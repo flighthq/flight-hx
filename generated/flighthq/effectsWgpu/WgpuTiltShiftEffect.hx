@@ -10,14 +10,16 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.TiltShiftEffect;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuTiltShiftEffect {
-  @:noCompletion
-  public static function applyTiltShiftEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:TiltShiftEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyTiltShiftEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:TiltShiftEffect):Void {
     var center:Float = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
     var blur:Float = cast _Runtime.UNDEFINED;

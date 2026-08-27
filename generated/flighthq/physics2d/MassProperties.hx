@@ -3,13 +3,14 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Physics2D.Physics2DBodyType;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.Physics2DMassData;
-import flighthq.types.Physics2D.Physics2DMaterial;
-import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.Physics2DBodyType;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.Physics2DMassData;
+import flighthq.types.Physics2DMaterial;
+import flighthq.types.RigidBody2D;
 
+@:noCompletion
 class MassProperties {
   public static function computePhysics2DColliderMassData(collider:Physics2DCollider, out:Physics2DMassData):Void {
     var shape:CollisionBuiltInShape2D = cast _Runtime.UNDEFINED;

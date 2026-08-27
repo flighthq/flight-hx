@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.SketchEffect;
 
+@:noCompletion
 class GlSketchEffect {
-  @:noCompletion
-  public static function applySketchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SketchEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applySketchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SketchEffect):Void {
     var strength:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     strength = _Runtime.coalesce(_Runtime.field(effect, 'strength'), function():Dynamic return cast 1.0);

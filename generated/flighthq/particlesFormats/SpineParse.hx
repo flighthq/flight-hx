@@ -8,19 +8,20 @@ import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.particles.Curve.particleColorCurveFromKeyframes;
 import flighthq.particles.Curve.particleCurveFromKeyframes;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
+import flighthq.types.ColorKeyframe;
+import flighthq.types.CurveKeyframe;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleCurve;
-import flighthq.types.ParticleCurve.ColorKeyframe;
-import flighthq.types.ParticleCurve.CurveKeyframe;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.SpineParticleSchema.SpineAlphaKeyframe;
-import flighthq.types.SpineParticleSchema.SpineParsed;
-import flighthq.types.SpineParticleSchema.SpineParticleDocument;
-import flighthq.types.SpineParticleSchema.SpineTintKeyframe;
+import flighthq.types.SpineAlphaKeyframe;
+import flighthq.types.SpineParsed;
+import flighthq.types.SpineParticleDocument;
+import flighthq.types.SpineTintKeyframe;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class SpineParse {
   public static function parseSpineJson__spineParse(json:String):flighthq._internal._Record<String, flighthq._internal._Any> {
     var raw:flighthq._internal._Any = cast _Runtime.UNDEFINED;

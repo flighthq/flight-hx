@@ -23,11 +23,11 @@ import flighthq.scene3dWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.types.Camera3D;
 import flighthq.types.CustomShaderMaterial;
+import flighthq.types.KeyedTable;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.Texture;
@@ -35,9 +35,9 @@ import flighthq.types.Types.CustomShaderMaterialKind;
 import flighthq.types.WgpuCustomMaterialShaderSource;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuMeshPipeline;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime;
 import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
@@ -46,9 +46,11 @@ typedef CustomMaterialBinding__customShaderWgpuMeshMaterialRenderer = { var text
 
 typedef CustomMaterialLayouts__customShaderWgpuMeshMaterialRenderer = { var texture:flighthq._internal.dom.GPUBindGroupLayout; var user:flighthq._internal.dom.GPUBindGroupLayout; };
 
+@:noCompletion
 class CustomShaderWgpuMeshMaterialRenderer {
-  @:noCompletion
-  public static final customShaderWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final customShaderWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
@@ -94,8 +96,9 @@ class CustomShaderWgpuMeshMaterialRenderer {
     drawWgpuMeshSubset(({ final __callArgument41:Dynamic = state; __callArgument41; }), ({ final __callArgument42:Dynamic = proxy; __callArgument42; }), ({ final __callArgument43:Dynamic = geometry; __callArgument43; }));
   } });
 
-  @:noCompletion
-  public static function getWgpuCustomMaterialShaderSource(state:WgpuRenderState, shaderKey:String):Null<WgpuCustomMaterialShaderSource> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuCustomMaterialShaderSource(state:WgpuRenderState, shaderKey:String):Null<WgpuCustomMaterialShaderSource> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:String; }>> = cast _Runtime.UNDEFINED;
     entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument49:Dynamic = state; __callArgument49; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var customMaterialShaders:KeyedTable<String>; }).customMaterialShaders : KeyedTable<String>).entries : flighthq._internal._Map<String, RegistryTableEntry<String>>).get(shaderKey));
     return cast ((cast _Runtime.strictEquals(({ final __structural51 = entry; __structural51 == null ? _Runtime.UNDEFINED : (cast __structural51 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:String; }).value : Dynamic) : (cast null : Dynamic));

@@ -1,5 +1,8 @@
 package;
 
+@:access(flighthq.application.Application)
+@:access(flighthq.device.Device)
+@:access(flighthq.statusbar.Statusbar)
 class TypedStructTranche4Smoke {
   public static function main():Void {
     run();

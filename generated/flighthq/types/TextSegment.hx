@@ -4,10 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TextSegmentGranularity = String;
-
 typedef TextSegment = { var start:Float; var end:Float; var text:String; @:optional var isWordLike:Bool; };
-
-typedef TextSegmentRange = { var start:Float; var end:Float; };
-
-typedef TextSegmenterBackend = { var segment:String->TextSegmentGranularity->String->Array<flighthq.types.TextSegment>; };

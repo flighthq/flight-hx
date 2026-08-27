@@ -5,21 +5,25 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Image;
 
+@:noCompletion
 class GlTextureUpload {
-  @:noCompletion
-  public static function uploadGlTextureData(gl:flighthq._internal.dom.WebGL2RenderingContext, target:Float, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray, ?internalFormat:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function uploadGlTextureData(gl:flighthq._internal.dom.WebGL2RenderingContext, target:Float, width:Float, height:Float, data:flighthq._internal._UInt8ClampedArray, ?internalFormat:Float):Void {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
     flighthq._internal.backend.WebGl2Backend.texImage2D(gl, target, 0.0, internalFormat, width, height, 0.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), (cast data : flighthq._internal._UInt8ClampedArray));
   }
 
-  @:noCompletion
-  public static function uploadGlTextureElement(gl:flighthq._internal.dom.WebGL2RenderingContext, target:Float, source:flighthq._internal.dom.TexImageSource, ?internalFormat:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function uploadGlTextureElement(gl:flighthq._internal.dom.WebGL2RenderingContext, target:Float, source:flighthq._internal.dom.TexImageSource, ?internalFormat:Float):Void {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
     flighthq._internal.backend.WebGl2Backend.texImage2DSource(gl, target, 0.0, internalFormat, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA), flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_BYTE', flighthq._internal.backend.WebGl2Backend.UNSIGNED_BYTE), source);
   }
 
-  @:noCompletion
-  public static function uploadGlTextureImageResource(gl:flighthq._internal.dom.WebGL2RenderingContext, target:Float, image:Image, ?internalFormat:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function uploadGlTextureImageResource(gl:flighthq._internal.dom.WebGL2RenderingContext, target:Float, image:Image, ?internalFormat:Float):Void {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
     uploadGlTextureElement(({ final __callArgument0:Dynamic = gl; __callArgument0; }), (cast target : Float), (cast (cast _Runtime.field(image, 'source') : flighthq._internal.dom.TexImageSource) : flighthq._internal._Any), (cast internalFormat : Float));
   }

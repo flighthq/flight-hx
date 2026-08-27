@@ -6,15 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
 import flighthq.types.BlurEffect;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class CanvasBlurEffect {
-  @:noCompletion
-  public static function applyBlurEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:BlurEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyBlurEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:BlurEffect):Void {
     var blurX:Float = cast _Runtime.UNDEFINED;
     var blurY:Float = cast _Runtime.UNDEFINED;
     var radius:Float = cast _Runtime.UNDEFINED;

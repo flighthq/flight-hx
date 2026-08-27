@@ -6,14 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.materials.PbrMaterials.createStandardPbrMaterialProperties;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
 import flighthq.types.BlendMode;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.ExtendedPbrMaterial;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.PbrExtension;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.StandardPbrMaterialProperties;
 import flighthq.types.Types.ExtendedPbrMaterialKind;
 import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
 
+@:noCompletion
 class ExtendedPbrMaterial {
   public static function createExtendedPbrMaterial(?opts:{ @:optional var extensions:Null<Array<PbrExtension>>; @:optional var kind:Null<String>; @:optional var standard:Null<StandardPbrMaterialProperties>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flighthq.types.ExtendedPbrMaterial {
     var material:flighthq.types.ExtendedPbrMaterial = cast _Runtime.UNDEFINED;

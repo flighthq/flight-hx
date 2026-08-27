@@ -4,6 +4,7 @@ package flighthq.effects;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class GaussianMath {
   public static function computeGaussianRadiusFromSigma(sigma:Float):Float {
     return cast HxMath.ceil(_Runtime.multiplyNumbers(3.0, HxMath.max(0.0, sigma)));

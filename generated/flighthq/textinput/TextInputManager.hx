@@ -18,14 +18,15 @@ import flighthq.types.InputKeyboardData;
 import flighthq.types.InputTextData;
 import flighthq.types.KeyboardEventData;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.Signal;
 import flighthq.types.TextInputManager;
-import flighthq.types.TextInputManager.TextInputSource;
+import flighthq.types.TextInputSource;
 import flighthq.types.TextInputState;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutResult;
 
+@:noCompletion
 class TextInputManager {
   public static function blurTextInput(manager:flighthq.types.TextInputManager):Void {
     var target:Null<RichText> = cast _Runtime.UNDEFINED;

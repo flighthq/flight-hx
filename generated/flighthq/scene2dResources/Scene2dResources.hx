@@ -13,21 +13,21 @@ import flighthq.scene2dResources.Scene2DDocumentSource as Facade_Scene2dResource
 import flighthq.scene2dResources.Scene2DSlotReference as Facade_Scene2dResources_flighthq_scene2dResources_Scene2DSlotReference;
 import flighthq.types.AudioResourceReference;
 import flighthq.types.ImageResourceReference;
+import flighthq.types.LoadScene2DAudioResourcesOptions;
+import flighthq.types.LoadScene2DImageResourcesOptions;
 import flighthq.types.Node2D;
+import flighthq.types.ResolveScene2DResourcesOptions;
+import flighthq.types.Scene2DAudioResources;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DDocument.Scene2DSlotReference;
+import flighthq.types.Scene2DDocumentFetcher;
+import flighthq.types.Scene2DDocumentImportContext;
+import flighthq.types.Scene2DDocumentImporter;
+import flighthq.types.Scene2DDocumentImporterMatcher;
+import flighthq.types.Scene2DDocumentImporterRegistry;
+import flighthq.types.Scene2DDocumentLoadOptions;
+import flighthq.types.Scene2DImageResources;
 import flighthq.types.Scene2DResources;
-import flighthq.types.Scene2DResources.LoadScene2DAudioResourcesOptions;
-import flighthq.types.Scene2DResources.LoadScene2DImageResourcesOptions;
-import flighthq.types.Scene2DResources.ResolveScene2DResourcesOptions;
-import flighthq.types.Scene2DResources.Scene2DAudioResources;
-import flighthq.types.Scene2DResources.Scene2DDocumentFetcher;
-import flighthq.types.Scene2DResources.Scene2DDocumentImportContext;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporter;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporterMatcher;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
-import flighthq.types.Scene2DResources.Scene2DDocumentLoadOptions;
-import flighthq.types.Scene2DResources.Scene2DImageResources;
+import flighthq.types.Scene2DSlotReference;
 
 class Scene2dResources {
   public static function createScene2DDocument(root:Node2D, ?slots:Array<Scene2DSlotReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>, ?imageResources:Array<ImageResourceReference>, ?audioResources:Array<AudioResourceReference>):Scene2DDocument {

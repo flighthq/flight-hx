@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 import flighthq.types.Vector4;
-import flighthq.types.Vector4.Vector4Like;
+import flighthq.types.Vector4Like;
 
+@:noCompletion
 class Vector4 {
   public static function addVector4(out:Vector4Like, a:Vector4Like, b:Vector4Like):Void {
     var ax:Float = cast _Runtime.UNDEFINED;

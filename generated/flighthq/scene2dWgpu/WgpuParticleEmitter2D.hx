@@ -16,23 +16,24 @@ import flighthq.texture.Texture.getTextureWidth;
 import flighthq.texture.Texture.hasTextureSource;
 import flighthq.types.Matrix;
 import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
+import flighthq.types.ParticleEmitterData;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.TextureFilter;
-import flighthq.types.Sampler.TextureWrap;
 import flighthq.types.SpriteRenderer;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureFilter;
+import flighthq.types.TextureLike;
+import flighthq.types.TextureWrap;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
 
 typedef WgpuParticleResources__wgpuParticleEmitter2D = { var pipelines:flighthq._internal._Map<flighthq._internal.dom.GPUTextureFormat, flighthq._internal.dom.GPURenderPipeline>; var pipelineLayout:flighthq._internal.dom.GPUPipelineLayout; var module:flighthq._internal.dom.GPUShaderModule; var instanceBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; };
 
+@:noCompletion
 class WgpuParticleEmitter2D {
   public static final INSTANCE_FLOATS__wgpuParticleEmitter2D:Float = 14.0;
 
@@ -100,8 +101,9 @@ class WgpuParticleEmitter2D {
     (runtime.particleInstanceData = cast (new flighthq._internal._Float32Array((newCapacity / 4.0)) : Null<flighthq._internal._Float32Array>));
   }
 
-  @:noCompletion
-  public static function drawWgpuParticleEmitter2D(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuParticleEmitter2D(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:ParticleEmitter2D = cast _Runtime.UNDEFINED;
     var __destructure2:ParticleEmitterData = cast _Runtime.UNDEFINED;

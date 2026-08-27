@@ -15,6 +15,7 @@ import flighthq.types.TextureContainerParseFailureReason;
 
 typedef ParseFailure__parseAtf = { var reason:Null<TextureContainerParseFailureReason>; };
 
+@:noCompletion
 class ParseAtf {
   public static function getAtfParseFailureReason(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseFailureReason> {
     var failure:ParseFailure__parseAtf = cast _Runtime.UNDEFINED;

@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.shell.Shell.installShellHostBackend;
 import flighthq.shell.Shell.observeShellHostResult;
-import flighthq.types.Shell.ShellBackend;
-import flighthq.types.Shell.ShellOpenExternalOptions;
-import flighthq.types.Shell.ShellOpenPathOptions;
-import flighthq.types.Shell.ShellShortcutLink;
-import flighthq.types.Shell.ShellShortcutWriteOperation;
+import flighthq.types.ShellBackend;
+import flighthq.types.ShellOpenExternalOptions;
+import flighthq.types.ShellOpenPathOptions;
+import flighthq.types.ShellShortcutLink;
+import flighthq.types.ShellShortcutWriteOperation;
 
+@:noCompletion
 class WebShell {
   public static function enableHostWebShell():Void {
     var backend:ShellBackend = cast _Runtime.UNDEFINED;
@@ -66,8 +67,9 @@ class WebShell {
     installShellHostBackend(({ final __callArgument0:Dynamic = backend; __callArgument0; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebShellForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebShellForTest():Void {
     (WebShell._enabled__webShell = cast (false : Dynamic));
   }
 

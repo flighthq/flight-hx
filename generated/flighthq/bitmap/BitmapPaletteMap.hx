@@ -7,6 +7,7 @@ import flighthq.bitmap.Bitmap.invalidateBitmap;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapPaletteMap {
   public static function applyBitmapPaletteMap(dest:BitmapRegion, source:BitmapRegion, redMap:Null<Array<Float>>, greenMap:Null<Array<Float>>, blueMap:Null<Array<Float>>, alphaMap:Null<Array<Float>>):Void {
     var w:Float = cast _Runtime.UNDEFINED;

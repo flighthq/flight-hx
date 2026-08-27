@@ -4,8 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef DeepReadonly<T> = flighthq._internal._Conditional<T, Array<flighthq._internal._Infer>, Array<flighthq._internal._DeepReadonly<flighthq._internal._Infer>>, flighthq._internal._Conditional<T, Array<flighthq._internal._Infer>, Array<flighthq._internal._DeepReadonly<flighthq._internal._Infer>>, flighthq._internal._Conditional<T, flighthq._internal._Object, flighthq._internal._Mapped<flighthq._internal._Any, flighthq._internal._DeepReadonly<flighthq._internal._IndexedAccess<T, flighthq._internal._Infer>>>, T>>>;
-
 typedef Snapshot<T> = flighthq._internal._DeepReadonly<T>;
-
-typedef SnapshotSchema = Array<String>;

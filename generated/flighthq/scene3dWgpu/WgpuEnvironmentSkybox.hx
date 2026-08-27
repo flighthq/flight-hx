@@ -11,11 +11,12 @@ import flighthq.types.Camera3D;
 import flighthq.types.Environment;
 import flighthq.types.Matrix4;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime;
 
 typedef WgpuSkybox__wgpuEnvironmentSkybox = { var cubeBindGroup:Null<flighthq._internal.dom.GPUBindGroup>; var cubeBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var cubeView:Null<flighthq._internal.dom.GPUTextureView>; var pipeline:flighthq._internal.dom.GPURenderPipeline; var uniformBindGroup:flighthq._internal.dom.GPUBindGroup; var uniformBuffer:flighthq._internal.dom.GPUBuffer; };
 
+@:noCompletion
 class WgpuEnvironmentSkybox {
   public static function drawWgpuEnvironmentSkybox(state:WgpuRenderState, environment:Environment, camera:Camera3D, aspect:Float):Void {
     var cubeView:Null<flighthq._internal.dom.GPUTextureView> = cast _Runtime.UNDEFINED;

@@ -3,10 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Screen.ScreenInfo;
-
-typedef ScreenChangeKind = String;
-
-typedef ScreenChangedMetrics = { var bounds:Bool; var workArea:Bool; var scaleFactor:Bool; var orientation:Bool; };
 
 typedef ScreenChangeEvent = { var kind:ScreenChangeKind; var screen:ScreenInfo; var changedMetrics:Null<ScreenChangedMetrics>; };

@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SpritesheetValidationSeverity = String;
-
 typedef SpritesheetValidationDiagnostic = { var animationName:Null<String>; var frameIndex:Null<Float>; var message:String; var severity:SpritesheetValidationSeverity; };

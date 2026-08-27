@@ -4,14 +4,15 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronPowerMonitor;
-import flighthq.types.ElectronApi.ElectronPowerSaveBlocker;
-import flighthq.types.Power.PowerBackend;
-import flighthq.types.Power.PowerIdleState;
-import flighthq.types.Power.PowerStatus;
-import flighthq.types.Power.PowerThermalState;
+import flighthq.types.ElectronPowerMonitor;
+import flighthq.types.ElectronPowerSaveBlocker;
+import flighthq.types.PowerBackend;
 import flighthq.types.PowerBatteryHealth;
+import flighthq.types.PowerIdleState;
+import flighthq.types.PowerStatus;
+import flighthq.types.PowerThermalState;
 
+@:noCompletion
 class ElectronPower {
   public static function createElectronPowerBackend(electron:ElectronApi):PowerBackend {
     var powerMonitor:ElectronPowerMonitor = cast _Runtime.UNDEFINED;

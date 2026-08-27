@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.FxaaEffect;
 
+@:noCompletion
 class FxaaEffect {
   public static function createFxaaEffect(?options:{ @:optional var edgeThreshold:Null<Float>; @:optional var subpixel:Null<Float>; }):flighthq.types.FxaaEffect {
     if (options == null) options = cast ({  } : Dynamic);

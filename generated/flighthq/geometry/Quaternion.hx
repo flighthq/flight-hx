@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
 import flighthq.types.EulerOrder;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Quaternion;
-import flighthq.types.Quaternion.QuaternionLike;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.QuaternionLike;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Quaternion {
   public static function cloneQuaternion(source:QuaternionLike):flighthq.types.Quaternion {
     return cast (cast createQuaternion(({ final __callArgument0:Dynamic = source.x; __callArgument0; }), ({ final __callArgument1:Dynamic = source.y; __callArgument1; }), ({ final __callArgument2:Dynamic = source.z; __callArgument2; }), ({ final __callArgument3:Dynamic = source.w; __callArgument3; })) : flighthq.types.Quaternion);

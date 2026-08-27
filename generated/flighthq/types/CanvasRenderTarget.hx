@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RenderTarget.RenderTargetDimensions;
 
 typedef CanvasRenderTarget = { var height:Float; var width:Float; var canvas:flighthq._internal.dom.HTMLCanvasElement; var context:flighthq._internal.dom.CanvasRenderingContext2D; };

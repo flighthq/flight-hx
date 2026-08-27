@@ -7,15 +7,16 @@ import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnost
 import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.ParticleDesignerSchema.ParticleDesignerDocument;
-import flighthq.types.ParticleDesignerSchema.ParticleDesignerParseOptions;
-import flighthq.types.ParticleDesignerSchema.ParticleDesignerParsed;
-import flighthq.types.ParticleDesignerSchema.ParticleDesignerRawDict;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.ParticleBlendMode;
+import flighthq.types.ParticleDesignerDocument;
+import flighthq.types.ParticleDesignerParseOptions;
+import flighthq.types.ParticleDesignerParsed;
+import flighthq.types.ParticleDesignerRawDict;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class ParticleDesignerParse {
   public static function parsePlistRawDict__particleDesignerParse(xml:String):ParticleDesignerRawDict {
     var result:ParticleDesignerRawDict = cast _Runtime.UNDEFINED;

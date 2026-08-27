@@ -7,13 +7,14 @@ import flighthq.bitmapfont.BitmapFont.getBitmapFontGlyph;
 import flighthq.bitmapfont.BitmapFont.getBitmapFontKerning;
 import flighthq.bitmapfont.BitmapFont.getBitmapFontMetrics;
 import flighthq.types.BitmapFont;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphMetrics;
 import flighthq.types.GlyphSource;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphMetrics;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureSource;
 
+@:noCompletion
 class BitmapFontGlyphSource {
   public static function createGlyphSourceFromBitmapFont(font:BitmapFont):GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Null<Float> = 0.0):Null<TextureSource> {

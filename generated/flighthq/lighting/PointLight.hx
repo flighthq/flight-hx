@@ -11,9 +11,10 @@ import flighthq.types.PointLight;
 import flighthq.types.PointLightOptions;
 import flighthq.types.Types.PointLightKind;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 import flighthq.types._internal._PointLightValues.PointLightKind;
 
+@:noCompletion
 class PointLight {
   public static function clonePointLight(source:flighthq.types.PointLight):flighthq.types.PointLight {
     return cast (cast createEntity((cast { castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), intensity: _Runtime.field(source, 'intensity'), kind: PointLightKind, normalBias: _Runtime.field(source, 'normalBias'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: (cast cloneVector3(({ final __callArgument0:Dynamic = _Runtime.field(source, 'position'); __callArgument0; })) : Vector3), range: _Runtime.field(source, 'range'), shadowBias: _Runtime.field(source, 'shadowBias') } : Dynamic)) : { >Entity, var castsShadow:Bool; var color:Float; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var shadowBias:Float; });

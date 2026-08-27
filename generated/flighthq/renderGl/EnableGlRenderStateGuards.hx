@@ -8,22 +8,24 @@ import flighthq.registry.RegistryTable.createSlotTable;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.GlRenderStateRuntime;
+import flighthq.types.LogLevel;
+import flighthq.types.NodeAny;
+import flighthq.types.RegistryEntryState;
 import flighthq.types.RenderCache;
+import flighthq.types.RenderRegistries;
+import flighthq.types.RenderRootGuard;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderRegistries;
-import flighthq.types.RenderState.RenderRootGuard;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Renderable;
+import flighthq.types.SlotTable;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class EnableGlRenderStateGuards {
-  @:noCompletion
-  public static function areGlRenderStateGuardsEnabled(state:GlRenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areGlRenderStateGuardsEnabled(state:GlRenderState):Bool {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:RenderRootGuard; }>> = cast _Runtime.UNDEFINED;
     entry = ({ final __structural2 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var renderRootGuard:Null<SlotTable<RenderRootGuard>>; }).renderRootGuard; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:RenderRootGuard; }>>; }).entry; });
     return cast ((cast _Runtime.strictEquals(({ final __structural3 = entry; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) && (cast _Runtime.strictEquals((cast entry : { var state:String; var value:RenderRootGuard; }).value, EnableGlRenderStateGuards.warnOnSecondRenderRoot__enableGlRenderStateGuards) : Bool));

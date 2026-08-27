@@ -3,11 +3,7 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
 
 typedef CreateTextureVariantOptions__CreateTextureOptions<Type> = flighthq._internal._Conditional<Type, TextureLike, flighthq._internal._Intersection2<flighthq._internal._Omit<{ @:optional var version:Null<Float>; @:optional var dimension:Null<String>; @:optional var colorSpace:Null<TextureColorSpace>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; }, String>, flighthq._internal._Conditional<flighthq._internal._IndexedAccess<Type, String>, String, { @:optional var dimension:String; }, { var dimension:flighthq._internal._IndexedAccess<Type, String>; }>>, flighthq._internal._Any>;
 
 typedef CreateTextureOptions = flighthq._internal._Intersection2<CreateTextureVariantOptions__CreateTextureOptions<TextureLike>, { @:optional var resource:Null<ImageResourceReference>; }>;
-
-typedef CreateTexture2DOptions = flighthq._internal._Extract<CreateTextureOptions, { @:optional var dimension:String; }>;

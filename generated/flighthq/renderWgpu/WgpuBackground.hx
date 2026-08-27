@@ -10,10 +10,11 @@ import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuSurface.acquireWgpuFrameCaptureTexture;
 import flighthq.renderWgpu.WgpuSurface.encodeWgpuFrameCapture;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuScissorRect;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderTarget;
+import flighthq.types.WgpuScissorRect;
 
+@:noCompletion
 class WgpuBackground {
   public static function ensureWgpuDepthStencil__wgpuBackground(state:WgpuRenderState, width:Float, height:Float):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -88,15 +89,17 @@ class WgpuBackground {
     (runtime.renderPass = cast (renderPass : Null<flighthq._internal.dom.GPURenderPassEncoder>));
   }
 
-  @:noCompletion
-  public static function retireWgpuBuffer(state:WgpuRenderState, buffer:flighthq._internal.dom.GPUBuffer):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function retireWgpuBuffer(state:WgpuRenderState, buffer:flighthq._internal.dom.GPUBuffer):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument17:Dynamic = state; __callArgument17; })) : WgpuRenderStateRuntime);
     _Runtime.callProperty(_Runtime.coalesce(runtime.retiredBuffers, function():Dynamic return cast (runtime.retiredBuffers = cast (cast ([] : Array<Dynamic>) : Null<Array<flighthq._internal.dom.GPUBuffer>>))), 'push', cast ([buffer] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function retireWgpuTexture(state:WgpuRenderState, texture:flighthq._internal.dom.GPUTexture):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function retireWgpuTexture(state:WgpuRenderState, texture:flighthq._internal.dom.GPUTexture):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument19:Dynamic = state; __callArgument19; })) : WgpuRenderStateRuntime);
     _Runtime.callProperty(_Runtime.coalesce(runtime.retiredTextures, function():Dynamic return cast (runtime.retiredTextures = cast (cast ([] : Array<Dynamic>) : Null<Array<flighthq._internal.dom.GPUTexture>>))), 'push', cast ([texture] : Array<Dynamic>));

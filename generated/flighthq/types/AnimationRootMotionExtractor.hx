@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 
 typedef AnimationRootMotionExtractor = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var channel:AnimationChannel; var channelIndex:Float; var clip:AnimationClip; var cycleDelta:flighthq._internal._Float32Array; var fromMotion:flighthq._internal._Float32Array; var fromSample:flighthq._internal._Float32Array; var powerScratch:flighthq._internal._Float32Array; var startSample:flighthq._internal._Float32Array; var toMotion:flighthq._internal._Float32Array; var toSample:flighthq._internal._Float32Array; };

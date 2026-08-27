@@ -19,22 +19,22 @@ import flighthq.shape.ShapeCommands.appendShapeEndFill;
 import flighthq.shape.ShapeCommands.appendShapeLineStyle;
 import flighthq.shape.ShapeCommands.appendShapeLineTo;
 import flighthq.shape.ShapeCommands.appendShapeMoveTo;
+import flighthq.types.CapsStyle;
+import flighthq.types.GradientType;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.InterpolationMethod;
+import flighthq.types.JointStyle;
+import flighthq.types.LineScaleMode;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Path;
+import flighthq.types.PathWinding;
 import flighthq.types.Shape;
-import flighthq.types.ShapeCommand.CapsStyle;
-import flighthq.types.ShapeCommand.GradientType;
-import flighthq.types.ShapeCommand.InterpolationMethod;
-import flighthq.types.ShapeCommand.JointStyle;
-import flighthq.types.ShapeCommand.LineScaleMode;
-import flighthq.types.ShapeCommand.PathWinding;
-import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.SpreadMethod;
 import flighthq.types.SwfMorphShapePaths;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef SwfShapeEdgeRecord__swfShape = { var controlX:Float; var controlY:Float; var curved:Bool; var kind:String; var toX:Float; var toY:Float; };
@@ -57,6 +57,7 @@ typedef SwfShapeState__swfShape = { var fill0:Float; var fill0Segment:Null<SwfSh
 
 typedef SwfBitmapFillResolver__swfShape = Float->Bool->Bool->Null<Texture2D>;
 
+@:noCompletion
 class SwfShape {
   public static function createSwfGlyphShape(reader:SwfReader):Null<Shape> {
     return cast (cast (#if js _Runtime.callValue(SwfShape.decodeSwfShapeBody__swfShape, cast ([({ final __callArgument1:Dynamic = reader; __callArgument1; }), (cast 1.0 : Float), (cast { fills: cast ([(cast SwfShape.createSwfShapeFill__swfShape((cast 255.0 : Float), (cast 1.0 : Float)) : SwfShapeFill__swfShape)] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) } : Dynamic)] : Array<Dynamic>)) #else SwfShape.decodeSwfShapeBody__swfShape(({ final __callArgument0:Dynamic = reader; __callArgument0; }), (cast 1.0 : Float), (cast { fills: cast ([(cast SwfShape.createSwfShapeFill__swfShape((cast 255.0 : Float), (cast 1.0 : Float)) : SwfShapeFill__swfShape)] : Array<Dynamic>), lines: cast ([] : Array<Dynamic>) } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Null<Shape>);

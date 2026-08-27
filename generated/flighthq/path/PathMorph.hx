@@ -6,8 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.path.PathMorphGeometry.buildPathMorph;
 import flighthq.types.Path;
 import flighthq.types.PathMorph;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 
+@:noCompletion
 class PathMorph {
   public static function createPathMorph(start:Path, end:Path):Null<flighthq.types.PathMorph> {
     return cast (cast (cast buildPathMorph(({ final __callArgument0:Dynamic = start; __callArgument0; }), ({ final __callArgument1:Dynamic = end; __callArgument1; })) : { var contour:Null<Float>; var issue:Float; var morph:Null<flighthq.types.PathMorph>; }) : { var contour:Null<Float>; var issue:Float; var morph:Null<flighthq.types.PathMorph>; }).morph;

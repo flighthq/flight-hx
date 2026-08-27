@@ -6,13 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.mediasession.Mediasession.createWebMediaSessionBackend;
 import flighthq.mediasession.Mediasession.installMediaSessionHostBackend;
 import flighthq.mediasession.Mediasession.observeMediaSessionHostResult;
-import flighthq.types.MediaSession.MediaSessionAction;
-import flighthq.types.MediaSession.MediaSessionActionDetails;
-import flighthq.types.MediaSession.MediaSessionBackend;
-import flighthq.types.MediaSession.MediaSessionMetadata;
-import flighthq.types.MediaSession.MediaSessionPlaybackState;
-import flighthq.types.MediaSession.MediaSessionPositionState;
+import flighthq.types.MediaSessionAction;
+import flighthq.types.MediaSessionActionDetails;
+import flighthq.types.MediaSessionBackend;
+import flighthq.types.MediaSessionMetadata;
+import flighthq.types.MediaSessionPlaybackState;
+import flighthq.types.MediaSessionPositionState;
 
+@:noCompletion
 class WebMediasession {
   public static function enableHostWebMediaSession():Void {
     var inner:MediaSessionBackend = cast _Runtime.UNDEFINED;
@@ -52,8 +53,9 @@ class WebMediasession {
     installMediaSessionHostBackend(({ final __callArgument2:Dynamic = backend; __callArgument2; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebMediasessionForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebMediasessionForTest():Void {
     (WebMediasession._enabled__webMediasession = cast (false : Dynamic));
   }
 

@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textsegment.TextSegmenterBackend.getTextSegmenterBackend;
 import flighthq.types.TextSegment;
-import flighthq.types.TextSegment.TextSegmentGranularity;
-import flighthq.types.TextSegment.TextSegmenterBackend;
+import flighthq.types.TextSegmentGranularity;
+import flighthq.types.TextSegmenterBackend;
 
+@:noCompletion
 class TextSegment {
   public static function segmentGraphemes(text:String, ?locale:String):Array<flighthq.types.TextSegment> {
     return cast (cast (cast getTextSegmenterBackend() : TextSegmenterBackend) : TextSegmenterBackend).segment((cast text : String), ({ final __callArgument0:Dynamic = 'grapheme'; __callArgument0; }), ({ final __callArgument1:Dynamic = locale; __callArgument1; }));

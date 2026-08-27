@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Transform3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
-
-typedef Transform3DLike = { var position:Vector3; var rotation:Quaternion; var scale:Vector3; };

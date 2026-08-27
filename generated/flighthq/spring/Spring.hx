@@ -10,9 +10,9 @@ import flighthq.spring.Spring2D as Facade_Spring_flighthq_spring_Spring2D;
 import flighthq.spring.Spring3D as Facade_Spring_flighthq_spring_Spring3D;
 import flighthq.spring.SpringConfig as Facade_Spring_flighthq_spring_SpringConfig;
 import flighthq.types.Spring;
-import flighthq.types.Spring.Spring2D;
-import flighthq.types.Spring.Spring3D;
-import flighthq.types.Spring.SpringConfig;
+import flighthq.types.Spring2D;
+import flighthq.types.Spring3D;
+import flighthq.types.SpringConfig;
 
 class Spring {
   public static function createSpring(value:Float = 0.0, velocity:Float = 0.0):flighthq.types.Spring {

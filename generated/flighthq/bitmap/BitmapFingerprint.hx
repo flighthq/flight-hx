@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapFingerprint;
 
+@:noCompletion
 class BitmapFingerprint {
   public static final BITMAP_FINGERPRINT_COMPUTATION_ID:String = 'grid-average-rgb-v1';
 

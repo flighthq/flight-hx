@@ -8,15 +8,17 @@ import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.DirectionalBlurEffect;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlDirectionalBlurEffect {
-  @:noCompletion
-  public static function applyDirectionalBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DirectionalBlurEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyDirectionalBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:DirectionalBlurEffect):Void {
     var angle:Float = cast _Runtime.UNDEFINED;
     var length:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;

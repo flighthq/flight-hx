@@ -3,12 +3,12 @@ package flighthq.velocity;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.Matrix;
-import flighthq.types.Velocity.Velocity2D;
-import flighthq.types.Velocity.VelocityExplanation;
-import flighthq.types.Velocity.VelocityField;
-import flighthq.types.Velocity.VelocitySample;
+import flighthq.types.Transform2DNode;
+import flighthq.types.Velocity2D;
+import flighthq.types.VelocityExplanation;
+import flighthq.types.VelocityField;
+import flighthq.types.VelocitySample;
 import flighthq.velocity.TransformVelocity as Facade_Velocity_flighthq_velocity_TransformVelocity;
 import flighthq.velocity.VelocityField as Facade_Velocity_flighthq_velocity_VelocityField;
 import flighthq.velocity.VelocitySample as Facade_Velocity_flighthq_velocity_VelocitySample;

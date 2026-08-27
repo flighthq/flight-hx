@@ -3,12 +3,14 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionShape2D;
-import flighthq.types.Collision.CollisionTestStatus;
+import flighthq.types.CollisionShape2D;
+import flighthq.types.CollisionTestStatus;
 
+@:noCompletion
 class CollisionShapeValidation2D {
-  @:noCompletion
-  public static function getCollisionPolygonValidationStatus2D(points:Array<Float>):Null<CollisionTestStatus> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCollisionPolygonValidationStatus2D(points:Array<Float>):Null<CollisionTestStatus> {
     var minX:Float = cast _Runtime.UNDEFINED;
     var minY:Float = cast _Runtime.UNDEFINED;
     var maxX:Float = cast _Runtime.UNDEFINED;
@@ -72,8 +74,9 @@ class CollisionShapeValidation2D {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getCollisionShapeValidationStatus2D(shape:CollisionShape2D):Null<CollisionTestStatus> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCollisionShapeValidationStatus2D(shape:CollisionShape2D):Null<CollisionTestStatus> {
     {
       var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'circle') {

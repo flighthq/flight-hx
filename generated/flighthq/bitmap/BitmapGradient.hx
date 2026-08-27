@@ -11,6 +11,7 @@ import flighthq.types.BitmapGradientBevelOptions;
 import flighthq.types.BitmapGradientGlowOptions;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapGradient {
   public static function buildBitmapGradientRamp(out:flighthq._internal._UInt8ClampedArray, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):Void {
     var n:Float = cast _Runtime.UNDEFINED;

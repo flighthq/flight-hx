@@ -9,14 +9,16 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.SmaaEffect;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuSmaaEffect {
-  @:noCompletion
-  public static function applySmaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SmaaEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applySmaaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SmaaEffect):Void {
     var threshold:Float = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;

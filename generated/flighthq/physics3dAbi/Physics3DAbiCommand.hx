@@ -22,35 +22,36 @@ import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiSetColliderPayloadOf
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiShapeHeaderByteLength;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiShapeKind;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiVersion;
-import flighthq.types.Collision.CollisionAabb3D;
-import flighthq.types.Collision.CollisionBox3D;
-import flighthq.types.Collision.CollisionCapsule3D;
-import flighthq.types.Collision.CollisionColliderShape3D;
-import flighthq.types.Collision.CollisionCone3D;
-import flighthq.types.Collision.CollisionConvex3D;
-import flighthq.types.Collision.CollisionCylinder3D;
-import flighthq.types.Collision.CollisionHeightfield3D;
-import flighthq.types.Collision.CollisionSphere3D;
-import flighthq.types.Collision.CollisionTriangleMesh3D;
-import flighthq.types.Physics3D.Physics3DBodyType;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.Physics3DCollisionFilter;
-import flighthq.types.Physics3D.Physics3DConeTwistJoint;
-import flighthq.types.Physics3D.Physics3DDistanceJoint;
-import flighthq.types.Physics3D.Physics3DGeneric6DofJoint;
-import flighthq.types.Physics3D.Physics3DHingeJoint;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointFrames;
-import flighthq.types.Physics3D.Physics3DMaterial;
-import flighthq.types.Physics3D.Physics3DSequentialImpulseConfig;
-import flighthq.types.Physics3D.Physics3DSliderJoint;
-import flighthq.types.Physics3D.Physics3DSolverConfig;
-import flighthq.types.Physics3D.RigidBody3D;
-import flighthq.types.Physics3DAbi.Physics3DAbiCommandBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiObjectId;
+import flighthq.types.CollisionAabb3D;
+import flighthq.types.CollisionBox3D;
+import flighthq.types.CollisionCapsule3D;
+import flighthq.types.CollisionColliderShape3D;
+import flighthq.types.CollisionCone3D;
+import flighthq.types.CollisionConvex3D;
+import flighthq.types.CollisionCylinder3D;
+import flighthq.types.CollisionHeightfield3D;
+import flighthq.types.CollisionSphere3D;
+import flighthq.types.CollisionTriangleMesh3D;
+import flighthq.types.Physics3DAbiCommandBuffer;
+import flighthq.types.Physics3DAbiObjectId;
+import flighthq.types.Physics3DBodyType;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.Physics3DCollisionFilter;
+import flighthq.types.Physics3DConeTwistJoint;
+import flighthq.types.Physics3DDistanceJoint;
+import flighthq.types.Physics3DGeneric6DofJoint;
+import flighthq.types.Physics3DHingeJoint;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointFrames;
+import flighthq.types.Physics3DMaterial;
+import flighthq.types.Physics3DSequentialImpulseConfig;
+import flighthq.types.Physics3DSliderJoint;
+import flighthq.types.Physics3DSolverConfig;
+import flighthq.types.RigidBody3D;
 
 typedef PendingCommand__physics3DAbiCommand = { var view:Dynamic; var start:Float; var payload:Float; var byteLength:Float; };
 
+@:noCompletion
 class Physics3DAbiCommand {
   public static function getPhysics3DAbiSetColliderCommandByteLength(collider:Physics3DCollider):Float {
     var shapeByteLength:Float = cast _Runtime.UNDEFINED;

@@ -10,17 +10,19 @@ import flighthq.scene3dGl.GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
 import flighthq.scene3dGl.GlMeshProgram.compileGlProgram;
 import flighthq.scene3dGl.GlMeshProgram.ensureGlScene3DProgram;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
+import flighthq.types.GlDebugDefineKey;
 import flighthq.types.GlDebugProgram;
-import flighthq.types.GlDebugProgram.GlDebugDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 
+@:noCompletion
 class GlDebugPrelude {
-  @:noCompletion
-  public static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlDebugNormalMap(state:GlRenderState, program:GlDebugProgram, normalMap:Null<Texture>, normalScale:Float):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNormalScale'), normalScale);
@@ -30,44 +32,50 @@ class GlDebugPrelude {
     }
   }
 
-  @:noCompletion
-  public static function bindGlDebugRange(state:GlRenderState, program:GlDebugProgram, near:Float, far:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlDebugRange(state:GlRenderState, program:GlDebugProgram, near:Float, far:Float):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locNear'), near);
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, _Runtime.field(program, 'locFar'), far);
   }
 
-  @:noCompletion
-  public static function buildGlDebugDefineKey(key:GlDebugDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildGlDebugDefineKey(key:GlDebugDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.strictEquals(_Runtime.field(key, 'mode'), 'depth') : Bool) ? (cast 'd' : Dynamic) : (cast 'n' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
-  @:noCompletion
-  public static function compileGlDebugProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlDebugDefineKey):GlDebugProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlDebugProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlDebugDefineKey):GlDebugProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     program = (cast compileGlProgram(({ final __callArgument4:Dynamic = gl; __callArgument4; }), (cast (cast getGlDebugVertexSourceForKey(({ final __callArgument5:Dynamic = key; __callArgument5; })) : String) : String), (cast (cast getGlDebugFragmentSourceForKey(({ final __callArgument7:Dynamic = key; __callArgument7; })) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locFar: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_far'), locJointNormalTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointNormalTexture'), locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNear: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_near'), locNormalMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMap'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix'), locNormalScale: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalScale'), locView: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_view'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureGlDebugProgram(state:GlRenderState, key:GlDebugDefineKey):GlDebugProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlDebugProgram(state:GlRenderState, key:GlDebugDefineKey):GlDebugProgram {
     var fullKey:GlDebugDefineKey = cast _Runtime.UNDEFINED;
     fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlScene3DRuntime) : { var activeSkinnedRun:Bool; }).activeSkinnedRun }]));
     return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlDebugProgram)->GlDebugProgram)(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast 'debug:' + Std.string((cast buildGlDebugDefineKey(({ final __callArgument17:Dynamic = fullKey; __callArgument17; })) : String)) + '' : String), ({ final __callArgument23:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlDebugProgram return (cast compileGlDebugProgram(({ final __callArgument19:Dynamic = gl; __callArgument19; }), ({ final __callArgument20:Dynamic = fullKey; __callArgument20; })) : GlDebugProgram); __callArgument23; })) : GlDebugProgram);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlDebugFragmentSourceForKey(key:GlDebugDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlDebugFragmentSourceForKey(key:GlDebugDefineKey):String {
     return cast ((cast GlDebugPrelude.buildDefineSource__glDebugPrelude(({ final __callArgument32:Dynamic = key; __callArgument32; })) : String) + GlDebugPrelude.DEBUG_FRAGMENT_BODY__glDebugPrelude);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlDebugVertexSourceForKey(key:GlDebugDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlDebugVertexSourceForKey(key:GlDebugDefineKey):String {
     return cast (((cast GlDebugPrelude.buildDefineSource__glDebugPrelude(({ final __callArgument34:Dynamic = key; __callArgument34; })) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlDebugPrelude.DEBUG_VERTEX_BODY__glDebugPrelude);
     return cast null;
   }

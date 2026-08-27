@@ -5,22 +5,23 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.BlendMode;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.Modifier;
 import flighthq.types.Sampler;
 import flighthq.types.ShadedMaterial;
 import flighthq.types.ShadedMaterialOptions;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.ShadedMaterialKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
+@:noCompletion
 class CreateShadedMaterial {
   public static function createShadedMaterial(?options:ShadedMaterialOptions):ShadedMaterial {
     var material:ShadedMaterial = cast _Runtime.UNDEFINED;

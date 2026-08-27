@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Matrix = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; };
-
-typedef MatrixLike = { var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; };

@@ -7,13 +7,14 @@ import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnost
 import flighthq.scene2dFormats.RiveCoreTypes.getRiveCoreTypeName;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveFileAsset;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.RiveCoreObject;
+import flighthq.types.RiveFileAsset;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class RiveAssets {
   public static function createRiveFileAssets(objects:Array<RiveCoreObject>, ?diagnostics:Array<ImportDiagnostic>):Array<RiveFileAsset> {
     var assets:Array<RiveFileAsset> = cast _Runtime.UNDEFINED;

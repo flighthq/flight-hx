@@ -6,15 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.App;
-import flighthq.types.App.AppActivationPolicy;
-import flighthq.types.App.AppBackend;
-import flighthq.types.App.AppLoginItem;
-import flighthq.types.App.AppLoginItemLike;
-import flighthq.types.App.AppPathKind;
+import flighthq.types.AppActivationPolicy;
+import flighthq.types.AppBackend;
+import flighthq.types.AppLoginItem;
+import flighthq.types.AppLoginItemLike;
+import flighthq.types.AppPathKind;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.MenuItemTemplate;
 import flighthq.types.Signal;
-import flighthq.types.Signal.SignalData;
+import flighthq.types.SignalData;
 
 class App {
   public static var _custom__app:Null<AppBackend> = _Runtime.explicitNull();
@@ -214,8 +214,9 @@ class App {
     (cast (cast getAppBackend() : AppBackend) : AppBackend).focus();
   }
 
-  @:noCompletion
-  public static function getAppBackend():AppBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getAppBackend():AppBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(App._custom__app, function():Dynamic return cast App._host__app), function():Dynamic return cast App._sentinel__app);
     return cast null;
   }
@@ -298,8 +299,9 @@ class App {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installAppHostBackend(backend:AppBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installAppHostBackend(backend:AppBackend):Void {
     if ((cast !_Runtime.strictEquals(App._host__app, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(App._host__app, backend) : Bool)) { (App._hostConflict__app = cast (true : Dynamic)); }
       return;
@@ -312,8 +314,9 @@ class App {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeAppHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeAppHostResult(operation:String, succeeded:Bool):Void {
     (App._hostObservation__app = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -339,8 +342,9 @@ class App {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetAppBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetAppBackendForTest():Void {
     (App._custom__app = cast (null : Dynamic));
     (App._host__app = cast (null : Dynamic));
     (App._hostConflict__app = cast (false : Dynamic));
@@ -351,8 +355,9 @@ class App {
     (cast (cast getAppBackend() : AppBackend) : AppBackend).setActivationPolicy(({ final __callArgument14:Dynamic = policy; __callArgument14; }));
   }
 
-  @:noCompletion
-  public static function setAppBackend(backend:Null<AppBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setAppBackend(backend:Null<AppBackend>):Void {
     (App._custom__app = cast (backend : Dynamic));
   }
 

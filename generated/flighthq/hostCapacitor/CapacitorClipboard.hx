@@ -4,12 +4,13 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorClipboardPlugin;
-import flighthq.types.CapacitorApi.CapacitorClipboardReadResult;
-import flighthq.types.CapacitorApi.CapacitorClipboardWriteOptions;
-import flighthq.types.Clipboard.ClipboardBackend;
-import flighthq.types.Clipboard.ClipboardBookmark;
+import flighthq.types.CapacitorClipboardPlugin;
+import flighthq.types.CapacitorClipboardReadResult;
+import flighthq.types.CapacitorClipboardWriteOptions;
+import flighthq.types.ClipboardBackend;
+import flighthq.types.ClipboardBookmark;
 
+@:noCompletion
 class CapacitorClipboard {
   public static function createCapacitorClipboardBackend(capacitor:CapacitorApi):ClipboardBackend {
     var clipboard:CapacitorClipboardPlugin = cast _Runtime.UNDEFINED;

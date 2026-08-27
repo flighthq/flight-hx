@@ -3,8 +3,8 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.Kind;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RequirementFacet;
 
 class _SceneCoverageEntryValues {

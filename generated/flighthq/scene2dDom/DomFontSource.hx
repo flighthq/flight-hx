@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.FontResource;
 
+@:noCompletion
 class DomFontSource {
   public static final _domFontAscentCache__domFontSource:flighthq._internal._Map<String, Float> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
@@ -13,8 +14,9 @@ class DomFontSource {
     return cast null;
   }
 
-  @:noCompletion
-  public static function invalidateDomFontResource(source:FontResource):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function invalidateDomFontResource(source:FontResource):Void {
     var family:String = cast _Runtime.UNDEFINED;
     family = source.family;
     for (key in _Runtime.iterable(((cast DomFontSource._domFontAscentCache__domFontSource : flighthq._internal._Map<String, Float>).keys()))) {

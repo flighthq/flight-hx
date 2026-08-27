@@ -9,14 +9,16 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.ScanlinesEffect;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuScanlinesEffect {
-  @:noCompletion
-  public static function applyScanlinesEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScanlinesEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyScanlinesEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ScanlinesEffect):Void {
     var count:Float = cast _Runtime.UNDEFINED;
     var intensity:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;

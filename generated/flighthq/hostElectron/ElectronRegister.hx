@@ -34,26 +34,27 @@ import flighthq.shell.Shell.setShellBackend;
 import flighthq.shortcut.Shortcut.setShortcutBackend;
 import flighthq.storage.Storage.setStorageBackend;
 import flighthq.tray.Tray.setTrayBackend;
-import flighthq.types.App.AppBackend;
-import flighthq.types.ApplicationWindow.WindowBackend;
-import flighthq.types.Clipboard.ClipboardBackend;
-import flighthq.types.Dialog.DialogBackend;
+import flighthq.types.AppBackend;
+import flighthq.types.ClipboardBackend;
+import flighthq.types.DialogBackend;
 import flighthq.types.ElectronApi;
 import flighthq.types.ElectronBackendOptions;
-import flighthq.types.Ipc.IpcBackend;
-import flighthq.types.Menu.MenuBackend;
-import flighthq.types.Notification.NotificationBackend;
-import flighthq.types.Platform.PlatformBackend;
-import flighthq.types.Power.PowerBackend;
-import flighthq.types.Protocol.ProtocolBackend;
-import flighthq.types.Screen.ScreenBackend;
-import flighthq.types.Shell.ShellBackend;
-import flighthq.types.Shortcut.ShortcutBackend;
-import flighthq.types.Storage.StorageBackend;
-import flighthq.types.Tray.TrayBackend;
-import flighthq.types.Updater.UpdaterBackend;
+import flighthq.types.IpcBackend;
+import flighthq.types.MenuBackend;
+import flighthq.types.NotificationBackend;
+import flighthq.types.PlatformBackend;
+import flighthq.types.PowerBackend;
+import flighthq.types.ProtocolBackend;
+import flighthq.types.ScreenBackend;
+import flighthq.types.ShellBackend;
+import flighthq.types.ShortcutBackend;
+import flighthq.types.StorageBackend;
+import flighthq.types.TrayBackend;
+import flighthq.types.UpdaterBackend;
+import flighthq.types.WindowBackend;
 import flighthq.updater.Updater.setUpdaterBackend;
 
+@:noCompletion
 class ElectronRegister {
   public static function registerElectronBackends(electron:ElectronApi, ?options:ElectronBackendOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);

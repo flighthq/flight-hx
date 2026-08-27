@@ -3,10 +3,11 @@ package flighthq.glyphatlas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlyphSource.GlyphAtlas;
-import flighthq.types.GlyphSource.GlyphAtlasRuntime;
-import flighthq.types.GlyphSource.GlyphMetrics;
+import flighthq.types.GlyphAtlas;
+import flighthq.types.GlyphAtlasRuntime;
+import flighthq.types.GlyphMetrics;
 
+@:noCompletion
 class GlyphAtlasMetrics {
   public static function getGlyphAtlasKerning(_atlas:GlyphAtlas, _left:Float, _right:Float):Float {
     return cast 0.0;

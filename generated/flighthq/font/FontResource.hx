@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.FontResource;
 
+@:noCompletion
 class FontResource {
   public static function createFontResource(family:String):flighthq.types.FontResource {
     return cast { family: family, face: null };

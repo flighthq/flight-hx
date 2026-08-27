@@ -8,12 +8,13 @@ import flighthq.glyphatlas.GlyphAtlasEntry.getGlyphAtlasEntry;
 import flighthq.glyphatlas.GlyphAtlasMetrics.getGlyphAtlasKerning;
 import flighthq.glyphatlas.GlyphAtlasMetrics.getGlyphAtlasMetrics;
 import flighthq.types.Bitmap;
+import flighthq.types.GlyphAtlas;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphMetrics;
 import flighthq.types.GlyphSource;
-import flighthq.types.GlyphSource.GlyphAtlas;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.TextureSource;
 
+@:noCompletion
 class GlyphSource {
   public static function createGlyphSourceFromGlyphAtlas(atlas:GlyphAtlas):flighthq.types.GlyphSource {
     return cast { getGlyphAtlasImage: function(page:Null<Float> = 0.0):Null<TextureSource> {

@@ -3,13 +3,15 @@ package flighthq.fontFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlyphOutlineSource.GlyphOutlineMetrics;
+import flighthq.types.GlyphOutlineMetrics;
 import flighthq.types.SfntTableDirectory;
-import flighthq.types.SfntTableDirectory.SfntTableRange;
+import flighthq.types.SfntTableRange;
 
+@:noCompletion
 class OpenTypeMetrics {
-  @:noCompletion
-  public static function readOpenTypeAdvances(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory, glyphCount:Float):Null<flighthq._internal._Int32Array> {
+  @:allow(flighthq)
+  @:keep
+  private static function readOpenTypeAdvances(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory, glyphCount:Float):Null<flighthq._internal._Int32Array> {
     var hhea:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var hmtx:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
@@ -36,8 +38,9 @@ class OpenTypeMetrics {
     return cast null;
   }
 
-  @:noCompletion
-  public static function readOpenTypeGlyphCount(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function readOpenTypeGlyphCount(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Float {
     var maxp:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     maxp = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('maxp'));
     if ((cast ((cast _Runtime.strictEquals(maxp, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast ((cast (cast maxp : { var length:Float; }).length : Float) < (cast 6.0 : Float)) : Bool)) : Bool)) { return cast -1.0; }
@@ -45,8 +48,9 @@ class OpenTypeMetrics {
     return cast null;
   }
 
-  @:noCompletion
-  public static function readOpenTypeLocaFormat(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function readOpenTypeLocaFormat(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Float {
     var head:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var format:Float = cast _Runtime.UNDEFINED;
     head = ((cast directory.tables : flighthq._internal._Map<String, SfntTableRange>).get('head'));
@@ -56,8 +60,9 @@ class OpenTypeMetrics {
     return cast null;
   }
 
-  @:noCompletion
-  public static function readOpenTypeMetrics(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Null<GlyphOutlineMetrics> {
+  @:allow(flighthq)
+  @:keep
+  private static function readOpenTypeMetrics(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Null<GlyphOutlineMetrics> {
     var head:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var hhea:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;

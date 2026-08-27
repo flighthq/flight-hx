@@ -4,6 +4,7 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class NextPowerOfTwo {
   public static function isPowerOfTwo(n:Float):Bool {
     return cast ((cast ((cast n : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals((_Runtime.toInt32(n) & _Runtime.toInt32((n - 1.0))), 0.0) : Bool));

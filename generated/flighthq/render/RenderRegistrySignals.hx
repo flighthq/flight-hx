@@ -7,14 +7,15 @@ import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Signal;
 
 typedef RenderRegistryMissEmitter__renderRegistrySignals = flighthq._internal._IndexedAccess<RenderStateRuntime, String>;
 
+@:noCompletion
 class RenderRegistrySignals {
   public static function enableRenderRegistrySignals(state:RenderState):flighthq.types.RenderRegistrySignals {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;

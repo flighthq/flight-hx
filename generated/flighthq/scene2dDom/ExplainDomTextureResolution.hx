@@ -5,18 +5,19 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.texture.Texture.getTextureSourceKind;
+import flighthq.types.DomRenderRegistries;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomRenderRegistries;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomRenderStateRuntime;
 import flighthq.types.DomTextureResolver;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.KeyedTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureResolutionExplanation;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class ExplainDomTextureResolution {
   public static function explainDomTextureResolution(state:DomRenderState, texture:Texture):TextureResolutionExplanation {
     var kind:Null<String> = cast _Runtime.UNDEFINED;

@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.WebcamFacingMode;
 import flighthq.types.WebcamStream;
 import flighthq.types.WebcamStreamRuntime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class WebcamStream {
   public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):flighthq.types.WebcamStream {
     var stream:{ >Entity, var active:Bool; var deviceId:String; var facingMode:Null<String>; var frameRate:Float; var height:Float; var id:String; var width:Float; } = cast _Runtime.UNDEFINED;
@@ -23,8 +24,9 @@ class WebcamStream {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWebcamStreamRuntime(stream:flighthq.types.WebcamStream):Null<WebcamStreamRuntime> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWebcamStreamRuntime(stream:flighthq.types.WebcamStream):Null<WebcamStreamRuntime> {
     var rt:Null<EntityRuntime> = cast _Runtime.UNDEFINED;
     rt = _Runtime.getIndex(stream, EntityRuntimeKey);
     if ((cast ((cast _Runtime.strictEquals(rt, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(rt, null) : Bool)) : Bool)) { return cast null; }

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BarrelDistortionEffect;
 
+@:noCompletion
 class BarrelDistortionEffect {
   public static function createBarrelDistortionEffect(?options:{ @:optional var amount:Null<Float>; @:optional var scale:Null<Float>; }):flighthq.types.BarrelDistortionEffect {
     if (options == null) options = cast ({  } : Dynamic);

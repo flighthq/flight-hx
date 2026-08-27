@@ -5,10 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.ForEachPathSegment.forEachPathSegment;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
+import flighthq.types.PathCommand;
 import flighthq.types.PathMorph;
 import flighthq.types.PathSegment;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 typedef PathMorphBuildResult__pathMorphGeometry = { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; };
@@ -17,6 +17,7 @@ typedef CubicContour__pathMorphGeometry = { var closed:Bool; var currentX:Float;
 
 typedef CubicSegment__pathMorphGeometry = { var control1X:Float; var control1Y:Float; var control2X:Float; var control2Y:Float; var x0:Float; var x1:Float; var y0:Float; var y1:Float; };
 
+@:noCompletion
 class PathMorphGeometry {
   public static final PathMorphIssueNone:Float = 0.0;
 

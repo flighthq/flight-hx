@@ -4,12 +4,13 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorStatusBarInfoResult;
-import flighthq.types.CapacitorApi.CapacitorStatusBarPlugin;
-import flighthq.types.StatusBar.StatusBarBackend;
-import flighthq.types.StatusBar.StatusBarInfo;
-import flighthq.types.StatusBar.StatusBarStyle;
+import flighthq.types.CapacitorStatusBarInfoResult;
+import flighthq.types.CapacitorStatusBarPlugin;
+import flighthq.types.StatusBarBackend;
+import flighthq.types.StatusBarInfo;
+import flighthq.types.StatusBarStyle;
 
+@:noCompletion
 class CapacitorStatusBar {
   public static function createCapacitorStatusBarBackend(capacitor:CapacitorApi):StatusBarBackend {
     var statusBar:CapacitorStatusBarPlugin = cast _Runtime.UNDEFINED;

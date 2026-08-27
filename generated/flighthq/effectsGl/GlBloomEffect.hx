@@ -14,18 +14,20 @@ import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.BloomEffect;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GlRenderTargetPool;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 
+@:noCompletion
 class GlBloomEffect {
-  @:noCompletion
-  public static function applyBloomEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BloomEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyBloomEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BloomEffect):Void {
     var threshold:Float = cast _Runtime.UNDEFINED;
     var intensity:Float = cast _Runtime.UNDEFINED;
     var radius:Float = cast _Runtime.UNDEFINED;

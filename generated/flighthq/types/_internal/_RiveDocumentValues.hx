@@ -7,9 +7,9 @@ import flighthq.types.AdvancedBlendMode;
 import flighthq.types.AnimationClip;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.Layout.LayoutTree;
-import flighthq.types.Scene2DDocument.Scene2DSlotReference;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.LayoutTree;
+import flighthq.types.PathWinding;
+import flighthq.types.Scene2DSlotReference;
 import flighthq.types.Skeleton2D;
 
 class _RiveDocumentValues {

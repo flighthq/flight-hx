@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 
 typedef CanvasTextureResolver = CanvasTextureResolvers->Texture->Null<flighthq._internal.dom.CanvasImageSource>;
-
-typedef CanvasTextureResolvers = { @:optional var registry:Null<flighthq._internal._Map<TextureSourceKind, flighthq.types.CanvasTextureResolver>>; @:optional var bitmapElementCache:flighthq._internal._WeakMap<Bitmap, { var element:flighthq._internal.dom.HTMLCanvasElement; var version:Float; }>; @:optional var textureWindowElementCache:flighthq._internal._WeakMap<Texture, { var element:flighthq._internal.dom.HTMLCanvasElement; var flipX:Bool; var flipY:Bool; var imageVersion:Float; var source:flighthq._internal.dom.CanvasImageSource; var textureVersion:Float; var uvOffsetX:Float; var uvOffsetY:Float; var uvRotation:Float; var uvScaleX:Float; var uvScaleY:Float; }>; @:optional var registryMiss:Null<RenderRegistry->Kind->Void>; };

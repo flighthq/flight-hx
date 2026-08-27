@@ -11,6 +11,7 @@ import flighthq.types.AnimationRootMotionExtractor;
 import flighthq.types.AnimationTrack;
 import flighthq.types.Entity;
 
+@:noCompletion
 class AnimationRootMotion {
   public static function createAnimationRootMotionExtractor(clip:AnimationClip, channelIndex:Float):AnimationRootMotionExtractor {
     var channel:AnimationChannel = cast _Runtime.UNDEFINED;

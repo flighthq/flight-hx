@@ -12,21 +12,22 @@ import flighthq.scene2d.DisplayObject.createNode2DRuntime;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.types.BitmapText;
-import flighthq.types.BitmapText.BitmapTextAlign;
-import flighthq.types.BitmapText.BitmapTextData;
-import flighthq.types.BitmapText.BitmapTextOptions;
-import flighthq.types.BitmapText.BitmapTextPage;
-import flighthq.types.BitmapText.BitmapTextRuntime;
+import flighthq.types.BitmapTextAlign;
+import flighthq.types.BitmapTextData;
+import flighthq.types.BitmapTextOptions;
+import flighthq.types.BitmapTextPage;
+import flighthq.types.BitmapTextRuntime;
 import flighthq.types.GlyphSource;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.TextureAtlas;
 import flighthq.types.Types.BitmapTextKind;
 import flighthq.types._internal._BitmapTextValues.BitmapTextKind;
 
+@:noCompletion
 class BitmapText {
   public static final BITMAP_TEXT_TRANSFORM_STRIDE__bitmapText:Float = 2.0;
 
@@ -59,14 +60,16 @@ class BitmapText {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createBitmapTextData(?data:{ @:optional var align:Null<BitmapTextAlign>; @:optional var glyphSource:Null<GlyphSource>; @:optional var letterSpacing:Null<Float>; @:optional var lineHeight:Null<Float>; @:optional var text:Null<String>; @:optional var wrapWidth:Null<Float>; }):BitmapTextData {
+  @:allow(flighthq)
+  @:keep
+  private static function createBitmapTextData(?data:{ @:optional var align:Null<BitmapTextAlign>; @:optional var glyphSource:Null<GlyphSource>; @:optional var letterSpacing:Null<Float>; @:optional var lineHeight:Null<Float>; @:optional var text:Null<String>; @:optional var wrapWidth:Null<Float>; }):BitmapTextData {
     return cast { align: _Runtime.coalesce(({ final __structural12 = data; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var align:Null<String>; }).align; }), function():Dynamic return cast 'left'), glyphSource: _Runtime.coalesce(({ final __structural13 = data; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var glyphSource:Null<GlyphSource>; }).glyphSource; }), function():Dynamic return cast null), letterSpacing: _Runtime.coalesce(({ final __structural14 = data; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var letterSpacing:Null<Float>; }).letterSpacing; }), function():Dynamic return cast 0.0), lineHeight: _Runtime.coalesce(({ final __structural15 = data; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var lineHeight:Null<Float>; }).lineHeight; }), function():Dynamic return cast 1.0), text: _Runtime.coalesce(({ final __structural16 = data; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var text:Null<String>; }).text; }), function():Dynamic return cast ''), wrapWidth: _Runtime.coalesce(({ final __structural17 = data; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { @:optional var wrapWidth:Null<Float>; }).wrapWidth; }), function():Dynamic return cast null) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createBitmapTextRuntime():BitmapTextRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createBitmapTextRuntime():BitmapTextRuntime {
     var runtime:BitmapTextRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createNode2DRuntime((cast BitmapText.defaultMethods__bitmapText : Dynamic)) : BitmapTextRuntime);
     (runtime.localBoundsRectangle = cast (null : Null<Rectangle>));

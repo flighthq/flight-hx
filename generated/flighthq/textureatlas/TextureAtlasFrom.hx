@@ -13,9 +13,10 @@ import flighthq.image.ImageResourceFrom.loadImageResourceFromUrl;
 import flighthq.texture.Texture.createTexture;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.types.Image;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 
+@:noCompletion
 class TextureAtlasFrom {
   public static function createTextureAtlasFromCanvas(canvas:flighthq._internal.dom.HTMLCanvasElement):TextureAtlas {
     return cast (cast createTextureAtlas((cast { texture: (cast createTexture((cast { dimension: '2d', source: (cast createImageResourceFromCanvas(({ final __callArgument0:Dynamic = canvas; __callArgument0; })) : Image) } : Dynamic)) : Texture2D) } : Dynamic)) : TextureAtlas);

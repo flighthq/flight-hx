@@ -11,39 +11,40 @@ import flighthq.node.NodeTransform2d.ensureNodeWorldMatrix;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuRenderTarget.createWgpuRenderTarget;
-import flighthq.types.Entity.Kind;
-import flighthq.types.HasBoundsRectangle.Spatial2DNode;
-import flighthq.types.HasTransform2D.Transform2DNode;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
 import flighthq.types.Matrix;
-import flighthq.types.Node.NodeOf;
+import flighthq.types.NodeOf;
 import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
+import flighthq.types.ParticleEmitterData;
 import flighthq.types.QuadBatch;
-import flighthq.types.QuadBatch.QuadBatchData;
-import flighthq.types.QuadBatch.QuadBatchRuntime;
+import flighthq.types.QuadBatchData;
+import flighthq.types.QuadBatchRuntime;
 import flighthq.types.QuadTransformType;
 import flighthq.types.Rectangle;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderTargetColorSpace;
+import flighthq.types.Spatial2DNode;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.Transform2DNode;
 import flighthq.types.Types.EntityRuntimeKey;
-import flighthq.types.Velocity.Velocity2D;
-import flighthq.types.Velocity.VelocityField;
+import flighthq.types.Velocity2D;
+import flighthq.types.VelocityField;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderTarget;
+import flighthq.types.WgpuVelocityContext;
 import flighthq.types.WgpuVelocityWriter;
-import flighthq.types.WgpuVelocityWriter.WgpuVelocityContext;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.velocity.VelocityField.getVelocity;
 
 typedef WgpuVelocityPipeline__wgpuVelocity = { var pipeline:flighthq._internal.dom.GPURenderPipeline; var uniformBuffer:flighthq._internal.dom.GPUBuffer; var bindGroup:flighthq._internal.dom.GPUBindGroup; var cursor:Float; var scratch:flighthq._internal._Float32Array; };
 
+@:noCompletion
 class WgpuVelocity {
   public static function createWgpuVelocityTarget(state:WgpuRenderState, width:Float, height:Float):WgpuRenderTarget {
     return cast (cast (#if js _Runtime.callValue(createWgpuRenderTarget, cast ([({ final __callArgument1:Dynamic = state; __callArgument1; }), (cast width : Float), (cast height : Float), (cast 'rgba16float' : String)] : Array<Dynamic>)) #else createWgpuRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast width : Float), (cast height : Float), (cast 'rgba16float' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : WgpuRenderTarget);
@@ -150,8 +151,9 @@ class WgpuVelocity {
     }
   });
 
-  @:noCompletion
-  public static final defaultWgpuQuadBatchVelocityWriter:WgpuVelocityWriter = (cast function(ctx:WgpuVelocityContext, node:flighthq._internal._Object):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultWgpuQuadBatchVelocityWriter:WgpuVelocityWriter = (cast function(ctx:WgpuVelocityContext, node:flighthq._internal._Object):Void {
     var batch:QuadBatch = cast _Runtime.UNDEFINED;
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
     var runtime:QuadBatchRuntime = cast _Runtime.UNDEFINED;
@@ -254,8 +256,9 @@ class WgpuVelocity {
     drawWgpuVelocityQuad(({ final __callArgument16:Dynamic = ctx; __callArgument16; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast bounds.width : Float), (cast bounds.height : Float), (cast WgpuVelocity._scratchVelocity__wgpuVelocity.x : Float), (cast WgpuVelocity._scratchVelocity__wgpuVelocity.y : Float));
   });
 
-  @:noCompletion
-  public static function drawWgpuVelocityQuad(ctx:WgpuVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuVelocityQuad(ctx:WgpuVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
     var active:Null<{ var pass:flighthq._internal.dom.GPURenderPassEncoder; var pipeline:WgpuVelocityPipeline__wgpuVelocity; }> = cast _Runtime.UNDEFINED;
     var pipeline:WgpuVelocityPipeline__wgpuVelocity = cast _Runtime.UNDEFINED;
     var clipX0:Float = cast _Runtime.UNDEFINED;
@@ -285,8 +288,9 @@ class WgpuVelocity {
     (cast (cast active : { var pass:flighthq._internal.dom.GPURenderPassEncoder; var pipeline:WgpuVelocityPipeline__wgpuVelocity; }).pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0);
   }
 
-  @:noCompletion
-  public static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuVelocityWriter(state:WgpuRenderState, kind:Kind):Null<WgpuVelocityWriter> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuVelocityWriter; }>> = cast _Runtime.UNDEFINED;
     entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument20:Dynamic = state; __callArgument20; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var velocityWriters:KeyedTable<WgpuVelocityWriter>; }).velocityWriters : KeyedTable<WgpuVelocityWriter>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuVelocityWriter>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural22 = entry; __structural22 == null ? _Runtime.UNDEFINED : (cast __structural22 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:WgpuVelocityWriter; }).value : Dynamic) : (cast null : Dynamic));

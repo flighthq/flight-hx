@@ -13,18 +13,20 @@ import flighthq.effectsWgpu.WgpuEffectTintShader.applyWgpuEffectInvertTintPass;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.renderWgpu.WgpuRenderTargetPool.acquireWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
-import flighthq.types.EffectSourceMode.InnerEffectSourceMode;
+import flighthq.types.InnerEffectSourceMode;
 import flighthq.types.InnerShadowEffect;
 import flighthq.types.RenderEffect;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
+import flighthq.types.WgpuRenderTargetPool;
 
+@:noCompletion
 class WgpuInnerShadowEffect {
-  @:noCompletion
-  public static function applyInnerShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerShadowEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyInnerShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:InnerShadowEffect):Void {
     var src:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var dst:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;

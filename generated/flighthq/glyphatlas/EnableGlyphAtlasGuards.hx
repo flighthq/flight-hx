@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.glyphatlas.GlyphAtlasEntry.setGlyphAtlasEntryGuard;
 import flighthq.log.Log.logOnce;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableGlyphAtlasGuards {
   public static function disableGlyphAtlasGuards():Void {
     setGlyphAtlasEntryGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));

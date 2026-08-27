@@ -13,16 +13,17 @@ import flighthq.node.NodeTransform3d.ensureNodeWorldMatrix4;
 import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.scene3d.Mesh.isMesh;
 import flighthq.types.Aabb;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.AabbLike;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DTraits;
+import flighthq.types.NodeRuntime;
 import flighthq.types.Vector3;
 
+@:noCompletion
 class SceneNodeBounds {
   public static function getNode3DWorldBounds(out:AabbLike, node:Node3D):Void {
     setAabb(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.POSITIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float), (cast HxMath.NEGATIVE_INFINITY : Float));

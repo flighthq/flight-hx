@@ -3,13 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
-
-typedef TextureWrap = String;
-
-typedef TextureFilter = String;
 
 typedef Sampler = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var anisotropy:Float; var magFilter:TextureFilter; var minFilter:TextureFilter; var mipmaps:Bool; var wrapU:TextureWrap; var wrapV:TextureWrap; };
-
-typedef SamplerLike = { var anisotropy:Float; var magFilter:TextureFilter; var minFilter:TextureFilter; var mipmaps:Bool; var wrapU:TextureWrap; var wrapV:TextureWrap; };

@@ -12,19 +12,20 @@ import flighthq.render.RenderState.getColorAdjustmentUnsupportedGuard;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.Adjustment;
 import flighthq.types.ColorAdjustmentRuntime;
+import flighthq.types.ColorAdjustmentUnsupportedGuard;
 import flighthq.types.ColorScaleBias;
-import flighthq.types.ColorScaleBias.ColorScaleBiasLike;
+import flighthq.types.ColorScaleBiasLike;
 import flighthq.types.Node;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.RegistryEntryState;
 import flighthq.types.RenderProxy;
+import flighthq.types.RenderRegistries;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.ColorAdjustmentUnsupportedGuard;
-import flighthq.types.RenderState.RenderRegistries;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Renderable;
+import flighthq.types.SlotTable;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class EnableColorAdjustments {
   public static function areColorAdjustmentsEnabled(state:RenderState):Bool {
     return cast _Runtime.strictEquals(({ final __structural3 = ({ final __structural2 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var colorAdjustments:Null<SlotTable<RenderState->RenderProxy->Null<RenderProxy>->Void>>; }).colorAdjustments; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:RenderState->RenderProxy->Null<RenderProxy>->Void; }>>; }).entry; }); __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);

@@ -6,15 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.texture.Texture.getTextureSourceKind;
 import flighthq.types.CanvasTextureResolver;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSourceKind;
 
+@:noCompletion
 class CanvasTextureResolver {
   public static function connectCanvasTextureResolverMisses(resolvers:CanvasTextureResolvers, state:RenderState):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -33,8 +34,9 @@ class CanvasTextureResolver {
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).delete_(sourceKind)); } else { ((cast registry : flighthq._internal._Map<flighthq._internal._Any, flighthq._internal._Any>).set(sourceKind, (cast resolver))); }
   }
 
-  @:noCompletion
-  public static function resolveCanvasTexture(resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveCanvasTexture(resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
     var sourceKind:Null<String> = cast _Runtime.UNDEFINED;
     var resolver:Null<flighthq.types.CanvasTextureResolver> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) { return cast null; }

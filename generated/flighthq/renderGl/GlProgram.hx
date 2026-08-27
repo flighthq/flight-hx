@@ -4,9 +4,11 @@ package flighthq.renderGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class GlProgram {
-  @:noCompletion
-  public static function compileGlShader(gl:flighthq._internal.dom.WebGL2RenderingContext, type:Float, source:String, label:String = 'GL'):flighthq._internal.dom.WebGLShader {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlShader(gl:flighthq._internal.dom.WebGL2RenderingContext, type:Float, source:String, label:String = 'GL'):flighthq._internal.dom.WebGLShader {
     var shader:flighthq._internal.dom.WebGLShader = cast _Runtime.UNDEFINED;
     shader = flighthq._internal.backend.WebGl2Backend.createShader(gl, type);
     flighthq._internal.backend.WebGl2Backend.shaderSource(gl, shader, source);
@@ -18,8 +20,9 @@ class GlProgram {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, vertexSource:String, fragmentSource:String, label:String = 'GL'):flighthq._internal.dom.WebGLProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function createGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, vertexSource:String, fragmentSource:String, label:String = 'GL'):flighthq._internal.dom.WebGLProgram {
     var vertexShader:flighthq._internal.dom.WebGLShader = cast _Runtime.UNDEFINED;
     var fragmentShader:flighthq._internal.dom.WebGLShader = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
@@ -35,8 +38,9 @@ class GlProgram {
     return cast null;
   }
 
-  @:noCompletion
-  public static function linkGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq._internal.dom.WebGLProgram, label:String = 'GL'):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function linkGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq._internal.dom.WebGLProgram, label:String = 'GL'):Void {
     flighthq._internal.backend.WebGl2Backend.linkProgram(gl, program);
     if ((cast !_Runtime.truthy(flighthq._internal.backend.WebGl2Backend.getProgramParameter(gl, program, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'LINK_STATUS', flighthq._internal.backend.WebGl2Backend.LINK_STATUS))) : Bool)) {
       _Runtime.throwValue(_Runtime.error('' + Std.string(label) + ' program link error: ' + Std.string(flighthq._internal.backend.WebGl2Backend.getProgramInfoLog(gl, program)) + ''));

@@ -8,16 +8,17 @@ import flighthq.renderWgpu.WgpuRenderTexture.getWgpuRenderTextureTarget;
 import flighthq.renderWgpu.WgpuRenderTexture.writeWgpuRenderTextureTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderTexture;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectApplicationExplanation;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectApplicationGuard;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectApplicationStatus;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectApplicationExplanation;
+import flighthq.types.WgpuRenderEffectApplicationGuard;
+import flighthq.types.WgpuRenderEffectApplicationStatus;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
-import flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool;
+import flighthq.types.WgpuRenderTargetPool;
+import flighthq.types.WgpuRenderTexturePool;
 
+@:noCompletion
 class WgpuRenderTextureEffect {
   public static function applyWgpuRenderEffectsToRenderTexture(state:WgpuRenderState, pool:WgpuRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
     var sourceTarget:Null<WgpuRenderTarget> = cast _Runtime.UNDEFINED;
@@ -60,8 +61,9 @@ class WgpuRenderTextureEffect {
     return cast null;
   }
 
-  @:noCompletion
-  public static function explainWgpuRenderEffectApplication(state:WgpuRenderState, source:RenderTexture, dest:RenderTexture, effects:Array<RenderEffect>):WgpuRenderEffectApplicationExplanation {
+  @:allow(flighthq)
+  @:keep
+  private static function explainWgpuRenderEffectApplication(state:WgpuRenderState, source:RenderTexture, dest:RenderTexture, effects:Array<RenderEffect>):WgpuRenderEffectApplicationExplanation {
     var unregisteredKinds:Array<String> = cast _Runtime.UNDEFINED;
     var registeredCount:Float = cast _Runtime.UNDEFINED;
     unregisteredKinds = (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused2:Float, __unused3:Array<RenderEffect>):Bool return _Runtime.strictEquals((cast getWgpuRenderEffectRunner(({ final __callArgument38:Dynamic = state; __callArgument38; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<WgpuRenderEffectRunner>), null), _Runtime.UNDEFINED)) : Array<RenderEffect>), function(effect:RenderEffect, __unused4:Float, __unused5:Array<RenderEffect>):String return _Runtime.field(effect, 'kind'), _Runtime.UNDEFINED));
@@ -70,8 +72,9 @@ class WgpuRenderTextureEffect {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setWgpuRenderEffectApplicationGuard(state:WgpuRenderState, guard:Null<WgpuRenderEffectApplicationGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setWgpuRenderEffectApplicationGuard(state:WgpuRenderState, guard:Null<WgpuRenderEffectApplicationGuard>):Void {
     if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast WgpuRenderTextureEffect._guards__wgpuRenderTextureEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuRenderEffectApplicationGuard>).delete_(state)); } else { ((cast WgpuRenderTextureEffect._guards__wgpuRenderTextureEffect : flighthq._internal._WeakMap<WgpuRenderState, WgpuRenderEffectApplicationGuard>).set(state, (cast guard))); }
   }
 

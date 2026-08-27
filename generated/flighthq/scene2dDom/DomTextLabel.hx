@@ -25,15 +25,16 @@ import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextLabel;
-import flighthq.types.TextLabel.TextLabelData;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLabelData;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextVerticalAlign;
 
 typedef DomTextData__domTextLabel = { >RendererData, var div:Null<flighthq._internal.dom.HTMLDivElement>; };
 
+@:noCompletion
 class DomTextLabel {
   public static function createDomTextData__domTextLabel(_state:RenderState, _source:Renderable):DomTextData__domTextLabel {
     return cast (cast createEntity(({ final __callArgument0:Dynamic = { div: null }; __callArgument0; })) : { >Entity, var div:flighthq._internal._Any; });
@@ -50,8 +51,9 @@ class DomTextLabel {
     return cast null;
   }
 
-  @:noCompletion
-  public static function drawDomTextLabel(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawDomTextLabel(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Null<DomTextData__domTextLabel> = cast _Runtime.UNDEFINED;
     var source:TextLabel = cast _Runtime.UNDEFINED;
     var __destructure0:TextLabelData = cast _Runtime.UNDEFINED;

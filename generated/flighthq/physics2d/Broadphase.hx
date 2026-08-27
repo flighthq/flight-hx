@@ -5,15 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics2d.ColliderTransform.updatePhysics2DColliderWorldShape;
 import flighthq.physics2d.ColliderTransform.writePhysics2DColliderBounds;
-import flighthq.types.Physics2D.Physics2DBodyType;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.Physics2DWorld;
-import flighthq.types.Physics2D.RigidBody2D;
-import flighthq.types.Spatial.SpatialAabb2D;
-import flighthq.types.Spatial.SpatialIndexBackend2D;
+import flighthq.types.Physics2DBodyType;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.Physics2DWorld;
+import flighthq.types.RigidBody2D;
+import flighthq.types.SpatialAabb2D;
+import flighthq.types.SpatialIndexBackend2D;
 
 typedef Physics2DBroadphaseScratch__broadphase = { var bounds:SpatialAabb2D; var bodyBounds:SpatialAabb2D; };
 
+@:noCompletion
 class Broadphase {
   public static function synchronizePhysics2DBroadphase(world:Physics2DWorld):Void {
     Broadphase.synchronizePhysics2DBroadphaseBounds__broadphase(({ final __callArgument0:Dynamic = world; __callArgument0; }), (cast 0.0 : Float));

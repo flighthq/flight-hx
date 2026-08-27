@@ -5,16 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.TessellateStrokePath.tessellateStrokePath;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.Path;
 import flighthq.types.PathMesh;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.SlotTable;
 import flighthq.types.StrokeStyle;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class EnableGlStrokePathTessellation {
   public static function enableGlStrokePathTessellation(state:GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;

@@ -19,50 +19,55 @@ import flighthq.types.ColorScaleBias;
 import flighthq.types.CompressedImage;
 import flighthq.types.HasColorScaleBias;
 import flighthq.types.Image;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.RegistryEntryState;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.TextureFilter;
-import flighthq.types.Sampler.TextureWrap;
+import flighthq.types.SlotTable;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureFilter;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureWrap;
 import flighthq.types.WgpuCompressedTextureDecoder;
 import flighthq.types.WgpuCompressedTextureUploader;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
-import flighthq.types.WgpuRenderState.WgpuTextureSourceTextureEntry;
-import flighthq.types.WgpuRenderState.WgpuVideoTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
+import flighthq.types.WgpuTextureSourceTextureEntry;
+import flighthq.types.WgpuVideoTextureEntry;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 typedef WgpuTextureSourceUpload__wgpuDraw = WgpuRenderState->TextureSource->Bool->Bool->TextureColorSpace->Null<WgpuTextureEntry>;
 
+@:noCompletion
 class WgpuDraw {
-  @:noCompletion
-  public static function applyWgpuBlendMode(state:WgpuRenderState, blendMode:Null<BlendMode>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyWgpuBlendMode(state:WgpuRenderState, blendMode:Null<BlendMode>):Void {
     ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var currentBlendMode:Null<String>; }).currentBlendMode = cast (blendMode : Null<String>));
   }
 
-  @:noCompletion
-  public static function bindWgpuBitmapTexture(state:WgpuRenderState, bitmap:Bitmap, generateMips:Bool = false, premultiply:Bool = false, colorSpace:TextureColorSpace = 'linear'):WgpuTextureEntry {
+  @:allow(flighthq)
+  @:keep
+  private static function bindWgpuBitmapTexture(state:WgpuRenderState, bitmap:Bitmap, generateMips:Bool = false, premultiply:Bool = false, colorSpace:TextureColorSpace = 'linear'):WgpuTextureEntry {
     return cast (cast WgpuDraw.bindWgpuTextureSourceTexture__wgpuDraw(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = bitmap; __callArgument3; }), (cast generateMips : Bool), (cast premultiply : Bool), ({ final __callArgument4:Dynamic = colorSpace; __callArgument4; }), (cast WgpuDraw.uploadWgpuBitmapEntry__wgpuDraw : Dynamic)) : Null<WgpuTextureEntry>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function bindWgpuCompressedImageTexture(state:WgpuRenderState, image:CompressedImage, colorSpace:TextureColorSpace = 'linear'):Null<WgpuTextureEntry> {
+  @:allow(flighthq)
+  @:keep
+  private static function bindWgpuCompressedImageTexture(state:WgpuRenderState, image:CompressedImage, colorSpace:TextureColorSpace = 'linear'):Null<WgpuTextureEntry> {
     return cast (cast WgpuDraw.bindWgpuTextureSourceTexture__wgpuDraw(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = image; __callArgument9; }), (cast false : Bool), (cast false : Bool), ({ final __callArgument10:Dynamic = colorSpace; __callArgument10; }), (cast WgpuDraw.uploadWgpuCompressedImageEntry__wgpuDraw : Dynamic)) : Null<WgpuTextureEntry>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function bindWgpuImageResourceTexture(state:WgpuRenderState, image:Image, generateMips:Bool = false, premultiply:Bool = false, colorSpace:TextureColorSpace = 'linear'):Null<WgpuTextureEntry> {
+  @:allow(flighthq)
+  @:keep
+  private static function bindWgpuImageResourceTexture(state:WgpuRenderState, image:Image, generateMips:Bool = false, premultiply:Bool = false, colorSpace:TextureColorSpace = 'linear'):Null<WgpuTextureEntry> {
     return cast (cast WgpuDraw.bindWgpuTextureSourceTexture__wgpuDraw(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = image; __callArgument15; }), (cast generateMips : Bool), (cast premultiply : Bool), ({ final __callArgument16:Dynamic = colorSpace; __callArgument16; }), (cast WgpuDraw.uploadWgpuImageResourceEntry__wgpuDraw : Dynamic)) : Null<WgpuTextureEntry>);
     return cast null;
   }
@@ -96,8 +101,9 @@ class WgpuDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function bindWgpuTexture(state:WgpuRenderState, imageSource:flighthq._internal.dom.CanvasImageSource, generateMips:Bool = false):Null<WgpuTextureEntry> {
+  @:allow(flighthq)
+  @:keep
+  private static function bindWgpuTexture(state:WgpuRenderState, imageSource:flighthq._internal.dom.CanvasImageSource, generateMips:Bool = false):Null<WgpuTextureEntry> {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var cached:Null<WgpuTextureEntry> = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -162,8 +168,9 @@ class WgpuDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function bindWgpuVideoTexture(state:WgpuRenderState, videoTexture:Texture):Null<WgpuVideoTextureEntry> {
+  @:allow(flighthq)
+  @:keep
+  private static function bindWgpuVideoTexture(state:WgpuRenderState, videoTexture:Texture):Null<WgpuVideoTextureEntry> {
     var image:Null<Image> = cast _Runtime.UNDEFINED;
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -200,8 +207,9 @@ class WgpuDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function buildWgpuRenderTargetBindGroup(state:WgpuRenderState, view:flighthq._internal.dom.GPUTextureView):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function buildWgpuRenderTargetBindGroup(state:WgpuRenderState, view:flighthq._internal.dom.GPUTextureView):flighthq._internal.dom.GPUBindGroup {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var sampler:flighthq._internal.dom.GPUSampler = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument71:Dynamic = state; __callArgument71; })) : WgpuRenderStateRuntime);
@@ -210,8 +218,9 @@ class WgpuDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWgpuTextureEntry(state:WgpuRenderState, width:Float, height:Float, canvas:flighthq._internal.dom.HTMLCanvasElement):Null<WgpuTextureEntry> {
+  @:allow(flighthq)
+  @:keep
+  private static function createWgpuTextureEntry(state:WgpuRenderState, width:Float, height:Float, canvas:flighthq._internal.dom.HTMLCanvasElement):Null<WgpuTextureEntry> {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var __destructure2:Dynamic = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
@@ -245,8 +254,9 @@ class WgpuDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyWgpuVideoTexture(state:WgpuRenderState, videoTexture:Texture):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuVideoTexture(state:WgpuRenderState, videoTexture:Texture):Bool {
     var image:Null<Image> = cast _Runtime.UNDEFINED;
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var destroyed:Bool = cast _Runtime.UNDEFINED;
@@ -281,8 +291,9 @@ class WgpuDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function drawWgpuQuad(state:WgpuRenderState, renderProxy:RenderProxy2D, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuQuad(state:WgpuRenderState, renderProxy:RenderProxy2D, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var uniformOffset:Float = cast _Runtime.UNDEFINED;
@@ -293,8 +304,9 @@ class WgpuDraw {
     submitWgpuQuadDraw(({ final __callArgument104:Dynamic = state; __callArgument104; }), (cast uniformOffset : Float), (cast textureEntry : WgpuTextureEntry).bindGroup);
   }
 
-  @:noCompletion
-  public static function drawWgpuQuadWithTransform(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuQuadWithTransform(state:WgpuRenderState, renderProxy:RenderProxy, transform:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, textureEntry:WgpuTextureEntry, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var uniformOffset:Float = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument106:Dynamic = state; __callArgument106; })) : WgpuRenderStateRuntime);
@@ -307,8 +319,9 @@ class WgpuDraw {
     ((cast state : { var applyBlendMode:Null<WgpuRenderState->Null<String>->Void>; }).applyBlendMode = (cast applyWgpuBlendMode));
   }
 
-  @:noCompletion
-  public static function getWgpuRenderProxyColorScaleBias(renderProxy:RenderProxy):Null<ColorScaleBias> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuRenderProxyColorScaleBias(renderProxy:RenderProxy):Null<ColorScaleBias> {
     return cast _Runtime.coalesce((cast (cast renderProxy : { @:optional var colorScaleBias:Null<ColorScaleBias>; }) : { @:optional var colorScaleBias:Null<ColorScaleBias>; }).colorScaleBias, function():Dynamic return cast null);
     return cast null;
   }
@@ -324,8 +337,9 @@ class WgpuDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function submitWgpuQuadDraw(state:WgpuRenderState, uniformOffset:Float, textureBindGroup:flighthq._internal.dom.GPUBindGroup):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function submitWgpuQuadDraw(state:WgpuRenderState, uniformOffset:Float, textureBindGroup:flighthq._internal.dom.GPUBindGroup):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var pipeline:flighthq._internal.dom.GPURenderPipeline = cast _Runtime.UNDEFINED;
@@ -340,8 +354,9 @@ class WgpuDraw {
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0);
   }
 
-  @:noCompletion
-  public static function updateWgpuTextureEntry(state:WgpuRenderState, entry:WgpuTextureEntry, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function updateWgpuTextureEntry(state:WgpuRenderState, entry:WgpuTextureEntry, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
     var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var w:Float = cast _Runtime.UNDEFINED;
@@ -354,8 +369,9 @@ class WgpuDraw {
     (cast tryCopyWgpuExternalImageToTexture(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), ({ final __callArgument138:Dynamic = { source: canvas, flipY: false }; __callArgument138; }), ({ final __callArgument139:Dynamic = { texture: (cast entry : WgpuTextureEntry).texture, premultipliedAlpha: true }; __callArgument139; }), (cast w : Float), (cast h : Float)) : Bool);
   }
 
-  @:noCompletion
-  public static function warmWgpuPipelines(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function warmWgpuPipelines(state:WgpuRenderState):Void {
     (cast getWgpuPipeline(({ final __callArgument142:Dynamic = state; __callArgument142; }), ({ final __callArgument143:Dynamic = (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal; __callArgument143; }), (cast 'normal' : String)) : flighthq._internal.dom.GPURenderPipeline);
     (cast getWgpuPipeline(({ final __callArgument146:Dynamic = state; __callArgument146; }), ({ final __callArgument147:Dynamic = (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Add; __callArgument147; }), (cast 'normal' : String)) : flighthq._internal.dom.GPURenderPipeline);
   }

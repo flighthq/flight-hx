@@ -10,22 +10,24 @@ import flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.resolveGlRenderTargetAxes;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
-import flighthq.types.RenderTarget.RenderTargetAxes;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
-import flighthq.types.RenderTarget.RenderTargetDepth;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
-import flighthq.types.RenderTarget.RenderTargetFormatPolicy;
-import flighthq.types.RenderTarget.ResolvedRenderTargetDescriptor;
+import flighthq.types.GlRenderTargetPool;
+import flighthq.types.RenderTargetAxes;
+import flighthq.types.RenderTargetColorSpace;
+import flighthq.types.RenderTargetDepth;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
+import flighthq.types.RenderTargetFormatPolicy;
+import flighthq.types.ResolvedRenderTargetDescriptor;
 
+@:noCompletion
 class GlRenderTargetPool {
-  @:noCompletion
-  @:overload(function(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor):GlRenderTarget {})
-  @:overload(function(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:String):GlRenderTarget {})
-  @:overload(function(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:String):Null<GlRenderTarget> {})
-  @:overload(function(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy):Null<GlRenderTarget> {})
-  public static function acquireGlRenderTarget(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy = 'preferred'):Null<GlRenderTarget> {
+  @:allow(flighthq)
+  @:keep
+  @:overload(function(state:GlRenderState, pool:flighthq.types.GlRenderTargetPool, descriptor:RenderTargetDescriptor):GlRenderTarget {})
+  @:overload(function(state:GlRenderState, pool:flighthq.types.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:String):GlRenderTarget {})
+  @:overload(function(state:GlRenderState, pool:flighthq.types.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:String):Null<GlRenderTarget> {})
+  @:overload(function(state:GlRenderState, pool:flighthq.types.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy):Null<GlRenderTarget> {})
+  private static function acquireGlRenderTarget(state:GlRenderState, pool:flighthq.types.GlRenderTargetPool, descriptor:RenderTargetDescriptor, formatPolicy:RenderTargetFormatPolicy = 'preferred'):Null<GlRenderTarget> {
     var requested:ResolvedRenderTargetDescriptor = cast _Runtime.UNDEFINED;
     var effective:Null<RenderTargetAxes> = cast _Runtime.UNDEFINED;
     requested = (cast resolveRenderTargetDescriptor(({ final __callArgument0:Dynamic = descriptor; __callArgument0; })) : ResolvedRenderTargetDescriptor);
@@ -33,10 +35,10 @@ class GlRenderTargetPool {
     if ((cast !_Runtime.truthy(effective) : Bool)) { return cast null; }
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, 'length') : Float)) : Bool)) {
-        var candidate:GlRenderTarget = flighthq._internal._StaticIndex.readArray((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast pool : flighthq.types.GlRenderTargetPool).free, 'length') : Float)) : Bool)) {
+        var candidate:GlRenderTarget = flighthq._internal._StaticIndex.readArray((cast pool : flighthq.types.GlRenderTargetPool).free, i);
         if ((cast (cast GlRenderTargetPool.matchesGlRenderTargetAxes__glRenderTargetPool(({ final __callArgument8:Dynamic = candidate; __callArgument8; }), ({ final __callArgument9:Dynamic = effective; __callArgument9; })) : Bool) : Bool)) {
-          _Runtime.splice((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, Std.int(i), Std.int(1.0), []);
+          _Runtime.splice((cast pool : flighthq.types.GlRenderTargetPool).free, Std.int(i), Std.int(1.0), []);
           (candidate.requestedAxes = cast ({ width: requested.width, height: requested.height, format: requested.format, colorAttachments: requested.colorAttachments, colorFormats: _Runtime.concatArrays([_Runtime.toArray(requested.colorFormats)]), sampleCount: requested.sampleCount, depth: requested.depth, colorSpace: requested.colorSpace } : RenderTargetAxes));
           (candidate.clearColors = cast (_Runtime.concatArrays([_Runtime.toArray(requested.clearColors)]) : Array<Float>));
           (candidate.clearDepth = cast (requested.clearDepth : Float));
@@ -50,23 +52,26 @@ class GlRenderTargetPool {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createGlRenderTargetPool():flighthq.types.GlRenderTarget.GlRenderTargetPool {
+  @:allow(flighthq)
+  @:keep
+  private static function createGlRenderTargetPool():flighthq.types.GlRenderTargetPool {
     return cast { free: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyGlRenderTargetPool(state:GlRenderState, pool:flighthq.types.GlRenderTarget.GlRenderTargetPool):Void {
-    for (target in _Runtime.iterable((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free)) {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyGlRenderTargetPool(state:GlRenderState, pool:flighthq.types.GlRenderTargetPool):Void {
+    for (target in _Runtime.iterable((cast pool : flighthq.types.GlRenderTargetPool).free)) {
       destroyGlRenderTarget(({ final __callArgument24:Dynamic = state; __callArgument24; }), ({ final __callArgument25:Dynamic = target; __callArgument25; }));
     }
-    _Runtime.setLength((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, 0.0);
+    _Runtime.setLength((cast pool : flighthq.types.GlRenderTargetPool).free, 0.0);
   }
 
-  @:noCompletion
-  public static function releaseGlRenderTarget(pool:flighthq.types.GlRenderTarget.GlRenderTargetPool, target:GlRenderTarget):Void {
-    _Runtime.callProperty((cast pool : flighthq.types.GlRenderTarget.GlRenderTargetPool).free, 'push', cast ([target] : Array<Dynamic>));
+  @:allow(flighthq)
+  @:keep
+  private static function releaseGlRenderTarget(pool:flighthq.types.GlRenderTargetPool, target:GlRenderTarget):Void {
+    _Runtime.callProperty((cast pool : flighthq.types.GlRenderTargetPool).free, 'push', cast ([target] : Array<Dynamic>));
   }
 
   public static function matchesGlRenderTargetAxes__glRenderTargetPool(target:GlRenderTarget, axes:RenderTargetAxes):Bool {

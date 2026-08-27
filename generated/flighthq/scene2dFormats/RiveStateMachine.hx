@@ -7,17 +7,18 @@ import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnost
 import flighthq.scene2dFormats.RiveCoreTypes.getRiveCoreTypeName;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveStateMachineDescriptor;
-import flighthq.types.RiveDocument.RiveStateMachineInput;
-import flighthq.types.RiveDocument.RiveStateMachineLayer;
-import flighthq.types.RiveDocument.RiveStateMachineState;
-import flighthq.types.RiveDocument.RiveStateMachineTransition;
-import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.RiveCoreObject;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveStateMachineDescriptor;
+import flighthq.types.RiveStateMachineInput;
+import flighthq.types.RiveStateMachineLayer;
+import flighthq.types.RiveStateMachineState;
+import flighthq.types.RiveStateMachineTransition;
+import flighthq.types.RiveValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class RiveStateMachine {
   public static function createRiveStateMachines(objects:Array<RiveCoreObject>, range:{ var end:Float; var start:Float; }, ?diagnostics:Array<ImportDiagnostic>):Array<RiveStateMachineDescriptor> {
     var machines:Array<RiveStateMachineDescriptor> = cast _Runtime.UNDEFINED;

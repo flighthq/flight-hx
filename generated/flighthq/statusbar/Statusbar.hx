@@ -8,12 +8,12 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.BackendExplanation;
 import flighthq.types.Signal;
 import flighthq.types.StatusBar;
-import flighthq.types.StatusBar.StatusBarAnimation;
-import flighthq.types.StatusBar.StatusBarBackend;
-import flighthq.types.StatusBar.StatusBarInfo;
-import flighthq.types.StatusBar.StatusBarStyle;
-import flighthq.types.StatusBar.StatusBarStyleEntry;
-import flighthq.types.StatusBar.StatusBarStyleEntryHandle;
+import flighthq.types.StatusBarAnimation;
+import flighthq.types.StatusBarBackend;
+import flighthq.types.StatusBarInfo;
+import flighthq.types.StatusBarStyle;
+import flighthq.types.StatusBarStyleEntry;
+import flighthq.types.StatusBarStyleEntryHandle;
 
 class Statusbar {
   public static var _applied__statusbar:Null<StatusBarInfo> = _Runtime.explicitNull();
@@ -131,8 +131,9 @@ class Statusbar {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createStatusBarInfo():StatusBarInfo {
+  @:allow(flighthq)
+  @:keep
+  private static function createStatusBarInfo():StatusBarInfo {
     return cast { color: 0.0, height: -1.0, overlaysContent: false, style: 'default', visible: true };
     return cast null;
   }
@@ -161,8 +162,9 @@ class Statusbar {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getStatusBarBackend():StatusBarBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getStatusBarBackend():StatusBarBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Statusbar._custom__statusbar, function():Dynamic return cast Statusbar._host__statusbar), function():Dynamic return cast Statusbar._sentinel__statusbar);
     return cast null;
   }
@@ -183,8 +185,9 @@ class Statusbar {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installStatusBarHostBackend(backend:StatusBarBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installStatusBarHostBackend(backend:StatusBarBackend):Void {
     if ((cast !_Runtime.strictEquals(Statusbar._host__statusbar, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Statusbar._host__statusbar, backend) : Bool)) { (Statusbar._hostConflict__statusbar = cast (true : Dynamic)); }
       return;
@@ -194,13 +197,15 @@ class Statusbar {
 
   public static final INVALID_HANDLE__statusbar:StatusBarStyleEntryHandle = -1.0;
 
-  @:noCompletion
-  public static function observeStatusBarHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeStatusBarHostResult(operation:String, succeeded:Bool):Void {
     (Statusbar._hostObservation__statusbar = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
-  @:noCompletion
-  public static function packedRgbaToHexColor(color:Float):String {
+  @:allow(flighthq)
+  @:keep
+  private static function packedRgbaToHexColor(color:Float):String {
     var rgb:Float = cast _Runtime.UNDEFINED;
     rgb = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 8)) & 16777215);
     return cast ('#' + _Runtime.padStart(_Runtime.numberToString(rgb, 16.0), 6.0, '0'));
@@ -229,16 +234,18 @@ class Statusbar {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetStatusBarBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetStatusBarBackendForTest():Void {
     (Statusbar._custom__statusbar = cast (null : Dynamic));
     (Statusbar._host__statusbar = cast (null : Dynamic));
     (Statusbar._hostConflict__statusbar = cast (false : Dynamic));
     (Statusbar._hostObservation__statusbar = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setStatusBarBackend(backend:Null<StatusBarBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setStatusBarBackend(backend:Null<StatusBarBackend>):Void {
     (Statusbar._custom__statusbar = cast (backend : Dynamic));
   }
 

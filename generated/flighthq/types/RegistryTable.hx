@@ -3,23 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
-
-typedef RegistryId = String;
-
-typedef RegistryTableEntry<T> = flighthq._internal._Union2<{ var state:Dynamic; var value:T; }, { var state:Dynamic; }>;
-
-typedef RegistryEntryState = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef RegistryMissPolicy = String;
-
-typedef RegistryTableBase = { var onMiss:RegistryMissPolicy; var registry:RegistryId; };
-
-typedef KeyedTable<T> = { var onMiss:RegistryMissPolicy; var registry:RegistryId; var entries:flighthq._internal._Map<Kind, RegistryTableEntry<T>>; var shape:String; };
-
-typedef SlotTable<T> = { var onMiss:RegistryMissPolicy; var registry:RegistryId; var entry:Null<RegistryTableEntry<T>>; var shape:String; };
-
-typedef OrdinalTable<T> = { var onMiss:RegistryMissPolicy; var registry:RegistryId; var entries:Array<Null<T>>; var shape:String; var vocabulary:Array<Kind>; };
 
 typedef RegistryTable<T> = flighthq._internal._Union2<flighthq._internal._Union2<KeyedTable<T>, OrdinalTable<T>>, SlotTable<T>>;

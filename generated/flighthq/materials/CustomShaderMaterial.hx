@@ -6,12 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
 import flighthq.types.BlendMode;
 import flighthq.types.CustomShaderMaterial;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.EntityRuntime;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.Texture;
 import flighthq.types.Types.CustomShaderMaterialKind;
 import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 
+@:noCompletion
 class CustomShaderMaterial {
   public static function createCustomShaderMaterial(?opts:{ @:optional var kind:Null<String>; @:optional var shaderKey:Null<String>; @:optional var textures:Null<flighthq._internal._Record<String, Texture>>; @:optional var uniforms:Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flighthq.types.CustomShaderMaterial {
     var material:flighthq.types.CustomShaderMaterial = cast _Runtime.UNDEFINED;

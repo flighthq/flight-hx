@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.VignetteEffect;
 
+@:noCompletion
 class GlVignetteEffect {
-  @:noCompletion
-  public static function applyVignetteEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:VignetteEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyVignetteEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:VignetteEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var radius:Float = cast _Runtime.UNDEFINED;
     var softness:Float = cast _Runtime.UNDEFINED;

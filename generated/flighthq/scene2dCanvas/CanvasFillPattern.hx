@@ -5,22 +5,24 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.scene2dCanvas.CanvasTextureWindowSource.resolveCanvasTextureWindowSource;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
+import flighthq.types.GradientType;
+import flighthq.types.InterpolationMethod;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.TextureFilter;
-import flighthq.types.Sampler.TextureWrap;
-import flighthq.types.ShapeCommand.GradientType;
-import flighthq.types.ShapeCommand.InterpolationMethod;
-import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.SpreadMethod;
 import flighthq.types.Texture;
+import flighthq.types.TextureFilter;
+import flighthq.types.TextureWrap;
 
+@:noCompletion
 class CanvasFillPattern {
   public static final GRADIENT_HALF__canvasFillPattern:Float = 819.2;
 
-  @:noCompletion
-  public static function createBitmapPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, texture:Texture, resolvers:CanvasTextureResolvers, allowSmoothing:Bool = true):Null<flighthq._internal.dom.CanvasPattern> {
+  @:allow(flighthq)
+  @:keep
+  private static function createBitmapPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, texture:Texture, resolvers:CanvasTextureResolvers, allowSmoothing:Bool = true):Null<flighthq._internal.dom.CanvasPattern> {
     var source:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
     var smooth:Bool = cast _Runtime.UNDEFINED;
     source = (cast resolveCanvasTextureWindowSource(({ final __callArgument0:Dynamic = resolvers; __callArgument0; }), ({ final __callArgument1:Dynamic = texture; __callArgument1; })) : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>);
@@ -31,8 +33,9 @@ class CanvasFillPattern {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createGradientPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasPattern, flighthq._internal.dom.CanvasGradient>> {
+  @:allow(flighthq)
+  @:keep
+  private static function createGradientPattern(context:flighthq._internal.dom.CanvasRenderingContext2D, gradientType:GradientType, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>, m:Null<Matrix>, spreadMethod:SpreadMethod, _interpolationMethod:InterpolationMethod, focalPointRatio:Float):Null<flighthq._internal._Union2<flighthq._internal.dom.CanvasPattern, flighthq._internal.dom.CanvasGradient>> {
     var mat:Matrix = cast _Runtime.UNDEFINED;
     mat = _Runtime.coalesce(m, function():Dynamic return cast CanvasFillPattern.IDENTITY__canvasFillPattern);
     if ((cast _Runtime.strictEquals(gradientType, 'radial') : Bool)) {

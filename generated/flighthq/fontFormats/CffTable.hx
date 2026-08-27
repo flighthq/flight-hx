@@ -11,12 +11,13 @@ import flighthq.fontFormats.CffDict.CFF_OPERATOR_SUBRS;
 import flighthq.fontFormats.CffDict.readCffDict;
 import flighthq.fontFormats.CffFdSelect.readCffFdSelect;
 import flighthq.fontFormats.CffIndex.readCffIndex;
+import flighthq.types.CffIndex;
+import flighthq.types.CffIndexEntry;
 import flighthq.types.CffTable;
-import flighthq.types.CffTable.CffIndex;
-import flighthq.types.CffTable.CffIndexEntry;
 import flighthq.types.SfntTableDirectory;
-import flighthq.types.SfntTableDirectory.SfntTableRange;
+import flighthq.types.SfntTableRange;
 
+@:noCompletion
 class CffTable {
   public static function readCffLocalSubrs__cffTable(bytes:flighthq._internal._UInt8Array, top:flighthq._internal._Map<Float, Array<Float>>, tableOffset:Float, tableEnd:Float):Array<CffIndexEntry> {
     var privateEntry:Null<Array<Float>> = cast _Runtime.UNDEFINED;
@@ -76,8 +77,9 @@ class CffTable {
     return cast null;
   }
 
-  @:noCompletion
-  public static function readCffTable(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Null<flighthq.types.CffTable> {
+  @:allow(flighthq)
+  @:keep
+  private static function readCffTable(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Null<flighthq.types.CffTable> {
     var table:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var headerSize:Float = cast _Runtime.UNDEFINED;

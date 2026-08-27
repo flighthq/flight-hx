@@ -5,12 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textshaper._TextShaperHooks._textShaperBackendHook;
 import flighthq.types.TextFormat;
-import flighthq.types.TextLayout.TextMeasureFunction;
-import flighthq.types.TextShaper.TextShaperBackend;
+import flighthq.types.TextMeasureFunction;
+import flighthq.types.TextShaperBackend;
 
+@:noCompletion
 class TextShaper {
-  @:noCompletion
-  public static function getTextShaperBackend():Null<TextShaperBackend> {
+  @:allow(flighthq)
+  @:keep
+  private static function getTextShaperBackend():Null<TextShaperBackend> {
     return cast TextShaper._backend__textShaper;
     return cast null;
   }
@@ -21,8 +23,9 @@ class TextShaper {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setTextShaperBackend(backend:Null<TextShaperBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setTextShaperBackend(backend:Null<TextShaperBackend>):Void {
     (TextShaper._backend__textShaper = cast (backend : Dynamic));
     _Runtime.callOptionalValue(_textShaperBackendHook, cast ([backend] : Array<Dynamic>));
   }

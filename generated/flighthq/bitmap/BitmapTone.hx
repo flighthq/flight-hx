@@ -7,6 +7,7 @@ import flighthq.bitmap.Bitmap.invalidateBitmap;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapTone {
   public static function applyBitmapCurve(out:BitmapRegion, source:BitmapRegion, redLut:Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>, greenLut:Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>, blueLut:Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>, ?alphaLut:Null<flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._UInt8ClampedArray>>):Void {
     if (alphaLut == null) alphaLut = cast (null : Dynamic);

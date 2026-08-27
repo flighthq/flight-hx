@@ -4,14 +4,16 @@ package flighthq.textlayout;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textlayout.TextLayout.TEXT_LAYOUT_GUTTER;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextBoundsSpec;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutResult;
 
+@:noCompletion
 class TextBounds {
-  @:noCompletion
-  public static final TEXT_BOUNDS_GUTTER:Float = TEXT_LAYOUT_GUTTER;
+  @:allow(flighthq)
+  @:keep
+  private static final TEXT_BOUNDS_GUTTER:Float = TEXT_LAYOUT_GUTTER;
 
   public static function computeTextBoundsHeight(spec:TextBoundsSpec, layout:TextLayoutResult):Float {
     if ((cast _Runtime.strictEquals((cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).autoSize, 'none') : Bool)) { return cast (cast spec : { var autoSize:TextAutoSize; var height:Float; var width:Float; @:optional var wordWrap:Null<Bool>; }).height; }

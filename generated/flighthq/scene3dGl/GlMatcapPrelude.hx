@@ -10,18 +10,20 @@ import flighthq.scene3dGl.GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
 import flighthq.scene3dGl.GlMeshProgram.compileGlProgram;
 import flighthq.scene3dGl.GlMeshProgram.ensureGlScene3DProgram;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
+import flighthq.types.GlMatcapDefineKey;
 import flighthq.types.GlMatcapProgram;
-import flighthq.types.GlMatcapProgram.GlMatcapDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
 import flighthq.types.LinearColor;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 
+@:noCompletion
 class GlMatcapPrelude {
-  @:noCompletion
-  public static function bindGlMatcapSurface(state:GlRenderState, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Texture>, alphaCutoff:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlMatcapSurface(state:GlRenderState, program:GlMatcapProgram, tint:LinearColor, matcap:Null<Texture>, alphaCutoff:Float):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.uniform4f(gl, _Runtime.field(program, 'locTint'), flighthq._internal._StaticIndex.readFloatArrayTyped((cast tint : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast tint : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast tint : Array<Float>), (cast 2.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast tint : Array<Float>), (cast 3.0 : Float)));
@@ -32,36 +34,41 @@ class GlMatcapPrelude {
     }
   }
 
-  @:noCompletion
-  public static function buildGlMatcapDefineKey(key:GlMatcapDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildGlMatcapDefineKey(key:GlMatcapDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasMatcap') : Bool) ? (cast 't' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
-  @:noCompletion
-  public static function compileGlMatcapProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlMatcapDefineKey):GlMatcapProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlMatcapProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlMatcapDefineKey):GlMatcapProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     program = (cast compileGlProgram(({ final __callArgument4:Dynamic = gl; __callArgument4; }), (cast (cast getGlMatcapVertexSourceForKey(({ final __callArgument5:Dynamic = key; __callArgument5; })) : String) : String), (cast (cast getGlMatcapFragmentSourceForKey(({ final __callArgument7:Dynamic = key; __callArgument7; })) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locJointNormalTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointNormalTexture'), locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locMatcap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matcap'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix'), locTint: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_tint'), locView: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_view'), locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureGlMatcapProgram(state:GlRenderState, key:GlMatcapDefineKey):GlMatcapProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlMatcapProgram(state:GlRenderState, key:GlMatcapDefineKey):GlMatcapProgram {
     var fullKey:GlMatcapDefineKey = cast _Runtime.UNDEFINED;
     fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlScene3DRuntime) : { var activeSkinnedRun:Bool; }).activeSkinnedRun }]));
     return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlMatcapProgram)->GlMatcapProgram)(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast 'matcap:' + Std.string((cast buildGlMatcapDefineKey(({ final __callArgument17:Dynamic = fullKey; __callArgument17; })) : String)) + '' : String), ({ final __callArgument23:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlMatcapProgram return (cast compileGlMatcapProgram(({ final __callArgument19:Dynamic = gl; __callArgument19; }), ({ final __callArgument20:Dynamic = fullKey; __callArgument20; })) : GlMatcapProgram); __callArgument23; })) : GlMatcapProgram);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlMatcapFragmentSourceForKey(key:GlMatcapDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlMatcapFragmentSourceForKey(key:GlMatcapDefineKey):String {
     return cast ((cast GlMatcapPrelude.buildDefineSource__glMatcapPrelude(({ final __callArgument32:Dynamic = key; __callArgument32; })) : String) + GlMatcapPrelude.MATCAP_FRAGMENT_BODY__glMatcapPrelude);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlMatcapVertexSourceForKey(key:GlMatcapDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlMatcapVertexSourceForKey(key:GlMatcapDefineKey):String {
     return cast (((cast GlMatcapPrelude.buildDefineSource__glMatcapPrelude(({ final __callArgument34:Dynamic = key; __callArgument34; })) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlMatcapPrelude.MATCAP_VERTEX_BODY__glMatcapPrelude);
     return cast null;
   }

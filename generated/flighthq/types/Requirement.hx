@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
 typedef Requirement = { var facet:RequirementFacet; var key:Kind; };
-
-typedef RequirementSet = { var covers:Array<RequirementFacet>; var requirements:Array<Requirement>; };

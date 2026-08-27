@@ -7,15 +7,15 @@ import flighthq.renderWgpu.WgpuTextureUpload.uploadWgpuTextureData;
 import flighthq.renderWgpu.WgpuTextureUpload.uploadWgpuTextureImageResource;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.types.Bitmap;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Environment;
 import flighthq.types.Image;
 import flighthq.types.Sampler;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types.Vector2;
@@ -25,9 +25,11 @@ import flighthq.types.WgpuScene3DRuntime;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
+@:noCompletion
 class WgpuEnvironmentCube {
-  @:noCompletion
-  public static function ensureWgpuEnvironmentSourceCube(state:WgpuRenderState, environment:Environment):Null<flighthq._internal.dom.GPUTextureView> {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuEnvironmentSourceCube(state:WgpuRenderState, environment:Environment):Null<flighthq._internal.dom.GPUTextureView> {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var cube:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
     var sources:TextureSourceCubeFaces = cast _Runtime.UNDEFINED;
@@ -59,8 +61,9 @@ class WgpuEnvironmentCube {
     return cast null;
   }
 
-  @:noCompletion
-  public static function updateWgpuEnvironmentCubeFace(state:WgpuRenderState, face:Float, image:TextureSource):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function updateWgpuEnvironmentCubeFace(state:WgpuRenderState, face:Float, image:TextureSource):Bool {
     var texture:Null<flighthq._internal.dom.GPUTexture> = cast _Runtime.UNDEFINED;
     texture = (cast (cast getWgpuScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : WgpuScene3DRuntime) : { var environmentSourceCube:Null<flighthq._internal.dom.GPUTexture>; }).environmentSourceCube;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return cast false; }

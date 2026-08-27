@@ -7,14 +7,15 @@ import flighthq.bitmap.BitmapComposite.writeBitmapPixels;
 import flighthq.bitmap.BitmapRegion.createBitmapRegion;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
-import flighthq.types.GlyphSource.GlyphAtlas;
-import flighthq.types.GlyphSource.GlyphAtlasRuntime;
-import flighthq.types.GlyphSource.GlyphAtlasShelf;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphRasterizeOptions;
-import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
+import flighthq.types.GlyphAtlas;
+import flighthq.types.GlyphAtlasRuntime;
+import flighthq.types.GlyphAtlasShelf;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphRasterizeOptions;
+import flighthq.types.GlyphRasterizedBitmap;
+import flighthq.types.GlyphRasterizerBackend;
 
+@:noCompletion
 class GlyphAtlasEntry {
   public static function getGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):Null<GlyphEntry> {
     var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;
@@ -203,8 +204,9 @@ class GlyphAtlasEntry {
     (runtime.occupiedArea -= ((cast bitmap : { var width:Float; }).width * (cast bitmap : { var height:Float; }).height));
   }
 
-  @:noCompletion
-  public static function setGlyphAtlasEntryGuard(guard:Null<String->Float->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlyphAtlasEntryGuard(guard:Null<String->Float->Void>):Void {
     (GlyphAtlasEntry._entryGuard__glyphAtlasEntry = cast (guard : Dynamic));
   }
 

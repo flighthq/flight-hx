@@ -4,8 +4,9 @@ package flighthq.camera;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Camera3D;
-import flighthq.types.Camera3D.Projection;
+import flighthq.types.Projection;
 
+@:noCompletion
 class Depth {
   public static function getCamera3DLinearDepth(camera:Camera3D, ndcZ:Float):Float {
     var near:Float = cast _Runtime.UNDEFINED;

@@ -4,9 +4,9 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
+import flighthq.types.Node3DRuntime;
+import flighthq.types.ParticleBlendMode;
+import flighthq.types.ParticleEmitterData;
 
 class _ParticleEmitter3DValues {
   public static final ParticleEmitter3DKind:String = 'ParticleEmitter3D';

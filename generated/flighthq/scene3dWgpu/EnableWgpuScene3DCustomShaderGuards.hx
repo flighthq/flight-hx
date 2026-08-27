@@ -8,26 +8,30 @@ import flighthq.scene3dWgpu.WgpuCustomMaterialAbi.WGPU_CUSTOM_SHADER_TEXTURE_CAP
 import flighthq.scene3dWgpu.WgpuCustomMaterialAbi.WGPU_CUSTOM_SHADER_USER_VEC4_CAPACITY;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.types.CustomShaderMaterial;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.Texture;
 import flighthq.types.WgpuCustomMaterialShaderSource;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuScene3DRuntime;
 
+@:noCompletion
 class EnableWgpuScene3DCustomShaderGuards {
-  @:noCompletion
-  public static function areWgpuScene3DCustomShaderGuardsEnabled(state:WgpuRenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areWgpuScene3DCustomShaderGuardsEnabled(state:WgpuRenderState):Bool {
     return cast !_Runtime.looseEquals((cast (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime) : { @:optional var customShaderGuard:Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>; }).customShaderGuard, null);
     return cast null;
   }
 
-  @:noCompletion
-  public static function enableWgpuScene3DCustomShaderGuards(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableWgpuScene3DCustomShaderGuards(state:WgpuRenderState):Void {
     ((cast (cast getWgpuScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuScene3DRuntime) : { @:optional var customShaderGuard:Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>; }).customShaderGuard = cast (runWgpuCustomShaderGuards : Null<WgpuRenderState->String->String->CustomShaderMaterial->Void>));
   }
 
-  @:noCompletion
-  public static function runWgpuCustomShaderGuards(state:WgpuRenderState, shaderKey:String, source:WgpuCustomMaterialShaderSource, material:CustomShaderMaterial):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function runWgpuCustomShaderGuards(state:WgpuRenderState, shaderKey:String, source:WgpuCustomMaterialShaderSource, material:CustomShaderMaterial):Void {
     var uniforms:flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>> = cast _Runtime.UNDEFINED;
     var uniformNames:Array<String> = cast _Runtime.UNDEFINED;
     var textureCount:Float = cast _Runtime.UNDEFINED;

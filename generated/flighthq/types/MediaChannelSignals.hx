@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef MediaReadyState = String;
-
 typedef MediaChannelSignals = { var onBuffering:Signal<Void->Void>; var onError:Signal<String->Void>; var onReady:Signal<Void->Void>; var onSeeked:Signal<Void->Void>; };

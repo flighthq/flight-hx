@@ -4,18 +4,20 @@ package flighthq.physics3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics3d.World.findPhysics3DBody;
-import flighthq.types.Physics3D.Physics3DBodyType;
-import flighthq.types.Physics3D.Physics3DContact;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointResolutionGuard;
-import flighthq.types.Physics3D.Physics3DJointSolver;
-import flighthq.types.Physics3D.Physics3DSolverConfig;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.Physics3DBodyType;
+import flighthq.types.Physics3DContact;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointResolutionGuard;
+import flighthq.types.Physics3DJointSolver;
+import flighthq.types.Physics3DSolverConfig;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class Islands {
-  @:noCompletion
-  public static function buildPhysics3DSolveIslands(world:Physics3DWorld):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function buildPhysics3DSolveIslands(world:Physics3DWorld):Void {
     var roots:Array<Float> = cast _Runtime.UNDEFINED;
     var byRoot:flighthq._internal._Map<Float, Float> = cast _Runtime.UNDEFINED;
     var bodyCounts:Array<Float> = cast _Runtime.UNDEFINED;
@@ -123,19 +125,22 @@ class Islands {
     }
   }
 
-  @:noCompletion
-  public static function isRigidBody3DPairAwake(a:RigidBody3D, b:RigidBody3D):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isRigidBody3DPairAwake(a:RigidBody3D, b:RigidBody3D):Bool {
     return cast ((cast (cast Islands.isBodyLive__islands(({ final __callArgument36:Dynamic = a; __callArgument36; })) : Bool) : Bool) || (cast (cast Islands.isBodyLive__islands(({ final __callArgument38:Dynamic = b; __callArgument38; })) : Bool) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function setPhysics3DJointResolutionGuard(guard:Null<Physics3DJointResolutionGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPhysics3DJointResolutionGuard(guard:Null<Physics3DJointResolutionGuard>):Void {
     (Islands.physics3DJointResolutionGuard__islands = cast (guard : Dynamic));
   }
 
-  @:noCompletion
-  public static function updatePhysics3DSleep(world:Physics3DWorld, dt:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function updatePhysics3DSleep(world:Physics3DWorld, dt:Float):Void {
     var config:Physics3DSolverConfig = cast _Runtime.UNDEFINED;
     var bodies:Array<RigidBody3D> = cast _Runtime.UNDEFINED;
     var parents:flighthq._internal._Map<Float, Float> = cast _Runtime.UNDEFINED;

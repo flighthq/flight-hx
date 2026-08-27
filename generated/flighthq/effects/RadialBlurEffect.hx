@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RadialBlurEffect;
 
+@:noCompletion
 class RadialBlurEffect {
   public static function createRadialBlurEffect(?options:{ @:optional var centerX:Null<Float>; @:optional var centerY:Null<Float>; @:optional var strength:Null<Float>; @:optional var samples:Null<Float>; }):flighthq.types.RadialBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);

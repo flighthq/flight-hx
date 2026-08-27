@@ -7,18 +7,19 @@ import flighthq.geometry.Aabb.createAabb;
 import flighthq.mesh.MeshGeometryOperations.getMeshGeometryTriangleCount;
 import flighthq.mesh.MeshGeometryOperations.getMeshGeometryTriangleVertexIndices;
 import flighthq.types.Aabb;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.AabbLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshGeometryRuntime;
-import flighthq.types.MeshGeometry.PrimitiveTopology;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.MeshGeometryRuntime;
 import flighthq.types.MeshTriangleVertexIndices;
+import flighthq.types.PrimitiveTopology;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
+import flighthq.types.VertexAttributeLayout;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class MeshGeometryCompute {
   public static function computeMeshGeometryBoundingSphere(out:BoundingSphereLike, geometry:MeshGeometry):Void {
     var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -599,8 +600,9 @@ class MeshGeometryCompute {
     ({ var __indexedObject78:flighthq._internal._Float64Array = bitangents; var __indexedKey79:Float = (base + 2.0); flighthq._internal._StaticIndex.writeFloat64ArrayTyped((cast __indexedObject78 : flighthq._internal._Float64Array), (cast __indexedKey79 : Float), (cast (flighthq._internal._StaticIndex.readFloat64ArrayTyped((cast __indexedObject78 : flighthq._internal._Float64Array), (cast __indexedKey79 : Float)) + bz) : Float)); });
   }
 
-  @:noCompletion
-  public static function ensureMeshGeometryBounds(geometry:MeshGeometry):Null<Aabb> {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureMeshGeometryBounds(geometry:MeshGeometry):Null<Aabb> {
     var runtime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     var bounds:Null<Aabb> = cast _Runtime.UNDEFINED;
     runtime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);

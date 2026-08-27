@@ -6,15 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.getCanvasRenderEffectRunner;
 import flighthq.scene2dCanvas.CanvasRenderTexture.getCanvasRenderTextureTarget;
 import flighthq.scene2dCanvas.CanvasRenderTexture.writeCanvasRenderTextureTarget;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
-import flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool;
+import flighthq.types.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderTexturePool;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderTexture;
 
+@:noCompletion
 class CanvasRenderTextureEffect {
   public static function applyCanvasRenderEffectsToRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
     var sourceTarget:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;

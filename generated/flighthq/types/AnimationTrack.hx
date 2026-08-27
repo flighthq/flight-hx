@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 
 typedef AnimationTrack = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var interpolation:AnimationInterpolation; var times:flighthq._internal._ArrayLike<Float>; var values:flighthq._internal._ArrayLike<Float>; var components:Float; var quaternion:Bool; var easing:Null<EasingFunction>; var segmentEasings:Null<Array<Null<EasingFunction>>>; };

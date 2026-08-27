@@ -9,20 +9,21 @@ import flighthq.scene2dCanvas.CanvasRenderTexture.destroyCanvasRenderTexture;
 import flighthq.scene2dCanvas.CanvasRenderTexture.invalidateCanvasRenderTexture;
 import flighthq.texture.RenderTexture.createRenderTexture;
 import flighthq.texture.Texture.resetTextureUvTransform;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
-import flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool;
+import flighthq.types.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderTexturePool;
 import flighthq.types.CreateRenderTextureOptions;
 import flighthq.types.RenderTarget;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 import flighthq.types.RenderTexture;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 
+@:noCompletion
 class CanvasRenderTexturePool {
-  public static function acquireCanvasRenderTexture(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
+  public static function acquireCanvasRenderTexture(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
     var renderTexture:RenderTexture = cast _Runtime.UNDEFINED;
     CanvasRenderTexturePool.assertUsablePool__canvasRenderTexturePool(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }));
     renderTexture = _Runtime.coalesce(_Runtime.callProperty(pool.free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture(({ final __callArgument4:Dynamic = descriptor; __callArgument4; })) : RenderTexture));
@@ -35,12 +36,12 @@ class CanvasRenderTexturePool {
     return cast null;
   }
 
-  public static function createCanvasRenderTexturePool():flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool {
+  public static function createCanvasRenderTexturePool():flighthq.types.CanvasRenderTexturePool {
     return cast { destroyed: false, effectTargets: { free: cast ([] : Array<Dynamic>), inUse: cast ([] : Array<Dynamic>) }, free: cast ([] : Array<Dynamic>), leased: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []), owner: null };
     return cast null;
   }
 
-  public static function destroyCanvasRenderTexturePool(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool):Void {
+  public static function destroyCanvasRenderTexturePool(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexturePool):Void {
     var textures:flighthq._internal._Set<RenderTexture> = cast _Runtime.UNDEFINED;
     if ((cast pool.destroyed : Bool)) { return; }
     CanvasRenderTexturePool.assertPoolOwner__canvasRenderTexturePool(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = pool; __callArgument15; }));
@@ -59,7 +60,7 @@ class CanvasRenderTexturePool {
     (pool.destroyed = cast (true : Bool));
   }
 
-  public static function releaseCanvasRenderTexture(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool, renderTexture:RenderTexture):Void {
+  public static function releaseCanvasRenderTexture(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexturePool, renderTexture:RenderTexture):Void {
     CanvasRenderTexturePool.assertUsablePool__canvasRenderTexturePool(({ final __callArgument28:Dynamic = state; __callArgument28; }), ({ final __callArgument29:Dynamic = pool; __callArgument29; }));
     if ((cast !(cast ((cast pool.leased : flighthq._internal._Set<RenderTexture>).delete_(renderTexture)) : Bool) : Bool)) {
       _Runtime.throwValue(_Runtime.error('releaseCanvasRenderTexture: texture is not leased from this pool'));
@@ -68,7 +69,7 @@ class CanvasRenderTexturePool {
     _Runtime.callProperty(pool.free, 'push', cast ([renderTexture] : Array<Dynamic>));
   }
 
-  public static function withCanvasRenderTextures<T>(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
+  public static function withCanvasRenderTextures<T>(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
     var textures:Array<RenderTexture> = cast _Runtime.UNDEFINED;
     textures = (cast cast ([] : Array<Dynamic>));
     try {
@@ -129,12 +130,12 @@ class CanvasRenderTexturePool {
     (target.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((target.version + 1.0)), 0) : Float));
   }
 
-  public static function assertUsablePool__canvasRenderTexturePool(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool):Void {
+  public static function assertUsablePool__canvasRenderTexturePool(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexturePool):Void {
     if ((cast pool.destroyed : Bool)) { _Runtime.throwValue(_Runtime.error('CanvasRenderTexturePool has been destroyed')); }
     CanvasRenderTexturePool.assertPoolOwner__canvasRenderTexturePool(({ final __callArgument66:Dynamic = state; __callArgument66; }), ({ final __callArgument67:Dynamic = pool; __callArgument67; }));
   }
 
-  public static function assertPoolOwner__canvasRenderTexturePool(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool):Void {
+  public static function assertPoolOwner__canvasRenderTexturePool(state:CanvasRenderState, pool:flighthq.types.CanvasRenderTexturePool):Void {
     var owner:CanvasRenderState = cast _Runtime.UNDEFINED;
     owner = (cast getCanvasRenderCacheScreenState(({ final __callArgument70:Dynamic = state; __callArgument70; })) : CanvasRenderState);
     if ((cast _Runtime.strictEquals(pool.owner, null) : Bool)) {

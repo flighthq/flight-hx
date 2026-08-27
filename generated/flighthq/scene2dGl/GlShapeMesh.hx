@@ -8,18 +8,20 @@ import flighthq.renderGl.GlRenderState.getGlColorAdjustmentMaterialFeature;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.scene2dGl.GlQuadBatchWriter.flushGlQuadBatchWriter;
 import flighthq.types.ColorScaleBias;
+import flighthq.types.GlColorAdjustmentMaterialFeature;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlShapeMesh;
 import flighthq.types.GlShapeMeshBinding;
+import flighthq.types.GlViewportRect;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
 
+@:noCompletion
 class GlShapeMesh {
-  @:noCompletion
-  public static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:GlRenderState->Void):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlShapeMeshBatch(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>, binding:GlShapeMeshBinding, ?onProgramBound:GlRenderState->Void):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var nodeAlpha:Float = cast _Runtime.UNDEFINED;
@@ -58,8 +60,9 @@ class GlShapeMesh {
     flighthq._internal.backend.WebGl2Backend.disableVertexAttribArray(gl, binding.positionLocation);
   }
 
-  @:noCompletion
-  public static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlShapeMeshes(state:GlRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.GlShapeMesh>):Void {
     var fold:Null<GlColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
     fold = (cast getGlColorAdjustmentMaterialFeature(({ final __callArgument8:Dynamic = state; __callArgument8; })) : Null<GlColorAdjustmentMaterialFeature>);
@@ -70,8 +73,9 @@ class GlShapeMesh {
     (#if js _Runtime.callValue(drawGlShapeMeshBatch, cast ([({ final __callArgument15:Dynamic = state; __callArgument15; }), ({ final __callArgument16:Dynamic = renderProxy; __callArgument16; }), ({ final __callArgument17:Dynamic = meshes; __callArgument17; }), (cast ensureGlShapeMeshProgram(({ final __callArgument18:Dynamic = state; __callArgument18; })) : GlShapeMeshBinding)] : Array<Dynamic>)) #else drawGlShapeMeshBatch(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = renderProxy; __callArgument11; }), ({ final __callArgument12:Dynamic = meshes; __callArgument12; }), (cast ensureGlShapeMeshProgram(({ final __callArgument13:Dynamic = state; __callArgument13; })) : GlShapeMeshBinding), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
-  @:noCompletion
-  public static function ensureGlShapeMeshProgram(state:GlRenderState):GlShapeMeshBinding {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlShapeMeshProgram(state:GlRenderState):GlShapeMeshBinding {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var existing:Null<GlShapeMeshBinding> = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;

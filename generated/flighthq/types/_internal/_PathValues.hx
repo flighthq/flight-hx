@@ -3,7 +3,7 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 
 class _PathValues {
   public static final PathCommandValue:{ var NO_OP:Float; var MOVE_TO:Float; var LINE_TO:Float; var CURVE_TO:Float; var WIDE_MOVE_TO:Float; var WIDE_LINE_TO:Float; var CUBIC_CURVE_TO:Float; var CLOSE:Float; } = (cast { NO_OP: 0.0, MOVE_TO: 1.0, LINE_TO: 2.0, CURVE_TO: 3.0, WIDE_MOVE_TO: 4.0, WIDE_LINE_TO: 5.0, CUBIC_CURVE_TO: 6.0, CLOSE: 7.0 });

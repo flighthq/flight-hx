@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textshaper.TextShaper.getTextShaperBackend;
 import flighthq.textshaper.TextShaper.measureText;
-import flighthq.types.TextLayout.TextMeasureFunction;
-import flighthq.types.TextShaper.TextShaperBackend;
+import flighthq.types.TextMeasureFunction;
+import flighthq.types.TextShaperBackend;
 
+@:noCompletion
 class TextLayoutMeasure {
   public static function getTextLayoutMeasureProvider():Null<TextMeasureFunction> {
     if ((cast !_Runtime.strictEquals(TextLayoutMeasure._measureProvider__textLayoutMeasure, null) : Bool)) { return cast TextLayoutMeasure._measureProvider__textLayoutMeasure; }

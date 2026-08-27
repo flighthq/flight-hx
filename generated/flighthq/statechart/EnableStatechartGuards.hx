@@ -4,16 +4,17 @@ package flighthq.statechart;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.Statechart;
-import flighthq.types.Statechart.StatechartDurationGuard;
-import flighthq.types.Statechart.StatechartInstance;
-import flighthq.types.Statechart.StatechartRegion;
-import flighthq.types.Statechart.StatechartState;
-import flighthq.types.Statechart.StatechartTransition;
-import flighthq.types.Statechart.StatechartTransitionExplanation;
-import flighthq.types.Statechart.StatechartTransitionStatus;
+import flighthq.types.StatechartDurationGuard;
+import flighthq.types.StatechartInstance;
+import flighthq.types.StatechartRegion;
+import flighthq.types.StatechartState;
+import flighthq.types.StatechartTransition;
+import flighthq.types.StatechartTransitionExplanation;
+import flighthq.types.StatechartTransitionStatus;
 
+@:noCompletion
 class EnableStatechartGuards {
   public static function areStatechartGuardsEnabled(instance:StatechartInstance):Bool {
     return cast _Runtime.strictEquals(instance.durationGuard, EnableStatechartGuards.warnMissingStatechartRegionDuration__enableStatechartGuards);

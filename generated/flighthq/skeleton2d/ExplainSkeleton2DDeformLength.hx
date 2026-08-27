@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Skeleton2DDeformLengthExplanation;
 import flighthq.types.Skin2D;
 
+@:noCompletion
 class ExplainSkeleton2DDeformLength {
   public static function explainSkeleton2DDeformLength(skin:Null<Skin2D>, vertices:Null<flighthq._internal._Float32Array>, deform:Null<flighthq._internal._Float32Array>):Skeleton2DDeformLengthExplanation {
     var weighted:Bool = cast _Runtime.UNDEFINED;

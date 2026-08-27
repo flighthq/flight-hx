@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.camera.Picking.getCamera3DScreenToWorldRay;
 import flighthq.camera.Picking.getCamera3DWorldToScreen;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Camera3D;
-import flighthq.types.Plane.PlaneLike;
-import flighthq.types.Ray3D.Ray3DLike;
+import flighthq.types.PlaneLike;
+import flighthq.types.Ray3DLike;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Intersection {
   public static function getCamera3DRayThroughBoundingSphere(out:Ray3DLike, camera:Camera3D, sphere:BoundingSphereLike, aspect:Float):Bool {
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) {

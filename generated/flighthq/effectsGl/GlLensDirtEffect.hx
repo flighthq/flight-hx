@@ -10,19 +10,21 @@ import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GlRenderTargetPool;
 import flighthq.types.LensDirtEffect;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 
+@:noCompletion
 class GlLensDirtEffect {
-  @:noCompletion
-  public static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:LensDirtEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyLensDirtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:LensDirtEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var threshold:Float = cast _Runtime.UNDEFINED;
     var seed:Float = cast _Runtime.UNDEFINED;

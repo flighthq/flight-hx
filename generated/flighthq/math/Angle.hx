@@ -7,6 +7,7 @@ import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.math.Constants.TAU;
 
+@:noCompletion
 class Angle {
   public static function degToRad(degrees:Float):Float {
     return cast (degrees * DEG_TO_RAD);

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.PixelateEffect;
 
+@:noCompletion
 class PixelateEffect {
   public static function createPixelateEffect(?options:{ @:optional var size:Null<Float>; }):flighthq.types.PixelateEffect {
     if (options == null) options = cast ({  } : Dynamic);

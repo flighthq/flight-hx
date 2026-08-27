@@ -8,20 +8,21 @@ import flighthq.spritesheet.SpritesheetData.createSpritesheetData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetFrameData;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasAsepriteParse.parseTextureAtlasAsepriteDocument;
-import flighthq.types.AsepriteSchema.AsepriteArrayFrame;
-import flighthq.types.AsepriteSchema.AsepriteBaseFrame;
-import flighthq.types.AsepriteSchema.AsepriteDocument;
-import flighthq.types.AsepriteSchema.AsepriteFrameTag;
-import flighthq.types.AsepriteSchema.AsepriteMeta;
-import flighthq.types.AsepriteSchema.AsepriteParsed;
-import flighthq.types.AsepriteSchema.AsepriteSize;
+import flighthq.types.AsepriteArrayFrame;
+import flighthq.types.AsepriteBaseFrame;
+import flighthq.types.AsepriteDocument;
+import flighthq.types.AsepriteFrameTag;
+import flighthq.types.AsepriteMeta;
+import flighthq.types.AsepriteParsed;
+import flighthq.types.AsepriteSize;
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 import flighthq.types.TextureAtlas;
-import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteDocument;
+import flighthq.types.TextureAtlasAsepriteDocument;
 import flighthq.types.TextureAtlasRegion;
 
+@:noCompletion
 class AsepriteParse {
   public static function frameFromRegion__asepriteParse(region:TextureAtlasRegion):SpritesheetFrameData {
     return cast (cast createSpritesheetFrameData(({ final __callArgument0:Dynamic = { height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: region.pivotX, pivotY: region.pivotY, rotated: region.rotated, sourceHeight: _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height), sourceWidth: _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width), width: region.width, x: region.x, y: region.y }; __callArgument0; })) : SpritesheetFrameData);

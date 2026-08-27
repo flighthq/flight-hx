@@ -14,42 +14,48 @@ import flighthq.scene3dGl.GlMeshProgram.ensureGlScene3DProgram;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
+import flighthq.types.GlToonDefineKey;
 import flighthq.types.GlToonProgram;
-import flighthq.types.GlToonProgram.GlToonDefineKey;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
+@:noCompletion
 class GlToonPrelude {
-  @:noCompletion
-  public static function buildGlToonDefineKey(key:GlToonDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildGlToonDefineKey(key:GlToonDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasBaseColorMap') : Bool) ? (cast 'b' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasRamp') : Bool) ? (cast 'r' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '';
     return cast null;
   }
 
-  @:noCompletion
-  public static function compileGlToonProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlToonDefineKey):GlToonProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlToonProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlToonDefineKey):GlToonProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     program = (cast compileGlProgram(({ final __callArgument0:Dynamic = gl; __callArgument0; }), (cast (cast getGlToonVertexSourceForKey(({ final __callArgument1:Dynamic = key; __callArgument1; })) : String) : String), (cast (cast getGlToonFragmentSourceForKey(({ final __callArgument3:Dynamic = key; __callArgument3; })) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast _Runtime.mergeObjects([(cast resolveGlLitLocations(({ final __callArgument10:Dynamic = gl; __callArgument10; }), ({ final __callArgument11:Dynamic = program; __callArgument11; })) : { var locAmbientCount:Null<flighthq._internal.dom.WebGLUniformLocation>; var locAmbientRadiance:Null<flighthq._internal.dom.WebGLUniformLocation>; var locCameraPosition:Null<flighthq._internal.dom.WebGLUniformLocation>; var locDirectional:Null<flighthq._internal.dom.WebGLUniformLocation>; var locDirectionalCount:Null<flighthq._internal.dom.WebGLUniformLocation>; var locDirectionalRadiance:Null<flighthq._internal.dom.WebGLUniformLocation>; var locHemisphereCount:Null<flighthq._internal.dom.WebGLUniformLocation>; var locHemisphereLights:Null<flighthq._internal.dom.WebGLUniformLocation>; var locIblBrdf:Null<flighthq._internal.dom.WebGLUniformLocation>; var locIblEnabled:Null<flighthq._internal.dom.WebGLUniformLocation>; var locIblIntensity:Null<flighthq._internal.dom.WebGLUniformLocation>; var locIblIrradiance:Null<flighthq._internal.dom.WebGLUniformLocation>; var locIblMaxMip:Null<flighthq._internal.dom.WebGLUniformLocation>; var locIblPrefiltered:Null<flighthq._internal.dom.WebGLUniformLocation>; var locPointCount:Null<flighthq._internal.dom.WebGLUniformLocation>; var locPointLights:Null<flighthq._internal.dom.WebGLUniformLocation>; var locShadowBias:Null<flighthq._internal.dom.WebGLUniformLocation>; var locShadowEnabled:Null<flighthq._internal.dom.WebGLUniformLocation>; var locShadowMap:Null<flighthq._internal.dom.WebGLUniformLocation>; var locShadowMatrix:Null<flighthq._internal.dom.WebGLUniformLocation>; var locShadowNormalBiasWorld:Null<flighthq._internal.dom.WebGLUniformLocation>; var locShadowPcfRadius:Null<flighthq._internal.dom.WebGLUniformLocation>; var locSpotCount:Null<flighthq._internal.dom.WebGLUniformLocation>; var locSpotLights:Null<flighthq._internal.dom.WebGLUniformLocation>; }), { program: program }, { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff') }, { locBaseColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_baseColor') }, { locBaseColorMap: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_baseColorMap') }, { locJointNormalTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointNormalTexture') }, { locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture') }, { locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model') }, { locNormalMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_normalMatrix') }, { locRamp: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_ramp') }, { locSteps: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_steps') }, { locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection') }]);
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureGlToonProgram(state:GlRenderState, key:GlToonDefineKey):GlToonProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlToonProgram(state:GlRenderState, key:GlToonDefineKey):GlToonProgram {
     var fullKey:GlToonDefineKey = cast _Runtime.UNDEFINED;
     fullKey = (cast _Runtime.mergeObjects([key, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlScene3DRuntime) : { var activeSkinnedRun:Bool; }).activeSkinnedRun }]));
     return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlToonProgram)->GlToonProgram)(({ final __callArgument16:Dynamic = state; __callArgument16; }), (cast 'toon:' + Std.string((cast buildGlToonDefineKey(({ final __callArgument17:Dynamic = fullKey; __callArgument17; })) : String)) + '' : String), ({ final __callArgument23:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlToonProgram return (cast compileGlToonProgram(({ final __callArgument19:Dynamic = gl; __callArgument19; }), ({ final __callArgument20:Dynamic = fullKey; __callArgument20; })) : GlToonProgram); __callArgument23; })) : GlToonProgram);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlToonFragmentSourceForKey(key:GlToonDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlToonFragmentSourceForKey(key:GlToonDefineKey):String {
     return cast ((cast GlToonPrelude.buildGlToonDefineSource__glToonPrelude(({ final __callArgument32:Dynamic = key; __callArgument32; })) : String) + GlToonPrelude.TOON_FRAGMENT_BODY__glToonPrelude);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlToonVertexSourceForKey(key:GlToonDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlToonVertexSourceForKey(key:GlToonDefineKey):String {
     var skin:String = cast _Runtime.UNDEFINED;
     skin = _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '');
     return cast (((cast GlToonPrelude.buildGlToonDefineSource__glToonPrelude(({ final __callArgument34:Dynamic = key; __callArgument34; })) : String) + skin) + GlToonPrelude.TOON_VERTEX_BODY__glToonPrelude);

@@ -4,28 +4,30 @@ package flighthq.scene3dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.hasScene3DMaterialTextureLister;
-import flighthq.types.Entity.Kind;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.CatalogEntry;
+import flighthq.types.CatalogRegistration;
+import flighthq.types.Kind;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RequirementFacet;
 import flighthq.types.Scene3DKindUsage;
-import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
-import flighthq.types.Scene3DResources.Scene3DResourceResolver;
+import flighthq.types.Scene3DMaterialTextureRegistry;
+import flighthq.types.Scene3DResourceResolver;
+import flighthq.types.SceneCoverage;
 import flighthq.types.SceneCoverageCatalog;
-import flighthq.types.SceneCoverageCatalog.CatalogEntry;
-import flighthq.types.SceneCoverageCatalog.CatalogRegistration;
 import flighthq.types.SceneCoverageEntry;
-import flighthq.types.SceneCoverageEntry.SceneCoverage;
 import flighthq.types._internal._RequirementFacetValues.RequirementFacetValue;
 import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 
+@:noCompletion
 class ExplainScene3DResourceCoverage {
   public static function explainScene3DResourceCoverage(out:Array<SceneCoverageEntry>, resolver:Scene3DResourceResolver, usage:Scene3DKindUsage, catalog:SceneCoverageCatalog):Void {
     _Runtime.setLength(out, 0.0);
     (cast ExplainScene3DResourceCoverage.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = resolver; __callArgument1; }), ({ final __callArgument2:Dynamic = usage; __callArgument2; }), (cast false : Bool), ({ final __callArgument3:Dynamic = catalog; __callArgument3; })) : Bool);
   }
 
-  @:noCompletion
-  public static function hasScene3DResourceCoverage(resolver:Scene3DResourceResolver, usage:Scene3DKindUsage):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasScene3DResourceCoverage(resolver:Scene3DResourceResolver, usage:Scene3DKindUsage):Bool {
     return cast !(cast (cast ExplainScene3DResourceCoverage.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage(({ final __callArgument8:Dynamic = null; __callArgument8; }), ({ final __callArgument9:Dynamic = resolver; __callArgument9; }), ({ final __callArgument10:Dynamic = usage; __callArgument10; }), (cast true : Bool), ({ final __callArgument11:Dynamic = null; __callArgument11; })) : Bool) : Bool);
     return cast null;
   }

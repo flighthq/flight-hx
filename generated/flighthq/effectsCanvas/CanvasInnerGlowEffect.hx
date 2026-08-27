@@ -11,19 +11,21 @@ import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEff
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.clearCanvasTarget;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasImage;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.drawCanvasInvertedTintedAlphaMask;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
+import flighthq.types.CanvasRenderTargetPool;
 import flighthq.types.InnerGlowEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class CanvasInnerGlowEffect {
-  @:noCompletion
+  @:allow(flighthq)
+  @:keep
   @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:InnerGlowEffect):Void {})
   @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:InnerGlowEffect):Void {})
-  public static function applyInnerGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, InnerGlowEffect>, ?maybeEffect:InnerGlowEffect):Void {
+  private static function applyInnerGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, InnerGlowEffect>, ?maybeEffect:InnerGlowEffect):Void {
     var effect:InnerGlowEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : InnerGlowEffect));

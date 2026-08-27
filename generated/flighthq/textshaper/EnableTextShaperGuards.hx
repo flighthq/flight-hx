@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.textshaper.TextShaperPool.setShapedRunReleaseGuard;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.ShapedRun;
 
+@:noCompletion
 class EnableTextShaperGuards {
   public static function disableTextShaperGuards():Void {
     setShapedRunReleaseGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));

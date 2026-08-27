@@ -17,11 +17,10 @@ import flighthq.types.AnimationClip;
 import flighthq.types.AnimationTrack;
 import flighthq.types.Attachment2D;
 import flighthq.types.AttachmentSkin2D;
-import flighthq.types.AttachmentSkin2D.SkinAttachment2D;
 import flighthq.types.Bone2D;
 import flighthq.types.EasingFunction;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.MeshAttachment2D;
 import flighthq.types.RegionAttachment2D;
 import flighthq.types.Skeleton2D;
@@ -29,10 +28,11 @@ import flighthq.types.Skeleton2DAnimationPath;
 import flighthq.types.Skeleton2DAnimationTarget;
 import flighthq.types.Skeleton2DDrawOrderTimeline;
 import flighthq.types.Skeleton2DImport;
-import flighthq.types.Skeleton2DImport.Skeleton2DImportAnimation;
+import flighthq.types.Skeleton2DImportAnimation;
+import flighthq.types.Skeleton2DSlotAnimationPath;
 import flighthq.types.Skeleton2DSlotAnimationTarget;
-import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
 import flighthq.types.Skin2D;
+import flighthq.types.SkinAttachment2D;
 import flighthq.types.Slot2D;
 import flighthq.types.TransformInherit2D;
 import flighthq.types.TransformMode2D.TransformMode2D;
@@ -49,9 +49,11 @@ import flighthq.types._internal._RegionAttachment2DValues.RegionAttachment2DKind
 import flighthq.types._internal._Skeleton2DAnimationPathValues.Skeleton2DAnimationPathValue;
 import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues.Skeleton2DSlotAnimationPathValue;
 
+@:noCompletion
 class SpineParse {
-  @:noCompletion
-  public static function parseSpineDrawOrderTimeline(raw:flighthq._internal._Any, slots:Array<Slot2D>, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DDrawOrderTimeline> {
+  @:allow(flighthq)
+  @:keep
+  private static function parseSpineDrawOrderTimeline(raw:flighthq._internal._Any, slots:Array<Slot2D>, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DDrawOrderTimeline> {
     var times:Array<Float> = cast _Runtime.UNDEFINED;
     var orderings:Array<Float> = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast !(cast _Runtime.isArray(raw) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(raw, 'length'), 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(slots, 'length'), 0.0) : Bool)) : Bool)) { return cast null; }

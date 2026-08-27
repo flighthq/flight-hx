@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 
 typedef WgpuTextureResolver = WgpuRenderState->TextureLike->Bool->TextureColorSpace->Null<WgpuTextureEntry>;

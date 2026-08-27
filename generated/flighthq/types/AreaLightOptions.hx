@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Vector3.Vector3Like;
 
 typedef AreaLightOptions = { @:optional var castsShadow:Bool; @:optional var color:Float; @:optional var direction:Vector3Like; @:optional var intensity:Float; @:optional var normalBias:Float; @:optional var pcfRadius:Float; @:optional var position:Vector3Like; @:optional var range:Float; @:optional var right:Vector3Like; @:optional var shadowBias:Float; @:optional var up:Vector3Like; };

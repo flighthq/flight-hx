@@ -3,12 +3,13 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.ShortcutBackend;
 import flighthq.types.ShortcutEvent;
 import flighthq.types.TauriApi;
-import flighthq.types.TauriApi.TauriGlobalShortcutPlugin;
-import flighthq.types.TauriApi.TauriShortcutEvent;
+import flighthq.types.TauriGlobalShortcutPlugin;
+import flighthq.types.TauriShortcutEvent;
 
+@:noCompletion
 class TauriShortcut {
   public static function createTauriShortcutBackend(tauri:TauriApi):ShortcutBackend {
     var globalShortcut:TauriGlobalShortcutPlugin = cast _Runtime.UNDEFINED;

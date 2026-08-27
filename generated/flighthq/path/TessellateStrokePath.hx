@@ -9,6 +9,7 @@ import flighthq.types.Path;
 import flighthq.types.PathMesh;
 import flighthq.types.StrokeStyle;
 
+@:noCompletion
 class TessellateStrokePath {
   public static function tessellateStrokePath(path:Path, style:StrokeStyle, tolerance:Float = 0.25):Null<PathMesh> {
     var geometry:{ var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; } = cast _Runtime.UNDEFINED;

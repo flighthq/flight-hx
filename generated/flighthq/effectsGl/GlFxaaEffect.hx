@@ -8,15 +8,17 @@ import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.FxaaEffect;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlFxaaEffect {
-  @:noCompletion
-  public static function applyFxaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FxaaEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyFxaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FxaaEffect):Void {
     var edgeThreshold:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     edgeThreshold = _Runtime.coalesce(_Runtime.field(effect, 'edgeThreshold'), function():Dynamic return cast 0.0312);

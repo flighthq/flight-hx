@@ -4,6 +4,7 @@ package flighthq.skeleton2dFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class SpineDrawOrder {
   public static function resolveSpineDrawOrdering(moves:Array<{ var offset:Float; var slotIndex:Float; }>, slotCount:Float):Null<Array<Float>> {
     var occupants:Array<Float> = cast _Runtime.UNDEFINED;

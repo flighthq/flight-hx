@@ -15,21 +15,21 @@ import flighthq.texture.Texture.getTextureSourceKind;
 import flighthq.texture.TextureColorSpace.getTextureSampleColorSpace;
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlTextureResolver;
 import flighthq.types.Image;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.KeyedTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.RenderTexture;
 import flighthq.types.Sampler;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSourceKind;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types.Types.CompressedImageTextureSourceKind;
@@ -41,6 +41,7 @@ import flighthq.types._internal._TextureSourceKindValues.CompressedImageTextureS
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSourceKind;
 
+@:noCompletion
 class GlTextureResolver {
   public static function registerGlBitmapTextureResolver(state:GlRenderState):Void {
     registerGlTextureResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast BitmapTextureSourceKind : String), ({ final __callArgument1:Dynamic = GlTextureResolver.resolveGlBitmapTexture__glTextureResolver; __callArgument1; }));

@@ -7,19 +7,20 @@ import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnost
 import flighthq.scene2dFormats.RiveCoreProperties.getRiveCorePropertyFieldType;
 import flighthq.scene2dFormats.RiveCoreProperties.isRiveCoreBytesProperty;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.RiveCoreObject;
 import flighthq.types.RiveDocument;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveDocumentHeader;
-import flighthq.types.RiveDocument.RiveFieldType;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RivePropertyFieldType;
-import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types.RiveDocumentHeader;
+import flighthq.types.RiveFieldType;
+import flighthq.types.RiveProperty;
+import flighthq.types.RivePropertyFieldType;
+import flighthq.types.RiveValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._RiveDocumentValues.RiveFieldTypeValue;
 
 typedef RiveCursor__riveDocument = { var bytes:flighthq._internal._UInt8Array; var overflowed:Bool; var position:Float; var unknownPropertyKey:Float; };
 
+@:noCompletion
 class RiveDocument {
   public static function parseRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<flighthq.types.RiveDocument> {
     var cursor:RiveCursor__riveDocument = cast _Runtime.UNDEFINED;

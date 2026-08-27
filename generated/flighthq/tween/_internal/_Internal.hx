@@ -3,8 +3,8 @@ package flighthq.tween._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.NumericProps;
 import flighthq.types.Tween;
-import flighthq.types.Tween.NumericProps;
 import flighthq.types.TweenPropertyDetail;
 
 class _Internal {

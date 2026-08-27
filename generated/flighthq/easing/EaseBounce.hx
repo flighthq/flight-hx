@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class EaseBounce {
   public static final easeInBounce:EasingFunction = (cast function(t:Float):Float return (1.0 - (cast EaseBounce.bounceOut__easeBounce((cast (1.0 - t) : Float)) : Float)));
 

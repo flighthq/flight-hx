@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 import flighthq.types._internal._TimelineCueValues.TimelineAudioCueKind;
 import flighthq.types._internal._TimelineCueValues.TimelineFrameEntryCauseValue;
 import flighthq.types._internal._TimelineCueValues.TimelineGotoCueKind;
@@ -13,22 +12,4 @@ import flighthq.types._internal._TimelineCueValues.TimelinePreviousFrameCueKind;
 import flighthq.types._internal._TimelineCueValues.TimelineStopCueKind;
 import flighthq.types._internal._TimelineCueValues.TimelineStreamAudioCueKind;
 
-typedef TimelineFrameEntryCause = flighthq._internal._IndexedAccess<Dynamic, String>;
-
 typedef TimelineCue = { var frame:Float; var kind:String; };
-
-typedef TimelineAudioEnvelopePoint = { var leftGain:Float; var rightGain:Float; var time:Float; };
-
-typedef TimelineAudioCue = { var frame:Float; var kind:String; var duration:Null<Float>; var gain:Float; var envelope:Array<TimelineAudioEnvelopePoint>; var loops:Float; var offset:Float; var resource:AudioResource; var skipIfPlaying:Bool; var stop:Bool; };
-
-typedef TimelineStreamAudioCue = { var frame:Float; var kind:String; var gain:Float; var resource:AudioResource; };
-
-typedef TimelineGotoCue = { var frame:Float; var kind:String; var targetFrame:Null<Float>; var targetLabel:Null<String>; };
-
-typedef TimelinePlaybackCue = { var frame:Float; var kind:String; };
-
-typedef TimelineCueHandler = Timeline->TimelineCue->TimelineFrameEntryCause->Void;
-
-typedef TimelineCueHandlerEntry = { var dispatchOnSeek:Bool; var handle:TimelineCueHandler; var kind:String; };
-
-typedef TimelineCueRegistry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var entries:Array<TimelineCueHandlerEntry>; };

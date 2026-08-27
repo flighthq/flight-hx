@@ -3,11 +3,12 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Shell.ShellBackend;
-import flighthq.types.Shell.ShellShortcutLink;
+import flighthq.types.ShellBackend;
+import flighthq.types.ShellShortcutLink;
 import flighthq.types.TauriApi;
-import flighthq.types.TauriApi.TauriOpenerPlugin;
+import flighthq.types.TauriOpenerPlugin;
 
+@:noCompletion
 class TauriShell {
   public static function createTauriShellBackend(tauri:TauriApi):ShellBackend {
     var opener:TauriOpenerPlugin = cast _Runtime.UNDEFINED;

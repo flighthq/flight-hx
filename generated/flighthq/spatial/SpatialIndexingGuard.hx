@@ -3,19 +3,21 @@ package flighthq.spatial;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.SpatialIndexing.SpatialIndexingGuard;
-import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
+import flighthq.types.SpatialIndexingGuard;
+import flighthq.types.SpatialIndexingNotice;
 
+@:noCompletion
 class SpatialIndexingGuard {
-  @:noCompletion
-  public static function reportSpatialIndexing(notice:SpatialIndexingNotice):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function reportSpatialIndexing(notice:SpatialIndexingNotice):Void {
     if ((cast _Runtime.strictEquals(SpatialIndexingGuard._indexingGuard__spatialIndexingGuard, null) : Bool)) { return; }
     (cast SpatialIndexingGuard._indexingGuard__spatialIndexingGuard : SpatialIndexingNotice->Void)(({ final __callArgument0:Dynamic = notice; __callArgument0; }));
   }
 
-  public static function setSpatialIndexingGuard(guard:Null<flighthq.types.SpatialIndexing.SpatialIndexingGuard>):Void {
+  public static function setSpatialIndexingGuard(guard:Null<flighthq.types.SpatialIndexingGuard>):Void {
     (SpatialIndexingGuard._indexingGuard__spatialIndexingGuard = cast (guard : Dynamic));
   }
 
-  public static var _indexingGuard__spatialIndexingGuard:Null<flighthq.types.SpatialIndexing.SpatialIndexingGuard> = _Runtime.explicitNull();
+  public static var _indexingGuard__spatialIndexingGuard:Null<flighthq.types.SpatialIndexingGuard> = _Runtime.explicitNull();
 }

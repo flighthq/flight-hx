@@ -14,18 +14,20 @@ import flighthq.scene3dWgpu.WgpuMeshPipeline.getWgpuMeshPreludeWgsl;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.stashWgpuUvTransform;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuSkinningAdapter;
+import flighthq.types.WgpuMaterialBinding;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 import flighthq.types.WgpuSkinningAdapter;
+import flighthq.types.WgpuToonDefineKey;
 import flighthq.types.WgpuToonPipeline;
-import flighthq.types.WgpuToonPipeline.WgpuToonDefineKey;
 
+@:noCompletion
 class WgpuToonPrelude {
-  @:noCompletion
-  public static function bindWgpuToonSurface(state:WgpuRenderState, pipeline:WgpuToonPipeline, materialKey:flighthq._internal._Object, baseColor:Array<Float>, steps:Float, alphaCutoff:Float):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function bindWgpuToonSurface(state:WgpuRenderState, pipeline:WgpuToonPipeline, materialKey:flighthq._internal._Object, baseColor:Array<Float>, steps:Float, alphaCutoff:Float):flighthq._internal.dom.GPUBindGroup {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
@@ -52,14 +54,16 @@ class WgpuToonPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function buildWgpuToonDefineKey(key:WgpuToonDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildWgpuToonDefineKey(key:WgpuToonDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'doubleSided') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasBaseColorMap') : Bool) ? (cast 'b' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasRamp') : Bool) ? (cast 'r' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
-  @:noCompletion
-  public static function compileWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Bool = false, skinned:Bool = false):WgpuToonPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function compileWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Bool = false, skinned:Bool = false):WgpuToonPipeline {
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
@@ -70,14 +74,16 @@ class WgpuToonPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuToonPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuToonPipeline(state:WgpuRenderState, key:WgpuToonDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuToonPipeline {
     return cast (cast (cast ensureWgpuScene3DPipeline : WgpuRenderState->String->(Bool->Bool->WgpuToonPipeline)->WgpuToonPipeline)(({ final __callArgument22:Dynamic = state; __callArgument22; }), (cast 'toon:' + Std.string(format) + '|' + Std.string((cast buildWgpuToonDefineKey(({ final __callArgument23:Dynamic = key; __callArgument23; })) : String)) + '' : String), ({ final __callArgument29:Dynamic = function(blended:Bool, skinned:Bool):WgpuToonPipeline return (cast compileWgpuToonPipeline(({ final __callArgument25:Dynamic = state; __callArgument25; }), ({ final __callArgument26:Dynamic = key; __callArgument26; }), (cast format : String), (cast blended : Bool), (cast skinned : Bool)) : WgpuToonPipeline); __callArgument29; })) : WgpuToonPipeline);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuToonModuleSourceForKey(key:WgpuToonDefineKey, skinned:Bool = false, ?skinning:Null<WgpuSkinningAdapter>):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuToonModuleSourceForKey(key:WgpuToonDefineKey, skinned:Bool = false, ?skinning:Null<WgpuSkinningAdapter>):String {
     if (skinning == null) skinning = cast (null : Dynamic);
     return cast ((((('const ALPHA_MASK : bool = ' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n' + 'const DOUBLE_SIDED : bool = ' + Std.string(((cast _Runtime.field(key, 'doubleSided') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + 'const HAS_BASE_COLOR_MAP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasBaseColorMap') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + 'const HAS_RAMP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasRamp') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + (cast getWgpuMeshPreludeWgsl((cast skinned : Bool), ({ final __callArgument38:Dynamic = skinning; __callArgument38; })) : String)) + WgpuToonPrelude.TOON_WGSL_BODY__wgpuToonPrelude);
     return cast null;

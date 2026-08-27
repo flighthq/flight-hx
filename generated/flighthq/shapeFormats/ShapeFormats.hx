@@ -5,8 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.shapeFormats.ShapeJson as Facade_ShapeFormats_flighthq_shapeFormats_ShapeJson;
 import flighthq.types.Shape;
-import flighthq.types.ShapeJson.ShapeJsonFormatOptions;
-import flighthq.types.ShapeJson.ShapeJsonParseOptions;
+import flighthq.types.ShapeJsonFormatOptions;
+import flighthq.types.ShapeJsonParseOptions;
 
 class ShapeFormats {
   public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {

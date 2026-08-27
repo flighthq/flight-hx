@@ -4,17 +4,17 @@ package flighthq.net;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
-import flighthq.types.Net.NetBackend;
-import flighthq.types.Net.NetBody;
-import flighthq.types.Net.NetCredentials;
-import flighthq.types.Net.NetMethod;
-import flighthq.types.Net.NetProgress;
-import flighthq.types.Net.NetRedirect;
-import flighthq.types.Net.NetRequest;
-import flighthq.types.Net.NetRequestOptions;
-import flighthq.types.Net.NetResponse;
-import flighthq.types.Net.NetResponseBody;
-import flighthq.types.Net.NetResponseType;
+import flighthq.types.NetBackend;
+import flighthq.types.NetBody;
+import flighthq.types.NetCredentials;
+import flighthq.types.NetMethod;
+import flighthq.types.NetProgress;
+import flighthq.types.NetRedirect;
+import flighthq.types.NetRequest;
+import flighthq.types.NetRequestOptions;
+import flighthq.types.NetResponse;
+import flighthq.types.NetResponseBody;
+import flighthq.types.NetResponseType;
 import flighthq.types.Signal;
 
 class Net {
@@ -256,8 +256,9 @@ class Net {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebNetBackend():NetBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebNetBackend():NetBackend {
     return cast { sendNetRequest: function(request:NetRequest, options:Null<NetRequestOptions>):flighthq._internal._Promise<NetResponse> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
@@ -294,8 +295,9 @@ class Net {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getNetBackend():NetBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getNetBackend():NetBackend {
     if ((cast _Runtime.strictEquals(Net._backend__net, null) : Bool)) { (Net._backend__net = cast ((cast createWebNetBackend() : NetBackend) : Dynamic)); }
     return cast Net._backend__net;
     return cast null;
@@ -306,8 +308,9 @@ class Net {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setNetBackend(backend:Null<NetBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setNetBackend(backend:Null<NetBackend>):Void {
     (Net._backend__net = cast (backend : Dynamic));
   }
 }

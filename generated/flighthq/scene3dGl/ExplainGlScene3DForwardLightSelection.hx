@@ -6,14 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.types.GlScene3DForwardLightList;
 import flighthq.types.PointLight;
 import flighthq.types.Scene3DForwardLightSelectionExplanation;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.SpotLight;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
+@:noCompletion
 class ExplainGlScene3DForwardLightSelection {
-  @:noCompletion
-  public static function explainGlScene3DForwardLightSelection(lights:Scene3DLightsLike, ?selection:GlScene3DForwardLightList):Scene3DForwardLightSelectionExplanation {
+  @:allow(flighthq)
+  @:keep
+  private static function explainGlScene3DForwardLightSelection(lights:Scene3DLightsLike, ?selection:GlScene3DForwardLightList):Scene3DForwardLightSelectionExplanation {
     var pointLightCount:Float = cast _Runtime.UNDEFINED;
     var spotLightCount:Float = cast _Runtime.UNDEFINED;
     var selectionPrepared:Bool = cast _Runtime.UNDEFINED;

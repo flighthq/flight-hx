@@ -8,22 +8,24 @@ import flighthq.renderGl.GlSkinPaletteTexture.createGlSkinPaletteTexture;
 import flighthq.renderGl.GlSkinPaletteTexture.destroyGlSkinPaletteTexture;
 import flighthq.scene3dGl.GlEnvironmentIblBake.destroyGlEnvironmentIblBakePrograms;
 import flighthq.types.GlMeshProgram;
+import flighthq.types.GlMeshUpload;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.GlScene3DDrawEntry;
+import flighthq.types.GlScene3DIbl;
 import flighthq.types.GlScene3DRuntime;
-import flighthq.types.GlScene3DRuntime.GlMeshUpload;
-import flighthq.types.GlScene3DRuntime.GlScene3DDrawEntry;
-import flighthq.types.GlScene3DRuntime.GlScene3DIbl;
-import flighthq.types.GlScene3DRuntime.GlScene3DShadow;
+import flighthq.types.GlScene3DShadow;
 import flighthq.types.GlSkinPaletteTexture;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class GlScene3DRuntime {
-  @:noCompletion
-  public static function destroyGlScene3DRuntime(state:GlRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyGlScene3DRuntime(state:GlRenderState):Void {
     var scene:Null<flighthq.types.GlScene3DRuntime> = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     scene = ((cast GlScene3DRuntime.sceneRuntimes__glScene3DRuntime : flighthq._internal._WeakMap<GlRenderState, flighthq.types.GlScene3DRuntime>).get(state));
@@ -68,8 +70,9 @@ class GlScene3DRuntime {
     _Runtime.setLength((cast scene : { var opaquePool:Array<GlScene3DDrawEntry>; }).opaquePool, 0.0);
   }
 
-  @:noCompletion
-  public static function ensureGlSkinNormalPalette(state:GlRenderState):GlSkinPaletteTexture {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlSkinNormalPalette(state:GlRenderState):GlSkinPaletteTexture {
     var scene:flighthq.types.GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var palette:Null<GlSkinPaletteTexture> = cast _Runtime.UNDEFINED;
     scene = (cast getGlScene3DRuntime(({ final __callArgument10:Dynamic = state; __callArgument10; })) : flighthq.types.GlScene3DRuntime);
@@ -82,8 +85,9 @@ class GlScene3DRuntime {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlSkinPalette(state:GlRenderState):GlSkinPaletteTexture {
     var scene:flighthq.types.GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var palette:Null<GlSkinPaletteTexture> = cast _Runtime.UNDEFINED;
     scene = (cast getGlScene3DRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : flighthq.types.GlScene3DRuntime);
@@ -96,8 +100,9 @@ class GlScene3DRuntime {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlScene3DRuntime(state:GlRenderState):flighthq.types.GlScene3DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlScene3DRuntime(state:GlRenderState):flighthq.types.GlScene3DRuntime {
     var stateRuntime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var scene:Null<flighthq.types.GlScene3DRuntime> = cast _Runtime.UNDEFINED;
     stateRuntime = (cast _Runtime.getIndex(state, EntityRuntimeKey) : GlRenderStateRuntime);

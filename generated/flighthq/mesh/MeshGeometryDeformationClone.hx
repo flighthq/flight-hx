@@ -10,13 +10,14 @@ import flighthq.mesh.MeshGeometry.getMeshGeometrySkinBindPose;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryBounds;
 import flighthq.types.Aabb;
-import flighthq.types.Aabb.AabbLike;
+import flighthq.types.AabbLike;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexSemantic;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexSemantic;
 
+@:noCompletion
 class MeshGeometryDeformationClone {
   public static function cloneMeshGeometryForDeformation(source:MeshGeometry):MeshGeometry {
     var clone:MeshGeometry = cast _Runtime.UNDEFINED;

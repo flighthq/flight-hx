@@ -11,15 +11,16 @@ import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
 import flighthq.types.AnimationTrack;
 import flighthq.types.Mesh;
-import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.MeshMorph;
 import flighthq.types.Node3D;
 import flighthq.types.Quaternion;
-import flighthq.types.Quaternion.QuaternionLike;
+import flighthq.types.QuaternionLike;
 import flighthq.types.Scene3DAnimationPath;
 import flighthq.types.Scene3DAnimationTarget;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class SceneAnimation {
   public static function applyAnimationClipToScene3D(clip:AnimationClip, time:Float):Void {
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;

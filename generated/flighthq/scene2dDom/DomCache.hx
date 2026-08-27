@@ -21,13 +21,15 @@ import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.Scene2DRenderer;
 
+@:noCompletion
 class DomCache {
   public static function enableDomRenderCache(state:RenderState):Void {
     registerRenderCacheRenderer(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = defaultDomRenderCacheRenderer; __callArgument1; }));
   }
 
-  @:noCompletion
-  public static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):CanvasRenderTarget {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureDomRenderCacheTarget(state:DomRenderState, cache:RenderCache, width:Float, height:Float):CanvasRenderTarget {
     var targets:flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     targets = (cast DomCache.getTargets__domCache(({ final __callArgument4:Dynamic = state; __callArgument4; })) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>);
@@ -43,14 +45,16 @@ class DomCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<CanvasRenderTarget> {
+  @:allow(flighthq)
+  @:keep
+  private static function getDomRenderCacheTarget(state:DomRenderState, cache:RenderCache):Null<CanvasRenderTarget> {
     return cast _Runtime.coalesce(((cast (cast DomCache.getTargets__domCache(({ final __callArgument12:Dynamic = state; __callArgument12; })) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:noCompletion
-  public static function releaseDomRenderCache(state:DomRenderState, cache:RenderCache):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function releaseDomRenderCache(state:DomRenderState, cache:RenderCache):Void {
     ((cast (cast DomCache.getTargets__domCache(({ final __callArgument16:Dynamic = state; __callArgument16; })) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).delete_(cache));
   }
 
@@ -83,8 +87,9 @@ class DomCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static final defaultDomRenderCacheRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: DomCache.drawDomRenderCache__domCache });
+  @:allow(flighthq)
+  @:keep
+  private static final defaultDomRenderCacheRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: DomCache.drawDomRenderCache__domCache });
 
   public static final _renderCacheTargets__domCache:flighthq._internal._WeakMap<DomRenderState, flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

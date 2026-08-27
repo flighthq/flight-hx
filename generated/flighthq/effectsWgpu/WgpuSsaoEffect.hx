@@ -10,14 +10,16 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.SsaoEffect;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuSsaoEffect {
-  @:noCompletion
-  public static function applySsaoEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsaoEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applySsaoEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsaoEffect):Void {
     var radius:Float = cast _Runtime.UNDEFINED;
     var intensity:Float = cast _Runtime.UNDEFINED;
     var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;

@@ -13,6 +13,7 @@ import flighthq.types.BitmapInnerShadowOptions;
 import flighthq.types.BitmapRegion;
 import flighthq.types.BitmapShadowBlurOptions;
 
+@:noCompletion
 class BitmapShadow {
   public static function dropShadowBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapDropShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);

@@ -4,15 +4,16 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorShareCanResult;
-import flighthq.types.CapacitorApi.CapacitorShareOptions;
-import flighthq.types.CapacitorApi.CapacitorSharePlugin;
-import flighthq.types.CapacitorApi.CapacitorShareResult;
-import flighthq.types.Share.ShareBackend;
-import flighthq.types.Share.ShareContent;
-import flighthq.types.Share.ShareOptions;
-import flighthq.types.Share.ShareResult;
+import flighthq.types.CapacitorShareCanResult;
+import flighthq.types.CapacitorShareOptions;
+import flighthq.types.CapacitorSharePlugin;
+import flighthq.types.CapacitorShareResult;
+import flighthq.types.ShareBackend;
+import flighthq.types.ShareContent;
+import flighthq.types.ShareOptions;
+import flighthq.types.ShareResult;
 
+@:noCompletion
 class CapacitorShare {
   public static function createCapacitorShareBackend(capacitor:CapacitorApi):ShareBackend {
     var share:CapacitorSharePlugin = cast _Runtime.UNDEFINED;

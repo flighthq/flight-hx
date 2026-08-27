@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SkinAttachment2D = { var attachment:Attachment2D; var name:String; var slotIndex:Float; };
-
 typedef AttachmentSkin2D = { var attachments:Array<SkinAttachment2D>; var name:String; };

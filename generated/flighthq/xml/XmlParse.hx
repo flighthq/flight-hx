@@ -7,6 +7,7 @@ import flighthq.types.XmlElement;
 
 typedef ParseState__xmlParse = { var depth:Float; var depthExceeded:Bool; var pos:Float; };
 
+@:noCompletion
 class XmlParse {
   public static function parseXmlAttributes(attrs:String):flighthq._internal._Record<String, String> {
     var result:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;

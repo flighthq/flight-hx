@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
-import flighthq.types.StarlingSchema.StarlingDocument;
-import flighthq.types.StarlingSchema.StarlingSubTexture;
+import flighthq.types.StarlingDocument;
+import flighthq.types.StarlingSubTexture;
 
+@:noCompletion
 class StarlingSerialize {
   public static function frameToSubTexture__starlingSerialize(frame:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<SpritesheetData, String>, Float>):StarlingSubTexture {
     var st:StarlingSubTexture = cast _Runtime.UNDEFINED;

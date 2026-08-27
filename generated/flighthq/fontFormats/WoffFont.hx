@@ -7,22 +7,24 @@ import flighthq.fontFormats.SfntAssembly.assembleSfntFont;
 import flighthq.fontFormats.SfntAssembly.computeSfntTableChecksum;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.types.Compression;
-import flighthq.types.Compression.CompressionFraming;
-import flighthq.types.Compression.Decompressor;
+import flighthq.types.CompressionFraming;
+import flighthq.types.Decompressor;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.WoffChecksumMismatch;
 import flighthq.types._internal._CompressionValues.CompressionFramingValue;
 import flighthq.types._internal._CompressionValues.CompressionValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class WoffFont {
   public static final WOFF_HEADER_BYTES__woffFont:Float = 44.0;
 
   public static final WOFF_DIRECTORY_ENTRY_BYTES__woffFont:Float = 20.0;
 
-  @:noCompletion
-  public static function readWoffChecksumMismatches(bytes:flighthq._internal._UInt8Array, decompress:Null<Decompressor>):Array<WoffChecksumMismatch> {
+  @:allow(flighthq)
+  @:keep
+  private static function readWoffChecksumMismatches(bytes:flighthq._internal._UInt8Array, decompress:Null<Decompressor>):Array<WoffChecksumMismatch> {
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var tableCount:Float = cast _Runtime.UNDEFINED;
     var directoryEnd:Float = cast _Runtime.UNDEFINED;
@@ -61,11 +63,13 @@ class WoffFont {
     return cast null;
   }
 
-  @:noCompletion
-  public static final WOFF_COMPRESSION:Compression = (cast CompressionValue : { var Brotli:String; var Deflate:String; var Lzma:String; }).Deflate;
+  @:allow(flighthq)
+  @:keep
+  private static final WOFF_COMPRESSION:Compression = (cast CompressionValue : { var Brotli:String; var Deflate:String; var Lzma:String; }).Deflate;
 
-  @:noCompletion
-  public static function readWoffFont(bytes:flighthq._internal._UInt8Array, decompress:Null<Decompressor>, ?diagnostics:Array<ImportDiagnostic>):Null<flighthq._internal._UInt8Array> {
+  @:allow(flighthq)
+  @:keep
+  private static function readWoffFont(bytes:flighthq._internal._UInt8Array, decompress:Null<Decompressor>, ?diagnostics:Array<ImportDiagnostic>):Null<flighthq._internal._UInt8Array> {
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var tableCount:Float = cast _Runtime.UNDEFINED;
     var directoryEnd:Float = cast _Runtime.UNDEFINED;

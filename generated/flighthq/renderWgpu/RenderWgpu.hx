@@ -21,20 +21,20 @@ import flighthq.types.Bitmap;
 import flighthq.types.CreateExternalTextureOptions;
 import flighthq.types.Matrix;
 import flighthq.types.RenderPassPreserve;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
+import flighthq.types.RenderTargetColorSpace;
+import flighthq.types.RenderTargetDescriptor;
 import flighthq.types.RenderTexture;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureResolutionExplanation;
 import flighthq.types.TextureSourceKind;
 import flighthq.types.WgpuCompressedTextureDecoder;
 import flighthq.types.WgpuRenderOptions;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
 import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTexture.WgpuRenderTextureExplanation;
-import flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool;
+import flighthq.types.WgpuRenderTextureExplanation;
+import flighthq.types.WgpuRenderTexturePool;
+import flighthq.types.WgpuTextureEntry;
 import flighthq.types.WgpuTextureResolver;
 
 class RenderWgpu {

@@ -10,22 +10,24 @@ import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.scene2dGl.GlQuadBatchWriter.flushGlQuadBatchWriter;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DRuntime;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DRuntime;
+import flighthq.types.Node2DTraits;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
+import flighthq.types.Scene2DClipHooks;
 import flighthq.types.Scene2DRenderer;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 
+@:noCompletion
 class GlNode2D {
-  @:noCompletion
-  public static function drawGlScene2D(_state:GlRenderState, _renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlScene2D(_state:GlRenderState, _renderProxy:RenderProxy2D):Void {
   }
 
   public static function renderGlScene2D(state:GlRenderState, source:Node2D):Void {
@@ -67,6 +69,7 @@ class GlNode2D {
     ({ final __optionalOwner19 = clipHooks; if (__optionalOwner19 != null) { final __optionalCall18 = (cast __optionalOwner19 : { var finalize:RenderState->Void; }).finalize; if (__optionalCall18 != null) __optionalCall18(state); } });
   }
 
-  @:noCompletion
-  public static final defaultGlScene2DRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawGlScene2D });
+  @:allow(flighthq)
+  @:keep
+  private static final defaultGlScene2DRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawGlScene2D });
 }

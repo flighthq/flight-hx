@@ -4,12 +4,12 @@ package flighthq.geolocation;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Geolocation.GeoPosition;
-import flighthq.types.Geolocation.GeoPositionResult;
-import flighthq.types.Geolocation.GeolocationBackend;
-import flighthq.types.Geolocation.GeolocationErrorReason;
-import flighthq.types.Geolocation.GeolocationPermissionState;
-import flighthq.types.Geolocation.GeolocationRequestOptions;
+import flighthq.types.GeoPosition;
+import flighthq.types.GeoPositionResult;
+import flighthq.types.GeolocationBackend;
+import flighthq.types.GeolocationErrorReason;
+import flighthq.types.GeolocationPermissionState;
+import flighthq.types.GeolocationRequestOptions;
 
 typedef GlobalGeolocationPosition__geolocation = flighthq._internal.dom.GeolocationPosition;
 
@@ -59,8 +59,9 @@ class Geolocation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebGeolocationBackend():GeolocationBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebGeolocationBackend():GeolocationBackend {
     return cast ({ var __thisValue0:Dynamic = null; __thisValue0 = { clearWatch: function(id:Float):Void {
       var geo:Null<flighthq._internal.dom.Geolocation> = cast _Runtime.UNDEFINED;
       geo = (cast Geolocation.getWebGeolocation__geolocation() : Null<flighthq._internal.dom.Geolocation>);
@@ -223,8 +224,9 @@ class Geolocation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGeolocationBackend():GeolocationBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getGeolocationBackend():GeolocationBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Geolocation._custom__geolocation, function():Dynamic return cast Geolocation._host__geolocation), function():Dynamic return cast Geolocation._sentinel__geolocation);
     return cast null;
   }
@@ -240,8 +242,9 @@ class Geolocation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installGeolocationHostBackend(backend:GeolocationBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installGeolocationHostBackend(backend:GeolocationBackend):Void {
     if ((cast !_Runtime.strictEquals(Geolocation._host__geolocation, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Geolocation._host__geolocation, backend) : Bool)) { (Geolocation._hostConflict__geolocation = cast (true : Dynamic)); }
       return;
@@ -279,8 +282,9 @@ class Geolocation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeGeolocationHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeGeolocationHostResult(operation:String, succeeded:Bool):Void {
     (Geolocation._hostObservation__geolocation = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -294,16 +298,18 @@ class Geolocation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetGeolocationBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetGeolocationBackendForTest():Void {
     (Geolocation._custom__geolocation = cast (null : Dynamic));
     (Geolocation._host__geolocation = cast (null : Dynamic));
     (Geolocation._hostConflict__geolocation = cast (false : Dynamic));
     (Geolocation._hostObservation__geolocation = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setGeolocationBackend(backend:Null<GeolocationBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGeolocationBackend(backend:Null<GeolocationBackend>):Void {
     (Geolocation._custom__geolocation = cast (backend : Dynamic));
   }
 

@@ -18,10 +18,11 @@ import flighthq.physics3d.JointMath.writePhysics3DJointRotationError;
 import flighthq.physics3d.JointMath.writePhysics3DJointSeparation;
 import flighthq.physics3d.SymmetricTensor.applySymmetricTensor;
 import flighthq.physics3d.SymmetricTensor.inverseSymmetricTensor;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointFrames;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointFrames;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class JointRows {
   public static final ROW_LENGTH:Float = 9.0;
 

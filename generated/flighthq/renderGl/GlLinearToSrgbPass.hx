@@ -9,9 +9,11 @@ import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
+@:noCompletion
 class GlLinearToSrgbPass {
-  @:noCompletion
-  public static function drawGlLinearToSrgbPass(state:GlRenderState, source:GlRenderTarget, dest:Null<GlRenderTarget>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlLinearToSrgbPass(state:GlRenderState, source:GlRenderTarget, dest:Null<GlRenderTarget>):Void {
     drawGlFullscreenPass(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast GlLinearToSrgbPass.getGlLinearToSrgbProgram__glLinearToSrgbPass(({ final __callArgument1:Dynamic = state; __callArgument1; })) : GlFullscreenProgram), ({ final __callArgument3:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument3; }), ({ final __callArgument4:Dynamic = dest; __callArgument4; }), ({ final __callArgument5:Dynamic = function(__unused0:flighthq._internal.dom.WebGL2RenderingContext, __unused1:GlFullscreenProgram):Void { GlLinearToSrgbPass.NOOP__glLinearToSrgbPass(); }; __callArgument5; }));
   }
 
@@ -32,6 +34,7 @@ class GlLinearToSrgbPass {
 
   public static final _programs__glLinearToSrgbPass:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static final LINEAR_TO_SRGB_FRAGMENT_SRC:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 fragColor;\nvec3 linearToSrgb(vec3 c) {\n  c = max(c, vec3(0.0));\n  vec3 low = c * 12.92;\n  vec3 high = 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055;\n  return mix(low, high, step(vec3(0.0031308), c));\n}\nvoid main() {\n  vec4 linear = texture(u_texture0, v_texCoord);\n  fragColor = vec4(linearToSrgb(linear.rgb), linear.a);\n}';
+  @:allow(flighthq)
+  @:keep
+  private static final LINEAR_TO_SRGB_FRAGMENT_SRC:String = '#version 300 es\nprecision highp float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nout vec4 fragColor;\nvec3 linearToSrgb(vec3 c) {\n  c = max(c, vec3(0.0));\n  vec3 low = c * 12.92;\n  vec3 high = 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055;\n  return mix(low, high, step(vec3(0.0031308), c));\n}\nvoid main() {\n  vec4 linear = texture(u_texture0, v_texCoord);\n  fragColor = vec4(linearToSrgb(linear.rgb), linear.a);\n}';
 }

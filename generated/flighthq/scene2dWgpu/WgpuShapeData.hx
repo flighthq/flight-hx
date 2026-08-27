@@ -13,15 +13,17 @@ import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.TextureSource;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
-import flighthq.types.WgpuRenderState.WgpuTextureSourceTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuShapeMeshBuffers;
+import flighthq.types.WgpuShapeRasterSurface;
 import flighthq.types.WgpuShapeRendererData;
-import flighthq.types.WgpuShapeRendererData.WgpuShapeRasterSurface;
+import flighthq.types.WgpuTextureSourceTextureEntry;
 
+@:noCompletion
 class WgpuShapeData {
-  @:noCompletion
-  public static function acquireWgpuShapeRasterSurface(data:WgpuShapeRendererData):WgpuShapeRasterSurface {
+  @:allow(flighthq)
+  @:keep
+  private static function acquireWgpuShapeRasterSurface(data:WgpuShapeRendererData):WgpuShapeRasterSurface {
     var existing:Null<WgpuShapeRasterSurface> = cast _Runtime.UNDEFINED;
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     var surface:WgpuShapeRasterSurface = cast _Runtime.UNDEFINED;
@@ -36,14 +38,16 @@ class WgpuShapeData {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWgpuShapeData(_state:RenderState, _source:Renderable):RendererData {
+  @:allow(flighthq)
+  @:keep
+  private static function createWgpuShapeData(_state:RenderState, _source:Renderable):RendererData {
     return cast (cast (cast createWgpuRendererData : WgpuShapeRendererData->RendererData)(({ final __callArgument0:Dynamic = { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null, meshBuffers: { vertexBuffers: cast ([] : Array<Dynamic>), vertexCapacities: cast ([] : Array<Dynamic>), indexBuffers: cast ([] : Array<Dynamic>), indexCapacities: cast ([] : Array<Dynamic>), uniformBuffers: cast ([] : Array<Dynamic>), bindGroups: cast ([] : Array<Dynamic>), colorScaleBiasUniformBuffers: cast ([] : Array<Dynamic>), colorScaleBiasBindGroups: cast ([] : Array<Dynamic>) } }; __callArgument0; })) : RendererData);
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyWgpuShapeData(state:WgpuRenderState, data:RendererData):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuShapeData(state:WgpuRenderState, data:RendererData):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var shapeData:Null<WgpuShapeRendererData> = cast _Runtime.UNDEFINED;
     var surface:Null<WgpuShapeRasterSurface> = cast _Runtime.UNDEFINED;
@@ -82,8 +86,9 @@ class WgpuShapeData {
     _Runtime.setLength(b.colorScaleBiasBindGroups, 0.0);
   }
 
-  @:noCompletion
-  public static function getWgpuShapeData(data:RendererData):Null<WgpuShapeRendererData> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuShapeData(data:RendererData):Null<WgpuShapeRendererData> {
     return cast (cast (cast getWgpuRendererData : Null<RendererData>->Null<WgpuShapeRendererData>)(({ final __callArgument14:Dynamic = data; __callArgument14; })) : Null<WgpuShapeRendererData>);
     return cast null;
   }

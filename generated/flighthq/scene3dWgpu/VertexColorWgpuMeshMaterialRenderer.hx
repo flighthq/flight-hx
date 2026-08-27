@@ -14,23 +14,25 @@ import flighthq.scene3dWgpu.WgpuUnlitPrelude.ensureWgpuUnlitPipeline;
 import flighthq.types.Camera3D;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.VertexColorMaterialKind;
 import flighthq.types.VertexColorMaterial;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuUnlitDefineKey;
 import flighthq.types.WgpuUnlitPipeline;
-import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 import flighthq.types._internal._VertexColorMaterialValues.VertexColorMaterialKind;
 
+@:noCompletion
 class VertexColorWgpuMeshMaterialRenderer {
-  @:noCompletion
-  public static final vertexColorWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final vertexColorWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var vertexColor:Null<VertexColorMaterial> = cast _Runtime.UNDEFINED;

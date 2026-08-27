@@ -3,10 +3,11 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DJointSolver;
-import flighthq.types.Physics2D.Physics2DWorld;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DJointSolver;
+import flighthq.types.Physics2DWorld;
 
+@:noCompletion
 class JointCollisionSuppression {
   public static function isPhysics2DPairJointSuppressed(world:Physics2DWorld, bodyA:Float, bodyB:Float):Bool {
     var first:Float = cast _Runtime.UNDEFINED;

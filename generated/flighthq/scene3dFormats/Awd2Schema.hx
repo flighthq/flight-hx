@@ -4,6 +4,7 @@ package flighthq.scene3dFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class Awd2Schema {
   public static final AWD2_MAGIC_0:Float = 65.0;
 

@@ -5,19 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.Luminance.getColorLuminance;
 import flighthq.materials.PbrMaterials.createStandardPbrMaterial;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.PhongMaterial;
 import flighthq.types.Sampler;
 import flighthq.types.StandardPbrMaterial;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.StandardPbrMaterialProperties;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 
+@:noCompletion
 class PhongToPbr {
   public static function convertPhongToStandardPbrMaterial(phong:PhongMaterial, ?opts:{ @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: phong.diffuse }, { baseColorMap: phong.diffuseMap }, { metallic: (cast getPbrMetallicFromPhongSpecular((cast phong.specular : Float), (cast phong.diffuse : Float)) : Float) }, { normalMap: phong.normalMap }, { normalScale: phong.normalScale }, { roughness: (cast getPbrRoughnessFromPhongShininess((cast phong.shininess : Float)) : Float) }, opts]) : Dynamic)) : StandardPbrMaterial);

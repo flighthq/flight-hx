@@ -5,23 +5,25 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshGeometryRuntime;
-import flighthq.types.MeshGeometry.MeshGeometryWgpuData;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.MeshGeometryRuntime;
+import flighthq.types.MeshGeometryWgpuData;
 import flighthq.types.Types.EntityRuntimeKey;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.WgpuMeshUpload;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuScene3DRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload;
 import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class WgpuMeshUpload {
-  @:noCompletion
-  public static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry, gpuSkinned:Bool = false):flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuMeshUpload(state:WgpuRenderState, geometry:MeshGeometry, gpuSkinned:Bool = false):flighthq.types.WgpuMeshUpload {
     var indices:Null<flighthq._internal._Union2<flighthq._internal._UInt32Array, flighthq._internal._UInt16Array>> = cast _Runtime.UNDEFINED;
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
-    var cache:flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload> = cast _Runtime.UNDEFINED;
-    var upload:Null<flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload> = cast _Runtime.UNDEFINED;
+    var cache:flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuMeshUpload> = cast _Runtime.UNDEFINED;
+    var upload:Null<flighthq.types.WgpuMeshUpload> = cast _Runtime.UNDEFINED;
     var meshRuntime:Null<MeshGeometryRuntime> = cast _Runtime.UNDEFINED;
     var skinning:Null<WgpuSkinningAdapter> = cast _Runtime.UNDEFINED;
     var hasSkinBindPose:Bool = cast _Runtime.UNDEFINED;
@@ -33,7 +35,7 @@ class WgpuMeshUpload {
     indices = geometry.indices;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
     cache = scene.uploadCache;
-    upload = ((cast cache : flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload>).get(geometry));
+    upload = ((cast cache : flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuMeshUpload>).get(geometry));
     meshRuntime = (cast _Runtime.getIndex(geometry, EntityRuntimeKey) : Null<MeshGeometryRuntime>);
     skinning = (cast scene.skinningAdapter : Null<WgpuSkinningAdapter>);
     hasSkinBindPose = ((cast ((cast gpuSkinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) && (cast (cast skinning : WgpuSkinningAdapter).hasBindPose(({ final __callArgument2:Dynamic = geometry; __callArgument2; })) : Bool));
@@ -55,7 +57,7 @@ class WgpuMeshUpload {
     }
     stride = (cast geometry.layout : { var stride:Float; }).stride;
     (upload = cast ({ indexBuffer: indexBuffer, indexCount: ((cast !_Runtime.strictEquals(indices, null) : Bool) ? (cast (cast indices : { var length:Float; }).length : Dynamic) : (cast ((cast ((cast stride : Float) > (cast 0.0 : Float)) : Bool) ? (cast HxMath.floor(_Runtime.divideNumbers(_Runtime.field(vertices, 'byteLength'), stride)) : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic)), indexFormat: ((cast _Runtime.strictEquals(indices, null) : Bool) ? (cast null : Dynamic) : (cast ((cast _Runtime.strictEquals((cast indices : { var BYTES_PER_ELEMENT:Float; }).BYTES_PER_ELEMENT, 4.0) : Bool) ? (cast 'uint32' : Dynamic) : (cast 'uint16' : Dynamic)) : Dynamic)), skinBindUploaded: hasSkinBindPose, version: geometry.version, vertexBuffer: vertexBuffer } : Dynamic));
-    ((cast cache : flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload>).set(geometry, (cast upload)));
+    ((cast cache : flighthq._internal._WeakMap<flighthq._internal._Object, flighthq.types.WgpuMeshUpload>).set(geometry, (cast upload)));
     if ((cast !_Runtime.strictEquals(meshRuntime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       ((cast meshRuntime : { var webgpuData:Null<MeshGeometryWgpuData>; }).webgpuData = cast ((cast (cast upload : flighthq._internal._Any) : flighthq._internal._IndexedAccess<MeshGeometryRuntime, String>) : Null<MeshGeometryWgpuData>));
     }

@@ -3,12 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.Material.MaterialData;
-import flighthq.types.Node.NodeData;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeTraits;
 
 typedef HasMaterial = { var material:Null<Material>; var materialData:Null<MaterialData>; };
-
-typedef MaterialNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var material:Null<Material>; var materialData:Null<MaterialData>; };

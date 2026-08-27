@@ -7,13 +7,14 @@ import flighthq.collision.CollisionShapeValidation2D.getCollisionShapeValidation
 import flighthq.collision.CollisionSupport2D.getCollisionPairTest2D;
 import flighthq.collision.CollisionSupport2D.getCollisionSupport2D;
 import flighthq.collision.TestCollision2D.testCollision2D;
-import flighthq.types.Collision.CollisionManifold2D;
-import flighthq.types.Collision.CollisionPairTest2D;
-import flighthq.types.Collision.CollisionShape2D;
-import flighthq.types.Collision.CollisionShapeKind2D;
-import flighthq.types.Collision.CollisionSupport2D;
-import flighthq.types.Collision.CollisionTestExplanation2D;
+import flighthq.types.CollisionManifold2D;
+import flighthq.types.CollisionPairTest2D;
+import flighthq.types.CollisionShape2D;
+import flighthq.types.CollisionShapeKind2D;
+import flighthq.types.CollisionSupport2D;
+import flighthq.types.CollisionTestExplanation2D;
 
+@:noCompletion
 class ExplainCollisionTest2D {
   public static function explainCollisionTest2D(a:CollisionShape2D, b:CollisionShape2D):CollisionTestExplanation2D {
     var statusA:Null<String> = cast _Runtime.UNDEFINED;

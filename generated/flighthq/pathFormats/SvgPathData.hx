@@ -13,8 +13,9 @@ import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.types.Path;
 import flighthq.types.PathSegment;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 
+@:noCompletion
 class SvgPathData {
   public static function appendSvgPathData(path:Path, d:String):Bool {
     var skipSeparators:Void->Void = cast _Runtime.UNDEFINED;

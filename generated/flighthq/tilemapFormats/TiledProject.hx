@@ -8,18 +8,19 @@ import flighthq.tilemap.Tilemap.createTilemapData;
 import flighthq.tilemapFormats.TiledGid.decodeTiledGid;
 import flighthq.tilemapFormats.TiledGid.getTiledTilesetRefForGid;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TiledGid;
 import flighthq.types.TiledLayer;
 import flighthq.types.TiledMap;
-import flighthq.types.TiledParseOptions.TiledTilesetResolver;
-import flighthq.types.TiledTileset.TiledTilesetRef;
-import flighthq.types.Tilemap.TilemapData;
+import flighthq.types.TiledTilesetRef;
+import flighthq.types.TiledTilesetResolver;
+import flighthq.types.TilemapData;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef TilesetGroup__tiledProject = { var firstGid:Float; var layout:Dynamic; var tiles:flighthq._internal._Int16Array; };
 
+@:noCompletion
 class TiledProject {
   public static function buildTilemapLayersFromTiled(map:TiledMap, layerIndex:Float, resolveTileset:TiledTilesetResolver, ?diagnostics:Array<ImportDiagnostic>):Null<Array<TilemapData>> {
     var layer:TiledLayer = cast _Runtime.UNDEFINED;

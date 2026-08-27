@@ -10,6 +10,7 @@ import flighthq.types.Entity;
 import flighthq.types.Types.AmbientLightKind;
 import flighthq.types._internal._AmbientLightValues.AmbientLightKind;
 
+@:noCompletion
 class AmbientLight {
   public static function cloneAmbientLight(source:flighthq.types.AmbientLight):flighthq.types.AmbientLight {
     return cast (cast createAmbientLight(({ final __callArgument0:Dynamic = { color: _Runtime.field(source, 'color'), intensity: _Runtime.field(source, 'intensity') }; __callArgument0; })) : flighthq.types.AmbientLight);

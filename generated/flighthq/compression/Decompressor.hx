@@ -4,26 +4,27 @@ package flighthq.compression;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Compression;
-import flighthq.types.Compression.Decompressor;
+import flighthq.types.Decompressor;
 
+@:noCompletion
 class Decompressor {
-  public static function getDecompressor(compression:Compression):Null<flighthq.types.Compression.Decompressor> {
-    return cast _Runtime.coalesce(((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor>).get(compression)), function():Dynamic return cast null);
+  public static function getDecompressor(compression:Compression):Null<flighthq.types.Decompressor> {
+    return cast _Runtime.coalesce(((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Decompressor>).get(compression)), function():Dynamic return cast null);
     return cast null;
   }
 
   public static function hasDecompressor(compression:Compression):Bool {
-    return cast ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor>).has(compression));
+    return cast ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Decompressor>).has(compression));
     return cast null;
   }
 
-  public static function registerDecompressor(compression:Compression, decompress:flighthq.types.Compression.Decompressor):Void {
-    ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor>).set(compression, (cast decompress)));
+  public static function registerDecompressor(compression:Compression, decompress:flighthq.types.Decompressor):Void {
+    ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Decompressor>).set(compression, (cast decompress)));
   }
 
   public static function unregisterDecompressor(compression:Compression):Void {
-    ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor>).delete_(compression));
+    ((cast Decompressor._decompressors__decompressor : flighthq._internal._Map<Compression, flighthq.types.Decompressor>).delete_(compression));
   }
 
-  public static final _decompressors__decompressor:flighthq._internal._Map<Compression, flighthq.types.Compression.Decompressor> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+  public static final _decompressors__decompressor:flighthq._internal._Map<Compression, flighthq.types.Decompressor> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 }

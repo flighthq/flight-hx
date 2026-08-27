@@ -4,8 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef CffIndex = { var endOffset:Float; var entries:Array<CffIndexEntry>; };
-
-typedef CffIndexEntry = { var end:Float; var start:Float; };
-
 typedef CffTable = { var charstrings:Array<CffIndexEntry>; var globalSubrs:Array<CffIndexEntry>; var localSubrs:Array<CffIndexEntry>; var localSubrsByGlyph:Null<Array<Array<CffIndexEntry>>>; };

@@ -7,8 +7,9 @@ import flighthq.types.AudioResourceReference;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.Node2D;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DDocument.Scene2DSlotReference;
+import flighthq.types.Scene2DSlotReference;
 
+@:noCompletion
 class Scene2DDocument {
   public static function createScene2DDocument(root:Node2D, ?slots:Array<Scene2DSlotReference>, ?sourceKind:Null<String>, ?backgroundColor:Null<Float>, ?imageResources:Array<ImageResourceReference>, ?audioResources:Array<AudioResourceReference>):flighthq.types.Scene2DDocument {
     if (slots == null) slots = cast (cast ([] : Array<Dynamic>) : Dynamic);

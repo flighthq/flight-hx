@@ -5,16 +5,18 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.ScanlinesEffect;
 
+@:noCompletion
 class CanvasScanlinesEffect {
-  @:noCompletion
-  public static function applyScanlinesEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:ScanlinesEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyScanlinesEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:ScanlinesEffect):Void {
     var count:Float = cast _Runtime.UNDEFINED;
     var intensity:Float = cast _Runtime.UNDEFINED;
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;

@@ -15,22 +15,23 @@ import flighthq.shape.ShapeCommands.appendShapeLineTo;
 import flighthq.shape.ShapeCommands.appendShapeMoveTo;
 import flighthq.shape.ShapeFill.getShapeFillRegions;
 import flighthq.swf.SwfShape.createSwfGlyphShape;
+import flighthq.types.GlyphOutlineMetrics;
 import flighthq.types.GlyphOutlineSource;
-import flighthq.types.GlyphOutlineSource.GlyphOutlineMetrics;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.MatrixLike;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.PathCommand;
+import flighthq.types.PathWinding;
+import flighthq.types.RectangleLike;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.ShapeCommand.PathWinding;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
 import flighthq.types.ShapeFillRegion;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class SwfText {
   public static function createSwfTextShape(reader:SwfReader, version:Float, fonts:flighthq._internal._Map<Float, GlyphOutlineSource>):Null<Shape> {
     var glyphBits:Float = cast _Runtime.UNDEFINED;

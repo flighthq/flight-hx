@@ -4,6 +4,7 @@ package flighthq.scene3dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class GlMeshFragmentTail {
   public static final GL_MESH_FRAGMENT_TAIL_UNIFORMS:String = 'uniform float u_objectAlpha;\nuniform float u_alphaIsCoverage;';
 

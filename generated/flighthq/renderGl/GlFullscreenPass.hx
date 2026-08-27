@@ -6,19 +6,21 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlShader.ensureDefaultGlBitmapShader;
+import flighthq.types.GlBitmapShader;
 import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlShaderLocations;
-import flighthq.types.GlShaderLocations.GlBitmapShader;
+import flighthq.types.GlViewportRect;
 
+@:noCompletion
 class GlFullscreenPass {
   public static final FULLSCREEN_VERTEX_SRC__glFullscreenPass:String = '#version 300 es\nin vec2 a_position;\nin vec2 a_texCoord;\nout vec2 v_texCoord;\nvoid main() {\n  gl_Position = vec4(a_position, 0.0, 1.0);\n  v_texCoord = a_texCoord;\n}';
 
-  @:noCompletion
-  public static function clearGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function clearGlRenderTarget(state:GlRenderState, target:GlRenderTarget):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime);
@@ -35,8 +37,9 @@ class GlFullscreenPass {
     (runtime.currentBlendMode = cast (null : Null<String>));
   }
 
-  @:noCompletion
-  public static function compileGlFullscreenProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSource:String):GlFullscreenProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlFullscreenProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSource:String):GlFullscreenProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     var textures:Array<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
     var single:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
@@ -56,8 +59,9 @@ class GlFullscreenPass {
     return cast null;
   }
 
-  @:noCompletion
-  public static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<flighthq._internal.dom.WebGLTexture>, dest:Null<GlRenderTarget>, setUniforms:flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<flighthq._internal.dom.WebGLTexture>, dest:Null<GlRenderTarget>, setUniforms:flighthq._internal.dom.WebGL2RenderingContext->GlFullscreenProgram->Void):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var destFramebuffer:Null<flighthq._internal.dom.WebGLFramebuffer> = cast _Runtime.UNDEFINED;

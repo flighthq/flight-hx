@@ -13,13 +13,14 @@ import flighthq.scene3d.Mesh.cloneMesh;
 import flighthq.scene3d.Mesh.isMesh;
 import flighthq.scene3d.SceneNode.createNode3D;
 import flighthq.types.Material;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
-import flighthq.types.Node.NodeOf;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
-import flighthq.types.Transform3D.Transform3DLike;
+import flighthq.types.Node3DTraits;
+import flighthq.types.NodeOf;
+import flighthq.types.Transform3DLike;
 
+@:noCompletion
 class CloneNode3DSubtree {
   public static function cloneNode3DSubtree(source:Node3D, ?materialOverride:Null<Null<Material>->Null<Material>>):Node3D {
     if (materialOverride == null) materialOverride = cast (null : Dynamic);

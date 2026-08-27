@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 import flighthq.types._internal._DirectionalLightValues.DIRECTIONAL_SHADOW_MAP_SIZE;
 import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
 import flighthq.types._internal._DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;

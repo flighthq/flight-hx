@@ -17,21 +17,21 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.AnimationClip;
 import flighthq.types.ClipRegion;
 import flighthq.types.DisplayObject;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.EntityRuntime;
 import flighthq.types.HtmlView;
+import flighthq.types.Kind;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeOf;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DDataFactory;
-import flighthq.types.Node2D.Node2DRuntime;
-import flighthq.types.Node2D.Node2DRuntimeFactory;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DDataFactory;
+import flighthq.types.Node2DRuntime;
+import flighthq.types.Node2DRuntimeFactory;
+import flighthq.types.Node2DTraits;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeOf;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.Scene2D;
-import flighthq.types.Scene2D.Scene2DRuntime;
+import flighthq.types.Scene2DRuntime;
 import flighthq.types.Scene2DSignals;
 import flighthq.types.Signal;
 import flighthq.types.Sprite;
@@ -83,14 +83,16 @@ class Scene2d {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createScene2DRuntime():Scene2DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createScene2DRuntime():Scene2DRuntime {
     return cast { binding: null, scene2dSignals: null };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createScene2DSignals():Scene2DSignals {
+  @:allow(flighthq)
+  @:keep
+  private static function createScene2DSignals():Scene2DSignals {
     return cast { onFullscreenChanged: (cast createSignal() : Signal<Void->Void>), onOrientationChanged: (cast createSignal() : Signal<Void->Void>), onResize: (cast createSignal() : Signal<Void->Void>) };
     return cast null;
   }
@@ -125,8 +127,9 @@ class Scene2d {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getScene2DRuntime(source:Scene2D):Scene2DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getScene2DRuntime(source:Scene2D):Scene2DRuntime {
     return cast (cast Scene2d.ensureScene2DRuntime__scene2d((cast source : Scene2D)) : Scene2DRuntime);
     return cast null;
   }

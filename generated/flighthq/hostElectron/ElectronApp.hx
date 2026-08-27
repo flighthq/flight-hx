@@ -4,133 +4,134 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.hostElectron.ElectronMenuTemplate.toElectronTemplate;
-import flighthq.types.App.AppActivationPolicy;
-import flighthq.types.App.AppBackend;
-import flighthq.types.App.AppLoginItem;
-import flighthq.types.App.AppLoginItemLike;
-import flighthq.types.App.AppPathKind;
+import flighthq.types.AppActivationPolicy;
+import flighthq.types.AppBackend;
+import flighthq.types.AppLoginItem;
+import flighthq.types.AppLoginItemLike;
+import flighthq.types.AppPathKind;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronApp;
-import flighthq.types.ElectronApi.ElectronDock;
-import flighthq.types.ElectronApi.ElectronLoginItemSettings;
-import flighthq.types.ElectronApi.ElectronLoginItemSettingsLike;
-import flighthq.types.ElectronApi.ElectronMenu;
-import flighthq.types.ElectronApi.ElectronMenuConstructor;
-import flighthq.types.ElectronApi.ElectronMenuItemOptions;
-import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.ElectronApp;
+import flighthq.types.ElectronDock;
+import flighthq.types.ElectronLoginItemSettings;
+import flighthq.types.ElectronLoginItemSettingsLike;
+import flighthq.types.ElectronMenu;
+import flighthq.types.ElectronMenuConstructor;
+import flighthq.types.ElectronMenuItemOptions;
+import flighthq.types.MenuItemTemplate;
 
+@:noCompletion
 class ElectronApp {
   public static function createElectronAppBackend(electron:ElectronApi):AppBackend {
-    var app:flighthq.types.ElectronApi.ElectronApp = cast _Runtime.UNDEFINED;
+    var app:flighthq.types.ElectronApp = cast _Runtime.UNDEFINED;
     app = electron.app;
     return cast { addRecentDocument: function(path:String):Void {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).addRecentDocument((cast path : String));
+      (cast app : flighthq.types.ElectronApp).addRecentDocument((cast path : String));
     }, bounceDock: function():Float {
-      return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural0 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var bounce:Null<String>->Float; }).bounce; }), cast ([] : Array<Dynamic>)), function():Dynamic return cast -1.0);
+      return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural0 = (cast app : flighthq.types.ElectronApp).dock; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var bounce:Null<String>->Float; }).bounce; }), cast ([] : Array<Dynamic>)), function():Dynamic return cast -1.0);
       return cast _Runtime.UNDEFINED;
     }, cancelAttention: function(id:Float):Void {
-      ({ final __optionalOwner2 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; if (__optionalOwner2 != null) { final __optionalCall1 = (cast __optionalOwner2 : { var cancelBounce:Float->Void; }).cancelBounce; if (__optionalCall1 != null) __optionalCall1(id); } });
+      ({ final __optionalOwner2 = (cast app : flighthq.types.ElectronApp).dock; if (__optionalOwner2 != null) { final __optionalCall1 = (cast __optionalOwner2 : { var cancelBounce:Float->Void; }).cancelBounce; if (__optionalCall1 != null) __optionalCall1(id); } });
     }, cancelDockBounce: function(id:Float):Void {
-      ({ final __optionalOwner4 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; if (__optionalOwner4 != null) { final __optionalCall3 = (cast __optionalOwner4 : { var cancelBounce:Float->Void; }).cancelBounce; if (__optionalCall3 != null) __optionalCall3(id); } });
+      ({ final __optionalOwner4 = (cast app : flighthq.types.ElectronApp).dock; if (__optionalOwner4 != null) { final __optionalCall3 = (cast __optionalOwner4 : { var cancelBounce:Float->Void; }).cancelBounce; if (__optionalCall3 != null) __optionalCall3(id); } });
     }, clearRecentDocuments: function():Void {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).clearRecentDocuments();
+      (cast app : flighthq.types.ElectronApp).clearRecentDocuments();
     }, focus: function():Void {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).focus();
+      (cast app : flighthq.types.ElectronApp).focus();
     }, getAppDirectoryPath: function(kind:AppPathKind):String {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).getPath((cast (cast ElectronApp.toElectronPathName__electronApp(({ final __callArgument5:Dynamic = kind; __callArgument5; })) : String) : String));
+      return cast (cast app : flighthq.types.ElectronApp).getPath((cast (cast ElectronApp.toElectronPathName__electronApp(({ final __callArgument5:Dynamic = kind; __callArgument5; })) : String) : String));
       return cast _Runtime.UNDEFINED;
     }, getAppPath: function():String {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).getAppPath();
+      return cast (cast app : flighthq.types.ElectronApp).getAppPath();
       return cast _Runtime.UNDEFINED;
     }, getCommandLine: function():Array<String> {
       return cast cast ([] : Array<Dynamic>);
       return cast _Runtime.UNDEFINED;
     }, getExecutablePath: function():String {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).getPath((cast 'exe' : String));
+      return cast (cast app : flighthq.types.ElectronApp).getPath((cast 'exe' : String));
       return cast _Runtime.UNDEFINED;
     }, getLocale: function():String {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).getLocale();
+      return cast (cast app : flighthq.types.ElectronApp).getLocale();
       return cast _Runtime.UNDEFINED;
     }, getLoginItem: function():AppLoginItem {
       var settings:ElectronLoginItemSettings = cast _Runtime.UNDEFINED;
       var out:AppLoginItem = cast _Runtime.UNDEFINED;
-      settings = (cast app : flighthq.types.ElectronApi.ElectronApp).getLoginItemSettings();
+      settings = (cast app : flighthq.types.ElectronApp).getLoginItemSettings();
       out = (cast { openAtLogin: (cast settings : ElectronLoginItemSettings).openAtLogin, openAsHidden: (cast settings : ElectronLoginItemSettings).openAsHidden, path: '', args: cast ([] : Array<Dynamic>) });
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, getName: function():String {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).getName();
+      return cast (cast app : flighthq.types.ElectronApp).getName();
       return cast _Runtime.UNDEFINED;
     }, getPreferredSystemLanguages: function():Array<String> {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).getPreferredSystemLanguages();
+      return cast (cast app : flighthq.types.ElectronApp).getPreferredSystemLanguages();
       return cast _Runtime.UNDEFINED;
     }, getSystemLocale: function():String {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).getSystemLocale();
+      return cast (cast app : flighthq.types.ElectronApp).getSystemLocale();
       return cast _Runtime.UNDEFINED;
     }, getVersion: function():String {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).getVersion();
+      return cast (cast app : flighthq.types.ElectronApp).getVersion();
       return cast _Runtime.UNDEFINED;
     }, hasSingleInstanceLock: function():Bool {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).hasSingleInstanceLock();
+      return cast (cast app : flighthq.types.ElectronApp).hasSingleInstanceLock();
       return cast _Runtime.UNDEFINED;
     }, hideApp: function():Bool {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).hide();
+      (cast app : flighthq.types.ElectronApp).hide();
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, isAppHidden: function():Bool {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).isHidden();
+      return cast (cast app : flighthq.types.ElectronApp).isHidden();
       return cast _Runtime.UNDEFINED;
     }, quit: function():Void {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).quit();
+      (cast app : flighthq.types.ElectronApp).quit();
     }, relaunch: function():Void {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).relaunch();
+      (cast app : flighthq.types.ElectronApp).relaunch();
     }, releaseSingleInstanceLock: function():Void {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).releaseSingleInstanceLock();
+      (cast app : flighthq.types.ElectronApp).releaseSingleInstanceLock();
     }, requestAttention: function(_critical:Bool):Float {
-      return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural7 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var bounce:Null<String>->Float; }).bounce; }), cast ([((cast _critical : Bool) ? (cast 'critical' : Dynamic) : (cast 'informational' : Dynamic))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
+      return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural7 = (cast app : flighthq.types.ElectronApp).dock; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var bounce:Null<String>->Float; }).bounce; }), cast ([((cast _critical : Bool) ? (cast 'critical' : Dynamic) : (cast 'informational' : Dynamic))] : Array<Dynamic>)), function():Dynamic return cast -1.0);
       return cast _Runtime.UNDEFINED;
     }, requestSingleInstanceLock: function():Bool {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).requestSingleInstanceLock();
+      return cast (cast app : flighthq.types.ElectronApp).requestSingleInstanceLock();
       return cast _Runtime.UNDEFINED;
     }, setActivationPolicy: function(policy:AppActivationPolicy):Void {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).setActivationPolicy((cast policy : String));
+      (cast app : flighthq.types.ElectronApp).setActivationPolicy((cast policy : String));
     }, setBadgeCount: function(count:Float):Bool {
-      return cast (cast app : flighthq.types.ElectronApi.ElectronApp).setBadgeCount((cast count : Float));
+      return cast (cast app : flighthq.types.ElectronApp).setBadgeCount((cast count : Float));
       return cast _Runtime.UNDEFINED;
     }, setDockBadge: function(text:String):Void {
-      ({ final __optionalOwner9 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; if (__optionalOwner9 != null) { final __optionalCall8 = (cast __optionalOwner9 : { var setBadge:String->Void; }).setBadge; if (__optionalCall8 != null) __optionalCall8(text); } });
+      ({ final __optionalOwner9 = (cast app : flighthq.types.ElectronApp).dock; if (__optionalOwner9 != null) { final __optionalCall8 = (cast __optionalOwner9 : { var setBadge:String->Void; }).setBadge; if (__optionalCall8 != null) __optionalCall8(text); } });
     }, setDockMenu: function(items:Array<MenuItemTemplate>):Void {
-      if ((cast !_Runtime.truthy((cast app : flighthq.types.ElectronApi.ElectronApp).dock) : Bool)) { return; }
-      (cast (cast app : flighthq.types.ElectronApi.ElectronApp).dock : ElectronDock).setMenu((cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast (#if js _Runtime.callValue(toElectronTemplate, cast ([(cast items : Dynamic)] : Array<Dynamic>)) #else toElectronTemplate((cast items : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Array<ElectronMenuItemOptions>) : Dynamic)));
+      if ((cast !_Runtime.truthy((cast app : flighthq.types.ElectronApp).dock) : Bool)) { return; }
+      (cast (cast app : flighthq.types.ElectronApp).dock : ElectronDock).setMenu((cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast (#if js _Runtime.callValue(toElectronTemplate, cast ([(cast items : Dynamic)] : Array<Dynamic>)) #else toElectronTemplate((cast items : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Array<ElectronMenuItemOptions>) : Dynamic)));
     }, setLoginItem: function(settings:AppLoginItemLike):Bool {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).setLoginItemSettings(({ final __callArgument10:Dynamic = { openAtLogin: settings.openAtLogin, openAsHidden: settings.openAsHidden, path: settings.path, args: _Runtime.select(settings.args, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(settings.args)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }; __callArgument10; }));
+      (cast app : flighthq.types.ElectronApp).setLoginItemSettings(({ final __callArgument10:Dynamic = { openAtLogin: settings.openAtLogin, openAsHidden: settings.openAsHidden, path: settings.path, args: _Runtime.select(settings.args, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(settings.args)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }; __callArgument10; }));
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, setName: function(name:String):Bool {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).setName((cast name : String));
+      (cast app : flighthq.types.ElectronApp).setName((cast name : String));
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, setUserModelId: function(id:String):Bool {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).setAppUserModelId((cast id : String));
+      (cast app : flighthq.types.ElectronApp).setAppUserModelId((cast id : String));
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, showApp: function():Bool {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).show();
+      (cast app : flighthq.types.ElectronApp).show();
       return cast true;
       return cast _Runtime.UNDEFINED;
     }, subscribeActivate: function(listener:Void->Void):Void->Void {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).on((cast 'activate' : String), ({ final __callArgument11:Dynamic = function(__unused0:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument11; }));
-      return cast function():Void { (cast app : flighthq.types.ElectronApi.ElectronApp).removeListener((cast 'activate' : String), ({ final __callArgument12:Dynamic = function(__unused1:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument12; })); };
+      (cast app : flighthq.types.ElectronApp).on((cast 'activate' : String), ({ final __callArgument11:Dynamic = function(__unused0:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument11; }));
+      return cast function():Void { (cast app : flighthq.types.ElectronApp).removeListener((cast 'activate' : String), ({ final __callArgument12:Dynamic = function(__unused1:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument12; })); };
       return cast _Runtime.UNDEFINED;
     }, subscribeAllWindowsClosed: function(listener:Void->Void):Void->Void {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).on((cast 'window-all-closed' : String), ({ final __callArgument13:Dynamic = function(__unused2:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument13; }));
-      return cast function():Void { (cast app : flighthq.types.ElectronApi.ElectronApp).removeListener((cast 'window-all-closed' : String), ({ final __callArgument14:Dynamic = function(__unused3:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument14; })); };
+      (cast app : flighthq.types.ElectronApp).on((cast 'window-all-closed' : String), ({ final __callArgument13:Dynamic = function(__unused2:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument13; }));
+      return cast function():Void { (cast app : flighthq.types.ElectronApp).removeListener((cast 'window-all-closed' : String), ({ final __callArgument14:Dynamic = function(__unused3:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument14; })); };
       return cast _Runtime.UNDEFINED;
     }, subscribeOpenFile: function(listener:String->Void):Void->Void {
       var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
       handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void { listener((cast Std.string(_Runtime.coalesce(flighthq._internal._StaticIndex.readArray(args, 1.0), function():Dynamic return cast '')) : String)); }, 0));
-      (cast app : flighthq.types.ElectronApi.ElectronApp).on((cast 'open-file' : String), ({ final __callArgument15:Dynamic = handler; __callArgument15; }));
-      return cast function():Void { (cast app : flighthq.types.ElectronApi.ElectronApp).removeListener((cast 'open-file' : String), ({ final __callArgument16:Dynamic = handler; __callArgument16; })); };
+      (cast app : flighthq.types.ElectronApp).on((cast 'open-file' : String), ({ final __callArgument15:Dynamic = handler; __callArgument15; }));
+      return cast function():Void { (cast app : flighthq.types.ElectronApp).removeListener((cast 'open-file' : String), ({ final __callArgument16:Dynamic = handler; __callArgument16; })); };
       return cast _Runtime.UNDEFINED;
     }, subscribeQuitRequest: function(listener:(Void->Void)->Void):Void->Void {
       var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
@@ -139,18 +140,18 @@ class ElectronApp {
         event = (cast flighthq._internal._StaticIndex.readArray(args, 0.0) : Null<{ @:optional var preventDefault:Void->Void; }>);
         listener(({ final __callArgument19:Dynamic = function():Void { ({ final __optionalOwner18 = event; if (__optionalOwner18 != null) { final __optionalCall17 = (cast __optionalOwner18 : { @:optional var preventDefault:Null<Void->Void>; }).preventDefault; if (__optionalCall17 != null) __optionalCall17(); } }); }; __callArgument19; }));
       }, 0));
-      (cast app : flighthq.types.ElectronApi.ElectronApp).on((cast 'before-quit' : String), ({ final __callArgument23:Dynamic = handler; __callArgument23; }));
-      return cast function():Void { (cast app : flighthq.types.ElectronApi.ElectronApp).removeListener((cast 'before-quit' : String), ({ final __callArgument24:Dynamic = handler; __callArgument24; })); };
+      (cast app : flighthq.types.ElectronApp).on((cast 'before-quit' : String), ({ final __callArgument23:Dynamic = handler; __callArgument23; }));
+      return cast function():Void { (cast app : flighthq.types.ElectronApp).removeListener((cast 'before-quit' : String), ({ final __callArgument24:Dynamic = handler; __callArgument24; })); };
       return cast _Runtime.UNDEFINED;
     }, subscribeReady: function(listener:Void->Void):Void->Void {
-      (cast app : flighthq.types.ElectronApi.ElectronApp).on((cast 'ready' : String), ({ final __callArgument25:Dynamic = function(__unused4:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument25; }));
-      return cast function():Void { (cast app : flighthq.types.ElectronApi.ElectronApp).removeListener((cast 'ready' : String), ({ final __callArgument26:Dynamic = function(__unused5:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument26; })); };
+      (cast app : flighthq.types.ElectronApp).on((cast 'ready' : String), ({ final __callArgument25:Dynamic = function(__unused4:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument25; }));
+      return cast function():Void { (cast app : flighthq.types.ElectronApp).removeListener((cast 'ready' : String), ({ final __callArgument26:Dynamic = function(__unused5:Array<flighthq._internal._Any>):Void { listener(); }; __callArgument26; })); };
       return cast _Runtime.UNDEFINED;
     }, subscribeSecondInstance: function(listener:Array<String>->Void):Void->Void {
       var handler:Array<flighthq._internal._Any>->Void = cast _Runtime.UNDEFINED;
       handler = (cast _Runtime.haxeRest(function(...args:flighthq._internal._Any):Void { listener(({ final __callArgument27:Dynamic = _Runtime.coalesce((cast flighthq._internal._StaticIndex.readArray(args, 1.0) : Array<String>), function():Dynamic return cast cast ([] : Array<Dynamic>)); __callArgument27; })); }, 0));
-      (cast app : flighthq.types.ElectronApi.ElectronApp).on((cast 'second-instance' : String), ({ final __callArgument29:Dynamic = handler; __callArgument29; }));
-      return cast function():Void { (cast app : flighthq.types.ElectronApi.ElectronApp).removeListener((cast 'second-instance' : String), ({ final __callArgument30:Dynamic = handler; __callArgument30; })); };
+      (cast app : flighthq.types.ElectronApp).on((cast 'second-instance' : String), ({ final __callArgument29:Dynamic = handler; __callArgument29; }));
+      return cast function():Void { (cast app : flighthq.types.ElectronApp).removeListener((cast 'second-instance' : String), ({ final __callArgument30:Dynamic = handler; __callArgument30; })); };
       return cast _Runtime.UNDEFINED;
     } };
     return cast null;

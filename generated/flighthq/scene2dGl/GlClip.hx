@@ -10,16 +10,17 @@ import flighthq.scene2dGl.GlClipRectangle.popGlClipRectangle;
 import flighthq.scene2dGl.GlClipRectangle.pushGlClipRectangle;
 import flighthq.types.ClipRegion;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node2D;
+import flighthq.types.PathWinding;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.Scene2DClipHooks;
 
+@:noCompletion
 class GlClip {
   public static function enableGlClipSupport(state:GlRenderState):Void {
     ((cast state : GlRenderState).displayObjectClipHooks = GlClip.webglClipHooks__glClip);

@@ -7,6 +7,7 @@ import flighthq.imageCodec.ImageEncoderRegistry.getImageEncoder;
 import flighthq.types.ImageEncodeFailureExplanation;
 import flighthq.types.ImageEncoder;
 
+@:noCompletion
 class ExplainImageEncodeFailure {
   public static function explainImageEncodeFailure(mimeType:String):Null<ImageEncodeFailureExplanation> {
     if ((cast !_Runtime.strictEquals((cast getImageEncoder((cast mimeType : String)) : Null<ImageEncoder>), null) : Bool)) { return cast null; }

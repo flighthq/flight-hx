@@ -28,29 +28,30 @@ import flighthq.physics3d.SymmetricTensor.TENSOR_YZ;
 import flighthq.physics3d.SymmetricTensor.TENSOR_ZZ;
 import flighthq.physics3d.SymmetricTensor.applySymmetricTensor;
 import flighthq.physics3d.World.writeRigidBody3DWorldCenter;
-import flighthq.types.Collision.CollisionColliderShape3D;
-import flighthq.types.Collision.CollisionContactManifold3D;
-import flighthq.types.Collision.CollisionContactPoint3D;
-import flighthq.types.Collision.CollisionTimeOfImpact3D;
-import flighthq.types.Physics3D.Physics3DBodyType;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.Physics3DCollisionFilter;
-import flighthq.types.Physics3D.Physics3DContact;
-import flighthq.types.Physics3D.Physics3DContactCallback;
-import flighthq.types.Physics3D.Physics3DContactEvents;
-import flighthq.types.Physics3D.Physics3DContactHooks;
-import flighthq.types.Physics3D.Physics3DContactPoint;
-import flighthq.types.Physics3D.Physics3DMaterial;
-import flighthq.types.Physics3D.Physics3DRotationalCcdEnvelope;
-import flighthq.types.Physics3D.Physics3DSequentialImpulseConfig;
-import flighthq.types.Physics3D.Physics3DSolverConfig;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
-import flighthq.types.Spatial.SpatialIndexBackend3D;
-import flighthq.types.Spatial.SpatialPair;
+import flighthq.types.CollisionColliderShape3D;
+import flighthq.types.CollisionContactManifold3D;
+import flighthq.types.CollisionContactPoint3D;
+import flighthq.types.CollisionTimeOfImpact3D;
+import flighthq.types.Physics3DBodyType;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.Physics3DCollisionFilter;
+import flighthq.types.Physics3DContact;
+import flighthq.types.Physics3DContactCallback;
+import flighthq.types.Physics3DContactEvents;
+import flighthq.types.Physics3DContactHooks;
+import flighthq.types.Physics3DContactPoint;
+import flighthq.types.Physics3DMaterial;
+import flighthq.types.Physics3DRotationalCcdEnvelope;
+import flighthq.types.Physics3DSequentialImpulseConfig;
+import flighthq.types.Physics3DSolverConfig;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
+import flighthq.types.SpatialIndexBackend3D;
+import flighthq.types.SpatialPair;
 
 typedef Physics3DContinuousScratch__continuous = { var pairs:Array<SpatialPair>; var linearImpact:CollisionTimeOfImpact3D; var rotationalImpact:CollisionTimeOfImpact3D; var fraction:Float; var bodyA:Float; var bodyB:Float; var colliderA:Float; var colliderB:Float; var normalX:Float; var normalY:Float; var normalZ:Float; var friction:Float; var restitution:Float; var rotational:Bool; var candidateRotational:Bool; var contactCreated:Bool; var rotationalManifold:CollisionContactManifold3D; var pointCount:Float; var points:Array<Float>; var depths:Array<Float>; var featureIds:Array<Float>; var normalImpulses:Array<Float>; var tangentImpulses0:Array<Float>; var tangentImpulses1:Array<Float>; var velocityBiases:Array<Float>; var tangent0X:Float; var tangent0Y:Float; var tangent0Z:Float; var tangent1X:Float; var tangent1Y:Float; var tangent1Z:Float; var centerA:Array<Float>; var centerB:Array<Float>; var candidateCenterA:Array<Float>; var candidateCenterB:Array<Float>; var poseA:Array<Float>; var poseB:Array<Float>; };
 
+@:noCompletion
 class Continuous {
   public static function hasActivePhysics3DBullet(world:Physics3DWorld):Bool {
     for (body in _Runtime.iterable(world.bodies)) {

@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Sampler.SamplerLike;
-import flighthq.types.Texture.TextureColorSpace;
 
 typedef CreateExternalTextureOptions = { @:optional var colorSpace:TextureColorSpace; var height:Float; @:optional var sampler:SamplerLike; var width:Float; };

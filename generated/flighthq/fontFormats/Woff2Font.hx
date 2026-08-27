@@ -6,23 +6,26 @@ import flighthq._internal._Runtime;
 import flighthq.fontFormats.SfntAssembly.assembleSfntFont;
 import flighthq.fontFormats.SfntAssembly.packSfntTag;
 import flighthq.types.Compression;
-import flighthq.types.Compression.CompressionFraming;
-import flighthq.types.Compression.Decompressor;
+import flighthq.types.CompressionFraming;
+import flighthq.types.Decompressor;
 import flighthq.types.Woff2TableDirectory;
-import flighthq.types.Woff2TableDirectory.Woff2TableEntry;
+import flighthq.types.Woff2TableEntry;
 import flighthq.types._internal._CompressionValues.CompressionFramingValue;
 import flighthq.types._internal._CompressionValues.CompressionValue;
 
+@:noCompletion
 class Woff2Font {
   public static final WOFF2_HEADER_BYTES__woff2Font:Float = 48.0;
 
   public static final WOFF2_KNOWN_TAGS__woff2Font:Array<String> = (cast cast (['cmap', 'head', 'hhea', 'hmtx', 'maxp', 'name', 'OS/2', 'post', 'cvt ', 'fpgm', 'glyf', 'loca', 'prep', 'CFF ', 'VORG', 'EBDT', 'EBLC', 'gasp', 'hdmx', 'kern', 'LTSH', 'PCLT', 'VDMX', 'vhea', 'vmtx', 'BASE', 'GDEF', 'GPOS', 'GSUB', 'EBSC', 'JSTF', 'MATH', 'CBDT', 'CBLC', 'COLR', 'CPAL', 'SVG ', 'sbix', 'acnt', 'avar', 'bdat', 'bloc', 'bsln', 'cvar', 'fdsc', 'feat', 'fmtx', 'fvar', 'gvar', 'hsty', 'just', 'lcar', 'mort', 'morx', 'opbd', 'prop', 'trak', 'Zapf', 'Silf', 'Glat', 'Gloc', 'Feat', 'Sill'] : Array<Dynamic>));
 
-  @:noCompletion
-  public static final WOFF2_COMPRESSION:Compression = (cast CompressionValue : { var Brotli:String; var Deflate:String; var Lzma:String; }).Brotli;
+  @:allow(flighthq)
+  @:keep
+  private static final WOFF2_COMPRESSION:Compression = (cast CompressionValue : { var Brotli:String; var Deflate:String; var Lzma:String; }).Brotli;
 
-  @:noCompletion
-  public static function readWoff2Font(bytes:flighthq._internal._UInt8Array, decompress:Null<Decompressor>, reverseTransform:Null<String->flighthq._internal._UInt8Array->flighthq._internal._Map<String, flighthq._internal._UInt8Array>->Null<flighthq._internal._UInt8Array>>):Null<flighthq._internal._UInt8Array> {
+  @:allow(flighthq)
+  @:keep
+  private static function readWoff2Font(bytes:flighthq._internal._UInt8Array, decompress:Null<Decompressor>, reverseTransform:Null<String->flighthq._internal._UInt8Array->flighthq._internal._Map<String, flighthq._internal._UInt8Array>->Null<flighthq._internal._UInt8Array>>):Null<flighthq._internal._UInt8Array> {
     var directory:Null<Woff2TableDirectory> = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var flavor:Float = cast _Runtime.UNDEFINED;
@@ -66,8 +69,9 @@ class Woff2Font {
     return cast null;
   }
 
-  @:noCompletion
-  public static function readWoff2TableDirectory(bytes:flighthq._internal._UInt8Array):Null<Woff2TableDirectory> {
+  @:allow(flighthq)
+  @:keep
+  private static function readWoff2TableDirectory(bytes:flighthq._internal._UInt8Array):Null<Woff2TableDirectory> {
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var tableCount:Float = cast _Runtime.UNDEFINED;
     var cursor:{ var at:Float; } = cast _Runtime.UNDEFINED;

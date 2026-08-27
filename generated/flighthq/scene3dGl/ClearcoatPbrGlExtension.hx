@@ -5,25 +5,26 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dGl.GlPbrExtensionRegistry.registerGlPbrExtension;
 import flighthq.types.ClearcoatPbrExtension;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.GlPbrExtensionBindContext;
 import flighthq.types.GlPbrExtensionRegistration;
 import flighthq.types.GlPbrExtensionShaderContext;
 import flighthq.types.GlPbrExtensionShaderContribution;
 import flighthq.types.GlRenderState;
 import flighthq.types.PbrExtension;
-import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.PbrUvSet;
 import flighthq.types.Sampler;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.ClearcoatPbrExtensionKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ClearcoatPbrExtensionValues.ClearcoatPbrExtensionKind;
 
+@:noCompletion
 class ClearcoatPbrGlExtension {
   public static final clearcoatPbrGlExtension:GlPbrExtensionRegistration = (cast { bind: function(context:GlPbrExtensionBindContext, value:PbrExtension):Void {
     var extension:ClearcoatPbrExtension = cast _Runtime.UNDEFINED;

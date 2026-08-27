@@ -3,10 +3,10 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.Shape.ShapeRuntime;
+import flighthq.types.ShapeData;
+import flighthq.types.ShapeRuntime;
 
 class _Scale9ShapeValues {
   public static final Scale9ShapeKind:String = 'Scale9Shape';

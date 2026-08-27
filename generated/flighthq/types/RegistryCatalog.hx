@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-
-typedef RegistryCatalogEntry = { var backend:String; var facet:RequirementFacet; var implementationImport:String; var implementationSymbol:String; var kind:Kind; var registrarImport:String; var registrarSymbol:String; };
 
 typedef RegistryCatalog = { var entries:Array<RegistryCatalogEntry>; };

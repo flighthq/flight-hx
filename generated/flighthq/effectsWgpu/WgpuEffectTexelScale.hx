@@ -8,6 +8,7 @@ import flighthq.types.WgpuRenderTarget;
 
 typedef WgpuEffectLogicalResolution__wgpuEffectTexelScale = { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; };
 
+@:noCompletion
 class WgpuEffectTexelScale {
   public static function getWgpuEffectLogicalResolution(state:WgpuRenderState, target:WgpuRenderTarget):WgpuEffectLogicalResolution__wgpuEffectTexelScale {
     var texelsPerLogicalPixel:Float = cast _Runtime.UNDEFINED;
@@ -16,8 +17,9 @@ class WgpuEffectTexelScale {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuRenderTargetTexelScale(targetWidth:Float, canvasWidth:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuRenderTargetTexelScale(targetWidth:Float, canvasWidth:Float):Float {
     if ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([targetWidth] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([canvasWidth] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast canvasWidth : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast 1.0; }
     return cast HxMath.max(1.0, HxMath.round((targetWidth / canvasWidth)));
     return cast null;

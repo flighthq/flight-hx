@@ -3,23 +3,24 @@ package flighthq.spritesheetFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.AsepriteSchema.AsepriteArrayDocument;
-import flighthq.types.AsepriteSchema.AsepriteArrayFrame;
-import flighthq.types.AsepriteSchema.AsepriteBaseFrame;
-import flighthq.types.AsepriteSchema.AsepriteDocument;
-import flighthq.types.AsepriteSchema.AsepriteFrameTag;
-import flighthq.types.AsepriteSchema.AsepriteHashDocument;
-import flighthq.types.AsepriteSchema.AsepriteHashFrame;
-import flighthq.types.AsepriteSchema.AsepriteLayer;
-import flighthq.types.AsepriteSchema.AsepriteMeta;
-import flighthq.types.AsepriteSchema.AsepriteRect;
-import flighthq.types.AsepriteSchema.AsepriteSerializeOptions;
-import flighthq.types.AsepriteSchema.AsepriteSize;
+import flighthq.types.AsepriteArrayDocument;
+import flighthq.types.AsepriteArrayFrame;
+import flighthq.types.AsepriteBaseFrame;
+import flighthq.types.AsepriteDocument;
+import flighthq.types.AsepriteFrameTag;
+import flighthq.types.AsepriteHashDocument;
+import flighthq.types.AsepriteHashFrame;
+import flighthq.types.AsepriteLayer;
+import flighthq.types.AsepriteMeta;
+import flighthq.types.AsepriteRect;
+import flighthq.types.AsepriteSerializeOptions;
+import flighthq.types.AsepriteSize;
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetAnimationDirection;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 
+@:noCompletion
 class AsepriteSerialize {
   public static function dataToMeta__asepriteSerialize(data:SpritesheetData, existing:{ @:optional var app:Null<String>; @:optional var format:Null<String>; @:optional var frameTags:Null<Array<AsepriteFrameTag>>; @:optional var image:Null<String>; @:optional var layers:Null<Array<AsepriteLayer>>; @:optional var scale:Null<flighthq._internal._Union2<Float, String>>; @:optional var size:Null<AsepriteSize>; @:optional var slices:Null<Array<flighthq._internal._Any>>; @:optional var version:Null<String>; }):AsepriteMeta {
     var tags:Array<{ @:optional var color:Null<String>; var direction:SpritesheetAnimationDirection; var from:Float; var name:String; var to:Float; }> = cast _Runtime.UNDEFINED;

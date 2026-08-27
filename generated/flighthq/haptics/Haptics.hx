@@ -4,10 +4,10 @@ package flighthq.haptics;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Haptics.HapticImpactStyle;
-import flighthq.types.Haptics.HapticNotificationType;
-import flighthq.types.Haptics.HapticsBackend;
-import flighthq.types.Haptics.HapticsCapabilities;
+import flighthq.types.HapticImpactStyle;
+import flighthq.types.HapticNotificationType;
+import flighthq.types.HapticsBackend;
+import flighthq.types.HapticsCapabilities;
 
 class Haptics {
   public static var _custom__haptics:Null<HapticsBackend> = _Runtime.explicitNull();
@@ -72,8 +72,9 @@ class Haptics {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebHapticsBackend():HapticsBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebHapticsBackend():HapticsBackend {
     return cast { cancel: function():Bool {
       return cast (cast Haptics._webVibrate__haptics(({ final __callArgument0:Dynamic = 0.0; __callArgument0; }), (cast 'cancel' : String)) : Bool);
       return cast _Runtime.UNDEFINED;
@@ -134,8 +135,9 @@ class Haptics {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getHapticsBackend():HapticsBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getHapticsBackend():HapticsBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Haptics._custom__haptics, function():Dynamic return cast Haptics._host__haptics), function():Dynamic return cast Haptics._sentinel__haptics);
     return cast null;
   }
@@ -145,8 +147,9 @@ class Haptics {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installHapticsHostBackend(backend:HapticsBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installHapticsHostBackend(backend:HapticsBackend):Void {
     if ((cast !_Runtime.strictEquals(Haptics._host__haptics, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Haptics._host__haptics, backend) : Bool)) { (Haptics._hostConflict__haptics = cast (true : Dynamic)); }
       return;
@@ -159,8 +162,9 @@ class Haptics {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeHapticsHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeHapticsHostResult(operation:String, succeeded:Bool):Void {
     (Haptics._hostObservation__haptics = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -168,16 +172,18 @@ class Haptics {
     _Runtime.callOptionalValue((cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).prepare, cast ([] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function resetHapticsBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHapticsBackendForTest():Void {
     (Haptics._custom__haptics = cast (null : Dynamic));
     (Haptics._host__haptics = cast (null : Dynamic));
     (Haptics._hostConflict__haptics = cast (false : Dynamic));
     (Haptics._hostObservation__haptics = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setHapticsBackend(backend:Null<HapticsBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setHapticsBackend(backend:Null<HapticsBackend>):Void {
     (Haptics._custom__haptics = cast (backend : Dynamic));
   }
 

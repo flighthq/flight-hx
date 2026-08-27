@@ -5,9 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CanvasRenderTarget;
 
+@:noCompletion
 class CanvasEffectCompositing {
-  @:noCompletion
-  public static function drawCanvasAccumulationPass(dest:CanvasRenderTarget, source:CanvasRenderTarget, samples:Float, perSampleTransform:flighthq._internal.dom.CanvasRenderingContext2D->Float->Float->Void):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasAccumulationPass(dest:CanvasRenderTarget, source:CanvasRenderTarget, samples:Float, perSampleTransform:flighthq._internal.dom.CanvasRenderingContext2D->Float->Float->Void):Void {
     var clampedSamples:Float = cast _Runtime.UNDEFINED;
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     clampedSamples = HxMath.max(1.0, HxMath.round(samples));
@@ -31,8 +33,9 @@ class CanvasEffectCompositing {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function drawCanvasEffectPass(dest:CanvasRenderTarget, source:CanvasRenderTarget, filter:String, compositeOperation:flighthq._internal.dom.GlobalCompositeOperation = 'source-over'):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasEffectPass(dest:CanvasRenderTarget, source:CanvasRenderTarget, filter:String, compositeOperation:flighthq._internal.dom.GlobalCompositeOperation = 'source-over'):Void {
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     ctx = dest.context;
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));
@@ -47,8 +50,9 @@ class CanvasEffectCompositing {
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function drawCanvasImageDataPass(dest:CanvasRenderTarget, source:CanvasRenderTarget, transform:flighthq._internal._UInt8ClampedArray->Float->Void):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasImageDataPass(dest:CanvasRenderTarget, source:CanvasRenderTarget, transform:flighthq._internal._UInt8ClampedArray->Float->Void):Void {
     var w:Float = cast _Runtime.UNDEFINED;
     var h:Float = cast _Runtime.UNDEFINED;
     var srcCtx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
@@ -75,8 +79,9 @@ class CanvasEffectCompositing {
     flighthq._internal.backend.Canvas2dBackend.call(dstCtx, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function passthroughCanvasEffectPass(dest:CanvasRenderTarget, source:CanvasRenderTarget):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function passthroughCanvasEffectPass(dest:CanvasRenderTarget, source:CanvasRenderTarget):Void {
     (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument6:Dynamic = dest; __callArgument6; }), ({ final __callArgument7:Dynamic = source; __callArgument7; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument4:Dynamic = dest; __callArgument4; }), ({ final __callArgument5:Dynamic = source; __callArgument5; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 }

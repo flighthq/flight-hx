@@ -13,40 +13,43 @@ import flighthq.scene2dDom.DomStyle.prepareDomElement;
 import flighthq.scene2dDom.DomStyle.setDomRendererElement;
 import flighthq.shape.Scale9ShapeCommands.mapScale9ShapeCommands;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomRenderStateRuntime;
 import flighthq.types.Entity;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.Scale9Mapper;
 import flighthq.types.Scale9Shape;
-import flighthq.types.Scale9Shape.Scale9ShapeData;
+import flighthq.types.Scale9ShapeData;
 import flighthq.types.Scene2DRenderer;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types.ShapeRasterizer;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
 typedef DomScale9ShapeData__domScale9Shape = { >RendererData, var canvas:Null<flighthq._internal.dom.HTMLCanvasElement>; var context:Null<flighthq._internal.dom.CanvasRenderingContext2D>; };
 
+@:noCompletion
 class DomScale9Shape {
   public static final _remappedCommands__domScale9Shape:Array<ShapeCommandToken> = (cast cast ([] : Array<Dynamic>));
 
-  @:noCompletion
-  public static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
+  @:allow(flighthq)
+  @:keep
+  private static function createDomScale9ShapeData(_state:RenderState, _source:Renderable):DomScale9ShapeData__domScale9Shape {
     return cast (cast createEntity(({ final __callArgument0:Dynamic = { canvas: null, context: null }; __callArgument0; })) : { >Entity, var canvas:flighthq._internal._Any; var context:flighthq._internal._Any; });
     return cast null;
   }
 
-  @:noCompletion
-  public static function drawDomScale9Shape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawDomScale9Shape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Null<DomScale9ShapeData__domScale9Shape> = cast _Runtime.UNDEFINED;
     var source:Scale9Shape = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

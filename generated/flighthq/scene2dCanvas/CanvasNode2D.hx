@@ -10,26 +10,29 @@ import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.scene2dCanvas.CanvasCSSFilterBinding.resolveCanvasCssFilter;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
+import flighthq.types.CanvasRenderStateRuntime;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DRuntime;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DRuntime;
+import flighthq.types.Node2DTraits;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
+import flighthq.types.Scene2DClipHooks;
 import flighthq.types.Scene2DRenderer;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 
+@:noCompletion
 class CanvasNode2D {
-  @:noCompletion
-  public static function drawCanvasScene2D(_state:CanvasRenderState, _renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasScene2D(_state:CanvasRenderState, _renderProxy:RenderProxy2D):Void {
   }
 
-  @:noCompletion
-  public static final defaultCanvasScene2DRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawCanvasScene2D });
+  @:allow(flighthq)
+  @:keep
+  private static final defaultCanvasScene2DRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawCanvasScene2D });
 
   public static function renderCanvasScene2D(state:CanvasRenderState, source:Node2D):Void {
     var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;

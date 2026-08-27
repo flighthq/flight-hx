@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Node.NodeTraits;
 
 typedef Skeleton2DDrawOrderAnimationTarget<Traits> = { var kind:Skeleton2DAnimationTargetKind; var nodes:Array<Null<Node<Traits>>>; var orderList:NodeOrderList<Traits>; };

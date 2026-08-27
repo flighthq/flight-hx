@@ -8,6 +8,7 @@ import flighthq.textMarkup.MarkupTagRegistry.resolveMarkupHexColor;
 import flighthq.types.MarkupColorResolver;
 import flighthq.types.MarkupTagRegistry;
 
+@:noCompletion
 class MarkupNamedColors {
   public static function registerMarkupNamedColors(registry:MarkupTagRegistry):Void {
     ((cast registry : { @:optional var colorResolver:Null<MarkupColorResolver>; }).colorResolver = MarkupNamedColors.resolveMarkupNamedColor__markupNamedColors);

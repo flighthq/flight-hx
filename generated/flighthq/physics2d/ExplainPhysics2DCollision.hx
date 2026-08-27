@@ -3,13 +3,14 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Collision.CollisionShapeKind2D;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.Physics2DCollisionExplanation;
-import flighthq.types.Physics2D.Physics2DWorld;
-import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.CollisionShapeKind2D;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.Physics2DCollisionExplanation;
+import flighthq.types.Physics2DWorld;
+import flighthq.types.RigidBody2D;
 
+@:noCompletion
 class ExplainPhysics2DCollision {
   public static function explainPhysics2DCollision(world:Physics2DWorld):Physics2DCollisionExplanation {
     var unsupported:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;

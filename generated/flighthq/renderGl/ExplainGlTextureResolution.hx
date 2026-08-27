@@ -5,17 +5,18 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.texture.Texture.getTextureSourceKind;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlTextureResolver;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.KeyedTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureResolutionExplanation;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class ExplainGlTextureResolution {
   public static function explainGlTextureResolution(state:GlRenderState, texture:TextureLike):TextureResolutionExplanation {
     var kind:Null<String> = cast _Runtime.UNDEFINED;

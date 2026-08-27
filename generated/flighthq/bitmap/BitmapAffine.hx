@@ -9,6 +9,7 @@ import flighthq.types.BitmapEdgeMode;
 import flighthq.types.BitmapRegion;
 import flighthq.types.BitmapResizeMode;
 
+@:noCompletion
 class BitmapAffine {
   public static function transformBitmap(dest:BitmapRegion, source:BitmapRegion, matrix:Array<Float>, edgeMode:BitmapEdgeMode = 'transparent', sampleMode:BitmapResizeMode = 'bilinear'):Void {
     var dw:Float = cast _Runtime.UNDEFINED;

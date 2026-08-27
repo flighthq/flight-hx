@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class EaseSine {
   public static final easeInOutSine:EasingFunction = (cast function(t:Float):Float return (-_Runtime.subtractNumbers(HxMath.cos((HxMath.PI * t)), 1.0) / 2.0));
 

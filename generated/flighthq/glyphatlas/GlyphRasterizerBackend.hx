@@ -4,12 +4,13 @@ package flighthq.glyphatlas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.GlyphSource.GlyphRasterizeOptions;
-import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
+import flighthq.types.GlyphRasterizeOptions;
+import flighthq.types.GlyphRasterizedBitmap;
+import flighthq.types.GlyphRasterizerBackend;
 
+@:noCompletion
 class GlyphRasterizerBackend {
-  public static function createStubGlyphRasterizerBackend():flighthq.types.GlyphSource.GlyphRasterizerBackend {
+  public static function createStubGlyphRasterizerBackend():flighthq.types.GlyphRasterizerBackend {
     return cast { rasterize: function(_codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
       var size:Float = cast _Runtime.UNDEFINED;
       var width:Float = cast _Runtime.UNDEFINED;
@@ -37,13 +38,14 @@ class GlyphRasterizerBackend {
     return cast null;
   }
 
-  public static function getGlyphRasterizerBackend():flighthq.types.GlyphSource.GlyphRasterizerBackend {
+  public static function getGlyphRasterizerBackend():flighthq.types.GlyphRasterizerBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(GlyphRasterizerBackend._custom__glyphRasterizerBackend, function():Dynamic return cast GlyphRasterizerBackend._host__glyphRasterizerBackend), function():Dynamic return cast GlyphRasterizerBackend._sentinel__glyphRasterizerBackend);
     return cast null;
   }
 
-  @:noCompletion
-  public static function installGlyphRasterizerHostBackend(backend:flighthq.types.GlyphSource.GlyphRasterizerBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installGlyphRasterizerHostBackend(backend:flighthq.types.GlyphRasterizerBackend):Void {
     if ((cast !_Runtime.strictEquals(GlyphRasterizerBackend._host__glyphRasterizerBackend, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(GlyphRasterizerBackend._host__glyphRasterizerBackend, backend) : Bool)) { (GlyphRasterizerBackend._hostConflict__glyphRasterizerBackend = cast (true : Dynamic)); }
       return;
@@ -51,32 +53,34 @@ class GlyphRasterizerBackend {
     (GlyphRasterizerBackend._host__glyphRasterizerBackend = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observeGlyphRasterizerHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeGlyphRasterizerHostResult(operation:String, succeeded:Bool):Void {
     (GlyphRasterizerBackend._hostObservation__glyphRasterizerBackend = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
-  @:noCompletion
-  public static function resetGlyphRasterizerBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetGlyphRasterizerBackendForTest():Void {
     (GlyphRasterizerBackend._custom__glyphRasterizerBackend = cast (null : Dynamic));
     (GlyphRasterizerBackend._host__glyphRasterizerBackend = cast (null : Dynamic));
     (GlyphRasterizerBackend._hostConflict__glyphRasterizerBackend = cast (false : Dynamic));
     (GlyphRasterizerBackend._hostObservation__glyphRasterizerBackend = cast (null : Dynamic));
   }
 
-  public static function setGlyphRasterizerBackend(backend:Null<flighthq.types.GlyphSource.GlyphRasterizerBackend>):Void {
+  public static function setGlyphRasterizerBackend(backend:Null<flighthq.types.GlyphRasterizerBackend>):Void {
     (GlyphRasterizerBackend._custom__glyphRasterizerBackend = cast (backend : Dynamic));
   }
 
-  public static var _custom__glyphRasterizerBackend:Null<flighthq.types.GlyphSource.GlyphRasterizerBackend> = _Runtime.explicitNull();
+  public static var _custom__glyphRasterizerBackend:Null<flighthq.types.GlyphRasterizerBackend> = _Runtime.explicitNull();
 
-  public static var _host__glyphRasterizerBackend:Null<flighthq.types.GlyphSource.GlyphRasterizerBackend> = _Runtime.explicitNull();
+  public static var _host__glyphRasterizerBackend:Null<flighthq.types.GlyphRasterizerBackend> = _Runtime.explicitNull();
 
   public static var _hostConflict__glyphRasterizerBackend:Bool = false;
 
   public static var _hostObservation__glyphRasterizerBackend:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
-  public static final _sentinel__glyphRasterizerBackend:flighthq.types.GlyphSource.GlyphRasterizerBackend = (cast { rasterize: function(codepoint:Float, options:GlyphRasterizeOptions):Dynamic {
+  public static final _sentinel__glyphRasterizerBackend:flighthq.types.GlyphRasterizerBackend = (cast { rasterize: function(codepoint:Float, options:GlyphRasterizeOptions):Dynamic {
     return cast null;
     return cast _Runtime.UNDEFINED;
   } });

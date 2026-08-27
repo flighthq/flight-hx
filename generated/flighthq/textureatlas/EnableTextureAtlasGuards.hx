@@ -5,11 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.textureatlas.TextureAtlasRegion.setTextureAtlasRegionTextureGuard;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegionTextureExplanation;
-import flighthq.types.TextureAtlasRegionTextureExplanation.TextureAtlasRegionTextureStatus;
+import flighthq.types.TextureAtlasRegionTextureStatus;
 
+@:noCompletion
 class EnableTextureAtlasGuards {
   public static function areTextureAtlasGuardsEnabled():Bool {
     return cast EnableTextureAtlasGuards.textureAtlasGuardsEnabled__enableTextureAtlasGuards;

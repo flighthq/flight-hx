@@ -17,6 +17,7 @@ typedef StrokeSubpath__strokePathGeometry = { var closed:Bool; var points:Array<
 
 typedef SegmentFrame__strokePathGeometry = { var nx:Float; var ny:Float; var tx:Float; var ty:Float; };
 
+@:noCompletion
 class StrokePathGeometry {
   public static final StrokePathTessellationIssueNone:Float = 0.0;
 

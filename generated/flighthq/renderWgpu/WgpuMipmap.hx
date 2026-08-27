@@ -5,11 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 
+@:noCompletion
 class WgpuMipmap {
-  @:noCompletion
-  public static function generateWgpuMipmaps(state:WgpuRenderState, texture:flighthq._internal.dom.GPUTexture, width:Float, height:Float, format:flighthq._internal.dom.GPUTextureFormat):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function generateWgpuMipmaps(state:WgpuRenderState, texture:flighthq._internal.dom.GPUTexture, width:Float, height:Float, format:flighthq._internal.dom.GPUTextureFormat):Void {
     var levelCount:Float = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
@@ -44,8 +46,9 @@ class WgpuMipmap {
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field(device, 'queue'), 'submit', cast ([cast ([(cast encoder : flighthq._internal.dom.GPUCommandEncoder).finish()] : Array<Dynamic>)] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function getWgpuMipLevelCount(width:Float, height:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuMipLevelCount(width:Float, height:Float):Float {
     return cast _Runtime.addNumbers(1.0, HxMath.floor(_Runtime.log2(HxMath.max(HxMath.max(1.0, width), height))));
     return cast null;
   }

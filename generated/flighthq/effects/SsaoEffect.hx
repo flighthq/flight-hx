@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SsaoEffect;
 
+@:noCompletion
 class SsaoEffect {
   public static function createSsaoEffect(?options:{ @:optional var radius:Null<Float>; @:optional var intensity:Null<Float>; @:optional var bias:Null<Float>; @:optional var samples:Null<Float>; }):flighthq.types.SsaoEffect {
     if (options == null) options = cast ({  } : Dynamic);

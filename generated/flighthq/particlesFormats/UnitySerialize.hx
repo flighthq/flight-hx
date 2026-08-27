@@ -6,24 +6,25 @@ import flighthq._internal._Runtime;
 import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.particles.Curve.particleColorCurveToKeyframes;
 import flighthq.particles.Curve.particleCurveToKeyframes;
+import flighthq.types.ColorKeyframe;
+import flighthq.types.CurveKeyframe;
 import flighthq.types.ParticleCurve;
-import flighthq.types.ParticleCurve.ColorKeyframe;
-import flighthq.types.ParticleCurve.CurveKeyframe;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterShape;
 import flighthq.types.ParticleSerializeResult;
-import flighthq.types.UnitySchema.UnityAnimationCurve;
-import flighthq.types.UnitySchema.UnityColor;
-import flighthq.types.UnitySchema.UnityColorOverLifetime;
-import flighthq.types.UnitySchema.UnityEmission;
-import flighthq.types.UnitySchema.UnityGradient;
-import flighthq.types.UnitySchema.UnityMinMaxValue;
-import flighthq.types.UnitySchema.UnityParticleDocument;
-import flighthq.types.UnitySchema.UnityRotationOverLifetime;
-import flighthq.types.UnitySchema.UnitySerializeOptions;
-import flighthq.types.UnitySchema.UnityShape;
-import flighthq.types.UnitySchema.UnitySizeOverLifetime;
+import flighthq.types.UnityAnimationCurve;
+import flighthq.types.UnityColor;
+import flighthq.types.UnityColorOverLifetime;
+import flighthq.types.UnityEmission;
+import flighthq.types.UnityGradient;
+import flighthq.types.UnityMinMaxValue;
+import flighthq.types.UnityParticleDocument;
+import flighthq.types.UnityRotationOverLifetime;
+import flighthq.types.UnitySerializeOptions;
+import flighthq.types.UnityShape;
+import flighthq.types.UnitySizeOverLifetime;
 
+@:noCompletion
 class UnitySerialize {
   public static final DEFAULT_PPU__unitySerialize:Float = 100.0;
 

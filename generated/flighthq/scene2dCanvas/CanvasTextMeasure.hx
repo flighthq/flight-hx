@@ -5,11 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.text.TextFormatFont.computeTextFormatFontString;
 import flighthq.types.TextFormat;
-import flighthq.types.TextLayout.TextMeasureFunction;
+import flighthq.types.TextMeasureFunction;
 
+@:noCompletion
 class CanvasTextMeasure {
-  @:noCompletion
-  public static function createCanvasTextMeasure():TextMeasureFunction {
+  @:allow(flighthq)
+  @:keep
+  private static function createCanvasTextMeasure():TextMeasureFunction {
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));

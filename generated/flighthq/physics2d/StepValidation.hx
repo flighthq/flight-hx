@@ -3,21 +3,23 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Physics2D.Physics2DBodyType;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.Physics2DCollisionFilter;
-import flighthq.types.Physics2D.Physics2DContact;
-import flighthq.types.Physics2D.Physics2DContactPoint;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DMaterial;
-import flighthq.types.Physics2D.Physics2DSolverConfig;
-import flighthq.types.Physics2D.Physics2DWorld;
-import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.Physics2DBodyType;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.Physics2DCollisionFilter;
+import flighthq.types.Physics2DContact;
+import flighthq.types.Physics2DContactPoint;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DMaterial;
+import flighthq.types.Physics2DSolverConfig;
+import flighthq.types.Physics2DWorld;
+import flighthq.types.RigidBody2D;
 
+@:noCompletion
 class StepValidation {
-  @:noCompletion
-  public static function isPhysics2DBodyStateValid(world:Physics2DWorld):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics2DBodyStateValid(world:Physics2DWorld):Bool {
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([world.nextBodyIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast world.nextBodyIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     for (body in _Runtime.iterable(world.bodies)) {
       if ((cast ((cast !(cast (cast StepValidation.isRigidBody2DStateValid__stepValidation(({ final __callArgument2:Dynamic = body; __callArgument2; })) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals(((cast world.bodyByIndex : flighthq._internal._Map<Float, RigidBody2D>).get((cast body : RigidBody2D).index)), body) : Bool)) : Bool)) { return cast false; }
@@ -26,8 +28,9 @@ class StepValidation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics2DContactStateValid(world:Physics2DWorld):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics2DContactStateValid(world:Physics2DWorld):Bool {
     for (contact in _Runtime.iterable(world.contacts)) {
       if ((cast !(cast (cast isPhysics2DContactValid(({ final __callArgument6:Dynamic = contact; __callArgument6; })) : Bool) : Bool) : Bool)) { return cast false; }
     }
@@ -35,8 +38,9 @@ class StepValidation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics2DContactValid(contact:Physics2DContact):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics2DContactValid(contact:Physics2DContact):Bool {
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([contact.bodyA] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([contact.bodyB] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([contact.colliderA] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([contact.colliderB] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([contact.pointCount] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast contact.pointCount : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast contact.pointCount : Float) > (cast _Runtime.field(contact.points, 'length') : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([contact.normalX] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([contact.normalY] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([contact.friction] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast contact.friction : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([contact.restitution] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast contact.restitution : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(contact.enabled), 'boolean') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(contact.sensor), 'boolean') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(contact.touching), 'boolean') : Bool)) : Bool)) {
       return cast false;
     }
@@ -55,14 +59,16 @@ class StepValidation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics2DGravityValid(world:Physics2DWorld):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics2DGravityValid(world:Physics2DWorld):Bool {
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([world.gravityX] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([world.gravityY] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics2DJointStateValid(world:Physics2DWorld):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics2DJointStateValid(world:Physics2DWorld):Bool {
     for (joint in _Runtime.iterable(world.joints)) {
       if ((cast !(cast (cast StepValidation.isPhysics2DJointValid__stepValidation(({ final __callArgument10:Dynamic = joint; __callArgument10; })) : Bool) : Bool) : Bool)) { return cast false; }
     }
@@ -70,14 +76,16 @@ class StepValidation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics2DPreviousTimestepValid(world:Physics2DWorld):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics2DPreviousTimestepValid(world:Physics2DWorld):Bool {
     return cast ((cast _Runtime.strictEquals(world.previousTimestep, 0.0) : Bool) || (cast _Runtime.andValue(_Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([world.previousTimestep] : Array<Dynamic>)), function():Dynamic return cast ((cast world.previousTimestep : Float) > (cast 0.0 : Float))) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics2DSolverConfigValid(config:Physics2DSolverConfig):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics2DSolverConfigValid(config:Physics2DSolverConfig):Bool {
     return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(config.allowSleeping), 'boolean') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([config.sleepLinearThreshold] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast config.sleepLinearThreshold : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([config.sleepAngularThreshold] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast config.sleepAngularThreshold : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([config.timeToSleep] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast config.timeToSleep : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([config.penetrationSlop] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast config.penetrationSlop : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([config.positionCorrection] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast config.positionCorrection : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast config.positionCorrection : Float) <= (cast 1.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([config.restitutionThreshold] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast config.restitutionThreshold : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(config.warmStarting), 'boolean') : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(config.continuousCollision), 'boolean') : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([config.maxCcdSubsteps] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast config.maxCcdSubsteps : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([config.maxCcdRotationSubsteps] : Array<Dynamic>)) : Bool)), function():Dynamic return cast ((cast config.maxCcdRotationSubsteps : Float) >= (cast 0.0 : Float)));
     return cast null;
   }
@@ -121,8 +129,9 @@ class StepValidation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics2DTimestepValid(dt:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics2DTimestepValid(dt:Float):Bool {
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([dt] : Array<Dynamic>)) : Bool) && (cast ((cast dt : Float) > (cast 0.0 : Float)) : Bool));
     return cast null;
   }

@@ -3,14 +3,15 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionAabb3D;
-import flighthq.types.Collision.CollisionBox3D;
-import flighthq.types.Collision.CollisionCapsule3D;
-import flighthq.types.Collision.CollisionConvex3D;
-import flighthq.types.Collision.CollisionFaceQuery3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionShapeKind3D;
+import flighthq.types.CollisionAabb3D;
+import flighthq.types.CollisionBox3D;
+import flighthq.types.CollisionCapsule3D;
+import flighthq.types.CollisionConvex3D;
+import flighthq.types.CollisionFaceQuery3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionShapeKind3D;
 
+@:noCompletion
 class CollisionFace3D {
   public static function getCollisionFaceQuery3D(kind:CollisionShapeKind3D):Null<CollisionFaceQuery3D> {
     return cast _Runtime.coalesce(((cast CollisionFace3D.collisionFaceQueries3D__collisionFace3D : flighthq._internal._Map<CollisionShapeKind3D, CollisionFaceQuery3D>).get(kind)), function():Dynamic return cast null);

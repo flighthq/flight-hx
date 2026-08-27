@@ -7,6 +7,7 @@ import flighthq.mesh.UpdateMeshMorph.updateMeshMorph;
 import flighthq.skeleton3d.UpdateMeshSkin.updateMeshSkin;
 import flighthq.types.Mesh;
 
+@:noCompletion
 class UpdateMeshDeformation {
   public static function updateMeshDeformation(mesh:Mesh):Void {
     updateMeshMorph(({ final __callArgument0:Dynamic = mesh; __callArgument0; }));

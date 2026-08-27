@@ -7,12 +7,13 @@ import flighthq.log.Log.logOnce;
 import flighthq.scene3dGl.GlPbrExtensionRegistry.explainGlPbrExtensions;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlPbrExtensionIssue;
-import flighthq.types.GlPbrExtensionIssue.GlPbrExtensionIssueCode;
+import flighthq.types.GlPbrExtensionIssueCode;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.PbrExtension;
 
+@:noCompletion
 class EnableGlPbrExtensionGuards {
   public static function areGlPbrExtensionGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.strictEquals((cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { @:optional var pbrExtensionGuard:Null<Array<PbrExtension>->Void>; }).pbrExtensionGuard, null);

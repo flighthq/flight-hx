@@ -1,4 +1,4 @@
 // Derived by tools/derive-cairo-aliases.mjs from the generated canvas surface. Do not edit.
 package flighthq.types;
 
-typedef CairoRenderState = flighthq.types.CanvasRenderState.CanvasRenderState;
+typedef CairoRenderState = flighthq.types.CanvasRenderState;

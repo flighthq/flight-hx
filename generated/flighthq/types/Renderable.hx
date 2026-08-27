@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Node.NodeAny;
 
 typedef Renderable = flighthq._internal._Union2<NodeAny, RenderCache>;

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.FontVariation;
 import flighthq.types.TextFormat;
 
+@:noCompletion
 class TextFormat {
   public static final DEFAULT_SIZE__textFormat:Float = 12.0;
 

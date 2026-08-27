@@ -8,10 +8,11 @@ import flighthq.geometry.Rectangle.createRectangle;
 import flighthq.math.Clamp.clamp;
 import flighthq.math.InterpolationAdvanced.damp;
 import flighthq.types.Camera2D;
-import flighthq.types.Camera2D.Camera2DFollowOptions;
+import flighthq.types.Camera2DFollowOptions;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 
+@:noCompletion
 class Follow {
   public static function updateCamera2DFollow(camera:Camera2D, targetX:Float, targetY:Float, deltaTime:Float, ?options:Camera2DFollowOptions):Void {
     var camX:Float = cast _Runtime.UNDEFINED;

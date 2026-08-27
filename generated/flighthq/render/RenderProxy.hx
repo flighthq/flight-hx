@@ -22,39 +22,41 @@ import flighthq.types.ClipRegion;
 import flighthq.types.Entity;
 import flighthq.types.HasBoundsRectangle;
 import flighthq.types.HasTransform2D;
+import flighthq.types.KeyedTable;
 import flighthq.types.Matrix;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeOf;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeTraits;
 import flighthq.types.Node2D;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeOf;
+import flighthq.types.NodeRuntime;
+import flighthq.types.NodeTraits;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderProxyVisitor;
+import flighthq.types.RenderRegistries;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.RenderRootGuard;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderRegistries;
-import flighthq.types.RenderState.RenderRootGuard;
-import flighthq.types.RenderState.RenderStateRuntime;
-import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.RendererData;
+import flighthq.types.Scene3DGraphSyncPolicy;
+import flighthq.types.SlotTable;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 typedef AdaptHook__renderProxy = RenderState->Renderable->RenderProxy2D->Void;
 
+@:noCompletion
 class RenderProxy {
-  @:noCompletion
-  public static function createRenderProxy(state:RenderState, source:Renderable):flighthq.types.RenderProxy {
+  @:allow(flighthq)
+  @:keep
+  private static function createRenderProxy(state:RenderState, source:Renderable):flighthq.types.RenderProxy {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var renderer:Null<Renderer> = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime);
@@ -63,8 +65,9 @@ class RenderProxy {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createRenderProxy2D(state:RenderState, source:flighthq._internal._Intersection2<flighthq._internal._Intersection2<Renderable, HasTransform2D>, HasBoundsRectangle>):RenderProxy2D {
+  @:allow(flighthq)
+  @:keep
+  private static function createRenderProxy2D(state:RenderState, source:flighthq._internal._Intersection2<flighthq._internal._Intersection2<Renderable, HasTransform2D>, HasBoundsRectangle>):RenderProxy2D {
     var node:RenderProxy2D = cast _Runtime.UNDEFINED;
     node = (cast createRenderProxy(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = source; __callArgument7; })) : RenderProxy2D);
     ((cast node : RenderProxy2D).transform2D = (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix));
@@ -74,8 +77,9 @@ class RenderProxy {
     return cast null;
   }
 
-  @:noCompletion
-  public static function disposeRenderProxy(state:RenderState, source:Renderable):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function disposeRenderProxy(state:RenderState, source:Renderable):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var renderProxyMap:flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxy> = cast _Runtime.UNDEFINED;
     var node:Null<flighthq.types.RenderProxy> = cast _Runtime.UNDEFINED;
@@ -92,8 +96,9 @@ class RenderProxy {
     RenderProxy.walkRenderSubtree__renderProxy(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = root; __callArgument15; }), ({ final __callArgument16:Dynamic = disposeRenderProxy; __callArgument16; }));
   }
 
-  @:noCompletion
-  public static function getOrCreateRenderProxy2D(state:RenderState, source:Renderable):RenderProxy2D {
+  @:allow(flighthq)
+  @:keep
+  private static function getOrCreateRenderProxy2D(state:RenderState, source:Renderable):RenderProxy2D {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var renderProxyMap:flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxy> = cast _Runtime.UNDEFINED;
     var node:Null<RenderProxy2D> = cast _Runtime.UNDEFINED;
@@ -112,19 +117,22 @@ class RenderProxy {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getRenderProxy2D(state:RenderState, source:Renderable):Null<RenderProxy2D> {
+  @:allow(flighthq)
+  @:keep
+  private static function getRenderProxy2D(state:RenderState, source:Renderable):Null<RenderProxy2D> {
     return cast (cast ((cast (cast (cast getRenderStateRuntime(({ final __callArgument30:Dynamic = state; __callArgument30; })) : RenderStateRuntime) : { var renderProxyMap:flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxy>; }).renderProxyMap : flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxy>).get(source)) : Null<RenderProxy2D>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function installRenderAdaptHook(state:RenderState, fn:AdaptHook__renderProxy):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installRenderAdaptHook(state:RenderState, fn:AdaptHook__renderProxy):Void {
     ((cast (cast getRenderStateRuntime(({ final __callArgument32:Dynamic = state; __callArgument32; })) : RenderStateRuntime) : { var renderAdaptHook:Null<RenderState->Renderable->RenderProxy2D->Void>; }).renderAdaptHook = cast (fn : Null<RenderState->Renderable->RenderProxy2D->Void>));
   }
 
-  @:noCompletion
-  public static function isRenderProxyDirty(state:RenderState, source:Renderable, data:flighthq.types.RenderProxy, ?parentData:flighthq.types.RenderProxy):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isRenderProxyDirty(state:RenderState, source:Renderable, data:flighthq.types.RenderProxy, ?parentData:flighthq.types.RenderProxy):Bool {
     var currentFrameId:Float = cast _Runtime.UNDEFINED;
     var parentDirty:Bool = cast _Runtime.UNDEFINED;
     var rendererDirty:Bool = cast _Runtime.UNDEFINED;
@@ -139,8 +147,9 @@ class RenderProxy {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isRenderProxyVisible(data:RenderProxy2D):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isRenderProxyVisible(data:RenderProxy2D):Bool {
     return cast ((cast ((cast (cast data : RenderProxy2D).visible : Bool) && (cast ((cast (cast data : RenderProxy2D).alpha : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast !(cast _Runtime.andValue(_Runtime.strictEquals((cast (cast data : RenderProxy2D).transform2D : { var a:Float; }).a, 0.0), function():Dynamic return cast _Runtime.strictEquals((cast (cast data : RenderProxy2D).transform2D : { var d:Float; }).d, 0.0)) : Bool) : Bool));
     return cast null;
   }
@@ -150,15 +159,17 @@ class RenderProxy {
     return cast null;
   }
 
-  @:noCompletion
-  public static function updateNodeClip(_state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function updateNodeClip(_state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
     var parentDepth:Float = cast _Runtime.UNDEFINED;
     parentDepth = ((cast !_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast parentData : RenderProxy2D).clipDepth : Dynamic) : (cast 0.0 : Dynamic));
     ((cast data : RenderProxy2D).clipDepth = _Runtime.addNumbers(parentDepth, ((cast !_Runtime.looseEquals((cast (cast source : Node2D) : { var clip:Null<ClipRegion>; }).clip, null) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic))));
   }
 
-  @:noCompletion
-  public static function updateRenderProxy2D(state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function updateRenderProxy2D(state:RenderState, source:Renderable, data:RenderProxy2D, parentData:Null<RenderProxy2D>):Void {
     var parentReferenceId:Float = cast _Runtime.UNDEFINED;
     var colorAdjustmentResolver:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:RenderState->flighthq.types.RenderProxy->Null<flighthq.types.RenderProxy>->Void; }>> = cast _Runtime.UNDEFINED;
     parentReferenceId = (cast getNodeParentReferenceRevision((cast (cast source : Node<Dynamic>) : Dynamic)) : Float);
@@ -180,8 +191,9 @@ class RenderProxy {
     ({ final __optionalCall80 = (cast (cast getRenderStateRuntime(({ final __callArgument81:Dynamic = state; __callArgument81; })) : RenderStateRuntime) : { var renderAdaptHook:Null<RenderState->Renderable->RenderProxy2D->Void>; }).renderAdaptHook; if (__optionalCall80 != null) __optionalCall80(state, source, data); });
   }
 
-  @:noCompletion
-  public static function updateRenderProxyRenderer(state:RenderState, node:flighthq.types.RenderProxy):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function updateRenderProxyRenderer(state:RenderState, node:flighthq.types.RenderProxy):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var renderer:Null<Renderer> = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime(({ final __callArgument83:Dynamic = state; __callArgument83; })) : RenderStateRuntime);
@@ -208,8 +220,9 @@ class RenderProxy {
     return cast null;
   }
 
-  @:noCompletion
-  public static function walkNode(state:RenderState, root:Renderable, visit:RenderProxyVisitor):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function walkNode(state:RenderState, root:Renderable, visit:RenderProxyVisitor):Bool {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var rootGuardTable:Null<SlotTable<RenderRootGuard>> = cast _Runtime.UNDEFINED;
     var tempStack:Array<Renderable> = cast _Runtime.UNDEFINED;

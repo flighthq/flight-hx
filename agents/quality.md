@@ -84,7 +84,7 @@ Use small fixture inputs and inspect the normalized model or emitted Haxe. Each 
 
 ### Haxe API and runtime tests
 
-Compile consumer-style fixtures against `flighthq.sdk.Sdk`, package and defining-file modules, and explicit canonical imports from `flighthq.types`. Verify public names, sentinels, numeric behavior, typed arrays, collections, async behavior, and platform seams.
+Compile consumer-style fixtures against `flighthq.sdk.Sdk`, package facades, and direct type-name imports from `flighthq.types`. Verify public names, completion-hidden source implementations, contract access rejection, sentinels, numeric behavior, typed arrays, collections, async behavior, and platform seams.
 
 ### Upstream behavioral tests
 

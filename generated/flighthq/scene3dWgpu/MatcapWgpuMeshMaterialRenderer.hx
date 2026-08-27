@@ -17,22 +17,24 @@ import flighthq.types.Camera3D;
 import flighthq.types.LinearColor;
 import flighthq.types.MatcapMaterial;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.MatcapMaterialKind;
+import flighthq.types.WgpuMatcapDefineKey;
 import flighthq.types.WgpuMatcapPipeline;
-import flighthq.types.WgpuMatcapPipeline.WgpuMatcapDefineKey;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types._internal._MatcapMaterialValues.MatcapMaterialKind;
 
+@:noCompletion
 class MatcapWgpuMeshMaterialRenderer {
-  @:noCompletion
-  public static final matcapWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final matcapWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var matcap:Null<MatcapMaterial> = cast _Runtime.UNDEFINED;

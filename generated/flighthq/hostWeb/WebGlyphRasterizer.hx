@@ -5,14 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.glyphatlas.GlyphRasterizerBackend.installGlyphRasterizerHostBackend;
 import flighthq.glyphatlas.GlyphRasterizerBackend.observeGlyphRasterizerHostResult;
-import flighthq.types.GlyphSource.GlyphMetrics;
-import flighthq.types.GlyphSource.GlyphRasterizeOptions;
-import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
+import flighthq.types.GlyphMetrics;
+import flighthq.types.GlyphRasterizeOptions;
+import flighthq.types.GlyphRasterizedBitmap;
+import flighthq.types.GlyphRasterizerBackend;
 
+@:noCompletion
 class WebGlyphRasterizer {
-  @:noCompletion
-  public static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
     return cast { measureMetrics: function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
       var context:Null<flighthq._internal._Union2<flighthq._internal.dom.OffscreenCanvasRenderingContext2D, flighthq._internal.dom.CanvasRenderingContext2D>> = cast _Runtime.UNDEFINED;
       var metrics:flighthq._internal.dom.TextMetrics = cast _Runtime.UNDEFINED;
@@ -120,8 +122,9 @@ class WebGlyphRasterizer {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetHostWebGlyphRasterizerForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebGlyphRasterizerForTest():Void {
     (WebGlyphRasterizer._enabled__webGlyphRasterizer = cast (false : Dynamic));
   }
 

@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Basis {
   public static function getCamera3DForward(out:Vector3Like, camera:Camera3D):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;

@@ -3,9 +3,10 @@ package flighthq.tilemapFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TiledParseOptions.TiledCompression;
-import flighthq.types.TiledParseOptions.TiledInflate;
+import flighthq.types.TiledCompression;
+import flighthq.types.TiledInflate;
 
+@:noCompletion
 class TiledLayerData {
   public static function decodeTiledBase64Layer(text:String, compression:Null<TiledCompression>, ?inflate:TiledInflate):Null<flighthq._internal._UInt32Array> {
     var bytes:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;

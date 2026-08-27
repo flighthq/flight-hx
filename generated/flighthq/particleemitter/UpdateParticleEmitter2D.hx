@@ -15,15 +15,16 @@ import flighthq.types.Matrix;
 import flighthq.types.Node2D;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitterCallbacks;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterData;
+import flighthq.types.ParticleEmitterShape;
 import flighthq.types.ParticleEmitterSignals;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.RandomSource;
 import flighthq.types.Signal;
 
+@:noCompletion
 class UpdateParticleEmitter2D {
   public static final PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter2D:Float = 4.0;
 

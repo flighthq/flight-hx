@@ -30,24 +30,26 @@ import flighthq.physics3d.StepValidation.isPhysics3DSolverConfigValid;
 import flighthq.physics3d.StepValidation.isPhysics3DSubstepsValid;
 import flighthq.physics3d.StepValidation.isPhysics3DTimestepValid;
 import flighthq.physics3d.StepValidation.isPhysics3DVelocityIterationsValid;
-import flighthq.types.Physics3D.Physics3DContact;
-import flighthq.types.Physics3D.Physics3DContactCallback;
-import flighthq.types.Physics3D.Physics3DContactConstraint;
-import flighthq.types.Physics3D.Physics3DContactConstraintPoint;
-import flighthq.types.Physics3D.Physics3DContactHooks;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointEvents;
-import flighthq.types.Physics3D.Physics3DJointSolver;
-import flighthq.types.Physics3D.Physics3DSequentialImpulseConfig;
-import flighthq.types.Physics3D.Physics3DSequentialImpulseState;
-import flighthq.types.Physics3D.Physics3DSolverConfig;
-import flighthq.types.Physics3D.Physics3DStepGuard;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.Physics3DContact;
+import flighthq.types.Physics3DContactCallback;
+import flighthq.types.Physics3DContactConstraint;
+import flighthq.types.Physics3DContactConstraintPoint;
+import flighthq.types.Physics3DContactHooks;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointEvents;
+import flighthq.types.Physics3DJointSolver;
+import flighthq.types.Physics3DSequentialImpulseConfig;
+import flighthq.types.Physics3DSequentialImpulseState;
+import flighthq.types.Physics3DSolverConfig;
+import flighthq.types.Physics3DStepGuard;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class Step {
-  @:noCompletion
-  public static function setPhysics3DStepGuard(guard:Null<Physics3DStepGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPhysics3DStepGuard(guard:Null<Physics3DStepGuard>):Void {
     (Step.physics3DStepGuard__step = cast (guard : Dynamic));
   }
 

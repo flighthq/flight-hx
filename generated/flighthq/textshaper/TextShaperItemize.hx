@@ -12,6 +12,7 @@ import flighthq.types.TextFormat;
 import flighthq.types.TextItem;
 import flighthq.types.TextShaperOptions;
 
+@:noCompletion
 class TextShaperItemize {
   public static function itemizeText(text:String, _format:TextFormat, ?options:TextShaperOptions):Array<TextItem> {
     var baseDirection:TextDirection = cast _Runtime.UNDEFINED;

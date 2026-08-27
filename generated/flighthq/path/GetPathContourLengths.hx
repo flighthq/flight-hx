@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
 
+@:noCompletion
 class GetPathContourLengths {
   public static function getPathContourLengths(path:Path, tolerance:Float = 0.25):Array<Float> {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;

@@ -4,9 +4,11 @@ package flighthq.scene2dDom;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class DomTextHelpers {
-  @:noCompletion
-  public static function escapeDomHtmlString(str:String):String {
+  @:allow(flighthq)
+  @:keep
+  private static function escapeDomHtmlString(str:String):String {
     return cast _Runtime.replace(_Runtime.replace(_Runtime.replace(_Runtime.replace(str, _Runtime.regexp('&', 'g'), '&amp;', false), _Runtime.regexp('<', 'g'), '&lt;', false), _Runtime.regexp('>', 'g'), '&gt;', false), _Runtime.regexp(' ', 'g'), '&nbsp;', false);
     return cast null;
   }

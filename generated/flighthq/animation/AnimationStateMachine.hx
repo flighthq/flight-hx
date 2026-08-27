@@ -8,16 +8,17 @@ import flighthq.animation.AnimationBlendTree.sampleAnimationBlendTreeChannel;
 import flighthq.animation.AnimationStateMachineAdvance.advanceAnimationStateMachineWithScratch;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationBlendTree;
-import flighthq.types.AnimationBlendTree.AnimationBlendTreeChannel;
+import flighthq.types.AnimationBlendTreeChannel;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationPlayer;
 import flighthq.types.AnimationStateMachine;
-import flighthq.types.AnimationStateMachine.AnimationStateMachineChannel;
-import flighthq.types.AnimationStateMachine.AnimationStateMachineState;
+import flighthq.types.AnimationStateMachineChannel;
+import flighthq.types.AnimationStateMachineState;
 import flighthq.types.AnimationTrack;
 import flighthq.types.EasingFunction;
 import flighthq.types.Entity;
 
+@:noCompletion
 class AnimationStateMachine {
   public static function advanceAnimationStateMachine(machine:flighthq.types.AnimationStateMachine, dt:Float):Void {
     var advanced:Array<AnimationPlayer> = cast _Runtime.UNDEFINED;

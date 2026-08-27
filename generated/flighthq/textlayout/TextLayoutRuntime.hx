@@ -4,9 +4,10 @@ package flighthq.textlayout;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textlayout.TextLayout.createTextLayoutResult;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutResult;
 
+@:noCompletion
 class TextLayoutRuntime {
   public static function clearTextLayoutResult(runtime:TextLabelRuntime):Void {
     (runtime.textLayout = cast (null : Null<TextLayoutResult>));

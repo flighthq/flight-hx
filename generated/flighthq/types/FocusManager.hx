@@ -3,15 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeTraits;
-
-typedef FocusDirection = String;
 
 typedef FocusManager<N> = { var focused:Null<N>; var root:N; var wrap:Bool; };
-
-typedef FocusManagerOptions = { @:optional var wrap:Bool; };
-
-typedef FocusNavigationOptions = { @:optional var arrowKeys:Bool; };
-
-typedef FocusNavigationInput = { var onKeyDown:Signal<InputKeyboardData->Void>; };

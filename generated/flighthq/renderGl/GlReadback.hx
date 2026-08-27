@@ -5,12 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
 
+@:noCompletion
 class GlReadback {
-  @:noCompletion
-  public static function readGlRenderTargetPixels(state:GlRenderState, target:GlRenderTarget, x:Float, y:Float, width:Float, height:Float, out:flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._Float32Array>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function readGlRenderTargetPixels(state:GlRenderState, target:GlRenderTarget, x:Float, y:Float, width:Float, height:Float, out:flighthq._internal._Union2<flighthq._internal._UInt8Array, flighthq._internal._Float32Array>):Bool {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var readFbo:flighthq._internal.dom.WebGLFramebuffer = cast _Runtime.UNDEFINED;

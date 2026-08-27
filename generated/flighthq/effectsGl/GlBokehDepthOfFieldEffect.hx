@@ -8,15 +8,17 @@ import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.BokehDepthOfFieldEffect;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlBokehDepthOfFieldEffect {
-  @:noCompletion
-  public static function applyBokehDepthOfFieldEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<flighthq._internal.dom.WebGLTexture>, effect:BokehDepthOfFieldEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyBokehDepthOfFieldEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<flighthq._internal.dom.WebGLTexture>, effect:BokehDepthOfFieldEffect):Void {
     var maxBlur:Float = cast _Runtime.UNDEFINED;
     var focusDistance:Float = cast _Runtime.UNDEFINED;
     var focusRange:Float = cast _Runtime.UNDEFINED;

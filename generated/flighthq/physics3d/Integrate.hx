@@ -11,9 +11,10 @@ import flighthq.physics3d.SymmetricTensor.TENSOR_YZ;
 import flighthq.physics3d.SymmetricTensor.TENSOR_ZZ;
 import flighthq.physics3d.SymmetricTensor.applySymmetricTensor;
 import flighthq.physics3d.SymmetricTensor.rotateSymmetricTensor;
-import flighthq.types.Physics3D.Physics3DBodyType;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.Physics3DBodyType;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class Integrate {
   public static function clearRigidBody3DForces(body:RigidBody3D):Void {
     ((cast body : RigidBody3D).forceX = 0.0);

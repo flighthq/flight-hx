@@ -3,12 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
 typedef RenderEffectPadding = { var bottom:Float; var left:Float; var right:Float; var top:Float; };
-
-typedef RenderEffectPaddingResolver = RenderEffect->flighthq.types.RenderEffectPadding;
-
-typedef RenderEffectPaddingStatus = String;
-
-typedef RenderEffectPaddingExplanation = { var missingKinds:Array<Kind>; var padding:flighthq.types.RenderEffectPadding; var status:RenderEffectPaddingStatus; };

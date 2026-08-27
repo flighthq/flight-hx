@@ -12,11 +12,11 @@ import flighthq.render.Renderer.registerRenderer;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.Entity;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.RenderCache;
-import flighthq.types.RenderCache.RenderCacheKind;
 import flighthq.types.RenderCacheAdapter;
 import flighthq.types.RenderCacheAdapterSignals;
+import flighthq.types.RenderCacheKind;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderProxyAdapter;
 import flighthq.types.RenderState;
@@ -25,14 +25,16 @@ import flighthq.types.Renderer;
 import flighthq.types.Signal;
 import flighthq.types._internal._RenderCacheValues.RenderCacheKindValue;
 
+@:noCompletion
 class RenderCache {
   public static function createRenderCache():flighthq.types.RenderCache {
     return cast (cast createEntity((cast { kind: RenderCacheKindValue, transform: (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix) } : Dynamic)) : { >Entity, var kind:String; var transform:Matrix; });
     return cast null;
   }
 
-  @:noCompletion
-  public static function createRenderCacheAdapter(?cache:Null<flighthq.types.RenderCache>):RenderCacheAdapter {
+  @:allow(flighthq)
+  @:keep
+  private static function createRenderCacheAdapter(?cache:Null<flighthq.types.RenderCache>):RenderCacheAdapter {
     if (cache == null) cache = cast (null : Dynamic);
     var adapter:RenderCacheAdapter = cast _Runtime.UNDEFINED;
     adapter = (cast { cache: cache, signals: null, adapt: function(_state:RenderState, _source:Renderable, node:RenderProxy2D):Null<Bool> {
@@ -49,33 +51,38 @@ class RenderCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static function enableRenderCacheAdapterSignals(adapter:RenderCacheAdapter):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableRenderCacheAdapterSignals(adapter:RenderCacheAdapter):Void {
     ({ final __nullishOwner11 = adapter; final __nullishValue12:Null<RenderCacheAdapterSignals> = cast (cast __nullishOwner11 : { var signals:Null<RenderCacheAdapterSignals>; }).signals; __nullishValue12 == null ? ((cast __nullishOwner11 : { var signals:Null<RenderCacheAdapterSignals>; }).signals = (cast { onPrepare: (cast createSignal() : Signal<Void->Void>) } : Null<RenderCacheAdapterSignals>)) : (cast __nullishValue12 : Null<RenderCacheAdapterSignals>); });
   }
 
-  @:noCompletion
-  public static function getRenderProxyCache(state:RenderState, source:Renderable):Null<flighthq.types.RenderCache> {
+  @:allow(flighthq)
+  @:keep
+  private static function getRenderProxyCache(state:RenderState, source:Renderable):Null<flighthq.types.RenderCache> {
     var adapter:Null<RenderProxyAdapter> = cast _Runtime.UNDEFINED;
     adapter = (cast getRenderProxyAdapter(({ final __callArgument13:Dynamic = state; __callArgument13; }), ({ final __callArgument14:Dynamic = source; __callArgument14; })) : Null<RenderProxyAdapter>);
     return cast ((cast (cast isRenderCacheAdapter((cast adapter : flighthq._internal._Any)) : Bool) : Bool) ? (cast _Runtime.coalesce((cast adapter : { var cache:Null<flighthq.types.RenderCache>; }).cache, function():Dynamic return cast null) : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function isRenderCache(source:flighthq._internal._Any):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isRenderCache(source:flighthq._internal._Any):Bool {
     return cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'object') : Bool) && (cast !_Runtime.strictEquals(source, null) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast (cast source : flighthq.types.RenderCache) : flighthq.types.RenderCache).kind, RenderCacheKindValue) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function isRenderCacheAdapter(value:flighthq._internal._Any):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isRenderCacheAdapter(value:flighthq._internal._Any):Bool {
     return cast _Runtime.andValue(((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool) && (cast !_Runtime.strictEquals(value, null) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast (cast value : RenderCacheAdapter) : { var adapt:RenderState->Renderable->RenderProxy2D->Null<Bool>; }).adapt), 'function') : Bool)), function():Dynamic return cast _Runtime.hasField((cast value : RenderCacheAdapter), 'cache'));
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerRenderCacheRenderer(state:RenderState, renderer:Renderer):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerRenderCacheRenderer(state:RenderState, renderer:Renderer):Void {
     registerRenderer(({ final __callArgument17:Dynamic = state; __callArgument17; }), (cast RenderCacheKindValue : String), ({ final __callArgument18:Dynamic = renderer; __callArgument18; }));
   }
 

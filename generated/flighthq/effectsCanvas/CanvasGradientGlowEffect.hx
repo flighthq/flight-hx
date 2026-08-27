@@ -12,19 +12,21 @@ import flighthq.effectsCanvas.CanvasRenderEffectPipeline.releaseCanvasRenderTarg
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.clearCanvasTarget;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasImage;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
+import flighthq.types.CanvasRenderTargetPool;
 import flighthq.types.GradientGlowEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class CanvasGradientGlowEffect {
-  @:noCompletion
+  @:allow(flighthq)
+  @:keep
   @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:GradientGlowEffect):Void {})
   @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:GradientGlowEffect):Void {})
-  public static function applyGradientGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, GradientGlowEffect>, ?maybeEffect:GradientGlowEffect):Void {
+  private static function applyGradientGlowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, GradientGlowEffect>, ?maybeEffect:GradientGlowEffect):Void {
     var effect:GradientGlowEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : GradientGlowEffect));

@@ -6,17 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.Matrix;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
+import flighthq.types.RectangleLike;
 
+@:noCompletion
 class CanvasClipRectangle {
-  @:noCompletion
-  public static function popCanvasClipRectangle(state:CanvasRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function popCanvasClipRectangle(state:CanvasRenderState):Void {
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function pushCanvasClipContours(state:CanvasRenderState, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function pushCanvasClipContours(state:CanvasRenderState, contours:Array<Array<Float>>, winding:PathWinding, transform:Matrix):Void {
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'save', cast ([] : Array<Dynamic>));
     setCanvasTransform(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast state : CanvasRenderState).context, ({ final __callArgument1:Dynamic = transform; __callArgument1; }));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'beginPath', cast ([] : Array<Dynamic>));
@@ -40,8 +43,9 @@ class CanvasClipRectangle {
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'clip', cast ([((cast _Runtime.strictEquals(winding, 'evenOdd') : Bool) ? (cast 'evenodd' : Dynamic) : (cast 'nonzero' : Dynamic))] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function pushCanvasClipRectangle(state:CanvasRenderState, rect:RectangleLike, transform:Matrix):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function pushCanvasClipRectangle(state:CanvasRenderState, rect:RectangleLike, transform:Matrix):Void {
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'save', cast ([] : Array<Dynamic>));
     setCanvasTransform(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast state : CanvasRenderState).context, ({ final __callArgument5:Dynamic = transform; __callArgument5; }));
     flighthq._internal.backend.Canvas2dBackend.call((cast state : CanvasRenderState).context, 'beginPath', cast ([] : Array<Dynamic>));

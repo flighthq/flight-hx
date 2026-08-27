@@ -5,25 +5,29 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.skeleton3d.Skeleton3d.setSkeleton3DBindPoseGuard;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.Node3D;
 import flighthq.types.Skeleton3D;
 
+@:noCompletion
 class EnableSkeleton3DGuards {
-  @:noCompletion
-  public static function areSkeleton3DGuardsEnabled():Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areSkeleton3DGuardsEnabled():Bool {
     return cast EnableSkeleton3DGuards.skeleton3DGuardsEnabled__enableSkeleton3DGuards;
     return cast null;
   }
 
-  @:noCompletion
-  public static function disableSkeleton3DGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function disableSkeleton3DGuards():Void {
     setSkeleton3DBindPoseGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));
     (EnableSkeleton3DGuards.skeleton3DGuardsEnabled__enableSkeleton3DGuards = cast (false : Dynamic));
   }
 
-  @:noCompletion
-  public static function enableSkeleton3DGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableSkeleton3DGuards():Void {
     setSkeleton3DBindPoseGuard(({ final __callArgument2:Dynamic = EnableSkeleton3DGuards.warnOnDegenerateSkeleton3DBindPose__enableSkeleton3DGuards; __callArgument2; }));
     (EnableSkeleton3DGuards.skeleton3DGuardsEnabled__enableSkeleton3DGuards = cast (true : Dynamic));
   }

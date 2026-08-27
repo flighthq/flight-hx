@@ -3,13 +3,14 @@ package flighthq.hostCapacitor;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.App.AppBackend;
-import flighthq.types.App.AppLoginItem;
+import flighthq.types.AppBackend;
+import flighthq.types.AppLoginItem;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorAppInfo;
-import flighthq.types.CapacitorApi.CapacitorAppPlugin;
-import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
+import flighthq.types.CapacitorAppInfo;
+import flighthq.types.CapacitorAppPlugin;
+import flighthq.types.CapacitorPluginListenerHandle;
 
+@:noCompletion
 class CapacitorApp {
   public static function createCapacitorAppBackend(capacitor:CapacitorApi):AppBackend {
     var app:CapacitorAppPlugin = cast _Runtime.UNDEFINED;

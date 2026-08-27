@@ -10,6 +10,7 @@ import flighthq.types.TextureAtlasStarlingParseOptions;
 import flighthq.types.XmlElement;
 import flighthq.xml.XmlParse.parseXmlDocument;
 
+@:noCompletion
 class TextureAtlasStarlingParse {
   public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {
     var root:Null<XmlElement> = cast _Runtime.UNDEFINED;

@@ -6,15 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.audio.AudioResourceReference.resolveAudioResourceReference;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.AudioResource;
+import flighthq.types.AudioResourceFetch;
 import flighthq.types.AudioResourceReference;
-import flighthq.types.AudioResourceReference.AudioResourceFetch;
-import flighthq.types.AudioResourceReference.ExternalAudioResourceReference;
+import flighthq.types.ExternalAudioResourceReference;
+import flighthq.types.LoadScene2DAudioResourcesOptions;
+import flighthq.types.Scene2DAudioResourceLoadProgress;
+import flighthq.types.Scene2DAudioResources;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DResources.LoadScene2DAudioResourcesOptions;
-import flighthq.types.Scene2DResources.Scene2DAudioResourceLoadProgress;
-import flighthq.types.Scene2DResources.Scene2DAudioResources;
 import flighthq.types.Signal;
 
+@:noCompletion
 class LoadScene2DAudioResources {
   public static function loadScene2DAudioResources(document:Scene2DDocument, ?options:LoadScene2DAudioResourcesOptions):flighthq._internal._Promise<Scene2DAudioResources> {
     return cast flighthq._internal._Async.finishFlow(

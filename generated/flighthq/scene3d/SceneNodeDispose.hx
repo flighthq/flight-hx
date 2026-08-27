@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.node.Node.disposeNode;
 import flighthq.types.Node3D;
 
+@:noCompletion
 class SceneNodeDispose {
   public static function disposeNode3D(node:Node3D):Void {
     disposeNode((cast node : Dynamic));

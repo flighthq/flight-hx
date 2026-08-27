@@ -9,6 +9,7 @@ import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
+@:noCompletion
 class MedianEffect {
   public static function createMedianEffect(?options:{ @:optional var radius:Null<Float>; }):flighthq.types.MedianEffect {
     if (options == null) options = cast ({  } : Dynamic);

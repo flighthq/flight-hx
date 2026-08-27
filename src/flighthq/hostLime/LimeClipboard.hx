@@ -16,7 +16,7 @@ class LimeClipboard {
   static inline final TEXT_FORMAT = 'text/plain';
 
   /** Allocation entry point, Flight-style: `createLimeClipboardBackend()`. */
-  public static function createLimeClipboardBackend():flighthq.types.Clipboard.ClipboardBackend {
+  public static function createLimeClipboardBackend():flighthq.types.ClipboardBackend {
     var changeCount = 0.0;
     Clipboard.onUpdate.add(function() changeCount++);
     return cast {

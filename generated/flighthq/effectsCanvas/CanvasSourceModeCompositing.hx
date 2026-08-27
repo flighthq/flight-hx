@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.CanvasEffectSourceMode;
 import flighthq.types.CanvasRenderTarget;
 
+@:noCompletion
 class CanvasSourceModeCompositing {
   public static function clearCanvasTarget(dest:CanvasRenderTarget):Void {
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;

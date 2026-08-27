@@ -7,24 +7,27 @@ import flighthq.log.Log.logOnce;
 import flighthq.registry.RegistryTable.createSlotTable;
 import flighthq.renderGl.GlRenderState.getGlColorAdjustmentMaterialFeatureGuard;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.GlColorAdjustmentMaterialFeatureGuard;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeatureGuard;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.GlRenderStateRuntime;
+import flighthq.types.LogLevel;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.SlotTable;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class EnableGlColorAdjustmentGuards {
-  @:noCompletion
-  public static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areGlColorAdjustmentGuardsEnabled(state:GlRenderState):Bool {
     return cast !_Runtime.looseEquals((cast getGlColorAdjustmentMaterialFeatureGuard(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Null<GlColorAdjustmentMaterialFeatureGuard>), null);
     return cast null;
   }
 
-  @:noCompletion
-  public static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableGlColorAdjustmentGuards(state:GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<GlColorAdjustmentMaterialFeatureGuard> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);

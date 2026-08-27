@@ -11,13 +11,14 @@ import flighthq.textureatlasFormats.TextureAtlasStarlingParse.parseTextureAtlasS
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
-import flighthq.types.StarlingSchema.StarlingDocument;
-import flighthq.types.StarlingSchema.StarlingParseOptions;
-import flighthq.types.StarlingSchema.StarlingParsed;
-import flighthq.types.StarlingSchema.StarlingSubTexture;
+import flighthq.types.StarlingDocument;
+import flighthq.types.StarlingParseOptions;
+import flighthq.types.StarlingParsed;
+import flighthq.types.StarlingSubTexture;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 
+@:noCompletion
 class StarlingParse {
   public static function parseAttrs__starlingParse(attrs:String):flighthq._internal._Record<String, String> {
     var result:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;

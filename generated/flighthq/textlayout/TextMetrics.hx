@@ -3,12 +3,14 @@ package flighthq.textlayout;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextMetrics;
 
+@:noCompletion
 class TextMetrics {
-  @:noCompletion
-  public static function createTextMetrics():flighthq.types.TextMetrics {
+  @:allow(flighthq)
+  @:keep
+  private static function createTextMetrics():flighthq.types.TextMetrics {
     return cast { height: 0.0, numLines: 0.0, width: 0.0 };
     return cast null;
   }

@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef Scene2DRenderer = { @:optional var format:BatchFormat; var createData:RenderState->Node2D->Null<RendererData>; @:optional var destroyData:RenderState->RendererData->Void; @:optional var isDirty:RenderState->Renderable->Null<RendererData>->Bool; var submit:RenderState->RenderProxy2D->Void; };
-
-typedef Scene2DClipHooks = { var finalize:RenderState->Void; var popClip:RenderState->RenderProxy2D->Node2D->Void; var pushClip:RenderState->RenderProxy2D->Node2D->Void; };

@@ -6,22 +6,23 @@ import flighthq._internal._Runtime;
 import flighthq.scene3dResources.ResolveScene3DResources.updateScene3DResourceStreaming;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.ImageResourceReference;
+import flighthq.types.LoadScene3DResourcesOptions;
 import flighthq.types.ResourceResolutionState;
 import flighthq.types.Scene3D;
+import flighthq.types.Scene3DResourceInFlight;
+import flighthq.types.Scene3DResourceLoadProgress;
+import flighthq.types.Scene3DResourceResolution;
+import flighthq.types.Scene3DResourceResolver;
+import flighthq.types.Scene3DResourceResolverRuntime;
+import flighthq.types.Scene3DResourceResolverWithRuntime;
+import flighthq.types.Scene3DResourceWorkingSet;
 import flighthq.types.Scene3DResources;
-import flighthq.types.Scene3DResources.LoadScene3DResourcesOptions;
-import flighthq.types.Scene3DResources.Scene3DResourceInFlight;
-import flighthq.types.Scene3DResources.Scene3DResourceLoadProgress;
-import flighthq.types.Scene3DResources.Scene3DResourceResolution;
-import flighthq.types.Scene3DResources.Scene3DResourceResolver;
-import flighthq.types.Scene3DResources.Scene3DResourceResolverRuntime;
-import flighthq.types.Scene3DResources.Scene3DResourceResolverWithRuntime;
-import flighthq.types.Scene3DResources.Scene3DResourceWorkingSet;
 import flighthq.types.Signal;
 import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
+@:noCompletion
 class LoadScene3DResources {
   public static function loadScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:LoadScene3DResourcesOptions):flighthq._internal._Promise<flighthq._internal._Nothing> {
     return cast flighthq._internal._Async.finishFlow(

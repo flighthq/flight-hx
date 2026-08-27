@@ -4,10 +4,11 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronApp;
-import flighthq.types.ElectronApi.ElectronFs;
-import flighthq.types.Storage.StorageBackend;
+import flighthq.types.ElectronApp;
+import flighthq.types.ElectronFs;
+import flighthq.types.StorageBackend;
 
+@:noCompletion
 class ElectronStorage {
   public static function createElectronStorageBackend(electron:ElectronApi, fileName:String = 'storage.json'):StorageBackend {
     var load:Void->flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;

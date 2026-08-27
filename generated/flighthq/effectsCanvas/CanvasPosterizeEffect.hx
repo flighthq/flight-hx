@@ -5,16 +5,18 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasImageDataPass;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.PosterizeEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class CanvasPosterizeEffect {
-  @:noCompletion
-  public static function applyPosterizeEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:PosterizeEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyPosterizeEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:PosterizeEffect):Void {
     var levels:Float = cast _Runtime.UNDEFINED;
     levels = HxMath.max(2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0));
     drawCanvasImageDataPass(({ final __callArgument0:Dynamic = dest; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = function(data:flighthq._internal._UInt8ClampedArray, pixelCount:Float):Void {

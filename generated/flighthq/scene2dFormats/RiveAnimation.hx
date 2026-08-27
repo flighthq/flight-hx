@@ -23,17 +23,17 @@ import flighthq.types.Bone2D;
 import flighthq.types.DisplayObject;
 import flighthq.types.EasingFunction;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Node2DAnimationPath;
 import flighthq.types.Node2DAnimationTarget;
-import flighthq.types.RiveDocument.RiveAnimationClip;
-import flighthq.types.RiveDocument.RiveAnimationLoop;
-import flighthq.types.RiveDocument.RiveArtboardGraph;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveFieldType;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveSkeleton2DImport;
-import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types.RiveAnimationClip;
+import flighthq.types.RiveAnimationLoop;
+import flighthq.types.RiveArtboardGraph;
+import flighthq.types.RiveCoreObject;
+import flighthq.types.RiveFieldType;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveSkeleton2DImport;
+import flighthq.types.RiveValue;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DAnimationPath;
 import flighthq.types.Skeleton2DAnimationTarget;
@@ -45,6 +45,7 @@ import flighthq.types._internal._Skeleton2DAnimationPathValues.Skeleton2DAnimati
 
 typedef RiveMutableTarget__riveAnimation = { var riveApply:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>->Void; };
 
+@:noCompletion
 class RiveAnimation {
   public static function applyAnimationClipToRiveDocument(clip:AnimationClip, time:Float):Void {
     applyAnimationClipToNode2D(({ final __callArgument0:Dynamic = clip; __callArgument0; }), (cast time : Float));

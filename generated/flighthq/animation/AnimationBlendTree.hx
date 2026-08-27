@@ -12,9 +12,9 @@ import flighthq.animation.AnimationPlayer.advanceAnimationPlayer;
 import flighthq.animation.AnimationTrack.sampleAnimationTrack;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationBlendTree;
-import flighthq.types.AnimationBlendTree.AnimationBlendTreeChannel;
-import flighthq.types.AnimationBlendTree.AnimationBlendTreeChannelSource;
-import flighthq.types.AnimationBlendTree.AnimationBlendTreeInput;
+import flighthq.types.AnimationBlendTreeChannel;
+import flighthq.types.AnimationBlendTreeChannelSource;
+import flighthq.types.AnimationBlendTreeInput;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
 import flighthq.types.AnimationPlayer;
@@ -22,6 +22,7 @@ import flighthq.types.AnimationSampleAccumulator;
 import flighthq.types.AnimationTrack;
 import flighthq.types.Entity;
 
+@:noCompletion
 class AnimationBlendTree {
   public static function advanceAnimationBlendTree(tree:flighthq.types.AnimationBlendTree, dt:Float):Void {
     for (player in _Runtime.iterable(tree.players)) {

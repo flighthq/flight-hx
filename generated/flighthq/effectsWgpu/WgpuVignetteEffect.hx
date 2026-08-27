@@ -9,14 +9,16 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.VignetteEffect;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuVignetteEffect {
-  @:noCompletion
-  public static function applyVignetteEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:VignetteEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyVignetteEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:VignetteEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var radius:Float = cast _Runtime.UNDEFINED;
     var softness:Float = cast _Runtime.UNDEFINED;

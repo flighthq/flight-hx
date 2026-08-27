@@ -5,9 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef Spring = { var value:Float; var velocity:Float; };
-
-typedef SpringConfig = { var dampingRatio:Float; var frequency:Float; };
-
-typedef Spring2D = { var x:flighthq.types.Spring; var y:flighthq.types.Spring; };
-
-typedef Spring3D = { var x:flighthq.types.Spring; var y:flighthq.types.Spring; var z:flighthq.types.Spring; };

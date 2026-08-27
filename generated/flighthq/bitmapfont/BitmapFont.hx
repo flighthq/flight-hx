@@ -4,14 +4,15 @@ package flighthq.bitmapfont;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BitmapFont;
-import flighthq.types.BitmapFont.BitmapFontData;
-import flighthq.types.BitmapFont.BitmapFontGlyphData;
-import flighthq.types.BitmapFont.BitmapFontKerningData;
-import flighthq.types.BitmapFont.BitmapFontKerningPair;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphMetrics;
+import flighthq.types.BitmapFontData;
+import flighthq.types.BitmapFontGlyphData;
+import flighthq.types.BitmapFontKerningData;
+import flighthq.types.BitmapFontKerningPair;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphMetrics;
 import flighthq.types.TextureAtlas;
 
+@:noCompletion
 class BitmapFont {
   public static function createBitmapFont(data:BitmapFontData):flighthq.types.BitmapFont {
     var pageCount:Float = cast _Runtime.UNDEFINED;
@@ -63,19 +64,22 @@ class BitmapFont {
     return cast null;
   }
 
-  @:noCompletion
-  public static function packBitmapFontKerningKey(left:Float, right:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function packBitmapFontKerningKey(left:Float, right:Float):Float {
     return cast ((left * BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont) + right);
     return cast null;
   }
 
-  @:noCompletion
-  public static function setBitmapFontGuard(guard:Null<String->Float->Float->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setBitmapFontGuard(guard:Null<String->Float->Float->Void>):Void {
     (BitmapFont._guard__bitmapFont = cast (guard : Dynamic));
   }
 
-  @:noCompletion
-  public static function unpackBitmapFontKerningKey(key:Float, out:BitmapFontKerningPair):BitmapFontKerningPair {
+  @:allow(flighthq)
+  @:keep
+  private static function unpackBitmapFontKerningKey(key:Float, out:BitmapFontKerningPair):BitmapFontKerningPair {
     ((cast out : BitmapFontKerningPair).left = HxMath.floor((key / BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont)));
     ((cast out : BitmapFontKerningPair).right = _Runtime.fmod(key, BitmapFont.UNICODE_CODEPOINT_SPACE__bitmapFont));
     return cast out;

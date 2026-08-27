@@ -11,16 +11,18 @@ import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.CompositeEffect;
 import flighthq.types.CompositeOperator;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue as CompositeOperatorValues;
 
+@:noCompletion
 class GlCompositeEffect {
-  @:noCompletion
-  public static function applyCompositeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CompositeEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyCompositeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CompositeEffect):Void {
     var backdrop:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     var operatorIndex:Float = cast _Runtime.UNDEFINED;
@@ -45,8 +47,9 @@ class GlCompositeEffect {
     applyCompositeEffectToGl(ctx.state, ctx.source, ctx.dest, (cast effect : CompositeEffect));
   });
 
-  @:noCompletion
-  public static function getCompositeEffectOperatorIndex(operator_:CompositeOperator):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function getCompositeEffectOperatorIndex(operator_:CompositeOperator):Float {
     return cast _Runtime.coalesce(_Runtime.getIndex(GlCompositeEffect.COMPOSITE_OPERATOR_INDEX__glCompositeEffect, operator_), function():Dynamic return cast 0.0);
     return cast null;
   }

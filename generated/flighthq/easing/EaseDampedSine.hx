@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class EaseDampedSine {
   public static function easeInDampedSine(amplitude:Float, period:Float):EasingFunction {
     var wavelength:Float = cast _Runtime.UNDEFINED;

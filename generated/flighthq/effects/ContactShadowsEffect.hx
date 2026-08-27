@@ -9,6 +9,7 @@ import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
+@:noCompletion
 class ContactShadowsEffect {
   public static function createContactShadowsEffect(?options:{ @:optional var distance:Null<Float>; @:optional var opacity:Null<Float>; @:optional var samples:Null<Float>; @:optional var smoothness:Null<Float>; }):flighthq.types.ContactShadowsEffect {
     if (options == null) options = cast ({  } : Dynamic);

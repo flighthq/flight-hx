@@ -7,8 +7,9 @@ import flighthq.scene3dFormats.ThreeDsParse.parse3ds;
 import flighthq.scene3dResources.SceneDocumentSource.loadScene3DDocumentBytesFromUrl;
 import flighthq.scene3dResources.SceneDocumentSource.setScene3DDocumentResourceBasePathFromUrl;
 import flighthq.types.Scene3DDocument;
-import flighthq.types.Scene3DResources.Scene3DDocumentLoadOptions;
+import flighthq.types.Scene3DDocumentLoadOptions;
 
+@:noCompletion
 class ThreeDsLoad {
   public static function loadScene3DDocumentFrom3dsUrl(url:String, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<Scene3DDocument>> {
     return cast flighthq._internal._Async.finishFlow(

@@ -15,31 +15,33 @@ import flighthq.scene3dWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.scene3dWgpu.WgpuShadedPrelude.bindWgpuShadedSurface;
 import flighthq.scene3dWgpu.WgpuShadedPrelude.ensureWgpuShadedPipeline;
 import flighthq.types.Camera3D;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.ShadedMaterial;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.ShadedMaterialKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
+@:noCompletion
 class ShadedWgpuMeshMaterialRenderer {
-  @:noCompletion
-  public static final shadedWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final shadedWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var shaded:Null<ShadedMaterial> = cast _Runtime.UNDEFINED;
     var format:String = cast _Runtime.UNDEFINED;
@@ -61,8 +63,9 @@ class ShadedWgpuMeshMaterialRenderer {
     drawWgpuMeshSubset(({ final __callArgument32:Dynamic = state; __callArgument32; }), ({ final __callArgument33:Dynamic = proxy; __callArgument33; }), ({ final __callArgument34:Dynamic = geometry; __callArgument34; }));
   } });
 
-  @:noCompletion
-  public static function getWgpuShadedBaseFlags(material:ShadedMaterial):{ var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; } {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuShadedBaseFlags(material:ShadedMaterial):{ var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; } {
     return cast { alphaMaskEnabled: _Runtime.strictEquals(material.alphaMode, 'mask'), doubleSided: material.doubleSided, hasDiffuseMap: (cast isWgpuTextureReady((cast material.diffuseMap : Dynamic)) : Bool), hasNormalMap: (cast isWgpuTextureReady((cast material.normalMap : Dynamic)) : Bool), hasSpecularMap: (cast isWgpuTextureReady((cast material.specularMap : Dynamic)) : Bool) };
     return cast null;
   }

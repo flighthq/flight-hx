@@ -14,19 +14,21 @@ import flighthq.renderGl.GlRenderTexture.getGlRenderTextureTarget;
 import flighthq.renderGl.GlRenderTexture.writeGlRenderTextureTarget;
 import flighthq.types.BlurEffect;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GlRenderTargetPool;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 import flighthq.types.RenderTexture;
 
+@:noCompletion
 class GlBlurEffect {
-  @:noCompletion
-  public static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, effect:BlurEffect):Void {
     applyGaussianBlurToGl(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = temp; __callArgument3; }), ({ final __callArgument4:Dynamic = { blurX: effect.blurX, blurY: effect.blurY }; __callArgument4; }));
   }
 
@@ -35,8 +37,9 @@ class GlBlurEffect {
     return cast null;
   }
 
-  @:noCompletion
-  public static function applyGaussianBlurToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGaussianBlurToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, temp:GlRenderTarget, options:{ @:optional var blurX:Float; @:optional var blurY:Float; }):Void {
     var sigmaX:Float = cast _Runtime.UNDEFINED;
     var sigmaY:Float = cast _Runtime.UNDEFINED;
     var radiusX:Float = cast _Runtime.UNDEFINED;

@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.node.Hierarchy.getNodeParent;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeOf;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeDescendantVisitor;
+import flighthq.types.NodeOf;
+import flighthq.types.NodeRuntime;
+import flighthq.types.NodeTraits;
 
+@:noCompletion
 class Traversal {
   @:overload(function<Traits:flighthq._internal._Object, Result:Node<Traits>>(source:Node<Traits>, predicate:Node<Traits>->Bool):Null<Result> {})
   @:overload(function<Traits:flighthq._internal._Object>(source:Node<Traits>, predicate:Node<Traits>->Bool):Null<NodeOf<Traits>> {})

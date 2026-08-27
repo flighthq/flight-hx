@@ -224,8 +224,9 @@ class _WgpuTestHelper {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createReadyImageElementForTest(width:Float = 1.0, height:Float = 1.0):flighthq._internal.dom.HTMLImageElement {
+  @:allow(flighthq)
+  @:keep
+  private static function createReadyImageElementForTest(width:Float = 1.0, height:Float = 1.0):flighthq._internal.dom.HTMLImageElement {
     var image:flighthq._internal.dom.HTMLImageElement = cast _Runtime.UNDEFINED;
     image = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['img'] : Array<Dynamic>));
     ((cast image : flighthq._internal.dom.HTMLImageElement).width = width);
@@ -235,8 +236,9 @@ class _WgpuTestHelper {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWgpuRenderStateForTest(?options:WgpuRenderOptions):flighthq._internal._Promise<WgpuRenderState> {
+  @:allow(flighthq)
+  @:keep
+  private static function createWgpuRenderStateForTest(?options:WgpuRenderOptions):flighthq._internal._Promise<WgpuRenderState> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
       if (options == null) options = cast ({  } : Dynamic);
       var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
@@ -247,8 +249,9 @@ class _WgpuTestHelper {
     }));
   }
 
-  @:noCompletion
-  public static function installWgpuMock():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installWgpuMock():Void {
     var gpu:flighthq._internal.dom.GPU = cast _Runtime.UNDEFINED;
     var origGetContext:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     _WgpuTestHelper.installWgpuConstants__wgpuTestHelper();

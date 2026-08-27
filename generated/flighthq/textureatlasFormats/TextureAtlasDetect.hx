@@ -12,7 +12,7 @@ import flighthq.textureatlasFormats.TextureAtlasAsepriteParse.parseTextureAtlasA
 import flighthq.textureatlasFormats.TextureAtlasLibgdxParse.parseTextureAtlasLibgdxAtlas;
 import flighthq.textureatlasFormats.TextureAtlasPackerParse.parseTextureAtlasPackerJson;
 import flighthq.textureatlasFormats.TextureAtlasStarlingParse.parseTextureAtlasStarlingXml;
-import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.KeyedTable;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasFormatKind;
 import flighthq.types.TextureAtlasParseOptions;
@@ -29,6 +29,7 @@ typedef FormatEntry__textureAtlasDetect = { var detect:String->Bool; var parse:S
 
 typedef RegisteredFormatEntry__textureAtlasDetect = { var entry:FormatEntry__textureAtlasDetect; var order:Float; };
 
+@:noCompletion
 class TextureAtlasDetect {
   public static function getRegistry__textureAtlasDetect():KeyedTable<RegisteredFormatEntry__textureAtlasDetect> {
     if ((cast !_Runtime.strictEquals(TextureAtlasDetect._registry__textureAtlasDetect, null) : Bool)) { return cast TextureAtlasDetect._registry__textureAtlasDetect; }

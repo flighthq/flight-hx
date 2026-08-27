@@ -4,6 +4,7 @@ package flighthq.physics2dAbi;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class Physics2DAbiLayout {
   public static final Physics2DAbiVersion:Float = 1.0;
 

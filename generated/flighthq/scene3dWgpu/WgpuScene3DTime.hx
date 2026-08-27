@@ -5,9 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.WgpuRenderState;
 
+@:noCompletion
 class WgpuScene3DTime {
-  @:noCompletion
-  public static function getWgpuScene3DTime(state:WgpuRenderState):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuScene3DTime(state:WgpuRenderState):Float {
     return cast _Runtime.coalesce(((cast WgpuScene3DTime.sceneTimes__wgpuScene3DTime : flighthq._internal._WeakMap<WgpuRenderState, Float>).get(state)), function():Dynamic return cast 0.0);
     return cast null;
   }

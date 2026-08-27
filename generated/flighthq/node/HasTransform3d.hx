@@ -8,23 +8,26 @@ import flighthq.geometry.Quaternion.createQuaternion;
 import flighthq.geometry.Vector3.cloneVector3;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.HasTransform3D;
-import flighthq.types.HasTransform3D.HasTransform3DRuntime;
+import flighthq.types.HasTransform3DRuntime;
 import flighthq.types.Matrix4;
 import flighthq.types.Quaternion;
-import flighthq.types.Quaternion.QuaternionLike;
+import flighthq.types.QuaternionLike;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class HasTransform3d {
-  @:noCompletion
-  public static function initTransform3DRuntimeTrait(target:HasTransform3DRuntime):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function initTransform3DRuntimeTrait(target:HasTransform3DRuntime):Void {
     (target.localMatrix4 = cast (null : Null<Matrix4>));
     (target.localMatrix4Detached = cast (false : Bool));
     (target.worldMatrix4 = cast (null : Null<Matrix4>));
   }
 
-  @:noCompletion
-  public static function initTransform3DTrait(target:HasTransform3D, ?obj:{ @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function initTransform3DTrait(target:HasTransform3D, ?obj:{ @:optional var position:Null<Vector3>; @:optional var rotation:Null<Quaternion>; @:optional var scale:Null<Vector3>; }):Void {
     var position:Null<Vector3> = cast _Runtime.UNDEFINED;
     var rotation:Null<Quaternion> = cast _Runtime.UNDEFINED;
     var scale:Null<Vector3> = cast _Runtime.UNDEFINED;

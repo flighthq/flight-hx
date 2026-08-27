@@ -16,24 +16,24 @@ import flighthq.shape.ShapeCommands.appendShapeEndFill;
 import flighthq.shape.ShapeCommands.appendShapeLineGradientStyle;
 import flighthq.shape.ShapeCommands.appendShapeLineStyle;
 import flighthq.shape.ShapeCommands.appendShapePath;
+import flighthq.types.CapsStyle;
+import flighthq.types.GradientType;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.InterpolationMethod;
+import flighthq.types.JointStyle;
+import flighthq.types.LineScaleMode;
 import flighthq.types.Matrix;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
-import flighthq.types.RiveDocument.RiveArtboardGraph;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RivePathRecord;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types.PathCommand;
+import flighthq.types.PathWinding;
+import flighthq.types.RiveArtboardGraph;
+import flighthq.types.RiveCoreObject;
+import flighthq.types.RivePathRecord;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveValue;
 import flighthq.types.Shape;
-import flighthq.types.ShapeCommand.CapsStyle;
-import flighthq.types.ShapeCommand.GradientType;
-import flighthq.types.ShapeCommand.InterpolationMethod;
-import flighthq.types.ShapeCommand.JointStyle;
-import flighthq.types.ShapeCommand.LineScaleMode;
-import flighthq.types.ShapeCommand.PathWinding;
-import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.SpreadMethod;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
@@ -49,6 +49,7 @@ typedef RiveStrokeEffect__riveShapePaint = flighthq._internal._Union2<{ var dash
 
 typedef RivePaint__riveShapePaint = { var alpha:Float; var color:Float; var effects:Array<RiveStrokeEffect__riveShapePaint>; var fillRule:PathWinding; var gradient:Null<RiveGradientPaint__riveShapePaint>; var stroke:Null<{ var caps:CapsStyle; var joints:JointStyle; var thickness:Float; }>; var visible:Bool; };
 
+@:noCompletion
 class RiveShapePaint {
   public static function appendRiveShapePaint(shape:Shape, artboard:RiveArtboardGraph, shapeIndex:Float, paths:Array<RivePathRecord>, ?diagnostics:Null<Array<ImportDiagnostic>>):Void {
     var paints:Array<RivePaint__riveShapePaint> = cast _Runtime.UNDEFINED;

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
 
 typedef ShapeRasterizer = flighthq._internal.dom.CanvasRenderingContext2D->Array<ShapeCommandToken>->RenderState->Void;

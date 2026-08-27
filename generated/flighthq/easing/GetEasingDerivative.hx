@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class GetEasingDerivative {
   public static function getEasingDerivative(ease:EasingFunction, t:Float, epsilon:Float = 0.000001):Float {
     if ((cast ((cast t : Float) <= (cast epsilon : Float)) : Bool)) {

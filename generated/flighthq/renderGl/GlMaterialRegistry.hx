@@ -5,39 +5,43 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.types.Entity.Kind;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
 import flighthq.types.Material;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
+@:noCompletion
 class GlMaterialRegistry {
-  @:noCompletion
-  public static function getGlMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMaterialRenderer> {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMaterialRenderer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var materialRenderers:KeyedTable<GlMaterialRenderer>; }).materialRenderers : KeyedTable<GlMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural4 = entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerGlMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMaterialRenderer):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerGlMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMaterialRenderer):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlRenderStateRuntime);
     ((cast runtime.registries : { var materialRenderers:KeyedTable<GlMaterialRenderer>; }).materialRenderers = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var materialRenderers:KeyedTable<GlMaterialRenderer>; }).materialRenderers : Dynamic), (cast kind : String), ({ final __callArgument7:Dynamic = renderer; __callArgument7; })) : KeyedTable<GlMaterialRenderer>) : KeyedTable<GlMaterialRenderer>));
   }
 
-  @:noCompletion
-  public static function resolveGlMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMaterialRenderer> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveGlMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMaterialRenderer> {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var entries:flighthq._internal._Map<String, RegistryTableEntry<GlMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var kind:String = cast _Runtime.UNDEFINED;

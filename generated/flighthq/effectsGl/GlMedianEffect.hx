@@ -7,21 +7,24 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.MedianEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlMedianEffect {
-  @:noCompletion
-  public static final MAX_MEDIAN_EFFECT_GL_RADIUS:Float = 2.0;
+  @:allow(flighthq)
+  @:keep
+  private static final MAX_MEDIAN_EFFECT_GL_RADIUS:Float = 2.0;
 
   public static final MAX_SAMPLES__glMedianEffect:Float = (((MAX_MEDIAN_EFFECT_GL_RADIUS * 2.0) + 1.0) * ((MAX_MEDIAN_EFFECT_GL_RADIUS * 2.0) + 1.0));
 
-  @:noCompletion
-  public static function applyMedianEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:MedianEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyMedianEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:MedianEffect):Void {
     var radius:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     radius = HxMath.min(MAX_MEDIAN_EFFECT_GL_RADIUS, HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0))));

@@ -16,17 +16,18 @@ import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.node.Revision.invalidateNodeParentReference;
 import flighthq.node.Revision.invalidateNodeWorldBounds;
 import flighthq.signals.Emitter.emitSignal;
-import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeOf;
-import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeOf;
+import flighthq.types.NodeRuntime;
 import flighthq.types.NodeSignals;
 import flighthq.types.Signal;
-import flighthq.types.Transform2D.Transform2DLike;
+import flighthq.types.Transform2DLike;
+import flighthq.types.Transform2DNode;
 
+@:noCompletion
 class Hierarchy {
   public static function addNodeChild<Traits:flighthq._internal._Object>(target:Node<Traits>, child:Node<Traits>):NodeOf<Traits> {
     return cast (cast addNodeChildAt((cast target : Dynamic), (cast child : Dynamic), (cast (cast getNodeChildCount((cast target : Dynamic)) : Float) : Float)) : NodeOf<Traits>);
@@ -362,8 +363,9 @@ class Hierarchy {
     }
   }
 
-  @:noCompletion
-  public static function setReparentNodeGuard(guard:Null<Node<Dynamic>->Node<Dynamic>->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setReparentNodeGuard(guard:Null<Node<Dynamic>->Node<Dynamic>->Void>):Void {
     (Hierarchy.reparentNodeGuard__hierarchy = cast (guard : Dynamic));
   }
 

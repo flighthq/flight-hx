@@ -10,14 +10,16 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.GlitchEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuGlitchEffect {
-  @:noCompletion
-  public static function applyGlitchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GlitchEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGlitchEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:GlitchEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var blockSize:Float = cast _Runtime.UNDEFINED;
     var colorShift:Float = cast _Runtime.UNDEFINED;

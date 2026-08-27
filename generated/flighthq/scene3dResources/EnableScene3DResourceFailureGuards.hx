@@ -8,19 +8,20 @@ import flighthq.log.Log.logOnce;
 import flighthq.scene3dResources.SceneResourceSignals.enableScene3DResourceSignals;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
+import flighthq.types.ImageResourceFailure;
+import flighthq.types.ImageResourceFailureKind;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.ImageResourceFailure;
-import flighthq.types.ImageResourceReference.ImageResourceFailureKind;
-import flighthq.types.ImageResourceReference.ImageResourceReferenceKind;
-import flighthq.types.ImageResourceReference.ImageResourceReferenceResolutionExplanation;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.Scene3DResources.Scene3DResourceEvent;
-import flighthq.types.Scene3DResources.Scene3DResourceResolver;
-import flighthq.types.Scene3DResources.Scene3DResourceSignals;
+import flighthq.types.ImageResourceReferenceKind;
+import flighthq.types.ImageResourceReferenceResolutionExplanation;
+import flighthq.types.LogLevel;
+import flighthq.types.Scene3DResourceEvent;
+import flighthq.types.Scene3DResourceResolver;
+import flighthq.types.Scene3DResourceSignals;
 import flighthq.types.Signal;
 
 typedef Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards = { var failed:Scene3DResourceEvent->Void; var resolved:Scene3DResourceEvent->Void; };
 
+@:noCompletion
 class EnableScene3DResourceFailureGuards {
   public static function areScene3DResourceFailureGuardsEnabled(resolver:Scene3DResourceResolver):Bool {
     return cast ((cast EnableScene3DResourceFailureGuards._guards__enableScene3DResourceFailureGuards : flighthq._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).has(resolver));

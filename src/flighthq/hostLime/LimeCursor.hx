@@ -10,7 +10,7 @@ import lime.ui.Window;
 
 class LimeCursor {
   /** Allocation entry point, Flight-style: `createLimeCursorBackend(window)`. */
-  public static function createLimeCursorBackend(window:Window):flighthq.types.Cursor.CursorBackend {
+  public static function createLimeCursorBackend(window:Window):flighthq.types.CursorBackend {
     return cast {
       setCursor: function(cursor:Null<Dynamic>):Void {
         window.cursor = mapCursor(cursor == null ? '' : Std.string(cursor));

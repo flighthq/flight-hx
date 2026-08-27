@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.filesystem.Filesystem.createWebFileSystemBackend;
 import flighthq.filesystem.Filesystem.installFileSystemHostBackend;
-import flighthq.types.FileSystem.FileSystemBackend;
+import flighthq.types.FileSystemBackend;
 
+@:noCompletion
 class WebFilesystem {
   public static function enableHostWebFileSystem():Void {
     if ((cast WebFilesystem._enabled__webFilesystem : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebFilesystem {
     installFileSystemHostBackend((cast createWebFileSystemBackend() : FileSystemBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebFilesystemForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebFilesystemForTest():Void {
     (WebFilesystem._enabled__webFilesystem = cast (false : Dynamic));
   }
 

@@ -4,29 +4,33 @@ package flighthq.textsegment;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TextSegment;
-import flighthq.types.TextSegment.TextSegmentGranularity;
-import flighthq.types.TextSegment.TextSegmenterBackend;
+import flighthq.types.TextSegmentGranularity;
+import flighthq.types.TextSegmenterBackend;
 
+@:noCompletion
 class TextSegmenterBackend {
-  @:noCompletion
-  public static function createWebTextSegmenterBackend():flighthq.types.TextSegment.TextSegmenterBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebTextSegmenterBackend():flighthq.types.TextSegmenterBackend {
     return cast { segment: TextSegmenterBackend.segmentWithIntlSegmenter__textSegmenterBackend };
     return cast null;
   }
 
-  @:noCompletion
-  public static function getTextSegmenterBackend():flighthq.types.TextSegment.TextSegmenterBackend {
-    if ((cast _Runtime.strictEquals(TextSegmenterBackend._backend__textSegmenterBackend, null) : Bool)) { (TextSegmenterBackend._backend__textSegmenterBackend = cast ((cast createWebTextSegmenterBackend() : flighthq.types.TextSegment.TextSegmenterBackend) : Dynamic)); }
+  @:allow(flighthq)
+  @:keep
+  private static function getTextSegmenterBackend():flighthq.types.TextSegmenterBackend {
+    if ((cast _Runtime.strictEquals(TextSegmenterBackend._backend__textSegmenterBackend, null) : Bool)) { (TextSegmenterBackend._backend__textSegmenterBackend = cast ((cast createWebTextSegmenterBackend() : flighthq.types.TextSegmenterBackend) : Dynamic)); }
     return cast TextSegmenterBackend._backend__textSegmenterBackend;
     return cast null;
   }
 
-  @:noCompletion
-  public static function setTextSegmenterBackend(backend:Null<flighthq.types.TextSegment.TextSegmenterBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setTextSegmenterBackend(backend:Null<flighthq.types.TextSegmenterBackend>):Void {
     (TextSegmenterBackend._backend__textSegmenterBackend = cast (backend : Dynamic));
   }
 
-  public static var _backend__textSegmenterBackend:Null<flighthq.types.TextSegment.TextSegmenterBackend> = _Runtime.explicitNull();
+  public static var _backend__textSegmenterBackend:Null<flighthq.types.TextSegmenterBackend> = _Runtime.explicitNull();
 
   public static final _segmenterCache__textSegmenterBackend:flighthq._internal._Map<String, flighthq._internal._Any> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 

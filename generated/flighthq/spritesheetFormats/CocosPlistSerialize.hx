@@ -3,12 +3,13 @@ package flighthq.spritesheetFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CocosPlistSchema.CocosPlistDocument;
-import flighthq.types.CocosPlistSchema.CocosPlistFrame;
-import flighthq.types.CocosPlistSchema.CocosPlistMetadata;
+import flighthq.types.CocosPlistDocument;
+import flighthq.types.CocosPlistFrame;
+import flighthq.types.CocosPlistMetadata;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 
+@:noCompletion
 class CocosPlistSerialize {
   public static function serializeCocosPlistSpritesheet(data:SpritesheetData, ?existing:{ @:optional var frames:Null<flighthq._internal._Record<String, CocosPlistFrame>>; @:optional var metadata:Null<CocosPlistMetadata>; }):String {
     var frames:flighthq._internal._Record<String, CocosPlistFrame> = cast _Runtime.UNDEFINED;

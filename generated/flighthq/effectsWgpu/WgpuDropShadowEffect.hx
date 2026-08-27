@@ -15,15 +15,17 @@ import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.DropShadowEffect;
 import flighthq.types.EffectSourceMode;
 import flighthq.types.RenderEffect;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
+import flighthq.types.WgpuRenderTargetPool;
 
+@:noCompletion
 class WgpuDropShadowEffect {
-  @:noCompletion
-  public static function applyDropShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:DropShadowEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyDropShadowEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:DropShadowEffect):Void {
     var src:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var dst:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     var descriptor:{ var width:Float; var height:Float; var format:String; } = cast _Runtime.UNDEFINED;

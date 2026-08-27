@@ -9,6 +9,7 @@ import flighthq.types.BitmapCompositeMode;
 import flighthq.types.BitmapRegion;
 import flighthq.types._internal._BitmapCompositeModeValues.BitmapCompositeModeValue;
 
+@:noCompletion
 class BitmapComposite {
   public static function compositeBitmapPixels(dest:BitmapRegion, pixels:flighthq._internal._UInt8ClampedArray, ?mode:BitmapCompositeMode):Void {
     if (mode == null) mode = cast ((cast BitmapCompositeModeValue : { var Add:String; var Clear:String; var ColorBurn:String; var ColorDodge:String; var Copy:String; var Darken:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var Difference:String; var Exclusion:String; var HardLight:String; var Invert:String; var Lighten:String; var Multiply:String; var Normal:String; var Overlay:String; var Screen:String; var SoftLight:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Subtract:String; var Xor:String; }).Normal : Dynamic);

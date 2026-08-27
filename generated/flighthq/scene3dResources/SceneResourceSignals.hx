@@ -6,18 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.Entity;
-import flighthq.types.Scene3DResources.Scene3DResourceEvent;
-import flighthq.types.Scene3DResources.Scene3DResourceResolver;
-import flighthq.types.Scene3DResources.Scene3DResourceResolverRuntime;
-import flighthq.types.Scene3DResources.Scene3DResourceResolverWithRuntime;
-import flighthq.types.Scene3DResources.Scene3DResourceSignals;
+import flighthq.types.Scene3DResourceEvent;
+import flighthq.types.Scene3DResourceResolver;
+import flighthq.types.Scene3DResourceResolverRuntime;
+import flighthq.types.Scene3DResourceResolverWithRuntime;
+import flighthq.types.Scene3DResourceSignals;
 import flighthq.types.Signal;
 import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
+@:noCompletion
 class SceneResourceSignals {
-  @:noCompletion
-  public static function createScene3DResourceSignals():Scene3DResourceSignals {
+  @:allow(flighthq)
+  @:keep
+  private static function createScene3DResourceSignals():Scene3DResourceSignals {
     return cast (cast createEntity((cast { onResourceFailed: (cast createSignal() : Signal<Scene3DResourceEvent->Void>), onResourceResolved: (cast createSignal() : Signal<Scene3DResourceEvent->Void>) } : Dynamic)) : { >Entity, var onResourceFailed:Signal<Scene3DResourceEvent->Void>; var onResourceResolved:Signal<Scene3DResourceEvent->Void>; });
     return cast null;
   }

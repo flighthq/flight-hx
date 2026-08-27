@@ -4,11 +4,12 @@ package flighthq.skeleton3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.skeleton3d.SkinVertices.skinVertices;
-import flighthq.types.Aabb.AabbLike;
+import flighthq.types.AabbLike;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types.Skeleton3D;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class GetMeshSkinBounds {
   public static function getMeshSkinConservativeBounds(out:AabbLike, bindPose:MeshSkinBindPose, skeleton:Skeleton3D):Void {
     var positions:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;

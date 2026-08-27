@@ -5,21 +5,22 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.ConvexHull3D.writeCollisionConvexHullFaces3D;
 import flighthq.physics3d.World.writeRigidBody3DWorldCenter;
-import flighthq.types.Collision.CollisionColliderShape3D;
-import flighthq.types.Collision.CollisionHeightfield3D;
-import flighthq.types.Collision.CollisionTriangleMesh3D;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.Physics3DContact;
-import flighthq.types.Physics3D.Physics3DContactPoint;
-import flighthq.types.Physics3D.Physics3DDebugFeature;
-import flighthq.types.Physics3D.Physics3DDebugGeometry;
-import flighthq.types.Physics3D.Physics3DDebugGeometryOptions;
-import flighthq.types.Physics3D.Physics3DDebugLine;
-import flighthq.types.Physics3D.Physics3DDebugSphere;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.CollisionColliderShape3D;
+import flighthq.types.CollisionHeightfield3D;
+import flighthq.types.CollisionTriangleMesh3D;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.Physics3DContact;
+import flighthq.types.Physics3DContactPoint;
+import flighthq.types.Physics3DDebugFeature;
+import flighthq.types.Physics3DDebugGeometry;
+import flighthq.types.Physics3DDebugGeometryOptions;
+import flighthq.types.Physics3DDebugLine;
+import flighthq.types.Physics3DDebugSphere;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class DebugGeometry {
   public static function createPhysics3DDebugGeometry():Physics3DDebugGeometry {
     return cast { lines: cast ([] : Array<Dynamic>), lineCount: 0.0, spheres: cast ([] : Array<Dynamic>), sphereCount: 0.0 };

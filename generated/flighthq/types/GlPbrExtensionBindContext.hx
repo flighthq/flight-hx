@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.PbrExtension.PbrUvSet;
 
 typedef GlPbrExtensionBindContext = { var bindTransmissionSceneColor:String->String->Bool; var bindTexture:String->String->String->Null<Texture>->PbrUvSet->Bool; var setLinearColor:String->Float->Void; var setFloat:String->Float->Void; };

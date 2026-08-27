@@ -18,9 +18,10 @@ import flighthq.physics3d.Joints.physics3DFixedJointSolver;
 import flighthq.physics3d.Joints.physics3DGeneric6DofJointSolver;
 import flighthq.physics3d.Joints.physics3DHingeJointSolver;
 import flighthq.physics3d.Joints.physics3DSliderJointSolver;
-import flighthq.types.Physics3D.Physics3DJointSolver;
-import flighthq.types.Physics3D.Physics3DWorld;
+import flighthq.types.Physics3DJointSolver;
+import flighthq.types.Physics3DWorld;
 
+@:noCompletion
 class RegisterBuiltInPhysics3DJointSolvers {
   public static function registerBuiltInPhysics3DJointSolvers(world:Physics3DWorld):Void {
     registerPhysics3DJointSolver(({ final __callArgument0:Dynamic = world; __callArgument0; }), (cast Physics3DBallAndSocketJointKind : String), ({ final __callArgument1:Dynamic = physics3DBallAndSocketJointSolver; __callArgument1; }));

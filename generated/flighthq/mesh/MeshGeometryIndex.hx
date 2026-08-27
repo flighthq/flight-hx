@@ -7,9 +7,10 @@ import flighthq.mesh.MeshGeometry.cloneMeshGeometry;
 import flighthq.mesh.MeshGeometry.cloneMeshGeometryMetadata;
 import flighthq.mesh.MeshGeometry.getMeshGeometryVertexCount;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.PrimitiveTopology;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.PrimitiveTopology;
+import flighthq.types.VertexAttributeLayout;
 
+@:noCompletion
 class MeshGeometryIndex {
   public static function compactMeshGeometryVertices(geometry:MeshGeometry):MeshGeometry {
     var sourceIndices:Null<flighthq._internal._Union2<flighthq._internal._UInt32Array, flighthq._internal._UInt16Array>> = cast _Runtime.UNDEFINED;

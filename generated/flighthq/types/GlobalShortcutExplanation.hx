@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef GlobalShortcutExplanation = { var accelerator:String; var normalized:Null<Accelerator>; var parseError:Null<AcceleratorParseError>; var hasNativeBackend:Bool; var registered:Bool; var reason:GlobalShortcutBlockReason; };
-
-typedef GlobalShortcutBlockReason = String;

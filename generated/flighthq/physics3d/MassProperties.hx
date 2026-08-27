@@ -12,13 +12,14 @@ import flighthq.physics3d.SymmetricTensor.TENSOR_YZ;
 import flighthq.physics3d.SymmetricTensor.TENSOR_ZZ;
 import flighthq.physics3d.SymmetricTensor.inverseSymmetricTensor;
 import flighthq.physics3d.SymmetricTensor.translateSymmetricTensor;
-import flighthq.types.Collision.CollisionColliderShape3D;
-import flighthq.types.Physics3D.Physics3DBodyType;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.Physics3DMassData;
-import flighthq.types.Physics3D.Physics3DMaterial;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.CollisionColliderShape3D;
+import flighthq.types.Physics3DBodyType;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.Physics3DMassData;
+import flighthq.types.Physics3DMaterial;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class MassProperties {
   public static function combinePhysics3DMassData(target:Physics3DMassData, addend:Physics3DMassData):Void {
     var totalMass:Float = cast _Runtime.UNDEFINED;

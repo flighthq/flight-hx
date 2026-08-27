@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.swf.SwfFilter.setSwfFilterListGuard;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableSwfGuards {
   public static function areSwfGuardsEnabled():Bool {
     return cast EnableSwfGuards.swfGuardsEnabled__enableSwfGuards;

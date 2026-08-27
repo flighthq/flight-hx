@@ -12,30 +12,31 @@ import flighthq.physics2d.Joints.Physics2DRevoluteJointKind;
 import flighthq.physics2d.Joints.Physics2DRopeJointKind;
 import flighthq.physics2d.Joints.Physics2DWeldJointKind;
 import flighthq.physics2d.Joints.Physics2DWheelJointKind;
-import flighthq.types.Physics2D.Physics2DDistanceJoint;
-import flighthq.types.Physics2D.Physics2DDistanceJointOptions;
-import flighthq.types.Physics2D.Physics2DGearCoordinateKind;
-import flighthq.types.Physics2D.Physics2DGearJoint;
-import flighthq.types.Physics2D.Physics2DGearJointOptions;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DJointOptions;
-import flighthq.types.Physics2D.Physics2DMouseJoint;
-import flighthq.types.Physics2D.Physics2DMouseJointOptions;
-import flighthq.types.Physics2D.Physics2DPrismaticJoint;
-import flighthq.types.Physics2D.Physics2DPrismaticJointOptions;
-import flighthq.types.Physics2D.Physics2DPulleyJoint;
-import flighthq.types.Physics2D.Physics2DPulleyJointOptions;
-import flighthq.types.Physics2D.Physics2DRevoluteJoint;
-import flighthq.types.Physics2D.Physics2DRevoluteJointOptions;
-import flighthq.types.Physics2D.Physics2DRopeJoint;
-import flighthq.types.Physics2D.Physics2DRopeJointOptions;
-import flighthq.types.Physics2D.Physics2DWeldJoint;
-import flighthq.types.Physics2D.Physics2DWeldJointOptions;
-import flighthq.types.Physics2D.Physics2DWheelJoint;
-import flighthq.types.Physics2D.Physics2DWheelJointOptions;
+import flighthq.types.Physics2DDistanceJoint;
+import flighthq.types.Physics2DDistanceJointOptions;
+import flighthq.types.Physics2DGearCoordinateKind;
+import flighthq.types.Physics2DGearJoint;
+import flighthq.types.Physics2DGearJointOptions;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DJointOptions;
+import flighthq.types.Physics2DMouseJoint;
+import flighthq.types.Physics2DMouseJointOptions;
+import flighthq.types.Physics2DPrismaticJoint;
+import flighthq.types.Physics2DPrismaticJointOptions;
+import flighthq.types.Physics2DPulleyJoint;
+import flighthq.types.Physics2DPulleyJointOptions;
+import flighthq.types.Physics2DRevoluteJoint;
+import flighthq.types.Physics2DRevoluteJointOptions;
+import flighthq.types.Physics2DRopeJoint;
+import flighthq.types.Physics2DRopeJointOptions;
+import flighthq.types.Physics2DWeldJoint;
+import flighthq.types.Physics2DWeldJointOptions;
+import flighthq.types.Physics2DWheelJoint;
+import flighthq.types.Physics2DWheelJointOptions;
 
 typedef Physics2DJointBase__jointFactories = { var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; };
 
+@:noCompletion
 class JointFactories {
   public static function createJointBase__jointFactories(options:Physics2DJointOptions):Physics2DJointBase__jointFactories {
     return cast { bodyA: _Runtime.field(options, 'bodyA'), bodyB: _Runtime.field(options, 'bodyB'), localAnchorAX: _Runtime.coalesce(_Runtime.field(options, 'localAnchorAX'), function():Dynamic return cast 0.0), localAnchorAY: _Runtime.coalesce(_Runtime.field(options, 'localAnchorAY'), function():Dynamic return cast 0.0), localAnchorBX: _Runtime.coalesce(_Runtime.field(options, 'localAnchorBX'), function():Dynamic return cast 0.0), localAnchorBY: _Runtime.coalesce(_Runtime.field(options, 'localAnchorBY'), function():Dynamic return cast 0.0), collideConnected: _Runtime.coalesce(_Runtime.field(options, 'collideConnected'), function():Dynamic return cast false), breakForce: _Runtime.coalesce(_Runtime.field(options, 'breakForce'), function():Dynamic return cast HxMath.POSITIVE_INFINITY), breakTorque: _Runtime.coalesce(_Runtime.field(options, 'breakTorque'), function():Dynamic return cast HxMath.POSITIVE_INFINITY), impulse0: 0.0, impulse1: 0.0, impulse2: 0.0, rAX: 0.0, rAY: 0.0, rBX: 0.0, rBY: 0.0 };

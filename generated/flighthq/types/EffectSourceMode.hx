@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef EffectSourceMode = String;
-
-typedef InnerEffectSourceMode = String;

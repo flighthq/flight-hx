@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef MorphTarget = { var normalDeltas:Null<flighthq._internal._Float32Array>; var positionDeltas:flighthq._internal._Float32Array; var tangentDeltas:Null<flighthq._internal._Float32Array>; };
-
-typedef MeshMorph = { var targets:Array<MorphTarget>; var weights:flighthq._internal._Float32Array; };

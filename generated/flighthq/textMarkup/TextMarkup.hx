@@ -12,14 +12,14 @@ import flighthq.textMarkup.MarkupTagRegistry.registerStandardMarkupTags;
 import flighthq.textlayout.RichTextContent.createRichTextContent;
 import flighthq.textlayout.TextFormatRange.createTextFormatRange;
 import flighthq.types.FontVariation;
+import flighthq.types.MarkupTagEffect;
 import flighthq.types.MarkupTagHandler;
-import flighthq.types.MarkupTagHandler.MarkupTagEffect;
-import flighthq.types.MarkupTagHandler.MarkupTagResult;
 import flighthq.types.MarkupTagRegistry;
+import flighthq.types.MarkupTagResult;
 import flighthq.types.RichTextContent;
 import flighthq.types.TextFormat;
-import flighthq.types.TextFormat.TextFormatAlign;
-import flighthq.types.TextFormat.TextFormatListMarker;
+import flighthq.types.TextFormatAlign;
+import flighthq.types.TextFormatListMarker;
 import flighthq.types.TextFormatRange;
 
 class TextMarkup {

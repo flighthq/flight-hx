@@ -7,19 +7,21 @@ import flighthq.renderWgpu.WgpuBackground.retireWgpuBuffer;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.scene2dWgpu.WgpuQuadBatchWriter.flushWgpuQuadBatchWriter;
 import flighthq.types.Matrix;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
+import flighthq.types.WgpuClipContourEntry;
+import flighthq.types.WgpuClipContourPipelines;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuClipContourEntry;
-import flighthq.types.WgpuRenderState.WgpuClipContourPipelines;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 
+@:noCompletion
 class WgpuClipContours {
   public static final CLIP_WGSL__wgpuClipContours:String = '\nstruct ClipUniforms { matrix : mat3x3f }\n@group(0) @binding(0) var<uniform> u : ClipUniforms;\n@vertex fn vs_main(@location(0) position : vec2f) -> @builtin(position) vec4f {\n  let p = u.matrix * vec3f(position, 1.0);\n  return vec4f(p.x, p.y, 0.0, 1.0);\n}\n@fragment fn fs_main() -> @location(0) vec4f { return vec4f(0.0); }\n';
 
   public static final CLIP_UNIFORM_BYTES__wgpuClipContours:Float = 48.0;
 
-  @:noCompletion
-  public static function popWgpuClipContours(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function popWgpuClipContours(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var entry:Null<WgpuClipContourEntry> = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
@@ -42,8 +44,9 @@ class WgpuClipContours {
     }
   }
 
-  @:noCompletion
-  public static function pushWgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function pushWgpuClipContours(state:WgpuRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var depth:Float = cast _Runtime.UNDEFINED;

@@ -15,31 +15,31 @@ import flighthq.scene3dFormats.Shared.CANONICAL_FLOATS_PER_VERTEX;
 import flighthq.scene3dFormats.Shared.CANONICAL_LAYOUT;
 import flighthq.scene3dFormats.Shared.createExternalTextureRef;
 import flighthq.types.BlinnPhongMaterial;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Material;
-import flighthq.types.Material.MaterialLike;
+import flighthq.types.MaterialAlphaMode;
+import flighthq.types.MaterialLike;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
-import flighthq.types.MeshGeometry.PrimitiveTopology;
 import flighthq.types.MeshGeometryOptions;
-import flighthq.types.ObjSchema.ObjMaterial;
-import flighthq.types.ObjSchema.ObjMaterialLibrary;
+import flighthq.types.MeshSubset;
+import flighthq.types.ObjMaterial;
+import flighthq.types.ObjMaterialLibrary;
+import flighthq.types.PrimitiveTopology;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
-import flighthq.types.Scene3DDocument.Scene3DDocumentMesh;
-import flighthq.types.Scene3DDocument.Scene3DDocumentNode;
-import flighthq.types.Scene3DDocument.Scene3DDocumentScene;
+import flighthq.types.Scene3DDocumentMesh;
+import flighthq.types.Scene3DDocumentNode;
+import flighthq.types.Scene3DDocumentScene;
 import flighthq.types.StandardPbrMaterial;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Transform3D;
 import flighthq.types.Types.MeshKind;
 import flighthq.types.Vector2;
@@ -51,6 +51,7 @@ typedef MaterialBucket__objParse = { var dedup:flighthq._internal._Map<String, F
 
 typedef ObjDropTally__objParse = { var count:Float; var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var severity:ImportDiagnosticSeverity; };
 
+@:noCompletion
 class ObjParse {
   public static function createScene3DFromObj(source:String, ?materials:ObjMaterialLibrary, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
     return cast (cast (#if js _Runtime.callValue(createScene3DFromDocument, cast ([(cast parseObj((cast source : String), ({ final __callArgument4:Dynamic = materials; __callArgument4; }), ({ final __callArgument5:Dynamic = diagnostics; __callArgument5; })) : Scene3DDocument)] : Array<Dynamic>)) #else createScene3DFromDocument((cast parseObj((cast source : String), ({ final __callArgument0:Dynamic = materials; __callArgument0; }), ({ final __callArgument1:Dynamic = diagnostics; __callArgument1; })) : Scene3DDocument), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3D);

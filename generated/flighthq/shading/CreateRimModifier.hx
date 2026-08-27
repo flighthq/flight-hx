@@ -10,6 +10,7 @@ import flighthq.types.Types.RimModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._RimModifierValues.RimModifierKind;
 
+@:noCompletion
 class CreateRimModifier {
   public static function createRimModifier(options:RimModifierOptions):RimModifier {
     return cast { kind: RimModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, color: _Runtime.field(options, 'color'), power: _Runtime.coalesce(_Runtime.field(options, 'power'), function():Dynamic return cast 3.0), intensity: _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0), bias: _Runtime.coalesce(_Runtime.field(options, 'bias'), function():Dynamic return cast 0.0) };

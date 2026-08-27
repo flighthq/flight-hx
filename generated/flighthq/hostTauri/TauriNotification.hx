@@ -3,16 +3,17 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Notification.NotificationBackend;
-import flighthq.types.Notification.NotificationCapabilities;
-import flighthq.types.Notification.NotificationPermission;
-import flighthq.types.Notification.NotificationRequest;
-import flighthq.types.Notification.ScheduledNotification;
+import flighthq.types.NotificationBackend;
+import flighthq.types.NotificationCapabilities;
+import flighthq.types.NotificationPermission;
+import flighthq.types.NotificationRequest;
+import flighthq.types.ScheduledNotification;
 import flighthq.types.TauriApi;
-import flighthq.types.TauriApi.TauriNotificationOptions;
-import flighthq.types.TauriApi.TauriNotificationPermission;
-import flighthq.types.TauriApi.TauriNotificationPlugin;
+import flighthq.types.TauriNotificationOptions;
+import flighthq.types.TauriNotificationPermission;
+import flighthq.types.TauriNotificationPlugin;
 
+@:noCompletion
 class TauriNotification {
   public static function createTauriNotificationBackend(tauri:TauriApi):NotificationBackend {
     var notification:TauriNotificationPlugin = cast _Runtime.UNDEFINED;

@@ -5,15 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.tray.EnableTrayGuards as Facade_Tray_flighthq_tray_EnableTrayGuards;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Menu.MenuItemTemplate;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Tray.TrayBackend;
-import flighthq.types.Tray.TrayBalloonOptions;
-import flighthq.types.Tray.TrayCapabilities;
-import flighthq.types.Tray.TrayEventData;
-import flighthq.types.Tray.TrayIcon;
-import flighthq.types.Tray.TrayIconOptions;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.MenuItemTemplate;
+import flighthq.types.RectangleLike;
+import flighthq.types.TrayBackend;
+import flighthq.types.TrayBalloonOptions;
+import flighthq.types.TrayCapabilities;
+import flighthq.types.TrayEventData;
+import flighthq.types.TrayIcon;
+import flighthq.types.TrayIconOptions;
+import flighthq.types.Vector2Like;
 
 class Tray {
   public static var _animationGuard__tray:Null<TrayIcon->Float->Float->Void> = _Runtime.explicitNull();
@@ -116,8 +116,9 @@ class Tray {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getTrayBackend():TrayBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getTrayBackend():TrayBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Tray._custom__tray, function():Dynamic return cast Tray._host__tray), function():Dynamic return cast Tray._sentinel__tray);
     return cast null;
   }
@@ -147,8 +148,9 @@ class Tray {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installTrayHostBackend(backend:TrayBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installTrayHostBackend(backend:TrayBackend):Void {
     if ((cast !_Runtime.strictEquals(Tray._host__tray, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Tray._host__tray, backend) : Bool)) { (Tray._hostConflict__tray = cast (true : Dynamic)); }
       return;
@@ -166,8 +168,9 @@ class Tray {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeTrayHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeTrayHostResult(operation:String, succeeded:Bool):Void {
     (Tray._hostObservation__tray = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -184,21 +187,24 @@ class Tray {
     (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).removeBalloon((cast tray.id : Float));
   }
 
-  @:noCompletion
-  public static function resetTrayBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetTrayBackendForTest():Void {
     (Tray._custom__tray = cast (null : Dynamic));
     (Tray._host__tray = cast (null : Dynamic));
     (Tray._hostConflict__tray = cast (false : Dynamic));
     (Tray._hostObservation__tray = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setTrayAnimationGuard(guard:Null<TrayIcon->Float->Float->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setTrayAnimationGuard(guard:Null<TrayIcon->Float->Float->Void>):Void {
     (Tray._animationGuard__tray = cast (guard : Dynamic));
   }
 
-  @:noCompletion
-  public static function setTrayBackend(backend:Null<TrayBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setTrayBackend(backend:Null<TrayBackend>):Void {
     (Tray._custom__tray = cast (backend : Dynamic));
   }
 

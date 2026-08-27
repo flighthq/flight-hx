@@ -6,22 +6,26 @@ import flighthq._internal._Runtime;
 import flighthq.pathBoolean.MartinezKernel.createMartinezPathBooleanBackend;
 import flighthq.types.PathBooleanBackend;
 
+@:noCompletion
 class PathBooleanBackend {
-  @:noCompletion
-  public static function createDefaultPathBooleanBackend():flighthq.types.PathBooleanBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createDefaultPathBooleanBackend():flighthq.types.PathBooleanBackend {
     return cast (cast createMartinezPathBooleanBackend() : flighthq.types.PathBooleanBackend);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getPathBooleanBackend():flighthq.types.PathBooleanBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getPathBooleanBackend():flighthq.types.PathBooleanBackend {
     if ((cast _Runtime.strictEquals(PathBooleanBackend._backend__pathBooleanBackend, null) : Bool)) { (PathBooleanBackend._backend__pathBooleanBackend = cast ((cast createDefaultPathBooleanBackend() : flighthq.types.PathBooleanBackend) : Dynamic)); }
     return cast PathBooleanBackend._backend__pathBooleanBackend;
     return cast null;
   }
 
-  @:noCompletion
-  public static function setPathBooleanBackend(backend:Null<flighthq.types.PathBooleanBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPathBooleanBackend(backend:Null<flighthq.types.PathBooleanBackend>):Void {
     (PathBooleanBackend._backend__pathBooleanBackend = cast (backend : Dynamic));
   }
 

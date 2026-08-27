@@ -4,8 +4,9 @@ package flighthq.collision;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollisionShapeValidation2D.getCollisionPolygonValidationStatus2D;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
+import flighthq.types.CollisionBuiltInShape2D;
 
+@:noCompletion
 class PointContainment2D {
   public static final RELATIVE_EPSILON__pointContainment2D:Float = 1e-9;
 

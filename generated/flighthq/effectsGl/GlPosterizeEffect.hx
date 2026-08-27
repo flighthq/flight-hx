@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.PosterizeEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlPosterizeEffect {
-  @:noCompletion
-  public static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyPosterizeEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PosterizeEffect):Void {
     var levels:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     levels = HxMath.max(2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0));

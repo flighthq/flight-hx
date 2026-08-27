@@ -7,15 +7,16 @@ import flighthq.image.ImageResourceReference.resetFailedImageResourceReference;
 import flighthq.scene3dResources.GetScene3DResourceTextures.getScene3DResourceTextures;
 import flighthq.scene3dResources.GetScene3DResourceTextures.getScene3DTextureResourceReference;
 import flighthq.scene3dResources.ResolveScene3DResources.updateScene3DResourceStreaming;
+import flighthq.types.EmbeddedImageResourceReference;
+import flighthq.types.ExternalImageResourceReference;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 import flighthq.types.Scene3D;
+import flighthq.types.Scene3DResourceResolver;
 import flighthq.types.Scene3DResources;
-import flighthq.types.Scene3DResources.Scene3DResourceResolver;
-import flighthq.types.Scene3DResources.UpdateScene3DResourceStreamingOptions;
 import flighthq.types.Texture;
+import flighthq.types.UpdateScene3DResourceStreamingOptions;
 
+@:noCompletion
 class SceneResourceRecovery {
   public static function retryFailedScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:UpdateScene3DResourceStreamingOptions):Float {
     var textures:Array<Texture> = cast _Runtime.UNDEFINED;

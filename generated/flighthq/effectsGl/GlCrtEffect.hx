@@ -8,15 +8,17 @@ import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.CrtEffect;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlCrtEffect {
-  @:noCompletion
-  public static function applyCrtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CrtEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyCrtEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CrtEffect):Void {
     var curvature:Float = cast _Runtime.UNDEFINED;
     var scanlineIntensity:Float = cast _Runtime.UNDEFINED;
     var vignette:Float = cast _Runtime.UNDEFINED;

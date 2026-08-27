@@ -9,18 +9,21 @@ import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.ConvolutionEffect;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlConvolutionEffect {
-  @:noCompletion
-  public static final MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE:Float = 49.0;
+  @:allow(flighthq)
+  @:keep
+  private static final MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE:Float = 49.0;
 
-  @:noCompletion
-  public static function applyConvolutionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ConvolutionEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyConvolutionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ConvolutionEffect):Void {
     var __destructure0:ConvolutionEffect = cast _Runtime.UNDEFINED;
     var matrix:Array<Float> = cast _Runtime.UNDEFINED;
     var matrixX:Float = cast _Runtime.UNDEFINED;

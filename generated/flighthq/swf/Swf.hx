@@ -9,7 +9,7 @@ import flighthq.swf.SwfImageDecoder as Facade_Swf_flighthq_swf_SwfImageDecoder;
 import flighthq.types.GlyphOutlineSource;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
+import flighthq.types.Scene2DDocumentImporterRegistry;
 import flighthq.types.SwfDocumentImport;
 
 class Swf {

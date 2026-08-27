@@ -5,20 +5,21 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DissolveModifier;
 import flighthq.types.DissolveModifierOptions;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.ModifierSlot;
 import flighthq.types.Sampler;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.DissolveModifierKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._DissolveModifierValues.DissolveModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
+@:noCompletion
 class CreateDissolveModifier {
   public static function createDissolveModifier(options:DissolveModifierOptions):DissolveModifier {
     var modifier:DissolveModifier = cast _Runtime.UNDEFINED;

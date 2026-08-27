@@ -11,34 +11,36 @@ import flighthq.scene2dDom.DomStyle.prepareDomElement;
 import flighthq.scene2dDom.DomStyle.setDomRendererElement;
 import flighthq.scene2dDom.DomTransform.setDomTransformWithOffset;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomRenderStateRuntime;
 import flighthq.types.Entity;
 import flighthq.types.Matrix;
 import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
 import flighthq.types.ShapeRasterizer;
 import flighthq.types.Types.ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
 typedef DomShapeData__domShape = { >RendererData, var canvas:Null<flighthq._internal.dom.HTMLCanvasElement>; var context:Null<flighthq._internal.dom.CanvasRenderingContext2D>; };
 
+@:noCompletion
 class DomShape {
   public static function createDomShapeData__domShape(_state:RenderState, _source:Renderable):DomShapeData__domShape {
     return cast (cast createEntity(({ final __callArgument0:Dynamic = { canvas: null, context: null }; __callArgument0; })) : { >Entity, var canvas:flighthq._internal._Any; var context:flighthq._internal._Any; });
     return cast null;
   }
 
-  @:noCompletion
-  public static function drawDomShape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawDomShape(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var data:Null<DomShapeData__domShape> = cast _Runtime.UNDEFINED;
     var source:Shape = cast _Runtime.UNDEFINED;
     var __destructure0:ShapeData = cast _Runtime.UNDEFINED;

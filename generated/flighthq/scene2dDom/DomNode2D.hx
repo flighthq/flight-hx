@@ -12,28 +12,31 @@ import flighthq.scene2dDom.DomReconcile.processDomNode;
 import flighthq.scene2dDom.DomReconcile.reconcileDomContainer;
 import flighthq.scene2dDom.DomReconcile.swapDomOrderLists;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
+import flighthq.types.DomClipHooks;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomClipHooks;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomRenderStateRuntime;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DRuntime;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DRuntime;
+import flighthq.types.Node2DTraits;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
+import flighthq.types.Scene2DClipHooks;
 import flighthq.types.Scene2DRenderer;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 
+@:noCompletion
 class DomNode2D {
-  @:noCompletion
-  public static function drawDomScene2D(_state:DomRenderState, _renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawDomScene2D(_state:DomRenderState, _renderProxy:RenderProxy2D):Void {
   }
 
-  @:noCompletion
-  public static final defaultDomScene2DRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawDomScene2D });
+  @:allow(flighthq)
+  @:keep
+  private static final defaultDomScene2DRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: drawDomScene2D });
 
   public static function renderDomScene2D(state:DomRenderState, source:Node2D):Void {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;

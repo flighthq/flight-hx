@@ -4,9 +4,10 @@ package flighthq.easing;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
+import flighthq.types.EasingStepsGuard;
 import flighthq.types.StepPosition;
-import flighthq.types.StepPosition.EasingStepsGuard;
 
+@:noCompletion
 class EaseSteps {
   public static function easeSteps(count:Float, position:StepPosition = 'jumpEnd'):EasingFunction {
     var jumps:Float = cast _Runtime.UNDEFINED;
@@ -29,8 +30,9 @@ class EaseSteps {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setEasingStepsGuard(guard:Null<EasingStepsGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setEasingStepsGuard(guard:Null<EasingStepsGuard>):Void {
     (EaseSteps._stepsGuard__easeSteps = cast (guard : Dynamic));
   }
 

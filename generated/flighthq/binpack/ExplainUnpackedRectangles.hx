@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.binpack.PackRectangles.BIN_PACK_DEFAULT_MAX_EXTENT;
 import flighthq.binpack.PackRectangles.packRectangles;
-import flighthq.types.BinPack.BinPackOptions;
-import flighthq.types.BinPack.PackResult;
-import flighthq.types.BinPack.PackableRectangle;
-import flighthq.types.BinPack.RectangleId;
-import flighthq.types.BinPack.UnpackedRectangleExplanation;
-import flighthq.types.BinPack.UnpackedRectangleReason;
+import flighthq.types.BinPackOptions;
+import flighthq.types.PackResult;
+import flighthq.types.PackableRectangle;
+import flighthq.types.RectangleId;
+import flighthq.types.UnpackedRectangleExplanation;
+import flighthq.types.UnpackedRectangleReason;
 
+@:noCompletion
 class ExplainUnpackedRectangles {
   public static function explainUnpackedRectangles(rectangles:Array<PackableRectangle>, ?options:BinPackOptions):Array<UnpackedRectangleExplanation> {
     var border:Float = cast _Runtime.UNDEFINED;

@@ -5,14 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.createVector3;
-import flighthq.types.Aabb.AabbLike;
+import flighthq.types.AabbLike;
 import flighthq.types.BoundingSphere;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Entity;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class BoundingSphere {
   public static function cloneBoundingSphere(source:BoundingSphereLike):flighthq.types.BoundingSphere {
     return cast (cast createBoundingSphere(({ final __callArgument0:Dynamic = (cast source.center : { var x:Float; }).x; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast source.center : { var y:Float; }).y; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast source.center : { var z:Float; }).z; __callArgument2; }), ({ final __callArgument3:Dynamic = source.radius; __callArgument3; })) : flighthq.types.BoundingSphere);

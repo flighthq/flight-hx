@@ -4,10 +4,11 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronGlobalShortcut;
-import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.ElectronGlobalShortcut;
+import flighthq.types.ShortcutBackend;
 import flighthq.types.ShortcutEvent;
 
+@:noCompletion
 class ElectronShortcut {
   public static function createElectronShortcutBackend(electron:ElectronApi):ShortcutBackend {
     var globalShortcut:ElectronGlobalShortcut = cast _Runtime.UNDEFINED;

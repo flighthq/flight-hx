@@ -8,16 +8,18 @@ import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEff
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BlendEffect;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
+import flighthq.types.CanvasRenderStateRuntime;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class CanvasBlendEffect {
-  @:noCompletion
-  public static function applyBlendEffectToCanvas(state:CanvasRenderState, source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:BlendEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyBlendEffectToCanvas(state:CanvasRenderState, source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:BlendEffect):Void {
     var backdrop:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var operation:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;

@@ -7,22 +7,24 @@ import flighthq.render.Renderer.noopRendererData;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
 import flighthq.types.Matrix;
 import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
+import flighthq.types.ParticleEmitterData;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureFilter;
 
+@:noCompletion
 class CanvasParticleEmitter2D {
-  @:noCompletion
-  public static function drawCanvasParticleEmitter2D(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasParticleEmitter2D(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:ParticleEmitter2D = cast _Runtime.UNDEFINED;
     var __destructure0:ParticleEmitterData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;

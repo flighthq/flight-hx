@@ -39,19 +39,20 @@ import flighthq.physics3d.JointRows.writeAngularRow;
 import flighthq.physics3d.JointRows.writePhysics3DSoftRowParameters;
 import flighthq.physics3d.JointRows.writeRow;
 import flighthq.physics3d.World.findPhysics3DBody;
-import flighthq.types.Physics3D.Physics3DConeTwistJoint;
-import flighthq.types.Physics3D.Physics3DDistanceJoint;
-import flighthq.types.Physics3D.Physics3DFixedJoint;
-import flighthq.types.Physics3D.Physics3DGeneric6DofJoint;
-import flighthq.types.Physics3D.Physics3DHingeJoint;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointFrames;
-import flighthq.types.Physics3D.Physics3DJointReaction;
-import flighthq.types.Physics3D.Physics3DJointSolver;
-import flighthq.types.Physics3D.Physics3DSliderJoint;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.Physics3DConeTwistJoint;
+import flighthq.types.Physics3DDistanceJoint;
+import flighthq.types.Physics3DFixedJoint;
+import flighthq.types.Physics3DGeneric6DofJoint;
+import flighthq.types.Physics3DHingeJoint;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointFrames;
+import flighthq.types.Physics3DJointReaction;
+import flighthq.types.Physics3DJointSolver;
+import flighthq.types.Physics3DSliderJoint;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class Joints {
   public static final Physics3DBallAndSocketJointKind:String = 'BallAndSocket';
 

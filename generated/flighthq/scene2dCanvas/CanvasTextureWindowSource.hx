@@ -6,18 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureFilter;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
 import flighthq.types.Vector2;
 
+@:noCompletion
 class CanvasTextureWindowSource {
-  @:noCompletion
-  public static function resolveCanvasTextureWindowSource(resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveCanvasTextureWindowSource(resolvers:CanvasTextureResolvers, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
     var image:Null<TextureSource> = cast _Runtime.UNDEFINED;
     var source:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>> = cast _Runtime.UNDEFINED;
     var uvOffsetX:Float = cast _Runtime.UNDEFINED;

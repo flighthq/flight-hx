@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapColorMatrix {
   public static function buildBitmapBrightnessColorMatrix(out:Array<Float>, amount:Float):Void {
     _Runtime.callHaxeRestValue(BitmapColorMatrix.setColorMatrix__bitmapColorMatrix, _Runtime.concatArrays([[out], [amount], [0.0], [0.0], [0.0], [0.0], [0.0], [amount], [0.0], [0.0], [0.0], [0.0], [0.0], [amount], [0.0], [0.0], [0.0], [0.0], [0.0], [1.0], [0.0]]), 1);

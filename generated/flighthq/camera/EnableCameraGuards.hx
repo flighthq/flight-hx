@@ -10,8 +10,9 @@ import flighthq.log.Log.logOnce;
 import flighthq.types.Camera2D;
 import flighthq.types.Camera3D;
 import flighthq.types.Camera3DViewExplanation;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableCameraGuards {
   public static function areCameraGuardsEnabled():Bool {
     return cast EnableCameraGuards.cameraGuardsEnabled__enableCameraGuards;

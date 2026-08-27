@@ -4,11 +4,12 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.CopyPath.copyPath;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
+import flighthq.types.PathCommand;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class TransformPath {
   public static function transformPath(source:Path, matrix:MatrixLike, out:Path):Void {
     var __destructure0:MatrixLike = cast _Runtime.UNDEFINED;

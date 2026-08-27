@@ -11,6 +11,7 @@ import flighthq.types.PathOffsetEnd;
 import flighthq.types.PathOffsetJoin;
 import flighthq.types.PathOffsetOptions;
 
+@:noCompletion
 class OffsetPath {
   public static function offsetPath(path:Path, delta:Float, ?options:PathOffsetOptions):Path {
     var join:PathOffsetJoin = cast _Runtime.UNDEFINED;

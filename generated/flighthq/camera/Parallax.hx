@@ -7,9 +7,10 @@ import flighthq.camera.ViewMatrix.getCamera2DViewMatrix;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.types.Camera2D;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.MatrixLike;
+import flighthq.types.Vector2Like;
 
+@:noCompletion
 class Parallax {
   public static function getCamera2DParallaxPoint(camera:Camera2D, factor:Float, out:Vector2Like):Void {
     getCamera2DViewMatrix(({ final __callArgument0:Dynamic = camera; __callArgument0; }), ({ final __callArgument1:Dynamic = Parallax.scratchMatrix__parallax; __callArgument1; }));

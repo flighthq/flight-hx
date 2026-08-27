@@ -5,10 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.clip.ClipRegion as Facade_Clip_flighthq_clip_ClipRegion;
 import flighthq.types.ClipRegion;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Path;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
+import flighthq.types.RectangleLike;
 
 class Clip {
   public static function acquireClipRegion():ClipRegion {

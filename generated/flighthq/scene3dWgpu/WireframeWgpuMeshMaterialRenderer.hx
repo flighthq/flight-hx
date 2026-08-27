@@ -16,25 +16,27 @@ import flighthq.scene3dWgpu.WgpuWireframeUpload.ensureWgpuWireframeUpload;
 import flighthq.types.Camera3D;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
+import flighthq.types.MeshSubset;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.WireframeMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime;
 import flighthq.types.WgpuWireframePipeline;
-import flighthq.types.WgpuWireframePipeline.WgpuWireframeUpload;
+import flighthq.types.WgpuWireframeUpload;
 import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
+@:noCompletion
 class WireframeWgpuMeshMaterialRenderer {
-  @:noCompletion
-  public static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final wireframeWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var wireframe:Null<WireframeMaterial> = cast _Runtime.UNDEFINED;

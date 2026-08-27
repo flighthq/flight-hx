@@ -8,6 +8,7 @@ import flighthq.imageCodec.ImageDecoderRegistry.getImageDecoder;
 import flighthq.types.ImageDecodeFailureExplanation;
 import flighthq.types.ImageDecoder;
 
+@:noCompletion
 class ExplainImageDecodeFailure {
   public static function explainImageDecodeFailure(bytes:flighthq._internal._UInt8Array, ?mimeType:String):Null<ImageDecodeFailureExplanation> {
     var type:Null<String> = cast _Runtime.UNDEFINED;

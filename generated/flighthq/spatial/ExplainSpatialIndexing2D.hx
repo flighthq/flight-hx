@@ -3,12 +3,13 @@ package flighthq.spatial;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Spatial.SpatialIndex2D;
-import flighthq.types.Spatial.SpatialIndexBackend2D;
-import flighthq.types.Spatial.SpatialIndexRuntime2D;
-import flighthq.types.Spatial.SpatialObjectId;
-import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
+import flighthq.types.SpatialIndex2D;
+import flighthq.types.SpatialIndexBackend2D;
+import flighthq.types.SpatialIndexRuntime2D;
+import flighthq.types.SpatialIndexingExplanation;
+import flighthq.types.SpatialObjectId;
 
+@:noCompletion
 class ExplainSpatialIndexing2D {
   public static function explainSpatialIndexing2D(index:SpatialIndex2D, id:SpatialObjectId):SpatialIndexingExplanation {
     return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime2D).backend : SpatialIndexBackend2D).explainSpatialIndexing((cast id : Float));

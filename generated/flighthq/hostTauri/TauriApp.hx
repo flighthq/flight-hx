@@ -3,13 +3,14 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.App.AppBackend;
-import flighthq.types.App.AppLoginItem;
+import flighthq.types.AppBackend;
+import flighthq.types.AppLoginItem;
 import flighthq.types.TauriApi;
-import flighthq.types.TauriApi.TauriAppModule;
-import flighthq.types.TauriApi.TauriOsModule;
-import flighthq.types.TauriApi.TauriProcessPlugin;
+import flighthq.types.TauriAppModule;
+import flighthq.types.TauriOsModule;
+import flighthq.types.TauriProcessPlugin;
 
+@:noCompletion
 class TauriApp {
   public static function createTauriAppBackend(tauri:TauriApi):AppBackend {
     var app:TauriAppModule = cast _Runtime.UNDEFINED;

@@ -12,9 +12,11 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.WgpuRenderState;
 
+@:noCompletion
 class WgpuShape {
-  @:noCompletion
-  public static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     if ((cast (cast drawWgpuMeshShape(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; })) : Bool) : Bool)) { return; }
     drawWgpuRasterShape(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = renderProxy; __callArgument5; }));
   }

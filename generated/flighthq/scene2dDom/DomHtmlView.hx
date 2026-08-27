@@ -8,14 +8,16 @@ import flighthq.scene2dDom.DomStyle.setDomRendererElement;
 import flighthq.scene2dDom.DomTransform.setDomTransform;
 import flighthq.types.DomRenderState;
 import flighthq.types.HtmlView;
-import flighthq.types.HtmlView.HtmlViewData;
+import flighthq.types.HtmlViewData;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer;
 
+@:noCompletion
 class DomHtmlView {
-  @:noCompletion
-  public static function drawDomHtmlView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawDomHtmlView(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:HtmlView = cast _Runtime.UNDEFINED;
     var data:HtmlViewData = cast _Runtime.UNDEFINED;
     var element:Null<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;

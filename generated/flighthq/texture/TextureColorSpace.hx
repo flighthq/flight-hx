@@ -3,21 +3,22 @@ package flighthq.texture;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
-import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.RenderTargetColorSpace;
+import flighthq.types.TextureColorSpace;
 
+@:noCompletion
 class TextureColorSpace {
-  public static function getTextureSampleColorSpace(source:flighthq.types.Texture.TextureColorSpace, working:RenderTargetColorSpace):flighthq.types.Texture.TextureColorSpace {
+  public static function getTextureSampleColorSpace(source:flighthq.types.TextureColorSpace, working:RenderTargetColorSpace):flighthq.types.TextureColorSpace {
     return cast ((cast (cast shouldDecodeTextureOnSample(({ final __callArgument0:Dynamic = source; __callArgument0; }), ({ final __callArgument1:Dynamic = working; __callArgument1; })) : Bool) : Bool) ? (cast 'srgb' : Dynamic) : (cast 'linear' : Dynamic));
     return cast null;
   }
 
-  public static function shouldDecodeTextureOnSample(source:flighthq.types.Texture.TextureColorSpace, working:RenderTargetColorSpace):Bool {
+  public static function shouldDecodeTextureOnSample(source:flighthq.types.TextureColorSpace, working:RenderTargetColorSpace):Bool {
     return cast ((cast _Runtime.strictEquals(source, 'srgb') : Bool) && (cast _Runtime.strictEquals(working, 'linear') : Bool));
     return cast null;
   }
 
-  public static function shouldPremultiplyTextureOnUpload(source:flighthq.types.Texture.TextureColorSpace, working:RenderTargetColorSpace):Bool {
+  public static function shouldPremultiplyTextureOnUpload(source:flighthq.types.TextureColorSpace, working:RenderTargetColorSpace):Bool {
     return cast !(cast (cast shouldDecodeTextureOnSample(({ final __callArgument4:Dynamic = source; __callArgument4; }), ({ final __callArgument5:Dynamic = working; __callArgument5; })) : Bool) : Bool);
     return cast null;
   }

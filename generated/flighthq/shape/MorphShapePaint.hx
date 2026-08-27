@@ -12,28 +12,29 @@ import flighthq.shape.ShapeCommands.appendShapeBeginTextureFill;
 import flighthq.shape.ShapeCommands.appendShapeLineGradientStyle;
 import flighthq.shape.ShapeCommands.appendShapeLineStyle;
 import flighthq.shape.ShapeCommands.appendShapeLineTextureStyle;
+import flighthq.types.CapsStyle;
+import flighthq.types.GradientType;
+import flighthq.types.InterpolationMethod;
+import flighthq.types.JointStyle;
+import flighthq.types.LineScaleMode;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.MorphShape;
-import flighthq.types.MorphShape.MorphShapeColorEndpoint;
-import flighthq.types.MorphShape.MorphShapeColorPaintBinding;
-import flighthq.types.MorphShape.MorphShapeData;
-import flighthq.types.MorphShape.MorphShapeGradientEndpoint;
-import flighthq.types.MorphShape.MorphShapeGradientPaintBinding;
-import flighthq.types.MorphShape.MorphShapeLineEndpoint;
-import flighthq.types.MorphShape.MorphShapeLinePaintBinding;
-import flighthq.types.MorphShape.MorphShapePaintBinding;
-import flighthq.types.MorphShape.MorphShapeTexturePaintBinding;
+import flighthq.types.MorphShapeColorEndpoint;
+import flighthq.types.MorphShapeColorPaintBinding;
+import flighthq.types.MorphShapeData;
+import flighthq.types.MorphShapeGradientEndpoint;
+import flighthq.types.MorphShapeGradientPaintBinding;
+import flighthq.types.MorphShapeLineEndpoint;
+import flighthq.types.MorphShapeLinePaintBinding;
+import flighthq.types.MorphShapePaintBinding;
+import flighthq.types.MorphShapeTexturePaintBinding;
 import flighthq.types.Shape;
-import flighthq.types.ShapeCommand.CapsStyle;
-import flighthq.types.ShapeCommand.GradientType;
-import flighthq.types.ShapeCommand.InterpolationMethod;
-import flighthq.types.ShapeCommand.JointStyle;
-import flighthq.types.ShapeCommand.LineScaleMode;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
-import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.SpreadMethod;
 import flighthq.types.Texture;
 
+@:noCompletion
 class MorphShapePaint {
   public static function appendMorphShapeBeginFill(shape:MorphShape, start:MorphShapeColorEndpoint, end:MorphShapeColorEndpoint):Void {
     var commandIndex:Float = cast _Runtime.UNDEFINED;

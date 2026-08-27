@@ -8,10 +8,11 @@ import flighthq.texture.Texture.getTextureSource;
 import flighthq.types.DomRenderState;
 import flighthq.types.Image;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
+@:noCompletion
 class DomImageTextureResolver {
   public static function registerDomImageTextureResolver(state:DomRenderState):Void {
     registerDomTextureResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast ImageTextureSourceKind : String), (cast DomImageTextureResolver.resolveDomImageTexture__domImageTextureResolver : Dynamic));

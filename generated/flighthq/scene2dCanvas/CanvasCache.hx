@@ -23,24 +23,25 @@ import flighthq.scene2dCanvas.CanvasRenderTarget.resizeCanvasRenderTarget;
 import flighthq.scene2dCanvas.CanvasRenderTarget.setCanvasRenderTransform2D;
 import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
+import flighthq.types.CanvasRenderStateRuntime;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.Scene2DRenderer;
+import flighthq.types.Scene3DGraphSyncPolicy;
 
 typedef CanvasRenderStateHandles__canvasCache = { >CanvasRenderState, var canvas:flighthq._internal.dom.HTMLCanvasElement; var context:flighthq._internal.dom.CanvasRenderingContext2D; };
 
+@:noCompletion
 class CanvasCache {
   public static function createCanvasCacheState(screenState:CanvasRenderState):CanvasRenderState {
     return cast (cast createCanvasOffscreenRenderState(({ final __callArgument0:Dynamic = screenState; __callArgument0; })) : CanvasRenderState);
@@ -62,8 +63,9 @@ class CanvasCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache):Void {
     var targets:flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     targets = (cast CanvasCache.getTargets__canvasCache(({ final __callArgument14:Dynamic = state; __callArgument14; })) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>);
@@ -81,8 +83,9 @@ class CanvasCache {
     registerRenderCacheRenderer(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = defaultCanvasRenderCacheRenderer; __callArgument17; }));
   }
 
-  @:noCompletion
-  public static function ensureCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache, width:Float, height:Float):CanvasRenderTarget {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache, width:Float, height:Float):CanvasRenderTarget {
     var targets:flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     targets = (cast CanvasCache.getTargets__canvasCache(({ final __callArgument20:Dynamic = state; __callArgument20; })) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>);
@@ -97,14 +100,16 @@ class CanvasCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getCanvasRenderCacheScreenState(state:CanvasRenderState):CanvasRenderState {
+  @:allow(flighthq)
+  @:keep
+  private static function getCanvasRenderCacheScreenState(state:CanvasRenderState):CanvasRenderState {
     return cast _Runtime.coalesce(((cast CanvasCache._cacheStateScreen__canvasCache : flighthq._internal._WeakMap<CanvasRenderState, CanvasRenderState>).get(state)), function():Dynamic return cast state);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache):Null<CanvasRenderTarget> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCanvasRenderCacheTarget(state:CanvasRenderState, cache:RenderCache):Null<CanvasRenderTarget> {
     return cast _Runtime.coalesce(((cast (cast CanvasCache.getTargets__canvasCache(({ final __callArgument26:Dynamic = state; __callArgument26; })) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
@@ -152,8 +157,9 @@ class CanvasCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static function releaseCanvasRenderCache(state:CanvasRenderState, cache:RenderCache):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function releaseCanvasRenderCache(state:CanvasRenderState, cache:RenderCache):Void {
     ((cast (cast CanvasCache.getTargets__canvasCache(({ final __callArgument73:Dynamic = state; __callArgument73; })) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>) : flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>).delete_(cache));
   }
 
@@ -181,8 +187,9 @@ class CanvasCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static final defaultCanvasRenderCacheRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: CanvasCache.drawCanvasRenderCache__canvasCache });
+  @:allow(flighthq)
+  @:keep
+  private static final defaultCanvasRenderCacheRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: CanvasCache.drawCanvasRenderCache__canvasCache });
 
   public static final _renderCacheTargets__canvasCache:flighthq._internal._WeakMap<CanvasRenderState, flighthq._internal._WeakMap<RenderCache, CanvasRenderTarget>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 

@@ -1,5 +1,7 @@
 package;
 
+@:access(flighthq.particleemitter.ParticleEmitter)
+@:access(flighthq.particles.ParticleEmitterState)
 class TypedStructParticleClassSmoke {
   static function main():Void {
     run();

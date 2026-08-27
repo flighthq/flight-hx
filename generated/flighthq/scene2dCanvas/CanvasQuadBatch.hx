@@ -12,25 +12,27 @@ import flighthq.scene2dCanvas.CanvasMaterialRegistry.applyCanvasMaterial;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.QuadBatch;
-import flighthq.types.QuadBatch.QuadBatchData;
+import flighthq.types.QuadBatchData;
 import flighthq.types.QuadTransformType;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureFilter;
 
+@:noCompletion
 class CanvasQuadBatch {
-  @:noCompletion
-  public static function drawCanvasQuadBatch(state:CanvasRenderState, quadBatch:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasQuadBatch(state:CanvasRenderState, quadBatch:RenderProxy2D):Void {
     var source:QuadBatch = cast _Runtime.UNDEFINED;
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
     var __destructure0:QuadBatchData = cast _Runtime.UNDEFINED;

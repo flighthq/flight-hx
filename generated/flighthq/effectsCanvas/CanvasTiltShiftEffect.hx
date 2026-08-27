@@ -5,16 +5,18 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasImageDataPass;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.TiltShiftEffect;
 
+@:noCompletion
 class CanvasTiltShiftEffect {
-  @:noCompletion
-  public static function applyTiltShiftEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:TiltShiftEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyTiltShiftEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:TiltShiftEffect):Void {
     var center:Float = cast _Runtime.UNDEFINED;
     var bandWidth:Float = cast _Runtime.UNDEFINED;
     var blur:Float = cast _Runtime.UNDEFINED;

@@ -3,13 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TiledTileset.TiledTilesetRef;
-import flighthq.types.Tilemap.TilemapData;
-
-typedef TiledCompression = String;
-
-typedef TiledInflate = flighthq._internal._UInt8Array->TiledCompression->Null<flighthq._internal._UInt8Array>;
 
 typedef TiledParseOptions = { @:optional var inflate:TiledInflate; };
-
-typedef TiledTilesetResolver = TiledTilesetRef->Null<{ var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }>;

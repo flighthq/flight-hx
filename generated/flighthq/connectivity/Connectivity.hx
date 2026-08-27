@@ -7,11 +7,11 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.BackendExplanation;
 import flighthq.types.Connectivity;
-import flighthq.types.Connectivity.ConnectivityBackend;
-import flighthq.types.Connectivity.ConnectivityConnectionType;
-import flighthq.types.Connectivity.ConnectivityReachability;
-import flighthq.types.Connectivity.ConnectivityReachabilityOptions;
-import flighthq.types.Connectivity.ConnectivityStatus;
+import flighthq.types.ConnectivityBackend;
+import flighthq.types.ConnectivityConnectionType;
+import flighthq.types.ConnectivityReachability;
+import flighthq.types.ConnectivityReachabilityOptions;
+import flighthq.types.ConnectivityStatus;
 import flighthq.types.Signal;
 
 typedef WebConnectivityConnection__connectivity = { @:optional var type:String; @:optional var downlink:Float; @:optional var downlinkMax:Float; @:optional var effectiveType:String; @:optional var rtt:Float; @:optional var saveData:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
@@ -111,14 +111,16 @@ class Connectivity {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createConnectivityStatus():ConnectivityStatus {
+  @:allow(flighthq)
+  @:keep
+  private static function createConnectivityStatus():ConnectivityStatus {
     return cast { downlink: -1.0, downlinkMax: -1.0, effectiveType: '', metered: false, online: false, rtt: -1.0, saveData: false, type: 'unknown' };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebConnectivityBackend():ConnectivityBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebConnectivityBackend():ConnectivityBackend {
     return cast { getStatus: function(out:ConnectivityStatus):ConnectivityStatus {
       var nav:Null<flighthq._internal.dom.Navigator> = cast _Runtime.UNDEFINED;
       var conn:Null<WebConnectivityConnection__connectivity> = cast _Runtime.UNDEFINED;
@@ -244,8 +246,9 @@ class Connectivity {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getConnectivityBackend():ConnectivityBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getConnectivityBackend():ConnectivityBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Connectivity._custom__connectivity, function():Dynamic return cast Connectivity._host__connectivity), function():Dynamic return cast Connectivity._sentinel__connectivity);
     return cast null;
   }
@@ -268,8 +271,9 @@ class Connectivity {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installConnectivityHostBackend(backend:ConnectivityBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installConnectivityHostBackend(backend:ConnectivityBackend):Void {
     if ((cast !_Runtime.strictEquals(Connectivity._host__connectivity, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Connectivity._host__connectivity, backend) : Bool)) { (Connectivity._hostConflict__connectivity = cast (true : Dynamic)); }
       return;
@@ -326,21 +330,24 @@ class Connectivity {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeConnectivityHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeConnectivityHostResult(operation:String, succeeded:Bool):Void {
     (Connectivity._hostObservation__connectivity = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
-  @:noCompletion
-  public static function resetConnectivityBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetConnectivityBackendForTest():Void {
     (Connectivity._custom__connectivity = cast (null : Dynamic));
     (Connectivity._host__connectivity = cast (null : Dynamic));
     (Connectivity._hostConflict__connectivity = cast (false : Dynamic));
     (Connectivity._hostObservation__connectivity = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setConnectivityBackend(backend:Null<ConnectivityBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setConnectivityBackend(backend:Null<ConnectivityBackend>):Void {
     (Connectivity._custom__connectivity = cast (backend : Dynamic));
   }
 }

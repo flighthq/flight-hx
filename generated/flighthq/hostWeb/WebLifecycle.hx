@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.lifecycle.Lifecycle.createWebLifecycleBackend;
 import flighthq.lifecycle.Lifecycle.installLifecycleHostBackend;
-import flighthq.types.Lifecycle.LifecycleBackend;
+import flighthq.types.LifecycleBackend;
 
+@:noCompletion
 class WebLifecycle {
   public static function enableHostWebLifecycle():Void {
     if ((cast WebLifecycle._enabled__webLifecycle : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebLifecycle {
     installLifecycleHostBackend((cast createWebLifecycleBackend() : LifecycleBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebLifecycleForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebLifecycleForTest():Void {
     (WebLifecycle._enabled__webLifecycle = cast (false : Dynamic));
   }
 

@@ -18,24 +18,25 @@ import flighthq.texture.Texture.hasTextureSource;
 import flighthq.types.BatchFormat;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlQuadBatchShader;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlQuadBatchShader;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.QuadBatch;
-import flighthq.types.QuadBatch.QuadBatchData;
+import flighthq.types.QuadBatchData;
 import flighthq.types.QuadTransformType;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.SpriteRenderer;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureLike;
 import flighthq.types.TintMaterialData;
 
+@:noCompletion
 class GlQuadBatch {
   public static final INSTANCE_FLOATS__glQuadBatch:Float = 13.0;
 

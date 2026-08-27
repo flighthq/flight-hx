@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.sensors.Sensors.createWebSensorsBackend;
 import flighthq.sensors.Sensors.installSensorsHostBackend;
-import flighthq.types.Sensors.SensorsBackend;
+import flighthq.types.SensorsBackend;
 
+@:noCompletion
 class WebSensors {
   public static function enableHostWebSensors():Void {
     if ((cast WebSensors._enabled__webSensors : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebSensors {
     installSensorsHostBackend((cast createWebSensorsBackend() : SensorsBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebSensorsForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebSensorsForTest():Void {
     (WebSensors._enabled__webSensors = cast (false : Dynamic));
   }
 

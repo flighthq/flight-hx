@@ -7,9 +7,11 @@ import flighthq.geometry.Typedarray.reserveFloat32Array;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.RandomSource;
 
+@:noCompletion
 class ParticleEmitterState {
-  @:noCompletion
-  public static final PARTICLE_VELOCITY_STRIDE:Float = 3.0;
+  @:allow(flighthq)
+  @:keep
+  private static final PARTICLE_VELOCITY_STRIDE:Float = 3.0;
 
   public static function createParticleEmitterState(?random:RandomSource):flighthq.types.ParticleEmitterState {
     if (random == null) random = cast (HxMath.random : Dynamic);
@@ -17,8 +19,9 @@ class ParticleEmitterState {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureParticleEmitterStateCapacity(state:flighthq.types.ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureParticleEmitterStateCapacity(state:flighthq.types.ParticleEmitterState, capacity:Float, hasColorVariance:Bool):Void {
     if ((cast ((cast _Runtime.field(state.lifetimes, 'length') : Float) >= (cast (capacity * 2.0) : Float)) : Bool)) {
       if ((cast ((cast hasColorVariance : Bool) && (cast ((cast _Runtime.field(state.colorBirth, 'length') : Float) < (cast (capacity * 3.0) : Float)) : Bool)) : Bool)) {
         (state.colorBirth = cast ((cast reserveFloat32Array(state.colorBirth, (cast (capacity * 3.0) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));

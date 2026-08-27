@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef AnimationTrackValidationCode = String;
-
 typedef AnimationTrackValidationDiagnostic = { var code:AnimationTrackValidationCode; var index:Null<Float>; var message:String; };

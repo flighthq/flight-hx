@@ -3,8 +3,9 @@ package flighthq.physics3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Physics3D.Physics3DWorld;
+import flighthq.types.Physics3DWorld;
 
+@:noCompletion
 class Physics3DSpatialIndexingGuards {
   public static function reportPhysics3DSpatialIndexing(world:Physics3DWorld):Void {
     _Runtime.callOptionalValue(Physics3DSpatialIndexingGuards.physics3DSpatialIndexingGuard__physics3DSpatialIndexingGuards, cast ([world] : Array<Dynamic>));

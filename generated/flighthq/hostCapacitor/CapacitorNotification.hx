@@ -4,20 +4,21 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorLocalNotificationAction;
-import flighthq.types.CapacitorApi.CapacitorLocalNotificationSchema;
-import flighthq.types.CapacitorApi.CapacitorLocalNotificationsPending;
-import flighthq.types.CapacitorApi.CapacitorLocalNotificationsPermission;
-import flighthq.types.CapacitorApi.CapacitorLocalNotificationsPlugin;
-import flighthq.types.CapacitorApi.CapacitorLocalNotificationsScheduleResult;
-import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
-import flighthq.types.Notification.NotificationBackend;
-import flighthq.types.Notification.NotificationCapabilities;
-import flighthq.types.Notification.NotificationPermission;
-import flighthq.types.Notification.NotificationRequest;
-import flighthq.types.Notification.NotificationSchedule;
-import flighthq.types.Notification.ScheduledNotification;
+import flighthq.types.CapacitorLocalNotificationAction;
+import flighthq.types.CapacitorLocalNotificationSchema;
+import flighthq.types.CapacitorLocalNotificationsPending;
+import flighthq.types.CapacitorLocalNotificationsPermission;
+import flighthq.types.CapacitorLocalNotificationsPlugin;
+import flighthq.types.CapacitorLocalNotificationsScheduleResult;
+import flighthq.types.CapacitorPluginListenerHandle;
+import flighthq.types.NotificationBackend;
+import flighthq.types.NotificationCapabilities;
+import flighthq.types.NotificationPermission;
+import flighthq.types.NotificationRequest;
+import flighthq.types.NotificationSchedule;
+import flighthq.types.ScheduledNotification;
 
+@:noCompletion
 class CapacitorNotification {
   public static function createCapacitorNotificationBackend(capacitor:CapacitorApi):NotificationBackend {
     var notifications:CapacitorLocalNotificationsPlugin = cast _Runtime.UNDEFINED;

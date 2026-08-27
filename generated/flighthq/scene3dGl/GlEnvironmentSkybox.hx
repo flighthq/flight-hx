@@ -13,6 +13,7 @@ import flighthq.types.Matrix4;
 
 typedef GlSkybox__glEnvironmentSkybox = { var locEnvCube:Null<flighthq._internal.dom.WebGLUniformLocation>; var locInverseViewProjection:Null<flighthq._internal.dom.WebGLUniformLocation>; var locIntensity:Null<flighthq._internal.dom.WebGLUniformLocation>; var program:flighthq._internal.dom.WebGLProgram; var vao:flighthq._internal.dom.WebGLVertexArrayObject; };
 
+@:noCompletion
 class GlEnvironmentSkybox {
   public static function drawGlEnvironmentSkybox(state:GlRenderState, environment:Environment, camera:Camera3D, aspect:Float):Void {
     var cube:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;

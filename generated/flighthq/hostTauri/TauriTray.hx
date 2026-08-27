@@ -3,33 +3,34 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Menu.MenuItemTemplate;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.MenuItemTemplate;
+import flighthq.types.RectangleLike;
 import flighthq.types.TauriApi;
-import flighthq.types.TauriApi.TauriMenu;
-import flighthq.types.TauriApi.TauriMenuFactory;
-import flighthq.types.TauriApi.TauriMenuItemFactory;
-import flighthq.types.TauriApi.TauriMenuItemHandle;
-import flighthq.types.TauriApi.TauriMenuItemOptions;
-import flighthq.types.TauriApi.TauriMenuModule;
-import flighthq.types.TauriApi.TauriMenuOptions;
-import flighthq.types.TauriApi.TauriPredefinedMenuItemFactory;
-import flighthq.types.TauriApi.TauriPredefinedMenuItemOptions;
-import flighthq.types.TauriApi.TauriSubmenuFactory;
-import flighthq.types.TauriApi.TauriSubmenuOptions;
-import flighthq.types.TauriApi.TauriTrayIcon;
-import flighthq.types.TauriApi.TauriTrayIconEvent;
-import flighthq.types.TauriApi.TauriTrayIconFactory;
-import flighthq.types.TauriApi.TauriTrayIconOptions;
-import flighthq.types.TauriApi.TauriTrayModule;
-import flighthq.types.Tray.TrayBackend;
-import flighthq.types.Tray.TrayCapabilities;
-import flighthq.types.Tray.TrayEventData;
-import flighthq.types.Tray.TrayEventType;
-import flighthq.types.Tray.TrayIconOptions;
+import flighthq.types.TauriMenu;
+import flighthq.types.TauriMenuFactory;
+import flighthq.types.TauriMenuItemFactory;
+import flighthq.types.TauriMenuItemHandle;
+import flighthq.types.TauriMenuItemOptions;
+import flighthq.types.TauriMenuModule;
+import flighthq.types.TauriMenuOptions;
+import flighthq.types.TauriPredefinedMenuItemFactory;
+import flighthq.types.TauriPredefinedMenuItemOptions;
+import flighthq.types.TauriSubmenuFactory;
+import flighthq.types.TauriSubmenuOptions;
+import flighthq.types.TauriTrayIcon;
+import flighthq.types.TauriTrayIconEvent;
+import flighthq.types.TauriTrayIconFactory;
+import flighthq.types.TauriTrayIconOptions;
+import flighthq.types.TauriTrayModule;
+import flighthq.types.TrayBackend;
+import flighthq.types.TrayCapabilities;
+import flighthq.types.TrayEventData;
+import flighthq.types.TrayEventType;
+import flighthq.types.TrayIconOptions;
 
 typedef TrayRecord__tauriTray = { var icon:Null<TauriTrayIcon>; var title:String; var tooltip:String; };
 
+@:noCompletion
 class TauriTray {
   public static function createTauriTrayBackend(tauri:TauriApi):TrayBackend {
     var trayModule:TauriTrayModule = cast _Runtime.UNDEFINED;

@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef IpcErrorCode = String;
-
 typedef IpcError = { var code:IpcErrorCode; var message:String; var channel:String; };

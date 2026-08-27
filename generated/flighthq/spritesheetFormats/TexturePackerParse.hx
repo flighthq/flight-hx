@@ -12,14 +12,15 @@ import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 import flighthq.types.TextureAtlas;
-import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
+import flighthq.types.TextureAtlasPackerDocument;
 import flighthq.types.TextureAtlasRegion;
-import flighthq.types.TexturePackerSchema.TexturePackerDocument;
-import flighthq.types.TexturePackerSchema.TexturePackerFrameTag;
-import flighthq.types.TexturePackerSchema.TexturePackerMeta;
-import flighthq.types.TexturePackerSchema.TexturePackerParsed;
-import flighthq.types.TexturePackerSchema.TexturePackerSize;
+import flighthq.types.TexturePackerDocument;
+import flighthq.types.TexturePackerFrameTag;
+import flighthq.types.TexturePackerMeta;
+import flighthq.types.TexturePackerParsed;
+import flighthq.types.TexturePackerSize;
 
+@:noCompletion
 class TexturePackerParse {
   public static function frameFromRegion__texturePackerParse(region:TextureAtlasRegion):SpritesheetFrameData {
     return cast (cast createSpritesheetFrameData(({ final __callArgument0:Dynamic = { height: region.height, name: _Runtime.coalesce(region.name, function():Dynamic return cast ''), offsetX: region.sourceX, offsetY: region.sourceY, pivotX: region.pivotX, pivotY: region.pivotY, rotated: region.rotated, sourceHeight: _Runtime.coalesce(region.originalHeight, function():Dynamic return cast region.height), sourceWidth: _Runtime.coalesce(region.originalWidth, function():Dynamic return cast region.width), width: region.width, x: region.x, y: region.y }; __callArgument0; })) : SpritesheetFrameData);

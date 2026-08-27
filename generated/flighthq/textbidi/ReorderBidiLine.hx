@@ -4,6 +4,7 @@ package flighthq.textbidi;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class ReorderBidiLine {
   public static function reorderBidiLine(levels:flighthq._internal._UInt8Array, start:Float, end:Float, out:Array<Float>):Void {
     var count:Float = cast _Runtime.UNDEFINED;

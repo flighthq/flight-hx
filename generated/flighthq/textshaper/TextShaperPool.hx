@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.textshaper.TextShaperRun.createShapedRun;
 import flighthq.types.ShapedRun;
 
+@:noCompletion
 class TextShaperPool {
   public static function acquireShapedRun():ShapedRun {
     var pooled:Null<ShapedRun> = cast _Runtime.UNDEFINED;
@@ -27,8 +28,9 @@ class TextShaperPool {
     }
   }
 
-  @:noCompletion
-  public static function setShapedRunReleaseGuard(guard:Null<ShapedRun->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setShapedRunReleaseGuard(guard:Null<ShapedRun->Void>):Void {
     (TextShaperPool._releaseGuard__textShaperPool = cast (guard : Dynamic));
   }
 

@@ -6,16 +6,19 @@ import flighthq._internal._Runtime;
 import flighthq.clip.ClipRegion.setClipRegionReleaseGuard;
 import flighthq.log.Log.logOnce;
 import flighthq.types.ClipRegion;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableClipGuards {
-  @:noCompletion
-  public static function disableClipGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function disableClipGuards():Void {
     setClipRegionReleaseGuard((cast null : Dynamic));
   }
 
-  @:noCompletion
-  public static function enableClipGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableClipGuards():Void {
     setClipRegionReleaseGuard((cast EnableClipGuards.warnOnDoubleRelease__enableClipGuards : Dynamic));
   }
 

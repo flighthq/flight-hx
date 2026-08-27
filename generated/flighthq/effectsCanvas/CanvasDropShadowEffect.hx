@@ -14,20 +14,22 @@ import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasImage;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.compositeCanvasSourceMode;
 import flighthq.effectsCanvas.CanvasSourceModeCompositing.drawCanvasTintedAlphaMask;
 import flighthq.types.CanvasEffectSourceMode;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
+import flighthq.types.CanvasRenderTargetPool;
 import flighthq.types.DropShadowEffect;
 import flighthq.types.EffectSourceMode;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class CanvasDropShadowEffect {
-  @:noCompletion
+  @:allow(flighthq)
+  @:keep
   @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:DropShadowEffect):Void {})
   @:overload(function(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:DropShadowEffect):Void {})
-  public static function applyDropShadowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, DropShadowEffect>, ?maybeEffect:DropShadowEffect):Void {
+  private static function applyDropShadowEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, poolOrEffect:flighthq._internal._Union2<CanvasRenderTargetPool, DropShadowEffect>, ?maybeEffect:DropShadowEffect):Void {
     var effect:DropShadowEffect = cast _Runtime.UNDEFINED;
     var css:Null<String> = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;

@@ -17,27 +17,27 @@ import flighthq.types.BlendMode;
 import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleEmitter3D;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
+import flighthq.types.ParticleEmitterData;
 import flighthq.types.RenderState;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.TextureFilter;
-import flighthq.types.Sampler.TextureWrap;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureFilter;
+import flighthq.types.TextureLike;
+import flighthq.types.TextureWrap;
 import flighthq.types.Types.ParticleEmitter3DKind;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
@@ -45,6 +45,7 @@ typedef WgpuParticle3DInstanceBuffer__wgpuParticleEmitter3D = { var buffer:fligh
 
 typedef WgpuParticle3DResources__wgpuParticleEmitter3D = { var cornerBuffer:flighthq._internal.dom.GPUBuffer; var frameBindGroup:flighthq._internal.dom.GPUBindGroup; var frameBuffer:flighthq._internal.dom.GPUBuffer; var frameLayout:flighthq._internal.dom.GPUBindGroupLayout; var indexBuffer:flighthq._internal.dom.GPUBuffer; var instanceBuffers:flighthq._internal._WeakMap<ParticleEmitter3D, WgpuParticle3DInstanceBuffer__wgpuParticleEmitter3D>; var instanceData:flighthq._internal._Float32Array; var module:flighthq._internal.dom.GPUShaderModule; var pipelineLayout:flighthq._internal.dom.GPUPipelineLayout; var pipelines:flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>; var textureLayout:flighthq._internal.dom.GPUBindGroupLayout; };
 
+@:noCompletion
 class WgpuParticleEmitter3D {
   public static final INSTANCE_FLOATS__wgpuParticleEmitter3D:Float = 16.0;
 
@@ -295,8 +296,9 @@ class WgpuParticleEmitter3D {
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyWgpuParticleEmitter3DResources(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuParticleEmitter3DResources(state:WgpuRenderState):Void {
     var resources:Null<WgpuParticle3DResources__wgpuParticleEmitter3D> = cast _Runtime.UNDEFINED;
     resources = ((cast WgpuParticleEmitter3D.resourceCache__wgpuParticleEmitter3D : flighthq._internal._WeakMap<WgpuRenderState, WgpuParticle3DResources__wgpuParticleEmitter3D>).get(state));
     if ((cast _Runtime.strictEquals(resources, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -307,8 +309,9 @@ class WgpuParticleEmitter3D {
     ((cast WgpuParticleEmitter3D.dummyTextureCache__wgpuParticleEmitter3D : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal.dom.GPUTextureView>).delete_(state));
   }
 
-  @:noCompletion
-  public static function drawWgpuScene3DParticleEmitter3Ds(state:WgpuRenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuScene3DParticleEmitter3Ds(state:WgpuRenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var list:Scene3DRenderList = cast _Runtime.UNDEFINED;
     var resources:WgpuParticle3DResources__wgpuParticleEmitter3D = cast _Runtime.UNDEFINED;

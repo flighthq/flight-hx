@@ -9,19 +9,21 @@ import flighthq.scene2dGl.GlQuadBatchWriter.ensureGlQuadBatchShader;
 import flighthq.scene2dGl.GlQuadBatchWriter.setGlQuadBatchWorldAndTexture;
 import flighthq.scene2dGl.GlQuadBatchWriter.useGlQuadBatchProgram;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlQuadBatchShader;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlQuadBatchShader;
 import flighthq.types.Material;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
+@:noCompletion
 class GlStandardMaterial {
   public static function registerGlStandardMaterial(state:GlRenderState):Void {
     registerGlMaterialRenderer(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast StandardMaterialKindValue : String), ({ final __callArgument1:Dynamic = standardGlMaterialRenderer; __callArgument1; }));
   }
 
-  @:noCompletion
-  public static final standardGlMaterialRenderer:GlMaterialRenderer = (cast { instanceFloatCount: 0.0, bind: function(state:GlRenderState, material:Null<Material>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final standardGlMaterialRenderer:GlMaterialRenderer = (cast { instanceFloatCount: 0.0, bind: function(state:GlRenderState, material:Null<Material>):Void {
     var shader:GlQuadBatchShader = cast _Runtime.UNDEFINED;
     shader = (cast ensureGlQuadBatchShader(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlQuadBatchShader);
     useGlQuadBatchProgram(({ final __callArgument6:Dynamic = state; __callArgument6; }), (cast shader : GlQuadBatchShader).program);

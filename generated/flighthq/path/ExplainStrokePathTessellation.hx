@@ -15,6 +15,7 @@ import flighthq.types.StrokePathTessellationExplanation;
 import flighthq.types.StrokePathTessellationReason;
 import flighthq.types.StrokeStyle;
 
+@:noCompletion
 class ExplainStrokePathTessellation {
   public static function explainStrokePathTessellation(path:Path, style:StrokeStyle, tolerance:Float = 0.25):StrokePathTessellationExplanation {
     var geometry:{ var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; } = cast _Runtime.UNDEFINED;

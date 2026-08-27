@@ -6,12 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.shortcut.Shortcut.setShortcutDropGuard;
 import flighthq.types.AcceleratorParseError;
-import flighthq.types.AcceleratorParseError.AcceleratorParseErrorReason;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.AcceleratorParseErrorReason;
+import flighthq.types.LogLevel;
 import flighthq.types.ShortcutDrop;
-import flighthq.types.ShortcutDrop.ShortcutDropReason;
-import flighthq.types.ShortcutDrop.ShortcutOperation;
+import flighthq.types.ShortcutDropReason;
+import flighthq.types.ShortcutOperation;
 
+@:noCompletion
 class EnableShortcutGuards {
   public static function disableShortcutGuards():Void {
     setShortcutDropGuard((cast null : Dynamic));

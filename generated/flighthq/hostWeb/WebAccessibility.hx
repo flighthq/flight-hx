@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.accessibility.Accessibility.createWebAccessibilityBackend;
 import flighthq.accessibility.Accessibility.installAccessibilityHostBackend;
-import flighthq.types.Accessibility.AccessibilityBackend;
+import flighthq.types.AccessibilityBackend;
 
+@:noCompletion
 class WebAccessibility {
   public static function enableHostWebAccessibility():Void {
     if ((cast WebAccessibility._enabled__webAccessibility : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebAccessibility {
     installAccessibilityHostBackend((cast (#if js _Runtime.callValue(createWebAccessibilityBackend, cast ([] : Array<Dynamic>)) #else createWebAccessibilityBackend(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : AccessibilityBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebAccessibilityForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebAccessibilityForTest():Void {
     (WebAccessibility._enabled__webAccessibility = cast (false : Dynamic));
   }
 

@@ -12,20 +12,21 @@ import flighthq.shape.MorphShapePaint.sampleMorphShapePaintBindings;
 import flighthq.shape.Shape.createShapeRuntime;
 import flighthq.shape.ShapeCommands.appendShapePath;
 import flighthq.types.MorphShape;
-import flighthq.types.MorphShape.MorphShapeData;
-import flighthq.types.MorphShape.MorphShapePaintBinding;
-import flighthq.types.MorphShape.MorphShapePathBinding;
-import flighthq.types.MorphShape.MorphShapeRuntime;
+import flighthq.types.MorphShapeData;
+import flighthq.types.MorphShapePaintBinding;
+import flighthq.types.MorphShapePathBinding;
+import flighthq.types.MorphShapeRuntime;
 import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.Path;
 import flighthq.types.PathMorph;
+import flighthq.types.PathWinding;
 import flighthq.types.Shape;
-import flighthq.types.ShapeCommand.PathWinding;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types.Types.MorphShapeKind;
 import flighthq.types._internal._MorphShapeValues.MorphShapeKind;
 
+@:noCompletion
 class MorphShape {
   public static function appendMorphShapePath(shape:flighthq.types.MorphShape, ?morph:PathMorph):Path {
     if (morph == null) morph = cast ((cast shape.data : { var morph:PathMorph; }).morph : Dynamic);
@@ -49,8 +50,9 @@ class MorphShape {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createMorphShapeData(morph:PathMorph, ?data:{ @:optional var morph:Null<PathMorph>; @:optional var path:Null<Path>; @:optional var paintBindings:Null<Array<MorphShapePaintBinding>>; @:optional var pathBindings:Null<Array<MorphShapePathBinding>>; @:optional var progress:Null<Float>; @:optional var commands:Null<Array<ShapeCommandToken>>; }):MorphShapeData {
+  @:allow(flighthq)
+  @:keep
+  private static function createMorphShapeData(morph:PathMorph, ?data:{ @:optional var morph:Null<PathMorph>; @:optional var path:Null<Path>; @:optional var paintBindings:Null<Array<MorphShapePaintBinding>>; @:optional var pathBindings:Null<Array<MorphShapePathBinding>>; @:optional var progress:Null<Float>; @:optional var commands:Null<Array<ShapeCommandToken>>; }):MorphShapeData {
     var progress:Float = cast _Runtime.UNDEFINED;
     var path:Path = cast _Runtime.UNDEFINED;
     var pathBindings:Array<{ var morph:PathMorph; var path:Path; }> = cast _Runtime.UNDEFINED;
@@ -81,14 +83,16 @@ class MorphShape {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createMorphShapeRuntime():MorphShapeRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createMorphShapeRuntime():MorphShapeRuntime {
     return cast (cast createShapeRuntime() : MorphShapeRuntime);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getMorphShapeRuntime(source:flighthq.types.MorphShape):MorphShapeRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getMorphShapeRuntime(source:flighthq.types.MorphShape):MorphShapeRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument17:Dynamic = source; __callArgument17; })) : MorphShapeRuntime);
     return cast null;
   }

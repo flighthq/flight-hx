@@ -6,11 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationInterpolation;
 import flighthq.types.AnimationTrack;
-import flighthq.types.Skeleton2DGuards.Skeleton2DCoercedInterpolation;
+import flighthq.types.Skeleton2DCoercedInterpolation;
 
+@:noCompletion
 class ExplainSkeleton2DChannel {
-  @:noCompletion
-  public static function explainSkeleton2DChannelInterpolation(channel:AnimationChannel, subject:String):Null<Skeleton2DCoercedInterpolation> {
+  @:allow(flighthq)
+  @:keep
+  private static function explainSkeleton2DChannelInterpolation(channel:AnimationChannel, subject:String):Null<Skeleton2DCoercedInterpolation> {
     var stated:AnimationInterpolation = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast isSkeleton2DSteppedChannelSubject((cast subject : String)) : Bool) : Bool) : Bool)) { return cast null; }
     stated = (cast channel.track : { var interpolation:AnimationInterpolation; }).interpolation;
@@ -19,8 +21,9 @@ class ExplainSkeleton2DChannel {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isSkeleton2DSteppedChannelSubject(subject:String):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isSkeleton2DSteppedChannelSubject(subject:String):Bool {
     return cast ((cast _Runtime.strictEquals(subject, ExplainSkeleton2DChannel.ATTACHMENT_SUBJECT__explainSkeleton2DChannel) : Bool) || (cast _Runtime.strictEquals(subject, ExplainSkeleton2DChannel.DRAW_ORDER_SUBJECT__explainSkeleton2DChannel) : Bool));
     return cast null;
   }

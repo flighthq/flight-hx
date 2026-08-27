@@ -4,30 +4,31 @@ package flighthq.spatial;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.spatial.UniformGrid3D.createUniformGridSpatialBackend3D;
-import flighthq.types.Spatial.SpatialAabb3D;
-import flighthq.types.Spatial.SpatialFrustum3D;
-import flighthq.types.Spatial.SpatialIndex3D;
-import flighthq.types.Spatial.SpatialIndexBackend3D;
-import flighthq.types.Spatial.SpatialIndexRuntime3D;
-import flighthq.types.Spatial.SpatialObjectId;
-import flighthq.types.Spatial.SpatialPair;
+import flighthq.types.SpatialAabb3D;
+import flighthq.types.SpatialFrustum3D;
+import flighthq.types.SpatialIndex3D;
+import flighthq.types.SpatialIndexBackend3D;
+import flighthq.types.SpatialIndexRuntime3D;
+import flighthq.types.SpatialObjectId;
+import flighthq.types.SpatialPair;
 
+@:noCompletion
 class SpatialIndex3D {
-  public static function clearSpatialIndex3D(index:flighthq.types.Spatial.SpatialIndex3D):Void {
+  public static function clearSpatialIndex3D(index:flighthq.types.SpatialIndex3D):Void {
     (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime3D).backend : SpatialIndexBackend3D).clearSpatialIndex();
   }
 
-  public static function createSpatialIndex3D(?backend:SpatialIndexBackend3D):flighthq.types.Spatial.SpatialIndex3D {
+  public static function createSpatialIndex3D(?backend:SpatialIndexBackend3D):flighthq.types.SpatialIndex3D {
     return cast { runtime: { backend: _Runtime.coalesce(backend, function():Dynamic return cast (cast createUniformGridSpatialBackend3D((cast SpatialIndex3D.DEFAULT_SPATIAL_CELL_SIZE_3D__spatialIndex3D : Float)) : SpatialIndexBackend3D)) } };
     return cast null;
   }
 
-  public static function insertSpatialObject3D(index:flighthq.types.Spatial.SpatialIndex3D, id:SpatialObjectId, bounds:SpatialAabb3D):Bool {
+  public static function insertSpatialObject3D(index:flighthq.types.SpatialIndex3D, id:SpatialObjectId, bounds:SpatialAabb3D):Bool {
     return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime3D).backend : SpatialIndexBackend3D).insertSpatialObject((cast id : Float), ({ final __callArgument0:Dynamic = bounds; __callArgument0; }));
     return cast null;
   }
 
-  public static function querySpatialFrustum3D(index:flighthq.types.Spatial.SpatialIndex3D, frustum:SpatialFrustum3D, out:Array<SpatialObjectId>, slices:Float = 8.0):Void {
+  public static function querySpatialFrustum3D(index:flighthq.types.SpatialIndex3D, frustum:SpatialFrustum3D, out:Array<SpatialObjectId>, slices:Float = 8.0):Void {
     var corners:Array<Float> = cast _Runtime.UNDEFINED;
     var steps:Float = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
@@ -83,23 +84,23 @@ class SpatialIndex3D {
     }
   }
 
-  public static function querySpatialPairs3D(index:flighthq.types.Spatial.SpatialIndex3D, out:Array<SpatialPair>):Void {
+  public static function querySpatialPairs3D(index:flighthq.types.SpatialIndex3D, out:Array<SpatialPair>):Void {
     (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime3D).backend : SpatialIndexBackend3D).querySpatialPairs(({ final __callArgument7:Dynamic = out; __callArgument7; }));
   }
 
-  public static function querySpatialPoint3D(index:flighthq.types.Spatial.SpatialIndex3D, x:Float, y:Float, z:Float, out:Array<SpatialObjectId>):Void {
+  public static function querySpatialPoint3D(index:flighthq.types.SpatialIndex3D, x:Float, y:Float, z:Float, out:Array<SpatialObjectId>):Void {
     (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime3D).backend : SpatialIndexBackend3D).querySpatialPoint((cast x : Float), (cast y : Float), (cast z : Float), ({ final __callArgument8:Dynamic = out; __callArgument8; }));
   }
 
-  public static function querySpatialRay3D(index:flighthq.types.Spatial.SpatialIndex3D, x:Float, y:Float, z:Float, dx:Float, dy:Float, dz:Float, out:Array<SpatialObjectId>):Void {
+  public static function querySpatialRay3D(index:flighthq.types.SpatialIndex3D, x:Float, y:Float, z:Float, dx:Float, dy:Float, dz:Float, out:Array<SpatialObjectId>):Void {
     (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime3D).backend : SpatialIndexBackend3D).querySpatialRay((cast x : Float), (cast y : Float), (cast z : Float), (cast dx : Float), (cast dy : Float), (cast dz : Float), ({ final __callArgument9:Dynamic = out; __callArgument9; }));
   }
 
-  public static function querySpatialRegion3D(index:flighthq.types.Spatial.SpatialIndex3D, region:SpatialAabb3D, out:Array<SpatialObjectId>):Void {
+  public static function querySpatialRegion3D(index:flighthq.types.SpatialIndex3D, region:SpatialAabb3D, out:Array<SpatialObjectId>):Void {
     (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime3D).backend : SpatialIndexBackend3D).querySpatialRegion(({ final __callArgument10:Dynamic = region; __callArgument10; }), ({ final __callArgument11:Dynamic = out; __callArgument11; }));
   }
 
-  public static function querySpatialSphere3D(index:flighthq.types.Spatial.SpatialIndex3D, x:Float, y:Float, z:Float, radius:Float, out:Array<SpatialObjectId>):Void {
+  public static function querySpatialSphere3D(index:flighthq.types.SpatialIndex3D, x:Float, y:Float, z:Float, radius:Float, out:Array<SpatialObjectId>):Void {
     _Runtime.setLength(out, 0.0);
     if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([x] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([y] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([z] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(radius, 0.0, '>=') : Bool) : Bool)) : Bool)) { return; }
     ((cast SpatialIndex3D.queryRegionScratch__spatialIndex3D : SpatialAabb3D).minX = (x - radius));
@@ -111,11 +112,11 @@ class SpatialIndex3D {
     (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime3D).backend : SpatialIndexBackend3D).querySpatialRegion(({ final __callArgument12:Dynamic = SpatialIndex3D.queryRegionScratch__spatialIndex3D; __callArgument12; }), ({ final __callArgument13:Dynamic = out; __callArgument13; }));
   }
 
-  public static function removeSpatialObject3D(index:flighthq.types.Spatial.SpatialIndex3D, id:SpatialObjectId):Void {
+  public static function removeSpatialObject3D(index:flighthq.types.SpatialIndex3D, id:SpatialObjectId):Void {
     (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime3D).backend : SpatialIndexBackend3D).removeSpatialObject((cast id : Float));
   }
 
-  public static function updateSpatialObject3D(index:flighthq.types.Spatial.SpatialIndex3D, id:SpatialObjectId, bounds:SpatialAabb3D):Bool {
+  public static function updateSpatialObject3D(index:flighthq.types.SpatialIndex3D, id:SpatialObjectId, bounds:SpatialAabb3D):Bool {
     return cast (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime3D).backend : SpatialIndexBackend3D).updateSpatialObject((cast id : Float), ({ final __callArgument14:Dynamic = bounds; __callArgument14; }));
     return cast null;
   }

@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.protocol.Protocol.installProtocolHostBackend;
 import flighthq.protocol.Protocol.observeProtocolHostResult;
-import flighthq.types.Protocol.ProtocolBackend;
+import flighthq.types.ProtocolBackend;
 
+@:noCompletion
 class WebProtocol {
   public static function enableHostWebProtocol():Void {
     var backend:ProtocolBackend = cast _Runtime.UNDEFINED;
@@ -78,8 +79,9 @@ class WebProtocol {
     installProtocolHostBackend(({ final __callArgument1:Dynamic = backend; __callArgument1; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebProtocolForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebProtocolForTest():Void {
     (WebProtocol._enabled__webProtocol = cast (false : Dynamic));
   }
 

@@ -8,9 +8,10 @@ import flighthq.skeleton2dFormats.SpineBinaryReader.isSpineBinaryReaderOverrun;
 import flighthq.skeleton2dFormats.SpineBinaryReader.readSpineBinaryString;
 import flighthq.skeleton2dFormats.SpineBinaryReader.skipSpineBinaryBytes;
 import flighthq.types.ByteReader;
-import flighthq.types.SpineBinaryVersion.SpineBinaryVersionFailure;
-import flighthq.types.SpineBinaryVersion.SpineBinaryVersionFailureReason;
+import flighthq.types.SpineBinaryVersionFailure;
+import flighthq.types.SpineBinaryVersionFailureReason;
 
+@:noCompletion
 class SpineBinaryVersion {
   public static function explainSpineBinaryVersionFailure(bytes:flighthq._internal._UInt8Array):SpineBinaryVersionFailure {
     var v3Candidate:Null<String> = cast _Runtime.UNDEFINED;

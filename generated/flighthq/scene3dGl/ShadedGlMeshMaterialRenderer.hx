@@ -19,46 +19,48 @@ import flighthq.scene3dGl.GlScene3DTime.getGlScene3DTime;
 import flighthq.scene3dGl.GlShadedPrelude.ensureGlShadedProgram;
 import flighthq.shading.OrderModifierStack.orderModifierStack;
 import flighthq.types.Camera3D;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.GlLitProgram;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlMeshProgram;
+import flighthq.types.GlModifierBindContext;
 import flighthq.types.GlModifierSnippet;
-import flighthq.types.GlModifierSnippet.GlModifierBindContext;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlScene3DRuntime;
+import flighthq.types.GlShadedDefineKey;
 import flighthq.types.GlShadedProgram;
-import flighthq.types.GlShadedProgram.GlShadedDefineKey;
+import flighthq.types.KeyedTable;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Modifier;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.ShadedMaterial;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.ShadedMaterialKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
+@:noCompletion
 class ShadedGlMeshMaterialRenderer {
-  @:noCompletion
-  public static final shadedGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final shadedGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var shaded:Null<ShadedMaterial> = cast _Runtime.UNDEFINED;
     var modifiers:Array<Modifier> = cast _Runtime.UNDEFINED;

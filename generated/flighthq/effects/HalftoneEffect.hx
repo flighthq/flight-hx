@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HalftoneEffect;
 
+@:noCompletion
 class HalftoneEffect {
   public static function createHalftoneEffect(?options:{ @:optional var scale:Null<Float>; @:optional var angle:Null<Float>; }):flighthq.types.HalftoneEffect {
     if (options == null) options = cast ({  } : Dynamic);

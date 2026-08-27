@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 
 typedef Scene2D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var align:ViewportAlign; var color:Null<Float>; var root:Node2D; var scaleMode:ViewportScaleMode; var scene2dHeight:Float; var scene2dWidth:Float; };
-
-typedef Scene2DRuntime = { var binding:Null<flighthq._internal._Object>; var scene2dSignals:Null<Scene2DSignals>; };

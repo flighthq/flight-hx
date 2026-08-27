@@ -6,15 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.Signal;
+import flighthq.types.VideoChannel;
+import flighthq.types.VideoChannelState;
+import flighthq.types.VideoPlayOptions;
 import flighthq.types.VideoResource;
-import flighthq.types.VideoResource.VideoChannel;
-import flighthq.types.VideoResource.VideoChannelState;
-import flighthq.types.VideoResource.VideoPlayOptions;
 
 typedef VideoChannelRuntime__videoChannel = { var loopsRemaining:Float; var onEnded:Void->Void; };
 
+@:noCompletion
 class VideoChannel {
-  public static function getVideoChannelCurrentTime(channel:flighthq.types.VideoResource.VideoChannel):Float {
+  public static function getVideoChannelCurrentTime(channel:flighthq.types.VideoChannel):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast ((cast _Runtime.strictEquals(element, null) : Bool) || (cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) : Bool)) { return cast channel.currentTime; }
@@ -22,31 +23,31 @@ class VideoChannel {
     return cast null;
   }
 
-  public static function getVideoChannelDuration(channel:flighthq.types.VideoResource.VideoChannel):Float {
+  public static function getVideoChannelDuration(channel:flighthq.types.VideoChannel):Float {
     return cast channel.length;
     return cast null;
   }
 
-  public static function getVideoChannelHeight(channel:flighthq.types.VideoResource.VideoChannel):Float {
+  public static function getVideoChannelHeight(channel:flighthq.types.VideoChannel):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
     return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoHeight : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
-  public static function getVideoChannelWidth(channel:flighthq.types.VideoResource.VideoChannel):Float {
+  public static function getVideoChannelWidth(channel:flighthq.types.VideoChannel):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
     return cast ((cast !_Runtime.strictEquals(element, null) : Bool) ? (cast (cast element : flighthq._internal.dom.HTMLVideoElement).videoWidth : Dynamic) : (cast 0.0 : Dynamic));
     return cast null;
   }
 
-  public static function isVideoChannelPlaying(channel:flighthq.types.VideoResource.VideoChannel):Bool {
+  public static function isVideoChannelPlaying(channel:flighthq.types.VideoChannel):Bool {
     return cast _Runtime.strictEquals(channel.state, 'playing');
     return cast null;
   }
 
-  public static function pauseVideoChannel(channel:flighthq.types.VideoResource.VideoChannel):Void {
+  public static function pauseVideoChannel(channel:flighthq.types.VideoChannel):Void {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) { return; }
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
@@ -56,10 +57,10 @@ class VideoChannel {
     (cast element : flighthq._internal.dom.HTMLVideoElement).pause();
   }
 
-  public static function playVideoResource(source:VideoResource, ?options:VideoPlayOptions):Null<flighthq.types.VideoResource.VideoChannel> {
+  public static function playVideoResource(source:VideoResource, ?options:VideoPlayOptions):Null<flighthq.types.VideoChannel> {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     var runtime:Null<VideoChannelRuntime__videoChannel> = cast _Runtime.UNDEFINED;
-    var channel:flighthq.types.VideoResource.VideoChannel = cast _Runtime.UNDEFINED;
+    var channel:flighthq.types.VideoChannel = cast _Runtime.UNDEFINED;
     var onEnded:Void->Void = cast _Runtime.UNDEFINED;
     element = (cast VideoChannel.getVideoElement__videoChannel(({ final __callArgument2:Dynamic = source; __callArgument2; })) : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return cast null; }
@@ -80,12 +81,12 @@ class VideoChannel {
     return cast null;
   }
 
-  public static function resumeVideoChannel(channel:flighthq.types.VideoResource.VideoChannel):Void {
+  public static function resumeVideoChannel(channel:flighthq.types.VideoChannel):Void {
     if ((cast ((cast _Runtime.strictEquals(channel.state, 'playing') : Bool) || (cast _Runtime.strictEquals((cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>), null) : Bool)) : Bool)) { return; }
     VideoChannel.startVideoChannel__videoChannel(({ final __callArgument12:Dynamic = channel; __callArgument12; }));
   }
 
-  public static function setVideoChannelCurrentTime(channel:flighthq.types.VideoResource.VideoChannel, value:Float):Float {
+  public static function setVideoChannelCurrentTime(channel:flighthq.types.VideoChannel, value:Float):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     (channel.currentTime = cast ((cast VideoChannel.clamp__videoChannel((cast value : Float), (cast 0.0 : Float), (cast channel.length : Float)) : Float) : Float));
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
@@ -94,7 +95,7 @@ class VideoChannel {
     return cast null;
   }
 
-  public static function setVideoChannelGain(channel:flighthq.types.VideoResource.VideoChannel, value:Float):Float {
+  public static function setVideoChannelGain(channel:flighthq.types.VideoChannel, value:Float):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     (channel.gain = cast (value : Float));
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
@@ -103,7 +104,7 @@ class VideoChannel {
     return cast null;
   }
 
-  public static function setVideoChannelPlaybackRate(channel:flighthq.types.VideoResource.VideoChannel, value:Float):Float {
+  public static function setVideoChannelPlaybackRate(channel:flighthq.types.VideoChannel, value:Float):Float {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     (channel.playbackRate = cast (value : Float));
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
@@ -112,7 +113,7 @@ class VideoChannel {
     return cast null;
   }
 
-  public static function stopVideoChannel(channel:flighthq.types.VideoResource.VideoChannel):Void {
+  public static function stopVideoChannel(channel:flighthq.types.VideoChannel):Void {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast !_Runtime.strictEquals(element, null) : Bool)) {
@@ -137,7 +138,7 @@ class VideoChannel {
     return cast null;
   }
 
-  public static function completeVideoChannel__videoChannel(channel:flighthq.types.VideoResource.VideoChannel):Void {
+  public static function completeVideoChannel__videoChannel(channel:flighthq.types.VideoChannel):Void {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     var runtime:Null<VideoChannelRuntime__videoChannel> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(channel.state, 'playing') : Bool)) { return; }
@@ -154,7 +155,7 @@ class VideoChannel {
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[channel.onComplete]]), 1);
   }
 
-  public static function startVideoChannel__videoChannel(channel:flighthq.types.VideoResource.VideoChannel):Void {
+  public static function startVideoChannel__videoChannel(channel:flighthq.types.VideoChannel):Void {
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     element = (cast VideoChannel.getVideoElement__videoChannel(channel.source) : Null<flighthq._internal.dom.HTMLVideoElement>);
     if ((cast _Runtime.strictEquals(element, null) : Bool)) { return; }

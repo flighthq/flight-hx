@@ -20,21 +20,22 @@ import flighthq.types.ColorScaleBias;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.SpriteRenderer;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureLike;
 import flighthq.types.Tilemap;
-import flighthq.types.Tilemap.TilemapData;
+import flighthq.types.TilemapData;
 import flighthq.types.TintMaterialData;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
 
+@:noCompletion
 class WgpuTilemap {
   public static final INSTANCE_STRIDE_FLOATS__wgpuTilemap:Float = QUAD_BATCH_INSTANCE_FLOATS;
 

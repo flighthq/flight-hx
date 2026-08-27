@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.LensFlareEffect;
 
+@:noCompletion
 class LensFlareEffect {
   public static function createLensFlareEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var intensity:Null<Float>; @:optional var ghosts:Null<Float>; @:optional var halo:Null<Float>; }):flighthq.types.LensFlareEffect {
     if (options == null) options = cast ({  } : Dynamic);

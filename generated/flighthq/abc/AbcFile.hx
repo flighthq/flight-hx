@@ -3,24 +3,24 @@ package flighthq.abc;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Abc.AbcClass;
-import flighthq.types.Abc.AbcConstantPool;
-import flighthq.types.Abc.AbcException;
-import flighthq.types.Abc.AbcFile;
-import flighthq.types.Abc.AbcInstance;
-import flighthq.types.Abc.AbcMetadata;
-import flighthq.types.Abc.AbcMetadataItem;
-import flighthq.types.Abc.AbcMethod;
-import flighthq.types.Abc.AbcMethodBody;
-import flighthq.types.Abc.AbcMultiname;
-import flighthq.types.Abc.AbcMultinameKind;
 import flighthq.types.Abc.AbcMultinameKindValue;
-import flighthq.types.Abc.AbcNamespace;
-import flighthq.types.Abc.AbcOptionalValue;
-import flighthq.types.Abc.AbcScript;
-import flighthq.types.Abc.AbcTrait;
-import flighthq.types.Abc.AbcTraitKind;
 import flighthq.types.Abc.AbcTraitKindValue;
+import flighthq.types.AbcClass;
+import flighthq.types.AbcConstantPool;
+import flighthq.types.AbcException;
+import flighthq.types.AbcFile;
+import flighthq.types.AbcInstance;
+import flighthq.types.AbcMetadata;
+import flighthq.types.AbcMetadataItem;
+import flighthq.types.AbcMethod;
+import flighthq.types.AbcMethodBody;
+import flighthq.types.AbcMultiname;
+import flighthq.types.AbcMultinameKind;
+import flighthq.types.AbcNamespace;
+import flighthq.types.AbcOptionalValue;
+import flighthq.types.AbcScript;
+import flighthq.types.AbcTrait;
+import flighthq.types.AbcTraitKind;
 
 @:keep
 class AbcReader__abcFile {
@@ -97,8 +97,9 @@ class AbcReader__abcFile {
   }
 }
 
+@:noCompletion
 class AbcFile {
-  public static function readAbcFile(source:flighthq._internal._UInt8Array):Null<flighthq.types.Abc.AbcFile> {
+  public static function readAbcFile(source:flighthq._internal._UInt8Array):Null<flighthq.types.AbcFile> {
     var reader:AbcReader__abcFile = cast _Runtime.UNDEFINED;
     var minorVersion:Float = cast _Runtime.UNDEFINED;
     var majorVersion:Float = cast _Runtime.UNDEFINED;

@@ -6,39 +6,42 @@ import flighthq._internal._Runtime;
 import flighthq.render.ExplainScene2DCoverage.explainScene2DCoverage;
 import flighthq.render.ExplainScene2DCoverage.hasScene2DCoverage;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.CatalogEntry;
+import flighthq.types.CatalogRegistration;
+import flighthq.types.GlBlendRealization;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlBlendRealization;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.GlRenderStateRuntime;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.RequirementFacet;
 import flighthq.types.Scene2DKindUsage;
+import flighthq.types.SceneCoverage;
 import flighthq.types.SceneCoverageCatalog;
-import flighthq.types.SceneCoverageCatalog.CatalogEntry;
-import flighthq.types.SceneCoverageCatalog.CatalogRegistration;
 import flighthq.types.SceneCoverageEntry;
-import flighthq.types.SceneCoverageEntry.SceneCoverage;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._RequirementFacetValues.RequirementFacetValue;
 import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
+@:noCompletion
 class ExplainGlScene2DCoverage {
-  @:noCompletion
-  public static function explainGlScene2DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function explainGlScene2DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void {
     explainScene2DCoverage(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = usage; __callArgument2; }), ({ final __callArgument3:Dynamic = catalog; __callArgument3; }));
     (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = usage; __callArgument10; }), (cast false : Bool), ({ final __callArgument11:Dynamic = catalog; __callArgument11; })) : Bool);
   }
 
-  @:noCompletion
-  public static function hasGlScene2DCoverage(state:GlRenderState, usage:Scene2DKindUsage):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasGlScene2DCoverage(state:GlRenderState, usage:Scene2DKindUsage):Bool {
     if ((cast !(cast (cast hasScene2DCoverage(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = usage; __callArgument17; })) : Bool) : Bool) : Bool)) { return cast false; }
     return cast !(cast (cast ExplainGlScene2DCoverage.collectGlScene2DCoverageGaps__explainGlScene2DCoverage(({ final __callArgument20:Dynamic = null; __callArgument20; }), ({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = usage; __callArgument22; }), (cast true : Bool), ({ final __callArgument23:Dynamic = null; __callArgument23; })) : Bool) : Bool);
     return cast null;

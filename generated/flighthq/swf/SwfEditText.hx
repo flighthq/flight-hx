@@ -7,14 +7,15 @@ import flighthq.color.PackColor.packColor;
 import flighthq.text.RichText.createRichText;
 import flighthq.textMarkup.TextMarkup.parseTextMarkup;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
 import flighthq.types.RichTextContent;
+import flighthq.types.RichTextData;
 import flighthq.types.TextFormat;
-import flighthq.types.TextFormat.TextFormatAlign;
+import flighthq.types.TextFormatAlign;
 import flighthq.types.TextFormatRange;
 
 typedef SwfEditTextField__swfEditText = { var align:TextFormatAlign; var border:Bool; var color:Float; var fontHeight:Float; var fontId:Float; var hasColor:Bool; var height:Float; var html:Bool; var indent:Float; var leading:Float; var leftMargin:Float; var maxChars:Float; var multiline:Bool; var readOnly:Bool; var rightMargin:Float; var selectable:Bool; var text:String; var width:Float; var wordWrap:Bool; };
 
+@:noCompletion
 class SwfEditText {
   public static function readSwfEditTextFactory(reader:SwfReader, width:Float, height:Float):Null<(Float->String)->RichText> {
     var flags:Float = cast _Runtime.UNDEFINED;

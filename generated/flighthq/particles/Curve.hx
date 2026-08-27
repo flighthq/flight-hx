@@ -3,10 +3,11 @@ package flighthq.particles;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ColorKeyframe;
+import flighthq.types.CurveKeyframe;
 import flighthq.types.ParticleCurve;
-import flighthq.types.ParticleCurve.ColorKeyframe;
-import flighthq.types.ParticleCurve.CurveKeyframe;
 
+@:noCompletion
 class Curve {
   public static function buildParticleColorCurve(f:Float->Array<Float>, samples:Float = 33.0):Array<Float> {
     var n:Float = cast _Runtime.UNDEFINED;

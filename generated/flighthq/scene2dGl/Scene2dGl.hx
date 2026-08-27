@@ -25,12 +25,11 @@ import flighthq.scene2dGl.GlTextInput as Facade_Scene2dGl_flighthq_scene2dGl_GlT
 import flighthq.scene2dGl.GlTextLabel as Facade_Scene2dGl_flighthq_scene2dGl_GlTextLabel;
 import flighthq.scene2dGl.GlTilemap as Facade_Scene2dGl_flighthq_scene2dGl_GlTilemap;
 import flighthq.scene2dGl.GlVelocity as Facade_Scene2dGl_flighthq_scene2dGl_GlVelocity;
-import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
-import flighthq.types.Entity.Kind;
+import flighthq.types.CanvasShapeCommand;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlVelocityWriter;
-import flighthq.types.HasTransform2D.Transform2DNode;
+import flighthq.types.Kind;
 import flighthq.types.Node2D;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
@@ -39,7 +38,8 @@ import flighthq.types.RenderState;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.ShapeRasterizer;
 import flighthq.types.SpriteRenderer;
-import flighthq.types.Velocity.VelocityField;
+import flighthq.types.Transform2DNode;
+import flighthq.types.VelocityField;
 
 class Scene2dGl {
   public static function createGlCacheState(screenState:GlRenderState):GlRenderState {

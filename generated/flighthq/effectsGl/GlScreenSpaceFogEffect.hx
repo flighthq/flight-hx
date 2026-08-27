@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.ScreenSpaceFogEffect;
 
+@:noCompletion
 class GlScreenSpaceFogEffect {
-  @:noCompletion
-  public static function applyScreenSpaceFogEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<flighthq._internal.dom.WebGLTexture>, effect:ScreenSpaceFogEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyScreenSpaceFogEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, depthTexture:Null<flighthq._internal.dom.WebGLTexture>, effect:ScreenSpaceFogEffect):Void {
     var packed:Float = cast _Runtime.UNDEFINED;
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;

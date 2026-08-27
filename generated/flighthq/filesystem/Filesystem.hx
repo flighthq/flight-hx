@@ -5,15 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.dialog.Dialog.getWebFileSystemHandle;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Dialog.FileDialogHandle;
-import flighthq.types.FileSystem.FileEntry;
-import flighthq.types.FileSystem.FilePermissions;
-import flighthq.types.FileSystem.FileStat;
-import flighthq.types.FileSystem.FileSystemBackend;
-import flighthq.types.FileSystem.FileSystemPathKind;
-import flighthq.types.FileSystem.FileSystemUsage;
-import flighthq.types.FileSystem.FileWalkOptions;
-import flighthq.types.FileSystem.FileWatchEvent;
+import flighthq.types.FileDialogHandle;
+import flighthq.types.FileEntry;
+import flighthq.types.FilePermissions;
+import flighthq.types.FileStat;
+import flighthq.types.FileSystemBackend;
+import flighthq.types.FileSystemPathKind;
+import flighthq.types.FileSystemUsage;
+import flighthq.types.FileWalkOptions;
+import flighthq.types.FileWatchEvent;
 
 class Filesystem {
   public static var _custom__filesystem:Null<FileSystemBackend> = _Runtime.explicitNull();
@@ -163,8 +163,9 @@ class Filesystem {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebFileSystemBackend():FileSystemBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebFileSystemBackend():FileSystemBackend {
     return cast ({ var __thisValue0:Dynamic = null; __thisValue0 = { readTextFile: function(path:String):flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
@@ -1049,8 +1050,9 @@ class Filesystem {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getFileSystemBackend():FileSystemBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getFileSystemBackend():FileSystemBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Filesystem._custom__filesystem, function():Dynamic return cast Filesystem._host__filesystem), function():Dynamic return cast Filesystem._sentinel__filesystem);
     return cast null;
   }
@@ -1225,8 +1227,9 @@ class Filesystem {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installFileSystemHostBackend(backend:FileSystemBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installFileSystemHostBackend(backend:FileSystemBackend):Void {
     if ((cast !_Runtime.strictEquals(Filesystem._host__filesystem, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Filesystem._host__filesystem, backend) : Bool)) { (Filesystem._hostConflict__filesystem = cast (true : Dynamic)); }
       return;
@@ -1276,8 +1279,9 @@ class Filesystem {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeFileSystemHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeFileSystemHostResult(operation:String, succeeded:Bool):Void {
     (Filesystem._hostObservation__filesystem = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -1446,8 +1450,9 @@ class Filesystem {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetFileSystemBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetFileSystemBackendForTest():Void {
     (Filesystem._custom__filesystem = cast (null : Dynamic));
     (Filesystem._host__filesystem = cast (null : Dynamic));
     (Filesystem._hostConflict__filesystem = cast (false : Dynamic));
@@ -1459,8 +1464,9 @@ class Filesystem {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setFileSystemBackend(backend:Null<FileSystemBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setFileSystemBackend(backend:Null<FileSystemBackend>):Void {
     (Filesystem._custom__filesystem = cast (backend : Dynamic));
   }
 

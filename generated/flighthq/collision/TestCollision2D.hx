@@ -5,15 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollisionSupport2D.getCollisionPairTest2D;
 import flighthq.collision.Gjk2D.testCollisionSupport2D;
-import flighthq.types.Collision.CollisionManifold2D;
-import flighthq.types.Collision.CollisionPairTest2D;
-import flighthq.types.Collision.CollisionShape2D;
-import flighthq.types.Collision.CollisionShapeKind2D;
-import flighthq.types.Collision.CollisionTestGuard2D;
+import flighthq.types.CollisionManifold2D;
+import flighthq.types.CollisionPairTest2D;
+import flighthq.types.CollisionShape2D;
+import flighthq.types.CollisionShapeKind2D;
+import flighthq.types.CollisionTestGuard2D;
 
+@:noCompletion
 class TestCollision2D {
-  @:noCompletion
-  public static function setCollisionTestGuard2D(guard:Null<CollisionTestGuard2D>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setCollisionTestGuard2D(guard:Null<CollisionTestGuard2D>):Void {
     (TestCollision2D.collisionTestGuard__testCollision2D = cast (guard : Dynamic));
   }
 

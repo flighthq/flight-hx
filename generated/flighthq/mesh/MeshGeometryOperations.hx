@@ -10,16 +10,17 @@ import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryTangents;
 import flighthq.mesh.MeshGeometryCompute.refreshMeshGeometryBounds;
 import flighthq.mesh.MeshGeometryLayout.CANONICAL_MESH_GEOMETRY_LAYOUT;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
-import flighthq.types.MeshGeometry.PrimitiveTopology;
-import flighthq.types.MeshGeometry.VertexAttribute;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexFormat;
-import flighthq.types.MeshGeometry.VertexSemantic;
 import flighthq.types.MeshGeometryFromAttributesOptions;
 import flighthq.types.MeshGeometryOptions;
+import flighthq.types.MeshSubset;
 import flighthq.types.MeshTriangleVertexIndices;
+import flighthq.types.PrimitiveTopology;
+import flighthq.types.VertexAttribute;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexFormat;
+import flighthq.types.VertexSemantic;
 
+@:noCompletion
 class MeshGeometryOperations {
   public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):MeshGeometry {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

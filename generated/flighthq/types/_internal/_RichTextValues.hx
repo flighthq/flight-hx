@@ -10,8 +10,8 @@ import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextInputState;
 import flighthq.types.TextLabel;
-import flighthq.types.TextLabel.TextLabelData;
-import flighthq.types.TextLabel.TextLabelRuntime;
+import flighthq.types.TextLabelData;
+import flighthq.types.TextLabelRuntime;
 
 class _RichTextValues {
   public static final RichTextKind:String = 'RichText';

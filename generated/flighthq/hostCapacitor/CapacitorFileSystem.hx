@@ -4,24 +4,25 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorFileInfo;
-import flighthq.types.CapacitorApi.CapacitorFilesystemCopyOptions;
-import flighthq.types.CapacitorApi.CapacitorFilesystemMkdirOptions;
-import flighthq.types.CapacitorApi.CapacitorFilesystemPathOptions;
-import flighthq.types.CapacitorApi.CapacitorFilesystemPlugin;
-import flighthq.types.CapacitorApi.CapacitorFilesystemReadOptions;
-import flighthq.types.CapacitorApi.CapacitorFilesystemReadResult;
-import flighthq.types.CapacitorApi.CapacitorFilesystemReaddirResult;
-import flighthq.types.CapacitorApi.CapacitorFilesystemRmdirOptions;
-import flighthq.types.CapacitorApi.CapacitorFilesystemStatResult;
-import flighthq.types.CapacitorApi.CapacitorFilesystemWriteOptions;
-import flighthq.types.CapacitorApi.CapacitorFilesystemWriteResult;
-import flighthq.types.FileSystem.FileEntry;
-import flighthq.types.FileSystem.FilePermissions;
-import flighthq.types.FileSystem.FileStat;
-import flighthq.types.FileSystem.FileSystemBackend;
-import flighthq.types.FileSystem.FileSystemUsage;
+import flighthq.types.CapacitorFileInfo;
+import flighthq.types.CapacitorFilesystemCopyOptions;
+import flighthq.types.CapacitorFilesystemMkdirOptions;
+import flighthq.types.CapacitorFilesystemPathOptions;
+import flighthq.types.CapacitorFilesystemPlugin;
+import flighthq.types.CapacitorFilesystemReadOptions;
+import flighthq.types.CapacitorFilesystemReadResult;
+import flighthq.types.CapacitorFilesystemReaddirResult;
+import flighthq.types.CapacitorFilesystemRmdirOptions;
+import flighthq.types.CapacitorFilesystemStatResult;
+import flighthq.types.CapacitorFilesystemWriteOptions;
+import flighthq.types.CapacitorFilesystemWriteResult;
+import flighthq.types.FileEntry;
+import flighthq.types.FilePermissions;
+import flighthq.types.FileStat;
+import flighthq.types.FileSystemBackend;
+import flighthq.types.FileSystemUsage;
 
+@:noCompletion
 class CapacitorFileSystem {
   public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):FileSystemBackend {
     var filesystem:CapacitorFilesystemPlugin = cast _Runtime.UNDEFINED;

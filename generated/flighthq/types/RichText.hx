@@ -3,21 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
-import flighthq.types.Material.MaterialData;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeTraitsKey;
-import flighthq.types.Node2D.Node2DTraits;
-import flighthq.types.TextLabel.TextLabelData;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
-import flighthq.types.TextLayout.TextMeasureFunction;
 import flighthq.types._internal._RichTextValues.RichTextKind;
-
-typedef RichTextData = { var autoSize:TextAutoSize; var height:Float; var text:String; var textFormat:TextFormat; var verticalAlign:TextVerticalAlign; var width:Float; var background:Bool; var backgroundColor:Float; var border:Bool; var borderColor:Float; var condenseWhite:Bool; var defaultTextFormat:TextFormat; var maxChars:Float; var mouseWheelEnabled:Bool; var multiline:Bool; var scrollH:Float; var scrollV:Float; var selectable:Bool; var textColor:Float; var textFormatRanges:Array<TextFormatRange>; var wordWrap:Bool; };
-
-typedef RichTextRuntime = { var binding:Null<flighthq._internal._Object>; var colorAdjustments:Null<Array<Adjustment>>; var colorAdjustmentsUnsupported:Bool; var resolvedColorMatrix:Null<Array<Float>>; var resolvedColorScaleBias:Null<ColorScaleBias>; var appearanceId:Float; var boundsUsingLocalBoundsId:Float; var boundsUsingLocalTransformId:Float; var canAddChild:Node<Node2DTraits>->Node<Node2DTraits>->Bool; var children:Null<Array<Node<Node2DTraits>>>; var childrenId:Float; @:optional var traits:NodeTraitsKey<Node2DTraits>; var interactionSignals:Null<InteractionSignals>; var localBoundsId:Float; var localBoundsUsingLocalBoundsId:Float; var localContentId:Float; var localTransformId:Float; var localTransformUsingLocalTransformId:Float; var nodeSignals:Null<NodeSignals>; var interactionState:Null<NodeInteractionState>; var parent:Null<Node<Node2DTraits>>; var parentReferenceId:Float; var worldBoundsUsingLocalBoundsId:Float; var worldBoundsUsingWorldTransformId:Float; var worldTransformId:Float; var worldTransformUsingLocalTransformId:Float; var worldTransformUsingParentTransformId:Float; var localMatrix:Null<Matrix>; var rotationAngle:Float; var rotationCosine:Float; var rotationSine:Float; var worldMatrix:Null<Matrix>; var boundsRectangle:Null<Rectangle>; var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; var localBoundsRectangle:Null<Rectangle>; var worldBoundsRectangle:Null<Rectangle>; var scene2d:Null<Scene2D>; var buildTextLayoutParams:TextLabel->TextMeasureFunction->TextLayoutParams; var textLayout:Null<TextLayoutResult>; var textLayoutUsingContentId:Float; var input:Null<TextInputState>; var richTextContent:Null<RichTextContent>; var selectionBeginIndex:Float; var selectionEndIndex:Float; var textFieldSignals:Null<TextFieldSignals>; };
 
 typedef RichText = { var data:RichTextData; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node2DTraits>>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };

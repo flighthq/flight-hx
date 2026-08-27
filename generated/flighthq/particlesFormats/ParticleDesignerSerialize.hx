@@ -4,15 +4,16 @@ package flighthq.particlesFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.math.Constants.RAD_TO_DEG;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleCurve;
-import flighthq.types.ParticleDesignerSchema.ParticleDesignerDocument;
-import flighthq.types.ParticleDesignerSchema.ParticleDesignerEmitterType;
-import flighthq.types.ParticleDesignerSchema.ParticleDesignerSerializeOptions;
+import flighthq.types.ParticleDesignerDocument;
+import flighthq.types.ParticleDesignerEmitterType;
+import flighthq.types.ParticleDesignerSerializeOptions;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterShape;
 import flighthq.types.ParticleSerializeResult;
 
+@:noCompletion
 class ParticleDesignerSerialize {
   public static function configToDocument__particleDesignerSerialize(config:ParticleEmitterConfig, existing:{ @:optional var maxParticles:Null<Float>; @:optional var emitterType:Null<ParticleDesignerEmitterType>; @:optional var duration:Null<Float>; @:optional var particleLifespan:Null<Float>; @:optional var particleLifespanVariance:Null<Float>; @:optional var speed:Null<Float>; @:optional var speedVariance:Null<Float>; @:optional var angle:Null<Float>; @:optional var angleVariance:Null<Float>; @:optional var gravityx:Null<Float>; @:optional var gravityy:Null<Float>; @:optional var sourcePositionVariancex:Null<Float>; @:optional var sourcePositionVariancey:Null<Float>; @:optional var startParticleSize:Null<Float>; @:optional var startParticleSizeVariance:Null<Float>; @:optional var finishParticleSize:Null<Float>; @:optional var finishParticleSizeVariance:Null<Float>; @:optional var startColorRed:Null<Float>; @:optional var startColorGreen:Null<Float>; @:optional var startColorBlue:Null<Float>; @:optional var startColorAlpha:Null<Float>; @:optional var startColorVarianceRed:Null<Float>; @:optional var startColorVarianceGreen:Null<Float>; @:optional var startColorVarianceBlue:Null<Float>; @:optional var startColorVarianceAlpha:Null<Float>; @:optional var finishColorRed:Null<Float>; @:optional var finishColorGreen:Null<Float>; @:optional var finishColorBlue:Null<Float>; @:optional var finishColorAlpha:Null<Float>; @:optional var finishColorVarianceRed:Null<Float>; @:optional var finishColorVarianceGreen:Null<Float>; @:optional var finishColorVarianceBlue:Null<Float>; @:optional var finishColorVarianceAlpha:Null<Float>; @:optional var rotationStart:Null<Float>; @:optional var rotationStartVariance:Null<Float>; @:optional var rotationEnd:Null<Float>; @:optional var rotationEndVariance:Null<Float>; @:optional var maxRadius:Null<Float>; @:optional var maxRadiusVariance:Null<Float>; @:optional var minRadius:Null<Float>; @:optional var minRadiusVariance:Null<Float>; @:optional var rotatePerSecond:Null<Float>; @:optional var rotatePerSecondVariance:Null<Float>; @:optional var blendFuncSource:Null<Float>; @:optional var blendFuncDestination:Null<Float>; @:optional var textureFileName:Null<String>; }, textureSize:Float):ParticleDesignerDocument {
     var angleDeg:Float = cast _Runtime.UNDEFINED;

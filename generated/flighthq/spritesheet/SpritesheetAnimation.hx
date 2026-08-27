@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
 import flighthq.types.SpritesheetAnimationDirection;
@@ -13,6 +13,7 @@ import flighthq.types.SpritesheetFrame;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 
+@:noCompletion
 class SpritesheetAnimation {
   public static function createSpritesheetAnimation(?obj:{ @:optional var frames:Null<Array<Float>>; @:optional var frameDuration:Null<Float>; @:optional var frameDurations:Null<Array<Float>>; @:optional var direction:Null<SpritesheetAnimationDirection>; @:optional var repeatCount:Null<Float>; @:optional var originX:Null<Float>; @:optional var originY:Null<Float>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flighthq.types.SpritesheetAnimation {
     return cast (cast createEntity((cast { direction: _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var direction:Null<String>; }).direction; }), function():Dynamic return cast 'forward'), frameDuration: _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var frameDuration:Null<Float>; }).frameDuration; }), function():Dynamic return cast 0.0), frameDurations: _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var frameDurations:Null<Array<Float>>; }).frameDurations; }), function():Dynamic return cast null), frames: _Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var frames:Null<Array<Float>>; }).frames; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), originX: _Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var originX:Null<Float>; }).originX; }), function():Dynamic return cast 0.0), originY: _Runtime.coalesce(({ final __structural5 = obj; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var originY:Null<Float>; }).originY; }), function():Dynamic return cast 0.0), repeatCount: _Runtime.coalesce(({ final __structural6 = obj; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var repeatCount:Null<Float>; }).repeatCount; }), function():Dynamic return cast 0.0) } : Dynamic)) : { >Entity, var direction:SpritesheetAnimationDirection; var frameDuration:Float; var frameDurations:Null<Array<Float>>; var frames:Array<Float>; var originX:Float; var originY:Float; var repeatCount:Float; });

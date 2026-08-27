@@ -9,19 +9,20 @@ import flighthq.interaction.HitTests.registerHitTestPrecise;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.text.TextLabelLayout.getTextLayout;
 import flighthq.textlayout.RichTextQuery.computeRichTextCharIndexAtPoint;
-import flighthq.types.HitTestFunction.HitTestPreciseFunction;
+import flighthq.types.HitTestPreciseFunction;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Node.NodeAny;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node2D;
+import flighthq.types.NodeAny;
 import flighthq.types.TextLabel;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.Types.RichTextKind;
 import flighthq.types.Types.TextLabelKind;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types._internal._RichTextValues.RichTextKind;
 import flighthq.types._internal._TextLabelValues.TextLabelKind;
 
+@:noCompletion
 class RegisterTextHitTest {
   public static function registerTextHitTest():Void {
     registerHitTestPrecise((cast TextLabelKind : String), ({ final __callArgument0:Dynamic = RegisterTextHitTest.resolveTextCharIndex__registerTextHitTest; __callArgument0; }));

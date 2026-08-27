@@ -5,24 +5,26 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerScene3DPbrExtensionTextures;
 import flighthq.types.AnisotropyPbrExtension;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.PbrExtension;
 import flighthq.types.Sampler;
-import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
-import flighthq.types.Scene3DResources.Scene3DPbrExtensionTextureLister;
+import flighthq.types.Scene3DMaterialTextureRegistry;
+import flighthq.types.Scene3DPbrExtensionTextureLister;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.AnisotropyPbrExtensionKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._AnisotropyPbrExtensionValues.AnisotropyPbrExtensionKind;
 
+@:noCompletion
 class AnisotropyPbrScene3DMaterialTextures {
-  @:noCompletion
-  public static function registerAnisotropyPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerAnisotropyPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     registerScene3DPbrExtensionTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast AnisotropyPbrExtensionKind : String), ({ final __callArgument1:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var anisotropy:AnisotropyPbrExtension = cast _Runtime.UNDEFINED;
       anisotropy = (cast extension : AnisotropyPbrExtension);

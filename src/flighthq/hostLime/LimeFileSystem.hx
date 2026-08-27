@@ -17,7 +17,7 @@ import sys.io.File;
 
 class LimeFileSystem {
   /** Allocation entry point, Flight-style: `createLimeFileSystemBackend()`. */
-  public static function createLimeFileSystemBackend():flighthq.types.FileSystem.FileSystemBackend {
+  public static function createLimeFileSystemBackend():flighthq.types.FileSystemBackend {
     return cast {
       readTextFile: function(path:String):_Promise<Dynamic> {
         return done(try File.getContent(path) catch (_:Dynamic) null);

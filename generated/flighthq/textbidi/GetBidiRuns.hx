@@ -4,9 +4,10 @@ package flighthq.textbidi;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textbidi.ResolveBidiLevels.resolveBidiLevels;
-import flighthq.types.Bidi.BidiDirection;
-import flighthq.types.Bidi.BidiRun;
+import flighthq.types.BidiDirection;
+import flighthq.types.BidiRun;
 
+@:noCompletion
 class GetBidiRuns {
   public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {
     var levels:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;

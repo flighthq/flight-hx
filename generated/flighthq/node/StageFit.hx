@@ -5,16 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Rectangle.createRectangle;
 import flighthq.node.Node.getNodeRuntime;
-import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
-import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.BoundsNodeAny;
+import flighthq.types.HasBoundsRectangleRuntime;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeTraits;
+import flighthq.types.NodeTraits;
 import flighthq.types.Rectangle;
 import flighthq.types.Scene2DFitContext;
 import flighthq.types.ViewportAlign;
 import flighthq.types.ViewportScaleMode;
 
+@:noCompletion
 class StageFit {
   public static function computeScene2DFitAlignX(scaledContentWidth:Float, viewWidth:Float, align:ViewportAlign):Float {
     if ((cast _Runtime.includes(align, 'left') : Bool)) { return cast 0.0; }

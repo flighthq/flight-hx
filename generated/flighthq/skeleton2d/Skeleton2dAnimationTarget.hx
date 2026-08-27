@@ -15,19 +15,20 @@ import flighthq.types.AnimationInterpolation;
 import flighthq.types.AnimationTrack;
 import flighthq.types.Attachment2D;
 import flighthq.types.Bone2D;
-import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.KeyedTable;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DAnimationPath;
 import flighthq.types.Skeleton2DAnimationTarget;
 import flighthq.types.Skeleton2DAnimationTargetBinder;
 import flighthq.types.Skeleton2DAnimationTargetKind;
+import flighthq.types.Skeleton2DSlotAnimationPath;
 import flighthq.types.Skeleton2DSlotAnimationTarget;
-import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
 import flighthq.types.Slot2D;
 import flighthq.types._internal._Skeleton2DAnimationPathValues.Skeleton2DAnimationPathValue as BonePath;
 import flighthq.types._internal._Skeleton2DAnimationTargetKindValues.Skeleton2DAnimationTargetKindValue as TargetKind;
 import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues.Skeleton2DSlotAnimationPathValue as SlotPath;
 
+@:noCompletion
 class Skeleton2dAnimationTarget {
   public static function createSkeleton2DBoneAnimationTarget(boneIndex:Float, path:Skeleton2DAnimationPath):Skeleton2DAnimationTarget {
     return cast { boneIndex: boneIndex, kind: (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Bone, path: path };
@@ -40,8 +41,9 @@ class Skeleton2dAnimationTarget {
     return cast null;
   }
 
-  @:noCompletion
-  public static function findSkeleton2DStepKeyframe(times:flighthq._internal._ArrayLike<Float>, time:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function findSkeleton2DStepKeyframe(times:flighthq._internal._ArrayLike<Float>, time:Float):Float {
     var count:Float = cast _Runtime.UNDEFINED;
     count = _Runtime.field(times, 'length');
     if ((cast _Runtime.strictEquals(count, 0.0) : Bool)) { return cast -1.0; }

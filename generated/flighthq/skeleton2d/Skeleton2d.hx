@@ -25,12 +25,11 @@ import flighthq.skeleton2d.TransformConstraint2D as Facade_Skeleton2d_flighthq_s
 import flighthq.types.AnimationClip;
 import flighthq.types.Attachment2D;
 import flighthq.types.AttachmentSkin2D;
-import flighthq.types.AttachmentSkin2D.SkinAttachment2D;
 import flighthq.types.Bone2D;
 import flighthq.types.BoundingBoxAttachment2D;
 import flighthq.types.ClippingAttachment2D;
 import flighthq.types.Entity;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.MeshAttachment2D;
 import flighthq.types.Path;
 import flighthq.types.PathAttachment2D;
@@ -42,16 +41,17 @@ import flighthq.types.Skeleton2DAnimationTarget;
 import flighthq.types.Skeleton2DAnimationTargetBinder;
 import flighthq.types.Skeleton2DAnimationTargetKind;
 import flighthq.types.Skeleton2DConstraint;
-import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
-import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintSolver;
+import flighthq.types.Skeleton2DConstraintKind;
+import flighthq.types.Skeleton2DConstraintSolver;
 import flighthq.types.Skeleton2DDeformLengthExplanation;
+import flighthq.types.Skeleton2DSlotAnimationPath;
 import flighthq.types.Skeleton2DSlotAnimationTarget;
-import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
 import flighthq.types.Skeleton2DSlotDeform;
 import flighthq.types.Skin2D;
+import flighthq.types.SkinAttachment2D;
 import flighthq.types.Slot2D;
 import flighthq.types.TransformInherit2D;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
 class Skeleton2d {
   public static final _scratchA__skeleton2d:MatrixLike = (cast { a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0 });
@@ -292,8 +292,9 @@ class Skeleton2d {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getSkeleton2DSkin(skeleton:Skeleton2D, name:String):Null<AttachmentSkin2D> {
+  @:allow(flighthq)
+  @:keep
+  private static function getSkeleton2DSkin(skeleton:Skeleton2D, name:String):Null<AttachmentSkin2D> {
     var skins:Null<Array<AttachmentSkin2D>> = cast _Runtime.UNDEFINED;
     skins = skeleton.skins;
     if ((cast ((cast _Runtime.strictEquals(skins, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(skins, null) : Bool)) : Bool)) { return cast null; }
@@ -372,8 +373,9 @@ class Skeleton2d {
     }
   }
 
-  @:noCompletion
-  public static function setSkeleton2DSkin(skeleton:Skeleton2D, skin:AttachmentSkin2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setSkeleton2DSkin(skeleton:Skeleton2D, skin:AttachmentSkin2D):Void {
     var slots:Null<Array<Slot2D>> = cast _Runtime.UNDEFINED;
     slots = skeleton.slots;
     if ((cast ((cast _Runtime.strictEquals(slots, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(slots, null) : Bool)) : Bool)) { return; }

@@ -4,10 +4,11 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.PathCommand;
+import flighthq.types.RectangleLike;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class GetPathBounds {
   public static function getPathBounds(path:Path, out:RectangleLike):Bool {
     var commands:Array<Float> = cast _Runtime.UNDEFINED;

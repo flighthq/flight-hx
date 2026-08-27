@@ -7,24 +7,27 @@ import flighthq.log.Log.logOnce;
 import flighthq.registry.RegistryTable.createSlotTable;
 import flighthq.render.RenderState.getColorAdjustmentUnsupportedGuard;
 import flighthq.render.RenderState.getRenderStateRuntime;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.ColorAdjustmentUnsupportedGuard;
+import flighthq.types.LogLevel;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RenderRegistries;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.ColorAdjustmentUnsupportedGuard;
-import flighthq.types.RenderState.RenderRegistries;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
+import flighthq.types.SlotTable;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class EnableColorAdjustmentGuards {
-  @:noCompletion
-  public static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areColorAdjustmentGuardsEnabled(state:RenderState):Bool {
     return cast !_Runtime.looseEquals((cast getColorAdjustmentUnsupportedGuard(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Null<ColorAdjustmentUnsupportedGuard>), null);
     return cast null;
   }
 
-  @:noCompletion
-  public static function enableColorAdjustmentGuards(state:RenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableColorAdjustmentGuards(state:RenderState):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<ColorAdjustmentUnsupportedGuard> = cast _Runtime.UNDEFINED;
     runtime = (cast getRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : RenderStateRuntime);

@@ -5,8 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.compression.Decompressor.registerDecompressor;
 import flighthq.types.Compression;
-import flighthq.types.Compression.CompressionFraming;
-import flighthq.types.Compression.Decompressor;
+import flighthq.types.CompressionFraming;
+import flighthq.types.Decompressor;
 import flighthq.types._internal._CompressionValues.CompressionFramingValue;
 import flighthq.types._internal._CompressionValues.CompressionValue;
 
@@ -64,6 +64,7 @@ class InflateState__deflate {
   }
 }
 
+@:noCompletion
 class Deflate {
   public static final inflateDeflate:Decompressor = (cast function(compressed:flighthq._internal._UInt8Array, uncompressedLength:Float, framing:CompressionFraming):Null<flighthq._internal._UInt8Array> {
     var input:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;

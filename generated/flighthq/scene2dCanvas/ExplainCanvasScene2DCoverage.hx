@@ -8,28 +8,31 @@ import flighthq.render.ExplainScene2DCoverage.hasScene2DCoverage;
 import flighthq.scene2dCanvas.CanvasMaterialRegistry.getCanvasMaterialRenderer;
 import flighthq.types.CanvasMaterialRenderer;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.Entity.Kind;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.CatalogEntry;
+import flighthq.types.CatalogRegistration;
+import flighthq.types.Kind;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.RequirementFacet;
 import flighthq.types.Scene2DKindUsage;
+import flighthq.types.SceneCoverage;
 import flighthq.types.SceneCoverageCatalog;
-import flighthq.types.SceneCoverageCatalog.CatalogEntry;
-import flighthq.types.SceneCoverageCatalog.CatalogRegistration;
 import flighthq.types.SceneCoverageEntry;
-import flighthq.types.SceneCoverageEntry.SceneCoverage;
 import flighthq.types._internal._RequirementFacetValues.RequirementFacetValue;
 import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 
+@:noCompletion
 class ExplainCanvasScene2DCoverage {
-  @:noCompletion
-  public static function explainCanvasScene2DCoverage(out:Array<SceneCoverageEntry>, state:CanvasRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function explainCanvasScene2DCoverage(out:Array<SceneCoverageEntry>, state:CanvasRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void {
     explainScene2DCoverage(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = usage; __callArgument2; }), ({ final __callArgument3:Dynamic = catalog; __callArgument3; }));
     (cast ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = usage; __callArgument10; }), (cast false : Bool), ({ final __callArgument11:Dynamic = catalog; __callArgument11; })) : Bool);
   }
 
-  @:noCompletion
-  public static function hasCanvasScene2DCoverage(state:CanvasRenderState, usage:Scene2DKindUsage):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasCanvasScene2DCoverage(state:CanvasRenderState, usage:Scene2DKindUsage):Bool {
     if ((cast !(cast (cast hasScene2DCoverage(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = usage; __callArgument17; })) : Bool) : Bool) : Bool)) { return cast false; }
     return cast !(cast (cast ExplainCanvasScene2DCoverage.collectCanvasScene2DCoverageGaps__explainCanvasScene2DCoverage(({ final __callArgument20:Dynamic = null; __callArgument20; }), ({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = usage; __callArgument22; }), (cast true : Bool), ({ final __callArgument23:Dynamic = null; __callArgument23; })) : Bool) : Bool);
     return cast null;

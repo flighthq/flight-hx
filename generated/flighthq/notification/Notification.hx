@@ -4,14 +4,14 @@ package flighthq.notification;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Notification.NotificationAction;
-import flighthq.types.Notification.NotificationBackend;
-import flighthq.types.Notification.NotificationCapabilities;
-import flighthq.types.Notification.NotificationChannel;
-import flighthq.types.Notification.NotificationPermission;
-import flighthq.types.Notification.NotificationRequest;
-import flighthq.types.Notification.NotificationSchedule;
-import flighthq.types.Notification.ScheduledNotification;
+import flighthq.types.NotificationAction;
+import flighthq.types.NotificationBackend;
+import flighthq.types.NotificationCapabilities;
+import flighthq.types.NotificationChannel;
+import flighthq.types.NotificationPermission;
+import flighthq.types.NotificationRequest;
+import flighthq.types.NotificationSchedule;
+import flighthq.types.ScheduledNotification;
 
 typedef NotificationSubscription__notification = { var unsubscribe:Void->Void; var rebind:NotificationBackend->Void; };
 
@@ -120,8 +120,9 @@ class Notification {
     ({ final __optionalCall0 = (cast backend : { @:optional var createNotificationChannel:Null<NotificationChannel->Void>; }).createNotificationChannel; if (__optionalCall0 != null) __optionalCall0(channel); });
   }
 
-  @:noCompletion
-  public static function createServiceWorkerNotificationBackend(registration:ServiceWorkerRegistrationLike__notification):NotificationBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createServiceWorkerNotificationBackend(registration:ServiceWorkerRegistrationLike__notification):NotificationBackend {
     var _generateId:Void->String = cast _Runtime.UNDEFINED;
     var _fire:flighthq._internal._Set<flighthq._internal._Any->Void>->flighthq._internal._Any->Void = cast _Runtime.UNDEFINED;
     var _show:NotificationRequest->flighthq._internal._Promise<String> = cast _Runtime.UNDEFINED;
@@ -408,8 +409,9 @@ class Notification {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebNotificationBackend():NotificationBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebNotificationBackend():NotificationBackend {
     var _generateId:Void->String = cast _Runtime.UNDEFINED;
     var _fire:flighthq._internal._Set<flighthq._internal._Any->Void>->flighthq._internal._Any->Void = cast _Runtime.UNDEFINED;
     var _notify:NotificationRequest->flighthq._internal._Promise<String> = cast _Runtime.UNDEFINED;
@@ -675,8 +677,9 @@ class Notification {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getNotificationBackend():NotificationBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getNotificationBackend():NotificationBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Notification._custom__notification, function():Dynamic return cast Notification._host__notification), function():Dynamic return cast Notification._sentinel__notification);
     return cast null;
   }
@@ -703,8 +706,9 @@ class Notification {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installNotificationHostBackend(backend:NotificationBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installNotificationHostBackend(backend:NotificationBackend):Void {
     var previous:NotificationBackend = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(Notification._host__notification, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Notification._host__notification, backend) : Bool)) { (Notification._hostConflict__notification = cast (true : Dynamic)); }
@@ -720,8 +724,9 @@ class Notification {
     return cast null;
   }
 
-  @:noCompletion
-  public static function notifyServiceWorkerBackendAction(backend:NotificationBackend, message:{ var type:String; var notificationId:String; @:optional var actionId:String; @:optional var reply:String; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function notifyServiceWorkerBackendAction(backend:NotificationBackend, message:{ var type:String; var notificationId:String; @:optional var actionId:String; @:optional var reply:String; }):Void {
     var b:{ >NotificationBackend, @:optional var _dispatchAction:Null<String->String->Void>; @:optional var _dispatchClick:Null<String->Void>; @:optional var _dispatchReply:Null<String->String->String->Void>; } = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast message : { var type:String; var notificationId:String; @:optional var actionId:Null<String>; @:optional var reply:Null<String>; }).type, 'notificationclick') : Bool)) { return; }
     b = (cast backend : flighthq._internal._Intersection2<NotificationBackend, { @:optional var _dispatchAction:String->String->Void; @:optional var _dispatchClick:String->Void; @:optional var _dispatchReply:String->String->String->Void; }>);
@@ -734,8 +739,9 @@ class Notification {
     } } }
   }
 
-  @:noCompletion
-  public static function observeNotificationHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeNotificationHostResult(operation:String, succeeded:Bool):Void {
     (Notification._hostObservation__notification = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -792,8 +798,9 @@ class Notification {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetNotificationBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetNotificationBackendForTest():Void {
     var previous:NotificationBackend = cast _Runtime.UNDEFINED;
     previous = (cast getNotificationBackend() : NotificationBackend);
     (Notification._custom__notification = cast (null : Dynamic));
@@ -808,8 +815,9 @@ class Notification {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setNotificationBackend(backend:Null<NotificationBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setNotificationBackend(backend:Null<NotificationBackend>):Void {
     var previous:NotificationBackend = cast _Runtime.UNDEFINED;
     previous = (cast getNotificationBackend() : NotificationBackend);
     (Notification._custom__notification = cast (backend : Dynamic));

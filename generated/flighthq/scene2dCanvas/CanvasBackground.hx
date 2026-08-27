@@ -6,9 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.BlendMode;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
+import flighthq.types.CanvasRenderStateRuntime;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
+@:noCompletion
 class CanvasBackground {
   public static function renderCanvasBackground(state:CanvasRenderState):Void {
     flighthq._internal.backend.Canvas2dBackend.setField((cast state : CanvasRenderState).context, 'globalCompositeOperation', 'source-over');

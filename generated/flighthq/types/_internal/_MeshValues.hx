@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.types.Aabb;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.MeshMorph;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
+import flighthq.types.Node3DRuntime;
 import flighthq.types.Skin;
 
 class _MeshValues {

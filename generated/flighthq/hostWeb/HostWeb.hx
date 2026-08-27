@@ -34,7 +34,7 @@ import flighthq.hostWeb.WebStatusbar as Facade_HostWeb_flighthq_hostWeb_WebStatu
 import flighthq.hostWeb.WebStorage as Facade_HostWeb_flighthq_hostWeb_WebStorage;
 import flighthq.hostWeb.WebWebcam as Facade_HostWeb_flighthq_hostWeb_WebWebcam;
 import flighthq.hostWeb.WebWindow as Facade_HostWeb_flighthq_hostWeb_WebWindow;
-import flighthq.types.Cursor.CursorBackend;
+import flighthq.types.CursorBackend;
 
 class HostWeb {
   public static function createWebCursorBackend(element:flighthq._internal.dom.HTMLElement):CursorBackend {

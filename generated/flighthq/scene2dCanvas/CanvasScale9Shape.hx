@@ -11,23 +11,25 @@ import flighthq.scene2dCanvas.CanvasShape.renderCanvasShapeCommands;
 import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.shape.Scale9ShapeCommands.mapScale9ShapeCommands;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.MatrixLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Scale9Mapper;
 import flighthq.types.Scale9Shape;
-import flighthq.types.Scale9Shape.Scale9ShapeData;
+import flighthq.types.Scale9ShapeData;
 import flighthq.types.Scene2DRenderer;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
 
+@:noCompletion
 class CanvasScale9Shape {
   public static final _remappedCommands__canvasScale9Shape:Array<ShapeCommandToken> = (cast cast ([] : Array<Dynamic>));
 
-  @:noCompletion
-  public static function drawCanvasScale9Shape(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasScale9Shape(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:Scale9Shape = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;

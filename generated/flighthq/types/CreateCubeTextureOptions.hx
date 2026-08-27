@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Sampler.SamplerLike;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
 
 typedef CreateCubeTextureOptions = { @:optional var colorSpace:TextureColorSpace; @:optional var sampler:SamplerLike; @:optional var sources:TextureSourceCubeFaces; };

@@ -6,18 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.render.RenderRegistrySignals.enableRenderRegistrySignals;
 import flighthq.signals.Slot.connectSignal;
-import flighthq.types.Entity.Kind;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.Kind;
+import flighthq.types.LogLevel;
+import flighthq.types.RenderRegistry;
+import flighthq.types.RenderRegistryMiss;
+import flighthq.types.RenderRegistryMissExplanation;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
-import flighthq.types.RenderRegistrySignals.RenderRegistryMiss;
-import flighthq.types.RenderRegistrySignals.RenderRegistryMissExplanation;
 import flighthq.types.RenderState;
 import flighthq.types.Signal;
 
+@:noCompletion
 class RenderRegistryGuards {
-  @:noCompletion
-  public static function areRenderRegistryGuardsEnabled(state:RenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areRenderRegistryGuardsEnabled(state:RenderState):Bool {
     return cast ((cast RenderRegistryGuards._stateIds__renderRegistryGuards : flighthq._internal._WeakMap<RenderState, Float>).has(state));
     return cast null;
   }

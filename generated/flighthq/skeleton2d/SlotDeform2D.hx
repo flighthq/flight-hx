@@ -7,6 +7,7 @@ import flighthq.types.Attachment2D;
 import flighthq.types.Skeleton2DSlotDeform;
 import flighthq.types.Slot2D;
 
+@:noCompletion
 class SlotDeform2D {
   public static function getSkeleton2DSlotDeformOffsets(slot:Slot2D):Null<flighthq._internal._Float32Array> {
     var deform:Null<Skeleton2DSlotDeform> = cast _Runtime.UNDEFINED;

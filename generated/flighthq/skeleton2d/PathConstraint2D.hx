@@ -15,21 +15,22 @@ import flighthq.types.Path;
 import flighthq.types.PathAttachment2D;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DConstraint;
-import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
-import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintSolver;
+import flighthq.types.Skeleton2DConstraintKind;
+import flighthq.types.Skeleton2DConstraintSolver;
 import flighthq.types.Skeleton2DPathConstraint;
-import flighthq.types.Skeleton2DPathConstraint.Skeleton2DPathPositionMode;
-import flighthq.types.Skeleton2DPathConstraint.Skeleton2DPathRotateMode;
-import flighthq.types.Skeleton2DPathConstraint.Skeleton2DPathSpacingMode;
+import flighthq.types.Skeleton2DPathPositionMode;
+import flighthq.types.Skeleton2DPathRotateMode;
+import flighthq.types.Skeleton2DPathSpacingMode;
 import flighthq.types.Slot2D;
 import flighthq.types.Types.PathAttachment2DKind;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types._internal._PathAttachment2DValues.PathAttachment2DKind;
 import flighthq.types._internal._Skeleton2DConstraintValues.Skeleton2DConstraintKindValue;
 import flighthq.types._internal._Skeleton2DPathConstraintValues.Skeleton2DPathPositionModeValue;
 import flighthq.types._internal._Skeleton2DPathConstraintValues.Skeleton2DPathRotateModeValue;
 import flighthq.types._internal._Skeleton2DPathConstraintValues.Skeleton2DPathSpacingModeValue;
 
+@:noCompletion
 class PathConstraint2D {
   public static final MATRIX_STRIDE__pathConstraint2D:Float = 6.0;
 
@@ -37,8 +38,9 @@ class PathConstraint2D {
     registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Path : String), ({ final __callArgument0:Dynamic = solveSkeleton2DPathConstraint; __callArgument0; }));
   }
 
-  @:noCompletion
-  public static function solveSkeleton2DPathConstraint(skeleton:Skeleton2D, constraint:Skeleton2DConstraint):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function solveSkeleton2DPathConstraint(skeleton:Skeleton2D, constraint:Skeleton2DConstraint):Void {
     var pathConstraint:Skeleton2DPathConstraint = cast _Runtime.UNDEFINED;
     var attachment:Null<PathAttachment2D> = cast _Runtime.UNDEFINED;
     var slot:Slot2D = cast _Runtime.UNDEFINED;

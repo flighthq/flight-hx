@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.storage.Storage.createWebStorageBackend;
 import flighthq.storage.Storage.installStorageHostBackend;
-import flighthq.types.Storage.StorageBackend;
+import flighthq.types.StorageBackend;
 
+@:noCompletion
 class WebStorage {
   public static function enableHostWebStorage():Void {
     if ((cast WebStorage._enabled__webStorage : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebStorage {
     installStorageHostBackend((cast createWebStorageBackend() : StorageBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebStorageForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebStorageForTest():Void {
     (WebStorage._enabled__webStorage = cast (false : Dynamic));
   }
 

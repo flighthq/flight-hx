@@ -15,43 +15,47 @@ import flighthq.scene3dWgpu.WgpuMeshPipeline.stashWgpuUvTransform;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.scene3dWgpu.WgpuPbrPipelineCache.ensureWgpuPbrPipeline;
 import flighthq.types.Camera3D;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.StandardPbrMaterial;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
+import flighthq.types.WgpuMaterialBinding;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuMeshPipeline;
+import flighthq.types.WgpuPbrDefineKey;
 import flighthq.types.WgpuPbrPipeline;
-import flighthq.types.WgpuPbrPipeline.WgpuPbrDefineKey;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
+import flighthq.types.WgpuRenderStateRuntime;
 
+@:noCompletion
 class StandardPbrWgpuMeshMaterialRenderer {
-  @:noCompletion
-  public static final WGPU_PBR_MATERIAL_UNIFORM_FLOATS:Float = 48.0;
+  @:allow(flighthq)
+  @:keep
+  private static final WGPU_PBR_MATERIAL_UNIFORM_FLOATS:Float = 48.0;
 
-  @:noCompletion
-  public static function buildWgpuPbrStandardDefineKey(standard:Null<StandardPbrMaterialProperties>, surface:Null<SurfaceMaterial>):WgpuPbrDefineKey {
+  @:allow(flighthq)
+  @:keep
+  private static function buildWgpuPbrStandardDefineKey(standard:Null<StandardPbrMaterialProperties>, surface:Null<SurfaceMaterial>):WgpuPbrDefineKey {
     return cast { alphaMaskEnabled: ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast _Runtime.strictEquals((cast surface : { var alphaMode:MaterialAlphaMode; }).alphaMode, 'mask') : Bool)), anisotropyEnabled: false, clearcoatEnabled: false, doubleSided: ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast (cast surface : { var doubleSided:Bool; }).doubleSided : Bool)), hasAlphaMap: ((cast ((cast ((cast !_Runtime.strictEquals(surface, null) : Bool) && (cast !_Runtime.strictEquals((cast surface : { var alphaMode:MaterialAlphaMode; }).alphaMode, 'opaque') : Bool)) : Bool) && (cast !_Runtime.strictEquals(standard, null) : Bool)) : Bool) && (cast (cast isWgpuTextureReady((cast (cast standard : { var alphaMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).alphaMap : Dynamic)) : Bool) : Bool)), hasBaseColorMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast (cast isWgpuTextureReady((cast (cast standard : { var baseColorMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).baseColorMap : Dynamic)) : Bool) : Bool)), hasEmissiveMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast (cast isWgpuTextureReady((cast (cast standard : { var emissiveMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).emissiveMap : Dynamic)) : Bool) : Bool)), hasMetallicRoughnessMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast (cast isWgpuTextureReady((cast (cast standard : { var metallicRoughnessMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).metallicRoughnessMap : Dynamic)) : Bool) : Bool)), hasNormalMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast (cast isWgpuTextureReady((cast (cast standard : { var normalMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).normalMap : Dynamic)) : Bool) : Bool)), hasOcclusionMap: ((cast !_Runtime.strictEquals(standard, null) : Bool) && (cast (cast isWgpuTextureReady((cast (cast standard : { var occlusionMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).occlusionMap : Dynamic)) : Bool) : Bool)), iridescenceEnabled: false, sheenEnabled: false, specularEnabled: false, subsurfaceEnabled: false, transmissionEnabled: false };
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuPbrMaterialBindGroup(state:WgpuRenderState, pipeline:WgpuPbrPipeline, key:flighthq._internal._Object, standard:Null<StandardPbrMaterialProperties>):WgpuMaterialBinding {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuPbrMaterialBindGroup(state:WgpuRenderState, pipeline:WgpuPbrPipeline, key:flighthq._internal._Object, standard:Null<StandardPbrMaterialProperties>):WgpuMaterialBinding {
     var baseColorMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
     var binding:WgpuMaterialBinding = cast _Runtime.UNDEFINED;
     baseColorMap = ((cast !_Runtime.strictEquals(standard, null) : Bool) ? (cast (cast standard : { var baseColorMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).baseColorMap : Dynamic) : (cast null : Dynamic));
@@ -73,19 +77,22 @@ class StandardPbrWgpuMeshMaterialRenderer {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuPbrMaterialScratch():flighthq._internal._Float32Array {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuPbrMaterialScratch():flighthq._internal._Float32Array {
     return cast StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer;
     return cast null;
   }
 
-  @:noCompletion
-  public static function writeWgpuPbrMaterialUniform(state:WgpuRenderState, binding:WgpuMaterialBinding):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function writeWgpuPbrMaterialUniform(state:WgpuRenderState, binding:WgpuMaterialBinding):Void {
     flighthq._internal.backend.WebGpuQueueBackend.call(flighthq._internal.backend.WebGpuDeviceBackend.field((cast state : WgpuRenderState).device, 'queue'), 'writeBuffer', cast ([_Runtime.field(binding, 'buffer'), 0.0, _Runtime.field(StandardPbrWgpuMeshMaterialRenderer._materialScratch__standardPbrWgpuMeshMaterialRenderer, 'buffer'), 0.0, (WGPU_PBR_MATERIAL_UNIFORM_FLOATS * 4.0)] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function writeWgpuPbrStandardBlock(out:flighthq._internal._Float32Array, standard:Null<StandardPbrMaterialProperties>, alphaCutoff:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function writeWgpuPbrStandardBlock(out:flighthq._internal._Float32Array, standard:Null<StandardPbrMaterialProperties>, alphaCutoff:Float):Void {
     var strength:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(standard, null) : Bool)) {
       flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast 0.0 : Float), (cast 1.0 : Float));

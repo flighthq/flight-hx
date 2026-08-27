@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.MotionBlurEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlMotionBlurEffect {
-  @:noCompletion
-  public static function applyMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, velocityTexture:Null<flighthq._internal.dom.WebGLTexture>, effect:MotionBlurEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, velocityTexture:Null<flighthq._internal.dom.WebGLTexture>, effect:MotionBlurEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;

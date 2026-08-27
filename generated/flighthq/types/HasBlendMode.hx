@@ -3,11 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.Node.NodeData;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeTraits;
 
 typedef HasBlendMode = { var blendMode:Null<BlendMode>; };
-
-typedef BlendModeNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var blendMode:Null<BlendMode>; };

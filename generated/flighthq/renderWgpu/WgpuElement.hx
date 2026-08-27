@@ -4,6 +4,7 @@ package flighthq.renderWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class WgpuElement {
   public static function createWgpuCanvasElement(width:Float, height:Float, pixelRatio:Float = 1.0):flighthq._internal.dom.HTMLCanvasElement {
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;

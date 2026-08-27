@@ -12,39 +12,40 @@ import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
-import flighthq.types.Entity.Kind;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.GlVelocityContext;
 import flighthq.types.GlVelocityWriter;
-import flighthq.types.GlVelocityWriter.GlVelocityContext;
-import flighthq.types.HasBoundsRectangle.Spatial2DNode;
-import flighthq.types.HasTransform2D.Transform2DNode;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
 import flighthq.types.Matrix;
-import flighthq.types.Node.NodeOf;
+import flighthq.types.NodeOf;
 import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
+import flighthq.types.ParticleEmitterData;
 import flighthq.types.QuadBatch;
-import flighthq.types.QuadBatch.QuadBatchData;
-import flighthq.types.QuadBatch.QuadBatchRuntime;
+import flighthq.types.QuadBatchData;
+import flighthq.types.QuadBatchRuntime;
 import flighthq.types.QuadTransformType;
 import flighthq.types.Rectangle;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.Spatial2DNode;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.Transform2DNode;
 import flighthq.types.Types.EntityRuntimeKey;
-import flighthq.types.Velocity.Velocity2D;
-import flighthq.types.Velocity.VelocityField;
+import flighthq.types.Velocity2D;
+import flighthq.types.VelocityField;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.velocity.VelocityField.getVelocity;
 
 typedef GlVelocityProgram__glVelocity = { var program:flighthq._internal.dom.WebGLProgram; var quadBuffer:flighthq._internal.dom.WebGLBuffer; var locCorner:Float; var locClipRect:flighthq._internal.dom.WebGLUniformLocation; var locVelocity:flighthq._internal.dom.WebGLUniformLocation; };
 
+@:noCompletion
 class GlVelocity {
   public static function createGlVelocityTarget(state:GlRenderState, width:Float, height:Float):GlRenderTarget {
     return cast (cast createGlRenderTarget(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = { width: width, height: height, format: 'rgba16f' }; __callArgument1; })) : GlRenderTarget);
@@ -151,8 +152,9 @@ class GlVelocity {
     }
   });
 
-  @:noCompletion
-  public static final defaultGlQuadBatchVelocityWriter:GlVelocityWriter = (cast function(ctx:GlVelocityContext, node:flighthq._internal._Object):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultGlQuadBatchVelocityWriter:GlVelocityWriter = (cast function(ctx:GlVelocityContext, node:flighthq._internal._Object):Void {
     var batch:QuadBatch = cast _Runtime.UNDEFINED;
     var data:QuadBatchData = cast _Runtime.UNDEFINED;
     var runtime:QuadBatchRuntime = cast _Runtime.UNDEFINED;
@@ -255,8 +257,9 @@ class GlVelocity {
     drawGlVelocityQuad(({ final __callArgument18:Dynamic = ctx; __callArgument18; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast bounds.width : Float), (cast bounds.height : Float), (cast GlVelocity._scratchVelocity__glVelocity.x : Float), (cast GlVelocity._scratchVelocity__glVelocity.y : Float));
   });
 
-  @:noCompletion
-  public static function drawGlVelocityQuad(ctx:GlVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlVelocityQuad(ctx:GlVelocityContext, x:Float, y:Float, width:Float, height:Float, velocityX:Float, velocityY:Float):Void {
     var program:GlVelocityProgram__glVelocity = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var clipX0:Float = cast _Runtime.UNDEFINED;
@@ -274,8 +277,9 @@ class GlVelocity {
     flighthq._internal.backend.WebGl2Backend.drawArrays(gl, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'TRIANGLES', flighthq._internal.backend.WebGl2Backend.TRIANGLES), 0.0, 6.0);
   }
 
-  @:noCompletion
-  public static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlVelocityWriter(state:GlRenderState, kind:Kind):Null<GlVelocityWriter> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlVelocityWriter; }>> = cast _Runtime.UNDEFINED;
     entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument22:Dynamic = state; __callArgument22; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var velocityWriters:KeyedTable<GlVelocityWriter>; }).velocityWriters : KeyedTable<GlVelocityWriter>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlVelocityWriter>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural24 = entry; __structural24 == null ? _Runtime.UNDEFINED : (cast __structural24 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlVelocityWriter; }).value : Dynamic) : (cast null : Dynamic));

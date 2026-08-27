@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef AcceleratorParseError = { var token:String; var reason:AcceleratorParseErrorReason; };
-
-typedef AcceleratorParseErrorReason = String;

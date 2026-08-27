@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ToneMapOperator = String;
-
 typedef ToneMapEffect = { var kind:String; @:optional var operator_:ToneMapOperator; @:optional var exposure:Float; @:optional var white:Float; };

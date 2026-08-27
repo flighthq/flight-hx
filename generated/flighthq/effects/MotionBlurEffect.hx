@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.MotionBlurEffect;
 
+@:noCompletion
 class MotionBlurEffect {
   public static function createMotionBlurEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var samples:Null<Float>; }):flighthq.types.MotionBlurEffect {
     if (options == null) options = cast ({  } : Dynamic);

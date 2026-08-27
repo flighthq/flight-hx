@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Snapshot;
 
+@:noCompletion
 class EqualsSnapshot {
   public static function equalsSnapshot<T>(a:Snapshot<T>, b:Snapshot<T>):Bool {
     return cast (cast EqualsSnapshot.snapshotValuesEqual__equalsSnapshot((cast a : flighthq._internal._Any), (cast b : flighthq._internal._Any)) : Bool);

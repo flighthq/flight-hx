@@ -1,4 +1,4 @@
 // Derived by tools/derive-cairo-aliases.mjs from the generated canvas surface. Do not edit.
 package flighthq.types;
 
-typedef CairoTextureResolver = flighthq.types.CanvasTextureResolver.CanvasTextureResolver;
+typedef CairoTextureResolver = flighthq.types.CanvasTextureResolver;

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SketchEffect;
 
+@:noCompletion
 class SketchEffect {
   public static function createSketchEffect(?options:{ @:optional var strength:Null<Float>; }):flighthq.types.SketchEffect {
     if (options == null) options = cast ({  } : Dynamic);

@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.share.Share.createWebShareBackend;
 import flighthq.share.Share.installShareHostBackend;
 import flighthq.share.Share.observeShareHostResult;
-import flighthq.types.Share.ShareBackend;
-import flighthq.types.Share.ShareContent;
-import flighthq.types.Share.ShareOptions;
-import flighthq.types.Share.ShareResult;
+import flighthq.types.ShareBackend;
+import flighthq.types.ShareContent;
+import flighthq.types.ShareOptions;
+import flighthq.types.ShareResult;
 
+@:noCompletion
 class WebShare {
   public static function enableHostWebShare():Void {
     var inner:ShareBackend = cast _Runtime.UNDEFINED;
@@ -49,8 +50,9 @@ class WebShare {
     installShareHostBackend(({ final __callArgument5:Dynamic = backend; __callArgument5; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebShareForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebShareForTest():Void {
     (WebShare._enabled__webShare = cast (false : Dynamic));
   }
 

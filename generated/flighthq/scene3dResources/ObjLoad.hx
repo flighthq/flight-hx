@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.scene3dFormats.ObjParse.parseObj;
 import flighthq.scene3dResources.SceneDocumentSource.loadScene3DDocumentTextFromUrl;
 import flighthq.scene3dResources.SceneDocumentSource.setScene3DDocumentResourceBasePathFromUrl;
-import flighthq.types.ObjSchema.ObjMaterialLibrary;
+import flighthq.types.ObjMaterialLibrary;
 import flighthq.types.Scene3DDocument;
-import flighthq.types.Scene3DResources.Scene3DDocumentLoadOptions;
+import flighthq.types.Scene3DDocumentLoadOptions;
 
+@:noCompletion
 class ObjLoad {
   public static function loadScene3DDocumentFromObjUrl(url:String, ?materials:ObjMaterialLibrary, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<Scene3DDocument>> {
     return cast flighthq._internal._Async.finishFlow(

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TintAdjustment;
 
+@:noCompletion
 class TintAdjustment {
   public static function createTintAdjustment(rgba:Float):flighthq.types.TintAdjustment {
     var redScale:Float = cast _Runtime.UNDEFINED;

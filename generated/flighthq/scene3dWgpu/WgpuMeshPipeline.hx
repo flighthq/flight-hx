@@ -18,27 +18,27 @@ import flighthq.texture.Texture.hasTextureSource;
 import flighthq.texture.Texture.hasTextureUvTransform;
 import flighthq.types.BlendMode;
 import flighthq.types.Camera3D;
-import flighthq.types.Camera3D.PerspectiveProjection;
-import flighthq.types.Camera3D.Projection;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.Matrix3;
-import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Matrix3Like;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.MeshSubset;
+import flighthq.types.PerspectiveProjection;
+import flighthq.types.Projection;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.TextureFilter;
-import flighthq.types.Sampler.TextureWrap;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.SurfaceMaterial;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureFilter;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureUvTransform;
+import flighthq.types.TextureWrap;
 import flighthq.types.Types.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types.Types.SCENE_LIGHT_HEMISPHERE_OFFSET;
@@ -47,20 +47,20 @@ import flighthq.types.Types.SCENE_LIGHT_POINT_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_POINT_STRIDE;
 import flighthq.types.Types.SCENE_LIGHT_SPOT_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_SPOT_STRIDE;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
+import flighthq.types.WgpuColorAdjustmentMaterialFeature;
+import flighthq.types.WgpuMaterialBinding;
 import flighthq.types.WgpuMeshPipeline;
-import flighthq.types.WgpuMeshPipeline.WgpuScene3DLayouts;
+import flighthq.types.WgpuMeshUpload;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuScene3DFrameBinding;
+import flighthq.types.WgpuScene3DIbl;
+import flighthq.types.WgpuScene3DLayouts;
 import flighthq.types.WgpuScene3DRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
-import flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload;
-import flighthq.types.WgpuScene3DRuntime.WgpuScene3DFrameBinding;
-import flighthq.types.WgpuScene3DRuntime.WgpuScene3DIbl;
-import flighthq.types.WgpuScene3DRuntime.WgpuScene3DShadow;
+import flighthq.types.WgpuScene3DShadow;
 import flighthq.types.WgpuSkinningAdapter;
+import flighthq.types.WgpuTextureEntry;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
@@ -71,6 +71,7 @@ import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_POINT_STRID
 import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_SPOT_OFFSET;
 import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_SPOT_STRIDE;
 
+@:noCompletion
 class WgpuMeshPipeline {
   public static function beginWgpuMeshDraw(state:WgpuRenderState, pipeline:flighthq.types.WgpuMeshPipeline):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -93,8 +94,9 @@ class WgpuMeshPipeline {
     }
   }
 
-  @:noCompletion
-  public static function buildWgpuMaterialBindGroup(state:WgpuRenderState, layout:flighthq._internal.dom.GPUBindGroupLayout, buffer:flighthq._internal.dom.GPUBuffer, sampler:flighthq._internal.dom.GPUSampler, views:Array<flighthq._internal.dom.GPUTextureView>):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function buildWgpuMaterialBindGroup(state:WgpuRenderState, layout:flighthq._internal.dom.GPUBindGroupLayout, buffer:flighthq._internal.dom.GPUBuffer, sampler:flighthq._internal.dom.GPUSampler, views:Array<flighthq._internal.dom.GPUTextureView>):flighthq._internal.dom.GPUBindGroup {
     var entries:Array<flighthq._internal.dom.GPUBindGroupEntry> = cast _Runtime.UNDEFINED;
     entries = (cast cast ([{ binding: 0.0, resource: { buffer: buffer } }, { binding: 1.0, resource: sampler }] : Array<Dynamic>));
     {
@@ -108,8 +110,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function buildWgpuPerMapMaterialBindGroup(state:WgpuRenderState, layout:flighthq._internal.dom.GPUBindGroupLayout, buffer:flighthq._internal.dom.GPUBuffer, samplers:Array<flighthq._internal.dom.GPUSampler>, views:Array<flighthq._internal.dom.GPUTextureView>):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function buildWgpuPerMapMaterialBindGroup(state:WgpuRenderState, layout:flighthq._internal.dom.GPUBindGroupLayout, buffer:flighthq._internal.dom.GPUBuffer, samplers:Array<flighthq._internal.dom.GPUSampler>, views:Array<flighthq._internal.dom.GPUTextureView>):flighthq._internal.dom.GPUBindGroup {
     var count:Float = cast _Runtime.UNDEFINED;
     var entries:Array<flighthq._internal.dom.GPUBindGroupEntry> = cast _Runtime.UNDEFINED;
     count = _Runtime.field(views, 'length');
@@ -132,8 +135,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWgpuMeshPipeline(state:WgpuRenderState, options:{ @:optional var blended:Bool; var doubleSided:Bool; @:optional var extraBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var format:flighthq._internal.dom.GPUTextureFormat; @:optional var iblBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var module:flighthq._internal.dom.GPUShaderModule; @:optional var pbrSampleBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; @:optional var shadowBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; @:optional var skinned:Bool; @:optional var topology:flighthq._internal.dom.GPUPrimitiveTopology; }):flighthq.types.WgpuMeshPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function createWgpuMeshPipeline(state:WgpuRenderState, options:{ @:optional var blended:Bool; var doubleSided:Bool; @:optional var extraBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var format:flighthq._internal.dom.GPUTextureFormat; @:optional var iblBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var module:flighthq._internal.dom.GPUShaderModule; @:optional var pbrSampleBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; @:optional var shadowBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; @:optional var skinned:Bool; @:optional var topology:flighthq._internal.dom.GPUPrimitiveTopology; }):flighthq.types.WgpuMeshPipeline {
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var layouts:WgpuScene3DLayouts = cast _Runtime.UNDEFINED;
     var sceneRuntime:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
@@ -168,8 +172,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function drawWgpuMeshSubset(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuMeshSubset(state:WgpuRenderState, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
@@ -207,8 +212,9 @@ class WgpuMeshPipeline {
     }
   }
 
-  @:noCompletion
-  public static function ensureWgpuFrameBindGroup(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuFrameBindGroup(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroup {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument32:Dynamic = state; __callArgument32; })) : WgpuScene3DRuntime);
     if ((cast _Runtime.strictEquals(scene.frameBuffer, null) : Bool)) {
@@ -221,8 +227,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuIblSampleBindGroup(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuIblSampleBindGroup(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroup {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var ibl:Null<WgpuScene3DIbl> = cast _Runtime.UNDEFINED;
@@ -268,8 +275,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuIblSampleLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuIblSampleLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument40:Dynamic = state; __callArgument40; })) : WgpuScene3DRuntime);
     if ((cast _Runtime.strictEquals(scene.iblSampleLayout, null) : Bool)) {
@@ -279,8 +287,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuMaterialBinding(state:WgpuRenderState, key:flighthq._internal._Object, layout:flighthq._internal.dom.GPUBindGroupLayout, uniformByteSize:Float, sampler:flighthq._internal.dom.GPUSampler, views:Array<flighthq._internal.dom.GPUTextureView>):WgpuMaterialBinding {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuMaterialBinding(state:WgpuRenderState, key:flighthq._internal._Object, layout:flighthq._internal.dom.GPUBindGroupLayout, uniformByteSize:Float, sampler:flighthq._internal.dom.GPUSampler, views:Array<flighthq._internal.dom.GPUTextureView>):WgpuMaterialBinding {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument42:Dynamic = state; __callArgument42; })) : WgpuScene3DRuntime);
@@ -309,8 +318,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuPbrSampleBindGroup(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuPbrSampleBindGroup(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroup {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var shadow:Null<WgpuScene3DShadow> = cast _Runtime.UNDEFINED;
@@ -371,8 +381,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuPbrSampleLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuPbrSampleLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument74:Dynamic = state; __callArgument74; })) : WgpuScene3DRuntime);
     if ((cast _Runtime.strictEquals(scene.pbrSampleLayout, null) : Bool)) {
@@ -382,8 +393,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuPerMapMaterialBinding(state:WgpuRenderState, key:flighthq._internal._Object, layout:flighthq._internal.dom.GPUBindGroupLayout, uniformByteSize:Float, samplers:Array<flighthq._internal.dom.GPUSampler>, views:Array<flighthq._internal.dom.GPUTextureView>):WgpuMaterialBinding {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuPerMapMaterialBinding(state:WgpuRenderState, key:flighthq._internal._Object, layout:flighthq._internal.dom.GPUBindGroupLayout, uniformByteSize:Float, samplers:Array<flighthq._internal.dom.GPUSampler>, views:Array<flighthq._internal.dom.GPUTextureView>):WgpuMaterialBinding {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument76:Dynamic = state; __callArgument76; })) : WgpuScene3DRuntime);
@@ -401,8 +413,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuPlaceholderTextureView(state:WgpuRenderState):flighthq._internal.dom.GPUTextureView {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuPlaceholderTextureView(state:WgpuRenderState):flighthq._internal.dom.GPUTextureView {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var view:Null<flighthq._internal.dom.GPUTextureView> = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument110:Dynamic = state; __callArgument110; })) : WgpuScene3DRuntime);
@@ -417,8 +430,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuScene3DLayouts(state:WgpuRenderState):WgpuScene3DLayouts {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuScene3DLayouts(state:WgpuRenderState):WgpuScene3DLayouts {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument112:Dynamic = state; __callArgument112; })) : WgpuScene3DRuntime);
     if ((cast ((cast _Runtime.strictEquals(scene.frameBindGroupLayout, null) : Bool) || (cast _Runtime.strictEquals(scene.drawBindGroupLayout, null) : Bool)) : Bool)) {
@@ -430,8 +444,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuScene3DPipeline<T:flighthq.types.WgpuMeshPipeline>(state:WgpuRenderState, key:String, compile:Bool->Bool->T):T {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuScene3DPipeline<T:flighthq.types.WgpuMeshPipeline>(state:WgpuRenderState, key:String, compile:Bool->Bool->T):T {
     var runtime:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var blended:Bool = cast _Runtime.UNDEFINED;
     var blendMode:Null<String> = cast _Runtime.UNDEFINED;
@@ -452,8 +467,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuShadowSampleBindGroup(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuShadowSampleBindGroup(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroup {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var shadow:Null<WgpuScene3DShadow> = cast _Runtime.UNDEFINED;
@@ -528,8 +544,9 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuMaterialSampler(state:WgpuRenderState, texture:Null<Texture>):flighthq._internal.dom.GPUSampler {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuMaterialSampler(state:WgpuRenderState, texture:Null<Texture>):flighthq._internal.dom.GPUSampler {
     var sampler:Sampler = cast _Runtime.UNDEFINED;
     var minFilter:flighthq._internal.dom.GPUFilterMode = cast _Runtime.UNDEFINED;
     var magFilter:flighthq._internal.dom.GPUFilterMode = cast _Runtime.UNDEFINED;
@@ -545,15 +562,17 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuMeshPreludeWgsl(skinned:Bool, ?skinning:Null<WgpuSkinningAdapter>):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuMeshPreludeWgsl(skinned:Bool, ?skinning:Null<WgpuSkinningAdapter>):String {
     if (skinning == null) skinning = cast (null : Dynamic);
     return cast ((cast ((cast skinned : Bool) && (cast !_Runtime.strictEquals(skinning, null) : Bool)) : Bool) ? (cast _Runtime.callProperty(skinning, 'extendMeshPrelude', cast ([WGPU_MESH_PRELUDE_WGSL] : Array<Dynamic>)) : Dynamic) : (cast WGPU_MESH_PRELUDE_WGSL : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function isWgpuMaterialBindGroupRebuildNeeded(binding:WgpuMaterialBinding, sampler:flighthq._internal.dom.GPUSampler, views:Array<flighthq._internal.dom.GPUTextureView>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isWgpuMaterialBindGroupRebuildNeeded(binding:WgpuMaterialBinding, sampler:flighthq._internal.dom.GPUSampler, views:Array<flighthq._internal.dom.GPUTextureView>):Bool {
     var cached:Null<Array<flighthq._internal.dom.GPUTextureView>> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(binding, 'sampler'), sampler) : Bool)) { return cast true; }
     cached = _Runtime.field(binding, 'views');
@@ -569,28 +588,32 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isWgpuTextureReady(texture:Null<Texture>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isWgpuTextureReady(texture:Null<Texture>):Bool {
     return cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast (cast hasTextureSource(({ final __callArgument132:Dynamic = texture; __callArgument132; })) : Bool) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function resolveWgpuMaterialTextureView(state:WgpuRenderState, texture:Null<Texture>):flighthq._internal.dom.GPUTextureView {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveWgpuMaterialTextureView(state:WgpuRenderState, texture:Null<Texture>):flighthq._internal.dom.GPUTextureView {
     return cast _Runtime.coalesce(((cast !_Runtime.strictEquals(texture, null) : Bool) ? (cast ({ final __structural138 = (cast (#if js _Runtime.callValue(resolveWgpuTexture, cast ([({ final __callArgument136:Dynamic = state; __callArgument136; }), ({ final __callArgument137:Dynamic = texture; __callArgument137; })] : Array<Dynamic>)) #else resolveWgpuTexture(({ final __callArgument134:Dynamic = state; __callArgument134; }), ({ final __callArgument135:Dynamic = texture; __callArgument135; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Null<WgpuTextureEntry>); __structural138 == null ? _Runtime.UNDEFINED : (cast __structural138 : { var view:flighthq._internal.dom.GPUTextureView; }).view; }) : Dynamic) : (cast null : Dynamic)), function():Dynamic return cast (cast ensureWgpuPlaceholderTextureView(({ final __callArgument139:Dynamic = state; __callArgument139; })) : flighthq._internal.dom.GPUTextureView));
     return cast null;
   }
 
-  @:noCompletion
-  public static function spliceWgpuColorAdjustmentPrelude(source:String, feature:WgpuColorAdjustmentMaterialFeature, matrix:Bool = false):String {
+  @:allow(flighthq)
+  @:keep
+  private static function spliceWgpuColorAdjustmentPrelude(source:String, feature:WgpuColorAdjustmentMaterialFeature, matrix:Bool = false):String {
     var fields:String = cast _Runtime.UNDEFINED;
     fields = ((cast matrix : Bool) ? (cast '  flightColorMatrix0 : vec4f,\n  flightColorMatrix1 : vec4f,\n  flightColorMatrix2 : vec4f,\n  flightColorMatrix3 : vec4f,\n  flightColorMatrixOffset : vec4f,' : Dynamic) : (cast '  flightColorScale : vec4f,\n  flightColorBias : vec4f,' : Dynamic));
     return cast (((cast matrix : Bool) ? (cast _Runtime.field(feature, 'matrixFragmentShaderChunk') : Dynamic) : (cast _Runtime.field(feature, 'fragmentShaderChunk') : Dynamic)) + _Runtime.replace(source, '  params : vec4f,          // x = resolved object alpha, y = alpha-is-coverage flag', '  params : vec4f,          // x = resolved object alpha, y = alpha-is-coverage flag\n' + Std.string(fields) + '', false));
     return cast null;
   }
 
-  @:noCompletion
-  public static function stashWgpuUvTransform(state:WgpuRenderState, texture:Null<TextureLike>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function stashWgpuUvTransform(state:WgpuRenderState, texture:Null<TextureLike>):Void {
     var out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     out = (cast (cast getWgpuScene3DRuntime(({ final __callArgument141:Dynamic = state; __callArgument141; })) : WgpuScene3DRuntime) : { var pendingUvTransform:flighthq._internal._Float32Array; }).pendingUvTransform;
@@ -609,8 +632,9 @@ class WgpuMeshPipeline {
     }
   }
 
-  @:noCompletion
-  public static function wgpuPerMapMaterialBindGroupNeedsRebuild(binding:WgpuMaterialBinding, samplers:Array<flighthq._internal.dom.GPUSampler>, views:Array<flighthq._internal.dom.GPUTextureView>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function wgpuPerMapMaterialBindGroupNeedsRebuild(binding:WgpuMaterialBinding, samplers:Array<flighthq._internal.dom.GPUSampler>, views:Array<flighthq._internal.dom.GPUTextureView>):Bool {
     var cachedSamplers:Null<Array<flighthq._internal.dom.GPUSampler>> = cast _Runtime.UNDEFINED;
     var cachedViews:Null<Array<flighthq._internal.dom.GPUTextureView>> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(samplers, 'length'), _Runtime.field(views, 'length')) : Bool)) { return cast true; }
@@ -736,11 +760,13 @@ class WgpuMeshPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static final WGPU_MESH_PRELUDE_WGSL:String = '\nconst PI : f32 = 3.14159265359;\nconst MAX_FORWARD_LIGHTS : u32 = 4u;\n\nstruct Frame {\n  viewProjection : mat4x4f,\n  cameraPosition : vec4f,\n  lightDirection : vec4f,       // xyz = directional light travel direction; w = directionalCount\n  directionalRadiance : vec4f,  // rgb = linear premultiplied radiance\n  ambientRadiance : vec4f,      // rgb = linear premultiplied radiance; w = ambientCount\n  view : mat4x4f,               // camera view matrix; rotates world normals into view space (matcap)\n  // Punctual light arrays — layout mirrors Scene3DLightBlock.data (packScene3DLightBlock).\n  //   point[i]      = pointLights[i*2+0]={pos.xyz,range}, [i*2+1]={radiance.rgb,invSqrRange}\n  //   spot[i]       = spotLights[i*4+0..1] as point, [i*4+2]={dir.xyz,_}, [i*4+3]={cosInner,cosOuter,_,_}\n  //   hemisphere[i] = hemisphereLights[i*3+0]={sky.rgb,_}, [i*3+1]={ground.rgb,_}, [i*3+2]={up.xyz,_}\n  pointLights : array<vec4f, 8>,       // MAX_FORWARD_LIGHTS * 2\n  spotLights : array<vec4f, 16>,       // MAX_FORWARD_LIGHTS * 4\n  hemisphereLights : array<vec4f, 12>, // MAX_FORWARD_LIGHTS * 3\n  punctualCounts : vec4f,              // x = pointCount, y = spotCount, z = hemisphereCount\n};\n\nstruct Draw {\n  world : mat4x4f,\n  normalMatrix : mat3x3f,\n  uvTransform : mat3x3f,   // KHR_texture_transform of the material\'s primary map (identity when unused)\n  params : vec4f,          // x = resolved object alpha, y = alpha-is-coverage flag\n};\n\n@group(0) @binding(0) var<uniform> frame : Frame;\n@group(1) @binding(0) var<uniform> draw : Draw;\n\nstruct VertexOutput {\n  @builtin(position) clipPosition : vec4f,\n  @location(0) worldPosition : vec3f,\n  @location(1) worldNormal : vec3f,\n  @location(2) worldTangent : vec4f,\n  @location(3) uv : vec2f,\n  @location(4) @interpolate(flat) objectAlpha : f32,\n};\n\n@vertex fn vs_main(\n  @location(0) position : vec3f,\n  @location(1) normal : vec3f,\n  @location(2) tangent : vec4f,\n  @location(3) uv : vec2f,\n) -> VertexOutput {\n  var out : VertexOutput;\n  var localPosition = vec4f(position, 1.0);\n  var localNormal = normal;\n  var localTangent = tangent.xyz;\n  let world = draw.world * localPosition;\n  out.worldPosition = world.xyz;\n  out.clipPosition = frame.viewProjection * world;\n  out.worldNormal = draw.normalMatrix * localNormal;\n  out.worldTangent = vec4f(draw.normalMatrix * localTangent, tangent.w);\n  // Apply the material\'s KHR_texture_transform to the uv. draw.uvTransform is identity for an untiled\n  // material (writeWgpuDrawUniform\'s default), so this is a no-op there — applied unconditionally rather\n  // than behind a pipeline const because this vs_main is shared by every family (classic/unlit/toon/\n  // matcap/debug/wireframe) and a const would have to thread through all of them; a per-vertex mat3\n  // multiply is negligible. The scene-gl mirror gates the equivalent branch via its #ifdef variant.\n  out.uv = (draw.uvTransform * vec3f(uv, 1.0)).xy;\n  out.objectAlpha = draw.params.x;\n  return out;\n}\n\n';
+  @:allow(flighthq)
+  @:keep
+  private static final WGPU_MESH_PRELUDE_WGSL:String = '\nconst PI : f32 = 3.14159265359;\nconst MAX_FORWARD_LIGHTS : u32 = 4u;\n\nstruct Frame {\n  viewProjection : mat4x4f,\n  cameraPosition : vec4f,\n  lightDirection : vec4f,       // xyz = directional light travel direction; w = directionalCount\n  directionalRadiance : vec4f,  // rgb = linear premultiplied radiance\n  ambientRadiance : vec4f,      // rgb = linear premultiplied radiance; w = ambientCount\n  view : mat4x4f,               // camera view matrix; rotates world normals into view space (matcap)\n  // Punctual light arrays — layout mirrors Scene3DLightBlock.data (packScene3DLightBlock).\n  //   point[i]      = pointLights[i*2+0]={pos.xyz,range}, [i*2+1]={radiance.rgb,invSqrRange}\n  //   spot[i]       = spotLights[i*4+0..1] as point, [i*4+2]={dir.xyz,_}, [i*4+3]={cosInner,cosOuter,_,_}\n  //   hemisphere[i] = hemisphereLights[i*3+0]={sky.rgb,_}, [i*3+1]={ground.rgb,_}, [i*3+2]={up.xyz,_}\n  pointLights : array<vec4f, 8>,       // MAX_FORWARD_LIGHTS * 2\n  spotLights : array<vec4f, 16>,       // MAX_FORWARD_LIGHTS * 4\n  hemisphereLights : array<vec4f, 12>, // MAX_FORWARD_LIGHTS * 3\n  punctualCounts : vec4f,              // x = pointCount, y = spotCount, z = hemisphereCount\n};\n\nstruct Draw {\n  world : mat4x4f,\n  normalMatrix : mat3x3f,\n  uvTransform : mat3x3f,   // KHR_texture_transform of the material\'s primary map (identity when unused)\n  params : vec4f,          // x = resolved object alpha, y = alpha-is-coverage flag\n};\n\n@group(0) @binding(0) var<uniform> frame : Frame;\n@group(1) @binding(0) var<uniform> draw : Draw;\n\nstruct VertexOutput {\n  @builtin(position) clipPosition : vec4f,\n  @location(0) worldPosition : vec3f,\n  @location(1) worldNormal : vec3f,\n  @location(2) worldTangent : vec4f,\n  @location(3) uv : vec2f,\n  @location(4) @interpolate(flat) objectAlpha : f32,\n};\n\n@vertex fn vs_main(\n  @location(0) position : vec3f,\n  @location(1) normal : vec3f,\n  @location(2) tangent : vec4f,\n  @location(3) uv : vec2f,\n) -> VertexOutput {\n  var out : VertexOutput;\n  var localPosition = vec4f(position, 1.0);\n  var localNormal = normal;\n  var localTangent = tangent.xyz;\n  let world = draw.world * localPosition;\n  out.worldPosition = world.xyz;\n  out.clipPosition = frame.viewProjection * world;\n  out.worldNormal = draw.normalMatrix * localNormal;\n  out.worldTangent = vec4f(draw.normalMatrix * localTangent, tangent.w);\n  // Apply the material\'s KHR_texture_transform to the uv. draw.uvTransform is identity for an untiled\n  // material (writeWgpuDrawUniform\'s default), so this is a no-op there — applied unconditionally rather\n  // than behind a pipeline const because this vs_main is shared by every family (classic/unlit/toon/\n  // matcap/debug/wireframe) and a const would have to thread through all of them; a per-vertex mat3\n  // multiply is negligible. The scene-gl mirror gates the equivalent branch via its #ifdef variant.\n  out.uv = (draw.uvTransform * vec3f(uv, 1.0)).xy;\n  out.objectAlpha = draw.params.x;\n  return out;\n}\n\n';
 
-  @:noCompletion
-  public static function writeWgpuFrameUniform(state:WgpuRenderState, camera:Camera3D, lights:Scene3DLightBlock):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function writeWgpuFrameUniform(state:WgpuRenderState, camera:Camera3D, lights:Scene3DLightBlock):Void {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuScene3DFrameBinding> = cast _Runtime.UNDEFINED;
     var f:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -866,11 +892,13 @@ class WgpuMeshPipeline {
 
   public static final DEPTH_STENCIL_FORMAT__wgpuMeshPipeline:flighthq._internal.dom.GPUTextureFormat = 'depth24plus-stencil8';
 
-  @:noCompletion
-  public static final SHADOW_DEPTH_FORMAT:flighthq._internal.dom.GPUTextureFormat = 'depth32float';
+  @:allow(flighthq)
+  @:keep
+  private static final SHADOW_DEPTH_FORMAT:flighthq._internal.dom.GPUTextureFormat = 'depth32float';
 
-  @:noCompletion
-  public static final WGPU_DIRECTIONAL_SHADOW_WGSL:String = '\nconst MAX_DIRECTIONAL_SHADOW_PCF_RADIUS : i32 = ' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + ';\n\nstruct Shadow {\n  matrix : mat4x4f,\n  params : vec4f,\n};\n\n@group(3) @binding(0) var<uniform> shadow : Shadow;\n@group(3) @binding(1) var shadowMap : texture_depth_2d;\n@group(3) @binding(2) var shadowSampler : sampler_comparison;\n\n// Directional shadow factor at a world position. The compile-time radius cap bounds fragment cost;\n// radius 0 and 1 take dedicated one-tap and 3x3 paths, while radius 2 takes the bounded 5x5 path.\n// Outside the frustum / disabled = lit.\nfn compareDirectionalShadow(uv : vec2f, depthRef : f32) -> f32 {\n  return textureSampleCompareLevel(shadowMap, shadowSampler, uv, depthRef);\n}\n\nfn sampleDirectionalShadow(worldPos : vec3f, geometricNormal : vec3f) -> f32 {\n  if (shadow.params.x < 0.5) {\n    return 1.0;\n  }\n  let biasedWorldPos = worldPos + geometricNormal * shadow.params.w;\n  let clip = shadow.matrix * vec4f(biasedWorldPos, 1.0);\n  let ndc = clip.xyz / clip.w;\n  let uv = vec2f(ndc.x * 0.5 + 0.5, 1.0 - (ndc.y * 0.5 + 0.5));\n  let depthRef = ndc.z * 0.5 + 0.5 - shadow.params.z;\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0 || depthRef > 1.0) {\n    return 1.0;\n  }\n  let radius = clamp(i32(shadow.params.y), 0, MAX_DIRECTIONAL_SHADOW_PCF_RADIUS);\n  let texel = 1.0 / vec2f(textureDimensions(shadowMap, 0));\n  if (radius == 0) {\n    return compareDirectionalShadow(uv, depthRef);\n  }\n\n  var sum = 0.0;\n  if (radius == 1) {\n    for (var x = -1; x <= 1; x = x + 1) {\n      for (var y = -1; y <= 1; y = y + 1) {\n        let offset = vec2f(f32(x), f32(y)) * texel;\n        sum = sum + compareDirectionalShadow(uv + offset, depthRef);\n      }\n    }\n    return sum / 9.0;\n  }\n  for (var x = -MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; x <= MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; x = x + 1) {\n    for (var y = -MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; y <= MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; y = y + 1) {\n      let offset = vec2f(f32(x), f32(y)) * texel;\n      sum = sum + compareDirectionalShadow(uv + offset, depthRef);\n    }\n  }\n  let diameter = f32(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS * 2 + 1);\n  return sum / (diameter * diameter);\n}\n';
+  @:allow(flighthq)
+  @:keep
+  private static final WGPU_DIRECTIONAL_SHADOW_WGSL:String = '\nconst MAX_DIRECTIONAL_SHADOW_PCF_RADIUS : i32 = ' + Std.string(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS) + ';\n\nstruct Shadow {\n  matrix : mat4x4f,\n  params : vec4f,\n};\n\n@group(3) @binding(0) var<uniform> shadow : Shadow;\n@group(3) @binding(1) var shadowMap : texture_depth_2d;\n@group(3) @binding(2) var shadowSampler : sampler_comparison;\n\n// Directional shadow factor at a world position. The compile-time radius cap bounds fragment cost;\n// radius 0 and 1 take dedicated one-tap and 3x3 paths, while radius 2 takes the bounded 5x5 path.\n// Outside the frustum / disabled = lit.\nfn compareDirectionalShadow(uv : vec2f, depthRef : f32) -> f32 {\n  return textureSampleCompareLevel(shadowMap, shadowSampler, uv, depthRef);\n}\n\nfn sampleDirectionalShadow(worldPos : vec3f, geometricNormal : vec3f) -> f32 {\n  if (shadow.params.x < 0.5) {\n    return 1.0;\n  }\n  let biasedWorldPos = worldPos + geometricNormal * shadow.params.w;\n  let clip = shadow.matrix * vec4f(biasedWorldPos, 1.0);\n  let ndc = clip.xyz / clip.w;\n  let uv = vec2f(ndc.x * 0.5 + 0.5, 1.0 - (ndc.y * 0.5 + 0.5));\n  let depthRef = ndc.z * 0.5 + 0.5 - shadow.params.z;\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0 || depthRef > 1.0) {\n    return 1.0;\n  }\n  let radius = clamp(i32(shadow.params.y), 0, MAX_DIRECTIONAL_SHADOW_PCF_RADIUS);\n  let texel = 1.0 / vec2f(textureDimensions(shadowMap, 0));\n  if (radius == 0) {\n    return compareDirectionalShadow(uv, depthRef);\n  }\n\n  var sum = 0.0;\n  if (radius == 1) {\n    for (var x = -1; x <= 1; x = x + 1) {\n      for (var y = -1; y <= 1; y = y + 1) {\n        let offset = vec2f(f32(x), f32(y)) * texel;\n        sum = sum + compareDirectionalShadow(uv + offset, depthRef);\n      }\n    }\n    return sum / 9.0;\n  }\n  for (var x = -MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; x <= MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; x = x + 1) {\n    for (var y = -MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; y <= MAX_DIRECTIONAL_SHADOW_PCF_RADIUS; y = y + 1) {\n      let offset = vec2f(f32(x), f32(y)) * texel;\n      sum = sum + compareDirectionalShadow(uv + offset, depthRef);\n    }\n  }\n  let diameter = f32(MAX_DIRECTIONAL_SHADOW_PCF_RADIUS * 2 + 1);\n  return sum / (diameter * diameter);\n}\n';
 
   public static final SHADOW_SAMPLE_UNIFORM_BYTES__wgpuMeshPipeline:Float = 80.0;
 

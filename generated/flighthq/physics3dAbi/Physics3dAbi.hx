@@ -8,26 +8,26 @@ import flighthq.physics3dAbi.Physics3DAbiBuffer as Facade_Physics3dAbi_flighthq_
 import flighthq.physics3dAbi.Physics3DAbiCommand as Facade_Physics3dAbi_flighthq_physics3dAbi_Physics3DAbiCommand;
 import flighthq.physics3dAbi.Physics3DAbiLayout as Facade_Physics3dAbi_flighthq_physics3dAbi_Physics3DAbiLayout;
 import flighthq.physics3dAbi.Physics3DAbiQuery as Facade_Physics3dAbi_flighthq_physics3dAbi_Physics3DAbiQuery;
-import flighthq.types.Collision.CollisionBuiltInShape3D;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DQueryFilter;
-import flighthq.types.Physics3D.Physics3DSolverConfig;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.CollisionBuiltInShape3D;
 import flighthq.types.Physics3DAbi;
-import flighthq.types.Physics3DAbi.Physics3DAbiBodyBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiCommandBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiContactBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiContactHooks;
-import flighthq.types.Physics3DAbi.Physics3DAbiContactSelection;
-import flighthq.types.Physics3DAbi.Physics3DAbiExecutionResult;
-import flighthq.types.Physics3DAbi.Physics3DAbiJointBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiObjectId;
-import flighthq.types.Physics3DAbi.Physics3DAbiQueryBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiStepStatus;
-import flighthq.types.Physics3DAbi.Physics3DAbiWorldHandle;
-import flighthq.types.Physics3DAbi.Physics3DAbiWorldStatus;
-import flighthq.types.Spatial.SpatialAabb3D;
+import flighthq.types.Physics3DAbiBodyBuffer;
+import flighthq.types.Physics3DAbiCommandBuffer;
+import flighthq.types.Physics3DAbiContactBuffer;
+import flighthq.types.Physics3DAbiContactHooks;
+import flighthq.types.Physics3DAbiContactSelection;
+import flighthq.types.Physics3DAbiExecutionResult;
+import flighthq.types.Physics3DAbiJointBuffer;
+import flighthq.types.Physics3DAbiObjectId;
+import flighthq.types.Physics3DAbiQueryBuffer;
+import flighthq.types.Physics3DAbiStepStatus;
+import flighthq.types.Physics3DAbiWorldHandle;
+import flighthq.types.Physics3DAbiWorldStatus;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DQueryFilter;
+import flighthq.types.Physics3DSolverConfig;
+import flighthq.types.RigidBody3D;
+import flighthq.types.SpatialAabb3D;
 
 class Physics3dAbi {
   public static function clearPhysics3DAbiCommandBuffer(out:Physics3DAbiCommandBuffer):Void {

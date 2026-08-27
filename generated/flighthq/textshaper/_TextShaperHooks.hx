@@ -3,8 +3,9 @@ package flighthq.textshaper;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TextShaper.TextShaperBackend;
+import flighthq.types.TextShaperBackend;
 
+@:noCompletion
 class _TextShaperHooks {
   public static var _textShaperBackendHook:Null<Null<TextShaperBackend>->Void> = _Runtime.explicitNull();
 

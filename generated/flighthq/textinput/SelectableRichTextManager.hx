@@ -9,12 +9,13 @@ import flighthq.textlayout.RichTextQuery.computeRichTextCharIndexAtPoint;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.KeyCode;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.SelectableRichTextManager;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutResult;
 import flighthq.types._internal._KeyCodeValues.KeyCodeValue;
 
+@:noCompletion
 class SelectableRichTextManager {
   public static function blurSelectableRichText(manager:flighthq.types.SelectableRichTextManager):Void {
     if ((cast !_Runtime.strictEquals(manager.focused, null) : Bool)) {

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.FilmGrainEffect;
 
+@:noCompletion
 class FilmGrainEffect {
   public static function createFilmGrainEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var size:Null<Float>; @:optional var seed:Null<Float>; }):flighthq.types.FilmGrainEffect {
     if (options == null) options = cast ({  } : Dynamic);

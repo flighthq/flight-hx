@@ -1,12 +1,13 @@
 package;
 
 import flighthq.math.Math.*;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq._internal._Async;
 import flighthq._internal._HostValueLut;
 import flighthq._internal._Runtime;
 import flighthq._internal.DynamicObject;
 
+@:access(flighthq.entity.Entity)
 class CoreSmoke {
   static function main():Void {
     // Number.isSafeInteger through the exact emitted form (callProperty on the
@@ -34,7 +35,7 @@ class CoreSmoke {
     if (shapeCommandRegistrarTypecheck == null) throw 'shape command registrar typecheck failed';
     final typedProtocolObjectTypecheck:flighthq.types.TweenManager->flighthq.types.Shape->flighthq._internal.dom.AudioContext->flighthq.types.AudioResource->Void = typecheckTypedProtocolObjects;
     if (typedProtocolObjectTypecheck == null) throw 'typed protocol object typecheck failed';
-    final physicsSolverTypecheck:flighthq.types.Physics2D.Physics2DWorld->Void = typecheckPhysicsSolverArity;
+    final physicsSolverTypecheck:flighthq.types.Physics2DWorld->Void = typecheckPhysicsSolverArity;
     if (physicsSolverTypecheck == null) throw 'physics solver arity typecheck failed';
     #if lime
     final glSurfaceTypecheck:lime.ui.Window->flighthq._internal.dom.HTMLCanvasElement = flighthq.sdk.Sdk.createGlSurface;
@@ -163,17 +164,17 @@ class CoreSmoke {
     );
     if (dynamicMapped.join(',') != 'ONE,TWO') throw 'dynamic Array map callback ABI failed';
 
-    final cursorTokens:Array<flighthq.types.ShapeCommand.ShapeCommandToken> = cast (
+    final cursorTokens:Array<flighthq.types.ShapeCommandToken> = cast (
       ['moveTo', 2.0, 10.0, 20.0] : Array<Dynamic>
     );
     final cursorRuntime = new flighthq._internal.ShapeCommandArgumentCursorRuntime(cursorTokens);
     flighthq.shape.ShapeBounds.setShapeCommandArgumentCursor__shapeBounds(cast cursorRuntime, 2.0, 2.0);
-    final publicCursor:flighthq.types.ShapeBounds.ShapeCommandArgumentCursor = cast cursorRuntime;
+    final publicCursor:flighthq.types.ShapeCommandArgumentCursor = cast cursorRuntime;
     if (publicCursor.length != 2.0 || publicCursor.getArgument(0.0) != 10.0 || publicCursor.getArgument(2.0) != null) {
       throw 'shape command cursor lost its portable derived length or indexed arguments';
     }
 
-    final circleCommands:Array<flighthq.types.ShapeCommand.ShapeCommandToken> = cast (
+    final circleCommands:Array<flighthq.types.ShapeCommandToken> = cast (
       [
         'beginFill',
         2.0,
@@ -297,7 +298,7 @@ class CoreSmoke {
     flighthq.sdk.Sdk.playAudioResource(context, audio, {gain: 1});
   }
 
-  static function typecheckPhysicsSolverArity(world:flighthq.types.Physics2D.Physics2DWorld):Void {
+  static function typecheckPhysicsSolverArity(world:flighthq.types.Physics2DWorld):Void {
     flighthq.physics2d.JointRegistry.registerPhysics2DJointSolver(
       world,
       flighthq.physics2d.Joints.Physics2DMouseJointKind,

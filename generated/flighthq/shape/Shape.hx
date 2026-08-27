@@ -25,43 +25,43 @@ import flighthq.shape.ShapeStroke as Facade_Shape_flighthq_shape_ShapeStroke;
 import flighthq.shape.ShapeStrokeOutline as Facade_Shape_flighthq_shape_ShapeStrokeOutline;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
-import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
+import flighthq.types.BoundsNodeAny;
+import flighthq.types.CapsStyle;
+import flighthq.types.GradientType;
+import flighthq.types.InterpolationMethod;
+import flighthq.types.JointStyle;
+import flighthq.types.LineScaleMode;
 import flighthq.types.Matrix;
 import flighthq.types.MethodsOf;
 import flighthq.types.MorphShape;
-import flighthq.types.MorphShape.MorphShapeColorEndpoint;
-import flighthq.types.MorphShape.MorphShapeData;
-import flighthq.types.MorphShape.MorphShapeGradientEndpoint;
-import flighthq.types.MorphShape.MorphShapeGradientEndpointExplanation;
-import flighthq.types.MorphShape.MorphShapeLineEndpoint;
-import flighthq.types.MorphShape.MorphShapePaintBinding;
 import flighthq.types.MorphShapeAnimationTarget;
+import flighthq.types.MorphShapeColorEndpoint;
+import flighthq.types.MorphShapeData;
+import flighthq.types.MorphShapeGradientEndpoint;
+import flighthq.types.MorphShapeGradientEndpointExplanation;
+import flighthq.types.MorphShapeLineEndpoint;
+import flighthq.types.MorphShapePaintBinding;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DTraits;
 import flighthq.types.PartialNode;
 import flighthq.types.Path;
 import flighthq.types.PathMorph;
+import flighthq.types.PathWinding;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.Scale9Mapper;
 import flighthq.types.Scale9Shape;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.Shape.ShapeRuntime;
-import flighthq.types.ShapeBounds.ShapeBoundsExplanation;
-import flighthq.types.ShapeBounds.ShapeBoundsMode;
-import flighthq.types.ShapeCommand.CapsStyle;
-import flighthq.types.ShapeCommand.GradientType;
-import flighthq.types.ShapeCommand.InterpolationMethod;
-import flighthq.types.ShapeCommand.JointStyle;
-import flighthq.types.ShapeCommand.LineScaleMode;
-import flighthq.types.ShapeCommand.PathWinding;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
-import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.ShapeBoundsExplanation;
+import flighthq.types.ShapeBoundsMode;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
 import flighthq.types.ShapeFillRegion;
+import flighthq.types.ShapeRuntime;
 import flighthq.types.ShapeStrokeRegion;
 import flighthq.types.ShapeTessellationExplanation;
+import flighthq.types.SpreadMethod;
 import flighthq.types.Texture;
 import flighthq.types.TriangleCulling;
 import flighthq.types.Types.MorphShapeKind;
@@ -257,14 +257,16 @@ class Shape {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createShapeData(?data:{ @:optional var commands:Null<Array<ShapeCommandToken>>; }):ShapeData {
+  @:allow(flighthq)
+  @:keep
+  private static function createShapeData(?data:{ @:optional var commands:Null<Array<ShapeCommandToken>>; }):ShapeData {
     return cast { commands: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createShapeRuntime():ShapeRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createShapeRuntime():ShapeRuntime {
     var runtime:ShapeRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createNode2DRuntime((cast Shape.defaultMethods__shape : Dynamic)) : ShapeRuntime);
     ((cast runtime : ShapeRuntime).shapeBoundsCommandRegistryRevision = -1.0);
@@ -339,8 +341,9 @@ class Shape {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getShapeRuntime(source:flighthq.types.Shape):ShapeRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getShapeRuntime(source:flighthq.types.Shape):ShapeRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument13:Dynamic = source; __callArgument13; })) : ShapeRuntime);
     return cast null;
   }

@@ -7,11 +7,13 @@ import flighthq.bitmap.Bitmap.createBitmap;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Bitmap;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 
+@:noCompletion
 class WgpuSurface {
-  @:noCompletion
-  public static function acquireWgpuFrameCaptureTexture(state:WgpuRenderState):Null<flighthq._internal.dom.GPUTexture> {
+  @:allow(flighthq)
+  @:keep
+  private static function acquireWgpuFrameCaptureTexture(state:WgpuRenderState):Null<flighthq._internal.dom.GPUTexture> {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
@@ -96,8 +98,9 @@ class WgpuSurface {
     ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : WgpuRenderStateRuntime) : { var frameCaptureEnabled:Bool; }).frameCaptureEnabled = cast (true : Bool));
   }
 
-  @:noCompletion
-  public static function encodeWgpuFrameCapture(state:WgpuRenderState, encoder:flighthq._internal.dom.GPUCommandEncoder):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function encodeWgpuFrameCapture(state:WgpuRenderState, encoder:flighthq._internal.dom.GPUCommandEncoder):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var texture:Null<flighthq._internal.dom.GPUTexture> = cast _Runtime.UNDEFINED;
     var mapState:Null<String> = cast _Runtime.UNDEFINED;

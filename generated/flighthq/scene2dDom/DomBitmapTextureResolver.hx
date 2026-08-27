@@ -9,13 +9,14 @@ import flighthq.scene2dDom.DomTextureResolver.registerDomTextureResolver;
 import flighthq.texture.Texture.getTextureSource;
 import flighthq.types.Bitmap;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomRenderStateRuntime;
 import flighthq.types.Image;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
+@:noCompletion
 class DomBitmapTextureResolver {
   public static function registerDomBitmapTextureResolver(state:DomRenderState):Void {
     registerDomTextureResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast BitmapTextureSourceKind : String), (cast DomBitmapTextureResolver.resolveDomBitmapTexture__domBitmapTextureResolver : Dynamic));

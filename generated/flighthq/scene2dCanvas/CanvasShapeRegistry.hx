@@ -7,27 +7,30 @@ import flighthq.registry.RegistryTable.createKeyedTable;
 import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.shape.ShapeBoundsRegistry.registerShapeBoundsCommand;
-import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.CanvasShapeCommand;
+import flighthq.types.KeyedTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderRegistries;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderRegistries;
-import flighthq.types.RenderState.RenderStateRuntime;
-import flighthq.types.ShapeCommand.ShapeCommandKey;
+import flighthq.types.RenderStateRuntime;
+import flighthq.types.ShapeCommandKey;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class CanvasShapeRegistry {
-  @:noCompletion
-  public static function getCanvasShapeCommand(state:RenderState, key:String):Null<CanvasShapeCommand<String>> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCanvasShapeCommand(state:RenderState, key:String):Null<CanvasShapeCommand<String>> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasShapeCommand<String>; }>> = cast _Runtime.UNDEFINED;
     entry = ({ final __collection6:Dynamic = ({ final __structural5 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>; }).entries; }); __collection6 == null ? _Runtime.UNDEFINED : ((cast __collection6 : flighthq._internal._Map<String, RegistryTableEntry<CanvasShapeCommand<String>>>).get(key)); });
     return cast ((cast _Runtime.strictEquals(({ final __structural7 = entry; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasShapeCommand<String>; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerCanvasShapeCommand<K:ShapeCommandKey>(state:RenderState, command:CanvasShapeCommand<K>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerCanvasShapeCommand<K:ShapeCommandKey>(state:RenderState, command:CanvasShapeCommand<K>):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:KeyedTable<CanvasShapeCommand<String>> = cast _Runtime.UNDEFINED;
     registerShapeBoundsCommand((cast command : Dynamic));

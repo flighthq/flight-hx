@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
-
-typedef PbrUvSet = Float;
 
 typedef PbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; };

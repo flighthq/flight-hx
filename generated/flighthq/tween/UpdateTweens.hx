@@ -11,6 +11,7 @@ import flighthq.types.Tween;
 import flighthq.types.TweenManager;
 import flighthq.types.TweenPropertyDetail;
 
+@:noCompletion
 class UpdateTweens {
   public static function completeTween<T:flighthq._internal._Object>(tween:Tween<T>):Void {
     var effectiveT:Float = cast _Runtime.UNDEFINED;

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.CompositeOperator;
 import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue;
 
+@:noCompletion
 class CompositeOperatorMath {
   public static function getCompositeOperatorFactors(operator_:CompositeOperator, sourceAlpha:Float, backdropAlpha:Float, out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
     var as:Float = cast _Runtime.UNDEFINED;

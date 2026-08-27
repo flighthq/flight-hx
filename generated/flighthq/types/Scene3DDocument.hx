@@ -3,26 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Camera3D.Projection;
-import flighthq.types.Entity.Kind;
-import flighthq.types.Material.MaterialLike;
-import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.MorphTarget.MeshMorph;
 
 typedef Scene3DDocument = { var animations:Array<Scene3DDocumentAnimation>; var cameras:Array<Scene3DDocumentCamera>; var lights:Array<Scene3DDocumentLight>; var materials:Array<MaterialLike>; var meshes:Array<Scene3DDocumentMesh>; var metadata:Null<Scene3DMetadata>; var nodes:Array<Scene3DDocumentNode>; var resources:Array<ImageResourceReference>; var scenes:Array<Scene3DDocumentScene>; var skins:Array<Scene3DDocumentSkin>; };
-
-typedef Scene3DDocumentAnimation = { var channels:Array<Scene3DDocumentAnimationChannel>; var duration:Float; @:optional var name:String; };
-
-typedef Scene3DDocumentAnimationChannel = { var node:Float; var path:Scene3DAnimationPath; var track:AnimationTrack; };
-
-typedef Scene3DDocumentCamera = { var far:Float; @:optional var name:String; var near:Float; @:optional var node:Float; var projection:Projection; var transform:Transform3D; };
-
-typedef Scene3DDocumentLight = { var descriptor:Light; @:optional var name:String; @:optional var node:Float; var transform:Transform3D; };
-
-typedef Scene3DDocumentMesh = { var geometry:MeshGeometry; var materials:Array<Float>; @:optional var morph:Null<MeshMorph>; @:optional var name:String; @:optional var skin:Float; };
-
-typedef Scene3DDocumentNode = { var children:Array<Float>; var kind:Kind; @:optional var mesh:Float; @:optional var name:String; var transform:Transform3D; };
-
-typedef Scene3DDocumentScene = { @:optional var name:String; var rootNodes:Array<Float>; };
-
-typedef Scene3DDocumentSkin = { var inverseBind:Array<Matrix4Like>; var joints:Array<Float>; };

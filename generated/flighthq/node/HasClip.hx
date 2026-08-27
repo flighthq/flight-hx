@@ -4,12 +4,14 @@ package flighthq.node;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ClipRegion;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.HasClip;
 
+@:noCompletion
 class HasClip {
-  @:noCompletion
-  public static function initClipTrait(target:flighthq.types.HasClip, ?obj:{ @:optional var clip:Null<ClipRegion>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function initClipTrait(target:flighthq.types.HasClip, ?obj:{ @:optional var clip:Null<ClipRegion>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):Void {
     ((cast target : flighthq.types.HasClip).clip = _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var clip:Null<ClipRegion>; }).clip; }), function():Dynamic return cast null));
   }
 }

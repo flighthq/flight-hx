@@ -9,18 +9,19 @@ import flighthq.texture.Texture.copyTexture;
 import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
 import flighthq.types.Entity;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.RectangleLike;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
-import flighthq.types.TextureAtlasRegion.TextureAtlasRegionLike;
+import flighthq.types.TextureAtlasRegionLike;
 import flighthq.types.TextureAtlasRegionTextureExplanation;
-import flighthq.types.TextureAtlasRegionTextureExplanation.TextureAtlasRegionTextureGuard;
-import flighthq.types.TextureAtlasRegionTextureExplanation.TextureAtlasRegionTextureStatus;
+import flighthq.types.TextureAtlasRegionTextureGuard;
+import flighthq.types.TextureAtlasRegionTextureStatus;
+import flighthq.types.TextureLike;
 import flighthq.types.Vector2;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
+@:noCompletion
 class TextureAtlasRegion {
   public static function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {
     _Runtime.callProperty(target.regions, 'push', cast ([(cast createTextureAtlasRegion(({ final __callArgument2:Dynamic = { x: x, y: y, width: width, height: height, id: (cast TextureAtlasRegion._nextTextureAtlasRegionId__textureAtlasRegion(({ final __callArgument0:Dynamic = target; __callArgument0; })) : Float), pivotX: _Runtime.coalesce(pivotX, function():Dynamic return cast null), pivotY: _Runtime.coalesce(pivotY, function():Dynamic return cast null), name: _Runtime.coalesce(name, function():Dynamic return cast null) }; __callArgument2; })) : flighthq.types.TextureAtlasRegion)] : Array<Dynamic>));
@@ -330,8 +331,9 @@ class TextureAtlasRegion {
     (out.trimmed = cast (trimmed : Bool));
   }
 
-  @:noCompletion
-  public static function setTextureAtlasRegionTextureGuard(guard:Null<TextureAtlasRegionTextureGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setTextureAtlasRegionTextureGuard(guard:Null<TextureAtlasRegionTextureGuard>):Void {
     (TextureAtlasRegion.textureAtlasRegionTextureGuard__textureAtlasRegion = cast (guard : Dynamic));
   }
 

@@ -6,19 +6,19 @@ import flighthq._internal._Runtime;
 import flighthq.shading.ModifierRegistry.registerModifier;
 import flighthq.types.AnimatedNormalModifier;
 import flighthq.types.EmissiveModifier;
-import flighthq.types.EmissiveModifier.EmissiveModifierFacing;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EmissiveModifierFacing;
+import flighthq.types.EntityRuntime;
 import flighthq.types.FogModifier;
-import flighthq.types.FogModifier.FogModifierMode;
+import flighthq.types.FogModifierMode;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierDefinition;
 import flighthq.types.ModifierRegistry;
 import flighthq.types.ModifierSlot;
 import flighthq.types.Sampler;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.AnimatedNormalModifierKind;
 import flighthq.types.Types.DissolveModifierKind;
 import flighthq.types.Types.EmissiveModifierKind;
@@ -28,9 +28,9 @@ import flighthq.types.Types.RimModifierKind;
 import flighthq.types.Types.ToonModifierKind;
 import flighthq.types.Types.VertexDisplaceModifierKind;
 import flighthq.types.Vector2;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 import flighthq.types.VertexDisplaceModifier;
-import flighthq.types.VertexDisplaceModifier.VertexDisplaceModifierSource;
+import flighthq.types.VertexDisplaceModifierSource;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._AnimatedNormalModifierValues.AnimatedNormalModifierKind;
 import flighthq.types._internal._DissolveModifierValues.DissolveModifierKind;
@@ -45,6 +45,7 @@ import flighthq.types._internal._ToonModifierValues.ToonModifierKind;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierKind;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
 
+@:noCompletion
 class RegisterBuiltInModifiers {
   public static final animatedNormalModifierDefinition:ModifierDefinition = (cast { kind: AnimatedNormalModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Normal, getDefineSignature: function(modifier:Modifier):String {
     var animated:AnimatedNormalModifier = cast _Runtime.UNDEFINED;

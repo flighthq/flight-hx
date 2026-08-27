@@ -55,15 +55,15 @@ import flighthq.effectsGl.GlVignetteEffect as Facade_EffectsGl_flighthq_effectsG
 import flighthq.effectsGl.GlWhiteBalanceEffect as Facade_EffectsGl_flighthq_effectsGl_GlWhiteBalanceEffect;
 import flighthq.types.Adjustment;
 import flighthq.types.BlurEffect;
+import flighthq.types.GlRenderEffectApplicationExplanation;
 import flighthq.types.GlRenderEffectPipeline;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectResolver;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
+import flighthq.types.GlRenderEffectResolver;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTexture.GlRenderTexturePool;
+import flighthq.types.GlRenderTexturePool;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderEffectPipelineOptions;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.RenderTexture;
 
 class EffectsGl {

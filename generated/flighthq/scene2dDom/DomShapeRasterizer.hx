@@ -4,14 +4,15 @@ package flighthq.scene2dDom;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
+import flighthq.types.DomRenderRegistries;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomRenderRegistries;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.DomRenderStateRuntime;
+import flighthq.types.RegistryEntryState;
 import flighthq.types.ShapeRasterizer;
+import flighthq.types.SlotTable;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class DomShapeRasterizer {
   public static function getDomShapeRasterizer(state:DomRenderState):Null<ShapeRasterizer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ShapeRasterizer; }>> = cast _Runtime.UNDEFINED;

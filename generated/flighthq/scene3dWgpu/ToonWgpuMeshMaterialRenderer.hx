@@ -16,23 +16,25 @@ import flighthq.scene3dWgpu.WgpuToonPrelude.ensureWgpuToonPipeline;
 import flighthq.types.Camera3D;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.ToonMaterial;
 import flighthq.types.Types.ToonMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuToonDefineKey;
 import flighthq.types.WgpuToonPipeline;
-import flighthq.types.WgpuToonPipeline.WgpuToonDefineKey;
 import flighthq.types._internal._ToonMaterialValues.ToonMaterialKind;
 
+@:noCompletion
 class ToonWgpuMeshMaterialRenderer {
-  @:noCompletion
-  public static final toonWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final toonWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var toon:Null<ToonMaterial> = cast _Runtime.UNDEFINED;

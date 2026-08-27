@@ -4,12 +4,13 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronApp;
-import flighthq.types.Platform.PlatformBackend;
-import flighthq.types.Platform.PlatformInfo;
-import flighthq.types.Platform.PlatformKind;
-import flighthq.types.Platform.PlatformName;
+import flighthq.types.ElectronApp;
+import flighthq.types.PlatformBackend;
+import flighthq.types.PlatformInfo;
+import flighthq.types.PlatformKind;
+import flighthq.types.PlatformName;
 
+@:noCompletion
 class ElectronPlatform {
   public static function createElectronPlatformBackend(electron:ElectronApi):PlatformBackend {
     return cast { getInfo: function(out:PlatformInfo):PlatformInfo {

@@ -7,17 +7,17 @@ import flighthq.textinput.SelectableRichTextManager as Facade_Textinput_flighthq
 import flighthq.textinput.TextInput as Facade_Textinput_flighthq_textinput_TextInput;
 import flighthq.textinput.TextInputEditing as Facade_Textinput_flighthq_textinput_TextInputEditing;
 import flighthq.textinput.TextInputManager as Facade_Textinput_flighthq_textinput_TextInputManager;
+import flighthq.types.HandleTextInputKeyboardOptions;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.KeyboardEventData;
+import flighthq.types.ReplaceTextInputOptions;
 import flighthq.types.RichText;
 import flighthq.types.SelectableRichTextManager;
-import flighthq.types.TextInputEditingOptions.HandleTextInputKeyboardOptions;
-import flighthq.types.TextInputEditingOptions.ReplaceTextInputOptions;
 import flighthq.types.TextInputManager;
-import flighthq.types.TextInputManager.TextInputSource;
+import flighthq.types.TextInputOptions;
+import flighthq.types.TextInputSource;
 import flighthq.types.TextInputState;
-import flighthq.types.TextInputState.TextInputOptions;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
 class Textinput {

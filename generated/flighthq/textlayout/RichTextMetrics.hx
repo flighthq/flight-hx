@@ -6,9 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.textlayout.TextBounds.TEXT_BOUNDS_GUTTER;
 import flighthq.textlayout.TextBounds.computeTextBoundsHeight;
 import flighthq.textlayout.TextBounds.computeTextBoundsWidth;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.RichTextData;
+import flighthq.types.TextLayoutResult;
 
+@:noCompletion
 class RichTextMetrics {
   public static function computeRichTextBottomScrollV(data:RichTextData, layout:TextLayoutResult):Float {
     return cast HxMath.min(layout.numLines, ((data.scrollV + (cast RichTextMetrics.getVisibleLineCount__richTextMetrics(({ final __callArgument0:Dynamic = data; __callArgument0; }), ({ final __callArgument1:Dynamic = layout; __callArgument1; })) : Float)) - 1.0));

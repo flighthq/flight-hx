@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef PixiParseResult = { var config:ParticleEmitterConfig; var diagnostics:Array<ImportDiagnostic>; };
-
-typedef PixiParsed = PixiParseResult;

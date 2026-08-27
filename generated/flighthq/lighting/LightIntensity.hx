@@ -13,6 +13,7 @@ import flighthq.types._internal._LightUnitValues.LumenLightUnit;
 import flighthq.types._internal._LightUnitValues.LuxLightUnit;
 import flighthq.types._internal._LightUnitValues.UnitlessLightUnit;
 
+@:noCompletion
 class LightIntensity {
   public static function applyLightExposure(intensity:Float, ev:Float):Float {
     return cast (intensity * HxMath.pow(2.0, ev));

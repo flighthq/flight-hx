@@ -6,20 +6,21 @@ import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont.createBitmapFont;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.types.BitmapFont;
-import flighthq.types.BitmapFont.BitmapFontData;
-import flighthq.types.BitmapFont.BitmapFontEncoding;
-import flighthq.types.BitmapFont.BitmapFontGlyphData;
-import flighthq.types.BitmapFont.BitmapFontKerningData;
-import flighthq.types.BitmapFont.BitmapFontParseOptions;
+import flighthq.types.BitmapFontCharRecord;
+import flighthq.types.BitmapFontData;
+import flighthq.types.BitmapFontEncoding;
+import flighthq.types.BitmapFontGlyphData;
+import flighthq.types.BitmapFontKerningData;
+import flighthq.types.BitmapFontKerningRecord;
+import flighthq.types.BitmapFontPageRecord;
+import flighthq.types.BitmapFontParseOptions;
 import flighthq.types.BitmapFontRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontCharRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontKerningRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontPageRecord;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.TextureAtlas;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class BitmapFontRecord {
   public static function buildBitmapFontFromRecord(record:flighthq.types.BitmapFontRecord, ?options:BitmapFontParseOptions):Null<BitmapFont> {
     var resolvePage:Null<Float->String->Null<TextureAtlas>> = cast _Runtime.UNDEFINED;

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.FilmEmulationEffect;
 
+@:noCompletion
 class FilmEmulationEffect {
   public static function createFilmEmulationEffect(?options:{ @:optional var gateWeave:Null<Float>; @:optional var grainIntensity:Null<Float>; @:optional var halationRadius:Null<Float>; @:optional var halationStrength:Null<Float>; }):flighthq.types.FilmEmulationEffect {
     if (options == null) options = cast ({  } : Dynamic);

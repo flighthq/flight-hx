@@ -6,9 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.RectangleLike;
+import flighthq.types.Vector2Like;
 
+@:noCompletion
 class Rectangle {
   public static function cloneRectangle(source:RectangleLike):flighthq.types.Rectangle {
     return cast (cast createRectangle(({ final __callArgument0:Dynamic = source.x; __callArgument0; }), ({ final __callArgument1:Dynamic = source.y; __callArgument1; }), ({ final __callArgument2:Dynamic = source.width; __callArgument2; }), ({ final __callArgument3:Dynamic = source.height; __callArgument3; })) : flighthq.types.Rectangle);

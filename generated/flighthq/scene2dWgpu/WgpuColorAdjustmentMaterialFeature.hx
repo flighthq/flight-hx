@@ -10,32 +10,33 @@ import flighthq.renderWgpu.WgpuShader.getWgpuBlendState;
 import flighthq.scene2dWgpu.WgpuQuadBatchWriter.getWgpuQuadBatchPreludeWGSL;
 import flighthq.scene2dWgpu.WgpuShapeMesh.drawWgpuShapeMeshBatch;
 import flighthq.types.ColorScaleBias;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.RegistryEntryState;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
+import flighthq.types.SlotTable;
 import flighthq.types.TintMaterialData;
+import flighthq.types.WgpuColorAdjustmentFlush;
+import flighthq.types.WgpuColorAdjustmentMaterialFeature;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentFlush;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
-import flighthq.types.WgpuRenderState.WgpuShapeMeshPipeline;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuShapeMesh;
+import flighthq.types.WgpuShapeMeshBuffers;
+import flighthq.types.WgpuShapeMeshPipeline;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 typedef ColorAdjustmentData__wgpuColorAdjustmentMaterialFeature = flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>;
 
+@:noCompletion
 class WgpuColorAdjustmentMaterialFeature {
   public static function registerWgpuColorAdjustmentMaterialFeature(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var table:SlotTable<flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
+    var table:SlotTable<flighthq.types.WgpuColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
     enableColorAdjustments(({ final __callArgument0:Dynamic = state; __callArgument0; }));
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);
-    table = _Runtime.coalesce((cast runtime.registries : { @:optional var colorAdjustmentFeature:Null<SlotTable<flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature>>; }).colorAdjustmentFeature, function():Dynamic return cast (cast createSlotTable((cast 'WgpuColorAdjustmentFeature' : String), (cast 'Disabled' : String)) : SlotTable<flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature>));
-    if ((cast ((cast !_Runtime.strictEquals(({ final __structural4 = (cast table : SlotTable<flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature>).entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) || (cast !_Runtime.strictEquals((cast (cast table : SlotTable<flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature>).entry : { var state:String; var value:flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature; }).value, WgpuColorAdjustmentMaterialFeature.wgpuColorAdjustmentMaterialFeature__wgpuColorAdjustmentMaterialFeature) : Bool)) : Bool)) {
-      ((cast runtime.registries : { @:optional var colorAdjustmentFeature:Null<SlotTable<flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature>>; }).colorAdjustmentFeature = cast (_Runtime.mergeObjects([table, { entry: { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: WgpuColorAdjustmentMaterialFeature.wgpuColorAdjustmentMaterialFeature__wgpuColorAdjustmentMaterialFeature } }]) : Null<SlotTable<flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature>>));
+    table = _Runtime.coalesce((cast runtime.registries : { @:optional var colorAdjustmentFeature:Null<SlotTable<flighthq.types.WgpuColorAdjustmentMaterialFeature>>; }).colorAdjustmentFeature, function():Dynamic return cast (cast createSlotTable((cast 'WgpuColorAdjustmentFeature' : String), (cast 'Disabled' : String)) : SlotTable<flighthq.types.WgpuColorAdjustmentMaterialFeature>));
+    if ((cast ((cast !_Runtime.strictEquals(({ final __structural4 = (cast table : SlotTable<flighthq.types.WgpuColorAdjustmentMaterialFeature>).entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) || (cast !_Runtime.strictEquals((cast (cast table : SlotTable<flighthq.types.WgpuColorAdjustmentMaterialFeature>).entry : { var state:String; var value:flighthq.types.WgpuColorAdjustmentMaterialFeature; }).value, WgpuColorAdjustmentMaterialFeature.wgpuColorAdjustmentMaterialFeature__wgpuColorAdjustmentMaterialFeature) : Bool)) : Bool)) {
+      ((cast runtime.registries : { @:optional var colorAdjustmentFeature:Null<SlotTable<flighthq.types.WgpuColorAdjustmentMaterialFeature>>; }).colorAdjustmentFeature = cast (_Runtime.mergeObjects([table, { entry: { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: WgpuColorAdjustmentMaterialFeature.wgpuColorAdjustmentMaterialFeature__wgpuColorAdjustmentMaterialFeature } }]) : Null<SlotTable<flighthq.types.WgpuColorAdjustmentMaterialFeature>>));
     }
     if ((cast _Runtime.strictEquals(runtime.quadBatchWriterColorScaleBiasMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (runtime.quadBatchWriterColorScaleBiasMode = cast (WgpuColorAdjustmentMaterialFeature.CT_MODE_NONE__wgpuColorAdjustmentMaterialFeature : Null<Float>)); }
   }
@@ -581,5 +582,5 @@ class WgpuColorAdjustmentMaterialFeature {
 
   public static final _colorMatrixModules__wgpuColorAdjustmentMaterialFeature:flighthq._internal._WeakMap<flighthq._internal.dom.GPUDevice, flighthq._internal.dom.GPUShaderModule> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final wgpuColorAdjustmentMaterialFeature__wgpuColorAdjustmentMaterialFeature:flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature = (cast { fragmentShaderChunk: WgpuColorAdjustmentMaterialFeature.WGPU_COLOR_ADJUSTMENT_FRAGMENT_CHUNK__wgpuColorAdjustmentMaterialFeature, matrixFragmentShaderChunk: WgpuColorAdjustmentMaterialFeature.WGPU_COLOR_MATRIX_FRAGMENT_CHUNK__wgpuColorAdjustmentMaterialFeature, drawShapeMeshes: WgpuColorAdjustmentMaterialFeature.drawWgpuShapeMeshesColorScaleBias__wgpuColorAdjustmentMaterialFeature, record: WgpuColorAdjustmentMaterialFeature.recordWgpuColorAdjustment__wgpuColorAdjustmentMaterialFeature, resolveFlush: WgpuColorAdjustmentMaterialFeature.resolveWgpuColorAdjustmentFlush__wgpuColorAdjustmentMaterialFeature });
+  public static final wgpuColorAdjustmentMaterialFeature__wgpuColorAdjustmentMaterialFeature:flighthq.types.WgpuColorAdjustmentMaterialFeature = (cast { fragmentShaderChunk: WgpuColorAdjustmentMaterialFeature.WGPU_COLOR_ADJUSTMENT_FRAGMENT_CHUNK__wgpuColorAdjustmentMaterialFeature, matrixFragmentShaderChunk: WgpuColorAdjustmentMaterialFeature.WGPU_COLOR_MATRIX_FRAGMENT_CHUNK__wgpuColorAdjustmentMaterialFeature, drawShapeMeshes: WgpuColorAdjustmentMaterialFeature.drawWgpuShapeMeshesColorScaleBias__wgpuColorAdjustmentMaterialFeature, record: WgpuColorAdjustmentMaterialFeature.recordWgpuColorAdjustment__wgpuColorAdjustmentMaterialFeature, resolveFlush: WgpuColorAdjustmentMaterialFeature.resolveWgpuColorAdjustmentFlush__wgpuColorAdjustmentMaterialFeature });
 }

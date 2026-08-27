@@ -8,12 +8,14 @@ import flighthq.node.Revision.invalidateNodeAppearance;
 import flighthq.scene3d.SceneNode.getNode3DRuntime;
 import flighthq.types.Node;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DRuntime;
+import flighthq.types.Node3DTraits;
 
+@:noCompletion
 class SceneNodeAppearance {
-  @:noCompletion
-  public static function ensureNode3DWorldAlpha(source:Node3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureNode3DWorldAlpha(source:Node3D):Void {
     var runtime:Node3DRuntime = cast _Runtime.UNDEFINED;
     var parent:Null<Node3D> = cast _Runtime.UNDEFINED;
     var parentWorldAlpha:Float = cast _Runtime.UNDEFINED;

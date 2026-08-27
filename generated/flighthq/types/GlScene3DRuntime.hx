@@ -3,15 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
-import flighthq.types.Texture.TextureColorSpace;
-
-typedef GlScene3DShadow = { var enabled:Bool; var matrix:Matrix4; var normalBiasWorld:Float; var pcfRadius:Float; var shadowBias:Float; var texture:flighthq._internal.dom.WebGLTexture; };
-
-typedef GlScene3DIbl = { var brdfLut:flighthq._internal.dom.WebGLTexture; var intensity:Float; var irradianceCube:flighthq._internal.dom.WebGLTexture; var prefilteredCube:flighthq._internal.dom.WebGLTexture; var prefilteredMipCount:Float; };
-
-typedef GlScene3DDrawEntry = { var alpha:Float; var colorMatrix:Null<flighthq._internal._Object>; var colorScaleBias:Null<flighthq._internal._Object>; var depth:Float; var lightBlock:Scene3DLightBlock; var material:flighthq._internal._Object; var mesh:flighthq._internal._Object; var renderer:flighthq._internal._Object; var subset:flighthq._internal._Object; var worldMatrix:flighthq._internal._Object; };
 
 typedef GlScene3DRuntime = { var activeBlendedRun:Bool; var activeColorAdjustmentRun:Bool; var activeColorMatrixRun:Bool; var activeMeshProgram:Null<GlMeshProgram>; var activeSkinnedRun:Bool; var blendedDrawList:Array<GlScene3DDrawEntry>; var blendedPool:Array<GlScene3DDrawEntry>; @:optional var colorSpaceGuard:Null<Void->Void>; @:optional var customShaderGuard:Null<GlRenderState->flighthq._internal.dom.WebGLProgram->String->Void>; @:optional var deformGuard:Null<Mesh->Void>; var environmentSourceCube:Null<flighthq._internal.dom.WebGLTexture>; var environmentSourceCubeColorSpace:TextureColorSpace; var ibl:Null<GlScene3DIbl>; var iblBakeFramebuffer:Null<flighthq._internal.dom.WebGLFramebuffer>; @:optional var forwardLightSelectionGuard:Null<Scene3DLightsLike->Void>; var opaqueDrawList:Array<GlScene3DDrawEntry>; var opaquePool:Array<GlScene3DDrawEntry>; @:optional var pbrExtensionGuard:Null<Array<PbrExtension>->Void>; var pbrTransmissionSceneColor:Null<GlPbrTransmissionSceneColor>; var programCache:flighthq._internal._Map<String, GlMeshProgram>; var shadow:Null<GlScene3DShadow>; var shadowTarget:Null<GlRenderTarget>; var skinPalette:Null<GlSkinPaletteTexture>; var skinNormalPalette:Null<GlSkinPaletteTexture>; var time:Float; var uploadCache:flighthq._internal._WeakMap<MeshGeometry, GlMeshUpload>; };
-
-typedef GlMeshUpload = { var indexBuffer:Null<flighthq._internal.dom.WebGLBuffer>; var indexCount:Float; var indexType:Float; var primitiveMode:Float; @:optional var skinBindUploaded:Bool; var vao:flighthq._internal.dom.WebGLVertexArrayObject; var version:Float; var vertexBuffer:flighthq._internal.dom.WebGLBuffer; };

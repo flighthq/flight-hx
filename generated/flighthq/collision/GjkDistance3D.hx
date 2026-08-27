@@ -4,20 +4,23 @@ package flighthq.collision;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollisionSupport3D.getCollisionSupport3D;
-import flighthq.types.Collision.CollisionDistance3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionShapeKind3D;
-import flighthq.types.Collision.CollisionSupport3D;
+import flighthq.types.CollisionDistance3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionShapeKind3D;
+import flighthq.types.CollisionSupport3D;
 
+@:noCompletion
 class GjkDistance3D {
-  @:noCompletion
-  public static function createCollisionDistance3D():CollisionDistance3D {
+  @:allow(flighthq)
+  @:keep
+  private static function createCollisionDistance3D():CollisionDistance3D {
     return cast { distance: 0.0, directionX: 0.0, directionY: 0.0, directionZ: 0.0, pointAX: 0.0, pointAY: 0.0, pointAZ: 0.0, pointBX: 0.0, pointBY: 0.0, pointBZ: 0.0, overlapping: false };
     return cast null;
   }
 
-  @:noCompletion
-  public static function writeCollisionDistance3D(a:CollisionShape3D, b:CollisionShape3D, out:CollisionDistance3D, offsetX:Float = 0.0, offsetY:Float = 0.0, offsetZ:Float = 0.0):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function writeCollisionDistance3D(a:CollisionShape3D, b:CollisionShape3D, out:CollisionDistance3D, offsetX:Float = 0.0, offsetY:Float = 0.0, offsetZ:Float = 0.0):Bool {
     var supportA:Null<CollisionSupport3D> = cast _Runtime.UNDEFINED;
     var supportB:Null<CollisionSupport3D> = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;

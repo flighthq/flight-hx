@@ -4,16 +4,16 @@ package flighthq.dialog;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Dialog.DialogBackend;
-import flighthq.types.Dialog.FileDialogFilter;
-import flighthq.types.Dialog.FileDialogHandle;
-import flighthq.types.Dialog.FileDialogStartIn;
-import flighthq.types.Dialog.MessageDialogOptions;
-import flighthq.types.Dialog.MessageDialogResult;
-import flighthq.types.Dialog.OpenDirectoryDialogOptions;
-import flighthq.types.Dialog.OpenFileDialogOptions;
-import flighthq.types.Dialog.PromptDialogOptions;
-import flighthq.types.Dialog.SaveFileDialogOptions;
+import flighthq.types.DialogBackend;
+import flighthq.types.FileDialogFilter;
+import flighthq.types.FileDialogHandle;
+import flighthq.types.FileDialogStartIn;
+import flighthq.types.MessageDialogOptions;
+import flighthq.types.MessageDialogResult;
+import flighthq.types.OpenDirectoryDialogOptions;
+import flighthq.types.OpenFileDialogOptions;
+import flighthq.types.PromptDialogOptions;
+import flighthq.types.SaveFileDialogOptions;
 
 typedef FileSystemAccessDirectoryPickerOptions__dialog = { @:optional var mode:String; @:optional var startIn:String; };
 
@@ -110,8 +110,9 @@ class Dialog {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebDialogBackend():DialogBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebDialogBackend():DialogBackend {
     return cast { confirm: function(options:MessageDialogOptions):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'confirm')), 'function') : Bool)) : Bool)) { return cast false; }
@@ -172,8 +173,9 @@ class Dialog {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getDialogBackend():DialogBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getDialogBackend():DialogBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Dialog._custom__dialog, function():Dynamic return cast Dialog._host__dialog), function():Dynamic return cast Dialog._sentinel__dialog);
     return cast null;
   }
@@ -188,8 +190,9 @@ class Dialog {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installDialogHostBackend(backend:DialogBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installDialogHostBackend(backend:DialogBackend):Void {
     if ((cast !_Runtime.strictEquals(Dialog._host__dialog, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Dialog._host__dialog, backend) : Bool)) { (Dialog._hostConflict__dialog = cast (true : Dynamic)); }
       return;
@@ -197,8 +200,9 @@ class Dialog {
     (Dialog._host__dialog = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observeDialogHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeDialogHostResult(operation:String, succeeded:Bool):Void {
     (Dialog._hostObservation__dialog = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -434,8 +438,9 @@ class Dialog {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetDialogBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetDialogBackendForTest():Void {
     (Dialog._custom__dialog = cast (null : Dynamic));
     (Dialog._host__dialog = cast (null : Dynamic));
     (Dialog._hostConflict__dialog = cast (false : Dynamic));
@@ -542,8 +547,9 @@ class Dialog {
     );
   }
 
-  @:noCompletion
-  public static function setDialogBackend(backend:Null<DialogBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setDialogBackend(backend:Null<DialogBackend>):Void {
     (Dialog._custom__dialog = cast (backend : Dynamic));
   }
 

@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
+import flighthq.types.Node3DRuntime;
 
 class _BillboardValues {
   public static final BillboardKind:String = 'Billboard';

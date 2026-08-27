@@ -4,6 +4,7 @@ package flighthq.effects;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class ColorTemperatureMath {
   public static function computeColorTemperatureRgb(kelvin:Float, out:Array<Float>):Void {
     var temp:Float = cast _Runtime.UNDEFINED;

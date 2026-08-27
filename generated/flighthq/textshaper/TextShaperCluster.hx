@@ -3,9 +3,10 @@ package flighthq.textshaper;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.ShapedGlyph;
 import flighthq.types.ShapedRun;
-import flighthq.types.ShapedRun.ShapedGlyph;
 
+@:noCompletion
 class TextShaperCluster {
   public static function getCaretPositionsForRun(run:ShapedRun):Array<Float> {
     var glyphs:Array<ShapedGlyph> = cast _Runtime.UNDEFINED;

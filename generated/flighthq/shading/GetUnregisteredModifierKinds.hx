@@ -9,6 +9,7 @@ import flighthq.types.ModifierDefinition;
 import flighthq.types.ModifierKind;
 import flighthq.types.ModifierRegistry;
 
+@:noCompletion
 class GetUnregisteredModifierKinds {
   public static function getUnregisteredModifierKinds(registry:ModifierRegistry, stack:Array<Modifier>):Array<ModifierKind> {
     var unregistered:Array<ModifierKind> = cast _Runtime.UNDEFINED;

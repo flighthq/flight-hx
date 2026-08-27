@@ -5,15 +5,18 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RendererData;
 
+@:noCompletion
 class WgpuRendererData {
-  @:noCompletion
-  public static function createWgpuRendererData<T:flighthq._internal._Object>(data:T):RendererData {
+  @:allow(flighthq)
+  @:keep
+  private static function createWgpuRendererData<T:flighthq._internal._Object>(data:T):RendererData {
     return cast (cast (cast data : flighthq._internal._Any) : RendererData);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuRendererData<T:flighthq._internal._Object>(data:Null<RendererData>):Null<T> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuRendererData<T:flighthq._internal._Object>(data:Null<RendererData>):Null<T> {
     return cast (cast (cast data : flighthq._internal._Any) : Null<T>);
     return cast null;
   }

@@ -9,12 +9,13 @@ import flighthq.physics2d.Ownership.assertPhysics2DWorldNotStepping;
 import flighthq.physics2d.Ownership.physics2DJointOwners;
 import flighthq.physics2d.World.findPhysics2DBody;
 import flighthq.physics2d.World.isPhysics2DPairOrdered;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DJointKind;
-import flighthq.types.Physics2D.Physics2DJointSolver;
-import flighthq.types.Physics2D.Physics2DWorld;
-import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DJointKind;
+import flighthq.types.Physics2DJointSolver;
+import flighthq.types.Physics2DWorld;
+import flighthq.types.RigidBody2D;
 
+@:noCompletion
 class JointRegistry {
   public static function addPhysics2DJoint(world:Physics2DWorld, joint:Physics2DJoint):Physics2DJoint {
     var active:Bool = cast _Runtime.UNDEFINED;

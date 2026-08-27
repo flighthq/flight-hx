@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.materials.Material.createMaterial;
 import flighthq.types.BlendMode;
-import flighthq.types.Entity.Kind;
+import flighthq.types.Kind;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.SurfaceMaterial;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.SurfaceMaterialOptions;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
+@:noCompletion
 class SurfaceMaterial {
   public static function createSurfaceMaterial(kind:Kind, ?opts:SurfaceMaterialOptions):flighthq.types.SurfaceMaterial {
     var material:flighthq.types.SurfaceMaterial = cast _Runtime.UNDEFINED;

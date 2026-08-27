@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef GlyphAtlasEntryExplanation = { var renderable:Bool; var reason:GlyphAtlasEntryBlockReason; var glyphWidth:Float; var glyphHeight:Float; var usableWidth:Float; var usableHeight:Float; };
-
-typedef GlyphAtlasEntryBlockReason = String;

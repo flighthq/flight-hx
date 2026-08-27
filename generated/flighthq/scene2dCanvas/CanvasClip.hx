@@ -10,13 +10,14 @@ import flighthq.types.CanvasRenderState;
 import flighthq.types.ClipRegion;
 import flighthq.types.Matrix;
 import flighthq.types.Node2D;
+import flighthq.types.PathWinding;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.Scene2DClipHooks;
 
+@:noCompletion
 class CanvasClip {
   public static function enableCanvasClip(state:CanvasRenderState):Void {
     ((cast state : CanvasRenderState).displayObjectClipHooks = CanvasClip.canvasClipHooks__canvasClip);

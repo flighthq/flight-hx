@@ -19,17 +19,19 @@ import flighthq.types.NormalMaterial;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.Types.NormalMaterialKind;
+import flighthq.types.WgpuDebugDefineKey;
 import flighthq.types.WgpuDebugPipeline;
-import flighthq.types.WgpuDebugPipeline.WgpuDebugDefineKey;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types._internal._NormalMaterialValues.NormalMaterialKind;
 
+@:noCompletion
 class NormalWgpuMeshMaterialRenderer {
-  @:noCompletion
-  public static final normalWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final normalWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var normal:Null<NormalMaterial> = cast _Runtime.UNDEFINED;

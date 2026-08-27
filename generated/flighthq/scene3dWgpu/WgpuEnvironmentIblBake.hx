@@ -7,13 +7,14 @@ import flighthq.scene3dWgpu.WgpuEnvironmentCube.ensureWgpuEnvironmentSourceCube;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.types.Environment;
 import flighthq.types.WgpuRenderState;
+import flighthq.types.WgpuScene3DIbl;
 import flighthq.types.WgpuScene3DRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuScene3DIbl;
 
 typedef WgpuBakedCube__wgpuEnvironmentIblBake = { var texture:flighthq._internal.dom.GPUTexture; var view:flighthq._internal.dom.GPUTextureView; };
 
 typedef WgpuBakePrograms__wgpuEnvironmentIblBake = { var brdfPipeline:flighthq._internal.dom.GPURenderPipeline; var irradiancePipeline:flighthq._internal.dom.GPURenderPipeline; var prefilteredPipeline:flighthq._internal.dom.GPURenderPipeline; var sampler:flighthq._internal.dom.GPUSampler; var sourceBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var uniformBindGroup:flighthq._internal.dom.GPUBindGroup; var uniformBuffer:flighthq._internal.dom.GPUBuffer; };
 
+@:noCompletion
 class WgpuEnvironmentIblBake {
   public static function bakeWgpuEnvironmentIbl(state:WgpuRenderState, environment:Environment):Void {
     var sourceCubeView:Null<flighthq._internal.dom.GPUTextureView> = cast _Runtime.UNDEFINED;
@@ -38,8 +39,9 @@ class WgpuEnvironmentIblBake {
     (scene.ibl = cast (ibl : Null<WgpuScene3DIbl>));
   }
 
-  @:noCompletion
-  public static function destroyWgpuScene3DIbl(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuScene3DIbl(state:WgpuRenderState):Void {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument20:Dynamic = state; __callArgument20; })) : WgpuScene3DRuntime);
     if ((cast !_Runtime.strictEquals(scene.ibl, null) : Bool)) {

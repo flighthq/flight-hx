@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
 typedef Scene3DKindUsage = { var materialKinds:Array<Kind>; var modifierKinds:Array<Kind>; var nodeKinds:Array<Kind>; var resourceMimeTypes:Array<String>; var textureSourceKinds:Array<TextureSourceKind>; };

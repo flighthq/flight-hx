@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class EaseCircular {
   public static final easeInCircular:EasingFunction = (cast function(t:Float):Float return _Runtime.subtractNumbers(1.0, HxMath.sqrt((1.0 - (t * t)))));
 

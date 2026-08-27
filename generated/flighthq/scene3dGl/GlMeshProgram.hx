@@ -20,27 +20,29 @@ import flighthq.texture.Texture.hasTextureUvTransform;
 import flighthq.types.Camera3D;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.GlMeshProgram;
+import flighthq.types.GlMeshUpload;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
-import flighthq.types.GlScene3DRuntime.GlMeshUpload;
 import flighthq.types.GlSkinPaletteTexture;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.Matrix3;
-import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Matrix3Like;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
+import flighthq.types.MeshSubset;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.SurfaceMaterial;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureUvTransform;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class GlMeshProgram {
-  @:noCompletion
-  public static function beginGlMeshDraw(state:GlRenderState, program:flighthq.types.GlMeshProgram, doubleSided:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function beginGlMeshDraw(state:GlRenderState, program:flighthq.types.GlMeshProgram, doubleSided:Bool):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
@@ -58,8 +60,9 @@ class GlMeshProgram {
     }
   }
 
-  @:noCompletion
-  public static function bindGlMeshSkinPalette(state:GlRenderState, program:flighthq.types.GlMeshProgram, proxy:Scene3DRenderProxy):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlMeshSkinPalette(state:GlRenderState, program:flighthq.types.GlMeshProgram, proxy:Scene3DRenderProxy):Bool {
     var jointMatrices:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var gpuSkinned:Bool = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
@@ -86,8 +89,9 @@ class GlMeshProgram {
     return cast null;
   }
 
-  @:noCompletion
-  public static function bindGlUvTransform(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq.types.GlMeshProgram, texture:Null<TextureLike>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlUvTransform(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq.types.GlMeshProgram, texture:Null<TextureLike>):Void {
     var loc:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
     loc = program.locUvTransform;
     if ((cast _Runtime.strictEquals(loc, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -99,19 +103,22 @@ class GlMeshProgram {
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, loc, false, GlMeshProgram.scratchUvMatrix__glMeshProgram.m);
   }
 
-  @:noCompletion
-  public static function compileGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, vertexSource:String, fragmentSource:String):flighthq._internal.dom.WebGLProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, vertexSource:String, fragmentSource:String):flighthq._internal.dom.WebGLProgram {
     return cast (cast createGlProgram(({ final __callArgument22:Dynamic = gl; __callArgument22; }), (cast vertexSource : String), (cast fragmentSource : String), (cast 'Mesh' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyGlMeshProgram(state:GlRenderState, program:flighthq.types.GlMeshProgram):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyGlMeshProgram(state:GlRenderState, program:flighthq.types.GlMeshProgram):Void {
     flighthq._internal.backend.WebGl2Backend.deleteProgram((cast state : GlRenderState).gl, program.program);
   }
 
-  @:noCompletion
-  public static function drawGlMeshSubset(state:GlRenderState, program:flighthq.types.GlMeshProgram, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlMeshSubset(state:GlRenderState, program:flighthq.types.GlMeshProgram, proxy:Scene3DRenderProxy, geometry:MeshGeometry):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var colorMatrix:Null<Array<Float>> = cast _Runtime.UNDEFINED;
     var colorScaleBias:Null<ColorScaleBias> = cast _Runtime.UNDEFINED;
@@ -169,8 +176,9 @@ class GlMeshProgram {
     }
   }
 
-  @:noCompletion
-  public static function ensureGlScene3DProgram<T:flighthq.types.GlMeshProgram>(state:GlRenderState, key:String, compile:flighthq._internal.dom.WebGL2RenderingContext->T):T {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlScene3DProgram<T:flighthq.types.GlMeshProgram>(state:GlRenderState, key:String, compile:flighthq._internal.dom.WebGL2RenderingContext->T):T {
     var runtime:GlScene3DRuntime = cast _Runtime.UNDEFINED;
     var program:Null<flighthq.types.GlMeshProgram> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlScene3DRuntime(({ final __callArgument40:Dynamic = state; __callArgument40; })) : GlScene3DRuntime);
@@ -183,26 +191,30 @@ class GlMeshProgram {
     return cast null;
   }
 
-  @:noCompletion
-  public static function hasGlUvTransform(texture:Null<TextureLike>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasGlUvTransform(texture:Null<TextureLike>):Bool {
     return cast ((cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast (cast hasTextureSource(({ final __callArgument42:Dynamic = texture; __callArgument42; })) : Bool) : Bool)) : Bool) && (cast (cast hasTextureUvTransform(({ final __callArgument44:Dynamic = texture; __callArgument44; })) : Bool) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function setGlMeshCameraPosition(gl:flighthq._internal.dom.WebGL2RenderingContext, locCameraPosition:Null<flighthq._internal.dom.WebGLUniformLocation>, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlMeshCameraPosition(gl:flighthq._internal.dom.WebGL2RenderingContext, locCameraPosition:Null<flighthq._internal.dom.WebGLUniformLocation>, camera:Camera3D):Void {
     getCamera3DPosition(({ final __callArgument46:Dynamic = GlMeshProgram.scratchCameraPosition__glMeshProgram; __callArgument46; }), ({ final __callArgument47:Dynamic = camera; __callArgument47; }));
     flighthq._internal.backend.WebGl2Backend.uniform3f(gl, locCameraPosition, (cast GlMeshProgram.scratchCameraPosition__glMeshProgram : { var x:Float; var y:Float; var z:Float; }).x, (cast GlMeshProgram.scratchCameraPosition__glMeshProgram : { var x:Float; var y:Float; var z:Float; }).y, (cast GlMeshProgram.scratchCameraPosition__glMeshProgram : { var x:Float; var y:Float; var z:Float; }).z);
   }
 
-  @:noCompletion
-  public static function setGlMeshViewProjection(state:GlRenderState, locViewProjection:Null<flighthq._internal.dom.WebGLUniformLocation>, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlMeshViewProjection(state:GlRenderState, locViewProjection:Null<flighthq._internal.dom.WebGLUniformLocation>, camera:Camera3D):Void {
     getCamera3DViewProjectionMatrix4(({ final __callArgument50:Dynamic = GlMeshProgram.scratchViewProjection__glMeshProgram; __callArgument50; }), ({ final __callArgument51:Dynamic = camera; __callArgument51; }), (cast (cast getGlScene3DViewportAspect(({ final __callArgument52:Dynamic = state; __callArgument52; })) : Float) : Float));
     flighthq._internal.backend.WebGl2Backend.uniformMatrix4fv((cast state : GlRenderState).gl, locViewProjection, false, GlMeshProgram.scratchViewProjection__glMeshProgram.m);
   }
 
-  @:noCompletion
-  public static function uploadGlMeshDrawAlpha(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq.types.GlMeshProgram, alpha:Float, material:Null<Material>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function uploadGlMeshDrawAlpha(gl:flighthq._internal.dom.WebGL2RenderingContext, program:flighthq.types.GlMeshProgram, alpha:Float, material:Null<Material>):Void {
     var location:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
     var coverageLocation:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
     location = program.locObjectAlpha;
@@ -226,17 +238,21 @@ class GlMeshProgram {
     return cast null;
   }
 
-  @:noCompletion
-  public static final GL_UV_TRANSFORM_VERTEX_GLSL:String = '\n#ifdef HAS_UV_TRANSFORM\nuniform mat3 u_uvTransform;\nvec2 applyUvTransform(vec2 uv) { return (u_uvTransform * vec3(uv, 1.0)).xy; }\n#else\nvec2 applyUvTransform(vec2 uv) { return uv; }\n#endif\n';
+  @:allow(flighthq)
+  @:keep
+  private static final GL_UV_TRANSFORM_VERTEX_GLSL:String = '\n#ifdef HAS_UV_TRANSFORM\nuniform mat3 u_uvTransform;\nvec2 applyUvTransform(vec2 uv) { return (u_uvTransform * vec3(uv, 1.0)).xy; }\n#else\nvec2 applyUvTransform(vec2 uv) { return uv; }\n#endif\n';
 
-  @:noCompletion
-  public static final SKIN_PALETTE_TEXTURE_UNIT:Float = 12.0;
+  @:allow(flighthq)
+  @:keep
+  private static final SKIN_PALETTE_TEXTURE_UNIT:Float = 12.0;
 
-  @:noCompletion
-  public static final SKIN_NORMAL_PALETTE_TEXTURE_UNIT:Float = 13.0;
+  @:allow(flighthq)
+  @:keep
+  private static final SKIN_NORMAL_PALETTE_TEXTURE_UNIT:Float = 13.0;
 
-  @:noCompletion
-  public static final GL_SKIN_VERTEX_DECLARATIONS_GLSL:String = '\nlayout(location = 6) in vec4 a_joints0;\nlayout(location = 7) in vec4 a_weights0;\nuniform highp sampler2D u_jointTexture;\nuniform highp sampler2D u_jointNormalTexture;\n\nmat4 fetchJointMatrix(int joint) {\n  int x = joint * 4;\n  return mat4(\n    texelFetch(u_jointTexture, ivec2(x, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 1, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 2, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 3, 0), 0)\n  );\n}\n\n// A vertex with NO influence stays at its bind pose, which the weighted sum cannot express: with every\n// weight zero the sum is the ZERO matrix, so the vertex would land on the origin with w = 0. Identity is\n// the bind pose. packSkinInfluences documents this case as legal — it zero-fills unused slots and says\n// such a vertex "stays at its bind position" — and the CPU skinVertices path falls back the same way.\nmat4 skinMatrix() {\n  float totalWeight = a_weights0.x + a_weights0.y + a_weights0.z + a_weights0.w;\n  if (totalWeight == 0.0) return mat4(1.0);\n  return a_weights0.x * fetchJointMatrix(int(a_joints0.x))\n       + a_weights0.y * fetchJointMatrix(int(a_joints0.y))\n       + a_weights0.z * fetchJointMatrix(int(a_joints0.z))\n       + a_weights0.w * fetchJointMatrix(int(a_joints0.w));\n}\n\n// Three texels per joint, one per padded vec4 column; the fourth component of each is unused.\nmat3 fetchJointNormalMatrix(int joint) {\n  int x = joint * 3;\n  return mat3(\n    texelFetch(u_jointNormalTexture, ivec2(x, 0), 0).xyz,\n    texelFetch(u_jointNormalTexture, ivec2(x + 1, 0), 0).xyz,\n    texelFetch(u_jointNormalTexture, ivec2(x + 2, 0), 0).xyz\n  );\n}\n\n// A normal is a covector: under non-uniform joint scale it follows the inverse-transpose, not the pose\n// matrix a position and a tangent follow. Blending the per-joint inverse-transposes is an APPROXIMATION\n// — the inverse-transpose of the blend is a different matrix — and it is the affordable one, since the\n// exact answer needs a 3x3 inverse per vertex. The CPU path blends the same way, so the two agree.\nmat3 skinNormalMatrix() {\n  // Same no-influence fallback as skinMatrix: a zero blend would hand the shader a zero normal, which\n  // every lighting term then normalizes into an undefined direction.\n  float totalWeight = a_weights0.x + a_weights0.y + a_weights0.z + a_weights0.w;\n  if (totalWeight == 0.0) return mat3(1.0);\n  return a_weights0.x * fetchJointNormalMatrix(int(a_joints0.x))\n       + a_weights0.y * fetchJointNormalMatrix(int(a_joints0.y))\n       + a_weights0.z * fetchJointNormalMatrix(int(a_joints0.z))\n       + a_weights0.w * fetchJointNormalMatrix(int(a_joints0.w));\n}\n';
+  @:allow(flighthq)
+  @:keep
+  private static final GL_SKIN_VERTEX_DECLARATIONS_GLSL:String = '\nlayout(location = 6) in vec4 a_joints0;\nlayout(location = 7) in vec4 a_weights0;\nuniform highp sampler2D u_jointTexture;\nuniform highp sampler2D u_jointNormalTexture;\n\nmat4 fetchJointMatrix(int joint) {\n  int x = joint * 4;\n  return mat4(\n    texelFetch(u_jointTexture, ivec2(x, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 1, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 2, 0), 0),\n    texelFetch(u_jointTexture, ivec2(x + 3, 0), 0)\n  );\n}\n\n// A vertex with NO influence stays at its bind pose, which the weighted sum cannot express: with every\n// weight zero the sum is the ZERO matrix, so the vertex would land on the origin with w = 0. Identity is\n// the bind pose. packSkinInfluences documents this case as legal — it zero-fills unused slots and says\n// such a vertex "stays at its bind position" — and the CPU skinVertices path falls back the same way.\nmat4 skinMatrix() {\n  float totalWeight = a_weights0.x + a_weights0.y + a_weights0.z + a_weights0.w;\n  if (totalWeight == 0.0) return mat4(1.0);\n  return a_weights0.x * fetchJointMatrix(int(a_joints0.x))\n       + a_weights0.y * fetchJointMatrix(int(a_joints0.y))\n       + a_weights0.z * fetchJointMatrix(int(a_joints0.z))\n       + a_weights0.w * fetchJointMatrix(int(a_joints0.w));\n}\n\n// Three texels per joint, one per padded vec4 column; the fourth component of each is unused.\nmat3 fetchJointNormalMatrix(int joint) {\n  int x = joint * 3;\n  return mat3(\n    texelFetch(u_jointNormalTexture, ivec2(x, 0), 0).xyz,\n    texelFetch(u_jointNormalTexture, ivec2(x + 1, 0), 0).xyz,\n    texelFetch(u_jointNormalTexture, ivec2(x + 2, 0), 0).xyz\n  );\n}\n\n// A normal is a covector: under non-uniform joint scale it follows the inverse-transpose, not the pose\n// matrix a position and a tangent follow. Blending the per-joint inverse-transposes is an APPROXIMATION\n// — the inverse-transpose of the blend is a different matrix — and it is the affordable one, since the\n// exact answer needs a 3x3 inverse per vertex. The CPU path blends the same way, so the two agree.\nmat3 skinNormalMatrix() {\n  // Same no-influence fallback as skinMatrix: a zero blend would hand the shader a zero normal, which\n  // every lighting term then normalizes into an undefined direction.\n  float totalWeight = a_weights0.x + a_weights0.y + a_weights0.z + a_weights0.w;\n  if (totalWeight == 0.0) return mat3(1.0);\n  return a_weights0.x * fetchJointNormalMatrix(int(a_joints0.x))\n       + a_weights0.y * fetchJointNormalMatrix(int(a_joints0.y))\n       + a_weights0.z * fetchJointNormalMatrix(int(a_joints0.z))\n       + a_weights0.w * fetchJointNormalMatrix(int(a_joints0.w));\n}\n';
 
   public static final scratchViewProjection__glMeshProgram:Matrix4 = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
 

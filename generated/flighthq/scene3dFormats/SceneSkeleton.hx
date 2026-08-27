@@ -6,12 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.node.Traversal.getNodeChildren;
 import flighthq.scene3d.Mesh.isMesh;
 import flighthq.types.Mesh;
-import flighthq.types.Node.NodeOf;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DTraits;
+import flighthq.types.NodeOf;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skin;
 
+@:noCompletion
 class SceneSkeleton {
   public static function findScene3DSkeletonJoints(root:Node3D):Null<Array<Node3D>> {
     var stack:Array<Node3D> = cast _Runtime.UNDEFINED;

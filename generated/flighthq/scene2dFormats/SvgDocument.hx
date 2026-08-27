@@ -50,37 +50,37 @@ import flighthq.text.RichText.createRichText;
 import flighthq.text.TextLabel.createTextLabel;
 import flighthq.textlayout.TextFormatRange.createTextFormatRange;
 import flighthq.texture.Texture.createTexture;
+import flighthq.types.CapsStyle;
 import flighthq.types.ClipRegion;
 import flighthq.types.DisplayObject;
+import flighthq.types.GradientType;
 import flighthq.types.Image;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.InterpolationMethod;
+import flighthq.types.JointStyle;
+import flighthq.types.LineScaleMode;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Node.NodeOf;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DTraits;
+import flighthq.types.NodeOf;
 import flighthq.types.Path;
+import flighthq.types.PathWinding;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RichText;
 import flighthq.types.Shape;
-import flighthq.types.ShapeBounds.ShapeBoundsMode;
-import flighthq.types.ShapeCommand.CapsStyle;
-import flighthq.types.ShapeCommand.GradientType;
-import flighthq.types.ShapeCommand.InterpolationMethod;
-import flighthq.types.ShapeCommand.JointStyle;
-import flighthq.types.ShapeCommand.LineScaleMode;
-import flighthq.types.ShapeCommand.PathWinding;
-import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.ShapeBoundsMode;
+import flighthq.types.SpreadMethod;
 import flighthq.types.Sprite;
-import flighthq.types.SvgDocumentImport.SvgDocumentImportOptions;
+import flighthq.types.SvgDocumentImportOptions;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextLabel;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
 import flighthq.types.Transform2D;
-import flighthq.types.Transform2D.Transform2DLike;
+import flighthq.types.Transform2DLike;
 import flighthq.types.Types.RichTextKind;
 import flighthq.types.Types.ShapeKind;
 import flighthq.types.Types.TextLabelKind;
@@ -107,6 +107,7 @@ typedef SvgStyle__svgDocument = { var clipRule:PathWinding; var color:String; va
 
 typedef SvgTextRun__svgDocument = { var opacity:Float; var style:SvgStyle__svgDocument; var text:String; };
 
+@:noCompletion
 class SvgDocument {
   public static function createScene2DFromSvgDocument(source:String, ?diagnostics:Array<ImportDiagnostic>, ?options:SvgDocumentImportOptions):DisplayObject {
     var out:DisplayObject = cast _Runtime.UNDEFINED;

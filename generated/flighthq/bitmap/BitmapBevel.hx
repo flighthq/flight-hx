@@ -10,6 +10,7 @@ import flighthq.types.BitmapBevelOptions;
 import flighthq.types.BitmapBevelType;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapBevel {
   public static function bevelBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapBevelOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);

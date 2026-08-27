@@ -4,12 +4,13 @@ package flighthq.video;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.VideoResource;
-import flighthq.types.VideoResource.VideoResourceLoadOptions;
-import flighthq.types.VideoResource.VideoResourceUrl;
+import flighthq.types.VideoResourceLoadOptions;
+import flighthq.types.VideoResourceUrl;
 import flighthq.video.VideoFormat.selectVideoResourceUrl;
 import flighthq.video.VideoResource.createVideoResource;
 import flighthq.video.VideoResource.disposeVideoResource;
 
+@:noCompletion
 class VideoResourceFrom {
   public static function createVideoResourceFromMediaStream(stream:flighthq._internal.dom.MediaStream):VideoResource {
     var element:flighthq._internal.dom.HTMLVideoElement = cast _Runtime.UNDEFINED;

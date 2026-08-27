@@ -9,6 +9,7 @@ import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
+@:noCompletion
 class OutlineEffect {
   public static function createOutlineEffect(?options:{ @:optional var threshold:Null<Float>; @:optional var thickness:Null<Float>; @:optional var color:Null<Float>; }):flighthq.types.OutlineEffect {
     if (options == null) options = cast ({  } : Dynamic);

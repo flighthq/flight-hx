@@ -8,20 +8,20 @@ import flighthq.cameraControls.FlyCameraController as Facade_CameraControls_flig
 import flighthq.cameraControls.Follow as Facade_CameraControls_flighthq_cameraControls_Follow;
 import flighthq.cameraControls.Framing as Facade_CameraControls_flighthq_cameraControls_Framing;
 import flighthq.cameraControls.OrbitCameraController as Facade_CameraControls_flighthq_cameraControls_OrbitCameraController;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Camera2D;
-import flighthq.types.Camera2D.Camera2DFollowOptions;
+import flighthq.types.Camera2DFollowOptions;
 import flighthq.types.Camera3D;
-import flighthq.types.Camera3D.OrthographicProjection;
-import flighthq.types.Camera3D.PerspectiveProjection;
-import flighthq.types.Camera3D.Projection;
 import flighthq.types.CameraShake;
-import flighthq.types.CameraShake.CameraShakeOffset;
-import flighthq.types.CameraShake.CameraShakeOptions;
+import flighthq.types.CameraShakeOffset;
+import flighthq.types.CameraShakeOptions;
 import flighthq.types.FlyCameraController;
-import flighthq.types.FlyCameraController.FlyCameraControllerOptions;
+import flighthq.types.FlyCameraControllerOptions;
 import flighthq.types.OrbitCameraController;
-import flighthq.types.OrbitCameraController.OrbitCameraControllerOptions;
+import flighthq.types.OrbitCameraControllerOptions;
+import flighthq.types.OrthographicProjection;
+import flighthq.types.PerspectiveProjection;
+import flighthq.types.Projection;
 
 class CameraControls {
   public static function addCameraShakeTrauma(shake:CameraShake, amount:Float):Void {

@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexSemantic;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexSemantic;
 
+@:noCompletion
 class MeshGeometryUvs {
   public static function offsetMeshGeometryUvs(geometry:MeshGeometry, du:Float, dv:Float):Void {
     var floatOffset:Float = cast _Runtime.UNDEFINED;

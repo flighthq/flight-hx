@@ -7,8 +7,8 @@ import flighthq.types.Matrix;
 import flighthq.types.Path;
 import flighthq.types.PathMorph;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.Shape.ShapeRuntime;
+import flighthq.types.ShapeData;
+import flighthq.types.ShapeRuntime;
 
 class _MorphShapeValues {
   public static final MorphShapeKind:String = 'MorphShape';

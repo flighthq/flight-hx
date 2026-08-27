@@ -8,13 +8,14 @@ import flighthq.collision.CollisionSupport3D.getCollisionPairTest3D;
 import flighthq.collision.CollisionSupport3D.getCollisionSupport3D;
 import flighthq.collision.Manifold3D.createCollisionManifold3D;
 import flighthq.collision.TestCollision3D.testCollision3D;
-import flighthq.types.Collision.CollisionManifold3D;
-import flighthq.types.Collision.CollisionPairTest3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionShapeKind3D;
-import flighthq.types.Collision.CollisionSupport3D;
-import flighthq.types.Collision.CollisionTestExplanation3D;
+import flighthq.types.CollisionManifold3D;
+import flighthq.types.CollisionPairTest3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionShapeKind3D;
+import flighthq.types.CollisionSupport3D;
+import flighthq.types.CollisionTestExplanation3D;
 
+@:noCompletion
 class ExplainCollisionTest3D {
   public static function explainCollisionTest3D(a:CollisionShape3D, b:CollisionShape3D):CollisionTestExplanation3D {
     var statusA:Null<String> = cast _Runtime.UNDEFINED;

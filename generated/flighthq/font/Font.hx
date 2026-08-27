@@ -13,10 +13,10 @@ import flighthq.font.FontStatus as Facade_Font_flighthq_font_FontStatus;
 import flighthq.font.GlyphOutlineSource as Facade_Font_flighthq_font_GlyphOutlineSource;
 import flighthq.types.Entity;
 import flighthq.types.Font;
-import flighthq.types.Font.FontUrl;
 import flighthq.types.FontResource;
+import flighthq.types.FontUrl;
 import flighthq.types.GlyphOutlineSource;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
+import flighthq.types.GlyphRasterizerBackend;
 
 class Font {
   public static function createFont(name:String):flighthq.types.Font {

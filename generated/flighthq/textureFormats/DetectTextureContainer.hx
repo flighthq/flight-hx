@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TextureContainerKind;
 
+@:noCompletion
 class DetectTextureContainer {
   public static function detectTextureContainer(bytes:flighthq._internal._UInt8Array):Null<TextureContainerKind> {
     if ((cast ((cast ((cast _Runtime.field(bytes, 'byteLength') : Float) >= (cast 12.0 : Float)) : Bool) && (cast (cast DetectTextureContainer.isKtx2Magic__detectTextureContainer(({ final __callArgument0:Dynamic = bytes; __callArgument0; })) : Bool) : Bool)) : Bool)) { return cast 'ktx2'; }

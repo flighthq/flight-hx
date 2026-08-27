@@ -3,10 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RenderTarget.RenderTargetDepth;
-import flighthq.types.RenderTarget.RenderTargetFormat;
-import flighthq.types.Sampler.SamplerLike;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Vector2.Vector2Like;
 
 typedef CreateRenderTextureOptions = { @:optional var colorSpace:TextureColorSpace; @:optional var colorAttachments:Float; @:optional var colorFormats:Array<RenderTargetFormat>; @:optional var clearColors:Array<Float>; @:optional var clearDepth:Float; @:optional var depth:RenderTargetDepth; @:optional var flipX:Bool; @:optional var flipY:Bool; @:optional var format:RenderTargetFormat; var height:Float; @:optional var sampleCount:Float; @:optional var sampler:SamplerLike; @:optional var uvOffset:Vector2Like; @:optional var uvRotation:Float; @:optional var uvScale:Vector2Like; var width:Float; };

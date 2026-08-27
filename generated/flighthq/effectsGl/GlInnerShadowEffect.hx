@@ -14,27 +14,29 @@ import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
-import flighthq.types.EffectSourceMode.InnerEffectSourceMode;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GlRenderTargetPool;
+import flighthq.types.InnerEffectSourceMode;
 import flighthq.types.InnerShadowEffect;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 
 typedef InnerClipLocations__glInnerShadowEffect = GlFullscreenProgram;
 
+@:noCompletion
 class GlInnerShadowEffect {
   public static final INNER_CLIP_FRAGMENT_SRC__glInnerShadowEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nout vec4 fragColor;\nvoid main() {\n  vec4 shadow = texture(u_texture0, v_texCoord);\n  float srcAlpha = texture(u_texture1, v_texCoord).a;\n  fragColor = shadow * srcAlpha;\n}';
 
   public static final clipShaders__glInnerShadowEffect:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static function applyInnerShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerShadowEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyInnerShadowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerShadowEffect):Void {
     var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
     var s0:GlRenderTarget = cast _Runtime.UNDEFINED;
     var s1:GlRenderTarget = cast _Runtime.UNDEFINED;

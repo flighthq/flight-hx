@@ -4,20 +4,23 @@ package flighthq.entity;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityRuntimeWriteGuard;
+import flighthq.types.EntityRuntime;
+import flighthq.types.EntityRuntimeWriteGuard;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class Guards {
-  @:noCompletion
-  public static function areEntityRuntimeGuardsEnabled():Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areEntityRuntimeGuardsEnabled():Bool {
     return cast Guards._guardsEnabled__guards;
     return cast null;
   }
 
-  @:noCompletion
-  public static function createGuardedEntity<Type:flighthq._internal._Object>(entity:Type):Type {
+  @:allow(flighthq)
+  @:keep
+  private static function createGuardedEntity<Type:flighthq._internal._Object>(entity:Type):Type {
     if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Proxy'), 'undefined') : Bool)) : Bool)) { return cast entity; }
     return cast _Runtime.createProxy(entity, { set: function(target:flighthq._internal._Intersection2<Type, Entity>, prop:flighthq._internal._Union2<String, flighthq._internal._Symbol>, value:flighthq._internal._Any):Bool {
       if ((cast ((cast _Runtime.strictEquals(prop, EntityRuntimeKey) : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
@@ -30,8 +33,9 @@ class Guards {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createGuardedEntityRuntime(runtime:EntityRuntime):EntityRuntime {
     if ((cast ((cast !(cast Guards._guardsEnabled__guards : Bool) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Proxy'), 'undefined') : Bool)) : Bool)) { return cast runtime; }
     return cast _Runtime.createProxy(runtime, { set: function(target:EntityRuntime, prop:flighthq._internal._Union2<String, flighthq._internal._Symbol>, value:flighthq._internal._Any):Bool {
       if ((cast ((cast _Runtime.strictEquals(prop, 'binding') : Bool) && (cast Guards._guardsEnabled__guards : Bool)) : Bool)) {
@@ -44,14 +48,16 @@ class Guards {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setEntityRuntimeGuardMode(enabled:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setEntityRuntimeGuardMode(enabled:Bool):Void {
     if ((cast ((cast enabled : Bool) && (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Proxy'), 'undefined') : Bool)) : Bool)) { return; }
     (Guards._guardsEnabled__guards = cast (enabled : Dynamic));
   }
 
-  @:noCompletion
-  public static function setEntityRuntimeWriteGuard(guard:Null<EntityRuntimeWriteGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setEntityRuntimeWriteGuard(guard:Null<EntityRuntimeWriteGuard>):Void {
     (Guards._writeGuard__guards = cast (guard : Dynamic));
   }
 

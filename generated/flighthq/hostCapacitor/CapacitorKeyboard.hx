@@ -4,21 +4,22 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorKeyboardPlugin;
-import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
-import flighthq.types.Keyboard.SoftKeyboardBackend;
-import flighthq.types.Keyboard.SoftKeyboardInfo;
-import flighthq.types.Keyboard.SoftKeyboardPhase;
+import flighthq.types.CapacitorKeyboardPlugin;
+import flighthq.types.CapacitorPluginListenerHandle;
 import flighthq.types.Keyboard.SoftKeyboardResizeBodyKind;
-import flighthq.types.Keyboard.SoftKeyboardResizeMode;
 import flighthq.types.Keyboard.SoftKeyboardResizeNoneKind;
 import flighthq.types.Keyboard.SoftKeyboardStyleDarkKind;
-import flighthq.types.Keyboard.SoftKeyboardStyleKind;
-import flighthq.types.Keyboard.SoftKeyboardTransition;
+import flighthq.types.SoftKeyboardBackend;
+import flighthq.types.SoftKeyboardInfo;
+import flighthq.types.SoftKeyboardPhase;
+import flighthq.types.SoftKeyboardResizeMode;
+import flighthq.types.SoftKeyboardStyleKind;
+import flighthq.types.SoftKeyboardTransition;
 import flighthq.types.Types.SoftKeyboardResizeBodyKind;
 import flighthq.types.Types.SoftKeyboardResizeNoneKind;
 import flighthq.types.Types.SoftKeyboardStyleDarkKind;
 
+@:noCompletion
 class CapacitorKeyboard {
   public static function createCapacitorKeyboardBackend(capacitor:CapacitorApi):SoftKeyboardBackend {
     var keyboard:CapacitorKeyboardPlugin = cast _Runtime.UNDEFINED;

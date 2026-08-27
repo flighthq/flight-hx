@@ -3,10 +3,11 @@ package flighthq.scene2dDom;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DomRenderState.DomClipContourEntry;
+import flighthq.types.DomClipContourEntry;
 import flighthq.types.Matrix;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 
+@:noCompletion
 class DomClipContours {
   public static function buildDomContourClipPath(entry:DomClipContourEntry, mapPointToElement:Float->Float->Array<Float>):String {
     var d:String = cast _Runtime.UNDEFINED;

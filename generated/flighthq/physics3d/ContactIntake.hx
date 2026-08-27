@@ -12,31 +12,34 @@ import flighthq.physics3d.JointRegistry.isPhysics3DPairOrdered;
 import flighthq.physics3d.Material.mixPhysics3DFriction;
 import flighthq.physics3d.Material.mixPhysics3DRestitution;
 import flighthq.physics3d.World.writeRigidBody3DWorldCenter;
-import flighthq.types.Collision.CollisionColliderShape3D;
-import flighthq.types.Collision.CollisionContactManifold3D;
-import flighthq.types.Collision.CollisionContactPoint3D;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.Physics3DCollisionFilter;
-import flighthq.types.Physics3D.Physics3DContact;
-import flighthq.types.Physics3D.Physics3DContactEvents;
-import flighthq.types.Physics3D.Physics3DContactIntakeGuard;
-import flighthq.types.Physics3D.Physics3DContactPoint;
-import flighthq.types.Physics3D.Physics3DMaterial;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
-import flighthq.types.Spatial.SpatialIndexBackend3D;
-import flighthq.types.Spatial.SpatialPair;
+import flighthq.types.CollisionColliderShape3D;
+import flighthq.types.CollisionContactManifold3D;
+import flighthq.types.CollisionContactPoint3D;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.Physics3DCollisionFilter;
+import flighthq.types.Physics3DContact;
+import flighthq.types.Physics3DContactEvents;
+import flighthq.types.Physics3DContactIntakeGuard;
+import flighthq.types.Physics3DContactPoint;
+import flighthq.types.Physics3DMaterial;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
+import flighthq.types.SpatialIndexBackend3D;
+import flighthq.types.SpatialPair;
 
 typedef Physics3DIntakeScratch__contactIntake = { var pairs:Array<SpatialPair>; var manifold:CollisionContactManifold3D; };
 
+@:noCompletion
 class ContactIntake {
-  @:noCompletion
-  public static function buildPhysics3DContacts(world:Physics3DWorld):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function buildPhysics3DContacts(world:Physics3DWorld):Void {
     ContactIntake.rebuildPhysics3DContacts__contactIntake(({ final __callArgument0:Dynamic = world; __callArgument0; }), (cast true : Bool), (cast false : Bool));
   }
 
-  @:noCompletion
-  public static function refreshPhysics3DContacts(world:Physics3DWorld):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function refreshPhysics3DContacts(world:Physics3DWorld):Void {
     ContactIntake.rebuildPhysics3DContacts__contactIntake(({ final __callArgument2:Dynamic = world; __callArgument2; }), (cast false : Bool), (cast true : Bool));
   }
 
@@ -60,8 +63,9 @@ class ContactIntake {
     }
   }
 
-  @:noCompletion
-  public static function setPhysics3DContactIntakeGuard(guard:Null<Physics3DContactIntakeGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPhysics3DContactIntakeGuard(guard:Null<Physics3DContactIntakeGuard>):Void {
     (ContactIntake.physics3DIntakeGuard__contactIntake = cast (guard : Dynamic));
   }
 

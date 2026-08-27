@@ -22,23 +22,25 @@ import flighthq.shape.ShapeBounds.normalizeShapeStrokeMiterLimit;
 import flighthq.shape.ShapeBounds.normalizeShapeStrokeWidth;
 import flighthq.texture.Texture.getTextureHeight;
 import flighthq.texture.Texture.getTextureWidth;
+import flighthq.types.CanvasShapeCommand;
 import flighthq.types.CanvasShapeDrawState;
-import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
+import flighthq.types.GradientType;
+import flighthq.types.InterpolationMethod;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.ShapeCommand.GradientType;
-import flighthq.types.ShapeCommand.InterpolationMethod;
-import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.MatrixLike;
+import flighthq.types.SpreadMethod;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.Vector2;
 
+@:noCompletion
 class CanvasShapeCommands {
   public static final _fillMatrixInverse__canvasShapeCommands:Matrix = (cast (#if js _Runtime.callValue(createMatrix, cast ([] : Array<Dynamic>)) #else createMatrix(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix);
 
-  @:noCompletion
-  public static final defaultCanvasBeginTextureFill:CanvasShapeCommand<String> = (cast { fillBounds: defaultShapeBoundsFlush, key: 'beginTextureFill', strokeBounds: defaultShapeBoundsFlush, draw: function(context:flighthq._internal.dom.CanvasRenderingContext2D, state:CanvasShapeDrawState, buf:Array<flighthq._internal._Any>, i:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultCanvasBeginTextureFill:CanvasShapeCommand<String> = (cast { fillBounds: defaultShapeBoundsFlush, key: 'beginTextureFill', strokeBounds: defaultShapeBoundsFlush, draw: function(context:flighthq._internal.dom.CanvasRenderingContext2D, state:CanvasShapeDrawState, buf:Array<flighthq._internal._Any>, i:Float):Void {
     var texture:Texture = cast _Runtime.UNDEFINED;
     var matrix:Null<Matrix> = cast _Runtime.UNDEFINED;
     var pattern:Null<flighthq._internal.dom.CanvasPattern> = cast _Runtime.UNDEFINED;
@@ -306,8 +308,9 @@ class CanvasShapeCommands {
     (state.bitmapSrc = cast (null : Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal.dom.HTMLVideoElement, flighthq._internal.dom.HTMLImageElement>, flighthq._internal.dom.SVGImageElement>, flighthq._internal.dom.HTMLCanvasElement>, flighthq._internal.dom.ImageBitmap>, flighthq._internal.dom.OffscreenCanvas>, flighthq._internal.dom.VideoFrame>>));
   } });
 
-  @:noCompletion
-  public static final defaultCanvasLineTextureStyle:CanvasShapeCommand<String> = (cast { fillBounds: null, key: 'lineTextureStyle', strokeBounds: null, draw: function(context:flighthq._internal.dom.CanvasRenderingContext2D, state:CanvasShapeDrawState, buf:Array<flighthq._internal._Any>, i:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultCanvasLineTextureStyle:CanvasShapeCommand<String> = (cast { fillBounds: null, key: 'lineTextureStyle', strokeBounds: null, draw: function(context:flighthq._internal.dom.CanvasRenderingContext2D, state:CanvasShapeDrawState, buf:Array<flighthq._internal._Any>, i:Float):Void {
     var texture:Texture = cast _Runtime.UNDEFINED;
     var pattern:Null<flighthq._internal.dom.CanvasPattern> = cast _Runtime.UNDEFINED;
     texture = (cast flighthq._internal._StaticIndex.readArray(buf, i) : Texture);

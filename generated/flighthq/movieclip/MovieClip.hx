@@ -22,8 +22,8 @@ import flighthq.timeline.Timeline.stopTimeline;
 import flighthq.timeline.Timeline.updateTimeline;
 import flighthq.types.FrameScript;
 import flighthq.types.MovieClip;
-import flighthq.types.MovieClip.MovieClipData;
-import flighthq.types.MovieClip.MovieClipRuntime;
+import flighthq.types.MovieClipData;
+import flighthq.types.MovieClipRuntime;
 import flighthq.types.MovieClipSignals;
 import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
@@ -36,6 +36,7 @@ import flighthq.types.Types.MovieClipKind;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 import flighthq.types._internal._MovieClipValues.MovieClipKind;
 
+@:noCompletion
 class MovieClip {
   public static function addMovieClipFrameScript(clip:flighthq.types.MovieClip, frame:flighthq._internal._Union2<Float, String>, script:FrameScript):Void {
     if ((cast _Runtime.strictEquals((cast (cast clip : flighthq.types.MovieClip).data : { var timeline:Null<Timeline>; }).timeline, null) : Bool)) { return; }
@@ -47,14 +48,16 @@ class MovieClip {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createMovieClipData(?data:{ @:optional var timeline:Null<Timeline>; }):MovieClipData {
+  @:allow(flighthq)
+  @:keep
+  private static function createMovieClipData(?data:{ @:optional var timeline:Null<Timeline>; }):MovieClipData {
     return cast { timeline: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var timeline:Null<Timeline>; }).timeline; }), function():Dynamic return cast null) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createMovieClipRuntime():MovieClipRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createMovieClipRuntime():MovieClipRuntime {
     var out:MovieClipRuntime = cast _Runtime.UNDEFINED;
     out = (cast (#if js _Runtime.callValue(createNode2DRuntime, cast ([] : Array<Dynamic>)) #else createNode2DRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : MovieClipRuntime);
     ((cast out : MovieClipRuntime).movieClipSignals = null);
@@ -98,8 +101,9 @@ class MovieClip {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getMovieClipRuntime(source:flighthq.types.MovieClip):MovieClipRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getMovieClipRuntime(source:flighthq.types.MovieClip):MovieClipRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument8:Dynamic = source; __callArgument8; })) : MovieClipRuntime);
     return cast null;
   }

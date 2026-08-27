@@ -12,23 +12,24 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
+import flighthq.types.FocusDirection;
 import flighthq.types.FocusEventData;
 import flighthq.types.FocusManager;
-import flighthq.types.FocusManager.FocusDirection;
-import flighthq.types.FocusManager.FocusManagerOptions;
-import flighthq.types.FocusManager.FocusNavigationInput;
-import flighthq.types.FocusManager.FocusNavigationOptions;
-import flighthq.types.HasBoundsRectangle.Spatial2DNode;
+import flighthq.types.FocusManagerOptions;
+import flighthq.types.FocusNavigationInput;
+import flighthq.types.FocusNavigationOptions;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.InteractionSignals;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
 import flighthq.types.Rectangle;
 import flighthq.types.Signal;
+import flighthq.types.Spatial2DNode;
 
 typedef FocusSignalName__focusManager = String;
 
+@:noCompletion
 class FocusManager {
   public static function clearFocus<N:NodeAny>(manager:flighthq.types.FocusManager<N>):Void {
     (cast setFocusedNode((cast manager : Dynamic), (cast null : Dynamic)) : Bool);

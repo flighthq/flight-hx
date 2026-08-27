@@ -26,19 +26,20 @@ import flighthq.scene2dGl.GlQuadBatchWriter.flushGlQuadBatchWriter;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheRefreshOptions;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
+import flighthq.types.RenderTargetDescriptor;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.Scene2DRenderer;
 
+@:noCompletion
 class GlCache {
   public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
     var cacheState:GlRenderState = cast _Runtime.UNDEFINED;
@@ -52,8 +53,9 @@ class GlCache {
     registerRenderCacheRenderer(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = defaultGlRenderCacheRenderer; __callArgument3; }));
   }
 
-  @:noCompletion
-  public static function ensureGlRenderCacheTarget(state:GlRenderState, cache:RenderCache, width:Float, height:Float):GlRenderTarget {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlRenderCacheTarget(state:GlRenderState, cache:RenderCache, width:Float, height:Float):GlRenderTarget {
     var targets:flighthq._internal._WeakMap<RenderCache, GlRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
     targets = (cast GlCache.getTargets__glCache(({ final __callArgument6:Dynamic = state; __callArgument6; })) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>);
@@ -68,14 +70,16 @@ class GlCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlRenderCacheScreenState(state:GlRenderState):GlRenderState {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlRenderCacheScreenState(state:GlRenderState):GlRenderState {
     return cast _Runtime.coalesce(((cast GlCache._cacheStateScreen__glCache : flighthq._internal._WeakMap<GlRenderState, GlRenderState>).get(state)), function():Dynamic return cast state);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlRenderCacheTarget(state:GlRenderState, cache:RenderCache):Null<GlRenderTarget> {
     return cast _Runtime.coalesce(((cast (cast GlCache.getTargets__glCache(({ final __callArgument18:Dynamic = state; __callArgument18; })) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>).get(cache)), function():Dynamic return cast null);
     return cast null;
   }
@@ -130,8 +134,9 @@ class GlCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static function releaseGlRenderCache(state:GlRenderState, cache:RenderCache):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function releaseGlRenderCache(state:GlRenderState, cache:RenderCache):Void {
     var targets:flighthq._internal._WeakMap<RenderCache, GlRenderTarget> = cast _Runtime.UNDEFINED;
     var target:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
     targets = (cast GlCache.getTargets__glCache(({ final __callArgument70:Dynamic = state; __callArgument70; })) : flighthq._internal._WeakMap<RenderCache, GlRenderTarget>);
@@ -163,8 +168,9 @@ class GlCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static final defaultGlRenderCacheRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: GlCache.drawGlRenderCache__glCache });
+  @:allow(flighthq)
+  @:keep
+  private static final defaultGlRenderCacheRenderer:Scene2DRenderer = (cast { createData: noopRendererData, submit: GlCache.drawGlRenderCache__glCache });
 
   public static final _renderCacheTargets__glCache:flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<RenderCache, GlRenderTarget>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 

@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.hostElectron.ElectronMenuTemplate.toElectronTemplate;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronMenu;
-import flighthq.types.ElectronApi.ElectronMenuConstructor;
-import flighthq.types.ElectronApi.ElectronMenuItemOptions;
-import flighthq.types.Menu.MenuBackend;
-import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.ElectronMenu;
+import flighthq.types.ElectronMenuConstructor;
+import flighthq.types.ElectronMenuItemOptions;
+import flighthq.types.MenuBackend;
+import flighthq.types.MenuItemTemplate;
 
+@:noCompletion
 class ElectronMenu {
   public static function createElectronMenuBackend(electron:ElectronApi):MenuBackend {
     var selectListener:Null<String->Void> = cast _Runtime.UNDEFINED;
@@ -21,10 +22,10 @@ class ElectronMenu {
       return cast _Runtime.UNDEFINED;
     }, popupContextMenu: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
       return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused0:flighthq._internal._Any):Void {
-        var menu:flighthq.types.ElectronApi.ElectronMenu = cast _Runtime.UNDEFINED;
+        var menu:flighthq.types.ElectronMenu = cast _Runtime.UNDEFINED;
         menu = (cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast toElectronTemplate((cast items : Dynamic), ({ final __callArgument4:Dynamic = function(id:String):Void { resolve(({ final __callArgument2:Dynamic = id; __callArgument2; })); }; __callArgument4; })) : Array<ElectronMenuItemOptions>) : Dynamic));
         try {
-          (cast menu : flighthq.types.ElectronApi.ElectronMenu).popup(({ final __callArgument8:Dynamic = { x: x, y: y }; __callArgument8; }));
+          (cast menu : flighthq.types.ElectronMenu).popup(({ final __callArgument8:Dynamic = { x: x, y: y }; __callArgument8; }));
         } catch (__error:Dynamic) {
           resolve(({ final __callArgument9:Dynamic = null; __callArgument9; }));
         }

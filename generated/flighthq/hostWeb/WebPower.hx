@@ -5,12 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.power.Power.installPowerHostBackend;
 import flighthq.power.Power.observePowerHostResult;
-import flighthq.types.Power.PowerBackend;
-import flighthq.types.Power.PowerIdleState;
-import flighthq.types.Power.PowerKeepAwakeMode;
-import flighthq.types.Power.PowerStatus;
-import flighthq.types.Power.PowerThermalState;
+import flighthq.types.PowerBackend;
 import flighthq.types.PowerBatteryHealth;
+import flighthq.types.PowerIdleState;
+import flighthq.types.PowerKeepAwakeMode;
+import flighthq.types.PowerStatus;
+import flighthq.types.PowerThermalState;
 
 typedef WebBatteryManager__webPower = { var chargingTime:Float; var dischargingTime:Float; var level:Float; var charging:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
 
@@ -18,6 +18,7 @@ typedef WebWakeLock__webPower = { var request:String->flighthq._internal._Promis
 
 typedef WebWakeLockSentinel__webPower = { @:optional var addEventListener:String->(Void->Void)->Void; @:optional var release:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; };
 
+@:noCompletion
 class WebPower {
   public static function enableHostWebPower():Void {
     var backend:PowerBackend = cast _Runtime.UNDEFINED;
@@ -224,8 +225,9 @@ class WebPower {
     installPowerHostBackend(({ final __callArgument10:Dynamic = backend; __callArgument10; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebPowerForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebPowerForTest():Void {
     (WebPower._enabled__webPower = cast (false : Dynamic));
   }
 

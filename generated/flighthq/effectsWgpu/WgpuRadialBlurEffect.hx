@@ -9,14 +9,16 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.RadialBlurEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuRadialBlurEffect {
-  @:noCompletion
-  public static function applyRadialBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:RadialBlurEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyRadialBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:RadialBlurEffect):Void {
     var centerX:Float = cast _Runtime.UNDEFINED;
     var centerY:Float = cast _Runtime.UNDEFINED;
     var strength:Float = cast _Runtime.UNDEFINED;

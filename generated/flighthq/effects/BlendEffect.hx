@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BlendEffect;
 
+@:noCompletion
 class BlendEffect {
   public static function createBlendEffect(mode:AdvancedBlendMode, ?options:{ @:optional var backdropKey:Null<String>; @:optional var opacity:Null<Float>; }):flighthq.types.BlendEffect {
     if (options == null) options = cast ({  } : Dynamic);

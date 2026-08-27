@@ -7,6 +7,7 @@ import flighthq.adjustments.ColorMatrixMath.COLOR_MATRIX_LENGTH;
 import flighthq.types.AdjustmentKind;
 import flighthq.types.ColorMatrixAdjustment;
 
+@:noCompletion
 class ColorMatrixAdjustment {
   public static function createColorMatrixAdjustment(colorMatrix:Array<Float>):flighthq.types.ColorMatrixAdjustment {
     if ((cast !_Runtime.strictEquals(_Runtime.field(colorMatrix, 'length'), COLOR_MATRIX_LENGTH) : Bool)) {

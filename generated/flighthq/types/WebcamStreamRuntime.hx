@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 
 typedef WebcamStreamRuntime = { var binding:Dynamic; var mediaStream:Null<flighthq._internal.dom.MediaStream>; var videoElement:Null<flighthq._internal.dom.HTMLVideoElement>; };

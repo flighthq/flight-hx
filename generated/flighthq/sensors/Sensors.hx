@@ -7,19 +7,19 @@ import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.AmbientLightReading;
 import flighthq.types.BackendExplanation;
+import flighthq.types.MotionReading;
+import flighthq.types.OrientationReading;
+import flighthq.types.PressureReading;
+import flighthq.types.ProximityReading;
+import flighthq.types.QuaternionReading;
+import flighthq.types.RotationRateReading;
+import flighthq.types.SensorAccuracy;
+import flighthq.types.SensorSubscribeOptions;
 import flighthq.types.Sensors;
-import flighthq.types.Sensors.AmbientLightReading;
-import flighthq.types.Sensors.MotionReading;
-import flighthq.types.Sensors.OrientationReading;
-import flighthq.types.Sensors.PressureReading;
-import flighthq.types.Sensors.ProximityReading;
-import flighthq.types.Sensors.QuaternionReading;
-import flighthq.types.Sensors.RotationRateReading;
-import flighthq.types.Sensors.SensorAccuracy;
-import flighthq.types.Sensors.SensorSubscribeOptions;
-import flighthq.types.Sensors.SensorsBackend;
-import flighthq.types.Sensors.SensorsPermissionState;
+import flighthq.types.SensorsBackend;
+import flighthq.types.SensorsPermissionState;
 import flighthq.types.Signal;
 
 typedef WebAmbientLightSensor__sensors = { >WebGenericSensor__sensors, @:optional var illuminance:Null<Float>; };
@@ -375,44 +375,51 @@ class Sensors {
     (out.accuracy = cast (acceleration.accuracy : SensorAccuracy));
   }
 
-  @:noCompletion
-  public static function createAmbientLightReading():AmbientLightReading {
+  @:allow(flighthq)
+  @:keep
+  private static function createAmbientLightReading():AmbientLightReading {
     return cast { accuracy: 'unknown', illuminance: 0.0, interval: -1.0, timestamp: -1.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createMotionReading():MotionReading {
+  @:allow(flighthq)
+  @:keep
+  private static function createMotionReading():MotionReading {
     return cast { accuracy: 'unknown', interval: -1.0, timestamp: -1.0, x: 0.0, y: 0.0, z: 0.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createOrientationReading():OrientationReading {
+  @:allow(flighthq)
+  @:keep
+  private static function createOrientationReading():OrientationReading {
     return cast { absolute: false, accuracy: 'unknown', alpha: 0.0, beta: 0.0, gamma: 0.0, heading: -1.0, interval: -1.0, timestamp: -1.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createPressureReading():PressureReading {
+  @:allow(flighthq)
+  @:keep
+  private static function createPressureReading():PressureReading {
     return cast { accuracy: 'unknown', altitude: -1.0, interval: -1.0, pressure: 0.0, timestamp: -1.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createProximityReading():ProximityReading {
+  @:allow(flighthq)
+  @:keep
+  private static function createProximityReading():ProximityReading {
     return cast { accuracy: 'unknown', distance: -1.0, interval: -1.0, max: -1.0, near: false, timestamp: -1.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createQuaternionReading():QuaternionReading {
+  @:allow(flighthq)
+  @:keep
+  private static function createQuaternionReading():QuaternionReading {
     return cast { accuracy: 'unknown', interval: -1.0, timestamp: -1.0, w: 1.0, x: 0.0, y: 0.0, z: 0.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createRotationRateReading():RotationRateReading {
+  @:allow(flighthq)
+  @:keep
+  private static function createRotationRateReading():RotationRateReading {
     return cast { accuracy: 'unknown', alpha: 0.0, beta: 0.0, gamma: 0.0, interval: -1.0, timestamp: -1.0 };
     return cast null;
   }
@@ -422,8 +429,9 @@ class Sensors {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebSensorsBackend():SensorsBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebSensorsBackend():SensorsBackend {
     return cast { getPermissionState: function(?sensor:String):flighthq._internal._Promise<SensorsPermissionState> {
       return cast (cast Sensors.getWebSensorsPermissionState__sensors(({ final __callArgument12:Dynamic = sensor; __callArgument12; })) : flighthq._internal._Promise<SensorsPermissionState>);
       return cast _Runtime.UNDEFINED;
@@ -764,8 +772,9 @@ class Sensors {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getSensorsBackend():SensorsBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getSensorsBackend():SensorsBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Sensors._custom__sensors, function():Dynamic return cast Sensors._host__sensors), function():Dynamic return cast Sensors._sentinel__sensors);
     return cast null;
   }
@@ -931,8 +940,9 @@ class Sensors {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installSensorsHostBackend(backend:SensorsBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installSensorsHostBackend(backend:SensorsBackend):Void {
     if ((cast !_Runtime.strictEquals(Sensors._host__sensors, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Sensors._host__sensors, backend) : Bool)) { (Sensors._hostConflict__sensors = cast (true : Dynamic)); }
       return;
@@ -947,8 +957,9 @@ class Sensors {
 
   public static var Magnetometer__sensors:flighthq._internal._Any;
 
-  @:noCompletion
-  public static function observeSensorsHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeSensorsHostResult(operation:String, succeeded:Bool):Void {
     (Sensors._hostObservation__sensors = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -957,16 +968,18 @@ class Sensors {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetSensorsBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetSensorsBackendForTest():Void {
     (Sensors._custom__sensors = cast (null : Dynamic));
     (Sensors._host__sensors = cast (null : Dynamic));
     (Sensors._hostConflict__sensors = cast (false : Dynamic));
     (Sensors._hostObservation__sensors = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setSensorsBackend(backend:Null<SensorsBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setSensorsBackend(backend:Null<SensorsBackend>):Void {
     (Sensors._custom__sensors = cast (backend : Dynamic));
   }
 }

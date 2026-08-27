@@ -11,18 +11,18 @@ import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
 import flighthq.types.Application;
 import flighthq.types.ApplicationLoopOptions;
-import flighthq.types.ApplicationLoopOptions.ApplicationStepOptions;
 import flighthq.types.ApplicationRenderView;
-import flighthq.types.ApplicationRenderView.ApplicationRenderViewResize;
+import flighthq.types.ApplicationRenderViewResize;
+import flighthq.types.ApplicationStepOptions;
 import flighthq.types.ApplicationWindow;
-import flighthq.types.ApplicationWindow.WindowBounds;
-import flighthq.types.ApplicationWindow.WindowOptions;
 import flighthq.types.BackendExplanation;
 import flighthq.types.LoopBackend;
 import flighthq.types.Matrix;
 import flighthq.types.RenderState;
-import flighthq.types.RenderTarget.RenderTargetDimensions;
+import flighthq.types.RenderTargetDimensions;
 import flighthq.types.Signal;
+import flighthq.types.WindowBounds;
+import flighthq.types.WindowOptions;
 
 typedef ApplicationStepPolicy__application = { var fixedStepState:Null<LoopState__application>; var maxDeltaTime:Float; };
 
@@ -199,8 +199,9 @@ class Application {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebLoopBackend():LoopBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebLoopBackend():LoopBackend {
     return cast { requestFrame: function(callback:Float->Void):flighthq._internal._Any {
       return cast _Runtime.callValue(flighthq._internal._HostValueLut.get('requestAnimationFrame'), cast ([callback] : Array<Dynamic>));
       return cast _Runtime.UNDEFINED;
@@ -303,8 +304,9 @@ class Application {
     return cast null;
   }
 
-  @:noCompletion
-  public static function explainLoopBackend():BackendExplanation {
+  @:allow(flighthq)
+  @:keep
+  private static function explainLoopBackend():BackendExplanation {
     if ((cast !_Runtime.strictEquals(Application._loopCustom__application, null) : Bool)) {
       return cast { conflict: Application._loopHostConflict__application, layer: 'custom', operation: null, viability: 'unobserved' };
     }
@@ -384,8 +386,9 @@ class Application {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getLoopBackend():Null<LoopBackend> {
+  @:allow(flighthq)
+  @:keep
+  private static function getLoopBackend():Null<LoopBackend> {
     return cast _Runtime.coalesce(_Runtime.coalesce(Application._loopCustom__application, function():Dynamic return cast Application._loopHost__application), function():Dynamic return cast null);
     return cast null;
   }
@@ -415,8 +418,9 @@ class Application {
     Facade_Application_flighthq_application_Window.hideWindow(win);
   }
 
-  @:noCompletion
-  public static function installLoopHostBackend(backend:LoopBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installLoopHostBackend(backend:LoopBackend):Void {
     if ((cast !_Runtime.strictEquals(Application._loopHost__application, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Application._loopHost__application, backend) : Bool)) { (Application._loopHostConflict__application = cast (true : Dynamic)); }
       return;
@@ -462,8 +466,9 @@ class Application {
     Facade_Application_flighthq_application_Window.minimizeWindow(win);
   }
 
-  @:noCompletion
-  public static function observeLoopHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeLoopHostResult(operation:String, succeeded:Bool):Void {
     (Application._loopHostObservation__application = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -514,8 +519,9 @@ class Application {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetLoopBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetLoopBackendForTest():Void {
     (Application._loopCustom__application = cast (null : Dynamic));
     (Application._loopHost__application = cast (null : Dynamic));
     (Application._loopHostConflict__application = cast (false : Dynamic));
@@ -548,8 +554,9 @@ class Application {
     ((cast Application._mainWindows__application : flighthq._internal._WeakMap<flighthq.types.Application, ApplicationWindow>).set(app, (cast win)));
   }
 
-  @:noCompletion
-  public static function setLoopBackend(backend:Null<LoopBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setLoopBackend(backend:Null<LoopBackend>):Void {
     (Application._loopCustom__application = cast (backend : Dynamic));
   }
 

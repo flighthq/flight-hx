@@ -5,14 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
-typedef Kind = String;
-
 typedef Entity = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };
-
-typedef EntityWithoutRuntime<Type> = flighthq._internal._Omit<Type, Dynamic>;
-
-typedef EntityRuntime = { var binding:Null<flighthq._internal._Object>; };
-
-typedef EntityRuntimeWriteSlot = String;
-
-typedef EntityRuntimeWriteGuard = EntityRuntimeWriteSlot->Void;

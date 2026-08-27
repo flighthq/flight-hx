@@ -4,28 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SensorAccuracy = String;
-
-typedef SensorsPermissionState = String;
-
-typedef SensorSubscribeOptions = { @:optional var frequency:Float; };
-
-typedef SensorReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; };
-
-typedef AmbientLightReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var illuminance:Float; };
-
-typedef MotionReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var x:Float; var y:Float; var z:Float; };
-
-typedef OrientationReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var alpha:Float; var beta:Float; var gamma:Float; var absolute:Bool; var heading:Float; };
-
-typedef PressureReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var altitude:Float; var pressure:Float; };
-
-typedef ProximityReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var distance:Float; var max:Float; var near:Bool; };
-
-typedef QuaternionReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var w:Float; var x:Float; var y:Float; var z:Float; };
-
-typedef RotationRateReading = { var accuracy:SensorAccuracy; var interval:Float; var timestamp:Float; var alpha:Float; var beta:Float; var gamma:Float; };
-
-typedef SensorsBackend = { var getPermissionState:String->flighthq._internal._Promise<SensorsPermissionState>; var isAmbientLightSupported:Void->Bool; var isBarometerSupported:Void->Bool; var isGravitySupported:Void->Bool; var isGyroscopeSupported:Void->Bool; var isLinearAccelerationSupported:Void->Bool; var isMagnetometerSupported:Void->Bool; var isMotionSupported:Void->Bool; var isOrientationSupported:Void->Bool; var isProximitySupported:Void->Bool; var requestPermission:Void->flighthq._internal._Promise<Bool>; var subscribeAbsoluteOrientation:(OrientationReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeAmbientLight:(AmbientLightReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeBarometer:(PressureReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeGravity:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeLinearAcceleration:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeMagnetometer:(MotionReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeMotion:(MotionReading->RotationRateReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeOrientation:(OrientationReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeProximity:(ProximityReading->Void)->SensorSubscribeOptions->(Void->Void); var subscribeQuaternion:(QuaternionReading->Void)->SensorSubscribeOptions->(Void->Void); };
-
 typedef Sensors = { var onAbsoluteOrientation:Signal<OrientationReading->Void>; var onAccelerometer:Signal<MotionReading->Void>; var onAmbientLight:Signal<AmbientLightReading->Void>; var onBarometer:Signal<PressureReading->Void>; var onGravity:Signal<MotionReading->Void>; var onGyroscope:Signal<RotationRateReading->Void>; var onLinearAcceleration:Signal<MotionReading->Void>; var onMagnetometer:Signal<MotionReading->Void>; var onOrientation:Signal<OrientationReading->Void>; var onProximity:Signal<ProximityReading->Void>; var onQuaternion:Signal<QuaternionReading->Void>; };

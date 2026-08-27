@@ -6,14 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.notification.Notification.createWebNotificationBackend;
 import flighthq.notification.Notification.installNotificationHostBackend;
 import flighthq.notification.Notification.observeNotificationHostResult;
-import flighthq.types.Notification.NotificationAction;
-import flighthq.types.Notification.NotificationBackend;
-import flighthq.types.Notification.NotificationCapabilities;
-import flighthq.types.Notification.NotificationPermission;
-import flighthq.types.Notification.NotificationRequest;
-import flighthq.types.Notification.NotificationSchedule;
-import flighthq.types.Notification.ScheduledNotification;
+import flighthq.types.NotificationAction;
+import flighthq.types.NotificationBackend;
+import flighthq.types.NotificationCapabilities;
+import flighthq.types.NotificationPermission;
+import flighthq.types.NotificationRequest;
+import flighthq.types.NotificationSchedule;
+import flighthq.types.ScheduledNotification;
 
+@:noCompletion
 class WebNotification {
   public static function enableHostWebNotification():Void {
     var inner:NotificationBackend = cast _Runtime.UNDEFINED;
@@ -117,8 +118,9 @@ class WebNotification {
     installNotificationHostBackend(({ final __callArgument10:Dynamic = backend; __callArgument10; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebNotificationForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebNotificationForTest():Void {
     (WebNotification._enabled__webNotification = cast (false : Dynamic));
   }
 

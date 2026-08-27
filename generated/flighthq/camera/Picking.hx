@@ -11,11 +11,12 @@ import flighthq.geometry.Vector3.normalizeVector3;
 import flighthq.geometry.Vector3.subtractVector3;
 import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Ray3D.Ray3DLike;
+import flighthq.types.Matrix4Like;
+import flighthq.types.Ray3DLike;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Picking {
   public static function getCamera3DScreenToWorldRay(out:Ray3DLike, camera:Camera3D, ndcX:Float, ndcY:Float, aspect:Float):Bool {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;

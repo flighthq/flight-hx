@@ -3,15 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Camera3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var far:Float; var inverseViewProjection:Matrix4; var jitter:Vector2; var near:Float; var projection:Projection; var view:Matrix4; };
-
-typedef Camera3DLike = { var far:Float; var inverseViewProjection:Matrix4; var jitter:Vector2; var near:Float; var projection:Projection; var view:Matrix4; };
-
-typedef Projection = flighthq._internal._Union2<OrthographicProjection, PerspectiveProjection>;
-
-typedef PerspectiveProjection = { var aspect:Float; var fovY:Float; var kind:String; };
-
-typedef OrthographicProjection = { var halfHeight:Float; var halfWidth:Float; var kind:String; };

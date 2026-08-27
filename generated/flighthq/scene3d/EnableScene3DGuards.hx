@@ -6,24 +6,28 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.scene3d.BillboardCamera.setBillboardCameraBasisGuard;
 import flighthq.types.Camera3D;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.Matrix4;
 
+@:noCompletion
 class EnableScene3DGuards {
-  @:noCompletion
-  public static function areScene3DGuardsEnabled():Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areScene3DGuardsEnabled():Bool {
     return cast EnableScene3DGuards.scene3DGuardsEnabled__enableScene3DGuards;
     return cast null;
   }
 
-  @:noCompletion
-  public static function disableScene3DGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function disableScene3DGuards():Void {
     setBillboardCameraBasisGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));
     (EnableScene3DGuards.scene3DGuardsEnabled__enableScene3DGuards = cast (false : Dynamic));
   }
 
-  @:noCompletion
-  public static function enableScene3DGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableScene3DGuards():Void {
     setBillboardCameraBasisGuard(({ final __callArgument2:Dynamic = EnableScene3DGuards.warnOnDegenerateBillboardCameraBasis__enableScene3DGuards; __callArgument2; }));
     (EnableScene3DGuards.scene3DGuardsEnabled__enableScene3DGuards = cast (true : Dynamic));
   }

@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Matrix4 = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var m:flighthq._internal._Float32Array; };
-
-typedef Matrix4Like = { var m:flighthq._internal._Float32Array; };

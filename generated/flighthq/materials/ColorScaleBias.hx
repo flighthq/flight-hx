@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.ColorScaleBias;
-import flighthq.types.ColorScaleBias.ColorScaleBiasLike;
+import flighthq.types.ColorScaleBiasLike;
 import flighthq.types.Entity;
 
+@:noCompletion
 class ColorScaleBias {
   public static function cloneColorScaleBias(source:ColorScaleBiasLike):flighthq.types.ColorScaleBias {
     return cast (cast createColorScaleBias(({ final __callArgument0:Dynamic = source; __callArgument0; })) : flighthq.types.ColorScaleBias);

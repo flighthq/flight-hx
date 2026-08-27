@@ -6,12 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuFullscreenPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuFullscreenPass {
-  @:noCompletion
-  public static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Float = 1.0, ?format:flighthq._internal.dom.GPUTextureFormat):WgpuFullscreenPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function createWgpuFullscreenPipeline(state:WgpuRenderState, fragmentWgsl:String, textureInputCount:Float = 1.0, ?format:flighthq._internal.dom.GPUTextureFormat):WgpuFullscreenPipeline {
     if (format == null) format = cast ((cast state : WgpuRenderState).format : Dynamic);
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
@@ -40,12 +42,14 @@ class WgpuFullscreenPass {
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyWgpuFullscreenPipeline(_state:WgpuRenderState, _pipeline:WgpuFullscreenPipeline):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuFullscreenPipeline(_state:WgpuRenderState, _pipeline:WgpuFullscreenPipeline):Void {
   }
 
-  @:noCompletion
-  public static function drawWgpuFullscreenPass(state:WgpuRenderState, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<WgpuRenderTarget>, dest:Null<WgpuRenderTarget>, setUniforms:Null<WgpuRenderState->flighthq._internal.dom.GPUBindGroupLayout->flighthq._internal.dom.GPUBindGroup>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuFullscreenPass(state:WgpuRenderState, wgpuPipeline:WgpuFullscreenPipeline, inputs:Array<WgpuRenderTarget>, dest:Null<WgpuRenderTarget>, setUniforms:Null<WgpuRenderState->flighthq._internal.dom.GPUBindGroupLayout->flighthq._internal.dom.GPUBindGroup>):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var runtime2:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;

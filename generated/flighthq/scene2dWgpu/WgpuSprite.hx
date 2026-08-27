@@ -21,30 +21,31 @@ import flighthq.texture.Texture.getTextureWidth;
 import flighthq.texture.Texture.hasTextureSource;
 import flighthq.types.BatchFormat;
 import flighthq.types.ColorScaleBias;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Sprite;
-import flighthq.types.Sprite.SpriteData;
+import flighthq.types.SpriteData;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
+import flighthq.types.WgpuBitmapShader;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuQuadBatchResources;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuBitmapShader;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
 
+@:noCompletion
 class WgpuSprite {
   public static function drawWgpuSprite(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;

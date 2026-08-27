@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.AgxToneMapOptions;
 import flighthq.types.FilmicToneMapOptions;
 
+@:noCompletion
 class ToneMapMath {
   public static function computeAcesToneMap(x:Float):Float {
     var a:Float = cast _Runtime.UNDEFINED;

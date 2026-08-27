@@ -4,13 +4,14 @@ package flighthq.cameraControls;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.math.Clamp.clamp;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
-import flighthq.types.Camera3D.OrthographicProjection;
-import flighthq.types.Camera3D.PerspectiveProjection;
-import flighthq.types.Camera3D.Projection;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.OrbitCameraController;
+import flighthq.types.OrthographicProjection;
+import flighthq.types.PerspectiveProjection;
+import flighthq.types.Projection;
 import flighthq.types.Vector3;
 
+@:noCompletion
 class Framing {
   public static function frameOrbitCameraControllerToSphere(controller:OrbitCameraController, projection:Projection, sphere:BoundingSphereLike, aspect:Float, padding:Float = 1.0):Bool {
     if ((cast ((cast ((cast !(cast _Runtime.compare(sphere.radius, 0.0, '>=') : Bool) : Bool) || (cast !(cast _Runtime.compare(aspect, 0.0, '>') : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.compare(padding, 0.0, '>') : Bool) : Bool)) : Bool)) { return cast false; }

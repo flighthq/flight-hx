@@ -6,19 +6,19 @@ import flighthq._internal._Runtime;
 import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
 import flighthq.types.BlendMode;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.EntityRuntime;
+import flighthq.types.Kind;
 import flighthq.types.LinearColor;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.Sampler;
 import flighthq.types.SpecularGlossinessPbrMaterial;
 import flighthq.types.StandardPbrMaterial;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.StandardPbrMaterialProperties;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.SpecularGlossinessPbrMaterialKind;
 import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types.Vector2;
@@ -26,6 +26,7 @@ import flighthq.types.VoxelGrid;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
+@:noCompletion
 class PbrMaterials {
   public static function convertSpecularGlossinessToStandardPbr(out:StandardPbrMaterialProperties, source:SpecularGlossinessPbrMaterial):Void {
     var diffuse:Float = cast _Runtime.UNDEFINED;

@@ -8,9 +8,10 @@ import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Matrix4Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class FrustumCorners {
   public static function getCamera3DFrustumCorners(out:Array<Vector3Like>, camera:Camera3D, aspect:Float):Bool {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;

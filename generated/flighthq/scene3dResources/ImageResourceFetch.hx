@@ -4,9 +4,10 @@ package flighthq.scene3dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.image.ImageResourceFrom.loadImageResourceFromUrl;
+import flighthq.types.ExternalImageResourceReference;
 import flighthq.types.Image;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 
+@:noCompletion
 class ImageResourceFetch {
   public static function fetchWebImageResource(ref:ExternalImageResourceReference, signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Null<Image>> {
     return cast flighthq._internal._Async.finishFlow(

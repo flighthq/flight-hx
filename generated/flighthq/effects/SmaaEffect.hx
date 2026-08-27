@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SmaaEffect;
 
+@:noCompletion
 class SmaaEffect {
   public static function createSmaaEffect(?options:{ @:optional var threshold:Null<Float>; }):flighthq.types.SmaaEffect {
     if (options == null) options = cast ({  } : Dynamic);

@@ -28,35 +28,36 @@ import flighthq.physics2dAbi.Physics2DAbiLayout.Physics2DAbiShapeHeaderByteLengt
 import flighthq.physics2dAbi.Physics2DAbiLayout.Physics2DAbiShapeKind;
 import flighthq.physics2dAbi.Physics2DAbiLayout.Physics2DAbiSolverConfigFlag;
 import flighthq.physics2dAbi.Physics2DAbiLayout.Physics2DAbiVersion;
-import flighthq.types.Collision.CollisionAabb2D;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Collision.CollisionCapsule2D;
-import flighthq.types.Collision.CollisionObb2D;
-import flighthq.types.Collision.CollisionPoint2D;
-import flighthq.types.Collision.CollisionPolygon2D;
-import flighthq.types.Collision.CollisionSegment2D;
-import flighthq.types.Physics2D.Physics2DBodyType;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.Physics2DCollisionFilter;
-import flighthq.types.Physics2D.Physics2DDistanceJoint;
-import flighthq.types.Physics2D.Physics2DGearCoordinateKind;
-import flighthq.types.Physics2D.Physics2DGearJoint;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DMaterial;
-import flighthq.types.Physics2D.Physics2DMouseJoint;
-import flighthq.types.Physics2D.Physics2DPrismaticJoint;
-import flighthq.types.Physics2D.Physics2DPulleyJoint;
-import flighthq.types.Physics2D.Physics2DRevoluteJoint;
-import flighthq.types.Physics2D.Physics2DRopeJoint;
-import flighthq.types.Physics2D.Physics2DSolverConfig;
-import flighthq.types.Physics2D.Physics2DWeldJoint;
-import flighthq.types.Physics2D.Physics2DWheelJoint;
-import flighthq.types.Physics2D.RigidBody2D;
-import flighthq.types.Physics2DAbi.Physics2DAbiCommandBuffer;
-import flighthq.types.Physics2DAbi.Physics2DAbiObjectId;
+import flighthq.types.CollisionAabb2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.CollisionCapsule2D;
+import flighthq.types.CollisionObb2D;
+import flighthq.types.CollisionPoint2D;
+import flighthq.types.CollisionPolygon2D;
+import flighthq.types.CollisionSegment2D;
+import flighthq.types.Physics2DAbiCommandBuffer;
+import flighthq.types.Physics2DAbiObjectId;
+import flighthq.types.Physics2DBodyType;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.Physics2DCollisionFilter;
+import flighthq.types.Physics2DDistanceJoint;
+import flighthq.types.Physics2DGearCoordinateKind;
+import flighthq.types.Physics2DGearJoint;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DMaterial;
+import flighthq.types.Physics2DMouseJoint;
+import flighthq.types.Physics2DPrismaticJoint;
+import flighthq.types.Physics2DPulleyJoint;
+import flighthq.types.Physics2DRevoluteJoint;
+import flighthq.types.Physics2DRopeJoint;
+import flighthq.types.Physics2DSolverConfig;
+import flighthq.types.Physics2DWeldJoint;
+import flighthq.types.Physics2DWheelJoint;
+import flighthq.types.RigidBody2D;
 
 typedef PendingCommand__physics2DAbiCommand = { var view:Dynamic; var start:Float; var payload:Float; var byteLength:Float; };
 
+@:noCompletion
 class Physics2DAbiCommand {
   public static function getPhysics2DAbiSetColliderCommandByteLength(collider:Physics2DCollider):Float {
     var shapeByteLength:Float = cast _Runtime.UNDEFINED;

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.adjustments.ColorMatrixMath.createChannelMixerColorMatrix;
 import flighthq.types.ChannelMixerAdjustment;
 
+@:noCompletion
 class ChannelMixerAdjustment {
   public static function createChannelMixerAdjustment(?options:{ var matrix:Array<Float>; }):flighthq.types.ChannelMixerAdjustment {
     if (options == null) options = cast ({ matrix: ChannelMixerAdjustment.IDENTITY_CHANNEL_MIXER__channelMixerAdjustment } : Dynamic);

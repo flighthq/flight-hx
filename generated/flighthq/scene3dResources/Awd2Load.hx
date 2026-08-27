@@ -7,8 +7,9 @@ import flighthq.scene3dFormats.Awd2Parse.parseAwd2;
 import flighthq.scene3dResources.SceneDocumentSource.loadScene3DDocumentBytesFromUrl;
 import flighthq.scene3dResources.SceneDocumentSource.setScene3DDocumentResourceBasePathFromUrl;
 import flighthq.types.Scene3DDocument;
-import flighthq.types.Scene3DResources.Scene3DDocumentLoadOptions;
+import flighthq.types.Scene3DDocumentLoadOptions;
 
+@:noCompletion
 class Awd2Load {
   public static function loadScene3DDocumentFromAwd2Url(url:String, ?options:Scene3DDocumentLoadOptions):flighthq._internal._Promise<Null<Scene3DDocument>> {
     return cast flighthq._internal._Async.finishFlow(

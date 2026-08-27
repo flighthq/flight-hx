@@ -6,9 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.types.DropShadowEffect;
 import flighthq.types.OuterGlowEffect;
 
+@:noCompletion
 class CanvasEffectDropShadowCss {
-  @:noCompletion
-  public static function computeDropShadowEffectCss(effect:DropShadowEffect):Null<String> {
+  @:allow(flighthq)
+  @:keep
+  private static function computeDropShadowEffectCss(effect:DropShadowEffect):Null<String> {
     var blurX:Float = cast _Runtime.UNDEFINED;
     var blurY:Float = cast _Runtime.UNDEFINED;
     var angle:Float = cast _Runtime.UNDEFINED;
@@ -29,8 +31,9 @@ class CanvasEffectDropShadowCss {
     return cast null;
   }
 
-  @:noCompletion
-  public static function computeOuterGlowEffectCss(effect:OuterGlowEffect):Null<String> {
+  @:allow(flighthq)
+  @:keep
+  private static function computeOuterGlowEffectCss(effect:OuterGlowEffect):Null<String> {
     var blurX:Float = cast _Runtime.UNDEFINED;
     var blurY:Float = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'draw') : Bool)) { return cast null; }

@@ -12,13 +12,14 @@ import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiContactValueStride;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiJointValueStride;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiQueryValueStride;
 import flighthq.physics3dAbi.Physics3DAbiLayout.Physics3DAbiVersion;
-import flighthq.types.Physics3DAbi.Physics3DAbiBodyBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiCommandBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiContactBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiExecutionResult;
-import flighthq.types.Physics3DAbi.Physics3DAbiJointBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiQueryBuffer;
+import flighthq.types.Physics3DAbiBodyBuffer;
+import flighthq.types.Physics3DAbiCommandBuffer;
+import flighthq.types.Physics3DAbiContactBuffer;
+import flighthq.types.Physics3DAbiExecutionResult;
+import flighthq.types.Physics3DAbiJointBuffer;
+import flighthq.types.Physics3DAbiQueryBuffer;
 
+@:noCompletion
 class Physics3DAbiBuffer {
   public static function clearPhysics3DAbiCommandBuffer(out:Physics3DAbiCommandBuffer):Void {
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;

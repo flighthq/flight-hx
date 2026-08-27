@@ -3,12 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-
-typedef AnimationBlendTreeInput = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var additive:Bool; var player:AnimationPlayer; var weight:Float; };
-
-typedef AnimationBlendTreeChannelSource = { var channelIndex:Float; var inputIndex:Float; };
-
-typedef AnimationBlendTreeChannel = { var accumulator:AnimationSampleAccumulator; var channel:AnimationChannel; var sources:Array<AnimationBlendTreeChannelSource>; };
 
 typedef AnimationBlendTree = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var channels:Array<AnimationBlendTreeChannel>; var inputs:Array<AnimationBlendTreeInput>; var players:Array<AnimationPlayer>; var sampleScratch:flighthq._internal._Float32Array; };

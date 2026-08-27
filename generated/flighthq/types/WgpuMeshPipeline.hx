@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef WgpuMeshPipeline = { var hasIblGroup:Bool; var hasPbrSampleGroup:Bool; var hasShadowGroup:Bool; var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var pipeline:flighthq._internal.dom.GPURenderPipeline; var skinned:Bool; };
-
-typedef WgpuScene3DLayouts = { var drawBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; var frameBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout; };

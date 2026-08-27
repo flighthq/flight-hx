@@ -10,14 +10,15 @@ import flighthq.physics2d.ExplainPhysics2DStep.explainPhysics2DStep;
 import flighthq.physics2d.Step.setPhysics2DContactIntakeGuard;
 import flighthq.physics2d.Step.setPhysics2DJointResolutionGuard;
 import flighthq.physics2d.Step.setPhysics2DStepGuard;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.Physics2D.Physics2DCollisionExplanation;
-import flighthq.types.Physics2D.Physics2DJointResolution;
-import flighthq.types.Physics2D.Physics2DJointResolutionExplanation;
-import flighthq.types.Physics2D.Physics2DJointResolutionStatus;
-import flighthq.types.Physics2D.Physics2DStepExplanation;
-import flighthq.types.Physics2D.Physics2DWorld;
+import flighthq.types.LogLevel;
+import flighthq.types.Physics2DCollisionExplanation;
+import flighthq.types.Physics2DJointResolution;
+import flighthq.types.Physics2DJointResolutionExplanation;
+import flighthq.types.Physics2DJointResolutionStatus;
+import flighthq.types.Physics2DStepExplanation;
+import flighthq.types.Physics2DWorld;
 
+@:noCompletion
 class EnablePhysics2DGuards {
   public static function arePhysics2DGuardsEnabled():Bool {
     return cast EnablePhysics2DGuards.physics2DGuardsEnabled__enablePhysics2DGuards;

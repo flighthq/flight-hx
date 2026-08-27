@@ -16,36 +16,38 @@ import flighthq.types.AlphaType;
 import flighthq.types.Bitmap;
 import flighthq.types.BlendMode;
 import flighthq.types.CompressedImage;
+import flighthq.types.GlBitmapShader;
+import flighthq.types.GlBlendFactor;
+import flighthq.types.GlBlendRealization;
 import flighthq.types.GlCompressedTextureDecoder;
 import flighthq.types.GlCompressedTextureUploader;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlBlendFactor;
-import flighthq.types.GlRenderState.GlBlendRealization;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlShaderLocations;
-import flighthq.types.GlShaderLocations.GlBitmapShader;
+import flighthq.types.GlViewportRect;
 import flighthq.types.Image;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.KeyedTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.SamplerLike;
-import flighthq.types.Sampler.TextureFilter;
-import flighthq.types.Sampler.TextureWrap;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.SamplerLike;
+import flighthq.types.SlotTable;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureFilter;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureWrap;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 typedef GlTextureSourceUpload__glDraw = GlRenderState->TextureSource->Bool->TextureColorSpace->Void;
 
+@:noCompletion
 class GlDraw {
-  @:noCompletion
-  public static function applyGlBlendMode(state:GlRenderState, blendMode:Null<BlendMode>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGlBlendMode(state:GlRenderState, blendMode:Null<BlendMode>):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlBlendRealization; }>> = cast _Runtime.UNDEFINED;
@@ -60,8 +62,9 @@ class GlDraw {
     flighthq._internal.backend.WebGl2Backend.blendFunc(gl, (switch ((cast realization : GlBlendRealization).src) { case 'DST_COLOR': flighthq._internal.backend.WebGl2Backend.DST_COLOR; case 'ONE': flighthq._internal.backend.WebGl2Backend.ONE; case 'ONE_MINUS_SRC_ALPHA': flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA; case 'ONE_MINUS_SRC_COLOR': flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_COLOR; case 'ZERO': flighthq._internal.backend.WebGl2Backend.ZERO; default: _Runtime.throwValue('WebGL2 computed constant is outside the closed GlBlendFactor domain: upstream/packages/render-gl/src/glDraw.ts'); }), (switch ((cast realization : GlBlendRealization).dst) { case 'DST_COLOR': flighthq._internal.backend.WebGl2Backend.DST_COLOR; case 'ONE': flighthq._internal.backend.WebGl2Backend.ONE; case 'ONE_MINUS_SRC_ALPHA': flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_ALPHA; case 'ONE_MINUS_SRC_COLOR': flighthq._internal.backend.WebGl2Backend.ONE_MINUS_SRC_COLOR; case 'ZERO': flighthq._internal.backend.WebGl2Backend.ZERO; default: _Runtime.throwValue('WebGL2 computed constant is outside the closed GlBlendFactor domain: upstream/packages/render-gl/src/glDraw.ts'); }));
   }
 
-  @:noCompletion
-  public static function applyGlSamplerState(state:GlRenderState, runtime:GlRenderStateRuntime, texture:flighthq._internal.dom.WebGLTexture, sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGlSamplerState(state:GlRenderState, runtime:GlRenderStateRuntime, texture:flighthq._internal.dom.WebGLTexture, sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>):Void {
     if (smoothingOverride == null) smoothingOverride = cast (null : Dynamic);
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var useMips:Bool = cast _Runtime.UNDEFINED;
@@ -95,14 +98,16 @@ class GlDraw {
     }
   }
 
-  @:noCompletion
-  public static function bindGlBitmapTexture(state:GlRenderState, bitmap:Bitmap, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Bool = false, colorSpace:TextureColorSpace = 'linear'):flighthq._internal.dom.WebGLTexture {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlBitmapTexture(state:GlRenderState, bitmap:Bitmap, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, premultiply:Bool = false, colorSpace:TextureColorSpace = 'linear'):flighthq._internal.dom.WebGLTexture {
     return cast (cast GlDraw.bindGlTextureSourceTexture__glDraw(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = bitmap; __callArgument18; }), ({ final __callArgument19:Dynamic = sampler; __callArgument19; }), ({ final __callArgument20:Dynamic = smoothingOverride; __callArgument20; }), (cast premultiply : Bool), (cast false : Bool), ({ final __callArgument21:Dynamic = colorSpace; __callArgument21; }), (cast GlDraw.uploadGlBitmap__glDraw : Dynamic)) : flighthq._internal.dom.WebGLTexture);
     return cast null;
   }
 
-  @:noCompletion
-  public static function bindGlCompressedImageTexture(state:GlRenderState, image:CompressedImage, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, colorSpace:TextureColorSpace = 'linear'):flighthq._internal.dom.WebGLTexture {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlCompressedImageTexture(state:GlRenderState, image:CompressedImage, ?sampler:Null<SamplerLike>, ?smoothingOverride:Null<Bool>, colorSpace:TextureColorSpace = 'linear'):flighthq._internal.dom.WebGLTexture {
     return cast (cast GlDraw.bindGlTextureSourceTexture__glDraw(({ final __callArgument27:Dynamic = state; __callArgument27; }), ({ final __callArgument28:Dynamic = image; __callArgument28; }), ({ final __callArgument29:Dynamic = sampler; __callArgument29; }), ({ final __callArgument30:Dynamic = smoothingOverride; __callArgument30; }), (cast false : Bool), (cast true : Bool), ({ final __callArgument31:Dynamic = colorSpace; __callArgument31; }), (cast GlDraw.uploadGlCompressedImage__glDraw : Dynamic)) : flighthq._internal.dom.WebGLTexture);
     return cast null;
   }
@@ -164,8 +169,9 @@ class GlDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function bindGlVideoTexture(state:GlRenderState, texture:TextureLike, ?sampler:Null<SamplerLike>):flighthq._internal.dom.WebGLTexture {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlVideoTexture(state:GlRenderState, texture:TextureLike, ?sampler:Null<SamplerLike>):flighthq._internal.dom.WebGLTexture {
     var image:Image = cast _Runtime.UNDEFINED;
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
@@ -190,8 +196,9 @@ class GlDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createGlTexture(state:GlRenderState):flighthq._internal.dom.WebGLTexture {
+  @:allow(flighthq)
+  @:keep
+  private static function createGlTexture(state:GlRenderState):flighthq._internal.dom.WebGLTexture {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var filter:Float = cast _Runtime.UNDEFINED;
@@ -211,8 +218,9 @@ class GlDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function drawGlQuad(state:GlRenderState, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlQuad(state:GlRenderState, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var __destructure0:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -257,14 +265,16 @@ class GlDraw {
     ((cast state : { var applyBlendMode:Null<GlRenderState->Null<String>->Void>; }).applyBlendMode = (cast applyGlBlendMode));
   }
 
-  @:noCompletion
-  public static function isBlendModeSupported(state:GlRenderState, blendMode:BlendMode):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isBlendModeSupported(state:GlRenderState, blendMode:BlendMode):Bool {
     return cast _Runtime.strictEquals(({ final __structural105 = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument103:Dynamic = state; __callArgument103; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations : KeyedTable<GlBlendRealization>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlBlendRealization>>).get(blendMode)); __structural105 == null ? _Runtime.UNDEFINED : (cast __structural105 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerDefaultGlBlendModes(state:GlRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerDefaultGlBlendModes(state:GlRenderState):Void {
     for (__iteration1 in _Runtime.iterable(GlDraw.DEFAULT_GL_BLEND_MODES__glDraw)) {
       var mode:String = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
       var realization:GlBlendRealization = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);
@@ -272,22 +282,25 @@ class GlDraw {
     }
   }
 
-  @:noCompletion
-  public static function registerGlBlendMode(state:GlRenderState, blendMode:BlendMode, realization:GlBlendRealization):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerGlBlendMode(state:GlRenderState, blendMode:BlendMode, realization:GlBlendRealization):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument112:Dynamic = state; __callArgument112; })) : GlRenderStateRuntime);
     ((cast runtime.registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var blendRealizations:KeyedTable<GlBlendRealization>; }).blendRealizations : Dynamic), (cast blendMode : String), ({ final __callArgument114:Dynamic = realization; __callArgument114; })) : KeyedTable<GlBlendRealization>) : KeyedTable<GlBlendRealization>));
   }
 
-  @:noCompletion
-  public static function setGlQuadMatrixFromOffset(state:GlRenderState, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, dx:Float, dy:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlQuadMatrixFromOffset(state:GlRenderState, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, dx:Float, dy:Float):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument116:Dynamic = state; __callArgument116; })) : GlRenderStateRuntime);
     setGlMatrixFromValues((cast state : GlRenderState).gl, ({ final __callArgument118:Dynamic = runtime.shaderLoc; __callArgument118; }), runtime.matrixArray, (cast a : Float), (cast b : Float), (cast c : Float), (cast d : Float), (cast ((tx + (a * dx)) + (c * dy)) : Float), (cast ((ty + (b * dx)) + (d * dy)) : Float), ({ final __callArgument119:Dynamic = _Runtime.coalesce(runtime.renderTargetViewport, function():Dynamic return cast (cast state : GlRenderState).canvas); __callArgument119; }));
   }
 
-  @:noCompletion
-  public static function updateGlTexture(state:GlRenderState, texture:flighthq._internal.dom.WebGLTexture, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function updateGlTexture(state:GlRenderState, texture:flighthq._internal.dom.WebGLTexture, canvas:flighthq._internal.dom.HTMLCanvasElement):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument122:Dynamic = state; __callArgument122; })) : GlRenderStateRuntime);
@@ -347,8 +360,9 @@ class GlDraw {
     return cast null;
   }
 
-  @:noCompletion
-  public static function useGlProgram(state:GlRenderState, ?shader:GlBitmapShader):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function useGlProgram(state:GlRenderState, ?shader:GlBitmapShader):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var resolved:GlBitmapShader = cast _Runtime.UNDEFINED;
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;

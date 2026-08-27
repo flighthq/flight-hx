@@ -4,6 +4,7 @@ package flighthq.physics2d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class Material {
   public static function mixPhysics2DFriction(first:Float, second:Float):Float {
     return cast _Runtime.multiplyNumbers(HxMath.sqrt(first), HxMath.sqrt(second));

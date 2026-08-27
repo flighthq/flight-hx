@@ -9,12 +9,12 @@ import flighthq.entity.Runtime.createEntityRuntime;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
 import flighthq.types.ApplicationRenderView;
-import flighthq.types.ApplicationRenderView.ApplicationRenderViewResize;
+import flighthq.types.ApplicationRenderViewResize;
 import flighthq.types.ApplicationWindow;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Matrix;
 import flighthq.types.RenderState;
-import flighthq.types.RenderTarget.RenderTargetDimensions;
+import flighthq.types.RenderTargetDimensions;
 import flighthq.types.Signal;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.Viewport;
@@ -22,6 +22,7 @@ import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 typedef ApplicationRenderViewRuntime__applicationRenderView<State, Target> = { >EntityRuntime, var attached:Bool; var resize:ApplicationRenderViewResize<State, Target>; var synchronize:Void->Void; };
 
+@:noCompletion
 class ApplicationRenderView {
   public static function attachApplicationRenderView(view:flighthq.types.ApplicationRenderView<Dynamic, Dynamic>):Void {
     var runtime:ApplicationRenderViewRuntime__applicationRenderView<RenderState, RenderTargetDimensions> = cast _Runtime.UNDEFINED;

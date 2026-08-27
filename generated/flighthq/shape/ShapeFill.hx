@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.math.Constants.CIRCLE_KAPPA;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
-import flighthq.types.ShapeCommand.PathWinding;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.PathCommand;
+import flighthq.types.PathWinding;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types.ShapeFillRegion;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class ShapeFill {
   public static function appendShapeGeometryCommand(path:Path, name:String, commands:Array<ShapeCommandToken>, a:Float):Void {
     {

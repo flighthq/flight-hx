@@ -12,6 +12,7 @@ import flighthq.types.DecodedImage;
 import flighthq.types.ImageDecodeOptions;
 import flighthq.types.ImageDecoder;
 
+@:noCompletion
 class SwfImageDecoder {
   public static function registerSwfImageDecoders():Void {
     registerImageDecoder((cast SWF_LOSSLESS_MIME_TYPE : String), ({ final __callArgument4:Dynamic = function(bytes:flighthq._internal._UInt8Array, options:Null<ImageDecodeOptions>):flighthq._internal._Promise<DecodedImage> return (cast SwfImageDecoder.decodeSwfLosslessImage__swfImageDecoder(({ final __callArgument0:Dynamic = bytes; __callArgument0; }), (cast false : Bool), ({ final __callArgument1:Dynamic = options; __callArgument1; })) : flighthq._internal._Promise<DecodedImage>); __callArgument4; }));

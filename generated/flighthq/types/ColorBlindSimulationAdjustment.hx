@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ColorBlindType = String;
-
 typedef ColorBlindSimulationAdjustment = { var kind:String; var colorMatrix:Array<Float>; @:optional var type:ColorBlindType; };

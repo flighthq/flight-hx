@@ -6,21 +6,24 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Runtime.createEntityRuntime;
 import flighthq.entity.Runtime.getEntityRuntime;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class Binding {
-  @:noCompletion
-  public static function attachEntityBinding(entity:Entity, binding:flighthq._internal._Object):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function attachEntityBinding(entity:Entity, binding:flighthq._internal._Object):Void {
     if ((cast _Runtime.strictEquals(_Runtime.getIndex(entity, EntityRuntimeKey), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       _Runtime.setIndex(entity, EntityRuntimeKey, (cast createEntityRuntime() : EntityRuntime));
     }
     ((cast _Runtime.getIndex(entity, EntityRuntimeKey) : EntityRuntime).binding = binding);
   }
 
-  @:noCompletion
-  public static function getEntityBinding(source:Entity):Null<flighthq._internal._Object> {
+  @:allow(flighthq)
+  @:keep
+  private static function getEntityBinding(source:Entity):Null<flighthq._internal._Object> {
     var runtime:EntityRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getEntityRuntime(({ final __callArgument0:Dynamic = source; __callArgument0; })) : EntityRuntime);
     return cast _Runtime.coalesce(_Runtime.optionalField(runtime, 'binding'), function():Dynamic return cast null);

@@ -4,8 +4,9 @@ package flighthq.shape;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Scale9Mapper;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
 
+@:noCompletion
 class Scale9ShapeCommands {
   public static function mapScale9ShapeCommands(out:Array<ShapeCommandToken>, source:Array<ShapeCommandToken>, mapper:Scale9Mapper):Void {
     var i:Float = cast _Runtime.UNDEFINED;

@@ -13,16 +13,17 @@ import flighthq.collision.ShapeCollision2D.testCircleAabbCollision2D;
 import flighthq.collision.ShapeCollision2D.testCircleCircleCollision2D;
 import flighthq.collision.ShapeCollision2D.testCircleObbCollision2D;
 import flighthq.collision.ShapeCollision2D.testCirclePolygonCollision2D;
-import flighthq.types.Collision.CollisionAabb2D;
-import flighthq.types.Collision.CollisionCircle2D;
-import flighthq.types.Collision.CollisionContactManifold2D;
-import flighthq.types.Collision.CollisionContactPoint2D;
-import flighthq.types.Collision.CollisionManifold2D;
-import flighthq.types.Collision.CollisionObb2D;
-import flighthq.types.Collision.CollisionPolygon2D;
+import flighthq.types.CollisionAabb2D;
+import flighthq.types.CollisionCircle2D;
+import flighthq.types.CollisionContactManifold2D;
+import flighthq.types.CollisionContactPoint2D;
+import flighthq.types.CollisionManifold2D;
+import flighthq.types.CollisionObb2D;
+import flighthq.types.CollisionPolygon2D;
 
 typedef ShapeContactScratch__shapeContact2D = { var verticesA:flighthq._internal._Float64Array; var verticesB:flighthq._internal._Float64Array; var leanManifold:CollisionManifold2D; var separationEdge:Float; var separationNormalX:Float; var separationNormalY:Float; };
 
+@:noCompletion
 class ShapeContact2D {
   public static function collideAabbAabbContactManifold2D(a:CollisionAabb2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
     var scratch:ShapeContactScratch__shapeContact2D = cast _Runtime.UNDEFINED;

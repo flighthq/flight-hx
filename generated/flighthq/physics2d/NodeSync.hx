@@ -6,8 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.types.Node2D;
-import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.RigidBody2D;
 
+@:noCompletion
 class NodeSync {
   public static function syncPhysics2DBodyToNode2D(body:RigidBody2D, node:Node2D):Void {
     ((cast node : { var x:Float; }).x = _Runtime.field(body, 'x'));

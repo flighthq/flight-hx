@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef GlShaderLocations = { var program:flighthq._internal.dom.WebGLProgram; var locPosition:Float; var locTexCoord:Float; var locMatrix:flighthq._internal.dom.WebGLUniformLocation; var locAlpha:flighthq._internal.dom.WebGLUniformLocation; @:optional var locColorScale:flighthq._internal.dom.WebGLUniformLocation; @:optional var locColorBias:flighthq._internal.dom.WebGLUniformLocation; @:optional var locHasColorScaleBias:flighthq._internal.dom.WebGLUniformLocation; var locTexture:flighthq._internal.dom.WebGLUniformLocation; };
-
-typedef GlBitmapShader = { var program:flighthq._internal.dom.WebGLProgram; var bind:flighthq._internal.dom.WebGL2RenderingContext->GlRenderState->RenderProxy2D->Void; var locations:GlShaderLocations; };

@@ -18,7 +18,7 @@ import lime.ui.Window;
 
 class LimeDialog {
   /** Allocation entry point, Flight-style: `createLimeDialogBackend(window)`. */
-  public static function createLimeDialogBackend(window:Window):flighthq.types.Dialog.DialogBackend {
+  public static function createLimeDialogBackend(window:Window):flighthq.types.DialogBackend {
     return cast {
       message: function(options:Dynamic):_Promise<Dynamic> {
         window.alert(messageText(options), _Runtime.field(options, 'title'));

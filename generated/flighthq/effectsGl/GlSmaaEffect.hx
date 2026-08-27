@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.SmaaEffect;
 
+@:noCompletion
 class GlSmaaEffect {
-  @:noCompletion
-  public static function applySmaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SmaaEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applySmaaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SmaaEffect):Void {
     var threshold:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     threshold = _Runtime.coalesce(_Runtime.field(effect, 'threshold'), function():Dynamic return cast 0.1);

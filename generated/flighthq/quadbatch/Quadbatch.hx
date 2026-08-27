@@ -9,7 +9,7 @@ import flighthq.types.QuadBatch;
 import flighthq.types.QuadBatchSignals;
 import flighthq.types.QuadTransformType;
 import flighthq.types.Rectangle;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
 class Quadbatch {
   public static function appendQuadBatchInstance(target:QuadBatch, id:Float, x:Float, y:Float):Float {

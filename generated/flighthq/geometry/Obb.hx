@@ -4,16 +4,17 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.AabbLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Entity;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Obb;
-import flighthq.types.Obb.ObbLike;
-import flighthq.types.Ray3D.Ray3DLike;
+import flighthq.types.ObbLike;
+import flighthq.types.Ray3DLike;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Obb {
   public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):flighthq.types.Obb {
     return cast (cast createEntity(({ final __callArgument0:Dynamic = { centerX: centerX, centerY: centerY, centerZ: centerZ, halfExtentX: halfExtentX, halfExtentY: halfExtentY, halfExtentZ: halfExtentZ, orientationW: orientationW, orientationX: orientationX, orientationY: orientationY, orientationZ: orientationZ }; __callArgument0; })) : { >Entity, var centerX:Float; var centerY:Float; var centerZ:Float; var halfExtentX:Float; var halfExtentY:Float; var halfExtentZ:Float; var orientationW:Float; var orientationX:Float; var orientationY:Float; var orientationZ:Float; });

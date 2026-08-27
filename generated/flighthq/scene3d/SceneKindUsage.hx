@@ -11,13 +11,14 @@ import flighthq.types.Mesh;
 import flighthq.types.Modifier;
 import flighthq.types.Node;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DTraits;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DKindUsage;
 import flighthq.types.Texture;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
+@:noCompletion
 class SceneKindUsage {
   public static function createScene3DKindUsage():Scene3DKindUsage {
     return cast { materialKinds: cast ([] : Array<Dynamic>), modifierKinds: cast ([] : Array<Dynamic>), nodeKinds: cast ([] : Array<Dynamic>), resourceMimeTypes: cast ([] : Array<Dynamic>), textureSourceKinds: cast ([] : Array<Dynamic>) };

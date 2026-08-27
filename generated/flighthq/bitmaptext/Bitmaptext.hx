@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.bitmaptext.BitmapText as Facade_Bitmaptext_flighthq_bitmaptext_BitmapText;
 import flighthq.bitmaptext.UpdateBitmapText as Facade_Bitmaptext_flighthq_bitmaptext_UpdateBitmapText;
 import flighthq.types.BitmapText;
-import flighthq.types.BitmapText.BitmapTextAlign;
-import flighthq.types.BitmapText.BitmapTextOptions;
-import flighthq.types.BitmapText.BitmapTextPage;
+import flighthq.types.BitmapTextAlign;
+import flighthq.types.BitmapTextOptions;
+import flighthq.types.BitmapTextPage;
 import flighthq.types.GlyphSource;
 import flighthq.types.Rectangle;
 

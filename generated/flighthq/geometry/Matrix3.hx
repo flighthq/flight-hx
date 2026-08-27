@@ -7,12 +7,13 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Matrix3Pool.acquireMatrix3;
 import flighthq.geometry.Matrix3Pool.releaseMatrix3;
 import flighthq.types.Entity;
-import flighthq.types.Matrix.MatrixLike;
 import flighthq.types.Matrix3;
-import flighthq.types.Matrix3.Matrix3Like;
-import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Matrix3Like;
+import flighthq.types.Matrix4Like;
+import flighthq.types.MatrixLike;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Matrix3 {
   public static function cloneMatrix3(source:Matrix3Like):flighthq.types.Matrix3 {
     var m:flighthq.types.Matrix3 = cast _Runtime.UNDEFINED;

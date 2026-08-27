@@ -4,6 +4,7 @@ package flighthq.color;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class ColorFromKelvin {
   public static function colorFromKelvin(kelvin:Float):Float {
     var temp:Float = cast _Runtime.UNDEFINED;

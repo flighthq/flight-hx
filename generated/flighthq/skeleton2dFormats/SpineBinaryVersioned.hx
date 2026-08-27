@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.skeleton2dFormats.SpineBinaryVersion.getSpineBinaryVersion;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Skeleton2DImport;
-import flighthq.types.SpineBinaryVersion.SpineBinaryParser;
+import flighthq.types.SpineBinaryParser;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class SpineBinaryVersioned {
   public static function parseSpineSkeletonBinaryVersioned(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DImport> {
     var version:Null<String> = cast _Runtime.UNDEFINED;

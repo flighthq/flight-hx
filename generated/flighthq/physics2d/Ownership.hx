@@ -3,11 +3,12 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DWorld;
-import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DWorld;
+import flighthq.types.RigidBody2D;
 
+@:noCompletion
 class Ownership {
   public static final physics2DBodyOwners:flighthq._internal._WeakMap<RigidBody2D, Physics2DWorld> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 

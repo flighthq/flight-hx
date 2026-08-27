@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef BitmapFontGlyphExplanation = { var renderable:Bool; var reason:BitmapFontGlyphExplanationReason; var page:Float; var pageCount:Float; var glyphWidth:Float; var glyphHeight:Float; };
-
-typedef BitmapFontGlyphExplanationReason = String;

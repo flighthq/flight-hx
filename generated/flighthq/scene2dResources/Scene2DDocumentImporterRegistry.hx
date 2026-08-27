@@ -6,14 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DResources.Scene2DDocumentImportContext;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporter;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporterEntry;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporterMatcher;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
+import flighthq.types.Scene2DDocumentImportContext;
+import flighthq.types.Scene2DDocumentImporter;
+import flighthq.types.Scene2DDocumentImporterEntry;
+import flighthq.types.Scene2DDocumentImporterMatcher;
+import flighthq.types.Scene2DDocumentImporterRegistry;
 
+@:noCompletion
 class Scene2DDocumentImporterRegistry {
-  public static function createScene2DDocumentFromBytes(source:flighthq._internal._UInt8Array, registry:flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry, ?context:Scene2DDocumentImportContext):Null<Scene2DDocument> {
+  public static function createScene2DDocumentFromBytes(source:flighthq._internal._UInt8Array, registry:flighthq.types.Scene2DDocumentImporterRegistry, ?context:Scene2DDocumentImportContext):Null<Scene2DDocument> {
     if (context == null) context = cast ({ mimeType: null, url: null } : Dynamic);
     {
       var i:Float = 0.0;
@@ -30,24 +31,24 @@ class Scene2DDocumentImporterRegistry {
     return cast null;
   }
 
-  public static function createScene2DDocumentImporterRegistry():flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry {
+  public static function createScene2DDocumentImporterRegistry():flighthq.types.Scene2DDocumentImporterRegistry {
     return cast (cast createEntity(({ final __callArgument4:Dynamic = { entries: cast ([] : Array<Dynamic>) }; __callArgument4; })) : { >Entity, var entries:Array<flighthq._internal._Any>; });
     return cast null;
   }
 
-  public static function registerScene2DDocumentImporter(registry:flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry, kind:String, matches:Scene2DDocumentImporterMatcher, importDocument:Scene2DDocumentImporter):Void {
+  public static function registerScene2DDocumentImporter(registry:flighthq.types.Scene2DDocumentImporterRegistry, kind:String, matches:Scene2DDocumentImporterMatcher, importDocument:Scene2DDocumentImporter):Void {
     var index:Float = cast _Runtime.UNDEFINED;
     var entry:{ var importDocument:Scene2DDocumentImporter; var kind:String; var matches:Scene2DDocumentImporterMatcher; } = cast _Runtime.UNDEFINED;
-    index = _Runtime.findIndex((cast registry : flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry).entries, function(entry:Scene2DDocumentImporterEntry, __unused0:Float, __unused1:Array<Scene2DDocumentImporterEntry>):Bool return _Runtime.strictEquals((cast entry : Scene2DDocumentImporterEntry).kind, kind));
+    index = _Runtime.findIndex((cast registry : flighthq.types.Scene2DDocumentImporterRegistry).entries, function(entry:Scene2DDocumentImporterEntry, __unused0:Float, __unused1:Array<Scene2DDocumentImporterEntry>):Bool return _Runtime.strictEquals((cast entry : Scene2DDocumentImporterEntry).kind, kind));
     entry = (cast { importDocument: importDocument, kind: kind, matches: matches });
-    if ((cast _Runtime.strictEquals(index, -1.0) : Bool)) { _Runtime.callProperty((cast registry : flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry).entries, 'push', cast ([entry] : Array<Dynamic>)); } else { flighthq._internal._StaticIndex.writeArray((cast registry : flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry).entries, index, entry); }
+    if ((cast _Runtime.strictEquals(index, -1.0) : Bool)) { _Runtime.callProperty((cast registry : flighthq.types.Scene2DDocumentImporterRegistry).entries, 'push', cast ([entry] : Array<Dynamic>)); } else { flighthq._internal._StaticIndex.writeArray((cast registry : flighthq.types.Scene2DDocumentImporterRegistry).entries, index, entry); }
   }
 
-  public static function unregisterScene2DDocumentImporter(registry:flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry, kind:String):Bool {
+  public static function unregisterScene2DDocumentImporter(registry:flighthq.types.Scene2DDocumentImporterRegistry, kind:String):Bool {
     var index:Float = cast _Runtime.UNDEFINED;
-    index = _Runtime.findIndex((cast registry : flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry).entries, function(entry:Scene2DDocumentImporterEntry, __unused2:Float, __unused3:Array<Scene2DDocumentImporterEntry>):Bool return _Runtime.strictEquals((cast entry : Scene2DDocumentImporterEntry).kind, kind));
+    index = _Runtime.findIndex((cast registry : flighthq.types.Scene2DDocumentImporterRegistry).entries, function(entry:Scene2DDocumentImporterEntry, __unused2:Float, __unused3:Array<Scene2DDocumentImporterEntry>):Bool return _Runtime.strictEquals((cast entry : Scene2DDocumentImporterEntry).kind, kind));
     if ((cast _Runtime.strictEquals(index, -1.0) : Bool)) { return cast false; }
-    _Runtime.splice((cast registry : flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry).entries, Std.int(index), Std.int(1.0), []);
+    _Runtime.splice((cast registry : flighthq.types.Scene2DDocumentImporterRegistry).entries, Std.int(index), Std.int(1.0), []);
     return cast true;
     return cast null;
   }

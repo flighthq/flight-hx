@@ -19,24 +19,24 @@ import flighthq.scene3dGl.GlMeshUpload.ensureGlMeshUpload;
 import flighthq.scene3dGl.GlScene3DRuntime.ensureGlSkinPalette;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Camera3D;
-import flighthq.types.Camera3D.OrthographicProjection;
-import flighthq.types.Camera3D.Projection;
 import flighthq.types.DirectionalLight;
 import flighthq.types.GlMeshProgram;
+import flighthq.types.GlMeshUpload;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlScene3DRuntime;
-import flighthq.types.GlScene3DRuntime.GlMeshUpload;
-import flighthq.types.GlScene3DRuntime.GlScene3DShadow;
+import flighthq.types.GlScene3DShadow;
 import flighthq.types.GlSkinPaletteTexture;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Node;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
+import flighthq.types.Node3DTraits;
+import flighthq.types.OrthographicProjection;
+import flighthq.types.Projection;
+import flighthq.types.RenderTargetDescriptor;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skin;
 import flighthq.types.Types.DIRECTIONAL_SHADOW_MAP_SIZE;
@@ -44,6 +44,7 @@ import flighthq.types.Types.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 import flighthq.types._internal._DirectionalLightValues.DIRECTIONAL_SHADOW_MAP_SIZE;
 import flighthq.types._internal._DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 
+@:noCompletion
 class GlShadowMap {
   public static function drawGlScene3DShadowMap(state:GlRenderState, scene:Node3D, shadowCamera:Camera3D, directionalLight:Null<DirectionalLight>):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;

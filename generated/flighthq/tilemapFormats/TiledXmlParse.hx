@@ -6,31 +6,32 @@ import flighthq._internal._Runtime;
 import flighthq.tilemapFormats.TiledColor.parseTiledColor;
 import flighthq.tilemapFormats.TiledLayerData.decodeTiledBase64Layer;
 import flighthq.tilemapFormats.TiledLayerData.decodeTiledCsvLayer;
+import flighthq.types.TiledCompression;
+import flighthq.types.TiledGroupLayer;
+import flighthq.types.TiledImageLayer;
+import flighthq.types.TiledInflate;
 import flighthq.types.TiledLayer;
-import flighthq.types.TiledLayer.TiledGroupLayer;
-import flighthq.types.TiledLayer.TiledImageLayer;
-import flighthq.types.TiledLayer.TiledObjectGroup;
-import flighthq.types.TiledLayer.TiledTileLayer;
 import flighthq.types.TiledMap;
-import flighthq.types.TiledMap.TiledOrientation;
-import flighthq.types.TiledMap.TiledRenderOrder;
 import flighthq.types.TiledObject;
+import flighthq.types.TiledObjectGroup;
+import flighthq.types.TiledOrientation;
 import flighthq.types.TiledParseOptions;
-import flighthq.types.TiledParseOptions.TiledCompression;
-import flighthq.types.TiledParseOptions.TiledInflate;
 import flighthq.types.TiledProperty;
-import flighthq.types.TiledProperty.TiledPropertyType;
+import flighthq.types.TiledPropertyType;
+import flighthq.types.TiledRenderOrder;
+import flighthq.types.TiledTileLayer;
 import flighthq.types.TiledTileset;
-import flighthq.types.TiledTileset.TiledTilesetRef;
-import flighthq.types.TiledTileset.TiledTilesetTile;
-import flighthq.types.TiledTileset.TiledTilesetTileFrame;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.TiledTilesetRef;
+import flighthq.types.TiledTilesetTile;
+import flighthq.types.TiledTilesetTileFrame;
+import flighthq.types.Vector2Like;
 import flighthq.types.XmlElement;
 import flighthq.xml.XmlParse.parseXmlDocument;
 import flighthq.xml.XmlQuery.getXmlElementAttribute;
 import flighthq.xml.XmlQuery.getXmlElementChildByName;
 import flighthq.xml.XmlQuery.getXmlElementChildrenByName;
 
+@:noCompletion
 class TiledXmlParse {
   public static function parseTiledTileset(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
     var root:Null<XmlElement> = cast _Runtime.UNDEFINED;

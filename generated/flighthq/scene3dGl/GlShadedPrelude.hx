@@ -17,21 +17,21 @@ import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.shading.GetModifierDefineKey.getModifierDefineKey;
 import flighthq.shading.ModifierRegistry.resolveModifier;
 import flighthq.shading.OrderModifierStack.orderModifierStack;
+import flighthq.types.GlColorAdjustmentMaterialFeature;
 import flighthq.types.GlModifierSnippet;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlScene3DRuntime;
+import flighthq.types.GlShadedDefineKey;
 import flighthq.types.GlShadedProgram;
-import flighthq.types.GlShadedProgram.GlShadedDefineKey;
+import flighthq.types.KeyedTable;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierKind;
 import flighthq.types.ModifierRegistry;
 import flighthq.types.ModifierSlot;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
@@ -39,17 +39,20 @@ import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
 typedef GlModifierSnippetSource__glShadedPrelude = flighthq._internal._Union2<ModifierRegistry, KeyedTable<GlModifierSnippet>>;
 
+@:noCompletion
 class GlShadedPrelude {
-  @:noCompletion
-  public static function buildGlShadedCacheKey(key:GlShadedDefineKey, modifierDefineKey:String):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildGlShadedCacheKey(key:GlShadedDefineKey, modifierDefineKey:String):String {
     var base:String = cast _Runtime.UNDEFINED;
     base = '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasDiffuseMap') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasSpecularMap') : Bool) ? (cast 's' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'n' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasColorMatrix'), function():Dynamic return cast 'x', function():Dynamic return cast _Runtime.select(_Runtime.field(key, 'hasColorAdjustment'), function():Dynamic return cast 'c', function():Dynamic return cast ''))) + '';
     return cast 'shaded:' + Std.string(base) + '|' + Std.string(modifierDefineKey) + '';
     return cast null;
   }
 
-  @:noCompletion
-  public static function compileGlShadedProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlShadedDefineKey, orderedModifiers:Array<Modifier>, registry:GlModifierSnippetSource__glShadedPrelude, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlShadedProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlShadedProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlShadedDefineKey, orderedModifiers:Array<Modifier>, registry:GlModifierSnippetSource__glShadedPrelude, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlShadedProgram {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var defineSource:String = cast _Runtime.UNDEFINED;
     var vertexSource:String = cast _Runtime.UNDEFINED;
@@ -68,8 +71,9 @@ class GlShadedPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureGlShadedProgram(state:GlRenderState, key:GlShadedDefineKey, modifiers:Array<Modifier>):GlShadedProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlShadedProgram(state:GlRenderState, key:GlShadedDefineKey, modifiers:Array<Modifier>):GlShadedProgram {
     var registries:GlRenderRegistries = cast _Runtime.UNDEFINED;
     var registry:KeyedTable<GlModifierSnippet> = cast _Runtime.UNDEFINED;
     var ordered:Array<Modifier> = cast _Runtime.UNDEFINED;

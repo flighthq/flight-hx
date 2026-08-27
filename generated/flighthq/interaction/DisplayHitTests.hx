@@ -4,47 +4,55 @@ package flighthq.interaction;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.interaction.HitTests.hitTestGraphLocalBounds;
-import flighthq.types.Node.NodeAny;
+import flighthq.types.NodeAny;
 
+@:noCompletion
 class DisplayHitTests {
-  @:noCompletion
-  public static function defaultHtmlViewHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultHtmlViewHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
     return cast false;
     return cast null;
   }
 
-  @:noCompletion
-  public static function defaultMovieClipHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultMovieClipHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
     return cast false;
     return cast null;
   }
 
-  @:noCompletion
-  public static function defaultNode2DHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultNode2DHitTestHandler(_source:NodeAny, _x:Float, _y:Float):Bool {
     return cast false;
     return cast null;
   }
 
-  @:noCompletion
-  public static function defaultRichTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultRichTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast (cast hitTestGraphLocalBounds((cast source : Dynamic), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
-  @:noCompletion
-  public static function defaultShapeHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultShapeHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast (cast hitTestGraphLocalBounds((cast source : Dynamic), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
-  @:noCompletion
-  public static function defaultTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultTextHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast (cast hitTestGraphLocalBounds((cast source : Dynamic), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
-  @:noCompletion
-  public static function defaultTextInputHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultTextInputHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast (cast hitTestGraphLocalBounds((cast source : Dynamic), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }

@@ -15,16 +15,17 @@ import flighthq.node.NodeTransform3d.ensureNodeWorldMatrix4;
 import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.types.Material;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshTriangleVertexIndices;
 import flighthq.types.Ray3D;
 import flighthq.types.Scene3DHit;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class SceneHitAttributes {
   public static function getScene3DHitMaterial(hit:Scene3DHit):Null<Material> {
     var node:Null<Mesh> = cast _Runtime.UNDEFINED;

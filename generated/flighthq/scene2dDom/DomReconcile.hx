@@ -3,9 +3,10 @@ package flighthq.scene2dDom;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomRenderStateRuntime;
 import flighthq.types.RenderProxy2D;
 
+@:noCompletion
 class DomReconcile {
   public static function hasDomStructureChanged(runtime:DomRenderStateRuntime, newLength:Float, needsReconcile:Bool):Bool {
     if ((cast needsReconcile : Bool)) { return cast true; }

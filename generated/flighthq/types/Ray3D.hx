@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Ray3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var direction:Vector3; var origin:Vector3; };
-
-typedef Ray3DLike = { var direction:Vector3; var origin:Vector3; };

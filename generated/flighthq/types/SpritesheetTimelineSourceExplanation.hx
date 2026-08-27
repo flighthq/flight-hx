@@ -4,8 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SpritesheetTimelineSourceUnsupportedField = String;
-
 typedef SpritesheetTimelineSourceExplanation = { var directionMaterialized:Bool; var unsupportedFields:Array<SpritesheetTimelineSourceUnsupportedField>; };
-
-typedef SpritesheetTimelineSourceGuard = SpritesheetAnimation->SpritesheetTimelineSourceExplanation->Void;

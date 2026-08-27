@@ -12,7 +12,7 @@ package flighthq.hostLime;
 #if (lime && sys)
 class LimeStorage {
   /** Allocation entry point, Flight-style: `createLimeStorageBackend()`. */
-  public static function createLimeStorageBackend(?path:String):flighthq.types.Storage.StorageBackend {
+  public static function createLimeStorageBackend(?path:String):flighthq.types.StorageBackend {
     final store = new LimeStorageStore(path);
     return cast {
       getItem: function(key:String):Null<String> return store.get(key),

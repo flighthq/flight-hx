@@ -3,10 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TiledTileset.TiledTilesetRef;
-
-typedef TiledOrientation = String;
-
-typedef TiledRenderOrder = String;
 
 typedef TiledMap = { var version:String; var tiledVersion:Null<String>; var orientation:TiledOrientation; var renderOrder:TiledRenderOrder; var width:Float; var height:Float; var tileWidth:Float; var tileHeight:Float; var infinite:Bool; var backgroundColor:Null<Float>; var layers:Array<TiledLayer>; var tilesets:Array<TiledTilesetRef>; var properties:Array<TiledProperty>; };

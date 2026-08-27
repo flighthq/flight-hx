@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef ImageBitmapComposition = { var kind:String; var payload:flighthq._internal._UInt8Array; };
-
-typedef ImageBitmapComposer = Null<DecodedImage>->flighthq._internal._UInt8Array->Null<Bitmap>;

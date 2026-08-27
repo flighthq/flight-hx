@@ -6,8 +6,8 @@ import flighthq._internal._Runtime;
 import flighthq.textbidi.GetBidiRuns as Facade_Textbidi_flighthq_textbidi_GetBidiRuns;
 import flighthq.textbidi.ReorderBidiLine as Facade_Textbidi_flighthq_textbidi_ReorderBidiLine;
 import flighthq.textbidi.ResolveBidiLevels as Facade_Textbidi_flighthq_textbidi_ResolveBidiLevels;
-import flighthq.types.Bidi.BidiDirection;
-import flighthq.types.Bidi.BidiRun;
+import flighthq.types.BidiDirection;
+import flighthq.types.BidiRun;
 
 class Textbidi {
   public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {

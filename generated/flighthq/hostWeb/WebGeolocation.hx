@@ -6,13 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.geolocation.Geolocation.createWebGeolocationBackend;
 import flighthq.geolocation.Geolocation.installGeolocationHostBackend;
 import flighthq.geolocation.Geolocation.observeGeolocationHostResult;
-import flighthq.types.Geolocation.GeoPosition;
-import flighthq.types.Geolocation.GeoPositionResult;
-import flighthq.types.Geolocation.GeolocationBackend;
-import flighthq.types.Geolocation.GeolocationErrorReason;
-import flighthq.types.Geolocation.GeolocationPermissionState;
-import flighthq.types.Geolocation.GeolocationRequestOptions;
+import flighthq.types.GeoPosition;
+import flighthq.types.GeoPositionResult;
+import flighthq.types.GeolocationBackend;
+import flighthq.types.GeolocationErrorReason;
+import flighthq.types.GeolocationPermissionState;
+import flighthq.types.GeolocationRequestOptions;
 
+@:noCompletion
 class WebGeolocation {
   public static function enableHostWebGeolocation():Void {
     var inner:GeolocationBackend = cast _Runtime.UNDEFINED;
@@ -88,8 +89,9 @@ class WebGeolocation {
     installGeolocationHostBackend(({ final __callArgument9:Dynamic = backend; __callArgument9; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebGeolocationForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebGeolocationForTest():Void {
     (WebGeolocation._enabled__webGeolocation = cast (false : Dynamic));
   }
 

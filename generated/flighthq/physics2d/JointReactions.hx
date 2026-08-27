@@ -3,11 +3,12 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DJointReaction;
-import flighthq.types.Physics2D.Physics2DJointSolver;
-import flighthq.types.Physics2D.Physics2DWorld;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DJointReaction;
+import flighthq.types.Physics2DJointSolver;
+import flighthq.types.Physics2DWorld;
 
+@:noCompletion
 class JointReactions {
   public static function createPhysics2DJointReaction():Physics2DJointReaction {
     return cast { forceX: 0.0, forceY: 0.0, torque: 0.0 };

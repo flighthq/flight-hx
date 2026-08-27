@@ -9,9 +9,10 @@ import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.matrixTransformBounds;
 import flighthq.types.Camera2D;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.MatrixLike;
+import flighthq.types.RectangleLike;
 
+@:noCompletion
 class VisibleBounds {
   public static function getCamera2DVisibleBounds(camera:Camera2D, out:RectangleLike):Void {
     getCamera2DViewMatrix(({ final __callArgument0:Dynamic = camera; __callArgument0; }), ({ final __callArgument1:Dynamic = VisibleBounds.scratchMatrix__visibleBounds; __callArgument1; }));
@@ -26,8 +27,9 @@ class VisibleBounds {
     matrixTransformBounds(({ final __callArgument8:Dynamic = out; __callArgument8; }), ({ final __callArgument9:Dynamic = VisibleBounds.scratchInverse__visibleBounds; __callArgument9; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast camera.viewportWidth : Float), (cast camera.viewportHeight : Float));
   }
 
-  @:noCompletion
-  public static function setCamera2DVisibleBoundsGuard(guard:Null<Camera2D->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setCamera2DVisibleBoundsGuard(guard:Null<Camera2D->Void>):Void {
     (VisibleBounds.degenerateVisibleBoundsGuard__visibleBounds = cast (guard : Dynamic));
   }
 

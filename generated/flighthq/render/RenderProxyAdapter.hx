@@ -12,12 +12,14 @@ import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderProxyAdapter;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Renderable;
 
+@:noCompletion
 class RenderProxyAdapter {
-  @:noCompletion
-  public static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:{ >RenderProxy2D, var traverseChildren:Bool; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyRenderProxyAdapter(state:RenderState, source:Renderable, data:{ >RenderProxy2D, var traverseChildren:Bool; }):Void {
     var renderAdapter:Null<flighthq.types.RenderProxyAdapter> = cast _Runtime.UNDEFINED;
     var traverseChildren:Bool = cast _Runtime.UNDEFINED;
     renderAdapter = _Runtime.coalesce(((cast (cast (cast getRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : RenderStateRuntime) : { var renderProxyAdapterMap:flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>; }).renderProxyAdapterMap : flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>).get(source)), function():Dynamic return cast null);
@@ -32,14 +34,16 @@ class RenderProxyAdapter {
     ((cast data : { var traverseChildren:Bool; }).traverseChildren = traverseChildren);
   }
 
-  @:noCompletion
-  public static function getRenderProxyAdapter(state:RenderState, source:Renderable):Null<flighthq.types.RenderProxyAdapter> {
+  @:allow(flighthq)
+  @:keep
+  private static function getRenderProxyAdapter(state:RenderState, source:Renderable):Null<flighthq.types.RenderProxyAdapter> {
     return cast _Runtime.coalesce(((cast (cast (cast getRenderStateRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : RenderStateRuntime) : { var renderProxyAdapterMap:flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>; }).renderProxyAdapterMap : flighthq._internal._WeakMap<Renderable, flighthq.types.RenderProxyAdapter>).get(source)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:noCompletion
-  public static function setRenderProxyAdapter(state:RenderState, source:Renderable, adapter:Null<flighthq.types.RenderProxyAdapter>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setRenderProxyAdapter(state:RenderState, source:Renderable, adapter:Null<flighthq.types.RenderProxyAdapter>):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast (cast getRenderStateRuntime(({ final __callArgument15:Dynamic = state; __callArgument15; })) : RenderStateRuntime) : { var renderAdaptHook:Null<RenderState->Renderable->RenderProxy2D->Void>; }).renderAdaptHook, applyRenderProxyAdapter) : Bool)) {
       installRenderAdaptHook(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = applyRenderProxyAdapter; __callArgument18; }));

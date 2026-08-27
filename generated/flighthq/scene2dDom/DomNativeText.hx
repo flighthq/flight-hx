@@ -10,26 +10,28 @@ import flighthq.scene2dDom.DomStyle.setDomRendererElement;
 import flighthq.text.NativeText.getNativeTextRuntime;
 import flighthq.types.DomRenderState;
 import flighthq.types.NativeText;
-import flighthq.types.NativeText.NativeTextData;
-import flighthq.types.NativeText.NativeTextRuntime;
-import flighthq.types.NativeText.NativeTextStyle;
+import flighthq.types.NativeTextData;
+import flighthq.types.NativeTextRuntime;
+import flighthq.types.NativeTextStyle;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.TextAutoSize;
-import flighthq.types.TextFormat.TextFormatAlign;
+import flighthq.types.TextFormatAlign;
 import flighthq.types.TextVerticalAlign;
 
+@:noCompletion
 class DomNativeText {
   public static function createDomNativeTextData__domNativeText(_state:RenderState, _source:Renderable):Null<RendererData> {
     return cast null;
     return cast null;
   }
 
-  @:noCompletion
-  public static function drawDomNativeText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawDomNativeText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:NativeText = cast _Runtime.UNDEFINED;
     var runtime:NativeTextRuntime = cast _Runtime.UNDEFINED;
     var data:NativeTextData = cast _Runtime.UNDEFINED;
@@ -70,8 +72,9 @@ class DomNativeText {
     setDomRendererElement(({ final __callArgument12:Dynamic = state; __callArgument12; }), ({ final __callArgument13:Dynamic = element; __callArgument13; }));
   }
 
-  @:noCompletion
-  public static function drawDomNativeTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawDomNativeTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     drawDomNativeText(({ final __callArgument16:Dynamic = state; __callArgument16; }), ({ final __callArgument17:Dynamic = renderProxy; __callArgument17; }));
   }
 

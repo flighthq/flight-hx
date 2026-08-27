@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.Path.appendPathClose;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
+import flighthq.types.PathCommand;
 import flighthq.types.StrokeStyle;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
@@ -13,6 +13,7 @@ typedef DashSegment__compactStrokePath = { var closed:Bool; var points:Array<Flo
 
 typedef StrokeSubpath__compactStrokePath = { var closed:Bool; var points:Array<Float>; };
 
+@:noCompletion
 class CompactStrokePath {
   public static function compactStrokePath(path:Path, style:StrokeStyle, tolerance:Float = 0.25):Path {
     var width:Float = cast _Runtime.UNDEFINED;

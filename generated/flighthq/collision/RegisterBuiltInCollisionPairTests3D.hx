@@ -11,15 +11,16 @@ import flighthq.collision.ShapeCollision3D.testSphereAabbCollision3D;
 import flighthq.collision.ShapeCollision3D.testSphereBoxCollision3D;
 import flighthq.collision.ShapeCollision3D.testSphereCapsuleCollision3D;
 import flighthq.collision.ShapeCollision3D.testSphereSphereCollision3D;
-import flighthq.types.Collision.CollisionAabb3D;
-import flighthq.types.Collision.CollisionBox3D;
-import flighthq.types.Collision.CollisionCapsule3D;
-import flighthq.types.Collision.CollisionManifold3D;
-import flighthq.types.Collision.CollisionPairTest3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionShapeKind3D;
-import flighthq.types.Collision.CollisionSphere3D;
+import flighthq.types.CollisionAabb3D;
+import flighthq.types.CollisionBox3D;
+import flighthq.types.CollisionCapsule3D;
+import flighthq.types.CollisionManifold3D;
+import flighthq.types.CollisionPairTest3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionShapeKind3D;
+import flighthq.types.CollisionSphere3D;
 
+@:noCompletion
 class RegisterBuiltInCollisionPairTests3D {
   public static function registerBuiltInCollisionPairTests3D():Void {
     registerCollisionPairTest3D(({ final __callArgument0:Dynamic = 'aabb'; __callArgument0; }), ({ final __callArgument1:Dynamic = 'aabb'; __callArgument1; }), ({ final __callArgument4:Dynamic = function(a:CollisionShape3D, b:CollisionShape3D, out:CollisionManifold3D):Bool return (cast testAabbAabbCollision3D((cast a : CollisionAabb3D), (cast b : CollisionAabb3D), ({ final __callArgument2:Dynamic = out; __callArgument2; })) : Bool); __callArgument4; }));

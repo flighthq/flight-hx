@@ -8,23 +8,24 @@ import flighthq.materials.PbrMaterials.createStandardPbrMaterial;
 import flighthq.materials.PbrMaterials.createStandardPbrMaterialProperties;
 import flighthq.materials.TransmissionVolumePbrExtension.createTransmissionVolumePbrExtension;
 import flighthq.types.BlendMode;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.EntityRuntime;
 import flighthq.types.ExtendedPbrMaterial;
 import flighthq.types.GlassExtendedPbrMaterialOptions;
+import flighthq.types.Kind;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.Sampler;
 import flighthq.types.StandardPbrMaterial;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.StandardPbrMaterialProperties;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.TransmissionVolumePbrExtension;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 
+@:noCompletion
 class MaterialPresets {
   public static function createAluminumStandardPbrMaterial(?opts:{ @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var kind:Null<Kind>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast (cast createStandardPbrMaterial((cast _Runtime.mergeObjects([{ baseColor: 2964369663.0 }, { metallic: 1.0 }, { roughness: 0.35 }, opts]) : Dynamic)) : StandardPbrMaterial);

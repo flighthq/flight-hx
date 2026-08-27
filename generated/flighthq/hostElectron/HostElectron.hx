@@ -20,26 +20,26 @@ import flighthq.hostElectron.ElectronStorage as Facade_HostElectron_flighthq_hos
 import flighthq.hostElectron.ElectronTray as Facade_HostElectron_flighthq_hostElectron_ElectronTray;
 import flighthq.hostElectron.ElectronUpdater as Facade_HostElectron_flighthq_hostElectron_ElectronUpdater;
 import flighthq.hostElectron.ElectronWindow as Facade_HostElectron_flighthq_hostElectron_ElectronWindow;
-import flighthq.types.App.AppBackend;
+import flighthq.types.AppBackend;
 import flighthq.types.ApplicationWindow;
-import flighthq.types.ApplicationWindow.WindowBackend;
-import flighthq.types.Clipboard.ClipboardBackend;
-import flighthq.types.Dialog.DialogBackend;
+import flighthq.types.ClipboardBackend;
+import flighthq.types.DialogBackend;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronBrowserWindow;
 import flighthq.types.ElectronBackendOptions;
-import flighthq.types.Ipc.IpcBackend;
-import flighthq.types.Menu.MenuBackend;
-import flighthq.types.Notification.NotificationBackend;
-import flighthq.types.Platform.PlatformBackend;
-import flighthq.types.Power.PowerBackend;
-import flighthq.types.Protocol.ProtocolBackend;
-import flighthq.types.Screen.ScreenBackend;
-import flighthq.types.Shell.ShellBackend;
-import flighthq.types.Shortcut.ShortcutBackend;
-import flighthq.types.Storage.StorageBackend;
-import flighthq.types.Tray.TrayBackend;
-import flighthq.types.Updater.UpdaterBackend;
+import flighthq.types.ElectronBrowserWindow;
+import flighthq.types.IpcBackend;
+import flighthq.types.MenuBackend;
+import flighthq.types.NotificationBackend;
+import flighthq.types.PlatformBackend;
+import flighthq.types.PowerBackend;
+import flighthq.types.ProtocolBackend;
+import flighthq.types.ScreenBackend;
+import flighthq.types.ShellBackend;
+import flighthq.types.ShortcutBackend;
+import flighthq.types.StorageBackend;
+import flighthq.types.TrayBackend;
+import flighthq.types.UpdaterBackend;
+import flighthq.types.WindowBackend;
 
 class HostElectron {
   public static function createElectronAppBackend(electron:ElectronApi):AppBackend {

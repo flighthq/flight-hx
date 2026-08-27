@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlModifierBindContext = { var acquireModifierTextureUnit:Void->Float; var index:Float; var program:flighthq._internal.dom.WebGLProgram; var state:GlRenderState; };
-
 typedef GlModifierSnippet = { var kind:ModifierKind; var slot:ModifierSlot; @:optional var getDefineSignature:Modifier->String; @:optional var bind:Modifier->GlModifierBindContext->Void; var contribution:Modifier->Float->String; @:optional var declarations:Modifier->Float->String; };

@@ -9,11 +9,12 @@ import flighthq.skeleton2d.Skeleton2dConstraint.registerSkeleton2DConstraintSolv
 import flighthq.types.Bone2D;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DConstraint;
-import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintKind;
-import flighthq.types.Skeleton2DConstraint.Skeleton2DConstraintSolver;
+import flighthq.types.Skeleton2DConstraintKind;
+import flighthq.types.Skeleton2DConstraintSolver;
 import flighthq.types.Skeleton2DTransformConstraint;
 import flighthq.types._internal._Skeleton2DConstraintValues.Skeleton2DConstraintKindValue;
 
+@:noCompletion
 class TransformConstraint2D {
   public static final MATRIX_STRIDE__transformConstraint2D:Float = 6.0;
 
@@ -21,8 +22,9 @@ class TransformConstraint2D {
     registerSkeleton2DConstraintSolver((cast (cast Skeleton2DConstraintKindValue : { var Ik:String; var Path:String; var Transform:String; }).Transform : String), ({ final __callArgument0:Dynamic = solveSkeleton2DTransformConstraint; __callArgument0; }));
   }
 
-  @:noCompletion
-  public static function solveSkeleton2DTransformConstraint(skeleton:Skeleton2D, constraint:Skeleton2DConstraint):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function solveSkeleton2DTransformConstraint(skeleton:Skeleton2D, constraint:Skeleton2DConstraint):Void {
     var transform:Skeleton2DTransformConstraint = cast _Runtime.UNDEFINED;
     var bones:Array<Bone2D> = cast _Runtime.UNDEFINED;
     var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;

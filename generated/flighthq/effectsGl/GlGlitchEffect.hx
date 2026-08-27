@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlitchEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlGlitchEffect {
-  @:noCompletion
-  public static function applyGlitchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GlitchEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGlitchEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GlitchEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var blockSize:Float = cast _Runtime.UNDEFINED;
     var colorShift:Float = cast _Runtime.UNDEFINED;

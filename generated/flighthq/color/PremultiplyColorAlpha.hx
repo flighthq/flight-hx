@@ -4,6 +4,7 @@ package flighthq.color;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class PremultiplyColorAlpha {
   public static function premultiplyColorAlpha(color:Float):Float {
     var a:Float = cast _Runtime.UNDEFINED;

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 
+@:noCompletion
 class SelectTextureContainer {
   public static function selectTextureContainer(containers:Array<TextureContainer>, supportedFormats:Array<TextureContainerFormat>):Null<TextureContainer> {
     for (container in _Runtime.iterable(containers)) {

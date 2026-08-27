@@ -5,20 +5,21 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.texture.Texture.getTextureSourceKind;
+import flighthq.types.DomRenderRegistries;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomRenderRegistries;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomRenderStateRuntime;
 import flighthq.types.DomTextureResolver;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.KeyedTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSourceKind;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class DomTextureResolver {
   public static function registerDomTextureResolver(state:DomRenderState, sourceKind:TextureSourceKind, resolver:Null<flighthq.types.DomTextureResolver>):Void {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -31,8 +32,9 @@ class DomTextureResolver {
     ((cast runtime.registries : { var textureResolvers:KeyedTable<flighthq.types.DomTextureResolver>; }).textureResolvers = cast (_Runtime.mergeObjects([table, { entries: entries }]) : KeyedTable<flighthq.types.DomTextureResolver>));
   }
 
-  @:noCompletion
-  public static function resolveDomTexture(state:DomRenderState, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveDomTexture(state:DomRenderState, texture:Texture):Null<flighthq._internal.dom.CanvasImageSource> {
     var sourceKind:Null<String> = cast _Runtime.UNDEFINED;
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:flighthq.types.DomTextureResolver; }>> = cast _Runtime.UNDEFINED;

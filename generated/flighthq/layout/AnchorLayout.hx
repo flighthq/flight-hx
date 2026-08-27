@@ -4,17 +4,18 @@ package flighthq.layout;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.layout.LayoutState.registerLayoutResolver;
-import flighthq.types.Layout.AnchorLayoutItemStyle;
+import flighthq.types.AnchorLayoutItemStyle;
 import flighthq.types.Layout.AnchorLayoutKind;
-import flighthq.types.Layout.LayoutNode;
-import flighthq.types.Layout.LayoutResolutionFailureKind;
 import flighthq.types.Layout.LayoutResolutionFailureKindValue;
-import flighthq.types.Layout.LayoutResolver;
-import flighthq.types.Layout.LayoutState;
-import flighthq.types.Layout.LayoutTree;
+import flighthq.types.LayoutNode;
+import flighthq.types.LayoutResolutionFailureKind;
+import flighthq.types.LayoutResolver;
+import flighthq.types.LayoutState;
+import flighthq.types.LayoutTree;
 import flighthq.types.Types.AnchorLayoutKind;
 import flighthq.types.ViewportAlign;
 
+@:noCompletion
 class AnchorLayout {
   public static function registerAnchorLayoutResolver(state:LayoutState):Void {
     registerLayoutResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast AnchorLayoutKind : String), ({ final __callArgument1:Dynamic = AnchorLayout.anchorLayoutResolver__anchorLayout; __callArgument1; }));

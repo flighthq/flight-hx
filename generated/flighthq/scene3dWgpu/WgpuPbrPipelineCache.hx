@@ -11,17 +11,19 @@ import flighthq.scene3dWgpu.WgpuPbrPrelude.buildWgpuPbrDefineKey;
 import flighthq.scene3dWgpu.WgpuPbrPrelude.getWgpuPbrModuleSourceForKey;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuSkinningAdapter;
+import flighthq.types.WgpuColorAdjustmentMaterialFeature;
 import flighthq.types.WgpuMeshPipeline;
+import flighthq.types.WgpuPbrDefineKey;
 import flighthq.types.WgpuPbrPipeline;
-import flighthq.types.WgpuPbrPipeline.WgpuPbrDefineKey;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
 import flighthq.types.WgpuScene3DRuntime;
 import flighthq.types.WgpuSkinningAdapter;
 
+@:noCompletion
 class WgpuPbrPipelineCache {
-  @:noCompletion
-  public static function compileWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Bool = false, skinned:Bool = false, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):WgpuPbrPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function compileWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Bool = false, skinned:Bool = false, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):WgpuPbrPipeline {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
@@ -33,8 +35,9 @@ class WgpuPbrPipelineCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuPbrPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuPbrPipeline(state:WgpuRenderState, key:WgpuPbrDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuPbrPipeline {
     var fullKey:WgpuPbrDefineKey = cast _Runtime.UNDEFINED;
     fullKey = (cast _Runtime.mergeObjects([key, { hasColorAdjustment: (cast (cast getWgpuScene3DRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : WgpuScene3DRuntime) : { var activeColorAdjustmentRun:Bool; }).activeColorAdjustmentRun }, { hasColorMatrix: (cast (cast getWgpuScene3DRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : WgpuScene3DRuntime) : { var activeColorMatrixRun:Bool; }).activeColorMatrixRun }]));
     return cast (cast (cast ensureWgpuScene3DPipeline : WgpuRenderState->String->(Bool->Bool->WgpuPbrPipeline)->WgpuPbrPipeline)(({ final __callArgument20:Dynamic = state; __callArgument20; }), (cast 'pbr:' + Std.string(format) + '|' + Std.string((cast buildWgpuPbrDefineKey(({ final __callArgument21:Dynamic = fullKey; __callArgument21; })) : String)) + '' : String), ({ final __callArgument31:Dynamic = function(blended:Bool, skinned:Bool):WgpuPbrPipeline return (cast compileWgpuPbrPipeline(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = fullKey; __callArgument24; }), (cast format : String), (cast blended : Bool), (cast skinned : Bool), (cast getWgpuColorAdjustmentMaterialFeature(({ final __callArgument25:Dynamic = state; __callArgument25; })) : Null<WgpuColorAdjustmentMaterialFeature>)) : WgpuPbrPipeline); __callArgument31; })) : WgpuPbrPipeline);

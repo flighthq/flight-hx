@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.tween.Tween.createTween;
 import flighthq.types.EasingFunction;
+import flighthq.types.NumericProps;
 import flighthq.types.Tween;
-import flighthq.types.Tween.NumericProps;
 import flighthq.types.TweenManager;
 import flighthq.types.TweenOptions;
 import flighthq.types.TweenStaggerOptions;
 
+@:noCompletion
 class TweenStagger {
   public static function createTweenStagger<T:flighthq._internal._Object>(manager:TweenManager, targets:Array<T>, duration:Float, propertyMap:NumericProps<T>, ?stagger:TweenStaggerOptions, ?options:TweenOptions):Array<Tween<T>> {
     var each:Float = cast _Runtime.UNDEFINED;

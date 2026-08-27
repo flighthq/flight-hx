@@ -9,7 +9,7 @@ import flighthq.sdk.Sdk.*;
 import flighthq.types.DisplayObject;
 import flighthq.types.TextLabel;
 import flighthq.types.MotionPath;
-import flighthq.types.MotionPath.MotionPathLoopMode;
+import flighthq.types.MotionPathLoopMode;
 import flighthq.types.Path;
 import flighthq.types.Shape;
 import lime.app.Application;

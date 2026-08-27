@@ -8,14 +8,15 @@ import flighthq.geometry.Matrix4Pool.acquireIdentityMatrix4;
 import flighthq.geometry.Matrix4Pool.acquireMatrix4;
 import flighthq.geometry.Matrix4Pool.releaseMatrix4;
 import flighthq.types.Entity;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Matrix3Like;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Quaternion.QuaternionLike;
-import flighthq.types.Vector3.Vector3Like;
-import flighthq.types.Vector4.Vector4Like;
+import flighthq.types.Matrix4Like;
+import flighthq.types.MatrixLike;
+import flighthq.types.QuaternionLike;
+import flighthq.types.Vector3Like;
+import flighthq.types.Vector4Like;
 
+@:noCompletion
 class Matrix4 {
   public static function appendMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
     multiplyMatrix4(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = other; __callArgument1; }), ({ final __callArgument2:Dynamic = source; __callArgument2; }));

@@ -5,37 +5,41 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
 import flighthq.types.Material;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
+@:noCompletion
 class WgpuMeshMaterialRegistry {
-  @:noCompletion
-  public static function getWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMeshMaterialRenderer> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMeshMaterialRenderer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuMeshMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var meshMaterialRenderers:KeyedTable<WgpuMeshMaterialRenderer>; }).meshMaterialRenderers : KeyedTable<WgpuMeshMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuMeshMaterialRenderer>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural4 = entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:WgpuMeshMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMeshMaterialRenderer):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerWgpuMeshMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMeshMaterialRenderer):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
     ((cast runtime.registries : { var meshMaterialRenderers:KeyedTable<WgpuMeshMaterialRenderer>; }).meshMaterialRenderers = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var meshMaterialRenderers:KeyedTable<WgpuMeshMaterialRenderer>; }).meshMaterialRenderers : Dynamic), (cast kind : String), ({ final __callArgument7:Dynamic = renderer; __callArgument7; })) : KeyedTable<WgpuMeshMaterialRenderer>) : KeyedTable<WgpuMeshMaterialRenderer>));
   }
 
-  @:noCompletion
-  public static function resolveWgpuMeshMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMeshMaterialRenderer> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveWgpuMeshMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMeshMaterialRenderer> {
     var entries:flighthq._internal._Map<String, RegistryTableEntry<WgpuMeshMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var fallback:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuMeshMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     entries = (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var meshMaterialRenderers:KeyedTable<WgpuMeshMaterialRenderer>; }).meshMaterialRenderers : KeyedTable<WgpuMeshMaterialRenderer>).entries;

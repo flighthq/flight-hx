@@ -4,11 +4,12 @@ package flighthq.socket;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Socket;
-import flighthq.types.Socket.SocketConnection;
-import flighthq.types.Socket.SocketReadyState;
-import flighthq.types.Socket.SocketRuntime;
-import flighthq.types.Socket.SocketSendFailureExplanation;
+import flighthq.types.SocketConnection;
+import flighthq.types.SocketReadyState;
+import flighthq.types.SocketRuntime;
+import flighthq.types.SocketSendFailureExplanation;
 
+@:noCompletion
 class ExplainSocketSendFailure {
   public static function explainSocketSendFailure(socket:Socket):Null<SocketSendFailureExplanation> {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;

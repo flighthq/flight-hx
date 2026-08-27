@@ -4,10 +4,11 @@ package flighthq.textbidi;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textbidi.BidiClassBackend.getBidiClassBackend;
-import flighthq.types.Bidi.BidiClass;
-import flighthq.types.Bidi.BidiClassBackend;
-import flighthq.types.Bidi.BidiDirection;
+import flighthq.types.BidiClass;
+import flighthq.types.BidiClassBackend;
+import flighthq.types.BidiDirection;
 
+@:noCompletion
 class ResolveBidiLevels {
   public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):flighthq._internal._UInt8Array {
     var length:Float = cast _Runtime.UNDEFINED;

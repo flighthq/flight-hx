@@ -4,9 +4,10 @@ package flighthq.mesh;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
-import flighthq.types.MeshGeometry.PrimitiveTopology;
+import flighthq.types.MeshSubset;
+import flighthq.types.PrimitiveTopology;
 
+@:noCompletion
 class MeshGeometrySubset {
   public static function addMeshGeometrySubset(geometry:MeshGeometry, subset:MeshSubset):Void {
     var next:Array<MeshSubset> = cast _Runtime.UNDEFINED;

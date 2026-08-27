@@ -19,6 +19,7 @@ import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorTablet;
 import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorUnknown;
 import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorWatch;
 
+@:noCompletion
 class UserAgentParse {
   public static function parseUserAgentFormFactor(ua:String, maxTouchPoints:Float):DeviceFormFactor {
     if ((cast _Runtime.callProperty(_Runtime.regexp('android auto|car browser|automotive', 'i'), 'test', cast ([ua] : Array<Dynamic>)) : Bool)) { return cast DeviceFormFactorCar; }

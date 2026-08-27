@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef SfntTableDirectory = { var declaredTableCount:Float; var sfntVersion:Float; var tables:flighthq._internal._Map<String, SfntTableRange>; };
-
-typedef SfntTableRange = { var length:Float; var offset:Float; };

@@ -6,13 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.assets.AssetLibrary as Facade_Assets_flighthq_assets_AssetLibrary;
 import flighthq.assets.EnableAssetGuards as Facade_Assets_flighthq_assets_EnableAssetGuards;
 import flighthq.assets.ExplainAssetLoad as Facade_Assets_flighthq_assets_ExplainAssetLoad;
-import flighthq.types.Assets.AssetDescriptor;
-import flighthq.types.Assets.AssetGroupLoadOptions;
-import flighthq.types.Assets.AssetLibrary;
-import flighthq.types.Assets.AssetLoadExplanation;
-import flighthq.types.Assets.AssetLoaderAdapter;
-import flighthq.types.Assets.AssetManifest;
-import flighthq.types.Assets.AssetType;
+import flighthq.types.AssetDescriptor;
+import flighthq.types.AssetGroupLoadOptions;
+import flighthq.types.AssetLibrary;
+import flighthq.types.AssetLoadExplanation;
+import flighthq.types.AssetLoaderAdapter;
+import flighthq.types.AssetManifest;
+import flighthq.types.AssetType;
 
 class Assets {
   public static function acquireAsset<T>(library:AssetLibrary, id:String):flighthq._internal._Promise<T> {

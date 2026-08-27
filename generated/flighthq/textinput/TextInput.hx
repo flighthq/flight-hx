@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.text.RichText.getRichTextRuntime;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.RichTextRuntime;
+import flighthq.types.TextInputOptions;
 import flighthq.types.TextInputState;
-import flighthq.types.TextInputState.TextInputOptions;
 
+@:noCompletion
 class TextInput {
   public static function disableTextInput(node:RichText):Void {
     ((cast (cast getRichTextRuntime(({ final __callArgument0:Dynamic = node; __callArgument0; })) : RichTextRuntime) : { var input:Null<TextInputState>; }).input = cast (null : Null<TextInputState>));

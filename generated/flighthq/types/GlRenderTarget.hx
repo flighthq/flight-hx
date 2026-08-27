@@ -3,12 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RenderTarget.RenderTargetAxes;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
-import flighthq.types.RenderTarget.RenderTargetDepth;
-import flighthq.types.RenderTarget.RenderTargetDimensions;
-import flighthq.types.RenderTarget.RenderTargetFormat;
 
 typedef GlRenderTarget = { var height:Float; var width:Float; var requestedAxes:RenderTargetAxes; var format:RenderTargetFormat; var colorAttachments:Float; var colorFormats:Array<RenderTargetFormat>; var depth:RenderTargetDepth; var colorSpace:RenderTargetColorSpace; var clearColors:Array<Float>; var clearDepth:Float; var sampleCount:Float; var framebuffer:flighthq._internal.dom.WebGLFramebuffer; var resolveFramebuffer:Null<flighthq._internal.dom.WebGLFramebuffer>; var textures:Array<flighthq._internal.dom.WebGLTexture>; var texture:flighthq._internal.dom.WebGLTexture; var depthTexture:Null<flighthq._internal.dom.WebGLTexture>; var colorRenderbuffers:Array<flighthq._internal.dom.WebGLRenderbuffer>; var depthStencilRenderbuffer:Null<flighthq._internal.dom.WebGLRenderbuffer>; };
-
-typedef GlRenderTargetPool = { var free:Array<flighthq.types.GlRenderTarget>; };

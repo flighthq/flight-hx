@@ -7,8 +7,9 @@ import flighthq.debug.Debug.isDebugEnabled;
 import flighthq.log.Log.endLogTimer;
 import flighthq.log.Log.logDebug;
 import flighthq.log.Log.startLogTimer;
-import flighthq.types.Log.LogTimer;
+import flighthq.types.LogTimer;
 
+@:noCompletion
 class DebugTiming {
   public static function beginDebugSpan(name:String, ?channel:Null<String>):Null<LogTimer> {
     if (channel == null) channel = cast (null : Dynamic);

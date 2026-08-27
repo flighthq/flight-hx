@@ -6,8 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.math.Clamp.clamp;
 import flighthq.math.Interpolation.lerp;
 import flighthq.types.Snapshot;
-import flighthq.types.Snapshot.SnapshotSchema;
+import flighthq.types.SnapshotSchema;
 
+@:noCompletion
 class InterpolateSnapshots {
   public static function interpolateSnapshots<T>(a:Snapshot<T>, b:Snapshot<T>, t:Float, out:T, ?schema:SnapshotSchema):Void {
     var paths:Null<flighthq._internal._Set<String>> = cast _Runtime.UNDEFINED;

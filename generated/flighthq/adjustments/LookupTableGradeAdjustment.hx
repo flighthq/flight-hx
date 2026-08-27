@@ -8,6 +8,7 @@ import flighthq.types.ColorLut;
 import flighthq.types.ColorTransformFunction;
 import flighthq.types.LookupTableGradeAdjustment;
 
+@:noCompletion
 class LookupTableGradeAdjustment {
   public static function createLookupTableGradeAdjustment(?options:{ @:optional var lut:Null<ColorLut>; @:optional var strength:Null<Float>; }):flighthq.types.LookupTableGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

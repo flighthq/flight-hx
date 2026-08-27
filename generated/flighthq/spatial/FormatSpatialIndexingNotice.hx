@@ -4,10 +4,11 @@ package flighthq.spatial;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.spatial.UniformGrid.MAX_INDEXED_CELLS_PER_OBJECT;
-import flighthq.types.SpatialIndexing.SpatialIndexingMode;
-import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
-import flighthq.types.SpatialIndexing.SpatialIndexingOperation;
+import flighthq.types.SpatialIndexingMode;
+import flighthq.types.SpatialIndexingNotice;
+import flighthq.types.SpatialIndexingOperation;
 
+@:noCompletion
 class FormatSpatialIndexingNotice {
   public static function formatSpatialIndexingNotice(notice:SpatialIndexingNotice):String {
     if ((cast _Runtime.strictEquals(notice.reason, 'invalid-cell-size') : Bool)) {

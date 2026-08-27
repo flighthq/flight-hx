@@ -7,17 +7,18 @@ import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnost
 import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.StarlingPexSchema.StarlingPexColor;
-import flighthq.types.StarlingPexSchema.StarlingPexDocument;
-import flighthq.types.StarlingPexSchema.StarlingPexParseOptions;
-import flighthq.types.StarlingPexSchema.StarlingPexParseResult;
+import flighthq.types.StarlingPexColor;
+import flighthq.types.StarlingPexDocument;
+import flighthq.types.StarlingPexParseOptions;
+import flighthq.types.StarlingPexParseResult;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef PexDict__starlingPexParse = flighthq._internal._Record<String, String>;
 
+@:noCompletion
 class StarlingPexParse {
   public static function parseStarlingPex(xml:String, ?options:StarlingPexParseOptions):ParticleEmitterConfig {
     var d:PexDict__starlingPexParse = cast _Runtime.UNDEFINED;

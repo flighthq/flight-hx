@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.WhiteBalanceEffect;
 
+@:noCompletion
 class WhiteBalanceEffect {
   public static function createWhiteBalanceEffect(?options:{ @:optional var temperature:Null<Float>; @:optional var tint:Null<Float>; }):flighthq.types.WhiteBalanceEffect {
     if (options == null) options = cast ({  } : Dynamic);

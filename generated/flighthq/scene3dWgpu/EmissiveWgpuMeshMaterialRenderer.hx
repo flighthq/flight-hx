@@ -16,32 +16,34 @@ import flighthq.scene3dWgpu.WgpuUnlitPrelude.bindWgpuUnlitSurface;
 import flighthq.scene3dWgpu.WgpuUnlitPrelude.ensureWgpuUnlitPipeline;
 import flighthq.types.Camera3D;
 import flighthq.types.EmissiveMaterial;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.EmissiveMaterialKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuUnlitDefineKey;
 import flighthq.types.WgpuUnlitPipeline;
-import flighthq.types.WgpuUnlitPipeline.WgpuUnlitDefineKey;
 import flighthq.types._internal._EmissiveMaterialValues.EmissiveMaterialKind;
 
+@:noCompletion
 class EmissiveWgpuMeshMaterialRenderer {
-  @:noCompletion
-  public static final emissiveWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final emissiveWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var emissive:Null<EmissiveMaterial> = cast _Runtime.UNDEFINED;

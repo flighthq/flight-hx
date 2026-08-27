@@ -10,18 +10,19 @@ import flighthq.renderGl.GlRenderState.getGlColorAdjustmentMaterialFeatureGuard;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.BlendMode;
 import flighthq.types.ColorScaleBias;
+import flighthq.types.GlColorAdjustmentMaterialFeature;
+import flighthq.types.GlColorAdjustmentMaterialFeatureGuard;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlQuadBatchShader;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
-import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeatureGuard;
-import flighthq.types.GlRenderState.GlQuadBatchShader;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderStateRuntime;
+import flighthq.types.GlViewportRect;
 import flighthq.types.Material;
-import flighthq.types.Material.MaterialData;
-import flighthq.types.Sampler.SamplerLike;
+import flighthq.types.MaterialData;
+import flighthq.types.SamplerLike;
 import flighthq.types.TintMaterialData;
 
+@:noCompletion
 class GlQuadBatchWriter {
   public static final QUAD_BATCH_INSTANCE_FLOATS__glQuadBatchWriter:Float = 13.0;
 
@@ -29,8 +30,9 @@ class GlQuadBatchWriter {
 
   public static final MAX_INSTANCE_ATTRIB_LOCATION__glQuadBatchWriter:Float = 8.0;
 
-  @:noCompletion
-  public static final QUAD_BATCH_VS:String = '#version 300 es\nprecision mediump float;\n\nlayout(location = 0) in vec2 a_corner;\nlayout(location = 1) in vec2 a_matAB;\nlayout(location = 2) in vec2 a_matCD;\nlayout(location = 3) in vec2 a_matTXTY;\nlayout(location = 4) in vec2 a_size;\nlayout(location = 5) in vec4 a_uvRect;\nlayout(location = 6) in float a_alpha;\n\nuniform mat3 u_world;\n\nout vec2 v_texCoord;\nout float v_alpha;\n\nvoid main() {\n  vec2 local = a_corner * a_size;\n  vec2 worldPos = vec2(\n    a_matAB.x * local.x + a_matCD.x * local.y + a_matTXTY.x,\n    a_matAB.y * local.x + a_matCD.y * local.y + a_matTXTY.y\n  );\n  vec3 clip = u_world * vec3(worldPos, 1.0);\n  gl_Position = vec4(clip.xy, 0.0, 1.0);\n  v_texCoord = mix(a_uvRect.xy, a_uvRect.zw, a_corner);\n  v_alpha = a_alpha;\n}';
+  @:allow(flighthq)
+  @:keep
+  private static final QUAD_BATCH_VS:String = '#version 300 es\nprecision mediump float;\n\nlayout(location = 0) in vec2 a_corner;\nlayout(location = 1) in vec2 a_matAB;\nlayout(location = 2) in vec2 a_matCD;\nlayout(location = 3) in vec2 a_matTXTY;\nlayout(location = 4) in vec2 a_size;\nlayout(location = 5) in vec4 a_uvRect;\nlayout(location = 6) in float a_alpha;\n\nuniform mat3 u_world;\n\nout vec2 v_texCoord;\nout float v_alpha;\n\nvoid main() {\n  vec2 local = a_corner * a_size;\n  vec2 worldPos = vec2(\n    a_matAB.x * local.x + a_matCD.x * local.y + a_matTXTY.x,\n    a_matAB.y * local.x + a_matCD.y * local.y + a_matTXTY.y\n  );\n  vec3 clip = u_world * vec3(worldPos, 1.0);\n  gl_Position = vec4(clip.xy, 0.0, 1.0);\n  v_texCoord = mix(a_uvRect.xy, a_uvRect.zw, a_corner);\n  v_alpha = a_alpha;\n}';
 
   public static final QUAD_BATCH_FS__glQuadBatchWriter:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nin float v_alpha;\nuniform sampler2D u_texture;\nuniform bool u_straightTextureAlpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord);\n  if (u_straightTextureAlpha) color.rgb *= color.a;\n  color *= clamp(v_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}';
 
@@ -41,8 +43,9 @@ class GlQuadBatchWriter {
     return cast null;
   }
 
-  @:noCompletion
-  public static function bindGlQuadBatchBaseAttributes(state:GlRenderState, locCorner:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlQuadBatchBaseAttributes(state:GlRenderState, locCorner:Float):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var stride:Float = cast _Runtime.UNDEFINED;
@@ -74,8 +77,9 @@ class GlQuadBatchWriter {
     flighthq._internal.backend.WebGl2Backend.vertexAttribDivisor(gl, 6.0, 1.0);
   }
 
-  @:noCompletion
-  public static function ensureGlQuadBatchShader(state:GlRenderState):GlQuadBatchShader {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlQuadBatchShader(state:GlRenderState):GlQuadBatchShader {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var cornerData:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
@@ -93,8 +97,9 @@ class GlQuadBatchWriter {
     return cast null;
   }
 
-  @:noCompletion
-  public static function flushGlQuadBatchWriter(state:GlRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function flushGlQuadBatchWriter(state:GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
@@ -166,8 +171,9 @@ class GlQuadBatchWriter {
     }
   }
 
-  @:noCompletion
-  public static function packGlQuadBatchMaterialInstance(state:GlRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function packGlQuadBatchMaterialInstance(state:GlRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var renderer:Null<GlMaterialRenderer> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument29:Dynamic = state; __callArgument29; })) : GlRenderStateRuntime);
@@ -176,8 +182,9 @@ class GlQuadBatchWriter {
     (cast renderer : GlMaterialRenderer).packInstance(({ final __callArgument31:Dynamic = state; __callArgument31; }), ({ final __callArgument32:Dynamic = materialData; __callArgument32; }), runtime.quadBatchWriterMaterialData, (cast (instanceIndex * runtime.quadBatchWriterMaterialFloats) : Float));
   }
 
-  @:noCompletion
-  public static function prepareGlQuadBatchWrite(state:GlRenderState, texture:flighthq._internal.dom.WebGLTexture, straightAlpha:Bool, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function prepareGlQuadBatchWrite(state:GlRenderState, texture:flighthq._internal.dom.WebGLTexture, straightAlpha:Bool, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:GlMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
     if (smoothing == null) smoothing = cast (null : Dynamic);
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var floats:Float = cast _Runtime.UNDEFINED;
@@ -222,8 +229,9 @@ class GlQuadBatchWriter {
     return cast null;
   }
 
-  @:noCompletion
-  public static function recordGlQuadBatchColorScaleBias(state:GlRenderState, colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>, instanceIndex:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function recordGlQuadBatchColorScaleBias(state:GlRenderState, colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>, instanceIndex:Float):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var fold:Null<GlColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument37:Dynamic = state; __callArgument37; })) : GlRenderStateRuntime);
@@ -235,8 +243,9 @@ class GlQuadBatchWriter {
     if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) { _Runtime.callOptionalValue((cast getGlColorAdjustmentMaterialFeatureGuard(({ final __callArgument41:Dynamic = state; __callArgument41; })) : Null<GlColorAdjustmentMaterialFeatureGuard>), cast ([state, colorScaleBias] : Array<Dynamic>)); }
   }
 
-  @:noCompletion
-  public static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:flighthq._internal.dom.WebGLUniformLocation, locTexture:flighthq._internal.dom.WebGLUniformLocation, ?locStraightTextureAlpha:flighthq._internal.dom.WebGLUniformLocation):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlQuadBatchWorldAndTexture(state:GlRenderState, locWorldMatrix:flighthq._internal.dom.WebGLUniformLocation, locTexture:flighthq._internal.dom.WebGLUniformLocation, ?locStraightTextureAlpha:flighthq._internal.dom.WebGLUniformLocation):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var viewport:flighthq._internal._Union2<flighthq._internal.dom.HTMLCanvasElement, GlViewportRect> = cast _Runtime.UNDEFINED;
@@ -265,8 +274,9 @@ class GlQuadBatchWriter {
     }
   }
 
-  @:noCompletion
-  public static function useGlQuadBatchProgram(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function useGlQuadBatchProgram(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument45:Dynamic = state; __callArgument45; })) : GlRenderStateRuntime);
     if ((cast !_Runtime.strictEquals(runtime.currentProgram, program) : Bool)) {

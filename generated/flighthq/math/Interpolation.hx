@@ -4,6 +4,7 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class Interpolation {
   public static function inverseLerp(a:Float, b:Float, value:Float):Float {
     var range:Float = cast _Runtime.UNDEFINED;

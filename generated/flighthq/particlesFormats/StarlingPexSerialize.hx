@@ -4,15 +4,16 @@ package flighthq.particlesFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.math.Constants.RAD_TO_DEG;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterShape;
 import flighthq.types.ParticleSerializeResult;
-import flighthq.types.StarlingPexSchema.StarlingPexColor;
-import flighthq.types.StarlingPexSchema.StarlingPexDocument;
-import flighthq.types.StarlingPexSchema.StarlingPexSerializeOptions;
+import flighthq.types.StarlingPexColor;
+import flighthq.types.StarlingPexDocument;
+import flighthq.types.StarlingPexSerializeOptions;
 
+@:noCompletion
 class StarlingPexSerialize {
   public static function serializeStarlingPex(config:ParticleEmitterConfig, ?existing:{ @:optional var maxParticles:Null<Float>; @:optional var emitterType:Null<Float>; @:optional var duration:Null<Float>; @:optional var particleLifespan:Null<Float>; @:optional var particleLifespanVariance:Null<Float>; @:optional var speed:Null<Float>; @:optional var speedVariance:Null<Float>; @:optional var angle:Null<Float>; @:optional var angleVariance:Null<Float>; @:optional var gravityx:Null<Float>; @:optional var gravityy:Null<Float>; @:optional var sourcePositionVariancex:Null<Float>; @:optional var sourcePositionVariancey:Null<Float>; @:optional var startParticleSize:Null<Float>; @:optional var startParticleSizeVariance:Null<Float>; @:optional var finishParticleSize:Null<Float>; @:optional var finishParticleSizeVariance:Null<Float>; @:optional var startColor:Null<StarlingPexColor>; @:optional var startColorVariance:Null<StarlingPexColor>; @:optional var finishColor:Null<StarlingPexColor>; @:optional var finishColorVariance:Null<StarlingPexColor>; @:optional var rotationStart:Null<Float>; @:optional var rotationStartVariance:Null<Float>; @:optional var rotationEnd:Null<Float>; @:optional var rotationEndVariance:Null<Float>; @:optional var maxRadius:Null<Float>; @:optional var maxRadiusVariance:Null<Float>; @:optional var minRadius:Null<Float>; @:optional var minRadiusVariance:Null<Float>; @:optional var rotatePerSecond:Null<Float>; @:optional var rotatePerSecondVariance:Null<Float>; @:optional var radialAcceleration:Null<Float>; @:optional var radialAccelVariance:Null<Float>; @:optional var tangentialAcceleration:Null<Float>; @:optional var tangentialAccelVariance:Null<Float>; @:optional var blendFuncSource:Null<Float>; @:optional var blendFuncDestination:Null<Float>; @:optional var textureFileName:Null<String>; }, ?options:StarlingPexSerializeOptions):String {
     var textureSize:Float = cast _Runtime.UNDEFINED;

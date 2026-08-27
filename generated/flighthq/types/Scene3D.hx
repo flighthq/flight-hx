@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 
 typedef Scene3D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var animations:flighthq._internal._Record<String, AnimationClip>; var metadata:Null<Scene3DMetadata>; var resources:Array<ImageResourceReference>; var root:Node3D; };
-
-typedef Scene3DRuntime = EntityRuntime;

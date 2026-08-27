@@ -4,14 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef VideoChannelState = String;
-
-typedef VideoChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:flighthq.types.VideoResource; var state:VideoChannelState; var onComplete:Signal<Void->Void>; };
-
-typedef VideoPlayOptions = { @:optional var currentTime:Float; @:optional var gain:Float; @:optional var loops:Float; @:optional var playbackRate:Float; };
-
 typedef VideoResource = { var element:Null<flighthq._internal.dom.CanvasImageSource>; var objectUrl:Null<String>; };
-
-typedef VideoResourceLoadOptions = { @:optional var crossOrigin:String; @:optional var muted:Bool; @:optional var playsInline:Bool; @:optional var preload:String; @:optional var readiness:String; };
-
-typedef VideoResourceUrl = { var url:String; @:optional var type:String; };

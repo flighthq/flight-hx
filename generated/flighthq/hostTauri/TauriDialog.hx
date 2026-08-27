@@ -3,22 +3,23 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Dialog.DialogBackend;
-import flighthq.types.Dialog.FileDialogFilter;
-import flighthq.types.Dialog.FileDialogHandle;
-import flighthq.types.Dialog.MessageDialogKind;
-import flighthq.types.Dialog.MessageDialogOptions;
-import flighthq.types.Dialog.MessageDialogResult;
-import flighthq.types.Dialog.OpenDirectoryDialogOptions;
-import flighthq.types.Dialog.OpenFileDialogOptions;
-import flighthq.types.Dialog.SaveFileDialogOptions;
+import flighthq.types.DialogBackend;
+import flighthq.types.FileDialogFilter;
+import flighthq.types.FileDialogHandle;
+import flighthq.types.MessageDialogKind;
+import flighthq.types.MessageDialogOptions;
+import flighthq.types.MessageDialogResult;
+import flighthq.types.OpenDirectoryDialogOptions;
+import flighthq.types.OpenFileDialogOptions;
+import flighthq.types.SaveFileDialogOptions;
 import flighthq.types.TauriApi;
-import flighthq.types.TauriApi.TauriDialogFilter;
-import flighthq.types.TauriApi.TauriDialogMessageOptions;
-import flighthq.types.TauriApi.TauriDialogOpenOptions;
-import flighthq.types.TauriApi.TauriDialogPlugin;
-import flighthq.types.TauriApi.TauriDialogSaveOptions;
+import flighthq.types.TauriDialogFilter;
+import flighthq.types.TauriDialogMessageOptions;
+import flighthq.types.TauriDialogOpenOptions;
+import flighthq.types.TauriDialogPlugin;
+import flighthq.types.TauriDialogSaveOptions;
 
+@:noCompletion
 class TauriDialog {
   public static function createTauriDialogBackend(tauri:TauriApi):DialogBackend {
     var dialog:TauriDialogPlugin = cast _Runtime.UNDEFINED;

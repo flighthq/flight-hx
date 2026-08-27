@@ -9,10 +9,11 @@ import flighthq.types.Bitmap;
 import flighthq.types.BitmapEdgeMode;
 import flighthq.types.Entity;
 import flighthq.types.PixelFormat;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
+@:noCompletion
 class BitmapCrop {
   public static function cropBitmap(source:Bitmap, rect:RectangleLike):Bitmap {
     var sw:Float = cast _Runtime.UNDEFINED;

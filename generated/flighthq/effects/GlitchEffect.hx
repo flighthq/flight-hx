@@ -9,6 +9,7 @@ import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
+@:noCompletion
 class GlitchEffect {
   public static function createGlitchEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; @:optional var seed:Null<Float>; }):flighthq.types.GlitchEffect {
     if (options == null) options = cast ({  } : Dynamic);

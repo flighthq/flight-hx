@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effects.RenderEffectPadding.getGaussianRenderEffectPadding;
 import flighthq.effects.RenderEffectPadding.registerRenderEffectPaddingResolver;
-import flighthq.types.EffectSourceMode.InnerEffectSourceMode;
+import flighthq.types.InnerEffectSourceMode;
 import flighthq.types.InnerGlowEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
+@:noCompletion
 class InnerGlowEffect {
   public static function createInnerGlowEffect(?options:{ @:optional var alpha:Null<Float>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var color:Null<Float>; @:optional var quality:Null<Float>; @:optional var sourceMode:Null<InnerEffectSourceMode>; @:optional var strength:Null<Float>; }):flighthq.types.InnerGlowEffect {
     if (options == null) options = cast ({  } : Dynamic);

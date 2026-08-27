@@ -5,19 +5,21 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dDom.DomClipContours.buildDomContourClipPath;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
+import flighthq.types.DomClipContourEntry;
+import flighthq.types.DomClipEntry;
+import flighthq.types.DomClipHooks;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomClipContourEntry;
-import flighthq.types.DomRenderState.DomClipEntry;
-import flighthq.types.DomRenderState.DomClipHooks;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomRenderStateRuntime;
 import flighthq.types.DomScene2DRectangle;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.MatrixLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderProxy2D;
 
+@:noCompletion
 class DomClipRectangle {
-  @:noCompletion
-  public static function applyDomClipRectangles(state:DomRenderState, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyDomClipRectangles(state:DomRenderState, data:RenderProxy2D, entries:Array<DomClipEntry>):Void {
     var element:Null<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
     var contour:Null<DomClipContourEntry> = cast _Runtime.UNDEFINED;
     var rect:Null<DomScene2DRectangle> = cast _Runtime.UNDEFINED;
@@ -61,8 +63,9 @@ class DomClipRectangle {
     ((cast (cast (cast element : flighthq._internal.dom.HTMLElement).style : flighthq._internal._Intersection2<flighthq._internal.dom.CSSStyleDeclaration, { var webkitClipPath:String; }>) : { var webkitClipPath:String; }).webkitClipPath = clipPath);
   }
 
-  @:noCompletion
-  public static function createDomScene2DRectangle(rect:RectangleLike, transform:MatrixLike):DomScene2DRectangle {
+  @:allow(flighthq)
+  @:keep
+  private static function createDomScene2DRectangle(rect:RectangleLike, transform:MatrixLike):DomScene2DRectangle {
     var x0:Float = cast _Runtime.UNDEFINED;
     var y0:Float = cast _Runtime.UNDEFINED;
     var x1:Float = cast _Runtime.UNDEFINED;
@@ -83,13 +86,15 @@ class DomClipRectangle {
     return cast null;
   }
 
-  @:noCompletion
-  public static function pushDomClipRectangle(stack:Array<DomClipEntry>, rect:RectangleLike, transform:MatrixLike):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function pushDomClipRectangle(stack:Array<DomClipEntry>, rect:RectangleLike, transform:MatrixLike):Void {
     _Runtime.callProperty(stack, 'push', cast ([(cast createDomScene2DRectangle(({ final __callArgument14:Dynamic = rect; __callArgument14; }), ({ final __callArgument15:Dynamic = transform; __callArgument15; })) : DomScene2DRectangle)] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function setDomClipHooks(state:DomRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setDomClipHooks(state:DomRenderState):Void {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getDomRenderStateRuntime(({ final __callArgument18:Dynamic = state; __callArgument18; })) : DomRenderStateRuntime);
     if ((cast _Runtime.strictEquals(runtime.domClipHooks, null) : Bool)) { (runtime.domClipHooks = cast (DomClipRectangle.domClipHooksImpl__domClipRectangle : Null<DomClipHooks>)); }

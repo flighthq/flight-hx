@@ -8,21 +8,24 @@ import flighthq.scene3dGl.GlMeshFragmentTail.GL_MESH_FRAGMENT_TAIL;
 import flighthq.scene3dGl.GlMeshFragmentTail.GL_MESH_FRAGMENT_TAIL_UNIFORMS;
 import flighthq.scene3dGl.GlMeshProgram.GL_SKIN_VERTEX_DECLARATIONS_GLSL;
 import flighthq.scene3dGl.GlMeshProgram.GL_UV_TRANSFORM_VERTEX_GLSL;
+import flighthq.types.GlColorAdjustmentMaterialFeature;
+import flighthq.types.GlPbrDefineKey;
 import flighthq.types.GlPbrExtensionShaderContribution;
-import flighthq.types.GlPbrProgram.GlPbrDefineKey;
-import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
+@:noCompletion
 class GlPbrPrelude {
-  @:noCompletion
-  public static function buildGlPbrDefineKey(key:GlPbrDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildGlPbrDefineKey(key:GlPbrDefineKey):String {
     return cast ((((((((('' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + '' + Std.string(((cast _Runtime.field(key, 'hasBaseColorMap') : Bool) ? (cast 'b' : Dynamic) : (cast '-' : Dynamic))) + '') + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'n' : Dynamic) : (cast '-' : Dynamic))) + '') + '' + Std.string(((cast _Runtime.field(key, 'hasMetallicRoughnessMap') : Bool) ? (cast 'r' : Dynamic) : (cast '-' : Dynamic))) + '') + '' + Std.string(((cast _Runtime.field(key, 'hasOcclusionMap') : Bool) ? (cast 'o' : Dynamic) : (cast '-' : Dynamic))) + '') + '' + Std.string(((cast _Runtime.field(key, 'hasEmissiveMap') : Bool) ? (cast 'e' : Dynamic) : (cast '-' : Dynamic))) + '') + '' + Std.string(((cast _Runtime.field(key, 'hasAlphaMap') : Bool) ? (cast 'a' : Dynamic) : (cast '-' : Dynamic))) + '') + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '') + ':' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '') + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasColorMatrix'), function():Dynamic return cast 'x', function():Dynamic return cast _Runtime.select(_Runtime.field(key, 'hasColorAdjustment'), function():Dynamic return cast 'c', function():Dynamic return cast ''))) + '');
     return cast null;
   }
 
-  @:noCompletion
-  public static function buildGlPbrDefineSource(key:GlPbrDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildGlPbrDefineSource(key:GlPbrDefineKey):String {
     var defines:String = cast _Runtime.UNDEFINED;
     defines = '#version 300 es\n#define MAX_FORWARD_LIGHTS ' + Std.string(MAX_FORWARD_LIGHTS) + '\n';
     if ((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool)) { (defines = cast ((defines + '#define ALPHA_MASK\n') : Dynamic)); }
@@ -39,14 +42,16 @@ class GlPbrPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlPbrFragmentSource():String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlPbrFragmentSource():String {
     return cast GlPbrPrelude.PBR_FRAGMENT_BODY__glPbrPrelude;
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlPbrFragmentSourceForKey(key:GlPbrDefineKey, ?contributions:Array<GlPbrExtensionShaderContribution>, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlPbrFragmentSourceForKey(key:GlPbrDefineKey, ?contributions:Array<GlPbrExtensionShaderContribution>, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):String {
     if (contributions == null) contributions = cast (cast ([] : Array<Dynamic>) : Dynamic);
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var body:String = cast _Runtime.UNDEFINED;
@@ -63,14 +68,16 @@ class GlPbrPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlPbrVertexSource():String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlPbrVertexSource():String {
     return cast GlPbrPrelude.PBR_VERTEX_BODY__glPbrPrelude;
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlPbrVertexSourceForKey(key:GlPbrDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlPbrVertexSourceForKey(key:GlPbrDefineKey):String {
     return cast (((cast buildGlPbrDefineSource(({ final __callArgument4:Dynamic = key; __callArgument4; })) : String) + _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '')) + GlPbrPrelude.PBR_VERTEX_BODY__glPbrPrelude);
     return cast null;
   }

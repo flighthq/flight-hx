@@ -7,12 +7,13 @@ import flighthq.geometry.Rectangle.intersectsRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DTraits;
+import flighthq.types.NodeRuntime;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 
+@:noCompletion
 class SpatialQuery {
   public static function hitTestAreaQuery(root:Node2D, rect:Rectangle, ?out:Array<Node2D>):Array<Node2D> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);

@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.math.Clamp.clamp;
 import flighthq.types.CameraShake;
-import flighthq.types.CameraShake.CameraShakeOffset;
-import flighthq.types.CameraShake.CameraShakeOptions;
+import flighthq.types.CameraShakeOffset;
+import flighthq.types.CameraShakeOptions;
 import flighthq.types.Entity;
 
+@:noCompletion
 class CameraShake {
   public static function addCameraShakeTrauma(shake:flighthq.types.CameraShake, amount:Float):Void {
     ((cast shake : flighthq.types.CameraShake).trauma = (cast clamp((cast ((cast shake : flighthq.types.CameraShake).trauma + amount) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float));

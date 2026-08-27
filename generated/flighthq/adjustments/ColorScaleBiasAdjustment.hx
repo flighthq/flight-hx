@@ -3,9 +3,10 @@ package flighthq.adjustments;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ColorScaleBias.ColorScaleBiasLike;
 import flighthq.types.ColorScaleBiasAdjustment;
+import flighthq.types.ColorScaleBiasLike;
 
+@:noCompletion
 class ColorScaleBiasAdjustment {
   public static function createColorScaleBiasAdjustment(colorScaleBias:ColorScaleBiasLike):flighthq.types.ColorScaleBiasAdjustment {
     var value:{ var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; } = cast _Runtime.UNDEFINED;

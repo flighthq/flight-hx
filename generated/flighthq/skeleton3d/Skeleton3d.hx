@@ -20,19 +20,19 @@ import flighthq.skeleton3d.SkinMeshGeometry as Facade_Skeleton3d_flighthq_skelet
 import flighthq.skeleton3d.SkinVertices as Facade_Skeleton3d_flighthq_skeleton3d_SkinVertices;
 import flighthq.skeleton3d.UpdateMeshDeformation as Facade_Skeleton3d_flighthq_skeleton3d_UpdateMeshDeformation;
 import flighthq.skeleton3d.UpdateMeshSkin as Facade_Skeleton3d_flighthq_skeleton3d_UpdateMeshSkin;
-import flighthq.types.Aabb.AabbLike;
+import flighthq.types.AabbLike;
 import flighthq.types.Entity;
 import flighthq.types.Matrix3;
-import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Matrix3Like;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshSkinBindPose;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeOf;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DTraits;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeOf;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skeleton3DValidationDiagnostic;
 
@@ -235,8 +235,9 @@ class Skeleton3d {
     }
   }
 
-  @:noCompletion
-  public static function setSkeleton3DBindPoseGuard(guard:Null<Skeleton3D->Float->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setSkeleton3DBindPoseGuard(guard:Null<Skeleton3D->Float->Void>):Void {
     (Skeleton3d.skeleton3DBindPoseGuard__skeleton3d = cast (guard : Dynamic));
   }
 

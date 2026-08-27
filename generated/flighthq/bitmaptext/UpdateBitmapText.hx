@@ -13,19 +13,19 @@ import flighthq.texture.Texture.setTextureSource;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlas.TextureAtlasRegion.addTextureAtlasRegion;
 import flighthq.types.BitmapText;
-import flighthq.types.BitmapText.BitmapTextAlign;
-import flighthq.types.BitmapText.BitmapTextData;
-import flighthq.types.BitmapText.BitmapTextPage;
-import flighthq.types.BitmapText.BitmapTextRuntime;
+import flighthq.types.BitmapTextAlign;
+import flighthq.types.BitmapTextData;
+import flighthq.types.BitmapTextPage;
+import flighthq.types.BitmapTextRuntime;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphMetrics;
 import flighthq.types.GlyphSource;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
 
 typedef BitmapTextGlyph__updateBitmapText = { var codepoint:Float; var entry:GlyphEntry; var penWithinWord:Float; };
@@ -38,6 +38,7 @@ typedef BitmapTextToken__updateBitmapText = { var gap:Float; var word:BitmapText
 
 typedef BitmapTextWord__updateBitmapText = { var glyphs:Array<BitmapTextGlyph__updateBitmapText>; var width:Float; };
 
+@:noCompletion
 class UpdateBitmapText {
   public static final BITMAP_TEXT_TRANSFORM_STRIDE__updateBitmapText:Float = 2.0;
 

@@ -14,37 +14,41 @@ import flighthq.physics3d.SymmetricTensor.TENSOR_YZ;
 import flighthq.physics3d.SymmetricTensor.TENSOR_ZZ;
 import flighthq.physics3d.SymmetricTensor.applySymmetricTensor;
 import flighthq.physics3d.World.writeRigidBody3DWorldCenter;
-import flighthq.types.Collision.CollisionColliderShape3D;
-import flighthq.types.Collision.CollisionContactManifold3D;
-import flighthq.types.Collision.CollisionContactPoint3D;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.Physics3DContact;
-import flighthq.types.Physics3D.Physics3DContactConstraint;
-import flighthq.types.Physics3D.Physics3DContactConstraintPoint;
-import flighthq.types.Physics3D.Physics3DContactPoint;
-import flighthq.types.Physics3D.Physics3DSequentialImpulseConfig;
-import flighthq.types.Physics3D.Physics3DSequentialImpulseState;
-import flighthq.types.Physics3D.Physics3DSolverConfig;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.CollisionColliderShape3D;
+import flighthq.types.CollisionContactManifold3D;
+import flighthq.types.CollisionContactPoint3D;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.Physics3DContact;
+import flighthq.types.Physics3DContactConstraint;
+import flighthq.types.Physics3DContactConstraintPoint;
+import flighthq.types.Physics3DContactPoint;
+import flighthq.types.Physics3DSequentialImpulseConfig;
+import flighthq.types.Physics3DSequentialImpulseState;
+import flighthq.types.Physics3DSolverConfig;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
 
 typedef Physics3DPositionScratch__solver = { var manifold:CollisionContactManifold3D; var centerA:Array<Float>; var centerB:Array<Float>; };
 
+@:noCompletion
 class Solver {
-  @:noCompletion
-  public static function createPhysics3DContactConstraint():Physics3DContactConstraint {
+  @:allow(flighthq)
+  @:keep
+  private static function createPhysics3DContactConstraint():Physics3DContactConstraint {
     return cast { contact: -1.0, pointCount: 0.0, points: cast ([] : Array<Dynamic>), tangent0X: 0.0, tangent0Y: 0.0, tangent0Z: 0.0, tangent1X: 0.0, tangent1Y: 0.0, tangent1Z: 0.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createPhysics3DContactConstraintPoint():Physics3DContactConstraintPoint {
+  @:allow(flighthq)
+  @:keep
+  private static function createPhysics3DContactConstraintPoint():Physics3DContactConstraintPoint {
     return cast { bias: 0.0, featureId: 0.0, normalImpulse: 0.0, normalMass: 0.0, tangentImpulse0: 0.0, tangentImpulse1: 0.0, tangentMass0: 0.0, tangentMass1: 0.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function preparePhysics3DContactConstraints(world:Physics3DWorld):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function preparePhysics3DContactConstraints(world:Physics3DWorld):Void {
     var state:Physics3DSequentialImpulseState = cast _Runtime.UNDEFINED;
     var previousByContact:flighthq._internal._Map<Physics3DContact, Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
     var constraints:Array<Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
@@ -140,8 +144,9 @@ class Solver {
     }));
   }
 
-  @:noCompletion
-  public static function solvePhysics3DContactPositions(world:Physics3DWorld):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function solvePhysics3DContactPositions(world:Physics3DWorld):Float {
     var scratch:Physics3DPositionScratch__solver = cast _Runtime.UNDEFINED;
     scratch = (cast Solver.acquirePhysics3DPositionScratch__solver() : Physics3DPositionScratch__solver);
     try {
@@ -214,8 +219,9 @@ class Solver {
     return cast null;
   }
 
-  @:noCompletion
-  public static function solvePhysics3DContactVelocities(world:Physics3DWorld):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function solvePhysics3DContactVelocities(world:Physics3DWorld):Void {
     var constraints:Array<Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
     constraints = (cast world.solver : Physics3DSequentialImpulseState).constraints;
     {
@@ -260,8 +266,9 @@ class Solver {
     }
   }
 
-  @:noCompletion
-  public static function warmStartPhysics3DContacts(world:Physics3DWorld):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function warmStartPhysics3DContacts(world:Physics3DWorld):Void {
     var constraints:Array<Physics3DContactConstraint> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast (cast world.config : Physics3DSolverConfig).sequentialImpulse : { var warmStarting:Bool; }).warmStarting : Bool) : Bool)) { return; }
     constraints = (cast world.solver : Physics3DSequentialImpulseState).constraints;

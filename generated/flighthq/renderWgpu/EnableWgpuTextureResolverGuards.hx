@@ -7,14 +7,16 @@ import flighthq.log.Log.logOnce;
 import flighthq.render.RenderRegistryGuards.areRenderRegistryGuardsEnabled;
 import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.RenderState;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 
+@:noCompletion
 class EnableWgpuTextureResolverGuards {
-  @:noCompletion
-  public static function areWgpuTextureResolverGuardsEnabled(state:WgpuRenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areWgpuTextureResolverGuardsEnabled(state:WgpuRenderState):Bool {
     return cast (cast areRenderRegistryGuardsEnabled(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Bool);
     return cast null;
   }

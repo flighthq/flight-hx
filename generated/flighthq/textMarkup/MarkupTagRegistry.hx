@@ -10,9 +10,10 @@ import flighthq.types.MarkupColorResolver;
 import flighthq.types.MarkupTagHandler;
 import flighthq.types.MarkupTagRegistry;
 import flighthq.types.TextFormat;
-import flighthq.types.TextFormat.TextFormatAlign;
-import flighthq.types.TextFormat.TextFormatListMarker;
+import flighthq.types.TextFormatAlign;
+import flighthq.types.TextFormatListMarker;
 
+@:noCompletion
 class MarkupTagRegistry {
   public static function createMarkupTagRegistry():flighthq.types.MarkupTagRegistry {
     return cast { handlers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };

@@ -8,15 +8,15 @@ import flighthq.textureatlas.TextureAtlas as Facade_Textureatlas_flighthq_textur
 import flighthq.textureatlas.TextureAtlasFrom as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasFrom;
 import flighthq.textureatlas.TextureAtlasGrid as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasGrid;
 import flighthq.textureatlas.TextureAtlasRegion as Facade_Textureatlas_flighthq_textureatlas_TextureAtlasRegion;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.GridSliceOptions;
 import flighthq.types.Image;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.RectangleLike;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 import flighthq.types.TextureAtlasRegionTextureExplanation;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
 class Textureatlas {
   public static function addTextureAtlasRegion(target:TextureAtlas, x:Float, y:Float, width:Float, height:Float, ?pivotX:Float, ?pivotY:Float, ?name:String):Void {

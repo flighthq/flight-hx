@@ -3,10 +3,11 @@ package flighthq.hostWeb;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Webcam.WebcamBackend;
+import flighthq.types.WebcamBackend;
 import flighthq.webcam.Webcam.createWebWebcamBackend;
 import flighthq.webcam.Webcam.installWebcamHostBackend;
 
+@:noCompletion
 class WebWebcam {
   public static function enableHostWebWebcam():Void {
     if ((cast WebWebcam._enabled__webWebcam : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebWebcam {
     installWebcamHostBackend((cast createWebWebcamBackend() : WebcamBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebWebcamForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebWebcamForTest():Void {
     (WebWebcam._enabled__webWebcam = cast (false : Dynamic));
   }
 

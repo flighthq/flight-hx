@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BrightnessContrastAdjustment;
 
+@:noCompletion
 class BrightnessContrastAdjustment {
   public static function createBrightnessContrastAdjustment(?options:{ @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; }):flighthq.types.BrightnessContrastAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

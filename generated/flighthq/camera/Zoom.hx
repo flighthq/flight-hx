@@ -7,8 +7,9 @@ import flighthq.camera.Projection2d.unprojectCamera2DPoint;
 import flighthq.geometry.Vector2.createVector2;
 import flighthq.types.Camera2D;
 import flighthq.types.Vector2;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
+@:noCompletion
 class Zoom {
   public static function zoomCamera2DAtScreenPoint(camera:Camera2D, screenX:Float, screenY:Float, zoom:Float):Void {
     unprojectCamera2DPoint(({ final __callArgument0:Dynamic = camera; __callArgument0; }), (cast screenX : Float), (cast screenY : Float), ({ final __callArgument1:Dynamic = Zoom.scratchBefore__zoom; __callArgument1; }));

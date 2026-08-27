@@ -4,12 +4,12 @@ package flighthq.webcam;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Webcam.WebcamBackend;
-import flighthq.types.Webcam.WebcamCaptureOptions;
-import flighthq.types.Webcam.WebcamPhoto;
-import flighthq.types.Webcam.WebcamVideo;
+import flighthq.types.WebcamBackend;
+import flighthq.types.WebcamCaptureOptions;
 import flighthq.types.WebcamFacingMode;
+import flighthq.types.WebcamPhoto;
 import flighthq.types.WebcamStream;
+import flighthq.types.WebcamVideo;
 import flighthq.webcam.WebcamStream as Facade_Webcam_flighthq_webcam_WebcamStream;
 
 class Webcam {
@@ -40,8 +40,9 @@ class Webcam {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebWebcamBackend():WebcamBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebWebcamBackend():WebcamBackend {
     return cast { capture: function(options:WebcamCaptureOptions):flighthq._internal._Promise<Null<WebcamPhoto>> {
       return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused0:flighthq._internal._Any):Void {
         if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) {
@@ -180,14 +181,16 @@ class Webcam {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWebcamBackend():WebcamBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getWebcamBackend():WebcamBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Webcam._custom__webcam, function():Dynamic return cast Webcam._host__webcam), function():Dynamic return cast Webcam._sentinel__webcam);
     return cast null;
   }
 
-  @:noCompletion
-  public static function installWebcamHostBackend(backend:WebcamBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installWebcamHostBackend(backend:WebcamBackend):Void {
     if ((cast !_Runtime.strictEquals(Webcam._host__webcam, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Webcam._host__webcam, backend) : Bool)) { (Webcam._hostConflict__webcam = cast (true : Dynamic)); }
       return;
@@ -195,8 +198,9 @@ class Webcam {
     (Webcam._host__webcam = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observeWebcamHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeWebcamHostResult(operation:String, succeeded:Bool):Void {
     (Webcam._hostObservation__webcam = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -210,8 +214,9 @@ class Webcam {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetWebcamBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetWebcamBackendForTest():Void {
     (Webcam._custom__webcam = cast (null : Dynamic));
     (Webcam._host__webcam = cast (null : Dynamic));
     (Webcam._hostConflict__webcam = cast (false : Dynamic));
@@ -223,8 +228,9 @@ class Webcam {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setWebcamBackend(backend:Null<WebcamBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setWebcamBackend(backend:Null<WebcamBackend>):Void {
     (Webcam._custom__webcam = cast (backend : Dynamic));
   }
 

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
 
 typedef WgpuRenderOptions = { @:optional var antialias:Bool; @:optional var backgroundColor:Float; @:optional var format:flighthq._internal.dom.GPUTextureFormat; @:optional var imageSmoothingEnabled:Bool; @:optional var pixelRatio:Float; @:optional var powerPreference:flighthq._internal.dom.GPUPowerPreference; @:optional var roundPixels:Bool; @:optional var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; };

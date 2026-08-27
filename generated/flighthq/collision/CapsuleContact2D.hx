@@ -7,14 +7,15 @@ import flighthq.collision.ContactFeatureId.packContactFeatureId;
 import flighthq.collision.ContactManifold2D.clearCollisionContactManifold2D;
 import flighthq.collision.ConvexVertices2D.writeAabbVertices;
 import flighthq.collision.ConvexVertices2D.writeObbVertices;
-import flighthq.types.Collision.CollisionAabb2D;
-import flighthq.types.Collision.CollisionCapsule2D;
-import flighthq.types.Collision.CollisionCircle2D;
-import flighthq.types.Collision.CollisionContactManifold2D;
-import flighthq.types.Collision.CollisionContactPoint2D;
-import flighthq.types.Collision.CollisionObb2D;
-import flighthq.types.Collision.CollisionPolygon2D;
+import flighthq.types.CollisionAabb2D;
+import flighthq.types.CollisionCapsule2D;
+import flighthq.types.CollisionCircle2D;
+import flighthq.types.CollisionContactManifold2D;
+import flighthq.types.CollisionContactPoint2D;
+import flighthq.types.CollisionObb2D;
+import flighthq.types.CollisionPolygon2D;
 
+@:noCompletion
 class CapsuleContact2D {
   public static function collideCapsuleAabbContactManifold2D(a:CollisionCapsule2D, b:CollisionAabb2D, out:CollisionContactManifold2D):Bool {
     writeAabbVertices(({ final __callArgument0:Dynamic = b; __callArgument0; }), (cast CapsuleContact2D.capsuleScratch__capsuleContact2D : { var axis:Array<Float>; var closest:Array<Float>; var span:Array<Float>; var spanDepth:Array<Float>; var vertices:flighthq._internal._Float64Array; }).vertices);

@@ -10,14 +10,16 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.DirectionalBlurEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuDirectionalBlurEffect {
-  @:noCompletion
-  public static function applyDirectionalBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DirectionalBlurEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyDirectionalBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DirectionalBlurEffect):Void {
     var angle:Float = cast _Runtime.UNDEFINED;
     var length:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;

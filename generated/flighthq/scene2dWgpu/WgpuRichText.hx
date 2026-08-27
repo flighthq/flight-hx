@@ -31,26 +31,27 @@ import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.RichTextContent;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextInputState;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextVerticalAlign;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRichTextOverlay;
+import flighthq.types.WgpuTextureEntry;
 
 typedef WgpuRichTextData__wgpuRichText = { var entry:Null<WgpuTextureEntry>; var w:Float; var h:Float; };
 
+@:noCompletion
 class WgpuRichText {
   public static var _offscreenCanvas__wgpuRichText:Null<flighthq._internal.dom.HTMLCanvasElement> = _Runtime.explicitNull();
 
@@ -58,29 +59,33 @@ class WgpuRichText {
 
   public static var _webgpuTextInputOverlay__wgpuRichText:Null<WgpuRichTextOverlay> = _Runtime.explicitNull();
 
-  @:noCompletion
-  public static function createWgpuRichTextData(_state:RenderState, _source:Renderable):RendererData {
+  @:allow(flighthq)
+  @:keep
+  private static function createWgpuRichTextData(_state:RenderState, _source:Renderable):RendererData {
     return cast (cast createWgpuRendererData((cast { entry: null, h: 0.0, w: 0.0 } : Dynamic)) : RendererData);
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyWgpuRichTextData(_state:RenderState, data:RendererData):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuRichTextData(_state:RenderState, data:RendererData):Void {
     var richData:Null<WgpuRichTextData__wgpuRichText> = cast _Runtime.UNDEFINED;
     richData = (cast getWgpuRendererData(({ final __callArgument0:Dynamic = data; __callArgument0; })) : Null<WgpuRichTextData__wgpuRichText>);
     if ((cast _Runtime.strictEquals(richData, null) : Bool)) { return; }
     ({ final __hostTypeCall5 = ({ final __structural4 = (cast richData : WgpuRichTextData__wgpuRichText).entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var texture:flighthq._internal.dom.GPUTexture; }).texture; }); __hostTypeCall5 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall5 : flighthq._internal.dom.GPUTexture).destroy(); });
   }
 
-  @:noCompletion
-  public static function drawWgpuRichText(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuRichText(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var overlay:Null<WgpuRichTextOverlay> = cast _Runtime.UNDEFINED;
     overlay = ((cast ((cast !_Runtime.strictEquals(WgpuRichText._webgpuTextInputOverlay__wgpuRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool) ? (cast WgpuRichText._webgpuTextInputOverlay__wgpuRichText : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     drawWgpuRichTextWithOverlay(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = renderProxy; __callArgument7; }), ({ final __callArgument8:Dynamic = overlay; __callArgument8; }));
   }
 
-  @:noCompletion
-  public static function drawWgpuRichTextWithOverlay(state:WgpuRenderState, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuRichTextWithOverlay(state:WgpuRenderState, renderProxy:RenderProxy2D, ?overlay:WgpuRichTextOverlay):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:RichText = cast _Runtime.UNDEFINED;
     var data:RichTextData = cast _Runtime.UNDEFINED;
@@ -151,8 +156,9 @@ class WgpuRichText {
     drawWgpuQuad(({ final __callArgument60:Dynamic = state; __callArgument60; }), ({ final __callArgument61:Dynamic = renderProxy; __callArgument61; }), ({ final __callArgument62:Dynamic = entry; __callArgument62; }), (cast offsetX : Float), (cast 0.0 : Float), (cast (offsetX + fieldW) : Float), (cast fieldH : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
-  @:noCompletion
-  public static function registerWgpuTextInputOverlay(overlay:WgpuRichTextOverlay):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerWgpuTextInputOverlay(overlay:WgpuRichTextOverlay):Void {
     (WgpuRichText._webgpuTextInputOverlay__wgpuRichText = cast (overlay : Dynamic));
   }
 

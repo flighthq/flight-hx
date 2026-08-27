@@ -8,7 +8,7 @@ import flighthq.types.AttractorForce;
 import flighthq.types.DragForce;
 import flighthq.types.ForceFalloff;
 import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
+import flighthq.types.ParticleEmitterData;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 import flighthq.types.ParticleObject;
@@ -17,6 +17,7 @@ import flighthq.types.TurbulenceForce;
 import flighthq.types.VortexForce;
 import flighthq.types.WindForce;
 
+@:noCompletion
 class ApplyParticleForces {
   public static final accel__applyParticleForces:Array<Float> = (cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
 

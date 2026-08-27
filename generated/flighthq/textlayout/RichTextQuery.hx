@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.textlayout.TextLayout.TEXT_LAYOUT_GUTTER;
 import flighthq.types.Rectangle;
 import flighthq.types.TextFormat;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextLineMetrics;
 import flighthq.types.TextSelectionRectangle;
 
+@:noCompletion
 class RichTextQuery {
   public static function computeRichTextCharIndexAtPoint(layout:TextLayoutResult, x:Float, y:Float):Float {
     var closestLineIndex:Float = cast _Runtime.UNDEFINED;

@@ -3,8 +3,9 @@ package flighthq.materials;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.StandardPbrMaterialProperties;
 
+@:noCompletion
 class MaterialValidation {
   public static function clampStandardPbrMaterialProperties(out:StandardPbrMaterialProperties):StandardPbrMaterialProperties {
     (out.metallic = cast (HxMath.min(1.0, HxMath.max(0.0, out.metallic)) : Float));

@@ -4,12 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef AudioChannelState = String;
-
-typedef AudioChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:flighthq.types.AudioResource; var state:AudioChannelState; var onComplete:Signal<Void->Void>; };
-
-typedef AudioPlayOptions = { @:optional var currentTime:Float; @:optional var gain:Float; @:optional var loops:Float; @:optional var playbackRate:Float; };
-
 typedef AudioResource = { var buffer:Null<flighthq._internal.dom.AudioBuffer>; };
-
-typedef AudioResourceUrl = { var url:String; @:optional var type:String; };

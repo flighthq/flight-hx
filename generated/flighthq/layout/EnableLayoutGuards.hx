@@ -3,9 +3,10 @@ package flighthq.layout;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Layout.LayoutResolutionGuard;
-import flighthq.types.Layout.LayoutState;
+import flighthq.types.LayoutResolutionGuard;
+import flighthq.types.LayoutState;
 
+@:noCompletion
 class EnableLayoutGuards {
   public static function enableLayoutGuards(state:LayoutState, warningSink:LayoutResolutionGuard):Void {
     (state.guard = cast (warningSink : Null<LayoutResolutionGuard>));

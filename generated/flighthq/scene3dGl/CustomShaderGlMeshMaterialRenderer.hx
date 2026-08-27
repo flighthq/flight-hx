@@ -19,29 +19,31 @@ import flighthq.types.CustomShaderMaterial;
 import flighthq.types.GlCustomMaterialShaderSource;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlMeshProgram;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlScene3DRuntime;
+import flighthq.types.KeyedTable;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.Types.CustomShaderMaterialKind;
 import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 typedef GlCustomShaderProgram__customShaderGlMeshMaterialRenderer = { >GlMeshProgram, var locCameraPosition:Null<flighthq._internal.dom.WebGLUniformLocation>; };
 
+@:noCompletion
 class CustomShaderGlMeshMaterialRenderer {
-  @:noCompletion
-  public static final customShaderGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final customShaderGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var custom:Null<CustomShaderMaterial> = cast _Runtime.UNDEFINED;
     var source:Null<GlCustomMaterialShaderSource> = cast _Runtime.UNDEFINED;
     var program:GlCustomShaderProgram__customShaderGlMeshMaterialRenderer = cast _Runtime.UNDEFINED;
@@ -69,8 +71,9 @@ class CustomShaderGlMeshMaterialRenderer {
     drawGlMeshSubset(({ final __callArgument35:Dynamic = state; __callArgument35; }), ({ final __callArgument36:Dynamic = program; __callArgument36; }), ({ final __callArgument37:Dynamic = proxy; __callArgument37; }), ({ final __callArgument38:Dynamic = geometry; __callArgument38; }));
   } });
 
-  @:noCompletion
-  public static function getGlCustomMaterialShaderSource(state:GlRenderState, shaderKey:String):Null<GlCustomMaterialShaderSource> {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlCustomMaterialShaderSource(state:GlRenderState, shaderKey:String):Null<GlCustomMaterialShaderSource> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlCustomMaterialShaderSource; }>> = cast _Runtime.UNDEFINED;
     entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument45:Dynamic = state; __callArgument45; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var customMaterialShaders:KeyedTable<GlCustomMaterialShaderSource>; }).customMaterialShaders : KeyedTable<GlCustomMaterialShaderSource>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlCustomMaterialShaderSource>>).get(shaderKey));
     return cast ((cast _Runtime.strictEquals(({ final __structural47 = entry; __structural47 == null ? _Runtime.UNDEFINED : (cast __structural47 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlCustomMaterialShaderSource; }).value : Dynamic) : (cast null : Dynamic));

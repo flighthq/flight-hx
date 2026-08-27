@@ -4,11 +4,13 @@ package flighthq.fontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SfntTableDirectory;
-import flighthq.types.SfntTableDirectory.SfntTableRange;
+import flighthq.types.SfntTableRange;
 
+@:noCompletion
 class OpenTypeCmap {
-  @:noCompletion
-  public static function findOpenTypeUnicodeSubtable(view:Dynamic, cmapOffset:Float, cmapLength:Float, byteLength:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function findOpenTypeUnicodeSubtable(view:Dynamic, cmapOffset:Float, cmapLength:Float, byteLength:Float):Float {
     var recordCount:Float = cast _Runtime.UNDEFINED;
     var best:Float = cast _Runtime.UNDEFINED;
     var bestRank:Float = cast _Runtime.UNDEFINED;
@@ -41,8 +43,9 @@ class OpenTypeCmap {
     return cast null;
   }
 
-  @:noCompletion
-  public static function rankOpenTypeUnicodeEncoding(platform:Float, encoding:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function rankOpenTypeUnicodeEncoding(platform:Float, encoding:Float):Float {
     if ((cast ((cast _Runtime.strictEquals(platform, 3.0) : Bool) && (cast _Runtime.strictEquals(encoding, 10.0) : Bool)) : Bool)) { return cast 2.0; }
     if ((cast ((cast _Runtime.strictEquals(platform, 0.0) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(encoding, 4.0), function():Dynamic return cast _Runtime.strictEquals(encoding, 6.0)) : Bool)) : Bool)) { return cast 2.0; }
     if ((cast ((cast _Runtime.strictEquals(platform, 3.0) : Bool) && (cast _Runtime.strictEquals(encoding, 1.0) : Bool)) : Bool)) { return cast 1.0; }
@@ -51,8 +54,9 @@ class OpenTypeCmap {
     return cast null;
   }
 
-  @:noCompletion
-  public static function readOpenTypeCodepointMap(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Null<flighthq._internal._Map<Float, Float>> {
+  @:allow(flighthq)
+  @:keep
+  private static function readOpenTypeCodepointMap(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory):Null<flighthq._internal._Map<Float, Float>> {
     var cmap:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var subtableOffset:Float = cast _Runtime.UNDEFINED;

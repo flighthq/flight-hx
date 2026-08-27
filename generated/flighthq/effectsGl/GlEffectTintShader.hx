@@ -12,6 +12,7 @@ import flighthq.types.GlRenderTarget;
 
 typedef TintShaderLocations__glEffectTintShader = { >GlFullscreenProgram, var locColor:flighthq._internal.dom.WebGLUniformLocation; var locAlpha:flighthq._internal.dom.WebGLUniformLocation; var locStrength:flighthq._internal.dom.WebGLUniformLocation; };
 
+@:noCompletion
 class GlEffectTintShader {
   public static final TINT_FRAGMENT_SRC__glEffectTintShader:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec3 u_color;\nuniform float u_alpha;\nuniform float u_strength;\nout vec4 fragColor;\nvoid main() {\n  float a = min(1.0, texture(u_texture, v_texCoord).a * u_alpha * u_strength);\n  fragColor = vec4(u_color * a, a);\n}';
 
@@ -21,8 +22,9 @@ class GlEffectTintShader {
 
   public static final invertTintShaders__glEffectTintShader:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, TintShaderLocations__glEffectTintShader> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGlEffectInvertTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var loc:TintShaderLocations__glEffectTintShader = cast _Runtime.UNDEFINED;
     loc = (cast GlEffectTintShader.getGlInvertTintShader__glEffectTintShader(({ final __callArgument0:Dynamic = state; __callArgument0; })) : TintShaderLocations__glEffectTintShader);
     drawGlFullscreenPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = loc; __callArgument3; }), ({ final __callArgument4:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument4; }), ({ final __callArgument5:Dynamic = dest; __callArgument5; }), ({ final __callArgument8:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
@@ -34,8 +36,9 @@ class GlEffectTintShader {
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument8; }));
   }
 
-  @:noCompletion
-  public static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGlEffectTintPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var loc:TintShaderLocations__glEffectTintShader = cast _Runtime.UNDEFINED;
     loc = (cast GlEffectTintShader.getGlTintShader__glEffectTintShader(({ final __callArgument16:Dynamic = state; __callArgument16; })) : TintShaderLocations__glEffectTintShader);
     drawGlFullscreenPass(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = loc; __callArgument19; }), ({ final __callArgument20:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument20; }), ({ final __callArgument21:Dynamic = dest; __callArgument21; }), ({ final __callArgument24:Dynamic = function(__unused4:flighthq._internal.dom.WebGL2RenderingContext, __unused5:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused3:GlFullscreenProgram):Void {

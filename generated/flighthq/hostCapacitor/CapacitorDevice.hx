@@ -4,19 +4,20 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorDeviceId;
-import flighthq.types.CapacitorApi.CapacitorDeviceInfo;
-import flighthq.types.CapacitorApi.CapacitorDevicePlugin;
-import flighthq.types.Device.DeviceBackend;
-import flighthq.types.Device.DeviceInfo;
-import flighthq.types.Device.SafeAreaInsets;
+import flighthq.types.CapacitorDeviceId;
+import flighthq.types.CapacitorDeviceInfo;
+import flighthq.types.CapacitorDevicePlugin;
+import flighthq.types.DeviceBackend;
 import flighthq.types.DeviceCapabilities;
 import flighthq.types.DeviceDisplayMetrics;
+import flighthq.types.DeviceInfo;
+import flighthq.types.SafeAreaInsets;
 import flighthq.types.Types.DeviceFormFactorPhone;
 import flighthq.types.Types.DeviceFormFactorUnknown;
 import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorPhone;
 import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorUnknown;
 
+@:noCompletion
 class CapacitorDevice {
   public static function createCapacitorDeviceBackend(capacitor:CapacitorApi):DeviceBackend {
     var device:CapacitorDevicePlugin = cast _Runtime.UNDEFINED;

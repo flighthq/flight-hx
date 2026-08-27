@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TimelineCue.TimelineCueRegistry;
 
 typedef Timeline = { var source:Null<TimelineSource>; var target:Null<Node2D>; var currentFrame:Float; var cueRegistry:Null<TimelineCueRegistry>; var frameScripts:Null<flighthq._internal._Map<Float, FrameScript>>; var isPlaying:Bool; var timeElapsed:Float; var lastFrameUpdate:Float; var playMode:TimelinePlayMode; var signals:Null<TimelineSignals>; };

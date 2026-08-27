@@ -4,8 +4,9 @@ package flighthq.importdiagnostics;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 
+@:noCompletion
 class ImportDiagnosticCollector {
   public static function collectImportDiagnostics(run:Array<ImportDiagnostic>->Void):Array<ImportDiagnostic> {
     var diagnostics:Array<ImportDiagnostic> = cast _Runtime.UNDEFINED;

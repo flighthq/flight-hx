@@ -3,10 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
 
 typedef SwfDocumentImport = { var appearances:Array<SwfNodeAppearance>; var document:Scene2DDocument; var jpegAlphaPayloads:Array<SwfJpegAlphaPayload>; };
-
-typedef SwfJpegAlphaPayload = { var characterId:Float; var compressedAlphaBytes:flighthq._internal._UInt8Array; var deblockingParameterRaw:Null<Float>; var height:Float; var reference:EmbeddedImageResourceReference; var width:Float; };
-
-typedef SwfNodeAppearance = { var advancedBlendMode:Null<AdvancedBlendMode>; var effects:Array<RenderEffect>; var frame:Float; var node:Node2D; };

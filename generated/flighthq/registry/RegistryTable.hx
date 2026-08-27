@@ -3,17 +3,18 @@ package flighthq.registry;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
+import flighthq.types.OrdinalTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryId;
+import flighthq.types.RegistryMissPolicy;
 import flighthq.types.RegistryTable;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.OrdinalTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryId;
-import flighthq.types.RegistryTable.RegistryMissPolicy;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.SlotTable;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class RegistryTable {
   public static function concatRegistryTable<T>(base:flighthq._internal._Union2<KeyedTable<T>, SlotTable<T>>, overlay:flighthq._internal._Union2<KeyedTable<T>, SlotTable<T>>):flighthq._internal._Union2<KeyedTable<T>, SlotTable<T>> {
     var baseKeyed:KeyedTable<T> = cast _Runtime.UNDEFINED;

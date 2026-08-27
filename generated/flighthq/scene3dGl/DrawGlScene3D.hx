@@ -22,35 +22,35 @@ import flighthq.scene3dGl.GlViewportAspect.getGlScene3DViewportAspect;
 import flighthq.types.BlendMode;
 import flighthq.types.Camera3D;
 import flighthq.types.ColorScaleBias;
+import flighthq.types.GlColorAdjustmentMaterialFeature;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
+import flighthq.types.GlScene3DDrawEntry;
 import flighthq.types.GlScene3DForwardLightList;
 import flighthq.types.GlScene3DRuntime;
-import flighthq.types.GlScene3DRuntime.GlScene3DDrawEntry;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.Matrix3;
-import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Matrix3Like;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
+import flighthq.types.MeshSubset;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
+import flighthq.types.Node3DRuntime;
 import flighthq.types.PointLight;
 import flighthq.types.RenderState;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Scene3DLightBlock;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skin;
 import flighthq.types.SpotLight;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types.SurfaceMaterial;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
@@ -58,6 +58,7 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 
 typedef DrawEntry__drawGlScene3D = { var alpha:Float; var colorMatrix:Null<Array<Float>>; var colorScaleBias:Null<ColorScaleBias>; var depth:Float; var lightBlock:Scene3DLightBlock; var material:Material; var mesh:Mesh; var renderer:GlMeshMaterialRenderer; var subset:MeshSubset; var worldMatrix:Matrix4; };
 
+@:noCompletion
 class DrawGlScene3D {
   public static function isGpuSkinnedDraw__drawGlScene3D(mesh:Mesh):Bool {
     return cast ((cast !_Runtime.looseEquals(mesh.skin, null) : Bool) && (cast (cast hasMeshGeometrySkin(mesh.geometry) : Bool) : Bool));

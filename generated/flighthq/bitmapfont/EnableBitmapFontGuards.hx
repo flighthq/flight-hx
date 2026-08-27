@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.bitmapfont.BitmapFont.setBitmapFontGuard;
 import flighthq.log.Log.logOnce;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableBitmapFontGuards {
   public static function disableBitmapFontGuards():Void {
     setBitmapFontGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SsrEffect;
 
+@:noCompletion
 class SsrEffect {
   public static function createSsrEffect(?options:{ @:optional var maxDistance:Null<Float>; @:optional var resolution:Null<Float>; @:optional var steps:Null<Float>; }):flighthq.types.SsrEffect {
     if (options == null) options = cast ({  } : Dynamic);

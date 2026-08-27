@@ -6,16 +6,18 @@ import flighthq._internal._Runtime;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.effectsGl.GlSsaoEffect.applySsaoEffectToGl;
 import flighthq.types.ContactShadowsEffect;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.SsaoEffect;
 
+@:noCompletion
 class GlContactShadowsEffect {
-  @:noCompletion
-  public static function applyContactShadowsEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ContactShadowsEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyContactShadowsEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ContactShadowsEffect):Void {
     applySsaoEffectToGl(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = { kind: 'SsaoEffect', intensity: _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 0.6), radius: _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 0.5), samples: _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0) }; __callArgument3; }));
   }
 

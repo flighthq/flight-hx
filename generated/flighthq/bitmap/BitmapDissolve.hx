@@ -7,6 +7,7 @@ import flighthq.bitmap.Bitmap.invalidateBitmap;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapDissolve {
   public static function dissolveBitmapPixels(dest:BitmapRegion, source:BitmapRegion, seed:Float, pixelCount:Float, fillColor:Float = 0.0):Float {
     var width:Float = cast _Runtime.UNDEFINED;

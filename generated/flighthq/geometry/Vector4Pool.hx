@@ -5,11 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.GeometryPoolGuards.geometryPoolReleaseGuard;
 import flighthq.geometry.Vector4.createVector4;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.Vector4;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class Vector4Pool {
   public static function acquireEmptyVector4():Vector4 {
     var v:Vector4 = cast _Runtime.UNDEFINED;

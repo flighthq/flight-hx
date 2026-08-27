@@ -4,20 +4,21 @@ package flighthq.shape;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Revision.invalidateContent;
+import flighthq.types.CapsStyle;
+import flighthq.types.GradientType;
+import flighthq.types.InterpolationMethod;
+import flighthq.types.JointStyle;
+import flighthq.types.LineScaleMode;
 import flighthq.types.Matrix;
+import flighthq.types.PathWinding;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.ShapeCommand.CapsStyle;
-import flighthq.types.ShapeCommand.GradientType;
-import flighthq.types.ShapeCommand.InterpolationMethod;
-import flighthq.types.ShapeCommand.JointStyle;
-import flighthq.types.ShapeCommand.LineScaleMode;
-import flighthq.types.ShapeCommand.PathWinding;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
-import flighthq.types.ShapeCommand.SpreadMethod;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
+import flighthq.types.SpreadMethod;
 import flighthq.types.Texture;
 import flighthq.types.TriangleCulling;
 
+@:noCompletion
 class ShapeCommands {
   public static function appendShapeArc(shape:Shape, cx:Float, cy:Float, radius:Float, startAngle:Float, endAngle:Float, anticlockwise:Bool = false):Void {
     var cmds:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;

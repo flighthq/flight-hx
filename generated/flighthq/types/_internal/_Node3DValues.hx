@@ -4,11 +4,11 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HasAppearance;
-import flighthq.types.HasAppearance.HasAppearanceRuntime;
+import flighthq.types.HasAppearanceRuntime;
 import flighthq.types.HasTransform3D;
-import flighthq.types.HasTransform3D.HasTransform3DRuntime;
+import flighthq.types.HasTransform3DRuntime;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeRuntime;
 
 class _Node3DValues {
   public static final Node3DKind:String = 'Node3D';

@@ -4,8 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ShapeTessellationStatus = String;
-
-typedef ShapeTessellationBlocker = String;
-
 typedef ShapeTessellationExplanation = { var blockedBy:ShapeTessellationBlocker; var status:ShapeTessellationStatus; };

@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.EffectSourceMode.InnerEffectSourceMode;
 
 typedef InnerGlowEffect = { var kind:String; @:optional var alpha:Float; @:optional var blurX:Float; @:optional var blurY:Float; @:optional var color:Float; @:optional var quality:Float; @:optional var sourceMode:InnerEffectSourceMode; @:optional var strength:Float; };

@@ -29,13 +29,13 @@ import flighthq.types.Adjustment;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types.BevelEffect;
 import flighthq.types.CanvasRenderEffectPipeline;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
-import flighthq.types.CanvasRenderTexture.CanvasRenderTexturePool;
+import flighthq.types.CanvasRenderTexturePool;
 import flighthq.types.CompositeOperator;
-import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPipelineOptions;
 import flighthq.types.RenderTexture;
 
 class EffectsCairo {

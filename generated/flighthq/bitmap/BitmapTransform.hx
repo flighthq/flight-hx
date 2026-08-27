@@ -6,9 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.bitmap.Bitmap.invalidateBitmap;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
-import flighthq.types.ColorScaleBias.ColorScaleBiasLike;
+import flighthq.types.ColorScaleBiasLike;
 import flighthq.types.ThresholdOperation;
 
+@:noCompletion
 class BitmapTransform {
   public static var _scrollScratch__bitmapTransform:Null<flighthq._internal._UInt8ClampedArray> = _Runtime.explicitNull();
 

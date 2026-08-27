@@ -11,12 +11,13 @@ import flighthq.scene2dCanvas.CanvasRenderTarget.endCanvasRenderPass;
 import flighthq.scene2dCanvas.CanvasRenderTarget.resizeCanvasRenderTarget;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
-import flighthq.types.CanvasRenderTexture.CanvasRenderTextureEntry;
-import flighthq.types.CanvasRenderTexture.CanvasRenderTextureExplanation;
-import flighthq.types.CanvasRenderTexture.CanvasRenderTextureStatus;
+import flighthq.types.CanvasRenderTextureEntry;
+import flighthq.types.CanvasRenderTextureExplanation;
+import flighthq.types.CanvasRenderTextureStatus;
 import flighthq.types.RenderTarget;
 import flighthq.types.RenderTexture;
 
+@:noCompletion
 class CanvasRenderTexture {
   public static function bindCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Null<flighthq._internal.dom.HTMLCanvasElement> {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
@@ -42,23 +43,26 @@ class CanvasRenderTexture {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getCanvasRenderTextureTarget(state:CanvasRenderState, renderTexture:RenderTexture):Null<CanvasRenderTarget> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCanvasRenderTextureTarget(state:CanvasRenderState, renderTexture:RenderTexture):Null<CanvasRenderTarget> {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
     entry = (cast CanvasRenderTexture.getEntry__canvasRenderTexture(({ final __callArgument18:Dynamic = state; __callArgument18; }), ({ final __callArgument19:Dynamic = renderTexture; __callArgument19; })) : Null<CanvasRenderTextureEntry>);
     return cast ((cast _Runtime.strictEquals(({ final __typedStruct22 = entry; __typedStruct22 == null ? _Runtime.UNDEFINED : (cast __typedStruct22 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready') : Bool) ? (cast (cast entry : { var target:CanvasRenderTarget; }).target : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function invalidateCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function invalidateCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
     var entry:Null<CanvasRenderTextureEntry> = cast _Runtime.UNDEFINED;
     entry = (cast CanvasRenderTexture.getEntry__canvasRenderTexture(({ final __callArgument23:Dynamic = state; __callArgument23; }), ({ final __callArgument24:Dynamic = renderTexture; __callArgument24; })) : Null<CanvasRenderTextureEntry>);
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast entry : { var status:CanvasRenderTextureStatus; }).status = cast (status : CanvasRenderTextureStatus)); }
   }
 
-  @:noCompletion
-  public static function isCanvasRenderTextureReady(state:CanvasRenderState, renderTexture:RenderTexture):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isCanvasRenderTextureReady(state:CanvasRenderState, renderTexture:RenderTexture):Bool {
     return cast _Runtime.strictEquals(({ final __typedStruct31 = (cast CanvasRenderTexture.getEntry__canvasRenderTexture(({ final __callArgument27:Dynamic = state; __callArgument27; }), ({ final __callArgument28:Dynamic = renderTexture; __callArgument28; })) : Null<CanvasRenderTextureEntry>); __typedStruct31 == null ? _Runtime.UNDEFINED : (cast __typedStruct31 : { var status:CanvasRenderTextureStatus; }).status; }), 'ready');
     return cast null;
   }
@@ -82,8 +86,9 @@ class CanvasRenderTexture {
     }; __callArgument45; }));
   }
 
-  @:noCompletion
-  public static function writeCanvasRenderTextureTarget<T>(state:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderTarget->T):T {
+  @:allow(flighthq)
+  @:keep
+  private static function writeCanvasRenderTextureTarget<T>(state:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderTarget->T):T {
     var entry:CanvasRenderTextureEntry = cast _Runtime.UNDEFINED;
     var previousStatus:CanvasRenderTextureStatus = cast _Runtime.UNDEFINED;
     var rendered:Bool = cast _Runtime.UNDEFINED;

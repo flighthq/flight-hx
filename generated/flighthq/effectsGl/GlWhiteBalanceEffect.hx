@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.WhiteBalanceEffect;
 
+@:noCompletion
 class GlWhiteBalanceEffect {
-  @:noCompletion
-  public static function applyWhiteBalanceEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:WhiteBalanceEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyWhiteBalanceEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:WhiteBalanceEffect):Void {
     var temperature:Float = cast _Runtime.UNDEFINED;
     var tint:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;

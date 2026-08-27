@@ -7,14 +7,15 @@ import flighthq.geometry.Aabb.createAabb;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryBounds;
 import flighthq.types.Aabb;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.AabbLike;
+import flighthq.types.Matrix4Like;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.PrimitiveTopology;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexSemantic;
+import flighthq.types.PrimitiveTopology;
 import flighthq.types.Vector3;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexSemantic;
 
+@:noCompletion
 class MeshGeometryTransforms {
   public static function centerMeshGeometry(geometry:MeshGeometry):Void {
     var b:Aabb = cast _Runtime.UNDEFINED;

@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Quaternion = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var x:Float; var y:Float; var z:Float; var w:Float; };
-
-typedef QuaternionLike = { var x:Float; var y:Float; var z:Float; var w:Float; };

@@ -4,6 +4,7 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class NumberTheory {
   public static function factorial(n:Float):Float {
     var result:Float = cast _Runtime.UNDEFINED;

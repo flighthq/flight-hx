@@ -8,6 +8,7 @@ import flighthq.types.TextureContainerLevel;
 
 typedef TextureFormatBlockInfo__textureLevelLayout = { var blockWidth:Float; var blockHeight:Float; var bytesPerBlock:Float; };
 
+@:noCompletion
 class TextureLevelLayout {
   public static function computeTextureContainerLevels(format:TextureContainerFormat, baseWidth:Float, baseHeight:Float, mipLevels:Float, layers:Float, faces:Float, startOffset:Float):Null<{ var levels:Array<TextureContainerLevel>; var endOffset:Float; }> {
     var levels:Array<TextureContainerLevel> = cast _Runtime.UNDEFINED;

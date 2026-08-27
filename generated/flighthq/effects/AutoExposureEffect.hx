@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.AutoExposureEffect;
 
+@:noCompletion
 class AutoExposureEffect {
   public static function createAutoExposureEffect(?options:{ @:optional var adaptationSpeed:Null<Float>; @:optional var exposureCompensation:Null<Float>; @:optional var maxExposure:Null<Float>; @:optional var minExposure:Null<Float>; }):flighthq.types.AutoExposureEffect {
     if (options == null) options = cast ({  } : Dynamic);

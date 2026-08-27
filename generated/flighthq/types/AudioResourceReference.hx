@@ -6,22 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types._internal._AudioResourceReferenceValues.AudioResourceFailureKindValue;
 import flighthq.types._internal._AudioResourceReferenceValues.AudioResourceReferenceKindValue;
 
-typedef AudioResourceReferenceKind = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef AudioResourceFailureKind = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef AudioResourceFailure = { var kind:AudioResourceFailureKind; var message:String; var name:Null<String>; };
-
 typedef AudioResourceReferenceBase__AudioResourceReference = { var failure:Null<AudioResourceFailure>; var mimeType:Null<String>; var name:Null<String>; var resource:AudioResource; var state:ResourceResolutionState; };
 
-typedef EmbeddedAudioResourceReference = { var failure:Null<AudioResourceFailure>; var mimeType:Null<String>; var name:Null<String>; var resource:AudioResource; var state:ResourceResolutionState; var kind:String; var bytes:flighthq._internal._UInt8Array; };
-
-typedef ExternalAudioResourceReference = { var failure:Null<AudioResourceFailure>; var mimeType:Null<String>; var name:Null<String>; var resource:AudioResource; var state:ResourceResolutionState; var kind:String; var uri:String; var basePath:Null<String>; };
-
 typedef AudioResourceReference = flighthq._internal._Union2<EmbeddedAudioResourceReference, ExternalAudioResourceReference>;
-
-typedef AudioResourceFetch = ExternalAudioResourceReference->flighthq._internal.dom.AbortSignal->flighthq._internal._Promise<Null<AudioResource>>;
-
-typedef AudioDecoder = flighthq._internal._UInt8Array->String->flighthq._internal.dom.AbortSignal->flighthq._internal._Promise<Null<AudioResource>>;
-
-typedef AudioResourceReferenceResolutionExplanation = { var failure:Null<AudioResourceFailure>; var kind:AudioResourceReferenceKind; var retryable:Bool; var state:ResourceResolutionState; };

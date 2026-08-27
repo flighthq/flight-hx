@@ -6,15 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.renderWgpu.WgpuScissor.setWgpuRenderPassScissorRect;
 import flighthq.scene2dWgpu.WgpuQuadBatchWriter.flushWgpuQuadBatchWriter;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.MatrixLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuScissorRect;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuScissorRect;
 
+@:noCompletion
 class WgpuClipRectangle {
-  @:noCompletion
-  public static function popWgpuClipRectangle(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function popWgpuClipRectangle(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var stack:Array<WgpuScissorRect> = cast _Runtime.UNDEFINED;
     var previous:Null<WgpuScissorRect> = cast _Runtime.UNDEFINED;
@@ -37,8 +39,9 @@ class WgpuClipRectangle {
     } }
   }
 
-  @:noCompletion
-  public static function pushWgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function pushWgpuClipRectangle(state:WgpuRenderState, rect:RectangleLike, transform:MatrixLike):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var next:WgpuScissorRect = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;

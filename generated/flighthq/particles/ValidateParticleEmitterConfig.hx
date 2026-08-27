@@ -4,12 +4,13 @@ package flighthq.particles;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleConfigIssue;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterShape;
 
+@:noCompletion
 class ValidateParticleEmitterConfig {
   public static final NUMERIC_FIELDS__validateParticleEmitterConfig:Array<String> = (cast cast (['alphaEnd', 'alphaStart', 'burstCount', 'burstInterval', 'duration', 'colorEndB', 'colorEndG', 'colorEndR', 'colorEndVarianceB', 'colorEndVarianceG', 'colorEndVarianceR', 'colorStartB', 'colorStartG', 'colorStartR', 'colorStartVarianceB', 'colorStartVarianceG', 'colorStartVarianceR', 'directionX', 'directionY', 'directionZ', 'emitterConeAngle', 'emitterDepth', 'emitterHeight', 'emitterRadius', 'emitterWidth', 'frameCount', 'frameRate', 'gravityX', 'gravityY', 'gravityZ', 'lifetimeMax', 'lifetimeMin', 'maxParticles', 'regionIdMax', 'regionIdMin', 'rotationSpeedMax', 'rotationSpeedMin', 'scaleEnd', 'scaleMax', 'scaleMin', 'speedMax', 'speedMin', 'spawnRate', 'spread', 'velocityInheritance'] : Array<Dynamic>));
 

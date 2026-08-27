@@ -6,15 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.collision.CollisionSupport3D.getCollisionPairTest3D;
 import flighthq.collision.Gjk3D.testCollisionSupport3D;
 import flighthq.collision.Manifold3D.clearCollisionManifold3D;
-import flighthq.types.Collision.CollisionManifold3D;
-import flighthq.types.Collision.CollisionPairTest3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionShapeKind3D;
-import flighthq.types.Collision.CollisionTestGuard3D;
+import flighthq.types.CollisionManifold3D;
+import flighthq.types.CollisionPairTest3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionShapeKind3D;
+import flighthq.types.CollisionTestGuard3D;
 
+@:noCompletion
 class TestCollision3D {
-  @:noCompletion
-  public static function setCollisionTestGuard3D(guard:Null<CollisionTestGuard3D>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setCollisionTestGuard3D(guard:Null<CollisionTestGuard3D>):Void {
     (TestCollision3D.collisionTestGuard__testCollision3D = cast (guard : Dynamic));
   }
 

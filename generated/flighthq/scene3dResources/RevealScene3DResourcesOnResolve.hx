@@ -13,30 +13,31 @@ import flighthq.signals.Slot.disconnectSignal;
 import flighthq.texture.Texture.hasTextureSource;
 import flighthq.tween.Tween.createTween;
 import flighthq.types.EasingFunction;
+import flighthq.types.EmbeddedImageResourceReference;
+import flighthq.types.ExternalImageResourceReference;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
 import flighthq.types.Material;
 import flighthq.types.Mesh;
 import flighthq.types.Node;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DTraits;
 import flighthq.types.ResourceResolutionState;
 import flighthq.types.Scene3D;
-import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
-import flighthq.types.Scene3DResources.Scene3DResourceEvent;
-import flighthq.types.Scene3DResources.Scene3DResourceResolver;
-import flighthq.types.Scene3DResources.Scene3DResourceRevealOptions;
-import flighthq.types.Scene3DResources.Scene3DResourceSignals;
+import flighthq.types.Scene3DMaterialTextureRegistry;
+import flighthq.types.Scene3DResourceEvent;
+import flighthq.types.Scene3DResourceResolver;
+import flighthq.types.Scene3DResourceRevealOptions;
+import flighthq.types.Scene3DResourceSignals;
 import flighthq.types.Signal;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.Tween;
 import flighthq.types.TweenManager;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 
 typedef Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve = { var node:Node3D; var pending:flighthq._internal._Set<Texture>; };
 
+@:noCompletion
 class RevealScene3DResourcesOnResolve {
   public static function revealScene3DResourcesOnResolve(resolver:Scene3DResourceResolver, scene:Scene3D, tweenManager:TweenManager, ?options:Scene3DResourceRevealOptions):Void->Void {
     var fadeSeconds:Float = cast _Runtime.UNDEFINED;

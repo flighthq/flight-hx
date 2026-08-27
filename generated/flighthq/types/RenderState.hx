@@ -3,23 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.SlotTable;
-import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
-
-typedef Scene3DGraphSyncPolicy = String;
 
 typedef RenderState = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var allowSmoothing:Bool; var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; var currentClipDepth:Float; var displayObjectClipHooks:Null<Scene2DClipHooks>; var pixelRatio:Float; var renderAlpha:Float; var renderBlendMode:Null<BlendMode>; var renderTransform2D:Null<Matrix>; var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; var roundPixels:Bool; };
-
-typedef RenderRegistries = { @:optional var canvasShapeCommands:KeyedTable<CanvasShapeCommand<String>>; @:optional var colorAdjustments:SlotTable<flighthq.types.RenderState->RenderProxy->RenderProxy->Void>; @:optional var colorAdjustmentUnsupportedGuard:SlotTable<ColorAdjustmentUnsupportedGuard>; @:optional var effectPaddingResolvers:KeyedTable<RenderEffectPaddingResolver>; var renderers:KeyedTable<Renderer>; @:optional var renderRootGuard:SlotTable<RenderRootGuard>; var strokeTessellator:SlotTable<Path->StrokeStyle->Float->Null<PathMesh>>; };
-
-typedef ColorAdjustmentUnsupportedGuard = flighthq.types.RenderState->Renderable->Void;
-
-typedef RenderRootGuard = flighthq.types.RenderState->Renderable->Void;
-
-typedef RenderStateRuntime = { var binding:Null<flighthq._internal._Object>; var currentFrameId:Float; var renderAdaptHook:Null<flighthq.types.RenderState->Renderable->RenderProxy2D->Void>; var renderProxyAdapterMap:flighthq._internal._WeakMap<Renderable, RenderProxyAdapter>; var renderProxyMap:flighthq._internal._WeakMap<Renderable, RenderProxy>; var renderProxySources:flighthq._internal._Set<Renderable>; var registryMiss:Null<flighthq._internal._Intersection2<RenderRegistry->Kind->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>; var registries:RenderRegistries; var rendererMapId:Float; var tempStack:Array<Renderable>; };

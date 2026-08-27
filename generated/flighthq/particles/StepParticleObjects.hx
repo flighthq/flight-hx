@@ -13,6 +13,7 @@ import flighthq.types.ParticleObject;
 import flighthq.types.ParticleObjectsState;
 import flighthq.types.ParticleObjectsUpdateOptions;
 
+@:noCompletion
 class StepParticleObjects {
   public static function stepParticleObjects(objects:Array<ParticleObject>, state:ParticleObjectsState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?updateOptions:ParticleObjectsUpdateOptions):Void {
     if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {

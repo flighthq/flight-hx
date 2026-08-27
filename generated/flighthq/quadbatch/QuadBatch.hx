@@ -12,34 +12,36 @@ import flighthq.scene2d.DisplayObject.createNode2D;
 import flighthq.scene2d.DisplayObject.createNode2DRuntime;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.signals.Signal.createSignal;
-import flighthq.types.Material.MaterialData;
+import flighthq.types.MaterialData;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.QuadBatch;
-import flighthq.types.QuadBatch.QuadBatchData;
-import flighthq.types.QuadBatch.QuadBatchRuntime;
+import flighthq.types.QuadBatchData;
+import flighthq.types.QuadBatchRuntime;
 import flighthq.types.QuadBatchSignals;
 import flighthq.types.QuadTransformType;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.Signal;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 import flighthq.types.Types.QuadBatchKind;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types._internal._QuadBatchValues.QuadBatchKind;
 
 typedef QuadBatchWithSignals__quadBatch = { @:optional var __quadBatchSignalsSlot:QuadBatchSignals; };
 
+@:noCompletion
 class QuadBatch {
   public static final QUAD_VECTOR2_STRIDE__quadBatch:Float = 2.0;
 
   public static final QUAD_MATRIX3X2_STRIDE__quadBatch:Float = 6.0;
 
-  @:noCompletion
-  public static final QUAD_BATCH_DELETED_ID:Float = 65535.0;
+  @:allow(flighthq)
+  @:keep
+  private static final QUAD_BATCH_DELETED_ID:Float = 65535.0;
 
   public static function appendQuadBatchInstance(target:flighthq.types.QuadBatch, id:Float, x:Float, y:Float):Float {
     var index:Float = cast _Runtime.UNDEFINED;
@@ -215,14 +217,16 @@ class QuadBatch {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createQuadBatchData(?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var ids:Null<flighthq._internal._UInt16Array>; @:optional var instanceCount:Null<Float>; @:optional var materialData:Null<Array<Null<MaterialData>>>; @:optional var transforms:Null<flighthq._internal._Float32Array>; @:optional var transformType:Null<QuadTransformType>; }):QuadBatchData {
+  @:allow(flighthq)
+  @:keep
+  private static function createQuadBatchData(?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var ids:Null<flighthq._internal._UInt16Array>; @:optional var instanceCount:Null<Float>; @:optional var materialData:Null<Array<Null<MaterialData>>>; @:optional var transforms:Null<flighthq._internal._Float32Array>; @:optional var transformType:Null<QuadTransformType>; }):QuadBatchData {
     return cast { atlas: _Runtime.coalesce(({ final __structural14 = data; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), ids: _Runtime.coalesce(({ final __structural15 = data; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var ids:Null<flighthq._internal._UInt16Array>; }).ids; }), function():Dynamic return cast new flighthq._internal._UInt16Array()), instanceCount: _Runtime.coalesce(({ final __structural16 = data; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var instanceCount:Null<Float>; }).instanceCount; }), function():Dynamic return cast 0.0), materialData: _Runtime.coalesce(({ final __structural17 = data; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { @:optional var materialData:Null<Array<Null<flighthq._internal._Object>>>; }).materialData; }), function():Dynamic return cast null), transforms: _Runtime.coalesce(({ final __structural18 = data; __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { @:optional var transforms:Null<flighthq._internal._Float32Array>; }).transforms; }), function():Dynamic return cast new flighthq._internal._Float32Array()), transformType: _Runtime.coalesce(({ final __structural19 = data; __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { @:optional var transformType:Null<String>; }).transformType; }), function():Dynamic return cast 'vector2') };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createQuadBatchRuntime():QuadBatchRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createQuadBatchRuntime():QuadBatchRuntime {
     var runtime:QuadBatchRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createNode2DRuntime((cast QuadBatch.defaultMethods__quadBatch : Dynamic)) : QuadBatchRuntime);
     (runtime.localBoundsRectangle = cast (null : Null<Rectangle>));
@@ -231,8 +235,9 @@ class QuadBatch {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createQuadBatchSignals():QuadBatchSignals {
+  @:allow(flighthq)
+  @:keep
+  private static function createQuadBatchSignals():QuadBatchSignals {
     return cast { onCleared: (cast createSignal() : Signal<Void->Void>), onInstanceAppended: (cast createSignal() : Signal<Float->Void>), onInstanceRemoved: (cast createSignal() : Signal<Float->Float->Void>) };
     return cast null;
   }
@@ -284,8 +289,9 @@ class QuadBatch {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getQuadBatchRuntime(source:flighthq.types.QuadBatch):QuadBatchRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getQuadBatchRuntime(source:flighthq.types.QuadBatch):QuadBatchRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument20:Dynamic = source; __callArgument20; })) : QuadBatchRuntime);
     return cast null;
   }

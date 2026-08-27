@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
-import flighthq.types.Matrix3.Matrix3Like;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Matrix3Like;
+import flighthq.types.Vector2Like;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
-import flighthq.types.Vector4.Vector4Like;
+import flighthq.types.Vector3Like;
+import flighthq.types.Vector4Like;
 
+@:noCompletion
 class Vector3 {
   public static function addVector3(out:Vector3Like, a:Vector3Like, b:Vector3Like):Void {
     var ax:Float = cast _Runtime.UNDEFINED;

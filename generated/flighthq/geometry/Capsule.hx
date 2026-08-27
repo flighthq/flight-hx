@@ -4,15 +4,16 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.AabbLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Capsule;
-import flighthq.types.Capsule.CapsuleLike;
+import flighthq.types.CapsuleLike;
 import flighthq.types.Entity;
-import flighthq.types.Ray3D.Ray3DLike;
+import flighthq.types.Ray3DLike;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Capsule {
   public static function createCapsule(startX:Float, startY:Float, startZ:Float, endX:Float, endY:Float, endZ:Float, radius:Float):flighthq.types.Capsule {
     return cast (cast createEntity(({ final __callArgument0:Dynamic = { endX: endX, endY: endY, endZ: endZ, radius: radius, startX: startX, startY: startY, startZ: startZ }; __callArgument0; })) : { >Entity, var endX:Float; var endY:Float; var endZ:Float; var radius:Float; var startX:Float; var startY:Float; var startZ:Float; });

@@ -9,9 +9,11 @@ import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
+@:noCompletion
 class GlColorMatrixPass {
-  @:noCompletion
-  public static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyColorMatrixPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, matrix:Array<Float>):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     m = new flighthq._internal._Float32Array(20.0);

@@ -13,8 +13,8 @@ import flighthq.particleemitter.StepParticleEmitter2D as Facade_Particleemitter_
 import flighthq.particleemitter.StepParticleEmitter3D as Facade_Particleemitter_flighthq_particleemitter_StepParticleEmitter3D;
 import flighthq.particleemitter.UpdateParticleEmitter2D as Facade_Particleemitter_flighthq_particleemitter_UpdateParticleEmitter2D;
 import flighthq.particleemitter.UpdateParticleEmitter3D as Facade_Particleemitter_flighthq_particleemitter_UpdateParticleEmitter3D;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.AabbLike;
+import flighthq.types.Matrix4Like;
 import flighthq.types.PartialNode;
 import flighthq.types.ParticleCollider;
 import flighthq.types.ParticleEmitter2D;
@@ -24,8 +24,8 @@ import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 import flighthq.types.Rectangle;
-import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector2Like;
+import flighthq.types.Vector3Like;
 
 class Particleemitter {
   public static function appendParticleEmitter2DParticle(target:ParticleEmitter2D, id:Float, x:Float, y:Float, rotation:Float, scale:Float):Float {

@@ -10,16 +10,17 @@ import flighthq.scene2dWgpu.WgpuClipRectangle.popWgpuClipRectangle;
 import flighthq.scene2dWgpu.WgpuClipRectangle.pushWgpuClipRectangle;
 import flighthq.types.ClipRegion;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node2D;
+import flighthq.types.PathWinding;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.Scene2DClipHooks;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 
+@:noCompletion
 class WgpuClip {
   public static function enableWgpuClipSupport(state:WgpuRenderState):Void {
     ((cast state : WgpuRenderState).displayObjectClipHooks = WgpuClip.webgpuClipHooks__wgpuClip);

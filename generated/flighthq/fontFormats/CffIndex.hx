@@ -3,12 +3,14 @@ package flighthq.fontFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.CffTable.CffIndex;
-import flighthq.types.CffTable.CffIndexEntry;
+import flighthq.types.CffIndex;
+import flighthq.types.CffIndexEntry;
 
+@:noCompletion
 class CffIndex {
-  @:noCompletion
-  public static function readCffIndex(bytes:flighthq._internal._UInt8Array, offset:Float):Null<flighthq.types.CffTable.CffIndex> {
+  @:allow(flighthq)
+  @:keep
+  private static function readCffIndex(bytes:flighthq._internal._UInt8Array, offset:Float):Null<flighthq.types.CffIndex> {
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     var offSize:Float = cast _Runtime.UNDEFINED;

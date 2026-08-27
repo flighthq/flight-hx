@@ -12,18 +12,18 @@ import flighthq.spatial.SpatialIndex3D as Facade_Spatial_flighthq_spatial_Spatia
 import flighthq.spatial.SpatialIndexingGuard as Facade_Spatial_flighthq_spatial_SpatialIndexingGuard;
 import flighthq.spatial.UniformGrid as Facade_Spatial_flighthq_spatial_UniformGrid;
 import flighthq.spatial.UniformGrid3D as Facade_Spatial_flighthq_spatial_UniformGrid3D;
-import flighthq.types.Spatial.SpatialAabb2D;
-import flighthq.types.Spatial.SpatialAabb3D;
-import flighthq.types.Spatial.SpatialFrustum3D;
-import flighthq.types.Spatial.SpatialIndex2D;
-import flighthq.types.Spatial.SpatialIndex3D;
-import flighthq.types.Spatial.SpatialIndexBackend2D;
-import flighthq.types.Spatial.SpatialIndexBackend3D;
-import flighthq.types.Spatial.SpatialObjectId;
-import flighthq.types.Spatial.SpatialPair;
-import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
-import flighthq.types.SpatialIndexing.SpatialIndexingGuard;
-import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
+import flighthq.types.SpatialAabb2D;
+import flighthq.types.SpatialAabb3D;
+import flighthq.types.SpatialFrustum3D;
+import flighthq.types.SpatialIndex2D;
+import flighthq.types.SpatialIndex3D;
+import flighthq.types.SpatialIndexBackend2D;
+import flighthq.types.SpatialIndexBackend3D;
+import flighthq.types.SpatialIndexingExplanation;
+import flighthq.types.SpatialIndexingGuard;
+import flighthq.types.SpatialIndexingNotice;
+import flighthq.types.SpatialObjectId;
+import flighthq.types.SpatialPair;
 
 class Spatial {
   public static function clearSpatialIndex2D(index:SpatialIndex2D):Void {

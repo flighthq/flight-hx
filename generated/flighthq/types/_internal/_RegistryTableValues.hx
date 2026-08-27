@@ -3,7 +3,7 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.Kind;
 
 class _RegistryTableValues {
   public static final RegistryEntryStateValue:{ var Bound:String; var Tombstoned:String; } = (cast { Bound: 'bound', Tombstoned: 'tombstoned' });

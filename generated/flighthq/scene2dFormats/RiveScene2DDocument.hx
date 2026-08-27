@@ -14,33 +14,35 @@ import flighthq.scene2dFormats.RiveScene2D.createScene2DFromRiveDocument;
 import flighthq.texture.Texture.createTexture;
 import flighthq.types.AlphaType;
 import flighthq.types.DisplayObject;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EmbeddedImageResourceReference;
+import flighthq.types.EntityRuntime;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.Node.NodeOf;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DTraits;
-import flighthq.types.RiveDocument.RiveArtboardImport;
-import flighthq.types.RiveDocument.RiveDocumentImportResult;
-import flighthq.types.RiveDocument.RiveFileAsset;
-import flighthq.types.RiveDocument.RiveScene2DDocumentResult;
+import flighthq.types.Node2DTraits;
+import flighthq.types.NodeOf;
+import flighthq.types.RiveArtboardImport;
+import flighthq.types.RiveDocumentImportResult;
+import flighthq.types.RiveFileAsset;
+import flighthq.types.RiveScene2DDocumentResult;
 import flighthq.types.Sampler;
-import flighthq.types.Scene2DDocument.Scene2DSlotReference;
+import flighthq.types.Scene2DSlotReference;
 import flighthq.types.Sprite;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class RiveScene2DDocument {
-  @:noCompletion
-  public static function createRiveImageSprite(name:String, assetIndex:Float):DisplayObject {
+  @:allow(flighthq)
+  @:keep
+  private static function createRiveImageSprite(name:String, assetIndex:Float):DisplayObject {
     var texture:Texture2D = cast _Runtime.UNDEFINED;
     var sprite:Sprite = cast _Runtime.UNDEFINED;
     texture = (cast createTexture((cast { dimension: '2d', source: null } : Dynamic)) : Texture2D);
@@ -118,8 +120,9 @@ class RiveScene2DDocument {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createScene2DDocumentFromRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<RiveScene2DDocumentResult> {
+  @:allow(flighthq)
+  @:keep
+  private static function createScene2DDocumentFromRiveDocument(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<RiveScene2DDocumentResult> {
     var imported:RiveDocumentImportResult = cast _Runtime.UNDEFINED;
     var root:DisplayObject = cast _Runtime.UNDEFINED;
     imported = (cast createScene2DFromRiveDocument(({ final __callArgument22:Dynamic = source; __callArgument22; }), ({ final __callArgument23:Dynamic = diagnostics; __callArgument23; })) : RiveDocumentImportResult);
@@ -132,8 +135,9 @@ class RiveScene2DDocument {
     return cast null;
   }
 
-  @:noCompletion
-  public static function markRiveNestedArtboard(node:Node2D, artboardIndex:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function markRiveNestedArtboard(node:Node2D, artboardIndex:Float):Void {
     ((cast RiveScene2DDocument._nestedArtboards__riveScene2DDocument : flighthq._internal._WeakMap<Node2D, Float>).set(node, (cast artboardIndex)));
   }
 

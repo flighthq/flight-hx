@@ -9,9 +9,11 @@ import flighthq.types.Image;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
+@:noCompletion
 class CanvasImageSource {
-  @:noCompletion
-  public static function explainCanvasImageSource(image:flighthq._internal._Union2<Image, Bitmap>):CanvasImageSourceKind {
+  @:allow(flighthq)
+  @:keep
+  private static function explainCanvasImageSource(image:flighthq._internal._Union2<Image, Bitmap>):CanvasImageSourceKind {
     if ((cast _Runtime.strictEquals((cast image : { var kind:String; }).kind, BitmapTextureSourceKind) : Bool)) { return cast 'data'; }
     return cast 'element';
     return cast null;

@@ -6,19 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.particles.Curve.particleColorCurveToKeyframes;
 import flighthq.particles.Curve.particleCurveToKeyframes;
+import flighthq.types.ColorKeyframe;
+import flighthq.types.CurveKeyframe;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleCurve;
-import flighthq.types.ParticleCurve.ColorKeyframe;
-import flighthq.types.ParticleCurve.CurveKeyframe;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterShape;
 import flighthq.types.ParticleSerializeResult;
-import flighthq.types.SpineParticleSchema.SpineAlphaKeyframe;
-import flighthq.types.SpineParticleSchema.SpineBlendMode;
-import flighthq.types.SpineParticleSchema.SpineParticleDocument;
-import flighthq.types.SpineParticleSchema.SpineRangeValue;
-import flighthq.types.SpineParticleSchema.SpineTintKeyframe;
+import flighthq.types.SpineAlphaKeyframe;
+import flighthq.types.SpineBlendMode;
+import flighthq.types.SpineParticleDocument;
+import flighthq.types.SpineRangeValue;
+import flighthq.types.SpineTintKeyframe;
 
+@:noCompletion
 class SpineSerialize {
   public static function rgbToHex__spineSerialize(r:Float, g:Float, b:Float):String {
     var byte:Float->String = cast _Runtime.UNDEFINED;

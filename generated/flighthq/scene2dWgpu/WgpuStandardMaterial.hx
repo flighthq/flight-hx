@@ -5,18 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuMaterialRegistry.registerWgpuMaterialRenderer;
 import flighthq.scene2dWgpu.WgpuQuadBatchWriter.getWgpuQuadBatchPreludeWGSL;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
+@:noCompletion
 class WgpuStandardMaterial {
   public static function registerWgpuStandardMaterial(state:WgpuRenderState):Void {
     registerWgpuMaterialRenderer(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast StandardMaterialKindValue : String), ({ final __callArgument1:Dynamic = standardWgpuMaterialRenderer; __callArgument1; }));
   }
 
-  @:noCompletion
-  public static final standardWgpuMaterialRenderer:WgpuMaterialRenderer = (cast { instanceFloatCount: 0.0, getShaderModule: function(state:WgpuRenderState):flighthq._internal.dom.GPUShaderModule {
+  @:allow(flighthq)
+  @:keep
+  private static final standardWgpuMaterialRenderer:WgpuMaterialRenderer = (cast { instanceFloatCount: 0.0, getShaderModule: function(state:WgpuRenderState):flighthq._internal.dom.GPUShaderModule {
     var cached:Null<flighthq._internal.dom.GPUShaderModule> = cast _Runtime.UNDEFINED;
     var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
     cached = ((cast WgpuStandardMaterial._modules__wgpuStandardMaterial : flighthq._internal._WeakMap<flighthq._internal.dom.GPUDevice, flighthq._internal.dom.GPUShaderModule>).get((cast state : WgpuRenderState).device));

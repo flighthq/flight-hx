@@ -6,9 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.types.ColorLut;
 import flighthq.types.ColorTransformFunction;
 
+@:noCompletion
 class ColorLut {
-  @:noCompletion
-  public static final COLOR_LUT_DEFAULT_SIZE:Float = 32.0;
+  @:allow(flighthq)
+  @:keep
+  private static final COLOR_LUT_DEFAULT_SIZE:Float = 32.0;
 
   public static function bakeColorLut(transforms:Array<ColorTransformFunction>, size:Float = 32.0):flighthq.types.ColorLut {
     var n:Float = cast _Runtime.UNDEFINED;

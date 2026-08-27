@@ -10,33 +10,34 @@ import flighthq.interaction.HitTests.hitTestGraphLocalBounds;
 import flighthq.interaction.HitTests.registerHitTestPrecise;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.types.Bitmap;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.HitTestFunction.HitTestPreciseFunction;
+import flighthq.types.EntityRuntime;
+import flighthq.types.HitTestPreciseFunction;
 import flighthq.types.Image;
 import flighthq.types.ImageChannel;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Node.NodeAny;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node2D;
+import flighthq.types.NodeAny;
 import flighthq.types.Sampler;
 import flighthq.types.Sprite;
-import flighthq.types.Sprite.SpriteData;
+import flighthq.types.SpriteData;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types.Types.SpriteKind;
 import flighthq.types.Vector2;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ImageChannelValues.ImageChannelValue;
 import flighthq.types._internal._SpriteValues.SpriteKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
+@:noCompletion
 class RegisterSpriteHitTest {
   public static function registerSpriteHitTest(alphaThreshold:Float = 1.0):Void {
     registerHitTestPrecise((cast SpriteKind : String), ({ final __callArgument2:Dynamic = function(source:NodeAny, x:Float, y:Float):Float return (cast RegisterSpriteHitTest.hitTestSpriteAlpha__registerSpriteHitTest(({ final __callArgument0:Dynamic = source; __callArgument0; }), (cast x : Float), (cast y : Float), (cast alphaThreshold : Float)) : Float); __callArgument2; }));

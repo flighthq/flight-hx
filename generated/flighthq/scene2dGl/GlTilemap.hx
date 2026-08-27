@@ -18,23 +18,24 @@ import flighthq.texture.Texture.hasTextureSource;
 import flighthq.types.BatchFormat;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlQuadBatchShader;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlQuadBatchShader;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.SpriteRenderer;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureLike;
 import flighthq.types.Tilemap;
-import flighthq.types.Tilemap.TilemapData;
+import flighthq.types.TilemapData;
 import flighthq.types.TintMaterialData;
 
+@:noCompletion
 class GlTilemap {
   public static final INSTANCE_FLOATS__glTilemap:Float = 13.0;
 

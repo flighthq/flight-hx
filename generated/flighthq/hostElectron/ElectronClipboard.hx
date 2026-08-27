@@ -3,23 +3,24 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Clipboard.ClipboardBackend;
-import flighthq.types.Clipboard.ClipboardBookmark;
-import flighthq.types.Clipboard.ClipboardWriteItem;
+import flighthq.types.ClipboardBackend;
+import flighthq.types.ClipboardBookmark;
+import flighthq.types.ClipboardWriteItem;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronClipboard;
-import flighthq.types.ElectronApi.ElectronClipboardData;
-import flighthq.types.ElectronApi.ElectronNativeImage;
-import flighthq.types.ElectronApi.ElectronNativeImageModule;
+import flighthq.types.ElectronClipboard;
+import flighthq.types.ElectronClipboardData;
+import flighthq.types.ElectronNativeImage;
+import flighthq.types.ElectronNativeImageModule;
 
+@:noCompletion
 class ElectronClipboard {
   public static function createElectronClipboardBackend(electron:ElectronApi):ClipboardBackend {
-    var cb:flighthq.types.ElectronApi.ElectronClipboard = cast _Runtime.UNDEFINED;
+    var cb:flighthq.types.ElectronClipboard = cast _Runtime.UNDEFINED;
     cb = electron.clipboard;
     return cast { readText: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).readText();
+          return cast (cast cb : flighthq.types.ElectronClipboard).readText();
         } catch (__error:Dynamic) {
           return cast '';
         }
@@ -28,7 +29,7 @@ class ElectronClipboard {
     }, writeText: function(text:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeText((cast text : String));
+          (cast cb : flighthq.types.ElectronClipboard).writeText((cast text : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -38,7 +39,7 @@ class ElectronClipboard {
     }, readHtml: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).readHTML();
+          return cast (cast cb : flighthq.types.ElectronClipboard).readHTML();
         } catch (__error:Dynamic) {
           return cast '';
         }
@@ -47,7 +48,7 @@ class ElectronClipboard {
     }, writeHtml: function(html:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeHTML((cast html : String));
+          (cast cb : flighthq.types.ElectronClipboard).writeHTML((cast html : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -57,7 +58,7 @@ class ElectronClipboard {
     }, hasText: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast ((cast _Runtime.field((cast cb : flighthq.types.ElectronApi.ElectronClipboard).readText(), 'length') : Float) > (cast 0.0 : Float));
+          return cast ((cast _Runtime.field((cast cb : flighthq.types.ElectronClipboard).readText(), 'length') : Float) > (cast 0.0 : Float));
         } catch (__error:Dynamic) {
           return cast false;
         }
@@ -66,7 +67,7 @@ class ElectronClipboard {
     }, readImage: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          var image:ElectronNativeImage = (cast cb : flighthq.types.ElectronApi.ElectronClipboard).readImage();
+          var image:ElectronNativeImage = (cast cb : flighthq.types.ElectronClipboard).readImage();
           return cast ((cast (cast image : ElectronNativeImage).isEmpty() : Bool) ? (cast '' : Dynamic) : (cast (cast image : ElectronNativeImage).toDataURL() : Dynamic));
         } catch (__error:Dynamic) {
           return cast '';
@@ -76,7 +77,7 @@ class ElectronClipboard {
     }, writeImage: function(dataUrl:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeImage((cast electron.nativeImage : ElectronNativeImageModule).createFromDataURL((cast dataUrl : String)));
+          (cast cb : flighthq.types.ElectronClipboard).writeImage((cast electron.nativeImage : ElectronNativeImageModule).createFromDataURL((cast dataUrl : String)));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -86,7 +87,7 @@ class ElectronClipboard {
     }, hasImage: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast !(cast (cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).readImage() : ElectronNativeImage).isEmpty() : Bool);
+          return cast !(cast (cast (cast cb : flighthq.types.ElectronClipboard).readImage() : ElectronNativeImage).isEmpty() : Bool);
         } catch (__error:Dynamic) {
           return cast false;
         }
@@ -95,7 +96,7 @@ class ElectronClipboard {
     }, readRTF: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).readRTF();
+          return cast (cast cb : flighthq.types.ElectronClipboard).readRTF();
         } catch (__error:Dynamic) {
           return cast '';
         }
@@ -104,7 +105,7 @@ class ElectronClipboard {
     }, writeRTF: function(rtf:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeRTF((cast rtf : String));
+          (cast cb : flighthq.types.ElectronClipboard).writeRTF((cast rtf : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -114,7 +115,7 @@ class ElectronClipboard {
     }, readBookmark: function():flighthq._internal._Promise<Null<ClipboardBookmark>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          var bookmark:{ var title:String; var url:String; } = (cast cb : flighthq.types.ElectronApi.ElectronClipboard).readBookmark();
+          var bookmark:{ var title:String; var url:String; } = (cast cb : flighthq.types.ElectronClipboard).readBookmark();
           if ((cast ((cast _Runtime.strictEquals((cast bookmark : { var title:String; var url:String; }).title, '') : Bool) && (cast _Runtime.strictEquals((cast bookmark : { var title:String; var url:String; }).url, '') : Bool)) : Bool)) { return cast null; }
           var out:ClipboardBookmark = (cast { title: (cast bookmark : { var title:String; var url:String; }).title, url: (cast bookmark : { var title:String; var url:String; }).url });
           return cast out;
@@ -126,7 +127,7 @@ class ElectronClipboard {
     }, writeBookmark: function(title:String, url:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeBookmark((cast title : String), (cast url : String));
+          (cast cb : flighthq.types.ElectronClipboard).writeBookmark((cast title : String), (cast url : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -136,7 +137,7 @@ class ElectronClipboard {
     }, readFormat: function(format:String):flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).read((cast format : String));
+          return cast (cast cb : flighthq.types.ElectronClipboard).read((cast format : String));
         } catch (__error:Dynamic) {
           return cast '';
         }
@@ -147,7 +148,7 @@ class ElectronClipboard {
         try {
           var payload:ElectronClipboardData = (cast {  });
           _Runtime.setIndex(payload, (cast ElectronClipboard.formatKey__electronClipboard((cast format : String)) : String), data);
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).write(({ final __callArgument0:Dynamic = payload; __callArgument0; }));
+          (cast cb : flighthq.types.ElectronClipboard).write(({ final __callArgument0:Dynamic = payload; __callArgument0; }));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -157,7 +158,7 @@ class ElectronClipboard {
     }, hasFormat: function(format:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).has((cast format : String));
+          return cast (cast cb : flighthq.types.ElectronClipboard).has((cast format : String));
         } catch (__error:Dynamic) {
           return cast false;
         }
@@ -166,7 +167,7 @@ class ElectronClipboard {
     }, getFormats: function():flighthq._internal._Promise<Array<String>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).availableFormats();
+          return cast (cast cb : flighthq.types.ElectronClipboard).availableFormats();
         } catch (__error:Dynamic) {
           return cast cast ([] : Array<Dynamic>);
         }
@@ -178,7 +179,7 @@ class ElectronClipboard {
         out = (cast {  });
         for (format in _Runtime.iterable(formats)) {
           try {
-            if ((cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).has((cast format : String)) : Bool)) { _Runtime.setIndex(out, format, (cast cb : flighthq.types.ElectronApi.ElectronClipboard).read((cast format : String))); }
+            if ((cast (cast cb : flighthq.types.ElectronClipboard).has((cast format : String)) : Bool)) { _Runtime.setIndex(out, format, (cast cb : flighthq.types.ElectronClipboard).read((cast format : String))); }
           } catch (__error:Dynamic) {
           }
         }
@@ -192,7 +193,7 @@ class ElectronClipboard {
           for (item in _Runtime.iterable(items)) {
             _Runtime.setIndex(data, (cast ElectronClipboard.formatKey__electronClipboard((cast item.format : String)) : String), item.data);
           }
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).write(({ final __callArgument5:Dynamic = data; __callArgument5; }));
+          (cast cb : flighthq.types.ElectronClipboard).write(({ final __callArgument5:Dynamic = data; __callArgument5; }));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -218,7 +219,7 @@ class ElectronClipboard {
     }, clear: function():flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).clear();
+          (cast cb : flighthq.types.ElectronClipboard).clear();
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;

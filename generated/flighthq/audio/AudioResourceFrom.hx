@@ -7,8 +7,9 @@ import flighthq.audio.AudioFormat.canPlayAudioType;
 import flighthq.audio.AudioFormat.inferAudioMimeType;
 import flighthq.audio.AudioResource.createAudioResource;
 import flighthq.types.AudioResource;
-import flighthq.types.AudioResource.AudioResourceUrl;
+import flighthq.types.AudioResourceUrl;
 
+@:noCompletion
 class AudioResourceFrom {
   public static function createAudioResourceFromSamples(channels:Array<flighthq._internal._Float32Array>, sampleRate:Float):AudioResource {
     var numberOfChannels:Float = cast _Runtime.UNDEFINED;

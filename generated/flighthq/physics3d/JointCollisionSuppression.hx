@@ -3,10 +3,11 @@ package flighthq.physics3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointSolver;
-import flighthq.types.Physics3D.Physics3DWorld;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointSolver;
+import flighthq.types.Physics3DWorld;
 
+@:noCompletion
 class JointCollisionSuppression {
   public static function isPhysics3DPairJointSuppressed(world:Physics3DWorld, bodyA:Float, bodyB:Float):Bool {
     var first:Float = cast _Runtime.UNDEFINED;
@@ -17,8 +18,9 @@ class JointCollisionSuppression {
     return cast null;
   }
 
-  @:noCompletion
-  public static function rebuildPhysics3DJointCollisionSuppressions(world:Physics3DWorld):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function rebuildPhysics3DJointCollisionSuppressions(world:Physics3DWorld):Void {
     var suppressions:flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>> = cast _Runtime.UNDEFINED;
     suppressions = world.jointCollisionSuppressions;
     ((cast suppressions : flighthq._internal._Map<Float, flighthq._internal._Map<Float, Float>>).clear());

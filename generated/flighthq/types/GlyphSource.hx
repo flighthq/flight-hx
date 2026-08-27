@@ -5,21 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef GlyphSource = { var getGlyphAtlasImage:Float->Null<TextureSource>; var getGlyphEntry:Float->Null<GlyphEntry>; var getGlyphKerning:Float->Float->Float; var getGlyphMetrics:Void->GlyphMetrics; };
-
-typedef GlyphEntry = { var advance:Float; var bearingX:Float; var bearingY:Float; var height:Float; var page:Float; var width:Float; var x:Float; var y:Float; };
-
-typedef GlyphMetrics = { var ascent:Float; var descent:Float; var lineGap:Float; };
-
-typedef GlyphRasterizedBitmap = { var advance:Float; var bearingX:Float; var bearingY:Float; var height:Float; var pixels:flighthq._internal._UInt8ClampedArray; var width:Float; };
-
-typedef GlyphRasterizeOptions = { var fontFamily:String; var fontSize:Float; @:optional var fontStyle:String; @:optional var fontWeight:flighthq._internal._Union2<Float, String>; };
-
-typedef GlyphRasterizerBackend = { var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; @:optional var measureMetrics:GlyphRasterizeOptions->Null<GlyphMetrics>; };
-
-typedef GlyphAtlasOptions = { var fontFamily:String; var fontSize:Float; @:optional var fontStyle:String; @:optional var fontWeight:String; var height:Float; @:optional var maxArea:Float; @:optional var maxBytes:Float; @:optional var maxGlyphs:Float; @:optional var padding:Float; @:optional var rasterizerBackend:GlyphRasterizerBackend; var width:Float; };
-
-typedef GlyphAtlasShelf = { var cursorX:Float; var height:Float; var y:Float; };
-
-typedef GlyphAtlasRuntime = { var bitmaps:flighthq._internal._Map<Float, GlyphRasterizedBitmap>; var dirty:Bool; var dirtyMaxX:Float; var dirtyMaxY:Float; var dirtyMinX:Float; var dirtyMinY:Float; var entries:flighthq._internal._Map<Float, GlyphEntry>; var lru:flighthq._internal._Map<Float, Bool>; var maxArea:Float; var maxBytes:Float; var maxGlyphs:Float; var occupiedArea:Float; var retainedBytes:Float; var metrics:GlyphMetrics; var packBottom:Float; var padding:Float; var rasterizerBackend:GlyphRasterizerBackend; var rasterizeOptions:GlyphRasterizeOptions; var shelves:Array<GlyphAtlasShelf>; var bitmap:Bitmap; };
-
-typedef GlyphAtlas = { var runtime:GlyphAtlasRuntime; };

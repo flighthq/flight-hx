@@ -13,13 +13,13 @@ import flighthq.glyphatlas.GlyphRasterizerBackend as Facade_Glyphatlas_flighthq_
 import flighthq.glyphatlas.GlyphSource as Facade_Glyphatlas_flighthq_glyphatlas_GlyphSource;
 import flighthq.types.BackendExplanation;
 import flighthq.types.Bitmap;
+import flighthq.types.GlyphAtlas;
 import flighthq.types.GlyphAtlasEntryExplanation;
+import flighthq.types.GlyphAtlasOptions;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphMetrics;
+import flighthq.types.GlyphRasterizerBackend;
 import flighthq.types.GlyphSource;
-import flighthq.types.GlyphSource.GlyphAtlas;
-import flighthq.types.GlyphSource.GlyphAtlasOptions;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphMetrics;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 import flighthq.types.Rectangle;
 
 class Glyphatlas {

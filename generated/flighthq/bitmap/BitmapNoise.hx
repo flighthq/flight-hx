@@ -7,6 +7,7 @@ import flighthq.bitmap.Bitmap.invalidateBitmap;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapNoise {
   public static function fillBitmapNoise(dest:BitmapRegion, seed:Float, low:Float = 0.0, high:Float = 255.0, grayScale:Bool = false):Void {
     var state:Float = cast _Runtime.UNDEFINED;

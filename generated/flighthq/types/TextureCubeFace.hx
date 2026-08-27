@@ -4,6 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class TextureCubeFace {
   public static final CubeFacePositiveX:Float = 0.0;
 

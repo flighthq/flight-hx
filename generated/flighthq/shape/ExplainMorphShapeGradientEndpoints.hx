@@ -3,10 +3,11 @@ package flighthq.shape;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.MorphShape.MorphShapeGradientEndpoint;
-import flighthq.types.MorphShape.MorphShapeGradientEndpointExplanation;
-import flighthq.types.MorphShape.MorphShapeGradientEndpointReason;
+import flighthq.types.MorphShapeGradientEndpoint;
+import flighthq.types.MorphShapeGradientEndpointExplanation;
+import flighthq.types.MorphShapeGradientEndpointReason;
 
+@:noCompletion
 class ExplainMorphShapeGradientEndpoints {
   public static function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):MorphShapeGradientEndpointExplanation {
     var issue:Float = cast _Runtime.UNDEFINED;

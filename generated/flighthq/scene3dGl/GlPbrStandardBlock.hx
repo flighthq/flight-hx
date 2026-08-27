@@ -7,51 +7,60 @@ import flighthq.color.PackColor.unpackColorToLinear;
 import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
 import flighthq.scene3dGl.GlMeshProgram.bindGlUvTransform;
 import flighthq.texture.Texture.hasTextureUvTransform;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.GlMeshProgram;
+import flighthq.types.GlPbrDefineKey;
 import flighthq.types.GlPbrProgram;
-import flighthq.types.GlPbrProgram.GlPbrDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.MaterialAlphaMode;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.StandardPbrMaterialProperties;
 import flighthq.types.SurfaceMaterial;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.TextureUvTransform;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 
+@:noCompletion
 class GlPbrStandardBlock {
-  @:noCompletion
-  public static final GL_PBR_BASE_COLOR_TEXTURE_UNIT:Float = 0.0;
+  @:allow(flighthq)
+  @:keep
+  private static final GL_PBR_BASE_COLOR_TEXTURE_UNIT:Float = 0.0;
 
-  @:noCompletion
-  public static final GL_PBR_NORMAL_TEXTURE_UNIT:Float = 1.0;
+  @:allow(flighthq)
+  @:keep
+  private static final GL_PBR_NORMAL_TEXTURE_UNIT:Float = 1.0;
 
-  @:noCompletion
-  public static final GL_PBR_METALLIC_ROUGHNESS_TEXTURE_UNIT:Float = 2.0;
+  @:allow(flighthq)
+  @:keep
+  private static final GL_PBR_METALLIC_ROUGHNESS_TEXTURE_UNIT:Float = 2.0;
 
-  @:noCompletion
-  public static final GL_PBR_OCCLUSION_TEXTURE_UNIT:Float = 3.0;
+  @:allow(flighthq)
+  @:keep
+  private static final GL_PBR_OCCLUSION_TEXTURE_UNIT:Float = 3.0;
 
-  @:noCompletion
-  public static final GL_PBR_EMISSIVE_TEXTURE_UNIT:Float = 4.0;
+  @:allow(flighthq)
+  @:keep
+  private static final GL_PBR_EMISSIVE_TEXTURE_UNIT:Float = 4.0;
 
-  @:noCompletion
-  public static final GL_PBR_ALPHA_TEXTURE_UNIT:Float = 5.0;
+  @:allow(flighthq)
+  @:keep
+  private static final GL_PBR_ALPHA_TEXTURE_UNIT:Float = 5.0;
 
-  @:noCompletion
-  public static final GL_PBR_EXTENSION_TEXTURE_UNIT:Float = 6.0;
+  @:allow(flighthq)
+  @:keep
+  private static final GL_PBR_EXTENSION_TEXTURE_UNIT:Float = 6.0;
 
-  @:noCompletion
-  public static function bindGlPbrStandardBlock(state:GlRenderState, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlPbrStandardBlock(state:GlRenderState, program:GlPbrProgram, standard:Null<StandardPbrMaterialProperties>):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     if ((cast _Runtime.strictEquals(standard, null) : Bool)) {
@@ -82,8 +91,9 @@ class GlPbrStandardBlock {
     bindGlUvTransform(({ final __callArgument16:Dynamic = gl; __callArgument16; }), ({ final __callArgument17:Dynamic = program; __callArgument17; }), (cast (cast standard : { var baseColorMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).baseColorMap : Dynamic));
   }
 
-  @:noCompletion
-  public static function bindGlPbrStandardTexture(state:GlRenderState, texture:Null<Texture>, location:Null<flighthq._internal.dom.WebGLUniformLocation>, unit:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlPbrStandardTexture(state:GlRenderState, texture:Null<Texture>, location:Null<flighthq._internal.dom.WebGLUniformLocation>, unit:Float):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(texture, null) : Bool)) { return; }
     gl = (cast state : GlRenderState).gl;
@@ -92,8 +102,9 @@ class GlPbrStandardBlock {
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, location, unit);
   }
 
-  @:noCompletion
-  public static function buildGlPbrStandardDefineKey(state:GlRenderState, standard:Null<StandardPbrMaterialProperties>, surface:Null<SurfaceMaterial>):GlPbrDefineKey {
+  @:allow(flighthq)
+  @:keep
+  private static function buildGlPbrStandardDefineKey(state:GlRenderState, standard:Null<StandardPbrMaterialProperties>, surface:Null<SurfaceMaterial>):GlPbrDefineKey {
     var baseColorMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
     var alphaMode:MaterialAlphaMode = cast _Runtime.UNDEFINED;
     baseColorMap = _Runtime.coalesce(({ final __typedStruct24 = standard; __typedStruct24 == null ? _Runtime.UNDEFINED : (cast __typedStruct24 : { var baseColorMap:Null<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).baseColorMap; }), function():Dynamic return cast null);
@@ -102,8 +113,9 @@ class GlPbrStandardBlock {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isGlTextureReady(state:GlRenderState, texture:Null<Texture>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isGlTextureReady(state:GlRenderState, texture:Null<Texture>):Bool {
     return cast ((cast !_Runtime.strictEquals(texture, null) : Bool) && (cast !_Runtime.strictEquals((cast (#if js _Runtime.callValue(resolveGlTexture, cast ([({ final __callArgument54:Dynamic = state; __callArgument54; }), ({ final __callArgument55:Dynamic = texture; __callArgument55; })] : Array<Dynamic>)) #else resolveGlTexture(({ final __callArgument52:Dynamic = state; __callArgument52; }), ({ final __callArgument53:Dynamic = texture; __callArgument53; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Null<flighthq._internal.dom.WebGLTexture>), null) : Bool));
     return cast null;
   }

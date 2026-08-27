@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef GlyphOutlineMetrics = { var ascent:Float; var descent:Float; var lineGap:Float; var unitsPerEm:Float; };
-
 typedef GlyphOutlineSource = { var getGlyphOutline:Path->Float->Bool; var getGlyphOutlineAdvance:Float->Float; var getGlyphOutlineIndexForCodePoint:Float->Float; var getGlyphOutlineMetrics:Void->GlyphOutlineMetrics; };

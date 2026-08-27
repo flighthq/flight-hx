@@ -3,9 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types._internal._PhongMaterialValues.PhongMaterialKind;
 
 typedef PhongMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var diffuse:Float; var diffuseMap:Null<Texture>; var normalMap:Null<Texture>; var normalScale:Float; var shininess:Float; var specular:Float; var specularMap:Null<Texture>; };

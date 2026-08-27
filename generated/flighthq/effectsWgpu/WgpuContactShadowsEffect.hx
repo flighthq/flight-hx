@@ -8,14 +8,16 @@ import flighthq.effectsWgpu.WgpuSsaoEffect.applySsaoEffectToWgpu;
 import flighthq.types.ContactShadowsEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.SsaoEffect;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuContactShadowsEffect {
-  @:noCompletion
-  public static function applyContactShadowsEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ContactShadowsEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyContactShadowsEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ContactShadowsEffect):Void {
     applySsaoEffectToWgpu(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }), ({ final __callArgument2:Dynamic = dest; __callArgument2; }), ({ final __callArgument3:Dynamic = { kind: 'SsaoEffect', intensity: _Runtime.coalesce(_Runtime.field(effect, 'opacity'), function():Dynamic return cast 0.6), radius: _Runtime.coalesce(_Runtime.field(effect, 'distance'), function():Dynamic return cast 0.5), samples: _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0) }; __callArgument3; }));
   }
 

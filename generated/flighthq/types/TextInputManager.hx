@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TextInputSource = Dynamic;
-
 typedef TextInputManager = { var enabled:Bool; var focused:Null<RichText>; };

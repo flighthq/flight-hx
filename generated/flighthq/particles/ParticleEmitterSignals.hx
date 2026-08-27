@@ -7,9 +7,11 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.ParticleEmitterSignals;
 import flighthq.types.Signal;
 
+@:noCompletion
 class ParticleEmitterSignals {
-  @:noCompletion
-  public static function createParticleEmitterSignals():flighthq.types.ParticleEmitterSignals {
+  @:allow(flighthq)
+  @:keep
+  private static function createParticleEmitterSignals():flighthq.types.ParticleEmitterSignals {
     return cast { onEmitterComplete: (cast createSignal() : Signal<Void->Void>), onParticleDeath: (cast createSignal() : Signal<Float->Float->Float->Void>), onParticleSpawn: (cast createSignal() : Signal<Float->Float->Float->Float->Float->Float->Void>) };
     return cast null;
   }

@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.SharpenEffect;
 
+@:noCompletion
 class GlSharpenEffect {
-  @:noCompletion
-  public static function applySharpenEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SharpenEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applySharpenEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:SharpenEffect):Void {
     var amount:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.5);

@@ -4,8 +4,9 @@ package flighthq.adjustments;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ColorBlindSimulationAdjustment;
-import flighthq.types.ColorBlindSimulationAdjustment.ColorBlindType;
+import flighthq.types.ColorBlindType;
 
+@:noCompletion
 class ColorBlindSimulationAdjustment {
   public static function createColorBlindSimulationAdjustment(?options:{ @:optional var type:Null<ColorBlindType>; }):flighthq.types.ColorBlindSimulationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

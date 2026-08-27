@@ -20,31 +20,33 @@ import flighthq.scene2dWgpu.WgpuShapeRasterizer.getWgpuShapeRasterizer;
 import flighthq.shape.Scale9ShapeCommands.mapScale9ShapeCommands;
 import flighthq.types.Matrix;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.Scale9Mapper;
 import flighthq.types.Scale9Shape;
-import flighthq.types.Scale9Shape.Scale9ShapeData;
+import flighthq.types.Scale9ShapeData;
 import flighthq.types.Scene2DRenderer;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types.ShapeRasterizer;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
 typedef WgpuScale9ShapeData__wgpuScale9Shape = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var ctx:flighthq._internal.dom.CanvasRenderingContext2D; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var entry:Null<WgpuTextureEntry>; };
 
+@:noCompletion
 class WgpuScale9Shape {
-  @:noCompletion
-  public static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
+  @:allow(flighthq)
+  @:keep
+  private static function createWgpuScale9ShapeData(_state:RenderState, _source:Renderable):RendererData {
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -55,16 +57,18 @@ class WgpuScale9Shape {
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyWgpuScale9ShapeData(_state:RenderState, data:RendererData):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuScale9ShapeData(_state:RenderState, data:RendererData):Void {
     var shapeData:Null<WgpuScale9ShapeData__wgpuScale9Shape> = cast _Runtime.UNDEFINED;
     shapeData = (cast getWgpuRendererData(({ final __callArgument0:Dynamic = data; __callArgument0; })) : Null<WgpuScale9ShapeData__wgpuScale9Shape>);
     if ((cast _Runtime.strictEquals(shapeData, null) : Bool)) { return; }
     ({ final __hostTypeCall5 = ({ final __structural4 = (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var texture:flighthq._internal.dom.GPUTexture; }).texture; }); __hostTypeCall5 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall5 : flighthq._internal.dom.GPUTexture).destroy(); });
   }
 
-  @:noCompletion
-  public static function drawWgpuScale9Shape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuScale9Shape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:Scale9Shape = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -145,8 +149,9 @@ class WgpuScale9Shape {
     drawWgpuQuadWithTransform(({ final __callArgument46:Dynamic = state; __callArgument46; }), ({ final __callArgument47:Dynamic = renderProxy; __callArgument47; }), ({ final __callArgument48:Dynamic = { a: a, b: b, c: c, d: d, tx: t.tx, ty: t.ty }; __callArgument48; }), (cast shapeData : WgpuScale9ShapeData__wgpuScale9Shape).entry, (cast 0.0 : Float), (cast 0.0 : Float), (cast w : Float), (cast h : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
-  @:noCompletion
-  public static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuScale9ShapeMask(state:WgpuRenderState, data:RenderProxy2D):Void {
     drawWgpuScale9Shape(({ final __callArgument52:Dynamic = state; __callArgument52; }), ({ final __callArgument53:Dynamic = data; __callArgument53; }));
   }
 

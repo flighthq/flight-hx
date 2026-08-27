@@ -9,21 +9,24 @@ import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
+import flighthq.types.WgpuBitmapShader;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuBitmapShader;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 
+@:noCompletion
 class WgpuShaderBinding {
   public static final _shaderBindings__wgpuShaderBinding:flighthq._internal._WeakMap<RenderProxy2D, WgpuBitmapShader> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static function getWgpuShader(renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuShader(renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
     return cast ((cast WgpuShaderBinding._shaderBindings__wgpuShaderBinding : flighthq._internal._WeakMap<RenderProxy2D, WgpuBitmapShader>).get(renderProxy));
     return cast null;
   }
 
-  @:noCompletion
-  public static function resolveWgpuShader(state:WgpuRenderState, renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveWgpuShader(state:WgpuRenderState, renderProxy:RenderProxy2D):Null<WgpuBitmapShader> {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var resolver:Null<RenderProxy2D->Null<WgpuBitmapShader>> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime);
@@ -36,8 +39,9 @@ class WgpuShaderBinding {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setWgpuShader(state:WgpuRenderState, node:Node2D, shader:Null<WgpuBitmapShader>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setWgpuShader(state:WgpuRenderState, node:Node2D, shader:Null<WgpuBitmapShader>):Void {
     var renderProxy:RenderProxy2D = cast _Runtime.UNDEFINED;
     renderProxy = (cast getOrCreateRenderProxy2D(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = node; __callArgument5; })) : RenderProxy2D);
     if ((cast _Runtime.strictEquals(shader, null) : Bool)) {

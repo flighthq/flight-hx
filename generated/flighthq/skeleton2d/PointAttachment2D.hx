@@ -7,8 +7,9 @@ import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.types.PointAttachment2D;
 import flighthq.types.Skeleton2D;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
+@:noCompletion
 class PointAttachment2D {
   public static final MATRIX_STRIDE__pointAttachment2D:Float = 6.0;
 

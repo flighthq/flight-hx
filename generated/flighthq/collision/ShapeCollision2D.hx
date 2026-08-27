@@ -9,16 +9,17 @@ import flighthq.collision.ConvexVertices2D.writeObbVertices;
 import flighthq.collision.Manifold2D.clearCollisionManifold2D;
 import flighthq.geometry.Vector2.createVector2;
 import flighthq.geometry.Vector2.normalizeVector2;
-import flighthq.types.Collision.CollisionAabb2D;
-import flighthq.types.Collision.CollisionCircle2D;
-import flighthq.types.Collision.CollisionManifold2D;
-import flighthq.types.Collision.CollisionObb2D;
-import flighthq.types.Collision.CollisionPolygon2D;
+import flighthq.types.CollisionAabb2D;
+import flighthq.types.CollisionCircle2D;
+import flighthq.types.CollisionManifold2D;
+import flighthq.types.CollisionObb2D;
+import flighthq.types.CollisionPolygon2D;
 import flighthq.types.Vector2;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
 typedef ShapeCollisionScratch__shapeCollision2D = { var verticesA:flighthq._internal._Float64Array; var verticesB:flighthq._internal._Float64Array; var axis:Dynamic; var minOverlapAxis:{ var overlap:Float; var sign:Float; var x:Float; var y:Float; }; };
 
+@:noCompletion
 class ShapeCollision2D {
   public static final RELATIVE_EPSILON__shapeCollision2D:Float = 1e-9;
 

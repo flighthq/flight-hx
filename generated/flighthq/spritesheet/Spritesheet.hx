@@ -12,7 +12,7 @@ import flighthq.spritesheet.SpritesheetFrom as Facade_Spritesheet_flighthq_sprit
 import flighthq.spritesheet.SpritesheetPlayer as Facade_Spritesheet_flighthq_spritesheet_SpritesheetPlayer;
 import flighthq.spritesheet.SpritesheetValidation as Facade_Spritesheet_flighthq_spritesheet_SpritesheetValidation;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.GridSliceOptions;
 import flighthq.types.Signal;
 import flighthq.types.Spritesheet;

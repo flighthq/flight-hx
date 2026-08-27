@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TextLayout.TextMeasureFunction;
-import flighthq.types.TextShaper.ShapeRunOptions;
-import flighthq.types.TextShaper.TextShaperBackend;
 
 typedef CanvasTextShaperBackend = { @:optional var getCodePointForGlyph:Float->Float; @:optional var getFontMetrics:TextFormat->Null<FontMetrics>; @:optional var getGlyphExtents:Float->Null<GlyphExtents>; @:optional var getGlyphIndexForCodePoint:Float->Float; @:optional var getGlyphName:Float->String; var measureText:TextMeasureFunction; @:optional var shapeRun:String->TextFormat->ShapeRunOptions->ShapedRun; var clearCache:Void->Void; };

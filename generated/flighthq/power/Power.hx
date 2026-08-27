@@ -8,12 +8,12 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.hasSignalSlots;
 import flighthq.types.BackendExplanation;
 import flighthq.types.Power;
-import flighthq.types.Power.PowerBackend;
-import flighthq.types.Power.PowerIdleState;
-import flighthq.types.Power.PowerKeepAwakeMode;
-import flighthq.types.Power.PowerStatus;
-import flighthq.types.Power.PowerThermalState;
+import flighthq.types.PowerBackend;
 import flighthq.types.PowerBatteryHealth;
+import flighthq.types.PowerIdleState;
+import flighthq.types.PowerKeepAwakeMode;
+import flighthq.types.PowerStatus;
+import flighthq.types.PowerThermalState;
 import flighthq.types.Signal;
 
 class Power {
@@ -166,14 +166,16 @@ class Power {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createPowerBatteryHealth():PowerBatteryHealth {
+  @:allow(flighthq)
+  @:keep
+  private static function createPowerBatteryHealth():PowerBatteryHealth {
     return cast { capacityWearLevel: -1.0, cycleCount: -1.0, healthState: 'Unknown', temperatureCelsius: -1.0, voltage: -1.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createPowerStatus():PowerStatus {
+  @:allow(flighthq)
+  @:keep
+  private static function createPowerStatus():PowerStatus {
     return cast { batteryLevel: -1.0, chargingTime: -1.0, dischargingTime: -1.0, isBatteryLow: false, isCharging: false, isLowPower: false, isOnBattery: false, thermalState: 'Unknown' };
     return cast null;
   }
@@ -215,8 +217,9 @@ class Power {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getPowerBackend():PowerBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getPowerBackend():PowerBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Power._custom__power, function():Dynamic return cast Power._host__power), function():Dynamic return cast Power._sentinel__power);
     return cast null;
   }
@@ -256,8 +259,9 @@ class Power {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installPowerHostBackend(backend:PowerBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installPowerHostBackend(backend:PowerBackend):Void {
     if ((cast !_Runtime.strictEquals(Power._host__power, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Power._host__power, backend) : Bool)) { (Power._hostConflict__power = cast (true : Dynamic)); }
       return;
@@ -265,21 +269,24 @@ class Power {
     (Power._host__power = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observePowerHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observePowerHostResult(operation:String, succeeded:Bool):Void {
     (Power._hostObservation__power = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
-  @:noCompletion
-  public static function resetPowerBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetPowerBackendForTest():Void {
     (Power._custom__power = cast (null : Dynamic));
     (Power._host__power = cast (null : Dynamic));
     (Power._hostConflict__power = cast (false : Dynamic));
     (Power._hostObservation__power = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setPowerBackend(backend:Null<PowerBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPowerBackend(backend:Null<PowerBackend>):Void {
     (Power._custom__power = cast (backend : Dynamic));
   }
 

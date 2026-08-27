@@ -12,21 +12,22 @@ import flighthq.texture.Texture.createTexture;
 import flighthq.types.CreateExternalTextureOptions;
 import flighthq.types.ExternalTexture;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.SamplerLike;
-import flighthq.types.Sampler.TextureFilter;
-import flighthq.types.Sampler.TextureWrap;
+import flighthq.types.SamplerLike;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureFilter;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureWrap;
 import flighthq.types.Types.ExternalTextureSourceKind;
 import flighthq.types.Vector2;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
 import flighthq.types._internal._TextureSourceKindValues.ExternalTextureSourceKind;
 
+@:noCompletion
 class WgpuExternalTexture {
   public static function createExternalWgpuTexture(state:WgpuRenderState, handle:flighthq._internal.dom.GPUTexture, options:CreateExternalTextureOptions):Texture {
     var source:ExternalTexture = cast _Runtime.UNDEFINED;

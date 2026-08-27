@@ -29,19 +29,19 @@ import flighthq.path.TessellatePath as Facade_Path_flighthq_path_TessellatePath;
 import flighthq.path.TessellatePathTyped as Facade_Path_flighthq_path_TessellatePathTyped;
 import flighthq.path.TessellateStrokePath as Facade_Path_flighthq_path_TessellateStrokePath;
 import flighthq.path.TransformPath as Facade_Path_flighthq_path_TransformPath;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
+import flighthq.types.PathCommand;
 import flighthq.types.PathMesh;
 import flighthq.types.PathMeshTyped;
 import flighthq.types.PathMorph;
 import flighthq.types.PathMorphCreationExplanation;
 import flighthq.types.PathSegment;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
+import flighthq.types.RectangleLike;
 import flighthq.types.StrokePathTessellationExplanation;
 import flighthq.types.StrokeStyle;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 class Path {

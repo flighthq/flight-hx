@@ -8,15 +8,16 @@ import flighthq.texture.Texture.createTexture;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapFont;
-import flighthq.types.BitmapFont.BitmapFontData;
-import flighthq.types.BitmapFont.BitmapFontGlyphData;
-import flighthq.types.GlyphSource.GlyphAtlas;
-import flighthq.types.GlyphSource.GlyphAtlasRuntime;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphMetrics;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.BitmapFontData;
+import flighthq.types.BitmapFontGlyphData;
+import flighthq.types.GlyphAtlas;
+import flighthq.types.GlyphAtlasRuntime;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphMetrics;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 
+@:noCompletion
 class BitmapFontFromGlyphAtlas {
   public static function createBitmapFontFromGlyphAtlas(atlas:GlyphAtlas):BitmapFont {
     var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;

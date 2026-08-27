@@ -5,10 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.binpack.ExplainUnpackedRectangles as Facade_Binpack_flighthq_binpack_ExplainUnpackedRectangles;
 import flighthq.binpack.PackRectangles as Facade_Binpack_flighthq_binpack_PackRectangles;
-import flighthq.types.BinPack.BinPackOptions;
-import flighthq.types.BinPack.PackResult;
-import flighthq.types.BinPack.PackableRectangle;
-import flighthq.types.BinPack.UnpackedRectangleExplanation;
+import flighthq.types.BinPackOptions;
+import flighthq.types.PackResult;
+import flighthq.types.PackableRectangle;
+import flighthq.types.UnpackedRectangleExplanation;
 
 class Binpack {
   public static function explainUnpackedRectangles(rectangles:Array<PackableRectangle>, ?options:BinPackOptions):Array<UnpackedRectangleExplanation> {

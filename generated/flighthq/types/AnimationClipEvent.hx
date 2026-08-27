@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 
 typedef AnimationClipEvent = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var name:String; var payload:flighthq._internal._Any; var time:Float; };

@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dResources.Scene2DSlotReference.setScene2DSlotReferenceContent;
 import flighthq.types.Node2D;
+import flighthq.types.ResolveScene2DResourcesOptions;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DDocument.Scene2DSlotReference;
 import flighthq.types.Scene2DResources;
-import flighthq.types.Scene2DResources.ResolveScene2DResourcesOptions;
-import flighthq.types.Scene2DResources.Scene2DSlotContentResolver;
-import flighthq.types.Scene2DResources.Scene2DSlotResolution;
+import flighthq.types.Scene2DSlotContentResolver;
+import flighthq.types.Scene2DSlotReference;
+import flighthq.types.Scene2DSlotResolution;
 
+@:noCompletion
 class ResolveScene2DResources {
   public static function resolveScene2DResources(document:Scene2DDocument, ?options:ResolveScene2DResourcesOptions):Scene2DResources {
     var resolved:flighthq._internal._IndexedAccess<Scene2DResources, String> = cast _Runtime.UNDEFINED;

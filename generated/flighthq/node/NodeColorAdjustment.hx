@@ -14,9 +14,10 @@ import flighthq.types.Adjustment;
 import flighthq.types.ColorAdjustmentRuntime;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeRuntime;
 import flighthq.types.TintAdjustment;
 
+@:noCompletion
 class NodeColorAdjustment {
   public static function addNodeColorAdjustment<Traits:flighthq._internal._Object>(source:Node<Traits>, adjustment:Adjustment):Void {
     var runtime:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;

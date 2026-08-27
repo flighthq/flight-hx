@@ -8,25 +8,26 @@ import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.particles.Curve.particleColorCurveFromKeyframes;
 import flighthq.particles.Curve.particleCurveFromKeyframes;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
+import flighthq.types.ColorKeyframe;
+import flighthq.types.CurveKeyframe;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleCurve;
-import flighthq.types.ParticleCurve.ColorKeyframe;
-import flighthq.types.ParticleCurve.CurveKeyframe;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.UnitySchema.UnityColor;
-import flighthq.types.UnitySchema.UnityColorOverLifetime;
-import flighthq.types.UnitySchema.UnityEmission;
-import flighthq.types.UnitySchema.UnityMinMaxValue;
-import flighthq.types.UnitySchema.UnityParseOptions;
-import flighthq.types.UnitySchema.UnityParsed;
-import flighthq.types.UnitySchema.UnityParticleDocument;
-import flighthq.types.UnitySchema.UnityRotationOverLifetime;
-import flighthq.types.UnitySchema.UnityShape;
-import flighthq.types.UnitySchema.UnitySizeOverLifetime;
+import flighthq.types.UnityColor;
+import flighthq.types.UnityColorOverLifetime;
+import flighthq.types.UnityEmission;
+import flighthq.types.UnityMinMaxValue;
+import flighthq.types.UnityParseOptions;
+import flighthq.types.UnityParsed;
+import flighthq.types.UnityParticleDocument;
+import flighthq.types.UnityRotationOverLifetime;
+import flighthq.types.UnityShape;
+import flighthq.types.UnitySizeOverLifetime;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class UnityParse {
   public static final DEFAULT_PPU__unityParse:Float = 100.0;
 

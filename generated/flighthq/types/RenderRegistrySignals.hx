@@ -3,22 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-
-enum abstract RenderRegistry(Int) from Int to Int {
-  public static inline var BlendRealization:RenderRegistry = 0;
-  public static inline var EffectPaddingResolver:RenderRegistry = 1;
-  public static inline var MaterialRenderer:RenderRegistry = 2;
-  public static inline var MaterialTextureLister:RenderRegistry = 3;
-  public static inline var ModifierSnippet:RenderRegistry = 4;
-  public static inline var NodeRenderer:RenderRegistry = 5;
-  public static inline var ShapeCommandHandler:RenderRegistry = 6;
-  public static inline var ShapeRasterizer:RenderRegistry = 7;
-  public static inline var TextureResolver:RenderRegistry = 8;
-}
-
-typedef RenderRegistryMiss = { var kind:Kind; var registry:RenderRegistry; };
-
-typedef RenderRegistryMissExplanation = { var misses:Array<RenderRegistryMiss>; var status:String; };
 
 typedef RenderRegistrySignals = { var onRegistryMiss:Signal<RenderRegistry->Kind->Void>; };

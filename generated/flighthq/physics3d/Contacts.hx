@@ -3,9 +3,10 @@ package flighthq.physics3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Physics3D.Physics3DContact;
-import flighthq.types.Physics3D.Physics3DContactPoint;
+import flighthq.types.Physics3DContact;
+import flighthq.types.Physics3DContactPoint;
 
+@:noCompletion
 class Contacts {
   public static function createPhysics3DContact(bodyA:Float, bodyB:Float, colliderA:Float = 0.0, colliderB:Float = 0.0):Physics3DContact {
     var ordered:Bool = cast _Runtime.UNDEFINED;

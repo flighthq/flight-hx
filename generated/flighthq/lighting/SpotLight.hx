@@ -13,9 +13,10 @@ import flighthq.types.SpotLightConeAngles;
 import flighthq.types.SpotLightOptions;
 import flighthq.types.Types.SpotLightKind;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 import flighthq.types._internal._SpotLightValues.SpotLightKind;
 
+@:noCompletion
 class SpotLight {
   public static function cloneSpotLight(source:flighthq.types.SpotLight):flighthq.types.SpotLight {
     return cast (cast createEntity((cast { castsShadow: _Runtime.field(source, 'castsShadow'), color: _Runtime.field(source, 'color'), direction: (cast cloneVector3(({ final __callArgument0:Dynamic = _Runtime.field(source, 'direction'); __callArgument0; })) : Vector3), innerConeCos: _Runtime.field(source, 'innerConeCos'), intensity: _Runtime.field(source, 'intensity'), kind: SpotLightKind, normalBias: _Runtime.field(source, 'normalBias'), outerConeCos: _Runtime.field(source, 'outerConeCos'), pcfRadius: _Runtime.field(source, 'pcfRadius'), position: (cast cloneVector3(({ final __callArgument2:Dynamic = _Runtime.field(source, 'position'); __callArgument2; })) : Vector3), range: _Runtime.field(source, 'range'), shadowBias: _Runtime.field(source, 'shadowBias') } : Dynamic)) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var innerConeCos:Float; var intensity:Float; var kind:String; var normalBias:Float; var outerConeCos:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var shadowBias:Float; });

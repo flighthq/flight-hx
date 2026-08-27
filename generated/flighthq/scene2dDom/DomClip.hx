@@ -8,19 +8,20 @@ import flighthq.scene2dDom.DomClipRectangle.pushDomClipRectangle;
 import flighthq.scene2dDom.DomClipRectangle.setDomClipHooks;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.types.ClipRegion;
+import flighthq.types.DomClipEntry;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomClipEntry;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomRenderStateRuntime;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node2D;
+import flighthq.types.PathWinding;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.Scene2DClipHooks;
 
+@:noCompletion
 class DomClip {
   public static function enableDomClipSupport(state:DomRenderState):Void {
     ((cast state : DomRenderState).displayObjectClipHooks = DomClip.domScene2DClipHooks__domClip);

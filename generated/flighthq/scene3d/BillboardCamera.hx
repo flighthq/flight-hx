@@ -16,19 +16,20 @@ import flighthq.node.NodeTransform3d.setNodeLocalMatrix4;
 import flighthq.scene3d.Billboard.isBillboard;
 import flighthq.scene3d.SceneNode.getNode3DRuntime;
 import flighthq.types.Billboard;
-import flighthq.types.Billboard.BillboardMode;
+import flighthq.types.BillboardMode;
 import flighthq.types.Camera3D;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Node;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DRuntime;
+import flighthq.types.Node3DTraits;
 import flighthq.types.Quaternion;
-import flighthq.types.Quaternion.QuaternionLike;
+import flighthq.types.QuaternionLike;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class BillboardCamera {
   public static function orientBillboardToCamera(billboard:Billboard, camera:Camera3D):Bool {
     if ((cast !(cast (cast BillboardCamera.setBillboardCameraBasis__billboardCamera(({ final __callArgument0:Dynamic = camera; __callArgument0; })) : Bool) : Bool) : Bool)) { return cast false; }
@@ -44,8 +45,9 @@ class BillboardCamera {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setBillboardCameraBasisGuard(guard:Null<Camera3D->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setBillboardCameraBasisGuard(guard:Null<Camera3D->Void>):Void {
     (BillboardCamera.billboardCameraBasisGuard__billboardCamera = cast (guard : Dynamic));
   }
 

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Snapshot;
 
+@:noCompletion
 class RestoreSnapshot {
   public static function restoreSnapshot<T>(snapshot:Snapshot<T>, target:T):Void {
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(snapshot, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(snapshot), 'object') : Bool)) : Bool) || (cast _Runtime.strictEquals(target, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'object') : Bool)) : Bool)) {

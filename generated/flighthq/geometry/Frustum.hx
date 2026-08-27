@@ -5,18 +5,19 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Plane.createPlane;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.AabbLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Entity;
 import flighthq.types.Frustum;
-import flighthq.types.Frustum.FrustumLike;
-import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Obb.ObbLike;
+import flighthq.types.FrustumLike;
+import flighthq.types.Matrix4Like;
+import flighthq.types.ObbLike;
 import flighthq.types.Plane;
-import flighthq.types.Plane.PlaneLike;
+import flighthq.types.PlaneLike;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Frustum {
   public static function createFrustum():flighthq.types.Frustum {
     return cast (cast createEntity((cast { bottom: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), far: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), left: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), near: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), right: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane), top: (cast (#if js _Runtime.callValue(createPlane, cast ([] : Array<Dynamic>)) #else createPlane(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Plane) } : Dynamic)) : { >Entity, var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; });

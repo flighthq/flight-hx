@@ -6,22 +6,24 @@ import flighthq._internal._Runtime;
 import flighthq.render.RenderProxy.getRenderProxy2D;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.HasAppearance;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.KeyedTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistries;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderRegistries;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.Scene2DRenderBlankReason;
 import flighthq.types.Scene2DRenderExplanation;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class ExplainScene2DRender {
-  @:noCompletion
-  public static function explainScene2DRender(state:RenderState, source:Renderable):Scene2DRenderExplanation {
+  @:allow(flighthq)
+  @:keep
+  private static function explainScene2DRender(state:RenderState, source:Renderable):Scene2DRenderExplanation {
     var kind:String = cast _Runtime.UNDEFINED;
     var hasRenderer:Bool = cast _Runtime.UNDEFINED;
     var proxy:Null<RenderProxy2D> = cast _Runtime.UNDEFINED;

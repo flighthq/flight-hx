@@ -3,25 +3,29 @@ package flighthq.shape;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ShapeBounds.ShapeBoundsCommand;
-import flighthq.types.ShapeBounds.ShapeBoundsCommandHandler;
-import flighthq.types.ShapeCommand.ShapeCommandKey;
+import flighthq.types.ShapeBoundsCommand;
+import flighthq.types.ShapeBoundsCommandHandler;
+import flighthq.types.ShapeCommandKey;
 
+@:noCompletion
 class ShapeBoundsRegistry {
-  @:noCompletion
-  public static function getShapeBoundsCommand(key:String):Null<ShapeBoundsCommand<String>> {
+  @:allow(flighthq)
+  @:keep
+  private static function getShapeBoundsCommand(key:String):Null<ShapeBoundsCommand<String>> {
     return cast _Runtime.coalesce(((cast ShapeBoundsRegistry._commands__shapeBoundsRegistry : flighthq._internal._Map<String, ShapeBoundsCommand<String>>).get(key)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getShapeBoundsCommandRegistryRevision():Float {
+  @:allow(flighthq)
+  @:keep
+  private static function getShapeBoundsCommandRegistryRevision():Float {
     return cast ShapeBoundsRegistry._revision__shapeBoundsRegistry;
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerShapeBoundsCommand<K:ShapeCommandKey>(command:ShapeBoundsCommand<K>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerShapeBoundsCommand<K:ShapeCommandKey>(command:ShapeBoundsCommand<K>):Void {
     var previous:Null<ShapeBoundsCommand<String>> = cast _Runtime.UNDEFINED;
     previous = ((cast ShapeBoundsRegistry._commands__shapeBoundsRegistry : flighthq._internal._Map<String, ShapeBoundsCommand<String>>).get((cast command : ShapeBoundsCommand<K>).key));
     ((cast ShapeBoundsRegistry._commands__shapeBoundsRegistry : flighthq._internal._Map<String, ShapeBoundsCommand<String>>).set((cast command : ShapeBoundsCommand<K>).key, (cast command)));
@@ -29,8 +33,9 @@ class ShapeBoundsRegistry {
     ShapeBoundsRegistry._revision__shapeBoundsRegistry++;
   }
 
-  @:noCompletion
-  public static function unregisterShapeBoundsCommand(key:String):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function unregisterShapeBoundsCommand(key:String):Void {
     if ((cast !(cast ((cast ShapeBoundsRegistry._commands__shapeBoundsRegistry : flighthq._internal._Map<String, ShapeBoundsCommand<String>>).delete_(key)) : Bool) : Bool)) { return; }
     ShapeBoundsRegistry._revision__shapeBoundsRegistry++;
   }

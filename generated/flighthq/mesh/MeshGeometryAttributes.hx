@@ -10,14 +10,15 @@ import flighthq.mesh.VertexFormat.readVertexFormatComponent;
 import flighthq.mesh.VertexFormat.writeVertexFormatComponent;
 import flighthq.types.Entity;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshGeometryRuntime;
-import flighthq.types.MeshGeometry.VertexAttribute;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexFormat;
-import flighthq.types.MeshGeometry.VertexSemantic;
+import flighthq.types.MeshGeometryRuntime;
+import flighthq.types.VertexAttribute;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexFormat;
+import flighthq.types.VertexSemantic;
 
 typedef AttributeByteLocation__meshGeometryAttributes = { var attribute:Null<VertexAttribute>; var byteOffset:Float; var view:Null<Dynamic>; };
 
+@:noCompletion
 class MeshGeometryAttributes {
   public static function getMeshGeometryVertexColor0(out:{ var w:Float; var x:Float; var y:Float; var z:Float; }, geometry:MeshGeometry, vertexIndex:Float):Bool {
     return cast (cast MeshGeometryAttributes.getFourComponentAttribute__meshGeometryAttributes(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = geometry; __callArgument1; }), (cast vertexIndex : Float), ({ final __callArgument2:Dynamic = 'color0'; __callArgument2; }), (cast true : Bool)) : Bool);

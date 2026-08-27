@@ -20,15 +20,17 @@ import flighthq.types.CanvasTextInputOverlay;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.TextInputState;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
+@:noCompletion
 class CanvasTextInput {
-  @:noCompletion
-  public static function drawCanvasTextInputOverlay(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasTextInputOverlay(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:RichText = cast _Runtime.UNDEFINED;
     var input:Null<TextInputState> = cast _Runtime.UNDEFINED;
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;

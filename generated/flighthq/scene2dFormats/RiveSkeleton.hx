@@ -7,18 +7,20 @@ import flighthq.math.Constants.RAD_TO_DEG;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.skeleton2d.Skeleton2d.createSkeleton2D;
 import flighthq.types.Bone2D;
-import flighthq.types.RiveDocument.RiveArtboardGraph;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveSkeleton2DImport;
-import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types.RiveArtboardGraph;
+import flighthq.types.RiveCoreObject;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveSkeleton2DImport;
+import flighthq.types.RiveValue;
 import flighthq.types.Skeleton2D;
 import flighthq.types.TransformMode2D.TransformMode2D;
 import flighthq.types.Types.TransformMode2D;
 
+@:noCompletion
 class RiveSkeleton {
-  @:noCompletion
-  public static function createRiveSkeleton2D(artboard:RiveArtboardGraph):Null<RiveSkeleton2DImport> {
+  @:allow(flighthq)
+  @:keep
+  private static function createRiveSkeleton2D(artboard:RiveArtboardGraph):Null<RiveSkeleton2DImport> {
     var objects:Array<RiveCoreObject> = cast _Runtime.UNDEFINED;
     var boneIndices:Array<Float> = cast _Runtime.UNDEFINED;
     var components:Array<Float> = cast _Runtime.UNDEFINED;

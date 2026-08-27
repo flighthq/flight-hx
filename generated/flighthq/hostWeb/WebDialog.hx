@@ -6,15 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.dialog.Dialog.createWebDialogBackend;
 import flighthq.dialog.Dialog.installDialogHostBackend;
 import flighthq.dialog.Dialog.observeDialogHostResult;
-import flighthq.types.Dialog.DialogBackend;
-import flighthq.types.Dialog.FileDialogHandle;
-import flighthq.types.Dialog.MessageDialogOptions;
-import flighthq.types.Dialog.MessageDialogResult;
-import flighthq.types.Dialog.OpenDirectoryDialogOptions;
-import flighthq.types.Dialog.OpenFileDialogOptions;
-import flighthq.types.Dialog.PromptDialogOptions;
-import flighthq.types.Dialog.SaveFileDialogOptions;
+import flighthq.types.DialogBackend;
+import flighthq.types.FileDialogHandle;
+import flighthq.types.MessageDialogOptions;
+import flighthq.types.MessageDialogResult;
+import flighthq.types.OpenDirectoryDialogOptions;
+import flighthq.types.OpenFileDialogOptions;
+import flighthq.types.PromptDialogOptions;
+import flighthq.types.SaveFileDialogOptions;
 
+@:noCompletion
 class WebDialog {
   public static function enableHostWebDialog():Void {
     var base:DialogBackend = cast _Runtime.UNDEFINED;
@@ -80,8 +81,9 @@ class WebDialog {
     installDialogHostBackend(({ final __callArgument12:Dynamic = observed; __callArgument12; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebDialogForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebDialogForTest():Void {
     (WebDialog._enabled__webDialog = cast (false : Dynamic));
   }
 

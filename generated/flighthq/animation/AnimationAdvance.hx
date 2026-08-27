@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.animation.AnimationPlayer.advanceAnimationPlayer;
 import flighthq.types.AnimationPlayer;
 
+@:noCompletion
 class AnimationAdvance {
   public static function advanceAnimationPlayers(players:Array<AnimationPlayer>, dt:Float, advanced:Array<AnimationPlayer>):Void {
     for (player in _Runtime.iterable(players)) {

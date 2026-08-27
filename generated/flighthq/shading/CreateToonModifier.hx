@@ -10,6 +10,7 @@ import flighthq.types.Types.ToonModifierKind;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._ToonModifierValues.ToonModifierKind;
 
+@:noCompletion
 class CreateToonModifier {
   public static function createToonModifier(options:ToonModifierOptions):ToonModifier {
     return cast { kind: ToonModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, steps: _Runtime.field(options, 'steps'), smoothness: _Runtime.coalesce(_Runtime.field(options, 'smoothness'), function():Dynamic return cast 0.0) };

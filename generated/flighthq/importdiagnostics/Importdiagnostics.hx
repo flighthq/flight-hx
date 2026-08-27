@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.importdiagnostics.ImportDiagnosticCollector as Facade_Importdiagnostics_flighthq_importdiagnostics_ImportDiagnosticCollector;
 import flighthq.importdiagnostics.ImportDiagnosticText as Facade_Importdiagnostics_flighthq_importdiagnostics_ImportDiagnosticText;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 
 class Importdiagnostics {
   public static function collectImportDiagnostics(run:Array<ImportDiagnostic>->Void):Array<ImportDiagnostic> {

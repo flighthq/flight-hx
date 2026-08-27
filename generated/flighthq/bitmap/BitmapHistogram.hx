@@ -9,6 +9,7 @@ import flighthq.types.Bitmap;
 import flighthq.types.BitmapHistogram;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapHistogram {
   public static function equalizeBitmapHistogram(dest:BitmapRegion, source:BitmapRegion):Void {
     var histogram:flighthq.types.BitmapHistogram = cast _Runtime.UNDEFINED;

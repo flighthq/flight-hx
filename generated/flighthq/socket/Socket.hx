@@ -9,17 +9,17 @@ import flighthq.socket.EnableSocketGuards as Facade_Socket_flighthq_socket_Enabl
 import flighthq.socket.ExplainSocketSendFailure as Facade_Socket_flighthq_socket_ExplainSocketSendFailure;
 import flighthq.types.Signal;
 import flighthq.types.Socket;
-import flighthq.types.Socket.SocketBackend;
-import flighthq.types.Socket.SocketCloseInfo;
-import flighthq.types.Socket.SocketConnection;
-import flighthq.types.Socket.SocketEventSink;
-import flighthq.types.Socket.SocketGuard;
-import flighthq.types.Socket.SocketMessage;
-import flighthq.types.Socket.SocketOptions;
-import flighthq.types.Socket.SocketReadyState;
-import flighthq.types.Socket.SocketRuntime;
-import flighthq.types.Socket.SocketSendFailureExplanation;
-import flighthq.types.Socket.SocketSignals;
+import flighthq.types.SocketBackend;
+import flighthq.types.SocketCloseInfo;
+import flighthq.types.SocketConnection;
+import flighthq.types.SocketEventSink;
+import flighthq.types.SocketGuard;
+import flighthq.types.SocketMessage;
+import flighthq.types.SocketOptions;
+import flighthq.types.SocketReadyState;
+import flighthq.types.SocketRuntime;
+import flighthq.types.SocketSendFailureExplanation;
+import flighthq.types.SocketSignals;
 
 class Socket {
   public static var _backend__socket:Null<SocketBackend> = _Runtime.explicitNull();
@@ -59,8 +59,9 @@ class Socket {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebSocketBackend():SocketBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebSocketBackend():SocketBackend {
     return cast { openSocket: function(options:SocketOptions, events:SocketEventSink):Null<SocketConnection> {
       var ws:flighthq._internal.dom.WebSocket = cast _Runtime.UNDEFINED;
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('WebSocket'), 'undefined') : Bool)) { return cast null; }
@@ -123,8 +124,9 @@ class Socket {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getSocketBackend():SocketBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getSocketBackend():SocketBackend {
     if ((cast _Runtime.strictEquals(Socket._backend__socket, null) : Bool)) { (Socket._backend__socket = cast ((cast createWebSocketBackend() : SocketBackend) : Dynamic)); }
     return cast Socket._backend__socket;
     return cast null;
@@ -166,13 +168,15 @@ class Socket {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setSocketBackend(backend:Null<SocketBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setSocketBackend(backend:Null<SocketBackend>):Void {
     (Socket._backend__socket = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function setSocketGuard(guard:Null<SocketGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setSocketGuard(guard:Null<SocketGuard>):Void {
     (Socket._guard__socket = cast (guard : Dynamic));
   }
 

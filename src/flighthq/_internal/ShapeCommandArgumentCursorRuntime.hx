@@ -1,6 +1,6 @@
 package flighthq._internal;
 
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
 
 @:noCompletion
 class ShapeCommandArgumentCursorRuntime {

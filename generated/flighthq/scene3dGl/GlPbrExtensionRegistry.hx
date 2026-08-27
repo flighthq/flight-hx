@@ -11,42 +11,44 @@ import flighthq.renderGl.GlTextureResolver.resolveGlTexture;
 import flighthq.scene3dGl.GlPbrStandardBlock.isGlTextureReady;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.texture.Texture.getTextureUvMatrix;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.EntityRuntime;
 import flighthq.types.GlPbrExtensionBindContext;
 import flighthq.types.GlPbrExtensionIssue;
 import flighthq.types.GlPbrExtensionRegistration;
 import flighthq.types.GlPbrExtensionShaderContext;
 import flighthq.types.GlPbrExtensionShaderContribution;
 import flighthq.types.GlPbrTransmissionSceneColor;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GlScene3DRuntime;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
 import flighthq.types.LinearColor;
 import flighthq.types.Matrix3;
-import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Matrix3Like;
 import flighthq.types.PbrExtension;
-import flighthq.types.PbrExtension.PbrUvSet;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.PbrUvSet;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.TextureUvTransform;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class GlPbrExtensionRegistry {
-  @:noCompletion
-  public static function bindGlPbrExtensions(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram, extensions:Array<PbrExtension>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function bindGlPbrExtensions(state:GlRenderState, program:flighthq._internal.dom.WebGLProgram, extensions:Array<PbrExtension>):Bool {
     var entries:flighthq._internal._Map<String, RegistryTableEntry<GlPbrExtensionRegistration>> = cast _Runtime.UNDEFINED;
     var context:GlPbrExtensionBindContext = cast _Runtime.UNDEFINED;
     entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var pbrExtensions:KeyedTable<GlPbrExtensionRegistration>; }).pbrExtensions : KeyedTable<GlPbrExtensionRegistration>).entries;
@@ -133,8 +135,9 @@ class GlPbrExtensionRegistry {
     registries.pbrExtensionRevision++;
   }
 
-  @:noCompletion
-  public static function resolveGlPbrExtensionContributions(state:GlRenderState, extensions:Array<PbrExtension>):Null<Array<GlPbrExtensionShaderContribution>> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveGlPbrExtensionContributions(state:GlRenderState, extensions:Array<PbrExtension>):Null<Array<GlPbrExtensionShaderContribution>> {
     var entries:flighthq._internal._Map<String, RegistryTableEntry<GlPbrExtensionRegistration>> = cast _Runtime.UNDEFINED;
     var context:GlPbrExtensionShaderContext = cast _Runtime.UNDEFINED;
     var contributions:Array<GlPbrExtensionShaderContribution> = cast _Runtime.UNDEFINED;

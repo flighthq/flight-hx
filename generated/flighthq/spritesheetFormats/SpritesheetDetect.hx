@@ -13,20 +13,21 @@ import flighthq.spritesheetFormats.CocosPlistParse.parseCocosPlistSpritesheet;
 import flighthq.spritesheetFormats.LibgdxAtlasParse.parseLibgdxAtlasSpritesheet;
 import flighthq.spritesheetFormats.StarlingParse.parseStarlingSpritesheet;
 import flighthq.spritesheetFormats.TexturePackerParse.parseTexturePackerSpritesheet;
-import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.KeyedTable;
 import flighthq.types.SpritesheetData;
-import flighthq.types.SpritesheetFormat.SpritesheetFormatKind;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindAseprite as ASEPRITE;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindCocosPlist as COCOS_PLIST;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindLibgdxAtlas as LIBGDX_ATLAS;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindStarling as STARLING;
 import flighthq.types.SpritesheetFormat.SpritesheetFormatKindTexturePacker as TEXTURE_PACKER;
+import flighthq.types.SpritesheetFormatKind;
 import flighthq.types.SpritesheetParseOptions;
 
 typedef FormatEntry__spritesheetDetect = { var detect:String->Bool; var parse:String->SpritesheetParseOptions->SpritesheetData; };
 
 typedef RegisteredFormatEntry__spritesheetDetect = { var entry:FormatEntry__spritesheetDetect; var order:Float; };
 
+@:noCompletion
 class SpritesheetDetect {
   public static function detectTexturePacker__spritesheetDetect(text:String):Bool {
     if ((cast !_Runtime.strictEquals(_Runtime.getIndex(_Runtime.callProperty(text, 'trimStart', cast ([] : Array<Dynamic>)), 0.0), '{') : Bool)) { return cast false; }

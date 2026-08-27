@@ -10,6 +10,7 @@ import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 
+@:noCompletion
 class BlurEffect {
   public static function createBlurEffect(?options:{ @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; }):flighthq.types.BlurEffect {
     if (options == null) options = cast ({  } : Dynamic);

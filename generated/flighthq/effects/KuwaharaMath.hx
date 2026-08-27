@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.KuwaharaEffect;
 
+@:noCompletion
 class KuwaharaMath {
   public static function computeKuwaharaGaussianWeights(radius:Float, out:flighthq._internal._Float32Array):Float {
     var r:Float = cast _Runtime.UNDEFINED;

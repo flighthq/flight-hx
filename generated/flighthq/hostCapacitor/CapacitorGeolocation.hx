@@ -4,19 +4,20 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorGeolocationOptions;
-import flighthq.types.CapacitorApi.CapacitorGeolocationPermissionOptions;
-import flighthq.types.CapacitorApi.CapacitorGeolocationPermissionStatus;
-import flighthq.types.CapacitorApi.CapacitorGeolocationPlugin;
-import flighthq.types.CapacitorApi.CapacitorPosition;
-import flighthq.types.CapacitorApi.CapacitorPositionCoords;
-import flighthq.types.Geolocation.GeoPosition;
-import flighthq.types.Geolocation.GeoPositionResult;
-import flighthq.types.Geolocation.GeolocationBackend;
-import flighthq.types.Geolocation.GeolocationErrorReason;
-import flighthq.types.Geolocation.GeolocationPermissionState;
-import flighthq.types.Geolocation.GeolocationRequestOptions;
+import flighthq.types.CapacitorGeolocationOptions;
+import flighthq.types.CapacitorGeolocationPermissionOptions;
+import flighthq.types.CapacitorGeolocationPermissionStatus;
+import flighthq.types.CapacitorGeolocationPlugin;
+import flighthq.types.CapacitorPosition;
+import flighthq.types.CapacitorPositionCoords;
+import flighthq.types.GeoPosition;
+import flighthq.types.GeoPositionResult;
+import flighthq.types.GeolocationBackend;
+import flighthq.types.GeolocationErrorReason;
+import flighthq.types.GeolocationPermissionState;
+import flighthq.types.GeolocationRequestOptions;
 
+@:noCompletion
 class CapacitorGeolocation {
   public static function createCapacitorGeolocationBackend(capacitor:CapacitorApi):GeolocationBackend {
     var geolocation:CapacitorGeolocationPlugin = cast _Runtime.UNDEFINED;

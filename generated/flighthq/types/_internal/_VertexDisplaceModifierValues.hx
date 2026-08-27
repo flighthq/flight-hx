@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
 import flighthq.types.Texture;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
 class _VertexDisplaceModifierValues {
   public static final VertexDisplaceModifierSourceValue:{ var HeightMap:String; var Sine:String; } = (cast { HeightMap: 'HeightMap', Sine: 'Sine' });

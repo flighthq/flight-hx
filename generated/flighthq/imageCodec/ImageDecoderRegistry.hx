@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ImageDecoder;
 
+@:noCompletion
 class ImageDecoderRegistry {
   public static function clearImageDecoders():Void {
     ((cast ImageDecoderRegistry.decoders__imageDecoderRegistry : flighthq._internal._Map<String, ImageDecoder>).clear());

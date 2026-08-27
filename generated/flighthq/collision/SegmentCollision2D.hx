@@ -4,13 +4,14 @@ package flighthq.collision;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollisionShapeValidation2D.getCollisionPolygonValidationStatus2D;
-import flighthq.types.Collision.CollisionAabb2D;
-import flighthq.types.Collision.CollisionCapsule2D;
-import flighthq.types.Collision.CollisionCircle2D;
-import flighthq.types.Collision.CollisionObb2D;
-import flighthq.types.Collision.CollisionPolygon2D;
-import flighthq.types.Collision.CollisionSegment2D;
+import flighthq.types.CollisionAabb2D;
+import flighthq.types.CollisionCapsule2D;
+import flighthq.types.CollisionCircle2D;
+import flighthq.types.CollisionObb2D;
+import flighthq.types.CollisionPolygon2D;
+import flighthq.types.CollisionSegment2D;
 
+@:noCompletion
 class SegmentCollision2D {
   public static final RELATIVE_EPSILON__segmentCollision2D:Float = 1e-9;
 
@@ -19,8 +20,9 @@ class SegmentCollision2D {
     return cast null;
   }
 
-  @:noCompletion
-  public static function testSegmentCapsuleCollision2D(a:CollisionSegment2D, b:CollisionCapsule2D):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function testSegmentCapsuleCollision2D(a:CollisionSegment2D, b:CollisionCapsule2D):Bool {
     var distanceSquared:Float = cast _Runtime.UNDEFINED;
     distanceSquared = (cast SegmentCollision2D.segmentSegmentDistanceSquared__segmentCollision2D((cast _Runtime.field(a, 'x0') : Float), (cast _Runtime.field(a, 'y0') : Float), (cast _Runtime.field(a, 'x1') : Float), (cast _Runtime.field(a, 'y1') : Float), (cast _Runtime.field(b, 'x0') : Float), (cast _Runtime.field(b, 'y0') : Float), (cast _Runtime.field(b, 'x1') : Float), (cast _Runtime.field(b, 'y1') : Float)) : Float);
     return cast ((cast distanceSquared : Float) <= (cast _Runtime.multiplyNumbers(_Runtime.field(b, 'radius'), _Runtime.field(b, 'radius')) : Float));

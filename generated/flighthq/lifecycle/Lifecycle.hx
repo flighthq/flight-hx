@@ -5,14 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.AppLaunchKind;
+import flighthq.types.AppLifecycle;
+import flighthq.types.AppLifecycleState;
+import flighthq.types.AppMemoryPressure;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Lifecycle.AppLaunchKind;
-import flighthq.types.Lifecycle.AppLifecycle;
-import flighthq.types.Lifecycle.AppLifecycleState;
-import flighthq.types.Lifecycle.AppMemoryPressure;
-import flighthq.types.Lifecycle.LifecycleBackend;
+import flighthq.types.LifecycleBackend;
 import flighthq.types.Signal;
-import flighthq.types.Signal.SignalData;
+import flighthq.types.SignalData;
 
 class Lifecycle {
   public static var _custom__lifecycle:Null<LifecycleBackend> = _Runtime.explicitNull();
@@ -89,8 +89,9 @@ class Lifecycle {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebLifecycleBackend():LifecycleBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebLifecycleBackend():LifecycleBackend {
     var _windowFocused:Bool = cast _Runtime.UNDEFINED;
     _windowFocused = !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined');
     return cast { getState: function():AppLifecycleState {
@@ -203,14 +204,16 @@ class Lifecycle {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getLifecycleBackend():LifecycleBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getLifecycleBackend():LifecycleBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Lifecycle._custom__lifecycle, function():Dynamic return cast Lifecycle._host__lifecycle), function():Dynamic return cast Lifecycle._sentinel__lifecycle);
     return cast null;
   }
 
-  @:noCompletion
-  public static function installLifecycleHostBackend(backend:LifecycleBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installLifecycleHostBackend(backend:LifecycleBackend):Void {
     if ((cast !_Runtime.strictEquals(Lifecycle._host__lifecycle, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Lifecycle._host__lifecycle, backend) : Bool)) { (Lifecycle._hostConflict__lifecycle = cast (true : Dynamic)); }
       return;
@@ -233,8 +236,9 @@ class Lifecycle {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeLifecycleHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeLifecycleHostResult(operation:String, succeeded:Bool):Void {
     (Lifecycle._hostObservation__lifecycle = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -244,16 +248,18 @@ class Lifecycle {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetLifecycleBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetLifecycleBackendForTest():Void {
     (Lifecycle._custom__lifecycle = cast (null : Dynamic));
     (Lifecycle._host__lifecycle = cast (null : Dynamic));
     (Lifecycle._hostConflict__lifecycle = cast (false : Dynamic));
     (Lifecycle._hostObservation__lifecycle = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setLifecycleBackend(backend:Null<LifecycleBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setLifecycleBackend(backend:Null<LifecycleBackend>):Void {
     (Lifecycle._custom__lifecycle = cast (backend : Dynamic));
   }
 }

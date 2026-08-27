@@ -5,6 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues.Skeleton2DSlotAnimationPathValue;
 
-typedef Skeleton2DSlotAnimationPath = flighthq._internal._IndexedAccess<Dynamic, String>;
-
 typedef Skeleton2DSlotAnimationTarget = { @:optional var attachments:Null<Array<Null<Attachment2D>>>; var kind:Skeleton2DAnimationTargetKind; var path:Skeleton2DSlotAnimationPath; var slotIndex:Float; };

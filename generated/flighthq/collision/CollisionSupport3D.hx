@@ -3,26 +3,27 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionAabb3D;
-import flighthq.types.Collision.CollisionBox3D;
-import flighthq.types.Collision.CollisionCapsule3D;
-import flighthq.types.Collision.CollisionCone3D;
-import flighthq.types.Collision.CollisionConvex3D;
-import flighthq.types.Collision.CollisionCylinder3D;
-import flighthq.types.Collision.CollisionPairTest3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionShapeKind3D;
-import flighthq.types.Collision.CollisionSphere3D;
-import flighthq.types.Collision.CollisionSupport3D;
+import flighthq.types.CollisionAabb3D;
+import flighthq.types.CollisionBox3D;
+import flighthq.types.CollisionCapsule3D;
+import flighthq.types.CollisionCone3D;
+import flighthq.types.CollisionConvex3D;
+import flighthq.types.CollisionCylinder3D;
+import flighthq.types.CollisionPairTest3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionShapeKind3D;
+import flighthq.types.CollisionSphere3D;
+import flighthq.types.CollisionSupport3D;
 
+@:noCompletion
 class CollisionSupport3D {
   public static function getCollisionPairTest3D(kindA:CollisionShapeKind3D, kindB:CollisionShapeKind3D):Null<CollisionPairTest3D> {
     return cast _Runtime.coalesce(((cast CollisionSupport3D.collisionPairTests3D__collisionSupport3D : flighthq._internal._Map<String, CollisionPairTest3D>).get((cast CollisionSupport3D.getCollisionPairKey3D__collisionSupport3D(({ final __callArgument0:Dynamic = kindA; __callArgument0; }), ({ final __callArgument1:Dynamic = kindB; __callArgument1; })) : String))), function():Dynamic return cast null);
     return cast null;
   }
 
-  public static function getCollisionSupport3D(kind:CollisionShapeKind3D):Null<flighthq.types.Collision.CollisionSupport3D> {
-    return cast _Runtime.coalesce(((cast CollisionSupport3D.collisionSupports3D__collisionSupport3D : flighthq._internal._Map<CollisionShapeKind3D, flighthq.types.Collision.CollisionSupport3D>).get(kind)), function():Dynamic return cast null);
+  public static function getCollisionSupport3D(kind:CollisionShapeKind3D):Null<flighthq.types.CollisionSupport3D> {
+    return cast _Runtime.coalesce(((cast CollisionSupport3D.collisionSupports3D__collisionSupport3D : flighthq._internal._Map<CollisionShapeKind3D, flighthq.types.CollisionSupport3D>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
@@ -40,8 +41,8 @@ class CollisionSupport3D {
     ((cast CollisionSupport3D.collisionPairTests3D__collisionSupport3D : flighthq._internal._Map<String, CollisionPairTest3D>).set((cast CollisionSupport3D.getCollisionPairKey3D__collisionSupport3D(({ final __callArgument32:Dynamic = kindA; __callArgument32; }), ({ final __callArgument33:Dynamic = kindB; __callArgument33; })) : String), (cast test)));
   }
 
-  public static function registerCollisionSupport3D(kind:CollisionShapeKind3D, support:flighthq.types.Collision.CollisionSupport3D):Void {
-    ((cast CollisionSupport3D.collisionSupports3D__collisionSupport3D : flighthq._internal._Map<CollisionShapeKind3D, flighthq.types.Collision.CollisionSupport3D>).set(kind, (cast support)));
+  public static function registerCollisionSupport3D(kind:CollisionShapeKind3D, support:flighthq.types.CollisionSupport3D):Void {
+    ((cast CollisionSupport3D.collisionSupports3D__collisionSupport3D : flighthq._internal._Map<CollisionShapeKind3D, flighthq.types.CollisionSupport3D>).set(kind, (cast support)));
   }
 
   public static function supportCollisionAabb3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
@@ -172,8 +173,9 @@ class CollisionSupport3D {
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 2.0 : Float), (cast ((cast sphere : CollisionSphere3D).z + (dirZ * scale)) : Float));
   }
 
-  @:noCompletion
-  public static function writeVertexListSupport3D(vertices:flighthq._internal._ArrayLike<Float>, count:Float, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function writeVertexListSupport3D(vertices:flighthq._internal._ArrayLike<Float>, count:Float, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Void {
     var bestX:Float = cast _Runtime.UNDEFINED;
     var bestY:Float = cast _Runtime.UNDEFINED;
     var bestZ:Float = cast _Runtime.UNDEFINED;
@@ -243,7 +245,7 @@ class CollisionSupport3D {
 
   public static final collisionPairTests3D__collisionSupport3D:flighthq._internal._Map<String, CollisionPairTest3D> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
-  public static final collisionSupports3D__collisionSupport3D:flighthq._internal._Map<CollisionShapeKind3D, flighthq.types.Collision.CollisionSupport3D> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
+  public static final collisionSupports3D__collisionSupport3D:flighthq._internal._Map<CollisionShapeKind3D, flighthq.types.CollisionSupport3D> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static final localCorner__collisionSupport3D:Array<Float> = (cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>));
 

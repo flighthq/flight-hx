@@ -10,6 +10,7 @@ import flighthq.types.ColorLut;
 import flighthq.types.ColorLutCache;
 import flighthq.types.ColorTransformFunction;
 
+@:noCompletion
 class ColorLutCache {
   public static function bakeColorLutForRun(cache:flighthq.types.ColorLutCache, run:Array<{ var kind:String; }>, size:Float = 32.0):ColorLut {
     var signature:String = cast _Runtime.UNDEFINED;

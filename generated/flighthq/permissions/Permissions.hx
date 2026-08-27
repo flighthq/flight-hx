@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.permissions.EnablePermissionGuards as Facade_Permissions_flighthq_permissions_EnablePermissionGuards;
 import flighthq.permissions.Permission as Facade_Permissions_flighthq_permissions_Permission;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Permission.PermissionName;
-import flighthq.types.Permission.PermissionState;
-import flighthq.types.Permission.PermissionStateExplanation;
+import flighthq.types.PermissionName;
+import flighthq.types.PermissionState;
+import flighthq.types.PermissionStateExplanation;
 
 class Permissions {
   public static function disablePermissionGuards():Void {

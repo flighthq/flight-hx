@@ -9,6 +9,7 @@ import flighthq.types.RenderEffectPadding;
 import flighthq.types.RenderState;
 import flighthq.types.TiltShiftEffect;
 
+@:noCompletion
 class TiltShiftEffect {
   public static function createTiltShiftEffect(?options:{ @:optional var center:Null<Float>; @:optional var width:Null<Float>; @:optional var blur:Null<Float>; }):flighthq.types.TiltShiftEffect {
     if (options == null) options = cast ({  } : Dynamic);

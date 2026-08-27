@@ -25,10 +25,10 @@ flight-hx/
 │   └── flighthq/
 │       ├── geometry/
 │       │   ├── Geometry.hx      # package facade
-│       │   └── Vector2.hx       # defining-file module
+│       │   └── Vector2.hx       # completion-hidden source implementation
 │       ├── renderGl/
 │       ├── sdk/Sdk.hx
-│       └── types/
+│       └── types/               # one public module per exported canonical type
 ├── tools/
 │   ├── generator/
 │   │   ├── src/                 # analyzer, IR, lowering, patching, emitter

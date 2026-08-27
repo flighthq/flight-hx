@@ -4,13 +4,14 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorConnectionStatus;
-import flighthq.types.CapacitorApi.CapacitorNetworkPlugin;
-import flighthq.types.CapacitorApi.CapacitorPluginListenerHandle;
-import flighthq.types.Connectivity.ConnectivityBackend;
-import flighthq.types.Connectivity.ConnectivityConnectionType;
-import flighthq.types.Connectivity.ConnectivityStatus;
+import flighthq.types.CapacitorConnectionStatus;
+import flighthq.types.CapacitorNetworkPlugin;
+import flighthq.types.CapacitorPluginListenerHandle;
+import flighthq.types.ConnectivityBackend;
+import flighthq.types.ConnectivityConnectionType;
+import flighthq.types.ConnectivityStatus;
 
+@:noCompletion
 class CapacitorConnectivity {
   public static function createCapacitorConnectivityBackend(capacitor:CapacitorApi):ConnectivityBackend {
     var network:CapacitorNetworkPlugin = cast _Runtime.UNDEFINED;

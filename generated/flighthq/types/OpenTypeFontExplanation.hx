@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef OpenTypeFontExplanation = { var accepted:Bool; var reason:OpenTypeFontExplanationReason; var format:String; var table:String; var tableCount:Float; var readableTableCount:Float; };
-
-typedef OpenTypeFontExplanationReason = String;

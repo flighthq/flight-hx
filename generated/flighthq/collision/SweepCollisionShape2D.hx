@@ -8,22 +8,23 @@ import flighthq.collision.CollisionShapeValidation2D.getCollisionShapeValidation
 import flighthq.collision.ContactManifold2D.createCollisionContactManifold2D;
 import flighthq.collision.ConvexVertices2D.writeAabbVertices;
 import flighthq.collision.ConvexVertices2D.writeObbVertices;
-import flighthq.types.Collision.CollisionAabb2D;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Collision.CollisionCapsule2D;
-import flighthq.types.Collision.CollisionCircle2D;
-import flighthq.types.Collision.CollisionContactManifold2D;
-import flighthq.types.Collision.CollisionObb2D;
-import flighthq.types.Collision.CollisionPoint2D;
-import flighthq.types.Collision.CollisionPolygon2D;
-import flighthq.types.Collision.CollisionSegment2D;
-import flighthq.types.Collision.CollisionShape2D;
-import flighthq.types.Collision.CollisionTimeOfImpact2D;
+import flighthq.types.CollisionAabb2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.CollisionCapsule2D;
+import flighthq.types.CollisionCircle2D;
+import flighthq.types.CollisionContactManifold2D;
+import flighthq.types.CollisionObb2D;
+import flighthq.types.CollisionPoint2D;
+import flighthq.types.CollisionPolygon2D;
+import flighthq.types.CollisionSegment2D;
+import flighthq.types.CollisionShape2D;
+import flighthq.types.CollisionTimeOfImpact2D;
 
 typedef CollisionSweepScratch__sweepCollisionShape2D = { var manifold:Dynamic; var verticesA:flighthq._internal._Float64Array; var verticesB:flighthq._internal._Float64Array; var piecesA:Array<CollisionSweepPiece__sweepCollisionShape2D>; var piecesB:Array<CollisionSweepPiece__sweepCollisionShape2D>; var pieceHit:CollisionTimeOfImpact2D; var projectionMin:Float; var projectionMax:Float; var entry:Float; var exit:Float; var normalX:Float; var normalY:Float; };
 
 typedef CollisionSweepPiece__sweepCollisionShape2D = { var x:Float; var y:Float; var radius:Float; var vertices:Null<flighthq._internal._ArrayLike<Float>>; var storage:flighthq._internal._Float64Array; };
 
+@:noCompletion
 class SweepCollisionShape2D {
   public static function createCollisionTimeOfImpact2D():CollisionTimeOfImpact2D {
     return cast { fraction: 0.0, x: 0.0, y: 0.0, normalX: 0.0, normalY: 0.0 };

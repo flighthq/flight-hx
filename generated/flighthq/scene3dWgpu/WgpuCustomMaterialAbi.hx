@@ -4,10 +4,13 @@ package flighthq.scene3dWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class WgpuCustomMaterialAbi {
-  @:noCompletion
-  public static final WGPU_CUSTOM_SHADER_USER_VEC4_CAPACITY:Float = 32.0;
+  @:allow(flighthq)
+  @:keep
+  private static final WGPU_CUSTOM_SHADER_USER_VEC4_CAPACITY:Float = 32.0;
 
-  @:noCompletion
-  public static final WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY:Float = 8.0;
+  @:allow(flighthq)
+  @:keep
+  private static final WGPU_CUSTOM_SHADER_TEXTURE_CAPACITY:Float = 8.0;
 }

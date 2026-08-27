@@ -25,29 +25,31 @@ import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
 import flighthq.types.ShapeRasterizer;
-import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.Types.ShapeKind;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuQuadBatchResources;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuShapeRasterSurface;
 import flighthq.types.WgpuShapeRendererData;
-import flighthq.types.WgpuShapeRendererData.WgpuShapeRasterSurface;
+import flighthq.types.WgpuTextureEntry;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
+@:noCompletion
 class WgpuRasterShapeRenderer {
-  @:noCompletion
-  public static function drawWgpuRasterShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuRasterShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:Shape = cast _Runtime.UNDEFINED;
     var __destructure0:ShapeData = cast _Runtime.UNDEFINED;

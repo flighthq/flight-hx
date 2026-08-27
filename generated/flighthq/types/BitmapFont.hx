@@ -3,19 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphMetrics;
-
-typedef BitmapFontEncoding = String;
 
 typedef BitmapFont = { var encoding:BitmapFontEncoding; var glyphs:flighthq._internal._Map<Float, GlyphEntry>; var kerning:flighthq._internal._Map<Float, Float>; var metrics:GlyphMetrics; var pages:Array<TextureAtlas>; };
-
-typedef BitmapFontData = { @:optional var encoding:BitmapFontEncoding; var glyphs:Array<BitmapFontGlyphData>; @:optional var kerning:Array<BitmapFontKerningData>; var metrics:GlyphMetrics; var pages:Array<TextureAtlas>; };
-
-typedef BitmapFontGlyphData = { var advance:Float; var bearingX:Float; var bearingY:Float; var codepoint:Float; var height:Float; @:optional var page:Float; var width:Float; var x:Float; var y:Float; };
-
-typedef BitmapFontKerningData = { var amount:Float; var left:Float; var right:Float; };
-
-typedef BitmapFontKerningPair = { var left:Float; var right:Float; };
-
-typedef BitmapFontParseOptions = { @:optional var resolvePage:Float->String->Null<TextureAtlas>; };

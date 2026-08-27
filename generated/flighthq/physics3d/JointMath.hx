@@ -10,10 +10,11 @@ import flighthq.physics3d.SymmetricTensor.TENSOR_YY;
 import flighthq.physics3d.SymmetricTensor.TENSOR_YZ;
 import flighthq.physics3d.SymmetricTensor.TENSOR_ZZ;
 import flighthq.physics3d.SymmetricTensor.applySymmetricTensor;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointFrames;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointFrames;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class JointMath {
   public static function applyPhysics3DJointAngularImpulse(bodyA:RigidBody3D, bodyB:RigidBody3D, impulseX:Float, impulseY:Float, impulseZ:Float):Void {
     JointMath.readWorldInverseInertia__jointMath(({ final __callArgument0:Dynamic = bodyA; __callArgument0; }), ({ final __callArgument1:Dynamic = JointMath.angularImpulseTensor__jointMath; __callArgument1; }));

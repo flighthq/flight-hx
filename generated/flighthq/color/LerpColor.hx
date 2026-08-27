@@ -7,6 +7,7 @@ import flighthq.color.PackColor.packLinearToColor;
 import flighthq.color.SrgbTransfer.srgbChannelToLinear;
 import flighthq.types.LinearColor;
 
+@:noCompletion
 class LerpColor {
   public static function lerpColor(start:Float, end:Float, t:Float):Float {
     var tc:Float = cast _Runtime.UNDEFINED;

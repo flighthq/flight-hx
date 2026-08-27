@@ -4,8 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TextureAtlasRegionTextureStatus = String;
-
 typedef TextureAtlasRegionTextureExplanation = { var status:TextureAtlasRegionTextureStatus; };
-
-typedef TextureAtlasRegionTextureGuard = TextureAtlas->Float->TextureAtlasRegionTextureExplanation->Void;

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.ModifierSlot;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
+@:noCompletion
 class IsBuiltInModifierSlot {
   public static function isBuiltInModifierSlot(value:String):Bool {
     return cast ((cast IsBuiltInModifierSlot.BUILT_IN_SLOTS__isBuiltInModifierSlot : flighthq._internal._Set<String>).has(value));

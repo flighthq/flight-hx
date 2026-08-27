@@ -7,6 +7,7 @@ import flighthq.intl.Cache.getCacheKey;
 import flighthq.intl.Cache.getCached;
 import flighthq.types.LocaleInput;
 
+@:noCompletion
 class Datetime {
   public static function formatDate(date:flighthq._internal._Union2<Date, Float>, locale:LocaleInput, ?options:Dynamic):String {
     return cast (cast Datetime.formatDateValue__datetime((cast date : flighthq._internal._Any), ({ final __callArgument0:Dynamic = locale; __callArgument0; }), (cast _Runtime.coalesce(options, function():Dynamic return cast Datetime.defaultDateOptions__datetime) : flighthq._internal._Any)) : String);

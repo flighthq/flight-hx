@@ -16,20 +16,21 @@ import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.EffectSourceMode;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GlRenderTargetPool;
 import flighthq.types.GradientBevelEffect;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 
 typedef BevelEncodeLocations__glGradientBevelEffect = { >GlFullscreenProgram, var locOffset:flighthq._internal.dom.WebGLUniformLocation; };
 
 typedef BevelApplyLocations__glGradientBevelEffect = { >GlFullscreenProgram, var locRamp:flighthq._internal.dom.WebGLUniformLocation; var locSource:flighthq._internal.dom.WebGLUniformLocation; };
 
+@:noCompletion
 class GlGradientBevelEffect {
   public static final BEVEL_ENCODE_FRAGMENT_SRC__glGradientBevelEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec2 u_offset;\nout vec4 fragColor;\nvoid main() {\n  float high = texture(u_texture, v_texCoord - u_offset).a;\n  float low = texture(u_texture, v_texCoord + u_offset).a;\n  float bevelVal = clamp((high - low) * 0.5 + 0.5, 0.0, 1.0);\n  fragColor = vec4(bevelVal, 0.0, 0.0, 1.0);\n}';
 
@@ -39,8 +40,9 @@ class GlGradientBevelEffect {
 
   public static final applyShaders__glGradientBevelEffect:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, BevelApplyLocations__glGradientBevelEffect> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static function applyGradientBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientBevelEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGradientBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientBevelEffect):Void {
     var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
     var s0:GlRenderTarget = cast _Runtime.UNDEFINED;
     var s1:GlRenderTarget = cast _Runtime.UNDEFINED;

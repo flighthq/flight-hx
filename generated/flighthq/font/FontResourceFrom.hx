@@ -7,9 +7,10 @@ import flighthq.font._FontFaceLoad._loadFontFaceFromBytes;
 import flighthq.font._FontFaceLoad._loadFontFaceFromUrl;
 import flighthq.font._FontFaceLoad._loadFontFaceFromUrls;
 import flighthq.font._FontFaceLoad._loadFontFacesFromName;
-import flighthq.types.Font.FontUrl;
 import flighthq.types.FontResource;
+import flighthq.types.FontUrl;
 
+@:noCompletion
 class FontResourceFrom {
   public static function loadFontResourceFromBytes(out:FontResource, bytes:flighthq._internal._UInt8Array):flighthq._internal._Promise<FontResource> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {

@@ -10,10 +10,11 @@ import flighthq.physics2d.StepValidation.isPhysics2DJointStateValid;
 import flighthq.physics2d.StepValidation.isPhysics2DPreviousTimestepValid;
 import flighthq.physics2d.StepValidation.isPhysics2DSolverConfigValid;
 import flighthq.physics2d.StepValidation.isPhysics2DTimestepValid;
-import flighthq.types.Physics2D.Physics2DSolverConfig;
-import flighthq.types.Physics2D.Physics2DStepExplanation;
-import flighthq.types.Physics2D.Physics2DWorld;
+import flighthq.types.Physics2DSolverConfig;
+import flighthq.types.Physics2DStepExplanation;
+import flighthq.types.Physics2DWorld;
 
+@:noCompletion
 class ExplainPhysics2DStep {
   public static function explainPhysics2DStep(world:Physics2DWorld, dt:Float):Physics2DStepExplanation {
     var bodyStateValid:Bool = cast _Runtime.UNDEFINED;

@@ -4,8 +4,9 @@ package flighthq.audio;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.audio.AudioFormat.getAudioMimeTypeEssence;
-import flighthq.types.AudioResourceReference.AudioDecoder;
+import flighthq.types.AudioDecoder;
 
+@:noCompletion
 class AudioDecoderRegistry {
   public static function getAudioDecoder(mimeType:String):Null<AudioDecoder> {
     return cast _Runtime.coalesce(((cast AudioDecoderRegistry.decoders__audioDecoderRegistry : flighthq._internal._Map<String, AudioDecoder>).get((cast getAudioMimeTypeEssence((cast mimeType : String)) : String))), function():Dynamic return cast null);

@@ -8,6 +8,7 @@ import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 import flighthq.types.GradientSpread;
 
+@:noCompletion
 class BitmapGradientFill {
   public static function fillBitmapLinearGradient(dest:BitmapRegion, ramp:flighthq._internal._UInt8ClampedArray, x0:Float, y0:Float, x1:Float, y1:Float, spread:GradientSpread = 'pad'):Void {
     var dw:Float = cast _Runtime.UNDEFINED;

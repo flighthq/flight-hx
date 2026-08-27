@@ -4,6 +4,7 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class Clamp {
   public static function clamp(value:Float, min:Float, max:Float):Float {
     return cast ((cast ((cast value : Float) < (cast min : Float)) : Bool) ? (cast min : Dynamic) : (cast ((cast ((cast value : Float) > (cast max : Float)) : Bool) ? (cast max : Dynamic) : (cast value : Dynamic)) : Dynamic));

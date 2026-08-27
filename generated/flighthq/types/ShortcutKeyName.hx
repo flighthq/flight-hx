@@ -5,21 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef ShortcutKeyName = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<ShortcutDigitKeyName, ShortcutEditingKeyName>, ShortcutFunctionKeyName>, ShortcutLetterKeyName>, ShortcutLockKeyName>, ShortcutMediaKeyName>, ShortcutNavigationKeyName>, ShortcutNumpadKeyName>, ShortcutPunctuationKeyName>;
-
-typedef ShortcutDigitKeyName = String;
-
-typedef ShortcutEditingKeyName = String;
-
-typedef ShortcutFunctionKeyName = String;
-
-typedef ShortcutLetterKeyName = String;
-
-typedef ShortcutLockKeyName = String;
-
-typedef ShortcutMediaKeyName = String;
-
-typedef ShortcutNavigationKeyName = String;
-
-typedef ShortcutNumpadKeyName = String;
-
-typedef ShortcutPunctuationKeyName = String;

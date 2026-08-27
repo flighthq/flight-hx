@@ -7,18 +7,18 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
+import flighthq.types.AttachInputOptions;
 import flighthq.types.GamepadAxisKind;
 import flighthq.types.GamepadButtonKind;
+import flighthq.types.GamepadMapping;
 import flighthq.types.GamepadMappingKind;
-import flighthq.types.InputGamepadData.GamepadMapping;
-import flighthq.types.InputGamepadData.InputGamepadAxisData;
-import flighthq.types.InputGamepadData.InputGamepadButtonData;
-import flighthq.types.InputGamepadData.InputGamepadConnectData;
+import flighthq.types.InputGamepadAxisData;
+import flighthq.types.InputGamepadButtonData;
+import flighthq.types.InputGamepadConnectData;
 import flighthq.types.InputKeyRepeatOptions;
 import flighthq.types.InputKeyRepeatTimer;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.InputManager;
-import flighthq.types.InputManager.AttachInputOptions;
 import flighthq.types.InputPointerData;
 import flighthq.types.InputSignals;
 import flighthq.types.InputState;
@@ -26,7 +26,7 @@ import flighthq.types.InputTextData;
 import flighthq.types.KeyCode;
 import flighthq.types.KeyModifier;
 import flighthq.types.MouseWheelMode;
-import flighthq.types.PointerEventData.PointerType;
+import flighthq.types.PointerType;
 import flighthq.types.Signal;
 import flighthq.types._internal._GamepadAxisKindValues.GamepadAxisKindValue as GamepadAxisKindValues;
 import flighthq.types._internal._GamepadButtonKindValues.GamepadButtonKindValue as GamepadButtonKindValues;
@@ -35,6 +35,7 @@ import flighthq.types._internal._KeyModifierValues.KeyModifierValue;
 
 typedef GamepadPollState__inputManager = { var axes:flighthq._internal._Map<Float, Array<Float>>; var buttons:flighthq._internal._Map<Float, Array<Bool>>; };
 
+@:noCompletion
 class InputManager {
   public static final MAX_GAMEPAD_AXES__inputManager:Float = 32.0;
 
@@ -408,8 +409,9 @@ class InputManager {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createInputSignals():InputSignals {
+  @:allow(flighthq)
+  @:keep
+  private static function createInputSignals():InputSignals {
     return cast { onGamepadAxisMove: (cast createSignal() : Signal<InputGamepadAxisData->Void>), onGamepadButtonDown: (cast createSignal() : Signal<InputGamepadButtonData->Void>), onGamepadButtonUp: (cast createSignal() : Signal<InputGamepadButtonData->Void>), onGamepadConnect: (cast createSignal() : Signal<InputGamepadConnectData->Void>), onGamepadDisconnect: (cast createSignal() : Signal<InputGamepadConnectData->Void>), onKeyDown: (cast createSignal() : Signal<InputKeyboardData->Void>), onKeyUp: (cast createSignal() : Signal<InputKeyboardData->Void>), onPointerCancel: (cast createSignal() : Signal<InputPointerData->Void>), onPointerDown: (cast createSignal() : Signal<InputPointerData->Void>), onPointerMove: (cast createSignal() : Signal<InputPointerData->Void>), onPointerMoveRelative: (cast createSignal() : Signal<InputPointerData->Void>), onPointerUp: (cast createSignal() : Signal<InputPointerData->Void>), onTextEdit: (cast createSignal() : Signal<InputTextData->Void>), onTextInput: (cast createSignal() : Signal<InputTextData->Void>), onWheel: (cast createSignal() : Signal<InputPointerData->Void>) };
     return cast null;
   }

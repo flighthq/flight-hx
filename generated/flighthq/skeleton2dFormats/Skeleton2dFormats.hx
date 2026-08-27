@@ -11,8 +11,8 @@ import flighthq.skeleton2dFormats.SpineBinaryVersioned as Facade_Skeleton2dForma
 import flighthq.skeleton2dFormats.SpineParse as Facade_Skeleton2dFormats_flighthq_skeleton2dFormats_SpineParse;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.Skeleton2DImport;
-import flighthq.types.SpineBinaryVersion.SpineBinaryParser;
-import flighthq.types.SpineBinaryVersion.SpineBinaryVersionFailure;
+import flighthq.types.SpineBinaryParser;
+import flighthq.types.SpineBinaryVersionFailure;
 
 class Skeleton2dFormats {
   public static function explainSpineBinaryVersionFailure(bytes:flighthq._internal._UInt8Array):SpineBinaryVersionFailure {

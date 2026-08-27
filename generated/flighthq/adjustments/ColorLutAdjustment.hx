@@ -8,6 +8,7 @@ import flighthq.types.AdjustmentKind;
 import flighthq.types.ColorLutAdjustment;
 import flighthq.types.ColorTransformFunction;
 
+@:noCompletion
 class ColorLutAdjustment {
   public static function getAdjustmentColorTransform(operation:{ var kind:String; }):Null<ColorTransformFunction> {
     var transform:Null<ColorTransformFunction> = cast _Runtime.UNDEFINED;

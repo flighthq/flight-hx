@@ -4,11 +4,12 @@ package flighthq.collision;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.Gjk3D.testCollisionSupportOverlap3D;
-import flighthq.types.Collision.CollisionBuiltInShape3D;
-import flighthq.types.Collision.CollisionConvex3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionSphere3D;
+import flighthq.types.CollisionBuiltInShape3D;
+import flighthq.types.CollisionConvex3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionSphere3D;
 
+@:noCompletion
 class PointContainment3D {
   public static function getCollisionShapeContainsPoint3D(shape:CollisionBuiltInShape3D, x:Float, y:Float, z:Float):Bool {
     {

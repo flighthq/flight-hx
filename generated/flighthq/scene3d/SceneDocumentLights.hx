@@ -16,26 +16,27 @@ import flighthq.types.HemisphereLight;
 import flighthq.types.Light;
 import flighthq.types.PointLight;
 import flighthq.types.Quaternion;
-import flighthq.types.Quaternion.QuaternionLike;
+import flighthq.types.QuaternionLike;
 import flighthq.types.Scene3DDocument;
-import flighthq.types.Scene3DDocument.Scene3DDocumentLight;
+import flighthq.types.Scene3DDocumentLight;
 import flighthq.types.Scene3DLights;
 import flighthq.types.SpotLight;
 import flighthq.types.Transform3D;
-import flighthq.types.Transform3D.Transform3DLike;
+import flighthq.types.Transform3DLike;
 import flighthq.types.Types.AmbientLightKind;
 import flighthq.types.Types.DirectionalLightKind;
 import flighthq.types.Types.HemisphereLightKind;
 import flighthq.types.Types.PointLightKind;
 import flighthq.types.Types.SpotLightKind;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 import flighthq.types._internal._AmbientLightValues.AmbientLightKind;
 import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
 import flighthq.types._internal._HemisphereLightValues.HemisphereLightKind;
 import flighthq.types._internal._PointLightValues.PointLightKind;
 import flighthq.types._internal._SpotLightValues.SpotLightKind;
 
+@:noCompletion
 class SceneDocumentLights {
   public static function createScene3DLightsFromDocument(document:Scene3DDocument):Scene3DLights {
     var ambient:Null<AmbientLight> = cast _Runtime.UNDEFINED;

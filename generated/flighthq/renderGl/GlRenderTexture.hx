@@ -15,24 +15,25 @@ import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.resizeGlRenderTarget;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTexture.GlRenderTextureEntry;
-import flighthq.types.GlRenderTexture.GlRenderTextureExplanation;
-import flighthq.types.GlRenderTexture.GlRenderTextureGuard;
-import flighthq.types.GlRenderTexture.GlRenderTextureStatus;
+import flighthq.types.GlRenderTextureEntry;
+import flighthq.types.GlRenderTextureExplanation;
+import flighthq.types.GlRenderTextureGuard;
+import flighthq.types.GlRenderTextureStatus;
 import flighthq.types.RenderTarget;
-import flighthq.types.RenderTarget.RenderTargetAxes;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
-import flighthq.types.RenderTarget.RenderTargetDepth;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
-import flighthq.types.RenderTarget.ResolvedRenderTargetDescriptor;
+import flighthq.types.RenderTargetAxes;
+import flighthq.types.RenderTargetColorSpace;
+import flighthq.types.RenderTargetDepth;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 import flighthq.types.RenderTexture;
+import flighthq.types.ResolvedRenderTargetDescriptor;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.SamplerLike;
-import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.SamplerLike;
+import flighthq.types.TextureColorSpace;
 
+@:noCompletion
 class GlRenderTexture {
   public static function bindGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, ?sampler:Null<SamplerLike>):Null<flighthq._internal.dom.WebGLTexture> {
     var entry:Null<GlRenderTextureEntry> = cast _Runtime.UNDEFINED;
@@ -95,14 +96,16 @@ class GlRenderTexture {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlRenderTextureColorSpace(state:GlRenderState, renderTexture:RenderTexture):TextureColorSpace {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlRenderTextureColorSpace(state:GlRenderState, renderTexture:RenderTexture):TextureColorSpace {
     return cast _Runtime.coalesce(({ final __typedStruct67 = ({ final __typedStruct66 = (cast GlRenderTexture.getEntry__glRenderTexture(({ final __callArgument62:Dynamic = state; __callArgument62; }), ({ final __callArgument63:Dynamic = renderTexture; __callArgument63; })) : Null<GlRenderTextureEntry>); __typedStruct66 == null ? _Runtime.UNDEFINED : (cast __typedStruct66 : { var target:GlRenderTarget; }).target; }); __typedStruct67 == null ? _Runtime.UNDEFINED : (cast __typedStruct67 : { var colorSpace:RenderTargetColorSpace; }).colorSpace; }), function():Dynamic return cast renderTexture.colorSpace);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlRenderTextureTarget(state:GlRenderState, renderTexture:RenderTexture):Null<flighthq._internal._IndexedAccess<GlRenderTextureEntry, String>> {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlRenderTextureTarget(state:GlRenderState, renderTexture:RenderTexture):Null<flighthq._internal._IndexedAccess<GlRenderTextureEntry, String>> {
     var entry:Null<GlRenderTextureEntry> = cast _Runtime.UNDEFINED;
     entry = (cast GlRenderTexture.getEntry__glRenderTexture(({ final __callArgument68:Dynamic = state; __callArgument68; }), ({ final __callArgument69:Dynamic = renderTexture; __callArgument69; })) : Null<GlRenderTextureEntry>);
     if ((cast _Runtime.strictEquals(({ final __typedStruct72 = entry; __typedStruct72 == null ? _Runtime.UNDEFINED : (cast __typedStruct72 : { var status:GlRenderTextureStatus; }).status; }), 'ready') : Bool)) { return cast (cast entry : { var target:GlRenderTarget; }).target; }
@@ -111,15 +114,17 @@ class GlRenderTexture {
     return cast null;
   }
 
-  @:noCompletion
-  public static function invalidateGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function invalidateGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, status:String = 'unrendered'):Void {
     var entry:Null<GlRenderTextureEntry> = cast _Runtime.UNDEFINED;
     entry = (cast GlRenderTexture.getEntry__glRenderTexture(({ final __callArgument77:Dynamic = state; __callArgument77; }), ({ final __callArgument78:Dynamic = renderTexture; __callArgument78; })) : Null<GlRenderTextureEntry>);
     if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast entry : { var status:GlRenderTextureStatus; }).status = cast (status : GlRenderTextureStatus)); }
   }
 
-  @:noCompletion
-  public static function isGlRenderTextureReady(state:GlRenderState, renderTexture:RenderTexture):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isGlRenderTextureReady(state:GlRenderState, renderTexture:RenderTexture):Bool {
     var ready:Bool = cast _Runtime.UNDEFINED;
     ready = _Runtime.strictEquals(({ final __typedStruct85 = (cast GlRenderTexture.getEntry__glRenderTexture(({ final __callArgument81:Dynamic = state; __callArgument81; }), ({ final __callArgument82:Dynamic = renderTexture; __callArgument82; })) : Null<GlRenderTextureEntry>); __typedStruct85 == null ? _Runtime.UNDEFINED : (cast __typedStruct85 : { var status:GlRenderTextureStatus; }).status; }), 'ready');
     if ((cast !(cast ready : Bool) : Bool)) { GlRenderTexture.notifyGuard__glRenderTexture(({ final __callArgument86:Dynamic = state; __callArgument86; }), ({ final __callArgument87:Dynamic = renderTexture; __callArgument87; })); }
@@ -159,13 +164,15 @@ class GlRenderTexture {
     } : Dynamic));
   }
 
-  @:noCompletion
-  public static function setGlRenderTextureGuard(state:GlRenderState, guard:Null<GlRenderTextureGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlRenderTextureGuard(state:GlRenderState, guard:Null<GlRenderTextureGuard>):Void {
     ((cast (cast getGlRenderStateRuntime(({ final __callArgument130:Dynamic = state; __callArgument130; })) : GlRenderStateRuntime) : { @:optional var glRenderTextureGuard:Null<GlRenderTextureGuard>; }).glRenderTextureGuard = cast (guard : Null<GlRenderTextureGuard>));
   }
 
-  @:noCompletion
-  public static function writeGlRenderTextureTarget<T>(state:GlRenderState, renderTexture:RenderTexture, callback:flighthq._internal._IndexedAccess<GlRenderTextureEntry, String>->T):T {
+  @:allow(flighthq)
+  @:keep
+  private static function writeGlRenderTextureTarget<T>(state:GlRenderState, renderTexture:RenderTexture, callback:flighthq._internal._IndexedAccess<GlRenderTextureEntry, String>->T):T {
     var entry:GlRenderTextureEntry = cast _Runtime.UNDEFINED;
     var previousStatus:GlRenderTextureStatus = cast _Runtime.UNDEFINED;
     var rendered:Bool = cast _Runtime.UNDEFINED;

@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.OutlineEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlOutlineEffect {
-  @:noCompletion
-  public static function applyOutlineEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:OutlineEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyOutlineEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:OutlineEffect):Void {
     var threshold:Float = cast _Runtime.UNDEFINED;
     var thickness:Float = cast _Runtime.UNDEFINED;
     var color:Float = cast _Runtime.UNDEFINED;

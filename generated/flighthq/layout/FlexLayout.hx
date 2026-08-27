@@ -4,21 +4,22 @@ package flighthq.layout;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.layout.LayoutState.registerLayoutResolver;
-import flighthq.types.Layout.FlexLayoutAlign;
-import flighthq.types.Layout.FlexLayoutContainerStyle;
-import flighthq.types.Layout.FlexLayoutDirection;
-import flighthq.types.Layout.FlexLayoutItemStyle;
-import flighthq.types.Layout.FlexLayoutJustify;
+import flighthq.types.FlexLayoutAlign;
+import flighthq.types.FlexLayoutContainerStyle;
+import flighthq.types.FlexLayoutDirection;
+import flighthq.types.FlexLayoutItemStyle;
+import flighthq.types.FlexLayoutJustify;
+import flighthq.types.FlexLayoutWrap;
 import flighthq.types.Layout.FlexLayoutKind;
-import flighthq.types.Layout.FlexLayoutWrap;
-import flighthq.types.Layout.LayoutNode;
-import flighthq.types.Layout.LayoutResolutionFailureKind;
 import flighthq.types.Layout.LayoutResolutionFailureKindValue;
-import flighthq.types.Layout.LayoutResolver;
-import flighthq.types.Layout.LayoutState;
-import flighthq.types.Layout.LayoutTree;
+import flighthq.types.LayoutNode;
+import flighthq.types.LayoutResolutionFailureKind;
+import flighthq.types.LayoutResolver;
+import flighthq.types.LayoutState;
+import flighthq.types.LayoutTree;
 import flighthq.types.Types.FlexLayoutKind;
 
+@:noCompletion
 class FlexLayout {
   public static function registerFlexLayoutResolver(state:LayoutState):Void {
     registerLayoutResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast FlexLayoutKind : String), ({ final __callArgument1:Dynamic = FlexLayout.flexLayoutResolver__flexLayout; __callArgument1; }));

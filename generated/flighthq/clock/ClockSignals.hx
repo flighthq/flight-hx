@@ -7,6 +7,7 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.types.Clock;
 import flighthq.types.Signal;
 
+@:noCompletion
 class ClockSignals {
   public static function enableClockSignals(clock:Clock):Signal<Float->Void> {
     if ((cast _Runtime.strictEquals(clock.onTick, null) : Bool)) {

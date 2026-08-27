@@ -21,32 +21,34 @@ import flighthq.scene2dGl.GlShapeRasterizer.getGlShapeRasterizer;
 import flighthq.types.BatchFormat;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlQuadBatchShader;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlQuadBatchShader;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
+import flighthq.types.GlShapeRasterSurface;
 import flighthq.types.GlShapeRendererData;
-import flighthq.types.GlShapeRendererData.GlShapeRasterSurface;
 import flighthq.types.Image;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.Rectangle;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
 import flighthq.types.ShapeRasterizer;
-import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.Types.ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
+@:noCompletion
 class GlRasterShapeRenderer {
-  @:noCompletion
-  public static function drawGlRasterShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlRasterShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:Shape = cast _Runtime.UNDEFINED;
     var __destructure0:ShapeData = cast _Runtime.UNDEFINED;

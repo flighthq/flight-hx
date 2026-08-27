@@ -11,19 +11,20 @@ import flighthq.animation.AnimationStateMachine.sampleAnimationStateMachineChann
 import flighthq.animation.AnimationStateMachineAdvance.advanceAnimationStateMachineWithScratch;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationBlendTree;
-import flighthq.types.AnimationBlendTree.AnimationBlendTreeChannel;
+import flighthq.types.AnimationBlendTreeChannel;
 import flighthq.types.AnimationChannel;
+import flighthq.types.AnimationLayer;
+import flighthq.types.AnimationLayerOptions;
 import flighthq.types.AnimationLayerStack;
-import flighthq.types.AnimationLayerStack.AnimationLayer;
-import flighthq.types.AnimationLayerStack.AnimationLayerOptions;
-import flighthq.types.AnimationLayerStack.AnimationLayerStackChannel;
-import flighthq.types.AnimationLayerStack.AnimationLayerStackChannelSource;
+import flighthq.types.AnimationLayerStackChannel;
+import flighthq.types.AnimationLayerStackChannelSource;
 import flighthq.types.AnimationPlayer;
 import flighthq.types.AnimationStateMachine;
-import flighthq.types.AnimationStateMachine.AnimationStateMachineChannel;
+import flighthq.types.AnimationStateMachineChannel;
 import flighthq.types.AnimationTrack;
 import flighthq.types.Entity;
 
+@:noCompletion
 class AnimationLayerStack {
   public static function advanceAnimationLayerStack(stack:flighthq.types.AnimationLayerStack, dt:Float):Void {
     var advanced:Array<AnimationPlayer> = cast _Runtime.UNDEFINED;

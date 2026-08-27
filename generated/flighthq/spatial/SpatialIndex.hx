@@ -4,13 +4,14 @@ package flighthq.spatial;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.spatial.UniformGrid.createUniformGridSpatialBackend2D;
-import flighthq.types.Spatial.SpatialAabb2D;
-import flighthq.types.Spatial.SpatialIndex2D;
-import flighthq.types.Spatial.SpatialIndexBackend2D;
-import flighthq.types.Spatial.SpatialIndexRuntime2D;
-import flighthq.types.Spatial.SpatialObjectId;
-import flighthq.types.Spatial.SpatialPair;
+import flighthq.types.SpatialAabb2D;
+import flighthq.types.SpatialIndex2D;
+import flighthq.types.SpatialIndexBackend2D;
+import flighthq.types.SpatialIndexRuntime2D;
+import flighthq.types.SpatialObjectId;
+import flighthq.types.SpatialPair;
 
+@:noCompletion
 class SpatialIndex {
   public static function clearSpatialIndex2D(index:SpatialIndex2D):Void {
     (cast (cast _Runtime.field(index, 'runtime') : SpatialIndexRuntime2D).backend : SpatialIndexBackend2D).clearSpatialIndex();

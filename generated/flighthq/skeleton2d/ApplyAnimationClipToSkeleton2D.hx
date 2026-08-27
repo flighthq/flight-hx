@@ -10,6 +10,7 @@ import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DAnimationTarget;
 import flighthq.types.Skeleton2DAnimationTargetBinder;
 
+@:noCompletion
 class ApplyAnimationClipToSkeleton2D {
   public static function applyAnimationClipToSkeleton2D(clip:AnimationClip, setup:Skeleton2D, pose:Skeleton2D, time:Float):Void {
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;

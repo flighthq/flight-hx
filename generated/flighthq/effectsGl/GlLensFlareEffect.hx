@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.LensFlareEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlLensFlareEffect {
-  @:noCompletion
-  public static function applyLensFlareEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensFlareEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyLensFlareEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensFlareEffect):Void {
     var threshold:Float = cast _Runtime.UNDEFINED;
     var intensity:Float = cast _Runtime.UNDEFINED;
     var ghosts:Float = cast _Runtime.UNDEFINED;

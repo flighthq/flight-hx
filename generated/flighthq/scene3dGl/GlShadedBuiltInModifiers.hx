@@ -17,39 +17,41 @@ import flighthq.shading.RegisterBuiltInModifiers.vertexDisplaceModifierDefinitio
 import flighthq.types.AnimatedNormalModifier;
 import flighthq.types.DissolveModifier;
 import flighthq.types.EmissiveModifier;
-import flighthq.types.EmissiveModifier.EmissiveModifierFacing;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EmissiveModifierFacing;
+import flighthq.types.EntityRuntime;
 import flighthq.types.EnvReflectModifier;
 import flighthq.types.FogModifier;
-import flighthq.types.FogModifier.FogModifierMode;
+import flighthq.types.FogModifierMode;
+import flighthq.types.GlModifierBindContext;
 import flighthq.types.GlModifierSnippet;
-import flighthq.types.GlModifierSnippet.GlModifierBindContext;
 import flighthq.types.GlRenderState;
 import flighthq.types.LinearColor;
 import flighthq.types.Modifier;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.RimModifier;
 import flighthq.types.Sampler;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.ToonModifier;
 import flighthq.types.Vector2;
-import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector2Like;
+import flighthq.types.Vector3Like;
 import flighthq.types.VertexDisplaceModifier;
-import flighthq.types.VertexDisplaceModifier.VertexDisplaceModifierSource;
+import flighthq.types.VertexDisplaceModifierSource;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._EmissiveModifierValues.EmissiveModifierFacingValue;
 import flighthq.types._internal._FogModifierValues.FogModifierModeValue;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierSourceValue;
 
+@:noCompletion
 class GlShadedBuiltInModifiers {
-  @:noCompletion
-  public static final animatedNormalGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([animatedNormalModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final animatedNormalGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([animatedNormalModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
     var animated:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var suffix:String = cast _Runtime.UNDEFINED;
@@ -92,8 +94,9 @@ class GlShadedBuiltInModifiers {
     return cast _Runtime.UNDEFINED;
   } }]));
 
-  @:noCompletion
-  public static final emissiveGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([emissiveModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final emissiveGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([emissiveModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
     var emissive:EmissiveModifier = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var suffix:String = cast _Runtime.UNDEFINED;
@@ -138,8 +141,9 @@ class GlShadedBuiltInModifiers {
     return cast _Runtime.UNDEFINED;
   } }]));
 
-  @:noCompletion
-  public static final rimGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([rimModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final rimGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([rimModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
     var rim:RimModifier = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var suffix:String = cast _Runtime.UNDEFINED;
@@ -163,8 +167,9 @@ class GlShadedBuiltInModifiers {
     return cast _Runtime.UNDEFINED;
   } }]));
 
-  @:noCompletion
-  public static final dissolveGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([dissolveModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final dissolveGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([dissolveModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
     var dissolve:DissolveModifier = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var suffix:String = cast _Runtime.UNDEFINED;
@@ -197,8 +202,9 @@ class GlShadedBuiltInModifiers {
     return cast _Runtime.UNDEFINED;
   } }]));
 
-  @:noCompletion
-  public static final envReflectGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([envReflectModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final envReflectGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([envReflectModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
     var reflect:EnvReflectModifier = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var suffix:String = cast _Runtime.UNDEFINED;
@@ -222,8 +228,9 @@ class GlShadedBuiltInModifiers {
     return cast _Runtime.UNDEFINED;
   } }]));
 
-  @:noCompletion
-  public static final fogGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([fogModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final fogGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([fogModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
     var fog:FogModifier = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var suffix:String = cast _Runtime.UNDEFINED;
@@ -265,8 +272,9 @@ class GlShadedBuiltInModifiers {
     return cast _Runtime.UNDEFINED;
   } }]));
 
-  @:noCompletion
-  public static final toonGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([toonModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final toonGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([toonModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
     var toon:ToonModifier = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var suffix:String = cast _Runtime.UNDEFINED;
@@ -287,8 +295,9 @@ class GlShadedBuiltInModifiers {
     return cast _Runtime.UNDEFINED;
   } }]));
 
-  @:noCompletion
-  public static final vertexDisplaceGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([vertexDisplaceModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final vertexDisplaceGlModifierSnippet:GlModifierSnippet = (cast _Runtime.mergeObjects([vertexDisplaceModifierDefinition, { bind: function(modifier:Modifier, context:GlModifierBindContext):Void {
     var displace:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var suffix:String = cast _Runtime.UNDEFINED;

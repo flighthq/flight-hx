@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Material.MaterialData;
 
 typedef WgpuMaterialRenderer = { var instanceFloatCount:Float; var getShaderModule:WgpuRenderState->flighthq._internal.dom.GPUShaderModule; @:optional var packInstance:WgpuRenderState->Null<Material>->Null<MaterialData>->flighthq._internal._Float32Array->Float->Void; };

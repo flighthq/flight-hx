@@ -3,36 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Physics2D.Physics2DQueryFilter;
-import flighthq.types.Spatial.SpatialAabb2D;
-
-typedef Physics2DAbiWorldHandle = Float;
-
-typedef Physics2DAbiObjectId = Float;
-
-typedef Physics2DAbiWorldStatus = String;
-
-typedef Physics2DAbiExecutionStatus = String;
-
-typedef Physics2DAbiExecutionResult = { var status:Physics2DAbiExecutionStatus; var commandIndex:Float; var byteOffset:Float; var commandKind:Float; };
-
-typedef Physics2DAbiCommandBuffer = { var data:flighthq._internal._UInt8Array; var byteLength:Float; var commandCount:Float; };
-
-typedef Physics2DAbiBodyBuffer = { var ids:flighthq._internal._UInt32Array; var flags:flighthq._internal._UInt32Array; var values:flighthq._internal._Float64Array; var count:Float; var requiredCount:Float; };
-
-typedef Physics2DAbiContactSelection = String;
-
-typedef Physics2DAbiContactBuffer = { var ids:flighthq._internal._UInt32Array; var flags:flighthq._internal._UInt32Array; var pointStarts:flighthq._internal._UInt32Array; var pointCounts:flighthq._internal._UInt32Array; var values:flighthq._internal._Float64Array; var pointFeatureIds:flighthq._internal._UInt32Array; var pointValues:flighthq._internal._Float64Array; var count:Float; var pointCount:Float; var requiredCount:Float; var requiredPointCount:Float; };
-
-typedef Physics2DAbiContactHook = Physics2DAbiContactBuffer->Void;
-
-typedef Physics2DAbiContactHooks = { var buffer:Physics2DAbiContactBuffer; var preSolve:Null<Physics2DAbiContactHook>; var postSolve:Null<Physics2DAbiContactHook>; };
-
-typedef Physics2DAbiStepStatus = String;
-
-typedef Physics2DAbiJointBuffer = { var ids:flighthq._internal._UInt32Array; var flags:flighthq._internal._UInt32Array; var values:flighthq._internal._Float64Array; var count:Float; var requiredCount:Float; };
-
-typedef Physics2DAbiQueryBuffer = { var bodyIds:flighthq._internal._UInt32Array; var colliderIds:flighthq._internal._UInt32Array; var values:flighthq._internal._Float64Array; var count:Float; var requiredCount:Float; };
 
 typedef Physics2DAbi = { var version:Float; var capabilities:Float; var createWorld:Void->Physics2DAbiWorldHandle; var destroyWorld:Physics2DAbiWorldHandle->Bool; var getWorldStatus:Physics2DAbiWorldHandle->Physics2DAbiWorldStatus; var execute:Physics2DAbiWorldHandle->Physics2DAbiCommandBuffer->Physics2DAbiExecutionResult->Bool; var step:Physics2DAbiWorldHandle->Float->Null<Physics2DAbiContactHooks>->Physics2DAbiStepStatus; var readBodies:Physics2DAbiWorldHandle->Null<flighthq._internal._UInt32Array>->Physics2DAbiBodyBuffer->Bool; var readContacts:Physics2DAbiWorldHandle->Physics2DAbiContactSelection->Physics2DAbiContactBuffer->Bool; var readJoints:Physics2DAbiWorldHandle->Physics2DAbiJointBuffer->Bool; var queryPoint:Physics2DAbiWorldHandle->Float->Float->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; var queryRay:Physics2DAbiWorldHandle->Float->Float->Float->Float->Float->Bool->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; var queryRegion:Physics2DAbiWorldHandle->SpatialAabb2D->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; var queryShapeCast:Physics2DAbiWorldHandle->CollisionBuiltInShape2D->Float->Float->Float->Null<Physics2DQueryFilter>->Physics2DAbiQueryBuffer->Bool; };

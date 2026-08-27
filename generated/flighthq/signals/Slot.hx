@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals._internal._Internal.nullSignalEmit;
 import flighthq.types.Signal;
-import flighthq.types.Signal.SignalData;
 import flighthq.types.SignalConnectOptions;
+import flighthq.types.SignalData;
 
+@:noCompletion
 class Slot {
   public static function clearSignal<T>(signal:Signal<T>):Void {
     (signal.emit = cast ((cast (cast nullSignalEmit : flighthq._internal._Any) : T) : T));

@@ -16,32 +16,34 @@ import flighthq.shape.ShapeStrokeOutline.getShapeStrokeOutlineRegions;
 import flighthq.types.BatchFormat;
 import flighthq.types.Path;
 import flighthq.types.PathMesh;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.RegistryEntryState;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RendererData;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
 import flighthq.types.ShapeFillRegion;
 import flighthq.types.ShapeStrokeRegion;
+import flighthq.types.SlotTable;
 import flighthq.types.StrokeStyle;
 import flighthq.types.Types.ShapeKind;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuShapeMesh;
+import flighthq.types.WgpuShapeMeshBuffers;
 import flighthq.types.WgpuShapeRendererData;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
+@:noCompletion
 class WgpuMeshShapeRenderer {
-  @:noCompletion
-  public static function drawWgpuMeshShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuMeshShape(state:WgpuRenderState, renderProxy:RenderProxy2D):Bool {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:Shape = cast _Runtime.UNDEFINED;
     var __destructure0:ShapeData = cast _Runtime.UNDEFINED;

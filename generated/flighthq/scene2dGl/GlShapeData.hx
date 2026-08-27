@@ -6,17 +6,19 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResource.createImageResource;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
+import flighthq.types.GlShapeRasterSurface;
 import flighthq.types.GlShapeRendererData;
-import flighthq.types.GlShapeRendererData.GlShapeRasterSurface;
 import flighthq.types.Image;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.TextureSource;
 
+@:noCompletion
 class GlShapeData {
-  @:noCompletion
-  public static function acquireGlShapeRasterSurface(data:GlShapeRendererData):GlShapeRasterSurface {
+  @:allow(flighthq)
+  @:keep
+  private static function acquireGlShapeRasterSurface(data:GlShapeRendererData):GlShapeRasterSurface {
     var existing:Null<GlShapeRasterSurface> = cast _Runtime.UNDEFINED;
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     var surface:GlShapeRasterSurface = cast _Runtime.UNDEFINED;
@@ -31,14 +33,16 @@ class GlShapeData {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createGlShapeData(_state:GlRenderState, _source:Renderable):Null<RendererData> {
+  @:allow(flighthq)
+  @:keep
+  private static function createGlShapeData(_state:GlRenderState, _source:Renderable):Null<RendererData> {
     return cast (cast toGlShapeRendererData(({ final __callArgument0:Dynamic = { surface: null, lastContentId: -1.0, lastPixelRatio: 0.0, lastW: 0.0, lastH: 0.0, meshVersion: -1.0, meshes: null }; __callArgument0; })) : RendererData);
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyGlShapeData(state:GlRenderState, data:RendererData):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyGlShapeData(state:GlRenderState, data:RendererData):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var surface:Null<GlShapeRasterSurface> = cast _Runtime.UNDEFINED;
     var entry:Null<{ var texture:flighthq._internal.dom.WebGLTexture; var version:Float; }> = cast _Runtime.UNDEFINED;
@@ -52,14 +56,16 @@ class GlShapeData {
     }
   }
 
-  @:noCompletion
-  public static function getGlShapeData(data:RendererData):GlShapeRendererData {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlShapeData(data:RendererData):GlShapeRendererData {
     return cast (cast (cast data : flighthq._internal._Any) : GlShapeRendererData);
     return cast null;
   }
 
-  @:noCompletion
-  public static function toGlShapeRendererData(data:GlShapeRendererData):RendererData {
+  @:allow(flighthq)
+  @:keep
+  private static function toGlShapeRendererData(data:GlShapeRendererData):RendererData {
     return cast (cast (cast data : flighthq._internal._Any) : RendererData);
     return cast null;
   }

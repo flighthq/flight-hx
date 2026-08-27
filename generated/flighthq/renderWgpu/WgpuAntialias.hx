@@ -5,14 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuAntialias {
   public static final SUPERSAMPLE_SCALE__wgpuAntialias:Float = 2.0;
 
-  @:noCompletion
-  public static function acquireWgpuSurfaceAntialiasView(state:WgpuRenderState, presentationView:flighthq._internal.dom.GPUTextureView):Null<flighthq._internal.dom.GPUTextureView> {
+  @:allow(flighthq)
+  @:keep
+  private static function acquireWgpuSurfaceAntialiasView(state:WgpuRenderState, presentationView:flighthq._internal.dom.GPUTextureView):Null<flighthq._internal.dom.GPUTextureView> {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
@@ -47,13 +49,15 @@ class WgpuAntialias {
     return cast null;
   }
 
-  @:noCompletion
-  public static function clearWgpuSurfacePresentation(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function clearWgpuSurfacePresentation(state:WgpuRenderState):Void {
     ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime) : { var surfacePresentationView:Null<flighthq._internal.dom.GPUTextureView>; }).surfacePresentationView = cast (null : Null<flighthq._internal.dom.GPUTextureView>));
   }
 
-  @:noCompletion
-  public static function encodeWgpuSurfaceAntialiasResolve(state:WgpuRenderState, encoder:flighthq._internal.dom.GPUCommandEncoder):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function encodeWgpuSurfaceAntialiasResolve(state:WgpuRenderState, encoder:flighthq._internal.dom.GPUCommandEncoder):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var presentationView:Null<flighthq._internal.dom.GPUTextureView> = cast _Runtime.UNDEFINED;
     var pipeline:Null<flighthq._internal.dom.GPURenderPipeline> = cast _Runtime.UNDEFINED;
@@ -71,8 +75,9 @@ class WgpuAntialias {
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).end();
   }
 
-  @:noCompletion
-  public static function getWgpuSurfaceRenderExtent(state:WgpuRenderState):{ var width:Float; var height:Float; } {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuSurfaceRenderExtent(state:WgpuRenderState):{ var width:Float; var height:Float; } {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : WgpuRenderStateRuntime);
     if ((cast !_Runtime.strictEquals(runtime.surfacePresentationView, null) : Bool)) {
@@ -82,8 +87,9 @@ class WgpuAntialias {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuSurfaceRenderScale(state:WgpuRenderState):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuSurfaceRenderScale(state:WgpuRenderState):Float {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument11:Dynamic = state; __callArgument11; })) : WgpuRenderStateRuntime);
     return cast ((cast ((cast _Runtime.strictEquals(runtime.currentRenderTarget, null) : Bool) && (cast !_Runtime.strictEquals(runtime.surfacePresentationView, null) : Bool)) : Bool) ? (cast WgpuAntialias.SUPERSAMPLE_SCALE__wgpuAntialias : Dynamic) : (cast 1.0 : Dynamic));

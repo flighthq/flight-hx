@@ -10,6 +10,7 @@ import flighthq.types.BitmapRegion;
 import flighthq.types.BitmapResizeMode;
 import flighthq.types.BitmapResizeOptions;
 
+@:noCompletion
 class BitmapResize {
   public static function resizeBitmap(dest:BitmapRegion, source:BitmapRegion, options:flighthq._internal._Union2<BitmapResizeMode, BitmapResizeOptions> = 'bilinear'):Void {
     var opts:BitmapResizeOptions = cast _Runtime.UNDEFINED;

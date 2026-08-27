@@ -6,19 +6,22 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.skeleton2d.Skeleton2dGuards.setSkeleton2DCoercedInterpolationGuard;
 import flighthq.skeleton2d.Skeleton2dGuards.setSkeleton2DDeformLengthGuard;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.Skeleton2DGuards.Skeleton2DCoercedInterpolation;
-import flighthq.types.Skeleton2DGuards.Skeleton2DDeformLengthMismatch;
+import flighthq.types.LogLevel;
+import flighthq.types.Skeleton2DCoercedInterpolation;
+import flighthq.types.Skeleton2DDeformLengthMismatch;
 
+@:noCompletion
 class EnableSkeleton2DGuards {
-  @:noCompletion
-  public static function disableSkeleton2DGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function disableSkeleton2DGuards():Void {
     setSkeleton2DCoercedInterpolationGuard((cast null : Dynamic));
     setSkeleton2DDeformLengthGuard((cast null : Dynamic));
   }
 
-  @:noCompletion
-  public static function enableSkeleton2DGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableSkeleton2DGuards():Void {
     setSkeleton2DCoercedInterpolationGuard((cast EnableSkeleton2DGuards.warnOnCoercedInterpolation__enableSkeleton2DGuards : Dynamic));
     setSkeleton2DDeformLengthGuard((cast EnableSkeleton2DGuards.warnOnDeformLengthMismatch__enableSkeleton2DGuards : Dynamic));
   }

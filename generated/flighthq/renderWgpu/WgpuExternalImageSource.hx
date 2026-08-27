@@ -4,6 +4,7 @@ package flighthq.renderWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class WgpuExternalImageSource {
   public static function isWgpuExternalImageSourceReady(source:flighthq._internal.dom.GPUCopyExternalImageSource, width:Float, height:Float):Bool {
     if ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([width] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([height] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }

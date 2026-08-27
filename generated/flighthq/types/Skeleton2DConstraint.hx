@@ -6,7 +6,3 @@ import flighthq._internal._Runtime;
 import flighthq.types._internal._Skeleton2DConstraintValues.Skeleton2DConstraintKindValue;
 
 typedef Skeleton2DConstraint = { var kind:Skeleton2DConstraintKind; var mix:Float; };
-
-typedef Skeleton2DConstraintSolver = Skeleton2D->Skeleton2DConstraint->Void;
-
-typedef Skeleton2DConstraintKind = String;

@@ -5,14 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderTarget.createWgpuRenderTarget;
 import flighthq.renderWgpu.WgpuRenderTarget.destroyWgpuRenderTarget;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
+import flighthq.types.WgpuRenderTargetPool;
 
+@:noCompletion
 class WgpuRenderTargetPool {
-  @:noCompletion
-  public static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:flighthq._internal.dom.GPUTextureFormat; @:optional var colorSpace:RenderTargetColorSpace; @:optional var sampleCount:Float; }):WgpuRenderTarget {
+  @:allow(flighthq)
+  @:keep
+  private static function acquireWgpuRenderTarget(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTargetPool, descriptor:{ var width:Float; var height:Float; @:optional var format:flighthq._internal.dom.GPUTextureFormat; @:optional var colorSpace:RenderTargetColorSpace; @:optional var sampleCount:Float; }):WgpuRenderTarget {
     var sampleCount:Float = cast _Runtime.UNDEFINED;
     var scale:Float = cast _Runtime.UNDEFINED;
     var w:Float = cast _Runtime.UNDEFINED;
@@ -25,10 +27,10 @@ class WgpuRenderTargetPool {
     format = _Runtime.coalesce((cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).format, function():Dynamic return cast (cast state : WgpuRenderState).format);
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, 'length') : Float)) : Bool)) {
-        var candidate:WgpuRenderTarget = flighthq._internal._StaticIndex.readArray((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, i);
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast pool : flighthq.types.WgpuRenderTargetPool).free, 'length') : Float)) : Bool)) {
+        var candidate:WgpuRenderTarget = flighthq._internal._StaticIndex.readArray((cast pool : flighthq.types.WgpuRenderTargetPool).free, i);
         if ((cast ((cast ((cast ((cast _Runtime.strictEquals(candidate.width, w) : Bool) && (cast _Runtime.strictEquals(candidate.height, h) : Bool)) : Bool) && (cast _Runtime.strictEquals(candidate.format, format) : Bool)) : Bool) && (cast _Runtime.strictEquals(candidate.sampleCount, sampleCount) : Bool)) : Bool)) {
-          _Runtime.splice((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, Std.int(i), Std.int(1.0), []);
+          _Runtime.splice((cast pool : flighthq.types.WgpuRenderTargetPool).free, Std.int(i), Std.int(1.0), []);
           (candidate.colorSpace = cast (_Runtime.coalesce((cast descriptor : { var width:Float; var height:Float; @:optional var format:Null<String>; @:optional var colorSpace:Null<String>; @:optional var sampleCount:Null<Float>; }).colorSpace, function():Dynamic return cast 'srgb') : RenderTargetColorSpace));
           return cast candidate;
         }
@@ -39,22 +41,25 @@ class WgpuRenderTargetPool {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWgpuRenderTargetPool():flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool {
+  @:allow(flighthq)
+  @:keep
+  private static function createWgpuRenderTargetPool():flighthq.types.WgpuRenderTargetPool {
     return cast { free: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyWgpuRenderTargetPool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool):Void {
-    for (target in _Runtime.iterable((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free)) {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuRenderTargetPool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTargetPool):Void {
+    for (target in _Runtime.iterable((cast pool : flighthq.types.WgpuRenderTargetPool).free)) {
       destroyWgpuRenderTarget(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = target; __callArgument7; }));
     }
-    _Runtime.setLength((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, 0.0);
+    _Runtime.setLength((cast pool : flighthq.types.WgpuRenderTargetPool).free, 0.0);
   }
 
-  @:noCompletion
-  public static function releaseWgpuRenderTarget(pool:flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool, target:WgpuRenderTarget):Void {
-    _Runtime.callProperty((cast pool : flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool).free, 'push', cast ([target] : Array<Dynamic>));
+  @:allow(flighthq)
+  @:keep
+  private static function releaseWgpuRenderTarget(pool:flighthq.types.WgpuRenderTargetPool, target:WgpuRenderTarget):Void {
+    _Runtime.callProperty((cast pool : flighthq.types.WgpuRenderTargetPool).free, 'push', cast ([target] : Array<Dynamic>));
   }
 }

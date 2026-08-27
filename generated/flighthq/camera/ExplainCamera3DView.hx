@@ -7,9 +7,11 @@ import flighthq.types.Camera3D;
 import flighthq.types.Camera3DViewExplanation;
 import flighthq.types.Matrix4;
 
+@:noCompletion
 class ExplainCamera3DView {
-  @:noCompletion
-  public static function explainCamera3DView(camera:Camera3D):Camera3DViewExplanation {
+  @:allow(flighthq)
+  @:keep
+  private static function explainCamera3DView(camera:Camera3D):Camera3DViewExplanation {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var x:{ var x:Float; var y:Float; var z:Float; } = cast _Runtime.UNDEFINED;
     var y:{ var x:Float; var y:Float; var z:Float; } = cast _Runtime.UNDEFINED;

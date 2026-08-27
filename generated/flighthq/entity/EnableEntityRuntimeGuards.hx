@@ -6,18 +6,21 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Guards.setEntityRuntimeGuardMode;
 import flighthq.entity.Guards.setEntityRuntimeWriteGuard;
 import flighthq.log.Log.logOnce;
-import flighthq.types.Entity.EntityRuntimeWriteSlot;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.EntityRuntimeWriteSlot;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableEntityRuntimeGuards {
-  @:noCompletion
-  public static function disableEntityRuntimeGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function disableEntityRuntimeGuards():Void {
     setEntityRuntimeGuardMode((cast false : Bool));
     setEntityRuntimeWriteGuard((cast null : Dynamic));
   }
 
-  @:noCompletion
-  public static function enableEntityRuntimeGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableEntityRuntimeGuards():Void {
     setEntityRuntimeGuardMode((cast true : Bool));
     setEntityRuntimeWriteGuard((cast EnableEntityRuntimeGuards.warnOnDirectWrite__enableEntityRuntimeGuards : Dynamic));
   }

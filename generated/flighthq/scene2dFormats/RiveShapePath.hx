@@ -16,17 +16,18 @@ import flighthq.path.Path.appendPathRoundRectangle;
 import flighthq.path.Path.createPath;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Path;
-import flighthq.types.RiveDocument.RiveArtboardGraph;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveValue;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
+import flighthq.types.RiveArtboardGraph;
+import flighthq.types.RiveCoreObject;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef RiveVertexPoint__riveShapePath = { var corner:Null<Array<Float>>; var entryX:Float; var entryY:Float; var exitX:Float; var exitY:Float; var inX:Float; var inY:Float; var outX:Float; var outY:Float; var radius:Float; var x:Float; var y:Float; };
 
+@:noCompletion
 class RiveShapePath {
   public static function createRivePath(path:RiveCoreObject, artboard:RiveArtboardGraph, index:Float, ?diagnostics:Array<ImportDiagnostic>):Null<Path> {
     if ((cast (cast isRiveCoreTypeDerivedFrom((cast path.typeKey : Float), (cast RiveShapePath.RIVE_POINTS_COMMON_PATH__riveShapePath : Float)) : Bool) : Bool)) {

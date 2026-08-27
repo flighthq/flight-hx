@@ -8,12 +8,14 @@ import flighthq.types.EasingFunction;
 import flighthq.types.TweenManager;
 import flighthq.types.TweenManagerOptions;
 
+@:noCompletion
 class TweenManager {
   public static function createTweenManager(?options:TweenManagerOptions):flighthq.types.TweenManager {
     return cast { __brand: 'TweenManager', defaultEase: _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var defaultEase:Null<EasingFunction>; }).defaultEase; }), function():Dynamic return cast easeOutExponential), tweens: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
     return cast null;
   }
 
-  @:noCompletion
-  public static final defaultManager:flighthq.types.TweenManager = (cast (#if js _Runtime.callValue(createTweenManager, cast ([] : Array<Dynamic>)) #else createTweenManager(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq.types.TweenManager);
+  @:allow(flighthq)
+  @:keep
+  private static final defaultManager:flighthq.types.TweenManager = (cast (#if js _Runtime.callValue(createTweenManager, cast ([] : Array<Dynamic>)) #else createTweenManager(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq.types.TweenManager);
 }

@@ -7,14 +7,15 @@ import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnost
 import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
 import flighthq.types.PixiParseResult;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef PixiRaw__pixiParse = flighthq._internal._Record<String, flighthq._internal._Any>;
 
+@:noCompletion
 class PixiParse {
   public static function parsePixiParticle(json:String):ParticleEmitterConfig {
     return cast (cast PixiParse.rawToConfig__pixiParse((cast (cast PixiParse.parsePixiJson__pixiParse((cast json : String)) : PixiRaw__pixiParse) : Dynamic)) : ParticleEmitterConfig);

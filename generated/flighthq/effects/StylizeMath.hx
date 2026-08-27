@@ -4,6 +4,7 @@ package flighthq.effects;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class StylizeMath {
   public static function computeCrtMaskParams(resolution:Float, curvature:Float, out:Array<Float>):Void {
     var maskScale:Float = cast _Runtime.UNDEFINED;

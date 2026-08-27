@@ -54,6 +54,7 @@ export interface CoreGenerationReport {
       source: string;
     }>;
     protectedDeclarationIdentities: number;
+    restrictedMemberDeclarations: number;
   };
   excludedPackages: Array<{ packageName: string; reason: string }>;
   hostTypes: HostTypeAudit;
@@ -62,7 +63,7 @@ export interface CoreGenerationReport {
     diagnostics: LoweringDiagnostic[];
     module: string;
   }>;
-  schemaVersion: 6;
+  schemaVersion: 7;
   staticLowering: StaticLoweringEmissionCounts;
   typeErasures: TypeErasureAudit;
 }
@@ -219,6 +220,17 @@ export function generateCoreModules(
   const modules = loweredPackages.flatMap((item) =>
     item.lowered.sources.flatMap((source) => buildSourceModules(item.packageName, source, workspaceDirectory)),
   );
+  splitPublicTypesIntoModules(modules, typesInventory);
+  for (const module of modules) {
+    if (
+      module.source &&
+      module.haxePackage === packageNameToHaxePackage(module.packageName) &&
+      module.name !== packageNameToModule(module.packageName) &&
+      module.declarations.some((declaration) => declaration.kind === 'function' || declaration.kind === 'variable')
+    ) {
+      module.namespaceNoCompletion = true;
+    }
+  }
   for (const item of loweredPackages) {
     const haxePackage = packageNameToHaxePackage(item.packageName);
     const existing = modules.find((module) => module.haxePackage === haxePackage && module.name === item.moduleName);
@@ -233,7 +245,7 @@ export function generateCoreModules(
     }
   }
   const omittedContractModules = omitHeaderOnlyContractModules(modules, inventory.packages);
-  const contractVisibility = markContractOnlyDeclarationsNoCompletion(modules, inventory.packages);
+  const contractVisibility = markContractOnlyDeclarationsVisibility(modules, inventory.packages);
   markCppStructInitTypes(modules, structRegistry, typedStructProvenance);
   verifyTypedStructEmissionCoverage(modules, structRegistry);
   const shadowedTypeNames = markShadowedSecondaryTypes(modules);
@@ -338,6 +350,7 @@ export function generateCoreModules(
       noCompletionDeclarations: contractVisibility.noCompletionDeclarations,
       omittedModules: omittedContractModules,
       protectedDeclarationIdentities: contractVisibility.protectedDeclarationIdentities,
+      restrictedMemberDeclarations: contractVisibility.restrictedMemberDeclarations,
     },
     excludedPackages: inventory.packages
       .filter((item) => item.exclusion !== null)
@@ -360,7 +373,7 @@ export function generateCoreModules(
         module: modulePath(module),
       }))
       .sort((left, right) => left.module.localeCompare(right.module)),
-    schemaVersion: 6,
+    schemaVersion: 7,
     staticLowering: staticLoweringEmissionCounts(),
     typeErasures: auditTypeErasures(modules),
   };
@@ -603,7 +616,67 @@ function exportDeclarationIdentities(record: ExportRecord): string[] {
 }
 
 /**
- * A declaration is completion-hidden only when at least one translated package
+ * Flight's canonical data package is addressed by exported type name, not by
+ * the TypeScript file that happened to define it. Keep non-public helper types
+ * with their source implementation, but give every root/contract-exported type
+ * its own `flighthq.types.<TypeName>` module.
+ */
+export function splitPublicTypesIntoModules(modules: IrModule[], inventory: PackageInventory): void {
+  if (inventory.name !== '@flighthq/types') {
+    throw new Error(`Expected @flighthq/types inventory, received ${inventory.name}`);
+  }
+  const publicIdentities = new Set(
+    inventory.exportLanes.flatMap((lane) => lane.exports.flatMap((record) => exportDeclarationIdentities(record))),
+  );
+  const typePackage = packageNameToHaxePackage(inventory.name);
+  const moved: Array<{ declaration: IrDeclaration; owner: IrModule }> = [];
+  for (const module of modules) {
+    if (module.packageName !== inventory.name) continue;
+    module.declarations = module.declarations.filter((declaration) => {
+      if (declaration.kind !== 'class' && declaration.kind !== 'enum' && declaration.kind !== 'type') return true;
+      const identity = `${declaration.origin.source}\0${declaration.origin.fingerprint}`;
+      if (!publicIdentities.has(identity)) return true;
+      moved.push({ declaration, owner: module });
+      return false;
+    });
+  }
+  const targetNames = new Set<string>();
+  for (const { declaration } of moved) {
+    if (targetNames.has(declaration.name)) {
+      throw new Error(`Duplicate public @flighthq/types declaration name: ${declaration.name}`);
+    }
+    targetNames.add(declaration.name);
+    const existing = modules.find((module) => module.haxePackage === typePackage && module.name === declaration.name);
+    if (existing) {
+      if (existing.source && existing.source !== declaration.origin.source) {
+        throw new Error(
+          `Public type module ${typePackage}.${declaration.name} conflicts between ${existing.source} and ${declaration.origin.source}`,
+        );
+      }
+      existing.source = declaration.origin.source;
+      existing.declarations.push(declaration);
+      continue;
+    }
+    modules.push({
+      declarations: [declaration],
+      haxePackage: typePackage,
+      imports: [],
+      name: declaration.name,
+      packageName: inventory.name,
+      source: declaration.origin.source,
+    });
+  }
+  const emptiedOwners = new Set(moved.map((item) => item.owner));
+  for (const owner of emptiedOwners) {
+    if (owner.declarations.length > 0) continue;
+    if (owner.source && path.basename(owner.source) === 'contract.ts') continue;
+    const index = modules.indexOf(owner);
+    if (index >= 0) modules.splice(index, 1);
+  }
+}
+
+/**
+ * A declaration is contract-restricted only when at least one translated package
  * exposes it through `./contract` and no package exposes the same canonical source
  * identity through any non-contract lane. Public aliases and filenames are not part
  * of the decision.
@@ -628,10 +701,14 @@ export function contractOnlyDeclarationIdentities(inventories: ReadonlyArray<Pac
   return new Set([...contract].filter((identity) => !ordinary.has(identity)));
 }
 
-export function markContractOnlyDeclarationsNoCompletion(
+export function markContractOnlyDeclarationsVisibility(
   modules: IrModule[],
   inventories: ReadonlyArray<PackageInventory>,
-): { noCompletionDeclarations: number; protectedDeclarationIdentities: number } {
+): {
+  noCompletionDeclarations: number;
+  protectedDeclarationIdentities: number;
+  restrictedMemberDeclarations: number;
+} {
   const protectedIdentities = contractOnlyDeclarationIdentities(inventories);
   const exportNamesByIdentity = new Map<string, Set<string>>();
   for (const inventory of inventories) {
@@ -654,6 +731,8 @@ export function markContractOnlyDeclarationsNoCompletion(
       declarationsByIdentity.set(identity, declarations);
     }
   }
+  let noCompletionDeclarations = 0;
+  let restrictedMemberDeclarations = 0;
   for (const identity of protectedIdentities) {
     const declarations = declarationsByIdentity.get(identity) ?? [];
     if (declarations.length !== 1) {
@@ -663,11 +742,20 @@ export function markContractOnlyDeclarationsNoCompletion(
         `Contract-only declaration ${source} (${exportNames || fingerprint}) resolves to ${String(declarations.length)} generated Haxe declarations`,
       );
     }
-    declarations[0]!.noCompletion = true;
+    const declaration = declarations[0]!;
+    if (declaration.kind === 'function' || declaration.kind === 'variable') {
+      declaration.allowPackage = 'flighthq';
+      declaration.noCompletion = undefined;
+      restrictedMemberDeclarations++;
+    } else {
+      declaration.noCompletion = true;
+      noCompletionDeclarations++;
+    }
   }
   return {
-    noCompletionDeclarations: protectedIdentities.size,
+    noCompletionDeclarations,
     protectedDeclarationIdentities: protectedIdentities.size,
+    restrictedMemberDeclarations,
   };
 }
 

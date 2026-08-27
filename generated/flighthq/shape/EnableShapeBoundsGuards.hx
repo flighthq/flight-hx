@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.shape.ShapeBounds.setShapeBoundsGuard;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.Shape;
-import flighthq.types.ShapeBounds.ShapeBoundsMode;
+import flighthq.types.ShapeBoundsMode;
 
+@:noCompletion
 class EnableShapeBoundsGuards {
   public static function areShapeBoundsGuardsEnabled():Bool {
     return cast EnableShapeBoundsGuards._enabled__enableShapeBoundsGuards;

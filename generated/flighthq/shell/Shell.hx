@@ -4,11 +4,11 @@ package flighthq.shell;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Shell.ShellBackend;
-import flighthq.types.Shell.ShellOpenExternalOptions;
-import flighthq.types.Shell.ShellOpenPathOptions;
-import flighthq.types.Shell.ShellShortcutLink;
-import flighthq.types.Shell.ShellShortcutWriteOperation;
+import flighthq.types.ShellBackend;
+import flighthq.types.ShellOpenExternalOptions;
+import flighthq.types.ShellOpenPathOptions;
+import flighthq.types.ShellShortcutLink;
+import flighthq.types.ShellShortcutWriteOperation;
 
 class Shell {
   public static var _custom__shell:Null<ShellBackend> = _Runtime.explicitNull();
@@ -68,14 +68,16 @@ class Shell {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getShellBackend():ShellBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getShellBackend():ShellBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Shell._custom__shell, function():Dynamic return cast Shell._host__shell), function():Dynamic return cast Shell._sentinel__shell);
     return cast null;
   }
 
-  @:noCompletion
-  public static function installShellHostBackend(backend:ShellBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installShellHostBackend(backend:ShellBackend):Void {
     if ((cast !_Runtime.strictEquals(Shell._host__shell, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Shell._host__shell, backend) : Bool)) { (Shell._hostConflict__shell = cast (true : Dynamic)); }
       return;
@@ -104,8 +106,9 @@ class Shell {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeShellHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeShellHostResult(operation:String, succeeded:Bool):Void {
     (Shell._hostObservation__shell = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -130,16 +133,18 @@ class Shell {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetShellBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetShellBackendForTest():Void {
     (Shell._custom__shell = cast (null : Dynamic));
     (Shell._host__shell = cast (null : Dynamic));
     (Shell._hostConflict__shell = cast (false : Dynamic));
     (Shell._hostObservation__shell = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setShellBackend(backend:Null<ShellBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setShellBackend(backend:Null<ShellBackend>):Void {
     (Shell._custom__shell = cast (backend : Dynamic));
   }
 

@@ -18,6 +18,7 @@ import flighthq.types.SpritesheetFrameData;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 
+@:noCompletion
 class SpritesheetFrom {
   public static function createSpritesheetFromData(data:SpritesheetData, atlas:TextureAtlas):Spritesheet {
     var nameToRegionId:flighthq._internal._Map<String, Float> = cast _Runtime.UNDEFINED;

@@ -4,14 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ConnectivityConnectionType = String;
-
-typedef ConnectivityStatus = { var online:Bool; var type:ConnectivityConnectionType; var downlink:Float; var downlinkMax:Float; var effectiveType:String; var rtt:Float; var saveData:Bool; var metered:Bool; };
-
-typedef ConnectivityReachability = { var reachable:Bool; var latency:Float; };
-
-typedef ConnectivityReachabilityOptions = { var url:String; @:optional var timeout:Float; @:optional var signal:flighthq._internal.dom.AbortSignal; };
-
-typedef ConnectivityBackend = { var getStatus:ConnectivityStatus->ConnectivityStatus; @:optional var detectReachability:ConnectivityReachabilityOptions->ConnectivityReachability->flighthq._internal._Promise<ConnectivityReachability>; var subscribe:(Void->Void)->(Void->Void); };
-
 typedef Connectivity = { var onChange:Signal<ConnectivityStatus->Void>; var onConnectionTypeChange:Signal<ConnectivityConnectionType->Void>; var onMeteredChange:Signal<Bool->Void>; var onOnline:Signal<Void->Void>; var onOffline:Signal<Void->Void>; };

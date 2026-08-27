@@ -3,19 +3,9 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
-
-typedef TextureColorSpace = String;
-
-typedef TextureSourceCubeFaces = Array<Null<TextureSource>>;
 
 typedef TextureCommon__Texture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; };
 
-typedef Texture2D = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var dimension:String; var source:Null<TextureSource>; };
-
-typedef Texture = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { >TextureCommon__Texture, var dimension:String; var sources:Array<Null<TextureSource>>; }>, { >TextureCommon__Texture, var dimension:String; var source:Null<VoxelGrid>; }>, { >TextureCommon__Texture, var dimension:String; var sources:TextureSourceCubeFaces; }>;
-
 typedef TextureLikeFrom__Texture<Type> = flighthq._internal._Conditional<Type, flighthq.types.Texture, { var dimension:String; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }, flighthq._internal._Any>;
 
-typedef TextureLike = TextureLikeFrom__Texture<flighthq.types.Texture>;
+typedef Texture = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<Texture2D, { >TextureCommon__Texture, var dimension:String; var sources:Array<Null<TextureSource>>; }>, { >TextureCommon__Texture, var dimension:String; var source:Null<VoxelGrid>; }>, { >TextureCommon__Texture, var dimension:String; var sources:TextureSourceCubeFaces; }>;

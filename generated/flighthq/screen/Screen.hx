@@ -6,18 +6,18 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Screen.ScreenBackend;
-import flighthq.types.Screen.ScreenInfo;
+import flighthq.types.RectangleLike;
+import flighthq.types.ScreenBackend;
 import flighthq.types.ScreenChangeEvent;
-import flighthq.types.ScreenChangeEvent.ScreenChangeKind;
-import flighthq.types.ScreenChangeEvent.ScreenChangedMetrics;
+import flighthq.types.ScreenChangeKind;
+import flighthq.types.ScreenChangedMetrics;
 import flighthq.types.ScreenColorSpace;
+import flighthq.types.ScreenInfo;
 import flighthq.types.ScreenMode;
 import flighthq.types.ScreenOrientation;
 import flighthq.types.ScreenSignals;
 import flighthq.types.Signal;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
 typedef ScreenDetailed__screen = { var availLeft:Float; var availTop:Float; var availWidth:Float; var availHeight:Float; var colorDepth:Float; var devicePixelRatio:Float; var height:Float; @:optional var isExtended:Bool; @:optional var isInternal:Bool; @:optional var isPrimary:Bool; var label:String; var left:Float; var pixelDepth:Float; @:optional var refreshRate:Float; var top:Float; var width:Float; };
 
@@ -151,8 +151,9 @@ class Screen {
     (dst.monochrome = cast (src.monochrome : Bool));
   }
 
-  @:noCompletion
-  public static function createScreenInfo():ScreenInfo {
+  @:allow(flighthq)
+  @:keep
+  private static function createScreenInfo():ScreenInfo {
     return cast { id: 0.0, x: 0.0, y: 0.0, width: 0.0, height: 0.0, workWidth: 0.0, workHeight: 0.0, scaleFactor: 1.0, isPrimary: false, rotation: -1.0, orientation: 'Landscape', refreshRate: -1.0, colorDepth: -1.0, pixelDepth: -1.0, physicalWidth: -1.0, physicalHeight: -1.0, isHdr: false, colorSpace: 'srgb', maxLuminance: -1.0, depthPerComponent: -1.0, dpi: -1.0, label: '', internal: false, touchSupport: 'unknown', monochrome: false };
     return cast null;
   }
@@ -162,14 +163,16 @@ class Screen {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createScreenSignals():ScreenSignals {
+  @:allow(flighthq)
+  @:keep
+  private static function createScreenSignals():ScreenSignals {
     return cast { onScreenAdded: (cast createSignal() : Signal<ScreenInfo->Void>), onScreenMetricsChanged: (cast createSignal() : Signal<ScreenChangeEvent->Void>), onScreenRemoved: (cast createSignal() : Signal<ScreenInfo->Void>) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebScreenBackend():ScreenBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebScreenBackend():ScreenBackend {
     var ensureCursorTracking:Void->Void = cast _Runtime.UNDEFINED;
     var upgradeToScreenDetails:ScreenDetails__screen->Void = cast _Runtime.UNDEFINED;
     var buildScreenInfoFromDetailed:ScreenDetailed__screen->Float->Float->ScreenInfo->Void = cast _Runtime.UNDEFINED;
@@ -508,8 +511,9 @@ class Screen {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getScreenBackend():ScreenBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getScreenBackend():ScreenBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Screen._custom__screen, function():Dynamic return cast Screen._host__screen), function():Dynamic return cast Screen._sentinel__screen);
     return cast null;
   }
@@ -776,8 +780,9 @@ class Screen {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installScreenHostBackend(backend:ScreenBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installScreenHostBackend(backend:ScreenBackend):Void {
     if ((cast !_Runtime.strictEquals(Screen._host__screen, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Screen._host__screen, backend) : Bool)) { (Screen._hostConflict__screen = cast (true : Dynamic)); }
       return;
@@ -785,8 +790,9 @@ class Screen {
     (Screen._host__screen = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observeScreenHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeScreenHostResult(operation:String, succeeded:Bool):Void {
     (Screen._hostObservation__screen = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -829,8 +835,9 @@ class Screen {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetScreenBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetScreenBackendForTest():Void {
     (Screen._custom__screen = cast (null : Dynamic));
     (Screen._host__screen = cast (null : Dynamic));
     (Screen._hostConflict__screen = cast (false : Dynamic));
@@ -867,8 +874,9 @@ class Screen {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setScreenBackend(backend:Null<ScreenBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setScreenBackend(backend:Null<ScreenBackend>):Void {
     (Screen._custom__screen = cast (backend : Dynamic));
   }
 }

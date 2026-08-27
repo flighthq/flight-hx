@@ -13,7 +13,7 @@ import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
 import flighthq.types.AnimationTrack;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Node3D;
 import flighthq.types.Types.Scene3DAnimationPathRotation;
 import flighthq.types.Types.Scene3DAnimationPathTranslation;
@@ -27,6 +27,7 @@ typedef Md5AnimBaseframePose__md5AnimParse = { var orientationX:Float; var orien
 
 typedef Md5AnimDropTally__md5AnimParse = { var count:Float; var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var severity:ImportDiagnosticSeverity; };
 
+@:noCompletion
 class Md5AnimParse {
   public static function parseMd5Anim(source:String, joints:Array<Node3D>, ?diagnostics:Array<ImportDiagnostic>):Null<AnimationClip> {
     var lines:Array<String> = cast _Runtime.UNDEFINED;

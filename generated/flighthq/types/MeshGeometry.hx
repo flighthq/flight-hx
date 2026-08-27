@@ -3,24 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-
-typedef VertexSemantic = String;
-
-typedef VertexFormat = String;
-
-typedef PrimitiveTopology = String;
-
-typedef VertexAttribute = { var byteOffset:Float; var format:VertexFormat; var semantic:VertexSemantic; };
-
-typedef VertexAttributeLayout = { var attributes:Array<VertexAttribute>; var stride:Float; };
-
-typedef MeshSubset = { var indexCount:Float; var indexOffset:Float; };
 
 typedef MeshGeometry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bounds:Null<Aabb>; var indices:Null<flighthq._internal._Union2<flighthq._internal._UInt16Array, flighthq._internal._UInt32Array>>; var layout:VertexAttributeLayout; var subsets:Array<MeshSubset>; var topology:PrimitiveTopology; var version:Float; var vertices:flighthq._internal._Float32Array; };
-
-typedef MeshGeometryGlData = { var __meshGeometryGlData:flighthq._internal._Symbol; };
-
-typedef MeshGeometryWgpuData = { var __meshGeometryWgpuData:flighthq._internal._Symbol; };
-
-typedef MeshGeometryRuntime = { var binding:Null<flighthq._internal._Object>; var attributeDataView:Null<{ var buffer:flighthq._internal._ArrayBufferLike; var byteOffset:Float; var byteLength:Float; var view:Dynamic; }>; var boundsVersion:Float; var morphBindPose:Null<MeshMorphBindPose>; var morphBlendedWeights:Null<flighthq._internal._Float32Array>; var skinBindPose:Null<MeshSkinBindPose>; var webglData:Null<MeshGeometryGlData>; var webgpuData:Null<MeshGeometryWgpuData>; };

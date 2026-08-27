@@ -13,6 +13,7 @@ import flighthq.types.SpritesheetValidationDiagnostic;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 
+@:noCompletion
 class SpritesheetValidation {
   public static function validateSpritesheet(spritesheet:Spritesheet):Null<Array<SpritesheetValidationDiagnostic>> {
     var diagnostics:Array<SpritesheetValidationDiagnostic> = cast _Runtime.UNDEFINED;

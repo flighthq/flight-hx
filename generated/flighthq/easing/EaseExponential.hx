@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class EaseExponential {
   public static final easeInExponential:EasingFunction = (cast function(t:Float):Float return ((cast _Runtime.strictEquals(t, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast HxMath.pow(2.0, ((10.0 * t) - 10.0)) : Dynamic)));
 

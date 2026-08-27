@@ -7,6 +7,7 @@ import flighthq.bitmap.BitmapComposite.extractBitmapPixels;
 import flighthq.types.BitmapBoxBlurOptions;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapBlur {
   public static function blurBitmapPixelsHorizontal(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, width:Float, height:Float, radius:Float):Void {
     {

@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Bitmap;
 import flighthq.types.ImageFormat;
 
+@:noCompletion
 class BitmapEncode {
   public static function encodeBitmap(source:Bitmap, format:ImageFormat = 'png', quality:Float = 0.9):flighthq._internal._UInt8Array {
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;

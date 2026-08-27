@@ -11,12 +11,13 @@ import flighthq.path.Path.createPath;
 import flighthq.pathBoolean.PathBooleanBackend.getPathBooleanBackend;
 import flighthq.types.Path;
 import flighthq.types.PathBooleanBackend;
-import flighthq.types.PathBooleanBackend.PathBooleanContour;
+import flighthq.types.PathBooleanContour;
 import flighthq.types.PathBooleanFillRule;
 import flighthq.types.PathBooleanOperation;
 import flighthq.types.PathBooleanOptions;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 
+@:noCompletion
 class BooleanPaths {
   public static function booleanPaths(subject:Path, clip:Path, operation:PathBooleanOperation, ?out:Path, ?options:PathBooleanOptions):Path {
     var fillRule:PathWinding = cast _Runtime.UNDEFINED;

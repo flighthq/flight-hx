@@ -3,9 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types._internal._PathValues.PathCommandValue;
-
-typedef PathCommand = flighthq._internal._IndexedAccess<Dynamic, String>;
 
 typedef Path = { var commands:Array<Float>; var data:Array<Float>; var winding:PathWinding; };

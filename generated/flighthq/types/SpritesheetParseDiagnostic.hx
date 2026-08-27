@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SpritesheetParseDiagnosticSeverity = String;
-
 typedef SpritesheetParseDiagnostic = { @:optional var frameName:String; @:optional var field:String; var message:String; var severity:SpritesheetParseDiagnosticSeverity; };

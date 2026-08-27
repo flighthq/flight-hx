@@ -20,27 +20,27 @@ import flighthq.scene3dResources.SceneResourceRecovery as Facade_Scene3dResource
 import flighthq.scene3dResources.SceneResourceResolver as Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceResolver;
 import flighthq.scene3dResources.SceneResourceSignals as Facade_Scene3dResources_flighthq_scene3dResources_SceneResourceSignals;
 import flighthq.scene3dResources.ThreeDsLoad as Facade_Scene3dResources_flighthq_scene3dResources_ThreeDsLoad;
+import flighthq.types.ExternalImageResourceReference;
 import flighthq.types.Image;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
-import flighthq.types.ObjSchema.ObjMaterialLibrary;
+import flighthq.types.LoadScene3DResourcesOptions;
+import flighthq.types.ObjMaterialLibrary;
+import flighthq.types.ResolveScene3DResourcesOptions;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
+import flighthq.types.Scene3DDocumentLoadOptions;
 import flighthq.types.Scene3DKindUsage;
+import flighthq.types.Scene3DResourceResolver;
+import flighthq.types.Scene3DResourceResolverOptions;
+import flighthq.types.Scene3DResourceRevealOptions;
+import flighthq.types.Scene3DResourceSignals;
 import flighthq.types.Scene3DResources;
-import flighthq.types.Scene3DResources.LoadScene3DResourcesOptions;
-import flighthq.types.Scene3DResources.ResolveScene3DResourcesOptions;
-import flighthq.types.Scene3DResources.Scene3DDocumentLoadOptions;
-import flighthq.types.Scene3DResources.Scene3DResourceResolver;
-import flighthq.types.Scene3DResources.Scene3DResourceResolverOptions;
-import flighthq.types.Scene3DResources.Scene3DResourceRevealOptions;
-import flighthq.types.Scene3DResources.Scene3DResourceSignals;
-import flighthq.types.Scene3DResources.UpdateScene3DResourceStreamingOptions;
 import flighthq.types.SceneCoverageCatalog;
 import flighthq.types.SceneCoverageEntry;
 import flighthq.types.Texture;
 import flighthq.types.TextureSource;
 import flighthq.types.TweenManager;
+import flighthq.types.UpdateScene3DResourceStreamingOptions;
 
 class Scene3dResources {
   public static function areScene3DResourceFailureGuardsEnabled(resolver:Scene3DResourceResolver):Bool {

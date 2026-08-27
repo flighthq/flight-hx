@@ -7,7 +7,7 @@
 import flighthq.app.App;
 import flighthq.hostLime.LimeApp;
 import flighthq.sdk.Sdk.*;
-import flighthq.types.ParticleCurve.ColorKeyframe;
+import flighthq.types.ColorKeyframe;
 import flighthq.types.DisplayObject;
 import flighthq.types.TextLabel;
 import flighthq.types.Bitmap;

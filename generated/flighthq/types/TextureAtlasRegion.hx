@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef TextureAtlasRegion = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var height:Float; var id:Float; var name:Null<String>; var originalHeight:Null<Float>; var originalWidth:Null<Float>; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; var sourceX:Float; var sourceY:Float; var trimmed:Bool; var x:Float; var y:Float; var width:Float; };
-
-typedef TextureAtlasRegionLike = { var height:Float; var id:Float; var name:Null<String>; var originalHeight:Null<Float>; var originalWidth:Null<Float>; var pivotX:Null<Float>; var pivotY:Null<Float>; var rotated:Bool; var sourceX:Float; var sourceY:Float; var trimmed:Bool; var x:Float; var y:Float; var width:Float; };

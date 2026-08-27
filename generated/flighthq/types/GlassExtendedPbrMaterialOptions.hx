@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.PbrExtension.PbrUvSet;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 
 typedef GlassExtendedPbrMaterialOptions = { @:optional var alphaCutoff:Float; @:optional var alphaMode:MaterialAlphaMode; @:optional var blendMode:BlendMode; @:optional var doubleSided:Bool; @:optional var standard:{ @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }; @:optional var transmissionVolume:{ @:optional var attenuationColor:Null<Float>; @:optional var attenuationDistance:Null<Float>; @:optional var ior:Null<Float>; @:optional var kind:Null<String>; @:optional var thickness:Null<Float>; @:optional var thicknessMap:Null<Texture>; @:optional var thicknessMapUvSet:Null<PbrUvSet>; @:optional var transmission:Null<Float>; @:optional var transmissionMap:Null<Texture>; @:optional var transmissionMapUvSet:Null<PbrUvSet>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }; };

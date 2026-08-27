@@ -3,20 +3,23 @@ package flighthq.node;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.BoundsNodeAny;
+import flighthq.types.EntityRuntime;
 import flighthq.types.HasBoundsRectangle;
-import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
-import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
+import flighthq.types.HasBoundsRectangleRuntime;
 import flighthq.types.MethodsOf;
 import flighthq.types.Rectangle;
 
+@:noCompletion
 class HasBoundsRectangle {
-  @:noCompletion
-  public static function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultComputeLocalBoundsRectangle(_out:Rectangle, _source:BoundsNodeAny):Void {
   }
 
-  @:noCompletion
-  public static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:{ @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function initBoundsRectangleRuntimeTrait(target:HasBoundsRectangleRuntime, ?methods:{ @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; }):Void {
     (target.boundsRectangle = cast (null : Null<Rectangle>));
     (target.localBoundsRectangle = cast (null : Null<Rectangle>));
     (target.worldBoundsRectangle = cast (null : Null<Rectangle>));
@@ -24,7 +27,8 @@ class HasBoundsRectangle {
     (target.isLocalBoundsRectangleValid = cast (_Runtime.coalesce(({ final __structural1 = methods; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; }).isLocalBoundsRectangleValid; }), function():Dynamic return cast null) : Null<BoundsNodeAny->Bool>));
   }
 
-  @:noCompletion
-  public static function initBoundsRectangleTrait(_target:flighthq.types.HasBoundsRectangle, ?_obj:{ @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function initBoundsRectangleTrait(_target:flighthq.types.HasBoundsRectangle, ?_obj:{ @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):Void {
   }
 }

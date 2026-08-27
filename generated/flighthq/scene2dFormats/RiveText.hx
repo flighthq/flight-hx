@@ -9,17 +9,18 @@ import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.text.RichText.createRichText;
 import flighthq.types.FontVariation;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RiveDocument.RiveArtboardGraph;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types.RichTextData;
+import flighthq.types.RiveArtboardGraph;
+import flighthq.types.RiveCoreObject;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveValue;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class RiveText {
   public static function createRiveRichText(artboard:RiveArtboardGraph, index:Float, fontNames:Array<String>, ?diagnostics:Array<ImportDiagnostic>):RichText {
     var source:RiveCoreObject = cast _Runtime.UNDEFINED;

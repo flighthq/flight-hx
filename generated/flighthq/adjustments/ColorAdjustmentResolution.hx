@@ -8,6 +8,7 @@ import flighthq.adjustments.ColorMatrixMath.fuseColorMatrices;
 import flighthq.types.Adjustment;
 import flighthq.types.ColorScaleBias;
 
+@:noCompletion
 class ColorAdjustmentResolution {
   public static final COLOR_ADJUSTMENT_NONE:Float = 0.0;
 

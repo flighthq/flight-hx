@@ -5,10 +5,4 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 @:noCompletion
-typedef RenderSortKey = Float;
-
-@:noCompletion
-typedef RenderQueueEntry = { var proxy:RenderProxy; var sortKey:RenderSortKey; };
-
-@:noCompletion
 typedef RenderQueue = { var entries:Array<RenderQueueEntry>; var entryCount:Float; };

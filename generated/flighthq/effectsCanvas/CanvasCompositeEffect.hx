@@ -5,8 +5,8 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasBlendEffect.getCanvasBlendEffectBackdrop;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.CompositeEffect;
@@ -14,9 +14,11 @@ import flighthq.types.CompositeOperator;
 import flighthq.types.RenderEffect;
 import flighthq.types._internal._CompositeOperatorValues.CompositeOperatorValue as CompositeOperatorValues;
 
+@:noCompletion
 class CanvasCompositeEffect {
-  @:noCompletion
-  public static function applyCompositeEffectToCanvas(state:CanvasRenderState, source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:CompositeEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyCompositeEffectToCanvas(state:CanvasRenderState, source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:CompositeEffect):Void {
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     ctx = dest.context;
     flighthq._internal.backend.Canvas2dBackend.call(ctx, 'save', cast ([] : Array<Dynamic>));

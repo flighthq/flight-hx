@@ -6,9 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.types.BlendMode;
 import flighthq.types.HasBlendMode;
 
+@:noCompletion
 class HasBlendMode {
-  @:noCompletion
-  public static function initBlendModeTrait(target:flighthq.types.HasBlendMode, ?obj:{ @:optional var blendMode:Null<BlendMode>; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function initBlendModeTrait(target:flighthq.types.HasBlendMode, ?obj:{ @:optional var blendMode:Null<BlendMode>; }):Void {
     ((cast target : flighthq.types.HasBlendMode).blendMode = _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var blendMode:Null<String>; }).blendMode; }), function():Dynamic return cast null));
   }
 }

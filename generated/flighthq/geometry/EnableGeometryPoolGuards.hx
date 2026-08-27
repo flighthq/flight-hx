@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.GeometryPoolGuards.geometryPoolReleaseGuard;
 import flighthq.geometry.GeometryPoolGuards.setGeometryPoolReleaseGuard;
 import flighthq.log.Log.logOnce;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 
 typedef GeometryPoolReleaseFunction__enableGeometryPoolGuards = flighthq._internal._IndexedAccess<Array<Dynamic>, Float>;
 
+@:noCompletion
 class EnableGeometryPoolGuards {
   public static function areGeometryPoolGuardsEnabled():Bool {
     return cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null);

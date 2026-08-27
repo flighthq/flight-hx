@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 
 typedef RiveCoreTypeRow__riveCoreTypes = { var key:Float; var name:String; var parent:Float; };
 
+@:noCompletion
 class RiveCoreTypes {
   public static function getRiveCoreTypeName(typeKey:Float):Null<String> {
     return cast ({ final __structural0 = ((cast RiveCoreTypes._typesByKey__riveCoreTypes : flighthq._internal._Map<Float, RiveCoreTypeRow__riveCoreTypes>).get(typeKey)); __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { var name:String; }).name; });

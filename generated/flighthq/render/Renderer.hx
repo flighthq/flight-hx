@@ -6,37 +6,40 @@ import flighthq._internal._Runtime;
 import flighthq.registry.RegistryTable.getRegistryTableEntry;
 import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.render.RenderState.getRenderStateRuntime;
-import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
-import flighthq.types.Entity.Kind;
+import flighthq.types.CanvasShapeCommand;
+import flighthq.types.ColorAdjustmentUnsupportedGuard;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
 import flighthq.types.Path;
 import flighthq.types.PathMesh;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RegistryTable.SlotTable;
-import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderEffectPaddingResolver;
 import flighthq.types.RenderProxy;
+import flighthq.types.RenderRegistries;
+import flighthq.types.RenderRootGuard;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.ColorAdjustmentUnsupportedGuard;
-import flighthq.types.RenderState.RenderRegistries;
-import flighthq.types.RenderState.RenderRootGuard;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.RendererData;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
+import flighthq.types.Scene2DClipHooks;
+import flighthq.types.SlotTable;
 import flighthq.types.StrokeStyle;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class Renderer {
-  @:noCompletion
-  public static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function copyAllRenderersFromRenderState(target:RenderState, source:RenderState):Void {
     copyRenderersFromRenderState(({ final __callArgument0:Dynamic = target; __callArgument0; }), ({ final __callArgument1:Dynamic = source; __callArgument1; }));
     if ((cast !_Runtime.strictEquals((cast source : RenderState).displayObjectClipHooks, null) : Bool)) { ((cast target : RenderState).displayObjectClipHooks = (cast source : RenderState).displayObjectClipHooks); }
   }
 
-  @:noCompletion
-  public static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function copyRenderersFromRenderState(target:RenderState, source:RenderState):Void {
     var targetRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var sourceTable:KeyedTable<flighthq.types.Renderer> = cast _Runtime.UNDEFINED;
     var targetTable:KeyedTable<flighthq.types.Renderer> = cast _Runtime.UNDEFINED;
@@ -60,8 +63,9 @@ class Renderer {
     }
   }
 
-  @:noCompletion
-  public static function copyRenderStateRegistrations(target:RenderState, source:RenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function copyRenderStateRegistrations(target:RenderState, source:RenderState):Void {
     var targetRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var sourceRuntime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     targetRuntime = (cast getRenderStateRuntime(({ final __callArgument14:Dynamic = target; __callArgument14; })) : RenderStateRuntime);
@@ -74,8 +78,9 @@ class Renderer {
     ((cast targetRuntime.registries : { var strokeTessellator:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator = cast ((cast sourceRuntime.registries : { var strokeTessellator:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator : SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>));
   }
 
-  @:noCompletion
-  public static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {
+  @:allow(flighthq)
+  @:keep
+  private static function noopRendererData(_state:RenderState, _source:Renderable):Null<RendererData> {
     return cast null;
     return cast null;
   }
@@ -90,8 +95,9 @@ class Renderer {
     (runtime.rendererMapId = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((runtime.rendererMapId + 1.0)), 0) : Float));
   }
 
-  @:noCompletion
-  public static function registerRenderers(state:RenderState, entries:Array<Array<flighthq._internal._Union2<Kind, flighthq.types.Renderer>>>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerRenderers(state:RenderState, entries:Array<Array<flighthq._internal._Union2<Kind, flighthq.types.Renderer>>>):Void {
     for (__iteration1 in _Runtime.iterable(entries)) {
       var kind:String = flighthq._internal._StaticIndex.readArray(__iteration1, 0.0);
       var renderer:flighthq.types.Renderer = flighthq._internal._StaticIndex.readArray(__iteration1, 1.0);

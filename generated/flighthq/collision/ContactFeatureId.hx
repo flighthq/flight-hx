@@ -4,6 +4,7 @@ package flighthq.collision;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class ContactFeatureId {
   public static final FEATURE_INDEX_LIMIT:Float = (1 << 25);
 

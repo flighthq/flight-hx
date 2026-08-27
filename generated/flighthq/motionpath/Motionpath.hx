@@ -5,9 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.motionpath.MotionPath as Facade_Motionpath_flighthq_motionpath_MotionPath;
 import flighthq.types.MotionPath;
-import flighthq.types.MotionPath.MotionPathLoopMode;
+import flighthq.types.MotionPathLoopMode;
 import flighthq.types.Path;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
 class Motionpath {
   public static function createMotionPath(path:Path, ?speed:Float, ?loopMode:MotionPathLoopMode, ?tolerance:Float):MotionPath {

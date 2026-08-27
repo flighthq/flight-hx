@@ -31,29 +31,30 @@ import flighthq.types.Node;
 import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.RichTextContent;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.Signal;
 import flighthq.types.TextAutoSize;
+import flighthq.types.TextFieldChangeEvent;
+import flighthq.types.TextFieldLinkEvent;
+import flighthq.types.TextFieldScrollEvent;
 import flighthq.types.TextFieldSignals;
-import flighthq.types.TextFieldSignals.TextFieldChangeEvent;
-import flighthq.types.TextFieldSignals.TextFieldLinkEvent;
-import flighthq.types.TextFieldSignals.TextFieldScrollEvent;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextInputState;
 import flighthq.types.TextLabel;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
-import flighthq.types.TextLayout.TextMeasureFunction;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextLineMetrics;
+import flighthq.types.TextMeasureFunction;
 import flighthq.types.TextVerticalAlign;
 import flighthq.types.Types.RichTextKind;
 import flighthq.types._internal._RichTextValues.RichTextKind;
 
+@:noCompletion
 class RichText {
   public static function appendRichTextString(source:flighthq.types.RichText, value:String):Void {
     var previousText:String = cast _Runtime.UNDEFINED;
@@ -113,8 +114,9 @@ class RichText {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createRichTextData(?data:{ @:optional var autoSize:Null<TextAutoSize>; @:optional var background:Null<Bool>; @:optional var backgroundColor:Null<Float>; @:optional var border:Null<Bool>; @:optional var borderColor:Null<Float>; @:optional var condenseWhite:Null<Bool>; @:optional var defaultTextFormat:Null<TextFormat>; @:optional var height:Null<Float>; @:optional var maxChars:Null<Float>; @:optional var mouseWheelEnabled:Null<Bool>; @:optional var multiline:Null<Bool>; @:optional var scrollH:Null<Float>; @:optional var scrollV:Null<Float>; @:optional var selectable:Null<Bool>; @:optional var text:Null<String>; @:optional var textColor:Null<Float>; @:optional var textFormatRanges:Null<Array<TextFormatRange>>; @:optional var width:Null<Float>; @:optional var wordWrap:Null<Bool>; @:optional var textFormat:Null<TextFormat>; @:optional var verticalAlign:Null<TextVerticalAlign>; }):RichTextData {
+  @:allow(flighthq)
+  @:keep
+  private static function createRichTextData(?data:{ @:optional var autoSize:Null<TextAutoSize>; @:optional var background:Null<Bool>; @:optional var backgroundColor:Null<Float>; @:optional var border:Null<Bool>; @:optional var borderColor:Null<Float>; @:optional var condenseWhite:Null<Bool>; @:optional var defaultTextFormat:Null<TextFormat>; @:optional var height:Null<Float>; @:optional var maxChars:Null<Float>; @:optional var mouseWheelEnabled:Null<Bool>; @:optional var multiline:Null<Bool>; @:optional var scrollH:Null<Float>; @:optional var scrollV:Null<Float>; @:optional var selectable:Null<Bool>; @:optional var text:Null<String>; @:optional var textColor:Null<Float>; @:optional var textFormatRanges:Null<Array<TextFormatRange>>; @:optional var width:Null<Float>; @:optional var wordWrap:Null<Bool>; @:optional var textFormat:Null<TextFormat>; @:optional var verticalAlign:Null<TextVerticalAlign>; }):RichTextData {
     var _data:RichTextData = cast _Runtime.UNDEFINED;
     _data = (cast createTextLabelData(({ final __callArgument26:Dynamic = data; __callArgument26; })) : RichTextData);
     (_data.background = cast (_Runtime.coalesce(({ final __structural28 = data; __structural28 == null ? _Runtime.UNDEFINED : (cast __structural28 : { @:optional var background:Null<Bool>; }).background; }), function():Dynamic return cast false) : Bool));
@@ -138,8 +140,9 @@ class RichText {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createRichTextRuntime():RichTextRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createRichTextRuntime():RichTextRuntime {
     var out:RichTextRuntime = cast _Runtime.UNDEFINED;
     out = (cast createNode2DRuntime((cast RichText.defaultMethods__richText : Dynamic)) : RichTextRuntime);
     (out.buildTextLayoutParams = cast (buildRichTextLayoutParams : TextLabel->TextMeasureFunction->TextLayoutParams));
@@ -154,8 +157,9 @@ class RichText {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createTextFieldSignals():TextFieldSignals {
+  @:allow(flighthq)
+  @:keep
+  private static function createTextFieldSignals():TextFieldSignals {
     return cast { onTextFieldChange: (cast createSignal() : Signal<TextFieldChangeEvent->Void>), onTextFieldLink: (cast createSignal() : Signal<TextFieldLinkEvent->Void>), onTextFieldScroll: (cast createSignal() : Signal<TextFieldScrollEvent->Void>) };
     return cast null;
   }
@@ -300,8 +304,9 @@ class RichText {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getRichTextRuntime(source:flighthq.types.RichText):RichTextRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getRichTextRuntime(source:flighthq.types.RichText):RichTextRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument108:Dynamic = source; __callArgument108; })) : RichTextRuntime);
     return cast null;
   }

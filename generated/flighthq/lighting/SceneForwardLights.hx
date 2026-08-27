@@ -4,14 +4,15 @@ package flighthq.lighting;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.lighting.LightAnalysis.getLightContributionAtBoundingSphere;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.PointLight;
 import flighthq.types.Scene3DForwardLightSelection;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.SpotLight;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
+@:noCompletion
 class SceneForwardLights {
   public static function selectScene3DForwardLights(out:Scene3DForwardLightSelection, lights:Scene3DLightsLike, bounds:BoundingSphereLike):Void {
     var points:Null<Array<PointLight>> = cast _Runtime.UNDEFINED;

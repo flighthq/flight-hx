@@ -8,9 +8,3 @@ import flighthq.types._internal._Skeleton2DPathConstraintValues.Skeleton2DPathRo
 import flighthq.types._internal._Skeleton2DPathConstraintValues.Skeleton2DPathSpacingModeValue;
 
 typedef Skeleton2DPathConstraint = { var kind:String; var mix:Float; var boneIndices:Array<Float>; var mixRotate:Float; var mixX:Float; var mixY:Float; var position:Float; var positionMode:Skeleton2DPathPositionMode; var rotateMode:Skeleton2DPathRotateMode; var spacing:Float; var spacingMode:Skeleton2DPathSpacingMode; var targetSlotIndex:Float; };
-
-typedef Skeleton2DPathPositionMode = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef Skeleton2DPathRotateMode = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef Skeleton2DPathSpacingMode = flighthq._internal._IndexedAccess<Dynamic, String>;

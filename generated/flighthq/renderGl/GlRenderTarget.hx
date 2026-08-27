@@ -15,25 +15,26 @@ import flighthq.renderGl.GlShader.setGlAttributes;
 import flighthq.renderGl.GlShader.setGlBaseUniforms;
 import flighthq.renderGl.GlShader.setGlMatrixFromTransform;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlScissorRect;
-import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.GlScissorRect;
 import flighthq.types.GlShaderLocations;
+import flighthq.types.GlViewportRect;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderTarget.RenderTargetAxes;
-import flighthq.types.RenderTarget.RenderTargetAxisDifference;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
-import flighthq.types.RenderTarget.RenderTargetDepth;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetExplanation;
-import flighthq.types.RenderTarget.RenderTargetFormat;
-import flighthq.types.RenderTarget.RenderTargetFormatPolicy;
-import flighthq.types.RenderTarget.ResolvedRenderTargetDescriptor;
+import flighthq.types.RenderTargetAxes;
+import flighthq.types.RenderTargetAxisDifference;
+import flighthq.types.RenderTargetColorSpace;
+import flighthq.types.RenderTargetDepth;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetExplanation;
+import flighthq.types.RenderTargetFormat;
+import flighthq.types.RenderTargetFormatPolicy;
+import flighthq.types.ResolvedRenderTargetDescriptor;
 
+@:noCompletion
 class GlRenderTarget {
   @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor):flighthq.types.GlRenderTarget {})
   @:overload(function(state:GlRenderState, descriptor:RenderTargetDescriptor, formatPolicy:String):flighthq.types.GlRenderTarget {})
@@ -59,8 +60,9 @@ class GlRenderTarget {
     return cast null;
   }
 
-  @:noCompletion
-  public static function declareGlRenderTargetColorSpace(state:GlRenderState, colorSpace:RenderTargetColorSpace):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function declareGlRenderTargetColorSpace(state:GlRenderState, colorSpace:RenderTargetColorSpace):Bool {
     var target:Null<flighthq.types.GlRenderTarget> = cast _Runtime.UNDEFINED;
     target = (cast (cast getGlRenderStateRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlRenderStateRuntime) : { @:optional var currentRenderTarget:Null<flighthq.types.GlRenderTarget>; }).currentRenderTarget;
     if ((cast _Runtime.looseEquals(target, null) : Bool)) { return cast false; }
@@ -85,8 +87,9 @@ class GlRenderTarget {
     if (_Runtime.truthy(target.depthStencilRenderbuffer)) { flighthq._internal.backend.WebGl2Backend.deleteRenderbuffer(gl, target.depthStencilRenderbuffer); }
   }
 
-  @:noCompletion
-  public static function drawGlRenderTargetResult(state:GlRenderState, renderProxy:RenderProxy2D, target:flighthq.types.GlRenderTarget, transform:Matrix):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlRenderTargetResult(state:GlRenderState, renderProxy:RenderProxy2D, target:flighthq.types.GlRenderTarget, transform:Matrix):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var __destructure0:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -126,8 +129,9 @@ class GlRenderTarget {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resizeGlRenderTarget(state:GlRenderState, target:flighthq.types.GlRenderTarget, width:Float, height:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resizeGlRenderTarget(state:GlRenderState, target:flighthq.types.GlRenderTarget, width:Float, height:Float):Void {
     var requested:ResolvedRenderTargetDescriptor = cast _Runtime.UNDEFINED;
     var effective:RenderTargetAxes = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
@@ -161,8 +165,9 @@ class GlRenderTarget {
     (runtime.currentTexture = cast (null : Null<flighthq._internal.dom.WebGLTexture>));
   }
 
-  @:noCompletion
-  public static function resolveGlRenderTarget(state:GlRenderState, target:flighthq.types.GlRenderTarget):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveGlRenderTarget(state:GlRenderState, target:flighthq.types.GlRenderTarget):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var scissor:Null<GlScissorRect> = cast _Runtime.UNDEFINED;

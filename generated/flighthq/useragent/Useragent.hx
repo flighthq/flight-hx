@@ -4,10 +4,10 @@ package flighthq.useragent;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DeviceFormFactor;
-import flighthq.types.Platform.PlatformEndianness;
-import flighthq.types.Platform.PlatformEngine;
-import flighthq.types.Platform.PlatformKind;
-import flighthq.types.Platform.PlatformName;
+import flighthq.types.PlatformEndianness;
+import flighthq.types.PlatformEngine;
+import flighthq.types.PlatformKind;
+import flighthq.types.PlatformName;
 import flighthq.useragent.UserAgent as Facade_Useragent_flighthq_useragent_UserAgent;
 import flighthq.useragent.UserAgentParse as Facade_Useragent_flighthq_useragent_UserAgentParse;
 

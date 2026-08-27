@@ -10,28 +10,33 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
+@:noCompletion
 class CanvasCSSFilterBinding {
   public static final _cssFilterBindings__canvasCSSFilterBinding:flighthq._internal._WeakMap<RenderProxy2D, String> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static function enableCanvasCssFilter(state:CanvasRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableCanvasCssFilter(state:CanvasRenderState):Void {
     ((cast state : { var canvasCssFilterResolver:Null<CanvasRenderState->RenderProxy2D->Null<String>>; }).canvasCssFilterResolver = (cast resolveCanvasCssFilter));
   }
 
-  @:noCompletion
-  public static function getCanvasCssFilter(renderProxy:RenderProxy2D):Null<String> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCanvasCssFilter(renderProxy:RenderProxy2D):Null<String> {
     return cast ((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).get(renderProxy));
     return cast null;
   }
 
-  @:noCompletion
-  public static function resolveCanvasCssFilter(_state:CanvasRenderState, renderProxy:RenderProxy2D):Null<String> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveCanvasCssFilter(_state:CanvasRenderState, renderProxy:RenderProxy2D):Null<String> {
     return cast _Runtime.coalesce(((cast CanvasCSSFilterBinding._cssFilterBindings__canvasCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).get(renderProxy)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:noCompletion
-  public static function setCanvasCssFilter(state:CanvasRenderState, node:Node2D, filter:Null<String>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setCanvasCssFilter(state:CanvasRenderState, node:Node2D, filter:Null<String>):Void {
     var renderProxy:RenderProxy2D = cast _Runtime.UNDEFINED;
     renderProxy = (cast getOrCreateRenderProxy2D(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = node; __callArgument1; })) : RenderProxy2D);
     if ((cast _Runtime.strictEquals(filter, null) : Bool)) {

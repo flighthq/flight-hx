@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.PixelateEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlPixelateEffect {
-  @:noCompletion
-  public static function applyPixelateEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PixelateEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyPixelateEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:PixelateEffect):Void {
     var size:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     size = _Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 8.0);

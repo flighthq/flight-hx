@@ -5,14 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.glyphatlas.GlyphRasterizerBackend.getGlyphRasterizerBackend;
 import flighthq.types.Bitmap;
+import flighthq.types.GlyphAtlas;
 import flighthq.types.GlyphAtlasEntryExplanation;
-import flighthq.types.GlyphSource.GlyphAtlas;
-import flighthq.types.GlyphSource.GlyphAtlasRuntime;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphRasterizeOptions;
-import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
+import flighthq.types.GlyphAtlasRuntime;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphRasterizeOptions;
+import flighthq.types.GlyphRasterizedBitmap;
+import flighthq.types.GlyphRasterizerBackend;
 
+@:noCompletion
 class ExplainGlyphAtlasEntry {
   public static function explainGlyphAtlasEntry(atlas:GlyphAtlas, codepoint:Float):GlyphAtlasEntryExplanation {
     var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;

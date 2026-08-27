@@ -4,6 +4,7 @@ package flighthq.collision;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class ConvexHull3D {
   public static function writeCollisionConvexHullFaces3D(points:Array<Float>, out:Array<Float>):Float {
     var count:Float = cast _Runtime.UNDEFINED;

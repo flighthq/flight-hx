@@ -8,12 +8,12 @@ import flighthq.geometry.Matrix.createMatrix;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.renderGl.GlRenderTarget.resolveGlRenderTarget;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlScissorRect;
-import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
+import flighthq.types.GlScissorRect;
+import flighthq.types.GlViewportRect;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.RenderPassPreserve;
 import flighthq.types.RenderProxy;
 import flighthq.types.Renderable;
@@ -25,6 +25,7 @@ typedef GlPassStackEntry__glRenderPass = { var depthMask:Bool; var owner:GlRende
 
 typedef SavedGlStencil__glRenderPass = { var fail:Float; var func:Float; var passDepthFail:Float; var passDepthPass:Float; var ref:Float; var valueMask:Float; var writeMask:Float; };
 
+@:noCompletion
 class GlRenderPass {
   public static function beginGlRenderPass(state:GlRenderState, target:GlRenderTarget, ?preserve:RenderPassPreserve, ?viewport:Viewport):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;

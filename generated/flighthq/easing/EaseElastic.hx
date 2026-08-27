@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class EaseElastic {
   public static final easeInElastic:EasingFunction = (cast function(t:Float):Float {
     if ((cast ((cast _Runtime.strictEquals(t, 0.0) : Bool) || (cast _Runtime.strictEquals(t, 1.0) : Bool)) : Bool)) { return cast t; }

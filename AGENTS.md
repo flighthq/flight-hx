@@ -41,7 +41,7 @@ Flight is intentionally optimized for globally searchable, free-function APIs. T
 - Preserve explicit `out` parameters, aliasing guarantees, sentinel returns, allocation vocabulary, and side-effect boundaries.
 - Prefer a boring, grepable one-to-one mapping over a clever transformation.
 
-The public namespace follows upstream source ownership mechanically: an npm package such as `@flighthq/render-gl` maps to `flighthq.renderGl`, and a defining file such as `glShader.ts` maps to `flighthq.renderGl.GlShader`. Package barrels remain generated facades such as `flighthq.geometry.Geometry` and `flighthq.sdk.Sdk`. See [`agents/architecture.md`](agents/architecture.md) for omitted implementation files, secondary types, and collision validation.
+The public namespace is addressed by Flight intent rather than upstream file layout: an npm package such as `@flighthq/render-gl` maps its free functions and values to the `flighthq.renderGl.RenderGl` package facade, while every exported `@flighthq/types` declaration owns `flighthq.types.<TypeName>`. Source-derived function modules remain completion-hidden implementation/provenance owners for generated bridges, not the steered consumer API. See [`agents/architecture.md`](agents/architecture.md) for placement, visibility, and collision validation.
 
 ## Translation Discipline
 

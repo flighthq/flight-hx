@@ -8,19 +8,20 @@ import flighthq.bitmapfont.BitmapFont.unpackBitmapFontKerningKey;
 import flighthq.bitmapfontFormats.BitmapFontRecord.buildBitmapFontFromRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.reportDroppedBitmapFontRecords;
 import flighthq.types.BitmapFont;
-import flighthq.types.BitmapFont.BitmapFontKerningPair;
-import flighthq.types.BitmapFont.BitmapFontParseOptions;
+import flighthq.types.BitmapFontCharRecord;
+import flighthq.types.BitmapFontKerningPair;
+import flighthq.types.BitmapFontKerningRecord;
+import flighthq.types.BitmapFontPageRecord;
+import flighthq.types.BitmapFontParseOptions;
 import flighthq.types.BitmapFontRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontCharRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontKerningRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontPageRecord;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphMetrics;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphMetrics;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureSource;
 
+@:noCompletion
 class BitmapFontFnt {
   public static function formatBitmapFontFnt(font:BitmapFont):String {
     var metrics:GlyphMetrics = cast _Runtime.UNDEFINED;

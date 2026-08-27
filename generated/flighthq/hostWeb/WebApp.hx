@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.app.App.installAppHostBackend;
 import flighthq.app.App.observeAppHostResult;
-import flighthq.types.App.AppActivationPolicy;
-import flighthq.types.App.AppBackend;
-import flighthq.types.App.AppLoginItem;
-import flighthq.types.App.AppLoginItemLike;
-import flighthq.types.App.AppPathKind;
-import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.AppActivationPolicy;
+import flighthq.types.AppBackend;
+import flighthq.types.AppLoginItem;
+import flighthq.types.AppLoginItemLike;
+import flighthq.types.AppPathKind;
+import flighthq.types.MenuItemTemplate;
 
+@:noCompletion
 class WebApp {
   public static function enableHostWebApp():Void {
     var _noop:Void->(Void->Void) = cast _Runtime.UNDEFINED;
@@ -162,8 +163,9 @@ class WebApp {
     installAppHostBackend(({ final __callArgument1:Dynamic = backend; __callArgument1; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebAppForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebAppForTest():Void {
     (WebApp._enabled__webApp = cast (false : Dynamic));
   }
 

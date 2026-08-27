@@ -3,12 +3,14 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionTestStatus;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionTestStatus;
 
+@:noCompletion
 class CollisionShapeValidation3D {
-  @:noCompletion
-  public static function getCollisionConvexValidationStatus3D(points:Array<Float>):Null<CollisionTestStatus> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCollisionConvexValidationStatus3D(points:Array<Float>):Null<CollisionTestStatus> {
     var minX:Float = cast _Runtime.UNDEFINED;
     var minY:Float = cast _Runtime.UNDEFINED;
     var minZ:Float = cast _Runtime.UNDEFINED;
@@ -42,8 +44,9 @@ class CollisionShapeValidation3D {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getCollisionShapeValidationStatus3D(shape:CollisionShape3D):Null<CollisionTestStatus> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCollisionShapeValidationStatus3D(shape:CollisionShape3D):Null<CollisionTestStatus> {
     {
       var __switchValue = (cast shape : { var kind:String; }).kind;
       if (__switchValue == 'sphere') {

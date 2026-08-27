@@ -7,13 +7,14 @@ import flighthq.textshaper.TextShaper.getTextShaperBackend;
 import flighthq.types.FontMetrics;
 import flighthq.types.FontResource;
 import flighthq.types.GlyphExtents;
+import flighthq.types.ShapeRunOptions;
+import flighthq.types.ShapedGlyph;
 import flighthq.types.ShapedRun;
-import flighthq.types.ShapedRun.ShapedGlyph;
 import flighthq.types.TextDirection;
 import flighthq.types.TextFormat;
-import flighthq.types.TextShaper.ShapeRunOptions;
-import flighthq.types.TextShaper.TextShaperBackend;
+import flighthq.types.TextShaperBackend;
 
+@:noCompletion
 class TextShaperRun {
   public static function clearShapedRun(run:ShapedRun):ShapedRun {
     (run.advanceWidth = cast (0.0 : Float));

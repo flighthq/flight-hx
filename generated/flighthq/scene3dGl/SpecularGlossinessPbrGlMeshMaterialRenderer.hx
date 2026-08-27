@@ -15,12 +15,12 @@ import flighthq.scene3dGl.GlPbrStandardBlock.bindGlPbrStandardBlock;
 import flighthq.scene3dGl.GlPbrStandardBlock.buildGlPbrStandardDefineKey;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Camera3D;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.GlLitProgram;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlMeshProgram;
+import flighthq.types.GlPbrDefineKey;
 import flighthq.types.GlPbrProgram;
-import flighthq.types.GlPbrProgram.GlPbrDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
 import flighthq.types.LinearColor;
@@ -30,19 +30,21 @@ import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.SpecularGlossinessPbrMaterial;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.StandardPbrMaterialProperties;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.SpecularGlossinessPbrMaterialKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 
+@:noCompletion
 class SpecularGlossinessPbrGlMeshMaterialRenderer {
-  @:noCompletion
-  public static final specularGlossinessPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final specularGlossinessPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var specGloss:Null<SpecularGlossinessPbrMaterial> = cast _Runtime.UNDEFINED;
     var standard:Null<StandardPbrMaterialProperties> = cast _Runtime.UNDEFINED;

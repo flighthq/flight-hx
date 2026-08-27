@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Bitmap;
 
+@:noCompletion
 class BitmapCoverage {
   public static function getBitmapCoverage(source:Bitmap, backgroundColor:Float, channelTolerance:Float = 0.0):Float {
     var br:Float = cast _Runtime.UNDEFINED;

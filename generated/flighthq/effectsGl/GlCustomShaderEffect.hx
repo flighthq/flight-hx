@@ -10,23 +10,25 @@ import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.CustomShaderEffect;
+import flighthq.types.GlCustomShaderSourceGuard;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlCustomShaderSourceGuard;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.KeyedTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
 import flighthq.types.RenderEffect;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class GlCustomShaderEffect {
-  @:noCompletion
-  public static function applyCustomShaderEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CustomShaderEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyCustomShaderEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CustomShaderEffect):Void {
     var fragmentSource:Null<String> = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     var uniforms:Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>> = cast _Runtime.UNDEFINED;
@@ -81,8 +83,9 @@ class GlCustomShaderEffect {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isGlCustomShaderEffectResolvable(state:GlRenderState, effect:RenderEffect):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isGlCustomShaderEffectResolvable(state:GlRenderState, effect:RenderEffect):Bool {
     return cast !_Runtime.strictEquals((cast getGlCustomShaderSource(({ final __callArgument39:Dynamic = state; __callArgument39; }), (cast _Runtime.field((cast effect : CustomShaderEffect), 'shaderKey') : String)) : Null<String>), null);
     return cast null;
   }
@@ -102,8 +105,9 @@ class GlCustomShaderEffect {
     ((cast runtime.registries : { var customEffectShaders:KeyedTable<String>; }).customEffectShaders = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var customEffectShaders:KeyedTable<String>; }).customEffectShaders : Dynamic), (cast shaderKey : String), (cast fragmentSource : String)) : KeyedTable<String>) : KeyedTable<String>));
   }
 
-  @:noCompletion
-  public static function setGlCustomShaderSourceGuard(state:GlRenderState, guard:Null<GlCustomShaderSourceGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlCustomShaderSourceGuard(state:GlRenderState, guard:Null<GlCustomShaderSourceGuard>):Void {
     if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast GlCustomShaderEffect._sourceGuards__glCustomShaderEffect : flighthq._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).delete_(state)); } else { ((cast GlCustomShaderEffect._sourceGuards__glCustomShaderEffect : flighthq._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).set(state, (cast guard))); }
   }
 

@@ -6,17 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.media.AudioMixer.setAudioBusMixerGuard;
 import flighthq.types.AudioBus;
-import flighthq.types.AudioBus.AudioBusMixerOperation;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.AudioBusMixerOperation;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableAudioMixerGuards {
-  @:noCompletion
-  public static function disableAudioMixerGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function disableAudioMixerGuards():Void {
     setAudioBusMixerGuard((cast null : Dynamic));
   }
 
-  @:noCompletion
-  public static function enableAudioMixerGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableAudioMixerGuards():Void {
     setAudioBusMixerGuard((cast EnableAudioMixerGuards.warnOnUnmixedBus__enableAudioMixerGuards : Dynamic));
   }
 

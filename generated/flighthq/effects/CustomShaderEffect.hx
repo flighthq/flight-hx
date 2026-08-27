@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CustomShaderEffect;
 
+@:noCompletion
 class CustomShaderEffect {
   public static function createCustomShaderEffect(options:{ var shaderKey:String; @:optional var uniforms:Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>>; }):flighthq.types.CustomShaderEffect {
     return cast _Runtime.mergeObjects([{ kind: 'CustomShaderEffect' }, options]);

@@ -11,11 +11,12 @@ import flighthq.skeleton3d.SkinMeshGeometry.skinMeshGeometry;
 import flighthq.skeleton3d.SkinMeshGeometry.updateMeshSkinBindPoseDeformInput;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MeshMorph;
 import flighthq.types.MeshSkinBindPose;
-import flighthq.types.MorphTarget.MeshMorph;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skin;
 
+@:noCompletion
 class UpdateMeshSkin {
   public static function updateMeshSkin(mesh:Mesh):Void {
     var skin:Null<Skin> = cast _Runtime.UNDEFINED;

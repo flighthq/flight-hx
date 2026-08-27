@@ -3,13 +3,14 @@ package flighthq.useragent;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Platform.PlatformEndianness;
-import flighthq.types.Platform.PlatformEngine;
-import flighthq.types.Platform.PlatformKind;
-import flighthq.types.Platform.PlatformName;
-import flighthq.types.Platform.PlatformRuntime;
+import flighthq.types.PlatformEndianness;
+import flighthq.types.PlatformEngine;
+import flighthq.types.PlatformKind;
+import flighthq.types.PlatformName;
+import flighthq.types.PlatformRuntime;
 import flighthq.useragent.UserAgentParse.parseUserAgentOsVersion;
 
+@:noCompletion
 class UserAgent {
   public static function detectEndianness():PlatformEndianness {
     try {
@@ -110,8 +111,9 @@ class UserAgent {
     return cast null;
   }
 
-  @:noCompletion
-  public static function parseUserAgentRuntime(win:Null<flighthq._internal._Record<String, flighthq._internal._Any>>):PlatformRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function parseUserAgentRuntime(win:Null<flighthq._internal._Record<String, flighthq._internal._Any>>):PlatformRuntime {
     var proc:Null<flighthq._internal._Record<String, flighthq._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.looseEquals(win, null) : Bool)) { return cast 'unknown'; }
     proc = (cast (cast win : { var process:flighthq._internal._Any; }).process : Null<flighthq._internal._Record<String, flighthq._internal._Any>>);

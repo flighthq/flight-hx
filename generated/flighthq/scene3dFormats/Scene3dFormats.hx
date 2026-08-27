@@ -24,13 +24,13 @@ import flighthq.scene3dFormats.ObjParse as Facade_Scene3dFormats_flighthq_scene3
 import flighthq.scene3dFormats.SceneSkeleton as Facade_Scene3dFormats_flighthq_scene3dFormats_SceneSkeleton;
 import flighthq.scene3dFormats.ThreeDsParse as Facade_Scene3dFormats_flighthq_scene3dFormats_ThreeDsParse;
 import flighthq.types.AnimationClip;
-import flighthq.types.GltfDraco.GltfDracoDecoder;
-import flighthq.types.GltfExtension.GltfExtensionHandler;
-import flighthq.types.GltfExtension.GltfImportOptions;
-import flighthq.types.GltfSchema.GltfDocument;
+import flighthq.types.GltfDocument;
+import flighthq.types.GltfDracoDecoder;
+import flighthq.types.GltfExtensionHandler;
+import flighthq.types.GltfImportOptions;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.Node3D;
-import flighthq.types.ObjSchema.ObjMaterialLibrary;
+import flighthq.types.ObjMaterialLibrary;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
 

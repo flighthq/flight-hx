@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.VoxelGrid;
 
+@:noCompletion
 class VoxelGrid {
   public static function invalidateVoxelGrid(voxelGrid:flighthq.types.VoxelGrid):Void {
     ((cast voxelGrid : flighthq.types.VoxelGrid).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast voxelGrid : flighthq.types.VoxelGrid).version + 1.0)), 0));

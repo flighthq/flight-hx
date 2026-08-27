@@ -7,7 +7,7 @@ import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.types.CircleCollider;
 import flighthq.types.ParticleCollider;
 import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
+import flighthq.types.ParticleEmitterData;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleObject;
 import flighthq.types.ParticleObjectsState;
@@ -15,6 +15,7 @@ import flighthq.types.PlaneCollider;
 import flighthq.types.RectangleCollider;
 import flighthq.types.SphereCollider;
 
+@:noCompletion
 class ApplyParticleCollisions {
   public static final s__applyParticleCollisions:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 

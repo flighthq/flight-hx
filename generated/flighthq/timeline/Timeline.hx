@@ -10,7 +10,7 @@ import flighthq.types.Node2D;
 import flighthq.types.Signal;
 import flighthq.types.Timeline;
 import flighthq.types.TimelineCue;
-import flighthq.types.TimelineCue.TimelineCueRegistry;
+import flighthq.types.TimelineCueRegistry;
 import flighthq.types.TimelineFrameEvent;
 import flighthq.types.TimelineLabel;
 import flighthq.types.TimelinePlayMode;

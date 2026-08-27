@@ -9,17 +9,19 @@ import flighthq.physics3d.Physics3DBroadphasePublication.getPhysics3DBroadphaseB
 import flighthq.physics3d.Physics3DBroadphasePublication.publishPhysics3DBroadphaseBody;
 import flighthq.physics3d.Physics3DBroadphasePublication.withdrawPhysics3DBroadphaseBody;
 import flighthq.physics3d.Physics3DSpatialIndexingGuards.reportPhysics3DSpatialIndexing;
-import flighthq.types.Physics3D.Physics3DBodyType;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
-import flighthq.types.Spatial.SpatialAabb3D;
+import flighthq.types.Physics3DBodyType;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
+import flighthq.types.SpatialAabb3D;
 
 typedef Physics3DBroadphaseScratch__broadphase = { var bounds:SpatialAabb3D; var bodyBounds:SpatialAabb3D; };
 
+@:noCompletion
 class Broadphase {
-  @:noCompletion
-  public static function synchronizePhysics3DBroadphase(world:Physics3DWorld):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function synchronizePhysics3DBroadphase(world:Physics3DWorld):Void {
     var scratch:Physics3DBroadphaseScratch__broadphase = cast _Runtime.UNDEFINED;
     scratch = (cast Broadphase.acquirePhysics3DBroadphaseScratch__broadphase() : Physics3DBroadphaseScratch__broadphase);
     try {
@@ -37,8 +39,9 @@ class Broadphase {
     }
   }
 
-  @:noCompletion
-  public static function synchronizePhysics3DSweptBroadphase(world:Physics3DWorld, dt:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function synchronizePhysics3DSweptBroadphase(world:Physics3DWorld, dt:Float):Void {
     var scratch:Physics3DBroadphaseScratch__broadphase = cast _Runtime.UNDEFINED;
     scratch = (cast Broadphase.acquirePhysics3DBroadphaseScratch__broadphase() : Physics3DBroadphaseScratch__broadphase);
     try {

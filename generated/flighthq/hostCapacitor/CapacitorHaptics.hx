@@ -4,12 +4,13 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorHapticsPlugin;
-import flighthq.types.Haptics.HapticImpactStyle;
-import flighthq.types.Haptics.HapticNotificationType;
-import flighthq.types.Haptics.HapticsBackend;
-import flighthq.types.Haptics.HapticsCapabilities;
+import flighthq.types.CapacitorHapticsPlugin;
+import flighthq.types.HapticImpactStyle;
+import flighthq.types.HapticNotificationType;
+import flighthq.types.HapticsBackend;
+import flighthq.types.HapticsCapabilities;
 
+@:noCompletion
 class CapacitorHaptics {
   public static function createCapacitorHapticsBackend(capacitor:CapacitorApi):HapticsBackend {
     var haptics:CapacitorHapticsPlugin = cast _Runtime.UNDEFINED;

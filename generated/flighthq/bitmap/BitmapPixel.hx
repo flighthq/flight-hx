@@ -7,6 +7,7 @@ import flighthq.bitmap.Bitmap.invalidateBitmap;
 import flighthq.types.Bitmap;
 import flighthq.types.ImageChannel;
 
+@:noCompletion
 class BitmapPixel {
   public static final LUMA_R__bitmapPixel:Float = 0.2126;
 

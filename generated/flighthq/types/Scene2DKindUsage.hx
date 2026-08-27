@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
 typedef Scene2DKindUsage = { var blendModes:Array<BlendMode>; var materialKinds:Array<Kind>; var nodeKinds:Array<Kind>; var shapeCommandKeys:Array<String>; };

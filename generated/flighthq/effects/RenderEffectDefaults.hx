@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class RenderEffectDefaults {
   public static function getRenderEffectDefaults(kind:String):flighthq._internal._Record<String, flighthq._internal._Any> {
     var entry:flighthq._internal._Record<String, flighthq._internal._Any> = cast _Runtime.UNDEFINED;

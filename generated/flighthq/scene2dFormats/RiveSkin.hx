@@ -9,25 +9,27 @@ import flighthq.geometry.Matrix.matrixTransformPointXY;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.RiveDocument.RiveArtboardGraph;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveValue;
-import flighthq.types.RiveDocument.RiveWeightedPoint;
-import flighthq.types.RiveDocument.RiveWeightedPointKind;
+import flighthq.types.MatrixLike;
+import flighthq.types.RiveArtboardGraph;
+import flighthq.types.RiveCoreObject;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveValue;
+import flighthq.types.RiveWeightedPoint;
+import flighthq.types.RiveWeightedPointKind;
 import flighthq.types.Skin2D;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._RiveDocumentValues.RiveWeightedPointKindValue;
 
 typedef RiveTendonBone__riveSkin = { var boneIndex:Float; var bind:Matrix; };
 
+@:noCompletion
 class RiveSkin {
-  @:noCompletion
-  public static function createRiveSkin2D(artboard:RiveArtboardGraph, skinnableIndex:Float, boneIndices:Array<Float>, points:Array<RiveWeightedPoint>, ?diagnostics:Array<ImportDiagnostic>):Null<Skin2D> {
+  @:allow(flighthq)
+  @:keep
+  private static function createRiveSkin2D(artboard:RiveArtboardGraph, skinnableIndex:Float, boneIndices:Array<Float>, points:Array<RiveWeightedPoint>, ?diagnostics:Array<ImportDiagnostic>):Null<Skin2D> {
     var skinIndex:Float = cast _Runtime.UNDEFINED;
     var skinWorld:Matrix = cast _Runtime.UNDEFINED;
     var tendons:Array<RiveTendonBone__riveSkin> = cast _Runtime.UNDEFINED;

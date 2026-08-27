@@ -11,11 +11,13 @@ import flighthq.types.Camera3D;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.Node3D;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 
+@:noCompletion
 class PresentGlScene3D {
-  @:noCompletion
-  public static function presentGlScene3D(state:GlRenderState, target:GlRenderTarget, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function presentGlScene3D(state:GlRenderState, target:GlRenderTarget, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
     (#if js _Runtime.callValue(beginGlRenderPass, cast ([({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = target; __callArgument3; })] : Array<Dynamic>)) #else beginGlRenderPass(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = target; __callArgument1; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     try {
       try {

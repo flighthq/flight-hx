@@ -12,6 +12,7 @@ import flighthq.types.Entity;
 import flighthq.types.Types.AnimationInterpolationLinear;
 import flighthq.types._internal._AnimationInterpolationValues.AnimationInterpolationLinear;
 
+@:noCompletion
 class AnimationTrack {
   public static function cloneAnimationTrack(track:flighthq.types.AnimationTrack):flighthq.types.AnimationTrack {
     return cast (cast createEntity((cast { components: track.components, easing: track.easing, interpolation: track.interpolation, quaternion: track.quaternion, segmentEasings: ((cast _Runtime.strictEquals(track.segmentEasings, null) : Bool) ? (cast null : Dynamic) : (cast _Runtime.slice(track.segmentEasings, 0, null) : Dynamic)), times: (cast AnimationTrack.cloneNumberBuffer__animationTrack(track.times) : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>), values: (cast AnimationTrack.cloneNumberBuffer__animationTrack(track.values) : flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>) } : Dynamic)) : { >Entity, var components:Float; var easing:Null<EasingFunction>; var interpolation:AnimationInterpolation; var quaternion:Bool; var segmentEasings:Null<Array<Null<EasingFunction>>>; var times:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>; var values:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>; });

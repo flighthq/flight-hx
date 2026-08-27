@@ -5,9 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.WgpuRenderState;
 
+@:noCompletion
 class WgpuEffectGradientRamp {
-  @:noCompletion
-  public static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal.dom.GPUTexture {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuEffectGradientRampTexture(state:WgpuRenderState, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal.dom.GPUTexture {
     var cache:Null<flighthq._internal._Map<String, flighthq._internal.dom.GPUTexture>> = cast _Runtime.UNDEFINED;
     var key:String = cast _Runtime.UNDEFINED;
     var texture:Null<flighthq._internal.dom.GPUTexture> = cast _Runtime.UNDEFINED;

@@ -11,19 +11,19 @@ import flighthq.imageCodec.ImageBitmapComposerRegistry.getImageBitmapComposer;
 import flighthq.types.AlphaType;
 import flighthq.types.Bitmap;
 import flighthq.types.DecodedImage;
+import flighthq.types.EmbeddedImageResourceReference;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityWithoutRuntime;
+import flighthq.types.EntityWithoutRuntime;
+import flighthq.types.ExternalImageResourceReference;
 import flighthq.types.Image;
+import flighthq.types.ImageBitmapComposer;
 import flighthq.types.ImageBitmapComposition;
-import flighthq.types.ImageBitmapComposition.ImageBitmapComposer;
+import flighthq.types.ImageResourceFailure;
+import flighthq.types.ImageResourceFailureKind;
+import flighthq.types.ImageResourceFetch;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
-import flighthq.types.ImageResourceReference.ImageResourceFailure;
-import flighthq.types.ImageResourceReference.ImageResourceFailureKind;
-import flighthq.types.ImageResourceReference.ImageResourceFetch;
-import flighthq.types.ImageResourceReference.ImageResourceReferenceKind;
-import flighthq.types.ImageResourceReference.ImageResourceReferenceResolutionExplanation;
+import flighthq.types.ImageResourceReferenceKind;
+import flighthq.types.ImageResourceReferenceResolutionExplanation;
 import flighthq.types.PixelFormat;
 import flighthq.types.ResourceResolutionState;
 import flighthq.types.TextureSource;
@@ -35,6 +35,7 @@ import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind
 
 typedef ResolveImageBitmapComposition__imageResourceReference = EmbeddedImageResourceReference->flighthq._internal.dom.AbortSignal->flighthq._internal._Promise<Null<Bitmap>>;
 
+@:noCompletion
 class ImageResourceReference {
   public static function createEmbeddedImageResourceReference(bytes:flighthq._internal._UInt8Array, ?mimeType:Null<String>, alphaType:AlphaType = 'straight'):EmbeddedImageResourceReference {
     if (mimeType == null) mimeType = cast (null : Dynamic);

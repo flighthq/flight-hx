@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.shape.ShapeFill.hasNonSolidShapeFill;
 import flighthq.shape.ShapeStroke.hasNonSolidShapeStroke;
 import flighthq.shape.ShapeStrokeOutline.getShapeStrokeOutlineRegions;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types.ShapeFillRegion;
 import flighthq.types.ShapeTessellationExplanation;
 
+@:noCompletion
 class ExplainShapeTessellation {
   public static function explainShapeTessellation(commands:Array<ShapeCommandToken>, strokePathTessellationEnabled:Bool = false):ShapeTessellationExplanation {
     if ((cast (cast hasNonSolidShapeFill(({ final __callArgument0:Dynamic = commands; __callArgument0; })) : Bool) : Bool)) { return cast { blockedBy: 'non-solid-fill', status: 'needs-rasterizer' }; }

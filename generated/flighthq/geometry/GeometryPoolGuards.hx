@@ -8,6 +8,7 @@ typedef GeometryPoolReleaseFunction__geometryPoolGuards = String;
 
 typedef GeometryPoolReleaseGuard__geometryPoolGuards = GeometryPoolReleaseFunction__geometryPoolGuards->Void;
 
+@:noCompletion
 class GeometryPoolGuards {
   public static var geometryPoolReleaseGuard:Null<GeometryPoolReleaseGuard__geometryPoolGuards> = _Runtime.explicitNull();
 

@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.snapshot.CaptureSnapshot.setSnapshotCaptureGuard;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableSnapshotGuards {
   public static function disableSnapshotGuards():Void {
     setSnapshotCaptureGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));

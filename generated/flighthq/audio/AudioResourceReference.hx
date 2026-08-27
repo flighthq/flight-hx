@@ -6,21 +6,22 @@ import flighthq._internal._Runtime;
 import flighthq.audio.AudioDecoderRegistry.getAudioDecoder;
 import flighthq.audio.AudioResource.createAudioResource;
 import flighthq.audio.AudioResourceFrom.loadAudioResourceFromBytes;
+import flighthq.types.AudioDecoder;
 import flighthq.types.AudioResource;
+import flighthq.types.AudioResourceFailure;
+import flighthq.types.AudioResourceFailureKind;
+import flighthq.types.AudioResourceFetch;
 import flighthq.types.AudioResourceReference;
-import flighthq.types.AudioResourceReference.AudioDecoder;
-import flighthq.types.AudioResourceReference.AudioResourceFailure;
-import flighthq.types.AudioResourceReference.AudioResourceFailureKind;
-import flighthq.types.AudioResourceReference.AudioResourceFetch;
-import flighthq.types.AudioResourceReference.AudioResourceReferenceKind;
-import flighthq.types.AudioResourceReference.AudioResourceReferenceResolutionExplanation;
-import flighthq.types.AudioResourceReference.EmbeddedAudioResourceReference;
-import flighthq.types.AudioResourceReference.ExternalAudioResourceReference;
+import flighthq.types.AudioResourceReferenceKind;
+import flighthq.types.AudioResourceReferenceResolutionExplanation;
+import flighthq.types.EmbeddedAudioResourceReference;
+import flighthq.types.ExternalAudioResourceReference;
 import flighthq.types.ResourceResolutionState;
 import flighthq.types._internal._AudioResourceReferenceValues.AudioResourceFailureKindValue;
 import flighthq.types._internal._AudioResourceReferenceValues.AudioResourceReferenceKindValue;
 import flighthq.types._internal._ResourceResolutionStateValues.ResourceResolutionStateValue;
 
+@:noCompletion
 class AudioResourceReference {
   public static function createAudioResourceFailure(cause:flighthq._internal._Any):AudioResourceFailure {
     if ((cast _Runtime.isError(cause) : Bool)) {

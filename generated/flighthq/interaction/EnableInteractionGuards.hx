@@ -9,12 +9,13 @@ import flighthq.interaction.NodeInteractionState.isNodeHitTestEnabled;
 import flighthq.log.Log.logOnce;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.types.InteractionHitEligibility;
-import flighthq.types.InteractionManager.InteractionSignalName;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.InteractionSignalName;
+import flighthq.types.LogLevel;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
 
+@:noCompletion
 class EnableInteractionGuards {
   public static function disableInteractionGuards():Void {
     setInteractionConnectGuard((cast null : Dynamic));

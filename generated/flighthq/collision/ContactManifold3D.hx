@@ -3,10 +3,11 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionContactManifold3D;
 import flighthq.types.Collision.MAX_COLLISION_CONTACT_POINTS_3D;
+import flighthq.types.CollisionContactManifold3D;
 import flighthq.types.Types.MAX_COLLISION_CONTACT_POINTS_3D;
 
+@:noCompletion
 class ContactManifold3D {
   public static function clearCollisionContactManifold3D(out:CollisionContactManifold3D):Void {
     ((cast out : CollisionContactManifold3D).overlapping = false);

@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.shape.ShapeFill.appendShapeGeometryCommand;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.PathCommand;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types.ShapeStrokeRegion;
 import flighthq.types.StrokeStyle;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class ShapeStroke {
   public static function getShapeStrokeRegions(commands:Array<ShapeCommandToken>):Null<Array<ShapeStrokeRegion>> {
     var regions:Array<ShapeStrokeRegion> = cast _Runtime.UNDEFINED;

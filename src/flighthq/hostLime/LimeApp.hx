@@ -2,7 +2,7 @@ package flighthq.hostLime;
 
 #if lime
 import flighthq.app.App;
-import flighthq.types.App.AppBackend;
+import flighthq.types.AppBackend;
 import lime.app.Application;
 
 /** Maps Flight's AppBackend onto a Lime application. */

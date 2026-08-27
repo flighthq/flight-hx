@@ -19,13 +19,14 @@ import flighthq.path.Path.appendPathLineTo;
 import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.types.ClipRegion;
-import flighthq.types.ClipRegion.ClipRegionReleaseGuard;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.ClipRegionReleaseGuard;
+import flighthq.types.MatrixLike;
 import flighthq.types.Path;
+import flighthq.types.PathWinding;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.RectangleLike;
 
+@:noCompletion
 class ClipRegion {
   public static function acquireClipRegion():flighthq.types.ClipRegion {
     var region:Null<flighthq.types.ClipRegion> = cast _Runtime.UNDEFINED;
@@ -240,8 +241,9 @@ class ClipRegion {
     (out.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((out.version + 1.0)), 0) : Float));
   }
 
-  @:noCompletion
-  public static function invalidateClipRegion(clip:flighthq.types.ClipRegion):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function invalidateClipRegion(clip:flighthq.types.ClipRegion):Void {
     (clip.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((clip.version + 1.0)), 0) : Float));
   }
 
@@ -329,8 +331,9 @@ class ClipRegion {
     _Runtime.callProperty(ClipRegion.clipRegionPool__clipRegion, 'push', cast ([clip] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function setClipRegionReleaseGuard(guard:Null<ClipRegionReleaseGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setClipRegionReleaseGuard(guard:Null<ClipRegionReleaseGuard>):Void {
     (ClipRegion._releaseGuard__clipRegion = cast (guard : Dynamic));
   }
 

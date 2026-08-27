@@ -4,11 +4,11 @@ package flighthq.device;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Device.DeviceBackend;
-import flighthq.types.Device.DeviceInfo;
-import flighthq.types.Device.SafeAreaInsets;
+import flighthq.types.DeviceBackend;
 import flighthq.types.DeviceCapabilities;
 import flighthq.types.DeviceDisplayMetrics;
+import flighthq.types.DeviceInfo;
+import flighthq.types.SafeAreaInsets;
 import flighthq.types.Types.DeviceFormFactorUnknown;
 import flighthq.types._internal._DeviceFormFactorValues.DeviceFormFactorUnknown;
 import flighthq.useragent.UserAgent.parseUserAgentArch;
@@ -83,32 +83,37 @@ class Device {
     return cast _Runtime.UNDEFINED;
   } });
 
-  @:noCompletion
-  public static function createDeviceCapabilities():DeviceCapabilities {
+  @:allow(flighthq)
+  @:keep
+  private static function createDeviceCapabilities():DeviceCapabilities {
     return cast { hasKeyboard: false, hasMouse: false, hasStylus: false };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createDeviceDisplayMetrics():DeviceDisplayMetrics {
+  @:allow(flighthq)
+  @:keep
+  private static function createDeviceDisplayMetrics():DeviceDisplayMetrics {
     return cast { colorDepth: -1.0, densityDpi: -1.0, logicalHeight: -1.0, logicalWidth: -1.0, physicalHeight: -1.0, physicalWidth: -1.0, pixelRatio: -1.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createDeviceInfo():DeviceInfo {
+  @:allow(flighthq)
+  @:keep
+  private static function createDeviceInfo():DeviceInfo {
     return cast { arch: '', availableMemory: -1.0, boardName: '', colorGamut: '', cpuCores: -1.0, fontScale: -1.0, formFactor: DeviceFormFactorUnknown, gpuRenderer: '', gpuVendor: '', isHdr: false, isJailbroken: false, isLowEndDevice: false, isRooted: false, isVirtual: false, manufacturer: '', marketingName: '', model: '', osBuild: '', osName: '', osVersion: '', platformString: '', productName: '', supportedAbis: cast ([] : Array<Dynamic>), totalMemory: -1.0, webViewVersion: '' };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createSafeAreaInsets():SafeAreaInsets {
+  @:allow(flighthq)
+  @:keep
+  private static function createSafeAreaInsets():SafeAreaInsets {
     return cast { bottom: 0.0, left: 0.0, right: 0.0, top: 0.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebDeviceBackend():DeviceBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebDeviceBackend():DeviceBackend {
     return cast { getCapabilities: function(out:DeviceCapabilities):DeviceCapabilities {
       var nav:Null<flighthq._internal.dom.Navigator> = cast _Runtime.UNDEFINED;
       var maxTouch:Float = cast _Runtime.UNDEFINED;
@@ -274,8 +279,9 @@ class Device {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getDeviceBackend():DeviceBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getDeviceBackend():DeviceBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Device._custom__device, function():Dynamic return cast Device._host__device), function():Dynamic return cast Device._sentinel__device);
     return cast null;
   }
@@ -305,8 +311,9 @@ class Device {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installDeviceHostBackend(backend:DeviceBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installDeviceHostBackend(backend:DeviceBackend):Void {
     if ((cast !_Runtime.strictEquals(Device._host__device, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Device._host__device, backend) : Bool)) { (Device._hostConflict__device = cast (true : Dynamic)); }
       return;
@@ -314,8 +321,9 @@ class Device {
     (Device._host__device = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observeDeviceHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeDeviceHostResult(operation:String, succeeded:Bool):Void {
     (Device._hostObservation__device = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -346,16 +354,18 @@ class Device {
     }
   }
 
-  @:noCompletion
-  public static function resetDeviceBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetDeviceBackendForTest():Void {
     (Device._custom__device = cast (null : Dynamic));
     (Device._host__device = cast (null : Dynamic));
     (Device._hostConflict__device = cast (false : Dynamic));
     (Device._hostObservation__device = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setDeviceBackend(backend:Null<DeviceBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setDeviceBackend(backend:Null<DeviceBackend>):Void {
     (Device._custom__device = cast (backend : Dynamic));
   }
 }

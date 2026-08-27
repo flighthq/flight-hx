@@ -9,19 +9,22 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.MedianEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuMedianEffect {
-  @:noCompletion
-  public static final MAX_MEDIAN_EFFECT_WGPU_RADIUS:Float = 2.0;
+  @:allow(flighthq)
+  @:keep
+  private static final MAX_MEDIAN_EFFECT_WGPU_RADIUS:Float = 2.0;
 
   public static final MAX_SAMPLES__wgpuMedianEffect:Float = (((MAX_MEDIAN_EFFECT_WGPU_RADIUS * 2.0) + 1.0) * ((MAX_MEDIAN_EFFECT_WGPU_RADIUS * 2.0) + 1.0));
 
-  @:noCompletion
-  public static function applyMedianEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:MedianEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyMedianEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:MedianEffect):Void {
     var radius:Float = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     radius = HxMath.min(MAX_MEDIAN_EFFECT_WGPU_RADIUS, HxMath.max(0.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0))));

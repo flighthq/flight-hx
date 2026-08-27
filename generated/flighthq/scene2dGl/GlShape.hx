@@ -12,9 +12,11 @@ import flighthq.types.GlRenderState;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Scene2DRenderer;
 
+@:noCompletion
 class GlShape {
-  @:noCompletion
-  public static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlShape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     if ((cast (cast drawGlMeshShape(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; })) : Bool) : Bool)) { return; }
     drawGlRasterShape(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = renderProxy; __callArgument5; }));
   }

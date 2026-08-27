@@ -7,6 +7,7 @@ import flighthq.bitmap.Bitmap.invalidateBitmap;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapFlip {
   public static function flipBitmapHorizontal(dest:BitmapRegion, source:BitmapRegion):Void {
     var w:Float = cast _Runtime.UNDEFINED;

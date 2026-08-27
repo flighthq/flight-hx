@@ -4,6 +4,7 @@ package flighthq.skeleton3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class SkinVertices {
   public static function skinTangents(outTangents:flighthq._internal._Float32Array, tangents:flighthq._internal._Float32Array, joints:flighthq._internal._ArrayLike<Float>, weights:flighthq._internal._Float32Array, jointMatrices:flighthq._internal._Float32Array):Void {
     var vertexCount:Float = cast _Runtime.UNDEFINED;

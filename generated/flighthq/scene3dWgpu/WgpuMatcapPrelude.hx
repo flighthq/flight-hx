@@ -12,17 +12,19 @@ import flighthq.scene3dWgpu.WgpuMeshPipeline.ensureWgpuScene3DPipeline;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.stashWgpuUvTransform;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.types.LinearColor;
+import flighthq.types.WgpuMatcapDefineKey;
 import flighthq.types.WgpuMatcapPipeline;
-import flighthq.types.WgpuMatcapPipeline.WgpuMatcapDefineKey;
+import flighthq.types.WgpuMaterialBinding;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 
+@:noCompletion
 class WgpuMatcapPrelude {
-  @:noCompletion
-  public static function bindWgpuMatcapSurface(state:WgpuRenderState, pipeline:WgpuMatcapPipeline, materialKey:flighthq._internal._Object, tint:LinearColor, alphaCutoff:Float):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function bindWgpuMatcapSurface(state:WgpuRenderState, pipeline:WgpuMatcapPipeline, materialKey:flighthq._internal._Object, tint:LinearColor, alphaCutoff:Float):flighthq._internal.dom.GPUBindGroup {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var binding:Null<WgpuMaterialBinding> = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
@@ -48,14 +50,16 @@ class WgpuMatcapPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function buildWgpuMatcapDefineKey(key:WgpuMatcapDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildWgpuMatcapDefineKey(key:WgpuMatcapDefineKey):String {
     return cast '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'doubleSided') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasMatcap') : Bool) ? (cast 't' : Dynamic) : (cast '-' : Dynamic))) + '';
     return cast null;
   }
 
-  @:noCompletion
-  public static function compileWgpuMatcapPipeline(state:WgpuRenderState, key:WgpuMatcapDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Bool = false):WgpuMatcapPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function compileWgpuMatcapPipeline(state:WgpuRenderState, key:WgpuMatcapDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Bool = false):WgpuMatcapPipeline {
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
     var materialBindGroupLayout:flighthq._internal.dom.GPUBindGroupLayout = cast _Runtime.UNDEFINED;
@@ -66,14 +70,16 @@ class WgpuMatcapPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuMatcapPipeline(state:WgpuRenderState, key:WgpuMatcapDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuMatcapPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuMatcapPipeline(state:WgpuRenderState, key:WgpuMatcapDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuMatcapPipeline {
     return cast (cast (cast ensureWgpuScene3DPipeline : WgpuRenderState->String->(Bool->Bool->WgpuMatcapPipeline)->WgpuMatcapPipeline)(({ final __callArgument14:Dynamic = state; __callArgument14; }), (cast 'matcap:' + Std.string(format) + '|' + Std.string((cast buildWgpuMatcapDefineKey(({ final __callArgument15:Dynamic = key; __callArgument15; })) : String)) + '' : String), ({ final __callArgument21:Dynamic = function(__unused1:Bool, __unused2:Bool):WgpuMatcapPipeline return _Runtime.callValue(function(blended:Bool, __unused0:Bool):WgpuMatcapPipeline return (cast compileWgpuMatcapPipeline(({ final __callArgument17:Dynamic = state; __callArgument17; }), ({ final __callArgument18:Dynamic = key; __callArgument18; }), (cast format : String), (cast blended : Bool)) : WgpuMatcapPipeline), cast ([__unused1] : Array<Dynamic>)); __callArgument21; })) : WgpuMatcapPipeline);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuMatcapModuleSourceForKey(key:WgpuMatcapDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuMatcapModuleSourceForKey(key:WgpuMatcapDefineKey):String {
     return cast ((('const ALPHA_MASK : bool = ' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n' + 'const HAS_MATCAP : bool = ' + Std.string(((cast _Runtime.field(key, 'hasMatcap') : Bool) ? (cast 'true' : Dynamic) : (cast 'false' : Dynamic))) + ';\n') + WGPU_MESH_PRELUDE_WGSL) + WgpuMatcapPrelude.MATCAP_WGSL_BODY__wgpuMatcapPrelude);
     return cast null;
   }

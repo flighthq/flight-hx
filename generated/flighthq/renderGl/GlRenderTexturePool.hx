@@ -11,17 +11,18 @@ import flighthq.texture.RenderTexture.createRenderTexture;
 import flighthq.texture.Texture.resetTextureUvTransform;
 import flighthq.types.CreateRenderTextureOptions;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
-import flighthq.types.GlRenderTexture.GlRenderTexturePool;
+import flighthq.types.GlRenderTargetPool;
+import flighthq.types.GlRenderTexturePool;
 import flighthq.types.RenderTarget;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 import flighthq.types.RenderTexture;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 
+@:noCompletion
 class GlRenderTexturePool {
-  public static function acquireGlRenderTexture(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
+  public static function acquireGlRenderTexture(state:GlRenderState, pool:flighthq.types.GlRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
     var renderTexture:RenderTexture = cast _Runtime.UNDEFINED;
     GlRenderTexturePool.assertUsablePool__glRenderTexturePool(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }));
     renderTexture = _Runtime.coalesce(_Runtime.callProperty(pool.free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture(({ final __callArgument4:Dynamic = descriptor; __callArgument4; })) : RenderTexture));
@@ -34,12 +35,12 @@ class GlRenderTexturePool {
     return cast null;
   }
 
-  public static function createGlRenderTexturePool():flighthq.types.GlRenderTexture.GlRenderTexturePool {
+  public static function createGlRenderTexturePool():flighthq.types.GlRenderTexturePool {
     return cast { context: null, destroyed: false, effectTargets: (cast createGlRenderTargetPool() : GlRenderTargetPool), free: cast ([] : Array<Dynamic>), leased: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) };
     return cast null;
   }
 
-  public static function destroyGlRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool):Void {
+  public static function destroyGlRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexturePool):Void {
     var textures:flighthq._internal._Set<RenderTexture> = cast _Runtime.UNDEFINED;
     if ((cast pool.destroyed : Bool)) { return; }
     GlRenderTexturePool.assertPoolContext__glRenderTexturePool(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = pool; __callArgument15; }));
@@ -53,7 +54,7 @@ class GlRenderTexturePool {
     (pool.destroyed = cast (true : Bool));
   }
 
-  public static function releaseGlRenderTexture(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool, renderTexture:RenderTexture):Void {
+  public static function releaseGlRenderTexture(state:GlRenderState, pool:flighthq.types.GlRenderTexturePool, renderTexture:RenderTexture):Void {
     GlRenderTexturePool.assertUsablePool__glRenderTexturePool(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = pool; __callArgument27; }));
     if ((cast !(cast ((cast pool.leased : flighthq._internal._Set<RenderTexture>).delete_(renderTexture)) : Bool) : Bool)) {
       _Runtime.throwValue(_Runtime.error('releaseGlRenderTexture: texture is not leased from this pool'));
@@ -62,7 +63,7 @@ class GlRenderTexturePool {
     _Runtime.callProperty(pool.free, 'push', cast ([renderTexture] : Array<Dynamic>));
   }
 
-  public static function withGlRenderTextures<T>(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
+  public static function withGlRenderTextures<T>(state:GlRenderState, pool:flighthq.types.GlRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
     var textures:Array<RenderTexture> = cast _Runtime.UNDEFINED;
     textures = (cast cast ([] : Array<Dynamic>));
     try {
@@ -123,12 +124,12 @@ class GlRenderTexturePool {
     (target.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((target.version + 1.0)), 0) : Float));
   }
 
-  public static function assertUsablePool__glRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool):Void {
+  public static function assertUsablePool__glRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexturePool):Void {
     if ((cast pool.destroyed : Bool)) { _Runtime.throwValue(_Runtime.error('GlRenderTexturePool has been destroyed')); }
     GlRenderTexturePool.assertPoolContext__glRenderTexturePool(({ final __callArgument64:Dynamic = state; __callArgument64; }), ({ final __callArgument65:Dynamic = pool; __callArgument65; }));
   }
 
-  public static function assertPoolContext__glRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexture.GlRenderTexturePool):Void {
+  public static function assertPoolContext__glRenderTexturePool(state:GlRenderState, pool:flighthq.types.GlRenderTexturePool):Void {
     if ((cast _Runtime.strictEquals(pool.context, null) : Bool)) {
       (pool.context = cast ((cast state : GlRenderState).gl : Null<flighthq._internal.dom.WebGL2RenderingContext>));
     } else { if ((cast !_Runtime.strictEquals(pool.context, (cast state : GlRenderState).gl) : Bool)) {

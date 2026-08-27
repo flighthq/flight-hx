@@ -9,6 +9,7 @@ import flighthq.types.BitmapBoxBlurOptions;
 import flighthq.types.BitmapRegion;
 import flighthq.types.BitmapSharpenOptions;
 
+@:noCompletion
 class BitmapSharpen {
   public static function sharpenBitmap(out:flighthq._internal._UInt8ClampedArray, scratch:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapSharpenOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);

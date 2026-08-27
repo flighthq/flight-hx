@@ -4,6 +4,7 @@ package flighthq.imageCodec;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class DetectImageMimeType {
   public static function detectImageMimeType(data:flighthq._internal._Union2<flighthq._internal._UInt8Array, haxe.io.Bytes>):Null<String> {
     var b:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;

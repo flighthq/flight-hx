@@ -4,26 +4,26 @@ package flighthq.shape;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.shape.ShapeBoundsRegistry.getShapeBoundsCommand;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.CapsStyle;
+import flighthq.types.EntityRuntime;
+import flighthq.types.JointStyle;
 import flighthq.types.Matrix;
 import flighthq.types.Rectangle;
 import flighthq.types.Sampler;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.ShapeBounds.ShapeBoundsCommand;
-import flighthq.types.ShapeBounds.ShapeBoundsCommandHandler;
-import flighthq.types.ShapeBounds.ShapeBoundsContext;
-import flighthq.types.ShapeBounds.ShapeBoundsExplanation;
-import flighthq.types.ShapeBounds.ShapeBoundsGuard;
-import flighthq.types.ShapeBounds.ShapeBoundsMode;
-import flighthq.types.ShapeBounds.ShapeCommandArgumentCursor;
-import flighthq.types.ShapeCommand.CapsStyle;
-import flighthq.types.ShapeCommand.JointStyle;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.ShapeBoundsCommand;
+import flighthq.types.ShapeBoundsCommandHandler;
+import flighthq.types.ShapeBoundsContext;
+import flighthq.types.ShapeBoundsExplanation;
+import flighthq.types.ShapeBoundsGuard;
+import flighthq.types.ShapeBoundsMode;
+import flighthq.types.ShapeCommandArgumentCursor;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 
@@ -37,9 +37,11 @@ typedef ShapeBoundsTangent__shapeBounds = { var x:Float; var y:Float; };
 
 typedef ShapeCommandArgumentCursorInternal__shapeBounds = { >ShapeCommandArgumentCursor, var argumentCount:Float; var argumentOffset:Float; var commands:Array<ShapeCommandToken>; };
 
+@:noCompletion
 class ShapeBounds {
-  @:noCompletion
-  public static function computeShapeBoundsRectangle(out:Rectangle, source:Shape, mode:ShapeBoundsMode = 'ink'):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function computeShapeBoundsRectangle(out:Rectangle, source:Shape, mode:ShapeBoundsMode = 'ink'):Bool {
     var accumulator:ShapeBoundsAccumulator__shapeBounds = cast _Runtime.UNDEFINED;
     var fillState:ShapeBoundsLaneState__shapeBounds = cast _Runtime.UNDEFINED;
     var fillContext:ShapeBoundsContext = cast _Runtime.UNDEFINED;
@@ -77,18 +79,21 @@ class ShapeBounds {
     return cast null;
   }
 
-  @:noCompletion
-  public static final defaultShapeBoundsCubicCurveTo:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsCubicCurveTo:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
     (cast context : ShapeBoundsContext).cubicCurveTo((cast (cast _Runtime.callProperty(command, 'getArgument', cast ([0.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([1.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([2.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([3.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([4.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([5.0] : Array<Dynamic>)) : Float) : Float));
   });
 
-  @:noCompletion
-  public static final defaultShapeBoundsCurveTo:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsCurveTo:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
     (cast context : ShapeBoundsContext).curveTo((cast (cast _Runtime.callProperty(command, 'getArgument', cast ([0.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([1.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([2.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([3.0] : Array<Dynamic>)) : Float) : Float));
   });
 
-  @:noCompletion
-  public static final defaultShapeBoundsDrawCircle:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsDrawCircle:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
     (cast context : ShapeBoundsContext).drawCircle((cast (cast _Runtime.callProperty(command, 'getArgument', cast ([0.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([1.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([2.0] : Array<Dynamic>)) : Float) : Float));
   });
 
@@ -507,13 +512,15 @@ class ShapeBounds {
     (out.height = cast (_Runtime.subtractNumbers(_Runtime.field(accumulator, 'maxY'), _Runtime.field(accumulator, 'minY')) : Float));
   }
 
-  @:noCompletion
-  public static final defaultShapeBoundsDrawEllipse:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsDrawEllipse:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
     (cast context : ShapeBoundsContext).drawEllipse((cast (cast _Runtime.callProperty(command, 'getArgument', cast ([0.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([1.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([2.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([3.0] : Array<Dynamic>)) : Float) : Float));
   });
 
-  @:noCompletion
-  public static final defaultShapeBoundsDrawPath:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsDrawPath:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
     var pathCommands:Array<Float> = cast _Runtime.UNDEFINED;
     var data:Array<Float> = cast _Runtime.UNDEFINED;
     var dataIndex:Float = cast _Runtime.UNDEFINED;
@@ -554,13 +561,15 @@ class ShapeBounds {
     }
   });
 
-  @:noCompletion
-  public static final defaultShapeBoundsDrawRectangle:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsDrawRectangle:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
     (cast context : ShapeBoundsContext).drawRectangle((cast (cast _Runtime.callProperty(command, 'getArgument', cast ([0.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([1.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([2.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([3.0] : Array<Dynamic>)) : Float) : Float));
   });
 
-  @:noCompletion
-  public static final defaultShapeBoundsExpandPointPairs:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsExpandPointPairs:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
     var values:Array<Float> = cast _Runtime.UNDEFINED;
     values = (cast _Runtime.callProperty(command, 'getArgument', cast ([0.0] : Array<Dynamic>)) : Array<Float>);
     {
@@ -572,23 +581,27 @@ class ShapeBounds {
     }
   });
 
-  @:noCompletion
-  public static final defaultShapeBoundsFlush:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, __unused0:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsFlush:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, __unused0:ShapeCommandArgumentCursor):Void {
     (cast context : ShapeBoundsContext).flushPath();
   });
 
-  @:noCompletion
-  public static final defaultShapeBoundsLineStyle:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsLineStyle:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
     (cast context : ShapeBoundsContext).setStrokeStyle((cast (cast _Runtime.callProperty(command, 'getArgument', cast ([0.0] : Array<Dynamic>)) : Float) : Float), (cast _Runtime.callProperty(command, 'getArgument', cast ([5.0] : Array<Dynamic>)) : CapsStyle), (cast _Runtime.callProperty(command, 'getArgument', cast ([6.0] : Array<Dynamic>)) : JointStyle), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([7.0] : Array<Dynamic>)) : Float) : Float));
   });
 
-  @:noCompletion
-  public static final defaultShapeBoundsLineTo:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsLineTo:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
     (cast context : ShapeBoundsContext).lineTo((cast (cast _Runtime.callProperty(command, 'getArgument', cast ([0.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([1.0] : Array<Dynamic>)) : Float) : Float));
   });
 
-  @:noCompletion
-  public static final defaultShapeBoundsMoveTo:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final defaultShapeBoundsMoveTo:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, command:ShapeCommandArgumentCursor):Void {
     (cast context : ShapeBoundsContext).moveTo((cast (cast _Runtime.callProperty(command, 'getArgument', cast ([0.0] : Array<Dynamic>)) : Float) : Float), (cast (cast _Runtime.callProperty(command, 'getArgument', cast ([1.0] : Array<Dynamic>)) : Float) : Float));
   });
 
@@ -611,21 +624,24 @@ class ShapeBounds {
     return cast null;
   }
 
-  @:noCompletion
-  public static function normalizeShapeStrokeMiterLimit(miterLimit:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function normalizeShapeStrokeMiterLimit(miterLimit:Float):Float {
     return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([miterLimit] : Array<Dynamic>)) : Bool) && (cast ((cast miterLimit : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast miterLimit : Dynamic) : (cast ShapeBounds.DEFAULT_SHAPE_STROKE_MITER_LIMIT__shapeBounds : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function normalizeShapeStrokeWidth(width:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function normalizeShapeStrokeWidth(width:Float):Float {
     if ((cast _Runtime.strictEquals(width, 0.0) : Bool)) { return cast 0.0; }
     return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([width] : Array<Dynamic>)) : Bool) && (cast ((cast width : Float) > (cast 0.0 : Float)) : Bool)) : Bool) ? (cast width : Dynamic) : (cast ShapeBounds.DEFAULT_SHAPE_STROKE_WIDTH__shapeBounds : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function setShapeBoundsGuard(guard:Null<ShapeBoundsGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setShapeBoundsGuard(guard:Null<ShapeBoundsGuard>):Void {
     (ShapeBounds._shapeBoundsGuard__shapeBounds = cast (guard : Dynamic));
   }
 

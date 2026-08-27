@@ -6,9 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
 import flighthq.types.Plane;
-import flighthq.types.Plane.PlaneLike;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.PlaneLike;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Plane {
   public static function clonePlane(source:PlaneLike):flighthq.types.Plane {
     return cast (cast createPlane(({ final __callArgument0:Dynamic = source.a; __callArgument0; }), ({ final __callArgument1:Dynamic = source.b; __callArgument1; }), ({ final __callArgument2:Dynamic = source.c; __callArgument2; }), ({ final __callArgument3:Dynamic = source.d; __callArgument3; })) : flighthq.types.Plane);

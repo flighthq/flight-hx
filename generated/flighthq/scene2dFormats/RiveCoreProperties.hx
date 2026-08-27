@@ -3,10 +3,11 @@ package flighthq.scene2dFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RiveDocument.RiveFieldType;
+import flighthq.types.RiveFieldType;
 import flighthq.types._internal._RiveDocumentValues.RiveFieldTypeValue;
 import flighthq.types._internal._RiveDocumentValues.RiveFieldTypeValue as RiveFieldTypeValue;
 
+@:noCompletion
 class RiveCoreProperties {
   public static function getRiveCorePropertyFieldType(key:Float):Null<RiveFieldType> {
     return cast ((cast RiveCoreProperties._fieldTypesByKey__riveCoreProperties : flighthq._internal._Map<Float, RiveFieldType>).get(key));

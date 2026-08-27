@@ -11,21 +11,23 @@ import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.scene2dWgpu.WgpuQuadBatchWriter.flushWgpuQuadBatchWriter;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DRuntime;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DRuntime;
+import flighthq.types.Node2DTraits;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
+import flighthq.types.Scene2DClipHooks;
 import flighthq.types.Scene2DRenderer;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 
+@:noCompletion
 class WgpuNode2D {
-  @:noCompletion
-  public static function drawWgpuScene2D(_state:WgpuRenderState, _renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuScene2D(_state:WgpuRenderState, _renderProxy:RenderProxy2D):Void {
   }
 
   public static function renderWgpuScene2D(state:WgpuRenderState, source:Node2D):Void {

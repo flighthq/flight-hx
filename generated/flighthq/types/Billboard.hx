@@ -3,15 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.Node.NodeData;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node3D.Node3DRuntime;
-import flighthq.types.Node3D.Node3DTraits;
 import flighthq.types._internal._BillboardValues.BillboardKind;
 
-typedef BillboardMode = String;
-
 typedef Billboard = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var geometry:MeshGeometry; var materials:Array<Null<Material>>; var mode:BillboardMode; };
-
-typedef BillboardRuntime = Node3DRuntime;

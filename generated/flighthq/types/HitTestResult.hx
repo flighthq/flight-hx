@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Node.NodeAny;
 
 typedef HitTestResult = { var localX:Float; var localY:Float; var node:NodeAny; var subIndex:Float; };

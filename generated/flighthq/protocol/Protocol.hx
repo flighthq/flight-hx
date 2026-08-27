@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Protocol.ParsedProtocolUrl;
-import flighthq.types.Protocol.ProtocolBackend;
-import flighthq.types.Protocol.ProtocolHandler;
+import flighthq.types.ParsedProtocolUrl;
+import flighthq.types.ProtocolBackend;
+import flighthq.types.ProtocolHandler;
 import flighthq.types.Signal;
 
 class Protocol {
@@ -150,8 +150,9 @@ class Protocol {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getProtocolBackend():ProtocolBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getProtocolBackend():ProtocolBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Protocol._custom__protocol, function():Dynamic return cast Protocol._host__protocol), function():Dynamic return cast Protocol._sentinel__protocol);
     return cast null;
   }
@@ -166,8 +167,9 @@ class Protocol {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installProtocolHostBackend(backend:ProtocolBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installProtocolHostBackend(backend:ProtocolBackend):Void {
     if ((cast !_Runtime.strictEquals(Protocol._host__protocol, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Protocol._host__protocol, backend) : Bool)) { (Protocol._hostConflict__protocol = cast (true : Dynamic)); }
       return;
@@ -194,8 +196,9 @@ class Protocol {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeProtocolHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeProtocolHostResult(operation:String, succeeded:Bool):Void {
     (Protocol._hostObservation__protocol = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -278,16 +281,18 @@ class Protocol {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetProtocolBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetProtocolBackendForTest():Void {
     (Protocol._custom__protocol = cast (null : Dynamic));
     (Protocol._host__protocol = cast (null : Dynamic));
     (Protocol._hostConflict__protocol = cast (false : Dynamic));
     (Protocol._hostObservation__protocol = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setProtocolBackend(backend:Null<ProtocolBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setProtocolBackend(backend:Null<ProtocolBackend>):Void {
     (Protocol._custom__protocol = cast (backend : Dynamic));
   }
 

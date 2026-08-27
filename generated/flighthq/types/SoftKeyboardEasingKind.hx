@@ -9,14 +9,4 @@ import flighthq.types._internal._SoftKeyboardEasingKindValues.SoftKeyboardEasing
 import flighthq.types._internal._SoftKeyboardEasingKindValues.SoftKeyboardEasingKeyboardDefaultKindValue;
 import flighthq.types._internal._SoftKeyboardEasingKindValues.SoftKeyboardEasingLinearKindValue;
 
-typedef SoftKeyboardEasingDefaultKind = Dynamic;
-
-typedef SoftKeyboardEasingEaseInKind = Dynamic;
-
-typedef SoftKeyboardEasingEaseOutKind = Dynamic;
-
-typedef SoftKeyboardEasingLinearKind = Dynamic;
-
-typedef SoftKeyboardEasingKeyboardDefaultKind = Dynamic;
-
 typedef SoftKeyboardEasingKind = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<SoftKeyboardEasingDefaultKind, SoftKeyboardEasingEaseInKind>, SoftKeyboardEasingEaseOutKind>, SoftKeyboardEasingLinearKind>, SoftKeyboardEasingKeyboardDefaultKind>;

@@ -9,11 +9,12 @@ import flighthq.scene3dGl.GlEnvironmentCube.getGlCubeFaceTarget;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Environment;
 import flighthq.types.GlRenderState;
+import flighthq.types.GlScene3DIbl;
 import flighthq.types.GlScene3DRuntime;
-import flighthq.types.GlScene3DRuntime.GlScene3DIbl;
 
 typedef GlBakeProgram__glEnvironmentIblBake = { var buffer:flighthq._internal.dom.WebGLBuffer; var locEnvCube:Null<flighthq._internal.dom.WebGLUniformLocation>; var locFaceForward:Null<flighthq._internal.dom.WebGLUniformLocation>; var locFaceRight:Null<flighthq._internal.dom.WebGLUniformLocation>; var locFaceUp:Null<flighthq._internal.dom.WebGLUniformLocation>; var locRoughness:Null<flighthq._internal.dom.WebGLUniformLocation>; var program:flighthq._internal.dom.WebGLProgram; var vao:flighthq._internal.dom.WebGLVertexArrayObject; };
 
+@:noCompletion
 class GlEnvironmentIblBake {
   public static function bakeGlEnvironmentIbl(state:GlRenderState, environment:Environment):Void {
     var sourceCube:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
@@ -60,8 +61,9 @@ class GlEnvironmentIblBake {
     (runtime.ibl = cast ({ brdfLut: brdfLut, intensity: _Runtime.field(environment, 'intensity'), irradianceCube: irradianceCube, prefilteredCube: prefilteredCube, prefilteredMipCount: prefilteredMipCount } : Null<GlScene3DIbl>));
   }
 
-  @:noCompletion
-  public static function destroyGlEnvironmentIblBakePrograms(state:GlRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyGlEnvironmentIblBakePrograms(state:GlRenderState):Void {
     var byState:Null<flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>> = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     byState = ((cast GlEnvironmentIblBake._bakePrograms__glEnvironmentIblBake : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._Map<String, GlBakeProgram__glEnvironmentIblBake>>).get(state));

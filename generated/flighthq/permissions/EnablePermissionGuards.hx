@@ -5,13 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.permissions.Permission.setPermissionRequestFallbackGuard;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.Permission.PermissionName;
-import flighthq.types.Permission.PermissionState;
+import flighthq.types.LogLevel;
+import flighthq.types.PermissionName;
+import flighthq.types.PermissionState;
 
+@:noCompletion
 class EnablePermissionGuards {
-  @:noCompletion
-  public static function arePermissionGuardsEnabled():Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function arePermissionGuardsEnabled():Bool {
     return cast EnablePermissionGuards._enabled__enablePermissionGuards;
     return cast null;
   }

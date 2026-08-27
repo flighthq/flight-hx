@@ -9,23 +9,24 @@ import flighthq.text.RichText.setRichTextScrollV;
 import flighthq.textinput.TextInput.getTextInputState;
 import flighthq.textlayout.RichTextQuery.getRichTextSelectionRectangles;
 import flighthq.textlayout.TextBounds.TEXT_BOUNDS_GUTTER;
+import flighthq.types.HandleTextInputKeyboardOptions;
 import flighthq.types.KeyCode;
 import flighthq.types.KeyboardEventData;
+import flighthq.types.ReplaceTextInputOptions;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
+import flighthq.types.RichTextData;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
-import flighthq.types.TextInputEditingOptions.HandleTextInputKeyboardOptions;
-import flighthq.types.TextInputEditingOptions.ReplaceTextInputOptions;
+import flighthq.types.TextInputHistoryEntry;
 import flighthq.types.TextInputState;
-import flighthq.types.TextInputState.TextInputHistoryEntry;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 import flighthq.types._internal._KeyCodeValues.KeyCodeValue;
 
 typedef KeyboardCommand__textInputEditing = String;
 
+@:noCompletion
 class TextInputEditing {
   public static final DESIRED_CARET_X_UNSET__textInputEditing:Float = -1.0;
 

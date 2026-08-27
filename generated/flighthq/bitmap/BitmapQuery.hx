@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 
+@:noCompletion
 class BitmapQuery {
   public static function getBitmapColorBoundsRectangle(source:BitmapRegion, mask:Float, color:Float, findColor:Bool = true):Null<RectangleLike> {
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;

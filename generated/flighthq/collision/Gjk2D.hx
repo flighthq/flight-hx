@@ -5,11 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollisionSupport2D.getCollisionSupport2D;
 import flighthq.collision.Manifold2D.clearCollisionManifold2D;
-import flighthq.types.Collision.CollisionManifold2D;
-import flighthq.types.Collision.CollisionShape2D;
-import flighthq.types.Collision.CollisionShapeKind2D;
-import flighthq.types.Collision.CollisionSupport2D;
+import flighthq.types.CollisionManifold2D;
+import flighthq.types.CollisionShape2D;
+import flighthq.types.CollisionShapeKind2D;
+import flighthq.types.CollisionSupport2D;
 
+@:noCompletion
 class Gjk2D {
   public static function testCollisionSupport2D(a:CollisionShape2D, b:CollisionShape2D, out:CollisionManifold2D):Bool {
     var supportA:Null<CollisionSupport2D> = cast _Runtime.UNDEFINED;

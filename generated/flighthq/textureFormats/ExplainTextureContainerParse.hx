@@ -12,6 +12,7 @@ import flighthq.types.TextureContainerKind;
 import flighthq.types.TextureContainerParseExplanation;
 import flighthq.types.TextureContainerParseFailureReason;
 
+@:noCompletion
 class ExplainTextureContainerParse {
   public static function explainTextureContainerParse(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseExplanation> {
     var container:Null<String> = cast _Runtime.UNDEFINED;

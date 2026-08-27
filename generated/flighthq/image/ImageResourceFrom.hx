@@ -10,10 +10,11 @@ import flighthq.types.AlphaType;
 import flighthq.types.Bitmap;
 import flighthq.types.Entity;
 import flighthq.types.Image;
-import flighthq.types.Image.ImageBackend;
+import flighthq.types.ImageBackend;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
+@:noCompletion
 class ImageResourceFrom {
   public static function createImageResourceFromBitmap(bitmap:Bitmap):Image {
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;

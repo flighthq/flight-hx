@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.statusbar.Statusbar.installStatusBarHostBackend;
 import flighthq.statusbar.Statusbar.observeStatusBarHostResult;
 import flighthq.statusbar.Statusbar.packedRgbaToHexColor;
-import flighthq.types.StatusBar.StatusBarAnimation;
-import flighthq.types.StatusBar.StatusBarBackend;
-import flighthq.types.StatusBar.StatusBarInfo;
-import flighthq.types.StatusBar.StatusBarStyle;
+import flighthq.types.StatusBarAnimation;
+import flighthq.types.StatusBarBackend;
+import flighthq.types.StatusBarInfo;
+import flighthq.types.StatusBarStyle;
 
+@:noCompletion
 class WebStatusbar {
   public static function enableHostWebStatusBar():Void {
     var backend:StatusBarBackend = cast _Runtime.UNDEFINED;
@@ -61,8 +62,9 @@ class WebStatusbar {
     installStatusBarHostBackend(({ final __callArgument0:Dynamic = backend; __callArgument0; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebStatusBarForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebStatusBarForTest():Void {
     (WebStatusbar._enabled__webStatusbar = cast (false : Dynamic));
   }
 

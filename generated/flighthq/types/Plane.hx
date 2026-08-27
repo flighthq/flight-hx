@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Plane = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var a:Float; var b:Float; var c:Float; var d:Float; };
-
-typedef PlaneLike = { var a:Float; var b:Float; var c:Float; var d:Float; };

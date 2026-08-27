@@ -5,16 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.ApplicationWindow;
-import flighthq.types.ApplicationWindow.WindowBackend;
-import flighthq.types.ApplicationWindow.WindowBounds;
-import flighthq.types.ApplicationWindow.WindowOptions;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronBrowserWindow;
-import flighthq.types.ElectronApi.ElectronBrowserWindowConstructor;
-import flighthq.types.ElectronApi.ElectronNativeImage;
-import flighthq.types.ElectronApi.ElectronRectangle;
+import flighthq.types.ElectronBrowserWindow;
+import flighthq.types.ElectronBrowserWindowConstructor;
+import flighthq.types.ElectronNativeImage;
+import flighthq.types.ElectronRectangle;
 import flighthq.types.Signal;
+import flighthq.types.WindowBackend;
+import flighthq.types.WindowBounds;
+import flighthq.types.WindowOptions;
 
+@:noCompletion
 class ElectronWindow {
   public static function createElectronWindowBackend(electron:ElectronApi):WindowBackend {
     return cast { open: function(win:ApplicationWindow, options:WindowOptions):Bool {

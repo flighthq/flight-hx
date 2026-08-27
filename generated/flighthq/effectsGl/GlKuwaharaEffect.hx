@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.KuwaharaEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlKuwaharaEffect {
-  @:noCompletion
-  public static function applyKuwaharaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:KuwaharaEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyKuwaharaEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:KuwaharaEffect):Void {
     var radius:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0);

@@ -6,18 +6,19 @@ import flighthq._internal._Runtime;
 import flighthq.bitmap.Bitmap.createBitmap;
 import flighthq.glyphatlas.GlyphRasterizerBackend.getGlyphRasterizerBackend;
 import flighthq.types.Bitmap;
-import flighthq.types.GlyphSource.GlyphAtlas;
-import flighthq.types.GlyphSource.GlyphAtlasOptions;
-import flighthq.types.GlyphSource.GlyphAtlasRuntime;
-import flighthq.types.GlyphSource.GlyphAtlasShelf;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphMetrics;
-import flighthq.types.GlyphSource.GlyphRasterizeOptions;
-import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
+import flighthq.types.GlyphAtlas;
+import flighthq.types.GlyphAtlasOptions;
+import flighthq.types.GlyphAtlasRuntime;
+import flighthq.types.GlyphAtlasShelf;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphMetrics;
+import flighthq.types.GlyphRasterizeOptions;
+import flighthq.types.GlyphRasterizedBitmap;
+import flighthq.types.GlyphRasterizerBackend;
 
+@:noCompletion
 class GlyphAtlas {
-  public static function createGlyphAtlas(options:GlyphAtlasOptions):flighthq.types.GlyphSource.GlyphAtlas {
+  public static function createGlyphAtlas(options:GlyphAtlasOptions):flighthq.types.GlyphAtlas {
     var padding:Float = cast _Runtime.UNDEFINED;
     var rasterizerBackend:GlyphRasterizerBackend = cast _Runtime.UNDEFINED;
     var rasterizeOptions:GlyphRasterizeOptions = cast _Runtime.UNDEFINED;
@@ -33,7 +34,7 @@ class GlyphAtlas {
     return cast null;
   }
 
-  public static function disposeGlyphAtlas(atlas:flighthq.types.GlyphSource.GlyphAtlas):Void {
+  public static function disposeGlyphAtlas(atlas:flighthq.types.GlyphAtlas):Void {
     var runtime:GlyphAtlasRuntime = cast _Runtime.UNDEFINED;
     runtime = atlas.runtime;
     ((cast runtime.entries : flighthq._internal._Map<Float, GlyphEntry>).clear());
@@ -46,7 +47,7 @@ class GlyphAtlas {
     (runtime.dirty = cast (false : Bool));
   }
 
-  public static function getGlyphAtlasBitmap(atlas:flighthq.types.GlyphSource.GlyphAtlas):Bitmap {
+  public static function getGlyphAtlasBitmap(atlas:flighthq.types.GlyphAtlas):Bitmap {
     return cast (cast atlas.runtime : { var bitmap:Bitmap; }).bitmap;
     return cast null;
   }

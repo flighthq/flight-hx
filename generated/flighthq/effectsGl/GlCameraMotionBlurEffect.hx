@@ -8,15 +8,17 @@ import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.CameraMotionBlurEffect;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlCameraMotionBlurEffect {
-  @:noCompletion
-  public static function applyCameraMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CameraMotionBlurEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyCameraMotionBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:CameraMotionBlurEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;

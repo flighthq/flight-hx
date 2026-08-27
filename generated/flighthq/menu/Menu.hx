@@ -7,10 +7,10 @@ import flighthq.menu.MenuTemplates as Facade_Menu_flighthq_menu_MenuTemplates;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Menu.MenuBackend;
-import flighthq.types.Menu.MenuItemRole;
-import flighthq.types.Menu.MenuItemTemplate;
-import flighthq.types.Menu.MenuItemType;
+import flighthq.types.MenuBackend;
+import flighthq.types.MenuItemRole;
+import flighthq.types.MenuItemTemplate;
+import flighthq.types.MenuItemType;
 import flighthq.types.MenuSignals;
 import flighthq.types.Signal;
 
@@ -251,8 +251,9 @@ class Menu {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getMenuBackend():MenuBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getMenuBackend():MenuBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Menu._custom__menu, function():Dynamic return cast Menu._host__menu), function():Dynamic return cast Menu._sentinel__menu);
     return cast null;
   }
@@ -262,8 +263,9 @@ class Menu {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installMenuHostBackend(backend:MenuBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installMenuHostBackend(backend:MenuBackend):Void {
     if ((cast !_Runtime.strictEquals(Menu._host__menu, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Menu._host__menu, backend) : Bool)) { (Menu._hostConflict__menu = cast (true : Dynamic)); }
       return;
@@ -271,8 +273,9 @@ class Menu {
     (Menu._host__menu = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observeMenuHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeMenuHostResult(operation:String, succeeded:Bool):Void {
     (Menu._hostObservation__menu = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -284,8 +287,9 @@ class Menu {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetMenuBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetMenuBackendForTest():Void {
     (Menu._custom__menu = cast (null : Dynamic));
     (Menu._host__menu = cast (null : Dynamic));
     (Menu._hostConflict__menu = cast (false : Dynamic));
@@ -297,8 +301,9 @@ class Menu {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setMenuBackend(backend:Null<MenuBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setMenuBackend(backend:Null<MenuBackend>):Void {
     (Menu._custom__menu = cast (backend : Dynamic));
   }
 
@@ -314,8 +319,9 @@ class Menu {
     return cast null;
   }
 
-  @:noCompletion
-  public static function showWebContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
+  @:allow(flighthq)
+  @:keep
+  private static function showWebContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flighthq._internal._Promise<Null<String>> {
     return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused3:flighthq._internal._Any):Void {
       var clampMenu:flighthq._internal.dom.HTMLElement->Float->Float->Void = cast _Runtime.UNDEFINED;
       var close:Null<String>->Void = cast _Runtime.UNDEFINED;

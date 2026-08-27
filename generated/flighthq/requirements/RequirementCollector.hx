@@ -4,12 +4,13 @@ package flighthq.requirements;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.requirements.RequirementSet.createRequirementSet;
-import flighthq.types.Entity.Kind;
+import flighthq.types.Kind;
 import flighthq.types.Requirement;
-import flighthq.types.Requirement.RequirementSet;
 import flighthq.types.RequirementFacet;
+import flighthq.types.RequirementSet;
 import flighthq.types._internal._RequirementFacetValues.RequirementFacetValue as Facet;
 
+@:noCompletion
 class RequirementCollector {
   public static function collectScene2DRequirements(run:Array<Requirement>->Void):RequirementSet {
     var requirements:Array<Requirement> = cast _Runtime.UNDEFINED;

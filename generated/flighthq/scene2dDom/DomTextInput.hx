@@ -17,19 +17,21 @@ import flighthq.types.DomTextInputOverlay;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RendererData;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.TextInputState;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
 typedef DomTextInputData__domTextInput = { >RendererData, var div:Null<flighthq._internal.dom.HTMLDivElement>; };
 
+@:noCompletion
 class DomTextInput {
   public static var _keyframesInjected__domTextInput:Bool = false;
 
-  @:noCompletion
-  public static function drawDomTextInputOverlay(_state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawDomTextInputOverlay(_state:DomRenderState, renderProxy:RenderProxy2D):Void {
     var source:RichText = cast _Runtime.UNDEFINED;
     var input:Null<TextInputState> = cast _Runtime.UNDEFINED;
     var layout:Null<TextLayoutResult> = cast _Runtime.UNDEFINED;

@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.types.GridSliceOptions;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 
+@:noCompletion
 class TextureAtlasGrid {
   public static function createTextureAtlasFromGrid(options:GridSliceOptions, ?texture:Null<Texture2D>):TextureAtlas {
     if (texture == null) texture = cast (null : Dynamic);

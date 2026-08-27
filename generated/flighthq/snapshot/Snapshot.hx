@@ -9,7 +9,7 @@ import flighthq.snapshot.EqualsSnapshot as Facade_Snapshot_flighthq_snapshot_Equ
 import flighthq.snapshot.InterpolateSnapshots as Facade_Snapshot_flighthq_snapshot_InterpolateSnapshots;
 import flighthq.snapshot.RestoreSnapshot as Facade_Snapshot_flighthq_snapshot_RestoreSnapshot;
 import flighthq.types.Snapshot;
-import flighthq.types.Snapshot.SnapshotSchema;
+import flighthq.types.SnapshotSchema;
 
 class Snapshot {
   public static function captureSnapshot<T>(source:T):flighthq.types.Snapshot<T> {

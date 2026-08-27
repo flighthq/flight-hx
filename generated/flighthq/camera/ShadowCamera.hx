@@ -5,14 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.camera.Camera.setCamera3DViewMatrix4FromLookAt;
 import flighthq.camera.Projection.createOrthographicProjection;
-import flighthq.types.Aabb.AabbLike;
+import flighthq.types.AabbLike;
 import flighthq.types.Camera3D;
-import flighthq.types.Camera3D.OrthographicProjection;
-import flighthq.types.Camera3D.Projection;
 import flighthq.types.Matrix4;
+import flighthq.types.OrthographicProjection;
 import flighthq.types.OrthographicProjectionOptions;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Projection;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class ShadowCamera {
   public static function configureDirectionalShadowCamera3D(camera:Camera3D, lightDirection:Vector3Like, sceneBounds:AabbLike):Void {
     var min:Vector3Like = cast _Runtime.UNDEFINED;

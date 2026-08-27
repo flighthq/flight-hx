@@ -7,12 +7,13 @@ import flighthq.particles.Curve.sampleParticleCurve;
 import flighthq.particles.ParticleObjectsState.ensureParticleObjectsStateCapacity;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterShape;
 import flighthq.types.ParticleObject;
 import flighthq.types.ParticleObjectsState;
 import flighthq.types.ParticleObjectsUpdateOptions;
 import flighthq.types.RandomSource;
 
+@:noCompletion
 class UpdateParticleObjects {
   public static final TWO_PI__updateParticleObjects:Float = (HxMath.PI * 2.0);
 

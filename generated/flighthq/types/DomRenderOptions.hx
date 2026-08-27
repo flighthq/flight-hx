@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
 
 typedef DomRenderOptions = { @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Bool; @:optional var pixelRatio:Float; @:optional var roundPixels:Bool; @:optional var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; };

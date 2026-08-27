@@ -6,13 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.Aabb;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.AabbLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Entity;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Aabb {
   public static function cloneAabb(source:AabbLike):flighthq.types.Aabb {
     return cast (cast createAabb(({ final __callArgument0:Dynamic = (cast source.min : { var x:Float; }).x; __callArgument0; }), ({ final __callArgument1:Dynamic = (cast source.min : { var y:Float; }).y; __callArgument1; }), ({ final __callArgument2:Dynamic = (cast source.min : { var z:Float; }).z; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast source.max : { var x:Float; }).x; __callArgument3; }), ({ final __callArgument4:Dynamic = (cast source.max : { var y:Float; }).y; __callArgument4; }), ({ final __callArgument5:Dynamic = (cast source.max : { var z:Float; }).z; __callArgument5; })) : flighthq.types.Aabb);

@@ -8,12 +8,13 @@ import flighthq.mesh.MeshGeometryAttributes.getMeshGeometryVertexWeights0;
 import flighthq.skeleton3d.SkinVertices.skinTangents;
 import flighthq.skeleton3d.SkinVertices.skinVertices;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.VertexAttribute;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexSemantic;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types.Skeleton3D;
+import flighthq.types.VertexAttribute;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexSemantic;
 
+@:noCompletion
 class SkinMeshGeometry {
   public static function captureMeshSkinBindPose(geometry:MeshGeometry):MeshSkinBindPose {
     var __destructure0:MeshGeometry = cast _Runtime.UNDEFINED;

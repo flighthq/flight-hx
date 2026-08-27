@@ -3,10 +3,11 @@ package flighthq.mesh;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.MeshGeometry.VertexFormat;
+import flighthq.types.VertexFormat;
 
+@:noCompletion
 class VertexFormat {
-  public static function getVertexFormatByteLength(format:flighthq.types.MeshGeometry.VertexFormat):Float {
+  public static function getVertexFormatByteLength(format:flighthq.types.VertexFormat):Float {
     {
       var __switchValue = format;
       if (__switchValue == 'float32x2') {
@@ -28,7 +29,7 @@ class VertexFormat {
     return cast null;
   }
 
-  public static function getVertexFormatComponentCount(format:flighthq.types.MeshGeometry.VertexFormat):Float {
+  public static function getVertexFormatComponentCount(format:flighthq.types.VertexFormat):Float {
     {
       var __switchValue = format;
       if (__switchValue == 'float32x2') {
@@ -44,7 +45,7 @@ class VertexFormat {
     return cast null;
   }
 
-  public static function readVertexFormatComponent(view:Dynamic, byteOffset:Float, format:flighthq.types.MeshGeometry.VertexFormat, component:Float):Float {
+  public static function readVertexFormatComponent(view:Dynamic, byteOffset:Float, format:flighthq.types.VertexFormat, component:Float):Float {
     {
       var __switchValue = format;
       if (__switchValue == 'float32x2' || __switchValue == 'float32x3' || __switchValue == 'float32x4') {
@@ -63,7 +64,7 @@ class VertexFormat {
     return cast null;
   }
 
-  public static function writeVertexFormatComponent(view:Dynamic, byteOffset:Float, format:flighthq.types.MeshGeometry.VertexFormat, component:Float, value:Float):Void {
+  public static function writeVertexFormatComponent(view:Dynamic, byteOffset:Float, format:flighthq.types.VertexFormat, component:Float, value:Float):Void {
     {
       var __switchValue = format;
       if (__switchValue == 'float32x2' || __switchValue == 'float32x3' || __switchValue == 'float32x4') {

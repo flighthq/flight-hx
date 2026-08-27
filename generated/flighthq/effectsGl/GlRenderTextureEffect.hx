@@ -9,20 +9,21 @@ import flighthq.renderGl.GlRenderStateBracket.withGlRenderState;
 import flighthq.renderGl.GlRenderTexture.explainGlRenderTexture;
 import flighthq.renderGl.GlRenderTexture.getGlRenderTextureTarget;
 import flighthq.renderGl.GlRenderTexture.writeGlRenderTextureTarget;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationGuard;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationStatus;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectApplicationExplanation;
+import flighthq.types.GlRenderEffectApplicationGuard;
+import flighthq.types.GlRenderEffectApplicationStatus;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
-import flighthq.types.GlRenderTexture.GlRenderTextureExplanation;
-import flighthq.types.GlRenderTexture.GlRenderTexturePool;
-import flighthq.types.GlRenderTexture.GlRenderTextureStatus;
+import flighthq.types.GlRenderTargetPool;
+import flighthq.types.GlRenderTextureExplanation;
+import flighthq.types.GlRenderTexturePool;
+import flighthq.types.GlRenderTextureStatus;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderTexture;
 
+@:noCompletion
 class GlRenderTextureEffect {
   public static function applyGlRenderEffectsToRenderTexture(state:GlRenderState, pool:GlRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
     var sourceTarget:Null<GlRenderTarget> = cast _Runtime.UNDEFINED;
@@ -93,8 +94,9 @@ class GlRenderTextureEffect {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setGlRenderEffectApplicationGuard(state:GlRenderState, guard:Null<GlRenderEffectApplicationGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlRenderEffectApplicationGuard(state:GlRenderState, guard:Null<GlRenderEffectApplicationGuard>):Void {
     if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).delete_(state)); } else { ((cast GlRenderTextureEffect._guards__glRenderTextureEffect : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectApplicationGuard>).set(state, (cast guard))); }
   }
 

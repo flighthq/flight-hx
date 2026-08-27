@@ -3,11 +3,11 @@ package flighthq.accessibility;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Accessibility.AccessibilityBackend;
-import flighthq.types.Accessibility.AccessibilityLiveness;
-import flighthq.types.Accessibility.AccessibilityNode;
-import flighthq.types.Accessibility.AccessibilityRole;
-import flighthq.types.Accessibility.AccessibilityState;
+import flighthq.types.AccessibilityBackend;
+import flighthq.types.AccessibilityLiveness;
+import flighthq.types.AccessibilityNode;
+import flighthq.types.AccessibilityRole;
+import flighthq.types.AccessibilityState;
 import flighthq.types.BackendExplanation;
 
 class Accessibility {
@@ -154,8 +154,9 @@ class Accessibility {
     (cast (cast getAccessibilityBackend() : AccessibilityBackend) : AccessibilityBackend).clear();
   }
 
-  @:noCompletion
-  public static function createWebAccessibilityBackend(?container:flighthq._internal.dom.HTMLElement):AccessibilityBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebAccessibilityBackend(?container:flighthq._internal.dom.HTMLElement):AccessibilityBackend {
     var getRoot:Void->Null<flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
     var elements:flighthq._internal._Map<String, flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
     var liveRegions:flighthq._internal._Map<AccessibilityLiveness, flighthq._internal.dom.HTMLElement> = cast _Runtime.UNDEFINED;
@@ -238,14 +239,16 @@ class Accessibility {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getAccessibilityBackend():AccessibilityBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getAccessibilityBackend():AccessibilityBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Accessibility._custom__accessibility, function():Dynamic return cast Accessibility._host__accessibility), function():Dynamic return cast Accessibility._sentinel__accessibility);
     return cast null;
   }
 
-  @:noCompletion
-  public static function installAccessibilityHostBackend(backend:AccessibilityBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installAccessibilityHostBackend(backend:AccessibilityBackend):Void {
     if ((cast !_Runtime.strictEquals(Accessibility._host__accessibility, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Accessibility._host__accessibility, backend) : Bool)) { (Accessibility._hostConflict__accessibility = cast (true : Dynamic)); }
       return;
@@ -253,8 +256,9 @@ class Accessibility {
     (Accessibility._host__accessibility = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observeAccessibilityHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeAccessibilityHostResult(operation:String, succeeded:Bool):Void {
     (Accessibility._hostObservation__accessibility = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -262,16 +266,18 @@ class Accessibility {
     (cast (cast getAccessibilityBackend() : AccessibilityBackend) : AccessibilityBackend).removeNode((cast id : String));
   }
 
-  @:noCompletion
-  public static function resetAccessibilityBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetAccessibilityBackendForTest():Void {
     (Accessibility._custom__accessibility = cast (null : Dynamic));
     (Accessibility._host__accessibility = cast (null : Dynamic));
     (Accessibility._hostConflict__accessibility = cast (false : Dynamic));
     (Accessibility._hostObservation__accessibility = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setAccessibilityBackend(backend:Null<AccessibilityBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setAccessibilityBackend(backend:Null<AccessibilityBackend>):Void {
     (Accessibility._custom__accessibility = cast (backend : Dynamic));
   }
 

@@ -16,19 +16,19 @@ import flighthq.hostCapacitor.CapacitorNotification as Facade_HostCapacitor_flig
 import flighthq.hostCapacitor.CapacitorRegister as Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorRegister;
 import flighthq.hostCapacitor.CapacitorShare as Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorShare;
 import flighthq.hostCapacitor.CapacitorStatusBar as Facade_HostCapacitor_flighthq_hostCapacitor_CapacitorStatusBar;
-import flighthq.types.App.AppBackend;
+import flighthq.types.AppBackend;
 import flighthq.types.CapacitorApi;
-import flighthq.types.Clipboard.ClipboardBackend;
-import flighthq.types.Connectivity.ConnectivityBackend;
-import flighthq.types.Device.DeviceBackend;
-import flighthq.types.Dialog.DialogBackend;
-import flighthq.types.FileSystem.FileSystemBackend;
-import flighthq.types.Geolocation.GeolocationBackend;
-import flighthq.types.Haptics.HapticsBackend;
-import flighthq.types.Keyboard.SoftKeyboardBackend;
-import flighthq.types.Notification.NotificationBackend;
-import flighthq.types.Share.ShareBackend;
-import flighthq.types.StatusBar.StatusBarBackend;
+import flighthq.types.ClipboardBackend;
+import flighthq.types.ConnectivityBackend;
+import flighthq.types.DeviceBackend;
+import flighthq.types.DialogBackend;
+import flighthq.types.FileSystemBackend;
+import flighthq.types.GeolocationBackend;
+import flighthq.types.HapticsBackend;
+import flighthq.types.NotificationBackend;
+import flighthq.types.ShareBackend;
+import flighthq.types.SoftKeyboardBackend;
+import flighthq.types.StatusBarBackend;
 
 class HostCapacitor {
   public static function createCapacitorAppBackend(capacitor:CapacitorApi):AppBackend {

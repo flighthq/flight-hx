@@ -3,29 +3,33 @@ package flighthq.textbidi;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Bidi.BidiClass;
-import flighthq.types.Bidi.BidiClassBackend;
+import flighthq.types.BidiClass;
+import flighthq.types.BidiClassBackend;
 
+@:noCompletion
 class BidiClassBackend {
-  @:noCompletion
-  public static function createCompactBidiClassBackend():flighthq.types.Bidi.BidiClassBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createCompactBidiClassBackend():flighthq.types.BidiClassBackend {
     return cast { getBidiClass: BidiClassBackend.getCompactBidiClass__bidiClassBackend };
     return cast null;
   }
 
-  @:noCompletion
-  public static function getBidiClassBackend():flighthq.types.Bidi.BidiClassBackend {
-    if ((cast _Runtime.strictEquals(BidiClassBackend._backend__bidiClassBackend, null) : Bool)) { (BidiClassBackend._backend__bidiClassBackend = cast ((cast createCompactBidiClassBackend() : flighthq.types.Bidi.BidiClassBackend) : Dynamic)); }
+  @:allow(flighthq)
+  @:keep
+  private static function getBidiClassBackend():flighthq.types.BidiClassBackend {
+    if ((cast _Runtime.strictEquals(BidiClassBackend._backend__bidiClassBackend, null) : Bool)) { (BidiClassBackend._backend__bidiClassBackend = cast ((cast createCompactBidiClassBackend() : flighthq.types.BidiClassBackend) : Dynamic)); }
     return cast BidiClassBackend._backend__bidiClassBackend;
     return cast null;
   }
 
-  @:noCompletion
-  public static function setBidiClassBackend(backend:Null<flighthq.types.Bidi.BidiClassBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setBidiClassBackend(backend:Null<flighthq.types.BidiClassBackend>):Void {
     (BidiClassBackend._backend__bidiClassBackend = cast (backend : Dynamic));
   }
 
-  public static var _backend__bidiClassBackend:Null<flighthq.types.Bidi.BidiClassBackend> = _Runtime.explicitNull();
+  public static var _backend__bidiClassBackend:Null<flighthq.types.BidiClassBackend> = _Runtime.explicitNull();
 
   public static function getCompactBidiClass__bidiClassBackend(codepoint:Float):BidiClass {
     var lo:Float = cast _Runtime.UNDEFINED;

@@ -4,7 +4,7 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.PbrExtension;
-import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.PbrUvSet;
 import flighthq.types.Texture;
 
 class _SheenPbrExtensionValues {

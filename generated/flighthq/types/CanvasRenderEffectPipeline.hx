@@ -3,12 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
-
-typedef CanvasRenderEffectContext = { var state:CanvasRenderState; var source:CanvasRenderTarget; var dest:CanvasRenderTarget; var pool:CanvasRenderTargetPool; };
-
-typedef CanvasRenderEffectRunner = CanvasRenderEffectContext->RenderEffect->Void;
-
-typedef CanvasRenderTargetPool = { var free:Array<CanvasRenderTarget>; var inUse:Array<CanvasRenderTarget>; };
 
 typedef CanvasRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<CanvasRenderTarget>; var pool:CanvasRenderTargetPool; var lutCache:ColorLutCache; };

@@ -8,15 +8,17 @@ import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.FilmGrainEffect;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlFilmGrainEffect {
-  @:noCompletion
-  public static function applyFilmGrainEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FilmGrainEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyFilmGrainEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:FilmGrainEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var size:Float = cast _Runtime.UNDEFINED;
     var seed:Float = cast _Runtime.UNDEFINED;

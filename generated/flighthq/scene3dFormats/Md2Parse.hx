@@ -27,19 +27,19 @@ import flighthq.scene3dFormats.Shared.reverseTriangleWinding;
 import flighthq.types.AnimationTrack;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Material;
-import flighthq.types.Material.MaterialLike;
+import flighthq.types.MaterialLike;
 import flighthq.types.MeshGeometry;
 import flighthq.types.MeshGeometryOptions;
+import flighthq.types.MeshMorph;
 import flighthq.types.MorphTarget;
-import flighthq.types.MorphTarget.MeshMorph;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
-import flighthq.types.Scene3DDocument.Scene3DDocumentAnimation;
-import flighthq.types.Scene3DDocument.Scene3DDocumentMesh;
-import flighthq.types.Scene3DDocument.Scene3DDocumentNode;
-import flighthq.types.Scene3DDocument.Scene3DDocumentScene;
+import flighthq.types.Scene3DDocumentAnimation;
+import flighthq.types.Scene3DDocumentMesh;
+import flighthq.types.Scene3DDocumentNode;
+import flighthq.types.Scene3DDocumentScene;
 import flighthq.types.Texture;
 import flighthq.types.Transform3D;
 import flighthq.types.Types.MeshKind;
@@ -50,6 +50,7 @@ import flighthq.types._internal._Scene3DAnimationPathValues.Scene3DAnimationPath
 
 typedef Md2Frame__md2Parse = { var name:String; var normals:flighthq._internal._Float32Array; var positions:flighthq._internal._Float32Array; };
 
+@:noCompletion
 class Md2Parse {
   public static function createScene3DFromMd2(bytes:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Scene3D {
     return cast (cast (#if js _Runtime.callValue(createScene3DFromDocument, cast ([(cast parseMd2(({ final __callArgument4:Dynamic = bytes; __callArgument4; }), ({ final __callArgument5:Dynamic = diagnostics; __callArgument5; })) : Scene3DDocument)] : Array<Dynamic>)) #else createScene3DFromDocument((cast parseMd2(({ final __callArgument0:Dynamic = bytes; __callArgument0; }), ({ final __callArgument1:Dynamic = diagnostics; __callArgument1; })) : Scene3DDocument), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3D);

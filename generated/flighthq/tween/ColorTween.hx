@@ -12,6 +12,7 @@ import flighthq.types.TweenOptions;
 
 typedef ColorComponents__colorTween = { var b:Float; var g:Float; var r:Float; };
 
+@:noCompletion
 class ColorTween {
   public static function createColorTween(manager:TweenManager, target:flighthq._internal._Record<String, Float>, property:String, duration:Float, toColor:Float, ?options:TweenOptions):Tween<ColorComponents__colorTween> {
     var fromColor:Float = cast _Runtime.UNDEFINED;

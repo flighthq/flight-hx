@@ -220,6 +220,7 @@ export function emitHaxeModule(module: IrModule): string {
   // that prevents consumer DCE; the parity harness adds it only to its dedicated JS
   // build.
   if (valueDeclarations.length === 0) return finalizeStaticLoweringEmission(lines.join('\n'));
+  if (module.namespaceNoCompletion) lines.push('@:noCompletion');
   lines.push(`class ${module.name} {`);
   for (const declaration of typeDeclarations) {
     if (declaration.kind !== 'enum') continue;
@@ -240,7 +241,11 @@ export function emitHaxeModule(module: IrModule): string {
     );
   }
   for (const declaration of valueDeclarations) {
-    const emitted = [...(declaration.noCompletion ? ['@:noCompletion'] : []), ...emitModuleValue(declaration)];
+    const emitted = [
+      ...(declaration.noCompletion ? ['@:noCompletion'] : []),
+      ...(declaration.allowPackage ? [`@:allow(${declaration.allowPackage})`, '@:keep'] : []),
+      ...emitModuleValue(declaration),
+    ];
     const conditional =
       declaration.kind === 'function' && declaration.haxeCondition
         ? [`#if ${declaration.haxeCondition}`, ...emitted, '#end']
@@ -258,6 +263,7 @@ export function emitHaxeModule(module: IrModule): string {
  * through class-level build metadata.
  */
 function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' | 'variable' }>): string[] {
+  const access = declaration.allowPackage ? 'private' : 'public';
   if (declaration.kind === 'variable') {
     const mutability = declaration.mutable || !declaration.initializer ? 'var' : 'final';
     const type = declaration.type ? `:${emitType(declaration.type)}` : declaration.initializer ? '' : ':Dynamic';
@@ -270,14 +276,14 @@ function emitModuleValue(declaration: Extract<IrDeclaration, { kind: 'function' 
             : emitDeclarationInitializer(declaration.type, declaration.initializer)
         }`
       : '';
-    return [`public static ${mutability} ${safeName(declaration.name)}${type}${initializer};`];
+    return [`${access} static ${mutability} ${safeName(declaration.name)}${type}${initializer};`];
   }
   const generics = emitTypeParameters(declaration.typeParameters, declaration.typeParameterConstraints);
   const directOnly = currentDirectFunctions.has(declaration.name);
   const parameters = directOnly ? '__flightArguments:Array<Dynamic>' : emitParameters(declaration.parameters);
   // High-arity `directOnly` shims stay private; everything else is public.
-  const access = directOnly ? 'private' : 'public';
-  const signature = `${access} static function ${safeName(declaration.name)}${generics}(${parameters}):${emitType(declaration.returns)}`;
+  const functionAccess = directOnly || declaration.allowPackage ? 'private' : 'public';
+  const signature = `${functionAccess} static function ${safeName(declaration.name)}${generics}(${parameters}):${emitType(declaration.returns)}`;
   const overloads = directOnly ? [] : emitFunctionOverloads(declaration);
 
   const bodyLines: string[] = [];

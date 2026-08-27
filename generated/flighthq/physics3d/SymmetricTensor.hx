@@ -4,6 +4,7 @@ package flighthq.physics3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class SymmetricTensor {
   public static final TENSOR_XX:Float = 0.0;
 

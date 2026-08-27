@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
+@:noCompletion
 class GetPathPointAtDistance {
   public static function getPathPointAtDistance(path:Path, distance:Float, out:Vector2Like, tolerance:Float = 0.25):Bool {
     var contours:Array<Array<Float>> = cast _Runtime.UNDEFINED;

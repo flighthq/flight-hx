@@ -17,20 +17,20 @@ import flighthq.types.AnimationInterpolation;
 import flighthq.types.AnimationTrack;
 import flighthq.types.Attachment2D;
 import flighthq.types.AttachmentSkin2D;
-import flighthq.types.AttachmentSkin2D.SkinAttachment2D;
 import flighthq.types.Bone2D;
 import flighthq.types.EasingFunction;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.MeshAttachment2D;
 import flighthq.types.RegionAttachment2D;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skeleton2DAnimationPath;
 import flighthq.types.Skeleton2DAnimationTarget;
 import flighthq.types.Skeleton2DImport;
-import flighthq.types.Skeleton2DImport.Skeleton2DImportAnimation;
+import flighthq.types.Skeleton2DImportAnimation;
+import flighthq.types.Skeleton2DSlotAnimationPath;
 import flighthq.types.Skeleton2DSlotAnimationTarget;
-import flighthq.types.Skeleton2DSlotAnimationTarget.Skeleton2DSlotAnimationPath;
+import flighthq.types.SkinAttachment2D;
 import flighthq.types.Slot2D;
 import flighthq.types.TransformInherit2D;
 import flighthq.types.Types.AnimationInterpolationLinear;
@@ -47,6 +47,7 @@ import flighthq.types._internal._Skeleton2DSlotAnimationTargetValues.Skeleton2DS
 
 typedef DragonBonesBoneRemap__dragonBonesParse = Float->Float;
 
+@:noCompletion
 class DragonBonesParse {
   public static function parseDragonBonesSkeleton(json:String, ?diagnostics:Array<ImportDiagnostic>):Null<Skeleton2DImport> {
     var doc:flighthq._internal._Any = cast _Runtime.UNDEFINED;

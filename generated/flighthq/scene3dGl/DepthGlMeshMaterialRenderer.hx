@@ -12,8 +12,8 @@ import flighthq.scene3dGl.GlMeshProgram.setGlMeshViewProjection;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.Camera3D;
 import flighthq.types.DepthMaterial;
+import flighthq.types.GlDebugDefineKey;
 import flighthq.types.GlDebugProgram;
-import flighthq.types.GlDebugProgram.GlDebugDefineKey;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
@@ -26,9 +26,11 @@ import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.Types.DepthMaterialKind;
 import flighthq.types._internal._DepthMaterialValues.DepthMaterialKind;
 
+@:noCompletion
 class DepthGlMeshMaterialRenderer {
-  @:noCompletion
-  public static final depthGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final depthGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var depth:Null<DepthMaterial> = cast _Runtime.UNDEFINED;
     var program:GlDebugProgram = cast _Runtime.UNDEFINED;
     depth = (cast material : Null<DepthMaterial>);

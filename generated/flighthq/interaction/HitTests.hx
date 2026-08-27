@@ -13,25 +13,26 @@ import flighthq.node.Hierarchy.getNodeParent;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.path.ContainsPathPoint.containsPathPoint;
-import flighthq.types.Entity.Kind;
+import flighthq.types.HitArea;
 import flighthq.types.HitTestFunction;
-import flighthq.types.HitTestFunction.HitTestPreciseFunction;
+import flighthq.types.HitTestPreciseFunction;
 import flighthq.types.HitTestResult;
+import flighthq.types.Kind;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeOf;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DTraits;
-import flighthq.types.NodeInteraction.HitArea;
+import flighthq.types.Node2DTraits;
+import flighthq.types.NodeAny;
 import flighthq.types.NodeInteractionState;
+import flighthq.types.NodeOf;
+import flighthq.types.NodeRuntime;
 import flighthq.types.Path;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.RectangleLike;
+import flighthq.types.Vector2Like;
 
+@:noCompletion
 class HitTests {
   public static function describeGraphHit(node:NodeAny, x:Float, y:Float, out:HitTestResult):Void {
     var exact:Null<HitTestPreciseFunction> = cast _Runtime.UNDEFINED;

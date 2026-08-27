@@ -4,7 +4,7 @@ package flighthq.lighting;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.color.Luminance.getColorLuminance;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Light;
 import flighthq.types.PointLight;
 import flighthq.types.SpotLight;
@@ -24,6 +24,7 @@ import flighthq.types._internal._HemisphereLightValues.HemisphereLightKind;
 import flighthq.types._internal._PointLightValues.PointLightKind;
 import flighthq.types._internal._SpotLightValues.SpotLightKind;
 
+@:noCompletion
 class LightAnalysis {
   public static function getLightContributionAtBoundingSphere(light:flighthq._internal._Union2<PointLight, SpotLight>, bounds:BoundingSphereLike):Float {
     var centerDx:Float = cast _Runtime.UNDEFINED;

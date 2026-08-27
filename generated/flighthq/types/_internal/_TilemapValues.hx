@@ -3,10 +3,10 @@ package flighthq.types._internal;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Material.MaterialData;
+import flighthq.types.MaterialData;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DData;
-import flighthq.types.Node2D.Node2DRuntime;
+import flighthq.types.Node2DData;
+import flighthq.types.Node2DRuntime;
 import flighthq.types.TextureAtlas;
 
 class _TilemapValues {

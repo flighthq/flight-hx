@@ -41,41 +41,42 @@ import flighthq.physics2d.StepValidation.isPhysics2DSolverConfigValid;
 import flighthq.physics2d.StepValidation.isPhysics2DTimestepValid;
 import flighthq.physics2d.World.findPhysics2DBody;
 import flighthq.physics2d.World.isPhysics2DPairOrdered;
-import flighthq.types.Collision.CollisionAabb2D;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Collision.CollisionCapsule2D;
-import flighthq.types.Collision.CollisionCircle2D;
-import flighthq.types.Collision.CollisionContactManifold2D;
-import flighthq.types.Collision.CollisionContactPoint2D;
-import flighthq.types.Collision.CollisionObb2D;
-import flighthq.types.Collision.CollisionPolygon2D;
-import flighthq.types.Collision.CollisionSegment2D;
-import flighthq.types.Collision.CollisionTimeOfImpact2D;
-import flighthq.types.Physics2D.Physics2DBodyType;
-import flighthq.types.Physics2D.Physics2DBrokenJoint;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.Physics2DCollisionFilter;
-import flighthq.types.Physics2D.Physics2DContact;
-import flighthq.types.Physics2D.Physics2DContactCallback;
-import flighthq.types.Physics2D.Physics2DContactEvents;
-import flighthq.types.Physics2D.Physics2DContactHooks;
-import flighthq.types.Physics2D.Physics2DContactIntakeGuard;
-import flighthq.types.Physics2D.Physics2DContactPoint;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DJointEvents;
-import flighthq.types.Physics2D.Physics2DJointReaction;
-import flighthq.types.Physics2D.Physics2DJointResolutionGuard;
-import flighthq.types.Physics2D.Physics2DJointSolver;
-import flighthq.types.Physics2D.Physics2DMaterial;
-import flighthq.types.Physics2D.Physics2DSolverConfig;
-import flighthq.types.Physics2D.Physics2DStepGuard;
-import flighthq.types.Physics2D.Physics2DWorld;
-import flighthq.types.Physics2D.RigidBody2D;
-import flighthq.types.Spatial.SpatialIndexBackend2D;
-import flighthq.types.Spatial.SpatialPair;
+import flighthq.types.CollisionAabb2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.CollisionCapsule2D;
+import flighthq.types.CollisionCircle2D;
+import flighthq.types.CollisionContactManifold2D;
+import flighthq.types.CollisionContactPoint2D;
+import flighthq.types.CollisionObb2D;
+import flighthq.types.CollisionPolygon2D;
+import flighthq.types.CollisionSegment2D;
+import flighthq.types.CollisionTimeOfImpact2D;
+import flighthq.types.Physics2DBodyType;
+import flighthq.types.Physics2DBrokenJoint;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.Physics2DCollisionFilter;
+import flighthq.types.Physics2DContact;
+import flighthq.types.Physics2DContactCallback;
+import flighthq.types.Physics2DContactEvents;
+import flighthq.types.Physics2DContactHooks;
+import flighthq.types.Physics2DContactIntakeGuard;
+import flighthq.types.Physics2DContactPoint;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DJointEvents;
+import flighthq.types.Physics2DJointReaction;
+import flighthq.types.Physics2DJointResolutionGuard;
+import flighthq.types.Physics2DJointSolver;
+import flighthq.types.Physics2DMaterial;
+import flighthq.types.Physics2DSolverConfig;
+import flighthq.types.Physics2DStepGuard;
+import flighthq.types.Physics2DWorld;
+import flighthq.types.RigidBody2D;
+import flighthq.types.SpatialIndexBackend2D;
+import flighthq.types.SpatialPair;
 
 typedef Physics2DStepScratch__step = { var pairs:Array<SpatialPair>; var ccdPairs:Array<SpatialPair>; var manifold:CollisionContactManifold2D; var ccdSweep:CollisionTimeOfImpact2D; var ccdRotationalManifold:CollisionContactManifold2D; var ccdCenterA:{ var x:Float; var y:Float; }; var ccdCenterB:{ var x:Float; var y:Float; }; var ccdImpactFraction:Float; var ccdImpactBodyA:Float; var ccdImpactBodyB:Float; var ccdImpactColliderA:Float; var ccdImpactColliderB:Float; var ccdImpactX:Float; var ccdImpactY:Float; var ccdImpactNormalX:Float; var ccdImpactNormalY:Float; };
 
+@:noCompletion
 class Step {
   public static function buildPhysics2DContacts__step(world:Physics2DWorld):Void {
     (cast world.index : SpatialIndexBackend2D).querySpatialPairs((cast (cast Step.getPhysics2DStepScratch__step() : Physics2DStepScratch__step) : Physics2DStepScratch__step).pairs);
@@ -351,18 +352,21 @@ class Step {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setPhysics2DContactIntakeGuard(guard:Null<Physics2DContactIntakeGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPhysics2DContactIntakeGuard(guard:Null<Physics2DContactIntakeGuard>):Void {
     (Step.physics2DContactIntakeGuard__step = cast (guard : Dynamic));
   }
 
-  @:noCompletion
-  public static function setPhysics2DJointResolutionGuard(guard:Null<Physics2DJointResolutionGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPhysics2DJointResolutionGuard(guard:Null<Physics2DJointResolutionGuard>):Void {
     (Step.physics2DJointResolutionGuard__step = cast (guard : Dynamic));
   }
 
-  @:noCompletion
-  public static function setPhysics2DStepGuard(guard:Null<Physics2DStepGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPhysics2DStepGuard(guard:Null<Physics2DStepGuard>):Void {
     (Step.physics2DStepGuard__step = cast (guard : Dynamic));
   }
 

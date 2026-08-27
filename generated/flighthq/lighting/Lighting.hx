@@ -18,7 +18,7 @@ import flighthq.types.AmbientLight;
 import flighthq.types.AmbientLightOptions;
 import flighthq.types.AreaLight;
 import flighthq.types.AreaLightOptions;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.DirectionalLight;
 import flighthq.types.DirectionalLightOptions;
 import flighthq.types.Environment;
@@ -31,11 +31,11 @@ import flighthq.types.PointLight;
 import flighthq.types.PointLightOptions;
 import flighthq.types.Scene3DForwardLightSelection;
 import flighthq.types.Scene3DLights;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.SpotLight;
 import flighthq.types.SpotLightConeAngles;
 import flighthq.types.SpotLightOptions;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
 class Lighting {
   public static function applyLightExposure(intensity:Float, ev:Float):Float {

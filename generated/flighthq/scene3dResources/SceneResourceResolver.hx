@@ -14,19 +14,20 @@ import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerExtendedPb
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerStandardPbrScene3DMaterialTextures;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerUnlitScene3DMaterialTextures;
 import flighthq.types.Entity;
+import flighthq.types.ImageResourceFetch;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.ImageResourceFetch;
 import flighthq.types.ResourceLoader;
-import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
-import flighthq.types.Scene3DResources.Scene3DResourceInFlight;
-import flighthq.types.Scene3DResources.Scene3DResourceResolver;
-import flighthq.types.Scene3DResources.Scene3DResourceResolverOptions;
-import flighthq.types.Scene3DResources.Scene3DResourceResolverRuntime;
-import flighthq.types.Scene3DResources.Scene3DResourceResolverWithRuntime;
+import flighthq.types.Scene3DMaterialTextureRegistry;
+import flighthq.types.Scene3DResourceInFlight;
+import flighthq.types.Scene3DResourceResolver;
+import flighthq.types.Scene3DResourceResolverOptions;
+import flighthq.types.Scene3DResourceResolverRuntime;
+import flighthq.types.Scene3DResourceResolverWithRuntime;
 import flighthq.types.TextureSource;
 import flighthq.types.Types.Scene3DResourceResolverRuntimeKey;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
+@:noCompletion
 class SceneResourceResolver {
   public static function createBuiltInScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolver {
     var resolver:Scene3DResourceResolver = cast _Runtime.UNDEFINED;

@@ -7,11 +7,12 @@ import flighthq.geometry.Matrix.matrixTransformPointXY;
 import flighthq.geometry.Matrix.multiplyMatrix;
 import flighthq.geometry.Matrix.setTransformMatrix;
 import flighthq.math.Constants.DEG_TO_RAD;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.RegionAttachment2D;
 import flighthq.types.Skeleton2D;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
+@:noCompletion
 class RegionAttachment2D {
   public static final MATRIX_STRIDE__regionAttachment2D:Float = 6.0;
 

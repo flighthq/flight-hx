@@ -20,16 +20,18 @@ import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextLabel;
-import flighthq.types.TextLabel.TextLabelData;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLabelData;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextVerticalAlign;
 
+@:noCompletion
 class CanvasTextLabel {
-  @:noCompletion
-  public static function drawCanvasTextLabel(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasTextLabel(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:TextLabel = cast _Runtime.UNDEFINED;
     var __destructure0:TextLabelData = cast _Runtime.UNDEFINED;
     var text:String = cast _Runtime.UNDEFINED;

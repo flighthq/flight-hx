@@ -8,6 +8,7 @@ import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 import flighthq.types.ImageChannel;
 
+@:noCompletion
 class BitmapCopy {
   public static function copyBitmapChannel(dest:BitmapRegion, destChannel:ImageChannel, source:BitmapRegion, sourceChannel:ImageChannel):Void {
     var w:Float = cast _Runtime.UNDEFINED;

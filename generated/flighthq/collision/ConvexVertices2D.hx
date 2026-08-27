@@ -3,9 +3,10 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionAabb2D;
-import flighthq.types.Collision.CollisionObb2D;
+import flighthq.types.CollisionAabb2D;
+import flighthq.types.CollisionObb2D;
 
+@:noCompletion
 class ConvexVertices2D {
   public static function writeAabbVertices(aabb:CollisionAabb2D, out:flighthq._internal._Float64Array):Void {
     var minX:Float = cast _Runtime.UNDEFINED;

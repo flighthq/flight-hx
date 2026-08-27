@@ -14,17 +14,17 @@ import flighthq.hostTauri.TauriShell as Facade_HostTauri_flighthq_hostTauri_Taur
 import flighthq.hostTauri.TauriShortcut as Facade_HostTauri_flighthq_hostTauri_TauriShortcut;
 import flighthq.hostTauri.TauriTray as Facade_HostTauri_flighthq_hostTauri_TauriTray;
 import flighthq.hostTauri.TauriWindow as Facade_HostTauri_flighthq_hostTauri_TauriWindow;
-import flighthq.types.App.AppBackend;
-import flighthq.types.ApplicationWindow.WindowBackend;
-import flighthq.types.Clipboard.ClipboardBackend;
-import flighthq.types.Dialog.DialogBackend;
-import flighthq.types.Menu.MenuBackend;
-import flighthq.types.Notification.NotificationBackend;
-import flighthq.types.Platform.PlatformBackend;
-import flighthq.types.Shell.ShellBackend;
-import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.AppBackend;
+import flighthq.types.ClipboardBackend;
+import flighthq.types.DialogBackend;
+import flighthq.types.MenuBackend;
+import flighthq.types.NotificationBackend;
+import flighthq.types.PlatformBackend;
+import flighthq.types.ShellBackend;
+import flighthq.types.ShortcutBackend;
 import flighthq.types.TauriApi;
-import flighthq.types.Tray.TrayBackend;
+import flighthq.types.TrayBackend;
+import flighthq.types.WindowBackend;
 
 class HostTauri {
   public static function createTauriAppBackend(tauri:TauriApi):AppBackend {

@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.tray.Tray.setTrayAnimationGuard;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.Tray.TrayIcon;
+import flighthq.types.LogLevel;
+import flighthq.types.TrayIcon;
 
+@:noCompletion
 class EnableTrayGuards {
   public static function disableTrayGuards():Void {
     setTrayAnimationGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));

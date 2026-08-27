@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.HalftoneEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlHalftoneEffect {
-  @:noCompletion
-  public static function applyHalftoneEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:HalftoneEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyHalftoneEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:HalftoneEffect):Void {
     var scale:Float = cast _Runtime.UNDEFINED;
     var angle:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;

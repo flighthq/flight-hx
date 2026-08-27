@@ -3,11 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
-
-typedef CatalogRegistration = { var module:String; var registrar:String; };
-
-typedef CatalogEntry = { var kind:Kind; var registrations:Array<CatalogRegistration>; var registry:RenderRegistry; };
 
 typedef SceneCoverageCatalog = Array<CatalogEntry>;

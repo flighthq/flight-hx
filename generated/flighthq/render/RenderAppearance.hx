@@ -10,12 +10,14 @@ import flighthq.types.HasBlendMode;
 import flighthq.types.Node;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Renderable;
 
+@:noCompletion
 class RenderAppearance {
-  @:noCompletion
-  public static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function updateRenderProxyAppearance(state:RenderState, data:RenderProxy, ?parentData:RenderProxy):Bool {
     var appearanceId:Float = cast _Runtime.UNDEFINED;
     appearanceId = (cast getNodeAppearanceRevision((cast (cast data.source : Node<Dynamic>) : Dynamic)) : Float);
     if ((cast ((cast _Runtime.andValue(!_Runtime.strictEquals(parentData, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(parentData.appearanceFrameId, (cast (cast getRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : RenderStateRuntime) : { var currentFrameId:Float; }).currentFrameId)) : Bool) || (cast !_Runtime.strictEquals(data.lastAppearanceId, appearanceId) : Bool)) : Bool)) {

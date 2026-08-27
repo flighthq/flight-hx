@@ -4,9 +4,11 @@ package flighthq.fontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class CffFdSelect {
-  @:noCompletion
-  public static function readCffFdSelect(bytes:flighthq._internal._UInt8Array, offset:Float, glyphCount:Float):Null<flighthq._internal._UInt8Array> {
+  @:allow(flighthq)
+  @:keep
+  private static function readCffFdSelect(bytes:flighthq._internal._UInt8Array, offset:Float, glyphCount:Float):Null<flighthq._internal._UInt8Array> {
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var format:Float = cast _Runtime.UNDEFINED;
     var rangeCount:Float = cast _Runtime.UNDEFINED;

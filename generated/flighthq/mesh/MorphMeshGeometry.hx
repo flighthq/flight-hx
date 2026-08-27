@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.mesh.MeshGeometryAttributes.getVertexAttributeFloatOffset;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexSemantic;
+import flighthq.types.MeshMorph;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MorphTarget;
-import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexSemantic;
 
+@:noCompletion
 class MorphMeshGeometry {
   public static function blendMeshGeometryMorph(geometry:MeshGeometry, morph:MeshMorph, bindPose:MeshMorphBindPose):Void {
     var __destructure0:MeshMorphBindPose = cast _Runtime.UNDEFINED;

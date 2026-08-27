@@ -4,9 +4,9 @@ package flighthq.applicationGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.applicationGl.GlApplicationRenderView as Facade_ApplicationGl_flighthq_applicationGl_GlApplicationRenderView;
-import flighthq.types.ApplicationRenderView.GlApplicationRenderView;
-import flighthq.types.ApplicationRenderView.GlApplicationRenderViewOptions;
 import flighthq.types.ApplicationWindow;
+import flighthq.types.GlApplicationRenderView;
+import flighthq.types.GlApplicationRenderViewOptions;
 
 class ApplicationGl {
   public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:GlApplicationRenderViewOptions):GlApplicationRenderView {

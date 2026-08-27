@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.socket.Socket.setSocketGuard;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.Socket;
-import flighthq.types.Socket.SocketGuardNotice;
+import flighthq.types.SocketGuardNotice;
 
+@:noCompletion
 class EnableSocketGuards {
   public static function areSocketGuardsEnabled():Bool {
     return cast EnableSocketGuards._enabled__enableSocketGuards;

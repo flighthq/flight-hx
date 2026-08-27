@@ -6,8 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.setTransformMatrix;
 import flighthq.geometry.Matrix.translateMatrixByVectorXY;
 import flighthq.types.Camera2D;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 
+@:noCompletion
 class ViewMatrix {
   public static function getCamera2DViewMatrix(camera:Camera2D, out:MatrixLike):Void {
     var zoom:Float = cast _Runtime.UNDEFINED;

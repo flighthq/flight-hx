@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.ScanlinesEffect;
 
+@:noCompletion
 class GlScanlinesEffect {
-  @:noCompletion
-  public static function applyScanlinesEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ScanlinesEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyScanlinesEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ScanlinesEffect):Void {
     var count:Float = cast _Runtime.UNDEFINED;
     var intensity:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;

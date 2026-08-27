@@ -5,7 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Modifier;
 import flighthq.types.Texture;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
 class _AnimatedNormalModifierValues {
   public static final AnimatedNormalModifierKind:String = 'AnimatedNormalModifier';

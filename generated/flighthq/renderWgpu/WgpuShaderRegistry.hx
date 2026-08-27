@@ -4,13 +4,15 @@ package flighthq.renderWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
+import flighthq.types.WgpuBitmapShader;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuBitmapShader;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 
+@:noCompletion
 class WgpuShaderRegistry {
-  @:noCompletion
-  public static function registerWgpuBitmapShader(state:WgpuRenderState, shader:WgpuBitmapShader):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerWgpuBitmapShader(state:WgpuRenderState, shader:WgpuBitmapShader):Void {
     ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuRenderStateRuntime) : { var defaultBitmapShader:Null<WgpuBitmapShader>; }).defaultBitmapShader = cast (shader : Null<WgpuBitmapShader>));
   }
 }

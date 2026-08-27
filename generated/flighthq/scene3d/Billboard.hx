@@ -8,22 +8,23 @@ import flighthq.node.Node.getNodeSignals;
 import flighthq.scene3d.SceneNode.createNode3D;
 import flighthq.scene3d.SceneNode.getNode3DRuntime;
 import flighthq.types.Billboard;
-import flighthq.types.Billboard.BillboardMode;
-import flighthq.types.Billboard.BillboardRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.BillboardMode;
+import flighthq.types.BillboardRuntime;
+import flighthq.types.Kind;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
-import flighthq.types.Node.NodeData;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DRuntime;
+import flighthq.types.Node3DTraits;
+import flighthq.types.NodeData;
+import flighthq.types.NodeRuntime;
 import flighthq.types.NodeSignals;
 import flighthq.types.Quaternion;
 import flighthq.types.Types.BillboardKind;
 import flighthq.types.Vector3;
 import flighthq.types._internal._BillboardValues.BillboardKind;
 
+@:noCompletion
 class Billboard {
   public static function createBillboard(geometry:MeshGeometry, materials:Array<Null<Material>>, mode:BillboardMode = 'full', ?kind:Kind, ?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):flighthq.types.Billboard {
     if (kind == null) kind = cast (BillboardKind : Dynamic);
@@ -41,8 +42,9 @@ class Billboard {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getBillboardRuntime(source:flighthq.types.Billboard):BillboardRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getBillboardRuntime(source:flighthq.types.Billboard):BillboardRuntime {
     return cast (cast getNode3DRuntime(({ final __callArgument2:Dynamic = source; __callArgument2; })) : Node3DRuntime);
     return cast null;
   }

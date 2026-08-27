@@ -3,11 +3,12 @@ package flighthq.physics3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointReaction;
-import flighthq.types.Physics3D.Physics3DJointSolver;
-import flighthq.types.Physics3D.Physics3DWorld;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointReaction;
+import flighthq.types.Physics3DJointSolver;
+import flighthq.types.Physics3DWorld;
 
+@:noCompletion
 class JointReaction {
   public static function accumulatePhysics3DJointRowReaction(joint:Physics3DJoint, state:Array<Float>, offset:Float, impulse:Float, out:Physics3DJointReaction):Void {
     var directionX:Float = cast _Runtime.UNDEFINED;

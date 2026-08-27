@@ -8,21 +8,23 @@ import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.CanvasMaterialRenderer;
 import flighthq.types.CanvasMaterialState;
+import flighthq.types.CanvasRenderRegistries;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderState.CanvasRenderRegistries;
-import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.CanvasRenderStateRuntime;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
 import flighthq.types.Material;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
+@:noCompletion
 class CanvasMaterialRegistry {
-  @:noCompletion
-  public static function applyCanvasMaterial(state:CanvasRenderState, material:Null<Material>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function applyCanvasMaterial(state:CanvasRenderState, material:Null<Material>):Bool {
     var renderer:Null<CanvasMaterialRenderer> = cast _Runtime.UNDEFINED;
     var drawState:CanvasMaterialState = cast _Runtime.UNDEFINED;
     var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
@@ -38,16 +40,18 @@ class CanvasMaterialRegistry {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind):Null<CanvasMaterialRenderer> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind):Null<CanvasMaterialRenderer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     entry = ({ final __collection11:Dynamic = ({ final __structural10 = (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument8:Dynamic = state; __callArgument8; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : { @:optional var materialRenderers:Null<KeyedTable<CanvasMaterialRenderer>>; }).materialRenderers; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>; }).entries; }); __collection11 == null ? _Runtime.UNDEFINED : ((cast __collection11 : flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>).get(kind)); });
     return cast ((cast _Runtime.strictEquals(({ final __structural12 = entry; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind, renderer:CanvasMaterialRenderer):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerCanvasMaterialRenderer(state:CanvasRenderState, kind:Kind, renderer:CanvasMaterialRenderer):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:KeyedTable<CanvasMaterialRenderer> = cast _Runtime.UNDEFINED;
     runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument13:Dynamic = state; __callArgument13; })) : CanvasRenderStateRuntime);
@@ -55,8 +59,9 @@ class CanvasMaterialRegistry {
     ((cast runtime.registries : { @:optional var materialRenderers:Null<KeyedTable<CanvasMaterialRenderer>>; }).materialRenderers = cast ((cast withRegistryTableEntry((cast table : Dynamic), (cast kind : String), ({ final __callArgument15:Dynamic = renderer; __callArgument15; })) : KeyedTable<CanvasMaterialRenderer>) : Null<KeyedTable<CanvasMaterialRenderer>>));
   }
 
-  @:noCompletion
-  public static function resolveCanvasMaterialRenderer(state:CanvasRenderState, material:Null<Material>):Null<CanvasMaterialRenderer> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveCanvasMaterialRenderer(state:CanvasRenderState, material:Null<Material>):Null<CanvasMaterialRenderer> {
     var entries:Null<flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>> = cast _Runtime.UNDEFINED;
     var fallback:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     entries = ({ final __structural19 = (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument17:Dynamic = state; __callArgument17; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : { @:optional var materialRenderers:Null<KeyedTable<CanvasMaterialRenderer>>; }).materialRenderers; __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { var entries:flighthq._internal._Map<String, RegistryTableEntry<CanvasMaterialRenderer>>; }).entries; });

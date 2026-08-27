@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CrtEffect;
 
+@:noCompletion
 class CrtEffect {
   public static function createCrtEffect(?options:{ @:optional var curvature:Null<Float>; @:optional var scanlineIntensity:Null<Float>; @:optional var vignette:Null<Float>; @:optional var aberration:Null<Float>; }):flighthq.types.CrtEffect {
     if (options == null) options = cast ({  } : Dynamic);

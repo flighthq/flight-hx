@@ -11,18 +11,19 @@ import flighthq.scene2dResources.Scene2DDocumentImporterRegistry.registerScene2D
 import flighthq.types.DisplayObject;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.LottieDocumentImport.LottieDocumentImportResult;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.LottieDocumentImportResult;
 import flighthq.types.Node2D;
-import flighthq.types.RiveDocument.RiveScene2DDocumentResult;
+import flighthq.types.RiveScene2DDocumentResult;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DDocument.Scene2DSlotReference;
-import flighthq.types.Scene2DResources.Scene2DDocumentImportContext;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporter;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporterMatcher;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
+import flighthq.types.Scene2DDocumentImportContext;
+import flighthq.types.Scene2DDocumentImporter;
+import flighthq.types.Scene2DDocumentImporterMatcher;
+import flighthq.types.Scene2DDocumentImporterRegistry;
+import flighthq.types.Scene2DSlotReference;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class BuiltInScene2DDocumentImporters {
   public static function registerLottieScene2DDocumentImporter(registry:Scene2DDocumentImporterRegistry):Void {
     registerScene2DDocumentImporter(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast 'lottie' : String), ({ final __callArgument1:Dynamic = BuiltInScene2DDocumentImporters.matchesLottieDocument__builtInScene2DDocumentImporters; __callArgument1; }), ({ final __callArgument2:Dynamic = BuiltInScene2DDocumentImporters.importLottieDocument__builtInScene2DDocumentImporters; __callArgument2; }));

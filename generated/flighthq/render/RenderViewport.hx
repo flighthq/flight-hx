@@ -6,18 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix.matrixTransformRectangle;
 import flighthq.geometry.Rectangle.createRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
-import flighthq.types.HasBoundsRectangle.Spatial2DNode;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderViewport2D;
 import flighthq.types.Renderable;
+import flighthq.types.Spatial2DNode;
 
+@:noCompletion
 class RenderViewport {
-  @:noCompletion
-  public static function computeRenderProxyWorldBounds(out:{ var height:Float; var width:Float; var x:Float; var y:Float; }, source:flighthq._internal._Any):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function computeRenderProxyWorldBounds(out:{ var height:Float; var width:Float; var x:Float; var y:Float; }, source:flighthq._internal._Any):Bool {
     var worldBounds:Rectangle = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast RenderViewport.isSpatial2DNode__renderViewport((cast source : flighthq._internal._Any)) : Bool) : Bool) : Bool)) { return cast false; }
     worldBounds = (cast getNodeWorldBoundsRectangle((cast source : Dynamic)) : Rectangle);
@@ -29,14 +31,16 @@ class RenderViewport {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createRenderViewport2D(x:Float, y:Float, width:Float, height:Float):RenderViewport2D {
+  @:allow(flighthq)
+  @:keep
+  private static function createRenderViewport2D(x:Float, y:Float, width:Float, height:Float):RenderViewport2D {
     return cast { height: height, width: width, x: x, y: y };
     return cast null;
   }
 
-  @:noCompletion
-  public static function isRenderableInViewport(source:flighthq._internal._Any, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isRenderableInViewport(source:flighthq._internal._Any, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
     var bounds:Rectangle = cast _Runtime.UNDEFINED;
     var objMinX:Float = cast _Runtime.UNDEFINED;
     var objMinY:Float = cast _Runtime.UNDEFINED;
@@ -64,8 +68,9 @@ class RenderViewport {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isRenderProxyInViewport(proxy:RenderProxy2D, viewport:RenderViewport2D, ?renderTransform2D:Null<Matrix>):Bool {
     return cast (cast isRenderableInViewport((cast _Runtime.field(proxy, 'source') : flighthq._internal._Any), ({ final __callArgument8:Dynamic = viewport; __callArgument8; }), ({ final __callArgument9:Dynamic = renderTransform2D; __callArgument9; })) : Bool);
     return cast null;
   }

@@ -16,25 +16,27 @@ import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.EffectSourceMode;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GlRenderTargetPool;
 import flighthq.types.GradientGlowEffect;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 
 typedef GradientLookupLocations__glGradientGlowEffect = { >GlFullscreenProgram, var locRamp:flighthq._internal.dom.WebGLUniformLocation; };
 
+@:noCompletion
 class GlGradientGlowEffect {
   public static final GRADIENT_LOOKUP_FRAGMENT_SRC__glGradientGlowEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform sampler2D u_ramp;\nout vec4 fragColor;\nvoid main() {\n  float alpha = texture(u_texture, v_texCoord).a;\n  fragColor = texture(u_ramp, vec2(alpha, 0.5));\n}';
 
   public static final lookupShaders__glGradientGlowEffect:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GradientLookupLocations__glGradientGlowEffect> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static function applyGradientGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientGlowEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGradientGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:GradientGlowEffect):Void {
     var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
     var s0:GlRenderTarget = cast _Runtime.UNDEFINED;
     var s1:GlRenderTarget = cast _Runtime.UNDEFINED;

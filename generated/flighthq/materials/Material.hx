@@ -4,9 +4,10 @@ package flighthq.materials;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
-import flighthq.types.Entity.Kind;
+import flighthq.types.Kind;
 import flighthq.types.Material;
 
+@:noCompletion
 class Material {
   public static function cloneMaterial(source:flighthq.types.Material):flighthq.types.Material {
     var clone:flighthq.types.Material = cast _Runtime.UNDEFINED;

@@ -13,6 +13,7 @@ import flighthq.types.PixelFormat;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
+@:noCompletion
 class BitmapChannel {
   public static function mergeBitmapChannels(out:BitmapRegion, r:BitmapRegion, g:BitmapRegion, b:BitmapRegion, a:BitmapRegion):Void {
     var w:Float = cast _Runtime.UNDEFINED;

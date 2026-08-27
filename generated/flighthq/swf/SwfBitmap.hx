@@ -8,16 +8,18 @@ import flighthq.compression.Decompressor.getDecompressor;
 import flighthq.types.AlphaType;
 import flighthq.types.Bitmap;
 import flighthq.types.Compression;
-import flighthq.types.Compression.CompressionFraming;
-import flighthq.types.Compression.Decompressor;
+import flighthq.types.CompressionFraming;
 import flighthq.types.DecodedImage;
-import flighthq.types.SwfDocumentImport.SwfJpegAlphaPayload;
+import flighthq.types.Decompressor;
+import flighthq.types.SwfJpegAlphaPayload;
 import flighthq.types._internal._CompressionValues.CompressionFramingValue;
 import flighthq.types._internal._CompressionValues.CompressionValue;
 
+@:noCompletion
 class SwfBitmap {
-  @:noCompletion
-  public static function createSwfJpegAlphaBitmap(decoded:DecodedImage, payload:SwfJpegAlphaPayload):Null<Bitmap> {
+  @:allow(flighthq)
+  @:keep
+  private static function createSwfJpegAlphaBitmap(decoded:DecodedImage, payload:SwfJpegAlphaPayload):Null<Bitmap> {
     var pixelCount:Float = cast _Runtime.UNDEFINED;
     var decompress:Null<Decompressor> = cast _Runtime.UNDEFINED;
     var alpha:Null<flighthq._internal._UInt8Array> = cast _Runtime.UNDEFINED;

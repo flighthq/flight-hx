@@ -3,61 +3,8 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Layout.LayoutTree;
-import flighthq.types.Scene2DDocument.Scene2DSlotReference;
-import flighthq.types.ShapeCommand.PathWinding;
 import flighthq.types._internal._RiveDocumentValues.RiveAnimationLoopValue;
 import flighthq.types._internal._RiveDocumentValues.RiveFieldTypeValue;
 import flighthq.types._internal._RiveDocumentValues.RiveWeightedPointKindValue;
 
-typedef RiveFieldType = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef RiveValue = flighthq._internal._Union2<flighthq._internal._Union2<Float, String>, flighthq._internal._UInt8Array>;
-
-typedef RiveProperty = { var key:Float; var type:RiveFieldType; var value:RiveValue; };
-
-typedef RiveCoreObject = { var properties:Array<RiveProperty>; var typeKey:Float; };
-
-typedef RivePropertyFieldType = { var key:Float; var type:RiveFieldType; };
-
-typedef RiveDocumentHeader = { var fileId:Float; var majorVersion:Float; var minorVersion:Float; var tableOfContents:Array<RivePropertyFieldType>; };
-
 typedef RiveDocument = { var header:RiveDocumentHeader; var objects:Array<RiveCoreObject>; };
-
-typedef RiveArtboardGraph = { var objects:Array<RiveCoreObject>; var streamEnd:Float; var streamStart:Float; var parentIndices:Array<Float>; };
-
-typedef RiveObjectGraph = { var artboards:Array<RiveArtboardGraph>; };
-
-typedef RiveFileAsset = { var bytes:Null<flighthq._internal._UInt8Array>; var cdnBaseUrl:String; var height:Float; var kind:String; var name:String; var width:Float; };
-
-typedef RiveStateMachineTransition = { var duration:Float; var exitTime:Float; var flags:Float; var toStateId:Float; };
-
-typedef RiveStateMachineState = { var animationId:Float; var kind:String; var transitions:Array<RiveStateMachineTransition>; };
-
-typedef RiveStateMachineLayer = { var name:String; var states:Array<RiveStateMachineState>; };
-
-typedef RiveStateMachineInput = { var kind:String; var name:String; var value:Null<flighthq._internal._Union2<Bool, Float>>; };
-
-typedef RiveStateMachineDescriptor = { var inputs:Array<RiveStateMachineInput>; var layers:Array<RiveStateMachineLayer>; var name:String; };
-
-typedef RiveAdvancedBlend = { var mode:AdvancedBlendMode; var node:DisplayObject; };
-
-typedef RiveAnimationLoop = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef RiveSkeleton2DImport = { var boneIndices:Array<Float>; var skeleton:Skeleton2D; };
-
-typedef RiveAnimationClip = { var clip:AnimationClip; var loop:RiveAnimationLoop; var name:String; var speed:Float; var workAreaEnd:Null<Float>; var workAreaStart:Null<Float>; };
-
-typedef RiveLayoutImport = { var targets:Array<DisplayObject>; var tree:LayoutTree; };
-
-typedef RiveArtboardImport = { var advancedBlends:Array<RiveAdvancedBlend>; var animations:Array<RiveAnimationClip>; var stateMachines:Array<RiveStateMachineDescriptor>; var height:Float; var layouts:Array<RiveLayoutImport>; var name:String; var root:DisplayObject; var skeleton:Null<RiveSkeleton2DImport>; var width:Float; };
-
-typedef RiveWeightedPointKind = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef RiveWeightedPoint = { var kind:RiveWeightedPointKind; var vertex:Float; var x:Float; var y:Float; };
-
-typedef RivePathRecord = { var commands:Array<Float>; var data:Array<Float>; var pathIndex:Float; var winding:PathWinding; };
-
-typedef RiveScene2DDocumentResult = { var imageResources:Array<ImageResourceReference>; var imported:RiveDocumentImportResult; var root:DisplayObject; var slots:Array<Scene2DSlotReference>; };
-
-typedef RiveDocumentImportResult = { var artboards:Array<RiveArtboardImport>; var assets:Array<RiveFileAsset>; };

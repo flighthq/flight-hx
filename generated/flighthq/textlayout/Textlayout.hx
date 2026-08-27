@@ -16,19 +16,19 @@ import flighthq.textlayout.TextLayoutRuntime as Facade_Textlayout_flighthq_textl
 import flighthq.textlayout.TextLineBreaks as Facade_Textlayout_flighthq_textlayout_TextLineBreaks;
 import flighthq.textlayout.TextMetrics as Facade_Textlayout_flighthq_textlayout_TextMetrics;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
+import flighthq.types.RectangleLike;
 import flighthq.types.RichTextContent;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.TextBoundsSpec;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
-import flighthq.types.TextLayout.TextMeasureFunction;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextLineMetrics;
+import flighthq.types.TextMeasureFunction;
 import flighthq.types.TextMetrics;
 import flighthq.types.TextSelectionRectangle;
 

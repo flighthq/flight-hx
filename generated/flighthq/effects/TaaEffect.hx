@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TaaEffect;
 
+@:noCompletion
 class TaaEffect {
   public static function createTaaEffect(?options:{ @:optional var feedback:Null<Float>; }):flighthq.types.TaaEffect {
     if (options == null) options = cast ({  } : Dynamic);

@@ -3,9 +3,10 @@ package flighthq.bitmap;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.BitmapReadback.BitmapReadbackBlockReason;
-import flighthq.types.BitmapReadback.BitmapReadbackExplanation;
+import flighthq.types.BitmapReadbackBlockReason;
+import flighthq.types.BitmapReadbackExplanation;
 
+@:noCompletion
 class ExplainBitmapReadback {
   public static function explainBitmapReadback(source:flighthq._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackExplanation {
     var reason:BitmapReadbackBlockReason = cast _Runtime.UNDEFINED;

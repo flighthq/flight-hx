@@ -12,16 +12,17 @@ import flighthq.spatial.SpatialIndex.insertSpatialObject2D;
 import flighthq.spatial.SpatialIndex.querySpatialPoint2D;
 import flighthq.types.InteractionManager;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node2D;
+import flighthq.types.NodeAny;
 import flighthq.types.NodeInteractionState;
+import flighthq.types.NodeRuntime;
 import flighthq.types.Path;
 import flighthq.types.Rectangle;
-import flighthq.types.Spatial.SpatialAabb2D;
-import flighthq.types.Spatial.SpatialIndex2D;
-import flighthq.types.Spatial.SpatialObjectId;
+import flighthq.types.SpatialAabb2D;
+import flighthq.types.SpatialIndex2D;
+import flighthq.types.SpatialObjectId;
 
+@:noCompletion
 class InteractionSpatialIndex {
   public static function findSpatialInteractionTarget<N:NodeAny>(manager:InteractionManager<N>, x:Float, y:Float, precise:Bool = false):Null<N> {
     var index:Null<SpatialIndex2D> = cast _Runtime.UNDEFINED;

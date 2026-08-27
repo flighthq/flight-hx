@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.GodRaysEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlGodRaysEffect {
-  @:noCompletion
-  public static function applyGodRaysEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GodRaysEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGodRaysEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:GodRaysEffect):Void {
     var centerX:Float = cast _Runtime.UNDEFINED;
     var centerY:Float = cast _Runtime.UNDEFINED;
     var density:Float = cast _Runtime.UNDEFINED;

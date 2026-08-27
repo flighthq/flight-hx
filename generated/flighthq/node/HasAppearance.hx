@@ -4,19 +4,22 @@ package flighthq.node;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HasAppearance;
-import flighthq.types.HasAppearance.HasAppearanceRuntime;
+import flighthq.types.HasAppearanceRuntime;
 
+@:noCompletion
 class HasAppearance {
-  @:noCompletion
-  public static function initAppearanceRuntimeTrait(target:HasAppearanceRuntime):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function initAppearanceRuntimeTrait(target:HasAppearanceRuntime):Void {
     ((cast target : HasAppearanceRuntime).worldAlpha = null);
     ((cast target : HasAppearanceRuntime).worldAlphaUsingAppearanceId = -1.0);
     ((cast target : HasAppearanceRuntime).worldAlphaUsingParentAppearanceId = -1.0);
     ((cast target : HasAppearanceRuntime).worldAppearanceId = 0.0);
   }
 
-  @:noCompletion
-  public static function initAppearanceTrait(target:flighthq.types.HasAppearance, ?obj:{ @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function initAppearanceTrait(target:flighthq.types.HasAppearance, ?obj:{ @:optional var alpha:Null<Float>; @:optional var visible:Null<Bool>; }):Void {
     ((cast target : flighthq.types.HasAppearance).alpha = _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var alpha:Null<Float>; }).alpha; }), function():Dynamic return cast 1.0));
     ((cast target : flighthq.types.HasAppearance).visible = _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var visible:Null<Bool>; }).visible; }), function():Dynamic return cast true));
   }

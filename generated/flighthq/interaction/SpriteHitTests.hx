@@ -4,23 +4,27 @@ package flighthq.interaction;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.interaction.HitTests.hitTestGraphLocalBounds;
-import flighthq.types.Node.NodeAny;
+import flighthq.types.NodeAny;
 
+@:noCompletion
 class SpriteHitTests {
-  @:noCompletion
-  public static function defaultQuadBatchHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultQuadBatchHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast (cast defaultSpriteHitTestHandler(({ final __callArgument0:Dynamic = source; __callArgument0; }), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
-  @:noCompletion
-  public static function defaultSpriteHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultSpriteHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast (cast hitTestGraphLocalBounds((cast source : Dynamic), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }
 
-  @:noCompletion
-  public static function defaultTilemapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultTilemapHitTestHandler(source:NodeAny, x:Float, y:Float):Bool {
     return cast (cast defaultSpriteHitTestHandler(({ final __callArgument2:Dynamic = source; __callArgument2; }), (cast x : Float), (cast y : Float)) : Bool);
     return cast null;
   }

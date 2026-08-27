@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.types.TextureAtlas;
-import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteArrayFrame;
-import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteBaseFrame;
-import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteDocument;
-import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteRect;
-import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteSize;
+import flighthq.types.TextureAtlasAsepriteArrayFrame;
+import flighthq.types.TextureAtlasAsepriteBaseFrame;
+import flighthq.types.TextureAtlasAsepriteDocument;
+import flighthq.types.TextureAtlasAsepriteRect;
+import flighthq.types.TextureAtlasAsepriteSize;
 import flighthq.types.TextureAtlasRegion;
 
+@:noCompletion
 class TextureAtlasAsepriteParse {
   public static function parseTextureAtlasAsepriteDocument(doc:TextureAtlasAsepriteDocument, atlas:TextureAtlas):TextureAtlas {
     _Runtime.setLength(atlas.regions, 0.0);

@@ -3,8 +3,8 @@ package flighthq.flow;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Flow.FlowStack;
-import flighthq.types.Flow.FlowState;
+import flighthq.types.FlowStack;
+import flighthq.types.FlowState;
 
 class Flow {
   public static function clearFlowStack(stack:FlowStack):Void {

@@ -8,19 +8,21 @@ import flighthq.geometry.Matrix.inverseMatrix;
 import flighthq.geometry.Matrix.multiplyMatrix;
 import flighthq.node.NodeTransform2d.getNodeLocalMatrix;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node2D;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderEffectPadding;
-import flighthq.types.RenderTarget.RenderTargetAxes;
-import flighthq.types.RenderTarget.RenderTargetAxisDifference;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
-import flighthq.types.RenderTarget.ResolvedRenderTargetDescriptor;
+import flighthq.types.RenderTargetAxes;
+import flighthq.types.RenderTargetAxisDifference;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
+import flighthq.types.ResolvedRenderTargetDescriptor;
 
+@:noCompletion
 class RenderTarget {
-  @:noCompletion
-  public static function computeRenderCacheTransform(outCacheTransform:MatrixLike, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function computeRenderCacheTransform(outCacheTransform:MatrixLike, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
     (outCacheTransform.a = cast (1.0 : Float));
     (outCacheTransform.b = cast (0.0 : Float));
     (outCacheTransform.c = cast (0.0 : Float));
@@ -29,8 +31,9 @@ class RenderTarget {
     (outCacheTransform.ty = cast ((bounds.y - contentY) : Float));
   }
 
-  @:noCompletion
-  public static function computeRenderTargetSize(out:{ var width:Float; var height:Float; }, bounds:RectangleLike, padding:flighthq._internal._Union2<Float, RenderEffectPadding> = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
+  @:allow(flighthq)
+  @:keep
+  private static function computeRenderTargetSize(out:{ var width:Float; var height:Float; }, bounds:RectangleLike, padding:flighthq._internal._Union2<Float, RenderEffectPadding> = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
     var horizontal:Float = cast _Runtime.UNDEFINED;
     var vertical:Float = cast _Runtime.UNDEFINED;
     horizontal = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast _Runtime.multiplyNumbers(padding, 2.0) : Dynamic) : (cast ((cast padding : { var left:Float; }).left + (cast padding : { var right:Float; }).right) : Dynamic));
@@ -41,8 +44,9 @@ class RenderTarget {
     return cast null;
   }
 
-  @:noCompletion
-  public static function computeScene2DRenderTargetTransform(outRenderTransform:MatrixLike, source:Node2D, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function computeScene2DRenderTargetTransform(outRenderTransform:MatrixLike, source:Node2D, bounds:RectangleLike, contentX:Float = 0.0, contentY:Float = 0.0):Void {
     var localTransform:Matrix = cast _Runtime.UNDEFINED;
     localTransform = (cast getNodeLocalMatrix((cast source : Dynamic)) : Matrix);
     (cast inverseMatrix(({ final __callArgument0:Dynamic = RenderTarget._tempInvLocal__renderTarget; __callArgument0; }), ({ final __callArgument1:Dynamic = localTransform; __callArgument1; })) : Bool);
@@ -55,8 +59,9 @@ class RenderTarget {
     multiplyMatrix(({ final __callArgument4:Dynamic = outRenderTransform; __callArgument4; }), ({ final __callArgument5:Dynamic = RenderTarget._tempTranslation__renderTarget; __callArgument5; }), ({ final __callArgument6:Dynamic = RenderTarget._tempInvLocal__renderTarget; __callArgument6; }));
   }
 
-  @:noCompletion
-  public static function explainRenderTargetAxes(requested:RenderTargetAxes, effective:RenderTargetAxes):Array<RenderTargetAxisDifference> {
+  @:allow(flighthq)
+  @:keep
+  private static function explainRenderTargetAxes(requested:RenderTargetAxes, effective:RenderTargetAxes):Array<RenderTargetAxisDifference> {
     var differences:Array<RenderTargetAxisDifference> = cast _Runtime.UNDEFINED;
     differences = (cast cast ([] : Array<Dynamic>));
     for (axis in _Runtime.iterable(RenderTarget._renderTargetAxisOrder__renderTarget)) {
@@ -69,8 +74,9 @@ class RenderTarget {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resolveRenderTargetDescriptor(descriptor:RenderTargetDescriptor):ResolvedRenderTargetDescriptor {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveRenderTargetDescriptor(descriptor:RenderTargetDescriptor):ResolvedRenderTargetDescriptor {
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
     var colorAttachments:Float = cast _Runtime.UNDEFINED;

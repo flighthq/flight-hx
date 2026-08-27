@@ -7,15 +7,15 @@ import flighthq.media.AudioChannel as Facade_Media_flighthq_media_AudioChannel;
 import flighthq.media.AudioMixer as Facade_Media_flighthq_media_AudioMixer;
 import flighthq.media.VideoChannel as Facade_Media_flighthq_media_VideoChannel;
 import flighthq.types.AudioBus;
-import flighthq.types.AudioBus.AudioBusOptions;
-import flighthq.types.AudioBus.AudioMixer;
-import flighthq.types.AudioBus.AudioMixerOptions;
+import flighthq.types.AudioBusOptions;
+import flighthq.types.AudioChannel;
+import flighthq.types.AudioMixer;
+import flighthq.types.AudioMixerOptions;
+import flighthq.types.AudioPlayOptions;
 import flighthq.types.AudioResource;
-import flighthq.types.AudioResource.AudioChannel;
-import flighthq.types.AudioResource.AudioPlayOptions;
+import flighthq.types.VideoChannel;
+import flighthq.types.VideoPlayOptions;
 import flighthq.types.VideoResource;
-import flighthq.types.VideoResource.VideoChannel;
-import flighthq.types.VideoResource.VideoPlayOptions;
 
 class Media {
   public static function addAudioBusToMixer(mixer:AudioMixer, bus:AudioBus):Void {

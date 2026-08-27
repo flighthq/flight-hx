@@ -13,22 +13,22 @@ import flighthq.spritesheetFormats.StarlingParse as Facade_SpritesheetFormats_fl
 import flighthq.spritesheetFormats.StarlingSerialize as Facade_SpritesheetFormats_flighthq_spritesheetFormats_StarlingSerialize;
 import flighthq.spritesheetFormats.TexturePackerParse as Facade_SpritesheetFormats_flighthq_spritesheetFormats_TexturePackerParse;
 import flighthq.spritesheetFormats.TexturePackerSerialize as Facade_SpritesheetFormats_flighthq_spritesheetFormats_TexturePackerSerialize;
-import flighthq.types.AsepriteSchema.AsepriteDocument;
-import flighthq.types.AsepriteSchema.AsepriteParsed;
-import flighthq.types.AsepriteSchema.AsepriteSerializeOptions;
-import flighthq.types.CocosPlistSchema.CocosPlistFrame;
-import flighthq.types.CocosPlistSchema.CocosPlistMetadata;
-import flighthq.types.CocosPlistSchema.CocosPlistParsed;
-import flighthq.types.LibgdxAtlasSchema.LibgdxAtlasParseOptions;
+import flighthq.types.AsepriteDocument;
+import flighthq.types.AsepriteParsed;
+import flighthq.types.AsepriteSerializeOptions;
+import flighthq.types.CocosPlistFrame;
+import flighthq.types.CocosPlistMetadata;
+import flighthq.types.CocosPlistParsed;
+import flighthq.types.LibgdxAtlasParseOptions;
 import flighthq.types.SpritesheetData;
-import flighthq.types.SpritesheetFormat.SpritesheetFormatKind;
+import flighthq.types.SpritesheetFormatKind;
 import flighthq.types.SpritesheetParseOptions;
-import flighthq.types.StarlingSchema.StarlingParseOptions;
-import flighthq.types.StarlingSchema.StarlingParsed;
-import flighthq.types.StarlingSchema.StarlingSubTexture;
-import flighthq.types.TexturePackerSchema.TexturePackerDocument;
-import flighthq.types.TexturePackerSchema.TexturePackerParsed;
-import flighthq.types.TexturePackerSchema.TexturePackerSerializeOptions;
+import flighthq.types.StarlingParseOptions;
+import flighthq.types.StarlingParsed;
+import flighthq.types.StarlingSubTexture;
+import flighthq.types.TexturePackerDocument;
+import flighthq.types.TexturePackerParsed;
+import flighthq.types.TexturePackerSerializeOptions;
 
 class SpritesheetFormats {
   public static function detectSpritesheetFormat(text:String):Null<SpritesheetFormatKind> {

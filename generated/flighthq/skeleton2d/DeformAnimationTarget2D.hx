@@ -17,6 +17,7 @@ import flighthq.types.Skeleton2DSlotDeform;
 import flighthq.types.Slot2D;
 import flighthq.types._internal._Skeleton2DAnimationTargetKindValues.Skeleton2DAnimationTargetKindValue;
 
+@:noCompletion
 class DeformAnimationTarget2D {
   public static function registerSkeleton2DDeformAnimationTarget():Void {
     registerSkeleton2DAnimationTargetBinder((cast (cast Skeleton2DAnimationTargetKindValue : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).Deform : String), ({ final __callArgument0:Dynamic = DeformAnimationTarget2D.bindSkeleton2DDeformChannel__deformAnimationTarget2D; __callArgument0; }));

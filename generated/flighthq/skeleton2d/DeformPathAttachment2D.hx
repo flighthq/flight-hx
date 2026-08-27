@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.skeleton2d.SkinAttachment2DPoints.skinSkeleton2DAttachmentPoints;
 import flighthq.types.Path;
 import flighthq.types.PathAttachment2D;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skin2D;
 
+@:noCompletion
 class DeformPathAttachment2D {
   public static function deformSkeleton2DPathAttachment(out:Path, attachment:PathAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
     if (deform == null) deform = cast (null : Dynamic);

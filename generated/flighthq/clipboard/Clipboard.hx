@@ -6,13 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Clipboard.ClipboardBackend;
-import flighthq.types.Clipboard.ClipboardBookmark;
-import flighthq.types.Clipboard.ClipboardWriteItem;
+import flighthq.types.ClipboardBackend;
+import flighthq.types.ClipboardBookmark;
 import flighthq.types.ClipboardFormat.ClipboardFormatBookmark;
 import flighthq.types.ClipboardFormat.ClipboardFormatHtml;
 import flighthq.types.ClipboardFormat.ClipboardFormatRtf;
 import flighthq.types.ClipboardWatch;
+import flighthq.types.ClipboardWriteItem;
 import flighthq.types.Signal;
 import flighthq.types.Types.ClipboardFormatBookmark;
 import flighthq.types.Types.ClipboardFormatHtml;
@@ -173,8 +173,9 @@ class Clipboard {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebClipboardBackend():ClipboardBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebClipboardBackend():ClipboardBackend {
     return cast ({ var __thisValue0:Dynamic = null; __thisValue0 = { readFormat: function(format:String):flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
@@ -678,8 +679,9 @@ class Clipboard {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getClipboardBackend():ClipboardBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getClipboardBackend():ClipboardBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Clipboard._custom__clipboard, function():Dynamic return cast Clipboard._host__clipboard), function():Dynamic return cast Clipboard._sentinel__clipboard);
     return cast null;
   }
@@ -738,8 +740,9 @@ class Clipboard {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installClipboardHostBackend(backend:ClipboardBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installClipboardHostBackend(backend:ClipboardBackend):Void {
     var previous:ClipboardBackend = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(Clipboard._host__clipboard, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Clipboard._host__clipboard, backend) : Bool)) { (Clipboard._hostConflict__clipboard = cast (true : Dynamic)); }
@@ -750,8 +753,9 @@ class Clipboard {
     Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument66:Dynamic = previous; __callArgument66; }), (cast getClipboardBackend() : ClipboardBackend));
   }
 
-  @:noCompletion
-  public static function observeClipboardHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeClipboardHostResult(operation:String, succeeded:Bool):Void {
     (Clipboard._hostObservation__clipboard = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -820,8 +824,9 @@ class Clipboard {
     }
   }
 
-  @:noCompletion
-  public static function resetClipboardBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetClipboardBackendForTest():Void {
     var previous:ClipboardBackend = cast _Runtime.UNDEFINED;
     previous = (cast getClipboardBackend() : ClipboardBackend);
     (Clipboard._custom__clipboard = cast (null : Dynamic));
@@ -831,8 +836,9 @@ class Clipboard {
     Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument72:Dynamic = previous; __callArgument72; }), (cast getClipboardBackend() : ClipboardBackend));
   }
 
-  @:noCompletion
-  public static function setClipboardBackend(backend:Null<ClipboardBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setClipboardBackend(backend:Null<ClipboardBackend>):Void {
     var previous:ClipboardBackend = cast _Runtime.UNDEFINED;
     previous = (cast getClipboardBackend() : ClipboardBackend);
     (Clipboard._custom__clipboard = cast (backend : Dynamic));

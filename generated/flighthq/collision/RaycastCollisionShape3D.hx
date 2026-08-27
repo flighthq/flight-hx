@@ -5,11 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.ConvexHull3D.writeCollisionConvexHullFaces3D;
 import flighthq.collision.PointContainment3D.getCollisionShapeContainsPoint3D;
-import flighthq.types.Collision.CollisionBuiltInShape3D;
-import flighthq.types.Collision.CollisionRaycastHit3D;
+import flighthq.types.CollisionBuiltInShape3D;
+import flighthq.types.CollisionRaycastHit3D;
 
 typedef SlabHit__raycastCollisionShape3D = { var fraction:Float; var normalX:Float; var normalY:Float; var normalZ:Float; };
 
+@:noCompletion
 class RaycastCollisionShape3D {
   public static function createCollisionRaycastHit3D():CollisionRaycastHit3D {
     return cast { fraction: 0.0, x: 0.0, y: 0.0, z: 0.0, normalX: 0.0, normalY: 0.0, normalZ: 0.0 };

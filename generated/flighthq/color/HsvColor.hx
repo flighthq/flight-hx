@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.HsvColor;
 
+@:noCompletion
 class HsvColor {
   public static function allocateHsvColor():flighthq.types.HsvColor {
     return cast cast ([0.0, 0.0, 0.0] : Array<Dynamic>);

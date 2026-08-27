@@ -10,25 +10,26 @@ import flighthq.physics3d.Joints.Physics3DFixedJointKind;
 import flighthq.physics3d.Joints.Physics3DGeneric6DofJointKind;
 import flighthq.physics3d.Joints.Physics3DHingeJointKind;
 import flighthq.physics3d.Joints.Physics3DSliderJointKind;
-import flighthq.types.Physics3D.Physics3DBallAndSocketJoint;
-import flighthq.types.Physics3D.Physics3DBallAndSocketJointOptions;
-import flighthq.types.Physics3D.Physics3DConeTwistJoint;
-import flighthq.types.Physics3D.Physics3DConeTwistJointOptions;
-import flighthq.types.Physics3D.Physics3DDistanceJoint;
-import flighthq.types.Physics3D.Physics3DDistanceJointOptions;
-import flighthq.types.Physics3D.Physics3DFixedJoint;
-import flighthq.types.Physics3D.Physics3DFixedJointOptions;
-import flighthq.types.Physics3D.Physics3DGeneric6DofJoint;
-import flighthq.types.Physics3D.Physics3DGeneric6DofJointOptions;
-import flighthq.types.Physics3D.Physics3DHingeJoint;
-import flighthq.types.Physics3D.Physics3DHingeJointOptions;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointFrameOptions;
-import flighthq.types.Physics3D.Physics3DJointFrames;
-import flighthq.types.Physics3D.Physics3DJointOptions;
-import flighthq.types.Physics3D.Physics3DSliderJoint;
-import flighthq.types.Physics3D.Physics3DSliderJointOptions;
+import flighthq.types.Physics3DBallAndSocketJoint;
+import flighthq.types.Physics3DBallAndSocketJointOptions;
+import flighthq.types.Physics3DConeTwistJoint;
+import flighthq.types.Physics3DConeTwistJointOptions;
+import flighthq.types.Physics3DDistanceJoint;
+import flighthq.types.Physics3DDistanceJointOptions;
+import flighthq.types.Physics3DFixedJoint;
+import flighthq.types.Physics3DFixedJointOptions;
+import flighthq.types.Physics3DGeneric6DofJoint;
+import flighthq.types.Physics3DGeneric6DofJointOptions;
+import flighthq.types.Physics3DHingeJoint;
+import flighthq.types.Physics3DHingeJointOptions;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointFrameOptions;
+import flighthq.types.Physics3DJointFrames;
+import flighthq.types.Physics3DJointOptions;
+import flighthq.types.Physics3DSliderJoint;
+import flighthq.types.Physics3DSliderJointOptions;
 
+@:noCompletion
 class JointFactories {
   public static function createPhysics3DBallAndSocketJoint(options:Physics3DBallAndSocketJointOptions):Physics3DBallAndSocketJoint {
     return cast _Runtime.mergeObjects([{ kind: Physics3DBallAndSocketJointKind }, (cast JointFactories.createJointBase__jointFactories(({ final __callArgument0:Dynamic = options; __callArgument0; })) : { var bodyA:Float; var bodyB:Float; var localAnchorAX:Float; var localAnchorAY:Float; var localAnchorBX:Float; var localAnchorBY:Float; var collideConnected:Bool; var impulse0:Float; var impulse1:Float; var impulse2:Float; var rAX:Float; var rAY:Float; var rBX:Float; var rBY:Float; var breakForce:Float; var breakTorque:Float; var localAnchorAZ:Float; var localAnchorBZ:Float; var broken:Bool; var impulse3:Float; var impulse4:Float; var impulse5:Float; var rAZ:Float; var rBZ:Float; })]);

@@ -9,24 +9,25 @@ import flighthq.lighting.DirectionalLight.createDirectionalLight;
 import flighthq.lighting.PointLight.createPointLight;
 import flighthq.lighting.SpotLight.createSpotLight;
 import flighthq.types.DirectionalLight;
-import flighthq.types.GltfExtension.GltfExtensionContext;
-import flighthq.types.GltfExtension.GltfExtensionHandler;
-import flighthq.types.GltfSchema.GltfDocument;
-import flighthq.types.GltfSchema.GltfDocumentExtensions;
-import flighthq.types.GltfSchema.GltfNode;
-import flighthq.types.GltfSchema.GltfPunctualLight;
+import flighthq.types.GltfDocument;
+import flighthq.types.GltfDocumentExtensions;
+import flighthq.types.GltfExtensionContext;
+import flighthq.types.GltfExtensionHandler;
+import flighthq.types.GltfNode;
+import flighthq.types.GltfPunctualLight;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Light;
 import flighthq.types.PointLight;
 import flighthq.types.Scene3DDocument;
-import flighthq.types.Scene3DDocument.Scene3DDocumentLight;
+import flighthq.types.Scene3DDocumentLight;
 import flighthq.types.SpotLight;
 import flighthq.types.Transform3D;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef LightDropTally__gltfPunctualLights = { var count:Float; var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var severity:ImportDiagnosticSeverity; };
 
+@:noCompletion
 class GltfPunctualLights {
   public static final GltfPunctualLightsExtensionHandler:GltfExtensionHandler = (cast { apply: function(context:GltfExtensionContext):Void {
     var definitions:Array<GltfPunctualLight> = cast _Runtime.UNDEFINED;

@@ -5,13 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef AudioBus = { var gain:Float; var muted:Bool; var name:String; var pan:Float; };
-
-typedef AudioBusOptions = { @:optional var gain:Float; @:optional var muted:Bool; @:optional var name:String; @:optional var pan:Float; };
-
-typedef AudioMixer = { var masterGain:Float; var masterMuted:Bool; };
-
-typedef AudioMixerOptions = { @:optional var masterGain:Float; @:optional var masterMuted:Bool; };
-
-typedef AudioBusMixerOperation = String;
-
-typedef AudioBusMixerGuard = AudioBusMixerOperation->AudioBus->Void;

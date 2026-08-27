@@ -4,6 +4,7 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class Constants {
   public static final CIRCLE_KAPPA:Float = 0.5522847498307936;
 

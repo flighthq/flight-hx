@@ -4,13 +4,13 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DData;
-import flighthq.types.Node2D.Node2DRuntime;
+import flighthq.types.Node2DData;
+import flighthq.types.Node2DRuntime;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
-import flighthq.types.TextLayout.TextMeasureFunction;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
+import flighthq.types.TextMeasureFunction;
 import flighthq.types.TextVerticalAlign;
 
 class _TextLabelValues {

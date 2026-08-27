@@ -8,9 +8,11 @@ import flighthq.types.WgpuEffectBlendMode;
 import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 
+@:noCompletion
 class WgpuEffectProgramCache {
-  @:noCompletion
-  public static function getWgpuEffectPipeline(state:WgpuRenderState, key:String, fragmentWGSL:String, blend:String = 'replace'):WgpuEffectPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuEffectPipeline(state:WgpuRenderState, key:String, fragmentWGSL:String, blend:String = 'replace'):WgpuEffectPipeline {
     var cache:Null<flighthq._internal._Map<String, WgpuEffectPipeline>> = cast _Runtime.UNDEFINED;
     var existing:Null<WgpuEffectPipeline> = cast _Runtime.UNDEFINED;
     var compiled:WgpuEffectPipeline = cast _Runtime.UNDEFINED;

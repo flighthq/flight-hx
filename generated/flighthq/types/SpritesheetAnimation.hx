@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 
 typedef SpritesheetAnimation = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var frames:Array<Float>; var frameDuration:Float; var frameDurations:Null<Array<Float>>; var direction:SpritesheetAnimationDirection; var repeatCount:Float; var originX:Float; var originY:Float; };

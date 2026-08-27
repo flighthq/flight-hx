@@ -8,9 +8,11 @@ import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
 import flighthq.types.GlRenderState;
 import flighthq.types.RenderState;
 
+@:noCompletion
 class EnableGlTextureResolverGuards {
-  @:noCompletion
-  public static function areGlTextureResolverGuardsEnabled(state:GlRenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areGlTextureResolverGuardsEnabled(state:GlRenderState):Bool {
     return cast (cast areRenderRegistryGuardsEnabled(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Bool);
     return cast null;
   }

@@ -14,13 +14,15 @@ import flighthq.types.WgpuEffectPipeline;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuEffectTintShader {
   public static final TINT_WGSL__wgpuEffectTintShader:String = '\nstruct Uniforms {\n  colorAlpha : vec4f,\n  strength : f32,\n  _pad0 : f32, _pad1 : f32, _pad2 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let a = min(1.0, textureSampleLevel(tex, smp, uv, 0.0).a * uni.colorAlpha.w * uni.strength);\n  return vec4f(uni.colorAlpha.xyz * a, a);\n}';
 
   public static final INVERT_TINT_WGSL__wgpuEffectTintShader:String = '\nstruct Uniforms {\n  colorAlpha : vec4f,\n  strength : f32,\n  _pad0 : f32, _pad1 : f32, _pad2 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let a = min(1.0, (1.0 - textureSampleLevel(tex, smp, uv, 0.0).a) * uni.colorAlpha.w * uni.strength);\n  return vec4f(uni.colorAlpha.xyz * a, a);\n}';
 
-  @:noCompletion
-  public static function applyWgpuEffectInnerClipPass(state:WgpuRenderState, glow:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyWgpuEffectInnerClipPass(state:WgpuRenderState, glow:WgpuRenderTarget, source:WgpuRenderTarget, dest:WgpuRenderTarget):Void {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     pipeline = (cast WgpuEffectTintShader.getWgpuInnerClipShader__wgpuEffectTintShader(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuEffectPipeline);
     drawWgpuDualSourceEffectPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = glow; __callArgument3; }), ({ final __callArgument4:Dynamic = source; __callArgument4; }), ({ final __callArgument5:Dynamic = dest; __callArgument5; }), ({ final __callArgument6:Dynamic = pipeline; __callArgument6; }), ({ final __callArgument7:Dynamic = function(__unused2:flighthq._internal._Float32Array, __unused3:flighthq._internal._Int32Array):Void { _Runtime.callValue(function(__unused0:flighthq._internal._Float32Array, __unused1:flighthq._internal._Int32Array):Void {
@@ -28,8 +30,9 @@ class WgpuEffectTintShader {
     }, cast ([] : Array<Dynamic>)); }; __callArgument7; }));
   }
 
-  @:noCompletion
-  public static function applyWgpuEffectInvertTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyWgpuEffectInvertTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     unpackColorRgba(({ final __callArgument14:Dynamic = WgpuEffectTintShader.scratchTint__wgpuEffectTintShader; __callArgument14; }), (cast color : Float));
     pipeline = (cast WgpuEffectTintShader.getWgpuInvertTintShader__wgpuEffectTintShader(({ final __callArgument16:Dynamic = state; __callArgument16; })) : WgpuEffectPipeline);
@@ -42,8 +45,9 @@ class WgpuEffectTintShader {
     }, cast ([__unused5] : Array<Dynamic>)); }; __callArgument22; }));
   }
 
-  @:noCompletion
-  public static function applyWgpuEffectTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyWgpuEffectTintPass(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, color:Float, alpha:Float, strength:Float):Void {
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     unpackColorRgba(({ final __callArgument28:Dynamic = WgpuEffectTintShader.scratchTint__wgpuEffectTintShader; __callArgument28; }), (cast color : Float));
     pipeline = (cast WgpuEffectTintShader.getWgpuTintShader__wgpuEffectTintShader(({ final __callArgument30:Dynamic = state; __callArgument30; })) : WgpuEffectPipeline);

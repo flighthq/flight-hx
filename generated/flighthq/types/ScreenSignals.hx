@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Screen.ScreenInfo;
 
 typedef ScreenSignals = { var onScreenAdded:Signal<ScreenInfo->Void>; var onScreenMetricsChanged:Signal<ScreenChangeEvent->Void>; var onScreenRemoved:Signal<ScreenInfo->Void>; };

@@ -5,18 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.TriangleMesh3D.writeCollisionHeightfieldBounds3D;
 import flighthq.collision.TriangleMesh3D.writeCollisionTriangleMeshBounds3D;
-import flighthq.types.Collision.CollisionAabb3D;
-import flighthq.types.Collision.CollisionColliderShape3D;
-import flighthq.types.Collision.CollisionHeightfield3D;
-import flighthq.types.Collision.CollisionStaticShape3D;
-import flighthq.types.Collision.CollisionTriangleMesh3D;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.RigidBody3D;
-import flighthq.types.Spatial.SpatialAabb3D;
+import flighthq.types.CollisionAabb3D;
+import flighthq.types.CollisionColliderShape3D;
+import flighthq.types.CollisionHeightfield3D;
+import flighthq.types.CollisionStaticShape3D;
+import flighthq.types.CollisionTriangleMesh3D;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.RigidBody3D;
+import flighthq.types.SpatialAabb3D;
 
+@:noCompletion
 class ColliderTransform {
-  @:noCompletion
-  public static function createPhysics3DColliderWorldShape(local:CollisionColliderShape3D):CollisionColliderShape3D {
+  @:allow(flighthq)
+  @:keep
+  private static function createPhysics3DColliderWorldShape(local:CollisionColliderShape3D):CollisionColliderShape3D {
     {
       var __switchValue = (cast local : { var kind:String; }).kind;
       if (__switchValue == 'sphere') {
@@ -50,8 +52,9 @@ class ColliderTransform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function updatePhysics3DColliderWorldShape(collider:Physics3DCollider, body:RigidBody3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function updatePhysics3DColliderWorldShape(collider:Physics3DCollider, body:RigidBody3D):Void {
     var local:CollisionColliderShape3D = cast _Runtime.UNDEFINED;
     var world:CollisionColliderShape3D = cast _Runtime.UNDEFINED;
     var qX:Float = cast _Runtime.UNDEFINED;
@@ -172,8 +175,9 @@ class ColliderTransform {
     }
   }
 
-  @:noCompletion
-  public static function writePhysics3DColliderBounds(collider:Physics3DCollider, out:SpatialAabb3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function writePhysics3DColliderBounds(collider:Physics3DCollider, out:SpatialAabb3D):Void {
     var shape:CollisionColliderShape3D = cast _Runtime.UNDEFINED;
     shape = _Runtime.field(collider, 'world');
     {

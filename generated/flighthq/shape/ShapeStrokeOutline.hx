@@ -7,12 +7,13 @@ import flighthq.shape.CompactStrokePath.compactStrokePath;
 import flighthq.shape.ShapeFill.appendShapeGeometryCommand;
 import flighthq.shape.ShapeFill.getPathCommandOperandCount;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.PathCommand;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types.ShapeFillRegion;
 import flighthq.types.StrokeStyle;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class ShapeStrokeOutline {
   public static function getShapeStrokeOutlineRegions(commands:Array<ShapeCommandToken>):Null<Array<ShapeFillRegion>> {
     var regions:Array<ShapeFillRegion> = cast _Runtime.UNDEFINED;

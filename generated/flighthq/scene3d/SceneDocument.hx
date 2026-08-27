@@ -19,32 +19,33 @@ import flighthq.types.AnimationTrack;
 import flighthq.types.Entity;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.Material;
-import flighthq.types.Material.MaterialLike;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.MaterialLike;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MorphTarget.MeshMorph;
-import flighthq.types.Node.NodeOf;
+import flighthq.types.MeshMorph;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DTraits;
+import flighthq.types.NodeOf;
 import flighthq.types.Quaternion;
-import flighthq.types.Quaternion.QuaternionLike;
+import flighthq.types.QuaternionLike;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DAnimationPath;
 import flighthq.types.Scene3DAnimationTarget;
 import flighthq.types.Scene3DDocument;
-import flighthq.types.Scene3DDocument.Scene3DDocumentAnimation;
-import flighthq.types.Scene3DDocument.Scene3DDocumentAnimationChannel;
-import flighthq.types.Scene3DDocument.Scene3DDocumentMesh;
-import flighthq.types.Scene3DDocument.Scene3DDocumentNode;
-import flighthq.types.Scene3DDocument.Scene3DDocumentScene;
-import flighthq.types.Scene3DDocument.Scene3DDocumentSkin;
+import flighthq.types.Scene3DDocumentAnimation;
+import flighthq.types.Scene3DDocumentAnimationChannel;
+import flighthq.types.Scene3DDocumentMesh;
+import flighthq.types.Scene3DDocumentNode;
+import flighthq.types.Scene3DDocumentScene;
+import flighthq.types.Scene3DDocumentSkin;
 import flighthq.types.Scene3DMetadata;
 import flighthq.types.Skin;
 import flighthq.types.Transform3D;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class SceneDocument {
   public static function createScene3DFromDocument(document:Scene3DDocument, sceneIndex:Float = 0.0):Scene3D {
     var nodes:Array<Node3D> = cast _Runtime.UNDEFINED;

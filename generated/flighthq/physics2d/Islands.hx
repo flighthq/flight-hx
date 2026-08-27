@@ -5,14 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics2d.Ownership.assertPhysics2DBodyNotStepping;
 import flighthq.physics2d.World.findPhysics2DBody;
-import flighthq.types.Physics2D.Physics2DBodyType;
-import flighthq.types.Physics2D.Physics2DContact;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DJointSolver;
-import flighthq.types.Physics2D.Physics2DSolverConfig;
-import flighthq.types.Physics2D.Physics2DWorld;
-import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.Physics2DBodyType;
+import flighthq.types.Physics2DContact;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DJointSolver;
+import flighthq.types.Physics2DSolverConfig;
+import flighthq.types.Physics2DWorld;
+import flighthq.types.RigidBody2D;
 
+@:noCompletion
 class Islands {
   public static function buildPhysics2DSolveIslands(world:Physics2DWorld):Void {
     var roots:Array<Float> = cast _Runtime.UNDEFINED;

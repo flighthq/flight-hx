@@ -10,6 +10,7 @@ import flighthq.types.Scene3D;
 import flighthq.types.Types.Node3DKind;
 import flighthq.types._internal._Node3DValues.Node3DKind;
 
+@:noCompletion
 class Scene {
   public static function createScene3D(?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):Scene3D {
     var root:Node3D = cast _Runtime.UNDEFINED;

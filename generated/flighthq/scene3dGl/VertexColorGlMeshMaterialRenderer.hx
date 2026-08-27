@@ -16,21 +16,23 @@ import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
+import flighthq.types.GlUnlitDefineKey;
 import flighthq.types.GlUnlitProgram;
-import flighthq.types.GlUnlitProgram.GlUnlitDefineKey;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.VertexColorMaterialKind;
 import flighthq.types.VertexColorMaterial;
 import flighthq.types._internal._VertexColorMaterialValues.VertexColorMaterialKind;
 
+@:noCompletion
 class VertexColorGlMeshMaterialRenderer {
-  @:noCompletion
-  public static final vertexColorGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final vertexColorGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var vertexColor:Null<VertexColorMaterial> = cast _Runtime.UNDEFINED;
     var program:GlUnlitProgram = cast _Runtime.UNDEFINED;

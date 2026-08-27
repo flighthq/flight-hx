@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Rectangle = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var height:Float; var width:Float; var x:Float; var y:Float; };
-
-typedef RectangleLike = { var height:Float; var width:Float; var x:Float; var y:Float; };

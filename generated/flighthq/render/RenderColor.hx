@@ -5,9 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RenderState;
 
+@:noCompletion
 class RenderColor {
-  @:noCompletion
-  public static function setRenderStateBackgroundColor(state:RenderState, color:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setRenderStateBackgroundColor(state:RenderState, color:Float):Void {
     var _state:{ var backgroundColor:Float; var backgroundColorRgba:Array<Float>; var backgroundColorString:String; } = cast _Runtime.UNDEFINED;
     var uint:Float = cast _Runtime.UNDEFINED;
     var r:Float = cast _Runtime.UNDEFINED;

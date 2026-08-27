@@ -6,9 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.menu.Menu.installMenuHostBackend;
 import flighthq.menu.Menu.observeMenuHostResult;
 import flighthq.menu.Menu.showWebContextMenu;
-import flighthq.types.Menu.MenuBackend;
-import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.MenuBackend;
+import flighthq.types.MenuItemTemplate;
 
+@:noCompletion
 class WebMenu {
   public static function enableHostWebMenu():Void {
     var backend:MenuBackend = cast _Runtime.UNDEFINED;
@@ -36,8 +37,9 @@ class WebMenu {
     installMenuHostBackend(({ final __callArgument0:Dynamic = backend; __callArgument0; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebMenuForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebMenuForTest():Void {
     (WebMenu._enabled__webMenu = cast (false : Dynamic));
   }
 

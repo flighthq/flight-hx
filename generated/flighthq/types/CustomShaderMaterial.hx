@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types._internal._CustomShaderMaterialValues.CustomShaderMaterialKind;
 
 typedef CustomShaderMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var shaderKey:String; var textures:Null<flighthq._internal._Record<String, Texture>>; var uniforms:Null<flighthq._internal._Record<String, flighthq._internal._Union2<Float, Array<Float>>>>; };

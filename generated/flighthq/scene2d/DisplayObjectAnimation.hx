@@ -13,6 +13,7 @@ import flighthq.types.Node2D;
 import flighthq.types.Node2DAnimationPath;
 import flighthq.types.Node2DAnimationTarget;
 
+@:noCompletion
 class DisplayObjectAnimation {
   public static function applyAnimationClipToNode2D(clip:AnimationClip, time:Float):Void {
     for (channel in _Runtime.iterable(clip.channels)) {

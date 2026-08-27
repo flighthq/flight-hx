@@ -4,6 +4,7 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class InterpolationAdvanced {
   public static function damp(current:Float, target:Float, lambda:Float, deltaTime:Float):Float {
     if ((cast ((cast ((cast deltaTime : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast lambda : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast current; }

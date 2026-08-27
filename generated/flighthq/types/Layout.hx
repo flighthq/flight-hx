@@ -4,40 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef AnchorLayoutItemStyle = { @:optional var align:ViewportAlign; @:optional var bottom:Null<Float>; @:optional var height:Null<Float>; @:optional var left:Null<Float>; @:optional var right:Null<Float>; @:optional var top:Null<Float>; @:optional var width:Null<Float>; };
-
-typedef FlexLayoutAlign = String;
-
-typedef FlexLayoutDirection = String;
-
-typedef FlexLayoutJustify = String;
-
-typedef FlexLayoutWrap = String;
-
-typedef FlexLayoutContainerStyle = { @:optional var align:FlexLayoutAlign; @:optional var direction:FlexLayoutDirection; @:optional var gap:Float; @:optional var justify:FlexLayoutJustify; @:optional var paddingBottom:Float; @:optional var paddingLeft:Float; @:optional var paddingRight:Float; @:optional var paddingTop:Float; @:optional var wrap:FlexLayoutWrap; };
-
-typedef FlexLayoutItemStyle = { @:optional var alignSelf:flighthq._internal._Union2<FlexLayoutAlign, String>; @:optional var basis:flighthq._internal._Union2<Float, String>; @:optional var grow:Float; @:optional var shrink:Float; };
-
-typedef GridLayoutTrack = flighthq._internal._Union2<flighthq._internal._Union2<{ var kind:String; }, { var kind:String; var size:Float; }>, { var fraction:Float; var kind:String; }>;
-
-typedef GridLayoutContainerStyle = { @:optional var columnGap:Float; var columns:Array<GridLayoutTrack>; @:optional var paddingBottom:Float; @:optional var paddingLeft:Float; @:optional var paddingRight:Float; @:optional var paddingTop:Float; @:optional var rowGap:Float; var rows:Array<GridLayoutTrack>; };
-
-typedef GridLayoutItemStyle = { @:optional var column:Float; @:optional var columnSpan:Float; @:optional var row:Float; @:optional var rowSpan:Float; };
-
-typedef LayoutNode<ContainerStyle, ItemStyle> = { var containerStyle:Null<ContainerStyle>; var itemStyle:Null<ItemStyle>; var kind:String; var parentIndex:Float; };
-
-typedef LayoutTree = { var nodes:Array<LayoutNode<Dynamic, Dynamic>>; };
-
-typedef LayoutResolutionFailureKind = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef LayoutResolutionExplanation = { var actualLength:Float; var kind:LayoutResolutionFailureKind; var nodeIndex:Float; var parentIndex:Float; var requiredLength:Float; var resolverKind:Null<String>; };
-
-typedef LayoutResolver = flighthq._internal._Float32Array->LayoutTree->flighthq._internal._ArrayLike<Float>->Float->Float->Null<LayoutResolutionFailureKind>;
-
-typedef LayoutResolutionGuard = LayoutResolutionExplanation->Void;
-
-typedef LayoutState = { var guard:Null<LayoutResolutionGuard>; var lastFailureActualLength:Float; var lastFailureKind:Null<LayoutResolutionFailureKind>; var lastFailureNodeIndex:Float; var lastFailureParentIndex:Float; var lastFailureRequiredLength:Float; var lastFailureResolverKind:Null<String>; var resolvers:flighthq._internal._Map<String, LayoutResolver>; };
-
+@:noCompletion
 class Layout {
   public static final AnchorLayoutKind:String = 'AnchorLayout';
 

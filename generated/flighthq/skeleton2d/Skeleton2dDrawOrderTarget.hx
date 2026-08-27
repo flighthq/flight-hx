@@ -15,22 +15,25 @@ import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationInterpolation;
 import flighthq.types.AnimationTrack;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeTraits;
 import flighthq.types.NodeOrderList;
+import flighthq.types.NodeTraits;
 import flighthq.types.Skeleton2DAnimationTargetBinder;
 import flighthq.types.Skeleton2DDrawOrderAnimationTarget;
 import flighthq.types.Skeleton2DDrawOrderTimeline;
 import flighthq.types._internal._Skeleton2DAnimationTargetKindValues.Skeleton2DAnimationTargetKindValue as TargetKind;
 
+@:noCompletion
 class Skeleton2dDrawOrderTarget {
-  @:noCompletion
-  public static function createSkeleton2DDrawOrderAnimationTarget<Traits:flighthq._internal._Object>(nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Skeleton2DDrawOrderAnimationTarget<Traits> {
+  @:allow(flighthq)
+  @:keep
+  private static function createSkeleton2DDrawOrderAnimationTarget<Traits:flighthq._internal._Object>(nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Skeleton2DDrawOrderAnimationTarget<Traits> {
     return cast { kind: (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder, nodes: nodes, orderList: orderList };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createSkeleton2DDrawOrderChannel<Traits:flighthq._internal._Object>(timeline:Skeleton2DDrawOrderTimeline, nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Null<AnimationChannel> {
+  @:allow(flighthq)
+  @:keep
+  private static function createSkeleton2DDrawOrderChannel<Traits:flighthq._internal._Object>(timeline:Skeleton2DDrawOrderTimeline, nodes:Array<Null<Node<Traits>>>, orderList:NodeOrderList<Traits>):Null<AnimationChannel> {
     var keyframes:Float = cast _Runtime.UNDEFINED;
     var slotCount:Float = cast _Runtime.UNDEFINED;
     keyframes = _Runtime.field(_Runtime.field(timeline, 'times'), 'length');
@@ -41,13 +44,15 @@ class Skeleton2dDrawOrderTarget {
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerSkeleton2DDrawOrderAnimationBinder():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerSkeleton2DDrawOrderAnimationBinder():Void {
     registerSkeleton2DAnimationTargetBinder((cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder : String), ({ final __callArgument0:Dynamic = Skeleton2dDrawOrderTarget.bindSkeleton2DDrawOrderChannel__skeleton2dDrawOrderTarget; __callArgument0; }));
   }
 
-  @:noCompletion
-  public static function unregisterSkeleton2DDrawOrderAnimationBinder():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function unregisterSkeleton2DDrawOrderAnimationBinder():Void {
     unregisterSkeleton2DAnimationTargetBinder((cast (cast TargetKind : { var Bone:String; var Constraint:String; var Deform:String; var DrawOrder:String; var Slot:String; }).DrawOrder : String));
   }
 

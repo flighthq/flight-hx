@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ParticleBurstEntry = { var time:Float; var count:Float; var cycles:Float; var interval:Float; };
-
 typedef ParticleBurstSchedule = Array<ParticleBurstEntry>;

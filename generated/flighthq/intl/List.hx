@@ -7,6 +7,7 @@ import flighthq.intl.Cache.getCacheKey;
 import flighthq.intl.Cache.getCached;
 import flighthq.types.LocaleInput;
 
+@:noCompletion
 class List {
   public static function formatList(items:Array<String>, locale:LocaleInput, ?options:Dynamic):String {
     var key:String = cast _Runtime.UNDEFINED;

@@ -5,19 +5,22 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.GjkDistance3D.createCollisionDistance3D;
 import flighthq.collision.GjkDistance3D.writeCollisionDistance3D;
-import flighthq.types.Collision.CollisionDistance3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionTimeOfImpact3D;
+import flighthq.types.CollisionDistance3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionTimeOfImpact3D;
 
+@:noCompletion
 class SweepCollisionShape3D {
-  @:noCompletion
-  public static function createCollisionTimeOfImpact3D():CollisionTimeOfImpact3D {
+  @:allow(flighthq)
+  @:keep
+  private static function createCollisionTimeOfImpact3D():CollisionTimeOfImpact3D {
     return cast { fraction: 0.0, x: 0.0, y: 0.0, z: 0.0, normalX: 0.0, normalY: 0.0, normalZ: 0.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function sweepCollisionShape3D(shapeA:CollisionShape3D, translationAX:Float, translationAY:Float, translationAZ:Float, shapeB:CollisionShape3D, translationBX:Float, translationBY:Float, translationBZ:Float, out:CollisionTimeOfImpact3D, maxFraction:Float = 1.0):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function sweepCollisionShape3D(shapeA:CollisionShape3D, translationAX:Float, translationAY:Float, translationAZ:Float, shapeB:CollisionShape3D, translationBX:Float, translationBY:Float, translationBZ:Float, out:CollisionTimeOfImpact3D, maxFraction:Float = 1.0):Bool {
     var relativeX:Float = cast _Runtime.UNDEFINED;
     var relativeY:Float = cast _Runtime.UNDEFINED;
     var relativeZ:Float = cast _Runtime.UNDEFINED;

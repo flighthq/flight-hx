@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapPixelate {
   public static function pixelateBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, blockSize:Float):Void {
     var block:Float = cast _Runtime.UNDEFINED;

@@ -6,9 +6,9 @@ import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
-import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.SlotTable;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureContainer;
 import flighthq.types.TextureContainerFormat;
 import flighthq.types.TextureContainerLevel;
@@ -16,23 +16,26 @@ import flighthq.types.TextureContainerSupercompression;
 import flighthq.types.WgpuCompressedTextureDecoder;
 import flighthq.types.WgpuCompressedTextureSupport;
 import flighthq.types.WgpuCompressedTextureUploader;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 typedef WgpuCompressedFormatInfo__wgpuCompressedTexture = { var blockHeight:Float; var blockWidth:Float; var bytesPerBlock:Float; var format:flighthq._internal.dom.GPUTextureFormat; };
 
+@:noCompletion
 class WgpuCompressedTexture {
-  @:noCompletion
-  public static function detectWgpuCompressedTextureSupport(device:flighthq._internal.dom.GPUDevice):WgpuCompressedTextureSupport {
+  @:allow(flighthq)
+  @:keep
+  private static function detectWgpuCompressedTextureSupport(device:flighthq._internal.dom.GPUDevice):WgpuCompressedTextureSupport {
     return cast { astc: ((cast device.features : flighthq._internal.dom.GPUSupportedFeatures).has('texture-compression-astc')), bc: ((cast device.features : flighthq._internal.dom.GPUSupportedFeatures).has('texture-compression-bc')), etc2: ((cast device.features : flighthq._internal.dom.GPUSupportedFeatures).has('texture-compression-etc2')) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuCompressedTextureFormat(device:flighthq._internal.dom.GPUDevice, format:TextureContainerFormat):Null<flighthq._internal.dom.GPUTextureFormat> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuCompressedTextureFormat(device:flighthq._internal.dom.GPUDevice, format:TextureContainerFormat):Null<flighthq._internal.dom.GPUTextureFormat> {
     var info:Null<WgpuCompressedFormatInfo__wgpuCompressedTexture> = cast _Runtime.UNDEFINED;
     var support:WgpuCompressedTextureSupport = cast _Runtime.UNDEFINED;
     info = (cast WgpuCompressedTexture.getCompressedFormatInfo__wgpuCompressedTexture(({ final __callArgument0:Dynamic = format; __callArgument0; })) : Null<WgpuCompressedFormatInfo__wgpuCompressedTexture>);
@@ -44,8 +47,9 @@ class WgpuCompressedTexture {
     return cast null;
   }
 
-  @:noCompletion
-  public static function hasWgpuCompressedTextureFormat(support:WgpuCompressedTextureSupport, format:TextureContainerFormat):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasWgpuCompressedTextureFormat(support:WgpuCompressedTextureSupport, format:TextureContainerFormat):Bool {
     if ((cast _Runtime.strictEquals((cast WgpuCompressedTexture.getCompressedFormatInfo__wgpuCompressedTexture(({ final __callArgument4:Dynamic = format; __callArgument4; })) : Null<WgpuCompressedFormatInfo__wgpuCompressedTexture>), null) : Bool)) { return cast false; }
     if ((cast StringTools.startsWith(format, 'bc') : Bool)) { return cast _Runtime.field(support, 'bc'); }
     if ((cast StringTools.startsWith(format, 'astc') : Bool)) { return cast _Runtime.field(support, 'astc'); }
@@ -69,8 +73,9 @@ class WgpuCompressedTexture {
     ((cast runtime.registries : { var compressedTextureUpload:SlotTable<WgpuCompressedTextureUploader>; }).compressedTextureUpload = cast (_Runtime.mergeObjects([table, { entry: ((cast _Runtime.strictEquals(uploader, null) : Bool) ? (cast null : Dynamic) : (cast { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: WgpuCompressedTexture.uploadWgpuCompressedImage__wgpuCompressedTexture } : Dynamic)) }]) : SlotTable<WgpuCompressedTextureUploader>));
   }
 
-  @:noCompletion
-  public static function uploadWgpuCompressedTextureContainer(state:WgpuRenderState, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:WgpuCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Null<flighthq._internal.dom.GPUTexture> {
+  @:allow(flighthq)
+  @:keep
+  private static function uploadWgpuCompressedTextureContainer(state:WgpuRenderState, container:TextureContainer, payload:flighthq._internal._UInt8Array, ?decode:WgpuCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Null<flighthq._internal.dom.GPUTexture> {
     var native:Null<String> = cast _Runtime.UNDEFINED;
     var decoded:Array<flighthq._internal._UInt8ClampedArray> = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.GPUTexture = cast _Runtime.UNDEFINED;

@@ -6,13 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.ParticleConfigParse.ParticleConfigParseResult;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.ParticleConfigParseResult;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleFormatCodec;
 import flighthq.types.ParticleFormatKind;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class FormatRegistry {
   public static function detectRegisteredParticleFormat(text:String):Null<String> {
     for (__iteration0 in _Runtime.iterable(FormatRegistry._registry__formatRegistry)) {

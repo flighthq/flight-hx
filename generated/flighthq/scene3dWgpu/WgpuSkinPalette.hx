@@ -8,23 +8,25 @@ import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshGeometryRuntime;
-import flighthq.types.MeshGeometry.VertexAttribute;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexSemantic;
+import flighthq.types.MeshGeometryRuntime;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types.Skin;
 import flighthq.types.Types.EntityRuntimeKey;
+import flighthq.types.VertexAttribute;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexSemantic;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime;
 import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class WgpuSkinPalette {
-  @:noCompletion
-  public static function destroyWgpuSkinPalette(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuSkinPalette(state:WgpuRenderState):Void {
     var runtime:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
     ({ final __hostTypeCall2 = runtime.skinPaletteTexture; __hostTypeCall2 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall2 : flighthq._internal.dom.GPUTexture).destroy(); });
@@ -44,8 +46,9 @@ class WgpuSkinPalette {
     (runtime.skinMeshDrawBindGroup = cast (null : Null<flighthq._internal.dom.GPUBindGroup>));
   }
 
-  @:noCompletion
-  public static function ensureWgpuSkinDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuSkinDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):flighthq._internal.dom.GPUBindGroup {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var view:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
@@ -60,8 +63,9 @@ class WgpuSkinPalette {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuSkinDrawLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuSkinDrawLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : WgpuScene3DRuntime);
     if ((cast _Runtime.strictEquals(scene.skinDrawBindGroupLayout, null) : Bool)) {
@@ -71,8 +75,9 @@ class WgpuSkinPalette {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuSkinMeshDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array, normalMatrices:flighthq._internal._Float32Array):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuSkinMeshDrawBindGroup(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array, normalMatrices:flighthq._internal._Float32Array):flighthq._internal.dom.GPUBindGroup {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var poseView:flighthq._internal.dom.GPUTextureView = cast _Runtime.UNDEFINED;
@@ -90,8 +95,9 @@ class WgpuSkinPalette {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuSkinMeshDrawLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuSkinMeshDrawLayout(state:WgpuRenderState):flighthq._internal.dom.GPUBindGroupLayout {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument30:Dynamic = state; __callArgument30; })) : WgpuScene3DRuntime);
     if ((cast _Runtime.strictEquals(scene.skinMeshDrawBindGroupLayout, null) : Bool)) {
@@ -105,8 +111,9 @@ class WgpuSkinPalette {
     ((cast (cast getWgpuScene3DRuntime(({ final __callArgument32:Dynamic = state; __callArgument32; })) : WgpuScene3DRuntime) : { var skinningAdapter:flighthq._internal._Any; }).skinningAdapter = cast (WgpuSkinPalette.WGPU_SKINNING_ADAPTER__wgpuSkinPalette : flighthq._internal._Any));
   }
 
-  @:noCompletion
-  public static function uploadWgpuSkinNormalPalette(state:WgpuRenderState, normalMatrices:flighthq._internal._Float32Array):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function uploadWgpuSkinNormalPalette(state:WgpuRenderState, normalMatrices:flighthq._internal._Float32Array):Float {
     var runtime:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var bases:flighthq._internal._Map<flighthq._internal._Float32Array, Float> = cast _Runtime.UNDEFINED;
     var existing:Null<Float> = cast _Runtime.UNDEFINED;
@@ -141,8 +148,9 @@ class WgpuSkinPalette {
     return cast null;
   }
 
-  @:noCompletion
-  public static function uploadWgpuSkinPalette(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function uploadWgpuSkinPalette(state:WgpuRenderState, jointMatrices:flighthq._internal._Float32Array):Float {
     var runtime:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     var bases:flighthq._internal._Map<flighthq._internal._Float32Array, Float> = cast _Runtime.UNDEFINED;
     var existing:Null<Float> = cast _Runtime.UNDEFINED;

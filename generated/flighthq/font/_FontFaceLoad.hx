@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.font.FontFormat.inferFontFormatFromUrl;
 import flighthq.font.FontShorthand.getFontShorthand;
-import flighthq.types.Font.FontUrl;
+import flighthq.types.FontUrl;
 
+@:noCompletion
 class _FontFaceLoad {
   public static function _loadFontFaceFromBytes(family:String, bytes:flighthq._internal._UInt8Array):flighthq._internal._Promise<flighthq._internal.dom.FontFace> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {

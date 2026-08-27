@@ -7,9 +7,10 @@ import flighthq.types.FontVariation;
 import flighthq.types.MarkupClassResolver;
 import flighthq.types.MarkupTagRegistry;
 import flighthq.types.TextFormat;
-import flighthq.types.TextFormat.TextFormatAlign;
-import flighthq.types.TextFormat.TextFormatListMarker;
+import flighthq.types.TextFormatAlign;
+import flighthq.types.TextFormatListMarker;
 
+@:noCompletion
 class MarkupClassStyles {
   public static function registerMarkupClassStyles(registry:MarkupTagRegistry, styles:flighthq._internal._Record<String, { @:optional var align:Null<TextFormatAlign>; @:optional var blockIndent:Null<Float>; @:optional var bold:Null<Bool>; @:optional var bullet:Null<Bool>; @:optional var color:Null<Float>; @:optional var font:Null<String>; @:optional var indent:Null<Float>; @:optional var italic:Null<Bool>; @:optional var kerning:Null<Bool>; @:optional var leading:Null<Float>; @:optional var leftMargin:Null<Float>; @:optional var letterSpacing:Null<Float>; @:optional var listMarker:Null<TextFormatListMarker>; @:optional var rightMargin:Null<Float>; @:optional var size:Null<Float>; @:optional var strikethrough:Null<Bool>; @:optional var tabStops:Null<Array<Float>>; @:optional var target:Null<String>; @:optional var underline:Null<Bool>; @:optional var url:Null<String>; @:optional var variations:Null<Array<FontVariation>>; }>):Void {
     var resolver:MarkupClassResolver = cast _Runtime.UNDEFINED;

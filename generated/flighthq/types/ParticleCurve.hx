@@ -5,7 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef ParticleCurve = Array<Float>;
-
-typedef CurveKeyframe = { var time:Float; var value:Float; };
-
-typedef ColorKeyframe = { var time:Float; var r:Float; var g:Float; var b:Float; };

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class EaseLinear {
   public static final easeLinear:EasingFunction = (cast function(t:Float):Float return t);
 }

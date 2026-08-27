@@ -5,37 +5,41 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.types.Entity.Kind;
 import flighthq.types.GlMeshMaterialRenderer;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
 import flighthq.types.Material;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
+@:noCompletion
 class GlMeshMaterialRegistry {
-  @:noCompletion
-  public static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlMeshMaterialRenderer(state:GlRenderState, kind:Kind):Null<GlMeshMaterialRenderer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMeshMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers : KeyedTable<GlMeshMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<GlMeshMaterialRenderer>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural4 = entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:GlMeshMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerGlMeshMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerGlMeshMaterialRenderer(state:GlRenderState, kind:Kind, renderer:GlMeshMaterialRenderer):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : GlRenderStateRuntime);
     ((cast runtime.registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers : Dynamic), (cast kind : String), ({ final __callArgument7:Dynamic = renderer; __callArgument7; })) : KeyedTable<GlMeshMaterialRenderer>) : KeyedTable<GlMeshMaterialRenderer>));
   }
 
-  @:noCompletion
-  public static function resolveGlMeshMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMeshMaterialRenderer> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveGlMeshMaterialRenderer(state:GlRenderState, material:Null<Material>):Null<GlMeshMaterialRenderer> {
     var entries:flighthq._internal._Map<String, RegistryTableEntry<GlMeshMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var fallback:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:GlMeshMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     entries = (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument9:Dynamic = state; __callArgument9; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var meshMaterialRenderers:KeyedTable<GlMeshMaterialRenderer>; }).meshMaterialRenderers : KeyedTable<GlMeshMaterialRenderer>).entries;

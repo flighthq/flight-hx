@@ -8,11 +8,13 @@ import flighthq.fontFormats.SfntAssembly.encodeSfntLoca;
 import flighthq.fontFormats.SfntAssembly.encodeSfntSimpleGlyph;
 import flighthq.types.Woff2GlyfStreams;
 
+@:noCompletion
 class Woff2GlyfTransform {
   public static final WOFF2_GLYF_HEADER_BYTES__woff2GlyfTransform:Float = 36.0;
 
-  @:noCompletion
-  public static function createWoff2TransformReverser():String->flighthq._internal._UInt8Array->flighthq._internal._Map<String, flighthq._internal._UInt8Array>->Null<flighthq._internal._UInt8Array> {
+  @:allow(flighthq)
+  @:keep
+  private static function createWoff2TransformReverser():String->flighthq._internal._UInt8Array->flighthq._internal._Map<String, flighthq._internal._UInt8Array>->Null<flighthq._internal._UInt8Array> {
     var reversed:Null<{ var glyf:flighthq._internal._UInt8Array; var loca:flighthq._internal._UInt8Array; }> = cast _Runtime.UNDEFINED;
     var reverse:Null<flighthq._internal._UInt8Array>->Bool = cast _Runtime.UNDEFINED;
     reversed = null;
@@ -35,8 +37,9 @@ class Woff2GlyfTransform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function decodeWoff2Triplet(code:Float, glyphStream:flighthq._internal._UInt8Array, at:Float):Null<{ var dx:Float; var dy:Float; var used:Float; }> {
+  @:allow(flighthq)
+  @:keep
+  private static function decodeWoff2Triplet(code:Float, glyphStream:flighthq._internal._UInt8Array, at:Float):Null<{ var dx:Float; var dy:Float; var used:Float; }> {
     var used:Float = cast _Runtime.UNDEFINED;
     var b0:Float = cast _Runtime.UNDEFINED;
     var b1:Float = cast _Runtime.UNDEFINED;
@@ -75,14 +78,16 @@ class Woff2GlyfTransform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWoff2BboxBitmapByteLength(glyphCount:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function getWoff2BboxBitmapByteLength(glyphCount:Float):Float {
     return cast _Runtime.multiplyNumbers(4.0, HxMath.ceil((glyphCount / 32.0)));
     return cast null;
   }
 
-  @:noCompletion
-  public static function hasWoff2GlyphBbox(bboxStream:flighthq._internal._UInt8Array, glyphIndex:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasWoff2GlyphBbox(bboxStream:flighthq._internal._UInt8Array, glyphIndex:Float):Bool {
     var byte:Float = cast _Runtime.UNDEFINED;
     byte = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bboxStream : flighthq._internal._UInt8Array), (cast (_Runtime.toInt32(glyphIndex) >> 3) : Float));
     if ((cast _Runtime.strictEquals(byte, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
@@ -90,14 +95,16 @@ class Woff2GlyfTransform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isWoff2PointOnCurve(flag:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isWoff2PointOnCurve(flag:Float):Bool {
     return cast _Runtime.strictEquals((_Runtime.toInt32(flag) & _Runtime.toInt32(Woff2GlyfTransform.WOFF2_POINT_OFF_CURVE__woff2GlyfTransform)), 0.0);
     return cast null;
   }
 
-  @:noCompletion
-  public static function measureWoff2CompositeGlyph(compositeStream:flighthq._internal._UInt8Array, at:Float):Null<{ var byteLength:Float; var hasInstructions:Bool; }> {
+  @:allow(flighthq)
+  @:keep
+  private static function measureWoff2CompositeGlyph(compositeStream:flighthq._internal._UInt8Array, at:Float):Null<{ var byteLength:Float; var hasInstructions:Bool; }> {
     var start:Float = cast _Runtime.UNDEFINED;
     var cursor:Float = cast _Runtime.UNDEFINED;
     var hasInstructions:Bool = cast _Runtime.UNDEFINED;
@@ -120,8 +127,9 @@ class Woff2GlyfTransform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function readWoff2GlyfStreams(transformed:flighthq._internal._UInt8Array):Null<Woff2GlyfStreams> {
+  @:allow(flighthq)
+  @:keep
+  private static function readWoff2GlyfStreams(transformed:flighthq._internal._UInt8Array):Null<Woff2GlyfStreams> {
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var glyphCount:Float = cast _Runtime.UNDEFINED;
     var indexFormat:Float = cast _Runtime.UNDEFINED;
@@ -194,8 +202,9 @@ class Woff2GlyfTransform {
 
   public static final WOFF2_SHORT_LOWEST__woff2GlyfTransform:Float = 253.0;
 
-  @:noCompletion
-  public static function readWoff2Short(bytes:flighthq._internal._UInt8Array, cursor:{ var at:Float; }, end:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function readWoff2Short(bytes:flighthq._internal._UInt8Array, cursor:{ var at:Float; }, end:Float):Float {
     var code:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast (cast cursor : { var at:Float; }).at : Float) >= (cast end : Float)) : Bool)) { return cast -1.0; }
     code = flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (cast cursor : { var at:Float; }).at : Float));
@@ -256,8 +265,9 @@ class Woff2GlyfTransform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function reverseWoff2GlyfTransform(streams:Woff2GlyfStreams):Null<{ var glyf:flighthq._internal._UInt8Array; var loca:flighthq._internal._UInt8Array; }> {
+  @:allow(flighthq)
+  @:keep
+  private static function reverseWoff2GlyfTransform(streams:Woff2GlyfStreams):Null<{ var glyf:flighthq._internal._UInt8Array; var loca:flighthq._internal._UInt8Array; }> {
     var contourView:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var points:{ var at:Float; } = cast _Runtime.UNDEFINED;
     var glyph:{ var at:Float; } = cast _Runtime.UNDEFINED;

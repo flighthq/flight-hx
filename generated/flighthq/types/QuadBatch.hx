@@ -3,18 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
-import flighthq.types.Material.MaterialData;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeTraitsKey;
-import flighthq.types.Node2D.Node2DData;
-import flighthq.types.Node2D.Node2DRuntime;
-import flighthq.types.Node2D.Node2DTraits;
 import flighthq.types._internal._QuadBatchValues.QuadBatchKind;
-
-typedef QuadBatchData = { var atlas:Null<TextureAtlas>; var ids:flighthq._internal._UInt16Array; var instanceCount:Float; var materialData:Null<Array<Null<MaterialData>>>; var transforms:flighthq._internal._Float32Array; var transformType:QuadTransformType; };
-
-typedef QuadBatchRuntime = { var binding:Null<flighthq._internal._Object>; var colorAdjustments:Null<Array<Adjustment>>; var colorAdjustmentsUnsupported:Bool; var resolvedColorMatrix:Null<Array<Float>>; var resolvedColorScaleBias:Null<ColorScaleBias>; var appearanceId:Float; var boundsUsingLocalBoundsId:Float; var boundsUsingLocalTransformId:Float; var canAddChild:Node<Node2DTraits>->Node<Node2DTraits>->Bool; var children:Null<Array<Node<Node2DTraits>>>; var childrenId:Float; @:optional var traits:NodeTraitsKey<Node2DTraits>; var interactionSignals:Null<InteractionSignals>; var localBoundsId:Float; var localBoundsUsingLocalBoundsId:Float; var localContentId:Float; var localTransformId:Float; var localTransformUsingLocalTransformId:Float; var nodeSignals:Null<NodeSignals>; var interactionState:Null<NodeInteractionState>; var parent:Null<Node<Node2DTraits>>; var parentReferenceId:Float; var worldBoundsUsingLocalBoundsId:Float; var worldBoundsUsingWorldTransformId:Float; var worldTransformId:Float; var worldTransformUsingLocalTransformId:Float; var worldTransformUsingParentTransformId:Float; var localMatrix:Null<Matrix>; var rotationAngle:Float; var rotationCosine:Float; var rotationSine:Float; var worldMatrix:Null<Matrix>; var boundsRectangle:Null<Rectangle>; var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; var localBoundsRectangle:Null<Rectangle>; var worldBoundsRectangle:Null<Rectangle>; var scene2d:Null<Scene2D>; var instanceVelocities:Null<flighthq._internal._Float32Array>; };
 
 typedef QuadBatch = { var data:QuadBatchData; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node2DTraits>>; var alpha:Float; var visible:Bool; var blendMode:Null<BlendMode>; var clip:Null<ClipRegion>; var material:Null<Material>; var materialData:Null<MaterialData>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };

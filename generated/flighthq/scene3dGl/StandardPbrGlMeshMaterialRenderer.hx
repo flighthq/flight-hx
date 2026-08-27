@@ -16,8 +16,8 @@ import flighthq.types.Camera3D;
 import flighthq.types.GlLitProgram;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlMeshProgram;
+import flighthq.types.GlPbrDefineKey;
 import flighthq.types.GlPbrProgram;
-import flighthq.types.GlPbrProgram.GlPbrDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Material;
@@ -26,9 +26,11 @@ import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.StandardPbrMaterial;
 
+@:noCompletion
 class StandardPbrGlMeshMaterialRenderer {
-  @:noCompletion
-  public static final standardPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final standardPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var pbr:Null<StandardPbrMaterial> = cast _Runtime.UNDEFINED;
     var program:GlPbrProgram = cast _Runtime.UNDEFINED;

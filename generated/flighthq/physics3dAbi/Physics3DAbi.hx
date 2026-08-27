@@ -5,17 +5,18 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics3dAbi.ReferencePhysics3DAbi.createReferencePhysics3DAbi;
 import flighthq.types.Physics3DAbi;
-import flighthq.types.Physics3DAbi.Physics3DAbiBodyBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiCommandBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiContactBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiContactHooks;
-import flighthq.types.Physics3DAbi.Physics3DAbiContactSelection;
-import flighthq.types.Physics3DAbi.Physics3DAbiExecutionResult;
-import flighthq.types.Physics3DAbi.Physics3DAbiJointBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiStepStatus;
-import flighthq.types.Physics3DAbi.Physics3DAbiWorldHandle;
-import flighthq.types.Physics3DAbi.Physics3DAbiWorldStatus;
+import flighthq.types.Physics3DAbiBodyBuffer;
+import flighthq.types.Physics3DAbiCommandBuffer;
+import flighthq.types.Physics3DAbiContactBuffer;
+import flighthq.types.Physics3DAbiContactHooks;
+import flighthq.types.Physics3DAbiContactSelection;
+import flighthq.types.Physics3DAbiExecutionResult;
+import flighthq.types.Physics3DAbiJointBuffer;
+import flighthq.types.Physics3DAbiStepStatus;
+import flighthq.types.Physics3DAbiWorldHandle;
+import flighthq.types.Physics3DAbiWorldStatus;
 
+@:noCompletion
 class Physics3DAbi {
   public static function createPhysics3DAbi():flighthq.types.Physics3DAbi {
     return cast (cast createReferencePhysics3DAbi() : flighthq.types.Physics3DAbi);

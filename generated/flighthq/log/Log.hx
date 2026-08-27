@@ -7,17 +7,17 @@ import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.BufferedLogSink;
 import flighthq.types.FileLogSink;
-import flighthq.types.Log.LogContext;
-import flighthq.types.Log.LogData;
-import flighthq.types.Log.LogDataProvider;
-import flighthq.types.Log.LogEntry;
-import flighthq.types.Log.LogFormatter;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.Log.LogSink;
-import flighthq.types.Log.LogSpan;
-import flighthq.types.Log.LogTimer;
-import flighthq.types.Log.LogTransportBackend;
+import flighthq.types.LogContext;
+import flighthq.types.LogData;
+import flighthq.types.LogDataProvider;
+import flighthq.types.LogEntry;
+import flighthq.types.LogFormatter;
+import flighthq.types.LogLevel;
 import flighthq.types.LogSignals;
+import flighthq.types.LogSink;
+import flighthq.types.LogSpan;
+import flighthq.types.LogTimer;
+import flighthq.types.LogTransportBackend;
 import flighthq.types.MemoryLogSink;
 import flighthq.types.RateLimitedLogSink;
 import flighthq.types.Signal;
@@ -528,8 +528,9 @@ class Log {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getLogTransportBackend():Null<LogTransportBackend> {
+  @:allow(flighthq)
+  @:keep
+  private static function getLogTransportBackend():Null<LogTransportBackend> {
     return cast Log._transportBackend__log;
     return cast null;
   }
@@ -735,8 +736,9 @@ class Log {
     if ((cast !_Runtime.strictEquals(sink, null) : Bool)) { _Runtime.callProperty(Log._sinks__log, 'push', cast ([sink] : Array<Dynamic>)); }
   }
 
-  @:noCompletion
-  public static function setLogTransportBackend(backend:Null<LogTransportBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setLogTransportBackend(backend:Null<LogTransportBackend>):Void {
     (Log._transportBackend__log = cast (backend : Dynamic));
   }
 

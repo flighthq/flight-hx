@@ -13,27 +13,29 @@ import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.renderGl.GlRenderTargetPool.acquireGlRenderTarget;
 import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
-import flighthq.types.EffectSourceMode.InnerEffectSourceMode;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GlRenderTargetPool;
+import flighthq.types.InnerEffectSourceMode;
 import flighthq.types.InnerGlowEffect;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 
 typedef InnerClipLocations__glInnerGlowEffect = GlFullscreenProgram;
 
+@:noCompletion
 class GlInnerGlowEffect {
   public static final INNER_CLIP_FRAGMENT_SRC__glInnerGlowEffect:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture0;\nuniform sampler2D u_texture1;\nout vec4 fragColor;\nvoid main() {\n  vec4 glow = texture(u_texture0, v_texCoord);\n  float srcAlpha = texture(u_texture1, v_texCoord).a;\n  fragColor = glow * srcAlpha;\n}';
 
   public static final clipShaders__glInnerGlowEffect:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static function applyInnerGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerGlowEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyInnerGlowEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:InnerGlowEffect):Void {
     var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
     var s0:GlRenderTarget = cast _Runtime.UNDEFINED;
     var s1:GlRenderTarget = cast _Runtime.UNDEFINED;

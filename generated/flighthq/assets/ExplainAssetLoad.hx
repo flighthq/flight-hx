@@ -3,14 +3,15 @@ package flighthq.assets;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Assets.AssetDescriptor;
-import flighthq.types.Assets.AssetEntry;
-import flighthq.types.Assets.AssetLibrary;
-import flighthq.types.Assets.AssetLibraryRuntime;
-import flighthq.types.Assets.AssetLoadExplanation;
-import flighthq.types.Assets.AssetLoaderAdapter;
-import flighthq.types.Assets.AssetType;
+import flighthq.types.AssetDescriptor;
+import flighthq.types.AssetEntry;
+import flighthq.types.AssetLibrary;
+import flighthq.types.AssetLibraryRuntime;
+import flighthq.types.AssetLoadExplanation;
+import flighthq.types.AssetLoaderAdapter;
+import flighthq.types.AssetType;
 
+@:noCompletion
 class ExplainAssetLoad {
   public static function explainAssetLoad(library:AssetLibrary, id:String):AssetLoadExplanation {
     var runtime:AssetLibraryRuntime = cast _Runtime.UNDEFINED;

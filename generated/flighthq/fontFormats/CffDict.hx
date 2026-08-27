@@ -4,27 +4,35 @@ package flighthq.fontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class CffDict {
-  @:noCompletion
-  public static final CFF_OPERATOR_CHARSTRINGS:Float = 17.0;
+  @:allow(flighthq)
+  @:keep
+  private static final CFF_OPERATOR_CHARSTRINGS:Float = 17.0;
 
-  @:noCompletion
-  public static final CFF_OPERATOR_PRIVATE:Float = 18.0;
+  @:allow(flighthq)
+  @:keep
+  private static final CFF_OPERATOR_PRIVATE:Float = 18.0;
 
-  @:noCompletion
-  public static final CFF_OPERATOR_SUBRS:Float = 19.0;
+  @:allow(flighthq)
+  @:keep
+  private static final CFF_OPERATOR_SUBRS:Float = 19.0;
 
-  @:noCompletion
-  public static final CFF_OPERATOR_ROS:Float = 1230.0;
+  @:allow(flighthq)
+  @:keep
+  private static final CFF_OPERATOR_ROS:Float = 1230.0;
 
-  @:noCompletion
-  public static final CFF_OPERATOR_FD_ARRAY:Float = 1236.0;
+  @:allow(flighthq)
+  @:keep
+  private static final CFF_OPERATOR_FD_ARRAY:Float = 1236.0;
 
-  @:noCompletion
-  public static final CFF_OPERATOR_FD_SELECT:Float = 1237.0;
+  @:allow(flighthq)
+  @:keep
+  private static final CFF_OPERATOR_FD_SELECT:Float = 1237.0;
 
-  @:noCompletion
-  public static function readCffDict(bytes:flighthq._internal._UInt8Array, start:Float, end:Float):Null<flighthq._internal._Map<Float, Array<Float>>> {
+  @:allow(flighthq)
+  @:keep
+  private static function readCffDict(bytes:flighthq._internal._UInt8Array, start:Float, end:Float):Null<flighthq._internal._Map<Float, Array<Float>>> {
     var dict:flighthq._internal._Map<Float, Array<Float>> = cast _Runtime.UNDEFINED;
     var operands:Array<Float> = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;

@@ -13,20 +13,21 @@ import flighthq.physics2d.Ownership.physics2DBodyOwners;
 import flighthq.physics2d.Ownership.physics2DColliderOwners;
 import flighthq.physics2d.Ownership.physics2DJointOwners;
 import flighthq.spatial.UniformGrid.createUniformGridSpatialBackend2D;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Physics2D.Physics2DBodyType;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.Physics2DCollisionFilter;
-import flighthq.types.Physics2D.Physics2DContact;
-import flighthq.types.Physics2D.Physics2DContactEvents;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DJointSolver;
-import flighthq.types.Physics2D.Physics2DMaterial;
-import flighthq.types.Physics2D.Physics2DSolverConfig;
-import flighthq.types.Physics2D.Physics2DWorld;
-import flighthq.types.Physics2D.RigidBody2D;
-import flighthq.types.Spatial.SpatialIndexBackend2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.Physics2DBodyType;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.Physics2DCollisionFilter;
+import flighthq.types.Physics2DContact;
+import flighthq.types.Physics2DContactEvents;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DJointSolver;
+import flighthq.types.Physics2DMaterial;
+import flighthq.types.Physics2DSolverConfig;
+import flighthq.types.Physics2DWorld;
+import flighthq.types.RigidBody2D;
+import flighthq.types.SpatialIndexBackend2D;
 
+@:noCompletion
 class World {
   public static function addPhysics2DBody(world:Physics2DWorld, body:RigidBody2D):RigidBody2D {
     var colliders:flighthq._internal._Set<Physics2DCollider> = cast _Runtime.UNDEFINED;

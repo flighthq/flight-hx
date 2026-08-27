@@ -7,24 +7,27 @@ import flighthq.log.Log.logOnce;
 import flighthq.registry.RegistryTable.createSlotTable;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuColorAdjustmentMaterialFeatureGuard;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.LogLevel;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.SlotTable;
+import flighthq.types.WgpuColorAdjustmentMaterialFeatureGuard;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeatureGuard;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class EnableWgpuColorAdjustmentGuards {
-  @:noCompletion
-  public static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areWgpuColorAdjustmentGuardsEnabled(state:WgpuRenderState):Bool {
     return cast !_Runtime.looseEquals((cast getWgpuColorAdjustmentMaterialFeatureGuard(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Null<WgpuColorAdjustmentMaterialFeatureGuard>), null);
     return cast null;
   }
 
-  @:noCompletion
-  public static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableWgpuColorAdjustmentGuards(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var table:SlotTable<WgpuColorAdjustmentMaterialFeatureGuard> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime);

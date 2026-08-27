@@ -8,24 +8,25 @@ import flighthq.interaction.HitTests.registerHitTestPrecise;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.path.ContainsPathPoint.containsPathPoint;
 import flighthq.shape.ShapeFill.getShapeFillRegions;
-import flighthq.types.HitTestFunction.HitTestPreciseFunction;
+import flighthq.types.HitTestPreciseFunction;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Node.NodeAny;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node2D;
+import flighthq.types.NodeAny;
 import flighthq.types.Path;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
 import flighthq.types.ShapeFillRegion;
 import flighthq.types.Types.MorphShapeKind;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types.Types.ShapeKind;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types._internal._MorphShapeValues.MorphShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 import flighthq.types._internal._ShapeValues.ShapeKind;
 
+@:noCompletion
 class RegisterShapeHitTest {
   public static function registerShapeHitTest():Void {
     registerHitTestPrecise((cast MorphShapeKind : String), ({ final __callArgument0:Dynamic = RegisterShapeHitTest.hitTestShapeFill__registerShapeHitTest; __callArgument0; }));

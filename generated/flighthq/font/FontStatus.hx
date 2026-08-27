@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.font.FontShorthand.getFontShorthand;
 
+@:noCompletion
 class FontStatus {
   public static function isFontLoaded(family:String, ?style:String):Bool {
     return cast (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'fonts') : flighthq._internal.dom.FontFaceSet).check((cast getFontShorthand((cast family : String), ({ final __callArgument0:Dynamic = style; __callArgument0; })) : String));

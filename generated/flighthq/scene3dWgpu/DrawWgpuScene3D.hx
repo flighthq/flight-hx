@@ -19,35 +19,35 @@ import flighthq.types.BlendMode;
 import flighthq.types.Camera3D;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.Matrix3;
-import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Matrix3Like;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
+import flighthq.types.MeshSubset;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
+import flighthq.types.Node3DRuntime;
 import flighthq.types.PointLight;
 import flighthq.types.RenderState;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Scene3DLightBlock;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skin;
 import flighthq.types.SpotLight;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types.SurfaceMaterial;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
+import flighthq.types.WgpuColorAdjustmentMaterialFeature;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
+import flighthq.types.WgpuScene3DDrawEntry;
 import flighthq.types.WgpuScene3DForwardLightList;
 import flighthq.types.WgpuScene3DRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuScene3DDrawEntry;
 import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
@@ -55,6 +55,7 @@ import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValu
 
 typedef DrawEntry__drawWgpuScene3D = { var alpha:Float; var colorMatrix:Null<Array<Float>>; var colorScaleBias:Null<ColorScaleBias>; var depth:Float; var lightBlock:Scene3DLightBlock; var material:Material; var mesh:Mesh; var renderer:WgpuMeshMaterialRenderer; var subset:MeshSubset; var worldMatrix:Matrix4; };
 
+@:noCompletion
 class DrawWgpuScene3D {
   public static function drawWgpuScene3D(state:WgpuRenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike, ?forwardLights:WgpuScene3DForwardLightList):Void {
     var list:Scene3DRenderList = cast _Runtime.UNDEFINED;
@@ -130,8 +131,9 @@ class DrawWgpuScene3D {
     (runtime.activeSkinnedRun = cast (false : Bool));
   }
 
-  @:noCompletion
-  public static function isWgpuMeshGpuSkinned(state:WgpuRenderState, mesh:Mesh):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isWgpuMeshGpuSkinned(state:WgpuRenderState, mesh:Mesh):Bool {
     var skinning:Null<WgpuSkinningAdapter> = cast _Runtime.UNDEFINED;
     skinning = (cast (cast (cast getWgpuScene3DRuntime(({ final __callArgument53:Dynamic = state; __callArgument53; })) : WgpuScene3DRuntime) : { var skinningAdapter:flighthq._internal._Any; }).skinningAdapter : Null<WgpuSkinningAdapter>);
     return cast ((cast !_Runtime.strictEquals(skinning, null) : Bool) && (cast (cast skinning : WgpuSkinningAdapter).isGpuSkinned(({ final __callArgument55:Dynamic = mesh; __callArgument55; })) : Bool));

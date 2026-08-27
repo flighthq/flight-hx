@@ -8,16 +8,18 @@ import flighthq.effectsWgpu.WgpuEffectProgramCache.getWgpuEffectPipeline;
 import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.ToneMapEffect;
-import flighthq.types.ToneMapEffect.ToneMapOperator;
+import flighthq.types.ToneMapOperator;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuToneMapEffect {
-  @:noCompletion
-  public static function applyToneMapEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ToneMapEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyToneMapEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ToneMapEffect):Void {
     var operator_:ToneMapOperator = cast _Runtime.UNDEFINED;
     var exposure:Float = cast _Runtime.UNDEFINED;
     var white:Float = cast _Runtime.UNDEFINED;

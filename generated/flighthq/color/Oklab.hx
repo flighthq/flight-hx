@@ -4,6 +4,7 @@ package flighthq.color;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class Oklab {
   public static function clampLinearRgb(out:Array<Float>, r:Float, g:Float, b:Float):Void {
     flighthq._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast 0.0 : Float), (cast HxMath.max(0.0, HxMath.min(1.0, r)) : Float));

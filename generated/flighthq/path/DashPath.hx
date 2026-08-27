@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathCommand;
+import flighthq.types.PathWinding;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class DashPath {
   public static function dashPath(source:Path, dash:Array<Float>, dashOffset:Float, out:Path, tolerance:Float = 0.25):Void {
     var totalDashLength:Float = cast _Runtime.UNDEFINED;

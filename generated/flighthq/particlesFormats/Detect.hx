@@ -17,6 +17,7 @@ import flighthq.types._internal._ParticleFormatKindValues.SpineParticleFormatKin
 import flighthq.types._internal._ParticleFormatKindValues.StarlingPexFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.UnityParticleFormatKind;
 
+@:noCompletion
 class Detect {
   public static function detectParticleFormat(text:String):Null<ParticleFormatKind> {
     var trimmed:String = cast _Runtime.UNDEFINED;

@@ -29,19 +29,20 @@ import flighthq.types.ColorLut;
 import flighthq.types.ColorLutCache;
 import flighthq.types.GlColorLutTextureCache;
 import flighthq.types.GlFullscreenProgram;
+import flighthq.types.GlRenderEffectContext;
 import flighthq.types.GlRenderEffectPipeline;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectPipelineSkipGuard;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
-import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
+import flighthq.types.GlRenderEffectPipelineSkipGuard;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GlRenderTargetPool;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderEffectPipelineOptions;
+import flighthq.types.RenderTargetColorSpace;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 
+@:noCompletion
 class GlRenderEffectPipeline {
   public static function beginGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline, colorSpace:RenderTargetColorSpace = 'srgb'):Void {
     var w:Float = cast _Runtime.UNDEFINED;
@@ -71,8 +72,9 @@ class GlRenderEffectPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyGlRenderEffectPipeline(state:GlRenderState, pipeline:flighthq.types.GlRenderEffectPipeline):Void {
     if (_Runtime.truthy(pipeline.sceneTarget)) {
       destroyGlRenderTarget(({ final __callArgument8:Dynamic = state; __callArgument8; }), pipeline.sceneTarget);
       (pipeline.sceneTarget = cast (null : Null<GlRenderTarget>));
@@ -152,8 +154,9 @@ class GlRenderEffectPipeline {
     if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseGlRenderTarget(pipeline.pool, ({ final __callArgument74:Dynamic = scratchB; __callArgument74; })); }
   }
 
-  @:noCompletion
-  public static function setGlRenderEffectPipelineSkipGuard(state:GlRenderState, guard:Null<GlRenderEffectPipelineSkipGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlRenderEffectPipelineSkipGuard(state:GlRenderState, guard:Null<GlRenderEffectPipelineSkipGuard>):Void {
     if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast GlRenderEffectPipeline._skipGuards__glRenderEffectPipeline : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectPipelineSkipGuard>).delete_(state)); } else { ((cast GlRenderEffectPipeline._skipGuards__glRenderEffectPipeline : flighthq._internal._WeakMap<GlRenderState, GlRenderEffectPipelineSkipGuard>).set(state, (cast guard))); }
   }
 

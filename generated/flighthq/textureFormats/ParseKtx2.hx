@@ -17,6 +17,7 @@ import flighthq.types.TextureContainerSupercompression;
 
 typedef ParseFailure__parseKtx2 = { var reason:Null<TextureContainerParseFailureReason>; };
 
+@:noCompletion
 class ParseKtx2 {
   public static function getKtx2ParseFailureReason(bytes:flighthq._internal._UInt8Array):Null<TextureContainerParseFailureReason> {
     var failure:ParseFailure__parseKtx2 = cast _Runtime.UNDEFINED;

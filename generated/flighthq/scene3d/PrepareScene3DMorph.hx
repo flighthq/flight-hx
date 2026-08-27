@@ -8,9 +8,10 @@ import flighthq.node.Node.getNodeRuntime;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
 
+@:noCompletion
 class PrepareScene3DMorph {
   public static function prepareScene3DMorph(scene:NodeAny):Void {
     var mesh:Mesh = cast _Runtime.UNDEFINED;

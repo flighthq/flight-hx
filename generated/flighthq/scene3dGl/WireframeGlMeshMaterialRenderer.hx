@@ -18,22 +18,24 @@ import flighthq.types.GlMeshProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
 import flighthq.types.GlWireframeProgram;
-import flighthq.types.GlWireframeProgram.GlWireframeUpload;
+import flighthq.types.GlWireframeUpload;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.Matrix4;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
+import flighthq.types.MeshSubset;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Types.WireframeMaterialKind;
 import flighthq.types.WireframeMaterial;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
+@:noCompletion
 class WireframeGlMeshMaterialRenderer {
-  @:noCompletion
-  public static final wireframeGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final wireframeGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, _lights:Scene3DLightBlock, camera:Camera3D):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var wireframe:Null<WireframeMaterial> = cast _Runtime.UNDEFINED;
     var alphaMaskEnabled:Bool = cast _Runtime.UNDEFINED;

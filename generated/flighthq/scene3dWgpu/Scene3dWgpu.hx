@@ -32,7 +32,7 @@ import flighthq.types.Camera3D;
 import flighthq.types.DirectionalLight;
 import flighthq.types.Environment;
 import flighthq.types.Node3D;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.WgpuCustomMaterialShaderSource;

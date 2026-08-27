@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ShapeCommand.PathWinding;
 
 typedef PathBooleanFillRule = flighthq._internal._Union2<PathWinding, String>;

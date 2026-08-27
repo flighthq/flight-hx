@@ -3,16 +3,17 @@ package flighthq.layout;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Layout.LayoutResolver;
-import flighthq.types.Layout.LayoutState;
+import flighthq.types.LayoutResolver;
+import flighthq.types.LayoutState;
 
+@:noCompletion
 class LayoutState {
-  public static function createLayoutState():flighthq.types.Layout.LayoutState {
+  public static function createLayoutState():flighthq.types.LayoutState {
     return cast { guard: null, lastFailureActualLength: 0.0, lastFailureKind: null, lastFailureNodeIndex: -1.0, lastFailureParentIndex: -1.0, lastFailureRequiredLength: 0.0, lastFailureResolverKind: null, resolvers: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) };
     return cast null;
   }
 
-  public static function registerLayoutResolver(state:flighthq.types.Layout.LayoutState, kind:String, resolver:Null<LayoutResolver>):Void {
+  public static function registerLayoutResolver(state:flighthq.types.LayoutState, kind:String, resolver:Null<LayoutResolver>):Void {
     if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { ((cast state.resolvers : flighthq._internal._Map<String, LayoutResolver>).delete_(kind)); } else { ((cast state.resolvers : flighthq._internal._Map<String, LayoutResolver>).set(kind, (cast resolver))); }
   }
 }

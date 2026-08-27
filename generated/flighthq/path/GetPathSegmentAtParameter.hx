@@ -4,10 +4,11 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.PathCommand;
+import flighthq.types.Vector2Like;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class GetPathSegmentAtParameter {
   public static function getCubicBezierPoint(x0:Float, y0:Float, c1x:Float, c1y:Float, c2x:Float, c2y:Float, x1:Float, y1:Float, t:Float, out:Vector2Like):Vector2Like {
     var u:Float = cast _Runtime.UNDEFINED;

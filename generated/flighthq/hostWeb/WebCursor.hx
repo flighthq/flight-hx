@@ -4,8 +4,9 @@ package flighthq.hostWeb;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Cursor;
-import flighthq.types.Cursor.CursorBackend;
+import flighthq.types.CursorBackend;
 
+@:noCompletion
 class WebCursor {
   public static function createWebCursorBackend(element:flighthq._internal.dom.HTMLElement):CursorBackend {
     return cast { setCursor: function(cursor:Null<Cursor>):Void {

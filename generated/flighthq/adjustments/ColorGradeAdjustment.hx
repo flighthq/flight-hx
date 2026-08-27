@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.ColorGradeAdjustment;
 import flighthq.types.ColorTransformFunction;
 
+@:noCompletion
 class ColorGradeAdjustment {
   public static function createColorGradeAdjustment(?options:{ @:optional var exposure:Null<Float>; @:optional var brightness:Null<Float>; @:optional var contrast:Null<Float>; @:optional var saturation:Null<Float>; @:optional var temperature:Null<Float>; @:optional var tint:Null<Float>; @:optional var lift:Null<Float>; @:optional var gamma:Null<Float>; @:optional var gain:Null<Float>; }):flighthq.types.ColorGradeAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

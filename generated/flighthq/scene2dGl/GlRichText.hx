@@ -22,29 +22,30 @@ import flighthq.textlayout.TextBounds.computeTextBoundsOffsetX;
 import flighthq.textlayout.TextBounds.computeTextBoundsWidth;
 import flighthq.textlayout.TextLayout.computeTextLayout;
 import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
+import flighthq.types.GlBitmapShader;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRichTextOverlay;
-import flighthq.types.GlShaderLocations.GlBitmapShader;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.RichTextContent;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextInputState;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextVerticalAlign;
 
 typedef GlRichTextData__glRichText = { var texture:Null<flighthq._internal.dom.WebGLTexture>; };
 
+@:noCompletion
 class GlRichText {
   public static var _offscreenCanvas__glRichText:Null<flighthq._internal.dom.HTMLCanvasElement> = _Runtime.explicitNull();
 
@@ -52,14 +53,16 @@ class GlRichText {
 
   public static var _webglTextInputOverlay__glRichText:Null<GlRichTextOverlay> = _Runtime.explicitNull();
 
-  @:noCompletion
-  public static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
+  @:allow(flighthq)
+  @:keep
+  private static function createGlRichTextData(_state:GlRenderState, _source:Renderable):RendererData {
     return cast (cast (cast { texture: null } : flighthq._internal._Any) : RendererData);
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyGlRichTextData(state:GlRenderState, data:RendererData):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyGlRichTextData(state:GlRenderState, data:RendererData):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var texture:Null<flighthq._internal.dom.WebGLTexture> = cast _Runtime.UNDEFINED;
     __destructure0 = (cast (cast data : flighthq._internal._Any) : GlRichTextData__glRichText);
@@ -67,15 +70,17 @@ class GlRichText {
     if ((cast !_Runtime.strictEquals(texture, null) : Bool)) { flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, texture); }
   }
 
-  @:noCompletion
-  public static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlRichText(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var overlay:Null<GlRichTextOverlay> = cast _Runtime.UNDEFINED;
     overlay = ((cast ((cast !_Runtime.strictEquals(GlRichText._webglTextInputOverlay__glRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool) ? (cast GlRichText._webglTextInputOverlay__glRichText : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     drawGlRichTextWithOverlay(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; }), ({ final __callArgument2:Dynamic = overlay; __callArgument2; }));
   }
 
-  @:noCompletion
-  public static function drawGlRichTextWithOverlay(state:GlRenderState, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlRichTextWithOverlay(state:GlRenderState, renderProxy:RenderProxy2D, ?overlay:GlRichTextOverlay):Void {
     var source:RichText = cast _Runtime.UNDEFINED;
     var data:RichTextData = cast _Runtime.UNDEFINED;
     var richTextRuntime:RichTextRuntime = cast _Runtime.UNDEFINED;
@@ -132,8 +137,9 @@ class GlRichText {
     drawGlQuad(({ final __callArgument52:Dynamic = state; __callArgument52; }), (cast offsetX : Float), (cast 0.0 : Float), (cast (offsetX + fieldW) : Float), (cast fieldH : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
-  @:noCompletion
-  public static function registerGlTextInputOverlay(overlay:GlRichTextOverlay):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerGlTextInputOverlay(overlay:GlRichTextOverlay):Void {
     (GlRichText._webglTextInputOverlay__glRichText = cast (overlay : Dynamic));
   }
 

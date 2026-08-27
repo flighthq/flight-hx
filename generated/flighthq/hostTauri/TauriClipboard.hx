@@ -3,11 +3,12 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Clipboard.ClipboardBackend;
-import flighthq.types.Clipboard.ClipboardBookmark;
+import flighthq.types.ClipboardBackend;
+import flighthq.types.ClipboardBookmark;
 import flighthq.types.TauriApi;
-import flighthq.types.TauriApi.TauriClipboardManager;
+import flighthq.types.TauriClipboardManager;
 
+@:noCompletion
 class TauriClipboard {
   public static function createTauriClipboardBackend(tauri:TauriApi):ClipboardBackend {
     var clipboard:TauriClipboardManager = cast _Runtime.UNDEFINED;

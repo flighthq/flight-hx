@@ -12,6 +12,7 @@ import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuRenderState;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
+@:noCompletion
 class RegisterWgpuStandardPbrMaterial {
   public static function registerWgpuStandardPbrMaterial(state:WgpuRenderState):Void {
     registerWgpuBitmapTextureResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }));

@@ -22,9 +22,9 @@ import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.types.BatchFormat;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.GlMaterialRenderer;
+import flighthq.types.GlQuadBatchShader;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlQuadBatchShader;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.Image;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
@@ -36,17 +36,18 @@ import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextLabel;
-import flighthq.types.TextLabel.TextLabelData;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLabelData;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextVerticalAlign;
-import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
 
 typedef GlTextLabelData__glTextLabel = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var ctx:flighthq._internal.dom.CanvasRenderingContext2D; var image:Image; var lastContentId:Float; var lastPixelRatio:Float; var logW:Float; var logH:Float; };
 
+@:noCompletion
 class GlTextLabel {
   public static function getGlTextLabelData__glTextLabel(data:RendererData):GlTextLabelData__glTextLabel {
     return cast (cast (cast data : flighthq._internal._Any) : GlTextLabelData__glTextLabel);
@@ -84,8 +85,9 @@ class GlTextLabel {
     }
   }
 
-  @:noCompletion
-  public static function drawGlTextLabel(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlTextLabel(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:TextLabel = cast _Runtime.UNDEFINED;
     var __destructure1:TextLabelData = cast _Runtime.UNDEFINED;

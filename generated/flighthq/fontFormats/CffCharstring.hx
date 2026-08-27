@@ -4,23 +4,26 @@ package flighthq.fontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathCommand;
+import flighthq.types.PathWinding;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class CffCharstring {
   public static final MAX_CALL_DEPTH__cffCharstring:Float = 10.0;
 
-  @:noCompletion
-  public static function cffSubroutineBias(count:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function cffSubroutineBias(count:Float):Float {
     if ((cast ((cast count : Float) < (cast 1240.0 : Float)) : Bool)) { return cast 107.0; }
     if ((cast ((cast count : Float) < (cast 33900.0 : Float)) : Bool)) { return cast 1131.0; }
     return cast 32768.0;
     return cast null;
   }
 
-  @:noCompletion
-  public static function runCffCharstring(out:Path, bytes:flighthq._internal._UInt8Array, charstring:{ var end:Float; var start:Float; }, localSubrs:Array<{ var end:Float; var start:Float; }>, globalSubrs:Array<{ var end:Float; var start:Float; }>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function runCffCharstring(out:Path, bytes:flighthq._internal._UInt8Array, charstring:{ var end:Float; var start:Float; }, localSubrs:Array<{ var end:Float; var start:Float; }>, globalSubrs:Array<{ var end:Float; var start:Float; }>):Bool {
     var emitRelativeCurve:Float->Float->Void = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var stack:Array<Float> = cast _Runtime.UNDEFINED;

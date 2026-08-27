@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.compression.Decompressor as Facade_Compression_flighthq_compression_Decompressor;
 import flighthq.compression.Deflate as Facade_Compression_flighthq_compression_Deflate;
 import flighthq.types.Compression;
-import flighthq.types.Compression.Decompressor;
+import flighthq.types.Decompressor;
 
 class Compression {
   public static function getDecompressor(compression:flighthq.types.Compression):Null<Decompressor> {

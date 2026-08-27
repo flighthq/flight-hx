@@ -4,6 +4,7 @@ package flighthq.physics2d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class JointRows {
   public static function writePhysics2DSoftRowParameters(mass:Float, frequencyHz:Float, dampingRatio:Float, dt:Float, hardBiasFactor:Float, out:Array<Float>):Void {
     var angular:Float = cast _Runtime.UNDEFINED;

@@ -7,11 +7,12 @@ import flighthq.physics3d.JointReaction.createPhysics3DJointReaction;
 import flighthq.physics3d.JointReaction.getPhysics3DJointReactionForce;
 import flighthq.physics3d.JointReaction.getPhysics3DJointReactionTorque;
 import flighthq.physics3d.JointReaction.writePhysics3DJointReaction;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointEvents;
-import flighthq.types.Physics3D.Physics3DJointReaction;
-import flighthq.types.Physics3D.Physics3DWorld;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointEvents;
+import flighthq.types.Physics3DJointReaction;
+import flighthq.types.Physics3DWorld;
 
+@:noCompletion
 class JointBreakage {
   public static function breakPhysics3DJoint(world:Physics3DWorld, joint:Physics3DJoint):Void {
     if ((cast (cast joint : Physics3DJoint).broken : Bool)) { return; }

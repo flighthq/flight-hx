@@ -5,16 +5,17 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Vector3.createVector3;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.AabbLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Entity;
-import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Plane.PlaneLike;
+import flighthq.types.Matrix4Like;
+import flighthq.types.PlaneLike;
 import flighthq.types.Ray3D;
-import flighthq.types.Ray3D.Ray3DLike;
+import flighthq.types.Ray3DLike;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Ray3d {
   public static function createRay3D(?originX:Float, ?originY:Float, ?originZ:Float, ?directionX:Float, ?directionY:Float, ?directionZ:Float):Ray3D {
     return cast (cast createEntity((cast { direction: (cast createVector3(({ final __callArgument0:Dynamic = _Runtime.coalesce(directionX, function():Dynamic return cast 0.0); __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.coalesce(directionY, function():Dynamic return cast 0.0); __callArgument1; }), ({ final __callArgument2:Dynamic = _Runtime.coalesce(directionZ, function():Dynamic return cast 1.0); __callArgument2; })) : Vector3), origin: (cast createVector3(({ final __callArgument6:Dynamic = _Runtime.coalesce(originX, function():Dynamic return cast 0.0); __callArgument6; }), ({ final __callArgument7:Dynamic = _Runtime.coalesce(originY, function():Dynamic return cast 0.0); __callArgument7; }), ({ final __callArgument8:Dynamic = _Runtime.coalesce(originZ, function():Dynamic return cast 0.0); __callArgument8; })) : Vector3) } : Dynamic)) : { >Entity, var direction:Vector3; var origin:Vector3; });

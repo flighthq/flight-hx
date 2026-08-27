@@ -13,31 +13,34 @@ import flighthq.renderWgpu.WgpuShader.getWgpuBlendState;
 import flighthq.types.BlendMode;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.Material;
-import flighthq.types.Material.MaterialData;
-import flighthq.types.Sampler.SamplerLike;
-import flighthq.types.Sampler.TextureFilter;
-import flighthq.types.Sampler.TextureWrap;
+import flighthq.types.MaterialData;
+import flighthq.types.SamplerLike;
+import flighthq.types.TextureFilter;
+import flighthq.types.TextureWrap;
 import flighthq.types.TintMaterialData;
+import flighthq.types.WgpuColorAdjustmentFlush;
+import flighthq.types.WgpuColorAdjustmentMaterialFeature;
+import flighthq.types.WgpuColorAdjustmentMaterialFeatureGuard;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuQuadBatchResources;
+import flighthq.types.WgpuQuadBatchWriterBufferSlot;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentFlush;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeatureGuard;
-import flighthq.types.WgpuRenderState.WgpuQuadBatchWriterBufferSlot;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
 
+@:noCompletion
 class WgpuQuadBatchWriter {
-  @:noCompletion
-  public static final QUAD_BATCH_INSTANCE_FLOATS:Float = 13.0;
+  @:allow(flighthq)
+  @:keep
+  private static final QUAD_BATCH_INSTANCE_FLOATS:Float = 13.0;
 
   public static final QUAD_BATCH_INSTANCE_STRIDE__wgpuQuadBatchWriter:Float = (QUAD_BATCH_INSTANCE_FLOATS * 4.0);
 
   public static final QUAD_BATCH_PRELUDE_WGSL__wgpuQuadBatchWriter:String = '\nstruct Uniforms {\n  matrix : mat3x3f,\n  straightTextureAlpha : u32,\n}\n\nstruct InstanceData {\n  a : f32, b : f32, c : f32, d : f32,\n  tx : f32, ty : f32,\n  width : f32, height : f32,\n  u0 : f32, v0 : f32, u1 : f32, v1 : f32,\n  alpha : f32,\n}\n\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var tex : texture_2d<f32>;\n@group(1) @binding(1) var smp : sampler;\n@group(2) @binding(0) var<storage, read> instances : array<InstanceData>;\n\nstruct BaseVertex {\n  position : vec4f,\n  uv : vec2f,\n  alpha : f32,\n}\n\nfn quadBaseVertex(vi : u32, ii : u32) -> BaseVertex {\n  let inst = instances[ii];\n  let xi = (vi == 1u || vi == 2u || vi == 4u);\n  let yi = (vi == 2u || vi == 4u || vi == 5u);\n  let lx = select(0.0, inst.width, xi);\n  let ly = select(0.0, inst.height, yi);\n  let wx = inst.a * lx + inst.c * ly + inst.tx;\n  let wy = inst.b * lx + inst.d * ly + inst.ty;\n  let p = uni.matrix * vec3f(wx, wy, 1.0);\n  var bv : BaseVertex;\n  bv.position = vec4f(p.x, p.y, 0.0, 1.0);\n  bv.uv = vec2f(select(inst.u0, inst.u1, xi), select(inst.v0, inst.v1, yi));\n  bv.alpha = inst.alpha;\n  return bv;\n}\n';
 
-  @:noCompletion
-  public static function ensureWgpuQuadBatchResources(state:WgpuRenderState):WgpuQuadBatchResources {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuQuadBatchResources(state:WgpuRenderState):WgpuQuadBatchResources {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var existing:Null<WgpuQuadBatchResources> = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
@@ -70,8 +73,9 @@ class WgpuQuadBatchWriter {
 
   public static final _quadBatchResources__wgpuQuadBatchWriter:flighthq._internal._WeakMap<flighthq._internal.dom.GPUDevice, WgpuQuadBatchResources> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static function flushWgpuQuadBatchWriter(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function flushWgpuQuadBatchWriter(state:WgpuRenderState):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var count:Float = cast _Runtime.UNDEFINED;
     var texture:WgpuTextureEntry = cast _Runtime.UNDEFINED;
@@ -143,8 +147,9 @@ class WgpuQuadBatchWriter {
     (cast pass : flighthq._internal.dom.GPURenderPassEncoder).draw(6.0, count, 0.0, 0.0);
   }
 
-  @:noCompletion
-  public static function getWgpuQuadBatchPipeline(state:WgpuRenderState, resources:WgpuQuadBatchResources, module:flighthq._internal.dom.GPUShaderModule, hasMaterialData:Bool, blendMode:Null<BlendMode>):flighthq._internal.dom.GPURenderPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuQuadBatchPipeline(state:WgpuRenderState, resources:WgpuQuadBatchResources, module:flighthq._internal.dom.GPUShaderModule, hasMaterialData:Bool, blendMode:Null<BlendMode>):flighthq._internal.dom.GPURenderPipeline {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var perModule:Null<flighthq._internal._Map<String, flighthq._internal.dom.GPURenderPipeline>> = cast _Runtime.UNDEFINED;
     var stencilMode:String = cast _Runtime.UNDEFINED;
@@ -185,14 +190,16 @@ class WgpuQuadBatchWriter {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuQuadBatchPreludeWGSL():String {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuQuadBatchPreludeWGSL():String {
     return cast WgpuQuadBatchWriter.QUAD_BATCH_PRELUDE_WGSL__wgpuQuadBatchWriter;
     return cast null;
   }
 
-  @:noCompletion
-  public static function packWgpuQuadBatchMaterialInstance(state:WgpuRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function packWgpuQuadBatchMaterialInstance(state:WgpuRenderState, materialData:Null<MaterialData>, instanceIndex:Float):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var floats:Float = cast _Runtime.UNDEFINED;
     var renderer:Null<WgpuMaterialRenderer> = cast _Runtime.UNDEFINED;
@@ -204,8 +211,9 @@ class WgpuQuadBatchWriter {
     (cast renderer : WgpuMaterialRenderer).packInstance(({ final __callArgument52:Dynamic = state; __callArgument52; }), runtime.quadBatchWriterMaterial, ({ final __callArgument53:Dynamic = materialData; __callArgument53; }), runtime.quadBatchWriterMaterialData, (cast (instanceIndex * floats) : Float));
   }
 
-  @:noCompletion
-  public static function prepareWgpuQuadBatchWrite(state:WgpuRenderState, texture:WgpuTextureEntry, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function prepareWgpuQuadBatchWrite(state:WgpuRenderState, texture:WgpuTextureEntry, sampler:Null<SamplerLike>, blendMode:Null<BlendMode>, material:Null<Material>, materialRenderer:WgpuMaterialRenderer, maxInstances:Float, ?smoothing:Null<Bool>):Float {
     if (smoothing == null) smoothing = cast (null : Dynamic);
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var floats:Float = cast _Runtime.UNDEFINED;
@@ -238,8 +246,9 @@ class WgpuQuadBatchWriter {
     return cast null;
   }
 
-  @:noCompletion
-  public static function recordWgpuQuadBatchColorScaleBias(state:WgpuRenderState, colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>, instanceIndex:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function recordWgpuQuadBatchColorScaleBias(state:WgpuRenderState, colorScaleBias:Null<flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>>, instanceIndex:Float):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var fold:Null<WgpuColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument58:Dynamic = state; __callArgument58; })) : WgpuRenderStateRuntime);
@@ -251,8 +260,9 @@ class WgpuQuadBatchWriter {
     if ((cast !_Runtime.looseEquals(colorScaleBias, null) : Bool)) { _Runtime.callOptionalValue((cast getWgpuColorAdjustmentMaterialFeatureGuard(({ final __callArgument62:Dynamic = state; __callArgument62; })) : Null<WgpuColorAdjustmentMaterialFeatureGuard>), cast ([state, colorScaleBias] : Array<Dynamic>)); }
   }
 
-  @:noCompletion
-  public static function resetWgpuQuadBatchWriterBufferPool(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetWgpuQuadBatchWriterBufferPool(state:WgpuRenderState):Void {
     ((cast (cast getWgpuRenderStateRuntime(({ final __callArgument64:Dynamic = state; __callArgument64; })) : WgpuRenderStateRuntime) : { var quadBatchWriterBufferCursor:Float; }).quadBatchWriterBufferCursor = cast (0.0 : Float));
   }
 

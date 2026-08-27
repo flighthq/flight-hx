@@ -3,15 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.Node.NodeData;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node3D.Node3DRuntime;
-import flighthq.types.Node3D.Node3DTraits;
 import flighthq.types._internal._LodMeshValues.LodMeshKind;
 
-typedef LodLevel = { var mesh:Mesh; var minDistance:Float; };
-
 typedef LodMesh = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Node3DTraits>>; var alpha:Float; var visible:Bool; var position:Vector3; var rotation:Quaternion; var scale:Vector3; var activeLevelIndex:Float; var levels:Array<LodLevel>; };
-
-typedef LodMeshRuntime = Node3DRuntime;

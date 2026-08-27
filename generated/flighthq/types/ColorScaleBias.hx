@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef ColorScaleBias = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; };
-
-typedef ColorScaleBiasLike = { var alphaScale:Float; var alphaBias:Float; var blueScale:Float; var blueBias:Float; var greenScale:Float; var greenBias:Float; var redScale:Float; var redBias:Float; };

@@ -6,14 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeTraits;
+import flighthq.types.NodeAny;
 import flighthq.types.NodeOrderList;
-import flighthq.types.NodeOrderList.NodeOrderListEntryVisitor;
+import flighthq.types.NodeOrderListEntryVisitor;
+import flighthq.types.NodeRuntime;
 import flighthq.types.NodeSignals;
+import flighthq.types.NodeTraits;
 import flighthq.types.Signal;
 
+@:noCompletion
 class NodeOrderList {
   public static function addNodeOrderListEntry<Traits:flighthq._internal._Object>(list:flighthq.types.NodeOrderList<Traits>, node:Node<Traits>, sortKey:Float):Void {
     var entryCount:Float = cast _Runtime.UNDEFINED;

@@ -16,16 +16,17 @@ import flighthq.types.Node;
 import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitter2DRuntime;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
+import flighthq.types.ParticleEmitter2DRuntime;
+import flighthq.types.ParticleEmitterData;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 import flighthq.types.Types.ParticleEmitter2DKind;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types._internal._ParticleEmitter2DValues.ParticleEmitter2DKind;
 
+@:noCompletion
 class ParticleEmitter {
   public static final PARTICLE_TRANSFORM_STRIDE__particleEmitter:Float = 4.0;
 
@@ -33,8 +34,9 @@ class ParticleEmitter {
 
   public static final PARTICLE_VELOCITY_STRIDE__particleEmitter:Float = 2.0;
 
-  @:noCompletion
-  public static final PARTICLE_EMITTER_DELETED_ID:Float = 65535.0;
+  @:allow(flighthq)
+  @:keep
+  private static final PARTICLE_EMITTER_DELETED_ID:Float = 65535.0;
 
   public static function copyLocalBoundsRectangle__particleEmitter(out:Rectangle, source:Node<Dynamic>):Void {
     var runtime:ParticleEmitter2DRuntime = cast _Runtime.UNDEFINED;
@@ -205,8 +207,9 @@ class ParticleEmitter {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createParticleEmitter2DRuntime():ParticleEmitter2DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createParticleEmitter2DRuntime():ParticleEmitter2DRuntime {
     var runtime:ParticleEmitter2DRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createNode2DRuntime((cast ParticleEmitter.defaultMethods__particleEmitter : Dynamic)) : ParticleEmitter2DRuntime);
     (runtime.localBoundsRectangle = cast (null : Null<Rectangle>));
@@ -214,8 +217,9 @@ class ParticleEmitter {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createParticleEmitterData(?data:{ @:optional var alphas:Null<flighthq._internal._Float32Array>; @:optional var atlas:Null<TextureAtlas>; @:optional var colors:Null<flighthq._internal._Float32Array>; @:optional var ids:Null<flighthq._internal._UInt16Array>; @:optional var particleCount:Null<Float>; @:optional var positionsZ:Null<flighthq._internal._Float32Array>; @:optional var transforms:Null<flighthq._internal._Float32Array>; @:optional var velocities:Null<flighthq._internal._Float32Array>; @:optional var worldSpace:Null<Bool>; }):ParticleEmitterData {
+  @:allow(flighthq)
+  @:keep
+  private static function createParticleEmitterData(?data:{ @:optional var alphas:Null<flighthq._internal._Float32Array>; @:optional var atlas:Null<TextureAtlas>; @:optional var colors:Null<flighthq._internal._Float32Array>; @:optional var ids:Null<flighthq._internal._UInt16Array>; @:optional var particleCount:Null<Float>; @:optional var positionsZ:Null<flighthq._internal._Float32Array>; @:optional var transforms:Null<flighthq._internal._Float32Array>; @:optional var velocities:Null<flighthq._internal._Float32Array>; @:optional var worldSpace:Null<Bool>; }):ParticleEmitterData {
     return cast { alphas: _Runtime.coalesce(({ final __structural12 = data; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var alphas:Null<flighthq._internal._Float32Array>; }).alphas; }), function():Dynamic return cast new flighthq._internal._Float32Array()), atlas: _Runtime.coalesce(({ final __structural13 = data; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var atlas:Null<TextureAtlas>; }).atlas; }), function():Dynamic return cast null), colors: _Runtime.coalesce(({ final __structural14 = data; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var colors:Null<flighthq._internal._Float32Array>; }).colors; }), function():Dynamic return cast new flighthq._internal._Float32Array()), ids: _Runtime.coalesce(({ final __structural15 = data; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var ids:Null<flighthq._internal._UInt16Array>; }).ids; }), function():Dynamic return cast new flighthq._internal._UInt16Array()), particleCount: _Runtime.coalesce(({ final __structural16 = data; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var particleCount:Null<Float>; }).particleCount; }), function():Dynamic return cast 0.0), positionsZ: _Runtime.coalesce(({ final __structural17 = data; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { @:optional var positionsZ:Null<flighthq._internal._Float32Array>; }).positionsZ; }), function():Dynamic return cast new flighthq._internal._Float32Array()), transforms: _Runtime.coalesce(({ final __structural18 = data; __structural18 == null ? _Runtime.UNDEFINED : (cast __structural18 : { @:optional var transforms:Null<flighthq._internal._Float32Array>; }).transforms; }), function():Dynamic return cast new flighthq._internal._Float32Array()), velocities: _Runtime.coalesce(({ final __structural19 = data; __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { @:optional var velocities:Null<flighthq._internal._Float32Array>; }).velocities; }), function():Dynamic return cast new flighthq._internal._Float32Array()), worldSpace: _Runtime.coalesce(({ final __structural20 = data; __structural20 == null ? _Runtime.UNDEFINED : (cast __structural20 : { @:optional var worldSpace:Null<Bool>; }).worldSpace; }), function():Dynamic return cast false) };
     return cast null;
   }
@@ -251,8 +255,9 @@ class ParticleEmitter {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getParticleEmitter2DRuntime(source:ParticleEmitter2D):ParticleEmitter2DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getParticleEmitter2DRuntime(source:ParticleEmitter2D):ParticleEmitter2DRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument21:Dynamic = source; __callArgument21; })) : ParticleEmitter2DRuntime);
     return cast null;
   }

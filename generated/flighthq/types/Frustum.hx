@@ -3,9 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.EntityWithoutRuntime;
 
 typedef Frustum = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; };
-
-typedef FrustumLike = { var bottom:Plane; var far:Plane; var left:Plane; var near:Plane; var right:Plane; var top:Plane; };

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ScanlinesEffect;
 
+@:noCompletion
 class ScanlinesEffect {
   public static function createScanlinesEffect(?options:{ @:optional var count:Null<Float>; @:optional var intensity:Null<Float>; }):flighthq.types.ScanlinesEffect {
     if (options == null) options = cast ({  } : Dynamic);

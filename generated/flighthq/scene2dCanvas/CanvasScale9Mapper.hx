@@ -3,12 +3,14 @@ package flighthq.scene2dCanvas;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.Scale9Mapper;
 
+@:noCompletion
 class CanvasScale9Mapper {
-  @:noCompletion
-  public static function buildScale9Mapper(commands:Array<flighthq._internal._Any>, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
+  @:allow(flighthq)
+  @:keep
+  private static function buildScale9Mapper(commands:Array<flighthq._internal._Any>, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
     var bounds:Null<{ var width:Float; var height:Float; }> = cast _Runtime.UNDEFINED;
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var bw:Float = cast _Runtime.UNDEFINED;

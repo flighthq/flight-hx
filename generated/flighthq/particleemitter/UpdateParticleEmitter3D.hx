@@ -11,19 +11,20 @@ import flighthq.particles.Curve.sampleParticleCurve;
 import flighthq.particles.ParticleEmitterSignals.getParticleEmitterSignals;
 import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.particles.ParticleEmitterState.ensureParticleEmitterStateCapacity;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Node3D;
 import flighthq.types.ParticleCurve;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitter3D;
 import flighthq.types.ParticleEmitterCallbacks;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterData;
+import flighthq.types.ParticleEmitterShape;
 import flighthq.types.ParticleEmitterSignals;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.RandomSource;
 import flighthq.types.Signal;
 
+@:noCompletion
 class UpdateParticleEmitter3D {
   public static final PARTICLE_TRANSFORM_STRIDE__updateParticleEmitter3D:Float = 4.0;
 

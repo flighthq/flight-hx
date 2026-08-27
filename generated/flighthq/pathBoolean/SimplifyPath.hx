@@ -8,8 +8,9 @@ import flighthq.pathBoolean.ResolvePathRegions.resolvePathRegions;
 import flighthq.types.Path;
 import flighthq.types.PathBooleanFillRule;
 import flighthq.types.PathBooleanOptions;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 
+@:noCompletion
 class SimplifyPath {
   public static function simplifyPath(path:Path, ?options:PathBooleanOptions):Path {
     var fillRule:PathWinding = cast _Runtime.UNDEFINED;

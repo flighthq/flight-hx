@@ -4,14 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TiledLayerBase = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; };
-
-typedef TiledTileLayer = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; var type:String; var width:Float; var height:Float; var data:flighthq._internal._UInt32Array; };
-
-typedef TiledObjectGroup = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; var type:String; var objects:Array<TiledObject>; };
-
-typedef TiledImageLayer = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; var type:String; var image:String; };
-
-typedef TiledGroupLayer = { var id:Float; var name:String; var opacity:Float; var visible:Bool; var offsetX:Float; var offsetY:Float; var properties:Array<TiledProperty>; var type:String; var layers:Array<TiledLayer>; };
-
 typedef TiledLayer = flighthq._internal._Union2<flighthq._internal._Union2<flighthq._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>;

@@ -4,12 +4,13 @@ package flighthq.fontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
+import flighthq.types.PathCommand;
+import flighthq.types.PathWinding;
 import flighthq.types.SfntTableDirectory;
-import flighthq.types.SfntTableDirectory.SfntTableRange;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.SfntTableRange;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class OpenTypeGlyf {
   public static final ON_CURVE__openTypeGlyf:Float = 1.0;
 
@@ -23,8 +24,9 @@ class OpenTypeGlyf {
 
   public static final Y_SAME_OR_POSITIVE__openTypeGlyf:Float = 32.0;
 
-  @:noCompletion
-  public static function readOpenTypeGlyphOutline(out:Path, bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory, ranges:flighthq._internal._UInt32Array, glyphIndex:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function readOpenTypeGlyphOutline(out:Path, bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory, ranges:flighthq._internal._UInt32Array, glyphIndex:Float):Bool {
     var glyf:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var start:Float = cast _Runtime.UNDEFINED;
     var end:Float = cast _Runtime.UNDEFINED;
@@ -84,8 +86,9 @@ class OpenTypeGlyf {
     return cast null;
   }
 
-  @:noCompletion
-  public static function readOpenTypeGlyphRanges(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory, glyphCount:Float, locaFormat:Float):Null<flighthq._internal._UInt32Array> {
+  @:allow(flighthq)
+  @:keep
+  private static function readOpenTypeGlyphRanges(bytes:flighthq._internal._UInt8Array, directory:SfntTableDirectory, glyphCount:Float, locaFormat:Float):Null<flighthq._internal._UInt32Array> {
     var loca:Null<SfntTableRange> = cast _Runtime.UNDEFINED;
     var entryCount:Float = cast _Runtime.UNDEFINED;
     var entryBytes:Float = cast _Runtime.UNDEFINED;

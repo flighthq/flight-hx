@@ -12,17 +12,18 @@ import flighthq.renderWgpu.WgpuDraw.drawWgpuQuadWithTransform;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.RenderPassPreserve;
 import flighthq.types.RenderProxy;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuSavedPassState;
-import flighthq.types.WgpuRenderState.WgpuScissorRect;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderTarget;
+import flighthq.types.WgpuSavedPassState;
+import flighthq.types.WgpuScissorRect;
+import flighthq.types.WgpuTextureEntry;
 
+@:noCompletion
 class WgpuRenderTarget {
   public static function beginWgpuRenderPassEncoder__wgpuRenderTarget(state:WgpuRenderState, colorView:flighthq._internal.dom.GPUTextureView, depthStencilView:flighthq._internal.dom.GPUTextureView, width:Float, height:Float, loadOp:flighthq._internal.dom.GPULoadOp, ?clearColor:flighthq._internal.dom.GPUColor, depthLoadOp:flighthq._internal.dom.GPULoadOp = 'clear', depthClearValue:Float = 1.0):flighthq._internal.dom.GPURenderPassEncoder {
     if (clearColor == null) clearColor = cast ({ r: 0.0, g: 0.0, b: 0.0, a: 0.0 } : Dynamic);
@@ -92,8 +93,9 @@ class WgpuRenderTarget {
     return cast null;
   }
 
-  @:noCompletion
-  public static function declareWgpuRenderTargetColorSpace(state:WgpuRenderState, colorSpace:RenderTargetColorSpace):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function declareWgpuRenderTargetColorSpace(state:WgpuRenderState, colorSpace:RenderTargetColorSpace):Bool {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var target:Null<flighthq.types.WgpuRenderTarget> = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument21:Dynamic = state; __callArgument21; })) : WgpuRenderStateRuntime);
@@ -104,14 +106,16 @@ class WgpuRenderTarget {
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyWgpuRenderTarget(_state:WgpuRenderState, target:flighthq.types.WgpuRenderTarget):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuRenderTarget(_state:WgpuRenderState, target:flighthq.types.WgpuRenderTarget):Void {
     (cast target.texture : flighthq._internal.dom.GPUTexture).destroy();
     (cast target.depthStencilTexture : flighthq._internal.dom.GPUTexture).destroy();
   }
 
-  @:noCompletion
-  public static function drawWgpuRenderTargetResult(state:WgpuRenderState, renderProxy:{ var alpha:Float; var material:Null<Material>; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, target:flighthq.types.WgpuRenderTarget, transform:Matrix):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuRenderTargetResult(state:WgpuRenderState, renderProxy:{ var alpha:Float; var material:Null<Material>; var transform2D:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }; }, target:flighthq.types.WgpuRenderTarget, transform:Matrix):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
@@ -175,14 +179,16 @@ class WgpuRenderTarget {
     }
   }
 
-  @:noCompletion
-  public static function getWgpuRenderTargetSupersampleScale(target:flighthq.types.WgpuRenderTarget):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuRenderTargetSupersampleScale(target:flighthq.types.WgpuRenderTarget):Float {
     return cast ((cast _Runtime.strictEquals(target.sampleCount, 4.0) : Bool) ? (cast WgpuRenderTarget.WGPU_RENDER_TARGET_SUPERSAMPLE_SCALE__wgpuRenderTarget : Dynamic) : (cast 1.0 : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function resizeWgpuRenderTarget(state:WgpuRenderState, target:flighthq.types.WgpuRenderTarget, width:Float, height:Float, ?sampleCount:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resizeWgpuRenderTarget(state:WgpuRenderState, target:flighthq.types.WgpuRenderTarget, width:Float, height:Float, ?sampleCount:Float):Void {
     if (sampleCount == null) sampleCount = cast (target.sampleCount : Dynamic);
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var format:String = cast _Runtime.UNDEFINED;

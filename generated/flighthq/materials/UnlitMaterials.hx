@@ -7,17 +7,17 @@ import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
 import flighthq.types.BlendMode;
 import flighthq.types.DepthMaterial;
 import flighthq.types.EmissiveMaterial;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.EntityRuntime;
+import flighthq.types.Kind;
 import flighthq.types.MatcapMaterial;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.NormalMaterial;
 import flighthq.types.Sampler;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.ToonMaterial;
 import flighthq.types.Types.DepthMaterialKind;
 import flighthq.types.Types.EmissiveMaterialKind;
@@ -41,6 +41,7 @@ import flighthq.types._internal._UnlitMaterialValues.UnlitMaterialKind;
 import flighthq.types._internal._VertexColorMaterialValues.VertexColorMaterialKind;
 import flighthq.types._internal._WireframeMaterialValues.WireframeMaterialKind;
 
+@:noCompletion
 class UnlitMaterials {
   public static function createDepthMaterial(?opts:{ @:optional var far:Null<Float>; @:optional var near:Null<Float>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var kind:Null<Kind>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):DepthMaterial {
     var material:DepthMaterial = cast _Runtime.UNDEFINED;

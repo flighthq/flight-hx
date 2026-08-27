@@ -8,7 +8,7 @@ import flighthq.spritesheet.SpritesheetData.createSpritesheetData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetFrameData;
 import flighthq.textureatlas.TextureAtlas.createTextureAtlas;
 import flighthq.textureatlasFormats.TextureAtlasLibgdxParse.parseTextureAtlasLibgdxAtlas;
-import flighthq.types.LibgdxAtlasSchema.LibgdxAtlasParseOptions;
+import flighthq.types.LibgdxAtlasParseOptions;
 import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
@@ -19,6 +19,7 @@ typedef LibgdxPage__libgdxAtlasParse = { var filename:String; var height:Float; 
 
 typedef LibgdxRegion__libgdxAtlasParse = { var index:Float; var name:String; var offsetX:Float; var offsetY:Float; var page:LibgdxPage__libgdxAtlasParse; var rotated:Bool; var sourceHeight:Float; var sourceWidth:Float; var spriteHeight:Float; var spriteWidth:Float; var x:Float; var y:Float; };
 
+@:noCompletion
 class LibgdxAtlasParse {
   public static function parseIntPair__libgdxAtlasParse(value:String):Array<Float> {
     var parts:Array<String> = cast _Runtime.UNDEFINED;

@@ -7,16 +7,17 @@ import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnost
 import flighthq.math.Constants.DEG_TO_RAD;
 import flighthq.particles.ParticleEmitterConfig.createParticleEmitterConfig;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.LibgdxParticleSchema.LibgdxParseOptions;
-import flighthq.types.LibgdxParticleSchema.LibgdxParseResult;
-import flighthq.types.LibgdxParticleSchema.LibgdxParticleDocument;
-import flighthq.types.LibgdxParticleSchema.LibgdxRangeValue;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.LibgdxParseOptions;
+import flighthq.types.LibgdxParseResult;
+import flighthq.types.LibgdxParticleDocument;
+import flighthq.types.LibgdxRangeValue;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef LibgdxSection__libgdxParse = flighthq._internal._Map<String, String>;
 
+@:noCompletion
 class LibgdxParse {
   public static function parseLibgdxParticle(text:String, ?options:LibgdxParseOptions):ParticleEmitterConfig {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

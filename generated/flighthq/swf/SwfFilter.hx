@@ -24,7 +24,7 @@ import flighthq.types.DropShadowEffect;
 import flighthq.types.GradientBevelEffect;
 import flighthq.types.GradientGlowEffect;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.InnerGlowEffect;
 import flighthq.types.InnerShadowEffect;
 import flighthq.types.OuterGlowEffect;
@@ -32,9 +32,11 @@ import flighthq.types.RenderEffect;
 import flighthq.types.SwfFilterListGuard;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class SwfFilter {
-  @:noCompletion
-  public static function readSwfFilterList(reader:SwfReader, outEffects:Array<RenderEffect>, outAdjustments:Array<Adjustment>, ?diagnostics:Array<ImportDiagnostic>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function readSwfFilterList(reader:SwfReader, outEffects:Array<RenderEffect>, outAdjustments:Array<Adjustment>, ?diagnostics:Array<ImportDiagnostic>):Bool {
     var count:Float = cast _Runtime.UNDEFINED;
     count = (cast reader : SwfReader).readUint8();
     {
@@ -178,8 +180,9 @@ class SwfFilter {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setSwfFilterListGuard(guard:Null<SwfFilterListGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setSwfFilterListGuard(guard:Null<SwfFilterListGuard>):Void {
     (SwfFilter._swfFilterListGuard__swfFilter = cast (guard : Dynamic));
   }
 

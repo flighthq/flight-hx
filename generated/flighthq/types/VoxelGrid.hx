@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 import flighthq.types._internal._TextureSourceKindValues.VoxelGridTextureSourceKind;
 
 typedef VoxelGrid = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var alphaType:AlphaType; var gamut:String; var height:Float; var kind:Dynamic; var version:Float; var width:Float; var data:flighthq._internal._UInt8Array; var depth:Float; var format:PixelFormat; };

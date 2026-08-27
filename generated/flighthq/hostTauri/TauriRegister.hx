@@ -23,18 +23,19 @@ import flighthq.platform.Platform.setPlatformBackend;
 import flighthq.shell.Shell.setShellBackend;
 import flighthq.shortcut.Shortcut.setShortcutBackend;
 import flighthq.tray.Tray.setTrayBackend;
-import flighthq.types.App.AppBackend;
-import flighthq.types.ApplicationWindow.WindowBackend;
-import flighthq.types.Clipboard.ClipboardBackend;
-import flighthq.types.Dialog.DialogBackend;
-import flighthq.types.Menu.MenuBackend;
-import flighthq.types.Notification.NotificationBackend;
-import flighthq.types.Platform.PlatformBackend;
-import flighthq.types.Shell.ShellBackend;
-import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.AppBackend;
+import flighthq.types.ClipboardBackend;
+import flighthq.types.DialogBackend;
+import flighthq.types.MenuBackend;
+import flighthq.types.NotificationBackend;
+import flighthq.types.PlatformBackend;
+import flighthq.types.ShellBackend;
+import flighthq.types.ShortcutBackend;
 import flighthq.types.TauriApi;
-import flighthq.types.Tray.TrayBackend;
+import flighthq.types.TrayBackend;
+import flighthq.types.WindowBackend;
 
+@:noCompletion
 class TauriRegister {
   public static function registerTauriBackends(tauri:TauriApi):Void {
     setPlatformBackend((cast (cast createTauriPlatformBackend(({ final __callArgument0:Dynamic = tauri; __callArgument0; })) : PlatformBackend) : Dynamic));

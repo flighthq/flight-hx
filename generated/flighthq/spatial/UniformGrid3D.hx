@@ -5,21 +5,22 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.spatial.SpatialIndexingGuard.reportSpatialIndexing;
 import flighthq.spatial.UniformGrid.MAX_INDEXED_CELLS_PER_OBJECT;
-import flighthq.types.Spatial.SpatialAabb3D;
-import flighthq.types.Spatial.SpatialIndexBackend3D;
-import flighthq.types.Spatial.SpatialObjectId;
-import flighthq.types.Spatial.SpatialPair;
-import flighthq.types.SpatialIndexing.SpatialDeclineReason;
-import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
-import flighthq.types.SpatialIndexing.SpatialIndexingMode;
-import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
-import flighthq.types.SpatialIndexing.SpatialIndexingOperation;
-import flighthq.types.SpatialIndexing.SpatialIndexingReason;
+import flighthq.types.SpatialAabb3D;
+import flighthq.types.SpatialDeclineReason;
+import flighthq.types.SpatialIndexBackend3D;
+import flighthq.types.SpatialIndexingExplanation;
+import flighthq.types.SpatialIndexingMode;
+import flighthq.types.SpatialIndexingNotice;
+import flighthq.types.SpatialIndexingOperation;
+import flighthq.types.SpatialIndexingReason;
+import flighthq.types.SpatialObjectId;
+import flighthq.types.SpatialPair;
 
 typedef GridCell3D__uniformGrid3D = { var cx:Float; var cy:Float; var cz:Float; var ids:flighthq._internal._Set<SpatialObjectId>; };
 
 typedef UniformGrid3D__uniformGrid3D = { var cellSize:Float; var cells:flighthq._internal._Map<String, GridCell3D__uniformGrid3D>; var bounds:flighthq._internal._Map<SpatialObjectId, SpatialAabb3D>; var overflow:flighthq._internal._Set<SpatialObjectId>; var declined:flighthq._internal._Map<SpatialObjectId, SpatialDeclineReason>; var minCellX:Float; var minCellY:Float; var minCellZ:Float; var maxCellX:Float; var maxCellY:Float; var maxCellZ:Float; var seen:flighthq._internal._Set<SpatialObjectId>; var pairIds:Array<SpatialObjectId>; };
 
+@:noCompletion
 class UniformGrid3D {
   public static function createUniformGridSpatialBackend3D(cellSize:Float):SpatialIndexBackend3D {
     var grid:UniformGrid3D__uniformGrid3D = cast _Runtime.UNDEFINED;

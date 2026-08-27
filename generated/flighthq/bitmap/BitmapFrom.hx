@@ -10,6 +10,7 @@ import flighthq.types.Image;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
+@:noCompletion
 class BitmapFrom {
   public static function captureBitmapFromImageResource(resource:Image):Bitmap {
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;

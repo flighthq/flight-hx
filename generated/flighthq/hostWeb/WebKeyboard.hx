@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.keyboard.Keyboard.createWebSoftKeyboardBackend;
 import flighthq.keyboard.Keyboard.installSoftKeyboardHostBackend;
-import flighthq.types.Keyboard.SoftKeyboardBackend;
+import flighthq.types.SoftKeyboardBackend;
 
+@:noCompletion
 class WebKeyboard {
   public static function enableHostWebSoftKeyboard():Void {
     if ((cast WebKeyboard._enabled__webKeyboard : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebKeyboard {
     installSoftKeyboardHostBackend((cast createWebSoftKeyboardBackend() : SoftKeyboardBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebKeyboardForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebKeyboardForTest():Void {
     (WebKeyboard._enabled__webKeyboard = cast (false : Dynamic));
   }
 

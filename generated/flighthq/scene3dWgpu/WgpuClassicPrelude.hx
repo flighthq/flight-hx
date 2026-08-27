@@ -19,19 +19,21 @@ import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuSkinningAdapter;
 import flighthq.types.LinearColor;
 import flighthq.types.Texture;
+import flighthq.types.WgpuClassicDefineKey;
+import flighthq.types.WgpuClassicLightingModel;
 import flighthq.types.WgpuClassicPipeline;
-import flighthq.types.WgpuClassicPipeline.WgpuClassicDefineKey;
-import flighthq.types.WgpuClassicPipeline.WgpuClassicLightingModel;
+import flighthq.types.WgpuColorAdjustmentMaterialFeature;
+import flighthq.types.WgpuMaterialBinding;
 import flighthq.types.WgpuMeshPipeline;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
 import flighthq.types.WgpuScene3DRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
 import flighthq.types.WgpuSkinningAdapter;
 
+@:noCompletion
 class WgpuClassicPrelude {
-  @:noCompletion
-  public static function bindWgpuClassicSurface(state:WgpuRenderState, pipeline:WgpuClassicPipeline, materialKey:flighthq._internal._Object, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Texture>, specularMap:Null<Texture>, normalMap:Null<Texture>, alphaMap:Null<Texture>):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function bindWgpuClassicSurface(state:WgpuRenderState, pipeline:WgpuClassicPipeline, materialKey:flighthq._internal._Object, diffuse:LinearColor, specular:LinearColor, shininess:Float, alphaCutoff:Float, diffuseMap:Null<Texture>, specularMap:Null<Texture>, normalMap:Null<Texture>, alphaMap:Null<Texture>):flighthq._internal.dom.GPUBindGroup {
     var binding:WgpuMaterialBinding = cast _Runtime.UNDEFINED;
     flighthq._internal._StaticIndex.writeArray(WgpuClassicPrelude._samplerScratch__wgpuClassicPrelude, 0.0, (cast getWgpuMaterialSampler(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast diffuseMap : Dynamic)) : flighthq._internal.dom.GPUSampler));
     flighthq._internal._StaticIndex.writeArray(WgpuClassicPrelude._samplerScratch__wgpuClassicPrelude, 1.0, (cast getWgpuMaterialSampler(({ final __callArgument2:Dynamic = state; __callArgument2; }), (cast specularMap : Dynamic)) : flighthq._internal.dom.GPUSampler));
@@ -60,16 +62,18 @@ class WgpuClassicPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function buildWgpuClassicDefineKey(key:WgpuClassicDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildWgpuClassicDefineKey(key:WgpuClassicDefineKey):String {
     var model:String = cast _Runtime.UNDEFINED;
     model = ((cast _Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'phong') : Bool) ? (cast 'p' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'blinnphong') : Bool) ? (cast 'b' : Dynamic) : (cast 'l' : Dynamic)) : Dynamic));
     return cast '' + Std.string(model) + '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'doubleSided') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasDiffuseMap') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasSpecularMap') : Bool) ? (cast 's' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'n' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasAlphaMap'), function():Dynamic return cast 'a', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasColorMatrix'), function():Dynamic return cast 'x', function():Dynamic return cast _Runtime.select(_Runtime.field(key, 'hasColorAdjustment'), function():Dynamic return cast 'c', function():Dynamic return cast ''))) + '';
     return cast null;
   }
 
-  @:noCompletion
-  public static function compileWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Bool = false, skinned:Bool = false, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):WgpuClassicPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function compileWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:flighthq._internal.dom.GPUTextureFormat, blended:Bool = false, skinned:Bool = false, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):WgpuClassicPipeline {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
     var module:flighthq._internal.dom.GPUShaderModule = cast _Runtime.UNDEFINED;
@@ -81,16 +85,18 @@ class WgpuClassicPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuClassicPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuClassicPipeline(state:WgpuRenderState, key:WgpuClassicDefineKey, format:flighthq._internal.dom.GPUTextureFormat):WgpuClassicPipeline {
     var fullKey:WgpuClassicDefineKey = cast _Runtime.UNDEFINED;
     fullKey = (cast _Runtime.mergeObjects([key, { hasColorAdjustment: (cast (cast getWgpuScene3DRuntime(({ final __callArgument42:Dynamic = state; __callArgument42; })) : WgpuScene3DRuntime) : { var activeColorAdjustmentRun:Bool; }).activeColorAdjustmentRun }, { hasColorMatrix: (cast (cast getWgpuScene3DRuntime(({ final __callArgument44:Dynamic = state; __callArgument44; })) : WgpuScene3DRuntime) : { var activeColorMatrixRun:Bool; }).activeColorMatrixRun }]));
     return cast (cast (cast ensureWgpuScene3DPipeline : WgpuRenderState->String->(Bool->Bool->WgpuClassicPipeline)->WgpuClassicPipeline)(({ final __callArgument46:Dynamic = state; __callArgument46; }), (cast 'classic:' + Std.string(format) + '|' + Std.string((cast buildWgpuClassicDefineKey(({ final __callArgument47:Dynamic = fullKey; __callArgument47; })) : String)) + '' : String), ({ final __callArgument57:Dynamic = function(blended:Bool, skinned:Bool):WgpuClassicPipeline return (cast compileWgpuClassicPipeline(({ final __callArgument49:Dynamic = state; __callArgument49; }), ({ final __callArgument50:Dynamic = fullKey; __callArgument50; }), (cast format : String), (cast blended : Bool), (cast skinned : Bool), (cast getWgpuColorAdjustmentMaterialFeature(({ final __callArgument51:Dynamic = state; __callArgument51; })) : Null<WgpuColorAdjustmentMaterialFeature>)) : WgpuClassicPipeline); __callArgument57; })) : WgpuClassicPipeline);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuClassicModuleSourceForKey(key:WgpuClassicDefineKey, skinned:Bool = false, ?skinning:Null<WgpuSkinningAdapter>, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuClassicModuleSourceForKey(key:WgpuClassicDefineKey, skinned:Bool = false, ?skinning:Null<WgpuSkinningAdapter>, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>):String {
     if (skinning == null) skinning = cast (null : Dynamic);
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var source:String = cast _Runtime.UNDEFINED;
@@ -102,8 +108,9 @@ class WgpuClassicPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuClassicSharedSamplerModuleSourceForKey(key:WgpuClassicDefineKey, skinned:Bool = false, ?skinning:Null<WgpuSkinningAdapter>):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuClassicSharedSamplerModuleSourceForKey(key:WgpuClassicDefineKey, skinned:Bool = false, ?skinning:Null<WgpuSkinningAdapter>):String {
     if (skinning == null) skinning = cast (null : Dynamic);
     return cast (cast WgpuClassicPrelude.assembleWgpuClassicModuleSource__wgpuClassicPrelude(({ final __callArgument78:Dynamic = key; __callArgument78; }), (cast skinned : Bool), ({ final __callArgument79:Dynamic = skinning; __callArgument79; }), (cast WgpuClassicPrelude.CLASSIC_SHARED_SAMPLER_WGSL_BODY__wgpuClassicPrelude : String)) : String);
     return cast null;

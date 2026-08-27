@@ -8,9 +8,11 @@ import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.RenderState;
 
+@:noCompletion
 class EnableCanvasTextureResolverGuards {
-  @:noCompletion
-  public static function areCanvasTextureResolverGuardsEnabled(state:CanvasRenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areCanvasTextureResolverGuardsEnabled(state:CanvasRenderState):Bool {
     return cast (cast areRenderRegistryGuardsEnabled(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Bool);
     return cast null;
   }

@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TiledGid;
 import flighthq.types.TiledMap;
-import flighthq.types.TiledTileset.TiledTilesetRef;
+import flighthq.types.TiledTilesetRef;
 
+@:noCompletion
 class TiledGid {
   public static function decodeTiledGid(gid:Float):flighthq.types.TiledGid {
     var g:Float = cast _Runtime.UNDEFINED;

@@ -19,22 +19,22 @@ import flighthq.particlesFormats.StarlingPexParse.parseStarlingPexDocument;
 import flighthq.particlesFormats.UnityParse.parseUnityParticle;
 import flighthq.particlesFormats.UnityParse.parseUnityParticleDocument;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.LibgdxParticleSchema.LibgdxParseResult;
-import flighthq.types.ParticleConfigParse.ParseParticleConfigOptions;
-import flighthq.types.ParticleConfigParse.ParticleConfigParseResult;
-import flighthq.types.ParticleDesignerSchema.ParticleDesignerParsed;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.LibgdxParseResult;
+import flighthq.types.ParseParticleConfigOptions;
+import flighthq.types.ParticleConfigParseResult;
+import flighthq.types.ParticleDesignerParsed;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.PixiParseResult;
-import flighthq.types.SpineParticleSchema.SpineParsed;
-import flighthq.types.StarlingPexSchema.StarlingPexParseResult;
+import flighthq.types.SpineParsed;
+import flighthq.types.StarlingPexParseResult;
 import flighthq.types.Types.LibgdxParticleFormatKind;
 import flighthq.types.Types.ParticleDesignerFormatKind;
 import flighthq.types.Types.PixiParticleFormatKind;
 import flighthq.types.Types.SpineParticleFormatKind;
 import flighthq.types.Types.StarlingPexFormatKind;
 import flighthq.types.Types.UnityParticleFormatKind;
-import flighthq.types.UnitySchema.UnityParsed;
+import flighthq.types.UnityParsed;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._ParticleFormatKindValues.LibgdxParticleFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.ParticleDesignerFormatKind;
@@ -43,6 +43,7 @@ import flighthq.types._internal._ParticleFormatKindValues.SpineParticleFormatKin
 import flighthq.types._internal._ParticleFormatKindValues.StarlingPexFormatKind;
 import flighthq.types._internal._ParticleFormatKindValues.UnityParticleFormatKind;
 
+@:noCompletion
 class ParseParticleConfig {
   public static function parseParticleConfig(text:String, ?options:ParseParticleConfigOptions):ParticleEmitterConfig {
     var format:Null<flighthq._internal._Union2<flighthq._internal._Intersection2<String, flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any>>, String>> = cast _Runtime.UNDEFINED;

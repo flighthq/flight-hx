@@ -9,6 +9,7 @@ import flighthq.types.Path;
 import flighthq.types.PathMesh;
 import flighthq.types.PathMeshTyped;
 
+@:noCompletion
 class PathMeshPool {
   public static function acquirePathMesh(path:Path, tolerance:Float = 0.25):PathMesh {
     var mesh:PathMesh = cast _Runtime.UNDEFINED;

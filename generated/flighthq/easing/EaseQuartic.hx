@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class EaseQuartic {
   public static final easeInOutQuartic:EasingFunction = (cast function(t:Float):Float return ((cast ((cast t : Float) < (cast 0.5 : Float)) : Bool) ? (cast ((((8.0 * t) * t) * t) * t) : Dynamic) : (cast (1.0 - _Runtime.divideNumbers(HxMath.pow(((-2.0 * t) + 2.0), 4.0), 2.0)) : Dynamic)));
 

@@ -4,13 +4,15 @@ package flighthq.fontFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class SfntAssembly {
   public static final SFNT_HEADER_BYTES__sfntAssembly:Float = 12.0;
 
   public static final SFNT_DIRECTORY_ENTRY_BYTES__sfntAssembly:Float = 16.0;
 
-  @:noCompletion
-  public static function assembleSfntFont(flavor:Float, tables:Array<{ var data:flighthq._internal._UInt8Array; var tag:Float; }>):flighthq._internal._UInt8Array {
+  @:allow(flighthq)
+  @:keep
+  private static function assembleSfntFont(flavor:Float, tables:Array<{ var data:flighthq._internal._UInt8Array; var tag:Float; }>):flighthq._internal._UInt8Array {
     var sorted:Array<{ var data:flighthq._internal._UInt8Array; var tag:Float; }> = cast _Runtime.UNDEFINED;
     var headerBytes:Float = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
@@ -42,8 +44,9 @@ class SfntAssembly {
     return cast null;
   }
 
-  @:noCompletion
-  public static function computeSfntTableChecksum(data:flighthq._internal._UInt8Array, isHeadTable:Bool = false):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function computeSfntTableChecksum(data:flighthq._internal._UInt8Array, isHeadTable:Bool = false):Float {
     var sum:Float = cast _Runtime.UNDEFINED;
     sum = 0.0;
     {
@@ -59,8 +62,9 @@ class SfntAssembly {
     return cast null;
   }
 
-  @:noCompletion
-  public static function encodeSfntCompositeGlyph(components:flighthq._internal._UInt8Array, instructions:flighthq._internal._UInt8Array, bounds:{ var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; }, hasInstructions:Bool):flighthq._internal._UInt8Array {
+  @:allow(flighthq)
+  @:keep
+  private static function encodeSfntCompositeGlyph(components:flighthq._internal._UInt8Array, instructions:flighthq._internal._UInt8Array, bounds:{ var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; }, hasInstructions:Bool):flighthq._internal._UInt8Array {
     var tail:Float = cast _Runtime.UNDEFINED;
     var out:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
@@ -81,8 +85,9 @@ class SfntAssembly {
     return cast null;
   }
 
-  @:noCompletion
-  public static function encodeSfntLoca(glyphLengths:Array<Float>, indexFormat:Float):Null<flighthq._internal._UInt8Array> {
+  @:allow(flighthq)
+  @:keep
+  private static function encodeSfntLoca(glyphLengths:Array<Float>, indexFormat:Float):Null<flighthq._internal._UInt8Array> {
     var entries:Float = cast _Runtime.UNDEFINED;
     var out:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
@@ -109,8 +114,9 @@ class SfntAssembly {
     return cast null;
   }
 
-  @:noCompletion
-  public static function encodeSfntSimpleGlyph(endPtsOfContours:Array<Float>, xs:Array<Float>, ys:Array<Float>, onCurve:Array<Bool>, instructions:flighthq._internal._UInt8Array, bounds:{ var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; }):flighthq._internal._UInt8Array {
+  @:allow(flighthq)
+  @:keep
+  private static function encodeSfntSimpleGlyph(endPtsOfContours:Array<Float>, xs:Array<Float>, ys:Array<Float>, onCurve:Array<Bool>, instructions:flighthq._internal._UInt8Array, bounds:{ var xMax:Float; var xMin:Float; var yMax:Float; var yMin:Float; }):flighthq._internal._UInt8Array {
     var pointCount:Float = cast _Runtime.UNDEFINED;
     var flags:Array<Float> = cast _Runtime.UNDEFINED;
     var xBytes:Array<Float> = cast _Runtime.UNDEFINED;
@@ -188,8 +194,9 @@ class SfntAssembly {
     return cast null;
   }
 
-  @:noCompletion
-  public static function packSfntTag(tag:String):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function packSfntTag(tag:String):Float {
     var padded:String = cast _Runtime.UNDEFINED;
     padded = _Runtime.padEnd(tag, 4.0, ' ');
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(_Runtime.charCodeAt(padded, 0.0)) << 24)) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.charCodeAt(padded, 1.0)) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(_Runtime.charCodeAt(padded, 2.0)) << 8)))) | _Runtime.toInt32(_Runtime.charCodeAt(padded, 3.0)))), 0);

@@ -7,9 +7,10 @@ import flighthq.mesh.MeshGeometry.createMeshGeometry;
 import flighthq.mesh.MeshGeometryCompute.computeMeshGeometryTangents;
 import flighthq.mesh.MeshGeometryCompute.refreshMeshGeometryBounds;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
 import flighthq.types.MeshGeometryOptions;
+import flighthq.types.VertexAttributeLayout;
 
+@:noCompletion
 class MeshGeometryBuilders {
   public static function createBoxMeshGeometry(width:Float = 1.0, height:Float = 1.0, depth:Float = 1.0):MeshGeometry {
     var hx:Float = cast _Runtime.UNDEFINED;

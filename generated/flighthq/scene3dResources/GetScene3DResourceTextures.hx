@@ -7,6 +7,7 @@ import flighthq.types.ImageResourceReference;
 import flighthq.types.Scene3D;
 import flighthq.types.Texture;
 
+@:noCompletion
 class GetScene3DResourceTextures {
   public static function getScene3DResourceTextures(out:Array<Texture>, scene:Scene3D):Void {
     var seen:flighthq._internal._Set<Texture> = cast _Runtime.UNDEFINED;
@@ -21,8 +22,9 @@ class GetScene3DResourceTextures {
     }
   }
 
-  @:noCompletion
-  public static function getScene3DTextureResourceReference(scene:Scene3D, texture:Texture):Null<ImageResourceReference> {
+  @:allow(flighthq)
+  @:keep
+  private static function getScene3DTextureResourceReference(scene:Scene3D, texture:Texture):Null<ImageResourceReference> {
     for (resource in _Runtime.iterable(scene.resources)) {
       if ((cast _Runtime.strictEquals(_Runtime.callOptionalProperty((cast resource : { @:optional var textures:Null<Array<Texture>>; }).textures, 'includes', cast ([(cast texture : Texture)] : Array<Dynamic>)), true) : Bool)) { return cast resource; }
     }

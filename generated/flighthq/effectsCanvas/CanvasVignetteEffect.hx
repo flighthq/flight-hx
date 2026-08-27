@@ -5,18 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasEffectPass;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.VignetteEffect;
 
+@:noCompletion
 class CanvasVignetteEffect {
   public static final RAMP_STOPS__canvasVignetteEffect:Float = 16.0;
 
-  @:noCompletion
-  public static function applyVignetteEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:VignetteEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyVignetteEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:VignetteEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var radius:Float = cast _Runtime.UNDEFINED;
     var softness:Float = cast _Runtime.UNDEFINED;

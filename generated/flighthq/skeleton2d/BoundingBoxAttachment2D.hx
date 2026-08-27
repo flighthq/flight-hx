@@ -8,6 +8,7 @@ import flighthq.types.BoundingBoxAttachment2D;
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skin2D;
 
+@:noCompletion
 class BoundingBoxAttachment2D {
   public static function computeSkeleton2DBoundingBoxAttachmentVertices(out:flighthq._internal._Float32Array, attachment:flighthq.types.BoundingBoxAttachment2D, skeleton:Skeleton2D, boneIndex:Float, ?deform:Null<flighthq._internal._Float32Array>):Void {
     if (deform == null) deform = cast (null : Dynamic);

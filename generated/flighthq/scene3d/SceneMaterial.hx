@@ -5,21 +5,22 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Traversal.findNode;
 import flighthq.node.Traversal.forEachNodeDescendant;
-import flighthq.types.Entity.Kind;
+import flighthq.types.Kind;
 import flighthq.types.Material;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.MeshMorph;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeData;
-import flighthq.types.Node.NodeOf;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DTraits;
+import flighthq.types.NodeData;
+import flighthq.types.NodeOf;
+import flighthq.types.NodeRuntime;
 import flighthq.types.Quaternion;
 import flighthq.types.Skin;
 import flighthq.types.Vector3;
 
+@:noCompletion
 class SceneMaterial {
   public static function findScene3DMaterialByName(root:Node3D, name:String):Null<Material> {
     var rootMatch:Null<Material> = cast _Runtime.UNDEFINED;

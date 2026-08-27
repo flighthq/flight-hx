@@ -4,12 +4,13 @@ package flighthq.physics3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.physics3d.World.findPhysics3DBody;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointExplanation;
-import flighthq.types.Physics3D.Physics3DJointSolver;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointExplanation;
+import flighthq.types.Physics3DJointSolver;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class ExplainPhysics3DJoints {
   public static function explainPhysics3DJoints(world:Physics3DWorld):Array<Physics3DJointExplanation> {
     var explanations:Array<Physics3DJointExplanation> = cast _Runtime.UNDEFINED;

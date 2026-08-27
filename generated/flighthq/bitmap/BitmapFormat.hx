@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.PixelOrder;
 
+@:noCompletion
 class BitmapFormat {
   public static function convertBitmapPixelOrder(out:flighthq._internal._UInt8ClampedArray, source:flighthq._internal._UInt8ClampedArray, length:Float, from:PixelOrder, to:PixelOrder):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

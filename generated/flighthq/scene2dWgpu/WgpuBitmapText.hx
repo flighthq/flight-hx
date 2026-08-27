@@ -18,25 +18,26 @@ import flighthq.texture.Texture.getTextureWidth;
 import flighthq.texture.Texture.hasTextureSource;
 import flighthq.types.BatchFormat;
 import flighthq.types.BitmapText;
-import flighthq.types.BitmapText.BitmapTextPage;
-import flighthq.types.BitmapText.BitmapTextRuntime;
+import flighthq.types.BitmapTextPage;
+import flighthq.types.BitmapTextRuntime;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Sampler;
 import flighthq.types.SpriteRenderer;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureLike;
 import flighthq.types.WgpuMaterialRenderer;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
 
+@:noCompletion
 class WgpuBitmapText {
   public static final INSTANCE_STRIDE_FLOATS__wgpuBitmapText:Float = QUAD_BATCH_INSTANCE_FLOATS;
 

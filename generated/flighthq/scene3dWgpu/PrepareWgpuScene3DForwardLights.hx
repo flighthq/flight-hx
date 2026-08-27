@@ -11,19 +11,19 @@ import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.render.SceneRender.packScene3DLightBlock;
 import flighthq.scene3d.SceneNodeBounds.getNode3DWorldBounds;
 import flighthq.types.Aabb;
-import flighthq.types.Aabb.AabbLike;
+import flighthq.types.AabbLike;
 import flighthq.types.AmbientLight;
 import flighthq.types.BoundingSphere;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.DirectionalLight;
 import flighthq.types.HemisphereLight;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.Node3D;
 import flighthq.types.PointLight;
 import flighthq.types.Scene3DForwardLightSelection;
 import flighthq.types.Scene3DLightBlock;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
 import flighthq.types.SpotLight;
 import flighthq.types.Types.SCENE_LIGHT_BLOCK_FLOATS;
@@ -36,6 +36,7 @@ typedef PreparedBlock__prepareWgpuScene3DForwardLights = { var indices:Array<Flo
 
 typedef Prepared__prepareWgpuScene3DForwardLights = { var blockCount:Float; var blocks:Array<PreparedBlock__prepareWgpuScene3DForwardLights>; var list:WgpuScene3DForwardLightList; var selection:Scene3DForwardLightSelection; };
 
+@:noCompletion
 class PrepareWgpuScene3DForwardLights {
   public static function prepareWgpuScene3DForwardLights(state:WgpuRenderState, sceneRenderList:Scene3DRenderList, lights:Scene3DLightsLike):WgpuScene3DForwardLightList {
     var prepared:Prepared__prepareWgpuScene3DForwardLights = cast _Runtime.UNDEFINED;

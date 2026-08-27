@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class EaseCubicBezier {
   public static function easeCubicBezier(x1:Float, y1:Float, x2:Float, y2:Float):EasingFunction {
     var cx:Float = cast _Runtime.UNDEFINED;

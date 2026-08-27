@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix4.createMatrix4;
 import flighthq.node.NodeTransform3d.setNodeLocalMatrix4;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Node3D;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class SceneNodeTransform {
   public static function setNode3DLookAt(node:Node3D, eye:Vector3Like, target:Vector3Like, up:Vector3Like):Void {
     var eyeX:Float = cast _Runtime.UNDEFINED;

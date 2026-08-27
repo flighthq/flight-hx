@@ -26,7 +26,3 @@ class Camera2D {
 #else
 typedef Camera2D = { var rotation:Float; var viewportHeight:Float; var viewportWidth:Float; var x:Float; var y:Float; var zoom:Float; };
 #end
-
-typedef Camera2DFollowOptions = { @:optional var deadzoneHalfHeight:Float; @:optional var deadzoneHalfWidth:Float; @:optional var smoothTime:Float; @:optional var worldBounds:Rectangle; };
-
-typedef Camera2DOptions = { @:optional var rotation:Float; @:optional var x:Float; @:optional var y:Float; @:optional var zoom:Float; };

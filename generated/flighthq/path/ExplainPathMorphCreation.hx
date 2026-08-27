@@ -14,6 +14,7 @@ import flighthq.types.PathMorph;
 import flighthq.types.PathMorphCreationExplanation;
 import flighthq.types.PathMorphCreationReason;
 
+@:noCompletion
 class ExplainPathMorphCreation {
   public static function explainPathMorphCreation(start:Path, end:Path):PathMorphCreationExplanation {
     var result:{ var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; } = cast _Runtime.UNDEFINED;

@@ -10,12 +10,12 @@ import flighthq.texture.Texture.copyTexture;
 import flighthq.texture.Texture.createTexture;
 import flighthq.texture.Texture.getTextureUvMatrix;
 import flighthq.types.Image;
-import flighthq.types.Matrix3.Matrix3Like;
+import flighthq.types.Matrix3Like;
 import flighthq.types.Sampler;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
 import flighthq.types.TextureUvTransform;
 import flighthq.types.Types.ImageTextureSourceKind;
@@ -23,6 +23,7 @@ import flighthq.types.Vector2;
 import flighthq.types.VideoResource;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
+@:noCompletion
 class VideoTexture {
   public static function advanceVideoTexture(texture:TextureLike):Float {
     var image:Null<Image> = cast _Runtime.UNDEFINED;

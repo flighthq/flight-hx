@@ -5,13 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityWithoutRuntime;
+import flighthq.types.EntityWithoutRuntime;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class Clone {
-  @:noCompletion
-  public static function cloneEntity<Type:Entity>(source:Type):Type {
+  @:allow(flighthq)
+  @:keep
+  private static function cloneEntity<Type:Entity>(source:Type):Type {
     var copy:flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     copy = (cast _Runtime.mergeObjects([source]) : flighthq._internal._Record<Dynamic, flighthq._internal._Any>);
     _Runtime.setIndex(copy, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
@@ -19,8 +21,9 @@ class Clone {
     return cast null;
   }
 
-  @:noCompletion
-  public static function stripEntityRuntime<Type:Entity>(source:Type):EntityWithoutRuntime<Type> {
+  @:allow(flighthq)
+  @:keep
+  private static function stripEntityRuntime<Type:Entity>(source:Type):EntityWithoutRuntime<Type> {
     var copy:flighthq._internal._Record<flighthq._internal._Any, flighthq._internal._Any> = cast _Runtime.UNDEFINED;
     copy = (cast _Runtime.mergeObjects([source]) : flighthq._internal._Record<Dynamic, flighthq._internal._Any>);
     _Runtime.deleteIndex(copy, EntityRuntimeKey);

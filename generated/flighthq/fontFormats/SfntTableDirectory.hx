@@ -5,13 +5,15 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SfntTableDirectory;
 
+@:noCompletion
 class SfntTableDirectory {
   public static final SFNT_HEADER_BYTES__sfntTableDirectory:Float = 12.0;
 
   public static final SFNT_TABLE_RECORD_BYTES__sfntTableDirectory:Float = 16.0;
 
-  @:noCompletion
-  public static function readSfntTableDirectory(bytes:flighthq._internal._UInt8Array):Null<flighthq.types.SfntTableDirectory> {
+  @:allow(flighthq)
+  @:keep
+  private static function readSfntTableDirectory(bytes:flighthq._internal._UInt8Array):Null<flighthq.types.SfntTableDirectory> {
     var view:flighthq._internal._Any = cast _Runtime.UNDEFINED;
     var declaredTableCount:Float = cast _Runtime.UNDEFINED;
     var tables:flighthq._internal._Map<String, { var length:Float; var offset:Float; }> = cast _Runtime.UNDEFINED;
@@ -35,8 +37,9 @@ class SfntTableDirectory {
     return cast null;
   }
 
-  @:noCompletion
-  public static function readSfntTag(bytes:flighthq._internal._UInt8Array, offset:Float):String {
+  @:allow(flighthq)
+  @:keep
+  private static function readSfntTag(bytes:flighthq._internal._UInt8Array, offset:Float):String {
     return cast _Runtime.callProperty(String, 'fromCharCode', cast ([flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast offset : Float)), flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (offset + 1.0) : Float)), flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (offset + 2.0) : Float)), flighthq._internal._StaticIndex.readUint8ArrayTyped((cast bytes : flighthq._internal._UInt8Array), (cast (offset + 3.0) : Float))] : Array<Dynamic>));
     return cast null;
   }

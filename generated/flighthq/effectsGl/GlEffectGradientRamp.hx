@@ -4,9 +4,11 @@ package flighthq.effectsGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class GlEffectGradientRamp {
-  @:noCompletion
-  public static function createGlEffectGradientRampTexture(gl:flighthq._internal.dom.WebGL2RenderingContext, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal.dom.WebGLTexture {
+  @:allow(flighthq)
+  @:keep
+  private static function createGlEffectGradientRampTexture(gl:flighthq._internal.dom.WebGL2RenderingContext, colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flighthq._internal.dom.WebGLTexture {
     var data:flighthq._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
     data = (cast GlEffectGradientRamp.buildRampData__glEffectGradientRamp(({ final __callArgument0:Dynamic = colors; __callArgument0; }), ({ final __callArgument1:Dynamic = alphas; __callArgument1; }), ({ final __callArgument2:Dynamic = ratios; __callArgument2; })) : flighthq._internal._UInt8ClampedArray);

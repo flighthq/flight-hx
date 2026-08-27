@@ -8,13 +8,14 @@ import flighthq.collision.CollisionShapeValidation3D.getCollisionShapeValidation
 import flighthq.collision.TestCollision2D.setCollisionTestGuard2D;
 import flighthq.collision.TestCollision3D.setCollisionTestGuard3D;
 import flighthq.log.Log.logOnce;
-import flighthq.types.Collision.CollisionShape2D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionTestExplanation2D;
-import flighthq.types.Collision.CollisionTestExplanation3D;
-import flighthq.types.Collision.CollisionTestStatus;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.CollisionShape2D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionTestExplanation2D;
+import flighthq.types.CollisionTestExplanation3D;
+import flighthq.types.CollisionTestStatus;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableCollisionGuards {
   public static function areCollisionGuardsEnabled():Bool {
     return cast EnableCollisionGuards.collisionGuardsEnabled__enableCollisionGuards;

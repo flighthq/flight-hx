@@ -4,8 +4,9 @@ package flighthq.signals;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Signal;
-import flighthq.types.Signal.SignalData;
+import flighthq.types.SignalData;
 
+@:noCompletion
 class Emitter {
   public static function cancelSignal<T>(signal:Signal<T>):Void {
     if ((cast !_Runtime.strictEquals(signal.data, null) : Bool)) { ((cast signal.data : { var cancelled:Bool; }).cancelled = cast (true : Bool)); }

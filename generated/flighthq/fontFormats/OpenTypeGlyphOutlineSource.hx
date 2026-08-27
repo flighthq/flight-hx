@@ -17,20 +17,21 @@ import flighthq.fontFormats.OpenTypeMetrics.readOpenTypeMetrics;
 import flighthq.fontFormats.SfntTableDirectory.readSfntTableDirectory;
 import flighthq.fontFormats.WoffFont.WOFF_COMPRESSION;
 import flighthq.fontFormats.WoffFont.readWoffFont;
+import flighthq.types.CffIndexEntry;
 import flighthq.types.CffTable;
-import flighthq.types.CffTable.CffIndexEntry;
 import flighthq.types.Compression;
-import flighthq.types.Compression.Decompressor;
+import flighthq.types.Decompressor;
+import flighthq.types.GlyphOutlineMetrics;
 import flighthq.types.GlyphOutlineSource;
-import flighthq.types.GlyphOutlineSource.GlyphOutlineMetrics;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.OpenTypeFontExplanation;
 import flighthq.types.Path;
 import flighthq.types.SfntTableDirectory;
-import flighthq.types.SfntTableDirectory.SfntTableRange;
+import flighthq.types.SfntTableRange;
 
 typedef OpenTypeFontTables__openTypeGlyphOutlineSource = { var advances:flighthq._internal._Int32Array; var bytes:flighthq._internal._UInt8Array; var cff:Null<CffTable>; var codepoints:flighthq._internal._Map<Float, Float>; var directory:SfntTableDirectory; var glyphCount:Float; var metrics:GlyphOutlineMetrics; var ranges:Null<flighthq._internal._UInt32Array>; };
 
+@:noCompletion
 class OpenTypeGlyphOutlineSource {
   public static function unwrapFontContainer__openTypeGlyphOutlineSource(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<flighthq._internal._UInt8Array> {
     var format:Null<String> = cast _Runtime.UNDEFINED;

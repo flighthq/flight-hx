@@ -18,36 +18,38 @@ import flighthq.scene3dWgpu.WgpuMeshUpload.ensureWgpuMeshUpload;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuScene3DRuntime;
 import flighthq.scene3dWgpu.WgpuScene3DRuntime.getWgpuSkinningAdapter;
 import flighthq.types.Camera3D;
-import flighthq.types.Camera3D.OrthographicProjection;
-import flighthq.types.Camera3D.Projection;
 import flighthq.types.DirectionalLight;
 import flighthq.types.Material;
 import flighthq.types.Matrix3;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
 import flighthq.types.Node;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DTraits;
+import flighthq.types.OrthographicProjection;
+import flighthq.types.Projection;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skin;
 import flighthq.types.Types.DIRECTIONAL_SHADOW_MAP_SIZE;
 import flighthq.types.Types.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
-import flighthq.types.WgpuMeshPipeline.WgpuScene3DLayouts;
+import flighthq.types.WgpuMeshUpload;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuScene3DLayouts;
 import flighthq.types.WgpuScene3DRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload;
-import flighthq.types.WgpuScene3DRuntime.WgpuScene3DShadow;
+import flighthq.types.WgpuScene3DShadow;
 import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._DirectionalLightValues.DIRECTIONAL_SHADOW_MAP_SIZE;
 import flighthq.types._internal._DirectionalLightValues.MAX_DIRECTIONAL_SHADOW_PCF_RADIUS;
 
+@:noCompletion
 class WgpuShadowMap {
-  @:noCompletion
-  public static function destroyWgpuScene3DShadow(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuScene3DShadow(state:WgpuRenderState):Void {
     var scene:WgpuScene3DRuntime = cast _Runtime.UNDEFINED;
     scene = (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : WgpuScene3DRuntime);
     if ((cast !_Runtime.strictEquals(scene.shadow, null) : Bool)) {

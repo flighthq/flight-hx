@@ -10,16 +10,18 @@ import flighthq.node.Revision.getNodeLocalTransformRevision;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.HasTransform2D;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderStateRuntime;
-import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
+import flighthq.types.RenderStateRuntime;
+import flighthq.types.Scene3DGraphSyncPolicy;
 
+@:noCompletion
 class RenderTransform2d {
-  @:noCompletion
-  public static function updateRenderProxy2DTransform(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function updateRenderProxy2DTransform(state:RenderState, data:RenderProxy2D, ?parentData:RenderProxy2D):Bool {
     var localTransformId:Float = cast _Runtime.UNDEFINED;
     var parentDirty:Bool = cast _Runtime.UNDEFINED;
     var localDirty:Bool = cast _Runtime.UNDEFINED;

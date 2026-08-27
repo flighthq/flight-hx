@@ -7,9 +7,10 @@ import flighthq.animation.AnimationAdvance.advanceAnimationPlayers;
 import flighthq.types.AnimationBlendTree;
 import flighthq.types.AnimationPlayer;
 import flighthq.types.AnimationStateMachine;
-import flighthq.types.AnimationStateMachine.AnimationStateMachineState;
+import flighthq.types.AnimationStateMachineState;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class AnimationStateMachineAdvance {
   public static function advanceAnimationStateMachineWithScratch(machine:AnimationStateMachine, dt:Float, advanced:Array<AnimationPlayer>):Void {
     var toIndex:Null<Float> = cast _Runtime.UNDEFINED;

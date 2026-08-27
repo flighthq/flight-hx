@@ -18,18 +18,19 @@ import flighthq.geometry.Vector3.copyVector3;
 import flighthq.node.Revision.computeNodeWorldTransformRevision;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.types.Entity;
-import flighthq.types.HasTransform3D.HasTransform3DRuntime;
-import flighthq.types.HasTransform3D.Transform3DNode;
+import flighthq.types.HasTransform3DRuntime;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeRuntime;
 import flighthq.types.Quaternion;
-import flighthq.types.Quaternion.QuaternionLike;
-import flighthq.types.Transform3D.Transform3DLike;
+import flighthq.types.QuaternionLike;
+import flighthq.types.Transform3DLike;
+import flighthq.types.Transform3DNode;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class NodeTransform3d {
   public static function convertNodeVector3GlobalToLocal<Traits:flighthq._internal._Object>(out:Vector3Like, source:Transform3DNode<Traits>, point:Vector3Like):Void {
     var inv:Matrix4 = cast _Runtime.UNDEFINED;
@@ -43,8 +44,9 @@ class NodeTransform3d {
     matrix4TransformPoint(({ final __callArgument10:Dynamic = out; __callArgument10; }), (cast getNodeWorldMatrix4((cast source : Dynamic)) : Matrix4Like), ({ final __callArgument11:Dynamic = point; __callArgument11; }));
   }
 
-  @:noCompletion
-  public static function ensureNodeLocalMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureNodeLocalMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, } = cast _Runtime.UNDEFINED;
     runtime = (cast getEntityRuntime(({ final __callArgument14:Dynamic = target; __callArgument14; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
     if ((cast ((cast _Runtime.strictEquals(runtime.localMatrix4, null) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var localTransformUsingLocalTransformId:Float; }).localTransformUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool)) : Bool)) {
@@ -52,8 +54,9 @@ class NodeTransform3d {
     }
   }
 
-  @:noCompletion
-  public static function ensureNodeWorldMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureNodeWorldMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, } = cast _Runtime.UNDEFINED;
     var parent:Null<Transform3DNode<Traits>> = cast _Runtime.UNDEFINED;
     var parentRuntime:Null<{ >NodeRuntime<Traits>, >HasTransform3DRuntime, }> = cast _Runtime.UNDEFINED;
@@ -112,8 +115,9 @@ class NodeTransform3d {
     invalidateNodeLocalTransform((cast target : Dynamic));
   }
 
-  @:noCompletion
-  public static function syncNodeTransform3DFromMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function syncNodeTransform3DFromMatrix4<Traits:flighthq._internal._Object>(target:Transform3DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasTransform3DRuntime, } = cast _Runtime.UNDEFINED;
     runtime = (cast getEntityRuntime(({ final __callArgument56:Dynamic = target; __callArgument56; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasTransform3DRuntime>);
     ensureNodeLocalMatrix4((cast target : Dynamic));

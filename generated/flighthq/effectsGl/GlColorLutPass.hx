@@ -11,9 +11,11 @@ import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 
+@:noCompletion
 class GlColorLutPass {
-  @:noCompletion
-  public static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyColorLutPassToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, lut:ColorLut, cache:GlColorLutTextureCache):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var size:Float = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;

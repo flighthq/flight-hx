@@ -3,9 +3,10 @@ package flighthq.scene2dDom;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.Scale9Mapper;
 
+@:noCompletion
 class DomScale9Mapper {
   public static function buildDomScale9Mapper(bounds:RectangleLike, scale9Grid:RectangleLike, scaleX:Float, scaleY:Float):Null<Scale9Mapper> {
     var gx:Float = cast _Runtime.UNDEFINED;

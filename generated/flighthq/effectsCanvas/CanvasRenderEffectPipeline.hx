@@ -17,20 +17,22 @@ import flighthq.scene2dCanvas.CanvasRenderTarget.createCanvasRenderTarget;
 import flighthq.scene2dCanvas.CanvasRenderTarget.endCanvasRenderPass;
 import flighthq.scene2dCanvas.CanvasRenderTarget.resizeCanvasRenderTarget;
 import flighthq.types.Adjustment;
+import flighthq.types.CanvasRenderEffectContext;
 import flighthq.types.CanvasRenderEffectPipeline;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderTargetPool;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
+import flighthq.types.CanvasRenderTargetPool;
 import flighthq.types.ColorLut;
 import flighthq.types.ColorLutCache;
-import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.RenderEffect;
+import flighthq.types.RenderEffectPipelineOptions;
 
+@:noCompletion
 class CanvasRenderEffectPipeline {
-  @:noCompletion
-  public static function acquireCanvasRenderTarget(pool:CanvasRenderTargetPool, width:Float, height:Float):CanvasRenderTarget {
+  @:allow(flighthq)
+  @:keep
+  private static function acquireCanvasRenderTarget(pool:CanvasRenderTargetPool, width:Float, height:Float):CanvasRenderTarget {
     var w:Float = cast _Runtime.UNDEFINED;
     var h:Float = cast _Runtime.UNDEFINED;
     var target:CanvasRenderTarget = cast _Runtime.UNDEFINED;
@@ -62,14 +64,16 @@ class CanvasRenderEffectPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createCanvasRenderTargetPool():CanvasRenderTargetPool {
+  @:allow(flighthq)
+  @:keep
+  private static function createCanvasRenderTargetPool():CanvasRenderTargetPool {
     return cast { free: cast ([] : Array<Dynamic>), inUse: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyCanvasRenderEffectPipeline(_state:CanvasRenderState, pipeline:flighthq.types.CanvasRenderEffectPipeline):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyCanvasRenderEffectPipeline(_state:CanvasRenderState, pipeline:flighthq.types.CanvasRenderEffectPipeline):Void {
     (pipeline.sceneTarget = cast (null : Null<CanvasRenderTarget>));
     _Runtime.setLength((cast pipeline.pool : { var free:Array<CanvasRenderTarget>; }).free, 0.0);
     _Runtime.setLength((cast pipeline.pool : { var inUse:Array<CanvasRenderTarget>; }).inUse, 0.0);
@@ -134,8 +138,9 @@ class CanvasRenderEffectPipeline {
     if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseCanvasRenderTarget(({ final __callArgument54:Dynamic = pool; __callArgument54; }), ({ final __callArgument55:Dynamic = scratchB; __callArgument55; })); }
   }
 
-  @:noCompletion
-  public static function releaseCanvasRenderTarget(pool:CanvasRenderTargetPool, target:CanvasRenderTarget):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function releaseCanvasRenderTarget(pool:CanvasRenderTargetPool, target:CanvasRenderTarget):Void {
     var index:Float = cast _Runtime.UNDEFINED;
     index = _Runtime.callProperty(pool.inUse, 'indexOf', cast ([target] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(index, -1.0) : Bool)) { _Runtime.splice(pool.inUse, Std.int(index), Std.int(1.0), []); }

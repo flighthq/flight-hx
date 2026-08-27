@@ -7,7 +7,7 @@ import flighthq.bitmapfontFormats.BitmapFontFnt as Facade_BitmapfontFormats_flig
 import flighthq.bitmapfontFormats.BitmapFontJson as Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontJson;
 import flighthq.bitmapfontFormats.BitmapFontXml as Facade_BitmapfontFormats_flighthq_bitmapfontFormats_BitmapFontXml;
 import flighthq.types.BitmapFont;
-import flighthq.types.BitmapFont.BitmapFontParseOptions;
+import flighthq.types.BitmapFontParseOptions;
 import flighthq.types.ImportDiagnostic;
 
 class BitmapfontFormats {

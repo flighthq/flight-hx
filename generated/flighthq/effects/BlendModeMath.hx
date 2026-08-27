@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.AdvancedBlendMode;
 import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue;
 
+@:noCompletion
 class BlendModeMath {
   public static function blendNonSeparableRgb(mode:AdvancedBlendMode, cbR:Float, cbG:Float, cbB:Float, csR:Float, csG:Float, csB:Float, out:flighthq._internal._Union2<Array<Float>, flighthq._internal._Float32Array>):Void {
     var r:Float = cast _Runtime.UNDEFINED;

@@ -4,7 +4,7 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Attachment2D;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 import flighthq.types.Skin2D;
 
 class _PathAttachment2DValues {

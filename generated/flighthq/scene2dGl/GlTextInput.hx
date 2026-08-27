@@ -13,14 +13,16 @@ import flighthq.textinput.TextInputEditing.getTextInputSelectionRectangles;
 import flighthq.textlayout.RichTextMetrics.getRichTextScrollYOffset;
 import flighthq.types.GlRichTextOverlay;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
+import flighthq.types.RichTextData;
 import flighthq.types.TextInputState;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 
+@:noCompletion
 class GlTextInput {
-  @:noCompletion
-  public static function drawGlTextInputOverlay(context:flighthq._internal.dom.CanvasRenderingContext2D, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlTextInputOverlay(context:flighthq._internal.dom.CanvasRenderingContext2D, source:RichText, result:TextLayoutResult, fieldW:Float, fieldH:Float, _text:String):Void {
     var input:Null<TextInputState> = cast _Runtime.UNDEFINED;
     var firstVisibleLine:Float = cast _Runtime.UNDEFINED;
     var scrollYOffset:Float = cast _Runtime.UNDEFINED;

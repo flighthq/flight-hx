@@ -7,6 +7,7 @@ import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 
+@:noCompletion
 class TextureAtlasLibgdxParse {
   public static function parseTextureAtlasLibgdxAtlas(text:String, atlas:TextureAtlas):TextureAtlas {
     var lines:Array<String> = cast _Runtime.UNDEFINED;

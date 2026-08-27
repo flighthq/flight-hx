@@ -11,21 +11,21 @@ import flighthq.movieclip.MovieClip.nextFrameMovieClip;
 import flighthq.movieclip.MovieClip.playMovieClip;
 import flighthq.movieclip.MovieClip.prevFrameMovieClip;
 import flighthq.movieclip.MovieClip.stopMovieClip;
-import flighthq.types.Abc.AbcConstantPool;
-import flighthq.types.Abc.AbcFile;
-import flighthq.types.Abc.AbcInstance;
-import flighthq.types.Abc.AbcInstruction;
-import flighthq.types.Abc.AbcMethodBody;
-import flighthq.types.Abc.AbcMultiname;
-import flighthq.types.Abc.AbcNamespace;
-import flighthq.types.Abc.AbcOpcode;
 import flighthq.types.Abc.AbcOpcodeValue;
-import flighthq.types.Abc.AbcTrait;
-import flighthq.types.Abc.AbcTraitKind;
 import flighthq.types.Abc.AbcTraitKindValue;
+import flighthq.types.AbcConstantPool;
+import flighthq.types.AbcFile;
+import flighthq.types.AbcInstance;
+import flighthq.types.AbcInstruction;
+import flighthq.types.AbcMethodBody;
+import flighthq.types.AbcMultiname;
+import flighthq.types.AbcNamespace;
+import flighthq.types.AbcOpcode;
+import flighthq.types.AbcTrait;
+import flighthq.types.AbcTraitKind;
 import flighthq.types.FrameScript;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.MovieClip;
 import flighthq.types.Node2D;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
@@ -34,6 +34,7 @@ typedef SwfFrameCommand__swfFrameAction = { var frame:Float; var kind:String; va
 
 typedef SwfAbcValue__swfFrameAction = { var kind:String; var label:String; var value:Float; };
 
+@:noCompletion
 class SwfFrameAction {
   public static function readSwfAbcFrameScripts(source:flighthq._internal._UInt8Array, ?diagnostics:Array<ImportDiagnostic>):Null<flighthq._internal._Map<String, flighthq._internal._Map<Float, FrameScript>>> {
     var file:Null<AbcFile> = cast _Runtime.UNDEFINED;

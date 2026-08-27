@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.InputGamepadData.InputGamepadAxisData;
-import flighthq.types.InputGamepadData.InputGamepadButtonData;
-import flighthq.types.InputGamepadData.InputGamepadConnectData;
 
 typedef InputSignals = { var onGamepadAxisMove:Signal<InputGamepadAxisData->Void>; var onGamepadButtonDown:Signal<InputGamepadButtonData->Void>; var onGamepadButtonUp:Signal<InputGamepadButtonData->Void>; var onGamepadConnect:Signal<InputGamepadConnectData->Void>; var onGamepadDisconnect:Signal<InputGamepadConnectData->Void>; var onKeyDown:Signal<InputKeyboardData->Void>; var onKeyUp:Signal<InputKeyboardData->Void>; var onPointerCancel:Signal<InputPointerData->Void>; var onPointerDown:Signal<InputPointerData->Void>; var onPointerMove:Signal<InputPointerData->Void>; var onPointerMoveRelative:Signal<InputPointerData->Void>; var onPointerUp:Signal<InputPointerData->Void>; var onTextEdit:Signal<InputTextData->Void>; var onTextInput:Signal<InputTextData->Void>; var onWheel:Signal<InputPointerData->Void>; };

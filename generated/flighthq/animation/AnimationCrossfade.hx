@@ -10,13 +10,14 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationChannel;
 import flighthq.types.AnimationClip;
 import flighthq.types.AnimationCrossfade;
-import flighthq.types.AnimationCrossfade.AnimationCrossfadeChannel;
-import flighthq.types.AnimationCrossfade.AnimationCrossfadeOptions;
+import flighthq.types.AnimationCrossfadeChannel;
+import flighthq.types.AnimationCrossfadeOptions;
 import flighthq.types.AnimationPlayer;
 import flighthq.types.AnimationTrack;
 import flighthq.types.EasingFunction;
 import flighthq.types.Entity;
 
+@:noCompletion
 class AnimationCrossfade {
   public static function advanceAnimationCrossfade(state:flighthq.types.AnimationCrossfade, dt:Float):Void {
     advanceAnimationPlayer(state.from, (cast dt : Float));

@@ -4,9 +4,10 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RandomSource;
-import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector2Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class RandomDistributions {
   public static function pick<T>(random:RandomSource, items:Array<T>):Null<T> {
     if ((cast _Runtime.strictEquals(_Runtime.field(items, 'length'), 0.0) : Bool)) { return cast _Runtime.field(_Runtime, 'UNDEFINED'); }

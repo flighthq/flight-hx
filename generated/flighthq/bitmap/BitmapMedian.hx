@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapMedian {
   public static function medianBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
     var r:Float = cast _Runtime.UNDEFINED;

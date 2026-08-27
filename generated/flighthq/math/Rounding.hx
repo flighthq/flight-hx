@@ -4,6 +4,7 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class Rounding {
   public static function ceilTo(value:Float, step:Float):Float {
     if ((cast ((cast step : Float) <= (cast 0.0 : Float)) : Bool)) { return cast value; }

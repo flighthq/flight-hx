@@ -19,8 +19,8 @@ import flighthq.math.Rounding as Facade_Math_flighthq_math_Rounding;
 import flighthq.math.Scalar as Facade_Math_flighthq_math_Scalar;
 import flighthq.math.Statistics as Facade_Math_flighthq_math_Statistics;
 import flighthq.types.RandomSource;
-import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector2Like;
+import flighthq.types.Vector3Like;
 
 class Math {
   public static function approxEqual(a:Float, b:Float, ?epsilon:Float):Bool {

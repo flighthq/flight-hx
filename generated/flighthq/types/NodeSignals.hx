@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Node.NodeAny;
 
 typedef NodeSignals = { var onChildAdded:Signal<NodeAny->Void>; var onChildRemoved:Signal<NodeAny->Void>; var onChildrenChanged:Signal<Void->Void>; var onChildrenOrderChanged:Signal<Void->Void>; var onParentChanged:Signal<Void->Void>; };

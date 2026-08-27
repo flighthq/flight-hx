@@ -5,39 +5,43 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
 import flighthq.types.Material;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types.WgpuMaterialRenderer;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
+@:noCompletion
 class WgpuMaterialRegistry {
-  @:noCompletion
-  public static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind):Null<WgpuMaterialRenderer> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:WgpuMaterialRenderer; }>> = cast _Runtime.UNDEFINED;
     entry = ((cast (cast (cast (cast (cast getWgpuRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : WgpuRenderStateRuntime) : { var registries:WgpuRenderRegistries; }).registries : { var materialRenderers:KeyedTable<WgpuMaterialRenderer>; }).materialRenderers : KeyedTable<WgpuMaterialRenderer>).entries : flighthq._internal._Map<String, RegistryTableEntry<WgpuMaterialRenderer>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural4 = entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:WgpuMaterialRenderer; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerWgpuMaterialRenderer(state:WgpuRenderState, kind:Kind, renderer:WgpuMaterialRenderer):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getWgpuRenderStateRuntime(({ final __callArgument5:Dynamic = state; __callArgument5; })) : WgpuRenderStateRuntime);
     ((cast runtime.registries : { var materialRenderers:KeyedTable<WgpuMaterialRenderer>; }).materialRenderers = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var materialRenderers:KeyedTable<WgpuMaterialRenderer>; }).materialRenderers : Dynamic), (cast kind : String), ({ final __callArgument7:Dynamic = renderer; __callArgument7; })) : KeyedTable<WgpuMaterialRenderer>) : KeyedTable<WgpuMaterialRenderer>));
   }
 
-  @:noCompletion
-  public static function resolveWgpuMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMaterialRenderer> {
+  @:allow(flighthq)
+  @:keep
+  private static function resolveWgpuMaterialRenderer(state:WgpuRenderState, material:Null<Material>):Null<WgpuMaterialRenderer> {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var entries:flighthq._internal._Map<String, RegistryTableEntry<WgpuMaterialRenderer>> = cast _Runtime.UNDEFINED;
     var kind:String = cast _Runtime.UNDEFINED;

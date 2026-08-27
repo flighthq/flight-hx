@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.LensDistortionEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlLensDistortionEffect {
-  @:noCompletion
-  public static function applyLensDistortionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDistortionEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyLensDistortionEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:LensDistortionEffect):Void {
     var amount:Float = cast _Runtime.UNDEFINED;
     var scale:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;

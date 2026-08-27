@@ -10,24 +10,26 @@ import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResol
 import flighthq.scene2dCanvas.CanvasShapeRegistry.getCanvasShapeCommand;
 import flighthq.scene2dCanvas.CanvasTransform.setCanvasTransform;
 import flighthq.types.CanvasRenderState;
+import flighthq.types.CanvasShapeCommand;
 import flighthq.types.CanvasShapeDrawState;
-import flighthq.types.CanvasShapeRegistry.CanvasShapeCommand;
-import flighthq.types.CanvasShapeRegistry.CanvasShapeHandler;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasShapeHandler;
+import flighthq.types.CanvasTextureResolvers;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
 
+@:noCompletion
 class CanvasShape {
-  @:noCompletion
-  public static function drawCanvasShape(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasShape(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     var source:Shape = cast _Runtime.UNDEFINED;
     var __destructure0:ShapeData = cast _Runtime.UNDEFINED;
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;
@@ -44,8 +46,9 @@ class CanvasShape {
     renderCanvasShapeCommands(({ final __callArgument8:Dynamic = context; __callArgument8; }), ({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = commands; __callArgument10; }), (cast getCanvasRenderStateTextureResolvers(({ final __callArgument11:Dynamic = state; __callArgument11; })) : CanvasTextureResolvers));
   }
 
-  @:noCompletion
-  public static function renderCanvasShapeCommands(context:flighthq._internal.dom.CanvasRenderingContext2D, state:RenderState, commands:Array<flighthq._internal._Any>, resolvers:CanvasTextureResolvers):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function renderCanvasShapeCommands(context:flighthq._internal.dom.CanvasRenderingContext2D, state:RenderState, commands:Array<flighthq._internal._Any>, resolvers:CanvasTextureResolvers):Void {
     var drawState:CanvasShapeDrawState = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
     drawState = (cast CanvasShape.createCanvasShapeDrawState__canvasShape(({ final __callArgument18:Dynamic = context; __callArgument18; }), ({ final __callArgument19:Dynamic = resolvers; __callArgument19; }), (cast (cast state : RenderState).allowSmoothing : Bool)) : CanvasShapeDrawState);

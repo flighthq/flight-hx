@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.EasingFunction;
 
+@:noCompletion
 class EaseBack {
   public static final easeInBack:EasingFunction = (cast function(t:Float):Float return ((t * t) * (((EaseBack.s__easeBack + 1.0) * t) - EaseBack.s__easeBack)));
 

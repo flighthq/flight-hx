@@ -3,15 +3,16 @@ package flighthq.physics3d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
-import flighthq.types.Spatial.SpatialAabb3D;
-import flighthq.types.Spatial.SpatialIndexBackend3D;
-import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
-import flighthq.types.SpatialIndexing.SpatialIndexingMode;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
+import flighthq.types.SpatialAabb3D;
+import flighthq.types.SpatialIndexBackend3D;
+import flighthq.types.SpatialIndexingExplanation;
+import flighthq.types.SpatialIndexingMode;
 
 typedef Physics3DBroadphasePublication__physics3DBroadphasePublication = { var bodyIndices:flighthq._internal._Set<Float>; var index:flighthq._internal._IndexedAccess<Physics3DWorld, String>; };
 
+@:noCompletion
 class Physics3DBroadphasePublication {
   public static function getPhysics3DBroadphaseBodyIndices(world:Physics3DWorld):flighthq._internal._Set<Float> {
     var existing:Null<Physics3DBroadphasePublication__physics3DBroadphasePublication> = cast _Runtime.UNDEFINED;

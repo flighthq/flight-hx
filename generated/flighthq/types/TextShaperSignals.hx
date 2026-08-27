@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.TextShaper.TextShaperBackend;
 
 typedef TextShaperSignals = { var onBackendChanged:Signal<Null<TextShaperBackend>->Void>; };

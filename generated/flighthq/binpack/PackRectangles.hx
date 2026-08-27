@@ -4,18 +4,19 @@ package flighthq.binpack;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Rectangle.intersectsRectangle;
-import flighthq.types.BinPack.BinPackHeuristic;
-import flighthq.types.BinPack.BinPackOptions;
-import flighthq.types.BinPack.PackResult;
-import flighthq.types.BinPack.PackableRectangle;
-import flighthq.types.BinPack.PackedRectangle;
-import flighthq.types.BinPack.RectangleId;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.BinPackHeuristic;
+import flighthq.types.BinPackOptions;
+import flighthq.types.PackResult;
+import flighthq.types.PackableRectangle;
+import flighthq.types.PackedRectangle;
+import flighthq.types.RectangleId;
+import flighthq.types.RectangleLike;
 
 typedef FreeRectangle__packRectangles = { var x:Float; var y:Float; var width:Float; var height:Float; };
 
 typedef Placement__packRectangles = { var x:Float; var y:Float; var footprintWidth:Float; var footprintHeight:Float; var rotated:Bool; };
 
+@:noCompletion
 class PackRectangles {
   public static function getPackResultOccupancy(result:PackResult):Float {
     var area:Float = cast _Runtime.UNDEFINED;
@@ -292,6 +293,7 @@ class PackRectangles {
     return cast null;
   }
 
-  @:noCompletion
-  public static final BIN_PACK_DEFAULT_MAX_EXTENT:Float = 16384.0;
+  @:allow(flighthq)
+  @:keep
+  private static final BIN_PACK_DEFAULT_MAX_EXTENT:Float = 16384.0;
 }

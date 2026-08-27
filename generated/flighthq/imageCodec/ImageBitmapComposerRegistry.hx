@@ -3,39 +3,46 @@ package flighthq.imageCodec;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ImageBitmapComposition.ImageBitmapComposer;
+import flighthq.types.ImageBitmapComposer;
 
+@:noCompletion
 class ImageBitmapComposerRegistry {
-  @:noCompletion
-  public static function clearImageBitmapComposers():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function clearImageBitmapComposers():Void {
     ((cast ImageBitmapComposerRegistry.composers__imageBitmapComposerRegistry : flighthq._internal._Map<String, ImageBitmapComposer>).clear());
   }
 
-  @:noCompletion
-  public static function getImageBitmapComposer(kind:String):Null<ImageBitmapComposer> {
+  @:allow(flighthq)
+  @:keep
+  private static function getImageBitmapComposer(kind:String):Null<ImageBitmapComposer> {
     return cast _Runtime.coalesce(((cast ImageBitmapComposerRegistry.composers__imageBitmapComposerRegistry : flighthq._internal._Map<String, ImageBitmapComposer>).get(kind)), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getImageBitmapComposerKinds():Array<String> {
+  @:allow(flighthq)
+  @:keep
+  private static function getImageBitmapComposerKinds():Array<String> {
     return cast (cast _Runtime.toArray(((cast ImageBitmapComposerRegistry.composers__imageBitmapComposerRegistry : flighthq._internal._Map<String, ImageBitmapComposer>).keys())) : Array<String>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function hasImageBitmapComposer(kind:String):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasImageBitmapComposer(kind:String):Bool {
     return cast ((cast ImageBitmapComposerRegistry.composers__imageBitmapComposerRegistry : flighthq._internal._Map<String, ImageBitmapComposer>).has(kind));
     return cast null;
   }
 
-  @:noCompletion
-  public static function registerImageBitmapComposer(kind:String, composer:ImageBitmapComposer):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerImageBitmapComposer(kind:String, composer:ImageBitmapComposer):Void {
     ((cast ImageBitmapComposerRegistry.composers__imageBitmapComposerRegistry : flighthq._internal._Map<String, ImageBitmapComposer>).set(kind, (cast composer)));
   }
 
-  @:noCompletion
-  public static function unregisterImageBitmapComposer(kind:String):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function unregisterImageBitmapComposer(kind:String):Void {
     ((cast ImageBitmapComposerRegistry.composers__imageBitmapComposerRegistry : flighthq._internal._Map<String, ImageBitmapComposer>).delete_(kind));
   }
 

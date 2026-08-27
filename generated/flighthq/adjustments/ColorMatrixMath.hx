@@ -4,9 +4,11 @@ package flighthq.adjustments;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class ColorMatrixMath {
-  @:noCompletion
-  public static final COLOR_MATRIX_LENGTH:Float = 20.0;
+  @:allow(flighthq)
+  @:keep
+  private static final COLOR_MATRIX_LENGTH:Float = 20.0;
 
   public static function applyColorMatrixToColor(matrix:Array<Float>, packedRgba:Float):Float {
     var r:Float = cast _Runtime.UNDEFINED;
@@ -38,14 +40,16 @@ class ColorMatrixMath {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createChannelMixerColorMatrix(redOut:Array<Float>, greenOut:Array<Float>, blueOut:Array<Float>):Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createChannelMixerColorMatrix(redOut:Array<Float>, greenOut:Array<Float>, blueOut:Array<Float>):Array<Float> {
     return cast cast ([flighthq._internal._StaticIndex.readFloatArrayTyped((cast redOut : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast redOut : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast redOut : Array<Float>), (cast 2.0 : Float)), 0.0, 0.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast greenOut : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast greenOut : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast greenOut : Array<Float>), (cast 2.0 : Float)), 0.0, 0.0, flighthq._internal._StaticIndex.readFloatArrayTyped((cast blueOut : Array<Float>), (cast 0.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast blueOut : Array<Float>), (cast 1.0 : Float)), flighthq._internal._StaticIndex.readFloatArrayTyped((cast blueOut : Array<Float>), (cast 2.0 : Float)), 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Array<Float>, highlights:Array<Float>):Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createColorBalanceColorMatrix(shadows:Array<Float>, midtones:Array<Float>, highlights:Array<Float>):Array<Float> {
     var scale:Float = cast _Runtime.UNDEFINED;
     var rOff:Float = cast _Runtime.UNDEFINED;
     var gOff:Float = cast _Runtime.UNDEFINED;
@@ -78,14 +82,16 @@ class ColorMatrixMath {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createDesaturateColorMatrix(amount:Float):Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createDesaturateColorMatrix(amount:Float):Array<Float> {
     return cast (cast createSaturationColorMatrix((cast (1.0 - amount) : Float)) : Array<Float>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function createGrayscaleColorMatrix():Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createGrayscaleColorMatrix():Array<Float> {
     var r:Float = cast _Runtime.UNDEFINED;
     var g:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;
@@ -118,14 +124,16 @@ class ColorMatrixMath {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createInvertColorMatrix():Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createInvertColorMatrix():Array<Float> {
     return cast cast ([-1.0, 0.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, gamma:Float = 1.0):Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createLevelsColorMatrix(inBlack:Float, inWhite:Float, outBlack:Float, outWhite:Float, gamma:Float = 1.0):Array<Float> {
     var inRange:Float = cast _Runtime.UNDEFINED;
     var scale:Float = cast _Runtime.UNDEFINED;
     var gammaCorrectedScale:Float = cast _Runtime.UNDEFINED;
@@ -138,14 +146,16 @@ class ColorMatrixMath {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createOpacityColorMatrix(alpha:Float):Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createOpacityColorMatrix(alpha:Float):Array<Float> {
     return cast cast ([1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, alpha, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function createPolaroidColorMatrix():Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createPolaroidColorMatrix():Array<Float> {
     return cast cast ([1.438, -0.062, -0.062, 0.0, (-31.8 / 255.0), -0.122, 1.378, -0.122, 0.0, (16.2 / 255.0), -0.016, -0.016, 1.484, 0.0, (-47.6 / 255.0), 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
@@ -161,26 +171,30 @@ class ColorMatrixMath {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createSepiaColorMatrix():Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createSepiaColorMatrix():Array<Float> {
     return cast cast ([0.393, 0.769, 0.189, 0.0, 0.0, 0.349, 0.686, 0.168, 0.0, 0.0, 0.272, 0.534, 0.131, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function createTechnicolorColorMatrix():Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createTechnicolorColorMatrix():Array<Float> {
     return cast cast ([1.9126, -0.8, -0.09, 0.0, (11.79 / 255.0), -0.2, 1.7, -0.27, 0.0, (-14.69 / 255.0), -0.14, -0.21, 1.62, 0.0, (-3.38 / 255.0), 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function createVintageColorMatrix():Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createVintageColorMatrix():Array<Float> {
     return cast cast ([0.9, 0.05, 0.05, 0.0, (10.0 / 255.0), 0.0, 0.85, 0.0, 0.0, (5.0 / 255.0), 0.0, 0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0] : Array<Dynamic>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Array<Float> {
+  @:allow(flighthq)
+  @:keep
+  private static function createWhiteBalanceColorMatrix(temperature:Float, tint:Float):Array<Float> {
     var tempScale:Float = cast _Runtime.UNDEFINED;
     var tintScale:Float = cast _Runtime.UNDEFINED;
     var rGain:Float = cast _Runtime.UNDEFINED;

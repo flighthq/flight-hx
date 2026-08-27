@@ -15,12 +15,12 @@ import flighthq.log.Log.setLogChannelLevel;
 import flighthq.log.Log.setLogLevel;
 import flighthq.render.EnableColorAdjustmentGuards.enableColorAdjustmentGuards;
 import flighthq.render.RenderRegistryGuards.enableRenderRegistryGuards;
-import flighthq.types.Debug.DebugOptions;
-import flighthq.types.Debug.DebugSubsystemHooks;
-import flighthq.types.Debug.DebugSubsystemName;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.Log.LogSink;
-import flighthq.types.Log.LogTimer;
+import flighthq.types.DebugOptions;
+import flighthq.types.DebugSubsystemHooks;
+import flighthq.types.DebugSubsystemName;
+import flighthq.types.LogLevel;
+import flighthq.types.LogSink;
+import flighthq.types.LogTimer;
 import flighthq.types.RenderState;
 
 class Debug {

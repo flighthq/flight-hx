@@ -3,47 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.ImageResourceReference.ImageResourceFetch;
 import flighthq.types._internal._Scene3DResourcesValues.Scene3DResourceResolverRuntimeKey;
 
-typedef Scene3DMaterialTextureLister = Material->Array<Texture>->Void;
-
-typedef Scene3DPbrExtensionTextureLister = PbrExtension->Array<Texture>->Void;
-
-typedef Scene3DMaterialTextureRegistry = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var extensionListers:flighthq._internal._Map<Kind, Scene3DPbrExtensionTextureLister>; var listers:flighthq._internal._Map<Kind, Scene3DMaterialTextureLister>; };
-
-typedef Scene3DResourceEvent = { var ref:ImageResourceReference; var texture:Texture; };
-
-typedef Scene3DResourceSignals = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onResourceFailed:Signal<Scene3DResourceEvent->Void>; var onResourceResolved:Signal<Scene3DResourceEvent->Void>; };
-
-typedef Scene3DResourceResolver = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; };
-
-typedef Scene3DResourceResolverOptions = { @:optional var fetch:ImageResourceFetch; @:optional var maxConcurrent:Float; @:optional var registry:Scene3DMaterialTextureRegistry; };
-
-typedef Scene3DResourceInFlight = { var controller:flighthq._internal.dom.AbortController; var promise:flighthq._internal._Promise<flighthq._internal._Nothing>; var subscribers:flighthq._internal._Set<Texture>; };
-
-typedef Scene3DResourceResolverRuntime = { var inFlight:flighthq._internal._Map<ImageResourceReference, Scene3DResourceInFlight>; var loader:ResourceLoader; var resolved:flighthq._internal._Map<ImageResourceReference, TextureSource>; var signals:Null<Scene3DResourceSignals>; };
-
-typedef Scene3DResourceResolverWithRuntime = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; @:optional var __Scene3DResourceResolverRuntimeKey:Scene3DResourceResolverRuntime; };
-
-typedef Scene3DDocumentLoadProgress = { var loaded:Float; var phase:String; var total:Float; var url:String; };
-
-typedef Scene3DDocumentLoadOptions = { @:optional var progress:Signal<Scene3DDocumentLoadProgress->Void>; @:optional var signal:flighthq._internal.dom.AbortSignal; };
-
-typedef Scene3DResourceLoadProgress = { var loaded:Float; var total:Float; };
-
-typedef LoadScene3DResourcesOptions = { @:optional var select:Texture->ImageResourceReference->Bool; @:optional var priority:Texture->ImageResourceReference->Float; @:optional var progress:Signal<Scene3DResourceLoadProgress->Void>; };
-
-typedef ResolveScene3DResourcesOptions = { @:optional var select:Texture->ImageResourceReference->Bool; };
-
-typedef Scene3DResourceResolution = { var ref:ImageResourceReference; var textures:Array<Texture>; var source:TextureSource; };
-
 typedef Scene3DResources = { var resolved:Array<Scene3DResourceResolution>; var scene:Scene3D; var unresolved:Array<Scene3DResourceWorkingSet>; };
-
-typedef Scene3DResourceWorkingSet = { var ref:ImageResourceReference; var textures:Array<Texture>; };
-
-typedef UpdateScene3DResourceStreamingOptions = { @:optional var select:Texture->ImageResourceReference->Bool; @:optional var priority:Texture->ImageResourceReference->Float; };
-
-typedef Scene3DResourceRevealOptions = { @:optional var ease:EasingFunction; @:optional var fadeSeconds:Float; @:optional var from:Float; };

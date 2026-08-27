@@ -9,6 +9,7 @@ import flighthq.types.BitmapMismatch;
 
 typedef BitmapComparisonSource__bitmapCompare = { var width:Float; var height:Float; var data:flighthq._internal._ArrayLike<Float>; };
 
+@:noCompletion
 class BitmapCompare {
   public static function compareBitmap(source:Bitmap, other:Bitmap):Null<Bitmap> {
     var result:Bitmap = cast _Runtime.UNDEFINED;

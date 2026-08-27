@@ -8,15 +8,15 @@ import flighthq.audio.AudioFormat as Facade_Audio_flighthq_audio_AudioFormat;
 import flighthq.audio.AudioResource as Facade_Audio_flighthq_audio_AudioResource;
 import flighthq.audio.AudioResourceFrom as Facade_Audio_flighthq_audio_AudioResourceFrom;
 import flighthq.audio.AudioResourceReference as Facade_Audio_flighthq_audio_AudioResourceReference;
+import flighthq.types.AudioDecoder;
 import flighthq.types.AudioResource;
-import flighthq.types.AudioResource.AudioResourceUrl;
+import flighthq.types.AudioResourceFailure;
+import flighthq.types.AudioResourceFetch;
 import flighthq.types.AudioResourceReference;
-import flighthq.types.AudioResourceReference.AudioDecoder;
-import flighthq.types.AudioResourceReference.AudioResourceFailure;
-import flighthq.types.AudioResourceReference.AudioResourceFetch;
-import flighthq.types.AudioResourceReference.AudioResourceReferenceResolutionExplanation;
-import flighthq.types.AudioResourceReference.EmbeddedAudioResourceReference;
-import flighthq.types.AudioResourceReference.ExternalAudioResourceReference;
+import flighthq.types.AudioResourceReferenceResolutionExplanation;
+import flighthq.types.AudioResourceUrl;
+import flighthq.types.EmbeddedAudioResourceReference;
+import flighthq.types.ExternalAudioResourceReference;
 
 class Audio {
   public static function canPlayAudioType(mimeType:String):Bool {

@@ -5,16 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.AppUpdater;
 import flighthq.types.BackendExplanation;
 import flighthq.types.Signal;
-import flighthq.types.Updater.AppUpdater;
-import flighthq.types.Updater.UpdateInfo;
-import flighthq.types.Updater.UpdateProgress;
-import flighthq.types.Updater.UpdaterBackend;
-import flighthq.types.Updater.UpdaterConfig;
-import flighthq.types.Updater.UpdaterError;
-import flighthq.types.Updater.UpdaterSignatureConfig;
-import flighthq.types.Updater.UpdaterState;
+import flighthq.types.UpdateInfo;
+import flighthq.types.UpdateProgress;
+import flighthq.types.UpdaterBackend;
+import flighthq.types.UpdaterConfig;
+import flighthq.types.UpdaterError;
+import flighthq.types.UpdaterSignatureConfig;
+import flighthq.types.UpdaterState;
 
 class Updater {
   public static var _custom__updater:Null<UpdaterBackend> = _Runtime.explicitNull();
@@ -227,8 +227,9 @@ class Updater {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getUpdaterBackend():UpdaterBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getUpdaterBackend():UpdaterBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Updater._custom__updater, function():Dynamic return cast Updater._host__updater), function():Dynamic return cast Updater._sentinel__updater);
     return cast null;
   }
@@ -243,8 +244,9 @@ class Updater {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installUpdaterHostBackend(backend:UpdaterBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installUpdaterHostBackend(backend:UpdaterBackend):Void {
     if ((cast !_Runtime.strictEquals(Updater._host__updater, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Updater._host__updater, backend) : Bool)) { (Updater._hostConflict__updater = cast (true : Dynamic)); }
       return;
@@ -257,8 +259,9 @@ class Updater {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeUpdaterHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeUpdaterHostResult(operation:String, succeeded:Bool):Void {
     (Updater._hostObservation__updater = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -266,8 +269,9 @@ class Updater {
     (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).quitAndInstall();
   }
 
-  @:noCompletion
-  public static function resetUpdaterBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetUpdaterBackendForTest():Void {
     (Updater._custom__updater = cast (null : Dynamic));
     (Updater._host__updater = cast (null : Dynamic));
     (Updater._hostConflict__updater = cast (false : Dynamic));
@@ -280,8 +284,9 @@ class Updater {
     (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).rollback();
   }
 
-  @:noCompletion
-  public static function setUpdaterBackend(backend:Null<UpdaterBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setUpdaterBackend(backend:Null<UpdaterBackend>):Void {
     (Updater._custom__updater = cast (backend : Dynamic));
   }
 

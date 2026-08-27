@@ -11,15 +11,17 @@ import flighthq.textlayout.TextLayoutRuntime.getTextLayoutResult;
 import flighthq.textlayout.TextMetrics.getTextMetrics;
 import flighthq.types.Node2D;
 import flighthq.types.TextLabel;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
-import flighthq.types.TextLayout.TextMeasureFunction;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
+import flighthq.types.TextMeasureFunction;
 import flighthq.types.TextMetrics;
 
+@:noCompletion
 class TextLabelLayout {
-  @:noCompletion
-  public static function ensureTextLayout(source:TextLabel):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureTextLayout(source:TextLabel):Void {
     var runtime:TextLabelRuntime = cast _Runtime.UNDEFINED;
     var contentId:Float = cast _Runtime.UNDEFINED;
     var measure:Null<TextMeasureFunction> = cast _Runtime.UNDEFINED;

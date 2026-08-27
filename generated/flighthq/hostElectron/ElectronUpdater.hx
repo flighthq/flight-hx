@@ -4,12 +4,13 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronAutoUpdater;
-import flighthq.types.Updater.UpdateInfo;
-import flighthq.types.Updater.UpdaterBackend;
-import flighthq.types.Updater.UpdaterConfig;
-import flighthq.types.Updater.UpdaterError;
+import flighthq.types.ElectronAutoUpdater;
+import flighthq.types.UpdateInfo;
+import flighthq.types.UpdaterBackend;
+import flighthq.types.UpdaterConfig;
+import flighthq.types.UpdaterError;
 
+@:noCompletion
 class ElectronUpdater {
   public static function createElectronUpdaterBackend(electron:ElectronApi):UpdaterBackend {
     var autoUpdater:ElectronAutoUpdater = cast _Runtime.UNDEFINED;

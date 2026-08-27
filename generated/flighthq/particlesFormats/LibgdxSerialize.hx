@@ -4,15 +4,16 @@ package flighthq.particlesFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.math.Constants.RAD_TO_DEG;
-import flighthq.types.LibgdxParticleSchema.LibgdxParticleDocument;
-import flighthq.types.LibgdxParticleSchema.LibgdxRangeValue;
-import flighthq.types.LibgdxParticleSchema.LibgdxSerializeOptions;
+import flighthq.types.LibgdxParticleDocument;
+import flighthq.types.LibgdxRangeValue;
+import flighthq.types.LibgdxSerializeOptions;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterShape;
 import flighthq.types.ParticleSerializeResult;
 
+@:noCompletion
 class LibgdxSerialize {
   public static function serializeLibgdxParticle(config:ParticleEmitterConfig, ?existing:{ @:optional var name:Null<String>; @:optional var minParticleCount:Null<Float>; @:optional var maxParticleCount:Null<Float>; @:optional var additive:Null<Bool>; @:optional var premultipliedAlpha:Null<Bool>; @:optional var delay:Null<{ >LibgdxRangeValue, var active:Bool; }>; @:optional var duration:Null<LibgdxRangeValue>; @:optional var emission:Null<LibgdxRangeValue>; @:optional var life:Null<LibgdxRangeValue>; @:optional var lifeOffset:Null<{ >LibgdxRangeValue, var active:Bool; }>; @:optional var xOffset:Null<{ >LibgdxRangeValue, var active:Bool; }>; @:optional var yOffset:Null<{ >LibgdxRangeValue, var active:Bool; }>; @:optional var spawnShape:Null<{ var shape:String; var edges:Bool; var side:String; }>; @:optional var spawnWidth:Null<LibgdxRangeValue>; @:optional var spawnHeight:Null<LibgdxRangeValue>; @:optional var scale:Null<LibgdxRangeValue>; @:optional var velocity:Null<{ >LibgdxRangeValue, var active:Bool; }>; @:optional var angle:Null<{ >LibgdxRangeValue, var active:Bool; }>; @:optional var rotation:Null<{ >LibgdxRangeValue, var active:Bool; }>; @:optional var wind:Null<{ >LibgdxRangeValue, var active:Bool; }>; @:optional var gravity:Null<{ >LibgdxRangeValue, var active:Bool; }>; @:optional var tint:Null<{ var colors:Array<String>; var timeline:Array<Float>; }>; @:optional var transparency:Null<LibgdxRangeValue>; @:optional var imageCount:Null<Float>; @:optional var imagePath:Null<String>; }, ?options:LibgdxSerializeOptions):String {
     var textureSize:Float = cast _Runtime.UNDEFINED;

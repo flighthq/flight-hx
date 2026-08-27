@@ -7,6 +7,7 @@ import flighthq.bitmap.Bitmap.invalidateBitmap;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapFill {
   public static var _floodFillVisited__bitmapFill:Null<flighthq._internal._UInt8Array> = _Runtime.explicitNull();
 

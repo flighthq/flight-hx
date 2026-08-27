@@ -8,16 +8,17 @@ import flighthq.texture.Sampler.copySampler;
 import flighthq.texture.Texture.createTexture;
 import flighthq.types.CreateRenderTextureOptions;
 import flighthq.types.RenderTarget;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetFormat;
 import flighthq.types.RenderTexture;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.SamplerLike;
-import flighthq.types.Texture.TextureColorSpace;
+import flighthq.types.SamplerLike;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.Types.RenderTargetTextureSourceKind;
 import flighthq.types.Vector2;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSourceKind;
 
+@:noCompletion
 class RenderTexture {
   public static function createRenderTexture(options:CreateRenderTextureOptions):flighthq.types.RenderTexture {
     var colorSpace:TextureColorSpace = cast _Runtime.UNDEFINED;

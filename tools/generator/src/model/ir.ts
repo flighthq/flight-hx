@@ -289,6 +289,7 @@ export interface IrVariable {
 }
 
 export interface IrFunctionDeclaration {
+  allowPackage?: string | undefined;
   async?: boolean | undefined;
   body: IrStatement[];
   exported: boolean;
@@ -314,6 +315,7 @@ export interface IrFunctionOverload {
 }
 
 export interface IrVariableDeclaration extends IrVariable {
+  allowPackage?: string | undefined;
   exported: boolean;
   kind: 'variable';
   noCompletion?: true | undefined;
@@ -394,6 +396,7 @@ export interface IrModule {
   haxePackage?: string;
   imports: string[];
   name: string;
+  namespaceNoCompletion?: true | undefined;
   packageName: string;
   source?: string | undefined;
 }

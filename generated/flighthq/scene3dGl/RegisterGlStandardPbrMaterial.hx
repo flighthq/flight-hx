@@ -10,6 +10,7 @@ import flighthq.types.GlRenderState;
 import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
+@:noCompletion
 class RegisterGlStandardPbrMaterial {
   public static function registerGlStandardPbrMaterial(state:GlRenderState):Void {
     registerGlMeshMaterialRenderer(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast StandardPbrMaterialKind : String), ({ final __callArgument1:Dynamic = standardPbrGlMeshMaterialRenderer; __callArgument1; }));

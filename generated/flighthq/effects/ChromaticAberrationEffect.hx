@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ChromaticAberrationEffect;
 
+@:noCompletion
 class ChromaticAberrationEffect {
   public static function createChromaticAberrationEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var radial:Null<Bool>; }):flighthq.types.ChromaticAberrationEffect {
     if (options == null) options = cast ({  } : Dynamic);

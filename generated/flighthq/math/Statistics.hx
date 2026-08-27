@@ -4,6 +4,7 @@ package flighthq.math;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class Statistics {
   public static function mean(values:Array<Float>):Float {
     var scale:Float = cast _Runtime.UNDEFINED;

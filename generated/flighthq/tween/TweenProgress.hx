@@ -10,6 +10,7 @@ import flighthq.types.Signal;
 import flighthq.types.Tween;
 import flighthq.types.TweenPropertyDetail;
 
+@:noCompletion
 class TweenProgress {
   public static function getTweenProgress(tween:Tween<flighthq._internal._Any>):Float {
     var activeElapsed:Float = cast _Runtime.UNDEFINED;
@@ -20,8 +21,9 @@ class TweenProgress {
     return cast null;
   }
 
-  @:noCompletion
-  public static function invalidateTween(tween:Tween<flighthq._internal._Any>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function invalidateTween(tween:Tween<flighthq._internal._Any>):Void {
     (tween.initialized = cast (false : Bool));
     (tween.complete = cast (false : Bool));
     (tween.elapsed = cast (0.0 : Float));

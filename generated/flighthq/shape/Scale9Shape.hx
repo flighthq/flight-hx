@@ -8,34 +8,38 @@ import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.shape.Shape.createShapeRuntime;
 import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.Scale9Shape;
-import flighthq.types.Scale9Shape.Scale9ShapeData;
-import flighthq.types.Scale9Shape.Scale9ShapeRuntime;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.Scale9ShapeData;
+import flighthq.types.Scale9ShapeRuntime;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
+@:noCompletion
 class Scale9Shape {
   public static function createScale9Shape(scale9Grid:RectangleLike, ?obj:PartialNode<flighthq.types.Scale9Shape>):flighthq.types.Scale9Shape {
     return cast (cast createNode2D((cast Scale9ShapeKind : String), (cast (cast obj : PartialNode<flighthq.types.Scale9Shape>) : Dynamic), (cast function(data:Null<{  }>):Scale9ShapeData return (cast createScale9ShapeData(({ final __callArgument0:Dynamic = scale9Grid; __callArgument0; }), (cast data : Dynamic)) : Scale9ShapeData) : Dynamic), (cast function(__unused0:Dynamic):Scale9ShapeRuntime return createScale9ShapeRuntime() : Dynamic)) : flighthq.types.Scale9Shape);
     return cast null;
   }
 
-  @:noCompletion
-  public static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:{ @:optional var scale9Grid:Null<RectangleLike>; @:optional var commands:Null<Array<ShapeCommandToken>>; }):Scale9ShapeData {
+  @:allow(flighthq)
+  @:keep
+  private static function createScale9ShapeData(scale9Grid:RectangleLike, ?data:{ @:optional var scale9Grid:Null<RectangleLike>; @:optional var commands:Null<Array<ShapeCommandToken>>; }):Scale9ShapeData {
     return cast { commands: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var commands:Null<Array<ShapeCommandToken>>; }).commands; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), scale9Grid: scale9Grid };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createScale9ShapeRuntime():Scale9ShapeRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createScale9ShapeRuntime():Scale9ShapeRuntime {
     return cast (cast createShapeRuntime() : Scale9ShapeRuntime);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getScale9ShapeRuntime(source:flighthq.types.Scale9Shape):Scale9ShapeRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getScale9ShapeRuntime(source:flighthq.types.Scale9Shape):Scale9ShapeRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument5:Dynamic = source; __callArgument5; })) : Scale9ShapeRuntime);
     return cast null;
   }

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.PosterizeEffect;
 
+@:noCompletion
 class PosterizeEffect {
   public static function createPosterizeEffect(?options:{ @:optional var levels:Null<Float>; }):flighthq.types.PosterizeEffect {
     if (options == null) options = cast ({  } : Dynamic);

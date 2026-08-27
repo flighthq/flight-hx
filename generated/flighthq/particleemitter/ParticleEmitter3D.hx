@@ -8,19 +8,20 @@ import flighthq.geometry.Typedarray.reserveUint16Array;
 import flighthq.particleemitter.ParticleEmitter.createParticleEmitterData;
 import flighthq.scene3d.SceneNode.createNode3D;
 import flighthq.scene3d.SceneNode.getNode3DRuntime;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.AabbLike;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Node3D;
 import flighthq.types.PartialNode;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleEmitter3D;
-import flighthq.types.ParticleEmitter3D.ParticleEmitter3DRuntime;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
+import flighthq.types.ParticleEmitter3DRuntime;
+import flighthq.types.ParticleEmitterData;
 import flighthq.types.TextureAtlas;
 import flighthq.types.Types.ParticleEmitter3DKind;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
+@:noCompletion
 class ParticleEmitter3D {
   public static final PARTICLE_TRANSFORM_STRIDE__particleEmitter3D:Float = 4.0;
 
@@ -28,8 +29,9 @@ class ParticleEmitter3D {
 
   public static final PARTICLE_VELOCITY_STRIDE__particleEmitter3D:Float = 3.0;
 
-  @:noCompletion
-  public static final PARTICLE_EMITTER_3D_DELETED_ID:Float = 65535.0;
+  @:allow(flighthq)
+  @:keep
+  private static final PARTICLE_EMITTER_3D_DELETED_ID:Float = 65535.0;
 
   public static function appendParticleEmitter3DParticle(target:flighthq.types.ParticleEmitter3D, id:Float, x:Float, y:Float, z:Float, rotation:Float, scale:Float):Float {
     var index:Float = cast _Runtime.UNDEFINED;
@@ -214,8 +216,9 @@ class ParticleEmitter3D {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getParticleEmitter3DRuntime(source:flighthq.types.ParticleEmitter3D):ParticleEmitter3DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getParticleEmitter3DRuntime(source:flighthq.types.ParticleEmitter3D):ParticleEmitter3DRuntime {
     return cast (cast getNode3DRuntime((cast (cast source : flighthq._internal._Any) : Node3D)) : ParticleEmitter3DRuntime);
     return cast null;
   }

@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.permissions.Permission.createWebPermissionBackend;
 import flighthq.permissions.Permission.installPermissionHostBackend;
 import flighthq.permissions.Permission.observePermissionHostResult;
-import flighthq.types.Permission.PermissionBackend;
-import flighthq.types.Permission.PermissionName;
-import flighthq.types.Permission.PermissionState;
+import flighthq.types.PermissionBackend;
+import flighthq.types.PermissionName;
+import flighthq.types.PermissionState;
 
+@:noCompletion
 class WebPermissions {
   public static function enableHostWebPermission():Void {
     var raw:PermissionBackend = cast _Runtime.UNDEFINED;
@@ -63,8 +64,9 @@ class WebPermissions {
     installPermissionHostBackend(({ final __callArgument4:Dynamic = observed; __callArgument4; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebPermissionsForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebPermissionsForTest():Void {
     (WebPermissions._enabled__webPermissions = cast (false : Dynamic));
   }
 

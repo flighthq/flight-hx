@@ -4,30 +4,31 @@ package flighthq.scene3dGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.CatalogEntry;
+import flighthq.types.CatalogRegistration;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlModifierSnippet;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlTextureResolver;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RequirementFacet;
 import flighthq.types.Scene3DKindUsage;
+import flighthq.types.SceneCoverage;
 import flighthq.types.SceneCoverageCatalog;
-import flighthq.types.SceneCoverageCatalog.CatalogEntry;
-import flighthq.types.SceneCoverageCatalog.CatalogRegistration;
 import flighthq.types.SceneCoverageEntry;
-import flighthq.types.SceneCoverageEntry.SceneCoverage;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._RequirementFacetValues.RequirementFacetValue;
 import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
+@:noCompletion
 class ExplainGlScene3DCoverage {
   public static function explainGlScene3DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene3DKindUsage, catalog:SceneCoverageCatalog):Void {
     _Runtime.setLength(out, 0.0);

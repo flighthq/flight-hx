@@ -5,36 +5,40 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.GlBitmapShader;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlShaderLocations;
-import flighthq.types.GlShaderLocations.GlBitmapShader;
+import flighthq.types.GlViewportRect;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 
+@:noCompletion
 class GlShader {
   public static final VERTEX_SRC__glShader:String = '#version 300 es\nin vec2 a_position;\nin vec2 a_texCoord;\nuniform mat3 u_matrix;\nout vec2 v_texCoord;\nvoid main() {\n  vec3 pos = u_matrix * vec3(a_position, 1.0);\n  gl_Position = vec4(pos.xy, 0.0, 1.0);\n  v_texCoord = a_texCoord;\n}';
 
   public static final FRAGMENT_SRC__glShader:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform float u_alpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord) * clamp(u_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}';
 
-  @:noCompletion
-  public static function compileDefaultGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext):GlShaderLocations {
+  @:allow(flighthq)
+  @:keep
+  private static function compileDefaultGlProgram(gl:flighthq._internal.dom.WebGL2RenderingContext):GlShaderLocations {
     return cast (cast (#if js _Runtime.callValue(compileGlBitmapProgram, cast ([({ final __callArgument1:Dynamic = gl; __callArgument1; })] : Array<Dynamic>)) #else compileGlBitmapProgram(({ final __callArgument0:Dynamic = gl; __callArgument0; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : GlShaderLocations);
     return cast null;
   }
 
-  @:noCompletion
-  public static function compileGlBitmapProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSrc:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform float u_alpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord) * clamp(u_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}'):GlShaderLocations {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlBitmapProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSrc:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform float u_alpha;\nout vec4 fragColor;\nvoid main() {\n  vec4 color = texture(u_texture, v_texCoord) * clamp(u_alpha, 0.0, 1.0);\n  if (color.a <= 0.0) discard;\n  fragColor = color;\n}'):GlShaderLocations {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     program = (cast createGlProgram(({ final __callArgument2:Dynamic = gl; __callArgument2; }), (cast GlShader.VERTEX_SRC__glShader : String), (cast fragmentSrc : String), (cast 'Bitmap' : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { program: program, locPosition: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_position'), locTexCoord: flighthq._internal.backend.WebGl2Backend.getAttribLocation(gl, program, 'a_texCoord'), locMatrix: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_matrix'), locAlpha: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alpha'), locTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_texture') };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createDefaultGlBitmapShader(shaderLoc:GlShaderLocations, matrixArray:flighthq._internal._Float32Array):GlBitmapShader {
+  @:allow(flighthq)
+  @:keep
+  private static function createDefaultGlBitmapShader(shaderLoc:GlShaderLocations, matrixArray:flighthq._internal._Float32Array):GlBitmapShader {
     return cast { locations: shaderLoc, program: (cast shaderLoc : GlShaderLocations).program, bind: function(gl:flighthq._internal.dom.WebGL2RenderingContext, state:GlRenderState, renderProxy:RenderProxy2D):Void {
       var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
       runtime = (cast getGlRenderStateRuntime(({ final __callArgument4:Dynamic = state; __callArgument4; })) : GlRenderStateRuntime);
@@ -45,8 +49,9 @@ class GlShader {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createGlBitmapShader(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSrc:String, ?onBind:flighthq._internal.dom.WebGL2RenderingContext->GlShaderLocations->RenderProxy2D->Void):GlBitmapShader {
+  @:allow(flighthq)
+  @:keep
+  private static function createGlBitmapShader(gl:flighthq._internal.dom.WebGL2RenderingContext, fragmentSrc:String, ?onBind:flighthq._internal.dom.WebGL2RenderingContext->GlShaderLocations->RenderProxy2D->Void):GlBitmapShader {
     var locations:GlShaderLocations = cast _Runtime.UNDEFINED;
     locations = (cast compileGlBitmapProgram(({ final __callArgument26:Dynamic = gl; __callArgument26; }), (cast fragmentSrc : String)) : GlShaderLocations);
     return cast { locations: locations, program: (cast locations : GlShaderLocations).program, bind: function(gl:flighthq._internal.dom.WebGL2RenderingContext, state:GlRenderState, renderProxy:RenderProxy2D):Void {
@@ -60,8 +65,9 @@ class GlShader {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureDefaultGlBitmapShader(state:GlRenderState):GlBitmapShader {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureDefaultGlBitmapShader(state:GlRenderState):GlBitmapShader {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var shaderLoc:GlShaderLocations = cast _Runtime.UNDEFINED;
     var shader:GlBitmapShader = cast _Runtime.UNDEFINED;
@@ -75,22 +81,25 @@ class GlShader {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setGlAttributes(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:GlShaderLocations):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlAttributes(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:GlShaderLocations):Void {
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast loc : GlShaderLocations).locPosition);
     flighthq._internal.backend.WebGl2Backend.enableVertexAttribArray(gl, (cast loc : GlShaderLocations).locTexCoord);
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast loc : GlShaderLocations).locPosition, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 16.0, 0.0);
     flighthq._internal.backend.WebGl2Backend.vertexAttribPointer(gl, (cast loc : GlShaderLocations).locTexCoord, 2.0, flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'FLOAT', flighthq._internal.backend.WebGl2Backend.FLOAT), false, 16.0, 8.0);
   }
 
-  @:noCompletion
-  public static function setGlBaseUniforms(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:GlShaderLocations, renderProxy:RenderProxy):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlBaseUniforms(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:GlShaderLocations, renderProxy:RenderProxy):Void {
     flighthq._internal.backend.WebGl2Backend.uniform1f(gl, (cast loc : GlShaderLocations).locAlpha, renderProxy.alpha);
     flighthq._internal.backend.WebGl2Backend.uniform1i(gl, (cast loc : GlShaderLocations).locTexture, 0.0);
   }
 
-  @:noCompletion
-  public static function setGlMatrixFromTransform(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:GlShaderLocations, m:flighthq._internal._Float32Array, t:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, viewport:{ var width:Float; var height:Float; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlMatrixFromTransform(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:GlShaderLocations, m:flighthq._internal._Float32Array, t:{ var a:Float; var b:Float; var c:Float; var d:Float; var tx:Float; var ty:Float; }, viewport:{ var width:Float; var height:Float; }):Void {
     var iw:Float = cast _Runtime.UNDEFINED;
     var ih:Float = cast _Runtime.UNDEFINED;
     iw = (2.0 / (cast viewport : { var width:Float; var height:Float; }).width);
@@ -107,8 +116,9 @@ class GlShader {
     flighthq._internal.backend.WebGl2Backend.uniformMatrix3fv(gl, (cast loc : GlShaderLocations).locMatrix, false, m);
   }
 
-  @:noCompletion
-  public static function setGlMatrixFromValues(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:GlShaderLocations, m:flighthq._internal._Float32Array, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, viewport:{ var width:Float; var height:Float; }):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setGlMatrixFromValues(gl:flighthq._internal.dom.WebGL2RenderingContext, loc:GlShaderLocations, m:flighthq._internal._Float32Array, a:Float, b:Float, c:Float, d:Float, tx:Float, ty:Float, viewport:{ var width:Float; var height:Float; }):Void {
     var iw:Float = cast _Runtime.UNDEFINED;
     var ih:Float = cast _Runtime.UNDEFINED;
     iw = (2.0 / (cast viewport : { var width:Float; var height:Float; }).width);

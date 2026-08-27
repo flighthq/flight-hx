@@ -4,6 +4,7 @@ package flighthq.font;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class FontShorthand {
   public static function getFontShorthand(family:String, ?style:String):String {
     var quoted:String = cast _Runtime.UNDEFINED;

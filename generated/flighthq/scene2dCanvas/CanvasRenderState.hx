@@ -12,29 +12,30 @@ import flighthq.render.RenderState.destroyRenderState;
 import flighthq.render.Renderer.copyRenderStateRegistrations;
 import flighthq.scene2dCanvas.CanvasTextureResolver.createCanvasTextureResolvers;
 import flighthq.types.CanvasMaterialRenderer;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderOptions;
+import flighthq.types.CanvasRenderRegistries;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderState.CanvasRenderRegistries;
-import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
+import flighthq.types.CanvasRenderStateRuntime;
 import flighthq.types.CanvasTextureResolver;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.CanvasTextureResolvers;
+import flighthq.types.EntityRuntime;
+import flighthq.types.KeyedTable;
 import flighthq.types.Matrix;
 import flighthq.types.Path;
 import flighthq.types.PathMesh;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
 import flighthq.types.Renderer;
+import flighthq.types.Scene3DGraphSyncPolicy;
+import flighthq.types.SlotTable;
 import flighthq.types.StrokeStyle;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class CanvasRenderState {
   public static function copyCanvasRenderStateRegistrations(target:flighthq.types.CanvasRenderState, source:flighthq.types.CanvasRenderState):Void {
     var targetRuntime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -75,8 +76,9 @@ class CanvasRenderState {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createCanvasRenderStateRuntime():CanvasRenderStateRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createCanvasRenderStateRuntime():CanvasRenderStateRuntime {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createRenderStateRuntime() : CanvasRenderStateRuntime);
     (runtime.registries = cast ({ renderEffects: (cast createKeyedTable((cast 'CanvasRenderEffect' : String), (cast 'Unregistered' : String)) : KeyedTable<CanvasRenderEffectRunner>), renderers: (cast runtime.registries : { var renderers:KeyedTable<Renderer>; }).renderers, strokeTessellator: (cast runtime.registries : { var strokeTessellator:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator } : CanvasRenderRegistries));
@@ -88,8 +90,9 @@ class CanvasRenderState {
     destroyRenderState(({ final __callArgument10:Dynamic = state; __callArgument10; }));
   }
 
-  @:noCompletion
-  public static function getCanvasRenderStateRuntime(state:flighthq.types.CanvasRenderState):CanvasRenderStateRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getCanvasRenderStateRuntime(state:flighthq.types.CanvasRenderState):CanvasRenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : CanvasRenderStateRuntime);
     return cast null;
   }

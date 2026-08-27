@@ -6,32 +6,34 @@ import flighthq._internal._Runtime;
 import flighthq.collision.CollisionShapeValidation3D.getCollisionShapeValidationStatus3D;
 import flighthq.collision.TriangleMesh3D.getCollisionHeightfieldValidationStatus3D;
 import flighthq.collision.TriangleMesh3D.getCollisionTriangleMeshValidationStatus3D;
-import flighthq.types.Collision.CollisionAabb3D;
-import flighthq.types.Collision.CollisionBox3D;
-import flighthq.types.Collision.CollisionCapsule3D;
-import flighthq.types.Collision.CollisionColliderShape3D;
-import flighthq.types.Collision.CollisionCone3D;
-import flighthq.types.Collision.CollisionConvex3D;
-import flighthq.types.Collision.CollisionCylinder3D;
-import flighthq.types.Collision.CollisionHeightfield3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionSphere3D;
-import flighthq.types.Collision.CollisionTriangleMesh3D;
-import flighthq.types.Physics3D.Physics3DBodyType;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.Physics3DCollisionFilter;
-import flighthq.types.Physics3D.Physics3DContact;
-import flighthq.types.Physics3D.Physics3DContactPoint;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DMaterial;
-import flighthq.types.Physics3D.Physics3DSequentialImpulseConfig;
-import flighthq.types.Physics3D.Physics3DSolverConfig;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.CollisionAabb3D;
+import flighthq.types.CollisionBox3D;
+import flighthq.types.CollisionCapsule3D;
+import flighthq.types.CollisionColliderShape3D;
+import flighthq.types.CollisionCone3D;
+import flighthq.types.CollisionConvex3D;
+import flighthq.types.CollisionCylinder3D;
+import flighthq.types.CollisionHeightfield3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionSphere3D;
+import flighthq.types.CollisionTriangleMesh3D;
+import flighthq.types.Physics3DBodyType;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.Physics3DCollisionFilter;
+import flighthq.types.Physics3DContact;
+import flighthq.types.Physics3DContactPoint;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DMaterial;
+import flighthq.types.Physics3DSequentialImpulseConfig;
+import flighthq.types.Physics3DSolverConfig;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class StepValidation {
-  @:noCompletion
-  public static function isPhysics3DBodyStateValid(world:Physics3DWorld):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DBodyStateValid(world:Physics3DWorld):Bool {
     if ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([world.nextBodyIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast world.nextBodyIndex : Float) < (cast 0.0 : Float)) : Bool)) : Bool)) { return cast false; }
     {
       var bodyIndex:Float = 0.0;
@@ -52,8 +54,9 @@ class StepValidation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DColliderStateValid(world:Physics3DWorld):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DColliderStateValid(world:Physics3DWorld):Bool {
     {
       var bodyIndex:Float = 0.0;
       while ((cast ((cast bodyIndex : Float) < (cast _Runtime.field(world.bodies, 'length') : Float)) : Bool)) {
@@ -73,8 +76,9 @@ class StepValidation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DContactStateValid(world:Physics3DWorld):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DContactStateValid(world:Physics3DWorld):Bool {
     {
       var contactIndex:Float = 0.0;
       while ((cast ((cast contactIndex : Float) < (cast _Runtime.field(world.contacts, 'length') : Float)) : Bool)) {
@@ -86,8 +90,9 @@ class StepValidation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DContactValid(contact:Physics3DContact):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DContactValid(contact:Physics3DContact):Bool {
     if ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(contact, 'bodyA')] : Array<Dynamic>)) : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(contact, 'bodyB')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(contact, 'colliderA')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(contact, 'colliderA') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(contact, 'colliderB')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(contact, 'colliderB') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(contact, 'pointCount')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(contact, 'pointCount') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast _Runtime.field(contact, 'pointCount') : Float) > (cast _Runtime.field(_Runtime.field(contact, 'points'), 'length') : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(contact, 'normalX')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(contact, 'normalY')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(contact, 'normalZ')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(contact, 'friction')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(contact, 'friction') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !(cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(contact, 'restitution')] : Array<Dynamic>)) : Bool) : Bool)) : Bool) || (cast ((cast _Runtime.field(contact, 'restitution') : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(contact, 'enabled')), 'boolean') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(contact, 'sensor')), 'boolean') : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(contact, 'touching')), 'boolean') : Bool)) : Bool)) {
       return cast false;
     }
@@ -106,14 +111,16 @@ class StepValidation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DGravityValid(world:Physics3DWorld):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DGravityValid(world:Physics3DWorld):Bool {
     return cast ((cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([world.gravityX] : Array<Dynamic>)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([world.gravityY] : Array<Dynamic>)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([world.gravityZ] : Array<Dynamic>)) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DJointStateValid(world:Physics3DWorld):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DJointStateValid(world:Physics3DWorld):Bool {
     {
       var jointIndex:Float = 0.0;
       while ((cast ((cast jointIndex : Float) < (cast _Runtime.field(world.joints, 'length') : Float)) : Bool)) {
@@ -125,36 +132,41 @@ class StepValidation {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DPositionIterationsValid(config:Physics3DSolverConfig):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DPositionIterationsValid(config:Physics3DSolverConfig):Bool {
     var iterations:Float = cast _Runtime.UNDEFINED;
     iterations = (cast _Runtime.field(config, 'sequentialImpulse') : { var positionIterations:Float; }).positionIterations;
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([iterations] : Array<Dynamic>)) : Bool) && (cast ((cast iterations : Float) >= (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DSolverConfigValid(config:Physics3DSolverConfig):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DSolverConfigValid(config:Physics3DSolverConfig):Bool {
     var sequential:Physics3DSequentialImpulseConfig = cast _Runtime.UNDEFINED;
     sequential = _Runtime.field(config, 'sequentialImpulse');
     return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(config, 'allowSleeping')), 'boolean') : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(config, 'sleepLinearThreshold')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(config, 'sleepLinearThreshold') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(config, 'sleepAngularThreshold')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(config, 'sleepAngularThreshold') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([_Runtime.field(config, 'timeToSleep')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(config, 'timeToSleep') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(config, 'continuousCollision')), 'boolean') : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(config, 'maxCcdSubsteps')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(config, 'maxCcdSubsteps') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(config, 'maxCcdRotationSubsteps')] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast _Runtime.field(config, 'maxCcdRotationSubsteps') : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([sequential.penetrationSlop] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast sequential.penetrationSlop : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([sequential.positionCorrection] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast sequential.positionCorrection : Float) >= (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast sequential.positionCorrection : Float) <= (cast 1.0 : Float)) : Bool)) : Bool) && (cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([sequential.restitutionThreshold] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast sequential.restitutionThreshold : Float) >= (cast 0.0 : Float)) : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(sequential.warmStarting), 'boolean'));
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DSubstepsValid(config:Physics3DSolverConfig):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DSubstepsValid(config:Physics3DSolverConfig):Bool {
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([_Runtime.field(config, 'substeps')] : Array<Dynamic>)) : Bool) && (cast ((cast _Runtime.field(config, 'substeps') : Float) >= (cast 1.0 : Float)) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DTimestepValid(dt:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DTimestepValid(dt:Float):Bool {
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isFinite', cast ([dt] : Array<Dynamic>)) : Bool) && (cast ((cast dt : Float) > (cast 0.0 : Float)) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DVelocityIterationsValid(config:Physics3DSolverConfig):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DVelocityIterationsValid(config:Physics3DSolverConfig):Bool {
     var iterations:Float = cast _Runtime.UNDEFINED;
     iterations = (cast _Runtime.field(config, 'sequentialImpulse') : { var velocityIterations:Float; }).velocityIterations;
     return cast ((cast _Runtime.callProperty(flighthq._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([iterations] : Array<Dynamic>)) : Bool) && (cast ((cast iterations : Float) >= (cast 0.0 : Float)) : Bool));

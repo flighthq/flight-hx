@@ -1,8 +1,9 @@
 package;
 
 import flighthq.pathBoolean.MartinezKernel.createMartinezPathBooleanBackend;
-import flighthq.types.PathBooleanBackend.PathBooleanContour;
+import flighthq.types.PathBooleanContour;
 
+@:access(flighthq.pathBoolean.MartinezKernel)
 class PathBooleanDceSmoke {
   static function main():Void {
     final subject:Array<PathBooleanContour> = [[0, 0, 10, 0, 10, 10, 0, 10]];

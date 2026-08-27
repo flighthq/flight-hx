@@ -10,15 +10,16 @@ import flighthq.geometry.Frustum.isFrustumIntersectingAabb;
 import flighthq.geometry.Frustum.isFrustumIntersectingSphere;
 import flighthq.geometry.Frustum.setFrustumFromMatrix4;
 import flighthq.geometry.Matrix4.createMatrix4;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.AabbLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Camera3D;
 import flighthq.types.Frustum;
-import flighthq.types.Frustum.FrustumLike;
+import flighthq.types.FrustumLike;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Matrix4Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Culling {
   public static function getCamera3DFrustum(out:FrustumLike, camera:Camera3D, aspect:Float):Void {
     getCamera3DViewProjectionMatrix4(({ final __callArgument0:Dynamic = Culling.__scratchViewProjection__culling; __callArgument0; }), ({ final __callArgument1:Dynamic = camera; __callArgument1; }), (cast aspect : Float));

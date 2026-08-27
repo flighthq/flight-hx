@@ -4,14 +4,15 @@ package flighthq.physics3d;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollisionSupport3D.getCollisionSupport3D;
-import flighthq.types.Collision.CollisionColliderShape3D;
-import flighthq.types.Collision.CollisionShapeKind3D;
-import flighthq.types.Collision.CollisionSupport3D;
-import flighthq.types.Physics3D.Physics3DCollider;
-import flighthq.types.Physics3D.Physics3DCollisionExplanation;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.CollisionColliderShape3D;
+import flighthq.types.CollisionShapeKind3D;
+import flighthq.types.CollisionSupport3D;
+import flighthq.types.Physics3DCollider;
+import flighthq.types.Physics3DCollisionExplanation;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class ExplainPhysics3DCollision {
   public static function explainPhysics3DCollision(world:Physics3DWorld):Physics3DCollisionExplanation {
     var unsupported:flighthq._internal._Set<String> = cast _Runtime.UNDEFINED;

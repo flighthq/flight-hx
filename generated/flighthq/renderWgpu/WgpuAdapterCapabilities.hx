@@ -5,9 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.WgpuAdapterCapabilities;
 
+@:noCompletion
 class WgpuAdapterCapabilities {
-  @:noCompletion
-  public static function getWgpuAdapterCapabilities(adapter:flighthq._internal.dom.GPUAdapter):flighthq.types.WgpuAdapterCapabilities {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuAdapterCapabilities(adapter:flighthq._internal.dom.GPUAdapter):flighthq.types.WgpuAdapterCapabilities {
     var features:flighthq._internal.dom.GPUSupportedFeatures = cast _Runtime.UNDEFINED;
     var limits:flighthq._internal.dom.GPUSupportedLimits = cast _Runtime.UNDEFINED;
     var supportsFloat32Filterable:Bool = cast _Runtime.UNDEFINED;

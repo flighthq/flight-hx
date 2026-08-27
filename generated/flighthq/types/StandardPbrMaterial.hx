@@ -3,11 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
-
-typedef StandardPbrMaterialProperties = { var alphaMap:Null<Texture>; var baseColor:Float; var baseColorMap:Null<Texture>; var emissive:Float; var emissiveMap:Null<Texture>; var emissiveStrength:Float; var metallic:Float; var metallicRoughnessMap:Null<Texture>; var normalMap:Null<Texture>; var normalScale:Float; var occlusionMap:Null<Texture>; var occlusionStrength:Float; var roughness:Float; };
 
 typedef StandardPbrMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var alphaMap:Null<Texture>; var baseColor:Float; var baseColorMap:Null<Texture>; var emissive:Float; var emissiveMap:Null<Texture>; var emissiveStrength:Float; var metallic:Float; var metallicRoughnessMap:Null<Texture>; var normalMap:Null<Texture>; var normalScale:Float; var occlusionMap:Null<Texture>; var occlusionStrength:Float; var roughness:Float; };

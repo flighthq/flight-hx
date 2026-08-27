@@ -8,6 +8,7 @@ import flighthq.application.Application.installLoopHostBackend;
 import flighthq.application.Application.observeLoopHostResult;
 import flighthq.types.LoopBackend;
 
+@:noCompletion
 class WebLoop {
   public static function enableHostWebLoop():Void {
     var inner:LoopBackend = cast _Runtime.UNDEFINED;
@@ -39,8 +40,9 @@ class WebLoop {
     installLoopHostBackend(({ final __callArgument1:Dynamic = backend; __callArgument1; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebLoopForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebLoopForTest():Void {
     (WebLoop._enabled__webLoop = cast (false : Dynamic));
   }
 

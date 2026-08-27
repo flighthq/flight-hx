@@ -3,8 +3,9 @@ package flighthq.video;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.VideoResource.VideoResourceUrl;
+import flighthq.types.VideoResourceUrl;
 
+@:noCompletion
 class VideoFormat {
   public static function canPlayVideoType(mimeType:String):Bool {
     var probe:flighthq._internal.dom.HTMLVideoElement = cast _Runtime.UNDEFINED;

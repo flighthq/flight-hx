@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.screen.Screen.createWebScreenBackend;
 import flighthq.screen.Screen.installScreenHostBackend;
-import flighthq.types.Screen.ScreenBackend;
+import flighthq.types.ScreenBackend;
 
+@:noCompletion
 class WebScreen {
   public static function enableHostWebScreen():Void {
     if ((cast WebScreen._enabled__webScreen : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebScreen {
     installScreenHostBackend((cast createWebScreenBackend() : ScreenBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebScreenForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebScreenForTest():Void {
     (WebScreen._enabled__webScreen = cast (false : Dynamic));
   }
 

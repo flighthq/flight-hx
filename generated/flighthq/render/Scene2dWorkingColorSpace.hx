@@ -3,8 +3,9 @@ package flighthq.render;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 
+@:noCompletion
 class Scene2dWorkingColorSpace {
   public static final SCENE2D_WORKING_COLOR_SPACE:RenderTargetColorSpace = 'srgb';
 }

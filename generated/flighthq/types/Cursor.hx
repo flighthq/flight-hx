@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef Cursor = String;
-
-typedef CursorBackend = { var setCursor:Null<Cursor>->Void; };

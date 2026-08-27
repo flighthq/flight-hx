@@ -5,26 +5,29 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderRegistries;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderState.CanvasRenderRegistries;
-import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.CanvasRenderStateRuntime;
+import flighthq.types.KeyedTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class CanvasRenderEffectRegistry {
-  @:noCompletion
-  public static function getCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Null<CanvasRenderEffectRunner> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Null<CanvasRenderEffectRunner> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasRenderEffectRunner; }>> = cast _Runtime.UNDEFINED;
     entry = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flighthq._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural4 = entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasRenderEffectRunner; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function hasCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Bool {
     return cast _Runtime.strictEquals(({ final __structural9 = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument7:Dynamic = state; __callArgument7; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flighthq._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind)); __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }

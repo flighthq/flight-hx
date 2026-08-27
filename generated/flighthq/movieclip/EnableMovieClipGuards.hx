@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.movieclip.SpritesheetTimelineSource.setSpritesheetTimelineSourceGuard;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.SpritesheetAnimation;
 import flighthq.types.SpritesheetAnimationDirection;
 import flighthq.types.SpritesheetTimelineSourceExplanation;
-import flighthq.types.SpritesheetTimelineSourceExplanation.SpritesheetTimelineSourceUnsupportedField;
+import flighthq.types.SpritesheetTimelineSourceUnsupportedField;
 
+@:noCompletion
 class EnableMovieClipGuards {
   public static function areMovieClipGuardsEnabled():Bool {
     return cast EnableMovieClipGuards.movieClipGuardsEnabled__enableMovieClipGuards;

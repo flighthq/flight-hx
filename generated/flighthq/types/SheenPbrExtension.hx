@@ -3,8 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.PbrExtension.PbrUvSet;
 import flighthq.types._internal._SheenPbrExtensionValues.SheenPbrExtensionKind;
 
 typedef SheenPbrExtension = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var sheenColor:Float; var sheenColorMap:Null<Texture>; var sheenColorMapUvSet:PbrUvSet; var sheenRoughness:Float; var sheenRoughnessMap:Null<Texture>; var sheenRoughnessMapUvSet:PbrUvSet; };

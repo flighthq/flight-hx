@@ -4,12 +4,13 @@ package flighthq.collision;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.Manifold3D.clearCollisionManifold3D;
-import flighthq.types.Collision.CollisionAabb3D;
-import flighthq.types.Collision.CollisionBox3D;
-import flighthq.types.Collision.CollisionCapsule3D;
-import flighthq.types.Collision.CollisionManifold3D;
-import flighthq.types.Collision.CollisionSphere3D;
+import flighthq.types.CollisionAabb3D;
+import flighthq.types.CollisionBox3D;
+import flighthq.types.CollisionCapsule3D;
+import flighthq.types.CollisionManifold3D;
+import flighthq.types.CollisionSphere3D;
 
+@:noCompletion
 class ShapeCollision3D {
   public static function testAabbAabbCollision3D(a:CollisionAabb3D, b:CollisionAabb3D, out:CollisionManifold3D):Bool {
     var overlapX:Float = cast _Runtime.UNDEFINED;

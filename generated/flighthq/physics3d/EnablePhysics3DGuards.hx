@@ -11,17 +11,18 @@ import flighthq.physics3d.ExplainPhysics3DStep.explainPhysics3DStep;
 import flighthq.physics3d.Islands.setPhysics3DJointResolutionGuard;
 import flighthq.physics3d.Physics3DSpatialIndexingGuards.setPhysics3DSpatialIndexingGuard;
 import flighthq.physics3d.Step.setPhysics3DStepGuard;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.Physics3D.Physics3DCollisionExplanation;
-import flighthq.types.Physics3D.Physics3DJointExplanation;
-import flighthq.types.Physics3D.Physics3DJointKind;
-import flighthq.types.Physics3D.Physics3DStepExplanation;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
-import flighthq.types.Spatial.SpatialIndexBackend3D;
-import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
-import flighthq.types.SpatialIndexing.SpatialIndexingMode;
+import flighthq.types.LogLevel;
+import flighthq.types.Physics3DCollisionExplanation;
+import flighthq.types.Physics3DJointExplanation;
+import flighthq.types.Physics3DJointKind;
+import flighthq.types.Physics3DStepExplanation;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
+import flighthq.types.SpatialIndexBackend3D;
+import flighthq.types.SpatialIndexingExplanation;
+import flighthq.types.SpatialIndexingMode;
 
+@:noCompletion
 class EnablePhysics3DGuards {
   public static function arePhysics3DGuardsEnabled():Bool {
     return cast EnablePhysics3DGuards.physics3DGuardsEnabled__enablePhysics3DGuards;

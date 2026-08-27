@@ -4,10 +4,11 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
+import flighthq.types.PathCommand;
 import flighthq.types.PathSegment;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class ForEachPathSegment {
   public static function forEachPathSegment(path:Path, visitor:PathSegment->Void):Void {
     var commands:Array<Float> = cast _Runtime.UNDEFINED;

@@ -12,22 +12,23 @@ import flighthq.collision.TriangleMesh3D.raycastCollisionHeightfield3D;
 import flighthq.collision.TriangleMesh3D.raycastCollisionTriangleMesh3D;
 import flighthq.collision.TriangleMesh3D.sweepCollisionHeightfield3D;
 import flighthq.collision.TriangleMesh3D.sweepCollisionTriangleMesh3D;
-import flighthq.types.Collision.CollisionAabb3D;
-import flighthq.types.Collision.CollisionBox3D;
-import flighthq.types.Collision.CollisionBuiltInShape3D;
-import flighthq.types.Collision.CollisionCapsule3D;
-import flighthq.types.Collision.CollisionColliderShape3D;
-import flighthq.types.Collision.CollisionCone3D;
-import flighthq.types.Collision.CollisionContactManifold3D;
-import flighthq.types.Collision.CollisionConvex3D;
-import flighthq.types.Collision.CollisionCylinder3D;
-import flighthq.types.Collision.CollisionHeightfield3D;
-import flighthq.types.Collision.CollisionRaycastHit3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionSphere3D;
-import flighthq.types.Collision.CollisionTimeOfImpact3D;
-import flighthq.types.Collision.CollisionTriangleMesh3D;
+import flighthq.types.CollisionAabb3D;
+import flighthq.types.CollisionBox3D;
+import flighthq.types.CollisionBuiltInShape3D;
+import flighthq.types.CollisionCapsule3D;
+import flighthq.types.CollisionColliderShape3D;
+import flighthq.types.CollisionCone3D;
+import flighthq.types.CollisionContactManifold3D;
+import flighthq.types.CollisionConvex3D;
+import flighthq.types.CollisionCylinder3D;
+import flighthq.types.CollisionHeightfield3D;
+import flighthq.types.CollisionRaycastHit3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionSphere3D;
+import flighthq.types.CollisionTimeOfImpact3D;
+import flighthq.types.CollisionTriangleMesh3D;
 
+@:noCompletion
 class ColliderCollision {
   public static function collidePhysics3DColliderShapes(shapeA:CollisionColliderShape3D, shapeB:CollisionColliderShape3D, out:CollisionContactManifold3D):Bool {
     if ((cast ((cast _Runtime.strictEquals((cast shapeA : { var kind:String; }).kind, 'triangle-mesh') : Bool) || (cast _Runtime.strictEquals((cast shapeA : { var kind:String; }).kind, 'heightfield') : Bool)) : Bool)) {

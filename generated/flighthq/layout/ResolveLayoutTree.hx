@@ -3,15 +3,16 @@ package flighthq.layout;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Layout.LayoutNode;
-import flighthq.types.Layout.LayoutResolutionExplanation;
-import flighthq.types.Layout.LayoutResolutionFailureKind;
 import flighthq.types.Layout.LayoutResolutionFailureKindValue as Failure;
-import flighthq.types.Layout.LayoutResolutionGuard;
-import flighthq.types.Layout.LayoutResolver;
-import flighthq.types.Layout.LayoutState;
-import flighthq.types.Layout.LayoutTree;
+import flighthq.types.LayoutNode;
+import flighthq.types.LayoutResolutionExplanation;
+import flighthq.types.LayoutResolutionFailureKind;
+import flighthq.types.LayoutResolutionGuard;
+import flighthq.types.LayoutResolver;
+import flighthq.types.LayoutState;
+import flighthq.types.LayoutTree;
 
+@:noCompletion
 class ResolveLayoutTree {
   public static function explainLayoutResolution(state:LayoutState, tree:LayoutTree, nodeIndex:Float):Null<LayoutResolutionExplanation> {
     var nodes:Array<LayoutNode<flighthq._internal._Object, flighthq._internal._Object>> = cast _Runtime.UNDEFINED;

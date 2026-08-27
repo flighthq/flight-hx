@@ -7,21 +7,23 @@ import flighthq.geometry.Matrix.copyMatrix;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateRuntime;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasRenderState.CanvasRenderStateRuntime;
+import flighthq.types.CanvasRenderStateRuntime;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.RenderPassPreserve;
 
 typedef CanvasRenderStateHandles__canvasRenderTarget = { >CanvasRenderState, var canvas:flighthq._internal.dom.HTMLCanvasElement; var context:flighthq._internal.dom.CanvasRenderingContext2D; };
 
 typedef SavedCanvasState__canvasRenderTarget = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var context:flighthq._internal.dom.CanvasRenderingContext2D; var renderTransform2D:Null<Matrix>; };
 
+@:noCompletion
 class CanvasRenderTarget {
   public static final _targetStack__canvasRenderTarget:flighthq._internal._WeakMap<CanvasRenderState, Array<SavedCanvasState__canvasRenderTarget>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static function beginCanvasRenderPass(state:CanvasRenderState, target:flighthq.types.CanvasRenderTarget, ?preserve:RenderPassPreserve):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function beginCanvasRenderPass(state:CanvasRenderState, target:flighthq.types.CanvasRenderTarget, ?preserve:RenderPassPreserve):Void {
     var handles:CanvasRenderStateHandles__canvasRenderTarget = cast _Runtime.UNDEFINED;
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
     var stack:Null<Array<SavedCanvasState__canvasRenderTarget>> = cast _Runtime.UNDEFINED;
@@ -44,8 +46,9 @@ class CanvasRenderTarget {
     if ((cast !(cast preserved : Bool) : Bool)) { flighthq._internal.backend.Canvas2dBackend.call((cast handles : { var context:flighthq._internal.dom.CanvasRenderingContext2D; }).context, 'clearRect', cast ([0.0, 0.0, target.width, target.height] : Array<Dynamic>)); }
   }
 
-  @:noCompletion
-  public static function createCanvasRenderTarget(width:Float, height:Float):flighthq.types.CanvasRenderTarget {
+  @:allow(flighthq)
+  @:keep
+  private static function createCanvasRenderTarget(width:Float, height:Float):flighthq.types.CanvasRenderTarget {
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     canvas = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
@@ -56,16 +59,18 @@ class CanvasRenderTarget {
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyCanvasRenderTarget(target:flighthq.types.CanvasRenderTarget):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyCanvasRenderTarget(target:flighthq.types.CanvasRenderTarget):Void {
     flighthq._internal.backend.CanvasElementBackend.setField(target.canvas, 'width', 0.0);
     flighthq._internal.backend.CanvasElementBackend.setField(target.canvas, 'height', 0.0);
     (target.width = cast (0.0 : Float));
     (target.height = cast (0.0 : Float));
   }
 
-  @:noCompletion
-  public static function endCanvasRenderPass(state:CanvasRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function endCanvasRenderPass(state:CanvasRenderState):Void {
     var handles:CanvasRenderStateHandles__canvasRenderTarget = cast _Runtime.UNDEFINED;
     var saved:Null<SavedCanvasState__canvasRenderTarget> = cast _Runtime.UNDEFINED;
     handles = (cast state : CanvasRenderStateHandles__canvasRenderTarget);
@@ -76,8 +81,9 @@ class CanvasRenderTarget {
     ((cast handles : { var renderTransform2D:Null<Matrix>; }).renderTransform2D = (cast saved : SavedCanvasState__canvasRenderTarget).renderTransform2D);
   }
 
-  @:noCompletion
-  public static function resizeCanvasRenderTarget(target:flighthq.types.CanvasRenderTarget, width:Float, height:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resizeCanvasRenderTarget(target:flighthq.types.CanvasRenderTarget, width:Float, height:Float):Void {
     flighthq._internal.backend.CanvasElementBackend.setField(target.canvas, 'width', HxMath.max(1.0, HxMath.ceil(width)));
     flighthq._internal.backend.CanvasElementBackend.setField(target.canvas, 'height', HxMath.max(1.0, HxMath.ceil(height)));
     (target.width = cast (flighthq._internal.backend.CanvasElementBackend.field(target.canvas, 'width') : Float));

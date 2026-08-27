@@ -4,9 +4,10 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronApp;
-import flighthq.types.Protocol.ProtocolBackend;
+import flighthq.types.ElectronApp;
+import flighthq.types.ProtocolBackend;
 
+@:noCompletion
 class ElectronProtocol {
   public static function createElectronProtocolBackend(electron:ElectronApi):ProtocolBackend {
     var app:ElectronApp = cast _Runtime.UNDEFINED;

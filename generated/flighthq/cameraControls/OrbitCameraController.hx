@@ -12,10 +12,11 @@ import flighthq.math.InterpolationAdvanced.damp;
 import flighthq.types.Camera3D;
 import flighthq.types.Entity;
 import flighthq.types.OrbitCameraController;
-import flighthq.types.OrbitCameraController.OrbitCameraControllerOptions;
+import flighthq.types.OrbitCameraControllerOptions;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class OrbitCameraController {
   public static function cloneOrbitCameraController(source:flighthq.types.OrbitCameraController):flighthq.types.OrbitCameraController {
     var clone:flighthq.types.OrbitCameraController = cast _Runtime.UNDEFINED;

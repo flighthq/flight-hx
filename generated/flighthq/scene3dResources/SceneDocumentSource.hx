@@ -7,19 +7,20 @@ import flighthq.net.Net.sendNetRequest;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.connectSignal;
+import flighthq.types.ExternalImageResourceReference;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
-import flighthq.types.ImageResourceReference.ImageResourceReferenceKind;
-import flighthq.types.Net.NetProgress;
-import flighthq.types.Net.NetRequest;
-import flighthq.types.Net.NetRequestOptions;
-import flighthq.types.Net.NetResponse;
+import flighthq.types.ImageResourceReferenceKind;
+import flighthq.types.NetProgress;
+import flighthq.types.NetRequest;
+import flighthq.types.NetRequestOptions;
+import flighthq.types.NetResponse;
 import flighthq.types.Scene3DDocument;
-import flighthq.types.Scene3DResources.Scene3DDocumentLoadOptions;
-import flighthq.types.Scene3DResources.Scene3DDocumentLoadProgress;
+import flighthq.types.Scene3DDocumentLoadOptions;
+import flighthq.types.Scene3DDocumentLoadProgress;
 import flighthq.types.Signal;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 
+@:noCompletion
 class SceneDocumentSource {
   public static function getScene3DDocumentBasePathFromUrl(url:String):Null<String> {
     var query:Float = cast _Runtime.UNDEFINED;

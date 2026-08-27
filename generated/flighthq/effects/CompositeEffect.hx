@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.CompositeEffect;
 import flighthq.types.CompositeOperator;
 
+@:noCompletion
 class CompositeEffect {
   public static function createCompositeEffect(operator_:CompositeOperator, ?options:{ @:optional var backdropKey:Null<String>; }):flighthq.types.CompositeEffect {
     if (options == null) options = cast ({  } : Dynamic);

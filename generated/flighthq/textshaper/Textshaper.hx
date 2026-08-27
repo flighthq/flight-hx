@@ -13,10 +13,10 @@ import flighthq.textshaper.TextShaperRun as Facade_Textshaper_flighthq_textshape
 import flighthq.textshaper.TextShaperSignals as Facade_Textshaper_flighthq_textshaper_TextShaperSignals;
 import flighthq.types.FontMetrics;
 import flighthq.types.GlyphExtents;
+import flighthq.types.ShapeRunOptions;
 import flighthq.types.ShapedRun;
 import flighthq.types.TextFormat;
 import flighthq.types.TextItem;
-import flighthq.types.TextShaper.ShapeRunOptions;
 import flighthq.types.TextShaperCache;
 import flighthq.types.TextShaperOptions;
 import flighthq.types.TextShaperSignals;

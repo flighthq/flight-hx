@@ -3,14 +3,15 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Platform.PlatformBackend;
-import flighthq.types.Platform.PlatformInfo;
-import flighthq.types.Platform.PlatformKind;
-import flighthq.types.Platform.PlatformName;
-import flighthq.types.Platform.PlatformRuntime;
+import flighthq.types.PlatformBackend;
+import flighthq.types.PlatformInfo;
+import flighthq.types.PlatformKind;
+import flighthq.types.PlatformName;
+import flighthq.types.PlatformRuntime;
 import flighthq.types.TauriApi;
-import flighthq.types.TauriApi.TauriOsModule;
+import flighthq.types.TauriOsModule;
 
+@:noCompletion
 class TauriPlatform {
   public static function createTauriPlatformBackend(tauri:TauriApi):PlatformBackend {
     var os:TauriOsModule = cast _Runtime.UNDEFINED;

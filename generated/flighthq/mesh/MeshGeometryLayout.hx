@@ -9,16 +9,17 @@ import flighthq.mesh.VertexFormat.getVertexFormatComponentCount;
 import flighthq.mesh.VertexFormat.readVertexFormatComponent;
 import flighthq.mesh.VertexFormat.writeVertexFormatComponent;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
-import flighthq.types.MeshGeometry.PrimitiveTopology;
-import flighthq.types.MeshGeometry.VertexAttribute;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexFormat;
-import flighthq.types.MeshGeometry.VertexSemantic;
 import flighthq.types.MeshGeometryOptions;
+import flighthq.types.MeshSubset;
+import flighthq.types.PrimitiveTopology;
+import flighthq.types.VertexAttribute;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexFormat;
+import flighthq.types.VertexSemantic;
 
 typedef AttributeMapping__meshGeometryLayout = { var destination:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<VertexAttributeLayout, String>, Float>; var source:flighthq._internal._IndexedAccess<flighthq._internal._IndexedAccess<VertexAttributeLayout, String>, Float>; var sourceByteLength:Float; };
 
+@:noCompletion
 class MeshGeometryLayout {
   public static function convertMeshGeometryLayout(source:MeshGeometry, targetLayout:VertexAttributeLayout):MeshGeometry {
     var srcStride:Float = cast _Runtime.UNDEFINED;

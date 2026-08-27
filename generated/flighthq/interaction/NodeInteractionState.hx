@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.types.Cursor;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.NodeInteraction.HitArea;
+import flighthq.types.HitArea;
+import flighthq.types.NodeAny;
 import flighthq.types.NodeInteractionState;
+import flighthq.types.NodeRuntime;
 import flighthq.types.Path;
 import flighthq.types.Rectangle;
 
+@:noCompletion
 class NodeInteractionState {
   public static function createNodeInteractionState():flighthq.types.NodeInteractionState {
     return cast { cursor: null, focusable: false, hitArea: null, hitTestEnabled: false, tabIndex: -1.0 };

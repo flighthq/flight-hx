@@ -10,6 +10,7 @@ import flighthq.types.BitmapEdgeMode;
 import flighthq.types.BitmapRegion;
 import flighthq.types.BitmapResizeMode;
 
+@:noCompletion
 class BitmapRotate {
   public static function rotateBitmap(dest:BitmapRegion, source:BitmapRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, edgeMode:BitmapEdgeMode = 'clamp', sampleMode:BitmapResizeMode = 'bilinear'):Void {
     if (pivotX == null) pivotX = cast (((source.width - 1.0) / 2.0) : Dynamic);

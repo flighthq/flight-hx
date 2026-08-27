@@ -6,17 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.materials.SurfaceMaterial.createSurfaceMaterial;
 import flighthq.types.BlendMode;
 import flighthq.types.BlinnPhongMaterial;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.EntityRuntime;
+import flighthq.types.Kind;
 import flighthq.types.LambertMaterial;
+import flighthq.types.MaterialAlphaMode;
 import flighthq.types.PhongMaterial;
 import flighthq.types.Sampler;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.BlinnPhongMaterialKind;
 import flighthq.types.Types.LambertMaterialKind;
 import flighthq.types.Types.PhongMaterialKind;
@@ -26,6 +26,7 @@ import flighthq.types._internal._BlinnPhongMaterialValues.BlinnPhongMaterialKind
 import flighthq.types._internal._LambertMaterialValues.LambertMaterialKind;
 import flighthq.types._internal._PhongMaterialValues.PhongMaterialKind;
 
+@:noCompletion
 class ClassicMaterials {
   public static function createBlinnPhongMaterial(?opts:{ @:optional var alphaMap:Null<Texture>; @:optional var diffuse:Null<Float>; @:optional var diffuseMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var shininess:Null<Float>; @:optional var specular:Null<Float>; @:optional var specularMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var kind:Null<Kind>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):BlinnPhongMaterial {
     var material:BlinnPhongMaterial = cast _Runtime.UNDEFINED;

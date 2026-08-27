@@ -1,5 +1,6 @@
 package;
 
+@:access(flighthq.entity.Guards)
 class JsEntry {
   static function main():Void {
     final math = flighthq.math.Math.EPSILON;

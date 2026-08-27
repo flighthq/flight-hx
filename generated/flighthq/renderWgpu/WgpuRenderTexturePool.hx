@@ -11,17 +11,18 @@ import flighthq.texture.RenderTexture.createRenderTexture;
 import flighthq.texture.Texture.resetTextureUvTransform;
 import flighthq.types.CreateRenderTextureOptions;
 import flighthq.types.RenderTarget;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 import flighthq.types.RenderTexture;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
-import flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool;
+import flighthq.types.WgpuRenderTargetPool;
+import flighthq.types.WgpuRenderTexturePool;
 
+@:noCompletion
 class WgpuRenderTexturePool {
-  public static function acquireWgpuRenderTexture(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
+  public static function acquireWgpuRenderTexture(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
     var renderTexture:RenderTexture = cast _Runtime.UNDEFINED;
     WgpuRenderTexturePool.assertUsablePool__wgpuRenderTexturePool(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = pool; __callArgument1; }));
     renderTexture = _Runtime.coalesce(_Runtime.callProperty(pool.free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createRenderTexture(({ final __callArgument4:Dynamic = descriptor; __callArgument4; })) : RenderTexture));
@@ -34,12 +35,12 @@ class WgpuRenderTexturePool {
     return cast null;
   }
 
-  public static function createWgpuRenderTexturePool():flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool {
+  public static function createWgpuRenderTexturePool():flighthq.types.WgpuRenderTexturePool {
     return cast { device: null, destroyed: false, effectTargets: (cast createWgpuRenderTargetPool() : WgpuRenderTargetPool), free: cast ([] : Array<Dynamic>), leased: _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []) };
     return cast null;
   }
 
-  public static function destroyWgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool):Void {
+  public static function destroyWgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexturePool):Void {
     var textures:flighthq._internal._Set<RenderTexture> = cast _Runtime.UNDEFINED;
     if ((cast pool.destroyed : Bool)) { return; }
     WgpuRenderTexturePool.assertPoolDevice__wgpuRenderTexturePool(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = pool; __callArgument15; }));
@@ -53,7 +54,7 @@ class WgpuRenderTexturePool {
     (pool.destroyed = cast (true : Bool));
   }
 
-  public static function releaseWgpuRenderTexture(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool, renderTexture:RenderTexture):Void {
+  public static function releaseWgpuRenderTexture(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexturePool, renderTexture:RenderTexture):Void {
     WgpuRenderTexturePool.assertUsablePool__wgpuRenderTexturePool(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = pool; __callArgument27; }));
     if ((cast !(cast ((cast pool.leased : flighthq._internal._Set<RenderTexture>).delete_(renderTexture)) : Bool) : Bool)) {
       _Runtime.throwValue(_Runtime.error('releaseWgpuRenderTexture: texture is not leased from this pool'));
@@ -62,7 +63,7 @@ class WgpuRenderTexturePool {
     _Runtime.callProperty(pool.free, 'push', cast ([renderTexture] : Array<Dynamic>));
   }
 
-  public static function withWgpuRenderTextures<T>(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
+  public static function withWgpuRenderTextures<T>(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
     var textures:Array<RenderTexture> = cast _Runtime.UNDEFINED;
     textures = (cast cast ([] : Array<Dynamic>));
     try {
@@ -123,12 +124,12 @@ class WgpuRenderTexturePool {
     (target.version = cast (_Runtime.unsignedShiftRight(_Runtime.toInt32((target.version + 1.0)), 0) : Float));
   }
 
-  public static function assertUsablePool__wgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool):Void {
+  public static function assertUsablePool__wgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexturePool):Void {
     if ((cast pool.destroyed : Bool)) { _Runtime.throwValue(_Runtime.error('WgpuRenderTexturePool has been destroyed')); }
     WgpuRenderTexturePool.assertPoolDevice__wgpuRenderTexturePool(({ final __callArgument64:Dynamic = state; __callArgument64; }), ({ final __callArgument65:Dynamic = pool; __callArgument65; }));
   }
 
-  public static function assertPoolDevice__wgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool):Void {
+  public static function assertPoolDevice__wgpuRenderTexturePool(state:WgpuRenderState, pool:flighthq.types.WgpuRenderTexturePool):Void {
     if ((cast _Runtime.strictEquals(pool.device, null) : Bool)) {
       (pool.device = cast ((cast state : WgpuRenderState).device : Null<flighthq._internal.dom.GPUDevice>));
     } else { if ((cast !_Runtime.strictEquals(pool.device, (cast state : WgpuRenderState).device) : Bool)) {

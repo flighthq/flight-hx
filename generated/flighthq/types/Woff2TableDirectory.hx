@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef Woff2TableDirectory = { var entries:Array<Woff2TableEntry>; var streamStart:Float; var totalUncompressedLength:Float; };
-
-typedef Woff2TableEntry = { var originalLength:Float; var tag:String; var transformLength:Float; var transformVersion:Float; var transformed:Bool; };

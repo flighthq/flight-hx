@@ -16,25 +16,25 @@ import flighthq.texture.TextureColorSpace.getTextureSampleColorSpace;
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
 import flighthq.types.Image;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.KeyedTable;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.RenderTexture;
 import flighthq.types.Sampler;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSourceKind;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types.Types.CompressedImageTextureSourceKind;
 import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types.Types.RenderTargetTextureSourceKind;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuTextureEntry;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuTextureEntry;
 import flighthq.types.WgpuTextureResolver;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
@@ -42,6 +42,7 @@ import flighthq.types._internal._TextureSourceKindValues.CompressedImageTextureS
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.RenderTargetTextureSourceKind;
 
+@:noCompletion
 class WgpuTextureResolver {
   public static function registerStandardWgpuTextureResolvers(state:WgpuRenderState):Void {
     registerWgpuBitmapTextureResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }));

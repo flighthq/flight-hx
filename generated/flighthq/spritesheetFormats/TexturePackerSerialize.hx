@@ -7,18 +7,19 @@ import flighthq.types.SpritesheetAnimationData;
 import flighthq.types.SpritesheetAnimationDirection;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
-import flighthq.types.TexturePackerSchema.TexturePackerArrayDocument;
-import flighthq.types.TexturePackerSchema.TexturePackerArrayFrame;
-import flighthq.types.TexturePackerSchema.TexturePackerDocument;
-import flighthq.types.TexturePackerSchema.TexturePackerFrameTag;
-import flighthq.types.TexturePackerSchema.TexturePackerHashDocument;
-import flighthq.types.TexturePackerSchema.TexturePackerHashFrame;
-import flighthq.types.TexturePackerSchema.TexturePackerMeta;
-import flighthq.types.TexturePackerSchema.TexturePackerPivot;
-import flighthq.types.TexturePackerSchema.TexturePackerRect;
-import flighthq.types.TexturePackerSchema.TexturePackerSerializeOptions;
-import flighthq.types.TexturePackerSchema.TexturePackerSize;
+import flighthq.types.TexturePackerArrayDocument;
+import flighthq.types.TexturePackerArrayFrame;
+import flighthq.types.TexturePackerDocument;
+import flighthq.types.TexturePackerFrameTag;
+import flighthq.types.TexturePackerHashDocument;
+import flighthq.types.TexturePackerHashFrame;
+import flighthq.types.TexturePackerMeta;
+import flighthq.types.TexturePackerPivot;
+import flighthq.types.TexturePackerRect;
+import flighthq.types.TexturePackerSerializeOptions;
+import flighthq.types.TexturePackerSize;
 
+@:noCompletion
 class TexturePackerSerialize {
   public static function dataToMeta__texturePackerSerialize(data:SpritesheetData, existing:{ @:optional var app:Null<String>; @:optional var format:Null<String>; @:optional var frameTags:Null<Array<TexturePackerFrameTag>>; @:optional var image:Null<String>; @:optional var scale:Null<flighthq._internal._Union2<Float, String>>; @:optional var size:Null<TexturePackerSize>; @:optional var version:Null<String>; }):TexturePackerMeta {
     return cast { app: _Runtime.coalesce((cast existing : { @:optional var app:Null<String>; @:optional var format:Null<String>; @:optional var frameTags:Null<Array<TexturePackerFrameTag>>; @:optional var image:Null<String>; @:optional var scale:Null<flighthq._internal._Union2<String, Float>>; @:optional var size:Null<TexturePackerSize>; @:optional var version:Null<String>; }).app, function():Dynamic return cast 'https://www.codeandweb.com/texturepacker'), format: _Runtime.coalesce((cast existing : { @:optional var app:Null<String>; @:optional var format:Null<String>; @:optional var frameTags:Null<Array<TexturePackerFrameTag>>; @:optional var image:Null<String>; @:optional var scale:Null<flighthq._internal._Union2<String, Float>>; @:optional var size:Null<TexturePackerSize>; @:optional var version:Null<String>; }).format, function():Dynamic return cast 'RGBA8888'), frameTags: _Runtime.select(_Runtime.field(data.animations, 'length'), function():Dynamic return cast (cast _Runtime.mapArray((cast data.animations : Array<SpritesheetAnimationData>), function(anim:SpritesheetAnimationData, __unused0:Float, __unused1:Array<SpritesheetAnimationData>):{ var direction:SpritesheetAnimationDirection; var from:Float; var name:String; var to:Float; } {

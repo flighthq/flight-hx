@@ -22,9 +22,10 @@ import flighthq.physics2d.Joints.physics2DRevoluteJointSolver;
 import flighthq.physics2d.Joints.physics2DRopeJointSolver;
 import flighthq.physics2d.Joints.physics2DWeldJointSolver;
 import flighthq.physics2d.Joints.physics2DWheelJointSolver;
-import flighthq.types.Physics2D.Physics2DJointSolver;
-import flighthq.types.Physics2D.Physics2DWorld;
+import flighthq.types.Physics2DJointSolver;
+import flighthq.types.Physics2DWorld;
 
+@:noCompletion
 class RegisterBuiltInPhysics2DJointSolvers {
   public static function registerBuiltInPhysics2DJointSolvers(world:Physics2DWorld):Void {
     registerPhysics2DJointSolver(({ final __callArgument0:Dynamic = world; __callArgument0; }), (cast Physics2DDistanceJointKind : String), ({ final __callArgument1:Dynamic = physics2DDistanceJointSolver; __callArgument1; }));

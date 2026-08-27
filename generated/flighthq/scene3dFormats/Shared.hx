@@ -8,16 +8,17 @@ import flighthq.image.ImageResourceReference.createExternalImageResourceReferenc
 import flighthq.mesh.MeshGeometryLayout.CANONICAL_SKINNED_MESH_GEOMETRY_LAYOUT;
 import flighthq.texture.Texture.createTexture;
 import flighthq.types.AlphaType;
+import flighthq.types.EmbeddedImageResourceReference;
+import flighthq.types.ExternalImageResourceReference;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
-import flighthq.types.ImageResourceReference.ImageResourceReferenceKind;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
+import flighthq.types.ImageResourceReferenceKind;
 import flighthq.types.SkinInfluence;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
+import flighthq.types.VertexAttributeLayout;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 
+@:noCompletion
 class Shared {
   public static final CANONICAL_FLOATS_PER_VERTEX:Float = 12.0;
 

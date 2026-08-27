@@ -4,8 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef SpritesheetFormatKind = String;
-
+@:noCompletion
 class SpritesheetFormat {
   public static final SpritesheetFormatKindAseprite:String = 'Aseprite';
 

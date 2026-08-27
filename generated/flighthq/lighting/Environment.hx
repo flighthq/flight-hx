@@ -5,19 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Environment;
 import flighthq.types.EnvironmentOptions;
 import flighthq.types.Sampler;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.EnvironmentKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._EnvironmentValues.EnvironmentKind;
 
+@:noCompletion
 class Environment {
   public static function cloneEnvironment(source:flighthq.types.Environment):flighthq.types.Environment {
     return cast (cast createEnvironment(({ final __callArgument0:Dynamic = { environment: _Runtime.field(source, 'environment'), intensity: _Runtime.field(source, 'intensity') }; __callArgument0; })) : flighthq.types.Environment);

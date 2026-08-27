@@ -8,15 +8,16 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
 import flighthq.types.ApplicationWindow;
-import flighthq.types.ApplicationWindow.WindowBackend;
-import flighthq.types.ApplicationWindow.WindowBounds;
-import flighthq.types.ApplicationWindow.WindowOptions;
 import flighthq.types.BackendExplanation;
 import flighthq.types.Matrix;
 import flighthq.types.RenderState;
 import flighthq.types.Signal;
-import flighthq.types.Signal.SignalData;
+import flighthq.types.SignalData;
+import flighthq.types.WindowBackend;
+import flighthq.types.WindowBounds;
+import flighthq.types.WindowOptions;
 
+@:noCompletion
 class Window {
   public static final kClose__window:flighthq._internal._Symbol = _Runtime.symbol(_Runtime.field(_Runtime, 'UNDEFINED'));
 
@@ -350,8 +351,9 @@ class Window {
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).focus(({ final __callArgument61:Dynamic = win; __callArgument61; }));
   }
 
-  @:noCompletion
-  public static function getWindowBackend():WindowBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getWindowBackend():WindowBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Window._custom__window, function():Dynamic return cast Window._host__window), function():Dynamic return cast Window._sentinel__window);
     return cast null;
   }
@@ -372,8 +374,9 @@ class Window {
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).hide(({ final __callArgument63:Dynamic = win; __callArgument63; }));
   }
 
-  @:noCompletion
-  public static function installWindowHostBackend(backend:WindowBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installWindowHostBackend(backend:WindowBackend):Void {
     if ((cast !_Runtime.strictEquals(Window._host__window, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Window._host__window, backend) : Bool)) { (Window._hostConflict__window = cast (true : Dynamic)); }
       return;
@@ -403,8 +406,9 @@ class Window {
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMinimize]]), 1);
   }
 
-  @:noCompletion
-  public static function observeWindowHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeWindowHostResult(operation:String, succeeded:Bool):Void {
     (Window._hostObservation__window = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -457,8 +461,9 @@ class Window {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetWindowBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetWindowBackendForTest():Void {
     (Window._custom__window = cast (null : Dynamic));
     (Window._host__window = cast (null : Dynamic));
     (Window._hostConflict__window = cast (false : Dynamic));
@@ -478,8 +483,9 @@ class Window {
     (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setAlwaysOnTop(({ final __callArgument73:Dynamic = win; __callArgument73; }), (cast alwaysOnTop : Bool));
   }
 
-  @:noCompletion
-  public static function setWindowBackend(backend:Null<WindowBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setWindowBackend(backend:Null<WindowBackend>):Void {
     (Window._custom__window = cast (backend : Dynamic));
   }
 

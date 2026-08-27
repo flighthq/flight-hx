@@ -12,13 +12,13 @@ import flighthq.types.BackendExplanation;
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
+import flighthq.types.EmbeddedImageResourceReference;
+import flighthq.types.ExternalImageResourceReference;
 import flighthq.types.Image;
+import flighthq.types.ImageResourceFailure;
+import flighthq.types.ImageResourceFetch;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.EmbeddedImageResourceReference;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
-import flighthq.types.ImageResourceReference.ImageResourceFailure;
-import flighthq.types.ImageResourceReference.ImageResourceFetch;
-import flighthq.types.ImageResourceReference.ImageResourceReferenceResolutionExplanation;
+import flighthq.types.ImageResourceReferenceResolutionExplanation;
 import flighthq.types.TextureSource;
 
 class Image {

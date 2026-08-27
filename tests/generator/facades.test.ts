@@ -18,6 +18,7 @@ describe('public Haxe facades', () => {
         noCompletionDeclarations: number;
         omittedModules: Array<{ module: string; reason: string }>;
         protectedDeclarationIdentities: number;
+        restrictedMemberDeclarations: number;
       };
     };
     const firstIdentities = [...contractOnlyDeclarationIdentities(inventory.packages)];
@@ -28,12 +29,14 @@ describe('public Haxe facades', () => {
       'utf8',
     );
     const vector2 = readFileSync(path.join(workspace, 'generated', 'flighthq', 'geometry', 'Vector2.hx'), 'utf8');
-    const precedingLine = (source: string, declaration: string): string | undefined =>
-      source.slice(0, source.indexOf(declaration)).trimEnd().split('\n').at(-1)?.trim();
+    const geometry = readFileSync(path.join(workspace, 'generated', 'flighthq', 'geometry', 'Geometry.hx'), 'utf8');
+    const abc = readFileSync(path.join(workspace, 'generated', 'flighthq', 'abc', 'Abc.hx'), 'utf8');
 
     expect(firstIdentities).toEqual(secondIdentities);
-    expect(core.contractSurface.noCompletionDeclarations).toBe(firstIdentities.length);
     expect(core.contractSurface.protectedDeclarationIdentities).toBe(firstIdentities.length);
+    expect(core.contractSurface.noCompletionDeclarations + core.contractSurface.restrictedMemberDeclarations).toBe(
+      firstIdentities.length,
+    );
     expect(new Set(core.contractSurface.omittedModules.map((item) => item.module)).size).toBe(
       core.contractSurface.omittedModules.length,
     );
@@ -42,9 +45,11 @@ describe('public Haxe facades', () => {
     ).toBe(true);
     expect(existsSync(path.join(workspace, 'generated', 'flighthq', 'entity', 'Contract.hx'))).toBe(false);
     expect(existsSync(path.join(workspace, 'tests', 'bridges', 'sources', 'entity', 'contract.mjs'))).toBe(true);
-    expect(precedingLine(entity, 'public static function createEntity<Type:')).toBe('@:noCompletion');
-    expect(precedingLine(renderCacheAdapter, 'typedef RenderCacheAdapter =')).toBe('@:noCompletion');
-    expect(precedingLine(vector2, 'public static function createVector2(')).not.toBe('@:noCompletion');
+    expect(entity).toContain('@:allow(flighthq)\n  @:keep\n  private static function createEntity<Type:');
+    expect(renderCacheAdapter).toContain('@:noCompletion\ntypedef RenderCacheAdapter =');
+    expect(vector2).toContain('@:noCompletion\nclass Vector2 {');
+    expect(geometry).not.toContain('@:noCompletion\nclass Geometry {');
+    expect(abc).not.toContain('@:noCompletion\nclass Abc {');
   });
 
   it('emits the broad SDK facade and renamed package re-exports', () => {
@@ -64,13 +69,17 @@ describe('public Haxe facades', () => {
     expect(scene2dGl).toContain('public static final defaultGlSpriteRenderer:');
   });
 
-  it('fully qualifies a self-named type owned by a mixed canonical types module', () => {
+  it('places every exported canonical type in its own public module', () => {
     const workspace = process.cwd();
     const layoutState = readFileSync(path.join(workspace, 'generated', 'flighthq', 'layout', 'LayoutState.hx'), 'utf8');
 
-    expect(layoutState).toContain('public static function createLayoutState():flighthq.types.Layout.LayoutState');
-    expect(layoutState).toContain(
-      'public static function registerLayoutResolver(state:flighthq.types.Layout.LayoutState,',
+    expect(layoutState).toContain('public static function createLayoutState():flighthq.types.LayoutState');
+    expect(layoutState).toContain('public static function registerLayoutResolver(state:flighthq.types.LayoutState,');
+    expect(existsSync(path.join(workspace, 'generated', 'flighthq', 'types', 'Vector2Like.hx'))).toBe(true);
+    const vector2Like = readFileSync(path.join(workspace, 'generated', 'flighthq', 'types', 'Vector2Like.hx'), 'utf8');
+    expect(vector2Like).toContain('typedef Vector2Like =');
+    expect(readFileSync(path.join(workspace, 'generated', 'flighthq', 'types', 'Vector2.hx'), 'utf8')).not.toContain(
+      'typedef Vector2Like =',
     );
   });
 

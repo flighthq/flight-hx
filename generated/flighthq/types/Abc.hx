@@ -4,42 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef AbcFile = { var classes:Array<AbcClass>; var constantPool:AbcConstantPool; var instances:Array<AbcInstance>; var majorVersion:Float; var metadata:Array<AbcMetadata>; var methodBodies:Array<AbcMethodBody>; var methods:Array<AbcMethod>; var minorVersion:Float; var scripts:Array<AbcScript>; };
-
-typedef AbcConstantPool = { var doubles:Array<Float>; var integers:Array<Float>; var multinames:Array<AbcMultiname>; var namespaceSets:Array<Array<Float>>; var namespaces:Array<AbcNamespace>; var strings:Array<String>; var unsignedIntegers:Array<Float>; };
-
-typedef AbcNamespace = { var kind:Float; var name:Float; };
-
-typedef AbcMultiname = { var kind:Float; var name:Float; var namespace:Float; var namespaceSet:Float; var parameters:Array<Float>; var typeName:Float; };
-
-typedef AbcMethod = { var flags:Float; var name:Float; var parameterNames:Array<Float>; var parameterTypes:Array<Float>; var optionalValues:Array<AbcOptionalValue>; var returnType:Float; };
-
-typedef AbcOptionalValue = { var kind:Float; var value:Float; };
-
-typedef AbcMetadata = { var items:Array<AbcMetadataItem>; var name:Float; };
-
-typedef AbcMetadataItem = { var key:Float; var value:Float; };
-
-typedef AbcInstance = { var flags:Float; var initializer:Float; var interfaces:Array<Float>; var name:Float; var protectedNamespace:Float; var superName:Float; var traits:Array<AbcTrait>; };
-
-typedef AbcClass = { var initializer:Float; var traits:Array<AbcTrait>; };
-
-typedef AbcScript = { var initializer:Float; var traits:Array<AbcTrait>; };
-
-typedef AbcTrait = { var attributes:Float; var classIndex:Float; var dispatchId:Float; var methodIndex:Float; var metadata:Array<Float>; var name:Float; var kind:Float; var slotId:Float; var typeName:Float; var valueIndex:Float; var valueKind:Float; };
-
-typedef AbcMethodBody = { var code:flighthq._internal._UInt8Array; var exceptions:Array<AbcException>; var initScopeDepth:Float; var localCount:Float; var maxScopeDepth:Float; var maxStack:Float; var method:Float; var traits:Array<AbcTrait>; };
-
-typedef AbcException = { var from:Float; var target:Float; var to:Float; var exceptionType:Float; var variableName:Float; };
-
-typedef AbcMultinameKind = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef AbcTraitKind = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef AbcInstruction = { var offset:Float; var opcode:Float; var operands:Array<Float>; };
-
-typedef AbcOpcode = flighthq._internal._IndexedAccess<Dynamic, String>;
-
+@:noCompletion
 class Abc {
   public static final AbcMultinameKindValue:{ var Multiname:Float; var MultinameA:Float; var MultinameL:Float; var MultinameLA:Float; var QName:Float; var QNameA:Float; var RtqName:Float; var RtqNameA:Float; var RtqNameL:Float; var RtqNameLA:Float; var TypeName:Float; } = (cast { Multiname: 9.0, MultinameA: 14.0, MultinameL: 27.0, MultinameLA: 28.0, QName: 7.0, QNameA: 13.0, RtqName: 15.0, RtqNameA: 16.0, RtqNameL: 17.0, RtqNameLA: 18.0, TypeName: 29.0 });
 

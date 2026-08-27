@@ -18,36 +18,38 @@ import flighthq.scene2dGl.GlShape.drawGlShape;
 import flighthq.scene2dGl.GlShapeRasterizer.getGlShapeRasterizer;
 import flighthq.shape.Scale9ShapeCommands.mapScale9ShapeCommands;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlShaderLocations;
+import flighthq.types.GlViewportRect;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.Scale9Mapper;
 import flighthq.types.Scale9Shape;
-import flighthq.types.Scale9Shape.Scale9ShapeData;
+import flighthq.types.Scale9ShapeData;
 import flighthq.types.Scene2DRenderer;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types.ShapeRasterizer;
 import flighthq.types.Types.Scale9ShapeKind;
 import flighthq.types._internal._Scale9ShapeValues.Scale9ShapeKind;
 
 typedef GlScale9ShapeData__glScale9Shape = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var ctx:flighthq._internal.dom.CanvasRenderingContext2D; var lastH:Float; var lastScaleX:Float; var lastScaleY:Float; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var texture:flighthq._internal.dom.WebGLTexture; };
 
+@:noCompletion
 class GlScale9Shape {
   public static final _remappedCommands__glScale9Shape:Array<ShapeCommandToken> = (cast cast ([] : Array<Dynamic>));
 
-  @:noCompletion
-  public static function createGlScale9ShapeData(state:GlRenderState, _source:Renderable):Null<RendererData> {
+  @:allow(flighthq)
+  @:keep
+  private static function createGlScale9ShapeData(state:GlRenderState, _source:Renderable):Null<RendererData> {
     var canvas:flighthq._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
     var ctx:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
@@ -60,8 +62,9 @@ class GlScale9Shape {
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyGlScale9ShapeData(state:GlRenderState, data:RendererData):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyGlScale9ShapeData(state:GlRenderState, data:RendererData):Void {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;
     var texture:flighthq._internal.dom.WebGLTexture = cast _Runtime.UNDEFINED;
     __destructure0 = (cast (cast data : flighthq._internal._Any) : GlScale9ShapeData__glScale9Shape);
@@ -69,8 +72,9 @@ class GlScale9Shape {
     flighthq._internal.backend.WebGl2Backend.deleteTexture((cast state : GlRenderState).gl, texture);
   }
 
-  @:noCompletion
-  public static function drawGlScale9Shape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlScale9Shape(state:GlRenderState, renderProxy:RenderProxy2D):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var source:Scale9Shape = cast _Runtime.UNDEFINED;
     var __destructure1:Dynamic = cast _Runtime.UNDEFINED;
@@ -146,8 +150,9 @@ class GlScale9Shape {
     drawGlQuad(({ final __callArgument54:Dynamic = state; __callArgument54; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast w : Float), (cast h : Float), (cast 0.0 : Float), (cast 0.0 : Float), (cast 1.0 : Float), (cast 1.0 : Float));
   }
 
-  @:noCompletion
-  public static function drawGlScale9ShapeMask(state:GlRenderState, data:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlScale9ShapeMask(state:GlRenderState, data:RenderProxy2D):Void {
     drawGlScale9Shape(({ final __callArgument56:Dynamic = state; __callArgument56; }), ({ final __callArgument57:Dynamic = data; __callArgument57; }));
   }
 

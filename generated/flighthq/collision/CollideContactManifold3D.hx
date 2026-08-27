@@ -8,16 +8,17 @@ import flighthq.collision.CollisionSupport3D.getCollisionSupport3D;
 import flighthq.collision.ContactManifold3D.clearCollisionContactManifold3D;
 import flighthq.collision.Manifold3D.createCollisionManifold3D;
 import flighthq.collision.TestCollision3D.testCollision3D;
-import flighthq.types.Collision.CollisionContactManifold3D;
-import flighthq.types.Collision.CollisionContactPoint3D;
-import flighthq.types.Collision.CollisionFaceQuery3D;
-import flighthq.types.Collision.CollisionManifold3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionShapeKind3D;
-import flighthq.types.Collision.CollisionSupport3D;
 import flighthq.types.Collision.MAX_COLLISION_CONTACT_POINTS_3D;
+import flighthq.types.CollisionContactManifold3D;
+import flighthq.types.CollisionContactPoint3D;
+import flighthq.types.CollisionFaceQuery3D;
+import flighthq.types.CollisionManifold3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionShapeKind3D;
+import flighthq.types.CollisionSupport3D;
 import flighthq.types.Types.MAX_COLLISION_CONTACT_POINTS_3D;
 
+@:noCompletion
 class CollideContactManifold3D {
   public static function collideContactManifold3D(a:CollisionShape3D, b:CollisionShape3D, out:CollisionContactManifold3D):Bool {
     var normalX:Float = cast _Runtime.UNDEFINED;

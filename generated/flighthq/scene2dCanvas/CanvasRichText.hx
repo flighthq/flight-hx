@@ -24,32 +24,35 @@ import flighthq.types.CanvasTextInputOverlay;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.RichTextContent;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextInputState;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextSelectionRectangle;
 import flighthq.types.TextVerticalAlign;
 
+@:noCompletion
 class CanvasRichText {
-  @:noCompletion
-  public static function drawCanvasRichText(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasRichText(state:CanvasRenderState, renderProxy:RenderProxy2D):Void {
     CanvasRichText.drawCanvasRichTextField__canvasRichText(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = renderProxy; __callArgument1; }));
     if ((cast ((cast !_Runtime.strictEquals(CanvasRichText._canvasTextInputOverlay__canvasRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool)) {
       (cast CanvasRichText._canvasTextInputOverlay__canvasRichText : CanvasRenderState->RenderProxy2D->Void)(({ final __callArgument4:Dynamic = state; __callArgument4; }), ({ final __callArgument5:Dynamic = renderProxy; __callArgument5; }));
     }
   }
 
-  @:noCompletion
-  public static function drawCanvasRichTextMask(state:CanvasRenderState, data:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasRichTextMask(state:CanvasRenderState, data:RenderProxy2D):Void {
     drawCanvasScene2D(({ final __callArgument8:Dynamic = state; __callArgument8; }), ({ final __callArgument9:Dynamic = data; __callArgument9; }));
   }
 
@@ -154,8 +157,9 @@ class CanvasRichText {
     flighthq._internal.backend.Canvas2dBackend.call(context, 'restore', cast ([] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function registerCanvasTextInputOverlay(overlay:CanvasTextInputOverlay):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerCanvasTextInputOverlay(overlay:CanvasTextInputOverlay):Void {
     (CanvasRichText._canvasTextInputOverlay__canvasRichText = cast (overlay : Dynamic));
   }
 

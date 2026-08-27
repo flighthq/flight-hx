@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.AudioResource;
 
+@:noCompletion
 class AudioResource {
   public static function cloneAudioResource(resource:flighthq.types.AudioResource):flighthq.types.AudioResource {
     return cast { buffer: resource.buffer };

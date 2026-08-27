@@ -14,18 +14,18 @@ import flighthq.render.Renderer as Facade_Render_flighthq_render_Renderer;
 import flighthq.render.Scene2dWorkingColorSpace as Facade_Render_flighthq_render_Scene2dWorkingColorSpace;
 import flighthq.render.SceneRender as Facade_Render_flighthq_render_SceneRender;
 import flighthq.types.Camera3D;
-import flighthq.types.Entity.Kind;
+import flighthq.types.Kind;
 import flighthq.types.Node3D;
 import flighthq.types.RenderCache;
 import flighthq.types.RenderCacheAdapter;
+import flighthq.types.RenderRegistryMissExplanation;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistryMissExplanation;
 import flighthq.types.RenderState;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.Scene3DLightBlock;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
 
 class Render {

@@ -16,15 +16,17 @@ import flighthq.types.RenderEffect;
 import flighthq.types.WgpuDualSourceEffectPipeline;
 import flighthq.types.WgpuEffectBlendMode;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
+import flighthq.types.WgpuRenderTargetPool;
 
+@:noCompletion
 class WgpuLensDirtEffect {
-  @:noCompletion
-  public static function applyLensDirtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:LensDirtEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyLensDirtEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, pool:WgpuRenderTargetPool, effect:LensDirtEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var threshold:Float = cast _Runtime.UNDEFINED;
     var seed:Float = cast _Runtime.UNDEFINED;

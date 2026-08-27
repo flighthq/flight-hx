@@ -4,16 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef StatusBarStyle = String;
-
-typedef StatusBarAnimation = String;
-
-typedef StatusBarStyleEntryHandle = Float;
-
-typedef StatusBarInfo = { var color:Float; var height:Float; var overlaysContent:Bool; var style:StatusBarStyle; var visible:Bool; };
-
-typedef StatusBarStyleEntry = { @:optional var animation:StatusBarAnimation; @:optional var color:Float; @:optional var overlaysContent:Bool; @:optional var style:StatusBarStyle; @:optional var visible:Bool; };
-
-typedef StatusBarBackend = { var getInfo:StatusBarInfo->StatusBarInfo; var setBackgroundColor:Float->Bool->Void; var setOverlaysContent:Bool->Void; var setStyle:StatusBarStyle->Void; var setVisible:Bool->StatusBarAnimation->Void; var subscribe:(Void->Void)->(Void->Void); };
-
 typedef StatusBar = { var onChange:Signal<StatusBarInfo->Void>; };

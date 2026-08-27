@@ -18,22 +18,24 @@ import flighthq.renderGl.GlRenderTargetPool.releaseGlRenderTarget;
 import flighthq.types.BevelEffect;
 import flighthq.types.EffectSourceMode;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
+import flighthq.types.GlRenderTargetPool;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
-import flighthq.types.RenderTarget.RenderTargetFormat;
+import flighthq.types.RenderTargetDescriptor;
+import flighthq.types.RenderTargetFormat;
 
 typedef BevelCompositeLocations__glBevelEffect = { >GlFullscreenProgram, var locHighlight:flighthq._internal.dom.WebGLUniformLocation; var locShadow:flighthq._internal.dom.WebGLUniformLocation; var locOffset:flighthq._internal.dom.WebGLUniformLocation; var locIntensity:flighthq._internal.dom.WebGLUniformLocation; var locClipMode:flighthq._internal.dom.WebGLUniformLocation; };
 
 typedef BevelCompositeParams__glBevelEffect = { var offsetX:Float; var offsetY:Float; var highlightColor:Float; var highlightAlpha:Float; var shadowColor:Float; var shadowAlpha:Float; var intensity:Float; var clipMode:Float; };
 
+@:noCompletion
 class GlBevelEffect {
-  @:noCompletion
-  public static function applyBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BevelEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyBevelEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, pool:GlRenderTargetPool, effect:BevelEffect):Void {
     var descriptor:{ var width:Float; var height:Float; var format:RenderTargetFormat; } = cast _Runtime.UNDEFINED;
     var s0:GlRenderTarget = cast _Runtime.UNDEFINED;
     var s1:GlRenderTarget = cast _Runtime.UNDEFINED;

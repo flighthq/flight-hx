@@ -4,7 +4,7 @@ package flighthq.shading;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.FogModifier;
-import flighthq.types.FogModifier.FogModifierMode;
+import flighthq.types.FogModifierMode;
 import flighthq.types.FogModifierOptions;
 import flighthq.types.ModifierSlot;
 import flighthq.types.Types.FogModifierKind;
@@ -12,6 +12,7 @@ import flighthq.types._internal._FogModifierValues.FogModifierKind;
 import flighthq.types._internal._FogModifierValues.FogModifierModeValue;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
+@:noCompletion
 class CreateFogModifier {
   public static function createFogModifier(options:FogModifierOptions):FogModifier {
     return cast { kind: FogModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect, color: options.color, mode: _Runtime.coalesce(options.mode, function():Dynamic return cast (cast FogModifierModeValue : { var Exponential:String; var Exponential2:String; var Linear:String; }).Linear), near: _Runtime.coalesce(options.near, function():Dynamic return cast 0.0), far: _Runtime.coalesce(options.far, function():Dynamic return cast 1.0), density: _Runtime.coalesce(options.density, function():Dynamic return cast 1.0) };

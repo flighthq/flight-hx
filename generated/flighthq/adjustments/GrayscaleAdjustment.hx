@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GrayscaleAdjustment;
 
+@:noCompletion
 class GrayscaleAdjustment {
   public static function createGrayscaleAdjustment(?options:{ @:optional var intensity:Null<Float>; }):flighthq.types.GrayscaleAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

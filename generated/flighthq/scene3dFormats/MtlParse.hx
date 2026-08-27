@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.ObjSchema.ObjMaterial;
-import flighthq.types.ObjSchema.ObjMaterialLibrary;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.ObjMaterial;
+import flighthq.types.ObjMaterialLibrary;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
 typedef MtlDropTally__mtlParse = { var count:Float; var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var severity:ImportDiagnosticSeverity; };
 
+@:noCompletion
 class MtlParse {
   public static function parseObjMaterialLibrary(source:String, ?diagnostics:Array<ImportDiagnostic>):ObjMaterialLibrary {
     var materials:flighthq._internal._Map<String, ObjMaterial> = cast _Runtime.UNDEFINED;

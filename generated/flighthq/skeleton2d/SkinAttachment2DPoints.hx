@@ -7,11 +7,13 @@ import flighthq.skeleton2d.Skeleton2dGuards.reportSkeleton2DDeformLengthMismatch
 import flighthq.types.Skeleton2D;
 import flighthq.types.Skin2D;
 
+@:noCompletion
 class SkinAttachment2DPoints {
   public static final MATRIX_STRIDE__skinAttachment2DPoints:Float = 6.0;
 
-  @:noCompletion
-  public static function skinSkeleton2DAttachmentPoints(out:flighthq._internal._Union2<flighthq._internal._Float32Array, Array<Float>>, skin:Null<Skin2D>, vertices:Null<flighthq._internal._Float32Array>, skeleton:Skeleton2D, boneIndex:Float, deform:Null<flighthq._internal._Float32Array>, subject:String):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function skinSkeleton2DAttachmentPoints(out:flighthq._internal._Union2<flighthq._internal._Float32Array, Array<Float>>, skin:Null<Skin2D>, vertices:Null<flighthq._internal._Float32Array>, skeleton:Skeleton2D, boneIndex:Float, deform:Null<flighthq._internal._Float32Array>, subject:String):Void {
     var world:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var offsets:Null<flighthq._internal._Float32Array> = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;

@@ -8,37 +8,39 @@ import flighthq.entity.Runtime.createEntityRuntime;
 import flighthq.registry.RegistryTable.createKeyedTable;
 import flighthq.registry.RegistryTable.createSlotTable;
 import flighthq.types.BlendMode;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.ColorAdjustmentUnsupportedGuard;
+import flighthq.types.EntityRuntime;
+import flighthq.types.KeyedTable;
 import flighthq.types.Matrix;
 import flighthq.types.Path;
 import flighthq.types.PathMesh;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
-import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RenderEffectPaddingResolver;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderProxyAdapter;
+import flighthq.types.RenderRegistries;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.ColorAdjustmentUnsupportedGuard;
-import flighthq.types.RenderState.RenderRegistries;
-import flighthq.types.RenderState.RenderStateRuntime;
-import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 import flighthq.types.RendererData;
-import flighthq.types.Scene2DRenderer.Scene2DClipHooks;
+import flighthq.types.Scene2DClipHooks;
+import flighthq.types.Scene3DGraphSyncPolicy;
+import flighthq.types.SlotTable;
 import flighthq.types.StrokeStyle;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class RenderState {
-  @:noCompletion
-  public static function createRenderState(?obj:{ @:optional var allowSmoothing:Null<Bool>; @:optional var backgroundColor:Null<Float>; @:optional var backgroundColorRgba:Null<Array<Float>>; @:optional var backgroundColorString:Null<String>; @:optional var currentClipDepth:Null<Float>; @:optional var displayObjectClipHooks:Null<Scene2DClipHooks>; @:optional var pixelRatio:Null<Float>; @:optional var renderAlpha:Null<Float>; @:optional var renderBlendMode:Null<BlendMode>; @:optional var renderTransform2D:Null<Matrix>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; @:optional var roundPixels:Null<Bool>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flighthq.types.RenderState {
+  @:allow(flighthq)
+  @:keep
+  private static function createRenderState(?obj:{ @:optional var allowSmoothing:Null<Bool>; @:optional var backgroundColor:Null<Float>; @:optional var backgroundColorRgba:Null<Array<Float>>; @:optional var backgroundColorString:Null<String>; @:optional var currentClipDepth:Null<Float>; @:optional var displayObjectClipHooks:Null<Scene2DClipHooks>; @:optional var pixelRatio:Null<Float>; @:optional var renderAlpha:Null<Float>; @:optional var renderBlendMode:Null<BlendMode>; @:optional var renderTransform2D:Null<Matrix>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; @:optional var roundPixels:Null<Bool>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flighthq.types.RenderState {
     var state:flighthq.types.RenderState = cast _Runtime.UNDEFINED;
     state = (cast createEntity((cast { allowSmoothing: _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var allowSmoothing:Null<Bool>; }).allowSmoothing; }), function():Dynamic return cast true), backgroundColor: _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var backgroundColor:Null<Float>; }).backgroundColor; }), function():Dynamic return cast 0.0), backgroundColorRgba: _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var backgroundColorRgba:Null<Array<Float>>; }).backgroundColorRgba; }), function():Dynamic return cast cast ([] : Array<Dynamic>)), backgroundColorString: _Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var backgroundColorString:Null<String>; }).backgroundColorString; }), function():Dynamic return cast ''), currentClipDepth: _Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var currentClipDepth:Null<Float>; }).currentClipDepth; }), function():Dynamic return cast 0.0), displayObjectClipHooks: _Runtime.coalesce(({ final __structural5 = obj; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var displayObjectClipHooks:Null<Scene2DClipHooks>; }).displayObjectClipHooks; }), function():Dynamic return cast null), pixelRatio: _Runtime.coalesce(({ final __structural6 = obj; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var pixelRatio:Null<Float>; }).pixelRatio; }), function():Dynamic return cast 1.0), renderAlpha: _Runtime.coalesce(({ final __structural7 = obj; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var renderAlpha:Null<Float>; }).renderAlpha; }), function():Dynamic return cast 1.0), renderBlendMode: _Runtime.coalesce(({ final __structural8 = obj; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var renderBlendMode:Null<String>; }).renderBlendMode; }), function():Dynamic return cast (cast BlendModeValue : { var Add:String; var Darken:String; var Lighten:String; var Multiply:String; var Normal:String; var Screen:String; }).Normal), renderTransform2D: _Runtime.coalesce(({ final __structural9 = obj; __structural9 == null ? _Runtime.UNDEFINED : (cast __structural9 : { @:optional var renderTransform2D:Null<Matrix>; }).renderTransform2D; }), function():Dynamic return cast null), roundPixels: _Runtime.coalesce(({ final __structural10 = obj; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { @:optional var roundPixels:Null<Bool>; }).roundPixels; }), function():Dynamic return cast false), sceneGraphSyncPolicy: _Runtime.coalesce(({ final __structural11 = obj; __structural11 == null ? _Runtime.UNDEFINED : (cast __structural11 : { @:optional var sceneGraphSyncPolicy:Null<String>; }).sceneGraphSyncPolicy; }), function():Dynamic return cast 'refreshDerivedState') } : Dynamic)) : flighthq.types.RenderState);
     _Runtime.setIndex(state, EntityRuntimeKey, (cast createRenderStateRuntime() : RenderStateRuntime));
@@ -46,8 +48,9 @@ class RenderState {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createRenderStateRuntime():RenderStateRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createRenderStateRuntime():RenderStateRuntime {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createEntityRuntime() : RenderStateRuntime);
     (runtime.currentFrameId = cast (0.0 : Float));
@@ -75,16 +78,18 @@ class RenderState {
     _Runtime.setLength(runtime.tempStack, 0.0);
   }
 
-  @:noCompletion
-  public static function getColorAdjustmentUnsupportedGuard(state:flighthq.types.RenderState):Null<ColorAdjustmentUnsupportedGuard> {
+  @:allow(flighthq)
+  @:keep
+  private static function getColorAdjustmentUnsupportedGuard(state:flighthq.types.RenderState):Null<ColorAdjustmentUnsupportedGuard> {
     var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ColorAdjustmentUnsupportedGuard; }>> = cast _Runtime.UNDEFINED;
     entry = ({ final __structural36 = (cast (cast (cast getRenderStateRuntime(({ final __callArgument34:Dynamic = state; __callArgument34; })) : RenderStateRuntime) : { var registries:RenderRegistries; }).registries : { @:optional var colorAdjustmentUnsupportedGuard:Null<SlotTable<ColorAdjustmentUnsupportedGuard>>; }).colorAdjustmentUnsupportedGuard; __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { var entry:Null<flighthq._internal._Union2<{ var state:String; }, { var state:String; var value:ColorAdjustmentUnsupportedGuard; }>>; }).entry; });
     return cast ((cast _Runtime.strictEquals(({ final __structural37 = entry; __structural37 == null ? _Runtime.UNDEFINED : (cast __structural37 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:ColorAdjustmentUnsupportedGuard; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
-  @:noCompletion
-  public static function getRenderStateRuntime(state:flighthq.types.RenderState):RenderStateRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getRenderStateRuntime(state:flighthq.types.RenderState):RenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : RenderStateRuntime);
     return cast null;
   }

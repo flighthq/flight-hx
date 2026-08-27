@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.clipboard.Clipboard.createWebClipboardBackend;
 import flighthq.clipboard.Clipboard.installClipboardHostBackend;
 import flighthq.clipboard.Clipboard.observeClipboardHostResult;
-import flighthq.types.Clipboard.ClipboardBackend;
-import flighthq.types.Clipboard.ClipboardBookmark;
-import flighthq.types.Clipboard.ClipboardWriteItem;
+import flighthq.types.ClipboardBackend;
+import flighthq.types.ClipboardBookmark;
+import flighthq.types.ClipboardWriteItem;
 
+@:noCompletion
 class WebClipboard {
   public static function enableHostWebClipboard():Void {
     var inner:ClipboardBackend = cast _Runtime.UNDEFINED;
@@ -213,8 +214,9 @@ class WebClipboard {
     installClipboardHostBackend(({ final __callArgument9:Dynamic = backend; __callArgument9; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebClipboardForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebClipboardForTest():Void {
     (WebClipboard._enabled__webClipboard = cast (false : Dynamic));
   }
 

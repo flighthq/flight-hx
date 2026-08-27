@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.Bitmap;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapRegion {
   public static function createBitmapRegion(bitmap:Bitmap, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):flighthq.types.BitmapRegion {
     if (width == null) width = cast (bitmap.width : Dynamic);

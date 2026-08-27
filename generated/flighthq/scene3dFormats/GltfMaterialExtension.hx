@@ -6,20 +6,22 @@ import flighthq._internal._Runtime;
 import flighthq.materials.ExtendedPbrMaterial.createExtendedPbrMaterial;
 import flighthq.materials.PbrMaterials.createStandardPbrMaterialProperties;
 import flighthq.types.ExtendedPbrMaterial;
-import flighthq.types.Material.MaterialLike;
+import flighthq.types.MaterialAlphaMode;
+import flighthq.types.MaterialLike;
 import flighthq.types.PbrExtension;
 import flighthq.types.Scene3DDocument;
 import flighthq.types.StandardPbrMaterial;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
-import flighthq.types.SurfaceMaterial.MaterialAlphaMode;
+import flighthq.types.StandardPbrMaterialProperties;
 import flighthq.types.Types.ExtendedPbrMaterialKind;
 import flighthq.types.Types.StandardPbrMaterialKind;
 import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
 import flighthq.types._internal._StandardPbrMaterialValues.StandardPbrMaterialKind;
 
+@:noCompletion
 class GltfMaterialExtension {
-  @:noCompletion
-  public static function attachGltfPbrExtension(document:Scene3DDocument, index:Float, extension:PbrExtension):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function attachGltfPbrExtension(document:Scene3DDocument, index:Float, extension:PbrExtension):Bool {
     var existing:MaterialLike = cast _Runtime.UNDEFINED;
     var standard:StandardPbrMaterial = cast _Runtime.UNDEFINED;
     var promoted:ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
@@ -43,8 +45,9 @@ class GltfMaterialExtension {
     return cast null;
   }
 
-  @:noCompletion
-  public static function findGltfPbrExtension(document:Scene3DDocument, index:Float, kind:String):Null<PbrExtension> {
+  @:allow(flighthq)
+  @:keep
+  private static function findGltfPbrExtension(document:Scene3DDocument, index:Float, kind:String):Null<PbrExtension> {
     var material:MaterialLike = cast _Runtime.UNDEFINED;
     var extended:ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
     material = flighthq._internal._StaticIndex.readArray(document.materials, index);

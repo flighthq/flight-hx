@@ -9,26 +9,4 @@ import flighthq.types._internal._StatechartValues.StatechartInputKindValue;
 import flighthq.types._internal._StatechartValues.StatechartNestedStateKind;
 import flighthq.types._internal._StatechartValues.StatechartTransitionStatusValue;
 
-typedef StatechartInputKind = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef StatechartComparison = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef StatechartInput = { var initialValue:Float; var kind:StatechartInputKind; @:optional var name:String; };
-
-typedef StatechartCondition = { var comparison:StatechartComparison; var inputIndex:Float; var value:Float; };
-
-typedef StatechartTransition = { var conditions:Array<StatechartCondition>; var durationMs:Float; var exitTimeRatio:Float; var targetStateIndex:Float; };
-
-typedef StatechartState = { var kind:String; @:optional var name:String; var transitions:Array<StatechartTransition>; };
-
-typedef StatechartRegion = { var initialStateIndex:Float; @:optional var name:String; var states:Array<StatechartState>; };
-
 typedef Statechart = { var inputs:Array<StatechartInput>; @:optional var name:String; var regions:Array<StatechartRegion>; };
-
-typedef StatechartDurationGuard = StatechartInstance->StatechartTransitionExplanation->Void;
-
-typedef StatechartInstance = { var chart:flighthq.types.Statechart; var durationGuard:Null<StatechartDurationGuard>; var inputValues:flighthq._internal._Float64Array; var regionBlend:flighthq._internal._Float32Array; var regionDuration:flighthq._internal._Float64Array; var regionElapsed:flighthq._internal._Float64Array; var regionStates:flighthq._internal._Int32Array; var regionTransitions:flighthq._internal._Int32Array; var signals:Null<StatechartSignals>; };
-
-typedef StatechartTransitionStatus = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef StatechartTransitionExplanation = { var blend:Float; var conditionIndex:Float; var regionIndex:Float; var sourceStateIndex:Float; var status:StatechartTransitionStatus; var targetStateIndex:Float; var transitionIndex:Float; };

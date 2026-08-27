@@ -6,13 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Ipc.IpcBackend;
-import flighthq.types.Ipc.IpcBackendCapabilities;
-import flighthq.types.Ipc.IpcChannel;
-import flighthq.types.Ipc.IpcMessageEvent;
-import flighthq.types.Ipc.IpcTarget;
-import flighthq.types.Ipc.IpcTimeoutError;
+import flighthq.types.IpcBackend;
+import flighthq.types.IpcBackendCapabilities;
+import flighthq.types.IpcChannel;
+import flighthq.types.IpcMessageEvent;
 import flighthq.types.IpcSignals;
+import flighthq.types.IpcTarget;
+import flighthq.types.IpcTimeoutError;
 import flighthq.types.Signal;
 
 class Ipc {
@@ -86,8 +86,9 @@ class Ipc {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getIpcBackend():IpcBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getIpcBackend():IpcBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Ipc._custom__ipc, function():Dynamic return cast Ipc._host__ipc), function():Dynamic return cast Ipc._sentinel__ipc);
     return cast null;
   }
@@ -104,14 +105,16 @@ class Ipc {
     return cast null;
   }
 
-  @:noCompletion
-  public static function hasIpcBackend():Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasIpcBackend():Bool {
     return cast ((cast !_Runtime.strictEquals(Ipc._custom__ipc, null) : Bool) || (cast !_Runtime.strictEquals(Ipc._host__ipc, null) : Bool));
     return cast null;
   }
 
-  @:noCompletion
-  public static function installIpcHostBackend(backend:IpcBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installIpcHostBackend(backend:IpcBackend):Void {
     if ((cast !_Runtime.strictEquals(Ipc._host__ipc, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Ipc._host__ipc, backend) : Bool)) { (Ipc._hostConflict__ipc = cast (true : Dynamic)); }
       return;
@@ -139,8 +142,9 @@ class Ipc {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeIpcHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeIpcHostResult(operation:String, succeeded:Bool):Void {
     (Ipc._hostObservation__ipc = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -233,8 +237,9 @@ class Ipc {
     }
   }
 
-  @:noCompletion
-  public static function resetIpcBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetIpcBackendForTest():Void {
     (Ipc._custom__ipc = cast (null : Dynamic));
     (Ipc._host__ipc = cast (null : Dynamic));
     (Ipc._hostConflict__ipc = cast (false : Dynamic));
@@ -254,8 +259,9 @@ class Ipc {
     _Runtime.callOptionalValue((cast (cast getIpcBackend() : IpcBackend) : IpcBackend).sendTo, cast ([target, (cast Ipc.resolveChannel__ipc(({ final __callArgument43:Dynamic = channel; __callArgument43; })) : String), args] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function setIpcBackend(backend:Null<IpcBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setIpcBackend(backend:Null<IpcBackend>):Void {
     (Ipc._custom__ipc = cast (backend : Dynamic));
     if ((cast !_Runtime.strictEquals(Ipc._ipcSignals__ipc, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Ipc._ipcSignals__ipc : { var onBackendChanged:Signal<Void->Void>; }).onBackendChanged]]), 1); }
   }

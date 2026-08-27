@@ -9,6 +9,7 @@ import flighthq.types.CaptureBaselineProvenance;
 import flighthq.types.CaptureBaselineProvenanceField;
 import flighthq.types.CaptureColumnBaseline;
 
+@:noCompletion
 class CaptureBaseline {
   public static function createCaptureBaseline():flighthq.types.CaptureBaseline {
     return cast {  };
@@ -37,8 +38,9 @@ class CaptureBaseline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getCaptureBaselineProvenance(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureBaselineProvenanceField):Null<CaptureBaselineProvenance> {
+  @:allow(flighthq)
+  @:keep
+  private static function getCaptureBaselineProvenance(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureBaselineProvenanceField):Null<CaptureBaselineProvenance> {
     return cast _Runtime.coalesce(_Runtime.optionalIndex(_Runtime.getIndex(baseline, column), (cast CaptureBaseline.provenanceMember__captureBaseline(({ final __callArgument4:Dynamic = field; __callArgument4; })) : String)), function():Dynamic return cast null);
     return cast null;
   }
@@ -59,8 +61,9 @@ class CaptureBaseline {
     _Runtime.setIndex(_Runtime.setIndex(baseline, column, (_Runtime.getIndex(baseline, column) ?? {  })), field, value);
   }
 
-  @:noCompletion
-  public static function setCaptureBaselineProvenance(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureBaselineProvenanceField, provenance:CaptureBaselineProvenance):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setCaptureBaselineProvenance(baseline:flighthq.types.CaptureBaseline, column:String, field:CaptureBaselineProvenanceField, provenance:CaptureBaselineProvenance):Void {
     _Runtime.setIndex(_Runtime.setIndex(baseline, column, (_Runtime.getIndex(baseline, column) ?? {  })), (cast CaptureBaseline.provenanceMember__captureBaseline(({ final __callArgument6:Dynamic = field; __callArgument6; })) : String), _Runtime.mergeObjects([provenance]));
   }
 

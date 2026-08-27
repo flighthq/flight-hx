@@ -4,10 +4,11 @@ package flighthq.renderGl;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
+import flighthq.types.GlBitmapShader;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlShaderLocations.GlBitmapShader;
+import flighthq.types.GlRenderStateRuntime;
 
+@:noCompletion
 class GlShaderRegistry {
   public static function registerGlBitmapShader(state:GlRenderState, shader:GlBitmapShader):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;

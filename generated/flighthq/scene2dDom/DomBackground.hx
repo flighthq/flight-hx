@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DomRenderState;
 
+@:noCompletion
 class DomBackground {
   public static function renderDomBackground(state:DomRenderState):Void {
     if ((cast !_Runtime.strictEquals((_Runtime.toInt32((cast state : DomRenderState).backgroundColor) & 255), 0.0) : Bool)) {

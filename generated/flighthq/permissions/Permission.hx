@@ -4,17 +4,19 @@ package flighthq.permissions;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Permission.PermissionBackend;
-import flighthq.types.Permission.PermissionName;
-import flighthq.types.Permission.PermissionRequestFallbackGuard;
-import flighthq.types.Permission.PermissionState;
-import flighthq.types.Permission.PermissionStateExplanation;
+import flighthq.types.PermissionBackend;
+import flighthq.types.PermissionName;
+import flighthq.types.PermissionRequestFallbackGuard;
+import flighthq.types.PermissionState;
+import flighthq.types.PermissionStateExplanation;
 
 typedef WakeLockLike__permission = { @:optional var release:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; };
 
+@:noCompletion
 class Permission {
-  @:noCompletion
-  public static function createWebPermissionBackend():PermissionBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebPermissionBackend():PermissionBackend {
     return cast { getState: function(name:PermissionName):flighthq._internal._Promise<PermissionState> {
       return cast (cast Permission.readWebPermissionState__permission(({ final __callArgument0:Dynamic = name; __callArgument0; })) : flighthq._internal._Promise<PermissionState>);
       return cast _Runtime.UNDEFINED;
@@ -87,8 +89,9 @@ class Permission {
     );
   }
 
-  @:noCompletion
-  public static function getPermissionBackend():PermissionBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getPermissionBackend():PermissionBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Permission._custom__permission, function():Dynamic return cast Permission._host__permission), function():Dynamic return cast Permission._sentinel__permission);
     return cast null;
   }
@@ -103,8 +106,9 @@ class Permission {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installPermissionHostBackend(backend:PermissionBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installPermissionHostBackend(backend:PermissionBackend):Void {
     if ((cast !_Runtime.strictEquals(Permission._host__permission, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Permission._host__permission, backend) : Bool)) { (Permission._hostConflict__permission = cast (true : Dynamic)); }
       return;
@@ -112,8 +116,9 @@ class Permission {
     (Permission._host__permission = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observePermissionHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observePermissionHostResult(operation:String, succeeded:Bool):Void {
     (Permission._hostObservation__permission = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -122,21 +127,24 @@ class Permission {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetPermissionBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetPermissionBackendForTest():Void {
     (Permission._custom__permission = cast (null : Dynamic));
     (Permission._host__permission = cast (null : Dynamic));
     (Permission._hostConflict__permission = cast (false : Dynamic));
     (Permission._hostObservation__permission = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setPermissionBackend(backend:Null<PermissionBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPermissionBackend(backend:Null<PermissionBackend>):Void {
     (Permission._custom__permission = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function setPermissionRequestFallbackGuard(guard:Null<PermissionRequestFallbackGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPermissionRequestFallbackGuard(guard:Null<PermissionRequestFallbackGuard>):Void {
     (Permission._requestFallbackGuard__permission = cast (guard : Dynamic));
   }
 

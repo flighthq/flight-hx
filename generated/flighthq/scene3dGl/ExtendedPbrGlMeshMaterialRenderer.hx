@@ -20,9 +20,9 @@ import flighthq.types.ExtendedPbrMaterial;
 import flighthq.types.GlLitProgram;
 import flighthq.types.GlMeshMaterialRenderer;
 import flighthq.types.GlMeshProgram;
+import flighthq.types.GlPbrDefineKey;
 import flighthq.types.GlPbrExtensionShaderContribution;
 import flighthq.types.GlPbrProgram;
-import flighthq.types.GlPbrProgram.GlPbrDefineKey;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Material;
@@ -30,10 +30,11 @@ import flighthq.types.MeshGeometry;
 import flighthq.types.PbrExtension;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
+import flighthq.types.StandardPbrMaterialProperties;
 import flighthq.types.Types.ExtendedPbrMaterialKind;
 import flighthq.types._internal._ExtendedPbrMaterialValues.ExtendedPbrMaterialKind;
 
+@:noCompletion
 class ExtendedPbrGlMeshMaterialRenderer {
   public static final extendedPbrGlMeshMaterialRenderer:GlMeshMaterialRenderer = (cast { bind: function(state:GlRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var extended:Null<ExtendedPbrMaterial> = cast _Runtime.UNDEFINED;

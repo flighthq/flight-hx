@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.bitmap.BitmapComposite.extractBitmapPixels;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapDraw {
   public static function drawBitmap(dest:flighthq._internal.dom.HTMLCanvasElement, source:BitmapRegion, x:Float, y:Float):Void {
     var domImageData:flighthq._internal.dom.ImageData = cast _Runtime.UNDEFINED;

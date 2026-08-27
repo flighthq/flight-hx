@@ -9,9 +9,10 @@ import flighthq.path.Path.appendPathMoveTo;
 import flighthq.path.Path.createPath;
 import flighthq.path.StrokePathGeometry.buildStrokePathGeometry;
 import flighthq.types.Path;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 import flighthq.types.StrokeStyle;
 
+@:noCompletion
 class StrokePath {
   public static function strokePath(path:Path, style:StrokeStyle, tolerance:Float = 0.25):Path {
     var result:Path = cast _Runtime.UNDEFINED;

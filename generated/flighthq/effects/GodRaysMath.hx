@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.GodRaysEffect;
 
+@:noCompletion
 class GodRaysMath {
   public static function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
     var samples:Float = cast _Runtime.UNDEFINED;

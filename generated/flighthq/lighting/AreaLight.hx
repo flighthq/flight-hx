@@ -13,9 +13,10 @@ import flighthq.types.AreaLightOptions;
 import flighthq.types.Entity;
 import flighthq.types.Types.AreaLightKind;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 import flighthq.types._internal._AreaLightValues.AreaLightKind;
 
+@:noCompletion
 class AreaLight {
   public static function cloneAreaLight(source:flighthq.types.AreaLight):flighthq.types.AreaLight {
     return cast (cast createEntity((cast { castsShadow: source.castsShadow, color: source.color, direction: (cast cloneVector3(({ final __callArgument0:Dynamic = source.direction; __callArgument0; })) : Vector3), intensity: source.intensity, kind: AreaLightKind, normalBias: source.normalBias, pcfRadius: source.pcfRadius, position: (cast cloneVector3(({ final __callArgument2:Dynamic = source.position; __callArgument2; })) : Vector3), range: source.range, right: (cast cloneVector3(({ final __callArgument4:Dynamic = source.right; __callArgument4; })) : Vector3), shadowBias: source.shadowBias, up: (cast cloneVector3(({ final __callArgument6:Dynamic = source.up; __callArgument6; })) : Vector3) } : Dynamic)) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var position:Vector3; var range:Float; var right:Vector3; var shadowBias:Float; var up:Vector3; });

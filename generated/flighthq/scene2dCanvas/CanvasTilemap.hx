@@ -8,23 +8,25 @@ import flighthq.scene2dCanvas.CanvasMaterialRegistry.applyCanvasMaterial;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.TextureFilter;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureFilter;
 import flighthq.types.Tilemap;
-import flighthq.types.Tilemap.TilemapData;
+import flighthq.types.TilemapData;
 
+@:noCompletion
 class CanvasTilemap {
-  @:noCompletion
-  public static function drawCanvasTilemap(state:CanvasRenderState, tilemapNode:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasTilemap(state:CanvasRenderState, tilemapNode:RenderProxy2D):Void {
     var source:Tilemap = cast _Runtime.UNDEFINED;
     var __destructure0:TilemapData = cast _Runtime.UNDEFINED;
     var atlas:Null<TextureAtlas> = cast _Runtime.UNDEFINED;

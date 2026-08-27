@@ -19,36 +19,36 @@ import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.node.NodeTransform3d.isNodeLocalMatrix4Detached;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.types.Aabb;
-import flighthq.types.Aabb.AabbLike;
+import flighthq.types.AabbLike;
 import flighthq.types.AmbientLight;
 import flighthq.types.Camera3D;
-import flighthq.types.Camera3D.OrthographicProjection;
-import flighthq.types.Camera3D.PerspectiveProjection;
-import flighthq.types.Camera3D.Projection;
 import flighthq.types.DirectionalLight;
 import flighthq.types.Frustum;
-import flighthq.types.Frustum.FrustumLike;
+import flighthq.types.FrustumLike;
 import flighthq.types.HasAppearance;
-import flighthq.types.HasTransform3D.Transform3DNode;
 import flighthq.types.HemisphereLight;
 import flighthq.types.LinearColor;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
-import flighthq.types.Mesh.MeshRuntime;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MeshRuntime;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
+import flighthq.types.OrthographicProjection;
+import flighthq.types.PerspectiveProjection;
 import flighthq.types.PointLight;
+import flighthq.types.Projection;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
+import flighthq.types.Scene3DGraphSyncPolicy;
 import flighthq.types.Scene3DLightBlock;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
 import flighthq.types.Skin;
 import flighthq.types.SpotLight;
+import flighthq.types.Transform3DNode;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types.Types.SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET;
 import flighthq.types.Types.SCENE_LIGHT_BLOCK_FLOATS;
@@ -76,6 +76,7 @@ import flighthq.types._internal._Scene3DLightBlockValues.SCENE_LIGHT_SPOT_STRIDE
 
 typedef PreparedScene3D__sceneRender = { var frustum:Frustum; var list:Scene3DRenderList; var meshes:Array<Mesh>; var viewProjection:Matrix4; var worldBounds:Aabb; };
 
+@:noCompletion
 class SceneRender {
   public static function packScene3DLightBlock(out:Scene3DLightBlock, lights:Scene3DLightsLike):Void {
     var directionalCount:Float = cast _Runtime.UNDEFINED;
@@ -362,8 +363,9 @@ class SceneRender {
 
   public static final scratchLightData__sceneRender:flighthq._internal._Float32Array = new flighthq._internal._Float32Array(SCENE_LIGHT_BLOCK_FLOATS);
 
-  @:noCompletion
-  public static function setSkinnedMeshBoundsGuard(guard:Null<Mesh->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setSkinnedMeshBoundsGuard(guard:Null<Mesh->Void>):Void {
     (SceneRender._skinnedBoundsGuard__sceneRender = cast (guard : Dynamic));
   }
 

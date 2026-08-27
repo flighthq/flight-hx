@@ -7,13 +7,14 @@ import flighthq.image.ImageResourceFrom.createImageResourceFromBitmap;
 import flighthq.scene2dCanvas.CanvasTextureResolver.registerCanvasTextureResolver;
 import flighthq.texture.Texture.getTextureSource;
 import flighthq.types.Bitmap;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
 import flighthq.types.Image;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
+@:noCompletion
 class CanvasBitmapTextureResolver {
   public static function registerCanvasBitmapTextureResolver(resolvers:CanvasTextureResolvers):Void {
     registerCanvasTextureResolver(({ final __callArgument0:Dynamic = resolvers; __callArgument0; }), (cast BitmapTextureSourceKind : String), (cast CanvasBitmapTextureResolver.resolveCanvasBitmapTexture__canvasBitmapTextureResolver : Dynamic));

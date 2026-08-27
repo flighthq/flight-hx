@@ -16,35 +16,35 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.connectSignal;
 import flighthq.signals.Slot.disconnectSignal;
 import flighthq.signals.Slot.isSlotConnected;
+import flighthq.types.AnyInteractionSignalSlot;
 import flighthq.types.Cursor;
-import flighthq.types.Cursor.CursorBackend;
+import flighthq.types.CursorBackend;
 import flighthq.types.FocusEventData;
-import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.InputKeyboardData;
 import flighthq.types.InputPointerData;
 import flighthq.types.InteractionConnectGuard;
+import flighthq.types.InteractionInputSource;
 import flighthq.types.InteractionManager;
-import flighthq.types.InteractionManager.AnyInteractionSignalSlot;
-import flighthq.types.InteractionManager.InteractionInputSource;
-import flighthq.types.InteractionManager.InteractionManagerOptions;
-import flighthq.types.InteractionManager.InteractionPointerOptions;
-import flighthq.types.InteractionManager.InteractionPointerState;
-import flighthq.types.InteractionManager.InteractionSignalName;
+import flighthq.types.InteractionManagerOptions;
+import flighthq.types.InteractionPointerOptions;
+import flighthq.types.InteractionPointerState;
+import flighthq.types.InteractionSignalName;
 import flighthq.types.InteractionSignals;
 import flighthq.types.KeyboardEventData;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeTraits;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
+import flighthq.types.NodeTraits;
 import flighthq.types.PointerEventData;
-import flighthq.types.PointerEventData.PointerType;
+import flighthq.types.PointerType;
 import flighthq.types.Signal;
-import flighthq.types.Signal.SignalData;
 import flighthq.types.SignalConnectOptions;
-import flighthq.types.Spatial.SpatialIndex2D;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.SignalData;
+import flighthq.types.SpatialIndex2D;
+import flighthq.types.Transform2DNode;
+import flighthq.types.Vector2Like;
 
 typedef KeyboardSignalName__interactionManager = String;
 
@@ -56,6 +56,7 @@ typedef InteractionSignalPayload__interactionManager<Name> = flighthq._internal.
 
 typedef InteractionSignalSlot__interactionManager<Name> = InteractionSignalPayload__interactionManager<Name>->Void;
 
+@:noCompletion
 class InteractionManager {
   public static function captureInteractionPointer<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, pointerId:Float, target:N):Void {
     ((cast manager.pointerCaptures : flighthq._internal._Map<Float, N>).set(pointerId, (cast target)));
@@ -126,8 +127,9 @@ class InteractionManager {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createInteractionSignals():InteractionSignals {
+  @:allow(flighthq)
+  @:keep
+  private static function createInteractionSignals():InteractionSignals {
     return cast { onClick: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onContextMenu: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onDoubleClick: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onFocusIn: (cast (cast createSignal : Void->Signal<FocusEventData->Void>)() : Signal<FocusEventData->Void>), onFocusOut: (cast (cast createSignal : Void->Signal<FocusEventData->Void>)() : Signal<FocusEventData->Void>), onKeyDown: (cast (cast createSignal : Void->Signal<KeyboardEventData->Void>)() : Signal<KeyboardEventData->Void>), onKeyUp: (cast (cast createSignal : Void->Signal<KeyboardEventData->Void>)() : Signal<KeyboardEventData->Void>), onPointerCancel: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onPointerDown: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onPointerMove: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onPointerOut: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onPointerOver: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onPointerRollOut: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onPointerRollOver: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onPointerUp: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onReleaseOutside: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>), onWheel: (cast (cast createSignal : Void->Signal<PointerEventData->Void>)() : Signal<PointerEventData->Void>) };
     return cast null;
   }

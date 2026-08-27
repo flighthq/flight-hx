@@ -4,6 +4,7 @@ package flighthq.tilemapFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class TiledColor {
   public static function formatTiledColor(packed:Float):String {
     var p:Float = cast _Runtime.UNDEFINED;

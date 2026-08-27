@@ -12,6 +12,7 @@ import flighthq.types.AnimationClipEvent;
 import flighthq.types.AnimationTrack;
 import flighthq.types.Entity;
 
+@:noCompletion
 class AnimationClip {
   public static function cloneAnimationClip(clip:flighthq.types.AnimationClip):flighthq.types.AnimationClip {
     var channels:Array<AnimationChannel> = cast _Runtime.UNDEFINED;

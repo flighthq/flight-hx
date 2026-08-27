@@ -10,11 +10,12 @@ import flighthq.path.Path.createPath;
 import flighthq.pathBoolean.PathBooleanBackend.getPathBooleanBackend;
 import flighthq.types.Path;
 import flighthq.types.PathBooleanBackend;
-import flighthq.types.PathBooleanBackend.PathBooleanContour;
+import flighthq.types.PathBooleanContour;
 import flighthq.types.PathBooleanFillRule;
 import flighthq.types.PathBooleanOperation;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 
+@:noCompletion
 class ResolvePathRegions {
   public static function resolvePathRegions(rings:Array<PathBooleanContour>, fillRule:PathBooleanFillRule):Path {
     var path:Path = cast _Runtime.UNDEFINED;

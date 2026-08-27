@@ -15,6 +15,7 @@ import flighthq.types.Types.ImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.CompressedImageTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.ImageTextureSourceKind;
 
+@:noCompletion
 class ImageResource {
   public static function cloneImageResource(resource:Image):Image {
     return cast (cast createEntity((cast { alphaType: _Runtime.field(resource, 'alphaType'), gamut: _Runtime.field(resource, 'gamut'), height: _Runtime.field(resource, 'height'), kind: _Runtime.field(resource, 'kind'), source: _Runtime.field(resource, 'source'), version: _Runtime.field(resource, 'version'), width: _Runtime.field(resource, 'width') } : Dynamic)) : { >Entity, var alphaType:AlphaType; var gamut:String; var height:Float; var kind:String; var source:flighthq._internal._Any; var version:Float; var width:Float; });
@@ -34,8 +35,9 @@ class ImageResource {
     return cast null;
   }
 
-  @:noCompletion
-  public static function invalidateImageResource(resource:Image):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function invalidateImageResource(resource:Image):Void {
     ImageResource.updateImageResourceSize__imageResource(({ final __callArgument6:Dynamic = resource; __callArgument6; }));
     ((cast resource : Image).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast resource : Image).version + 1.0)), 0));
   }

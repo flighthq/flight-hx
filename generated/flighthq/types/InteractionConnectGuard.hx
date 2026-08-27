@@ -3,7 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.InteractionManager.InteractionSignalName;
-import flighthq.types.Node.NodeAny;
 
 typedef InteractionConnectGuard = NodeAny->InteractionSignalName->Void;

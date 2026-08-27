@@ -31,22 +31,23 @@ import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 import flighthq.types.RendererData;
 import flighthq.types.RichText;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.RichTextContent;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.Scene2DRenderer;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextInputState;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
 import flighthq.types.TextVerticalAlign;
 
 typedef DomRichTextData__domRichText = { >RendererData, var div:Null<flighthq._internal.dom.HTMLDivElement>; };
 
+@:noCompletion
 class DomRichText {
   public static function createDomRichTextData__domRichText(_state:RenderState, _source:Renderable):DomRichTextData__domRichText {
     return cast (cast createEntity(({ final __callArgument0:Dynamic = { div: null }; __callArgument0; })) : { >Entity, var div:flighthq._internal._Any; });
@@ -63,16 +64,18 @@ class DomRichText {
     return cast null;
   }
 
-  @:noCompletion
-  public static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawDomRichText(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     DomRichText.drawDomRichTextField__domRichText(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = renderProxy; __callArgument3; }));
     if ((cast ((cast !_Runtime.strictEquals(DomRichText._domTextInputOverlay__domRichText, null) : Bool) && (cast !_Runtime.strictEquals((cast (cast getRichTextRuntime((cast (cast renderProxy : RenderProxy2D).source : RichText)) : RichTextRuntime) : { var input:Null<TextInputState>; }).input, null) : Bool)) : Bool)) {
       (cast DomRichText._domTextInputOverlay__domRichText : DomRenderState->RenderProxy2D->Void)(({ final __callArgument6:Dynamic = state; __callArgument6; }), ({ final __callArgument7:Dynamic = renderProxy; __callArgument7; }));
     }
   }
 
-  @:noCompletion
-  public static function drawDomRichTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawDomRichTextMask(state:DomRenderState, renderProxy:RenderProxy2D):Void {
     drawDomRichText(({ final __callArgument10:Dynamic = state; __callArgument10; }), ({ final __callArgument11:Dynamic = renderProxy; __callArgument11; }));
   }
 
@@ -256,8 +259,9 @@ class DomRichText {
 
   public static var _domTextInputOverlay__domRichText:Null<DomTextInputOverlay> = _Runtime.explicitNull();
 
-  @:noCompletion
-  public static function registerDomTextInputOverlay(overlay:DomTextInputOverlay):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerDomTextInputOverlay(overlay:DomTextInputOverlay):Void {
     (DomRichText._domTextInputOverlay__domRichText = cast (overlay : Dynamic));
   }
 

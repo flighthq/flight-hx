@@ -6,19 +6,20 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResourceReference.resolveImageResourceReference;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.texture.Texture.setTextureSource;
+import flighthq.types.ExternalImageResourceReference;
 import flighthq.types.Image;
+import flighthq.types.ImageResourceFetch;
 import flighthq.types.ImageResourceReference;
-import flighthq.types.ImageResourceReference.ExternalImageResourceReference;
-import flighthq.types.ImageResourceReference.ImageResourceFetch;
+import flighthq.types.LoadScene2DImageResourcesOptions;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DResources.LoadScene2DImageResourcesOptions;
-import flighthq.types.Scene2DResources.Scene2DImageResourceLoadProgress;
-import flighthq.types.Scene2DResources.Scene2DImageResources;
+import flighthq.types.Scene2DImageResourceLoadProgress;
+import flighthq.types.Scene2DImageResources;
 import flighthq.types.Signal;
 import flighthq.types.Texture;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
 
+@:noCompletion
 class LoadScene2DImageResources {
   public static function loadScene2DImageResources(document:Scene2DDocument, ?options:LoadScene2DImageResourcesOptions):flighthq._internal._Promise<Scene2DImageResources> {
     return cast flighthq._internal._Async.finishFlow(

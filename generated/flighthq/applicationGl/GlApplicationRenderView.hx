@@ -13,18 +13,19 @@ import flighthq.renderGl.GlRenderTarget.createGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.destroyGlRenderTarget;
 import flighthq.renderGl.GlRenderTarget.resizeGlRenderTarget;
 import flighthq.types.ApplicationRenderView;
-import flighthq.types.ApplicationRenderView.ApplicationRenderViewTargetOptions;
-import flighthq.types.ApplicationRenderView.GlApplicationRenderView;
-import flighthq.types.ApplicationRenderView.GlApplicationRenderViewOptions;
+import flighthq.types.ApplicationRenderViewTargetOptions;
 import flighthq.types.ApplicationWindow;
+import flighthq.types.GlApplicationRenderView;
+import flighthq.types.GlApplicationRenderViewOptions;
 import flighthq.types.GlRenderOptions;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.RenderTarget.RenderTargetDescriptor;
+import flighthq.types.RenderTargetDescriptor;
 import flighthq.types.Viewport;
 
+@:noCompletion
 class GlApplicationRenderView {
-  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:GlApplicationRenderViewOptions):flighthq.types.ApplicationRenderView.GlApplicationRenderView {
+  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:flighthq._internal.dom.HTMLCanvasElement, ?options:GlApplicationRenderViewOptions):flighthq.types.GlApplicationRenderView {
     if (options == null) options = cast ({  } : Dynamic);
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
@@ -41,7 +42,7 @@ class GlApplicationRenderView {
     return cast null;
   }
 
-  public static function destroyGlApplicationRenderView(view:flighthq.types.ApplicationRenderView.GlApplicationRenderView):Void {
+  public static function destroyGlApplicationRenderView(view:flighthq.types.GlApplicationRenderView):Void {
     detachApplicationRenderView((cast view : Dynamic));
     destroyGlRenderTarget(_Runtime.field(view, 'renderState'), _Runtime.field(view, 'renderTarget'));
     destroyGlRenderState(_Runtime.field(view, 'renderState'));

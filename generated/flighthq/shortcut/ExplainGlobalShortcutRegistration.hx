@@ -8,11 +8,12 @@ import flighthq.shortcut.Shortcut.hasNativeShortcutBackend;
 import flighthq.shortcut.Shortcut.isGlobalShortcutRegistered;
 import flighthq.shortcut.Shortcut.parseAcceleratorDetailed;
 import flighthq.types.AcceleratorParseError;
+import flighthq.types.GlobalShortcutBlockReason;
 import flighthq.types.GlobalShortcutExplanation;
-import flighthq.types.GlobalShortcutExplanation.GlobalShortcutBlockReason;
 import flighthq.types.ParsedAccelerator;
 import flighthq.types.ShortcutModifier;
 
+@:noCompletion
 class ExplainGlobalShortcutRegistration {
   public static function explainGlobalShortcutRegistration(accelerator:String):GlobalShortcutExplanation {
     var parsed:flighthq._internal._Union2<ParsedAccelerator, AcceleratorParseError> = cast _Runtime.UNDEFINED;

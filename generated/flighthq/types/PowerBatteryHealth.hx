@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef PowerBatteryHealth = { var capacityWearLevel:Float; var cycleCount:Float; var healthState:PowerBatteryHealthState; var temperatureCelsius:Float; var voltage:Float; };
-
-typedef PowerBatteryHealthState = String;

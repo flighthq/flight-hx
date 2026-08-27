@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SharpenEffect;
 
+@:noCompletion
 class SharpenEffect {
   public static function createSharpenEffect(?options:{ @:optional var amount:Null<Float>; }):flighthq.types.SharpenEffect {
     if (options == null) options = cast ({  } : Dynamic);

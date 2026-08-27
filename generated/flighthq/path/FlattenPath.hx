@@ -4,9 +4,10 @@ package flighthq.path;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
+import flighthq.types.PathCommand;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
+@:noCompletion
 class FlattenPath {
   public static function flattenPath(path:Path, tolerance:Float = 0.25):Array<Array<Float>> {
     var commands:Array<Float> = cast _Runtime.UNDEFINED;

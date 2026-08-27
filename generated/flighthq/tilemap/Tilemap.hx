@@ -7,7 +7,7 @@ import flighthq.scene2d.DisplayObject.createNode2D;
 import flighthq.scene2d.DisplayObject.createNode2DRuntime;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.signals.Signal.createSignal;
-import flighthq.types.Material.MaterialData;
+import flighthq.types.MaterialData;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
@@ -16,11 +16,11 @@ import flighthq.types.Rectangle;
 import flighthq.types.Signal;
 import flighthq.types.TextureAtlas;
 import flighthq.types.Tilemap;
-import flighthq.types.Tilemap.TilemapData;
-import flighthq.types.Tilemap.TilemapRuntime;
+import flighthq.types.TilemapData;
+import flighthq.types.TilemapRuntime;
 import flighthq.types.TilemapSignals;
 import flighthq.types.Types.TilemapKind;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 import flighthq.types._internal._TilemapValues.TilemapKind;
 
 typedef TilemapWithSignals__tilemap = { @:optional var __tilemapSignalsSlot:TilemapSignals; };
@@ -66,8 +66,9 @@ class Tilemap {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createTilemapData(?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var columns:Null<Float>; @:optional var rows:Null<Float>; @:optional var tileHeight:Null<Float>; @:optional var tileWidth:Null<Float>; @:optional var tiles:Null<flighthq._internal._Int16Array>; @:optional var materialData:Null<Array<Null<MaterialData>>>; }):TilemapData {
+  @:allow(flighthq)
+  @:keep
+  private static function createTilemapData(?data:{ @:optional var atlas:Null<TextureAtlas>; @:optional var columns:Null<Float>; @:optional var rows:Null<Float>; @:optional var tileHeight:Null<Float>; @:optional var tileWidth:Null<Float>; @:optional var tiles:Null<flighthq._internal._Int16Array>; @:optional var materialData:Null<Array<Null<MaterialData>>>; }):TilemapData {
     var columns:Float = cast _Runtime.UNDEFINED;
     var rows:Float = cast _Runtime.UNDEFINED;
     columns = _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var columns:Null<Float>; }).columns; }), function():Dynamic return cast 0.0);
@@ -76,14 +77,16 @@ class Tilemap {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createTilemapRuntime():TilemapRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createTilemapRuntime():TilemapRuntime {
     return cast (cast createNode2DRuntime((cast Tilemap.defaultMethods__tilemap : Dynamic)) : TilemapRuntime);
     return cast null;
   }
 
-  @:noCompletion
-  public static function createTilemapSignals():TilemapSignals {
+  @:allow(flighthq)
+  @:keep
+  private static function createTilemapSignals():TilemapSignals {
     return cast { onCleared: (cast createSignal() : Signal<Void->Void>), onTileChanged: (cast createSignal() : Signal<Float->Float->Float->Void>), onTilesChanged: (cast createSignal() : Signal<Float->Float->Float->Float->Void>) };
     return cast null;
   }
@@ -147,8 +150,9 @@ class Tilemap {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getTilemapRuntime(source:flighthq.types.Tilemap):TilemapRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getTilemapRuntime(source:flighthq.types.Tilemap):TilemapRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument15:Dynamic = source; __callArgument15; })) : TilemapRuntime);
     return cast null;
   }

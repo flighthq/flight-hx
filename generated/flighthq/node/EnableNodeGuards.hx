@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.node.Hierarchy.setReparentNodeGuard;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeTraits;
+import flighthq.types.NodeTraits;
 
+@:noCompletion
 class EnableNodeGuards {
   public static function areNodeGuardsEnabled():Bool {
     return cast EnableNodeGuards.nodeGuardsEnabled__enableNodeGuards;

@@ -6,20 +6,22 @@ import flighthq._internal._Runtime;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.render.RenderState.getRenderStateRuntime;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
 import flighthq.types.RenderProxy;
 import flighthq.types.RenderQueue;
-import flighthq.types.RenderQueue.RenderQueueEntry;
-import flighthq.types.RenderQueue.RenderSortKey;
+import flighthq.types.RenderQueueEntry;
+import flighthq.types.RenderSortKey;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types.Renderable;
 import flighthq.types.Renderer;
 
+@:noCompletion
 class RenderQueue {
-  @:noCompletion
-  public static function buildRenderQueue(state:RenderState, source:Renderable, out:flighthq.types.RenderQueue):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function buildRenderQueue(state:RenderState, source:Renderable, out:flighthq.types.RenderQueue):Void {
     var runtime:RenderStateRuntime = cast _Runtime.UNDEFINED;
     var renderProxyMap:flighthq._internal._WeakMap<Renderable, RenderProxy> = cast _Runtime.UNDEFINED;
     var stack:Array<Renderable> = cast _Runtime.UNDEFINED;
@@ -54,25 +56,29 @@ class RenderQueue {
     }
   }
 
-  @:noCompletion
-  public static function clearRenderQueue(queue:flighthq.types.RenderQueue):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function clearRenderQueue(queue:flighthq.types.RenderQueue):Void {
     (queue.entryCount = cast (0.0 : Float));
   }
 
-  @:noCompletion
-  public static function compareRenderQueueEntries(a:RenderQueueEntry, b:RenderQueueEntry):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function compareRenderQueueEntries(a:RenderQueueEntry, b:RenderQueueEntry):Float {
     return cast ((cast a : RenderQueueEntry).sortKey - (cast b : RenderQueueEntry).sortKey);
     return cast null;
   }
 
-  @:noCompletion
-  public static function createRenderQueue():flighthq.types.RenderQueue {
+  @:allow(flighthq)
+  @:keep
+  private static function createRenderQueue():flighthq.types.RenderQueue {
     return cast { entries: cast ([] : Array<Dynamic>), entryCount: 0.0 };
     return cast null;
   }
 
-  @:noCompletion
-  public static function packRenderSortKey(layer:Float, depth:Float, isTransparent:Bool):RenderSortKey {
+  @:allow(flighthq)
+  @:keep
+  private static function packRenderSortKey(layer:Float, depth:Float, isTransparent:Bool):RenderSortKey {
     var layerBits:Float = cast _Runtime.UNDEFINED;
     var transparentBit:Float = cast _Runtime.UNDEFINED;
     var depthBits:Float = cast _Runtime.UNDEFINED;
@@ -83,8 +89,9 @@ class RenderQueue {
     return cast null;
   }
 
-  @:noCompletion
-  public static function pushRenderQueueEntry(queue:flighthq.types.RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function pushRenderQueueEntry(queue:flighthq.types.RenderQueue, proxy:RenderProxy, sortKey:RenderSortKey):Void {
     var entry:{ var proxy:RenderProxy; var sortKey:Float; } = cast _Runtime.UNDEFINED;
     entry = (cast { proxy: proxy, sortKey: sortKey });
     if ((cast ((cast queue.entryCount : Float) < (cast _Runtime.field(queue.entries, 'length') : Float)) : Bool)) {
@@ -95,8 +102,9 @@ class RenderQueue {
     queue.entryCount++;
   }
 
-  @:noCompletion
-  public static function sortRenderQueue(queue:flighthq.types.RenderQueue, ?compare:RenderQueueEntry->RenderQueueEntry->Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function sortRenderQueue(queue:flighthq.types.RenderQueue, ?compare:RenderQueueEntry->RenderQueueEntry->Float):Void {
     var slice:Array<RenderQueueEntry> = cast _Runtime.UNDEFINED;
     slice = _Runtime.slice(queue.entries, 0.0, queue.entryCount);
     _Runtime.callProperty(slice, 'sort', cast ([_Runtime.coalesce(compare, function():Dynamic return cast RenderQueue.compareRenderQueueEntriesByKey__renderQueue)] : Array<Dynamic>));

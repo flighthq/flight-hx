@@ -9,18 +9,18 @@ import flighthq.collision.ContactManifold3D.clearCollisionContactManifold3D;
 import flighthq.collision.ContactManifold3D.createCollisionContactManifold3D;
 import flighthq.collision.SweepCollisionShape3D.createCollisionTimeOfImpact3D;
 import flighthq.collision.SweepCollisionShape3D.sweepCollisionShape3D;
-import flighthq.types.Collision.CollisionAabb3D;
-import flighthq.types.Collision.CollisionBuiltInShape3D;
-import flighthq.types.Collision.CollisionContactManifold3D;
-import flighthq.types.Collision.CollisionContactPoint3D;
-import flighthq.types.Collision.CollisionHeightfield3D;
-import flighthq.types.Collision.CollisionRaycastHit3D;
-import flighthq.types.Collision.CollisionShape3D;
-import flighthq.types.Collision.CollisionShapeKind3D;
-import flighthq.types.Collision.CollisionSupport3D;
-import flighthq.types.Collision.CollisionTestStatus;
-import flighthq.types.Collision.CollisionTimeOfImpact3D;
-import flighthq.types.Collision.CollisionTriangleMesh3D;
+import flighthq.types.CollisionAabb3D;
+import flighthq.types.CollisionBuiltInShape3D;
+import flighthq.types.CollisionContactManifold3D;
+import flighthq.types.CollisionContactPoint3D;
+import flighthq.types.CollisionHeightfield3D;
+import flighthq.types.CollisionRaycastHit3D;
+import flighthq.types.CollisionShape3D;
+import flighthq.types.CollisionShapeKind3D;
+import flighthq.types.CollisionSupport3D;
+import flighthq.types.CollisionTestStatus;
+import flighthq.types.CollisionTimeOfImpact3D;
+import flighthq.types.CollisionTriangleMesh3D;
 
 typedef CollisionTriangleMeshAcceleration3D__triangleMesh3D = { var points:Array<Float>; var indices:Array<Float>; var version:Float; var triangleCount:Float; var nodes:Array<CollisionTriangleMeshNode3D__triangleMesh3D>; var order:Array<Float>; };
 
@@ -36,6 +36,7 @@ typedef CollisionBounds3D__triangleMesh3D = { var minX:Float; var minY:Float; va
 
 typedef CollisionTriangleContactCandidate3D__triangleMesh3D = { var x:Float; var y:Float; var z:Float; var depth:Float; var featureId:Float; };
 
+@:noCompletion
 class TriangleMesh3D {
   public static function collideCollisionHeightfield3D(convex:CollisionShape3D, heightfield:CollisionHeightfield3D, out:CollisionContactManifold3D):Bool {
     if ((cast !_Runtime.strictEquals((cast getCollisionHeightfieldValidationStatus3D(({ final __callArgument0:Dynamic = heightfield; __callArgument0; })) : Null<String>), null) : Bool)) {

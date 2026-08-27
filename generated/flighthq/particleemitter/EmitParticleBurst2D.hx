@@ -10,12 +10,13 @@ import flighthq.particles.ParticleEmitterState.PARTICLE_VELOCITY_STRIDE;
 import flighthq.particles.ParticleEmitterState.ensureParticleEmitterStateCapacity;
 import flighthq.types.ParticleCurve;
 import flighthq.types.ParticleEmitter2D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
 import flighthq.types.ParticleEmitterConfig;
-import flighthq.types.ParticleEmitterConfig.ParticleEmitterShape;
+import flighthq.types.ParticleEmitterData;
+import flighthq.types.ParticleEmitterShape;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.RandomSource;
 
+@:noCompletion
 class EmitParticleBurst2D {
   public static final PARTICLE_TRANSFORM_STRIDE__emitParticleBurst2D:Float = 4.0;
 

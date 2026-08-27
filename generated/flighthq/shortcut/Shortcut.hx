@@ -13,13 +13,13 @@ import flighthq.types.AcceleratorParseError;
 import flighthq.types.BackendExplanation;
 import flighthq.types.GlobalShortcutExplanation;
 import flighthq.types.ParsedAccelerator;
-import flighthq.types.Shortcut.ShortcutBackend;
+import flighthq.types.ShortcutBackend;
 import flighthq.types.ShortcutDrop;
-import flighthq.types.ShortcutDrop.ShortcutDropGuard;
-import flighthq.types.ShortcutDrop.ShortcutOperation;
+import flighthq.types.ShortcutDropGuard;
 import flighthq.types.ShortcutEvent;
 import flighthq.types.ShortcutKeyName;
 import flighthq.types.ShortcutModifier;
+import flighthq.types.ShortcutOperation;
 import flighthq.types.ShortcutSignals;
 import flighthq.types.Signal;
 
@@ -345,8 +345,9 @@ class Shortcut {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getShortcutBackend():ShortcutBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getShortcutBackend():ShortcutBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Shortcut._custom__shortcut, function():Dynamic return cast Shortcut._host__shortcut), function():Dynamic return cast Shortcut._sentinel__shortcut);
     return cast null;
   }
@@ -364,8 +365,9 @@ class Shortcut {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installShortcutHostBackend(backend:ShortcutBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installShortcutHostBackend(backend:ShortcutBackend):Void {
     if ((cast !_Runtime.strictEquals(Shortcut._host__shortcut, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Shortcut._host__shortcut, backend) : Bool)) { (Shortcut._hostConflict__shortcut = cast (true : Dynamic)); }
       return;
@@ -394,8 +396,9 @@ class Shortcut {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeShortcutHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeShortcutHostResult(operation:String, succeeded:Bool):Void {
     (Shortcut._hostObservation__shortcut = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -428,8 +431,9 @@ class Shortcut {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetShortcutBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetShortcutBackendForTest():Void {
     (Shortcut._custom__shortcut = cast (null : Dynamic));
     (Shortcut._host__shortcut = cast (null : Dynamic));
     (Shortcut._hostConflict__shortcut = cast (false : Dynamic));
@@ -446,13 +450,15 @@ class Shortcut {
     (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).setAllEnabled((cast true : Bool));
   }
 
-  @:noCompletion
-  public static function setShortcutBackend(backend:Null<ShortcutBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setShortcutBackend(backend:Null<ShortcutBackend>):Void {
     (Shortcut._custom__shortcut = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function setShortcutDropGuard(guard:Null<ShortcutDropGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setShortcutDropGuard(guard:Null<ShortcutDropGuard>):Void {
     (Shortcut._dropGuard__shortcut = cast (guard : Dynamic));
   }
 

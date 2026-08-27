@@ -4,13 +4,13 @@ package flighthq.mediasession;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.MediaSession.MediaSessionAction;
-import flighthq.types.MediaSession.MediaSessionActionDetails;
-import flighthq.types.MediaSession.MediaSessionArtwork;
-import flighthq.types.MediaSession.MediaSessionBackend;
-import flighthq.types.MediaSession.MediaSessionMetadata;
-import flighthq.types.MediaSession.MediaSessionPlaybackState;
-import flighthq.types.MediaSession.MediaSessionPositionState;
+import flighthq.types.MediaSessionAction;
+import flighthq.types.MediaSessionActionDetails;
+import flighthq.types.MediaSessionArtwork;
+import flighthq.types.MediaSessionBackend;
+import flighthq.types.MediaSessionMetadata;
+import flighthq.types.MediaSessionPlaybackState;
+import flighthq.types.MediaSessionPositionState;
 
 class Mediasession {
   public static var _custom__mediasession:Null<MediaSessionBackend> = _Runtime.explicitNull();
@@ -43,8 +43,9 @@ class Mediasession {
     (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState(({ final __callArgument3:Dynamic = null; __callArgument3; }));
   }
 
-  @:noCompletion
-  public static function createWebMediaSessionBackend():MediaSessionBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebMediaSessionBackend():MediaSessionBackend {
     return cast { setActionHandler: function(action:MediaSessionAction, handler:Null<MediaSessionActionDetails->Void>):Void {
       var session:Null<flighthq._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
       session = (cast Mediasession.getWebMediaSession__mediasession() : Null<flighthq._internal.dom.MediaSession>);
@@ -88,8 +89,9 @@ class Mediasession {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getMediaSessionBackend():MediaSessionBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getMediaSessionBackend():MediaSessionBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Mediasession._custom__mediasession, function():Dynamic return cast Mediasession._host__mediasession), function():Dynamic return cast Mediasession._sentinel__mediasession);
     return cast null;
   }
@@ -100,8 +102,9 @@ class Mediasession {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installMediaSessionHostBackend(backend:MediaSessionBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installMediaSessionHostBackend(backend:MediaSessionBackend):Void {
     if ((cast !_Runtime.strictEquals(Mediasession._host__mediasession, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Mediasession._host__mediasession, backend) : Bool)) { (Mediasession._hostConflict__mediasession = cast (true : Dynamic)); }
       return;
@@ -109,13 +112,15 @@ class Mediasession {
     (Mediasession._host__mediasession = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observeMediaSessionHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeMediaSessionHostResult(operation:String, succeeded:Bool):Void {
     (Mediasession._hostObservation__mediasession = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
-  @:noCompletion
-  public static function resetMediaSessionBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetMediaSessionBackendForTest():Void {
     (Mediasession._custom__mediasession = cast (null : Dynamic));
     (Mediasession._host__mediasession = cast (null : Dynamic));
     (Mediasession._hostConflict__mediasession = cast (false : Dynamic));
@@ -126,8 +131,9 @@ class Mediasession {
     (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler(({ final __callArgument4:Dynamic = action; __callArgument4; }), ({ final __callArgument5:Dynamic = handler; __callArgument5; }));
   }
 
-  @:noCompletion
-  public static function setMediaSessionBackend(backend:Null<MediaSessionBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setMediaSessionBackend(backend:Null<MediaSessionBackend>):Void {
     (Mediasession._custom__mediasession = cast (backend : Dynamic));
   }
 

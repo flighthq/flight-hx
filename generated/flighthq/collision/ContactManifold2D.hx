@@ -3,9 +3,10 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionContactManifold2D;
-import flighthq.types.Collision.CollisionContactPoint2D;
+import flighthq.types.CollisionContactManifold2D;
+import flighthq.types.CollisionContactPoint2D;
 
+@:noCompletion
 class ContactManifold2D {
   public static function clearCollisionContactManifold2D(out:CollisionContactManifold2D):Void {
     (out.overlapping = cast (false : Bool));

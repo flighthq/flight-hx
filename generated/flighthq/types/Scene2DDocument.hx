@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef Scene2DSlotReference = { var content:Null<Node2D>; var linkage:Null<String>; var name:String; var required:Bool; var target:Node2D; };
-
 typedef Scene2DDocument = { var audioResources:Array<AudioResourceReference>; var backgroundColor:Null<Float>; var imageResources:Array<ImageResourceReference>; var root:Node2D; var slots:Array<Scene2DSlotReference>; var sourceKind:Null<String>; };

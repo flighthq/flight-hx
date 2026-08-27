@@ -26,6 +26,7 @@ import flighthq.hostWeb.WebShare.enableHostWebShare;
 import flighthq.hostWeb.WebStorage.enableHostWebStorage;
 import flighthq.hostWeb.WebWebcam.enableHostWebWebcam;
 
+@:noCompletion
 class EnableHostWeb {
   public static function enableHostWeb():Void {
     enableHostWebAccessibility();

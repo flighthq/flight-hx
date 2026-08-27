@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dResources.Scene2DDocumentImporterRegistry.createScene2DDocumentFromBytes;
 import flighthq.types.Scene2DDocument;
-import flighthq.types.Scene2DResources.Scene2DDocumentFetchProgress;
-import flighthq.types.Scene2DResources.Scene2DDocumentFetcher;
-import flighthq.types.Scene2DResources.Scene2DDocumentImportContext;
-import flighthq.types.Scene2DResources.Scene2DDocumentImporterRegistry;
-import flighthq.types.Scene2DResources.Scene2DDocumentLoadOptions;
+import flighthq.types.Scene2DDocumentFetchProgress;
+import flighthq.types.Scene2DDocumentFetcher;
+import flighthq.types.Scene2DDocumentImportContext;
+import flighthq.types.Scene2DDocumentImporterRegistry;
+import flighthq.types.Scene2DDocumentLoadOptions;
 import flighthq.types.Signal;
 
+@:noCompletion
 class Scene2DDocumentSource {
   public static function loadScene2DDocumentFromUrl(url:String, registry:Scene2DDocumentImporterRegistry, fetchDocument:Scene2DDocumentFetcher, ?options:Scene2DDocumentLoadOptions):flighthq._internal._Promise<Null<Scene2DDocument>> {
     return cast flighthq._internal._Async.finishFlow(

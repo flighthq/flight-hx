@@ -10,19 +10,20 @@ import flighthq.scene2d.DisplayObject.createNode2DRuntime;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.types.MethodsOf;
 import flighthq.types.NativeText;
-import flighthq.types.NativeText.NativeTextData;
-import flighthq.types.NativeText.NativeTextRuntime;
-import flighthq.types.NativeText.NativeTextStyle;
+import flighthq.types.NativeTextData;
+import flighthq.types.NativeTextRuntime;
+import flighthq.types.NativeTextStyle;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.TextAutoSize;
-import flighthq.types.TextFormat.TextFormatAlign;
+import flighthq.types.TextFormatAlign;
 import flighthq.types.TextVerticalAlign;
 import flighthq.types.Types.NativeTextKind;
 import flighthq.types._internal._NativeTextValues.NativeTextKind;
 
+@:noCompletion
 class NativeText {
   public static function computeNativeTextLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var native:flighthq.types.NativeText = cast _Runtime.UNDEFINED;
@@ -47,14 +48,16 @@ class NativeText {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createNativeTextData(?data:{ @:optional var autoSize:Null<TextAutoSize>; @:optional var height:Null<Float>; @:optional var style:Null<NativeTextStyle>; @:optional var text:Null<String>; @:optional var verticalAlign:Null<TextVerticalAlign>; @:optional var width:Null<Float>; }):NativeTextData {
+  @:allow(flighthq)
+  @:keep
+  private static function createNativeTextData(?data:{ @:optional var autoSize:Null<TextAutoSize>; @:optional var height:Null<Float>; @:optional var style:Null<NativeTextStyle>; @:optional var text:Null<String>; @:optional var verticalAlign:Null<TextVerticalAlign>; @:optional var width:Null<Float>; }):NativeTextData {
     return cast { autoSize: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var autoSize:Null<String>; }).autoSize; }), function():Dynamic return cast 'none'), height: _Runtime.coalesce(({ final __structural3 = data; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 100.0), style: _Runtime.coalesce(({ final __structural4 = data; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var style:Null<NativeTextStyle>; }).style; }), function():Dynamic return cast {  }), text: _Runtime.coalesce(({ final __structural5 = data; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { @:optional var text:Null<String>; }).text; }), function():Dynamic return cast ''), verticalAlign: _Runtime.coalesce(({ final __structural6 = data; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { @:optional var verticalAlign:Null<String>; }).verticalAlign; }), function():Dynamic return cast 'top'), width: _Runtime.coalesce(({ final __structural7 = data; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createNativeTextRuntime():NativeTextRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createNativeTextRuntime():NativeTextRuntime {
     var out:NativeTextRuntime = cast _Runtime.UNDEFINED;
     out = (cast createNode2DRuntime((cast NativeText.defaultMethods__nativeText : Dynamic)) : NativeTextRuntime);
     (out.element = cast (null : Null<flighthq._internal.dom.HTMLElement>));
@@ -74,8 +77,9 @@ class NativeText {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getNativeTextRuntime(source:flighthq.types.NativeText):NativeTextRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getNativeTextRuntime(source:flighthq.types.NativeText):NativeTextRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument12:Dynamic = source; __callArgument12; })) : NativeTextRuntime);
     return cast null;
   }

@@ -5,9 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Matrix;
 
+@:noCompletion
 class DomTransform {
-  @:noCompletion
-  public static function setDomTransform(element:flighthq._internal.dom.HTMLElement, transform:Matrix, roundPixels:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setDomTransform(element:flighthq._internal.dom.HTMLElement, transform:Matrix, roundPixels:Bool):Void {
     var tx:Float = cast _Runtime.UNDEFINED;
     var ty:Float = cast _Runtime.UNDEFINED;
     tx = ((cast roundPixels : Bool) ? (cast _Runtime.fround(transform.tx) : Dynamic) : (cast transform.tx : Dynamic));
@@ -15,8 +17,9 @@ class DomTransform {
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).transform = 'matrix(' + Std.string(transform.a) + ',' + Std.string(transform.b) + ',' + Std.string(transform.c) + ',' + Std.string(transform.d) + ',' + Std.string(tx) + ',' + Std.string(ty) + ')');
   }
 
-  @:noCompletion
-  public static function setDomTransformWithOffset(element:flighthq._internal.dom.HTMLElement, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setDomTransformWithOffset(element:flighthq._internal.dom.HTMLElement, transform:Matrix, offsetX:Float, offsetY:Float, roundPixels:Bool):Void {
     var __destructure0:Matrix = cast _Runtime.UNDEFINED;
     var a:Float = cast _Runtime.UNDEFINED;
     var b:Float = cast _Runtime.UNDEFINED;

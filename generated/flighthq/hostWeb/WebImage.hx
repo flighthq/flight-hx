@@ -7,8 +7,9 @@ import flighthq.image.ImageBackend.createWebImageBackend;
 import flighthq.image.ImageBackend.installImageHostBackend;
 import flighthq.image.ImageBackend.observeImageHostResult;
 import flighthq.types.Image;
-import flighthq.types.Image.ImageBackend;
+import flighthq.types.ImageBackend;
 
+@:noCompletion
 class WebImage {
   public static function enableHostWebImage():Void {
     var inner:ImageBackend = cast _Runtime.UNDEFINED;
@@ -41,8 +42,9 @@ class WebImage {
     installImageHostBackend(({ final __callArgument3:Dynamic = backend; __callArgument3; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebImageForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebImageForTest():Void {
     (WebImage._enabled__webImage = cast (false : Dynamic));
   }
 

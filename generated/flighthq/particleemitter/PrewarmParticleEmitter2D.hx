@@ -9,6 +9,7 @@ import flighthq.types.ParticleEmitterCallbacks;
 import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
 
+@:noCompletion
 class PrewarmParticleEmitter2D {
   public static function prewarmParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, duration:Float, ?stepDeltaTime:Float, ?callbacks:ParticleEmitterCallbacks):Void {
     if (stepDeltaTime == null) stepDeltaTime = cast ((1.0 / 60.0) : Dynamic);

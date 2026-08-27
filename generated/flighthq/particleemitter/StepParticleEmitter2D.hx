@@ -13,6 +13,7 @@ import flighthq.types.ParticleEmitterConfig;
 import flighthq.types.ParticleEmitterState;
 import flighthq.types.ParticleForce;
 
+@:noCompletion
 class StepParticleEmitter2D {
   public static function stepParticleEmitter2D(emitter:ParticleEmitter2D, state:ParticleEmitterState, config:ParticleEmitterConfig, deltaTime:Float, ?forces:Array<ParticleForce>, ?colliders:Array<ParticleCollider>, ?callbacks:ParticleEmitterCallbacks):Void {
     if ((cast ((cast !_Runtime.looseEquals(forces, null) : Bool) && (cast ((cast _Runtime.field(forces, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {

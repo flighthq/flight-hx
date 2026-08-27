@@ -12,6 +12,7 @@ import flighthq.types.MorphShapeAnimationTarget;
 import flighthq.types.Types.MorphShapeKind;
 import flighthq.types._internal._MorphShapeValues.MorphShapeKind;
 
+@:noCompletion
 class MorphShapeAnimation {
   public static function applyAnimationClipToMorphShape(clip:AnimationClip, time:Float):Void {
     sampleAnimationClip(({ final __callArgument0:Dynamic = MorphShapeAnimation.morphShapeAnimationScratch__morphShapeAnimation; __callArgument0; }), ({ final __callArgument1:Dynamic = clip; __callArgument1; }), (cast time : Float), ({ final __callArgument2:Dynamic = function(__unused0:flighthq._internal._ArrayLike<Float>, __unused1:AnimationChannel, __unused2:Float):Bool return applyMorphShapeAnimationSample(__unused0, __unused1); __callArgument2; }));

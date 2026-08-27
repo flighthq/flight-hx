@@ -5,15 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.path.ForEachPathSegment.forEachPathSegment;
 import flighthq.types.Path;
-import flighthq.types.Path.PathCommand;
+import flighthq.types.PathCommand;
 import flighthq.types.PathSegment;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 import flighthq.types._internal._PathValues.PathCommandValue;
 
 typedef Subpath__reversePath = { var closed:Bool; var points:Array<SubpathPoint__reversePath>; };
 
 typedef SubpathPoint__reversePath = flighthq._internal._Union2<flighthq._internal._Union2<{ var kind:String; var x:Float; var y:Float; }, { var kind:String; var x:Float; var y:Float; var cx:Float; var cy:Float; }>, { var kind:String; var x:Float; var y:Float; var c1x:Float; var c1y:Float; var c2x:Float; var c2y:Float; }>;
 
+@:noCompletion
 class ReversePath {
   public static function reversePath(source:Path, out:Path):Void {
     var subpaths:Array<Subpath__reversePath> = cast _Runtime.UNDEFINED;

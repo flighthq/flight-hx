@@ -15,34 +15,35 @@ import flighthq.node.Node.createNode;
 import flighthq.node.Node.createNodeRuntime;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.Revision.invalidateNodeAppearance;
+import flighthq.types.BoundsNodeAny;
 import flighthq.types.ClipRegion;
-import flighthq.types.Entity.Kind;
 import flighthq.types.HasAppearance;
 import flighthq.types.HasBlendMode;
 import flighthq.types.HasBoundsRectangle;
-import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
-import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
+import flighthq.types.HasBoundsRectangleRuntime;
 import flighthq.types.HasClip;
 import flighthq.types.HasMaterial;
 import flighthq.types.HasTransform2D;
-import flighthq.types.HasTransform2D.HasTransform2DRuntime;
+import flighthq.types.HasTransform2DRuntime;
+import flighthq.types.Kind;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeRuntimeFactory;
-import flighthq.types.Node.NodeTraitsKey;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DDataFactory;
-import flighthq.types.Node2D.Node2DRuntime;
-import flighthq.types.Node2D.Node2DRuntimeFactory;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DDataFactory;
+import flighthq.types.Node2DRuntime;
+import flighthq.types.Node2DRuntimeFactory;
+import flighthq.types.Node2DTraits;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
+import flighthq.types.NodeRuntimeFactory;
+import flighthq.types.NodeTraitsKey;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
 import flighthq.types.Scene2D;
 import flighthq.types.Types.Node2DTraitsKey;
 import flighthq.types._internal._Node2DValues.Node2DTraitsKey;
 
+@:noCompletion
 class DisplayObject {
   public static function createNode2D<R:Node2DRuntime>(kind:Kind, ?obj:PartialNode<Node2D>, ?createData:Node2DDataFactory, ?createNode2DRuntimeFactory:Node2DRuntimeFactory<R>):Node2D {
     var out:Node2D = cast _Runtime.UNDEFINED;
@@ -57,8 +58,9 @@ class DisplayObject {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createNode2DRuntime(?methods:{ @:optional var canAddChild:Null<Node<Node2DTraits>->Node<Node2DTraits>->Bool>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; }):Node2DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createNode2DRuntime(?methods:{ @:optional var canAddChild:Null<Node<Node2DTraits>->Node<Node2DTraits>->Bool>; @:optional var computeLocalBoundsRectangle:Null<Rectangle->BoundsNodeAny->Void>; @:optional var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; }):Node2DRuntime {
     var out:Node2DRuntime = cast _Runtime.UNDEFINED;
     out = (cast createNodeRuntime((cast methods : Dynamic)) : Node2DRuntime);
     ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node2DTraits>>; }).traits = Node2DTraitsKey);
@@ -69,8 +71,9 @@ class DisplayObject {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getNode2DRuntime(source:Node2D):Node2DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getNode2DRuntime(source:Node2D):Node2DRuntime {
     return cast (cast getNodeRuntime((cast source : Dynamic)) : Node2DRuntime);
     return cast null;
   }

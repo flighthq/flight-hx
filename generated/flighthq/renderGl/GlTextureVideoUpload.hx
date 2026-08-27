@@ -6,9 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlTextureUpload.uploadGlTextureElement;
 import flighthq.types.Image;
 
+@:noCompletion
 class GlTextureVideoUpload {
-  @:noCompletion
-  public static function uploadGlTextureVideoFrame(gl:flighthq._internal.dom.WebGL2RenderingContext, image:Image, uploadedVersion:Float, ?internalFormat:Float):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function uploadGlTextureVideoFrame(gl:flighthq._internal.dom.WebGL2RenderingContext, image:Image, uploadedVersion:Float, ?internalFormat:Float):Float {
     if (internalFormat == null) internalFormat = cast (flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'RGBA', flighthq._internal.backend.WebGl2Backend.RGBA) : Dynamic);
     var element:Null<flighthq._internal.dom.HTMLVideoElement> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(image, 'version'), uploadedVersion) : Bool)) { return cast uploadedVersion; }

@@ -9,10 +9,10 @@ import flighthq.textureatlasFormats.TextureAtlasLibgdxParse as Facade_Textureatl
 import flighthq.textureatlasFormats.TextureAtlasPackerParse as Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasPackerParse;
 import flighthq.textureatlasFormats.TextureAtlasStarlingParse as Facade_TextureatlasFormats_flighthq_textureatlasFormats_TextureAtlasStarlingParse;
 import flighthq.types.TextureAtlas;
-import flighthq.types.TextureAtlasAsepriteSchema.TextureAtlasAsepriteDocument;
+import flighthq.types.TextureAtlasAsepriteDocument;
 import flighthq.types.TextureAtlasFormatKind;
+import flighthq.types.TextureAtlasPackerDocument;
 import flighthq.types.TextureAtlasPackerParseOptions;
-import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
 import flighthq.types.TextureAtlasParseOptions;
 import flighthq.types.TextureAtlasStarlingParseOptions;
 

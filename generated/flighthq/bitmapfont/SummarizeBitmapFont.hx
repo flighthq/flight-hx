@@ -6,9 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlas.getTextureAtlasByteSize;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFontSummary;
-import flighthq.types.GlyphSource.GlyphEntry;
+import flighthq.types.GlyphEntry;
 import flighthq.types.TextureAtlas;
 
+@:noCompletion
 class SummarizeBitmapFont {
   public static function summarizeBitmapFont(font:BitmapFont):BitmapFontSummary {
     var byteSize:Float = cast _Runtime.UNDEFINED;

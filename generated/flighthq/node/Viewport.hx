@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Viewport;
-import flighthq.types.Viewport.ViewportLike;
+import flighthq.types.ViewportLike;
 
+@:noCompletion
 class Viewport {
   public static function createViewport(?obj:ViewportLike):flighthq.types.Viewport {
     return cast (cast createEntity(({ final __callArgument5:Dynamic = { devicePixelRatio: _Runtime.coalesce(({ final __structural0 = obj; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var devicePixelRatio:Null<Float>; }).devicePixelRatio; }), function():Dynamic return cast 1.0), height: _Runtime.coalesce(({ final __structural1 = obj; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 0.0), width: _Runtime.coalesce(({ final __structural2 = obj; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 0.0), x: _Runtime.coalesce(({ final __structural3 = obj; __structural3 == null ? _Runtime.UNDEFINED : (cast __structural3 : { @:optional var x:Null<Float>; }).x; }), function():Dynamic return cast 0.0), y: _Runtime.coalesce(({ final __structural4 = obj; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var y:Null<Float>; }).y; }), function():Dynamic return cast 0.0) }; __callArgument5; })) : { >Entity, var devicePixelRatio:Float; var height:Float; var width:Float; var x:Float; var y:Float; });

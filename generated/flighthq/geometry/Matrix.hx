@@ -6,13 +6,14 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Matrix3.Matrix3Like;
-import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Matrix3Like;
+import flighthq.types.Matrix4Like;
+import flighthq.types.MatrixLike;
+import flighthq.types.RectangleLike;
+import flighthq.types.Vector2Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Matrix {
   public static function cloneMatrix(source:MatrixLike):flighthq.types.Matrix {
     var m:flighthq.types.Matrix = cast _Runtime.UNDEFINED;

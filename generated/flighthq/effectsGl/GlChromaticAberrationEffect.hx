@@ -8,15 +8,17 @@ import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.ChromaticAberrationEffect;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlChromaticAberrationEffect {
-  @:noCompletion
-  public static function applyChromaticAberrationEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ChromaticAberrationEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyChromaticAberrationEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ChromaticAberrationEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var radial:Bool = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;

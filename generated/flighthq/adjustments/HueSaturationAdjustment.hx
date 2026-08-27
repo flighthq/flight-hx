@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.ColorTransformFunction;
 import flighthq.types.HueSaturationAdjustment;
 
+@:noCompletion
 class HueSaturationAdjustment {
   public static function createHueSaturationAdjustment(?options:{ @:optional var hue:Null<Float>; @:optional var saturation:Null<Float>; @:optional var lightness:Null<Float>; }):flighthq.types.HueSaturationAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

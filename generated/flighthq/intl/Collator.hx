@@ -7,6 +7,7 @@ import flighthq.intl.Cache.getCacheKey;
 import flighthq.intl.Cache.getCached;
 import flighthq.types.LocaleInput;
 
+@:noCompletion
 class Collator {
   public static function compareStrings(a:String, b:String, locale:LocaleInput, ?options:Dynamic):Float {
     return cast _Runtime.callProperty(Collator.getCollator__collator(({ final __callArgument8:Dynamic = locale; __callArgument8; }), ({ final __callArgument9:Dynamic = options; __callArgument9; })), 'compare', cast ([a, b] : Array<Dynamic>));

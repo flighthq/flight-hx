@@ -8,15 +8,18 @@ import flighthq.types.WgpuRenderStats;
 
 typedef Mutable__wgpuRenderStats<T> = flighthq._internal._Mapped<flighthq._internal._Any, flighthq._internal._IndexedAccess<T, flighthq._internal._Infer>>;
 
+@:noCompletion
 class WgpuRenderStats {
-  @:noCompletion
-  public static function getWgpuRenderStats(state:WgpuRenderState):flighthq.types.WgpuRenderStats {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuRenderStats(state:WgpuRenderState):flighthq.types.WgpuRenderStats {
     return cast (cast WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats(({ final __callArgument0:Dynamic = state; __callArgument0; })) : Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>);
     return cast null;
   }
 
-  @:noCompletion
-  public static function recordWgpuBatchFlush(state:WgpuRenderState, instances:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function recordWgpuBatchFlush(state:WgpuRenderState, instances:Float):Void {
     var entry:Null<Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>> = cast _Runtime.UNDEFINED;
     entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap<WgpuRenderState, Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>>).get(state));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
@@ -25,16 +28,18 @@ class WgpuRenderStats {
     _Runtime.incrementField(entry, 'batchFlushCount', 1, true);
   }
 
-  @:noCompletion
-  public static function recordWgpuTextureUpload(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function recordWgpuTextureUpload(state:WgpuRenderState):Void {
     var entry:Null<Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>> = cast _Runtime.UNDEFINED;
     entry = ((cast WgpuRenderStats._stats__wgpuRenderStats : flighthq._internal._WeakMap<WgpuRenderState, Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>>).get(state));
     if ((cast _Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
     _Runtime.incrementField(entry, 'textureUploadCount', 1, true);
   }
 
-  @:noCompletion
-  public static function resetWgpuRenderStats(state:WgpuRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetWgpuRenderStats(state:WgpuRenderState):Void {
     var entry:Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats> = cast _Runtime.UNDEFINED;
     entry = (cast WgpuRenderStats.ensureWgpuRenderStatsMutable__wgpuRenderStats(({ final __callArgument2:Dynamic = state; __callArgument2; })) : Mutable__wgpuRenderStats<flighthq.types.WgpuRenderStats>);
     _Runtime.setField(entry, 'batchFlushCount', 0.0);

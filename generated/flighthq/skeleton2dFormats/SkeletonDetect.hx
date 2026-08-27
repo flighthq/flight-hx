@@ -11,13 +11,14 @@ import flighthq.registry.RegistryTable.withoutRegistryTableEntry;
 import flighthq.skeleton2dFormats.DragonBonesParse.parseDragonBonesSkeleton;
 import flighthq.skeleton2dFormats.SpineParse.parseSpineSkeleton;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.RegistryTable.KeyedTable;
+import flighthq.types.KeyedTable;
 import flighthq.types.Skeleton2DImport;
 
 typedef SkeletonFormatEntry__skeletonDetect = { var detect:String->Bool; var parse:String->Array<ImportDiagnostic>->Null<Skeleton2DImport>; };
 
 typedef RegisteredSkeletonFormat__skeletonDetect = { var entry:SkeletonFormatEntry__skeletonDetect; var order:Float; };
 
+@:noCompletion
 class SkeletonDetect {
   public static function getRegistry__skeletonDetect():KeyedTable<RegisteredSkeletonFormat__skeletonDetect> {
     if ((cast !_Runtime.strictEquals(SkeletonDetect._registry__skeletonDetect, null) : Bool)) { return cast SkeletonDetect._registry__skeletonDetect; }

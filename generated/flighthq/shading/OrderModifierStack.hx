@@ -7,6 +7,7 @@ import flighthq.types.Modifier;
 import flighthq.types.ModifierSlot;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 
+@:noCompletion
 class OrderModifierStack {
   public static function orderModifierStack(stack:Array<Modifier>):Array<Modifier> {
     var indexed:Array<{ var index:Float; var modifier:Modifier; }> = cast _Runtime.UNDEFINED;

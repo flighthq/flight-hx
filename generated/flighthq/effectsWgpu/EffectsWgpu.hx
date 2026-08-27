@@ -52,15 +52,15 @@ import flighthq.effectsWgpu.WgpuToneMapEffect as Facade_EffectsWgpu_flighthq_eff
 import flighthq.effectsWgpu.WgpuVignetteEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuVignetteEffect;
 import flighthq.effectsWgpu.WgpuWhiteBalanceEffect as Facade_EffectsWgpu_flighthq_effectsWgpu_WgpuWhiteBalanceEffect;
 import flighthq.types.Adjustment;
-import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderEffectPipelineOptions;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.RenderTexture;
 import flighthq.types.WgpuRenderEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTexture.WgpuRenderTexturePool;
+import flighthq.types.WgpuRenderTexturePool;
 
 class EffectsWgpu {
   public static function applyWgpuRenderEffectsToRenderTexture(state:WgpuRenderState, pool:WgpuRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {

@@ -12,18 +12,20 @@ import flighthq.scene3dGl.GlPbrPrelude.buildGlPbrDefineKey;
 import flighthq.scene3dGl.GlPbrPrelude.getGlPbrFragmentSourceForKey;
 import flighthq.scene3dGl.GlPbrPrelude.getGlPbrVertexSourceForKey;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
+import flighthq.types.GlColorAdjustmentMaterialFeature;
+import flighthq.types.GlPbrDefineKey;
 import flighthq.types.GlPbrExtensionShaderContribution;
 import flighthq.types.GlPbrProgram;
-import flighthq.types.GlPbrProgram.GlPbrDefineKey;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlScene3DRuntime;
 
+@:noCompletion
 class GlPbrProgramCache {
-  @:noCompletion
-  public static function compileGlPbrProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlPbrDefineKey, ?contributions:Array<GlPbrExtensionShaderContribution>, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlPbrProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlPbrProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlPbrDefineKey, ?contributions:Array<GlPbrExtensionShaderContribution>, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlPbrProgram {
     if (contributions == null) contributions = cast (cast ([] : Array<Dynamic>) : Dynamic);
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var vertexSource:String = cast _Runtime.UNDEFINED;
@@ -36,8 +38,9 @@ class GlPbrProgramCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureGlPbrProgram(state:GlRenderState, key:GlPbrDefineKey, ?contributions:Array<GlPbrExtensionShaderContribution>):GlPbrProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlPbrProgram(state:GlRenderState, key:GlPbrDefineKey, ?contributions:Array<GlPbrExtensionShaderContribution>):GlPbrProgram {
     if (contributions == null) contributions = cast (cast ([] : Array<Dynamic>) : Dynamic);
     var fullKey:GlPbrDefineKey = cast _Runtime.UNDEFINED;
     var extensionKey:String = cast _Runtime.UNDEFINED;

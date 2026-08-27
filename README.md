@@ -6,11 +6,11 @@ The current generation accounts for all 143 upstream packages, 32,998 public exp
 
 ## API shape
 
-Use a granular package module when you know the Flight domain:
+Use the package facade when you know the Flight domain:
 
 ```haxe
-import flighthq.geometry.Vector2.*;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.geometry.Geometry.*;
+import flighthq.types.Vector2Like;
 
 final point:Vector2Like = createVector2(3, 4);
 trace(getVector2Length(point));
@@ -24,7 +24,7 @@ import flighthq.sdk.Sdk.*;
 final point = createVector2(3, 4);
 ```
 
-Qualified calls such as `flighthq.geometry.Vector2.createVector2()` and `flighthq.geometry.Geometry.createVector2()` work as well. Function names remain unchanged; `createVector2` does not become a constructor, and `getVector2Length` does not become an instance method. Canonical shared types remain in their defining modules under `flighthq.types`.
+The qualified form is `flighthq.geometry.Geometry.createVector2()`. Function names remain unchanged; `createVector2` does not become a constructor, and `getVector2Length` does not become an instance method. Every exported canonical type is directly addressable by name under `flighthq.types`, independent of its defining TypeScript file.
 
 ## Lime host
 

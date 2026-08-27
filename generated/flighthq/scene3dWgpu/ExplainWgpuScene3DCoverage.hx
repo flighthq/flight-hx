@@ -4,39 +4,42 @@ package flighthq.scene3dWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.renderWgpu.WgpuRenderState.getWgpuRenderStateRuntime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
+import flighthq.types.CatalogEntry;
+import flighthq.types.CatalogRegistration;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RequirementFacet;
 import flighthq.types.Scene3DKindUsage;
+import flighthq.types.SceneCoverage;
 import flighthq.types.SceneCoverageCatalog;
-import flighthq.types.SceneCoverageCatalog.CatalogEntry;
-import flighthq.types.SceneCoverageCatalog.CatalogRegistration;
 import flighthq.types.SceneCoverageEntry;
-import flighthq.types.SceneCoverageEntry.SceneCoverage;
-import flighthq.types.StandardMaterial.StandardMaterialKind;
+import flighthq.types.StandardMaterialKind;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuModifierSnippet;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuTextureResolver;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 import flighthq.types._internal._RequirementFacetValues.RequirementFacetValue;
 import flighthq.types._internal._SceneCoverageEntryValues.SceneCoverageValue;
 import flighthq.types._internal._StandardMaterialValues.StandardMaterialKindValue;
 
+@:noCompletion
 class ExplainWgpuScene3DCoverage {
-  @:noCompletion
-  public static function explainWgpuScene3DCoverage(out:Array<SceneCoverageEntry>, state:WgpuRenderState, usage:Scene3DKindUsage, catalog:SceneCoverageCatalog):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function explainWgpuScene3DCoverage(out:Array<SceneCoverageEntry>, state:WgpuRenderState, usage:Scene3DKindUsage, catalog:SceneCoverageCatalog):Void {
     _Runtime.setLength(out, 0.0);
     (cast ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = state; __callArgument1; }), ({ final __callArgument2:Dynamic = usage; __callArgument2; }), (cast false : Bool), ({ final __callArgument3:Dynamic = catalog; __callArgument3; })) : Bool);
   }
 
-  @:noCompletion
-  public static function hasWgpuScene3DCoverage(state:WgpuRenderState, usage:Scene3DKindUsage):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasWgpuScene3DCoverage(state:WgpuRenderState, usage:Scene3DKindUsage):Bool {
     return cast !(cast (cast ExplainWgpuScene3DCoverage.collectWgpuScene3DCoverageGaps__explainWgpuScene3DCoverage(({ final __callArgument8:Dynamic = null; __callArgument8; }), ({ final __callArgument9:Dynamic = state; __callArgument9; }), ({ final __callArgument10:Dynamic = usage; __callArgument10; }), (cast true : Bool), ({ final __callArgument11:Dynamic = null; __callArgument11; })) : Bool) : Bool);
     return cast null;
   }

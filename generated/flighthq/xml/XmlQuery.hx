@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.XmlElement;
 
+@:noCompletion
 class XmlQuery {
   public static function getXmlElementAttribute(element:XmlElement, name:String):Null<String> {
     var value:String = cast _Runtime.UNDEFINED;

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.RandomSource;
 
+@:noCompletion
 class RandomRange {
   public static function randomBool(random:RandomSource, probability:Float = 0.5):Bool {
     return cast ((cast (cast random() : Float) : Float) < (cast probability : Float));

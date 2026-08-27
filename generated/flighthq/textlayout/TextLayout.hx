@@ -13,18 +13,20 @@ import flighthq.types.FontVariation;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextDirection;
 import flighthq.types.TextFormat;
-import flighthq.types.TextFormat.TextFormatAlign;
+import flighthq.types.TextFormatAlign;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextJustification;
-import flighthq.types.TextLayout.TextLayoutGroup;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
-import flighthq.types.TextLayout.TextMeasureFunction;
+import flighthq.types.TextLayoutGroup;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
+import flighthq.types.TextMeasureFunction;
 import flighthq.types.TextVerticalAlign;
 
+@:noCompletion
 class TextLayout {
-  @:noCompletion
-  public static final TEXT_LAYOUT_GUTTER:Float = 2.0;
+  @:allow(flighthq)
+  @:keep
+  private static final TEXT_LAYOUT_GUTTER:Float = 2.0;
 
   public static final _lineBreaks__textLayout:Array<Float> = (cast cast ([] : Array<Dynamic>));
 

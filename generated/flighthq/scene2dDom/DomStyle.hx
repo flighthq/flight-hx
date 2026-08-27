@@ -6,13 +6,15 @@ import flighthq._internal._Runtime;
 import flighthq.scene2dDom.DomRenderState.getDomRenderStateRuntime;
 import flighthq.scene2dDom.DomTransform.setDomTransform;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
+import flighthq.types.DomRenderStateRuntime;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
 
+@:noCompletion
 class DomStyle {
-  @:noCompletion
-  public static function applyDomStyle(state:DomRenderState, element:flighthq._internal.dom.HTMLElement, node:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyDomStyle(state:DomRenderState, element:flighthq._internal.dom.HTMLElement, node:RenderProxy2D):Void {
     setDomTransform(({ final __callArgument0:Dynamic = element; __callArgument0; }), (cast node : RenderProxy2D).transform2D, (cast (cast state : DomRenderState).roundPixels : Bool));
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).opacity = ((cast ((cast (cast node : RenderProxy2D).alpha : Float) < (cast 1.0 : Float)) : Bool) ? (cast Std.string((cast node : RenderProxy2D).alpha) : Dynamic) : (cast '' : Dynamic)));
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).imageRendering = ((cast (cast state : DomRenderState).allowSmoothing : Bool) ? (cast '' : Dynamic) : (cast 'pixelated' : Dynamic)));
@@ -20,8 +22,9 @@ class DomStyle {
     _Runtime.callOptionalValue((cast state : DomRenderState).applyBlendMode, cast ([element, (cast node : RenderProxy2D).blendMode] : Array<Dynamic>));
   }
 
-  @:noCompletion
-  public static function prepareDomElement(element:flighthq._internal.dom.HTMLElement):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function prepareDomElement(element:flighthq._internal.dom.HTMLElement):Void {
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).position = 'absolute');
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).left = '0');
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).top = '0');
@@ -29,8 +32,9 @@ class DomStyle {
     ((cast element.style : flighthq._internal.dom.CSSStyleDeclaration).pointerEvents = 'none');
   }
 
-  @:noCompletion
-  public static function setDomRendererElement(state:DomRenderState, element:flighthq._internal.dom.HTMLElement):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setDomRendererElement(state:DomRenderState, element:flighthq._internal.dom.HTMLElement):Void {
     ((cast (cast getDomRenderStateRuntime(({ final __callArgument3:Dynamic = state; __callArgument3; })) : DomRenderStateRuntime) : { var domCurrentElement:Null<flighthq._internal.dom.HTMLElement>; }).domCurrentElement = cast (element : Null<flighthq._internal.dom.HTMLElement>));
   }
 }

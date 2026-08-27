@@ -6,9 +6,10 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
 import flighthq.types.Vector2;
-import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector2Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Vector2 {
   public static function addVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
     var ax:Float = cast _Runtime.UNDEFINED;

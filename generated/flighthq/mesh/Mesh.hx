@@ -16,21 +16,21 @@ import flighthq.mesh.MeshGeometryTransforms as Facade_Mesh_flighthq_mesh_MeshGeo
 import flighthq.mesh.MeshGeometryUvs as Facade_Mesh_flighthq_mesh_MeshGeometryUvs;
 import flighthq.mesh.MorphMeshGeometry as Facade_Mesh_flighthq_mesh_MorphMeshGeometry;
 import flighthq.mesh.UpdateMeshMorph as Facade_Mesh_flighthq_mesh_UpdateMeshMorph;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.AabbLike;
+import flighthq.types.BoundingSphereLike;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshSubset;
-import flighthq.types.MeshGeometry.VertexAttribute;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexSemantic;
 import flighthq.types.MeshGeometryFromAttributesOptions;
 import flighthq.types.MeshGeometryOptions;
+import flighthq.types.MeshMorph;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
+import flighthq.types.MeshSubset;
 import flighthq.types.MeshTriangleVertexIndices;
-import flighthq.types.MorphTarget.MeshMorph;
+import flighthq.types.VertexAttribute;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexSemantic;
 
 class Mesh {
   public static function addMeshGeometrySubset(geometry:MeshGeometry, subset:MeshSubset):Void {

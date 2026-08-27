@@ -6,17 +6,18 @@ import flighthq._internal._Runtime;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
+import flighthq.types.RiveArtboardGraph;
+import flighthq.types.RiveCoreObject;
 import flighthq.types.RiveDocument;
-import flighthq.types.RiveDocument.RiveArtboardGraph;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveObjectGraph;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types.RiveObjectGraph;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class RiveObjectGraph {
-  public static function createRiveObjectGraph(document:RiveDocument, ?diagnostics:Array<ImportDiagnostic>):flighthq.types.RiveDocument.RiveObjectGraph {
+  public static function createRiveObjectGraph(document:RiveDocument, ?diagnostics:Array<ImportDiagnostic>):flighthq.types.RiveObjectGraph {
     var artboards:Array<RiveArtboardGraph> = cast _Runtime.UNDEFINED;
     var current:Null<Array<RiveCoreObject>> = cast _Runtime.UNDEFINED;
     artboards = (cast cast ([] : Array<Dynamic>));

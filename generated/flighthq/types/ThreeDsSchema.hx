@@ -4,16 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef ThreeDsMaterial = { var ambient:Array<Float>; var bumpFilename:Null<String>; var diffuse:Array<Float>; var name:String; var opacity:Float; var opacityFilename:Null<String>; var shininess:Null<Float>; var specular:Array<Float>; var textureFilename:Null<String>; };
-
-typedef ThreeDsLight = { var color:Array<Float>; var enabled:Bool; var falloff:Float; var hotspot:Float; var innerRange:Null<Float>; var multiplier:Float; var name:String; var outerRange:Null<Float>; var position:Array<Float>; var target:Null<Array<Float>>; };
-
-typedef ThreeDsCamera = { var far:Null<Float>; var focalLength:Float; var name:String; var near:Null<Float>; var position:Array<Float>; var roll:Float; var target:Array<Float>; };
-
-typedef ThreeDsMaterialGroup = { var faces:flighthq._internal._UInt16Array; var name:String; };
-
-typedef ThreeDsMesh = { var faces:flighthq._internal._UInt16Array; var localMatrix:Null<flighthq._internal._Float32Array>; var materialGroups:Array<ThreeDsMaterialGroup>; var name:String; var smoothingGroups:Null<flighthq._internal._UInt32Array>; var uvs:Null<flighthq._internal._Float32Array>; var vertices:flighthq._internal._Float32Array; };
-
+@:noCompletion
 class ThreeDsSchema {
   public static final THREE_DS_MAIN:Float = 19789.0;
 

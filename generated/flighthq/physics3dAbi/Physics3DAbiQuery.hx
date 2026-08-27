@@ -3,13 +3,14 @@ package flighthq.physics3dAbi;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionBuiltInShape3D;
-import flighthq.types.Physics3D.Physics3DQueryFilter;
+import flighthq.types.CollisionBuiltInShape3D;
 import flighthq.types.Physics3DAbi;
-import flighthq.types.Physics3DAbi.Physics3DAbiQueryBuffer;
-import flighthq.types.Physics3DAbi.Physics3DAbiWorldHandle;
-import flighthq.types.Spatial.SpatialAabb3D;
+import flighthq.types.Physics3DAbiQueryBuffer;
+import flighthq.types.Physics3DAbiWorldHandle;
+import flighthq.types.Physics3DQueryFilter;
+import flighthq.types.SpatialAabb3D;
 
+@:noCompletion
 class Physics3DAbiQuery {
   public static function queryPhysics3DAbiPoint(abi:Physics3DAbi, world:Physics3DAbiWorldHandle, x:Float, y:Float, z:Float, out:Physics3DAbiQueryBuffer, ?filter:Null<Physics3DQueryFilter>):Bool {
     if (filter == null) filter = cast (null : Dynamic);

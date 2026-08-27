@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.signals._internal._Internal.nullSignalEmit;
 import flighthq.types.Signal;
 
+@:noCompletion
 class Signal {
   public static function createSignal<T>():flighthq.types.Signal<T> {
     return cast { emit: (cast (cast nullSignalEmit : flighthq._internal._Any) : T), data: null };

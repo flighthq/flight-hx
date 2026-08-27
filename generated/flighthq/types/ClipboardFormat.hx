@@ -4,6 +4,7 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class ClipboardFormat {
   public static final ClipboardFormatBookmark:String = 'text/x-moz-url';
 

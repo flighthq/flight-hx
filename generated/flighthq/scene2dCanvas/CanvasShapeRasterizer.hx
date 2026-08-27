@@ -4,11 +4,12 @@ package flighthq.scene2dCanvas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene2dCanvas.CanvasShape.renderCanvasShapeCommands;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
 import flighthq.types.RenderState;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types.ShapeRasterizer;
 
+@:noCompletion
 class CanvasShapeRasterizer {
   public static function createCanvasShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer {
     return cast function(context:flighthq._internal.dom.CanvasRenderingContext2D, commands:Array<ShapeCommandToken>, state:RenderState):Void {

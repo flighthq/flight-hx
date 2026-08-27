@@ -19,26 +19,27 @@ import flighthq.types.Camera3D;
 import flighthq.types.GlRenderState;
 import flighthq.types.Matrix4;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
-import flighthq.types.ParticleEmitter2D.ParticleEmitterData;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
+import flighthq.types.ParticleBlendMode;
 import flighthq.types.ParticleEmitter3D;
-import flighthq.types.ParticleEmitterConfig.ParticleBlendMode;
+import flighthq.types.ParticleEmitterData;
 import flighthq.types.RenderState;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
-import flighthq.types.Scene3DLights.Scene3DLightsLike;
+import flighthq.types.RenderTargetColorSpace;
+import flighthq.types.Scene3DLightsLike;
 import flighthq.types.Scene3DRenderList;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
+import flighthq.types.TextureLike;
 import flighthq.types.Types.ParticleEmitter3DKind;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 import flighthq.types._internal._ParticleEmitter3DValues.ParticleEmitter3DKind;
 
 typedef GlParticle3DShader__glParticleEmitter3D = { var cornerBuffer:flighthq._internal.dom.WebGLBuffer; var indexBuffer:flighthq._internal.dom.WebGLBuffer; var instanceBuffer:flighthq._internal.dom.WebGLBuffer; var instanceData:flighthq._internal._Float32Array; var locCameraRight:flighthq._internal.dom.WebGLUniformLocation; var locCameraUp:flighthq._internal.dom.WebGLUniformLocation; var locColor:Float; var locCorner:Float; var locCosScale:Float; var locHasTexture:flighthq._internal.dom.WebGLUniformLocation; var locPos:Float; var locSinScale:Float; var locSize:Float; var locTexture:flighthq._internal.dom.WebGLUniformLocation; var locUvRect:Float; var locViewProjection:flighthq._internal.dom.WebGLUniformLocation; var program:flighthq._internal.dom.WebGLProgram; var vao:flighthq._internal.dom.WebGLVertexArrayObject; };
 
+@:noCompletion
 class GlParticleEmitter3D {
   public static final INSTANCE_FLOATS__glParticleEmitter3D:Float = 16.0;
 
@@ -282,8 +283,9 @@ class GlParticleEmitter3D {
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, null);
   }
 
-  @:noCompletion
-  public static function destroyGlParticleEmitter3DShader(state:GlRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyGlParticleEmitter3DShader(state:GlRenderState):Void {
     var shader:Null<GlParticle3DShader__glParticleEmitter3D> = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     shader = ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap<GlRenderState, GlParticle3DShader__glParticleEmitter3D>).get(state));
@@ -296,8 +298,9 @@ class GlParticleEmitter3D {
     ((cast GlParticleEmitter3D.shaderCache__glParticleEmitter3D : flighthq._internal._WeakMap<GlRenderState, GlParticle3DShader__glParticleEmitter3D>).delete_(state));
   }
 
-  @:noCompletion
-  public static function drawGlScene3DParticleEmitter3Ds(state:GlRenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawGlScene3DParticleEmitter3Ds(state:GlRenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike):Void {
     var list:Scene3DRenderList = cast _Runtime.UNDEFINED;
     var shader:GlParticle3DShader__glParticleEmitter3D = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;

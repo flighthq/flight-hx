@@ -5,11 +5,12 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.collision.CollisionShapeValidation2D.getCollisionPolygonValidationStatus2D;
 import flighthq.collision.PointContainment2D.getCollisionShapeContainsPoint2D;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Collision.CollisionRaycastHit2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.CollisionRaycastHit2D;
 
 typedef RaycastScratch__raycastCollisionShape2D = { var localHit:CollisionRaycastHit2D; var fraction:{ var value:Float; }; var polygonCenter:{ var x:Float; var y:Float; }; };
 
+@:noCompletion
 class RaycastCollisionShape2D {
   public static final RELATIVE_EPSILON__raycastCollisionShape2D:Float = 1e-9;
 

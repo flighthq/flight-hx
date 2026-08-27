@@ -3,16 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Menu.MenuItemTemplate;
-
-typedef AppActivationPolicy = String;
-
-typedef AppLoginItem = { var openAtLogin:Bool; var openAsHidden:Bool; var path:String; var args:Array<String>; };
-
-typedef AppLoginItemLike = { @:optional var openAtLogin:Bool; @:optional var openAsHidden:Bool; @:optional var path:String; @:optional var args:Array<String>; };
-
-typedef AppPathKind = String;
 
 typedef App = { var onActivate:Signal<Void->Void>; var onAllWindowsClosed:Signal<Void->Void>; var onOpenFile:Signal<String->Void>; var onQuitRequest:Signal<Void->Void>; var onReady:Signal<Void->Void>; var onSecondInstance:Signal<Array<String>->Void>; };
-
-typedef AppBackend = { var addRecentDocument:String->Void; var bounceDock:Void->Float; var cancelAttention:Float->Void; var cancelDockBounce:Float->Void; var clearRecentDocuments:Void->Void; var focus:Void->Void; var getAppDirectoryPath:AppPathKind->String; var getAppPath:Void->String; var getCommandLine:Void->Array<String>; var getExecutablePath:Void->String; var getLocale:Void->String; var getLoginItem:Void->AppLoginItem; var getName:Void->String; var getPreferredSystemLanguages:Void->Array<String>; var getSystemLocale:Void->String; var getVersion:Void->String; var hasSingleInstanceLock:Void->Bool; var hideApp:Void->Bool; var isAppHidden:Void->Bool; var quit:Void->Void; var relaunch:Void->Void; var releaseSingleInstanceLock:Void->Void; var requestAttention:Bool->Float; var requestSingleInstanceLock:Void->Bool; var setActivationPolicy:AppActivationPolicy->Void; var setBadgeCount:Float->Bool; var setDockBadge:String->Void; var setDockMenu:Array<MenuItemTemplate>->Void; var setLoginItem:AppLoginItemLike->Bool; var setName:String->Bool; var setUserModelId:String->Bool; var showApp:Void->Bool; var subscribeActivate:(Void->Void)->(Void->Void); var subscribeAllWindowsClosed:(Void->Void)->(Void->Void); var subscribeOpenFile:(String->Void)->(Void->Void); var subscribeQuitRequest:((Void->Void)->Void)->(Void->Void); var subscribeReady:(Void->Void)->(Void->Void); var subscribeSecondInstance:(Array<String>->Void)->(Void->Void); };

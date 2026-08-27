@@ -5,15 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetData;
 import flighthq.spritesheet.SpritesheetData.createSpritesheetFrameData;
-import flighthq.types.CocosPlistSchema.CocosPlistDocument;
-import flighthq.types.CocosPlistSchema.CocosPlistFrame;
-import flighthq.types.CocosPlistSchema.CocosPlistMetadata;
-import flighthq.types.CocosPlistSchema.CocosPlistParsed;
+import flighthq.types.CocosPlistDocument;
+import flighthq.types.CocosPlistFrame;
+import flighthq.types.CocosPlistMetadata;
+import flighthq.types.CocosPlistParsed;
 import flighthq.types.SpritesheetData;
 import flighthq.types.SpritesheetFrameData;
 import flighthq.types.XmlElement;
 import flighthq.xml.XmlParse.parseXmlDocument;
 
+@:noCompletion
 class CocosPlistParse {
   public static function parsePlistPair__cocosPlistParse(s:String):Array<Float> {
     var m:Null<flighthq._internal._Any> = cast _Runtime.UNDEFINED;

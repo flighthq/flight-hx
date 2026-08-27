@@ -7,21 +7,22 @@ import flighthq.registry.RegistryTable.createKeyedTable;
 import flighthq.registry.RegistryTable.withRegistryTableEntry;
 import flighthq.registry.RegistryTable.withoutRegistryTableEntry;
 import flighthq.render.RenderState.getRenderStateRuntime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.KeyedTable;
+import flighthq.types.Kind;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
 import flighthq.types.RenderEffect;
 import flighthq.types.RenderEffectPadding;
-import flighthq.types.RenderEffectPadding.RenderEffectPaddingExplanation;
-import flighthq.types.RenderEffectPadding.RenderEffectPaddingResolver;
+import flighthq.types.RenderEffectPaddingExplanation;
+import flighthq.types.RenderEffectPaddingResolver;
+import flighthq.types.RenderRegistries;
+import flighthq.types.RenderRegistry;
 import flighthq.types.RenderRegistrySignals;
-import flighthq.types.RenderRegistrySignals.RenderRegistry;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.RenderRegistries;
-import flighthq.types.RenderState.RenderStateRuntime;
+import flighthq.types.RenderStateRuntime;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
+@:noCompletion
 class RenderEffectPadding {
   public static function computeRenderEffectPadding(state:RenderState, effects:flighthq._internal._Union2<RenderEffect, Array<RenderEffect>>):flighthq.types.RenderEffectPadding {
     var list:Array<flighthq._internal._Any> = cast _Runtime.UNDEFINED;

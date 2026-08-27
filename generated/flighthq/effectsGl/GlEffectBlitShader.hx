@@ -11,6 +11,7 @@ import flighthq.types.GlRenderTarget;
 
 typedef BlitOffsetShaderLocations__glEffectBlitShader = { >GlFullscreenProgram, var locOffset:flighthq._internal.dom.WebGLUniformLocation; };
 
+@:noCompletion
 class GlEffectBlitShader {
   public static final BLIT_OFFSET_FRAGMENT_SRC__glEffectBlitShader:String = '#version 300 es\nprecision mediump float;\nin vec2 v_texCoord;\nuniform sampler2D u_texture;\nuniform vec2 u_offset;\nout vec4 fragColor;\nvoid main() {\n  vec2 uv = v_texCoord + u_offset;\n  if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {\n    fragColor = vec4(0.0);\n    return;\n  }\n  fragColor = texture(u_texture, uv);\n}';
 
@@ -24,8 +25,9 @@ class GlEffectBlitShader {
 
   public static final eraseShaders__glEffectBlitShader:flighthq._internal._WeakMap<flighthq._internal.dom.WebGL2RenderingContext, GlFullscreenProgram> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGlEffectBlitOffsetPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, dx:Float, dy:Float):Void {
     var loc:BlitOffsetShaderLocations__glEffectBlitShader = cast _Runtime.UNDEFINED;
     loc = (cast GlEffectBlitShader.getGlBlitOffsetShader__glEffectBlitShader(({ final __callArgument0:Dynamic = state; __callArgument0; })) : BlitOffsetShaderLocations__glEffectBlitShader);
     drawGlFullscreenPass(({ final __callArgument2:Dynamic = state; __callArgument2; }), ({ final __callArgument3:Dynamic = loc; __callArgument3; }), ({ final __callArgument4:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument4; }), ({ final __callArgument5:Dynamic = dest; __callArgument5; }), ({ final __callArgument6:Dynamic = function(__unused1:flighthq._internal.dom.WebGL2RenderingContext, __unused2:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused0:GlFullscreenProgram):Void {
@@ -33,8 +35,9 @@ class GlEffectBlitShader {
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument6; }));
   }
 
-  @:noCompletion
-  public static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGlEffectBlitPass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     loc = (cast GlEffectBlitShader.getGlBlitShader__glEffectBlitShader(({ final __callArgument12:Dynamic = state; __callArgument12; })) : GlFullscreenProgram);
     drawGlFullscreenPass(({ final __callArgument14:Dynamic = state; __callArgument14; }), ({ final __callArgument15:Dynamic = loc; __callArgument15; }), ({ final __callArgument16:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument16; }), ({ final __callArgument17:Dynamic = dest; __callArgument17; }), ({ final __callArgument18:Dynamic = function(__unused5:flighthq._internal.dom.WebGL2RenderingContext, __unused6:GlFullscreenProgram):Void { _Runtime.callValue(function(__unused3:flighthq._internal.dom.WebGL2RenderingContext, __unused4:GlFullscreenProgram):Void {
@@ -42,8 +45,9 @@ class GlEffectBlitShader {
     }, cast ([] : Array<Dynamic>)); }; __callArgument18; }));
   }
 
-  @:noCompletion
-  public static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyGlEffectErasePass(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget):Void {
     var loc:GlFullscreenProgram = cast _Runtime.UNDEFINED;
     loc = (cast GlEffectBlitShader.getGlEraseShader__glEffectBlitShader(({ final __callArgument24:Dynamic = state; __callArgument24; })) : GlFullscreenProgram);
     drawGlFullscreenPass(({ final __callArgument26:Dynamic = state; __callArgument26; }), ({ final __callArgument27:Dynamic = loc; __callArgument27; }), ({ final __callArgument28:Dynamic = cast ([source.texture] : Array<Dynamic>); __callArgument28; }), ({ final __callArgument29:Dynamic = dest; __callArgument29; }), ({ final __callArgument30:Dynamic = function(__unused8:flighthq._internal.dom.WebGL2RenderingContext, __unused9:GlFullscreenProgram):Void { _Runtime.callValue(function(gl:flighthq._internal.dom.WebGL2RenderingContext, __unused7:GlFullscreenProgram):Void {

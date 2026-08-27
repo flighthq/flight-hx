@@ -17,20 +17,21 @@ import flighthq.types.Node;
 import flighthq.types.Node2D;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.TextAutoSize;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 import flighthq.types.TextLabel;
-import flighthq.types.TextLabel.TextLabelData;
-import flighthq.types.TextLabel.TextLabelRuntime;
-import flighthq.types.TextLayout.TextLayoutParams;
-import flighthq.types.TextLayout.TextLayoutResult;
-import flighthq.types.TextLayout.TextMeasureFunction;
+import flighthq.types.TextLabelData;
+import flighthq.types.TextLabelRuntime;
+import flighthq.types.TextLayoutParams;
+import flighthq.types.TextLayoutResult;
+import flighthq.types.TextMeasureFunction;
 import flighthq.types.TextVerticalAlign;
 import flighthq.types.Types.TextLabelKind;
 import flighthq.types._internal._TextLabelValues.TextLabelKind;
 
+@:noCompletion
 class TextLabel {
   public static function buildTextLabelLayoutParams__textLabel(source:flighthq.types.TextLabel, measure:TextMeasureFunction):TextLayoutParams {
     var data:TextLabelData = cast _Runtime.UNDEFINED;
@@ -75,14 +76,16 @@ class TextLabel {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createTextLabelData(?data:{ @:optional var autoSize:Null<TextAutoSize>; @:optional var height:Null<Float>; @:optional var text:Null<String>; @:optional var textFormat:Null<TextFormat>; @:optional var verticalAlign:Null<TextVerticalAlign>; @:optional var width:Null<Float>; }):TextLabelData {
+  @:allow(flighthq)
+  @:keep
+  private static function createTextLabelData(?data:{ @:optional var autoSize:Null<TextAutoSize>; @:optional var height:Null<Float>; @:optional var text:Null<String>; @:optional var textFormat:Null<TextFormat>; @:optional var verticalAlign:Null<TextVerticalAlign>; @:optional var width:Null<Float>; }):TextLabelData {
     return cast { autoSize: _Runtime.coalesce(({ final __structural12 = data; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var autoSize:Null<String>; }).autoSize; }), function():Dynamic return cast 'none'), height: _Runtime.coalesce(({ final __structural13 = data; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 100.0), text: _Runtime.coalesce(({ final __structural14 = data; __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var text:Null<String>; }).text; }), function():Dynamic return cast ''), textFormat: _Runtime.coalesce(({ final __structural15 = data; __structural15 == null ? _Runtime.UNDEFINED : (cast __structural15 : { @:optional var textFormat:Null<TextFormat>; }).textFormat; }), function():Dynamic return cast {  }), verticalAlign: _Runtime.coalesce(({ final __structural16 = data; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { @:optional var verticalAlign:Null<String>; }).verticalAlign; }), function():Dynamic return cast 'top'), width: _Runtime.coalesce(({ final __structural17 = data; __structural17 == null ? _Runtime.UNDEFINED : (cast __structural17 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createTextLabelRuntime():TextLabelRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createTextLabelRuntime():TextLabelRuntime {
     var out:TextLabelRuntime = cast _Runtime.UNDEFINED;
     out = (cast createNode2DRuntime((cast TextLabel.defaultMethods__textLabel : Dynamic)) : TextLabelRuntime);
     (out.buildTextLayoutParams = cast (TextLabel.buildTextLabelLayoutParams__textLabel : flighthq.types.TextLabel->TextMeasureFunction->TextLayoutParams));
@@ -97,8 +100,9 @@ class TextLabel {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getTextLabelRuntime(source:flighthq.types.TextLabel):TextLabelRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getTextLabelRuntime(source:flighthq.types.TextLabel):TextLabelRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument18:Dynamic = source; __callArgument18; })) : TextLabelRuntime);
     return cast null;
   }

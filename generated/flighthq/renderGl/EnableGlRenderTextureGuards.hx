@@ -6,14 +6,16 @@ import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.renderGl.GlRenderTexture.setGlRenderTextureGuard;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderTexture.GlRenderTextureExplanation;
-import flighthq.types.GlRenderTexture.GlRenderTextureStatus;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.GlRenderTextureExplanation;
+import flighthq.types.GlRenderTextureStatus;
+import flighthq.types.LogLevel;
 import flighthq.types.RenderTexture;
 
+@:noCompletion
 class EnableGlRenderTextureGuards {
-  @:noCompletion
-  public static function areGlRenderTextureGuardsEnabled(state:GlRenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areGlRenderTextureGuardsEnabled(state:GlRenderState):Bool {
     var enabled:Bool = cast _Runtime.UNDEFINED;
     enabled = false;
     EnableGlRenderTextureGuards.setGlRenderTextureGuardProbe__enableGlRenderTextureGuards(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = function():Void {

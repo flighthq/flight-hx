@@ -36,36 +36,36 @@ import flighthq.scene3dFormats.Shared.reverseTriangleWinding;
 import flighthq.types.AnimationClip;
 import flighthq.types.ImageResourceReference;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Material;
-import flighthq.types.Material.MaterialLike;
+import flighthq.types.MaterialLike;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
-import flighthq.types.Md5Schema.Md5Joint;
-import flighthq.types.Md5Schema.Md5Mesh;
-import flighthq.types.Md5Schema.Md5Vertex;
-import flighthq.types.Md5Schema.Md5Weight;
+import flighthq.types.Matrix4Like;
+import flighthq.types.Md5Joint;
+import flighthq.types.Md5Mesh;
+import flighthq.types.Md5Vertex;
+import flighthq.types.Md5Weight;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexSemantic;
 import flighthq.types.MeshGeometryOptions;
 import flighthq.types.MeshTriangleVertexIndices;
 import flighthq.types.Node3D;
 import flighthq.types.Quaternion;
-import flighthq.types.Quaternion.QuaternionLike;
+import flighthq.types.QuaternionLike;
 import flighthq.types.Scene3D;
 import flighthq.types.Scene3DDocument;
-import flighthq.types.Scene3DDocument.Scene3DDocumentMesh;
-import flighthq.types.Scene3DDocument.Scene3DDocumentNode;
-import flighthq.types.Scene3DDocument.Scene3DDocumentScene;
-import flighthq.types.Scene3DDocument.Scene3DDocumentSkin;
+import flighthq.types.Scene3DDocumentMesh;
+import flighthq.types.Scene3DDocumentNode;
+import flighthq.types.Scene3DDocumentScene;
+import flighthq.types.Scene3DDocumentSkin;
 import flighthq.types.SkinInfluence;
 import flighthq.types.Texture;
 import flighthq.types.Transform3D;
 import flighthq.types.Types.MeshKind;
 import flighthq.types.Types.Node3DKind;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexSemantic;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 import flighthq.types._internal._MeshValues.MeshKind;
 import flighthq.types._internal._Node3DValues.Node3DKind;
@@ -74,9 +74,11 @@ typedef Md5WeightInfluence__md5Parse = { >SkinInfluence, var mx:Float; var my:Fl
 
 typedef Md5DropTally__md5Parse = { var count:Float; var detail:flighthq._internal._Record<String, flighthq._internal._Union2<flighthq._internal._Union2<Bool, Float>, String>>; var kind:String; var severity:ImportDiagnosticSeverity; };
 
+@:noCompletion
 class Md5Parse {
-  @:noCompletion
-  public static function canonicalizeMd5TangentHandedness(geometry:MeshGeometry, md5Drops:Null<flighthq._internal._Map<String, Md5DropTally__md5Parse>>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function canonicalizeMd5TangentHandedness(geometry:MeshGeometry, md5Drops:Null<flighthq._internal._Map<String, Md5DropTally__md5Parse>>):Void {
     var floatsPerVertex:Float = cast _Runtime.UNDEFINED;
     var tangentOffset:Float = cast _Runtime.UNDEFINED;
     var uvOffset:Float = cast _Runtime.UNDEFINED;

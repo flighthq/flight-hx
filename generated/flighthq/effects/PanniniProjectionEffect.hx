@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.PanniniProjectionEffect;
 
+@:noCompletion
 class PanniniProjectionEffect {
   public static function createPanniniProjectionEffect(?options:{ @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }):flighthq.types.PanniniProjectionEffect {
     if (options == null) options = cast ({  } : Dynamic);

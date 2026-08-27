@@ -7,14 +7,16 @@ import flighthq.effectsGl.GlCustomShaderEffect.setGlCustomShaderSourceGuard;
 import flighthq.effectsGl.GlRenderEffectPipeline.setGlRenderEffectPipelineSkipGuard;
 import flighthq.effectsGl.GlRenderTextureEffect.setGlRenderEffectApplicationGuard;
 import flighthq.log.Log.logOnce;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationExplanation;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectApplicationStatus;
+import flighthq.types.GlRenderEffectApplicationExplanation;
+import flighthq.types.GlRenderEffectApplicationStatus;
 import flighthq.types.GlRenderState;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableGlRenderEffectGuards {
-  @:noCompletion
-  public static function areGlRenderEffectGuardsEnabled(state:GlRenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areGlRenderEffectGuardsEnabled(state:GlRenderState):Bool {
     return cast ((cast EnableGlRenderEffectGuards._guardedStates__enableGlRenderEffectGuards : flighthq._internal._WeakSet<GlRenderState>).has(state));
     return cast null;
   }

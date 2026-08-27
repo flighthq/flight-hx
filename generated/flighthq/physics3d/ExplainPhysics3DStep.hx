@@ -13,10 +13,11 @@ import flighthq.physics3d.StepValidation.isPhysics3DSolverConfigValid;
 import flighthq.physics3d.StepValidation.isPhysics3DSubstepsValid;
 import flighthq.physics3d.StepValidation.isPhysics3DTimestepValid;
 import flighthq.physics3d.StepValidation.isPhysics3DVelocityIterationsValid;
-import flighthq.types.Physics3D.Physics3DSolverConfig;
-import flighthq.types.Physics3D.Physics3DStepExplanation;
-import flighthq.types.Physics3D.Physics3DWorld;
+import flighthq.types.Physics3DSolverConfig;
+import flighthq.types.Physics3DStepExplanation;
+import flighthq.types.Physics3DWorld;
 
+@:noCompletion
 class ExplainPhysics3DStep {
   public static function explainPhysics3DStep(world:Physics3DWorld, dt:Float):Physics3DStepExplanation {
     var config:Physics3DSolverConfig = cast _Runtime.UNDEFINED;

@@ -4,18 +4,20 @@ package flighthq.scene3dWgpu;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Types.EntityRuntimeKey;
+import flighthq.types.WgpuMaterialBinding;
+import flighthq.types.WgpuMeshUpload;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
+import flighthq.types.WgpuScene3DFrameBinding;
 import flighthq.types.WgpuScene3DRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
-import flighthq.types.WgpuScene3DRuntime.WgpuMeshUpload;
-import flighthq.types.WgpuScene3DRuntime.WgpuScene3DFrameBinding;
 import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class WgpuScene3DRuntime {
-  @:noCompletion
-  public static function getWgpuScene3DRuntime(state:WgpuRenderState):flighthq.types.WgpuScene3DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuScene3DRuntime(state:WgpuRenderState):flighthq.types.WgpuScene3DRuntime {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var scene:Null<flighthq.types.WgpuScene3DRuntime> = cast _Runtime.UNDEFINED;
     stateRuntime = (cast _Runtime.getIndex(state, EntityRuntimeKey) : WgpuRenderStateRuntime);
@@ -29,8 +31,9 @@ class WgpuScene3DRuntime {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuSkinningAdapter(state:WgpuRenderState):Null<WgpuSkinningAdapter> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuSkinningAdapter(state:WgpuRenderState):Null<WgpuSkinningAdapter> {
     return cast (cast (cast (cast getWgpuScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : flighthq.types.WgpuScene3DRuntime) : { var skinningAdapter:flighthq._internal._Any; }).skinningAdapter : Null<WgpuSkinningAdapter>);
     return cast null;
   }

@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.TiltShiftEffect;
 
+@:noCompletion
 class GlTiltShiftEffect {
-  @:noCompletion
-  public static function applyTiltShiftEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:TiltShiftEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyTiltShiftEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:TiltShiftEffect):Void {
     var center:Float = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
     var blur:Float = cast _Runtime.UNDEFINED;

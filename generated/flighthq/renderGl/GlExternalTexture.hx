@@ -12,18 +12,19 @@ import flighthq.texture.Texture.createTexture;
 import flighthq.types.CreateExternalTextureOptions;
 import flighthq.types.ExternalTexture;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.SamplerLike;
+import flighthq.types.SamplerLike;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
 import flighthq.types.Types.ExternalTextureSourceKind;
 import flighthq.types.Vector2;
 import flighthq.types._internal._TextureSourceKindValues.ExternalTextureSourceKind;
 
+@:noCompletion
 class GlExternalTexture {
   public static function createExternalGlTexture(state:GlRenderState, handle:flighthq._internal.dom.WebGLTexture, options:CreateExternalTextureOptions):Texture {
     var source:ExternalTexture = cast _Runtime.UNDEFINED;

@@ -9559,11 +9559,27 @@
     },
     {
       "byReason": {
-        "unclassified": 3
+        "unclassified": 1
       },
-      "module": "flighthq.types.Abc",
+      "module": "flighthq.types.AbcMultinameKind",
       "source": "upstream/packages/types/src/Abc.ts",
-      "total": 3
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.AbcOpcode",
+      "source": "upstream/packages/types/src/Abc.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.AbcTraitKind",
+      "source": "upstream/packages/types/src/Abc.ts",
+      "total": 1
     },
     {
       "byReason": {
@@ -9591,27 +9607,51 @@
     },
     {
       "byReason": {
+        "source-unknown": 2
+      },
+      "module": "flighthq.types.AppLifecycle",
+      "source": "upstream/packages/types/src/Lifecycle.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
         "source-unknown": 1
       },
-      "module": "flighthq.types.AsepriteSchema",
+      "module": "flighthq.types.AsepriteMeta",
       "source": "upstream/packages/types/src/AsepriteSchema.ts",
       "total": 1
     },
     {
       "byReason": {
-        "source-unknown": 3
+        "source-unknown": 2
       },
-      "module": "flighthq.types.Assets",
+      "module": "flighthq.types.AssetEntry",
       "source": "upstream/packages/types/src/Assets.ts",
-      "total": 3
+      "total": 2
     },
     {
       "byReason": {
-        "unclassified": 2
+        "source-unknown": 1
       },
-      "module": "flighthq.types.AudioResourceReference",
+      "module": "flighthq.types.AssetLibraryRuntime",
+      "source": "upstream/packages/types/src/Assets.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.AudioResourceFailureKind",
       "source": "upstream/packages/types/src/AudioResourceReference.ts",
-      "total": 2
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.AudioResourceReferenceKind",
+      "source": "upstream/packages/types/src/AudioResourceReference.ts",
+      "total": 1
     },
     {
       "byReason": {
@@ -9633,17 +9673,25 @@
       "byReason": {
         "source-unknown": 1
       },
-      "module": "flighthq.types.CanvasShapeRegistry",
+      "module": "flighthq.types.CanvasShapeHandler",
       "source": "upstream/packages/types/src/CanvasShapeRegistry.ts",
       "total": 1
     },
     {
       "byReason": {
-        "source-unknown": 3
+        "source-unknown": 1
       },
-      "module": "flighthq.types.CapacitorApi",
+      "module": "flighthq.types.CapacitorFilesystemPlugin",
       "source": "upstream/packages/types/src/CapacitorApi.ts",
-      "total": 3
+      "total": 1
+    },
+    {
+      "byReason": {
+        "source-unknown": 2
+      },
+      "module": "flighthq.types.CapacitorGeolocationPlugin",
+      "source": "upstream/packages/types/src/CapacitorApi.ts",
+      "total": 2
     },
     {
       "byReason": {
@@ -9655,11 +9703,19 @@
     },
     {
       "byReason": {
-        "unclassified": 2
+        "unclassified": 1
       },
       "module": "flighthq.types.Compression",
       "source": "upstream/packages/types/src/Compression.ts",
-      "total": 2
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.CompressionFraming",
+      "source": "upstream/packages/types/src/Compression.ts",
+      "total": 1
     },
     {
       "byReason": {
@@ -9671,18 +9727,105 @@
     },
     {
       "byReason": {
-        "source-unknown": 32,
-        "unclassified": 4
+        "standard-toolkit-boundary": 1
       },
-      "module": "flighthq.types.ElectronApi",
+      "module": "flighthq.types.DeepReadonly",
+      "source": "upstream/packages/types/src/Snapshot.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "source-unknown": 4
+      },
+      "module": "flighthq.types.ElectronApp",
       "source": "upstream/packages/types/src/ElectronApi.ts",
-      "total": 36
+      "total": 4
+    },
+    {
+      "byReason": {
+        "source-unknown": 4
+      },
+      "module": "flighthq.types.ElectronAutoUpdater",
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 4
+    },
+    {
+      "byReason": {
+        "source-unknown": 2
+      },
+      "module": "flighthq.types.ElectronBrowserWindow",
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 2
     },
     {
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.EmissiveModifier",
+      "module": "flighthq.types.ElectronBrowserWindowConstructor",
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "source-unknown": 14
+      },
+      "module": "flighthq.types.ElectronIpcMain",
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 14
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.ElectronMenuConstructor",
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "source-unknown": 2
+      },
+      "module": "flighthq.types.ElectronNotification",
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.ElectronNotificationConstructor",
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "source-unknown": 4
+      },
+      "module": "flighthq.types.ElectronScreen",
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 4
+    },
+    {
+      "byReason": {
+        "source-unknown": 2
+      },
+      "module": "flighthq.types.ElectronTray",
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.ElectronTrayConstructor",
+      "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.EmissiveModifierFacing",
       "source": "upstream/packages/types/src/EmissiveModifier.ts",
       "total": 1
     },
@@ -9690,7 +9833,7 @@
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.Entity",
+      "module": "flighthq.types.EntityWithoutRuntime",
       "source": "upstream/packages/types/src/Entity.ts",
       "total": 1
     },
@@ -9706,7 +9849,23 @@
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.FogModifier",
+      "module": "flighthq.types.FallbackRemediableSceneCoverageEntry",
+      "source": "upstream/packages/types/src/SceneCoverageEntry.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.FallbackUnavailableSceneCoverageEntry",
+      "source": "upstream/packages/types/src/SceneCoverageEntry.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.FogModifierMode",
       "source": "upstream/packages/types/src/FogModifier.ts",
       "total": 1
     },
@@ -9730,7 +9889,7 @@
       "byReason": {
         "source-never": 1
       },
-      "module": "flighthq.types.GltfSchema",
+      "module": "flighthq.types.GltfMaterial",
       "source": "upstream/packages/types/src/GltfSchema.ts",
       "total": 1
     },
@@ -9760,52 +9919,91 @@
     },
     {
       "byReason": {
-        "unclassified": 2
+        "unclassified": 1
       },
-      "module": "flighthq.types.ImageResourceReference",
+      "module": "flighthq.types.ImageResourceFailureKind",
       "source": "upstream/packages/types/src/ImageResourceReference.ts",
-      "total": 2
+      "total": 1
     },
     {
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.ImportDiagnostic",
+      "module": "flighthq.types.ImageResourceReferenceKind",
+      "source": "upstream/packages/types/src/ImageResourceReference.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.ImportDiagnosticSeverity",
       "source": "upstream/packages/types/src/ImportDiagnostic.ts",
       "total": 1
     },
     {
       "byReason": {
-        "source-unknown": 16,
-        "standard-toolkit-boundary": 1
+        "source-unknown": 13
       },
-      "module": "flighthq.types.Ipc",
+      "module": "flighthq.types.IpcBackend",
       "source": "upstream/packages/types/src/Ipc.ts",
-      "total": 17
-    },
-    {
-      "byReason": {
-        "unclassified": 3
-      },
-      "module": "flighthq.types.Layout",
-      "source": "upstream/packages/types/src/Layout.ts",
-      "total": 3
-    },
-    {
-      "byReason": {
-        "source-unknown": 2
-      },
-      "module": "flighthq.types.Lifecycle",
-      "source": "upstream/packages/types/src/Lifecycle.ts",
-      "total": 2
+      "total": 13
     },
     {
       "byReason": {
         "source-unknown": 3
       },
-      "module": "flighthq.types.Log",
-      "source": "upstream/packages/types/src/Log.ts",
+      "module": "flighthq.types.IpcMessageEvent",
+      "source": "upstream/packages/types/src/Ipc.ts",
       "total": 3
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 1
+      },
+      "module": "flighthq.types.IpcTimeoutError",
+      "source": "upstream/packages/types/src/Ipc.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.LayoutResolutionFailureKind",
+      "source": "upstream/packages/types/src/Layout.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 2
+      },
+      "module": "flighthq.types.LayoutTree",
+      "source": "upstream/packages/types/src/Layout.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "source-unknown": 1
+      },
+      "module": "flighthq.types.LogContext",
+      "source": "upstream/packages/types/src/Log.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "source-unknown": 1
+      },
+      "module": "flighthq.types.LogData",
+      "source": "upstream/packages/types/src/Log.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "source-unknown": 1
+      },
+      "module": "flighthq.types.LogSpan",
+      "source": "upstream/packages/types/src/Log.ts",
+      "total": 1
     },
     {
       "byReason": {
@@ -9817,17 +10015,25 @@
     },
     {
       "byReason": {
-        "source-unknown": 4
+        "source-unknown": 1
       },
       "module": "flighthq.types.LottieDocument",
       "source": "upstream/packages/types/src/LottieDocument.ts",
-      "total": 4
+      "total": 1
+    },
+    {
+      "byReason": {
+        "source-unknown": 3
+      },
+      "module": "flighthq.types.LottieTextData",
+      "source": "upstream/packages/types/src/LottieDocument.ts",
+      "total": 3
     },
     {
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.MeshGeometry",
+      "module": "flighthq.types.MeshGeometryRuntime",
       "source": "upstream/packages/types/src/MeshGeometry.ts",
       "total": 1
     },
@@ -9851,7 +10057,7 @@
       "byReason": {
         "source-unknown": 1
       },
-      "module": "flighthq.types.Net",
+      "module": "flighthq.types.NetResponseBody",
       "source": "upstream/packages/types/src/Net.ts",
       "total": 1
     },
@@ -9859,17 +10065,33 @@
       "byReason": {
         "source-any": 1
       },
-      "module": "flighthq.types.Node",
+      "module": "flighthq.types.NodeAny",
       "source": "upstream/packages/types/src/Node.ts",
       "total": 1
     },
     {
       "byReason": {
-        "source-unknown": 3
+        "source-unknown": 2
       },
-      "module": "flighthq.types.Notification",
+      "module": "flighthq.types.NotificationBackend",
       "source": "upstream/packages/types/src/Notification.ts",
-      "total": 3
+      "total": 2
+    },
+    {
+      "byReason": {
+        "source-unknown": 1
+      },
+      "module": "flighthq.types.NotificationRequest",
+      "source": "upstream/packages/types/src/Notification.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 1
+      },
+      "module": "flighthq.types.NumericProps",
+      "source": "upstream/packages/types/src/Tween.ts",
+      "total": 1
     },
     {
       "byReason": {
@@ -9883,23 +10105,31 @@
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.Path",
+      "module": "flighthq.types.PathCommand",
       "source": "upstream/packages/types/src/Path.ts",
       "total": 1
     },
     {
       "byReason": {
-        "unclassified": 3
+        "unclassified": 1
       },
-      "module": "flighthq.types.RegistryTable",
+      "module": "flighthq.types.RegistryEntryState",
       "source": "upstream/packages/types/src/RegistryTable.ts",
-      "total": 3
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 2
+      },
+      "module": "flighthq.types.RegistryTableEntry",
+      "source": "upstream/packages/types/src/RegistryTable.ts",
+      "total": 2
     },
     {
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.RenderCache",
+      "module": "flighthq.types.RenderCacheKind",
       "source": "upstream/packages/types/src/RenderCache.ts",
       "total": 1
     },
@@ -9945,25 +10175,49 @@
     },
     {
       "byReason": {
-        "unclassified": 3
+        "unclassified": 1
       },
-      "module": "flighthq.types.RiveDocument",
+      "module": "flighthq.types.RiveAnimationLoop",
       "source": "upstream/packages/types/src/RiveDocument.ts",
-      "total": 3
-    },
-    {
-      "byReason": {
-        "unclassified": 6
-      },
-      "module": "flighthq.types.SceneCoverageEntry",
-      "source": "upstream/packages/types/src/SceneCoverageEntry.ts",
-      "total": 6
+      "total": 1
     },
     {
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.ShapeCommand",
+      "module": "flighthq.types.RiveFieldType",
+      "source": "upstream/packages/types/src/RiveDocument.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.RiveWeightedPointKind",
+      "source": "upstream/packages/types/src/RiveDocument.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.SatisfiedSceneCoverageEntry",
+      "source": "upstream/packages/types/src/SceneCoverageEntry.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.SceneCoverage",
+      "source": "upstream/packages/types/src/SceneCoverageEntry.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.ShapeCommandRegistry",
       "source": "upstream/packages/types/src/ShapeCommand.ts",
       "total": 1
     },
@@ -9993,66 +10247,145 @@
     },
     {
       "byReason": {
-        "unclassified": 3
+        "unclassified": 1
       },
-      "module": "flighthq.types.Skeleton2DPathConstraint",
+      "module": "flighthq.types.Skeleton2DPathPositionMode",
       "source": "upstream/packages/types/src/Skeleton2DPathConstraint.ts",
-      "total": 3
+      "total": 1
     },
     {
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.Skeleton2DSlotAnimationTarget",
+      "module": "flighthq.types.Skeleton2DPathRotateMode",
+      "source": "upstream/packages/types/src/Skeleton2DPathConstraint.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.Skeleton2DPathSpacingMode",
+      "source": "upstream/packages/types/src/Skeleton2DPathConstraint.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.Skeleton2DSlotAnimationPath",
       "source": "upstream/packages/types/src/Skeleton2DSlotAnimationTarget.ts",
       "total": 1
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 1
+        "unclassified": 1
       },
-      "module": "flighthq.types.Snapshot",
-      "source": "upstream/packages/types/src/Snapshot.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
-        "unclassified": 5
-      },
-      "module": "flighthq.types.SoftKeyboardEasingKind",
+      "module": "flighthq.types.SoftKeyboardEasingDefaultKind",
       "source": "upstream/packages/types/src/SoftKeyboardEasingKind.ts",
-      "total": 5
+      "total": 1
     },
     {
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.StandardMaterial",
+      "module": "flighthq.types.SoftKeyboardEasingEaseInKind",
+      "source": "upstream/packages/types/src/SoftKeyboardEasingKind.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.SoftKeyboardEasingEaseOutKind",
+      "source": "upstream/packages/types/src/SoftKeyboardEasingKind.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.SoftKeyboardEasingKeyboardDefaultKind",
+      "source": "upstream/packages/types/src/SoftKeyboardEasingKind.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.SoftKeyboardEasingLinearKind",
+      "source": "upstream/packages/types/src/SoftKeyboardEasingKind.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.StandardMaterialKind",
       "source": "upstream/packages/types/src/StandardMaterial.ts",
       "total": 1
     },
     {
       "byReason": {
-        "unclassified": 3
+        "unclassified": 1
       },
-      "module": "flighthq.types.Statechart",
+      "module": "flighthq.types.StatechartComparison",
       "source": "upstream/packages/types/src/Statechart.ts",
-      "total": 3
-    },
-    {
-      "byReason": {
-        "source-unknown": 2,
-        "unclassified": 2
-      },
-      "module": "flighthq.types.TauriApi",
-      "source": "upstream/packages/types/src/TauriApi.ts",
-      "total": 4
+      "total": 1
     },
     {
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.TextInputManager",
+      "module": "flighthq.types.StatechartInputKind",
+      "source": "upstream/packages/types/src/Statechart.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.StatechartTransitionStatus",
+      "source": "upstream/packages/types/src/Statechart.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "source-unknown": 1
+      },
+      "module": "flighthq.types.TauriDialogPlugin",
+      "source": "upstream/packages/types/src/TauriApi.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.TauriLogicalPositionConstructor",
+      "source": "upstream/packages/types/src/TauriApi.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.TauriLogicalSizeConstructor",
+      "source": "upstream/packages/types/src/TauriApi.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "source-unknown": 1
+      },
+      "module": "flighthq.types.TauriMenu",
+      "source": "upstream/packages/types/src/TauriApi.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.TextInputSource",
       "source": "upstream/packages/types/src/TextInputManager.ts",
       "total": 1
     },
@@ -10068,16 +10401,8 @@
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.TimelineCue",
+      "module": "flighthq.types.TimelineFrameEntryCause",
       "source": "upstream/packages/types/src/TimelineCue.ts",
-      "total": 1
-    },
-    {
-      "byReason": {
-        "standard-toolkit-boundary": 1
-      },
-      "module": "flighthq.types.Tween",
-      "source": "upstream/packages/types/src/Tween.ts",
       "total": 1
     },
     {
@@ -10100,7 +10425,23 @@
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.VertexDisplaceModifier",
+      "module": "flighthq.types.UnavailableSceneCoverageEntry",
+      "source": "upstream/packages/types/src/SceneCoverageEntry.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.UnregisteredSceneCoverageEntry",
+      "source": "upstream/packages/types/src/SceneCoverageEntry.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flighthq.types.VertexDisplaceModifierSource",
       "source": "upstream/packages/types/src/VertexDisplaceModifier.ts",
       "total": 1
     },
@@ -10124,7 +10465,7 @@
       "byReason": {
         "unclassified": 1
       },
-      "module": "flighthq.types.WellKnownMenuItemRole",
+      "module": "flighthq.types.WellKnownMenuItemRoleValue",
       "source": "upstream/packages/types/src/WellKnownMenuItemRole.ts",
       "total": 1
     },
@@ -10243,7 +10584,7 @@
       "unclassified": 431
     },
     "checkerKnownUnrepresentable": 0,
-    "modules": 1205,
+    "modules": 1248,
     "total": 26905
   }
 }

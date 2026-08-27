@@ -7,9 +7,10 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
 import flighthq.textshaper._TextShaperHooks._setTextShaperBackendHook;
 import flighthq.types.Signal;
-import flighthq.types.TextShaper.TextShaperBackend;
+import flighthq.types.TextShaperBackend;
 import flighthq.types.TextShaperSignals;
 
+@:noCompletion
 class TextShaperSignals {
   public static function disposeTextShaperSignals():Void {
     if ((cast _Runtime.strictEquals(TextShaperSignals._signals__textShaperSignals, null) : Bool)) { return; }

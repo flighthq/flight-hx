@@ -3,22 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Cursor.CursorBackend;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeTraits;
-import flighthq.types.PointerEventData.PointerType;
-import flighthq.types.Spatial.SpatialIndex2D;
-
-typedef InteractionSignalName = String;
-
-typedef AnyInteractionSignalSlot = flighthq._internal._Union2<flighthq._internal._Union2<PointerEventData, KeyboardEventData>, FocusEventData>->Void;
 
 typedef InteractionManager<N> = { var cursorBackend:Null<CursorBackend>; var doubleClickDelay:Float; var enabled:Bool; var pointerCaptures:flighthq._internal._Map<Float, N>; var pointerStates:flighthq._internal._Map<Float, InteractionPointerState<N>>; var precise:Bool; var root:N; var spatialIndex:Null<SpatialIndex2D>; var signalSubscriberCounts:flighthq._internal._Map<InteractionSignalName, Float>; var trackedSignalSlots:flighthq._internal._Map<N, flighthq._internal._Map<InteractionSignalName, flighthq._internal._Map<AnyInteractionSignalSlot, AnyInteractionSignalSlot>>>; var trackedSubscribersOnly:Bool; };
-
-typedef InteractionManagerOptions = { @:optional var cursorBackend:Null<CursorBackend>; @:optional var enabled:Bool; @:optional var precise:Bool; @:optional var spatialIndex:Null<SpatialIndex2D>; @:optional var trackedSubscribersOnly:Bool; };
-
-typedef InteractionInputSource = { var onKeyDown:Signal<InputKeyboardData->Void>; var onKeyUp:Signal<InputKeyboardData->Void>; var onPointerCancel:Signal<InputPointerData->Void>; var onPointerDown:Signal<InputPointerData->Void>; var onPointerMove:Signal<InputPointerData->Void>; var onPointerUp:Signal<InputPointerData->Void>; var onWheel:Signal<InputPointerData->Void>; };
-
-typedef InteractionPointerOptions = { @:optional var altKey:Bool; @:optional var buttons:Float; @:optional var ctrlKey:Bool; @:optional var metaKey:Bool; @:optional var pointerId:Float; @:optional var pointerType:PointerType; @:optional var shiftKey:Bool; };
-
-typedef InteractionPointerState<N> = { var lastClickTarget:Null<N>; var lastClickTime:Float; var pointerDownTarget:Null<N>; var pointerOverTarget:Null<N>; };

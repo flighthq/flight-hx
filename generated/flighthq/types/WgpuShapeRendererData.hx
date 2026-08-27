@@ -3,8 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
-
-typedef WgpuShapeRasterSurface = { var canvas:flighthq._internal.dom.HTMLCanvasElement; var ctx:flighthq._internal.dom.CanvasRenderingContext2D; var image:Image; };
 
 typedef WgpuShapeRendererData = { var surface:Null<WgpuShapeRasterSurface>; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<WgpuShapeMesh>>; var meshBuffers:WgpuShapeMeshBuffers; };

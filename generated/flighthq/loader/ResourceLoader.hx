@@ -13,7 +13,7 @@ import flighthq.types.ResourceLoadHandle;
 import flighthq.types.ResourceLoadItem;
 import flighthq.types.ResourceLoadItemStatus;
 import flighthq.types.ResourceLoadReport;
-import flighthq.types.ResourceLoadReport.ResourceLoadReportStatus;
+import flighthq.types.ResourceLoadReportStatus;
 import flighthq.types.ResourceLoader;
 import flighthq.types.ResourceLoaderItemSignals;
 import flighthq.types.ResourceLoaderOptions;
@@ -25,6 +25,7 @@ typedef TokenBucket__resourceLoader = { var lastRefillMs:Float; var maxBytesPerS
 
 typedef ResourceLoaderInternal__resourceLoader = { >flighthq.types.ResourceLoader, var cancelled:Bool; var dedupeMap:flighthq._internal._Map<String, ResourceLoadHandle<flighthq._internal._Any>>; var errorPolicy:String; var generation:Float; var inFlight:flighthq._internal._Set<PendingEntry__resourceLoader>; var itemCounter:Float; var itemSignals:Null<ResourceLoaderItemSignals>; var loaded:Float; var maxConcurrent:Float; var options:ResourceLoaderOptions; var paused:Bool; var pending:Array<PendingEntry__resourceLoader>; var reports:Array<ResourceLoadReport>; var started:Bool; var streaming:Bool; var throttle:Null<TokenBucket__resourceLoader>; var total:Float; var totalWeight:Float; var weightLoaded:Float; };
 
+@:noCompletion
 class ResourceLoader {
   public static final AUTO_KEY_PREFIX__resourceLoader:String = '__item_';
 

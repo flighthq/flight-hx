@@ -13,26 +13,29 @@ import flighthq.scene3dGl.GlMeshProgram.GL_UV_TRANSFORM_VERTEX_GLSL;
 import flighthq.scene3dGl.GlMeshProgram.compileGlProgram;
 import flighthq.scene3dGl.GlMeshProgram.ensureGlScene3DProgram;
 import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
+import flighthq.types.GlClassicDefineKey;
+import flighthq.types.GlClassicLightingModel;
 import flighthq.types.GlClassicProgram;
-import flighthq.types.GlClassicProgram.GlClassicDefineKey;
-import flighthq.types.GlClassicProgram.GlClassicLightingModel;
+import flighthq.types.GlColorAdjustmentMaterialFeature;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
 import flighthq.types.GlScene3DRuntime;
 import flighthq.types.Types.MAX_FORWARD_LIGHTS;
 import flighthq.types._internal._Scene3DLightBlockValues.MAX_FORWARD_LIGHTS;
 
+@:noCompletion
 class GlClassicPrelude {
-  @:noCompletion
-  public static function buildGlClassicDefineKey(key:GlClassicDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildGlClassicDefineKey(key:GlClassicDefineKey):String {
     var model:String = cast _Runtime.UNDEFINED;
     model = ((cast _Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'phong') : Bool) ? (cast 'p' : Dynamic) : (cast ((cast _Runtime.strictEquals(_Runtime.field(key, 'lightingModel'), 'blinnphong') : Bool) ? (cast 'b' : Dynamic) : (cast 'l' : Dynamic)) : Dynamic));
     return cast '' + Std.string(model) + '' + Std.string(((cast _Runtime.field(key, 'alphaMaskEnabled') : Bool) ? (cast 'm' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasDiffuseMap') : Bool) ? (cast 'd' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasSpecularMap') : Bool) ? (cast 's' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasNormalMap') : Bool) ? (cast 'n' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasAlphaMap') : Bool) ? (cast 'a' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(((cast _Runtime.field(key, 'hasUvTransform') : Bool) ? (cast 'u' : Dynamic) : (cast '-' : Dynamic))) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast 'k', function():Dynamic return cast '-')) + '' + Std.string(_Runtime.select(_Runtime.field(key, 'hasColorMatrix'), function():Dynamic return cast 'x', function():Dynamic return cast _Runtime.select(_Runtime.field(key, 'hasColorAdjustment'), function():Dynamic return cast 'c', function():Dynamic return cast ''))) + '';
     return cast null;
   }
 
-  @:noCompletion
-  public static function compileGlClassicProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlClassicDefineKey, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlClassicProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlClassicProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, key:GlClassicDefineKey, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):GlClassicProgram {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var vertexSource:String = cast _Runtime.UNDEFINED;
     var fragmentSource:String = cast _Runtime.UNDEFINED;
@@ -44,22 +47,25 @@ class GlClassicPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureGlClassicProgram(state:GlRenderState, key:GlClassicDefineKey):GlClassicProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlClassicProgram(state:GlRenderState, key:GlClassicDefineKey):GlClassicProgram {
     var fullKey:GlClassicDefineKey = cast _Runtime.UNDEFINED;
     fullKey = (cast _Runtime.mergeObjects([key, { hasColorAdjustment: (cast (cast getGlScene3DRuntime(({ final __callArgument12:Dynamic = state; __callArgument12; })) : GlScene3DRuntime) : { var activeColorAdjustmentRun:Bool; }).activeColorAdjustmentRun }, { hasColorMatrix: (cast (cast getGlScene3DRuntime(({ final __callArgument14:Dynamic = state; __callArgument14; })) : GlScene3DRuntime) : { var activeColorMatrixRun:Bool; }).activeColorMatrixRun }, { hasSkin: (cast (cast getGlScene3DRuntime(({ final __callArgument16:Dynamic = state; __callArgument16; })) : GlScene3DRuntime) : { var activeSkinnedRun:Bool; }).activeSkinnedRun }]));
     return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlClassicProgram)->GlClassicProgram)(({ final __callArgument18:Dynamic = state; __callArgument18; }), (cast 'classic:' + Std.string((cast buildGlClassicDefineKey(({ final __callArgument19:Dynamic = fullKey; __callArgument19; })) : String)) + '' : String), ({ final __callArgument29:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlClassicProgram return (cast compileGlClassicProgram(({ final __callArgument21:Dynamic = gl; __callArgument21; }), ({ final __callArgument22:Dynamic = fullKey; __callArgument22; }), (cast getGlColorAdjustmentMaterialFeature(({ final __callArgument23:Dynamic = state; __callArgument23; })) : Null<GlColorAdjustmentMaterialFeature>)) : GlClassicProgram); __callArgument29; })) : GlClassicProgram);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlClassicFragmentSource():String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlClassicFragmentSource():String {
     return cast GlClassicPrelude.CLASSIC_FRAGMENT_BODY__glClassicPrelude;
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlClassicFragmentSourceForKey(key:GlClassicDefineKey, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlClassicFragmentSourceForKey(key:GlClassicDefineKey, ?colorAdjustmentFeature:Null<GlColorAdjustmentMaterialFeature>):String {
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
     var body:String = cast _Runtime.UNDEFINED;
     body = GlClassicPrelude.CLASSIC_FRAGMENT_BODY__glClassicPrelude;
@@ -70,14 +76,16 @@ class GlClassicPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlClassicVertexSource():String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlClassicVertexSource():String {
     return cast GlClassicPrelude.CLASSIC_VERTEX_BODY__glClassicPrelude;
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlClassicVertexSourceForKey(key:GlClassicDefineKey):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlClassicVertexSourceForKey(key:GlClassicDefineKey):String {
     var skin:String = cast _Runtime.UNDEFINED;
     skin = _Runtime.select(_Runtime.field(key, 'hasSkin'), function():Dynamic return cast GL_SKIN_VERTEX_DECLARATIONS_GLSL, function():Dynamic return cast '');
     return cast (((cast GlClassicPrelude.buildGlClassicDefineSource__glClassicPrelude(({ final __callArgument44:Dynamic = key; __callArgument44; })) : String) + skin) + GlClassicPrelude.CLASSIC_VERTEX_BODY__glClassicPrelude);

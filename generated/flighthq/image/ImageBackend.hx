@@ -6,11 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.image.ImageResourceFrom.createImageResourceFromImageElement;
 import flighthq.types.BackendExplanation;
 import flighthq.types.Image;
-import flighthq.types.Image.ImageBackend;
+import flighthq.types.ImageBackend;
 
+@:noCompletion
 class ImageBackend {
-  @:noCompletion
-  public static function createWebImageBackend():flighthq.types.Image.ImageBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebImageBackend():flighthq.types.ImageBackend {
     return cast { loadImageFromUrl: function(url:String, crossOrigin:Null<String>, signal:Null<flighthq._internal.dom.AbortSignal>):flighthq._internal._Promise<Image> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
@@ -86,14 +88,16 @@ class ImageBackend {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getImageBackend():flighthq.types.Image.ImageBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getImageBackend():flighthq.types.ImageBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(ImageBackend._custom__imageBackend, function():Dynamic return cast ImageBackend._host__imageBackend), function():Dynamic return cast ImageBackend._sentinel__imageBackend);
     return cast null;
   }
 
-  @:noCompletion
-  public static function installImageHostBackend(backend:flighthq.types.Image.ImageBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installImageHostBackend(backend:flighthq.types.ImageBackend):Void {
     if ((cast !_Runtime.strictEquals(ImageBackend._host__imageBackend, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(ImageBackend._host__imageBackend, backend) : Bool)) { (ImageBackend._hostConflict__imageBackend = cast (true : Dynamic)); }
       return;
@@ -101,32 +105,35 @@ class ImageBackend {
     (ImageBackend._host__imageBackend = cast (backend : Dynamic));
   }
 
-  @:noCompletion
-  public static function observeImageHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeImageHostResult(operation:String, succeeded:Bool):Void {
     (ImageBackend._hostObservation__imageBackend = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
-  @:noCompletion
-  public static function resetImageBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetImageBackendForTest():Void {
     (ImageBackend._custom__imageBackend = cast (null : Dynamic));
     (ImageBackend._host__imageBackend = cast (null : Dynamic));
     (ImageBackend._hostConflict__imageBackend = cast (false : Dynamic));
     (ImageBackend._hostObservation__imageBackend = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setImageBackend(backend:Null<flighthq.types.Image.ImageBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setImageBackend(backend:Null<flighthq.types.ImageBackend>):Void {
     (ImageBackend._custom__imageBackend = cast (backend : Dynamic));
   }
 
-  public static final _sentinel__imageBackend:flighthq.types.Image.ImageBackend = (cast { loadImageFromUrl: function(_url:String, ?_crossOrigin:String, ?_signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
+  public static final _sentinel__imageBackend:flighthq.types.ImageBackend = (cast { loadImageFromUrl: function(_url:String, ?_crossOrigin:String, ?_signal:flighthq._internal.dom.AbortSignal):flighthq._internal._Promise<Image> {
     return cast flighthq._internal._Async.reject(_Runtime.error('No image backend installed. Call enableHostWebImage() or setImageBackend() first.'));
     return cast _Runtime.UNDEFINED;
   } });
 
-  public static var _custom__imageBackend:Null<flighthq.types.Image.ImageBackend> = _Runtime.explicitNull();
+  public static var _custom__imageBackend:Null<flighthq.types.ImageBackend> = _Runtime.explicitNull();
 
-  public static var _host__imageBackend:Null<flighthq.types.Image.ImageBackend> = _Runtime.explicitNull();
+  public static var _host__imageBackend:Null<flighthq.types.ImageBackend> = _Runtime.explicitNull();
 
   public static var _hostConflict__imageBackend:Bool = false;
 

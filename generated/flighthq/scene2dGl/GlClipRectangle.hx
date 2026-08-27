@@ -6,15 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.scene2dGl.GlQuadBatchWriter.flushGlQuadBatchWriter;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlScissorRect;
-import flighthq.types.GlRenderState.GlViewportRect;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.GlRenderStateRuntime;
+import flighthq.types.GlScissorRect;
+import flighthq.types.GlViewportRect;
+import flighthq.types.MatrixLike;
+import flighthq.types.RectangleLike;
 
+@:noCompletion
 class GlClipRectangle {
-  @:noCompletion
-  public static function popGlClipRectangle(state:GlRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function popGlClipRectangle(state:GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var stack:Array<GlScissorRect> = cast _Runtime.UNDEFINED;
     var previous:Null<GlScissorRect> = cast _Runtime.UNDEFINED;
@@ -33,8 +35,9 @@ class GlClipRectangle {
     }
   }
 
-  @:noCompletion
-  public static function pushGlClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function pushGlClipRectangle(state:GlRenderState, rect:RectangleLike, transform:MatrixLike):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var next:GlScissorRect = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;

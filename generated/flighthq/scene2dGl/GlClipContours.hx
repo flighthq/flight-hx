@@ -7,20 +7,22 @@ import flighthq.renderGl.GlProgram.createGlProgram;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.scene2dGl.GlQuadBatchWriter.flushGlQuadBatchWriter;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderStateRuntime;
+import flighthq.types.GlViewportRect;
 import flighthq.types.Matrix;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
 
 typedef ClipProgram__glClipContours = { var program:flighthq._internal.dom.WebGLProgram; var buffer:flighthq._internal.dom.WebGLBuffer; var positionLocation:Float; var worldMatrixLocation:Null<flighthq._internal.dom.WebGLUniformLocation>; var projectionLocation:Null<flighthq._internal.dom.WebGLUniformLocation>; };
 
+@:noCompletion
 class GlClipContours {
   public static final VERTEX_SOURCE__glClipContours:String = '\nattribute vec2 a_position;\nuniform mat3 u_worldMatrix;   // node world transform2D (a,b,c,d,tx,ty) lifted to mat3\nuniform mat3 u_projection;    // device pixels -> clip space (same one the sprite/shape shaders use)\nvoid main() {\n  vec3 clip = u_projection * (u_worldMatrix * vec3(a_position, 1.0));\n  gl_Position = vec4(clip.xy, 0.0, 1.0);\n}\n';
 
   public static final FRAGMENT_SOURCE__glClipContours:String = '\nprecision mediump float;\nvoid main() { gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0); }\n';
 
-  @:noCompletion
-  public static function popGlClipContours(state:GlRenderState):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function popGlClipContours(state:GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var nextDepth:Float = cast _Runtime.UNDEFINED;
@@ -35,8 +37,9 @@ class GlClipContours {
     }
   }
 
-  @:noCompletion
-  public static function pushGlClipContours(state:GlRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function pushGlClipContours(state:GlRenderState, contours:Array<Array<Float>>, winding:PathWinding, worldTransform:Matrix):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var depth:Float = cast _Runtime.UNDEFINED;

@@ -6,16 +6,17 @@ import flighthq._internal._Runtime;
 import flighthq.path.FlattenPath.flattenPath;
 import flighthq.path.GetPathBounds.getPathBounds;
 import flighthq.path.Path.createPath;
+import flighthq.types.GlyphMetrics;
+import flighthq.types.GlyphOutlineMetrics;
 import flighthq.types.GlyphOutlineSource;
-import flighthq.types.GlyphOutlineSource.GlyphOutlineMetrics;
-import flighthq.types.GlyphSource.GlyphMetrics;
-import flighthq.types.GlyphSource.GlyphRasterizeOptions;
-import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
-import flighthq.types.GlyphSource.GlyphRasterizerBackend;
+import flighthq.types.GlyphRasterizeOptions;
+import flighthq.types.GlyphRasterizedBitmap;
+import flighthq.types.GlyphRasterizerBackend;
 import flighthq.types.Path;
-import flighthq.types.Rectangle.RectangleLike;
-import flighthq.types.ShapeCommand.PathWinding;
+import flighthq.types.PathWinding;
+import flighthq.types.RectangleLike;
 
+@:noCompletion
 class GlyphOutlineSource {
   public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:flighthq.types.GlyphOutlineSource):GlyphRasterizerBackend {
     return cast { measureMetrics: function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {

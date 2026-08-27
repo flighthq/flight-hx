@@ -21,19 +21,20 @@ import flighthq.node.NodeTransform2d.ensureNodeWorldMatrix;
 import flighthq.node.NodeTransform2d.getNodeLocalMatrix;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
+import flighthq.types.BoundsNode;
+import flighthq.types.BoundsNodeAny;
 import flighthq.types.Entity;
-import flighthq.types.HasBoundsRectangle.BoundsNode;
-import flighthq.types.HasBoundsRectangle.BoundsNodeAny;
-import flighthq.types.HasBoundsRectangle.HasBoundsRectangleRuntime;
-import flighthq.types.HasBoundsRectangle.Spatial2DNode;
-import flighthq.types.HasTransform2D.HasTransform2DRuntime;
+import flighthq.types.HasBoundsRectangleRuntime;
+import flighthq.types.HasTransform2DRuntime;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeRuntime;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
+import flighthq.types.Spatial2DNode;
 
+@:noCompletion
 class BoundsRectangle {
   public static function computeNodeBoundsRectangle<Traits:flighthq._internal._Object>(out:RectangleLike, source:Spatial2DNode<Traits>, targetCoordinateSpace:Null<Spatial2DNode<Traits>>):Void {
     var bounds:flighthq._internal._Any = cast _Runtime.UNDEFINED;
@@ -61,8 +62,9 @@ class BoundsRectangle {
     BoundsRectangle.mergeRootLocalBounds__boundsRectangle(({ final __callArgument18:Dynamic = out; __callArgument18; }), (cast root : Dynamic), ({ final __callArgument19:Dynamic = null; __callArgument19; }));
   }
 
-  @:noCompletion
-  public static function ensureNodeLocalBoundsRectangle<Traits:flighthq._internal._Object>(target:BoundsNode<Traits>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureNodeLocalBoundsRectangle<Traits:flighthq._internal._Object>(target:BoundsNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasBoundsRectangleRuntime, } = cast _Runtime.UNDEFINED;
     runtime = (cast getEntityRuntime(({ final __callArgument22:Dynamic = target; __callArgument22; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasBoundsRectangleRuntime>);
     if ((cast !(cast (cast BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle((cast target : Dynamic), (cast runtime : Dynamic)) : Bool) : Bool) : Bool)) {
@@ -70,8 +72,9 @@ class BoundsRectangle {
     }
   }
 
-  @:noCompletion
-  public static function ensureNodeParentBoundsRectangle<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureNodeParentBoundsRectangle<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasBoundsRectangleRuntime, } = cast _Runtime.UNDEFINED;
     runtime = (cast getEntityRuntime(({ final __callArgument24:Dynamic = target; __callArgument24; })) : flighthq._internal._Intersection2<NodeRuntime<Traits>, HasBoundsRectangleRuntime>);
     if ((cast ((cast ((cast !(cast (cast BoundsRectangle.isNodeLocalBoundsRectangleValid__boundsRectangle((cast target : Dynamic), (cast runtime : Dynamic)) : Bool) : Bool) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var boundsUsingLocalBoundsId:Float; }).boundsUsingLocalBoundsId, (cast runtime : { var localBoundsId:Float; }).localBoundsId) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : { var boundsUsingLocalTransformId:Float; }).boundsUsingLocalTransformId, (cast runtime : { var localTransformId:Float; }).localTransformId) : Bool)) : Bool)) {
@@ -79,8 +82,9 @@ class BoundsRectangle {
     }
   }
 
-  @:noCompletion
-  public static function ensureNodeWorldBoundsRectangle<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureNodeWorldBoundsRectangle<Traits:flighthq._internal._Object>(target:Spatial2DNode<Traits>):Void {
     var runtime:{ >NodeRuntime<Traits>, >HasBoundsRectangleRuntime, >HasTransform2DRuntime, } = cast _Runtime.UNDEFINED;
     var localBoundsInvalid:Bool = cast _Runtime.UNDEFINED;
     var hasChildren:Bool = cast _Runtime.UNDEFINED;

@@ -8,12 +8,13 @@ import flighthq.physics3d.Ownership.assertPhysics3DWorldNotStepping;
 import flighthq.physics3d.Ownership.physics3DJointOwners;
 import flighthq.physics3d.World.findPhysics3DBody;
 import flighthq.physics3d.World.wakePhysics3DBody;
-import flighthq.types.Physics3D.Physics3DJoint;
-import flighthq.types.Physics3D.Physics3DJointKind;
-import flighthq.types.Physics3D.Physics3DJointSolver;
-import flighthq.types.Physics3D.Physics3DWorld;
-import flighthq.types.Physics3D.RigidBody3D;
+import flighthq.types.Physics3DJoint;
+import flighthq.types.Physics3DJointKind;
+import flighthq.types.Physics3DJointSolver;
+import flighthq.types.Physics3DWorld;
+import flighthq.types.RigidBody3D;
 
+@:noCompletion
 class JointRegistry {
   public static function addPhysics3DJoint<T:Physics3DJoint>(world:Physics3DWorld, joint:T):T {
     var active:Bool = cast _Runtime.UNDEFINED;
@@ -52,8 +53,9 @@ class JointRegistry {
     return cast null;
   }
 
-  @:noCompletion
-  public static function isPhysics3DPairOrdered(a:Float, b:Float):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function isPhysics3DPairOrdered(a:Float, b:Float):Bool {
     return cast ((cast a : Float) <= (cast b : Float));
     return cast null;
   }

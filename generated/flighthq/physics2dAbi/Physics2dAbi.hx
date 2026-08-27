@@ -8,26 +8,26 @@ import flighthq.physics2dAbi.Physics2DAbiBuffer as Facade_Physics2dAbi_flighthq_
 import flighthq.physics2dAbi.Physics2DAbiCommand as Facade_Physics2dAbi_flighthq_physics2dAbi_Physics2DAbiCommand;
 import flighthq.physics2dAbi.Physics2DAbiLayout as Facade_Physics2dAbi_flighthq_physics2dAbi_Physics2DAbiLayout;
 import flighthq.physics2dAbi.Physics2DAbiQuery as Facade_Physics2dAbi_flighthq_physics2dAbi_Physics2DAbiQuery;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.Physics2DJoint;
-import flighthq.types.Physics2D.Physics2DQueryFilter;
-import flighthq.types.Physics2D.Physics2DSolverConfig;
-import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.CollisionBuiltInShape2D;
 import flighthq.types.Physics2DAbi;
-import flighthq.types.Physics2DAbi.Physics2DAbiBodyBuffer;
-import flighthq.types.Physics2DAbi.Physics2DAbiCommandBuffer;
-import flighthq.types.Physics2DAbi.Physics2DAbiContactBuffer;
-import flighthq.types.Physics2DAbi.Physics2DAbiContactHooks;
-import flighthq.types.Physics2DAbi.Physics2DAbiContactSelection;
-import flighthq.types.Physics2DAbi.Physics2DAbiExecutionResult;
-import flighthq.types.Physics2DAbi.Physics2DAbiJointBuffer;
-import flighthq.types.Physics2DAbi.Physics2DAbiObjectId;
-import flighthq.types.Physics2DAbi.Physics2DAbiQueryBuffer;
-import flighthq.types.Physics2DAbi.Physics2DAbiStepStatus;
-import flighthq.types.Physics2DAbi.Physics2DAbiWorldHandle;
-import flighthq.types.Physics2DAbi.Physics2DAbiWorldStatus;
-import flighthq.types.Spatial.SpatialAabb2D;
+import flighthq.types.Physics2DAbiBodyBuffer;
+import flighthq.types.Physics2DAbiCommandBuffer;
+import flighthq.types.Physics2DAbiContactBuffer;
+import flighthq.types.Physics2DAbiContactHooks;
+import flighthq.types.Physics2DAbiContactSelection;
+import flighthq.types.Physics2DAbiExecutionResult;
+import flighthq.types.Physics2DAbiJointBuffer;
+import flighthq.types.Physics2DAbiObjectId;
+import flighthq.types.Physics2DAbiQueryBuffer;
+import flighthq.types.Physics2DAbiStepStatus;
+import flighthq.types.Physics2DAbiWorldHandle;
+import flighthq.types.Physics2DAbiWorldStatus;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.Physics2DJoint;
+import flighthq.types.Physics2DQueryFilter;
+import flighthq.types.Physics2DSolverConfig;
+import flighthq.types.RigidBody2D;
+import flighthq.types.SpatialAabb2D;
 
 class Physics2dAbi {
   public static function clearPhysics2DAbiCommandBuffer(out:Physics2DAbiCommandBuffer):Void {

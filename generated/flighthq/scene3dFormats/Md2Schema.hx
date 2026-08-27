@@ -4,6 +4,7 @@ package flighthq.scene3dFormats;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class Md2Schema {
   public static final MD2_MAGIC:Float = 844121161.0;
 

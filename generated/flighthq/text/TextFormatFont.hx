@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.TextFormat;
 
+@:noCompletion
 class TextFormatFont {
   public static function computeTextFormatFontString(format:TextFormat):String {
     var style:String = cast _Runtime.UNDEFINED;

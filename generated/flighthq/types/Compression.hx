@@ -6,8 +6,4 @@ import flighthq._internal._Runtime;
 import flighthq.types._internal._CompressionValues.CompressionFramingValue;
 import flighthq.types._internal._CompressionValues.CompressionValue;
 
-typedef Decompressor = flighthq._internal._UInt8Array->Float->CompressionFraming->Null<flighthq._internal._UInt8Array>;
-
-typedef CompressionFraming = flighthq._internal._IndexedAccess<Dynamic, String>;
-
 typedef Compression = flighthq._internal._IndexedAccess<Dynamic, String>;

@@ -3,8 +3,9 @@ package flighthq.collision;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionManifold3D;
+import flighthq.types.CollisionManifold3D;
 
+@:noCompletion
 class Manifold3D {
   public static function clearCollisionManifold3D(out:CollisionManifold3D):Void {
     ((cast out : CollisionManifold3D).overlapping = false);

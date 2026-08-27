@@ -7,6 +7,7 @@ import flighthq.entity.Entity.createEntity;
 import flighthq.types.AnimationSampleAccumulator;
 import flighthq.types.Entity;
 
+@:noCompletion
 class AnimationBlend {
   public static function accumulateAnimationSample(accumulator:AnimationSampleAccumulator, sample:flighthq._internal._ArrayLike<Float>, weight:Float):Void {
     var components:Float = cast _Runtime.UNDEFINED;

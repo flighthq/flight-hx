@@ -7,28 +7,29 @@ import flighthq.node.Hierarchy.addNodeChild;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.scene2d.Sprite.createSprite;
 import flighthq.textureatlas.TextureAtlasRegion.getTextureAtlasRegionTexture;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Node.NodeOf;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DTraits;
+import flighthq.types.NodeOf;
 import flighthq.types.Sampler;
 import flighthq.types.Sprite;
-import flighthq.types.Sprite.SpriteData;
+import flighthq.types.SpriteData;
 import flighthq.types.Spritesheet;
 import flighthq.types.SpritesheetAnimation;
 import flighthq.types.SpritesheetAnimationDirection;
 import flighthq.types.SpritesheetFrame;
 import flighthq.types.SpritesheetTimelineSourceExplanation;
-import flighthq.types.SpritesheetTimelineSourceExplanation.SpritesheetTimelineSourceGuard;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.SpritesheetTimelineSourceGuard;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.TimelineSource;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 
+@:noCompletion
 class SpritesheetTimelineSource {
   public static function createSpritesheetTimelineSource(spritesheet:Spritesheet, animation:SpritesheetAnimation):TimelineSource {
     var bitmaps:flighthq._internal._WeakMap<Node2D, Sprite> = cast _Runtime.UNDEFINED;
@@ -65,8 +66,9 @@ class SpritesheetTimelineSource {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setSpritesheetTimelineSourceGuard(guard:Null<SpritesheetTimelineSourceGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setSpritesheetTimelineSourceGuard(guard:Null<SpritesheetTimelineSourceGuard>):Void {
     (SpritesheetTimelineSource._spritesheetTimelineSourceGuard__spritesheetTimelineSource = cast (guard : Dynamic));
   }
 

@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.math.Constants.EPSILON;
 
+@:noCompletion
 class Comparison {
   public static function approxEqual(a:Float, b:Float, epsilon:Float = 0.000001):Bool {
     return cast ((cast HxMath.abs((a - b)) : Float) <= (cast epsilon : Float));

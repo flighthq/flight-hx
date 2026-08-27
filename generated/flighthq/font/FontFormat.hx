@@ -4,6 +4,7 @@ package flighthq.font;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
+@:noCompletion
 class FontFormat {
   public static function detectFontFormat(bytes:flighthq._internal._Union2<haxe.io.Bytes, flighthq._internal._UInt8Array>):Null<String> {
     var b:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;

@@ -11,15 +11,15 @@ import flighthq.tilemapFormats.TiledProject as Facade_TilemapFormats_flighthq_ti
 import flighthq.tilemapFormats.TiledTmxFormat as Facade_TilemapFormats_flighthq_tilemapFormats_TiledTmxFormat;
 import flighthq.tilemapFormats.TiledXmlParse as Facade_TilemapFormats_flighthq_tilemapFormats_TiledXmlParse;
 import flighthq.types.ImportDiagnostic;
+import flighthq.types.TiledCompression;
 import flighthq.types.TiledGid;
+import flighthq.types.TiledInflate;
 import flighthq.types.TiledMap;
 import flighthq.types.TiledParseOptions;
-import flighthq.types.TiledParseOptions.TiledCompression;
-import flighthq.types.TiledParseOptions.TiledInflate;
-import flighthq.types.TiledParseOptions.TiledTilesetResolver;
 import flighthq.types.TiledTileset;
-import flighthq.types.TiledTileset.TiledTilesetRef;
-import flighthq.types.Tilemap.TilemapData;
+import flighthq.types.TiledTilesetRef;
+import flighthq.types.TiledTilesetResolver;
+import flighthq.types.TilemapData;
 
 class TilemapFormats {
   public static function buildTilemapLayersFromTiled(map:TiledMap, layerIndex:Float, resolveTileset:TiledTilesetResolver, ?diagnostics:Array<ImportDiagnostic>):Null<Array<TilemapData>> {

@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.device.Device.createWebDeviceBackend;
 import flighthq.device.Device.installDeviceHostBackend;
-import flighthq.types.Device.DeviceBackend;
+import flighthq.types.DeviceBackend;
 
+@:noCompletion
 class WebDevice {
   public static function enableHostWebDevice():Void {
     if ((cast WebDevice._enabled__webDevice : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebDevice {
     installDeviceHostBackend((cast createWebDeviceBackend() : DeviceBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebDeviceForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebDeviceForTest():Void {
     (WebDevice._enabled__webDevice = cast (false : Dynamic));
   }
 

@@ -12,15 +12,17 @@ import flighthq.types.RenderEffect;
 import flighthq.types.WgpuDualSourceEffectPipeline;
 import flighthq.types.WgpuEffectBlendMode;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 import flighthq.types._internal._AdvancedBlendModeValues.AdvancedBlendModeValue as AdvancedBlendModeValues;
 
+@:noCompletion
 class WgpuBlendEffect {
-  @:noCompletion
-  public static function applyBlendEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:BlendEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyBlendEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:BlendEffect):Void {
     var backdrop:Null<WgpuRenderTarget> = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     var modeIndex:Float = cast _Runtime.UNDEFINED;
@@ -40,15 +42,17 @@ class WgpuBlendEffect {
     applyBlendEffectToWgpu(context.state, context.source, context.dest, (cast effect : BlendEffect));
   });
 
-  @:noCompletion
-  public static function getWgpuBlendEffectBackdrop(state:WgpuRenderState, backdropKey:Null<String>):Null<WgpuRenderTarget> {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuBlendEffectBackdrop(state:WgpuRenderState, backdropKey:Null<String>):Null<WgpuRenderTarget> {
     if ((cast _Runtime.strictEquals(backdropKey, null) : Bool)) { return cast null; }
     return cast _Runtime.coalesce(({ final __collection14:Dynamic = ((cast WgpuBlendEffect.backdrops__wgpuBlendEffect : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuRenderTarget>>).get(state)); __collection14 == null ? _Runtime.UNDEFINED : ((cast __collection14 : flighthq._internal._Map<String, WgpuRenderTarget>).get(backdropKey)); }), function():Dynamic return cast null);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuBlendEffectModeIndex(mode:AdvancedBlendMode):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuBlendEffectModeIndex(mode:AdvancedBlendMode):Float {
     return cast _Runtime.coalesce(_Runtime.getIndex(WgpuBlendEffect.BLEND_MODE_INDEX__wgpuBlendEffect, mode), function():Dynamic return cast -1.0);
     return cast null;
   }
@@ -67,8 +71,9 @@ class WgpuBlendEffect {
     ((cast registry : flighthq._internal._Map<String, WgpuRenderTarget>).set(backdropKey, (cast target)));
   }
 
-  @:noCompletion
-  public static function unregisterWgpuBlendEffectBackdrop(state:WgpuRenderState, backdropKey:String):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function unregisterWgpuBlendEffectBackdrop(state:WgpuRenderState, backdropKey:String):Bool {
     return cast _Runtime.coalesce(({ final __collection19:Dynamic = ((cast WgpuBlendEffect.backdrops__wgpuBlendEffect : flighthq._internal._WeakMap<WgpuRenderState, flighthq._internal._Map<String, WgpuRenderTarget>>).get(state)); __collection19 == null ? _Runtime.UNDEFINED : ((cast __collection19 : flighthq._internal._Map<String, WgpuRenderTarget>).delete_(backdropKey)); }), function():Dynamic return cast false);
     return cast null;
   }
@@ -90,6 +95,7 @@ class WgpuBlendEffect {
 
   public static final pipelines__wgpuBlendEffect:flighthq._internal._WeakMap<WgpuRenderState, WgpuEffectPipeline> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  @:noCompletion
-  public static final WGPU_BLEND_FRAGMENT_WGSL:String = '\nstruct Uniforms {\n  mode : i32,\n  opacity : f32,\n  hasBackdrop : i32,\n  _pad0 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var layerTexture : texture_2d<f32>;\n@group(1) @binding(1) var layerSampler : sampler;\n@group(2) @binding(0) var backdropTexture : texture_2d<f32>;\n@group(2) @binding(1) var backdropSampler : sampler;\n\nfn lum(c : vec3f) -> f32 {\n  return dot(c, vec3f(0.3, 0.59, 0.11));\n}\n\nfn sat(c : vec3f) -> f32 {\n  return max(max(c.r, c.g), c.b) - min(min(c.r, c.g), c.b);\n}\n\nfn clipColor(inputColor : vec3f) -> vec3f {\n  var c = inputColor;\n  let l = lum(c);\n  let mn = min(min(c.r, c.g), c.b);\n  let mx = max(max(c.r, c.g), c.b);\n  if (mn < 0.0) {\n    c = vec3f(l) + (c - vec3f(l)) * l / (l - mn);\n  }\n  if (mx > 1.0) {\n    c = vec3f(l) + (c - vec3f(l)) * (1.0 - l) / (mx - l);\n  }\n  return c;\n}\n\nfn setLum(c : vec3f, l : f32) -> vec3f {\n  return clipColor(c + vec3f(l - lum(c)));\n}\n\nfn setSat(c : vec3f, s : f32) -> vec3f {\n  let mn = min(min(c.r, c.g), c.b);\n  let mx = max(max(c.r, c.g), c.b);\n  let md = c.r + c.g + c.b - mn - mx;\n  let rmid = select(0.0, (md - mn) * s / (mx - mn), mx > mn);\n  let rmax = select(0.0, s, mx > mn);\n  var out = vec3f(0.0);\n  out.r = select(select(rmid, 0.0, c.r == mn), rmax, c.r == mx);\n  out.g = select(select(rmid, 0.0, c.g == mn), rmax, c.g == mx);\n  out.b = select(select(rmid, 0.0, c.b == mn), rmax, c.b == mx);\n  return out;\n}\n\nfn sepChannel(mode : i32, cb : f32, cs : f32) -> f32 {\n  if (mode == 0) {\n    return select(1.0 - 2.0 * (1.0 - cb) * (1.0 - cs), 2.0 * cb * cs, cb <= 0.5);\n  }\n  if (mode == 1) {\n    return select(1.0 - 2.0 * (1.0 - cb) * (1.0 - cs), 2.0 * cb * cs, cs <= 0.5);\n  }\n  if (mode == 2) {\n    let d = select(sqrt(cb), ((16.0 * cb - 12.0) * cb + 4.0) * cb, cb <= 0.25);\n    return select(cb + (2.0 * cs - 1.0) * (d - cb), cb - (1.0 - 2.0 * cs) * cb * (1.0 - cb), cs <= 0.5);\n  }\n  if (mode == 3) { return abs(cb - cs); }\n  if (mode == 4) { return cb + cs - 2.0 * cb * cs; }\n  if (mode == 5) {\n    if (cb <= 0.0) { return 0.0; }\n    return select(min(1.0, cb / (1.0 - cs)), 1.0, cs >= 1.0);\n  }\n  if (mode == 6) {\n    if (cb >= 1.0) { return 1.0; }\n    return select(1.0 - min(1.0, (1.0 - cb) / cs), 0.0, cs <= 0.0);\n  }\n  if (mode == 11) { return min(cb, cs); }\n  if (mode == 12) { return max(cb, cs); }\n  return cs;\n}\n\nfn blendRgb(mode : i32, cb : vec3f, cs : vec3f) -> vec3f {\n  if (mode == 7) { return setLum(setSat(cs, sat(cb)), lum(cb)); }\n  if (mode == 8) { return setLum(setSat(cb, sat(cs)), lum(cb)); }\n  if (mode == 9) { return setLum(cs, lum(cb)); }\n  if (mode == 10) { return setLum(cb, lum(cs)); }\n  return vec3f(\n    sepChannel(mode, cb.r, cs.r),\n    sepChannel(mode, cb.g, cs.g),\n    sepChannel(mode, cb.b, cs.b),\n  );\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let layer = textureSampleLevel(layerTexture, layerSampler, uv, 0.0);\n  if (uni.hasBackdrop == 0) {\n    return layer;\n  }\n  let back = textureSampleLevel(backdropTexture, backdropSampler, uv, 0.0);\n  let cs = select(vec3f(0.0), layer.rgb / layer.a, layer.a > 0.0);\n  let cb = select(vec3f(0.0), back.rgb / back.a, back.a > 0.0);\n  let sourceAlpha = layer.a * uni.opacity;\n  let backdropAlpha = back.a;\n  let blended = blendRgb(uni.mode, cb, cs);\n  let mixed = (1.0 - backdropAlpha) * cs + backdropAlpha * blended;\n  let outAlpha = sourceAlpha + backdropAlpha * (1.0 - sourceAlpha);\n  let outRgb = mixed * sourceAlpha + cb * backdropAlpha * (1.0 - sourceAlpha);\n  return vec4f(outRgb, outAlpha);\n}\n';
+  @:allow(flighthq)
+  @:keep
+  private static final WGPU_BLEND_FRAGMENT_WGSL:String = '\nstruct Uniforms {\n  mode : i32,\n  opacity : f32,\n  hasBackdrop : i32,\n  _pad0 : f32,\n}\n@group(0) @binding(0) var<uniform> uni : Uniforms;\n@group(1) @binding(0) var layerTexture : texture_2d<f32>;\n@group(1) @binding(1) var layerSampler : sampler;\n@group(2) @binding(0) var backdropTexture : texture_2d<f32>;\n@group(2) @binding(1) var backdropSampler : sampler;\n\nfn lum(c : vec3f) -> f32 {\n  return dot(c, vec3f(0.3, 0.59, 0.11));\n}\n\nfn sat(c : vec3f) -> f32 {\n  return max(max(c.r, c.g), c.b) - min(min(c.r, c.g), c.b);\n}\n\nfn clipColor(inputColor : vec3f) -> vec3f {\n  var c = inputColor;\n  let l = lum(c);\n  let mn = min(min(c.r, c.g), c.b);\n  let mx = max(max(c.r, c.g), c.b);\n  if (mn < 0.0) {\n    c = vec3f(l) + (c - vec3f(l)) * l / (l - mn);\n  }\n  if (mx > 1.0) {\n    c = vec3f(l) + (c - vec3f(l)) * (1.0 - l) / (mx - l);\n  }\n  return c;\n}\n\nfn setLum(c : vec3f, l : f32) -> vec3f {\n  return clipColor(c + vec3f(l - lum(c)));\n}\n\nfn setSat(c : vec3f, s : f32) -> vec3f {\n  let mn = min(min(c.r, c.g), c.b);\n  let mx = max(max(c.r, c.g), c.b);\n  let md = c.r + c.g + c.b - mn - mx;\n  let rmid = select(0.0, (md - mn) * s / (mx - mn), mx > mn);\n  let rmax = select(0.0, s, mx > mn);\n  var out = vec3f(0.0);\n  out.r = select(select(rmid, 0.0, c.r == mn), rmax, c.r == mx);\n  out.g = select(select(rmid, 0.0, c.g == mn), rmax, c.g == mx);\n  out.b = select(select(rmid, 0.0, c.b == mn), rmax, c.b == mx);\n  return out;\n}\n\nfn sepChannel(mode : i32, cb : f32, cs : f32) -> f32 {\n  if (mode == 0) {\n    return select(1.0 - 2.0 * (1.0 - cb) * (1.0 - cs), 2.0 * cb * cs, cb <= 0.5);\n  }\n  if (mode == 1) {\n    return select(1.0 - 2.0 * (1.0 - cb) * (1.0 - cs), 2.0 * cb * cs, cs <= 0.5);\n  }\n  if (mode == 2) {\n    let d = select(sqrt(cb), ((16.0 * cb - 12.0) * cb + 4.0) * cb, cb <= 0.25);\n    return select(cb + (2.0 * cs - 1.0) * (d - cb), cb - (1.0 - 2.0 * cs) * cb * (1.0 - cb), cs <= 0.5);\n  }\n  if (mode == 3) { return abs(cb - cs); }\n  if (mode == 4) { return cb + cs - 2.0 * cb * cs; }\n  if (mode == 5) {\n    if (cb <= 0.0) { return 0.0; }\n    return select(min(1.0, cb / (1.0 - cs)), 1.0, cs >= 1.0);\n  }\n  if (mode == 6) {\n    if (cb >= 1.0) { return 1.0; }\n    return select(1.0 - min(1.0, (1.0 - cb) / cs), 0.0, cs <= 0.0);\n  }\n  if (mode == 11) { return min(cb, cs); }\n  if (mode == 12) { return max(cb, cs); }\n  return cs;\n}\n\nfn blendRgb(mode : i32, cb : vec3f, cs : vec3f) -> vec3f {\n  if (mode == 7) { return setLum(setSat(cs, sat(cb)), lum(cb)); }\n  if (mode == 8) { return setLum(setSat(cb, sat(cs)), lum(cb)); }\n  if (mode == 9) { return setLum(cs, lum(cb)); }\n  if (mode == 10) { return setLum(cb, lum(cs)); }\n  return vec3f(\n    sepChannel(mode, cb.r, cs.r),\n    sepChannel(mode, cb.g, cs.g),\n    sepChannel(mode, cb.b, cs.b),\n  );\n}\n\n@fragment\nfn fs_main(@location(0) uv : vec2f) -> @location(0) vec4f {\n  let layer = textureSampleLevel(layerTexture, layerSampler, uv, 0.0);\n  if (uni.hasBackdrop == 0) {\n    return layer;\n  }\n  let back = textureSampleLevel(backdropTexture, backdropSampler, uv, 0.0);\n  let cs = select(vec3f(0.0), layer.rgb / layer.a, layer.a > 0.0);\n  let cb = select(vec3f(0.0), back.rgb / back.a, back.a > 0.0);\n  let sourceAlpha = layer.a * uni.opacity;\n  let backdropAlpha = back.a;\n  let blended = blendRgb(uni.mode, cb, cs);\n  let mixed = (1.0 - backdropAlpha) * cs + backdropAlpha * blended;\n  let outAlpha = sourceAlpha + backdropAlpha * (1.0 - sourceAlpha);\n  let outRgb = mixed * sourceAlpha + cb * backdropAlpha * (1.0 - sourceAlpha);\n  return vec4f(outRgb, outAlpha);\n}\n';
 }

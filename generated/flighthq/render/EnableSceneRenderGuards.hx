@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.log.Log.logOnce;
 import flighthq.render.SceneRender.setSkinnedMeshBoundsGuard;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.Mesh;
 
+@:noCompletion
 class EnableSceneRenderGuards {
   public static function disableSceneRenderGuards():Void {
     setSkinnedMeshBoundsGuard(({ final __callArgument0:Dynamic = null; __callArgument0; }));

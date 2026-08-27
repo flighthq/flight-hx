@@ -8,12 +8,12 @@ import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
 import flighthq.types.BackendExplanation;
 import flighthq.types.Signal;
-import flighthq.types.Storage.StorageBackend;
-import flighthq.types.Storage.StorageChange;
-import flighthq.types.Storage.StorageMigration;
-import flighthq.types.Storage.StorageNamespace;
-import flighthq.types.Storage.StorageQuota;
-import flighthq.types.Storage.StorageSignals;
+import flighthq.types.StorageBackend;
+import flighthq.types.StorageChange;
+import flighthq.types.StorageMigration;
+import flighthq.types.StorageNamespace;
+import flighthq.types.StorageQuota;
+import flighthq.types.StorageSignals;
 
 class Storage {
   public static var _crossTabUnsubscribe__storage:Null<Void->Void> = _Runtime.explicitNull();
@@ -96,8 +96,9 @@ class Storage {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebStorageBackend():StorageBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebStorageBackend():StorageBackend {
     return cast { getItem: function(key:String):Null<String> {
       var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
       ls = (cast Storage._getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
@@ -279,8 +280,9 @@ class Storage {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getStorageBackend():StorageBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getStorageBackend():StorageBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Storage._custom__storage, function():Dynamic return cast Storage._host__storage), function():Dynamic return cast Storage._sentinel__storage);
     return cast null;
   }
@@ -470,8 +472,9 @@ class Storage {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installStorageHostBackend(backend:StorageBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installStorageHostBackend(backend:StorageBackend):Void {
     if ((cast !_Runtime.strictEquals(Storage._host__storage, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Storage._host__storage, backend) : Bool)) { (Storage._hostConflict__storage = cast (true : Dynamic)); }
       return;
@@ -507,8 +510,9 @@ class Storage {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeStorageHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeStorageHostResult(operation:String, succeeded:Bool):Void {
     (Storage._hostObservation__storage = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
@@ -541,8 +545,9 @@ class Storage {
     return cast null;
   }
 
-  @:noCompletion
-  public static function resetStorageBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetStorageBackendForTest():Void {
     (Storage._custom__storage = cast (null : Dynamic));
     (Storage._host__storage = cast (null : Dynamic));
     (Storage._hostConflict__storage = cast (false : Dynamic));
@@ -554,8 +559,9 @@ class Storage {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setStorageBackend(backend:Null<StorageBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setStorageBackend(backend:Null<StorageBackend>):Void {
     if ((cast ((cast Storage._signalsActive__storage : Bool) && (cast !_Runtime.strictEquals(Storage._crossTabUnsubscribe__storage, null) : Bool)) : Bool)) {
       (cast Storage._crossTabUnsubscribe__storage : Void->Void)();
       (Storage._crossTabUnsubscribe__storage = cast (null : Dynamic));

@@ -23,29 +23,30 @@ import flighthq.node.NodeTransform3d.getNodeWorldMatrix4;
 import flighthq.scene3d.Mesh.isMesh;
 import flighthq.scene3d.SceneNodeBounds.getNode3DWorldBounds;
 import flighthq.types.Aabb;
-import flighthq.types.Aabb.AabbLike;
+import flighthq.types.AabbLike;
 import flighthq.types.Camera3D;
-import flighthq.types.Camera3D.PerspectiveProjection;
-import flighthq.types.Camera3D.Projection;
 import flighthq.types.Entity;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
-import flighthq.types.Mesh.MeshRuntime;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MeshRuntime;
 import flighthq.types.MeshTriangleVertexIndices;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DTraits;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
+import flighthq.types.PerspectiveProjection;
+import flighthq.types.Projection;
 import flighthq.types.Ray3D;
-import flighthq.types.Ray3D.Ray3DLike;
+import flighthq.types.Ray3DLike;
 import flighthq.types.Scene3DHit;
 import flighthq.types.Scene3DPickOptions;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class PickScene3D {
   public static function createScene3DHit():Scene3DHit {
     return cast (cast createEntity(({ final __callArgument0:Dynamic = { distance: 0.0, node: null, normalX: 0.0, normalY: 0.0, normalZ: 0.0, pointX: 0.0, pointY: 0.0, pointZ: 0.0, triangleIndex: -1.0, u: 0.0, v: 0.0, w: 0.0 }; __callArgument0; })) : { >Entity, var distance:Float; var node:flighthq._internal._Any; var normalX:Float; var normalY:Float; var normalZ:Float; var pointX:Float; var pointY:Float; var pointZ:Float; var triangleIndex:Float; var u:Float; var v:Float; var w:Float; });

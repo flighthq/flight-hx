@@ -9,6 +9,7 @@ import flighthq.types.BitmapDisplacementMapOptions;
 import flighthq.types.BitmapEdgeMode;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapDisplacement {
   public static function displaceBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, options:BitmapDisplacementMapOptions):Void {
     var w:Float = cast _Runtime.UNDEFINED;

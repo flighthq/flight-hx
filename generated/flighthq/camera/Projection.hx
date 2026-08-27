@@ -5,13 +5,14 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Matrix4.setOrthographicMatrix4;
 import flighthq.geometry.Matrix4.setPerspectiveMatrix4;
-import flighthq.types.Camera3D.OrthographicProjection;
-import flighthq.types.Camera3D.PerspectiveProjection;
-import flighthq.types.Camera3D.Projection;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
+import flighthq.types.OrthographicProjection;
 import flighthq.types.OrthographicProjectionOptions;
+import flighthq.types.PerspectiveProjection;
 import flighthq.types.PerspectiveProjectionOptions;
+import flighthq.types.Projection;
 
+@:noCompletion
 class Projection {
   public static function createOrthographicProjection(opts:OrthographicProjectionOptions):OrthographicProjection {
     return cast { halfHeight: _Runtime.field(opts, 'halfHeight'), halfWidth: _Runtime.field(opts, 'halfWidth'), kind: 'orthographic' };
@@ -28,17 +29,17 @@ class Projection {
     return cast null;
   }
 
-  public static function isOrthographicProjection(projection:flighthq.types.Camera3D.Projection):Bool {
+  public static function isOrthographicProjection(projection:flighthq.types.Projection):Bool {
     return cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'orthographic');
     return cast null;
   }
 
-  public static function isPerspectiveProjection(projection:flighthq.types.Camera3D.Projection):Bool {
+  public static function isPerspectiveProjection(projection:flighthq.types.Projection):Bool {
     return cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'perspective');
     return cast null;
   }
 
-  public static function setProjectionMatrix4(out:Matrix4Like, projection:flighthq.types.Camera3D.Projection, aspect:Float, near:Float, far:Float):Void {
+  public static function setProjectionMatrix4(out:Matrix4Like, projection:flighthq.types.Projection, aspect:Float, near:Float, far:Float):Void {
     var halfWidth:Float = cast _Runtime.UNDEFINED;
     var halfHeight:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'perspective') : Bool)) {

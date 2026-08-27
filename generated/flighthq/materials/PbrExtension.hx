@@ -3,8 +3,9 @@ package flighthq.materials;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.PbrExtension.PbrUvSet;
+import flighthq.types.PbrUvSet;
 
+@:noCompletion
 class PbrExtension {
   public static function isValidPbrUvSet(value:Float):Bool {
     return cast ((cast _Runtime.strictEquals(value, 0.0) : Bool) || (cast _Runtime.strictEquals(value, 1.0) : Bool));

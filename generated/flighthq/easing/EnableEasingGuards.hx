@@ -5,17 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.easing.EaseSteps.setEasingStepsGuard;
 import flighthq.log.Log.logOnce;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.LogLevel;
 import flighthq.types.StepPosition;
 
+@:noCompletion
 class EnableEasingGuards {
-  @:noCompletion
-  public static function disableEasingGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function disableEasingGuards():Void {
     setEasingStepsGuard((cast null : Dynamic));
   }
 
-  @:noCompletion
-  public static function enableEasingGuards():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function enableEasingGuards():Void {
     setEasingStepsGuard((cast EnableEasingGuards.warnOnDegenerateSteps__enableEasingGuards : Dynamic));
   }
 

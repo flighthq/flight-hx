@@ -5,10 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.requirements.RequirementCollector as Facade_Requirements_flighthq_requirements_RequirementCollector;
 import flighthq.requirements.RequirementSet as Facade_Requirements_flighthq_requirements_RequirementSet;
-import flighthq.types.Entity.Kind;
+import flighthq.types.Kind;
 import flighthq.types.Requirement;
-import flighthq.types.Requirement.RequirementSet;
 import flighthq.types.RequirementFacet;
+import flighthq.types.RequirementSet;
 
 class Requirements {
   public static function collectScene2DRequirements(run:Array<Requirement>->Void):RequirementSet {

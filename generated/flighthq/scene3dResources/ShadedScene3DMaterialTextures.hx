@@ -4,25 +4,27 @@ package flighthq.scene3dResources;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dResources.SceneMaterialTextureRegistry.registerScene3DMaterialTextures;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Material;
 import flighthq.types.Sampler;
-import flighthq.types.Scene3DResources.Scene3DMaterialTextureLister;
-import flighthq.types.Scene3DResources.Scene3DMaterialTextureRegistry;
+import flighthq.types.Scene3DMaterialTextureLister;
+import flighthq.types.Scene3DMaterialTextureRegistry;
 import flighthq.types.ShadedMaterial;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.ShadedMaterialKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ShadedMaterialValues.ShadedMaterialKind;
 
+@:noCompletion
 class ShadedScene3DMaterialTextures {
-  @:noCompletion
-  public static function registerShadedScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function registerShadedScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
     registerScene3DMaterialTextures(({ final __callArgument0:Dynamic = registry; __callArgument0; }), (cast ShadedMaterialKind : String), ({ final __callArgument1:Dynamic = function(material:Material, out:Array<Texture>):Void {
       var shaded:ShadedMaterial = cast _Runtime.UNDEFINED;
       shaded = (cast material : ShadedMaterial);

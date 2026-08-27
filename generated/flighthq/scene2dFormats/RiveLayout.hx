@@ -6,24 +6,24 @@ import flighthq._internal._Runtime;
 import flighthq.importdiagnostics.ImportDiagnosticCollector.reportImportDiagnostic;
 import flighthq.scene2dFormats.RiveCoreTypes.isRiveCoreTypeDerivedFrom;
 import flighthq.types.DisplayObject;
+import flighthq.types.FlexLayoutAlign;
+import flighthq.types.FlexLayoutContainerStyle;
+import flighthq.types.FlexLayoutDirection;
+import flighthq.types.FlexLayoutItemStyle;
+import flighthq.types.FlexLayoutJustify;
+import flighthq.types.GridLayoutContainerStyle;
+import flighthq.types.GridLayoutItemStyle;
+import flighthq.types.GridLayoutTrack;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.Layout.FlexLayoutAlign;
-import flighthq.types.Layout.FlexLayoutContainerStyle;
-import flighthq.types.Layout.FlexLayoutDirection;
-import flighthq.types.Layout.FlexLayoutItemStyle;
-import flighthq.types.Layout.FlexLayoutJustify;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Layout.FlexLayoutKind;
-import flighthq.types.Layout.GridLayoutContainerStyle;
-import flighthq.types.Layout.GridLayoutItemStyle;
 import flighthq.types.Layout.GridLayoutKind;
-import flighthq.types.Layout.GridLayoutTrack;
-import flighthq.types.Layout.LayoutNode;
-import flighthq.types.RiveDocument.RiveArtboardGraph;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveLayoutImport;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types.LayoutNode;
+import flighthq.types.RiveArtboardGraph;
+import flighthq.types.RiveCoreObject;
+import flighthq.types.RiveLayoutImport;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveValue;
 import flighthq.types.Types.FlexLayoutKind;
 import flighthq.types.Types.GridLayoutKind;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
@@ -36,6 +36,7 @@ typedef RiveSizingValues__riveLayout = { var fractionalHeight:Float; var fractio
 
 typedef RiveAxisAlignment__riveLayout = String;
 
+@:noCompletion
 class RiveLayout {
   public static function createRiveLayoutImports(artboard:RiveArtboardGraph, nodes:Array<Null<DisplayObject>>, ?diagnostics:Array<ImportDiagnostic>):Array<RiveLayoutImport> {
     var componentProviders:flighthq._internal._Map<Float, RiveLayoutProvider__riveLayout> = cast _Runtime.UNDEFINED;

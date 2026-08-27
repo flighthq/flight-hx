@@ -25,28 +25,28 @@ import flighthq.geometry.Matrix4.inverseMatrix4;
 import flighthq.geometry.Matrix4.multiplyMatrix4;
 import flighthq.geometry.Matrix4.setMatrix4LookAt;
 import flighthq.geometry.Vector2.createVector2;
-import flighthq.types.Aabb.AabbLike;
-import flighthq.types.BoundingSphere.BoundingSphereLike;
+import flighthq.types.AabbLike;
+import flighthq.types.BoundingSphereLike;
 import flighthq.types.Camera2D;
-import flighthq.types.Camera2D.Camera2DOptions;
+import flighthq.types.Camera2DOptions;
 import flighthq.types.Camera3D;
-import flighthq.types.Camera3D.OrthographicProjection;
-import flighthq.types.Camera3D.PerspectiveProjection;
-import flighthq.types.Camera3D.Projection;
 import flighthq.types.Camera3DOptions;
 import flighthq.types.Entity;
-import flighthq.types.Frustum.FrustumLike;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.FrustumLike;
 import flighthq.types.Matrix4;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
+import flighthq.types.MatrixLike;
+import flighthq.types.OrthographicProjection;
 import flighthq.types.OrthographicProjectionOptions;
+import flighthq.types.PerspectiveProjection;
 import flighthq.types.PerspectiveProjectionOptions;
-import flighthq.types.Plane.PlaneLike;
-import flighthq.types.Ray3D.Ray3DLike;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.PlaneLike;
+import flighthq.types.Projection;
+import flighthq.types.Ray3DLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.Vector2;
-import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector2Like;
+import flighthq.types.Vector3Like;
 
 class Camera {
   public static final __scratchInverse__camera:Matrix4 = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Matrix4);
@@ -239,8 +239,9 @@ class Camera {
     ((cast camera.jitter : { var y:Float; }).y = cast (y : Float));
   }
 
-  @:noCompletion
-  public static function setCamera3DViewGuard(guard:Null<Camera3D->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setCamera3DViewGuard(guard:Null<Camera3D->Void>):Void {
     (Camera.camera3DViewGuard__camera = cast (guard : Dynamic));
   }
 

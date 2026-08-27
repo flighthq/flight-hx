@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.VideoResource;
 
+@:noCompletion
 class VideoResource {
   public static function createVideoResource(?element:flighthq._internal.dom.HTMLVideoElement, ?objectUrl:String):flighthq.types.VideoResource {
     return cast { element: _Runtime.coalesce(element, function():Dynamic return cast null), objectUrl: _Runtime.coalesce(objectUrl, function():Dynamic return cast null) };

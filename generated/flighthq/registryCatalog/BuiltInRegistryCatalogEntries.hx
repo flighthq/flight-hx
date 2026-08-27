@@ -3,8 +3,9 @@ package flighthq.registryCatalog;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.RegistryCatalog.RegistryCatalogEntry;
+import flighthq.types.RegistryCatalogEntry;
 
+@:noCompletion
 class BuiltInRegistryCatalogEntries {
   public static final BUILT_IN_REGISTRY_CATALOG_ENTRIES:Array<RegistryCatalogEntry> = (cast cast ([] : Array<Dynamic>));
 }

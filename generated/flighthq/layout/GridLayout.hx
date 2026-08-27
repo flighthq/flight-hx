@@ -4,18 +4,19 @@ package flighthq.layout;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.layout.LayoutState.registerLayoutResolver;
-import flighthq.types.Layout.GridLayoutContainerStyle;
-import flighthq.types.Layout.GridLayoutItemStyle;
+import flighthq.types.GridLayoutContainerStyle;
+import flighthq.types.GridLayoutItemStyle;
+import flighthq.types.GridLayoutTrack;
 import flighthq.types.Layout.GridLayoutKind;
-import flighthq.types.Layout.GridLayoutTrack;
-import flighthq.types.Layout.LayoutNode;
-import flighthq.types.Layout.LayoutResolutionFailureKind;
 import flighthq.types.Layout.LayoutResolutionFailureKindValue;
-import flighthq.types.Layout.LayoutResolver;
-import flighthq.types.Layout.LayoutState;
-import flighthq.types.Layout.LayoutTree;
+import flighthq.types.LayoutNode;
+import flighthq.types.LayoutResolutionFailureKind;
+import flighthq.types.LayoutResolver;
+import flighthq.types.LayoutState;
+import flighthq.types.LayoutTree;
 import flighthq.types.Types.GridLayoutKind;
 
+@:noCompletion
 class GridLayout {
   public static function registerGridLayoutResolver(state:LayoutState):Void {
     registerLayoutResolver(({ final __callArgument0:Dynamic = state; __callArgument0; }), (cast GridLayoutKind : String), ({ final __callArgument1:Dynamic = GridLayout.gridLayoutResolver__gridLayout; __callArgument1; }));

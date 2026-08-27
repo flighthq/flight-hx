@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textlayout.TextFormat.mergeTextFormat;
 import flighthq.types.FontVariation;
-import flighthq.types.RichText.RichTextData;
-import flighthq.types.RichText.RichTextRuntime;
 import flighthq.types.RichTextContent;
+import flighthq.types.RichTextData;
+import flighthq.types.RichTextRuntime;
 import flighthq.types.TextFormat;
 import flighthq.types.TextFormatRange;
 
+@:noCompletion
 class RichTextContent {
   public static function clearRichTextContent(runtime:RichTextRuntime):Void {
     (runtime.richTextContent = cast (null : Null<flighthq.types.RichTextContent>));

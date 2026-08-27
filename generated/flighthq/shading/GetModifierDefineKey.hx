@@ -9,6 +9,7 @@ import flighthq.types.Modifier;
 import flighthq.types.ModifierDefinition;
 import flighthq.types.ModifierRegistry;
 
+@:noCompletion
 class GetModifierDefineKey {
   public static function getModifierDefineKey(stack:Array<Modifier>, ?registry:ModifierRegistry):String {
     var ordered:Array<Modifier> = cast _Runtime.UNDEFINED;

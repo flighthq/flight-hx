@@ -5,9 +5,10 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BitmapFont;
 import flighthq.types.BitmapFontGlyphExplanation;
-import flighthq.types.GlyphSource.GlyphEntry;
+import flighthq.types.GlyphEntry;
 import flighthq.types.TextureAtlas;
 
+@:noCompletion
 class ExplainBitmapFontGlyph {
   public static function explainBitmapFontGlyph(font:BitmapFont, codepoint:Float):BitmapFontGlyphExplanation {
     var pageCount:Float = cast _Runtime.UNDEFINED;

@@ -15,6 +15,7 @@ import flighthq.shape.ShapeBounds.defaultShapeBoundsLineTo;
 import flighthq.shape.ShapeBounds.defaultShapeBoundsMoveTo;
 import flighthq.shape.ShapeBoundsRegistry.registerShapeBoundsCommand;
 
+@:noCompletion
 class RegisterDefaultShapeBoundsCommands {
   public static function registerDefaultShapeBoundsCommands():Void {
     registerShapeBoundsCommand((cast { fillBounds: defaultShapeBoundsFlush, key: 'beginTextureFill', strokeBounds: defaultShapeBoundsFlush } : Dynamic));

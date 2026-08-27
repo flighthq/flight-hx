@@ -4,8 +4,9 @@ package flighthq.importdiagnostics;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
+import flighthq.types.ImportDiagnosticSeverity;
 
+@:noCompletion
 class ImportDiagnosticText {
   public static function formatImportDiagnostic(diagnostic:ImportDiagnostic):String {
     var __destructure0:Dynamic = cast _Runtime.UNDEFINED;

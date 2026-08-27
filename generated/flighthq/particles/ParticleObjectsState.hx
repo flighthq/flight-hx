@@ -7,6 +7,7 @@ import flighthq.geometry.Typedarray.reserveFloat32Array;
 import flighthq.types.ParticleObjectsState;
 import flighthq.types.RandomSource;
 
+@:noCompletion
 class ParticleObjectsState {
   public static function createParticleObjectsState(capacity:Float, ?random:RandomSource):flighthq.types.ParticleObjectsState {
     if (random == null) random = cast (HxMath.random : Dynamic);
@@ -14,8 +15,9 @@ class ParticleObjectsState {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureParticleObjectsStateCapacity(state:flighthq.types.ParticleObjectsState, capacity:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureParticleObjectsStateCapacity(state:flighthq.types.ParticleObjectsState, capacity:Float):Void {
     if ((cast ((cast _Runtime.field(state.lifetimes, 'length') : Float) >= (cast (capacity * 2.0) : Float)) : Bool)) { return; }
     (state.lifetimes = cast ((cast reserveFloat32Array(state.lifetimes, (cast (capacity * 2.0) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));
     (state.velocities = cast ((cast reserveFloat32Array(state.velocities, (cast (capacity * 2.0) : Float)) : flighthq._internal._Float32Array) : flighthq._internal._Float32Array));

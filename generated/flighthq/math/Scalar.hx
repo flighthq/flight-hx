@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.math.NextPowerOfTwo.nextPowerOfTwo;
 import flighthq.math.NextPowerOfTwo.previousPowerOfTwo;
 
+@:noCompletion
 class Scalar {
   public static function ceilPowerOfTwo(n:Float):Float {
     return cast (cast nextPowerOfTwo((cast n : Float)) : Float);

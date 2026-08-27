@@ -3,19 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
-import flighthq.types.Entity.Kind;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeData;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeTraits;
 
 typedef HasBoundsRectangle = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };
-
-typedef HasBoundsRectangleRuntime = { var binding:Null<flighthq._internal._Object>; var boundsRectangle:Null<Rectangle>; var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; var localBoundsRectangle:Null<Rectangle>; var worldBoundsRectangle:Null<Rectangle>; };
-
-typedef BoundsNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; };
-
-typedef BoundsNodeAny = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; };
-
-typedef Spatial2DNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var pivotX:Float; var pivotY:Float; var rotation:Float; var scaleX:Float; var scaleY:Float; var skewX:Float; var skewY:Float; var x:Float; var y:Float; };

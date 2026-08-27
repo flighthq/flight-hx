@@ -10,15 +10,16 @@ import flighthq.texture.Texture.createTexture;
 import flighthq.texture.Texture.equalsTexture;
 import flighthq.types.CreateCubeTextureOptions;
 import flighthq.types.CubeTexture;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.SamplerLike;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureLike;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.SamplerLike;
+import flighthq.types.TextureColorSpace;
+import flighthq.types.TextureLike;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Vector2;
 
+@:noCompletion
 class CubeTexture {
   public static function getCubeSources__cubeTexture(texture:flighthq.types.CubeTexture):TextureSourceCubeFaces {
     return cast (cast texture : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }).sources;

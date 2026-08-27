@@ -7,9 +7,11 @@ import flighthq.scene3dGl.GlScene3DRuntime.getGlScene3DRuntime;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
 
+@:noCompletion
 class GlScene3DTime {
-  @:noCompletion
-  public static function getGlScene3DTime(state:GlRenderState):Float {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlScene3DTime(state:GlRenderState):Float {
     return cast (cast (cast getGlScene3DRuntime(({ final __callArgument0:Dynamic = state; __callArgument0; })) : GlScene3DRuntime) : { var time:Float; }).time;
     return cast null;
   }

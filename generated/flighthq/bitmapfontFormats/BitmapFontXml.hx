@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.bitmapfontFormats.BitmapFontRecord.buildBitmapFontFromRecord;
 import flighthq.bitmapfontFormats.BitmapFontRecord.reportDroppedBitmapFontRecords;
 import flighthq.types.BitmapFont;
-import flighthq.types.BitmapFont.BitmapFontParseOptions;
+import flighthq.types.BitmapFontCharRecord;
+import flighthq.types.BitmapFontKerningRecord;
+import flighthq.types.BitmapFontPageRecord;
+import flighthq.types.BitmapFontParseOptions;
 import flighthq.types.BitmapFontRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontCharRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontKerningRecord;
-import flighthq.types.BitmapFontRecord.BitmapFontPageRecord;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.XmlElement;
 import flighthq.xml.XmlParse.parseXmlDocument;
@@ -19,6 +19,7 @@ import flighthq.xml.XmlQuery.getXmlElementAttributeNumber;
 import flighthq.xml.XmlQuery.getXmlElementChildByName;
 import flighthq.xml.XmlQuery.getXmlElementChildrenByName;
 
+@:noCompletion
 class BitmapFontXml {
   public static function parseBitmapFontXml(text:String, ?options:BitmapFontParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<BitmapFont> {
     var record:Null<BitmapFontRecord> = cast _Runtime.UNDEFINED;

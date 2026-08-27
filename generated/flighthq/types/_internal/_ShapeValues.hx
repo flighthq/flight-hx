@@ -4,9 +4,9 @@ package flighthq.types._internal;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DData;
-import flighthq.types.Node2D.Node2DRuntime;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.Node2DData;
+import flighthq.types.Node2DRuntime;
+import flighthq.types.ShapeCommandToken;
 
 class _ShapeValues {
   public static final ShapeKind:String = 'Shape';

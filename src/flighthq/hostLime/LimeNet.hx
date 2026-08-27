@@ -19,8 +19,8 @@ package flighthq.hostLime;
 #if lime
 import flighthq._internal._Promise;
 import flighthq._internal._Runtime;
-import flighthq.types.Net.NetBackend;
-import flighthq.types.Net.NetResponse;
+import flighthq.types.NetBackend;
+import flighthq.types.NetResponse;
 
 class LimeNet {
   /** Allocation entry point, Flight-style: `createLimeNetBackend()`. */

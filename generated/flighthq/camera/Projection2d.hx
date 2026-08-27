@@ -9,9 +9,10 @@ import flighthq.geometry.Matrix.inverseMatrixTransformPointXY;
 import flighthq.geometry.Matrix.matrixTransformPointXY;
 import flighthq.types.Camera2D;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.MatrixLike;
+import flighthq.types.Vector2Like;
 
+@:noCompletion
 class Projection2d {
   public static function projectCamera2DPoint(camera:Camera2D, worldX:Float, worldY:Float, out:Vector2Like):Void {
     getCamera2DViewMatrix(({ final __callArgument0:Dynamic = camera; __callArgument0; }), ({ final __callArgument1:Dynamic = Projection2d.scratchMatrix__projection2d; __callArgument1; }));

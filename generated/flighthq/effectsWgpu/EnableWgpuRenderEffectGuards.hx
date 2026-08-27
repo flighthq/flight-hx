@@ -7,14 +7,16 @@ import flighthq.effectsWgpu.WgpuRenderEffectPipeline.setWgpuRenderEffectPipeline
 import flighthq.effectsWgpu.WgpuRenderEffectPipeline.setWgpuRenderEffectPipelineSkipGuard;
 import flighthq.effectsWgpu.WgpuRenderTextureEffect.setWgpuRenderEffectApplicationGuard;
 import flighthq.log.Log.logOnce;
-import flighthq.types.Log.LogLevel;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectApplicationExplanation;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectApplicationStatus;
+import flighthq.types.LogLevel;
+import flighthq.types.WgpuRenderEffectApplicationExplanation;
+import flighthq.types.WgpuRenderEffectApplicationStatus;
 import flighthq.types.WgpuRenderState;
 
+@:noCompletion
 class EnableWgpuRenderEffectGuards {
-  @:noCompletion
-  public static function areWgpuRenderEffectGuardsEnabled(state:WgpuRenderState):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function areWgpuRenderEffectGuardsEnabled(state:WgpuRenderState):Bool {
     return cast ((cast EnableWgpuRenderEffectGuards._guardedStates__enableWgpuRenderEffectGuards : flighthq._internal._WeakSet<WgpuRenderState>).has(state));
     return cast null;
   }

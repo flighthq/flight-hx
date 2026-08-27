@@ -7,16 +7,18 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RadialBlurEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class GlRadialBlurEffect {
-  @:noCompletion
-  public static function applyRadialBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:RadialBlurEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyRadialBlurEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:RadialBlurEffect):Void {
     var centerX:Float = cast _Runtime.UNDEFINED;
     var centerY:Float = cast _Runtime.UNDEFINED;
     var strength:Float = cast _Runtime.UNDEFINED;

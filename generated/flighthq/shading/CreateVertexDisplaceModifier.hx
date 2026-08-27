@@ -3,24 +3,25 @@ package flighthq.shading;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.ModifierSlot;
 import flighthq.types.Sampler;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.VertexDisplaceModifierKind;
 import flighthq.types.Vector2;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 import flighthq.types.VertexDisplaceModifier;
-import flighthq.types.VertexDisplaceModifier.VertexDisplaceModifierSource;
 import flighthq.types.VertexDisplaceModifierOptions;
+import flighthq.types.VertexDisplaceModifierSource;
 import flighthq.types.VoxelGrid;
 import flighthq.types._internal._ModifierSlotValues.ModifierSlotValue;
 import flighthq.types._internal._VertexDisplaceModifierValues.VertexDisplaceModifierKind;
 
+@:noCompletion
 class CreateVertexDisplaceModifier {
   public static function createVertexDisplaceModifier(options:VertexDisplaceModifierOptions):VertexDisplaceModifier {
     var modifier:VertexDisplaceModifier = cast _Runtime.UNDEFINED;

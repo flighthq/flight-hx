@@ -5,10 +5,11 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.node.Revision.invalidateNodeLocalTransform;
 import flighthq.types.Node3D;
-import flighthq.types.Physics3D.RigidBody3D;
 import flighthq.types.Quaternion;
+import flighthq.types.RigidBody3D;
 import flighthq.types.Vector3;
 
+@:noCompletion
 class NodeSync {
   public static function syncPhysics3DBodyToNode3D(body:RigidBody3D, node:Node3D):Void {
     ((cast node.position : { var x:Float; }).x = cast (_Runtime.field(body, 'x') : Float));

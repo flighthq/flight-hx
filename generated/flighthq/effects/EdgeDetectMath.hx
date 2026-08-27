@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.OutlineEffect;
 import flighthq.types.SketchEffect;
 
+@:noCompletion
 class EdgeDetectMath {
   public static function computeOutlineEdgeParams(effect:OutlineEffect, out:Array<Float>):Void {
     var threshold:Float = cast _Runtime.UNDEFINED;

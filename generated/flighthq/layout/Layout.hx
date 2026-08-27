@@ -9,11 +9,11 @@ import flighthq.layout.FlexLayout as Facade_Layout_flighthq_layout_FlexLayout;
 import flighthq.layout.GridLayout as Facade_Layout_flighthq_layout_GridLayout;
 import flighthq.layout.LayoutState as Facade_Layout_flighthq_layout_LayoutState;
 import flighthq.layout.ResolveLayoutTree as Facade_Layout_flighthq_layout_ResolveLayoutTree;
-import flighthq.types.Layout.LayoutResolutionExplanation;
-import flighthq.types.Layout.LayoutResolutionGuard;
-import flighthq.types.Layout.LayoutResolver;
-import flighthq.types.Layout.LayoutState;
-import flighthq.types.Layout.LayoutTree;
+import flighthq.types.LayoutResolutionExplanation;
+import flighthq.types.LayoutResolutionGuard;
+import flighthq.types.LayoutResolver;
+import flighthq.types.LayoutState;
+import flighthq.types.LayoutTree;
 
 class Layout {
   public static function createLayoutState():LayoutState {

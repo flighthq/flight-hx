@@ -6,12 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.connectivity.Connectivity.createWebConnectivityBackend;
 import flighthq.connectivity.Connectivity.installConnectivityHostBackend;
 import flighthq.connectivity.Connectivity.observeConnectivityHostResult;
-import flighthq.types.Connectivity.ConnectivityBackend;
-import flighthq.types.Connectivity.ConnectivityConnectionType;
-import flighthq.types.Connectivity.ConnectivityReachability;
-import flighthq.types.Connectivity.ConnectivityReachabilityOptions;
-import flighthq.types.Connectivity.ConnectivityStatus;
+import flighthq.types.ConnectivityBackend;
+import flighthq.types.ConnectivityConnectionType;
+import flighthq.types.ConnectivityReachability;
+import flighthq.types.ConnectivityReachabilityOptions;
+import flighthq.types.ConnectivityStatus;
 
+@:noCompletion
 class WebConnectivity {
   public static function enableHostWebConnectivity():Void {
     var inner:ConnectivityBackend = cast _Runtime.UNDEFINED;
@@ -76,8 +77,9 @@ class WebConnectivity {
     installConnectivityHostBackend(({ final __callArgument3:Dynamic = backend; __callArgument3; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebConnectivityForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebConnectivityForTest():Void {
     (WebConnectivity._enabled__webConnectivity = cast (false : Dynamic));
   }
 

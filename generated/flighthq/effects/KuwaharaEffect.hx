@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.KuwaharaEffect;
 
+@:noCompletion
 class KuwaharaEffect {
   public static function createKuwaharaEffect(?options:{ @:optional var radius:Null<Float>; }):flighthq.types.KuwaharaEffect {
     if (options == null) options = cast ({  } : Dynamic);

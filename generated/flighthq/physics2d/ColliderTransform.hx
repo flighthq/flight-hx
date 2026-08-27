@@ -3,10 +3,11 @@ package flighthq.physics2d;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.RigidBody2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.RigidBody2D;
 
+@:noCompletion
 class ColliderTransform {
   public static function createPhysics2DColliderWorldShape(local:CollisionBuiltInShape2D):CollisionBuiltInShape2D {
     {

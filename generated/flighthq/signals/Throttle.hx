@@ -8,6 +8,7 @@ import flighthq.signals.Slot.disconnectSignal;
 import flighthq.types.Signal;
 import flighthq.types.SignalThrottleOptions;
 
+@:noCompletion
 class Throttle {
   public static function connectSignalAtFrameRate(source:Signal<Float->Void>, fps:Float, slot:Float->Void):Void->Void {
     var period:Float = cast _Runtime.UNDEFINED;

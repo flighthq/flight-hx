@@ -18,7 +18,7 @@ import flighthq.scene3dWgpu.WgpuMeshPipeline.drawWgpuMeshSubset;
 import flighthq.scene3dWgpu.WgpuMeshPipeline.writeWgpuFrameUniform;
 import flighthq.scene3dWgpu.WgpuPbrPipelineCache.ensureWgpuPbrPipeline;
 import flighthq.types.Camera3D;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.LinearColor;
 import flighthq.types.Material;
 import flighthq.types.MeshGeometry;
@@ -26,26 +26,28 @@ import flighthq.types.Sampler;
 import flighthq.types.Scene3DLightBlock;
 import flighthq.types.Scene3DRenderProxy;
 import flighthq.types.SpecularGlossinessPbrMaterial;
-import flighthq.types.StandardPbrMaterial.StandardPbrMaterialProperties;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.StandardPbrMaterialProperties;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Types.SpecularGlossinessPbrMaterialKind;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
+import flighthq.types.WgpuMaterialBinding;
 import flighthq.types.WgpuMeshMaterialRenderer;
 import flighthq.types.WgpuMeshPipeline;
+import flighthq.types.WgpuPbrDefineKey;
 import flighthq.types.WgpuPbrPipeline;
-import flighthq.types.WgpuPbrPipeline.WgpuPbrDefineKey;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuScene3DRuntime.WgpuMaterialBinding;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types._internal._SpecularGlossinessPbrMaterialValues.SpecularGlossinessPbrMaterialKind;
 
+@:noCompletion
 class SpecularGlossinessPbrWgpuMeshMaterialRenderer {
-  @:noCompletion
-  public static final specularGlossinessPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final specularGlossinessPbrWgpuMeshMaterialRenderer:WgpuMeshMaterialRenderer = (cast { bind: function(state:WgpuRenderState, material:Null<Material>, lights:Scene3DLightBlock, camera:Camera3D):Void {
     var stateRuntime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var specGloss:Null<SpecularGlossinessPbrMaterial> = cast _Runtime.UNDEFINED;

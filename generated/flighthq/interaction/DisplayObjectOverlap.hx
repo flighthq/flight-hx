@@ -10,8 +10,9 @@ import flighthq.geometry.Rectangle.intersectsRectangle;
 import flighthq.node.BoundsRectangle.getNodeWorldBoundsRectangle;
 import flighthq.types.Node2D;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 
+@:noCompletion
 class DisplayObjectOverlap {
   public static function containsNode2D(outer:Node2D, inner:Node2D):Bool {
     return cast (cast enclosesRectangle(({ final __callArgument0:Dynamic = (cast getNodeWorldBoundsRectangle((cast outer : Dynamic)) : Rectangle); __callArgument0; }), ({ final __callArgument1:Dynamic = (cast getNodeWorldBoundsRectangle((cast inner : Dynamic)) : Rectangle); __callArgument1; })) : Bool);

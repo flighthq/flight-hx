@@ -10,17 +10,20 @@ import flighthq.effectsWgpu.WgpuRenderEffectRegistry.registerWgpuRenderEffect;
 import flighthq.types.ConvolutionEffect;
 import flighthq.types.RenderEffect;
 import flighthq.types.WgpuEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectContext;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
 import flighthq.types.WgpuRenderTarget;
 
+@:noCompletion
 class WgpuConvolutionEffect {
-  @:noCompletion
-  public static final MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE:Float = 49.0;
+  @:allow(flighthq)
+  @:keep
+  private static final MAX_CONVOLUTION_EFFECT_WGPU_KERNEL_SIZE:Float = 49.0;
 
-  @:noCompletion
-  public static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyConvolutionEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:ConvolutionEffect):Void {
     var __destructure0:ConvolutionEffect = cast _Runtime.UNDEFINED;
     var matrix:Array<Float> = cast _Runtime.UNDEFINED;
     var matrixX:Float = cast _Runtime.UNDEFINED;

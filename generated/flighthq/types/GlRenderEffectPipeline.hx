@@ -3,28 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GlRenderTarget.GlRenderTargetPool;
-import flighthq.types.RenderTarget.RenderTargetDepth;
-import flighthq.types.RenderTarget.RenderTargetFormat;
-
-typedef GlRenderEffectContext = { var state:GlRenderState; var source:GlRenderTarget; var dest:GlRenderTarget; var pool:GlRenderTargetPool; var sceneDepthTexture:Null<flighthq._internal.dom.WebGLTexture>; var sceneVelocityTexture:Null<flighthq._internal.dom.WebGLTexture>; };
-
-typedef GlRenderEffectRunner = GlRenderEffectContext->RenderEffect->Void;
-
-typedef GlRenderEffectApplicationStatus = String;
-
-typedef GlRenderEffectApplicationExplanation = { var registeredCount:Float; var requestedCount:Float; var status:GlRenderEffectApplicationStatus; var unregisteredKinds:Array<String>; var unresolvedIndexes:Array<Float>; };
-
-typedef GlRenderEffectResolver = GlRenderState->RenderEffect->Bool;
-
-typedef GlRenderEffectRegistration = { @:optional var isResolvable:GlRenderEffectResolver; var runner:GlRenderEffectRunner; };
-
-typedef GlCustomShaderSourceGuard = GlRenderState->String->String->String->Void;
-
-typedef GlRenderEffectPipelineSkipGuard = GlRenderState->String->Void;
-
-typedef GlRenderEffectApplicationGuard = GlRenderState->GlRenderEffectApplicationExplanation->Void;
-
-typedef RenderEffectPipelineOptions = { @:optional var sampleCount:Float; @:optional var format:RenderTargetFormat; @:optional var depth:RenderTargetDepth; };
 
 typedef GlRenderEffectPipeline = { var options:RenderEffectPipelineOptions; var sceneTarget:Null<GlRenderTarget>; var pool:GlRenderTargetPool; var lutCache:ColorLutCache; var lutTexture:GlColorLutTextureCache; var velocityTexture:Null<flighthq._internal.dom.WebGLTexture>; };

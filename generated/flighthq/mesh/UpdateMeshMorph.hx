@@ -9,12 +9,13 @@ import flighthq.mesh.MorphMeshGeometry.blendMeshGeometryMorph;
 import flighthq.mesh.MorphMeshGeometry.captureMeshMorphBindPose;
 import flighthq.types.Mesh;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshGeometryRuntime;
+import flighthq.types.MeshGeometryRuntime;
+import flighthq.types.MeshMorph;
 import flighthq.types.MeshMorphBindPose;
-import flighthq.types.MorphTarget.MeshMorph;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class UpdateMeshMorph {
   public static function updateMeshMorph(mesh:Mesh):Void {
     var morph:Null<MeshMorph> = cast _Runtime.UNDEFINED;

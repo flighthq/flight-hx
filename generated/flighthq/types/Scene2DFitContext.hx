@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Node.NodeTraits;
 
 typedef Scene2DFitContext<Traits> = { var align:ViewportAlign; var root:Null<Node<Traits>>; var scaleMode:ViewportScaleMode; };

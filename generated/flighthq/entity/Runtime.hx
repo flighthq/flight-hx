@@ -4,25 +4,29 @@ package flighthq.entity;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Entity;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class Runtime {
-  @:noCompletion
-  public static function createEntityRuntime():EntityRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createEntityRuntime():EntityRuntime {
     return cast { binding: null };
     return cast null;
   }
 
-  @:noCompletion
-  public static function getEntityRuntime(source:Entity):EntityRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getEntityRuntime(source:Entity):EntityRuntime {
     return cast _Runtime.getIndex(source, EntityRuntimeKey);
     return cast null;
   }
 
-  @:noCompletion
-  public static function hasEntityRuntime(source:Entity):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function hasEntityRuntime(source:Entity):Bool {
     return cast !_Runtime.strictEquals(_Runtime.getIndex(source, EntityRuntimeKey), _Runtime.field(_Runtime, 'UNDEFINED'));
     return cast null;
   }

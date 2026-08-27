@@ -13,6 +13,7 @@ import flighthq.types.SpritesheetAnimationDirection;
 import flighthq.types.SpritesheetFrame;
 import flighthq.types.SpritesheetPlayer;
 
+@:noCompletion
 class SpritesheetPlayer {
   public static function acquireSpritesheetPlayer():flighthq.types.SpritesheetPlayer {
     if ((cast ((cast _Runtime.field(SpritesheetPlayer.playerPool__spritesheetPlayer, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {

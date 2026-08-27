@@ -6,23 +6,24 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.geometry.Aabb.createAabb;
 import flighthq.types.Aabb;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.MeshGeometryGlData;
-import flighthq.types.MeshGeometry.MeshGeometryRuntime;
-import flighthq.types.MeshGeometry.MeshGeometryWgpuData;
-import flighthq.types.MeshGeometry.MeshSubset;
-import flighthq.types.MeshGeometry.PrimitiveTopology;
-import flighthq.types.MeshGeometry.VertexAttribute;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexSemantic;
+import flighthq.types.MeshGeometryGlData;
 import flighthq.types.MeshGeometryOptions;
+import flighthq.types.MeshGeometryRuntime;
+import flighthq.types.MeshGeometryWgpuData;
 import flighthq.types.MeshMorphBindPose;
 import flighthq.types.MeshSkinBindPose;
+import flighthq.types.MeshSubset;
+import flighthq.types.PrimitiveTopology;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types.Vector3;
+import flighthq.types.VertexAttribute;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexSemantic;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class MeshGeometry {
   public static function cloneMeshGeometry(source:flighthq.types.MeshGeometry):flighthq.types.MeshGeometry {
     var vertices:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;

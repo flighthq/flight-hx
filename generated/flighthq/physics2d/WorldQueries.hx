@@ -11,25 +11,26 @@ import flighthq.collision.SweepCollisionShape2D.sweepCollisionShape2D;
 import flighthq.physics2d.Broadphase.synchronizePhysics2DBroadphase;
 import flighthq.physics2d.ColliderTransform.writePhysics2DColliderBounds;
 import flighthq.physics2d.World.findPhysics2DBody;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Collision.CollisionRaycastHit2D;
-import flighthq.types.Collision.CollisionTimeOfImpact2D;
-import flighthq.types.Physics2D.Physics2DBodyType;
-import flighthq.types.Physics2D.Physics2DCollider;
-import flighthq.types.Physics2D.Physics2DCollisionFilter;
-import flighthq.types.Physics2D.Physics2DQueryFilter;
-import flighthq.types.Physics2D.Physics2DQueryHit;
-import flighthq.types.Physics2D.Physics2DQueryResult;
-import flighthq.types.Physics2D.Physics2DRayHit;
-import flighthq.types.Physics2D.Physics2DRayResult;
-import flighthq.types.Physics2D.Physics2DShapeCastResult;
-import flighthq.types.Physics2D.Physics2DWorld;
-import flighthq.types.Physics2D.RigidBody2D;
-import flighthq.types.Spatial.SpatialAabb2D;
-import flighthq.types.Spatial.SpatialIndexBackend2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.CollisionRaycastHit2D;
+import flighthq.types.CollisionTimeOfImpact2D;
+import flighthq.types.Physics2DBodyType;
+import flighthq.types.Physics2DCollider;
+import flighthq.types.Physics2DCollisionFilter;
+import flighthq.types.Physics2DQueryFilter;
+import flighthq.types.Physics2DQueryHit;
+import flighthq.types.Physics2DQueryResult;
+import flighthq.types.Physics2DRayHit;
+import flighthq.types.Physics2DRayResult;
+import flighthq.types.Physics2DShapeCastResult;
+import flighthq.types.Physics2DWorld;
+import flighthq.types.RigidBody2D;
+import flighthq.types.SpatialAabb2D;
+import flighthq.types.SpatialIndexBackend2D;
 
 typedef Physics2DQueryScratch__worldQueries = { var candidateBodies:Array<Float>; var colliderBounds:SpatialAabb2D; var raycastHit:CollisionRaycastHit2D; var timeOfImpact:CollisionTimeOfImpact2D; };
 
+@:noCompletion
 class WorldQueries {
   public static function createPhysics2DQueryFilter():Physics2DQueryFilter {
     return cast { categoryBits: 4294967295.0, maskBits: 4294967295.0, includeSensors: true, includeDynamic: true, includeKinematic: true, includeStatic: true };

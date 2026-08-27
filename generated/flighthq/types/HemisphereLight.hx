@@ -3,7 +3,6 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.EntityRuntime;
 import flighthq.types._internal._HemisphereLightValues.HemisphereLightKind;
 
 typedef HemisphereLight = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:String; var groundColor:Float; var intensity:Float; var skyColor:Float; };

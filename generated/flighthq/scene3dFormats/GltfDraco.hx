@@ -3,8 +3,9 @@ package flighthq.scene3dFormats;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.GltfDraco.GltfDracoDecoder;
+import flighthq.types.GltfDracoDecoder;
 
+@:noCompletion
 class GltfDraco {
   public static function getGltfDracoDecoder():Null<GltfDracoDecoder> {
     return cast GltfDraco._dracoDecoder__gltfDraco;

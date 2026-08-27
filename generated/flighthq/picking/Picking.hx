@@ -11,8 +11,8 @@ import flighthq.types.Node3D;
 import flighthq.types.Ray3D;
 import flighthq.types.Scene3DHit;
 import flighthq.types.Scene3DPickOptions;
-import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector2Like;
+import flighthq.types.Vector3Like;
 
 class Picking {
   public static function createScene3DHit():Scene3DHit {

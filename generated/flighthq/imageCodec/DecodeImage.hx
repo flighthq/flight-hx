@@ -8,6 +8,7 @@ import flighthq.imageCodec.ImageDecoderRegistry.getImageDecoder;
 import flighthq.types.DecodedImage;
 import flighthq.types.ImageDecoder;
 
+@:noCompletion
 class DecodeImage {
   public static function decodeImage(bytes:flighthq._internal._UInt8Array, ?mimeType:String):flighthq._internal._Promise<Null<DecodedImage>> {
     return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {

@@ -6,7 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.textsegment.TextSegment as Facade_Textsegment_flighthq_textsegment_TextSegment;
 import flighthq.textsegment.TextSegmentBoundary as Facade_Textsegment_flighthq_textsegment_TextSegmentBoundary;
 import flighthq.types.TextSegment;
-import flighthq.types.TextSegment.TextSegmentRange;
+import flighthq.types.TextSegmentRange;
 
 class Textsegment {
   public static function getNextGraphemeBoundary(text:String, index:Float, ?locale:String):Float {

@@ -10,13 +10,13 @@ import flighthq.bitmapfont.EnableBitmapFontGuards as Facade_Bitmapfont_flighthq_
 import flighthq.bitmapfont.ExplainBitmapFontGlyph as Facade_Bitmapfont_flighthq_bitmapfont_ExplainBitmapFontGlyph;
 import flighthq.bitmapfont.SummarizeBitmapFont as Facade_Bitmapfont_flighthq_bitmapfont_SummarizeBitmapFont;
 import flighthq.types.BitmapFont;
-import flighthq.types.BitmapFont.BitmapFontData;
+import flighthq.types.BitmapFontData;
 import flighthq.types.BitmapFontGlyphExplanation;
 import flighthq.types.BitmapFontSummary;
+import flighthq.types.GlyphAtlas;
+import flighthq.types.GlyphEntry;
+import flighthq.types.GlyphMetrics;
 import flighthq.types.GlyphSource;
-import flighthq.types.GlyphSource.GlyphAtlas;
-import flighthq.types.GlyphSource.GlyphEntry;
-import flighthq.types.GlyphSource.GlyphMetrics;
 import flighthq.types.TextureAtlas;
 
 class Bitmapfont {

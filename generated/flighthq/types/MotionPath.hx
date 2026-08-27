@@ -4,6 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef MotionPathLoopMode = String;
-
 typedef MotionPath = { var direction:Float; var distance:Float; var length:Float; var loopMode:MotionPathLoopMode; var path:Path; var speed:Float; };

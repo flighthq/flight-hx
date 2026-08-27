@@ -4,18 +4,19 @@ package flighthq.spatial;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.spatial.SpatialIndexingGuard.reportSpatialIndexing;
-import flighthq.types.Spatial.SpatialAabb3D;
-import flighthq.types.Spatial.SpatialIndexBackend3D;
-import flighthq.types.Spatial.SpatialObjectId;
-import flighthq.types.Spatial.SpatialPair;
-import flighthq.types.SpatialIndexing.SpatialIndexingExplanation;
-import flighthq.types.SpatialIndexing.SpatialIndexingMode;
-import flighthq.types.SpatialIndexing.SpatialIndexingNotice;
-import flighthq.types.SpatialIndexing.SpatialIndexingOperation;
-import flighthq.types.SpatialIndexing.SpatialIndexingReason;
+import flighthq.types.SpatialAabb3D;
+import flighthq.types.SpatialIndexBackend3D;
+import flighthq.types.SpatialIndexingExplanation;
+import flighthq.types.SpatialIndexingMode;
+import flighthq.types.SpatialIndexingNotice;
+import flighthq.types.SpatialIndexingOperation;
+import flighthq.types.SpatialIndexingReason;
+import flighthq.types.SpatialObjectId;
+import flighthq.types.SpatialPair;
 
 typedef Bvh3D__bvh3D = { var margin:Float; var root:Float; var minX:Array<Float>; var minY:Array<Float>; var minZ:Array<Float>; var maxX:Array<Float>; var maxY:Array<Float>; var maxZ:Array<Float>; var parent:Array<Float>; var child1:Array<Float>; var child2:Array<Float>; var height:Array<Float>; var object:Array<Float>; var freeList:Array<Float>; var count:Float; var leafByObject:flighthq._internal._Map<SpatialObjectId, Float>; var bounds:flighthq._internal._Map<SpatialObjectId, SpatialAabb3D>; var declined:flighthq._internal._Map<SpatialObjectId, String>; var stack:Array<Float>; };
 
+@:noCompletion
 class Bvh3D {
   public static function createBvhSpatialBackend3D(margin:Float = 2.0):SpatialIndexBackend3D {
     var tree:Bvh3D__bvh3D = cast _Runtime.UNDEFINED;

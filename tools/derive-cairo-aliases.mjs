@@ -146,9 +146,8 @@ function deriveTypes() {
   const names = readdirSync(typesDirectory)
     .filter((name) => name.endsWith('.hx') && name.includes('Canvas'))
     .sort();
-  // A module may declare its primary type plus secondary types (or only
-  // secondaries); alias every declared Canvas-named type through the dotted
-  // module path, which resolves both forms uniformly.
+  // Every exported canonical type owns its public module, so alias each
+  // Canvas-named declaration directly through its type-name address.
   const declarationPattern =
     /^(?:@:\w+(?:\([^)]*\))?\s+)*(?:typedef|class|interface|enum(?: abstract)?|abstract) ([A-Za-z_]\w*)(<[^>]+>)?/gmu;
   for (const fileName of names) {
@@ -163,7 +162,10 @@ function deriveTypes() {
             .map((parameter) => parameter.split(':')[0].trim())
             .join(', ')}>`
         : '';
-      const content = `${header}package flighthq.types;\n\ntypedef ${alias}${generics ?? ''} = flighthq.types.${moduleName}.${typeName}${genericNames};\n`;
+      if (moduleName !== typeName) {
+        throw new Error(`derive-cairo-aliases: canonical type ${typeName} does not own module ${moduleName}`);
+      }
+      const content = `${header}package flighthq.types;\n\ntypedef ${alias}${generics ?? ''} = flighthq.types.${typeName}${genericNames};\n`;
       outputs.push({ content, relative: path.join('src', 'flighthq', 'types', `${alias}.hx`) });
     }
   }

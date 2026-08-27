@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.application.Window.installWindowHostBackend;
 import flighthq.application.Window.observeWindowHostResult;
 import flighthq.types.ApplicationWindow;
-import flighthq.types.ApplicationWindow.WindowBackend;
-import flighthq.types.ApplicationWindow.WindowBounds;
-import flighthq.types.ApplicationWindow.WindowOptions;
+import flighthq.types.WindowBackend;
+import flighthq.types.WindowBounds;
+import flighthq.types.WindowOptions;
 
+@:noCompletion
 class WebWindow {
   public static function enableHostWebWindow():Void {
     var backend:WindowBackend = cast _Runtime.UNDEFINED;
@@ -141,8 +142,9 @@ class WebWindow {
     installWindowHostBackend(({ final __callArgument1:Dynamic = backend; __callArgument1; }));
   }
 
-  @:noCompletion
-  public static function resetHostWebWindowForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebWindowForTest():Void {
     (WebWindow._enabled__webWindow = cast (false : Dynamic));
   }
 

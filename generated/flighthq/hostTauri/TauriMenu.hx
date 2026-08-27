@@ -3,24 +3,25 @@ package flighthq.hostTauri;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Menu.MenuBackend;
-import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.MenuBackend;
+import flighthq.types.MenuItemTemplate;
 import flighthq.types.TauriApi;
-import flighthq.types.TauriApi.TauriLogicalPositionConstructor;
-import flighthq.types.TauriApi.TauriMenu;
-import flighthq.types.TauriApi.TauriMenuFactory;
-import flighthq.types.TauriApi.TauriMenuItemFactory;
-import flighthq.types.TauriApi.TauriMenuItemHandle;
-import flighthq.types.TauriApi.TauriMenuItemOptions;
-import flighthq.types.TauriApi.TauriMenuModule;
-import flighthq.types.TauriApi.TauriMenuOptions;
-import flighthq.types.TauriApi.TauriPhysicalPositionLike;
-import flighthq.types.TauriApi.TauriPredefinedMenuItemFactory;
-import flighthq.types.TauriApi.TauriPredefinedMenuItemOptions;
-import flighthq.types.TauriApi.TauriSubmenuFactory;
-import flighthq.types.TauriApi.TauriSubmenuOptions;
-import flighthq.types.TauriApi.TauriWindowModule;
+import flighthq.types.TauriLogicalPositionConstructor;
+import flighthq.types.TauriMenu;
+import flighthq.types.TauriMenuFactory;
+import flighthq.types.TauriMenuItemFactory;
+import flighthq.types.TauriMenuItemHandle;
+import flighthq.types.TauriMenuItemOptions;
+import flighthq.types.TauriMenuModule;
+import flighthq.types.TauriMenuOptions;
+import flighthq.types.TauriPhysicalPositionLike;
+import flighthq.types.TauriPredefinedMenuItemFactory;
+import flighthq.types.TauriPredefinedMenuItemOptions;
+import flighthq.types.TauriSubmenuFactory;
+import flighthq.types.TauriSubmenuOptions;
+import flighthq.types.TauriWindowModule;
 
+@:noCompletion
 class TauriMenu {
   public static function createTauriMenuBackend(tauri:TauriApi):MenuBackend {
     var menuModule:TauriMenuModule = cast _Runtime.UNDEFINED;
@@ -31,12 +32,12 @@ class TauriMenu {
       _Runtime.voidValue(flighthq._internal._Async.recover(_Runtime.callValue(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
         return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
           var built:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
-          var menu:flighthq.types.TauriApi.TauriMenu = cast _Runtime.UNDEFINED;
+          var menu:flighthq.types.TauriMenu = cast _Runtime.UNDEFINED;
           return flighthq._internal._Async.flatMap((cast TauriMenu.buildItems__tauriMenu(({ final __callArgument12:Dynamic = menuModule; __callArgument12; }), ({ final __callArgument13:Dynamic = items; __callArgument13; }), ({ final __callArgument14:Dynamic = function(id:String):Void { _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>)); }; __callArgument14; })) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue9:Dynamic):Dynamic {
             built = __awaitValue9;
             return flighthq._internal._Async.flatMap((cast (cast menuModule : TauriMenuModule).Menu : TauriMenuFactory).new_((cast { items: built } : Dynamic)), function(__awaitValue10:Dynamic):Dynamic {
               menu = __awaitValue10;
-              return flighthq._internal._Async.flatMap((cast menu : flighthq.types.TauriApi.TauriMenu).setAsAppMenu(), function(__awaitValue11:Dynamic):Dynamic {
+              return flighthq._internal._Async.flatMap((cast menu : flighthq.types.TauriMenu).setAsAppMenu(), function(__awaitValue11:Dynamic):Dynamic {
                 __awaitValue11;
                 return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);
               });
@@ -53,12 +54,12 @@ class TauriMenu {
         _Runtime.voidValue(flighthq._internal._Async.recover(_Runtime.callValue(function():flighthq._internal._Promise<flighthq._internal._Nothing> {
           return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
             var built:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
-            var menu:flighthq.types.TauriApi.TauriMenu = cast _Runtime.UNDEFINED;
+            var menu:flighthq.types.TauriMenu = cast _Runtime.UNDEFINED;
             return flighthq._internal._Async.flatMap((cast TauriMenu.buildItems__tauriMenu(({ final __callArgument34:Dynamic = menuModule; __callArgument34; }), ({ final __callArgument35:Dynamic = items; __callArgument35; }), ({ final __callArgument38:Dynamic = function(id:String):Void { resolve(({ final __callArgument36:Dynamic = id; __callArgument36; })); }; __callArgument38; })) : flighthq._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue31:Dynamic):Dynamic {
               built = __awaitValue31;
               return flighthq._internal._Async.flatMap((cast (cast menuModule : TauriMenuModule).Menu : TauriMenuFactory).new_((cast { items: built } : Dynamic)), function(__awaitValue32:Dynamic):Dynamic {
                 menu = __awaitValue32;
-                return flighthq._internal._Async.flatMap((cast menu : flighthq.types.TauriApi.TauriMenu).popup((cast _Runtime.construct((cast tauri.window : TauriWindowModule).LogicalPosition, [x, y]) : Dynamic)), function(__awaitValue33:Dynamic):Dynamic {
+                return flighthq._internal._Async.flatMap((cast menu : flighthq.types.TauriMenu).popup((cast _Runtime.construct((cast tauri.window : TauriWindowModule).LogicalPosition, [x, y]) : Dynamic)), function(__awaitValue33:Dynamic):Dynamic {
                   __awaitValue33;
                   return flighthq._internal._Async.resolve(_Runtime.UNDEFINED);
                 });

@@ -25,27 +25,27 @@ import flighthq.shading.OrderModifierStack.orderModifierStack;
 import flighthq.types.AnimatedNormalModifier;
 import flighthq.types.DissolveModifier;
 import flighthq.types.EmissiveModifier;
-import flighthq.types.EmissiveModifier.EmissiveModifierFacing;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EmissiveModifierFacing;
+import flighthq.types.EntityRuntime;
 import flighthq.types.EnvReflectModifier;
 import flighthq.types.FogModifier;
-import flighthq.types.FogModifier.FogModifierMode;
+import flighthq.types.FogModifierMode;
+import flighthq.types.KeyedTable;
 import flighthq.types.LinearColor;
 import flighthq.types.Modifier;
 import flighthq.types.ModifierKind;
 import flighthq.types.ModifierRegistry;
 import flighthq.types.ModifierSlot;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.RegistryTableEntry;
+import flighthq.types.RegistryEntryState;
+import flighthq.types.RegistryTableEntry;
 import flighthq.types.RimModifier;
 import flighthq.types.Sampler;
 import flighthq.types.ShadedMaterial;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.ToonModifier;
 import flighthq.types.Types.AnimatedNormalModifierKind;
 import flighthq.types.Types.DissolveModifierKind;
@@ -56,20 +56,20 @@ import flighthq.types.Types.RimModifierKind;
 import flighthq.types.Types.ToonModifierKind;
 import flighthq.types.Types.VertexDisplaceModifierKind;
 import flighthq.types.Vector2;
-import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector2Like;
+import flighthq.types.Vector3Like;
 import flighthq.types.VertexDisplaceModifier;
-import flighthq.types.VertexDisplaceModifier.VertexDisplaceModifierSource;
+import flighthq.types.VertexDisplaceModifierSource;
 import flighthq.types.VoxelGrid;
-import flighthq.types.WgpuClassicPipeline.WgpuClassicDefineKey;
+import flighthq.types.WgpuClassicDefineKey;
+import flighthq.types.WgpuColorAdjustmentMaterialFeature;
 import flighthq.types.WgpuMeshPipeline;
+import flighthq.types.WgpuModifierCompileContext;
+import flighthq.types.WgpuModifierContribution;
 import flighthq.types.WgpuModifierSnippet;
-import flighthq.types.WgpuModifierSnippet.WgpuModifierCompileContext;
-import flighthq.types.WgpuModifierSnippet.WgpuModifierContribution;
+import flighthq.types.WgpuRenderRegistries;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
-import flighthq.types.WgpuRenderState.WgpuRenderRegistries;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuScene3DRuntime;
 import flighthq.types.WgpuSkinningAdapter;
 import flighthq.types._internal._AnimatedNormalModifierValues.AnimatedNormalModifierKind;
@@ -94,9 +94,11 @@ typedef WgpuModifierSnippetSource__wgpuShadedPrelude = flighthq._internal._Union
 
 typedef ShadedBinding__wgpuShadedPrelude = { var bindGroup:flighthq._internal.dom.GPUBindGroup; var buffer:flighthq._internal.dom.GPUBuffer; var data:flighthq._internal._Float32Array; var entries:Array<flighthq._internal.dom.GPUBindGroupEntry>; var layout:flighthq._internal.dom.GPUBindGroupLayout; var sampler:flighthq._internal.dom.GPUSampler; var textures:Array<Null<Texture>>; var views:Array<flighthq._internal.dom.GPUTextureView>; };
 
+@:noCompletion
 class WgpuShadedPrelude {
-  @:noCompletion
-  public static function bindWgpuShadedSurface(state:WgpuRenderState, pipeline:WgpuMeshPipeline, material:ShadedMaterial, diffuse:LinearColor, specular:LinearColor):flighthq._internal.dom.GPUBindGroup {
+  @:allow(flighthq)
+  @:keep
+  private static function bindWgpuShadedSurface(state:WgpuRenderState, pipeline:WgpuMeshPipeline, material:ShadedMaterial, diffuse:LinearColor, specular:LinearColor):flighthq._internal.dom.GPUBindGroup {
     var registry:KeyedTable<WgpuModifierSnippet> = cast _Runtime.UNDEFINED;
     var plan:ShadedModifierPlan__wgpuShadedPrelude = cast _Runtime.UNDEFINED;
     var byteLength:Float = cast _Runtime.UNDEFINED;
@@ -194,8 +196,9 @@ class WgpuShadedPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function buildWgpuShadedCacheKey(material:ShadedMaterial, ?registry:WgpuModifierSnippetSource__wgpuShadedPrelude):String {
+  @:allow(flighthq)
+  @:keep
+  private static function buildWgpuShadedCacheKey(material:ShadedMaterial, ?registry:WgpuModifierSnippetSource__wgpuShadedPrelude):String {
     if (registry == null) registry = cast ({ definitions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) } : Dynamic);
     var flags:{ var alphaMaskEnabled:Bool; var doubleSided:Bool; var hasDiffuseMap:Bool; var hasNormalMap:Bool; var hasSpecularMap:Bool; } = cast _Runtime.UNDEFINED;
     var base:String = cast _Runtime.UNDEFINED;
@@ -205,8 +208,9 @@ class WgpuShadedPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureWgpuShadedPipeline(state:WgpuRenderState, material:ShadedMaterial, format:flighthq._internal.dom.GPUTextureFormat):WgpuMeshPipeline {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureWgpuShadedPipeline(state:WgpuRenderState, material:ShadedMaterial, format:flighthq._internal.dom.GPUTextureFormat):WgpuMeshPipeline {
     var registries:WgpuRenderRegistries = cast _Runtime.UNDEFINED;
     var registry:KeyedTable<WgpuModifierSnippet> = cast _Runtime.UNDEFINED;
     var defineKey:String = cast _Runtime.UNDEFINED;
@@ -241,8 +245,9 @@ class WgpuShadedPrelude {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getWgpuShadedModuleSource(material:ShadedMaterial, ?registry:WgpuModifierSnippetSource__wgpuShadedPrelude, skinned:Bool = false, ?skinning:Null<WgpuSkinningAdapter>, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>, colorMatrix:Bool = false):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getWgpuShadedModuleSource(material:ShadedMaterial, ?registry:WgpuModifierSnippetSource__wgpuShadedPrelude, skinned:Bool = false, ?skinning:Null<WgpuSkinningAdapter>, ?colorAdjustmentFeature:Null<WgpuColorAdjustmentMaterialFeature>, colorMatrix:Bool = false):String {
     if (registry == null) registry = cast ({ definitions: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []) } : Dynamic);
     if (skinning == null) skinning = cast (null : Dynamic);
     if (colorAdjustmentFeature == null) colorAdjustmentFeature = cast (null : Dynamic);
@@ -378,8 +383,9 @@ class WgpuShadedPrelude {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast flighthq._internal._StaticIndex.readFloatArrayTyped((cast WgpuShadedPrelude._color__wgpuShadedPrelude : Array<Float>), (cast 2.0 : Float)) : Float));
   }
 
-  @:noCompletion
-  public static final animatedNormalWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final animatedNormalWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:AnimatedNormalModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : AnimatedNormalModifier);
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast base : Float), (cast (cast value.scroll : { var x:Float; }).x : Float));
@@ -414,8 +420,9 @@ class WgpuShadedPrelude {
     return cast _Runtime.UNDEFINED;
   } });
 
-  @:noCompletion
-  public static final dissolveWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final dissolveWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:DissolveModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : DissolveModifier);
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast base : Float), (cast value.threshold : Float));
@@ -445,8 +452,9 @@ class WgpuShadedPrelude {
     return cast _Runtime.UNDEFINED;
   } });
 
-  @:noCompletion
-  public static final emissiveWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final emissiveWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:EmissiveModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : EmissiveModifier);
     (cast unpackColorToLinear(({ final __callArgument125:Dynamic = WgpuShadedPrelude._color__wgpuShadedPrelude; __callArgument125; }), (cast value.color : Float)) : LinearColor);
@@ -478,8 +486,9 @@ class WgpuShadedPrelude {
     return cast _Runtime.UNDEFINED;
   } });
 
-  @:noCompletion
-  public static final envReflectWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final envReflectWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:EnvReflectModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : EnvReflectModifier);
     (cast unpackColorToLinear(({ final __callArgument129:Dynamic = WgpuShadedPrelude._color__wgpuShadedPrelude; __callArgument129; }), (cast _Runtime.field(value, 'tint') : Float)) : LinearColor);
@@ -494,8 +503,9 @@ class WgpuShadedPrelude {
     return cast _Runtime.UNDEFINED;
   }, kind: EnvReflectModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect });
 
-  @:noCompletion
-  public static final fogWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final fogWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:FogModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : FogModifier);
     (cast unpackColorToLinear(({ final __callArgument133:Dynamic = WgpuShadedPrelude._color__wgpuShadedPrelude; __callArgument133; }), (cast value.color : Float)) : LinearColor);
@@ -519,8 +529,9 @@ class WgpuShadedPrelude {
     return cast _Runtime.UNDEFINED;
   }, kind: FogModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect });
 
-  @:noCompletion
-  public static final rimWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final rimWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:RimModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : RimModifier);
     (cast unpackColorToLinear(({ final __callArgument137:Dynamic = WgpuShadedPrelude._color__wgpuShadedPrelude; __callArgument137; }), (cast _Runtime.field(value, 'color') : Float)) : LinearColor);
@@ -535,8 +546,9 @@ class WgpuShadedPrelude {
     return cast _Runtime.UNDEFINED;
   }, kind: RimModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect });
 
-  @:noCompletion
-  public static final toonWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final toonWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:ToonModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : ToonModifier);
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast base : Float), (cast HxMath.max(_Runtime.field(value, 'steps'), 2.0) : Float));
@@ -548,8 +560,9 @@ class WgpuShadedPrelude {
     return cast _Runtime.UNDEFINED;
   }, kind: ToonModifierKind, slot: (cast ModifierSlotValue : { var Diffuse:String; var Effect:String; var Emissive:String; var Normal:String; var Specular:String; var Vertex:String; }).Effect });
 
-  @:noCompletion
-  public static final vertexDisplaceWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
+  @:allow(flighthq)
+  @:keep
+  private static final vertexDisplaceWgpuModifierSnippet:WgpuModifierSnippet = (cast { bind: function(modifier:Modifier, out:flighthq._internal._Float32Array, base:Float):Void {
     var value:VertexDisplaceModifier = cast _Runtime.UNDEFINED;
     value = (cast modifier : VertexDisplaceModifier);
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast out : flighthq._internal._Float32Array), (cast base : Float), (cast value.amplitude : Float));

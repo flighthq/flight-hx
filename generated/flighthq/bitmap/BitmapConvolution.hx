@@ -8,6 +8,7 @@ import flighthq.types.BitmapConvolutionOptions;
 import flighthq.types.BitmapEdgeMode;
 import flighthq.types.BitmapRegion;
 
+@:noCompletion
 class BitmapConvolution {
   public static function convolveBitmap(out:flighthq._internal._UInt8ClampedArray, source:BitmapRegion, options:BitmapConvolutionOptions):Void {
     var __destructure0:BitmapConvolutionOptions = cast _Runtime.UNDEFINED;

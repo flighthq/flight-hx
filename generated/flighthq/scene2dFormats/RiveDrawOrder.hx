@@ -13,17 +13,18 @@ import flighthq.node.NodeOrderList.setNodeOrderListEntryBelow;
 import flighthq.node.NodeOrderList.setNodeOrderListFromNodeChildren;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImportDiagnostic;
-import flighthq.types.ImportDiagnostic.ImportDiagnosticSeverity;
-import flighthq.types.Node.NodeOf;
+import flighthq.types.ImportDiagnosticSeverity;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DTraits;
+import flighthq.types.NodeOf;
 import flighthq.types.NodeOrderList;
-import flighthq.types.RiveDocument.RiveArtboardGraph;
-import flighthq.types.RiveDocument.RiveCoreObject;
-import flighthq.types.RiveDocument.RiveProperty;
-import flighthq.types.RiveDocument.RiveValue;
+import flighthq.types.RiveArtboardGraph;
+import flighthq.types.RiveCoreObject;
+import flighthq.types.RiveProperty;
+import flighthq.types.RiveValue;
 import flighthq.types._internal._ImportDiagnosticValues.ImportDiagnosticSeverityValue;
 
+@:noCompletion
 class RiveDrawOrder {
   public static function applyRiveDrawOrder(nodes:Array<Null<Node2D>>, artboard:RiveArtboardGraph, root:DisplayObject, ?diagnostics:Array<ImportDiagnostic>):Void {
     var lists:flighthq._internal._Map<Node2D, NodeOrderList<Node2DTraits>> = cast _Runtime.UNDEFINED;

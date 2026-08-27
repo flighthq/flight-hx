@@ -9,14 +9,15 @@ import flighthq.geometry.Matrix4.decomposeMatrix4;
 import flighthq.geometry.Quaternion.createQuaternion;
 import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.Entity;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Quaternion;
-import flighthq.types.Quaternion.QuaternionLike;
+import flighthq.types.QuaternionLike;
 import flighthq.types.Transform3D;
-import flighthq.types.Transform3D.Transform3DLike;
+import flighthq.types.Transform3DLike;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 
+@:noCompletion
 class Transform3d {
   public static function composeMatrix4FromTransform3D(out:Matrix4Like, source:Transform3DLike):Void {
     composeMatrix4(({ final __callArgument0:Dynamic = out; __callArgument0; }), ({ final __callArgument1:Dynamic = _Runtime.field(source, 'position'); __callArgument1; }), ({ final __callArgument2:Dynamic = _Runtime.field(source, 'rotation'); __callArgument2; }), ({ final __callArgument3:Dynamic = _Runtime.field(source, 'scale'); __callArgument3; }));

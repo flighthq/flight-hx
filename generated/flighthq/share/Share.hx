@@ -6,11 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Share.ShareBackend;
-import flighthq.types.Share.ShareContent;
-import flighthq.types.Share.ShareOptions;
-import flighthq.types.Share.ShareResult;
+import flighthq.types.ShareBackend;
+import flighthq.types.ShareContent;
 import flighthq.types.ShareFile;
+import flighthq.types.ShareOptions;
+import flighthq.types.ShareResult;
 import flighthq.types.ShareSignals;
 import flighthq.types.Signal;
 
@@ -50,8 +50,9 @@ class Share {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebShareBackend():ShareBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebShareBackend():ShareBackend {
     return cast { isAvailable: function():Bool {
       return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'share') : Bool));
       return cast _Runtime.UNDEFINED;
@@ -154,8 +155,9 @@ class Share {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getShareBackend():ShareBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getShareBackend():ShareBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Share._custom__share, function():Dynamic return cast Share._host__share), function():Dynamic return cast Share._sentinel__share);
     return cast null;
   }
@@ -169,8 +171,9 @@ class Share {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installShareHostBackend(backend:ShareBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installShareHostBackend(backend:ShareBackend):Void {
     if ((cast !_Runtime.strictEquals(Share._host__share, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Share._host__share, backend) : Bool)) { (Share._hostConflict__share = cast (true : Dynamic)); }
       return;
@@ -183,21 +186,24 @@ class Share {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observeShareHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observeShareHostResult(operation:String, succeeded:Bool):Void {
     (Share._hostObservation__share = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
-  @:noCompletion
-  public static function resetShareBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetShareBackendForTest():Void {
     (Share._custom__share = cast (null : Dynamic));
     (Share._host__share = cast (null : Dynamic));
     (Share._hostConflict__share = cast (false : Dynamic));
     (Share._hostObservation__share = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setShareBackend(backend:Null<ShareBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setShareBackend(backend:Null<ShareBackend>):Void {
     (Share._custom__share = cast (backend : Dynamic));
   }
 

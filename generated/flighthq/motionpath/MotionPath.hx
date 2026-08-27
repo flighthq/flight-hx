@@ -8,11 +8,12 @@ import flighthq.path.GetPathLength.getPathLength;
 import flighthq.path.GetPathPointAtDistance.getPathPositionAtDistance;
 import flighthq.path.GetPathPointAtDistance.getPathTangentAtDistance;
 import flighthq.types.MotionPath;
-import flighthq.types.MotionPath.MotionPathLoopMode;
+import flighthq.types.MotionPathLoopMode;
 import flighthq.types.Path;
 import flighthq.types.Vector2;
-import flighthq.types.Vector2.Vector2Like;
+import flighthq.types.Vector2Like;
 
+@:noCompletion
 class MotionPath {
   public static function createMotionPath(path:Path, speed:Float = 0.0, loopMode:MotionPathLoopMode = 'clamp', ?tolerance:Float):flighthq.types.MotionPath {
     return cast { direction: 1.0, distance: 0.0, length: (cast getPathLength(({ final __callArgument0:Dynamic = path; __callArgument0; }), #if js (cast tolerance : Float) #else (cast tolerance : Null<Float>) #end) : Float), loopMode: loopMode, path: path, speed: speed };

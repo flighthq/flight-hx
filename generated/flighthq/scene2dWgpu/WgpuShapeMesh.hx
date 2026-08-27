@@ -11,16 +11,18 @@ import flighthq.scene2dWgpu.WgpuQuadBatchWriter.flushWgpuQuadBatchWriter;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.Matrix;
 import flighthq.types.RenderProxy2D;
+import flighthq.types.WgpuColorAdjustmentMaterialFeature;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuColorAdjustmentMaterialFeature;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
-import flighthq.types.WgpuRenderState.WgpuShapeMeshBuffers;
-import flighthq.types.WgpuRenderState.WgpuShapeMeshPipeline;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuShapeMesh;
+import flighthq.types.WgpuShapeMeshBuffers;
+import flighthq.types.WgpuShapeMeshPipeline;
 
+@:noCompletion
 class WgpuShapeMesh {
-  @:noCompletion
-  public static function drawWgpuShapeMeshBatch(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers, pipelineEntry:WgpuShapeMeshPipeline, uniformBuffers:Array<flighthq._internal.dom.GPUBuffer>, bindGroups:Array<flighthq._internal.dom.GPUBindGroup>, uniformData:flighthq._internal._Float32Array):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuShapeMeshBatch(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers, pipelineEntry:WgpuShapeMeshPipeline, uniformBuffers:Array<flighthq._internal.dom.GPUBuffer>, bindGroups:Array<flighthq._internal.dom.GPUBindGroup>, uniformData:flighthq._internal._Float32Array):Void {
     var runtime:WgpuRenderStateRuntime = cast _Runtime.UNDEFINED;
     var pass:Null<flighthq._internal.dom.GPURenderPassEncoder> = cast _Runtime.UNDEFINED;
     var device:flighthq._internal.dom.GPUDevice = cast _Runtime.UNDEFINED;
@@ -67,8 +69,9 @@ class WgpuShapeMesh {
     }
   }
 
-  @:noCompletion
-  public static function drawWgpuShapeMeshes(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawWgpuShapeMeshes(state:WgpuRenderState, renderProxy:RenderProxy2D, meshes:Array<flighthq.types.WgpuShapeMesh>, buffers:WgpuShapeMeshBuffers):Void {
     var fold:Null<WgpuColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(_Runtime.field(meshes, 'length'), 0.0) : Bool)) { return; }
     fold = (cast getWgpuColorAdjustmentMaterialFeature(({ final __callArgument30:Dynamic = state; __callArgument30; })) : Null<WgpuColorAdjustmentMaterialFeature>);

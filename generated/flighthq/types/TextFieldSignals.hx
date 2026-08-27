@@ -4,10 +4,4 @@ package flighthq.types;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 
-typedef TextFieldChangeEvent = { var previousText:String; var text:String; };
-
-typedef TextFieldLinkEvent = { var url:String; var x:Float; var y:Float; };
-
-typedef TextFieldScrollEvent = { var previousScrollH:Float; var previousScrollV:Float; var scrollH:Float; var scrollV:Float; };
-
 typedef TextFieldSignals = { var onTextFieldChange:Signal<TextFieldChangeEvent->Void>; var onTextFieldLink:Signal<TextFieldLinkEvent->Void>; var onTextFieldScroll:Signal<TextFieldScrollEvent->Void>; };

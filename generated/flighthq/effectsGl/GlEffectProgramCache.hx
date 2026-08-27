@@ -7,9 +7,11 @@ import flighthq.renderGl.GlFullscreenPass.compileGlFullscreenProgram;
 import flighthq.types.GlFullscreenProgram;
 import flighthq.types.GlRenderState;
 
+@:noCompletion
 class GlEffectProgramCache {
-  @:noCompletion
-  public static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlEffectProgram(state:GlRenderState, key:String, fragmentSource:String):GlFullscreenProgram {
     var cache:Null<flighthq._internal._Map<String, GlFullscreenProgram>> = cast _Runtime.UNDEFINED;
     var existing:Null<GlFullscreenProgram> = cast _Runtime.UNDEFINED;
     var compiled:GlFullscreenProgram = cast _Runtime.UNDEFINED;
@@ -26,8 +28,9 @@ class GlEffectProgramCache {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<flighthq._internal.dom.WebGLUniformLocation> {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlEffectUniformLocation(state:GlRenderState, program:GlFullscreenProgram, name:String):Null<flighthq._internal.dom.WebGLUniformLocation> {
     var cache:Null<flighthq._internal._Map<String, Null<flighthq._internal.dom.WebGLUniformLocation>>> = cast _Runtime.UNDEFINED;
     var existing:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
     var loc:Null<flighthq._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;

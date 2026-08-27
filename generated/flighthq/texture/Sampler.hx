@@ -6,10 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
 import flighthq.types.Sampler;
-import flighthq.types.Sampler.SamplerLike;
-import flighthq.types.Sampler.TextureFilter;
-import flighthq.types.Sampler.TextureWrap;
+import flighthq.types.SamplerLike;
+import flighthq.types.TextureFilter;
+import flighthq.types.TextureWrap;
 
+@:noCompletion
 class Sampler {
   public static function cloneSampler(source:SamplerLike):flighthq.types.Sampler {
     return cast (cast createEntity((cast { anisotropy: source.anisotropy, magFilter: source.magFilter, minFilter: source.minFilter, mipmaps: source.mipmaps, wrapU: source.wrapU, wrapV: source.wrapV } : Dynamic)) : { >Entity, var anisotropy:Float; var magFilter:TextureFilter; var minFilter:TextureFilter; var mipmaps:Bool; var wrapU:TextureWrap; var wrapV:TextureWrap; });

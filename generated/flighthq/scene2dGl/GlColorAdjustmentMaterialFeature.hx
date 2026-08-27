@@ -14,33 +14,34 @@ import flighthq.scene2dGl.GlQuadBatchWriter.useGlQuadBatchProgram;
 import flighthq.scene2dGl.GlShapeMesh.drawGlShapeMeshBatch;
 import flighthq.scene2dGl.GlShapeMesh.ensureGlShapeMeshProgram;
 import flighthq.types.ColorScaleBias;
+import flighthq.types.GlColorAdjustmentMaterialFeature;
+import flighthq.types.GlColorScaleBiasInstancedShader;
+import flighthq.types.GlRenderRegistries;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature;
-import flighthq.types.GlRenderState.GlColorScaleBiasInstancedShader;
-import flighthq.types.GlRenderState.GlRenderRegistries;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlShapeMeshColorScaleBiasShader;
-import flighthq.types.GlRenderState.GlUniformColorScaleBiasShader;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlShapeMesh;
 import flighthq.types.GlShapeMeshBinding;
-import flighthq.types.RegistryTable.RegistryEntryState;
-import flighthq.types.RegistryTable.SlotTable;
+import flighthq.types.GlShapeMeshColorScaleBiasShader;
+import flighthq.types.GlUniformColorScaleBiasShader;
+import flighthq.types.RegistryEntryState;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
+import flighthq.types.SlotTable;
 import flighthq.types.TintMaterialData;
 import flighthq.types._internal._RegistryTableValues.RegistryEntryStateValue;
 
 typedef ColorAdjustmentData__glColorAdjustmentMaterialFeature = flighthq._internal._Union2<flighthq._internal._Union2<ColorScaleBias, TintMaterialData>, Array<Float>>;
 
+@:noCompletion
 class GlColorAdjustmentMaterialFeature {
   public static function registerGlColorAdjustmentMaterialFeature(state:GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
-    var table:SlotTable<flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
+    var table:SlotTable<flighthq.types.GlColorAdjustmentMaterialFeature> = cast _Runtime.UNDEFINED;
     enableColorAdjustments(({ final __callArgument0:Dynamic = state; __callArgument0; }));
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlRenderStateRuntime);
-    table = _Runtime.coalesce((cast runtime.registries : { @:optional var colorAdjustmentFeature:Null<SlotTable<flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature>>; }).colorAdjustmentFeature, function():Dynamic return cast (cast createSlotTable((cast 'GlColorAdjustmentFeature' : String), (cast 'Disabled' : String)) : SlotTable<flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature>));
-    if ((cast ((cast !_Runtime.strictEquals(({ final __structural4 = (cast table : SlotTable<flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature>).entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) || (cast !_Runtime.strictEquals((cast (cast table : SlotTable<flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature>).entry : { var state:String; var value:flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature; }).value, GlColorAdjustmentMaterialFeature.glColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature) : Bool)) : Bool)) {
-      ((cast runtime.registries : { @:optional var colorAdjustmentFeature:Null<SlotTable<flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature>>; }).colorAdjustmentFeature = cast (_Runtime.mergeObjects([table, { entry: { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: GlColorAdjustmentMaterialFeature.glColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature } }]) : Null<SlotTable<flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature>>));
+    table = _Runtime.coalesce((cast runtime.registries : { @:optional var colorAdjustmentFeature:Null<SlotTable<flighthq.types.GlColorAdjustmentMaterialFeature>>; }).colorAdjustmentFeature, function():Dynamic return cast (cast createSlotTable((cast 'GlColorAdjustmentFeature' : String), (cast 'Disabled' : String)) : SlotTable<flighthq.types.GlColorAdjustmentMaterialFeature>));
+    if ((cast ((cast !_Runtime.strictEquals(({ final __structural4 = (cast table : SlotTable<flighthq.types.GlColorAdjustmentMaterialFeature>).entry; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) || (cast !_Runtime.strictEquals((cast (cast table : SlotTable<flighthq.types.GlColorAdjustmentMaterialFeature>).entry : { var state:String; var value:flighthq.types.GlColorAdjustmentMaterialFeature; }).value, GlColorAdjustmentMaterialFeature.glColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature) : Bool)) : Bool)) {
+      ((cast runtime.registries : { @:optional var colorAdjustmentFeature:Null<SlotTable<flighthq.types.GlColorAdjustmentMaterialFeature>>; }).colorAdjustmentFeature = cast (_Runtime.mergeObjects([table, { entry: { state: (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound, value: GlColorAdjustmentMaterialFeature.glColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature } }]) : Null<SlotTable<flighthq.types.GlColorAdjustmentMaterialFeature>>));
     }
     if ((cast _Runtime.strictEquals(runtime.quadBatchWriterColorScaleBiasMode, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (runtime.quadBatchWriterColorScaleBiasMode = cast (GlColorAdjustmentMaterialFeature.CT_MODE_NONE__glColorAdjustmentMaterialFeature : Null<Float>)); }
   }
@@ -678,5 +679,5 @@ class GlColorAdjustmentMaterialFeature {
 
   public static final SHAPE_MESH_MATRIX_FS__glColorAdjustmentMaterialFeature:String = '\nprecision mediump float;\nuniform vec4 u_color;\nuniform vec4 u_ctRow0;\nuniform vec4 u_ctRow1;\nuniform vec4 u_ctRow2;\nuniform vec4 u_ctRow3;\nuniform vec4 u_colorBias;\n' + Std.string(GlColorAdjustmentMaterialFeature.GL_COLOR_MATRIX_FRAGMENT_CHUNK__glColorAdjustmentMaterialFeature) + '\nvoid main() {\n  vec4 color = u_color;\n  if (color.a <= 0.0) discard;\n  color = vec4(color.rgb / color.a, color.a);\n  color = applyFlightColorMatrix(color, u_ctRow0, u_ctRow1, u_ctRow2, u_ctRow3, u_colorBias);\n  gl_FragColor = vec4(color.rgb * color.a, color.a);\n}\n';
 
-  public static final glColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature:flighthq.types.GlRenderState.GlColorAdjustmentMaterialFeature = (cast { fragmentShaderChunk: GlColorAdjustmentMaterialFeature.GL_COLOR_ADJUSTMENT_FRAGMENT_CHUNK__glColorAdjustmentMaterialFeature, matrixFragmentShaderChunk: GlColorAdjustmentMaterialFeature.GL_COLOR_MATRIX_FRAGMENT_CHUNK__glColorAdjustmentMaterialFeature, drawShapeMeshes: GlColorAdjustmentMaterialFeature.drawGlShapeMeshesColorScaleBias__glColorAdjustmentMaterialFeature, flush: GlColorAdjustmentMaterialFeature.flushGlColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature, record: GlColorAdjustmentMaterialFeature.recordGlColorAdjustment__glColorAdjustmentMaterialFeature });
+  public static final glColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature:flighthq.types.GlColorAdjustmentMaterialFeature = (cast { fragmentShaderChunk: GlColorAdjustmentMaterialFeature.GL_COLOR_ADJUSTMENT_FRAGMENT_CHUNK__glColorAdjustmentMaterialFeature, matrixFragmentShaderChunk: GlColorAdjustmentMaterialFeature.GL_COLOR_MATRIX_FRAGMENT_CHUNK__glColorAdjustmentMaterialFeature, drawShapeMeshes: GlColorAdjustmentMaterialFeature.drawGlShapeMeshesColorScaleBias__glColorAdjustmentMaterialFeature, flush: GlColorAdjustmentMaterialFeature.flushGlColorAdjustmentMaterialFeature__glColorAdjustmentMaterialFeature, record: GlColorAdjustmentMaterialFeature.recordGlColorAdjustment__glColorAdjustmentMaterialFeature });
 }

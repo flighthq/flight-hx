@@ -5,16 +5,18 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.effectsCanvas.CanvasEffectCompositing.drawCanvasImageDataPass;
 import flighthq.effectsCanvas.CanvasRenderEffectRegistry.registerCanvasRenderEffect;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectContext;
-import flighthq.types.CanvasRenderEffectPipeline.CanvasRenderEffectRunner;
+import flighthq.types.CanvasRenderEffectContext;
+import flighthq.types.CanvasRenderEffectRunner;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.CanvasRenderTarget;
 import flighthq.types.LensDistortionEffect;
 import flighthq.types.RenderEffect;
 
+@:noCompletion
 class CanvasLensDistortionEffect {
-  @:noCompletion
-  public static function applyLensDistortionEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:LensDistortionEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyLensDistortionEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:LensDistortionEffect):Void {
     var amount:Float = cast _Runtime.UNDEFINED;
     var scale:Float = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.2);

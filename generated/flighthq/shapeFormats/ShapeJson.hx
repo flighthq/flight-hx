@@ -22,19 +22,19 @@ import flighthq.shape.ShapeCommands.appendShapeMoveTo;
 import flighthq.shape.ShapeCommands.appendShapePath;
 import flighthq.shape.ShapeCommands.appendShapeRectangle;
 import flighthq.shape.ShapeCommands.appendShapeRoundRectangle;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Matrix;
 import flighthq.types.Sampler;
 import flighthq.types.Shape;
-import flighthq.types.Shape.ShapeData;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
-import flighthq.types.ShapeJson.ShapeJsonFormatOptions;
-import flighthq.types.ShapeJson.ShapeJsonParseOptions;
-import flighthq.types.ShapeJson.ShapeTextureReference;
-import flighthq.types.Texture.Texture2D;
-import flighthq.types.Texture.TextureColorSpace;
-import flighthq.types.Texture.TextureSourceCubeFaces;
+import flighthq.types.ShapeCommandToken;
+import flighthq.types.ShapeData;
+import flighthq.types.ShapeJsonFormatOptions;
+import flighthq.types.ShapeJsonParseOptions;
+import flighthq.types.ShapeTextureReference;
+import flighthq.types.Texture2D;
+import flighthq.types.TextureColorSpace;
 import flighthq.types.TextureSource;
+import flighthq.types.TextureSourceCubeFaces;
 import flighthq.types.Vector2;
 import flighthq.types.VoxelGrid;
 
@@ -46,6 +46,7 @@ typedef ShapeCommandArgType__shapeJson = String;
 
 typedef ShapeCommandArgSpec__shapeJson = { var required:Float; var types:Array<ShapeCommandArgType__shapeJson>; };
 
+@:noCompletion
 class ShapeJson {
   public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
     var commands:Array<ShapeCommandToken> = cast _Runtime.UNDEFINED;

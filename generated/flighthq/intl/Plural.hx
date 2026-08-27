@@ -7,6 +7,7 @@ import flighthq.intl.Cache.getCacheKey;
 import flighthq.intl.Cache.getCached;
 import flighthq.types.LocaleInput;
 
+@:noCompletion
 class Plural {
   public static function selectOrdinalCategory(value:Float, locale:LocaleInput, ?options:Dynamic):Dynamic {
     return cast _Runtime.callProperty(Plural.getPluralRules__plural(({ final __callArgument4:Dynamic = locale; __callArgument4; }), (cast _Runtime.mergeObjects([{ type: 'ordinal' }, options]) : flighthq._internal._Any)), 'select', cast ([value] : Array<Dynamic>));

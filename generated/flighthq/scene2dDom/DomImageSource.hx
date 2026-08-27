@@ -9,9 +9,11 @@ import flighthq.types.Image;
 import flighthq.types.Types.BitmapTextureSourceKind;
 import flighthq.types._internal._TextureSourceKindValues.BitmapTextureSourceKind;
 
+@:noCompletion
 class DomImageSource {
-  @:noCompletion
-  public static function explainDomImageSource(image:flighthq._internal._Union2<Image, Bitmap>):DomImageSourceKind {
+  @:allow(flighthq)
+  @:keep
+  private static function explainDomImageSource(image:flighthq._internal._Union2<Image, Bitmap>):DomImageSourceKind {
     if ((cast _Runtime.strictEquals((cast image : { var kind:String; }).kind, BitmapTextureSourceKind) : Bool)) { return cast 'data'; }
     return cast 'element';
     return cast null;

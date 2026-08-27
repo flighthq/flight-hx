@@ -8,6 +8,7 @@ import flighthq.types.Path;
 import flighthq.types.PathMesh;
 import flighthq.types.PathMeshTyped;
 
+@:noCompletion
 class TessellatePathTyped {
   public static function tessellatePathTyped(path:Path, tolerance:Float = 0.25):PathMeshTyped {
     var mesh:PathMesh = cast _Runtime.UNDEFINED;

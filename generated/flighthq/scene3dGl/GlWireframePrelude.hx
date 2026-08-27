@@ -13,31 +13,36 @@ import flighthq.types.GlRenderState;
 import flighthq.types.GlScene3DRuntime;
 import flighthq.types.GlWireframeProgram;
 
+@:noCompletion
 class GlWireframePrelude {
-  @:noCompletion
-  public static function compileGlWireframeProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, alphaMaskEnabled:Bool = false, skinned:Bool = false):GlWireframeProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function compileGlWireframeProgram(gl:flighthq._internal.dom.WebGL2RenderingContext, alphaMaskEnabled:Bool = false, skinned:Bool = false):GlWireframeProgram {
     var program:flighthq._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     program = (cast compileGlProgram(({ final __callArgument0:Dynamic = gl; __callArgument0; }), (cast (cast getGlWireframeVertexSource((cast skinned : Bool)) : String) : String), (cast (cast getGlWireframeFragmentSource((cast alphaMaskEnabled : Bool)) : String) : String)) : flighthq._internal.dom.WebGLProgram);
     return cast { locAlphaCutoff: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_alphaCutoff'), locColor: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_color'), locJointNormalTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointNormalTexture'), locJointTexture: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_jointTexture'), locModel: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_model'), locNormalMatrix: null, locViewProjection: flighthq._internal.backend.WebGl2Backend.getUniformLocation(gl, program, 'u_viewProjection'), program: program };
     return cast null;
   }
 
-  @:noCompletion
-  public static function ensureGlWireframeProgram(state:GlRenderState, alphaMaskEnabled:Bool = false):GlWireframeProgram {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlWireframeProgram(state:GlRenderState, alphaMaskEnabled:Bool = false):GlWireframeProgram {
     var skinned:Bool = cast _Runtime.UNDEFINED;
     skinned = (cast (cast getGlScene3DRuntime(({ final __callArgument2:Dynamic = state; __callArgument2; })) : GlScene3DRuntime) : { var activeSkinnedRun:Bool; }).activeSkinnedRun;
     return cast (cast (cast ensureGlScene3DProgram : GlRenderState->String->(flighthq._internal.dom.WebGL2RenderingContext->GlWireframeProgram)->GlWireframeProgram)(({ final __callArgument4:Dynamic = state; __callArgument4; }), (cast 'wireframe:' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast 'mask' : Dynamic) : (cast 'base' : Dynamic))) + '|' + Std.string(((cast skinned : Bool) ? (cast 'skin' : Dynamic) : (cast 'rigid' : Dynamic))) + '' : String), ({ final __callArgument7:Dynamic = function(gl:flighthq._internal.dom.WebGL2RenderingContext):GlWireframeProgram return (cast compileGlWireframeProgram(({ final __callArgument5:Dynamic = gl; __callArgument5; }), (cast alphaMaskEnabled : Bool), (cast skinned : Bool)) : GlWireframeProgram); __callArgument7; })) : GlWireframeProgram);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlWireframeFragmentSource(alphaMaskEnabled:Bool = false):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlWireframeFragmentSource(alphaMaskEnabled:Bool = false):String {
     return cast '#version 300 es\n' + Std.string(((cast alphaMaskEnabled : Bool) ? (cast '#define ALPHA_MASK\n' : Dynamic) : (cast '' : Dynamic))) + '' + Std.string(GlWireframePrelude.WIREFRAME_FRAGMENT__glWireframePrelude) + '';
     return cast null;
   }
 
-  @:noCompletion
-  public static function getGlWireframeVertexSource(skinned:Bool = false):String {
+  @:allow(flighthq)
+  @:keep
+  private static function getGlWireframeVertexSource(skinned:Bool = false):String {
     return cast ('#version 300 es\n' + Std.string(((cast skinned : Bool) ? (cast ('#define HAS_SKIN\n' + GL_SKIN_VERTEX_DECLARATIONS_GLSL) : Dynamic) : (cast '' : Dynamic))) + '' + GlWireframePrelude.WIREFRAME_VERTEX__glWireframePrelude);
     return cast null;
   }

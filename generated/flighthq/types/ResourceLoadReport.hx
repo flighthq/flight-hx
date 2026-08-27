@@ -5,5 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef ResourceLoadReport = { var attempts:Float; var bytes:Float; var elapsedMs:Float; var group:Null<String>; var key:String; var status:ResourceLoadReportStatus; };
-
-typedef ResourceLoadReportStatus = String;

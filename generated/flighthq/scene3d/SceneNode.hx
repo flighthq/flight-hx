@@ -12,22 +12,23 @@ import flighthq.node.Node.createNodeRuntime;
 import flighthq.node.Node.enableNodeSignals;
 import flighthq.node.Node.getNodeRuntime;
 import flighthq.node.Node.getNodeSignals;
-import flighthq.types.Entity.Kind;
 import flighthq.types.HasAppearance;
-import flighthq.types.HasAppearance.HasAppearanceRuntime;
+import flighthq.types.HasAppearanceRuntime;
 import flighthq.types.HasTransform3D;
-import flighthq.types.HasTransform3D.HasTransform3DRuntime;
+import flighthq.types.HasTransform3DRuntime;
+import flighthq.types.Kind;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeTraitsKey;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DRuntime;
+import flighthq.types.Node3DTraits;
 import flighthq.types.NodeSignals;
+import flighthq.types.NodeTraitsKey;
 import flighthq.types.Types.Node3DKind;
 import flighthq.types.Types.Node3DTraitsKey;
 import flighthq.types._internal._Node3DValues.Node3DKind;
 import flighthq.types._internal._Node3DValues.Node3DTraitsKey;
 
+@:noCompletion
 class SceneNode {
   public static function createNode3D(?kind:Kind, ?obj:flighthq._internal._Partial<{ var enabled:Bool; var name:Null<String>; var alpha:Float; var visible:Bool; }>):Node3D {
     if (kind == null) kind = cast (Node3DKind : Dynamic);
@@ -39,8 +40,9 @@ class SceneNode {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createNode3DRuntime():Node3DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createNode3DRuntime():Node3DRuntime {
     var out:Node3DRuntime = cast _Runtime.UNDEFINED;
     out = (cast (#if js _Runtime.callValue(createNodeRuntime, cast ([] : Array<Dynamic>)) #else createNodeRuntime(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Node3DRuntime);
     ((cast out : { @:optional var traits:Null<NodeTraitsKey<Node3DTraits>>; }).traits = Node3DTraitsKey);
@@ -55,8 +57,9 @@ class SceneNode {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getNode3DRuntime(source:Node3D):Node3DRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getNode3DRuntime(source:Node3D):Node3DRuntime {
     return cast (cast getNodeRuntime((cast source : Dynamic)) : Node3DRuntime);
     return cast null;
   }

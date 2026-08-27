@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.haptics.Haptics.createWebHapticsBackend;
 import flighthq.haptics.Haptics.installHapticsHostBackend;
-import flighthq.types.Haptics.HapticsBackend;
+import flighthq.types.HapticsBackend;
 
+@:noCompletion
 class WebHaptics {
   public static function enableHostWebHaptics():Void {
     if ((cast WebHaptics._enabled__webHaptics : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebHaptics {
     installHapticsHostBackend((cast createWebHapticsBackend() : HapticsBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebHapticsForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebHapticsForTest():Void {
     (WebHaptics._enabled__webHaptics = cast (false : Dynamic));
   }
 

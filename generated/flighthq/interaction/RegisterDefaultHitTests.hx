@@ -37,6 +37,7 @@ import flighthq.types._internal._SpriteValues.SpriteKind;
 import flighthq.types._internal._TextLabelValues.TextLabelKind;
 import flighthq.types._internal._TilemapValues.TilemapKind;
 
+@:noCompletion
 class RegisterDefaultHitTests {
   public static function registerDefaultHitTests():Void {
     registerHitTest((cast DisplayObjectKind : String), ({ final __callArgument0:Dynamic = defaultNode2DHitTestHandler; __callArgument0; }));

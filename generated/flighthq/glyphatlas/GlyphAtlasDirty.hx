@@ -4,10 +4,11 @@ package flighthq.glyphatlas;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.geometry.Rectangle.createRectangle;
-import flighthq.types.GlyphSource.GlyphAtlas;
-import flighthq.types.GlyphSource.GlyphAtlasRuntime;
+import flighthq.types.GlyphAtlas;
+import flighthq.types.GlyphAtlasRuntime;
 import flighthq.types.Rectangle;
 
+@:noCompletion
 class GlyphAtlasDirty {
   public static function clearGlyphAtlasDirty(atlas:GlyphAtlas):Void {
     ((cast atlas.runtime : { var dirty:Bool; }).dirty = cast (false : Bool));

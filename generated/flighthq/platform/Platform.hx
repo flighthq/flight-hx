@@ -4,13 +4,13 @@ package flighthq.platform;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.BackendExplanation;
-import flighthq.types.Platform.PlatformBackend;
-import flighthq.types.Platform.PlatformEndianness;
-import flighthq.types.Platform.PlatformEngine;
-import flighthq.types.Platform.PlatformInfo;
-import flighthq.types.Platform.PlatformKind;
-import flighthq.types.Platform.PlatformName;
-import flighthq.types.Platform.PlatformRuntime;
+import flighthq.types.PlatformBackend;
+import flighthq.types.PlatformEndianness;
+import flighthq.types.PlatformEngine;
+import flighthq.types.PlatformInfo;
+import flighthq.types.PlatformKind;
+import flighthq.types.PlatformName;
+import flighthq.types.PlatformRuntime;
 import flighthq.useragent.UserAgent.detectEndianness;
 import flighthq.useragent.UserAgent.parseUserAgentArch;
 import flighthq.useragent.UserAgent.parseUserAgentEngine;
@@ -75,14 +75,16 @@ class Platform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createPlatformInfo():PlatformInfo {
+  @:allow(flighthq)
+  @:keep
+  private static function createPlatformInfo():PlatformInfo {
     return cast { arch: '', distro: '', distroVersion: '', endianness: 'unknown', engine: 'unknown', engineVersion: '', isTouch: false, kind: 'unknown', locale: '', name: 'unknown', osBuild: '', pointerWidth: -1.0, runtime: 'unknown', version: '' };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebPlatformBackend():PlatformBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function createWebPlatformBackend():PlatformBackend {
     return cast { getInfo: Platform.getWebPlatformInfo__platform };
     return cast null;
   }
@@ -98,8 +100,9 @@ class Platform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getPlatformBackend():PlatformBackend {
+  @:allow(flighthq)
+  @:keep
+  private static function getPlatformBackend():PlatformBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(Platform._custom__platform, function():Dynamic return cast Platform._host__platform), function():Dynamic return cast Platform._sentinel__platform);
     return cast null;
   }
@@ -124,8 +127,9 @@ class Platform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getPlatformRuntime():PlatformRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getPlatformRuntime():PlatformRuntime {
     return cast (cast (cast getPlatformInfo(({ final __callArgument7:Dynamic = Platform._scratch__platform; __callArgument7; })) : PlatformInfo) : { var runtime:PlatformRuntime; }).runtime;
     return cast null;
   }
@@ -153,8 +157,9 @@ class Platform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function installPlatformHostBackend(backend:PlatformBackend):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function installPlatformHostBackend(backend:PlatformBackend):Void {
     if ((cast !_Runtime.strictEquals(Platform._host__platform, null) : Bool)) {
       if ((cast !_Runtime.strictEquals(Platform._host__platform, backend) : Bool)) { (Platform._hostConflict__platform = cast (true : Dynamic)); }
       return;
@@ -197,21 +202,24 @@ class Platform {
     return cast null;
   }
 
-  @:noCompletion
-  public static function observePlatformHostResult(operation:String, succeeded:Bool):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function observePlatformHostResult(operation:String, succeeded:Bool):Void {
     (Platform._hostObservation__platform = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
-  @:noCompletion
-  public static function resetPlatformBackendForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetPlatformBackendForTest():Void {
     (Platform._custom__platform = cast (null : Dynamic));
     (Platform._host__platform = cast (null : Dynamic));
     (Platform._hostConflict__platform = cast (false : Dynamic));
     (Platform._hostObservation__platform = cast (null : Dynamic));
   }
 
-  @:noCompletion
-  public static function setPlatformBackend(backend:Null<PlatformBackend>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setPlatformBackend(backend:Null<PlatformBackend>):Void {
     (Platform._custom__platform = cast (backend : Dynamic));
   }
 }

@@ -12,24 +12,24 @@ import flighthq.node.NodeTransform3d.setNodeLocalMatrix4;
 import flighthq.node.NodeTransform3d.setNodeTransform3D;
 import flighthq.scene3d.SceneNode.createNode3D;
 import flighthq.scene3d.SceneNode.getNode3DRuntime;
-import flighthq.types.Entity.Kind;
+import flighthq.types.Kind;
 import flighthq.types.Material;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
 import flighthq.types.Mesh;
-import flighthq.types.Mesh.MeshRuntime;
 import flighthq.types.MeshDeformer;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MeshMorph;
+import flighthq.types.MeshRuntime;
 import flighthq.types.MorphTarget;
-import flighthq.types.MorphTarget.MeshMorph;
-import flighthq.types.Node.NodeData;
-import flighthq.types.Node.NodeRuntime;
 import flighthq.types.Node3D;
-import flighthq.types.Node3D.Node3DRuntime;
-import flighthq.types.Node3D.Node3DTraits;
+import flighthq.types.Node3DRuntime;
+import flighthq.types.Node3DTraits;
+import flighthq.types.NodeData;
+import flighthq.types.NodeRuntime;
 import flighthq.types.NodeSignals;
 import flighthq.types.Quaternion;
 import flighthq.types.Skin;
-import flighthq.types.Transform3D.Transform3DLike;
+import flighthq.types.Transform3DLike;
 import flighthq.types.Types.MeshDeformerMorph;
 import flighthq.types.Types.MeshDeformerNone;
 import flighthq.types.Types.MeshDeformerSkeletal;
@@ -40,6 +40,7 @@ import flighthq.types._internal._MeshDeformerValues.MeshDeformerNone;
 import flighthq.types._internal._MeshDeformerValues.MeshDeformerSkeletal;
 import flighthq.types._internal._MeshValues.MeshKind;
 
+@:noCompletion
 class Mesh {
   public static function cloneMesh(source:flighthq.types.Mesh):flighthq.types.Mesh {
     var hasDeformation:Bool = cast _Runtime.UNDEFINED;
@@ -81,8 +82,9 @@ class Mesh {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getMeshRuntime(source:flighthq.types.Mesh):MeshRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getMeshRuntime(source:flighthq.types.Mesh):MeshRuntime {
     return cast (cast getNode3DRuntime(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Node3DRuntime);
     return cast null;
   }

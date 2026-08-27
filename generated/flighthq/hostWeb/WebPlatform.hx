@@ -5,8 +5,9 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.platform.Platform.createWebPlatformBackend;
 import flighthq.platform.Platform.installPlatformHostBackend;
-import flighthq.types.Platform.PlatformBackend;
+import flighthq.types.PlatformBackend;
 
+@:noCompletion
 class WebPlatform {
   public static function enableHostWebPlatform():Void {
     if ((cast WebPlatform._enabled__webPlatform : Bool)) { return; }
@@ -14,8 +15,9 @@ class WebPlatform {
     installPlatformHostBackend((cast createWebPlatformBackend() : PlatformBackend));
   }
 
-  @:noCompletion
-  public static function resetHostWebPlatformForTest():Void {
+  @:allow(flighthq)
+  @:keep
+  private static function resetHostWebPlatformForTest():Void {
     (WebPlatform._enabled__webPlatform = cast (false : Dynamic));
   }
 

@@ -11,17 +11,18 @@ import flighthq.skeleton3d.GetMeshSkinBounds.getMeshSkinConservativeBounds;
 import flighthq.skeleton3d.Skeleton3d.computeSkeleton3DJointMatrices;
 import flighthq.skeleton3d.SkinMeshGeometry.captureMeshSkinBindPose;
 import flighthq.types.Aabb;
-import flighthq.types.Aabb.AabbLike;
+import flighthq.types.AabbLike;
 import flighthq.types.Mesh;
-import flighthq.types.Mesh.MeshRuntime;
 import flighthq.types.MeshGeometry;
+import flighthq.types.MeshRuntime;
 import flighthq.types.MeshSkinBindPose;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeRuntime;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeRuntime;
 import flighthq.types.Skeleton3D;
 import flighthq.types.Skin;
 
+@:noCompletion
 class PrepareScene3DSkinning {
   public static function prepareMeshSkinning(mesh:Mesh):Void {
     var skin:Null<Skin> = cast _Runtime.UNDEFINED;

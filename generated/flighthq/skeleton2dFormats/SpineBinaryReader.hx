@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ByteReader;
 
+@:noCompletion
 class SpineBinaryReader {
   public static function createSpineBinaryReader(bytes:flighthq._internal._UInt8Array):ByteReader {
     return cast { offset: 0.0, view: _Runtime.construct(flighthq._internal._HostValueLut.get('DataView'), [_Runtime.field(bytes, 'buffer'), _Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')]) };

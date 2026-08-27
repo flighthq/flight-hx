@@ -6,9 +6,11 @@ import flighthq._internal._Runtime;
 import flighthq.types.CanvasRenderState;
 import flighthq.types.Matrix;
 
+@:noCompletion
 class CanvasTransform {
-  @:noCompletion
-  public static function setCanvasTransform(state:CanvasRenderState, context:flighthq._internal.dom.CanvasRenderingContext2D, transform:Matrix):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setCanvasTransform(state:CanvasRenderState, context:flighthq._internal.dom.CanvasRenderingContext2D, transform:Matrix):Void {
     if ((cast (cast state : CanvasRenderState).roundPixels : Bool)) {
       flighthq._internal.backend.Canvas2dBackend.call(context, 'setTransform', cast ([transform.a, transform.b, transform.c, transform.d, _Runtime.fround(transform.tx), _Runtime.fround(transform.ty)] : Array<Dynamic>));
     } else {

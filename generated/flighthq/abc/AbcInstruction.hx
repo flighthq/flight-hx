@@ -3,14 +3,15 @@ package flighthq.abc;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Abc.AbcInstruction;
-import flighthq.types.Abc.AbcOpcode;
 import flighthq.types.Abc.AbcOpcodeValue;
+import flighthq.types.AbcInstruction;
+import flighthq.types.AbcOpcode;
 
+@:noCompletion
 class AbcInstruction {
-  public static function readAbcInstructions(code:flighthq._internal._UInt8Array):Null<Array<flighthq.types.Abc.AbcInstruction>> {
+  public static function readAbcInstructions(code:flighthq._internal._UInt8Array):Null<Array<flighthq.types.AbcInstruction>> {
     var source:flighthq._internal._UInt8Array = cast _Runtime.UNDEFINED;
-    var instructions:Array<flighthq.types.Abc.AbcInstruction> = cast _Runtime.UNDEFINED;
+    var instructions:Array<flighthq.types.AbcInstruction> = cast _Runtime.UNDEFINED;
     var pos:Float = cast _Runtime.UNDEFINED;
     source = (cast code : flighthq._internal._UInt8Array);
     instructions = (cast cast ([] : Array<Dynamic>));

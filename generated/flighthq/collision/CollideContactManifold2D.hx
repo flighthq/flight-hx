@@ -19,15 +19,16 @@ import flighthq.collision.ShapeContact2D.collideCirclePolygonContactManifold2D;
 import flighthq.collision.ShapeContact2D.collideObbObbContactManifold2D;
 import flighthq.collision.ShapeContact2D.collideObbPolygonContactManifold2D;
 import flighthq.collision.ShapeContact2D.collidePolygonPolygonContactManifold2D;
-import flighthq.types.Collision.CollisionAabb2D;
-import flighthq.types.Collision.CollisionBuiltInShape2D;
-import flighthq.types.Collision.CollisionCapsule2D;
-import flighthq.types.Collision.CollisionCircle2D;
-import flighthq.types.Collision.CollisionContactManifold2D;
-import flighthq.types.Collision.CollisionObb2D;
-import flighthq.types.Collision.CollisionPolygon2D;
-import flighthq.types.Collision.CollisionShapeKind2D;
+import flighthq.types.CollisionAabb2D;
+import flighthq.types.CollisionBuiltInShape2D;
+import flighthq.types.CollisionCapsule2D;
+import flighthq.types.CollisionCircle2D;
+import flighthq.types.CollisionContactManifold2D;
+import flighthq.types.CollisionObb2D;
+import flighthq.types.CollisionPolygon2D;
+import flighthq.types.CollisionShapeKind2D;
 
+@:noCompletion
 class CollideContactManifold2D {
   public static function collideContactManifold2D(a:CollisionBuiltInShape2D, b:CollisionBuiltInShape2D, out:CollisionContactManifold2D):Bool {
     var rankA:Float = cast _Runtime.UNDEFINED;

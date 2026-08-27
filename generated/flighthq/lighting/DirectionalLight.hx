@@ -12,9 +12,10 @@ import flighthq.types.DirectionalLightOptions;
 import flighthq.types.Entity;
 import flighthq.types.Types.DirectionalLightKind;
 import flighthq.types.Vector3;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector3Like;
 import flighthq.types._internal._DirectionalLightValues.DirectionalLightKind;
 
+@:noCompletion
 class DirectionalLight {
   public static function cloneDirectionalLight(source:flighthq.types.DirectionalLight):flighthq.types.DirectionalLight {
     return cast (cast createEntity((cast { castsShadow: source.castsShadow, color: source.color, direction: (cast cloneVector3(({ final __callArgument0:Dynamic = source.direction; __callArgument0; })) : Vector3), intensity: source.intensity, kind: DirectionalLightKind, normalBias: source.normalBias, pcfRadius: source.pcfRadius, shadowBias: source.shadowBias } : Dynamic)) : { >Entity, var castsShadow:Bool; var color:Float; var direction:Vector3; var intensity:Float; var kind:String; var normalBias:Float; var pcfRadius:Float; var shadowBias:Float; });

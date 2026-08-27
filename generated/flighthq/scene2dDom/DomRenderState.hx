@@ -7,26 +7,27 @@ import flighthq.geometry.Matrix.createMatrix;
 import flighthq.render.RenderColor.setRenderStateBackgroundColor;
 import flighthq.render.RenderState.createRenderState as _createRenderState;
 import flighthq.render.RenderState.createRenderStateRuntime;
+import flighthq.types.DomClipEntry;
+import flighthq.types.DomClipHooks;
 import flighthq.types.DomRenderOptions;
+import flighthq.types.DomRenderRegistries;
 import flighthq.types.DomRenderState;
-import flighthq.types.DomRenderState.DomClipEntry;
-import flighthq.types.DomRenderState.DomClipHooks;
-import flighthq.types.DomRenderState.DomRenderRegistries;
-import flighthq.types.DomRenderState.DomRenderStateRuntime;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.DomRenderStateRuntime;
+import flighthq.types.EntityRuntime;
+import flighthq.types.KeyedTable;
 import flighthq.types.Matrix;
 import flighthq.types.Path;
 import flighthq.types.PathMesh;
-import flighthq.types.RegistryTable.KeyedTable;
-import flighthq.types.RegistryTable.SlotTable;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
-import flighthq.types.RenderState.Scene3DGraphSyncPolicy;
 import flighthq.types.Renderer;
+import flighthq.types.Scene3DGraphSyncPolicy;
+import flighthq.types.SlotTable;
 import flighthq.types.StrokeStyle;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class DomRenderState {
   public static function createDomRenderState(element:flighthq._internal.dom.HTMLElement, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var pixelRatio:Null<Float>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):flighthq.types.DomRenderState {
     if (options == null) options = cast ({  } : Dynamic);
@@ -54,8 +55,9 @@ class DomRenderState {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createDomRenderStateRuntime():DomRenderStateRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createDomRenderStateRuntime():DomRenderStateRuntime {
     var runtime:DomRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast createRenderStateRuntime() : DomRenderStateRuntime);
     (runtime.registries = cast ({ renderers: (cast runtime.registries : { var renderers:KeyedTable<Renderer>; }).renderers, shapeRasterizer: { entry: null, onMiss: 'Unregistered', registry: 'DomShapeRasterizer', shape: 'slot' }, strokeTessellator: (cast runtime.registries : { var strokeTessellator:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator, textureResolvers: { entries: _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []), onMiss: 'Unregistered', registry: 'DomTextureResolver', shape: 'keyed' } } : DomRenderRegistries));
@@ -63,8 +65,9 @@ class DomRenderState {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getDomRenderStateRuntime(state:flighthq.types.DomRenderState):DomRenderStateRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getDomRenderStateRuntime(state:flighthq.types.DomRenderState):DomRenderStateRuntime {
     return cast (cast _Runtime.getIndex(state, EntityRuntimeKey) : DomRenderStateRuntime);
     return cast null;
   }

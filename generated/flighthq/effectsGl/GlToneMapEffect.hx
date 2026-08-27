@@ -7,17 +7,19 @@ import flighthq.effectsGl.GlEffectProgramCache.getGlEffectProgram;
 import flighthq.effectsGl.GlRenderEffectRegistry.registerGlRenderEffect;
 import flighthq.renderGl.GlFullscreenPass.drawGlFullscreenPass;
 import flighthq.types.GlFullscreenProgram;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectContext;
-import flighthq.types.GlRenderEffectPipeline.GlRenderEffectRunner;
+import flighthq.types.GlRenderEffectContext;
+import flighthq.types.GlRenderEffectRunner;
 import flighthq.types.GlRenderState;
 import flighthq.types.GlRenderTarget;
 import flighthq.types.RenderEffect;
 import flighthq.types.ToneMapEffect;
-import flighthq.types.ToneMapEffect.ToneMapOperator;
+import flighthq.types.ToneMapOperator;
 
+@:noCompletion
 class GlToneMapEffect {
-  @:noCompletion
-  public static function applyToneMapEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ToneMapEffect):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function applyToneMapEffectToGl(state:GlRenderState, source:GlRenderTarget, dest:GlRenderTarget, effect:ToneMapEffect):Void {
     var operator_:ToneMapOperator = cast _Runtime.UNDEFINED;
     var exposure:Float = cast _Runtime.UNDEFINED;
     var program:GlFullscreenProgram = cast _Runtime.UNDEFINED;

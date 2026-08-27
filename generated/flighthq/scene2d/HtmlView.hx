@@ -8,8 +8,8 @@ import flighthq.scene2d.DisplayObject.createNode2D;
 import flighthq.scene2d.DisplayObject.createNode2DRuntime;
 import flighthq.scene2d.DisplayObject.getNode2DRuntime;
 import flighthq.types.HtmlView;
-import flighthq.types.HtmlView.HtmlViewData;
-import flighthq.types.HtmlView.HtmlViewRuntime;
+import flighthq.types.HtmlViewData;
+import flighthq.types.HtmlViewRuntime;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
@@ -18,6 +18,7 @@ import flighthq.types.Rectangle;
 import flighthq.types.Types.HtmlViewKind;
 import flighthq.types._internal._HtmlViewValues.HtmlViewKind;
 
+@:noCompletion
 class HtmlView {
   public static function computeHtmlViewLocalBoundsRectangle(out:Rectangle, source:Node<Dynamic>):Void {
     var data:HtmlViewData = cast _Runtime.UNDEFINED;
@@ -31,20 +32,23 @@ class HtmlView {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createHtmlViewData(?data:{ @:optional var element:Null<flighthq._internal.dom.HTMLElement>; @:optional var height:Null<Float>; @:optional var width:Null<Float>; }):HtmlViewData {
+  @:allow(flighthq)
+  @:keep
+  private static function createHtmlViewData(?data:{ @:optional var element:Null<flighthq._internal.dom.HTMLElement>; @:optional var height:Null<Float>; @:optional var width:Null<Float>; }):HtmlViewData {
     return cast { element: _Runtime.coalesce(({ final __structural0 = data; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var element:Null<flighthq._internal.dom.HTMLElement>; }).element; }), function():Dynamic return cast null), height: _Runtime.coalesce(({ final __structural1 = data; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var height:Null<Float>; }).height; }), function():Dynamic return cast 100.0), width: _Runtime.coalesce(({ final __structural2 = data; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { @:optional var width:Null<Float>; }).width; }), function():Dynamic return cast 100.0) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function createHtmlViewRuntime():HtmlViewRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function createHtmlViewRuntime():HtmlViewRuntime {
     return cast (cast createNode2DRuntime((cast HtmlView.defaultMethods__htmlView : Dynamic)) : HtmlViewRuntime);
     return cast null;
   }
 
-  @:noCompletion
-  public static function getHtmlViewRuntime(source:flighthq.types.HtmlView):HtmlViewRuntime {
+  @:allow(flighthq)
+  @:keep
+  private static function getHtmlViewRuntime(source:flighthq.types.HtmlView):HtmlViewRuntime {
     return cast (cast getNode2DRuntime(({ final __callArgument3:Dynamic = source; __callArgument3; })) : HtmlViewRuntime);
     return cast null;
   }

@@ -3,10 +3,11 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.ElectronApi.ElectronMenuItemOptions;
-import flighthq.types.ElectronApi.ElectronMenuItemRole;
-import flighthq.types.Menu.MenuItemTemplate;
+import flighthq.types.ElectronMenuItemOptions;
+import flighthq.types.ElectronMenuItemRole;
+import flighthq.types.MenuItemTemplate;
 
+@:noCompletion
 class ElectronMenuTemplate {
   public static function toElectronTemplate(items:Array<MenuItemTemplate>, ?onSelect:String->Void):Array<ElectronMenuItemOptions> {
     return cast (cast _Runtime.mapArray((cast items : Array<MenuItemTemplate>), function(item:MenuItemTemplate, __unused0:Float, __unused1:Array<MenuItemTemplate>):ElectronMenuItemOptions {

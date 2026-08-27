@@ -6,20 +6,6 @@ import flighthq._internal._Runtime;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceFailureKindValue;
 import flighthq.types._internal._ImageResourceReferenceValues.ImageResourceReferenceKindValue;
 
-typedef ImageResourceReferenceKind = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef ImageResourceFailureKind = flighthq._internal._IndexedAccess<Dynamic, String>;
-
-typedef ImageResourceFailure = { var kind:ImageResourceFailureKind; var message:String; var name:Null<String>; };
-
 typedef ImageResourceReferenceBase__ImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; };
 
-typedef EmbeddedImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; var kind:String; var alphaType:AlphaType; @:optional var bitmapComposition:ImageBitmapComposition; var bytes:flighthq._internal._UInt8Array; };
-
-typedef ExternalImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; var kind:String; var uri:String; var basePath:Null<String>; };
-
 typedef ImageResourceReference = flighthq._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>;
-
-typedef ImageResourceFetch = ExternalImageResourceReference->flighthq._internal.dom.AbortSignal->flighthq._internal._Promise<Null<Image>>;
-
-typedef ImageResourceReferenceResolutionExplanation = { var failure:Null<ImageResourceFailure>; var kind:ImageResourceReferenceKind; var retryable:Bool; var state:ResourceResolutionState; };

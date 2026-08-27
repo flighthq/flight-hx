@@ -16,18 +16,22 @@ function writeFlighthqTree(): void {
   mkdirSync(path.join(fixtureRoot, 'flighthq', 'geometry'), { recursive: true });
   mkdirSync(path.join(fixtureRoot, 'game'), { recursive: true });
 
-  // A contract-bearing type: public API + private contract member/static, opened to flighthq only.
-  // A module-private type stands in for something used only within this module.
+  // Contract members carry their own grant, so an unrelated module-private
+  // sibling remains private. Contract-exclusive types can only be completion-hidden.
   writeFileSync(
     path.join(fixtureRoot, 'flighthq', 'node', 'Node.hx'),
     `package flighthq.node;
-@:allow(flighthq)
 class Node {
   public var publicX:Int = 1;
+  @:allow(flighthq)
   private var contractY:Int = 2;
+  private var moduleOnly:Int = 4;
+  @:allow(flighthq)
   private static function contractFn():Int return 40;
   public function new() {}
 }
+@:noCompletion
+typedef SharedContract = { value:Int }
 private typedef ContractOnly = { secret:Int }
 `,
   );
@@ -40,7 +44,8 @@ import flighthq.node.Node;
 class Consumer {
   public static function use():Int {
     final n = new Node();
-    return n.publicX + n.contractY + Node.contractFn();
+    final shared:flighthq.node.Node.SharedContract = { value: 0 };
+    return n.publicX + n.contractY + Node.contractFn() + shared.value;
   }
   static function main():Void {
     if (use() != 43) throw 'cross-package contract access miscompiled';
@@ -59,8 +64,12 @@ function compile(main: string): void {
 
 function compileError(main: string, source: string): string {
   writeFileSync(path.join(fixtureRoot, 'game', `${main}.hx`), source);
+  return existingCompileError(`game.${main}`);
+}
+
+function existingCompileError(main: string): string {
   try {
-    execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureRoot, '--main', `game.${main}`, '--interp'], {
+    execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureRoot, '--main', main, '--interp'], {
       cwd: path.resolve('.'),
       stdio: 'pipe',
     });
@@ -68,7 +77,7 @@ function compileError(main: string, source: string): string {
     const shell = error as { stdout?: Buffer; stderr?: Buffer };
     return `${shell.stdout?.toString() ?? ''}${shell.stderr?.toString() ?? ''}`;
   }
-  throw new Error(`expected game.${main} to fail compilation, but it succeeded`);
+  throw new Error(`expected ${main} to fail compilation, but it succeeded`);
 }
 
 describe('contract-lane visibility mapping', () => {
@@ -110,14 +119,40 @@ class WantsType {
 }
 `,
     );
-    let output = '';
-    try {
-      compile('flighthq.geometry.WantsType');
-      throw new Error('expected module-private type access to fail');
-    } catch (error: unknown) {
-      const shell = error as { stdout?: Buffer; stderr?: Buffer };
-      output = `${shell.stdout?.toString() ?? ''}${shell.stderr?.toString() ?? ''}`;
-    }
+    const output = existingCompileError('flighthq.geometry.WantsType');
     expect(output).toContain('Cannot access private type ContractOnly');
+  });
+
+  it('D: a member-level grant does not expose an unrelated module-private sibling', () => {
+    writeFlighthqTree();
+    writeFileSync(
+      path.join(fixtureRoot, 'flighthq', 'geometry', 'WantsLocal.hx'),
+      `package flighthq.geometry;
+import flighthq.node.Node;
+class WantsLocal {
+  static function main():Void {
+    final n = new Node();
+    trace(n.moduleOnly);
+  }
+}
+`,
+    );
+    expect(existingCompileError('flighthq.geometry.WantsLocal')).toContain('Cannot access private field moduleOnly');
+  });
+
+  it('E: @:noCompletion contract types remain compile-visible to consumers', () => {
+    writeFlighthqTree();
+    writeFileSync(
+      path.join(fixtureRoot, 'game', 'TypeConsumer.hx'),
+      `package game;
+class TypeConsumer {
+  static function main():Void {
+    final value:flighthq.node.Node.SharedContract = { value: 3 };
+    if (value.value != 3) throw 'contract type miscompiled';
+  }
+}
+`,
+    );
+    expect(() => compile('game.TypeConsumer')).not.toThrow();
   });
 });

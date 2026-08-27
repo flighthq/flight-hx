@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.SepiaAdjustment;
 
+@:noCompletion
 class SepiaAdjustment {
   public static function createSepiaAdjustment(?options:{ @:optional var intensity:Null<Float>; }):flighthq.types.SepiaAdjustment {
     if (options == null) options = cast ({  } : Dynamic);

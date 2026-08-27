@@ -5,41 +5,44 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.scene3dGl.GlMeshUpload.bindGlVertexAttribute;
 import flighthq.scene3dGl.GlMeshUpload.ensureGlMeshUpload;
+import flighthq.types.GlMeshUpload;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlScene3DRuntime.GlMeshUpload;
-import flighthq.types.GlWireframeProgram.GlWireframeUpload;
+import flighthq.types.GlWireframeUpload;
 import flighthq.types.MeshGeometry;
-import flighthq.types.MeshGeometry.VertexAttribute;
-import flighthq.types.MeshGeometry.VertexAttributeLayout;
-import flighthq.types.MeshGeometry.VertexSemantic;
+import flighthq.types.VertexAttribute;
+import flighthq.types.VertexAttributeLayout;
+import flighthq.types.VertexSemantic;
 
+@:noCompletion
 class GlWireframeUpload {
-  @:noCompletion
-  public static function destroyGlWireframeUpload(state:GlRenderState, upload:flighthq.types.GlWireframeProgram.GlWireframeUpload):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyGlWireframeUpload(state:GlRenderState, upload:flighthq.types.GlWireframeUpload):Void {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     flighthq._internal.backend.WebGl2Backend.deleteVertexArray(gl, upload.vao);
     flighthq._internal.backend.WebGl2Backend.deleteBuffer(gl, upload.lineIndexBuffer);
   }
 
-  @:noCompletion
-  public static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry, gpuSkinned:Bool = false):flighthq.types.GlWireframeProgram.GlWireframeUpload {
+  @:allow(flighthq)
+  @:keep
+  private static function ensureGlWireframeUpload(state:GlRenderState, geometry:MeshGeometry, gpuSkinned:Bool = false):flighthq.types.GlWireframeUpload {
     var gl:flighthq._internal.dom.WebGL2RenderingContext = cast _Runtime.UNDEFINED;
     var meshUpload:GlMeshUpload = cast _Runtime.UNDEFINED;
-    var perState:Null<flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>> = cast _Runtime.UNDEFINED;
-    var upload:Null<flighthq.types.GlWireframeProgram.GlWireframeUpload> = cast _Runtime.UNDEFINED;
+    var perState:Null<flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeUpload>> = cast _Runtime.UNDEFINED;
+    var upload:Null<flighthq.types.GlWireframeUpload> = cast _Runtime.UNDEFINED;
     var lineIndices:flighthq._internal._Union2<flighthq._internal._UInt32Array, flighthq._internal._UInt16Array> = cast _Runtime.UNDEFINED;
     var indexType:Float = cast _Runtime.UNDEFINED;
     var stride:Float = cast _Runtime.UNDEFINED;
     var attributes:Array<VertexAttribute> = cast _Runtime.UNDEFINED;
     gl = (cast state : GlRenderState).gl;
     meshUpload = (cast ensureGlMeshUpload(({ final __callArgument0:Dynamic = state; __callArgument0; }), ({ final __callArgument1:Dynamic = geometry; __callArgument1; }), (cast gpuSkinned : Bool)) : GlMeshUpload);
-    perState = ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>>).get(state));
+    perState = ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeUpload>>).get(state));
     if ((cast _Runtime.strictEquals(perState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (perState = cast (_Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []) : Dynamic));
-      ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>>).set(state, (cast perState)));
+      ((cast GlWireframeUpload.wireframeUploads__glWireframeUpload : flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeUpload>>).set(state, (cast perState)));
     }
-    upload = ((cast perState : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>).get((cast geometry : MeshGeometry)));
+    upload = ((cast perState : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeUpload>).get((cast geometry : MeshGeometry)));
     if ((cast ((cast !_Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals((cast upload : { var version:Float; }).version, geometry.version) : Bool)) : Bool)) {
       flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
       return cast upload;
@@ -48,7 +51,7 @@ class GlWireframeUpload {
     indexType = ((cast _Runtime.isInstanceOfName(lineIndices, 'Uint32Array') : Bool) ? (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_INT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_INT) : Dynamic) : (cast flighthq._internal.backend.WebGl2Backend.contextConstant(gl, 'UNSIGNED_SHORT', flighthq._internal.backend.WebGl2Backend.UNSIGNED_SHORT) : Dynamic));
     if ((cast _Runtime.strictEquals(upload, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       (upload = cast ({ indexType: indexType, lineIndexBuffer: flighthq._internal.backend.WebGl2Backend.createBuffer(gl), vao: flighthq._internal.backend.WebGl2Backend.createVertexArray(gl), version: -1.0 } : Dynamic));
-      ((cast perState : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>).set((cast geometry : MeshGeometry), (cast upload)));
+      ((cast perState : flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeUpload>).set((cast geometry : MeshGeometry), (cast upload)));
     }
     ((cast upload : { var indexType:Float; }).indexType = cast (indexType : Float));
     flighthq._internal.backend.WebGl2Backend.bindVertexArray(gl, (cast upload : { var vao:flighthq._internal.dom.WebGLVertexArrayObject; }).vao);
@@ -104,5 +107,5 @@ class GlWireframeUpload {
     return cast null;
   }
 
-  public static final wireframeUploads__glWireframeUpload:flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeProgram.GlWireframeUpload>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final wireframeUploads__glWireframeUpload:flighthq._internal._WeakMap<GlRenderState, flighthq._internal._WeakMap<MeshGeometry, flighthq.types.GlWireframeUpload>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 }

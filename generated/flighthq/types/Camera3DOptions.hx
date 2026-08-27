@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Camera3D.Projection;
 
 typedef Camera3DOptions = { var far:Float; var near:Float; var projection:Projection; };

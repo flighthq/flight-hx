@@ -9,23 +9,25 @@ import flighthq.scene2dCanvas.CanvasMaterialRegistry.applyCanvasMaterial;
 import flighthq.scene2dCanvas.CanvasRenderState.getCanvasRenderStateTextureResolvers;
 import flighthq.scene2dCanvas.CanvasTextureResolver.resolveCanvasTexture;
 import flighthq.types.BitmapText;
-import flighthq.types.BitmapText.BitmapTextPage;
-import flighthq.types.BitmapText.BitmapTextRuntime;
+import flighthq.types.BitmapTextPage;
+import flighthq.types.BitmapTextRuntime;
 import flighthq.types.CanvasRenderState;
-import flighthq.types.CanvasTextureResolver.CanvasTextureResolvers;
+import flighthq.types.CanvasTextureResolvers;
 import flighthq.types.Material;
 import flighthq.types.Matrix;
 import flighthq.types.Node2D;
 import flighthq.types.RenderProxy2D;
 import flighthq.types.SpriteRenderer;
 import flighthq.types.Texture;
-import flighthq.types.Texture.Texture2D;
+import flighthq.types.Texture2D;
 import flighthq.types.TextureAtlas;
 import flighthq.types.TextureAtlasRegion;
 
+@:noCompletion
 class CanvasBitmapText {
-  @:noCompletion
-  public static function drawCanvasSpriteText(state:CanvasRenderState, node:RenderProxy2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function drawCanvasSpriteText(state:CanvasRenderState, node:RenderProxy2D):Void {
     var source:BitmapText = cast _Runtime.UNDEFINED;
     var pages:Array<BitmapTextPage> = cast _Runtime.UNDEFINED;
     var context:flighthq._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;

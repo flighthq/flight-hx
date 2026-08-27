@@ -6,12 +6,13 @@ import flighthq._internal._Runtime;
 import flighthq.geometry.GeometryPoolGuards.geometryPoolReleaseGuard;
 import flighthq.geometry.Matrix.createMatrix;
 import flighthq.geometry.Matrix.setMatrixIdentity;
-import flighthq.types.Entity.EntityRuntime;
+import flighthq.types.EntityRuntime;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
+import flighthq.types.MatrixLike;
 import flighthq.types.Types.EntityRuntimeKey;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
+@:noCompletion
 class MatrixPool {
   public static function acquireIdentityMatrix():Matrix {
     var m:Matrix = cast _Runtime.UNDEFINED;

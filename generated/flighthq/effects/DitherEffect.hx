@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.DitherEffect;
 
+@:noCompletion
 class DitherEffect {
   public static function createDitherEffect(?options:{ @:optional var levels:Null<Float>; }):flighthq.types.DitherEffect {
     if (options == null) options = cast ({  } : Dynamic);

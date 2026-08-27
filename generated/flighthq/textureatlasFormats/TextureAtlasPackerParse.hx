@@ -5,15 +5,16 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.textureatlas.TextureAtlasRegion.createTextureAtlasRegion;
 import flighthq.types.TextureAtlas;
+import flighthq.types.TextureAtlasPackerArrayFrame;
+import flighthq.types.TextureAtlasPackerDocument;
+import flighthq.types.TextureAtlasPackerHashFrame;
 import flighthq.types.TextureAtlasPackerParseOptions;
-import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerArrayFrame;
-import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerDocument;
-import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerHashFrame;
-import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerPivot;
-import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerRect;
-import flighthq.types.TextureAtlasPackerSchema.TextureAtlasPackerSize;
+import flighthq.types.TextureAtlasPackerPivot;
+import flighthq.types.TextureAtlasPackerRect;
+import flighthq.types.TextureAtlasPackerSize;
 import flighthq.types.TextureAtlasRegion;
 
+@:noCompletion
 class TextureAtlasPackerParse {
   public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
     TextureAtlasPackerParse.applyDocument__textureAtlasPackerParse(({ final __callArgument0:Dynamic = atlas; __callArgument0; }), ({ final __callArgument1:Dynamic = doc; __callArgument1; }), ({ final __callArgument2:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast {  }); __callArgument2; }));

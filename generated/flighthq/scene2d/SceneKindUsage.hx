@@ -8,21 +8,24 @@ import flighthq.types.BlendMode;
 import flighthq.types.Material;
 import flighthq.types.Node;
 import flighthq.types.Node2D;
-import flighthq.types.Node2D.Node2DTraits;
+import flighthq.types.Node2DTraits;
 import flighthq.types.Scene2D;
 import flighthq.types.Scene2DKindUsage;
-import flighthq.types.ShapeCommand.ShapeCommandToken;
+import flighthq.types.ShapeCommandToken;
 import flighthq.types._internal._BlendModeValues.BlendModeValue;
 
+@:noCompletion
 class SceneKindUsage {
-  @:noCompletion
-  public static function createScene2DKindUsage():Scene2DKindUsage {
+  @:allow(flighthq)
+  @:keep
+  private static function createScene2DKindUsage():Scene2DKindUsage {
     return cast { blendModes: cast ([] : Array<Dynamic>), materialKinds: cast ([] : Array<Dynamic>), nodeKinds: cast ([] : Array<Dynamic>), shapeCommandKeys: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
-  @:noCompletion
-  public static function getScene2DKindUsage(out:Scene2DKindUsage, scene:Scene2D):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function getScene2DKindUsage(out:Scene2DKindUsage, scene:Scene2D):Void {
     var visit:Node2D->Void = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out.blendModes, 0.0);
     _Runtime.setLength(out.materialKinds, 0.0);

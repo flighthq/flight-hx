@@ -6,11 +6,12 @@ import flighthq._internal._Runtime;
 import flighthq.color.SrgbTransfer.srgbChannelToLinear;
 import flighthq.renderGl.GlRenderState.getGlRenderStateRuntime;
 import flighthq.types.GlRenderState;
-import flighthq.types.GlRenderState.GlRenderStateRuntime;
-import flighthq.types.GlRenderState.GlViewportRect;
+import flighthq.types.GlRenderStateRuntime;
 import flighthq.types.GlRenderTarget;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.GlViewportRect;
+import flighthq.types.RenderTargetColorSpace;
 
+@:noCompletion
 class GlBackground {
   public static function renderGlBackground(state:GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;

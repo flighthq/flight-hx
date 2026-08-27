@@ -4,18 +4,19 @@ package flighthq.hostCapacitor;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.CapacitorApi;
-import flighthq.types.CapacitorApi.CapacitorDialogAlertOptions;
-import flighthq.types.CapacitorApi.CapacitorDialogConfirmOptions;
-import flighthq.types.CapacitorApi.CapacitorDialogConfirmResult;
-import flighthq.types.CapacitorApi.CapacitorDialogPlugin;
-import flighthq.types.CapacitorApi.CapacitorDialogPromptOptions;
-import flighthq.types.CapacitorApi.CapacitorDialogPromptResult;
-import flighthq.types.Dialog.DialogBackend;
-import flighthq.types.Dialog.FileDialogHandle;
-import flighthq.types.Dialog.MessageDialogOptions;
-import flighthq.types.Dialog.MessageDialogResult;
-import flighthq.types.Dialog.PromptDialogOptions;
+import flighthq.types.CapacitorDialogAlertOptions;
+import flighthq.types.CapacitorDialogConfirmOptions;
+import flighthq.types.CapacitorDialogConfirmResult;
+import flighthq.types.CapacitorDialogPlugin;
+import flighthq.types.CapacitorDialogPromptOptions;
+import flighthq.types.CapacitorDialogPromptResult;
+import flighthq.types.DialogBackend;
+import flighthq.types.FileDialogHandle;
+import flighthq.types.MessageDialogOptions;
+import flighthq.types.MessageDialogResult;
+import flighthq.types.PromptDialogOptions;
 
+@:noCompletion
 class CapacitorDialog {
   public static function createCapacitorDialogBackend(capacitor:CapacitorApi):DialogBackend {
     var dialog:CapacitorDialogPlugin = cast _Runtime.UNDEFINED;

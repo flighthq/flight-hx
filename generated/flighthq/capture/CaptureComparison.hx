@@ -8,6 +8,7 @@ import flighthq.bitmap.BitmapFingerprint.parseBitmapFingerprint;
 import flighthq.types.BitmapFingerprint;
 import flighthq.types.CaptureCheckResult;
 
+@:noCompletion
 class CaptureComparison {
   public static final CAPTURE_PARITY_TOLERANCE:Float = 15.0;
 

@@ -21,44 +21,44 @@ import flighthq.node.Viewport as Facade_Node_flighthq_node_Viewport;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
 import flighthq.types.Adjustment;
+import flighthq.types.BoundsNode;
 import flighthq.types.ColorScaleBias;
 import flighthq.types.Entity;
-import flighthq.types.Entity.Kind;
-import flighthq.types.HasBoundsRectangle.BoundsNode;
-import flighthq.types.HasBoundsRectangle.Spatial2DNode;
-import flighthq.types.HasTransform2D.Transform2DNode;
-import flighthq.types.HasTransform3D.Transform3DNode;
 import flighthq.types.InteractionSignals;
+import flighthq.types.Kind;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Matrix4Like;
+import flighthq.types.MatrixLike;
 import flighthq.types.MethodsOf;
 import flighthq.types.Node;
-import flighthq.types.Node.NodeAny;
-import flighthq.types.Node.NodeData;
-import flighthq.types.Node.NodeDataFactory;
-import flighthq.types.Node.NodeOf;
-import flighthq.types.Node.NodeRuntime;
-import flighthq.types.Node.NodeRuntimeFactory;
-import flighthq.types.Node.NodeTraits;
+import flighthq.types.NodeAny;
+import flighthq.types.NodeData;
+import flighthq.types.NodeDataFactory;
 import flighthq.types.NodeDescendantVisitor;
 import flighthq.types.NodeInteractionState;
+import flighthq.types.NodeOf;
 import flighthq.types.NodeOrderList;
-import flighthq.types.NodeOrderList.NodeOrderListEntryVisitor;
+import flighthq.types.NodeOrderListEntryVisitor;
+import flighthq.types.NodeRuntime;
+import flighthq.types.NodeRuntimeFactory;
 import flighthq.types.NodeSignals;
+import flighthq.types.NodeTraits;
 import flighthq.types.PartialNode;
 import flighthq.types.Rectangle;
-import flighthq.types.Rectangle.RectangleLike;
+import flighthq.types.RectangleLike;
 import flighthq.types.Scene2DFitContext;
 import flighthq.types.Signal;
-import flighthq.types.Transform2D.Transform2DLike;
-import flighthq.types.Transform3D.Transform3DLike;
+import flighthq.types.Spatial2DNode;
+import flighthq.types.Transform2DLike;
+import flighthq.types.Transform2DNode;
+import flighthq.types.Transform3DLike;
+import flighthq.types.Transform3DNode;
 import flighthq.types.Types.EntityRuntimeKey;
-import flighthq.types.Vector2.Vector2Like;
-import flighthq.types.Vector3.Vector3Like;
+import flighthq.types.Vector2Like;
+import flighthq.types.Vector3Like;
 import flighthq.types.Viewport;
-import flighthq.types.Viewport.ViewportLike;
 import flighthq.types.ViewportAlign;
+import flighthq.types.ViewportLike;
 import flighthq.types._internal._EntityValues.EntityRuntimeKey;
 
 class Node {
@@ -165,8 +165,9 @@ class Node {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createNodeRuntime<Traits:flighthq._internal._Object>(?methods:flighthq._internal._Partial<MethodsOf<NodeRuntime<Traits>>>):NodeRuntime<Traits> {
+  @:allow(flighthq)
+  @:keep
+  private static function createNodeRuntime<Traits:flighthq._internal._Object>(?methods:flighthq._internal._Partial<MethodsOf<NodeRuntime<Traits>>>):NodeRuntime<Traits> {
     var out:NodeRuntime<Traits> = cast _Runtime.UNDEFINED;
     out = (cast createEntityRuntime() : NodeRuntime<Traits>);
     ((cast out : NodeRuntime<Traits>).appearanceId = 0.0);
@@ -198,8 +199,9 @@ class Node {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createNodeSignals():NodeSignals {
+  @:allow(flighthq)
+  @:keep
+  private static function createNodeSignals():NodeSignals {
     return cast { onChildAdded: (cast createSignal() : Signal<NodeAny->Void>), onChildRemoved: (cast createSignal() : Signal<NodeAny->Void>), onChildrenChanged: (cast createSignal() : Signal<Void->Void>), onChildrenOrderChanged: (cast createSignal() : Signal<Void->Void>), onParentChanged: (cast createSignal() : Signal<Void->Void>) };
     return cast null;
   }
@@ -209,8 +211,9 @@ class Node {
     return cast null;
   }
 
-  @:noCompletion
-  public static function defaultNodeRuntimeCanAddChild<Traits:flighthq._internal._Object>(_target:flighthq.types.Node<Traits>, _child:flighthq.types.Node<Traits>):Bool {
+  @:allow(flighthq)
+  @:keep
+  private static function defaultNodeRuntimeCanAddChild<Traits:flighthq._internal._Object>(_target:flighthq.types.Node<Traits>, _child:flighthq.types.Node<Traits>):Bool {
     return cast true;
     return cast null;
   }
@@ -416,8 +419,9 @@ class Node {
     return cast null;
   }
 
-  @:noCompletion
-  public static function getNodeRuntime<Traits:flighthq._internal._Object>(source:flighthq.types.Node<Traits>):NodeRuntime<Traits> {
+  @:allow(flighthq)
+  @:keep
+  private static function getNodeRuntime<Traits:flighthq._internal._Object>(source:flighthq.types.Node<Traits>):NodeRuntime<Traits> {
     return cast (cast getEntityRuntime(({ final __callArgument13:Dynamic = source; __callArgument13; })) : NodeRuntime<Traits>);
     return cast null;
   }

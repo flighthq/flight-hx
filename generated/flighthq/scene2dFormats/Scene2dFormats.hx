@@ -12,12 +12,12 @@ import flighthq.types.AnimationClip;
 import flighthq.types.DisplayObject;
 import flighthq.types.ImportDiagnostic;
 import flighthq.types.LottieDocument;
-import flighthq.types.LottieDocumentImport.LottieDocumentImportOptions;
-import flighthq.types.LottieDocumentImport.LottieDocumentImportResult;
+import flighthq.types.LottieDocumentImportOptions;
+import flighthq.types.LottieDocumentImportResult;
 import flighthq.types.RiveDocument;
-import flighthq.types.RiveDocument.RiveDocumentImportResult;
-import flighthq.types.RiveDocument.RiveObjectGraph;
-import flighthq.types.SvgDocumentImport.SvgDocumentImportOptions;
+import flighthq.types.RiveDocumentImportResult;
+import flighthq.types.RiveObjectGraph;
+import flighthq.types.SvgDocumentImportOptions;
 
 class Scene2dFormats {
   public static function applyAnimationClipToLottieDocument(clip:AnimationClip, time:Float):Void {

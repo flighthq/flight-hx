@@ -4,9 +4,10 @@ package flighthq.hostElectron;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.ElectronApi;
-import flighthq.types.ElectronApi.ElectronIpcMain;
-import flighthq.types.Ipc.IpcBackend;
+import flighthq.types.ElectronIpcMain;
+import flighthq.types.IpcBackend;
 
+@:noCompletion
 class ElectronIpc {
   public static function createElectronIpcBackend(electron:ElectronApi):IpcBackend {
     var ipcMain:ElectronIpcMain = cast _Runtime.UNDEFINED;

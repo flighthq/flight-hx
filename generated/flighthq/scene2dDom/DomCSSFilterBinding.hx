@@ -10,13 +10,15 @@ import flighthq.types.RenderProxy2D;
 import flighthq.types.RenderState;
 import flighthq.types.Renderable;
 
+@:noCompletion
 class DomCSSFilterBinding {
   public static function enableDomCssFilterSupport(state:DomRenderState):Void {
     ((cast state : { var domCssFilterResolver:Null<RenderProxy2D->Null<String>>; }).domCssFilterResolver = (cast getDomCssFilter));
   }
 
-  @:noCompletion
-  public static function getDomCssFilter(renderProxy:RenderProxy2D):Null<String> {
+  @:allow(flighthq)
+  @:keep
+  private static function getDomCssFilter(renderProxy:RenderProxy2D):Null<String> {
     return cast ((cast DomCSSFilterBinding._cssFilterBindings__domCSSFilterBinding : flighthq._internal._WeakMap<RenderProxy2D, String>).get(renderProxy));
     return cast null;
   }

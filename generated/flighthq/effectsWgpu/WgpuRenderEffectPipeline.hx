@@ -26,21 +26,22 @@ import flighthq.renderWgpu.WgpuRenderTargetPool.releaseWgpuRenderTarget;
 import flighthq.types.Adjustment;
 import flighthq.types.ColorLut;
 import flighthq.types.ColorLutCache;
-import flighthq.types.GlRenderEffectPipeline.RenderEffectPipelineOptions;
 import flighthq.types.RenderEffect;
-import flighthq.types.RenderTarget.RenderTargetColorSpace;
+import flighthq.types.RenderEffectPipelineOptions;
+import flighthq.types.RenderTargetColorSpace;
 import flighthq.types.WgpuColorLutTextureCache;
 import flighthq.types.WgpuEffectPipeline;
+import flighthq.types.WgpuRenderEffectContext;
 import flighthq.types.WgpuRenderEffectPipeline;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectContext;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectPipelineSampleCountGuard;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectPipelineSkipGuard;
-import flighthq.types.WgpuRenderEffectPipeline.WgpuRenderEffectRunner;
+import flighthq.types.WgpuRenderEffectPipelineSampleCountGuard;
+import flighthq.types.WgpuRenderEffectPipelineSkipGuard;
+import flighthq.types.WgpuRenderEffectRunner;
 import flighthq.types.WgpuRenderState;
-import flighthq.types.WgpuRenderState.WgpuRenderStateRuntime;
+import flighthq.types.WgpuRenderStateRuntime;
 import flighthq.types.WgpuRenderTarget;
-import flighthq.types.WgpuRenderTarget.WgpuRenderTargetPool;
+import flighthq.types.WgpuRenderTargetPool;
 
+@:noCompletion
 class WgpuRenderEffectPipeline {
   public static function beginWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:flighthq.types.WgpuRenderEffectPipeline, colorSpace:RenderTargetColorSpace = 'srgb'):Void {
     var w:Float = cast _Runtime.UNDEFINED;
@@ -74,8 +75,9 @@ class WgpuRenderEffectPipeline {
     return cast null;
   }
 
-  @:noCompletion
-  public static function destroyWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:flighthq.types.WgpuRenderEffectPipeline):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function destroyWgpuRenderEffectPipeline(state:WgpuRenderState, pipeline:flighthq.types.WgpuRenderEffectPipeline):Void {
     if (_Runtime.truthy(pipeline.sceneTarget)) {
       destroyWgpuRenderTarget(({ final __callArgument10:Dynamic = state; __callArgument10; }), pipeline.sceneTarget);
       (pipeline.sceneTarget = cast (null : Null<WgpuRenderTarget>));
@@ -152,13 +154,15 @@ class WgpuRenderEffectPipeline {
     if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseWgpuRenderTarget(pipeline.pool, ({ final __callArgument69:Dynamic = scratchB; __callArgument69; })); }
   }
 
-  @:noCompletion
-  public static function setWgpuRenderEffectPipelineSampleCountGuard(state:WgpuRenderState, guard:Null<WgpuRenderEffectPipelineSampleCountGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setWgpuRenderEffectPipelineSampleCountGuard(state:WgpuRenderState, guard:Null<WgpuRenderEffectPipelineSampleCountGuard>):Void {
     if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast WgpuRenderEffectPipeline._sampleCountGuards__wgpuRenderEffectPipeline : flighthq._internal._WeakMap<WgpuRenderState, WgpuRenderEffectPipelineSampleCountGuard>).delete_(state)); } else { ((cast WgpuRenderEffectPipeline._sampleCountGuards__wgpuRenderEffectPipeline : flighthq._internal._WeakMap<WgpuRenderState, WgpuRenderEffectPipelineSampleCountGuard>).set(state, (cast guard))); }
   }
 
-  @:noCompletion
-  public static function setWgpuRenderEffectPipelineSkipGuard(state:WgpuRenderState, guard:Null<WgpuRenderEffectPipelineSkipGuard>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setWgpuRenderEffectPipelineSkipGuard(state:WgpuRenderState, guard:Null<WgpuRenderEffectPipelineSkipGuard>):Void {
     if ((cast _Runtime.strictEquals(guard, null) : Bool)) { ((cast WgpuRenderEffectPipeline._skipGuards__wgpuRenderEffectPipeline : flighthq._internal._WeakMap<WgpuRenderState, WgpuRenderEffectPipelineSkipGuard>).delete_(state)); } else { ((cast WgpuRenderEffectPipeline._skipGuards__wgpuRenderEffectPipeline : flighthq._internal._WeakMap<WgpuRenderState, WgpuRenderEffectPipelineSkipGuard>).set(state, (cast guard))); }
   }
 

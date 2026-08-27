@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Snapshot;
 
+@:noCompletion
 class CaptureSnapshot {
   public static function captureSnapshot<T>(source:T):Snapshot<T> {
     var clone:T = cast _Runtime.UNDEFINED;
@@ -15,8 +16,9 @@ class CaptureSnapshot {
     return cast null;
   }
 
-  @:noCompletion
-  public static function setSnapshotCaptureGuard(guard:Null<flighthq._internal._Any->Void>):Void {
+  @:allow(flighthq)
+  @:keep
+  private static function setSnapshotCaptureGuard(guard:Null<flighthq._internal._Any->Void>):Void {
     (CaptureSnapshot._captureGuard__captureSnapshot = cast (guard : Dynamic));
   }
 

@@ -9,15 +9,16 @@ import flighthq.node.Hierarchy.getNodeChildAt;
 import flighthq.node.Hierarchy.getNodeChildCount;
 import flighthq.node.NodeTransform2d.ensureNodeWorldMatrix;
 import flighthq.node.NodeTransform2d.getNodeWorldMatrix;
-import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.Matrix;
-import flighthq.types.Matrix.MatrixLike;
-import flighthq.types.Node.NodeOf;
-import flighthq.types.Velocity.Velocity2D;
-import flighthq.types.Velocity.VelocityField;
-import flighthq.types.Velocity.VelocitySample;
+import flighthq.types.MatrixLike;
+import flighthq.types.NodeOf;
+import flighthq.types.Transform2DNode;
+import flighthq.types.Velocity2D;
+import flighthq.types.VelocityField;
+import flighthq.types.VelocitySample;
 import flighthq.velocity.VelocityField.ensureVelocitySample;
 
+@:noCompletion
 class TransformVelocity {
   public static function contributeTransformVelocity<Traits:flighthq._internal._Object>(field:VelocityField, root:Transform2DNode<Traits>):Void {
     TransformVelocity.visitTransformVelocity__transformVelocity(({ final __callArgument0:Dynamic = field; __callArgument0; }), (cast root : Dynamic));

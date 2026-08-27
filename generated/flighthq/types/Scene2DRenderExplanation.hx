@@ -3,6 +3,5 @@ package flighthq.types;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
-import flighthq.types.Entity.Kind;
 
 typedef Scene2DRenderExplanation = { var kind:Kind; var hasRenderer:Bool; var prepared:Bool; var visible:Bool; var effectiveAlpha:Float; var reason:Scene2DRenderBlankReason; };

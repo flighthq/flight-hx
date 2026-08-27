@@ -5,9 +5,3 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 
 typedef ShortcutDrop = { var operation:ShortcutOperation; var accelerator:String; var reason:ShortcutDropReason; var parseError:Null<AcceleratorParseError>; };
-
-typedef ShortcutDropGuard = ShortcutDrop->Void;
-
-typedef ShortcutDropReason = String;
-
-typedef ShortcutOperation = String;

@@ -5,12 +5,13 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.assets.AssetLibrary.setAssetAcquireGuard;
 import flighthq.log.Log.logOnce;
-import flighthq.types.Assets.AssetAcquireGuard;
-import flighthq.types.Assets.AssetLibrary;
-import flighthq.types.Assets.AssetLibraryRuntime;
-import flighthq.types.Assets.AssetLoadExplanation;
-import flighthq.types.Log.LogLevel;
+import flighthq.types.AssetAcquireGuard;
+import flighthq.types.AssetLibrary;
+import flighthq.types.AssetLibraryRuntime;
+import flighthq.types.AssetLoadExplanation;
+import flighthq.types.LogLevel;
 
+@:noCompletion
 class EnableAssetGuards {
   public static function areAssetGuardsEnabled(library:AssetLibrary):Bool {
     return cast _Runtime.strictEquals((cast library.runtime : { var acquireGuard:Null<AssetAcquireGuard>; }).acquireGuard, EnableAssetGuards.warnOnAssetAcquireFailure__enableAssetGuards);
