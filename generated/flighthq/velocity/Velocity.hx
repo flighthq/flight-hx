@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.types.HasTransform2D.Transform2DNode;
 import flighthq.types.Matrix;
 import flighthq.types.Velocity.Velocity2D;
+import flighthq.types.Velocity.VelocityExplanation;
 import flighthq.types.Velocity.VelocityField;
 import flighthq.types.Velocity.VelocitySample;
 import flighthq.velocity.TransformVelocity as Facade_Velocity_flighthq_velocity_TransformVelocity;
@@ -47,6 +48,11 @@ class Velocity {
 
   public static function dampVelocity(out:Velocity2D, current:Velocity2D, previous:Velocity2D, factor:Float):Velocity2D {
     return cast Facade_Velocity_flighthq_velocity_VelocityField.dampVelocity(out, current, previous, factor);
+    return cast null;
+  }
+
+  public static function explainVelocity(field:VelocityField, source:flighthq._internal._Object):VelocityExplanation {
+    return cast Facade_Velocity_flighthq_velocity_VelocityField.explainVelocity(field, source);
     return cast null;
   }
 

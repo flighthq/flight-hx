@@ -201,11 +201,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 18
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.app.App",
       "source": "upstream/packages/app/src/app.ts",
-      "total": 18
+      "total": 10
     },
     {
       "byReason": {
@@ -230,11 +230,11 @@
     {
       "byReason": {
         "source-any": 3,
-        "standard-toolkit-boundary": 118
+        "standard-toolkit-boundary": 99
       },
       "module": "flighthq.application.Window",
       "source": "upstream/packages/application/src/window.ts",
-      "total": 121
+      "total": 102
     },
     {
       "byReason": {
@@ -825,11 +825,11 @@
     {
       "byReason": {
         "source-unknown": 1,
-        "standard-toolkit-boundary": 61
+        "standard-toolkit-boundary": 63
       },
       "module": "flighthq.clipboard.Clipboard",
       "source": "upstream/packages/clipboard/src/clipboard.ts",
-      "total": 62
+      "total": 64
     },
     {
       "byReason": {
@@ -2684,19 +2684,20 @@
     {
       "byReason": {
         "source-any": 1,
-        "standard-toolkit-boundary": 33
+        "source-null": 2,
+        "standard-toolkit-boundary": 41
       },
       "module": "flighthq.geolocation.Geolocation",
       "source": "upstream/packages/geolocation/src/geolocation.ts",
-      "total": 34
+      "total": 44
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 78
+        "standard-toolkit-boundary": 84
       },
       "module": "flighthq.geometry.Aabb",
       "source": "upstream/packages/geometry/src/aabb.ts",
-      "total": 78
+      "total": 84
     },
     {
       "byReason": {
@@ -2708,11 +2709,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 46
+        "standard-toolkit-boundary": 98
       },
       "module": "flighthq.geometry.Capsule",
       "source": "upstream/packages/geometry/src/capsule.ts",
-      "total": 46
+      "total": 98
     },
     {
       "byReason": {
@@ -2724,11 +2725,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.geometry.Frustum",
       "source": "upstream/packages/geometry/src/frustum.ts",
-      "total": 4
+      "total": 10
     },
     {
       "byReason": {
@@ -2780,11 +2781,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 52
+        "standard-toolkit-boundary": 64
       },
       "module": "flighthq.geometry.Obb",
       "source": "upstream/packages/geometry/src/obb.ts",
-      "total": 52
+      "total": 64
     },
     {
       "byReason": {
@@ -2796,11 +2797,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 144
+        "standard-toolkit-boundary": 152
       },
       "module": "flighthq.geometry.Quaternion",
       "source": "upstream/packages/geometry/src/quaternion.ts",
-      "total": 144
+      "total": 152
     },
     {
       "byReason": {
@@ -2812,11 +2813,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 26
+        "standard-toolkit-boundary": 28
       },
       "module": "flighthq.geometry.Ray3d",
       "source": "upstream/packages/geometry/src/ray3d.ts",
-      "total": 26
+      "total": 28
     },
     {
       "byReason": {
@@ -2852,11 +2853,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 22
+        "standard-toolkit-boundary": 28
       },
       "module": "flighthq.geometry.Vector2",
       "source": "upstream/packages/geometry/src/vector2.ts",
-      "total": 22
+      "total": 28
     },
     {
       "byReason": {
@@ -2985,11 +2986,12 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "source-unknown": 3,
+        "standard-toolkit-boundary": 6
       },
       "module": "flighthq.hostCapacitor.CapacitorFileSystem",
       "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts",
-      "total": 4
+      "total": 9
     },
     {
       "byReason": {
@@ -3049,12 +3051,11 @@
     {
       "byReason": {
         "source-any": 1,
-        "source-unknown": 43,
-        "standard-toolkit-boundary": 2
+        "source-unknown": 43
       },
       "module": "flighthq.hostElectron.ElectronApp",
       "source": "upstream/packages/host-electron/src/electronApp.ts",
-      "total": 46
+      "total": 44
     },
     {
       "byReason": {
@@ -3077,11 +3078,19 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 6
+        "standard-toolkit-boundary": 5
       },
       "module": "flighthq.hostElectron.ElectronMenu",
       "source": "upstream/packages/host-electron/src/electronMenu.ts",
-      "total": 6
+      "total": 5
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.hostElectron.ElectronMenuTemplate",
+      "source": "upstream/packages/host-electron/src/electronMenuTemplate.ts",
+      "total": 2
     },
     {
       "byReason": {
@@ -3139,11 +3148,11 @@
     {
       "byReason": {
         "source-unknown": 9,
-        "standard-toolkit-boundary": 20
+        "standard-toolkit-boundary": 19
       },
       "module": "flighthq.hostElectron.ElectronTray",
       "source": "upstream/packages/host-electron/src/electronTray.ts",
-      "total": 29
+      "total": 28
     },
     {
       "byReason": {
@@ -3165,20 +3174,21 @@
     },
     {
       "byReason": {
-        "source-any": 6,
-        "standard-toolkit-boundary": 8
+        "source-any": 7,
+        "standard-toolkit-boundary": 10
       },
       "module": "flighthq.hostTauri.TauriApp",
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-      "total": 14
+      "total": 17
     },
     {
       "byReason": {
+        "source-unknown": 3,
         "standard-toolkit-boundary": 11
       },
       "module": "flighthq.hostTauri.TauriDialog",
       "source": "upstream/packages/host-tauri/src/tauriDialog.ts",
-      "total": 11
+      "total": 14
     },
     {
       "byReason": {
@@ -3197,6 +3207,15 @@
       },
       "module": "flighthq.hostTauri.TauriNotification",
       "source": "upstream/packages/host-tauri/src/tauriNotification.ts",
+      "total": 3
+    },
+    {
+      "byReason": {
+        "source-any": 1,
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.hostTauri.TauriPlatform",
+      "source": "upstream/packages/host-tauri/src/tauriPlatform.ts",
       "total": 3
     },
     {
@@ -3238,6 +3257,30 @@
     },
     {
       "byReason": {
+        "standard-toolkit-boundary": 13
+      },
+      "module": "flighthq.hostWeb.WebApp",
+      "source": "upstream/packages/host-web/src/webApp.ts",
+      "total": 13
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 3
+      },
+      "module": "flighthq.hostWeb.WebDialog",
+      "source": "upstream/packages/host-web/src/webDialog.ts",
+      "total": 3
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.hostWeb.WebGeolocation",
+      "source": "upstream/packages/host-web/src/webGeolocation.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
         "external-toolkit-boundary": 2,
         "standard-toolkit-boundary": 31
       },
@@ -3255,6 +3298,64 @@
     },
     {
       "byReason": {
+        "source-null": 1,
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.hostWeb.WebMenu",
+      "source": "upstream/packages/host-web/src/webMenu.ts",
+      "total": 3
+    },
+    {
+      "byReason": {
+        "source-unknown": 2
+      },
+      "module": "flighthq.hostWeb.WebNotification",
+      "source": "upstream/packages/host-web/src/webNotification.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "source-any": 4,
+        "standard-toolkit-boundary": 11
+      },
+      "module": "flighthq.hostWeb.WebPower",
+      "source": "upstream/packages/host-web/src/webPower.ts",
+      "total": 15
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 6
+      },
+      "module": "flighthq.hostWeb.WebProtocol",
+      "source": "upstream/packages/host-web/src/webProtocol.ts",
+      "total": 6
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flighthq.hostWeb.WebShell",
+      "source": "upstream/packages/host-web/src/webShell.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 5
+      },
+      "module": "flighthq.hostWeb.WebStatusbar",
+      "source": "upstream/packages/host-web/src/webStatusbar.ts",
+      "total": 5
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 19
+      },
+      "module": "flighthq.hostWeb.WebWindow",
+      "source": "upstream/packages/host-web/src/webWindow.ts",
+      "total": 19
+    },
+    {
+      "byReason": {
         "source-unknown": 1
       },
       "module": "flighthq.image.Image",
@@ -3266,11 +3367,11 @@
         "source-any": 1,
         "source-never": 2,
         "source-unknown": 3,
-        "standard-toolkit-boundary": 11
+        "standard-toolkit-boundary": 14
       },
       "module": "flighthq.image.ImageBackend",
       "source": "upstream/packages/image/src/imageBackend.ts",
-      "total": 17
+      "total": 20
     },
     {
       "byReason": {
@@ -3517,12 +3618,12 @@
       "byReason": {
         "source-any": 2,
         "source-undefined": 1,
-        "source-unknown": 47,
+        "source-unknown": 50,
         "standard-toolkit-boundary": 17
       },
       "module": "flighthq.ipc.Ipc",
       "source": "upstream/packages/ipc/src/ipc.ts",
-      "total": 67
+      "total": 70
     },
     {
       "byReason": {
@@ -4103,12 +4204,12 @@
     },
     {
       "byReason": {
-        "source-unknown": 15,
-        "standard-toolkit-boundary": 90
+        "source-unknown": 17,
+        "standard-toolkit-boundary": 92
       },
       "module": "flighthq.notification.Notification",
       "source": "upstream/packages/notification/src/notification.ts",
-      "total": 105
+      "total": 109
     },
     {
       "byReason": {
@@ -4563,12 +4664,12 @@
     {
       "byReason": {
         "source-unknown": 9,
-        "standard-toolkit-boundary": 41,
+        "standard-toolkit-boundary": 45,
         "unclassified": 1
       },
       "module": "flighthq.permissions.Permission",
       "source": "upstream/packages/permissions/src/permission.ts",
-      "total": 51
+      "total": 55
     },
     {
       "byReason": {
@@ -4844,11 +4945,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 24
+        "standard-toolkit-boundary": 26
       },
       "module": "flighthq.physics3d.Islands",
       "source": "upstream/packages/physics3d/src/islands.ts",
-      "total": 24
+      "total": 26
     },
     {
       "byReason": {
@@ -5055,20 +5156,19 @@
     },
     {
       "byReason": {
-        "source-any": 4,
-        "standard-toolkit-boundary": 14
+        "standard-toolkit-boundary": 3
       },
       "module": "flighthq.power.Power",
       "source": "upstream/packages/power/src/power.ts",
-      "total": 18
+      "total": 3
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 40
+        "standard-toolkit-boundary": 34
       },
       "module": "flighthq.protocol.Protocol",
       "source": "upstream/packages/protocol/src/protocol.ts",
-      "total": 40
+      "total": 34
     },
     {
       "byReason": {
@@ -8139,12 +8239,12 @@
     {
       "byReason": {
         "source-unknown": 7,
-        "standard-toolkit-boundary": 50,
+        "standard-toolkit-boundary": 54,
         "unclassified": 4
       },
       "module": "flighthq.sensors.Sensors",
       "source": "upstream/packages/sensors/src/sensors.ts",
-      "total": 61
+      "total": 65
     },
     {
       "byReason": {
@@ -8314,11 +8414,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 6
+        "standard-toolkit-boundary": 4
       },
       "module": "flighthq.shell.Shell",
       "source": "upstream/packages/shell/src/shell.ts",
-      "total": 6
+      "total": 4
     },
     {
       "byReason": {
@@ -8845,11 +8945,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 20
+        "standard-toolkit-boundary": 8
       },
       "module": "flighthq.statusbar.Statusbar",
       "source": "upstream/packages/statusbar/src/statusbar.ts",
-      "total": 20
+      "total": 8
     },
     {
       "byReason": {
@@ -9539,11 +9639,11 @@
     },
     {
       "byReason": {
-        "source-unknown": 2
+        "source-unknown": 3
       },
       "module": "flighthq.types.CapacitorApi",
       "source": "upstream/packages/types/src/CapacitorApi.ts",
-      "total": 2
+      "total": 3
     },
     {
       "byReason": {
@@ -9941,12 +10041,12 @@
     },
     {
       "byReason": {
-        "source-unknown": 1,
+        "source-unknown": 2,
         "unclassified": 2
       },
       "module": "flighthq.types.TauriApi",
       "source": "upstream/packages/types/src/TauriApi.ts",
-      "total": 3
+      "total": 4
     },
     {
       "byReason": {
@@ -10072,11 +10172,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 14
+        "standard-toolkit-boundary": 15
       },
       "module": "flighthq.velocity.VelocityField",
       "source": "upstream/packages/velocity/src/velocityField.ts",
-      "total": 14
+      "total": 15
     },
     {
       "byReason": {
@@ -10134,16 +10234,16 @@
   "summary": {
     "byReason": {
       "external-toolkit-boundary": 618,
-      "source-any": 968,
+      "source-any": 970,
       "source-never": 120,
-      "source-null": 86,
+      "source-null": 89,
       "source-undefined": 267,
-      "source-unknown": 3894,
-      "standard-toolkit-boundary": 20374,
+      "source-unknown": 3909,
+      "standard-toolkit-boundary": 20501,
       "unclassified": 431
     },
     "checkerKnownUnrepresentable": 0,
-    "modules": 1193,
-    "total": 26758
+    "modules": 1205,
+    "total": 26905
   }
 }

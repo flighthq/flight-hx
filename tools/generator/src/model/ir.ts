@@ -187,6 +187,7 @@ type IrExpressionNode =
       cppStructInit?: IrCppStructInitConstruction | undefined;
       kind: 'object';
       properties: IrObjectMember[];
+      thisCapture?: string | undefined;
     }
   | {
       binding?:

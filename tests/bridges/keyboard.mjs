@@ -6,6 +6,7 @@ export const createSoftKeyboard = compiled.flighthq.keyboard.Keyboard.createSoft
 export const createSoftKeyboardTransition = compiled.flighthq.keyboard.Keyboard.createSoftKeyboardTransition;
 export const detachSoftKeyboard = compiled.flighthq.keyboard.Keyboard.detachSoftKeyboard;
 export const disposeSoftKeyboard = compiled.flighthq.keyboard.Keyboard.disposeSoftKeyboard;
+export const explainSoftKeyboardBackend = compiled.flighthq.keyboard.Keyboard.explainSoftKeyboardBackend;
 export const getSoftKeyboardHeight = compiled.flighthq.keyboard.Keyboard.getSoftKeyboardHeight;
 export const getSoftKeyboardInfo = compiled.flighthq.keyboard.Keyboard.getSoftKeyboardInfo;
 export const getSoftKeyboardResizeMode = compiled.flighthq.keyboard.Keyboard.getSoftKeyboardResizeMode;

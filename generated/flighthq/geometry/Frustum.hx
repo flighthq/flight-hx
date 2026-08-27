@@ -11,6 +11,7 @@ import flighthq.types.Entity;
 import flighthq.types.Frustum;
 import flighthq.types.Frustum.FrustumLike;
 import flighthq.types.Matrix4.Matrix4Like;
+import flighthq.types.Obb.ObbLike;
 import flighthq.types.Plane;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Vector3;
@@ -61,11 +62,60 @@ class Frustum {
     return cast null;
   }
 
+  public static function isFrustumIntersectingObb(frustum:FrustumLike, obb:ObbLike):Bool {
+    var qx:Float = cast _Runtime.UNDEFINED;
+    var qy:Float = cast _Runtime.UNDEFINED;
+    var qz:Float = cast _Runtime.UNDEFINED;
+    var qw:Float = cast _Runtime.UNDEFINED;
+    var xx:Float = cast _Runtime.UNDEFINED;
+    var yy:Float = cast _Runtime.UNDEFINED;
+    var zz:Float = cast _Runtime.UNDEFINED;
+    var xy:Float = cast _Runtime.UNDEFINED;
+    var xz:Float = cast _Runtime.UNDEFINED;
+    var yz:Float = cast _Runtime.UNDEFINED;
+    var wx:Float = cast _Runtime.UNDEFINED;
+    var wy:Float = cast _Runtime.UNDEFINED;
+    var wz:Float = cast _Runtime.UNDEFINED;
+    var ax0:Float = cast _Runtime.UNDEFINED;
+    var ay0:Float = cast _Runtime.UNDEFINED;
+    var az0:Float = cast _Runtime.UNDEFINED;
+    var ax1:Float = cast _Runtime.UNDEFINED;
+    var ay1:Float = cast _Runtime.UNDEFINED;
+    var az1:Float = cast _Runtime.UNDEFINED;
+    var ax2:Float = cast _Runtime.UNDEFINED;
+    var ay2:Float = cast _Runtime.UNDEFINED;
+    var az2:Float = cast _Runtime.UNDEFINED;
+    qx = obb.orientationX;
+    qy = obb.orientationY;
+    qz = obb.orientationZ;
+    qw = obb.orientationW;
+    xx = (qx * qx);
+    yy = (qy * qy);
+    zz = (qz * qz);
+    xy = (qx * qy);
+    xz = (qx * qz);
+    yz = (qy * qz);
+    wx = (qw * qx);
+    wy = (qw * qy);
+    wz = (qw * qz);
+    ax0 = (1.0 - (2.0 * (yy + zz)));
+    ay0 = (2.0 * (xy + wz));
+    az0 = (2.0 * (xz - wy));
+    ax1 = (2.0 * (xy - wz));
+    ay1 = (1.0 - (2.0 * (xx + zz)));
+    az1 = (2.0 * (yz + wx));
+    ax2 = (2.0 * (xz + wy));
+    ay2 = (2.0 * (yz - wx));
+    az2 = (1.0 - (2.0 * (xx + yy)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast (cast Frustum.__planeIntersectsObb__frustum(({ final __callArgument48:Dynamic = frustum.left; __callArgument48; }), ({ final __callArgument49:Dynamic = obb; __callArgument49; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool) && (cast (cast Frustum.__planeIntersectsObb__frustum(({ final __callArgument52:Dynamic = frustum.right; __callArgument52; }), ({ final __callArgument53:Dynamic = obb; __callArgument53; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) : Bool) && (cast (cast Frustum.__planeIntersectsObb__frustum(({ final __callArgument56:Dynamic = frustum.bottom; __callArgument56; }), ({ final __callArgument57:Dynamic = obb; __callArgument57; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) : Bool) && (cast (cast Frustum.__planeIntersectsObb__frustum(({ final __callArgument60:Dynamic = frustum.top; __callArgument60; }), ({ final __callArgument61:Dynamic = obb; __callArgument61; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)) : Bool) && (cast (cast Frustum.__planeIntersectsObb__frustum(({ final __callArgument64:Dynamic = frustum.near; __callArgument64; }), ({ final __callArgument65:Dynamic = obb; __callArgument65; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool) : Bool)), function():Dynamic return cast (cast Frustum.__planeIntersectsObb__frustum(({ final __callArgument68:Dynamic = frustum.far; __callArgument68; }), ({ final __callArgument69:Dynamic = obb; __callArgument69; }), (cast ax0 : Float), (cast ay0 : Float), (cast az0 : Float), (cast ax1 : Float), (cast ay1 : Float), (cast az1 : Float), (cast ax2 : Float), (cast ay2 : Float), (cast az2 : Float)) : Bool));
+    return cast null;
+  }
+
   public static function isFrustumIntersectingSphere(frustum:FrustumLike, sphere:BoundingSphereLike):Bool {
     var r:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
     r = sphere.radius;
-    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument48:Dynamic = frustum.left; __callArgument48; }), ({ final __callArgument49:Dynamic = sphere.center; __callArgument49; })) : Float) : Float) >= (cast -r : Float)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument52:Dynamic = frustum.right; __callArgument52; }), ({ final __callArgument53:Dynamic = sphere.center; __callArgument53; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument56:Dynamic = frustum.bottom; __callArgument56; }), ({ final __callArgument57:Dynamic = sphere.center; __callArgument57; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument60:Dynamic = frustum.top; __callArgument60; }), ({ final __callArgument61:Dynamic = sphere.center; __callArgument61; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument64:Dynamic = frustum.near; __callArgument64; }), ({ final __callArgument65:Dynamic = sphere.center; __callArgument65; })) : Float) : Float) >= (cast -r : Float)) : Bool)), function():Dynamic return cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument68:Dynamic = frustum.far; __callArgument68; }), ({ final __callArgument69:Dynamic = sphere.center; __callArgument69; })) : Float) : Float) >= (cast -r : Float)));
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument72:Dynamic = frustum.left; __callArgument72; }), ({ final __callArgument73:Dynamic = sphere.center; __callArgument73; })) : Float) : Float) >= (cast -r : Float)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument76:Dynamic = frustum.right; __callArgument76; }), ({ final __callArgument77:Dynamic = sphere.center; __callArgument77; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument80:Dynamic = frustum.bottom; __callArgument80; }), ({ final __callArgument81:Dynamic = sphere.center; __callArgument81; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument84:Dynamic = frustum.top; __callArgument84; }), ({ final __callArgument85:Dynamic = sphere.center; __callArgument85; })) : Float) : Float) >= (cast -r : Float)) : Bool)) : Bool) && (cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument88:Dynamic = frustum.near; __callArgument88; }), ({ final __callArgument89:Dynamic = sphere.center; __callArgument89; })) : Float) : Float) >= (cast -r : Float)) : Bool)), function():Dynamic return cast ((cast (cast Frustum.__planeSignedDistance__frustum(({ final __callArgument92:Dynamic = frustum.far; __callArgument92; }), ({ final __callArgument93:Dynamic = sphere.center; __callArgument93; })) : Float) : Float) >= (cast -r : Float)));
     return cast null;
   }
 
@@ -104,12 +154,12 @@ class Frustum {
     r31 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float));
     r32 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 11.0 : Float));
     r33 = flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 15.0 : Float));
-    Frustum.__setPlane__frustum(({ final __callArgument72:Dynamic = out.left; __callArgument72; }), (cast (r30 + r00) : Float), (cast (r31 + r01) : Float), (cast (r32 + r02) : Float), (cast (r33 + r03) : Float));
-    Frustum.__setPlane__frustum(({ final __callArgument74:Dynamic = out.right; __callArgument74; }), (cast (r30 - r00) : Float), (cast (r31 - r01) : Float), (cast (r32 - r02) : Float), (cast (r33 - r03) : Float));
-    Frustum.__setPlane__frustum(({ final __callArgument76:Dynamic = out.bottom; __callArgument76; }), (cast (r30 + r10) : Float), (cast (r31 + r11) : Float), (cast (r32 + r12) : Float), (cast (r33 + r13) : Float));
-    Frustum.__setPlane__frustum(({ final __callArgument78:Dynamic = out.top; __callArgument78; }), (cast (r30 - r10) : Float), (cast (r31 - r11) : Float), (cast (r32 - r12) : Float), (cast (r33 - r13) : Float));
-    Frustum.__setPlane__frustum(({ final __callArgument80:Dynamic = out.near; __callArgument80; }), (cast (r30 + r20) : Float), (cast (r31 + r21) : Float), (cast (r32 + r22) : Float), (cast (r33 + r23) : Float));
-    Frustum.__setPlane__frustum(({ final __callArgument82:Dynamic = out.far; __callArgument82; }), (cast (r30 - r20) : Float), (cast (r31 - r21) : Float), (cast (r32 - r22) : Float), (cast (r33 - r23) : Float));
+    Frustum.__setPlane__frustum(({ final __callArgument96:Dynamic = out.left; __callArgument96; }), (cast (r30 + r00) : Float), (cast (r31 + r01) : Float), (cast (r32 + r02) : Float), (cast (r33 + r03) : Float));
+    Frustum.__setPlane__frustum(({ final __callArgument98:Dynamic = out.right; __callArgument98; }), (cast (r30 - r00) : Float), (cast (r31 - r01) : Float), (cast (r32 - r02) : Float), (cast (r33 - r03) : Float));
+    Frustum.__setPlane__frustum(({ final __callArgument100:Dynamic = out.bottom; __callArgument100; }), (cast (r30 + r10) : Float), (cast (r31 + r11) : Float), (cast (r32 + r12) : Float), (cast (r33 + r13) : Float));
+    Frustum.__setPlane__frustum(({ final __callArgument102:Dynamic = out.top; __callArgument102; }), (cast (r30 - r10) : Float), (cast (r31 - r11) : Float), (cast (r32 - r12) : Float), (cast (r33 - r13) : Float));
+    Frustum.__setPlane__frustum(({ final __callArgument104:Dynamic = out.near; __callArgument104; }), (cast (r30 + r20) : Float), (cast (r31 + r21) : Float), (cast (r32 + r22) : Float), (cast (r33 + r23) : Float));
+    Frustum.__setPlane__frustum(({ final __callArgument106:Dynamic = out.far; __callArgument106; }), (cast (r30 - r20) : Float), (cast (r31 - r21) : Float), (cast (r32 - r22) : Float), (cast (r33 - r23) : Float));
   }
 
   public static function __planeIntersectsAabb__frustum(plane:PlaneLike, aabb:AabbLike):Bool {
@@ -120,6 +170,15 @@ class Frustum {
     py = ((cast ((cast plane.b : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (cast aabb.max : { var y:Float; }).y : Dynamic) : (cast (cast aabb.min : { var y:Float; }).y : Dynamic));
     pz = ((cast ((cast plane.c : Float) >= (cast 0.0 : Float)) : Bool) ? (cast (cast aabb.max : { var z:Float; }).z : Dynamic) : (cast (cast aabb.min : { var z:Float; }).z : Dynamic));
     return cast ((cast ((((plane.a * px) + (plane.b * py)) + (plane.c * pz)) + plane.d) : Float) >= (cast 0.0 : Float));
+    return cast null;
+  }
+
+  public static function __planeIntersectsObb__frustum(plane:PlaneLike, obb:ObbLike, ax0:Float, ay0:Float, az0:Float, ax1:Float, ay1:Float, az1:Float, ax2:Float, ay2:Float, az2:Float):Bool {
+    var dist:Float = cast _Runtime.UNDEFINED;
+    var r:Float = cast _Runtime.UNDEFINED;
+    dist = ((((plane.a * obb.centerX) + (plane.b * obb.centerY)) + (plane.c * obb.centerZ)) + plane.d);
+    r = ((_Runtime.multiplyNumbers(obb.halfExtentX, HxMath.abs((((plane.a * ax0) + (plane.b * ay0)) + (plane.c * az0)))) + _Runtime.multiplyNumbers(obb.halfExtentY, HxMath.abs((((plane.a * ax1) + (plane.b * ay1)) + (plane.c * az1))))) + _Runtime.multiplyNumbers(obb.halfExtentZ, HxMath.abs((((plane.a * ax2) + (plane.b * ay2)) + (plane.c * az2)))));
+    return cast ((cast dist : Float) >= (cast -r : Float));
     return cast null;
   }
 

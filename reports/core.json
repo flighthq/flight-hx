@@ -1,6 +1,6 @@
 {
   "contractSurface": {
-    "noCompletionDeclarations": 1395,
+    "noCompletionDeclarations": 1505,
     "omittedModules": [
       {
         "module": "flighthq.abc.Contract",
@@ -909,7 +909,7 @@
         "source": "upstream/packages/xml/src/contract.ts"
       }
     ],
-    "protectedDeclarationIdentities": 1395
+    "protectedDeclarationIdentities": 1505
   },
   "excludedPackages": [
     {
@@ -938,7 +938,7 @@
       "module": "flighthq.abc.AbcInstruction"
     },
     {
-      "declarations": 20,
+      "declarations": 28,
       "diagnostics": [],
       "module": "flighthq.accessibility.Accessibility"
     },
@@ -1103,12 +1103,12 @@
       "module": "flighthq.animation.AnimationTrack"
     },
     {
-      "declarations": 44,
+      "declarations": 52,
       "diagnostics": [],
       "module": "flighthq.app.App"
     },
     {
-      "declarations": 114,
+      "declarations": 115,
       "diagnostics": [],
       "module": "flighthq.application.Application"
     },
@@ -1118,7 +1118,7 @@
       "module": "flighthq.application.ApplicationRenderView"
     },
     {
-      "declarations": 74,
+      "declarations": 81,
       "diagnostics": [],
       "module": "flighthq.application.Window"
     },
@@ -1628,7 +1628,7 @@
       "module": "flighthq.clip.EnableClipGuards"
     },
     {
-      "declarations": 38,
+      "declarations": 48,
       "diagnostics": [],
       "module": "flighthq.clipboard.Clipboard"
     },
@@ -1893,7 +1893,7 @@
       "module": "flighthq.compression.Deflate"
     },
     {
-      "declarations": 22,
+      "declarations": 30,
       "diagnostics": [],
       "module": "flighthq.connectivity.Connectivity"
     },
@@ -1908,12 +1908,12 @@
       "module": "flighthq.debug.DebugTiming"
     },
     {
-      "declarations": 19,
+      "declarations": 29,
       "diagnostics": [],
       "module": "flighthq.device.Device"
     },
     {
-      "declarations": 33,
+      "declarations": 41,
       "diagnostics": [],
       "module": "flighthq.dialog.Dialog"
     },
@@ -3143,7 +3143,7 @@
       "module": "flighthq.entity.Runtime"
     },
     {
-      "declarations": 54,
+      "declarations": 62,
       "diagnostics": [],
       "module": "flighthq.filesystem.Filesystem"
     },
@@ -3273,12 +3273,12 @@
       "module": "flighthq.fontFormats.WoffFont"
     },
     {
-      "declarations": 20,
+      "declarations": 28,
       "diagnostics": [],
       "module": "flighthq.geolocation.Geolocation"
     },
     {
-      "declarations": 16,
+      "declarations": 17,
       "diagnostics": [],
       "module": "flighthq.geometry.Aabb"
     },
@@ -3288,7 +3288,7 @@
       "module": "flighthq.geometry.BoundingSphere"
     },
     {
-      "declarations": 9,
+      "declarations": 12,
       "diagnostics": [],
       "module": "flighthq.geometry.Capsule"
     },
@@ -3298,12 +3298,12 @@
       "module": "flighthq.geometry.EnableGeometryPoolGuards"
     },
     {
-      "declarations": 9,
+      "declarations": 11,
       "diagnostics": [],
       "module": "flighthq.geometry.Frustum"
     },
     {
-      "declarations": 380,
+      "declarations": 389,
       "diagnostics": [],
       "module": "flighthq.geometry.Geometry"
     },
@@ -3343,7 +3343,7 @@
       "module": "flighthq.geometry.MatrixPool"
     },
     {
-      "declarations": 8,
+      "declarations": 9,
       "diagnostics": [],
       "module": "flighthq.geometry.Obb"
     },
@@ -3353,7 +3353,7 @@
       "module": "flighthq.geometry.Plane"
     },
     {
-      "declarations": 20,
+      "declarations": 21,
       "diagnostics": [],
       "module": "flighthq.geometry.Quaternion"
     },
@@ -3363,7 +3363,7 @@
       "module": "flighthq.geometry.QuaternionPool"
     },
     {
-      "declarations": 9,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flighthq.geometry.Ray3d"
     },
@@ -3393,7 +3393,7 @@
       "module": "flighthq.geometry.Typedarray"
     },
     {
-      "declarations": 33,
+      "declarations": 36,
       "diagnostics": [],
       "module": "flighthq.geometry.Vector2"
     },
@@ -3468,7 +3468,7 @@
       "module": "flighthq.glyphatlas.GlyphSource"
     },
     {
-      "declarations": 15,
+      "declarations": 23,
       "diagnostics": [],
       "module": "flighthq.haptics.Haptics"
     },
@@ -3498,7 +3498,7 @@
       "module": "flighthq.hostCapacitor.CapacitorDialog"
     },
     {
-      "declarations": 4,
+      "declarations": 6,
       "diagnostics": [],
       "module": "flighthq.hostCapacitor.CapacitorFileSystem"
     },
@@ -3543,7 +3543,7 @@
       "module": "flighthq.hostCapacitor.HostCapacitor"
     },
     {
-      "declarations": 3,
+      "declarations": 2,
       "diagnostics": [],
       "module": "flighthq.hostElectron.ElectronApp"
     },
@@ -3563,9 +3563,14 @@
       "module": "flighthq.hostElectron.ElectronIpc"
     },
     {
-      "declarations": 2,
+      "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.hostElectron.ElectronMenu"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostElectron.ElectronMenuTemplate"
     },
     {
       "declarations": 1,
@@ -3613,7 +3618,7 @@
       "module": "flighthq.hostElectron.ElectronStorage"
     },
     {
-      "declarations": 4,
+      "declarations": 3,
       "diagnostics": [],
       "module": "flighthq.hostElectron.ElectronTray"
     },
@@ -3693,14 +3698,59 @@
       "module": "flighthq.hostTauri.TauriWindow"
     },
     {
-      "declarations": 4,
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.EnableHostWeb"
+    },
+    {
+      "declarations": 31,
       "diagnostics": [],
       "module": "flighthq.hostWeb.HostWeb"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebAccessibility"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebApp"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebClipboard"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebConnectivity"
     },
     {
       "declarations": 1,
       "diagnostics": [],
       "module": "flighthq.hostWeb.WebCursor"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebDevice"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebDialog"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebFilesystem"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebGeolocation"
     },
     {
       "declarations": 7,
@@ -3710,15 +3760,110 @@
     {
       "declarations": 3,
       "diagnostics": [],
+      "module": "flighthq.hostWeb.WebHaptics"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebImage"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebKeyboard"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebLifecycle"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
       "module": "flighthq.hostWeb.WebLoop"
     },
     {
-      "declarations": 21,
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebMediasession"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebMenu"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebNotification"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebPermissions"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebPlatform"
+    },
+    {
+      "declarations": 12,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebPower"
+    },
+    {
+      "declarations": 4,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebProtocol"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebScreen"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebSensors"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebShare"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebShell"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebStatusbar"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebStorage"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebWebcam"
+    },
+    {
+      "declarations": 3,
+      "diagnostics": [],
+      "module": "flighthq.hostWeb.WebWindow"
+    },
+    {
+      "declarations": 22,
       "diagnostics": [],
       "module": "flighthq.image.Image"
     },
     {
-      "declarations": 4,
+      "declarations": 12,
       "diagnostics": [],
       "module": "flighthq.image.ImageBackend"
     },
@@ -3933,12 +4078,12 @@
       "module": "flighthq.intl.RelativeTime"
     },
     {
-      "declarations": 23,
+      "declarations": 30,
       "diagnostics": [],
       "module": "flighthq.ipc.Ipc"
     },
     {
-      "declarations": 27,
+      "declarations": 35,
       "diagnostics": [],
       "module": "flighthq.keyboard.Keyboard"
     },
@@ -3978,7 +4123,7 @@
       "module": "flighthq.layout.ResolveLayoutTree"
     },
     {
-      "declarations": 16,
+      "declarations": 24,
       "diagnostics": [],
       "module": "flighthq.lifecycle.Lifecycle"
     },
@@ -4053,7 +4198,7 @@
       "module": "flighthq.loader.ResourceLoader"
     },
     {
-      "declarations": 93,
+      "declarations": 92,
       "diagnostics": [],
       "module": "flighthq.log.Log"
     },
@@ -4268,12 +4413,12 @@
       "module": "flighthq.media.VideoChannel"
     },
     {
-      "declarations": 12,
+      "declarations": 20,
       "diagnostics": [],
       "module": "flighthq.mediasession.Mediasession"
     },
     {
-      "declarations": 23,
+      "declarations": 30,
       "diagnostics": [],
       "module": "flighthq.menu.Menu"
     },
@@ -4488,7 +4633,7 @@
       "module": "flighthq.node.Viewport"
     },
     {
-      "declarations": 29,
+      "declarations": 42,
       "diagnostics": [],
       "module": "flighthq.notification.Notification"
     },
@@ -4873,12 +5018,12 @@
       "module": "flighthq.permissions.EnablePermissionGuards"
     },
     {
-      "declarations": 29,
+      "declarations": 36,
       "diagnostics": [],
       "module": "flighthq.permissions.Permission"
     },
     {
-      "declarations": 6,
+      "declarations": 7,
       "diagnostics": [],
       "module": "flighthq.permissions.Permissions"
     },
@@ -5268,17 +5413,17 @@
       "module": "flighthq.picking.SceneHitAttributes"
     },
     {
-      "declarations": 19,
+      "declarations": 27,
       "diagnostics": [],
       "module": "flighthq.platform.Platform"
     },
     {
-      "declarations": 28,
+      "declarations": 30,
       "diagnostics": [],
       "module": "flighthq.power.Power"
     },
     {
-      "declarations": 25,
+      "declarations": 32,
       "diagnostics": [],
       "module": "flighthq.protocol.Protocol"
     },
@@ -5423,7 +5568,7 @@
       "module": "flighthq.render.Scene2dWorkingColorSpace"
     },
     {
-      "declarations": 22,
+      "declarations": 23,
       "diagnostics": [],
       "module": "flighthq.render.SceneRender"
     },
@@ -5778,7 +5923,7 @@
       "module": "flighthq.scene2dCanvas.CanvasBitmapTextureResolver"
     },
     {
-      "declarations": 17,
+      "declarations": 18,
       "diagnostics": [],
       "module": "flighthq.scene2dCanvas.CanvasCache"
     },
@@ -6243,7 +6388,7 @@
       "module": "flighthq.scene2dGl.GlBitmapText"
     },
     {
-      "declarations": 15,
+      "declarations": 16,
       "diagnostics": [],
       "module": "flighthq.scene2dGl.GlCache"
     },
@@ -6433,7 +6578,7 @@
       "module": "flighthq.scene2dWgpu.WgpuBitmapText"
     },
     {
-      "declarations": 17,
+      "declarations": 18,
       "diagnostics": [],
       "module": "flighthq.scene2dWgpu.WgpuCache"
     },
@@ -7468,7 +7613,7 @@
       "module": "flighthq.scene3dWgpu.WireframeWgpuMeshMaterialRenderer"
     },
     {
-      "declarations": 45,
+      "declarations": 54,
       "diagnostics": [],
       "module": "flighthq.screen.Screen"
     },
@@ -7533,7 +7678,7 @@
       "module": "flighthq.sdk.Scene3d"
     },
     {
-      "declarations": 4780,
+      "declarations": 4821,
       "diagnostics": [],
       "module": "flighthq.sdk.Sdk"
     },
@@ -7543,7 +7688,7 @@
       "module": "flighthq.sdk.Text"
     },
     {
-      "declarations": 57,
+      "declarations": 66,
       "diagnostics": [],
       "module": "flighthq.sensors.Sensors"
     },
@@ -7728,12 +7873,12 @@
       "module": "flighthq.shapeFormats.ShapeJson"
     },
     {
-      "declarations": 19,
+      "declarations": 27,
       "diagnostics": [],
       "module": "flighthq.share.Share"
     },
     {
-      "declarations": 16,
+      "declarations": 23,
       "diagnostics": [],
       "module": "flighthq.shell.Shell"
     },
@@ -7748,7 +7893,7 @@
       "module": "flighthq.shortcut.ExplainGlobalShortcutRegistration"
     },
     {
-      "declarations": 53,
+      "declarations": 59,
       "diagnostics": [],
       "module": "flighthq.shortcut.Shortcut"
     },
@@ -8193,12 +8338,12 @@
       "module": "flighthq.statechart.StatechartSignals"
     },
     {
-      "declarations": 29,
+      "declarations": 35,
       "diagnostics": [],
       "module": "flighthq.statusbar.Statusbar"
     },
     {
-      "declarations": 46,
+      "declarations": 54,
       "diagnostics": [],
       "module": "flighthq.storage.Storage"
     },
@@ -8713,7 +8858,7 @@
       "module": "flighthq.tray.EnableTrayGuards"
     },
     {
-      "declarations": 33,
+      "declarations": 40,
       "diagnostics": [],
       "module": "flighthq.tray.Tray"
     },
@@ -10368,7 +10513,7 @@
       "module": "flighthq.types.EffectSourceMode"
     },
     {
-      "declarations": 36,
+      "declarations": 37,
       "diagnostics": [],
       "module": "flighthq.types.ElectronApi"
     },
@@ -12100,11 +12245,6 @@
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flighthq.types.RenderTargetSizeOptions"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
       "module": "flighthq.types.RenderTexture"
     },
     {
@@ -13443,7 +13583,7 @@
       "module": "flighthq.types.Vector4"
     },
     {
-      "declarations": 4,
+      "declarations": 5,
       "diagnostics": [],
       "module": "flighthq.types.Velocity"
     },
@@ -13793,7 +13933,7 @@
       "module": "flighthq.types.XmlElement"
     },
     {
-      "declarations": 27,
+      "declarations": 36,
       "diagnostics": [],
       "module": "flighthq.updater.Updater"
     },
@@ -13818,12 +13958,12 @@
       "module": "flighthq.velocity.TransformVelocity"
     },
     {
-      "declarations": 19,
+      "declarations": 20,
       "diagnostics": [],
       "module": "flighthq.velocity.Velocity"
     },
     {
-      "declarations": 18,
+      "declarations": 19,
       "diagnostics": [],
       "module": "flighthq.velocity.VelocityField"
     },
@@ -13853,7 +13993,7 @@
       "module": "flighthq.video.VideoResourceFrom"
     },
     {
-      "declarations": 9,
+      "declarations": 17,
       "diagnostics": [],
       "module": "flighthq.webcam.Webcam"
     },
@@ -13880,10 +14020,10 @@
   ],
   "schemaVersion": 6,
   "staticLowering": {
-    "booleanAndExpressions": 2633,
-    "booleanConditionalExpressions": 3330,
-    "booleanOrExpressions": 3200,
-    "booleanTruthinessUses": 15872,
+    "booleanAndExpressions": 2644,
+    "booleanConditionalExpressions": 3424,
+    "booleanOrExpressions": 3205,
+    "booleanTruthinessUses": 16018,
     "destructuringEscapes": {
       "regexp-result-array": {
         "assignment": 0,
@@ -13980,20 +14120,20 @@
       "asyncFlowForOfValues": 8
     },
     "indexedAccesses": {
-      "reads": 9459,
-      "writes": 4420
+      "reads": 9482,
+      "writes": 4430
     },
     "indexedReceivers": {
       "Array": {
-        "reads": 6561,
-        "writes": 1447
+        "reads": 6563,
+        "writes": 1457
       },
       "ArrayOrFloat32Array": {
         "reads": 15,
         "writes": 43
       },
       "Float32Array": {
-        "reads": 1784,
+        "reads": 1805,
         "writes": 2113
       },
       "Float64Array": {
@@ -14033,7 +14173,7 @@
         "writes": 402
       }
     },
-    "numericRelations": 7591,
+    "numericRelations": 7616,
     "syntheticArrayReads": {
       "highArityArguments": 27,
       "iterationBindings": 176
@@ -14255,11 +14395,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 18
+          "standard-toolkit-boundary": 10
         },
         "module": "flighthq.app.App",
         "source": "upstream/packages/app/src/app.ts",
-        "total": 18
+        "total": 10
       },
       {
         "byReason": {
@@ -14284,11 +14424,11 @@
       {
         "byReason": {
           "source-any": 3,
-          "standard-toolkit-boundary": 118
+          "standard-toolkit-boundary": 99
         },
         "module": "flighthq.application.Window",
         "source": "upstream/packages/application/src/window.ts",
-        "total": 121
+        "total": 102
       },
       {
         "byReason": {
@@ -14879,11 +15019,11 @@
       {
         "byReason": {
           "source-unknown": 1,
-          "standard-toolkit-boundary": 61
+          "standard-toolkit-boundary": 63
         },
         "module": "flighthq.clipboard.Clipboard",
         "source": "upstream/packages/clipboard/src/clipboard.ts",
-        "total": 62
+        "total": 64
       },
       {
         "byReason": {
@@ -16738,19 +16878,20 @@
       {
         "byReason": {
           "source-any": 1,
-          "standard-toolkit-boundary": 33
+          "source-null": 2,
+          "standard-toolkit-boundary": 41
         },
         "module": "flighthq.geolocation.Geolocation",
         "source": "upstream/packages/geolocation/src/geolocation.ts",
-        "total": 34
+        "total": 44
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 78
+          "standard-toolkit-boundary": 84
         },
         "module": "flighthq.geometry.Aabb",
         "source": "upstream/packages/geometry/src/aabb.ts",
-        "total": 78
+        "total": 84
       },
       {
         "byReason": {
@@ -16762,11 +16903,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 46
+          "standard-toolkit-boundary": 98
         },
         "module": "flighthq.geometry.Capsule",
         "source": "upstream/packages/geometry/src/capsule.ts",
-        "total": 46
+        "total": 98
       },
       {
         "byReason": {
@@ -16778,11 +16919,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 4
+          "standard-toolkit-boundary": 10
         },
         "module": "flighthq.geometry.Frustum",
         "source": "upstream/packages/geometry/src/frustum.ts",
-        "total": 4
+        "total": 10
       },
       {
         "byReason": {
@@ -16834,11 +16975,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 52
+          "standard-toolkit-boundary": 64
         },
         "module": "flighthq.geometry.Obb",
         "source": "upstream/packages/geometry/src/obb.ts",
-        "total": 52
+        "total": 64
       },
       {
         "byReason": {
@@ -16850,11 +16991,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 144
+          "standard-toolkit-boundary": 152
         },
         "module": "flighthq.geometry.Quaternion",
         "source": "upstream/packages/geometry/src/quaternion.ts",
-        "total": 144
+        "total": 152
       },
       {
         "byReason": {
@@ -16866,11 +17007,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 26
+          "standard-toolkit-boundary": 28
         },
         "module": "flighthq.geometry.Ray3d",
         "source": "upstream/packages/geometry/src/ray3d.ts",
-        "total": 26
+        "total": 28
       },
       {
         "byReason": {
@@ -16906,11 +17047,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 22
+          "standard-toolkit-boundary": 28
         },
         "module": "flighthq.geometry.Vector2",
         "source": "upstream/packages/geometry/src/vector2.ts",
-        "total": 22
+        "total": 28
       },
       {
         "byReason": {
@@ -17039,11 +17180,12 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 4
+          "source-unknown": 3,
+          "standard-toolkit-boundary": 6
         },
         "module": "flighthq.hostCapacitor.CapacitorFileSystem",
         "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts",
-        "total": 4
+        "total": 9
       },
       {
         "byReason": {
@@ -17103,12 +17245,11 @@
       {
         "byReason": {
           "source-any": 1,
-          "source-unknown": 43,
-          "standard-toolkit-boundary": 2
+          "source-unknown": 43
         },
         "module": "flighthq.hostElectron.ElectronApp",
         "source": "upstream/packages/host-electron/src/electronApp.ts",
-        "total": 46
+        "total": 44
       },
       {
         "byReason": {
@@ -17131,11 +17272,19 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 6
+          "standard-toolkit-boundary": 5
         },
         "module": "flighthq.hostElectron.ElectronMenu",
         "source": "upstream/packages/host-electron/src/electronMenu.ts",
-        "total": 6
+        "total": 5
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 2
+        },
+        "module": "flighthq.hostElectron.ElectronMenuTemplate",
+        "source": "upstream/packages/host-electron/src/electronMenuTemplate.ts",
+        "total": 2
       },
       {
         "byReason": {
@@ -17193,11 +17342,11 @@
       {
         "byReason": {
           "source-unknown": 9,
-          "standard-toolkit-boundary": 20
+          "standard-toolkit-boundary": 19
         },
         "module": "flighthq.hostElectron.ElectronTray",
         "source": "upstream/packages/host-electron/src/electronTray.ts",
-        "total": 29
+        "total": 28
       },
       {
         "byReason": {
@@ -17219,20 +17368,21 @@
       },
       {
         "byReason": {
-          "source-any": 6,
-          "standard-toolkit-boundary": 8
+          "source-any": 7,
+          "standard-toolkit-boundary": 10
         },
         "module": "flighthq.hostTauri.TauriApp",
         "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-        "total": 14
+        "total": 17
       },
       {
         "byReason": {
+          "source-unknown": 3,
           "standard-toolkit-boundary": 11
         },
         "module": "flighthq.hostTauri.TauriDialog",
         "source": "upstream/packages/host-tauri/src/tauriDialog.ts",
-        "total": 11
+        "total": 14
       },
       {
         "byReason": {
@@ -17251,6 +17401,15 @@
         },
         "module": "flighthq.hostTauri.TauriNotification",
         "source": "upstream/packages/host-tauri/src/tauriNotification.ts",
+        "total": 3
+      },
+      {
+        "byReason": {
+          "source-any": 1,
+          "standard-toolkit-boundary": 2
+        },
+        "module": "flighthq.hostTauri.TauriPlatform",
+        "source": "upstream/packages/host-tauri/src/tauriPlatform.ts",
         "total": 3
       },
       {
@@ -17292,6 +17451,30 @@
       },
       {
         "byReason": {
+          "standard-toolkit-boundary": 13
+        },
+        "module": "flighthq.hostWeb.WebApp",
+        "source": "upstream/packages/host-web/src/webApp.ts",
+        "total": 13
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 3
+        },
+        "module": "flighthq.hostWeb.WebDialog",
+        "source": "upstream/packages/host-web/src/webDialog.ts",
+        "total": 3
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 2
+        },
+        "module": "flighthq.hostWeb.WebGeolocation",
+        "source": "upstream/packages/host-web/src/webGeolocation.ts",
+        "total": 2
+      },
+      {
+        "byReason": {
           "external-toolkit-boundary": 2,
           "standard-toolkit-boundary": 31
         },
@@ -17309,6 +17492,64 @@
       },
       {
         "byReason": {
+          "source-null": 1,
+          "standard-toolkit-boundary": 2
+        },
+        "module": "flighthq.hostWeb.WebMenu",
+        "source": "upstream/packages/host-web/src/webMenu.ts",
+        "total": 3
+      },
+      {
+        "byReason": {
+          "source-unknown": 2
+        },
+        "module": "flighthq.hostWeb.WebNotification",
+        "source": "upstream/packages/host-web/src/webNotification.ts",
+        "total": 2
+      },
+      {
+        "byReason": {
+          "source-any": 4,
+          "standard-toolkit-boundary": 11
+        },
+        "module": "flighthq.hostWeb.WebPower",
+        "source": "upstream/packages/host-web/src/webPower.ts",
+        "total": 15
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 6
+        },
+        "module": "flighthq.hostWeb.WebProtocol",
+        "source": "upstream/packages/host-web/src/webProtocol.ts",
+        "total": 6
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 2
+        },
+        "module": "flighthq.hostWeb.WebShell",
+        "source": "upstream/packages/host-web/src/webShell.ts",
+        "total": 2
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 5
+        },
+        "module": "flighthq.hostWeb.WebStatusbar",
+        "source": "upstream/packages/host-web/src/webStatusbar.ts",
+        "total": 5
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 19
+        },
+        "module": "flighthq.hostWeb.WebWindow",
+        "source": "upstream/packages/host-web/src/webWindow.ts",
+        "total": 19
+      },
+      {
+        "byReason": {
           "source-unknown": 1
         },
         "module": "flighthq.image.Image",
@@ -17320,11 +17561,11 @@
           "source-any": 1,
           "source-never": 2,
           "source-unknown": 3,
-          "standard-toolkit-boundary": 11
+          "standard-toolkit-boundary": 14
         },
         "module": "flighthq.image.ImageBackend",
         "source": "upstream/packages/image/src/imageBackend.ts",
-        "total": 17
+        "total": 20
       },
       {
         "byReason": {
@@ -17571,12 +17812,12 @@
         "byReason": {
           "source-any": 2,
           "source-undefined": 1,
-          "source-unknown": 47,
+          "source-unknown": 50,
           "standard-toolkit-boundary": 17
         },
         "module": "flighthq.ipc.Ipc",
         "source": "upstream/packages/ipc/src/ipc.ts",
-        "total": 67
+        "total": 70
       },
       {
         "byReason": {
@@ -18157,12 +18398,12 @@
       },
       {
         "byReason": {
-          "source-unknown": 15,
-          "standard-toolkit-boundary": 90
+          "source-unknown": 17,
+          "standard-toolkit-boundary": 92
         },
         "module": "flighthq.notification.Notification",
         "source": "upstream/packages/notification/src/notification.ts",
-        "total": 105
+        "total": 109
       },
       {
         "byReason": {
@@ -18617,12 +18858,12 @@
       {
         "byReason": {
           "source-unknown": 9,
-          "standard-toolkit-boundary": 41,
+          "standard-toolkit-boundary": 45,
           "unclassified": 1
         },
         "module": "flighthq.permissions.Permission",
         "source": "upstream/packages/permissions/src/permission.ts",
-        "total": 51
+        "total": 55
       },
       {
         "byReason": {
@@ -18898,11 +19139,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 24
+          "standard-toolkit-boundary": 26
         },
         "module": "flighthq.physics3d.Islands",
         "source": "upstream/packages/physics3d/src/islands.ts",
-        "total": 24
+        "total": 26
       },
       {
         "byReason": {
@@ -19109,20 +19350,19 @@
       },
       {
         "byReason": {
-          "source-any": 4,
-          "standard-toolkit-boundary": 14
+          "standard-toolkit-boundary": 3
         },
         "module": "flighthq.power.Power",
         "source": "upstream/packages/power/src/power.ts",
-        "total": 18
+        "total": 3
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 40
+          "standard-toolkit-boundary": 34
         },
         "module": "flighthq.protocol.Protocol",
         "source": "upstream/packages/protocol/src/protocol.ts",
-        "total": 40
+        "total": 34
       },
       {
         "byReason": {
@@ -22193,12 +22433,12 @@
       {
         "byReason": {
           "source-unknown": 7,
-          "standard-toolkit-boundary": 50,
+          "standard-toolkit-boundary": 54,
           "unclassified": 4
         },
         "module": "flighthq.sensors.Sensors",
         "source": "upstream/packages/sensors/src/sensors.ts",
-        "total": 61
+        "total": 65
       },
       {
         "byReason": {
@@ -22368,11 +22608,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 6
+          "standard-toolkit-boundary": 4
         },
         "module": "flighthq.shell.Shell",
         "source": "upstream/packages/shell/src/shell.ts",
-        "total": 6
+        "total": 4
       },
       {
         "byReason": {
@@ -22899,11 +23139,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 20
+          "standard-toolkit-boundary": 8
         },
         "module": "flighthq.statusbar.Statusbar",
         "source": "upstream/packages/statusbar/src/statusbar.ts",
-        "total": 20
+        "total": 8
       },
       {
         "byReason": {
@@ -23593,11 +23833,11 @@
       },
       {
         "byReason": {
-          "source-unknown": 2
+          "source-unknown": 3
         },
         "module": "flighthq.types.CapacitorApi",
         "source": "upstream/packages/types/src/CapacitorApi.ts",
-        "total": 2
+        "total": 3
       },
       {
         "byReason": {
@@ -23995,12 +24235,12 @@
       },
       {
         "byReason": {
-          "source-unknown": 1,
+          "source-unknown": 2,
           "unclassified": 2
         },
         "module": "flighthq.types.TauriApi",
         "source": "upstream/packages/types/src/TauriApi.ts",
-        "total": 3
+        "total": 4
       },
       {
         "byReason": {
@@ -24126,11 +24366,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 14
+          "standard-toolkit-boundary": 15
         },
         "module": "flighthq.velocity.VelocityField",
         "source": "upstream/packages/velocity/src/velocityField.ts",
-        "total": 14
+        "total": 15
       },
       {
         "byReason": {
@@ -24188,17 +24428,17 @@
     "summary": {
       "byReason": {
         "external-toolkit-boundary": 618,
-        "source-any": 968,
+        "source-any": 970,
         "source-never": 120,
-        "source-null": 86,
+        "source-null": 89,
         "source-undefined": 267,
-        "source-unknown": 3894,
-        "standard-toolkit-boundary": 20374,
+        "source-unknown": 3909,
+        "standard-toolkit-boundary": 20501,
         "unclassified": 431
       },
       "checkerKnownUnrepresentable": 0,
-      "modules": 1193,
-      "total": 26758
+      "modules": 1205,
+      "total": 26905
     }
   }
 }

@@ -10,6 +10,7 @@ export const createDefaultViewMenuTemplate = compiled.flighthq.menu.Menu.createD
 export const createDefaultWindowMenuTemplate = compiled.flighthq.menu.Menu.createDefaultWindowMenuTemplate;
 export const createMenuItemTemplate = compiled.flighthq.menu.Menu.createMenuItemTemplate;
 export const enableMenuSignals = compiled.flighthq.menu.Menu.enableMenuSignals;
+export const explainMenuBackend = compiled.flighthq.menu.Menu.explainMenuBackend;
 export const getMenuSignals = compiled.flighthq.menu.Menu.getMenuSignals;
 export const onMenuSelect = compiled.flighthq.menu.Menu.onMenuSelect;
 export const setApplicationMenu = compiled.flighthq.menu.Menu.setApplicationMenu;

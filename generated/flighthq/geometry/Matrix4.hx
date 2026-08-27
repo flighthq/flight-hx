@@ -311,10 +311,10 @@ class Matrix4 {
     return cast null;
   }
 
-  public static function createPerspectiveMatrix4(fov:Float, aspect:Float, zNear:Float, zFar:Float):flighthq.types.Matrix4 {
+  public static function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):flighthq.types.Matrix4 {
     var out:flighthq.types.Matrix4 = cast _Runtime.UNDEFINED;
     out = (cast (#if js _Runtime.callValue(createMatrix4, cast ([] : Array<Dynamic>)) #else createMatrix4(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flighthq.types.Matrix4);
-    setPerspectiveMatrix4(({ final __callArgument64:Dynamic = out; __callArgument64; }), (cast fov : Float), (cast aspect : Float), (cast zNear : Float), (cast zFar : Float));
+    setPerspectiveMatrix4(({ final __callArgument64:Dynamic = out; __callArgument64; }), (cast tanHalfFovY : Float), (cast aspect : Float), (cast zNear : Float), (cast zFar : Float));
     return cast out;
     return cast null;
   }
@@ -978,7 +978,7 @@ class Matrix4 {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast _out : flighthq._internal._Float32Array), (cast 15.0 : Float), (cast 1.0 : Float));
   }
 
-  public static function setPerspectiveMatrix4(out:Matrix4Like, fov:Float, aspect:Float, zNear:Float, zFar:Float):Void {
+  public static function setPerspectiveMatrix4(out:Matrix4Like, tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Void {
     var _out:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var top:Float = cast _Runtime.UNDEFINED;
     var bottom:Float = cast _Runtime.UNDEFINED;
@@ -988,7 +988,7 @@ class Matrix4 {
       _Runtime.throwValue(_Runtime.error('Aspect ratio may not be 0'));
     }
     _out = out.m;
-    top = (fov * zNear);
+    top = (tanHalfFovY * zNear);
     bottom = -top;
     right = (top * aspect);
     left = -right;

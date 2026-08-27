@@ -11,6 +11,7 @@ export const createUpdaterState = compiled.flighthq.updater.Updater.createUpdate
 export const detachAppUpdater = compiled.flighthq.updater.Updater.detachAppUpdater;
 export const disposeAppUpdater = compiled.flighthq.updater.Updater.disposeAppUpdater;
 export const downloadAppUpdate = compiled.flighthq.updater.Updater.downloadAppUpdate;
+export const explainUpdaterBackend = compiled.flighthq.updater.Updater.explainUpdaterBackend;
 export const getAppUpdaterState = compiled.flighthq.updater.Updater.getAppUpdaterState;
 export const getUpdaterChannel = compiled.flighthq.updater.Updater.getUpdaterChannel;
 export const getUpdaterConfig = compiled.flighthq.updater.Updater.getUpdaterConfig;

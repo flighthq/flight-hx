@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Connectivity;
 import flighthq.types.Connectivity.ConnectivityBackend;
 import flighthq.types.Connectivity.ConnectivityConnectionType;
@@ -16,11 +17,41 @@ import flighthq.types.Signal;
 typedef WebConnectivityConnection__connectivity = { @:optional var type:String; @:optional var downlink:Float; @:optional var downlinkMax:Float; @:optional var effectiveType:String; @:optional var rtt:Float; @:optional var saveData:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
 
 class Connectivity {
-  public static var _backend__connectivity:Null<ConnectivityBackend> = _Runtime.explicitNull();
-
   public static var _cachedWebBackend__connectivity:Null<ConnectivityBackend> = _Runtime.explicitNull();
 
+  public static var _custom__connectivity:Null<ConnectivityBackend> = _Runtime.explicitNull();
+
+  public static var _host__connectivity:Null<ConnectivityBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__connectivity:Bool = false;
+
+  public static var _hostObservation__connectivity:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+
   public static final _scratch__connectivity:ConnectivityStatus = (cast createConnectivityStatus() : ConnectivityStatus);
+
+  public static final _sentinel__connectivity:ConnectivityBackend = (cast { getStatus: function(out:ConnectivityStatus):ConnectivityStatus {
+    (out.online = cast (false : Bool));
+    (out.type = cast ('unknown' : ConnectivityConnectionType));
+    (out.downlink = cast (-1.0 : Float));
+    (out.downlinkMax = cast (-1.0 : Float));
+    (out.effectiveType = cast ('' : String));
+    (out.rtt = cast (-1.0 : Float));
+    (out.saveData = cast (false : Bool));
+    (out.metered = cast (false : Bool));
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  }, detectReachability: function(_options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flighthq._internal._Promise<ConnectivityReachability> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      (out.reachable = cast (false : Bool));
+      (out.latency = cast (-1.0 : Float));
+      return flighthq._internal._Async.resolve(out);
+    }));
+  }, subscribe: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  } });
 
   public static final _subscriptions__connectivity:flighthq._internal._WeakMap<flighthq.types.Connectivity, Void->Void> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
@@ -202,10 +233,20 @@ class Connectivity {
     detachConnectivity(({ final __callArgument24:Dynamic = net; __callArgument24; }));
   }
 
+  public static function explainConnectivityBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Connectivity._custom__connectivity, null) : Bool)) {
+      return cast { conflict: Connectivity._hostConflict__connectivity, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Connectivity._host__connectivity, null) : Bool)) {
+      return cast { conflict: Connectivity._hostConflict__connectivity, layer: 'host', operation: ((cast !_Runtime.strictEquals(Connectivity._hostObservation__connectivity, null) : Bool) ? (cast (cast Connectivity._hostObservation__connectivity : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Connectivity._hostObservation__connectivity, null) : Bool) ? (cast (cast Connectivity._hostObservation__connectivity : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   @:noCompletion
   public static function getConnectivityBackend():ConnectivityBackend {
-    if ((cast _Runtime.strictEquals(Connectivity._backend__connectivity, null) : Bool)) { (Connectivity._backend__connectivity = cast ((cast createWebConnectivityBackend() : ConnectivityBackend) : Dynamic)); }
-    return cast Connectivity._backend__connectivity;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Connectivity._custom__connectivity, function():Dynamic return cast Connectivity._host__connectivity), function():Dynamic return cast Connectivity._sentinel__connectivity);
     return cast null;
   }
 
@@ -225,6 +266,15 @@ class Connectivity {
   public static function hasConnectivityStatusChanged(a:ConnectivityStatus, b:ConnectivityStatus):Bool {
     return cast _Runtime.orValue(((cast ((cast ((cast ((cast ((cast ((cast !_Runtime.strictEquals(a.online, b.online) : Bool) || (cast !_Runtime.strictEquals(a.type, b.type) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.downlink, b.downlink) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.downlinkMax, b.downlinkMax) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.effectiveType, b.effectiveType) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.rtt, b.rtt) : Bool)) : Bool) || (cast !_Runtime.strictEquals(a.saveData, b.saveData) : Bool)), function():Dynamic return cast !_Runtime.strictEquals(a.metered, b.metered));
     return cast null;
+  }
+
+  @:noCompletion
+  public static function installConnectivityHostBackend(backend:ConnectivityBackend):Void {
+    if ((cast !_Runtime.strictEquals(Connectivity._host__connectivity, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Connectivity._host__connectivity, backend) : Bool)) { (Connectivity._hostConflict__connectivity = cast (true : Dynamic)); }
+      return;
+    }
+    (Connectivity._host__connectivity = cast (backend : Dynamic));
   }
 
   public static function isConnectivityMetered():Bool {
@@ -277,7 +327,20 @@ class Connectivity {
   }
 
   @:noCompletion
+  public static function observeConnectivityHostResult(operation:String, succeeded:Bool):Void {
+    (Connectivity._hostObservation__connectivity = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
+  }
+
+  @:noCompletion
+  public static function resetConnectivityBackendForTest():Void {
+    (Connectivity._custom__connectivity = cast (null : Dynamic));
+    (Connectivity._host__connectivity = cast (null : Dynamic));
+    (Connectivity._hostConflict__connectivity = cast (false : Dynamic));
+    (Connectivity._hostObservation__connectivity = cast (null : Dynamic));
+  }
+
+  @:noCompletion
   public static function setConnectivityBackend(backend:Null<ConnectivityBackend>):Void {
-    (Connectivity._backend__connectivity = cast (backend : Dynamic));
+    (Connectivity._custom__connectivity = cast (backend : Dynamic));
   }
 }

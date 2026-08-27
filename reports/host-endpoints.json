@@ -3108,12 +3108,12 @@
       "sites": [
         {
           "column": 3,
-          "line": 126,
+          "line": 127,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 3,
-          "line": 127,
+          "line": 128,
           "source": "upstream/packages/application/src/window.ts"
         }
       ]
@@ -3183,12 +3183,12 @@
         },
         {
           "column": 8,
-          "line": 307,
+          "line": 381,
           "source": "upstream/packages/device/src/device.ts"
         },
         {
           "column": 8,
-          "line": 308,
+          "line": 382,
           "source": "upstream/packages/device/src/device.ts"
         },
         {
@@ -3593,7 +3593,7 @@
         },
         {
           "column": 5,
-          "line": 145,
+          "line": 146,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
@@ -3788,12 +3788,12 @@
       "sites": [
         {
           "column": 5,
-          "line": 129,
+          "line": 130,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 5,
-          "line": 130,
+          "line": 131,
           "source": "upstream/packages/application/src/window.ts"
         }
       ]
@@ -3813,7 +3813,7 @@
       "sites": [
         {
           "column": 5,
-          "line": 538,
+          "line": 460,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
@@ -4178,7 +4178,7 @@
         },
         {
           "column": 5,
-          "line": 144,
+          "line": 145,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
@@ -4372,7 +4372,7 @@
       "sites": [
         {
           "column": 14,
-          "line": 82,
+          "line": 83,
           "source": "upstream/packages/accessibility/src/accessibility.ts"
         }
       ]
@@ -4391,13 +4391,23 @@
       "sites": [
         {
           "column": 3,
-          "line": 80,
+          "line": 81,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 3,
-          "line": 178,
+          "line": 179,
           "source": "upstream/packages/application/src/window.ts"
+        },
+        {
+          "column": 9,
+          "line": 154,
+          "source": "upstream/packages/host-web/src/webPower.ts"
+        },
+        {
+          "column": 9,
+          "line": 165,
+          "source": "upstream/packages/host-web/src/webPower.ts"
         },
         {
           "column": 3,
@@ -4406,23 +4416,13 @@
         },
         {
           "column": 7,
-          "line": 109,
+          "line": 110,
           "source": "upstream/packages/lifecycle/src/lifecycle.ts"
         },
         {
           "column": 5,
-          "line": 260,
+          "line": 209,
           "source": "upstream/packages/menu/src/menu.ts"
-        },
-        {
-          "column": 7,
-          "line": 259,
-          "source": "upstream/packages/power/src/power.ts"
-        },
-        {
-          "column": 7,
-          "line": 264,
-          "source": "upstream/packages/power/src/power.ts"
         }
       ]
     },
@@ -4440,27 +4440,27 @@
       "sites": [
         {
           "column": 44,
-          "line": 38,
+          "line": 39,
           "source": "upstream/packages/accessibility/src/accessibility.ts"
         },
         {
           "column": 5,
-          "line": 43,
+          "line": 44,
           "source": "upstream/packages/accessibility/src/accessibility.ts"
         },
         {
           "column": 3,
-          "line": 202,
+          "line": 190,
           "source": "upstream/packages/device/src/device.ts"
         },
         {
           "column": 5,
-          "line": 261,
+          "line": 210,
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
           "column": 5,
-          "line": 262,
+          "line": 211,
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
@@ -4494,23 +4494,18 @@
       "sites": [
         {
           "column": 19,
-          "line": 53,
+          "line": 54,
           "source": "upstream/packages/accessibility/src/accessibility.ts"
         },
         {
           "column": 21,
-          "line": 163,
+          "line": 212,
           "source": "upstream/packages/accessibility/src/accessibility.ts"
         },
         {
           "column": 14,
-          "line": 188,
+          "line": 237,
           "source": "upstream/packages/accessibility/src/accessibility.ts"
-        },
-        {
-          "column": 16,
-          "line": 342,
-          "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 18,
@@ -4534,22 +4529,22 @@
         },
         {
           "column": 14,
-          "line": 197,
+          "line": 185,
           "source": "upstream/packages/device/src/device.ts"
         },
         {
           "column": 20,
-          "line": 305,
+          "line": 379,
           "source": "upstream/packages/device/src/device.ts"
         },
         {
           "column": 21,
-          "line": 214,
+          "line": 302,
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 21,
-          "line": 293,
+          "line": 381,
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
@@ -4559,47 +4554,57 @@
         },
         {
           "column": 18,
+          "line": 33,
+          "source": "upstream/packages/host-web/src/webStatusbar.ts"
+        },
+        {
+          "column": 16,
+          "line": 80,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
+        },
+        {
+          "column": 18,
           "line": 13,
           "source": "upstream/packages/image/src/imageResourceFrom.ts"
         },
         {
           "column": 21,
-          "line": 190,
+          "line": 139,
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
           "column": 16,
-          "line": 268,
+          "line": 301,
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
           "column": 16,
-          "line": 289,
+          "line": 322,
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
           "column": 20,
-          "line": 309,
+          "line": 342,
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
           "column": 21,
-          "line": 314,
+          "line": 347,
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
           "column": 26,
-          "line": 318,
+          "line": 351,
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
           "column": 21,
-          "line": 328,
+          "line": 361,
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
           "column": 21,
-          "line": 333,
+          "line": 366,
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
@@ -4768,11 +4773,6 @@
           "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts"
         },
         {
-          "column": 16,
-          "line": 82,
-          "source": "upstream/packages/statusbar/src/statusbar.ts"
-        },
-        {
           "column": 22,
           "line": 158,
           "source": "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
@@ -4794,12 +4794,12 @@
         },
         {
           "column": 25,
-          "line": 15,
+          "line": 17,
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 25,
-          "line": 50,
+          "line": 58,
           "source": "upstream/packages/webcam/src/webcam.ts"
         }
       ]
@@ -4818,12 +4818,12 @@
       "sites": [
         {
           "column": 49,
-          "line": 209,
+          "line": 297,
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 49,
-          "line": 288,
+          "line": 376,
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
@@ -4833,12 +4833,12 @@
         },
         {
           "column": 55,
-          "line": 10,
+          "line": 11,
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 55,
-          "line": 45,
+          "line": 52,
           "source": "upstream/packages/webcam/src/webcam.ts"
         }
       ]
@@ -4857,7 +4857,7 @@
       "sites": [
         {
           "column": 24,
-          "line": 254,
+          "line": 303,
           "source": "upstream/packages/accessibility/src/accessibility.ts"
         },
         {
@@ -4880,14 +4880,14 @@
       "runtimePath": "src/flighthq/_internal/backend/DomDocumentBackend.hx",
       "sites": [
         {
-          "column": 30,
-          "line": 331,
-          "source": "upstream/packages/application/src/window.ts"
+          "column": 43,
+          "line": 205,
+          "source": "upstream/packages/device/src/device.ts"
         },
         {
-          "column": 43,
-          "line": 218,
-          "source": "upstream/packages/device/src/device.ts"
+          "column": 30,
+          "line": 68,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -4904,14 +4904,14 @@
       "runtimePath": "src/flighthq/_internal/backend/DomDocumentBackend.hx",
       "sites": [
         {
-          "column": 19,
-          "line": 332,
+          "column": 10,
+          "line": 320,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
-          "column": 10,
-          "line": 427,
-          "source": "upstream/packages/application/src/window.ts"
+          "column": 19,
+          "line": 69,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -4929,7 +4929,7 @@
       "sites": [
         {
           "column": 3,
-          "line": 435,
+          "line": 328,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
@@ -4953,7 +4953,7 @@
       "sites": [
         {
           "column": 49,
-          "line": 432,
+          "line": 325,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
@@ -5030,13 +5030,13 @@
       "sites": [
         {
           "column": 24,
-          "line": 100,
+          "line": 101,
           "source": "upstream/packages/lifecycle/src/lifecycle.ts"
         }
       ]
     },
     {
-      "accesses": 4,
+      "accesses": 3,
       "binding": "DomDocumentBackend",
       "contract": "backend",
       "member": "head",
@@ -5048,24 +5048,19 @@
       "runtimePath": "src/flighthq/_internal/backend/DomDocumentBackend.hx",
       "sites": [
         {
+          "column": 22,
+          "line": 26,
+          "source": "upstream/packages/host-web/src/webStatusbar.ts"
+        },
+        {
           "column": 9,
-          "line": 344,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 82,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         },
         {
           "column": 3,
           "line": 77,
           "source": "upstream/packages/scene2d-dom/src/domTextInput.ts"
-        },
-        {
-          "column": 20,
-          "line": 78,
-          "source": "upstream/packages/statusbar/src/statusbar.ts"
-        },
-        {
-          "column": 16,
-          "line": 288,
-          "source": "upstream/packages/statusbar/src/statusbar.ts"
         }
       ]
     },
@@ -5088,18 +5083,18 @@
         },
         {
           "column": 9,
-          "line": 172,
+          "line": 173,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
-          "column": 11,
-          "line": 94,
-          "source": "upstream/packages/lifecycle/src/lifecycle.ts"
+          "column": 54,
+          "line": 67,
+          "source": "upstream/packages/host-web/src/webPower.ts"
         },
         {
-          "column": 54,
-          "line": 182,
-          "source": "upstream/packages/power/src/power.ts"
+          "column": 11,
+          "line": 95,
+          "source": "upstream/packages/lifecycle/src/lifecycle.ts"
         }
       ]
     },
@@ -5136,8 +5131,8 @@
       "sites": [
         {
           "column": 18,
-          "line": 340,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 78,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -5155,13 +5150,23 @@
       "sites": [
         {
           "column": 36,
-          "line": 81,
+          "line": 82,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 36,
-          "line": 179,
+          "line": 180,
           "source": "upstream/packages/application/src/window.ts"
+        },
+        {
+          "column": 22,
+          "line": 156,
+          "source": "upstream/packages/host-web/src/webPower.ts"
+        },
+        {
+          "column": 22,
+          "line": 167,
+          "source": "upstream/packages/host-web/src/webPower.ts"
         },
         {
           "column": 66,
@@ -5170,23 +5175,13 @@
         },
         {
           "column": 9,
-          "line": 115,
+          "line": 116,
           "source": "upstream/packages/lifecycle/src/lifecycle.ts"
         },
         {
           "column": 7,
-          "line": 203,
+          "line": 152,
           "source": "upstream/packages/menu/src/menu.ts"
-        },
-        {
-          "column": 20,
-          "line": 260,
-          "source": "upstream/packages/power/src/power.ts"
-        },
-        {
-          "column": 20,
-          "line": 265,
-          "source": "upstream/packages/power/src/power.ts"
         }
       ]
     },
@@ -5203,9 +5198,9 @@
       "runtimePath": "src/flighthq/_internal/backend/DomDocumentBackend.hx",
       "sites": [
         {
-          "column": 48,
-          "line": 157,
-          "source": "upstream/packages/app/src/app.ts"
+          "column": 16,
+          "line": 51,
+          "source": "upstream/packages/host-web/src/webApp.ts"
         }
       ]
     },
@@ -5222,9 +5217,9 @@
       "runtimePath": "src/flighthq/_internal/backend/DomDocumentBackend.hx",
       "sites": [
         {
-          "column": 44,
-          "line": 271,
-          "source": "upstream/packages/application/src/window.ts"
+          "column": 9,
+          "line": 117,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -5242,7 +5237,7 @@
       "sites": [
         {
           "column": 16,
-          "line": 46,
+          "line": 30,
           "source": "upstream/packages/share/src/share.ts"
         }
       ]
@@ -5261,7 +5256,7 @@
       "sites": [
         {
           "column": 10,
-          "line": 374,
+          "line": 518,
           "source": "upstream/packages/clipboard/src/clipboard.ts"
         }
       ]
@@ -5280,7 +5275,7 @@
       "sites": [
         {
           "column": 10,
-          "line": 245,
+          "line": 286,
           "source": "upstream/packages/connectivity/src/connectivity.ts"
         }
       ]
@@ -5299,22 +5294,22 @@
       "sites": [
         {
           "column": 17,
-          "line": 172,
+          "line": 184,
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         },
         {
           "column": 58,
-          "line": 172,
+          "line": 184,
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         },
         {
           "column": 10,
-          "line": 209,
+          "line": 252,
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         },
         {
           "column": 10,
-          "line": 229,
+          "line": 287,
           "source": "upstream/packages/permissions/src/permission.ts"
         }
       ]
@@ -5333,8 +5328,8 @@
       "sites": [
         {
           "column": 12,
-          "line": 402,
-          "source": "upstream/packages/power/src/power.ts"
+          "line": 223,
+          "source": "upstream/packages/host-web/src/webPower.ts"
         }
       ]
     },
@@ -5352,8 +5347,8 @@
       "sites": [
         {
           "column": 14,
-          "line": 400,
-          "source": "upstream/packages/power/src/power.ts"
+          "line": 221,
+          "source": "upstream/packages/host-web/src/webPower.ts"
         }
       ]
     },
@@ -5443,7 +5438,7 @@
       "sites": [
         {
           "column": 69,
-          "line": 138,
+          "line": 131,
           "source": "upstream/packages/device/src/device.ts"
         }
       ]
@@ -5461,13 +5456,13 @@
       "runtimePath": "src/flighthq/_internal/backend/DomNavigatorBackend.hx",
       "sites": [
         {
-          "column": 50,
-          "line": 134,
-          "source": "upstream/packages/app/src/app.ts"
+          "column": 16,
+          "line": 41,
+          "source": "upstream/packages/host-web/src/webApp.ts"
         },
         {
           "column": 16,
-          "line": 154,
+          "line": 214,
           "source": "upstream/packages/platform/src/platform.ts"
         }
       ]
@@ -5486,13 +5481,13 @@
       "sites": [
         {
           "column": 61,
-          "line": 137,
-          "source": "upstream/packages/app/src/app.ts"
+          "line": 56,
+          "source": "upstream/packages/host-web/src/webApp.ts"
         },
         {
           "column": 16,
-          "line": 138,
-          "source": "upstream/packages/app/src/app.ts"
+          "line": 58,
+          "source": "upstream/packages/host-web/src/webApp.ts"
         }
       ]
     },
@@ -5510,17 +5505,17 @@
       "sites": [
         {
           "column": 66,
-          "line": 85,
+          "line": 79,
           "source": "upstream/packages/device/src/device.ts"
         },
         {
           "column": 95,
-          "line": 141,
+          "line": 134,
           "source": "upstream/packages/device/src/device.ts"
         },
         {
           "column": 73,
-          "line": 156,
+          "line": 216,
           "source": "upstream/packages/platform/src/platform.ts"
         }
       ]
@@ -5539,7 +5534,7 @@
       "sites": [
         {
           "column": 10,
-          "line": 234,
+          "line": 292,
           "source": "upstream/packages/permissions/src/permission.ts"
         }
       ]
@@ -5558,7 +5553,7 @@
       "sites": [
         {
           "column": 10,
-          "line": 108,
+          "line": 145,
           "source": "upstream/packages/mediasession/src/mediasession.ts"
         }
       ]
@@ -5577,7 +5572,7 @@
       "sites": [
         {
           "column": 20,
-          "line": 71,
+          "line": 67,
           "source": "upstream/packages/connectivity/src/connectivity.ts"
         }
       ]
@@ -5596,47 +5591,47 @@
       "sites": [
         {
           "column": 63,
-          "line": 81,
+          "line": 80,
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         },
         {
           "column": 63,
-          "line": 93,
+          "line": 92,
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         },
         {
           "column": 63,
-          "line": 105,
+          "line": 104,
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         },
         {
           "column": 23,
-          "line": 249,
+          "line": 149,
           "source": "upstream/packages/permissions/src/permission.ts"
         },
         {
           "column": 26,
-          "line": 533,
+          "line": 513,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 3,
-          "line": 686,
+          "line": 653,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 43,
-          "line": 740,
+          "line": 847,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 28,
-          "line": 742,
+          "line": 849,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 29,
-          "line": 83,
+          "line": 96,
           "source": "upstream/packages/webcam/src/webcam.ts"
         }
       ]
@@ -5655,7 +5650,7 @@
       "sites": [
         {
           "column": 13,
-          "line": 568,
+          "line": 592,
           "source": "upstream/packages/shortcut/src/shortcut.ts"
         }
       ]
@@ -5674,8 +5669,8 @@
       "sites": [
         {
           "column": 9,
-          "line": 60,
-          "source": "upstream/packages/protocol/src/protocol.ts"
+          "line": 45,
+          "source": "upstream/packages/host-web/src/webProtocol.ts"
         }
       ]
     },
@@ -5693,8 +5688,8 @@
       "sites": [
         {
           "column": 18,
-          "line": 58,
-          "source": "upstream/packages/protocol/src/protocol.ts"
+          "line": 40,
+          "source": "upstream/packages/host-web/src/webProtocol.ts"
         }
       ]
     },
@@ -5712,7 +5707,7 @@
       "sites": [
         {
           "column": 19,
-          "line": 173,
+          "line": 220,
           "source": "upstream/packages/permissions/src/permission.ts"
         }
       ]
@@ -5731,8 +5726,8 @@
       "sites": [
         {
           "column": 9,
-          "line": 206,
-          "source": "upstream/packages/app/src/app.ts"
+          "line": 112,
+          "source": "upstream/packages/host-web/src/webApp.ts"
         }
       ]
     },
@@ -5750,12 +5745,12 @@
       "sites": [
         {
           "column": 15,
-          "line": 58,
+          "line": 42,
           "source": "upstream/packages/share/src/share.ts"
         },
         {
           "column": 15,
-          "line": 71,
+          "line": 55,
           "source": "upstream/packages/share/src/share.ts"
         }
       ]
@@ -5774,12 +5769,12 @@
       "sites": [
         {
           "column": 81,
-          "line": 53,
+          "line": 37,
           "source": "upstream/packages/share/src/share.ts"
         },
         {
           "column": 81,
-          "line": 66,
+          "line": 50,
           "source": "upstream/packages/share/src/share.ts"
         }
       ]
@@ -5798,22 +5793,22 @@
       "sites": [
         {
           "column": 23,
-          "line": 280,
+          "line": 281,
           "source": "upstream/packages/filesystem/src/filesystem.ts"
         },
         {
           "column": 19,
-          "line": 627,
+          "line": 790,
           "source": "upstream/packages/filesystem/src/filesystem.ts"
         },
         {
           "column": 10,
-          "line": 256,
+          "line": 297,
           "source": "upstream/packages/permissions/src/permission.ts"
         },
         {
           "column": 19,
-          "line": 311,
+          "line": 335,
           "source": "upstream/packages/storage/src/storage.ts"
         }
       ]
@@ -5832,17 +5827,17 @@
       "sites": [
         {
           "column": 18,
-          "line": 89,
+          "line": 83,
           "source": "upstream/packages/device/src/device.ts"
         },
         {
           "column": 18,
-          "line": 128,
+          "line": 122,
           "source": "upstream/packages/device/src/device.ts"
         },
         {
           "column": 14,
-          "line": 149,
+          "line": 209,
           "source": "upstream/packages/platform/src/platform.ts"
         }
       ]
@@ -5860,8 +5855,8 @@
       "runtimePath": "src/flighthq/_internal/backend/DomNavigatorBackend.hx",
       "sites": [
         {
-          "column": 12,
-          "line": 147,
+          "column": 20,
+          "line": 196,
           "source": "upstream/packages/haptics/src/haptics.ts"
         }
       ]
@@ -5890,7 +5885,7 @@
         },
         {
           "column": 79,
-          "line": 143,
+          "line": 191,
           "source": "upstream/packages/haptics/src/haptics.ts"
         }
       ]
@@ -5909,7 +5904,7 @@
       "sites": [
         {
           "column": 10,
-          "line": 243,
+          "line": 298,
           "source": "upstream/packages/keyboard/src/keyboard.ts"
         }
       ]
@@ -5927,14 +5922,14 @@
       "runtimePath": "src/flighthq/_internal/backend/DomNavigatorBackend.hx",
       "sites": [
         {
-          "column": 20,
-          "line": 198,
-          "source": "upstream/packages/permissions/src/permission.ts"
+          "column": 24,
+          "line": 53,
+          "source": "upstream/packages/host-web/src/webPower.ts"
         },
         {
-          "column": 24,
-          "line": 167,
-          "source": "upstream/packages/power/src/power.ts"
+          "column": 20,
+          "line": 264,
+          "source": "upstream/packages/permissions/src/permission.ts"
         }
       ]
     },
@@ -5957,32 +5952,32 @@
         },
         {
           "column": 3,
-          "line": 37,
-          "source": "upstream/packages/application/src/window.ts"
-        },
-        {
-          "column": 3,
           "line": 38,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 3,
-          "line": 105,
+          "line": 39,
+          "source": "upstream/packages/application/src/window.ts"
+        },
+        {
+          "column": 3,
+          "line": 106,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 9,
-          "line": 205,
+          "line": 220,
           "source": "upstream/packages/clipboard/src/clipboard.ts"
         },
         {
           "column": 7,
-          "line": 111,
+          "line": 107,
           "source": "upstream/packages/connectivity/src/connectivity.ts"
         },
         {
           "column": 7,
-          "line": 112,
+          "line": 108,
           "source": "upstream/packages/connectivity/src/connectivity.ts"
         },
         {
@@ -5997,11 +5992,6 @@
         },
         {
           "column": 7,
-          "line": 110,
-          "source": "upstream/packages/lifecycle/src/lifecycle.ts"
-        },
-        {
-          "column": 7,
           "line": 111,
           "source": "upstream/packages/lifecycle/src/lifecycle.ts"
         },
@@ -6017,7 +6007,7 @@
         },
         {
           "column": 7,
-          "line": 157,
+          "line": 114,
           "source": "upstream/packages/lifecycle/src/lifecycle.ts"
         },
         {
@@ -6026,43 +6016,48 @@
           "source": "upstream/packages/lifecycle/src/lifecycle.ts"
         },
         {
+          "column": 7,
+          "line": 159,
+          "source": "upstream/packages/lifecycle/src/lifecycle.ts"
+        },
+        {
           "column": 5,
-          "line": 131,
+          "line": 125,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 7,
-          "line": 326,
+          "line": 320,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 7,
-          "line": 397,
+          "line": 398,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 7,
-          "line": 443,
+          "line": 444,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 7,
-          "line": 461,
+          "line": 462,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 7,
-          "line": 507,
+          "line": 508,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 7,
-          "line": 526,
+          "line": 527,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 7,
-          "line": 101,
+          "line": 111,
           "source": "upstream/packages/storage/src/storage.ts"
         }
       ]
@@ -6081,13 +6076,13 @@
       "sites": [
         {
           "column": 9,
-          "line": 36,
+          "line": 37,
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ]
     },
     {
-      "accesses": 1,
+      "accesses": 2,
       "binding": "DomWindowBackend",
       "contract": "backend",
       "member": "alert",
@@ -6100,8 +6095,13 @@
       "sites": [
         {
           "column": 51,
-          "line": 32,
+          "line": 33,
           "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 82,
+          "line": 18,
+          "source": "upstream/packages/host-web/src/webDialog.ts"
         }
       ]
     },
@@ -6119,13 +6119,13 @@
       "sites": [
         {
           "column": 11,
-          "line": 176,
-          "source": "upstream/packages/app/src/app.ts"
+          "line": 84,
+          "source": "upstream/packages/host-web/src/webApp.ts"
         },
         {
           "column": 11,
-          "line": 264,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 23,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -6143,8 +6143,8 @@
       "sites": [
         {
           "column": 51,
-          "line": 262,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 21,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -6162,13 +6162,13 @@
       "sites": [
         {
           "column": 16,
-          "line": 23,
+          "line": 24,
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ]
     },
     {
-      "accesses": 1,
+      "accesses": 2,
       "binding": "DomWindowBackend",
       "contract": "backend",
       "member": "confirm",
@@ -6181,8 +6181,13 @@
       "sites": [
         {
           "column": 51,
-          "line": 20,
+          "line": 21,
           "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 82,
+          "line": 13,
+          "source": "upstream/packages/host-web/src/webDialog.ts"
         }
       ]
     },
@@ -6200,22 +6205,22 @@
       "sites": [
         {
           "column": 30,
-          "line": 160,
+          "line": 161,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 41,
-          "line": 103,
+          "line": 97,
           "source": "upstream/packages/device/src/device.ts"
         },
         {
           "column": 30,
-          "line": 196,
+          "line": 190,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 69,
-          "line": 196,
+          "line": 190,
           "source": "upstream/packages/screen/src/screen.ts"
         }
       ]
@@ -6234,13 +6239,13 @@
       "sites": [
         {
           "column": 11,
-          "line": 110,
-          "source": "upstream/packages/app/src/app.ts"
+          "line": 19,
+          "source": "upstream/packages/host-web/src/webApp.ts"
         },
         {
-          "column": 80,
-          "line": 309,
-          "source": "upstream/packages/application/src/window.ts"
+          "column": 9,
+          "line": 33,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -6258,8 +6263,8 @@
       "sites": [
         {
           "column": 51,
-          "line": 309,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 32,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -6277,7 +6282,7 @@
       "sites": [
         {
           "column": 27,
-          "line": 723,
+          "line": 840,
           "source": "upstream/packages/screen/src/screen.ts"
         }
       ]
@@ -6296,7 +6301,7 @@
       "sites": [
         {
           "column": 14,
-          "line": 721,
+          "line": 838,
           "source": "upstream/packages/screen/src/screen.ts"
         }
       ]
@@ -6315,17 +6320,17 @@
       "sites": [
         {
           "column": 20,
-          "line": 302,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 49,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         },
         {
           "column": 18,
-          "line": 264,
+          "line": 319,
           "source": "upstream/packages/keyboard/src/keyboard.ts"
         },
         {
           "column": 50,
-          "line": 198,
+          "line": 147,
           "source": "upstream/packages/menu/src/menu.ts"
         }
       ]
@@ -6344,17 +6349,17 @@
       "sites": [
         {
           "column": 19,
-          "line": 301,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 48,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         },
         {
           "column": 30,
-          "line": 266,
+          "line": 321,
           "source": "upstream/packages/keyboard/src/keyboard.ts"
         },
         {
           "column": 50,
-          "line": 197,
+          "line": 146,
           "source": "upstream/packages/menu/src/menu.ts"
         }
       ]
@@ -6373,7 +6378,7 @@
       "sites": [
         {
           "column": 40,
-          "line": 171,
+          "line": 183,
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         }
       ]
@@ -6392,7 +6397,7 @@
       "sites": [
         {
           "column": 12,
-          "line": 478,
+          "line": 544,
           "source": "upstream/packages/storage/src/storage.ts"
         }
       ]
@@ -6411,17 +6416,17 @@
       "sites": [
         {
           "column": 7,
-          "line": 859,
+          "line": 803,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 7,
-          "line": 860,
+          "line": 804,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 10,
-          "line": 866,
+          "line": 810,
           "source": "upstream/packages/screen/src/screen.ts"
         }
       ]
@@ -6440,12 +6445,12 @@
       "sites": [
         {
           "column": 47,
-          "line": 858,
+          "line": 802,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 47,
-          "line": 865,
+          "line": 809,
           "source": "upstream/packages/screen/src/screen.ts"
         }
       ]
@@ -6463,14 +6468,14 @@
       "runtimePath": "src/flighthq/_internal/backend/DomWindowBackend.hx",
       "sites": [
         {
-          "column": 11,
-          "line": 276,
-          "source": "upstream/packages/application/src/window.ts"
+          "column": 9,
+          "line": 11,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         },
         {
-          "column": 9,
-          "line": 316,
-          "source": "upstream/packages/application/src/window.ts"
+          "column": 11,
+          "line": 95,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -6488,13 +6493,13 @@
       "sites": [
         {
           "column": 51,
-          "line": 274,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 9,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         },
         {
           "column": 51,
-          "line": 314,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 93,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -6511,9 +6516,9 @@
       "runtimePath": "src/flighthq/_internal/backend/DomWindowBackend.hx",
       "sites": [
         {
-          "column": 16,
-          "line": 30,
-          "source": "upstream/packages/shell/src/shell.ts"
+          "column": 24,
+          "line": 21,
+          "source": "upstream/packages/host-web/src/webShell.ts"
         }
       ]
     },
@@ -6531,8 +6536,8 @@
       "sites": [
         {
           "column": 51,
-          "line": 28,
-          "source": "upstream/packages/shell/src/shell.ts"
+          "line": 16,
+          "source": "upstream/packages/host-web/src/webShell.ts"
         }
       ]
     },
@@ -6550,13 +6555,13 @@
       "sites": [
         {
           "column": 16,
-          "line": 51,
+          "line": 52,
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ]
     },
     {
-      "accesses": 1,
+      "accesses": 2,
       "binding": "DomWindowBackend",
       "contract": "backend",
       "member": "prompt",
@@ -6569,8 +6574,13 @@
       "sites": [
         {
           "column": 51,
-          "line": 49,
+          "line": 50,
           "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 81,
+          "line": 33,
+          "source": "upstream/packages/host-web/src/webDialog.ts"
         }
       ]
     },
@@ -6593,32 +6603,32 @@
         },
         {
           "column": 5,
-          "line": 40,
-          "source": "upstream/packages/application/src/window.ts"
-        },
-        {
-          "column": 5,
           "line": 41,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
+          "column": 5,
+          "line": 42,
+          "source": "upstream/packages/application/src/window.ts"
+        },
+        {
           "column": 30,
-          "line": 106,
+          "line": 107,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 22,
-          "line": 206,
+          "line": 221,
           "source": "upstream/packages/clipboard/src/clipboard.ts"
         },
         {
           "column": 9,
-          "line": 116,
+          "line": 112,
           "source": "upstream/packages/connectivity/src/connectivity.ts"
         },
         {
           "column": 9,
-          "line": 117,
+          "line": 113,
           "source": "upstream/packages/connectivity/src/connectivity.ts"
         },
         {
@@ -6630,11 +6640,6 @@
           "column": 5,
           "line": 119,
           "source": "upstream/packages/input/src/inputManager.ts"
-        },
-        {
-          "column": 9,
-          "line": 116,
-          "source": "upstream/packages/lifecycle/src/lifecycle.ts"
         },
         {
           "column": 9,
@@ -6653,7 +6658,7 @@
         },
         {
           "column": 9,
-          "line": 160,
+          "line": 120,
           "source": "upstream/packages/lifecycle/src/lifecycle.ts"
         },
         {
@@ -6663,37 +6668,42 @@
         },
         {
           "column": 9,
-          "line": 335,
+          "line": 162,
+          "source": "upstream/packages/lifecycle/src/lifecycle.ts"
+        },
+        {
+          "column": 9,
+          "line": 329,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 9,
-          "line": 399,
+          "line": 400,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 9,
-          "line": 445,
+          "line": 446,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 9,
-          "line": 463,
+          "line": 464,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 9,
-          "line": 509,
+          "line": 510,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 9,
-          "line": 528,
+          "line": 529,
           "source": "upstream/packages/sensors/src/sensors.ts"
         },
         {
           "column": 20,
-          "line": 102,
+          "line": 112,
           "source": "upstream/packages/storage/src/storage.ts"
         }
       ]
@@ -6712,8 +6722,8 @@
       "sites": [
         {
           "column": 11,
-          "line": 285,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 107,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -6731,8 +6741,8 @@
       "sites": [
         {
           "column": 51,
-          "line": 283,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 105,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -6750,32 +6760,32 @@
       "sites": [
         {
           "column": 49,
-          "line": 175,
+          "line": 169,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 15,
-          "line": 188,
+          "line": 182,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 51,
-          "line": 221,
+          "line": 215,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 51,
-          "line": 247,
+          "line": 241,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 47,
-          "line": 886,
+          "line": 830,
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 13,
-          "line": 887,
+          "line": 831,
           "source": "upstream/packages/screen/src/screen.ts"
         }
       ]
@@ -6794,18 +6804,18 @@
       "sites": [
         {
           "column": 16,
-          "line": 93,
-          "source": "upstream/packages/application/src/window.ts"
-        },
-        {
-          "column": 17,
           "line": 94,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
-          "column": 15,
-          "line": 299,
+          "column": 17,
+          "line": 95,
           "source": "upstream/packages/application/src/window.ts"
+        },
+        {
+          "column": 15,
+          "line": 46,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -6823,18 +6833,18 @@
       "sites": [
         {
           "column": 54,
-          "line": 93,
+          "line": 94,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 17,
-          "line": 95,
+          "line": 96,
           "source": "upstream/packages/application/src/window.ts"
         },
         {
           "column": 15,
-          "line": 300,
-          "source": "upstream/packages/application/src/window.ts"
+          "line": 47,
+          "source": "upstream/packages/host-web/src/webWindow.ts"
         }
       ]
     },
@@ -6852,12 +6862,12 @@
       "sites": [
         {
           "column": 24,
-          "line": 111,
+          "line": 112,
           "source": "upstream/packages/keyboard/src/keyboard.ts"
         },
         {
           "column": 20,
-          "line": 262,
+          "line": 317,
           "source": "upstream/packages/keyboard/src/keyboard.ts"
         }
       ]
@@ -23941,14 +23951,14 @@
   ],
   "schemaVersion": 1,
   "summary": {
-    "accesses": 3682,
+    "accesses": 3684,
     "backendContractEndpoints": 394,
     "bindings": 10,
     "calls": 2337,
     "dynamicFallbackEndpoints": 12,
     "endpoints": 394,
-    "reads": 1092,
+    "reads": 1094,
     "writes": 253
   },
-  "upstreamCommit": "443275fa278b1f0415c49b6be710891ef8a64bf1"
+  "upstreamCommit": "cd6b6e71eb472b3a4249830a7743333f019fa7b7"
 }

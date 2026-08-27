@@ -315,6 +315,11 @@ class Application {
     return cast null;
   }
 
+  public static function explainWindowBackend():BackendExplanation {
+    return cast Facade_Application_flighthq_application_Window.explainWindowBackend();
+    return cast null;
+  }
+
   public static function flashWindowFrame(win:ApplicationWindow):Void {
     Facade_Application_flighthq_application_Window.flashWindowFrame(win);
   }

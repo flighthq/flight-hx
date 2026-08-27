@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.clearSignal;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Signal;
 import flighthq.types.Storage.StorageBackend;
 import flighthq.types.Storage.StorageChange;
@@ -15,18 +16,51 @@ import flighthq.types.Storage.StorageQuota;
 import flighthq.types.Storage.StorageSignals;
 
 class Storage {
-  public static var _backend__storage:Null<StorageBackend> = _Runtime.explicitNull();
-
   public static var _crossTabUnsubscribe__storage:Null<Void->Void> = _Runtime.explicitNull();
+
+  public static var _custom__storage:Null<StorageBackend> = _Runtime.explicitNull();
 
   public static function _emitStorageChange__storage(change:StorageChange):Void {
     if ((cast !_Runtime.strictEquals(Storage._signals__storage, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast Storage._signals__storage : { var onChange:Signal<StorageChange->Void>; }).onChange], [change]]), 1); }
   }
 
+  public static function _getWebStorage__storage():Null<flighthq._internal.dom.Storage> {
+    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast null; }
+    try {
+      return cast _Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'localStorage'), function():Dynamic return cast null);
+    } catch (__error:Dynamic) {
+      return cast null;
+    }
+    return cast null;
+  }
+
+  public static var _host__storage:Null<StorageBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__storage:Bool = false;
+
+  public static var _hostObservation__storage:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+
   public static function _namespacedKey__storage(namespace:StorageNamespace, key:String):String {
     return cast ((namespace.prefix + '.') + key);
     return cast null;
   }
+
+  public static final _sentinel__storage:StorageBackend = (cast { getItem: function(key:String):Null<String> {
+    return cast null;
+    return cast _Runtime.UNDEFINED;
+  }, setItem: function(key:String, value:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, removeItem: function(key:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, clear: function():Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, keys: function():Array<String> {
+    return cast cast ([] : Array<Dynamic>);
+    return cast _Runtime.UNDEFINED;
+  } });
 
   public static var _signals__storage:Null<StorageSignals> = _Runtime.explicitNull();
 
@@ -66,50 +100,59 @@ class Storage {
   public static function createWebStorageBackend():StorageBackend {
     return cast { getItem: function(key:String):Null<String> {
       var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
-      ls = (cast Storage.getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
+      ls = (cast Storage._getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast null; }
       try {
-        return cast (cast ls : flighthq._internal.dom.Storage).getItem(key);
+        var result:Null<String> = (cast ls : flighthq._internal.dom.Storage).getItem(key);
+        observeStorageHostResult((cast 'getItem' : String), (cast true : Bool));
+        return cast result;
       } catch (__error:Dynamic) {
+        observeStorageHostResult((cast 'getItem' : String), (cast false : Bool));
         return cast null;
       }
       return cast _Runtime.UNDEFINED;
     }, setItem: function(key:String, value:String):Bool {
       var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
-      ls = (cast Storage.getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
+      ls = (cast Storage._getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast false; }
       try {
         (cast ls : flighthq._internal.dom.Storage).setItem(key, value);
+        observeStorageHostResult((cast 'setItem' : String), (cast true : Bool));
         return cast true;
       } catch (__error:Dynamic) {
+        observeStorageHostResult((cast 'setItem' : String), (cast false : Bool));
         return cast false;
       }
       return cast _Runtime.UNDEFINED;
     }, removeItem: function(key:String):Bool {
       var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
-      ls = (cast Storage.getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
+      ls = (cast Storage._getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast false; }
       try {
         (cast ls : flighthq._internal.dom.Storage).removeItem(key);
+        observeStorageHostResult((cast 'removeItem' : String), (cast true : Bool));
         return cast true;
       } catch (__error:Dynamic) {
+        observeStorageHostResult((cast 'removeItem' : String), (cast false : Bool));
         return cast false;
       }
       return cast _Runtime.UNDEFINED;
     }, clear: function():Bool {
       var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
-      ls = (cast Storage.getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
+      ls = (cast Storage._getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast false; }
       try {
         (cast ls : flighthq._internal.dom.Storage).clear();
+        observeStorageHostResult((cast 'clear' : String), (cast true : Bool));
         return cast true;
       } catch (__error:Dynamic) {
+        observeStorageHostResult((cast 'clear' : String), (cast false : Bool));
         return cast false;
       }
       return cast _Runtime.UNDEFINED;
     }, keys: function():Array<String> {
       var ls:Null<flighthq._internal.dom.Storage> = cast _Runtime.UNDEFINED;
-      ls = (cast Storage.getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
+      ls = (cast Storage._getWebStorage__storage() : Null<flighthq._internal.dom.Storage>);
       if ((cast _Runtime.strictEquals(ls, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
       try {
         var out:Array<String> = (cast cast ([] : Array<Dynamic>));
@@ -166,6 +209,17 @@ class Storage {
       }; __callArgument8; })) : Dynamic));
     }
     return cast Storage._signals__storage;
+    return cast null;
+  }
+
+  public static function explainStorageBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Storage._custom__storage, null) : Bool)) {
+      return cast { conflict: Storage._hostConflict__storage, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Storage._host__storage, null) : Bool)) {
+      return cast { conflict: Storage._hostConflict__storage, layer: 'host', operation: ((cast !_Runtime.strictEquals(Storage._hostObservation__storage, null) : Bool) ? (cast (cast Storage._hostObservation__storage : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Storage._hostObservation__storage, null) : Bool) ? (cast (cast Storage._hostObservation__storage : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
     return cast null;
   }
 
@@ -227,8 +281,7 @@ class Storage {
 
   @:noCompletion
   public static function getStorageBackend():StorageBackend {
-    if ((cast _Runtime.strictEquals(Storage._backend__storage, null) : Bool)) { (Storage._backend__storage = cast ((cast createWebStorageBackend() : StorageBackend) : Dynamic)); }
-    return cast Storage._backend__storage;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Storage._custom__storage, function():Dynamic return cast Storage._host__storage), function():Dynamic return cast Storage._sentinel__storage);
     return cast null;
   }
 
@@ -407,16 +460,6 @@ class Storage {
     return cast null;
   }
 
-  public static function getWebStorage__storage():Null<flighthq._internal.dom.Storage> {
-    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast null; }
-    try {
-      return cast _Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'localStorage'), function():Dynamic return cast null);
-    } catch (__error:Dynamic) {
-      return cast null;
-    }
-    return cast null;
-  }
-
   public static function hasNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
     return cast !_Runtime.strictEquals((cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast (cast Storage._namespacedKey__storage(({ final __callArgument26:Dynamic = namespace; __callArgument26; }), (cast key : String)) : String) : String)), null);
     return cast null;
@@ -425,6 +468,15 @@ class Storage {
   public static function hasStorageItem(key:String):Bool {
     return cast !_Runtime.strictEquals((cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast key : String)), null);
     return cast null;
+  }
+
+  @:noCompletion
+  public static function installStorageHostBackend(backend:StorageBackend):Void {
+    if ((cast !_Runtime.strictEquals(Storage._host__storage, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Storage._host__storage, backend) : Bool)) { (Storage._hostConflict__storage = cast (true : Dynamic)); }
+      return;
+    }
+    (Storage._host__storage = cast (backend : Dynamic));
   }
 
   public static function migrateStorage(namespace:Null<StorageNamespace>, migrations:Array<StorageMigration>):Float {
@@ -453,6 +505,11 @@ class Storage {
     }
     return cast newVersion;
     return cast null;
+  }
+
+  @:noCompletion
+  public static function observeStorageHostResult(operation:String, succeeded:Bool):Void {
+    (Storage._hostObservation__storage = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function removeNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
@@ -484,6 +541,14 @@ class Storage {
     return cast null;
   }
 
+  @:noCompletion
+  public static function resetStorageBackendForTest():Void {
+    (Storage._custom__storage = cast (null : Dynamic));
+    (Storage._host__storage = cast (null : Dynamic));
+    (Storage._hostConflict__storage = cast (false : Dynamic));
+    (Storage._hostObservation__storage = cast (null : Dynamic));
+  }
+
   public static function setNamespacedStorageItem(namespace:StorageNamespace, key:String, value:String):Bool {
     return cast (cast (cast getStorageBackend() : StorageBackend) : StorageBackend).setItem((cast (cast Storage._namespacedKey__storage(({ final __callArgument41:Dynamic = namespace; __callArgument41; }), (cast key : String)) : String) : String), (cast value : String));
     return cast null;
@@ -495,7 +560,7 @@ class Storage {
       (cast Storage._crossTabUnsubscribe__storage : Void->Void)();
       (Storage._crossTabUnsubscribe__storage = cast (null : Dynamic));
     }
-    (Storage._backend__storage = cast (backend : Dynamic));
+    (Storage._custom__storage = cast (backend : Dynamic));
     if ((cast Storage._signalsActive__storage : Bool)) {
       var b:StorageBackend = (cast getStorageBackend() : StorageBackend);
       if ((cast !_Runtime.strictEquals((cast b : StorageBackend).subscribeChanges, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {

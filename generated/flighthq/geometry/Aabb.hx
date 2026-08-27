@@ -220,6 +220,25 @@ class Aabb {
     return cast null;
   }
 
+  public static function isAabbIntersectingSphere(aabb:AabbLike, sphere:BoundingSphereLike):Bool {
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast ((cast (cast aabb.min : { var x:Float; }).x : Float) > (cast (cast aabb.max : { var x:Float; }).x : Float)) : Bool) || (cast ((cast (cast aabb.min : { var y:Float; }).y : Float) > (cast (cast aabb.max : { var y:Float; }).y : Float)) : Bool)) : Bool) || (cast ((cast (cast aabb.min : { var z:Float; }).z : Float) > (cast (cast aabb.max : { var z:Float; }).z : Float)) : Bool)) : Bool)) { return cast false; }
+    if ((cast ((cast sphere.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
+    cx = (cast sphere.center : { var x:Float; }).x;
+    cy = (cast sphere.center : { var y:Float; }).y;
+    cz = (cast sphere.center : { var z:Float; }).z;
+    dx = HxMath.max(HxMath.max(((cast aabb.min : { var x:Float; }).x - cx), 0.0), (cx - (cast aabb.max : { var x:Float; }).x));
+    dy = HxMath.max(HxMath.max(((cast aabb.min : { var y:Float; }).y - cy), 0.0), (cy - (cast aabb.max : { var y:Float; }).y));
+    dz = HxMath.max(HxMath.max(((cast aabb.min : { var z:Float; }).z - cz), 0.0), (cz - (cast aabb.max : { var z:Float; }).z));
+    return cast ((cast (((dx * dx) + (dy * dy)) + (dz * dz)) : Float) <= (cast (sphere.radius * sphere.radius) : Float));
+    return cast null;
+  }
+
   public static function setAabb(out:AabbLike, minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Void {
     ((cast out.min : { var x:Float; }).x = cast (minX : Float));
     ((cast out.min : { var y:Float; }).y = cast (minY : Float));

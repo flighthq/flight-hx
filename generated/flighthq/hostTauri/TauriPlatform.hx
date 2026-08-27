@@ -14,13 +14,20 @@ import flighthq.types.TauriApi.TauriOsModule;
 class TauriPlatform {
   public static function createTauriPlatformBackend(tauri:TauriApi):PlatformBackend {
     var os:TauriOsModule = cast _Runtime.UNDEFINED;
+    var cachedLocale:String = cast _Runtime.UNDEFINED;
     os = tauri.os;
+    cachedLocale = '';
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast os : TauriOsModule).locale(), 'then', cast ([function(locale:Null<String>):Void {
+      (cachedLocale = cast (_Runtime.coalesce(locale, function():Dynamic return cast '') : Dynamic));
+    }] : Array<Dynamic>)), function(__unused0:flighthq._internal._Any):Void {
+
+    });
     return cast { getInfo: function(out:PlatformInfo):PlatformInfo {
       (out.name = cast ((cast TauriPlatform.toPlatformName__tauriPlatform((cast (cast os : TauriOsModule).platform() : String)) : PlatformName) : PlatformName));
       (out.kind = cast ('desktop' : PlatformKind));
       (out.version = cast ((cast os : TauriOsModule).version() : String));
       (out.arch = cast ((cast os : TauriOsModule).arch() : String));
-      (out.locale = cast (_Runtime.coalesce((cast os : TauriOsModule).locale(), function():Dynamic return cast '') : String));
+      (out.locale = cast (cachedLocale : String));
       (out.isTouch = cast (false : Bool));
       (out.runtime = cast ('tauri' : PlatformRuntime));
       return cast out;

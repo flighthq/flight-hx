@@ -17,19 +17,26 @@ class TauriApp {
     var process:TauriProcessPlugin = cast _Runtime.UNDEFINED;
     var cachedName:String = cast _Runtime.UNDEFINED;
     var cachedVersion:String = cast _Runtime.UNDEFINED;
+    var cachedLocale:String = cast _Runtime.UNDEFINED;
     app = tauri.app;
     os = tauri.os;
     process = tauri.process;
     cachedName = '';
     cachedVersion = '';
+    cachedLocale = '';
     flighthq._internal._Async.recover(_Runtime.callProperty((cast app : TauriAppModule).getName(), 'then', cast ([function(name:String):Void {
       (cachedName = cast (name : Dynamic));
     }] : Array<Dynamic>)), function(__unused0:flighthq._internal._Any):Void {
 
     });
+    flighthq._internal._Async.recover(_Runtime.callProperty((cast os : TauriOsModule).locale(), 'then', cast ([function(locale:Null<String>):Void {
+      (cachedLocale = cast (_Runtime.coalesce(locale, function():Dynamic return cast '') : Dynamic));
+    }] : Array<Dynamic>)), function(__unused1:flighthq._internal._Any):Void {
+
+    });
     flighthq._internal._Async.recover(_Runtime.callProperty((cast app : TauriAppModule).getVersion(), 'then', cast ([function(version:String):Void {
       (cachedVersion = cast (version : Dynamic));
-    }] : Array<Dynamic>)), function(__unused1:flighthq._internal._Any):Void {
+    }] : Array<Dynamic>)), function(__unused2:flighthq._internal._Any):Void {
 
     });
     return cast { addRecentDocument: function():Void {
@@ -58,7 +65,7 @@ class TauriApp {
       return cast '';
       return cast _Runtime.UNDEFINED;
     }, getLocale: function():String {
-      return cast _Runtime.coalesce((cast os : TauriOsModule).locale(), function():Dynamic return cast '');
+      return cast cachedLocale;
       return cast _Runtime.UNDEFINED;
     }, getLoginItem: function():AppLoginItem {
       var out:AppLoginItem = cast _Runtime.UNDEFINED;
@@ -69,12 +76,10 @@ class TauriApp {
       return cast cachedName;
       return cast _Runtime.UNDEFINED;
     }, getPreferredSystemLanguages: function():Array<String> {
-      var locale:Null<String> = cast _Runtime.UNDEFINED;
-      locale = (cast os : TauriOsModule).locale();
-      return cast _Runtime.select(locale, function():Dynamic return cast cast ([locale] : Array<Dynamic>), function():Dynamic return cast cast ([] : Array<Dynamic>));
+      return cast _Runtime.select(cachedLocale, function():Dynamic return cast cast ([cachedLocale] : Array<Dynamic>), function():Dynamic return cast cast ([] : Array<Dynamic>));
       return cast _Runtime.UNDEFINED;
     }, getSystemLocale: function():String {
-      return cast _Runtime.coalesce((cast os : TauriOsModule).locale(), function():Dynamic return cast '');
+      return cast cachedLocale;
       return cast _Runtime.UNDEFINED;
     }, getVersion: function():String {
       return cast cachedVersion;
@@ -83,7 +88,7 @@ class TauriApp {
       return cast false;
       return cast _Runtime.UNDEFINED;
     }, hideApp: function():Bool {
-      flighthq._internal._Async.recover((cast app : TauriAppModule).hide(), function(__unused2:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast app : TauriAppModule).hide(), function(__unused3:flighthq._internal._Any):Void {
 
       });
       return cast true;
@@ -92,11 +97,11 @@ class TauriApp {
       return cast false;
       return cast _Runtime.UNDEFINED;
     }, quit: function():Void {
-      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).exit(({ final __callArgument1:Dynamic = 0.0; __callArgument1; })), function(__unused3:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).exit(({ final __callArgument1:Dynamic = 0.0; __callArgument1; })), function(__unused4:flighthq._internal._Any):Void {
 
       });
     }, relaunch: function():Void {
-      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).relaunch(), function(__unused4:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast process : TauriProcessPlugin).relaunch(), function(__unused5:flighthq._internal._Any):Void {
 
       });
     }, releaseSingleInstanceLock: function():Void {
@@ -126,7 +131,7 @@ class TauriApp {
       return cast false;
       return cast _Runtime.UNDEFINED;
     }, showApp: function():Bool {
-      flighthq._internal._Async.recover((cast app : TauriAppModule).show(), function(__unused5:flighthq._internal._Any):Void {
+      flighthq._internal._Async.recover((cast app : TauriAppModule).show(), function(__unused6:flighthq._internal._Any):Void {
 
       });
       return cast true;

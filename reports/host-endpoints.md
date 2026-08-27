@@ -1,6 +1,6 @@
 # Host Endpoint Audit
 
-Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
+Upstream commit: `cd6b6e71eb472b3a4249830a7743333f019fa7b7`
 
 Receiver identities and member use are checker-derived. The shared contract selects explicit host backends where maintained target semantics exist and the maintained dynamic runtime otherwise; generation validates both routes.
 
@@ -8,9 +8,9 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | --- | ---: |
 | Receiver bindings | 10 |
 | Canonical endpoints | 394 |
-| Property accesses | 3682 |
+| Property accesses | 3684 |
 | Calls | 2337 |
-| Reads | 1092 |
+| Reads | 1094 |
 | Writes | 253 |
 | Backend contract endpoints | 394 |
 | Dynamic-fallback endpoints in use | 12 |
@@ -90,7 +90,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomDocumentBackend` | `fonts` | `read` | `fonts` | `backend` | 4 | `src/flighthq/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `getElementById` | `call` | `getElementById` | `backend` | 1 | `src/flighthq/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `hasFocus` | `call` | `hasFocus` | `backend` | 1 | `src/flighthq/_internal/backend/DomDocumentBackend.hx` |
-| `DomDocumentBackend` | `head` | `read` | `head` | `backend` | 4 | `src/flighthq/_internal/backend/DomDocumentBackend.hx` |
+| `DomDocumentBackend` | `head` | `read` | `head` | `backend` | 3 | `src/flighthq/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `hidden` | `read` | `hidden` | `backend` | 4 | `src/flighthq/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `pointerLockElement` | `read` | `pointerLockElement` | `backend` | 1 | `src/flighthq/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `querySelector` | `call` | `querySelector` | `backend` | 1 | `src/flighthq/_internal/backend/DomDocumentBackend.hx` |
@@ -129,11 +129,11 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomNavigatorBackend` | `wakeLock` | `read` | `wakeLock` | `backend` | 2 | `src/flighthq/_internal/backend/DomNavigatorBackend.hx` |
 | `DomWindowBackend` | `addEventListener` | `call` | `addEventListener` | `backend` | 23 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `alert` | `call` | `alert` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
-| `DomWindowBackend` | `alert` | `read` | `alert` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
+| `DomWindowBackend` | `alert` | `read` | `alert` | `backend` | 2 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `close` | `call` | `close` | `backend` | 2 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `close` | `read` | `close` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `confirm` | `call` | `confirm` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
-| `DomWindowBackend` | `confirm` | `read` | `confirm` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
+| `DomWindowBackend` | `confirm` | `read` | `confirm` | `backend` | 2 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `devicePixelRatio` | `read` | `devicePixelRatio` | `backend` | 4 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `focus` | `call` | `focus` | `backend` | 2 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `focus` | `read` | `focus` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
@@ -150,7 +150,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomWindowBackend` | `open` | `call` | `open` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `open` | `read` | `open` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `prompt` | `call` | `prompt` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
-| `DomWindowBackend` | `prompt` | `read` | `prompt` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
+| `DomWindowBackend` | `prompt` | `read` | `prompt` | `backend` | 2 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `removeEventListener` | `call` | `removeEventListener` | `backend` | 22 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `resizeTo` | `call` | `resizeTo` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `resizeTo` | `read` | `resizeTo` | `backend` | 1 | `src/flighthq/_internal/backend/DomWindowBackend.hx` |

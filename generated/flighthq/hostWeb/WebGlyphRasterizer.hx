@@ -11,6 +11,7 @@ import flighthq.types.GlyphSource.GlyphRasterizedBitmap;
 import flighthq.types.GlyphSource.GlyphRasterizerBackend;
 
 class WebGlyphRasterizer {
+  @:noCompletion
   public static function createWebGlyphRasterizerBackend():GlyphRasterizerBackend {
     return cast { measureMetrics: function(options:GlyphRasterizeOptions):Null<GlyphMetrics> {
       var context:Null<flighthq._internal._Union2<flighthq._internal.dom.OffscreenCanvasRenderingContext2D, flighthq._internal.dom.CanvasRenderingContext2D>> = cast _Runtime.UNDEFINED;

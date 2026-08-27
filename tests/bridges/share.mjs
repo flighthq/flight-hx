@@ -6,6 +6,7 @@ export const canShareContent = compiled.flighthq.share.Share.canShareContent;
 export const detachShareSignals = compiled.flighthq.share.Share.detachShareSignals;
 export const disposeShareSignals = compiled.flighthq.share.Share.disposeShareSignals;
 export const enableShareSignals = compiled.flighthq.share.Share.enableShareSignals;
+export const explainShareBackend = compiled.flighthq.share.Share.explainShareBackend;
 export const hasShareContentFields = compiled.flighthq.share.Share.hasShareContentFields;
 export const isShareAvailable = compiled.flighthq.share.Share.isShareAvailable;
 export const shareContent = compiled.flighthq.share.Share.shareContent;

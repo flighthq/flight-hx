@@ -1,26 +1,26 @@
 # Upstream Inventory
 
-Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
+Upstream commit: `cd6b6e71eb472b3a4249830a7743333f019fa7b7`
 
 | Metric | Count |
 | --- | ---: |
 | Packages | 153 |
 | Derived package exclusions | 2 |
-| Source files | 2726 |
-| Test files | 1570 |
+| Source files | 2754 |
+| Test files | 1599 |
 | Public export lanes | 319 |
-| Public export records | 36109 |
-| Root-lane exports | 14063 |
+| Public export records | 36488 |
+| Root-lane exports | 14176 |
 | Export conflicts | 0 |
 
 | Upstream package | Haxe module | Sources | Tests | Lanes | Export records | SDK | Conflicts |
 | --- | --- | ---: | ---: | ---: | ---: | :---: | ---: |
 | `@flighthq/abc` | `flighthq.abc.Abc` | 4 | 2 | 2 | 4 | yes | 0 |
-| `@flighthq/accessibility` | `flighthq.accessibility.Accessibility` | 3 | 1 | 2 | 13 | yes | 0 |
+| `@flighthq/accessibility` | `flighthq.accessibility.Accessibility` | 3 | 1 | 2 | 18 | yes | 0 |
 | `@flighthq/adjustments` | `flighthq.adjustments.Adjustments` | 21 | 19 | 2 | 90 | yes | 0 |
 | `@flighthq/animation` | `flighthq.animation.Animation` | 13 | 11 | 2 | 104 | yes | 0 |
-| `@flighthq/app` | `flighthq.app.App` | 3 | 1 | 2 | 81 | yes | 0 |
-| `@flighthq/application` | `flighthq.application.Application` | 5 | 3 | 2 | 172 | yes | 0 |
+| `@flighthq/app` | `flighthq.app.App` | 3 | 1 | 2 | 85 | yes | 0 |
+| `@flighthq/application` | `flighthq.application.Application` | 5 | 3 | 2 | 176 | yes | 0 |
 | `@flighthq/application-gl` | `flighthq.applicationGl.ApplicationGl` | 3 | 1 | 2 | 4 | yes | 0 |
 | `@flighthq/assets` | `flighthq.assets.Assets` | 5 | 3 | 2 | 35 | yes | 0 |
 | `@flighthq/audio` | `flighthq.audio.Audio` | 7 | 5 | 2 | 68 | yes | 0 |
@@ -33,72 +33,72 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/camera-controls` | `flighthq.cameraControls.CameraControls` | 7 | 5 | 2 | 54 | yes | 0 |
 | `@flighthq/capture` | `flighthq.capture.Capture` | 4 | 2 | 2 | 22 | yes | 0 |
 | `@flighthq/clip` | `flighthq.clip.Clip` | 4 | 2 | 2 | 48 | yes | 0 |
-| `@flighthq/clipboard` | `flighthq.clipboard.Clipboard` | 3 | 1 | 2 | 61 | yes | 0 |
+| `@flighthq/clipboard` | `flighthq.clipboard.Clipboard` | 3 | 1 | 2 | 66 | yes | 0 |
 | `@flighthq/clock` | `flighthq.clock.Clock` | 4 | 2 | 2 | 28 | yes | 0 |
 | `@flighthq/collision` | `flighthq.collision.Collision` | 38 | 37 | 2 | 225 | yes | 0 |
 | `@flighthq/color` | `flighthq.color.Color` | 11 | 9 | 2 | 62 | yes | 0 |
 | `@flighthq/compression` | `flighthq.compression.Compression` | 4 | 2 | 2 | 12 | yes | 0 |
-| `@flighthq/connectivity` | `flighthq.connectivity.Connectivity` | 3 | 1 | 2 | 24 | yes | 0 |
+| `@flighthq/connectivity` | `flighthq.connectivity.Connectivity` | 3 | 1 | 2 | 29 | yes | 0 |
 | `@flighthq/debug` | `flighthq.debug.Debug` | 4 | 2 | 2 | 20 | yes | 0 |
-| `@flighthq/device` | `flighthq.device.Device` | 3 | 1 | 2 | 21 | yes | 0 |
-| `@flighthq/dialog` | `flighthq.dialog.Dialog` | 3 | 1 | 2 | 27 | yes | 0 |
+| `@flighthq/device` | `flighthq.device.Device` | 3 | 1 | 2 | 26 | yes | 0 |
+| `@flighthq/dialog` | `flighthq.dialog.Dialog` | 3 | 1 | 2 | 32 | yes | 0 |
 | `@flighthq/easing` | `flighthq.easing.Easing` | 23 | 22 | 2 | 105 | yes | 0 |
 | `@flighthq/effects` | `flighthq.effects.Effects` | 74 | 72 | 2 | 305 | yes | 0 |
 | `@flighthq/effects-canvas` | `flighthq.effectsCanvas.EffectsCanvas` | 29 | 29 | 2 | 131 | yes | 0 |
 | `@flighthq/effects-gl` | `flighthq.effectsGl.EffectsGl` | 60 | 59 | 2 | 286 | yes | 0 |
 | `@flighthq/effects-wgpu` | `flighthq.effectsWgpu.EffectsWgpu` | 59 | 59 | 2 | 274 | yes | 0 |
 | `@flighthq/entity` | `flighthq.entity.Entity` | 8 | 6 | 2 | 15 | yes | 0 |
-| `@flighthq/filesystem` | `flighthq.filesystem.Filesystem` | 3 | 1 | 2 | 83 | yes | 0 |
+| `@flighthq/filesystem` | `flighthq.filesystem.Filesystem` | 3 | 1 | 2 | 88 | yes | 0 |
 | `@flighthq/flow` | `flighthq.flow.Flow` | 3 | 1 | 2 | 18 | yes | 0 |
 | `@flighthq/font` | `flighthq.font.Font` | 11 | 9 | 2 | 32 | yes | 0 |
 | `@flighthq/font-formats` | `flighthq.fontFormats.FontFormats` | 17 | 15 | 2 | 48 | yes | 0 |
-| `@flighthq/geolocation` | `flighthq.geolocation.Geolocation` | 3 | 1 | 2 | 21 | yes | 0 |
-| `@flighthq/geometry` | `flighthq.geometry.Geometry` | 30 | 28 | 2 | 760 | yes | 0 |
+| `@flighthq/geolocation` | `flighthq.geolocation.Geolocation` | 3 | 1 | 2 | 26 | yes | 0 |
+| `@flighthq/geometry` | `flighthq.geometry.Geometry` | 30 | 28 | 2 | 778 | yes | 0 |
 | `@flighthq/glyphatlas` | `flighthq.glyphatlas.Glyphatlas` | 10 | 8 | 2 | 38 | yes | 0 |
-| `@flighthq/haptics` | `flighthq.haptics.Haptics` | 3 | 1 | 2 | 23 | yes | 0 |
+| `@flighthq/haptics` | `flighthq.haptics.Haptics` | 3 | 1 | 2 | 28 | yes | 0 |
 | `@flighthq/host-capacitor` | `flighthq.hostCapacitor.HostCapacitor` | 15 | 13 | 2 | 26 | no | 0 |
-| `@flighthq/host-electron` | `flighthq.hostElectron.HostElectron` | 19 | 17 | 2 | 40 | no | 0 |
+| `@flighthq/host-electron` | `flighthq.hostElectron.HostElectron` | 20 | 18 | 2 | 40 | no | 0 |
 | `@flighthq/host-tauri` | `flighthq.hostTauri.HostTauri` | 13 | 11 | 2 | 22 | no | 0 |
-| `@flighthq/host-web` | `flighthq.hostWeb.HostWeb` | 5 | 4 | 2 | 10 | no | 0 |
-| `@flighthq/image` | `flighthq.image.Image` | 6 | 4 | 2 | 46 | yes | 0 |
+| `@flighthq/host-web` | `flighthq.hostWeb.HostWeb` | 33 | 32 | 2 | 92 | no | 0 |
+| `@flighthq/image` | `flighthq.image.Image` | 6 | 4 | 2 | 51 | yes | 0 |
 | `@flighthq/image-codec` | `flighthq.imageCodec.ImageCodec` | 12 | 10 | 2 | 46 | yes | 0 |
 | `@flighthq/importdiagnostics` | `flighthq.importdiagnostics.Importdiagnostics` | 4 | 2 | 2 | 6 | yes | 0 |
 | `@flighthq/input` | `flighthq.input.Input` | 3 | 1 | 2 | 79 | yes | 0 |
 | `@flighthq/interaction` | `flighthq.interaction.Interaction` | 16 | 14 | 2 | 143 | yes | 0 |
 | `@flighthq/intl` | `flighthq.intl.Intl` | 9 | 7 | 2 | 28 | yes | 0 |
-| `@flighthq/ipc` | `flighthq.ipc.Ipc` | 3 | 1 | 2 | 30 | yes | 0 |
-| `@flighthq/keyboard` | `flighthq.keyboard.Keyboard` | 3 | 1 | 2 | 36 | yes | 0 |
+| `@flighthq/ipc` | `flighthq.ipc.Ipc` | 3 | 1 | 2 | 34 | yes | 0 |
+| `@flighthq/keyboard` | `flighthq.keyboard.Keyboard` | 3 | 1 | 2 | 41 | yes | 0 |
 | `@flighthq/layout` | `flighthq.layout.Layout` | 8 | 7 | 2 | 16 | yes | 0 |
-| `@flighthq/lifecycle` | `flighthq.lifecycle.Lifecycle` | 3 | 1 | 2 | 23 | yes | 0 |
+| `@flighthq/lifecycle` | `flighthq.lifecycle.Lifecycle` | 3 | 1 | 2 | 28 | yes | 0 |
 | `@flighthq/lighting` | `flighthq.lighting.Lighting` | 13 | 11 | 2 | 62 | yes | 0 |
 | `@flighthq/loader` | `flighthq.loader.Loader` | 3 | 1 | 2 | 30 | yes | 0 |
-| `@flighthq/log` | `flighthq.log.Log` | 3 | 1 | 2 | 125 | yes | 0 |
+| `@flighthq/log` | `flighthq.log.Log` | 3 | 1 | 2 | 124 | yes | 0 |
 | `@flighthq/materials` | `flighthq.materials.Materials` | 22 | 20 | 2 | 158 | yes | 0 |
 | `@flighthq/math` | `flighthq.math.Math` | 17 | 15 | 2 | 148 | yes | 0 |
 | `@flighthq/media` | `flighthq.media.Media` | 6 | 4 | 2 | 87 | yes | 0 |
-| `@flighthq/mediasession` | `flighthq.mediasession.Mediasession` | 3 | 1 | 2 | 17 | yes | 0 |
-| `@flighthq/menu` | `flighthq.menu.Menu` | 4 | 2 | 2 | 31 | yes | 0 |
+| `@flighthq/mediasession` | `flighthq.mediasession.Mediasession` | 3 | 1 | 2 | 22 | yes | 0 |
+| `@flighthq/menu` | `flighthq.menu.Menu` | 4 | 2 | 2 | 36 | yes | 0 |
 | `@flighthq/mesh` | `flighthq.mesh.Mesh` | 16 | 14 | 2 | 167 | yes | 0 |
 | `@flighthq/motionpath` | `flighthq.motionpath.Motionpath` | 3 | 1 | 2 | 14 | yes | 0 |
 | `@flighthq/movieclip` | `flighthq.movieclip.Movieclip` | 5 | 3 | 2 | 52 | yes | 0 |
 | `@flighthq/net` | `flighthq.net.Net` | 3 | 1 | 2 | 5 | yes | 0 |
 | `@flighthq/node` | `flighthq.node.Node` | 21 | 19 | 2 | 226 | yes | 0 |
-| `@flighthq/notification` | `flighthq.notification.Notification` | 3 | 1 | 2 | 47 | yes | 0 |
+| `@flighthq/notification` | `flighthq.notification.Notification` | 3 | 1 | 2 | 52 | yes | 0 |
 | `@flighthq/particleemitter` | `flighthq.particleemitter.Particleemitter` | 12 | 12 | 2 | 98 | yes | 0 |
 | `@flighthq/particles` | `flighthq.particles.Particles` | 12 | 10 | 2 | 52 | yes | 0 |
 | `@flighthq/particles-formats` | `flighthq.particlesFormats.ParticlesFormats` | 16 | 14 | 2 | 62 | yes | 0 |
 | `@flighthq/path` | `flighthq.path.Path` | 30 | 28 | 2 | 120 | yes | 0 |
 | `@flighthq/path-boolean` | `flighthq.pathBoolean.PathBoolean` | 9 | 8 | 2 | 20 | yes | 0 |
 | `@flighthq/path-formats` | `flighthq.pathFormats.PathFormats` | 3 | 1 | 2 | 6 | yes | 0 |
-| `@flighthq/permissions` | `flighthq.permissions.Permissions` | 4 | 2 | 2 | 17 | yes | 0 |
+| `@flighthq/permissions` | `flighthq.permissions.Permissions` | 4 | 2 | 2 | 22 | yes | 0 |
 | `@flighthq/physics2d` | `flighthq.physics2d.Physics2d` | 26 | 25 | 2 | 193 | yes | 0 |
 | `@flighthq/physics2d-abi` | `flighthq.physics2dAbi.Physics2dAbi` | 8 | 6 | 2 | 150 | yes | 0 |
 | `@flighthq/physics3d` | `flighthq.physics3d.Physics3d` | 36 | 35 | 2 | 240 | yes | 0 |
 | `@flighthq/physics3d-abi` | `flighthq.physics3dAbi.Physics3dAbi` | 8 | 6 | 2 | 142 | yes | 0 |
 | `@flighthq/picking` | `flighthq.picking.Picking` | 4 | 2 | 2 | 22 | yes | 0 |
-| `@flighthq/platform` | `flighthq.platform.Platform` | 3 | 1 | 2 | 27 | yes | 0 |
-| `@flighthq/power` | `flighthq.power.Power` | 3 | 1 | 2 | 33 | yes | 0 |
-| `@flighthq/protocol` | `flighthq.protocol.Protocol` | 3 | 1 | 2 | 37 | yes | 0 |
+| `@flighthq/platform` | `flighthq.platform.Platform` | 3 | 1 | 2 | 32 | yes | 0 |
+| `@flighthq/power` | `flighthq.power.Power` | 3 | 1 | 2 | 37 | yes | 0 |
+| `@flighthq/protocol` | `flighthq.protocol.Protocol` | 3 | 1 | 2 | 41 | yes | 0 |
 | `@flighthq/quadbatch` | `flighthq.quadbatch.Quadbatch` | 3 | 1 | 2 | 57 | yes | 0 |
 | `@flighthq/registry` | `flighthq.registry.Registry` | 3 | 1 | 2 | 22 | yes | 0 |
 | `@flighthq/registry-catalog` | `flighthq.registryCatalog.RegistryCatalog` | 4 | 1 | 2 | 12 | yes | 0 |
@@ -119,15 +119,15 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/scene3d-gl` | `flighthq.scene3dGl.Scene3dGl` | 65 | 63 | 2 | 230 | yes | 0 |
 | `@flighthq/scene3d-resources` | `flighthq.scene3dResources.Scene3dResources` | 28 | 27 | 2 | 79 | yes | 0 |
 | `@flighthq/scene3d-wgpu` | `flighthq.scene3dWgpu.Scene3dWgpu` | 49 | 46 | 2 | 189 | yes | 0 |
-| `@flighthq/screen` | `flighthq.screen.Screen` | 3 | 1 | 2 | 57 | yes | 0 |
-| `@flighthq/sdk` | `flighthq.sdk.Sdk` | 15 | 1 | 15 | 20419 | no | 0 |
-| `@flighthq/sensors` | `flighthq.sensors.Sensors` | 3 | 1 | 2 | 54 | yes | 0 |
+| `@flighthq/screen` | `flighthq.screen.Screen` | 3 | 1 | 2 | 62 | yes | 0 |
+| `@flighthq/sdk` | `flighthq.sdk.Sdk` | 15 | 1 | 15 | 20548 | no | 0 |
+| `@flighthq/sensors` | `flighthq.sensors.Sensors` | 3 | 1 | 2 | 59 | yes | 0 |
 | `@flighthq/shading` | `flighthq.shading.Shading` | 18 | 16 | 2 | 52 | yes | 0 |
 | `@flighthq/shape` | `flighthq.shape.Shape` | 19 | 17 | 2 | 146 | yes | 0 |
 | `@flighthq/shape-formats` | `flighthq.shapeFormats.ShapeFormats` | 3 | 1 | 2 | 4 | yes | 0 |
-| `@flighthq/share` | `flighthq.share.Share` | 3 | 1 | 2 | 27 | yes | 0 |
-| `@flighthq/shell` | `flighthq.shell.Shell` | 3 | 1 | 2 | 25 | yes | 0 |
-| `@flighthq/shortcut` | `flighthq.shortcut.Shortcut` | 5 | 3 | 2 | 62 | yes | 0 |
+| `@flighthq/share` | `flighthq.share.Share` | 3 | 1 | 2 | 32 | yes | 0 |
+| `@flighthq/shell` | `flighthq.shell.Shell` | 3 | 1 | 2 | 29 | yes | 0 |
+| `@flighthq/shortcut` | `flighthq.shortcut.Shortcut` | 5 | 3 | 2 | 66 | yes | 0 |
 | `@flighthq/signals` | `flighthq.signals.Signals` | 7 | 5 | 2 | 22 | yes | 0 |
 | `@flighthq/skeleton2d` | `flighthq.skeleton2d.Skeleton2d` | 23 | 21 | 2 | 91 | yes | 0 |
 | `@flighthq/skeleton2d-formats` | `flighthq.skeleton2dFormats.Skeleton2dFormats` | 10 | 8 | 2 | 25 | yes | 0 |
@@ -139,8 +139,8 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/spritesheet` | `flighthq.spritesheet.Spritesheet` | 9 | 7 | 2 | 62 | yes | 0 |
 | `@flighthq/spritesheet-formats` | `flighthq.spritesheetFormats.SpritesheetFormats` | 12 | 10 | 2 | 38 | yes | 0 |
 | `@flighthq/statechart` | `flighthq.statechart.Statechart` | 5 | 3 | 2 | 30 | yes | 0 |
-| `@flighthq/statusbar` | `flighthq.statusbar.Statusbar` | 3 | 1 | 2 | 32 | yes | 0 |
-| `@flighthq/storage` | `flighthq.storage.Storage` | 3 | 1 | 2 | 75 | yes | 0 |
+| `@flighthq/statusbar` | `flighthq.statusbar.Statusbar` | 3 | 1 | 2 | 37 | yes | 0 |
+| `@flighthq/storage` | `flighthq.storage.Storage` | 3 | 1 | 2 | 80 | yes | 0 |
 | `@flighthq/swf` | `flighthq.swf.Swf` | 15 | 12 | 2 | 23 | yes | 0 |
 | `@flighthq/text` | `flighthq.text.Text` | 7 | 5 | 2 | 161 | yes | 0 |
 | `@flighthq/text-markup` | `flighthq.textMarkup.TextMarkup` | 6 | 4 | 2 | 16 | yes | 0 |
@@ -159,14 +159,14 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/timeline` | `flighthq.timeline.Timeline` | 3 | 1 | 2 | 38 | yes | 0 |
 | `@flighthq/tool-capture` | `flighthq.toolCapture.ToolCapture` | 40 | 40 | 2 | 282 | no | 0 |
 | `@flighthq/tool-registry` | `flighthq.toolRegistry.ToolRegistry` | 4 | 1 | 2 | 4 | no | 0 |
-| `@flighthq/tray` | `flighthq.tray.Tray` | 4 | 2 | 2 | 52 | yes | 0 |
+| `@flighthq/tray` | `flighthq.tray.Tray` | 4 | 2 | 2 | 56 | yes | 0 |
 | `@flighthq/tween` | `flighthq.tween.Tween` | 10 | 7 | 2 | 54 | yes | 0 |
-| `@flighthq/types` | `flighthq.types.Types` | 884 | 33 | 2 | 4926 | yes | 0 |
-| `@flighthq/updater` | `flighthq.updater.Updater` | 3 | 1 | 2 | 43 | yes | 0 |
+| `@flighthq/types` | `flighthq.types.Types` | 883 | 33 | 2 | 4929 | yes | 0 |
+| `@flighthq/updater` | `flighthq.updater.Updater` | 3 | 1 | 2 | 47 | yes | 0 |
 | `@flighthq/useragent` | `flighthq.useragent.Useragent` | 4 | 2 | 2 | 23 | yes | 0 |
-| `@flighthq/velocity` | `flighthq.velocity.Velocity` | 5 | 3 | 2 | 39 | yes | 0 |
+| `@flighthq/velocity` | `flighthq.velocity.Velocity` | 5 | 3 | 2 | 41 | yes | 0 |
 | `@flighthq/video` | `flighthq.video.Video` | 5 | 3 | 2 | 32 | yes | 0 |
-| `@flighthq/webcam` | `flighthq.webcam.Webcam` | 4 | 2 | 2 | 14 | yes | 0 |
+| `@flighthq/webcam` | `flighthq.webcam.Webcam` | 4 | 2 | 2 | 19 | yes | 0 |
 | `@flighthq/xml` | `flighthq.xml.Xml` | 4 | 2 | 2 | 12 | yes | 0 |
 
 ## Derived exclusions
@@ -180,16 +180,16 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | --- | --- | ---: | ---: |
 | `@flighthq/abc` | `upstream/packages/abc/src/index.ts` | 2 | 0 |
 | `@flighthq/abc/contract` | `upstream/packages/abc/src/contract.ts` | 2 | 0 |
-| `@flighthq/accessibility` | `upstream/packages/accessibility/src/index.ts` | 5 | 0 |
-| `@flighthq/accessibility/contract` | `upstream/packages/accessibility/src/contract.ts` | 8 | 0 |
+| `@flighthq/accessibility` | `upstream/packages/accessibility/src/index.ts` | 6 | 0 |
+| `@flighthq/accessibility/contract` | `upstream/packages/accessibility/src/contract.ts` | 12 | 0 |
 | `@flighthq/adjustments` | `upstream/packages/adjustments/src/index.ts` | 38 | 0 |
 | `@flighthq/adjustments/contract` | `upstream/packages/adjustments/src/contract.ts` | 52 | 0 |
 | `@flighthq/animation` | `upstream/packages/animation/src/index.ts` | 52 | 0 |
 | `@flighthq/animation/contract` | `upstream/packages/animation/src/contract.ts` | 52 | 0 |
-| `@flighthq/app` | `upstream/packages/app/src/index.ts` | 39 | 0 |
-| `@flighthq/app/contract` | `upstream/packages/app/src/contract.ts` | 42 | 0 |
-| `@flighthq/application` | `upstream/packages/application/src/index.ts` | 81 | 0 |
-| `@flighthq/application/contract` | `upstream/packages/application/src/contract.ts` | 91 | 0 |
+| `@flighthq/app` | `upstream/packages/app/src/index.ts` | 40 | 0 |
+| `@flighthq/app/contract` | `upstream/packages/app/src/contract.ts` | 45 | 0 |
+| `@flighthq/application` | `upstream/packages/application/src/index.ts` | 82 | 0 |
+| `@flighthq/application/contract` | `upstream/packages/application/src/contract.ts` | 94 | 0 |
 | `@flighthq/application-gl` | `upstream/packages/application-gl/src/index.ts` | 2 | 0 |
 | `@flighthq/application-gl/contract` | `upstream/packages/application-gl/src/contract.ts` | 2 | 0 |
 | `@flighthq/assets` | `upstream/packages/assets/src/index.ts` | 17 | 0 |
@@ -214,8 +214,8 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/capture/contract` | `upstream/packages/capture/src/contract.ts` | 12 | 0 |
 | `@flighthq/clip` | `upstream/packages/clip/src/index.ts` | 22 | 0 |
 | `@flighthq/clip/contract` | `upstream/packages/clip/src/contract.ts` | 26 | 0 |
-| `@flighthq/clipboard` | `upstream/packages/clipboard/src/index.ts` | 29 | 0 |
-| `@flighthq/clipboard/contract` | `upstream/packages/clipboard/src/contract.ts` | 32 | 0 |
+| `@flighthq/clipboard` | `upstream/packages/clipboard/src/index.ts` | 30 | 0 |
+| `@flighthq/clipboard/contract` | `upstream/packages/clipboard/src/contract.ts` | 36 | 0 |
 | `@flighthq/clock` | `upstream/packages/clock/src/index.ts` | 14 | 0 |
 | `@flighthq/clock/contract` | `upstream/packages/clock/src/contract.ts` | 14 | 0 |
 | `@flighthq/collision` | `upstream/packages/collision/src/index.ts` | 106 | 0 |
@@ -224,14 +224,14 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/color/contract` | `upstream/packages/color/src/contract.ts` | 31 | 0 |
 | `@flighthq/compression` | `upstream/packages/compression/src/index.ts` | 6 | 0 |
 | `@flighthq/compression/contract` | `upstream/packages/compression/src/contract.ts` | 6 | 0 |
-| `@flighthq/connectivity` | `upstream/packages/connectivity/src/index.ts` | 10 | 0 |
-| `@flighthq/connectivity/contract` | `upstream/packages/connectivity/src/contract.ts` | 14 | 0 |
+| `@flighthq/connectivity` | `upstream/packages/connectivity/src/index.ts` | 11 | 0 |
+| `@flighthq/connectivity/contract` | `upstream/packages/connectivity/src/contract.ts` | 18 | 0 |
 | `@flighthq/debug` | `upstream/packages/debug/src/index.ts` | 10 | 0 |
 | `@flighthq/debug/contract` | `upstream/packages/debug/src/contract.ts` | 10 | 0 |
-| `@flighthq/device` | `upstream/packages/device/src/index.ts` | 7 | 0 |
-| `@flighthq/device/contract` | `upstream/packages/device/src/contract.ts` | 14 | 0 |
-| `@flighthq/dialog` | `upstream/packages/dialog/src/index.ts` | 12 | 0 |
-| `@flighthq/dialog/contract` | `upstream/packages/dialog/src/contract.ts` | 15 | 0 |
+| `@flighthq/device` | `upstream/packages/device/src/index.ts` | 8 | 0 |
+| `@flighthq/device/contract` | `upstream/packages/device/src/contract.ts` | 18 | 0 |
+| `@flighthq/dialog` | `upstream/packages/dialog/src/index.ts` | 13 | 0 |
+| `@flighthq/dialog/contract` | `upstream/packages/dialog/src/contract.ts` | 19 | 0 |
 | `@flighthq/easing` | `upstream/packages/easing/src/index.ts` | 51 | 0 |
 | `@flighthq/easing/contract` | `upstream/packages/easing/src/contract.ts` | 54 | 0 |
 | `@flighthq/effects` | `upstream/packages/effects/src/index.ts` | 152 | 0 |
@@ -244,32 +244,32 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/effects-wgpu/contract` | `upstream/packages/effects-wgpu/src/contract.ts` | 177 | 0 |
 | `@flighthq/entity` | `upstream/packages/entity/src/index.ts` | 0 | 0 |
 | `@flighthq/entity/contract` | `upstream/packages/entity/src/contract.ts` | 15 | 0 |
-| `@flighthq/filesystem` | `upstream/packages/filesystem/src/index.ts` | 40 | 0 |
-| `@flighthq/filesystem/contract` | `upstream/packages/filesystem/src/contract.ts` | 43 | 0 |
+| `@flighthq/filesystem` | `upstream/packages/filesystem/src/index.ts` | 41 | 0 |
+| `@flighthq/filesystem/contract` | `upstream/packages/filesystem/src/contract.ts` | 47 | 0 |
 | `@flighthq/flow` | `upstream/packages/flow/src/index.ts` | 9 | 0 |
 | `@flighthq/flow/contract` | `upstream/packages/flow/src/contract.ts` | 9 | 0 |
 | `@flighthq/font` | `upstream/packages/font/src/index.ts` | 16 | 0 |
 | `@flighthq/font/contract` | `upstream/packages/font/src/contract.ts` | 16 | 0 |
 | `@flighthq/font-formats` | `upstream/packages/font-formats/src/index.ts` | 2 | 0 |
 | `@flighthq/font-formats/contract` | `upstream/packages/font-formats/src/contract.ts` | 46 | 0 |
-| `@flighthq/geolocation` | `upstream/packages/geolocation/src/index.ts` | 9 | 0 |
-| `@flighthq/geolocation/contract` | `upstream/packages/geolocation/src/contract.ts` | 12 | 0 |
-| `@flighthq/geometry` | `upstream/packages/geometry/src/index.ts` | 380 | 0 |
-| `@flighthq/geometry/contract` | `upstream/packages/geometry/src/contract.ts` | 380 | 0 |
+| `@flighthq/geolocation` | `upstream/packages/geolocation/src/index.ts` | 10 | 0 |
+| `@flighthq/geolocation/contract` | `upstream/packages/geolocation/src/contract.ts` | 16 | 0 |
+| `@flighthq/geometry` | `upstream/packages/geometry/src/index.ts` | 389 | 0 |
+| `@flighthq/geometry/contract` | `upstream/packages/geometry/src/contract.ts` | 389 | 0 |
 | `@flighthq/glyphatlas` | `upstream/packages/glyphatlas/src/index.ts` | 17 | 0 |
 | `@flighthq/glyphatlas/contract` | `upstream/packages/glyphatlas/src/contract.ts` | 21 | 0 |
-| `@flighthq/haptics` | `upstream/packages/haptics/src/index.ts` | 10 | 0 |
-| `@flighthq/haptics/contract` | `upstream/packages/haptics/src/contract.ts` | 13 | 0 |
+| `@flighthq/haptics` | `upstream/packages/haptics/src/index.ts` | 11 | 0 |
+| `@flighthq/haptics/contract` | `upstream/packages/haptics/src/contract.ts` | 17 | 0 |
 | `@flighthq/host-capacitor` | `upstream/packages/host-capacitor/src/index.ts` | 13 | 0 |
 | `@flighthq/host-capacitor/contract` | `upstream/packages/host-capacitor/src/contract.ts` | 13 | 0 |
 | `@flighthq/host-electron` | `upstream/packages/host-electron/src/index.ts` | 20 | 0 |
 | `@flighthq/host-electron/contract` | `upstream/packages/host-electron/src/contract.ts` | 20 | 0 |
 | `@flighthq/host-tauri` | `upstream/packages/host-tauri/src/index.ts` | 11 | 0 |
 | `@flighthq/host-tauri/contract` | `upstream/packages/host-tauri/src/contract.ts` | 11 | 0 |
-| `@flighthq/host-web` | `upstream/packages/host-web/src/index.ts` | 4 | 0 |
-| `@flighthq/host-web/contract` | `upstream/packages/host-web/src/contract.ts` | 6 | 0 |
-| `@flighthq/image` | `upstream/packages/image/src/index.ts` | 21 | 0 |
-| `@flighthq/image/contract` | `upstream/packages/image/src/contract.ts` | 25 | 0 |
+| `@flighthq/host-web` | `upstream/packages/host-web/src/index.ts` | 31 | 0 |
+| `@flighthq/host-web/contract` | `upstream/packages/host-web/src/contract.ts` | 61 | 0 |
+| `@flighthq/image` | `upstream/packages/image/src/index.ts` | 22 | 0 |
+| `@flighthq/image/contract` | `upstream/packages/image/src/contract.ts` | 29 | 0 |
 | `@flighthq/image-codec` | `upstream/packages/image-codec/src/index.ts` | 20 | 0 |
 | `@flighthq/image-codec/contract` | `upstream/packages/image-codec/src/contract.ts` | 26 | 0 |
 | `@flighthq/importdiagnostics` | `upstream/packages/importdiagnostics/src/index.ts` | 3 | 0 |
@@ -280,30 +280,30 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/interaction/contract` | `upstream/packages/interaction/src/contract.ts` | 77 | 0 |
 | `@flighthq/intl` | `upstream/packages/intl/src/index.ts` | 14 | 0 |
 | `@flighthq/intl/contract` | `upstream/packages/intl/src/contract.ts` | 14 | 0 |
-| `@flighthq/ipc` | `upstream/packages/ipc/src/index.ts` | 13 | 0 |
-| `@flighthq/ipc/contract` | `upstream/packages/ipc/src/contract.ts` | 17 | 0 |
-| `@flighthq/keyboard` | `upstream/packages/keyboard/src/index.ts` | 16 | 0 |
-| `@flighthq/keyboard/contract` | `upstream/packages/keyboard/src/contract.ts` | 20 | 0 |
+| `@flighthq/ipc` | `upstream/packages/ipc/src/index.ts` | 14 | 0 |
+| `@flighthq/ipc/contract` | `upstream/packages/ipc/src/contract.ts` | 20 | 0 |
+| `@flighthq/keyboard` | `upstream/packages/keyboard/src/index.ts` | 17 | 0 |
+| `@flighthq/keyboard/contract` | `upstream/packages/keyboard/src/contract.ts` | 24 | 0 |
 | `@flighthq/layout` | `upstream/packages/layout/src/index.ts` | 8 | 0 |
 | `@flighthq/layout/contract` | `upstream/packages/layout/src/contract.ts` | 8 | 0 |
-| `@flighthq/lifecycle` | `upstream/packages/lifecycle/src/index.ts` | 10 | 0 |
-| `@flighthq/lifecycle/contract` | `upstream/packages/lifecycle/src/contract.ts` | 13 | 0 |
+| `@flighthq/lifecycle` | `upstream/packages/lifecycle/src/index.ts` | 11 | 0 |
+| `@flighthq/lifecycle/contract` | `upstream/packages/lifecycle/src/contract.ts` | 17 | 0 |
 | `@flighthq/lighting` | `upstream/packages/lighting/src/index.ts` | 31 | 0 |
 | `@flighthq/lighting/contract` | `upstream/packages/lighting/src/contract.ts` | 31 | 0 |
 | `@flighthq/loader` | `upstream/packages/loader/src/index.ts` | 15 | 0 |
 | `@flighthq/loader/contract` | `upstream/packages/loader/src/contract.ts` | 15 | 0 |
 | `@flighthq/log` | `upstream/packages/log/src/index.ts` | 61 | 0 |
-| `@flighthq/log/contract` | `upstream/packages/log/src/contract.ts` | 64 | 0 |
+| `@flighthq/log/contract` | `upstream/packages/log/src/contract.ts` | 63 | 0 |
 | `@flighthq/materials` | `upstream/packages/materials/src/index.ts` | 79 | 0 |
 | `@flighthq/materials/contract` | `upstream/packages/materials/src/contract.ts` | 79 | 0 |
 | `@flighthq/math` | `upstream/packages/math/src/index.ts` | 74 | 0 |
 | `@flighthq/math/contract` | `upstream/packages/math/src/contract.ts` | 74 | 0 |
 | `@flighthq/media` | `upstream/packages/media/src/index.ts` | 42 | 0 |
 | `@flighthq/media/contract` | `upstream/packages/media/src/contract.ts` | 45 | 0 |
-| `@flighthq/mediasession` | `upstream/packages/mediasession/src/index.ts` | 7 | 0 |
-| `@flighthq/mediasession/contract` | `upstream/packages/mediasession/src/contract.ts` | 10 | 0 |
-| `@flighthq/menu` | `upstream/packages/menu/src/index.ts` | 14 | 0 |
-| `@flighthq/menu/contract` | `upstream/packages/menu/src/contract.ts` | 17 | 0 |
+| `@flighthq/mediasession` | `upstream/packages/mediasession/src/index.ts` | 8 | 0 |
+| `@flighthq/mediasession/contract` | `upstream/packages/mediasession/src/contract.ts` | 14 | 0 |
+| `@flighthq/menu` | `upstream/packages/menu/src/index.ts` | 15 | 0 |
+| `@flighthq/menu/contract` | `upstream/packages/menu/src/contract.ts` | 21 | 0 |
 | `@flighthq/mesh` | `upstream/packages/mesh/src/index.ts` | 83 | 0 |
 | `@flighthq/mesh/contract` | `upstream/packages/mesh/src/contract.ts` | 84 | 0 |
 | `@flighthq/motionpath` | `upstream/packages/motionpath/src/index.ts` | 7 | 0 |
@@ -314,8 +314,8 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/net/contract` | `upstream/packages/net/src/contract.ts` | 4 | 0 |
 | `@flighthq/node` | `upstream/packages/node/src/index.ts` | 96 | 0 |
 | `@flighthq/node/contract` | `upstream/packages/node/src/contract.ts` | 130 | 0 |
-| `@flighthq/notification` | `upstream/packages/notification/src/index.ts` | 21 | 0 |
-| `@flighthq/notification/contract` | `upstream/packages/notification/src/contract.ts` | 26 | 0 |
+| `@flighthq/notification` | `upstream/packages/notification/src/index.ts` | 22 | 0 |
+| `@flighthq/notification/contract` | `upstream/packages/notification/src/contract.ts` | 30 | 0 |
 | `@flighthq/particleemitter` | `upstream/packages/particleemitter/src/index.ts` | 46 | 0 |
 | `@flighthq/particleemitter/contract` | `upstream/packages/particleemitter/src/contract.ts` | 52 | 0 |
 | `@flighthq/particles` | `upstream/packages/particles/src/index.ts` | 24 | 0 |
@@ -328,8 +328,8 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/path-boolean/contract` | `upstream/packages/path-boolean/src/contract.ts` | 12 | 0 |
 | `@flighthq/path-formats` | `upstream/packages/path-formats/src/index.ts` | 3 | 0 |
 | `@flighthq/path-formats/contract` | `upstream/packages/path-formats/src/contract.ts` | 3 | 0 |
-| `@flighthq/permissions` | `upstream/packages/permissions/src/index.ts` | 6 | 0 |
-| `@flighthq/permissions/contract` | `upstream/packages/permissions/src/contract.ts` | 11 | 0 |
+| `@flighthq/permissions` | `upstream/packages/permissions/src/index.ts` | 7 | 0 |
+| `@flighthq/permissions/contract` | `upstream/packages/permissions/src/contract.ts` | 15 | 0 |
 | `@flighthq/physics2d` | `upstream/packages/physics2d/src/index.ts` | 92 | 0 |
 | `@flighthq/physics2d/contract` | `upstream/packages/physics2d/src/contract.ts` | 101 | 0 |
 | `@flighthq/physics2d-abi` | `upstream/packages/physics2d-abi/src/index.ts` | 75 | 0 |
@@ -340,12 +340,12 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/physics3d-abi/contract` | `upstream/packages/physics3d-abi/src/contract.ts` | 71 | 0 |
 | `@flighthq/picking` | `upstream/packages/picking/src/index.ts` | 11 | 0 |
 | `@flighthq/picking/contract` | `upstream/packages/picking/src/contract.ts` | 11 | 0 |
-| `@flighthq/platform` | `upstream/packages/platform/src/index.ts` | 11 | 0 |
-| `@flighthq/platform/contract` | `upstream/packages/platform/src/contract.ts` | 16 | 0 |
-| `@flighthq/power` | `upstream/packages/power/src/index.ts` | 14 | 0 |
-| `@flighthq/power/contract` | `upstream/packages/power/src/contract.ts` | 19 | 0 |
-| `@flighthq/protocol` | `upstream/packages/protocol/src/index.ts` | 17 | 0 |
-| `@flighthq/protocol/contract` | `upstream/packages/protocol/src/contract.ts` | 20 | 0 |
+| `@flighthq/platform` | `upstream/packages/platform/src/index.ts` | 12 | 0 |
+| `@flighthq/platform/contract` | `upstream/packages/platform/src/contract.ts` | 20 | 0 |
+| `@flighthq/power` | `upstream/packages/power/src/index.ts` | 15 | 0 |
+| `@flighthq/power/contract` | `upstream/packages/power/src/contract.ts` | 22 | 0 |
+| `@flighthq/protocol` | `upstream/packages/protocol/src/index.ts` | 18 | 0 |
+| `@flighthq/protocol/contract` | `upstream/packages/protocol/src/contract.ts` | 23 | 0 |
 | `@flighthq/quadbatch` | `upstream/packages/quadbatch/src/index.ts` | 26 | 0 |
 | `@flighthq/quadbatch/contract` | `upstream/packages/quadbatch/src/contract.ts` | 31 | 0 |
 | `@flighthq/registry` | `upstream/packages/registry/src/index.ts` | 11 | 0 |
@@ -386,37 +386,37 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/scene3d-resources/contract` | `upstream/packages/scene3d-resources/src/contract.ts` | 49 | 0 |
 | `@flighthq/scene3d-wgpu` | `upstream/packages/scene3d-wgpu/src/index.ts` | 29 | 0 |
 | `@flighthq/scene3d-wgpu/contract` | `upstream/packages/scene3d-wgpu/src/contract.ts` | 160 | 0 |
-| `@flighthq/screen` | `upstream/packages/screen/src/index.ts` | 26 | 0 |
-| `@flighthq/screen/contract` | `upstream/packages/screen/src/contract.ts` | 31 | 0 |
-| `@flighthq/sdk` | `upstream/packages/sdk/src/index.ts` | 6928 | 0 |
+| `@flighthq/screen` | `upstream/packages/screen/src/index.ts` | 27 | 0 |
+| `@flighthq/screen/contract` | `upstream/packages/screen/src/contract.ts` | 35 | 0 |
+| `@flighthq/sdk` | `upstream/packages/sdk/src/index.ts` | 6971 | 0 |
 | `@flighthq/sdk/animation` | `upstream/packages/sdk/src/animation.ts` | 222 | 0 |
-| `@flighthq/sdk/application` | `upstream/packages/sdk/src/application.ts` | 242 | 0 |
-| `@flighthq/sdk/contract` | `upstream/packages/sdk/src/contract.ts` | 6548 | 0 |
-| `@flighthq/sdk/core` | `upstream/packages/sdk/src/core.ts` | 3085 | 0 |
+| `@flighthq/sdk/application` | `upstream/packages/sdk/src/application.ts` | 244 | 0 |
+| `@flighthq/sdk/contract` | `upstream/packages/sdk/src/contract.ts` | 6591 | 0 |
+| `@flighthq/sdk/core` | `upstream/packages/sdk/src/core.ts` | 3096 | 0 |
 | `@flighthq/sdk/formats` | `upstream/packages/sdk/src/formats.ts` | 182 | 0 |
 | `@flighthq/sdk/game` | `upstream/packages/sdk/src/game.ts` | 603 | 0 |
 | `@flighthq/sdk/interaction` | `upstream/packages/sdk/src/interaction.ts` | 105 | 0 |
-| `@flighthq/sdk/media` | `upstream/packages/sdk/src/media.ts` | 49 | 0 |
-| `@flighthq/sdk/platform` | `upstream/packages/sdk/src/platform.ts` | 456 | 0 |
-| `@flighthq/sdk/rendering` | `upstream/packages/sdk/src/rendering.ts` | 926 | 0 |
-| `@flighthq/sdk/resources` | `upstream/packages/sdk/src/resources.ts` | 178 | 0 |
+| `@flighthq/sdk/media` | `upstream/packages/sdk/src/media.ts` | 50 | 0 |
+| `@flighthq/sdk/platform` | `upstream/packages/sdk/src/platform.ts` | 483 | 0 |
+| `@flighthq/sdk/rendering` | `upstream/packages/sdk/src/rendering.ts` | 927 | 0 |
+| `@flighthq/sdk/resources` | `upstream/packages/sdk/src/resources.ts` | 179 | 0 |
 | `@flighthq/sdk/scene2d` | `upstream/packages/sdk/src/scene2d.ts` | 284 | 0 |
 | `@flighthq/sdk/scene3d` | `upstream/packages/sdk/src/scene3d.ts` | 421 | 0 |
 | `@flighthq/sdk/text` | `upstream/packages/sdk/src/text.ts` | 190 | 0 |
-| `@flighthq/sensors` | `upstream/packages/sensors/src/index.ts` | 22 | 0 |
-| `@flighthq/sensors/contract` | `upstream/packages/sensors/src/contract.ts` | 32 | 0 |
+| `@flighthq/sensors` | `upstream/packages/sensors/src/index.ts` | 23 | 0 |
+| `@flighthq/sensors/contract` | `upstream/packages/sensors/src/contract.ts` | 36 | 0 |
 | `@flighthq/shading` | `upstream/packages/shading/src/index.ts` | 26 | 0 |
 | `@flighthq/shading/contract` | `upstream/packages/shading/src/contract.ts` | 26 | 0 |
 | `@flighthq/shape` | `upstream/packages/shape/src/index.ts` | 59 | 0 |
 | `@flighthq/shape/contract` | `upstream/packages/shape/src/contract.ts` | 87 | 0 |
 | `@flighthq/shape-formats` | `upstream/packages/shape-formats/src/index.ts` | 2 | 0 |
 | `@flighthq/shape-formats/contract` | `upstream/packages/shape-formats/src/contract.ts` | 2 | 0 |
-| `@flighthq/share` | `upstream/packages/share/src/index.ts` | 12 | 0 |
-| `@flighthq/share/contract` | `upstream/packages/share/src/contract.ts` | 15 | 0 |
-| `@flighthq/shell` | `upstream/packages/shell/src/index.ts` | 11 | 0 |
-| `@flighthq/shell/contract` | `upstream/packages/shell/src/contract.ts` | 14 | 0 |
-| `@flighthq/shortcut` | `upstream/packages/shortcut/src/index.ts` | 29 | 0 |
-| `@flighthq/shortcut/contract` | `upstream/packages/shortcut/src/contract.ts` | 33 | 0 |
+| `@flighthq/share` | `upstream/packages/share/src/index.ts` | 13 | 0 |
+| `@flighthq/share/contract` | `upstream/packages/share/src/contract.ts` | 19 | 0 |
+| `@flighthq/shell` | `upstream/packages/shell/src/index.ts` | 12 | 0 |
+| `@flighthq/shell/contract` | `upstream/packages/shell/src/contract.ts` | 17 | 0 |
+| `@flighthq/shortcut` | `upstream/packages/shortcut/src/index.ts` | 30 | 0 |
+| `@flighthq/shortcut/contract` | `upstream/packages/shortcut/src/contract.ts` | 36 | 0 |
 | `@flighthq/signals` | `upstream/packages/signals/src/index.ts` | 11 | 0 |
 | `@flighthq/signals/contract` | `upstream/packages/signals/src/contract.ts` | 11 | 0 |
 | `@flighthq/skeleton2d` | `upstream/packages/skeleton2d/src/index.ts` | 35 | 0 |
@@ -439,10 +439,10 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/spritesheet-formats/contract` | `upstream/packages/spritesheet-formats/src/contract.ts` | 19 | 0 |
 | `@flighthq/statechart` | `upstream/packages/statechart/src/index.ts` | 15 | 0 |
 | `@flighthq/statechart/contract` | `upstream/packages/statechart/src/contract.ts` | 15 | 0 |
-| `@flighthq/statusbar` | `upstream/packages/statusbar/src/index.ts` | 14 | 0 |
-| `@flighthq/statusbar/contract` | `upstream/packages/statusbar/src/contract.ts` | 18 | 0 |
-| `@flighthq/storage` | `upstream/packages/storage/src/index.ts` | 36 | 0 |
-| `@flighthq/storage/contract` | `upstream/packages/storage/src/contract.ts` | 39 | 0 |
+| `@flighthq/statusbar` | `upstream/packages/statusbar/src/index.ts` | 15 | 0 |
+| `@flighthq/statusbar/contract` | `upstream/packages/statusbar/src/contract.ts` | 22 | 0 |
+| `@flighthq/storage` | `upstream/packages/storage/src/index.ts` | 37 | 0 |
+| `@flighthq/storage/contract` | `upstream/packages/storage/src/contract.ts` | 43 | 0 |
 | `@flighthq/swf` | `upstream/packages/swf/src/index.ts` | 10 | 0 |
 | `@flighthq/swf/contract` | `upstream/packages/swf/src/contract.ts` | 13 | 0 |
 | `@flighthq/text` | `upstream/packages/text/src/index.ts` | 75 | 0 |
@@ -479,21 +479,21 @@ Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
 | `@flighthq/tool-capture/contract` | `upstream/packages/tool-capture/src/contract.ts` | 141 | 0 |
 | `@flighthq/tool-registry` | `upstream/packages/tool-registry/src/index.ts` | 2 | 0 |
 | `@flighthq/tool-registry/contract` | `upstream/packages/tool-registry/src/contract.ts` | 2 | 0 |
-| `@flighthq/tray` | `upstream/packages/tray/src/index.ts` | 24 | 0 |
-| `@flighthq/tray/contract` | `upstream/packages/tray/src/contract.ts` | 28 | 0 |
+| `@flighthq/tray` | `upstream/packages/tray/src/index.ts` | 25 | 0 |
+| `@flighthq/tray/contract` | `upstream/packages/tray/src/contract.ts` | 31 | 0 |
 | `@flighthq/tween` | `upstream/packages/tween/src/index.ts` | 26 | 0 |
 | `@flighthq/tween/contract` | `upstream/packages/tween/src/contract.ts` | 28 | 0 |
-| `@flighthq/types` | `upstream/packages/types/src/index.ts` | 2455 | 0 |
-| `@flighthq/types/contract` | `upstream/packages/types/src/contract.ts` | 2471 | 0 |
-| `@flighthq/updater` | `upstream/packages/updater/src/index.ts` | 20 | 0 |
-| `@flighthq/updater/contract` | `upstream/packages/updater/src/contract.ts` | 23 | 0 |
+| `@flighthq/types` | `upstream/packages/types/src/index.ts` | 2457 | 0 |
+| `@flighthq/types/contract` | `upstream/packages/types/src/contract.ts` | 2472 | 0 |
+| `@flighthq/updater` | `upstream/packages/updater/src/index.ts` | 21 | 0 |
+| `@flighthq/updater/contract` | `upstream/packages/updater/src/contract.ts` | 26 | 0 |
 | `@flighthq/useragent` | `upstream/packages/useragent/src/index.ts` | 11 | 0 |
 | `@flighthq/useragent/contract` | `upstream/packages/useragent/src/contract.ts` | 12 | 0 |
-| `@flighthq/velocity` | `upstream/packages/velocity/src/index.ts` | 19 | 0 |
-| `@flighthq/velocity/contract` | `upstream/packages/velocity/src/contract.ts` | 20 | 0 |
+| `@flighthq/velocity` | `upstream/packages/velocity/src/index.ts` | 20 | 0 |
+| `@flighthq/velocity/contract` | `upstream/packages/velocity/src/contract.ts` | 21 | 0 |
 | `@flighthq/video` | `upstream/packages/video/src/index.ts` | 16 | 0 |
 | `@flighthq/video/contract` | `upstream/packages/video/src/contract.ts` | 16 | 0 |
-| `@flighthq/webcam` | `upstream/packages/webcam/src/index.ts` | 5 | 0 |
-| `@flighthq/webcam/contract` | `upstream/packages/webcam/src/contract.ts` | 9 | 0 |
+| `@flighthq/webcam` | `upstream/packages/webcam/src/index.ts` | 6 | 0 |
+| `@flighthq/webcam/contract` | `upstream/packages/webcam/src/contract.ts` | 13 | 0 |
 | `@flighthq/xml` | `upstream/packages/xml/src/index.ts` | 6 | 0 |
 | `@flighthq/xml/contract` | `upstream/packages/xml/src/contract.ts` | 6 | 0 |

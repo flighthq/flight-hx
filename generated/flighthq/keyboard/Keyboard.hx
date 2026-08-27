@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Keyboard.SoftKeyboard;
 import flighthq.types.Keyboard.SoftKeyboardBackend;
 import flighthq.types.Keyboard.SoftKeyboardInfo;
@@ -21,9 +22,34 @@ typedef VirtualKeyboard__keyboard = { >flighthq._internal.dom.EventTarget, var b
 typedef WebKeyboardGeometry__keyboard = { var height:Float; var width:Float; var x:Float; var y:Float; };
 
 class Keyboard {
-  public static var _backend__keyboard:Null<SoftKeyboardBackend> = _Runtime.explicitNull();
+  public static var _custom__keyboard:Null<SoftKeyboardBackend> = _Runtime.explicitNull();
+
+  public static var _host__keyboard:Null<SoftKeyboardBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__keyboard:Bool = false;
+
+  public static var _hostObservation__keyboard:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static final _scratch__keyboard:SoftKeyboardInfo = (cast createSoftKeyboardInfo() : SoftKeyboardInfo);
+
+  public static final _sentinel__keyboard:SoftKeyboardBackend = (cast { getInfo: function(out:SoftKeyboardInfo):SoftKeyboardInfo {
+    (out.visible = cast (false : Bool));
+    (out.height = cast (0.0 : Float));
+    (out.x = cast (0.0 : Float));
+    (out.y = cast (0.0 : Float));
+    (out.width = cast (0.0 : Float));
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  }, subscribe: function(listener:SoftKeyboardPhase->SoftKeyboardTransition->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, show: function():Void {
+
+  }, hide: function():Void {
+
+  } });
 
   public static final _subscriptions__keyboard:flighthq._internal._WeakMap<SoftKeyboard, Void->Void> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
@@ -150,10 +176,20 @@ class Keyboard {
     detachSoftKeyboard(({ final __callArgument11:Dynamic = keyboard; __callArgument11; }));
   }
 
+  public static function explainSoftKeyboardBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Keyboard._custom__keyboard, null) : Bool)) {
+      return cast { conflict: Keyboard._hostConflict__keyboard, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Keyboard._host__keyboard, null) : Bool)) {
+      return cast { conflict: Keyboard._hostConflict__keyboard, layer: 'host', operation: ((cast !_Runtime.strictEquals(Keyboard._hostObservation__keyboard, null) : Bool) ? (cast (cast Keyboard._hostObservation__keyboard : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Keyboard._hostObservation__keyboard, null) : Bool) ? (cast (cast Keyboard._hostObservation__keyboard : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   @:noCompletion
   public static function getSoftKeyboardBackend():SoftKeyboardBackend {
-    if ((cast _Runtime.strictEquals(Keyboard._backend__keyboard, null) : Bool)) { (Keyboard._backend__keyboard = cast ((cast createWebSoftKeyboardBackend() : SoftKeyboardBackend) : Dynamic)); }
-    return cast Keyboard._backend__keyboard;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Keyboard._custom__keyboard, function():Dynamic return cast Keyboard._host__keyboard), function():Dynamic return cast Keyboard._sentinel__keyboard);
     return cast null;
   }
 
@@ -209,6 +245,15 @@ class Keyboard {
     (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).hide();
   }
 
+  @:noCompletion
+  public static function installSoftKeyboardHostBackend(backend:SoftKeyboardBackend):Void {
+    if ((cast !_Runtime.strictEquals(Keyboard._host__keyboard, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Keyboard._host__keyboard, backend) : Bool)) { (Keyboard._hostConflict__keyboard = cast (true : Dynamic)); }
+      return;
+    }
+    (Keyboard._host__keyboard = cast (backend : Dynamic));
+  }
+
   public static function isSoftKeyboardAccessoryBarVisible():Bool {
     return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getAccessoryBarVisible, cast ([] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
@@ -219,13 +264,26 @@ class Keyboard {
     return cast null;
   }
 
+  @:noCompletion
+  public static function observeSoftKeyboardHostResult(operation:String, succeeded:Bool):Void {
+    (Keyboard._hostObservation__keyboard = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
+  }
+
+  @:noCompletion
+  public static function resetSoftKeyboardBackendForTest():Void {
+    (Keyboard._custom__keyboard = cast (null : Dynamic));
+    (Keyboard._host__keyboard = cast (null : Dynamic));
+    (Keyboard._hostConflict__keyboard = cast (false : Dynamic));
+    (Keyboard._hostObservation__keyboard = cast (null : Dynamic));
+  }
+
   public static function setSoftKeyboardAccessoryBarVisible(visible:Bool):Void {
     _Runtime.callOptionalValue((cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).setAccessoryBarVisible, cast ([visible] : Array<Dynamic>));
   }
 
   @:noCompletion
   public static function setSoftKeyboardBackend(backend:Null<SoftKeyboardBackend>):Void {
-    (Keyboard._backend__keyboard = cast (backend : Dynamic));
+    (Keyboard._custom__keyboard = cast (backend : Dynamic));
   }
 
   public static function setSoftKeyboardResizeMode(mode:SoftKeyboardResizeMode):Void {

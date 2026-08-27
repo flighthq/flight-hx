@@ -6,6 +6,7 @@ export const createConnectivity = compiled.flighthq.connectivity.Connectivity.cr
 export const detachConnectivity = compiled.flighthq.connectivity.Connectivity.detachConnectivity;
 export const detectConnectivityReachability = compiled.flighthq.connectivity.Connectivity.detectConnectivityReachability;
 export const disposeConnectivity = compiled.flighthq.connectivity.Connectivity.disposeConnectivity;
+export const explainConnectivityBackend = compiled.flighthq.connectivity.Connectivity.explainConnectivityBackend;
 export const getConnectivityStatus = compiled.flighthq.connectivity.Connectivity.getConnectivityStatus;
 export const hasConnectivityStatusChanged = compiled.flighthq.connectivity.Connectivity.hasConnectivityStatusChanged;
 export const isConnectivityMetered = compiled.flighthq.connectivity.Connectivity.isConnectivityMetered;

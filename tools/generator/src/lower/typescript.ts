@@ -262,6 +262,7 @@ const platformGlobalValues = new Set([
   'globalThis',
   'localStorage',
   'location',
+  'matchMedia',
   'navigator',
   'isNaN',
   'parseFloat',
@@ -1334,12 +1335,15 @@ function lowerTypeParameterConstraints(
   return parameters.map((parameter) => (parameter.constraint ? lowerType(parameter.constraint, context) : undefined));
 }
 
-function dynamicThisCapture(node: ts.Node, context: LoweringContext): string | undefined {
-  if (!containsLexicallyOwnedThis(node)) return undefined;
+function freshThisCapture(context: LoweringContext): string {
   let name: string;
   do name = `__thisValue${String(context.temporaryIndex++)}`;
   while (context.sourceFile.text.includes(name));
   return name;
+}
+
+function dynamicThisCapture(node: ts.Node, context: LoweringContext): string | undefined {
+  return containsLexicallyOwnedThis(node) ? freshThisCapture(context) : undefined;
 }
 
 function containsLexicallyOwnedThis(root: ts.Node): boolean {
@@ -3559,6 +3563,11 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
             context.checker.getContextualType(node) ?? context.checker.getTypeAtLocation(node),
           )
         : undefined;
+    const thisCapture = node.properties.some(
+      (property) => ts.isMethodDeclaration(property) && containsLexicallyOwnedThis(property),
+    )
+      ? freshThisCapture(context)
+      : undefined;
     return {
       ...(cppStructInit ? { cppStructInit } : {}),
       kind: 'object',
@@ -3587,9 +3596,9 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         if (ts.isMethodDeclaration(property) && property.body) {
           const previousClassThis = context.classThis;
           const previousDynamicThisCapture = context.dynamicThisCapture;
-          const thisCapture = dynamicThisCapture(property, context);
+          const methodThisCapture = containsLexicallyOwnedThis(property) ? thisCapture : undefined;
           context.classThis = false;
-          context.dynamicThisCapture = thisCapture;
+          context.dynamicThisCapture = methodThisCapture;
           let value: Extract<IrExpression, { kind: 'function' }>;
           try {
             value = {
@@ -3602,7 +3611,6 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
               returns:
                 (property.type ? lowerType(property.type, context) : inferredReturnType(property, context)) ??
                 (hasModifier(property, ts.SyntaxKind.AsyncKeyword) ? promiseOfDynamic() : undefined),
-              ...(thisCapture ? { thisCapture } : {}),
             };
           } finally {
             context.classThis = previousClassThis;
@@ -3623,6 +3631,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         }
         return unsupported(property, context, 'object literal member');
       }),
+      ...(thisCapture ? { thisCapture } : {}),
     };
   }
   if (ts.isPropertyAccessExpression(node)) {

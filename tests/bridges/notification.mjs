@@ -6,6 +6,7 @@ export const closeAllNotifications = compiled.flighthq.notification.Notification
 export const closeNotification = compiled.flighthq.notification.Notification.closeNotification;
 export const createNotificationChannel = compiled.flighthq.notification.Notification.createNotificationChannel;
 export const deleteNotificationChannel = compiled.flighthq.notification.Notification.deleteNotificationChannel;
+export const explainNotificationBackend = compiled.flighthq.notification.Notification.explainNotificationBackend;
 export const getActiveNotifications = compiled.flighthq.notification.Notification.getActiveNotifications;
 export const getLaunchNotification = compiled.flighthq.notification.Notification.getLaunchNotification;
 export const getNotificationCapabilities = compiled.flighthq.notification.Notification.getNotificationCapabilities;

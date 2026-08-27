@@ -3,6 +3,7 @@ package flighthq.dialog;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Dialog.DialogBackend;
 import flighthq.types.Dialog.FileDialogFilter;
 import flighthq.types.Dialog.FileDialogHandle;
@@ -29,11 +30,43 @@ typedef FileSystemWritableFileStream__dialog = { var write:flighthq._internal._U
 typedef WindowWithFileSystemAccess__dialog = { @:optional var showDirectoryPicker:FileSystemAccessDirectoryPickerOptions__dialog->flighthq._internal._Promise<FileSystemDirectoryHandle__dialog>; @:optional var showOpenFilePicker:FileSystemAccessOpenPickerOptions__dialog->flighthq._internal._Promise<Array<FileSystemFileHandle__dialog>>; @:optional var showSaveFilePicker:FileSystemAccessSavePickerOptions__dialog->flighthq._internal._Promise<FileSystemFileHandle__dialog>; };
 
 class Dialog {
-  public static var _backend__dialog:Null<DialogBackend> = _Runtime.explicitNull();
+  public static var _custom__dialog:Null<DialogBackend> = _Runtime.explicitNull();
 
   public static final _fileSystemDirectoryHandleRegistry__dialog:flighthq._internal._WeakMap<FileDialogHandle, FileSystemDirectoryHandle__dialog> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static final _fileSystemHandleRegistry__dialog:flighthq._internal._WeakMap<FileDialogHandle, FileSystemFileHandle__dialog> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+
+  public static var _host__dialog:Null<DialogBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__dialog:Bool = false;
+
+  public static var _hostObservation__dialog:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+
+  public static final _sentinel__dialog:DialogBackend = (cast { confirm: function(options:MessageDialogOptions):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, message: function(options:MessageDialogOptions):flighthq._internal._Promise<MessageDialogResult> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve({ buttonIndex: 0.0, cancelled: false, checkboxChecked: _Runtime.coalesce(options.checkboxChecked, function():Dynamic return cast false) });
+    }));
+  }, openDirectory: function(options:OpenDirectoryDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+    }));
+  }, openFile: function(options:OpenFileDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+    }));
+  }, prompt: function(options:PromptDialogOptions):flighthq._internal._Promise<Null<String>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(null);
+    }));
+  }, saveFile: function(options:SaveFileDialogOptions):flighthq._internal._Promise<Null<FileDialogHandle>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(null);
+    }));
+  } });
 
   public static function buildAcceptAttribute__dialog(filters:flighthq._internal._IndexedAccess<OpenFileDialogOptions, String>):String {
     var parts:Array<String> = cast _Runtime.UNDEFINED;
@@ -128,10 +161,20 @@ class Dialog {
     return cast null;
   }
 
+  public static function explainDialogBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Dialog._custom__dialog, null) : Bool)) {
+      return cast { conflict: Dialog._hostConflict__dialog, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Dialog._host__dialog, null) : Bool)) {
+      return cast { conflict: Dialog._hostConflict__dialog, layer: 'host', operation: ((cast !_Runtime.strictEquals(Dialog._hostObservation__dialog, null) : Bool) ? (cast (cast Dialog._hostObservation__dialog : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Dialog._hostObservation__dialog, null) : Bool) ? (cast (cast Dialog._hostObservation__dialog : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   @:noCompletion
   public static function getDialogBackend():DialogBackend {
-    if ((cast _Runtime.strictEquals(Dialog._backend__dialog, null) : Bool)) { (Dialog._backend__dialog = cast ((cast createWebDialogBackend() : DialogBackend) : Dynamic)); }
-    return cast Dialog._backend__dialog;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Dialog._custom__dialog, function():Dynamic return cast Dialog._host__dialog), function():Dynamic return cast Dialog._sentinel__dialog);
     return cast null;
   }
 
@@ -143,6 +186,20 @@ class Dialog {
   public static function getWebFileSystemHandle(handle:FileDialogHandle):Null<FileSystemFileHandle__dialog> {
     return cast _Runtime.coalesce(((cast Dialog._fileSystemHandleRegistry__dialog : flighthq._internal._WeakMap<FileDialogHandle, FileSystemFileHandle__dialog>).get((cast handle : FileDialogHandle))), function():Dynamic return cast null);
     return cast null;
+  }
+
+  @:noCompletion
+  public static function installDialogHostBackend(backend:DialogBackend):Void {
+    if ((cast !_Runtime.strictEquals(Dialog._host__dialog, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Dialog._host__dialog, backend) : Bool)) { (Dialog._hostConflict__dialog = cast (true : Dynamic)); }
+      return;
+    }
+    (Dialog._host__dialog = cast (backend : Dynamic));
+  }
+
+  @:noCompletion
+  public static function observeDialogHostResult(operation:String, succeeded:Bool):Void {
+    (Dialog._hostObservation__dialog = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function openDirectoryPickerAccessApi__dialog(options:OpenDirectoryDialogOptions):flighthq._internal._Promise<Array<FileDialogHandle>> {
@@ -377,6 +434,14 @@ class Dialog {
     return cast null;
   }
 
+  @:noCompletion
+  public static function resetDialogBackendForTest():Void {
+    (Dialog._custom__dialog = cast (null : Dynamic));
+    (Dialog._host__dialog = cast (null : Dynamic));
+    (Dialog._hostConflict__dialog = cast (false : Dynamic));
+    (Dialog._hostObservation__dialog = cast (null : Dynamic));
+  }
+
   public static function saveWebFile__dialog(options:SaveFileDialogOptions):flighthq._internal._Promise<Null<FileDialogHandle>> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
@@ -479,7 +544,7 @@ class Dialog {
 
   @:noCompletion
   public static function setDialogBackend(backend:Null<DialogBackend>):Void {
-    (Dialog._backend__dialog = cast (backend : Dynamic));
+    (Dialog._custom__dialog = cast (backend : Dynamic));
   }
 
   public static function showConfirmDialog(options:MessageDialogOptions):flighthq._internal._Promise<Bool> {

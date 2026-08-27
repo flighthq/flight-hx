@@ -8,6 +8,7 @@ export const dipToScreenPoint = compiled.flighthq.screen.Screen.dipToScreenPoint
 export const dipToScreenRect = compiled.flighthq.screen.Screen.dipToScreenRect;
 export const disposeScreenSignals = compiled.flighthq.screen.Screen.disposeScreenSignals;
 export const enableScreenSignals = compiled.flighthq.screen.Screen.enableScreenSignals;
+export const explainScreenBackend = compiled.flighthq.screen.Screen.explainScreenBackend;
 export const getPrimaryScreen = compiled.flighthq.screen.Screen.getPrimaryScreen;
 export const getScreenBounds = compiled.flighthq.screen.Screen.getScreenBounds;
 export const getScreenById = compiled.flighthq.screen.Screen.getScreenById;

@@ -347,7 +347,7 @@ class InteractionManager {
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
       InteractionManager.setInteractionSignalCurrentTarget__interactionManager((cast data : Dynamic), ({ final __callArgument147:Dynamic = target; __callArgument147; }), ({ final __callArgument148:Dynamic = current; __callArgument148; }));
       InteractionManager.emitInteractionSignalDirect__interactionManager((cast current : Dynamic), (cast name : Dynamic), (cast data : Dynamic));
-      if ((cast (cast (cast InteractionManager.isInteractionSignalCancelled__interactionManager : { var ___u40_EntityRuntimeKey_u40_9767:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument151:Dynamic = current; __callArgument151; }), (cast name : String)) : Bool) : Bool)) { break; }
+      if ((cast (cast (cast InteractionManager.isInteractionSignalCancelled__interactionManager : { var ___u40_EntityRuntimeKey_u40_9932:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument151:Dynamic = current; __callArgument151; }), (cast name : String)) : Bool) : Bool)) { break; }
       if ((cast _Runtime.strictEquals(current, root) : Bool)) { break; }
       (current = cast ((cast getNodeParent((cast current : Dynamic)) : Null<N>) : Dynamic));
     }
@@ -421,7 +421,7 @@ class InteractionManager {
   public static function hasInteractionSignalSubscriber__interactionManager<N:NodeAny>(manager:flighthq.types.InteractionManager<N>, name:InteractionSignalName):Bool {
     if ((cast ((cast _Runtime.coalesce(((cast manager.signalSubscriberCounts : flighthq._internal._Map<String, Float>).get(name)), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool)) { return cast true; }
     if ((cast manager.trackedSubscribersOnly : Bool)) { return cast false; }
-    return cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_9767:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument158:Dynamic = manager.root; __callArgument158; }), (cast name : String)) : Bool);
+    return cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_9932:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument158:Dynamic = manager.root; __callArgument158; }), (cast name : String)) : Bool);
     return cast null;
   }
 
@@ -433,7 +433,7 @@ class InteractionManager {
     children = _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if ((cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_9767:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument163:Dynamic = (cast child : N); __callArgument163; }), (cast name : String)) : Bool) : Bool)) { return cast true; }
+        if ((cast (cast (cast InteractionManager.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_9932:Null<NodeRuntime<flighthq._internal._Any>>; var data:Null<flighthq._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument163:Dynamic = (cast child : N); __callArgument163; }), (cast name : String)) : Bool) : Bool)) { return cast true; }
       }
     }
     return cast false;

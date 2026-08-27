@@ -452,14 +452,6 @@ class Log {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebLogTransportBackend():LogTransportBackend {
-    return cast { write: function(_line:String):Void {
-
-    } };
-    return cast null;
-  }
-
   public static function disposeFileLogSink(_handle:FileLogSink):Void {
     var backend:Null<LogTransportBackend> = cast _Runtime.UNDEFINED;
     backend = Log._transportBackend__log;

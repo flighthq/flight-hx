@@ -6,6 +6,7 @@ export const canAccessFile = compiled.flighthq.filesystem.Filesystem.canAccessFi
 export const copyFile = compiled.flighthq.filesystem.Filesystem.copyFile;
 export const createFileSymlink = compiled.flighthq.filesystem.Filesystem.createFileSymlink;
 export const directoryExists = compiled.flighthq.filesystem.Filesystem.directoryExists;
+export const explainFileSystemBackend = compiled.flighthq.filesystem.Filesystem.explainFileSystemBackend;
 export const fileExists = compiled.flighthq.filesystem.Filesystem.fileExists;
 export const findFiles = compiled.flighthq.filesystem.Filesystem.findFiles;
 export const getFileBaseName = compiled.flighthq.filesystem.Filesystem.getFileBaseName;

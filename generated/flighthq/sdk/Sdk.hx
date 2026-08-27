@@ -436,6 +436,7 @@ import flighthq.glyphatlas.GlyphAtlasMetrics as Facade_Sdk_flighthq_glyphatlas_G
 import flighthq.glyphatlas.GlyphRasterizerBackend as Facade_Sdk_flighthq_glyphatlas_GlyphRasterizerBackend;
 import flighthq.glyphatlas.GlyphSource as Facade_Sdk_flighthq_glyphatlas_GlyphSource;
 import flighthq.haptics.Haptics as Facade_Sdk_flighthq_haptics_Haptics;
+import flighthq.image.ImageBackend as Facade_Sdk_flighthq_image_ImageBackend;
 import flighthq.image.ImageResource as Facade_Sdk_flighthq_image_ImageResource;
 import flighthq.image.ImageResourceFrom as Facade_Sdk_flighthq_image_ImageResourceFrom;
 import flighthq.image.ImageResourceReference as Facade_Sdk_flighthq_image_ImageResourceReference;
@@ -2285,6 +2286,7 @@ import flighthq.types.Vector3.Vector3Like;
 import flighthq.types.Vector4;
 import flighthq.types.Vector4.Vector4Like;
 import flighthq.types.Velocity.Velocity2D;
+import flighthq.types.Velocity.VelocityExplanation;
 import flighthq.types.Velocity.VelocityField;
 import flighthq.types.Velocity.VelocitySample;
 import flighthq.types.VertexColorMaterial;
@@ -6759,8 +6761,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createPerspectiveMatrix4(fov:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
-    return cast Facade_Sdk_flighthq_geometry_Matrix4.createPerspectiveMatrix4(fov, aspect, zNear, zFar);
+  public static function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
+    return cast Facade_Sdk_flighthq_geometry_Matrix4.createPerspectiveMatrix4(tanHalfFovY, aspect, zNear, zFar);
     return cast null;
   }
 
@@ -8022,6 +8024,11 @@ class Sdk {
 
   public static function cropBitmap(source:Bitmap, rect:RectangleLike):Bitmap {
     return cast Facade_Sdk_flighthq_bitmap_BitmapCrop.cropBitmap(source, rect);
+    return cast null;
+  }
+
+  public static function crossVector2(a:Vector2Like, b:Vector2Like):Float {
+    return cast Facade_Sdk_flighthq_geometry_Vector2.crossVector2(a, b);
     return cast null;
   }
 
@@ -10066,6 +10073,16 @@ class Sdk {
     Facade_Sdk_flighthq_geometry_Rectangle.expandRectangleToPoint(out, sourceRect, sourceVec2);
   }
 
+  public static function explainAccessibilityBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_accessibility_Accessibility.explainAccessibilityBackend();
+    return cast null;
+  }
+
+  public static function explainAppBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_app_App.explainAppBackend();
+    return cast null;
+  }
+
   public static function explainAssetLoad(library:AssetLibrary, id:String):AssetLoadExplanation {
     return cast Facade_Sdk_flighthq_assets_ExplainAssetLoad.explainAssetLoad(library, id);
     return cast null;
@@ -10096,6 +10113,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainClipboardBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_clipboard_Clipboard.explainClipboardBackend();
+    return cast null;
+  }
+
   public static function explainCollisionTest2D(a:CollisionShape2D, b:CollisionShape2D):CollisionTestExplanation2D {
     return cast Facade_Sdk_flighthq_collision_ExplainCollisionTest2D.explainCollisionTest2D(a, b);
     return cast null;
@@ -10106,8 +10128,33 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainConnectivityBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_connectivity_Connectivity.explainConnectivityBackend();
+    return cast null;
+  }
+
+  public static function explainDeviceBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_device_Device.explainDeviceBackend();
+    return cast null;
+  }
+
+  public static function explainDialogBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_dialog_Dialog.explainDialogBackend();
+    return cast null;
+  }
+
   public static function explainDomTextureResolution(state:DomRenderState, texture:Texture):TextureResolutionExplanation {
     return cast Facade_Sdk_flighthq_scene2dDom_ExplainDomTextureResolution.explainDomTextureResolution(state, texture);
+    return cast null;
+  }
+
+  public static function explainFileSystemBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_filesystem_Filesystem.explainFileSystemBackend();
+    return cast null;
+  }
+
+  public static function explainGeolocationBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_geolocation_Geolocation.explainGeolocationBackend();
     return cast null;
   }
 
@@ -10155,6 +10202,16 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainHapticsBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_haptics_Haptics.explainHapticsBackend();
+    return cast null;
+  }
+
+  public static function explainImageBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_image_ImageBackend.explainImageBackend();
+    return cast null;
+  }
+
   public static function explainImageDecodeFailure(bytes:flighthq._internal._UInt8Array, ?mimeType:String):Null<ImageDecodeFailureExplanation> {
     return cast Facade_Sdk_flighthq_imageCodec_ExplainImageDecodeFailure.explainImageDecodeFailure(bytes, mimeType);
     return cast null;
@@ -10175,13 +10232,38 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainIpcBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_ipc_Ipc.explainIpcBackend();
+    return cast null;
+  }
+
   public static function explainLayoutResolution(state:LayoutState, tree:LayoutTree, nodeIndex:Float):Null<LayoutResolutionExplanation> {
     return cast Facade_Sdk_flighthq_layout_ResolveLayoutTree.explainLayoutResolution(state, tree, nodeIndex);
     return cast null;
   }
 
+  public static function explainLifecycleBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_lifecycle_Lifecycle.explainLifecycleBackend();
+    return cast null;
+  }
+
+  public static function explainMediaSessionBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_mediasession_Mediasession.explainMediaSessionBackend();
+    return cast null;
+  }
+
+  public static function explainMenuBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_menu_Menu.explainMenuBackend();
+    return cast null;
+  }
+
   public static function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):MorphShapeGradientEndpointExplanation {
     return cast Facade_Sdk_flighthq_shape_ExplainMorphShapeGradientEndpoints.explainMorphShapeGradientEndpoints(start, end);
+    return cast null;
+  }
+
+  public static function explainNotificationBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_notification_Notification.explainNotificationBackend();
     return cast null;
   }
 
@@ -10192,6 +10274,11 @@ class Sdk {
 
   public static function explainPathMorphCreation(start:Path, end:Path):PathMorphCreationExplanation {
     return cast Facade_Sdk_flighthq_path_ExplainPathMorphCreation.explainPathMorphCreation(start, end);
+    return cast null;
+  }
+
+  public static function explainPermissionBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_permissions_Permission.explainPermissionBackend();
     return cast null;
   }
 
@@ -10230,6 +10317,21 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainPlatformBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_platform_Platform.explainPlatformBackend();
+    return cast null;
+  }
+
+  public static function explainPowerBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_power_Power.explainPowerBackend();
+    return cast null;
+  }
+
+  public static function explainProtocolBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_protocol_Protocol.explainProtocolBackend();
+    return cast null;
+  }
+
   public static function explainRenderEffectPadding(state:RenderState, effects:flighthq._internal._Union2<RenderEffect, Array<RenderEffect>>):RenderEffectPaddingExplanation {
     return cast Facade_Sdk_flighthq_effects_RenderEffectPadding.explainRenderEffectPadding(state, effects);
     return cast null;
@@ -10244,6 +10346,16 @@ class Sdk {
     Facade_Sdk_flighthq_scene3dResources_ExplainScene3DResourceCoverage.explainScene3DResourceCoverage(out, resolver, usage, catalog);
   }
 
+  public static function explainScreenBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_screen_Screen.explainScreenBackend();
+    return cast null;
+  }
+
+  public static function explainSensorsBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_sensors_Sensors.explainSensorsBackend();
+    return cast null;
+  }
+
   public static function explainShapeBounds(source:Shape, ?mode:ShapeBoundsMode):ShapeBoundsExplanation {
     return cast Facade_Sdk_flighthq_shape_ShapeBounds.explainShapeBounds(source, mode);
     return cast null;
@@ -10254,6 +10366,21 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainShareBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_share_Share.explainShareBackend();
+    return cast null;
+  }
+
+  public static function explainShellBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_shell_Shell.explainShellBackend();
+    return cast null;
+  }
+
+  public static function explainShortcutBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_shortcut_Shortcut.explainShortcutBackend();
+    return cast null;
+  }
+
   public static function explainSkeleton2DDeformLength(skin:Null<Skin2D>, vertices:Null<flighthq._internal._Float32Array>, deform:Null<flighthq._internal._Float32Array>):Skeleton2DDeformLengthExplanation {
     return cast Facade_Sdk_flighthq_skeleton2d_ExplainSkeleton2DDeformLength.explainSkeleton2DDeformLength(skin, vertices, deform);
     return cast null;
@@ -10261,6 +10388,11 @@ class Sdk {
 
   public static function explainSocketSendFailure(socket:Socket):Null<SocketSendFailureExplanation> {
     return cast Facade_Sdk_flighthq_socket_ExplainSocketSendFailure.explainSocketSendFailure(socket);
+    return cast null;
+  }
+
+  public static function explainSoftKeyboardBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_keyboard_Keyboard.explainSoftKeyboardBackend();
     return cast null;
   }
 
@@ -10289,6 +10421,16 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainStatusBarBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_statusbar_Statusbar.explainStatusBarBackend();
+    return cast null;
+  }
+
+  public static function explainStorageBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_storage_Storage.explainStorageBackend();
+    return cast null;
+  }
+
   public static function explainStrokePathTessellation(path:Path, style:StrokeStyle, ?tolerance:Float):StrokePathTessellationExplanation {
     return cast Facade_Sdk_flighthq_path_ExplainStrokePathTessellation.explainStrokePathTessellation(path, style, tolerance);
     return cast null;
@@ -10304,8 +10446,28 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainTrayBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_tray_Tray.explainTrayBackend();
+    return cast null;
+  }
+
   public static function explainUnpackedRectangles(rectangles:Array<PackableRectangle>, ?options:BinPackOptions):Array<UnpackedRectangleExplanation> {
     return cast Facade_Sdk_flighthq_binpack_ExplainUnpackedRectangles.explainUnpackedRectangles(rectangles, options);
+    return cast null;
+  }
+
+  public static function explainUpdaterBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_updater_Updater.explainUpdaterBackend();
+    return cast null;
+  }
+
+  public static function explainVelocity(field:VelocityField, source:flighthq._internal._Object):VelocityExplanation {
+    return cast Facade_Sdk_flighthq_velocity_VelocityField.explainVelocity(field, source);
+    return cast null;
+  }
+
+  public static function explainWebcamBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_webcam_Webcam.explainWebcamBackend();
     return cast null;
   }
 
@@ -10316,6 +10478,11 @@ class Sdk {
 
   public static function explainWgpuTextureResolution(state:WgpuRenderState, texture:TextureLike):TextureResolutionExplanation {
     return cast Facade_Sdk_flighthq_renderWgpu_ExplainWgpuTextureResolution.explainWgpuTextureResolution(state, texture);
+    return cast null;
+  }
+
+  public static function explainWindowBackend():BackendExplanation {
+    return cast Facade_Sdk_flighthq_application_Window.explainWindowBackend();
     return cast null;
   }
 
@@ -12550,6 +12717,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function getQuaternionAxisAngle(outAxis:Vector3Like, source:QuaternionLike):Float {
+    return cast Facade_Sdk_flighthq_geometry_Quaternion.getQuaternionAxisAngle(outAxis, source);
+    return cast null;
+  }
+
   public static function getQuaternionDot(a:QuaternionLike, b:QuaternionLike):Float {
     return cast Facade_Sdk_flighthq_geometry_Quaternion.getQuaternionDot(a, b);
     return cast null;
@@ -13550,6 +13722,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function getVector2Angle(source:Vector2Like):Float {
+    return cast Facade_Sdk_flighthq_geometry_Vector2.getVector2Angle(source);
+    return cast null;
+  }
+
   public static function getVector2AngleBetween(a:Vector2Like, b:Vector2Like):Float {
     return cast Facade_Sdk_flighthq_geometry_Vector2.getVector2AngleBetween(a, b);
     return cast null;
@@ -14479,6 +14656,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function isAabbIntersectingSphere(aabb:AabbLike, sphere:BoundingSphereLike):Bool {
+    return cast Facade_Sdk_flighthq_geometry_Aabb.isAabbIntersectingSphere(aabb, sphere);
+    return cast null;
+  }
+
   public static function isAbsoluteFilePath(path:String):Bool {
     return cast Facade_Sdk_flighthq_filesystem_Filesystem.isAbsoluteFilePath(path);
     return cast null;
@@ -14574,6 +14756,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function isCapsuleIntersectingAabb(capsule:CapsuleLike, aabb:AabbLike):Bool {
+    return cast Facade_Sdk_flighthq_geometry_Capsule.isCapsuleIntersectingAabb(capsule, aabb);
+    return cast null;
+  }
+
   public static function isCapsuleIntersectingCapsule(a:CapsuleLike, b:CapsuleLike):Bool {
     return cast Facade_Sdk_flighthq_geometry_Capsule.isCapsuleIntersectingCapsule(a, b);
     return cast null;
@@ -14666,6 +14853,11 @@ class Sdk {
 
   public static function isFrustumIntersectingAabb(frustum:FrustumLike, aabb:AabbLike):Bool {
     return cast Facade_Sdk_flighthq_geometry_Frustum.isFrustumIntersectingAabb(frustum, aabb);
+    return cast null;
+  }
+
+  public static function isFrustumIntersectingObb(frustum:FrustumLike, obb:ObbLike):Bool {
+    return cast Facade_Sdk_flighthq_geometry_Frustum.isFrustumIntersectingObb(frustum, obb);
     return cast null;
   }
 
@@ -14791,6 +14983,11 @@ class Sdk {
 
   public static function isObbIntersectingObb(a:ObbLike, b:ObbLike):Bool {
     return cast Facade_Sdk_flighthq_geometry_Obb.isObbIntersectingObb(a, b);
+    return cast null;
+  }
+
+  public static function isObbIntersectingSphere(obb:ObbLike, sphere:BoundingSphereLike):Bool {
+    return cast Facade_Sdk_flighthq_geometry_Obb.isObbIntersectingSphere(obb, sphere);
     return cast null;
   }
 
@@ -19239,6 +19436,10 @@ class Sdk {
     Facade_Sdk_flighthq_cameraControls_OrbitCameraController.rotateOrbitCameraController(controller, deltaAzimuth, deltaPolar);
   }
 
+  public static function rotateVector2(out:Vector2Like, source:Vector2Like, angle:Float):Void {
+    Facade_Sdk_flighthq_geometry_Vector2.rotateVector2(out, source, angle);
+  }
+
   public static function rotateVector3ByQuaternion(out:Vector3Like, vector:Vector3Like, q:QuaternionLike):Void {
     Facade_Sdk_flighthq_geometry_Quaternion.rotateVector3ByQuaternion(out, vector, q);
   }
@@ -20236,8 +20437,8 @@ class Sdk {
     Facade_Sdk_flighthq_particleemitter_ParticleEmitter3D.setParticleEmitter3DParticleVelocity(target, index, vx, vy, vz);
   }
 
-  public static function setPerspectiveMatrix4(out:Matrix4Like, fov:Float, aspect:Float, zNear:Float, zFar:Float):Void {
-    Facade_Sdk_flighthq_geometry_Matrix4.setPerspectiveMatrix4(out, fov, aspect, zNear, zFar);
+  public static function setPerspectiveMatrix4(out:Matrix4Like, tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Void {
+    Facade_Sdk_flighthq_geometry_Matrix4.setPerspectiveMatrix4(out, tanHalfFovY, aspect, zNear, zFar);
   }
 
   public static function setPhysics2DBodyBullet(world:Physics2DWorld, body:RigidBody2D, bullet:Bool):Bool {
@@ -21775,11 +21976,15 @@ class Sdk {
     Facade_Sdk_flighthq_path_TransformPath.transformPath(source, matrix, out);
   }
 
+  public static function transformRay3DByMatrix4(out:Ray3DLike, ray:Ray3DLike, m:Matrix4Like):Void {
+    Facade_Sdk_flighthq_geometry_Ray3d.transformRay3DByMatrix4(out, ray, m);
+  }
+
   public static function transformTextureUv(out:Vector2Like, texture:TextureLike, u:Float, v:Float):Void {
     Facade_Sdk_flighthq_texture_Texture.transformTextureUv(out, texture, u, v);
   }
 
-  public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:{ var m:flighthq._internal._Float32Array; }):Void {
+  public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:Matrix3Like):Void {
     Facade_Sdk_flighthq_geometry_Vector3.transformVector3ByMatrix3(out, source, matrix);
   }
 

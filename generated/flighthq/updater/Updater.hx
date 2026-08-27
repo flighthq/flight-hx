@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Signal;
 import flighthq.types.Updater.AppUpdater;
 import flighthq.types.Updater.UpdateInfo;
@@ -16,7 +17,93 @@ import flighthq.types.Updater.UpdaterSignatureConfig;
 import flighthq.types.Updater.UpdaterState;
 
 class Updater {
-  public static var _backend__updater:Null<UpdaterBackend> = _Runtime.explicitNull();
+  public static var _custom__updater:Null<UpdaterBackend> = _Runtime.explicitNull();
+
+  public static var _host__updater:Null<UpdaterBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__updater:Bool = false;
+
+  public static var _hostObservation__updater:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+
+  public static final _sentinel__updater:UpdaterBackend = (cast { cancelDownload: function():Void {
+
+  }, checkForUpdates: function():Void {
+
+  }, downloadUpdate: function():Void {
+
+  }, getChannel: function():String {
+    return cast Updater._sentinelChannel__updater;
+    return cast _Runtime.UNDEFINED;
+  }, getConfig: function():UpdaterConfig {
+    return cast Updater._sentinelConfig__updater;
+    return cast _Runtime.UNDEFINED;
+  }, quitAndInstall: function():Void {
+
+  }, rollback: function():Void {
+
+  }, setChannel: function(channel:String):Void {
+    (Updater._sentinelChannel__updater = cast (channel : Dynamic));
+  }, setConfig: function(config:UpdaterConfig):Void {
+    (Updater._sentinelConfig__updater = cast (_Runtime.mergeObjects([config]) : Dynamic));
+  }, setFeedUrl: function(url:String):Void {
+
+  }, setSignatureConfig: function(config:Null<UpdaterSignatureConfig>):Void {
+
+  }, subscribeChecking: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeDownloadProgress: function(listener:UpdateProgress->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeError: function(listener:UpdaterError->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeUpdateAvailable: function(listener:UpdateInfo->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeUpdateCancelled: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeUpdateDownloaded: function(listener:UpdateInfo->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeUpdateNotAvailable: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeUpdateRolledBack: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeUpdateStaging: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeUpdateVerified: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  } });
+
+  public static var _sentinelChannel__updater:String = 'stable';
+
+  public static var _sentinelConfig__updater:UpdaterConfig = (cast createUpdaterConfig() : UpdaterConfig);
 
   public static function _setState__updater(updater:AppUpdater, update:flighthq._internal._Union2<UpdaterState, UpdaterState->UpdaterState>):Void {
     var prev:UpdaterState = cast _Runtime.UNDEFINED;
@@ -107,90 +194,6 @@ class Updater {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebUpdaterBackend():UpdaterBackend {
-    var _config:UpdaterConfig = cast _Runtime.UNDEFINED;
-    var _channel:String = cast _Runtime.UNDEFINED;
-    _config = (cast createUpdaterConfig() : UpdaterConfig);
-    _channel = 'stable';
-    return cast { cancelDownload: function():Void {
-
-    }, checkForUpdates: function():Void {
-
-    }, downloadUpdate: function():Void {
-
-    }, getChannel: function():String {
-      return cast _channel;
-      return cast _Runtime.UNDEFINED;
-    }, getConfig: function():UpdaterConfig {
-      return cast _config;
-      return cast _Runtime.UNDEFINED;
-    }, quitAndInstall: function():Void {
-
-    }, rollback: function():Void {
-
-    }, setChannel: function(channel:String):Void {
-      (_channel = cast (channel : Dynamic));
-    }, setConfig: function(config:UpdaterConfig):Void {
-      (_config = cast (_Runtime.mergeObjects([config]) : Dynamic));
-    }, setFeedUrl: function():Void {
-
-    }, setSignatureConfig: function():Void {
-
-    }, subscribeChecking: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeDownloadProgress: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeError: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeUpdateAvailable: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeUpdateCancelled: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeUpdateDownloaded: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeUpdateNotAvailable: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeUpdateRolledBack: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeUpdateStaging: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeUpdateVerified: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    } };
-    return cast null;
-  }
-
   public static function detachAppUpdater(updater:AppUpdater):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast Updater._subscriptions__updater : flighthq._internal._WeakMap<AppUpdater, Void->Void>).get(updater));
@@ -208,6 +211,17 @@ class Updater {
     (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).downloadUpdate();
   }
 
+  public static function explainUpdaterBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Updater._custom__updater, null) : Bool)) {
+      return cast { conflict: Updater._hostConflict__updater, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Updater._host__updater, null) : Bool)) {
+      return cast { conflict: Updater._hostConflict__updater, layer: 'host', operation: ((cast !_Runtime.strictEquals(Updater._hostObservation__updater, null) : Bool) ? (cast (cast Updater._hostObservation__updater : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Updater._hostObservation__updater, null) : Bool) ? (cast (cast Updater._hostObservation__updater : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   public static function getAppUpdaterState(updater:AppUpdater):UpdaterState {
     return cast _Runtime.coalesce(((cast Updater._states__updater : flighthq._internal._WeakMap<AppUpdater, UpdaterState>).get(updater)), function():Dynamic return cast (cast createUpdaterState() : UpdaterState));
     return cast null;
@@ -215,8 +229,7 @@ class Updater {
 
   @:noCompletion
   public static function getUpdaterBackend():UpdaterBackend {
-    if ((cast _Runtime.strictEquals(Updater._backend__updater, null) : Bool)) { (Updater._backend__updater = cast ((cast createWebUpdaterBackend() : UpdaterBackend) : Dynamic)); }
-    return cast Updater._backend__updater;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Updater._custom__updater, function():Dynamic return cast Updater._host__updater), function():Dynamic return cast Updater._sentinel__updater);
     return cast null;
   }
 
@@ -230,13 +243,37 @@ class Updater {
     return cast null;
   }
 
+  @:noCompletion
+  public static function installUpdaterHostBackend(backend:UpdaterBackend):Void {
+    if ((cast !_Runtime.strictEquals(Updater._host__updater, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Updater._host__updater, backend) : Bool)) { (Updater._hostConflict__updater = cast (true : Dynamic)); }
+      return;
+    }
+    (Updater._host__updater = cast (backend : Dynamic));
+  }
+
   public static function isAppUpdateEligible(info:UpdateInfo, rolloutSeed:Float):Bool {
     return cast ((cast (rolloutSeed * 100.0) : Float) < (cast info.stagedRolloutPercent : Float));
     return cast null;
   }
 
+  @:noCompletion
+  public static function observeUpdaterHostResult(operation:String, succeeded:Bool):Void {
+    (Updater._hostObservation__updater = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
+  }
+
   public static function quitAndInstallUpdate():Void {
     (cast (cast getUpdaterBackend() : UpdaterBackend) : UpdaterBackend).quitAndInstall();
+  }
+
+  @:noCompletion
+  public static function resetUpdaterBackendForTest():Void {
+    (Updater._custom__updater = cast (null : Dynamic));
+    (Updater._host__updater = cast (null : Dynamic));
+    (Updater._hostConflict__updater = cast (false : Dynamic));
+    (Updater._hostObservation__updater = cast (null : Dynamic));
+    (Updater._sentinelChannel__updater = cast ('stable' : Dynamic));
+    (Updater._sentinelConfig__updater = cast ((cast createUpdaterConfig() : UpdaterConfig) : Dynamic));
   }
 
   public static function rollbackAppUpdate():Void {
@@ -245,7 +282,7 @@ class Updater {
 
   @:noCompletion
   public static function setUpdaterBackend(backend:Null<UpdaterBackend>):Void {
-    (Updater._backend__updater = cast (backend : Dynamic));
+    (Updater._custom__updater = cast (backend : Dynamic));
   }
 
   public static function setUpdaterChannel(channel:String):Void {

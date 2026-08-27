@@ -224,7 +224,8 @@ class Islands {
         var body:RigidBody3D = flighthq._internal._StaticIndex.readArray(bodies, bodyIndex);
         if ((cast _Runtime.strictEquals((cast body : RigidBody3D).type, 'static') : Bool)) { (bodyIndex = cast ((bodyIndex + 1.0) : Dynamic)); continue; }
         var islandTimer:Float = _Runtime.coalesce(((cast islandTimers : flighthq._internal._Map<Float, Float>).get((cast Islands.islandRootOf__islands(({ final __callArgument57:Dynamic = parents; __callArgument57; }), (cast (cast body : RigidBody3D).index : Float)) : Float))), function():Dynamic return cast (cast body : RigidBody3D).sleepTimer);
-        var shouldSleep:Bool = ((cast (cast body : RigidBody3D).sleepEnabled : Bool) && (cast ((cast islandTimer : Float) >= (cast (cast config : Physics3DSolverConfig).timeToSleep : Float)) : Bool));
+        var deadlineTolerance:Float = _Runtime.multiplyNumbers(_Runtime.NUMBER_EPSILON, HxMath.max(HxMath.max(1.0, islandTimer), (cast config : Physics3DSolverConfig).timeToSleep));
+        var shouldSleep:Bool = ((cast (cast body : RigidBody3D).sleepEnabled : Bool) && (cast ((cast (islandTimer + deadlineTolerance) : Float) >= (cast (cast config : Physics3DSolverConfig).timeToSleep : Float)) : Bool));
         if ((cast ((cast !(cast shouldSleep : Bool) : Bool) && (cast (cast body : RigidBody3D).sleeping : Bool)) : Bool)) {
           ((cast body : RigidBody3D).sleepTimer = 0.0);
         }

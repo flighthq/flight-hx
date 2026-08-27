@@ -6,20 +6,23 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createTrayIcon = api.createTrayIcon;
-export const createWebTrayBackend = api.createWebTrayBackend;
 export const destroyTrayIcon = api.destroyTrayIcon;
 export const displayTrayBalloon = api.displayTrayBalloon;
+export const explainTrayBackend = api.explainTrayBackend;
 export const getTrayBackend = api.getTrayBackend;
 export const getTrayCapabilities = api.getTrayCapabilities;
 export const getTrayIconBounds = api.getTrayIconBounds;
 export const getTrayIcons = api.getTrayIcons;
 export const getTrayIconTitle = api.getTrayIconTitle;
 export const getTrayIconTooltip = api.getTrayIconTooltip;
+export const installTrayHostBackend = api.installTrayHostBackend;
 export const isTrayDestroyed = api.isTrayDestroyed;
 export const isTrayIconAnimating = api.isTrayIconAnimating;
+export const observeTrayHostResult = api.observeTrayHostResult;
 export const onTrayEvent = api.onTrayEvent;
 export const popupTrayContextMenu = api.popupTrayContextMenu;
 export const removeTrayBalloon = api.removeTrayBalloon;
+export const resetTrayBackendForTest = api.resetTrayBackendForTest;
 export const setTrayAnimationGuard = api.setTrayAnimationGuard;
 export const setTrayBackend = api.setTrayBackend;
 export const setTrayIcon = api.setTrayIcon;

@@ -3,6 +3,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const disablePermissionGuards = compiled.flighthq.permissions.Permissions.disablePermissionGuards;
 export const enablePermissionGuards = compiled.flighthq.permissions.Permissions.enablePermissionGuards;
+export const explainPermissionBackend = compiled.flighthq.permissions.Permissions.explainPermissionBackend;
 export const explainPermissionState = compiled.flighthq.permissions.Permissions.explainPermissionState;
 export const getPermissionState = compiled.flighthq.permissions.Permissions.getPermissionState;
 export const getPermissionStates = compiled.flighthq.permissions.Permissions.getPermissionStates;

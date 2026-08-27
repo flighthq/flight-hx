@@ -50,6 +50,26 @@ class Quaternion {
     return cast null;
   }
 
+  public static function getQuaternionAxisAngle(outAxis:Vector3Like, source:QuaternionLike):Float {
+    var w:Float = cast _Runtime.UNDEFINED;
+    var sinHalfSq:Float = cast _Runtime.UNDEFINED;
+    var invSinHalf:Float = cast _Runtime.UNDEFINED;
+    w = source.w;
+    sinHalfSq = (1.0 - (w * w));
+    if ((cast ((cast sinHalfSq : Float) <= (cast 0.0 : Float)) : Bool)) {
+      (outAxis.x = cast (1.0 : Float));
+      (outAxis.y = cast (0.0 : Float));
+      (outAxis.z = cast (0.0 : Float));
+      return cast 0.0;
+    }
+    invSinHalf = _Runtime.divideNumbers(1.0, HxMath.sqrt(sinHalfSq));
+    (outAxis.x = cast ((source.x * invSinHalf) : Float));
+    (outAxis.y = cast ((source.y * invSinHalf) : Float));
+    (outAxis.z = cast ((source.z * invSinHalf) : Float));
+    return cast _Runtime.multiplyNumbers(2.0, HxMath.acos(HxMath.min(1.0, HxMath.max(-1.0, w))));
+    return cast null;
+  }
+
   public static function getQuaternionDot(a:QuaternionLike, b:QuaternionLike):Float {
     return cast ((((a.x * b.x) + (a.y * b.y)) + (a.z * b.z)) + (a.w * b.w));
     return cast null;

@@ -8,6 +8,7 @@ __syncDependencies();
 export const createCapsule = api.createCapsule;
 export const getClosestPointOnCapsule = api.getClosestPointOnCapsule;
 export const intersectRay3DCapsule = api.intersectRay3DCapsule;
+export const isCapsuleIntersectingAabb = api.isCapsuleIntersectingAabb;
 export const isCapsuleIntersectingCapsule = api.isCapsuleIntersectingCapsule;
 export const isCapsuleIntersectingSphere = api.isCapsuleIntersectingSphere;
 export const setCapsule = api.setCapsule;

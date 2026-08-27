@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
 import flighthq.types.Entity;
+import flighthq.types.Matrix3.Matrix3Like;
 import flighthq.types.Vector2.Vector2Like;
 import flighthq.types.Vector3;
 import flighthq.types.Vector3.Vector3Like;
@@ -398,12 +399,12 @@ class Vector3 {
     (out.z = cast ((sz - oz) : Float));
   }
 
-  public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:{ var m:flighthq._internal._Float32Array; }):Void {
+  public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:Matrix3Like):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     var x:Float = cast _Runtime.UNDEFINED;
     var y:Float = cast _Runtime.UNDEFINED;
     var z:Float = cast _Runtime.UNDEFINED;
-    m = (cast matrix : { var m:flighthq._internal._Float32Array; }).m;
+    m = matrix.m;
     x = source.x;
     y = source.y;
     z = source.z;

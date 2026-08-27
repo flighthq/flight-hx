@@ -10,6 +10,7 @@ export const enableGlobalShortcutSignals = compiled.flighthq.shortcut.Shortcut.e
 export const enableShortcutGuards = compiled.flighthq.shortcut.Shortcut.enableShortcutGuards;
 export const equalsAccelerator = compiled.flighthq.shortcut.Shortcut.equalsAccelerator;
 export const explainGlobalShortcutRegistration = compiled.flighthq.shortcut.Shortcut.explainGlobalShortcutRegistration;
+export const explainShortcutBackend = compiled.flighthq.shortcut.Shortcut.explainShortcutBackend;
 export const findAcceleratorConflict = compiled.flighthq.shortcut.Shortcut.findAcceleratorConflict;
 export const formatAcceleratorForDisplay = compiled.flighthq.shortcut.Shortcut.formatAcceleratorForDisplay;
 export const getAcceleratorKey = compiled.flighthq.shortcut.Shortcut.getAcceleratorKey;

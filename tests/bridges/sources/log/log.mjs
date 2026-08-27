@@ -29,7 +29,6 @@ export const createMemoryLogSink = api.createMemoryLogSink;
 export const createRateLimitedLogSink = api.createRateLimitedLogSink;
 export const createSampledLogSink = api.createSampledLogSink;
 export const createTextLogFormatter = api.createTextLogFormatter;
-export const createWebLogTransportBackend = api.createWebLogTransportBackend;
 export const disposeFileLogSink = api.disposeFileLogSink;
 export const disposeLogSink = api.disposeLogSink;
 export const enableLogSignals = api.enableLogSignals;

@@ -11,6 +11,7 @@ import flighthq.types.ApplicationWindow;
 import flighthq.types.ApplicationWindow.WindowBackend;
 import flighthq.types.ApplicationWindow.WindowBounds;
 import flighthq.types.ApplicationWindow.WindowOptions;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Matrix;
 import flighthq.types.RenderState;
 import flighthq.types.Signal;
@@ -236,185 +237,79 @@ class Window {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebWindowBackend():WindowBackend {
-    return cast { open: function():Bool {
-      return cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined');
-      return cast _Runtime.UNDEFINED;
-    }, close: function():Void {
-      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'close')), 'function') : Bool)) : Bool)) {
-        try {
-          flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'close', cast ([] : Array<Dynamic>));
-        } catch (__error:Dynamic) {
-        }
-      }
-    }, setTitle: function(_win:ApplicationWindow, title:String):Void {
-      if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { flighthq._internal.backend.DomDocumentBackend.setField(flighthq._internal.backend.DomDocumentBackend.value(), 'title', title); }
-    }, setPosition: function(_win:ApplicationWindow, x:Float, y:Float):Void {
-      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo')), 'function') : Bool)) : Bool)) {
-        try {
-          flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo', cast ([x, y] : Array<Dynamic>));
-        } catch (__error:Dynamic) {
-        }
-      }
-    }, setSize: function(_win:ApplicationWindow, width:Float, height:Float):Void {
-      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'resizeTo')), 'function') : Bool)) : Bool)) {
-        try {
-          flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'resizeTo', cast ([width, height] : Array<Dynamic>));
-        } catch (__error:Dynamic) {
-        }
-      }
-    }, getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
-      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
-        (out.x = cast (win.x : Float));
-        (out.y = cast (win.y : Float));
-        (out.width = cast (win.width : Float));
-        (out.height = cast (win.height : Float));
-        return cast out;
-      }
-      (out.x = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenX'), function():Dynamic return cast win.x) : Float));
-      (out.y = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'screenY'), function():Dynamic return cast win.y) : Float));
-      (out.width = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerWidth'), function():Dynamic return cast win.width) : Float));
-      (out.height = cast (_Runtime.coalesce(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'innerHeight'), function():Dynamic return cast win.height) : Float));
-      return cast out;
-      return cast _Runtime.UNDEFINED;
-    }, minimize: function():Void {
-
-    }, maximize: function():Void {
-
-    }, restore: function():Void {
-
-    }, focus: function():Void {
-      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'focus')), 'function') : Bool)) : Bool)) { flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'focus', cast ([] : Array<Dynamic>)); }
-    }, show: function():Void {
-
-    }, hide: function():Void {
-
-    }, center: function(win:ApplicationWindow):Void {
-      if ((cast ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo')), 'function') : Bool)) : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('screen'), 'undefined') : Bool)) : Bool)) { return; }
-      try {
-        flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'moveTo', cast ([HxMath.round((_Runtime.subtractNumbers((cast flighthq._internal._HostValueLut.get('screen') : flighthq._internal.dom.Screen).availWidth, win.width) / 2.0)), HxMath.round((_Runtime.subtractNumbers((cast flighthq._internal._HostValueLut.get('screen') : flighthq._internal.dom.Screen).availHeight, win.height) / 2.0))] : Array<Dynamic>));
-      } catch (__error:Dynamic) {
-      }
-    }, setResizable: function():Void {
-
-    }, setAlwaysOnTop: function():Void {
-
-    }, setMinimumSize: function():Void {
-
-    }, setMaximumSize: function():Void {
-
-    }, setFullscreen: function(_win:ApplicationWindow, fullscreen:Bool):Void {
-      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return; }
-      try {
-        if ((cast fullscreen : Bool)) { _Runtime.voidValue(({ final __hostTypeCall36 = flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'documentElement'); (cast __hostTypeCall36 : flighthq._internal.dom.HTMLElement).requestFullscreen == null ? _Runtime.UNDEFINED : (cast __hostTypeCall36 : flighthq._internal.dom.HTMLElement).requestFullscreen(); })); } else { _Runtime.voidValue(flighthq._internal.backend.DomDocumentBackend.callOptional(flighthq._internal.backend.DomDocumentBackend.value(), 'exitFullscreen', cast ([] : Array<Dynamic>))); }
-      } catch (__error:Dynamic) {
-      }
-    }, setIcon: function(_win:ApplicationWindow, icon:String):Void {
-      var link:Null<flighthq._internal.dom.HTMLLinkElement> = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return; }
-      link = flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'querySelector', cast (['link[rel="icon"]'] : Array<Dynamic>));
-      if ((cast _Runtime.strictEquals(link, null) : Bool)) {
-        (link = cast (flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['link'] : Array<Dynamic>)) : Dynamic));
-        ((cast link : flighthq._internal.dom.HTMLLinkElement).rel = 'icon');
-        (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'head') : flighthq._internal.dom.HTMLHeadElement).appendChild(link);
-      }
-      ((cast link : flighthq._internal.dom.HTMLLinkElement).href = icon);
-    }, setOpacity: function():Void {
-
-    }, setSkipTaskbar: function():Void {
-
-    }, setMenuBarVisible: function():Void {
-
-    }, setParent: function():Void {
-
-    }, setProgress: function():Void {
-
-    }, requestAttention: function():Void {
-
-    }, setContentProtection: function():Void {
-
-    }, flashWindowFrame: function():Void {
-
-    }, setHasShadow: function():Void {
-
-    } };
-    return cast null;
-  }
-
   public static function detachWindowClose(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument37:Dynamic = win; __callArgument37; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument36:Dynamic = win; __callArgument36; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kClose__window)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Window.kClose__window));
   }
 
   public static function detachWindowDropFile(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument39:Dynamic = win; __callArgument39; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument38:Dynamic = win; __callArgument38; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kDropFile__window)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Window.kDropFile__window));
   }
 
   public static function detachWindowFocus(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument41:Dynamic = win; __callArgument41; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument40:Dynamic = win; __callArgument40; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kFocus__window)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Window.kFocus__window));
   }
 
   public static function detachWindowFullscreen(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument43:Dynamic = win; __callArgument43; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument42:Dynamic = win; __callArgument42; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kFullscreen__window)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Window.kFullscreen__window));
   }
 
   public static function detachWindowMove(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument45:Dynamic = win; __callArgument45; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument44:Dynamic = win; __callArgument44; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kMove__window)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Window.kMove__window));
   }
 
   public static function detachWindowOrientation(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument47:Dynamic = win; __callArgument47; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument46:Dynamic = win; __callArgument46; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kOrientation__window)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Window.kOrientation__window));
   }
 
   public static function detachWindowRenderContext(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument49:Dynamic = win; __callArgument49; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument48:Dynamic = win; __callArgument48; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kRenderContext__window)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Window.kRenderContext__window));
   }
 
   public static function detachWindowRenderState(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument51:Dynamic = win; __callArgument51; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument50:Dynamic = win; __callArgument50; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kRenderState__window)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Window.kRenderState__window));
   }
 
   public static function detachWindowResize(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument53:Dynamic = win; __callArgument53; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument52:Dynamic = win; __callArgument52; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kResize__window)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Window.kResize__window));
   }
 
   public static function detachWindowVisibility(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument55:Dynamic = win; __callArgument55; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument54:Dynamic = win; __callArgument54; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     _Runtime.callOptionalValue(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).get(Window.kVisibility__window)), cast ([] : Array<Dynamic>));
     ((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).delete_(Window.kVisibility__window));
   }
 
   public static function disposeApplicationWindow(win:ApplicationWindow):Void {
     var observers:flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;
-    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument57:Dynamic = win; __callArgument57; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
+    observers = (cast Window.getApplicationWindowObservers__window(({ final __callArgument56:Dynamic = win; __callArgument56; })) : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>);
     for (cleanup in _Runtime.iterable(((cast observers : flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>).values()))) {
       cleanup();
     }
@@ -435,24 +330,34 @@ class Window {
     return cast null;
   }
 
+  public static function explainWindowBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Window._custom__window, null) : Bool)) {
+      return cast { conflict: Window._hostConflict__window, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Window._host__window, null) : Bool)) {
+      return cast { conflict: Window._hostConflict__window, layer: 'host', operation: ((cast !_Runtime.strictEquals(Window._hostObservation__window, null) : Bool) ? (cast (cast Window._hostObservation__window : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Window._hostObservation__window, null) : Bool) ? (cast (cast Window._hostObservation__window : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   public static function flashWindowFrame(win:ApplicationWindow):Void {
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).flashWindowFrame(({ final __callArgument61:Dynamic = win; __callArgument61; }));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).flashWindowFrame(({ final __callArgument60:Dynamic = win; __callArgument60; }));
   }
 
   public static function focusWindow(win:ApplicationWindow):Void {
     (win.focused = cast (true : Bool));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).focus(({ final __callArgument62:Dynamic = win; __callArgument62; }));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).focus(({ final __callArgument61:Dynamic = win; __callArgument61; }));
   }
 
   @:noCompletion
   public static function getWindowBackend():WindowBackend {
-    if ((cast _Runtime.strictEquals(Window._windowBackend__window, null) : Bool)) { (Window._windowBackend__window = cast ((cast createWebWindowBackend() : WindowBackend) : Dynamic)); }
-    return cast Window._windowBackend__window;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Window._custom__window, function():Dynamic return cast Window._host__window), function():Dynamic return cast Window._sentinel__window);
     return cast null;
   }
 
   public static function getWindowBounds(win:ApplicationWindow, out:WindowBounds):WindowBounds {
-    return cast (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).getBounds((cast win : ApplicationWindow), ({ final __callArgument63:Dynamic = out; __callArgument63; }));
+    return cast (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).getBounds((cast win : ApplicationWindow), ({ final __callArgument62:Dynamic = out; __callArgument62; }));
     return cast null;
   }
 
@@ -464,7 +369,16 @@ class Window {
   public static function hideWindow(win:ApplicationWindow):Void {
     if ((cast !(cast win.visible : Bool) : Bool)) { return; }
     (win.visible = cast (false : Bool));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).hide(({ final __callArgument64:Dynamic = win; __callArgument64; }));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).hide(({ final __callArgument63:Dynamic = win; __callArgument63; }));
+  }
+
+  @:noCompletion
+  public static function installWindowHostBackend(backend:WindowBackend):Void {
+    if ((cast !_Runtime.strictEquals(Window._host__window, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Window._host__window, backend) : Bool)) { (Window._hostConflict__window = cast (true : Dynamic)); }
+      return;
+    }
+    (Window._host__window = cast (backend : Dynamic));
   }
 
   public static function lockApplicationPointer(element:flighthq._internal.dom.HTMLElement):flighthq._internal._Promise<flighthq._internal._Nothing> {
@@ -478,15 +392,20 @@ class Window {
   public static function maximizeWindow(win:ApplicationWindow):Void {
     if ((cast win.maximized : Bool)) { return; }
     (win.maximized = cast (true : Bool));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).maximize(({ final __callArgument65:Dynamic = win; __callArgument65; }));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).maximize(({ final __callArgument64:Dynamic = win; __callArgument64; }));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMaximize]]), 1);
   }
 
   public static function minimizeWindow(win:ApplicationWindow):Void {
     if ((cast win.minimized : Bool)) { return; }
     (win.minimized = cast (true : Bool));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).minimize(({ final __callArgument66:Dynamic = win; __callArgument66; }));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).minimize(({ final __callArgument65:Dynamic = win; __callArgument65; }));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMinimize]]), 1);
+  }
+
+  @:noCompletion
+  public static function observeWindowHostResult(operation:String, succeeded:Bool):Void {
+    (Window._hostObservation__window = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function openWindow(win:ApplicationWindow, ?options:WindowOptions):Bool {
@@ -507,8 +426,8 @@ class Window {
     if ((cast !_Runtime.strictEquals(options.minHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.minHeight = cast (options.minHeight : Float)); }
     if ((cast !_Runtime.strictEquals(options.maxWidth, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.maxWidth = cast (options.maxWidth : Float)); }
     if ((cast !_Runtime.strictEquals(options.maxHeight, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (win.maxHeight = cast (options.maxHeight : Float)); }
-    result = (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).open(({ final __callArgument67:Dynamic = win; __callArgument67; }), ({ final __callArgument68:Dynamic = options; __callArgument68; }));
-    if ((cast _Runtime.strictEquals(options.center, true) : Bool)) { centerWindow(({ final __callArgument69:Dynamic = win; __callArgument69; })); }
+    result = (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).open(({ final __callArgument66:Dynamic = win; __callArgument66; }), ({ final __callArgument67:Dynamic = options; __callArgument67; }));
+    if ((cast _Runtime.strictEquals(options.center, true) : Bool)) { centerWindow(({ final __callArgument68:Dynamic = win; __callArgument68; })); }
     return cast result;
     return cast null;
   }
@@ -529,120 +448,198 @@ class Window {
   }
 
   public static function requestWindowAttention(win:ApplicationWindow, attention:Bool):Void {
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).requestAttention(({ final __callArgument71:Dynamic = win; __callArgument71; }), (cast attention : Bool));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).requestAttention(({ final __callArgument70:Dynamic = win; __callArgument70; }), (cast attention : Bool));
   }
 
   public static function requestWindowClose(win:ApplicationWindow):Bool {
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onCloseRequest]]), 1);
-    return cast !_Runtime.strictEquals(({ final __typedStruct72 = (cast win.onCloseRequest : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct72 == null ? _Runtime.UNDEFINED : (cast __typedStruct72 : { var cancelled:Bool; }).cancelled; }), true);
+    return cast !_Runtime.strictEquals(({ final __typedStruct71 = (cast win.onCloseRequest : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct71 == null ? _Runtime.UNDEFINED : (cast __typedStruct71 : { var cancelled:Bool; }).cancelled; }), true);
     return cast null;
+  }
+
+  @:noCompletion
+  public static function resetWindowBackendForTest():Void {
+    (Window._custom__window = cast (null : Dynamic));
+    (Window._host__window = cast (null : Dynamic));
+    (Window._hostConflict__window = cast (false : Dynamic));
+    (Window._hostObservation__window = cast (null : Dynamic));
   }
 
   public static function restoreWindow(win:ApplicationWindow):Void {
     if ((cast ((cast !(cast win.minimized : Bool) : Bool) && (cast !(cast win.maximized : Bool) : Bool)) : Bool)) { return; }
     (win.minimized = cast (false : Bool));
     (win.maximized = cast (false : Bool));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).restore(({ final __callArgument73:Dynamic = win; __callArgument73; }));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).restore(({ final __callArgument72:Dynamic = win; __callArgument72; }));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onRestore]]), 1);
   }
 
   public static function setWindowAlwaysOnTop(win:ApplicationWindow, alwaysOnTop:Bool):Void {
     (win.alwaysOnTop = cast (alwaysOnTop : Bool));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setAlwaysOnTop(({ final __callArgument74:Dynamic = win; __callArgument74; }), (cast alwaysOnTop : Bool));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setAlwaysOnTop(({ final __callArgument73:Dynamic = win; __callArgument73; }), (cast alwaysOnTop : Bool));
   }
 
   @:noCompletion
   public static function setWindowBackend(backend:Null<WindowBackend>):Void {
-    (Window._windowBackend__window = cast (backend : Dynamic));
+    (Window._custom__window = cast (backend : Dynamic));
   }
 
   public static function setWindowContentProtection(win:ApplicationWindow, enabled:Bool):Void {
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setContentProtection(({ final __callArgument75:Dynamic = win; __callArgument75; }), (cast enabled : Bool));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setContentProtection(({ final __callArgument74:Dynamic = win; __callArgument74; }), (cast enabled : Bool));
   }
 
   public static function setWindowFullscreen(win:ApplicationWindow, fullscreen:Bool):Void {
     if ((cast _Runtime.strictEquals(win.fullscreen, fullscreen) : Bool)) { return; }
     (win.fullscreen = cast (fullscreen : Bool));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setFullscreen(({ final __callArgument76:Dynamic = win; __callArgument76; }), (cast fullscreen : Bool));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setFullscreen(({ final __callArgument75:Dynamic = win; __callArgument75; }), (cast fullscreen : Bool));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onFullscreenChanged]]), 1);
   }
 
   public static function setWindowHasShadow(win:ApplicationWindow, hasShadow:Bool):Void {
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setHasShadow(({ final __callArgument77:Dynamic = win; __callArgument77; }), (cast hasShadow : Bool));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setHasShadow(({ final __callArgument76:Dynamic = win; __callArgument76; }), (cast hasShadow : Bool));
   }
 
   public static function setWindowIcon(win:ApplicationWindow, icon:String):Void {
     (win.icon = cast (icon : String));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setIcon(({ final __callArgument78:Dynamic = win; __callArgument78; }), (cast icon : String));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setIcon(({ final __callArgument77:Dynamic = win; __callArgument77; }), (cast icon : String));
   }
 
   public static function setWindowMaximumSize(win:ApplicationWindow, width:Float, height:Float):Void {
     (win.maxWidth = cast (width : Float));
     (win.maxHeight = cast (height : Float));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setMaximumSize(({ final __callArgument79:Dynamic = win; __callArgument79; }), (cast width : Float), (cast height : Float));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setMaximumSize(({ final __callArgument78:Dynamic = win; __callArgument78; }), (cast width : Float), (cast height : Float));
   }
 
   public static function setWindowMenuBarVisible(win:ApplicationWindow, visible:Bool):Void {
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setMenuBarVisible(({ final __callArgument80:Dynamic = win; __callArgument80; }), (cast visible : Bool));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setMenuBarVisible(({ final __callArgument79:Dynamic = win; __callArgument79; }), (cast visible : Bool));
   }
 
   public static function setWindowMinimumSize(win:ApplicationWindow, width:Float, height:Float):Void {
     (win.minWidth = cast (width : Float));
     (win.minHeight = cast (height : Float));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setMinimumSize(({ final __callArgument81:Dynamic = win; __callArgument81; }), (cast width : Float), (cast height : Float));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setMinimumSize(({ final __callArgument80:Dynamic = win; __callArgument80; }), (cast width : Float), (cast height : Float));
   }
 
   public static function setWindowOpacity(win:ApplicationWindow, opacity:Float):Void {
     (win.opacity = cast (opacity : Float));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setOpacity(({ final __callArgument82:Dynamic = win; __callArgument82; }), (cast opacity : Float));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setOpacity(({ final __callArgument81:Dynamic = win; __callArgument81; }), (cast opacity : Float));
   }
 
   public static function setWindowParent(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setParent(({ final __callArgument83:Dynamic = win; __callArgument83; }), ({ final __callArgument84:Dynamic = parent; __callArgument84; }));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setParent(({ final __callArgument82:Dynamic = win; __callArgument82; }), ({ final __callArgument83:Dynamic = parent; __callArgument83; }));
   }
 
   public static function setWindowPosition(win:ApplicationWindow, x:Float, y:Float):Void {
     (win.x = cast (x : Float));
     (win.y = cast (y : Float));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setPosition(({ final __callArgument85:Dynamic = win; __callArgument85; }), (cast x : Float), (cast y : Float));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setPosition(({ final __callArgument84:Dynamic = win; __callArgument84; }), (cast x : Float), (cast y : Float));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onMove]]), 1);
   }
 
   public static function setWindowProgress(win:ApplicationWindow, progress:Float):Void {
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setProgress(({ final __callArgument86:Dynamic = win; __callArgument86; }), (cast progress : Float));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setProgress(({ final __callArgument85:Dynamic = win; __callArgument85; }), (cast progress : Float));
   }
 
   public static function setWindowResizable(win:ApplicationWindow, resizable:Bool):Void {
     (win.resizable = cast (resizable : Bool));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setResizable(({ final __callArgument87:Dynamic = win; __callArgument87; }), (cast resizable : Bool));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setResizable(({ final __callArgument86:Dynamic = win; __callArgument86; }), (cast resizable : Bool));
   }
 
   public static function setWindowSize(win:ApplicationWindow, width:Float, height:Float):Void {
     (win.width = cast (width : Float));
     (win.height = cast (height : Float));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setSize(({ final __callArgument88:Dynamic = win; __callArgument88; }), (cast width : Float), (cast height : Float));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setSize(({ final __callArgument87:Dynamic = win; __callArgument87; }), (cast width : Float), (cast height : Float));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
   }
 
   public static function setWindowSkipTaskbar(win:ApplicationWindow, skip:Bool):Void {
     (win.skipTaskbar = cast (skip : Bool));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setSkipTaskbar(({ final __callArgument89:Dynamic = win; __callArgument89; }), (cast skip : Bool));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setSkipTaskbar(({ final __callArgument88:Dynamic = win; __callArgument88; }), (cast skip : Bool));
   }
 
   public static function setWindowTitle(win:ApplicationWindow, title:String):Void {
     (win.title = cast (title : String));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setTitle(({ final __callArgument90:Dynamic = win; __callArgument90; }), (cast title : String));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).setTitle(({ final __callArgument89:Dynamic = win; __callArgument89; }), (cast title : String));
   }
 
   public static function showWindow(win:ApplicationWindow):Void {
     if ((cast win.visible : Bool)) { return; }
     (win.visible = cast (true : Bool));
-    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).show(({ final __callArgument91:Dynamic = win; __callArgument91; }));
+    (cast (cast getWindowBackend() : WindowBackend) : WindowBackend).show(({ final __callArgument90:Dynamic = win; __callArgument90; }));
   }
+
+  public static final _sentinel__window:WindowBackend = (cast { center: function(win:ApplicationWindow):Void {
+
+  }, close: function(win:ApplicationWindow):Void {
+
+  }, flashWindowFrame: function(win:ApplicationWindow):Void {
+
+  }, focus: function(win:ApplicationWindow):Void {
+
+  }, getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
+    (out.x = cast (win.x : Float));
+    (out.y = cast (win.y : Float));
+    (out.width = cast (win.width : Float));
+    (out.height = cast (win.height : Float));
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  }, hide: function(win:ApplicationWindow):Void {
+
+  }, maximize: function(win:ApplicationWindow):Void {
+
+  }, minimize: function(win:ApplicationWindow):Void {
+
+  }, open: function(win:ApplicationWindow, options:WindowOptions):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, requestAttention: function(win:ApplicationWindow, attention:Bool):Void {
+
+  }, restore: function(win:ApplicationWindow):Void {
+
+  }, setAlwaysOnTop: function(win:ApplicationWindow, alwaysOnTop:Bool):Void {
+
+  }, setContentProtection: function(win:ApplicationWindow, enabled:Bool):Void {
+
+  }, setFullscreen: function(win:ApplicationWindow, fullscreen:Bool):Void {
+
+  }, setHasShadow: function(win:ApplicationWindow, hasShadow:Bool):Void {
+
+  }, setIcon: function(win:ApplicationWindow, icon:String):Void {
+
+  }, setMaximumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
+
+  }, setMenuBarVisible: function(win:ApplicationWindow, visible:Bool):Void {
+
+  }, setMinimumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
+
+  }, setOpacity: function(win:ApplicationWindow, opacity:Float):Void {
+
+  }, setParent: function(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
+
+  }, setPosition: function(win:ApplicationWindow, x:Float, y:Float):Void {
+
+  }, setProgress: function(win:ApplicationWindow, progress:Float):Void {
+
+  }, setResizable: function(win:ApplicationWindow, resizable:Bool):Void {
+
+  }, setSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
+
+  }, setSkipTaskbar: function(win:ApplicationWindow, skip:Bool):Void {
+
+  }, setTitle: function(win:ApplicationWindow, title:String):Void {
+
+  }, show: function(win:ApplicationWindow):Void {
+
+  } });
 
   public static final _applicationWindowObservers__window:flighthq._internal._WeakMap<ApplicationWindow, flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
-  public static var _windowBackend__window:Null<WindowBackend> = _Runtime.explicitNull();
+  public static var _custom__window:Null<WindowBackend> = _Runtime.explicitNull();
+
+  public static var _host__window:Null<WindowBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__window:Bool = false;
+
+  public static var _hostObservation__window:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static function getApplicationWindowObservers__window(win:ApplicationWindow):flighthq._internal._Map<flighthq._internal._Symbol, Void->Void> {
     var observers:Null<flighthq._internal._Map<flighthq._internal._Symbol, Void->Void>> = cast _Runtime.UNDEFINED;

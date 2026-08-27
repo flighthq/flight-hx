@@ -2731,7 +2731,7 @@ function emitExpression(expression: IrExpression): string {
         }
       }
       if (expression.properties.some((property) => property.kind === 'spread')) {
-        return `_Runtime.mergeObjects([${expression.properties
+        const value = `_Runtime.mergeObjects([${expression.properties
           .map((property) =>
             property.kind === 'spread'
               ? emitExpression(property.expression)
@@ -2740,6 +2740,7 @@ function emitExpression(expression: IrExpression): string {
                 : emitNamedObject(property.name, property.value),
           )
           .join(', ')}])`;
+        return emitObjectThisCapture(expression, value);
       }
       if (
         expression.properties.some(
@@ -2749,7 +2750,7 @@ function emitExpression(expression: IrExpression): string {
               (!isHaxeIdentifier(property.name) || safeName(property.name) !== property.name)),
         )
       ) {
-        return `_Runtime.objectFromPairs([${expression.properties
+        const value = `_Runtime.objectFromPairs([${expression.properties
           .map((property) =>
             property.kind === 'computedProperty'
               ? `{ key: ${emitExpression(property.key)}, value: ${emitExpression(property.value)} }`
@@ -2759,13 +2760,17 @@ function emitExpression(expression: IrExpression): string {
           )
           .filter(Boolean)
           .join(', ')}])`;
+        return emitObjectThisCapture(expression, value);
       }
-      return `{ ${expression.properties
-        .map((property) =>
-          property.kind === 'property' ? `${safeName(property.name)}: ${emitExpression(property.value)}` : '',
-        )
-        .filter(Boolean)
-        .join(', ')} }`;
+      return emitObjectThisCapture(
+        expression,
+        `{ ${expression.properties
+          .map((property) =>
+            property.kind === 'property' ? `${safeName(property.name)}: ${emitExpression(property.value)}` : '',
+          )
+          .filter(Boolean)
+          .join(', ')} }`,
+      );
     case 'property':
       if (expression.binding === 'DynamicObject') {
         return `flighthq._internal.DynamicObject.field(${quote(expression.name)})`;
@@ -2931,6 +2936,12 @@ function emitNamedObject(name: string, value: IrExpression): string {
   return isHaxeIdentifier(name) && safeName(name) === name
     ? `{ ${safeName(name)}: ${emitExpression(value)} }`
     : `_Runtime.objectFromPairs([{ key: ${quote(name)}, value: ${emitExpression(value)} }])`;
+}
+
+function emitObjectThisCapture(expression: Extract<IrExpression, { kind: 'object' }>, value: string): string {
+  if (!expression.thisCapture) return value;
+  const capture = safeName(expression.thisCapture);
+  return `({ var ${capture}:Dynamic = null; ${capture} = ${value}; ${capture}; })`;
 }
 
 function isHaxeIdentifier(name: string): boolean {

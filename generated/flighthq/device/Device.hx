@@ -3,6 +3,7 @@ package flighthq.device;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Device.DeviceBackend;
 import flighthq.types.Device.DeviceInfo;
 import flighthq.types.Device.SafeAreaInsets;
@@ -16,9 +17,71 @@ import flighthq.useragent.UserAgentParse.parseUserAgentOsName;
 import flighthq.useragent.UserAgentParse.parseUserAgentOsVersion;
 
 class Device {
-  public static var _backend__device:Null<DeviceBackend> = _Runtime.explicitNull();
+  public static var _custom__device:Null<DeviceBackend> = _Runtime.explicitNull();
+
+  public static var _host__device:Null<DeviceBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__device:Bool = false;
+
+  public static var _hostObservation__device:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static var _safeAreaInsets__device:Null<SafeAreaInsets> = _Runtime.explicitNull();
+
+  public static final _sentinel__device:DeviceBackend = (cast { getCapabilities: function(out:DeviceCapabilities):DeviceCapabilities {
+    (out.hasKeyboard = cast (false : Bool));
+    (out.hasMouse = cast (false : Bool));
+    (out.hasStylus = cast (false : Bool));
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  }, getDisplayMetrics: function(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
+    (out.colorDepth = cast (-1.0 : Float));
+    (out.densityDpi = cast (-1.0 : Float));
+    (out.logicalHeight = cast (-1.0 : Float));
+    (out.logicalWidth = cast (-1.0 : Float));
+    (out.physicalHeight = cast (-1.0 : Float));
+    (out.physicalWidth = cast (-1.0 : Float));
+    (out.pixelRatio = cast (-1.0 : Float));
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  }, getId: function():String {
+    return cast '';
+    return cast _Runtime.UNDEFINED;
+  }, getInfo: function(out:DeviceInfo):DeviceInfo {
+    (out.arch = cast ('' : String));
+    (out.availableMemory = cast (-1.0 : Float));
+    (out.boardName = cast ('' : String));
+    (out.colorGamut = cast ('' : String));
+    (out.cpuCores = cast (-1.0 : Float));
+    (out.fontScale = cast (-1.0 : Float));
+    (out.formFactor = cast (DeviceFormFactorUnknown : String));
+    (out.gpuRenderer = cast ('' : String));
+    (out.gpuVendor = cast ('' : String));
+    (out.isHdr = cast (false : Bool));
+    (out.isJailbroken = cast (false : Bool));
+    (out.isLowEndDevice = cast (false : Bool));
+    (out.isRooted = cast (false : Bool));
+    (out.isVirtual = cast (false : Bool));
+    (out.manufacturer = cast ('' : String));
+    (out.marketingName = cast ('' : String));
+    (out.model = cast ('' : String));
+    (out.osBuild = cast ('' : String));
+    (out.osName = cast ('' : String));
+    (out.osVersion = cast ('' : String));
+    (out.platformString = cast ('' : String));
+    (out.productName = cast ('' : String));
+    (out.supportedAbis = cast (cast ([] : Array<Dynamic>) : Array<String>));
+    (out.totalMemory = cast (-1.0 : Float));
+    (out.webViewVersion = cast ('' : String));
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  }, getSafeAreaInsets: function(out:SafeAreaInsets):SafeAreaInsets {
+    (out.bottom = cast (0.0 : Float));
+    (out.left = cast (0.0 : Float));
+    (out.right = cast (0.0 : Float));
+    (out.top = cast (0.0 : Float));
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  } });
 
   @:noCompletion
   public static function createDeviceCapabilities():DeviceCapabilities {
@@ -100,7 +163,7 @@ class Device {
       (out.arch = cast ((cast parseUserAgentArch((cast ua : String), ({ final __callArgument4:Dynamic = uadPlatform; __callArgument4; })) : String) : String));
       (out.availableMemory = cast (-1.0 : Float));
       (out.boardName = cast ('' : String));
-      (out.colorGamut = cast ('' : String));
+      (out.colorGamut = cast ((cast Device.detectColorGamut__device() : String) : String));
       cores = ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'hardwareConcurrency') : Bool)) : Bool) ? (cast _Runtime.coalesce((cast nav : flighthq._internal.dom.Navigator).hardwareConcurrency, function():Dynamic return cast -1.0) : Dynamic) : (cast -1.0 : Dynamic));
       (out.cpuCores = cast (cores : Float));
       (out.fontScale = cast (-1.0 : Float));
@@ -108,7 +171,7 @@ class Device {
       gpuInfo = (cast Device.readWebGpuInfo__device() : { var vendor:String; var renderer:String; });
       (out.gpuRenderer = cast ((cast gpuInfo : { var vendor:String; var renderer:String; }).renderer : String));
       (out.gpuVendor = cast ((cast gpuInfo : { var vendor:String; var renderer:String; }).vendor : String));
-      (out.isHdr = cast (false : Bool));
+      (out.isHdr = cast ((cast Device.detectHdr__device() : Bool) : Bool));
       (out.isJailbroken = cast (false : Bool));
       devMem = ((cast ((cast !_Runtime.strictEquals(nav, null) : Bool) && (cast _Runtime.hasField(nav, 'deviceMemory') : Bool)) : Bool) ? (cast _Runtime.coalesce((cast (cast nav : { @:optional var deviceMemory:Float; }) : { @:optional var deviceMemory:Null<Float>; }).deviceMemory, function():Dynamic return cast -1.0) : Dynamic) : (cast -1.0 : Dynamic));
       (out.isLowEndDevice = cast ((cast Device.detectLowEndDevice__device((cast devMem : Float), (cast cores : Float)) : Bool) : Bool));
@@ -147,8 +210,23 @@ class Device {
     return cast null;
   }
 
+  public static function detectColorGamut__device():String {
+    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('matchMedia'), 'undefined') : Bool)) { return cast ''; }
+    if ((cast (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('matchMedia'), cast (['(color-gamut: rec2020)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches : Bool)) { return cast 'rec2020'; }
+    if ((cast (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('matchMedia'), cast (['(color-gamut: p3)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches : Bool)) { return cast 'p3'; }
+    if ((cast (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('matchMedia'), cast (['(color-gamut: srgb)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches : Bool)) { return cast 'srgb'; }
+    return cast '';
+    return cast null;
+  }
+
   public static function detectDesktopUa__device(ua:String):Bool {
     return cast _Runtime.callProperty(_Runtime.regexp('win(?:dows)?nt|macintosh|mac os x|linux(?!.*android)|cros|x11', 'i'), 'test', cast ([ua] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function detectHdr__device():Bool {
+    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('matchMedia'), 'undefined') : Bool)) { return cast false; }
+    return cast (cast _Runtime.callValue(flighthq._internal._HostValueLut.get('matchMedia'), cast (['(dynamic-range: high)'] : Array<Dynamic>)) : flighthq._internal.dom.MediaQueryList).matches;
     return cast null;
   }
 
@@ -185,10 +263,20 @@ class Device {
     return cast null;
   }
 
+  public static function explainDeviceBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Device._custom__device, null) : Bool)) {
+      return cast { conflict: Device._hostConflict__device, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Device._host__device, null) : Bool)) {
+      return cast { conflict: Device._hostConflict__device, layer: 'host', operation: ((cast !_Runtime.strictEquals(Device._hostObservation__device, null) : Bool) ? (cast (cast Device._hostObservation__device : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Device._hostObservation__device, null) : Bool) ? (cast (cast Device._hostObservation__device : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   @:noCompletion
   public static function getDeviceBackend():DeviceBackend {
-    if ((cast _Runtime.strictEquals(Device._backend__device, null) : Bool)) { (Device._backend__device = cast ((cast createWebDeviceBackend() : DeviceBackend) : Dynamic)); }
-    return cast Device._backend__device;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Device._custom__device, function():Dynamic return cast Device._host__device), function():Dynamic return cast Device._sentinel__device);
     return cast null;
   }
 
@@ -215,6 +303,20 @@ class Device {
   public static function getSafeAreaInsets(out:SafeAreaInsets):SafeAreaInsets {
     return cast (cast (cast getDeviceBackend() : DeviceBackend) : DeviceBackend).getSafeAreaInsets(({ final __callArgument10:Dynamic = out; __callArgument10; }));
     return cast null;
+  }
+
+  @:noCompletion
+  public static function installDeviceHostBackend(backend:DeviceBackend):Void {
+    if ((cast !_Runtime.strictEquals(Device._host__device, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Device._host__device, backend) : Bool)) { (Device._hostConflict__device = cast (true : Dynamic)); }
+      return;
+    }
+    (Device._host__device = cast (backend : Dynamic));
+  }
+
+  @:noCompletion
+  public static function observeDeviceHostResult(operation:String, succeeded:Bool):Void {
+    (Device._hostObservation__device = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function readWebGpuInfo__device():{ var vendor:String; var renderer:String; } {
@@ -245,7 +347,15 @@ class Device {
   }
 
   @:noCompletion
+  public static function resetDeviceBackendForTest():Void {
+    (Device._custom__device = cast (null : Dynamic));
+    (Device._host__device = cast (null : Dynamic));
+    (Device._hostConflict__device = cast (false : Dynamic));
+    (Device._hostObservation__device = cast (null : Dynamic));
+  }
+
+  @:noCompletion
   public static function setDeviceBackend(backend:Null<DeviceBackend>):Void {
-    (Device._backend__device = cast (backend : Dynamic));
+    (Device._custom__device = cast (backend : Dynamic));
   }
 }

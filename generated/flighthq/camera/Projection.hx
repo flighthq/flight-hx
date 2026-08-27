@@ -42,8 +42,7 @@ class Projection {
     var halfWidth:Float = cast _Runtime.UNDEFINED;
     var halfHeight:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'perspective') : Bool)) {
-      var tanHalfFovY:Float = HxMath.tan(((cast projection : { var fovY:Float; }).fovY * 0.5));
-      setPerspectiveMatrix4(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast tanHalfFovY : Float), (cast aspect : Float), (cast near : Float), (cast far : Float));
+      setPerspectiveMatrix4(({ final __callArgument0:Dynamic = out; __callArgument0; }), (cast HxMath.tan(((cast projection : { var fovY:Float; }).fovY * 0.5)) : Float), (cast aspect : Float), (cast near : Float), (cast far : Float));
       return;
     }
     halfWidth = (cast projection : { var halfWidth:Float; }).halfWidth;

@@ -462,8 +462,8 @@ class Geometry {
     return cast null;
   }
 
-  public static function createPerspectiveMatrix4(fov:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
-    return cast Facade_Geometry_flighthq_geometry_Matrix4.createPerspectiveMatrix4(fov, aspect, zNear, zFar);
+  public static function createPerspectiveMatrix4(tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Matrix4 {
+    return cast Facade_Geometry_flighthq_geometry_Matrix4.createPerspectiveMatrix4(tanHalfFovY, aspect, zNear, zFar);
     return cast null;
   }
 
@@ -524,6 +524,11 @@ class Geometry {
 
   public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):Vector4 {
     return cast Facade_Geometry_flighthq_geometry_Vector4.createVector4(x, y, z, w);
+    return cast null;
+  }
+
+  public static function crossVector2(a:Vector2Like, b:Vector2Like):Float {
+    return cast Facade_Geometry_flighthq_geometry_Vector2.crossVector2(a, b);
     return cast null;
   }
 
@@ -702,6 +707,11 @@ class Geometry {
     return cast null;
   }
 
+  public static function getQuaternionAxisAngle(outAxis:Vector3Like, source:QuaternionLike):Float {
+    return cast Facade_Geometry_flighthq_geometry_Quaternion.getQuaternionAxisAngle(outAxis, source);
+    return cast null;
+  }
+
   public static function getQuaternionDot(a:QuaternionLike, b:QuaternionLike):Float {
     return cast Facade_Geometry_flighthq_geometry_Quaternion.getQuaternionDot(a, b);
     return cast null;
@@ -773,6 +783,11 @@ class Geometry {
 
   public static function getRectangleTopLeft(out:Vector2Like, source:RectangleLike):Void {
     Facade_Geometry_flighthq_geometry_Rectangle.getRectangleTopLeft(out, source);
+  }
+
+  public static function getVector2Angle(source:Vector2Like):Float {
+    return cast Facade_Geometry_flighthq_geometry_Vector2.getVector2Angle(source);
+    return cast null;
   }
 
   public static function getVector2AngleBetween(a:Vector2Like, b:Vector2Like):Float {
@@ -968,6 +983,11 @@ class Geometry {
     return cast null;
   }
 
+  public static function isAabbIntersectingSphere(aabb:AabbLike, sphere:BoundingSphereLike):Bool {
+    return cast Facade_Geometry_flighthq_geometry_Aabb.isAabbIntersectingSphere(aabb, sphere);
+    return cast null;
+  }
+
   public static function isAffineMatrix3(source:Matrix3Like):Bool {
     return cast Facade_Geometry_flighthq_geometry_Matrix3.isAffineMatrix3(source);
     return cast null;
@@ -980,6 +1000,11 @@ class Geometry {
 
   public static function isBoundingSphereIntersectingBoundingSphere(a:BoundingSphereLike, b:BoundingSphereLike):Bool {
     return cast Facade_Geometry_flighthq_geometry_BoundingSphere.isBoundingSphereIntersectingBoundingSphere(a, b);
+    return cast null;
+  }
+
+  public static function isCapsuleIntersectingAabb(capsule:CapsuleLike, aabb:AabbLike):Bool {
+    return cast Facade_Geometry_flighthq_geometry_Capsule.isCapsuleIntersectingAabb(capsule, aabb);
     return cast null;
   }
 
@@ -1018,6 +1043,11 @@ class Geometry {
     return cast null;
   }
 
+  public static function isFrustumIntersectingObb(frustum:FrustumLike, obb:ObbLike):Bool {
+    return cast Facade_Geometry_flighthq_geometry_Frustum.isFrustumIntersectingObb(frustum, obb);
+    return cast null;
+  }
+
   public static function isFrustumIntersectingSphere(frustum:FrustumLike, sphere:BoundingSphereLike):Bool {
     return cast Facade_Geometry_flighthq_geometry_Frustum.isFrustumIntersectingSphere(frustum, sphere);
     return cast null;
@@ -1030,6 +1060,11 @@ class Geometry {
 
   public static function isObbIntersectingObb(a:ObbLike, b:ObbLike):Bool {
     return cast Facade_Geometry_flighthq_geometry_Obb.isObbIntersectingObb(a, b);
+    return cast null;
+  }
+
+  public static function isObbIntersectingSphere(obb:ObbLike, sphere:BoundingSphereLike):Bool {
+    return cast Facade_Geometry_flighthq_geometry_Obb.isObbIntersectingSphere(obb, sphere);
     return cast null;
   }
 
@@ -1307,6 +1342,10 @@ class Geometry {
     Facade_Geometry_flighthq_geometry_Matrix4.rotateMatrix4(out, source, axis, radians);
   }
 
+  public static function rotateVector2(out:Vector2Like, source:Vector2Like, angle:Float):Void {
+    Facade_Geometry_flighthq_geometry_Vector2.rotateVector2(out, source, angle);
+  }
+
   public static function rotateVector3ByQuaternion(out:Vector3Like, vector:Vector3Like, q:QuaternionLike):Void {
     Facade_Geometry_flighthq_geometry_Quaternion.rotateVector3ByQuaternion(out, vector, q);
   }
@@ -1467,8 +1506,8 @@ class Geometry {
     Facade_Geometry_flighthq_geometry_Matrix4.setOrthographicMatrix4(out, left, right, bottom, top, zNear, zFar);
   }
 
-  public static function setPerspectiveMatrix4(out:Matrix4Like, fov:Float, aspect:Float, zNear:Float, zFar:Float):Void {
-    Facade_Geometry_flighthq_geometry_Matrix4.setPerspectiveMatrix4(out, fov, aspect, zNear, zFar);
+  public static function setPerspectiveMatrix4(out:Matrix4Like, tanHalfFovY:Float, aspect:Float, zNear:Float, zFar:Float):Void {
+    Facade_Geometry_flighthq_geometry_Matrix4.setPerspectiveMatrix4(out, tanHalfFovY, aspect, zNear, zFar);
   }
 
   public static function setPlane(out:PlaneLike, a:Float, b:Float, c:Float, d:Float):Void {
@@ -1623,7 +1662,11 @@ class Geometry {
     Facade_Geometry_flighthq_geometry_Obb.transformObbByMatrix4(out, obb, m);
   }
 
-  public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:{ var m:flighthq._internal._Float32Array; }):Void {
+  public static function transformRay3DByMatrix4(out:Ray3DLike, ray:Ray3DLike, m:Matrix4Like):Void {
+    Facade_Geometry_flighthq_geometry_Ray3d.transformRay3DByMatrix4(out, ray, m);
+  }
+
+  public static function transformVector3ByMatrix3(out:Vector3Like, source:Vector3Like, matrix:Matrix3Like):Void {
     Facade_Geometry_flighthq_geometry_Vector3.transformVector3ByMatrix3(out, source, matrix);
   }
 

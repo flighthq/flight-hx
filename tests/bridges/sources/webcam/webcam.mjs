@@ -6,9 +6,13 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebWebcamBackend = api.createWebWebcamBackend;
+export const explainWebcamBackend = api.explainWebcamBackend;
 export const getWebcamBackend = api.getWebcamBackend;
+export const installWebcamHostBackend = api.installWebcamHostBackend;
+export const observeWebcamHostResult = api.observeWebcamHostResult;
 export const recordWebcamVideo = api.recordWebcamVideo;
 export const requestWebcamPermission = api.requestWebcamPermission;
+export const resetWebcamBackendForTest = api.resetWebcamBackendForTest;
 export const selectWebcamImage = api.selectWebcamImage;
 export const setWebcamBackend = api.setWebcamBackend;
 export const takeWebcamPhoto = api.takeWebcamPhoto;

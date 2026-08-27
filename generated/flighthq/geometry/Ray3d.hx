@@ -8,6 +8,7 @@ import flighthq.geometry.Vector3.createVector3;
 import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Entity;
+import flighthq.types.Matrix4.Matrix4Like;
 import flighthq.types.Plane.PlaneLike;
 import flighthq.types.Ray3D;
 import flighthq.types.Ray3D.Ray3DLike;
@@ -340,5 +341,43 @@ class Ray3d {
     ((cast out.direction : { var x:Float; }).x = cast (dx : Float));
     ((cast out.direction : { var y:Float; }).y = cast (dy : Float));
     ((cast out.direction : { var z:Float; }).z = cast (dz : Float));
+  }
+
+  public static function transformRay3DByMatrix4(out:Ray3DLike, ray:Ray3DLike, m:Matrix4Like):Void {
+    var mm:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
+    var ox:Float = cast _Runtime.UNDEFINED;
+    var oy:Float = cast _Runtime.UNDEFINED;
+    var oz:Float = cast _Runtime.UNDEFINED;
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var ndx:Float = cast _Runtime.UNDEFINED;
+    var ndy:Float = cast _Runtime.UNDEFINED;
+    var ndz:Float = cast _Runtime.UNDEFINED;
+    var len:Float = cast _Runtime.UNDEFINED;
+    mm = m.m;
+    ox = (cast ray.origin : { var x:Float; }).x;
+    oy = (cast ray.origin : { var y:Float; }).y;
+    oz = (cast ray.origin : { var z:Float; }).z;
+    dx = (cast ray.direction : { var x:Float; }).x;
+    dy = (cast ray.direction : { var y:Float; }).y;
+    dz = (cast ray.direction : { var z:Float; }).z;
+    ((cast out.origin : { var x:Float; }).x = cast (((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 0.0 : Float)) * ox) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 4.0 : Float)) * oy)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 8.0 : Float)) * oz)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 12.0 : Float))) : Float));
+    ((cast out.origin : { var y:Float; }).y = cast (((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 1.0 : Float)) * ox) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 5.0 : Float)) * oy)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 9.0 : Float)) * oz)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 13.0 : Float))) : Float));
+    ((cast out.origin : { var z:Float; }).z = cast (((((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 2.0 : Float)) * ox) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 6.0 : Float)) * oy)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 10.0 : Float)) * oz)) + flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 14.0 : Float))) : Float));
+    ndx = (((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 0.0 : Float)) * dx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 4.0 : Float)) * dy)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 8.0 : Float)) * dz));
+    ndy = (((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 1.0 : Float)) * dx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 5.0 : Float)) * dy)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 9.0 : Float)) * dz));
+    ndz = (((flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 2.0 : Float)) * dx) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 6.0 : Float)) * dy)) + (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast mm : flighthq._internal._Float32Array), (cast 10.0 : Float)) * dz));
+    len = HxMath.sqrt((((ndx * ndx) + (ndy * ndy)) + (ndz * ndz)));
+    if ((cast ((cast len : Float) > (cast 0.0 : Float)) : Bool)) {
+      var inv:Float = (1.0 / len);
+      ((cast out.direction : { var x:Float; }).x = cast ((ndx * inv) : Float));
+      ((cast out.direction : { var y:Float; }).y = cast ((ndy * inv) : Float));
+      ((cast out.direction : { var z:Float; }).z = cast ((ndz * inv) : Float));
+    } else {
+      ((cast out.direction : { var x:Float; }).x = cast (0.0 : Float));
+      ((cast out.direction : { var y:Float; }).y = cast (0.0 : Float));
+      ((cast out.direction : { var z:Float; }).z = cast (0.0 : Float));
+    }
   }
 }

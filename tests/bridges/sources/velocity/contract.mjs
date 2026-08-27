@@ -12,6 +12,7 @@ export { copyVelocity } from './velocityField.mjs';
 export { createVelocityField } from './velocityField.mjs';
 export { dampVelocity } from './velocityField.mjs';
 export { ensureVelocitySample } from './velocityField.mjs';
+export { explainVelocity } from './velocityField.mjs';
 export { getVelocity } from './velocityField.mjs';
 export { getVelocitySampleAt } from './velocitySample.mjs';
 export { hasVelocity } from './velocityField.mjs';

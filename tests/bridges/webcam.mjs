@@ -2,6 +2,7 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createWebcamStreamEntity = compiled.flighthq.webcam.Webcam.createWebcamStreamEntity;
+export const explainWebcamBackend = compiled.flighthq.webcam.Webcam.explainWebcamBackend;
 export const recordWebcamVideo = compiled.flighthq.webcam.Webcam.recordWebcamVideo;
 export const requestWebcamPermission = compiled.flighthq.webcam.Webcam.requestWebcamPermission;
 export const selectWebcamImage = compiled.flighthq.webcam.Webcam.selectWebcamImage;

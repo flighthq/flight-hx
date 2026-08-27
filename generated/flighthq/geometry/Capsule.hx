@@ -4,6 +4,7 @@ package flighthq.geometry;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.entity.Entity.createEntity;
+import flighthq.types.Aabb.AabbLike;
 import flighthq.types.BoundingSphere.BoundingSphereLike;
 import flighthq.types.Capsule;
 import flighthq.types.Capsule.CapsuleLike;
@@ -208,6 +209,15 @@ class Capsule {
     return cast null;
   }
 
+  public static function isCapsuleIntersectingAabb(capsule:CapsuleLike, aabb:AabbLike):Bool {
+    var dist2:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast capsule.radius : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
+    if ((cast ((cast ((cast ((cast (cast aabb.min : { var x:Float; }).x : Float) > (cast (cast aabb.max : { var x:Float; }).x : Float)) : Bool) || (cast ((cast (cast aabb.min : { var y:Float; }).y : Float) > (cast (cast aabb.max : { var y:Float; }).y : Float)) : Bool)) : Bool) || (cast ((cast (cast aabb.min : { var z:Float; }).z : Float) > (cast (cast aabb.max : { var z:Float; }).z : Float)) : Bool)) : Bool)) { return cast false; }
+    dist2 = (cast Capsule.segmentToAabbDistanceSq__capsule((cast capsule.startX : Float), (cast capsule.startY : Float), (cast capsule.startZ : Float), (cast capsule.endX : Float), (cast capsule.endY : Float), (cast capsule.endZ : Float), (cast (cast aabb.min : { var x:Float; }).x : Float), (cast (cast aabb.min : { var y:Float; }).y : Float), (cast (cast aabb.min : { var z:Float; }).z : Float), (cast (cast aabb.max : { var x:Float; }).x : Float), (cast (cast aabb.max : { var y:Float; }).y : Float), (cast (cast aabb.max : { var z:Float; }).z : Float)) : Float);
+    return cast ((cast dist2 : Float) <= (cast (capsule.radius * capsule.radius) : Float));
+    return cast null;
+  }
+
   public static function isCapsuleIntersectingCapsule(a:CapsuleLike, b:CapsuleLike):Bool {
     var dist:Float = cast _Runtime.UNDEFINED;
     var sumR:Float = cast _Runtime.UNDEFINED;
@@ -357,4 +367,78 @@ class Capsule {
     return cast (((qx * qx) + (qy * qy)) + (qz * qz));
     return cast null;
   }
+
+  public static function segmentToAabbDistanceSq__capsule(ax:Float, ay:Float, az:Float, bx:Float, by:Float, bz:Float, minX:Float, minY:Float, minZ:Float, maxX:Float, maxY:Float, maxZ:Float):Float {
+    var dx:Float = cast _Runtime.UNDEFINED;
+    var dy:Float = cast _Runtime.UNDEFINED;
+    var dz:Float = cast _Runtime.UNDEFINED;
+    var len2:Float = cast _Runtime.UNDEFINED;
+    var bestDist2:Float = cast _Runtime.UNDEFINED;
+    var candidates:Array<Float> = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    var cx:Float = cast _Runtime.UNDEFINED;
+    var cy:Float = cast _Runtime.UNDEFINED;
+    var cz:Float = cast _Runtime.UNDEFINED;
+    var tCenter:Float = cast _Runtime.UNDEFINED;
+    dx = (bx - ax);
+    dy = (by - ay);
+    dz = (bz - az);
+    len2 = (((dx * dx) + (dy * dy)) + (dz * dz));
+    if ((cast ((cast len2 : Float) < (cast 1e-20 : Float)) : Bool)) {
+      var ex:Float = HxMath.max(HxMath.max((minX - ax), 0.0), (ax - maxX));
+      var ey:Float = HxMath.max(HxMath.max((minY - ay), 0.0), (ay - maxY));
+      var ez:Float = HxMath.max(HxMath.max((minZ - az), 0.0), (az - maxZ));
+      return cast (((ex * ex) + (ey * ey)) + (ez * ez));
+    }
+    bestDist2 = HxMath.POSITIVE_INFINITY;
+    candidates = Capsule._segCandidates__capsule;
+    count = 2.0;
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast candidates : Array<Float>), (cast 0.0 : Float), (cast 0.0 : Float));
+    flighthq._internal._StaticIndex.writeFloatArrayTyped((cast candidates : Array<Float>), (cast 1.0 : Float), (cast 1.0 : Float));
+    if ((cast ((cast HxMath.abs(dx) : Float) > (cast 1e-20 : Float)) : Bool)) {
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast candidates : Array<Float>), (cast count++ : Float), (cast HxMath.min(HxMath.max(((minX - ax) / dx), 0.0), 1.0) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast candidates : Array<Float>), (cast count++ : Float), (cast HxMath.min(HxMath.max(((maxX - ax) / dx), 0.0), 1.0) : Float));
+    }
+    if ((cast ((cast HxMath.abs(dy) : Float) > (cast 1e-20 : Float)) : Bool)) {
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast candidates : Array<Float>), (cast count++ : Float), (cast HxMath.min(HxMath.max(((minY - ay) / dy), 0.0), 1.0) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast candidates : Array<Float>), (cast count++ : Float), (cast HxMath.min(HxMath.max(((maxY - ay) / dy), 0.0), 1.0) : Float));
+    }
+    if ((cast ((cast HxMath.abs(dz) : Float) > (cast 1e-20 : Float)) : Bool)) {
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast candidates : Array<Float>), (cast count++ : Float), (cast HxMath.min(HxMath.max(((minZ - az) / dz), 0.0), 1.0) : Float));
+      flighthq._internal._StaticIndex.writeFloatArrayTyped((cast candidates : Array<Float>), (cast count++ : Float), (cast HxMath.min(HxMath.max(((maxZ - az) / dz), 0.0), 1.0) : Float));
+    }
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
+        var t:Float = flighthq._internal._StaticIndex.readFloatArrayTyped((cast candidates : Array<Float>), (cast i : Float));
+        var px:Float = (ax + (t * dx));
+        var py:Float = (ay + (t * dy));
+        var pz:Float = (az + (t * dz));
+        var ex:Float = HxMath.max(HxMath.max((minX - px), 0.0), (px - maxX));
+        var ey:Float = HxMath.max(HxMath.max((minY - py), 0.0), (py - maxY));
+        var ez:Float = HxMath.max(HxMath.max((minZ - pz), 0.0), (pz - maxZ));
+        var d2:Float = (((ex * ex) + (ey * ey)) + (ez * ez));
+        if ((cast ((cast d2 : Float) < (cast bestDist2 : Float)) : Bool)) { (bestDist2 = cast (d2 : Dynamic)); }
+        i++;
+      }
+    }
+    cx = ((minX + maxX) * 0.5);
+    cy = ((minY + maxY) * 0.5);
+    cz = ((minZ + maxZ) * 0.5);
+    tCenter = HxMath.min(HxMath.max((((((cx - ax) * dx) + ((cy - ay) * dy)) + ((cz - az) * dz)) / len2), 0.0), 1.0);
+    {
+      var px:Float = (ax + (tCenter * dx));
+      var py:Float = (ay + (tCenter * dy));
+      var pz:Float = (az + (tCenter * dz));
+      var ex:Float = HxMath.max(HxMath.max((minX - px), 0.0), (px - maxX));
+      var ey:Float = HxMath.max(HxMath.max((minY - py), 0.0), (py - maxY));
+      var ez:Float = HxMath.max(HxMath.max((minZ - pz), 0.0), (pz - maxZ));
+      var d2:Float = (((ex * ex) + (ey * ey)) + (ez * ez));
+      if ((cast ((cast d2 : Float) < (cast bestDist2 : Float)) : Bool)) { (bestDist2 = cast (d2 : Dynamic)); }
+    }
+    return cast bestDist2;
+    return cast null;
+  }
+
+  public static final _segCandidates__capsule:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] : Array<Dynamic>));
 }

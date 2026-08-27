@@ -11,3 +11,5 @@ typedef VelocitySample = { var previousWorldTransform:Null<Matrix>; var velocity
 typedef VelocityField = { var samples:flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>; var frameId:Float; };
 
 typedef VelocityContributor = VelocityField->flighthq._internal._Object->Void;
+
+typedef VelocityExplanation = { var reason:String; var x:Float; var y:Float; var lastFrameId:Float; var currentFrameId:Float; var explicit:Bool; };

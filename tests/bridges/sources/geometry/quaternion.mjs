@@ -11,6 +11,7 @@ export const copyQuaternion = api.copyQuaternion;
 export const createQuaternion = api.createQuaternion;
 export const equalsQuaternion = api.equalsQuaternion;
 export const getQuaternionAngleBetween = api.getQuaternionAngleBetween;
+export const getQuaternionAxisAngle = api.getQuaternionAxisAngle;
 export const getQuaternionDot = api.getQuaternionDot;
 export const getQuaternionEuler = api.getQuaternionEuler;
 export const inverseQuaternion = api.inverseQuaternion;

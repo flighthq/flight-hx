@@ -4,6 +4,7 @@ package flighthq.velocity;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.types.Velocity.Velocity2D;
+import flighthq.types.Velocity.VelocityExplanation;
 import flighthq.types.Velocity.VelocityField;
 import flighthq.types.Velocity.VelocitySample;
 
@@ -93,6 +94,31 @@ class VelocityField {
       ((cast field.samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).set(source, (cast sample)));
     }
     return cast sample;
+    return cast null;
+  }
+
+  public static function explainVelocity(field:flighthq.types.Velocity.VelocityField, source:flighthq._internal._Object):VelocityExplanation {
+    var sample:Null<VelocitySample> = cast _Runtime.UNDEFINED;
+    var currentFrameId:Float = cast _Runtime.UNDEFINED;
+    var explicit:Bool = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    sample = ((cast field.samples : flighthq._internal._WeakMap<flighthq._internal._Object, VelocitySample>).get(source));
+    currentFrameId = field.frameId;
+    if ((cast _Runtime.strictEquals(sample, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      return cast { currentFrameId: currentFrameId, explicit: false, lastFrameId: -1.0, reason: 'no-sample', x: 0.0, y: 0.0 };
+    }
+    if ((cast !_Runtime.strictEquals((cast sample : { var lastFrameId:Float; }).lastFrameId, currentFrameId) : Bool)) {
+      return cast { currentFrameId: currentFrameId, explicit: false, lastFrameId: (cast sample : { var lastFrameId:Float; }).lastFrameId, reason: 'stale', x: 0.0, y: 0.0 };
+    }
+    explicit = _Runtime.strictEquals((cast sample : { var explicitFrameId:Float; }).explicitFrameId, currentFrameId);
+    x = (cast (cast sample : { var velocity:Velocity2D; }).velocity : { var x:Float; }).x;
+    y = (cast (cast sample : { var velocity:Velocity2D; }).velocity : { var y:Float; }).y;
+    if ((cast ((cast _Runtime.strictEquals(x, 0.0) : Bool) && (cast _Runtime.strictEquals(y, 0.0) : Bool)) : Bool)) {
+      var reason:String = ((cast explicit : Bool) ? (cast 'explicit-zero' : Dynamic) : (cast 'derived-zero' : Dynamic));
+      return cast { currentFrameId: currentFrameId, explicit: explicit, lastFrameId: (cast sample : { var lastFrameId:Float; }).lastFrameId, reason: reason, x: 0.0, y: 0.0 };
+    }
+    return cast { currentFrameId: currentFrameId, explicit: explicit, lastFrameId: (cast sample : { var lastFrameId:Float; }).lastFrameId, reason: 'ok', x: x, y: y };
     return cast null;
   }
 

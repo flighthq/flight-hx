@@ -6,10 +6,14 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebPermissionBackend = api.createWebPermissionBackend;
+export const explainPermissionBackend = api.explainPermissionBackend;
 export const explainPermissionState = api.explainPermissionState;
 export const getPermissionBackend = api.getPermissionBackend;
 export const getPermissionState = api.getPermissionState;
 export const getPermissionStates = api.getPermissionStates;
+export const installPermissionHostBackend = api.installPermissionHostBackend;
+export const observePermissionHostResult = api.observePermissionHostResult;
 export const requestPermission = api.requestPermission;
+export const resetPermissionBackendForTest = api.resetPermissionBackendForTest;
 export const setPermissionBackend = api.setPermissionBackend;
 export const setPermissionRequestFallbackGuard = api.setPermissionRequestFallbackGuard;

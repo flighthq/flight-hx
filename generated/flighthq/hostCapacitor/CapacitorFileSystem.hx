@@ -31,7 +31,7 @@ class CapacitorFileSystem {
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).readFile(({ final __callArgument1:Dynamic = { path: path, encoding: 'utf8' }; __callArgument1; })), function(__awaitValue0:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn((cast __awaitValue0 : CapacitorFilesystemReadResult).data);
+              return flighthq._internal._Async.flowReturn((cast CapacitorFileSystem.readResultAsText__capacitorFileSystem((cast __awaitValue0 : CapacitorFilesystemReadResult).data) : flighthq._internal._Promise<String>));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -66,7 +66,7 @@ class CapacitorFileSystem {
         flighthq._internal._Async.protect(function():Dynamic {
           return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
             return flighthq._internal._Async.flatMap((cast filesystem : CapacitorFilesystemPlugin).readFile(({ final __callArgument5:Dynamic = { path: path }; __callArgument5; })), function(__awaitValue4:Dynamic):Dynamic {
-              return flighthq._internal._Async.flowReturn((cast CapacitorFileSystem.base64ToBytes__capacitorFileSystem((cast (cast __awaitValue4 : CapacitorFilesystemReadResult).data : String)) : flighthq._internal._UInt8Array));
+              return flighthq._internal._Async.flowReturn((cast CapacitorFileSystem.readResultAsBytes__capacitorFileSystem((cast __awaitValue4 : CapacitorFilesystemReadResult).data) : flighthq._internal._Promise<flighthq._internal._UInt8Array>));
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -384,6 +384,24 @@ class CapacitorFileSystem {
     }
     return cast bytes;
     return cast null;
+  }
+
+  public static function readResultAsText__capacitorFileSystem(data:flighthq._internal._Union2<flighthq._internal.dom.Blob, String>):flighthq._internal._Promise<String> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool) ? (cast data : Dynamic) : (cast (cast data : flighthq._internal.dom.Blob).text() : Dynamic)));
+    }));
+  }
+
+  public static function readResultAsBytes__capacitorFileSystem(data:flighthq._internal._Union2<flighthq._internal.dom.Blob, String>):flighthq._internal._Promise<flighthq._internal._UInt8Array> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      if ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool)) {
+        return flighthq._internal._Async.resolve((cast CapacitorFileSystem.base64ToBytes__capacitorFileSystem((cast data : String)) : flighthq._internal._UInt8Array));
+      } else {
+        return flighthq._internal._Async.flatMap((cast data : flighthq._internal.dom.Blob).arrayBuffer(), function(__awaitValue37:Dynamic):Dynamic {
+          return flighthq._internal._Async.resolve(new flighthq._internal._UInt8Array(__awaitValue37));
+        });
+      }
+    }));
   }
 
   public static function bytesToBase64__capacitorFileSystem(bytes:flighthq._internal._UInt8Array):String {

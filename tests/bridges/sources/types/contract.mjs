@@ -544,7 +544,6 @@ export * from './RenderRegistrySignals.mjs';
 export * from './RenderState.mjs';
 export * from './RenderStateStats.mjs';
 export * from './RenderTarget.mjs';
-export * from './RenderTargetSizeOptions.mjs';
 export * from './RenderTexture.mjs';
 export * from './RenderViewport2D.mjs';
 export * from './Renderable.mjs';

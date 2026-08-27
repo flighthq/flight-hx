@@ -3,6 +3,7 @@ package flighthq.shell;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Shell.ShellBackend;
 import flighthq.types.Shell.ShellOpenExternalOptions;
 import flighthq.types.Shell.ShellOpenPathOptions;
@@ -10,61 +11,76 @@ import flighthq.types.Shell.ShellShortcutLink;
 import flighthq.types.Shell.ShellShortcutWriteOperation;
 
 class Shell {
-  public static var _backend__shell:Null<ShellBackend> = _Runtime.explicitNull();
+  public static var _custom__shell:Null<ShellBackend> = _Runtime.explicitNull();
+
+  public static var _host__shell:Null<ShellBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__shell:Bool = false;
+
+  public static var _hostObservation__shell:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+
+  public static final _sentinel__shell:ShellBackend = (cast { beep: function():Void {
+
+  }, moveItemsToTrash: function(paths:Array<String>):flighthq._internal._Promise<Array<Bool>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+    }));
+  }, moveToTrash: function(path:String):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, openExternal: function(url:String, ?options:ShellOpenExternalOptions):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, openPath: function(path:String, ?options:ShellOpenPathOptions):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, openPathResult: function(path:String, ?options:ShellOpenPathOptions):flighthq._internal._Promise<String> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve('unavailable on web');
+    }));
+  }, readShortcutLink: function(shortcutPath:String):flighthq._internal._Promise<Null<ShellShortcutLink>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(null);
+    }));
+  }, showItemInFolder: function(path:String):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, writeShortcutLink: function(shortcutPath:String, link:ShellShortcutLink, ?operation:ShellShortcutWriteOperation):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  } });
 
   public static var _urlSchemeAllowlist__shell:Null<Array<String>> = _Runtime.explicitNull();
 
-  @:noCompletion
-  public static function createWebShellBackend():ShellBackend {
-    return cast { beep: function():Void {
-
-    }, moveItemsToTrash: function():flighthq._internal._Promise<Array<Bool>> {
-      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
-      }));
-    }, moveToTrash: function():flighthq._internal._Promise<Bool> {
-      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(false);
-      }));
-    }, openExternal: function(url:String):flighthq._internal._Promise<Bool> {
-      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomWindowBackend.field(flighthq._internal.backend.DomWindowBackend.value(), 'open')), 'function') : Bool)) : Bool)) { return cast false; }
-        try {
-          return cast !_Runtime.strictEquals(flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'open', cast ([url, '_blank', 'noopener'] : Array<Dynamic>)), null);
-        } catch (__error:Dynamic) {
-          return cast false;
-        }
-        return cast null;
-      }));
-    }, openPath: function():flighthq._internal._Promise<Bool> {
-      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(false);
-      }));
-    }, openPathResult: function():flighthq._internal._Promise<String> {
-      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve('unavailable on web');
-      }));
-    }, readShortcutLink: function():flighthq._internal._Promise<Null<ShellShortcutLink>> {
-      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(null);
-      }));
-    }, showItemInFolder: function():flighthq._internal._Promise<Bool> {
-      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(false);
-      }));
-    }, writeShortcutLink: function():flighthq._internal._Promise<Bool> {
-      return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve(false);
-      }));
-    } };
+  public static function explainShellBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Shell._custom__shell, null) : Bool)) {
+      return cast { conflict: Shell._hostConflict__shell, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Shell._host__shell, null) : Bool)) {
+      return cast { conflict: Shell._hostConflict__shell, layer: 'host', operation: ((cast !_Runtime.strictEquals(Shell._hostObservation__shell, null) : Bool) ? (cast (cast Shell._hostObservation__shell : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Shell._hostObservation__shell, null) : Bool) ? (cast (cast Shell._hostObservation__shell : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
     return cast null;
   }
 
   @:noCompletion
   public static function getShellBackend():ShellBackend {
-    if ((cast _Runtime.strictEquals(Shell._backend__shell, null) : Bool)) { (Shell._backend__shell = cast ((cast createWebShellBackend() : ShellBackend) : Dynamic)); }
-    return cast Shell._backend__shell;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Shell._custom__shell, function():Dynamic return cast Shell._host__shell), function():Dynamic return cast Shell._sentinel__shell);
     return cast null;
+  }
+
+  @:noCompletion
+  public static function installShellHostBackend(backend:ShellBackend):Void {
+    if ((cast !_Runtime.strictEquals(Shell._host__shell, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Shell._host__shell, backend) : Bool)) { (Shell._hostConflict__shell = cast (true : Dynamic)); }
+      return;
+    }
+    (Shell._host__shell = cast (backend : Dynamic));
   }
 
   public static function isShellUrlAllowed(url:String):Bool {
@@ -86,6 +102,11 @@ class Shell {
   public static function moveItemToTrash(path:String):flighthq._internal._Promise<Bool> {
     return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).moveToTrash((cast path : String));
     return cast null;
+  }
+
+  @:noCompletion
+  public static function observeShellHostResult(operation:String, succeeded:Bool):Void {
+    (Shell._hostObservation__shell = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function openShellExternalUrl(url:String, ?options:ShellOpenExternalOptions):flighthq._internal._Promise<Bool> {
@@ -110,8 +131,16 @@ class Shell {
   }
 
   @:noCompletion
+  public static function resetShellBackendForTest():Void {
+    (Shell._custom__shell = cast (null : Dynamic));
+    (Shell._host__shell = cast (null : Dynamic));
+    (Shell._hostConflict__shell = cast (false : Dynamic));
+    (Shell._hostObservation__shell = cast (null : Dynamic));
+  }
+
+  @:noCompletion
   public static function setShellBackend(backend:Null<ShellBackend>):Void {
-    (Shell._backend__shell = cast (backend : Dynamic));
+    (Shell._custom__shell = cast (backend : Dynamic));
   }
 
   public static function setShellUrlSchemeAllowlist(schemes:Null<Array<String>>):Void {

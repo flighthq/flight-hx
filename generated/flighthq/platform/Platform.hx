@@ -3,6 +3,7 @@ package flighthq.platform;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Platform.PlatformBackend;
 import flighthq.types.Platform.PlatformEndianness;
 import flighthq.types.Platform.PlatformEngine;
@@ -21,9 +22,34 @@ import flighthq.useragent.UserAgent.parseUserAgentRuntime;
 import flighthq.useragent.UserAgent.parseUserAgentVersion;
 
 class Platform {
-  public static var _backend__platform:Null<PlatformBackend> = _Runtime.explicitNull();
+  public static var _custom__platform:Null<PlatformBackend> = _Runtime.explicitNull();
+
+  public static var _host__platform:Null<PlatformBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__platform:Bool = false;
+
+  public static var _hostObservation__platform:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static final _scratch__platform:PlatformInfo = (cast createPlatformInfo() : PlatformInfo);
+
+  public static final _sentinel__platform:PlatformBackend = (cast { getInfo: function(out:PlatformInfo):PlatformInfo {
+    (out.arch = cast ('' : String));
+    (out.distro = cast ('' : String));
+    (out.distroVersion = cast ('' : String));
+    (out.endianness = cast ('unknown' : PlatformEndianness));
+    (out.engine = cast ('unknown' : PlatformEngine));
+    (out.engineVersion = cast ('' : String));
+    (out.isTouch = cast (false : Bool));
+    (out.kind = cast ('unknown' : PlatformKind));
+    (out.locale = cast ('' : String));
+    (out.name = cast ('unknown' : PlatformName));
+    (out.osBuild = cast ('' : String));
+    (out.pointerWidth = cast (-1.0 : Float));
+    (out.runtime = cast ('unknown' : PlatformRuntime));
+    (out.version = cast ('' : String));
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  } });
 
   public static function comparePlatformVersions(a:String, b:String):Float {
     var aParts:Array<String> = cast _Runtime.UNDEFINED;
@@ -61,10 +87,20 @@ class Platform {
     return cast null;
   }
 
+  public static function explainPlatformBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Platform._custom__platform, null) : Bool)) {
+      return cast { conflict: Platform._hostConflict__platform, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Platform._host__platform, null) : Bool)) {
+      return cast { conflict: Platform._hostConflict__platform, layer: 'host', operation: ((cast !_Runtime.strictEquals(Platform._hostObservation__platform, null) : Bool) ? (cast (cast Platform._hostObservation__platform : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Platform._hostObservation__platform, null) : Bool) ? (cast (cast Platform._hostObservation__platform : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   @:noCompletion
   public static function getPlatformBackend():PlatformBackend {
-    if ((cast _Runtime.strictEquals(Platform._backend__platform, null) : Bool)) { (Platform._backend__platform = cast ((cast createWebPlatformBackend() : PlatformBackend) : Dynamic)); }
-    return cast Platform._backend__platform;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Platform._custom__platform, function():Dynamic return cast Platform._host__platform), function():Dynamic return cast Platform._sentinel__platform);
     return cast null;
   }
 
@@ -117,6 +153,15 @@ class Platform {
     return cast null;
   }
 
+  @:noCompletion
+  public static function installPlatformHostBackend(backend:PlatformBackend):Void {
+    if ((cast !_Runtime.strictEquals(Platform._host__platform, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Platform._host__platform, backend) : Bool)) { (Platform._hostConflict__platform = cast (true : Dynamic)); }
+      return;
+    }
+    (Platform._host__platform = cast (backend : Dynamic));
+  }
+
   public static function isPlatformDesktop():Bool {
     return cast _Runtime.strictEquals((cast getPlatformKind() : PlatformKind), 'desktop');
     return cast null;
@@ -153,7 +198,20 @@ class Platform {
   }
 
   @:noCompletion
+  public static function observePlatformHostResult(operation:String, succeeded:Bool):Void {
+    (Platform._hostObservation__platform = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
+  }
+
+  @:noCompletion
+  public static function resetPlatformBackendForTest():Void {
+    (Platform._custom__platform = cast (null : Dynamic));
+    (Platform._host__platform = cast (null : Dynamic));
+    (Platform._hostConflict__platform = cast (false : Dynamic));
+    (Platform._hostObservation__platform = cast (null : Dynamic));
+  }
+
+  @:noCompletion
   public static function setPlatformBackend(backend:Null<PlatformBackend>):Void {
-    (Platform._backend__platform = cast (backend : Dynamic));
+    (Platform._custom__platform = cast (backend : Dynamic));
   }
 }

@@ -3,6 +3,7 @@ package flighthq.notification;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Notification.NotificationAction;
 import flighthq.types.Notification.NotificationBackend;
 import flighthq.types.Notification.NotificationCapabilities;
@@ -12,10 +13,24 @@ import flighthq.types.Notification.NotificationRequest;
 import flighthq.types.Notification.NotificationSchedule;
 import flighthq.types.Notification.ScheduledNotification;
 
+typedef NotificationSubscription__notification = { var unsubscribe:Void->Void; var rebind:NotificationBackend->Void; };
+
 typedef ServiceWorkerRegistrationLike__notification = { var showNotification:String->flighthq._internal.dom.NotificationOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var getNotifications:{ @:optional var tag:String; }->flighthq._internal._Promise<Array<{ var title:String; var close:Void->Void; var tag:String; }>>; };
 
 class Notification {
-  public static var _backend__notification:Null<NotificationBackend> = _Runtime.explicitNull();
+  public static var _custom__notification:Null<NotificationBackend> = _Runtime.explicitNull();
+
+  public static var _host__notification:Null<NotificationBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__notification:Bool = false;
+
+  public static var _hostObservation__notification:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+
+  public static final _noop__notification:Void->(Void->Void) = (cast function():Void->Void return function():Void {
+
+  });
+
+  public static final _notificationSubscriptions__notification:flighthq._internal._Set<NotificationSubscription__notification> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), []);
 
   public static function _repeatMs__notification(repeat:flighthq._internal._IndexedAccess<NotificationSchedule, String>):Float {
     {
@@ -41,6 +56,51 @@ class Notification {
     }
     return cast null;
   }
+
+  public static final _sentinel__notification:NotificationBackend = (cast { cancelScheduledNotification: function(id:String):Void {
+
+  }, closeAllNotifications: function():Void {
+
+  }, closeNotification: function(id:String):Void {
+
+  }, getCapabilities: function():NotificationCapabilities {
+    return cast { actions: false, channels: false, coldStart: false, image: false, listActive: false, scheduling: false, textReply: false };
+    return cast _Runtime.UNDEFINED;
+  }, getActiveNotifications: function():flighthq._internal._Promise<Array<NotificationRequest>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+    }));
+  }, getLaunchNotification: function():flighthq._internal._Promise<Null<NotificationRequest>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(null);
+    }));
+  }, getPendingNotifications: function():flighthq._internal._Promise<Array<ScheduledNotification>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+    }));
+  }, getPermission: function():NotificationPermission {
+    return cast 'denied';
+    return cast _Runtime.UNDEFINED;
+  }, isSupported: function():Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, notify: function(request:NotificationRequest):flighthq._internal._Promise<String> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve('');
+    }));
+  }, requestPermission: function():flighthq._internal._Promise<NotificationPermission> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve('denied');
+    }));
+  }, scheduleNotification: function(request:NotificationRequest, schedule:NotificationSchedule):flighthq._internal._Promise<String> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve('');
+    }));
+  }, subscribeAction: Notification._noop__notification, subscribeClick: Notification._noop__notification, subscribeDismiss: Notification._noop__notification, subscribeReply: Notification._noop__notification, subscribeShow: Notification._noop__notification, updateNotification: function(id:String, partial:{ @:optional var title:Null<String>; @:optional var id:Null<String>; @:optional var body:Null<String>; @:optional var icon:Null<String>; @:optional var badge:Null<String>; @:optional var tag:Null<String>; @:optional var silent:Null<Bool>; @:optional var actions:Null<Array<NotificationAction>>; @:optional var dir:Null<String>; @:optional var image:Null<String>; @:optional var lang:Null<String>; @:optional var renotify:Null<Bool>; @:optional var requireInteraction:Null<Bool>; @:optional var timestamp:Null<Float>; @:optional var vibrate:Null<Array<Float>>; @:optional var data:flighthq._internal._Any; }):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  } });
 
   public static function cancelScheduledNotification(id:String):Void {
     (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).cancelScheduledNotification((cast id : String));
@@ -594,6 +654,17 @@ class Notification {
     ({ final __optionalCall55 = (cast backend : { @:optional var deleteNotificationChannel:Null<String->Void>; }).deleteNotificationChannel; if (__optionalCall55 != null) __optionalCall55(id); });
   }
 
+  public static function explainNotificationBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Notification._custom__notification, null) : Bool)) {
+      return cast { conflict: Notification._hostConflict__notification, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Notification._host__notification, null) : Bool)) {
+      return cast { conflict: Notification._hostConflict__notification, layer: 'host', operation: ((cast !_Runtime.strictEquals(Notification._hostObservation__notification, null) : Bool) ? (cast (cast Notification._hostObservation__notification : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Notification._hostObservation__notification, null) : Bool) ? (cast (cast Notification._hostObservation__notification : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   public static function getActiveNotifications():flighthq._internal._Promise<Array<NotificationRequest>> {
     return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).getActiveNotifications();
     return cast null;
@@ -606,8 +677,7 @@ class Notification {
 
   @:noCompletion
   public static function getNotificationBackend():NotificationBackend {
-    if ((cast _Runtime.strictEquals(Notification._backend__notification, null) : Bool)) { (Notification._backend__notification = cast ((cast createWebNotificationBackend() : NotificationBackend) : Dynamic)); }
-    return cast Notification._backend__notification;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Notification._custom__notification, function():Dynamic return cast Notification._host__notification), function():Dynamic return cast Notification._sentinel__notification);
     return cast null;
   }
 
@@ -633,6 +703,18 @@ class Notification {
     return cast null;
   }
 
+  @:noCompletion
+  public static function installNotificationHostBackend(backend:NotificationBackend):Void {
+    var previous:NotificationBackend = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals(Notification._host__notification, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Notification._host__notification, backend) : Bool)) { (Notification._hostConflict__notification = cast (true : Dynamic)); }
+      return;
+    }
+    previous = (cast getNotificationBackend() : NotificationBackend);
+    (Notification._host__notification = cast (backend : Dynamic));
+    Notification.rebindNotificationSubscriptions__notification(({ final __callArgument56:Dynamic = previous; __callArgument56; }), (cast getNotificationBackend() : NotificationBackend));
+  }
+
   public static function isNotificationSupported():Bool {
     return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).isSupported();
     return cast null;
@@ -652,28 +734,56 @@ class Notification {
     } } }
   }
 
+  @:noCompletion
+  public static function observeNotificationHostResult(operation:String, succeeded:Bool):Void {
+    (Notification._hostObservation__notification = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
+  }
+
   public static function onNotificationAction(listener:String->String->Void):Void->Void {
-    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).subscribeAction(({ final __callArgument56:Dynamic = listener; __callArgument56; }));
+    return cast (cast (cast Notification.registerNotificationSubscription__notification : (Array<String>->Void)->(NotificationBackend->(Array<String>->Void)->(Void->Void))->(Void->Void))(({ final __callArgument58:Dynamic = listener; __callArgument58; }), ({ final __callArgument60:Dynamic = function(backend:NotificationBackend, handler:Array<String>->Void):Void->Void return (cast backend : NotificationBackend).subscribeAction(({ final __callArgument59:Dynamic = handler; __callArgument59; })); __callArgument60; })) : Void->Void);
     return cast null;
   }
 
   public static function onNotificationClick(listener:String->Void):Void->Void {
-    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).subscribeClick(({ final __callArgument57:Dynamic = listener; __callArgument57; }));
+    return cast (cast (cast Notification.registerNotificationSubscription__notification : (Array<String>->Void)->(NotificationBackend->(Array<String>->Void)->(Void->Void))->(Void->Void))(({ final __callArgument64:Dynamic = listener; __callArgument64; }), ({ final __callArgument66:Dynamic = function(backend:NotificationBackend, handler:Array<String>->Void):Void->Void return (cast backend : NotificationBackend).subscribeClick(({ final __callArgument65:Dynamic = handler; __callArgument65; })); __callArgument66; })) : Void->Void);
     return cast null;
   }
 
   public static function onNotificationDismiss(listener:String->Void):Void->Void {
-    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).subscribeDismiss(({ final __callArgument58:Dynamic = listener; __callArgument58; }));
+    return cast (cast (cast Notification.registerNotificationSubscription__notification : (Array<String>->Void)->(NotificationBackend->(Array<String>->Void)->(Void->Void))->(Void->Void))(({ final __callArgument70:Dynamic = listener; __callArgument70; }), ({ final __callArgument72:Dynamic = function(backend:NotificationBackend, handler:Array<String>->Void):Void->Void return (cast backend : NotificationBackend).subscribeDismiss(({ final __callArgument71:Dynamic = handler; __callArgument71; })); __callArgument72; })) : Void->Void);
     return cast null;
   }
 
   public static function onNotificationReply(listener:String->String->String->Void):Void->Void {
-    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).subscribeReply(({ final __callArgument59:Dynamic = listener; __callArgument59; }));
+    return cast (cast (cast Notification.registerNotificationSubscription__notification : (Array<String>->Void)->(NotificationBackend->(Array<String>->Void)->(Void->Void))->(Void->Void))(({ final __callArgument76:Dynamic = listener; __callArgument76; }), ({ final __callArgument78:Dynamic = function(backend:NotificationBackend, handler:Array<String>->Void):Void->Void return (cast backend : NotificationBackend).subscribeReply(({ final __callArgument77:Dynamic = handler; __callArgument77; })); __callArgument78; })) : Void->Void);
     return cast null;
   }
 
   public static function onNotificationShow(listener:String->Void):Void->Void {
-    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).subscribeShow(({ final __callArgument60:Dynamic = listener; __callArgument60; }));
+    return cast (cast (cast Notification.registerNotificationSubscription__notification : (Array<String>->Void)->(NotificationBackend->(Array<String>->Void)->(Void->Void))->(Void->Void))(({ final __callArgument82:Dynamic = listener; __callArgument82; }), ({ final __callArgument84:Dynamic = function(backend:NotificationBackend, handler:Array<String>->Void):Void->Void return (cast backend : NotificationBackend).subscribeShow(({ final __callArgument83:Dynamic = handler; __callArgument83; })); __callArgument84; })) : Void->Void);
+    return cast null;
+  }
+
+  public static function rebindNotificationSubscriptions__notification(previous:NotificationBackend, next:NotificationBackend):Void {
+    if ((cast _Runtime.strictEquals(previous, next) : Bool)) { return; }
+    for (subscription in _Runtime.iterable(Notification._notificationSubscriptions__notification)) {
+      (cast subscription : NotificationSubscription__notification).rebind(({ final __callArgument90:Dynamic = next; __callArgument90; }));
+    }
+  }
+
+  public static function registerNotificationSubscription__notification<TArgs>(listener:TArgs->Void, subscribe:NotificationBackend->(TArgs->Void)->(Void->Void)):Void->Void {
+    var activeUnsubscribe:Void->Void = cast _Runtime.UNDEFINED;
+    var entry:NotificationSubscription__notification = cast _Runtime.UNDEFINED;
+    activeUnsubscribe = (cast subscribe((cast getNotificationBackend() : NotificationBackend), (cast listener : Dynamic)) : Void->Void);
+    entry = (cast { rebind: function(backend:NotificationBackend):Void {
+      activeUnsubscribe();
+      (activeUnsubscribe = cast ((cast subscribe(({ final __callArgument91:Dynamic = backend; __callArgument91; }), (cast listener : Dynamic)) : Void->Void) : Dynamic));
+    }, unsubscribe: function():Void {
+      if ((cast !(cast ((cast Notification._notificationSubscriptions__notification : flighthq._internal._Set<NotificationSubscription__notification>).delete_(entry)) : Bool) : Bool)) { return; }
+      activeUnsubscribe();
+    } });
+    ((cast Notification._notificationSubscriptions__notification : flighthq._internal._Set<NotificationSubscription__notification>).add(entry));
+    return cast (cast entry : NotificationSubscription__notification).unsubscribe;
     return cast null;
   }
 
@@ -682,18 +792,32 @@ class Notification {
     return cast null;
   }
 
+  @:noCompletion
+  public static function resetNotificationBackendForTest():Void {
+    var previous:NotificationBackend = cast _Runtime.UNDEFINED;
+    previous = (cast getNotificationBackend() : NotificationBackend);
+    (Notification._custom__notification = cast (null : Dynamic));
+    (Notification._host__notification = cast (null : Dynamic));
+    (Notification._hostConflict__notification = cast (false : Dynamic));
+    (Notification._hostObservation__notification = cast (null : Dynamic));
+    Notification.rebindNotificationSubscriptions__notification(({ final __callArgument93:Dynamic = previous; __callArgument93; }), (cast getNotificationBackend() : NotificationBackend));
+  }
+
   public static function scheduleNotification(request:NotificationRequest, schedule:NotificationSchedule):flighthq._internal._Promise<String> {
-    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).scheduleNotification(({ final __callArgument61:Dynamic = request; __callArgument61; }), ({ final __callArgument62:Dynamic = schedule; __callArgument62; }));
+    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).scheduleNotification(({ final __callArgument95:Dynamic = request; __callArgument95; }), ({ final __callArgument96:Dynamic = schedule; __callArgument96; }));
     return cast null;
   }
 
   @:noCompletion
   public static function setNotificationBackend(backend:Null<NotificationBackend>):Void {
-    (Notification._backend__notification = cast (backend : Dynamic));
+    var previous:NotificationBackend = cast _Runtime.UNDEFINED;
+    previous = (cast getNotificationBackend() : NotificationBackend);
+    (Notification._custom__notification = cast (backend : Dynamic));
+    Notification.rebindNotificationSubscriptions__notification(({ final __callArgument97:Dynamic = previous; __callArgument97; }), (cast getNotificationBackend() : NotificationBackend));
   }
 
   public static function showNotification(request:NotificationRequest):flighthq._internal._Promise<String> {
-    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).notify(({ final __callArgument63:Dynamic = request; __callArgument63; }));
+    return cast (cast (cast getNotificationBackend() : NotificationBackend) : NotificationBackend).notify(({ final __callArgument99:Dynamic = request; __callArgument99; }));
     return cast null;
   }
 

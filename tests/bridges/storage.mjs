@@ -6,6 +6,7 @@ export const clearStorageNamespace = compiled.flighthq.storage.Storage.clearStor
 export const createStorageNamespace = compiled.flighthq.storage.Storage.createStorageNamespace;
 export const disableStorageSignals = compiled.flighthq.storage.Storage.disableStorageSignals;
 export const enableStorageSignals = compiled.flighthq.storage.Storage.enableStorageSignals;
+export const explainStorageBackend = compiled.flighthq.storage.Storage.explainStorageBackend;
 export const getNamespacedStorageByteSize = compiled.flighthq.storage.Storage.getNamespacedStorageByteSize;
 export const getNamespacedStorageEntries = compiled.flighthq.storage.Storage.getNamespacedStorageEntries;
 export const getNamespacedStorageItem = compiled.flighthq.storage.Storage.getNamespacedStorageItem;

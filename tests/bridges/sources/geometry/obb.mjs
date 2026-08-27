@@ -10,5 +10,6 @@ export const getClosestPointOnObb = api.getClosestPointOnObb;
 export const intersectRay3DObb = api.intersectRay3DObb;
 export const isObbIntersectingAabb = api.isObbIntersectingAabb;
 export const isObbIntersectingObb = api.isObbIntersectingObb;
+export const isObbIntersectingSphere = api.isObbIntersectingSphere;
 export const setObb = api.setObb;
 export const transformObbByMatrix4 = api.transformObbByMatrix4;

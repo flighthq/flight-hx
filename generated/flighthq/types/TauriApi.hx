@@ -20,7 +20,7 @@ typedef TauriDialogSaveOptions = { @:optional var defaultPath:String; @:optional
 
 typedef TauriDialogMessageOptions = { @:optional var cancelLabel:String; @:optional var kind:String; @:optional var okLabel:String; @:optional var title:String; };
 
-typedef TauriDialogPlugin = { var ask:String->TauriDialogMessageOptions->flighthq._internal._Promise<Bool>; var confirm:String->TauriDialogMessageOptions->flighthq._internal._Promise<Bool>; var message:String->TauriDialogMessageOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var open:TauriDialogOpenOptions->flighthq._internal._Promise<Null<flighthq._internal._Union2<String, Array<String>>>>; var save:TauriDialogSaveOptions->flighthq._internal._Promise<Null<String>>; };
+typedef TauriDialogPlugin = { var ask:String->TauriDialogMessageOptions->flighthq._internal._Promise<Bool>; var confirm:String->TauriDialogMessageOptions->flighthq._internal._Promise<Bool>; var message:String->TauriDialogMessageOptions->flighthq._internal._Promise<flighthq._internal._Any>; var open:TauriDialogOpenOptions->flighthq._internal._Promise<Null<flighthq._internal._Union2<String, Array<String>>>>; var save:TauriDialogSaveOptions->flighthq._internal._Promise<Null<String>>; };
 
 typedef TauriNotificationPermission = String;
 
@@ -30,7 +30,7 @@ typedef TauriNotificationPlugin = { var isPermissionGranted:Void->flighthq._inte
 
 typedef TauriOpenerPlugin = { var openPath:String->String->flighthq._internal._Promise<flighthq._internal._Nothing>; var openUrl:String->String->flighthq._internal._Promise<flighthq._internal._Nothing>; var revealItemInDir:String->flighthq._internal._Promise<flighthq._internal._Nothing>; };
 
-typedef TauriOsModule = { var arch:Void->String; var locale:Void->Null<String>; var platform:Void->String; var version:Void->String; };
+typedef TauriOsModule = { var arch:Void->String; var locale:Void->flighthq._internal._Promise<Null<String>>; var platform:Void->String; var version:Void->String; };
 
 typedef TauriShortcutEvent = { var shortcut:String; var state:String; };
 

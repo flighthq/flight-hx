@@ -11,12 +11,114 @@ import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
 import flighthq.types.App.AppLoginItemLike;
 import flighthq.types.App.AppPathKind;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Menu.MenuItemTemplate;
 import flighthq.types.Signal;
 import flighthq.types.Signal.SignalData;
 
 class App {
-  public static var _backend__app:Null<AppBackend> = _Runtime.explicitNull();
+  public static var _custom__app:Null<AppBackend> = _Runtime.explicitNull();
+
+  public static var _host__app:Null<AppBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__app:Bool = false;
+
+  public static var _hostObservation__app:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+
+  public static final _noop__app:Void->(Void->Void) = (cast function():Void->Void return function():Void {
+
+  });
+
+  public static final _sentinel__app:AppBackend = (cast { addRecentDocument: function(path:String):Void {
+
+  }, bounceDock: function():Float {
+    return cast -1.0;
+    return cast _Runtime.UNDEFINED;
+  }, cancelAttention: function(id:Float):Void {
+
+  }, cancelDockBounce: function(id:Float):Void {
+
+  }, clearRecentDocuments: function():Void {
+
+  }, focus: function():Void {
+
+  }, getAppDirectoryPath: function(kind:AppPathKind):String {
+    return cast '';
+    return cast _Runtime.UNDEFINED;
+  }, getAppPath: function():String {
+    return cast '';
+    return cast _Runtime.UNDEFINED;
+  }, getCommandLine: function():Array<String> {
+    return cast cast ([] : Array<Dynamic>);
+    return cast _Runtime.UNDEFINED;
+  }, getExecutablePath: function():String {
+    return cast '';
+    return cast _Runtime.UNDEFINED;
+  }, getLocale: function():String {
+    return cast '';
+    return cast _Runtime.UNDEFINED;
+  }, getLoginItem: function():AppLoginItem {
+    return cast { args: cast ([] : Array<Dynamic>), openAsHidden: false, openAtLogin: false, path: '' };
+    return cast _Runtime.UNDEFINED;
+  }, getName: function():String {
+    return cast '';
+    return cast _Runtime.UNDEFINED;
+  }, getPreferredSystemLanguages: function():Array<String> {
+    return cast cast ([] : Array<Dynamic>);
+    return cast _Runtime.UNDEFINED;
+  }, getSystemLocale: function():String {
+    try {
+      return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Intl'), 'undefined') : Bool) ? (cast _Runtime.field(_Runtime.callProperty(_Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'DateTimeFormat'), []), 'resolvedOptions', cast ([] : Array<Dynamic>)), 'locale') : Dynamic) : (cast '' : Dynamic));
+    } catch (__error:Dynamic) {
+      return cast '';
+    }
+    return cast _Runtime.UNDEFINED;
+  }, getVersion: function():String {
+    return cast '';
+    return cast _Runtime.UNDEFINED;
+  }, hasSingleInstanceLock: function():Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, hideApp: function():Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, isAppHidden: function():Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, quit: function():Void {
+
+  }, relaunch: function():Void {
+
+  }, releaseSingleInstanceLock: function():Void {
+
+  }, requestAttention: function(critical:Bool):Float {
+    return cast -1.0;
+    return cast _Runtime.UNDEFINED;
+  }, requestSingleInstanceLock: function():Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, setActivationPolicy: function(policy:AppActivationPolicy):Void {
+
+  }, setBadgeCount: function(count:Float):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, setDockBadge: function(text:String):Void {
+
+  }, setDockMenu: function(items:Array<MenuItemTemplate>):Void {
+
+  }, setLoginItem: function(settings:AppLoginItemLike):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, setName: function(name:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, setUserModelId: function(id:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, showApp: function():Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, subscribeActivate: App._noop__app, subscribeAllWindowsClosed: App._noop__app, subscribeOpenFile: App._noop__app, subscribeQuitRequest: App._noop__app, subscribeReady: App._noop__app, subscribeSecondInstance: App._noop__app });
 
   public static final _subscriptions__app:flighthq._internal._WeakMap<flighthq.types.App, Void->Void> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
@@ -84,158 +186,6 @@ class App {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebAppBackend():AppBackend {
-    return cast { addRecentDocument: function():Void {
-
-    }, bounceDock: function():Float {
-      return cast -1.0;
-      return cast _Runtime.UNDEFINED;
-    }, cancelAttention: function():Void {
-
-    }, cancelDockBounce: function():Void {
-
-    }, clearRecentDocuments: function():Void {
-
-    }, focus: function():Void {
-      if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
-        try {
-          flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'focus', cast ([] : Array<Dynamic>));
-        } catch (__error:Dynamic) {
-        }
-      }
-    }, getAppDirectoryPath: function():String {
-      return cast '';
-      return cast _Runtime.UNDEFINED;
-    }, getAppPath: function():String {
-      return cast '';
-      return cast _Runtime.UNDEFINED;
-    }, getCommandLine: function():Array<String> {
-      return cast cast ([] : Array<Dynamic>);
-      return cast _Runtime.UNDEFINED;
-    }, getExecutablePath: function():String {
-      return cast '';
-      return cast _Runtime.UNDEFINED;
-    }, getLocale: function():String {
-      return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) ? (cast _Runtime.coalesce(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'language'), function():Dynamic return cast '') : Dynamic) : (cast '' : Dynamic));
-      return cast _Runtime.UNDEFINED;
-    }, getPreferredSystemLanguages: function():Array<String> {
-      if ((cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast _Runtime.isArray(flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'languages')) : Bool)) : Bool)) {
-        return cast (cast flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'languages') : Array<String>);
-      }
-      return cast cast ([] : Array<Dynamic>);
-      return cast _Runtime.UNDEFINED;
-    }, getSystemLocale: function():String {
-      try {
-        return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('Intl'), 'undefined') : Bool) ? (cast _Runtime.field(_Runtime.callProperty(_Runtime.construct(_Runtime.field(flighthq._internal._HostValueLut.get('Intl'), 'DateTimeFormat'), []), 'resolvedOptions', cast ([] : Array<Dynamic>)), 'locale') : Dynamic) : (cast '' : Dynamic));
-      } catch (__error:Dynamic) {
-        return cast '';
-      }
-      return cast _Runtime.UNDEFINED;
-    }, getLoginItem: function():AppLoginItem {
-      return cast { args: cast ([] : Array<Dynamic>), openAsHidden: false, openAtLogin: false, path: '' };
-      return cast _Runtime.UNDEFINED;
-    }, getName: function():String {
-      return cast ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) ? (cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'title') : Dynamic) : (cast '' : Dynamic));
-      return cast _Runtime.UNDEFINED;
-    }, getVersion: function():String {
-      return cast '';
-      return cast _Runtime.UNDEFINED;
-    }, hasSingleInstanceLock: function():Bool {
-      return cast true;
-      return cast _Runtime.UNDEFINED;
-    }, hideApp: function():Bool {
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, isAppHidden: function():Bool {
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, quit: function():Void {
-      if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
-        try {
-          flighthq._internal.backend.DomWindowBackend.call(flighthq._internal.backend.DomWindowBackend.value(), 'close', cast ([] : Array<Dynamic>));
-        } catch (__error:Dynamic) {
-        }
-      }
-    }, relaunch: function():Void {
-      if ((cast !_Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) {
-        try {
-          (cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).reload();
-        } catch (__error:Dynamic) {
-        }
-      }
-    }, releaseSingleInstanceLock: function():Void {
-
-    }, requestAttention: function():Float {
-      return cast -1.0;
-      return cast _Runtime.UNDEFINED;
-    }, requestSingleInstanceLock: function():Bool {
-      return cast true;
-      return cast _Runtime.UNDEFINED;
-    }, setActivationPolicy: function():Void {
-
-    }, setBadgeCount: function(count:Float):Bool {
-      if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flighthq._internal.backend.DomNavigatorBackend.hasField(flighthq._internal.backend.DomNavigatorBackend.value(), 'setAppBadge') : Bool) : Bool)) : Bool)) { return cast false; }
-      try {
-        (cast (cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { var setAppBadge:Float->flighthq._internal._Promise<flighthq._internal._Nothing>; }>) : { var setAppBadge:Null<Float>->flighthq._internal._Promise<flighthq._internal._Nothing>; }).setAppBadge(({ final __callArgument9:Dynamic = count; __callArgument9; }));
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast _Runtime.UNDEFINED;
-    }, setDockBadge: function():Void {
-
-    }, setDockMenu: function():Void {
-
-    }, setLoginItem: function():Bool {
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, setName: function():Bool {
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, setUserModelId: function():Bool {
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, showApp: function():Bool {
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, subscribeActivate: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeAllWindowsClosed: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeOpenFile: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeQuitRequest: function(_listener:(Void->Void)->Void):Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeReady: function(listener:Void->Void):Void->Void {
-      var id:flighthq._internal._Promise<flighthq._internal._Nothing> = cast _Runtime.UNDEFINED;
-      id = _Runtime.callProperty(flighthq._internal._Async.resolve(), 'then', cast ([function(__unused0:flighthq._internal._Nothing):Void { listener(); }] : Array<Dynamic>));
-      _Runtime.voidValue(id);
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeSecondInstance: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    } };
-    return cast null;
-  }
-
   public static function detachApp(app:flighthq.types.App):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast App._subscriptions__app : flighthq._internal._WeakMap<flighthq.types.App, Void->Void>).get(app));
@@ -246,7 +196,18 @@ class App {
   }
 
   public static function disposeApp(app:flighthq.types.App):Void {
-    detachApp(({ final __callArgument10:Dynamic = app; __callArgument10; }));
+    detachApp(({ final __callArgument9:Dynamic = app; __callArgument9; }));
+  }
+
+  public static function explainAppBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(App._custom__app, null) : Bool)) {
+      return cast { conflict: App._hostConflict__app, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(App._host__app, null) : Bool)) {
+      return cast { conflict: App._hostConflict__app, layer: 'host', operation: ((cast !_Runtime.strictEquals(App._hostObservation__app, null) : Bool) ? (cast (cast App._hostObservation__app : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(App._hostObservation__app, null) : Bool) ? (cast (cast App._hostObservation__app : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
   }
 
   public static function focusApp():Void {
@@ -255,8 +216,7 @@ class App {
 
   @:noCompletion
   public static function getAppBackend():AppBackend {
-    if ((cast _Runtime.strictEquals(App._backend__app, null) : Bool)) { (App._backend__app = cast ((cast createWebAppBackend() : AppBackend) : Dynamic)); }
-    return cast App._backend__app;
+    return cast _Runtime.coalesce(_Runtime.coalesce(App._custom__app, function():Dynamic return cast App._host__app), function():Dynamic return cast App._sentinel__app);
     return cast null;
   }
 
@@ -279,7 +239,7 @@ class App {
   }
 
   public static function getAppDirectoryPath(kind:AppPathKind):String {
-    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getAppDirectoryPath(({ final __callArgument14:Dynamic = kind; __callArgument14; }));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).getAppDirectoryPath(({ final __callArgument13:Dynamic = kind; __callArgument13; }));
     return cast null;
   }
 
@@ -338,9 +298,23 @@ class App {
     return cast null;
   }
 
+  @:noCompletion
+  public static function installAppHostBackend(backend:AppBackend):Void {
+    if ((cast !_Runtime.strictEquals(App._host__app, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(App._host__app, backend) : Bool)) { (App._hostConflict__app = cast (true : Dynamic)); }
+      return;
+    }
+    (App._host__app = cast (backend : Dynamic));
+  }
+
   public static function isAppHidden():Bool {
     return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).isAppHidden();
     return cast null;
+  }
+
+  @:noCompletion
+  public static function observeAppHostResult(operation:String, succeeded:Bool):Void {
+    (App._hostObservation__app = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function quitApp():Void {
@@ -365,13 +339,21 @@ class App {
     return cast null;
   }
 
+  @:noCompletion
+  public static function resetAppBackendForTest():Void {
+    (App._custom__app = cast (null : Dynamic));
+    (App._host__app = cast (null : Dynamic));
+    (App._hostConflict__app = cast (false : Dynamic));
+    (App._hostObservation__app = cast (null : Dynamic));
+  }
+
   public static function setAppActivationPolicy(policy:AppActivationPolicy):Void {
-    (cast (cast getAppBackend() : AppBackend) : AppBackend).setActivationPolicy(({ final __callArgument15:Dynamic = policy; __callArgument15; }));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).setActivationPolicy(({ final __callArgument14:Dynamic = policy; __callArgument14; }));
   }
 
   @:noCompletion
   public static function setAppBackend(backend:Null<AppBackend>):Void {
-    (App._backend__app = cast (backend : Dynamic));
+    (App._custom__app = cast (backend : Dynamic));
   }
 
   public static function setAppBadgeCount(count:Float):Bool {
@@ -384,11 +366,11 @@ class App {
   }
 
   public static function setAppDockMenu(items:Array<MenuItemTemplate>):Void {
-    (cast (cast getAppBackend() : AppBackend) : AppBackend).setDockMenu(({ final __callArgument16:Dynamic = items; __callArgument16; }));
+    (cast (cast getAppBackend() : AppBackend) : AppBackend).setDockMenu(({ final __callArgument15:Dynamic = items; __callArgument15; }));
   }
 
   public static function setAppLoginItem(settings:AppLoginItemLike):Bool {
-    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).setLoginItem(({ final __callArgument17:Dynamic = settings; __callArgument17; }));
+    return cast (cast (cast getAppBackend() : AppBackend) : AppBackend).setLoginItem(({ final __callArgument16:Dynamic = settings; __callArgument16; }));
     return cast null;
   }
 

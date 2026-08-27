@@ -5,13 +5,20 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Protocol.ParsedProtocolUrl;
 import flighthq.types.Protocol.ProtocolBackend;
 import flighthq.types.Protocol.ProtocolHandler;
 import flighthq.types.Signal;
 
 class Protocol {
-  public static var _backend__protocol:Null<ProtocolBackend> = _Runtime.explicitNull();
+  public static var _custom__protocol:Null<ProtocolBackend> = _Runtime.explicitNull();
+
+  public static var _host__protocol:Null<ProtocolBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__protocol:Bool = false;
+
+  public static var _hostObservation__protocol:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static final _reservedSchemes__protocol:flighthq._internal._Set<String> = _Runtime.construct(flighthq._internal._HostValueLut.get('Set'), [cast (['file', 'ftp', 'ftps', 'http', 'https', 'mailto'] : Array<Dynamic>)]);
 
@@ -25,6 +32,40 @@ class Protocol {
   }
 
   public static final _schemePattern__protocol:flighthq._internal._Any = _Runtime.regexp('^[a-z][a-z0-9+\\-.]*$$', '');
+
+  public static final _sentinel__protocol:ProtocolBackend = (cast { drainPendingUrls: function():Array<String> {
+    return cast cast ([] : Array<Dynamic>);
+    return cast _Runtime.UNDEFINED;
+  }, getLaunchUrl: function():Null<String> {
+    return cast null;
+    return cast _Runtime.UNDEFINED;
+  }, getRegisteredSchemes: function():Array<String> {
+    return cast cast ([] : Array<Dynamic>);
+    return cast _Runtime.UNDEFINED;
+  }, isDefault: function(scheme:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, isRegistered: function(scheme:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, register: function(scheme:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, removeAsDefault: function(scheme:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, setAsDefault: function(scheme:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, subscribe: function(listener:String->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, unregister: function(scheme:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  } });
 
   public static final _subscriptions__protocol:flighthq._internal._WeakMap<ProtocolHandler, Void->Void> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
@@ -85,66 +126,6 @@ class Protocol {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebProtocolBackend():ProtocolBackend {
-    var _registeredSchemes:Array<String> = cast _Runtime.UNDEFINED;
-    _registeredSchemes = (cast cast ([] : Array<Dynamic>));
-    return cast { register: function(scheme:String):Bool {
-      var nav:flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var registerProtocolHandler:Null<String->String->Void>; }> = cast _Runtime.UNDEFINED;
-      if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) : Bool)) { return cast false; }
-      nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var registerProtocolHandler:String->String->Void; }>);
-      if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast nav : { var registerProtocolHandler:String->String->Void; }).registerProtocolHandler), 'function') : Bool)) { return cast false; }
-      try {
-        (cast nav : { var registerProtocolHandler:String->String->Void; }).registerProtocolHandler((cast scheme : String), ({ final __callArgument5:Dynamic = ((cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).origin + '/?url=%s'); __callArgument5; }));
-        if ((cast !(cast _Runtime.includes(_registeredSchemes, scheme) : Bool) : Bool)) { _Runtime.callProperty(_registeredSchemes, 'push', cast ([scheme] : Array<Dynamic>)); }
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast _Runtime.UNDEFINED;
-    }, unregister: function(scheme:String):Bool {
-      var idx:Float = cast _Runtime.UNDEFINED;
-      idx = _Runtime.callProperty(_registeredSchemes, 'indexOf', cast ([scheme] : Array<Dynamic>));
-      if ((cast ((cast idx : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.splice(_registeredSchemes, Std.int(idx), Std.int(1.0), []); }
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, isRegistered: function():Bool {
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, getRegisteredSchemes: function():Array<String> {
-      return cast _Runtime.slice(_registeredSchemes, 0, null);
-      return cast _Runtime.UNDEFINED;
-    }, setAsDefault: function():Bool {
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, isDefault: function():Bool {
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, removeAsDefault: function():Bool {
-      return cast false;
-      return cast _Runtime.UNDEFINED;
-    }, getLaunchUrl: function():Null<String> {
-      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('location'), 'undefined') : Bool)) { return cast null; }
-      try {
-        var params:flighthq._internal.dom.URLSearchParams = _Runtime.construct(flighthq._internal._HostValueLut.get('URLSearchParams'), [(cast flighthq._internal._HostValueLut.get('location') : flighthq._internal.dom.Location).search]);
-        var url:Null<String> = (cast params : flighthq._internal.dom.URLSearchParams).get('url');
-        return cast _Runtime.select(_Runtime.andValue(url, function():Dynamic return cast ((cast _Runtime.field(url, 'length') : Float) > (cast 0.0 : Float))), function():Dynamic return cast url, function():Dynamic return cast null);
-      } catch (__error:Dynamic) {
-        return cast null;
-      }
-      return cast _Runtime.UNDEFINED;
-    }, drainPendingUrls: function():Array<String> {
-      return cast (cast cast ([] : Array<Dynamic>) : Array<String>);
-      return cast _Runtime.UNDEFINED;
-    }, subscribe: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    } };
-    return cast null;
-  }
-
   public static function detachProtocolHandler(handler:ProtocolHandler):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast Protocol._subscriptions__protocol : flighthq._internal._WeakMap<ProtocolHandler, Void->Void>).get(handler));
@@ -155,13 +136,23 @@ class Protocol {
   }
 
   public static function disposeProtocolHandler(handler:ProtocolHandler):Void {
-    detachProtocolHandler(({ final __callArgument6:Dynamic = handler; __callArgument6; }));
+    detachProtocolHandler(({ final __callArgument5:Dynamic = handler; __callArgument5; }));
+  }
+
+  public static function explainProtocolBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Protocol._custom__protocol, null) : Bool)) {
+      return cast { conflict: Protocol._hostConflict__protocol, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Protocol._host__protocol, null) : Bool)) {
+      return cast { conflict: Protocol._hostConflict__protocol, layer: 'host', operation: ((cast !_Runtime.strictEquals(Protocol._hostObservation__protocol, null) : Bool) ? (cast (cast Protocol._hostObservation__protocol : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Protocol._hostObservation__protocol, null) : Bool) ? (cast (cast Protocol._hostObservation__protocol : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
   }
 
   @:noCompletion
   public static function getProtocolBackend():ProtocolBackend {
-    if ((cast _Runtime.strictEquals(Protocol._backend__protocol, null) : Bool)) { (Protocol._backend__protocol = cast ((cast createWebProtocolBackend() : ProtocolBackend) : Dynamic)); }
-    return cast Protocol._backend__protocol;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Protocol._custom__protocol, function():Dynamic return cast Protocol._host__protocol), function():Dynamic return cast Protocol._sentinel__protocol);
     return cast null;
   }
 
@@ -173,6 +164,15 @@ class Protocol {
   public static function getRegisteredProtocolSchemes():Array<String> {
     return cast (cast (cast getProtocolBackend() : ProtocolBackend) : ProtocolBackend).getRegisteredSchemes();
     return cast null;
+  }
+
+  @:noCompletion
+  public static function installProtocolHostBackend(backend:ProtocolBackend):Void {
+    if ((cast !_Runtime.strictEquals(Protocol._host__protocol, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Protocol._host__protocol, backend) : Bool)) { (Protocol._hostConflict__protocol = cast (true : Dynamic)); }
+      return;
+    }
+    (Protocol._host__protocol = cast (backend : Dynamic));
   }
 
   public static function isProtocolSchemeDefault(scheme:String):Bool {
@@ -192,6 +192,11 @@ class Protocol {
     if ((cast ((cast Protocol._reservedSchemes__protocol : flighthq._internal._Set<String>).has(lower)) : Bool)) { return cast false; }
     return cast _Runtime.callProperty(Protocol._schemePattern__protocol, 'test', cast ([lower] : Array<Dynamic>));
     return cast null;
+  }
+
+  @:noCompletion
+  public static function observeProtocolHostResult(operation:String, succeeded:Bool):Void {
+    (Protocol._hostObservation__protocol = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function parseProtocolUrl(url:String):Null<ParsedProtocolUrl> {
@@ -274,8 +279,16 @@ class Protocol {
   }
 
   @:noCompletion
+  public static function resetProtocolBackendForTest():Void {
+    (Protocol._custom__protocol = cast (null : Dynamic));
+    (Protocol._host__protocol = cast (null : Dynamic));
+    (Protocol._hostConflict__protocol = cast (false : Dynamic));
+    (Protocol._hostObservation__protocol = cast (null : Dynamic));
+  }
+
+  @:noCompletion
   public static function setProtocolBackend(backend:Null<ProtocolBackend>):Void {
-    (Protocol._backend__protocol = cast (backend : Dynamic));
+    (Protocol._custom__protocol = cast (backend : Dynamic));
   }
 
   public static function setProtocolSchemeAsDefault(scheme:String):Bool {

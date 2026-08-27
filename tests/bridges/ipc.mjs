@@ -3,6 +3,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const createIpcChannel = compiled.flighthq.ipc.Ipc.createIpcChannel;
 export const enableIpcSignals = compiled.flighthq.ipc.Ipc.enableIpcSignals;
+export const explainIpcBackend = compiled.flighthq.ipc.Ipc.explainIpcBackend;
 export const getIpcListenerCount = compiled.flighthq.ipc.Ipc.getIpcListenerCount;
 export const getIpcSignals = compiled.flighthq.ipc.Ipc.getIpcSignals;
 export const invokeIpc = compiled.flighthq.ipc.Ipc.invokeIpc;

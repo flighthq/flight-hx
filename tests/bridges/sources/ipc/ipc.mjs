@@ -6,19 +6,22 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createIpcChannel = api.createIpcChannel;
-export const createWebIpcBackend = api.createWebIpcBackend;
 export const enableIpcSignals = api.enableIpcSignals;
+export const explainIpcBackend = api.explainIpcBackend;
 export const getIpcBackend = api.getIpcBackend;
 export const getIpcListenerCount = api.getIpcListenerCount;
 export const getIpcSignals = api.getIpcSignals;
 export const hasIpcBackend = api.hasIpcBackend;
+export const installIpcHostBackend = api.installIpcHostBackend;
 export const invokeIpc = api.invokeIpc;
 export const invokeIpcWithTimeout = api.invokeIpcWithTimeout;
+export const observeIpcHostResult = api.observeIpcHostResult;
 export const onceIpcMessage = api.onceIpcMessage;
 export const onIpcInvoke = api.onIpcInvoke;
 export const onIpcMessage = api.onIpcMessage;
 export const onIpcMessageEvent = api.onIpcMessageEvent;
 export const removeAllIpcListeners = api.removeAllIpcListeners;
+export const resetIpcBackendForTest = api.resetIpcBackendForTest;
 export const sendIpcMessage = api.sendIpcMessage;
 export const sendIpcMessageTo = api.sendIpcMessageTo;
 export const setIpcBackend = api.setIpcBackend;

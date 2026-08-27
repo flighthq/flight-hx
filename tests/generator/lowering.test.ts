@@ -237,6 +237,29 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toMatch(/isInstanceOf\(value, SharedArrayBuffer\)/u);
   });
 
+  it('routes matchMedia availability and calls through the explicit host-value LUT', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/device/src/device.ts',
+      `
+        export function detectHdr(): boolean {
+          if (typeof matchMedia === 'undefined') return false;
+          return matchMedia('(dynamic-range: high)').matches;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/device', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'DeviceFixture',
+      packageName: '@flighthq/device',
+    });
+
+    expect(output).toContain("_HostValueLut.typeofValue('matchMedia')");
+    expect(output).toContain("_Runtime.callValue(flighthq._internal._HostValueLut.get('matchMedia')");
+    expect(output).not.toMatch(/\bmatchMedia\(/u);
+  });
+
   it('erases local type declarations while retaining their strict structural field types', () => {
     const { checker, program, source } = typedSource(
       '/workspace/upstream/packages/example/src/localTypes.ts',
@@ -914,7 +937,7 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('_Async.resolve(7.0)');
   });
 
-  it('captures dynamic method receivers across async and arrow continuations', () => {
+  it('captures object method receivers across targets, async work, and arrow continuations', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/example/src/sample.ts',
       `
@@ -954,11 +977,72 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
-    expect(output).toContain('var __thisValue1:Dynamic = _Runtime.thisValue();');
+    expect(output).toContain('({ var __thisValue1:Dynamic = null; __thisValue1 = {');
     expect(output).toContain("_Runtime.field(__thisValue1, 'value')");
-    expect(output).toMatch(/var __thisValue\d+:Dynamic = _Runtime\.thisValue\(\);[\s\S]*_Async\.flatMap/u);
-    expect(output.match(/_Runtime\.thisValue\(\)/gu)).toHaveLength(3);
+    expect(output).toMatch(/_Async\.flatMap[\s\S]*_Runtime\.field\(__thisValue1, 'value'\)/u);
+    expect(output).toContain('var __thisValue2:Dynamic = _Runtime.thisValue();');
+    expect(output.match(/_Runtime\.thisValue\(\)/gu)).toHaveLength(1);
     expect(output).toContain('noReceiver: function() {\n      return cast 1.0;\n    }');
+  });
+
+  it('executes an IPC-style object method receiver on a portable target', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/ipc/src/ipc.ts',
+      `
+        export function createEvent() {
+          return {
+            senderId: 41,
+            reply() {
+              return this.senderId + 1;
+            },
+          };
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/ipc', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'IpcReceiverFixture',
+      packageName: '@flighthq/ipc',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).not.toContain('_Runtime.thisValue()');
+    expect(output).toMatch(/var (__thisValue\d+):Dynamic = null; \1 = \{ senderId:/u);
+
+    const fixtureDirectory = path.resolve('build/haxe-ipc-receiver-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flighthq');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'IpcReceiverFixture.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flighthq.IpcReceiverFixture.createEvent;
+        class Main {
+          static function main() {
+            final event:Dynamic = createEvent();
+            final reply:Dynamic = Reflect.field(event, 'reply');
+            final result:Dynamic = Reflect.callMethod(event, reply, []);
+            if (result != 42) throw 'object method receiver was not preserved';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'],
+        {
+          cwd: path.resolve('.'),
+          stdio: 'pipe',
+        },
+      ),
+    ).not.toThrow();
   });
 
   it('propagates returns through awaited conditional branches', () => {

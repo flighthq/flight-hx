@@ -80,6 +80,7 @@ class _HostValueLut {
     'isNaN',
     'localStorage',
     'location',
+    'matchMedia',
     'navigator',
     'parseFloat',
     'parseInt',

@@ -967,7 +967,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
     },
     {
@@ -1732,7 +1732,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
     },
     {
@@ -3262,7 +3262,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
     },
     {
@@ -4982,7 +4982,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#MorphShapeRuntime"
     },
     {
@@ -5092,7 +5092,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#MovieClipRuntime"
     },
     {
@@ -5192,7 +5192,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#NativeTextRuntime"
     },
     {
@@ -5492,7 +5492,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
     },
     {
@@ -6227,7 +6227,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
     },
     {
@@ -6742,7 +6742,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#RichTextRuntime"
     },
     {
@@ -7037,7 +7037,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
     },
     {
@@ -7917,7 +7917,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#ShapeRuntime"
     },
     {
@@ -8462,7 +8462,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#SpriteRuntime"
     },
     {
@@ -8962,7 +8962,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#TextLabelRuntime"
     },
     {
@@ -9502,7 +9502,7 @@
     },
     {
       "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-      "fieldPath": "traits.__@NodeTraitsKey@14316",
+      "fieldPath": "traits.__@NodeTraitsKey@14507",
       "parentSchemaId": "@flighthq/types:interface#TilemapRuntime"
     },
     {
@@ -14600,41 +14600,6 @@
     },
     {
       "bridgeExposure": {
-        "inputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#AccessibilityBackend"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#AccessibilityBackend"
-          }
-        ],
-        "outputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#AccessibilityBackend"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#AccessibilityBackend"
-          }
-        ]
-      },
-      "containment": {
-        "children": [],
-        "parents": []
-      },
-      "directAccesses": 0,
-      "fields": 5,
-      "id": "@flighthq/types:interface#AccessibilityBackend",
-      "name": "AccessibilityBackend",
-      "nominalIdentity": {
-        "blockerReasons": [],
-        "closed": true
-      },
-      "normalizationProvenance": [],
-      "source": "upstream/packages/types/src/Accessibility.ts",
-      "transfers": []
-    },
-    {
-      "bridgeExposure": {
         "inputPaths": [],
         "outputPaths": [
           {
@@ -15757,7 +15722,7 @@
           }
         ]
       },
-      "directAccesses": 151,
+      "directAccesses": 155,
       "fields": 36,
       "id": "@flighthq/types:interface#ApplicationWindow",
       "name": "ApplicationWindow",
@@ -19093,33 +19058,6 @@
       },
       "containment": {
         "children": [],
-        "parents": [
-          {
-            "childSchemaId": "@flighthq/types:interface#CapacitorPositionCoords",
-            "fieldPath": "coords",
-            "parentSchemaId": "@flighthq/types:interface#CapacitorPosition"
-          }
-        ]
-      },
-      "directAccesses": 0,
-      "fields": 7,
-      "id": "@flighthq/types:interface#CapacitorPositionCoords",
-      "name": "CapacitorPositionCoords",
-      "nominalIdentity": {
-        "blockerReasons": [],
-        "closed": true
-      },
-      "normalizationProvenance": [],
-      "source": "upstream/packages/types/src/CapacitorApi.ts",
-      "transfers": []
-    },
-    {
-      "bridgeExposure": {
-        "inputPaths": [],
-        "outputPaths": []
-      },
-      "containment": {
-        "children": [],
         "parents": []
       },
       "directAccesses": 0,
@@ -19790,7 +19728,7 @@
           {
             "path": [
               "@flighthq/types:interface#RichTextRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#RichTextRuntime"
@@ -19866,7 +19804,7 @@
           {
             "path": [
               "@flighthq/types:interface#TextLabelRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#TextLabelRuntime"
@@ -19898,7 +19836,7 @@
           {
             "path": [
               "@flighthq/types:interface#BitmapTextRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
@@ -19919,7 +19857,7 @@
           {
             "path": [
               "@flighthq/types:interface#DisplayObjectRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
@@ -19934,7 +19872,7 @@
           {
             "path": [
               "@flighthq/types:interface#HtmlViewRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
@@ -19965,7 +19903,7 @@
           {
             "path": [
               "@flighthq/types:interface#MorphShapeRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#MorphShapeRuntime"
@@ -19989,7 +19927,7 @@
           {
             "path": [
               "@flighthq/types:interface#MovieClipRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#MovieClipRuntime"
@@ -20004,7 +19942,7 @@
           {
             "path": [
               "@flighthq/types:interface#NativeTextRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
@@ -20026,7 +19964,7 @@
           {
             "path": [
               "@flighthq/types:interface#ParticleEmitter2DRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
@@ -20041,7 +19979,7 @@
           {
             "path": [
               "@flighthq/types:interface#QuadBatchRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
@@ -20056,7 +19994,7 @@
           {
             "path": [
               "@flighthq/types:interface#RichTextRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#RichTextRuntime"
@@ -20096,7 +20034,7 @@
           {
             "path": [
               "@flighthq/types:interface#Scale9ShapeRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
@@ -20169,7 +20107,7 @@
           {
             "path": [
               "@flighthq/types:interface#ShapeRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#ShapeRuntime"
@@ -20184,7 +20122,7 @@
           {
             "path": [
               "@flighthq/types:interface#SpriteRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#SpriteRuntime"
@@ -20216,7 +20154,7 @@
           {
             "path": [
               "@flighthq/types:interface#TextLabelRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#TextLabelRuntime"
@@ -20231,7 +20169,7 @@
           {
             "path": [
               "@flighthq/types:interface#TilemapRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
               "clip:@flighthq/types:interface#ClipRegion"
             ],
             "rootSchemaId": "@flighthq/types:interface#TilemapRuntime"
@@ -20361,7 +20299,7 @@
         {
           "path": [
             "@flighthq/types:interface#BitmapTextRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20382,7 +20320,7 @@
         {
           "path": [
             "@flighthq/types:interface#DisplayObjectRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20413,7 +20351,7 @@
         {
           "path": [
             "@flighthq/types:interface#HtmlViewRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20445,7 +20383,7 @@
         {
           "path": [
             "@flighthq/types:interface#MorphShapeRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20466,7 +20404,7 @@
         {
           "path": [
             "@flighthq/types:interface#MovieClipRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20487,7 +20425,7 @@
         {
           "path": [
             "@flighthq/types:interface#NativeTextRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20520,7 +20458,7 @@
         {
           "path": [
             "@flighthq/types:interface#ParticleEmitter2DRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20542,7 +20480,7 @@
         {
           "path": [
             "@flighthq/types:interface#QuadBatchRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20564,7 +20502,7 @@
         {
           "path": [
             "@flighthq/types:interface#RichTextRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20585,7 +20523,7 @@
         {
           "path": [
             "@flighthq/types:interface#Scale9ShapeRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20618,7 +20556,7 @@
         {
           "path": [
             "@flighthq/types:interface#ShapeRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20639,7 +20577,7 @@
         {
           "path": [
             "@flighthq/types:interface#SpriteRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20660,7 +20598,7 @@
         {
           "path": [
             "@flighthq/types:interface#TextLabelRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -20681,7 +20619,7 @@
         {
           "path": [
             "@flighthq/types:interface#TilemapRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits",
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits",
             "clip:@flighthq/types:interface#ClipRegion"
           ],
           "reasons": [
@@ -22286,7 +22224,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 8,
+      "directAccesses": 12,
       "fields": 2,
       "id": "@flighthq/types:interface#ConnectivityReachability",
       "name": "ConnectivityReachability",
@@ -22476,7 +22414,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 6,
+      "directAccesses": 9,
       "fields": 3,
       "id": "@flighthq/types:interface#DeviceCapabilities",
       "name": "DeviceCapabilities",
@@ -22511,7 +22449,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 14,
+      "directAccesses": 21,
       "fields": 7,
       "id": "@flighthq/types:interface#DeviceDisplayMetrics",
       "name": "DeviceDisplayMetrics",
@@ -22546,7 +22484,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 50,
+      "directAccesses": 75,
       "fields": 25,
       "id": "@flighthq/types:interface#DeviceInfo",
       "name": "DeviceInfo",
@@ -23788,85 +23726,85 @@
         {
           "column": 12,
           "kind": "anonymous-container-transfer",
-          "line": 210,
+          "line": 298,
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 19,
           "kind": "anonymous-container-transfer",
-          "line": 222,
+          "line": 310,
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 54,
-          "kind": "anonymous-container-transfer",
-          "line": 239,
-          "source": "upstream/packages/dialog/src/dialog.ts"
-        },
-        {
-          "column": 15,
-          "kind": "anonymous-container-transfer",
-          "line": 242,
-          "source": "upstream/packages/dialog/src/dialog.ts"
-        },
-        {
-          "column": 61,
-          "kind": "anonymous-container-transfer",
-          "line": 255,
-          "source": "upstream/packages/dialog/src/dialog.ts"
-        },
-        {
-          "column": 12,
-          "kind": "anonymous-container-transfer",
-          "line": 272,
-          "source": "upstream/packages/dialog/src/dialog.ts"
-        },
-        {
-          "column": 12,
-          "kind": "anonymous-container-transfer",
-          "line": 289,
-          "source": "upstream/packages/dialog/src/dialog.ts"
-        },
-        {
-          "column": 19,
-          "kind": "anonymous-container-transfer",
-          "line": 304,
-          "source": "upstream/packages/dialog/src/dialog.ts"
-        },
-        {
-          "column": 54,
-          "kind": "anonymous-container-transfer",
-          "line": 314,
-          "source": "upstream/packages/dialog/src/dialog.ts"
-        },
-        {
-          "column": 15,
-          "kind": "anonymous-container-transfer",
-          "line": 317,
-          "source": "upstream/packages/dialog/src/dialog.ts"
-        },
-        {
-          "column": 48,
           "kind": "anonymous-container-transfer",
           "line": 327,
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
-          "column": 12,
+          "column": 15,
           "kind": "anonymous-container-transfer",
-          "line": 349,
+          "line": 330,
+          "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 61,
+          "kind": "anonymous-container-transfer",
+          "line": 343,
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 12,
           "kind": "anonymous-container-transfer",
-          "line": 358,
+          "line": 360,
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 12,
           "kind": "anonymous-container-transfer",
-          "line": 381,
+          "line": 377,
+          "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 19,
+          "kind": "anonymous-container-transfer",
+          "line": 392,
+          "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 54,
+          "kind": "anonymous-container-transfer",
+          "line": 402,
+          "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 15,
+          "kind": "anonymous-container-transfer",
+          "line": 405,
+          "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 48,
+          "kind": "anonymous-container-transfer",
+          "line": 415,
+          "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 12,
+          "kind": "anonymous-container-transfer",
+          "line": 437,
+          "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 12,
+          "kind": "anonymous-container-transfer",
+          "line": 446,
+          "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 12,
+          "kind": "anonymous-container-transfer",
+          "line": 469,
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ]
@@ -23903,43 +23841,43 @@
         {
           "column": 33,
           "kind": "anonymous-container-transfer",
-          "line": 115,
+          "line": 116,
           "source": "upstream/packages/filesystem/src/filesystem.ts"
         },
         {
           "column": 32,
           "kind": "anonymous-container-transfer",
-          "line": 117,
+          "line": 118,
           "source": "upstream/packages/filesystem/src/filesystem.ts"
         },
         {
           "column": 16,
           "kind": "anonymous-container-transfer",
-          "line": 126,
+          "line": 127,
           "source": "upstream/packages/filesystem/src/filesystem.ts"
         },
         {
           "column": 33,
           "kind": "anonymous-container-transfer",
-          "line": 132,
+          "line": 133,
           "source": "upstream/packages/filesystem/src/filesystem.ts"
         },
         {
           "column": 32,
           "kind": "anonymous-container-transfer",
-          "line": 134,
+          "line": 135,
           "source": "upstream/packages/filesystem/src/filesystem.ts"
         },
         {
           "column": 16,
           "kind": "anonymous-container-transfer",
-          "line": 140,
+          "line": 141,
           "source": "upstream/packages/filesystem/src/filesystem.ts"
         },
         {
           "column": 32,
           "kind": "anonymous-container-transfer",
-          "line": 320,
+          "line": 336,
           "source": "upstream/packages/filesystem/src/filesystem.ts"
         },
         {
@@ -24828,19 +24766,19 @@
         {
           "column": 19,
           "kind": "anonymous-container-transfer",
-          "line": 48,
+          "line": 47,
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         },
         {
           "column": 27,
           "kind": "anonymous-container-transfer",
-          "line": 54,
+          "line": 53,
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         },
         {
           "column": 19,
           "kind": "anonymous-container-transfer",
-          "line": 58,
+          "line": 57,
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         },
         {
@@ -24873,7 +24811,7 @@
         ],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 1,
       "fields": 2,
       "id": "@flighthq/types:interface#GeoPositionResult",
       "name": "GeoPositionResult",
@@ -27234,7 +27172,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 10,
+      "directAccesses": 15,
       "fields": 5,
       "id": "@flighthq/types:interface#HapticsCapabilities",
       "name": "HapticsCapabilities",
@@ -27397,41 +27335,6 @@
         }
       ],
       "source": "upstream/packages/types/src/HtmlView.ts",
-      "transfers": []
-    },
-    {
-      "bridgeExposure": {
-        "inputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#ImageBackend"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#ImageBackend"
-          }
-        ],
-        "outputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#ImageBackend"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#ImageBackend"
-          }
-        ]
-      },
-      "containment": {
-        "children": [],
-        "parents": []
-      },
-      "directAccesses": 0,
-      "fields": 1,
-      "id": "@flighthq/types:interface#ImageBackend",
-      "name": "ImageBackend",
-      "nominalIdentity": {
-        "blockerReasons": [],
-        "closed": true
-      },
-      "normalizationProvenance": [],
-      "source": "upstream/packages/types/src/Image.ts",
       "transfers": []
     },
     {
@@ -29866,41 +29769,6 @@
         "inputPaths": [
           {
             "path": [
-              "@flighthq/types:interface#MediaSessionBackend"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#MediaSessionBackend"
-          }
-        ],
-        "outputPaths": [
-          {
-            "path": [
-              "@flighthq/types:interface#MediaSessionBackend"
-            ],
-            "rootSchemaId": "@flighthq/types:interface#MediaSessionBackend"
-          }
-        ]
-      },
-      "containment": {
-        "children": [],
-        "parents": []
-      },
-      "directAccesses": 0,
-      "fields": 4,
-      "id": "@flighthq/types:interface#MediaSessionBackend",
-      "name": "MediaSessionBackend",
-      "nominalIdentity": {
-        "blockerReasons": [],
-        "closed": true
-      },
-      "normalizationProvenance": [],
-      "source": "upstream/packages/types/src/MediaSession.ts",
-      "transfers": []
-    },
-    {
-      "bridgeExposure": {
-        "inputPaths": [
-          {
-            "path": [
               "@flighthq/types:interface#MediaSessionMetadata"
             ],
             "rootSchemaId": "@flighthq/types:interface#MediaSessionMetadata"
@@ -31603,7 +31471,7 @@
           {
             "path": [
               "@flighthq/types:interface#RichTextRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#RichTextRuntime"
           },
@@ -31631,7 +31499,7 @@
           {
             "path": [
               "@flighthq/types:interface#TextLabelRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#TextLabelRuntime"
           },
@@ -31647,28 +31515,28 @@
           {
             "path": [
               "@flighthq/types:interface#BitmapTextRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#DisplayObjectRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#HtmlViewRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#MorphShapeRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#MorphShapeRuntime"
           },
@@ -31692,14 +31560,14 @@
           {
             "path": [
               "@flighthq/types:interface#MovieClipRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#MovieClipRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#NativeTextRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#NativeTextRuntime"
           },
@@ -31712,21 +31580,21 @@
           {
             "path": [
               "@flighthq/types:interface#ParticleEmitter2DRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#QuadBatchRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#RichTextRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#RichTextRuntime"
           },
@@ -31741,7 +31609,7 @@
           {
             "path": [
               "@flighthq/types:interface#Scale9ShapeRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
           },
@@ -31792,14 +31660,14 @@
           {
             "path": [
               "@flighthq/types:interface#ShapeRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#ShapeRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#SpriteRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#SpriteRuntime"
           },
@@ -31814,14 +31682,14 @@
           {
             "path": [
               "@flighthq/types:interface#TextLabelRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#TextLabelRuntime"
           },
           {
             "path": [
               "@flighthq/types:interface#TilemapRuntime",
-              "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+              "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
             ],
             "rootSchemaId": "@flighthq/types:interface#TilemapRuntime"
           },
@@ -31855,7 +31723,7 @@
         "parents": [
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#BitmapTextRuntime"
           },
           {
@@ -31865,7 +31733,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#DisplayObjectRuntime"
           },
           {
@@ -31875,7 +31743,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#HtmlViewRuntime"
           },
           {
@@ -31885,7 +31753,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#MorphShapeRuntime"
           },
           {
@@ -31895,7 +31763,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#MovieClipRuntime"
           },
           {
@@ -31905,7 +31773,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#NativeTextRuntime"
           },
           {
@@ -31920,7 +31788,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#ParticleEmitter2DRuntime"
           },
           {
@@ -31930,7 +31798,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#QuadBatchRuntime"
           },
           {
@@ -31940,7 +31808,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#RichTextRuntime"
           },
           {
@@ -31950,7 +31818,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#Scale9ShapeRuntime"
           },
           {
@@ -31990,7 +31858,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#ShapeRuntime"
           },
           {
@@ -32000,7 +31868,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#SpriteRuntime"
           },
           {
@@ -32015,7 +31883,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#TextLabelRuntime"
           },
           {
@@ -32025,7 +31893,7 @@
           },
           {
             "childSchemaId": "@flighthq/types:interface#Node2DTraits",
-            "fieldPath": "traits.__@NodeTraitsKey@14316",
+            "fieldPath": "traits.__@NodeTraitsKey@14507",
             "parentSchemaId": "@flighthq/types:interface#TilemapRuntime"
           },
           {
@@ -32055,7 +31923,7 @@
         {
           "path": [
             "@flighthq/types:interface#BitmapTextRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32065,7 +31933,7 @@
         {
           "path": [
             "@flighthq/types:interface#DisplayObjectRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32075,7 +31943,7 @@
         {
           "path": [
             "@flighthq/types:interface#HtmlViewRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32085,7 +31953,7 @@
         {
           "path": [
             "@flighthq/types:interface#MorphShapeRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32107,7 +31975,7 @@
         {
           "path": [
             "@flighthq/types:interface#MovieClipRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32117,7 +31985,7 @@
         {
           "path": [
             "@flighthq/types:interface#NativeTextRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32137,7 +32005,7 @@
         {
           "path": [
             "@flighthq/types:interface#ParticleEmitter2DRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32147,7 +32015,7 @@
         {
           "path": [
             "@flighthq/types:interface#QuadBatchRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer",
@@ -32158,7 +32026,7 @@
         {
           "path": [
             "@flighthq/types:interface#RichTextRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32168,7 +32036,7 @@
         {
           "path": [
             "@flighthq/types:interface#Scale9ShapeRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32188,7 +32056,7 @@
         {
           "path": [
             "@flighthq/types:interface#ShapeRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32198,7 +32066,7 @@
         {
           "path": [
             "@flighthq/types:interface#SpriteRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32208,7 +32076,7 @@
         {
           "path": [
             "@flighthq/types:interface#TextLabelRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -32218,7 +32086,7 @@
         {
           "path": [
             "@flighthq/types:interface#TilemapRuntime",
-            "traits.__@NodeTraitsKey@14316:@flighthq/types:interface#Node2DTraits"
+            "traits.__@NodeTraitsKey@14507:@flighthq/types:interface#Node2DTraits"
           ],
           "reasons": [
             "cross-schema-transfer"
@@ -34940,7 +34808,7 @@
         {
           "column": 19,
           "kind": "dynamic-container-transfer",
-          "line": 277,
+          "line": 276,
           "relatedSchemaIds": [
             "@flighthq/types:interface#NodeRuntime"
           ],
@@ -34949,7 +34817,7 @@
         {
           "column": 67,
           "kind": "cross-schema-container-transfer",
-          "line": 290,
+          "line": 289,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Mesh"
           ],
@@ -36459,9 +36327,9 @@
           "source": "upstream/packages/render/src/renderTransform2d.ts"
         },
         {
-          "column": 56,
+          "column": 58,
           "kind": "dynamic-container-transfer",
-          "line": 210,
+          "line": 214,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node",
             "@flighthq/types:type#NodeAny"
@@ -42050,7 +41918,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 21,
+      "directAccesses": 37,
       "fields": 8,
       "id": "@flighthq/types:interface#PowerStatus",
       "name": "PowerStatus",
@@ -45050,7 +44918,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 16,
+      "directAccesses": 20,
       "fields": 4,
       "id": "@flighthq/types:interface#SafeAreaInsets",
       "name": "SafeAreaInsets",
@@ -47693,7 +47561,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 0,
+      "directAccesses": 1,
       "fields": 3,
       "id": "@flighthq/types:interface#ShareResult",
       "name": "ShareResult",
@@ -50505,7 +50373,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 17,
+      "directAccesses": 22,
       "fields": 5,
       "id": "@flighthq/types:interface#SoftKeyboardInfo",
       "name": "SoftKeyboardInfo",
@@ -52449,19 +52317,19 @@
         {
           "column": 48,
           "kind": "anonymous-container-transfer",
-          "line": 310,
+          "line": 334,
           "source": "upstream/packages/storage/src/storage.ts"
         },
         {
           "column": 47,
           "kind": "anonymous-container-transfer",
-          "line": 314,
+          "line": 338,
           "source": "upstream/packages/storage/src/storage.ts"
         },
         {
           "column": 12,
           "kind": "anonymous-container-transfer",
-          "line": 322,
+          "line": 346,
           "source": "upstream/packages/storage/src/storage.ts"
         }
       ]
@@ -58905,10 +58773,38 @@
           }
         ]
       },
-      "directAccesses": 86,
+      "directAccesses": 88,
       "fields": 2,
       "id": "@flighthq/types:interface#Velocity2D",
       "name": "Velocity2D",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Velocity.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#VelocityExplanation"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#VelocityExplanation"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 6,
+      "id": "@flighthq/types:interface#VelocityExplanation",
+      "name": "VelocityExplanation",
       "nominalIdentity": {
         "blockerReasons": [],
         "closed": true
@@ -58971,7 +58867,7 @@
           }
         ]
       },
-      "directAccesses": 11,
+      "directAccesses": 13,
       "fields": 2,
       "id": "@flighthq/types:interface#VelocityField",
       "name": "VelocityField",
@@ -59053,7 +58949,7 @@
           }
         ]
       },
-      "directAccesses": 29,
+      "directAccesses": 36,
       "fields": 4,
       "id": "@flighthq/types:interface#VelocitySample",
       "name": "VelocitySample",
@@ -59837,25 +59733,25 @@
         {
           "column": 19,
           "kind": "anonymous-container-transfer",
-          "line": 11,
+          "line": 13,
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 23,
           "kind": "anonymous-container-transfer",
-          "line": 22,
+          "line": 24,
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
-          "column": 44,
+          "column": 23,
           "kind": "anonymous-container-transfer",
-          "line": 34,
+          "line": 39,
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 19,
           "kind": "anonymous-container-transfer",
-          "line": 39,
+          "line": 46,
           "source": "upstream/packages/webcam/src/webcam.ts"
         }
       ]
@@ -59950,25 +59846,25 @@
         {
           "column": 19,
           "kind": "anonymous-container-transfer",
-          "line": 46,
+          "line": 54,
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 23,
           "kind": "anonymous-container-transfer",
-          "line": 57,
+          "line": 65,
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
-          "column": 44,
+          "column": 23,
           "kind": "anonymous-container-transfer",
-          "line": 69,
+          "line": 79,
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 19,
           "kind": "anonymous-container-transfer",
-          "line": 74,
+          "line": 86,
           "source": "upstream/packages/webcam/src/webcam.ts"
         }
       ]
@@ -61334,7 +61230,7 @@
         "children": [],
         "parents": []
       },
-      "directAccesses": 24,
+      "directAccesses": 28,
       "fields": 4,
       "id": "@flighthq/types:interface#WindowBounds",
       "name": "WindowBounds",
@@ -64959,11 +64855,11 @@
   ],
   "summary": {
     "anonymousContainerTransferSchemas": 52,
-    "bridgeInputExposedSchemas": 527,
-    "bridgeOutputExposedSchemas": 568,
+    "bridgeInputExposedSchemas": 524,
+    "bridgeOutputExposedSchemas": 566,
     "blockedSchemas": 197,
-    "candidateSchemas": 821,
-    "closedSchemas": 624,
+    "candidateSchemas": 818,
+    "closedSchemas": 621,
     "combinedBlockedSchemas": 17,
     "containmentEdges": 2193,
     "containerOnlyBlockedSchemas": 58,
@@ -64975,5 +64871,5 @@
     "normalizationProvenanceBlockedSchemas": 139,
     "normalizationRoots": 445
   },
-  "upstreamCommit": "443275fa278b1f0415c49b6be710891ef8a64bf1"
+  "upstreamCommit": "cd6b6e71eb472b3a4249830a7743333f019fa7b7"
 }

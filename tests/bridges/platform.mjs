@@ -2,6 +2,7 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const comparePlatformVersions = compiled.flighthq.platform.Platform.comparePlatformVersions;
+export const explainPlatformBackend = compiled.flighthq.platform.Platform.explainPlatformBackend;
 export const getPlatformEngine = compiled.flighthq.platform.Platform.getPlatformEngine;
 export const getPlatformInfo = compiled.flighthq.platform.Platform.getPlatformInfo;
 export const getPlatformKind = compiled.flighthq.platform.Platform.getPlatformKind;

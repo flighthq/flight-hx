@@ -6,6 +6,7 @@ export const clearClipboard = compiled.flighthq.clipboard.Clipboard.clearClipboa
 export const createClipboardWatch = compiled.flighthq.clipboard.Clipboard.createClipboardWatch;
 export const detachClipboardWatch = compiled.flighthq.clipboard.Clipboard.detachClipboardWatch;
 export const disposeClipboardWatch = compiled.flighthq.clipboard.Clipboard.disposeClipboardWatch;
+export const explainClipboardBackend = compiled.flighthq.clipboard.Clipboard.explainClipboardBackend;
 export const getClipboardChangeCount = compiled.flighthq.clipboard.Clipboard.getClipboardChangeCount;
 export const getClipboardFormats = compiled.flighthq.clipboard.Clipboard.getClipboardFormats;
 export const hasClipboardBookmark = compiled.flighthq.clipboard.Clipboard.hasClipboardBookmark;

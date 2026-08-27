@@ -8,6 +8,7 @@ import flighthq.types.Accessibility.AccessibilityLiveness;
 import flighthq.types.Accessibility.AccessibilityNode;
 import flighthq.types.Accessibility.AccessibilityRole;
 import flighthq.types.Accessibility.AccessibilityState;
+import flighthq.types.BackendExplanation;
 
 class Accessibility {
   public static function _applyAccessibilityElementAttributes__accessibility(element:flighthq._internal.dom.HTMLElement, node:AccessibilityNode):Void {
@@ -37,8 +38,6 @@ class Accessibility {
     Accessibility._reflectAccessibilityNumber__accessibility(({ final __callArgument38:Dynamic = element; __callArgument38; }), (cast 'aria-valuenow' : String), state.valueNow);
   }
 
-  public static var _backend__accessibility:Null<AccessibilityBackend> = _Runtime.explicitNull();
-
   public static function _createHiddenAccessibilityContainer__accessibility(doc:flighthq._internal.dom.Document):flighthq._internal.dom.HTMLElement {
     var container:flighthq._internal.dom.HTMLDivElement = cast _Runtime.UNDEFINED;
     var style:flighthq._internal.dom.CSSStyleDeclaration = cast _Runtime.UNDEFINED;
@@ -59,6 +58,8 @@ class Accessibility {
     return cast null;
   }
 
+  public static var _custom__accessibility:Null<AccessibilityBackend> = _Runtime.explicitNull();
+
   public static final _EMPTY_STATE__accessibility:AccessibilityState = (cast {  });
 
   public static function _getAccessibilityLiveRegion__accessibility(root:flighthq._internal.dom.HTMLElement, liveRegions:flighthq._internal._Map<AccessibilityLiveness, flighthq._internal.dom.HTMLElement>, liveness:AccessibilityLiveness):flighthq._internal.dom.HTMLElement {
@@ -75,6 +76,12 @@ class Accessibility {
     return cast region;
     return cast null;
   }
+
+  public static var _host__accessibility:Null<AccessibilityBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__accessibility:Bool = false;
+
+  public static var _hostObservation__accessibility:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static function _reflectAccessibilityAttribute__accessibility(element:flighthq._internal.dom.HTMLElement, attribute:String, value:Null<String>):Void {
     if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -109,6 +116,19 @@ class Accessibility {
     }
     if ((cast !_Runtime.strictEquals(element.parentNode, parent) : Bool)) { parent.appendChild(element); }
   }
+
+  public static final _sentinel__accessibility:AccessibilityBackend = (cast { setNode: function(node:AccessibilityNode):Void {
+
+  }, removeNode: function(id:String):Void {
+
+  }, clear: function():Void {
+
+  }, setFocus: function(id:String):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, announce: function(message:String, liveness:AccessibilityLiveness):Void {
+
+  } });
 
   public static function _setAccessibilityElementValueText__accessibility(element:flighthq._internal.dom.HTMLElement, value:Null<String>):Void {
     var first:Null<flighthq._internal.dom.ChildNode> = cast _Runtime.UNDEFINED;
@@ -207,11 +227,35 @@ class Accessibility {
     return cast null;
   }
 
+  public static function explainAccessibilityBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Accessibility._custom__accessibility, null) : Bool)) {
+      return cast { conflict: Accessibility._hostConflict__accessibility, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Accessibility._host__accessibility, null) : Bool)) {
+      return cast { conflict: Accessibility._hostConflict__accessibility, layer: 'host', operation: ((cast !_Runtime.strictEquals(Accessibility._hostObservation__accessibility, null) : Bool) ? (cast (cast Accessibility._hostObservation__accessibility : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Accessibility._hostObservation__accessibility, null) : Bool) ? (cast (cast Accessibility._hostObservation__accessibility : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   @:noCompletion
   public static function getAccessibilityBackend():AccessibilityBackend {
-    if ((cast _Runtime.strictEquals(Accessibility._backend__accessibility, null) : Bool)) { (Accessibility._backend__accessibility = cast ((cast (#if js _Runtime.callValue(createWebAccessibilityBackend, cast ([] : Array<Dynamic>)) #else createWebAccessibilityBackend(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : AccessibilityBackend) : Dynamic)); }
-    return cast Accessibility._backend__accessibility;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Accessibility._custom__accessibility, function():Dynamic return cast Accessibility._host__accessibility), function():Dynamic return cast Accessibility._sentinel__accessibility);
     return cast null;
+  }
+
+  @:noCompletion
+  public static function installAccessibilityHostBackend(backend:AccessibilityBackend):Void {
+    if ((cast !_Runtime.strictEquals(Accessibility._host__accessibility, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Accessibility._host__accessibility, backend) : Bool)) { (Accessibility._hostConflict__accessibility = cast (true : Dynamic)); }
+      return;
+    }
+    (Accessibility._host__accessibility = cast (backend : Dynamic));
+  }
+
+  @:noCompletion
+  public static function observeAccessibilityHostResult(operation:String, succeeded:Bool):Void {
+    (Accessibility._hostObservation__accessibility = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function removeAccessibilityNode(id:String):Void {
@@ -219,8 +263,16 @@ class Accessibility {
   }
 
   @:noCompletion
+  public static function resetAccessibilityBackendForTest():Void {
+    (Accessibility._custom__accessibility = cast (null : Dynamic));
+    (Accessibility._host__accessibility = cast (null : Dynamic));
+    (Accessibility._hostConflict__accessibility = cast (false : Dynamic));
+    (Accessibility._hostObservation__accessibility = cast (null : Dynamic));
+  }
+
+  @:noCompletion
   public static function setAccessibilityBackend(backend:Null<AccessibilityBackend>):Void {
-    (Accessibility._backend__accessibility = cast (backend : Dynamic));
+    (Accessibility._custom__accessibility = cast (backend : Dynamic));
   }
 
   public static function setAccessibilityFocus(id:String):Bool {

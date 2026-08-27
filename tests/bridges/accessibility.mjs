@@ -3,6 +3,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const announceAccessibility = compiled.flighthq.accessibility.Accessibility.announceAccessibility;
 export const clearAccessibilityTree = compiled.flighthq.accessibility.Accessibility.clearAccessibilityTree;
+export const explainAccessibilityBackend = compiled.flighthq.accessibility.Accessibility.explainAccessibilityBackend;
 export const removeAccessibilityNode = compiled.flighthq.accessibility.Accessibility.removeAccessibilityNode;
 export const setAccessibilityFocus = compiled.flighthq.accessibility.Accessibility.setAccessibilityFocus;
 export const setAccessibilityNode = compiled.flighthq.accessibility.Accessibility.setAccessibilityNode;

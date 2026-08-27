@@ -13,6 +13,7 @@ export const copyVelocity = api.copyVelocity;
 export const createVelocityField = api.createVelocityField;
 export const dampVelocity = api.dampVelocity;
 export const ensureVelocitySample = api.ensureVelocitySample;
+export const explainVelocity = api.explainVelocity;
 export const getVelocity = api.getVelocity;
 export const hasVelocity = api.hasVelocity;
 export const isVelocityZero = api.isVelocityZero;

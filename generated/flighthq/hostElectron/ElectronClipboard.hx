@@ -38,7 +38,7 @@ class ElectronClipboard {
     }, readHtml: function():flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).readHtml();
+          return cast (cast cb : flighthq.types.ElectronApi.ElectronClipboard).readHTML();
         } catch (__error:Dynamic) {
           return cast '';
         }
@@ -47,7 +47,7 @@ class ElectronClipboard {
     }, writeHtml: function(html:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeHtml((cast html : String));
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeHTML((cast html : String));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;
@@ -67,7 +67,7 @@ class ElectronClipboard {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
           var image:ElectronNativeImage = (cast cb : flighthq.types.ElectronApi.ElectronClipboard).readImage();
-          return cast ((cast (cast image : ElectronNativeImage).isEmpty() : Bool) ? (cast '' : Dynamic) : (cast (cast image : ElectronNativeImage).toDataUrl() : Dynamic));
+          return cast ((cast (cast image : ElectronNativeImage).isEmpty() : Bool) ? (cast '' : Dynamic) : (cast (cast image : ElectronNativeImage).toDataURL() : Dynamic));
         } catch (__error:Dynamic) {
           return cast '';
         }
@@ -76,7 +76,7 @@ class ElectronClipboard {
     }, writeImage: function(dataUrl:String):flighthq._internal._Promise<Bool> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         try {
-          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeImage((cast electron.nativeImage : ElectronNativeImageModule).createFromDataUrl((cast dataUrl : String)));
+          (cast cb : flighthq.types.ElectronApi.ElectronClipboard).writeImage((cast electron.nativeImage : ElectronNativeImageModule).createFromDataURL((cast dataUrl : String)));
           return cast true;
         } catch (__error:Dynamic) {
           return cast false;

@@ -7,12 +7,16 @@ __syncDependencies();
 
 export const cloneMenuTemplate = api.cloneMenuTemplate;
 export const createMenuItemTemplate = api.createMenuItemTemplate;
-export const createWebMenuBackend = api.createWebMenuBackend;
 export const enableMenuSignals = api.enableMenuSignals;
+export const explainMenuBackend = api.explainMenuBackend;
 export const getMenuBackend = api.getMenuBackend;
 export const getMenuSignals = api.getMenuSignals;
+export const installMenuHostBackend = api.installMenuHostBackend;
+export const observeMenuHostResult = api.observeMenuHostResult;
 export const onMenuSelect = api.onMenuSelect;
+export const resetMenuBackendForTest = api.resetMenuBackendForTest;
 export const setApplicationMenu = api.setApplicationMenu;
 export const setMenuBackend = api.setMenuBackend;
 export const showContextMenu = api.showContextMenu;
+export const showWebContextMenu = api.showWebContextMenu;
 export const validateMenuItemTemplate = api.validateMenuItemTemplate;

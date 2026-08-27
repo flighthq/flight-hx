@@ -6,6 +6,7 @@ export const clearStatusBarStyleStack = compiled.flighthq.statusbar.Statusbar.cl
 export const createStatusBar = compiled.flighthq.statusbar.Statusbar.createStatusBar;
 export const detachStatusBar = compiled.flighthq.statusbar.Statusbar.detachStatusBar;
 export const disposeStatusBar = compiled.flighthq.statusbar.Statusbar.disposeStatusBar;
+export const explainStatusBarBackend = compiled.flighthq.statusbar.Statusbar.explainStatusBarBackend;
 export const getStatusBarHeight = compiled.flighthq.statusbar.Statusbar.getStatusBarHeight;
 export const getStatusBarInfo = compiled.flighthq.statusbar.Statusbar.getStatusBarInfo;
 export const hasStatusBarStyleEntry = compiled.flighthq.statusbar.Statusbar.hasStatusBarStyleEntry;

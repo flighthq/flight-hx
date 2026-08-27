@@ -36,13 +36,13 @@ typedef CapacitorDialogPromptOptions = { @:optional var cancelButtonTitle:String
 
 typedef CapacitorDialogPromptResult = { var cancelled:Bool; var value:String; };
 
-typedef CapacitorFilesystemPlugin = { var appendFile:CapacitorFilesystemWriteOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var copy:CapacitorFilesystemCopyOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var deleteFile:CapacitorFilesystemPathOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var mkdir:CapacitorFilesystemMkdirOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var readFile:CapacitorFilesystemReadOptions->flighthq._internal._Promise<CapacitorFilesystemReadResult>; var readdir:CapacitorFilesystemPathOptions->flighthq._internal._Promise<CapacitorFilesystemReaddirResult>; var rename:CapacitorFilesystemCopyOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var rmdir:CapacitorFilesystemRmdirOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var stat:CapacitorFilesystemPathOptions->flighthq._internal._Promise<CapacitorFilesystemStatResult>; var writeFile:CapacitorFilesystemWriteOptions->flighthq._internal._Promise<CapacitorFilesystemWriteResult>; };
+typedef CapacitorFilesystemPlugin = { var appendFile:CapacitorFilesystemWriteOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var copy:CapacitorFilesystemCopyOptions->flighthq._internal._Promise<flighthq._internal._Any>; var deleteFile:CapacitorFilesystemPathOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var mkdir:CapacitorFilesystemMkdirOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var readFile:CapacitorFilesystemReadOptions->flighthq._internal._Promise<CapacitorFilesystemReadResult>; var readdir:CapacitorFilesystemPathOptions->flighthq._internal._Promise<CapacitorFilesystemReaddirResult>; var rename:CapacitorFilesystemCopyOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var rmdir:CapacitorFilesystemRmdirOptions->flighthq._internal._Promise<flighthq._internal._Nothing>; var stat:CapacitorFilesystemPathOptions->flighthq._internal._Promise<CapacitorFilesystemStatResult>; var writeFile:CapacitorFilesystemWriteOptions->flighthq._internal._Promise<CapacitorFilesystemWriteResult>; };
 
 typedef CapacitorFilesystemPathOptions = { var path:String; };
 
 typedef CapacitorFilesystemReadOptions = { @:optional var encoding:String; var path:String; };
 
-typedef CapacitorFilesystemReadResult = { var data:String; };
+typedef CapacitorFilesystemReadResult = { var data:flighthq._internal._Union2<flighthq._internal.dom.Blob, String>; };
 
 typedef CapacitorFilesystemWriteOptions = { var data:String; @:optional var encoding:String; var path:String; @:optional var recursive:Bool; };
 

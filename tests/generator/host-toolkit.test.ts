@@ -24,6 +24,7 @@ describe('host toolkit dependency boundary', () => {
     expect(audit.types.find((entry) => entry.key === 'host:AbortSignal')?.coverage).toBe('typed');
     expect(audit.types.find((entry) => entry.key === 'host:Performance')?.coverage).toBe('typed');
     expect(audit.values.find((entry) => entry.key === 'global:TextDecoder')?.coverage).toBe('portable');
+    expect(audit.values.find((entry) => entry.key === 'global:matchMedia')?.coverage).toBe('js-only');
     for (const key of [
       'global:AbortController',
       'global:Date',

@@ -4,6 +4,7 @@ package flighthq.tray;
 import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.tray.EnableTrayGuards as Facade_Tray_flighthq_tray_EnableTrayGuards;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Menu.MenuItemTemplate;
 import flighthq.types.Rectangle.RectangleLike;
 import flighthq.types.Tray.TrayBackend;
@@ -19,69 +20,71 @@ class Tray {
 
   public static final _animations__tray:flighthq._internal._Map<Float, flighthq._internal.dom.Timeout> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
-  public static var _backend__tray:Null<TrayBackend> = _Runtime.explicitNull();
+  public static var _custom__tray:Null<TrayBackend> = _Runtime.explicitNull();
+
+  public static var _host__tray:Null<TrayBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__tray:Bool = false;
+
+  public static var _hostObservation__tray:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static function _noopStop__tray():Void {
   }
+
+  public static final _sentinel__tray:TrayBackend = (cast { create: function(options:TrayIconOptions):Float {
+    return cast -1.0;
+    return cast _Runtime.UNDEFINED;
+  }, destroy: function(id:Float):Void {
+
+  }, displayBalloon: function(id:Float, options:TrayBalloonOptions):Void {
+
+  }, getBounds: function(id:Float):Null<RectangleLike> {
+    return cast null;
+    return cast _Runtime.UNDEFINED;
+  }, getCapabilities: function():TrayCapabilities {
+    return cast Tray.WEB_CAPABILITIES__tray;
+    return cast _Runtime.UNDEFINED;
+  }, getTitle: function(id:Float):String {
+    return cast '';
+    return cast _Runtime.UNDEFINED;
+  }, getTooltip: function(id:Float):String {
+    return cast '';
+    return cast _Runtime.UNDEFINED;
+  }, isDestroyed: function(id:Float):Bool {
+    return cast true;
+    return cast _Runtime.UNDEFINED;
+  }, listIds: function():Array<Float> {
+    return cast cast ([] : Array<Dynamic>);
+    return cast _Runtime.UNDEFINED;
+  }, popUpContextMenu: function(id:Float, ?position:Vector2Like):Void {
+
+  }, removeBalloon: function(id:Float):Void {
+
+  }, setContextMenu: function(id:Float, items:Array<MenuItemTemplate>):Void {
+
+  }, setIcon: function(id:Float, icon:String):Void {
+
+  }, setIgnoreDoubleClickEvents: function(id:Float, ignore:Bool):Void {
+
+  }, setPressedIcon: function(id:Float, icon:String):Void {
+
+  }, setTemplate: function(id:Float, isTemplate:Bool):Void {
+
+  }, setTitle: function(id:Float, title:String):Void {
+
+  }, setTooltip: function(id:Float, tooltip:String):Void {
+
+  }, subscribe: function(listener:TrayEventData->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  } });
 
   public static function createTrayIcon(?options:TrayIconOptions):Null<TrayIcon> {
     var id:Float = cast _Runtime.UNDEFINED;
     id = (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).create(({ final __callArgument0:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast {  }); __callArgument0; }));
     return cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast { id: id } : Dynamic));
-    return cast null;
-  }
-
-  @:noCompletion
-  public static function createWebTrayBackend():TrayBackend {
-    return cast { create: function():Float {
-      return cast -1.0;
-      return cast _Runtime.UNDEFINED;
-    }, destroy: function():Void {
-
-    }, displayBalloon: function():Void {
-
-    }, getBounds: function():Null<RectangleLike> {
-      return cast null;
-      return cast _Runtime.UNDEFINED;
-    }, getCapabilities: function():TrayCapabilities {
-      return cast Tray.WEB_CAPABILITIES__tray;
-      return cast _Runtime.UNDEFINED;
-    }, getTitle: function():String {
-      return cast '';
-      return cast _Runtime.UNDEFINED;
-    }, getTooltip: function():String {
-      return cast '';
-      return cast _Runtime.UNDEFINED;
-    }, isDestroyed: function():Bool {
-      return cast true;
-      return cast _Runtime.UNDEFINED;
-    }, listIds: function():Array<Float> {
-      return cast cast ([] : Array<Dynamic>);
-      return cast _Runtime.UNDEFINED;
-    }, popUpContextMenu: function():Void {
-
-    }, removeBalloon: function():Void {
-
-    }, setContextMenu: function():Void {
-
-    }, setIcon: function():Void {
-
-    }, setIgnoreDoubleClickEvents: function():Void {
-
-    }, setPressedIcon: function():Void {
-
-    }, setTemplate: function():Void {
-
-    }, setTitle: function():Void {
-
-    }, setTooltip: function():Void {
-
-    }, subscribe: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    } };
     return cast null;
   }
 
@@ -102,10 +105,20 @@ class Tray {
     Facade_Tray_flighthq_tray_EnableTrayGuards.enableTrayGuards();
   }
 
+  public static function explainTrayBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Tray._custom__tray, null) : Bool)) {
+      return cast { conflict: Tray._hostConflict__tray, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Tray._host__tray, null) : Bool)) {
+      return cast { conflict: Tray._hostConflict__tray, layer: 'host', operation: ((cast !_Runtime.strictEquals(Tray._hostObservation__tray, null) : Bool) ? (cast (cast Tray._hostObservation__tray : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Tray._hostObservation__tray, null) : Bool) ? (cast (cast Tray._hostObservation__tray : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   @:noCompletion
   public static function getTrayBackend():TrayBackend {
-    if ((cast _Runtime.strictEquals(Tray._backend__tray, null) : Bool)) { (Tray._backend__tray = cast ((cast createWebTrayBackend() : TrayBackend) : Dynamic)); }
-    return cast Tray._backend__tray;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Tray._custom__tray, function():Dynamic return cast Tray._host__tray), function():Dynamic return cast Tray._sentinel__tray);
     return cast null;
   }
 
@@ -134,6 +147,15 @@ class Tray {
     return cast null;
   }
 
+  @:noCompletion
+  public static function installTrayHostBackend(backend:TrayBackend):Void {
+    if ((cast !_Runtime.strictEquals(Tray._host__tray, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Tray._host__tray, backend) : Bool)) { (Tray._hostConflict__tray = cast (true : Dynamic)); }
+      return;
+    }
+    (Tray._host__tray = cast (backend : Dynamic));
+  }
+
   public static function isTrayDestroyed(tray:TrayIcon):Bool {
     return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).isDestroyed((cast tray.id : Float));
     return cast null;
@@ -142,6 +164,11 @@ class Tray {
   public static function isTrayIconAnimating(tray:TrayIcon):Bool {
     return cast ((cast Tray._animations__tray : flighthq._internal._Map<Float, flighthq._internal.dom.Timeout>).has(tray.id));
     return cast null;
+  }
+
+  @:noCompletion
+  public static function observeTrayHostResult(operation:String, succeeded:Bool):Void {
+    (Tray._hostObservation__tray = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function onTrayEvent(listener:TrayEventData->Void):Void->Void {
@@ -158,13 +185,21 @@ class Tray {
   }
 
   @:noCompletion
+  public static function resetTrayBackendForTest():Void {
+    (Tray._custom__tray = cast (null : Dynamic));
+    (Tray._host__tray = cast (null : Dynamic));
+    (Tray._hostConflict__tray = cast (false : Dynamic));
+    (Tray._hostObservation__tray = cast (null : Dynamic));
+  }
+
+  @:noCompletion
   public static function setTrayAnimationGuard(guard:Null<TrayIcon->Float->Float->Void>):Void {
     (Tray._animationGuard__tray = cast (guard : Dynamic));
   }
 
   @:noCompletion
   public static function setTrayBackend(backend:Null<TrayBackend>):Void {
-    (Tray._backend__tray = cast (backend : Dynamic));
+    (Tray._custom__tray = cast (backend : Dynamic));
   }
 
   public static function setTrayIcon(tray:TrayIcon, icon:String):Void {

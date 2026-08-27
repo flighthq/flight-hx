@@ -37,6 +37,7 @@ export const disposeApplicationWindow = compiled.flighthq.application.Applicatio
 export const enableApplicationLifecycleSignals = compiled.flighthq.application.Application.enableApplicationLifecycleSignals;
 export const exitApplicationFullscreen = compiled.flighthq.application.Application.exitApplicationFullscreen;
 export const exitApplicationPointerLock = compiled.flighthq.application.Application.exitApplicationPointerLock;
+export const explainWindowBackend = compiled.flighthq.application.Application.explainWindowBackend;
 export const flashWindowFrame = compiled.flighthq.application.Application.flashWindowFrame;
 export const focusWindow = compiled.flighthq.application.Application.focusWindow;
 export const forEachApplicationWindow = compiled.flighthq.application.Application.forEachApplicationWindow;

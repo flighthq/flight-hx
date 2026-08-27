@@ -6,6 +6,7 @@ import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
 import flighthq.signals.Slot.hasSignalSlots;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Power;
 import flighthq.types.Power.PowerBackend;
 import flighthq.types.Power.PowerIdleState;
@@ -15,22 +16,83 @@ import flighthq.types.Power.PowerThermalState;
 import flighthq.types.PowerBatteryHealth;
 import flighthq.types.Signal;
 
-typedef WebBatteryManager__power = { var chargingTime:Float; var dischargingTime:Float; var level:Float; var charging:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
-
-typedef WebWakeLock__power = { var request:String->flighthq._internal._Promise<WebWakeLockSentinel__power>; };
-
-typedef WebWakeLockSentinel__power = { @:optional var addEventListener:String->(Void->Void)->Void; @:optional var release:Void->flighthq._internal._Promise<flighthq._internal._Nothing>; };
-
 class Power {
-  public static var _backend__power:Null<PowerBackend> = _Runtime.explicitNull();
+  public static var _custom__power:Null<PowerBackend> = _Runtime.explicitNull();
+
+  public static var _host__power:Null<PowerBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__power:Bool = false;
+
+  public static var _hostObservation__power:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static var _idlePollingIntervalMs__power:Float = 5000.0;
 
   public static final _scratch__power:PowerStatus = (cast createPowerStatus() : PowerStatus);
 
-  public static final _subscriptions__power:flighthq._internal._WeakMap<flighthq.types.Power, Void->Void> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+  public static final _sentinel__power:PowerBackend = (cast { getBatteryHealth: function(out:PowerBatteryHealth):Null<PowerBatteryHealth> {
+    return cast null;
+    return cast _Runtime.UNDEFINED;
+  }, getStatus: function(out:PowerStatus):PowerStatus {
+    (out.batteryLevel = cast (-1.0 : Float));
+    (out.chargingTime = cast (-1.0 : Float));
+    (out.dischargingTime = cast (-1.0 : Float));
+    (out.isBatteryLow = cast (false : Bool));
+    (out.isCharging = cast (false : Bool));
+    (out.isLowPower = cast (false : Bool));
+    (out.isOnBattery = cast (false : Bool));
+    (out.thermalState = cast ('Unknown' : PowerThermalState));
+    return cast out;
+    return cast _Runtime.UNDEFINED;
+  }, getSystemIdleState: function(thresholdSeconds:Float):PowerIdleState {
+    return cast 'Unknown';
+    return cast _Runtime.UNDEFINED;
+  }, getSystemIdleTime: function():Float {
+    return cast -1.0;
+    return cast _Runtime.UNDEFINED;
+  }, isKeepAwakeActive: function():Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, setKeepAwake: function(enabled:Bool, ?mode:PowerKeepAwakeMode):Bool {
+    return cast false;
+    return cast _Runtime.UNDEFINED;
+  }, subscribe: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
 
-  public static var _wakeLockSentinel__power:Null<WebWakeLockSentinel__power> = _Runtime.explicitNull();
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeLockScreen: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeLowPowerModeChange: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeResume: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeSuspend: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeThermalStateChange: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, subscribeUnlockScreen: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  } });
+
+  public static final _subscriptions__power:flighthq._internal._WeakMap<flighthq.types.Power, Void->Void> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
 
   public static function attachPower(power:flighthq.types.Power, idleThresholdSeconds:Float = 60.0):Void {
     var backend:PowerBackend = cast _Runtime.UNDEFINED;
@@ -116,180 +178,6 @@ class Power {
     return cast null;
   }
 
-  @:noCompletion
-  public static function createWebPowerBackend():PowerBackend {
-    var cachedLevel:Float = cast _Runtime.UNDEFINED;
-    var cachedCharging:Bool = cast _Runtime.UNDEFINED;
-    var cachedChargingTime:Float = cast _Runtime.UNDEFINED;
-    var cachedDischargingTime:Float = cast _Runtime.UNDEFINED;
-    cachedLevel = -1.0;
-    cachedCharging = false;
-    cachedChargingTime = -1.0;
-    cachedDischargingTime = -1.0;
-    return cast { getBatteryHealth: function(_out:PowerBatteryHealth):Null<PowerBatteryHealth> {
-      return cast null;
-      return cast _Runtime.UNDEFINED;
-    }, isKeepAwakeActive: function():Bool {
-      return cast !_Runtime.strictEquals(Power._wakeLockSentinel__power, null);
-      return cast _Runtime.UNDEFINED;
-    }, getStatus: function(out:PowerStatus):PowerStatus {
-      var level:Float = cast _Runtime.UNDEFINED;
-      var charging:Bool = cast _Runtime.UNDEFINED;
-      var chargingTime:Float = cast _Runtime.UNDEFINED;
-      var dischargingTime:Float = cast _Runtime.UNDEFINED;
-      level = cachedLevel;
-      charging = cachedCharging;
-      chargingTime = cachedChargingTime;
-      dischargingTime = cachedDischargingTime;
-      (out.batteryLevel = cast (level : Float));
-      (out.chargingTime = cast (chargingTime : Float));
-      (out.dischargingTime = cast (dischargingTime : Float));
-      (out.isBatteryLow = cast (((cast ((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast level : Float) <= (cast 0.2 : Float)) : Bool)) : Bool) && (cast !(cast charging : Bool) : Bool)) : Bool));
-      (out.isCharging = cast (charging : Bool));
-      (out.isOnBattery = cast (((cast ((cast level : Float) >= (cast 0.0 : Float)) : Bool) && (cast !(cast charging : Bool) : Bool)) : Bool));
-      (out.isLowPower = cast (false : Bool));
-      (out.thermalState = cast ('Unknown' : PowerThermalState));
-      return cast out;
-      return cast _Runtime.UNDEFINED;
-    }, getSystemIdleState: function(_thresholdSeconds:Float):PowerIdleState {
-      return cast 'Unknown';
-      return cast _Runtime.UNDEFINED;
-    }, getSystemIdleTime: function():Float {
-      return cast -1.0;
-      return cast _Runtime.UNDEFINED;
-    }, setKeepAwake: function(enabled:Bool, mode:Null<String>):Bool {
-      var resolvedMode:PowerKeepAwakeMode = cast _Runtime.UNDEFINED;
-      var wakeLock:flighthq._internal._Intersection2<flighthq._internal.dom.WakeLock, WebWakeLock__power> = cast _Runtime.UNDEFINED;
-      resolvedMode = _Runtime.coalesce(mode, function():Dynamic return cast 'PreventDisplaySleep');
-      if ((cast _Runtime.strictEquals(resolvedMode, 'PreventAppSuspension') : Bool)) { return cast false; }
-      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast false; }
-      wakeLock = flighthq._internal.backend.DomNavigatorBackend.field((cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var wakeLock:WebWakeLock__power; }>), 'wakeLock');
-      if ((cast _Runtime.strictEquals(wakeLock, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
-      try {
-        if ((cast !(cast enabled : Bool) : Bool)) {
-          _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural12 = Power._wakeLockSentinel__power; __structural12 == null ? _Runtime.UNDEFINED : (cast __structural12 : { @:optional var release:Null<Void->flighthq._internal._Promise<flighthq._internal._Nothing>>; }).release; }), cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused0:flighthq._internal._Any):Void {
-
-          }] : Array<Dynamic>));
-          (Power._wakeLockSentinel__power = cast (null : Dynamic));
-          return cast true;
-        }
-        flighthq._internal._Async.recover(_Runtime.callProperty((cast wakeLock : { var request:String->flighthq._internal._Promise<WebWakeLockSentinel__power>; }).request((cast 'screen' : String)), 'then', cast ([function(sentinel:WebWakeLockSentinel__power):Void {
-          (Power._wakeLockSentinel__power = cast (sentinel : Dynamic));
-          _Runtime.callOptionalValue((cast sentinel : WebWakeLockSentinel__power).addEventListener, cast (['release', function():Void {
-            if ((cast ((cast _Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel) : Bool) && (cast !(cast flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool) : Bool)) : Bool)) {
-              flighthq._internal._Async.recover(_Runtime.callProperty((cast wakeLock : { var request:String->flighthq._internal._Promise<WebWakeLockSentinel__power>; }).request((cast 'screen' : String)), 'then', cast ([function(newSentinel:WebWakeLockSentinel__power):Void {
-                if ((cast _Runtime.strictEquals(Power._wakeLockSentinel__power, sentinel) : Bool)) { (Power._wakeLockSentinel__power = cast (newSentinel : Dynamic)); }
-              }] : Array<Dynamic>)), function(__unused1:flighthq._internal._Any):Void {
-
-              });
-            }
-          }] : Array<Dynamic>));
-        }] : Array<Dynamic>)), function(__unused2:flighthq._internal._Any):Void {
-
-        });
-        return cast true;
-      } catch (__error:Dynamic) {
-        return cast false;
-      }
-      return cast _Runtime.UNDEFINED;
-    }, subscribe: function(listener:Void->Void):Void->Void {
-      var battery:Null<flighthq._internal._Promise<WebBatteryManager__power>> = cast _Runtime.UNDEFINED;
-      var manager:Null<WebBatteryManager__power> = cast _Runtime.UNDEFINED;
-      var onLevelChange:Void->Void = cast _Runtime.UNDEFINED;
-      var onChargingChange:Void->Void = cast _Runtime.UNDEFINED;
-      var onChargingTimeChange:Void->Void = cast _Runtime.UNDEFINED;
-      var onDischargingTimeChange:Void->Void = cast _Runtime.UNDEFINED;
-      var cancelled:Bool = cast _Runtime.UNDEFINED;
-      battery = (cast Power.getWebBatteryManagerPromise__power() : Null<flighthq._internal._Promise<WebBatteryManager__power>>);
-      if ((cast _Runtime.strictEquals(battery, null) : Bool)) { return cast function():Void {
-
-      }; }
-      manager = null;
-      onLevelChange = (cast function():Void {
-        if ((cast !_Runtime.strictEquals(manager, null) : Bool)) { (cachedLevel = cast ((cast manager : WebBatteryManager__power).level : Dynamic)); }
-        listener();
-      });
-      onChargingChange = (cast function():Void {
-        if ((cast !_Runtime.strictEquals(manager, null) : Bool)) { (cachedCharging = cast ((cast manager : WebBatteryManager__power).charging : Dynamic)); }
-        listener();
-      });
-      onChargingTimeChange = (cast function():Void {
-        if ((cast !_Runtime.strictEquals(manager, null) : Bool)) {
-          var t:Float = (cast manager : WebBatteryManager__power).chargingTime;
-          (cachedChargingTime = cast (((cast _Runtime.strictEquals(t, HxMath.POSITIVE_INFINITY) : Bool) ? (cast -1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic));
-        }
-        listener();
-      });
-      onDischargingTimeChange = (cast function():Void {
-        if ((cast !_Runtime.strictEquals(manager, null) : Bool)) {
-          var t:Float = (cast manager : WebBatteryManager__power).dischargingTime;
-          (cachedDischargingTime = cast (((cast _Runtime.strictEquals(t, HxMath.POSITIVE_INFINITY) : Bool) ? (cast -1.0 : Dynamic) : (cast t : Dynamic)) : Dynamic));
-        }
-        listener();
-      });
-      cancelled = false;
-      flighthq._internal._Async.recover(_Runtime.callProperty(battery, 'then', cast ([function(m:WebBatteryManager__power):Void {
-        if ((cast cancelled : Bool)) { return; }
-        (manager = cast (m : Dynamic));
-        (cachedLevel = cast ((cast m : WebBatteryManager__power).level : Dynamic));
-        (cachedCharging = cast ((cast m : WebBatteryManager__power).charging : Dynamic));
-        (cachedChargingTime = cast (((cast _Runtime.strictEquals((cast m : WebBatteryManager__power).chargingTime, HxMath.POSITIVE_INFINITY) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast m : WebBatteryManager__power).chargingTime : Dynamic)) : Dynamic));
-        (cachedDischargingTime = cast (((cast _Runtime.strictEquals((cast m : WebBatteryManager__power).dischargingTime, HxMath.POSITIVE_INFINITY) : Bool) ? (cast -1.0 : Dynamic) : (cast (cast m : WebBatteryManager__power).dischargingTime : Dynamic)) : Dynamic));
-        _Runtime.callOptionalValue((cast m : WebBatteryManager__power).addEventListener, cast (['levelchange', onLevelChange] : Array<Dynamic>));
-        _Runtime.callOptionalValue((cast m : WebBatteryManager__power).addEventListener, cast (['chargingchange', onChargingChange] : Array<Dynamic>));
-        _Runtime.callOptionalValue((cast m : WebBatteryManager__power).addEventListener, cast (['chargingtimechange', onChargingTimeChange] : Array<Dynamic>));
-        _Runtime.callOptionalValue((cast m : WebBatteryManager__power).addEventListener, cast (['dischargingtimechange', onDischargingTimeChange] : Array<Dynamic>));
-        listener();
-      }] : Array<Dynamic>)), function(__unused3:flighthq._internal._Any):Void {
-
-      });
-      return cast function():Void {
-        (cancelled = cast (true : Dynamic));
-        ({ final __optionalOwner14 = manager; if (__optionalOwner14 != null) { final __optionalCall13 = (cast __optionalOwner14 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall13 != null) __optionalCall13('levelchange', onLevelChange); } });
-        ({ final __optionalOwner16 = manager; if (__optionalOwner16 != null) { final __optionalCall15 = (cast __optionalOwner16 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall15 != null) __optionalCall15('chargingchange', onChargingChange); } });
-        ({ final __optionalOwner18 = manager; if (__optionalOwner18 != null) { final __optionalCall17 = (cast __optionalOwner18 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall17 != null) __optionalCall17('chargingtimechange', onChargingTimeChange); } });
-        ({ final __optionalOwner20 = manager; if (__optionalOwner20 != null) { final __optionalCall19 = (cast __optionalOwner20 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall19 != null) __optionalCall19('dischargingtimechange', onDischargingTimeChange); } });
-        (manager = cast (null : Dynamic));
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeLockScreen: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeLowPowerModeChange: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeResume: function(listener:Void->Void):Void->Void {
-      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast function():Void {
-
-      }; }
-      flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['resume', listener] : Array<Dynamic>));
-      return cast function():Void { flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['resume', listener] : Array<Dynamic>)); };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeSuspend: function(listener:Void->Void):Void->Void {
-      if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast function():Void {
-
-      }; }
-      flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'addEventListener', cast (['freeze', listener] : Array<Dynamic>));
-      return cast function():Void { flighthq._internal.backend.DomDocumentBackend.call(flighthq._internal.backend.DomDocumentBackend.value(), 'removeEventListener', cast (['freeze', listener] : Array<Dynamic>)); };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeThermalStateChange: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    }, subscribeUnlockScreen: function():Void->Void {
-      return cast function():Void {
-
-      };
-      return cast _Runtime.UNDEFINED;
-    } };
-    return cast null;
-  }
-
   public static function detachPower(power:flighthq.types.Power):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast Power._subscriptions__power : flighthq._internal._WeakMap<flighthq.types.Power, Void->Void>).get(power));
@@ -300,7 +188,7 @@ class Power {
   }
 
   public static function disposePower(power:flighthq.types.Power):Void {
-    detachPower(({ final __callArgument21:Dynamic = power; __callArgument21; }));
+    detachPower(({ final __callArgument11:Dynamic = power; __callArgument11; }));
   }
 
   public static function enablePowerSignals(power:flighthq.types.Power):Void {
@@ -316,15 +204,25 @@ class Power {
     if ((cast _Runtime.strictEquals(power.onUnlockScreen, null) : Bool)) { (power.onUnlockScreen = cast ((cast createSignal() : Signal<Void->Void>) : Null<Signal<Void->Void>>)); }
   }
 
+  public static function explainPowerBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Power._custom__power, null) : Bool)) {
+      return cast { conflict: Power._hostConflict__power, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Power._host__power, null) : Bool)) {
+      return cast { conflict: Power._hostConflict__power, layer: 'host', operation: ((cast !_Runtime.strictEquals(Power._hostObservation__power, null) : Bool) ? (cast (cast Power._hostObservation__power : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Power._hostObservation__power, null) : Bool) ? (cast (cast Power._hostObservation__power : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   @:noCompletion
   public static function getPowerBackend():PowerBackend {
-    if ((cast _Runtime.strictEquals(Power._backend__power, null) : Bool)) { (Power._backend__power = cast ((cast createWebPowerBackend() : PowerBackend) : Dynamic)); }
-    return cast Power._backend__power;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Power._custom__power, function():Dynamic return cast Power._host__power), function():Dynamic return cast Power._sentinel__power);
     return cast null;
   }
 
   public static function getPowerBatteryHealth(out:PowerBatteryHealth):Null<PowerBatteryHealth> {
-    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getBatteryHealth(({ final __callArgument23:Dynamic = out; __callArgument23; }));
+    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getBatteryHealth(({ final __callArgument13:Dynamic = out; __callArgument13; }));
     return cast null;
   }
 
@@ -334,7 +232,7 @@ class Power {
   }
 
   public static function getPowerStatus(out:PowerStatus):PowerStatus {
-    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus(({ final __callArgument24:Dynamic = out; __callArgument24; }));
+    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus(({ final __callArgument14:Dynamic = out; __callArgument14; }));
     return cast null;
   }
 
@@ -349,20 +247,7 @@ class Power {
   }
 
   public static function getPowerThermalState():PowerThermalState {
-    return cast (cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus(({ final __callArgument25:Dynamic = Power._scratch__power; __callArgument25; })) : { var thermalState:PowerThermalState; }).thermalState;
-    return cast null;
-  }
-
-  public static function getWebBatteryManagerPromise__power():Null<flighthq._internal._Promise<WebBatteryManager__power>> {
-    var nav:flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var getBattery:Null<Void->flighthq._internal._Promise<WebBatteryManager__power>>; }> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast null; }
-    nav = (cast flighthq._internal.backend.DomNavigatorBackend.value() : flighthq._internal._Intersection2<flighthq._internal.dom.Navigator, { @:optional var getBattery:Void->flighthq._internal._Promise<WebBatteryManager__power>; }>);
-    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomNavigatorBackend.field(nav, 'getBattery')), 'function') : Bool)) { return cast null; }
-    try {
-      return cast flighthq._internal.backend.DomNavigatorBackend.call(nav, 'getBattery', cast ([] : Array<Dynamic>));
-    } catch (__error:Dynamic) {
-      return cast null;
-    }
+    return cast (cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus(({ final __callArgument15:Dynamic = Power._scratch__power; __callArgument15; })) : { var thermalState:PowerThermalState; }).thermalState;
     return cast null;
   }
 
@@ -372,8 +257,30 @@ class Power {
   }
 
   @:noCompletion
+  public static function installPowerHostBackend(backend:PowerBackend):Void {
+    if ((cast !_Runtime.strictEquals(Power._host__power, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Power._host__power, backend) : Bool)) { (Power._hostConflict__power = cast (true : Dynamic)); }
+      return;
+    }
+    (Power._host__power = cast (backend : Dynamic));
+  }
+
+  @:noCompletion
+  public static function observePowerHostResult(operation:String, succeeded:Bool):Void {
+    (Power._hostObservation__power = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
+  }
+
+  @:noCompletion
+  public static function resetPowerBackendForTest():Void {
+    (Power._custom__power = cast (null : Dynamic));
+    (Power._host__power = cast (null : Dynamic));
+    (Power._hostConflict__power = cast (false : Dynamic));
+    (Power._hostObservation__power = cast (null : Dynamic));
+  }
+
+  @:noCompletion
   public static function setPowerBackend(backend:Null<PowerBackend>):Void {
-    (Power._backend__power = cast (backend : Dynamic));
+    (Power._custom__power = cast (backend : Dynamic));
   }
 
   public static function setPowerIdlePollingIntervalMs(intervalMs:Float):Void {
@@ -381,7 +288,7 @@ class Power {
   }
 
   public static function setPowerKeepAwake(enabled:Bool, ?mode:PowerKeepAwakeMode):Bool {
-    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).setKeepAwake((cast enabled : Bool), ({ final __callArgument26:Dynamic = mode; __callArgument26; }));
+    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).setKeepAwake((cast enabled : Bool), ({ final __callArgument16:Dynamic = mode; __callArgument16; }));
     return cast null;
   }
 }

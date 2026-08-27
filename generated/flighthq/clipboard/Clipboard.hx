@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.signals.Emitter.emitSignal;
 import flighthq.signals.Signal.createSignal;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Clipboard.ClipboardBackend;
 import flighthq.types.Clipboard.ClipboardBookmark;
 import flighthq.types.Clipboard.ClipboardWriteItem;
@@ -17,36 +18,145 @@ import flighthq.types.Types.ClipboardFormatBookmark;
 import flighthq.types.Types.ClipboardFormatHtml;
 import flighthq.types.Types.ClipboardFormatRtf;
 
-class Clipboard {
-  public static var _backend__clipboard:Null<ClipboardBackend> = _Runtime.explicitNull();
+typedef ClipboardWatchSubscription__clipboard = { var listener:Void->Void; var detach:Void->Void; var rebind:ClipboardBackend->Void; };
 
-  public static final _watchSubscriptions__clipboard:flighthq._internal._WeakMap<ClipboardWatch, Void->Void> = _Runtime.construct(flighthq._internal._HostValueLut.get('WeakMap'), []);
+class Clipboard {
+  public static var _custom__clipboard:Null<ClipboardBackend> = _Runtime.explicitNull();
+
+  public static var _host__clipboard:Null<ClipboardBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__clipboard:Bool = false;
+
+  public static var _hostObservation__clipboard:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+
+  public static final _sentinel__clipboard:ClipboardBackend = (cast { clear: function():flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, getChangeCount: function():Float {
+    return cast -1.0;
+    return cast _Runtime.UNDEFINED;
+  }, getFormats: function():flighthq._internal._Promise<Array<String>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+    }));
+  }, hasFormat: function(format:String):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, hasImage: function():flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, hasText: function():flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, readBookmark: function():flighthq._internal._Promise<Null<ClipboardBookmark>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(null);
+    }));
+  }, readFiles: function():flighthq._internal._Promise<Array<String>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(cast ([] : Array<Dynamic>));
+    }));
+  }, readFormat: function(format:String):flighthq._internal._Promise<String> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve('');
+    }));
+  }, readHtml: function():flighthq._internal._Promise<String> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve('');
+    }));
+  }, readImage: function():flighthq._internal._Promise<String> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve('');
+    }));
+  }, readItems: function(formats:Array<String>):flighthq._internal._Promise<flighthq._internal._Record<String, String>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve({  });
+    }));
+  }, readRTF: function():flighthq._internal._Promise<String> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve('');
+    }));
+  }, readText: function():flighthq._internal._Promise<String> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve('');
+    }));
+  }, subscribeClipboardChange: function(listener:Void->Void):Void->Void {
+    return cast function():Void {
+
+    };
+    return cast _Runtime.UNDEFINED;
+  }, writeBookmark: function(title:String, url:String):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, writeFiles: function(paths:Array<String>):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, writeFormat: function(format:String, data:String):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, writeHtml: function(html:String):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, writeImage: function(dataUrl:String):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, writeItems: function(items:Array<ClipboardWriteItem>):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, writeRTF: function(rtf:String):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  }, writeText: function(text:String):flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  } });
+
+  public static final _watchSubscriptions__clipboard:flighthq._internal._Map<ClipboardWatch, ClipboardWatchSubscription__clipboard> = _Runtime.construct(flighthq._internal._HostValueLut.get('Map'), []);
 
   public static function attachClipboardWatch(watch:ClipboardWatch):Void {
+    var listener:Void->Void = cast _Runtime.UNDEFINED;
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
+    var entry:ClipboardWatchSubscription__clipboard = cast _Runtime.UNDEFINED;
     detachClipboardWatch(({ final __callArgument0:Dynamic = watch; __callArgument0; }));
-    unsubscribe = (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).subscribeClipboardChange(({ final __callArgument2:Dynamic = function():Void {
+    listener = (cast function():Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[watch.onChange]]), 1);
-    }; __callArgument2; }));
-    ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._WeakMap<ClipboardWatch, Void->Void>).set(watch, (cast unsubscribe)));
+    });
+    unsubscribe = (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).subscribeClipboardChange(({ final __callArgument2:Dynamic = listener; __callArgument2; }));
+    entry = (cast { listener: listener, detach: function():Void { unsubscribe(); }, rebind: function(backend:ClipboardBackend):Void {
+      unsubscribe();
+      (unsubscribe = cast ((cast backend : ClipboardBackend).subscribeClipboardChange(({ final __callArgument3:Dynamic = listener; __callArgument3; })) : Dynamic));
+    } });
+    ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._Map<ClipboardWatch, ClipboardWatchSubscription__clipboard>).set(watch, (cast entry)));
   }
 
   public static function blobFromFormatData__clipboard(format:String, data:String):flighthq._internal._Promise<flighthq._internal.dom.Blob> {
     return cast flighthq._internal._Async.finishFlow(
       flighthq._internal._Async.protect(function():Dynamic {
-        var __flowBranch3:Dynamic;
+        var __flowBranch4:Dynamic;
         if ((cast ((cast StringTools.startsWith(format, 'image/') : Bool) && (cast StringTools.startsWith(data, 'data:') : Bool)) : Bool)) {
-          __flowBranch3 = flighthq._internal._Async.protect(function():Dynamic {
+          __flowBranch4 = flighthq._internal._Async.protect(function():Dynamic {
             var response:flighthq._internal.dom.Response = cast _Runtime.UNDEFINED;
-            return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([data] : Array<Dynamic>)), function(__awaitValue4:Dynamic):Dynamic {
-              response = __awaitValue4;
+            return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([data] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
+              response = __awaitValue5;
               return flighthq._internal._Async.flowReturn((cast response : flighthq._internal.dom.Response).blob());
             });
           });
         } else {
-          __flowBranch3 = flighthq._internal._Async.flowNormal();
+          __flowBranch4 = flighthq._internal._Async.flowNormal();
         }
-        return flighthq._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+        return flighthq._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
           return flighthq._internal._Async.flowReturn(_Runtime.construct(flighthq._internal._HostValueLut.get('Blob'), [cast ([data] : Array<Dynamic>), { type: format }]));
         });
       })
@@ -65,52 +175,52 @@ class Clipboard {
 
   @:noCompletion
   public static function createWebClipboardBackend():ClipboardBackend {
-    return cast { readFormat: function(format:String):flighthq._internal._Promise<String> {
+    return cast ({ var __thisValue0:Dynamic = null; __thisValue0 = { readFormat: function(format:String):flighthq._internal._Promise<String> {
       return cast flighthq._internal._Async.finishFlow(
         flighthq._internal._Async.protect(function():Dynamic {
           var cb:Null<flighthq._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast Clipboard.getWebClipboard__clipboard() : Null<flighthq._internal.dom.Clipboard>);
-          var __flowBranch5:Dynamic;
+          var __flowBranch6:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flighthq._internal.dom.Clipboard).read), 'function') : Bool)) : Bool)) {
-            __flowBranch5 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch6 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn('');
             });
           } else {
-            __flowBranch5 = flighthq._internal._Async.flowNormal();
+            __flowBranch6 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch5, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var items:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).read(), function(__awaitValue6:Dynamic):Dynamic {
-                items = __awaitValue6;
-                var __flowIterator7:Array<Dynamic> = _Runtime.iterable(items);
-                var __flowIndex8:Int = 0;
+              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).read(), function(__awaitValue7:Dynamic):Dynamic {
+                items = __awaitValue7;
+                var __flowIterator8:Array<Dynamic> = _Runtime.iterable(items);
+                var __flowIndex9:Int = 0;
                 return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
-                  if (__flowIndex8 >= __flowIterator7.length) return flighthq._internal._Async.flowBreak();
-                  var item:Dynamic = __flowIterator7[__flowIndex8++];
-                  var __flowBranch9:Dynamic;
+                  if (__flowIndex9 >= __flowIterator8.length) return flighthq._internal._Async.flowBreak();
+                  var item:Dynamic = __flowIterator8[__flowIndex9++];
+                  var __flowBranch10:Dynamic;
                   if ((cast _Runtime.includes((cast item : flighthq._internal.dom.ClipboardItem).types, format) : Bool)) {
-                    __flowBranch9 = flighthq._internal._Async.protect(function():Dynamic {
+                    __flowBranch10 = flighthq._internal._Async.protect(function():Dynamic {
                       var blob:flighthq._internal.dom.Blob = cast _Runtime.UNDEFINED;
-                      return flighthq._internal._Async.flatMap((cast item : flighthq._internal.dom.ClipboardItem).getType(format), function(__awaitValue10:Dynamic):Dynamic {
-                        blob = __awaitValue10;
-                        var __flowBranch11:Dynamic;
+                      return flighthq._internal._Async.flatMap((cast item : flighthq._internal.dom.ClipboardItem).getType(format), function(__awaitValue11:Dynamic):Dynamic {
+                        blob = __awaitValue11;
+                        var __flowBranch12:Dynamic;
                         if ((cast StringTools.startsWith(format, 'image/') : Bool)) {
-                          __flowBranch11 = flighthq._internal._Async.protect(function():Dynamic {
-                            return flighthq._internal._Async.flowReturn((cast Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument12:Dynamic = blob; __callArgument12; })) : flighthq._internal._Promise<String>));
+                          __flowBranch12 = flighthq._internal._Async.protect(function():Dynamic {
+                            return flighthq._internal._Async.flowReturn((cast Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument13:Dynamic = blob; __callArgument13; })) : flighthq._internal._Promise<String>));
                           });
                         } else {
-                          __flowBranch11 = flighthq._internal._Async.flowNormal();
+                          __flowBranch12 = flighthq._internal._Async.flowNormal();
                         }
-                        return flighthq._internal._Async.continueFlow(__flowBranch11, function():Dynamic {
+                        return flighthq._internal._Async.continueFlow(__flowBranch12, function():Dynamic {
                           return flighthq._internal._Async.flowReturn((cast blob : flighthq._internal.dom.Blob).text());
                         });
                       });
                     });
                   } else {
-                    __flowBranch9 = flighthq._internal._Async.flowNormal();
+                    __flowBranch10 = flighthq._internal._Async.flowNormal();
                   }
-                  return flighthq._internal._Async.continueFlow(__flowBranch9, function():Dynamic {
+                  return flighthq._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
                     return flighthq._internal._Async.flowNormal();
                   });
                 }), function():Dynamic {
@@ -133,21 +243,21 @@ class Clipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           var cb:Null<flighthq._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast Clipboard.getWritableWebClipboard__clipboard() : Null<flighthq._internal.dom.Clipboard>);
-          var __flowBranch14:Dynamic;
+          var __flowBranch15:Dynamic;
           if ((cast _Runtime.strictEquals(cb, null) : Bool)) {
-            __flowBranch14 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch15 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch14 = flighthq._internal._Async.flowNormal();
+            __flowBranch15 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch14, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var blob:flighthq._internal.dom.Blob = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast Clipboard.blobFromFormatData__clipboard((cast format : String), (cast data : String)) : flighthq._internal._Promise<flighthq._internal.dom.Blob>), function(__awaitValue15:Dynamic):Dynamic {
-                blob = __awaitValue15;
-                return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).write(cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('ClipboardItem'), [_Runtime.objectFromPairs([{ key: format, value: blob }])])] : Array<Dynamic>)), function(__awaitValue16:Dynamic):Dynamic {
-                  __awaitValue16;
+              return flighthq._internal._Async.flatMap((cast Clipboard.blobFromFormatData__clipboard((cast format : String), (cast data : String)) : flighthq._internal._Promise<flighthq._internal.dom.Blob>), function(__awaitValue16:Dynamic):Dynamic {
+                blob = __awaitValue16;
+                return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).write(cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('ClipboardItem'), [_Runtime.objectFromPairs([{ key: format, value: blob }])])] : Array<Dynamic>)), function(__awaitValue17:Dynamic):Dynamic {
+                  __awaitValue17;
                   return flighthq._internal._Async.flowReturn(true);
                 });
               });
@@ -163,11 +273,10 @@ class Clipboard {
         })
       );
     }, hasFormat: function(format:String):flighthq._internal._Promise<Bool> {
-      var __thisValue0:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
         var formats:Array<String> = cast _Runtime.UNDEFINED;
-        return flighthq._internal._Async.flatMap((cast __thisValue0 : ClipboardBackend).getFormats(), function(__awaitValue17:Dynamic):Dynamic {
-          formats = __awaitValue17;
+        return flighthq._internal._Async.flatMap((cast __thisValue0 : ClipboardBackend).getFormats(), function(__awaitValue18:Dynamic):Dynamic {
+          formats = __awaitValue18;
           return flighthq._internal._Async.resolve(_Runtime.includes(formats, format));
         });
       }));
@@ -176,20 +285,20 @@ class Clipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           var cb:Null<flighthq._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast Clipboard.getWebClipboard__clipboard() : Null<flighthq._internal.dom.Clipboard>);
-          var __flowBranch18:Dynamic;
+          var __flowBranch19:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flighthq._internal.dom.Clipboard).read), 'function') : Bool)) : Bool)) {
-            __flowBranch18 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch19 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
             });
           } else {
-            __flowBranch18 = flighthq._internal._Async.flowNormal();
+            __flowBranch19 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch18, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch19, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var items:flighthq._internal._Any = cast _Runtime.UNDEFINED;
               var out:Array<String> = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).read(), function(__awaitValue19:Dynamic):Dynamic {
-                items = __awaitValue19;
+              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).read(), function(__awaitValue20:Dynamic):Dynamic {
+                items = __awaitValue20;
                 out = cast ([] : Array<Dynamic>);
                 for (item in _Runtime.iterable(items)) {
                   for (t in _Runtime.iterable((cast item : flighthq._internal.dom.ClipboardItem).types)) {
@@ -214,32 +323,32 @@ class Clipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           var cb:Null<flighthq._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast Clipboard.getWritableWebClipboard__clipboard() : Null<flighthq._internal.dom.Clipboard>);
-          var __flowBranch24:Dynamic;
+          var __flowBranch25:Dynamic;
           if ((cast _Runtime.strictEquals(cb, null) : Bool)) {
-            __flowBranch24 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch25 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch24 = flighthq._internal._Async.flowNormal();
+            __flowBranch25 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch24, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch25, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var entry:flighthq._internal._Record<String, flighthq._internal.dom.Blob> = cast _Runtime.UNDEFINED;
               entry = {  };
-              var __flowIterator25:Array<Dynamic> = _Runtime.iterable(items);
-              var __flowIndex26:Int = 0;
+              var __flowIterator26:Array<Dynamic> = _Runtime.iterable(items);
+              var __flowIndex27:Int = 0;
               return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
-                if (__flowIndex26 >= __flowIterator25.length) return flighthq._internal._Async.flowBreak();
-                var item:Dynamic = __flowIterator25[__flowIndex26++];
-                var __beforeAwait27:Dynamic = entry;
-                var __beforeAwait28:Dynamic = item.format;
-                return flighthq._internal._Async.flatMap((cast Clipboard.blobFromFormatData__clipboard((cast item.format : String), (cast item.data : String)) : flighthq._internal._Promise<flighthq._internal.dom.Blob>), function(__awaitValue29:Dynamic):Dynamic {
-                  _Runtime.setIndex(__beforeAwait27, __beforeAwait28, __awaitValue29);
+                if (__flowIndex27 >= __flowIterator26.length) return flighthq._internal._Async.flowBreak();
+                var item:Dynamic = __flowIterator26[__flowIndex27++];
+                var __beforeAwait28:Dynamic = entry;
+                var __beforeAwait29:Dynamic = item.format;
+                return flighthq._internal._Async.flatMap((cast Clipboard.blobFromFormatData__clipboard((cast item.format : String), (cast item.data : String)) : flighthq._internal._Promise<flighthq._internal.dom.Blob>), function(__awaitValue30:Dynamic):Dynamic {
+                  _Runtime.setIndex(__beforeAwait28, __beforeAwait29, __awaitValue30);
                   return flighthq._internal._Async.flowNormal();
                 });
               }), function():Dynamic {
-                return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).write(cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('ClipboardItem'), [entry])] : Array<Dynamic>)), function(__awaitValue30:Dynamic):Dynamic {
-                  __awaitValue30;
+                return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).write(cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('ClipboardItem'), [entry])] : Array<Dynamic>)), function(__awaitValue31:Dynamic):Dynamic {
+                  __awaitValue31;
                   return flighthq._internal._Async.flowReturn(true);
                 });
               });
@@ -259,51 +368,51 @@ class Clipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           var cb:Null<flighthq._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast Clipboard.getWebClipboard__clipboard() : Null<flighthq._internal.dom.Clipboard>);
-          var __flowBranch31:Dynamic;
+          var __flowBranch32:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flighthq._internal.dom.Clipboard).read), 'function') : Bool)) : Bool)) {
-            __flowBranch31 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch32 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn({  });
             });
           } else {
-            __flowBranch31 = flighthq._internal._Async.flowNormal();
+            __flowBranch32 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch31, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch32, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var clipItems:flighthq._internal._Any = cast _Runtime.UNDEFINED;
               var result:flighthq._internal._Record<String, String> = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).read(), function(__awaitValue32:Dynamic):Dynamic {
-                clipItems = __awaitValue32;
+              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).read(), function(__awaitValue33:Dynamic):Dynamic {
+                clipItems = __awaitValue33;
                 result = {  };
-                var __flowIterator33:Array<Dynamic> = _Runtime.iterable(clipItems);
-                var __flowIndex34:Int = 0;
+                var __flowIterator34:Array<Dynamic> = _Runtime.iterable(clipItems);
+                var __flowIndex35:Int = 0;
                 return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
-                  if (__flowIndex34 >= __flowIterator33.length) return flighthq._internal._Async.flowBreak();
-                  var clipItem:Dynamic = __flowIterator33[__flowIndex34++];
-                  var __flowIterator35:Array<Dynamic> = _Runtime.iterable(formats);
-                  var __flowIndex36:Int = 0;
+                  if (__flowIndex35 >= __flowIterator34.length) return flighthq._internal._Async.flowBreak();
+                  var clipItem:Dynamic = __flowIterator34[__flowIndex35++];
+                  var __flowIterator36:Array<Dynamic> = _Runtime.iterable(formats);
+                  var __flowIndex37:Int = 0;
                   return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
-                    if (__flowIndex36 >= __flowIterator35.length) return flighthq._internal._Async.flowBreak();
-                    var format:Dynamic = __flowIterator35[__flowIndex36++];
-                    var __flowBranch37:Dynamic;
+                    if (__flowIndex37 >= __flowIterator36.length) return flighthq._internal._Async.flowBreak();
+                    var format:Dynamic = __flowIterator36[__flowIndex37++];
+                    var __flowBranch38:Dynamic;
                     if ((cast ((cast _Runtime.includes((cast clipItem : flighthq._internal.dom.ClipboardItem).types, format) : Bool) && (cast !(cast _Runtime.hasField(result, format) : Bool) : Bool)) : Bool)) {
-                      __flowBranch37 = flighthq._internal._Async.protect(function():Dynamic {
+                      __flowBranch38 = flighthq._internal._Async.protect(function():Dynamic {
                         var blob:flighthq._internal.dom.Blob = cast _Runtime.UNDEFINED;
-                        return flighthq._internal._Async.flatMap((cast clipItem : flighthq._internal.dom.ClipboardItem).getType(format), function(__awaitValue38:Dynamic):Dynamic {
-                          blob = __awaitValue38;
-                          var __beforeAwait39:Dynamic = result;
-                          var __beforeAwait40:Dynamic = format;
-                          return flighthq._internal._Async.flatMap((cast blob : flighthq._internal.dom.Blob).text(), function(__awaitValue41:Dynamic):Dynamic {
-                            return flighthq._internal._Async.flatMap((cast Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument43:Dynamic = blob; __callArgument43; })) : flighthq._internal._Promise<String>), function(__awaitValue42:Dynamic):Dynamic {
-                              _Runtime.setIndex(__beforeAwait39, __beforeAwait40, ((cast StringTools.startsWith(format, 'image/') : Bool) ? (cast __awaitValue42 : Dynamic) : (cast __awaitValue41 : Dynamic)));
+                        return flighthq._internal._Async.flatMap((cast clipItem : flighthq._internal.dom.ClipboardItem).getType(format), function(__awaitValue39:Dynamic):Dynamic {
+                          blob = __awaitValue39;
+                          var __beforeAwait40:Dynamic = result;
+                          var __beforeAwait41:Dynamic = format;
+                          return flighthq._internal._Async.flatMap((cast blob : flighthq._internal.dom.Blob).text(), function(__awaitValue42:Dynamic):Dynamic {
+                            return flighthq._internal._Async.flatMap((cast Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument44:Dynamic = blob; __callArgument44; })) : flighthq._internal._Promise<String>), function(__awaitValue43:Dynamic):Dynamic {
+                              _Runtime.setIndex(__beforeAwait40, __beforeAwait41, ((cast StringTools.startsWith(format, 'image/') : Bool) ? (cast __awaitValue43 : Dynamic) : (cast __awaitValue42 : Dynamic)));
                               return flighthq._internal._Async.flowNormal();
                             });
                           });
                         });
                       });
                     } else {
-                      __flowBranch37 = flighthq._internal._Async.flowNormal();
+                      __flowBranch38 = flighthq._internal._Async.flowNormal();
                     }
-                    return flighthq._internal._Async.continueFlow(__flowBranch37, function():Dynamic {
+                    return flighthq._internal._Async.continueFlow(__flowBranch38, function():Dynamic {
                       return flighthq._internal._Async.flowNormal();
                     });
                   }), function():Dynamic {
@@ -329,18 +438,18 @@ class Clipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           var cb:Null<flighthq._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast Clipboard.getWebClipboard__clipboard() : Null<flighthq._internal.dom.Clipboard>);
-          var __flowBranch45:Dynamic;
+          var __flowBranch46:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flighthq._internal.dom.Clipboard).readText), 'function') : Bool)) : Bool)) {
-            __flowBranch45 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch46 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn('');
             });
           } else {
-            __flowBranch45 = flighthq._internal._Async.flowNormal();
+            __flowBranch46 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch45, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch46, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).readText(), function(__awaitValue46:Dynamic):Dynamic {
-                return flighthq._internal._Async.flowReturn(__awaitValue46);
+              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).readText(), function(__awaitValue47:Dynamic):Dynamic {
+                return flighthq._internal._Async.flowReturn(__awaitValue47);
               });
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;
@@ -358,18 +467,18 @@ class Clipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           var cb:Null<flighthq._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast Clipboard.getWebClipboard__clipboard() : Null<flighthq._internal.dom.Clipboard>);
-          var __flowBranch47:Dynamic;
+          var __flowBranch48:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flighthq._internal.dom.Clipboard).writeText), 'function') : Bool)) : Bool)) {
-            __flowBranch47 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch48 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch47 = flighthq._internal._Async.flowNormal();
+            __flowBranch48 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch47, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch48, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
-              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).writeText(text), function(__awaitValue48:Dynamic):Dynamic {
-                __awaitValue48;
+              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).writeText(text), function(__awaitValue49:Dynamic):Dynamic {
+                __awaitValue49;
                 return flighthq._internal._Async.flowReturn(true);
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -384,20 +493,17 @@ class Clipboard {
         })
       );
     }, readHtml: function():flighthq._internal._Promise<String> {
-      var __thisValue1:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast __thisValue1 : ClipboardBackend).readFormat((cast ClipboardFormatHtml : String)));
+        return flighthq._internal._Async.resolve((cast __thisValue0 : ClipboardBackend).readFormat((cast ClipboardFormatHtml : String)));
       }));
     }, writeHtml: function(html:String):flighthq._internal._Promise<Bool> {
-      var __thisValue2:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast __thisValue2 : ClipboardBackend).writeFormat((cast ClipboardFormatHtml : String), (cast html : String)));
+        return flighthq._internal._Async.resolve((cast __thisValue0 : ClipboardBackend).writeFormat((cast ClipboardFormatHtml : String), (cast html : String)));
       }));
     }, hasText: function():flighthq._internal._Promise<Bool> {
-      var __thisValue3:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.flatMap((cast __thisValue3 : ClipboardBackend).readText(), function(__awaitValue49:Dynamic):Dynamic {
-          return flighthq._internal._Async.resolve(((cast _Runtime.field(__awaitValue49, 'length') : Float) > (cast 0.0 : Float)));
+        return flighthq._internal._Async.flatMap((cast __thisValue0 : ClipboardBackend).readText(), function(__awaitValue50:Dynamic):Dynamic {
+          return flighthq._internal._Async.resolve(((cast _Runtime.field(__awaitValue50, 'length') : Float) > (cast 0.0 : Float)));
         });
       }));
     }, readImage: function():flighthq._internal._Promise<String> {
@@ -405,39 +511,39 @@ class Clipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           var cb:Null<flighthq._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast Clipboard.getWebClipboard__clipboard() : Null<flighthq._internal.dom.Clipboard>);
-          var __flowBranch50:Dynamic;
+          var __flowBranch51:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flighthq._internal.dom.Clipboard).read), 'function') : Bool)) : Bool)) {
-            __flowBranch50 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch51 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn('');
             });
           } else {
-            __flowBranch50 = flighthq._internal._Async.flowNormal();
+            __flowBranch51 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch50, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch51, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var items:flighthq._internal._Any = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).read(), function(__awaitValue51:Dynamic):Dynamic {
-                items = __awaitValue51;
-                var __flowIterator52:Array<Dynamic> = _Runtime.iterable(items);
-                var __flowIndex53:Int = 0;
+              return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).read(), function(__awaitValue52:Dynamic):Dynamic {
+                items = __awaitValue52;
+                var __flowIterator53:Array<Dynamic> = _Runtime.iterable(items);
+                var __flowIndex54:Int = 0;
                 return flighthq._internal._Async.continueFlow(flighthq._internal._Async.repeatFlow(function():Dynamic {
-                  if (__flowIndex53 >= __flowIterator52.length) return flighthq._internal._Async.flowBreak();
-                  var item:Dynamic = __flowIterator52[__flowIndex53++];
+                  if (__flowIndex54 >= __flowIterator53.length) return flighthq._internal._Async.flowBreak();
+                  var item:Dynamic = __flowIterator53[__flowIndex54++];
                   var type:Null<String> = cast _Runtime.UNDEFINED;
-                  type = _Runtime.find((cast item : flighthq._internal.dom.ClipboardItem).types, function(t:String, __unused4:Float, __unused5:Array<String>):Bool return StringTools.startsWith(t, 'image/'));
-                  var __flowBranch54:Dynamic;
+                  type = _Runtime.find((cast item : flighthq._internal.dom.ClipboardItem).types, function(t:String, __unused1:Float, __unused2:Array<String>):Bool return StringTools.startsWith(t, 'image/'));
+                  var __flowBranch55:Dynamic;
                   if ((cast !_Runtime.strictEquals(type, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                    __flowBranch54 = flighthq._internal._Async.protect(function():Dynamic {
+                    __flowBranch55 = flighthq._internal._Async.protect(function():Dynamic {
                       var blob:flighthq._internal.dom.Blob = cast _Runtime.UNDEFINED;
-                      return flighthq._internal._Async.flatMap((cast item : flighthq._internal.dom.ClipboardItem).getType(type), function(__awaitValue55:Dynamic):Dynamic {
-                        blob = __awaitValue55;
-                        return flighthq._internal._Async.flowReturn((cast Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument56:Dynamic = blob; __callArgument56; })) : flighthq._internal._Promise<String>));
+                      return flighthq._internal._Async.flatMap((cast item : flighthq._internal.dom.ClipboardItem).getType(type), function(__awaitValue56:Dynamic):Dynamic {
+                        blob = __awaitValue56;
+                        return flighthq._internal._Async.flowReturn((cast Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument57:Dynamic = blob; __callArgument57; })) : flighthq._internal._Promise<String>));
                       });
                     });
                   } else {
-                    __flowBranch54 = flighthq._internal._Async.flowNormal();
+                    __flowBranch55 = flighthq._internal._Async.flowNormal();
                   }
-                  return flighthq._internal._Async.continueFlow(__flowBranch54, function():Dynamic {
+                  return flighthq._internal._Async.continueFlow(__flowBranch55, function():Dynamic {
                     return flighthq._internal._Async.flowNormal();
                   });
                 }), function():Dynamic {
@@ -460,24 +566,24 @@ class Clipboard {
         flighthq._internal._Async.protect(function():Dynamic {
           var cb:Null<flighthq._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast Clipboard.getWritableWebClipboard__clipboard() : Null<flighthq._internal.dom.Clipboard>);
-          var __flowBranch58:Dynamic;
+          var __flowBranch59:Dynamic;
           if ((cast _Runtime.strictEquals(cb, null) : Bool)) {
-            __flowBranch58 = flighthq._internal._Async.protect(function():Dynamic {
+            __flowBranch59 = flighthq._internal._Async.protect(function():Dynamic {
               return flighthq._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch58 = flighthq._internal._Async.flowNormal();
+            __flowBranch59 = flighthq._internal._Async.flowNormal();
           }
-          return flighthq._internal._Async.continueFlow(__flowBranch58, function():Dynamic {
+          return flighthq._internal._Async.continueFlow(__flowBranch59, function():Dynamic {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var response:flighthq._internal.dom.Response = cast _Runtime.UNDEFINED;
               var blob:flighthq._internal.dom.Blob = cast _Runtime.UNDEFINED;
-              return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([dataUrl] : Array<Dynamic>)), function(__awaitValue59:Dynamic):Dynamic {
-                response = __awaitValue59;
-                return flighthq._internal._Async.flatMap((cast response : flighthq._internal.dom.Response).blob(), function(__awaitValue60:Dynamic):Dynamic {
-                  blob = __awaitValue60;
-                  return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).write(cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('ClipboardItem'), [_Runtime.objectFromPairs([{ key: (cast blob : flighthq._internal.dom.Blob).type, value: blob }])])] : Array<Dynamic>)), function(__awaitValue61:Dynamic):Dynamic {
-                    __awaitValue61;
+              return flighthq._internal._Async.flatMap(_Runtime.callValue(flighthq._internal._HostValueLut.get('fetch'), cast ([dataUrl] : Array<Dynamic>)), function(__awaitValue60:Dynamic):Dynamic {
+                response = __awaitValue60;
+                return flighthq._internal._Async.flatMap((cast response : flighthq._internal.dom.Response).blob(), function(__awaitValue61:Dynamic):Dynamic {
+                  blob = __awaitValue61;
+                  return flighthq._internal._Async.flatMap((cast cb : flighthq._internal.dom.Clipboard).write(cast ([_Runtime.construct(flighthq._internal._HostValueLut.get('ClipboardItem'), [_Runtime.objectFromPairs([{ key: (cast blob : flighthq._internal.dom.Blob).type, value: blob }])])] : Array<Dynamic>)), function(__awaitValue62:Dynamic):Dynamic {
+                    __awaitValue62;
                     return flighthq._internal._Async.flowReturn(true);
                   });
                 });
@@ -494,21 +600,18 @@ class Clipboard {
         })
       );
     }, hasImage: function():flighthq._internal._Promise<Bool> {
-      var __thisValue6:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.flatMap((cast __thisValue6 : ClipboardBackend).readImage(), function(__awaitValue62:Dynamic):Dynamic {
-          return flighthq._internal._Async.resolve(((cast _Runtime.field(__awaitValue62, 'length') : Float) > (cast 0.0 : Float)));
+        return flighthq._internal._Async.flatMap((cast __thisValue0 : ClipboardBackend).readImage(), function(__awaitValue63:Dynamic):Dynamic {
+          return flighthq._internal._Async.resolve(((cast _Runtime.field(__awaitValue63, 'length') : Float) > (cast 0.0 : Float)));
         });
       }));
     }, readRTF: function():flighthq._internal._Promise<String> {
-      var __thisValue7:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast __thisValue7 : ClipboardBackend).readFormat((cast ClipboardFormatRtf : String)));
+        return flighthq._internal._Async.resolve((cast __thisValue0 : ClipboardBackend).readFormat((cast ClipboardFormatRtf : String)));
       }));
     }, writeRTF: function(rtf:String):flighthq._internal._Promise<Bool> {
-      var __thisValue8:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast __thisValue8 : ClipboardBackend).writeFormat((cast ClipboardFormatRtf : String), (cast rtf : String)));
+        return flighthq._internal._Async.resolve((cast __thisValue0 : ClipboardBackend).writeFormat((cast ClipboardFormatRtf : String), (cast rtf : String)));
       }));
     }, readBookmark: function():flighthq._internal._Promise<Null<ClipboardBookmark>> {
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
@@ -527,9 +630,8 @@ class Clipboard {
         return flighthq._internal._Async.resolve(false);
       }));
     }, clear: function():flighthq._internal._Promise<Bool> {
-      var __thisValue9:Dynamic = _Runtime.thisValue();
       return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
-        return flighthq._internal._Async.resolve((cast __thisValue9 : ClipboardBackend).writeText((cast '' : String)));
+        return flighthq._internal._Async.resolve((cast __thisValue0 : ClipboardBackend).writeText((cast '' : String)));
       }));
     }, getChangeCount: function():Float {
       return cast -1.0;
@@ -548,27 +650,37 @@ class Clipboard {
 
       };
       return cast _Runtime.UNDEFINED;
-    } };
+    } }; __thisValue0; });
     return cast null;
   }
 
   public static function detachClipboardWatch(watch:ClipboardWatch):Void {
-    var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
-    unsubscribe = ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._WeakMap<ClipboardWatch, Void->Void>).get(watch));
+    var unsubscribe:Null<ClipboardWatchSubscription__clipboard> = cast _Runtime.UNDEFINED;
+    unsubscribe = ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._Map<ClipboardWatch, ClipboardWatchSubscription__clipboard>).get(watch));
     if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      unsubscribe();
-      ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._WeakMap<ClipboardWatch, Void->Void>).delete_(watch));
+      (cast unsubscribe : ClipboardWatchSubscription__clipboard).detach();
+      ((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._Map<ClipboardWatch, ClipboardWatchSubscription__clipboard>).delete_(watch));
     }
   }
 
   public static function disposeClipboardWatch(watch:ClipboardWatch):Void {
-    detachClipboardWatch(({ final __callArgument63:Dynamic = watch; __callArgument63; }));
+    detachClipboardWatch(({ final __callArgument64:Dynamic = watch; __callArgument64; }));
+  }
+
+  public static function explainClipboardBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Clipboard._custom__clipboard, null) : Bool)) {
+      return cast { conflict: Clipboard._hostConflict__clipboard, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Clipboard._host__clipboard, null) : Bool)) {
+      return cast { conflict: Clipboard._hostConflict__clipboard, layer: 'host', operation: ((cast !_Runtime.strictEquals(Clipboard._hostObservation__clipboard, null) : Bool) ? (cast (cast Clipboard._hostObservation__clipboard : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Clipboard._hostObservation__clipboard, null) : Bool) ? (cast (cast Clipboard._hostObservation__clipboard : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
   }
 
   @:noCompletion
   public static function getClipboardBackend():ClipboardBackend {
-    if ((cast _Runtime.strictEquals(Clipboard._backend__clipboard, null) : Bool)) { (Clipboard._backend__clipboard = cast ((cast createWebClipboardBackend() : ClipboardBackend) : Dynamic)); }
-    return cast Clipboard._backend__clipboard;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Clipboard._custom__clipboard, function():Dynamic return cast Clipboard._host__clipboard), function():Dynamic return cast Clipboard._sentinel__clipboard);
     return cast null;
   }
 
@@ -626,16 +738,33 @@ class Clipboard {
     return cast null;
   }
 
+  @:noCompletion
+  public static function installClipboardHostBackend(backend:ClipboardBackend):Void {
+    var previous:ClipboardBackend = cast _Runtime.UNDEFINED;
+    if ((cast !_Runtime.strictEquals(Clipboard._host__clipboard, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Clipboard._host__clipboard, backend) : Bool)) { (Clipboard._hostConflict__clipboard = cast (true : Dynamic)); }
+      return;
+    }
+    previous = (cast getClipboardBackend() : ClipboardBackend);
+    (Clipboard._host__clipboard = cast (backend : Dynamic));
+    Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument66:Dynamic = previous; __callArgument66; }), (cast getClipboardBackend() : ClipboardBackend));
+  }
+
+  @:noCompletion
+  public static function observeClipboardHostResult(operation:String, succeeded:Bool):Void {
+    (Clipboard._hostObservation__clipboard = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
+  }
+
   public static function readBlobAsDataUrl__clipboard(blob:flighthq._internal.dom.Blob):flighthq._internal._Promise<String> {
-    return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused10:flighthq._internal._Any):Void {
+    return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused3:flighthq._internal._Any):Void {
       if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('FileReader'), 'undefined') : Bool)) {
         resolve((cast '' : flighthq._internal._Any));
         return;
       }
       try {
         var reader:flighthq._internal.dom.FileReader = _Runtime.construct(flighthq._internal._HostValueLut.get('FileReader'), []);
-        ((cast reader : flighthq._internal.dom.FileReader).onloadend = function(__unused11:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void { resolve((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast reader : flighthq._internal.dom.FileReader).result), 'string') : Bool) ? (cast (cast reader : flighthq._internal.dom.FileReader).result : Dynamic) : (cast '' : Dynamic)) : flighthq._internal._Any)); });
-        ((cast reader : flighthq._internal.dom.FileReader).onerror = function(__unused12:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void { resolve((cast '' : flighthq._internal._Any)); });
+        ((cast reader : flighthq._internal.dom.FileReader).onloadend = function(__unused4:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void { resolve((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast reader : flighthq._internal.dom.FileReader).result), 'string') : Bool) ? (cast (cast reader : flighthq._internal.dom.FileReader).result : Dynamic) : (cast '' : Dynamic)) : flighthq._internal._Any)); });
+        ((cast reader : flighthq._internal.dom.FileReader).onerror = function(__unused5:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void { resolve((cast '' : flighthq._internal._Any)); });
         (cast reader : flighthq._internal.dom.FileReader).readAsDataURL(blob);
       } catch (__error:Dynamic) {
         resolve((cast '' : flighthq._internal._Any));
@@ -645,7 +774,7 @@ class Clipboard {
   }
 
   public static function readClipboard(formats:Array<String>):flighthq._internal._Promise<flighthq._internal._Record<String, String>> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).readItems(({ final __callArgument65:Dynamic = formats; __callArgument65; }));
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).readItems(({ final __callArgument68:Dynamic = formats; __callArgument68; }));
     return cast null;
   }
 
@@ -684,13 +813,34 @@ class Clipboard {
     return cast null;
   }
 
+  public static function rebindClipboardWatches__clipboard(previous:ClipboardBackend, next:ClipboardBackend):Void {
+    if ((cast _Runtime.strictEquals(previous, next) : Bool)) { return; }
+    for (subscription in _Runtime.iterable(((cast Clipboard._watchSubscriptions__clipboard : flighthq._internal._Map<ClipboardWatch, ClipboardWatchSubscription__clipboard>).values()))) {
+      (cast subscription : ClipboardWatchSubscription__clipboard).rebind(({ final __callArgument71:Dynamic = next; __callArgument71; }));
+    }
+  }
+
+  @:noCompletion
+  public static function resetClipboardBackendForTest():Void {
+    var previous:ClipboardBackend = cast _Runtime.UNDEFINED;
+    previous = (cast getClipboardBackend() : ClipboardBackend);
+    (Clipboard._custom__clipboard = cast (null : Dynamic));
+    (Clipboard._host__clipboard = cast (null : Dynamic));
+    (Clipboard._hostConflict__clipboard = cast (false : Dynamic));
+    (Clipboard._hostObservation__clipboard = cast (null : Dynamic));
+    Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument72:Dynamic = previous; __callArgument72; }), (cast getClipboardBackend() : ClipboardBackend));
+  }
+
   @:noCompletion
   public static function setClipboardBackend(backend:Null<ClipboardBackend>):Void {
-    (Clipboard._backend__clipboard = cast (backend : Dynamic));
+    var previous:ClipboardBackend = cast _Runtime.UNDEFINED;
+    previous = (cast getClipboardBackend() : ClipboardBackend);
+    (Clipboard._custom__clipboard = cast (backend : Dynamic));
+    Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument74:Dynamic = previous; __callArgument74; }), (cast getClipboardBackend() : ClipboardBackend));
   }
 
   public static function writeClipboard(items:Array<ClipboardWriteItem>):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeItems(({ final __callArgument66:Dynamic = items; __callArgument66; }));
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeItems(({ final __callArgument76:Dynamic = items; __callArgument76; }));
     return cast null;
   }
 
@@ -700,7 +850,7 @@ class Clipboard {
   }
 
   public static function writeClipboardFiles(paths:Array<String>):flighthq._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeFiles(({ final __callArgument67:Dynamic = paths; __callArgument67; }));
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeFiles(({ final __callArgument77:Dynamic = paths; __callArgument77; }));
     return cast null;
   }
 

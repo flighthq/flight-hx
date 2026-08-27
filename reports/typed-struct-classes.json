@@ -838,16 +838,16 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
-        "testObjectLiterals": 1
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 3
       },
       "directAccesses": 0,
       "fields": {
@@ -859,14 +859,16 @@
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "object-spread"
+        ]
       },
       "name": "AccessibilityBackend",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 0,
+        "objectSpreads": 4,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -879,7 +881,36 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 39,
+          "kind": "object-spread",
+          "line": 216,
+          "scope": "test",
+          "source": "upstream/packages/accessibility/src/accessibility.test.ts"
+        },
+        {
+          "column": 39,
+          "kind": "object-spread",
+          "line": 217,
+          "scope": "test",
+          "source": "upstream/packages/accessibility/src/accessibility.test.ts"
+        },
+        {
+          "column": 21,
+          "kind": "object-spread",
+          "line": 245,
+          "scope": "test",
+          "source": "upstream/packages/accessibility/src/accessibility.test.ts"
+        },
+        {
+          "column": 22,
+          "kind": "object-spread",
+          "line": 246,
+          "scope": "test",
+          "source": "upstream/packages/accessibility/src/accessibility.test.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Accessibility.ts"
     },
     {
@@ -1023,7 +1054,7 @@
         {
           "column": 52,
           "kind": "optional-omission",
-          "line": 257,
+          "line": 306,
           "scope": "production",
           "source": "upstream/packages/accessibility/src/accessibility.ts"
         }
@@ -2973,15 +3004,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 5
+        "inputSignatures": 2,
+        "outputSignatures": 4
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 4,
+        "objectLiterals": 5,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 4,
+        "plainObjectLiterals": 5,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -3201,7 +3232,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 151,
+      "directAccesses": 155,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -3287,10 +3318,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 5,
+        "objectLiterals": 6,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 5,
+        "plainObjectLiterals": 6,
         "testObjectLiterals": 3
       },
       "directAccesses": 0,
@@ -3329,7 +3360,7 @@
         {
           "column": 26,
           "kind": "object-spread",
-          "line": 185,
+          "line": 188,
           "scope": "test",
           "source": "upstream/packages/app/src/app.test.ts"
         }
@@ -3385,7 +3416,7 @@
         {
           "column": 45,
           "kind": "object-spread",
-          "line": 185,
+          "line": 188,
           "scope": "test",
           "source": "upstream/packages/app/src/app.test.ts"
         }
@@ -5321,14 +5352,14 @@
     {
       "bridge": {
         "inputSignatures": 0,
-        "outputSignatures": 2
+        "outputSignatures": 33
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 6,
+        "objectLiterals": 99,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 6,
+        "plainObjectLiterals": 99,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -8609,7 +8640,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 26,
+        "inputSignatures": 28,
         "outputSignatures": 2
       },
       "construction": {
@@ -8620,7 +8651,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 165,
+      "directAccesses": 177,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -11436,7 +11467,7 @@
       },
       "sites": [
         {
-          "column": 57,
+          "column": 61,
           "kind": "optional-omission",
           "line": 33,
           "scope": "production",
@@ -12448,7 +12479,7 @@
       "directAccesses": 0,
       "fields": {
         "optional": 0,
-        "requiredUndefined": 0,
+        "requiredUndefined": 1,
         "total": 7
       },
       "id": "@flighthq/types:interface#CapacitorPositionCoords",
@@ -12773,7 +12804,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 6,
+        "inputSignatures": 7,
         "outputSignatures": 1
       },
       "construction": {
@@ -12784,7 +12815,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 45,
+      "directAccesses": 54,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -12820,7 +12851,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 17,
+          "line": 24,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -13557,15 +13588,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 5
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 4,
+        "objectLiterals": 6,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 4,
+        "plainObjectLiterals": 6,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -17374,15 +17405,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 1,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 2
       },
       "directAccesses": 0,
@@ -17422,7 +17453,7 @@
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 239,
+          "line": 243,
           "scope": "test",
           "source": "upstream/packages/connectivity/src/connectivity.test.ts"
         },
@@ -17449,7 +17480,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 3
       },
-      "directAccesses": 8,
+      "directAccesses": 12,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -17541,7 +17572,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 2
       },
-      "directAccesses": 50,
+      "directAccesses": 66,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -17577,35 +17608,35 @@
         {
           "column": 17,
           "kind": "object-spread",
-          "line": 294,
+          "line": 326,
           "scope": "test",
           "source": "upstream/packages/connectivity/src/connectivity.test.ts"
         },
         {
           "column": 17,
           "kind": "object-spread",
-          "line": 300,
+          "line": 332,
           "scope": "test",
           "source": "upstream/packages/connectivity/src/connectivity.test.ts"
         },
         {
           "column": 17,
           "kind": "object-spread",
-          "line": 306,
+          "line": 338,
           "scope": "test",
           "source": "upstream/packages/connectivity/src/connectivity.test.ts"
         },
         {
           "column": 17,
           "kind": "object-spread",
-          "line": 312,
+          "line": 344,
           "scope": "test",
           "source": "upstream/packages/connectivity/src/connectivity.test.ts"
         },
         {
           "column": 17,
           "kind": "object-spread",
-          "line": 318,
+          "line": 350,
           "scope": "test",
           "source": "upstream/packages/connectivity/src/connectivity.test.ts"
         }
@@ -18566,15 +18597,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -18613,7 +18644,7 @@
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 363,
+          "line": 432,
           "scope": "test",
           "source": "upstream/packages/device/src/device.test.ts"
         }
@@ -18633,7 +18664,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 1
       },
-      "directAccesses": 6,
+      "directAccesses": 9,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -18679,7 +18710,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 1
       },
-      "directAccesses": 14,
+      "directAccesses": 21,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -18725,7 +18756,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 1
       },
-      "directAccesses": 50,
+      "directAccesses": 75,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -18760,15 +18791,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 5
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 4,
+        "objectLiterals": 6,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 4,
+        "plainObjectLiterals": 6,
         "testObjectLiterals": 6
       },
       "directAccesses": 0,
@@ -18807,35 +18838,35 @@
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 157,
+          "line": 238,
           "scope": "test",
           "source": "upstream/packages/dialog/src/dialog.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 182,
+          "line": 263,
           "scope": "test",
           "source": "upstream/packages/dialog/src/dialog.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 197,
+          "line": 278,
           "scope": "test",
           "source": "upstream/packages/dialog/src/dialog.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 236,
+          "line": 317,
           "scope": "test",
           "source": "upstream/packages/dialog/src/dialog.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 366,
+          "line": 447,
           "scope": "test",
           "source": "upstream/packages/dialog/src/dialog.test.ts"
         }
@@ -20377,7 +20408,7 @@
         {
           "column": 109,
           "kind": "optional-omission",
-          "line": 47,
+          "line": 48,
           "scope": "production",
           "source": "upstream/packages/host-electron/src/electronRegister.ts"
         }
@@ -21012,14 +21043,14 @@
     {
       "bridge": {
         "inputSignatures": 0,
-        "outputSignatures": 0
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
-        "objectLiteralsOmittingOptionalFields": 3,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 1,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -21056,25 +21087,11 @@
       },
       "sites": [
         {
-          "column": 40,
-          "kind": "optional-omission",
-          "line": 179,
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronApp.ts"
-        },
-        {
           "column": 46,
           "kind": "optional-omission",
-          "line": 47,
+          "line": 10,
           "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronMenu.ts"
-        },
-        {
-          "column": 46,
-          "kind": "optional-omission",
-          "line": 156,
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronTray.ts"
+          "source": "upstream/packages/host-electron/src/electronMenuTemplate.ts"
         }
       ],
       "source": "upstream/packages/types/src/ElectronApi.ts"
@@ -23641,15 +23658,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -25051,7 +25068,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 7,
+        "inputSignatures": 8,
         "outputSignatures": 1
       },
       "construction": {
@@ -25062,7 +25079,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 24,
+      "directAccesses": 30,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -25098,7 +25115,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 19,
+          "line": 20,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -25187,15 +25204,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -25280,14 +25297,14 @@
         {
           "column": 45,
           "kind": "optional-omission",
-          "line": 102,
+          "line": 101,
           "scope": "production",
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         },
         {
           "column": 50,
           "kind": "optional-omission",
-          "line": 204,
+          "line": 225,
           "scope": "production",
           "source": "upstream/packages/geolocation/src/geolocation.ts"
         }
@@ -25353,7 +25370,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 0,
+      "directAccesses": 1,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -33976,15 +33993,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
-        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiterals": 3,
+        "objectLiteralsOmittingOptionalFields": 2,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -34021,6 +34038,13 @@
       },
       "sites": [
         {
+          "column": 35,
+          "kind": "optional-omission",
+          "line": 157,
+          "scope": "production",
+          "source": "upstream/packages/haptics/src/haptics.ts"
+        },
+        {
           "column": 10,
           "kind": "optional-omission",
           "line": 18,
@@ -34043,7 +34067,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 2
       },
-      "directAccesses": 10,
+      "directAccesses": 15,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -34131,9 +34155,9 @@
           "source": "upstream/packages/render/src/explainScene2DRender.ts"
         },
         {
-          "column": 26,
+          "column": 28,
           "kind": "dynamic-ingress",
-          "line": 199,
+          "line": 204,
           "scope": "production",
           "source": "upstream/packages/render/src/sceneRender.ts"
         },
@@ -35505,16 +35529,16 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
-        "testObjectLiterals": 1
+        "plainObjectLiterals": 3,
+        "testObjectLiterals": 3
       },
       "directAccesses": 0,
       "fields": {
@@ -35526,14 +35550,16 @@
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "object-spread"
+        ]
       },
       "name": "ImageBackend",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 0,
+        "objectSpreads": 4,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -35546,7 +35572,36 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 31,
+          "kind": "object-spread",
+          "line": 65,
+          "scope": "test",
+          "source": "upstream/packages/image/src/imageBackend.test.ts"
+        },
+        {
+          "column": 31,
+          "kind": "object-spread",
+          "line": 66,
+          "scope": "test",
+          "source": "upstream/packages/image/src/imageBackend.test.ts"
+        },
+        {
+          "column": 21,
+          "kind": "object-spread",
+          "line": 97,
+          "scope": "test",
+          "source": "upstream/packages/image/src/imageBackend.test.ts"
+        },
+        {
+          "column": 22,
+          "kind": "object-spread",
+          "line": 98,
+          "scope": "test",
+          "source": "upstream/packages/image/src/imageBackend.test.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Image.ts"
     },
     {
@@ -37091,8 +37146,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 3
+        "inputSignatures": 2,
+        "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -37143,9 +37198,9 @@
           "source": "upstream/packages/host-electron/src/electronIpc.ts"
         },
         {
-          "column": 10,
+          "column": 31,
           "kind": "optional-omission",
-          "line": 56,
+          "line": 267,
           "scope": "production",
           "source": "upstream/packages/ipc/src/ipc.ts"
         }
@@ -39016,15 +39071,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
+        "plainObjectLiterals": 2,
         "testObjectLiterals": 2
       },
       "directAccesses": 0,
@@ -39581,63 +39636,70 @@
         {
           "column": 20,
           "kind": "object-spread",
-          "line": 75,
+          "line": 74,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 38,
           "kind": "object-spread",
-          "line": 101,
+          "line": 100,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 22,
           "kind": "object-spread",
-          "line": 109,
+          "line": 108,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 38,
           "kind": "object-spread",
-          "line": 220,
+          "line": 219,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 72,
           "kind": "object-spread",
-          "line": 248,
+          "line": 247,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 70,
           "kind": "object-spread",
-          "line": 279,
+          "line": 278,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 66,
           "kind": "object-spread",
-          "line": 288,
+          "line": 287,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 66,
           "kind": "object-spread",
-          "line": 298,
+          "line": 297,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 66,
           "kind": "object-spread",
-          "line": 307,
+          "line": 306,
+          "scope": "test",
+          "source": "upstream/packages/log/src/log.test.ts"
+        },
+        {
+          "column": 23,
+          "kind": "object-spread",
+          "line": 430,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
@@ -39649,107 +39711,100 @@
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
-          "column": 23,
-          "kind": "object-spread",
-          "line": 432,
-          "scope": "test",
-          "source": "upstream/packages/log/src/log.test.ts"
-        },
-        {
           "column": 29,
           "kind": "object-spread",
-          "line": 474,
+          "line": 473,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 69,
           "kind": "object-spread",
-          "line": 582,
+          "line": 581,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 69,
           "kind": "object-spread",
-          "line": 592,
+          "line": 591,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 75,
           "kind": "object-spread",
-          "line": 610,
+          "line": 609,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 66,
           "kind": "object-spread",
-          "line": 631,
+          "line": 630,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 66,
           "kind": "object-spread",
-          "line": 639,
+          "line": 638,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 62,
           "kind": "object-spread",
-          "line": 755,
+          "line": 746,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 60,
           "kind": "object-spread",
-          "line": 765,
+          "line": 756,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 38,
           "kind": "object-spread",
-          "line": 804,
+          "line": 795,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 32,
           "kind": "object-spread",
-          "line": 1011,
+          "line": 1002,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 32,
           "kind": "object-spread",
-          "line": 1012,
+          "line": 1003,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 22,
           "kind": "object-spread",
-          "line": 1225,
+          "line": 1216,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 32,
           "kind": "object-spread",
-          "line": 1367,
+          "line": 1358,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         },
         {
           "column": 32,
           "kind": "object-spread",
-          "line": 1368,
+          "line": 1359,
           "scope": "test",
           "source": "upstream/packages/log/src/log.test.ts"
         }
@@ -39897,15 +39952,15 @@
     {
       "bridge": {
         "inputSignatures": 1,
-        "outputSignatures": 2
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
-        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
-        "testObjectLiterals": 4
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 5
       },
       "directAccesses": 0,
       "fields": {
@@ -39917,9 +39972,7 @@
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
-        "observabilityReasons": [
-          "optional-omission"
-        ]
+        "observabilityReasons": []
       },
       "name": "LogTransportBackend",
       "oracle": {
@@ -39939,15 +39992,7 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 10,
-          "kind": "optional-omission",
-          "line": 299,
-          "scope": "production",
-          "source": "upstream/packages/log/src/log.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Log.ts"
     },
     {
@@ -42242,7 +42287,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 40,
+        "inputSignatures": 41,
         "outputSignatures": 4
       },
       "construction": {
@@ -42253,7 +42298,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 50,
+      "directAccesses": 51,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -42301,7 +42346,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 88,
+        "inputSignatures": 89,
         "outputSignatures": 9
       },
       "construction": {
@@ -42312,7 +42357,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 1
       },
-      "directAccesses": 132,
+      "directAccesses": 133,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -42801,7 +42846,7 @@
         {
           "column": 73,
           "kind": "anonymous-structural-transfer",
-          "line": 61,
+          "line": 33,
           "scope": "production",
           "source": "upstream/packages/mediasession/src/mediasession.ts"
         }
@@ -42856,16 +42901,16 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
-        "testObjectLiterals": 1
+        "plainObjectLiterals": 3,
+        "testObjectLiterals": 3
       },
       "directAccesses": 0,
       "fields": {
@@ -42877,14 +42922,16 @@
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "object-spread"
+        ]
       },
       "name": "MediaSessionBackend",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 0,
+        "objectSpreads": 4,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -42897,7 +42944,36 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 38,
+          "kind": "object-spread",
+          "line": 253,
+          "scope": "test",
+          "source": "upstream/packages/mediasession/src/mediasession.test.ts"
+        },
+        {
+          "column": 38,
+          "kind": "object-spread",
+          "line": 254,
+          "scope": "test",
+          "source": "upstream/packages/mediasession/src/mediasession.test.ts"
+        },
+        {
+          "column": 21,
+          "kind": "object-spread",
+          "line": 287,
+          "scope": "test",
+          "source": "upstream/packages/mediasession/src/mediasession.test.ts"
+        },
+        {
+          "column": 22,
+          "kind": "object-spread",
+          "line": 288,
+          "scope": "test",
+          "source": "upstream/packages/mediasession/src/mediasession.test.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/MediaSession.ts"
     },
     {
@@ -43040,15 +43116,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 4
+        "inputSignatures": 2,
+        "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -43086,7 +43162,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 7,
+        "inputSignatures": 9,
         "outputSignatures": 8
       },
       "construction": {
@@ -43095,9 +43171,9 @@
         "objectLiteralsOmittingOptionalFields": 41,
         "objectLiteralsWithSpread": 2,
         "plainObjectLiterals": 41,
-        "testObjectLiterals": 66
+        "testObjectLiterals": 71
       },
-      "directAccesses": 93,
+      "directAccesses": 75,
       "fields": {
         "optional": 11,
         "requiredUndefined": 0,
@@ -43424,28 +43500,28 @@
         {
           "column": 5,
           "kind": "strict-equality",
-          "line": 34,
+          "line": 38,
           "scope": "test",
           "source": "upstream/packages/menu/src/menu.test.ts"
         },
         {
           "column": 35,
           "kind": "object-literal-spread",
-          "line": 7,
+          "line": 8,
           "scope": "production",
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
           "column": 37,
           "kind": "object-spread",
-          "line": 7,
+          "line": 8,
           "scope": "production",
           "source": "upstream/packages/menu/src/menu.ts"
         },
         {
           "column": 34,
           "kind": "object-literal-spread",
-          "line": 18,
+          "line": 19,
           "scope": "production",
           "source": "upstream/packages/menu/src/menu.ts"
         }
@@ -43546,9 +43622,9 @@
       },
       "sites": [
         {
-          "column": 16,
+          "column": 18,
           "kind": "dynamic-ingress",
-          "line": 220,
+          "line": 218,
           "scope": "production",
           "source": "upstream/packages/render/src/sceneRender.ts"
         },
@@ -44496,7 +44572,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 16
       },
-      "directAccesses": 28,
+      "directAccesses": 29,
       "fields": {
         "optional": 9,
         "requiredUndefined": 0,
@@ -44535,49 +44611,49 @@
         {
           "column": 37,
           "kind": "optional-omission",
-          "line": 95,
+          "line": 130,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 100,
+          "line": 135,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 100,
+          "line": 135,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 105,
+          "line": 140,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 105,
+          "line": 140,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 141,
+          "line": 176,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 141,
+          "line": 176,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
@@ -47513,9 +47589,9 @@
           "source": "upstream/packages/render/src/renderTransform2d.ts"
         },
         {
-          "column": 34,
+          "column": 36,
           "kind": "cross-schema-transfer",
-          "line": 211,
+          "line": 215,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -47523,9 +47599,9 @@
           "source": "upstream/packages/render/src/sceneRender.ts"
         },
         {
-          "column": 35,
+          "column": 37,
           "kind": "cross-schema-transfer",
-          "line": 225,
+          "line": 223,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -47535,7 +47611,7 @@
         {
           "column": 34,
           "kind": "cross-schema-transfer",
-          "line": 277,
+          "line": 276,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -50348,15 +50424,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 2,
+        "inputSignatures": 3,
         "outputSignatures": 6
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 5,
+        "objectLiterals": 7,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 5,
+        "plainObjectLiterals": 7,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -50399,10 +50475,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 5,
+        "objectLiterals": 6,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 5,
+        "plainObjectLiterals": 6,
         "testObjectLiterals": 2
       },
       "directAccesses": 0,
@@ -50441,7 +50517,7 @@
         {
           "column": 16,
           "kind": "object-spread",
-          "line": 81,
+          "line": 85,
           "scope": "test",
           "source": "upstream/packages/notification/src/notification.test.ts"
         }
@@ -50546,63 +50622,63 @@
         {
           "column": 20,
           "kind": "object-literal-spread",
-          "line": 197,
+          "line": 198,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 22,
           "kind": "object-spread",
-          "line": 197,
+          "line": 198,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 43,
           "kind": "object-literal-spread",
-          "line": 254,
+          "line": 255,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 45,
           "kind": "object-spread",
-          "line": 254,
+          "line": 255,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 49,
           "kind": "anonymous-structural-transfer",
-          "line": 254,
+          "line": 255,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 22,
           "kind": "object-literal-spread",
-          "line": 455,
+          "line": 456,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 24,
           "kind": "object-spread",
-          "line": 455,
+          "line": 456,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 43,
           "kind": "object-literal-spread",
-          "line": 522,
+          "line": 523,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 45,
           "kind": "object-spread",
-          "line": 522,
+          "line": 523,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         }
@@ -50660,28 +50736,28 @@
         {
           "column": 45,
           "kind": "object-literal-spread",
-          "line": 203,
+          "line": 204,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 47,
           "kind": "object-spread",
-          "line": 203,
+          "line": 204,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 45,
           "kind": "object-literal-spread",
-          "line": 461,
+          "line": 462,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         },
         {
           "column": 47,
           "kind": "object-spread",
-          "line": 461,
+          "line": 462,
           "scope": "production",
           "source": "upstream/packages/notification/src/notification.ts"
         }
@@ -50690,7 +50766,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 8,
+        "inputSignatures": 10,
         "outputSignatures": 1
       },
       "construction": {
@@ -50701,7 +50777,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 80,
+      "directAccesses": 103,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -50737,7 +50813,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 20,
+          "line": 28,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -53632,15 +53708,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -61154,7 +61230,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 103,
+      "directAccesses": 116,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -61248,15 +61324,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 4
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -61305,7 +61381,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 4
       },
-      "directAccesses": 37,
+      "directAccesses": 51,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -61341,7 +61417,7 @@
         {
           "column": 26,
           "kind": "object-spread",
-          "line": 25,
+          "line": 29,
           "scope": "test",
           "source": "upstream/packages/platform/src/platform.test.ts"
         }
@@ -61813,15 +61889,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 3
+        "inputSignatures": 2,
+        "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 2
       },
       "directAccesses": 0,
@@ -61860,7 +61936,7 @@
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 496,
+          "line": 526,
           "scope": "test",
           "source": "upstream/packages/power/src/power.test.ts"
         }
@@ -61926,7 +62002,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 1
       },
-      "directAccesses": 21,
+      "directAccesses": 37,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -62053,15 +62129,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 3
+        "inputSignatures": 2,
+        "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -62516,7 +62592,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 34,
+        "inputSignatures": 35,
         "outputSignatures": 4
       },
       "construction": {
@@ -62527,7 +62603,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 240,
+      "directAccesses": 244,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -62744,7 +62820,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 17,
+        "inputSignatures": 19,
         "outputSignatures": 1
       },
       "construction": {
@@ -62755,7 +62831,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 88,
+      "directAccesses": 103,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -62791,7 +62867,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 16,
+          "line": 24,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -66619,14 +66695,14 @@
         {
           "column": 9,
           "kind": "object-spread",
-          "line": 136,
+          "line": 139,
           "scope": "test",
           "source": "upstream/packages/render/src/renderTarget.test.ts"
         },
         {
           "column": 46,
           "kind": "object-spread",
-          "line": 153,
+          "line": 156,
           "scope": "test",
           "source": "upstream/packages/render/src/renderTarget.test.ts"
         }
@@ -68893,7 +68969,7 @@
         "plainObjectLiterals": 2,
         "testObjectLiterals": 1
       },
-      "directAccesses": 16,
+      "directAccesses": 20,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -72874,15 +72950,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 1,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -73081,70 +73157,77 @@
         {
           "column": 12,
           "kind": "object-spread",
-          "line": 37,
+          "line": 41,
           "scope": "test",
           "source": "upstream/packages/screen/src/screen.test.ts"
         },
         {
           "column": 31,
           "kind": "object-spread",
-          "line": 50,
+          "line": 54,
           "scope": "test",
           "source": "upstream/packages/screen/src/screen.test.ts"
         },
         {
           "column": 53,
           "kind": "object-spread",
-          "line": 56,
+          "line": 60,
           "scope": "test",
           "source": "upstream/packages/screen/src/screen.test.ts"
         },
         {
           "column": 69,
           "kind": "object-spread",
-          "line": 234,
+          "line": 228,
           "scope": "production",
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 25,
           "kind": "object-literal-spread",
-          "line": 242,
+          "line": 236,
           "scope": "production",
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 27,
           "kind": "object-spread",
-          "line": 242,
+          "line": 236,
           "scope": "production",
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 27,
           "kind": "object-literal-spread",
-          "line": 271,
+          "line": 265,
           "scope": "production",
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 29,
           "kind": "object-spread",
-          "line": 271,
+          "line": 265,
           "scope": "production",
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 51,
           "kind": "object-spread",
-          "line": 306,
+          "line": 300,
           "scope": "production",
           "source": "upstream/packages/screen/src/screen.ts"
         },
         {
           "column": 29,
           "kind": "object-literal-spread",
-          "line": 315,
+          "line": 309,
+          "scope": "production",
+          "source": "upstream/packages/screen/src/screen.ts"
+        },
+        {
+          "column": 31,
+          "kind": "object-spread",
+          "line": 309,
           "scope": "production",
           "source": "upstream/packages/screen/src/screen.ts"
         },
@@ -73152,13 +73235,6 @@
           "column": 31,
           "kind": "object-spread",
           "line": 315,
-          "scope": "production",
-          "source": "upstream/packages/screen/src/screen.ts"
-        },
-        {
-          "column": 31,
-          "kind": "object-spread",
-          "line": 321,
           "scope": "production",
           "source": "upstream/packages/screen/src/screen.ts"
         }
@@ -73474,15 +73550,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
+        "plainObjectLiterals": 2,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -75030,15 +75106,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 9
       },
       "directAccesses": 0,
@@ -75123,21 +75199,21 @@
         {
           "column": 23,
           "kind": "optional-omission",
+          "line": 156,
+          "scope": "production",
+          "source": "upstream/packages/share/src/share.ts"
+        },
+        {
+          "column": 23,
+          "kind": "optional-omission",
+          "line": 160,
+          "scope": "production",
+          "source": "upstream/packages/share/src/share.ts"
+        },
+        {
+          "column": 23,
+          "kind": "optional-omission",
           "line": 164,
-          "scope": "production",
-          "source": "upstream/packages/share/src/share.ts"
-        },
-        {
-          "column": 23,
-          "kind": "optional-omission",
-          "line": 169,
-          "scope": "production",
-          "source": "upstream/packages/share/src/share.ts"
-        },
-        {
-          "column": 23,
-          "kind": "optional-omission",
-          "line": 174,
           "scope": "production",
           "source": "upstream/packages/share/src/share.ts"
         }
@@ -75249,7 +75325,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 0,
+      "directAccesses": 1,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -75496,15 +75572,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 4
+        "inputSignatures": 2,
+        "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -75551,7 +75627,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 2
+        "testObjectLiterals": 1
       },
       "directAccesses": 0,
       "fields": {
@@ -75643,7 +75719,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 4
+        "testObjectLiterals": 3
       },
       "directAccesses": 7,
       "fields": {
@@ -75680,8 +75756,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 4
+        "inputSignatures": 2,
+        "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -75780,35 +75856,35 @@
         {
           "column": 49,
           "kind": "object-spread",
-          "line": 932,
+          "line": 1012,
           "scope": "test",
           "source": "upstream/packages/shortcut/src/shortcut.test.ts"
         },
         {
           "column": 49,
           "kind": "object-spread",
-          "line": 962,
+          "line": 1042,
           "scope": "test",
           "source": "upstream/packages/shortcut/src/shortcut.test.ts"
         },
         {
           "column": 49,
           "kind": "object-spread",
-          "line": 986,
+          "line": 1066,
           "scope": "test",
           "source": "upstream/packages/shortcut/src/shortcut.test.ts"
         },
         {
           "column": 49,
           "kind": "object-spread",
-          "line": 995,
+          "line": 1075,
           "scope": "test",
           "source": "upstream/packages/shortcut/src/shortcut.test.ts"
         },
         {
           "column": 49,
           "kind": "object-spread",
-          "line": 1003,
+          "line": 1083,
           "scope": "test",
           "source": "upstream/packages/shortcut/src/shortcut.test.ts"
         }
@@ -78490,15 +78566,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
-        "objectLiteralsOmittingOptionalFields": 2,
+        "objectLiterals": 3,
+        "objectLiteralsOmittingOptionalFields": 3,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 8
       },
       "directAccesses": 0,
@@ -78544,7 +78620,14 @@
         {
           "column": 10,
           "kind": "optional-omission",
-          "line": 86,
+          "line": 87,
+          "scope": "production",
+          "source": "upstream/packages/keyboard/src/keyboard.ts"
+        },
+        {
+          "column": 40,
+          "kind": "optional-omission",
+          "line": 268,
           "scope": "production",
           "source": "upstream/packages/keyboard/src/keyboard.ts"
         }
@@ -78564,7 +78647,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 1
       },
-      "directAccesses": 17,
+      "directAccesses": 22,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -82813,15 +82896,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 3
+        "inputSignatures": 2,
+        "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -82870,7 +82953,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 2
       },
-      "directAccesses": 23,
+      "directAccesses": 28,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -82906,7 +82989,7 @@
         {
           "column": 23,
           "kind": "object-spread",
-          "line": 96,
+          "line": 98,
           "scope": "test",
           "source": "upstream/packages/statusbar/src/statusbar.test.ts"
         }
@@ -83007,15 +83090,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
-        "objectLiteralsOmittingOptionalFields": 2,
+        "objectLiterals": 3,
+        "objectLiteralsOmittingOptionalFields": 3,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 2
       },
       "directAccesses": 0,
@@ -83061,7 +83144,14 @@
         {
           "column": 10,
           "kind": "optional-omission",
-          "line": 42,
+          "line": 43,
+          "scope": "production",
+          "source": "upstream/packages/storage/src/storage.ts"
+        },
+        {
+          "column": 35,
+          "kind": "optional-omission",
+          "line": 508,
           "scope": "production",
           "source": "upstream/packages/storage/src/storage.ts"
         }
@@ -83117,7 +83207,7 @@
         {
           "column": 53,
           "kind": "object-spread",
-          "line": 180,
+          "line": 184,
           "scope": "test",
           "source": "upstream/packages/storage/src/storage.test.ts"
         }
@@ -93123,8 +93213,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 4
+        "inputSignatures": 2,
+        "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -93216,7 +93306,7 @@
         {
           "column": 5,
           "kind": "strict-equality",
-          "line": 268,
+          "line": 236,
           "scope": "test",
           "source": "upstream/packages/tray/src/tray.test.ts"
         }
@@ -93272,7 +93362,7 @@
         {
           "column": 12,
           "kind": "enumeration",
-          "line": 315,
+          "line": 346,
           "scope": "test",
           "source": "upstream/packages/tray/src/tray.test.ts"
         }
@@ -93374,7 +93464,7 @@
         {
           "column": 10,
           "kind": "anonymous-structural-transfer",
-          "line": 29,
+          "line": 30,
           "scope": "production",
           "source": "upstream/packages/tray/src/tray.ts"
         }
@@ -93430,7 +93520,7 @@
         {
           "column": 49,
           "kind": "optional-omission",
-          "line": 28,
+          "line": 29,
           "scope": "production",
           "source": "upstream/packages/tray/src/tray.ts"
         }
@@ -95027,28 +95117,28 @@
         {
           "column": 42,
           "kind": "object-spread",
-          "line": 568,
+          "line": 618,
           "scope": "test",
           "source": "upstream/packages/updater/src/updater.test.ts"
         },
         {
           "column": 42,
           "kind": "object-spread",
-          "line": 573,
+          "line": 623,
           "scope": "test",
           "source": "upstream/packages/updater/src/updater.test.ts"
         },
         {
           "column": 42,
           "kind": "object-spread",
-          "line": 579,
+          "line": 629,
           "scope": "test",
           "source": "upstream/packages/updater/src/updater.test.ts"
         },
         {
           "column": 42,
           "kind": "object-spread",
-          "line": 584,
+          "line": 634,
           "scope": "test",
           "source": "upstream/packages/updater/src/updater.test.ts"
         }
@@ -95103,8 +95193,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 3
+        "inputSignatures": 2,
+        "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -95198,28 +95288,28 @@
         {
           "column": 18,
           "kind": "object-spread",
-          "line": 106,
+          "line": 109,
           "scope": "test",
           "source": "upstream/packages/updater/src/updater.test.ts"
         },
         {
           "column": 25,
           "kind": "object-spread",
-          "line": 472,
+          "line": 566,
           "scope": "test",
           "source": "upstream/packages/updater/src/updater.test.ts"
         },
         {
-          "column": 17,
+          "column": 23,
           "kind": "object-literal-spread",
-          "line": 146,
+          "line": 275,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
-          "column": 19,
+          "column": 25,
           "kind": "object-spread",
-          "line": 146,
+          "line": 275,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         }
@@ -95369,98 +95459,98 @@
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 28,
+          "line": 29,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 28,
+          "line": 29,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 32,
+          "line": 33,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 32,
+          "line": 33,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 36,
+          "line": 37,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 36,
+          "line": 37,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 40,
+          "line": 41,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 40,
+          "line": 41,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 44,
+          "line": 45,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 44,
+          "line": 45,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 48,
+          "line": 49,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 48,
+          "line": 49,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 55,
+          "line": 56,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 55,
+          "line": 56,
           "scope": "production",
           "source": "upstream/packages/updater/src/updater.ts"
         }
@@ -95528,7 +95618,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 127,
+        "inputSignatures": 132,
         "outputSignatures": 11
       },
       "construction": {
@@ -95539,7 +95629,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 390,
+      "directAccesses": 402,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -95587,7 +95677,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 164,
+        "inputSignatures": 165,
         "outputSignatures": 8
       },
       "construction": {
@@ -95598,7 +95688,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 8
       },
-      "directAccesses": 1351,
+      "directAccesses": 1402,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -95714,9 +95804,9 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 3,
-        "testObjectLiterals": 43
+        "testObjectLiterals": 47
       },
-      "directAccesses": 86,
+      "directAccesses": 88,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -95751,7 +95841,53 @@
     },
     {
       "bridge": {
-        "inputSignatures": 9,
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 4,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 4,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#VelocityExplanation",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "VelocityExplanation",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Velocity.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 10,
         "outputSignatures": 1
       },
       "construction": {
@@ -95762,7 +95898,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 11,
+      "directAccesses": 13,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -95808,7 +95944,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 29,
+      "directAccesses": 36,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -96731,15 +96867,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
+        "plainObjectLiterals": 2,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -96918,56 +97054,56 @@
         {
           "column": 28,
           "kind": "object-spread",
-          "line": 17,
+          "line": 21,
           "scope": "test",
           "source": "upstream/packages/webcam/src/webcam.test.ts"
         },
         {
           "column": 28,
           "kind": "object-spread",
-          "line": 21,
+          "line": 25,
           "scope": "test",
           "source": "upstream/packages/webcam/src/webcam.test.ts"
         },
         {
           "column": 42,
           "kind": "object-literal-spread",
-          "line": 102,
+          "line": 149,
           "scope": "production",
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 44,
           "kind": "object-spread",
-          "line": 102,
+          "line": 149,
           "scope": "production",
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 112,
+          "line": 166,
           "scope": "production",
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 112,
+          "line": 166,
           "scope": "production",
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 37,
           "kind": "object-literal-spread",
-          "line": 122,
+          "line": 175,
           "scope": "production",
           "source": "upstream/packages/webcam/src/webcam.ts"
         },
         {
           "column": 39,
           "kind": "object-spread",
-          "line": 122,
+          "line": 175,
           "scope": "production",
           "source": "upstream/packages/webcam/src/webcam.ts"
         }
@@ -101488,15 +101624,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 4
+        "inputSignatures": 2,
+        "outputSignatures": 3
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -101543,9 +101679,9 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 0
       },
-      "directAccesses": 24,
+      "directAccesses": 28,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -101627,7 +101763,7 @@
         {
           "column": 87,
           "kind": "optional-omission",
-          "line": 506,
+          "line": 428,
           "scope": "production",
           "source": "upstream/packages/application/src/window.ts"
         }
@@ -102043,7 +102179,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 36,
+        "inputSignatures": 38,
         "outputSignatures": 0
       },
       "construction": {
@@ -102054,7 +102190,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 256,
+      "directAccesses": 280,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -102180,7 +102316,7 @@
         {
           "column": 26,
           "kind": "cross-schema-transfer",
-          "line": 290,
+          "line": 289,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Aabb"
           ],
@@ -102190,7 +102326,7 @@
         {
           "column": 39,
           "kind": "cross-schema-transfer",
-          "line": 290,
+          "line": 289,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Aabb"
           ],
@@ -102200,7 +102336,7 @@
         {
           "column": 45,
           "kind": "cross-schema-transfer",
-          "line": 291,
+          "line": 290,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Aabb"
           ],
@@ -102470,7 +102606,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 26,
+        "inputSignatures": 28,
         "outputSignatures": 0
       },
       "construction": {
@@ -102562,7 +102698,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 6,
+        "inputSignatures": 7,
         "outputSignatures": 0
       },
       "construction": {
@@ -102654,7 +102790,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 850,
+        "inputSignatures": 867,
         "outputSignatures": 11
       },
       "construction": {
@@ -102746,7 +102882,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 7,
+        "inputSignatures": 8,
         "outputSignatures": 0
       },
       "construction": {
@@ -102976,7 +103112,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 39,
+        "inputSignatures": 40,
         "outputSignatures": 0
       },
       "construction": {
@@ -103022,7 +103158,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 87,
+        "inputSignatures": 88,
         "outputSignatures": 2
       },
       "construction": {
@@ -103366,7 +103502,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 8,
+        "inputSignatures": 10,
         "outputSignatures": 0
       },
       "construction": {
@@ -103642,7 +103778,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 33,
+        "inputSignatures": 34,
         "outputSignatures": 0
       },
       "construction": {
@@ -103688,7 +103824,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 14,
+        "inputSignatures": 16,
         "outputSignatures": 0
       },
       "construction": {
@@ -103961,52 +104097,6 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/RenderProxyResolver.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 0
-      },
-      "directAccesses": 0,
-      "fields": {
-        "optional": 2,
-        "requiredUndefined": 0,
-        "total": 2
-      },
-      "id": "@flighthq/types:type#RenderTargetSizeOptions",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
-      },
-      "name": "RenderTargetSizeOptions",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [],
-      "source": "upstream/packages/types/src/RenderTargetSizeOptions.ts"
     },
     {
       "bridge": {
@@ -104424,7 +104514,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 126,
+        "inputSignatures": 131,
         "outputSignatures": 4
       },
       "construction": {
@@ -104470,7 +104560,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 163,
+        "inputSignatures": 164,
         "outputSignatures": 0
       },
       "construction": {
@@ -104778,27 +104868,27 @@
   ],
   "summary": {
     "anonymousStructuralTransfers": 165,
-    "bridgeInputSignatures": 9320,
-    "bridgeOutputSignatures": 1803,
+    "bridgeInputSignatures": 9407,
+    "bridgeOutputSignatures": 1824,
     "crossSchemaTransfers": 1545,
-    "directAccesses": 26772,
+    "directAccesses": 27051,
     "dynamicIngresses": 68,
     "mechanicallyCompatibleSchemas": 1238,
     "normalizationRequiredSchemas": 439,
-    "objectLiterals": 2064,
+    "objectLiterals": 2196,
     "objectLiteralsOmittingOptionalFields": 415,
     "objectLiteralsWithComputedKeys": 2,
     "objectLiteralsWithSpread": 228,
-    "observabilityReviewSchemas": 271,
-    "optionalFields": 2217,
-    "oracleObservations": 322,
+    "observabilityReviewSchemas": 273,
+    "optionalFields": 2215,
+    "oracleObservations": 334,
     "productionEnumerations": 8,
     "productionJsonSerializations": 6,
     "productionObjectRests": 0,
     "productionObjectSpreads": 130,
-    "requiredUndefinedFields": 2,
+    "requiredUndefinedFields": 3,
     "schemas": 1677,
-    "testObjectLiterals": 6184
+    "testObjectLiterals": 6197
   },
-  "upstreamCommit": "443275fa278b1f0415c49b6be710891ef8a64bf1"
+  "upstreamCommit": "cd6b6e71eb472b3a4249830a7743333f019fa7b7"
 }

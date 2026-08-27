@@ -19,7 +19,7 @@ class ElectronUpdater {
     channel = '';
     config = (cast { allowPrerelease: false, autoDownload: true, autoInstallOnAppQuit: true });
     return cast { setFeedUrl: function(url:String):Void {
-      (cast autoUpdater : ElectronAutoUpdater).setFeedUrl(({ final __callArgument0:Dynamic = { url: url }; __callArgument0; }));
+      (cast autoUpdater : ElectronAutoUpdater).setFeedURL(({ final __callArgument0:Dynamic = { url: url }; __callArgument0; }));
     }, checkForUpdates: function():Void {
       (cast autoUpdater : ElectronAutoUpdater).checkForUpdates();
     }, downloadUpdate: function():Void {

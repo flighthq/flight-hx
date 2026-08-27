@@ -3,6 +3,7 @@ package flighthq.webcam;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Webcam.WebcamBackend;
 import flighthq.types.Webcam.WebcamCaptureOptions;
 import flighthq.types.Webcam.WebcamPhoto;
@@ -12,7 +13,27 @@ import flighthq.types.WebcamStream;
 import flighthq.webcam.WebcamStream as Facade_Webcam_flighthq_webcam_WebcamStream;
 
 class Webcam {
-  public static var _backend__webcam:Null<WebcamBackend> = _Runtime.explicitNull();
+  public static var _custom__webcam:Null<WebcamBackend> = _Runtime.explicitNull();
+
+  public static var _host__webcam:Null<WebcamBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__webcam:Bool = false;
+
+  public static var _hostObservation__webcam:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+
+  public static final _sentinel__webcam:WebcamBackend = (cast { capture: function(options:WebcamCaptureOptions):flighthq._internal._Promise<Null<WebcamPhoto>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(null);
+    }));
+  }, captureVideo: function(options:WebcamCaptureOptions):flighthq._internal._Promise<Null<WebcamVideo>> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(null);
+    }));
+  }, requestPermission: function():flighthq._internal._Promise<Bool> {
+    return cast flighthq._internal._Async.resolve(flighthq._internal._Async.protect(function():Dynamic {
+      return flighthq._internal._Async.resolve(false);
+    }));
+  } });
 
   public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):WebcamStream {
     return cast Facade_Webcam_flighthq_webcam_WebcamStream.createWebcamStreamEntity(data);
@@ -24,6 +45,7 @@ class Webcam {
     return cast { capture: function(options:WebcamCaptureOptions):flighthq._internal._Promise<Null<WebcamPhoto>> {
       return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused0:flighthq._internal._Any):Void {
         if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) {
+          observeWebcamHostResult((cast 'capture' : String), (cast false : Bool));
           resolve(({ final __callArgument0:Dynamic = null; __callArgument0; }));
           return;
         }
@@ -42,13 +64,18 @@ class Webcam {
             }
             reader = _Runtime.construct(flighthq._internal._HostValueLut.get('FileReader'), []);
             ((cast reader : flighthq._internal.dom.FileReader).onload = function(__unused2:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void {
+              observeWebcamHostResult((cast 'capture' : String), (cast true : Bool));
               resolve(({ final __callArgument4:Dynamic = { dataUrl: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast reader : flighthq._internal.dom.FileReader).result), 'string') : Bool) ? (cast (cast reader : flighthq._internal.dom.FileReader).result : Dynamic) : (cast '' : Dynamic)), width: 0.0, height: 0.0, format: (cast file : flighthq._internal.dom.File).type }; __callArgument4; }));
             });
-            ((cast reader : flighthq._internal.dom.FileReader).onerror = function(__unused3:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void { resolve(({ final __callArgument6:Dynamic = null; __callArgument6; })); });
+            ((cast reader : flighthq._internal.dom.FileReader).onerror = function(__unused3:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void {
+              observeWebcamHostResult((cast 'capture' : String), (cast false : Bool));
+              resolve(({ final __callArgument6:Dynamic = null; __callArgument6; }));
+            });
             (cast reader : flighthq._internal.dom.FileReader).readAsDataURL(file);
           });
           (cast input : flighthq._internal.dom.HTMLInputElement).click();
         } catch (__error:Dynamic) {
+          observeWebcamHostResult((cast 'capture' : String), (cast false : Bool));
           resolve(({ final __callArgument8:Dynamic = null; __callArgument8; }));
         }
       });
@@ -56,6 +83,7 @@ class Webcam {
     }, captureVideo: function(options:WebcamCaptureOptions):flighthq._internal._Promise<Null<WebcamVideo>> {
       return cast flighthq._internal._Async.create(function(resolve:flighthq._internal._Any, __unused4:flighthq._internal._Any):Void {
         if ((cast ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flighthq._internal.backend.DomDocumentBackend.field(flighthq._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) {
+          observeWebcamHostResult((cast 'captureVideo' : String), (cast false : Bool));
           resolve(({ final __callArgument10:Dynamic = null; __callArgument10; }));
           return;
         }
@@ -74,13 +102,18 @@ class Webcam {
             }
             reader = _Runtime.construct(flighthq._internal._HostValueLut.get('FileReader'), []);
             ((cast reader : flighthq._internal.dom.FileReader).onload = function(__unused6:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void {
+              observeWebcamHostResult((cast 'captureVideo' : String), (cast true : Bool));
               resolve(({ final __callArgument14:Dynamic = { dataUrl: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast reader : flighthq._internal.dom.FileReader).result), 'string') : Bool) ? (cast (cast reader : flighthq._internal.dom.FileReader).result : Dynamic) : (cast '' : Dynamic)), duration: 0.0, format: (cast file : flighthq._internal.dom.File).type }; __callArgument14; }));
             });
-            ((cast reader : flighthq._internal.dom.FileReader).onerror = function(__unused7:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void { resolve(({ final __callArgument16:Dynamic = null; __callArgument16; })); });
+            ((cast reader : flighthq._internal.dom.FileReader).onerror = function(__unused7:flighthq._internal.dom.ProgressEvent<flighthq._internal.dom.FileReader>):Void {
+              observeWebcamHostResult((cast 'captureVideo' : String), (cast false : Bool));
+              resolve(({ final __callArgument16:Dynamic = null; __callArgument16; }));
+            });
             (cast reader : flighthq._internal.dom.FileReader).readAsDataURL(file);
           });
           (cast input : flighthq._internal.dom.HTMLInputElement).click();
         } catch (__error:Dynamic) {
+          observeWebcamHostResult((cast 'captureVideo' : String), (cast false : Bool));
           resolve(({ final __callArgument18:Dynamic = null; __callArgument18; }));
         }
       });
@@ -91,6 +124,7 @@ class Webcam {
           var __flowBranch20:Dynamic;
           if ((cast _Runtime.strictEquals(flighthq._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) {
             __flowBranch20 = flighthq._internal._Async.protect(function():Dynamic {
+              observeWebcamHostResult((cast 'requestPermission' : String), (cast false : Bool));
               return flighthq._internal._Async.flowReturn(false);
             });
           } else {
@@ -100,10 +134,12 @@ class Webcam {
             return flighthq._internal._Async.continueFlow(flighthq._internal._Async.recover(flighthq._internal._Async.protect(function():Dynamic {
               var permissions:flighthq._internal.dom.Permissions = cast _Runtime.UNDEFINED;
               var status:flighthq._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
+              var granted:Bool = cast _Runtime.UNDEFINED;
               permissions = flighthq._internal.backend.DomNavigatorBackend.field(flighthq._internal.backend.DomNavigatorBackend.value(), 'permissions');
               var __flowBranch21:Dynamic;
               if ((cast ((cast _Runtime.strictEquals(permissions, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast permissions : flighthq._internal.dom.Permissions).query), 'function') : Bool)) : Bool)) {
                 __flowBranch21 = flighthq._internal._Async.protect(function():Dynamic {
+                  observeWebcamHostResult((cast 'requestPermission' : String), (cast false : Bool));
                   return flighthq._internal._Async.flowReturn(false);
                 });
               } else {
@@ -112,12 +148,15 @@ class Webcam {
               return flighthq._internal._Async.continueFlow(__flowBranch21, function():Dynamic {
                 return flighthq._internal._Async.flatMap((cast permissions : flighthq._internal.dom.Permissions).query({ name: (cast 'camera' : flighthq._internal.dom.PermissionName) }), function(__awaitValue22:Dynamic):Dynamic {
                   status = __awaitValue22;
-                  return flighthq._internal._Async.flowReturn(_Runtime.strictEquals((cast status : flighthq._internal.dom.PermissionStatus).state, 'granted'));
+                  granted = _Runtime.strictEquals((cast status : flighthq._internal.dom.PermissionStatus).state, 'granted');
+                  observeWebcamHostResult((cast 'requestPermission' : String), (cast granted : Bool));
+                  return flighthq._internal._Async.flowReturn(granted);
                 });
               });
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;
               return flighthq._internal._Async.protect(function():Dynamic {
+                observeWebcamHostResult((cast 'requestPermission' : String), (cast false : Bool));
                 return flighthq._internal._Async.flowReturn(false);
               });
             }), function():Dynamic {
@@ -130,11 +169,35 @@ class Webcam {
     return cast null;
   }
 
+  public static function explainWebcamBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(Webcam._custom__webcam, null) : Bool)) {
+      return cast { conflict: Webcam._hostConflict__webcam, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(Webcam._host__webcam, null) : Bool)) {
+      return cast { conflict: Webcam._hostConflict__webcam, layer: 'host', operation: ((cast !_Runtime.strictEquals(Webcam._hostObservation__webcam, null) : Bool) ? (cast (cast Webcam._hostObservation__webcam : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(Webcam._hostObservation__webcam, null) : Bool) ? (cast (cast Webcam._hostObservation__webcam : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
   @:noCompletion
   public static function getWebcamBackend():WebcamBackend {
-    if ((cast _Runtime.strictEquals(Webcam._backend__webcam, null) : Bool)) { (Webcam._backend__webcam = cast ((cast createWebWebcamBackend() : WebcamBackend) : Dynamic)); }
-    return cast Webcam._backend__webcam;
+    return cast _Runtime.coalesce(_Runtime.coalesce(Webcam._custom__webcam, function():Dynamic return cast Webcam._host__webcam), function():Dynamic return cast Webcam._sentinel__webcam);
     return cast null;
+  }
+
+  @:noCompletion
+  public static function installWebcamHostBackend(backend:WebcamBackend):Void {
+    if ((cast !_Runtime.strictEquals(Webcam._host__webcam, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(Webcam._host__webcam, backend) : Bool)) { (Webcam._hostConflict__webcam = cast (true : Dynamic)); }
+      return;
+    }
+    (Webcam._host__webcam = cast (backend : Dynamic));
+  }
+
+  @:noCompletion
+  public static function observeWebcamHostResult(operation:String, succeeded:Bool):Void {
+    (Webcam._hostObservation__webcam = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function recordWebcamVideo(?options:WebcamCaptureOptions):flighthq._internal._Promise<Null<WebcamVideo>> {
@@ -147,6 +210,14 @@ class Webcam {
     return cast null;
   }
 
+  @:noCompletion
+  public static function resetWebcamBackendForTest():Void {
+    (Webcam._custom__webcam = cast (null : Dynamic));
+    (Webcam._host__webcam = cast (null : Dynamic));
+    (Webcam._hostConflict__webcam = cast (false : Dynamic));
+    (Webcam._hostObservation__webcam = cast (null : Dynamic));
+  }
+
   public static function selectWebcamImage(?options:WebcamCaptureOptions):flighthq._internal._Promise<Null<WebcamPhoto>> {
     return cast (cast (cast getWebcamBackend() : WebcamBackend) : WebcamBackend).capture(({ final __callArgument24:Dynamic = _Runtime.mergeObjects([options, { source: 'photos' }]); __callArgument24; }));
     return cast null;
@@ -154,7 +225,7 @@ class Webcam {
 
   @:noCompletion
   public static function setWebcamBackend(backend:Null<WebcamBackend>):Void {
-    (Webcam._backend__webcam = cast (backend : Dynamic));
+    (Webcam._custom__webcam = cast (backend : Dynamic));
   }
 
   public static function takeWebcamPhoto(?options:WebcamCaptureOptions):flighthq._internal._Promise<Null<WebcamPhoto>> {

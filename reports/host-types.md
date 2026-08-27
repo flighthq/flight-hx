@@ -1,22 +1,22 @@
 # Host Type Census
 
-Upstream commit: `443275fa278b1f0415c49b6be710891ef8a64bf1`
+Upstream commit: `cd6b6e71eb472b3a4249830a7743333f019fa7b7`
 
 Host identities are derived from the TypeScript checker and their ambient declaration origins. Every emitted identity maps mechanically to `flighthq._internal.dom.<SameTypeName>`; this census is descriptive, not an eligibility list.
 
 | Metric | Count |
 | --- | ---: |
 | Host types | 233 |
-| Type references | 6037 |
-| Member accesses | 5239 |
-| Reads | 1845 |
+| Type references | 6056 |
+| Member accesses | 5245 |
+| Reads | 1851 |
 | Writes | 453 |
 | Calls | 2941 |
 
 | Host type | Ambient declarations | Type refs | Arities | Members | Reads | Writes | Calls |
 | --- | --- | ---: | --- | ---: | ---: | ---: | ---: |
 | `AbortController` | `node_modules/@types/node/web-globals/abortcontroller.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 14 | 0 | 2 | 11 | 0 | 15 |
-| `AbortSignal` | `node_modules/@types/node/web-globals/abortcontroller.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 112 | 0 | 5 | 19 | 0 | 19 |
+| `AbortSignal` | `node_modules/@types/node/web-globals/abortcontroller.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 117 | 0 | 5 | 19 | 0 | 19 |
 | `AddEventListenerOptions` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `AudioBuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 16 | 0 | 6 | 8 | 0 | 2 |
 | `AudioBufferSourceNode` | `node_modules/typescript/lib/lib.dom.d.ts` | 4 | 0 | 6 | 2 | 3 | 3 |
@@ -25,7 +25,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `AudioNode` | `node_modules/typescript/lib/lib.dom.d.ts` | 8 | 0 | 0 | 0 | 0 | 0 |
 | `AudioParam` | `node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 2 | 0 | 4 | 2 | 11 | 6 |
 | `BeforeUnloadEvent` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 2 | 0 | 1 | 1 |
-| `Blob` | `node_modules/@types/node/buffer.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 35 | 0 | 3 | 2 | 0 | 5 |
+| `Blob` | `node_modules/@types/node/buffer.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 42 | 0 | 3 | 2 | 0 | 7 |
 | `BodyInit` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `BufferSource` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `CSSStyleDeclaration` | `node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 32 | 0 | 35 | 6 | 120 | 0 |
@@ -50,13 +50,13 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `DOMRectReadOnly` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 2 | 2 | 0 | 0 |
 | `DOMStringMap` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `DataTransfer` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 1 | 1 | 0 | 0 |
-| `Document` | `node_modules/typescript/lib/lib.dom.d.ts` | 47 | 0 | 17 | 32 | 1 | 80 |
+| `Document` | `node_modules/typescript/lib/lib.dom.d.ts` | 48 | 0 | 17 | 31 | 1 | 80 |
 | `DragEvent` | `node_modules/typescript/lib/lib.dom.d.ts` | 5 | 0 | 2 | 1 | 0 | 2 |
 | `EXT_color_buffer_float` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 0 | 0 | 0 | 0 |
 | `EXT_texture_compression_bptc` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `EXT_texture_compression_rgtc` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `EXT_texture_filter_anisotropic` | `node_modules/typescript/lib/lib.dom.d.ts` | 8 | 0 | 2 | 2 | 0 | 0 |
-| `Element` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 3 | 0 | 0 | 4 |
+| `Element` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 2 | 0 | 0 | 3 |
 | `Event` | `node_modules/@types/node/web-globals/events.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 40 | 0 | 1 | 0 | 0 | 6 |
 | `EventListener` | `node_modules/typescript/lib/lib.dom.d.ts` | 15 | 0 | 0 | 0 | 0 | 0 |
 | `EventListenerObject` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
@@ -146,8 +146,8 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `HTMLAudioElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 1 | 0 | 0 | 1 |
 | `HTMLCanvasElement` | `node_modules/@webgpu/types/dist/index.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 221 | 0 | 7 | 86 | 64 | 34 |
 | `HTMLDivElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 14 | 0 | 10 | 13 | 3 | 8 |
-| `HTMLElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 151 | 0 | 22 | 84 | 2 | 61 |
-| `HTMLHeadElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 2 | 0 | 0 | 5 |
+| `HTMLElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 152 | 0 | 22 | 84 | 2 | 61 |
+| `HTMLHeadElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 2 | 0 | 0 | 4 |
 | `HTMLImageElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 56 | 0 | 8 | 10 | 7 | 2 |
 | `HTMLInputElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 8 | 4 | 13 | 8 |
 | `HTMLLIElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 7 | 7 | 1 | 13 |
@@ -170,14 +170,14 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `Location` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 4 | 4 | 0 | 1 |
 | `MediaDevices` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 1 | 1 | 0 | 1 |
 | `MediaMetadata` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 0 | 0 | 0 | 0 |
-| `MediaQueryList` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 1 | 3 | 0 | 0 |
+| `MediaQueryList` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 1 | 7 | 0 | 0 |
 | `MediaSession` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 4 | 1 | 3 | 2 |
 | `MediaSource` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `MediaStream` | `node_modules/typescript/lib/lib.dom.d.ts` | 8 | 0 | 0 | 0 | 0 | 0 |
 | `MediaStreamTrack` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 1 | 1 | 0 | 1 |
 | `MessageEvent` | `node_modules/@types/node/web-globals/fetch.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 3 | 1 | 1 | 1 | 0 | 0 |
 | `MouseEvent` | `node_modules/typescript/lib/lib.dom.d.ts` | 5 | 0 | 3 | 2 | 0 | 1 |
-| `Navigator` | `node_modules/@types/node/web-globals/navigator.d.ts`<br>`node_modules/@webgpu/types/dist/index.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 40 | 0 | 18 | 42 | 0 | 5 |
+| `Navigator` | `node_modules/@types/node/web-globals/navigator.d.ts`<br>`node_modules/@webgpu/types/dist/index.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 41 | 0 | 18 | 42 | 0 | 5 |
 | `Node` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 0 | 0 | 0 | 0 |
 | `NodeListOf` | `node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 2 | 1 | 0 | 0 | 0 | 0 |
 | `Notification` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 5 | 0 | 4 | 3 |
@@ -204,7 +204,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `ResizeObserverEntry` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 1 | 2 | 0 | 0 |
 | `Response` | `node_modules/@types/node/web-globals/fetch.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 12 | 0 | 10 | 13 | 0 | 8 |
 | `SVGImageElement` | `node_modules/typescript/lib/lib.dom.d.ts` | 30 | 0 | 0 | 0 | 0 | 0 |
-| `Screen` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 7 | 18 | 0 | 0 |
+| `Screen` | `node_modules/typescript/lib/lib.dom.d.ts` | 7 | 0 | 7 | 18 | 0 | 0 |
 | `ScreenOrientation` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 2 | 0 | 0 | 2 |
 | `ShareData` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 4 | 0 | 4 | 0 |
 | `StereoPannerNode` | `node_modules/typescript/lib/lib.dom.d.ts` | 7 | 0 | 3 | 2 | 0 | 2 |
@@ -245,6 +245,6 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `WebGLVertexArrayObject` | `node_modules/typescript/lib/lib.dom.d.ts` | 26 | 0 | 0 | 0 | 0 | 0 |
 | `WebSocket` | `node_modules/@types/node/web-globals/fetch.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 8 | 1 | 5 | 2 |
 | `WheelEvent` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 3 | 2 | 0 | 1 |
-| `Window` | `node_modules/typescript/lib/lib.dom.d.ts` | 25 | 0 | 20 | 37 | 0 | 59 |
+| `Window` | `node_modules/typescript/lib/lib.dom.d.ts` | 27 | 0 | 20 | 40 | 0 | 59 |
 | `WritableStream` | `node_modules/@types/node/stream/web.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 9 | 1 | 1 | 0 | 0 | 1 |
 | `WritableStreamDefaultWriter` | `node_modules/@types/node/stream/web.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 1 | 1 | 3 | 0 | 0 | 3 |

@@ -3,6 +3,7 @@ package flighthq.hostElectron;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.hostElectron.ElectronMenuTemplate.toElectronTemplate;
 import flighthq.types.App.AppActivationPolicy;
 import flighthq.types.App.AppBackend;
 import flighthq.types.App.AppLoginItem;
@@ -100,7 +101,7 @@ class ElectronApp {
       ({ final __optionalOwner9 = (cast app : flighthq.types.ElectronApi.ElectronApp).dock; if (__optionalOwner9 != null) { final __optionalCall8 = (cast __optionalOwner9 : { var setBadge:String->Void; }).setBadge; if (__optionalCall8 != null) __optionalCall8(text); } });
     }, setDockMenu: function(items:Array<MenuItemTemplate>):Void {
       if ((cast !_Runtime.truthy((cast app : flighthq.types.ElectronApi.ElectronApp).dock) : Bool)) { return; }
-      (cast (cast app : flighthq.types.ElectronApi.ElectronApp).dock : ElectronDock).setMenu((cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast _Runtime.mapArray((cast items : Array<MenuItemTemplate>), ElectronApp.toMenuItemOptions__electronApp, _Runtime.UNDEFINED))));
+      (cast (cast app : flighthq.types.ElectronApi.ElectronApp).dock : ElectronDock).setMenu((cast electron.Menu : ElectronMenuConstructor).buildFromTemplate((cast (cast (#if js _Runtime.callValue(toElectronTemplate, cast ([(cast items : Dynamic)] : Array<Dynamic>)) #else toElectronTemplate((cast items : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Array<ElectronMenuItemOptions>) : Dynamic)));
     }, setLoginItem: function(settings:AppLoginItemLike):Bool {
       (cast app : flighthq.types.ElectronApi.ElectronApp).setLoginItemSettings(({ final __callArgument10:Dynamic = { openAtLogin: settings.openAtLogin, openAsHidden: settings.openAsHidden, path: settings.path, args: _Runtime.select(settings.args, function():Dynamic return cast _Runtime.concatArrays([_Runtime.toArray(settings.args)]), function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')) }; __callArgument10; }));
       return cast true;
@@ -159,14 +160,6 @@ class ElectronApp {
     if ((cast _Runtime.strictEquals(kind, 'logs') : Bool)) { return cast 'logs'; }
     if ((cast _Runtime.strictEquals(kind, 'crashDumps') : Bool)) { return cast 'crashDumps'; }
     return cast 'userData';
-    return cast null;
-  }
-
-  public static function toMenuItemOptions__electronApp(item:MenuItemTemplate):ElectronMenuItemOptions {
-    var out:ElectronMenuItemOptions = cast _Runtime.UNDEFINED;
-    out = (cast { id: item.id, label: item.label, type: item.type, role: item.role, accelerator: item.accelerator, enabled: item.enabled, checked: item.checked });
-    if (_Runtime.truthy(item.submenu)) { ((cast out : ElectronMenuItemOptions).submenu = (cast _Runtime.mapArray((cast item.submenu : Array<MenuItemTemplate>), ElectronApp.toMenuItemOptions__electronApp, _Runtime.UNDEFINED))); }
-    return cast out;
     return cast null;
   }
 }

@@ -4,14 +4,14 @@
   "summary": {
     "dynamicTypeEntries": 211,
     "externalTypeKeys": 4,
-    "globalValueKeys": 69,
+    "globalValueKeys": 70,
     "hostTypeKeys": 233,
-    "jsOnlyGlobalValueKeys": 36,
+    "jsOnlyGlobalValueKeys": 37,
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 33,
-    "typeUses": 11280,
-    "valueUses": 2000
+    "typeUses": 11305,
+    "valueUses": 2011
   },
   "types": [
     {
@@ -86,6 +86,7 @@
         "upstream/packages/audio/src/audioResourceFrom.ts",
         "upstream/packages/audio/src/audioResourceReference.ts",
         "upstream/packages/connectivity/src/connectivity.ts",
+        "upstream/packages/host-web/src/webImage.ts",
         "upstream/packages/image/src/imageBackend.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
         "upstream/packages/image/src/imageResourceReference.ts",
@@ -110,7 +111,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flighthq/_internal/dom/AbortSignal.hx",
-      "uses": 150
+      "uses": 155
     },
     {
       "coverage": "typed",
@@ -223,16 +224,18 @@
         "upstream/packages/clipboard/src/clipboard.ts",
         "upstream/packages/dialog/src/dialog.ts",
         "upstream/packages/filesystem/src/filesystem.ts",
+        "upstream/packages/host-capacitor/src/capacitorFileSystem.ts",
         "upstream/packages/image-codec/src/registerWebImageDecoders.ts",
         "upstream/packages/image-codec/src/registerWebImageEncoders.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
         "upstream/packages/net/src/net.ts",
         "upstream/packages/textureatlas/src/textureAtlasFrom.ts",
+        "upstream/packages/types/src/CapacitorApi.ts",
         "upstream/packages/types/src/Net.ts",
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Blob.hx",
-      "uses": 42
+      "uses": 51
     },
     {
       "coverage": "dynamic-stub",
@@ -607,7 +610,6 @@
       "kind": "host",
       "locations": [
         "upstream/packages/accessibility/src/accessibility.ts",
-        "upstream/packages/app/src/app.ts",
         "upstream/packages/application/src/application.ts",
         "upstream/packages/application/src/window.ts",
         "upstream/packages/bitmap/src/bitmapEncode.ts",
@@ -616,12 +618,15 @@
         "upstream/packages/dialog/src/dialog.ts",
         "upstream/packages/font/src/_fontFaceLoad.ts",
         "upstream/packages/font/src/fontStatus.ts",
+        "upstream/packages/host-web/src/webApp.ts",
         "upstream/packages/host-web/src/webGlyphRasterizer.ts",
+        "upstream/packages/host-web/src/webPower.ts",
+        "upstream/packages/host-web/src/webStatusbar.ts",
+        "upstream/packages/host-web/src/webWindow.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
         "upstream/packages/input/src/inputManager.ts",
         "upstream/packages/lifecycle/src/lifecycle.ts",
         "upstream/packages/menu/src/menu.ts",
-        "upstream/packages/power/src/power.ts",
         "upstream/packages/render-gl/src/glElement.ts",
         "upstream/packages/render-wgpu/src/wgpuElement.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
@@ -646,7 +651,6 @@
         "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts",
         "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
-        "upstream/packages/statusbar/src/statusbar.ts",
         "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts",
         "upstream/packages/video/src/videoFormat.ts",
         "upstream/packages/video/src/videoResourceFrom.ts",
@@ -722,12 +726,12 @@
       "kind": "host",
       "locations": [
         "upstream/packages/accessibility/src/accessibility.ts",
+        "upstream/packages/host-web/src/webStatusbar.ts",
         "upstream/packages/input/src/inputManager.ts",
-        "upstream/packages/scene2d-dom/src/domTextInput.ts",
-        "upstream/packages/statusbar/src/statusbar.ts"
+        "upstream/packages/scene2d-dom/src/domTextInput.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Element.hx",
-      "uses": 10
+      "uses": 9
     },
     {
       "coverage": "dynamic-stub",
@@ -2532,7 +2536,9 @@
         "upstream/packages/accessibility/src/accessibility.ts",
         "upstream/packages/application/src/window.ts",
         "upstream/packages/device/src/device.ts",
+        "upstream/packages/host-web/src/webAccessibility.ts",
         "upstream/packages/host-web/src/webCursor.ts",
+        "upstream/packages/host-web/src/webWindow.ts",
         "upstream/packages/input/src/inputManager.ts",
         "upstream/packages/menu/src/menu.ts",
         "upstream/packages/scene2d-dom/src/domBackground.ts",
@@ -2559,7 +2565,7 @@
         "upstream/packages/types/src/NativeText.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLElement.hx",
-      "uses": 298
+      "uses": 299
     },
     {
       "coverage": "dynamic-stub",
@@ -2567,12 +2573,12 @@
       "key": "host:HTMLHeadElement",
       "kind": "host",
       "locations": [
-        "upstream/packages/application/src/window.ts",
-        "upstream/packages/scene2d-dom/src/domTextInput.ts",
-        "upstream/packages/statusbar/src/statusbar.ts"
+        "upstream/packages/host-web/src/webStatusbar.ts",
+        "upstream/packages/host-web/src/webWindow.ts",
+        "upstream/packages/scene2d-dom/src/domTextInput.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLHeadElement.hx",
-      "uses": 8
+      "uses": 7
     },
     {
       "coverage": "dynamic-stub",
@@ -2640,7 +2646,7 @@
       "key": "host:HTMLLinkElement",
       "kind": "host",
       "locations": [
-        "upstream/packages/application/src/window.ts"
+        "upstream/packages/host-web/src/webWindow.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLLinkElement.hx",
       "uses": 5
@@ -2662,7 +2668,7 @@
       "key": "host:HTMLMetaElement",
       "kind": "host",
       "locations": [
-        "upstream/packages/statusbar/src/statusbar.ts"
+        "upstream/packages/host-web/src/webStatusbar.ts"
       ],
       "provider": "src/flighthq/_internal/dom/HTMLMetaElement.hx",
       "uses": 1
@@ -2871,9 +2877,9 @@
       "key": "host:Location",
       "kind": "host",
       "locations": [
-        "upstream/packages/app/src/app.ts",
-        "upstream/packages/image/src/imageResourceFrom.ts",
-        "upstream/packages/protocol/src/protocol.ts"
+        "upstream/packages/host-web/src/webApp.ts",
+        "upstream/packages/host-web/src/webProtocol.ts",
+        "upstream/packages/image/src/imageResourceFrom.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Location.hx",
       "uses": 8
@@ -2906,10 +2912,11 @@
       "key": "host:MediaQueryList",
       "kind": "host",
       "locations": [
+        "upstream/packages/device/src/device.ts",
         "upstream/packages/screen/src/screen.ts"
       ],
       "provider": "src/flighthq/_internal/dom/MediaQueryList.hx",
-      "uses": 4
+      "uses": 9
     },
     {
       "coverage": "dynamic-stub",
@@ -2986,21 +2993,21 @@
       "key": "host:Navigator",
       "kind": "host",
       "locations": [
-        "upstream/packages/app/src/app.ts",
         "upstream/packages/clipboard/src/clipboard.ts",
         "upstream/packages/connectivity/src/connectivity.ts",
         "upstream/packages/device/src/device.ts",
         "upstream/packages/filesystem/src/filesystem.ts",
         "upstream/packages/geolocation/src/geolocation.ts",
         "upstream/packages/haptics/src/haptics.ts",
+        "upstream/packages/host-web/src/webApp.ts",
+        "upstream/packages/host-web/src/webPower.ts",
+        "upstream/packages/host-web/src/webProtocol.ts",
         "upstream/packages/input/src/inputManager.ts",
         "upstream/packages/keyboard/src/keyboard.ts",
         "upstream/packages/mediasession/src/mediasession.ts",
         "upstream/packages/notification/src/notification.ts",
         "upstream/packages/permissions/src/permission.ts",
         "upstream/packages/platform/src/platform.ts",
-        "upstream/packages/power/src/power.ts",
-        "upstream/packages/protocol/src/protocol.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
         "upstream/packages/screen/src/screen.ts",
@@ -3011,7 +3018,7 @@
         "upstream/packages/webcam/src/webcam.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Navigator.hx",
-      "uses": 87
+      "uses": 88
     },
     {
       "coverage": "dynamic-stub",
@@ -3352,10 +3359,11 @@
       "locations": [
         "upstream/packages/application/src/window.ts",
         "upstream/packages/device/src/device.ts",
+        "upstream/packages/host-web/src/webWindow.ts",
         "upstream/packages/screen/src/screen.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Screen.hx",
-      "uses": 24
+      "uses": 25
     },
     {
       "coverage": "dynamic-stub",
@@ -3571,8 +3579,8 @@
       "key": "host:URL",
       "kind": "host",
       "locations": [
+        "upstream/packages/host-web/src/webProtocol.ts",
         "upstream/packages/image/src/imageResourceFrom.ts",
-        "upstream/packages/protocol/src/protocol.ts",
         "upstream/packages/shell/src/shell.ts"
       ],
       "provider": "src/flighthq/_internal/dom/URL.hx",
@@ -3584,8 +3592,8 @@
       "key": "host:URLSearchParams",
       "kind": "host",
       "locations": [
-        "upstream/packages/net/src/net.ts",
-        "upstream/packages/protocol/src/protocol.ts"
+        "upstream/packages/host-web/src/webProtocol.ts",
+        "upstream/packages/net/src/net.ts"
       ],
       "provider": "src/flighthq/_internal/dom/URLSearchParams.hx",
       "uses": 3
@@ -3640,8 +3648,8 @@
       "key": "host:WakeLock",
       "kind": "host",
       "locations": [
-        "upstream/packages/permissions/src/permission.ts",
-        "upstream/packages/power/src/power.ts"
+        "upstream/packages/host-web/src/webPower.ts",
+        "upstream/packages/permissions/src/permission.ts"
       ],
       "provider": "src/flighthq/_internal/dom/WakeLock.hx",
       "uses": 2
@@ -4362,7 +4370,6 @@
       "key": "host:Window",
       "kind": "host",
       "locations": [
-        "upstream/packages/app/src/app.ts",
         "upstream/packages/application/src/application.ts",
         "upstream/packages/application/src/window.ts",
         "upstream/packages/clipboard/src/clipboard.ts",
@@ -4370,6 +4377,10 @@
         "upstream/packages/device/src/device.ts",
         "upstream/packages/dialog/src/dialog.ts",
         "upstream/packages/geolocation/src/geolocation.ts",
+        "upstream/packages/host-web/src/webApp.ts",
+        "upstream/packages/host-web/src/webDialog.ts",
+        "upstream/packages/host-web/src/webShell.ts",
+        "upstream/packages/host-web/src/webWindow.ts",
         "upstream/packages/input/src/inputManager.ts",
         "upstream/packages/keyboard/src/keyboard.ts",
         "upstream/packages/lifecycle/src/lifecycle.ts",
@@ -4377,11 +4388,10 @@
         "upstream/packages/platform/src/platform.ts",
         "upstream/packages/screen/src/screen.ts",
         "upstream/packages/sensors/src/sensors.ts",
-        "upstream/packages/shell/src/shell.ts",
         "upstream/packages/storage/src/storage.ts"
       ],
       "provider": "src/flighthq/_internal/dom/Window.hx",
-      "uses": 121
+      "uses": 126
     },
     {
       "coverage": "dynamic-stub",
@@ -4408,7 +4418,7 @@
       "uses": 4
     }
   ],
-  "upstreamCommit": "443275fa278b1f0415c49b6be710891ef8a64bf1",
+  "upstreamCommit": "cd6b6e71eb472b3a4249830a7743333f019fa7b7",
   "values": [
     {
       "coverage": "portable",
@@ -4625,23 +4635,24 @@
       "key": "global:document",
       "locations": [
         "generated/flighthq/accessibility/Accessibility.hx",
-        "generated/flighthq/app/App.hx",
         "generated/flighthq/application/Application.hx",
         "generated/flighthq/application/Window.hx",
         "generated/flighthq/device/Device.hx",
         "generated/flighthq/dialog/Dialog.hx",
+        "generated/flighthq/hostWeb/WebApp.hx",
         "generated/flighthq/hostWeb/WebGlyphRasterizer.hx",
+        "generated/flighthq/hostWeb/WebPower.hx",
+        "generated/flighthq/hostWeb/WebStatusbar.hx",
+        "generated/flighthq/hostWeb/WebWindow.hx",
         "generated/flighthq/lifecycle/Lifecycle.hx",
         "generated/flighthq/menu/Menu.hx",
-        "generated/flighthq/power/Power.hx",
         "generated/flighthq/scene2dDom/DomRichText.hx",
         "generated/flighthq/scene2dDom/DomTextInput.hx",
-        "generated/flighthq/statusbar/Statusbar.hx",
         "generated/flighthq/textshaperCanvas/CanvasTextShaper.hx",
         "generated/flighthq/webcam/Webcam.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 25
+      "uses": 24
     },
     {
       "coverage": "portable",
@@ -4803,6 +4814,7 @@
       "key": "global:Intl",
       "locations": [
         "generated/flighthq/app/App.hx",
+        "generated/flighthq/hostWeb/WebApp.hx",
         "generated/flighthq/intl/Collator.hx",
         "generated/flighthq/intl/Datetime.hx",
         "generated/flighthq/intl/List.hx",
@@ -4812,7 +4824,7 @@
         "generated/flighthq/textsegment/TextSegmenterBackend.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 11
+      "uses": 13
     },
     {
       "coverage": "portable",
@@ -4849,9 +4861,9 @@
       "coverage": "js-only",
       "key": "global:location",
       "locations": [
-        "generated/flighthq/app/App.hx",
-        "generated/flighthq/image/ImageResourceFrom.hx",
-        "generated/flighthq/protocol/Protocol.hx"
+        "generated/flighthq/hostWeb/WebApp.hx",
+        "generated/flighthq/hostWeb/WebProtocol.hx",
+        "generated/flighthq/image/ImageResourceFrom.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
       "uses": 8
@@ -4873,6 +4885,7 @@
         "generated/flighthq/bitmapfont/BitmapFont.hx",
         "generated/flighthq/bitmapfontFormats/BitmapFontRecord.hx",
         "generated/flighthq/bitmaptext/UpdateBitmapText.hx",
+        "generated/flighthq/clipboard/Clipboard.hx",
         "generated/flighthq/collision/CollisionFace3D.hx",
         "generated/flighthq/collision/CollisionSupport2D.hx",
         "generated/flighthq/collision/CollisionSupport3D.hx",
@@ -5007,7 +5020,16 @@
         "generated/flighthq/tween/TweenManager.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 334
+      "uses": 335
+    },
+    {
+      "coverage": "js-only",
+      "key": "global:matchMedia",
+      "locations": [
+        "generated/flighthq/device/Device.hx"
+      ],
+      "provider": "src/flighthq/_internal/_HostValueLut.hx",
+      "uses": 6
     },
     {
       "coverage": "js-only",
@@ -5022,19 +5044,19 @@
       "coverage": "js-only",
       "key": "global:navigator",
       "locations": [
-        "generated/flighthq/app/App.hx",
         "generated/flighthq/clipboard/Clipboard.hx",
         "generated/flighthq/connectivity/Connectivity.hx",
         "generated/flighthq/device/Device.hx",
         "generated/flighthq/filesystem/Filesystem.hx",
         "generated/flighthq/geolocation/Geolocation.hx",
         "generated/flighthq/haptics/Haptics.hx",
+        "generated/flighthq/hostWeb/WebApp.hx",
+        "generated/flighthq/hostWeb/WebPower.hx",
+        "generated/flighthq/hostWeb/WebProtocol.hx",
         "generated/flighthq/keyboard/Keyboard.hx",
         "generated/flighthq/mediasession/Mediasession.hx",
         "generated/flighthq/permissions/Permission.hx",
         "generated/flighthq/platform/Platform.hx",
-        "generated/flighthq/power/Power.hx",
-        "generated/flighthq/protocol/Protocol.hx",
         "generated/flighthq/renderWgpu/WgpuRenderState.hx",
         "generated/flighthq/screen/Screen.hx",
         "generated/flighthq/sensors/Sensors.hx",
@@ -5236,14 +5258,13 @@
         "generated/flighthq/spritesheetFormats/CocosPlistParse.hx",
         "generated/flighthq/spritesheetFormats/LibgdxAtlasParse.hx",
         "generated/flighthq/spritesheetFormats/StarlingParse.hx",
-        "generated/flighthq/statusbar/Statusbar.hx",
         "generated/flighthq/storage/Storage.hx",
         "generated/flighthq/textureatlasFormats/TextureAtlasLibgdxParse.hx",
         "generated/flighthq/tilemapFormats/TiledColor.hx",
         "generated/flighthq/xml/XmlParse.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 40
+      "uses": 39
     },
     {
       "coverage": "portable",
@@ -5313,7 +5334,8 @@
       "key": "global:screen",
       "locations": [
         "generated/flighthq/application/Window.hx",
-        "generated/flighthq/device/Device.hx"
+        "generated/flighthq/device/Device.hx",
+        "generated/flighthq/hostWeb/WebWindow.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
       "uses": 8
@@ -5327,6 +5349,7 @@
         "generated/flighthq/assets/AssetLibrary.hx",
         "generated/flighthq/dialog/Dialog.hx",
         "generated/flighthq/effects/RenderEffectInterpolation.hx",
+        "generated/flighthq/hostElectron/ElectronMenuTemplate.hx",
         "generated/flighthq/hostElectron/ElectronProtocol.hx",
         "generated/flighthq/hostElectron/ElectronShortcut.hx",
         "generated/flighthq/hostTauri/TauriShortcut.hx",
@@ -5391,7 +5414,7 @@
         "generated/flighthq/tilemapFormats/TiledProject.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 123
+      "uses": 125
     },
     {
       "coverage": "portable",
@@ -5485,7 +5508,7 @@
       "coverage": "js-only",
       "key": "global:URLSearchParams",
       "locations": [
-        "generated/flighthq/protocol/Protocol.hx"
+        "generated/flighthq/hostWeb/WebProtocol.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
       "uses": 1
@@ -5506,7 +5529,6 @@
         "generated/flighthq/app/App.hx",
         "generated/flighthq/application/Application.hx",
         "generated/flighthq/application/Window.hx",
-        "generated/flighthq/clipboard/Clipboard.hx",
         "generated/flighthq/collision/TriangleMesh3D.hx",
         "generated/flighthq/connectivity/Connectivity.hx",
         "generated/flighthq/dialog/Dialog.hx",
@@ -5628,7 +5650,7 @@
         "generated/flighthq/velocity/VelocityField.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 201
+      "uses": 200
     },
     {
       "coverage": "portable",
@@ -5672,24 +5694,26 @@
       "coverage": "js-only",
       "key": "global:window",
       "locations": [
-        "generated/flighthq/app/App.hx",
         "generated/flighthq/application/Window.hx",
         "generated/flighthq/clipboard/Clipboard.hx",
         "generated/flighthq/connectivity/Connectivity.hx",
         "generated/flighthq/device/Device.hx",
         "generated/flighthq/dialog/Dialog.hx",
         "generated/flighthq/geolocation/Geolocation.hx",
+        "generated/flighthq/hostWeb/WebApp.hx",
+        "generated/flighthq/hostWeb/WebDialog.hx",
+        "generated/flighthq/hostWeb/WebShell.hx",
+        "generated/flighthq/hostWeb/WebWindow.hx",
         "generated/flighthq/keyboard/Keyboard.hx",
         "generated/flighthq/lifecycle/Lifecycle.hx",
         "generated/flighthq/menu/Menu.hx",
         "generated/flighthq/platform/Platform.hx",
         "generated/flighthq/screen/Screen.hx",
         "generated/flighthq/sensors/Sensors.hx",
-        "generated/flighthq/shell/Shell.hx",
         "generated/flighthq/storage/Storage.hx"
       ],
       "provider": "src/flighthq/_internal/_HostValueLut.hx",
-      "uses": 50
+      "uses": 53
     }
   ]
 }

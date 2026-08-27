@@ -6,5 +6,9 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebImageBackend = api.createWebImageBackend;
+export const explainImageBackend = api.explainImageBackend;
 export const getImageBackend = api.getImageBackend;
+export const installImageHostBackend = api.installImageHostBackend;
+export const observeImageHostResult = api.observeImageHostResult;
+export const resetImageBackendForTest = api.resetImageBackendForTest;
 export const setImageBackend = api.setImageBackend;

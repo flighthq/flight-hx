@@ -67,6 +67,11 @@ class Vector2 {
     return cast null;
   }
 
+  public static function crossVector2(a:Vector2Like, b:Vector2Like):Float {
+    return cast ((a.x * b.y) - (a.y * b.x));
+    return cast null;
+  }
+
   public static function divideVector2(out:Vector2Like, source:Vector2Like, divisor:Vector2Like):Void {
     var sx:Float = cast _Runtime.UNDEFINED;
     var sy:Float = cast _Runtime.UNDEFINED;
@@ -83,6 +88,12 @@ class Vector2 {
   public static function equalsVector2(a:Null<Vector2Like>, b:Null<Vector2Like>):Bool {
     if ((cast ((cast !_Runtime.truthy(a) : Bool) || (cast !_Runtime.truthy(b) : Bool)) : Bool)) { return cast false; }
     return cast ((cast _Runtime.strictEquals(a, b) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals((cast a : { var x:Float; }).x, (cast b : { var x:Float; }).x), function():Dynamic return cast _Runtime.strictEquals((cast a : { var y:Float; }).y, (cast b : { var y:Float; }).y)) : Bool));
+    return cast null;
+  }
+
+  public static function getVector2Angle(source:Vector2Like):Float {
+    if ((cast ((cast _Runtime.strictEquals(source.x, 0.0) : Bool) && (cast _Runtime.strictEquals(source.y, 0.0) : Bool)) : Bool)) { return cast 0.0; }
+    return cast HxMath.atan2(source.y, source.x);
     return cast null;
   }
 
@@ -237,6 +248,19 @@ class Vector2 {
     twoDot = (2.0 * ((ix * nx) + (iy * ny)));
     (out.x = cast ((ix - (twoDot * nx)) : Float));
     (out.y = cast ((iy - (twoDot * ny)) : Float));
+  }
+
+  public static function rotateVector2(out:Vector2Like, source:Vector2Like, angle:Float):Void {
+    var c:Float = cast _Runtime.UNDEFINED;
+    var s:Float = cast _Runtime.UNDEFINED;
+    var x:Float = cast _Runtime.UNDEFINED;
+    var y:Float = cast _Runtime.UNDEFINED;
+    c = HxMath.cos(angle);
+    s = HxMath.sin(angle);
+    x = source.x;
+    y = source.y;
+    (out.x = cast (((x * c) - (y * s)) : Float));
+    (out.y = cast (((x * s) + (y * c)) : Float));
   }
 
   public static function scaleVector2(out:Vector2Like, source:Vector2Like, scalar:Float):Void {

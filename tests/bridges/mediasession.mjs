@@ -4,6 +4,7 @@ import compiled from '../../build/haxe-js/flight.cjs';
 export const clearMediaSessionActionHandler = compiled.flighthq.mediasession.Mediasession.clearMediaSessionActionHandler;
 export const clearMediaSessionMetadata = compiled.flighthq.mediasession.Mediasession.clearMediaSessionMetadata;
 export const clearMediaSessionPositionState = compiled.flighthq.mediasession.Mediasession.clearMediaSessionPositionState;
+export const explainMediaSessionBackend = compiled.flighthq.mediasession.Mediasession.explainMediaSessionBackend;
 export const setMediaSessionActionHandler = compiled.flighthq.mediasession.Mediasession.setMediaSessionActionHandler;
 export const setMediaSessionMetadata = compiled.flighthq.mediasession.Mediasession.setMediaSessionMetadata;
 export const setMediaSessionPlaybackState = compiled.flighthq.mediasession.Mediasession.setMediaSessionPlaybackState;

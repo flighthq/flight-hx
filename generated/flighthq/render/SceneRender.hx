@@ -166,26 +166,32 @@ class SceneRender {
     return cast null;
   }
 
-  public static function collectVisibleMeshes__sceneRender(node:NodeAny, frustum:Frustum, worldBounds:Aabb, out:Array<Mesh>, refreshTransforms:Bool):Void {
-    var mesh:Mesh = cast _Runtime.UNDEFINED;
-    var children:Null<Array<Node<flighthq._internal._Any>>> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool) || (cast !(cast (cast (cast (cast node : flighthq._internal._Any) : HasAppearance) : HasAppearance).visible : Bool) : Bool)) : Bool)) {
-      return;
-    }
-    if ((cast ((cast refreshTransforms : Bool) && (cast !(cast (cast isNodeLocalMatrix4Detached((cast (cast node : Transform3DNode<Dynamic>) : Dynamic)) : Bool) : Bool) : Bool)) : Bool)) {
-      invalidateNodeLocalTransform((cast (cast node : NodeAny) : Dynamic));
-    }
-    mesh = (cast (cast node : flighthq._internal._Any) : Mesh);
-    if ((cast ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool) && (cast (cast SceneRender.isMeshVisible__sceneRender(({ final __callArgument36:Dynamic = mesh; __callArgument36; }), ({ final __callArgument37:Dynamic = frustum; __callArgument37; }), ({ final __callArgument38:Dynamic = worldBounds; __callArgument38; })) : Bool) : Bool)) : Bool)) {
-      _Runtime.callProperty(out, 'push', cast ([mesh] : Array<Dynamic>));
-    }
-    children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
-    if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
-      {
-        var i:Float = 0.0;
-        while ((cast ((cast i : Float) < (cast _Runtime.field(children, 'length') : Float)) : Bool)) {
-          SceneRender.collectVisibleMeshes__sceneRender(({ final __callArgument42:Dynamic = flighthq._internal._StaticIndex.readArray(children, i); __callArgument42; }), ({ final __callArgument43:Dynamic = frustum; __callArgument43; }), ({ final __callArgument44:Dynamic = worldBounds; __callArgument44; }), ({ final __callArgument45:Dynamic = out; __callArgument45; }), (cast refreshTransforms : Bool));
-          i++;
+  public static function collectVisibleMeshes__sceneRender(root:NodeAny, frustum:Frustum, worldBounds:Aabb, out:Array<Mesh>, refreshTransforms:Bool):Void {
+    var stack:Array<NodeAny> = cast _Runtime.UNDEFINED;
+    var stackLength:Float = cast _Runtime.UNDEFINED;
+    stack = SceneRender._collectStack__sceneRender;
+    flighthq._internal._StaticIndex.writeArray(stack, 0.0, root);
+    stackLength = 1.0;
+    while ((cast ((cast stackLength : Float) > (cast 0.0 : Float)) : Bool)) {
+      var node:NodeAny = (cast flighthq._internal._StaticIndex.readArray(stack, --stackLength) : NodeAny);
+      if ((cast ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool) || (cast !(cast (cast (cast (cast node : flighthq._internal._Any) : HasAppearance) : HasAppearance).visible : Bool) : Bool)) : Bool)) {
+        continue;
+      }
+      if ((cast ((cast refreshTransforms : Bool) && (cast !(cast (cast isNodeLocalMatrix4Detached((cast (cast node : Transform3DNode<Dynamic>) : Dynamic)) : Bool) : Bool) : Bool)) : Bool)) {
+        invalidateNodeLocalTransform((cast node : Dynamic));
+      }
+      var mesh:Mesh = (cast (cast node : flighthq._internal._Any) : Mesh);
+      if ((cast ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool) && (cast (cast SceneRender.isMeshVisible__sceneRender(({ final __callArgument36:Dynamic = mesh; __callArgument36; }), ({ final __callArgument37:Dynamic = frustum; __callArgument37; }), ({ final __callArgument38:Dynamic = worldBounds; __callArgument38; })) : Bool) : Bool)) : Bool)) {
+        _Runtime.callProperty(out, 'push', cast ([mesh] : Array<Dynamic>));
+      }
+      var children:Null<Array<Node<flighthq._internal._Any>>> = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<flighthq._internal._Any>), 'children');
+      if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
+        {
+          var i:Float = _Runtime.subtractNumbers(_Runtime.field(children, 'length'), 1.0);
+          while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
+            flighthq._internal._StaticIndex.writeArray(stack, stackLength++, flighthq._internal._StaticIndex.readArray(children, i));
+            i--;
+          }
         }
       }
     }
@@ -229,14 +235,14 @@ class SceneRender {
     if ((cast _Runtime.strictEquals(bounds, null) : Bool)) {
       return cast true;
     }
-    transformAabbByMatrix4(({ final __callArgument50:Dynamic = worldBounds; __callArgument50; }), ({ final __callArgument51:Dynamic = bounds; __callArgument51; }), (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4Like));
-    return cast (cast isFrustumIntersectingAabb(({ final __callArgument54:Dynamic = frustum; __callArgument54; }), ({ final __callArgument55:Dynamic = worldBounds; __callArgument55; })) : Bool);
+    transformAabbByMatrix4(({ final __callArgument42:Dynamic = worldBounds; __callArgument42; }), ({ final __callArgument43:Dynamic = bounds; __callArgument43; }), (cast getNodeWorldMatrix4((cast mesh : Dynamic)) : Matrix4Like));
+    return cast (cast isFrustumIntersectingAabb(({ final __callArgument46:Dynamic = frustum; __callArgument46; }), ({ final __callArgument47:Dynamic = worldBounds; __callArgument47; })) : Bool);
     return cast null;
   }
 
   public static function packAmbientLight__sceneRender(data:flighthq._internal._Float32Array, ambient:AmbientLight):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
-    (cast unpackColorToLinear(({ final __callArgument58:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument58; }), (cast _Runtime.field(ambient, 'color') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument50:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument50; }), (cast _Runtime.field(ambient, 'color') : Float)) : LinearColor);
     intensity = _Runtime.field(ambient, 'intensity');
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET + 0.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 0.0 : Float)) * intensity) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (SCENE_LIGHT_AMBIENT_RADIANCE_OFFSET + 1.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 1.0 : Float)) * intensity) : Float));
@@ -248,7 +254,7 @@ class SceneRender {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 0.0) : Float), (cast (cast directional.direction : { var x:Float; }).x : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 1.0) : Float), (cast (cast directional.direction : { var y:Float; }).y : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (SCENE_LIGHT_DIRECTIONAL_DIRECTION_OFFSET + 2.0) : Float), (cast (cast directional.direction : { var z:Float; }).z : Float));
-    (cast unpackColorToLinear(({ final __callArgument60:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument60; }), (cast directional.color : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument52:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument52; }), (cast directional.color : Float)) : LinearColor);
     intensity = directional.intensity;
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 0.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 0.0 : Float)) * intensity) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (SCENE_LIGHT_DIRECTIONAL_RADIANCE_OFFSET + 1.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 1.0 : Float)) * intensity) : Float));
@@ -258,11 +264,11 @@ class SceneRender {
   public static function packHemisphereLight__sceneRender(data:flighthq._internal._Float32Array, offset:Float, hemisphere:HemisphereLight):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     intensity = _Runtime.field(hemisphere, 'intensity');
-    (cast unpackColorToLinear(({ final __callArgument62:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument62; }), (cast _Runtime.field(hemisphere, 'skyColor') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument54:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument54; }), (cast _Runtime.field(hemisphere, 'skyColor') : Float)) : LinearColor);
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 0.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 0.0 : Float)) * intensity) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 1.0 : Float)) * intensity) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 2.0 : Float)) * intensity) : Float));
-    (cast unpackColorToLinear(({ final __callArgument64:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument64; }), (cast _Runtime.field(hemisphere, 'groundColor') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument56:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument56; }), (cast _Runtime.field(hemisphere, 'groundColor') : Float)) : LinearColor);
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 4.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 0.0 : Float)) * intensity) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 1.0 : Float)) * intensity) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 6.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 2.0 : Float)) * intensity) : Float));
@@ -279,7 +285,7 @@ class SceneRender {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast (cast _Runtime.field(point, 'position') : { var y:Float; }).y : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast (cast _Runtime.field(point, 'position') : { var z:Float; }).z : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 3.0) : Float), (cast range : Float));
-    (cast unpackColorToLinear(({ final __callArgument66:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument66; }), (cast _Runtime.field(point, 'color') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument58:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument58; }), (cast _Runtime.field(point, 'color') : Float)) : LinearColor);
     intensity = _Runtime.field(point, 'intensity');
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 4.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 0.0 : Float)) * intensity) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 1.0 : Float)) * intensity) : Float));
@@ -295,7 +301,7 @@ class SceneRender {
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 1.0) : Float), (cast (cast _Runtime.field(spot, 'position') : { var y:Float; }).y : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 2.0) : Float), (cast (cast _Runtime.field(spot, 'position') : { var z:Float; }).z : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 3.0) : Float), (cast range : Float));
-    (cast unpackColorToLinear(({ final __callArgument68:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument68; }), (cast _Runtime.field(spot, 'color') : Float)) : LinearColor);
+    (cast unpackColorToLinear(({ final __callArgument60:Dynamic = SceneRender.scratchColor__sceneRender; __callArgument60; }), (cast _Runtime.field(spot, 'color') : Float)) : LinearColor);
     intensity = _Runtime.field(spot, 'intensity');
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 4.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 0.0 : Float)) * intensity) : Float));
     flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast data : flighthq._internal._Float32Array), (cast (offset + 5.0) : Float), (cast (flighthq._internal._StaticIndex.readFloatArrayTyped((cast SceneRender.scratchColor__sceneRender : Array<Float>), (cast 1.0 : Float)) * intensity) : Float));
@@ -312,25 +318,25 @@ class SceneRender {
     var projection:Projection = cast _Runtime.UNDEFINED;
     projection = camera.projection;
     if ((cast _Runtime.strictEquals((cast projection : { var kind:String; }).kind, 'perspective') : Bool)) {
-      setPerspectiveMatrix4(({ final __callArgument70:Dynamic = SceneRender.scratchProjection__sceneRender; __callArgument70; }), (cast HxMath.tan(((cast projection : { var fovY:Float; }).fovY * 0.5)) : Float), (cast aspect : Float), (cast camera.near : Float), (cast camera.far : Float));
+      setPerspectiveMatrix4(({ final __callArgument62:Dynamic = SceneRender.scratchProjection__sceneRender; __callArgument62; }), (cast HxMath.tan(((cast projection : { var fovY:Float; }).fovY * 0.5)) : Float), (cast aspect : Float), (cast camera.near : Float), (cast camera.far : Float));
     } else {
-      setOrthographicMatrix4(({ final __callArgument72:Dynamic = SceneRender.scratchProjection__sceneRender; __callArgument72; }), (cast -(cast projection : { var halfWidth:Float; }).halfWidth : Float), (cast (cast projection : { var halfWidth:Float; }).halfWidth : Float), (cast -(cast projection : { var halfHeight:Float; }).halfHeight : Float), (cast (cast projection : { var halfHeight:Float; }).halfHeight : Float), (cast camera.near : Float), (cast camera.far : Float));
+      setOrthographicMatrix4(({ final __callArgument64:Dynamic = SceneRender.scratchProjection__sceneRender; __callArgument64; }), (cast -(cast projection : { var halfWidth:Float; }).halfWidth : Float), (cast (cast projection : { var halfWidth:Float; }).halfWidth : Float), (cast -(cast projection : { var halfHeight:Float; }).halfHeight : Float), (cast (cast projection : { var halfHeight:Float; }).halfHeight : Float), (cast camera.near : Float), (cast camera.far : Float));
     }
-    SceneRender.applyScene3DProjectionJitter__sceneRender(({ final __callArgument74:Dynamic = SceneRender.scratchProjection__sceneRender; __callArgument74; }), (cast (cast camera.jitter : { var x:Float; }).x : Float), (cast (cast camera.jitter : { var y:Float; }).y : Float));
-    multiplyMatrix4(({ final __callArgument76:Dynamic = out; __callArgument76; }), ({ final __callArgument77:Dynamic = SceneRender.scratchProjection__sceneRender; __callArgument77; }), ({ final __callArgument78:Dynamic = camera.view; __callArgument78; }));
+    SceneRender.applyScene3DProjectionJitter__sceneRender(({ final __callArgument66:Dynamic = SceneRender.scratchProjection__sceneRender; __callArgument66; }), (cast (cast camera.jitter : { var x:Float; }).x : Float), (cast (cast camera.jitter : { var y:Float; }).y : Float));
+    multiplyMatrix4(({ final __callArgument68:Dynamic = out; __callArgument68; }), ({ final __callArgument69:Dynamic = SceneRender.scratchProjection__sceneRender; __callArgument69; }), ({ final __callArgument70:Dynamic = camera.view; __callArgument70; }));
   }
 
   public static function applyScene3DProjectionJitter__sceneRender(out:Matrix4, x:Float, y:Float):Void {
     var m:flighthq._internal._Float32Array = cast _Runtime.UNDEFINED;
     m = out.m;
-    ({ var __indexedObject82:flighthq._internal._Float32Array = m; var __indexedKey83:Float = 0.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject82 : flighthq._internal._Float32Array), (cast __indexedKey83 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject82 : flighthq._internal._Float32Array), (cast __indexedKey83 : Float)) + (x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float)))) : Float)); });
-    ({ var __indexedObject84:flighthq._internal._Float32Array = m; var __indexedKey85:Float = 4.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject84 : flighthq._internal._Float32Array), (cast __indexedKey85 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject84 : flighthq._internal._Float32Array), (cast __indexedKey85 : Float)) + (x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)))) : Float)); });
-    ({ var __indexedObject86:flighthq._internal._Float32Array = m; var __indexedKey87:Float = 8.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject86 : flighthq._internal._Float32Array), (cast __indexedKey87 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject86 : flighthq._internal._Float32Array), (cast __indexedKey87 : Float)) + (x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 11.0 : Float)))) : Float)); });
-    ({ var __indexedObject88:flighthq._internal._Float32Array = m; var __indexedKey89:Float = 12.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject88 : flighthq._internal._Float32Array), (cast __indexedKey89 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject88 : flighthq._internal._Float32Array), (cast __indexedKey89 : Float)) + (x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 15.0 : Float)))) : Float)); });
-    ({ var __indexedObject90:flighthq._internal._Float32Array = m; var __indexedKey91:Float = 1.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject90 : flighthq._internal._Float32Array), (cast __indexedKey91 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject90 : flighthq._internal._Float32Array), (cast __indexedKey91 : Float)) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float)))) : Float)); });
-    ({ var __indexedObject92:flighthq._internal._Float32Array = m; var __indexedKey93:Float = 5.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject92 : flighthq._internal._Float32Array), (cast __indexedKey93 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject92 : flighthq._internal._Float32Array), (cast __indexedKey93 : Float)) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)))) : Float)); });
-    ({ var __indexedObject94:flighthq._internal._Float32Array = m; var __indexedKey95:Float = 9.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject94 : flighthq._internal._Float32Array), (cast __indexedKey95 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject94 : flighthq._internal._Float32Array), (cast __indexedKey95 : Float)) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 11.0 : Float)))) : Float)); });
-    ({ var __indexedObject96:flighthq._internal._Float32Array = m; var __indexedKey97:Float = 13.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject96 : flighthq._internal._Float32Array), (cast __indexedKey97 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject96 : flighthq._internal._Float32Array), (cast __indexedKey97 : Float)) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 15.0 : Float)))) : Float)); });
+    ({ var __indexedObject74:flighthq._internal._Float32Array = m; var __indexedKey75:Float = 0.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject74 : flighthq._internal._Float32Array), (cast __indexedKey75 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject74 : flighthq._internal._Float32Array), (cast __indexedKey75 : Float)) + (x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float)))) : Float)); });
+    ({ var __indexedObject76:flighthq._internal._Float32Array = m; var __indexedKey77:Float = 4.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject76 : flighthq._internal._Float32Array), (cast __indexedKey77 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject76 : flighthq._internal._Float32Array), (cast __indexedKey77 : Float)) + (x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)))) : Float)); });
+    ({ var __indexedObject78:flighthq._internal._Float32Array = m; var __indexedKey79:Float = 8.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject78 : flighthq._internal._Float32Array), (cast __indexedKey79 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject78 : flighthq._internal._Float32Array), (cast __indexedKey79 : Float)) + (x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 11.0 : Float)))) : Float)); });
+    ({ var __indexedObject80:flighthq._internal._Float32Array = m; var __indexedKey81:Float = 12.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject80 : flighthq._internal._Float32Array), (cast __indexedKey81 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject80 : flighthq._internal._Float32Array), (cast __indexedKey81 : Float)) + (x * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 15.0 : Float)))) : Float)); });
+    ({ var __indexedObject82:flighthq._internal._Float32Array = m; var __indexedKey83:Float = 1.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject82 : flighthq._internal._Float32Array), (cast __indexedKey83 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject82 : flighthq._internal._Float32Array), (cast __indexedKey83 : Float)) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 3.0 : Float)))) : Float)); });
+    ({ var __indexedObject84:flighthq._internal._Float32Array = m; var __indexedKey85:Float = 5.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject84 : flighthq._internal._Float32Array), (cast __indexedKey85 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject84 : flighthq._internal._Float32Array), (cast __indexedKey85 : Float)) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 7.0 : Float)))) : Float)); });
+    ({ var __indexedObject86:flighthq._internal._Float32Array = m; var __indexedKey87:Float = 9.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject86 : flighthq._internal._Float32Array), (cast __indexedKey87 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject86 : flighthq._internal._Float32Array), (cast __indexedKey87 : Float)) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 11.0 : Float)))) : Float)); });
+    ({ var __indexedObject88:flighthq._internal._Float32Array = m; var __indexedKey89:Float = 13.0; flighthq._internal._StaticIndex.writeFloat32ArrayTyped((cast __indexedObject88 : flighthq._internal._Float32Array), (cast __indexedKey89 : Float), (cast (flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast __indexedObject88 : flighthq._internal._Float32Array), (cast __indexedKey89 : Float)) + (y * flighthq._internal._StaticIndex.readFloat32ArrayTyped((cast m : flighthq._internal._Float32Array), (cast 15.0 : Float)))) : Float)); });
   }
 
   public static function resolveScene3DViewportAspect__sceneRender(camera:Camera3D, viewportAspect:Null<Float>):Float {
@@ -360,6 +366,8 @@ class SceneRender {
   public static function setSkinnedMeshBoundsGuard(guard:Null<Mesh->Void>):Void {
     (SceneRender._skinnedBoundsGuard__sceneRender = cast (guard : Dynamic));
   }
+
+  public static final _collectStack__sceneRender:Array<NodeAny> = (cast cast ([] : Array<Dynamic>));
 
   public static var _skinnedBoundsGuard__sceneRender:Null<Mesh->Void> = _Runtime.explicitNull();
 }

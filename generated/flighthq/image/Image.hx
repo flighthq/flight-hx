@@ -3,10 +3,12 @@ package flighthq.image;
 
 import Math as HxMath;
 import flighthq._internal._Runtime;
+import flighthq.image.ImageBackend as Facade_Image_flighthq_image_ImageBackend;
 import flighthq.image.ImageResource as Facade_Image_flighthq_image_ImageResource;
 import flighthq.image.ImageResourceFrom as Facade_Image_flighthq_image_ImageResourceFrom;
 import flighthq.image.ImageResourceReference as Facade_Image_flighthq_image_ImageResourceReference;
 import flighthq.types.AlphaType;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Bitmap;
 import flighthq.types.CompressedImage;
 import flighthq.types.CompressedImageData;
@@ -76,6 +78,11 @@ class Image {
 
   public static function enableImageBitmapComposition():Void {
     Facade_Image_flighthq_image_ImageResourceReference.enableImageBitmapComposition();
+  }
+
+  public static function explainImageBackend():BackendExplanation {
+    return cast Facade_Image_flighthq_image_ImageBackend.explainImageBackend();
+    return cast null;
   }
 
   public static function explainImageResourceReferenceResolution(ref:ImageResourceReference):ImageResourceReferenceResolutionExplanation {

@@ -6,9 +6,13 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWebDialogBackend = api.createWebDialogBackend;
+export const explainDialogBackend = api.explainDialogBackend;
 export const getDialogBackend = api.getDialogBackend;
 export const getWebDirectorySystemHandle = api.getWebDirectorySystemHandle;
 export const getWebFileSystemHandle = api.getWebFileSystemHandle;
+export const installDialogHostBackend = api.installDialogHostBackend;
+export const observeDialogHostResult = api.observeDialogHostResult;
+export const resetDialogBackendForTest = api.resetDialogBackendForTest;
 export const setDialogBackend = api.setDialogBackend;
 export const showConfirmDialog = api.showConfirmDialog;
 export const showErrorBox = api.showErrorBox;

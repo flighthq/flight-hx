@@ -14,3 +14,4 @@ export const intersectRay3DPlane = api.intersectRay3DPlane;
 export const intersectRay3DSphere = api.intersectRay3DSphere;
 export const intersectRay3DTriangle = api.intersectRay3DTriangle;
 export const setRay3D = api.setRay3D;
+export const transformRay3DByMatrix4 = api.transformRay3DByMatrix4;

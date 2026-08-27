@@ -6,6 +6,7 @@ export const destroyTrayIcon = compiled.flighthq.tray.Tray.destroyTrayIcon;
 export const disableTrayGuards = compiled.flighthq.tray.Tray.disableTrayGuards;
 export const displayTrayBalloon = compiled.flighthq.tray.Tray.displayTrayBalloon;
 export const enableTrayGuards = compiled.flighthq.tray.Tray.enableTrayGuards;
+export const explainTrayBackend = compiled.flighthq.tray.Tray.explainTrayBackend;
 export const getTrayCapabilities = compiled.flighthq.tray.Tray.getTrayCapabilities;
 export const getTrayIconBounds = compiled.flighthq.tray.Tray.getTrayIconBounds;
 export const getTrayIcons = compiled.flighthq.tray.Tray.getTrayIcons;

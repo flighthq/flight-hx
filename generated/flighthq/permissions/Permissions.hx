@@ -5,6 +5,7 @@ import Math as HxMath;
 import flighthq._internal._Runtime;
 import flighthq.permissions.EnablePermissionGuards as Facade_Permissions_flighthq_permissions_EnablePermissionGuards;
 import flighthq.permissions.Permission as Facade_Permissions_flighthq_permissions_Permission;
+import flighthq.types.BackendExplanation;
 import flighthq.types.Permission.PermissionName;
 import flighthq.types.Permission.PermissionState;
 import flighthq.types.Permission.PermissionStateExplanation;
@@ -16,6 +17,11 @@ class Permissions {
 
   public static function enablePermissionGuards():Void {
     Facade_Permissions_flighthq_permissions_EnablePermissionGuards.enablePermissionGuards();
+  }
+
+  public static function explainPermissionBackend():BackendExplanation {
+    return cast Facade_Permissions_flighthq_permissions_Permission.explainPermissionBackend();
+    return cast null;
   }
 
   public static function explainPermissionState(name:PermissionName):flighthq._internal._Promise<PermissionStateExplanation> {

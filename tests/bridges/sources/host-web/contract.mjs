@@ -3,6 +3,34 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './enableHostWeb.mjs';
+export * from './webAccessibility.mjs';
+export * from './webApp.mjs';
+export * from './webClipboard.mjs';
+export * from './webConnectivity.mjs';
 export * from './webCursor.mjs';
+export * from './webDevice.mjs';
+export * from './webDialog.mjs';
+export * from './webFilesystem.mjs';
+export * from './webGeolocation.mjs';
 export * from './webGlyphRasterizer.mjs';
+export * from './webHaptics.mjs';
+export * from './webImage.mjs';
+export * from './webKeyboard.mjs';
+export * from './webLifecycle.mjs';
 export * from './webLoop.mjs';
+export * from './webMediasession.mjs';
+export * from './webMenu.mjs';
+export * from './webNotification.mjs';
+export * from './webPermissions.mjs';
+export * from './webPlatform.mjs';
+export * from './webPower.mjs';
+export * from './webProtocol.mjs';
+export * from './webScreen.mjs';
+export * from './webSensors.mjs';
+export * from './webShare.mjs';
+export * from './webShell.mjs';
+export * from './webStatusbar.mjs';
+export * from './webStorage.mjs';
+export * from './webWebcam.mjs';
+export * from './webWindow.mjs';

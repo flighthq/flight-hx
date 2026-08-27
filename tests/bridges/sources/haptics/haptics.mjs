@@ -7,10 +7,14 @@ __syncDependencies();
 
 export const cancelDeviceVibration = api.cancelDeviceVibration;
 export const createWebHapticsBackend = api.createWebHapticsBackend;
+export const explainHapticsBackend = api.explainHapticsBackend;
 export const getHapticsBackend = api.getHapticsBackend;
 export const getHapticsCapabilities = api.getHapticsCapabilities;
+export const installHapticsHostBackend = api.installHapticsHostBackend;
 export const isHapticsSupported = api.isHapticsSupported;
+export const observeHapticsHostResult = api.observeHapticsHostResult;
 export const prepareHaptics = api.prepareHaptics;
+export const resetHapticsBackendForTest = api.resetHapticsBackendForTest;
 export const setHapticsBackend = api.setHapticsBackend;
 export const triggerHapticImpact = api.triggerHapticImpact;
 export const triggerHapticNotification = api.triggerHapticNotification;

@@ -11,6 +11,7 @@ export const createApp = compiled.flighthq.app.App.createApp;
 export const createAppLoginItem = compiled.flighthq.app.App.createAppLoginItem;
 export const detachApp = compiled.flighthq.app.App.detachApp;
 export const disposeApp = compiled.flighthq.app.App.disposeApp;
+export const explainAppBackend = compiled.flighthq.app.App.explainAppBackend;
 export const focusApp = compiled.flighthq.app.App.focusApp;
 export const getAppCommandLine = compiled.flighthq.app.App.getAppCommandLine;
 export const getAppCommandLineSwitch = compiled.flighthq.app.App.getAppCommandLineSwitch;

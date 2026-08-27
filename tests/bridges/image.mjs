@@ -13,6 +13,7 @@ export const createImageResourceFromImageBitmap = compiled.flighthq.image.Image.
 export const createImageResourceFromImageElement = compiled.flighthq.image.Image.createImageResourceFromImageElement;
 export const disableImageBitmapComposition = compiled.flighthq.image.Image.disableImageBitmapComposition;
 export const enableImageBitmapComposition = compiled.flighthq.image.Image.enableImageBitmapComposition;
+export const explainImageBackend = compiled.flighthq.image.Image.explainImageBackend;
 export const explainImageResourceReferenceResolution = compiled.flighthq.image.Image.explainImageResourceReferenceResolution;
 export const isImageResourceEmpty = compiled.flighthq.image.Image.isImageResourceEmpty;
 export const isImageUrlSameOrigin = compiled.flighthq.image.Image.isImageUrlSameOrigin;

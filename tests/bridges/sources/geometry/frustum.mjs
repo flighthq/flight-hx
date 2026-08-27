@@ -9,5 +9,6 @@ export const createFrustum = api.createFrustum;
 export const getFrustumCorners = api.getFrustumCorners;
 export const isFrustumContainingPoint = api.isFrustumContainingPoint;
 export const isFrustumIntersectingAabb = api.isFrustumIntersectingAabb;
+export const isFrustumIntersectingObb = api.isFrustumIntersectingObb;
 export const isFrustumIntersectingSphere = api.isFrustumIntersectingSphere;
 export const setFrustumFromMatrix4 = api.setFrustumFromMatrix4;

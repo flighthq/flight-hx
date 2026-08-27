@@ -71,7 +71,7 @@ class RenderViewport {
   }
 
   public static function isSpatial2DNode__renderViewport(source:flighthq._internal._Any):Bool {
-    return cast ((cast ((cast !_Runtime.strictEquals(source, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'object') : Bool)) : Bool) && (cast _Runtime.hasField((cast source : flighthq._internal._Object), 'pivotX') : Bool));
+    return cast ((cast ((cast ((cast !_Runtime.strictEquals(source, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(source), 'object') : Bool)) : Bool) && (cast _Runtime.hasField(source, 'pivotX') : Bool)) : Bool) && (cast _Runtime.hasField(source, 'skewX') : Bool));
     return cast null;
   }
 

@@ -30,12 +30,14 @@ class RenderTarget {
   }
 
   @:noCompletion
-  public static function computeRenderTargetSize(bounds:RectangleLike, padding:flighthq._internal._Union2<Float, RenderEffectPadding> = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
+  public static function computeRenderTargetSize(out:{ var width:Float; var height:Float; }, bounds:RectangleLike, padding:flighthq._internal._Union2<Float, RenderEffectPadding> = 0.0, minWidth:Float = 1.0, minHeight:Float = 1.0):{ var width:Float; var height:Float; } {
     var horizontal:Float = cast _Runtime.UNDEFINED;
     var vertical:Float = cast _Runtime.UNDEFINED;
     horizontal = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast _Runtime.multiplyNumbers(padding, 2.0) : Dynamic) : (cast ((cast padding : { var left:Float; }).left + (cast padding : { var right:Float; }).right) : Dynamic));
     vertical = ((cast _Runtime.strictEquals(_Runtime.typeofValue(padding), 'number') : Bool) ? (cast _Runtime.multiplyNumbers(padding, 2.0) : Dynamic) : (cast ((cast padding : { var top:Float; }).top + (cast padding : { var bottom:Float; }).bottom) : Dynamic));
-    return cast { width: HxMath.max(minWidth, _Runtime.addNumbers(HxMath.ceil(bounds.width), horizontal)), height: HxMath.max(minHeight, _Runtime.addNumbers(HxMath.ceil(bounds.height), vertical)) };
+    ((cast out : { var width:Float; var height:Float; }).width = HxMath.max(minWidth, _Runtime.addNumbers(HxMath.ceil(bounds.width), horizontal)));
+    ((cast out : { var width:Float; var height:Float; }).height = HxMath.max(minHeight, _Runtime.addNumbers(HxMath.ceil(bounds.height), vertical)));
+    return cast out;
     return cast null;
   }
 

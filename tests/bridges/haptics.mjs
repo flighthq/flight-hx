@@ -2,6 +2,7 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const cancelDeviceVibration = compiled.flighthq.haptics.Haptics.cancelDeviceVibration;
+export const explainHapticsBackend = compiled.flighthq.haptics.Haptics.explainHapticsBackend;
 export const getHapticsCapabilities = compiled.flighthq.haptics.Haptics.getHapticsCapabilities;
 export const isHapticsSupported = compiled.flighthq.haptics.Haptics.isHapticsSupported;
 export const prepareHaptics = compiled.flighthq.haptics.Haptics.prepareHaptics;

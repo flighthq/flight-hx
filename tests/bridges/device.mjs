@@ -2,6 +2,7 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const enableWebSafeAreaInsets = compiled.flighthq.device.Device.enableWebSafeAreaInsets;
+export const explainDeviceBackend = compiled.flighthq.device.Device.explainDeviceBackend;
 export const getDeviceCapabilities = compiled.flighthq.device.Device.getDeviceCapabilities;
 export const getDeviceDisplayMetrics = compiled.flighthq.device.Device.getDeviceDisplayMetrics;
 export const getDeviceId = compiled.flighthq.device.Device.getDeviceId;

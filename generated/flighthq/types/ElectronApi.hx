@@ -16,7 +16,7 @@ typedef ElectronLoginItemSettingsLike = { @:optional var openAtLogin:Bool; @:opt
 
 typedef ElectronDock = { var bounce:String->Float; var cancelBounce:Float->Void; var setBadge:String->Void; var setMenu:ElectronMenu->Void; };
 
-typedef ElectronClipboard = { var readText:Void->String; var writeText:String->Void; var readHtml:Void->String; var writeHtml:String->Void; var readRTF:Void->String; var writeRTF:String->Void; var readBookmark:Void->{ var title:String; var url:String; }; var writeBookmark:String->String->Void; var readImage:Void->ElectronNativeImage; var writeImage:ElectronNativeImage->Void; var read:String->String; var write:ElectronClipboardData->Void; var has:String->Bool; var availableFormats:Void->Array<String>; var clear:Void->Void; };
+typedef ElectronClipboard = { var readText:Void->String; var writeText:String->Void; var readHTML:Void->String; var writeHTML:String->Void; var readRTF:Void->String; var writeRTF:String->Void; var readBookmark:Void->{ var title:String; var url:String; }; var writeBookmark:String->String->Void; var readImage:Void->ElectronNativeImage; var writeImage:ElectronNativeImage->Void; var read:String->String; var write:ElectronClipboardData->Void; var has:String->Bool; var availableFormats:Void->Array<String>; var clear:Void->Void; };
 
 typedef ElectronClipboardData = { @:optional var text:String; @:optional var html:String; @:optional var rtf:String; @:optional var bookmark:String; @:optional var image:ElectronNativeImage; };
 
@@ -42,13 +42,13 @@ typedef ElectronPowerMonitor = { var on:String->(Void->Void)->Void; var removeLi
 
 typedef ElectronPowerSaveBlocker = { var start:String->Float; var stop:Float->Void; var isStarted:Float->Bool; };
 
-typedef ElectronNativeImageModule = { var createFromDataUrl:String->ElectronNativeImage; var createFromPath:String->ElectronNativeImage; };
+typedef ElectronNativeImageModule = { var createFromDataURL:String->ElectronNativeImage; var createFromPath:String->ElectronNativeImage; };
 
-typedef ElectronNativeImage = { var toDataUrl:Void->String; var isEmpty:Void->Bool; };
+typedef ElectronNativeImage = { var toDataURL:Void->String; var isEmpty:Void->Bool; };
 
 typedef ElectronIpcMain = { var on:String->(flighthq._internal._Any->Array<flighthq._internal._Any>->Void)->Void; var removeListener:String->(flighthq._internal._Any->Array<flighthq._internal._Any>->Void)->Void; var handle:String->(flighthq._internal._Any->Array<flighthq._internal._Any>->flighthq._internal._Any)->Void; var removeHandler:String->Void; };
 
-typedef ElectronAutoUpdater = { var setFeedUrl:{ var url:String; }->Void; var checkForUpdates:Void->Void; var quitAndInstall:Void->Void; var on:String->(Array<flighthq._internal._Any>->Void)->Void; var removeListener:String->(Array<flighthq._internal._Any>->Void)->Void; };
+typedef ElectronAutoUpdater = { var setFeedURL:{ var url:String; }->Void; var checkForUpdates:Void->Void; var quitAndInstall:Void->Void; var on:String->(Array<flighthq._internal._Any>->Void)->Void; var removeListener:String->(Array<flighthq._internal._Any>->Void)->Void; };
 
 typedef ElectronBrowserWindowConstructor = { @:optional var __construct:Dynamic; var getAllWindows:Void->Array<ElectronBrowserWindow>; var fromId:Float->Null<ElectronBrowserWindow>; };
 
@@ -62,7 +62,9 @@ typedef ElectronMenuConstructor = { @:optional var __construct:Dynamic; var buil
 
 typedef ElectronMenu = { var popup:{ @:optional var x:Float; @:optional var y:Float; }->Void; };
 
-typedef ElectronMenuItemOptions = { @:optional var id:String; @:optional var label:String; @:optional var type:String; @:optional var role:String; @:optional var accelerator:String; @:optional var enabled:Bool; @:optional var checked:Bool; @:optional var click:Void->Void; @:optional var submenu:Array<ElectronMenuItemOptions>; };
+typedef ElectronMenuItemOptions = { @:optional var id:String; @:optional var label:String; @:optional var type:String; @:optional var role:ElectronMenuItemRole; @:optional var accelerator:String; @:optional var enabled:Bool; @:optional var checked:Bool; @:optional var click:Void->Void; @:optional var submenu:Array<ElectronMenuItemOptions>; };
+
+typedef ElectronMenuItemRole = String;
 
 typedef ElectronTrayConstructor = { @:optional var __construct:Dynamic; };
 
@@ -72,6 +74,6 @@ typedef ElectronTrayBalloonOptions = { @:optional var icon:flighthq._internal._U
 
 typedef ElectronNotificationConstructor = { @:optional var __construct:Dynamic; var isSupported:Void->Bool; };
 
-typedef ElectronNotificationOptions = { var title:String; @:optional var body:String; @:optional var icon:String; @:optional var silent:Bool; @:optional var actions:Array<{ var type:String; var text:String; }>; };
+typedef ElectronNotificationOptions = { var title:String; @:optional var body:String; @:optional var icon:String; @:optional var silent:Bool; @:optional var actions:Array<{ var text:String; var type:String; }>; };
 
 typedef ElectronNotification = { var show:Void->Void; var close:Void->Void; var on:String->(Array<flighthq._internal._Any>->Void)->Void; };

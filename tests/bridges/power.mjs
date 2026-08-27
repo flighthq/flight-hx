@@ -6,6 +6,7 @@ export const createPower = compiled.flighthq.power.Power.createPower;
 export const detachPower = compiled.flighthq.power.Power.detachPower;
 export const disposePower = compiled.flighthq.power.Power.disposePower;
 export const enablePowerSignals = compiled.flighthq.power.Power.enablePowerSignals;
+export const explainPowerBackend = compiled.flighthq.power.Power.explainPowerBackend;
 export const getPowerBatteryHealth = compiled.flighthq.power.Power.getPowerBatteryHealth;
 export const getPowerIdlePollingIntervalMs = compiled.flighthq.power.Power.getPowerIdlePollingIntervalMs;
 export const getPowerStatus = compiled.flighthq.power.Power.getPowerStatus;
