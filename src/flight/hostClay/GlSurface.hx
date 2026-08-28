@@ -72,47 +72,134 @@ class GlSurface {
  * none require behavior. Marked `@:keep` for the same reflective reasons.
  */
 @:keep
+/**
+ * Object-shaped WebGL context over Clay's static `clay.opengl.GL`, forwarding
+ * every method `flight._internal.backend.WebGl2Backend` dispatches on the GL
+ * context (`GlContext = Dynamic` on the Clay target, so these calls are checked
+ * only at runtime — the adapter must be COMPLETE). The 102-method required
+ * surface is enumerated from WebGl2Backend and guarded by
+ * tests/generator/hostclay-gl-coverage.test.ts. Methods forward through the
+ * `clay.opengl.GL` typedef (linc_opengl `opengl.WebGL` natively). Args are
+ * `Dynamic` to match WebGl2Backend's dynamic dispatch and absorb the web/native
+ * signature differences. Six GLES3 methods absent from linc_opengl throw a
+ * clear unsupported error rather than corrupting GL state silently.
+ */
+@:keep
 private class ClayGlContext {
   public function new() {}
-
-  // --- WebGL numeric constants Flight reads off the context object ---
-  // linc_opengl exposes these as GL statics; expose the handful render-gl
-  // reads through the context. (Full constant set: complete alongside the
-  // method surface.)
-  public var ARRAY_BUFFER(get, never):Int; inline function get_ARRAY_BUFFER() return GL.ARRAY_BUFFER;
-  public var ELEMENT_ARRAY_BUFFER(get, never):Int; inline function get_ELEMENT_ARRAY_BUFFER() return GL.ELEMENT_ARRAY_BUFFER;
-  public var TRIANGLES(get, never):Int; inline function get_TRIANGLES() return GL.TRIANGLES;
-  public var FLOAT(get, never):Int; inline function get_FLOAT() return GL.FLOAT;
-  public var COLOR_BUFFER_BIT(get, never):Int; inline function get_COLOR_BUFFER_BIT() return GL.COLOR_BUFFER_BIT;
-  public var DEPTH_BUFFER_BIT(get, never):Int; inline function get_DEPTH_BUFFER_BIT() return GL.DEPTH_BUFFER_BIT;
-  public var DEPTH_TEST(get, never):Int; inline function get_DEPTH_TEST() return GL.DEPTH_TEST;
-  public var BLEND(get, never):Int; inline function get_BLEND() return GL.BLEND;
-
-  // --- shaders / programs ---
-  public inline function createShader(type:Int):Dynamic return GL.createShader(type);
-  public inline function shaderSource(shader:Dynamic, source:String):Void GL.shaderSource(shader, source);
-  public inline function compileShader(shader:Dynamic):Void GL.compileShader(shader);
-  public inline function createProgram():Dynamic return GL.createProgram();
-  public inline function attachShader(program:Dynamic, shader:Dynamic):Void GL.attachShader(program, shader);
-  public inline function linkProgram(program:Dynamic):Void GL.linkProgram(program);
-  public inline function useProgram(program:Dynamic):Void GL.useProgram(program);
-  public inline function getAttribLocation(program:Dynamic, name:String):Int return GL.getAttribLocation(program, name);
-  public inline function getUniformLocation(program:Dynamic, name:String):Dynamic return GL.getUniformLocation(program, name);
-
-  // --- buffers / attributes ---
-  public inline function createBuffer():Dynamic return GL.createBuffer();
-  public inline function bindBuffer(target:Int, buffer:Dynamic):Void GL.bindBuffer(target, buffer);
-  public inline function enableVertexAttribArray(index:Int):Void GL.enableVertexAttribArray(index);
-  public inline function vertexAttribPointer(index:Int, size:Int, type:Int, normalized:Bool, stride:Int, offset:Int):Void
-    GL.vertexAttribPointer(index, size, type, normalized, stride, offset);
-
-  // --- draw / state ---
-  public inline function viewport(x:Int, y:Int, w:Int, h:Int):Void GL.viewport(x, y, w, h);
-  public inline function clearColor(r:Float, g:Float, b:Float, a:Float):Void GL.clearColor(r, g, b, a);
-  public inline function clear(mask:Int):Void GL.clear(mask);
-  public inline function enable(cap:Int):Void GL.enable(cap);
-  public inline function disable(cap:Int):Void GL.disable(cap);
-  public inline function drawArrays(mode:Int, first:Int, count:Int):Void GL.drawArrays(mode, first, count);
-  public inline function drawElements(mode:Int, count:Int, type:Int, offset:Int):Void GL.drawElements(mode, count, type, offset);
+  // --- 90 methods present on both Clay web and native GL: direct forwards ---
+  public inline function activeTexture(a0:Dynamic):Void GL.activeTexture(cast a0);
+  public inline function attachShader(a0:Dynamic, a1:Dynamic):Void GL.attachShader(cast a0, cast a1);
+  public inline function bindBuffer(a0:Dynamic, a1:Dynamic):Void GL.bindBuffer(cast a0, cast a1);
+  public inline function bindFramebuffer(a0:Dynamic, a1:Dynamic):Void GL.bindFramebuffer(cast a0, cast a1);
+  public inline function bindRenderbuffer(a0:Dynamic, a1:Dynamic):Void GL.bindRenderbuffer(cast a0, cast a1);
+  public inline function bindTexture(a0:Dynamic, a1:Dynamic):Void GL.bindTexture(cast a0, cast a1);
+  public inline function blendEquation(a0:Dynamic):Void GL.blendEquation(cast a0);
+  public inline function blendEquationSeparate(a0:Dynamic, a1:Dynamic):Void GL.blendEquationSeparate(cast a0, cast a1);
+  public inline function blendFunc(a0:Dynamic, a1:Dynamic):Void GL.blendFunc(cast a0, cast a1);
+  public inline function blendFuncSeparate(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.blendFuncSeparate(cast a0, cast a1, cast a2, cast a3);
+  public inline function blitFramebuffer(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic, a5:Dynamic, a6:Dynamic, a7:Dynamic, a8:Dynamic, a9:Dynamic):Void GL.blitFramebuffer(cast a0, cast a1, cast a2, cast a3, cast a4, cast a5, cast a6, cast a7, cast a8, cast a9);
+  public inline function bufferData(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.bufferData(cast a0, cast a1, cast a2);
+  public inline function bufferSubData(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.bufferSubData(cast a0, cast a1, cast a2);
+  public inline function checkFramebufferStatus(a0:Dynamic):Dynamic return cast GL.checkFramebufferStatus(cast a0);
+  public inline function clear(a0:Dynamic):Void GL.clear(cast a0);
+  public inline function clearBufferfv(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.clearBufferfv(cast a0, cast a1, cast a2, cast a3);
+  public inline function clearColor(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.clearColor(cast a0, cast a1, cast a2, cast a3);
+  public inline function clearDepth(a0:Dynamic):Void GL.clearDepth(cast a0);
+  public inline function colorMask(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.colorMask(cast a0, cast a1, cast a2, cast a3);
+  public inline function compileShader(a0:Dynamic):Void GL.compileShader(cast a0);
+  public inline function compressedTexImage2D(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic, a5:Dynamic, a6:Dynamic):Void GL.compressedTexImage2D(cast a0, cast a1, cast a2, cast a3, cast a4, cast a5, cast a6);
+  public inline function createBuffer():Dynamic return cast GL.createBuffer();
+  public inline function createFramebuffer():Dynamic return cast GL.createFramebuffer();
+  public inline function createProgram():Dynamic return cast GL.createProgram();
+  public inline function createRenderbuffer():Dynamic return cast GL.createRenderbuffer();
+  public inline function createShader(a0:Dynamic):Dynamic return cast GL.createShader(cast a0);
+  public inline function createTexture():Dynamic return cast GL.createTexture();
+  public inline function cullFace(a0:Dynamic):Void GL.cullFace(cast a0);
+  public inline function deleteBuffer(a0:Dynamic):Void GL.deleteBuffer(cast a0);
+  public inline function deleteFramebuffer(a0:Dynamic):Void GL.deleteFramebuffer(cast a0);
+  public inline function deleteProgram(a0:Dynamic):Void GL.deleteProgram(cast a0);
+  public inline function deleteRenderbuffer(a0:Dynamic):Void GL.deleteRenderbuffer(cast a0);
+  public inline function deleteShader(a0:Dynamic):Void GL.deleteShader(cast a0);
+  public inline function deleteTexture(a0:Dynamic):Void GL.deleteTexture(cast a0);
+  public inline function depthFunc(a0:Dynamic):Void GL.depthFunc(cast a0);
+  public inline function depthMask(a0:Dynamic):Void GL.depthMask(cast a0);
+  public inline function disable(a0:Dynamic):Void GL.disable(cast a0);
+  public inline function disableVertexAttribArray(a0:Dynamic):Void GL.disableVertexAttribArray(cast a0);
+  public inline function drawArrays(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.drawArrays(cast a0, cast a1, cast a2);
+  public inline function drawElements(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.drawElements(cast a0, cast a1, cast a2, cast a3);
+  public inline function enable(a0:Dynamic):Void GL.enable(cast a0);
+  public inline function enableVertexAttribArray(a0:Dynamic):Void GL.enableVertexAttribArray(cast a0);
+  public inline function flush():Void GL.flush();
+  public inline function framebufferRenderbuffer(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.framebufferRenderbuffer(cast a0, cast a1, cast a2, cast a3);
+  public inline function framebufferTexture2D(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic):Void GL.framebufferTexture2D(cast a0, cast a1, cast a2, cast a3, cast a4);
+  public inline function frontFace(a0:Dynamic):Void GL.frontFace(cast a0);
+  public inline function generateMipmap(a0:Dynamic):Void GL.generateMipmap(cast a0);
+  public inline function getActiveUniform(a0:Dynamic, a1:Dynamic):Dynamic return cast GL.getActiveUniform(cast a0, cast a1);
+  public inline function getAttribLocation(a0:Dynamic, a1:Dynamic):Dynamic return cast GL.getAttribLocation(cast a0, cast a1);
+  public inline function getError():Dynamic return cast GL.getError();
+  public inline function getExtension(a0:Dynamic):Dynamic return cast GL.getExtension(cast a0);
+  public inline function getParameter(a0:Dynamic):Dynamic return cast GL.getParameter(cast a0);
+  public inline function getProgramInfoLog(a0:Dynamic):Dynamic return cast GL.getProgramInfoLog(cast a0);
+  public inline function getProgramParameter(a0:Dynamic, a1:Dynamic):Dynamic return cast GL.getProgramParameter(cast a0, cast a1);
+  public inline function getShaderInfoLog(a0:Dynamic):Dynamic return cast GL.getShaderInfoLog(cast a0);
+  public inline function getShaderParameter(a0:Dynamic, a1:Dynamic):Dynamic return cast GL.getShaderParameter(cast a0, cast a1);
+  public inline function getUniformLocation(a0:Dynamic, a1:Dynamic):Dynamic return cast GL.getUniformLocation(cast a0, cast a1);
+  public inline function isEnabled(a0:Dynamic):Dynamic return cast GL.isEnabled(cast a0);
+  public inline function linkProgram(a0:Dynamic):Void GL.linkProgram(cast a0);
+  public inline function pixelStorei(a0:Dynamic, a1:Dynamic):Void GL.pixelStorei(cast a0, cast a1);
+  public inline function readPixels(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic, a5:Dynamic, a6:Dynamic):Void GL.readPixels(cast a0, cast a1, cast a2, cast a3, cast a4, cast a5, cast a6);
+  public inline function renderbufferStorage(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.renderbufferStorage(cast a0, cast a1, cast a2, cast a3);
+  public inline function renderbufferStorageMultisample(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic):Void GL.renderbufferStorageMultisample(cast a0, cast a1, cast a2, cast a3, cast a4);
+  public inline function scissor(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.scissor(cast a0, cast a1, cast a2, cast a3);
+  public inline function shaderSource(a0:Dynamic, a1:Dynamic):Void GL.shaderSource(cast a0, cast a1);
+  public inline function stencilFunc(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.stencilFunc(cast a0, cast a1, cast a2);
+  public inline function stencilFuncSeparate(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.stencilFuncSeparate(cast a0, cast a1, cast a2, cast a3);
+  public inline function stencilMask(a0:Dynamic):Void GL.stencilMask(cast a0);
+  public inline function stencilMaskSeparate(a0:Dynamic, a1:Dynamic):Void GL.stencilMaskSeparate(cast a0, cast a1);
+  public inline function stencilOp(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.stencilOp(cast a0, cast a1, cast a2);
+  public inline function stencilOpSeparate(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.stencilOpSeparate(cast a0, cast a1, cast a2, cast a3);
+  public inline function texImage2D(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic, a5:Dynamic, a6:Dynamic, a7:Dynamic, a8:Dynamic):Void GL.texImage2D(cast a0, cast a1, cast a2, cast a3, cast a4, cast a5, cast a6, cast a7, cast a8);
+  public inline function texParameterf(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.texParameterf(cast a0, cast a1, cast a2);
+  public inline function texParameteri(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.texParameteri(cast a0, cast a1, cast a2);
+  public inline function texSubImage2D(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic, a5:Dynamic, a6:Dynamic, a7:Dynamic, a8:Dynamic):Void GL.texSubImage2D(cast a0, cast a1, cast a2, cast a3, cast a4, cast a5, cast a6, cast a7, cast a8);
+  public inline function uniform1f(a0:Dynamic, a1:Dynamic):Void GL.uniform1f(cast a0, cast a1);
+  public inline function uniform1fv(a0:Dynamic, a1:Dynamic):Void GL.uniform1fv(cast a0, cast a1);
+  public inline function uniform1i(a0:Dynamic, a1:Dynamic):Void GL.uniform1i(cast a0, cast a1);
+  public inline function uniform2f(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.uniform2f(cast a0, cast a1, cast a2);
+  public inline function uniform2fv(a0:Dynamic, a1:Dynamic):Void GL.uniform2fv(cast a0, cast a1);
+  public inline function uniform3f(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.uniform3f(cast a0, cast a1, cast a2, cast a3);
+  public inline function uniform3fv(a0:Dynamic, a1:Dynamic):Void GL.uniform3fv(cast a0, cast a1);
+  public inline function uniform4f(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic):Void GL.uniform4f(cast a0, cast a1, cast a2, cast a3, cast a4);
+  public inline function uniform4fv(a0:Dynamic, a1:Dynamic):Void GL.uniform4fv(cast a0, cast a1);
+  public inline function uniformMatrix3fv(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.uniformMatrix3fv(cast a0, cast a1, cast a2);
+  public inline function uniformMatrix4fv(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.uniformMatrix4fv(cast a0, cast a1, cast a2);
+  public inline function useProgram(a0:Dynamic):Void GL.useProgram(cast a0);
+  public inline function vertexAttrib4f(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic):Void GL.vertexAttrib4f(cast a0, cast a1, cast a2, cast a3, cast a4);
+  public inline function vertexAttribPointer(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic, a5:Dynamic):Void GL.vertexAttribPointer(cast a0, cast a1, cast a2, cast a3, cast a4, cast a5);
+  public inline function viewport(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.viewport(cast a0, cast a1, cast a2, cast a3);
+  // --- 6 WebGL2 methods present on native (linc_opengl) only ---
+#if clay_web
+  public inline function bindVertexArray(a0:Dynamic):Dynamic throw "hostClay: GL.bindVertexArray requires the native (linc_opengl) GL backend; not available on clay_web.";
+  public inline function createVertexArray():Dynamic throw "hostClay: GL.createVertexArray requires the native (linc_opengl) GL backend; not available on clay_web.";
+  public inline function deleteVertexArray(a0:Dynamic):Dynamic throw "hostClay: GL.deleteVertexArray requires the native (linc_opengl) GL backend; not available on clay_web.";
+  public inline function drawBuffers(a0:Dynamic):Dynamic throw "hostClay: GL.drawBuffers requires the native (linc_opengl) GL backend; not available on clay_web.";
+  public inline function drawElementsInstanced(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic):Dynamic throw "hostClay: GL.drawElementsInstanced requires the native (linc_opengl) GL backend; not available on clay_web.";
+  public inline function vertexAttribDivisor(a0:Dynamic, a1:Dynamic):Dynamic throw "hostClay: GL.vertexAttribDivisor requires the native (linc_opengl) GL backend; not available on clay_web.";
+#else
+  public inline function bindVertexArray(a0:Dynamic):Void GL.bindVertexArray(cast a0);
+  public inline function createVertexArray():Dynamic return cast GL.createVertexArray();
+  public inline function deleteVertexArray(a0:Dynamic):Void GL.deleteVertexArray(cast a0);
+  public inline function drawBuffers(a0:Dynamic):Void GL.drawBuffers(cast a0);
+  public inline function drawElementsInstanced(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic, a4:Dynamic):Void GL.drawElementsInstanced(cast a0, cast a1, cast a2, cast a3, cast a4);
+  public inline function vertexAttribDivisor(a0:Dynamic, a1:Dynamic):Void GL.vertexAttribDivisor(cast a0, cast a1);
+#end
+  // --- 6 GLES3 methods render-gl uses that linc_opengl does not expose (real gaps) ---
+  public inline function clearBufferfi(a0:Dynamic,a1:Dynamic,a2:Dynamic,a3:Dynamic,a4:Dynamic,a5:Dynamic,a6:Dynamic,a7:Dynamic,a8:Dynamic):Dynamic throw "hostClay: GL.clearBufferfi (GLES3) is absent from linc_opengl; unsupported on Clay native.";
+  public inline function compressedTexSubImage3D(a0:Dynamic,a1:Dynamic,a2:Dynamic,a3:Dynamic,a4:Dynamic,a5:Dynamic,a6:Dynamic,a7:Dynamic,a8:Dynamic):Dynamic throw "hostClay: GL.compressedTexSubImage3D (GLES3) is absent from linc_opengl; unsupported on Clay native.";
+  public inline function readBuffer(a0:Dynamic,a1:Dynamic,a2:Dynamic,a3:Dynamic,a4:Dynamic,a5:Dynamic,a6:Dynamic,a7:Dynamic,a8:Dynamic):Dynamic throw "hostClay: GL.readBuffer (GLES3) is absent from linc_opengl; unsupported on Clay native.";
+  public inline function texImage3D(a0:Dynamic,a1:Dynamic,a2:Dynamic,a3:Dynamic,a4:Dynamic,a5:Dynamic,a6:Dynamic,a7:Dynamic,a8:Dynamic):Dynamic throw "hostClay: GL.texImage3D (GLES3) is absent from linc_opengl; unsupported on Clay native.";
+  public inline function texStorage3D(a0:Dynamic,a1:Dynamic,a2:Dynamic,a3:Dynamic,a4:Dynamic,a5:Dynamic,a6:Dynamic,a7:Dynamic,a8:Dynamic):Dynamic throw "hostClay: GL.texStorage3D (GLES3) is absent from linc_opengl; unsupported on Clay native.";
+  public inline function vertexAttribIPointer(a0:Dynamic,a1:Dynamic,a2:Dynamic,a3:Dynamic,a4:Dynamic,a5:Dynamic,a6:Dynamic,a7:Dynamic,a8:Dynamic):Dynamic throw "hostClay: GL.vertexAttribIPointer (GLES3) is absent from linc_opengl; unsupported on Clay native.";
 }
 #end

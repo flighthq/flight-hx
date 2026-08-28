@@ -85,7 +85,20 @@ Defines: `-D clay -D clay_native -D clay_sdl -D clay_use_glew -D clay_soloud -D 
   `linc_opengl/linc_ogg/linc_stb/linc_timestamp` + `-D clay -D clay_web -D web`,
   via `--macro include('flight.hostClay')`. Sentinel copies, install calls, and
   the GL adapter all resolve against the current generated `flight._*` modules.
-- **GL adapter forwards verified** against real `clay.opengl.GL` (names/arities).
+- **GL adapter is complete and coverage-gated.** render-gl routes all GL through
+  `flight._internal.backend.WebGl2Backend`, which dispatches **102** distinct
+  methods on the context (`GlContext = Dynamic` on Clay, so unchecked at compile
+  time). `ClayGlContext` forwards all 102 to `clay.opengl.GL`;
+  `tests/generator/hostclay-gl-coverage.test.ts` asserts completeness from source.
+  Measured GL capability of Clay's binding vs the 102 required:
+  **native `opengl.WebGL` (linc_opengl) covers 96/102; web covers 90/102.** The 6
+  native gaps are GLES3 methods absent from linc_opengl (`texImage3D`,
+  `texStorage3D`, `compressedTexSubImage3D`, `readBuffer`, `clearBufferfi`,
+  `vertexAttribIPointer`) — the adapter throws a clear unsupported error for these
+  rather than corrupting GL state, so a scene that needs 3D/array textures,
+  integer vertex attributes, or MRT read-buffers fails loudly. The other 96 map
+  1:1. (web also lacks VAO/instancing/`drawBuffers`, but Clay-on-web is not the
+  intended target; native is.)
 - **Clay pin.** Clay HEAD has internal drift (`GLGraphicsDriver` doesn't satisfy
   Clay's own `GraphicsDriver` spec, introduced by the `GraphicsBatcher` refactor
   `c24a8ac`). Pin at its parent `8ae994a`, which compiles clean. hostClay never
@@ -97,8 +110,6 @@ Defines: `-D clay -D clay_native -D clay_sdl -D clay_use_glew -D clay_soloud -D 
   (haxe.Http), SDL clipboard/cursor, storage persistence + filesystem over sys.io,
   app focus/paths.
 - **Audio** (`AudioContext` over SoLoud) — not yet adapted.
-- **Complete the GL adapter** method surface by enumerating render-gl's context
-  call sites in the generated `flighthq.renderGl.*` bridges.
 - **New seams** as hostLime grows: screen/platform/lifecycle/haptics, and
   image/glyph via `linc_stb`.
 - **Build integration**: pin clay + linc in `haxe_libraries/` and add a hostClay
