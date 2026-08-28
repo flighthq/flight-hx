@@ -102,6 +102,7 @@ class _HostValueLut {
     'atob',
     'AudioBuffer',
     'btoa',
+    'Blob',
     'cancelAnimationFrame',
     'console',
     'DataView',
@@ -129,6 +130,7 @@ class _HostValueLut {
     'Uint32Array',
     'Uint8Array',
     'Uint8ClampedArray',
+    'URL',
     'WeakMap',
     'WeakSet',
     'globalThis',
@@ -146,6 +148,7 @@ class _HostValueLut {
     return switch (name) {
       case 'AbortController': _AbortController;
       case 'AbortSignal': abortSignalConstructor();
+      case 'Blob': _Blob;
       case 'Map': _Map;
       case 'Set': _Set;
       case 'WeakMap': _WeakMap;
@@ -153,6 +156,7 @@ class _HostValueLut {
       case 'Float32Array' | 'Float64Array' | 'Int16Array' | 'Int32Array' | 'Int8Array' | 'Uint16Array' | 'Uint32Array' | 'Uint8Array'
         | 'Uint8ClampedArray':
         typedArrayConstructor(name);
+      case 'URL': _URL;
       case 'ImageData': createImageData;
       case 'AudioBuffer': createAudioBuffer;
       case 'ArrayBuffer': arrayBufferConstructor();

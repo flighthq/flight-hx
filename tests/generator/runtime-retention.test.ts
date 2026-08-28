@@ -11,10 +11,12 @@ describe('reflective host-toolkit retention', () => {
 
     expect(reflectiveClasses).toEqual([
       '_AbortController',
+      '_Blob',
       '_Map',
       '_Set',
       '_WeakMap',
       '_WeakSet',
+      '_URL',
       '_DOMException',
       '_TextDecoder',
       '_TextEncoder',

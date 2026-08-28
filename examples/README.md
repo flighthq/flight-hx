@@ -9,7 +9,7 @@ Each `Main.hx` is a standalone `lime.app.Application`. Every statement of the up
 - Flight's Lime host capabilities are enabled in `onWindowCreate` with `HostLime.enableHostLime(this)`, followed by the GL render-state setup and renderer registration for the kinds the example draws.
 - The upstream `./render` module and `render(root)` become the `render(context)` override; its `scale` becomes `window.scale`.
 - `requestAnimationFrame` + `performance.now()` become the `update(deltaTime)` override.
-- `window` keyboard/pointer listeners become Lime's `onKeyDown`/`onKeyUp`/`onMouseDown`/`onMouseMove`/`onMouseUp`/`onMouseWheel`/`onTextInput` overrides.
+- Browser input is normally wired to Lime callbacks directly. The `interaction` port demonstrates the reusable, disposable `LimeInput.attachLimeInput()` adapter for Flight's `InputManager`, including pointer, keyboard, composition/text, touch, and optional gamepad events.
 - Browser-only asset painting (Canvas-2D texture generation, DOM control panels, Web Audio/Video output) is reduced to a minimal in-file stub that keeps the surrounding Flight SDK call sites identical.
 
 The full scene graph, materials, meshes, labels, and per-frame logic are otherwise a direct port. 3D examples (`scene3d`, `skeleton`) inline the upstream WebGL scene path (`createGlRenderEffectPipeline` → `prepareSceneRender` → `drawGlScene`).

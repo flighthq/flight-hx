@@ -41,9 +41,21 @@ override function onWindowCreate():Void {
 }
 ```
 
-The enabler is idempotent for one application and installs through Flight's host layer, preserving `custom > host > sentinel` precedence. It currently covers application identity and lifecycle, the frame loop, text clipboard, native file dialogs, platform and display metadata, conservative haptics, filesystem, and persistent storage. GL surfaces, native audio contexts, cursor mapping, and font registration remain explicit per-window/per-context factories.
+The enabler is idempotent for one application and installs through Flight's host layer, preserving `custom > host > sentinel` precedence. It currently covers application identity and lifecycle, the frame loop, native image loading and Cairo glyph rasterization, text clipboard, native file dialogs, platform and display metadata, conservative haptics, filesystem, and persistent storage. GL surfaces, native audio contexts, cursor mapping, font registration, and input attachment remain explicit per-window/per-context factories.
 
-The adapter is compiled only with Lime's `lime` define, so base Flight does not depend on Lime. Its maintained smoke test compiles and executes against pinned Lime 8.3.2. Native HTTP exists but is not installed by the umbrella because Flight's Net contract does not yet have a host-layer slot. The detailed support and design-gap matrix is in [agents/host-lime-maturity.md](agents/host-lime-maturity.md).
+Connect a Flight input manager to a Lime window explicitly and retain its disposer:
+
+```haxe
+import flight.hostLime.LimeInput;
+
+final input = flight.Input.createInputManager();
+final detachInput = LimeInput.attachLimeInput(window, input, {gamepads: true});
+// Call detachInput() when the window closes.
+```
+
+The adapter includes pointer, keyboard, composition/text, touch, and standardized gamepad events. Lime does not retain a touch event's originating window, so multi-window applications should attach touch to only one binding or provide `touchFilter`.
+
+The adapter is compiled only with Lime's `lime` define, so base Flight does not depend on Lime. Its maintained smoke test compiles and executes against pinned Lime 8.3.2. Native HTTP exists but is not installed by the umbrella because Flight's Net contract does not yet have a host-layer slot; audio remains an explicit context because Flight has no `AudioBackend`. The detailed support and design-gap matrix is in [agents/host-lime-maturity.md](agents/host-lime-maturity.md).
 
 ## Repository setup
 

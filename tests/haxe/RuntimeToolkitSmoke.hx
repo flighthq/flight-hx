@@ -12,6 +12,7 @@ class RuntimeToolkitSmoke {
       'ArrayBuffer',
       'atob',
       'btoa',
+      'Blob',
       'cancelAnimationFrame',
       'console',
       'Date',
@@ -26,6 +27,7 @@ class RuntimeToolkitSmoke {
       'structuredClone',
       'TextEncoder',
       'Uint8Array',
+      'URL',
     ];
     for (key in portableKeys) {
       if (_HostValueLut.typeofValue(key) == 'undefined') throw 'portable toolkit key resolved undefined: ' + key;
@@ -76,6 +78,22 @@ class RuntimeToolkitSmoke {
     final floatView = new flight._internal._Float32Array([1.5, 2.5]);
     if (!_Runtime.isInstanceOf(floatView, _HostValueLut.get('Float32Array'))) throw 'portable Float32Array identity failed';
     if (_Runtime.isInstanceOf(floatView, _HostValueLut.get('Uint8Array'))) throw 'typed-array identities collapsed';
+
+    final blob:flight._internal._Blob = _Runtime.construct(_HostValueLut.get('Blob'), [['a', byteView], {type: 'TEXT/PLAIN'}]);
+    if (blob.size != 4 || blob.type != 'text/plain' || blob.bytes.toHex() != '61010203') {
+      throw 'portable Blob assembly failed';
+    }
+    final objectUrl:String = _Runtime.callProperty(_HostValueLut.get('URL'), 'createObjectURL', [blob]);
+    if (flight._internal._URL.resolveObjectURL(objectUrl) != blob) throw 'portable object URL registration failed';
+    _Runtime.callProperty(_HostValueLut.get('URL'), 'revokeObjectURL', [objectUrl]);
+    if (flight._internal._URL.resolveObjectURL(objectUrl) != null) throw 'portable object URL revocation failed';
+    final parsedUrl:flight._internal._URL = _Runtime.construct(_HostValueLut.get('URL'), ['HTTPS://Example.com/path']);
+    if (parsedUrl.protocol != 'https:' || parsedUrl.origin != 'https://example.com') throw 'portable URL parsing failed';
+    flight.Shell.setShellUrlSchemeAllowlist(['https']);
+    if (!flight.Shell.isShellUrlAllowed('https://example.com') || flight.Shell.isShellUrlAllowed('file:///tmp/example')) {
+      throw 'portable URL scheme allowlist failed';
+    }
+    flight.Shell.setShellUrlSchemeAllowlist(null);
 
     final controller:flight._internal.dom.AbortController = _Runtime.construct(_HostValueLut.get('AbortController'), []);
     var abortCalls = 0;

@@ -2,19 +2,15 @@
 // against the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`:
 // the browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
 // lifecycle, and Flight's Lime host capabilities are enabled with `HostLime.enableHostLime(this)`.
-// The upstream DOM-canvas InputManager wiring (createInputManager/attachPointerInput/
-// connectInputToInteraction) is replaced by driving `dispatchInteractionPointer*` directly from Lime's
-// `onMouseDown`/`onMouseMove`/`onMouseUp` overrides; the interaction-manager signal wiring
-// (connectInteractionSignal / capture / release) is otherwise translated faithfully.
+// The upstream DOM-canvas input attachment is replaced by Flight's explicit Lime InputManager
+// adapter; the InputManager-to-interaction signal bridge is otherwise translated faithfully.
 import flight.hostLime.HostLime;
+import flight.hostLime.LimeInput;
 import flight.Sdk.*;
 import flight.types.DisplayObject;
 import flight.types.Shape;
 import lime.app.Application;
 import lime.graphics.RenderContext;
-import lime.ui.KeyCode;
-import lime.ui.KeyModifier;
-import lime.ui.MouseButton;
 import lime.ui.Window;
 
 // Shape definitions: six draggable colored shapes at different positions.
@@ -41,6 +37,8 @@ class Main extends Application {
 
   var root:DisplayObject;
   var manager:Dynamic;
+  var detachInput:Void->Void;
+  var disconnectInteractionInput:Void->Void;
 
   var shapes:Array<DraggableShape>;
 
@@ -127,11 +125,9 @@ class Main extends Application {
     registerShapeHitTest();
 
     manager = createInteractionManager(root, {precise: true});
-
-    // The upstream DOM pointer wiring (createInputManager/attachPointerInput/connectInputToInteraction)
-    // is replaced by driving dispatchInteractionPointer* from the onMouse* overrides below. The pointer
-    // coordinates are scaled by `scale` there, matching upstream's coordScale bridge from CSS pixels to
-    // the backing-store pixel space used by hit testing.
+    final input = createInputManager();
+    detachInput = LimeInput.attachLimeInput(window, input);
+    disconnectInteractionInput = connectInputToInteraction(input, manager, scale);
 
     shapes = [
       {
@@ -330,27 +326,15 @@ class Main extends Application {
     }
   }
 
-  // Upstream DOM pointer events, delivered here through Lime's mouse overrides and forwarded to the
-  // interaction manager. Coordinates are scaled to backing-store space, matching the upstream coordScale.
-  override public function onMouseDown(x:Float, y:Float, button:MouseButton):Void {
-    if (!ready) return;
-    dispatchInteractionPointerDown(manager, x * scale, y * scale);
-  }
-
-  override public function onMouseMove(x:Float, y:Float):Void {
-    if (!ready) return;
-    dispatchInteractionPointerMove(manager, x * scale, y * scale);
-  }
-
-  override public function onMouseUp(x:Float, y:Float, button:MouseButton):Void {
-    if (!ready) return;
-    dispatchInteractionPointerUp(manager, x * scale, y * scale);
-  }
-
   // Upstream `enterFrame`, driven by Lime's per-frame `update`.
   override public function update(deltaTime:Int):Void {
     if (!ready) return;
     updateHud();
+  }
+
+  override public function onWindowClose():Void {
+    if (detachInput != null) detachInput();
+    if (disconnectInteractionInput != null) disconnectInteractionInput();
   }
 
   // Upstream `render(root)`, driven by Lime's per-frame `render`.

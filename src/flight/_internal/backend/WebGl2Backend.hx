@@ -217,6 +217,13 @@ class WebGl2Backend {
   public static inline final VIEWPORT:Int = 2978;
   public static inline final ZERO:Int = 0;
 
+  #if (lime && !js)
+  // Native GL has no WebGL pixel-store enums. Remember the only one Flight
+  // currently uses so DOM-source uploads can apply the conversion on CPU and
+  // state brackets can read it without sending an invalid enum to the driver.
+  static final nativeUnpackPremultiplyAlpha = new haxe.ds.ObjectMap<Dynamic, Bool>();
+  #end
+
   /** Preserve context-owned WebGL constants on JavaScript so wrappers observe
    * their own enum surface. Native targets use the fixed specification value
    * because their context types do not expose instance constants. */
@@ -586,8 +593,13 @@ class WebGl2Backend {
   public static inline function getParameter(gl:GlContext, pname:Float):Dynamic {
     #if js
     return js.Syntax.code('{0}.getParameter({1})', gl, pname);
-    #elseif ((neko || cpp) && lime)
+    #elseif (lime && !js)
+    if (Std.int(pname) == UNPACK_PREMULTIPLY_ALPHA_WEBGL) return nativePremultiplyAlpha(gl);
+    #if (neko || cpp)
     return nativeParameter(gl, Std.int(pname));
+    #else
+    return gl.getParameter(Std.int(pname));
+    #end
     #else
     return gl.getParameter(Std.int(pname));
     #end
@@ -654,8 +666,12 @@ class WebGl2Backend {
     // WebGL-only pack parameters (UNPACK_FLIP_Y_WEBGL, UNPACK_PREMULTIPLY_ALPHA_WEBGL,
     // UNPACK_COLORSPACE_CONVERSION_WEBGL) do not exist in native GL and would
     // poison getError; Flight performs those conversions CPU-side on this path.
-    if (Std.int(pname) >= 0x9240 && Std.int(pname) <= 0x9243) return;
     final raw:Dynamic = param;
+    if (Std.int(pname) == UNPACK_PREMULTIPLY_ALPHA_WEBGL) {
+      nativeUnpackPremultiplyAlpha.set(cast gl, Std.isOfType(raw, Bool) ? (raw : Bool) : Std.int(raw) != 0);
+      return;
+    }
+    if (Std.int(pname) >= 0x9240 && Std.int(pname) <= 0x9243) return;
     gl.pixelStorei(Std.int(pname), Std.isOfType(raw, Bool) ? ((raw : Bool) ? 1 : 0) : Std.int(raw));
     #elseif js
     js.Syntax.code('{0}.pixelStorei({1}, {2})', gl, Std.int(pname), param);
@@ -759,16 +775,23 @@ class WebGl2Backend {
     #end
   }
 
-  /** The 6-argument DOM-source overload of `texImage2D`. On native the only
-   * supported source is the cairo-backed scratch canvas: its premultiplied
-   * ARGB32 pixels are reordered to RGBA and uploaded through the pixel form
-   * (Flight's premultiply pack flag is a native no-op, so premultiplied texel
-   * content matches the html5 result). */
+  /** The 6-argument DOM-source overload of `texImage2D`. Native accepts Lime
+   * images plus the cairo-backed scratch canvas. Lime image pixels are
+   * normalized to RGBA with the remembered WebGL premultiplication state;
+   * cairo's premultiplied ARGB32 bytes are reordered before upload. */
   public static inline function texImage2DSource(gl:GlContext, target:Float, level:Float, internalformat:Float,
       format:Float, type:Float, source:Dynamic):Void {
-    #if (lime && !js && lime_cairo)
+    #if (lime && !js)
+    if (Std.isOfType(source, lime.graphics.Image)) {
+      final image:lime.graphics.Image = cast source;
+      final rgba = nativeImagePixels(image, nativePremultiplyAlpha(gl));
+      gl.texImage2D(Std.int(target), Std.int(level), Std.int(internalformat), image.width, image.height, 0,
+        Std.int(format), Std.int(type), rgba);
+      return;
+    }
+    #if lime_cairo
     if (!Std.isOfType(source, NativeScratchCanvas)) {
-      throw 'WebGl2Backend: unsupported texImage2D source on native GL targets (expected a scratch canvas)';
+      throw 'WebGl2Backend: unsupported texImage2D source on native GL targets (expected a Lime image or scratch canvas)';
     }
     final canvasContext = (cast source : NativeScratchCanvas).nativeContext();
     canvasContext.syncWithOwner();
@@ -819,8 +842,9 @@ class WebGl2Backend {
     #end
     gl.texImage2D(Std.int(target), Std.int(level), Std.int(internalformat), canvasWidth, canvasHeight, 0,
       Std.int(format), Std.int(type), rgba);
-    #elseif (lime && !js)
-    throw 'WebGl2Backend: texImage2D from a canvas source requires Lime\'s cairo feature';
+    #else
+    throw 'WebGl2Backend: unsupported texImage2D source on native GL targets (expected a Lime image)';
+    #end
     #elseif js
     js.Syntax.code('{0}.texImage2D({1}, {2}, {3}, {4}, {5}, {6})', gl, Std.int(target), Std.int(level),
       Std.int(internalformat), Std.int(format), Std.int(type), source);
@@ -828,6 +852,68 @@ class WebGl2Backend {
     gl.texImage2D(Std.int(target), Std.int(level), Std.int(internalformat), Std.int(format), Std.int(type), source);
     #end
   }
+
+  #if (lime && !js)
+  static function nativePremultiplyAlpha(gl:GlContext):Bool {
+    final key:Dynamic = cast gl;
+    return key != null && nativeUnpackPremultiplyAlpha.exists(key) && nativeUnpackPremultiplyAlpha.get(key);
+  }
+
+  static function nativeImagePixels(image:lime.graphics.Image, premultiply:Bool):lime.utils.UInt8Array {
+    if (image == null || image.buffer == null || image.width <= 0 || image.height <= 0) {
+      return new lime.utils.UInt8Array(0);
+    }
+    final source = image.data;
+    final output = new lime.utils.UInt8Array(image.width * image.height * 4);
+    final sourceWidth = image.buffer.width;
+    final sourcePremultiplied = image.premultiplied;
+    for (y in 0...image.height) {
+      for (x in 0...image.width) {
+        final sourceOffset = ((image.offsetY + y) * sourceWidth + image.offsetX + x) * 4;
+        final targetOffset = (y * image.width + x) * 4;
+        var red:Int;
+        var green:Int;
+        var blue:Int;
+        var alpha:Int;
+        switch (image.format) {
+          case lime.graphics.PixelFormat.ARGB32:
+            alpha = source[sourceOffset];
+            red = source[sourceOffset + 1];
+            green = source[sourceOffset + 2];
+            blue = source[sourceOffset + 3];
+          case lime.graphics.PixelFormat.BGRA32:
+            blue = source[sourceOffset];
+            green = source[sourceOffset + 1];
+            red = source[sourceOffset + 2];
+            alpha = source[sourceOffset + 3];
+          default:
+            red = source[sourceOffset];
+            green = source[sourceOffset + 1];
+            blue = source[sourceOffset + 2];
+            alpha = source[sourceOffset + 3];
+        }
+        if (premultiply && !sourcePremultiplied) {
+          red = Std.int(red * alpha / 255);
+          green = Std.int(green * alpha / 255);
+          blue = Std.int(blue * alpha / 255);
+        } else if (!premultiply && sourcePremultiplied) {
+          if (alpha == 0) {
+            red = green = blue = 0;
+          } else {
+            red = red > alpha ? 255 : Std.int(red * 255 / alpha);
+            green = green > alpha ? 255 : Std.int(green * 255 / alpha);
+            blue = blue > alpha ? 255 : Std.int(blue * 255 / alpha);
+          }
+        }
+        output[targetOffset] = red;
+        output[targetOffset + 1] = green;
+        output[targetOffset + 2] = blue;
+        output[targetOffset + 3] = alpha;
+      }
+    }
+    return output;
+  }
+  #end
 
   public static inline function texImage3D(gl:GlContext, target:Float, level:Float, internalformat:Float, width:Float,
       height:Float, depth:Float, border:Float, format:Float, type:Float, pixels:Null<GlBufferSource>):Void {

@@ -88,7 +88,7 @@ function smokeOne(example, target, mode) {
   const script = [
     `cd ${binDir}`,
     `rm -f ${shot} ${shot2}`,
-    `LIBGL_ALWAYS_SOFTWARE=1 ./${binary} > ${log} 2>&1 & APP=$!`,
+    `SDL_VIDEODRIVER=x11 LIBGL_ALWAYS_SOFTWARE=1 ./${binary} > ${log} 2>&1 & APP=$!`,
     `sleep ${RUN_SECONDS - 2}`,
     `WID=$(xwininfo -root -tree 2>/dev/null | grep -i flight | grep -o "0x[0-9a-f]*" | head -1)`,
     `[ -n "$WID" ] && import -window $WID ${shot} 2>/dev/null`,

@@ -6,10 +6,10 @@
     "externalTypeKeys": 4,
     "globalValueKeys": 70,
     "hostTypeKeys": 233,
-    "jsOnlyGlobalValueKeys": 37,
+    "jsOnlyGlobalValueKeys": 35,
     "missingEntries": 0,
     "moduleValueKeys": 0,
-    "portableGlobalValueKeys": 33,
+    "portableGlobalValueKeys": 35,
     "typeUses": 11305,
     "valueUses": 2011
   },
@@ -4489,7 +4489,7 @@
       "uses": 1
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:Blob",
       "locations": [
         "generated/flight/_Clipboard.hx",
@@ -5255,7 +5255,7 @@
       "uses": 5
     },
     {
-      "coverage": "js-only",
+      "coverage": "portable",
       "key": "global:URL",
       "locations": [
         "generated/flight/_Image.hx",

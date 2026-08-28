@@ -10,8 +10,8 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | External type keys | 4 |
 | Dynamic compatibility type entries | 211 |
 | Global value keys | 70 |
-| Portable global value keys | 33 |
-| JavaScript-only global value keys | 37 |
+| Portable global value keys | 35 |
+| JavaScript-only global value keys | 35 |
 | Module value keys | 0 |
 | Type uses | 11305 |
 | Value uses | 2011 |
@@ -269,7 +269,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:atob` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 4 |
 | `global:Audio` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:AudioBuffer` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
-| `global:Blob` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
+| `global:Blob` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 4 |
 | `global:btoa` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
 | `global:cancelAnimationFrame` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 2 |
 | `global:ClipboardItem` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
@@ -325,7 +325,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:TextEncoder` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
 | `global:Uint32Array` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 1 |
 | `global:Uint8Array` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 5 |
-| `global:URL` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 7 |
+| `global:URL` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 7 |
 | `global:URLSearchParams` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:VideoFrame` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:WeakMap` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 200 |

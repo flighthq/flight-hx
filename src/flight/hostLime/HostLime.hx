@@ -5,7 +5,10 @@ import flight._App.installAppHostBackend;
 import flight._Application.installLoopHostBackend;
 import flight._Clipboard.installClipboardHostBackend;
 import flight._Dialog.installDialogHostBackend;
+import flight._GlyphAtlas.installGlyphRasterizerHostBackend;
 import flight._Haptics.installHapticsHostBackend;
+import flight._Image.installImageHostBackend;
+import flight._Image.observeImageHostResult;
 import flight._Lifecycle.installLifecycleHostBackend;
 import flight._Platform.installPlatformHostBackend;
 import flight._Screen.installScreenHostBackend;
@@ -25,15 +28,18 @@ class HostLime {
    *
    * Call this once the first Lime window exists (normally from
    * `onWindowCreate`). Repeating it for the same application is idempotent.
-   * Networking and audio are intentionally separate: Flight networking does
-   * not yet expose a host-layer installation seam, while audio is a per-context
-   * service created with `LimeAudio.createLimeAudioContext()`.
+   * Input, networking, and audio are intentionally separate: input attachment
+   * is explicit and disposable per window; Flight networking does not yet
+   * expose a host-layer installation seam; and audio is a per-context service
+   * created with `LimeAudio.createLimeAudioContext()`.
    */
   public static function enableHostLime(application:Application):Void {
     enableHostLimeApp(application);
     enableHostLimeClipboard(application);
     enableHostLimeDialog(application);
+    enableHostLimeGlyphRasterizer(application);
     enableHostLimeHaptics(application);
+    enableHostLimeImage(application);
     enableHostLimeLifecycle(application);
     enableHostLimeLoop(application);
     enableHostLimePlatform(application);
@@ -70,6 +76,36 @@ class HostLime {
     final installation = forApplication(application);
     if (installation.haptics == null) installation.haptics = LimeHaptics.createLimeHapticsBackend();
     installHapticsHostBackend(installation.haptics);
+  }
+
+  /** Returns false when the active Lime build has no native Cairo support. */
+  public static function enableHostLimeGlyphRasterizer(application:Application):Bool {
+    final installation = forApplication(application);
+    if (installation.glyphRasterizer == null) {
+      installation.glyphRasterizer = LimeGlyphRasterizer.createLimeGlyphRasterizerBackend();
+    }
+    if (installation.glyphRasterizer == null) return false;
+    installGlyphRasterizerHostBackend(installation.glyphRasterizer);
+    return true;
+  }
+
+  public static function enableHostLimeImage(application:Application):Void {
+    final installation = forApplication(application);
+    if (installation.image == null) {
+      final inner = LimeImage.createLimeImageBackend();
+      installation.image = cast {
+        loadImageFromUrl: function(url:String, crossOrigin:Null<String>, signal:Null<flight._internal.dom.AbortSignal>) {
+          return inner.loadImageFromUrl(url, crossOrigin, signal).then(function(image) {
+            observeImageHostResult('loadImageFromUrl', true);
+            return image;
+          }, function(error):flight.types.Image {
+            observeImageHostResult('loadImageFromUrl', false);
+            throw error;
+          });
+        },
+      };
+    }
+    installImageHostBackend(installation.image);
   }
 
   public static function enableHostLimeLifecycle(application:Application):Void {
@@ -125,6 +161,8 @@ private class LimeInstallation {
   public var clipboard:Dynamic;
   public var dialog:Dynamic;
   public var haptics:Dynamic;
+  public var glyphRasterizer:Dynamic;
+  public var image:Dynamic;
   public var lifecycle:Dynamic;
   public var loop:Dynamic;
   public var platform:Dynamic;
