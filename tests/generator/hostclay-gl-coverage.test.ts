@@ -16,12 +16,12 @@ const adapter = readFileSync(path.join(root, 'src/flight/hostClay/GlSurface.hx')
 
 function required(): Set<string> {
   const set = new Set<string>();
-  for (const m of backend.matchAll(/\bgl\.([a-z][A-Za-z0-9]*)\s*\(/g)) set.add(m[1]);
+  for (const m of backend.matchAll(/\bgl\.([a-z][A-Za-z0-9]*)\s*\(/g)) if (m[1]) set.add(m[1]);
   return set;
 }
 function provided(): Set<string> {
   const set = new Set<string>();
-  for (const m of adapter.matchAll(/public inline function ([a-z][A-Za-z0-9]*)\s*\(/g)) set.add(m[1]);
+  for (const m of adapter.matchAll(/public inline function ([a-z][A-Za-z0-9]*)\s*\(/g)) if (m[1]) set.add(m[1]);
   return set;
 }
 
