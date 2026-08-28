@@ -6,31 +6,30 @@ package flight.hostClay;
 
 #if clay
 import clay.Clay;
-import flight.App;
 import flight.types.AppBackend;
 
-/** Maps Flight's AppBackend onto the Clay application singleton. */
+/** Maps Flight's AppBackend onto the Clay application singleton.
+ *
+ * NOTE: Flight's host-adapter factory surface is mid-refactor on this base
+ * (the former `createWebAppBackend` seed was removed); `builder` is stabilizing
+ * it via hostLime. To stay decoupled from that churn, this backend is built
+ * inline rather than seeded from a web default. Once hostLime's migration lands,
+ * re-align this to whatever seed/override pattern it settles on. */
 class ClayApp {
-  /**
-   * Creates a Flight application backend backed by `Clay.app`.
-   *
-   * Starts from Flight's web backend (the documented sentinels for dock menus,
-   * login items, recent documents, etc.) and overrides the integrations Clay
-   * can honestly supply.
-   */
+  /** Creates a Flight application backend backed by `Clay.app`. */
   public static function createClayAppBackend():AppBackend {
-    final backend = App.createWebAppBackend();
-    backend.getName = function():String {
-      final id = Clay.app.appId;
-      return id == null ? '' : id;
+    return cast {
+      getName: function():String {
+        final id = Clay.app.appId;
+        return id == null ? '' : id;
+      },
+      getVersion: function():String return '',
+      quit: function():Void Clay.app.shutdown(),
+      // TODO(hostClay): focus/showApp map onto Clay's window once the per-window
+      // handle is wired; sentinels until then.
+      focus: function():Void {},
+      showApp: function():Bool return false,
     };
-    backend.quit = function():Void {
-      Clay.app.shutdown();
-    };
-    // TODO(hostClay): focus/showApp map onto Clay's window once the per-window
-    // handle is wired (Clay exposes windowing through its runtime; the base
-    // web sentinels remain correct until then).
-    return backend;
   }
 }
 #end

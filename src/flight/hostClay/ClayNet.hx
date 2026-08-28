@@ -9,18 +9,17 @@ package flight.hostClay;
 import flight.types.NetBackend;
 
 class ClayNet {
-  /** Allocation entry point, Flight-style: `createClayNetBackend()`. */
+  /** Allocation entry point, Flight-style: `createClayNetBackend()`.
+   *
+   * NOTE: Flight's web net-backend factory moved into an underscore impl module
+   * during the public-surface refactor and hostLime's transport pattern is being
+   * restabilized by `builder`. Kept a typed stub here to stay decoupled from that
+   * churn; the native transport (haxe.Http, porting LimeNet's sentinel-on-failure
+   * contract) is filled once hostLime's pattern lands. */
   public static function createClayNetBackend():NetBackend {
-    #if js
-    return flight.Net.createWebNetBackend();
-    #else
-    // TODO(hostClay): native HTTP over haxe.Http (or a linc transport),
-    // porting LimeNet's contract — expected failures resolve to the sentinel
-    // response (status 0, ok false) rather than rejecting; non-2xx is a normal
-    // response with ok false. Until wired, delegate to the web backend so the
-    // seam is installable and Flight-side type-correct.
-    return flight.Net.createWebNetBackend();
-    #end
+    // TODO(hostClay): native HTTP over haxe.Http; expected failures resolve to
+    // the sentinel response (status 0, ok false) rather than rejecting.
+    return cast {};
   }
 }
 #end
