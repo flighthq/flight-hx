@@ -20,7 +20,8 @@ flight-hx/
 │   └── flight/
 │       ├── _internal/           # hidden portable runtime types
 │       └── hostLime/            # optional Lime backend adapters
-│           └── LimeApp.hx
+│           ├── HostLime.hx      # host-layer registration door
+│           └── Lime*.hx         # capability and per-object factories
 ├── generated/                   # disposable generated Haxe classpath
 │   └── flight/
 │       ├── geometry/

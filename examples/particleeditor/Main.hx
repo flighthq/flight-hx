@@ -1,13 +1,12 @@
 // Line-by-line Haxe/Lime port of the upstream `particleeditor` example (`app.ts`), written directly
 // against the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`:
 // the browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
-// lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
+// lifecycle, and Flight's Lime host capabilities are enabled with `HostLime.enableHostLime(this)`.
 // Every statement of the upstream program is otherwise translated faithfully. The procedural glow
 // particle texture and the HTML `<div id="controls">` slider/color/blend panel are pure browser glue
 // with no SDK call sites, so they collapse to a size-reporting stub and the retained portable config
 // state; the emitter still follows the Lime pointer and rebuilds its config through the SDK.
-import flight.App;
-import flight.hostLime.LimeApp;
+import flight.hostLime.HostLime;
 import flight.Sdk.*;
 import flight.types.DisplayObject;
 import flight.types.TextLabel;
@@ -16,7 +15,6 @@ import flight.types.ParticleEmitter2D;
 import flight.types.ParticleEmitterConfig;
 import flight.types.ParticleForce;
 import flight.types.TextureAtlas;
-import flight.types._internal._BlendModeValues;
 import flight._internal._UInt8ClampedArray;
 import lime.app.Application;
 import lime.graphics.RenderContext;
@@ -30,10 +28,6 @@ class Main extends Application {
   var renderState:Dynamic;
   var ready = false;
   var usingCairo = false;
-
-  // `BlendMode` is a TS string enum; its value namespace maps to the generated `BlendModeValue`
-  // record, so `BlendMode.Add` / `BlendMode.Normal` read exactly as upstream.
-  final BlendMode:Dynamic = _BlendModeValues.BlendModeValue;
 
   final WIDTH = 800;
   final HEIGHT = 600;
@@ -158,7 +152,7 @@ class Main extends Application {
 
   // Lime: window/GL are ready. Wire the Flight Lime backend, set up the GL renderer, build the scene.
   override public function onWindowCreate():Void {
-    App.setAppBackend(LimeApp.createLimeAppBackend(this));
+    HostLime.enableHostLime(this);
     trace('window context type: ' + window.context.type);
     switch (window.context.type) {
       case CAIRO:
@@ -198,12 +192,12 @@ class Main extends Application {
     root = createDisplayObject();
 
     // Procedural radial glow particle texture, uploaded as real RGBA bytes via the ImageResource `data` path.
-    atlas = createTextureAtlas({image: createParticleTexture()});
+    atlas = createTextureAtlasFromImageResource(createParticleTexture());
     addTextureAtlasRegion(atlas, 0, 0, 16, 16);
 
     emitter = createParticleEmitter2D();
     emitter.data.atlas = atlas;
-    emitter.blendMode = BlendMode.Add;
+    emitter.blendMode = flight.Types.BlendMode.Add;
     emitter.scaleX = 1;
     emitter.scaleY = 1;
     emitter.x = (WIDTH * scale) / 2;
@@ -320,7 +314,7 @@ class Main extends Application {
   function onConfigChange():Void {
     config = rebuildConfig();
     forces = rebuildForces();
-    emitter.blendMode = useBlendAdd ? BlendMode.Add : BlendMode.Normal;
+    emitter.blendMode = useBlendAdd ? flight.Types.BlendMode.Add : flight.Types.BlendMode.Normal;
   }
 
   function rgbToHex(r:Float, g:Float, b:Float):String {

@@ -2,9 +2,9 @@
 // Upstream's `createWebNetBackend` wraps fetch; this backend implements the
 // same `NetBackend` seam over `lime.net.HTTPRequest` (libcurl on native), so
 // `sendNetRequest` — and everything upstream routes through the net seam —
-// works without a browser. Install with
-// `setNetBackend(LimeNet.createLimeNetBackend())`. On js it simply returns
-// upstream's own web backend.
+// works without a browser. Flight does not yet expose a host-layer installer
+// for Net, so HostLime cannot safely install this factory without treating it
+// as a custom override. On js it simply returns upstream's own web backend.
 //
 // Contract notes carried over from upstream: expected transport failures
 // (network error, DNS, timeout, caller abort) resolve to the sentinel
@@ -19,14 +19,20 @@ package flight.hostLime;
 #if lime
 import flight._internal._Promise;
 import flight._internal._Runtime;
+#if !js
+import flight._internal._LimeTypedArray;
+#end
 import flight.types.NetBackend;
 import flight.types.NetResponse;
+#if !js
+import flight._internal.dom.AbortSignal;
+#end
 
 class LimeNet {
   /** Allocation entry point, Flight-style: `createLimeNetBackend()`. */
   public static function createLimeNetBackend():NetBackend {
     #if js
-    return flight.Net.createWebNetBackend();
+    return flight._Net.createWebNetBackend();
     #else
     return cast {
       sendNetRequest: function(request:Dynamic, ?options:Dynamic):_Promise<NetResponse> {
@@ -42,10 +48,13 @@ class LimeNet {
       final url:String = request.url;
       final redirect:String = stringField(request, 'redirect', 'follow');
       final responseType:String = stringField(request, 'responseType', 'text');
+      final signal:Null<AbortSignal> = options == null ? null : cast _Runtime.field(options, 'signal');
+      var onAbort:Null<Void->Void> = null;
       var settled = false;
       final settle = function(response:NetResponse):Void {
         if (settled) return;
         settled = true;
+        if (signal != null && onAbort != null) signal.removeEventListener('abort', onAbort);
         resolve(response);
       };
 
@@ -72,18 +81,18 @@ class LimeNet {
       if (body != null) http.data = bodyToBytes(body);
 
       // Caller abort: the toolkit AbortSignal is structural — read `aborted`
-      // now and register tolerantly for a later abort.
-      final signal:Dynamic = options == null ? null : _Runtime.field(options, 'signal');
-      if (signal != null && _Runtime.field(signal, 'aborted') == true) {
+      // now, remove the listener when the request settles, and cancel Lime for
+      // a later abort.
+      if (signal != null && signal.aborted) {
         settle(transportFailure(url, 'aborted'));
         return;
       }
       if (signal != null) {
-        final onAbort:Dynamic = function():Void {
+        onAbort = function():Void {
           http.cancel();
           settle(transportFailure(url, 'aborted'));
         };
-        _Runtime.callOptionalValue(_Runtime.field(signal, 'addEventListener'), (['abort', onAbort] : Array<Dynamic>));
+        signal.addEventListener('abort', onAbort);
       }
 
       final progressSignal:Dynamic = options == null ? null : _Runtime.field(options, 'progress');
@@ -149,9 +158,20 @@ class LimeNet {
   static function bodyToBytes(body:Dynamic):haxe.io.Bytes {
     if (Std.isOfType(body, String)) return haxe.io.Bytes.ofString(cast body);
     if (Std.isOfType(body, haxe.io.Bytes)) return cast body;
+    if (Std.isOfType(body, _LimeTypedArray)) {
+      return limeViewToBytes(cast _LimeTypedArray.unwrap(body));
+    }
+    if (Std.isOfType(body, lime.utils.ArrayBufferView)) return limeViewToBytes(cast body);
     final inner:Dynamic = _Runtime.field(body, 'buffer');
     if (inner != null && Std.isOfType(inner, haxe.io.Bytes)) return cast inner;
     return haxe.io.Bytes.ofString(Std.string(body));
+  }
+
+  static function limeViewToBytes(view:lime.utils.ArrayBufferView):haxe.io.Bytes {
+    final bytes:haxe.io.Bytes = cast view.buffer;
+    final offset = view.byteOffset;
+    final length = view.byteLength;
+    return offset == 0 && length == bytes.length ? bytes : bytes.sub(offset, length);
   }
 
   static function stringField(owner:Dynamic, name:String, fallback:String):String {

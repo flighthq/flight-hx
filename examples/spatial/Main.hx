@@ -1,16 +1,15 @@
 // Line-by-line Haxe/Lime port of the upstream `spatial` example (`app.ts`), written directly against
 // the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
-// lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
+// lifecycle, and Flight's Lime host capabilities are enabled with `HostLime.enableHostLime(this)`.
 // Every statement of the upstream program is otherwise translated faithfully.
-import flight.App;
-import flight.hostLime.LimeApp;
+import flight.hostLime.HostLime;
 import flight.Sdk.*;
 import flight.types.DisplayObject;
 import flight.types.TextLabel;
 import flight.types.Shape;
-import flight.types.Spatial.SpatialAabb;
-import flight.types.Spatial.SpatialIndex;
+import flight.types.SpatialAabb2D as SpatialAabb;
+import flight.types.SpatialIndex2D as SpatialIndex;
 import flight.types.SpatialObjectId;
 import flight.types.SpatialPair;
 import lime.app.Application;
@@ -67,7 +66,7 @@ class Main extends Application {
 
   // Lime: window/GL are ready. Wire the Flight Lime backend, set up the GL renderer, build the scene.
   override public function onWindowCreate():Void {
-    App.setAppBackend(LimeApp.createLimeAppBackend(this));
+    HostLime.enableHostLime(this);
     trace('window context type: ' + window.context.type);
     switch (window.context.type) {
       case CAIRO:
@@ -120,7 +119,7 @@ class Main extends Application {
     root.scaleX = scale;
     root.scaleY = scale;
 
-    index = createSpatialIndex(createUniformGridSpatialBackend(100));
+    index = createSpatialIndex2D(createUniformGridSpatialBackend2D(100));
 
     for (i in 0...OBJECT_COUNT) {
       final w = randomRange(30, 80);
@@ -143,7 +142,7 @@ class Main extends Application {
         vy: isMoving ? randomRange(-speed, speed) : 0,
       });
 
-      insertSpatialObject(index, i, bounds);
+      insertSpatialObject2D(index, i, bounds);
     }
 
     // Query visualization overlay: draws region box, ray line, or point marker.
@@ -286,7 +285,7 @@ class Main extends Application {
         obj.vy = -Math.abs(obj.vy);
       }
 
-      updateSpatialObject(index, obj.id, obj.bounds);
+      updateSpatialObject2D(index, obj.id, obj.bounds);
     }
 
     // Determine which objects to highlight based on the active query mode.
@@ -294,14 +293,14 @@ class Main extends Application {
     var resultCount = 0;
 
     if (activeMode == 'pairs') {
-      querySpatialPairs(index, pairsOut);
+      querySpatialPairs2D(index, pairsOut);
       resultCount = pairsOut.length;
       for (i in 0...pairsOut.length) {
         highlightSet.set(Std.int(pairsOut[i].a), true);
         highlightSet.set(Std.int(pairsOut[i].b), true);
       }
     } else if (activeMode == 'point') {
-      querySpatialPoint(index, mouseX, mouseY, idsOut);
+      querySpatialPoint2D(index, mouseX, mouseY, idsOut);
       resultCount = idsOut.length;
       for (i in 0...idsOut.length) {
         highlightSet.set(Std.int(idsOut[i]), true);
@@ -309,7 +308,7 @@ class Main extends Application {
     } else if (activeMode == 'ray') {
       final dx = mouseX;
       final dy = mouseY - CANVAS_HEIGHT / 2;
-      querySpatialRay(index, 0, CANVAS_HEIGHT / 2, dx, dy, idsOut);
+      querySpatialRay2D(index, 0, CANVAS_HEIGHT / 2, dx, dy, idsOut);
       resultCount = idsOut.length;
       for (i in 0...idsOut.length) {
         highlightSet.set(Std.int(idsOut[i]), true);
@@ -321,7 +320,7 @@ class Main extends Application {
         maxX: mouseX + 50,
         maxY: mouseY + 50,
       };
-      querySpatialRegion(index, region, idsOut);
+      querySpatialRegion2D(index, region, idsOut);
       resultCount = idsOut.length;
       for (i in 0...idsOut.length) {
         highlightSet.set(Std.int(idsOut[i]), true);

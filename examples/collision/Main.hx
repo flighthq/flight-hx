@@ -1,15 +1,14 @@
 // Line-by-line Haxe/Lime port of the upstream `collision` example (`app.ts`), written directly against
 // the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
-// lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
+// lifecycle, and Flight's Lime host capabilities are enabled with `HostLime.enableHostLime(this)`.
 // Pointer drag is Lime's `onMouseDown`/`onMouseMove`/`onMouseUp`. Every other statement is faithful.
-import flight.App;
-import flight.hostLime.LimeApp;
+import flight.hostLime.HostLime;
 import flight.Sdk.*;
-import flight.types.Collision.CollisionAabb;
-import flight.types.Collision.CollisionCircle;
-import flight.types.Collision.CollisionManifold;
-import flight.types.Collision.CollisionPolygon;
+import flight.types.CollisionAabb2D as CollisionAabb;
+import flight.types.CollisionCircle2D as CollisionCircle;
+import flight.types.CollisionManifold2D as CollisionManifold;
+import flight.types.CollisionPolygon2D as CollisionPolygon;
 import flight.types.DisplayObject;
 import flight.types.Shape;
 import lime.app.Application;
@@ -51,7 +50,7 @@ class Main extends Application {
 
   // Lime: window/GL are ready. Wire the Flight Lime backend, set up the GL renderer, build the scene.
   override public function onWindowCreate():Void {
-    App.setAppBackend(LimeApp.createLimeAppBackend(this));
+    HostLime.enableHostLime(this);
     trace('window context type: ' + window.context.type);
     switch (window.context.type) {
       case CAIRO:
@@ -112,7 +111,7 @@ class Main extends Application {
     mtvOverlay = createShape();
     addNodeChild(main, mtvOverlay);
 
-    manifold = createCollisionManifold();
+    manifold = createCollisionManifold2D();
 
     ready = true;
   }
@@ -235,13 +234,13 @@ class Main extends Application {
   // Test one pair for collision, dispatching on the two kinds.
   function testPairCollision(a:_Collider, b:_Collider, out:CollisionManifold):Bool {
     if (a.kind == 'circle' && b.kind == 'circle') {
-      return testCircleCircleCollision(a.collider, b.collider, out);
+      return testCircleCircleCollision2D(a.collider, b.collider, out);
     }
     if (a.kind == 'circle' && b.kind == 'aabb') {
-      return testCircleAabbCollision(a.collider, b.collider, out);
+      return testCircleAabbCollision2D(a.collider, b.collider, out);
     }
     if (a.kind == 'aabb' && b.kind == 'circle') {
-      final result = testCircleAabbCollision(b.collider, a.collider, out);
+      final result = testCircleAabbCollision2D(b.collider, a.collider, out);
       if (result) {
         out.normalX = -out.normalX;
         out.normalY = -out.normalY;
@@ -249,13 +248,13 @@ class Main extends Application {
       return result;
     }
     if (a.kind == 'aabb' && b.kind == 'aabb') {
-      return testAabbAabbCollision(a.collider, b.collider, out);
+      return testAabbAabbCollision2D(a.collider, b.collider, out);
     }
     if (a.kind == 'circle' && b.kind == 'polygon') {
-      return testCirclePolygonCollision(a.collider, b.collider, out);
+      return testCirclePolygonCollision2D(a.collider, b.collider, out);
     }
     if (a.kind == 'polygon' && b.kind == 'circle') {
-      final result = testCirclePolygonCollision(b.collider, a.collider, out);
+      final result = testCirclePolygonCollision2D(b.collider, a.collider, out);
       if (result) {
         out.normalX = -out.normalX;
         out.normalY = -out.normalY;
@@ -263,13 +262,13 @@ class Main extends Application {
       return result;
     }
     if (a.kind == 'polygon' && b.kind == 'polygon') {
-      return testPolygonPolygonCollision(a.collider, b.collider, out);
+      return testPolygonPolygonCollision2D(a.collider, b.collider, out);
     }
     if (a.kind == 'aabb' && b.kind == 'polygon') {
-      return testAabbPolygonCollision(a.collider, b.collider, out);
+      return testAabbPolygonCollision2D(a.collider, b.collider, out);
     }
     if (a.kind == 'polygon' && b.kind == 'aabb') {
-      final result = testAabbPolygonCollision(b.collider, a.collider, out);
+      final result = testAabbPolygonCollision2D(b.collider, a.collider, out);
       if (result) {
         out.normalX = -out.normalX;
         out.normalY = -out.normalY;

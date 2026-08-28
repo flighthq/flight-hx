@@ -1,12 +1,12 @@
 # Non-HTML5 Compatibility
 
-Last audited: 2026-07-24
+Last audited: 2026-08-27
 
 ## Compile Status
 
 The complete generated `flight` namespace type-checks and runs its smoke test on Eval and Python without `js` or `html5`. Web-only globals are isolated behind maintained target boundaries or represented as `Dynamic` on other targets. They are unavailable at runtime there, but they are not library compile blockers.
 
-C++/hxcpp remains unverified in the current workspace because neither `g++` nor `clang++` is installed. The committed portability command still covers it on a properly provisioned host.
+The complete generic portability smoke compiles, links, and runs on C++/hxcpp in this workspace. HostLime's sound integration also completes native Neko and Linux/hxcpp application builds against pinned Lime 8.3.2. This headless workspace provides compile/link coverage rather than interactive audio, window, dialog, clipboard, or input validation.
 
 ## WebGL2 Binding
 
@@ -32,18 +32,17 @@ The remaining source-kind exception is the six-argument `texImage2D` overload fo
 
 These areas compile on non-HTML5 targets but do not currently provide equivalent native behavior:
 
-- `CanvasRenderingContext2D` remains a dynamic/reflective host boundary and has no Lime canvas implementation.
-- WebGPU, DOM media/image sources, clipboard, geolocation, screen, storage, and similar browser integrations degrade to dynamic values or maintained sentinels.
+- `CanvasRenderingContext2D` has the maintained native Cairo path, but DOM-created scratch canvases and image/media sources still need explicit native providers.
+- HostLime supplies clipboard text, screen metadata, storage, filesystem, lifecycle, and related core services. WebGPU, geolocation, DOM media/image sources, and the remaining OS-service packages retain sentinels.
 
 They are capability gaps, not present non-HTML5 Haxe type-check failures.
 
 ## Remaining Reflection Inventory
 
-There is no `Reflect.*` use in generated source or the WebGL2 binding. The remaining calls are confined to four maintained boundaries:
+There is no `Reflect.*` use in generated source or the WebGL2 binding. The remaining calls are confined to maintained dynamic boundaries:
 
 - `_Runtime` implements TypeScript's genuinely dynamic property, callback, iterator, and object semantics.
 - `CanvasRenderingContext2D` still dispatches dynamic canvas methods and properties; this is the next browser API where typed extern macros could improve dead-code elimination.
 - `DynamicObject` implements generic structural-object operations.
-- `hostLime.LimeApp` reads application metadata whose concrete Lime config shape is not exposed through this adapter's public contract.
 
-All four compile on non-HTML5 targets. Replacing them should be evaluated by semantic family rather than by adding target-specific cases to generated code.
+These compile on non-HTML5 targets. Replacing them should be evaluated by semantic family rather than by adding target-specific cases to generated code.

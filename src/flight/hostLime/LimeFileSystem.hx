@@ -1,8 +1,7 @@
 // Maintained host adapter: Flight file-system backend over sys IO. Upstream's
 // default is web OPFS; this backend implements the same `FileSystemBackend`
 // seam with `sys.FileSystem`/`sys.io.File`, so filesystem free functions work
-// natively. Install with
-// `setFileSystemBackend(LimeFileSystem.createLimeFileSystemBackend())`.
+// natively. HostLime owns installation.
 // Contract carried over: reads resolve to null/[] and writes to false on
 // missing entries or denied access — never a rejection. `isSymlink` is always
 // false (sys exposes no portable symlink probe).
@@ -12,11 +11,15 @@ package flight.hostLime;
 import Math as HxMath;
 import flight._internal._Promise;
 import flight._internal._Runtime;
+import flight._internal._LimeTypedArray;
 import flight._internal._UInt8Array;
+import lime.system.FileWatcher;
 import sys.FileSystem;
 import sys.io.File;
 
 class LimeFileSystem {
+  static var atomicCounter = 0;
+
   /** Allocation entry point, Flight-style: `createLimeFileSystemBackend()`. */
   public static function createLimeFileSystemBackend():flight.types.FileSystemBackend {
     return cast {
@@ -50,14 +53,7 @@ class LimeFileSystem {
         } catch (_:Dynamic) false);
       },
       writeFileAtomic: function(path:String, data:Dynamic):_Promise<Dynamic> {
-        return done(try {
-          final temp = path + '.tmp-flight-atomic';
-          final bytes = Std.isOfType(data, String) ? haxe.io.Bytes.ofString(cast data) : viewToBytes(data);
-          File.saveBytes(temp, bytes);
-          if (FileSystem.exists(path)) FileSystem.deleteFile(path);
-          FileSystem.rename(temp, path);
-          true;
-        } catch (_:Dynamic) false);
+        return done(writeAtomic(path, data));
       },
       fileExists: function(path:String):_Promise<Dynamic> {
         return done(FileSystem.exists(path) && !FileSystem.isDirectory(path));
@@ -139,7 +135,7 @@ class LimeFileSystem {
       setFilePermissions: function(_path:String, _permissions:Dynamic):_Promise<Dynamic> return done(false),
       canAccessFile: function(path:String, mode:String):_Promise<Dynamic> {
         return done(switch (mode) {
-          case 'readable': FileSystem.exists(path);
+          case 'readable': canRead(path);
           case 'writable':
             try {
               if (!FileSystem.exists(path)) false;
@@ -153,8 +149,7 @@ class LimeFileSystem {
         });
       },
       getFileSystemUsage: function():_Promise<Dynamic> return done(null),
-      // No native change watcher; return the web-parity no-op unsubscribe.
-      watch: function(_path:String, _listener:Dynamic):Dynamic return function():Void {},
+      watch: function(path:String, listener:Dynamic):Dynamic return watchPath(path, listener),
       getPath: function(kind:String):String return pathFor(kind),
     };
   }
@@ -179,9 +174,106 @@ class LimeFileSystem {
 
   static function viewToBytes(data:Dynamic):haxe.io.Bytes {
     if (Std.isOfType(data, haxe.io.Bytes)) return cast data;
+    if (Std.isOfType(data, _LimeTypedArray)) {
+      return limeViewToBytes(cast _LimeTypedArray.unwrap(data));
+    }
+    if (Std.isOfType(data, lime.utils.ArrayBufferView)) return limeViewToBytes(cast data);
     final inner:Dynamic = _Runtime.field(data, 'buffer');
     if (inner != null && Std.isOfType(inner, haxe.io.Bytes)) return cast inner;
     throw 'unsupported binary payload';
+  }
+
+  static function limeViewToBytes(view:lime.utils.ArrayBufferView):haxe.io.Bytes {
+    final bytes:haxe.io.Bytes = cast view.buffer;
+    final offset = view.byteOffset;
+    final length = view.byteLength;
+    return offset == 0 && length == bytes.length ? bytes : bytes.sub(offset, length);
+  }
+
+  static function writeAtomic(path:String, data:Dynamic):Bool {
+    final suffix = Std.string(lime.system.System.getTimer()) + '-' + Std.string(atomicCounter++);
+    final temp = path + '.tmp-flight-' + suffix;
+    final backup = path + '.bak-flight-' + suffix;
+    var movedOriginal = false;
+    try {
+      final bytes = Std.isOfType(data, String) ? haxe.io.Bytes.ofString(cast data) : viewToBytes(data);
+      File.saveBytes(temp, bytes);
+      #if windows
+      if (FileSystem.exists(path)) {
+        FileSystem.rename(path, backup);
+        movedOriginal = true;
+      }
+      #end
+      FileSystem.rename(temp, path);
+      #if windows
+      // Replacement already committed; a stale backup is cleanup debt, not a
+      // failed write that should make callers roll their state back.
+      if (movedOriginal && FileSystem.exists(backup)) {
+        try FileSystem.deleteFile(backup) catch (_:Dynamic) {}
+      }
+      #end
+      return true;
+    } catch (_:Dynamic) {
+      try if (FileSystem.exists(temp)) FileSystem.deleteFile(temp) catch (_:Dynamic) {}
+      #if windows
+      if (movedOriginal && !FileSystem.exists(path)) {
+        try FileSystem.rename(backup, path) catch (_:Dynamic) {}
+      }
+      #end
+      return false;
+    }
+  }
+
+  static function canRead(path:String):Bool {
+    if (!FileSystem.exists(path) || FileSystem.isDirectory(path)) return false;
+    return try {
+      final input = File.read(path, true);
+      input.close();
+      true;
+    } catch (_:Dynamic) false;
+  }
+
+  static function watchPath(path:String, listener:Dynamic):Void->Void {
+    final watchingDirectory = FileSystem.exists(path) && FileSystem.isDirectory(path);
+    final root = watchingDirectory ? path : {
+      final directory = haxe.io.Path.directory(path);
+      directory == '' ? '.' : directory;
+    };
+    final watchedPath = fullPathOrSelf(path);
+    final watcher = new FileWatcher();
+    if (!watcher.addDirectory(root, watchingDirectory)) return function():Void {};
+
+    final matches = function(changed:String):Bool {
+      return watchingDirectory || fullPathOrSelf(changed) == watchedPath;
+    };
+    final onAdd = function(changed:String):Void {
+      if (matches(changed)) listener({type: 'created', path: changed});
+    };
+    final onModify = function(changed:String):Void {
+      if (matches(changed)) listener({type: 'modified', path: changed});
+    };
+    final onDelete = function(changed:String):Void {
+      if (matches(changed)) listener({type: 'deleted', path: changed});
+    };
+    final onMove = function(from:String, to:String):Void {
+      if (matches(from)) listener({type: 'deleted', path: from});
+      if (matches(to)) listener({type: 'created', path: to});
+    };
+    watcher.onAdd.add(onAdd);
+    watcher.onModify.add(onModify);
+    watcher.onDelete.add(onDelete);
+    watcher.onMove.add(onMove);
+    return function():Void {
+      watcher.onAdd.remove(onAdd);
+      watcher.onModify.remove(onModify);
+      watcher.onDelete.remove(onDelete);
+      watcher.onMove.remove(onMove);
+      watcher.removeDirectory(root);
+    };
+  }
+
+  static function fullPathOrSelf(path:String):String {
+    return try FileSystem.fullPath(path) catch (_:Dynamic) path;
   }
 
   static function listEntries(path:String):Array<Dynamic> {

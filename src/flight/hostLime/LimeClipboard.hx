@@ -3,8 +3,8 @@
 // (read/write/has/clear, plus 'text/plain' through the format lanes) are
 // real; every richer flavor — HTML, RTF, images, bookmarks, files — resolves
 // to its documented denied/absent value ('' / false / null / []). Change
-// notification maps to `lime.system.Clipboard.onUpdate`. Install with
-// `setClipboardBackend(LimeClipboard.createLimeClipboardBackend())`.
+// notification maps to `lime.system.Clipboard.onUpdate`. The factory has no
+// side effects; HostLime owns installation and observation begins on first use.
 package flight.hostLime;
 
 #if lime
@@ -14,19 +14,21 @@ import lime.system.Clipboard;
 
 class LimeClipboard {
   static inline final TEXT_FORMAT = 'text/plain';
+  static var changeCount = 0.0;
+  static var observing = false;
 
   /** Allocation entry point, Flight-style: `createLimeClipboardBackend()`. */
   public static function createLimeClipboardBackend():flight.types.ClipboardBackend {
-    var changeCount = 0.0;
-    Clipboard.onUpdate.add(function() changeCount++);
     return cast {
       readText: function():_Promise<Dynamic> return _Promise.resolve(currentText()),
       writeText: function(text:String):_Promise<Dynamic> {
+        ensureObservation();
         Clipboard.text = text;
         return _Promise.resolve(true);
       },
       hasText: function():_Promise<Dynamic> return _Promise.resolve(currentText() != ''),
       clear: function():_Promise<Dynamic> {
+        ensureObservation();
         Clipboard.text = '';
         return _Promise.resolve(true);
       },
@@ -35,6 +37,7 @@ class LimeClipboard {
       },
       writeFormat: function(format:String, data:String):_Promise<Dynamic> {
         if (format != TEXT_FORMAT) return _Promise.resolve(false);
+        ensureObservation();
         Clipboard.text = data;
         return _Promise.resolve(true);
       },
@@ -54,14 +57,19 @@ class LimeClipboard {
       writeItems: function(items:Array<Dynamic>):_Promise<Dynamic> {
         if (items != null) for (item in items) {
           if (_Runtime.field(item, 'format') == TEXT_FORMAT) {
+            ensureObservation();
             Clipboard.text = Std.string(_Runtime.field(item, 'data'));
             return _Promise.resolve(true);
           }
         }
         return _Promise.resolve(false);
       },
-      getChangeCount: function():Float return changeCount,
+      getChangeCount: function():Float {
+        ensureObservation();
+        return changeCount;
+      },
       subscribeClipboardChange: function(listener:Dynamic):Dynamic {
+        ensureObservation();
         final wrapped = function():Void _Runtime.callOptionalValue(listener, cast []);
         Clipboard.onUpdate.add(wrapped);
         return function():Void Clipboard.onUpdate.remove(wrapped);
@@ -82,8 +90,17 @@ class LimeClipboard {
   }
 
   static function currentText():String {
+    ensureObservation();
     final text = Clipboard.text;
     return text == null ? '' : text;
   }
+
+  static function ensureObservation():Void {
+    if (observing) return;
+    observing = true;
+    Clipboard.onUpdate.add(incrementChangeCount);
+  }
+
+  static function incrementChangeCount():Void changeCount++;
 }
 #end

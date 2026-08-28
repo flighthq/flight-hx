@@ -1,13 +1,12 @@
 // Line-by-line Haxe/Lime port of the upstream `interaction` example (`app.ts`), written directly
 // against the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`:
 // the browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
-// lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
+// lifecycle, and Flight's Lime host capabilities are enabled with `HostLime.enableHostLime(this)`.
 // The upstream DOM-canvas InputManager wiring (createInputManager/attachPointerInput/
 // connectInputToInteraction) is replaced by driving `dispatchInteractionPointer*` directly from Lime's
 // `onMouseDown`/`onMouseMove`/`onMouseUp` overrides; the interaction-manager signal wiring
 // (connectInteractionSignal / capture / release) is otherwise translated faithfully.
-import flight.App;
-import flight.hostLime.LimeApp;
+import flight.hostLime.HostLime;
 import flight.Sdk.*;
 import flight.types.DisplayObject;
 import flight.types.Shape;
@@ -66,7 +65,7 @@ class Main extends Application {
 
   // Lime: window/GL are ready. Wire the Flight Lime backend, set up the GL renderer, build the scene.
   override public function onWindowCreate():Void {
-    App.setAppBackend(LimeApp.createLimeAppBackend(this));
+    HostLime.enableHostLime(this);
     trace('window context type: ' + window.context.type);
     switch (window.context.type) {
       case CAIRO:

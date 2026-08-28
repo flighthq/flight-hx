@@ -1,8 +1,7 @@
 // Maintained host adapter: Flight storage backend over a JSON file in the
 // application storage directory. Upstream's default is web localStorage; this
 // backend implements the same synchronous `StorageBackend` seam with a
-// write-through file store. Install with
-// `setStorageBackend(LimeStorage.createLimeStorageBackend())`; pass a path to
+// atomic write-through file store. HostLime owns default installation; pass a path to
 // override the default `<applicationStorageDirectory>/flight-storage.json`.
 // `byteSize` reports the UTF-16 byte cost like the web backend. The optional
 // `subscribeChanges` seam is deliberately absent — a single-process file store
@@ -26,6 +25,7 @@ class LimeStorage {
 }
 
 private class LimeStorageStore {
+  static var persistCounter = 0;
   final path:String;
   var entries:Null<Map<String, String>> = null;
 
@@ -49,14 +49,40 @@ private class LimeStorageStore {
   }
 
   function persist():Bool {
+    final suffix = Std.string(lime.system.System.getTimer()) + '-' + Std.string(persistCounter++);
+    final temp = path + '.tmp-flight-' + suffix;
+    final backup = path + '.bak-flight-' + suffix;
+    var movedOriginal = false;
     return try {
       final out:Dynamic = {};
       for (key => value in load()) Reflect.setField(out, key, value);
       final directory = haxe.io.Path.directory(path);
       if (directory != '' && !sys.FileSystem.exists(directory)) sys.FileSystem.createDirectory(directory);
-      sys.io.File.saveContent(path, haxe.Json.stringify(out));
+      sys.io.File.saveContent(temp, haxe.Json.stringify(out));
+      #if windows
+      if (sys.FileSystem.exists(path)) {
+        sys.FileSystem.rename(path, backup);
+        movedOriginal = true;
+      }
+      #end
+      sys.FileSystem.rename(temp, path);
+      #if windows
+      // Replacement already committed; backup cleanup cannot turn it back
+      // into a failed mutation without desynchronizing memory from disk.
+      if (movedOriginal && sys.FileSystem.exists(backup)) {
+        try sys.FileSystem.deleteFile(backup) catch (_:Dynamic) {}
+      }
+      #end
       true;
-    } catch (_:Dynamic) false;
+    } catch (_:Dynamic) {
+      try if (sys.FileSystem.exists(temp)) sys.FileSystem.deleteFile(temp) catch (_:Dynamic) {}
+      #if windows
+      if (movedOriginal && !sys.FileSystem.exists(path)) {
+        try sys.FileSystem.rename(backup, path) catch (_:Dynamic) {}
+      }
+      #end
+      false;
+    };
   }
 
   public function get(key:String):Null<String> {
@@ -64,18 +90,31 @@ private class LimeStorageStore {
   }
 
   public function set(key:String, value:String):Bool {
-    load().set(key, value);
-    return persist();
+    final values = load();
+    final existed = values.exists(key);
+    final previous = values.get(key);
+    values.set(key, value);
+    if (persist()) return true;
+    if (existed) values.set(key, previous) else values.remove(key);
+    return false;
   }
 
   public function remove(key:String):Bool {
-    load().remove(key);
-    return persist();
+    final values = load();
+    if (!values.exists(key)) return true;
+    final previous = values.get(key);
+    values.remove(key);
+    if (persist()) return true;
+    values.set(key, previous);
+    return false;
   }
 
   public function clear():Bool {
+    final previous = entries == null ? copy(load()) : copy(entries);
     entries = new Map();
-    return persist();
+    if (persist()) return true;
+    entries = previous;
+    return false;
   }
 
   public function keys():Array<String> {
@@ -86,6 +125,12 @@ private class LimeStorageStore {
     var total = 0.0;
     for (key => value in load()) total += (key.length + value.length) * 2;
     return total;
+  }
+
+  static function copy(source:Map<String, String>):Map<String, String> {
+    final result = new Map();
+    for (key => value in source) result.set(key, value);
+    return result;
   }
 }
 #end

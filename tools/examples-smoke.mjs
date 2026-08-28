@@ -26,6 +26,8 @@ const targets = targetArg === 'all' ? ['neko', 'html5', 'linux'] : targetArg.spl
 const filter = opt('filter');
 const modes = opt('modes', 'gl,cairo').split(',');
 const resume = flag('resume');
+const haxeVersion = JSON.parse(readFileSync(path.join(repo, '.haxerc'), 'utf8')).version;
+const localHaxe = path.join(repo, '.haxe', haxeVersion);
 
 // Examples that only implement the GL path (no cairo branch).
 const GL_ONLY = new Set(['scene3d', 'skeleton']);
@@ -44,7 +46,11 @@ const examples = readdirSync(path.join(repo, 'examples'), { withFileTypes: true 
 const env = {
   ...process.env,
   HAXELIB_PATH: path.join(repo, '.haxelib'),
-  PATH: `${path.join(repo, 'node_modules', '.bin')}:${process.env.PATH}`,
+  HAXE_STD_PATH: path.join(localHaxe, 'std'),
+  // Lime invokes haxe/haxelib recursively. Prefer the installed repository
+  // toolchain to Lix's node_modules shims so nested example builds resolve the
+  // same local Haxelib repository as the top-level command.
+  PATH: `${localHaxe}:${path.join(repo, 'node_modules', '.bin')}:${process.env.PATH}`,
 };
 
 function sh(command, timeoutSeconds) {

@@ -1,7 +1,7 @@
 // Line-by-line Haxe/Lime port of the upstream `video` example (`app.ts`), written directly against
 // the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
-// lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
+// lifecycle, and Flight's Lime host capabilities are enabled with `HostLime.enableHostLime(this)`.
 //
 // Upstream has two source paths. The MediaRecorder/blob pipeline (`generateVideoBlob` +
 // `loadVideoResourceFromBlob` + audio `playVideoResource` channels) needs browser media APIs that no
@@ -11,8 +11,7 @@
 // static capture render, the frames keep animating: each source advances at the playback rate its
 // upstream audio channel would have used (0.75/1.0/1.25), so the visible result matches the live
 // browser demo — three copies of the clip drifting apart in time.
-import flight.App;
-import flight.hostLime.LimeApp;
+import flight.hostLime.HostLime;
 import flight.Sdk.*;
 import flight.types.DisplayObject;
 import flight.types.Sprite;
@@ -48,7 +47,7 @@ class Main extends Application {
 
   // Lime: window/GL are ready. Wire the Flight Lime backend, set up the renderer, build the scene.
   override public function onWindowCreate():Void {
-    App.setAppBackend(LimeApp.createLimeAppBackend(this));
+    HostLime.enableHostLime(this);
     switch (window.context.type) {
       case CAIRO:
         usingCairo = true;

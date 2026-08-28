@@ -18,6 +18,9 @@ package flight.hostLime;
 #if lime
 import Math as HxMath;
 import flight._internal._Float32Array;
+#if !js
+import flight._internal._LimeTypedArray;
+#end
 import flight._internal._Promise;
 import flight._internal._Runtime;
 import flight._internal.backend.NativeAudioBuffer;
@@ -132,14 +135,23 @@ private class LimeAudioContext implements AudioContext {
     activeSources.remove(source);
   }
 
-  // lime.utils.ArrayBuffer IS haxe.io.Bytes on native targets; a typed-array
-  // view carries its buffer in `.buffer`.
+  // Lime typed-array views can start part-way through a shared byte buffer;
+  // preserve the exact view rather than decoding unrelated prefix/suffix data.
   static function toBytes(data:Dynamic):Null<haxe.io.Bytes> {
     if (data == null) return null;
     if (Std.isOfType(data, haxe.io.Bytes)) return cast data;
+    if (Std.isOfType(data, _LimeTypedArray)) return viewToBytes(cast _LimeTypedArray.unwrap(data));
+    if (Std.isOfType(data, lime.utils.ArrayBufferView)) return viewToBytes(cast data);
     final inner:Dynamic = _Runtime.field(data, 'buffer');
     if (inner != null && Std.isOfType(inner, haxe.io.Bytes)) return cast inner;
     return null;
+  }
+
+  static function viewToBytes(view:lime.utils.ArrayBufferView):haxe.io.Bytes {
+    final bytes:haxe.io.Bytes = cast view.buffer;
+    final offset = view.byteOffset;
+    final length = view.byteLength;
+    return offset == 0 && length == bytes.length ? bytes : bytes.sub(offset, length);
   }
 
   // Decoded PCM (8/16/32-bit interleaved) to the portable Float32 channel form
@@ -260,8 +272,10 @@ private class LimeAudioBufferSourceNode extends LimeAudioNode implements AudioBu
     if (started || buffer == null) return;
     started = true;
     final limeBuffer = encodeBuffer(buffer);
+    // Lime 8.3.2 documents offset as samples, but its native, HTML5, and Flash
+    // backends all add it to millisecond positions. Match the pinned runtime.
     final offsetMs = offset == null ? 0 : Std.int(offset * 1000);
-    final lengthMs:Null<Int> = duration == null ? null : offsetMs + Std.int(duration * 1000);
+    final lengthMs:Null<Int> = duration == null ? null : Std.int(duration * 1000);
     // 0x3FFFFFFF loops stands in for Web Audio's unbounded `loop = true`.
     source = new lime.media.AudioSource(limeBuffer, offsetMs, lengthMs, loop ? 0x3FFFFFFF : 0);
     source.onComplete.add(handleComplete);

@@ -1,14 +1,13 @@
 // Line-by-line Haxe/Lime port of the upstream `platformer` example (`app.ts`), written directly against
 // the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
-// lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
+// lifecycle, and Flight's Lime host capabilities are enabled with `HostLime.enableHostLime(this)`.
 // Every statement of the upstream program is otherwise translated faithfully.
-import flight.App;
-import flight.hostLime.LimeApp;
+import flight.hostLime.HostLime;
 import flight.Sdk.*;
 import flight.types.Camera2D;
-import flight.types.Collision.CollisionAabb;
-import flight.types.Collision.CollisionManifold;
+import flight.types.CollisionAabb2D as CollisionAabb;
+import flight.types.CollisionManifold2D as CollisionManifold;
 import flight.types.DisplayObject;
 import flight.types.TextLabel;
 import flight.types.Matrix;
@@ -81,7 +80,7 @@ class Main extends Application {
 
   // Lime: window/GL are ready. Wire the Flight Lime backend, set up the GL renderer, build the scene.
   override public function onWindowCreate():Void {
-    App.setAppBackend(LimeApp.createLimeAppBackend(this));
+    HostLime.enableHostLime(this);
     trace('window context type: ' + window.context.type);
     switch (window.context.type) {
       case CAIRO:
@@ -187,7 +186,7 @@ class Main extends Application {
     invalidateNodeLocalTransform(gameOverLabel);
     addNodeChild(uiContainer, gameOverLabel);
 
-    manifold = createCollisionManifold();
+    manifold = createCollisionManifold2D();
 
     playerAabb = {minX: 0, minY: 0, maxX: 0, maxY: 0};
     platformAabb = {minX: 0, minY: 0, maxX: 0, maxY: 0};
@@ -286,7 +285,7 @@ class Main extends Application {
       platformAabb.maxX = plat.x + plat.width;
       platformAabb.maxY = plat.y + plat.height;
 
-      if (testAabbAabbCollision(playerAabb, platformAabb, manifold)) {
+      if (testAabbAabbCollision2D(playerAabb, platformAabb, manifold)) {
         playerX += manifold.normalX * manifold.depth;
         playerY += manifold.normalY * manifold.depth;
 

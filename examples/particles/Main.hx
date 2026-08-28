@@ -1,11 +1,10 @@
 // Line-by-line Haxe/Lime port of the upstream `particles` example (`app.ts`), written directly against
 // the generated Flight Haxe surface (`flight.*`). It is a standalone `lime.app.Application`: the
 // browser `./render` module and `requestAnimationFrame` loop are replaced by Lime's window/render
-// lifecycle, and the Flight app backend is wired with `App.setAppBackend(createLimeAppBackend(this))`.
+// lifecycle, and Flight's Lime host capabilities are enabled with `HostLime.enableHostLime(this)`.
 // Every statement of the upstream program is otherwise translated faithfully. The procedural
 // Canvas-2D texture painting is replaced by a minimal stub that keeps the SDK call sites intact.
-import flight.App;
-import flight.hostLime.LimeApp;
+import flight.hostLime.HostLime;
 import flight.Sdk.*;
 import flight.types.ColorKeyframe;
 import flight.types.DisplayObject;
@@ -60,7 +59,7 @@ class Main extends Application {
 
   // Lime: window/GL are ready. Wire the Flight Lime backend, set up the GL renderer, build the scene.
   override public function onWindowCreate():Void {
-    App.setAppBackend(LimeApp.createLimeAppBackend(this));
+    HostLime.enableHostLime(this);
     trace('window context type: ' + window.context.type);
     switch (window.context.type) {
       case CAIRO:
@@ -111,7 +110,7 @@ class Main extends Application {
       [1.0, 150, 0, 0, 0],
     ]);
 
-    final fireAtlas = createTextureAtlas({image: sparkImage});
+    final fireAtlas = createTextureAtlasFromImageResource(sparkImage);
     addTextureAtlasRegion(fireAtlas, 0, 0, 16, 16);
 
     // Procedural snowflake texture: soft white radial glow.
@@ -122,7 +121,7 @@ class Main extends Application {
       [1.0, 140, 180, 255, 0],
     ]);
 
-    final snowAtlas = createTextureAtlas({image: snowImage});
+    final snowAtlas = createTextureAtlasFromImageResource(snowImage);
     addTextureAtlasRegion(snowAtlas, 0, 0, 12, 12);
 
     // Fire emitter: additive glow, follows mouse, world-space trail.

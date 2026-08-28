@@ -30,7 +30,20 @@ The qualified form is `flight.Geometry.createVector2()`. Function names remain u
 
 ## Lime host
 
-`flight.hostLime.LimeApp` provides the optional Lime application backend. A Lime application explicitly installs it with `flight.App.setAppBackend(LimeApp.createLimeAppBackend(this))`, matching the factory-based Capacitor, Tauri, and Electron hosts. The adapter does not own the Lime application lifecycle or renderer. It is compiled only when Lime's `lime` define is active, so the base Flight library does not require Lime. The adapter still needs verification against an installed Lime toolchain.
+Enable the optional Lime host after Lime creates its first window:
+
+```haxe
+import flight.hostLime.HostLime;
+
+override function onWindowCreate():Void {
+  HostLime.enableHostLime(this);
+  // Create the GL/Cairo surface and Flight render state here.
+}
+```
+
+The enabler is idempotent for one application and installs through Flight's host layer, preserving `custom > host > sentinel` precedence. It currently covers application identity and lifecycle, the frame loop, text clipboard, native file dialogs, platform and display metadata, conservative haptics, filesystem, and persistent storage. GL surfaces, native audio contexts, cursor mapping, and font registration remain explicit per-window/per-context factories.
+
+The adapter is compiled only with Lime's `lime` define, so base Flight does not depend on Lime. Its maintained smoke test compiles and executes against pinned Lime 8.3.2. Native HTTP exists but is not installed by the umbrella because Flight's Net contract does not yet have a host-layer slot. The detailed support and design-gap matrix is in [agents/host-lime-maturity.md](agents/host-lime-maturity.md).
 
 ## Repository setup
 

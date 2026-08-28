@@ -1,12 +1,11 @@
 // Line-by-line Haxe/Lime port of the upstream `skeleton` example (`app.ts` + `render.webgl.ts`),
 // written directly against the generated Flight Haxe surface (`flight.*`). It is a standalone
 // `lime.app.Application`: the browser `./render` module and `requestAnimationFrame` loop are replaced
-// by Lime's window/render lifecycle, and the Flight app backend is wired with
-// `App.setAppBackend(createLimeAppBackend(this))`. This is a 3D example — the render pass drives the
+// by Lime's window/render lifecycle, and Flight's Lime host capabilities are enabled with
+// `HostLime.enableHostLime(this)`. This is a 3D example — the render pass drives the
 // scene-gl forward renderer (`prepareSceneRender` + `drawGlScene`) through a GL render-effect pipeline,
 // faithful to the example's `render.webgl.ts`.
-import flight.App;
-import flight.hostLime.LimeApp;
+import flight.hostLime.HostLime;
 import flight.Sdk.*;
 import flight.types.Camera3D;
 import flight.types.GlRenderEffectPipeline;
@@ -55,7 +54,7 @@ class Main extends Application {
 
   // Lime: window/GL are ready. Wire the Flight Lime backend, set up the GL scene renderer, build the scene.
   override public function onWindowCreate():Void {
-    App.setAppBackend(LimeApp.createLimeAppBackend(this));
+    HostLime.enableHostLime(this);
     switch (window.context.type) {
       case OPENGL, OPENGLES, WEBGL:
       default:

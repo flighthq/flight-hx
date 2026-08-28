@@ -6,7 +6,7 @@ Faithful, **line-by-line** Haxe/Lime ports of every example under [`upstream/exa
 
 Each `Main.hx` is a standalone `lime.app.Application`. Every statement of the upstream `app.ts` is translated faithfully; only the irreducible browser glue is adapted onto Lime's lifecycle:
 
-- The Flight app backend is wired in `onWindowCreate` with `App.setAppBackend(LimeApp.createLimeAppBackend(this))`, followed by the GL render-state setup and renderer registration for the kinds the example draws.
+- Flight's Lime host capabilities are enabled in `onWindowCreate` with `HostLime.enableHostLime(this)`, followed by the GL render-state setup and renderer registration for the kinds the example draws.
 - The upstream `./render` module and `render(root)` become the `render(context)` override; its `scale` becomes `window.scale`.
 - `requestAnimationFrame` + `performance.now()` become the `update(deltaTime)` override.
 - `window` keyboard/pointer listeners become Lime's `onKeyDown`/`onKeyUp`/`onMouseDown`/`onMouseMove`/`onMouseUp`/`onMouseWheel`/`onTextInput` overrides.
