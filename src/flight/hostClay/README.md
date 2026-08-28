@@ -113,6 +113,10 @@ Defines: `-D clay -D clay_native -D clay_sdl -D clay_use_glew -D clay_soloud -D 
 - **New seams** as hostLime grows: screen/platform/lifecycle/haptics, and
   image/glyph via `linc_stb`.
 - **Build integration**: pin clay + linc in `haxe_libraries/` and add a hostClay
-  compile target so it is CI-checked, not verified ad-hoc.
+  compile target so it is CI-checked, not verified ad-hoc. (Attempted: `lix install`
+  of the linc libs works, but pinning clay at a specific commit needs the GitHub
+  API host, which was network-blocked in the sandbox — this needs a host-side
+  network allowance or a tag-based clay pin. Until then the compile is verified
+  with the libs registered via `haxelib dev`.)
 - **Native smoke**: SDL/GLEW link + a Clay window running a Flight scene (the
   gated native-toolchain step).
