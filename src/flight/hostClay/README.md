@@ -80,16 +80,28 @@ Defines: `-D clay -D clay_native -D clay_sdl -D clay_use_glew -D clay_soloud -D 
 
 ## Verification status (honest)
 
-- **Clay API surface used here is verified** against pinned Haxe 4.3.7: a probe
-  importing `clay.Clay`, `clay.Events`, `clay.opengl.GL` and calling
-  `Clay.app.screen*`, `GL.createProgram/useProgram/viewport` typechecks with the
-  linc libs registered.
-- **Flight-facing signatures mirror hostLime** exactly (same `flight.types.*`
-  seam types, same `create*` shape), so they are correct by construction — but
-  they require generated `flight.types.*`, so hostClay compiles under the
-  project's `generate` + `build:haxe` pipeline (add `-lib clay` + the classpaths
-  above), the same constraint hostLime has.
-- **Pending:** Clay HEAD has internal drift (`GLGraphicsDriver` does not satisfy
-  Clay's own `GraphicsDriver` spec) — pin a known-good Clay commit; hostClay does
-  not use Clay's graphics driver, but a full Clay compile needs a clean pin.
-  Native SDL/GLEW link + a window/GL smoke is the remaining gated step.
+- **Compiles in-repo against real generated types.** The whole `flight.hostClay`
+  package typechecks with `-cp src -cp generated` + Clay (pinned `8ae994a`) +
+  `linc_opengl/linc_ogg/linc_stb/linc_timestamp` + `-D clay -D clay_web -D web`,
+  via `--macro include('flight.hostClay')`. Sentinel copies, install calls, and
+  the GL adapter all resolve against the current generated `flight._*` modules.
+- **GL adapter forwards verified** against real `clay.opengl.GL` (names/arities).
+- **Clay pin.** Clay HEAD has internal drift (`GLGraphicsDriver` doesn't satisfy
+  Clay's own `GraphicsDriver` spec, introduced by the `GraphicsBatcher` refactor
+  `c24a8ac`). Pin at its parent `8ae994a`, which compiles clean. hostClay never
+  uses Clay's graphics driver, but a full Clay compile needs the clean pin.
+
+### Remaining to full maturity
+
+- **Deep seam impls** (currently sentinel-copy with `TODO` overrides): native net
+  (haxe.Http), SDL clipboard/cursor, storage persistence + filesystem over sys.io,
+  app focus/paths.
+- **Audio** (`AudioContext` over SoLoud) — not yet adapted.
+- **Complete the GL adapter** method surface by enumerating render-gl's context
+  call sites in the generated `flighthq.renderGl.*` bridges.
+- **New seams** as hostLime grows: screen/platform/lifecycle/haptics, and
+  image/glyph via `linc_stb`.
+- **Build integration**: pin clay + linc in `haxe_libraries/` and add a hostClay
+  compile target so it is CI-checked, not verified ad-hoc.
+- **Native smoke**: SDL/GLEW link + a Clay window running a Flight scene (the
+  gated native-toolchain step).
