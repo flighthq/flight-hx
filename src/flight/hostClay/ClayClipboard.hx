@@ -11,9 +11,10 @@ import flight.types.ClipboardBackend;
 class ClayClipboard {
   /** Allocation entry point, Flight-style: `createClayClipboardBackend()`. */
   public static function createClayClipboardBackend():ClipboardBackend {
-    // TODO(hostClay): readText/writeText over SDL_GetClipboardText/
+    final backend:Dynamic = Reflect.copy((flight._Clipboard._sentinel__clipboard : Dynamic));
+    // TODO(hostClay): override readText/writeText over SDL_GetClipboardText/
     // SDL_SetClipboardText via Clay's runtime; file clipboard stays sentinel.
-    return cast {};
+    return cast backend;
   }
 }
 #end

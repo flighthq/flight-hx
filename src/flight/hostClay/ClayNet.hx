@@ -17,9 +17,16 @@ class ClayNet {
    * churn; the native transport (haxe.Http, porting LimeNet's sentinel-on-failure
    * contract) is filled once hostLime's pattern lands. */
   public static function createClayNetBackend():NetBackend {
-    // TODO(hostClay): native HTTP over haxe.Http; expected failures resolve to
-    // the sentinel response (status 0, ok false) rather than rejecting.
-    return cast {};
+    #if js
+    // Reachable from flight.* via _Net's @:allow(flight) (contract-visibility).
+    return flight._Net.createWebNetBackend();
+    #else
+    // TODO(hostClay): native HTTP over haxe.Http, porting LimeNet's contract —
+    // expected failures resolve to the sentinel response (status 0, ok false)
+    // rather than rejecting. Delegating to the web backend keeps the seam
+    // installable and Flight-side type-correct until then.
+    return flight._Net.createWebNetBackend();
+    #end
   }
 }
 #end

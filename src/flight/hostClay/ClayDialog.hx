@@ -11,9 +11,10 @@ import flight.types.DialogBackend;
 class ClayDialog {
   /** Allocation entry point, Flight-style: `createClayDialogBackend()`. */
   public static function createClayDialogBackend():DialogBackend {
+    final backend:Dynamic = Reflect.copy((flight._Dialog._sentinel__dialog : Dynamic));
     // TODO(hostClay): wire a native dialog provider (e.g. tinyfiledialogs) or
-    // keep upstream's sentinel returns for cancelled/unsupported dialogs.
-    return cast {};
+    // keep the sentinel returns for cancelled/unsupported dialogs.
+    return cast backend;
   }
 }
 #end

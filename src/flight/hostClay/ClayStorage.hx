@@ -12,15 +12,15 @@ class ClayStorage {
   /** Allocation entry point, Flight-style: `createClayStorageBackend()`. */
   public static function createClayStorageBackend(?_path:String):StorageBackend {
     final store = new Map<String, String>();
-    return cast {
-      getItem: function(key:String):Null<String> return store.exists(key) ? store.get(key) : null,
-      setItem: function(key:String, value:String):Bool {
-        store.set(key, value);
-        return true; // TODO(hostClay): persist via Clay IO + report quota like LimeStorage.
-      },
-      removeItem: function(key:String):Void store.remove(key),
-      clear: function():Void store.clear(),
+    final backend:Dynamic = Reflect.copy((flight._Storage._sentinel__storage : Dynamic));
+    backend.getItem = function(key:String):Null<String> return store.exists(key) ? store.get(key) : null;
+    backend.setItem = function(key:String, value:String):Bool {
+      store.set(key, value);
+      return true; // TODO(hostClay): persist via Clay IO + report quota like LimeStorage.
     };
+    backend.removeItem = function(key:String):Void store.remove(key);
+    backend.clear = function():Void store.clear();
+    return cast backend;
   }
 }
 #end

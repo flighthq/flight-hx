@@ -5,9 +5,17 @@ A second Haxe host for Flight, alongside `flight.hostLime`, backed by
 Ceramic). Clay exposes a raw WebGL-shaped `clay.opengl.GL`, so it feeds Flight's
 existing `render-gl` with no new render backend. See
 [`agents/host-strategy.md`](../../../agents/host-strategy.md) for why Clay was
-chosen. This directory is a **skeleton**: the seam surface and the critical GL
-adapter are in place; several subsystem seams are typed stubs marked
-`TODO(hostClay)`.
+chosen.
+
+**Architecture** follows hostLime's matured idiom: each seam adapter copies
+Flight's capability sentinel (`Reflect.copy((flight._<Pkg>._sentinel__<name> : Dynamic))`,
+reachable via `@:allow(flight)`) and overrides what Clay can supply; `HostClay`
+is the aggregator that installs them via `flight._<Pkg>.install<Name>HostBackend`.
+Verified to compile in-repo against real generated `flight.types.*` with Clay
+pinned at `8ae994a`. Adapters exist for app, loop, clipboard, dialog, filesystem,
+storage, plus the GL surface, cursor, and net; deeper Clay implementations and
+the newer seams (screen/platform/lifecycle/haptics, image/glyph via `linc_stb`)
+remain `TODO(hostClay)`.
 
 ## Seam parity with hostLime
 

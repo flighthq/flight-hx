@@ -11,10 +11,10 @@ import flight.types.FileSystemBackend;
 class ClayFileSystem {
   /** Allocation entry point, Flight-style: `createClayFileSystemBackend()`. */
   public static function createClayFileSystemBackend():FileSystemBackend {
-    // TODO(hostClay): implement read/write/atomic-write/symlink over sys.io on
-    // native (the same surface LimeFileSystem provides); return the sentinel
-    // shape upstream expects for unsupported operations off-native.
-    return cast {};
+    final backend:Dynamic = Reflect.copy((flight._FileSystem._sentinel__filesystem : Dynamic));
+    // TODO(hostClay): override read/write/atomic-write/symlink over sys.io on
+    // native (the same surface LimeFileSystem provides); sentinel off-native.
+    return cast backend;
   }
 }
 #end

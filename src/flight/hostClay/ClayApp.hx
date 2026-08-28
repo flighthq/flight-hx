@@ -10,26 +10,21 @@ import flight.types.AppBackend;
 
 /** Maps Flight's AppBackend onto the Clay application singleton.
  *
- * NOTE: Flight's host-adapter factory surface is mid-refactor on this base
- * (the former `createWebAppBackend` seed was removed); `builder` is stabilizing
- * it via hostLime. To stay decoupled from that churn, this backend is built
- * inline rather than seeded from a web default. Once hostLime's migration lands,
- * re-align this to whatever seed/override pattern it settles on. */
+ * Follows hostLime's matured idiom: copy Flight's capability-owned sentinel
+ * backend (so unsupported desktop-shell operations retain their sentinel
+ * behavior) and override the integrations Clay can honestly supply. */
 class ClayApp {
-  /** Creates a Flight application backend backed by `Clay.app`. */
+  /** Creates a backend without installing it (install via HostClay). */
   public static function createClayAppBackend():AppBackend {
-    return cast {
-      getName: function():String {
-        final id = Clay.app.appId;
-        return id == null ? '' : id;
-      },
-      getVersion: function():String return '',
-      quit: function():Void Clay.app.shutdown(),
-      // TODO(hostClay): focus/showApp map onto Clay's window once the per-window
-      // handle is wired; sentinels until then.
-      focus: function():Void {},
-      showApp: function():Bool return false,
+    final backend:Dynamic = Reflect.copy((flight._App._sentinel__app : Dynamic));
+    backend.getName = function():String {
+      final id = Clay.app.appId;
+      return id == null ? '' : id;
     };
+    backend.quit = function():Void Clay.app.shutdown();
+    // TODO(hostClay): focus/getAppPath/getCommandLine map onto Clay's runtime
+    // and sys APIs (parallel to LimeApp); sentinels retained until then.
+    return cast backend;
   }
 }
 #end
