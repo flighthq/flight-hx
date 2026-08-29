@@ -1127,8 +1127,10 @@ class WebGl2Backend {
   public static inline function uniform4fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList,
       ?srcOffset:Null<Float>, ?srcLength:Null<Float>):Void {
     #if (lime && !js)
-    gl.uniform4fv(location, nativeFloats(values), srcOffset == null ? null : Std.int(srcOffset),
-      srcLength == null ? null : Std.int(srcLength));
+    final native = nativeFloats(values);
+    if (srcOffset == null) gl.uniform4fv(location, native);
+    else if (srcLength == null) gl.uniform4fv(location, native, Std.int(srcOffset));
+    else gl.uniform4fv(location, native, Std.int(srcOffset), Std.int(srcLength));
     #elseif js
     if (srcOffset == null) js.Syntax.code('{0}.uniform4fv({1}, {2})', gl, location, values);
     else js.Syntax.code('{0}.uniform4fv({1}, {2}, {3}, {4})', gl, location, values, Std.int(srcOffset),
@@ -1143,8 +1145,9 @@ class WebGl2Backend {
       values:GlFloatList, ?srcOffset:Null<Float>, ?srcLength:Null<Float>):Void {
     #if (lime && !js)
     final native = nativeFloats(values);
-    gl.uniformMatrix3fv(location, transpose, native, srcOffset == null ? null : Std.int(srcOffset),
-      srcLength == null ? null : Std.int(srcLength));
+    if (srcOffset == null) gl.uniformMatrix3fv(location, transpose, native);
+    else if (srcLength == null) gl.uniformMatrix3fv(location, transpose, native, Std.int(srcOffset));
+    else gl.uniformMatrix3fv(location, transpose, native, Std.int(srcOffset), Std.int(srcLength));
     #if flight_gl_trace
     final f32:lime.utils.Float32Array = cast native;
     glTrace('uniformMatrix3fv(' + Std.string(location) + ', len=' + f32.length + ', m0..2=' + f32[0] + ',' + f32[1]
@@ -1164,8 +1167,10 @@ class WebGl2Backend {
   public static inline function uniformMatrix4fv(gl:GlContext, location:Null<GlUniformLocation>, transpose:Bool,
       values:GlFloatList, ?srcOffset:Null<Float>, ?srcLength:Null<Float>):Void {
     #if (lime && !js)
-    gl.uniformMatrix4fv(location, transpose, nativeFloats(values), srcOffset == null ? null : Std.int(srcOffset),
-      srcLength == null ? null : Std.int(srcLength));
+    final native = nativeFloats(values);
+    if (srcOffset == null) gl.uniformMatrix4fv(location, transpose, native);
+    else if (srcLength == null) gl.uniformMatrix4fv(location, transpose, native, Std.int(srcOffset));
+    else gl.uniformMatrix4fv(location, transpose, native, Std.int(srcOffset), Std.int(srcLength));
     #elseif js
     if (srcOffset == null) js.Syntax.code('{0}.uniformMatrix4fv({1}, {2}, {3})', gl, location, transpose, values);
     else js.Syntax.code('{0}.uniformMatrix4fv({1}, {2}, {3}, {4}, {5})', gl, location, transpose, values,
