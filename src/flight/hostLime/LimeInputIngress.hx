@@ -22,9 +22,9 @@ class LimeInputIngress {
   public static function createLimeInputIngressBackend():InputIngressBackend {
     return cast {
       attachPointer: function(source:Window, sink:InputIngressSink, ?options:Dynamic):Void->Void {
-        final onDown = function(x:Float, y:Float, button:Int) if (sink.isEnabled()) sink.pointerDown(cast {x: x, y: y, button: button});
-        final onUp = function(x:Float, y:Float, button:Int) if (sink.isEnabled()) sink.pointerUp(cast {x: x, y: y, button: button});
-        final onMove = function(x:Float, y:Float) if (sink.isEnabled()) sink.pointerMove(cast {x: x, y: y});
+        final onDown = function(x:Float, y:Float, button:Int) if (sink.isEnabled()) sink.pointerDown(pointerData(x, y, button, 1 << button, 1.0));
+        final onUp = function(x:Float, y:Float, button:Int) if (sink.isEnabled()) sink.pointerUp(pointerData(x, y, button, 0, 0.0));
+        final onMove = function(x:Float, y:Float) if (sink.isEnabled()) sink.pointerMove(pointerData(x, y, -1, 0, 0.0));
         source.onMouseDown.add(onDown);
         source.onMouseUp.add(onUp);
         source.onMouseMove.add(onMove);
@@ -43,8 +43,8 @@ class LimeInputIngress {
       attachKeyboard: function(source:Window, sink:InputIngressSink, ?options:Dynamic):Void->Void {
         // TODO(builder review): carry LimeInput's keycode/modifier/shifted-key
         // and text/composition mapping. lime.ui.Window key events + onTextInput.
-        final onKeyDown = function(code:Dynamic, mod:Dynamic) if (sink.isEnabled()) sink.keyDown(cast {keycode: code, mod: mod});
-        final onKeyUp = function(code:Dynamic, mod:Dynamic) if (sink.isEnabled()) sink.keyUp(cast {keycode: code, mod: mod});
+        final onKeyDown = function(code:Dynamic, mod:Dynamic) if (sink.isEnabled()) sink.keyDown(keyData(code, mod, false));
+        final onKeyUp = function(code:Dynamic, mod:Dynamic) if (sink.isEnabled()) sink.keyUp(keyData(code, mod, false));
         source.onKeyDown.add(onKeyDown);
         source.onKeyUp.add(onKeyUp);
         return function():Void { source.onKeyDown.remove(onKeyDown); source.onKeyUp.remove(onKeyUp); };
@@ -56,10 +56,24 @@ class LimeInputIngress {
       },
       attachGamepad: function(source:Dynamic, sink:InputIngressSink, ?options:Dynamic):Void->Void {
         // TODO(builder review): reuse LimeInput.attachLimeGamepadInput's global,
-        // opt-in, standardized-gamepad delivery, re-targeted to the sink.
+        // opt-in, standardized-gamepad delivery (lime.ui.Gamepad.onConnect +
+        // per-pad onButtonDown/Up/onAxisMove), re-targeted to the sink.
         return function():Void {};
       },
     };
   }
+
+  static inline function pointerData(x:Float, y:Float, button:Int, buttons:Int, pressure:Float):Dynamic
+    return cast {
+      x: x, y: y, button: button, buttons: buttons, deltaX: 0.0, deltaY: 0.0,
+      pointerId: 1, pointerType: 'mouse', pressure: pressure, isPrimary: true,
+      width: 1.0, height: 1.0, tiltX: 0.0, tiltY: 0.0,
+      altKey: false, ctrlKey: false, metaKey: false, shiftKey: false,
+    };
+  static inline function keyData(code:Dynamic, mod:Dynamic, repeat:Bool):Dynamic
+    return cast {
+      keyCode: code, code: Std.string(code), key: '', location: 0, modifier: mod, repeat: repeat,
+      altKey: false, ctrlKey: false, metaKey: false, shiftKey: false, capsLock: false, numLock: false,
+    };
 }
 #end

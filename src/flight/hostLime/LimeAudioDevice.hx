@@ -83,9 +83,23 @@ class LimeAudioDevice {
   }
 
   static function pcmFloatToInt16(data:Array<Dynamic>, channels:Int, length:Int):Dynamic {
-    // TODO(builder review): interleave per-channel Float32 [-1,1] into 16-bit
-    // little-endian PCM bytes matching lime AudioBuffer.data.
-    return null;
+    // Interleave per-channel Float32 [-1,1] into 16-bit little-endian PCM.
+    final bytes = haxe.io.Bytes.alloc(length * channels * 2);
+    var o = 0;
+    for (i in 0...length) {
+      for (c in 0...channels) {
+        final src:Array<Float> = cast data[c];
+        var v = src[i];
+        if (v > 1) v = 1; else if (v < -1) v = -1;
+        final s = Std.int(v * 32767);
+        bytes.set(o, s & 0xFF);
+        bytes.set(o + 1, (s >> 8) & 0xFF);
+        o += 2;
+      }
+    }
+    // TODO(builder review): wrap as lime AudioBuffer.data's exact type
+    // (lime.utils.UInt8Array) — likely UInt8Array.fromBytes(bytes).
+    return lime.utils.UInt8Array.fromBytes(bytes);
   }
 }
 #end

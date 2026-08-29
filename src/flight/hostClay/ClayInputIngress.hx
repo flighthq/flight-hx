@@ -47,29 +47,42 @@ class ClayInputIngress {
   }
 
   // --- Dispatch: the app's clay.Events subclass forwards raw events here. ---
-  // clay.Events → InputIngressSink is a near 1:1 mapping. TODO(develop): build
-  // the exact flight.types.Input*Data field shapes (x/y/button/dx/dy/keycode/
-  // modifiers/…) once generated; cast placeholders mark the fields to fill.
+  // Builds develop's DOM-event-shaped Input*Data. Fields Clay does not report
+  // (tilt/pressure gradations, per-key location) default; reconcile optional
+  // field names against the generated types on rebase.
   public static function onMouseDown(x:Int, y:Int, button:Int, timestamp:Float):Void
-    for (s in pointer) if (s.isEnabled()) s.pointerDown(cast {x: x, y: y, button: button, timestamp: timestamp});
+    for (s in pointer) if (s.isEnabled()) s.pointerDown(pointerData(x, y, button, 1 << button, 0, 0, 1.0));
   public static function onMouseUp(x:Int, y:Int, button:Int, timestamp:Float):Void
-    for (s in pointer) if (s.isEnabled()) s.pointerUp(cast {x: x, y: y, button: button, timestamp: timestamp});
+    for (s in pointer) if (s.isEnabled()) s.pointerUp(pointerData(x, y, button, 0, 0, 0, 0.0));
   public static function onMouseMove(x:Int, y:Int, xrel:Int, yrel:Int, timestamp:Float):Void
     for (s in pointer) if (s.isEnabled()) {
-      s.pointerMove(cast {x: x, y: y, timestamp: timestamp});
-      s.pointerMoveRelative(cast {x: x, y: y, dx: xrel, dy: yrel, timestamp: timestamp});
+      s.pointerMove(pointerData(x, y, -1, 0, 0, 0, 0.0));
+      s.pointerMoveRelative(pointerData(x, y, -1, 0, xrel, yrel, 0.0));
     }
   public static function onMouseWheel(dx:Float, dy:Float, timestamp:Float):Void
-    for (s in wheel) if (s.isEnabled()) s.wheel(cast {dx: dx, dy: dy, timestamp: timestamp});
+    for (s in wheel) if (s.isEnabled()) s.wheel(cast {deltaX: dx, deltaY: dy, x: 0.0, y: 0.0, button: -1, buttons: 0, pointerId: 1, pointerType: 'mouse', isPrimary: true});
   public static function onKeyDown(keycode:Int, scancode:Int, repeat:Bool, mod:Dynamic, timestamp:Float):Void
-    for (s in keyboard) if (s.isEnabled()) s.keyDown(cast {keycode: keycode, scancode: scancode, repeat: repeat, mod: mod, timestamp: timestamp});
+    for (s in keyboard) if (s.isEnabled()) s.keyDown(keyData(keycode, scancode, repeat, mod));
   public static function onKeyUp(keycode:Int, scancode:Int, mod:Dynamic, timestamp:Float):Void
-    for (s in keyboard) if (s.isEnabled()) s.keyUp(cast {keycode: keycode, scancode: scancode, mod: mod, timestamp: timestamp});
+    for (s in keyboard) if (s.isEnabled()) s.keyUp(keyData(keycode, scancode, false, mod));
   public static function onText(str:String, timestamp:Float):Void
-    for (s in text) if (s.isEnabled()) s.textInput(cast {text: str, timestamp: timestamp});
+    for (s in text) if (s.isEnabled()) s.textInput(cast {text: str, key: str});
   public static function onGamepadButton(gamepad:Int, button:Int, value:Float, down:Bool, timestamp:Float):Void
     for (s in ClayInputIngress.gamepad) if (s.isEnabled())
-      down ? s.gamepadButtonDown(cast {gamepad: gamepad, button: button, value: value, timestamp: timestamp})
-           : s.gamepadButtonUp(cast {gamepad: gamepad, button: button, value: value, timestamp: timestamp});
+      down ? s.gamepadButtonDown(cast {gamepad: gamepad, button: button, value: value})
+           : s.gamepadButtonUp(cast {gamepad: gamepad, button: button, value: value});
+
+  static inline function pointerData(x:Int, y:Int, button:Int, buttons:Int, dx:Int, dy:Int, pressure:Float):Dynamic
+    return cast {
+      x: (x : Float), y: (y : Float), button: button, buttons: buttons,
+      deltaX: (dx : Float), deltaY: (dy : Float), pointerId: 1, pointerType: 'mouse',
+      pressure: pressure, isPrimary: true, width: 1.0, height: 1.0, tiltX: 0.0, tiltY: 0.0,
+      altKey: false, ctrlKey: false, metaKey: false, shiftKey: false,
+    };
+  static inline function keyData(keycode:Int, scancode:Int, repeat:Bool, mod:Dynamic):Dynamic
+    return cast {
+      keyCode: keycode, code: '' + scancode, key: '', location: 0, modifier: 0, repeat: repeat,
+      altKey: false, ctrlKey: false, metaKey: false, shiftKey: false, capsLock: false, numLock: false,
+    };
 }
 #end

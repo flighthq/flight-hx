@@ -22,11 +22,40 @@ class ClayTextShaper {
     };
   }
 
+  // Cache StbPackedChar advance tables per (fontPath, pixelSize). ASCII range.
+  static final packCache = new Map<String, Array<Dynamic>>();
+
   static function measureViaStb(text:String, format:Dynamic):Dynamic {
-    // TODO(develop): resolve the registered face (ClayFont), sum stb advance
-    // widths at the format's pixel size; return {width, height, ascent, descent}
-    // in the generated TextMetrics shape.
-    return cast {width: 0.0, height: 0.0};
+    final size:Float = numField(format, 'fontSize', 16);
+    final path = fontPathFor(format);
+    if (path == null || text == null) return cast {width: 0.0, height: size, ascent: size * 0.8, descent: size * 0.2};
+    final packed = packedFor(path, size);
+    var width = 0.0;
+    for (i in 0...text.length) {
+      final c = text.charCodeAt(i) - 32; // range starts at space (32)
+      if (packed != null && c >= 0 && c < packed.length) width += numField(packed[c], 'xadvance', 0);
+    }
+    return cast {width: width, height: size, ascent: size * 0.8, descent: size * 0.2};
+  }
+
+  static function packedFor(path:String, size:Float):Array<Dynamic> {
+    final key = path + '@' + size;
+    if (packCache.exists(key)) return packCache.get(key);
+    // stb: pack the printable ASCII range once; StbPackedChar carries xadvance.
+    final packed:Array<Dynamic> = try cast stb.TrueType.pack_font_range(path, 0, size, 32, 95) catch (_:Dynamic) null;
+    packCache.set(key, packed);
+    return packed;
+  }
+
+  static function fontPathFor(format:Dynamic):Null<String> {
+    // TODO(develop): resolve the ClayFont-registered face for `format` to its
+    // on-disk font path (pack_font_range is filename-based).
+    return null;
+  }
+
+  static inline function numField(o:Dynamic, name:String, fallback:Float):Float {
+    final v:Dynamic = flight._internal._Runtime.field(o, name);
+    return v == null ? fallback : (v : Float);
   }
 }
 #end
