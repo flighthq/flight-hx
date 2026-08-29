@@ -118,9 +118,13 @@ class Texture {
     return cast null;
   }
 
-  public static function createVideoTexture(source:VideoResource, ?opts:flight._internal._Partial<TextureLike>):flight.types.Texture {
+  public static function createVideoTexture(source:VideoResource, ?opts:flight._internal._Partial<TextureLike>):Texture2D {
     return cast Facade_Texture_flight__Texture.createVideoTexture(source, opts);
     return cast null;
+  }
+
+  public static function destroyVideoTexture(texture:Texture2D):Void {
+    Facade_Texture_flight__Texture.destroyVideoTexture(texture);
   }
 
   public static function equalsCubeTexture(a:Null<CubeTexture>, b:Null<CubeTexture>):Bool {

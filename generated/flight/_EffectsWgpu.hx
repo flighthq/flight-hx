@@ -802,21 +802,21 @@ class _EffectsWgpu {
     var scanlineIntensity:Float = cast _Runtime.UNDEFINED;
     var vignette:Float = cast _Runtime.UNDEFINED;
     var aberration:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     curvature = _Runtime.coalesce(effect.curvature, function():Dynamic return cast 0.1);
     scanlineIntensity = _Runtime.coalesce(effect.scanlineIntensity, function():Dynamic return cast 0.3);
     vignette = _Runtime.coalesce(effect.vignette, function():Dynamic return cast 0.3);
     aberration = _Runtime.coalesce(effect.aberration, function():Dynamic return cast 0.005);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument373:Dynamic = state; __callArgument373; }), ({ final __callArgument374:Dynamic = source; __callArgument374; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument373:Dynamic = state; __callArgument373; }), ({ final __callArgument374:Dynamic = source; __callArgument374; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument377:Dynamic = state; __callArgument377; }), (cast 'stylization.crt' : String), (cast _EffectsWgpu.CRT_FRAGMENT_WGSL__wgpuCrtEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument379:Dynamic = state; __callArgument379; }), (cast source : WgpuRenderTarget), ({ final __callArgument380:Dynamic = (cast dest : WgpuRenderTarget); __callArgument380; }), ({ final __callArgument381:Dynamic = pipeline; __callArgument381; }), ({ final __callArgument382:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast curvature : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 1.0 : Float), (cast scanlineIntensity : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast vignette : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast aberration : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument382; }));
   }
 
@@ -836,19 +836,19 @@ class _EffectsWgpu {
     var angle:Float = cast _Runtime.UNDEFINED;
     var length:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(effect.angle, function():Dynamic return cast 0.0), HxMath.PI) / 180.0);
     length = _Runtime.coalesce(effect.length, function():Dynamic return cast 8.0);
     samples = _Runtime.coalesce(effect.samples, function():Dynamic return cast 16.0);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument391:Dynamic = state; __callArgument391; }), ({ final __callArgument392:Dynamic = source; __callArgument392; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument391:Dynamic = state; __callArgument391; }), ({ final __callArgument392:Dynamic = source; __callArgument392; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument395:Dynamic = state; __callArgument395; }), (cast 'motion.directionalBlur' : String), (cast _EffectsWgpu.DIRECTIONAL_BLUR_FRAGMENT_WGSL__wgpuDirectionalBlurEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument397:Dynamic = state; __callArgument397; }), (cast source : WgpuRenderTarget), ({ final __callArgument398:Dynamic = (cast dest : WgpuRenderTarget); __callArgument398; }), ({ final __callArgument399:Dynamic = pipeline; __callArgument399; }), ({ final __callArgument400:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast angle : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 1.0 : Float), (cast length : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast samples : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument400; }));
   }
 
@@ -868,19 +868,19 @@ class _EffectsWgpu {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var frequency:Float = cast _Runtime.UNDEFINED;
     var seed:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 8.0);
     frequency = _Runtime.coalesce(_Runtime.field(effect, 'frequency'), function():Dynamic return cast 12.0);
     seed = _Runtime.coalesce(_Runtime.field(effect, 'seed'), function():Dynamic return cast 0.0);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument409:Dynamic = state; __callArgument409; }), ({ final __callArgument410:Dynamic = source; __callArgument410; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument409:Dynamic = state; __callArgument409; }), ({ final __callArgument410:Dynamic = source; __callArgument410; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument413:Dynamic = state; __callArgument413; }), (cast 'lens.displacement' : String), (cast _EffectsWgpu.DISPLACEMENT_FRAGMENT_WGSL__wgpuDisplacementEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument415:Dynamic = state; __callArgument415; }), (cast source : WgpuRenderTarget), ({ final __callArgument416:Dynamic = (cast dest : WgpuRenderTarget); __callArgument416; }), ({ final __callArgument417:Dynamic = pipeline; __callArgument417; }), ({ final __callArgument418:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 1.0 : Float), (cast frequency : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast seed : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument418; }));
   }
 
@@ -898,15 +898,15 @@ class _EffectsWgpu {
   @:keep
   private static function applyDitherEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:DitherEffect):Void {
     var levels:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     levels = _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 4.0);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument427:Dynamic = state; __callArgument427; }), ({ final __callArgument428:Dynamic = source; __callArgument428; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument427:Dynamic = state; __callArgument427; }), ({ final __callArgument428:Dynamic = source; __callArgument428; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument431:Dynamic = state; __callArgument431; }), (cast 'stylization.dither' : String), (cast _EffectsWgpu.DITHER_FRAGMENT_WGSL__wgpuDitherEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument433:Dynamic = state; __callArgument433; }), (cast source : WgpuRenderTarget), ({ final __callArgument434:Dynamic = (cast dest : WgpuRenderTarget); __callArgument434; }), ({ final __callArgument435:Dynamic = pipeline; __callArgument435; }), ({ final __callArgument436:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast HxMath.max(2.0, levels) : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument436; }));
   }
 
@@ -1645,21 +1645,21 @@ class _EffectsWgpu {
     var blockSize:Float = cast _Runtime.UNDEFINED;
     var colorShift:Float = cast _Runtime.UNDEFINED;
     var seed:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 0.5);
     blockSize = _Runtime.coalesce(effect.blockSize, function():Dynamic return cast 24.0);
     colorShift = _Runtime.coalesce(effect.colorShift, function():Dynamic return cast 8.0);
     seed = _Runtime.coalesce(effect.seed, function():Dynamic return cast 0.0);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument765:Dynamic = state; __callArgument765; }), ({ final __callArgument766:Dynamic = source; __callArgument766; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument765:Dynamic = state; __callArgument765; }), ({ final __callArgument766:Dynamic = source; __callArgument766; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument769:Dynamic = state; __callArgument769; }), (cast 'stylization.glitch' : String), (cast _EffectsWgpu.GLITCH_FRAGMENT_WGSL__wgpuGlitchEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument771:Dynamic = state; __callArgument771; }), (cast source : WgpuRenderTarget), ({ final __callArgument772:Dynamic = (cast dest : WgpuRenderTarget); __callArgument772; }), ({ final __callArgument773:Dynamic = pipeline; __callArgument773; }), ({ final __callArgument774:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 1.0 : Float), (cast blockSize : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast colorShift : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast seed : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument774; }));
   }
 
@@ -2102,15 +2102,15 @@ class _EffectsWgpu {
   @:keep
   private static function applyKuwaharaEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:KuwaharaEffect):Void {
     var radius:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 3.0);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1139:Dynamic = state; __callArgument1139; }), ({ final __callArgument1140:Dynamic = source; __callArgument1140; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1139:Dynamic = state; __callArgument1139; }), ({ final __callArgument1140:Dynamic = source; __callArgument1140; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument1143:Dynamic = state; __callArgument1143; }), (cast 'stylization.kuwahara' : String), (cast _EffectsWgpu.KUWAHARA_FRAGMENT_WGSL__wgpuKuwaharaEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument1145:Dynamic = state; __callArgument1145; }), (cast source : WgpuRenderTarget), ({ final __callArgument1146:Dynamic = (cast dest : WgpuRenderTarget); __callArgument1146; }), ({ final __callArgument1147:Dynamic = pipeline; __callArgument1147; }), ({ final __callArgument1148:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast HxMath.max(1.0, radius) : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1148; }));
   }
 
@@ -2274,19 +2274,19 @@ class _EffectsWgpu {
   private static function applyMotionBlurEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, velocityTexture:Null<flight._internal.dom.GPUTexture>, effect:MotionBlurEffect):Void {
     var intensity:Float = cast _Runtime.UNDEFINED;
     var samples:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     var velocitySource:WgpuRenderTarget = cast _Runtime.UNDEFINED;
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
     samples = _Runtime.coalesce(_Runtime.field(effect, 'samples'), function():Dynamic return cast 16.0);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1269:Dynamic = state; __callArgument1269; }), ({ final __callArgument1270:Dynamic = source; __callArgument1270; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1269:Dynamic = state; __callArgument1269; }), ({ final __callArgument1270:Dynamic = source; __callArgument1270; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast _EffectsWgpu.getMotionBlurPipeline__wgpuMotionBlurEffect(({ final __callArgument1273:Dynamic = state; __callArgument1273; })) : WgpuEffectPipeline);
     if ((cast _Runtime.strictEquals(velocityTexture, null) : Bool)) {
       drawWgpuDualSourceEffectPass(({ final __callArgument1275:Dynamic = state; __callArgument1275; }), (cast source : WgpuRenderTarget), (cast source : WgpuRenderTarget), ({ final __callArgument1276:Dynamic = (cast dest : WgpuRenderTarget); __callArgument1276; }), ({ final __callArgument1277:Dynamic = pipeline; __callArgument1277; }), ({ final __callArgument1278:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
         flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
         flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 1.0 : Float), (cast samples : Float));
-        flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-        flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+        flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+        flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
         flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast 0.0 : Float));
       }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1278; }));
       return;
@@ -2295,8 +2295,8 @@ class _EffectsWgpu {
     drawWgpuDualSourceEffectPass(({ final __callArgument1283:Dynamic = state; __callArgument1283; }), (cast source : WgpuRenderTarget), ({ final __callArgument1284:Dynamic = velocitySource; __callArgument1284; }), ({ final __callArgument1285:Dynamic = (cast dest : WgpuRenderTarget); __callArgument1285; }), ({ final __callArgument1286:Dynamic = pipeline; __callArgument1286; }), ({ final __callArgument1287:Dynamic = function(__unused4:flight._internal._Float32Array, __unused5:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused3:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast intensity : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 1.0 : Float), (cast samples : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast 1.0 : Float));
     }, cast ([__unused4] : Array<Dynamic>)); }; __callArgument1287; }));
   }
@@ -2426,15 +2426,15 @@ class _EffectsWgpu {
   @:keep
   private static function applyPixelateEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:PixelateEffect):Void {
     var size:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     size = _Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 8.0);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1387:Dynamic = state; __callArgument1387; }), ({ final __callArgument1388:Dynamic = source; __callArgument1388; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1387:Dynamic = state; __callArgument1387; }), ({ final __callArgument1388:Dynamic = source; __callArgument1388; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument1391:Dynamic = state; __callArgument1391; }), (cast 'stylization.pixelate' : String), (cast _EffectsWgpu.PIXELATE_FRAGMENT_WGSL__wgpuPixelateEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument1393:Dynamic = state; __callArgument1393; }), (cast source : WgpuRenderTarget), ({ final __callArgument1394:Dynamic = (cast dest : WgpuRenderTarget); __callArgument1394; }), ({ final __callArgument1395:Dynamic = pipeline; __callArgument1395; }), ({ final __callArgument1396:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast HxMath.max(1.0, size) : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1396; }));
   }
 
@@ -2825,15 +2825,15 @@ class _EffectsWgpu {
   @:keep
   private static function applySharpenEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SharpenEffect):Void {
     var amount:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.5);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1614:Dynamic = state; __callArgument1614; }), ({ final __callArgument1615:Dynamic = source; __callArgument1615; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1614:Dynamic = state; __callArgument1614; }), ({ final __callArgument1615:Dynamic = source; __callArgument1615; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument1618:Dynamic = state; __callArgument1618; }), (cast 'stylization.sharpen' : String), (cast _EffectsWgpu.SHARPEN_FRAGMENT_WGSL__wgpuSharpenEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument1620:Dynamic = state; __callArgument1620; }), (cast source : WgpuRenderTarget), ({ final __callArgument1621:Dynamic = (cast dest : WgpuRenderTarget); __callArgument1621; }), ({ final __callArgument1622:Dynamic = pipeline; __callArgument1622; }), ({ final __callArgument1623:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast amount : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1623; }));
   }
 
@@ -2904,17 +2904,17 @@ class _EffectsWgpu {
   private static function applySsaoEffectToWgpu(state:WgpuRenderState, source:WgpuRenderTarget, dest:WgpuRenderTarget, effect:SsaoEffect):Void {
     var radius:Float = cast _Runtime.UNDEFINED;
     var intensity:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     radius = _Runtime.coalesce(_Runtime.field(effect, 'radius'), function():Dynamic return cast 1.0);
     intensity = _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 1.0);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1660:Dynamic = state; __callArgument1660; }), ({ final __callArgument1661:Dynamic = source; __callArgument1661; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1660:Dynamic = state; __callArgument1660; }), ({ final __callArgument1661:Dynamic = source; __callArgument1661; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument1664:Dynamic = state; __callArgument1664; }), (cast 'atmospheric.ssao' : String), (cast _EffectsWgpu.SSAO_FRAGMENT_WGSL__wgpuSsaoEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument1666:Dynamic = state; __callArgument1666; }), (cast source : WgpuRenderTarget), ({ final __callArgument1667:Dynamic = (cast dest : WgpuRenderTarget); __callArgument1667; }), ({ final __callArgument1668:Dynamic = pipeline; __callArgument1668; }), ({ final __callArgument1669:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast radius : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 1.0 : Float), (cast intensity : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 3.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1669; }));
   }
 
@@ -2934,19 +2934,19 @@ class _EffectsWgpu {
     var center:Float = cast _Runtime.UNDEFINED;
     var width:Float = cast _Runtime.UNDEFINED;
     var blur:Float = cast _Runtime.UNDEFINED;
-    var resolution:{ var height:Float; var texelsPerLogicalPixel:Float; var width:Float; } = cast _Runtime.UNDEFINED;
+    var resolution:WgpuEffectLogicalResolution__wgpuEffectTexelScale = cast _Runtime.UNDEFINED;
     var pipeline:WgpuEffectPipeline = cast _Runtime.UNDEFINED;
     center = _Runtime.coalesce(effect.center, function():Dynamic return cast 0.5);
     width = _Runtime.coalesce(effect.width, function():Dynamic return cast 0.3);
     blur = _Runtime.coalesce(effect.blur, function():Dynamic return cast 4.0);
-    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1678:Dynamic = state; __callArgument1678; }), ({ final __callArgument1679:Dynamic = source; __callArgument1679; })) : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; });
+    resolution = (cast getWgpuEffectLogicalResolution(({ final __callArgument1678:Dynamic = state; __callArgument1678; }), ({ final __callArgument1679:Dynamic = source; __callArgument1679; })) : WgpuEffectLogicalResolution__wgpuEffectTexelScale);
     pipeline = (cast getWgpuEffectPipeline(({ final __callArgument1682:Dynamic = state; __callArgument1682; }), (cast 'lens.tiltShift' : String), (cast _EffectsWgpu.TILT_SHIFT_FRAGMENT_WGSL__wgpuTiltShiftEffect : String), (cast 'replace' : String)) : WgpuEffectPipeline);
     drawWgpuEffectPass(({ final __callArgument1684:Dynamic = state; __callArgument1684; }), (cast source : WgpuRenderTarget), ({ final __callArgument1685:Dynamic = (cast dest : WgpuRenderTarget); __callArgument1685; }), ({ final __callArgument1686:Dynamic = pipeline; __callArgument1686; }), ({ final __callArgument1687:Dynamic = function(__unused1:flight._internal._Float32Array, __unused2:flight._internal._Int32Array):Void { _Runtime.callValue(function(f32:flight._internal._Float32Array, __unused0:flight._internal._Int32Array):Void {
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 0.0 : Float), (cast center : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 1.0 : Float), (cast width : Float));
       flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 2.0 : Float), (cast blur : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).width : Float));
-      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : { var height:Float; var texelsPerLogicalPixel:Float; var width:Float; }).height : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 4.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).width : Float));
+      flight._internal._StaticIndex.writeFloat32ArrayTyped((cast f32 : flight._internal._Float32Array), (cast 5.0 : Float), (cast (cast resolution : WgpuEffectLogicalResolution__wgpuEffectTexelScale).height : Float));
     }, cast ([__unused1] : Array<Dynamic>)); }; __callArgument1687; }));
   }
 

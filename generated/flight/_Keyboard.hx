@@ -8,10 +8,12 @@ import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight._Types.SoftKeyboardResizeNoneKind;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.Signal;
 import flight.types.SoftKeyboard;
 import flight.types.SoftKeyboardBackend;
 import flight.types.SoftKeyboardInfo;
+import flight.types.SoftKeyboardOperation;
 import flight.types.SoftKeyboardPhase;
 import flight.types.SoftKeyboardResizeMode;
 import flight.types.SoftKeyboardStyleKind;
@@ -161,6 +163,19 @@ class _Keyboard {
 
   @:allow(flight)
   @:keep
+  private static function explainSoftKeyboardOperation(operation:SoftKeyboardOperation):BackendOperationExplanation {
+    if ((cast ((cast !_Runtime.strictEquals(_Keyboard._custom__keyboard, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Keyboard._custom__keyboard, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'custom', operation: operation };
+    }
+    if ((cast ((cast !_Runtime.strictEquals(_Keyboard._host__keyboard, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Keyboard._host__keyboard, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'host', operation: operation };
+    }
+    return cast { implemented: false, layer: 'sentinel', operation: operation };
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
   private static function getSoftKeyboardBackend():SoftKeyboardBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(_Keyboard._custom__keyboard, function():Dynamic return cast _Keyboard._host__keyboard), function():Dynamic return cast _Keyboard._sentinel__keyboard);
     return cast null;
@@ -180,6 +195,13 @@ class _Keyboard {
     var backend:SoftKeyboardBackend = cast _Runtime.UNDEFINED;
     backend = (cast getSoftKeyboardBackend() : SoftKeyboardBackend);
     return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast backend : SoftKeyboardBackend).getResizeMode, cast ([] : Array<Dynamic>)), function():Dynamic return cast SoftKeyboardResizeNoneKind);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasSoftKeyboardOperation(operation:SoftKeyboardOperation):Bool {
+    return cast (cast (cast explainSoftKeyboardOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 

@@ -14,7 +14,7 @@ import type {
   IrWebGlComputedConstantDomain,
   StaticLoweringEmissionCounts,
 } from '../model/ir.ts';
-import { requireHostEndpoint } from '../host-endpoints.ts';
+import { requireHostEndpoint, webGl2ReadUsesContextField } from '../host-endpoints.ts';
 
 type ScalarStaticLoweringEmissionName = Exclude<
   keyof StaticLoweringEmissionCounts,
@@ -568,11 +568,11 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
         `${modifier}class ${safeName(declaration.name)}${generics} {`,
       ];
       for (const field of fields) {
-        lines.push(`  public var ${safeName(field.name)}:${emitType(field.type)};`);
+        lines.push(`  public var ${safeName(field.name)}:${emitValueType(field.type)};`);
       }
       lines.push(
         '',
-        `  public function new(${fields.map((field) => `${safeName(field.name)}:${emitType(field.type)}`).join(', ')}):Void {`,
+        `  public function new(${fields.map((field) => `${safeName(field.name)}:${emitValueType(field.type)}`).join(', ')}):Void {`,
       );
       for (const field of fields) lines.push(`    this.${safeName(field.name)} = ${safeName(field.name)};`);
       lines.push(
@@ -2784,9 +2784,12 @@ function emitExpression(expression: IrExpression): string {
       }
       if (expression.binding === 'WebGl2Backend') {
         if (expression.optional) {
-          throw new Error(`Optional WebGL2 constant access has no typed backend endpoint: ${expression.name}`);
+          throw new Error(`Optional WebGL2 read has no typed backend endpoint: ${expression.name}`);
         }
-        const endpoint = webGl2ConstantEndpoint(expression.name);
+        const endpoint = webGl2ReadEndpoint(expression.name);
+        if (webGl2ReadUsesContextField(expression.name)) {
+          return `flight._internal.backend.WebGl2Backend.${endpoint}(${emitExpression(expression.object)})`;
+        }
         return `flight._internal.backend.WebGl2Backend.contextConstant(${emitExpression(expression.object)}, ${quote(expression.name)}, flight._internal.backend.WebGl2Backend.${endpoint})`;
       }
       if (expression.binding && expression.binding in collectionBindingTypes) {
@@ -3667,6 +3670,12 @@ function emitCheckedCallArgument(
 ): string {
   const emitted = emitExpression(argument);
   const expected = call.directArgumentTypes?.[index];
+  // TypeScript permits a void-returning call to flow through a generic whose
+  // constraint proves void. Haxe cannot use Void as a value, so sequence the
+  // side effect and pass the maintained undefined carrier instead.
+  if (argument.type && isVoidType(argument.type)) {
+    return `({ ${emitted}; _Runtime.UNDEFINED; })`;
+  }
   // JavaScript needs the original undefined sentinel, while static targets
   // need null so a scalar cast cannot turn an omitted argument into 0/false.
   if (call.omittedArguments?.[index]) {
@@ -3845,7 +3854,7 @@ export function emitType(type: IrType): string {
       const members = [
         ...type.extends.filter((parent) => parent.kind !== 'dynamic').map((parent) => `>${emitType(parent)},`),
         ...type.fields.map(
-          (field) => `${field.optional ? '@:optional ' : ''}var ${safeName(field.name)}:${emitType(field.type)};`,
+          (field) => `${field.optional ? '@:optional ' : ''}var ${safeName(field.name)}:${emitValueType(field.type)};`,
         ),
       ];
       return `{ ${members.join(' ')} }`;
@@ -3907,13 +3916,13 @@ function webGl2MethodEndpoint(name: string, argumentCount: number): string {
   return requireHostEndpoint('WebGl2Backend', 'call', endpoint);
 }
 
-function webGl2ConstantEndpoint(name: string): string {
+function webGl2ReadEndpoint(name: string): string {
   return requireHostEndpoint('WebGl2Backend', 'read', name);
 }
 
 function emitWebGl2ComputedConstant(index: IrExpression, domain: IrWebGlComputedConstantDomain): string {
   const cases = domain.values
-    .map((name) => `case ${quote(name)}: flight._internal.backend.WebGl2Backend.${webGl2ConstantEndpoint(name)};`)
+    .map((name) => `case ${quote(name)}: flight._internal.backend.WebGl2Backend.${webGl2ReadEndpoint(name)};`)
     .join(' ');
   return `(switch (${emitExpression(index)}) { ${cases} default: _Runtime.throwValue(${quote(`WebGL2 computed constant is outside the closed ${domain.name} domain: ${currentSourceIdentity}`)}); })`;
 }

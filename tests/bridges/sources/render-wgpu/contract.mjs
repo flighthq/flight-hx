@@ -13,6 +13,7 @@ export * from './wgpuDraw.mjs';
 export * from './wgpuElement.mjs';
 export * from './wgpuExternalTexture.mjs';
 export * from './wgpuFullscreenPass.mjs';
+export * from './wgpuHost.mjs';
 export * from './wgpuMaterialRegistry.mjs';
 export * from './wgpuMipmap.mjs';
 export * from './wgpuRenderState.mjs';

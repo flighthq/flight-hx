@@ -25,6 +25,22 @@ class DynamicObject {
     return [for (name in Reflect.fields(source)) [name, Reflect.field(source, name)]];
   }
 
+  public static inline function create(prototype:Dynamic):Dynamic {
+    #if js
+    return js.Syntax.code('Object.create({0})', prototype);
+    #else
+    return {};
+    #end
+  }
+
+  public static inline function hasOwn(source:Dynamic, name:String):Bool {
+    #if js
+    return js.Syntax.code('Object.prototype.hasOwnProperty.call({0}, {1})', source, name);
+    #else
+    return source != null && Reflect.hasField(source, name);
+    #end
+  }
+
   public static inline function keys(source:Dynamic):Array<String> {
     return Reflect.fields(source);
   }

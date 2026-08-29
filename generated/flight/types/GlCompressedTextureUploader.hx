@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlCompressedTextureUploader = flight._internal.dom.WebGL2RenderingContext->CompressedImage->Null<GlCompressedTextureDecoder>->TextureColorSpace->Bool;
+typedef GlCompressedTextureUploader = GlContext->CompressedImage->Null<GlCompressedTextureDecoder>->TextureColorSpace->Bool;

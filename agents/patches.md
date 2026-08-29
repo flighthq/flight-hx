@@ -89,4 +89,4 @@ Unmatched:    0
 Conflicting:  0
 ```
 
-Each record includes the patch id, target, operation, reason, and source fingerprint. Stale, unmatched, ambiguous, duplicate-id, or conflicting patches make generation and CI fail. The current audit contains one `replaceBody` patch and zero stale, unmatched, or conflicting entries.
+Each record includes the patch id, target, operation, reason, and source fingerprint. Stale, unmatched, ambiguous, duplicate-id, or conflicting patches make generation and CI fail. The current audit contains five `replaceBody` patches and zero stale, unmatched, or conflicting entries.

@@ -17,8 +17,11 @@ import flight.types.RenderCacheRefreshOptions;
 import flight.types.RenderState;
 import flight.types.RenderTargetDescriptor;
 import flight.types.RenderTexture;
+import flight.types.Scene2DKindUsage;
 import flight.types.Scene2DRenderer;
 import flight.types.Scene3DGraphSyncPolicy;
+import flight.types.SceneCoverageCatalog;
+import flight.types.SceneCoverageEntry;
 import flight.types.ShapeRasterizer;
 import flight.types.SpriteRenderer;
 import flight.types.Texture;
@@ -46,8 +49,10 @@ class Scene2DCairo {
   public static inline function enableCairoTextInput():Void { flight.Scene2DCanvas.enableCanvasTextInput(); }
   public static inline function enableCairoTextureResolverGuards(state:CanvasRenderState):Void { flight.Scene2DCanvas.enableCanvasTextureResolverGuards(state); }
   public static inline function explainCairoRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):CanvasRenderTextureExplanation { return flight.Scene2DCanvas.explainCanvasRenderTexture(state, renderTexture); }
+  public static inline function explainCairoScene2DCoverage(out:Array<SceneCoverageEntry>, state:CanvasRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void { flight.Scene2DCanvas.explainCanvasScene2DCoverage(out, state, usage, catalog); }
   public static inline function explainCairoTextureResolution(resolvers:CanvasTextureResolvers, texture:Texture):TextureResolutionExplanation { return flight.Scene2DCanvas.explainCanvasTextureResolution(resolvers, texture); }
   public static inline function getCairoRenderStateTextureResolvers(state:CanvasRenderState):CanvasTextureResolvers { return flight.Scene2DCanvas.getCanvasRenderStateTextureResolvers(state); }
+  public static inline function hasCairoScene2DCoverage(state:CanvasRenderState, usage:Scene2DKindUsage):Bool { return flight.Scene2DCanvas.hasCanvasScene2DCoverage(state, usage); }
   public static inline function refreshCairoRenderCache(cacheState:CanvasRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool { return flight.Scene2DCanvas.refreshCanvasRenderCache(cacheState, cache, source, options); }
   public static inline function registerCairoBitmapTextureResolver(resolvers:CanvasTextureResolvers):Void { flight.Scene2DCanvas.registerCanvasBitmapTextureResolver(resolvers); }
   public static inline function registerCairoImageTextureResolver(resolvers:CanvasTextureResolvers):Void { flight.Scene2DCanvas.registerCanvasImageTextureResolver(resolvers); }

@@ -9,6 +9,7 @@ import {
   hostEndpointUsesDynamicFallback,
   hostPropertyOperation,
   hostReceiverContracts,
+  webGl2ReadUsesContextField,
   webGlComputedConstantDomain,
   type HostEndpointOperation,
 } from '../host-endpoints.ts';
@@ -255,7 +256,9 @@ function backendRuntimeHas(
     return operation === 'call'
       ? haxeStaticFunctionNames(source).has(member)
       : operation === 'read'
-        ? haxeStaticConstantNames(source).has(member)
+        ? webGl2ReadUsesContextField(member)
+          ? haxeStaticFunctionNames(source).has(member)
+          : haxeStaticConstantNames(source).has(member)
         : false;
   }
   const branches = binding === 'Canvas2dBackend' ? explicitCanvasBranches(source) : [source];

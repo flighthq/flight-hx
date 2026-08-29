@@ -2,7 +2,9 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const areColorAdjustmentsEnabled = compiled.flight.Render.areColorAdjustmentsEnabled;
+export const createRaster2DSurface = compiled.flight.Render.createRaster2DSurface;
 export const createRenderCache = compiled.flight.Render.createRenderCache;
+export const destroyRaster2DSurface = compiled.flight.Render.destroyRaster2DSurface;
 export const destroyRenderState = compiled.flight.Render.destroyRenderState;
 export const disableSceneRenderGuards = compiled.flight.Render.disableSceneRenderGuards;
 export const disposeScene2DRender = compiled.flight.Render.disposeScene2DRender;
@@ -10,6 +12,7 @@ export const enableColorAdjustments = compiled.flight.Render.enableColorAdjustme
 export const enableRenderRegistryGuards = compiled.flight.Render.enableRenderRegistryGuards;
 export const enableRenderRegistrySignals = compiled.flight.Render.enableRenderRegistrySignals;
 export const enableSceneRenderGuards = compiled.flight.Render.enableSceneRenderGuards;
+export const explainRaster2DSurfaceProvider = compiled.flight.Render.explainRaster2DSurfaceProvider;
 export const explainRenderRegistryMisses = compiled.flight.Render.explainRenderRegistryMisses;
 export const packScene3DLightBlock = compiled.flight.Render.packScene3DLightBlock;
 export const prepareScene2DRender = compiled.flight.Render.prepareScene2DRender;

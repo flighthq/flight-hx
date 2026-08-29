@@ -5,6 +5,7 @@ const api = compiled.flight._Application;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const attachWindow = api.attachWindow;
 export const attachWindowClose = api.attachWindowClose;
 export const attachWindowDropFile = api.attachWindowDropFile;
 export const attachWindowFocus = api.attachWindowFocus;
@@ -33,16 +34,19 @@ export const disposeApplicationWindow = api.disposeApplicationWindow;
 export const exitApplicationFullscreen = api.exitApplicationFullscreen;
 export const exitApplicationPointerLock = api.exitApplicationPointerLock;
 export const explainWindowBackend = api.explainWindowBackend;
+export const explainWindowOperation = api.explainWindowOperation;
 export const flashWindowFrame = api.flashWindowFrame;
 export const focusWindow = api.focusWindow;
 export const getWindowBackend = api.getWindowBackend;
 export const getWindowBounds = api.getWindowBounds;
 export const getWindowDisplay = api.getWindowDisplay;
+export const hasWindowOperation = api.hasWindowOperation;
 export const hideWindow = api.hideWindow;
 export const installWindowHostBackend = api.installWindowHostBackend;
 export const lockApplicationPointer = api.lockApplicationPointer;
 export const maximizeWindow = api.maximizeWindow;
 export const minimizeWindow = api.minimizeWindow;
+export const notifyWindowClosed = api.notifyWindowClosed;
 export const observeWindowHostResult = api.observeWindowHostResult;
 export const openWindow = api.openWindow;
 export const prepareElementForInput = api.prepareElementForInput;

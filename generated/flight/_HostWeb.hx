@@ -3,15 +3,27 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight.Types.BitmapTextureSourceKind;
 import flight._Accessibility.createWebAccessibilityBackend;
+import flight._Accessibility.hasAccessibilityHostBackend;
 import flight._Accessibility.installAccessibilityHostBackend;
+import flight._Accessibility.resetAccessibilityBackendForTest;
 import flight._App.installAppHostBackend;
 import flight._App.observeAppHostResult;
 import flight._Application.createWebLoopBackend;
 import flight._Application.installLoopHostBackend;
 import flight._Application.installWindowHostBackend;
+import flight._Application.notifyWindowClosed;
 import flight._Application.observeLoopHostResult;
 import flight._Application.observeWindowHostResult;
+import flight._Audio.createWebAudioBackend;
+import flight._Audio.installAudioHostBackend;
+import flight._Audio.observeAudioHostResult;
+import flight._Bitmap.hasBitmapEncodeHostBackend;
+import flight._Bitmap.hasBitmapReadbackHostBackend;
+import flight._Bitmap.installBitmapEncodeHostBackend;
+import flight._Bitmap.installBitmapReadbackHostBackend;
+import flight._Bitmap.observeBitmapEncodeHostResult;
 import flight._Clipboard.createWebClipboardBackend;
 import flight._Clipboard.installClipboardHostBackend;
 import flight._Clipboard.observeClipboardHostResult;
@@ -23,8 +35,10 @@ import flight._Device.installDeviceHostBackend;
 import flight._Dialog.createWebDialogBackend;
 import flight._Dialog.installDialogHostBackend;
 import flight._Dialog.observeDialogHostResult;
+import flight._Entity.createEntity;
 import flight._FileSystem.createWebFileSystemBackend;
 import flight._FileSystem.installFileSystemHostBackend;
+import flight._Font.installFontLoadingHostBackend;
 import flight._Geolocation.createWebGeolocationBackend;
 import flight._Geolocation.installGeolocationHostBackend;
 import flight._Geolocation.observeGeolocationHostResult;
@@ -32,6 +46,7 @@ import flight._GlyphAtlas.installGlyphRasterizerHostBackend;
 import flight._GlyphAtlas.observeGlyphRasterizerHostResult;
 import flight._Haptics.createWebHapticsBackend;
 import flight._Haptics.installHapticsHostBackend;
+import flight._Image.createImageResource;
 import flight._Image.createWebImageBackend;
 import flight._Image.installImageHostBackend;
 import flight._Image.observeImageHostResult;
@@ -39,11 +54,18 @@ import flight._Keyboard.createWebSoftKeyboardBackend;
 import flight._Keyboard.installSoftKeyboardHostBackend;
 import flight._Lifecycle.createWebLifecycleBackend;
 import flight._Lifecycle.installLifecycleHostBackend;
+import flight._Media.createWebAudioDeviceBackend;
+import flight._Media.installAudioDeviceHostBackend;
+import flight._Media.observeAudioDeviceHostResult;
 import flight._MediaSession.createWebMediaSessionBackend;
+import flight._MediaSession.hasMediaSessionHostBackend;
 import flight._MediaSession.installMediaSessionHostBackend;
 import flight._MediaSession.observeMediaSessionHostResult;
+import flight._MediaSession.resetMediaSessionBackendForTest;
+import flight._Menu.hasMenuHostBackend;
 import flight._Menu.installMenuHostBackend;
 import flight._Menu.observeMenuHostResult;
+import flight._Menu.resetMenuBackendForTest;
 import flight._Menu.showWebContextMenu;
 import flight._Notification.createWebNotificationBackend;
 import flight._Notification.installNotificationHostBackend;
@@ -53,10 +75,15 @@ import flight._Permissions.installPermissionHostBackend;
 import flight._Permissions.observePermissionHostResult;
 import flight._Platform.createWebPlatformBackend;
 import flight._Platform.installPlatformHostBackend;
+import flight._Power.hasPowerHostBackend;
 import flight._Power.installPowerHostBackend;
 import flight._Power.observePowerHostResult;
+import flight._Power.resetPowerBackendForTest;
 import flight._Protocol.installProtocolHostBackend;
 import flight._Protocol.observeProtocolHostResult;
+import flight._Render.installRaster2DSurfaceHostProvider;
+import flight._RenderGl.setGlRenderSurfaceProvider;
+import flight._RenderWgpu.setWgpuRenderSurfaceProvider;
 import flight._Screen.createWebScreenBackend;
 import flight._Screen.installScreenHostBackend;
 import flight._Sensors.createWebSensorsBackend;
@@ -71,6 +98,10 @@ import flight._StatusBar.observeStatusBarHostResult;
 import flight._StatusBar.packedRgbaToHexColor;
 import flight._Storage.createWebStorageBackend;
 import flight._Storage.installStorageHostBackend;
+import flight._Types.BitmapTextureSourceKind;
+import flight._Video.hasVideoCapabilityHostBackend;
+import flight._Video.installVideoCapabilityHostBackend;
+import flight._Video.observeVideoCapabilityHostResult;
 import flight._Webcam.createWebWebcamBackend;
 import flight._Webcam.installWebcamHostBackend;
 import flight.types.AccessibilityBackend;
@@ -80,6 +111,16 @@ import flight.types.AppLoginItem;
 import flight.types.AppLoginItemLike;
 import flight.types.AppPathKind;
 import flight.types.ApplicationWindow;
+import flight.types.AudioBackend;
+import flight.types.AudioBufferHandle;
+import flight.types.AudioDeviceBackend;
+import flight.types.AudioDeviceHandle;
+import flight.types.AudioSourceHandle;
+import flight.types.Bitmap;
+import flight.types.BitmapEncodeBackend;
+import flight.types.BitmapReadbackBackend;
+import flight.types.BitmapReadbackMode;
+import flight.types.BitmapReadbackOutcome;
 import flight.types.ClipboardBackend;
 import flight.types.ClipboardBookmark;
 import flight.types.ClipboardWriteItem;
@@ -92,14 +133,17 @@ import flight.types.Cursor;
 import flight.types.CursorBackend;
 import flight.types.DeviceBackend;
 import flight.types.DialogBackend;
+import flight.types.Entity;
 import flight.types.FileDialogHandle;
 import flight.types.FileSystemBackend;
+import flight.types.FontLoadingBackend;
 import flight.types.GeoPosition;
 import flight.types.GeoPositionResult;
 import flight.types.GeolocationBackend;
 import flight.types.GeolocationErrorReason;
 import flight.types.GeolocationPermissionState;
 import flight.types.GeolocationRequestOptions;
+import flight.types.GlRenderSurfaceProvider;
 import flight.types.GlyphMetrics;
 import flight.types.GlyphRasterizeOptions;
 import flight.types.GlyphRasterizedBitmap;
@@ -107,6 +151,7 @@ import flight.types.GlyphRasterizerBackend;
 import flight.types.HapticsBackend;
 import flight.types.Image;
 import flight.types.ImageBackend;
+import flight.types.ImageFormat;
 import flight.types.LifecycleBackend;
 import flight.types.LoopBackend;
 import flight.types.MediaSessionAction;
@@ -119,6 +164,7 @@ import flight.types.MenuBackend;
 import flight.types.MenuItemTemplate;
 import flight.types.MessageDialogOptions;
 import flight.types.MessageDialogResult;
+import flight.types.NativeWindowHandle;
 import flight.types.NotificationAction;
 import flight.types.NotificationBackend;
 import flight.types.NotificationCapabilities;
@@ -139,6 +185,7 @@ import flight.types.PowerStatus;
 import flight.types.PowerThermalState;
 import flight.types.PromptDialogOptions;
 import flight.types.ProtocolBackend;
+import flight.types.Raster2DSurfaceProvider;
 import flight.types.SaveFileDialogOptions;
 import flight.types.ScheduledNotification;
 import flight.types.ScreenBackend;
@@ -158,26 +205,38 @@ import flight.types.StatusBarBackend;
 import flight.types.StatusBarInfo;
 import flight.types.StatusBarStyle;
 import flight.types.StorageBackend;
+import flight.types.VideoCapabilityBackend;
 import flight.types.WebcamBackend;
+import flight.types.WgpuRenderSurfaceProvider;
+import flight.types.WindowAttachmentOwnership;
 import flight.types.WindowBackend;
 import flight.types.WindowBounds;
 import flight.types.WindowOptions;
+
+typedef Mutable__webMediasession<T> = flight._internal._Mapped<flight._internal._Any, flight._internal._IndexedAccess<T, flight._internal._Infer>>;
 
 typedef WebBatteryManager__webPower = { var chargingTime:Float; var dischargingTime:Float; var level:Float; var charging:Bool; @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; };
 
 typedef WebWakeLock__webPower = { var request:String->flight._internal._Promise<WebWakeLockSentinel__webPower>; };
 
-typedef WebWakeLockSentinel__webPower = { @:optional var addEventListener:String->(Void->Void)->Void; @:optional var release:Void->flight._internal._Promise<flight._internal._Nothing>; };
+typedef WebWakeLockSentinel__webPower = { @:optional var addEventListener:String->(Void->Void)->Void; @:optional var removeEventListener:String->(Void->Void)->Void; @:optional var release:Void->flight._internal._Promise<flight._internal._Nothing>; };
+
+typedef WebWindowRecord__webWindow = { var cleanup:Void->Void; var handle:flight._internal.dom.Window; var ownership:WindowAttachmentOwnership; };
 
 @:noCompletion
 class _HostWeb {
   public static function enableHostWeb():Void {
     enableHostWebAccessibility();
+    enableHostWebAudio();
+    enableHostWebAudioDevice();
+    enableHostWebBitmapEncode();
+    enableHostWebBitmapReadback();
     enableHostWebClipboard();
     enableHostWebConnectivity();
     enableHostWebDevice();
     enableHostWebDialog();
     enableHostWebFileSystem();
+    enableHostWebFontLoading();
     enableHostWebGeolocation();
     enableHostWebGlyphRasterizer();
     enableHostWebHaptics();
@@ -189,26 +248,25 @@ class _HostWeb {
     enableHostWebNotification();
     enableHostWebPermission();
     enableHostWebPlatform();
+    enableHostWebRaster2DSurface();
     enableHostWebScreen();
     enableHostWebSensors();
     enableHostWebShare();
     enableHostWebStorage();
+    enableHostWebVideoCapability();
     enableHostWebWebcam();
   }
 
   public static function enableHostWebAccessibility():Void {
-    if ((cast _HostWeb._enabled__webAccessibility : Bool)) { return; }
-    (_HostWeb._enabled__webAccessibility = cast (true : Dynamic));
+    if ((cast (cast hasAccessibilityHostBackend() : Bool) : Bool)) { return; }
     installAccessibilityHostBackend((cast (#if js _Runtime.callValue(createWebAccessibilityBackend, cast ([] : Array<Dynamic>)) #else createWebAccessibilityBackend(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : AccessibilityBackend));
   }
 
   @:allow(flight)
   @:keep
   private static function resetHostWebAccessibilityForTest():Void {
-    (_HostWeb._enabled__webAccessibility = cast (false : Dynamic));
+    resetAccessibilityBackendForTest();
   }
-
-  public static var _enabled__webAccessibility:Bool = false;
 
   public static function enableHostWebApp():Void {
     var _noop:Void->(Void->Void) = cast _Runtime.UNDEFINED;
@@ -367,6 +425,144 @@ class _HostWeb {
 
   public static var _enabled__webApp:Bool = false;
 
+  public static function enableHostWebAudio():Void {
+    var inner:AudioBackend = cast _Runtime.UNDEFINED;
+    var backend:AudioBackend = cast _Runtime.UNDEFINED;
+    if ((cast _HostWeb._enabled__webAudio : Bool)) { return; }
+    (_HostWeb._enabled__webAudio = cast (true : Dynamic));
+    inner = (cast createWebAudioBackend() : AudioBackend);
+    backend = (cast { canPlayType: function(mimeType:String):Bool {
+      var result:Bool = cast _Runtime.UNDEFINED;
+      result = (cast inner : AudioBackend).canPlayType((cast mimeType : String));
+      observeAudioHostResult((cast 'canPlayType' : String), (cast result : Bool));
+      return cast result;
+      return cast _Runtime.UNDEFINED;
+    } });
+    installAudioHostBackend(({ final __callArgument3:Dynamic = backend; __callArgument3; }));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function resetHostWebAudioForTest():Void {
+    (_HostWeb._enabled__webAudio = cast (false : Dynamic));
+  }
+
+  public static var _enabled__webAudio:Bool = false;
+
+  public static function enableHostWebAudioDevice():Void {
+    var inner:{ >AudioDeviceBackend, var getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>; var getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>; var createBuffer:AudioDeviceHandle->Float->Float->Float->Array<flight._internal._Float32Array>->AudioBufferHandle; var createDevice:Float->AudioDeviceHandle; var createSource:AudioDeviceHandle->AudioBufferHandle->AudioSourceHandle; var destroyBuffer:AudioBufferHandle->Void; var destroyDevice:AudioDeviceHandle->Void; var destroySource:AudioSourceHandle->Void; var getDeviceTime:AudioDeviceHandle->Float; var onSourceEnded:AudioSourceHandle->Null<Void->Void>->Void; var resumeDevice:AudioDeviceHandle->Void; var setSourceGain:AudioSourceHandle->Float->Void; var setSourcePlaybackRate:AudioSourceHandle->Float->Void; var startSource:AudioSourceHandle->Float->Void; var stopSource:AudioSourceHandle->Void; } = cast _Runtime.UNDEFINED;
+    var backend:AudioDeviceBackend = cast _Runtime.UNDEFINED;
+    if ((cast _HostWeb._enabled__webAudioDevice : Bool)) { return; }
+    (_HostWeb._enabled__webAudioDevice = cast (true : Dynamic));
+    inner = (cast createWebAudioDeviceBackend() : { >AudioDeviceBackend, var getSourceBufferSourceNode:AudioSourceHandle->Null<flight._internal.dom.AudioBufferSourceNode>; var getSourceGainNode:AudioSourceHandle->Null<flight._internal.dom.GainNode>; var createBuffer:AudioDeviceHandle->Float->Float->Float->Array<flight._internal._Float32Array>->AudioBufferHandle; var createDevice:Float->AudioDeviceHandle; var createSource:AudioDeviceHandle->AudioBufferHandle->AudioSourceHandle; var destroyBuffer:AudioBufferHandle->Void; var destroyDevice:AudioDeviceHandle->Void; var destroySource:AudioSourceHandle->Void; var getDeviceTime:AudioDeviceHandle->Float; var onSourceEnded:AudioSourceHandle->Null<Void->Void>->Void; var resumeDevice:AudioDeviceHandle->Void; var setSourceGain:AudioSourceHandle->Float->Void; var setSourcePlaybackRate:AudioSourceHandle->Float->Void; var startSource:AudioSourceHandle->Float->Void; var stopSource:AudioSourceHandle->Void; });
+    backend = (cast _Runtime.mergeObjects([inner, { createDevice: function(sampleRate:Float):AudioDeviceHandle {
+      try {
+        var result:AudioDeviceHandle = (cast inner : { var createDevice:Float->AudioDeviceHandle; }).createDevice((cast sampleRate : Float));
+        observeAudioDeviceHostResult((cast 'createDevice' : String), (cast true : Bool));
+        return cast result;
+      } catch (__error:Dynamic) {
+        observeAudioDeviceHostResult((cast 'createDevice' : String), (cast false : Bool));
+        _Runtime.throwValue(_Runtime.error('AudioContext creation failed'));
+      }
+      return cast _Runtime.UNDEFINED;
+    } }]));
+    installAudioDeviceHostBackend(({ final __callArgument5:Dynamic = backend; __callArgument5; }));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function resetHostWebAudioDeviceForTest():Void {
+    (_HostWeb._enabled__webAudioDevice = cast (false : Dynamic));
+  }
+
+  public static var _enabled__webAudioDevice:Bool = false;
+
+  public static function enableHostWebBitmapEncode():Void {
+    if ((cast (cast hasBitmapEncodeHostBackend() : Bool) : Bool)) { return; }
+    installBitmapEncodeHostBackend((cast _HostWeb.createWebBitmapEncodeBackend__webBitmapEncode() : BitmapEncodeBackend));
+  }
+
+  public static function createWebBitmapEncodeBackend__webBitmapEncode():BitmapEncodeBackend {
+    return cast { encodeBitmap: function(source:Bitmap, format:ImageFormat, quality:Float):flight._internal._UInt8Array {
+      try {
+        var canvas:flight._internal.dom.HTMLCanvasElement = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
+        flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', source.width);
+        flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', source.height);
+        var imageData:flight._internal.dom.ImageData = _Runtime.construct(_Runtime.field(flight._internal._HostValueLut.get('globalThis'), 'ImageData'), [source.width, source.height]);
+        (cast (cast imageData : flight._internal.dom.ImageData).data : flight._internal._UInt8ClampedArray).set(source.data);
+        flight._internal.backend.Canvas2dBackend.call(flight._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([imageData, 0.0, 0.0] : Array<Dynamic>));
+        var mimeType:String = ((cast _Runtime.strictEquals(format, 'jpeg') : Bool) ? (cast 'image/jpeg' : Dynamic) : (cast 'image/png' : Dynamic));
+        var dataUrl:String = flight._internal.backend.CanvasElementBackend.call(canvas, 'toDataURL', cast ([mimeType, quality] : Array<Dynamic>));
+        var base64:String = _Runtime.slice(dataUrl, _Runtime.addNumbers(_Runtime.callProperty(dataUrl, 'indexOf', cast ([','] : Array<Dynamic>)), 1.0), null);
+        var binary:String = _Runtime.callValue(flight._internal._HostValueLut.get('atob'), cast ([base64] : Array<Dynamic>));
+        var bytes:flight._internal._UInt8Array = new flight._internal._UInt8Array(_Runtime.field(binary, 'length'));
+        {
+          var i:Float = 0.0;
+          while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
+            flight._internal._StaticIndex.writeUint8ArrayTyped((cast bytes : flight._internal._UInt8Array), (cast i : Float), (cast _Runtime.charCodeAt(binary, i) : Float));
+            i++;
+          }
+        }
+        observeBitmapEncodeHostResult((cast 'encodeBitmap' : String), (cast true : Bool));
+        return cast bytes;
+      } catch (error:Dynamic) {
+        observeBitmapEncodeHostResult((cast 'encodeBitmap' : String), (cast false : Bool));
+        _Runtime.throwValue(error);
+      }
+      return cast _Runtime.UNDEFINED;
+    }, supportedFormats: cast (['jpeg', 'png'] : Array<Dynamic>) };
+    return cast null;
+  }
+
+  public static function createWebBitmapReadbackBackend():BitmapReadbackBackend {
+    return cast { readBitmap: function(source:flight._internal._Any, width:Float, height:Float, mode:BitmapReadbackMode):BitmapReadbackOutcome {
+      var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+      var probe:Bool = cast _Runtime.UNDEFINED;
+      var context:Null<flight._internal.dom.CanvasRenderingContext2D> = cast _Runtime.UNDEFINED;
+      var raw:flight._internal.dom.ImageData = cast _Runtime.UNDEFINED;
+      var bitmap:Bitmap = cast _Runtime.UNDEFINED;
+      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return cast { bitmap: null, reason: 'no-canvas' }; }
+      canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
+      probe = _Runtime.strictEquals(mode, 'probe');
+      flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', ((cast probe : Bool) ? (cast 1.0 : Dynamic) : (cast width : Dynamic)));
+      flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', ((cast probe : Bool) ? (cast 1.0 : Dynamic) : (cast height : Dynamic)));
+      context = flight._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
+      if ((cast _Runtime.strictEquals(context, null) : Bool)) { return cast { bitmap: null, reason: 'no-canvas' }; }
+      try {
+        flight._internal.backend.Canvas2dBackend.call(context, 'drawImage', cast ([source, 0.0, 0.0] : Array<Dynamic>));
+      } catch (error:Dynamic) {
+        if ((cast (cast _HostWeb.isExpectedSourceRefusal__webBitmapReadback((cast error : flight._internal._Any)) : Bool) : Bool)) { return cast { bitmap: null, reason: 'tainted-source' }; }
+        _Runtime.throwValue(error);
+      }
+      try {
+        (raw = cast (flight._internal.backend.Canvas2dBackend.call(context, 'getImageData', cast ([0.0, 0.0, ((cast probe : Bool) ? (cast 1.0 : Dynamic) : (cast width : Dynamic)), ((cast probe : Bool) ? (cast 1.0 : Dynamic) : (cast height : Dynamic))] : Array<Dynamic>)) : Dynamic));
+      } catch (error:Dynamic) {
+        if ((cast (cast _HostWeb.isTaintedCanvasRefusal__webBitmapReadback((cast error : flight._internal._Any)) : Bool) : Bool)) { return cast { bitmap: null, reason: 'tainted-source' }; }
+        _Runtime.throwValue(error);
+      }
+      if ((cast probe : Bool)) { return cast { bitmap: null, reason: 'ok' }; }
+      bitmap = (cast createEntity(({ final __callArgument7:Dynamic = { alphaType: 'straight', gamut: (cast raw.colorSpace : String), data: raw.data, format: 'rgba8unorm', height: raw.height, kind: BitmapTextureSourceKind, version: 0.0, width: raw.width }; __callArgument7; })) : { >Entity, var alphaType:String; var gamut:String; var data:flight._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
+      return cast { bitmap: bitmap, reason: 'ok' };
+      return cast _Runtime.UNDEFINED;
+    } };
+    return cast null;
+  }
+
+  public static function enableHostWebBitmapReadback():Void {
+    if ((cast (cast hasBitmapReadbackHostBackend() : Bool) : Bool)) { return; }
+    installBitmapReadbackHostBackend((cast createWebBitmapReadbackBackend() : BitmapReadbackBackend));
+  }
+
+  public static function isExpectedSourceRefusal__webBitmapReadback(error:flight._internal._Any):Bool {
+    return cast _Runtime.orValue(_Runtime.isInstanceOfName(error, 'TypeError'), function():Dynamic return cast _Runtime.andValue(_Runtime.isInstanceOf(error, flight._internal._HostValueLut.get('DOMException')), function():Dynamic return cast _Runtime.orValue(_Runtime.strictEquals((cast error : flight._internal.dom.DOMException).name, 'InvalidStateError'), function():Dynamic return cast _Runtime.strictEquals((cast error : flight._internal.dom.DOMException).name, 'SecurityError'))));
+    return cast null;
+  }
+
+  public static function isTaintedCanvasRefusal__webBitmapReadback(error:flight._internal._Any):Bool {
+    return cast ((cast _Runtime.isInstanceOf(error, flight._internal._HostValueLut.get('DOMException')) : Bool) && (cast _Runtime.strictEquals((cast error : flight._internal.dom.DOMException).name, 'SecurityError') : Bool));
+    return cast null;
+  }
+
   public static function enableHostWebClipboard():Void {
     var inner:ClipboardBackend = cast _Runtime.UNDEFINED;
     var backend:ClipboardBackend = cast _Runtime.UNDEFINED;
@@ -378,8 +574,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var result:String = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).readFormat((cast format : String)), function(__awaitValue3:Dynamic):Dynamic {
-              result = __awaitValue3;
+            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).readFormat((cast format : String)), function(__awaitValue9:Dynamic):Dynamic {
+              result = __awaitValue9;
               observeClipboardHostResult((cast 'readFormat' : String), (cast true : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -399,8 +595,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var result:Bool = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).writeFormat((cast format : String), (cast data : String)), function(__awaitValue4:Dynamic):Dynamic {
-              result = __awaitValue4;
+            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).writeFormat((cast format : String), (cast data : String)), function(__awaitValue10:Dynamic):Dynamic {
+              result = __awaitValue10;
               observeClipboardHostResult((cast 'writeFormat' : String), (cast result : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -428,8 +624,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var result:Bool = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).writeItems((cast items : Dynamic)), function(__awaitValue5:Dynamic):Dynamic {
-              result = __awaitValue5;
+            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).writeItems((cast items : Dynamic)), function(__awaitValue11:Dynamic):Dynamic {
+              result = __awaitValue11;
               observeClipboardHostResult((cast 'writeItems' : String), (cast result : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -449,8 +645,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var result:flight._internal._Record<String, String> = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).readItems(({ final __callArgument7:Dynamic = formats; __callArgument7; })), function(__awaitValue6:Dynamic):Dynamic {
-              result = __awaitValue6;
+            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).readItems(({ final __callArgument13:Dynamic = formats; __callArgument13; })), function(__awaitValue12:Dynamic):Dynamic {
+              result = __awaitValue12;
               observeClipboardHostResult((cast 'readItems' : String), (cast true : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -470,8 +666,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var result:String = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).readText(), function(__awaitValue8:Dynamic):Dynamic {
-              result = __awaitValue8;
+            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).readText(), function(__awaitValue14:Dynamic):Dynamic {
+              result = __awaitValue14;
               observeClipboardHostResult((cast 'readText' : String), (cast true : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -491,8 +687,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var result:Bool = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).writeText((cast text : String)), function(__awaitValue9:Dynamic):Dynamic {
-              result = __awaitValue9;
+            return flight._internal._Async.flatMap((cast inner : ClipboardBackend).writeText((cast text : String)), function(__awaitValue15:Dynamic):Dynamic {
+              result = __awaitValue15;
               observeClipboardHostResult((cast 'writeText' : String), (cast result : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -553,7 +749,7 @@ class _HostWeb {
       }));
     }, writeFiles: function(paths:Array<String>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.resolve((cast inner : ClipboardBackend).writeFiles(({ final __callArgument10:Dynamic = paths; __callArgument10; })));
+        return flight._internal._Async.resolve((cast inner : ClipboardBackend).writeFiles(({ final __callArgument16:Dynamic = paths; __callArgument16; })));
       }));
     }, clear: function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
@@ -563,10 +759,10 @@ class _HostWeb {
       return cast (cast inner : ClipboardBackend).getChangeCount();
       return cast _Runtime.UNDEFINED;
     }, subscribeClipboardChange: function(listener:Void->Void):Void->Void {
-      return cast (cast inner : ClipboardBackend).subscribeClipboardChange(({ final __callArgument11:Dynamic = listener; __callArgument11; }));
+      return cast (cast inner : ClipboardBackend).subscribeClipboardChange(({ final __callArgument17:Dynamic = listener; __callArgument17; }));
       return cast _Runtime.UNDEFINED;
     } });
-    installClipboardHostBackend(({ final __callArgument12:Dynamic = backend; __callArgument12; }));
+    installClipboardHostBackend(({ final __callArgument18:Dynamic = backend; __callArgument18; }));
   }
 
   @:allow(flight)
@@ -585,7 +781,7 @@ class _HostWeb {
     inner = (cast createWebConnectivityBackend() : ConnectivityBackend);
     backend = (cast { getStatus: function(out:ConnectivityStatus):ConnectivityStatus {
       try {
-        var result:ConnectivityStatus = (cast inner : ConnectivityBackend).getStatus(({ final __callArgument14:Dynamic = out; __callArgument14; }));
+        var result:ConnectivityStatus = (cast inner : ConnectivityBackend).getStatus(({ final __callArgument20:Dynamic = out; __callArgument20; }));
         observeConnectivityHostResult((cast 'getStatus' : String), (cast true : Bool));
         return cast result;
       } catch (__error:Dynamic) {
@@ -606,8 +802,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var result:ConnectivityReachability = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : ConnectivityBackend).detectReachability(options, out), function(__awaitValue15:Dynamic):Dynamic {
-              result = __awaitValue15;
+            return flight._internal._Async.flatMap((cast inner : ConnectivityBackend).detectReachability(options, out), function(__awaitValue21:Dynamic):Dynamic {
+              result = __awaitValue21;
               observeConnectivityHostResult((cast 'detectReachability' : String), (cast true : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -626,7 +822,7 @@ class _HostWeb {
       );
     }, subscribe: function(listener:Void->Void):Void->Void {
       try {
-        var unsub:Void->Void = (cast inner : ConnectivityBackend).subscribe(({ final __callArgument16:Dynamic = listener; __callArgument16; }));
+        var unsub:Void->Void = (cast inner : ConnectivityBackend).subscribe(({ final __callArgument22:Dynamic = listener; __callArgument22; }));
         observeConnectivityHostResult((cast 'subscribe' : String), (cast true : Bool));
         return cast unsub;
       } catch (__error:Dynamic) {
@@ -637,7 +833,7 @@ class _HostWeb {
       }
       return cast _Runtime.UNDEFINED;
     } });
-    installConnectivityHostBackend(({ final __callArgument17:Dynamic = backend; __callArgument17; }));
+    installConnectivityHostBackend(({ final __callArgument23:Dynamic = backend; __callArgument23; }));
   }
 
   @:allow(flight)
@@ -678,8 +874,8 @@ class _HostWeb {
     observed = (cast { confirm: function(options:MessageDialogOptions):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var result:Bool = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast base : DialogBackend).confirm(({ final __callArgument20:Dynamic = options; __callArgument20; })), function(__awaitValue19:Dynamic):Dynamic {
-          result = __awaitValue19;
+        return flight._internal._Async.flatMap((cast base : DialogBackend).confirm(({ final __callArgument26:Dynamic = options; __callArgument26; })), function(__awaitValue25:Dynamic):Dynamic {
+          result = __awaitValue25;
           observeDialogHostResult((cast 'confirm' : String), (cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'confirm')), 'function') : Bool)) : Bool));
           return flight._internal._Async.resolve(result);
         });
@@ -687,8 +883,8 @@ class _HostWeb {
     }, message: function(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var result:MessageDialogResult = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast base : DialogBackend).message(({ final __callArgument22:Dynamic = options; __callArgument22; })), function(__awaitValue21:Dynamic):Dynamic {
-          result = __awaitValue21;
+        return flight._internal._Async.flatMap((cast base : DialogBackend).message(({ final __callArgument28:Dynamic = options; __callArgument28; })), function(__awaitValue27:Dynamic):Dynamic {
+          result = __awaitValue27;
           observeDialogHostResult((cast 'message' : String), (cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'alert')), 'function') : Bool)) : Bool));
           return flight._internal._Async.resolve(result);
         });
@@ -696,8 +892,8 @@ class _HostWeb {
     }, openDirectory: function(options:OpenDirectoryDialogOptions):flight._internal._Promise<Array<FileDialogHandle>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var result:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast base : DialogBackend).openDirectory(({ final __callArgument24:Dynamic = options; __callArgument24; })), function(__awaitValue23:Dynamic):Dynamic {
-          result = __awaitValue23;
+        return flight._internal._Async.flatMap((cast base : DialogBackend).openDirectory(({ final __callArgument30:Dynamic = options; __callArgument30; })), function(__awaitValue29:Dynamic):Dynamic {
+          result = __awaitValue29;
           observeDialogHostResult((cast 'openDirectory' : String), (cast ((cast _Runtime.field(result, 'length') : Float) > (cast 0.0 : Float)) : Bool));
           return flight._internal._Async.resolve(result);
         });
@@ -705,8 +901,8 @@ class _HostWeb {
     }, openFile: function(options:OpenFileDialogOptions):flight._internal._Promise<Array<FileDialogHandle>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var result:Array<FileDialogHandle> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast base : DialogBackend).openFile(({ final __callArgument26:Dynamic = options; __callArgument26; })), function(__awaitValue25:Dynamic):Dynamic {
-          result = __awaitValue25;
+        return flight._internal._Async.flatMap((cast base : DialogBackend).openFile(({ final __callArgument32:Dynamic = options; __callArgument32; })), function(__awaitValue31:Dynamic):Dynamic {
+          result = __awaitValue31;
           observeDialogHostResult((cast 'openFile' : String), (cast ((cast _Runtime.field(result, 'length') : Float) > (cast 0.0 : Float)) : Bool));
           return flight._internal._Async.resolve(result);
         });
@@ -714,8 +910,8 @@ class _HostWeb {
     }, prompt: function(options:PromptDialogOptions):flight._internal._Promise<Null<String>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var result:Null<String> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast base : DialogBackend).prompt(({ final __callArgument28:Dynamic = options; __callArgument28; })), function(__awaitValue27:Dynamic):Dynamic {
-          result = __awaitValue27;
+        return flight._internal._Async.flatMap((cast base : DialogBackend).prompt(({ final __callArgument34:Dynamic = options; __callArgument34; })), function(__awaitValue33:Dynamic):Dynamic {
+          result = __awaitValue33;
           observeDialogHostResult((cast 'prompt' : String), (cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'prompt')), 'function') : Bool)) : Bool));
           return flight._internal._Async.resolve(result);
         });
@@ -723,14 +919,14 @@ class _HostWeb {
     }, saveFile: function(options:SaveFileDialogOptions):flight._internal._Promise<Null<FileDialogHandle>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var result:Null<FileDialogHandle> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast base : DialogBackend).saveFile(({ final __callArgument30:Dynamic = options; __callArgument30; })), function(__awaitValue29:Dynamic):Dynamic {
-          result = __awaitValue29;
+        return flight._internal._Async.flatMap((cast base : DialogBackend).saveFile(({ final __callArgument36:Dynamic = options; __callArgument36; })), function(__awaitValue35:Dynamic):Dynamic {
+          result = __awaitValue35;
           observeDialogHostResult((cast 'saveFile' : String), (cast !_Runtime.strictEquals(result, null) : Bool));
           return flight._internal._Async.resolve(result);
         });
       }));
     } });
-    installDialogHostBackend(({ final __callArgument31:Dynamic = observed; __callArgument31; }));
+    installDialogHostBackend(({ final __callArgument37:Dynamic = observed; __callArgument37; }));
   }
 
   @:allow(flight)
@@ -755,6 +951,40 @@ class _HostWeb {
 
   public static var _enabled__webFilesystem:Bool = false;
 
+  public static function createWebFontLoadingBackend():FontLoadingBackend {
+    return cast { addFontFace: function(face:flight._internal.dom.FontFace):Void {
+      (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'fonts') : flight._internal.dom.FontFaceSet).add(face);
+    }, checkFontFace: function(shorthand:String):Bool {
+      return cast (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'fonts') : flight._internal.dom.FontFaceSet).check(shorthand);
+      return cast _Runtime.UNDEFINED;
+    }, loadFontFaces: function(shorthand:String):flight._internal._Promise<Array<flight._internal.dom.FontFace>> {
+      return cast (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'fonts') : flight._internal.dom.FontFaceSet).load(shorthand);
+      return cast _Runtime.UNDEFINED;
+    }, whenReady: function():flight._internal._Promise<flight._internal._Nothing> {
+      return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+        return flight._internal._Async.flatMap((cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'fonts') : flight._internal.dom.FontFaceSet).ready, function(__awaitValue39:Dynamic):Dynamic {
+          __awaitValue39;
+          return flight._internal._Async.resolve(_Runtime.UNDEFINED);
+        });
+      }));
+    } };
+    return cast null;
+  }
+
+  public static function enableHostWebFontLoading():Void {
+    if ((cast _HostWeb._enabled__webFontLoading : Bool)) { return; }
+    (_HostWeb._enabled__webFontLoading = cast (true : Dynamic));
+    installFontLoadingHostBackend((cast createWebFontLoadingBackend() : FontLoadingBackend));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function resetHostWebFontLoadingForTest():Void {
+    (_HostWeb._enabled__webFontLoading = cast (false : Dynamic));
+  }
+
+  public static var _enabled__webFontLoading:Bool = false;
+
   public static function enableHostWebGeolocation():Void {
     var inner:GeolocationBackend = cast _Runtime.UNDEFINED;
     var backend:GeolocationBackend = cast _Runtime.UNDEFINED;
@@ -764,14 +994,14 @@ class _HostWeb {
     backend = (cast { clearWatch: function(id:Float):Void {
       (cast inner : GeolocationBackend).clearWatch((cast id : Float));
     }, getCurrentPosition: function(options:GeolocationRequestOptions):flight._internal._Promise<Null<GeoPosition>> {
-      return cast _Runtime.callProperty((cast inner : GeolocationBackend).getCurrentPosition(({ final __callArgument35:Dynamic = options; __callArgument35; })), 'then', cast ([function(position:Null<GeoPosition>):Null<GeoPosition> {
+      return cast _Runtime.callProperty((cast inner : GeolocationBackend).getCurrentPosition(({ final __callArgument42:Dynamic = options; __callArgument42; })), 'then', cast ([function(position:Null<GeoPosition>):Null<GeoPosition> {
         observeGeolocationHostResult((cast 'getCurrentPosition' : String), (cast !_Runtime.strictEquals(position, null) : Bool));
         return cast position;
         return cast _Runtime.UNDEFINED;
       }] : Array<Dynamic>));
       return cast _Runtime.UNDEFINED;
     }, getCurrentPositionResult: function(options:GeolocationRequestOptions):flight._internal._Promise<GeoPositionResult> {
-      return cast _Runtime.callProperty((cast inner : GeolocationBackend).getCurrentPositionResult(({ final __callArgument38:Dynamic = options; __callArgument38; })), 'then', cast ([function(result:GeoPositionResult):GeoPositionResult {
+      return cast _Runtime.callProperty((cast inner : GeolocationBackend).getCurrentPositionResult(({ final __callArgument45:Dynamic = options; __callArgument45; })), 'then', cast ([function(result:GeoPositionResult):GeoPositionResult {
         observeGeolocationHostResult((cast 'getCurrentPositionResult' : String), (cast !_Runtime.strictEquals(result.position, null) : Bool));
         return cast result;
         return cast _Runtime.UNDEFINED;
@@ -782,8 +1012,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var state:GeolocationPermissionState = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : GeolocationBackend).getPermission(), function(__awaitValue39:Dynamic):Dynamic {
-              state = __awaitValue39;
+            return flight._internal._Async.flatMap((cast inner : GeolocationBackend).getPermission(), function(__awaitValue46:Dynamic):Dynamic {
+              state = __awaitValue46;
               observeGeolocationHostResult((cast 'getPermission' : String), (cast true : Bool));
               return flight._internal._Async.flowReturn(state);
             });
@@ -798,13 +1028,19 @@ class _HostWeb {
           });
         })
       );
+    }, isAvailable: function():Bool {
+      var available:Bool = cast _Runtime.UNDEFINED;
+      available = (cast inner : GeolocationBackend).isAvailable();
+      observeGeolocationHostResult((cast 'isAvailable' : String), (cast available : Bool));
+      return cast available;
+      return cast _Runtime.UNDEFINED;
     }, requestPermission: function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var result:Bool = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : GeolocationBackend).requestPermission(), function(__awaitValue40:Dynamic):Dynamic {
-              result = __awaitValue40;
+            return flight._internal._Async.flatMap((cast inner : GeolocationBackend).requestPermission(), function(__awaitValue47:Dynamic):Dynamic {
+              result = __awaitValue47;
               observeGeolocationHostResult((cast 'requestPermission' : String), (cast result : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -823,10 +1059,10 @@ class _HostWeb {
       return cast (cast inner : GeolocationBackend).subscribePermission((cast listener : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, watchPosition: function(listener:GeoPosition->Void, options:GeolocationRequestOptions, onError:Null<GeolocationErrorReason->Void>):Float {
-      return cast (cast inner : GeolocationBackend).watchPosition((cast listener : Dynamic), ({ final __callArgument41:Dynamic = options; __callArgument41; }), (cast onError : Dynamic));
+      return cast (cast inner : GeolocationBackend).watchPosition((cast listener : Dynamic), ({ final __callArgument48:Dynamic = options; __callArgument48; }), (cast onError : Dynamic));
       return cast _Runtime.UNDEFINED;
     } });
-    installGeolocationHostBackend(({ final __callArgument42:Dynamic = backend; __callArgument42; }));
+    installGeolocationHostBackend(({ final __callArgument49:Dynamic = backend; __callArgument49; }));
   }
 
   @:allow(flight)
@@ -836,6 +1072,35 @@ class _HostWeb {
   }
 
   public static var _enabled__webGeolocation:Bool = false;
+
+  public static var _enabled__webGlRenderSurface:Bool = false;
+
+  public static function createWebGlRenderSurfaceProvider():GlRenderSurfaceProvider {
+    return cast { createRenderSurface: function(width:Float, height:Float, pixelRatio:Float):flight._internal.dom.HTMLCanvasElement {
+      var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+      canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
+      ((cast (cast canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).width = '' + Std.string(width) + 'px');
+      ((cast (cast canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).height = '' + Std.string(height) + 'px');
+      flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', (width * pixelRatio));
+      flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', (height * pixelRatio));
+      return cast canvas;
+      return cast _Runtime.UNDEFINED;
+    } };
+    return cast null;
+  }
+
+  public static function enableHostWebGlRenderSurface():Void {
+    enableHostWebRaster2DSurface();
+    if ((cast _HostWeb._enabled__webGlRenderSurface : Bool)) { return; }
+    (_HostWeb._enabled__webGlRenderSurface = cast (true : Dynamic));
+    setGlRenderSurfaceProvider(({ final __callArgument51:Dynamic = (cast createWebGlRenderSurfaceProvider() : GlRenderSurfaceProvider); __callArgument51; }));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function resetHostWebGlRenderSurfaceForTest():Void {
+    (_HostWeb._enabled__webGlRenderSurface = cast (false : Dynamic));
+  }
 
   @:allow(flight)
   @:keep
@@ -850,7 +1115,7 @@ class _HostWeb {
         observeGlyphRasterizerHostResult((cast 'measureMetrics' : String), (cast false : Bool));
         return cast null;
       }
-      _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument44:Dynamic = context; __callArgument44; }), ({ final __callArgument45:Dynamic = options; __callArgument45; }));
+      _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument53:Dynamic = context; __callArgument53; }), ({ final __callArgument54:Dynamic = options; __callArgument54; }));
       metrics = flight._internal.backend.Canvas2dBackend.call(context, 'measureText', cast (['Hg'] : Array<Dynamic>));
       ascent = (cast metrics : flight._internal.dom.TextMetrics).fontBoundingBoxAscent;
       descent = (cast metrics : flight._internal.dom.TextMetrics).fontBoundingBoxDescent;
@@ -869,7 +1134,7 @@ class _HostWeb {
         return cast null;
       }
       observeGlyphRasterizerHostResult((cast 'rasterize' : String), (cast true : Bool));
-      return cast (cast _HostWeb._rasterizeGlyphOnContext__webGlyphRasterizer(({ final __callArgument48:Dynamic = context; __callArgument48; }), (cast codepoint : Float), ({ final __callArgument49:Dynamic = options; __callArgument49; })) : Null<GlyphRasterizedBitmap>);
+      return cast (cast _HostWeb._rasterizeGlyphOnContext__webGlyphRasterizer(({ final __callArgument57:Dynamic = context; __callArgument57; }), (cast codepoint : Float), ({ final __callArgument58:Dynamic = options; __callArgument58; })) : Null<GlyphRasterizedBitmap>);
       return cast _Runtime.UNDEFINED;
     } };
     return cast null;
@@ -920,7 +1185,7 @@ class _HostWeb {
     var canvas:flight._internal._Union2<flight._internal.dom.HTMLCanvasElement, flight._internal.dom.OffscreenCanvas> = cast _Runtime.UNDEFINED;
     var image:flight._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     text = _Runtime.fromCodePoint(codepoint);
-    _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument52:Dynamic = context; __callArgument52; }), ({ final __callArgument53:Dynamic = options; __callArgument53; }));
+    _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument61:Dynamic = context; __callArgument61; }), ({ final __callArgument62:Dynamic = options; __callArgument62; }));
     flight._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flight._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     metrics = flight._internal.backend.Canvas2dBackend.call(context, 'measureText', cast ([text] : Array<Dynamic>));
@@ -936,7 +1201,7 @@ class _HostWeb {
     canvas = flight._internal.backend.Canvas2dBackend.field(context, 'canvas');
     flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
     flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
-    _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument56:Dynamic = context; __callArgument56; }), ({ final __callArgument57:Dynamic = options; __callArgument57; }));
+    _HostWeb._applyGlyphRasterFont__webGlyphRasterizer(({ final __callArgument65:Dynamic = context; __callArgument65; }), ({ final __callArgument66:Dynamic = options; __callArgument66; }));
     flight._internal.backend.Canvas2dBackend.setField(context, 'textBaseline', 'alphabetic');
     flight._internal.backend.Canvas2dBackend.setField(context, 'textAlign', 'left');
     flight._internal.backend.Canvas2dBackend.call(context, 'clearRect', cast ([0.0, 0.0, width, height] : Array<Dynamic>));
@@ -980,8 +1245,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var result:Image = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : ImageBackend).loadImageFromUrl((cast url : String), ({ final __callArgument61:Dynamic = crossOrigin; __callArgument61; }), ({ final __callArgument62:Dynamic = signal; __callArgument62; })), function(__awaitValue60:Dynamic):Dynamic {
-              result = __awaitValue60;
+            return flight._internal._Async.flatMap((cast inner : ImageBackend).loadImageFromUrl((cast url : String), ({ final __callArgument70:Dynamic = crossOrigin; __callArgument70; }), ({ final __callArgument71:Dynamic = signal; __callArgument71; })), function(__awaitValue69:Dynamic):Dynamic {
+              result = __awaitValue69;
               observeImageHostResult((cast 'loadImageFromUrl' : String), (cast true : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -997,7 +1262,20 @@ class _HostWeb {
         })
       );
     } });
-    installImageHostBackend(({ final __callArgument63:Dynamic = backend; __callArgument63; }));
+    if ((cast !_Runtime.strictEquals((cast inner : ImageBackend).createImageFromBitmap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      ((cast backend : { @:optional var createImageFromBitmap:Null<Bitmap->Image>; }).createImageFromBitmap = (cast function(bitmap:Bitmap):Image {
+        try {
+          var result:Image = (cast inner : ImageBackend).createImageFromBitmap(bitmap);
+          observeImageHostResult((cast 'createImageFromBitmap' : String), (cast true : Bool));
+          return cast result;
+        } catch (error:Dynamic) {
+          observeImageHostResult((cast 'createImageFromBitmap' : String), (cast false : Bool));
+          _Runtime.throwValue(error);
+        }
+        return cast _Runtime.UNDEFINED;
+      }));
+    }
+    installImageHostBackend(({ final __callArgument72:Dynamic = backend; __callArgument72; }));
   }
 
   @:allow(flight)
@@ -1044,7 +1322,7 @@ class _HostWeb {
     inner = (cast createWebLoopBackend() : LoopBackend);
     backend = (cast { requestFrame: function(callback:Float->Void):flight._internal._Any {
       try {
-        var handle:flight._internal._Any = (cast inner : LoopBackend).requestFrame(({ final __callArgument65:Dynamic = callback; __callArgument65; }));
+        var handle:flight._internal._Any = (cast inner : LoopBackend).requestFrame(({ final __callArgument74:Dynamic = callback; __callArgument74; }));
         observeLoopHostResult((cast 'requestFrame' : String), (cast true : Bool));
         return cast handle;
       } catch (__error:Dynamic) {
@@ -1063,7 +1341,7 @@ class _HostWeb {
       return cast (cast inner : LoopBackend).now();
       return cast _Runtime.UNDEFINED;
     } });
-    installLoopHostBackend(({ final __callArgument66:Dynamic = backend; __callArgument66; }));
+    installLoopHostBackend(({ final __callArgument75:Dynamic = backend; __callArgument75; }));
   }
 
   @:allow(flight)
@@ -1076,55 +1354,68 @@ class _HostWeb {
 
   public static function enableHostWebMediaSession():Void {
     var inner:MediaSessionBackend = cast _Runtime.UNDEFINED;
-    var backend:MediaSessionBackend = cast _Runtime.UNDEFINED;
-    if ((cast _HostWeb._enabled__webMediasession : Bool)) { return; }
-    (_HostWeb._enabled__webMediasession = cast (true : Dynamic));
+    var backend:Mutable__webMediasession<MediaSessionBackend> = cast _Runtime.UNDEFINED;
+    if ((cast (cast hasMediaSessionHostBackend() : Bool) : Bool)) { return; }
     inner = (cast createWebMediaSessionBackend() : MediaSessionBackend);
-    backend = (cast { setActionHandler: function(action:MediaSessionAction, handler:Null<MediaSessionActionDetails->Void>):Void {
-      try {
-        (cast inner : MediaSessionBackend).setActionHandler(({ final __callArgument68:Dynamic = action; __callArgument68; }), (cast handler : Dynamic));
-        observeMediaSessionHostResult((cast 'setActionHandler' : String), (cast true : Bool));
-      } catch (__error:Dynamic) {
-        observeMediaSessionHostResult((cast 'setActionHandler' : String), (cast false : Bool));
-      }
-    }, setMetadata: function(metadata:Null<MediaSessionMetadata>):Void {
-      try {
-        (cast inner : MediaSessionBackend).setMetadata((cast metadata : Dynamic));
-        observeMediaSessionHostResult((cast 'setMetadata' : String), (cast true : Bool));
-      } catch (__error:Dynamic) {
-        observeMediaSessionHostResult((cast 'setMetadata' : String), (cast false : Bool));
-      }
-    }, setPlaybackState: function(state:MediaSessionPlaybackState):Void {
-      try {
-        (cast inner : MediaSessionBackend).setPlaybackState(({ final __callArgument69:Dynamic = state; __callArgument69; }));
-        observeMediaSessionHostResult((cast 'setPlaybackState' : String), (cast true : Bool));
-      } catch (__error:Dynamic) {
-        observeMediaSessionHostResult((cast 'setPlaybackState' : String), (cast false : Bool));
-      }
-    }, setPositionState: function(state:Null<MediaSessionPositionState>):Void {
-      try {
-        (cast inner : MediaSessionBackend).setPositionState((cast state : Dynamic));
-        observeMediaSessionHostResult((cast 'setPositionState' : String), (cast true : Bool));
-      } catch (__error:Dynamic) {
-        observeMediaSessionHostResult((cast 'setPositionState' : String), (cast false : Bool));
-      }
-    } });
-    installMediaSessionHostBackend(({ final __callArgument70:Dynamic = backend; __callArgument70; }));
+    backend = (cast {  });
+    if ((cast !_Runtime.strictEquals((cast inner : MediaSessionBackend).setActionHandler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      ((cast backend : { @:optional var setActionHandler:Null<MediaSessionAction->Null<MediaSessionActionDetails->Void>->Void>; }).setActionHandler = (cast function(action:MediaSessionAction, handler:Null<MediaSessionActionDetails->Void>):Void {
+        try {
+          (cast inner : MediaSessionBackend).setActionHandler(action, handler);
+          observeMediaSessionHostResult((cast 'setActionHandler' : String), (cast true : Bool));
+        } catch (__error:Dynamic) {
+          observeMediaSessionHostResult((cast 'setActionHandler' : String), (cast false : Bool));
+        }
+      }));
+    }
+    if ((cast !_Runtime.strictEquals((cast inner : MediaSessionBackend).setMetadata, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      ((cast backend : { @:optional var setMetadata:Null<Null<MediaSessionMetadata>->Void>; }).setMetadata = (cast function(metadata:Null<MediaSessionMetadata>):Void {
+        try {
+          (cast inner : MediaSessionBackend).setMetadata(metadata);
+          observeMediaSessionHostResult((cast 'setMetadata' : String), (cast true : Bool));
+        } catch (__error:Dynamic) {
+          observeMediaSessionHostResult((cast 'setMetadata' : String), (cast false : Bool));
+        }
+      }));
+    }
+    if ((cast !_Runtime.strictEquals((cast inner : MediaSessionBackend).setPlaybackState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      ((cast backend : { @:optional var setPlaybackState:Null<MediaSessionPlaybackState->Void>; }).setPlaybackState = (cast function(state:MediaSessionPlaybackState):Void {
+        try {
+          (cast inner : MediaSessionBackend).setPlaybackState(state);
+          observeMediaSessionHostResult((cast 'setPlaybackState' : String), (cast true : Bool));
+        } catch (__error:Dynamic) {
+          observeMediaSessionHostResult((cast 'setPlaybackState' : String), (cast false : Bool));
+        }
+      }));
+    }
+    if ((cast !_Runtime.strictEquals((cast inner : MediaSessionBackend).setPositionState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      ((cast backend : { @:optional var setPositionState:Null<Null<MediaSessionPositionState>->Void>; }).setPositionState = (cast function(state:Null<MediaSessionPositionState>):Void {
+        try {
+          (cast inner : MediaSessionBackend).setPositionState(state);
+          observeMediaSessionHostResult((cast 'setPositionState' : String), (cast true : Bool));
+        } catch (__error:Dynamic) {
+          observeMediaSessionHostResult((cast 'setPositionState' : String), (cast false : Bool));
+        }
+      }));
+    }
+    if ((cast !_Runtime.strictEquals((cast inner : MediaSessionBackend).destroy, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      ((cast backend : { @:optional var destroy:Null<Void->Void>; }).destroy = (cast function():Void { (cast inner : MediaSessionBackend).destroy(); }));
+    }
+    installMediaSessionHostBackend(({ final __callArgument77:Dynamic = backend; __callArgument77; }));
   }
 
   @:allow(flight)
   @:keep
   private static function resetHostWebMediasessionForTest():Void {
-    (_HostWeb._enabled__webMediasession = cast (false : Dynamic));
+    resetMediaSessionBackendForTest();
   }
-
-  public static var _enabled__webMediasession:Bool = false;
 
   public static function enableHostWebMenu():Void {
     var backend:MenuBackend = cast _Runtime.UNDEFINED;
-    if ((cast _HostWeb._enabled__webMenu : Bool)) { return; }
-    (_HostWeb._enabled__webMenu = cast (true : Dynamic));
-    backend = (cast { popupContextMenu: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
+    if ((cast (cast hasMenuHostBackend() : Bool) : Bool)) { return; }
+    backend = (cast { destroy: function():Void {
+
+    }, popupContextMenu: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
       try {
         var result:flight._internal._Promise<Null<String>> = (cast showWebContextMenu((cast items : Dynamic), (cast x : Float), (cast y : Float)) : flight._internal._Promise<Null<String>>);
         observeMenuHostResult((cast 'popupContextMenu' : String), (cast true : Bool));
@@ -1143,16 +1434,14 @@ class _HostWeb {
       };
       return cast _Runtime.UNDEFINED;
     } });
-    installMenuHostBackend(({ final __callArgument72:Dynamic = backend; __callArgument72; }));
+    installMenuHostBackend(({ final __callArgument79:Dynamic = backend; __callArgument79; }));
   }
 
   @:allow(flight)
   @:keep
   private static function resetHostWebMenuForTest():Void {
-    (_HostWeb._enabled__webMenu = cast (false : Dynamic));
+    resetMenuBackendForTest();
   }
-
-  public static var _enabled__webMenu:Bool = false;
 
   public static function enableHostWebNotification():Void {
     var inner:NotificationBackend = cast _Runtime.UNDEFINED;
@@ -1192,8 +1481,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var id:String = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : NotificationBackend).notify(({ final __callArgument75:Dynamic = request; __callArgument75; })), function(__awaitValue74:Dynamic):Dynamic {
-              id = __awaitValue74;
+            return flight._internal._Async.flatMap((cast inner : NotificationBackend).notify(({ final __callArgument82:Dynamic = request; __callArgument82; })), function(__awaitValue81:Dynamic):Dynamic {
+              id = __awaitValue81;
               observeNotificationHostResult((cast 'notify' : String), (cast !_Runtime.strictEquals(id, '') : Bool));
               return flight._internal._Async.flowReturn(id);
             });
@@ -1213,8 +1502,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var result:NotificationPermission = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast inner : NotificationBackend).requestPermission(), function(__awaitValue76:Dynamic):Dynamic {
-              result = __awaitValue76;
+            return flight._internal._Async.flatMap((cast inner : NotificationBackend).requestPermission(), function(__awaitValue83:Dynamic):Dynamic {
+              result = __awaitValue83;
               observeNotificationHostResult((cast 'requestPermission' : String), (cast !_Runtime.strictEquals(result, 'denied') : Bool));
               return flight._internal._Async.flowReturn(result);
             });
@@ -1231,29 +1520,29 @@ class _HostWeb {
       );
     }, scheduleNotification: function(request:NotificationRequest, schedule:NotificationSchedule):flight._internal._Promise<String> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.resolve((cast inner : NotificationBackend).scheduleNotification(({ final __callArgument77:Dynamic = request; __callArgument77; }), ({ final __callArgument78:Dynamic = schedule; __callArgument78; })));
+        return flight._internal._Async.resolve((cast inner : NotificationBackend).scheduleNotification(({ final __callArgument84:Dynamic = request; __callArgument84; }), ({ final __callArgument85:Dynamic = schedule; __callArgument85; })));
       }));
     }, subscribeAction: function(listener:String->String->Void):Void->Void {
-      return cast (cast inner : NotificationBackend).subscribeAction(({ final __callArgument79:Dynamic = listener; __callArgument79; }));
+      return cast (cast inner : NotificationBackend).subscribeAction(({ final __callArgument86:Dynamic = listener; __callArgument86; }));
       return cast _Runtime.UNDEFINED;
     }, subscribeClick: function(listener:String->Void):Void->Void {
-      return cast (cast inner : NotificationBackend).subscribeClick(({ final __callArgument80:Dynamic = listener; __callArgument80; }));
+      return cast (cast inner : NotificationBackend).subscribeClick(({ final __callArgument87:Dynamic = listener; __callArgument87; }));
       return cast _Runtime.UNDEFINED;
     }, subscribeDismiss: function(listener:String->Void):Void->Void {
-      return cast (cast inner : NotificationBackend).subscribeDismiss(({ final __callArgument81:Dynamic = listener; __callArgument81; }));
+      return cast (cast inner : NotificationBackend).subscribeDismiss(({ final __callArgument88:Dynamic = listener; __callArgument88; }));
       return cast _Runtime.UNDEFINED;
     }, subscribeReply: function(listener:String->String->String->Void):Void->Void {
-      return cast (cast inner : NotificationBackend).subscribeReply(({ final __callArgument82:Dynamic = listener; __callArgument82; }));
+      return cast (cast inner : NotificationBackend).subscribeReply(({ final __callArgument89:Dynamic = listener; __callArgument89; }));
       return cast _Runtime.UNDEFINED;
     }, subscribeShow: function(listener:String->Void):Void->Void {
-      return cast (cast inner : NotificationBackend).subscribeShow(({ final __callArgument83:Dynamic = listener; __callArgument83; }));
+      return cast (cast inner : NotificationBackend).subscribeShow(({ final __callArgument90:Dynamic = listener; __callArgument90; }));
       return cast _Runtime.UNDEFINED;
     }, updateNotification: function(id:String, partial:{ @:optional var title:Null<String>; @:optional var id:Null<String>; @:optional var body:Null<String>; @:optional var icon:Null<String>; @:optional var badge:Null<String>; @:optional var tag:Null<String>; @:optional var silent:Null<Bool>; @:optional var actions:Null<Array<NotificationAction>>; @:optional var dir:Null<String>; @:optional var image:Null<String>; @:optional var lang:Null<String>; @:optional var renotify:Null<Bool>; @:optional var requireInteraction:Null<Bool>; @:optional var timestamp:Null<Float>; @:optional var vibrate:Null<Array<Float>>; @:optional var data:flight._internal._Any; }):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.resolve((cast inner : NotificationBackend).updateNotification((cast id : String), (cast partial : Dynamic)));
       }));
     } });
-    installNotificationHostBackend(({ final __callArgument84:Dynamic = backend; __callArgument84; }));
+    installNotificationHostBackend(({ final __callArgument91:Dynamic = backend; __callArgument91; }));
   }
 
   @:allow(flight)
@@ -1275,8 +1564,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var state:PermissionState = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast raw : PermissionBackend).getState(({ final __callArgument87:Dynamic = name; __callArgument87; })), function(__awaitValue86:Dynamic):Dynamic {
-              state = __awaitValue86;
+            return flight._internal._Async.flatMap((cast raw : PermissionBackend).getState(({ final __callArgument94:Dynamic = name; __callArgument94; })), function(__awaitValue93:Dynamic):Dynamic {
+              state = __awaitValue93;
               observePermissionHostResult((cast 'getState' : String), (cast true : Bool));
               return flight._internal._Async.flowReturn(state);
             });
@@ -1296,8 +1585,8 @@ class _HostWeb {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var state:PermissionState = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast raw : PermissionBackend).request(({ final __callArgument89:Dynamic = name; __callArgument89; })), function(__awaitValue88:Dynamic):Dynamic {
-              state = __awaitValue88;
+            return flight._internal._Async.flatMap((cast raw : PermissionBackend).request(({ final __callArgument96:Dynamic = name; __callArgument96; })), function(__awaitValue95:Dynamic):Dynamic {
+              state = __awaitValue95;
               observePermissionHostResult((cast 'request' : String), (cast true : Bool));
               return flight._internal._Async.flowReturn(state);
             });
@@ -1313,7 +1602,7 @@ class _HostWeb {
         })
       );
     } });
-    installPermissionHostBackend(({ final __callArgument90:Dynamic = observed; __callArgument90; }));
+    installPermissionHostBackend(({ final __callArgument97:Dynamic = observed; __callArgument97; }));
   }
 
   @:allow(flight)
@@ -1340,9 +1629,15 @@ class _HostWeb {
 
   public static function enableHostWebPower():Void {
     var backend:PowerBackend = cast _Runtime.UNDEFINED;
-    if ((cast _HostWeb._enabled__webPower : Bool)) { return; }
-    (_HostWeb._enabled__webPower = cast (true : Dynamic));
-    backend = (cast { getBatteryHealth: function(out:PowerBatteryHealth):Null<PowerBatteryHealth> {
+    if ((cast (cast hasPowerHostBackend() : Bool) : Bool)) { return; }
+    backend = (cast { destroy: function():Void {
+      _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural100 = _HostWeb._wakeLockSentinel__webPower; __structural100 == null ? _Runtime.UNDEFINED : (cast __structural100 : { @:optional var release:Null<Void->flight._internal._Promise<flight._internal._Nothing>>; }).release; }), cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused0:flight._internal._Any):Void {
+
+      }] : Array<Dynamic>));
+      (_HostWeb._wakeLockSentinel__webPower = cast (null : Dynamic));
+      _HostWeb.detachWakeLockReleaseListeners__webPower();
+      _HostWeb.resetCachedBatteryReadings__webPower();
+    }, getBatteryHealth: function(out:PowerBatteryHealth):Null<PowerBatteryHealth> {
       return cast null;
       return cast _Runtime.UNDEFINED;
     }, getStatus: function(out:PowerStatus):PowerStatus {
@@ -1393,7 +1688,7 @@ class _HostWeb {
       if ((cast _Runtime.strictEquals(wakeLock, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
       try {
         if ((cast !(cast enabled : Bool) : Bool)) {
-          _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural93 = _HostWeb._wakeLockSentinel__webPower; __structural93 == null ? _Runtime.UNDEFINED : (cast __structural93 : { @:optional var release:Null<Void->flight._internal._Promise<flight._internal._Nothing>>; }).release; }), cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused0:flight._internal._Any):Void {
+          _Runtime.callOptionalProperty(_Runtime.callOptionalValue(({ final __structural102 = _HostWeb._wakeLockSentinel__webPower; __structural102 == null ? _Runtime.UNDEFINED : (cast __structural102 : { @:optional var release:Null<Void->flight._internal._Promise<flight._internal._Nothing>>; }).release; }), cast ([] : Array<Dynamic>)), 'catch', cast ([function(__unused1:flight._internal._Any):Void {
 
           }] : Array<Dynamic>));
           (_HostWeb._wakeLockSentinel__webPower = cast (null : Dynamic));
@@ -1401,17 +1696,20 @@ class _HostWeb {
           return cast true;
         }
         flight._internal._Async.recover(_Runtime.callProperty((cast wakeLock : { var request:String->flight._internal._Promise<WebWakeLockSentinel__webPower>; }).request((cast 'screen' : String)), 'then', cast ([function(sentinel:WebWakeLockSentinel__webPower):Void {
+          var onRelease:Void->Void = cast _Runtime.UNDEFINED;
           (_HostWeb._wakeLockSentinel__webPower = cast (sentinel : Dynamic));
-          _Runtime.callOptionalValue((cast sentinel : WebWakeLockSentinel__webPower).addEventListener, cast (['release', function():Void {
+          onRelease = (cast function():Void {
             if ((cast ((cast _Runtime.strictEquals(_HostWeb._wakeLockSentinel__webPower, sentinel) : Bool) && (cast !(cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'hidden') : Bool) : Bool)) : Bool)) {
               flight._internal._Async.recover(_Runtime.callProperty((cast wakeLock : { var request:String->flight._internal._Promise<WebWakeLockSentinel__webPower>; }).request((cast 'screen' : String)), 'then', cast ([function(newSentinel:WebWakeLockSentinel__webPower):Void {
                 if ((cast _Runtime.strictEquals(_HostWeb._wakeLockSentinel__webPower, sentinel) : Bool)) { (_HostWeb._wakeLockSentinel__webPower = cast (newSentinel : Dynamic)); }
-              }] : Array<Dynamic>)), function(__unused1:flight._internal._Any):Void {
+              }] : Array<Dynamic>)), function(__unused2:flight._internal._Any):Void {
 
               });
             }
-          }] : Array<Dynamic>));
-        }] : Array<Dynamic>)), function(__unused2:flight._internal._Any):Void {
+          });
+          ((cast _HostWeb._wakeLockReleaseListeners__webPower : flight._internal._Map<WebWakeLockSentinel__webPower, Void->Void>).set(sentinel, (cast onRelease)));
+          _Runtime.callOptionalValue((cast sentinel : WebWakeLockSentinel__webPower).addEventListener, cast (['release', onRelease] : Array<Dynamic>));
+        }] : Array<Dynamic>)), function(__unused3:flight._internal._Any):Void {
 
         });
         observePowerHostResult((cast 'setKeepAwake' : String), (cast true : Bool));
@@ -1470,16 +1768,16 @@ class _HostWeb {
           _Runtime.callOptionalValue((cast m : WebBatteryManager__webPower).addEventListener, cast (['chargingtimechange', onChargingTimeChange] : Array<Dynamic>));
           _Runtime.callOptionalValue((cast m : WebBatteryManager__webPower).addEventListener, cast (['dischargingtimechange', onDischargingTimeChange] : Array<Dynamic>));
           listener();
-        }] : Array<Dynamic>)), function(__unused3:flight._internal._Any):Void {
+        }] : Array<Dynamic>)), function(__unused4:flight._internal._Any):Void {
 
         });
         observePowerHostResult((cast 'subscribe' : String), (cast true : Bool));
         return cast function():Void {
           (cancelled = cast (true : Dynamic));
-          ({ final __optionalOwner95 = manager; if (__optionalOwner95 != null) { final __optionalCall94 = (cast __optionalOwner95 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall94 != null) __optionalCall94('levelchange', onLevelChange); } });
-          ({ final __optionalOwner97 = manager; if (__optionalOwner97 != null) { final __optionalCall96 = (cast __optionalOwner97 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall96 != null) __optionalCall96('chargingchange', onChargingChange); } });
-          ({ final __optionalOwner99 = manager; if (__optionalOwner99 != null) { final __optionalCall98 = (cast __optionalOwner99 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall98 != null) __optionalCall98('chargingtimechange', onChargingTimeChange); } });
-          ({ final __optionalOwner101 = manager; if (__optionalOwner101 != null) { final __optionalCall100 = (cast __optionalOwner101 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall100 != null) __optionalCall100('dischargingtimechange', onDischargingTimeChange); } });
+          ({ final __optionalOwner104 = manager; if (__optionalOwner104 != null) { final __optionalCall103 = (cast __optionalOwner104 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall103 != null) __optionalCall103('levelchange', onLevelChange); } });
+          ({ final __optionalOwner106 = manager; if (__optionalOwner106 != null) { final __optionalCall105 = (cast __optionalOwner106 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall105 != null) __optionalCall105('chargingchange', onChargingChange); } });
+          ({ final __optionalOwner108 = manager; if (__optionalOwner108 != null) { final __optionalCall107 = (cast __optionalOwner108 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall107 != null) __optionalCall107('chargingtimechange', onChargingTimeChange); } });
+          ({ final __optionalOwner110 = manager; if (__optionalOwner110 != null) { final __optionalCall109 = (cast __optionalOwner110 : { @:optional var removeEventListener:Null<String->(Void->Void)->Void>; }).removeEventListener; if (__optionalCall109 != null) __optionalCall109('dischargingtimechange', onDischargingTimeChange); } });
           (manager = cast (null : Dynamic));
         };
       } catch (__error:Dynamic) {
@@ -1540,13 +1838,29 @@ class _HostWeb {
       };
       return cast _Runtime.UNDEFINED;
     } });
-    installPowerHostBackend(({ final __callArgument102:Dynamic = backend; __callArgument102; }));
+    installPowerHostBackend(({ final __callArgument111:Dynamic = backend; __callArgument111; }));
   }
 
   @:allow(flight)
   @:keep
   private static function resetHostWebPowerForTest():Void {
-    (_HostWeb._enabled__webPower = cast (false : Dynamic));
+    resetPowerBackendForTest();
+  }
+
+  public static function detachWakeLockReleaseListeners__webPower():Void {
+    for (__iteration5 in _Runtime.iterable(_HostWeb._wakeLockReleaseListeners__webPower)) {
+      var sentinel:WebWakeLockSentinel__webPower = flight._internal._StaticIndex.readArray(__iteration5, 0.0);
+      var onRelease:Void->Void = flight._internal._StaticIndex.readArray(__iteration5, 1.0);
+      _Runtime.callOptionalValue((cast sentinel : WebWakeLockSentinel__webPower).removeEventListener, cast (['release', onRelease] : Array<Dynamic>));
+    }
+    ((cast _HostWeb._wakeLockReleaseListeners__webPower : flight._internal._Map<WebWakeLockSentinel__webPower, Void->Void>).clear());
+  }
+
+  public static function resetCachedBatteryReadings__webPower():Void {
+    (_HostWeb._cachedCharging__webPower = cast (false : Dynamic));
+    (_HostWeb._cachedChargingTime__webPower = cast (-1.0 : Dynamic));
+    (_HostWeb._cachedDischargingTime__webPower = cast (-1.0 : Dynamic));
+    (_HostWeb._cachedLevel__webPower = cast (-1.0 : Dynamic));
   }
 
   public static var _cachedCharging__webPower:Bool = false;
@@ -1557,9 +1871,9 @@ class _HostWeb {
 
   public static var _cachedLevel__webPower:Float = -1.0;
 
-  public static var _enabled__webPower:Bool = false;
-
   public static var _wakeLockSentinel__webPower:Null<WebWakeLockSentinel__webPower> = _Runtime.explicitNull();
+
+  public static final _wakeLockReleaseListeners__webPower:flight._internal._Map<WebWakeLockSentinel__webPower, Void->Void> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
 
   public static function _getWebBatteryManagerPromise__webPower():Null<flight._internal._Promise<WebBatteryManager__webPower>> {
     var nav:flight._internal._Intersection2<flight._internal.dom.Navigator, { @:optional var getBattery:Null<Void->flight._internal._Promise<WebBatteryManager__webPower>>; }> = cast _Runtime.UNDEFINED;
@@ -1614,7 +1928,7 @@ class _HostWeb {
         return cast false;
       }
       try {
-        (cast nav : { var registerProtocolHandler:String->String->Void; }).registerProtocolHandler((cast scheme : String), ({ final __callArgument104:Dynamic = ((cast flight._internal._HostValueLut.get('location') : flight._internal.dom.Location).origin + '/?url=%s'); __callArgument104; }));
+        (cast nav : { var registerProtocolHandler:String->String->Void; }).registerProtocolHandler((cast scheme : String), ({ final __callArgument115:Dynamic = ((cast flight._internal._HostValueLut.get('location') : flight._internal.dom.Location).origin + '/?url=%s'); __callArgument115; }));
         if ((cast !(cast _Runtime.includes(_HostWeb._registeredSchemes__webProtocol, scheme) : Bool) : Bool)) { _Runtime.callProperty(_HostWeb._registeredSchemes__webProtocol, 'push', cast ([scheme] : Array<Dynamic>)); }
         observeProtocolHostResult((cast 'register' : String), (cast true : Bool));
         return cast true;
@@ -1641,7 +1955,7 @@ class _HostWeb {
       return cast false;
       return cast _Runtime.UNDEFINED;
     } });
-    installProtocolHostBackend(({ final __callArgument105:Dynamic = backend; __callArgument105; }));
+    installProtocolHostBackend(({ final __callArgument116:Dynamic = backend; __callArgument116; }));
   }
 
   @:allow(flight)
@@ -1653,6 +1967,66 @@ class _HostWeb {
   public static var _enabled__webProtocol:Bool = false;
 
   public static final _registeredSchemes__webProtocol:Array<String> = (cast cast ([] : Array<Dynamic>));
+
+  public static function createWebRaster2DSurfaceProvider():Raster2DSurfaceProvider {
+    return cast {
+      createRaster2DSurface: function(width:Float, height:Float):Dynamic {
+        final canvas:flight._internal.dom.HTMLCanvasElement = cast flight._internal.backend.DomDocumentBackend.call(
+          flight._internal.backend.DomDocumentBackend.value(),
+          'createElement',
+          cast (['canvas'] : Array<Dynamic>)
+        );
+        if (canvas == null) return null;
+        flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
+        flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
+        final context:flight._internal.dom.CanvasRenderingContext2D = cast flight._internal.backend.CanvasElementBackend.call(
+          canvas,
+          'getContext',
+          cast (['2d'] : Array<Dynamic>)
+        );
+        if (context == null) return null;
+        final surface:Dynamic = {
+          width: width,
+          height: height,
+          context: context,
+          image: flight.Image.createImageResource(canvas),
+        };
+        return flight._internal.DynamicObject.defineProperties(surface, {
+          width: {
+            configurable: true,
+            enumerable: true,
+            get: function():Dynamic return flight._internal.backend.CanvasElementBackend.field(canvas, 'width'),
+            set: function(value:Dynamic):Dynamic return flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', value),
+          },
+          height: {
+            configurable: true,
+            enumerable: true,
+            get: function():Dynamic return flight._internal.backend.CanvasElementBackend.field(canvas, 'height'),
+            set: function(value:Dynamic):Dynamic return flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', value),
+          },
+        });
+      },
+      destroyRaster2DSurface: function(surface:Dynamic):Void {
+        flight._internal._Runtime.setField(surface, 'width', 0.0);
+        flight._internal._Runtime.setField(surface, 'height', 0.0);
+      },
+    };
+    return cast null;
+  }
+
+  public static function enableHostWebRaster2DSurface():Void {
+    if ((cast _HostWeb._enabled__webRaster2DSurface : Bool)) { return; }
+    (_HostWeb._enabled__webRaster2DSurface = cast (true : Dynamic));
+    installRaster2DSurfaceHostProvider((cast createWebRaster2DSurfaceProvider() : Raster2DSurfaceProvider));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function resetHostWebRaster2DSurfaceForTest():Void {
+    (_HostWeb._enabled__webRaster2DSurface = cast (false : Dynamic));
+  }
+
+  public static var _enabled__webRaster2DSurface:Bool = false;
 
   public static function enableHostWebScreen():Void {
     if ((cast _HostWeb._enabled__webScreen : Bool)) { return; }
@@ -1693,15 +2067,15 @@ class _HostWeb {
       return cast _Runtime.UNDEFINED;
     }, canShare: function(content:ShareContent):Bool {
       var result:Bool = cast _Runtime.UNDEFINED;
-      result = (cast inner : ShareBackend).canShare(({ final __callArgument107:Dynamic = content; __callArgument107; }));
+      result = (cast inner : ShareBackend).canShare(({ final __callArgument118:Dynamic = content; __callArgument118; }));
       observeShareHostResult((cast 'canShare' : String), (cast result : Bool));
       return cast result;
       return cast _Runtime.UNDEFINED;
     }, share: function(content:ShareContent, ?options:Null<ShareOptions>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var result:Bool = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast inner : ShareBackend).share(({ final __callArgument109:Dynamic = content; __callArgument109; }), (cast options : Dynamic)), function(__awaitValue108:Dynamic):Dynamic {
-          result = __awaitValue108;
+        return flight._internal._Async.flatMap((cast inner : ShareBackend).share(({ final __callArgument120:Dynamic = content; __callArgument120; }), (cast options : Dynamic)), function(__awaitValue119:Dynamic):Dynamic {
+          result = __awaitValue119;
           observeShareHostResult((cast 'share' : String), (cast result : Bool));
           return flight._internal._Async.resolve(result);
         });
@@ -1709,14 +2083,14 @@ class _HostWeb {
     }, shareWithResult: function(content:ShareContent, ?options:Null<ShareOptions>):flight._internal._Promise<ShareResult> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var result:ShareResult = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast inner : ShareBackend).shareWithResult(({ final __callArgument111:Dynamic = content; __callArgument111; }), (cast options : Dynamic)), function(__awaitValue110:Dynamic):Dynamic {
-          result = __awaitValue110;
+        return flight._internal._Async.flatMap((cast inner : ShareBackend).shareWithResult(({ final __callArgument122:Dynamic = content; __callArgument122; }), (cast options : Dynamic)), function(__awaitValue121:Dynamic):Dynamic {
+          result = __awaitValue121;
           observeShareHostResult((cast 'shareWithResult' : String), (cast result.completed : Bool));
           return flight._internal._Async.resolve(result);
         });
       }));
     } });
-    installShareHostBackend(({ final __callArgument112:Dynamic = backend; __callArgument112; }));
+    installShareHostBackend(({ final __callArgument123:Dynamic = backend; __callArgument123; }));
   }
 
   @:allow(flight)
@@ -1778,7 +2152,7 @@ class _HostWeb {
         return flight._internal._Async.resolve(false);
       }));
     } });
-    installShellHostBackend(({ final __callArgument114:Dynamic = backend; __callArgument114; }));
+    installShellHostBackend(({ final __callArgument125:Dynamic = backend; __callArgument125; }));
   }
 
   @:allow(flight)
@@ -1835,7 +2209,7 @@ class _HostWeb {
       };
       return cast _Runtime.UNDEFINED;
     } });
-    installStatusBarHostBackend(({ final __callArgument116:Dynamic = backend; __callArgument116; }));
+    installStatusBarHostBackend(({ final __callArgument127:Dynamic = backend; __callArgument127; }));
   }
 
   @:allow(flight)
@@ -1860,6 +2234,33 @@ class _HostWeb {
 
   public static var _enabled__webStorage:Bool = false;
 
+  public static function enableHostWebVideoCapability():Void {
+    if ((cast (cast hasVideoCapabilityHostBackend() : Bool) : Bool)) { return; }
+    installVideoCapabilityHostBackend((cast _HostWeb.createWebVideoCapabilityBackend__webVideoCapability() : VideoCapabilityBackend));
+  }
+
+  public static function createWebVideoCapabilityBackend__webVideoCapability():VideoCapabilityBackend {
+    return cast { canPlayType: function(mimeType:String):Bool {
+      try {
+        var result:flight._internal._Any = (cast flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>)) : flight._internal.dom.HTMLVideoElement).canPlayType(mimeType);
+        observeVideoCapabilityHostResult((cast 'canPlayType' : String), (cast true : Bool));
+        return cast ((cast _Runtime.strictEquals(result, 'maybe') : Bool) || (cast _Runtime.strictEquals(result, 'probably') : Bool));
+      } catch (__error:Dynamic) {
+        observeVideoCapabilityHostResult((cast 'canPlayType' : String), (cast false : Bool));
+        return cast false;
+      }
+      return cast _Runtime.UNDEFINED;
+    }, createVideoElement: function():Null<flight._internal.dom.HTMLVideoElement> {
+      try {
+        return cast flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['video'] : Array<Dynamic>));
+      } catch (__error:Dynamic) {
+        return cast null;
+      }
+      return cast _Runtime.UNDEFINED;
+    } };
+    return cast null;
+  }
+
   public static function enableHostWebWebcam():Void {
     if ((cast _HostWeb._enabled__webWebcam : Bool)) { return; }
     (_HostWeb._enabled__webWebcam = cast (true : Dynamic));
@@ -1874,36 +2275,107 @@ class _HostWeb {
 
   public static var _enabled__webWebcam:Bool = false;
 
+  public static var _enabled__webWgpuRenderSurface:Bool = false;
+
+  public static function createWebWgpuRenderSurfaceProvider():WgpuRenderSurfaceProvider {
+    return cast { createRenderSurface: function(width:Float, height:Float, pixelRatio:Float):flight._internal.dom.HTMLCanvasElement {
+      var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+      canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
+      ((cast (cast canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).width = '' + Std.string(width) + 'px');
+      ((cast (cast canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).height = '' + Std.string(height) + 'px');
+      flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', (width * pixelRatio));
+      flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', (height * pixelRatio));
+      return cast canvas;
+      return cast _Runtime.UNDEFINED;
+    } };
+    return cast null;
+  }
+
+  public static function enableHostWebWgpuRenderSurface():Void {
+    enableHostWebRaster2DSurface();
+    if ((cast _HostWeb._enabled__webWgpuRenderSurface : Bool)) { return; }
+    (_HostWeb._enabled__webWgpuRenderSurface = cast (true : Dynamic));
+    setWgpuRenderSurfaceProvider(({ final __callArgument129:Dynamic = (cast createWebWgpuRenderSurfaceProvider() : WgpuRenderSurfaceProvider); __callArgument129; }));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function resetHostWebWgpuRenderSurfaceForTest():Void {
+    (_HostWeb._enabled__webWgpuRenderSurface = cast (false : Dynamic));
+  }
+
   public static function enableHostWebWindow():Void {
+    var handles:flight._internal._WeakMap<flight._internal.dom.Window, ApplicationWindow> = cast _Runtime.UNDEFINED;
+    var records:flight._internal._WeakMap<ApplicationWindow, WebWindowRecord__webWindow> = cast _Runtime.UNDEFINED;
+    var detach:ApplicationWindow->Bool->Void = cast _Runtime.UNDEFINED;
+    var attach:ApplicationWindow->flight._internal.dom.Window->WindowAttachmentOwnership->Bool = cast _Runtime.UNDEFINED;
+    var getHandle:ApplicationWindow->Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
     var backend:WindowBackend = cast _Runtime.UNDEFINED;
     if ((cast _HostWeb._enabled__webWindow : Bool)) { return; }
     (_HostWeb._enabled__webWindow = cast (true : Dynamic));
-    backend = (cast { center: function(win:ApplicationWindow):Void {
-      if ((cast ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'moveTo')), 'function') : Bool)) : Bool) || (cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('screen'), 'undefined') : Bool)) : Bool)) { return; }
+    handles = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
+    records = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
+    detach = (cast function(win:ApplicationWindow, closeOwned:Bool):Void {
+      var record:Null<WebWindowRecord__webWindow> = cast _Runtime.UNDEFINED;
+      record = ((cast records : flight._internal._WeakMap<ApplicationWindow, WebWindowRecord__webWindow>).get(win));
+      if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
+      ((cast records : flight._internal._WeakMap<ApplicationWindow, WebWindowRecord__webWindow>).delete_(win));
+      ((cast handles : flight._internal._WeakMap<flight._internal.dom.Window, ApplicationWindow>).delete_((cast record : WebWindowRecord__webWindow).handle));
+      (cast record : WebWindowRecord__webWindow).cleanup();
+      if ((cast ((cast closeOwned : Bool) && (cast _Runtime.strictEquals((cast record : WebWindowRecord__webWindow).ownership, 'flight') : Bool)) : Bool)) {
+        try {
+          flight._internal.backend.DomWindowBackend.call((cast record : WebWindowRecord__webWindow).handle, 'close', cast ([] : Array<Dynamic>));
+        } catch (__error:Dynamic) {
+        }
+      }
+    });
+    attach = (cast function(win:ApplicationWindow, handle:flight._internal.dom.Window, ownership:WindowAttachmentOwnership):Bool {
+      var existing:Null<WebWindowRecord__webWindow> = cast _Runtime.UNDEFINED;
+      var mapped:Null<ApplicationWindow> = cast _Runtime.UNDEFINED;
+      var onPageHide:Void->Void = cast _Runtime.UNDEFINED;
+      existing = ((cast records : flight._internal._WeakMap<ApplicationWindow, WebWindowRecord__webWindow>).get(win));
+      if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast ((cast _Runtime.strictEquals((cast existing : WebWindowRecord__webWindow).handle, handle) : Bool) && (cast _Runtime.strictEquals((cast existing : WebWindowRecord__webWindow).ownership, ownership) : Bool)); }
+      mapped = ((cast handles : flight._internal._WeakMap<flight._internal.dom.Window, ApplicationWindow>).get(handle));
+      if ((cast ((cast !_Runtime.strictEquals(mapped, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(mapped, win) : Bool)) : Bool)) { return cast false; }
+      onPageHide = (cast function():Void {
+        detach(({ final __callArgument131:Dynamic = win; __callArgument131; }), (cast false : Bool));
+        notifyWindowClosed(({ final __callArgument133:Dynamic = win; __callArgument133; }));
+      });
+      flight._internal.backend.DomWindowBackend.call(handle, 'addEventListener', cast (['pagehide', onPageHide] : Array<Dynamic>));
+      ((cast records : flight._internal._WeakMap<ApplicationWindow, WebWindowRecord__webWindow>).set(win, (cast { cleanup: function():Void { flight._internal.backend.DomWindowBackend.call(handle, 'removeEventListener', cast (['pagehide', onPageHide] : Array<Dynamic>)); }, handle: handle, ownership: ownership })));
+      ((cast handles : flight._internal._WeakMap<flight._internal.dom.Window, ApplicationWindow>).set(handle, (cast win)));
+      return cast true;
+      return cast _Runtime.UNDEFINED;
+    });
+    getHandle = (cast function(win:ApplicationWindow):Null<flight._internal.dom.Window> return _Runtime.coalesce(({ final __structural135 = ((cast records : flight._internal._WeakMap<ApplicationWindow, WebWindowRecord__webWindow>).get(win)); __structural135 == null ? _Runtime.UNDEFINED : (cast __structural135 : { var handle:flight._internal.dom.Window; }).handle; }), function():Dynamic return cast null));
+    backend = (cast { attach: function(win:ApplicationWindow, handle:flight._internal._Any, ownership:WindowAttachmentOwnership):Bool {
+      if ((cast !(cast (cast _HostWeb.isWebWindow__webWindow((cast handle : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast false; }
+      return cast (cast attach(({ final __callArgument136:Dynamic = win; __callArgument136; }), ({ final __callArgument137:Dynamic = handle; __callArgument137; }), ({ final __callArgument138:Dynamic = ownership; __callArgument138; })) : Bool);
+      return cast _Runtime.UNDEFINED;
+    }, center: function(win:ApplicationWindow):Void {
+      var handle:Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
+      handle = (cast getHandle(({ final __callArgument142:Dynamic = win; __callArgument142; })) : Null<flight._internal.dom.Window>);
+      if ((cast ((cast _Runtime.strictEquals(handle, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(handle, 'moveTo')), 'function') : Bool)) : Bool)) { return; }
       try {
-        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'moveTo', cast ([HxMath.round((_Runtime.subtractNumbers((cast flight._internal._HostValueLut.get('screen') : flight._internal.dom.Screen).availWidth, win.width) / 2.0)), HxMath.round((_Runtime.subtractNumbers((cast flight._internal._HostValueLut.get('screen') : flight._internal.dom.Screen).availHeight, win.height) / 2.0))] : Array<Dynamic>));
+        flight._internal.backend.DomWindowBackend.call(handle, 'moveTo', cast ([HxMath.round((_Runtime.subtractNumbers((cast flight._internal.backend.DomWindowBackend.field(handle, 'screen') : flight._internal.dom.Screen).availWidth, win.width) / 2.0)), HxMath.round((_Runtime.subtractNumbers((cast flight._internal.backend.DomWindowBackend.field(handle, 'screen') : flight._internal.dom.Screen).availHeight, win.height) / 2.0))] : Array<Dynamic>));
         observeWindowHostResult((cast 'center' : String), (cast true : Bool));
       } catch (__error:Dynamic) {
         observeWindowHostResult((cast 'center' : String), (cast false : Bool));
       }
     }, close: function(win:ApplicationWindow):Void {
-      if ((cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'close')), 'function') : Bool)) : Bool)) {
-        try {
-          flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'close', cast ([] : Array<Dynamic>));
-          observeWindowHostResult((cast 'close' : String), (cast true : Bool));
-        } catch (__error:Dynamic) {
-          observeWindowHostResult((cast 'close' : String), (cast false : Bool));
-        }
-      }
-    }, flashWindowFrame: function(win:ApplicationWindow):Void {
-
+      detach(({ final __callArgument144:Dynamic = win; __callArgument144; }), (cast true : Bool));
+      observeWindowHostResult((cast 'close' : String), (cast true : Bool));
     }, focus: function(win:ApplicationWindow):Void {
-      if ((cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'focus')), 'function') : Bool)) : Bool)) {
-        flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'focus', cast ([] : Array<Dynamic>));
+      var handle:Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
+      handle = (cast getHandle(({ final __callArgument146:Dynamic = win; __callArgument146; })) : Null<flight._internal.dom.Window>);
+      if ((cast ((cast !_Runtime.strictEquals(handle, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(handle, 'focus')), 'function') : Bool)) : Bool)) {
+        flight._internal.backend.DomWindowBackend.call(handle, 'focus', cast ([] : Array<Dynamic>));
         observeWindowHostResult((cast 'focus' : String), (cast true : Bool));
       }
     }, getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
-      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
+      var handle:Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
+      handle = (cast getHandle(({ final __callArgument148:Dynamic = win; __callArgument148; })) : Null<flight._internal.dom.Window>);
+      if ((cast _Runtime.strictEquals(handle, null) : Bool)) {
         (out.x = cast (win.x : Float));
         (out.y = cast (win.y : Float));
         (out.width = cast (win.width : Float));
@@ -1911,97 +2383,73 @@ class _HostWeb {
         observeWindowHostResult((cast 'getBounds' : String), (cast true : Bool));
         return cast out;
       }
-      (out.x = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'screenX'), function():Dynamic return cast win.x) : Float));
-      (out.y = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'screenY'), function():Dynamic return cast win.y) : Float));
-      (out.width = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'innerWidth'), function():Dynamic return cast win.width) : Float));
-      (out.height = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'innerHeight'), function():Dynamic return cast win.height) : Float));
+      (out.x = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(handle, 'screenX'), function():Dynamic return cast win.x) : Float));
+      (out.y = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(handle, 'screenY'), function():Dynamic return cast win.y) : Float));
+      (out.width = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(handle, 'innerWidth'), function():Dynamic return cast win.width) : Float));
+      (out.height = cast (_Runtime.coalesce(flight._internal.backend.DomWindowBackend.field(handle, 'innerHeight'), function():Dynamic return cast win.height) : Float));
       observeWindowHostResult((cast 'getBounds' : String), (cast true : Bool));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    }, hide: function(win:ApplicationWindow):Void {
-
-    }, maximize: function(win:ApplicationWindow):Void {
-
-    }, minimize: function(win:ApplicationWindow):Void {
-
     }, open: function(win:ApplicationWindow, options:WindowOptions):Bool {
       var result:Bool = cast _Runtime.UNDEFINED;
-      result = !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined');
+      result = ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast (cast attach(({ final __callArgument150:Dynamic = win; __callArgument150; }), ({ final __callArgument151:Dynamic = flight._internal.backend.DomWindowBackend.value(); __callArgument151; }), ({ final __callArgument152:Dynamic = 'host'; __callArgument152; })) : Bool) : Bool));
       observeWindowHostResult((cast 'open' : String), (cast result : Bool));
       return cast result;
       return cast _Runtime.UNDEFINED;
-    }, requestAttention: function(win:ApplicationWindow, attention:Bool):Void {
-
-    }, restore: function(win:ApplicationWindow):Void {
-
-    }, setAlwaysOnTop: function(win:ApplicationWindow, alwaysOnTop:Bool):Void {
-
-    }, setContentProtection: function(win:ApplicationWindow, enabled:Bool):Void {
-
-    }, setFullscreen: function(_win:ApplicationWindow, fullscreen:Bool):Void {
-      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return; }
+    }, setFullscreen: function(win:ApplicationWindow, fullscreen:Bool):Void {
+      var document:Null<flight._internal.dom.Document> = cast _Runtime.UNDEFINED;
+      document = ({ final __hostType158 = (cast getHandle(({ final __callArgument156:Dynamic = win; __callArgument156; })) : Null<flight._internal.dom.Window>); __hostType158 == null ? _Runtime.UNDEFINED : (cast __hostType158 : flight._internal.dom.Window).document; });
+      if ((cast _Runtime.strictEquals(document, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
       try {
-        if ((cast fullscreen : Bool)) { _Runtime.voidValue(({ final __hostTypeCall118 = flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'documentElement'); (cast __hostTypeCall118 : flight._internal.dom.HTMLElement).requestFullscreen == null ? _Runtime.UNDEFINED : (cast __hostTypeCall118 : flight._internal.dom.HTMLElement).requestFullscreen(); })); } else { _Runtime.voidValue(flight._internal.backend.DomDocumentBackend.callOptional(flight._internal.backend.DomDocumentBackend.value(), 'exitFullscreen', cast ([] : Array<Dynamic>))); }
+        if ((cast fullscreen : Bool)) { _Runtime.voidValue(({ final __hostTypeCall159 = flight._internal.backend.DomDocumentBackend.field(document, 'documentElement'); (cast __hostTypeCall159 : flight._internal.dom.HTMLElement).requestFullscreen == null ? _Runtime.UNDEFINED : (cast __hostTypeCall159 : flight._internal.dom.HTMLElement).requestFullscreen(); })); } else { _Runtime.voidValue(flight._internal.backend.DomDocumentBackend.callOptional(document, 'exitFullscreen', cast ([] : Array<Dynamic>))); }
         observeWindowHostResult((cast 'setFullscreen' : String), (cast true : Bool));
       } catch (__error:Dynamic) {
         observeWindowHostResult((cast 'setFullscreen' : String), (cast false : Bool));
       }
-    }, setHasShadow: function(win:ApplicationWindow, hasShadow:Bool):Void {
-
-    }, setIcon: function(_win:ApplicationWindow, icon:String):Void {
+    }, setIcon: function(win:ApplicationWindow, icon:String):Void {
+      var document:Null<flight._internal.dom.Document> = cast _Runtime.UNDEFINED;
       var link:Null<flight._internal.dom.HTMLLinkElement> = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) { return; }
-      link = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'querySelector', cast (['link[rel="icon"]'] : Array<Dynamic>));
+      document = ({ final __hostType162 = (cast getHandle(({ final __callArgument160:Dynamic = win; __callArgument160; })) : Null<flight._internal.dom.Window>); __hostType162 == null ? _Runtime.UNDEFINED : (cast __hostType162 : flight._internal.dom.Window).document; });
+      if ((cast _Runtime.strictEquals(document, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
+      link = flight._internal.backend.DomDocumentBackend.call(document, 'querySelector', cast (['link[rel="icon"]'] : Array<Dynamic>));
       if ((cast _Runtime.strictEquals(link, null) : Bool)) {
-        (link = cast (flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['link'] : Array<Dynamic>)) : Dynamic));
+        (link = cast (flight._internal.backend.DomDocumentBackend.call(document, 'createElement', cast (['link'] : Array<Dynamic>)) : Dynamic));
         ((cast link : flight._internal.dom.HTMLLinkElement).rel = 'icon');
-        (cast flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'head') : flight._internal.dom.HTMLHeadElement).appendChild(link);
+        (cast flight._internal.backend.DomDocumentBackend.field(document, 'head') : flight._internal.dom.HTMLHeadElement).appendChild(link);
       }
       ((cast link : flight._internal.dom.HTMLLinkElement).href = icon);
       observeWindowHostResult((cast 'setIcon' : String), (cast true : Bool));
-    }, setMaximumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
-
-    }, setMenuBarVisible: function(win:ApplicationWindow, visible:Bool):Void {
-
-    }, setMinimumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
-
-    }, setOpacity: function(win:ApplicationWindow, opacity:Float):Void {
-
-    }, setParent: function(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
-
-    }, setPosition: function(_win:ApplicationWindow, x:Float, y:Float):Void {
-      if ((cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'moveTo')), 'function') : Bool)) : Bool)) {
+    }, setPosition: function(win:ApplicationWindow, x:Float, y:Float):Void {
+      var handle:Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
+      handle = (cast getHandle(({ final __callArgument163:Dynamic = win; __callArgument163; })) : Null<flight._internal.dom.Window>);
+      if ((cast ((cast !_Runtime.strictEquals(handle, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(handle, 'moveTo')), 'function') : Bool)) : Bool)) {
         try {
-          flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'moveTo', cast ([x, y] : Array<Dynamic>));
+          flight._internal.backend.DomWindowBackend.call(handle, 'moveTo', cast ([x, y] : Array<Dynamic>));
           observeWindowHostResult((cast 'setPosition' : String), (cast true : Bool));
         } catch (__error:Dynamic) {
           observeWindowHostResult((cast 'setPosition' : String), (cast false : Bool));
         }
       }
-    }, setProgress: function(win:ApplicationWindow, progress:Float):Void {
-
-    }, setResizable: function(win:ApplicationWindow, resizable:Bool):Void {
-
-    }, setSize: function(_win:ApplicationWindow, width:Float, height:Float):Void {
-      if ((cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'resizeTo')), 'function') : Bool)) : Bool)) {
+    }, setSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
+      var handle:Null<flight._internal.dom.Window> = cast _Runtime.UNDEFINED;
+      handle = (cast getHandle(({ final __callArgument165:Dynamic = win; __callArgument165; })) : Null<flight._internal.dom.Window>);
+      if ((cast ((cast !_Runtime.strictEquals(handle, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(handle, 'resizeTo')), 'function') : Bool)) : Bool)) {
         try {
-          flight._internal.backend.DomWindowBackend.call(flight._internal.backend.DomWindowBackend.value(), 'resizeTo', cast ([width, height] : Array<Dynamic>));
+          flight._internal.backend.DomWindowBackend.call(handle, 'resizeTo', cast ([width, height] : Array<Dynamic>));
           observeWindowHostResult((cast 'setSize' : String), (cast true : Bool));
         } catch (__error:Dynamic) {
           observeWindowHostResult((cast 'setSize' : String), (cast false : Bool));
         }
       }
-    }, setSkipTaskbar: function(win:ApplicationWindow, skip:Bool):Void {
-
-    }, setTitle: function(_win:ApplicationWindow, title:String):Void {
-      if ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool)) {
-        flight._internal.backend.DomDocumentBackend.setField(flight._internal.backend.DomDocumentBackend.value(), 'title', title);
+    }, setTitle: function(win:ApplicationWindow, title:String):Void {
+      var document:Null<flight._internal.dom.Document> = cast _Runtime.UNDEFINED;
+      document = ({ final __hostType169 = (cast getHandle(({ final __callArgument167:Dynamic = win; __callArgument167; })) : Null<flight._internal.dom.Window>); __hostType169 == null ? _Runtime.UNDEFINED : (cast __hostType169 : flight._internal.dom.Window).document; });
+      if ((cast !_Runtime.strictEquals(document, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        flight._internal.backend.DomDocumentBackend.setField(document, 'title', title);
         observeWindowHostResult((cast 'setTitle' : String), (cast true : Bool));
       }
-    }, show: function(win:ApplicationWindow):Void {
-
     } });
-    installWindowHostBackend(({ final __callArgument119:Dynamic = backend; __callArgument119; }));
+    installWindowHostBackend(({ final __callArgument170:Dynamic = backend; __callArgument170; }));
   }
 
   @:allow(flight)
@@ -2011,4 +2459,12 @@ class _HostWeb {
   }
 
   public static var _enabled__webWindow:Bool = false;
+
+  public static function isWebWindow__webWindow(handle:NativeWindowHandle):Bool {
+    var candidate:flight._internal._Any = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(handle), 'object') : Bool) || (cast _Runtime.strictEquals(handle, null) : Bool)) : Bool)) { return cast false; }
+    candidate = (cast handle : flight._internal._Partial<flight._internal.dom.Window>);
+    return cast _Runtime.andValue(((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(candidate, 'addEventListener')), 'function') : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(candidate, 'close')), 'function') : Bool)), function():Dynamic return cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.field(candidate, 'removeEventListener')), 'function'));
+    return cast null;
+  }
 }

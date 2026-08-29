@@ -9,3 +9,4 @@ export const createElectronWindowBackend = api.createElectronWindowBackend;
 export const getApplicationWindowForElectronId = api.getApplicationWindowForElectronId;
 export const getElectronBrowserWindow = api.getElectronBrowserWindow;
 export const getElectronWindowId = api.getElectronWindowId;
+export const resetElectronWindowBackendForTest = api.resetElectronWindowBackendForTest;

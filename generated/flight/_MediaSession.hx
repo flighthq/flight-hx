@@ -4,61 +4,216 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.MediaSessionAction;
 import flight.types.MediaSessionActionDetails;
 import flight.types.MediaSessionArtwork;
 import flight.types.MediaSessionBackend;
 import flight.types.MediaSessionMetadata;
+import flight.types.MediaSessionOperation;
 import flight.types.MediaSessionPlaybackState;
 import flight.types.MediaSessionPositionState;
+
+typedef IsAny__mediasession<T> = flight._internal._Conditional<Float, T, Bool, Bool>;
+
+typedef WebMediaSessionOwnedValue__mediasession<Value> = { var owner:flight._internal._Object; var value:Value; };
+
+typedef WebMediaSessionOwnership__mediasession = { var actions:flight._internal._Map<MediaSessionAction, flight._internal._Object>; var metadata:Null<WebMediaSessionOwnedValue__mediasession<flight._internal.dom.MediaMetadata>>; var playbackState:Null<WebMediaSessionOwnedValue__mediasession<MediaSessionPlaybackState>>; var positionState:Null<flight._internal._Object>; };
+
+typedef WebMediaSessionPublication__mediasession = { var actions:flight._internal._Set<MediaSessionAction>; var metadata:Null<flight._internal.dom.MediaMetadata>; var playbackState:Null<MediaSessionPlaybackState>; var positionState:Bool; };
 
 @:noCompletion
 class _MediaSession {
   public static function clearMediaSessionActionHandler(action:MediaSessionAction):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler(({ final __callArgument0:Dynamic = action; __callArgument0; }), ({ final __callArgument1:Dynamic = null; __callArgument1; }));
+    _Runtime.callOptionalValue((cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler, cast ([action, null] : Array<Dynamic>));
   }
 
   public static function clearMediaSessionMetadata():Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata(({ final __callArgument2:Dynamic = null; __callArgument2; }));
+    _Runtime.callOptionalValue((cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata, cast ([null] : Array<Dynamic>));
   }
 
   public static function clearMediaSessionPositionState():Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState(({ final __callArgument3:Dynamic = null; __callArgument3; }));
+    _Runtime.callOptionalValue((cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState, cast ([null] : Array<Dynamic>));
   }
 
   @:allow(flight)
   @:keep
   private static function createWebMediaSessionBackend():MediaSessionBackend {
-    return cast { setActionHandler: function(action:MediaSessionAction, handler:Null<MediaSessionActionDetails->Void>):Void {
+    var owner:{  } = cast _Runtime.UNDEFINED;
+    var publications:flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession> = cast _Runtime.UNDEFINED;
+    owner = (cast {  });
+    publications = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    return cast { destroy: function():Void {
+      for (__iteration0 in _Runtime.iterable(publications)) {
+        var session:flight._internal.dom.MediaSession = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
+        var publication:WebMediaSessionPublication__mediasession = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
+        var ownership:Null<WebMediaSessionOwnership__mediasession> = ((cast _MediaSession._webMediaSessionOwnership__mediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__mediasession>).get(session));
+        if ((cast _Runtime.strictEquals(ownership, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+          ((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>).delete_(session));
+          continue;
+        }
+        for (action in _Runtime.iterable((cast publication : WebMediaSessionPublication__mediasession).actions)) {
+          if ((cast !_Runtime.strictEquals(((cast (cast ownership : WebMediaSessionOwnership__mediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get(action)), owner) : Bool)) {
+            ((cast (cast publication : WebMediaSessionPublication__mediasession).actions : flight._internal._Set<MediaSessionAction>).delete_(action));
+            continue;
+          }
+          var released:Bool = false;
+          try {
+            (cast _MediaSession.assertSyncVoid__mediasession : flight._internal._Nothing->Void)(({ (cast session : flight._internal.dom.MediaSession).setActionHandler(action, null); _Runtime.UNDEFINED; }));
+            (released = cast (true : Dynamic));
+          } catch (__error:Dynamic) {
+          }
+          if ((cast released : Bool)) {
+            if ((cast _Runtime.strictEquals(((cast (cast ownership : WebMediaSessionOwnership__mediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).get(action)), owner) : Bool)) { ((cast (cast ownership : WebMediaSessionOwnership__mediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).delete_(action)); }
+            ((cast (cast publication : WebMediaSessionPublication__mediasession).actions : flight._internal._Set<MediaSessionAction>).delete_(action));
+          }
+        }
+        if ((cast !_Runtime.strictEquals((cast publication : WebMediaSessionPublication__mediasession).metadata, null) : Bool)) {
+          var ownedMetadata:Null<WebMediaSessionOwnedValue__mediasession<flight._internal.dom.MediaMetadata>> = (cast ownership : WebMediaSessionOwnership__mediasession).metadata;
+          if ((cast !_Runtime.strictEquals(({ final __structural4 = ownedMetadata; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { var owner:flight._internal._Object; }).owner; }), owner) : Bool)) {
+            ((cast publication : WebMediaSessionPublication__mediasession).metadata = null);
+          } else { if ((cast ((cast !_Runtime.strictEquals((cast ownedMetadata : WebMediaSessionOwnedValue__mediasession<flight._internal.dom.MediaMetadata>).value, (cast publication : WebMediaSessionPublication__mediasession).metadata) : Bool) || (cast !_Runtime.strictEquals((cast session : flight._internal.dom.MediaSession).metadata, (cast ownedMetadata : WebMediaSessionOwnedValue__mediasession<flight._internal.dom.MediaMetadata>).value) : Bool)) : Bool)) {
+            ((cast ownership : WebMediaSessionOwnership__mediasession).metadata = null);
+            ((cast publication : WebMediaSessionPublication__mediasession).metadata = null);
+          } else {
+            try {
+              ((cast session : flight._internal.dom.MediaSession).metadata = null);
+              if ((cast _Runtime.strictEquals(({ final __structural5 = (cast ownership : WebMediaSessionOwnership__mediasession).metadata; __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var owner:flight._internal._Object; }).owner; }), owner) : Bool)) { ((cast ownership : WebMediaSessionOwnership__mediasession).metadata = null); }
+              ((cast publication : WebMediaSessionPublication__mediasession).metadata = null);
+            } catch (__error:Dynamic) {
+            }
+          } }
+        }
+        if ((cast !_Runtime.strictEquals((cast publication : WebMediaSessionPublication__mediasession).playbackState, null) : Bool)) {
+          var ownedPlaybackState:Null<WebMediaSessionOwnedValue__mediasession<MediaSessionPlaybackState>> = (cast ownership : WebMediaSessionOwnership__mediasession).playbackState;
+          if ((cast !_Runtime.strictEquals(({ final __structural6 = ownedPlaybackState; __structural6 == null ? _Runtime.UNDEFINED : (cast __structural6 : { var owner:flight._internal._Object; }).owner; }), owner) : Bool)) {
+            ((cast publication : WebMediaSessionPublication__mediasession).playbackState = null);
+          } else { if ((cast ((cast !_Runtime.strictEquals((cast ownedPlaybackState : WebMediaSessionOwnedValue__mediasession<MediaSessionPlaybackState>).value, (cast publication : WebMediaSessionPublication__mediasession).playbackState) : Bool) || (cast !_Runtime.strictEquals((cast session : flight._internal.dom.MediaSession).playbackState, (cast ownedPlaybackState : WebMediaSessionOwnedValue__mediasession<MediaSessionPlaybackState>).value) : Bool)) : Bool)) {
+            ((cast ownership : WebMediaSessionOwnership__mediasession).playbackState = null);
+            ((cast publication : WebMediaSessionPublication__mediasession).playbackState = null);
+          } else {
+            try {
+              ((cast session : flight._internal.dom.MediaSession).playbackState = 'none');
+              if ((cast _Runtime.strictEquals(({ final __structural7 = (cast ownership : WebMediaSessionOwnership__mediasession).playbackState; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { var owner:flight._internal._Object; }).owner; }), owner) : Bool)) { ((cast ownership : WebMediaSessionOwnership__mediasession).playbackState = null); }
+              ((cast publication : WebMediaSessionPublication__mediasession).playbackState = null);
+            } catch (__error:Dynamic) {
+            }
+          } }
+        }
+        if ((cast (cast publication : WebMediaSessionPublication__mediasession).positionState : Bool)) {
+          if ((cast !_Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__mediasession).positionState, owner) : Bool)) {
+            ((cast publication : WebMediaSessionPublication__mediasession).positionState = false);
+          } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast session : flight._internal.dom.MediaSession).setPositionState), 'function') : Bool)) {
+            try {
+              (cast _MediaSession.assertSyncVoid__mediasession : flight._internal._Nothing->Void)(({ (cast session : flight._internal.dom.MediaSession).setPositionState(_Runtime.field(_Runtime, 'UNDEFINED')); _Runtime.UNDEFINED; }));
+              if ((cast _Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__mediasession).positionState, owner) : Bool)) { ((cast ownership : WebMediaSessionOwnership__mediasession).positionState = null); }
+              ((cast publication : WebMediaSessionPublication__mediasession).positionState = false);
+            } catch (__error:Dynamic) {
+            }
+          } }
+        }
+        _MediaSession.pruneWebMediaSessionOwnership__mediasession(({ final __callArgument8:Dynamic = session; __callArgument8; }), (cast ownership : Dynamic));
+        _MediaSession.pruneWebMediaSessionPublication__mediasession((cast publications : Dynamic), ({ final __callArgument10:Dynamic = session; __callArgument10; }), (cast publication : Dynamic));
+      }
+    }, setActionHandler: function(action:MediaSessionAction, handler:Null<MediaSessionActionDetails->Void>):Void {
       var session:Null<flight._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
       session = (cast _MediaSession.getWebMediaSession__mediasession() : Null<flight._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       try {
-        (cast session : flight._internal.dom.MediaSession).setActionHandler(action, _Runtime.select(handler, function():Dynamic return cast function(details:MediaSessionActionDetails):Void { handler((cast details : MediaSessionActionDetails)); }, function():Dynamic return cast null));
+        (cast session : flight._internal.dom.MediaSession).setActionHandler(action, ((cast _Runtime.strictEquals(handler, null) : Bool) ? (cast null : Dynamic) : (cast function(details:MediaSessionActionDetails):Void { handler((cast details : MediaSessionActionDetails)); } : Dynamic)));
+        var ownership:Null<WebMediaSessionOwnership__mediasession> = ((cast _MediaSession._webMediaSessionOwnership__mediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__mediasession>).get(session));
+        var publication:Null<WebMediaSessionPublication__mediasession> = ((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>).get(session));
+        if ((cast _Runtime.strictEquals(handler, null) : Bool)) {
+          ({ final __collection14:Dynamic = ({ final __structural13 = ownership; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : { var actions:flight._internal._Map<MediaSessionAction, flight._internal._Object>; }).actions; }); __collection14 == null ? _Runtime.UNDEFINED : ((cast __collection14 : flight._internal._Map<MediaSessionAction, flight._internal._Object>).delete_(action)); });
+          ({ final __collection17:Dynamic = ({ final __structural16 = publication; __structural16 == null ? _Runtime.UNDEFINED : (cast __structural16 : { var actions:flight._internal._Set<MediaSessionAction>; }).actions; }); __collection17 == null ? _Runtime.UNDEFINED : ((cast __collection17 : flight._internal._Set<MediaSessionAction>).delete_(action)); });
+          if ((cast !_Runtime.strictEquals(ownership, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _MediaSession.pruneWebMediaSessionOwnership__mediasession(({ final __callArgument18:Dynamic = session; __callArgument18; }), (cast ownership : Dynamic)); }
+          if ((cast !_Runtime.strictEquals(publication, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _MediaSession.pruneWebMediaSessionPublication__mediasession((cast publications : Dynamic), ({ final __callArgument20:Dynamic = session; __callArgument20; }), (cast publication : Dynamic)); }
+        } else {
+          ((cast (cast (cast _MediaSession.getWebMediaSessionOwnership__mediasession(({ final __callArgument24:Dynamic = session; __callArgument24; })) : WebMediaSessionOwnership__mediasession) : WebMediaSessionOwnership__mediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).set(action, (cast owner)));
+          ((cast (cast (cast _MediaSession.getWebMediaSessionPublication__mediasession((cast publications : Dynamic), ({ final __callArgument28:Dynamic = session; __callArgument28; })) : WebMediaSessionPublication__mediasession) : WebMediaSessionPublication__mediasession).actions : flight._internal._Set<MediaSessionAction>).add(action));
+        }
       } catch (__error:Dynamic) {
       }
     }, setMetadata: function(metadata:Null<MediaSessionMetadata>):Void {
       var session:Null<flight._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
+      var published:flight._internal.dom.MediaMetadata = cast _Runtime.UNDEFINED;
       session = (cast _MediaSession.getWebMediaSession__mediasession() : Null<flight._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       if ((cast _Runtime.strictEquals(metadata, null) : Bool)) {
         ((cast session : flight._internal.dom.MediaSession).metadata = null);
+        var ownership:Null<WebMediaSessionOwnership__mediasession> = ((cast _MediaSession._webMediaSessionOwnership__mediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__mediasession>).get(session));
+        var publication:Null<WebMediaSessionPublication__mediasession> = ((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>).get(session));
+        if ((cast !_Runtime.strictEquals(ownership, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+          ((cast ownership : WebMediaSessionOwnership__mediasession).metadata = null);
+          _MediaSession.pruneWebMediaSessionOwnership__mediasession(({ final __callArgument30:Dynamic = session; __callArgument30; }), (cast ownership : Dynamic));
+        }
+        if ((cast !_Runtime.strictEquals(publication, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+          ((cast publication : WebMediaSessionPublication__mediasession).metadata = null);
+          _MediaSession.pruneWebMediaSessionPublication__mediasession((cast publications : Dynamic), ({ final __callArgument32:Dynamic = session; __callArgument32; }), (cast publication : Dynamic));
+        }
         return;
       }
       if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('MediaMetadata'), 'undefined') : Bool)) { return; }
-      ((cast session : flight._internal.dom.MediaSession).metadata = _Runtime.construct(flight._internal._HostValueLut.get('MediaMetadata'), [{ title: (cast metadata : { var title:String; }).title, artist: (cast metadata : { var artist:String; }).artist, album: (cast metadata : { var album:String; }).album, artwork: _Runtime.concatArrays([_Runtime.toArray((cast metadata : { var artwork:Array<MediaSessionArtwork>; }).artwork)]) }]));
+      published = _Runtime.construct(flight._internal._HostValueLut.get('MediaMetadata'), [{ title: (cast metadata : { var title:String; }).title, artist: (cast metadata : { var artist:String; }).artist, album: (cast metadata : { var album:String; }).album, artwork: _Runtime.concatArrays([_Runtime.toArray((cast metadata : { var artwork:Array<MediaSessionArtwork>; }).artwork)]) }]);
+      ((cast session : flight._internal.dom.MediaSession).metadata = published);
+      ((cast (cast _MediaSession.getWebMediaSessionOwnership__mediasession(({ final __callArgument34:Dynamic = session; __callArgument34; })) : WebMediaSessionOwnership__mediasession) : WebMediaSessionOwnership__mediasession).metadata = { owner: owner, value: published });
+      ((cast (cast _MediaSession.getWebMediaSessionPublication__mediasession((cast publications : Dynamic), ({ final __callArgument36:Dynamic = session; __callArgument36; })) : WebMediaSessionPublication__mediasession) : WebMediaSessionPublication__mediasession).metadata = published);
     }, setPlaybackState: function(state:MediaSessionPlaybackState):Void {
       var session:Null<flight._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
+      var ownership:Null<WebMediaSessionOwnership__mediasession> = cast _Runtime.UNDEFINED;
+      var publication:Null<WebMediaSessionPublication__mediasession> = cast _Runtime.UNDEFINED;
       session = (cast _MediaSession.getWebMediaSession__mediasession() : Null<flight._internal.dom.MediaSession>);
       if ((cast _Runtime.strictEquals(session, null) : Bool)) { return; }
       ((cast session : flight._internal.dom.MediaSession).playbackState = state);
+      ownership = ((cast _MediaSession._webMediaSessionOwnership__mediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__mediasession>).get(session));
+      publication = ((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>).get(session));
+      if ((cast _Runtime.strictEquals(state, 'none') : Bool)) {
+        if ((cast !_Runtime.strictEquals(ownership, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+          ((cast ownership : WebMediaSessionOwnership__mediasession).playbackState = null);
+          _MediaSession.pruneWebMediaSessionOwnership__mediasession(({ final __callArgument38:Dynamic = session; __callArgument38; }), (cast ownership : Dynamic));
+        }
+        if ((cast !_Runtime.strictEquals(publication, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+          ((cast publication : WebMediaSessionPublication__mediasession).playbackState = null);
+          _MediaSession.pruneWebMediaSessionPublication__mediasession((cast publications : Dynamic), ({ final __callArgument40:Dynamic = session; __callArgument40; }), (cast publication : Dynamic));
+        }
+      } else {
+        ((cast (cast _MediaSession.getWebMediaSessionOwnership__mediasession(({ final __callArgument42:Dynamic = session; __callArgument42; })) : WebMediaSessionOwnership__mediasession) : WebMediaSessionOwnership__mediasession).playbackState = { owner: owner, value: state });
+        ((cast (cast _MediaSession.getWebMediaSessionPublication__mediasession((cast publications : Dynamic), ({ final __callArgument44:Dynamic = session; __callArgument44; })) : WebMediaSessionPublication__mediasession) : WebMediaSessionPublication__mediasession).playbackState = state);
+      }
     }, setPositionState: function(state:Null<MediaSessionPositionState>):Void {
       var session:Null<flight._internal.dom.MediaSession> = cast _Runtime.UNDEFINED;
+      var ownership:Null<WebMediaSessionOwnership__mediasession> = cast _Runtime.UNDEFINED;
+      var publication:Null<WebMediaSessionPublication__mediasession> = cast _Runtime.UNDEFINED;
       session = (cast _MediaSession.getWebMediaSession__mediasession() : Null<flight._internal.dom.MediaSession>);
       if ((cast ((cast _Runtime.strictEquals(session, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast session : flight._internal.dom.MediaSession).setPositionState), 'function') : Bool)) : Bool)) { return; }
       (cast session : flight._internal.dom.MediaSession).setPositionState(_Runtime.coalesce(state, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')));
+      ownership = ((cast _MediaSession._webMediaSessionOwnership__mediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__mediasession>).get(session));
+      publication = ((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>).get(session));
+      if ((cast _Runtime.strictEquals(state, null) : Bool)) {
+        if ((cast !_Runtime.strictEquals(ownership, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+          ((cast ownership : WebMediaSessionOwnership__mediasession).positionState = null);
+          _MediaSession.pruneWebMediaSessionOwnership__mediasession(({ final __callArgument46:Dynamic = session; __callArgument46; }), (cast ownership : Dynamic));
+        }
+        if ((cast !_Runtime.strictEquals(publication, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+          ((cast publication : WebMediaSessionPublication__mediasession).positionState = false);
+          _MediaSession.pruneWebMediaSessionPublication__mediasession((cast publications : Dynamic), ({ final __callArgument48:Dynamic = session; __callArgument48; }), (cast publication : Dynamic));
+        }
+      } else {
+        ((cast (cast _MediaSession.getWebMediaSessionOwnership__mediasession(({ final __callArgument50:Dynamic = session; __callArgument50; })) : WebMediaSessionOwnership__mediasession) : WebMediaSessionOwnership__mediasession).positionState = owner);
+        ((cast (cast _MediaSession.getWebMediaSessionPublication__mediasession((cast publications : Dynamic), ({ final __callArgument52:Dynamic = session; __callArgument52; })) : WebMediaSessionPublication__mediasession) : WebMediaSessionPublication__mediasession).positionState = true);
+      }
     } };
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function destroyMediaSessionBackend():Void {
+    var previous:Array<Null<MediaSessionBackend>> = cast _Runtime.UNDEFINED;
+    previous = (cast cast ([_MediaSession._custom__mediasession, _MediaSession._host__mediasession] : Array<Dynamic>));
+    (_MediaSession._custom__mediasession = cast (null : Dynamic));
+    (_MediaSession._host__mediasession = cast (null : Dynamic));
+    _MediaSession.releaseMediaSessionBackends__mediasession(({ final __callArgument54:Dynamic = previous; __callArgument54; }));
   }
 
   public static function explainMediaSessionBackend():BackendExplanation {
@@ -74,8 +229,35 @@ class _MediaSession {
 
   @:allow(flight)
   @:keep
+  private static function explainMediaSessionOperation(operation:MediaSessionOperation):BackendOperationExplanation {
+    if ((cast ((cast !_Runtime.strictEquals(_MediaSession._custom__mediasession, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_MediaSession._custom__mediasession, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'custom', operation: operation };
+    }
+    if ((cast ((cast !_Runtime.strictEquals(_MediaSession._host__mediasession, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_MediaSession._host__mediasession, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'host', operation: operation };
+    }
+    return cast { implemented: false, layer: 'sentinel', operation: operation };
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
   private static function getMediaSessionBackend():MediaSessionBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(_MediaSession._custom__mediasession, function():Dynamic return cast _MediaSession._host__mediasession), function():Dynamic return cast _MediaSession._sentinel__mediasession);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasMediaSessionHostBackend():Bool {
+    return cast !_Runtime.strictEquals(_MediaSession._host__mediasession, null);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasMediaSessionOperation(operation:MediaSessionOperation):Bool {
+    return cast (cast (cast explainMediaSessionOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 
@@ -98,6 +280,7 @@ class _MediaSession {
   @:allow(flight)
   @:keep
   private static function resetMediaSessionBackendForTest():Void {
+    destroyMediaSessionBackend();
     (_MediaSession._custom__mediasession = cast (null : Dynamic));
     (_MediaSession._host__mediasession = cast (null : Dynamic));
     (_MediaSession._hostConflict__mediasession = cast (false : Dynamic));
@@ -105,36 +288,32 @@ class _MediaSession {
   }
 
   public static function setMediaSessionActionHandler(action:MediaSessionAction, handler:MediaSessionActionDetails->Void):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler(({ final __callArgument4:Dynamic = action; __callArgument4; }), ({ final __callArgument5:Dynamic = handler; __callArgument5; }));
+    _Runtime.callOptionalValue((cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setActionHandler, cast ([action, handler] : Array<Dynamic>));
   }
 
   @:allow(flight)
   @:keep
   private static function setMediaSessionBackend(backend:Null<MediaSessionBackend>):Void {
+    var previous:Array<Null<MediaSessionBackend>> = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_MediaSession._custom__mediasession, backend) : Bool)) { return; }
+    previous = (cast cast ([_MediaSession._custom__mediasession] : Array<Dynamic>));
     (_MediaSession._custom__mediasession = cast (backend : Dynamic));
+    _MediaSession.releaseMediaSessionBackends__mediasession(({ final __callArgument56:Dynamic = previous; __callArgument56; }));
   }
 
   public static function setMediaSessionMetadata(metadata:MediaSessionMetadata):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata(({ final __callArgument6:Dynamic = metadata; __callArgument6; }));
+    _Runtime.callOptionalValue((cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setMetadata, cast ([metadata] : Array<Dynamic>));
   }
 
   public static function setMediaSessionPlaybackState(state:MediaSessionPlaybackState):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPlaybackState(({ final __callArgument7:Dynamic = state; __callArgument7; }));
+    _Runtime.callOptionalValue((cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPlaybackState, cast ([state] : Array<Dynamic>));
   }
 
   public static function setMediaSessionPositionState(state:MediaSessionPositionState):Void {
-    (cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState(({ final __callArgument8:Dynamic = state; __callArgument8; }));
+    _Runtime.callOptionalValue((cast (cast getMediaSessionBackend() : MediaSessionBackend) : MediaSessionBackend).setPositionState, cast ([state] : Array<Dynamic>));
   }
 
-  public static final _sentinel__mediasession:MediaSessionBackend = (cast { setActionHandler: function(_action:MediaSessionAction, _handler:Null<MediaSessionActionDetails->Void>):Void {
-
-  }, setMetadata: function(_metadata:Null<MediaSessionMetadata>):Void {
-
-  }, setPlaybackState: function(_state:MediaSessionPlaybackState):Void {
-
-  }, setPositionState: function(_state:Null<MediaSessionPositionState>):Void {
-
-  } });
+  public static final _sentinel__mediasession:MediaSessionBackend = (cast {  });
 
   public static var _custom__mediasession:Null<MediaSessionBackend> = _Runtime.explicitNull();
 
@@ -144,9 +323,61 @@ class _MediaSession {
 
   public static var _hostObservation__mediasession:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
+  public static final _webMediaSessionOwnership__mediasession:flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__mediasession> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
+
   public static function getWebMediaSession__mediasession():Null<flight._internal.dom.MediaSession> {
     if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flight._internal.backend.DomNavigatorBackend.hasField(flight._internal.backend.DomNavigatorBackend.value(), 'mediaSession') : Bool) : Bool)) : Bool)) { return cast null; }
     return cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'mediaSession');
     return cast null;
+  }
+
+  public static function getWebMediaSessionOwnership__mediasession(session:flight._internal.dom.MediaSession):WebMediaSessionOwnership__mediasession {
+    var existing:Null<WebMediaSessionOwnership__mediasession> = cast _Runtime.UNDEFINED;
+    var created:WebMediaSessionOwnership__mediasession = cast _Runtime.UNDEFINED;
+    existing = ((cast _MediaSession._webMediaSessionOwnership__mediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__mediasession>).get(session));
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
+    created = (cast { actions: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), metadata: null, playbackState: null, positionState: null });
+    ((cast _MediaSession._webMediaSessionOwnership__mediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__mediasession>).set(session, (cast created)));
+    return cast created;
+    return cast null;
+  }
+
+  public static function getWebMediaSessionPublication__mediasession(publications:flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>, session:flight._internal.dom.MediaSession):WebMediaSessionPublication__mediasession {
+    var existing:Null<WebMediaSessionPublication__mediasession> = cast _Runtime.UNDEFINED;
+    var created:WebMediaSessionPublication__mediasession = cast _Runtime.UNDEFINED;
+    existing = ((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>).get(session));
+    if ((cast !_Runtime.strictEquals(existing, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast existing; }
+    created = (cast { actions: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), metadata: null, playbackState: null, positionState: false });
+    ((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>).set(session, (cast created)));
+    return cast created;
+    return cast null;
+  }
+
+  public static function pruneWebMediaSessionOwnership__mediasession(session:flight._internal.dom.MediaSession, ownership:WebMediaSessionOwnership__mediasession):Void {
+    if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(((cast _MediaSession._webMediaSessionOwnership__mediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__mediasession>).get(session)), ownership) : Bool) && (cast _Runtime.strictEquals((cast (cast ownership : WebMediaSessionOwnership__mediasession).actions : flight._internal._Map<MediaSessionAction, flight._internal._Object>).size, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__mediasession).metadata, null) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__mediasession).playbackState, null) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast ownership : WebMediaSessionOwnership__mediasession).positionState, null) : Bool)) : Bool)) {
+      ((cast _MediaSession._webMediaSessionOwnership__mediasession : flight._internal._WeakMap<flight._internal.dom.MediaSession, WebMediaSessionOwnership__mediasession>).delete_(session));
+    }
+  }
+
+  public static function pruneWebMediaSessionPublication__mediasession(publications:flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>, session:flight._internal.dom.MediaSession, publication:WebMediaSessionPublication__mediasession):Void {
+    if ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>).get(session)), publication) : Bool) && (cast _Runtime.strictEquals((cast (cast publication : WebMediaSessionPublication__mediasession).actions : flight._internal._Set<MediaSessionAction>).size, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast publication : WebMediaSessionPublication__mediasession).metadata, null) : Bool)) : Bool) && (cast _Runtime.strictEquals((cast publication : WebMediaSessionPublication__mediasession).playbackState, null) : Bool)) : Bool) && (cast !(cast (cast publication : WebMediaSessionPublication__mediasession).positionState : Bool) : Bool)) : Bool)) {
+      ((cast publications : flight._internal._Map<flight._internal.dom.MediaSession, WebMediaSessionPublication__mediasession>).delete_(session));
+    }
+  }
+
+  public static function releaseMediaSessionBackends__mediasession(previous:Array<Null<MediaSessionBackend>>):Void {
+    var retained:flight._internal._Set<flight._internal._Any> = cast _Runtime.UNDEFINED;
+    var released:flight._internal._Set<flight._internal._Any> = cast _Runtime.UNDEFINED;
+    retained = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [(cast _Runtime.filterArray((cast cast ([_MediaSession._custom__mediasession, _MediaSession._host__mediasession] : Array<Dynamic>) : Array<Dynamic>), function(slot:Null<MediaSessionBackend>, __unused1:Float, __unused2:Array<Null<MediaSessionBackend>>):Bool return !_Runtime.strictEquals(slot, null), _Runtime.UNDEFINED))]);
+    released = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+    for (backend in _Runtime.iterable(previous)) {
+      if ((cast ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast ((cast retained : flight._internal._Set<flight._internal._Any>).has(backend)) : Bool)) : Bool) || (cast ((cast released : flight._internal._Set<flight._internal._Any>).has(backend)) : Bool)) : Bool)) { continue; }
+      ((cast released : flight._internal._Set<flight._internal._Any>).add(backend));
+      _Runtime.callOptionalProperty(backend, 'destroy', cast ([] : Array<Dynamic>));
+    }
+  }
+
+  public static function assertSyncVoid__mediasession<T>(value:T):Void {
+    _Runtime.voidValue(value);
   }
 }

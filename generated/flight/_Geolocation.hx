@@ -96,6 +96,10 @@ class _Geolocation {
           });
         })
       );
+    }, isAvailable: function():Bool {
+      if ((cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'isSecureContext'), false) : Bool)) : Bool)) { return cast false; }
+      return cast !_Runtime.strictEquals((cast _Geolocation.getWebGeolocation__geolocation() : Null<flight._internal.dom.Geolocation>), null);
+      return cast _Runtime.UNDEFINED;
     }, requestPermission: function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
@@ -212,9 +216,7 @@ class _Geolocation {
   }
 
   public static function isGeolocationAvailable():Bool {
-    if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast false; }
-    if ((cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) && (cast _Runtime.strictEquals(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'isSecureContext'), false) : Bool)) : Bool)) { return cast false; }
-    return cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'geolocation')), 'undefined') : Bool) && (cast !_Runtime.strictEquals(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'geolocation'), null) : Bool));
+    return cast (cast (cast getGeolocationBackend() : GeolocationBackend) : GeolocationBackend).isAvailable();
     return cast null;
   }
 
@@ -278,6 +280,9 @@ class _Geolocation {
     return cast _Runtime.UNDEFINED;
   }, getPermission: function():flight._internal._Promise<GeolocationPermissionState> {
     return cast flight._internal._Async.resolve((cast 'prompt' : GeolocationPermissionState));
+    return cast _Runtime.UNDEFINED;
+  }, isAvailable: function():Bool {
+    return cast false;
     return cast _Runtime.UNDEFINED;
   }, requestPermission: function():flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(false);

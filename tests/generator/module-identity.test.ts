@@ -1,4 +1,8 @@
-import { buildSourceModules, validateHaxeModuleIdentities } from '../../tools/generator/src/emit/core.ts';
+import {
+  buildSourceModules,
+  importExternalTypesFromLut,
+  validateHaxeModuleIdentities,
+} from '../../tools/generator/src/emit/core.ts';
 import type { IrModule } from '../../tools/generator/src/model/ir.ts';
 
 const origin = {
@@ -149,5 +153,55 @@ describe('generated Haxe module identities', () => {
     expect(() => validateHaxeModuleIdentities(modules)).toThrowError(
       /flight\.hostElectron\.ElectronApp:.*electronModule\.ts.*other\.ts/isu,
     );
+  });
+
+  it('imports only emitted unresolved types from the external toolkit', () => {
+    const modules: IrModule[] = [
+      {
+        declarations: [
+          {
+            body: [
+              {
+                expression: {
+                  arguments: [],
+                  callee: { kind: 'identifier', name: 'consume' },
+                  kind: 'call',
+                  typeArguments: [{ arguments: [], kind: 'named', name: 'PrivateFields' }],
+                },
+                kind: 'expression',
+              },
+            ],
+            exported: true,
+            kind: 'function',
+            name: 'read',
+            origin,
+            parameters: [
+              {
+                name: 'reason',
+                optional: false,
+                rest: false,
+                type: { arguments: [], kind: 'named', name: 'ReasonType' },
+              },
+              {
+                name: 'clipboard',
+                optional: false,
+                rest: false,
+                type: { arguments: [], kind: 'named', name: 'Clipboard' },
+              },
+            ],
+            returns: { kind: 'primitive', name: 'Void' },
+            typeParameters: [],
+          },
+        ],
+        haxePackage: 'flight',
+        imports: ['flight.types.Reason as ReasonType'],
+        name: '_Fixture',
+        packageName: '@flighthq/example',
+      },
+    ];
+
+    importExternalTypesFromLut(modules);
+
+    expect(modules[0]?.imports).toEqual(['flight._internal.WebExterns.Clipboard', 'flight.types.Reason as ReasonType']);
   });
 });

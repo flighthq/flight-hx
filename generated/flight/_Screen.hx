@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.RectangleLike;
 import flight.types.ScreenBackend;
 import flight.types.ScreenChangeEvent;
@@ -14,7 +15,9 @@ import flight.types.ScreenChangedMetrics;
 import flight.types.ScreenColorSpace;
 import flight.types.ScreenInfo;
 import flight.types.ScreenMode;
+import flight.types.ScreenOperation;
 import flight.types.ScreenOrientation;
+import flight.types.ScreenPermissionState;
 import flight.types.ScreenSignals;
 import flight.types.Signal;
 import flight.types.Vector2Like;
@@ -159,7 +162,7 @@ class _Screen {
     _cursorTracking = false;
     _cachedScreens = null;
     _screenDetails = null;
-    backend = (cast { _upgrade: upgradeToScreenDetails, getScreens: function(out:Array<ScreenInfo>):Array<ScreenInfo> {
+    backend = (cast _Runtime.mergeObjects([{ _upgrade: upgradeToScreenDetails }, { getScreens: function(out:Array<ScreenInfo>):Array<ScreenInfo> {
       if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'screen')), 'undefined') : Bool)) : Bool)) {
         _Runtime.setLength(out, 0.0);
         return cast out;
@@ -185,7 +188,7 @@ class _Screen {
       (_cachedScreens = cast (cast ([_Runtime.mergeObjects([flight._internal._StaticIndex.readArray(out, 0.0)])] : Array<Dynamic>) : Dynamic));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    }, getPrimaryScreen: function(out:ScreenInfo):ScreenInfo {
+    } }, { getPrimaryScreen: function(out:ScreenInfo):ScreenInfo {
       if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'screen')), 'undefined') : Bool)) : Bool)) {
         _Screen.fillDefaultScreenInfo__screen(({ final __callArgument7:Dynamic = out; __callArgument7; }));
         return cast out;
@@ -202,7 +205,7 @@ class _Screen {
       buildCurrentScreenInfo(({ final __callArgument11:Dynamic = out; __callArgument11; }));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    }, subscribe: function(listener:ScreenChangeEvent->Void):Void->Void {
+    } }, { subscribe: function(listener:ScreenChangeEvent->Void):Void->Void {
       var handleChange:Void->Void = cast _Runtime.UNDEFINED;
       var orientation:Null<WebScreenOrientationObject__screen> = cast _Runtime.UNDEFINED;
       var detailsRef:Null<ScreenDetails__screen> = cast _Runtime.UNDEFINED;
@@ -275,13 +278,13 @@ class _Screen {
         ({ final __optionalOwner48 = detailsRef; if (__optionalOwner48 != null) { final __optionalCall47 = (cast __optionalOwner48 : { var removeEventListener:String->(Void->Void)->Void; }).removeEventListener; if (__optionalCall47 != null) __optionalCall47('screenschange', handleChange); } });
       };
       return cast _Runtime.UNDEFINED;
-    }, getCursorPosition: function(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
+    } }, { getCursorPosition: function(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
       ensureCursorTracking();
       ((cast out : { var x:Float; var y:Float; }).x = _cursorX);
       ((cast out : { var x:Float; var y:Float; }).y = _cursorY);
       return cast out;
       return cast _Runtime.UNDEFINED;
-    }, getModes: function(screen:ScreenInfo, out:Array<ScreenMode>):Array<ScreenMode> {
+    } }, { getModes: function(screen:ScreenInfo, out:Array<ScreenMode>):Array<ScreenMode> {
       _Runtime.setLength(out, 1.0);
       if ((cast _Runtime.strictEquals(flight._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeArray(out, 0.0, (cast createScreenMode() : ScreenMode)); }
       ((cast flight._internal._StaticIndex.readArray(out, 0.0) : { var width:Float; }).width = cast (screen.width : Float));
@@ -291,7 +294,31 @@ class _Screen {
       ((cast flight._internal._StaticIndex.readArray(out, 0.0) : { var pixelFormat:String; }).pixelFormat = cast ('' : String));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } });
+    } }, ((cast ((cast !_Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) && (cast flight._internal.backend.DomNavigatorBackend.hasField(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : Bool)) : Bool) ? (cast { queryWindowManagementPermission: function():flight._internal._Promise<ScreenPermissionState> {
+      return cast _Runtime.callProperty((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast 'window-management' : flight._internal.dom.PermissionName) }), 'then', cast ([function(status:flight._internal.dom.PermissionStatus):ScreenPermissionState return (cast (cast status : flight._internal.dom.PermissionStatus).state : ScreenPermissionState)] : Array<Dynamic>));
+      return cast _Runtime.UNDEFINED;
+    }, subscribeWindowManagementPermission: function(listener:ScreenPermissionState->Void):Void->Void {
+      var status:Null<flight._internal.dom.PermissionStatus> = cast _Runtime.UNDEFINED;
+      var cancelled:Bool = cast _Runtime.UNDEFINED;
+      var handleChange:Void->Void = cast _Runtime.UNDEFINED;
+      status = null;
+      cancelled = false;
+      handleChange = (cast function():Void {
+        if ((cast !_Runtime.strictEquals(status, null) : Bool)) { listener((cast status.state : ScreenPermissionState)); }
+      });
+      flight._internal._Async.recover(_Runtime.callProperty((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast 'window-management' : flight._internal.dom.PermissionName) }), 'then', cast ([function(s:flight._internal.dom.PermissionStatus):Void {
+        if ((cast cancelled : Bool)) { return; }
+        (status = cast (s : Dynamic));
+        (cast s : flight._internal.dom.PermissionStatus).addEventListener('change', handleChange);
+      }] : Array<Dynamic>)), function(__unused17:flight._internal._Any):Void {
+
+      });
+      return cast function():Void {
+        (cancelled = cast (true : Dynamic));
+        ({ final __hostTypeCall49 = status; __hostTypeCall49 == null ? _Runtime.UNDEFINED : __hostTypeCall49.removeEventListener('change', handleChange); });
+      };
+      return cast _Runtime.UNDEFINED;
+    } } : Dynamic) : (cast {  } : Dynamic))]));
     return cast backend;
     return cast null;
   }
@@ -336,7 +363,7 @@ class _Screen {
   }
 
   public static function disposeScreenSignals(signals:ScreenSignals):Void {
-    detachScreenSignals(({ final __callArgument49:Dynamic = signals; __callArgument49; }));
+    detachScreenSignals(({ final __callArgument50:Dynamic = signals; __callArgument50; }));
   }
 
   public static function enableScreenSignals():ScreenSignals {
@@ -355,8 +382,21 @@ class _Screen {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function explainScreenOperation(operation:ScreenOperation):BackendOperationExplanation {
+    if ((cast ((cast !_Runtime.strictEquals(_Screen._custom__screen, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Screen._custom__screen, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'custom', operation: operation };
+    }
+    if ((cast ((cast !_Runtime.strictEquals(_Screen._host__screen, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Screen._host__screen, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'host', operation: operation };
+    }
+    return cast { implemented: false, layer: 'sentinel', operation: operation };
+    return cast null;
+  }
+
   public static function getPrimaryScreen(out:ScreenInfo):ScreenInfo {
-    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).getPrimaryScreen(({ final __callArgument51:Dynamic = out; __callArgument51; }));
+    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).getPrimaryScreen(({ final __callArgument52:Dynamic = out; __callArgument52; }));
     return cast null;
   }
 
@@ -379,10 +419,10 @@ class _Screen {
   public static function getScreenById(id:Float, out:ScreenInfo):Null<ScreenInfo> {
     var screens:Array<ScreenInfo> = cast _Runtime.UNDEFINED;
     screens = (cast cast ([] : Array<Dynamic>));
-    (cast getScreens(({ final __callArgument52:Dynamic = screens; __callArgument52; })) : Array<ScreenInfo>);
+    (cast getScreens(({ final __callArgument53:Dynamic = screens; __callArgument53; })) : Array<ScreenInfo>);
     for (screen in _Runtime.iterable(screens)) {
       if ((cast _Runtime.strictEquals(screen.id, id) : Bool)) {
-        _Screen.copyScreenInfo__screen(({ final __callArgument56:Dynamic = screen; __callArgument56; }), ({ final __callArgument57:Dynamic = out; __callArgument57; }));
+        _Screen.copyScreenInfo__screen(({ final __callArgument57:Dynamic = screen; __callArgument57; }), ({ final __callArgument58:Dynamic = out; __callArgument58; }));
         return cast out;
       }
     }
@@ -395,9 +435,9 @@ class _Screen {
     var bestScreen:ScreenInfo = cast _Runtime.UNDEFINED;
     var bestOverlap:Float = cast _Runtime.UNDEFINED;
     screens = (cast cast ([] : Array<Dynamic>));
-    (cast getScreens(({ final __callArgument60:Dynamic = screens; __callArgument60; })) : Array<ScreenInfo>);
+    (cast getScreens(({ final __callArgument61:Dynamic = screens; __callArgument61; })) : Array<ScreenInfo>);
     if ((cast _Runtime.strictEquals(_Runtime.field(screens, 'length'), 0.0) : Bool)) {
-      _Screen.fillDefaultScreenInfo__screen(({ final __callArgument62:Dynamic = out; __callArgument62; }));
+      _Screen.fillDefaultScreenInfo__screen(({ final __callArgument63:Dynamic = out; __callArgument63; }));
       return cast out;
     }
     bestScreen = flight._internal._StaticIndex.readArray(screens, 0.0);
@@ -427,7 +467,7 @@ class _Screen {
         }
       }
     }
-    _Screen.copyScreenInfo__screen(({ final __callArgument68:Dynamic = bestScreen; __callArgument68; }), ({ final __callArgument69:Dynamic = out; __callArgument69; }));
+    _Screen.copyScreenInfo__screen(({ final __callArgument69:Dynamic = bestScreen; __callArgument69; }), ({ final __callArgument70:Dynamic = out; __callArgument70; }));
     return cast out;
     return cast null;
   }
@@ -443,35 +483,35 @@ class _Screen {
   }
 
   public static function getScreenCursorPosition(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
-    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).getCursorPosition(({ final __callArgument72:Dynamic = out; __callArgument72; }));
+    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).getCursorPosition(({ final __callArgument73:Dynamic = out; __callArgument73; }));
     return cast null;
   }
 
   public static function getScreenCursorScreen(out:ScreenInfo):ScreenInfo {
     var pos:{ var x:Float; var y:Float; } = cast _Runtime.UNDEFINED;
     pos = _Screen._scratchPoint__screen;
-    (cast getScreenCursorPosition(({ final __callArgument73:Dynamic = pos; __callArgument73; })) : { var x:Float; var y:Float; });
-    return cast (cast getScreenNearestPoint(({ final __callArgument75:Dynamic = pos; __callArgument75; }), ({ final __callArgument76:Dynamic = out; __callArgument76; })) : ScreenInfo);
+    (cast getScreenCursorPosition(({ final __callArgument74:Dynamic = pos; __callArgument74; })) : { var x:Float; var y:Float; });
+    return cast (cast getScreenNearestPoint(({ final __callArgument76:Dynamic = pos; __callArgument76; }), ({ final __callArgument77:Dynamic = out; __callArgument77; })) : ScreenInfo);
     return cast null;
   }
 
-  public static function getScreenDetailPermission():flight._internal._Promise<String> {
+  public static function getScreenDetailPermission():flight._internal._Promise<ScreenPermissionState> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
-        var __flowBranch79:Dynamic;
-        if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flight._internal.backend.DomNavigatorBackend.hasField(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : Bool) : Bool)) : Bool)) {
-          __flowBranch79 = flight._internal._Async.protect(function():Dynamic {
+        var query:Null<Void->flight._internal._Promise<ScreenPermissionState>> = cast _Runtime.UNDEFINED;
+        query = (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).queryWindowManagementPermission;
+        var __flowBranch80:Dynamic;
+        if ((cast _Runtime.strictEquals(query, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+          __flowBranch80 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn('prompt');
           });
         } else {
-          __flowBranch79 = flight._internal._Async.flowNormal();
+          __flowBranch80 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch79, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch80, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            var status:flight._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast 'window-management' : flight._internal.dom.PermissionName) }), function(__awaitValue80:Dynamic):Dynamic {
-              status = __awaitValue80;
-              return flight._internal._Async.flowReturn((cast (cast status : flight._internal.dom.PermissionStatus).state : String));
+            return flight._internal._Async.flatMap((cast query() : flight._internal._Promise<ScreenPermissionState>), function(__awaitValue81:Dynamic):Dynamic {
+              return flight._internal._Async.flowReturn(__awaitValue81);
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -490,11 +530,11 @@ class _Screen {
     var backend:ScreenBackend = cast _Runtime.UNDEFINED;
     backend = (cast getScreenBackend() : ScreenBackend);
     if ((cast !_Runtime.strictEquals((cast backend : ScreenBackend).getModes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      return cast (cast backend : ScreenBackend).getModes(({ final __callArgument81:Dynamic = screen; __callArgument81; }), ({ final __callArgument82:Dynamic = out; __callArgument82; }));
+      return cast (cast backend : ScreenBackend).getModes(({ final __callArgument82:Dynamic = screen; __callArgument82; }), ({ final __callArgument83:Dynamic = out; __callArgument83; }));
     }
     _Runtime.setLength(out, 1.0);
     if ((cast _Runtime.strictEquals(flight._internal._StaticIndex.readArray(out, 0.0), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._StaticIndex.writeArray(out, 0.0, (cast createScreenMode() : ScreenMode)); }
-    (cast getScreenCurrentMode(({ final __callArgument83:Dynamic = screen; __callArgument83; }), flight._internal._StaticIndex.readArray(out, 0.0)) : ScreenMode);
+    (cast getScreenCurrentMode(({ final __callArgument84:Dynamic = screen; __callArgument84; }), flight._internal._StaticIndex.readArray(out, 0.0)) : ScreenMode);
     return cast out;
     return cast null;
   }
@@ -504,14 +544,14 @@ class _Screen {
     var bestScreen:ScreenInfo = cast _Runtime.UNDEFINED;
     var bestDist:Float = cast _Runtime.UNDEFINED;
     screens = (cast cast ([] : Array<Dynamic>));
-    (cast getScreens(({ final __callArgument85:Dynamic = screens; __callArgument85; })) : Array<ScreenInfo>);
+    (cast getScreens(({ final __callArgument86:Dynamic = screens; __callArgument86; })) : Array<ScreenInfo>);
     if ((cast _Runtime.strictEquals(_Runtime.field(screens, 'length'), 0.0) : Bool)) {
-      _Screen.fillDefaultScreenInfo__screen(({ final __callArgument87:Dynamic = out; __callArgument87; }));
+      _Screen.fillDefaultScreenInfo__screen(({ final __callArgument88:Dynamic = out; __callArgument88; }));
       return cast out;
     }
     for (screen in _Runtime.iterable(screens)) {
       if ((cast ((cast ((cast ((cast ((cast point.x : Float) >= (cast screen.x : Float)) : Bool) && (cast ((cast point.x : Float) < (cast (screen.x + screen.width) : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) >= (cast screen.y : Float)) : Bool)) : Bool) && (cast ((cast point.y : Float) < (cast (screen.y + screen.height) : Float)) : Bool)) : Bool)) {
-        _Screen.copyScreenInfo__screen(({ final __callArgument91:Dynamic = screen; __callArgument91; }), ({ final __callArgument92:Dynamic = out; __callArgument92; }));
+        _Screen.copyScreenInfo__screen(({ final __callArgument92:Dynamic = screen; __callArgument92; }), ({ final __callArgument93:Dynamic = out; __callArgument93; }));
         return cast out;
       }
     }
@@ -528,7 +568,7 @@ class _Screen {
         (bestScreen = cast (screen : Dynamic));
       }
     }
-    _Screen.copyScreenInfo__screen(({ final __callArgument97:Dynamic = bestScreen; __callArgument97; }), ({ final __callArgument98:Dynamic = out; __callArgument98; }));
+    _Screen.copyScreenInfo__screen(({ final __callArgument98:Dynamic = bestScreen; __callArgument98; }), ({ final __callArgument99:Dynamic = out; __callArgument99; }));
     return cast out;
     return cast null;
   }
@@ -540,14 +580,14 @@ class _Screen {
     var bestScreen:ScreenInfo = cast _Runtime.UNDEFINED;
     var bestDist:Float = cast _Runtime.UNDEFINED;
     screens = (cast cast ([] : Array<Dynamic>));
-    (cast getScreens(({ final __callArgument101:Dynamic = screens; __callArgument101; })) : Array<ScreenInfo>);
+    (cast getScreens(({ final __callArgument102:Dynamic = screens; __callArgument102; })) : Array<ScreenInfo>);
     if ((cast _Runtime.strictEquals(_Runtime.field(screens, 'length'), 0.0) : Bool)) {
-      _Screen.fillDefaultScreenInfo__screen(({ final __callArgument103:Dynamic = out; __callArgument103; }));
+      _Screen.fillDefaultScreenInfo__screen(({ final __callArgument104:Dynamic = out; __callArgument104; }));
       return cast out;
     }
     for (screen in _Runtime.iterable(screens)) {
       if ((cast ((cast ((cast ((cast ((cast rect.x : Float) >= (cast screen.x : Float)) : Bool) && (cast ((cast rect.y : Float) >= (cast screen.y : Float)) : Bool)) : Bool) && (cast ((cast (rect.x + rect.width) : Float) <= (cast (screen.x + screen.width) : Float)) : Bool)) : Bool) && (cast ((cast (rect.y + rect.height) : Float) <= (cast (screen.y + screen.height) : Float)) : Bool)) : Bool)) {
-        _Screen.copyScreenInfo__screen(({ final __callArgument107:Dynamic = screen; __callArgument107; }), ({ final __callArgument108:Dynamic = out; __callArgument108; }));
+        _Screen.copyScreenInfo__screen(({ final __callArgument108:Dynamic = screen; __callArgument108; }), ({ final __callArgument109:Dynamic = out; __callArgument109; }));
         return cast out;
       }
     }
@@ -566,13 +606,13 @@ class _Screen {
         (bestScreen = cast (screen : Dynamic));
       }
     }
-    _Screen.copyScreenInfo__screen(({ final __callArgument113:Dynamic = bestScreen; __callArgument113; }), ({ final __callArgument114:Dynamic = out; __callArgument114; }));
+    _Screen.copyScreenInfo__screen(({ final __callArgument114:Dynamic = bestScreen; __callArgument114; }), ({ final __callArgument115:Dynamic = out; __callArgument115; }));
     return cast out;
     return cast null;
   }
 
   public static function getScreens(out:Array<ScreenInfo>):Array<ScreenInfo> {
-    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).getScreens(({ final __callArgument117:Dynamic = out; __callArgument117; }));
+    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).getScreens(({ final __callArgument118:Dynamic = out; __callArgument118; }));
     return cast null;
   }
 
@@ -582,6 +622,13 @@ class _Screen {
     ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).width = screen.workWidth);
     ((cast out : { var x:Float; var y:Float; var width:Float; var height:Float; }).height = screen.workHeight);
     return cast out;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasScreenOperation(operation:ScreenOperation):Bool {
+    return cast (cast (cast explainScreenOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 
@@ -602,33 +649,23 @@ class _Screen {
   }
 
   public static function onScreenChange(listener:ScreenChangeEvent->Void):Void->Void {
-    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).subscribe(({ final __callArgument118:Dynamic = listener; __callArgument118; }));
+    return cast (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).subscribe(({ final __callArgument119:Dynamic = listener; __callArgument119; }));
     return cast null;
   }
 
-  public static function onScreenDetailPermissionChange(listener:String->Void):Void->Void {
-    var status:Null<flight._internal.dom.PermissionStatus> = cast _Runtime.UNDEFINED;
-    var cancelled:Bool = cast _Runtime.UNDEFINED;
-    var handleChange:Void->Void = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool) || (cast !(cast flight._internal.backend.DomNavigatorBackend.hasField(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : Bool) : Bool)) : Bool)) { return cast function():Void {
+  public static function onScreenDetailPermissionChange(listener:ScreenPermissionState->Void):Void->Void {
+    var subscribe:Null<(ScreenPermissionState->Void)->(Void->Void)> = cast _Runtime.UNDEFINED;
+    subscribe = (cast (cast getScreenBackend() : ScreenBackend) : ScreenBackend).subscribeWindowManagementPermission;
+    if ((cast _Runtime.strictEquals(subscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast function():Void {
 
     }; }
-    status = null;
-    cancelled = false;
-    handleChange = (cast function():Void {
-      if ((cast !_Runtime.strictEquals(status, null) : Bool)) { listener((cast (cast status.state : String) : String)); }
-    });
-    flight._internal._Async.recover(_Runtime.callProperty((cast flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions') : flight._internal.dom.Permissions).query({ name: (cast 'window-management' : flight._internal.dom.PermissionName) }), 'then', cast ([function(s:flight._internal.dom.PermissionStatus):Void {
-      if ((cast cancelled : Bool)) { return; }
-      (status = cast (s : Dynamic));
-      (cast s : flight._internal.dom.PermissionStatus).addEventListener('change', handleChange);
-    }] : Array<Dynamic>)), function(__unused17:flight._internal._Any):Void {
+    try {
+      return cast (cast subscribe(({ final __callArgument120:Dynamic = listener; __callArgument120; })) : Void->Void);
+    } catch (__error:Dynamic) {
+      return cast function():Void {
 
-    });
-    return cast function():Void {
-      (cancelled = cast (true : Dynamic));
-      ({ final __hostTypeCall119 = status; __hostTypeCall119 == null ? _Runtime.UNDEFINED : __hostTypeCall119.removeEventListener('change', handleChange); });
-    };
+      };
+    }
     return cast null;
   }
 
@@ -785,7 +822,7 @@ class _Screen {
     var obj:Null<WebScreenOrientationObject__screen> = cast _Runtime.UNDEFINED;
     var type:String = cast _Runtime.UNDEFINED;
     obj = (cast _Screen.getWebScreenOrientationObject__screen() : Null<WebScreenOrientationObject__screen>);
-    type = _Runtime.coalesce(({ final __structural120 = obj; __structural120 == null ? _Runtime.UNDEFINED : (cast __structural120 : { @:optional var type:Null<String>; }).type; }), function():Dynamic return cast '');
+    type = _Runtime.coalesce(({ final __structural122 = obj; __structural122 == null ? _Runtime.UNDEFINED : (cast __structural122 : { @:optional var type:Null<String>; }).type; }), function():Dynamic return cast '');
     if ((cast StringTools.startsWith(type, 'portrait-primary') : Bool)) { return cast 'Portrait'; }
     if ((cast StringTools.startsWith(type, 'portrait-secondary') : Bool)) { return cast 'PortraitFlipped'; }
     if ((cast StringTools.startsWith(type, 'landscape-secondary') : Bool)) { return cast 'LandscapeFlipped'; }
@@ -797,7 +834,7 @@ class _Screen {
     var obj:Null<WebScreenOrientationObject__screen> = cast _Runtime.UNDEFINED;
     var angle:Null<Float> = cast _Runtime.UNDEFINED;
     obj = (cast _Screen.getWebScreenOrientationObject__screen() : Null<WebScreenOrientationObject__screen>);
-    angle = ({ final __structural121 = obj; __structural121 == null ? _Runtime.UNDEFINED : (cast __structural121 : { @:optional var angle:Null<Float>; }).angle; });
+    angle = ({ final __structural123 = obj; __structural123 == null ? _Runtime.UNDEFINED : (cast __structural123 : { @:optional var angle:Null<Float>; }).angle; });
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(angle), 'number') : Bool)) { return cast angle; }
     return cast -1.0;
     return cast null;
@@ -815,32 +852,32 @@ class _Screen {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var win:flight._internal._Intersection2<flight._internal.dom.Window, { @:optional var getScreenDetails:Null<Void->flight._internal._Promise<flight._internal._Any>>; }> = cast _Runtime.UNDEFINED;
-        var __flowBranch123:Dynamic;
+        var __flowBranch125:Dynamic;
         if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) {
-          __flowBranch123 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch125 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(false);
           });
         } else {
-          __flowBranch123 = flight._internal._Async.flowNormal();
+          __flowBranch125 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch123, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch125, function():Dynamic {
           win = (cast flight._internal.backend.DomWindowBackend.value() : flight._internal._Intersection2<flight._internal.dom.Window, { @:optional var getScreenDetails:Void->flight._internal._Promise<flight._internal._Any>; }>);
-          var __flowBranch124:Dynamic;
+          var __flowBranch126:Dynamic;
           if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomWindowBackend.field(win, 'getScreenDetails')), 'function') : Bool)) {
-            __flowBranch124 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch126 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch124 = flight._internal._Async.flowNormal();
+            __flowBranch126 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch124, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch126, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var details:flight._internal._Any = cast _Runtime.UNDEFINED;
               var b:{ >ScreenBackend, @:optional var _upgrade:Null<flight._internal._Any->Void>; } = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap(flight._internal.backend.DomWindowBackend.call(win, 'getScreenDetails', cast ([] : Array<Dynamic>)), function(__awaitValue125:Dynamic):Dynamic {
-                details = __awaitValue125;
+              return flight._internal._Async.flatMap(flight._internal.backend.DomWindowBackend.call(win, 'getScreenDetails', cast ([] : Array<Dynamic>)), function(__awaitValue127:Dynamic):Dynamic {
+                details = __awaitValue127;
                 b = (cast getScreenBackend() : flight._internal._Intersection2<ScreenBackend, { @:optional var _upgrade:flight._internal._Any->Void; }>);
-                ({ final __optionalCall126 = (cast b : { @:optional var _upgrade:Null<flight._internal._Any->Void>; })._upgrade; if (__optionalCall126 != null) __optionalCall126(details); });
+                ({ final __optionalCall128 = (cast b : { @:optional var _upgrade:Null<flight._internal._Any->Void>; })._upgrade; if (__optionalCall128 != null) __optionalCall128(details); });
                 return flight._internal._Async.flowReturn(true);
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -862,7 +899,7 @@ class _Screen {
     return cast out;
     return cast _Runtime.UNDEFINED;
   }, getPrimaryScreen: function(out:ScreenInfo):ScreenInfo {
-    _Screen.fillDefaultScreenInfo__screen(({ final __callArgument127:Dynamic = out; __callArgument127; }));
+    _Screen.fillDefaultScreenInfo__screen(({ final __callArgument129:Dynamic = out; __callArgument129; }));
     return cast out;
     return cast _Runtime.UNDEFINED;
   }, subscribe: function(listener:ScreenChangeEvent->Void):Void->Void {

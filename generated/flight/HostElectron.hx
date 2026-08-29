@@ -124,4 +124,8 @@ class HostElectron {
   public static function registerElectronBackends(electron:ElectronApi, ?options:ElectronBackendOptions):Void {
     Facade_HostElectron_flight__HostElectron.registerElectronBackends(electron, options);
   }
+
+  public static function resetElectronWindowBackendForTest():Void {
+    Facade_HostElectron_flight__HostElectron.resetElectronWindowBackendForTest();
+  }
 }

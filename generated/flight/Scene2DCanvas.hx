@@ -17,8 +17,11 @@ import flight.types.RenderCacheRefreshOptions;
 import flight.types.RenderState;
 import flight.types.RenderTargetDescriptor;
 import flight.types.RenderTexture;
+import flight.types.Scene2DKindUsage;
 import flight.types.Scene2DRenderer;
 import flight.types.Scene3DGraphSyncPolicy;
+import flight.types.SceneCoverageCatalog;
+import flight.types.SceneCoverageEntry;
 import flight.types.ShapeRasterizer;
 import flight.types.SpriteRenderer;
 import flight.types.Texture;
@@ -168,6 +171,10 @@ class Scene2DCanvas {
     return cast null;
   }
 
+  public static function explainCanvasScene2DCoverage(out:Array<SceneCoverageEntry>, state:CanvasRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void {
+    Facade_Scene2DCanvas_flight__Scene2DCanvas.explainCanvasScene2DCoverage(out, state, usage, catalog);
+  }
+
   public static function explainCanvasTextureResolution(resolvers:CanvasTextureResolvers, texture:Texture):TextureResolutionExplanation {
     return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.explainCanvasTextureResolution(resolvers, texture);
     return cast null;
@@ -175,6 +182,11 @@ class Scene2DCanvas {
 
   public static function getCanvasRenderStateTextureResolvers(state:CanvasRenderState):CanvasTextureResolvers {
     return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.getCanvasRenderStateTextureResolvers(state);
+    return cast null;
+  }
+
+  public static function hasCanvasScene2DCoverage(state:CanvasRenderState, usage:Scene2DKindUsage):Bool {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.hasCanvasScene2DCoverage(state, usage);
     return cast null;
   }
 

@@ -3,5 +3,8 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from '@flighthq/gizmo';
+export * from '@flighthq/gui';
 export * from '@flighthq/input';
 export * from '@flighthq/interaction';
+export * from '@flighthq/selection';

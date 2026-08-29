@@ -104,6 +104,16 @@ class _Power {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function destroyPowerBackend():Void {
+    var previous:Array<Null<PowerBackend>> = cast _Runtime.UNDEFINED;
+    previous = (cast cast ([_Power._custom__power, _Power._host__power] : Array<Dynamic>));
+    (_Power._custom__power = cast (null : Dynamic));
+    (_Power._host__power = cast (null : Dynamic));
+    _Power.releasePowerBackends__power(({ final __callArgument11:Dynamic = previous; __callArgument11; }), ({ final __callArgument12:Dynamic = cast ([] : Array<Dynamic>); __callArgument12; }));
+  }
+
   public static function detachPower(power:Power):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast _Power._subscriptions__power : flight._internal._WeakMap<Power, Void->Void>).get(power));
@@ -114,7 +124,7 @@ class _Power {
   }
 
   public static function disposePower(power:Power):Void {
-    detachPower(({ final __callArgument11:Dynamic = power; __callArgument11; }));
+    detachPower(({ final __callArgument15:Dynamic = power; __callArgument15; }));
   }
 
   public static function enablePowerSignals(power:Power):Void {
@@ -149,7 +159,7 @@ class _Power {
   }
 
   public static function getPowerBatteryHealth(out:PowerBatteryHealth):Null<PowerBatteryHealth> {
-    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getBatteryHealth(({ final __callArgument13:Dynamic = out; __callArgument13; }));
+    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getBatteryHealth(({ final __callArgument17:Dynamic = out; __callArgument17; }));
     return cast null;
   }
 
@@ -159,7 +169,7 @@ class _Power {
   }
 
   public static function getPowerStatus(out:PowerStatus):PowerStatus {
-    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus(({ final __callArgument14:Dynamic = out; __callArgument14; }));
+    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus(({ final __callArgument18:Dynamic = out; __callArgument18; }));
     return cast null;
   }
 
@@ -174,7 +184,14 @@ class _Power {
   }
 
   public static function getPowerThermalState():PowerThermalState {
-    return cast (cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus(({ final __callArgument15:Dynamic = _Power._scratch__power; __callArgument15; })) : { var thermalState:PowerThermalState; }).thermalState;
+    return cast (cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).getStatus(({ final __callArgument19:Dynamic = _Power._scratch__power; __callArgument19; })) : { var thermalState:PowerThermalState; }).thermalState;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasPowerHostBackend():Bool {
+    return cast !_Runtime.strictEquals(_Power._host__power, null);
     return cast null;
   }
 
@@ -211,6 +228,8 @@ class _Power {
   @:allow(flight)
   @:keep
   private static function setPowerBackend(backend:Null<PowerBackend>):Void {
+    if ((cast _Runtime.strictEquals(_Power._custom__power, backend) : Bool)) { return; }
+    _Power.releasePowerBackends__power(({ final __callArgument20:Dynamic = cast ([_Power._custom__power] : Array<Dynamic>); __callArgument20; }), ({ final __callArgument21:Dynamic = cast ([_Power._host__power] : Array<Dynamic>); __callArgument21; }));
     (_Power._custom__power = cast (backend : Dynamic));
   }
 
@@ -219,8 +238,20 @@ class _Power {
   }
 
   public static function setPowerKeepAwake(enabled:Bool, ?mode:PowerKeepAwakeMode):Bool {
-    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).setKeepAwake((cast enabled : Bool), ({ final __callArgument16:Dynamic = mode; __callArgument16; }));
+    return cast (cast (cast getPowerBackend() : PowerBackend) : PowerBackend).setKeepAwake((cast enabled : Bool), ({ final __callArgument24:Dynamic = mode; __callArgument24; }));
     return cast null;
+  }
+
+  public static function releasePowerBackends__power(previous:Array<Null<PowerBackend>>, retainedSlots:Array<Null<PowerBackend>>):Void {
+    var retained:flight._internal._Set<flight._internal._Any> = cast _Runtime.UNDEFINED;
+    var released:flight._internal._Set<flight._internal._Any> = cast _Runtime.UNDEFINED;
+    retained = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [(cast _Runtime.filterArray((cast retainedSlots : Array<Null<PowerBackend>>), function(slot:Null<PowerBackend>, __unused0:Float, __unused1:Array<Null<PowerBackend>>):Bool return !_Runtime.strictEquals(slot, null), _Runtime.UNDEFINED))]);
+    released = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+    for (backend in _Runtime.iterable(previous)) {
+      if ((cast ((cast ((cast _Runtime.strictEquals(backend, null) : Bool) || (cast ((cast retained : flight._internal._Set<flight._internal._Any>).has(backend)) : Bool)) : Bool) || (cast ((cast released : flight._internal._Set<flight._internal._Any>).has(backend)) : Bool)) : Bool)) { continue; }
+      ((cast released : flight._internal._Set<flight._internal._Any>).add(backend));
+      _Runtime.callOptionalProperty(backend, 'destroy', cast ([] : Array<Dynamic>));
+    }
   }
 
   public static var _custom__power:Null<PowerBackend> = _Runtime.explicitNull();

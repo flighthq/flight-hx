@@ -20,6 +20,7 @@ import flight._Types.ImageTextureSourceKind;
 import flight._Types.ResourceResolutionStateValue;
 import flight.types.AlphaType;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.Bitmap;
 import flight.types.CompressedImage;
 import flight.types.CompressedImageData;
@@ -30,6 +31,7 @@ import flight.types.EntityWithoutRuntime;
 import flight.types.ExternalImageResourceReference;
 import flight.types.Image;
 import flight.types.ImageBackend;
+import flight.types.ImageBackendOperation;
 import flight.types.ImageBitmapComposer;
 import flight.types.ImageBitmapComposition;
 import flight.types.ImageResourceFailure;
@@ -50,26 +52,37 @@ class _Image {
   @:allow(flight)
   @:keep
   private static function createWebImageBackend():ImageBackend {
-    return cast { loadImageFromUrl: function(url:String, crossOrigin:Null<String>, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Image> {
+    return cast { createImageFromBitmap: function(bitmap:Bitmap):Image {
+      var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+      var domImageData:flight._internal.dom.ImageData = cast _Runtime.UNDEFINED;
+      canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
+      flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', bitmap.width);
+      flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', bitmap.height);
+      domImageData = _Runtime.construct(_Runtime.field(flight._internal._HostValueLut.get('globalThis'), 'ImageData'), [bitmap.width, bitmap.height]);
+      (cast (cast domImageData : flight._internal.dom.ImageData).data : flight._internal._UInt8ClampedArray).set(((cast _Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool) ? (cast (cast _Image.unpremultiplyRgba8__imageBackend(bitmap.data) : flight._internal._UInt8ClampedArray) : Dynamic) : (cast bitmap.data : Dynamic)));
+      flight._internal.backend.Canvas2dBackend.call(flight._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
+      return cast (cast createImageResourceFromCanvas(({ final __callArgument0:Dynamic = canvas; __callArgument0; })) : Image);
+      return cast _Runtime.UNDEFINED;
+    }, loadImageFromUrl: function(url:String, crossOrigin:Null<String>, signal:Null<flight._internal.dom.AbortSignal>):flight._internal._Promise<Image> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var img:flight._internal.dom.HTMLImageElement = cast _Runtime.UNDEFINED;
-          ({ final __hostTypeCall0 = signal; __hostTypeCall0 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall0 : flight._internal.dom.AbortSignal).throwIfAborted(); });
+          ({ final __hostTypeCall2 = signal; __hostTypeCall2 == null ? _Runtime.UNDEFINED : (cast __hostTypeCall2 : flight._internal.dom.AbortSignal).throwIfAborted(); });
           img = _Runtime.construct(flight._internal._HostValueLut.get('Image'), []);
-          var __flowBranch1:Dynamic;
+          var __flowBranch3:Dynamic;
           if ((cast !_Runtime.strictEquals(crossOrigin, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            __flowBranch1 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch3 = flight._internal._Async.protect(function():Dynamic {
               ((cast img : flight._internal.dom.HTMLImageElement).crossOrigin = crossOrigin);
               return flight._internal._Async.flowNormal();
             });
           } else {
-            __flowBranch1 = flight._internal._Async.flowNormal();
+            __flowBranch3 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch1, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
             ((cast img : flight._internal.dom.HTMLImageElement).src = url);
-            var __flowBranch2:Dynamic;
+            var __flowBranch4:Dynamic;
             if ((cast !_Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-              __flowBranch2 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch4 = flight._internal._Async.protect(function():Dynamic {
                 var rejectAbort:flight._internal._Any->Void = cast _Runtime.UNDEFINED;
                 var abortPromise:flight._internal._Promise<flight._internal._Any> = cast _Runtime.UNDEFINED;
                 var onAbort:Void->Void = cast _Runtime.UNDEFINED;
@@ -85,8 +98,8 @@ class _Image {
                 };
                 (cast signal : flight._internal.dom.AbortSignal).addEventListener('abort', onAbort, { once: true });
                 return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.protect(function():Dynamic {
-                  return flight._internal._Async.flatMap(flight._internal._Async.race(cast ([(cast img : flight._internal.dom.HTMLImageElement).decode(), abortPromise] : Array<Dynamic>)), function(__awaitValue3:Dynamic):Dynamic {
-                    __awaitValue3;
+                  return flight._internal._Async.flatMap(flight._internal._Async.race(cast ([(cast img : flight._internal.dom.HTMLImageElement).decode(), abortPromise] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
+                    __awaitValue5;
                     return flight._internal._Async.flowNormal();
                   });
                 }), function():Dynamic {
@@ -97,20 +110,45 @@ class _Image {
                 });
               });
             } else {
-              __flowBranch2 = flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap((cast img : flight._internal.dom.HTMLImageElement).decode(), function(__awaitValue4:Dynamic):Dynamic {
-                  __awaitValue4;
+              __flowBranch4 = flight._internal._Async.protect(function():Dynamic {
+                return flight._internal._Async.flatMap((cast img : flight._internal.dom.HTMLImageElement).decode(), function(__awaitValue6:Dynamic):Dynamic {
+                  __awaitValue6;
                   return flight._internal._Async.flowNormal();
                 });
               });
             }
-            return flight._internal._Async.continueFlow(__flowBranch2, function():Dynamic {
-              return flight._internal._Async.flowReturn((cast createImageResourceFromImageElement(({ final __callArgument5:Dynamic = img; __callArgument5; })) : Image));
+            return flight._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+              return flight._internal._Async.flowReturn((cast createImageResourceFromImageElement(({ final __callArgument7:Dynamic = img; __callArgument7; })) : Image));
             });
           });
         })
       );
     } };
+    return cast null;
+  }
+
+  public static function unpremultiplyRgba8__imageBackend(source:flight._internal._UInt8ClampedArray):flight._internal._UInt8ClampedArray {
+    var data:flight._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
+    data = new flight._internal._UInt8ClampedArray(source);
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
+        var alpha:Float = flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 3.0) : Float));
+        if ((cast _Runtime.strictEquals(alpha, 0.0) : Bool)) {
+          flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast i : Float), (cast 0.0 : Float));
+          flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast 0.0 : Float));
+          flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast 0.0 : Float));
+          (i = cast ((i + 4.0) : Dynamic));
+          continue;
+        }
+        var scale:Float = (255.0 / alpha);
+        flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast i : Float), (cast HxMath.min(255.0, HxMath.round((flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast i : Float)) * scale))) : Float));
+        flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast HxMath.min(255.0, HxMath.round((flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 1.0) : Float)) * scale))) : Float));
+        flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast HxMath.min(255.0, HxMath.round((flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 2.0) : Float)) * scale))) : Float));
+        (i = cast ((i + 4.0) : Dynamic));
+      }
+    }
+    return cast data;
     return cast null;
   }
 
@@ -125,10 +163,26 @@ class _Image {
     return cast null;
   }
 
+  public static function explainImageOperation(operation:ImageBackendOperation):BackendOperationExplanation {
+    if ((cast !_Runtime.strictEquals(_Image._custom__imageBackend, null) : Bool)) {
+      return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Image._custom__imageBackend, operation)), 'function') : Bool) ? (cast { implemented: true, layer: 'custom', operation: operation } : Dynamic) : (cast { implemented: false, layer: 'none', operation: operation } : Dynamic));
+    }
+    if ((cast !_Runtime.strictEquals(_Image._host__imageBackend, null) : Bool)) {
+      return cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Image._host__imageBackend, operation)), 'function') : Bool) ? (cast { implemented: true, layer: 'host', operation: operation } : Dynamic) : (cast { implemented: false, layer: 'none', operation: operation } : Dynamic));
+    }
+    return cast { implemented: false, layer: ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Image._sentinel__imageBackend, operation)), 'function') : Bool) ? (cast 'sentinel' : Dynamic) : (cast 'none' : Dynamic)), operation: operation };
+    return cast null;
+  }
+
   @:allow(flight)
   @:keep
   private static function getImageBackend():ImageBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(_Image._custom__imageBackend, function():Dynamic return cast _Image._host__imageBackend), function():Dynamic return cast _Image._sentinel__imageBackend);
+    return cast null;
+  }
+
+  public static function hasImageOperation(operation:ImageBackendOperation):Bool {
+    return cast (cast (cast explainImageOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 
@@ -182,14 +236,14 @@ class _Image {
   }
 
   public static function createCompressedImage(compressed:CompressedImageData):CompressedImage {
-    return cast (cast createEntity(({ final __callArgument7:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: _Image.DECODED_GAMUT__imageResource, height: (cast compressed.container : { var height:Float; }).height, kind: CompressedImageTextureSourceKind, version: 0.0, width: (cast compressed.container : { var width:Float; }).width }; __callArgument7; })) : { >Entity, var alphaType:String; var compressed:CompressedImageData; var gamut:String; var height:Float; var kind:String; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument9:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResource, compressed: compressed, gamut: _Image.DECODED_GAMUT__imageResource, height: (cast compressed.container : { var height:Float; }).height, kind: CompressedImageTextureSourceKind, version: 0.0, width: (cast compressed.container : { var width:Float; }).width }; __callArgument9; })) : { >Entity, var alphaType:String; var compressed:CompressedImageData; var gamut:String; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 
   public static function createImageResource(image:flight._internal.dom.CanvasImageSource):Image {
     var resource:Image = cast _Runtime.UNDEFINED;
-    resource = (cast createEntity(({ final __callArgument9:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResource, gamut: _Image.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 }; __callArgument9; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal._Any; var version:Float; var width:Float; });
-    _Image.updateImageResourceSize__imageResource(({ final __callArgument11:Dynamic = resource; __callArgument11; }));
+    resource = (cast createEntity(({ final __callArgument11:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResource, gamut: _Image.DECODED_GAMUT__imageResource, height: 0.0, kind: ImageTextureSourceKind, source: image, version: 0.0, width: 0.0 }; __callArgument11; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal._Any; var version:Float; var width:Float; });
+    _Image.updateImageResourceSize__imageResource(({ final __callArgument13:Dynamic = resource; __callArgument13; }));
     return cast resource;
     return cast null;
   }
@@ -197,7 +251,7 @@ class _Image {
   @:allow(flight)
   @:keep
   private static function invalidateImageResource(resource:Image):Void {
-    _Image.updateImageResourceSize__imageResource(({ final __callArgument13:Dynamic = resource; __callArgument13; }));
+    _Image.updateImageResourceSize__imageResource(({ final __callArgument15:Dynamic = resource; __callArgument15; }));
     ((cast resource : Image).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast resource : Image).version + 1.0)), 0));
   }
 
@@ -224,56 +278,26 @@ class _Image {
 
   public static final DECODED_GAMUT__imageResource:String = 'srgb';
 
-  public static function createImageResourceFromBitmap(bitmap:Bitmap):Image {
-    var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
-    var domImageData:flight._internal.dom.ImageData = cast _Runtime.UNDEFINED;
-    canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', bitmap.width);
-    flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', bitmap.height);
-    domImageData = _Runtime.construct(_Runtime.field(flight._internal._HostValueLut.get('globalThis'), 'ImageData'), [bitmap.width, bitmap.height]);
-    (cast (cast domImageData : flight._internal.dom.ImageData).data : flight._internal._UInt8ClampedArray).set(((cast _Runtime.strictEquals(bitmap.alphaType, 'premultiplied') : Bool) ? (cast (cast _Image.unpremultiplyRgba8__imageResourceFrom(bitmap.data) : flight._internal._UInt8ClampedArray) : Dynamic) : (cast bitmap.data : Dynamic)));
-    flight._internal.backend.Canvas2dBackend.call(flight._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
-    return cast (cast createImageResourceFromCanvas(({ final __callArgument15:Dynamic = canvas; __callArgument15; })) : Image);
-    return cast null;
-  }
-
-  public static function unpremultiplyRgba8__imageResourceFrom(source:flight._internal._UInt8ClampedArray):flight._internal._UInt8ClampedArray {
-    var data:flight._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
-    data = new flight._internal._UInt8ClampedArray(source);
-    {
-      var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(data, 'length') : Float)) : Bool)) {
-        var alpha:Float = flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 3.0) : Float));
-        if ((cast _Runtime.strictEquals(alpha, 0.0) : Bool)) {
-          flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast i : Float), (cast 0.0 : Float));
-          flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast 0.0 : Float));
-          flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast 0.0 : Float));
-          (i = cast ((i + 4.0) : Dynamic));
-          continue;
-        }
-        var scale:Float = (255.0 / alpha);
-        flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast i : Float), (cast HxMath.min(255.0, HxMath.round((flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast i : Float)) * scale))) : Float));
-        flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast HxMath.min(255.0, HxMath.round((flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 1.0) : Float)) * scale))) : Float));
-        flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast HxMath.min(255.0, HxMath.round((flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast (i + 2.0) : Float)) * scale))) : Float));
-        (i = cast ((i + 4.0) : Dynamic));
-      }
-    }
-    return cast data;
+  public static function createImageResourceFromBitmap(bitmap:Bitmap):Null<Image> {
+    var backend:ImageBackend = cast _Runtime.UNDEFINED;
+    backend = (cast getImageBackend() : ImageBackend);
+    if ((cast _Runtime.strictEquals((cast backend : ImageBackend).createImageFromBitmap, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
+    return cast (cast backend : ImageBackend).createImageFromBitmap(({ final __callArgument17:Dynamic = bitmap; __callArgument17; }));
     return cast null;
   }
 
   public static function createImageResourceFromCanvas(canvas:flight._internal.dom.HTMLCanvasElement):Image {
-    return cast (cast createEntity(({ final __callArgument17:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: flight._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flight._internal.backend.CanvasElementBackend.field(canvas, 'width') }; __callArgument17; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal.dom.HTMLCanvasElement; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument18:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: flight._internal.backend.CanvasElementBackend.field(canvas, 'height'), kind: ImageTextureSourceKind, source: canvas, version: 0.0, width: flight._internal.backend.CanvasElementBackend.field(canvas, 'width') }; __callArgument18; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal.dom.HTMLCanvasElement; var version:Float; var width:Float; });
     return cast null;
   }
 
   public static function createImageResourceFromImageBitmap(bitmap:flight._internal.dom.ImageBitmap):Image {
-    return cast (cast createEntity(({ final __callArgument19:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: bitmap.height, kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: bitmap.width }; __callArgument19; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal.dom.ImageBitmap; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument20:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: bitmap.height, kind: ImageTextureSourceKind, source: bitmap, version: 0.0, width: bitmap.width }; __callArgument20; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal.dom.ImageBitmap; var version:Float; var width:Float; });
     return cast null;
   }
 
   public static function createImageResourceFromImageElement(img:flight._internal.dom.HTMLImageElement):Image {
-    return cast (cast createEntity(({ final __callArgument21:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: img.height, kind: ImageTextureSourceKind, source: img, version: 0.0, width: img.width }; __callArgument21; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal.dom.HTMLImageElement; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument22:Dynamic = { alphaType: _Image.DECODED_ALPHA_TYPE__imageResourceFrom, gamut: _Image.DECODED_GAMUT__imageResourceFrom, height: img.height, kind: ImageTextureSourceKind, source: img, version: 0.0, width: img.width }; __callArgument22; })) : { >Entity, var alphaType:String; var gamut:String; var height:Float; var kind:String; var source:flight._internal.dom.HTMLImageElement; var version:Float; var width:Float; });
     return cast null;
   }
 
@@ -289,7 +313,7 @@ class _Image {
 
   public static function loadImageResourceFromBase64(base64:String, mimeType:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Image> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve((cast loadImageResourceFromUrl((cast 'data:' + Std.string(mimeType) + ';base64,' + Std.string(base64) + '' : String), ({ final __callArgument27:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument27; }), ({ final __callArgument28:Dynamic = signal; __callArgument28; })) : flight._internal._Promise<Image>));
+      return flight._internal._Async.resolve((cast loadImageResourceFromUrl((cast 'data:' + Std.string(mimeType) + ';base64,' + Std.string(base64) + '' : String), ({ final __callArgument28:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument28; }), ({ final __callArgument29:Dynamic = signal; __callArgument29; })) : flight._internal._Promise<Image>));
     }));
   }
 
@@ -299,8 +323,8 @@ class _Image {
         var url:String = cast _Runtime.UNDEFINED;
         url = _Runtime.callProperty(flight._internal._HostValueLut.get('URL'), 'createObjectURL', cast ([blob] : Array<Dynamic>));
         return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), ({ final __callArgument38:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument38; }), ({ final __callArgument39:Dynamic = signal; __callArgument39; })) : flight._internal._Promise<Image>), function(__awaitValue37:Dynamic):Dynamic {
-            return flight._internal._Async.flowReturn(__awaitValue37);
+          return flight._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), ({ final __callArgument39:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument39; }), ({ final __callArgument40:Dynamic = signal; __callArgument40; })) : flight._internal._Promise<Image>), function(__awaitValue38:Dynamic):Dynamic {
+            return flight._internal._Async.flowReturn(__awaitValue38);
           });
         }), function():Dynamic {
           _Runtime.callProperty(flight._internal._HostValueLut.get('URL'), 'revokeObjectURL', cast ([url] : Array<Dynamic>));
@@ -316,19 +340,19 @@ class _Image {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       var type:Null<String> = cast _Runtime.UNDEFINED;
       var buf:haxe.io.Bytes = cast _Runtime.UNDEFINED;
-      type = _Runtime.coalesce(mimeType, function():Dynamic return cast (cast detectImageMimeType(({ final __callArgument42:Dynamic = bytes; __callArgument42; })) : Null<String>));
+      type = _Runtime.coalesce(mimeType, function():Dynamic return cast (cast detectImageMimeType(({ final __callArgument43:Dynamic = bytes; __callArgument43; })) : Null<String>));
       if ((cast _Runtime.strictEquals(type, null) : Bool)) {
         _Runtime.throwValue(_Runtime.error('Unable to determine image type from bytes'));
       }
       buf = _Runtime.slice((cast _Runtime.field(bytes, 'buffer') : haxe.io.Bytes), _Runtime.field(bytes, 'byteOffset'), _Runtime.addNumbers(_Runtime.field(bytes, 'byteOffset'), _Runtime.field(bytes, 'byteLength')));
-      return cast (cast loadImageResourceFromBlob(_Runtime.construct(flight._internal._HostValueLut.get('Blob'), [cast ([buf] : Array<Dynamic>), { type: type }]), ({ final __callArgument44:Dynamic = signal; __callArgument44; })) : flight._internal._Promise<Image>);
+      return cast (cast loadImageResourceFromBlob(_Runtime.construct(flight._internal._HostValueLut.get('Blob'), [cast ([buf] : Array<Dynamic>), { type: type }]), ({ final __callArgument45:Dynamic = signal; __callArgument45; })) : flight._internal._Promise<Image>);
       return cast null;
     }));
   }
 
   public static function loadImageResourceFromUrl(url:String, ?crossOrigin:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Image> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve((cast (cast getImageBackend() : ImageBackend) : ImageBackend).loadImageFromUrl((cast url : String), ({ final __callArgument48:Dynamic = crossOrigin; __callArgument48; }), ({ final __callArgument49:Dynamic = signal; __callArgument49; })));
+      return flight._internal._Async.resolve((cast (cast getImageBackend() : ImageBackend) : ImageBackend).loadImageFromUrl((cast url : String), ({ final __callArgument49:Dynamic = crossOrigin; __callArgument49; }), ({ final __callArgument50:Dynamic = signal; __callArgument50; })));
     }));
   }
 
@@ -347,28 +371,28 @@ class _Image {
       flight._internal._Async.protect(function():Dynamic {
         var decoded:Null<DecodedImage> = cast _Runtime.UNDEFINED;
         var bitmap:{ var data:flight._internal._UInt8ClampedArray; var format:PixelFormat; var kind:Dynamic; var alphaType:AlphaType; var gamut:String; var height:Float; var version:Float; var width:Float; } = cast _Runtime.UNDEFINED;
-        var __flowBranch58:Dynamic;
+        var __flowBranch59:Dynamic;
         if ((cast ((cast !_Runtime.strictEquals(ref.bitmapComposition, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(_Image._resolveImageBitmapComposition__imageResourceReference, null) : Bool)) : Bool)) {
-          __flowBranch58 = flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flowReturn((cast (cast _Image._resolveImageBitmapComposition__imageResourceReference : EmbeddedImageResourceReference->flight._internal.dom.AbortSignal->flight._internal._Promise<Null<Bitmap>>)(({ final __callArgument59:Dynamic = ref; __callArgument59; }), ({ final __callArgument60:Dynamic = signal; __callArgument60; })) : flight._internal._Promise<Null<Bitmap>>));
+          __flowBranch59 = flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flowReturn((cast (cast _Image._resolveImageBitmapComposition__imageResourceReference : EmbeddedImageResourceReference->flight._internal.dom.AbortSignal->flight._internal._Promise<Null<Bitmap>>)(({ final __callArgument60:Dynamic = ref; __callArgument60; }), ({ final __callArgument61:Dynamic = signal; __callArgument61; })) : flight._internal._Promise<Null<Bitmap>>));
           });
         } else {
-          __flowBranch58 = flight._internal._Async.flowNormal();
+          __flowBranch59 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch58, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch59, function():Dynamic {
           signal.throwIfAborted();
-          return flight._internal._Async.flatMap(((cast _Runtime.strictEquals(ref.alphaType, 'premultiplied') : Bool) ? (cast (cast decodeImagePremultiplied(ref.bytes, ({ final __callArgument65:Dynamic = _Runtime.coalesce(ref.mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument65; })) : flight._internal._Promise<Null<DecodedImage>>) : Dynamic) : (cast (cast decodeImage(ref.bytes, ({ final __callArgument67:Dynamic = _Runtime.coalesce(ref.mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument67; })) : flight._internal._Promise<Null<DecodedImage>>) : Dynamic)), function(__awaitValue63:Dynamic):Dynamic {
-            decoded = __awaitValue63;
+          return flight._internal._Async.flatMap(((cast _Runtime.strictEquals(ref.alphaType, 'premultiplied') : Bool) ? (cast (cast decodeImagePremultiplied(ref.bytes, ({ final __callArgument66:Dynamic = _Runtime.coalesce(ref.mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument66; })) : flight._internal._Promise<Null<DecodedImage>>) : Dynamic) : (cast (cast decodeImage(ref.bytes, ({ final __callArgument68:Dynamic = _Runtime.coalesce(ref.mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument68; })) : flight._internal._Promise<Null<DecodedImage>>) : Dynamic)), function(__awaitValue64:Dynamic):Dynamic {
+            decoded = __awaitValue64;
             signal.throwIfAborted();
-            var __flowBranch64:Dynamic;
+            var __flowBranch65:Dynamic;
             if ((cast _Runtime.strictEquals(decoded, null) : Bool)) {
-              __flowBranch64 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch65 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn(null);
               });
             } else {
-              __flowBranch64 = flight._internal._Async.flowNormal();
+              __flowBranch65 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch64, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch65, function():Dynamic {
               bitmap = { alphaType: ref.alphaType, data: new flight._internal._UInt8ClampedArray((cast decoded : DecodedImage).data), format: 'rgba8unorm', gamut: 'srgb', height: (cast decoded : DecodedImage).height, kind: BitmapTextureSourceKind, version: 0.0, width: (cast decoded : DecodedImage).width };
               return flight._internal._Async.flowReturn((cast createEntity((cast bitmap : Dynamic)) : { >Entity, var data:flight._internal._UInt8ClampedArray; var format:PixelFormat; var height:Float; var width:Float; var kind:String; var version:Float; var alphaType:AlphaType; var gamut:String; }));
             });
@@ -401,17 +425,17 @@ class _Image {
         signal.throwIfAborted();
         composition = ref.bitmapComposition;
         composer = (cast getImageBitmapComposer((cast (cast composition : ImageBitmapComposition).kind : String)) : Null<ImageBitmapComposer>);
-        var __flowBranch71:Dynamic;
+        var __flowBranch72:Dynamic;
         if ((cast _Runtime.strictEquals(composer, null) : Bool)) {
-          __flowBranch71 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch72 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn(null);
           });
         } else {
-          __flowBranch71 = flight._internal._Async.flowNormal();
+          __flowBranch72 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch71, function():Dynamic {
-          return flight._internal._Async.flatMap((cast decodeImage(ref.bytes, ({ final __callArgument73:Dynamic = _Runtime.coalesce(ref.mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument73; })) : flight._internal._Promise<Null<DecodedImage>>), function(__awaitValue72:Dynamic):Dynamic {
-            decoded = __awaitValue72;
+        return flight._internal._Async.continueFlow(__flowBranch72, function():Dynamic {
+          return flight._internal._Async.flatMap((cast decodeImage(ref.bytes, ({ final __callArgument74:Dynamic = _Runtime.coalesce(ref.mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument74; })) : flight._internal._Promise<Null<DecodedImage>>), function(__awaitValue73:Dynamic):Dynamic {
+            decoded = __awaitValue73;
             signal.throwIfAborted();
             return flight._internal._Async.flowReturn((cast composer((cast decoded : Dynamic), (cast composition : ImageBitmapComposition).payload) : Null<Bitmap>));
           });
@@ -453,41 +477,41 @@ class _Image {
           var source:Null<flight._internal._Union2<Image, Bitmap>> = cast _Runtime.UNDEFINED;
           usesOrdinaryEmbeddedDecode = ((cast _Runtime.strictEquals((cast ref : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals((cast ref : { @:optional var bitmapComposition:Null<ImageBitmapComposition>; }).bitmapComposition, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast _Runtime.strictEquals(_Image._resolveImageBitmapComposition__imageResourceReference, null)) : Bool));
           if ((cast _Runtime.strictEquals((cast ref : { var kind:String; }).kind, (cast ImageResourceReferenceKindValue : { var Embedded:String; var External:String; }).Embedded) : Bool)) {
-            return flight._internal._Async.flatMap((cast _Image.decodeEmbeddedImageResourceReference__imageResourceReference(({ final __callArgument91:Dynamic = ref; __callArgument91; }), ({ final __callArgument92:Dynamic = signal; __callArgument92; })) : flight._internal._Promise<Null<Bitmap>>), function(__awaitValue86:Dynamic):Dynamic {
-              source = __awaitValue86;
-              var __flowBranch87:Dynamic;
+            return flight._internal._Async.flatMap((cast _Image.decodeEmbeddedImageResourceReference__imageResourceReference(({ final __callArgument92:Dynamic = ref; __callArgument92; }), ({ final __callArgument93:Dynamic = signal; __callArgument93; })) : flight._internal._Promise<Null<Bitmap>>), function(__awaitValue87:Dynamic):Dynamic {
+              source = __awaitValue87;
+              var __flowBranch88:Dynamic;
               if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-                __flowBranch87 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch88 = flight._internal._Async.protect(function():Dynamic {
                   var decodeFailure:Null<flight._internal._Union2<{ var mimeType:flight._internal._Any; var reason:String; }, { var mimeType:String; var reason:String; }>> = cast _Runtime.UNDEFINED;
-                  decodeFailure = ((cast usesOrdinaryEmbeddedDecode : Bool) ? (cast (cast explainImageDecodeFailure((cast ref : { var bytes:flight._internal._UInt8Array; }).bytes, ({ final __callArgument88:Dynamic = _Runtime.coalesce((cast ref : { var mimeType:Null<String>; }).mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument88; })) : Null<flight._internal._Union2<{ var mimeType:flight._internal._Any; var reason:String; }, { var mimeType:String; var reason:String; }>>) : Dynamic) : (cast null : Dynamic));
-                  ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: _Runtime.coalesce(({ final __structural90 = decodeFailure; __structural90 == null ? _Runtime.UNDEFINED : (cast __structural90 : { var reason:String; }).reason; }), function():Dynamic return cast 'Image resource unavailable'), name: null });
+                  decodeFailure = ((cast usesOrdinaryEmbeddedDecode : Bool) ? (cast (cast explainImageDecodeFailure((cast ref : { var bytes:flight._internal._UInt8Array; }).bytes, ({ final __callArgument89:Dynamic = _Runtime.coalesce((cast ref : { var mimeType:Null<String>; }).mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument89; })) : Null<flight._internal._Union2<{ var mimeType:flight._internal._Any; var reason:String; }, { var mimeType:String; var reason:String; }>>) : Dynamic) : (cast null : Dynamic));
+                  ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: _Runtime.coalesce(({ final __structural91 = decodeFailure; __structural91 == null ? _Runtime.UNDEFINED : (cast __structural91 : { var reason:String; }).reason; }), function():Dynamic return cast 'Image resource unavailable'), name: null });
                   ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
                   return flight._internal._Async.flowReturn(null);
                 });
               } else {
-                __flowBranch87 = flight._internal._Async.flowNormal();
+                __flowBranch88 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch87, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch88, function():Dynamic {
                 ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
                 return flight._internal._Async.flowReturn(source);
               });
             });
           } else {
-            return flight._internal._Async.flatMap((cast fetch(({ final __callArgument100:Dynamic = ref; __callArgument100; }), ({ final __callArgument101:Dynamic = signal; __callArgument101; })) : flight._internal._Promise<Null<Image>>), function(__awaitValue95:Dynamic):Dynamic {
-              source = __awaitValue95;
-              var __flowBranch96:Dynamic;
+            return flight._internal._Async.flatMap((cast fetch(({ final __callArgument101:Dynamic = ref; __callArgument101; }), ({ final __callArgument102:Dynamic = signal; __callArgument102; })) : flight._internal._Promise<Null<Image>>), function(__awaitValue96:Dynamic):Dynamic {
+              source = __awaitValue96;
+              var __flowBranch97:Dynamic;
               if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-                __flowBranch96 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch97 = flight._internal._Async.protect(function():Dynamic {
                   var decodeFailure:Null<flight._internal._Union2<{ var mimeType:flight._internal._Any; var reason:String; }, { var mimeType:String; var reason:String; }>> = cast _Runtime.UNDEFINED;
-                  decodeFailure = ((cast usesOrdinaryEmbeddedDecode : Bool) ? (cast (cast explainImageDecodeFailure((cast ref : { var bytes:flight._internal._UInt8Array; }).bytes, ({ final __callArgument97:Dynamic = _Runtime.coalesce((cast ref : { var mimeType:Null<String>; }).mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument97; })) : Null<flight._internal._Union2<{ var mimeType:flight._internal._Any; var reason:String; }, { var mimeType:String; var reason:String; }>>) : Dynamic) : (cast null : Dynamic));
-                  ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: _Runtime.coalesce(({ final __structural99 = decodeFailure; __structural99 == null ? _Runtime.UNDEFINED : (cast __structural99 : { var reason:String; }).reason; }), function():Dynamic return cast 'Image resource unavailable'), name: null });
+                  decodeFailure = ((cast usesOrdinaryEmbeddedDecode : Bool) ? (cast (cast explainImageDecodeFailure((cast ref : { var bytes:flight._internal._UInt8Array; }).bytes, ({ final __callArgument98:Dynamic = _Runtime.coalesce((cast ref : { var mimeType:Null<String>; }).mimeType, function():Dynamic return cast _Runtime.field(_Runtime, 'UNDEFINED')); __callArgument98; })) : Null<flight._internal._Union2<{ var mimeType:flight._internal._Any; var reason:String; }, { var mimeType:String; var reason:String; }>>) : Dynamic) : (cast null : Dynamic));
+                  ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: _Runtime.coalesce(({ final __structural100 = decodeFailure; __structural100 == null ? _Runtime.UNDEFINED : (cast __structural100 : { var reason:String; }).reason; }), function():Dynamic return cast 'Image resource unavailable'), name: null });
                   ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
                   return flight._internal._Async.flowReturn(null);
                 });
               } else {
-                __flowBranch96 = flight._internal._Async.flowNormal();
+                __flowBranch97 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch96, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch97, function():Dynamic {
                 ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
                 return flight._internal._Async.flowReturn(source);
               });
@@ -496,16 +520,16 @@ class _Image {
         }), function(__caughtError:Dynamic):Dynamic {
           var cause:Dynamic = __caughtError;
           return flight._internal._Async.protect(function():Dynamic {
-            var __flowBranch104:Dynamic;
+            var __flowBranch105:Dynamic;
             if ((cast signal.aborted : Bool)) {
-              __flowBranch104 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch105 = flight._internal._Async.protect(function():Dynamic {
                 ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Unresolved);
                 return flight._internal._Async.reject(cause);
               });
             } else {
-              __flowBranch104 = flight._internal._Async.flowNormal();
+              __flowBranch105 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch104, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch105, function():Dynamic {
               ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = (cast createImageResourceFailure((cast cause : flight._internal._Any)) : ImageResourceFailure));
               ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
               return flight._internal._Async.flowReturn(null);

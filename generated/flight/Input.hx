@@ -8,6 +8,7 @@ import flight.types.AttachInputOptions;
 import flight.types.GamepadAxisKind;
 import flight.types.GamepadButtonKind;
 import flight.types.GamepadMappingKind;
+import flight.types.InputIngressSource;
 import flight.types.InputKeyRepeatOptions;
 import flight.types.InputKeyRepeatTimer;
 import flight.types.InputManager;
@@ -25,28 +26,28 @@ class Input {
     Facade_Input_flight__Input.applyGamepadStickDeadZone(out, x, y, deadZone);
   }
 
-  public static function attachGamepadInput(manager:InputManager, target:flight._internal.dom.Window, ?options:AttachInputOptions):Void {
-    Facade_Input_flight__Input.attachGamepadInput(manager, target, options);
+  public static function attachGamepadInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
+    Facade_Input_flight__Input.attachGamepadInput(manager, source, options);
   }
 
-  public static function attachKeyboardInput(manager:InputManager, target:flight._internal.dom.EventTarget, ?options:AttachInputOptions):Void {
-    Facade_Input_flight__Input.attachKeyboardInput(manager, target, options);
+  public static function attachKeyboardInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
+    Facade_Input_flight__Input.attachKeyboardInput(manager, source, options);
   }
 
-  public static function attachPointerInput(manager:InputManager, element:flight._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
-    Facade_Input_flight__Input.attachPointerInput(manager, element, options);
+  public static function attachPointerInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
+    Facade_Input_flight__Input.attachPointerInput(manager, source, options);
   }
 
-  public static function attachRelativePointerInput(manager:InputManager, element:flight._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
-    Facade_Input_flight__Input.attachRelativePointerInput(manager, element, options);
+  public static function attachRelativePointerInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
+    Facade_Input_flight__Input.attachRelativePointerInput(manager, source, options);
   }
 
-  public static function attachTextInput(manager:InputManager, element:flight._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
-    Facade_Input_flight__Input.attachTextInput(manager, element, options);
+  public static function attachTextInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
+    Facade_Input_flight__Input.attachTextInput(manager, source, options);
   }
 
-  public static function attachWheelInput(manager:InputManager, element:flight._internal.dom.HTMLElement, ?options:AttachInputOptions):Void {
-    Facade_Input_flight__Input.attachWheelInput(manager, element, options);
+  public static function attachWheelInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
+    Facade_Input_flight__Input.attachWheelInput(manager, source, options);
   }
 
   public static function connectInputStateToInputManager(state:InputState, manager:InputManager):Void->Void {
@@ -69,28 +70,28 @@ class Input {
     return cast null;
   }
 
-  public static function detachGamepadInput(manager:InputManager, target:flight._internal.dom.Window):Void {
-    Facade_Input_flight__Input.detachGamepadInput(manager, target);
+  public static function detachGamepadInput(manager:InputManager, source:InputIngressSource):Void {
+    Facade_Input_flight__Input.detachGamepadInput(manager, source);
   }
 
-  public static function detachKeyboardInput(manager:InputManager, target:flight._internal.dom.EventTarget):Void {
-    Facade_Input_flight__Input.detachKeyboardInput(manager, target);
+  public static function detachKeyboardInput(manager:InputManager, source:InputIngressSource):Void {
+    Facade_Input_flight__Input.detachKeyboardInput(manager, source);
   }
 
-  public static function detachPointerInput(manager:InputManager, element:flight._internal.dom.HTMLElement):Void {
-    Facade_Input_flight__Input.detachPointerInput(manager, element);
+  public static function detachPointerInput(manager:InputManager, source:InputIngressSource):Void {
+    Facade_Input_flight__Input.detachPointerInput(manager, source);
   }
 
-  public static function detachRelativePointerInput(manager:InputManager, element:flight._internal.dom.HTMLElement):Void {
-    Facade_Input_flight__Input.detachRelativePointerInput(manager, element);
+  public static function detachRelativePointerInput(manager:InputManager, source:InputIngressSource):Void {
+    Facade_Input_flight__Input.detachRelativePointerInput(manager, source);
   }
 
-  public static function detachTextInput(manager:InputManager, element:flight._internal.dom.HTMLElement):Void {
-    Facade_Input_flight__Input.detachTextInput(manager, element);
+  public static function detachTextInput(manager:InputManager, source:InputIngressSource):Void {
+    Facade_Input_flight__Input.detachTextInput(manager, source);
   }
 
-  public static function detachWheelInput(manager:InputManager, element:flight._internal.dom.HTMLElement):Void {
-    Facade_Input_flight__Input.detachWheelInput(manager, element);
+  public static function detachWheelInput(manager:InputManager, source:InputIngressSource):Void {
+    Facade_Input_flight__Input.detachWheelInput(manager, source);
   }
 
   public static function endInputStateFrame(state:InputState):Void {
@@ -153,10 +154,6 @@ class Input {
   public static function isInputPointerButtonDown(state:InputState, pointerId:Float, button:Float):Bool {
     return cast Facade_Input_flight__Input.isInputPointerButtonDown(state, pointerId, button);
     return cast null;
-  }
-
-  public static function pollGamepadInput(manager:InputManager):Void {
-    Facade_Input_flight__Input.pollGamepadInput(manager);
   }
 
   public static function releaseInputPointerCapture(element:flight._internal.dom.HTMLElement, pointerId:Float):Void {

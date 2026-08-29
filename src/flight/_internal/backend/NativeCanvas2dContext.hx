@@ -589,6 +589,16 @@ class NativeCanvas2dContext {
 
   // ---- images and pixels ----
 
+  public function createImageData(width:Float, height:Float):Dynamic {
+    final imageWidth = Std.int(width);
+    final imageHeight = Std.int(height);
+    return {
+      width: imageWidth,
+      height: imageHeight,
+      data: new flight._internal._UInt8ClampedArray(imageWidth * imageHeight * 4),
+    };
+  }
+
   public function drawImage(source:Dynamic, a:Float, b:Float, ?c:Float, ?d:Float, ?e:Float, ?f:Float, ?g:Float,
       ?h:Float):Void {
     final imageSurface = sourceSurface(source);

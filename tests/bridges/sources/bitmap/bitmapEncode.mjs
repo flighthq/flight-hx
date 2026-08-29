@@ -6,3 +6,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const encodeBitmap = api.encodeBitmap;
+export const explainBitmapEncodeFailure = api.explainBitmapEncodeFailure;

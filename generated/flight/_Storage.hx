@@ -7,11 +7,13 @@ import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.Signal;
 import flight.types.StorageBackend;
 import flight.types.StorageChange;
 import flight.types.StorageMigration;
 import flight.types.StorageNamespace;
+import flight.types.StorageOperation;
 import flight.types.StorageQuota;
 import flight.types.StorageSignals;
 
@@ -172,6 +174,19 @@ class _Storage {
       return cast { conflict: _Storage._hostConflict__storage, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Storage._hostObservation__storage, null) : Bool) ? (cast (cast _Storage._hostObservation__storage : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Storage._hostObservation__storage, null) : Bool) ? (cast (cast _Storage._hostObservation__storage : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
     }
     return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function explainStorageOperation(operation:StorageOperation):BackendOperationExplanation {
+    if ((cast ((cast !_Runtime.strictEquals(_Storage._custom__storage, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Storage._custom__storage, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'custom', operation: operation };
+    }
+    if ((cast ((cast !_Runtime.strictEquals(_Storage._host__storage, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Storage._host__storage, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'host', operation: operation };
+    }
+    return cast { implemented: false, layer: 'sentinel', operation: operation };
     return cast null;
   }
 
@@ -420,6 +435,13 @@ class _Storage {
 
   public static function hasStorageItem(key:String):Bool {
     return cast !_Runtime.strictEquals((cast (cast getStorageBackend() : StorageBackend) : StorageBackend).getItem((cast key : String)), null);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasStorageOperation(operation:StorageOperation):Bool {
+    return cast (cast (cast explainStorageOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 

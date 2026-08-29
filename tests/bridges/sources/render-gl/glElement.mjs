@@ -6,3 +6,8 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createGlCanvasElement = api.createGlCanvasElement;
+export const createGlRenderSurface = api.createGlRenderSurface;
+export const explainGlRenderSurfaceAbsence = api.explainGlRenderSurfaceAbsence;
+export const getGlRenderSurfaceProvider = api.getGlRenderSurfaceProvider;
+export const resetGlRenderSurfaceProviderForTest = api.resetGlRenderSurfaceProviderForTest;
+export const setGlRenderSurfaceProvider = api.setGlRenderSurfaceProvider;

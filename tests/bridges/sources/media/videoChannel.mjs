@@ -5,6 +5,7 @@ const api = compiled.flight._Media;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const destroyVideoChannel = api.destroyVideoChannel;
 export const getVideoChannelCurrentTime = api.getVideoChannelCurrentTime;
 export const getVideoChannelDuration = api.getVideoChannelDuration;
 export const getVideoChannelHeight = api.getVideoChannelHeight;

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MenuBackend = { var setApplicationMenu:Array<MenuItemTemplate>->Bool; var popupContextMenu:Array<MenuItemTemplate>->Float->Float->flight._internal._Promise<Null<String>>; var subscribeSelect:(String->Void)->(Void->Void); };
+typedef MenuBackend = { @:optional var replacementGuarantees:Array<MenuReplacementGuaranteeDeclaration>; @:optional var destroy:Void->Void; var setApplicationMenu:Array<MenuItemTemplate>->Bool; var popupContextMenu:Array<MenuItemTemplate>->Float->Float->flight._internal._Promise<Null<String>>; var subscribeSelect:(String->Void)->(Void->Void); };

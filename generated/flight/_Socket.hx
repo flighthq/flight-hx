@@ -146,14 +146,30 @@ class _Socket {
   @:allow(flight)
   @:keep
   private static function getSocketBackend():SocketBackend {
-    if ((cast _Runtime.strictEquals(_Socket._backend__socket, null) : Bool)) { (_Socket._backend__socket = cast ((cast createWebSocketBackend() : SocketBackend) : Dynamic)); }
-    return cast _Socket._backend__socket;
+    if ((cast !_Runtime.strictEquals(_Socket._custom__socket, null) : Bool)) { return cast _Socket._custom__socket; }
+    if ((cast !_Runtime.strictEquals(_Socket._host__socket, null) : Bool)) { return cast _Socket._host__socket; }
+    if ((cast _Runtime.strictEquals(_Socket._webFallback__socket, null) : Bool)) { (_Socket._webFallback__socket = cast ((cast createWebSocketBackend() : SocketBackend) : Dynamic)); }
+    return cast _Socket._webFallback__socket;
     return cast null;
   }
 
   public static function getSocketReadyState(socket:Socket):SocketReadyState {
     return cast (cast socket.runtime : { var readyState:SocketReadyState; }).readyState;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function installSocketHostBackend(backend:SocketBackend):Void {
+    if ((cast _Runtime.strictEquals(_Socket._host__socket, null) : Bool)) { (_Socket._host__socket = cast (backend : Dynamic)); }
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function resetSocketBackendForTest():Void {
+    (_Socket._custom__socket = cast (null : Dynamic));
+    (_Socket._host__socket = cast (null : Dynamic));
+    (_Socket._webFallback__socket = cast (null : Dynamic));
   }
 
   public static function sendSocketMessage(socket:Socket, data:flight._internal._Union2<String, haxe.io.Bytes>):Bool {
@@ -171,7 +187,7 @@ class _Socket {
   @:allow(flight)
   @:keep
   private static function setSocketBackend(backend:Null<SocketBackend>):Void {
-    (_Socket._backend__socket = cast (backend : Dynamic));
+    (_Socket._custom__socket = cast (backend : Dynamic));
   }
 
   @:allow(flight)
@@ -180,9 +196,13 @@ class _Socket {
     (_Socket._guard__socket = cast (guard : Dynamic));
   }
 
-  public static var _backend__socket:Null<SocketBackend> = _Runtime.explicitNull();
+  public static var _custom__socket:Null<SocketBackend> = _Runtime.explicitNull();
 
   public static var _guard__socket:Null<SocketGuard> = _Runtime.explicitNull();
+
+  public static var _host__socket:Null<SocketBackend> = _Runtime.explicitNull();
+
+  public static var _webFallback__socket:Null<SocketBackend> = _Runtime.explicitNull();
 
   public static function makeSocketEventSink__socket(runtime:SocketRuntime):SocketEventSink {
     return cast { handleSocketOpen: function():Void {

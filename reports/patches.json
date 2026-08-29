@@ -1,28 +1,6 @@
 {
   "applied": [
     {
-      "astHash": "sha256:57c19df3c8d820dc87a2d6f310711ed58fc5e5c570961e25e6996f79d2328c16",
-      "id": "bitmap.create-from-image-source.native-scratch-canvas",
-      "operation": "replaceBody",
-      "reason": "The native runtime supplies a scratch canvas without a DOM document, so availability must be checked through the canvas backend.",
-      "target": {
-        "export": "createBitmapFromImageSource",
-        "package": "@flighthq/bitmap",
-        "source": "upstream/packages/bitmap/src/bitmapFrom.ts"
-      }
-    },
-    {
-      "astHash": "sha256:d54784a6879d18399e017d556950ee8f8fd9be2bd7bca627eb138dfaf56e7a38",
-      "id": "bitmap.explain-readback.native-scratch-canvas",
-      "operation": "replaceBody",
-      "reason": "The native runtime supplies a scratch canvas without a DOM document, so diagnostics must probe the canvas backend.",
-      "target": {
-        "export": "_blockReason__explainBitmapReadback",
-        "package": "@flighthq/bitmap",
-        "source": "upstream/packages/bitmap/src/explainBitmapReadback.ts"
-      }
-    },
-    {
       "astHash": "sha256:e8e8ec56ac0d693d53dc93ebf38f390809e722b38285fd85aff1e9c1d5c98d77",
       "id": "entity.create-entity.portable-runtime-slot",
       "operation": "replaceBody",
@@ -31,6 +9,28 @@
         "export": "createEntity",
         "package": "@flighthq/entity",
         "source": "upstream/packages/entity/src/entity.ts"
+      }
+    },
+    {
+      "astHash": "sha256:8f338bafdcbe00d549a1c7dde5ccd4b8f9ced16d370fb2ef500efd6e5e5efbd1",
+      "id": "host-web.create-raster-2d-surface-provider.live-dimensions",
+      "operation": "replaceBody",
+      "reason": "Portable Haxe anonymous structures cannot preserve TypeScript object-literal accessors, so the web provider materializes live canvas dimension descriptors explicitly.",
+      "target": {
+        "export": "createWebRaster2DSurfaceProvider",
+        "package": "@flighthq/host-web",
+        "source": "upstream/packages/host-web/src/webRaster2DSurface.ts"
+      }
+    },
+    {
+      "astHash": "sha256:bec59fc28ac2cefeb3a8ee1bd234b5142511bf77ca8db1cb9e6dde7ecdd6caea",
+      "id": "render-gl.create-context.bind-native-drawing-buffer-surface",
+      "operation": "replaceBody",
+      "reason": "Native GL contexts lack WebGL drawingBufferWidth/Height fields, so context acquisition associates the caller-owned surface for exact live dimension reads.",
+      "target": {
+        "export": "createGlContextFromCanvasElement",
+        "package": "@flighthq/render-gl",
+        "source": "upstream/packages/render-gl/src/glContext.ts"
       }
     },
     {

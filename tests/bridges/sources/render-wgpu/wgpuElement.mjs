@@ -6,3 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createWgpuCanvasElement = api.createWgpuCanvasElement;
+export const createWgpuRenderSurface = api.createWgpuRenderSurface;
+export const getWgpuRenderSurfaceProvider = api.getWgpuRenderSurfaceProvider;
+export const resetWgpuRenderSurfaceProviderForTest = api.resetWgpuRenderSurfaceProviderForTest;
+export const setWgpuRenderSurfaceProvider = api.setWgpuRenderSurfaceProvider;

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlBitmapShader = { var program:flight._internal.dom.WebGLProgram; var bind:flight._internal.dom.WebGL2RenderingContext->GlRenderState->RenderProxy2D->Void; var locations:GlShaderLocations; };
+typedef GlBitmapShader = { var program:flight._internal.dom.WebGLProgram; var bind:GlContext->GlRenderState->RenderProxy2D->Void; var locations:GlShaderLocations; };

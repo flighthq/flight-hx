@@ -4,6 +4,9 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Video as Facade_Video_flight__Video;
+import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
+import flight.types.VideoCapabilityOperation;
 import flight.types.VideoResource;
 import flight.types.VideoResourceLoadOptions;
 import flight.types.VideoResourceUrl;
@@ -14,14 +17,18 @@ class Video {
     return cast null;
   }
 
-  public static function createVideoResource(?element:flight._internal.dom.HTMLVideoElement, ?objectUrl:String):VideoResource {
-    return cast Facade_Video_flight__Video.createVideoResource(element, objectUrl);
+  public static function createVideoResource(?element:flight._internal.dom.HTMLVideoElement, ?objectUrl:String, ?ownsElement:Bool):VideoResource {
+    return cast Facade_Video_flight__Video.createVideoResource(element, objectUrl, ownsElement);
     return cast null;
   }
 
-  public static function createVideoResourceFromMediaStream(stream:flight._internal.dom.MediaStream):VideoResource {
+  public static function createVideoResourceFromMediaStream(stream:flight._internal.dom.MediaStream):Null<VideoResource> {
     return cast Facade_Video_flight__Video.createVideoResourceFromMediaStream(stream);
     return cast null;
+  }
+
+  public static function destroyVideoResource(resource:VideoResource):Void {
+    Facade_Video_flight__Video.destroyVideoResource(resource);
   }
 
   public static function detectVideoMimeType(data:flight._internal._Union2<haxe.io.Bytes, flight._internal._UInt8Array>):Null<String> {
@@ -31,6 +38,16 @@ class Video {
 
   public static function disposeVideoResource(resource:VideoResource):Void {
     Facade_Video_flight__Video.disposeVideoResource(resource);
+  }
+
+  public static function explainVideoCapabilityBackend():BackendExplanation {
+    return cast Facade_Video_flight__Video.explainVideoCapabilityBackend();
+    return cast null;
+  }
+
+  public static function explainVideoCapabilityOperation(operation:VideoCapabilityOperation):BackendOperationExplanation {
+    return cast Facade_Video_flight__Video.explainVideoCapabilityOperation(operation);
+    return cast null;
   }
 
   public static function getVideoResourceDuration(resource:VideoResource):Float {
@@ -45,6 +62,11 @@ class Video {
 
   public static function getVideoResourceWidth(resource:VideoResource):Float {
     return cast Facade_Video_flight__Video.getVideoResourceWidth(resource);
+    return cast null;
+  }
+
+  public static function hasVideoCapabilityOperation(operation:VideoCapabilityOperation):Bool {
+    return cast Facade_Video_flight__Video.hasVideoCapabilityOperation(operation);
     return cast null;
   }
 

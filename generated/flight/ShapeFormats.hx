@@ -4,11 +4,15 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._ShapeFormats as Facade_ShapeFormats_flight__ShapeFormats;
+import flight.types.KeyedTable;
 import flight.types.Shape;
+import flight.types.ShapeCommandSchema;
 import flight.types.ShapeJsonFormatOptions;
 import flight.types.ShapeJsonParseOptions;
 
 class ShapeFormats {
+  public static final defaultShapeCommandSchemas:KeyedTable<ShapeCommandSchema<String>> = Facade_ShapeFormats_flight__ShapeFormats.defaultShapeCommandSchemas;
+
   public static function formatShapeJson(shape:Shape, ?options:ShapeJsonFormatOptions):String {
     return cast Facade_ShapeFormats_flight__ShapeFormats.formatShapeJson(shape, options);
     return cast null;

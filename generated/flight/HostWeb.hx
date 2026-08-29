@@ -4,11 +4,41 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._HostWeb as Facade_HostWeb_flight__HostWeb;
+import flight.types.BitmapReadbackBackend;
 import flight.types.CursorBackend;
+import flight.types.FontLoadingBackend;
+import flight.types.GlRenderSurfaceProvider;
+import flight.types.Raster2DSurfaceProvider;
+import flight.types.WgpuRenderSurfaceProvider;
 
 class HostWeb {
+  public static function createWebBitmapReadbackBackend():BitmapReadbackBackend {
+    return cast Facade_HostWeb_flight__HostWeb.createWebBitmapReadbackBackend();
+    return cast null;
+  }
+
   public static function createWebCursorBackend(element:flight._internal.dom.HTMLElement):CursorBackend {
     return cast Facade_HostWeb_flight__HostWeb.createWebCursorBackend(element);
+    return cast null;
+  }
+
+  public static function createWebFontLoadingBackend():FontLoadingBackend {
+    return cast Facade_HostWeb_flight__HostWeb.createWebFontLoadingBackend();
+    return cast null;
+  }
+
+  public static function createWebGlRenderSurfaceProvider():GlRenderSurfaceProvider {
+    return cast Facade_HostWeb_flight__HostWeb.createWebGlRenderSurfaceProvider();
+    return cast null;
+  }
+
+  public static function createWebRaster2DSurfaceProvider():Raster2DSurfaceProvider {
+    return cast Facade_HostWeb_flight__HostWeb.createWebRaster2DSurfaceProvider();
+    return cast null;
+  }
+
+  public static function createWebWgpuRenderSurfaceProvider():WgpuRenderSurfaceProvider {
+    return cast Facade_HostWeb_flight__HostWeb.createWebWgpuRenderSurfaceProvider();
     return cast null;
   }
 
@@ -22,6 +52,22 @@ class HostWeb {
 
   public static function enableHostWebApp():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWebApp();
+  }
+
+  public static function enableHostWebAudio():Void {
+    Facade_HostWeb_flight__HostWeb.enableHostWebAudio();
+  }
+
+  public static function enableHostWebAudioDevice():Void {
+    Facade_HostWeb_flight__HostWeb.enableHostWebAudioDevice();
+  }
+
+  public static function enableHostWebBitmapEncode():Void {
+    Facade_HostWeb_flight__HostWeb.enableHostWebBitmapEncode();
+  }
+
+  public static function enableHostWebBitmapReadback():Void {
+    Facade_HostWeb_flight__HostWeb.enableHostWebBitmapReadback();
   }
 
   public static function enableHostWebClipboard():Void {
@@ -44,8 +90,16 @@ class HostWeb {
     Facade_HostWeb_flight__HostWeb.enableHostWebFileSystem();
   }
 
+  public static function enableHostWebFontLoading():Void {
+    Facade_HostWeb_flight__HostWeb.enableHostWebFontLoading();
+  }
+
   public static function enableHostWebGeolocation():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWebGeolocation();
+  }
+
+  public static function enableHostWebGlRenderSurface():Void {
+    Facade_HostWeb_flight__HostWeb.enableHostWebGlRenderSurface();
   }
 
   public static function enableHostWebGlyphRasterizer():Void {
@@ -96,6 +150,10 @@ class HostWeb {
     Facade_HostWeb_flight__HostWeb.enableHostWebProtocol();
   }
 
+  public static function enableHostWebRaster2DSurface():Void {
+    Facade_HostWeb_flight__HostWeb.enableHostWebRaster2DSurface();
+  }
+
   public static function enableHostWebScreen():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWebScreen();
   }
@@ -124,8 +182,16 @@ class HostWeb {
     Facade_HostWeb_flight__HostWeb.enableHostWebStorage();
   }
 
+  public static function enableHostWebVideoCapability():Void {
+    Facade_HostWeb_flight__HostWeb.enableHostWebVideoCapability();
+  }
+
   public static function enableHostWebWebcam():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWebWebcam();
+  }
+
+  public static function enableHostWebWgpuRenderSurface():Void {
+    Facade_HostWeb_flight__HostWeb.enableHostWebWgpuRenderSurface();
   }
 
   public static function enableHostWebWindow():Void {

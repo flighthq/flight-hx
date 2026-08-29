@@ -6,6 +6,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const createVideoResource = api.createVideoResource;
+export const destroyVideoResource = api.destroyVideoResource;
 export const disposeVideoResource = api.disposeVideoResource;
 export const getVideoResourceDuration = api.getVideoResourceDuration;
 export const getVideoResourceHeight = api.getVideoResourceHeight;

@@ -14,6 +14,7 @@ class _HostValueLut {
     'ArrayBuffer',
     'Audio',
     'AudioBuffer',
+    'AudioContext',
     'Blob',
     'Buffer',
     'CSSStyleDeclaration',

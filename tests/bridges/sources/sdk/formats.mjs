@@ -8,6 +8,7 @@ export * from '@flighthq/font-formats';
 export * from '@flighthq/importdiagnostics';
 export * from '@flighthq/particles-formats';
 export * from '@flighthq/path-formats';
+export * from '@flighthq/scene-document';
 export * from '@flighthq/scene2d-formats';
 export * from '@flighthq/scene2d-resources';
 export * from '@flighthq/scene3d-formats';

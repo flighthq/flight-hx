@@ -15,7 +15,10 @@ import flight.types.RenderCache;
 import flight.types.RenderCacheRefreshOptions;
 import flight.types.RenderProxy2D;
 import flight.types.RenderState;
+import flight.types.Scene2DKindUsage;
 import flight.types.Scene2DRenderer;
+import flight.types.SceneCoverageCatalog;
+import flight.types.SceneCoverageEntry;
 import flight.types.ShapeRasterizer;
 import flight.types.SpriteRenderer;
 import flight.types.Transform2DNode;
@@ -84,8 +87,17 @@ class Scene2DGl {
     Facade_Scene2DGl_flight__Scene2DGl.enableGlTextInput();
   }
 
+  public static function explainGlScene2DCoverage(out:Array<SceneCoverageEntry>, state:GlRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void {
+    Facade_Scene2DGl_flight__Scene2DGl.explainGlScene2DCoverage(out, state, usage, catalog);
+  }
+
   public static function getGlShapeRasterizer(state:GlRenderState):Null<ShapeRasterizer> {
     return cast Facade_Scene2DGl_flight__Scene2DGl.getGlShapeRasterizer(state);
+    return cast null;
+  }
+
+  public static function hasGlScene2DCoverage(state:GlRenderState, usage:Scene2DKindUsage):Bool {
+    return cast Facade_Scene2DGl_flight__Scene2DGl.hasGlScene2DCoverage(state, usage);
     return cast null;
   }
 

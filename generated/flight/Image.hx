@@ -6,12 +6,14 @@ import flight._internal._Runtime;
 import flight._Image as Facade_Image_flight__Image;
 import flight.types.AlphaType;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.Bitmap;
 import flight.types.CompressedImage;
 import flight.types.CompressedImageData;
 import flight.types.EmbeddedImageResourceReference;
 import flight.types.ExternalImageResourceReference;
 import flight.types.Image;
+import flight.types.ImageBackendOperation;
 import flight.types.ImageResourceFailure;
 import flight.types.ImageResourceFetch;
 import flight.types.ImageResourceReference;
@@ -49,7 +51,7 @@ class Image {
     return cast null;
   }
 
-  public static function createImageResourceFromBitmap(bitmap:Bitmap):flight.types.Image {
+  public static function createImageResourceFromBitmap(bitmap:Bitmap):Null<flight.types.Image> {
     return cast Facade_Image_flight__Image.createImageResourceFromBitmap(bitmap);
     return cast null;
   }
@@ -82,8 +84,18 @@ class Image {
     return cast null;
   }
 
+  public static function explainImageOperation(operation:ImageBackendOperation):BackendOperationExplanation {
+    return cast Facade_Image_flight__Image.explainImageOperation(operation);
+    return cast null;
+  }
+
   public static function explainImageResourceReferenceResolution(ref:ImageResourceReference):ImageResourceReferenceResolutionExplanation {
     return cast Facade_Image_flight__Image.explainImageResourceReferenceResolution(ref);
+    return cast null;
+  }
+
+  public static function hasImageOperation(operation:ImageBackendOperation):Bool {
+    return cast Facade_Image_flight__Image.hasImageOperation(operation);
     return cast null;
   }
 

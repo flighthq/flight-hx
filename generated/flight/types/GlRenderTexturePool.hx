@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlRenderTexturePool = { var context:Null<flight._internal.dom.WebGL2RenderingContext>; var destroyed:Bool; var effectTargets:GlRenderTargetPool; var free:Array<RenderTexture>; var leased:flight._internal._Set<RenderTexture>; };
+typedef GlRenderTexturePool = { var context:Null<GlContext>; var destroyed:Bool; var effectTargets:GlRenderTargetPool; var free:Array<RenderTexture>; var leased:flight._internal._Set<RenderTexture>; };

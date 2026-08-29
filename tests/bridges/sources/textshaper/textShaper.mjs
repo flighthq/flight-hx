@@ -5,6 +5,8 @@ const api = compiled.flight._TextShaper;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const explainTextShaperOperation = api.explainTextShaperOperation;
 export const getTextShaperBackend = api.getTextShaperBackend;
+export const hasTextShaperOperation = api.hasTextShaperOperation;
 export const measureText = api.measureText;
 export const setTextShaperBackend = api.setTextShaperBackend;

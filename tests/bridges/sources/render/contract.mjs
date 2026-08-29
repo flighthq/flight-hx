@@ -8,6 +8,7 @@ export * from './enableColorAdjustments.mjs';
 export * from './enableSceneRenderGuards.mjs';
 export * from './explainScene2DCoverage.mjs';
 export * from './explainScene2DRender.mjs';
+export * from './raster2DSurface.mjs';
 export * from './renderAppearance.mjs';
 export * from './renderCache.mjs';
 export * from './renderColor.mjs';

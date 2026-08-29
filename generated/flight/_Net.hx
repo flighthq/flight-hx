@@ -61,9 +61,25 @@ class _Net {
   @:allow(flight)
   @:keep
   private static function getNetBackend():NetBackend {
-    if ((cast _Runtime.strictEquals(_Net._backend__net, null) : Bool)) { (_Net._backend__net = cast ((cast createWebNetBackend() : NetBackend) : Dynamic)); }
-    return cast _Net._backend__net;
+    if ((cast !_Runtime.strictEquals(_Net._custom__net, null) : Bool)) { return cast _Net._custom__net; }
+    if ((cast !_Runtime.strictEquals(_Net._host__net, null) : Bool)) { return cast _Net._host__net; }
+    if ((cast _Runtime.strictEquals(_Net._webFallback__net, null) : Bool)) { (_Net._webFallback__net = cast ((cast createWebNetBackend() : NetBackend) : Dynamic)); }
+    return cast _Net._webFallback__net;
     return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function installNetHostBackend(backend:NetBackend):Void {
+    if ((cast _Runtime.strictEquals(_Net._host__net, null) : Bool)) { (_Net._host__net = cast (backend : Dynamic)); }
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function resetNetBackendForTest():Void {
+    (_Net._custom__net = cast (null : Dynamic));
+    (_Net._host__net = cast (null : Dynamic));
+    (_Net._webFallback__net = cast (null : Dynamic));
   }
 
   public static function sendNetRequest(request:NetRequest, ?options:NetRequestOptions):flight._internal._Promise<NetResponse> {
@@ -74,10 +90,14 @@ class _Net {
   @:allow(flight)
   @:keep
   private static function setNetBackend(backend:Null<NetBackend>):Void {
-    (_Net._backend__net = cast (backend : Dynamic));
+    (_Net._custom__net = cast (backend : Dynamic));
   }
 
-  public static var _backend__net:Null<NetBackend> = _Runtime.explicitNull();
+  public static var _custom__net:Null<NetBackend> = _Runtime.explicitNull();
+
+  public static var _host__net:Null<NetBackend> = _Runtime.explicitNull();
+
+  public static var _webFallback__net:Null<NetBackend> = _Runtime.explicitNull();
 
   public static final _netTimeoutReason__net:{ var flightNetTimeout:Bool; } = (cast { flightNetTimeout: true });
 

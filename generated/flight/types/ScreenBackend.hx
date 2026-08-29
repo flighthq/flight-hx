@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScreenBackend = { var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; var getPrimaryScreen:ScreenInfo->ScreenInfo; var subscribe:(ScreenChangeEvent->Void)->(Void->Void); var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; @:optional var getModes:ScreenInfo->Array<ScreenMode>->Array<ScreenMode>; };
+typedef ScreenBackend = { var getScreens:Array<ScreenInfo>->Array<ScreenInfo>; var getPrimaryScreen:ScreenInfo->ScreenInfo; var subscribe:(ScreenChangeEvent->Void)->(Void->Void); var getCursorPosition:{ var x:Float; var y:Float; }->{ var x:Float; var y:Float; }; @:optional var getModes:ScreenInfo->Array<ScreenMode>->Array<ScreenMode>; @:optional var queryWindowManagementPermission:Void->flight._internal._Promise<ScreenPermissionState>; @:optional var subscribeWindowManagementPermission:(ScreenPermissionState->Void)->(Void->Void); };

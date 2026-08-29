@@ -3,4 +3,5 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './shapeCommandSchemas.mjs';
 export * from './shapeJson.mjs';

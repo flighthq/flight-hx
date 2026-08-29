@@ -20,6 +20,7 @@ export const createTexture = compiled.flight.Texture.createTexture;
 export const createTexture2D = compiled.flight.Texture.createTexture2D;
 export const createTilingSampler = compiled.flight.Texture.createTilingSampler;
 export const createVideoTexture = compiled.flight.Texture.createVideoTexture;
+export const destroyVideoTexture = compiled.flight.Texture.destroyVideoTexture;
 export const equalsCubeTexture = compiled.flight.Texture.equalsCubeTexture;
 export const equalsSampler = compiled.flight.Texture.equalsSampler;
 export const equalsTexture = compiled.flight.Texture.equalsTexture;

@@ -2,7 +2,7 @@
 // AudioContext); native is a nominal interface implemented by the host audio
 // backend (hostLime LimeAudio). Members mirror the upstream corpus census in
 // reports/host-types.json: createBufferSource, createGain, createStereoPanner,
-// currentTime, decodeAudioData, destination, resume, state.
+// close, currentTime, decodeAudioData, destination, resume, state.
 package flight._internal.dom;
 
 #if js
@@ -16,6 +16,7 @@ interface AudioContext {
   function createBufferSource():AudioBufferSourceNode;
   function createGain():GainNode;
   function createStereoPanner():StereoPannerNode;
+  function close():Dynamic;
   function decodeAudioData(data:Dynamic):Dynamic;
   function resume():Dynamic;
 }

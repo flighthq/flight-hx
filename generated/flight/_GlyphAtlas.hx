@@ -9,6 +9,7 @@ import flight._Bitmap.writeBitmapPixels;
 import flight._Geometry.createRectangle;
 import flight._Log.logOnce;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.Bitmap;
 import flight.types.BitmapRegion;
 import flight.types.GlyphAtlas;
@@ -21,6 +22,7 @@ import flight.types.GlyphMetrics;
 import flight.types.GlyphRasterizeOptions;
 import flight.types.GlyphRasterizedBitmap;
 import flight.types.GlyphRasterizerBackend;
+import flight.types.GlyphRasterizerOperation;
 import flight.types.GlyphSource;
 import flight.types.LogLevel;
 import flight.types.Rectangle;
@@ -360,8 +362,28 @@ class _GlyphAtlas {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function explainGlyphRasterizerOperation(operation:GlyphRasterizerOperation):BackendOperationExplanation {
+    if ((cast ((cast !_Runtime.strictEquals(_GlyphAtlas._custom__glyphRasterizerBackend, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_GlyphAtlas._custom__glyphRasterizerBackend, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'custom', operation: operation };
+    }
+    if ((cast ((cast !_Runtime.strictEquals(_GlyphAtlas._host__glyphRasterizerBackend, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_GlyphAtlas._host__glyphRasterizerBackend, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'host', operation: operation };
+    }
+    return cast { implemented: false, layer: 'sentinel', operation: operation };
+    return cast null;
+  }
+
   public static function getGlyphRasterizerBackend():GlyphRasterizerBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(_GlyphAtlas._custom__glyphRasterizerBackend, function():Dynamic return cast _GlyphAtlas._host__glyphRasterizerBackend), function():Dynamic return cast _GlyphAtlas._sentinel__glyphRasterizerBackend);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasGlyphRasterizerOperation(operation:GlyphRasterizerOperation):Bool {
+    return cast (cast (cast explainGlyphRasterizerOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 

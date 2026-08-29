@@ -7,10 +7,15 @@ import flight._Media as Facade_Media_flight__Media;
 import flight.types.AudioBus;
 import flight.types.AudioBusOptions;
 import flight.types.AudioChannel;
+import flight.types.AudioDeviceBackend;
+import flight.types.AudioDeviceHandle;
+import flight.types.AudioDeviceOperation;
 import flight.types.AudioMixer;
 import flight.types.AudioMixerOptions;
 import flight.types.AudioPlayOptions;
 import flight.types.AudioResource;
+import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.VideoChannel;
 import flight.types.VideoPlayOptions;
 import flight.types.VideoResource;
@@ -34,8 +39,26 @@ class Media {
     return cast null;
   }
 
+  public static function destroyAudioChannel(channel:AudioChannel):Void {
+    Facade_Media_flight__Media.destroyAudioChannel(channel);
+  }
+
   public static function destroyAudioMixer(mixer:AudioMixer):Void {
     Facade_Media_flight__Media.destroyAudioMixer(mixer);
+  }
+
+  public static function destroyVideoChannel(channel:VideoChannel):Void {
+    Facade_Media_flight__Media.destroyVideoChannel(channel);
+  }
+
+  public static function explainAudioDeviceBackend():BackendExplanation {
+    return cast Facade_Media_flight__Media.explainAudioDeviceBackend();
+    return cast null;
+  }
+
+  public static function explainAudioDeviceOperation(operation:AudioDeviceOperation):BackendOperationExplanation {
+    return cast Facade_Media_flight__Media.explainAudioDeviceOperation(operation);
+    return cast null;
   }
 
   public static function fadeAudioBusGain(mixer:AudioMixer, bus:AudioBus, targetGain:Float, durationMs:Float):Void {
@@ -66,6 +89,11 @@ class Media {
     return cast null;
   }
 
+  public static function getAudioDeviceBackend():AudioDeviceBackend {
+    return cast Facade_Media_flight__Media.getAudioDeviceBackend();
+    return cast null;
+  }
+
   public static function getAudioMixerActiveChannels(mixer:AudioMixer):Array<AudioChannel> {
     return cast Facade_Media_flight__Media.getAudioMixerActiveChannels(mixer);
     return cast null;
@@ -91,6 +119,26 @@ class Media {
     return cast null;
   }
 
+  public static function hasAudioChannelFade():Bool {
+    return cast Facade_Media_flight__Media.hasAudioChannelFade();
+    return cast null;
+  }
+
+  public static function hasAudioChannelNodeAccess():Bool {
+    return cast Facade_Media_flight__Media.hasAudioChannelNodeAccess();
+    return cast null;
+  }
+
+  public static function hasAudioDeviceOperation(operation:AudioDeviceOperation):Bool {
+    return cast Facade_Media_flight__Media.hasAudioDeviceOperation(operation);
+    return cast null;
+  }
+
+  public static function hasAudioDeviceWebNodeAccess():Bool {
+    return cast Facade_Media_flight__Media.hasAudioDeviceWebNodeAccess();
+    return cast null;
+  }
+
   public static function isAudioChannelPlaying(channel:AudioChannel):Bool {
     return cast Facade_Media_flight__Media.isAudioChannelPlaying(channel);
     return cast null;
@@ -113,8 +161,8 @@ class Media {
     Facade_Media_flight__Media.pauseVideoChannel(channel);
   }
 
-  public static function playAudioResource(context:flight._internal.dom.AudioContext, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
-    return cast Facade_Media_flight__Media.playAudioResource(context, source, options);
+  public static function playAudioResource(device:AudioDeviceHandle, source:AudioResource, ?options:AudioPlayOptions):Null<AudioChannel> {
+    return cast Facade_Media_flight__Media.playAudioResource(device, source, options);
     return cast null;
   }
 
@@ -167,6 +215,10 @@ class Media {
   public static function setAudioChannelPlaybackRate(channel:AudioChannel, value:Float):Float {
     return cast Facade_Media_flight__Media.setAudioChannelPlaybackRate(channel, value);
     return cast null;
+  }
+
+  public static function setAudioDeviceBackend(backend:Null<AudioDeviceBackend>):Void {
+    Facade_Media_flight__Media.setAudioDeviceBackend(backend);
   }
 
   public static function setAudioMixerMasterGain(mixer:AudioMixer, value:Float):Float {

@@ -1138,11 +1138,6 @@ describe('typed struct stable declaration identity', () => {
           purpose: 'reviewed escape-free WebGPU quad-batch buffer slot',
         }),
         expect.objectContaining({
-          name: 'TextShaperBackend',
-          packageName: '@flighthq/types',
-          purpose: 'reviewed escape-free text-shaper backend',
-        }),
-        expect.objectContaining({
           name: 'TextLayoutParams',
           packageName: '@flighthq/types',
           purpose: 'reviewed escape-free text-layout parameters',
@@ -1808,9 +1803,9 @@ describe('typed struct stable declaration identity', () => {
           purpose: 'reviewed escape-free quad-batch runtime',
         }),
         expect.objectContaining({
-          name: 'WgpuShapeRasterSurface',
+          name: 'Raster2DSurface',
           packageName: '@flighthq/types',
-          purpose: 'reviewed escape-free WebGPU shape raster surface',
+          purpose: 'reviewed escape-free backend-neutral raster surface',
         }),
         expect.objectContaining({
           name: 'BitmapBevelOptions',
@@ -3006,7 +3001,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free orbit-camera options',
       },
       {
-        declarationFingerprint: 'sha256:8bf31aa0b755de712e58851fc670470e5a3027dcca83854e402fb31490ea8a01',
+        declarationFingerprint: 'sha256:14f4588c80a91b071109c03fdcd722fb54b4ddf1673b2815a754c927e90a2fc2',
         id: '@flighthq/types:interface#WgpuShapeRendererData',
         purpose: 'reviewed escape-free WebGPU shape-renderer data',
       },
@@ -3021,7 +3016,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free WebGPU render-texture pool',
       },
       {
-        declarationFingerprint: 'sha256:c9cc45d02ce4d7e948c85172e4a590ef8bacca7dc268920a688dea44c772f41c',
+        declarationFingerprint: 'sha256:31cadf0a506da69f7c8df86f6b91bb4f048c2669d118cde2ce59c15187c99e12',
         id: '@flighthq/types:interface#GlRenderTexturePool',
         purpose: 'reviewed escape-free WebGL render-texture pool',
       },
@@ -3031,7 +3026,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free WebGL shaded program',
       },
       {
-        declarationFingerprint: 'sha256:ae1793eea0c5323a3989c3b263cf25e9d862080401783b4209e04677c86e3f65',
+        declarationFingerprint: 'sha256:2e974f7ae0bf0f6972aa160d471db04fc37c6c6309f4c1d2f1627b6293829b1e',
         id: '@flighthq/types:interface#GlShapeRendererData',
         purpose: 'reviewed escape-free WebGL shape-renderer data',
       },
@@ -3039,11 +3034,6 @@ describe('typed struct stable declaration identity', () => {
         declarationFingerprint: 'sha256:0362fdf0b62095db70100964f8f2d188eae552a2513337d7a145648619fd9486',
         id: '@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot',
         purpose: 'reviewed escape-free WebGPU quad-batch buffer slot',
-      },
-      {
-        declarationFingerprint: 'sha256:a6d76855c342cc710304eff6c3034f16a3853a751ee704d881de32f764d3c047',
-        id: '@flighthq/types:interface#TextShaperBackend',
-        purpose: 'reviewed escape-free text-shaper backend',
       },
       {
         declarationFingerprint: 'sha256:1f2c95acb12ba7582d7411b09d418cf403f8a1cfd850662b185e4c344cecdd40',
@@ -3456,7 +3446,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free WebGPU mesh pipeline',
       },
       {
-        declarationFingerprint: 'sha256:cfc1746d136ddf34026e1c7e71cf59ee94dfc90edf8e66824bacfcdd8682dac6',
+        declarationFingerprint: 'sha256:0cd69d580d37270bd7601022682d57f0789628f77872eb1af86902faa8e8080c',
         id: '@flighthq/types:interface#WgpuRenderOptions',
         purpose: 'reviewed escape-free WebGPU render options',
       },
@@ -3711,9 +3701,9 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free quad-batch runtime',
       },
       {
-        declarationFingerprint: 'sha256:aa2460bc8817e1063225259a5afe70eeef50b8dce6723d3f72a52fe6632c2cc8',
-        id: '@flighthq/types:interface#WgpuShapeRasterSurface',
-        purpose: 'reviewed escape-free WebGPU shape raster surface',
+        declarationFingerprint: 'sha256:8f5956e935f6aa84c5eb19bef04c2b1e4be1d2b138d4fc7bc1ba46e6b5b95e20',
+        id: '@flighthq/types:interface#Raster2DSurface',
+        purpose: 'reviewed escape-free backend-neutral raster surface',
       },
       {
         declarationFingerprint: 'sha256:0a011bdbca5a41569ee8a81d5ebca8c94dc47e164f8c24aef36dbdab9b78f282',
@@ -5031,7 +5021,7 @@ describe('typed struct analysis', () => {
             'CreateExternalTextureOptions',
             'RenderQueue',
             'QuadBatchRuntime',
-            'WgpuShapeRasterSurface',
+            'Raster2DSurface',
           ].includes(candidate.name),
         )
         .map((candidate) => [candidate.name, candidate]),
@@ -5997,7 +5987,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'WgpuShapeRendererData',
-        'sha256:8bf31aa0b755de712e58851fc670470e5a3027dcca83854e402fb31490ea8a01',
+        'sha256:14f4588c80a91b071109c03fdcd722fb54b4ddf1673b2815a754c927e90a2fc2',
         'reviewed escape-free WebGPU shape-renderer data',
       ],
       [
@@ -6024,7 +6014,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'GlRenderTexturePool',
-        'sha256:c9cc45d02ce4d7e948c85172e4a590ef8bacca7dc268920a688dea44c772f41c',
+        'sha256:31cadf0a506da69f7c8df86f6b91bb4f048c2669d118cde2ce59c15187c99e12',
         'reviewed escape-free WebGL render-texture pool',
       ],
       [
@@ -6034,7 +6024,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'GlShapeRendererData',
-        'sha256:ae1793eea0c5323a3989c3b263cf25e9d862080401783b4209e04677c86e3f65',
+        'sha256:2e974f7ae0bf0f6972aa160d471db04fc37c6c6309f4c1d2f1627b6293829b1e',
         'reviewed escape-free WebGL shape-renderer data',
       ],
       [
@@ -6054,11 +6044,6 @@ describe('typed struct analysis', () => {
       });
     }
     for (const [name, declarationFingerprint, purpose] of [
-      [
-        'TextShaperBackend',
-        'sha256:a6d76855c342cc710304eff6c3034f16a3853a751ee704d881de32f764d3c047',
-        'reviewed escape-free text-shaper backend',
-      ],
       [
         'TextLayoutParams',
         'sha256:1f2c95acb12ba7582d7411b09d418cf403f8a1cfd850662b185e4c344cecdd40',
@@ -6090,6 +6075,22 @@ describe('typed struct analysis', () => {
         reasons: [],
       });
     }
+    expect(fourteenthHighAccessFrontierCandidates.get('TextShaperBackend')).toMatchObject({
+      declarationFingerprint: 'sha256:a6d76855c342cc710304eff6c3034f16a3853a751ee704d881de32f764d3c047',
+      eligible: true,
+      emission: {
+        directAccesses: 0,
+        mode: 'audit-only',
+        pendingAccesses: 17,
+        reflectiveSurvivors: [],
+      },
+      escapes: [
+        expect.objectContaining({ reason: 'computed-key', source: 'upstream/packages/textshaper/src/textShaper.ts' }),
+      ],
+      migration: { baselineId: null, status: 'new' },
+      purpose: 'checker-discovered public declaration',
+      reasons: [],
+    });
     for (const [name, declarationFingerprint, purpose] of [
       [
         'AnimationSampleAccumulator',
@@ -6663,7 +6664,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'WgpuRenderOptions',
-        'sha256:cfc1746d136ddf34026e1c7e71cf59ee94dfc90edf8e66824bacfcdd8682dac6',
+        'sha256:0cd69d580d37270bd7601022682d57f0789628f77872eb1af86902faa8e8080c',
         'reviewed escape-free WebGPU render options',
       ],
       [
@@ -7033,9 +7034,9 @@ describe('typed struct analysis', () => {
         'reviewed escape-free quad-batch runtime',
       ],
       [
-        'WgpuShapeRasterSurface',
-        'sha256:aa2460bc8817e1063225259a5afe70eeef50b8dce6723d3f72a52fe6632c2cc8',
-        'reviewed escape-free WebGPU shape raster surface',
+        'Raster2DSurface',
+        'sha256:8f5956e935f6aa84c5eb19bef04c2b1e4be1d2b138d4fc7bc1ba46e6b5b95e20',
+        'reviewed escape-free backend-neutral raster surface',
       ],
     ] as const) {
       expect(fortiethHighAccessFrontierCandidates.get(name)).toMatchObject({
@@ -8235,7 +8236,7 @@ describe('typed struct analysis', () => {
     const reviewedDirectCandidates = report.candidates.filter((candidate) =>
       candidate.purpose.startsWith('reviewed escape-free'),
     );
-    expect(reviewedDirectCandidates).toHaveLength(388);
+    expect(reviewedDirectCandidates).toHaveLength(387);
     expect(
       reviewedDirectCandidates.every(
         (candidate) =>
@@ -8246,7 +8247,7 @@ describe('typed struct analysis', () => {
       ),
     ).toBe(true);
     expect(reviewedDirectCandidates.reduce((total, candidate) => total + candidate.emission.directAccesses, 0)).toBe(
-      14_799,
+      14_975,
     );
 
     // Merged implementation modules invalidate whole-file receiver-name scans:

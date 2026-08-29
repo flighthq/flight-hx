@@ -51,52 +51,74 @@ class _Clipboard {
   @:allow(flight)
   @:keep
   private static function createWebClipboardBackend():ClipboardBackend {
-    return cast ({ var __thisValue0:Dynamic = null; __thisValue0 = { readFormat: function(format:String):flight._internal._Promise<String> {
+    var blobFromFormatData:String->String->flight._internal._Promise<flight._internal.dom.Blob> = cast _Runtime.UNDEFINED;
+    blobFromFormatData = (cast function(format:String, data:String):flight._internal._Promise<flight._internal.dom.Blob> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
-          var cb:Null<flight._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
-          cb = (cast _Clipboard.getWebClipboard__clipboard() : Null<flight._internal.dom.Clipboard>);
           var __flowBranch4:Dynamic;
-          if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flight._internal.dom.Clipboard).read), 'function') : Bool)) : Bool)) {
+          if ((cast ((cast StringTools.startsWith(format, 'image/') : Bool) && (cast StringTools.startsWith(data, 'data:') : Bool)) : Bool)) {
             __flowBranch4 = flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flowReturn('');
+              var response:flight._internal.dom.Response = cast _Runtime.UNDEFINED;
+              return flight._internal._Async.flatMap(_Runtime.callValue(flight._internal._HostValueLut.get('fetch'), cast ([data] : Array<Dynamic>)), function(__awaitValue5:Dynamic):Dynamic {
+                response = __awaitValue5;
+                return flight._internal._Async.flowReturn((cast response : flight._internal.dom.Response).blob());
+              });
             });
           } else {
             __flowBranch4 = flight._internal._Async.flowNormal();
           }
           return flight._internal._Async.continueFlow(__flowBranch4, function():Dynamic {
+            return flight._internal._Async.flowReturn(_Runtime.construct(flight._internal._HostValueLut.get('Blob'), [cast ([data] : Array<Dynamic>), { type: format }]));
+          });
+        })
+      );
+    });
+    return cast ({ var __thisValue0:Dynamic = null; __thisValue0 = { readFormat: function(format:String):flight._internal._Promise<String> {
+      return cast flight._internal._Async.finishFlow(
+        flight._internal._Async.protect(function():Dynamic {
+          var cb:Null<flight._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
+          cb = (cast _Clipboard.getWebClipboard__clipboard() : Null<flight._internal.dom.Clipboard>);
+          var __flowBranch6:Dynamic;
+          if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flight._internal.dom.Clipboard).read), 'function') : Bool)) : Bool)) {
+            __flowBranch6 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn('');
+            });
+          } else {
+            __flowBranch6 = flight._internal._Async.flowNormal();
+          }
+          return flight._internal._Async.continueFlow(__flowBranch6, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var items:flight._internal._Any = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).read(), function(__awaitValue5:Dynamic):Dynamic {
-                items = __awaitValue5;
-                var __flowIterator6:Array<Dynamic> = _Runtime.iterable(items);
-                var __flowIndex7:Int = 0;
+              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).read(), function(__awaitValue7:Dynamic):Dynamic {
+                items = __awaitValue7;
+                var __flowIterator8:Array<Dynamic> = _Runtime.iterable(items);
+                var __flowIndex9:Int = 0;
                 return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-                  if (__flowIndex7 >= __flowIterator6.length) return flight._internal._Async.flowBreak();
-                  var item:Dynamic = __flowIterator6[__flowIndex7++];
-                  var __flowBranch8:Dynamic;
+                  if (__flowIndex9 >= __flowIterator8.length) return flight._internal._Async.flowBreak();
+                  var item:Dynamic = __flowIterator8[__flowIndex9++];
+                  var __flowBranch10:Dynamic;
                   if ((cast _Runtime.includes((cast item : flight._internal.dom.ClipboardItem).types, format) : Bool)) {
-                    __flowBranch8 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch10 = flight._internal._Async.protect(function():Dynamic {
                       var blob:flight._internal.dom.Blob = cast _Runtime.UNDEFINED;
-                      return flight._internal._Async.flatMap((cast item : flight._internal.dom.ClipboardItem).getType(format), function(__awaitValue9:Dynamic):Dynamic {
-                        blob = __awaitValue9;
-                        var __flowBranch10:Dynamic;
+                      return flight._internal._Async.flatMap((cast item : flight._internal.dom.ClipboardItem).getType(format), function(__awaitValue11:Dynamic):Dynamic {
+                        blob = __awaitValue11;
+                        var __flowBranch12:Dynamic;
                         if ((cast StringTools.startsWith(format, 'image/') : Bool)) {
-                          __flowBranch10 = flight._internal._Async.protect(function():Dynamic {
-                            return flight._internal._Async.flowReturn((cast _Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument11:Dynamic = blob; __callArgument11; })) : flight._internal._Promise<String>));
+                          __flowBranch12 = flight._internal._Async.protect(function():Dynamic {
+                            return flight._internal._Async.flowReturn((cast _Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument13:Dynamic = blob; __callArgument13; })) : flight._internal._Promise<String>));
                           });
                         } else {
-                          __flowBranch10 = flight._internal._Async.flowNormal();
+                          __flowBranch12 = flight._internal._Async.flowNormal();
                         }
-                        return flight._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
+                        return flight._internal._Async.continueFlow(__flowBranch12, function():Dynamic {
                           return flight._internal._Async.flowReturn((cast blob : flight._internal.dom.Blob).text());
                         });
                       });
                     });
                   } else {
-                    __flowBranch8 = flight._internal._Async.flowNormal();
+                    __flowBranch10 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch8, function():Dynamic {
+                  return flight._internal._Async.continueFlow(__flowBranch10, function():Dynamic {
                     return flight._internal._Async.flowNormal();
                   });
                 }), function():Dynamic {
@@ -119,21 +141,21 @@ class _Clipboard {
         flight._internal._Async.protect(function():Dynamic {
           var cb:Null<flight._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast _Clipboard.getWritableWebClipboard__clipboard() : Null<flight._internal.dom.Clipboard>);
-          var __flowBranch13:Dynamic;
+          var __flowBranch15:Dynamic;
           if ((cast _Runtime.strictEquals(cb, null) : Bool)) {
-            __flowBranch13 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch15 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch13 = flight._internal._Async.flowNormal();
+            __flowBranch15 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch13, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch15, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var blob:flight._internal.dom.Blob = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast _Clipboard.blobFromFormatData__clipboard((cast format : String), (cast data : String)) : flight._internal._Promise<flight._internal.dom.Blob>), function(__awaitValue14:Dynamic):Dynamic {
-                blob = __awaitValue14;
-                return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).write(cast ([_Runtime.construct(flight._internal._HostValueLut.get('ClipboardItem'), [_Runtime.objectFromPairs([{ key: format, value: blob }])])] : Array<Dynamic>)), function(__awaitValue15:Dynamic):Dynamic {
-                  __awaitValue15;
+              return flight._internal._Async.flatMap((cast blobFromFormatData((cast format : String), (cast data : String)) : flight._internal._Promise<flight._internal.dom.Blob>), function(__awaitValue16:Dynamic):Dynamic {
+                blob = __awaitValue16;
+                return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).write(cast ([_Runtime.construct(flight._internal._HostValueLut.get('ClipboardItem'), [_Runtime.objectFromPairs([{ key: format, value: blob }])])] : Array<Dynamic>)), function(__awaitValue17:Dynamic):Dynamic {
+                  __awaitValue17;
                   return flight._internal._Async.flowReturn(true);
                 });
               });
@@ -151,8 +173,8 @@ class _Clipboard {
     }, hasFormat: function(format:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var formats:Array<String> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast __thisValue0 : ClipboardBackend).getFormats(), function(__awaitValue16:Dynamic):Dynamic {
-          formats = __awaitValue16;
+        return flight._internal._Async.flatMap((cast __thisValue0 : ClipboardBackend).getFormats(), function(__awaitValue18:Dynamic):Dynamic {
+          formats = __awaitValue18;
           return flight._internal._Async.resolve(_Runtime.includes(formats, format));
         });
       }));
@@ -161,20 +183,20 @@ class _Clipboard {
         flight._internal._Async.protect(function():Dynamic {
           var cb:Null<flight._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast _Clipboard.getWebClipboard__clipboard() : Null<flight._internal.dom.Clipboard>);
-          var __flowBranch17:Dynamic;
+          var __flowBranch19:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flight._internal.dom.Clipboard).read), 'function') : Bool)) : Bool)) {
-            __flowBranch17 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch19 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
             });
           } else {
-            __flowBranch17 = flight._internal._Async.flowNormal();
+            __flowBranch19 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch17, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch19, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var items:flight._internal._Any = cast _Runtime.UNDEFINED;
               var out:Array<String> = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).read(), function(__awaitValue18:Dynamic):Dynamic {
-                items = __awaitValue18;
+              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).read(), function(__awaitValue20:Dynamic):Dynamic {
+                items = __awaitValue20;
                 out = cast ([] : Array<Dynamic>);
                 for (item in _Runtime.iterable(items)) {
                   for (t in _Runtime.iterable((cast item : flight._internal.dom.ClipboardItem).types)) {
@@ -199,32 +221,32 @@ class _Clipboard {
         flight._internal._Async.protect(function():Dynamic {
           var cb:Null<flight._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast _Clipboard.getWritableWebClipboard__clipboard() : Null<flight._internal.dom.Clipboard>);
-          var __flowBranch23:Dynamic;
+          var __flowBranch25:Dynamic;
           if ((cast _Runtime.strictEquals(cb, null) : Bool)) {
-            __flowBranch23 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch25 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch23 = flight._internal._Async.flowNormal();
+            __flowBranch25 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch23, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch25, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var entry:flight._internal._Record<String, flight._internal.dom.Blob> = cast _Runtime.UNDEFINED;
               entry = {  };
-              var __flowIterator24:Array<Dynamic> = _Runtime.iterable(items);
-              var __flowIndex25:Int = 0;
+              var __flowIterator26:Array<Dynamic> = _Runtime.iterable(items);
+              var __flowIndex27:Int = 0;
               return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-                if (__flowIndex25 >= __flowIterator24.length) return flight._internal._Async.flowBreak();
-                var item:Dynamic = __flowIterator24[__flowIndex25++];
-                var __beforeAwait26:Dynamic = entry;
-                var __beforeAwait27:Dynamic = item.format;
-                return flight._internal._Async.flatMap((cast _Clipboard.blobFromFormatData__clipboard((cast item.format : String), (cast item.data : String)) : flight._internal._Promise<flight._internal.dom.Blob>), function(__awaitValue28:Dynamic):Dynamic {
-                  _Runtime.setIndex(__beforeAwait26, __beforeAwait27, __awaitValue28);
+                if (__flowIndex27 >= __flowIterator26.length) return flight._internal._Async.flowBreak();
+                var item:Dynamic = __flowIterator26[__flowIndex27++];
+                var __beforeAwait28:Dynamic = entry;
+                var __beforeAwait29:Dynamic = item.format;
+                return flight._internal._Async.flatMap((cast blobFromFormatData((cast item.format : String), (cast item.data : String)) : flight._internal._Promise<flight._internal.dom.Blob>), function(__awaitValue30:Dynamic):Dynamic {
+                  _Runtime.setIndex(__beforeAwait28, __beforeAwait29, __awaitValue30);
                   return flight._internal._Async.flowNormal();
                 });
               }), function():Dynamic {
-                return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).write(cast ([_Runtime.construct(flight._internal._HostValueLut.get('ClipboardItem'), [entry])] : Array<Dynamic>)), function(__awaitValue29:Dynamic):Dynamic {
-                  __awaitValue29;
+                return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).write(cast ([_Runtime.construct(flight._internal._HostValueLut.get('ClipboardItem'), [entry])] : Array<Dynamic>)), function(__awaitValue31:Dynamic):Dynamic {
+                  __awaitValue31;
                   return flight._internal._Async.flowReturn(true);
                 });
               });
@@ -244,51 +266,51 @@ class _Clipboard {
         flight._internal._Async.protect(function():Dynamic {
           var cb:Null<flight._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast _Clipboard.getWebClipboard__clipboard() : Null<flight._internal.dom.Clipboard>);
-          var __flowBranch30:Dynamic;
+          var __flowBranch32:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flight._internal.dom.Clipboard).read), 'function') : Bool)) : Bool)) {
-            __flowBranch30 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch32 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({  });
             });
           } else {
-            __flowBranch30 = flight._internal._Async.flowNormal();
+            __flowBranch32 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch30, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch32, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var clipItems:flight._internal._Any = cast _Runtime.UNDEFINED;
               var result:flight._internal._Record<String, String> = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).read(), function(__awaitValue31:Dynamic):Dynamic {
-                clipItems = __awaitValue31;
+              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).read(), function(__awaitValue33:Dynamic):Dynamic {
+                clipItems = __awaitValue33;
                 result = {  };
-                var __flowIterator32:Array<Dynamic> = _Runtime.iterable(clipItems);
-                var __flowIndex33:Int = 0;
+                var __flowIterator34:Array<Dynamic> = _Runtime.iterable(clipItems);
+                var __flowIndex35:Int = 0;
                 return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-                  if (__flowIndex33 >= __flowIterator32.length) return flight._internal._Async.flowBreak();
-                  var clipItem:Dynamic = __flowIterator32[__flowIndex33++];
-                  var __flowIterator34:Array<Dynamic> = _Runtime.iterable(formats);
-                  var __flowIndex35:Int = 0;
+                  if (__flowIndex35 >= __flowIterator34.length) return flight._internal._Async.flowBreak();
+                  var clipItem:Dynamic = __flowIterator34[__flowIndex35++];
+                  var __flowIterator36:Array<Dynamic> = _Runtime.iterable(formats);
+                  var __flowIndex37:Int = 0;
                   return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-                    if (__flowIndex35 >= __flowIterator34.length) return flight._internal._Async.flowBreak();
-                    var format:Dynamic = __flowIterator34[__flowIndex35++];
-                    var __flowBranch36:Dynamic;
+                    if (__flowIndex37 >= __flowIterator36.length) return flight._internal._Async.flowBreak();
+                    var format:Dynamic = __flowIterator36[__flowIndex37++];
+                    var __flowBranch38:Dynamic;
                     if ((cast ((cast _Runtime.includes((cast clipItem : flight._internal.dom.ClipboardItem).types, format) : Bool) && (cast !(cast _Runtime.hasField(result, format) : Bool) : Bool)) : Bool)) {
-                      __flowBranch36 = flight._internal._Async.protect(function():Dynamic {
+                      __flowBranch38 = flight._internal._Async.protect(function():Dynamic {
                         var blob:flight._internal.dom.Blob = cast _Runtime.UNDEFINED;
-                        return flight._internal._Async.flatMap((cast clipItem : flight._internal.dom.ClipboardItem).getType(format), function(__awaitValue37:Dynamic):Dynamic {
-                          blob = __awaitValue37;
-                          var __beforeAwait38:Dynamic = result;
-                          var __beforeAwait39:Dynamic = format;
-                          return flight._internal._Async.flatMap((cast blob : flight._internal.dom.Blob).text(), function(__awaitValue40:Dynamic):Dynamic {
-                            return flight._internal._Async.flatMap((cast _Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument42:Dynamic = blob; __callArgument42; })) : flight._internal._Promise<String>), function(__awaitValue41:Dynamic):Dynamic {
-                              _Runtime.setIndex(__beforeAwait38, __beforeAwait39, ((cast StringTools.startsWith(format, 'image/') : Bool) ? (cast __awaitValue41 : Dynamic) : (cast __awaitValue40 : Dynamic)));
+                        return flight._internal._Async.flatMap((cast clipItem : flight._internal.dom.ClipboardItem).getType(format), function(__awaitValue39:Dynamic):Dynamic {
+                          blob = __awaitValue39;
+                          var __beforeAwait40:Dynamic = result;
+                          var __beforeAwait41:Dynamic = format;
+                          return flight._internal._Async.flatMap((cast blob : flight._internal.dom.Blob).text(), function(__awaitValue42:Dynamic):Dynamic {
+                            return flight._internal._Async.flatMap((cast _Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument44:Dynamic = blob; __callArgument44; })) : flight._internal._Promise<String>), function(__awaitValue43:Dynamic):Dynamic {
+                              _Runtime.setIndex(__beforeAwait40, __beforeAwait41, ((cast StringTools.startsWith(format, 'image/') : Bool) ? (cast __awaitValue43 : Dynamic) : (cast __awaitValue42 : Dynamic)));
                               return flight._internal._Async.flowNormal();
                             });
                           });
                         });
                       });
                     } else {
-                      __flowBranch36 = flight._internal._Async.flowNormal();
+                      __flowBranch38 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch36, function():Dynamic {
+                    return flight._internal._Async.continueFlow(__flowBranch38, function():Dynamic {
                       return flight._internal._Async.flowNormal();
                     });
                   }), function():Dynamic {
@@ -314,18 +336,18 @@ class _Clipboard {
         flight._internal._Async.protect(function():Dynamic {
           var cb:Null<flight._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast _Clipboard.getWebClipboard__clipboard() : Null<flight._internal.dom.Clipboard>);
-          var __flowBranch44:Dynamic;
+          var __flowBranch46:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flight._internal.dom.Clipboard).readText), 'function') : Bool)) : Bool)) {
-            __flowBranch44 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch46 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn('');
             });
           } else {
-            __flowBranch44 = flight._internal._Async.flowNormal();
+            __flowBranch46 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch44, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch46, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).readText(), function(__awaitValue45:Dynamic):Dynamic {
-                return flight._internal._Async.flowReturn(__awaitValue45);
+              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).readText(), function(__awaitValue47:Dynamic):Dynamic {
+                return flight._internal._Async.flowReturn(__awaitValue47);
               });
             }), function(__caughtError:Dynamic):Dynamic {
               var __error:Dynamic = __caughtError;
@@ -343,18 +365,18 @@ class _Clipboard {
         flight._internal._Async.protect(function():Dynamic {
           var cb:Null<flight._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast _Clipboard.getWebClipboard__clipboard() : Null<flight._internal.dom.Clipboard>);
-          var __flowBranch46:Dynamic;
+          var __flowBranch48:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flight._internal.dom.Clipboard).writeText), 'function') : Bool)) : Bool)) {
-            __flowBranch46 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch48 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch46 = flight._internal._Async.flowNormal();
+            __flowBranch48 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch46, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch48, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).writeText(text), function(__awaitValue47:Dynamic):Dynamic {
-                __awaitValue47;
+              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).writeText(text), function(__awaitValue49:Dynamic):Dynamic {
+                __awaitValue49;
                 return flight._internal._Async.flowReturn(true);
               });
             }), function(__caughtError:Dynamic):Dynamic {
@@ -378,8 +400,8 @@ class _Clipboard {
       }));
     }, hasText: function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.flatMap((cast __thisValue0 : ClipboardBackend).readText(), function(__awaitValue48:Dynamic):Dynamic {
-          return flight._internal._Async.resolve(((cast _Runtime.field(__awaitValue48, 'length') : Float) > (cast 0.0 : Float)));
+        return flight._internal._Async.flatMap((cast __thisValue0 : ClipboardBackend).readText(), function(__awaitValue50:Dynamic):Dynamic {
+          return flight._internal._Async.resolve(((cast _Runtime.field(__awaitValue50, 'length') : Float) > (cast 0.0 : Float)));
         });
       }));
     }, readImage: function():flight._internal._Promise<String> {
@@ -387,39 +409,39 @@ class _Clipboard {
         flight._internal._Async.protect(function():Dynamic {
           var cb:Null<flight._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast _Clipboard.getWebClipboard__clipboard() : Null<flight._internal.dom.Clipboard>);
-          var __flowBranch49:Dynamic;
+          var __flowBranch51:Dynamic;
           if ((cast ((cast _Runtime.strictEquals(cb, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast cb : flight._internal.dom.Clipboard).read), 'function') : Bool)) : Bool)) {
-            __flowBranch49 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch51 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn('');
             });
           } else {
-            __flowBranch49 = flight._internal._Async.flowNormal();
+            __flowBranch51 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch49, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch51, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var items:flight._internal._Any = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).read(), function(__awaitValue50:Dynamic):Dynamic {
-                items = __awaitValue50;
-                var __flowIterator51:Array<Dynamic> = _Runtime.iterable(items);
-                var __flowIndex52:Int = 0;
+              return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).read(), function(__awaitValue52:Dynamic):Dynamic {
+                items = __awaitValue52;
+                var __flowIterator53:Array<Dynamic> = _Runtime.iterable(items);
+                var __flowIndex54:Int = 0;
                 return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-                  if (__flowIndex52 >= __flowIterator51.length) return flight._internal._Async.flowBreak();
-                  var item:Dynamic = __flowIterator51[__flowIndex52++];
+                  if (__flowIndex54 >= __flowIterator53.length) return flight._internal._Async.flowBreak();
+                  var item:Dynamic = __flowIterator53[__flowIndex54++];
                   var type:Null<String> = cast _Runtime.UNDEFINED;
                   type = _Runtime.find((cast item : flight._internal.dom.ClipboardItem).types, function(t:String, __unused1:Float, __unused2:Array<String>):Bool return StringTools.startsWith(t, 'image/'));
-                  var __flowBranch53:Dynamic;
+                  var __flowBranch55:Dynamic;
                   if ((cast !_Runtime.strictEquals(type, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                    __flowBranch53 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch55 = flight._internal._Async.protect(function():Dynamic {
                       var blob:flight._internal.dom.Blob = cast _Runtime.UNDEFINED;
-                      return flight._internal._Async.flatMap((cast item : flight._internal.dom.ClipboardItem).getType(type), function(__awaitValue54:Dynamic):Dynamic {
-                        blob = __awaitValue54;
-                        return flight._internal._Async.flowReturn((cast _Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument55:Dynamic = blob; __callArgument55; })) : flight._internal._Promise<String>));
+                      return flight._internal._Async.flatMap((cast item : flight._internal.dom.ClipboardItem).getType(type), function(__awaitValue56:Dynamic):Dynamic {
+                        blob = __awaitValue56;
+                        return flight._internal._Async.flowReturn((cast _Clipboard.readBlobAsDataUrl__clipboard(({ final __callArgument57:Dynamic = blob; __callArgument57; })) : flight._internal._Promise<String>));
                       });
                     });
                   } else {
-                    __flowBranch53 = flight._internal._Async.flowNormal();
+                    __flowBranch55 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch53, function():Dynamic {
+                  return flight._internal._Async.continueFlow(__flowBranch55, function():Dynamic {
                     return flight._internal._Async.flowNormal();
                   });
                 }), function():Dynamic {
@@ -442,24 +464,24 @@ class _Clipboard {
         flight._internal._Async.protect(function():Dynamic {
           var cb:Null<flight._internal.dom.Clipboard> = cast _Runtime.UNDEFINED;
           cb = (cast _Clipboard.getWritableWebClipboard__clipboard() : Null<flight._internal.dom.Clipboard>);
-          var __flowBranch57:Dynamic;
+          var __flowBranch59:Dynamic;
           if ((cast _Runtime.strictEquals(cb, null) : Bool)) {
-            __flowBranch57 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch59 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch57 = flight._internal._Async.flowNormal();
+            __flowBranch59 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch57, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch59, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               var response:flight._internal.dom.Response = cast _Runtime.UNDEFINED;
               var blob:flight._internal.dom.Blob = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap(_Runtime.callValue(flight._internal._HostValueLut.get('fetch'), cast ([dataUrl] : Array<Dynamic>)), function(__awaitValue58:Dynamic):Dynamic {
-                response = __awaitValue58;
-                return flight._internal._Async.flatMap((cast response : flight._internal.dom.Response).blob(), function(__awaitValue59:Dynamic):Dynamic {
-                  blob = __awaitValue59;
-                  return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).write(cast ([_Runtime.construct(flight._internal._HostValueLut.get('ClipboardItem'), [_Runtime.objectFromPairs([{ key: (cast blob : flight._internal.dom.Blob).type, value: blob }])])] : Array<Dynamic>)), function(__awaitValue60:Dynamic):Dynamic {
-                    __awaitValue60;
+              return flight._internal._Async.flatMap(_Runtime.callValue(flight._internal._HostValueLut.get('fetch'), cast ([dataUrl] : Array<Dynamic>)), function(__awaitValue60:Dynamic):Dynamic {
+                response = __awaitValue60;
+                return flight._internal._Async.flatMap((cast response : flight._internal.dom.Response).blob(), function(__awaitValue61:Dynamic):Dynamic {
+                  blob = __awaitValue61;
+                  return flight._internal._Async.flatMap((cast cb : flight._internal.dom.Clipboard).write(cast ([_Runtime.construct(flight._internal._HostValueLut.get('ClipboardItem'), [_Runtime.objectFromPairs([{ key: (cast blob : flight._internal.dom.Blob).type, value: blob }])])] : Array<Dynamic>)), function(__awaitValue62:Dynamic):Dynamic {
+                    __awaitValue62;
                     return flight._internal._Async.flowReturn(true);
                   });
                 });
@@ -477,8 +499,8 @@ class _Clipboard {
       );
     }, hasImage: function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.flatMap((cast __thisValue0 : ClipboardBackend).readImage(), function(__awaitValue61:Dynamic):Dynamic {
-          return flight._internal._Async.resolve(((cast _Runtime.field(__awaitValue61, 'length') : Float) > (cast 0.0 : Float)));
+        return flight._internal._Async.flatMap((cast __thisValue0 : ClipboardBackend).readImage(), function(__awaitValue63:Dynamic):Dynamic {
+          return flight._internal._Async.resolve(((cast _Runtime.field(__awaitValue63, 'length') : Float) > (cast 0.0 : Float)));
         });
       }));
     }, readRTF: function():flight._internal._Promise<String> {
@@ -540,7 +562,7 @@ class _Clipboard {
   }
 
   public static function disposeClipboardWatch(watch:ClipboardWatch):Void {
-    detachClipboardWatch(({ final __callArgument62:Dynamic = watch; __callArgument62; }));
+    detachClipboardWatch(({ final __callArgument64:Dynamic = watch; __callArgument64; }));
   }
 
   public static function explainClipboardBackend():BackendExplanation {
@@ -611,7 +633,7 @@ class _Clipboard {
     }
     previous = (cast getClipboardBackend() : ClipboardBackend);
     (_Clipboard._host__clipboard = cast (backend : Dynamic));
-    _Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument64:Dynamic = previous; __callArgument64; }), (cast getClipboardBackend() : ClipboardBackend));
+    _Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument66:Dynamic = previous; __callArgument66; }), (cast getClipboardBackend() : ClipboardBackend));
   }
 
   @:allow(flight)
@@ -621,7 +643,7 @@ class _Clipboard {
   }
 
   public static function readClipboard(formats:Array<String>):flight._internal._Promise<flight._internal._Record<String, String>> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).readItems(({ final __callArgument66:Dynamic = formats; __callArgument66; }));
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).readItems(({ final __callArgument68:Dynamic = formats; __callArgument68; }));
     return cast null;
   }
 
@@ -669,7 +691,7 @@ class _Clipboard {
     (_Clipboard._host__clipboard = cast (null : Dynamic));
     (_Clipboard._hostConflict__clipboard = cast (false : Dynamic));
     (_Clipboard._hostObservation__clipboard = cast (null : Dynamic));
-    _Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument67:Dynamic = previous; __callArgument67; }), (cast getClipboardBackend() : ClipboardBackend));
+    _Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument69:Dynamic = previous; __callArgument69; }), (cast getClipboardBackend() : ClipboardBackend));
   }
 
   @:allow(flight)
@@ -678,11 +700,11 @@ class _Clipboard {
     var previous:ClipboardBackend = cast _Runtime.UNDEFINED;
     previous = (cast getClipboardBackend() : ClipboardBackend);
     (_Clipboard._custom__clipboard = cast (backend : Dynamic));
-    _Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument69:Dynamic = previous; __callArgument69; }), (cast getClipboardBackend() : ClipboardBackend));
+    _Clipboard.rebindClipboardWatches__clipboard(({ final __callArgument71:Dynamic = previous; __callArgument71; }), (cast getClipboardBackend() : ClipboardBackend));
   }
 
   public static function writeClipboard(items:Array<ClipboardWriteItem>):flight._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeItems(({ final __callArgument71:Dynamic = items; __callArgument71; }));
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeItems(({ final __callArgument73:Dynamic = items; __callArgument73; }));
     return cast null;
   }
 
@@ -692,7 +714,7 @@ class _Clipboard {
   }
 
   public static function writeClipboardFiles(paths:Array<String>):flight._internal._Promise<Bool> {
-    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeFiles(({ final __callArgument72:Dynamic = paths; __callArgument72; }));
+    return cast (cast (cast getClipboardBackend() : ClipboardBackend) : ClipboardBackend).writeFiles(({ final __callArgument74:Dynamic = paths; __callArgument74; }));
     return cast null;
   }
 
@@ -828,30 +850,8 @@ class _Clipboard {
   public static function rebindClipboardWatches__clipboard(previous:ClipboardBackend, next:ClipboardBackend):Void {
     if ((cast _Runtime.strictEquals(previous, next) : Bool)) { return; }
     for (subscription in _Runtime.iterable(((cast _Clipboard._watchSubscriptions__clipboard : flight._internal._Map<ClipboardWatch, ClipboardWatchSubscription__clipboard>).values()))) {
-      (cast subscription : ClipboardWatchSubscription__clipboard).rebind(({ final __callArgument75:Dynamic = next; __callArgument75; }));
+      (cast subscription : ClipboardWatchSubscription__clipboard).rebind(({ final __callArgument77:Dynamic = next; __callArgument77; }));
     }
-  }
-
-  public static function blobFromFormatData__clipboard(format:String, data:String):flight._internal._Promise<flight._internal.dom.Blob> {
-    return cast flight._internal._Async.finishFlow(
-      flight._internal._Async.protect(function():Dynamic {
-        var __flowBranch76:Dynamic;
-        if ((cast ((cast StringTools.startsWith(format, 'image/') : Bool) && (cast StringTools.startsWith(data, 'data:') : Bool)) : Bool)) {
-          __flowBranch76 = flight._internal._Async.protect(function():Dynamic {
-            var response:flight._internal.dom.Response = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap(_Runtime.callValue(flight._internal._HostValueLut.get('fetch'), cast ([data] : Array<Dynamic>)), function(__awaitValue77:Dynamic):Dynamic {
-              response = __awaitValue77;
-              return flight._internal._Async.flowReturn((cast response : flight._internal.dom.Response).blob());
-            });
-          });
-        } else {
-          __flowBranch76 = flight._internal._Async.flowNormal();
-        }
-        return flight._internal._Async.continueFlow(__flowBranch76, function():Dynamic {
-          return flight._internal._Async.flowReturn(_Runtime.construct(flight._internal._HostValueLut.get('Blob'), [cast ([data] : Array<Dynamic>), { type: format }]));
-        });
-      })
-    );
   }
 
   public static function getWebClipboard__clipboard():Null<flight._internal.dom.Clipboard> {

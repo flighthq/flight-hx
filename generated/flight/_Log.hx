@@ -5,6 +5,7 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
+import flight.types.BackendOperationExplanation;
 import flight.types.BufferedLogSink;
 import flight.types.FileLogSink;
 import flight.types.LogContext;
@@ -18,6 +19,7 @@ import flight.types.LogSink;
 import flight.types.LogSpan;
 import flight.types.LogTimer;
 import flight.types.LogTransportBackend;
+import flight.types.LogTransportOperation;
 import flight.types.MemoryLogSink;
 import flight.types.RateLimitedLogSink;
 import flight.types.Signal;
@@ -292,12 +294,17 @@ class _Log {
     return cast null;
   }
 
-  public static function disposeFileLogSink(_handle:FileLogSink):Void {
+  public static function destroyFileLogSink(_handle:FileLogSink):Void {
+    destroyLogTransportBackend();
+  }
+
+  public static function destroyLogTransportBackend():Void {
     var backend:Null<LogTransportBackend> = cast _Runtime.UNDEFINED;
     backend = _Log._transportBackend__log;
     if ((cast _Runtime.strictEquals(backend, null) : Bool)) { return; }
+    (_Log._transportBackend__log = cast (null : Dynamic));
     if (_Runtime.truthy((cast backend : LogTransportBackend).flush)) { (cast backend : LogTransportBackend).flush(); }
-    if (_Runtime.truthy((cast backend : LogTransportBackend).dispose)) { (cast backend : LogTransportBackend).dispose(); }
+    if (_Runtime.truthy((cast backend : LogTransportBackend).destroy)) { (cast backend : LogTransportBackend).destroy(); }
   }
 
   public static function disposeLogSink(handle:BufferedLogSink):Void {
@@ -340,6 +347,16 @@ class _Log {
     var idx:Float = cast _Runtime.UNDEFINED;
     idx = _Runtime.callProperty(_Log._spanStack__log, 'indexOf', cast ([span] : Array<Dynamic>));
     if ((cast ((cast idx : Float) >= (cast 0.0 : Float)) : Bool)) { _Runtime.splice(_Log._spanStack__log, Std.int(idx), Std.int(1.0), []); }
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function explainLogTransportOperation(operation:LogTransportOperation):BackendOperationExplanation {
+    if ((cast ((cast !_Runtime.strictEquals(_Log._transportBackend__log, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Log._transportBackend__log, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'custom', operation: operation };
+    }
+    return cast { implemented: false, layer: 'none', operation: operation };
+    return cast null;
   }
 
   public static function flushLogSink(handle:BufferedLogSink):Void {
@@ -387,6 +404,13 @@ class _Log {
     head = _Runtime.field(__destructure3, 'head');
     if ((cast _Runtime.strictEquals(head, 0.0) : Bool)) { return cast _Runtime.slice(buf, 0, null); }
     return cast _Runtime.concatArrays([_Runtime.toArray(_Runtime.slice(buf, head, null)), _Runtime.toArray(_Runtime.slice(buf, 0.0, head))]);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasLogTransportOperation(operation:LogTransportOperation):Bool {
+    return cast (cast (cast explainLogTransportOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 
@@ -579,6 +603,8 @@ class _Log {
   @:allow(flight)
   @:keep
   private static function setLogTransportBackend(backend:Null<LogTransportBackend>):Void {
+    if ((cast _Runtime.strictEquals(_Log._transportBackend__log, backend) : Bool)) { return; }
+    destroyLogTransportBackend();
     (_Log._transportBackend__log = cast (backend : Dynamic));
   }
 

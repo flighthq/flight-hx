@@ -5,6 +5,7 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Scene3DResources as Facade_Scene3DResources_flight__Scene3DResources;
 import flight.types.ExternalImageResourceReference;
+import flight.types.GltfScene3DDocumentLoadOptions;
 import flight.types.Image;
 import flight.types.ImageResourceReference;
 import flight.types.LoadScene3DResourcesOptions;
@@ -98,12 +99,12 @@ class Scene3DResources {
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromGlbUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+  public static function loadScene3DDocumentFromGlbUrl(url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
     return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromGlbUrl(url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromGltfUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+  public static function loadScene3DDocumentFromGltfUrl(url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
     return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromGltfUrl(url, options);
     return cast null;
   }

@@ -8,6 +8,8 @@ import flight.types.BackendExplanation;
 import flight.types.MenuItemRole;
 import flight.types.MenuItemTemplate;
 import flight.types.MenuItemType;
+import flight.types.MenuReplacementGuarantee;
+import flight.types.MenuReplacementGuaranteeExplanation;
 import flight.types.MenuSignals;
 
 class Menu {
@@ -61,8 +63,18 @@ class Menu {
     return cast null;
   }
 
+  public static function explainMenuReplacementGuarantee(guarantee:MenuReplacementGuarantee):MenuReplacementGuaranteeExplanation {
+    return cast Facade_Menu_flight__Menu.explainMenuReplacementGuarantee(guarantee);
+    return cast null;
+  }
+
   public static function getMenuSignals():Null<MenuSignals> {
     return cast Facade_Menu_flight__Menu.getMenuSignals();
+    return cast null;
+  }
+
+  public static function hasMenuReplacementGuarantee(guarantee:MenuReplacementGuarantee):Bool {
+    return cast Facade_Menu_flight__Menu.hasMenuReplacementGuarantee(guarantee);
     return cast null;
   }
 

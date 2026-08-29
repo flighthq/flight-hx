@@ -6,6 +6,8 @@ import flight._internal._Runtime;
 import flight._RenderGl as Facade_RenderGl_flight__RenderGl;
 import flight.types.CreateExternalTextureOptions;
 import flight.types.GlCompressedTextureDecoder;
+import flight.types.GlContext;
+import flight.types.GlContextOptions;
 import flight.types.GlRenderOptions;
 import flight.types.GlRenderState;
 import flight.types.GlRenderTarget;
@@ -74,13 +76,23 @@ class RenderGl {
     return cast null;
   }
 
+  public static function createGlContextFromCanvasElement(canvas:flight._internal.dom.HTMLCanvasElement, ?options:GlContextOptions):GlContext {
+    return cast Facade_RenderGl_flight__RenderGl.createGlContextFromCanvasElement(canvas, options);
+    return cast null;
+  }
+
   public static function createGlOffscreenRenderState(screenState:GlRenderState):GlRenderState {
     return cast Facade_RenderGl_flight__RenderGl.createGlOffscreenRenderState(screenState);
     return cast null;
   }
 
-  public static function createGlRenderState(canvas:flight._internal.dom.HTMLCanvasElement, ?options:GlRenderOptions):GlRenderState {
-    return cast Facade_RenderGl_flight__RenderGl.createGlRenderState(canvas, options);
+  public static function createGlRenderState(gl:GlContext, ?options:GlRenderOptions):GlRenderState {
+    return cast Facade_RenderGl_flight__RenderGl.createGlRenderState(gl, options);
+    return cast null;
+  }
+
+  public static function createGlRenderSurface(width:Float, height:Float, ?pixelRatio:Float):Null<flight._internal.dom.HTMLCanvasElement> {
+    return cast Facade_RenderGl_flight__RenderGl.createGlRenderSurface(width, height, pixelRatio);
     return cast null;
   }
 
@@ -137,6 +149,11 @@ class RenderGl {
 
   public static function endGlRenderPass(state:GlRenderState):Void {
     Facade_RenderGl_flight__RenderGl.endGlRenderPass(state);
+  }
+
+  public static function explainGlRenderSurfaceAbsence():Null<{ var reason:String; }> {
+    return cast Facade_RenderGl_flight__RenderGl.explainGlRenderSurfaceAbsence();
+    return cast null;
   }
 
   public static function explainGlRenderTarget(target:GlRenderTarget):RenderTargetExplanation {
@@ -225,7 +242,7 @@ class RenderGl {
     Facade_RenderGl_flight__RenderGl.setGlRenderTransform2D(state, transform);
   }
 
-  public static function uploadGlCompressedTextureContainer(gl:flight._internal.dom.WebGL2RenderingContext, container:TextureContainer, payload:flight._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
+  public static function uploadGlCompressedTextureContainer(gl:GlContext, container:TextureContainer, payload:flight._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
     return cast Facade_RenderGl_flight__RenderGl.uploadGlCompressedTextureContainer(gl, container, payload, decode, colorSpace);
     return cast null;
   }

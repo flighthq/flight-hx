@@ -4,6 +4,7 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './audioChannel.mjs';
+export * from './audioDeviceBackend.mjs';
 export * from './audioMixer.mjs';
 export * from './enableAudioMixerGuards.mjs';
 export * from './videoChannel.mjs';

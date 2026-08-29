@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Log.logOnce;
+import flight._Platform.getPlatformName;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
@@ -15,6 +16,7 @@ import flight.types.GlobalShortcutBlockReason;
 import flight.types.GlobalShortcutExplanation;
 import flight.types.LogLevel;
 import flight.types.ParsedAccelerator;
+import flight.types.PlatformName;
 import flight.types.ShortcutBackend;
 import flight.types.ShortcutDrop;
 import flight.types.ShortcutDropGuard;
@@ -406,11 +408,8 @@ class _Shortcut {
   }
 
   public static function _isMacOS__shortcut(?platform:String):Bool {
-    var p:String = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(platform, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callProperty(_Runtime.regexp('^mac', 'i'), 'test', cast ([platform] : Array<Dynamic>)); }
-    if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast false; }
-    p = _Runtime.coalesce(flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'platform'), function():Dynamic return cast '');
-    return cast _Runtime.callProperty(_Runtime.regexp('mac', 'i'), 'test', cast ([p] : Array<Dynamic>));
+    return cast _Runtime.strictEquals((cast getPlatformName() : PlatformName), 'macos');
     return cast null;
   }
 

@@ -5,8 +5,10 @@ const api = compiled.flight._Scene2DWgpu;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const acquireWgpuScale9ShapeRasterSurface = api.acquireWgpuScale9ShapeRasterSurface;
 export const createWgpuScale9ShapeData = api.createWgpuScale9ShapeData;
 export const defaultWgpuScale9ShapeRenderer = api.defaultWgpuScale9ShapeRenderer;
 export const destroyWgpuScale9ShapeData = api.destroyWgpuScale9ShapeData;
 export const drawWgpuScale9Shape = api.drawWgpuScale9Shape;
 export const drawWgpuScale9ShapeMask = api.drawWgpuScale9ShapeMask;
+export const getWgpuScale9ShapeData = api.getWgpuScale9ShapeData;

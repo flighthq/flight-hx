@@ -31,6 +31,7 @@ class Canvas2dBackend {
       case 'clearRect': ctx.clearRect(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
       case 'clip': ctx.clip(); return null;
       case 'closePath': ctx.closePath(); return null;
+      case 'createImageData': return ctx.createImageData(arguments[0], arguments[1]);
       case 'createLinearGradient': return ctx.createLinearGradient(arguments[0], arguments[1], arguments[2], arguments[3]);
       case 'createPattern': return ctx.createPattern(arguments[0], arguments[1]);
       case 'createRadialGradient':
@@ -162,6 +163,7 @@ class Canvas2dBackend {
       case 'beginPath': ctx.beginPath(); return null;
       case 'clearRect': ctx.clearRect(arguments[0], arguments[1], arguments[2], arguments[3]); return null;
       case 'clip': ctx.clip(); return null;
+      case 'createImageData': return ctx.createImageData(arguments[0], arguments[1]);
       case 'createLinearGradient': return ctx.createLinearGradient(arguments[0], arguments[1], arguments[2], arguments[3]);
       case 'createPattern': return ctx.createPattern(arguments[0], arguments[1]);
       case 'createRadialGradient':

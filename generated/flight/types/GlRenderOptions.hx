@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlRenderOptions = { @:optional var allowSmoothing:Bool; @:optional var antialias:Bool; @:optional var backgroundColor:Float; @:optional var contextAttributes:flight._internal.dom.WebGLContextAttributes; @:optional var imageSmoothingEnabled:Bool; @:optional var pixelRatio:Float; @:optional var powerPreference:flight._internal.dom.WebGLPowerPreference; @:optional var roundPixels:Bool; @:optional var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; };
+typedef GlRenderOptions = { @:optional var allowSmoothing:Bool; @:optional var backgroundColor:Float; @:optional var imageSmoothingEnabled:Bool; @:optional var pixelRatio:Float; @:optional var roundPixels:Bool; @:optional var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; };

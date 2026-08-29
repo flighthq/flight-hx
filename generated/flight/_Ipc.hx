@@ -6,10 +6,12 @@ import flight._internal._Runtime;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.IpcBackend;
 import flight.types.IpcBackendCapabilities;
 import flight.types.IpcChannel;
 import flight.types.IpcMessageEvent;
+import flight.types.IpcOperation;
 import flight.types.IpcSignals;
 import flight.types.IpcTarget;
 import flight.types.IpcTimeoutError;
@@ -71,6 +73,19 @@ class _Ipc {
 
   @:allow(flight)
   @:keep
+  private static function explainIpcOperation(operation:IpcOperation):BackendOperationExplanation {
+    if ((cast ((cast !_Runtime.strictEquals(_Ipc._custom__ipc, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Ipc._custom__ipc, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'custom', operation: operation };
+    }
+    if ((cast ((cast !_Runtime.strictEquals(_Ipc._host__ipc, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Ipc._host__ipc, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'host', operation: operation };
+    }
+    return cast { implemented: false, layer: 'sentinel', operation: operation };
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
   private static function getIpcBackend():IpcBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(_Ipc._custom__ipc, function():Dynamic return cast _Ipc._host__ipc), function():Dynamic return cast _Ipc._sentinel__ipc);
     return cast null;
@@ -92,6 +107,13 @@ class _Ipc {
   @:keep
   private static function hasIpcBackend():Bool {
     return cast ((cast !_Runtime.strictEquals(_Ipc._custom__ipc, null) : Bool) || (cast !_Runtime.strictEquals(_Ipc._host__ipc, null) : Bool));
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasIpcOperation(operation:IpcOperation):Bool {
+    return cast (cast (cast explainIpcOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 

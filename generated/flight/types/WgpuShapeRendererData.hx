@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuShapeRendererData = { var surface:Null<WgpuShapeRasterSurface>; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<WgpuShapeMesh>>; var meshBuffers:WgpuShapeMeshBuffers; };
+typedef WgpuShapeRendererData = { var surface:Null<Raster2DSurface>; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<WgpuShapeMesh>>; var meshBuffers:WgpuShapeMeshBuffers; };

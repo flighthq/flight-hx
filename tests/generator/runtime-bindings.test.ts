@@ -6,12 +6,21 @@ import { describe, expect, it } from 'vitest';
 const workspace = process.cwd();
 
 describe('maintained runtime bindings', () => {
+  it('implements the standard Object operations used by generated dictionaries', () => {
+    const source = readFileSync(path.join(workspace, 'src/flight/_internal/DynamicObject.hx'), 'utf8');
+    expect(source).toContain('function create(');
+    expect(source).toContain('Object.create');
+    expect(source).toContain('function hasOwn(');
+    expect(source).toContain('hasOwnProperty.call');
+  });
+
   it('keeps typed collection calls dispatchable on native JavaScript collections', () => {
     for (const name of ['_Map', '_Set']) {
       const source = readFileSync(path.join(workspace, 'src', 'flight', '_internal', `${name}.hx`), 'utf8');
       expect(source).toContain('public function has(');
       expect(source).not.toContain('public inline function has(');
       expect(source).toContain('@:native("delete")');
+      if (name === '_Map') expect(source).toContain('for (pair in _Runtime.iterable(source))');
     }
 
     const runtime = readFileSync(path.join(workspace, 'src', 'flight', '_internal', '_Runtime.hx'), 'utf8');

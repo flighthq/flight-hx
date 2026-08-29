@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Types.ImageTextureSourceKind;
 
-typedef ImageBackend = { var loadImageFromUrl:String->String->flight._internal.dom.AbortSignal->flight._internal._Promise<Image>; };
+typedef ImageBackend = { @:optional var createImageFromBitmap:Bitmap->Image; var loadImageFromUrl:String->String->flight._internal.dom.AbortSignal->flight._internal._Promise<Image>; };

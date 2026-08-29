@@ -1131,6 +1131,9 @@ class _HostCapacitor {
           });
         })
       );
+    }, isAvailable: function():Bool {
+      return cast true;
+      return cast _Runtime.UNDEFINED;
     }, watchPosition: function(listener:GeoPosition->Void, options:GeolocationRequestOptions, onError:Null<GeolocationErrorReason->Void>):Float {
       var numericId:Float = cast _Runtime.UNDEFINED;
       numericId = nextWatchId++;

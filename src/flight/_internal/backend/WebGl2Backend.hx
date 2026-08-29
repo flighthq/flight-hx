@@ -224,6 +224,52 @@ class WebGl2Backend {
   static final nativeUnpackPremultiplyAlpha = new haxe.ds.ObjectMap<Dynamic, Bool>();
   #end
 
+  #if !js
+  // Native GL contexts do not own WebGL's drawingBufferWidth/Height fields.
+  // Keep the caller-owned surface associated by identity and read its live
+  // backing-store dimensions instead. This also supports object-shaped GL
+  // adapters (for example Clay) without inventing a process-global window.
+  static final drawingBufferSurfaces = new haxe.ds.ObjectMap<Dynamic, Dynamic>();
+  #end
+
+  /** Associate a context with the live surface that owns its backing store.
+   * createGlContextFromCanvasElement installs this automatically; hosts that
+   * inject a context directly must bind their surface before rendering. */
+  public static function bindDrawingBufferSurface(gl:GlContext, surface:Dynamic):Void {
+    #if !js
+    if (gl != null && surface != null) drawingBufferSurfaces.set(cast gl, surface);
+    #end
+  }
+
+  public static inline function drawingBufferHeight(gl:GlContext):Float {
+    #if js
+    return cast js.Syntax.code('{0}.drawingBufferHeight', gl);
+    #else
+    return drawingBufferDimension(gl, 'drawingBufferHeight', 'height');
+    #end
+  }
+
+  public static inline function drawingBufferWidth(gl:GlContext):Float {
+    #if js
+    return cast js.Syntax.code('{0}.drawingBufferWidth', gl);
+    #else
+    return drawingBufferDimension(gl, 'drawingBufferWidth', 'width');
+    #end
+  }
+
+  #if !js
+  static function drawingBufferDimension(gl:GlContext, contextField:String, surfaceField:String):Float {
+    final dynamicContext:Dynamic = cast gl;
+    final direct:Dynamic = Reflect.field(dynamicContext, contextField);
+    if (direct != null) return cast direct;
+    final surface = drawingBufferSurfaces.get(dynamicContext);
+    final value:Dynamic = surface == null ? null : Reflect.field(surface, surfaceField);
+    if (value != null) return cast value;
+    throw 'Flight native GL context has no ' + contextField
+      + '; acquire it with createGlContextFromCanvasElement or call WebGl2Backend.bindDrawingBufferSurface().';
+  }
+  #end
+
   /** Preserve context-owned WebGL constants on JavaScript so wrappers observe
    * their own enum surface. Native targets use the fixed specification value
    * because their context types do not expose instance constants. */
@@ -388,11 +434,16 @@ class WebGl2Backend {
     gl.clearBufferfi(Std.int(buffer), Std.int(drawbuffer), depth, Std.int(stencil));
   }
 
-  public static inline function clearBufferfv(gl:GlContext, buffer:Float, drawbuffer:Float, values:GlFloatList):Void {
+  public static inline function clearBufferfv(gl:GlContext, buffer:Float, drawbuffer:Float, values:GlFloatList,
+      ?srcOffset:Null<Float>):Void {
     #if (lime && !js)
-    gl.clearBufferfv(Std.int(buffer), Std.int(drawbuffer), nativeFloats(values));
+    gl.clearBufferfv(Std.int(buffer), Std.int(drawbuffer), nativeFloats(values), srcOffset == null ? 0 : Std.int(srcOffset));
+    #elseif js
+    if (srcOffset == null) js.Syntax.code('{0}.clearBufferfv({1}, {2}, {3})', gl, Std.int(buffer), Std.int(drawbuffer), values);
+    else js.Syntax.code('{0}.clearBufferfv({1}, {2}, {3}, {4})', gl, Std.int(buffer), Std.int(drawbuffer), values, Std.int(srcOffset));
     #else
-    gl.clearBufferfv(Std.int(buffer), Std.int(drawbuffer), cast values);
+    if (srcOffset == null) gl.clearBufferfv(Std.int(buffer), Std.int(drawbuffer), cast values);
+    else gl.clearBufferfv(Std.int(buffer), Std.int(drawbuffer), cast values, Std.int(srcOffset));
     #end
   }
 
@@ -414,24 +465,60 @@ class WebGl2Backend {
   }
 
   public static inline function compressedTexImage2D(gl:GlContext, target:Float, level:Float, internalformat:Float,
-      width:Float, height:Float, border:Float, data:GlBufferSource):Void {
+      width:Float, height:Float, border:Float, data:GlBufferSource, ?srcOffset:Null<Float>,
+      ?srcLengthOverride:Null<Float>):Void {
     #if (lime && !js)
-    gl.compressedTexImage2D(Std.int(target), Std.int(level), Std.int(internalformat), Std.int(width), Std.int(height),
-      Std.int(border), nativeView(data));
+    if (srcOffset == null) {
+      gl.compressedTexImage2D(Std.int(target), Std.int(level), Std.int(internalformat), Std.int(width), Std.int(height),
+        Std.int(border), nativeView(data));
+    } else {
+      gl.compressedTexImage2D(Std.int(target), Std.int(level), Std.int(internalformat), Std.int(width), Std.int(height),
+        Std.int(border), nativeView(data), Std.int(srcOffset), srcLengthOverride == null ? null : Std.int(srcLengthOverride));
+    }
+    #elseif js
+    if (srcOffset == null) {
+      js.Syntax.code('{0}.compressedTexImage2D({1}, {2}, {3}, {4}, {5}, {6}, {7})', gl, Std.int(target), Std.int(level),
+        Std.int(internalformat), Std.int(width), Std.int(height), Std.int(border), data);
+    } else {
+      js.Syntax.code('{0}.compressedTexImage2D({1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9})', gl, Std.int(target),
+        Std.int(level), Std.int(internalformat), Std.int(width), Std.int(height), Std.int(border), data,
+        Std.int(srcOffset), srcLengthOverride == null ? null : Std.int(srcLengthOverride));
+    }
     #else
-    gl.compressedTexImage2D(Std.int(target), Std.int(level), Std.int(internalformat), Std.int(width), Std.int(height),
-      Std.int(border), cast data);
+    if (srcOffset == null) gl.compressedTexImage2D(Std.int(target), Std.int(level), Std.int(internalformat), Std.int(width),
+      Std.int(height), Std.int(border), cast data);
+    else gl.compressedTexImage2D(Std.int(target), Std.int(level), Std.int(internalformat), Std.int(width), Std.int(height),
+      Std.int(border), cast data, Std.int(srcOffset), srcLengthOverride == null ? null : Std.int(srcLengthOverride));
     #end
   }
 
   public static inline function compressedTexSubImage3D(gl:GlContext, target:Float, level:Float, xoffset:Float,
-      yoffset:Float, zoffset:Float, width:Float, height:Float, depth:Float, format:Float, data:GlBufferSource):Void {
+      yoffset:Float, zoffset:Float, width:Float, height:Float, depth:Float, format:Float, data:GlBufferSource,
+      ?srcOffset:Null<Float>, ?srcLengthOverride:Null<Float>):Void {
     #if (lime && !js)
+    // Lime native exposes only the full-view GLES entry point. Current Flight
+    // calls use the full view; reject a ranged request instead of uploading
+    // the wrong byte window.
+    if (srcOffset != null) throw 'Ranged compressedTexSubImage3D is unavailable on Lime native GL.';
     gl.compressedTexSubImage3D(Std.int(target), Std.int(level), Std.int(xoffset), Std.int(yoffset), Std.int(zoffset),
       Std.int(width), Std.int(height), Std.int(depth), Std.int(format), nativeView(data));
+    #elseif js
+    if (srcOffset == null) {
+      js.Syntax.code('{0}.compressedTexSubImage3D({1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10})', gl,
+        Std.int(target), Std.int(level), Std.int(xoffset), Std.int(yoffset), Std.int(zoffset), Std.int(width),
+        Std.int(height), Std.int(depth), Std.int(format), data);
+    } else {
+      js.Syntax.code('{0}.compressedTexSubImage3D({1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12})',
+        gl, Std.int(target), Std.int(level), Std.int(xoffset), Std.int(yoffset), Std.int(zoffset), Std.int(width),
+        Std.int(height), Std.int(depth), Std.int(format), data, Std.int(srcOffset),
+        srcLengthOverride == null ? null : Std.int(srcLengthOverride));
+    }
     #else
-    gl.compressedTexSubImage3D(Std.int(target), Std.int(level), Std.int(xoffset), Std.int(yoffset), Std.int(zoffset),
-      Std.int(width), Std.int(height), Std.int(depth), Std.int(format), cast data);
+    if (srcOffset == null) gl.compressedTexSubImage3D(Std.int(target), Std.int(level), Std.int(xoffset), Std.int(yoffset),
+      Std.int(zoffset), Std.int(width), Std.int(height), Std.int(depth), Std.int(format), cast data);
+    else gl.compressedTexSubImage3D(Std.int(target), Std.int(level), Std.int(xoffset), Std.int(yoffset), Std.int(zoffset),
+      Std.int(width), Std.int(height), Std.int(depth), Std.int(format), cast data, Std.int(srcOffset),
+      srcLengthOverride == null ? null : Std.int(srcLengthOverride));
     #end
   }
 
@@ -967,11 +1054,18 @@ class WebGl2Backend {
     #end
   }
 
-  public static inline function uniform1fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList):Void {
+  public static inline function uniform1fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList,
+      ?srcOffset:Null<Float>, ?srcLength:Null<Float>):Void {
     #if (lime && !js)
-    gl.uniform1fv(location, nativeFloats(values));
+    gl.uniform1fv(location, nativeFloats(values), srcOffset == null ? null : Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
+    #elseif js
+    if (srcOffset == null) js.Syntax.code('{0}.uniform1fv({1}, {2})', gl, location, values);
+    else js.Syntax.code('{0}.uniform1fv({1}, {2}, {3}, {4})', gl, location, values, Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
     #else
-    gl.uniform1fv(location, cast values);
+    if (srcOffset == null) gl.uniform1fv(location, cast values);
+    else gl.uniform1fv(location, cast values, Std.int(srcOffset), srcLength == null ? null : Std.int(srcLength));
     #end
   }
 
@@ -987,11 +1081,18 @@ class WebGl2Backend {
     gl.uniform2f(location, x, y);
   }
 
-  public static inline function uniform2fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList):Void {
+  public static inline function uniform2fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList,
+      ?srcOffset:Null<Float>, ?srcLength:Null<Float>):Void {
     #if (lime && !js)
-    gl.uniform2fv(location, nativeFloats(values));
+    gl.uniform2fv(location, nativeFloats(values), srcOffset == null ? null : Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
+    #elseif js
+    if (srcOffset == null) js.Syntax.code('{0}.uniform2fv({1}, {2})', gl, location, values);
+    else js.Syntax.code('{0}.uniform2fv({1}, {2}, {3}, {4})', gl, location, values, Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
     #else
-    gl.uniform2fv(location, cast values);
+    if (srcOffset == null) gl.uniform2fv(location, cast values);
+    else gl.uniform2fv(location, cast values, Std.int(srcOffset), srcLength == null ? null : Std.int(srcLength));
     #end
   }
 
@@ -999,11 +1100,18 @@ class WebGl2Backend {
     gl.uniform3f(location, x, y, z);
   }
 
-  public static inline function uniform3fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList):Void {
+  public static inline function uniform3fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList,
+      ?srcOffset:Null<Float>, ?srcLength:Null<Float>):Void {
     #if (lime && !js)
-    gl.uniform3fv(location, nativeFloats(values));
+    gl.uniform3fv(location, nativeFloats(values), srcOffset == null ? null : Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
+    #elseif js
+    if (srcOffset == null) js.Syntax.code('{0}.uniform3fv({1}, {2})', gl, location, values);
+    else js.Syntax.code('{0}.uniform3fv({1}, {2}, {3}, {4})', gl, location, values, Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
     #else
-    gl.uniform3fv(location, cast values);
+    if (srcOffset == null) gl.uniform3fv(location, cast values);
+    else gl.uniform3fv(location, cast values, Std.int(srcOffset), srcLength == null ? null : Std.int(srcLength));
     #end
   }
 
@@ -1016,35 +1124,56 @@ class WebGl2Backend {
     #end
   }
 
-  public static inline function uniform4fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList):Void {
+  public static inline function uniform4fv(gl:GlContext, location:Null<GlUniformLocation>, values:GlFloatList,
+      ?srcOffset:Null<Float>, ?srcLength:Null<Float>):Void {
     #if (lime && !js)
-    gl.uniform4fv(location, nativeFloats(values));
+    gl.uniform4fv(location, nativeFloats(values), srcOffset == null ? null : Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
+    #elseif js
+    if (srcOffset == null) js.Syntax.code('{0}.uniform4fv({1}, {2})', gl, location, values);
+    else js.Syntax.code('{0}.uniform4fv({1}, {2}, {3}, {4})', gl, location, values, Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
     #else
-    gl.uniform4fv(location, cast values);
+    if (srcOffset == null) gl.uniform4fv(location, cast values);
+    else gl.uniform4fv(location, cast values, Std.int(srcOffset), srcLength == null ? null : Std.int(srcLength));
     #end
   }
 
   public static inline function uniformMatrix3fv(gl:GlContext, location:Null<GlUniformLocation>, transpose:Bool,
-      values:GlFloatList):Void {
+      values:GlFloatList, ?srcOffset:Null<Float>, ?srcLength:Null<Float>):Void {
     #if (lime && !js)
     final native = nativeFloats(values);
-    gl.uniformMatrix3fv(location, transpose, native);
+    gl.uniformMatrix3fv(location, transpose, native, srcOffset == null ? null : Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
     #if flight_gl_trace
     final f32:lime.utils.Float32Array = cast native;
     glTrace('uniformMatrix3fv(' + Std.string(location) + ', len=' + f32.length + ', m0..2=' + f32[0] + ',' + f32[1]
       + ',' + f32[2] + ') getError -> 0x' + StringTools.hex(Std.int(gl.getError()), 4));
     #end
+    #elseif js
+    if (srcOffset == null) js.Syntax.code('{0}.uniformMatrix3fv({1}, {2}, {3})', gl, location, transpose, values);
+    else js.Syntax.code('{0}.uniformMatrix3fv({1}, {2}, {3}, {4}, {5})', gl, location, transpose, values,
+      Std.int(srcOffset), srcLength == null ? null : Std.int(srcLength));
     #else
-    gl.uniformMatrix3fv(location, transpose, cast values);
+    if (srcOffset == null) gl.uniformMatrix3fv(location, transpose, cast values);
+    else gl.uniformMatrix3fv(location, transpose, cast values, Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
     #end
   }
 
   public static inline function uniformMatrix4fv(gl:GlContext, location:Null<GlUniformLocation>, transpose:Bool,
-      values:GlFloatList):Void {
+      values:GlFloatList, ?srcOffset:Null<Float>, ?srcLength:Null<Float>):Void {
     #if (lime && !js)
-    gl.uniformMatrix4fv(location, transpose, nativeFloats(values));
+    gl.uniformMatrix4fv(location, transpose, nativeFloats(values), srcOffset == null ? null : Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
+    #elseif js
+    if (srcOffset == null) js.Syntax.code('{0}.uniformMatrix4fv({1}, {2}, {3})', gl, location, transpose, values);
+    else js.Syntax.code('{0}.uniformMatrix4fv({1}, {2}, {3}, {4}, {5})', gl, location, transpose, values,
+      Std.int(srcOffset), srcLength == null ? null : Std.int(srcLength));
     #else
-    gl.uniformMatrix4fv(location, transpose, cast values);
+    if (srcOffset == null) gl.uniformMatrix4fv(location, transpose, cast values);
+    else gl.uniformMatrix4fv(location, transpose, cast values, Std.int(srcOffset),
+      srcLength == null ? null : Std.int(srcLength));
     #end
   }
 

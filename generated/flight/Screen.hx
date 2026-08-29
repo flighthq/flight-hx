@@ -9,6 +9,7 @@ import flight.types.RectangleLike;
 import flight.types.ScreenChangeEvent;
 import flight.types.ScreenInfo;
 import flight.types.ScreenMode;
+import flight.types.ScreenPermissionState;
 import flight.types.ScreenSignals;
 import flight.types.Vector2Like;
 
@@ -85,7 +86,7 @@ class Screen {
     return cast null;
   }
 
-  public static function getScreenDetailPermission():flight._internal._Promise<String> {
+  public static function getScreenDetailPermission():flight._internal._Promise<ScreenPermissionState> {
     return cast Facade_Screen_flight__Screen.getScreenDetailPermission();
     return cast null;
   }
@@ -120,7 +121,7 @@ class Screen {
     return cast null;
   }
 
-  public static function onScreenDetailPermissionChange(listener:String->Void):Void->Void {
+  public static function onScreenDetailPermissionChange(listener:ScreenPermissionState->Void):Void->Void {
     return cast Facade_Screen_flight__Screen.onScreenDetailPermissionChange(listener);
     return cast null;
   }

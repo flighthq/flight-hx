@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef VideoResource = { var element:Null<flight._internal.dom.CanvasImageSource>; var objectUrl:Null<String>; };
+typedef VideoResource = { var element:Null<flight._internal.dom.CanvasImageSource>; var objectUrl:Null<String>; var ownsElement:Bool; };

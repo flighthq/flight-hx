@@ -9,6 +9,7 @@ export * from './enableGlTextureResolverGuards.mjs';
 export * from './explainGlTextureResolution.mjs';
 export * from './glBackground.mjs';
 export * from './glCompressedTexture.mjs';
+export * from './glContext.mjs';
 export * from './glDraw.mjs';
 export * from './glElement.mjs';
 export * from './glExternalTexture.mjs';

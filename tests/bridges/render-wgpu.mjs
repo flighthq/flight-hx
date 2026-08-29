@@ -11,6 +11,7 @@ export const createExternalWgpuTexture = compiled.flight.RenderWgpu.createExtern
 export const createWgpuCanvasElement = compiled.flight.RenderWgpu.createWgpuCanvasElement;
 export const createWgpuOffscreenRenderState = compiled.flight.RenderWgpu.createWgpuOffscreenRenderState;
 export const createWgpuRenderState = compiled.flight.RenderWgpu.createWgpuRenderState;
+export const createWgpuRenderSurface = compiled.flight.RenderWgpu.createWgpuRenderSurface;
 export const createWgpuRenderTarget = compiled.flight.RenderWgpu.createWgpuRenderTarget;
 export const createWgpuRenderTexturePool = compiled.flight.RenderWgpu.createWgpuRenderTexturePool;
 export const destroyWgpuRenderState = compiled.flight.RenderWgpu.destroyWgpuRenderState;

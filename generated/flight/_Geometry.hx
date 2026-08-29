@@ -2355,7 +2355,7 @@ class _Geometry {
 
   public static function releaseMatrix3(m:Matrix3):Void {
     if ((cast !_Runtime.truthy(m) : Bool)) { return; }
-    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__matrix3Pool, m) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseMatrix3' : String)); }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__matrix3Pool, m) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseMatrix3' : Dynamic)); }
     _Runtime.setIndex(m, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(_Geometry.pool__matrix3Pool, 'push', cast ([m] : Array<Dynamic>));
   }
@@ -3450,7 +3450,7 @@ class _Geometry {
 
   public static function releaseMatrix4(m:Matrix4):Void {
     if ((cast !_Runtime.truthy(m) : Bool)) { return; }
-    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__matrix4Pool, m) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseMatrix4' : String)); }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__matrix4Pool, m) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseMatrix4' : Dynamic)); }
     _Runtime.setIndex(m, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(_Geometry.pool__matrix4Pool, 'push', cast ([m] : Array<Dynamic>));
   }
@@ -3482,7 +3482,7 @@ class _Geometry {
 
   public static function releaseMatrix(m:Matrix):Void {
     if ((cast !_Runtime.truthy(m) : Bool)) { return; }
-    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__matrixPool, m) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseMatrix' : String)); }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__matrixPool, m) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseMatrix' : Dynamic)); }
     _Runtime.setIndex(m, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(_Geometry.pool__matrixPool, 'push', cast ([m] : Array<Dynamic>));
   }
@@ -4951,7 +4951,7 @@ class _Geometry {
 
   public static function releaseQuaternion(q:Quaternion):Void {
     if ((cast !_Runtime.truthy(q) : Bool)) { return; }
-    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__quaternionPool, q) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseQuaternion' : String)); }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__quaternionPool, q) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseQuaternion' : Dynamic)); }
     _Runtime.setIndex(q, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(_Geometry.pool__quaternionPool, 'push', cast ([q] : Array<Dynamic>));
   }
@@ -5747,7 +5747,7 @@ class _Geometry {
 
   public static function releaseRectangle(r:Rectangle):Void {
     if ((cast !_Runtime.truthy(r) : Bool)) { return; }
-    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__rectanglePool, r) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseRectangle' : String)); }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__rectanglePool, r) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseRectangle' : Dynamic)); }
     _Runtime.setIndex(r, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(_Geometry.pool__rectanglePool, 'push', cast ([r] : Array<Dynamic>));
   }
@@ -6176,7 +6176,7 @@ class _Geometry {
 
   public static function releaseVector2(v:Vector2):Void {
     if ((cast !_Runtime.truthy(v) : Bool)) { return; }
-    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__vector2Pool, v) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseVector2' : String)); }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__vector2Pool, v) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseVector2' : Dynamic)); }
     _Runtime.setIndex(v, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(_Geometry.pool__vector2Pool, 'push', cast ([v] : Array<Dynamic>));
   }
@@ -6623,7 +6623,7 @@ class _Geometry {
 
   public static function releaseVector3(v:Vector3):Void {
     if ((cast !_Runtime.truthy(v) : Bool)) { return; }
-    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__vector3Pool, v) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseVector3' : String)); }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__vector3Pool, v) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseVector3' : Dynamic)); }
     _Runtime.setIndex(v, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(_Geometry.pool__vector3Pool, 'push', cast ([v] : Array<Dynamic>));
   }
@@ -7083,7 +7083,7 @@ class _Geometry {
 
   public static function releaseVector4(v:Vector4):Void {
     if ((cast !_Runtime.truthy(v) : Bool)) { return; }
-    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__vector4Pool, v) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseVector4' : String)); }
+    if ((cast ((cast !_Runtime.strictEquals(geometryPoolReleaseGuard, null) : Bool) && (cast _Runtime.includes(_Geometry.pool__vector4Pool, v) : Bool)) : Bool)) { geometryPoolReleaseGuard((cast 'releaseVector4' : Dynamic)); }
     _Runtime.setIndex(v, EntityRuntimeKey, _Runtime.field(_Runtime, 'UNDEFINED'));
     _Runtime.callProperty(_Geometry.pool__vector4Pool, 'push', cast ([v] : Array<Dynamic>));
   }

@@ -27,6 +27,8 @@ class Types {
 
   public static final AbcTraitKind:{ var Class:Float; var Const:Float; var Function:Float; var Getter:Float; var Method:Float; var Setter:Float; var Slot:Float; } = Facade_Types_flight__Types.AbcTraitKindValue;
 
+  public static final AddNodeChildCommandKind:String = Facade_Types_flight__Types.AddNodeChildCommandKind;
+
   public static final AdvancedBlendMode:{ var Color:String; var ColorBurn:String; var ColorDodge:String; var Darken:String; var Difference:String; var Exclusion:String; var HardLight:String; var Hue:String; var Lighten:String; var Luminosity:String; var Overlay:String; var Saturation:String; var SoftLight:String; } = Facade_Types_flight__Types.AdvancedBlendModeValue;
 
   public static final AmbientLightKind:String = Facade_Types_flight__Types.AmbientLightKind;
@@ -88,6 +90,12 @@ class Types {
   public static final ClipboardFormatUriList:String = Facade_Types_flight__Types.ClipboardFormatUriList;
 
   public static final ClippingAttachment2DKind:String = Facade_Types_flight__Types.ClippingAttachment2DKind;
+
+  public static final CommandBindingMissPolicy:String = Facade_Types_flight__Types.CommandBindingMissPolicy;
+
+  public static final CommandBindingRegistryId:String = Facade_Types_flight__Types.CommandBindingRegistryId;
+
+  public static final CompositeCommandKind:String = Facade_Types_flight__Types.CompositeCommandKind;
 
   public static final CompositeOperator:{ var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; } = Facade_Types_flight__Types.CompositeOperatorValue;
 
@@ -156,6 +164,8 @@ class Types {
   public static final ExternalTextureSourceKind:String = Facade_Types_flight__Types.ExternalTextureSourceKind;
 
   public static final FlexLayoutKind:String = Facade_Types_flight__Types.FlexLayoutKind;
+
+  public static final FlightDocumentRefusalReason:{ var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; } = Facade_Types_flight__Types.FlightDocumentRefusalReasonValue;
 
   public static final FogModifierKind:String = Facade_Types_flight__Types.FogModifierKind;
 
@@ -315,9 +325,13 @@ class Types {
 
   public static final RegistryEntryState:{ var Bound:String; var Tombstoned:String; } = Facade_Types_flight__Types.RegistryEntryStateValue;
 
+  public static final RemoveNodeChildCommandKind:String = Facade_Types_flight__Types.RemoveNodeChildCommandKind;
+
   public static final RenderCacheKind:String = Facade_Types_flight__Types.RenderCacheKindValue;
 
   public static final RenderTargetTextureSourceKind:String = Facade_Types_flight__Types.RenderTargetTextureSourceKind;
+
+  public static final ReorderNodeChildCommandKind:String = Facade_Types_flight__Types.ReorderNodeChildCommandKind;
 
   public static final RequirementFacet:{ var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; } = Facade_Types_flight__Types.RequirementFacetValue;
 
@@ -370,6 +384,8 @@ class Types {
   public static final Scene3DResourceResolverRuntimeKey:flight._internal._Symbol = Facade_Types_flight__Types.Scene3DResourceResolverRuntimeKey;
 
   public static final SceneCoverage:{ var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; } = Facade_Types_flight__Types.SceneCoverageValue;
+
+  public static final SetNodePropertyCommandKind:String = Facade_Types_flight__Types.SetNodePropertyCommandKind;
 
   public static final ShadedMaterialKind:String = Facade_Types_flight__Types.ShadedMaterialKind;
 

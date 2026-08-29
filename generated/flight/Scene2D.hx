@@ -18,6 +18,7 @@ import flight.types.NodeAny;
 import flight.types.PartialNode;
 import flight.types.Rectangle;
 import flight.types.Scene2D;
+import flight.types.Scene2DKindUsage;
 import flight.types.Scene2DSignals;
 import flight.types.Sprite;
 import flight.types.ViewportAlign;
@@ -61,6 +62,11 @@ class Scene2D {
     return cast null;
   }
 
+  public static function createScene2DKindUsage():Scene2DKindUsage {
+    return cast Facade_Scene2D_flight__Scene2D.createScene2DKindUsage();
+    return cast null;
+  }
+
   public static function createSprite(?obj:PartialNode<Sprite>):Sprite {
     return cast Facade_Scene2D_flight__Scene2D.createSprite(obj);
     return cast null;
@@ -69,6 +75,10 @@ class Scene2D {
   public static function enableScene2DSignals(source:flight.types.Scene2D):Scene2DSignals {
     return cast Facade_Scene2D_flight__Scene2D.enableScene2DSignals(source);
     return cast null;
+  }
+
+  public static function getScene2DKindUsage(out:Scene2DKindUsage, scene:flight.types.Scene2D):Void {
+    Facade_Scene2D_flight__Scene2D.getScene2DKindUsage(out, scene);
   }
 
   public static function getScene2DRoot(source:Node2D):Null<flight.types.Scene2D> {

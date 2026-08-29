@@ -54,7 +54,7 @@ typedef CreateTextureCubeOptions__texture = flight._internal._Extract<CreateText
 @:noCompletion
 class _Texture {
   public static function getCubeSources__cubeTexture(texture:CubeTexture):TextureSourceCubeFaces {
-    return cast (cast texture : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_9932:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }).sources;
+    return cast (cast texture : { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10353:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }).sources;
     return cast null;
   }
 
@@ -498,11 +498,16 @@ class _Texture {
     copyTexture(({ final __callArgument134:Dynamic = out; __callArgument134; }), ({ final __callArgument135:Dynamic = source; __callArgument135; }));
   }
 
-  public static function createVideoTexture(source:VideoResource, ?opts:flight._internal._Partial<TextureLike>):Texture {
+  public static function createVideoTexture(source:VideoResource, ?opts:flight._internal._Partial<TextureLike>):Texture2D {
     var image:Null<Image> = cast _Runtime.UNDEFINED;
     image = (cast _Texture.createVideoImageResource__videoTexture(({ final __callArgument138:Dynamic = source; __callArgument138; })) : Null<Image>);
     return cast (cast createTexture((cast _Runtime.mergeObjects([opts, { dimension: '2d' }, { source: image }, { version: _Runtime.coalesce(({ final __structural140 = image; __structural140 == null ? _Runtime.UNDEFINED : (cast __structural140 : { var version:Float; }).version; }), function():Dynamic return cast _Texture.INITIAL_VIDEO_VERSION__videoTexture) }]) : Dynamic)) : Texture2D);
     return cast null;
+  }
+
+  public static function destroyVideoTexture(texture:Texture2D):Void {
+    ((cast texture : Texture2D).source = null);
+    ((cast texture : Texture2D).version = _Texture.INITIAL_VIDEO_VERSION__videoTexture);
   }
 
   public static function getVideoTextureHeight(texture:TextureLike):Float {

@@ -11,10 +11,14 @@ import flight.types.ApplicationRenderViewResize;
 import flight.types.ApplicationStepOptions;
 import flight.types.ApplicationWindow;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.Matrix;
+import flight.types.NativeWindowHandle;
 import flight.types.RenderState;
 import flight.types.RenderTargetDimensions;
+import flight.types.WindowAttachmentOwnership;
 import flight.types.WindowBounds;
+import flight.types.WindowOperation;
 import flight.types.WindowOptions;
 
 class Application {
@@ -28,6 +32,11 @@ class Application {
 
   public static function attachApplicationRenderView(view:ApplicationRenderView<Dynamic, Dynamic>):Void {
     Facade_Application_flight__Application.attachApplicationRenderView(view);
+  }
+
+  public static function attachWindow(win:ApplicationWindow, handle:NativeWindowHandle, ownership:WindowAttachmentOwnership):Bool {
+    return cast Facade_Application_flight__Application.attachWindow(win, handle, ownership);
+    return cast null;
   }
 
   public static function attachWindowClose(win:ApplicationWindow):Void {
@@ -174,6 +183,11 @@ class Application {
     return cast null;
   }
 
+  public static function explainWindowOperation(operation:WindowOperation):BackendOperationExplanation {
+    return cast Facade_Application_flight__Application.explainWindowOperation(operation);
+    return cast null;
+  }
+
   public static function flashWindowFrame(win:ApplicationWindow):Void {
     Facade_Application_flight__Application.flashWindowFrame(win);
   }
@@ -208,6 +222,11 @@ class Application {
 
   public static function getWindowDisplay(win:ApplicationWindow):Float {
     return cast Facade_Application_flight__Application.getWindowDisplay(win);
+    return cast null;
+  }
+
+  public static function hasWindowOperation(operation:WindowOperation):Bool {
+    return cast Facade_Application_flight__Application.hasWindowOperation(operation);
     return cast null;
   }
 

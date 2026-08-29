@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef VideoChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:VideoResource; var state:VideoChannelState; var onComplete:Signal<Void->Void>; };
+typedef VideoChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:Null<VideoResource>; var state:VideoChannelState; var onComplete:Signal<Void->Void>; };

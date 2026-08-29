@@ -1529,9 +1529,16 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     return { extends: [], fields: lowerTypeMembers(node.members, context), kind: 'anonymous' };
   }
   if (ts.isTupleTypeNode(node)) {
-    const elements = node.elements.map((element) =>
-      lowerType(ts.isNamedTupleMember(element) ? element.type : element, context),
-    );
+    const elements = node.elements.map((element) => {
+      const typeNode = ts.isNamedTupleMember(element)
+        ? element.type
+        : ts.isRestTypeNode(element)
+          ? element.type
+          : element;
+      const lowered = lowerType(typeNode, context);
+      const rest = ts.isRestTypeNode(element) || (ts.isNamedTupleMember(element) && Boolean(element.dotDotDotToken));
+      return rest && lowered.kind === 'array' ? lowered.element : lowered;
+    });
     return { element: commonType(elements), kind: 'array' };
   }
   if (ts.isParenthesizedTypeNode(node)) return lowerType(node.type, context);
@@ -1686,14 +1693,15 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     const stringType = types.find((item) => item.kind === 'primitive' && item.name === 'String');
     if (stringType) return stringType;
     const nodeType = types.find((item) => item.kind === 'named' && item.name === 'Node');
-    const genericPartner = types.find(
-      (item) => item.kind === 'named' && ['D', 'R', 'T', 'Traits', 'Type', 'U'].includes(item.name),
-    );
+    const genericIndex = node.types.findIndex((item) => {
+      if (context.checker) {
+        return (context.checker.getTypeFromTypeNode(item).flags & ts.TypeFlags.TypeParameter) !== 0;
+      }
+      return ts.isTypeReferenceNode(item) && ['D', 'R', 'T', 'Traits', 'Type', 'U'].includes(item.typeName.getText());
+    });
+    const genericPartner = genericIndex < 0 ? undefined : types[genericIndex];
     if (types.length === 2 && nodeType && genericPartner) return lowerIntersection(types, true);
-    const genericType = types.find(
-      (item) => item.kind === 'named' && ['D', 'R', 'T', 'Traits', 'Type', 'U'].includes(item.name),
-    );
-    if (genericType) return genericType;
+    if (genericPartner) return genericPartner;
     const concrete = types.filter((item) => item.kind !== 'dynamic');
     if (concrete.length === 0) return { kind: 'dynamic' };
     if (concrete.length === 1) return concrete[0]!;
@@ -1919,6 +1927,8 @@ function lowerCheckerTypeUncached(
   // not a request to inline a potentially recursive structural graph.
   if (name && context.visibleTypeNames.has(name)) return { arguments: arguments_, kind: 'named', name };
   if (name && sourceDefinedNamedType(symbol)) return { arguments: arguments_, kind: 'named', name };
+  const privateSourceType = name && sourceDefinedPrivateTypeName(symbol, context);
+  if (privateSourceType) return { arguments: arguments_, kind: 'named', name: privateSourceType };
   if (name && context.externalTypes.has(name)) {
     return { kind: 'dynamic', reason: 'external-toolkit-boundary' };
   }
@@ -2046,6 +2056,41 @@ function sourceDefinedNamedType(symbol: ts.Symbol | undefined): boolean {
         ts.isInterfaceDeclaration(declaration) ||
         ts.isTypeAliasDeclaration(declaration)),
   );
+}
+
+/**
+ * A checker-inferred type can retain the private identity of a declaration in
+ * another source file even though the consuming file cannot name it in
+ * TypeScript. Package modules merge those files and namespace every private
+ * declaration by its source basename, so use that same deterministic identity
+ * instead of recursively expanding (and eventually erasing) its structure.
+ */
+function sourceDefinedPrivateTypeName(symbol: ts.Symbol | undefined, context: LoweringContext): string | undefined {
+  const currentPackageDirectory = upstreamPackageSourceDirectory(context.sourceFile, context.workspaceDirectory);
+  if (!currentPackageDirectory) return undefined;
+  const declaration = (symbol?.declarations ?? []).find(
+    (candidate) =>
+      candidate.getSourceFile() !== context.sourceFile &&
+      ts.isSourceFile(candidate.parent) &&
+      !candidate.getSourceFile().isDeclarationFile &&
+      !hasModifier(candidate, ts.SyntaxKind.ExportKeyword) &&
+      (ts.isClassDeclaration(candidate) ||
+        ts.isEnumDeclaration(candidate) ||
+        ts.isInterfaceDeclaration(candidate) ||
+        ts.isTypeAliasDeclaration(candidate)),
+  );
+  if (!declaration) return undefined;
+  const declarationPackageDirectory = upstreamPackageSourceDirectory(
+    declaration.getSourceFile(),
+    context.workspaceDirectory,
+  );
+  if (declarationPackageDirectory !== currentPackageDirectory) return undefined;
+  const name = symbol?.getName();
+  const suffix = path
+    .basename(declaration.getSourceFile().fileName)
+    .replace(/\.tsx?$/u, '')
+    .replace(/[^A-Za-z0-9]/gu, '_');
+  return name && suffix ? `${name}__${suffix}` : undefined;
 }
 
 function checkerTypeDeclarationBoundary(

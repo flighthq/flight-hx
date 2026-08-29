@@ -157,6 +157,38 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain("_Runtime.field(sample, 'value')");
   });
 
+  it('preserves checker-inferred private types across package source files', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/consumer.ts',
+      `
+        export function firstValue() {
+          const value = parseValue().value;
+          return Array.isArray(value) ? value[0] : value;
+        }
+      `,
+      {
+        '/workspace/upstream/packages/example/src/parser.ts': `
+          type ParserValue = null | boolean | number | string | ParserValue[] | ParserMapping;
+          interface ParserMapping { [key: string]: ParserValue; }
+          interface ParserResult { value: ParserValue; }
+          declare function parseValue(): ParserResult;
+        `,
+      },
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'PrivateTypeConsumerFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('value:ParserValue__parser');
+    expect(output).toContain('function firstValue():ParserValue__parser');
+    expect(output).not.toContain('checker-known-unrepresentable');
+  });
+
   it('lowers template-literal string refinements without external or Dynamic type debt', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/types/src/templateLiteral.ts',
@@ -177,6 +209,44 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('typedef VendorKind = String;');
     expect(output).toContain('typedef VendorShape = { var kind:VendorKind; };');
     expect(output).not.toContain('Dynamic');
+  });
+
+  it('uses the typed no-value carrier for structural void brand fields', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/types/src/brand.ts',
+      `
+        declare const BrandKey: unique symbol;
+        export interface Branded { readonly [BrandKey]?: void; }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/types', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'VoidBrandFixture',
+      packageName: '@flighthq/types',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('@:optional var __BrandKey:flight._internal._Nothing;');
+    expect(output).not.toContain('var __BrandKey:Void;');
+  });
+
+  it('flattens variadic tuple tails into their Haxe array element type', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/types/src/nonEmpty.ts',
+      `export type NonEmpty = [string, ...string[]];`,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/types', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'NonEmptyTupleFixture',
+      packageName: '@flighthq/types',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('typedef NonEmpty = Array<String>;');
   });
 
   it('materializes concrete inline mapped wrappers while retaining open generic applications', () => {
@@ -1590,6 +1660,7 @@ describe('TypeScript lowering and Haxe emission', () => {
           gl.bufferData(gl.ARRAY_BUFFER, 64, gl.STATIC_DRAW);
           gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
           gl.stencilOp(gl.KEEP, gl.KEEP, gl.INVERT);
+          const dimensions = [gl.drawingBufferWidth, gl.drawingBufferHeight];
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, null);
           gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
         }
@@ -1621,6 +1692,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain(
       "flight._internal.backend.WebGl2Backend.stencilOp(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flight._internal.backend.WebGl2Backend.KEEP), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'KEEP', flight._internal.backend.WebGl2Backend.KEEP), flight._internal.backend.WebGl2Backend.contextConstant(gl, 'INVERT', flight._internal.backend.WebGl2Backend.INVERT))",
     );
+    expect(output).toContain('flight._internal.backend.WebGl2Backend.drawingBufferWidth(gl)');
+    expect(output).toContain('flight._internal.backend.WebGl2Backend.drawingBufferHeight(gl)');
+    expect(output).not.toContain("contextConstant(gl, 'drawingBufferWidth'");
     expect(output).not.toContain('WebGl2Backend.bufferDataSize(');
     expect(output).toContain('flight._internal.backend.WebGl2Backend.texImage2DSource(');
     expect(output).toContain('flight._internal.backend.WebGl2Backend.texImage2D(');
@@ -2505,7 +2579,8 @@ describe('TypeScript lowering and Haxe emission', () => {
       `
         export function merge(target: any, source: any) {
           Object.assign(target, source);
-          return Object.keys(target).length + Object.entries(target).length;
+          const dictionary = Object.create(null);
+          return Object.keys(target).length + Object.entries(target).length + (Object.hasOwn(dictionary, 'key') ? 1 : 0);
         }
       `,
       ts.ScriptTarget.Latest,
@@ -2524,8 +2599,38 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('flight._internal.DynamicObject.assign(target, source)');
     expect(output).toContain('flight._internal.DynamicObject.keys(target)');
     expect(output).toContain('flight._internal.DynamicObject.entries(target)');
+    expect(output).toContain('flight._internal.DynamicObject.create(null)');
+    expect(output).toContain("flight._internal.DynamicObject.hasOwn(dictionary, 'key')");
     expect(output).not.toContain("_HostValueLut.get('Object')");
     expect(output).not.toContain('Reflect.fields');
+  });
+
+  it('collapses generic object intersections and sequences void call arguments', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/genericBoundary.ts',
+      `
+        interface Common { done: boolean; }
+        interface Sink { stop(): void; }
+        type IsAny<T> = 0 extends 1 & T ? true : false;
+        function assertSyncVoid<T>(value: T & (IsAny<T> extends true ? never : T extends void ? unknown : never)): void {
+          void value;
+        }
+        export function merge<T extends object>(fields: T): T & Common { return { ...fields, done: false }; }
+        export function release(sink: Sink): void { assertSyncVoid(sink.stop()); }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'GenericBoundaryFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('function merge<T:flight._internal._Object>(fields:T):T');
+    expect(output).not.toContain('{ >T,');
+    expect(output).toContain('; _Runtime.UNDEFINED; })');
   });
 
   it('lowers portable standard identity, constants, and iterable probes explicitly', () => {

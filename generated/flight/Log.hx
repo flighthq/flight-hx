@@ -130,8 +130,12 @@ class Log {
     return cast null;
   }
 
-  public static function disposeFileLogSink(_handle:FileLogSink):Void {
-    Facade_Log_flight__Log.disposeFileLogSink(_handle);
+  public static function destroyFileLogSink(_handle:FileLogSink):Void {
+    Facade_Log_flight__Log.destroyFileLogSink(_handle);
+  }
+
+  public static function destroyLogTransportBackend():Void {
+    Facade_Log_flight__Log.destroyLogTransportBackend();
   }
 
   public static function disposeLogSink(handle:BufferedLogSink):Void {

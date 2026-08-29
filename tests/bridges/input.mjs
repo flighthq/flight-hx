@@ -32,7 +32,6 @@ export const hasInputPointerLock = compiled.flight.Input.hasInputPointerLock;
 export const isInputGamepadButtonDown = compiled.flight.Input.isInputGamepadButtonDown;
 export const isInputKeyDown = compiled.flight.Input.isInputKeyDown;
 export const isInputPointerButtonDown = compiled.flight.Input.isInputPointerButtonDown;
-export const pollGamepadInput = compiled.flight.Input.pollGamepadInput;
 export const releaseInputPointerCapture = compiled.flight.Input.releaseInputPointerCapture;
 export const requestInputPointerLock = compiled.flight.Input.requestInputPointerLock;
 export const setInputPointerCapture = compiled.flight.Input.setInputPointerCapture;

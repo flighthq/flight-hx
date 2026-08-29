@@ -38,7 +38,7 @@ describe('checker-derived host endpoint contract', () => {
     expect(hostEndpointSummary(audit)).toContain('| Coverage issues | 0 |');
   });
 
-  it('discovers the 27 WebGL additions and current dynamic host fallbacks from checker facts', () => {
+  it('discovers the WebGL additions through Flight GlContext and current dynamic host fallbacks', () => {
     const audit = auditHostEndpoints(workspace, 'fixture');
     const keys = new Set(audit.endpoints.map((endpoint) => `${endpoint.binding}:${endpoint.member}`));
     const newWebGlEndpoints = [
@@ -57,6 +57,8 @@ describe('checker-derived host endpoint contract', () => {
       'CW',
       'DEPTH_FUNC',
       'DEPTH_WRITEMASK',
+      'drawingBufferHeight',
+      'drawingBufferWidth',
       'FRONT_FACE',
       'MAX_TEXTURE_IMAGE_UNITS',
       'SCISSOR_BOX',
@@ -86,10 +88,15 @@ describe('checker-derived host endpoint contract', () => {
       'stencilMaskSeparate',
     ];
 
-    expect(newWebGlEndpoints).toHaveLength(42);
+    expect(newWebGlEndpoints).toHaveLength(44);
     expect(newWebGlEndpoints.every((member) => keys.has(`WebGl2Backend:${member}`))).toBe(true);
     expect(audit.endpoints).toEqual(
       expect.arrayContaining([
+        expect.objectContaining({
+          binding: 'Canvas2dBackend',
+          member: 'createImageData',
+          operation: 'call',
+        }),
         expect.objectContaining({
           binding: 'Canvas2dBackend',
           member: 'roundRect',
@@ -122,8 +129,10 @@ describe('checker-derived host endpoint contract', () => {
         }),
       ]),
     );
-    expect(keys.has('Canvas2dBackend:createImageData')).toBe(false);
+    expect(keys.has('Canvas2dBackend:createImageData')).toBe(true);
     expect(keys.has('WebGl2Backend:finish')).toBe(false);
+    const runtime = readFileSync(path.join(workspace, 'src/flight/_internal/backend/WebGl2Backend.hx'), 'utf8');
+    expect(runtime).toContain('public static inline function drawingBufferWidth(');
     expect([...keys].some((key) => key.includes('__ft'))).toBe(false);
   });
 
@@ -155,7 +164,7 @@ describe('checker-derived host endpoint contract', () => {
         contract: 'backend',
         member: 'futureMethod',
         operation: 'call',
-        receiverTypes: ['WebGL2RenderingContext'],
+        receiverTypes: ['GlContext', 'WebGL2RenderingContext'],
         runtimeEndpoint: 'futureMethod',
         runtimePath: 'src/flight/_internal/backend/WebGl2Backend.hx',
         sites: [],

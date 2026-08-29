@@ -21,3 +21,4 @@ export const getApplicationWindowForElectronId = compiled.flight.HostElectron.ge
 export const getElectronBrowserWindow = compiled.flight.HostElectron.getElectronBrowserWindow;
 export const getElectronWindowId = compiled.flight.HostElectron.getElectronWindowId;
 export const registerElectronBackends = compiled.flight.HostElectron.registerElectronBackends;
+export const resetElectronWindowBackendForTest = compiled.flight.HostElectron.resetElectronWindowBackendForTest;

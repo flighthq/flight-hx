@@ -8,6 +8,8 @@ import flight._Entity.createEntity;
 import flight._Types.BitmapCompositeModeValue;
 import flight._Types.BitmapTextureSourceKind;
 import flight.types.AlphaType;
+import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.Bitmap;
 import flight.types.BitmapBevelOptions;
 import flight.types.BitmapBevelType;
@@ -18,6 +20,9 @@ import flight.types.BitmapDisplacementMapMode;
 import flight.types.BitmapDisplacementMapOptions;
 import flight.types.BitmapDropShadowOptions;
 import flight.types.BitmapEdgeMode;
+import flight.types.BitmapEncodeBackend;
+import flight.types.BitmapEncodeFailureExplanation;
+import flight.types.BitmapEncodeOperation;
 import flight.types.BitmapFingerprint;
 import flight.types.BitmapGlowOptions;
 import flight.types.BitmapGradientBevelOptions;
@@ -26,8 +31,11 @@ import flight.types.BitmapHistogram;
 import flight.types.BitmapInnerGlowOptions;
 import flight.types.BitmapInnerShadowOptions;
 import flight.types.BitmapMismatch;
+import flight.types.BitmapReadbackBackend;
 import flight.types.BitmapReadbackBlockReason;
 import flight.types.BitmapReadbackExplanation;
+import flight.types.BitmapReadbackMode;
+import flight.types.BitmapReadbackOutcome;
 import flight.types.BitmapRegion;
 import flight.types.BitmapResizeMode;
 import flight.types.BitmapResizeOptions;
@@ -36,6 +44,7 @@ import flight.types.BitmapSharpenOptions;
 import flight.types.ColorScaleBiasLike;
 import flight.types.Entity;
 import flight.types.GradientSpread;
+import flight.types.HostImageSource;
 import flight.types.Image;
 import flight.types.ImageChannel;
 import flight.types.ImageFormat;
@@ -45,6 +54,10 @@ import flight.types.RectangleLike;
 import flight.types.ThresholdOperation;
 
 typedef BitmapComparisonSource__bitmapCompare = { var width:Float; var height:Float; var data:flight._internal._ArrayLike<Float>; };
+
+typedef BitmapEncodeResolution__bitmapEncode = flight._internal._Union2<{ var backend:BitmapEncodeBackend; var format:ImageFormat; var reason:Dynamic; }, { var backend:Null<BitmapEncodeBackend>; var format:ImageFormat; var reason:flight._internal._IndexedAccess<BitmapEncodeFailureExplanation, String>; }>;
+
+typedef BitmapReadbackResolution__bitmapReadbackResolver = { var bitmap:Null<Bitmap>; var reason:BitmapReadbackBlockReason; };
 
 @:noCompletion
 class _Bitmap {
@@ -2003,42 +2016,118 @@ class _Bitmap {
   }
 
   public static function drawBitmap(dest:flight._internal.dom.HTMLCanvasElement, source:BitmapRegion, x:Float, y:Float):Void {
+    var context:flight._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
     var domImageData:flight._internal.dom.ImageData = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast source.width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast source.height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return; }
-    domImageData = _Runtime.construct(_Runtime.field(flight._internal._HostValueLut.get('globalThis'), 'ImageData'), [source.width, source.height]);
+    context = flight._internal.backend.CanvasElementBackend.call(dest, 'getContext', cast (['2d'] : Array<Dynamic>));
+    domImageData = flight._internal.backend.Canvas2dBackend.call(context, 'createImageData', cast ([source.width, source.height] : Array<Dynamic>));
     extractBitmapPixels(({ final __callArgument138:Dynamic = (cast domImageData : flight._internal.dom.ImageData).data; __callArgument138; }), ({ final __callArgument139:Dynamic = source; __callArgument139; }));
-    flight._internal.backend.Canvas2dBackend.call(flight._internal.backend.CanvasElementBackend.call(dest, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, x, y] : Array<Dynamic>));
+    flight._internal.backend.Canvas2dBackend.call(context, 'putImageData', cast ([domImageData, x, y] : Array<Dynamic>));
   }
 
-  public static function encodeBitmap(source:Bitmap, format:ImageFormat = 'png', quality:Float = 0.9):flight._internal._UInt8Array {
-    var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
-    var domImageData:flight._internal.dom.ImageData = cast _Runtime.UNDEFINED;
-    var mimeType:String = cast _Runtime.UNDEFINED;
-    var dataUrl:String = cast _Runtime.UNDEFINED;
-    var base64:String = cast _Runtime.UNDEFINED;
-    var binary:String = cast _Runtime.UNDEFINED;
-    var bytes:flight._internal._UInt8Array = cast _Runtime.UNDEFINED;
-    canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', source.width);
-    flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', source.height);
-    domImageData = _Runtime.construct(_Runtime.field(flight._internal._HostValueLut.get('globalThis'), 'ImageData'), [source.width, source.height]);
-    (cast (cast domImageData : flight._internal.dom.ImageData).data : flight._internal._UInt8ClampedArray).set(source.data);
-    flight._internal.backend.Canvas2dBackend.call(flight._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>)), 'putImageData', cast ([domImageData, 0.0, 0.0] : Array<Dynamic>));
-    mimeType = ((cast _Runtime.strictEquals(format, 'jpeg') : Bool) ? (cast 'image/jpeg' : Dynamic) : (cast 'image/png' : Dynamic));
-    dataUrl = flight._internal.backend.CanvasElementBackend.call(canvas, 'toDataURL', cast ([mimeType, quality] : Array<Dynamic>));
-    base64 = _Runtime.slice(dataUrl, _Runtime.addNumbers(_Runtime.callProperty(dataUrl, 'indexOf', cast ([','] : Array<Dynamic>)), 1.0), null);
-    binary = _Runtime.callValue(flight._internal._HostValueLut.get('atob'), cast ([base64] : Array<Dynamic>));
-    bytes = new flight._internal._UInt8Array(_Runtime.field(binary, 'length'));
-    {
-      var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field(binary, 'length') : Float)) : Bool)) {
-        flight._internal._StaticIndex.writeUint8ArrayTyped((cast bytes : flight._internal._UInt8Array), (cast i : Float), (cast _Runtime.charCodeAt(binary, i) : Float));
-        i++;
-      }
-    }
-    return cast bytes;
+  public static function encodeBitmap(source:Bitmap, format:ImageFormat = 'png', quality:Float = 0.9):Null<flight._internal._UInt8Array> {
+    var resolution:BitmapEncodeResolution__bitmapEncode = cast _Runtime.UNDEFINED;
+    resolution = (cast _Bitmap.resolveBitmapEncode__bitmapEncode(({ final __callArgument142:Dynamic = format; __callArgument142; })) : BitmapEncodeResolution__bitmapEncode);
+    if ((cast !_Runtime.strictEquals((cast resolution : { var reason:Null<String>; }).reason, null) : Bool)) { return cast null; }
+    return cast (cast (cast resolution : { var backend:BitmapEncodeBackend; var format:ImageFormat; var reason:flight._internal._Any; }).backend : BitmapEncodeBackend).encodeBitmap(({ final __callArgument144:Dynamic = source; __callArgument144; }), (cast resolution : { var backend:BitmapEncodeBackend; var format:ImageFormat; var reason:flight._internal._Any; }).format, (cast quality : Float));
     return cast null;
   }
+
+  public static function explainBitmapEncodeFailure(format:ImageFormat):Null<BitmapEncodeFailureExplanation> {
+    var resolution:BitmapEncodeResolution__bitmapEncode = cast _Runtime.UNDEFINED;
+    resolution = (cast _Bitmap.resolveBitmapEncode__bitmapEncode(({ final __callArgument145:Dynamic = format; __callArgument145; })) : BitmapEncodeResolution__bitmapEncode);
+    return cast ((cast _Runtime.strictEquals((cast resolution : { var reason:Null<String>; }).reason, null) : Bool) ? (cast null : Dynamic) : (cast { format: (cast resolution : { var backend:Null<BitmapEncodeBackend>; var format:ImageFormat; var reason:String; }).format, reason: (cast resolution : { var backend:Null<BitmapEncodeBackend>; var format:ImageFormat; var reason:String; }).reason } : Dynamic));
+    return cast null;
+  }
+
+  public static function resolveBitmapEncode__bitmapEncode(format:ImageFormat):BitmapEncodeResolution__bitmapEncode {
+    var normalizedFormat:ImageFormat = cast _Runtime.UNDEFINED;
+    var backend:Null<BitmapEncodeBackend> = cast _Runtime.UNDEFINED;
+    normalizedFormat = ((cast _Runtime.strictEquals(format, 'jpeg') : Bool) ? (cast 'jpeg' : Dynamic) : (cast 'png' : Dynamic));
+    backend = (cast getBitmapEncodeBackend() : Null<BitmapEncodeBackend>);
+    if ((cast _Runtime.strictEquals(backend, null) : Bool)) { return cast { backend: backend, format: normalizedFormat, reason: 'backend-not-installed' }; }
+    if ((cast !(cast _Runtime.includes((cast backend : BitmapEncodeBackend).supportedFormats, normalizedFormat) : Bool) : Bool)) {
+      return cast { backend: backend, format: normalizedFormat, reason: 'format-unsupported' };
+    }
+    return cast { backend: backend, format: normalizedFormat, reason: null };
+    return cast null;
+  }
+
+  public static function explainBitmapEncodeBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(_Bitmap._custom__bitmapEncodeBackend, null) : Bool)) {
+      return cast { conflict: _Bitmap._hostConflict__bitmapEncodeBackend, layer: 'custom', operation: null, viability: 'unobserved' };
+    }
+    if ((cast !_Runtime.strictEquals(_Bitmap._host__bitmapEncodeBackend, null) : Bool)) {
+      return cast { conflict: _Bitmap._hostConflict__bitmapEncodeBackend, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Bitmap._hostObservation__bitmapEncodeBackend, null) : Bool) ? (cast (cast _Bitmap._hostObservation__bitmapEncodeBackend : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Bitmap._hostObservation__bitmapEncodeBackend, null) : Bool) ? (cast (cast _Bitmap._hostObservation__bitmapEncodeBackend : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    }
+    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+    return cast null;
+  }
+
+  public static function explainBitmapEncodeOperation(operation:BitmapEncodeOperation):BackendOperationExplanation {
+    if ((cast !_Runtime.strictEquals(_Bitmap._custom__bitmapEncodeBackend, null) : Bool)) { return cast { implemented: true, layer: 'custom', operation: operation }; }
+    if ((cast !_Runtime.strictEquals(_Bitmap._host__bitmapEncodeBackend, null) : Bool)) { return cast { implemented: true, layer: 'host', operation: operation }; }
+    return cast { implemented: false, layer: 'sentinel', operation: operation };
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function getBitmapEncodeBackend():Null<BitmapEncodeBackend> {
+    return cast _Runtime.coalesce(_Bitmap._custom__bitmapEncodeBackend, function():Dynamic return cast _Bitmap._host__bitmapEncodeBackend);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasBitmapEncodeHostBackend():Bool {
+    return cast !_Runtime.strictEquals(_Bitmap._host__bitmapEncodeBackend, null);
+    return cast null;
+  }
+
+  public static function hasBitmapEncodeOperation(operation:BitmapEncodeOperation):Bool {
+    return cast (cast (cast explainBitmapEncodeOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function installBitmapEncodeHostBackend(backend:BitmapEncodeBackend):Void {
+    if ((cast !_Runtime.strictEquals(_Bitmap._host__bitmapEncodeBackend, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(_Bitmap._host__bitmapEncodeBackend, backend) : Bool)) { (_Bitmap._hostConflict__bitmapEncodeBackend = cast (true : Dynamic)); }
+      return;
+    }
+    (_Bitmap._host__bitmapEncodeBackend = cast (backend : Dynamic));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function observeBitmapEncodeHostResult(operation:BitmapEncodeOperation, succeeded:Bool):Void {
+    (_Bitmap._hostObservation__bitmapEncodeBackend = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function resetBitmapEncodeBackendForTest():Void {
+    (_Bitmap._custom__bitmapEncodeBackend = cast (null : Dynamic));
+    (_Bitmap._host__bitmapEncodeBackend = cast (null : Dynamic));
+    (_Bitmap._hostConflict__bitmapEncodeBackend = cast (false : Dynamic));
+    (_Bitmap._hostObservation__bitmapEncodeBackend = cast (null : Dynamic));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function setBitmapEncodeBackend(backend:Null<BitmapEncodeBackend>):Void {
+    (_Bitmap._custom__bitmapEncodeBackend = cast (backend : Dynamic));
+  }
+
+  public static var _custom__bitmapEncodeBackend:Null<BitmapEncodeBackend> = _Runtime.explicitNull();
+
+  public static var _host__bitmapEncodeBackend:Null<BitmapEncodeBackend> = _Runtime.explicitNull();
+
+  public static var _hostConflict__bitmapEncodeBackend:Bool = false;
+
+  public static var _hostObservation__bitmapEncodeBackend:Null<{ var operation:BitmapEncodeOperation; var viability:String; }> = _Runtime.explicitNull();
 
   public static var _floodFillVisited__bitmapFill:Null<flight._internal._UInt8Array> = _Runtime.explicitNull();
 
@@ -2126,7 +2215,7 @@ class _Bitmap {
       if ((cast ((cast py : Float) > (cast 0.0 : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx - out.width)] : Array<Dynamic>)); }
       if ((cast ((cast py : Float) < (cast (out.height - 1.0) : Float)) : Bool)) { _Runtime.callProperty(stack, 'push', cast ([(idx + out.width)] : Array<Dynamic>)); }
     }
-    invalidateBitmap(({ final __callArgument142:Dynamic = out; __callArgument142; }));
+    invalidateBitmap(({ final __callArgument147:Dynamic = out; __callArgument147; }));
   }
 
   public static final BITMAP_FINGERPRINT_COMPUTATION_ID:String = 'grid-average-rgb-v1';
@@ -2261,7 +2350,7 @@ class _Bitmap {
     h = HxMath.min(dest.height, source.height);
     data = (cast dest.bitmap : { var data:flight._internal._UInt8ClampedArray; }).data;
     stride = (cast dest.bitmap : { var width:Float; }).width;
-    if ((cast (cast _Bitmap.isSameRegion__bitmapFlip(({ final __callArgument144:Dynamic = dest; __callArgument144; }), ({ final __callArgument145:Dynamic = source; __callArgument145; })) : Bool) : Bool)) {
+    if ((cast (cast _Bitmap.isSameRegion__bitmapFlip(({ final __callArgument149:Dynamic = dest; __callArgument149; }), ({ final __callArgument150:Dynamic = source; __callArgument150; })) : Bool) : Bool)) {
       var half:Float = (_Runtime.toInt32(w) >> 1);
       {
         var py:Float = 0.0;
@@ -2274,7 +2363,7 @@ class _Bitmap {
               var xa:Float = (dest.x + px);
               var xb:Float = (dest.x + ((w - 1.0) - px));
               if ((cast ((cast ((cast ((cast ((cast xa : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast xa : Float) >= (cast stride : Float)) : Bool)) : Bool) || (cast ((cast xb : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast xb : Float) >= (cast stride : Float)) : Bool)) : Bool)) { px++; continue; }
-              _Bitmap.swapPixels__bitmapFlip(({ final __callArgument148:Dynamic = data; __callArgument148; }), (cast (((y * stride) + xa) * 4.0) : Float), (cast (((y * stride) + xb) * 4.0) : Float));
+              _Bitmap.swapPixels__bitmapFlip(({ final __callArgument153:Dynamic = data; __callArgument153; }), (cast (((y * stride) + xa) * 4.0) : Float), (cast (((y * stride) + xb) * 4.0) : Float));
               px++;
             }
           }
@@ -2283,7 +2372,7 @@ class _Bitmap {
       }
       return;
     }
-    _Bitmap.copyMirrored__bitmapFlip(({ final __callArgument150:Dynamic = dest; __callArgument150; }), ({ final __callArgument151:Dynamic = source; __callArgument151; }), (cast w : Float), (cast h : Float), (cast true : Bool), (cast false : Bool));
+    _Bitmap.copyMirrored__bitmapFlip(({ final __callArgument155:Dynamic = dest; __callArgument155; }), ({ final __callArgument156:Dynamic = source; __callArgument156; }), (cast w : Float), (cast h : Float), (cast true : Bool), (cast false : Bool));
     invalidateBitmap(dest.bitmap);
   }
 
@@ -2296,7 +2385,7 @@ class _Bitmap {
     h = HxMath.min(dest.height, source.height);
     data = (cast dest.bitmap : { var data:flight._internal._UInt8ClampedArray; }).data;
     stride = (cast dest.bitmap : { var width:Float; }).width;
-    if ((cast (cast _Bitmap.isSameRegion__bitmapFlip(({ final __callArgument154:Dynamic = dest; __callArgument154; }), ({ final __callArgument155:Dynamic = source; __callArgument155; })) : Bool) : Bool)) {
+    if ((cast (cast _Bitmap.isSameRegion__bitmapFlip(({ final __callArgument159:Dynamic = dest; __callArgument159; }), ({ final __callArgument160:Dynamic = source; __callArgument160; })) : Bool) : Bool)) {
       var half:Float = (_Runtime.toInt32(h) >> 1);
       {
         var py:Float = 0.0;
@@ -2309,7 +2398,7 @@ class _Bitmap {
             while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
               var x:Float = (dest.x + px);
               if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast stride : Float)) : Bool)) : Bool)) { px++; continue; }
-              _Bitmap.swapPixels__bitmapFlip(({ final __callArgument158:Dynamic = data; __callArgument158; }), (cast (((yTop * stride) + x) * 4.0) : Float), (cast (((yBottom * stride) + x) * 4.0) : Float));
+              _Bitmap.swapPixels__bitmapFlip(({ final __callArgument163:Dynamic = data; __callArgument163; }), (cast (((yTop * stride) + x) * 4.0) : Float), (cast (((yBottom * stride) + x) * 4.0) : Float));
               px++;
             }
           }
@@ -2318,7 +2407,7 @@ class _Bitmap {
       }
       return;
     }
-    _Bitmap.copyMirrored__bitmapFlip(({ final __callArgument160:Dynamic = dest; __callArgument160; }), ({ final __callArgument161:Dynamic = source; __callArgument161; }), (cast w : Float), (cast h : Float), (cast false : Bool), (cast true : Bool));
+    _Bitmap.copyMirrored__bitmapFlip(({ final __callArgument165:Dynamic = dest; __callArgument165; }), ({ final __callArgument166:Dynamic = source; __callArgument166; }), (cast w : Float), (cast h : Float), (cast false : Bool), (cast true : Bool));
     invalidateBitmap(dest.bitmap);
   }
 
@@ -2389,12 +2478,12 @@ class _Bitmap {
       if ((cast !_Runtime.strictEquals(out, source) : Bool)) { (cast out : flight._internal._UInt8ClampedArray).set((cast source : flight._internal._UInt8ClampedArray).subarray(Std.int(0.0), Std.int(length))); }
       return;
     }
-    __destructure0 = (cast _Bitmap.channelOffsets__bitmapFormat(({ final __callArgument164:Dynamic = from; __callArgument164; })) : Array<Float>);
+    __destructure0 = (cast _Bitmap.channelOffsets__bitmapFormat(({ final __callArgument169:Dynamic = from; __callArgument169; })) : Array<Float>);
     srcR = flight._internal._StaticIndex.readArray(__destructure0, 0.0);
     srcG = flight._internal._StaticIndex.readArray(__destructure0, 1.0);
     srcB = flight._internal._StaticIndex.readArray(__destructure0, 2.0);
     srcA = flight._internal._StaticIndex.readArray(__destructure0, 3.0);
-    __destructure1 = (cast _Bitmap.channelOffsets__bitmapFormat(({ final __callArgument166:Dynamic = to; __callArgument166; })) : Array<Float>);
+    __destructure1 = (cast _Bitmap.channelOffsets__bitmapFormat(({ final __callArgument171:Dynamic = to; __callArgument171; })) : Array<Float>);
     dstR = flight._internal._StaticIndex.readArray(__destructure1, 0.0);
     dstG = flight._internal._StaticIndex.readArray(__destructure1, 1.0);
     dstB = flight._internal._StaticIndex.readArray(__destructure1, 2.0);
@@ -2470,17 +2559,8 @@ class _Bitmap {
     return cast null;
   }
 
-  public static function captureBitmapFromImageResource(resource:Image):Bitmap {
-    var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
-    var ctx:flight._internal.dom.CanvasRenderingContext2D = cast _Runtime.UNDEFINED;
-    var raw:flight._internal.dom.ImageData = cast _Runtime.UNDEFINED;
-    canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
-    flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', _Runtime.field(resource, 'width'));
-    flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', _Runtime.field(resource, 'height'));
-    ctx = flight._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
-    flight._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([_Runtime.field(resource, 'source'), 0.0, 0.0] : Array<Dynamic>));
-    raw = flight._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([0.0, 0.0, _Runtime.field(resource, 'width'), _Runtime.field(resource, 'height')] : Array<Dynamic>));
-    return cast (cast createEntity(({ final __callArgument168:Dynamic = { alphaType: 'straight', gamut: (cast (cast raw : flight._internal.dom.ImageData).colorSpace : String), data: (cast raw : flight._internal.dom.ImageData).data, format: 'rgba8unorm', height: _Runtime.field(resource, 'height'), kind: BitmapTextureSourceKind, version: 0.0, width: _Runtime.field(resource, 'width') }; __callArgument168; })) : { >Entity, var alphaType:String; var gamut:String; var data:flight._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
+  public static function captureBitmapFromImageResource(resource:Image):Null<Bitmap> {
+    return cast (cast createBitmapFromImageSource((cast _Runtime.field(resource, 'source') : flight._internal._Any), (cast _Runtime.field(resource, 'width') : Float), (cast _Runtime.field(resource, 'height') : Float)) : Null<Bitmap>);
     return cast null;
   }
 
@@ -2493,48 +2573,12 @@ class _Bitmap {
     h = _Runtime.coalesce(height, function():Dynamic return cast flight._internal.backend.CanvasElementBackend.field(canvas, 'height'));
     ctx = flight._internal.backend.CanvasElementBackend.call(canvas, 'getContext', cast (['2d'] : Array<Dynamic>));
     raw = flight._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([x, y, w, h] : Array<Dynamic>));
-    return cast (cast createEntity(({ final __callArgument170:Dynamic = { alphaType: 'straight', gamut: (cast (cast raw : flight._internal.dom.ImageData).colorSpace : String), data: (cast raw : flight._internal.dom.ImageData).data, format: 'rgba8unorm', height: (cast raw : flight._internal.dom.ImageData).height, kind: BitmapTextureSourceKind, version: 0.0, width: (cast raw : flight._internal.dom.ImageData).width }; __callArgument170; })) : { >Entity, var alphaType:String; var gamut:String; var data:flight._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
+    return cast (cast createEntity(({ final __callArgument173:Dynamic = { alphaType: 'straight', gamut: (cast (cast raw : flight._internal.dom.ImageData).colorSpace : String), data: (cast raw : flight._internal.dom.ImageData).data, format: 'rgba8unorm', height: (cast raw : flight._internal.dom.ImageData).height, kind: BitmapTextureSourceKind, version: 0.0, width: (cast raw : flight._internal.dom.ImageData).width }; __callArgument173; })) : { >Entity, var alphaType:String; var gamut:String; var data:flight._internal._Any; var format:String; var height:Float; var kind:String; var version:Float; var width:Float; });
     return cast null;
   }
 
   public static function createBitmapFromImageSource(source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):Null<Bitmap> {
-    if (width <= 0 || height <= 0) return null;
-    final canvas:flight._internal.dom.HTMLCanvasElement = cast flight._internal.backend.DomDocumentBackend.call(
-      flight._internal.backend.DomDocumentBackend.value(),
-      'createElement',
-      cast (['canvas'] : Array<Dynamic>)
-    );
-    if (canvas == null) return null;
-    flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', width);
-    flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', height);
-    final ctx:flight._internal.dom.CanvasRenderingContext2D = cast flight._internal.backend.CanvasElementBackend.call(
-      canvas,
-      'getContext',
-      cast (['2d'] : Array<Dynamic>)
-    );
-    if (ctx == null) return null;
-    var raw:flight._internal.dom.ImageData;
-    try {
-      flight._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([source, 0.0, 0.0] : Array<Dynamic>));
-      raw = cast flight._internal.backend.Canvas2dBackend.call(
-        ctx,
-        'getImageData',
-        cast ([0.0, 0.0, width, height] : Array<Dynamic>)
-      );
-    } catch (_:Dynamic) {
-      return null;
-    }
-    final bitmap:Bitmap = cast createEntity(cast {
-      alphaType: 'straight',
-      gamut: cast _Runtime.field(raw, 'colorSpace'),
-      data: _Runtime.field(raw, 'data'),
-      format: 'rgba8unorm',
-      height: height,
-      kind: BitmapTextureSourceKind,
-      version: 0.0,
-      width: width,
-    });
-    return bitmap;
+    return cast (cast (cast resolveBitmapReadback((cast source : flight._internal._Any), (cast width : Float), (cast height : Float), ({ final __callArgument175:Dynamic = 'bitmap'; __callArgument175; })) : BitmapReadbackResolution__bitmapReadbackResolver) : BitmapReadbackResolution__bitmapReadbackResolver).bitmap;
     return cast null;
   }
 
@@ -2610,14 +2654,14 @@ class _Bitmap {
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flight._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flight._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flight._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
-            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flight._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast _Bitmap.readSourceAlpha__bitmapGradient(({ final __callArgument172:Dynamic = source; __callArgument172; }), (cast px : Float), (cast py : Float)) : Float) : Float));
+            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast scratch : flight._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast _Bitmap.readSourceAlpha__bitmapGradient(({ final __callArgument177:Dynamic = source; __callArgument177; }), (cast px : Float), (cast py : Float)) : Float) : Float));
             px++;
           }
         }
         py++;
       }
     }
-    _Bitmap.blurAlphaField__bitmapGradient(({ final __callArgument174:Dynamic = scratch; __callArgument174; }), ({ final __callArgument175:Dynamic = out; __callArgument175; }), (cast w : Float), (cast h : Float), options.radiusX, options.radiusY, options.passes);
+    _Bitmap.blurAlphaField__bitmapGradient(({ final __callArgument179:Dynamic = scratch; __callArgument179; }), ({ final __callArgument180:Dynamic = out; __callArgument180; }), (cast w : Float), (cast h : Float), options.radiusX, options.radiusY, options.passes);
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
@@ -2625,12 +2669,12 @@ class _Bitmap {
           var px:Float = 0.0;
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Float = (((py * w) + px) * 4.0);
-            var lit:Float = (cast _Bitmap.sampleField__bitmapGradient(({ final __callArgument178:Dynamic = scratch; __callArgument178; }), (cast w : Float), (cast h : Float), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float);
-            var shade:Float = (cast _Bitmap.sampleField__bitmapGradient(({ final __callArgument180:Dynamic = scratch; __callArgument180; }), (cast w : Float), (cast h : Float), (cast (px + offsetX) : Float), (cast (py + offsetY) : Float)) : Float);
+            var lit:Float = (cast _Bitmap.sampleField__bitmapGradient(({ final __callArgument183:Dynamic = scratch; __callArgument183; }), (cast w : Float), (cast h : Float), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float);
+            var shade:Float = (cast _Bitmap.sampleField__bitmapGradient(({ final __callArgument185:Dynamic = scratch; __callArgument185; }), (cast w : Float), (cast h : Float), (cast (px + offsetX) : Float), (cast (py + offsetY) : Float)) : Float);
             var gradient:Float = (lit - shade);
             var idx:Float = HxMath.max(0.0, HxMath.min(255.0, HxMath.round((((gradient * 0.5) + 0.5) * 255.0))));
             var ri:Float = (idx * 4.0);
-            var clip:Float = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast ((cast _Bitmap.readSourceAlpha__bitmapGradient(({ final __callArgument182:Dynamic = source; __callArgument182; }), (cast px : Float), (cast py : Float)) : Float) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - ((cast _Bitmap.readSourceAlpha__bitmapGradient(({ final __callArgument184:Dynamic = source; __callArgument184; }), (cast px : Float), (cast py : Float)) : Float) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
+            var clip:Float = ((cast _Runtime.strictEquals(type, 'inner') : Bool) ? (cast ((cast _Bitmap.readSourceAlpha__bitmapGradient(({ final __callArgument187:Dynamic = source; __callArgument187; }), (cast px : Float), (cast py : Float)) : Float) / 255.0) : Dynamic) : (cast ((cast _Runtime.strictEquals(type, 'outer') : Bool) ? (cast (1.0 - ((cast _Bitmap.readSourceAlpha__bitmapGradient(({ final __callArgument189:Dynamic = source; __callArgument189; }), (cast px : Float), (cast py : Float)) : Float) / 255.0)) : Dynamic) : (cast 1.0 : Dynamic)) : Dynamic));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast di : Float), (cast flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flight._internal._UInt8ClampedArray), (cast ri : Float)) : Float));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flight._internal._UInt8ClampedArray), (cast (ri + 1.0) : Float)) : Float));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flight._internal._UInt8ClampedArray), (cast (ri + 2.0) : Float)) : Float));
@@ -2661,14 +2705,14 @@ class _Bitmap {
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
-            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast _Bitmap.readSourceAlpha__bitmapGradient(({ final __callArgument186:Dynamic = source; __callArgument186; }), (cast px : Float), (cast py : Float)) : Float) : Float));
+            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast _Bitmap.readSourceAlpha__bitmapGradient(({ final __callArgument191:Dynamic = source; __callArgument191; }), (cast px : Float), (cast py : Float)) : Float) : Float));
             px++;
           }
         }
         py++;
       }
     }
-    _Bitmap.blurAlphaField__bitmapGradient(({ final __callArgument188:Dynamic = out; __callArgument188; }), ({ final __callArgument189:Dynamic = scratch; __callArgument189; }), (cast w : Float), (cast h : Float), options.radiusX, options.radiusY, options.passes);
+    _Bitmap.blurAlphaField__bitmapGradient(({ final __callArgument193:Dynamic = out; __callArgument193; }), ({ final __callArgument194:Dynamic = scratch; __callArgument194; }), (cast w : Float), (cast h : Float), options.radiusX, options.radiusY, options.passes);
     {
       var py:Float = 0.0;
       while ((cast ((cast py : Float) < (cast h : Float)) : Bool)) {
@@ -2704,13 +2748,13 @@ class _Bitmap {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast p : Float)) : Bool)) {
         if ((cast ((cast rx : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsHorizontal(({ final __callArgument192:Dynamic = b; __callArgument192; }), ({ final __callArgument193:Dynamic = a; __callArgument193; }), (cast w : Float), (cast h : Float), (cast rx : Float));
+          blurBitmapPixelsHorizontal(({ final __callArgument197:Dynamic = b; __callArgument197; }), ({ final __callArgument198:Dynamic = a; __callArgument198; }), (cast w : Float), (cast h : Float), (cast rx : Float));
           var t:flight._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if ((cast ((cast ry : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsVertical(({ final __callArgument196:Dynamic = b; __callArgument196; }), ({ final __callArgument197:Dynamic = a; __callArgument197; }), (cast w : Float), (cast h : Float), (cast ry : Float));
+          blurBitmapPixelsVertical(({ final __callArgument201:Dynamic = b; __callArgument201; }), ({ final __callArgument202:Dynamic = a; __callArgument202; }), (cast w : Float), (cast h : Float), (cast ry : Float));
           var t:flight._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
@@ -2772,7 +2816,7 @@ class _Bitmap {
             var x:Float = (dest.x + px);
             if ((cast ((cast ((cast x : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast x : Float) >= (cast bitmapWidth : Float)) : Bool)) : Bool)) { px++; continue; }
             var t:Float = ((((px - x0) * axisX) + ((py - y0) * axisY)) * invLen);
-            var idx:Float = (cast _Bitmap.spreadIndex__bitmapGradientFill((cast t : Float), ({ final __callArgument200:Dynamic = spread; __callArgument200; })) : Float);
+            var idx:Float = (cast _Bitmap.spreadIndex__bitmapGradientFill((cast t : Float), ({ final __callArgument205:Dynamic = spread; __callArgument205; })) : Float);
             var ri:Float = (idx * 4.0);
             var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast i : Float), (cast flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flight._internal._UInt8ClampedArray), (cast ri : Float)) : Float));
@@ -2820,7 +2864,7 @@ class _Bitmap {
             var dx:Float = (px - focalX);
             var dy:Float = (py - focalY);
             var t:Float = (_Runtime.multiplyNumbers(HxMath.sqrt(((dx * dx) + (dy * dy))), invRadius) - ((((dx * fdx) + (dy * fdy)) * invRadius) * invRadius));
-            var idx:Float = (cast _Bitmap.spreadIndex__bitmapGradientFill((cast t : Float), ({ final __callArgument202:Dynamic = spread; __callArgument202; })) : Float);
+            var idx:Float = (cast _Bitmap.spreadIndex__bitmapGradientFill((cast t : Float), ({ final __callArgument207:Dynamic = spread; __callArgument207; })) : Float);
             var ri:Float = (idx * 4.0);
             var i:Float = (((y * bitmapWidth) + x) * 4.0);
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast data : flight._internal._UInt8ClampedArray), (cast i : Float), (cast flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast ramp : flight._internal._UInt8ClampedArray), (cast ri : Float)) : Float));
@@ -2864,9 +2908,9 @@ class _Bitmap {
   public static function equalizeBitmapHistogram(dest:BitmapRegion, source:BitmapRegion):Void {
     var histogram:BitmapHistogram = cast _Runtime.UNDEFINED;
     var total:Float = cast _Runtime.UNDEFINED;
-    histogram = (cast getBitmapHistogram(({ final __callArgument204:Dynamic = source; __callArgument204; })) : BitmapHistogram);
+    histogram = (cast getBitmapHistogram(({ final __callArgument209:Dynamic = source; __callArgument209; })) : BitmapHistogram);
     total = (source.width * source.height);
-    applyBitmapPaletteMap(({ final __callArgument206:Dynamic = dest; __callArgument206; }), ({ final __callArgument207:Dynamic = source; __callArgument207; }), ({ final __callArgument208:Dynamic = (cast _Bitmap.buildEqualizeMap__bitmapHistogram((cast histogram : BitmapHistogram).red, (cast total : Float)) : Array<Float>); __callArgument208; }), ({ final __callArgument209:Dynamic = (cast _Bitmap.buildEqualizeMap__bitmapHistogram((cast histogram : BitmapHistogram).green, (cast total : Float)) : Array<Float>); __callArgument209; }), ({ final __callArgument210:Dynamic = (cast _Bitmap.buildEqualizeMap__bitmapHistogram((cast histogram : BitmapHistogram).blue, (cast total : Float)) : Array<Float>); __callArgument210; }), ({ final __callArgument211:Dynamic = null; __callArgument211; }));
+    applyBitmapPaletteMap(({ final __callArgument211:Dynamic = dest; __callArgument211; }), ({ final __callArgument212:Dynamic = source; __callArgument212; }), ({ final __callArgument213:Dynamic = (cast _Bitmap.buildEqualizeMap__bitmapHistogram((cast histogram : BitmapHistogram).red, (cast total : Float)) : Array<Float>); __callArgument213; }), ({ final __callArgument214:Dynamic = (cast _Bitmap.buildEqualizeMap__bitmapHistogram((cast histogram : BitmapHistogram).green, (cast total : Float)) : Array<Float>); __callArgument214; }), ({ final __callArgument215:Dynamic = (cast _Bitmap.buildEqualizeMap__bitmapHistogram((cast histogram : BitmapHistogram).blue, (cast total : Float)) : Array<Float>); __callArgument215; }), ({ final __callArgument216:Dynamic = null; __callArgument216; }));
     invalidateBitmap(dest.bitmap);
   }
 
@@ -2986,10 +3030,10 @@ class _Bitmap {
             }
             var mid:Float = (_Runtime.toInt32(n) >> 1);
             var di:Float = (((py * w) + px) * 4.0);
-            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast di : Float), (cast (cast _Bitmap.medianOf__bitmapMedian(({ final __callArgument218:Dynamic = rs; __callArgument218; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
-            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast (cast _Bitmap.medianOf__bitmapMedian(({ final __callArgument220:Dynamic = gs; __callArgument220; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
-            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast (cast _Bitmap.medianOf__bitmapMedian(({ final __callArgument222:Dynamic = bs; __callArgument222; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
-            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast _Bitmap.medianOf__bitmapMedian(({ final __callArgument224:Dynamic = as; __callArgument224; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast di : Float), (cast (cast _Bitmap.medianOf__bitmapMedian(({ final __callArgument223:Dynamic = rs; __callArgument223; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast (cast _Bitmap.medianOf__bitmapMedian(({ final __callArgument225:Dynamic = gs; __callArgument225; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast (cast _Bitmap.medianOf__bitmapMedian(({ final __callArgument227:Dynamic = bs; __callArgument227; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
+            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (cast _Bitmap.medianOf__bitmapMedian(({ final __callArgument229:Dynamic = as; __callArgument229; }), (cast n : Float), (cast mid : Float)) : Float) : Float));
             px++;
           }
         }
@@ -3025,11 +3069,11 @@ class _Bitmap {
   public static var _windowAlpha__bitmapMedian:Null<flight._internal._UInt8Array> = _Runtime.explicitNull();
 
   public static function dilateBitmap(out:flight._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
-    _Bitmap.applyMorphological__bitmapMorphological(({ final __callArgument226:Dynamic = out; __callArgument226; }), ({ final __callArgument227:Dynamic = source; __callArgument227; }), (cast radius : Float), (cast true : Bool));
+    _Bitmap.applyMorphological__bitmapMorphological(({ final __callArgument231:Dynamic = out; __callArgument231; }), ({ final __callArgument232:Dynamic = source; __callArgument232; }), (cast radius : Float), (cast true : Bool));
   }
 
   public static function erodeBitmap(out:flight._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float):Void {
-    _Bitmap.applyMorphological__bitmapMorphological(({ final __callArgument230:Dynamic = out; __callArgument230; }), ({ final __callArgument231:Dynamic = source; __callArgument231; }), (cast radius : Float), (cast false : Bool));
+    _Bitmap.applyMorphological__bitmapMorphological(({ final __callArgument235:Dynamic = out; __callArgument235; }), ({ final __callArgument236:Dynamic = source; __callArgument236; }), (cast radius : Float), (cast false : Bool));
   }
 
   public static function applyMorphological__bitmapMorphological(out:flight._internal._UInt8ClampedArray, source:BitmapRegion, radius:Float, dilate:Bool):Void {
@@ -3444,7 +3488,7 @@ class _Bitmap {
     flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flight._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) : Float));
     flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flight._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) : Float));
     flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flight._internal._UInt8ClampedArray), (cast (i + 3.0) : Float), (cast (_Runtime.toInt32(color) & 255) : Float));
-    invalidateBitmap(({ final __callArgument234:Dynamic = out; __callArgument234; }));
+    invalidateBitmap(({ final __callArgument239:Dynamic = out; __callArgument239; }));
   }
 
   public static function setBitmapPixelRgb(out:Bitmap, x:Float, y:Float, color:Float):Void {
@@ -3453,7 +3497,7 @@ class _Bitmap {
     flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flight._internal._UInt8ClampedArray), (cast i : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) : Float));
     flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flight._internal._UInt8ClampedArray), (cast (i + 1.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255) : Float));
     flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out.data : flight._internal._UInt8ClampedArray), (cast (i + 2.0) : Float), (cast (_Runtime.toInt32(color) & 255) : Float));
-    invalidateBitmap(({ final __callArgument236:Dynamic = out; __callArgument236; }));
+    invalidateBitmap(({ final __callArgument241:Dynamic = out; __callArgument241; }));
   }
 
   public static function pixelateBitmap(out:flight._internal._UInt8ClampedArray, source:BitmapRegion, blockSize:Float):Void {
@@ -3579,6 +3623,53 @@ class _Bitmap {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function getBitmapReadbackBackend():Null<BitmapReadbackBackend> {
+    return cast _Runtime.coalesce(_Bitmap._custom__bitmapReadbackBackend, function():Dynamic return cast _Bitmap._host__bitmapReadbackBackend);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasBitmapReadbackHostBackend():Bool {
+    return cast !_Runtime.strictEquals(_Bitmap._host__bitmapReadbackBackend, null);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function installBitmapReadbackHostBackend(backend:BitmapReadbackBackend):Void {
+    if ((cast !_Runtime.strictEquals(_Bitmap._host__bitmapReadbackBackend, null) : Bool)) { return; }
+    (_Bitmap._host__bitmapReadbackBackend = cast (backend : Dynamic));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function resetBitmapReadbackBackendForTest():Void {
+    (_Bitmap._custom__bitmapReadbackBackend = cast (null : Dynamic));
+    (_Bitmap._host__bitmapReadbackBackend = cast (null : Dynamic));
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function setBitmapReadbackBackend(backend:Null<BitmapReadbackBackend>):Void {
+    (_Bitmap._custom__bitmapReadbackBackend = cast (backend : Dynamic));
+  }
+
+  public static var _custom__bitmapReadbackBackend:Null<BitmapReadbackBackend> = _Runtime.explicitNull();
+
+  public static var _host__bitmapReadbackBackend:Null<BitmapReadbackBackend> = _Runtime.explicitNull();
+
+  public static function resolveBitmapReadback(source:flight._internal.dom.CanvasImageSource, width:Float, height:Float, mode:BitmapReadbackMode):BitmapReadbackResolution__bitmapReadbackResolver {
+    var backend:Null<BitmapReadbackBackend> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast width : Float) <= (cast 0.0 : Float)) : Bool) || (cast ((cast height : Float) <= (cast 0.0 : Float)) : Bool)) : Bool)) { return cast { bitmap: null, reason: 'empty-size' }; }
+    backend = (cast getBitmapReadbackBackend() : Null<BitmapReadbackBackend>);
+    if ((cast _Runtime.strictEquals(backend, null) : Bool)) { return cast { bitmap: null, reason: 'backend-not-installed' }; }
+    return cast (cast backend : BitmapReadbackBackend).readBitmap((cast source : flight._internal._Any), (cast width : Float), (cast height : Float), ({ final __callArgument243:Dynamic = mode; __callArgument243; }));
+    return cast null;
+  }
+
   public static function createBitmapRegion(bitmap:Bitmap, x:Float = 0.0, y:Float = 0.0, ?width:Float, ?height:Float):BitmapRegion {
     if (width == null) width = cast (bitmap.width : Dynamic);
     if (height == null) height = cast (bitmap.height : Dynamic);
@@ -3683,12 +3774,12 @@ class _Bitmap {
                     var m:Float = -1.0;
                     while ((cast ((cast m : Float) <= (cast 2.0 : Float)) : Bool)) {
                       var wy:Float = (cast _Bitmap.catmullRomWeight__bitmapResize((cast (ty - m) : Float)) : Float);
-                      var ry:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast (y1 + m) : Float), (cast sh : Float), ({ final __callArgument238:Dynamic = edgeMode; __callArgument238; })) : Null<Float>);
+                      var ry:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast (y1 + m) : Float), (cast sh : Float), ({ final __callArgument244:Dynamic = edgeMode; __callArgument244; })) : Null<Float>);
                       {
                         var n:Float = -1.0;
                         while ((cast ((cast n : Float) <= (cast 2.0 : Float)) : Bool)) {
                           var wx:Float = (cast _Bitmap.catmullRomWeight__bitmapResize((cast (tx - n) : Float)) : Float);
-                          var rx:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast (x1 + n) : Float), (cast sw : Float), ({ final __callArgument240:Dynamic = edgeMode; __callArgument240; })) : Null<Float>);
+                          var rx:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast (x1 + n) : Float), (cast sw : Float), ({ final __callArgument246:Dynamic = edgeMode; __callArgument246; })) : Null<Float>);
                           if ((cast ((cast _Runtime.strictEquals(rx, null) : Bool) || (cast _Runtime.strictEquals(ry, null) : Bool)) : Bool)) { n++; continue; }
                           var sy:Float = (source.y + ry);
                           var sx:Float = (source.x + rx);
@@ -3733,8 +3824,8 @@ class _Bitmap {
         var fy:Float = (((dy + 0.5) * scaleY) - 0.5);
         var y0:Float = HxMath.floor(fy);
         var ty:Float = (fy - y0);
-        var ry0:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast y0 : Float), (cast sh : Float), ({ final __callArgument242:Dynamic = edgeMode; __callArgument242; })) : Null<Float>);
-        var ry1:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast (y0 + 1.0) : Float), (cast sh : Float), ({ final __callArgument244:Dynamic = edgeMode; __callArgument244; })) : Null<Float>);
+        var ry0:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast y0 : Float), (cast sh : Float), ({ final __callArgument248:Dynamic = edgeMode; __callArgument248; })) : Null<Float>);
+        var ry1:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast (y0 + 1.0) : Float), (cast sh : Float), ({ final __callArgument250:Dynamic = edgeMode; __callArgument250; })) : Null<Float>);
         {
           var dx:Float = 0.0;
           while ((cast ((cast dx : Float) < (cast dw : Float)) : Bool)) {
@@ -3743,8 +3834,8 @@ class _Bitmap {
             var fx:Float = (((dx + 0.5) * scaleX) - 0.5);
             var x0:Float = HxMath.floor(fx);
             var tx:Float = (fx - x0);
-            var rx0:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast x0 : Float), (cast sw : Float), ({ final __callArgument246:Dynamic = edgeMode; __callArgument246; })) : Null<Float>);
-            var rx1:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast (x0 + 1.0) : Float), (cast sw : Float), ({ final __callArgument248:Dynamic = edgeMode; __callArgument248; })) : Null<Float>);
+            var rx0:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast x0 : Float), (cast sw : Float), ({ final __callArgument252:Dynamic = edgeMode; __callArgument252; })) : Null<Float>);
+            var rx1:Null<Float> = (cast _Bitmap.resolveResizeEdge__bitmapResize((cast (x0 + 1.0) : Float), (cast sw : Float), ({ final __callArgument254:Dynamic = edgeMode; __callArgument254; })) : Null<Float>);
             var di:Float = (((oy * dStride) + ox) * 4.0);
             var i00:Float = ((cast ((cast !_Runtime.strictEquals(rx0, null) : Bool) && (cast !_Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast (((((source.y + ry0) * sStride) + source.x) + rx0) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
             var i10:Float = ((cast ((cast !_Runtime.strictEquals(rx1, null) : Bool) && (cast !_Runtime.strictEquals(ry0, null) : Bool)) : Bool) ? (cast (((((source.y + ry0) * sStride) + source.x) + rx1) * 4.0) : Dynamic) : (cast -1.0 : Dynamic));
@@ -3838,7 +3929,7 @@ class _Bitmap {
     destPivotY = ((dest.height - 1.0) / 2.0);
     e = ((pivotX - (cosA * destPivotX)) + (sinA * destPivotY));
     f = ((pivotY - (sinA * destPivotX)) - (cosA * destPivotY));
-    transformBitmap(({ final __callArgument250:Dynamic = dest; __callArgument250; }), ({ final __callArgument251:Dynamic = source; __callArgument251; }), ({ final __callArgument252:Dynamic = cast ([cosA, sinA, -sinA, cosA, e, f] : Array<Dynamic>); __callArgument252; }), ({ final __callArgument253:Dynamic = edgeMode; __callArgument253; }), ({ final __callArgument254:Dynamic = sampleMode; __callArgument254; }));
+    transformBitmap(({ final __callArgument256:Dynamic = dest; __callArgument256; }), ({ final __callArgument257:Dynamic = source; __callArgument257; }), ({ final __callArgument258:Dynamic = cast ([cosA, sinA, -sinA, cosA, e, f] : Array<Dynamic>); __callArgument258; }), ({ final __callArgument259:Dynamic = edgeMode; __callArgument259; }), ({ final __callArgument260:Dynamic = sampleMode; __callArgument260; }));
   }
 
   public static function rotateBitmap180(dest:BitmapRegion, source:BitmapRegion):Void {
@@ -3850,7 +3941,7 @@ class _Bitmap {
     var dStride:Float = cast _Runtime.UNDEFINED;
     w = HxMath.min(dest.width, source.width);
     h = HxMath.min(dest.height, source.height);
-    if ((cast (cast _Bitmap.isSameRegion__bitmapRotate(({ final __callArgument260:Dynamic = dest; __callArgument260; }), ({ final __callArgument261:Dynamic = source; __callArgument261; })) : Bool) : Bool)) {
+    if ((cast (cast _Bitmap.isSameRegion__bitmapRotate(({ final __callArgument266:Dynamic = dest; __callArgument266; }), ({ final __callArgument267:Dynamic = source; __callArgument267; })) : Bool) : Bool)) {
       var data:flight._internal._UInt8ClampedArray = (cast dest.bitmap : { var data:flight._internal._UInt8ClampedArray; }).data;
       var stride:Float = (cast dest.bitmap : { var width:Float; }).width;
       var total:Float = (w * h);
@@ -3863,7 +3954,7 @@ class _Bitmap {
           var bx:Float = (dest.x + ((w - 1.0) - _Runtime.fmod(k, w)));
           var by:Float = (dest.y + _Runtime.subtractNumbers((h - 1.0), HxMath.floor((k / w))));
           if ((cast ((cast !(cast (cast _Bitmap.inBounds__bitmapRotate((cast ax : Float), (cast ay : Float), (cast stride : Float), (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool) || (cast !(cast (cast _Bitmap.inBounds__bitmapRotate((cast bx : Float), (cast by : Float), (cast stride : Float), (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool) : Bool) : Bool)) : Bool)) { k++; continue; }
-          _Bitmap.swapPixels__bitmapRotate(({ final __callArgument264:Dynamic = data; __callArgument264; }), (cast (((ay * stride) + ax) * 4.0) : Float), (cast (((by * stride) + bx) * 4.0) : Float));
+          _Bitmap.swapPixels__bitmapRotate(({ final __callArgument270:Dynamic = data; __callArgument270; }), (cast (((ay * stride) + ax) * 4.0) : Float), (cast (((by * stride) + bx) * 4.0) : Float));
           k++;
         }
       }
@@ -3885,7 +3976,7 @@ class _Bitmap {
             var sx:Float = (source.x + ((w - 1.0) - px));
             var dx:Float = (dest.x + px);
             if ((cast ((cast ((cast ((cast ((cast sx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast sx : Float) >= (cast sStride : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool)) { px++; continue; }
-            _Bitmap.copyPixel__bitmapRotate(({ final __callArgument266:Dynamic = dd; __callArgument266; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument267:Dynamic = sd; __callArgument267; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
+            _Bitmap.copyPixel__bitmapRotate(({ final __callArgument272:Dynamic = dd; __callArgument272; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument273:Dynamic = sd; __callArgument273; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
             px++;
           }
         }
@@ -3921,7 +4012,7 @@ class _Bitmap {
             var dx:Float = (dest.x + ((sh - 1.0) - py));
             var dy:Float = (dest.y + px);
             if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { px++; continue; }
-            _Bitmap.copyPixel__bitmapRotate(({ final __callArgument270:Dynamic = dd; __callArgument270; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument271:Dynamic = sd; __callArgument271; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
+            _Bitmap.copyPixel__bitmapRotate(({ final __callArgument276:Dynamic = dd; __callArgument276; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument277:Dynamic = sd; __callArgument277; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
             px++;
           }
         }
@@ -3957,7 +4048,7 @@ class _Bitmap {
             var dx:Float = (dest.x + py);
             var dy:Float = (dest.y + ((sw - 1.0) - px));
             if ((cast ((cast ((cast ((cast ((cast dx : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast dx : Float) >= (cast dStride : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) < (cast 0.0 : Float)) : Bool)) : Bool) || (cast ((cast dy : Float) >= (cast (cast dest.bitmap : { var height:Float; }).height : Float)) : Bool)) : Bool)) { px++; continue; }
-            _Bitmap.copyPixel__bitmapRotate(({ final __callArgument274:Dynamic = dd; __callArgument274; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument275:Dynamic = sd; __callArgument275; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
+            _Bitmap.copyPixel__bitmapRotate(({ final __callArgument280:Dynamic = dd; __callArgument280; }), (cast (((dy * dStride) + dx) * 4.0) : Float), ({ final __callArgument281:Dynamic = sd; __callArgument281; }), (cast (((sy * sStride) + sx) * 4.0) : Float));
             px++;
           }
         }
@@ -3998,24 +4089,24 @@ class _Bitmap {
 
   public static function dropShadowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapDropShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    _Bitmap.tintBitmapAlphaMask__bitmapShadow(({ final __callArgument278:Dynamic = out; __callArgument278; }), ({ final __callArgument279:Dynamic = source; __callArgument279; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0) : Float));
-    _Bitmap.applyBlurPasses__bitmapShadow(({ final __callArgument282:Dynamic = out; __callArgument282; }), ({ final __callArgument283:Dynamic = scratch; __callArgument283; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument284:Dynamic = options; __callArgument284; }));
+    _Bitmap.tintBitmapAlphaMask__bitmapShadow(({ final __callArgument284:Dynamic = out; __callArgument284; }), ({ final __callArgument285:Dynamic = source; __callArgument285; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0) : Float));
+    _Bitmap.applyBlurPasses__bitmapShadow(({ final __callArgument288:Dynamic = out; __callArgument288; }), ({ final __callArgument289:Dynamic = scratch; __callArgument289; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument290:Dynamic = options; __callArgument290; }));
   }
 
   public static function glowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    _Bitmap.tintBitmapAlphaMask__bitmapShadow(({ final __callArgument288:Dynamic = out; __callArgument288; }), ({ final __callArgument289:Dynamic = source; __callArgument289; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0) : Float));
-    _Bitmap.applyBlurPasses__bitmapShadow(({ final __callArgument292:Dynamic = out; __callArgument292; }), ({ final __callArgument293:Dynamic = scratch; __callArgument293; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument294:Dynamic = options; __callArgument294; }));
+    _Bitmap.tintBitmapAlphaMask__bitmapShadow(({ final __callArgument294:Dynamic = out; __callArgument294; }), ({ final __callArgument295:Dynamic = source; __callArgument295; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'intensity'), function():Dynamic return cast 1.0) : Float));
+    _Bitmap.applyBlurPasses__bitmapShadow(({ final __callArgument298:Dynamic = out; __callArgument298; }), ({ final __callArgument299:Dynamic = scratch; __callArgument299; }), (cast source.width : Float), (cast source.height : Float), ({ final __callArgument300:Dynamic = options; __callArgument300; }));
   }
 
   public static function innerGlowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapInnerGlowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    _Bitmap.applyInnerEffect__bitmapShadow(({ final __callArgument298:Dynamic = out; __callArgument298; }), ({ final __callArgument299:Dynamic = scratch; __callArgument299; }), ({ final __callArgument300:Dynamic = source; __callArgument300; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0) : Float), ({ final __callArgument301:Dynamic = options; __callArgument301; }), (cast 0.0 : Float), (cast 0.0 : Float));
+    _Bitmap.applyInnerEffect__bitmapShadow(({ final __callArgument304:Dynamic = out; __callArgument304; }), ({ final __callArgument305:Dynamic = scratch; __callArgument305; }), ({ final __callArgument306:Dynamic = source; __callArgument306; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 4278190335.0) : Float), ({ final __callArgument307:Dynamic = options; __callArgument307; }), (cast 0.0 : Float), (cast 0.0 : Float));
   }
 
   public static function innerShadowBitmap(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, source:BitmapRegion, ?options:BitmapInnerShadowOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
-    _Bitmap.applyInnerEffect__bitmapShadow(({ final __callArgument306:Dynamic = out; __callArgument306; }), ({ final __callArgument307:Dynamic = scratch; __callArgument307; }), ({ final __callArgument308:Dynamic = source; __callArgument308; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0) : Float), ({ final __callArgument309:Dynamic = options; __callArgument309; }), (cast _Runtime.coalesce(_Runtime.field(options, 'offsetX'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'offsetY'), function():Dynamic return cast 0.0) : Float));
+    _Bitmap.applyInnerEffect__bitmapShadow(({ final __callArgument312:Dynamic = out; __callArgument312; }), ({ final __callArgument313:Dynamic = scratch; __callArgument313; }), ({ final __callArgument314:Dynamic = source; __callArgument314; }), (cast _Runtime.coalesce(_Runtime.field(options, 'color'), function():Dynamic return cast 255.0) : Float), ({ final __callArgument315:Dynamic = options; __callArgument315; }), (cast _Runtime.coalesce(_Runtime.field(options, 'offsetX'), function():Dynamic return cast 0.0) : Float), (cast _Runtime.coalesce(_Runtime.field(options, 'offsetY'), function():Dynamic return cast 0.0) : Float));
   }
 
   public static function applyBlurPasses__bitmapShadow(out:flight._internal._UInt8ClampedArray, scratch:flight._internal._UInt8ClampedArray, width:Float, height:Float, options:BitmapShadowBlurOptions):Void {
@@ -4033,13 +4124,13 @@ class _Bitmap {
       var pass:Float = 0.0;
       while ((cast ((cast pass : Float) < (cast passes : Float)) : Bool)) {
         if ((cast ((cast radiusX : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsHorizontal(({ final __callArgument314:Dynamic = b; __callArgument314; }), ({ final __callArgument315:Dynamic = a; __callArgument315; }), (cast width : Float), (cast height : Float), (cast radiusX : Float));
+          blurBitmapPixelsHorizontal(({ final __callArgument320:Dynamic = b; __callArgument320; }), ({ final __callArgument321:Dynamic = a; __callArgument321; }), (cast width : Float), (cast height : Float), (cast radiusX : Float));
           var t:flight._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
         }
         if ((cast ((cast radiusY : Float) > (cast 0.0 : Float)) : Bool)) {
-          blurBitmapPixelsVertical(({ final __callArgument318:Dynamic = b; __callArgument318; }), ({ final __callArgument319:Dynamic = a; __callArgument319; }), (cast width : Float), (cast height : Float), (cast radiusY : Float));
+          blurBitmapPixelsVertical(({ final __callArgument324:Dynamic = b; __callArgument324; }), ({ final __callArgument325:Dynamic = a; __callArgument325; }), (cast width : Float), (cast height : Float), (cast radiusY : Float));
           var t:flight._internal._UInt8ClampedArray = a;
           (a = cast (b : Dynamic));
           (b = cast (t : Dynamic));
@@ -4072,14 +4163,14 @@ class _Bitmap {
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast 0.0 : Float));
-            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (255.0 - (cast _Bitmap.readSourceAlpha__bitmapShadow(({ final __callArgument322:Dynamic = source; __callArgument322; }), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float)) : Float));
+            flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 3.0) : Float), (cast (255.0 - (cast _Bitmap.readSourceAlpha__bitmapShadow(({ final __callArgument328:Dynamic = source; __callArgument328; }), (cast (px - offsetX) : Float), (cast (py - offsetY) : Float)) : Float)) : Float));
             px++;
           }
         }
         py++;
       }
     }
-    _Bitmap.applyBlurPasses__bitmapShadow(({ final __callArgument324:Dynamic = out; __callArgument324; }), ({ final __callArgument325:Dynamic = scratch; __callArgument325; }), (cast w : Float), (cast h : Float), ({ final __callArgument326:Dynamic = options; __callArgument326; }));
+    _Bitmap.applyBlurPasses__bitmapShadow(({ final __callArgument330:Dynamic = out; __callArgument330; }), ({ final __callArgument331:Dynamic = scratch; __callArgument331; }), (cast w : Float), (cast h : Float), ({ final __callArgument332:Dynamic = options; __callArgument332; }));
     cr = (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255);
     cg = (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255);
     cb = (_Runtime.toInt32((_Runtime.toInt32(color) >> 8)) & 255);
@@ -4093,7 +4184,7 @@ class _Bitmap {
           while ((cast ((cast px : Float) < (cast w : Float)) : Bool)) {
             var di:Float = (((py * w) + px) * 4.0);
             var blurred:Float = flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 3.0) : Float));
-            var sourceAlpha:Float = (cast _Bitmap.readSourceAlpha__bitmapShadow(({ final __callArgument330:Dynamic = source; __callArgument330; }), (cast px : Float), (cast py : Float)) : Float);
+            var sourceAlpha:Float = (cast _Bitmap.readSourceAlpha__bitmapShadow(({ final __callArgument336:Dynamic = source; __callArgument336; }), (cast px : Float), (cast py : Float)) : Float);
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast di : Float), (cast cr : Float));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast cg : Float));
             flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast out : flight._internal._UInt8ClampedArray), (cast (di + 2.0) : Float), (cast cb : Float));
@@ -4160,7 +4251,7 @@ class _Bitmap {
     var bitmapHeight:Float = cast _Runtime.UNDEFINED;
     var data:flight._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(options, 'amount'), function():Dynamic return cast 1.0);
-    boxBlurBitmap(({ final __callArgument332:Dynamic = out; __callArgument332; }), ({ final __callArgument333:Dynamic = scratch; __callArgument333; }), ({ final __callArgument334:Dynamic = source; __callArgument334; }), ({ final __callArgument335:Dynamic = { radiusX: _Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0), radiusY: _Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0), passes: _Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0) }; __callArgument335; }));
+    boxBlurBitmap(({ final __callArgument338:Dynamic = out; __callArgument338; }), ({ final __callArgument339:Dynamic = scratch; __callArgument339; }), ({ final __callArgument340:Dynamic = source; __callArgument340; }), ({ final __callArgument341:Dynamic = { radiusX: _Runtime.coalesce(_Runtime.field(options, 'radiusX'), function():Dynamic return cast 2.0), radiusY: _Runtime.coalesce(_Runtime.field(options, 'radiusY'), function():Dynamic return cast 2.0), passes: _Runtime.coalesce(_Runtime.field(options, 'passes'), function():Dynamic return cast 1.0) }; __callArgument341; }));
     w = source.width;
     h = source.height;
     bitmapWidth = (cast source.bitmap : { var width:Float; }).width;
@@ -4253,7 +4344,7 @@ class _Bitmap {
         i++;
       }
     }
-    applyBitmapCurve(({ final __callArgument340:Dynamic = out; __callArgument340; }), ({ final __callArgument341:Dynamic = source; __callArgument341; }), ({ final __callArgument342:Dynamic = lut; __callArgument342; }), ({ final __callArgument343:Dynamic = lut; __callArgument343; }), ({ final __callArgument344:Dynamic = lut; __callArgument344; }), ({ final __callArgument345:Dynamic = null; __callArgument345; }));
+    applyBitmapCurve(({ final __callArgument346:Dynamic = out; __callArgument346; }), ({ final __callArgument347:Dynamic = source; __callArgument347; }), ({ final __callArgument348:Dynamic = lut; __callArgument348; }), ({ final __callArgument349:Dynamic = lut; __callArgument349; }), ({ final __callArgument350:Dynamic = lut; __callArgument350; }), ({ final __callArgument351:Dynamic = null; __callArgument351; }));
   }
 
   public static var _scrollScratch__bitmapTransform:Null<flight._internal._UInt8ClampedArray> = _Runtime.explicitNull();
@@ -4320,7 +4411,7 @@ class _Bitmap {
             var si:Float = (((sy * (cast source.bitmap : { var width:Float; }).width) + sx) * 4.0);
             var di:Float = (((dy * (cast dest.bitmap : { var width:Float; }).width) + dx) * 4.0);
             var pixel:Float = _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flight._internal._UInt8ClampedArray), (cast si : Float))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flight._internal._UInt8ClampedArray), (cast (si + 1.0) : Float))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flight._internal._UInt8ClampedArray), (cast (si + 2.0) : Float))) << 8)))) | _Runtime.toInt32(flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flight._internal._UInt8ClampedArray), (cast (si + 3.0) : Float))))) & _Runtime.toInt32(mask))), 0);
-            var passes:Bool = (cast _Bitmap.compare__bitmapTransform((cast pixel : Float), ({ final __callArgument352:Dynamic = operation; __callArgument352; }), (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(thresholdValue), 0) : Float)) : Bool);
+            var passes:Bool = (cast _Bitmap.compare__bitmapTransform((cast pixel : Float), ({ final __callArgument358:Dynamic = operation; __callArgument358; }), (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(thresholdValue), 0) : Float)) : Bool);
             if ((cast passes : Bool)) {
               flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flight._internal._UInt8ClampedArray), (cast di : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(color), 24)) & 255) : Float));
               flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flight._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast (_Runtime.toInt32((_Runtime.toInt32(color) >> 16)) & 255) : Float));
@@ -4407,7 +4498,7 @@ class _Bitmap {
         py++;
       }
     }
-    invalidateBitmap(({ final __callArgument354:Dynamic = out; __callArgument354; }));
+    invalidateBitmap(({ final __callArgument360:Dynamic = out; __callArgument360; }));
   }
 
   public static function compare__bitmapTransform(a:Float, op:ThresholdOperation, b:Float):Bool {
@@ -4496,7 +4587,7 @@ class _Bitmap {
             var invW:Float = (1.0 / w);
             var sx:Float = ((((m0 * dx) + (m1 * dy)) + m2) * invW);
             var sy:Float = ((((m3 * dx) + (m4 * dy)) + m5) * invW);
-            _Bitmap.warpSampleBitmap__bitmapWarp(({ final __callArgument356:Dynamic = dd; __callArgument356; }), (cast di : Float), ({ final __callArgument357:Dynamic = sd; __callArgument357; }), (cast sw : Float), (cast sh : Float), (cast source.x : Float), (cast source.y : Float), (cast sStride : Float), (cast (cast source.bitmap : { var height:Float; }).height : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument358:Dynamic = sampleMode; __callArgument358; }), ({ final __callArgument359:Dynamic = edgeMode; __callArgument359; }));
+            _Bitmap.warpSampleBitmap__bitmapWarp(({ final __callArgument362:Dynamic = dd; __callArgument362; }), (cast di : Float), ({ final __callArgument363:Dynamic = sd; __callArgument363; }), (cast sw : Float), (cast sh : Float), (cast source.x : Float), (cast source.y : Float), (cast sStride : Float), (cast (cast source.bitmap : { var height:Float; }).height : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument364:Dynamic = sampleMode; __callArgument364; }), ({ final __callArgument365:Dynamic = edgeMode; __callArgument365; }));
             dx++;
           }
         }
@@ -4516,19 +4607,19 @@ class _Bitmap {
     sh = source.height;
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(sw, 0.0) : Bool) || (cast _Runtime.strictEquals(sh, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest.width, 0.0) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest.height, 0.0) : Bool)) : Bool)) { return; }
     srcPts = (cast cast ([0.0, 0.0, sw, 0.0, sw, sh, 0.0, sh] : Array<Dynamic>));
-    H = (cast _Bitmap.computeHomography__bitmapWarp(({ final __callArgument364:Dynamic = srcPts; __callArgument364; }), ({ final __callArgument365:Dynamic = dstQuad; __callArgument365; })) : Null<Array<Float>>);
+    H = (cast _Bitmap.computeHomography__bitmapWarp(({ final __callArgument370:Dynamic = srcPts; __callArgument370; }), ({ final __callArgument371:Dynamic = dstQuad; __callArgument371; })) : Null<Array<Float>>);
     if ((cast _Runtime.strictEquals(H, null) : Bool)) { return; }
-    Hinv = (cast _Bitmap.invertMatrix3x3__bitmapWarp(({ final __callArgument368:Dynamic = H; __callArgument368; })) : Null<Array<Float>>);
+    Hinv = (cast _Bitmap.invertMatrix3x3__bitmapWarp(({ final __callArgument374:Dynamic = H; __callArgument374; })) : Null<Array<Float>>);
     if ((cast _Runtime.strictEquals(Hinv, null) : Bool)) { return; }
-    warpBitmap(({ final __callArgument370:Dynamic = dest; __callArgument370; }), ({ final __callArgument371:Dynamic = source; __callArgument371; }), ({ final __callArgument372:Dynamic = Hinv; __callArgument372; }), ({ final __callArgument373:Dynamic = edgeMode; __callArgument373; }), ({ final __callArgument374:Dynamic = sampleMode; __callArgument374; }));
+    warpBitmap(({ final __callArgument376:Dynamic = dest; __callArgument376; }), ({ final __callArgument377:Dynamic = source; __callArgument377; }), ({ final __callArgument378:Dynamic = Hinv; __callArgument378; }), ({ final __callArgument379:Dynamic = edgeMode; __callArgument379; }), ({ final __callArgument380:Dynamic = sampleMode; __callArgument380; }));
   }
 
   public static function warpSampleBitmap__bitmapWarp(dd:flight._internal._UInt8ClampedArray, di:Float, sd:flight._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, sHeight:Float, sx:Float, sy:Float, sampleMode:BitmapResizeMode, edgeMode:BitmapEdgeMode):Void {
     if ((cast _Runtime.strictEquals(sampleMode, 'nearest') : Bool)) {
       var ix:Float = HxMath.round(sx);
       var iy:Float = HxMath.round(sy);
-      var cx:Null<Float> = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast ix : Float), (cast sw : Float), ({ final __callArgument380:Dynamic = edgeMode; __callArgument380; })) : Null<Float>);
-      var cy:Null<Float> = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast iy : Float), (cast sh : Float), ({ final __callArgument382:Dynamic = edgeMode; __callArgument382; })) : Null<Float>);
+      var cx:Null<Float> = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast ix : Float), (cast sw : Float), ({ final __callArgument386:Dynamic = edgeMode; __callArgument386; })) : Null<Float>);
+      var cy:Null<Float> = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast iy : Float), (cast sh : Float), ({ final __callArgument388:Dynamic = edgeMode; __callArgument388; })) : Null<Float>);
       if ((cast ((cast _Runtime.strictEquals(cx, null) : Bool) || (cast _Runtime.strictEquals(cy, null) : Bool)) : Bool)) {
         flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flight._internal._UInt8ClampedArray), (cast di : Float), (cast 0.0 : Float));
         flight._internal._StaticIndex.writeUint8ClampedArrayTyped((cast dd : flight._internal._UInt8ClampedArray), (cast (di + 1.0) : Float), (cast 0.0 : Float));
@@ -4544,10 +4635,10 @@ class _Bitmap {
       return;
     }
     if ((cast _Runtime.strictEquals(sampleMode, 'bicubic') : Bool)) {
-      _Bitmap.warpSampleBicubic__bitmapWarp(({ final __callArgument384:Dynamic = dd; __callArgument384; }), (cast di : Float), ({ final __callArgument385:Dynamic = sd; __callArgument385; }), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument386:Dynamic = edgeMode; __callArgument386; }));
+      _Bitmap.warpSampleBicubic__bitmapWarp(({ final __callArgument390:Dynamic = dd; __callArgument390; }), (cast di : Float), ({ final __callArgument391:Dynamic = sd; __callArgument391; }), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument392:Dynamic = edgeMode; __callArgument392; }));
       return;
     }
-    _Bitmap.warpSampleBilinear__bitmapWarp(({ final __callArgument390:Dynamic = dd; __callArgument390; }), (cast di : Float), ({ final __callArgument391:Dynamic = sd; __callArgument391; }), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument392:Dynamic = edgeMode; __callArgument392; }));
+    _Bitmap.warpSampleBilinear__bitmapWarp(({ final __callArgument396:Dynamic = dd; __callArgument396; }), (cast di : Float), ({ final __callArgument397:Dynamic = sd; __callArgument397; }), (cast sw : Float), (cast sh : Float), (cast originX : Float), (cast originY : Float), (cast sStride : Float), (cast sHeight : Float), (cast sx : Float), (cast sy : Float), ({ final __callArgument398:Dynamic = edgeMode; __callArgument398; }));
   }
 
   public static function warpSampleBilinear__bitmapWarp(dd:flight._internal._UInt8ClampedArray, di:Float, sd:flight._internal._UInt8ClampedArray, sw:Float, sh:Float, originX:Float, originY:Float, sStride:Float, _sHeight:Float, sx:Float, sy:Float, edgeMode:BitmapEdgeMode):Void {
@@ -4563,10 +4654,10 @@ class _Bitmap {
     y0 = HxMath.floor(sy);
     tx = (sx - x0);
     ty = (sy - y0);
-    cx00 = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast x0 : Float), (cast sw : Float), ({ final __callArgument396:Dynamic = edgeMode; __callArgument396; })) : Null<Float>);
-    cx10 = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast (x0 + 1.0) : Float), (cast sw : Float), ({ final __callArgument398:Dynamic = edgeMode; __callArgument398; })) : Null<Float>);
-    cy00 = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast y0 : Float), (cast sh : Float), ({ final __callArgument400:Dynamic = edgeMode; __callArgument400; })) : Null<Float>);
-    cy10 = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast (y0 + 1.0) : Float), (cast sh : Float), ({ final __callArgument402:Dynamic = edgeMode; __callArgument402; })) : Null<Float>);
+    cx00 = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast x0 : Float), (cast sw : Float), ({ final __callArgument402:Dynamic = edgeMode; __callArgument402; })) : Null<Float>);
+    cx10 = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast (x0 + 1.0) : Float), (cast sw : Float), ({ final __callArgument404:Dynamic = edgeMode; __callArgument404; })) : Null<Float>);
+    cy00 = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast y0 : Float), (cast sh : Float), ({ final __callArgument406:Dynamic = edgeMode; __callArgument406; })) : Null<Float>);
+    cy10 = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast (y0 + 1.0) : Float), (cast sh : Float), ({ final __callArgument408:Dynamic = edgeMode; __callArgument408; })) : Null<Float>);
     {
       var c:Float = 0.0;
       while ((cast ((cast c : Float) < (cast 4.0 : Float)) : Bool)) {
@@ -4599,12 +4690,12 @@ class _Bitmap {
           var m:Float = -1.0;
           while ((cast ((cast m : Float) <= (cast 2.0 : Float)) : Bool)) {
             var wy:Float = (cast _Bitmap.catmullRomWeight__bitmapWarp((cast (ty - m) : Float)) : Float);
-            var ry:Null<Float> = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast (y1 + m) : Float), (cast sh : Float), ({ final __callArgument404:Dynamic = edgeMode; __callArgument404; })) : Null<Float>);
+            var ry:Null<Float> = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast (y1 + m) : Float), (cast sh : Float), ({ final __callArgument410:Dynamic = edgeMode; __callArgument410; })) : Null<Float>);
             {
               var n:Float = -1.0;
               while ((cast ((cast n : Float) <= (cast 2.0 : Float)) : Bool)) {
                 var wx:Float = (cast _Bitmap.catmullRomWeight__bitmapWarp((cast (tx - n) : Float)) : Float);
-                var rx:Null<Float> = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast (x1 + n) : Float), (cast sw : Float), ({ final __callArgument406:Dynamic = edgeMode; __callArgument406; })) : Null<Float>);
+                var rx:Null<Float> = (cast _Bitmap.warpResolveEdge__bitmapWarp((cast (x1 + n) : Float), (cast sw : Float), ({ final __callArgument412:Dynamic = edgeMode; __callArgument412; })) : Null<Float>);
                 var v:Float = ((cast ((cast !_Runtime.strictEquals(rx, null) : Bool) && (cast !_Runtime.strictEquals(ry, null) : Bool)) : Bool) ? (cast flight._internal._StaticIndex.readUint8ClampedArrayTyped((cast sd : flight._internal._UInt8ClampedArray), (cast ((((((originY + ry) * sStride) + originX) + rx) * 4.0) + c) : Float)) : Dynamic) : (cast 0.0 : Dynamic));
                 (sum = cast ((sum + ((v * wy) * wx)) : Dynamic));
                 n++;
@@ -4681,7 +4772,7 @@ class _Bitmap {
         r++;
       }
     }
-    h = (cast _Bitmap.solveLinear8__bitmapWarp(({ final __callArgument408:Dynamic = M; __callArgument408; }), ({ final __callArgument409:Dynamic = b; __callArgument409; })) : Null<Array<Float>>);
+    h = (cast _Bitmap.solveLinear8__bitmapWarp(({ final __callArgument414:Dynamic = M; __callArgument414; }), ({ final __callArgument415:Dynamic = b; __callArgument415; })) : Null<Array<Float>>);
     if ((cast _Runtime.strictEquals(h, null) : Bool)) { return cast null; }
     return cast cast ([flight._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 0.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 1.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 2.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 3.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 4.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 5.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 6.0 : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast h : Array<Float>), (cast 7.0 : Float)), 1.0] : Array<Dynamic>);
     return cast null;
@@ -4710,7 +4801,7 @@ class _Bitmap {
           }
         }
         if ((cast ((cast maxVal : Float) < (cast 1e-12 : Float)) : Bool)) { return cast null; }
-        ({ var __destructure412:Dynamic = cast ([flight._internal._StaticIndex.readArray(aug, maxRow), flight._internal._StaticIndex.readArray(aug, col)] : Array<Dynamic>); _Runtime.setIndex(aug, col, flight._internal._StaticIndex.readArray(__destructure412, 0)); _Runtime.setIndex(aug, maxRow, flight._internal._StaticIndex.readArray(__destructure412, 1)); __destructure412; });
+        ({ var __destructure418:Dynamic = cast ([flight._internal._StaticIndex.readArray(aug, maxRow), flight._internal._StaticIndex.readArray(aug, col)] : Array<Dynamic>); _Runtime.setIndex(aug, col, flight._internal._StaticIndex.readArray(__destructure418, 0)); _Runtime.setIndex(aug, maxRow, flight._internal._StaticIndex.readArray(__destructure418, 1)); __destructure418; });
         var pivot:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast flight._internal._StaticIndex.readArray(aug, col) : Array<Float>), (cast col : Float));
         {
           var row:Float = (col + 1.0);
@@ -4719,7 +4810,7 @@ class _Bitmap {
             {
               var k:Float = col;
               while ((cast ((cast k : Float) <= (cast n : Float)) : Bool)) {
-                ({ var __indexedObject413:Array<Float> = flight._internal._StaticIndex.readArray(aug, row); var __indexedKey414:Float = k; flight._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject413 : Array<Float>), (cast __indexedKey414 : Float), (cast (flight._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject413 : Array<Float>), (cast __indexedKey414 : Float)) - (factor * flight._internal._StaticIndex.readFloatArrayTyped((cast flight._internal._StaticIndex.readArray(aug, col) : Array<Float>), (cast k : Float)))) : Float)); });
+                ({ var __indexedObject419:Array<Float> = flight._internal._StaticIndex.readArray(aug, row); var __indexedKey420:Float = k; flight._internal._StaticIndex.writeFloatArrayTyped((cast __indexedObject419 : Array<Float>), (cast __indexedKey420 : Float), (cast (flight._internal._StaticIndex.readFloatArrayTyped((cast __indexedObject419 : Array<Float>), (cast __indexedKey420 : Float)) - (factor * flight._internal._StaticIndex.readFloatArrayTyped((cast flight._internal._StaticIndex.readArray(aug, col) : Array<Float>), (cast k : Float)))) : Float)); });
                 k++;
               }
             }
@@ -4780,35 +4871,9 @@ class _Bitmap {
   }
 
   public static function explainBitmapReadback(source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackExplanation {
-    var reason:BitmapReadbackBlockReason = cast _Runtime.UNDEFINED;
-    reason = (cast _Bitmap._blockReason__explainBitmapReadback((cast source : flight._internal._Any), (cast width : Float), (cast height : Float)) : BitmapReadbackBlockReason);
-    return cast { readable: _Runtime.strictEquals(reason, 'ok'), reason: reason };
-    return cast null;
-  }
-
-  public static function _blockReason__explainBitmapReadback(source:flight._internal.dom.CanvasImageSource, width:Float, height:Float):BitmapReadbackBlockReason {
-    if (width <= 0 || height <= 0) return cast 'empty-size';
-    final canvas:flight._internal.dom.HTMLCanvasElement = cast flight._internal.backend.DomDocumentBackend.call(
-      flight._internal.backend.DomDocumentBackend.value(),
-      'createElement',
-      cast (['canvas'] : Array<Dynamic>)
-    );
-    if (canvas == null) return cast 'no-canvas';
-    flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', 1.0);
-    flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', 1.0);
-    final ctx:flight._internal.dom.CanvasRenderingContext2D = cast flight._internal.backend.CanvasElementBackend.call(
-      canvas,
-      'getContext',
-      cast (['2d'] : Array<Dynamic>)
-    );
-    if (ctx == null) return cast 'no-canvas';
-    try {
-      flight._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([source, 0.0, 0.0] : Array<Dynamic>));
-      flight._internal.backend.Canvas2dBackend.call(ctx, 'getImageData', cast ([0.0, 0.0, 1.0, 1.0] : Array<Dynamic>));
-    } catch (_:Dynamic) {
-      return cast 'tainted-source';
-    }
-    return cast 'ok';
+    var outcome:BitmapReadbackResolution__bitmapReadbackResolver = cast _Runtime.UNDEFINED;
+    outcome = (cast resolveBitmapReadback((cast source : flight._internal._Any), (cast width : Float), (cast height : Float), ({ final __callArgument421:Dynamic = 'probe'; __callArgument421; })) : BitmapReadbackResolution__bitmapReadbackResolver);
+    return cast { readable: _Runtime.strictEquals((cast outcome : BitmapReadbackResolution__bitmapReadbackResolver).reason, 'ok'), reason: (cast outcome : BitmapReadbackResolution__bitmapReadbackResolver).reason };
     return cast null;
   }
 }

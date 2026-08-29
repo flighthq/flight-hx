@@ -6,11 +6,14 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export const connectAudioChannelToNode = api.connectAudioChannelToNode;
+export const destroyAudioChannel = api.destroyAudioChannel;
 export const fadeAudioChannelGain = api.fadeAudioChannelGain;
 export const getAudioChannelCurrentTime = api.getAudioChannelCurrentTime;
 export const getAudioChannelDuration = api.getAudioChannelDuration;
 export const getAudioChannelInputNode = api.getAudioChannelInputNode;
 export const getAudioChannelOutputNode = api.getAudioChannelOutputNode;
+export const hasAudioChannelFade = api.hasAudioChannelFade;
+export const hasAudioChannelNodeAccess = api.hasAudioChannelNodeAccess;
 export const isAudioChannelPlaying = api.isAudioChannelPlaying;
 export const pauseAudioChannel = api.pauseAudioChannel;
 export const playAudioResource = api.playAudioResource;

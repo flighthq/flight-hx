@@ -940,7 +940,12 @@ function populateSourceImports(
           // `Y` as a value) resolves to the type, which has no members. Bind the renamed value
           // `XValue` from its values module to `Y` instead. The non-renamed case is handled by
           // reference rewriting + `importCanonicalValues`.
-          if (canonicalValueAliases.has(importedName) && element.name.text !== importedName) {
+          if (
+            canonicalValueAliases.has(importedName) &&
+            element.name.text !== importedName &&
+            !statement.importClause?.isTypeOnly &&
+            !element.isTypeOnly
+          ) {
             const generatedValue = canonicalValueAliases.get(importedName);
             const valueModule = generatedValue ? valueOwner.get(generatedValue) : undefined;
             if (valueModule) {
@@ -1056,9 +1061,12 @@ function computeSelfShadowTypeModules(modules: IrModule[]): Map<string, string> 
 
 /** The Haxe name an import statement binds into scope: the alias, or the trailing path segment. */
 function importBindsShadowedName(imported: string, shadowedTypeNames: ReadonlySet<string>): boolean {
+  return shadowedTypeNames.has(importBoundName(imported));
+}
+
+function importBoundName(imported: string): string {
   const aliasMatch = / as (\w+)$/u.exec(imported);
-  const bound = aliasMatch?.[1] ?? imported.split('.').pop() ?? imported;
-  return shadowedTypeNames.has(bound);
+  return aliasMatch?.[1] ?? imported.split('.').pop() ?? imported;
 }
 
 /** Whether a declaration was marked package-private (only type/class/enum declarations can be). */
@@ -1157,7 +1165,11 @@ function computeExternalTypeNames(modules: IrModule[]): Set<string> {
     const record = value as Record<string, unknown>;
     if (record.kind === 'named' && typeof record.name === 'string') referenced.add(record.name);
     Object.entries(record).forEach(([key, item]) => {
-      if (key !== 'contextualParameters') collect(item);
+      // Call-site TypeScript arguments guide lowering but Haxe infers them and
+      // never emits their names. They therefore cannot create a host-toolkit
+      // dependency. Contextual-only callback parameters are likewise not part
+      // of emitted source.
+      if (key !== 'contextualParameters' && key !== 'typeArguments') collect(item);
     });
   };
   for (const module of modules) collect(module.declarations);
@@ -1178,13 +1190,14 @@ function computeExternalTypeNames(modules: IrModule[]): Set<string> {
  * into the module so the reference resolves; a module that IS the like-named namespace resolves the
  * name to itself and needs no import.
  */
-function importExternalTypesFromLut(modules: IrModule[]): void {
+export function importExternalTypesFromLut(modules: IrModule[]): void {
   const externalTypeNames = computeExternalTypeNames(modules);
   for (const module of modules) {
     const referenced = new Set<string>();
     collectReferencedNamedTypes(module.declarations, externalTypeNames, referenced);
+    const boundImports = new Set(module.imports.map(importBoundName));
     for (const name of referenced) {
-      if (name === module.name) continue;
+      if (name === module.name || boundImports.has(name)) continue;
       module.imports.push(`${WEB_EXTERNS_MODULE}.${name}`);
     }
     module.imports = [...new Set(module.imports)].sort();
@@ -1538,7 +1551,9 @@ function collectReferencedNamedTypes(value: unknown, canonicalNames: ReadonlySet
     output.add(record.name);
   }
   Object.entries(record).forEach(([key, item]) => {
-    if (key !== 'contextualParameters') collectReferencedNamedTypes(item, canonicalNames, output);
+    if (key !== 'contextualParameters' && key !== 'typeArguments') {
+      collectReferencedNamedTypes(item, canonicalNames, output);
+    }
   });
 }
 

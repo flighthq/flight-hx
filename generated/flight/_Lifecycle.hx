@@ -10,7 +10,9 @@ import flight.types.AppLifecycle;
 import flight.types.AppLifecycleState;
 import flight.types.AppMemoryPressure;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.LifecycleBackend;
+import flight.types.LifecycleOperation;
 import flight.types.Signal;
 import flight.types.SignalData;
 
@@ -163,6 +165,19 @@ class _Lifecycle {
     return cast null;
   }
 
+  @:allow(flight)
+  @:keep
+  private static function explainLifecycleOperation(operation:LifecycleOperation):BackendOperationExplanation {
+    if ((cast ((cast !_Runtime.strictEquals(_Lifecycle._custom__lifecycle, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Lifecycle._custom__lifecycle, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'custom', operation: operation };
+    }
+    if ((cast ((cast !_Runtime.strictEquals(_Lifecycle._host__lifecycle, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Lifecycle._host__lifecycle, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'host', operation: operation };
+    }
+    return cast { implemented: false, layer: 'sentinel', operation: operation };
+    return cast null;
+  }
+
   public static function getAppLaunchKind():AppLaunchKind {
     var backend:LifecycleBackend = cast _Runtime.UNDEFINED;
     backend = (cast getLifecycleBackend() : LifecycleBackend);
@@ -179,6 +194,13 @@ class _Lifecycle {
   @:keep
   private static function getLifecycleBackend():LifecycleBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(_Lifecycle._custom__lifecycle, function():Dynamic return cast _Lifecycle._host__lifecycle), function():Dynamic return cast _Lifecycle._sentinel__lifecycle);
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasLifecycleOperation(operation:LifecycleOperation):Bool {
+    return cast (cast (cast explainLifecycleOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 

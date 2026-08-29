@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlShapeRendererData = { var surface:Null<GlShapeRasterSurface>; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<GlShapeMesh>>; };
+typedef GlShapeRendererData = { var surface:Null<Raster2DSurface>; var lastContentId:Float; var lastPixelRatio:Float; var lastW:Float; var lastH:Float; var meshVersion:Float; var meshes:Null<Array<GlShapeMesh>>; };

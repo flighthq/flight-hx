@@ -10,7 +10,7 @@ class _Map<K, V> {
   public var size(default, null):Int = 0;
 
   public function new(?source:Dynamic) {
-    if (source != null) for (pair in (cast source : Array<Dynamic>)) set(pair[0], pair[1]);
+    if (source != null) for (pair in _Runtime.iterable(source)) set(pair[0], pair[1]);
   }
 
   public function clear():Void {

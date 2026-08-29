@@ -5,8 +5,10 @@ const api = compiled.flight._Scene2DGl;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const acquireGlScale9ShapeRasterSurface = api.acquireGlScale9ShapeRasterSurface;
 export const createGlScale9ShapeData = api.createGlScale9ShapeData;
 export const defaultGlScale9ShapeRenderer = api.defaultGlScale9ShapeRenderer;
 export const destroyGlScale9ShapeData = api.destroyGlScale9ShapeData;
 export const drawGlScale9Shape = api.drawGlScale9Shape;
 export const drawGlScale9ShapeMask = api.drawGlScale9ShapeMask;
+export const getGlScale9ShapeData = api.getGlScale9ShapeData;

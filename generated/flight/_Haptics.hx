@@ -4,10 +4,12 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.HapticImpactStyle;
 import flight.types.HapticNotificationType;
 import flight.types.HapticsBackend;
 import flight.types.HapticsCapabilities;
+import flight.types.HapticsOperation;
 
 @:noCompletion
 class _Haptics {
@@ -81,6 +83,19 @@ class _Haptics {
 
   @:allow(flight)
   @:keep
+  private static function explainHapticsOperation(operation:HapticsOperation):BackendOperationExplanation {
+    if ((cast ((cast !_Runtime.strictEquals(_Haptics._custom__haptics, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Haptics._custom__haptics, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'custom', operation: operation };
+    }
+    if ((cast ((cast !_Runtime.strictEquals(_Haptics._host__haptics, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Haptics._host__haptics, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'host', operation: operation };
+    }
+    return cast { implemented: false, layer: 'sentinel', operation: operation };
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
   private static function getHapticsBackend():HapticsBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(_Haptics._custom__haptics, function():Dynamic return cast _Haptics._host__haptics), function():Dynamic return cast _Haptics._sentinel__haptics);
     return cast null;
@@ -88,6 +103,13 @@ class _Haptics {
 
   public static function getHapticsCapabilities(out:HapticsCapabilities):HapticsCapabilities {
     return cast (cast (cast getHapticsBackend() : HapticsBackend) : HapticsBackend).capabilities(({ final __callArgument14:Dynamic = out; __callArgument14; }));
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasHapticsOperation(operation:HapticsOperation):Bool {
+    return cast (cast (cast explainHapticsOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 

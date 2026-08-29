@@ -9,6 +9,7 @@ export const advanceVideoTexture = api.advanceVideoTexture;
 export const cloneVideoTexture = api.cloneVideoTexture;
 export const copyVideoTexture = api.copyVideoTexture;
 export const createVideoTexture = api.createVideoTexture;
+export const destroyVideoTexture = api.destroyVideoTexture;
 export const getVideoTextureHeight = api.getVideoTextureHeight;
 export const getVideoTextureInverseUvMatrix = api.getVideoTextureInverseUvMatrix;
 export const getVideoTextureUvMatrix = api.getVideoTextureUvMatrix;

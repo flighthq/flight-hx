@@ -18,6 +18,8 @@ import flight.types.AnimationClip;
 import flight.types.Attachment2D;
 import flight.types.AudioResource;
 import flight.types.AudioResourceFailure;
+import flight.types.ButtonController;
+import flight.types.Camera2D;
 import flight.types.CollisionResponse;
 import flight.types.ColorAdjustmentRuntime;
 import flight.types.DisplayObject;
@@ -26,7 +28,10 @@ import flight.types.Entity;
 import flight.types.EntityRuntime;
 import flight.types.EntityWithoutRuntime;
 import flight.types.ForceFalloff;
+import flight.types.GltfExtensionHandler;
 import flight.types.GlyphSource;
+import flight.types.GuiControllerOptions;
+import flight.types.GuiOrientation;
 import flight.types.HasAppearance;
 import flight.types.HasAppearanceRuntime;
 import flight.types.HasBlendMode;
@@ -38,15 +43,20 @@ import flight.types.HasTransform2D;
 import flight.types.HasTransform2DRuntime;
 import flight.types.HasTransform3D;
 import flight.types.HasTransform3DRuntime;
+import flight.types.HierarchyNodeAny;
 import flight.types.Image;
 import flight.types.ImageBitmapComposition;
 import flight.types.ImageResourceFailure;
 import flight.types.ImageResourceFetch;
 import flight.types.ImageResourceReference;
+import flight.types.ImportDiagnostic;
+import flight.types.InputKeyboardData;
 import flight.types.InteractionSignals;
+import flight.types.KeyedTable;
 import flight.types.Kind;
 import flight.types.LayoutTree;
 import flight.types.Light;
+import flight.types.ListController;
 import flight.types.Material;
 import flight.types.MaterialData;
 import flight.types.Matrix;
@@ -62,6 +72,7 @@ import flight.types.Node2DData;
 import flight.types.Node2DRuntime;
 import flight.types.Node3D;
 import flight.types.Node3DRuntime;
+import flight.types.NodeAny;
 import flight.types.NodeData;
 import flight.types.NodeDataFactory;
 import flight.types.NodeInteractionState;
@@ -83,11 +94,14 @@ import flight.types.RenderRegistry;
 import flight.types.RequirementFacet;
 import flight.types.ResourceLoader;
 import flight.types.ResourceResolutionState;
+import flight.types.RichText;
 import flight.types.RichTextContent;
 import flight.types.Sampler;
 import flight.types.Scene2D;
 import flight.types.Scene2DSlotReference;
 import flight.types.Scene3D;
+import flight.types.ScrollBarController;
+import flight.types.SelectionState;
 import flight.types.Shape;
 import flight.types.ShapeCommandToken;
 import flight.types.ShapeData;
@@ -106,6 +120,8 @@ import flight.types.TextFieldSignals;
 import flight.types.TextFormat;
 import flight.types.TextFormatAlign;
 import flight.types.TextFormatRange;
+import flight.types.TextInputManager;
+import flight.types.TextInputSource;
 import flight.types.TextInputState;
 import flight.types.TextLabel;
 import flight.types.TextLabelData;
@@ -121,6 +137,7 @@ import flight.types.TextureLike;
 import flight.types.TextureSource;
 import flight.types.TextureUvTransform;
 import flight.types.Timeline;
+import flight.types.ToggleController;
 import flight.types.TransformInherit2D;
 import flight.types.Vector2;
 import flight.types.Vector2Like;
@@ -132,6 +149,8 @@ import flight.types.VoxelGrid;
 typedef AudioResourceReferenceBase__AudioResourceReference = { var failure:Null<AudioResourceFailure>; var mimeType:Null<String>; var name:Null<String>; var resource:AudioResource; var state:ResourceResolutionState; };
 
 typedef CreateTextureVariantOptions__CreateTextureOptions<Type> = flight._internal._Conditional<Type, TextureLike, flight._internal._Intersection2<flight._internal._Omit<{ @:optional var version:Null<Float>; @:optional var dimension:Null<String>; @:optional var colorSpace:Null<TextureColorSpace>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; }, String>, flight._internal._Conditional<flight._internal._IndexedAccess<Type, String>, String, { @:optional var dimension:String; }, { var dimension:flight._internal._IndexedAccess<Type, String>; }>>, flight._internal._Any>;
+
+typedef GlContextMember__GlContext = String;
 
 typedef ImageResourceReferenceBase__ImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; };
 
@@ -189,6 +208,8 @@ class _Types {
 
   public static final BoundingBoxAttachment2DKind:String = 'BoundingBoxAttachment2D';
 
+  public static var ButtonControllerTypeKey__ButtonController:flight._internal._Symbol;
+
   public static final CircleColliderKind:String = 'CircleCollider';
 
   public static final ClearcoatPbrExtensionKind:String = 'ClearcoatPbrExtension';
@@ -208,6 +229,22 @@ class _Types {
   public static final ClippingAttachment2DKind:String = 'ClippingAttachment2D';
 
   public static final MAX_COLLISION_CONTACT_POINTS_3D:Float = 4.0;
+
+  public static var ComboBoxControllerTypeKey__ComboBoxController:flight._internal._Symbol;
+
+  public static final AddNodeChildCommandKind:String = 'AddNodeChildCommand';
+
+  public static final CompositeCommandKind:String = 'CompositeCommand';
+
+  public static final RemoveNodeChildCommandKind:String = 'RemoveNodeChildCommand';
+
+  public static final ReorderNodeChildCommandKind:String = 'ReorderNodeChildCommand';
+
+  public static final SetNodePropertyCommandKind:String = 'SetNodePropertyCommand';
+
+  public static final CommandBindingRegistryId:String = 'command.bindings';
+
+  public static final CommandBindingMissPolicy:String = 'ignore';
 
   public static final CompositeOperatorValue:{ var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; } = (cast { Clear: 'Clear', Copy: 'Copy', DestinationAtop: 'DestinationAtop', DestinationIn: 'DestinationIn', DestinationOut: 'DestinationOut', DestinationOver: 'DestinationOver', SourceAtop: 'SourceAtop', SourceIn: 'SourceIn', SourceOut: 'SourceOut', SourceOver: 'SourceOver', Xor: 'Xor' });
 
@@ -259,6 +296,8 @@ class _Types {
 
   public static final ExtendedPbrMaterialKind:String = 'ExtendedPbrMaterial';
 
+  public static final FlightDocumentRefusalReasonValue:{ var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; } = (cast { AliasUnsupported: 'flight-document.unsupported.alias', AnchorUnsupported: 'flight-document.unsupported.anchor', BlockScalarUnsupported: 'flight-document.unsupported.block-scalar', CollectionEntriesLimitExceeded: 'flight-document.limit.collection-entries', DefaultSceneOutOfRange: 'flight-document.structure.default-scene-out-of-range', DocumentCodeUnitsLimitExceeded: 'flight-document.limit.document-code-units', DocumentSeparatorUnsupported: 'flight-document.unsupported.document-separator', DuplicateAmbientLight: 'flight-document.structure.duplicate-ambient-light', DuplicateDirectionalLight: 'flight-document.structure.duplicate-directional-light', DuplicateKey: 'flight-document.syntax.duplicate-key', ExpectedFlowDelimiter: 'flight-document.syntax.expected-flow-delimiter', ExpectedMappingEntry: 'flight-document.syntax.expected-mapping-entry', ExpectedMappingKey: 'flight-document.syntax.expected-mapping-key', ExpectedScalar: 'flight-document.syntax.expected-scalar', ExpectedValue: 'flight-document.syntax.expected-value', FieldInvalid: 'flight-document.field.invalid', FlowSequenceUnsupported: 'flight-document.unsupported.flow-sequence', InvalidDocument: 'flight-document.syntax.invalid-document', InvalidEscape: 'flight-document.syntax.invalid-escape', KeyCodeUnitsLimitExceeded: 'flight-document.limit.key-code-units', MixedCollection: 'flight-document.syntax.mixed-collection', MultipleRootValues: 'flight-document.syntax.multiple-root-values', NestingDepthLimitExceeded: 'flight-document.limit.nesting-depth', NodeKindUnregistered: 'flight-document.node-kind.unregistered', NumberOutOfRange: 'flight-document.scalar.number-out-of-range', ResourceKindUnregistered: 'flight-document.resource-kind.unregistered', ResourceResolverUnregistered: 'flight-document.resource-resolver.unregistered', ResourceUnresolved: 'flight-document.resource.unresolved', RootIndentation: 'flight-document.syntax.root-indentation', RootKindMismatch: 'flight-document.structure.root-kind-mismatch', ScalarCodeUnitsLimitExceeded: 'flight-document.limit.scalar-code-units', ScalarInvalid: 'flight-document.scalar.invalid', ShapeCommandUnregistered: 'flight-document.shape-command.unregistered', ScenesEmpty: 'flight-document.structure.scenes-empty', StructureInvalid: 'flight-document.structure.invalid', TabCharacter: 'flight-document.syntax.tab-character', TagUnsupported: 'flight-document.unsupported.tag', TotalNodesLimitExceeded: 'flight-document.limit.total-nodes', TrailingFlowComma: 'flight-document.syntax.trailing-flow-comma', TrailingFlowContent: 'flight-document.syntax.trailing-flow-content', UnexpectedIndentation: 'flight-document.syntax.unexpected-indentation', UnexpectedToken: 'flight-document.syntax.unexpected-token', UnterminatedFlowMapping: 'flight-document.syntax.unterminated-flow-mapping', UnterminatedQuotedScalar: 'flight-document.syntax.unterminated-quoted-scalar', VersionUnsupported: 'flight-document.version.unsupported' });
+
   public static final FogModifierModeValue:{ var Exponential:String; var Exponential2:String; var Linear:String; } = (cast { Exponential: 'Exponential', Exponential2: 'Exponential2', Linear: 'Linear' });
 
   public static final FogModifierKind:String = 'FogModifier';
@@ -276,6 +315,8 @@ class _Types {
   public static final GamepadAxisKindValue:{ var STICK_LEFT_X:String; var STICK_LEFT_Y:String; var STICK_RIGHT_X:String; var STICK_RIGHT_Y:String; } = (cast { STICK_LEFT_X: 'StickLeftX', STICK_LEFT_Y: 'StickLeftY', STICK_RIGHT_X: 'StickRightX', STICK_RIGHT_Y: 'StickRightY' });
 
   public static final GamepadButtonKindValue:{ var BUTTON_EAST:String; var BUTTON_NORTH:String; var BUTTON_SOUTH:String; var BUTTON_WEST:String; var DPAD_DOWN:String; var DPAD_LEFT:String; var DPAD_RIGHT:String; var DPAD_UP:String; var HOME:String; var SELECT:String; var SHOULDER_LEFT:String; var SHOULDER_RIGHT:String; var START:String; var STICK_LEFT:String; var STICK_RIGHT:String; var TOUCHPAD:String; var TRIGGER_LEFT:String; var TRIGGER_RIGHT:String; } = (cast { BUTTON_EAST: 'ButtonEast', BUTTON_NORTH: 'ButtonNorth', BUTTON_SOUTH: 'ButtonSouth', BUTTON_WEST: 'ButtonWest', DPAD_DOWN: 'DpadDown', DPAD_LEFT: 'DpadLeft', DPAD_RIGHT: 'DpadRight', DPAD_UP: 'DpadUp', HOME: 'Home', SELECT: 'Select', SHOULDER_LEFT: 'ShoulderLeft', SHOULDER_RIGHT: 'ShoulderRight', START: 'Start', STICK_LEFT: 'StickLeft', STICK_RIGHT: 'StickRight', TOUCHPAD: 'Touchpad', TRIGGER_LEFT: 'TriggerLeft', TRIGGER_RIGHT: 'TriggerRight' });
+
+  public static var GizmoStateNodeTypeKey__GizmoState:flight._internal._Symbol;
 
   public static final GroupKind:String = 'Group';
 
@@ -324,6 +365,8 @@ class _Types {
   public static final LuxLightUnit:String = 'Lux';
 
   public static final UnitlessLightUnit:String = 'Unitless';
+
+  public static var ListControllerTypeKey__ListController:flight._internal._Symbol;
 
   public static final LodMeshKind:String = 'LodMesh';
 
@@ -427,7 +470,11 @@ class _Types {
 
   public static final PointLightKind:String = 'PointLight';
 
+  public static var ProgressBarControllerTypeKey__ProgressBarController:flight._internal._Symbol;
+
   public static final QuadBatchKind:String = 'QuadBatch';
+
+  public static var RadioGroupControllerTypeKey__RadioGroupController:flight._internal._Symbol;
 
   public static final RectangleColliderKind:String = 'RectangleCollider';
 
@@ -489,6 +536,12 @@ class _Types {
 
   public static final SceneCoverageValue:{ var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; } = (cast { FallbackRemediable: 'FallbackRemediable', FallbackUnavailable: 'FallbackUnavailable', Satisfied: 'Satisfied', Unavailable: 'Unavailable', Unregistered: 'Unregistered' });
 
+  public static var ScrollBarControllerTypeKey__ScrollBarController:flight._internal._Symbol;
+
+  public static var ScrollViewControllerTypeKey__ScrollViewController:flight._internal._Symbol;
+
+  public static var SelectionStateNodeTypeKey__SelectionState:flight._internal._Symbol;
+
   public static final ShadedMaterialKind:String = 'ShadedMaterial';
 
   public static final ShapeKind:String = 'Shape';
@@ -509,6 +562,8 @@ class _Types {
 
   public static final Skeleton2DSlotAnimationPathValue:{ var Attachment:String; var Color:String; } = (cast { Attachment: 'Attachment', Color: 'Color' });
 
+  public static var SliderControllerTypeKey__SliderController:flight._internal._Symbol;
+
   public static final SoftKeyboardEasingDefaultKindValue:String = 'ease';
 
   public static final SoftKeyboardEasingEaseInKindValue:String = 'easeIn';
@@ -524,6 +579,8 @@ class _Types {
   public static final SpecularPbrExtensionKind:String = 'SpecularPbrExtension';
 
   public static final SphereColliderKind:String = 'SphereCollider';
+
+  public static var SplitPaneControllerTypeKey__SplitPaneController:flight._internal._Symbol;
 
   public static final SpotLightKind:String = 'SpotLight';
 
@@ -552,6 +609,8 @@ class _Types {
   public static final StatechartNestedStateKind:String = 'Statechart.Nested';
 
   public static final StatechartTransitionStatusValue:{ var ConditionsUnmet:String; var ExitTimePending:String; var InvalidRegion:String; var MissingRegionDuration:String; var NoTransitions:String; var Ready:String; var Transitioning:String; } = (cast { ConditionsUnmet: 'ConditionsUnmet', ExitTimePending: 'ExitTimePending', InvalidRegion: 'InvalidRegion', MissingRegionDuration: 'MissingRegionDuration', NoTransitions: 'NoTransitions', Ready: 'Ready', Transitioning: 'Transitioning' });
+
+  public static var TabBarControllerTypeKey__TabBarController:flight._internal._Symbol;
 
   public static final TextDirectionLeftToRight:String = 'LeftToRight';
 
@@ -582,6 +641,8 @@ class _Types {
   public static final TextFeatureSuperscript:String = 'sups';
 
   public static final TextFeatureTabularFigures:String = 'tnum';
+
+  public static var TextInputControllerTypeKey__TextInputController:flight._internal._Symbol;
 
   public static final TextLabelKind:String = 'TextLabel';
 
@@ -719,6 +780,10 @@ class _Types {
 
   public static final TimelineFrameEntryCauseValue:{ var Advance:String; var Seek:String; } = (cast { Advance: 'Advance', Seek: 'Seek' });
 
+  public static var ToggleControllerTypeKey__ToggleController:flight._internal._Symbol;
+
+  public static var TooltipControllerTypeKey__TooltipController:flight._internal._Symbol;
+
   public static final ToonMaterialKind:String = 'ToonMaterial';
 
   public static final ToonModifierKind:String = 'ToonModifier';
@@ -726,6 +791,8 @@ class _Types {
   public static final TransformMode2D:{ var Normal:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var OnlyTranslation:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoRotationOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScale:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScaleOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; } = (cast { Normal: { reflection: true, rotation: true, scale: true, translation: true }, OnlyTranslation: { reflection: false, rotation: false, scale: false, translation: true }, NoRotationOrReflection: { reflection: false, rotation: false, scale: true, translation: true }, NoScale: { reflection: true, rotation: true, scale: false, translation: true }, NoScaleOrReflection: { reflection: false, rotation: true, scale: false, translation: true } });
 
   public static final TransmissionVolumePbrExtensionKind:String = 'TransmissionVolumePbrExtension';
+
+  public static var TreeViewControllerTypeKey__TreeViewController:flight._internal._Symbol;
 
   public static final TurbulenceForceKind:String = 'TurbulenceForce';
 
@@ -742,6 +809,8 @@ class _Types {
   public static final WellKnownMenuItemRole:{ var copy:String; var cut:String; var delete:String; var paste:String; var pasteAndMatchStyle:String; var redo:String; var selectAll:String; var toggleSpellChecker:String; var undo:String; var about:String; var close:String; var front:String; var hide:String; var hideOthers:String; var mergeAllWindows:String; var minimize:String; var moveTabToNewWindow:String; var quit:String; var selectNextTab:String; var selectPreviousTab:String; var toggleTabBar:String; var unhide:String; var zoom:String; var forceReload:String; var reload:String; var resetZoom:String; var toggleDevTools:String; var toggleFullscreen:String; var zoomIn:String; var zoomOut:String; var help:String; var services:String; var startSpeaking:String; var stopSpeaking:String; var clearRecentDocuments:String; var recentDocuments:String; var appMenu:String; var editMenu:String; var fileMenu:String; var helpMenu:String; var shareMenu:String; var viewMenu:String; var windowMenu:String; } = (cast { copy: 'copy', cut: 'cut', delete: 'delete', paste: 'paste', pasteAndMatchStyle: 'pasteAndMatchStyle', redo: 'redo', selectAll: 'selectAll', toggleSpellChecker: 'toggleSpellChecker', undo: 'undo', about: 'about', close: 'close', front: 'front', hide: 'hide', hideOthers: 'hideOthers', mergeAllWindows: 'mergeAllWindows', minimize: 'minimize', moveTabToNewWindow: 'moveTabToNewWindow', quit: 'quit', selectNextTab: 'selectNextTab', selectPreviousTab: 'selectPreviousTab', toggleTabBar: 'toggleTabBar', unhide: 'unhide', zoom: 'zoom', forceReload: 'forceReload', reload: 'reload', resetZoom: 'resetZoom', toggleDevTools: 'toggleDevTools', toggleFullscreen: 'toggleFullscreen', zoomIn: 'zoomIn', zoomOut: 'zoomOut', help: 'help', services: 'services', startSpeaking: 'startSpeaking', stopSpeaking: 'stopSpeaking', clearRecentDocuments: 'clearRecentDocuments', recentDocuments: 'recentDocuments', appMenu: 'appMenu', editMenu: 'editMenu', fileMenu: 'fileMenu', helpMenu: 'helpMenu', shareMenu: 'shareMenu', viewMenu: 'viewMenu', windowMenu: 'windowMenu' });
 
   public static final WindForceKind:String = 'WindForce';
+
+  public static var WindowControllerTypeKey__WindowController:flight._internal._Symbol;
 
   public static final WireframeMaterialKind:String = 'WireframeMaterial';
 

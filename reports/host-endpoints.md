@@ -1,19 +1,19 @@
 # Host Endpoint Audit
 
-Upstream commit: `cd6b6e71eb472b3a4249830a7743333f019fa7b7`
+Upstream commit: `2cf1c5cef13bfbb76e1ca7646df2aaa68f8c7f4b`
 
 Receiver identities and member use are checker-derived. The shared contract selects explicit host backends where maintained target semantics exist and the maintained dynamic runtime otherwise; generation validates both routes.
 
 | Metric | Count |
 | --- | ---: |
 | Receiver bindings | 10 |
-| Canonical endpoints | 394 |
-| Property accesses | 3684 |
-| Calls | 2337 |
-| Reads | 1094 |
-| Writes | 253 |
-| Backend contract endpoints | 394 |
-| Dynamic-fallback endpoints in use | 12 |
+| Canonical endpoints | 398 |
+| Property accesses | 3633 |
+| Calls | 2313 |
+| Reads | 1095 |
+| Writes | 225 |
+| Backend contract endpoints | 397 |
+| Dynamic-fallback endpoints in use | 15 |
 | Coverage issues | 0 |
 
 | Binding | Member | Operation | Runtime endpoint | Contract | Accesses | Runtime implementation |
@@ -25,10 +25,11 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `Canvas2dBackend` | `clearRect` | `call` | `clearRect` | `backend` | 24 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `clip` | `call` | `clip` | `backend` | 8 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `closePath` | `call` | `closePath` | `backend` | 2 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
+| `Canvas2dBackend` | `createImageData` | `call` | `createImageData` | `backend` | 1 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `createLinearGradient` | `call` | `createLinearGradient` | `backend` | 2 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `createPattern` | `call` | `createPattern` | `backend` | 3 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `createRadialGradient` | `call` | `createRadialGradient` | `backend` | 2 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
-| `Canvas2dBackend` | `drawImage` | `call` | `drawImage` | `backend` | 25 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
+| `Canvas2dBackend` | `drawImage` | `call` | `drawImage` | `backend` | 23 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `ellipse` | `call` | `ellipse` | `backend` | 1 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `fill` | `call` | `fill` | `backend` | 2 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `fillRect` | `call` | `fillRect` | `backend` | 18 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
@@ -37,7 +38,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `Canvas2dBackend` | `filter` | `write` | `filter` | `backend` | 20 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `font` | `write` | `font` | `backend` | 19 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `getContextAttributes` | `call` | `getContextAttributes` | `backend` | 1 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
-| `Canvas2dBackend` | `getImageData` | `call` | `getImageData` | `backend` | 7 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
+| `Canvas2dBackend` | `getImageData` | `call` | `getImageData` | `backend` | 5 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `globalAlpha` | `write` | `globalAlpha` | `backend` | 32 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `globalCompositeOperation` | `write` | `globalCompositeOperation` | `backend` | 24 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `Canvas2dBackend` | `imageSmoothingEnabled` | `read` | `imageSmoothingEnabled` | `backend` | 1 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
@@ -68,19 +69,19 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `Canvas2dBackend` | `translate` | `call` | `translate` | `backend` | 1 | `src/flight/_internal/backend/Canvas2dBackend.hx` |
 | `CanvasElementBackend` | `addEventListener` | `call` | `addEventListener` | `backend` | 2 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
 | `CanvasElementBackend` | `convertToBlob` | `call` | `convertToBlob` | `backend` | 1 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
-| `CanvasElementBackend` | `getContext` | `call` | `getContext` | `backend` | 36 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
+| `CanvasElementBackend` | `getContext` | `call` | `getContext` | `backend` | 27 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
 | `CanvasElementBackend` | `getContext` | `read` | `getContext` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
-| `CanvasElementBackend` | `height` | `read` | `height` | `backend` | 41 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
-| `CanvasElementBackend` | `height` | `write` | `height` | `backend` | 37 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
+| `CanvasElementBackend` | `height` | `read` | `height` | `backend` | 28 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
+| `CanvasElementBackend` | `height` | `write` | `height` | `backend` | 23 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
 | `CanvasElementBackend` | `removeEventListener` | `call` | `removeEventListener` | `backend` | 2 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
 | `CanvasElementBackend` | `style` | `read` | `style` | `dynamic-fallback` | 19 | `src/flight/_internal/_Runtime.hx` |
 | `CanvasElementBackend` | `toDataURL` | `call` | `toDataURL` | `backend` | 1 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
-| `CanvasElementBackend` | `width` | `read` | `width` | `backend` | 43 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
-| `CanvasElementBackend` | `width` | `write` | `width` | `backend` | 37 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
+| `CanvasElementBackend` | `width` | `read` | `width` | `backend` | 30 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
+| `CanvasElementBackend` | `width` | `write` | `width` | `backend` | 23 | `src/flight/_internal/backend/CanvasElementBackend.hx` |
 | `DomDocumentBackend` | `activeElement` | `read` | `activeElement` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
-| `DomDocumentBackend` | `addEventListener` | `call` | `addEventListener` | `backend` | 7 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
+| `DomDocumentBackend` | `addEventListener` | `call` | `addEventListener` | `backend` | 6 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `body` | `read` | `body` | `backend` | 8 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
-| `DomDocumentBackend` | `createElement` | `call` | `createElement` | `backend` | 62 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
+| `DomDocumentBackend` | `createElement` | `call` | `createElement` | `backend` | 52 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `createElement` | `read` | `createElement` | `backend` | 5 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `createTextNode` | `call` | `createTextNode` | `backend` | 2 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `documentElement` | `read` | `documentElement` | `backend` | 2 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
@@ -94,18 +95,18 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomDocumentBackend` | `hidden` | `read` | `hidden` | `backend` | 4 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `pointerLockElement` | `read` | `pointerLockElement` | `backend` | 1 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `querySelector` | `call` | `querySelector` | `backend` | 1 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
-| `DomDocumentBackend` | `removeEventListener` | `call` | `removeEventListener` | `backend` | 7 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
+| `DomDocumentBackend` | `removeEventListener` | `call` | `removeEventListener` | `backend` | 6 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `title` | `read` | `title` | `backend` | 1 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomDocumentBackend` | `title` | `write` | `title` | `backend` | 1 | `src/flight/_internal/backend/DomDocumentBackend.hx` |
 | `DomNavigatorBackend` | `canShare` | `call` | `canShare` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
 | `DomNavigatorBackend` | `clipboard` | `read` | `clipboard` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `connection` | `read` | `connection` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
-| `DomNavigatorBackend` | `geolocation` | `read` | `geolocation` | `backend` | 4 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
+| `DomNavigatorBackend` | `geolocation` | `read` | `geolocation` | `backend` | 2 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `getBattery` | `call` | `getBattery` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `getBattery` | `read` | `getBattery` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `getGamepads` | `call` | `getGamepads` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `getGamepads` | `read` | `getGamepads` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
-| `DomNavigatorBackend` | `gpu` | `read` | `gpu` | `backend` | 4 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
+| `DomNavigatorBackend` | `gpu` | `read` | `gpu` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `hardwareConcurrency` | `read` | `hardwareConcurrency` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
 | `DomNavigatorBackend` | `language` | `read` | `language` | `backend` | 2 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `languages` | `read` | `languages` | `backend` | 2 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
@@ -114,7 +115,6 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomNavigatorBackend` | `mediaSession` | `read` | `mediaSession` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `onLine` | `read` | `onLine` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
 | `DomNavigatorBackend` | `permissions` | `read` | `permissions` | `backend` | 9 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
-| `DomNavigatorBackend` | `platform` | `read` | `platform` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `registerProtocolHandler` | `call` | `registerProtocolHandler` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
 | `DomNavigatorBackend` | `registerProtocolHandler` | `read` | `registerProtocolHandler` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
 | `DomNavigatorBackend` | `requestMIDIAccess` | `read` | `requestMIDIAccess` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
@@ -127,14 +127,14 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomNavigatorBackend` | `vibrate` | `read` | `vibrate` | `backend` | 3 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `virtualKeyboard` | `read` | `virtualKeyboard` | `backend` | 1 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
 | `DomNavigatorBackend` | `wakeLock` | `read` | `wakeLock` | `backend` | 2 | `src/flight/_internal/backend/DomNavigatorBackend.hx` |
-| `DomWindowBackend` | `addEventListener` | `call` | `addEventListener` | `backend` | 23 | `src/flight/_internal/backend/DomWindowBackend.hx` |
+| `DomWindowBackend` | `addEventListener` | `call` | `addEventListener` | `backend` | 22 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `alert` | `call` | `alert` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `alert` | `read` | `alert` | `backend` | 2 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `close` | `call` | `close` | `backend` | 2 | `src/flight/_internal/backend/DomWindowBackend.hx` |
-| `DomWindowBackend` | `close` | `read` | `close` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `confirm` | `call` | `confirm` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `confirm` | `read` | `confirm` | `backend` | 2 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `devicePixelRatio` | `read` | `devicePixelRatio` | `backend` | 4 | `src/flight/_internal/backend/DomWindowBackend.hx` |
+| `DomWindowBackend` | `document` | `read` | `document` | `dynamic-fallback` | 3 | `src/flight/_internal/_Runtime.hx` |
 | `DomWindowBackend` | `focus` | `call` | `focus` | `backend` | 2 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `focus` | `read` | `focus` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `getScreenDetails` | `call` | `getScreenDetails` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
@@ -151,10 +151,10 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `DomWindowBackend` | `open` | `read` | `open` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `prompt` | `call` | `prompt` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `prompt` | `read` | `prompt` | `backend` | 2 | `src/flight/_internal/backend/DomWindowBackend.hx` |
-| `DomWindowBackend` | `removeEventListener` | `call` | `removeEventListener` | `backend` | 22 | `src/flight/_internal/backend/DomWindowBackend.hx` |
+| `DomWindowBackend` | `removeEventListener` | `call` | `removeEventListener` | `backend` | 21 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `resizeTo` | `call` | `resizeTo` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `resizeTo` | `read` | `resizeTo` | `backend` | 1 | `src/flight/_internal/backend/DomWindowBackend.hx` |
-| `DomWindowBackend` | `screen` | `read` | `screen` | `backend` | 6 | `src/flight/_internal/backend/DomWindowBackend.hx` |
+| `DomWindowBackend` | `screen` | `read` | `screen` | `backend` | 8 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `screenX` | `read` | `screenX` | `backend` | 3 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `screenY` | `read` | `screenY` | `backend` | 3 | `src/flight/_internal/backend/DomWindowBackend.hx` |
 | `DomWindowBackend` | `visualViewport` | `read` | `visualViewport` | `backend` | 2 | `src/flight/_internal/backend/DomWindowBackend.hx` |
@@ -168,7 +168,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `bindBuffer` | `call` | `bindBuffer` | `backend` | 47 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `bindFramebuffer` | `call` | `bindFramebuffer` | `backend` | 26 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `bindRenderbuffer` | `call` | `bindRenderbuffer` | `backend` | 3 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `bindTexture` | `call` | `bindTexture` | `backend` | 48 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `bindTexture` | `call` | `bindTexture` | `backend` | 47 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `bindVertexArray` | `call` | `bindVertexArray` | `backend` | 20 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `BLEND` | `read` | `BLEND` | `backend` | 17 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `BLEND_DST_ALPHA` | `read` | `BLEND_DST_ALPHA` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
@@ -237,6 +237,8 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `drawBuffers` | `call` | `drawBuffers` | `backend` | 3 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `drawElements` | `call` | `drawElements` | `backend` | 6 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `drawElementsInstanced` | `call` | `drawElementsInstanced` | `backend` | 3 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `drawingBufferHeight` | `read` | `drawingBufferHeight` | `backend` | 15 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `drawingBufferWidth` | `read` | `drawingBufferWidth` | `backend` | 15 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `DST_COLOR` | `read` | `DST_COLOR` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `DYNAMIC_DRAW` | `read` | `DYNAMIC_DRAW` | `backend` | 11 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `ELEMENT_ARRAY_BUFFER` | `read` | `ELEMENT_ARRAY_BUFFER` | `backend` | 15 | `src/flight/_internal/backend/WebGl2Backend.hx` |
@@ -347,7 +349,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `texParameteri` | `call` | `texParameteri` | `backend` | 50 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `texStorage3D` | `call` | `texStorage3D` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `texSubImage2D` | `call` | `texSubImage2D` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `TEXTURE_2D` | `read` | `TEXTURE_2D` | `backend` | 85 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `TEXTURE_2D` | `read` | `TEXTURE_2D` | `backend` | 84 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `TEXTURE_2D_ARRAY` | `read` | `TEXTURE_2D_ARRAY` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `TEXTURE_3D` | `read` | `TEXTURE_3D` | `backend` | 9 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `TEXTURE_BINDING_2D` | `read` | `TEXTURE_BINDING_2D` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
@@ -393,6 +395,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `ZERO` | `read` | `ZERO` | `backend` | 12 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGpuCanvasContextBackend` | `configure` | `call` | `configure` | `backend` | 1 | `src/flight/_internal/backend/WebGpuCanvasContextBackend.hx` |
 | `WebGpuCanvasContextBackend` | `getCurrentTexture` | `call` | `getCurrentTexture` | `backend` | 1 | `src/flight/_internal/backend/WebGpuCanvasContextBackend.hx` |
+| `WebGpuCanvasContextBackend` | `unconfigure` | `call` | `unconfigure` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
 | `WebGpuDeviceBackend` | `createBindGroup` | `call` | `createBindGroup` | `backend` | 57 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createBindGroupLayout` | `call` | `createBindGroupLayout` | `backend` | 39 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createBuffer` | `call` | `createBuffer` | `backend` | 36 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
@@ -402,6 +405,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGpuDeviceBackend` | `createSampler` | `call` | `createSampler` | `backend` | 10 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createShaderModule` | `call` | `createShaderModule` | `backend` | 35 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createTexture` | `call` | `createTexture` | `backend` | 29 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `destroy` | `call` | `destroy` | `dynamic-fallback` | 2 | `src/flight/_internal/_Runtime.hx` |
 | `WebGpuDeviceBackend` | `features` | `read` | `features` | `dynamic-fallback` | 3 | `src/flight/_internal/_Runtime.hx` |
 | `WebGpuDeviceBackend` | `limits` | `read` | `limits` | `backend` | 7 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `queue` | `read` | `queue` | `backend` | 50 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |

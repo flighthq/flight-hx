@@ -3,34 +3,34 @@ import { definePatches } from '../src/patch/apply.ts';
 export default definePatches([
   {
     expect: {
-      astHash: 'sha256:57c19df3c8d820dc87a2d6f310711ed58fc5e5c570961e25e6996f79d2328c16',
+      astHash: 'sha256:bec59fc28ac2cefeb3a8ee1bd234b5142511bf77ca8db1cb9e6dde7ecdd6caea',
       kind: 'function',
     },
-    fragment: 'tools/generator/patches/bodies/bitmap/createBitmapFromImageSource.hx',
-    id: 'bitmap.create-from-image-source.native-scratch-canvas',
+    fragment: 'tools/generator/patches/bodies/render-gl/createGlContextFromCanvasElement.hx',
+    id: 'render-gl.create-context.bind-native-drawing-buffer-surface',
     operation: 'replaceBody',
     reason:
-      'The native runtime supplies a scratch canvas without a DOM document, so availability must be checked through the canvas backend.',
+      'Native GL contexts lack WebGL drawingBufferWidth/Height fields, so context acquisition associates the caller-owned surface for exact live dimension reads.',
     target: {
-      export: 'createBitmapFromImageSource',
-      package: '@flighthq/bitmap',
-      source: 'upstream/packages/bitmap/src/bitmapFrom.ts',
+      export: 'createGlContextFromCanvasElement',
+      package: '@flighthq/render-gl',
+      source: 'upstream/packages/render-gl/src/glContext.ts',
     },
   },
   {
     expect: {
-      astHash: 'sha256:d54784a6879d18399e017d556950ee8f8fd9be2bd7bca627eb138dfaf56e7a38',
+      astHash: 'sha256:8f338bafdcbe00d549a1c7dde5ccd4b8f9ced16d370fb2ef500efd6e5e5efbd1',
       kind: 'function',
     },
-    fragment: 'tools/generator/patches/bodies/bitmap/explainBitmapReadbackBlockReason.hx',
-    id: 'bitmap.explain-readback.native-scratch-canvas',
+    fragment: 'tools/generator/patches/bodies/host-web/createWebRaster2DSurfaceProvider.hx',
+    id: 'host-web.create-raster-2d-surface-provider.live-dimensions',
     operation: 'replaceBody',
     reason:
-      'The native runtime supplies a scratch canvas without a DOM document, so diagnostics must probe the canvas backend.',
+      'Portable Haxe anonymous structures cannot preserve TypeScript object-literal accessors, so the web provider materializes live canvas dimension descriptors explicitly.',
     target: {
-      export: '_blockReason__explainBitmapReadback',
-      package: '@flighthq/bitmap',
-      source: 'upstream/packages/bitmap/src/explainBitmapReadback.ts',
+      export: 'createWebRaster2DSurfaceProvider',
+      package: '@flighthq/host-web',
+      source: 'upstream/packages/host-web/src/webRaster2DSurface.ts',
     },
   },
   {

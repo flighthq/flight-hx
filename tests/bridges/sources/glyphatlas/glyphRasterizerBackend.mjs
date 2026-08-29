@@ -7,7 +7,9 @@ __syncDependencies();
 
 export const createStubGlyphRasterizerBackend = api.createStubGlyphRasterizerBackend;
 export const explainGlyphRasterizerBackend = api.explainGlyphRasterizerBackend;
+export const explainGlyphRasterizerOperation = api.explainGlyphRasterizerOperation;
 export const getGlyphRasterizerBackend = api.getGlyphRasterizerBackend;
+export const hasGlyphRasterizerOperation = api.hasGlyphRasterizerOperation;
 export const installGlyphRasterizerHostBackend = api.installGlyphRasterizerHostBackend;
 export const observeGlyphRasterizerHostResult = api.observeGlyphRasterizerHostResult;
 export const resetGlyphRasterizerBackendForTest = api.resetGlyphRasterizerBackendForTest;

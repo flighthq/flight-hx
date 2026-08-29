@@ -72,6 +72,11 @@ class RenderWgpu {
     return cast null;
   }
 
+  public static function createWgpuRenderSurface(width:Float, height:Float, ?pixelRatio:Float):Null<flight._internal.dom.HTMLCanvasElement> {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuRenderSurface(width, height, pixelRatio);
+    return cast null;
+  }
+
   public static function createWgpuRenderTarget(state:WgpuRenderState, width:Float, height:Float, ?format:flight._internal.dom.GPUTextureFormat, ?colorSpace:RenderTargetColorSpace, ?sampleCount:Float):WgpuRenderTarget {
     return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuRenderTarget(state, width, height, format, colorSpace, sampleCount);
     return cast null;

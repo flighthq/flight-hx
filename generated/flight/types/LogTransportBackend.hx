@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LogTransportBackend = { var write:String->Void; @:optional var flush:Void->Void; @:optional var dispose:Void->Void; };
+typedef LogTransportBackend = { var write:String->Void; @:optional var flush:Void->Void; @:optional var destroy:Void->Void; };

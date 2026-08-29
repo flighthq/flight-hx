@@ -6,9 +6,11 @@ import flight._internal._Runtime;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.BackendExplanation;
+import flight.types.BackendOperationExplanation;
 import flight.types.Connectivity;
 import flight.types.ConnectivityBackend;
 import flight.types.ConnectivityConnectionType;
+import flight.types.ConnectivityOperation;
 import flight.types.ConnectivityReachability;
 import flight.types.ConnectivityReachabilityOptions;
 import flight.types.ConnectivityStatus;
@@ -193,6 +195,19 @@ class _Connectivity {
 
   @:allow(flight)
   @:keep
+  private static function explainConnectivityOperation(operation:ConnectivityOperation):BackendOperationExplanation {
+    if ((cast ((cast !_Runtime.strictEquals(_Connectivity._custom__connectivity, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Connectivity._custom__connectivity, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'custom', operation: operation };
+    }
+    if ((cast ((cast !_Runtime.strictEquals(_Connectivity._host__connectivity, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Connectivity._host__connectivity, operation)), 'function') : Bool)) : Bool)) {
+      return cast { implemented: true, layer: 'host', operation: operation };
+    }
+    return cast { implemented: false, layer: 'sentinel', operation: operation };
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
   private static function getConnectivityBackend():ConnectivityBackend {
     return cast _Runtime.coalesce(_Runtime.coalesce(_Connectivity._custom__connectivity, function():Dynamic return cast _Connectivity._host__connectivity), function():Dynamic return cast _Connectivity._sentinel__connectivity);
     return cast null;
@@ -200,6 +215,13 @@ class _Connectivity {
 
   public static function getConnectivityStatus(out:ConnectivityStatus):ConnectivityStatus {
     return cast (cast (cast getConnectivityBackend() : ConnectivityBackend) : ConnectivityBackend).getStatus(({ final __callArgument25:Dynamic = out; __callArgument25; }));
+    return cast null;
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function hasConnectivityOperation(operation:ConnectivityOperation):Bool {
+    return cast (cast (cast explainConnectivityOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 

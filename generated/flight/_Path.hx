@@ -620,9 +620,9 @@ class _Path {
   }
 
   public static function explainPathMorphCreation(start:Path, end:Path):PathMorphCreationExplanation {
-    var result:{ var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; } = cast _Runtime.UNDEFINED;
-    result = (cast buildPathMorph(({ final __callArgument48:Dynamic = start; __callArgument48; }), ({ final __callArgument49:Dynamic = end; __callArgument49; })) : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; });
-    return cast { contour: (cast result : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }).contour, reason: (cast _Path.getReason__explainPathMorphCreation((cast (cast result : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }).issue : Float)) : PathMorphCreationReason), supported: _Runtime.strictEquals((cast result : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }).issue, PathMorphIssueNone) };
+    var result:PathMorphBuildResult__pathMorphGeometry = cast _Runtime.UNDEFINED;
+    result = (cast buildPathMorph(({ final __callArgument48:Dynamic = start; __callArgument48; }), ({ final __callArgument49:Dynamic = end; __callArgument49; })) : PathMorphBuildResult__pathMorphGeometry);
+    return cast { contour: (cast result : PathMorphBuildResult__pathMorphGeometry).contour, reason: (cast _Path.getReason__explainPathMorphCreation((cast (cast result : PathMorphBuildResult__pathMorphGeometry).issue : Float)) : PathMorphCreationReason), supported: _Runtime.strictEquals((cast result : PathMorphBuildResult__pathMorphGeometry).issue, PathMorphIssueNone) };
     return cast null;
   }
 
@@ -636,9 +636,9 @@ class _Path {
   }
 
   public static function explainStrokePathTessellation(path:Path, style:StrokeStyle, tolerance:Float = 0.25):StrokePathTessellationExplanation {
-    var geometry:{ var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; } = cast _Runtime.UNDEFINED;
-    geometry = (cast buildStrokePathGeometry(({ final __callArgument52:Dynamic = path; __callArgument52; }), ({ final __callArgument53:Dynamic = style; __callArgument53; }), (cast tolerance : Float)) : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; });
-    return cast { reason: (cast _Path.getReason__explainStrokePathTessellation((cast (cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).issue : Float)) : StrokePathTessellationReason), subpath: (cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).issueSubpath, supported: _Runtime.strictEquals((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).issue, StrokePathTessellationIssueNone) };
+    var geometry:StrokePathGeometry__strokePathGeometry = cast _Runtime.UNDEFINED;
+    geometry = (cast buildStrokePathGeometry(({ final __callArgument52:Dynamic = path; __callArgument52; }), ({ final __callArgument53:Dynamic = style; __callArgument53; }), (cast tolerance : Float)) : StrokePathGeometry__strokePathGeometry);
+    return cast { reason: (cast _Path.getReason__explainStrokePathTessellation((cast (cast geometry : StrokePathGeometry__strokePathGeometry).issue : Float)) : StrokePathTessellationReason), subpath: (cast geometry : StrokePathGeometry__strokePathGeometry).issueSubpath, supported: _Runtime.strictEquals((cast geometry : StrokePathGeometry__strokePathGeometry).issue, StrokePathTessellationIssueNone) };
     return cast null;
   }
 
@@ -2134,7 +2134,7 @@ class _Path {
   public static final typedPool__pathMeshPool:Array<PathMeshTyped> = (cast cast ([] : Array<Dynamic>));
 
   public static function createPathMorph(start:Path, end:Path):Null<PathMorph> {
-    return cast (cast (cast buildPathMorph(({ final __callArgument292:Dynamic = start; __callArgument292; }), ({ final __callArgument293:Dynamic = end; __callArgument293; })) : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }) : { var contour:Null<Float>; var issue:Float; var morph:Null<PathMorph>; }).morph;
+    return cast (cast (cast buildPathMorph(({ final __callArgument292:Dynamic = start; __callArgument292; }), ({ final __callArgument293:Dynamic = end; __callArgument293; })) : PathMorphBuildResult__pathMorphGeometry) : PathMorphBuildResult__pathMorphGeometry).morph;
     return cast null;
   }
 
@@ -2665,13 +2665,13 @@ class _Path {
 
   public static function strokePath(path:Path, style:StrokeStyle, tolerance:Float = 0.25):Path {
     var result:Path = cast _Runtime.UNDEFINED;
-    var geometry:{ var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; } = cast _Runtime.UNDEFINED;
+    var geometry:StrokePathGeometry__strokePathGeometry = cast _Runtime.UNDEFINED;
     result = (cast createPath(({ final __callArgument316:Dynamic = 'nonZero'; __callArgument316; })) : Path);
-    geometry = (cast buildStrokePathGeometry(({ final __callArgument318:Dynamic = path; __callArgument318; }), ({ final __callArgument319:Dynamic = style; __callArgument319; }), (cast tolerance : Float)) : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; });
+    geometry = (cast buildStrokePathGeometry(({ final __callArgument318:Dynamic = path; __callArgument318; }), ({ final __callArgument319:Dynamic = style; __callArgument319; }), (cast tolerance : Float)) : StrokePathGeometry__strokePathGeometry);
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, 'length') : Float)) : Bool)) {
-        _Path.appendPieceOutline__strokePath(({ final __callArgument322:Dynamic = result; __callArgument322; }), ({ final __callArgument323:Dynamic = flight._internal._StaticIndex.readArray((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, i); __callArgument323; }));
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry : StrokePathGeometry__strokePathGeometry).pieces, 'length') : Float)) : Bool)) {
+        _Path.appendPieceOutline__strokePath(({ final __callArgument322:Dynamic = result; __callArgument322; }), ({ final __callArgument323:Dynamic = flight._internal._StaticIndex.readArray((cast geometry : StrokePathGeometry__strokePathGeometry).pieces, i); __callArgument323; }));
         i++;
       }
     }
@@ -3451,15 +3451,15 @@ class _Path {
   }
 
   public static function tessellateStrokePath(path:Path, style:StrokeStyle, tolerance:Float = 0.25):Null<PathMesh> {
-    var geometry:{ var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; } = cast _Runtime.UNDEFINED;
+    var geometry:StrokePathGeometry__strokePathGeometry = cast _Runtime.UNDEFINED;
     var mesh:PathMesh = cast _Runtime.UNDEFINED;
-    geometry = (cast buildStrokePathGeometry(({ final __callArgument424:Dynamic = path; __callArgument424; }), ({ final __callArgument425:Dynamic = style; __callArgument425; }), (cast tolerance : Float)) : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; });
-    if ((cast !_Runtime.strictEquals((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).issue, StrokePathTessellationIssueNone) : Bool)) { return cast null; }
+    geometry = (cast buildStrokePathGeometry(({ final __callArgument424:Dynamic = path; __callArgument424; }), ({ final __callArgument425:Dynamic = style; __callArgument425; }), (cast tolerance : Float)) : StrokePathGeometry__strokePathGeometry);
+    if ((cast !_Runtime.strictEquals((cast geometry : StrokePathGeometry__strokePathGeometry).issue, StrokePathTessellationIssueNone) : Bool)) { return cast null; }
     mesh = (cast { indices: cast ([] : Array<Dynamic>), vertices: cast ([] : Array<Dynamic>) });
     {
       var i:Float = 0.0;
-      while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, 'length') : Float)) : Bool)) {
-        _Path.appendStrokePieceMesh__tessellateStrokePath(({ final __callArgument428:Dynamic = mesh; __callArgument428; }), ({ final __callArgument429:Dynamic = flight._internal._StaticIndex.readArray((cast geometry : { var issue:Float; var issueSubpath:Null<Float>; var pieces:Array<{ var closed:Bool; var endCap:Array<Float>; var left:Array<Float>; var right:Array<Float>; var startCap:Array<Float>; }>; }).pieces, i); __callArgument429; }));
+      while ((cast ((cast i : Float) < (cast _Runtime.field((cast geometry : StrokePathGeometry__strokePathGeometry).pieces, 'length') : Float)) : Bool)) {
+        _Path.appendStrokePieceMesh__tessellateStrokePath(({ final __callArgument428:Dynamic = mesh; __callArgument428; }), ({ final __callArgument429:Dynamic = flight._internal._StaticIndex.readArray((cast geometry : StrokePathGeometry__strokePathGeometry).pieces, i); __callArgument429; }));
         i++;
       }
     }

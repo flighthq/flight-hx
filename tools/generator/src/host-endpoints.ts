@@ -45,7 +45,7 @@ export const hostReceiverContracts: readonly HostReceiverContract[] = [
   {
     binding: 'WebGl2Backend',
     dynamicFallback: false,
-    receiverTypes: ['WebGL2RenderingContext'],
+    receiverTypes: ['GlContext', 'WebGL2RenderingContext'],
     runtimePath: 'src/flight/_internal/backend/WebGl2Backend.hx',
   },
   {
@@ -81,6 +81,7 @@ const canvas2dCalls = [
   'clearRect',
   'clip',
   'closePath',
+  'createImageData',
   'createLinearGradient',
   'createPattern',
   'createRadialGradient',
@@ -267,6 +268,8 @@ const webGl2Reads = [
   'DEPTH_TEST',
   'DEPTH_WRITEMASK',
   'DRAW_FRAMEBUFFER',
+  'drawingBufferHeight',
+  'drawingBufferWidth',
   'DST_COLOR',
   'DYNAMIC_DRAW',
   'ELEMENT_ARRAY_BUFFER',
@@ -369,6 +372,12 @@ const webGl2Reads = [
   'VIEWPORT',
   'ZERO',
 ] as const;
+
+const webGl2ContextFieldReads = new Set<string>(['drawingBufferHeight', 'drawingBufferWidth']);
+
+export function webGl2ReadUsesContextField(member: string): boolean {
+  return webGl2ContextFieldReads.has(member);
+}
 
 const canvasElementCalls = [
   'addEventListener',
@@ -562,7 +571,9 @@ export function requireHostEndpoint(
         ? 'method'
         : operation === 'read'
           ? binding === 'WebGl2Backend'
-            ? 'constant'
+            ? webGl2ReadUsesContextField(member)
+              ? 'field'
+              : 'constant'
             : 'field'
           : 'property';
     throw new Error(`${surface} ${kind} is not in the host endpoint contract: ${member}`);
