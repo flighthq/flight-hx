@@ -21,11 +21,11 @@ import flight._Font.installFontLoadingHostBackend;
 import flight._Bitmap.installBitmapReadbackHostBackend;
 import flight._Bitmap.installBitmapEncodeHostBackend;
 import flight._Video.installVideoCapabilityHostBackend;
-// RECONCILED vs builder's develop tree: text-shaping installs through the
-// measure-provider mechanism in flight._TextShaper (setTextLayoutMeasureProvider),
-// not flight._TextLayout.setTextShaperBackend. Exact fn/signature to confirm on a
-// clean compile (builder's WIP tree still has generation bugs, e.g. ButtonController).
-import flight._TextShaper.setTextLayoutMeasureProvider;
+// RECONCILED (compiled vs develop 2bb4870f): text-shaping installs via the
+// measure-provider seam flight._TextLayout.setTextLayoutMeasureProvider —
+// TextShaperBackend itself is audit-only in develop, so measurement is the
+// supported install point.
+import flight._TextLayout.setTextLayoutMeasureProvider;
 import flight._Screen.installScreenHostBackend;
 import flight._Platform.installPlatformHostBackend;
 import flight._Lifecycle.installLifecycleHostBackend;

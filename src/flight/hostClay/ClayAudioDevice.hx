@@ -103,7 +103,7 @@ class ClayAudioDevice {
   /** Called by the host frame pump to fire ended callbacks (SoLoud has no event). */
   public static function pumpEnded():Void {
     for (s in sources) {
-      if (s.playing != null && s.ended != null && !Clay.app.audio.stateOf(s.playing).match(cast 'playing')) {
+      if (s.playing != null && s.ended != null && Clay.app.audio.stateOf(s.playing) == clay.audio.AudioState.STOPPED) {
         final cb = s.ended; s.playing = null; s.ended = null; cb();
       }
     }
