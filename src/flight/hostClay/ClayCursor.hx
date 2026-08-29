@@ -1,8 +1,9 @@
 // Maintained host adapter: Flight cursor backend for the Clay host.
-// Clay counterpart of flight.hostLime.LimeCursor. SKELETON: Clay exposes raw
-// input events (clay.Events.mouse*) but the mapping of Flight's CSS-style
-// cursor names onto a Clay/SDL system cursor is the fill-in — SDL_SetCursor via
-// Clay's runtime. Until wired, setCursor is a no-op so the seam is installable.
+// HONEST CAPABILITY: Clay's SDL binding (clay.sdl.SDL) exposes NO cursor surface
+// — no SDL_CreateSystemCursor / SDL_SetCursor. With nothing to call, setCursor is
+// a no-op (the pointer keeps the system default) rather than pretending to change
+// it. Wiring real cursors would require binding SDL's cursor functions in Clay's
+// linc layer — out of scope here. See host-develop-adaptation.md.
 package flight.hostClay;
 
 #if clay
@@ -12,10 +13,8 @@ class ClayCursor {
   /** Allocation entry point, Flight-style: `createClayCursorBackend()`. */
   public static function createClayCursorBackend():CursorBackend {
     return cast {
-      setCursor: function(_cursor:Null<Dynamic>):Void {
-        // TODO(hostClay): map CSS cursor names -> SDL system cursor via Clay's
-        // runtime (parallels LimeCursor's MouseCursor mapping).
-      },
+      // No-op: Clay exposes no cursor API to honor the requested shape.
+      setCursor: function(_cursor:Null<Dynamic>):Void {},
     };
   }
 }
