@@ -39,3 +39,11 @@ The existing hostClay adapters (app/loop/net/cursor/storage/filesystem/clipboard
 2. Compile `--macro include('flight.hostClay')` / `include('flight.hostLime')` against the new generated `flight.types.*` + `flight._*` + Clay(`8ae994a`)/Lime; reconcile predicted names.
 3. Re-run the hostClay GL coverage gate; add coverage gates for the new seams if useful.
 4. Native smoke remains the gated end-to-end proof.
+
+## Completion status (write-ahead committed)
+
+**hostClay — comprehensive (21 seams, `#if clay`).** New develop backends: audio-device (full over SoLoud), audio (`canPlayType`), input-ingress (`clay.Events`→sink), net-install, font (registry + stb), bitmap readback (`GL.readPixels`) + encode (stb), text-shaper (stb metrics), video (honest negative), screen/platform/lifecycle/haptics (sentinel-copy + Clay overrides). Existing seams upgraded to real: filesystem (`sys.io`) and storage (write-through JSON). `HostClay.enableHostClay()` installs all of them. Remaining hostClay: clipboard/cursor stay honest sentinels until SDL access via Clay's runtime is wired; app focus/paths is partial.
+
+**hostLime — the genuinely new-shape seams only (`#if (lime && flight_host_develop)`).** Written: `LimeInputIngress` and `LimeAudioDevice` (reshaping builder's Lime logic onto the new seams). NOT rewritten here: builder already owns mature `LimeFonts`, image loading, `LimeScreen`/`LimePlatform`/`LimeLifecycle`/`LimeHaptics`, `LimeNet`, and glyph rasterization — reconciling those to the develop seam shapes (FontLoadingBackend, Bitmap\*, TextShaper, the net install slot, capability backends) is builder's on their own code during the regenerate, to avoid a blind rewrite that loses their nuances. The blueprint rows above are the spec for that reconciliation.
+
+Everything is write-ahead: it compiles only after builder's develop regenerate lands. CI is unaffected — hostClay's `#if clay` is never built in CI, and hostLime's extra `flight_host_develop` guard keeps it out of `test:haxe:lime`.
