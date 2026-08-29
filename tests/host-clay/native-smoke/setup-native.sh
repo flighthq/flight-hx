@@ -11,13 +11,13 @@ DEPS="${1:-$PWD/.native-deps}"
 mkdir -p "$DEPS"
 cd "$DEPS"
 
-clone() { # repo, dir, [checkout]
+clone() { # repo, dir
   if [ ! -d "$2/.git" ]; then git clone --recursive --depth 1 "https://github.com/$1" "$2"; fi
-  if [ -n "${3:-}" ]; then git -C "$2" fetch --depth 1 origin "$3" && git -C "$2" checkout "$3" && git -C "$2" submodule update --init --recursive; fi
 }
 
-# Clay pinned at 8ae994a (pre-GraphicsBatcher refactor: self-consistent, compiles clean).
-clone ceramic-engine/clay        clay 8ae994ada50918a403dcb10efdfcb0dcad72aa3 2>/dev/null || clone ceramic-engine/clay clay
+# The smoke only needs Clay's clay.buffers (typed arrays), not its graphics driver,
+# so any Clay revision works — clone the default branch.
+clone ceramic-engine/clay        clay
 clone ceramic-engine/linc_opengl linc_opengl
 clone ceramic-engine/linc_stb    linc_stb
 clone jeremyfa/linc_soloud       linc_soloud
