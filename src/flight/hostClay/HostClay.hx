@@ -21,7 +21,11 @@ import flight._Font.installFontLoadingHostBackend;
 import flight._Bitmap.installBitmapReadbackHostBackend;
 import flight._Bitmap.installBitmapEncodeHostBackend;
 import flight._Video.installVideoCapabilityHostBackend;
-import flight._TextLayout.setTextShaperBackend;
+// RECONCILED vs builder's develop tree: text-shaping installs through the
+// measure-provider mechanism in flight._TextShaper (setTextLayoutMeasureProvider),
+// not flight._TextLayout.setTextShaperBackend. Exact fn/signature to confirm on a
+// clean compile (builder's WIP tree still has generation bugs, e.g. ButtonController).
+import flight._TextShaper.setTextLayoutMeasureProvider;
 import flight._Screen.installScreenHostBackend;
 import flight._Platform.installPlatformHostBackend;
 import flight._Lifecycle.installLifecycleHostBackend;
@@ -65,7 +69,7 @@ class HostClay {
     installBitmapReadbackHostBackend(ClayBitmap.createClayBitmapReadbackBackend());
     installBitmapEncodeHostBackend(ClayBitmap.createClayBitmapEncodeBackend());
     installVideoCapabilityHostBackend(ClayVideo.createClayVideoCapabilityBackend());
-    setTextShaperBackend(ClayTextShaper.createClayTextShaperBackend());
+    setTextLayoutMeasureProvider(ClayTextShaper.createClayTextShaperBackend());
     installScreenHostBackend(ClayScreen.createClayScreenBackend());
     installPlatformHostBackend(ClayPlatform.createClayPlatformBackend());
     installLifecycleHostBackend(ClayLifecycle.createClayLifecycleBackend());
