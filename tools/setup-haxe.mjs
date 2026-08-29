@@ -54,7 +54,9 @@ function installCompiler() {
 
   rmSync(temporaryDirectory, { force: true, recursive: true });
   mkdirSync(temporaryDirectory, { recursive: true });
-  run('tar', ['-xzf', archive, '--strip-components=1', '-C', temporaryDirectory]);
+  // .zip (Windows) is read by bsdtar via autodetect (-xf); .tar.gz needs -xzf.
+  const extractFlags = archive.endsWith('.zip') ? '-xf' : '-xzf';
+  run('tar', [extractFlags, archive, '--strip-components=1', '-C', temporaryDirectory]);
   rmSync(installDirectory, { force: true, recursive: true });
   renameSync(temporaryDirectory, installDirectory);
   process.stdout.write(`Installed Haxe ${version} in ${path.relative(workspace, installDirectory)}.\n`);
@@ -83,12 +85,28 @@ function run(command, args, options = {}) {
 }
 
 function selectRelease() {
-  if (process.platform === 'linux' && process.arch === 'x64') {
-    const file = `haxe-${version}-linux64.tar.gz`;
-    return {
-      file,
+  // Pinned official Haxe archives per host. Only x64 builds are published, so CI
+  // must run the non-Linux legs on x64 runners (macos-13, windows). Extend here
+  // for a new host rather than reaching for a global lix/Haxe install.
+  const releases = {
+    'linux/x64': {
+      file: `haxe-${version}-linux64.tar.gz`,
       sha256: 'a156b3d039daa572f1f9329870ee753e3c39b7514fe8c818069323579659acca',
-      url: `https://github.com/HaxeFoundation/haxe/releases/download/${version}/${file}`,
+    },
+    'darwin/x64': {
+      file: `haxe-${version}-osx.tar.gz`,
+      sha256: '1d355cb28bc25784b33acce023caeb28d50ccb14e953134a62b889697947efdc',
+    },
+    'win32/x64': {
+      file: `haxe-${version}-win64.zip`,
+      sha256: '29f7acb0fb9fc66a2b9f6bd9453af3474ccb14ebd9fd0142f351d7311c4010c9',
+    },
+  };
+  const release = releases[`${process.platform}/${process.arch}`];
+  if (release) {
+    return {
+      ...release,
+      url: `https://github.com/HaxeFoundation/haxe/releases/download/${version}/${release.file}`,
     };
   }
   throw new Error(
