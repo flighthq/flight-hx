@@ -17,6 +17,11 @@ import flight._Media.installAudioDeviceHostBackend;
 import flight._Audio.installAudioHostBackend;
 import flight._Input.installInputIngressHostBackend;
 import flight._Net.installNetHostBackend;
+import flight._Font.installFontLoadingHostBackend;
+import flight._Bitmap.installBitmapReadbackHostBackend;
+import flight._Bitmap.installBitmapEncodeHostBackend;
+import flight._Video.installVideoCapabilityHostBackend;
+import flight._TextLayout.setTextShaperBackend;
 #if sys
 import flight._FileSystem.installFileSystemHostBackend;
 import flight._Storage.installStorageHostBackend;
@@ -52,6 +57,11 @@ class HostClay {
     installAudioDeviceHostBackend(ClayAudioDevice.createClayAudioDeviceBackend());
     installInputIngressHostBackend(ClayInputIngress.createClayInputIngressBackend());
     installNetHostBackend(ClayNet.createClayNetBackend());
+    installFontLoadingHostBackend(ClayFont.createClayFontLoadingBackend());
+    installBitmapReadbackHostBackend(ClayBitmap.createClayBitmapReadbackBackend());
+    installBitmapEncodeHostBackend(ClayBitmap.createClayBitmapEncodeBackend());
+    installVideoCapabilityHostBackend(ClayVideo.createClayVideoCapabilityBackend());
+    setTextShaperBackend(ClayTextShaper.createClayTextShaperBackend());
 
     #if sys
     installFileSystemHostBackend(ClayFileSystem.createClayFileSystemBackend());
