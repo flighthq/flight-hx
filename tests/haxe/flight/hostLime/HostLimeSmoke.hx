@@ -24,6 +24,9 @@ class HostLimeSmoke {
     testImage(application);
     #end
     testInstallPrecedence(application);
+    #if !js
+    GlDrawingBufferSmoke.run();
+    #end
     #if sys
     testFileSystem();
     testStorage();

@@ -121,6 +121,7 @@ class CoreSmoke {
     TypedStructClassSmoke.run();
     TypedStructParticleClassSmoke.run();
     RuntimeToolkitSmoke.run();
+    GlDrawingBufferSmoke.run();
 
     final box = flight.Mesh.createBoxMeshGeometry(2, 4, 6);
     if (box.bounds == null || box.bounds.min.x != -1 || box.bounds.max.y != 2 || box.bounds.max.z != 3) {
