@@ -22,6 +22,10 @@ import flight._Bitmap.installBitmapReadbackHostBackend;
 import flight._Bitmap.installBitmapEncodeHostBackend;
 import flight._Video.installVideoCapabilityHostBackend;
 import flight._TextLayout.setTextShaperBackend;
+import flight._Screen.installScreenHostBackend;
+import flight._Platform.installPlatformHostBackend;
+import flight._Lifecycle.installLifecycleHostBackend;
+import flight._Haptics.installHapticsHostBackend;
 #if sys
 import flight._FileSystem.installFileSystemHostBackend;
 import flight._Storage.installStorageHostBackend;
@@ -62,14 +66,18 @@ class HostClay {
     installBitmapEncodeHostBackend(ClayBitmap.createClayBitmapEncodeBackend());
     installVideoCapabilityHostBackend(ClayVideo.createClayVideoCapabilityBackend());
     setTextShaperBackend(ClayTextShaper.createClayTextShaperBackend());
+    installScreenHostBackend(ClayScreen.createClayScreenBackend());
+    installPlatformHostBackend(ClayPlatform.createClayPlatformBackend());
+    installLifecycleHostBackend(ClayLifecycle.createClayLifecycleBackend());
+    installHapticsHostBackend(ClayHaptics.createClayHapticsBackend());
 
     #if sys
     installFileSystemHostBackend(ClayFileSystem.createClayFileSystemBackend());
     installStorageHostBackend(ClayStorage.createClayStorageBackend());
     #end
-    // TODO(hostClay): install screen/platform/lifecycle/haptics and font/bitmap
-    // (linc_stb) once their Clay adapters land. Cursor and the GL surface are
-    // wired by the app, not installed.
+    // Cursor and the GL surface are wired by the app (window-scoped), not
+    // installed here. Input-ingress/audio-device backends are installed; the app
+    // creates devices/attaches sources and forwards clay.Events to the dispatchers.
   }
 
   /** Drive Flight's application loop + SoLoud ended callbacks from Clay's frame. */
