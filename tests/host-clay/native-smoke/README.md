@@ -17,11 +17,11 @@ The program `Sys.exit(1)`s if any check fails, so the CI job goes red.
 
 ## How CI runs it
 
-`.github/workflows/hostclay-native-smoke.yml` (on `workflow_dispatch` and on changes under `src/flight/hostClay/**` or this directory):
+The `clay-native` job of `.github/workflows/host-backends.yml` (on `workflow_dispatch` and on changes under `src/flight/hostClay/**` or the host test dirs):
 
 1. `apt` installs SDL2, GLEW, Mesa (software GL), ALSA, OpenAL, Xvfb.
 2. Haxe 4.3.7 + hxcpp.
-3. `setup-native.sh` clones Clay + the linc bindings **with submodules** (the vendored GLEW and SoLoud core), registers them via `haxelib dev`, and writes an ALSA null device so SoLoud can initialize without a sound card.
+3. `setup-native.sh` fetches Clay + the linc bindings at **pinned revisions** (fetch-by-SHA; the vendored GLEW and SoLoud core come from submodules, with system-GLEW / curl fallbacks), registers them via `haxelib dev`, and writes an ALSA null device so SoLoud can initialize without a sound card.
 4. Compiles `NativeSmoke` to cpp and runs it under `xvfb-run` with `LIBGL_ALWAYS_SOFTWARE=1`.
 
 ## Run locally

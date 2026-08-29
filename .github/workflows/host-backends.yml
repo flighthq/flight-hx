@@ -1,0 +1,95 @@
+name: host backends
+
+# Confirms Flight's host backends actually BUILD and RUN on GitHub Actions — one
+# job per backend so a per-host regression is visible by name. These gates are
+# heavyweight (native hxcpp compiles, a real browser) and touch the network
+# (Clay/linc clones, Playwright), so they live outside the fast, fully-pinned
+# ci.yml per-push lane (mirroring parity.yml's split) and are path-filtered to
+# the host sources they cover.
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - 'src/flight/hostClay/**'
+      - 'src/flight/hostLime/**'
+      - 'tests/host-clay/**'
+      - 'tests/host-web/**'
+      - '.github/workflows/host-backends.yml'
+  pull_request:
+    paths:
+      - 'src/flight/hostClay/**'
+      - 'src/flight/hostLime/**'
+      - 'tests/host-clay/**'
+      - 'tests/host-web/**'
+      - '.github/workflows/host-backends.yml'
+
+concurrency:
+  group: host-backends-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  clay-native:
+    # hostClay's core native paths on hxcpp, headless: software Mesa GL under Xvfb
+    # + an ALSA null device. Exercises the same native libraries the Clay adapters
+    # call (linc_opengl, linc_stb, SDL, SoLoud) and asserts real results.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install system native libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libsdl2-dev libglew-dev libgl1-mesa-dev libgl1-mesa-dri mesa-utils \
+            libx11-dev libasound2-dev libopenal-dev xvfb
+
+      - name: Set up Haxe + hxcpp
+        uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.3.7
+      - run: haxelib install hxcpp --always --quiet
+
+      - name: Fetch Clay + linc native deps (pinned)
+        run: bash tests/host-clay/native-smoke/setup-native.sh "$RUNNER_TEMP/native-deps"
+
+      - name: Compile the native smoke (hxcpp)
+        run: |
+          haxe -cp tests/host-clay/native-smoke \
+            -lib clay -lib linc_opengl -lib linc_stb -lib linc_soloud \
+            -D clay -D clay_native -main NativeSmoke -cpp build/native-smoke
+
+      - name: Run the native smoke (Xvfb + software GL + ALSA null)
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: xvfb-run -a -s "-screen 0 128x128x24 -ac" ./build/native-smoke/NativeSmoke
+
+  lime-host:
+    # hostLime on the real openfl/lime toolchain (restored by the shared toolchain
+    # action via `npm run setup`): the behavioral interp smoke plus the html5 JS
+    # compile. Native lime windowing is a follow-up — see tests/host-web/README and
+    # tests/host-clay/native-smoke/README for the native-vs-binding distinction.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/toolchain
+      - name: hostLime interp smoke
+        run: npm run test:haxe:lime
+      - name: hostLime html5 compile
+        run: npm run test:haxe:lime:html5
+
+  web-browser:
+    # hostWeb: the compiled Flight SDK loaded and initialized in a REAL headless
+    # Chromium (SwiftShader), plus a real WebGL2 render + readback — the web analog
+    # of clay-native's GL smoke, and the signal node + jsdom cannot give.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/toolchain
+      - name: Build Flight to JS
+        run: npm run build:haxe:js
+      - name: Install Playwright Chromium
+        run: |
+          npm i --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Run the browser smoke
+        run: node tests/host-web/browser-smoke/smoke.mjs
