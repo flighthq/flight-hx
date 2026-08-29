@@ -1,6 +1,6 @@
 # hostClay native smoke (CI)
 
-A GitHub Actions job that **builds and runs** hostClay's core native paths on a stock `ubuntu-latest` runner — headless, with software Mesa GL under Xvfb and an ALSA null device — and fails loudly on any regression. This is the confirm-it-works-in-CI counterpart to the Haxe/JS compile checks: it proves the native libraries hostClay's adapters call actually link and run.
+A GitHub Actions job (the `clay-native` job of `host-backends.yml`) that **builds and runs** hostClay's core native paths and fails loudly on any regression. It fans out across two operating systems — **Linux** (headless: software Mesa GL under Xvfb + an ALSA null device) and **macOS** (system GL + CoreAudio) — so a per-OS native regression is visible by name. This is the confirm-it-works-in-CI counterpart to the Haxe/JS compile checks: it proves the native libraries hostClay's adapters call actually link and run. (Windows-native is a follow-up — its SDL/GLEW/hxcpp toolchain is a separate setup.)
 
 ## What it verifies
 
@@ -19,10 +19,10 @@ The program `Sys.exit(1)`s if any check fails, so the CI job goes red.
 
 The `clay-native` job of `.github/workflows/host-backends.yml` (on `workflow_dispatch` and on changes under `src/flight/hostClay/**` or the host test dirs):
 
-1. `apt` installs SDL2, GLEW, Mesa (software GL), ALSA, OpenAL, Xvfb.
+1. System native libraries: `apt` on Linux (SDL2, GLEW, Mesa software GL, ALSA, OpenAL, Xvfb); Homebrew on macOS (`sdl2`, `glew`).
 2. Haxe 4.3.7 + hxcpp.
-3. `setup-native.sh` fetches Clay + the linc bindings at **pinned revisions** (fetch-by-SHA; the vendored GLEW and SoLoud core come from submodules, with system-GLEW / curl fallbacks), registers them via `haxelib dev`, and writes an ALSA null device so SoLoud can initialize without a sound card.
-4. Compiles `NativeSmoke` to cpp and runs it under `xvfb-run` with `LIBGL_ALWAYS_SOFTWARE=1`.
+3. `setup-native.sh` fetches Clay + the linc bindings at **pinned revisions** (fetch-by-SHA; the vendored GLEW and SoLoud core come from submodules, with system-GLEW / curl fallbacks), registers them via `haxelib dev`, and on Linux writes an ALSA null device so SoLoud can initialize without a sound card (macOS uses CoreAudio). The script branches on `uname` for the per-OS include paths.
+4. Compiles `NativeSmoke` to cpp (the `@:buildXml` selects Linux vs macOS link flags) and runs it — under `xvfb-run` with `LIBGL_ALWAYS_SOFTWARE=1` on Linux, directly on macOS.
 
 ## Run locally
 

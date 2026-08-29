@@ -41,9 +41,19 @@ fetch_pin  ceramic-engine/linc_stb    linc_stb    8fcaea2d55d0fdefb819945d9ec370
 # linc_soloud vendors the SoLoud core as a submodule (fallback: curl, below).
 fetch_head jeremyfa/linc_soloud       linc_soloud; submods linc_soloud
 
+# Per-OS system include dir for the GLEW fallback (Linux apt vs macOS Homebrew).
+case "$(uname -s)" in
+  Darwin) SYS_GL_INC="$( [ -d /opt/homebrew/include/GL ] && echo /opt/homebrew/include || echo /usr/local/include )/GL" ;;
+  *)      SYS_GL_INC="/usr/include/GL" ;;
+esac
+
 # Fallbacks if a vendored submodule did not populate:
 GLEWH="linc_opengl/lib/glew/include/GL/glew.h"
-if [ ! -f "$GLEWH" ]; then mkdir -p "$(dirname "$GLEWH")"; ln -sf /usr/include/GL/glew.h "$GLEWH"; ln -sf /usr/include/GL/glxew.h "$(dirname "$GLEWH")/glxew.h" 2>/dev/null || true; fi
+if [ ! -f "$GLEWH" ]; then
+  mkdir -p "$(dirname "$GLEWH")"
+  ln -sf "$SYS_GL_INC/glew.h" "$GLEWH"
+  ln -sf "$SYS_GL_INC/glxew.h" "$(dirname "$GLEWH")/glxew.h" 2>/dev/null || true
+fi
 if [ ! -f "linc_soloud/lib/soloud/include/soloud.h" ]; then
   curl -fsSL "https://github.com/jarikomppa/soloud/archive/refs/heads/master.tar.gz" -o /tmp/soloud.tgz
   tar xzf /tmp/soloud.tgz -C /tmp
@@ -56,7 +66,10 @@ haxelib dev linc_opengl "$DEPS/linc_opengl" >/dev/null
 haxelib dev linc_stb    "$DEPS/linc_stb"    >/dev/null
 haxelib dev linc_soloud "$DEPS/linc_soloud" >/dev/null
 
-# ALSA null device so SoLoud/miniaudio initializes without a sound card.
-printf 'pcm.!default { type null }\nctl.!default { type null }\n' > "$HOME/.asoundrc"
+# Linux: an ALSA null device so SoLoud initializes without a sound card. macOS
+# uses CoreAudio, which SoLoud opens without extra setup.
+if [ "$(uname -s)" = "Linux" ]; then
+  printf 'pcm.!default { type null }\nctl.!default { type null }\n' > "$HOME/.asoundrc"
+fi
 
 echo "native deps ready in $DEPS"

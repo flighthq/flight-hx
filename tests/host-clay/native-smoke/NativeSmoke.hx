@@ -1,8 +1,9 @@
-// Native functional smoke for hostClay's core paths, run on hxcpp under Xvfb +
-// software Mesa GL + an ALSA null device. Exercises the SAME native libraries
-// hostClay's adapters call, and asserts real results (a rendered pixel, a valid
-// PNG, a clipboard roundtrip, an active audio voice). Exits non-zero on any
-// failure so CI fails loudly. See tests/host-clay/native-smoke/README.md.
+// Native functional smoke for hostClay's core paths, run on hxcpp. Exercises the
+// SAME native libraries hostClay's adapters call, and asserts real results (a
+// rendered pixel, a valid PNG, a clipboard roundtrip, an active audio voice).
+// Exits non-zero on any failure so CI fails loudly. Runs on more than one OS:
+// Linux (software Mesa GL under Xvfb + an ALSA null device) and macOS (system GL
+// + CoreAudio). See tests/host-clay/native-smoke/README.md.
 //
 //   ClayGlContext / GlSurface  -> linc_opengl (viewport/clearColor/clear/readPixels)
 //   ClayBitmap (encode)        -> linc_stb    (write_png_to_mem)
@@ -13,9 +14,13 @@ import stb.ImageWrite;
 import soloud.Soloud;
 import soloud.Wav;
 
+// SDL2/GLEW/GL wiring, per OS. Linux links against the apt packages on the
+// default include path; macOS adds the Homebrew include/lib prefixes (Apple
+// Silicon and Intel) and the OpenGL framework. The linc_* libraries bring their
+// own build config for stb/SoLoud, so this only covers our direct SDL+GL calls.
 @:cppInclude('SDL2/SDL.h')
 @:cppInclude('math.h')
-@:buildXml('<target id="haxe"><flag value="-I/usr/include/SDL2"/><lib name="-lSDL2"/><lib name="-lGLEW"/><lib name="-lGL"/><lib name="-lasound"/><lib name="-lpthread"/><lib name="-ldl"/><lib name="-lm"/></target>')
+@:buildXml('<compilerflag value="-I/opt/homebrew/include" if="macos"/><compilerflag value="-I/opt/homebrew/include/SDL2" if="macos"/><compilerflag value="-I/usr/local/include" if="macos"/><compilerflag value="-I/usr/local/include/SDL2" if="macos"/><target id="haxe"><section if="linux"><flag value="-I/usr/include/SDL2"/><lib name="-lSDL2"/><lib name="-lGLEW"/><lib name="-lGL"/><lib name="-lasound"/><lib name="-lpthread"/><lib name="-ldl"/><lib name="-lm"/></section><section if="macos"><flag value="-L/opt/homebrew/lib"/><flag value="-L/usr/local/lib"/><lib name="-lSDL2"/><lib name="-lGLEW"/><flag value="-framework"/><flag value="OpenGL"/></section></target>')
 class NativeSmoke {
   static var failures = 0;
   static function check(name:String, ok:Bool) {
