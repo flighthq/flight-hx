@@ -43,9 +43,36 @@ class ClayBitmap {
   }
 
   static function encodeStb(pixels:Dynamic, w:Int, h:Int, fmt:String, quality:Int):Dynamic {
-    // TODO(develop): call the linc_stb ImageWrite memory encoder for png/jpg and
-    // wrap the result bytes in the generated UInt8Array type.
-    return null;
+    // RGBA8 (comp=4), tightly packed (stride = w*4). pixels -> BytesData.
+    final bytes:haxe.io.Bytes = toBytes(pixels);
+    final data = bytes.getData();
+    if (fmt.indexOf('jpeg') >= 0 || fmt.indexOf('jpg') >= 0) {
+      // stb exposes only PNG to-memory; JPEG goes via a temp file round-trip.
+      #if sys
+      final tmp = 'flight-encode.jpg';
+      stb.ImageWrite.write_jpg(tmp, w, h, 4, data, 0, bytes.length, quality);
+      final out = sys.io.File.getBytes(tmp);
+      try sys.FileSystem.deleteFile(tmp) catch (_:Dynamic) {}
+      return wrapBytes(out);
+      #else
+      return null;
+      #end
+    }
+    final png = stb.ImageWrite.write_png_to_mem(w, h, 4, data, 0, bytes.length, w * 4);
+    return wrapBytes(haxe.io.Bytes.ofData(png));
+  }
+
+  static function toBytes(pixels:Dynamic):haxe.io.Bytes {
+    // TODO(develop): extract the underlying bytes from the generated pixel
+    // buffer (clay Uint8Array / Flight _UInt8Array) — .buffer/.bytes shape.
+    if (Std.isOfType(pixels, haxe.io.Bytes)) return cast pixels;
+    final buffer = flight._internal._Runtime.field(pixels, 'buffer');
+    return buffer != null && Std.isOfType(buffer, haxe.io.Bytes) ? cast buffer : cast pixels;
+  }
+
+  static function wrapBytes(bytes:haxe.io.Bytes):Dynamic {
+    // TODO(develop): wrap in the generated UInt8Array the encode contract returns.
+    return cast bytes;
   }
 }
 #end

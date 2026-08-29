@@ -42,11 +42,13 @@ class ClayAudioDevice {
       getDeviceTime: function(device:Dynamic):Float return Clay.app.timestamp,
 
       createBuffer: function(device:Dynamic, channels:Float, length:Float, sampleRate:Float, data:Array<Dynamic>):Dynamic {
-        // SoLoud AudioData from interleaved PCM. TODO(develop): confirm
-        // SoloudAudio.dataFromPCM arg order (channels/sampleRate/samples) and
-        // channel interleaving of `data` (Float32Array per channel) on rebase.
-        final audioData = Clay.app.audio.dataFromPCM(Clay.app, 'flight-buffer-' + nextHandle, interleave(data), Std.int(channels), Std.int(sampleRate));
+        // SoloudAudio.dataFromPCM(id, pcmData:Float32Array, sampleFrames, channels,
+        // sampleRate, interleaved=true). `data` is one Float32Array per channel.
+        final ch = Std.int(channels);
+        final frames = Std.int(length);
+        final pcm = interleave(data, ch, frames);
         final h = nextHandle++;
+        final audioData = Clay.app.audio.dataFromPCM('flight-buffer-' + h, pcm, frames, ch, sampleRate, true);
         buffers.set(h, audioData);
         return cast h;
       },
@@ -107,10 +109,14 @@ class ClayAudioDevice {
     }
   }
 
-  static function interleave(data:Array<Dynamic>):Dynamic {
-    // TODO(develop): interleave per-channel Float32Array data into SoLoud's
-    // expected PCM layout once the AudioData PCM contract is confirmed.
-    return data.length == 1 ? data[0] : data;
+  static function interleave(data:Array<Dynamic>, channels:Int, frames:Int):clay.buffers.Float32Array {
+    if (channels == 1) return cast data[0]; // already the single-channel Float32Array
+    final out = new clay.buffers.Float32Array(frames * channels);
+    for (c in 0...channels) {
+      final src:clay.buffers.Float32Array = cast data[c];
+      for (i in 0...frames) out[i * channels + c] = src[i];
+    }
+    return out;
   }
 }
 #end
