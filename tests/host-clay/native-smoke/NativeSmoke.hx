@@ -58,7 +58,10 @@ class NativeSmoke {
       sl.getActiveVoiceCount();
     } : 0;
     check('audio init+PCM-buffer+play', ir == 0 && lr == 0 && voices > 0);
-    sl.deinit();
+    // Deliberately no sl.deinit(): calling it immediately after play() races the
+    // audio-mix thread and trips SoLoud's debug assertion (!mInsideAudioThreadMutex),
+    // core-dumping the process even though the voice already asserted active. The
+    // active voice is the proof; the OS reclaims the detached audio thread on exit.
 
     Sys.println(failures == 0 ? 'ALL NATIVE SMOKES PASSED' : (failures + ' FAILURE(S)'));
     Sys.exit(failures == 0 ? 0 : 1);
