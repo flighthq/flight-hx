@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <meta title="HostLime Native Smoke" package="hq.flight.tests.hostlime" version="0.0.0" />
+  <app main="Main" file="HostLimeNativeSmoke" path="../../../build/host-lime-native-smoke" />
+  <window width="128" height="80" fps="30" hardware="true" vsync="false" antialiasing="0" />
+  <include path="../../../" />
+  <classpath name="." />
+  <haxeflag name="-dce" value="full" />
+  <haxelib name="lime" />
+</project>

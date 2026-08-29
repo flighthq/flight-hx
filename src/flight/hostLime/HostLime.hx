@@ -3,6 +3,7 @@ package flight.hostLime;
 #if lime
 import flight._App.installAppHostBackend;
 import flight._Application.installLoopHostBackend;
+import flight._Application.installWindowHostBackend;
 import flight._Clipboard.installClipboardHostBackend;
 import flight._Dialog.installDialogHostBackend;
 import flight._GlyphAtlas.installGlyphRasterizerHostBackend;
@@ -42,6 +43,7 @@ class HostLime {
     enableHostLimeImage(application);
     enableHostLimeLifecycle(application);
     enableHostLimeLoop(application);
+    enableHostLimeWindow(application);
     enableHostLimePlatform(application);
     enableHostLimeScreen(application);
     #if sys
@@ -120,6 +122,12 @@ class HostLime {
     installLoopHostBackend(installation.loop);
   }
 
+  public static function enableHostLimeWindow(application:Application):Void {
+    final installation = forApplication(application);
+    if (installation.window == null) installation.window = LimeWindow.createLimeWindowBackend(application);
+    installWindowHostBackend(installation.window);
+  }
+
   public static function enableHostLimePlatform(application:Application):Void {
     final installation = forApplication(application);
     if (installation.platform == null) installation.platform = LimePlatform.createLimePlatformBackend();
@@ -165,6 +173,7 @@ private class LimeInstallation {
   public var image:Dynamic;
   public var lifecycle:Dynamic;
   public var loop:Dynamic;
+  public var window:Dynamic;
   public var platform:Dynamic;
   public var screen:Dynamic;
   #if sys

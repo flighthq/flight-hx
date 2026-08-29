@@ -32,6 +32,7 @@
     "test:haxe:core": "node tools/haxe.mjs -cp src -cp generated -cp tests/haxe --main CoreSmoke --interp",
     "test:haxe:lime": "node tools/haxe.mjs -lib lime -cp src -cp generated -cp tests/haxe --main flight.hostLime.HostLimeSmoke --interp --macro \"include('flight.hostLime')\"",
     "test:haxe:lime:html5": "node tools/haxe.mjs -lib lime -cp src -cp generated -cp tests/haxe --main flight.hostLime.HostLimeSmoke --js build/host-lime-smoke.js -D html5 --macro \"include('flight.hostLime')\"",
+    "test:haxe:lime:native": "node tests/host-lime/native-smoke/run.mjs",
     "test:portable": "node tools/test-portable.mjs",
     "test:portable:cpp": "node tools/test-portable.mjs cpp",
     "test:portable:eval": "node tools/test-portable.mjs eval",

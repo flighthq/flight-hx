@@ -121,9 +121,11 @@ class HostLimeSmoke {
     HostLime.enableHostLime(application);
     assert(flight.App.explainAppBackend().layer == 'host', 'app installed at host layer');
     assert(flight.FileSystem.explainFileSystemBackend().layer == 'host', 'filesystem installed at host layer');
+    assert(flight.Application.explainWindowBackend().layer == 'host', 'window installed at host layer');
     HostLime.enableHostLime(application);
     assert(!flight.App.explainAppBackend().conflict, 'same-app enabling is idempotent');
     assert(!flight.FileSystem.explainFileSystemBackend().conflict, 'same filesystem host is idempotent');
+    assert(!flight.Application.explainWindowBackend().conflict, 'same window host is idempotent');
     flight._App.setAppBackend(LimeApp.createLimeAppBackend(application));
     assert(flight.App.explainAppBackend().layer == 'custom', 'custom app override remains in front of host');
     flight._App.setAppBackend(null);
@@ -364,6 +366,7 @@ class HostLimeSmoke {
   static function resetBackends():Void {
     flight._App.resetAppBackendForTest();
     flight._Application.resetLoopBackendForTest();
+    flight._Application.resetWindowBackendForTest();
     flight._Clipboard.resetClipboardBackendForTest();
     flight._Dialog.resetDialogBackendForTest();
     flight._GlyphAtlas.resetGlyphRasterizerBackendForTest();
