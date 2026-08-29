@@ -1,6 +1,6 @@
 # hostWeb browser smoke (CI)
 
-The `web-browser` job of `.github/workflows/host-backends.yml`. It **builds and runs** the compiled Flight SDK in a **real headless Chromium** (SwiftShader software GL) and fails loudly on a regression. This is the web-target counterpart to the Clay native smoke: it gives the signal that `node` + `jsdom` cannot — that the SDK loads and real WebGL2 works in an actual browser.
+The `web-browser` job of `.github/workflows/host-backends.yml`. It **builds and runs** the compiled Flight SDK in a **real headless Chromium** (SwiftShader software GL) and fails loudly on a regression. It fans out across **Linux, macOS, and Windows** runners so a per-OS browser regression is visible by name. This is the web-target counterpart to the Clay native smoke: it gives the signal that `node` + `jsdom` cannot — that the SDK loads and real WebGL2 works in an actual browser.
 
 ## What it verifies
 

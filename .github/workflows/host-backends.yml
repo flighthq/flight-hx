@@ -1,11 +1,11 @@
 name: host backends
 
-# Confirms Flight's host backends actually BUILD and RUN on GitHub Actions — one
-# job per backend so a per-host regression is visible by name. These gates are
-# heavyweight (native hxcpp compiles, a real browser) and touch the network
-# (Clay/linc clones, Playwright), so they live outside the fast, fully-pinned
-# ci.yml per-push lane (mirroring parity.yml's split) and are path-filtered to
-# the host sources they cover.
+# Confirms Flight's host backends actually BUILD and RUN on GitHub Actions —
+# one job per backend, each fanned out across operating systems so a per-OS
+# regression is visible by name. These gates are heavyweight (native hxcpp
+# compiles, a real browser) and touch the network (Clay/linc clones, Playwright),
+# so they live outside the fast, fully-pinned ci.yml per-push lane (mirroring
+# parity.yml's split) and are path-filtered to the host sources they cover.
 on:
   workflow_dispatch: {}
   push:
@@ -29,19 +29,29 @@ concurrency:
 
 jobs:
   clay-native:
-    # hostClay's core native paths on hxcpp, headless: software Mesa GL under Xvfb
-    # + an ALSA null device. Exercises the same native libraries the Clay adapters
-    # call (linc_opengl, linc_stb, SDL, SoLoud) and asserts real results.
-    runs-on: ubuntu-latest
+    # hostClay's core native paths on hxcpp across two OSes: Linux (software Mesa
+    # GL under Xvfb + an ALSA null device) and macOS (system GL + CoreAudio).
+    # Exercises the same native libraries the Clay adapters call (linc_opengl,
+    # linc_stb, SDL, SoLoud) and asserts real results. Windows-native is a
+    # follow-up (its SDL/GLEW/hxcpp toolchain is a separate setup).
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install system native libraries
+      - name: Install system native libraries (Linux)
+        if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             libsdl2-dev libglew-dev libgl1-mesa-dev libgl1-mesa-dri mesa-utils \
             libx11-dev libasound2-dev libopenal-dev xvfb
+      - name: Install system native libraries (macOS)
+        if: runner.os == 'macOS'
+        run: brew install sdl2 glew
 
       - name: Set up Haxe + hxcpp
         uses: krdlab/setup-haxe@v1
@@ -58,17 +68,24 @@ jobs:
             -lib clay -lib linc_opengl -lib linc_stb -lib linc_soloud \
             -D clay -D clay_native -main NativeSmoke -cpp build/native-smoke
 
-      - name: Run the native smoke (Xvfb + software GL + ALSA null)
+      - name: Run the native smoke (Linux — Xvfb + software GL + ALSA null)
+        if: runner.os == 'Linux'
         env:
           LIBGL_ALWAYS_SOFTWARE: '1'
         run: xvfb-run -a -s "-screen 0 128x128x24 -ac" ./build/native-smoke/NativeSmoke
+      - name: Run the native smoke (macOS — system GL + CoreAudio)
+        if: runner.os == 'macOS'
+        run: ./build/native-smoke/NativeSmoke
 
   lime-host:
     # hostLime on the real openfl/lime toolchain (restored by the shared toolchain
     # action via `npm run setup`): the behavioral interp smoke plus the html5 JS
-    # compile. Native lime windowing is a follow-up — see tests/host-web/README and
-    # tests/host-clay/native-smoke/README for the native-vs-binding distinction.
-    runs-on: ubuntu-latest
+    # compile, on all three major OSes. Pure Haxe/JS, so it is portable by nature.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/toolchain
@@ -79,17 +96,26 @@ jobs:
 
   web-browser:
     # hostWeb: the compiled Flight SDK loaded and initialized in a REAL headless
-    # Chromium (SwiftShader), plus a real WebGL2 render + readback — the web analog
-    # of clay-native's GL smoke, and the signal node + jsdom cannot give.
-    runs-on: ubuntu-latest
+    # Chromium, plus a real WebGL2 render + readback — the web analog of
+    # clay-native's GL smoke, run in the browser on all three major OSes.
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/toolchain
       - name: Build Flight to JS
         run: npm run build:haxe:js
       - name: Install Playwright Chromium
+        shell: bash
         run: |
           npm i --no-save playwright
-          npx playwright install --with-deps chromium
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            npx playwright install --with-deps chromium
+          else
+            npx playwright install chromium
+          fi
       - name: Run the browser smoke
         run: node tests/host-web/browser-smoke/smoke.mjs
