@@ -4,12 +4,19 @@
 // HostLime's per-Application map.
 package flight.hostClay;
 
+// WRITE-AHEAD note: as of develop 2cf1c5cef this aggregator also installs the
+// new host slots (audio-device, input-ingress, audio, net). Those imports do not
+// resolve on the 0.4.0 base; reconcile module/fn names on rebase.
 #if clay
 import flight.hostClay.ClayLoop.ClayLoopBackend;
 import flight._App.installAppHostBackend;
 import flight._Application.installLoopHostBackend;
 import flight._Clipboard.installClipboardHostBackend;
 import flight._Dialog.installDialogHostBackend;
+import flight._Media.installAudioDeviceHostBackend;
+import flight._Audio.installAudioHostBackend;
+import flight._Input.installInputIngressHostBackend;
+import flight._Net.installNetHostBackend;
 #if sys
 import flight._FileSystem.installFileSystemHostBackend;
 import flight._Storage.installStorageHostBackend;
@@ -39,18 +46,26 @@ class HostClay {
 
     installClipboardHostBackend(ClayClipboard.createClayClipboardBackend());
     installDialogHostBackend(ClayDialog.createClayDialogBackend());
+
+    // develop host slots
+    installAudioHostBackend(ClayAudioBackend.createClayAudioBackend());
+    installAudioDeviceHostBackend(ClayAudioDevice.createClayAudioDeviceBackend());
+    installInputIngressHostBackend(ClayInputIngress.createClayInputIngressBackend());
+    installNetHostBackend(ClayNet.createClayNetBackend());
+
     #if sys
     installFileSystemHostBackend(ClayFileSystem.createClayFileSystemBackend());
     installStorageHostBackend(ClayStorage.createClayStorageBackend());
     #end
-    // TODO(hostClay): as their Clay adapters land, install screen/platform/
-    // lifecycle/haptics (mirroring HostLime) and the image/glyph backends over
-    // linc_stb. Cursor and the GL surface are wired by the app, not installed.
+    // TODO(hostClay): install screen/platform/lifecycle/haptics and font/bitmap
+    // (linc_stb) once their Clay adapters land. Cursor and the GL surface are
+    // wired by the app, not installed.
   }
 
-  /** Drive Flight's application loop from Clay's frame. Call from Events.tick. */
+  /** Drive Flight's application loop + SoLoud ended callbacks from Clay's frame. */
   public static function pumpLoop():Void {
     if (loop != null) loop.pump();
+    ClayAudioDevice.pumpEnded();
   }
 }
 #end
