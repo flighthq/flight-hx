@@ -114,7 +114,12 @@ jobs:
       # volume — matching lix's temp and the web-browser job's working default.
       - name: Point HAXE_LIBCACHE at the home volume
         shell: bash
-        run: echo "HAXE_LIBCACHE=$HOME/haxe/haxe_libraries" >> "$GITHUB_ENV"
+        run: |
+          home="$HOME"
+          # git-bash's $HOME is an MSYS path (/c/Users/...); native Haxe needs a
+          # Windows path, so convert with cygpath (present only on Windows).
+          if command -v cygpath >/dev/null 2>&1; then home="$(cygpath -m "$HOME")"; fi
+          echo "HAXE_LIBCACHE=$home/haxe/haxe_libraries" >> "$GITHUB_ENV"
       - uses: ./.github/actions/toolchain
         with:
           # Neko powers `haxelib run lime` for the native smoke; its install step
