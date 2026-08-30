@@ -54,9 +54,28 @@ function installCompiler() {
 
   rmSync(temporaryDirectory, { force: true, recursive: true });
   mkdirSync(temporaryDirectory, { recursive: true });
-  // .zip (Windows) is read by bsdtar via autodetect (-xf); .tar.gz needs -xzf.
-  const extractFlags = archive.endsWith('.zip') ? '-xf' : '-xzf';
-  run('tar', [extractFlags, archive, '--strip-components=1', '-C', temporaryDirectory]);
+  if (archive.endsWith('.zip')) {
+    // The Windows runner's `tar` is GNU tar: it cannot read a .zip and it treats
+    // the archive's drive-letter colon (D:\...) as a remote host. Extract with
+    // PowerShell instead, then promote the archive's single top-level directory
+    // so the layout matches the tar `--strip-components=1` platforms below.
+    run('powershell', [
+      '-NoProfile',
+      '-NonInteractive',
+      '-Command',
+      `Expand-Archive -LiteralPath '${archive}' -DestinationPath '${temporaryDirectory}' -Force`,
+    ]);
+    const entries = readdirSync(temporaryDirectory);
+    if (entries.length === 1) {
+      const root = path.join(temporaryDirectory, entries[0]);
+      for (const child of readdirSync(root)) {
+        renameSync(path.join(root, child), path.join(temporaryDirectory, child));
+      }
+      rmSync(root, { force: true, recursive: true });
+    }
+  } else {
+    run('tar', ['-xzf', archive, '--strip-components=1', '-C', temporaryDirectory]);
+  }
   rmSync(installDirectory, { force: true, recursive: true });
   renameSync(temporaryDirectory, installDirectory);
   process.stdout.write(`Installed Haxe ${version} in ${path.relative(workspace, installDirectory)}.\n`);
