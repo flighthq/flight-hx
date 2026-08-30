@@ -16,6 +16,11 @@ if (!existsSync(executable)) {
   process.stdout.write(`Haxe ${version} is already installed in ${path.relative(workspace, installDirectory)}.\n`);
 }
 
+// Pin the library cache so lix's downloads and the hxcpp lookup below always
+// resolve to the same tree. lix's own default base differs from os.homedir()/haxe
+// on Windows, which otherwise leaves ensureHxcppRunner looking in the wrong place.
+process.env.HAXE_LIBCACHE ??= path.join(os.homedir(), 'haxe', 'haxe_libraries');
+
 const lix = path.join(workspace, 'node_modules', '.bin', process.platform === 'win32' ? 'lix.cmd' : 'lix');
 if (!existsSync(lix)) throw new Error('Local npm dependencies are missing. Run npm ci first.');
 downloadLibraries(lix);
