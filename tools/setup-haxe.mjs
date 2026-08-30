@@ -98,7 +98,11 @@ function ensureHxcppRunner() {
 }
 
 function run(command, args, options = {}) {
-  const result = spawnSync(command, args, { stdio: 'inherit', ...options });
+  // Node >= 20 refuses to spawn a Windows .cmd/.bat shim (e.g. lix.cmd) without a
+  // shell and throws EINVAL; run those through the shell. The args here contain no
+  // spaces, so the shell's lack of auto-quoting is not a concern.
+  const shell = process.platform === 'win32' && /\.(cmd|bat)$/iu.test(command);
+  const result = spawnSync(command, args, { stdio: 'inherit', shell, ...options });
   if (result.error) throw result.error;
   if (result.status !== 0) throw new Error(`${command} exited with status ${String(result.status)}`);
 }
