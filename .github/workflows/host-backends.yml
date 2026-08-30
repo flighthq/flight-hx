@@ -101,14 +101,20 @@ jobs:
         os: [ubuntu-latest, macos-13, windows-latest]
     runs-on: ${{ matrix.os }}
     # ci.yml's Haxe jobs are all -cp-only, so this is the first CI job to use
-    # `-lib`. Scoped-lib resolution the toolchain action does not wire up: download
-    # the pinned libraries into HAXE_LIBCACHE and resolve them from the committed
-    # haxe_libraries/ via HAXELIB_PATH (Haxe reads <lib>.hxml there natively).
+    # `-lib`. Scoped-lib resolution the toolchain action does not wire up: resolve
+    # libraries from the committed haxe_libraries/ via HAXELIB_PATH (Haxe reads
+    # <lib>.hxml there natively). HAXE_LIBCACHE is set in the first step (below).
     env:
       HAXELIB_PATH: ${{ github.workspace }}/haxe_libraries
-      HAXE_LIBCACHE: ${{ github.workspace }}/.haxe-libcache
     steps:
       - uses: actions/checkout@v4
+      # lix downloads into a temp on the home volume, then MOVES each library into
+      # HAXE_LIBCACHE. On Windows the workspace (D:) and home dir (C:) are different
+      # volumes and a cross-volume move fails, so point HAXE_LIBCACHE at the home
+      # volume — matching lix's temp and the web-browser job's working default.
+      - name: Point HAXE_LIBCACHE at the home volume
+        shell: bash
+        run: echo "HAXE_LIBCACHE=$HOME/haxe/haxe_libraries" >> "$GITHUB_ENV"
       - uses: ./.github/actions/toolchain
         with:
           # Neko powers `haxelib run lime` for the native smoke; its install step
