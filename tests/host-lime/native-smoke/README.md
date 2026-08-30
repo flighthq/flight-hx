@@ -9,4 +9,4 @@ The smoke verifies:
 - physical-pixel dimensions through `GlSurface` and the associated GL context;
 - a Flight background clear read back from the real native framebuffer.
 
-`npm run test:haxe:lime:native` builds with the repository-pinned Lime and hxcpp revisions, runs under software Mesa, and exits nonzero on any failed assertion or timeout. The Linux host needs Neko, Xvfb, and the runtime libraries required by Lime's prebuilt native binary.
+`npm run test:haxe:lime:native` maps the scoped dependency downloads from `HAXE_LIBCACHE` into an ignored local Haxelib repository. The scoped Lime source archive omits native binaries, so the runner installs the Haxelib release matching the version declared by the pinned Lime source when that release is not already cached. It then builds with the pinned dependency revisions, runs under software Mesa, and exits nonzero on any failed assertion or timeout. The Linux host needs Neko, Xvfb, and the runtime libraries required by Lime's prebuilt native binary.
