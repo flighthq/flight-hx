@@ -28,7 +28,7 @@ runs:
         path: |
           .haxe
           .haxelib
-        key: haxe-${{ runner.os }}-${{ hashFiles('package-lock.json', '.haxerc', 'haxe_libraries/**') }}
+        key: haxe-${{ runner.os }}-${{ hashFiles('package-lock.json', '.haxerc', 'haxe_libraries/**', 'tools/setup-haxe.mjs', '.github/actions/toolchain/action.yml') }}
     - name: Install dependencies
       shell: bash
       run: npm ci
