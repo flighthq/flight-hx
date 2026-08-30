@@ -16,6 +16,12 @@ on:
       - 'tests/host-web/**'
       - 'tests/host-lime/**'
       - '.github/workflows/host-backends.yml'
+      - '.github/actions/toolchain/**'
+      - 'tools/setup-haxe.mjs'
+      - '.haxerc'
+      - 'haxe_libraries/**'
+      - 'package.json'
+      - 'package-lock.json'
   pull_request:
     paths:
       - 'src/flight/hostClay/**'
@@ -24,6 +30,12 @@ on:
       - 'tests/host-web/**'
       - 'tests/host-lime/**'
       - '.github/workflows/host-backends.yml'
+      - '.github/actions/toolchain/**'
+      - 'tools/setup-haxe.mjs'
+      - '.haxerc'
+      - 'haxe_libraries/**'
+      - 'package.json'
+      - 'package-lock.json'
 
 concurrency:
   group: host-backends-${{ github.ref }}
@@ -110,9 +122,10 @@ jobs:
       - name: hostLime html5 compile
         run: npm run test:haxe:lime:html5
       # Native Lime window smoke — Linux only: a real hxcpp build via `haxelib run
-      # lime` plus a windowed GL readback under Xvfb + software Mesa. Resolves libs
-      # through the same HAXELIB_PATH/HAXE_LIBCACHE recipe as the steps above
-      # (run.mjs honors an external HAXELIB_PATH), so no gitignored .haxelib needed.
+      # lime` plus a windowed GL readback under Xvfb + software Mesa. run.mjs keeps
+      # the job's HAXE_LIBCACHE but overrides HAXELIB_PATH to a repo-local .haxelib
+      # it builds: it maps the pinned deps there and installs the exact-version Lime
+      # release for the Linux64 ndll the scoped GitHub source omits.
       - name: Install Xvfb + Mesa DRI (native smoke)
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libgl1-mesa-dri xvfb
