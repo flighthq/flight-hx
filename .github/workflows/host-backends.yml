@@ -14,6 +14,7 @@ on:
       - 'src/flight/hostLime/**'
       - 'tests/host-clay/**'
       - 'tests/host-web/**'
+      - 'tests/host-lime/**'
       - '.github/workflows/host-backends.yml'
   pull_request:
     paths:
@@ -21,6 +22,7 @@ on:
       - 'src/flight/hostLime/**'
       - 'tests/host-clay/**'
       - 'tests/host-web/**'
+      - 'tests/host-lime/**'
       - '.github/workflows/host-backends.yml'
 
 concurrency:
@@ -79,8 +81,8 @@ jobs:
 
   lime-host:
     # hostLime on the real openfl/lime toolchain (restored by the shared toolchain
-    # action via `npm run setup`): the behavioral interp smoke plus the html5 JS
-    # compile, on all three major OSes. Pure Haxe/JS, so it is portable by nature.
+    # action via `npm run setup`): the portable interp smoke + html5 JS compile on
+    # all three major OSes, plus a real native Lime window smoke on Linux (below).
     strategy:
       fail-fast: false
       matrix:
@@ -96,6 +98,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/toolchain
+        with:
+          # Neko powers `haxelib run lime` for the native smoke; its install step
+          # is apt-only, so only request it on Linux (the native leg's OS).
+          neko: ${{ runner.os == 'Linux' && 'true' || 'false' }}
       - name: Put the pinned haxelib on PATH
         shell: bash
         run: echo "${{ github.workspace }}/.haxe/4.3.7" >> "$GITHUB_PATH"
@@ -103,6 +109,16 @@ jobs:
         run: npm run test:haxe:lime
       - name: hostLime html5 compile
         run: npm run test:haxe:lime:html5
+      # Native Lime window smoke — Linux only: a real hxcpp build via `haxelib run
+      # lime` plus a windowed GL readback under Xvfb + software Mesa. Resolves libs
+      # through the same HAXELIB_PATH/HAXE_LIBCACHE recipe as the steps above
+      # (run.mjs honors an external HAXELIB_PATH), so no gitignored .haxelib needed.
+      - name: Install Xvfb + Mesa DRI (native smoke)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libgl1-mesa-dri xvfb
+      - name: hostLime native window smoke
+        if: runner.os == 'Linux'
+        run: npm run test:haxe:lime:native
 
   web-browser:
     # hostWeb: the compiled Flight SDK loaded and initialized in a REAL headless
