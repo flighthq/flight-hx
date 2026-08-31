@@ -13,7 +13,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | Portable global value keys | 35 |
 | JavaScript-only global value keys | 35 |
 | Module value keys | 0 |
-| Type uses | 8726 |
+| Type uses | 8718 |
 | Value uses | 2092 |
 | Missing toolkit entries | 0 |
 
@@ -245,14 +245,14 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:WebGLActiveInfo` | `host` | `flight._internal.dom.WebGLActiveInfo` | `src/flight/_internal/dom/WebGLActiveInfo.hx` | `dynamic-stub` | 8 |
 | `host:WebGLBuffer` | `host` | `flight._internal.dom.WebGLBuffer` | `src/flight/_internal/dom/WebGLBuffer.hx` | `dynamic-stub` | 67 |
 | `host:WebGLContextAttributes` | `host` | `flight._internal.dom.WebGLContextAttributes` | `src/flight/_internal/dom/WebGLContextAttributes.hx` | `dynamic-stub` | 1 |
-| `host:WebGLFramebuffer` | `host` | `flight._internal.dom.WebGLFramebuffer` | `src/flight/_internal/dom/WebGLFramebuffer.hx` | `dynamic-stub` | 40 |
+| `host:WebGLFramebuffer` | `host` | `flight._internal.dom.WebGLFramebuffer` | `src/flight/_internal/dom/WebGLFramebuffer.hx` | `dynamic-stub` | 39 |
 | `host:WebGLPowerPreference` | `host` | `flight._internal.dom.WebGLPowerPreference` | `src/flight/_internal/dom/WebGLPowerPreference.hx` | `dynamic-stub` | 1 |
-| `host:WebGLProgram` | `host` | `flight._internal.dom.WebGLProgram` | `src/flight/_internal/dom/WebGLProgram.hx` | `dynamic-stub` | 252 |
+| `host:WebGLProgram` | `host` | `flight._internal.dom.WebGLProgram` | `src/flight/_internal/dom/WebGLProgram.hx` | `dynamic-stub` | 248 |
 | `host:WebGLRenderbuffer` | `host` | `flight._internal.dom.WebGLRenderbuffer` | `src/flight/_internal/dom/WebGLRenderbuffer.hx` | `dynamic-stub` | 6 |
 | `host:WebGLRenderingContext` | `host` | `flight._internal.dom.WebGLRenderingContext` | `src/flight/_internal/dom/WebGLRenderingContext.hx` | `dynamic-stub` | 8 |
 | `host:WebGLShader` | `host` | `flight._internal.dom.WebGLShader` | `src/flight/_internal/dom/WebGLShader.hx` | `dynamic-stub` | 4 |
-| `host:WebGLTexture` | `host` | `flight._internal.dom.WebGLTexture` | `src/flight/_internal/dom/WebGLTexture.hx` | `dynamic-stub` | 416 |
-| `host:WebGLUniformLocation` | `host` | `flight._internal.dom.WebGLUniformLocation` | `src/flight/_internal/dom/WebGLUniformLocation.hx` | `dynamic-stub` | 375 |
+| `host:WebGLTexture` | `host` | `flight._internal.dom.WebGLTexture` | `src/flight/_internal/dom/WebGLTexture.hx` | `dynamic-stub` | 414 |
+| `host:WebGLUniformLocation` | `host` | `flight._internal.dom.WebGLUniformLocation` | `src/flight/_internal/dom/WebGLUniformLocation.hx` | `dynamic-stub` | 374 |
 | `host:WebGLVertexArrayObject` | `host` | `flight._internal.dom.WebGLVertexArrayObject` | `src/flight/_internal/dom/WebGLVertexArrayObject.hx` | `dynamic-stub` | 34 |
 | `host:WebSocket` | `host` | `flight._internal.dom.WebSocket` | `src/flight/_internal/dom/WebSocket.hx` | `dynamic-stub` | 9 |
 | `host:WheelEvent` | `host` | `flight._internal.dom.WheelEvent` | `src/flight/_internal/dom/WheelEvent.hx` | `dynamic-stub` | 9 |

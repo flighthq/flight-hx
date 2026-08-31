@@ -11,18 +11,22 @@ import Math as HxMath;
 class DynamicObject {
   #if !js
   static final frozenObjects:_IdentityMap<Bool> = new _IdentityMap();
+  // JavaScript functions are objects and can own fields. Native Haxe closure
+  // values cannot, so retain fields assigned to them behind the same identity.
+  static final callableTargets:Array<Dynamic> = [];
+  static final callableFields:Array<Dynamic> = [];
   #end
 
-  public static function assign(target:Dynamic, sources:haxe.Rest<Dynamic>):Dynamic {
+  @:noInline public static function assign(target:Dynamic, sources:haxe.Rest<Dynamic>):Dynamic {
     for (source in sources) {
       if (source == null) continue;
-      for (name in Reflect.fields(source)) Reflect.setField(target, name, Reflect.field(source, name));
+      for (name in keys(source)) setOwnField(target, name, ownField(source, name));
     }
     return target;
   }
 
-  public static inline function entries(source:Dynamic):Array<Array<Dynamic>> {
-    return [for (name in Reflect.fields(source)) [name, Reflect.field(source, name)]];
+  public static function entries(source:Dynamic):Array<Array<Dynamic>> {
+    return [for (name in keys(source)) [name, ownField(source, name)]];
   }
 
   public static inline function fromEntries(entries:Array<Array<Dynamic>>):Dynamic {
@@ -41,20 +45,46 @@ class DynamicObject {
     #end
   }
 
-  public static inline function hasOwn(source:Dynamic, name:String):Bool {
+  public static function hasOwn(source:Dynamic, name:String):Bool {
     #if js
     return js.Syntax.code('Object.prototype.hasOwnProperty.call({0}, {1})', source, name);
     #else
-    return source != null && Reflect.hasField(source, name);
+    return source != null && (Reflect.hasField(source, name) || hasCallableField(source, name));
     #end
   }
 
-  public static inline function keys(source:Dynamic):Array<String> {
-    return Reflect.fields(source);
+  public static function keys(source:Dynamic):Array<String> {
+    final result = Reflect.fields(source);
+    #if !js
+    final index = callableIndex(source);
+    if (index >= 0) {
+      final attached = callableFields[index];
+      for (name in Reflect.fields(attached)) if (result.indexOf(name) < 0) result.push(name);
+    }
+    #end
+    return result;
   }
 
-  public static inline function values(source:Dynamic):Array<Dynamic> {
-    return [for (name in Reflect.fields(source)) Reflect.field(source, name)];
+  public static function values(source:Dynamic):Array<Dynamic> {
+    return [for (name in keys(source)) ownField(source, name)];
+  }
+
+  @:noInline public static function hasCallableField(source:Dynamic, name:String):Bool {
+    #if js
+    return false;
+    #else
+    final index = callableIndex(source);
+    return index >= 0 && Reflect.hasField(callableFields[index], name);
+    #end
+  }
+
+  @:noInline public static function callableField(source:Dynamic, name:String):Dynamic {
+    #if js
+    return null;
+    #else
+    final index = callableIndex(source);
+    return index < 0 ? null : Reflect.field(callableFields[index], name);
+    #end
   }
 
   public static inline function freeze(source:Dynamic):Dynamic {
@@ -71,7 +101,7 @@ class DynamicObject {
     return js.Syntax.code('Object.defineProperty({0}, {1}, {2})', target, name, descriptor);
     #else
     if (descriptor != null && Reflect.hasField(descriptor, 'value')) {
-      Reflect.setField(target, name, Reflect.field(descriptor, 'value'));
+      setOwnField(target, name, Reflect.field(descriptor, 'value'));
     }
     return target;
     #end
@@ -125,6 +155,34 @@ class DynamicObject {
   }
 
   #if !js
+  static function ownField(source:Dynamic, name:String):Dynamic {
+    return hasCallableField(source, name) ? callableField(source, name) : Reflect.field(source, name);
+  }
+
+  @:noInline static function setOwnField(target:Dynamic, name:String, value:Dynamic):Void {
+    if (!Reflect.isFunction(target)) {
+      Reflect.setField(target, name, value);
+      return;
+    }
+    var index = callableIndex(target);
+    if (index < 0) {
+      index = callableTargets.length;
+      callableTargets.push(target);
+      callableFields.push({});
+    }
+    Reflect.setField(callableFields[index], name, value);
+  }
+
+  @:noInline static function callableIndex(target:Dynamic):Int {
+    if (!Reflect.isFunction(target)) return -1;
+    var index = callableTargets.length;
+    while (index > 0) {
+      index--;
+      if (Reflect.compareMethods(callableTargets[index], target)) return index;
+    }
+    return -1;
+  }
+
   static function isObjectValue(value:Dynamic):Bool {
     if (value == null) return false;
     return switch (Type.typeof(value)) {
@@ -132,6 +190,14 @@ class DynamicObject {
       case TClass(type): type != String;
       default: false;
     };
+  }
+  #else
+  static inline function ownField(source:Dynamic, name:String):Dynamic {
+    return Reflect.field(source, name);
+  }
+
+  static inline function setOwnField(target:Dynamic, name:String, value:Dynamic):Void {
+    Reflect.setField(target, name, value);
   }
   #end
 }

@@ -7,21 +7,21 @@
 | Candidate declarations | 16807 |
 | Lowered declarations | 16807 |
 | Current diagnostics | 0 |
-| Proven explicit Boolean truthiness uses | 17162 |
+| Proven explicit Boolean truthiness uses | 17158 |
 | Proven Boolean conditional conditions | 3485 |
 | Proven Boolean logical-left truthiness uses | 6511 |
 | Proven Boolean logical expressions | 6180 |
-| Proven numeric relations | 7795 |
-| Direct Boolean truthiness uses | 17127 |
+| Proven numeric relations | 7793 |
+| Direct Boolean truthiness uses | 17123 |
 | Direct Boolean conditional expressions | 3477 |
 | Direct Boolean `&&` expressions | 2781 |
 | Direct Boolean `\|\|` expressions | 3370 |
-| Direct numeric relations | 7782 |
-| Proven indexed expressions | 13439 |
-| Proven indexed reads | 9145 |
+| Direct numeric relations | 7780 |
+| Proven indexed expressions | 13436 |
+| Proven indexed reads | 9142 |
 | Proven indexed writes | 4441 |
 | Parked width-sensitive mixed indexed writes | 19 |
-| Direct indexed reads | 9610 |
+| Direct indexed reads | 9607 |
 | Direct indexed writes | 4436 |
 | Guarded in-bounds async-flow for-of Array reads | 21 |
 | Guarded in-bounds async-flow for-in key reads | 0 |
@@ -37,7 +37,7 @@
 
 | Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `Array` | 7622 | 6223 | 1463 | 6688 | 1463 |
+| `Array` | 7619 | 6220 | 1463 | 6685 | 1463 |
 | `ArrayOrFloat32Array` | 56 | 13 | 43 | 15 | 43 |
 | `Float32Array` | 3846 | 1805 | 2113 | 1805 | 2113 |
 | `Float64Array` | 396 | 178 | 228 | 178 | 228 |
@@ -184,7 +184,7 @@
 | `@flighthq/registry-catalog` | 8 | 8 | 0 | 4 | 0 | 1 | 0 |
 | `@flighthq/registry-codegen` | 2 | 2 | 0 | 2 | 0 | 0 | 0 |
 | `@flighthq/render` | 141 | 141 | 0 | 213 | 28 | 134 | 1 |
-| `@flighthq/render-gl` | 240 | 240 | 0 | 263 | 39 | 113 | 0 |
+| `@flighthq/render-gl` | 240 | 240 | 0 | 259 | 37 | 110 | 0 |
 | `@flighthq/render-wgpu` | 248 | 248 | 0 | 432 | 74 | 97 | 0 |
 | `@flighthq/requirements` | 9 | 9 | 0 | 4 | 0 | 1 | 0 |
 | `@flighthq/scene-document` | 132 | 132 | 0 | 474 | 62 | 51 | 0 |

@@ -10,7 +10,7 @@
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 35,
-    "typeUses": 8726,
+    "typeUses": 8718,
     "valueUses": 2092
   },
   "types": [
@@ -3820,7 +3820,7 @@
         "upstream/packages/types/src/GlScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLFramebuffer.hx",
-      "uses": 40
+      "uses": 39
     },
     {
       "coverage": "dynamic-stub",
@@ -3929,7 +3929,7 @@
         "upstream/packages/types/src/GlShapeMeshBinding.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLProgram.hx",
-      "uses": 252
+      "uses": 248
     },
     {
       "coverage": "dynamic-stub",
@@ -4079,7 +4079,7 @@
         "upstream/packages/types/src/GlTextureResolver.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLTexture.hx",
-      "uses": 416
+      "uses": 414
     },
     {
       "coverage": "dynamic-stub",
@@ -4194,7 +4194,7 @@
         "upstream/packages/types/src/GlWireframeProgram.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLUniformLocation.hx",
-      "uses": 375
+      "uses": 374
     },
     {
       "coverage": "dynamic-stub",

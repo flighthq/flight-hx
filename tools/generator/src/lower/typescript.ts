@@ -911,6 +911,12 @@ function structuralReceiverType(node: ts.PropertyAccessExpression, context: Lowe
   const checker = context.checker;
   if (!checker) return undefined;
   const receiver = checker.getTypeAtLocation(node.expression);
+  // JavaScript callable objects can carry fields, but native Haxe closures
+  // cannot. Keep their property access on the portable runtime path, which
+  // retains Object.assign decorations by closure identity.
+  if (checker.getSignaturesOfType(checker.getNonNullableType(receiver), ts.SignatureKind.Call).length > 0) {
+    return undefined;
+  }
   const declaredProperty = checker.getPropertyOfType(receiver, node.name.text);
   const narrowedProperty = checker.getSymbolAtLocation(node.name);
   const property =

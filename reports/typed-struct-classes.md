@@ -7,7 +7,7 @@ This is a construction, structural-flow, and observability census. It does not e
 | Metric | Count |
 | --- | ---: |
 | Eligible canonical schemas | 2159 |
-| Direct field accesses | 25838 |
+| Direct field accesses | 25827 |
 | Declared optional fields | 2508 |
 | Declared required-undefined fields | 3 |
 | Production object literals | 2297 |
@@ -601,10 +601,10 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#GlRenderOptions` | 0 | 6 | 6 | 0 | 5 | 4 | 1 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | 7 | 0 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#GlRenderRegistries` | 0 | 24 | 7 | 0 | 3 | 1 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 2 | 1 | 4 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#GlRenderState` | 0 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 375 | 4 | 1 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#GlRenderStateRuntime` | 430 | 44 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#GlRenderStateRuntime` | 422 | 44 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#GlRenderStats` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlRenderSurfaceProvider` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 9 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlRenderTarget` | 305 | 18 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 130 | 15 | 8 | 0 | no | `anonymous-structural-transfer` | — |
+| `@flighthq/types:interface#GlRenderTarget` | 302 | 18 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 130 | 15 | 8 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#GlRenderTargetPool` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlRenderTextureEntry` | 24 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlRenderTextureExplanation` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |

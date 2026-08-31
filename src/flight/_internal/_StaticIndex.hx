@@ -26,7 +26,11 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readFloat32ArrayTyped(source:_Float32Array, key:Float):Float {
+  #else
   public static inline function readFloat32ArrayTyped(source:_Float32Array, key:Float):Float {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
@@ -34,7 +38,11 @@ class _StaticIndex {
     #end
   }
 
+  #if neko
+  public static function writeFloat32ArrayTyped(source:_Float32Array, key:Float, value:Float):Float {
+  #else
   public static inline function writeFloat32ArrayTyped(source:_Float32Array, key:Float, value:Float):Float {
+  #end
     #if js
     js.Syntax.code('{0}[{1}] = {2}', source, key, value);
     #else
@@ -43,7 +51,11 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readFloat64ArrayTyped(source:_Float64Array, key:Float):Float {
+  #else
   public static inline function readFloat64ArrayTyped(source:_Float64Array, key:Float):Float {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
@@ -51,7 +63,11 @@ class _StaticIndex {
     #end
   }
 
+  #if neko
+  public static function writeFloat64ArrayTyped(source:_Float64Array, key:Float, value:Float):Float {
+  #else
   public static inline function writeFloat64ArrayTyped(source:_Float64Array, key:Float, value:Float):Float {
+  #end
     #if js
     js.Syntax.code('{0}[{1}] = {2}', source, key, value);
     #else
@@ -60,7 +76,11 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readInt16ArrayTyped(source:_Int16Array, key:Float):Float {
+  #else
   public static inline function readInt16ArrayTyped(source:_Int16Array, key:Float):Float {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
@@ -68,7 +88,11 @@ class _StaticIndex {
     #end
   }
 
+  #if neko
+  public static function writeInt16ArrayTyped(source:_Int16Array, key:Float, value:Float):Float {
+  #else
   public static inline function writeInt16ArrayTyped(source:_Int16Array, key:Float, value:Float):Float {
+  #end
     #if js
     js.Syntax.code('{0}[{1}] = {2}', source, key, value);
     #else
@@ -77,7 +101,11 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readInt32ArrayTyped(source:_Int32Array, key:Float):Float {
+  #else
   public static inline function readInt32ArrayTyped(source:_Int32Array, key:Float):Float {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
@@ -85,7 +113,11 @@ class _StaticIndex {
     #end
   }
 
+  #if neko
+  public static function writeInt32ArrayTyped(source:_Int32Array, key:Float, value:Float):Float {
+  #else
   public static inline function writeInt32ArrayTyped(source:_Int32Array, key:Float, value:Float):Float {
+  #end
     #if js
     js.Syntax.code('{0}[{1}] = {2}', source, key, value);
     #else
@@ -94,7 +126,11 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readInt8ArrayTyped(source:_Int8Array, key:Float):Float {
+  #else
   public static inline function readInt8ArrayTyped(source:_Int8Array, key:Float):Float {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
@@ -102,7 +138,11 @@ class _StaticIndex {
     #end
   }
 
+  #if neko
+  public static function writeInt8ArrayTyped(source:_Int8Array, key:Float, value:Float):Float {
+  #else
   public static inline function writeInt8ArrayTyped(source:_Int8Array, key:Float, value:Float):Float {
+  #end
     #if js
     js.Syntax.code('{0}[{1}] = {2}', source, key, value);
     #else
@@ -111,7 +151,11 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readUint16ArrayTyped(source:_UInt16Array, key:Float):Float {
+  #else
   public static inline function readUint16ArrayTyped(source:_UInt16Array, key:Float):Float {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
@@ -119,7 +163,11 @@ class _StaticIndex {
     #end
   }
 
+  #if neko
+  public static function writeUint16ArrayTyped(source:_UInt16Array, key:Float, value:Float):Float {
+  #else
   public static inline function writeUint16ArrayTyped(source:_UInt16Array, key:Float, value:Float):Float {
+  #end
     #if js
     js.Syntax.code('{0}[{1}] = {2}', source, key, value);
     #else
@@ -128,7 +176,11 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readUint32ArrayTyped(source:_UInt32Array, key:Float):Float {
+  #else
   public static inline function readUint32ArrayTyped(source:_UInt32Array, key:Float):Float {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
@@ -136,7 +188,11 @@ class _StaticIndex {
     #end
   }
 
+  #if neko
+  public static function writeUint32ArrayTyped(source:_UInt32Array, key:Float, value:Float):Float {
+  #else
   public static inline function writeUint32ArrayTyped(source:_UInt32Array, key:Float, value:Float):Float {
+  #end
     #if js
     js.Syntax.code('{0}[{1}] = {2}', source, key, value);
     #else
@@ -145,7 +201,11 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readUint8ArrayTyped(source:_UInt8Array, key:Float):Float {
+  #else
   public static inline function readUint8ArrayTyped(source:_UInt8Array, key:Float):Float {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
@@ -153,7 +213,11 @@ class _StaticIndex {
     #end
   }
 
+  #if neko
+  public static function writeUint8ArrayTyped(source:_UInt8Array, key:Float, value:Float):Float {
+  #else
   public static inline function writeUint8ArrayTyped(source:_UInt8Array, key:Float, value:Float):Float {
+  #end
     #if js
     js.Syntax.code('{0}[{1}] = {2}', source, key, value);
     #else
@@ -162,7 +226,11 @@ class _StaticIndex {
     return value;
   }
 
+  #if neko
+  public static function readUint8ClampedArrayTyped(source:_UInt8ClampedArray, key:Float):Float {
+  #else
   public static inline function readUint8ClampedArrayTyped(source:_UInt8ClampedArray, key:Float):Float {
+  #end
     #if js
     return js.Syntax.code('{0}[{1}]', source, key);
     #else
@@ -170,7 +238,11 @@ class _StaticIndex {
     #end
   }
 
+  #if neko
+  public static function writeUint8ClampedArrayTyped(
+  #else
   public static inline function writeUint8ClampedArrayTyped(
+  #end
     source:_UInt8ClampedArray,
     key:Float,
     value:Float

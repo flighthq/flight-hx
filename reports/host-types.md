@@ -7,7 +7,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | Metric | Count |
 | --- | ---: |
 | Host types | 237 |
-| Type references | 5837 |
+| Type references | 5829 |
 | Member accesses | 2888 |
 | Reads | 1058 |
 | Writes | 419 |
@@ -238,14 +238,14 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `WebGLActiveInfo` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 2 | 6 | 0 | 0 |
 | `WebGLBuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 67 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLContextAttributes` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLFramebuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 40 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLFramebuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 39 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLPowerPreference` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLProgram` | `node_modules/typescript/lib/lib.dom.d.ts` | 252 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLProgram` | `node_modules/typescript/lib/lib.dom.d.ts` | 248 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLRenderbuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLRenderingContext` | `node_modules/typescript/lib/lib.dom.d.ts` | 5 | 0 | 2 | 0 | 0 | 3 |
 | `WebGLShader` | `node_modules/typescript/lib/lib.dom.d.ts` | 4 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLTexture` | `node_modules/typescript/lib/lib.dom.d.ts` | 416 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLUniformLocation` | `node_modules/typescript/lib/lib.dom.d.ts` | 375 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLTexture` | `node_modules/typescript/lib/lib.dom.d.ts` | 414 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLUniformLocation` | `node_modules/typescript/lib/lib.dom.d.ts` | 374 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLVertexArrayObject` | `node_modules/typescript/lib/lib.dom.d.ts` | 34 | 0 | 0 | 0 | 0 | 0 |
 | `WebSocket` | `node_modules/@types/node/web-globals/fetch.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 8 | 1 | 5 | 2 |
 | `WheelEvent` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 3 | 2 | 0 | 1 |

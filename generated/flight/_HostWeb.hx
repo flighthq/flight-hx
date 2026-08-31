@@ -1888,7 +1888,7 @@ class _HostWeb {
             __flowBranch324 = flight._internal._Async.flowNormal();
           }
           return flight._internal._Async.continueFlow(__flowBranch324, function():Dynamic {
-            return flight._internal._Async.flatMap((cast picker : { var call:flight._internal._Any; }).call(win, pickerOptions), function(__awaitValue325:Dynamic):Dynamic {
+            return flight._internal._Async.flatMap(_Runtime.callProperty(picker, 'call', cast ([win, pickerOptions] : Array<Dynamic>)), function(__awaitValue325:Dynamic):Dynamic {
               nativeHandles = __awaitValue325;
               var __flowBranch326:Dynamic;
               if ((cast _Runtime.strictEquals(_Runtime.field(nativeHandles, 'length'), 0.0) : Bool)) {

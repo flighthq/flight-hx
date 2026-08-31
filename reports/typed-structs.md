@@ -12,11 +12,11 @@ The candidate universe is checker-derived. Member escapes, presence and width se
 | Audit-only schemas | 2096 |
 | Direct schemas | 758 |
 | Declared fields | 29491 |
-| Bindable accesses | 39997 |
-| Pending accesses | 14159 |
-| Directly emitted accesses | 25838 |
+| Bindable accesses | 39965 |
+| Pending accesses | 14138 |
+| Directly emitted accesses | 25827 |
 | Reflective survivors | 452 |
-| Dynamic escapes | 14607 |
+| Dynamic escapes | 14597 |
 
 ## Review status since baseline
 
@@ -781,7 +781,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GlBlendFactor` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GlBlendRealization` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlBlendSignature` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlBoundShader` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlBoundShader` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlClassicDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 26 | 0 | 0 | 26 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#GlClassicLightingModel` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -794,10 +794,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GlCompressedTextureDecoder` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#GlCompressedTextureSupport` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlCompressedTextureUploader` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#GlContext` | `audit-only` | `new` | — | checker-discovered public declaration | 236 | 791 | 0 | 0 | 791 | 0 | 0 | 1519 | yes | — |
+| `@flighthq/types:interface#GlContext` | `audit-only` | `new` | — | checker-discovered public declaration | 236 | 782 | 0 | 0 | 782 | 0 | 0 | 1509 | yes | — |
 | `@flighthq/types:interface#GlContextLossSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlContextOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlContextRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 105 | 41 | 0 | 146 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlContextRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 104 | 37 | 0 | 141 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlContextState` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:type#GlCullFaceKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GlCustomMaterialShaderSource` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
@@ -806,7 +806,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlDebugProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 21 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlDepthFuncKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#GlFramebufferStatusKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#GlFullscreenProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 142 | 0 | 0 | 142 | 0 | 0 | 38 | yes | — |
+| `@flighthq/types:interface#GlFullscreenProgram` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 137 | 0 | 0 | 137 | 0 | 0 | 38 | yes | — |
 | `@flighthq/types:interface#GlitchEffect` | `direct` | `new` | — | reviewed escape-free glitch effect | 5 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlLitProgram` | `direct` | `new` | — | reviewed escape-free WebGL lit program | 40 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlMatcapDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 7 | 0 | 0 | 7 | 0 | 0 | 1 | yes | — |
@@ -846,11 +846,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GlRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#GlRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 7 | 0 | 0 | 7 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlRenderRegistries` | `audit-only` | `new` | — | checker-discovered public declaration | 24 | 53 | 18 | 0 | 71 | 0 | 0 | 2 | yes | — |
-| `@flighthq/types:interface#GlRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 248 | 5 | 4 | 257 | 0 | 0 | 3 | yes | — |
-| `@flighthq/types:interface#GlRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGL render-state runtime | 44 | 313 | 109 | 8 | 0 | 430 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 247 | 5 | 4 | 256 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#GlRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGL render-state runtime | 44 | 307 | 107 | 8 | 0 | 422 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderStats` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderSurfaceProvider` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#GlRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGL render target | 18 | 278 | 27 | 0 | 0 | 305 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGL render target | 18 | 275 | 27 | 0 | 0 | 302 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGL render-texture entry | 2 | 19 | 5 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |

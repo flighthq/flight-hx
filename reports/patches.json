@@ -34,6 +34,17 @@
       }
     },
     {
+      "astHash": "sha256:4fd73157da56cf435825260a527f7c6efb36a59b791b2cd63d2b628014b24597",
+      "id": "render-gl.fullscreen-pass.ignore-native-window-depth",
+      "operation": "replaceBody",
+      "reason": "Lime retains native window depth across presented frames, so fullscreen passes temporarily disable depth testing and writes to match WebGL drawing-buffer behavior.",
+      "target": {
+        "export": "drawGlFullscreenPass",
+        "package": "@flighthq/render-gl",
+        "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+      }
+    },
+    {
       "astHash": "sha256:500b25d369a38f3546e52f19b5e28242c48129246ad75ece9ef42427b9202c58",
       "id": "shape.create-command-argument-cursor.portable-length",
       "operation": "replaceBody",
@@ -58,7 +69,7 @@
   ],
   "schemaVersion": 1,
   "summary": {
-    "applied": 5,
+    "applied": 6,
     "conflicting": 0,
     "stale": 0,
     "unmatched": 0

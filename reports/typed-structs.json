@@ -156846,7 +156846,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 8,
+        "reads": 7,
         "writes": 0
       },
       "declarationFingerprint": "sha256:47cb66d99fe4424f5173f83d93556fe967f733d2a3dd7792e8d54fe119727d65",
@@ -156856,7 +156856,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 8,
+        "pendingAccesses": 7,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -158773,7 +158773,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 791,
+        "reads": 782,
         "writes": 0
       },
       "declarationFingerprint": "sha256:38fcc7afaaa3f22576bbd55664610f1c51c559deeae3051a537970af67defbe5",
@@ -158783,7 +158783,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 791,
+        "pendingAccesses": 782,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -161569,76 +161569,6 @@
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
           "line": 51
-        },
-        {
-          "column": 5,
-          "member": "useProgram",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 73
-        },
-        {
-          "column": 5,
-          "member": "bindFramebuffer",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 79
-        },
-        {
-          "column": 3,
-          "member": "viewport",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 84
-        },
-        {
-          "column": 5,
-          "member": "activeTexture",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 88
-        },
-        {
-          "column": 5,
-          "member": "bindTexture",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 89
-        },
-        {
-          "column": 30,
-          "member": "uniform1i",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 90
-        },
-        {
-          "column": 3,
-          "member": "activeTexture",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 92
-        },
-        {
-          "column": 5,
-          "member": "activeTexture",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 109
-        },
-        {
-          "column": 5,
-          "member": "bindTexture",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 110
-        },
-        {
-          "column": 3,
-          "member": "activeTexture",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 112
         },
         {
           "column": 15,
@@ -171952,8 +171882,8 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 105,
-        "writes": 41
+        "reads": 104,
+        "writes": 37
       },
       "declarationFingerprint": "sha256:8f29edae9696d4a3689b68f0f7f660d91f6aaf0860eb87835d337b9e7c54c4b4",
       "declarationKind": "interface",
@@ -171962,7 +171892,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 146,
+        "pendingAccesses": 141,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -174674,7 +174604,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 142,
+        "reads": 137,
         "writes": 0
       },
       "declarationFingerprint": "sha256:4a6e4eb3b93808f0ccd4b27918297fc8be16015058c903937fdf0a3c7bf69ae4",
@@ -174684,7 +174614,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 142,
+        "pendingAccesses": 137,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -180634,7 +180564,7 @@
     {
       "accesses": {
         "calls": 4,
-        "reads": 248,
+        "reads": 247,
         "writes": 5
       },
       "declarationFingerprint": "sha256:8bf2c46da5a3a37678dda70498807943307c263ced5ca9613912e81ab2346518",
@@ -180644,7 +180574,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 257,
+        "pendingAccesses": 256,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -180825,15 +180755,15 @@
     {
       "accesses": {
         "calls": 8,
-        "reads": 313,
-        "writes": 109
+        "reads": 307,
+        "writes": 107
       },
       "declarationFingerprint": "sha256:7b13d22a6501300f888dfc1d174bb0d7a4eb02db97f0112d52adcd1f0d4156ba",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 430,
+        "directAccesses": 422,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -181361,7 +181291,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 278,
+        "reads": 275,
         "writes": 27
       },
       "declarationFingerprint": "sha256:a70ee9ffbaf0c1d0fd73965076d56028db2ce78f1dda4c9006e35974be0fe408",
@@ -181369,7 +181299,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 305,
+        "directAccesses": 302,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -541295,15 +541225,15 @@
   "schemaVersion": 5,
   "summary": {
     "auditOnlySchemas": 2096,
-    "bindableAccesses": 39997,
+    "bindableAccesses": 39965,
     "candidates": 2857,
-    "directAccesses": 25838,
+    "directAccesses": 25827,
     "directSchemas": 758,
     "eligible": 2159,
-    "escapes": 14607,
+    "escapes": 14597,
     "fields": 29491,
     "ineligible": 698,
-    "pendingAccesses": 14159,
+    "pendingAccesses": 14138,
     "reflectiveSurvivors": 452
   },
   "upstreamCommit": "2e86cd620a53121aa6c9230215f44c6c9a3bf816"

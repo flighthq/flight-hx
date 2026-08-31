@@ -2785,6 +2785,34 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('Reflect.fields');
   });
 
+  it('routes fields attached to callable objects through the portable runtime', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/callableObject.ts',
+      `
+        type Decorated = ((value: string) => void) & { clear?: () => void; readonly signals: { active: boolean } };
+        export function decorate(callback: (value: string) => void): Decorated {
+          const decorated = callback as Decorated;
+          Object.assign(decorated, { clear: () => {}, signals: { active: true } });
+          return decorated;
+        }
+        export function active(decorated: Decorated): boolean { return decorated.signals.active; }
+        export function clear(decorated: Decorated): void { decorated.clear?.(); }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'CallableObjectFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("_Runtime.field(decorated, 'signals')");
+    expect(output).toContain("_Runtime.callOptionalProperty(decorated, 'clear'");
+    expect(output).not.toContain('(cast decorated : {');
+  });
+
   it('collapses generic object intersections and sequences void call arguments', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/genericBoundary.ts',

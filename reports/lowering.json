@@ -2147,18 +2147,18 @@
       "packageName": "@flighthq/render-gl",
       "staticFacts": {
         "booleanConditionalTruthiness": 62,
-        "booleanExplicitTruthiness": 145,
+        "booleanExplicitTruthiness": 141,
         "booleanLogicalExpressions": 53,
         "booleanLogicalTruthiness": 56,
         "indexedAccesses": {
-          "expressions": 113,
-          "reads": 51,
+          "expressions": 110,
+          "reads": 48,
           "writes": 62
         },
         "indexedAccessEscapes": {
           "widthSensitiveMixedWrites": 0
         },
-        "numericRelations": 39,
+        "numericRelations": 37,
         "typedArraySetCalls": 0
       }
     },
@@ -3623,7 +3623,7 @@
       "booleanAndExpressions": 2781,
       "booleanConditionalExpressions": 3477,
       "booleanOrExpressions": 3370,
-      "booleanTruthinessUses": 17127,
+      "booleanTruthinessUses": 17123,
       "destructuringEscapes": {
         "regexp-result-array": {
           "assignment": 0,
@@ -3720,12 +3720,12 @@
         "asyncFlowForOfValues": 21
       },
       "indexedAccesses": {
-        "reads": 9610,
+        "reads": 9607,
         "writes": 4436
       },
       "indexedReceivers": {
         "Array": {
-          "reads": 6688,
+          "reads": 6685,
           "writes": 1463
         },
         "ArrayOrFloat32Array": {
@@ -3773,7 +3773,7 @@
           "writes": 402
         }
       },
-      "numericRelations": 7782,
+      "numericRelations": 7780,
       "syntheticArrayReads": {
         "highArityArguments": 27,
         "iterationBindings": 189
@@ -3794,12 +3794,12 @@
     },
     "staticFacts": {
       "booleanConditionalTruthiness": 3485,
-      "booleanExplicitTruthiness": 17162,
+      "booleanExplicitTruthiness": 17158,
       "booleanLogicalExpressions": 6180,
       "booleanLogicalTruthiness": 6511,
       "indexedAccesses": {
-        "expressions": 13439,
-        "reads": 9145,
+        "expressions": 13436,
+        "reads": 9142,
         "writes": 4441
       },
       "indexedAccessEscapes": {
@@ -3807,8 +3807,8 @@
       },
       "indexedReceivers": {
         "Array": {
-          "expressions": 7622,
-          "reads": 6223,
+          "expressions": 7619,
+          "reads": 6220,
           "writes": 1463
         },
         "ArrayOrFloat32Array": {
@@ -3867,7 +3867,7 @@
           "writes": 402
         }
       },
-      "numericRelations": 7795,
+      "numericRelations": 7793,
       "typedArraySetCalls": 96,
       "typedArraySetReceivers": {
         "Float32Array": 41,

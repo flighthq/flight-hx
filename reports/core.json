@@ -16840,7 +16840,7 @@
     "booleanAndExpressions": 2781,
     "booleanConditionalExpressions": 3477,
     "booleanOrExpressions": 3370,
-    "booleanTruthinessUses": 17127,
+    "booleanTruthinessUses": 17123,
     "destructuringEscapes": {
       "regexp-result-array": {
         "assignment": 0,
@@ -16937,12 +16937,12 @@
       "asyncFlowForOfValues": 21
     },
     "indexedAccesses": {
-      "reads": 9610,
+      "reads": 9607,
       "writes": 4436
     },
     "indexedReceivers": {
       "Array": {
-        "reads": 6688,
+        "reads": 6685,
         "writes": 1463
       },
       "ArrayOrFloat32Array": {
@@ -16990,7 +16990,7 @@
         "writes": 402
       }
     },
-    "numericRelations": 7782,
+    "numericRelations": 7780,
     "syntheticArrayReads": {
       "highArityArguments": 27,
       "iterationBindings": 189
@@ -20595,12 +20595,12 @@
         "byReason": {
           "external-toolkit-boundary": 1,
           "source-unknown": 14,
-          "standard-toolkit-boundary": 41,
+          "standard-toolkit-boundary": 40,
           "unclassified": 3
         },
         "module": "flight._HostWeb",
         "source": "upstream/packages/host-web/src/webDialog.ts",
-        "total": 59
+        "total": 58
       },
       {
         "byReason": {
@@ -22956,11 +22956,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 34
+          "standard-toolkit-boundary": 24
         },
         "module": "flight._RenderGl",
         "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-        "total": 34
+        "total": 24
       },
       {
         "byReason": {
@@ -29012,12 +29012,12 @@
         "source-null": 206,
         "source-undefined": 508,
         "source-unknown": 4479,
-        "standard-toolkit-boundary": 21581,
+        "standard-toolkit-boundary": 21570,
         "unclassified": 496
       },
       "checkerKnownUnrepresentable": 0,
       "modules": 1412,
-      "total": 29179
+      "total": 29168
     }
   }
 }

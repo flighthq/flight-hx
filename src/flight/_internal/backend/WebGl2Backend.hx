@@ -674,7 +674,24 @@ class WebGl2Backend {
   }
 
   public static inline function getExtension(gl:GlContext, name:String):Dynamic {
-    return gl.getExtension(name);
+    final extension = gl.getExtension(name);
+    #if (lime && !js)
+    // Lime enumerates native extensions through the legacy GL_EXTENSIONS
+    // string, which is empty on desktop core profiles. Float color targets
+    // are core in desktop OpenGL 3+, so expose the WebGL capability marker
+    // that the generated format policy expects there. OpenGL ES continues to
+    // require Lime's real EXT_color_buffer_float result.
+    final nativeGl:Dynamic = gl;
+    if (
+      extension == null &&
+      name == 'EXT_color_buffer_float' &&
+      Reflect.field(nativeGl, 'type') == 'opengl' &&
+      Std.int(Reflect.field(nativeGl, 'version')) >= 3
+    ) {
+      return {};
+    }
+    #end
+    return extension;
   }
 
   public static inline function getParameter(gl:GlContext, pname:Float):Dynamic {

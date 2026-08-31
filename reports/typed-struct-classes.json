@@ -34725,7 +34725,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 430,
+      "directAccesses": 422,
       "fields": {
         "optional": 14,
         "requiredUndefined": 0,
@@ -34896,7 +34896,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 8
       },
-      "directAccesses": 305,
+      "directAccesses": 302,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -132669,7 +132669,7 @@
     "bridgeInputSignatures": 10282,
     "bridgeOutputSignatures": 2351,
     "crossSchemaTransfers": 1912,
-    "directAccesses": 25838,
+    "directAccesses": 25827,
     "dynamicIngresses": 69,
     "mechanicallyCompatibleSchemas": 1586,
     "normalizationRequiredSchemas": 573,

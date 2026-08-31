@@ -1,5 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 
@@ -104,6 +105,42 @@ describe('maintained runtime bindings', () => {
       ],
       { cwd: workspace, stdio: 'pipe' },
     );
+  });
+
+  it('builds generated mesh geometry with Lime on Neko under full DCE', () => {
+    const limeSpecification = readFileSync(path.join(workspace, 'haxe_libraries/lime.hxml'), 'utf8');
+    const limeRelativeCachePath = / into ([^\s"]+)/u.exec(limeSpecification)?.[1];
+    if (!limeRelativeCachePath) throw new Error('Could not resolve the pinned Lime cache path');
+    const libraryCache = process.env.HAXE_LIBCACHE ?? path.join(os.homedir(), 'haxe', 'haxe_libraries');
+    const limeSource = path.join(libraryCache, limeRelativeCachePath, 'src');
+    const outputDirectory = path.join(workspace, 'build', 'haxe-mesh-lime-neko');
+    const output = path.join(outputDirectory, 'main.n');
+    mkdirSync(outputDirectory, { recursive: true });
+
+    execFileSync(
+      process.execPath,
+      [
+        'tools/haxe.mjs',
+        '-cp',
+        'src',
+        '-cp',
+        'generated',
+        '-cp',
+        'tests/haxe',
+        '-cp',
+        limeSource,
+        '--main',
+        'MeshLimeNekoSmoke',
+        '-neko',
+        output,
+        '-D',
+        'lime',
+        '-dce',
+        'full',
+      ],
+      { cwd: workspace, stdio: 'pipe' },
+    );
+    expect(execFileSync('neko', [output], { cwd: workspace, encoding: 'utf8' })).toContain('MESH_LIME_NEKO_OK');
   });
 
   it('executes generated internal-class methods in path booleans under full JavaScript DCE', () => {

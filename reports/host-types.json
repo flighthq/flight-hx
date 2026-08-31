@@ -4,7 +4,7 @@
     "calls": 1411,
     "memberAccesses": 2888,
     "reads": 1058,
-    "typeReferences": 5837,
+    "typeReferences": 5829,
     "types": 237,
     "writes": 419
   },
@@ -53574,7 +53574,7 @@
         "arities": [
           0
         ],
-        "count": 40,
+        "count": 39,
         "locations": [
           {
             "arity": 0,
@@ -53586,12 +53586,6 @@
             "arity": 0,
             "column": 7,
             "line": 25,
-            "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
-          },
-          {
-            "arity": 0,
-            "column": 27,
-            "line": 77,
             "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
           },
           {
@@ -53858,7 +53852,7 @@
         "arities": [
           0
         ],
-        "count": 252,
+        "count": 248,
         "locations": [
           {
             "arity": 0,
@@ -54338,30 +54332,6 @@
             "arity": 0,
             "column": 10,
             "line": 48,
-            "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
-          },
-          {
-            "arity": 0,
-            "column": 7,
-            "line": 72,
-            "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
-          },
-          {
-            "arity": 0,
-            "column": 5,
-            "line": 73,
-            "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
-          },
-          {
-            "arity": 0,
-            "column": 3,
-            "line": 75,
-            "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
-          },
-          {
-            "arity": 0,
-            "column": 35,
-            "line": 75,
             "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
           },
           {
@@ -55571,7 +55541,7 @@
         "arities": [
           0
         ],
-        "count": 416,
+        "count": 414,
         "locations": [
           {
             "arity": 0,
@@ -57003,18 +56973,6 @@
           },
           {
             "arity": 0,
-            "column": 35,
-            "line": 89,
-            "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
-          },
-          {
-            "arity": 0,
-            "column": 5,
-            "line": 89,
-            "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
-          },
-          {
-            "arity": 0,
             "column": 3,
             "line": 21,
             "source": "upstream/packages/render-gl/src/glLinearToSrgbPass.ts"
@@ -58086,7 +58044,7 @@
         "arities": [
           0
         ],
-        "count": 375,
+        "count": 374,
         "locations": [
           {
             "arity": 0,
@@ -58734,12 +58692,6 @@
             "arity": 0,
             "column": 10,
             "line": 48,
-            "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
-          },
-          {
-            "arity": 0,
-            "column": 9,
-            "line": 90,
             "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
           },
           {

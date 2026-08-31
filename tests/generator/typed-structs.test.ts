@@ -8224,7 +8224,7 @@ describe('typed struct analysis', () => {
       ),
     ).toBe(true);
     expect(reviewedDirectCandidates.reduce((total, candidate) => total + candidate.emission.directAccesses, 0)).toBe(
-      13_827,
+      13_816,
     );
 
     // Merged implementation modules invalidate whole-file receiver-name scans:

@@ -244,6 +244,7 @@ class _Runtime {
 
   static function resolveMethod(owner:Dynamic, name:String):Dynamic {
     #if !js
+    if (DynamicObject.hasCallableField(owner, name)) return DynamicObject.callableField(owner, name);
     // Typed-array methods on the pure-eval representation (plain Array): JS
     // code only calls these on real typed arrays, so an Array receiver here is
     // a typed wrapper's storage. `subarray` copies where JS aliases — accepted
@@ -564,6 +565,9 @@ class _Runtime {
     if (source != null && Std.isOfType(source, _LimeTypedArray)) {
       return limeTypedArrayField(cast source, name);
     }
+    #end
+    #if !js
+    if (DynamicObject.hasCallableField(source, name)) return DynamicObject.callableField(source, name);
     #end
     return source == null ? null : Reflect.field(source, name);
   }
@@ -1202,7 +1206,8 @@ class _Runtime {
     if (Std.isOfType(source, _HostConstructor)) {
       return (cast source : _HostConstructor).hasStaticMember(Std.string(key));
     }
-    return source != null && Reflect.hasField(source, Std.string(key));
+    final name = Std.string(key);
+    return source != null && (Reflect.hasField(source, name) || DynamicObject.hasCallableField(source, name));
     #end
   }
 
