@@ -1,22 +1,22 @@
 # Typed Struct Audit
 
-Upstream commit: `2cf1c5cef13bfbb76e1ca7646df2aaa68f8c7f4b`
+Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
 
 The candidate universe is checker-derived. Member escapes, presence and width sensitivity, class feasibility, containment, and provenance are applied as rules. Eligibility is audited independently from emission; newly discovered schemas are reported as unreviewed and remain reflective until their audit diff is approved.
 
 | Metric | Count |
 | --- | ---: |
-| Candidates | 2376 |
-| Eligible | 1784 |
-| Ineligible | 592 |
-| Audit-only schemas | 1587 |
-| Direct schemas | 787 |
-| Declared fields | 28947 |
-| Bindable accesses | 39923 |
-| Pending accesses | 12610 |
-| Directly emitted accesses | 27313 |
-| Reflective survivors | 460 |
-| Dynamic escapes | 14661 |
+| Candidates | 2849 |
+| Eligible | 2158 |
+| Ineligible | 691 |
+| Audit-only schemas | 2088 |
+| Direct schemas | 758 |
+| Declared fields | 29364 |
+| Bindable accesses | 39997 |
+| Pending accesses | 14159 |
+| Directly emitted accesses | 25838 |
+| Reflective survivors | 452 |
+| Dynamic escapes | 14602 |
 
 ## Review status since baseline
 
@@ -27,23 +27,53 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Disposition | Count |
 | --- | ---: |
 | Baseline candidates | 405 |
-| Preserved | 231 |
+| Preserved | 204 |
 | Relocated | 146 |
-| Renamed | 23 |
-| Declaration-kind changes | 2 |
-| Replacement removals | 3 |
-| Unreviewed additions, audit-only | 1587 |
+| Renamed | 26 |
+| Declaration-kind changes | 3 |
+| Replacement removals | 26 |
+| Unreviewed additions, audit-only | 2088 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
+| `@flighthq/types:interface#AppUpdater` | `@flighthq/types:interface#AppUpdateInstallOutcome`, `@flighthq/types:interface#DownloadedUpdate`, `@flighthq/types:interface#UpdaterCommandBackend`, `@flighthq/types:type#AppUpdateCheckOutcome` |
 | `@flighthq/types:interface#ImageResource` | `@flighthq/types:interface#Bitmap`, `@flighthq/types:interface#CompressedImage`, `@flighthq/types:interface#Image` |
+| `@flighthq/types:interface#IpcBackendCapabilities` | `@flighthq/types:interface#HostIpcCapabilities`, `@flighthq/types:interface#IpcMessageBackend` |
+| `@flighthq/types:interface#IpcChannel` | `@flighthq/types:interface#IpcMessageBackend` |
+| `@flighthq/types:interface#IpcMessageEvent` | `@flighthq/types:interface#IpcMessageBackend` |
+| `@flighthq/types:interface#IpcSignals` | `@flighthq/types:interface#IpcMessageBackend` |
+| `@flighthq/types:interface#IpcTarget` | `@flighthq/types:interface#IpcMessageBackend` |
+| `@flighthq/types:interface#NotificationCapabilities` | `@flighthq/types:interface#HostNotificationCapabilities` |
+| `@flighthq/types:interface#NotificationChannel` | `@flighthq/types:interface#HostNotificationCapabilities` |
+| `@flighthq/types:interface#OpenDirectoryDialogOptions` | `@flighthq/types:interface#DirectoryOpenDialogBackend`, `@flighthq/types:type#DirectoryOpenDialogResult` |
+| `@flighthq/types:interface#ShareOptions` | `@flighthq/types:interface#CapacitorShareContentOptions` |
+| `@flighthq/types:interface#ShellOpenExternalOptions` | `@flighthq/types:interface#ShellExternalBackend`, `@flighthq/types:interface#ShellExternalUrlPolicy` |
+| `@flighthq/types:interface#ShellOpenPathOptions` | `@flighthq/types:interface#ShellPathOpenBackend`, `@flighthq/types:type#ShellPathOpenOutcome` |
+| `@flighthq/types:interface#ShortcutEvent` | `@flighthq/types:interface#GlobalShortcut` |
+| `@flighthq/types:interface#ShortcutSignals` | `@flighthq/types:interface#GlobalShortcut` |
+| `@flighthq/types:interface#StorageQuota` | `@flighthq/types:type#StorageByteSizeResult` |
 | `@flighthq/types:interface#Tileset` | `@flighthq/types:interface#TiledTileset`, `@flighthq/types:interface#TilemapData` |
+| `@flighthq/types:interface#TrayCapabilities` | `@flighthq/types:interface#HostTrayCapabilities` |
+| `@flighthq/types:interface#TrayEventData` | `@flighthq/types:interface#TrayBalloonEvent`, `@flighthq/types:interface#TrayInteractionEvent`, `@flighthq/types:interface#TrayMenuSelectionEvent`, `@flighthq/types:type#TrayDropEvent` |
+| `@flighthq/types:interface#UpdateProgress` | `@flighthq/types:interface#DownloadedUpdate`, `@flighthq/types:type#AppUpdateCheckOutcome` |
+| `@flighthq/types:interface#UpdaterConfig` | `@flighthq/types:interface#UpdaterCommandBackend` |
+| `@flighthq/types:interface#UpdaterError` | `@flighthq/types:interface#AppUpdateInstallOutcome`, `@flighthq/types:type#AppUpdateCheckOutcome` |
+| `@flighthq/types:interface#UpdaterSignatureConfig` | `@flighthq/types:interface#DownloadedUpdate`, `@flighthq/types:interface#UpdaterCommandBackend` |
+| `@flighthq/types:interface#UpdaterState` | `@flighthq/types:interface#DownloadedUpdate`, `@flighthq/types:type#AppUpdateCheckOutcome` |
 | `@flighthq/types:interface#VideoTexture` | `@flighthq/types:interface#Image`, `@flighthq/types:interface#VideoResource`, `@flighthq/types:type#Texture` |
+| `@flighthq/types:interface#WebcamStream` | `@flighthq/types:interface#MediaFileCaptureBackend`, `@flighthq/types:interface#MediaFileCapturePhoto`, `@flighthq/types:interface#MediaFileCaptureVideo` |
 
 ## Rule-derived candidate audit
 
 | Candidate identity | Mode | Migration | Baseline identity | Purpose | Fields | Reads | Writes | Calls | Pending | Direct | Reflective survivors | Escapes | Eligible | Reasons |
 | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- |
+| `@flighthq/host-capacitor:type#CapacitorAppCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/host-capacitor:type#CapacitorProtocolCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/host-electron:type#ElectronAppCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/host-electron:type#ElectronProtocolCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/host-electron:type#ElectronTrayCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/host-tauri:type#TauriAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/host-tauri:type#TauriTrayCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#Aabb` | `direct` | `preserved` | `@flighthq/types:interface#Aabb` | 3D axis-aligned bounds entity | 2 | 30 | 0 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AabbLike` | `direct` | `preserved` | `@flighthq/types:type#AabbLike` | structural 3D axis-aligned bounds carrier | 2 | 280 | 0 | 0 | 0 | 280 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcClass` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -65,13 +95,14 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AbcTrait` | `direct` | `new` | — | reviewed escape-free ABC trait | 11 | 6 | 10 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AbcTraitKind` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#Accelerator` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#AcceleratorParseError` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:interface#AcceleratorParseError` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:type#AcceleratorParseErrorReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#AccessibilityBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
+| `@flighthq/types:interface#AccessibilityBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#AccessibilityDescriptor` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AccessibilityLiveness` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AccessibilityNode` | `direct` | `new` | — | reviewed escape-free accessibility node | 8 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
-| `@flighthq/types:type#AccessibilityOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#AccessibilityOperationOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#AccessibilityRole` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#AccessibilityState` | `direct` | `new` | — | reviewed escape-free accessibility state | 13 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AddNodeChildCommand` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -114,25 +145,51 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#AnimationTrackValidationDiagnostic` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AnisotropyPbrExtension` | `direct` | `new` | — | reviewed escape-free anisotropy PBR extension | 5 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AnyInteractionSignalSlot` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#App` | `direct` | `preserved` | `@flighthq/types:interface#App` | broad host document | 6 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#App` | `direct` | `preserved` | `@flighthq/types:interface#App` | broad host document | 6 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AppActivateBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#AppActivationPolicy` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#AppBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 38 | 0 | 0 | 0 | 0 | 0 | 0 | 40 | yes | — |
+| `@flighthq/types:interface#AppActivationPolicyBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppAllWindowsClosedBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppBadgeBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppDockBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:type#AppearanceNode` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#AppFocusBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppHideBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#AppLaunchKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Application` | `direct` | `preserved` | `@flighthq/types:interface#Application` | broad host document | 13 | 24 | 14 | 0 | 0 | 38 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ApplicationExitBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#ApplicationLoopOptions` | `direct` | `preserved` | `@flighthq/types:interface#ApplicationLoopOptions` | application-loop option record | 5 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ApplicationRenderView` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 17 | 0 | 0 | 17 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:type#ApplicationRenderViewResize` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#ApplicationRenderViewTargetOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#ApplicationStepOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
-| `@flighthq/types:interface#ApplicationWindow` | `direct` | `preserved` | `@flighthq/types:interface#ApplicationWindow` | broad host document | 36 | 93 | 59 | 0 | 0 | 152 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ApplicationVisibilityBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#ApplicationWindow` | `direct` | `preserved` | `@flighthq/types:interface#ApplicationWindow` | broad host document | 36 | 85 | 60 | 0 | 0 | 145 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AppLifecycle` | `direct` | `preserved` | `@flighthq/types:interface#AppLifecycle` | broad host document | 7 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AppLifecycleState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#AppLocaleBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#AppLoginItem` | `direct` | `preserved` | `@flighthq/types:interface#AppLoginItem` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AppLoginItemBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#AppLoginItemLike` | `direct` | `preserved` | `@flighthq/types:interface#AppLoginItemLike` | broad host document | 4 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AppMemoryPressure` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#AppNameBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppNameWriteBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppOpenFileBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppPathBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:type#AppPathKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#AppUpdater` | `direct` | `preserved` | `@flighthq/types:interface#AppUpdater` | broad host document | 10 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AppQuitBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppQuitRequestBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppReadyBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppRecentDocumentsBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#AppRelaunchBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppSecondInstanceBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppShowBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppSingleInstanceBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:type#AppUpdateCheckOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#AppUpdateInstallOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#AppUserModelIdBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppVersionBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AppVisibilityQueryBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#AreaLight` | `direct` | `new` | — | reviewed escape-free area light | 12 | 34 | 0 | 0 | 0 | 34 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AreaLightOptions` | `direct` | `new` | — | reviewed escape-free area-light options | 11 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AsepriteArrayDocument` | `direct` | `relocated` | `@flighthq/spritesheet-formats:interface#AsepriteArrayDocument` | broad serialization document | 2 | 1 | 0 | 0 | 0 | 1 | 3 | 3 | yes | — |
@@ -189,7 +246,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AudioSourceHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#AutoExposureEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BackendExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#BackendOperationExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 17 | 0 | 0 | 17 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#BackendOperationExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BarrelDistortionEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#BevelEffect` | `direct` | `new` | — | reviewed escape-free bevel effect | 13 | 39 | 0 | 0 | 0 | 39 | 0 | 0 | yes | — |
 | `@flighthq/types:type#BidiClass` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -287,28 +344,32 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#CanvasImageSourceKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#CanvasMaterialRenderer` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasMaterialState` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CanvasRenderEffectContext` | `direct` | `new` | — | reviewed escape-free Canvas render-effect context | 4 | 48 | 0 | 0 | 0 | 48 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderEffectPipeline` | `direct` | `new` | — | reviewed escape-free Canvas render-effect pipeline | 4 | 10 | 2 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CanvasRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#CanvasRenderEffectSupport` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#CanvasRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasRenderRegistries` | `direct` | `new` | — | reviewed escape-free Canvas render registries | 9 | 12 | 2 | 0 | 0 | 14 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 70 | 15 | 9 | 94 | 0 | 0 | 16 | yes | — |
-| `@flighthq/types:interface#CanvasRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free Canvas render-state runtime | 15 | 30 | 9 | 1 | 0 | 40 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasRenderTarget` | `direct` | `new` | — | reviewed escape-free Canvas render target | 4 | 150 | 6 | 0 | 0 | 156 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasRenderTargetPool` | `direct` | `new` | — | reviewed escape-free Canvas render-target pool | 2 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free Canvas render-texture entry | 2 | 12 | 3 | 0 | 0 | 15 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderRegistries` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 8 | 2 | 0 | 10 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#CanvasRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 66 | 10 | 9 | 85 | 0 | 0 | 16 | yes | — |
+| `@flighthq/types:interface#CanvasRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free Canvas render-state runtime | 16 | 24 | 9 | 1 | 0 | 34 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderSurface` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 24 | 0 | 0 | 24 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#CanvasRenderSurfaceCreator` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:interface#CanvasRenderSurfaceOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderTarget` | `direct` | `new` | — | reviewed escape-free Canvas render target | 5 | 154 | 4 | 0 | 0 | 158 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderTargetPool` | `direct` | `new` | — | reviewed escape-free Canvas render-target pool | 3 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free Canvas render-texture entry | 2 | 13 | 3 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CanvasRenderTexturePool` | `direct` | `new` | — | reviewed escape-free Canvas render-texture pool | 5 | 18 | 3 | 0 | 0 | 21 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CanvasRenderTextureStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#CanvasShapeCommand` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 1 | 0 | 1 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CanvasShapeDrawState` | `direct` | `new` | — | reviewed escape-free Canvas shape draw state | 16 | 53 | 60 | 6 | 0 | 119 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasShapeCommand` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 1 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasShapeDrawState` | `direct` | `new` | — | reviewed escape-free Canvas shape draw state | 16 | 55 | 60 | 6 | 0 | 121 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CanvasShapeHandler` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#CanvasTextInputOverlay` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#CanvasTextShaperBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#CanvasTextureResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#CanvasTextureResolvers` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 6 | 1 | 10 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorApi` | `direct` | `new` | — | reviewed escape-free Capacitor API | 12 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CanvasTextureResolvers` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 4 | 7 | 1 | 12 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#CapacitorApi` | `direct` | `new` | — | reviewed escape-free Capacitor API | 12 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorAppInfo` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorAppPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#CapacitorClipboardPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | yes | — |
@@ -328,7 +389,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CapacitorFilesystemCopyOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorFilesystemMkdirOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorFilesystemPathOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorFilesystemPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | yes | — |
+| `@flighthq/types:interface#CapacitorFilesystemPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | yes | — |
 | `@flighthq/types:interface#CapacitorFilesystemReaddirResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorFilesystemReadOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorFilesystemReadResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
@@ -338,23 +399,25 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CapacitorFilesystemWriteResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorGeolocationOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorGeolocationPermissionOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorGeolocationPermissionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorGeolocationPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | yes | — |
+| `@flighthq/types:interface#CapacitorGeolocationPermissionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CapacitorGeolocationPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#CapacitorHapticsPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#CapacitorKeyboardPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | yes | — |
-| `@flighthq/types:interface#CapacitorLocalNotificationAction` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CapacitorLocalNotificationAction` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorLocalNotificationSchema` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorLocalNotificationsPending` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorLocalNotificationsPermission` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorLocalNotificationsPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
-| `@flighthq/types:interface#CapacitorLocalNotificationsScheduleResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorNetworkPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#CapacitorLocalNotificationsPermission` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CapacitorLocalNotificationsPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | yes | — |
+| `@flighthq/types:interface#CapacitorLocalNotificationsScheduleResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CapacitorNetworkPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#CapacitorNotificationCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#CapacitorPluginListenerHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
 | `@flighthq/types:interface#CapacitorPosition` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorPositionCoords` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorShareCanResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CapacitorShareContentBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CapacitorShareContentOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorShareOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#CapacitorSharePlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#CapacitorSharePlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#CapacitorShareResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorStatusBarInfoResult` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorStatusBarPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
@@ -378,8 +441,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ChromaticAberrationEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CircleCollider` | `direct` | `preserved` | `@flighthq/types:interface#CircleCollider` | broad asset document | 7 | 17 | 0 | 0 | 0 | 17 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ClearcoatPbrExtension` | `direct` | `new` | — | reviewed escape-free clearcoat PBR extension | 10 | 25 | 0 | 0 | 0 | 25 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ClipboardBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 23 | 0 | 0 | 0 | 0 | 0 | 0 | 58 | yes | — |
 | `@flighthq/types:interface#ClipboardBookmark` | `direct` | `preserved` | `@flighthq/types:interface#ClipboardBookmark` | broad host document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ClipboardBookmarkBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#ClipboardChangeBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | yes | — |
+| `@flighthq/types:interface#ClipboardImageBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#ClipboardTextBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#ClipboardWatch` | `direct` | `preserved` | `@flighthq/types:interface#ClipboardWatch` | broad host document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ClipboardWriteItem` | `direct` | `preserved` | `@flighthq/types:interface#ClipboardWriteItem` | broad host document | 2 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ClipNode` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -472,17 +539,19 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CompressedImageData` | `direct` | `renamed` | `@flighthq/types:interface#ImageResourceCompressed` | broad asset document | 2 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Compression` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#CompressionFraming` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#Connectivity` | `direct` | `preserved` | `@flighthq/types:interface#Connectivity` | broad host document | 5 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ConnectivityBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 13 | yes | — |
+| `@flighthq/types:interface#Connectivity` | `direct` | `preserved` | `@flighthq/types:interface#Connectivity` | broad host document | 5 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ConnectivityChangeBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:type#ConnectivityConnectionType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#ConnectivityOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ConnectivityReachability` | `direct` | `preserved` | `@flighthq/types:interface#ConnectivityReachability` | broad host document | 2 | 0 | 12 | 0 | 0 | 12 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ConnectivityReachability` | `direct` | `preserved` | `@flighthq/types:interface#ConnectivityReachability` | broad host document | 2 | 0 | 6 | 0 | 0 | 6 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ConnectivityReachabilityBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ConnectivityReachabilityOptions` | `direct` | `preserved` | `@flighthq/types:interface#ConnectivityReachabilityOptions` | broad host document | 3 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ConnectivityStatus` | `direct` | `preserved` | `@flighthq/types:interface#ConnectivityStatus` | broad host document | 8 | 34 | 32 | 0 | 0 | 66 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ConnectivityStatus` | `direct` | `preserved` | `@flighthq/types:interface#ConnectivityStatus` | broad host document | 8 | 43 | 19 | 0 | 0 | 62 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ConnectivityStatusBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#ContactShadowsEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ConvolutionEffect` | `direct` | `new` | — | reviewed escape-free convolution effect | 9 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CreateCubeTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CreateExternalTextureOptions` | `direct` | `new` | — | reviewed escape-free external-texture options | 4 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
+| `@flighthq/types:type#CreateGlobalShortcutOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#CreateRenderTextureOptions` | `direct` | `new` | — | reviewed escape-free render-texture options | 16 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:type#CreateTexture2DOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#CreateTextureOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -501,15 +570,17 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Decompressor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#DeepReadonly` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#DepthMaterial` | `direct` | `new` | — | reviewed escape-free depth material | 8 | 6 | 2 | 0 | 0 | 8 | 0 | 0 | yes | — |
+| `@flighthq/types:type#DesktopOsProfile` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#DeviceBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
-| `@flighthq/types:interface#DeviceCapabilities` | `direct` | `preserved` | `@flighthq/types:interface#DeviceCapabilities` | device capability result record | 3 | 0 | 9 | 0 | 0 | 9 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#DeviceDisplayMetrics` | `direct` | `preserved` | `@flighthq/types:interface#DeviceDisplayMetrics` | device display-metrics result record | 7 | 0 | 21 | 0 | 0 | 21 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#DeviceCapabilities` | `direct` | `preserved` | `@flighthq/types:interface#DeviceCapabilities` | device capability result record | 3 | 0 | 6 | 0 | 0 | 6 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#DeviceDisplayMetrics` | `direct` | `preserved` | `@flighthq/types:interface#DeviceDisplayMetrics` | device display-metrics result record | 7 | 0 | 14 | 0 | 0 | 14 | 0 | 0 | yes | — |
 | `@flighthq/types:type#DeviceFormFactor` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#DeviceInfo` | `direct` | `preserved` | `@flighthq/types:interface#DeviceInfo` | broad host document | 25 | 0 | 75 | 0 | 0 | 75 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#DialogBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | yes | — |
+| `@flighthq/types:interface#DeviceInfo` | `direct` | `preserved` | `@flighthq/types:interface#DeviceInfo` | broad host document | 25 | 0 | 50 | 0 | 0 | 50 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DirectionalBlurEffect` | `direct` | `new` | — | reviewed escape-free directional-blur effect | 4 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DirectionalLight` | `direct` | `new` | — | reviewed escape-free directional light | 8 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DirectionalLightOptions` | `direct` | `new` | — | reviewed escape-free directional-light options | 7 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#DirectoryOpenDialogBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#DirectoryOpenDialogResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#DisplacementEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplayObject` | `direct` | `new` | — | reviewed escape-free display object | 19 | 0 | 12 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DisplayObjectRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 38 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -528,48 +599,52 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#DomScene2DRectangle` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 36 | 0 | 0 | 36 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#DomTextInputOverlay` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#DomTextureResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
+| `@flighthq/types:interface#DownloadedUpdate` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#DragForce` | `direct` | `preserved` | `@flighthq/types:interface#DragForce` | broad asset document | 2 | 3 | 0 | 0 | 0 | 3 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#DropShadowEffect` | `direct` | `new` | — | reviewed escape-free drop-shadow effect | 10 | 37 | 0 | 0 | 0 | 37 | 0 | 0 | yes | — |
 | `@flighthq/types:type#EasingFunction` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#EasingSegment` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 1 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#EasingStepsGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#EffectSourceMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ElectronApi` | `direct` | `new` | — | reviewed escape-free Electron API | 16 | 29 | 0 | 0 | 0 | 29 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ElectronApp` | `audit-only` | `new` | — | checker-discovered public declaration | 31 | 7 | 0 | 0 | 7 | 0 | 0 | 48 | yes | — |
-| `@flighthq/types:interface#ElectronAutoUpdater` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | yes | — |
-| `@flighthq/types:interface#ElectronBackendOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ElectronApi` | `direct` | `new` | — | reviewed escape-free Electron API | 16 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ElectronApp` | `audit-only` | `new` | — | checker-discovered public declaration | 31 | 1 | 0 | 0 | 1 | 0 | 0 | 38 | yes | — |
+| `@flighthq/types:interface#ElectronAutoUpdater` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
+| `@flighthq/types:interface#ElectronBackendOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 8 | 0 | 0 | 8 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#ElectronBrowserWindow` | `audit-only` | `new` | — | checker-discovered public declaration | 40 | 4 | 0 | 0 | 4 | 0 | 0 | 34 | yes | — |
 | `@flighthq/types:interface#ElectronBrowserWindowConstructor` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `constructable-schema` |
 | `@flighthq/types:interface#ElectronBrowserWindowOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronClipboard` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | yes | — |
 | `@flighthq/types:interface#ElectronClipboardData` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
-| `@flighthq/types:interface#ElectronDialog` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
-| `@flighthq/types:interface#ElectronDisplay` | `direct` | `new` | — | reviewed escape-free Electron display | 4 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ElectronDialog` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 5 | yes | — |
+| `@flighthq/types:interface#ElectronDisplay` | `direct` | `new` | — | reviewed escape-free Electron display | 12 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronDock` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
-| `@flighthq/types:interface#ElectronFs` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
-| `@flighthq/types:interface#ElectronGlobalShortcut` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:interface#ElectronFs` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
+| `@flighthq/types:interface#ElectronGlobalShortcut` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#ElectronIpcMain` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#ElectronLoginItemSettings` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronLoginItemSettingsLike` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#ElectronMacosNotificationCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#ElectronMenu` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ElectronMenuConstructor` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | no | `constructable-schema` |
 | `@flighthq/types:interface#ElectronMenuItemOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 2 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ElectronMenuItemRole` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ElectronMessageBoxOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ElectronNativeImage` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
-| `@flighthq/types:interface#ElectronNativeImageModule` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#ElectronNotification` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | yes | — |
-| `@flighthq/types:interface#ElectronNotificationConstructor` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | no | `constructable-schema` |
-| `@flighthq/types:interface#ElectronNotificationOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ElectronNativeImage` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
+| `@flighthq/types:interface#ElectronNativeImageModule` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#ElectronNotification` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
+| `@flighthq/types:type#ElectronNotificationCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#ElectronNotificationConstructor` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | no | `constructable-schema` |
+| `@flighthq/types:interface#ElectronNotificationOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronOpenDialogOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ElectronPowerMonitor` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 1 | 0 | 0 | 1 | 0 | 0 | 16 | yes | — |
+| `@flighthq/types:interface#ElectronPowerMonitor` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 2 | 0 | 0 | 2 | 0 | 0 | 17 | yes | — |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ElectronPowerSaveBlocker` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#ElectronRectangle` | `direct` | `new` | — | reviewed escape-free Electron rectangle | 4 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronSaveDialogOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronScreen` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | yes | — |
-| `@flighthq/types:interface#ElectronShell` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | yes | — |
+| `@flighthq/types:interface#ElectronShell` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | yes | — |
 | `@flighthq/types:interface#ElectronShortcutDetails` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ElectronTray` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 17 | yes | — |
+| `@flighthq/types:interface#ElectronTray` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 18 | yes | — |
 | `@flighthq/types:interface#ElectronTrayBalloonOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronTrayConstructor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `constructable-schema` |
 | `@flighthq/types:interface#EmbeddedAudioResourceReference` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 6 | 2 | 0 | 8 | 0 | 0 | 20 | yes | — |
@@ -578,11 +653,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#EmissiveModifier` | `direct` | `new` | — | reviewed escape-free emissive modifier | 7 | 25 | 1 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:type#EmissiveModifierFacing` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#EmissiveModifierOptions` | `direct` | `new` | — | reviewed escape-free emissive modifier options | 5 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Entity` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | yes | — |
+| `@flighthq/types:interface#Entity` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | yes | — |
 | `@flighthq/types:interface#EntityRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 1 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#EntityRuntimeWriteGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#EntityRuntimeWriteSlot` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#EntityWithoutRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3598 | yes | — |
+| `@flighthq/types:type#EntityWithoutRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3594 | yes | — |
 | `@flighthq/types:interface#Environment` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#EnvironmentOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#EnvReflectModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
@@ -595,14 +670,21 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ExternalTexture` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FallbackRemediableSceneCoverageEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FallbackUnavailableSceneCoverageEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FileDialogFilter` | `direct` | `preserved` | `@flighthq/types:interface#FileDialogFilter` | broad host document | 3 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FileDialogHandle` | `direct` | `preserved` | `@flighthq/types:interface#FileDialogHandle` | file-dialog result handle | 3 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
-| `@flighthq/types:type#FileDialogStartIn` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#FileDialogFilter` | `direct` | `preserved` | `@flighthq/types:interface#FileDialogFilter` | broad host document | 2 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FileDialogHandle` | `direct` | `preserved` | `@flighthq/types:interface#FileDialogHandle` | file-dialog result handle | 3 | 8 | 0 | 0 | 0 | 8 | 2 | 2 | yes | — |
+| `@flighthq/types:interface#FileDialogHandleOperations` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FileDialogHandleRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 1 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FileEntry` | `direct` | `preserved` | `@flighthq/types:interface#FileEntry` | broad host document | 3 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FileLogSink` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FileLogSink` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FileLogSinkDestroyOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#FileOpenDialogBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#FileOpenDialogResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#FilePermissions` | `direct` | `preserved` | `@flighthq/types:interface#FilePermissions` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FileSaveDialogBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#FileSaveDialogResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#FileStat` | `direct` | `preserved` | `@flighthq/types:interface#FileStat` | broad host document | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#FileSystemBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 28 | 0 | 0 | 0 | 0 | 0 | 0 | 37 | yes | — |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#FileSystemHostBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 22 | yes | — |
 | `@flighthq/types:type#FileSystemPathKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#FileSystemUsage` | `direct` | `preserved` | `@flighthq/types:interface#FileSystemUsage` | broad host document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FileWalkOptions` | `direct` | `preserved` | `@flighthq/types:interface#FileWalkOptions` | broad host document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
@@ -665,14 +747,16 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#FrameScript` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#Frustum` | `direct` | `preserved` | `@flighthq/types:interface#Frustum` | 3D frustum aggregate | 6 | 30 | 0 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:type#FrustumLike` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 30 | yes | — |
+| `@flighthq/types:interface#FullscreenBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:type#FullscreenTargetHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#FxaaEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GamepadAxisKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#GamepadButtonKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#GamepadMapping` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#GamepadMappingKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#GeolocationBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 17 | yes | — |
+| `@flighthq/types:type#GeolocationAccessOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GeolocationBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 2 | 0 | 0 | 2 | 0 | 0 | 13 | yes | — |
 | `@flighthq/types:type#GeolocationErrorReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#GeolocationPermissionState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GeolocationRequestOptions` | `direct` | `preserved` | `@flighthq/types:interface#GeolocationRequestOptions` | broad host document | 3 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GeoPosition` | `direct` | `preserved` | `@flighthq/types:interface#GeoPosition` | broad host document | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GeoPositionResult` | `direct` | `preserved` | `@flighthq/types:interface#GeoPositionResult` | broad host document | 2 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
@@ -686,26 +770,31 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GizmoState` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:type#GizmoTransformMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#GlApplicationRenderView` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
-| `@flighthq/types:interface#GlApplicationRenderViewOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlApplicationRenderViewOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlassExtendedPbrMaterialOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 2 | 0 | 0 | 2 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#GlBitmapShader` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | no | `unsupported-shape` |
 | `@flighthq/types:type#GlBlendEquation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#GlBlendFactor` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GlBlendRealization` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlBlendSignature` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlBoundShader` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlClassicDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 26 | 0 | 0 | 26 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#GlClassicLightingModel` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GlClassicProgram` | `direct` | `new` | — | reviewed escape-free WebGL classic program | 49 | 37 | 0 | 0 | 0 | 37 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlColorAdjustmentMaterialFeature` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:type#GlColorAdjustmentMaterialFeatureGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
+| `@flighthq/types:interface#GlColorAdjustmentResources` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlColorLutTextureCache` | `direct` | `new` | — | reviewed escape-free WebGL color-LUT texture cache | 2 | 6 | 4 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlColorScaleBiasInstancedShader` | `direct` | `new` | — | reviewed escape-free WebGL color scale-bias instanced shader | 5 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlCompressedTextureDecoder` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#GlCompressedTextureSupport` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlCompressedTextureUploader` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#GlContext` | `audit-only` | `new` | — | checker-discovered public declaration | 236 | 809 | 0 | 0 | 809 | 0 | 0 | 1535 | yes | — |
+| `@flighthq/types:interface#GlContext` | `audit-only` | `new` | — | checker-discovered public declaration | 236 | 791 | 0 | 0 | 791 | 0 | 0 | 1519 | yes | — |
 | `@flighthq/types:interface#GlContextLossSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlContextOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlContextRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 105 | 41 | 0 | 146 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlContextState` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:type#GlCullFaceKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GlCustomMaterialShaderSource` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlCustomShaderSourceGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -724,8 +813,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlMeshUpload` | `direct` | `new` | — | reviewed escape-free WebGL mesh upload | 8 | 26 | 9 | 0 | 0 | 35 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlModifierBindContext` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 48 | 1 | 0 | 49 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlModifierSnippet` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 11 | 0 | 1 | 12 | 0 | 0 | 5 | yes | — |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#GlobalShortcutExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlobalShortcut` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#GlobalShortcutAttachOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#GlobalShortcutDetachOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#GlobalShortcutQueryOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#GlParticleResources` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlParticleShader` | `direct` | `new` | — | reviewed escape-free WebGL particle shader | 11 | 34 | 0 | 0 | 0 | 34 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlPbrDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 26 | 0 | 0 | 26 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlPbrExtensionBindContext` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 34 | yes | — |
@@ -736,6 +828,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlPbrExtensionShaderContribution` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlPbrProgram` | `direct` | `new` | — | reviewed escape-free WebGL PBR program | 54 | 30 | 0 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlPbrTransmissionSceneColor` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#GlQuadBatchResources` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 30 | 6 | 0 | 36 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlQuadBatchShader` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderEffectApplicationExplanation` | `direct` | `new` | — | reviewed escape-free WebGL render-effect explanation | 5 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlRenderEffectApplicationGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
@@ -747,12 +841,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GlRenderEffectResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#GlRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#GlRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 7 | 0 | 0 | 7 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#GlRenderRegistries` | `direct` | `new` | — | reviewed escape-free WebGL render registries | 24 | 71 | 18 | 0 | 0 | 89 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 268 | 7 | 4 | 279 | 0 | 0 | 4 | yes | — |
-| `@flighthq/types:interface#GlRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGL render-state runtime | 76 | 352 | 225 | 8 | 0 | 585 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderRegistries` | `audit-only` | `new` | — | checker-discovered public declaration | 24 | 53 | 18 | 0 | 71 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#GlRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 248 | 5 | 4 | 257 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#GlRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGL render-state runtime | 44 | 313 | 109 | 8 | 0 | 430 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderStats` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderSurfaceProvider` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#GlRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGL render target | 18 | 279 | 27 | 0 | 0 | 306 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGL render target | 18 | 278 | 27 | 0 | 0 | 305 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGL render-texture entry | 2 | 19 | 5 | 0 | 0 | 24 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -763,21 +857,23 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlScene3DDrawEntry` | `direct` | `new` | — | reviewed escape-free WebGL Scene3D draw entry | 10 | 2 | 10 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlScene3DForwardLightList` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 1 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlScene3DIbl` | `direct` | `new` | — | reviewed escape-free WebGL Scene3D IBL | 5 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlScene3DRuntime` | `direct` | `new` | — | reviewed escape-free WebGL scene runtime | 26 | 85 | 36 | 4 | 0 | 125 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlScene3DRuntime` | `direct` | `new` | — | reviewed escape-free WebGL scene runtime | 26 | 84 | 36 | 4 | 0 | 124 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlScene3DShadow` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 7 | 1 | 0 | 8 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlScissorRect` | `direct` | `new` | — | reviewed escape-free WebGL scissor rectangle | 4 | 38 | 0 | 0 | 0 | 38 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShadedDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 20 | 0 | 0 | 20 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#GlShadedProgram` | `direct` | `new` | — | reviewed escape-free WebGL shaded program | 49 | 17 | 0 | 0 | 0 | 17 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShader` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
-| `@flighthq/types:interface#GlShaderLocations` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlShaderLocations` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShapeMesh` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShapeMeshBinding` | `direct` | `new` | — | reviewed escape-free WebGL shape-mesh binding | 6 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShapeMeshColorScaleBiasShader` | `direct` | `new` | — | reviewed escape-free WebGL shape-mesh color-scale-bias shader | 7 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlShapeMeshResources` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 9 | 2 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlShapeRendererData` | `direct` | `new` | — | reviewed escape-free WebGL shape-renderer data | 7 | 9 | 7 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlSkinPaletteTexture` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 1 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlTextureDescriptor` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlTextureFilterKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#GlTextureInternalFormat` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#GlTextureRealization` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#GlTextureResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#GlTextureWrapKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GltfAccessor` | `direct` | `relocated` | `@flighthq/scene-formats:interface#GltfAccessor` | broad serialization document | 7 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
@@ -838,7 +934,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GlyphAtlasEntryBlockReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#GlyphAtlasEntryExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlyphAtlasOptions` | `direct` | `preserved` | `@flighthq/types:interface#GlyphAtlasOptions` | glyph-atlas option record | 11 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#GlyphAtlasRuntime` | `direct` | `preserved` | `@flighthq/types:interface#GlyphAtlasRuntime` | broad asset document | 20 | 75 | 20 | 0 | 0 | 95 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#GlyphAtlasRuntime` | `direct` | `preserved` | `@flighthq/types:interface#GlyphAtlasRuntime` | broad asset document | 20 | 76 | 20 | 0 | 0 | 96 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlyphAtlasShelf` | `direct` | `preserved` | `@flighthq/types:interface#GlyphAtlasShelf` | broad asset document | 3 | 5 | 1 | 0 | 0 | 6 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlyphEntry` | `direct` | `preserved` | `@flighthq/types:interface#GlyphEntry` | broad asset document | 8 | 51 | 2 | 0 | 0 | 53 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#GlyphExtents` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 4 | 0 | 8 | 0 | 0 | 0 | yes | — |
@@ -872,21 +968,183 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#HandleTextInputKeyboardOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 5 | 0 | 2 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#HapticImpactStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#HapticNotificationType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#HapticsBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 1 | 0 | 0 | 1 | 0 | 0 | 13 | yes | — |
-| `@flighthq/types:interface#HapticsCapabilities` | `direct` | `preserved` | `@flighthq/types:interface#HapticsCapabilities` | haptics capability result record | 5 | 0 | 15 | 0 | 0 | 15 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HapticsBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 1 | 0 | 0 | 1 | 0 | 0 | 11 | yes | — |
+| `@flighthq/types:interface#HapticsCapabilities` | `direct` | `preserved` | `@flighthq/types:interface#HapticsCapabilities` | haptics capability result record | 5 | 0 | 10 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:type#HapticsOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#HasAccessibilityProvider` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasAppActivate` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppActivationPolicy` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppAllWindowsClosed` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppBadge` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppDock` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#HasAppearance` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 2 | 0 | 5 | 0 | 0 | 27 | yes | — |
 | `@flighthq/types:interface#HasAppearanceRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 4 | 0 | 4 | 0 | 0 | 23 | yes | — |
+| `@flighthq/types:interface#HasAppExitSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppFocus` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppHiddenQuery` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppHide` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppLocale` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppLoginItem` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppLoop` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#HasAppName` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppNameWrite` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppOpenFile` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppPath` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppQuit` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppQuitRequest` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppReady` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppRecentDocuments` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppRelaunch` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppSecondInstance` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppShow` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppSingleInstance` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppUserModelId` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppVersion` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasAppVisibilityQuery` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#HasBlendMode` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#HasBoundsRectangle` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | yes | — |
 | `@flighthq/types:interface#HasBoundsRectangleRuntime` | `direct` | `preserved` | `@flighthq/types:interface#HasBoundsRectangleRuntime` | cached node rectangle-bounds aggregate | 6 | 9 | 7 | 2 | 0 | 18 | 49 | 49 | yes | — |
 | `@flighthq/types:interface#HasClip` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasClipboardBookmark` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasClipboardChange` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasClipboardFormats` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 12 | 0 | 0 | 12 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasClipboardImage` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasClipboardText` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 4 | 0 | 0 | 4 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#HasColorScaleBias` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | yes | — |
+| `@flighthq/types:interface#HasConnectivityChange` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#HasConnectivityReachability` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasConnectivityStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 4 | 0 | 0 | 4 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#HasDialogDirectoryOpen` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasDialogFileOpen` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasDialogFileSave` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasDialogMessage` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasDialogPrompt` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasGraphicsBitmapEncode` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasGraphicsBitmapReadback` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasGraphicsImage` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasGraphicsPathBoolean` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasGraphicsRenderContextSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasGraphicsRenderSurface` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasGraphicsWgpuHost` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasInputDropFileSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasInputFocusSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasInputHaptics` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 10 | 0 | 0 | 10 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasInputIngress` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasInputPointerLock` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasInputTargetPreparation` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasIpcMessage` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#HasMaterial` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 2 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasMediaAudioCodec` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasMediaAudioDevice` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasMediaFileCapture` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasMediaSession` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 5 | 0 | 0 | 5 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#HasMediaSessionAction` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#HasMediaVideo` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasMenuApplication` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasMenuHighlight` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasMenuPopup` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasMenuSelect` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasMidiAccess` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasMidiPermission` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNetHttp` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNetSocket` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationAction` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationActiveList` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationClick` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationClose` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationDelivery` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationDismiss` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationLifecycle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationPermission` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationReceived` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationReply` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasNotificationScheduling` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasPowerBatteryHealth` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasPowerChange` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasPowerIdle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasPowerKeepAwake` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasPowerSessionLock` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasPowerStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasPowerSuspension` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasPowerThermal` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasProtocolDefault` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasProtocolLaunch` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasProtocolOpen` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasProtocolRegistration` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasProtocolRegistrationQuery` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasProtocolUnregistration` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasScreenChange` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasScreenDetails` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasScreenPermissionChange` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasScreenQuery` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasShareContent` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasShareFiles` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasShellBeep` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasShellExternal` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasShellPathOpen` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasShellPathReveal` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasShellShortcutLink` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasShellTrash` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasShortcutQuery` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasShortcutTrigger` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasSoftKeyboardAccessoryBar` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasSoftKeyboardChange` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#HasSoftKeyboardInfo` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#HasSoftKeyboardResizeModeWrite` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasSoftKeyboardScrollAssist` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasSoftKeyboardStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasSoftKeyboardVisibility` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HasStorageChange` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasStorageFileSystem` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 21 | 0 | 0 | 21 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasStorageLocal` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 31 | 0 | 0 | 31 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasStoragePersistenceQuery` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasStoragePersistenceRequest` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasSystemDevice` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasSystemGeolocation` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasSystemLifecycle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasSystemPlatform` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasSystemSensors` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTextBidiClass` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTextFontLoading` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTextGlyphRasterizer` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTextSegmenter` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTextShaper` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#HasTransform2D` | `direct` | `preserved` | `@flighthq/types:interface#HasTransform2D` | authored node 2D transform aggregate | 9 | 41 | 36 | 0 | 0 | 77 | 7 | 7 | yes | — |
 | `@flighthq/types:interface#HasTransform2DRuntime` | `direct` | `preserved` | `@flighthq/types:interface#HasTransform2DRuntime` | cached node 2D transform aggregate | 6 | 17 | 10 | 0 | 0 | 27 | 46 | 46 | yes | — |
 | `@flighthq/types:interface#HasTransform3D` | `direct` | `preserved` | `@flighthq/types:interface#HasTransform3D` | authored node 3D transform aggregate | 3 | 12 | 3 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#HasTransform3DRuntime` | `direct` | `preserved` | `@flighthq/types:interface#HasTransform3DRuntime` | cached node 3D transform aggregate | 4 | 15 | 9 | 0 | 0 | 24 | 34 | 34 | yes | — |
+| `@flighthq/types:interface#HasTrayBalloon` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayBalloonEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayBounds` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayDoubleClickPolicy` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayDropEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayImage` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayInteractionEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayLifecycle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayMenu` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayMenuSelectionEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayPopupMenu` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayPressedImage` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayTemplateImage` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayTitle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasTrayTooltip` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasUiFullscreen` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasUiFullscreenSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasUiStatusBarChange` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#HasUiStatusBarColor` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 5 | yes | — |
+| `@flighthq/types:interface#HasUiStatusBarInfo` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 7 | yes | — |
+| `@flighthq/types:interface#HasUiStatusBarOverlays` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 5 | yes | — |
+| `@flighthq/types:interface#HasUiStatusBarStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 5 | yes | — |
+| `@flighthq/types:type#HasUiStatusBarStyleStack` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | no | `unsupported-shape` |
+| `@flighthq/types:interface#HasUiStatusBarVisibility` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 5 | yes | — |
+| `@flighthq/types:interface#HasUpdaterCommand` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasWindowAttach` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasWindowCloseSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasWindowMoveSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasWindowOpen` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasWindowOrientationSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasWindowResizeSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HasWindowVisibilitySubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#HemisphereLight` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#HemisphereLightOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#HierarchyNode` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -895,7 +1153,33 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#HitTestFunction` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#HitTestPreciseFunction` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#HitTestResult` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 4 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Host` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 6 | 0 | 0 | 6 | 0 | 0 | 9 | yes | — |
+| `@flighthq/types:interface#HostAccessibilityCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 27 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostClipboardCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostConnectivityCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostDialogCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostGraphicsCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#HostImageSource` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#HostInputCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostIpcCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostMediaCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostMenuCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostMidiCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostNetCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostNotificationCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#HostPowerCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostProtocolCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostScreenCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostShareCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostShellCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostShortcutCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostStorageCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostSystemCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostTextCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostTrayCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#HostUiCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#HostUpdaterCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#HslColor` | `audit-only` | `new` | — | checker-discovered public declaration | 36 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#HsvColor` | `audit-only` | `new` | — | checker-discovered public declaration | 36 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#HtmlView` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -926,10 +1210,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#InnerEffectSourceMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#InnerGlowEffect` | `direct` | `new` | — | reviewed escape-free inner-glow effect | 8 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InnerShadowEffect` | `direct` | `new` | — | reviewed escape-free inner-shadow effect | 10 | 30 | 0 | 0 | 0 | 30 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InputDropFileBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#InputFocusBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#InputGamepadAxisData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadAxisData` | gamepad-axis input result record | 4 | 3 | 4 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadButtonData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadButtonData` | gamepad-button input result record | 4 | 4 | 4 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputGamepadConnectData` | `direct` | `preserved` | `@flighthq/types:interface#InputGamepadConnectData` | gamepad-connection input result record | 3 | 4 | 3 | 0 | 0 | 7 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#InputIngressBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
+| `@flighthq/types:interface#InputIngressBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#InputIngressSink` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 28 | yes | — |
 | `@flighthq/types:type#InputIngressSource` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#InputKeyboardData` | `direct` | `new` | — | reviewed escape-free input keyboard data | 13 | 21 | 13 | 0 | 0 | 34 | 0 | 0 | yes | — |
@@ -937,8 +1223,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#InputKeyRepeatTimer` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputManager` | `direct` | `new` | — | reviewed escape-free input manager | 16 | 51 | 0 | 0 | 0 | 51 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputPointerData` | `direct` | `new` | — | reviewed escape-free input pointer data | 21 | 23 | 22 | 0 | 0 | 45 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InputPointerLockBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#InputPointerLockExitOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#InputPointerLockRequestOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#InputSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#InputState` | `direct` | `new` | — | reviewed escape-free input state | 8 | 37 | 0 | 0 | 0 | 37 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#InputTargetBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#InputTargetHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InputTextData` | `direct` | `preserved` | `@flighthq/types:interface#InputTextData` | text-input result record | 2 | 2 | 4 | 0 | 0 | 6 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#InstancedMesh` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#InstancedMeshRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 34 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
@@ -953,16 +1244,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#InteractionSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 10 | 0 | 0 | 10 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:type#InterpolationMethod` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#InvertAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#IpcBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 10 | yes | — |
-| `@flighthq/types:interface#IpcBackendCapabilities` | `direct` | `preserved` | `@flighthq/types:interface#IpcBackendCapabilities` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#IpcChannel` | `direct` | `preserved` | `@flighthq/types:interface#IpcChannel` | broad host document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#IpcError` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:type#IpcErrorCode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#IpcMessageEvent` | `direct` | `preserved` | `@flighthq/types:interface#IpcMessageEvent` | broad host document | 4 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
-| `@flighthq/types:type#IpcOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#IpcPort` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#IpcSignals` | `direct` | `preserved` | `@flighthq/types:interface#IpcSignals` | broad host document | 2 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#IpcTarget` | `direct` | `preserved` | `@flighthq/types:interface#IpcTarget` | broad host document | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#IpcMessageBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#IridescencePbrExtension` | `direct` | `new` | — | reviewed escape-free iridescence PBR extension | 9 | 22 | 0 | 0 | 0 | 22 | 0 | 0 | yes | — |
 | `@flighthq/types:type#JointStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#KeyboardEventData` | `direct` | `new` | — | reviewed escape-free keyboard event data | 6 | 79 | 6 | 0 | 0 | 85 | 0 | 0 | yes | — |
@@ -994,7 +1276,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#LibgdxParticleDocument` | `direct` | `relocated` | `@flighthq/particles-formats:interface#LibgdxParticleDocument` | broad serialization document | 25 | 80 | 0 | 0 | 0 | 80 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LibgdxRangeValue` | `direct` | `relocated` | `@flighthq/particles-formats:interface#LibgdxRangeValue` | broad serialization document | 7 | 20 | 0 | 0 | 0 | 20 | 27 | 27 | yes | — |
 | `@flighthq/types:interface#LibgdxSerializeOptions` | `direct` | `relocated` | `@flighthq/particles-formats:interface#LibgdxSerializeOptions` | broad serialization document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#LifecycleBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 2 | 0 | 0 | 2 | 0 | 0 | 10 | yes | — |
+| `@flighthq/types:interface#LifecycleBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 2 | 0 | 0 | 2 | 0 | 0 | 9 | yes | — |
 | `@flighthq/types:type#LifecycleOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#LiftGammaGainAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Light` | `direct` | `new` | — | reviewed escape-free light | 1 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
@@ -1020,10 +1302,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#LogSink` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#LogSpan` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#LogTimer` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#LogTransportBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 4 | yes | — |
-| `@flighthq/types:type#LogTransportOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#LogTransport` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#LogTransportDestroyOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#LogTransportFlushOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#LogTransportWriteOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#LookupTableGradeAdjustment` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#LoopBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | yes | — |
+| `@flighthq/types:interface#LoopBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
 | `@flighthq/types:interface#LottieAdvancedBlend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#LottieAnimatable` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#LottieAnimatedProperty` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 10 | 0 | 0 | 10 | 0 | 0 | 4 | yes | — |
@@ -1091,27 +1376,41 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Md5Vertex` | `direct` | `relocated` | `@flighthq/scene-formats:interface#Md5Vertex` | broad serialization document | 4 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Md5Weight` | `direct` | `relocated` | `@flighthq/scene-formats:interface#Md5Weight` | broad serialization document | 5 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MediaChannelSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MediaFileCaptureBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#MediaFileCaptureOptions` | `direct` | `renamed` | `@flighthq/types:interface#WebcamCaptureOptions` | broad host document | 4 | 2 | 0 | 0 | 0 | 2 | 3 | 3 | yes | — |
+| `@flighthq/types:interface#MediaFileCapturePhoto` | `direct` | `renamed` | `@flighthq/types:interface#WebcamPhoto` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#MediaFileCaptureSource` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#MediaFileCaptureVideo` | `direct` | `renamed` | `@flighthq/types:interface#WebcamVideo` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MedianEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MediaReadyState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#MediaSessionAction` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#MediaSessionActionBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#MediaSessionActionDetails` | `direct` | `preserved` | `@flighthq/types:interface#MediaSessionActionDetails` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MediaSessionActionSignal` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MediaSessionArtwork` | `direct` | `preserved` | `@flighthq/types:interface#MediaSessionArtwork` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#MediaSessionBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 10 | 0 | 0 | 10 | 0 | 0 | 10 | yes | — |
+| `@flighthq/types:interface#MediaSessionBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
+| `@flighthq/types:type#MediaSessionClearMetadataOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#MediaSessionClearPositionStateOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MediaSessionMetadata` | `direct` | `preserved` | `@flighthq/types:interface#MediaSessionMetadata` | broad host document | 4 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
-| `@flighthq/types:type#MediaSessionOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#MediaSessionOperationOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MediaSessionPlaybackState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#MediaSessionPositionState` | `direct` | `preserved` | `@flighthq/types:interface#MediaSessionPositionState` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MediaSessionPositionState` | `direct` | `preserved` | `@flighthq/types:interface#MediaSessionPositionState` | broad host document | 3 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
+| `@flighthq/types:type#MediaSessionSetMetadataOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#MediaSessionSetPlaybackStateOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#MediaSessionSetPositionStateOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MemoryLogSink` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#MenuBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 2 | 0 | 0 | 2 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:interface#MenuApplicationBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 0 | 1 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#MenuHighlight` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MenuHighlightBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#MenuItemRole` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#MenuItemTemplate` | `direct` | `preserved` | `@flighthq/types:interface#MenuItemTemplate` | broad host document | 11 | 73 | 2 | 0 | 0 | 75 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#MenuItemTemplate` | `direct` | `preserved` | `@flighthq/types:interface#MenuItemTemplate` | broad host document | 11 | 76 | 2 | 0 | 0 | 78 | 1 | 1 | yes | — |
 | `@flighthq/types:type#MenuItemType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#MenuReplacementGuaranteeDeclaration` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:type#MenuReplacementGuaranteeExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#MenuSignals` | `direct` | `preserved` | `@flighthq/types:interface#MenuSignals` | broad host document | 4 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MenuPopupBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#MenuSelect` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MenuSelectBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#MenuSignals` | `direct` | `preserved` | `@flighthq/types:interface#MenuSignals` | broad host document | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Mesh` | `direct` | `preserved` | `@flighthq/types:interface#Mesh` | broad scene document | 13 | 72 | 8 | 0 | 0 | 80 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshAttachment2D` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MeshDeformer` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1128,10 +1427,45 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#MeshSkinBindPose` | `direct` | `new` | — | reviewed escape-free mesh skin bind pose | 8 | 42 | 0 | 0 | 0 | 42 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#MeshSubset` | `direct` | `preserved` | `@flighthq/types:interface#MeshSubset` | broad scene document | 2 | 35 | 0 | 0 | 0 | 35 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#MeshTriangleVertexIndices` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 15 | 3 | 0 | 18 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MessageDialogBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:type#MessageDialogKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#MessageDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#MessageDialogOptions` | broad host document | 10 | 29 | 0 | 0 | 0 | 29 | 3 | 3 | yes | — |
+| `@flighthq/types:interface#MessageDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#MessageDialogOptions` | broad host document | 10 | 28 | 0 | 0 | 0 | 28 | 3 | 3 | yes | — |
 | `@flighthq/types:interface#MessageDialogResult` | `direct` | `preserved` | `@flighthq/types:interface#MessageDialogResult` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#MethodsOf` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MidiAccess` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MidiAccessBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#MidiAccessDisposeOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#MidiAccessLifecycleFailure` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#MidiAccessPortsOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#MidiAccessRequestOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#MidiAccessResourceOperations` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#MidiAccessStateSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MidiEventAttachment` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#MidiEventBackendAttachOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#MidiEventReleaseOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MidiInputMessage` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MidiInputMessageSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MidiInputPort` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#MidiInputPortResourceOperations` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
+| `@flighthq/types:type#MidiMessageSendOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MidiOutputPort` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#MidiOutputPortResourceOperations` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
+| `@flighthq/types:interface#MidiPermissionBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#MidiPort` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#MidiPortCloseOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#MidiPortConnection` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#MidiPortConnectionOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#MidiPortDisposeOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#MidiPortLifecycleFailure` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#MidiPortOpenOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#MidiPortResourceOperations` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#MidiPortState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#MidiPortStateOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#MidiPortStateSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#MidiSubscriptionAttachOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#MidiSubscriptionDetachOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#MidiSubscriptionDisposeOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#MobileOsProfile` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#Modifier` | `direct` | `new` | — | reviewed escape-free modifier | 2 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ModifierDefinition` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 1 | 3 | 0 | 0 | 8 | yes | — |
 | `@flighthq/types:type#ModifierKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1207,20 +1541,50 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#NodeTraits` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#NodeTraitsKey` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#NormalMaterial` | `direct` | `new` | — | reviewed escape-free normal material | 8 | 7 | 2 | 0 | 0 | 9 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#NotificationAction` | `direct` | `preserved` | `@flighthq/types:interface#NotificationAction` | broad host document | 3 | 5 | 0 | 0 | 0 | 5 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#NotificationBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 18 | 0 | 0 | 0 | 0 | 0 | 0 | 50 | yes | — |
-| `@flighthq/types:interface#NotificationCapabilities` | `direct` | `preserved` | `@flighthq/types:interface#NotificationCapabilities` | broad host document | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#NotificationChannel` | `direct` | `preserved` | `@flighthq/types:interface#NotificationChannel` | broad host document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#Notification` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationAction` | `direct` | `preserved` | `@flighthq/types:interface#NotificationAction` | broad host document | 3 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationActionBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#NotificationActionSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationActiveListBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#NotificationActiveListOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#NotificationCancelOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationClickBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#NotificationClickSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationCloseBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#NotificationCloseOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationDeliveryBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#NotificationDeliveryOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#NotificationDismissBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#NotificationDismissSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationEventAttachment` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#NotificationEventBackendAttachOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#NotificationEventReleaseOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationLifecycleBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#NotificationLifecycleFailure` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#NotificationLifecycleOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#NotificationPendingListOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#NotificationPermission` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#NotificationRequest` | `direct` | `preserved` | `@flighthq/types:interface#NotificationRequest` | broad host document | 16 | 52 | 0 | 0 | 0 | 52 | 4 | 4 | yes | — |
-| `@flighthq/types:interface#NotificationSchedule` | `direct` | `preserved` | `@flighthq/types:interface#NotificationSchedule` | broad host document | 2 | 7 | 0 | 0 | 0 | 7 | 2 | 2 | yes | — |
+| `@flighthq/types:interface#NotificationPermissionBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#NotificationPermissionQueryOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#NotificationPermissionRequestOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationReceivedBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#NotificationReceivedSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationReplyBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#NotificationReplySubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#NotificationRequest` | `direct` | `preserved` | `@flighthq/types:interface#NotificationRequest` | broad host document | 16 | 53 | 0 | 0 | 0 | 53 | 6 | 6 | yes | — |
+| `@flighthq/types:type#NotificationRequestField` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#NotificationSchedule` | `direct` | `preserved` | `@flighthq/types:interface#NotificationSchedule` | broad host document | 2 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
+| `@flighthq/types:type#NotificationScheduleOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#NotificationSchedulingBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#NotificationSubscriptionAttachOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#NotificationSubscriptionDetachOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#NotificationSubscriptionDisposeOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#NumericProps` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#Obb` | `direct` | `preserved` | `@flighthq/types:interface#Obb` | 3D oriented-bounds aggregate | 10 | 83 | 20 | 0 | 0 | 103 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ObbLike` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 103 | yes | — |
 | `@flighthq/types:interface#ObjMaterial` | `direct` | `relocated` | `@flighthq/scene-formats:interface#ObjMaterial` | broad serialization document | 24 | 43 | 24 | 0 | 0 | 67 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ObjMaterialLibrary` | `direct` | `relocated` | `@flighthq/scene-formats:interface#ObjMaterialLibrary` | broad serialization document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#OpenDirectoryDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#OpenDirectoryDialogOptions` | broad host document | 4 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#OpenFileDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#OpenFileDialogOptions` | broad host document | 7 | 19 | 0 | 0 | 0 | 19 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#OpenFileDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#OpenFileDialogOptions` | broad host document | 2 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#OpenTypeFontExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#OpenTypeFontExplanationReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#OrbitCameraController` | `direct` | `new` | — | reviewed escape-free orbit camera controller | 12 | 69 | 35 | 0 | 0 | 104 | 0 | 0 | yes | — |
@@ -1235,7 +1599,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#PackedRectangle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PackResult` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PanniniProjectionEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ParsedAccelerator` | `direct` | `preserved` | `@flighthq/types:interface#ParsedAccelerator` | broad host document | 2 | 4 | 1 | 0 | 0 | 5 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#ParsedAccelerator` | `direct` | `preserved` | `@flighthq/types:interface#ParsedAccelerator` | broad host document | 2 | 6 | 1 | 0 | 0 | 7 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#ParsedProtocolUrl` | `direct` | `preserved` | `@flighthq/types:interface#ParsedProtocolUrl` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ParseParticleConfigOptions` | `direct` | `relocated` | `@flighthq/particles-formats:interface#ParseParticleConfigOptions` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PartialNode` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | no | `unsupported-shape` |
@@ -1290,12 +1654,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PathWinding` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#PbrExtension` | `direct` | `new` | — | reviewed escape-free PBR extension | 1 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PbrUvSet` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#PermissionBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:type#PermissionName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#PermissionRequestFallbackGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#PermissionQueryOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#PermissionRequestOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#PermissionState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#PermissionStateExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:type#PermissionStateSource` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#PerspectiveProjection` | `direct` | `relocated` | `@flighthq/types:interface#PerspectiveProjection` | perspective-camera projection aggregate | 3 | 10 | 1 | 0 | 0 | 11 | 14 | 14 | yes | — |
 | `@flighthq/types:interface#PerspectiveProjectionOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PhongMaterial` | `direct` | `new` | — | reviewed escape-free Phong material | 13 | 36 | 7 | 0 | 0 | 43 | 0 | 0 | yes | — |
@@ -1453,7 +1817,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#PlatformBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#PlatformEndianness` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#PlatformEngine` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#PlatformInfo` | `direct` | `preserved` | `@flighthq/types:interface#PlatformInfo` | broad host document | 14 | 10 | 41 | 0 | 0 | 51 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PlatformInfo` | `direct` | `preserved` | `@flighthq/types:interface#PlatformInfo` | broad host document | 14 | 10 | 27 | 0 | 0 | 37 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PlatformKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#PlatformName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#PlatformRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1465,22 +1829,40 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#PointLight` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 24 | 0 | 0 | 24 | 0 | 0 | 7 | yes | — |
 | `@flighthq/types:interface#PointLightOptions` | `direct` | `new` | — | reviewed escape-free point-light options | 8 | 8 | 0 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PosterizeEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Power` | `direct` | `preserved` | `@flighthq/types:interface#Power` | broad host document | 10 | 27 | 10 | 0 | 0 | 37 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#PowerBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 19 | yes | — |
+| `@flighthq/types:interface#Power` | `direct` | `preserved` | `@flighthq/types:interface#Power` | broad host document | 9 | 29 | 9 | 0 | 0 | 38 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PowerAttachHost` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PowerBatteryHealth` | `direct` | `preserved` | `@flighthq/types:interface#PowerBatteryHealth` | broad host document | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PowerBatteryHealthBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PowerBatteryHealthState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#PowerChangeBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#PowerIdleBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:type#PowerIdleState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#PowerKeepAwakeAcquireResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PowerKeepAwakeBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 1 | 0 | 0 | 1 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:type#PowerKeepAwakeMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#PowerStatus` | `direct` | `preserved` | `@flighthq/types:interface#PowerStatus` | broad host document | 8 | 5 | 32 | 0 | 0 | 37 | 0 | 0 | yes | — |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#PowerKeepAwakeReleaseResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PowerSessionLockBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#PowerStatus` | `direct` | `preserved` | `@flighthq/types:interface#PowerStatus` | broad host document | 8 | 4 | 16 | 0 | 0 | 20 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#PowerStatusBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#PowerSuspensionBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#PowerThermalBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:type#PowerThermalState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#PressureReading` | `direct` | `preserved` | `@flighthq/types:interface#PressureReading` | broad host document | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PrimitiveTopology` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ProgressBarController` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ProgressBarControllerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Projection` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#PromptDialogBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#PromptDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#PromptDialogOptions` | broad host document | 5 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ProtocolBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | yes | — |
+| `@flighthq/types:interface#ProtocolDefaultBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#ProtocolHandler` | `direct` | `preserved` | `@flighthq/types:interface#ProtocolHandler` | broad host document | 1 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ProtocolLaunchBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#ProtocolOpenBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#ProtocolRegistrationBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#ProtocolRegistrationQueryBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#ProtocolUnregistrationBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#ProximityReading` | `direct` | `preserved` | `@flighthq/types:interface#ProximityReading` | broad host document | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatch` | `direct` | `new` | — | reviewed escape-free quad batch | 19 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#QuadBatchData` | `direct` | `new` | — | reviewed escape-free quad batch data | 6 | 121 | 9 | 0 | 0 | 130 | 0 | 0 | yes | — |
@@ -1500,10 +1882,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RateLimitedLogSink` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Ray3D` | `direct` | `preserved` | `@flighthq/types:interface#Ray3D` | 3D ray aggregate | 2 | 103 | 0 | 0 | 0 | 103 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Ray3DLike` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 93 | yes | — |
-| `@flighthq/types:interface#Rectangle` | `direct` | `preserved` | `@flighthq/types:interface#Rectangle` | four-component rectangle leaf | 4 | 511 | 236 | 0 | 0 | 747 | 3 | 3 | yes | — |
+| `@flighthq/types:interface#Rectangle` | `direct` | `preserved` | `@flighthq/types:interface#Rectangle` | four-component rectangle leaf | 4 | 507 | 236 | 0 | 0 | 743 | 3 | 3 | yes | — |
 | `@flighthq/types:interface#RectangleCollider` | `direct` | `preserved` | `@flighthq/types:interface#RectangleCollider` | broad asset document | 8 | 9 | 0 | 0 | 0 | 9 | 1 | 1 | yes | — |
 | `@flighthq/types:type#RectangleId` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:type#RectangleLike` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 391 | yes | — |
+| `@flighthq/types:type#RectangleLike` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 387 | yes | — |
 | `@flighthq/types:interface#RegionAttachment2D` | `direct` | `new` | — | reviewed escape-free region attachment | 9 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RegistryCatalog` | `direct` | `new` | — | reviewed escape-free registry catalog | 1 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RegistryCatalogEntry` | `direct` | `new` | — | reviewed escape-free registry catalog entry | 7 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
@@ -1523,6 +1905,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#RenderCacheAdapterSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RenderCacheKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#RenderCacheRefreshOptions` | `direct` | `preserved` | `@flighthq/types:type#RenderCacheRefreshOptions` | render-cache refresh option record | 3 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RenderContextBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#RenderDrawContext` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 15 | 0 | 0 | 15 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:type#RenderEffectInput` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1550,6 +1933,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 15 | 5 | 0 | 20 | 0 | 0 | 9 | yes | — |
 | `@flighthq/types:interface#RenderStateRuntime` | `direct` | `new` | — | reviewed escape-free render-state runtime | 10 | 72 | 15 | 4 | 0 | 91 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderStateStats` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#RenderSurfaceBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#RenderTarget` | `direct` | `new` | — | reviewed escape-free portable render target | 14 | 16 | 33 | 0 | 0 | 49 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#RenderTargetAxes` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 42 | 0 | 0 | 42 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#RenderTargetAxisDifference` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1617,11 +2001,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#RiveWeightedPoint` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#RiveWeightedPointKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#RotationRateReading` | `direct` | `preserved` | `@flighthq/types:interface#RotationRateReading` | broad host document | 6 | 0 | 5 | 0 | 0 | 5 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SafeAreaInsets` | `direct` | `preserved` | `@flighthq/types:interface#SafeAreaInsets` | broad host document | 4 | 4 | 16 | 0 | 0 | 20 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SafeAreaInsets` | `direct` | `preserved` | `@flighthq/types:interface#SafeAreaInsets` | broad host document | 4 | 4 | 12 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Sampler` | `direct` | `preserved` | `@flighthq/types:interface#Sampler` | broad asset document | 6 | 89 | 11 | 0 | 0 | 100 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SamplerLike` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 45 | yes | — |
 | `@flighthq/types:interface#SatisfiedSceneCoverageEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SaveFileDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#SaveFileDialogOptions` | broad host document | 6 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SaveFileDialogOptions` | `direct` | `preserved` | `@flighthq/types:interface#SaveFileDialogOptions` | broad host document | 2 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ScalarRemap` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#Scale9Mapper` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 36 | yes | — |
 | `@flighthq/types:interface#Scale9Shape` | `direct` | `new` | — | reviewed escape-free scale-9 shape | 19 | 39 | 0 | 0 | 0 | 39 | 0 | 0 | yes | — |
@@ -1703,18 +2087,21 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#SceneCoverage` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#SceneCoverageCatalog` | `audit-only` | `new` | — | checker-discovered public declaration | 24 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#SceneCoverageEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/types:interface#ScheduledNotification` | `direct` | `preserved` | `@flighthq/types:interface#ScheduledNotification` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ScreenBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 3 | 0 | 0 | 3 | 0 | 0 | 9 | yes | — |
+| `@flighthq/types:interface#ScheduledNotification` | `direct` | `preserved` | `@flighthq/types:interface#ScheduledNotification` | broad host document | 3 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ScreenChangeBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ScreenChangedMetrics` | `direct` | `preserved` | `@flighthq/types:interface#ScreenChangedMetrics` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ScreenChangeEvent` | `direct` | `preserved` | `@flighthq/types:interface#ScreenChangeEvent` | broad host document | 3 | 4 | 0 | 0 | 0 | 4 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ScreenChangeKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#ScreenColorSpace` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ScreenInfo` | `direct` | `preserved` | `@flighthq/types:interface#ScreenInfo` | broad host document | 25 | 116 | 109 | 0 | 0 | 225 | 5 | 5 | yes | — |
-| `@flighthq/types:interface#ScreenMode` | `direct` | `preserved` | `@flighthq/types:interface#ScreenMode` | broad host document | 5 | 0 | 10 | 0 | 0 | 10 | 0 | 0 | yes | — |
-| `@flighthq/types:type#ScreenOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#ScreenDetailsBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#ScreenInfo` | `direct` | `preserved` | `@flighthq/types:interface#ScreenInfo` | broad host document | 25 | 77 | 0 | 0 | 0 | 77 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ScreenMode` | `direct` | `preserved` | `@flighthq/types:interface#ScreenMode` | broad host document | 5 | 0 | 5 | 0 | 0 | 5 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ScreenOrientation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#ScreenPermissionChange` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ScreenPermissionChangeBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#ScreenPermissionState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ScreenSignals` | `direct` | `preserved` | `@flighthq/types:interface#ScreenSignals` | broad host document | 3 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ScreenQueryBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#ScreenSignals` | `direct` | `preserved` | `@flighthq/types:interface#ScreenSignals` | broad host document | 3 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ScreenSpaceFogEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ScrollBarController` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ScrollBarControllerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 12 | 19 | 0 | 0 | 19 | 0 | 0 | 0 | yes | — |
@@ -1767,26 +2154,32 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ShapeTessellationExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ShapeTessellationStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ShapeTextureReference` | `direct` | `renamed` | `@flighthq/shape-formats:interface#ShapeBitmapReference` | broad serialization document | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ShareBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
-| `@flighthq/types:interface#ShareContent` | `direct` | `preserved` | `@flighthq/types:interface#ShareContent` | broad host document | 4 | 26 | 0 | 0 | 0 | 26 | 0 | 0 | yes | — |
+| `@flighthq/types:type#ShareContent` | `direct` | `kind-changed` | `@flighthq/types:interface#ShareContent` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#ShareContentBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#ShareFile` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ShareOptions` | `direct` | `preserved` | `@flighthq/types:interface#ShareOptions` | broad host document | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ShareResult` | `direct` | `preserved` | `@flighthq/types:interface#ShareResult` | broad host document | 3 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ShareSignals` | `direct` | `preserved` | `@flighthq/types:interface#ShareSignals` | broad host document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShareFilesBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#ShareFilesContent` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShareResult` | `direct` | `preserved` | `@flighthq/types:interface#ShareResult` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShareSignals` | `direct` | `preserved` | `@flighthq/types:interface#ShareSignals` | broad host document | 1 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SharpenEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SheenPbrExtension` | `direct` | `new` | — | reviewed escape-free sheen PBR extension | 7 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ShellBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | yes | — |
-| `@flighthq/types:interface#ShellOpenExternalOptions` | `direct` | `preserved` | `@flighthq/types:interface#ShellOpenExternalOptions` | broad host document | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#ShellOpenPathOptions` | `direct` | `preserved` | `@flighthq/types:interface#ShellOpenPathOptions` | broad host document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShellBeepBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#ShellExternalBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#ShellExternalOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShellExternalUrlPolicy` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShellPathOpenBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#ShellPathOpenOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#ShellPathRevealBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#ShellPathRevealOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ShellShortcutLink` | `direct` | `preserved` | `@flighthq/types:interface#ShellShortcutLink` | broad host document | 7 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShellShortcutLinkBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#ShellShortcutLinkReadOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#ShellShortcutLinkWriteOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ShellShortcutWriteOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ShortcutBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | yes | — |
+| `@flighthq/types:interface#ShellTrashBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#ShellTrashOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ShortcutDigitKeyName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ShortcutDrop` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:type#ShortcutDropGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:type#ShortcutDropReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#ShortcutEditingKeyName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ShortcutEvent` | `direct` | `preserved` | `@flighthq/types:interface#ShortcutEvent` | broad host document | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#ShortcutFunctionKeyName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#ShortcutKeyName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#ShortcutLetterKeyName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1795,9 +2188,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ShortcutModifier` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#ShortcutNavigationKeyName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#ShortcutNumpadKeyName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#ShortcutOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#ShortcutPunctuationKeyName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#ShortcutSignals` | `direct` | `preserved` | `@flighthq/types:interface#ShortcutSignals` | broad host document | 1 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShortcutQueryBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#ShortcutTriggerBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:type#ShortcutTriggerSubscribeOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#ShortcutTriggerSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShortcutTriggerUnsubscribeOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Signal` | `direct` | `preserved` | `@flighthq/types:interface#Signal` | broad scene document | 2 | 17 | 6 | 18 | 0 | 41 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SignalConnection` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SignalConnectOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
@@ -1842,7 +2238,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SliderControllerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 16 | 0 | 0 | 16 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SliderControllerSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Slot2D` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 7 | 0 | 13 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#SlotTable` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 41 | 0 | 0 | 41 | 0 | 0 | 33 | yes | — |
+| `@flighthq/types:interface#SlotTable` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 41 | 0 | 0 | 41 | 0 | 0 | 34 | yes | — |
 | `@flighthq/types:interface#SmaaEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#Snapshot` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#SnapshotSchema` | `audit-only` | `new` | — | checker-discovered public declaration | 24 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -1859,20 +2255,21 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SocketRuntime` | `direct` | `new` | — | reviewed escape-free socket runtime | 5 | 32 | 11 | 0 | 0 | 43 | 0 | 0 | yes | — |
 | `@flighthq/types:type#SocketSendFailureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#SocketSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SoftKeyboard` | `direct` | `new` | — | reviewed escape-free soft keyboard | 9 | 9 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | yes | — |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#SoftKeyboardInfo` | `direct` | `new` | — | reviewed escape-free soft-keyboard info | 5 | 7 | 15 | 0 | 0 | 22 | 0 | 0 | yes | — |
-| `@flighthq/types:type#SoftKeyboardOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#SoftKeyboard` | `direct` | `new` | — | reviewed escape-free soft keyboard | 3 | 3 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SoftKeyboardAccessoryBarBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#SoftKeyboardChangeBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#SoftKeyboardChangeSubscription` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SoftKeyboardInfo` | `direct` | `new` | — | reviewed escape-free soft-keyboard info | 5 | 4 | 10 | 0 | 0 | 14 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SoftKeyboardInfoBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:type#SoftKeyboardResizeMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#SoftKeyboardResizeModeWriteBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#SoftKeyboardScrollAssistBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#SoftKeyboardStyleBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#SoftKeyboardStyleKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#SoftKeyboardTransition` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#SoftKeyboardVisibilityBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#Spatial2DNode` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | no | `unsupported-shape` |
 | `@flighthq/types:interface#SpatialAabb2D` | `direct` | `preserved` | `@flighthq/types:interface#SpatialAabb2D` | 2D spatial-index bounds aggregate after dimension-explicit upstream rename | 4 | 98 | 16 | 0 | 0 | 114 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SpatialAabb3D` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 212 | 90 | 0 | 302 | 0 | 0 | 0 | yes | — |
@@ -1967,23 +2364,65 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#StatechartTransitionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#StatusBar` | `direct` | `preserved` | `@flighthq/types:interface#StatusBar` | broad host document | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StatusBarAnimation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#StatusBarBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | yes | — |
-| `@flighthq/types:interface#StatusBarInfo` | `direct` | `preserved` | `@flighthq/types:interface#StatusBarInfo` | status-bar result record | 5 | 9 | 19 | 0 | 0 | 28 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#StatusBarChangeBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#StatusBarColorBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#StatusBarInfo` | `direct` | `preserved` | `@flighthq/types:interface#StatusBarInfo` | status-bar result record | 5 | 9 | 9 | 0 | 0 | 18 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#StatusBarInfoBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:interface#StatusBarOverlaysBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:type#StatusBarStyle` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#StatusBarStyleBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#StatusBarStyleEntry` | `direct` | `preserved` | `@flighthq/types:interface#StatusBarStyleEntry` | broad host document | 5 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StatusBarStyleEntryHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#StatusBarVisibilityBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:type#StepPosition` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#StopTweenOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#StorageBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 3 | 0 | 0 | 3 | 0 | 0 | 37 | yes | — |
+| `@flighthq/types:interface#StorageBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 25 | yes | — |
+| `@flighthq/types:type#StorageBatchMutationResult` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageBooleanOrResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageBooleanResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageByteSizeResult` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#StorageChange` | `direct` | `preserved` | `@flighthq/types:interface#StorageChange` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#StorageMigration` | `direct` | `preserved` | `@flighthq/types:interface#StorageMigration` | broad host document | 2 | 4 | 0 | 0 | 0 | 4 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#StorageChangeBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#StorageClearFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#StorageClearNamespaceResult` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageClearResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageEntriesResult` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageFallbackResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#StorageGetItemResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageItemCountResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageItemOrResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageItemsResult` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageJsonOrResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageJsonResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageJsonWriteResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#StorageKeysResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#StorageMigration` | `direct` | `preserved` | `@flighthq/types:interface#StorageMigration` | broad host document | 2 | 11 | 0 | 0 | 0 | 11 | 1 | 1 | yes | — |
+| `@flighthq/types:type#StorageMigrationResult` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageMutationResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#StorageNamespace` | `direct` | `preserved` | `@flighthq/types:interface#StorageNamespace` | broad host document | 1 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
-| `@flighthq/types:type#StorageOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#StorageQuota` | `direct` | `preserved` | `@flighthq/types:interface#StorageQuota` | broad host document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#StorageSignals` | `direct` | `preserved` | `@flighthq/types:interface#StorageSignals` | broad host document | 1 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — |
+| `@flighthq/types:type#StorageNumberOrResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageNumberResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#StoragePersistenceQueryBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#StoragePersistenceRequestBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#StoragePersistenceResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#StoragePresenceResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageQueryResult` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageReadFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#StorageRemoveItemResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageRemoveItemsResult` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:type#StorageSetItemResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageSetItemsResult` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#StorageSignals` | `direct` | `preserved` | `@flighthq/types:interface#StorageSignals` | broad host document | 1 | 6 | 0 | 0 | 0 | 6 | 0 | 0 | yes | — |
+| `@flighthq/types:type#StorageValueResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#StrokePathTessellationExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#StrokePathTessellationReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#StrokeStyle` | `direct` | `new` | — | reviewed escape-free stroke style | 6 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |
+| `@flighthq/types:type#StrokeTessellator` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#SurfaceMaterial` | `direct` | `new` | — | reviewed escape-free surface material | 6 | 18 | 5 | 0 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SurfaceMaterialOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SvgDocumentImportOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
@@ -1997,42 +2436,43 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TabBarControllerItem` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TabBarControllerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TabBarControllerSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TauriApi` | `direct` | `new` | — | reviewed escape-free Tauri API | 11 | 14 | 0 | 0 | 0 | 14 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TauriApi` | `direct` | `new` | — | reviewed escape-free Tauri API | 11 | 26 | 0 | 0 | 0 | 26 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriAppModule` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#TauriClipboardManager` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#TauriCloseRequestedEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriDialogFilter` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriDialogMessageOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriDialogOpenOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TauriDialogPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
+| `@flighthq/types:interface#TauriDialogPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 3 | 0 | 0 | 3 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#TauriDialogSaveOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriGlobalShortcutPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#TauriLogicalPositionConstructor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `constructable-schema` |
 | `@flighthq/types:interface#TauriLogicalSizeConstructor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `constructable-schema` |
-| `@flighthq/types:interface#TauriLogicalSizeLike` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TauriMenu` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#TauriLogicalSizeLike` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TauriMenu` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#TauriMenuFactory` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#TauriMenuItemFactory` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#TauriMenuItemHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriMenuItemOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriMenuModule` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriMenuOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#TauriNotificationCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#TauriNotificationOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TauriNotificationPermission` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#TauriNotificationPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
-| `@flighthq/types:interface#TauriOpenerPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:interface#TauriNotificationPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:interface#TauriOpenerPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#TauriOsModule` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
-| `@flighthq/types:interface#TauriPhysicalPositionLike` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TauriPhysicalPositionLike` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriPredefinedMenuItemFactory` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#TauriPredefinedMenuItemOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriProcessPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#TauriShortcutEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriSubmenuFactory` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#TauriSubmenuOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TauriTrayIcon` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
-| `@flighthq/types:interface#TauriTrayIconEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TauriTrayIcon` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | yes | — |
+| `@flighthq/types:interface#TauriTrayIconEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriTrayIconFactory` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#TauriTrayIconOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TauriTrayIconOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriTrayModule` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TauriUnlisten` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#TauriWindow` | `audit-only` | `new` | — | checker-discovered public declaration | 25 | 0 | 0 | 0 | 0 | 0 | 0 | 38 | yes | — |
@@ -2115,7 +2555,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#TextureAtlasRegionTextureStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TextureAtlasStarlingParseOptions` | `direct` | `relocated` | `@flighthq/textureatlas-formats:interface#TextureAtlasStarlingParseOptions` | broad serialization document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextureColorSpace` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#TextureContainer` | `direct` | `new` | — | reviewed escape-free texture container | 9 | 62 | 0 | 0 | 0 | 62 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TextureContainer` | `direct` | `new` | — | reviewed escape-free texture container | 9 | 63 | 0 | 0 | 0 | 63 | 0 | 0 | yes | — |
 | `@flighthq/types:type#TextureContainerFormat` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#TextureContainerKind` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#TextureContainerLevel` | `direct` | `new` | — | reviewed escape-free texture container level | 4 | 32 | 0 | 0 | 0 | 32 | 0 | 0 | yes | — |
@@ -2213,13 +2653,67 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#Transform3DNode` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | no | `unsupported-shape` |
 | `@flighthq/types:interface#TransformInherit2D` | `direct` | `new` | — | reviewed escape-free 2D transform inheritance | 4 | 20 | 0 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TransmissionVolumePbrExtension` | `direct` | `new` | — | reviewed escape-free transmission-volume PBR extension | 10 | 24 | 7 | 0 | 0 | 31 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TrayBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 19 | yes | — |
+| `@flighthq/types:type#TrayAnimationStartResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#TrayAnimationStopResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayBalloonBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#TrayBalloonDisplayResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayBalloonEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayBalloonEventsBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TrayBalloonOptions` | `direct` | `preserved` | `@flighthq/types:interface#TrayBalloonOptions` | tray-balloon option record | 7 | 7 | 0 | 0 | 0 | 7 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TrayCapabilities` | `direct` | `preserved` | `@flighthq/types:interface#TrayCapabilities` | broad host document | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TrayEventData` | `direct` | `preserved` | `@flighthq/types:interface#TrayEventData` | broad host document | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:type#TrayEventType` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#TrayIcon` | `direct` | `preserved` | `@flighthq/types:interface#TrayIcon` | broad host document | 1 | 21 | 0 | 0 | 0 | 21 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#TrayIconOptions` | `direct` | `preserved` | `@flighthq/types:interface#TrayIconOptions` | broad host document | 4 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
+| `@flighthq/types:type#TrayBalloonRemoveResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayBoundsBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#TrayBoundsResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#TrayCreateProviderResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#TrayCreateResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayDestroyFailure` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#TrayDestroyProviderResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#TrayDestroyResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayDoubleClickPolicyBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#TrayDoubleClickPolicyUpdateResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#TrayDropEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayDropEventsBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#TrayEventAttachResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayEventRelease` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayIcon` | `direct` | `preserved` | `@flighthq/types:interface#TrayIcon` | broad host document | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | yes | — |
+| `@flighthq/types:type#TrayIconForHost` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayIconOptions` | `direct` | `preserved` | `@flighthq/types:interface#TrayIconOptions` | broad host document | 5 | 18 | 0 | 0 | 0 | 18 | 0 | 0 | yes | — |
+| `@flighthq/types:type#TrayIconSource` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#TrayImageBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#TrayImageUpdateResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayInteractionEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayInteractionEventsBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayLifecycleBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:interface#TrayMenuBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#TrayMenuSelectionEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayMenuSelectionEventsBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#TrayMenuUpdateResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayPopupMenuBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#TrayPopupMenuResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayPressedImageBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#TrayPressedImageUpdateResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#TrayReleaseResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayTemplateImageBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#TrayTemplateImageUpdateResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayTitleBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#TrayTitleReadResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#TrayTitleUpdateResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayTooltipBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#TrayTooltipReadResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#TrayTooltipUpdateResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#TrayWithBalloon` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithBalloonEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithBounds` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithDoubleClickPolicy` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithDropEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithImage` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithInteractionEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithMenu` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithMenuSelectionEvents` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithPopupMenu` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithPressedImage` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithTemplateImage` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithTitle` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#TrayWithTooltip` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TreeViewController` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TreeViewControllerItem` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TreeViewControllerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
@@ -2255,14 +2749,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#UnpackedRectangleExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#UnpackedRectangleReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#UnregisteredSceneCoverageEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#UpdateInfo` | `direct` | `preserved` | `@flighthq/types:interface#UpdateInfo` | broad host document | 9 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#UpdateProgress` | `direct` | `preserved` | `@flighthq/types:interface#UpdateProgress` | broad host document | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#UpdaterBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 23 | yes | — |
-| `@flighthq/types:interface#UpdaterConfig` | `direct` | `preserved` | `@flighthq/types:interface#UpdaterConfig` | broad host document | 3 | 1 | 0 | 0 | 0 | 1 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#UpdaterError` | `direct` | `preserved` | `@flighthq/types:interface#UpdaterError` | broad host document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:type#UpdaterPhase` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#UpdaterSignatureConfig` | `direct` | `preserved` | `@flighthq/types:interface#UpdaterSignatureConfig` | broad host document | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#UpdaterState` | `direct` | `preserved` | `@flighthq/types:interface#UpdaterState` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 7 | 7 | yes | — |
+| `@flighthq/types:interface#UpdateInfo` | `direct` | `preserved` | `@flighthq/types:interface#UpdateInfo` | broad host document | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#UpdaterCommandBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#UpdateScene3DResourceStreamingOptions` | `direct` | `renamed` | `@flighthq/scene-resources:interface#ResolveSceneResourcesOptions` | broad scene document | 2 | 2 | 0 | 2 | 0 | 4 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Vector2` | `direct` | `preserved` | `@flighthq/types:interface#Vector2` | two-component numeric geometry leaf | 2 | 259 | 169 | 0 | 0 | 428 | 1 | 1 | yes | — |
 | `@flighthq/types:type#Vector2Like` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 304 | yes | — |
@@ -2299,22 +2787,21 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#VolumetricLightEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#VortexForce` | `direct` | `preserved` | `@flighthq/types:interface#VortexForce` | broad asset document | 10 | 9 | 0 | 0 | 0 | 9 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#VoxelGrid` | `audit-only` | `new` | — | checker-discovered public declaration | 9 | 1 | 1 | 0 | 2 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WebcamBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
-| `@flighthq/types:interface#WebcamCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WebcamCapabilityRange` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WebcamCaptureOptions` | `direct` | `preserved` | `@flighthq/types:interface#WebcamCaptureOptions` | broad host document | 4 | 2 | 0 | 0 | 0 | 2 | 3 | 3 | yes | — |
-| `@flighthq/types:interface#WebcamConstraints` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WebcamDevice` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:type#WebcamFacingMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:type#WebcamPermissionState` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#WebcamPhoto` | `direct` | `preserved` | `@flighthq/types:interface#WebcamPhoto` | broad host document | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WebcamRecording` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WebcamSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:type#WebcamSource` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#WebcamStream` | `direct` | `preserved` | `@flighthq/types:interface#WebcamStream` | broad host document | 7 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
-| `@flighthq/types:interface#WebcamStreamOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WebcamStreamRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WebcamVideo` | `direct` | `preserved` | `@flighthq/types:interface#WebcamVideo` | broad host document | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#WebMidiAccessCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:type#WebMidiPermissionAccessCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#WebNotificationOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WebPageNotificationApi` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#WebPageNotificationCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#WebPageNotificationInstance` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 4 | 0 | 4 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#WebServiceWorkerNotificationApi` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#WebServiceWorkerNotificationCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#WebServiceWorkerNotificationEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WebServiceWorkerNotificationInstance` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#WebServiceWorkerNotificationRegistration` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#WebWindowStoragePersistenceApi` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#WebWindowStoragePersistenceCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WebWorkerStoragePersistenceApi` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#WebWorkerStoragePersistenceCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WellKnownMenuItemRoleValue` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#WgpuAdapterCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuBitmapShader` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -2333,13 +2820,16 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#WgpuCustomMaterialShaderSource` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#WgpuDebugDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuDebugPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuDeviceRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 30 | 70 | 29 | 0 | 99 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuDeviceSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuDeviceState` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:type#WgpuDualSourceEffectPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuEffectBlendMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#WgpuEffectPipeline` | `direct` | `new` | — | reviewed escape-free WebGPU effect pipeline | 4 | 9 | 0 | 1 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuFullscreenPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuHostAcquisition` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuHostAcquisitionOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuHostBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:interface#WgpuHostAcquisition` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 8 | 0 | 0 | 8 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#WgpuHostAcquisitionOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#WgpuHostBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#WgpuMatcapDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuMatcapPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuMaterialBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 28 | 7 | 0 | 35 | 0 | 0 | 2 | yes | — |
@@ -2350,8 +2840,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuModifierCompileContext` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 8 | 0 | 0 | 8 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#WgpuModifierContribution` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuModifierSnippet` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 8 | 0 | 1 | 9 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:type#WgpuOffscreenRenderStateResult` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
+| `@flighthq/types:interface#WgpuParticleResources` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuPbrDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 37 | 0 | 0 | 37 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#WgpuPbrPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#WgpuPresentationRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 19 | 31 | 0 | 0 | 31 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuPresentationSurface` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuQuadBatchResources` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuQuadBatchWriterBufferSlot` | `direct` | `new` | — | reviewed escape-free WebGPU quad-batch buffer slot | 4 | 12 | 4 | 0 | 0 | 16 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderEffectApplicationExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 13 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — |
@@ -2362,14 +2857,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#WgpuRenderEffectPipelineSampleCountGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#WgpuRenderEffectPipelineSkipGuard` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#WgpuRenderEffectRunner` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#WgpuRenderOptions` | `direct` | `new` | — | reviewed escape-free WebGPU render options | 9 | 10 | 0 | 0 | 0 | 10 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuRenderRegistries` | `direct` | `new` | — | reviewed escape-free WebGPU render registries | 20 | 71 | 14 | 0 | 0 | 85 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 291 | 8 | 0 | 299 | 0 | 0 | 5 | yes | — |
-| `@flighthq/types:interface#WgpuRenderStateRuntime` | `direct` | `new` | — | reviewed escape-free WebGPU render-state runtime | 98 | 486 | 326 | 12 | 0 | 824 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuRenderStateSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuRenderOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 8 | 0 | 0 | 8 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:interface#WgpuRenderRegistries` | `audit-only` | `new` | — | checker-discovered public declaration | 20 | 38 | 14 | 0 | 52 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:interface#WgpuRenderState` | `audit-only` | `new` | — | checker-discovered public declaration | 17 | 218 | 6 | 0 | 224 | 0 | 0 | 5 | yes | — |
+| `@flighthq/types:interface#WgpuRenderStateRuntime` | `audit-only` | `new` | — | checker-discovered public declaration | 108 | 467 | 229 | 12 | 708 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#WgpuRenderStats` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderSurfaceProvider` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
-| `@flighthq/types:interface#WgpuRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGPU render target | 12 | 123 | 17 | 0 | 0 | 140 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuRenderTarget` | `direct` | `new` | — | reviewed escape-free WebGPU render target | 13 | 124 | 16 | 0 | 0 | 140 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuRenderTargetPool` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGPU render-texture entry | 2 | 18 | 5 | 0 | 0 | 23 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuRenderTextureExplanation` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -2383,7 +2877,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuScene3DFrameBinding` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DIbl` | `direct` | `new` | — | reviewed escape-free WebGPU Scene3D IBL | 8 | 15 | 0 | 0 | 0 | 15 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DLayouts` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#WgpuScene3DRuntime` | `direct` | `new` | — | reviewed escape-free WebGPU scene runtime | 70 | 184 | 126 | 2 | 0 | 312 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuScene3DRuntime` | `direct` | `new` | — | reviewed escape-free WebGPU scene runtime | 70 | 183 | 126 | 2 | 0 | 311 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScene3DShadow` | `direct` | `new` | — | reviewed escape-free WebGPU Scene3D shadow | 9 | 14 | 5 | 0 | 0 | 19 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuScissorRect` | `direct` | `new` | — | reviewed escape-free WebGPU scissor rectangle | 4 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeMesh` | `direct` | `new` | — | reviewed escape-free WebGPU shape mesh | 4 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
@@ -2391,28 +2885,30 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuShapeMeshPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuShapeRendererData` | `direct` | `new` | — | reviewed escape-free WebGPU shape-renderer data | 8 | 11 | 7 | 0 | 0 | 18 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuSkinningAdapter` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 2 | 0 | 0 | 2 | 0 | 0 | 11 | yes | — |
-| `@flighthq/types:interface#WgpuTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 18 | 2 | 0 | 20 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#WgpuTextureBindings` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
+| `@flighthq/types:interface#WgpuTextureEntry` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 18 | 0 | 0 | 18 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#WgpuTextureResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#WgpuTextureSourceTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGPU texture-source entry | 7 | 6 | 7 | 0 | 0 | 13 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuTextureResource` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuTextureSourceTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGPU texture-source entry | 7 | 8 | 5 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuToonDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 9 | 0 | 0 | 9 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuToonPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuUnlitDefineKey` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuUnlitPipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuVelocityContext` | `direct` | `new` | — | reviewed escape-free WebGPU velocity context | 5 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
 | `@flighthq/types:type#WgpuVelocityWriter` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
-| `@flighthq/types:interface#WgpuVideoTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGPU video texture entry | 10 | 9 | 3 | 0 | 0 | 12 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WgpuVideoTextureEntry` | `direct` | `new` | — | reviewed escape-free WebGPU video texture entry | 9 | 8 | 2 | 0 | 0 | 10 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuWireframePipeline` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WgpuWireframeUpload` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WhiteBalanceEffect` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 4 | 0 | 0 | 4 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WindForce` | `direct` | `preserved` | `@flighthq/types:interface#WindForce` | broad asset document | 4 | 3 | 0 | 0 | 0 | 3 | 1 | 1 | yes | — |
 | `@flighthq/types:type#WindowAttachmentOwnership` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
-| `@flighthq/types:interface#WindowBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 29 | 0 | 0 | 0 | 0 | 0 | 0 | 31 | yes | — |
-| `@flighthq/types:interface#WindowBounds` | `direct` | `preserved` | `@flighthq/types:interface#WindowBounds` | broad host document | 4 | 0 | 28 | 0 | 0 | 28 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#WindowBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 34 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
+| `@flighthq/types:interface#WindowBounds` | `direct` | `preserved` | `@flighthq/types:interface#WindowBounds` | broad host document | 4 | 0 | 20 | 0 | 0 | 20 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WindowController` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WindowControllerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 10 | 14 | 0 | 0 | 14 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WindowControllerSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:type#WindowOperation` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#WindowOptions` | `direct` | `preserved` | `@flighthq/types:interface#WindowOptions` | broad host document | 18 | 74 | 0 | 0 | 0 | 74 | 0 | 0 | yes | — |
+| `@flighthq/types:type#WindowResizeTargetHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#WireframeMaterial` | `direct` | `new` | — | reviewed escape-free wireframe material | 8 | 6 | 2 | 0 | 0 | 8 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Woff2GlyfStreams` | `direct` | `new` | — | reviewed escape-free WOFF2 glyf streams | 9 | 27 | 0 | 0 | 0 | 27 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#Woff2TableDirectory` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 6 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — |
@@ -2425,6 +2921,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 
 | Candidate identity | Member | Reason | Source identity |
 | --- | --- | --- | --- |
+| `@flighthq/host-capacitor:type#CapacitorAppCapabilitiesFor` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/host-capacitor:type#CapacitorProtocolCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/host-electron:type#ElectronAppCapabilitiesFor` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/host-electron:type#ElectronProtocolCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/host-tauri:type#TauriAppCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#Aabb` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#AbcMultinameKind` | `toExponential` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:576` |
 | `@flighthq/types:type#AbcMultinameKind` | `toFixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:570` |
@@ -2542,12 +3043,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AcceleratorParseErrorReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#AcceleratorParseErrorReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#AcceleratorParseErrorReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#AccessibilityBackend` | `announce` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:85` |
-| `@flighthq/types:interface#AccessibilityBackend` | `clear` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:83` |
-| `@flighthq/types:interface#AccessibilityBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:92` |
-| `@flighthq/types:interface#AccessibilityBackend` | `removeNode` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:82` |
-| `@flighthq/types:interface#AccessibilityBackend` | `setFocus` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:84` |
-| `@flighthq/types:interface#AccessibilityBackend` | `setNode` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:81` |
+| `@flighthq/types:interface#AccessibilityBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AccessibilityBackend` | `announce` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:84` |
+| `@flighthq/types:interface#AccessibilityBackend` | `clear` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:85` |
+| `@flighthq/types:interface#AccessibilityBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:86` |
+| `@flighthq/types:interface#AccessibilityBackend` | `removeNode` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:87` |
+| `@flighthq/types:interface#AccessibilityBackend` | `setFocus` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:88` |
+| `@flighthq/types:interface#AccessibilityBackend` | `setNode` | `receiver-sensitive-method` | `upstream/packages/types/src/Accessibility.ts:89` |
 | `@flighthq/types:type#AccessibilityLiveness` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#AccessibilityLiveness` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#AccessibilityLiveness` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -2597,55 +3099,55 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AccessibilityLiveness` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#AccessibilityLiveness` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#AccessibilityLiveness` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#AccessibilityOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#AccessibilityOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#AccessibilityOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#AccessibilityOperation` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#AccessibilityOperation` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#AccessibilityOperation` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#AccessibilityOperation` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#AccessibilityOperation` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#AccessibilityOperation` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#AccessibilityOperation` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#AccessibilityOperation` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#AccessibilityOperation` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#AccessibilityOperation` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#AccessibilityOperation` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#AccessibilityOperation` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#AccessibilityOperation` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#AccessibilityOperation` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#AccessibilityOperation` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#AccessibilityOperation` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#AccessibilityOperation` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#AccessibilityOperation` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#AccessibilityOperation` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#AccessibilityOperation` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#AccessibilityOperation` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#AccessibilityOperation` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#AccessibilityOperation` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#AccessibilityOperation` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#AccessibilityOperation` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#AccessibilityOperation` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#AccessibilityOperation` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#AccessibilityOperation` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#AccessibilityOperation` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#AccessibilityOperation` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#AccessibilityOperation` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#AccessibilityOperation` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#AccessibilityOperation` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#AccessibilityOperation` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#AccessibilityOperation` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#AccessibilityOperation` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#AccessibilityOperation` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#AccessibilityOperation` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#AccessibilityOperation` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#AccessibilityOperation` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#AccessibilityOperation` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#AccessibilityOperation` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#AccessibilityOperation` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#AccessibilityOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#AccessibilityOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#AccessibilityOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#AccessibilityOperationBlockReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#AccessibilityRole` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#AccessibilityRole` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#AccessibilityRole` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -3005,6 +3507,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AnimationTrackValidationCode` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#AnimationTrackValidationCode` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#AnisotropyPbrExtension` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#App` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppActivateBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppActivateBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:48` |
 | `@flighthq/types:type#AppActivationPolicy` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#AppActivationPolicy` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#AppActivationPolicy` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -3054,45 +3559,24 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AppActivationPolicy` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#AppActivationPolicy` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#AppActivationPolicy` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#AppBackend` | `addRecentDocument` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:48` |
-| `@flighthq/types:interface#AppBackend` | `bounceDock` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:50` |
-| `@flighthq/types:interface#AppBackend` | `cancelAttention` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:52` |
-| `@flighthq/types:interface#AppBackend` | `cancelDockBounce` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:53` |
-| `@flighthq/types:interface#AppBackend` | `clearRecentDocuments` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:55` |
-| `@flighthq/types:interface#AppBackend` | `focus` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:56` |
-| `@flighthq/types:interface#AppBackend` | `getAppDirectoryPath` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:58` |
-| `@flighthq/types:interface#AppBackend` | `getAppPath` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:60` |
-| `@flighthq/types:interface#AppBackend` | `getCommandLine` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:62` |
-| `@flighthq/types:interface#AppBackend` | `getExecutablePath` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:64` |
-| `@flighthq/types:interface#AppBackend` | `getLocale` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:65` |
-| `@flighthq/types:interface#AppBackend` | `getLoginItem` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:67` |
-| `@flighthq/types:interface#AppBackend` | `getName` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:68` |
-| `@flighthq/types:interface#AppBackend` | `getPreferredSystemLanguages` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:70` |
-| `@flighthq/types:interface#AppBackend` | `getSystemLocale` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:72` |
-| `@flighthq/types:interface#AppBackend` | `getVersion` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:73` |
-| `@flighthq/types:interface#AppBackend` | `hasSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:74` |
-| `@flighthq/types:interface#AppBackend` | `hideApp` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:76` |
-| `@flighthq/types:interface#AppBackend` | `isAppHidden` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:78` |
-| `@flighthq/types:interface#AppBackend` | `quit` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:79` |
-| `@flighthq/types:interface#AppBackend` | `relaunch` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:80` |
-| `@flighthq/types:interface#AppBackend` | `releaseSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:81` |
-| `@flighthq/types:interface#AppBackend` | `requestAttention` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:84` |
-| `@flighthq/types:interface#AppBackend` | `requestSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:85` |
-| `@flighthq/types:interface#AppBackend` | `setActivationPolicy` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:87` |
-| `@flighthq/types:interface#AppBackend` | `setBadgeCount` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:90` |
-| `@flighthq/types:interface#AppBackend` | `setDockBadge` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:91` |
-| `@flighthq/types:interface#AppBackend` | `setDockMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:93` |
-| `@flighthq/types:interface#AppBackend` | `setLoginItem` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:95` |
-| `@flighthq/types:interface#AppBackend` | `setName` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:97` |
-| `@flighthq/types:interface#AppBackend` | `setUserModelId` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:99` |
-| `@flighthq/types:interface#AppBackend` | `showApp` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:101` |
-| `@flighthq/types:interface#AppBackend` | `subscribeActivate` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:103` |
-| `@flighthq/types:interface#AppBackend` | `subscribeAllWindowsClosed` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:105` |
-| `@flighthq/types:interface#AppBackend` | `subscribeOpenFile` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:107` |
-| `@flighthq/types:interface#AppBackend` | `subscribeQuitRequest` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:110` |
-| `@flighthq/types:interface#AppBackend` | `subscribeReady` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:112` |
-| `@flighthq/types:interface#AppBackend` | `subscribeSecondInstance` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:114` |
+| `@flighthq/types:interface#AppActivationPolicyBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppActivationPolicyBackend` | `setActivationPolicy` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:52` |
+| `@flighthq/types:interface#AppAllWindowsClosedBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppAllWindowsClosedBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:56` |
+| `@flighthq/types:interface#AppBadgeBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppBadgeBackend` | `setBadgeCount` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:60` |
+| `@flighthq/types:interface#AppDockBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppDockBackend` | `bounceDock` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:64` |
+| `@flighthq/types:interface#AppDockBackend` | `cancelAttention` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:65` |
+| `@flighthq/types:interface#AppDockBackend` | `cancelDockBounce` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:66` |
+| `@flighthq/types:interface#AppDockBackend` | `requestAttention` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:67` |
+| `@flighthq/types:interface#AppDockBackend` | `setDockBadge` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:68` |
+| `@flighthq/types:interface#AppDockBackend` | `setDockMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:69` |
 | `@flighthq/types:type#AppearanceNode` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
+| `@flighthq/types:interface#AppFocusBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppFocusBackend` | `focus` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:73` |
+| `@flighthq/types:interface#AppHideBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppHideBackend` | `hideApp` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:145` |
 | `@flighthq/types:type#AppLaunchKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#AppLaunchKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#AppLaunchKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -3142,7 +3626,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AppLaunchKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#AppLaunchKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#AppLaunchKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#Application` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ApplicationExitBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationExitBackend.ts:2` |
+| `@flighthq/types:interface#ApplicationExitBackend` | `unsubscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationExitBackend.ts:3` |
 | `@flighthq/types:interface#ApplicationRenderView` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ApplicationVisibilityBackend` | `isVisible` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationVisibilityBackend.ts:2` |
+| `@flighthq/types:interface#ApplicationWindow` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#AppLifecycleState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#AppLifecycleState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#AppLifecycleState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -3192,6 +3681,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AppLifecycleState` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#AppLifecycleState` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#AppLifecycleState` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#AppLocaleBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppLocaleBackend` | `getLocale` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:77` |
+| `@flighthq/types:interface#AppLocaleBackend` | `getPreferredSystemLanguages` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:78` |
+| `@flighthq/types:interface#AppLocaleBackend` | `getSystemLocale` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:79` |
+| `@flighthq/types:interface#AppLoginItemBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppLoginItemBackend` | `getLoginItem` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:83` |
+| `@flighthq/types:interface#AppLoginItemBackend` | `setLoginItem` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:84` |
 | `@flighthq/types:type#AppMemoryPressure` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#AppMemoryPressure` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#AppMemoryPressure` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -3241,6 +3737,16 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AppMemoryPressure` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#AppMemoryPressure` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#AppMemoryPressure` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#AppNameBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppNameBackend` | `getName` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:88` |
+| `@flighthq/types:interface#AppNameWriteBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppNameWriteBackend` | `setName` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:92` |
+| `@flighthq/types:interface#AppOpenFileBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppOpenFileBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:96` |
+| `@flighthq/types:interface#AppPathBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppPathBackend` | `getAppDirectoryPath` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:100` |
+| `@flighthq/types:interface#AppPathBackend` | `getAppPath` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:101` |
+| `@flighthq/types:interface#AppPathBackend` | `getExecutablePath` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:102` |
 | `@flighthq/types:type#AppPathKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#AppPathKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#AppPathKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -3290,6 +3796,31 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#AppPathKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#AppPathKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#AppPathKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#AppQuitBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppQuitBackend` | `quit` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:106` |
+| `@flighthq/types:interface#AppQuitRequestBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppQuitRequestBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:110` |
+| `@flighthq/types:interface#AppReadyBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppReadyBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:114` |
+| `@flighthq/types:interface#AppRecentDocumentsBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppRecentDocumentsBackend` | `addRecentDocument` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:118` |
+| `@flighthq/types:interface#AppRecentDocumentsBackend` | `clearRecentDocuments` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:119` |
+| `@flighthq/types:interface#AppRelaunchBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppRelaunchBackend` | `relaunch` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:123` |
+| `@flighthq/types:interface#AppSecondInstanceBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppSecondInstanceBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:127` |
+| `@flighthq/types:interface#AppShowBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppShowBackend` | `showApp` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:149` |
+| `@flighthq/types:interface#AppSingleInstanceBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppSingleInstanceBackend` | `hasSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:131` |
+| `@flighthq/types:interface#AppSingleInstanceBackend` | `releaseSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:132` |
+| `@flighthq/types:interface#AppSingleInstanceBackend` | `requestSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:133` |
+| `@flighthq/types:interface#AppUserModelIdBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppUserModelIdBackend` | `setUserModelId` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:137` |
+| `@flighthq/types:interface#AppVersionBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppVersionBackend` | `getVersion` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:141` |
+| `@flighthq/types:interface#AppVisibilityQueryBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#AppVisibilityQueryBackend` | `isAppHidden` | `receiver-sensitive-method` | `upstream/packages/types/src/App.ts:153` |
 | `@flighthq/types:interface#AreaLight` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#AssetLoaderAdapter` | `dispose` | `receiver-sensitive-method` | `upstream/packages/types/src/Assets.ts:45` |
 | `@flighthq/types:interface#AssetLoaderAdapter` | `load` | `receiver-sensitive-method` | `upstream/packages/types/src/Assets.ts:44` |
@@ -4591,6 +5122,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#CanvasImageSourceKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#CanvasImageSourceKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#CanvasMaterialRenderer` | `getState` | `receiver-sensitive-method` | `upstream/packages/types/src/CanvasMaterialRenderer.ts:13` |
+| `@flighthq/types:interface#CanvasPipeline` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#CanvasRenderEffectSupport` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#CanvasRenderEffectSupport` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#CanvasRenderEffectSupport` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -4641,6 +5173,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#CanvasRenderEffectSupport` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#CanvasRenderEffectSupport` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#CanvasRenderState` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#CanvasRenderSurface` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#CanvasRenderSurfaceCreator` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#CanvasRenderSurfaceCreator` | `createRenderSurface` | `receiver-sensitive-method` | `upstream/packages/types/src/CanvasRenderSurface.ts:4` |
+| `@flighthq/types:interface#CanvasRenderSurfaceCreator` | `destroyRenderSurface` | `receiver-sensitive-method` | `upstream/packages/types/src/CanvasRenderSurface.ts:5` |
 | `@flighthq/types:type#CanvasRenderTextureStatus` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#CanvasRenderTextureStatus` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#CanvasRenderTextureStatus` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -4691,6 +5227,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#CanvasRenderTextureStatus` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#CanvasRenderTextureStatus` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#CanvasTextShaperBackend` | `clearCache` | `receiver-sensitive-method` | `upstream/packages/types/src/CanvasTextShaperBackend.ts:7` |
+| `@flighthq/types:interface#CanvasTextureResolvers` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#CapacitorAppPlugin` | `addListener` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:59` |
 | `@flighthq/types:interface#CapacitorAppPlugin` | `exitApp` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:67` |
 | `@flighthq/types:interface#CapacitorAppPlugin` | `getInfo` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:68` |
@@ -4736,17 +5273,21 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CapacitorLocalNotificationsPlugin` | `getPending` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:331` |
 | `@flighthq/types:interface#CapacitorLocalNotificationsPlugin` | `requestPermissions` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:332` |
 | `@flighthq/types:interface#CapacitorLocalNotificationsPlugin` | `schedule` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:333` |
-| `@flighthq/types:interface#CapacitorNetworkPlugin` | `addListener` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:366` |
-| `@flighthq/types:interface#CapacitorNetworkPlugin` | `getStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:370` |
+| `@flighthq/types:interface#CapacitorNetworkPlugin` | `addListener` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:370` |
+| `@flighthq/types:interface#CapacitorNetworkPlugin` | `getStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:374` |
+| `@flighthq/types:type#CapacitorNotificationCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#CapacitorPluginListenerHandle` | `remove` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:53` |
-| `@flighthq/types:interface#CapacitorSharePlugin` | `canShare` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:383` |
-| `@flighthq/types:interface#CapacitorSharePlugin` | `share` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:384` |
-| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `getInfo` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:407` |
-| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:408` |
-| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `setBackgroundColor` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:409` |
-| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `setOverlaysWebView` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:410` |
-| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `setStyle` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:411` |
-| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:412` |
+| `@flighthq/types:interface#CapacitorShareContentBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#CapacitorShareContentBackend` | `canShareContent` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:29` |
+| `@flighthq/types:interface#CapacitorShareContentBackend` | `shareContent` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:47` |
+| `@flighthq/types:interface#CapacitorShareContentBackend` | `shareContentWithResult` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:48` |
+| `@flighthq/types:interface#CapacitorSharePlugin` | `share` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:386` |
+| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `getInfo` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:405` |
+| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:406` |
+| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `setBackgroundColor` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:407` |
+| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `setOverlaysWebView` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:408` |
+| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `setStyle` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:409` |
+| `@flighthq/types:interface#CapacitorStatusBarPlugin` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:410` |
 | `@flighthq/types:type#CapsStyle` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#CapsStyle` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#CapsStyle` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -4945,29 +5486,32 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#CaptureCheckTier` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#CaptureCheckTier` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#ClearcoatPbrExtension` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/types:interface#ClipboardBackend` | `clear` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:52` |
-| `@flighthq/types:interface#ClipboardBackend` | `getChangeCount` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:54` |
-| `@flighthq/types:interface#ClipboardBackend` | `getFormats` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:43` |
-| `@flighthq/types:interface#ClipboardBackend` | `hasFormat` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:41` |
-| `@flighthq/types:interface#ClipboardBackend` | `hasImage` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:27` |
-| `@flighthq/types:interface#ClipboardBackend` | `hasText` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:22` |
-| `@flighthq/types:interface#ClipboardBackend` | `readBookmark` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:33` |
-| `@flighthq/types:interface#ClipboardBackend` | `readFiles` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:49` |
-| `@flighthq/types:interface#ClipboardBackend` | `readFormat` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:37` |
-| `@flighthq/types:interface#ClipboardBackend` | `readHtml` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:20` |
-| `@flighthq/types:interface#ClipboardBackend` | `readImage` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:24` |
-| `@flighthq/types:interface#ClipboardBackend` | `readItems` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:45` |
-| `@flighthq/types:interface#ClipboardBackend` | `readRTF` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:29` |
-| `@flighthq/types:interface#ClipboardBackend` | `readText` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:18` |
-| `@flighthq/types:interface#ClipboardBackend` | `subscribeClipboardChange` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:56` |
-| `@flighthq/types:interface#ClipboardBackend` | `writeBookmark` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:35` |
-| `@flighthq/types:interface#ClipboardBackend` | `writeFiles` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:51` |
-| `@flighthq/types:interface#ClipboardBackend` | `writeFormat` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:39` |
-| `@flighthq/types:interface#ClipboardBackend` | `writeHtml` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:21` |
-| `@flighthq/types:interface#ClipboardBackend` | `writeImage` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:26` |
-| `@flighthq/types:interface#ClipboardBackend` | `writeItems` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:47` |
-| `@flighthq/types:interface#ClipboardBackend` | `writeRTF` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:31` |
-| `@flighthq/types:interface#ClipboardBackend` | `writeText` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:19` |
+| `@flighthq/types:interface#ClipboardBookmarkBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ClipboardBookmarkBackend` | `readBookmark` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:17` |
+| `@flighthq/types:interface#ClipboardBookmarkBackend` | `writeBookmark` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:18` |
+| `@flighthq/types:interface#ClipboardChangeBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ClipboardChangeBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:24` |
+| `@flighthq/types:interface#ClipboardChangeBackend` | `unsubscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:25` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `getFormats` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:31` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `hasFormat` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:32` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `readFormat` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:33` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `readHtml` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:34` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `readItems` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:35` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `readRTF` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:36` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `writeFormat` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:37` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `writeHtml` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:38` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `writeItems` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:39` |
+| `@flighthq/types:interface#ClipboardFormatsBackend` | `writeRTF` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:40` |
+| `@flighthq/types:interface#ClipboardImageBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ClipboardImageBackend` | `hasImage` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:45` |
+| `@flighthq/types:interface#ClipboardImageBackend` | `readImage` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:46` |
+| `@flighthq/types:interface#ClipboardImageBackend` | `writeImage` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:47` |
+| `@flighthq/types:interface#ClipboardTextBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ClipboardTextBackend` | `clear` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:52` |
+| `@flighthq/types:interface#ClipboardTextBackend` | `hasText` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:53` |
+| `@flighthq/types:interface#ClipboardTextBackend` | `readText` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:54` |
+| `@flighthq/types:interface#ClipboardTextBackend` | `writeText` | `receiver-sensitive-method` | `upstream/packages/types/src/Clipboard.ts:55` |
 | `@flighthq/types:type#ClipNode` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
 | `@flighthq/types:type#CollisionShapeKind2D` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#CollisionShapeKind2D` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -5415,9 +5959,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#CompressionFraming` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#CompressionFraming` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#CompressionFraming` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#ConnectivityBackend` | `detectReachability` | `receiver-sensitive-method` | `upstream/packages/types/src/Connectivity.ts:54` |
-| `@flighthq/types:interface#ConnectivityBackend` | `getStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/Connectivity.ts:52` |
-| `@flighthq/types:interface#ConnectivityBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Connectivity.ts:59` |
+| `@flighthq/types:interface#Connectivity` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ConnectivityChangeBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ConnectivityChangeBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Connectivity.ts:61` |
+| `@flighthq/types:interface#ConnectivityChangeBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Connectivity.ts:64` |
 | `@flighthq/types:type#ConnectivityConnectionType` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#ConnectivityConnectionType` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#ConnectivityConnectionType` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -5467,55 +6012,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ConnectivityConnectionType` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#ConnectivityConnectionType` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ConnectivityConnectionType` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#ConnectivityOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#ConnectivityOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#ConnectivityOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#ConnectivityOperation` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#ConnectivityOperation` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#ConnectivityOperation` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#ConnectivityOperation` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#ConnectivityOperation` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#ConnectivityOperation` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#ConnectivityOperation` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#ConnectivityOperation` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#ConnectivityOperation` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#ConnectivityOperation` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#ConnectivityOperation` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#ConnectivityOperation` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#ConnectivityOperation` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#ConnectivityOperation` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#ConnectivityOperation` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#ConnectivityOperation` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#ConnectivityOperation` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#ConnectivityOperation` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#ConnectivityOperation` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#ConnectivityOperation` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#ConnectivityOperation` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#ConnectivityOperation` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#ConnectivityOperation` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#ConnectivityOperation` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#ConnectivityOperation` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#ConnectivityOperation` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#ConnectivityOperation` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#ConnectivityOperation` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#ConnectivityOperation` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#ConnectivityOperation` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#ConnectivityOperation` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#ConnectivityOperation` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#ConnectivityOperation` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#ConnectivityOperation` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#ConnectivityOperation` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#ConnectivityOperation` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#ConnectivityOperation` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#ConnectivityOperation` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#ConnectivityOperation` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#ConnectivityOperation` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#ConnectivityOperation` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#ConnectivityOperation` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#ConnectivityOperation` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#ConnectivityOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#ConnectivityOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#ConnectivityOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#ConnectivityReachabilityBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ConnectivityReachabilityBackend` | `detectReachability` | `receiver-sensitive-method` | `upstream/packages/types/src/Connectivity.ts:68` |
+| `@flighthq/types:interface#ConnectivityStatusBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ConnectivityStatusBackend` | `getStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/Connectivity.ts:56` |
 | `@flighthq/types:type#CubeTexture` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#Cursor` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#Cursor` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -5618,6 +6118,55 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#DebugSubsystemName` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#DebugSubsystemName` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#DepthMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#DesktopOsProfile` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#DesktopOsProfile` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#DesktopOsProfile` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#DesktopOsProfile` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#DesktopOsProfile` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#DesktopOsProfile` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#DesktopOsProfile` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#DesktopOsProfile` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#DesktopOsProfile` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#DesktopOsProfile` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#DesktopOsProfile` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#DesktopOsProfile` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#DesktopOsProfile` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#DesktopOsProfile` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#DesktopOsProfile` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#DesktopOsProfile` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#DesktopOsProfile` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#DesktopOsProfile` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#DesktopOsProfile` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#DesktopOsProfile` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#DesktopOsProfile` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#DesktopOsProfile` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#DesktopOsProfile` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#DesktopOsProfile` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#DesktopOsProfile` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#DesktopOsProfile` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#DesktopOsProfile` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#DesktopOsProfile` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#DesktopOsProfile` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#DesktopOsProfile` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#DesktopOsProfile` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#DesktopOsProfile` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#DesktopOsProfile` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#DesktopOsProfile` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#DesktopOsProfile` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#DesktopOsProfile` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#DesktopOsProfile` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#DesktopOsProfile` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#DesktopOsProfile` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#DesktopOsProfile` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#DesktopOsProfile` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#DesktopOsProfile` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#DesktopOsProfile` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#DesktopOsProfile` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#DesktopOsProfile` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#DesktopOsProfile` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#DesktopOsProfile` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#DesktopOsProfile` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#DesktopOsProfile` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#DeviceBackend` | `getCapabilities` | `receiver-sensitive-method` | `upstream/packages/types/src/Device.ts:49` |
 | `@flighthq/types:interface#DeviceBackend` | `getDisplayMetrics` | `receiver-sensitive-method` | `upstream/packages/types/src/Device.ts:50` |
 | `@flighthq/types:interface#DeviceBackend` | `getId` | `receiver-sensitive-method` | `upstream/packages/types/src/Device.ts:51` |
@@ -5672,13 +6221,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#DeviceFormFactor` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#DeviceFormFactor` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#DeviceFormFactor` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#DialogBackend` | `confirm` | `receiver-sensitive-method` | `upstream/packages/types/src/Dialog.ts:114` |
-| `@flighthq/types:interface#DialogBackend` | `message` | `receiver-sensitive-method` | `upstream/packages/types/src/Dialog.ts:115` |
-| `@flighthq/types:interface#DialogBackend` | `openDirectory` | `receiver-sensitive-method` | `upstream/packages/types/src/Dialog.ts:116` |
-| `@flighthq/types:interface#DialogBackend` | `openFile` | `receiver-sensitive-method` | `upstream/packages/types/src/Dialog.ts:117` |
-| `@flighthq/types:interface#DialogBackend` | `prompt` | `receiver-sensitive-method` | `upstream/packages/types/src/Dialog.ts:118` |
-| `@flighthq/types:interface#DialogBackend` | `saveFile` | `receiver-sensitive-method` | `upstream/packages/types/src/Dialog.ts:119` |
 | `@flighthq/types:interface#DirectionalLight` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#DirectoryOpenDialogBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#DirectoryOpenDialogBackend` | `open` | `receiver-sensitive-method` | `upstream/packages/types/src/FileDialogBackend.ts:11` |
 | `@flighthq/types:interface#DisplayObject` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
 | `@flighthq/types:type#DomBlendModeFidelity` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#DomBlendModeFidelity` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -5780,6 +6325,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#DomImageSourceKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#DomImageSourceKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#DomRenderState` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#DownloadedUpdate` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#EffectSourceMode` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#EffectSourceMode` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#EffectSourceMode` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -5829,118 +6375,121 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#EffectSourceMode` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#EffectSourceMode` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#EffectSourceMode` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#ElectronApp` | `addRecentDocument` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:62` |
-| `@flighthq/types:interface#ElectronApp` | `clearRecentDocuments` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:63` |
-| `@flighthq/types:interface#ElectronApp` | `exit` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:67` |
-| `@flighthq/types:interface#ElectronApp` | `focus` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:69` |
-| `@flighthq/types:interface#ElectronApp` | `getAppPath` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:54` |
-| `@flighthq/types:interface#ElectronApp` | `getLocale` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:51` |
-| `@flighthq/types:interface#ElectronApp` | `getLoginItemSettings` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:64` |
-| `@flighthq/types:interface#ElectronApp` | `getName` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:49` |
-| `@flighthq/types:interface#ElectronApp` | `getPath` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:55` |
-| `@flighthq/types:interface#ElectronApp` | `getPreferredSystemLanguages` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:53` |
-| `@flighthq/types:interface#ElectronApp` | `getSystemLocale` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:52` |
-| `@flighthq/types:interface#ElectronApp` | `getVersion` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:50` |
-| `@flighthq/types:interface#ElectronApp` | `hasSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:71` |
-| `@flighthq/types:interface#ElectronApp` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:59` |
-| `@flighthq/types:interface#ElectronApp` | `isDefaultProtocolClient` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:76` |
-| `@flighthq/types:interface#ElectronApp` | `isHidden` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:61` |
-| `@flighthq/types:interface#ElectronApp` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:77` |
-| `@flighthq/types:interface#ElectronApp` | `quit` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:66` |
-| `@flighthq/types:interface#ElectronApp` | `relaunch` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:68` |
-| `@flighthq/types:interface#ElectronApp` | `releaseSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:72` |
-| `@flighthq/types:interface#ElectronApp` | `removeAsDefaultProtocolClient` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:75` |
-| `@flighthq/types:interface#ElectronApp` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:78` |
-| `@flighthq/types:interface#ElectronApp` | `requestSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:70` |
-| `@flighthq/types:interface#ElectronApp` | `setActivationPolicy` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:58` |
-| `@flighthq/types:interface#ElectronApp` | `setAppUserModelId` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:57` |
-| `@flighthq/types:interface#ElectronApp` | `setAsDefaultProtocolClient` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:74` |
-| `@flighthq/types:interface#ElectronApp` | `setBadgeCount` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:73` |
-| `@flighthq/types:interface#ElectronApp` | `setLoginItemSettings` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:65` |
-| `@flighthq/types:interface#ElectronApp` | `setName` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:56` |
-| `@flighthq/types:interface#ElectronApp` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:60` |
-| `@flighthq/types:interface#ElectronAutoUpdater` | `checkForUpdates` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:248` |
-| `@flighthq/types:interface#ElectronAutoUpdater` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:250` |
-| `@flighthq/types:interface#ElectronAutoUpdater` | `quitAndInstall` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:249` |
-| `@flighthq/types:interface#ElectronAutoUpdater` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:251` |
-| `@flighthq/types:interface#ElectronAutoUpdater` | `setFeedURL` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:247` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `center` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:306` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:322` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:323` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `flashFrame` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:316` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `focus` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:303` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `getBounds` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:295` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `getTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:292` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:305` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `isDestroyed` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:324` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `isFullScreen` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:312` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `isMaximized` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:302` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `isMinimized` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:301` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `loadFile` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:290` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `loadURL` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:289` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `maximize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:298` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `minimize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:297` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `off` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:326` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:325` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `removeAllListeners` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:327` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `restore` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:300` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setAlwaysOnTop` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:308` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setBounds` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:296` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setContentProtection` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:317` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setFullScreen` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:311` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setHasShadow` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:318` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setIcon` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:313` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setMaximumSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:310` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setMenuBarVisibility` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:320` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setMinimumSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:309` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setOpacity` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:314` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setParentWindow` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:321` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:293` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setProgressBar` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:315` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setResizable` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:307` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:294` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setSkipTaskbar` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:319` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:291` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:304` |
-| `@flighthq/types:interface#ElectronBrowserWindow` | `unmaximize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:299` |
-| `@flighthq/types:interface#ElectronBrowserWindowConstructor` | `fromId` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:257` |
-| `@flighthq/types:interface#ElectronBrowserWindowConstructor` | `getAllWindows` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:256` |
-| `@flighthq/types:interface#ElectronClipboard` | `availableFormats` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:117` |
-| `@flighthq/types:interface#ElectronClipboard` | `clear` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:118` |
-| `@flighthq/types:interface#ElectronClipboard` | `has` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:116` |
-| `@flighthq/types:interface#ElectronClipboard` | `read` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:114` |
-| `@flighthq/types:interface#ElectronClipboard` | `readBookmark` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:110` |
-| `@flighthq/types:interface#ElectronClipboard` | `readHTML` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:106` |
-| `@flighthq/types:interface#ElectronClipboard` | `readImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:112` |
-| `@flighthq/types:interface#ElectronClipboard` | `readRTF` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:108` |
-| `@flighthq/types:interface#ElectronClipboard` | `readText` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:104` |
-| `@flighthq/types:interface#ElectronClipboard` | `write` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:115` |
-| `@flighthq/types:interface#ElectronClipboard` | `writeBookmark` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:111` |
-| `@flighthq/types:interface#ElectronClipboard` | `writeHTML` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:107` |
-| `@flighthq/types:interface#ElectronClipboard` | `writeImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:113` |
-| `@flighthq/types:interface#ElectronClipboard` | `writeRTF` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:109` |
-| `@flighthq/types:interface#ElectronClipboard` | `writeText` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:105` |
-| `@flighthq/types:interface#ElectronDialog` | `showMessageBox` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:162` |
-| `@flighthq/types:interface#ElectronDialog` | `showOpenDialog` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:154` |
-| `@flighthq/types:interface#ElectronDialog` | `showSaveDialog` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:158` |
-| `@flighthq/types:interface#ElectronDock` | `bounce` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:97` |
-| `@flighthq/types:interface#ElectronDock` | `cancelBounce` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:98` |
-| `@flighthq/types:interface#ElectronDock` | `setBadge` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:99` |
-| `@flighthq/types:interface#ElectronDock` | `setMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:100` |
+| `@flighthq/types:interface#ElectronApp` | `addRecentDocument` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:64` |
+| `@flighthq/types:interface#ElectronApp` | `clearRecentDocuments` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:65` |
+| `@flighthq/types:interface#ElectronApp` | `exit` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:69` |
+| `@flighthq/types:interface#ElectronApp` | `focus` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:71` |
+| `@flighthq/types:interface#ElectronApp` | `getAppPath` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:56` |
+| `@flighthq/types:interface#ElectronApp` | `getLocale` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:53` |
+| `@flighthq/types:interface#ElectronApp` | `getLoginItemSettings` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:66` |
+| `@flighthq/types:interface#ElectronApp` | `getName` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:51` |
+| `@flighthq/types:interface#ElectronApp` | `getPath` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:57` |
+| `@flighthq/types:interface#ElectronApp` | `getPreferredSystemLanguages` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:55` |
+| `@flighthq/types:interface#ElectronApp` | `getSystemLocale` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:54` |
+| `@flighthq/types:interface#ElectronApp` | `getVersion` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:52` |
+| `@flighthq/types:interface#ElectronApp` | `hasSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:73` |
+| `@flighthq/types:interface#ElectronApp` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:61` |
+| `@flighthq/types:interface#ElectronApp` | `isDefaultProtocolClient` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:78` |
+| `@flighthq/types:interface#ElectronApp` | `isHidden` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:63` |
+| `@flighthq/types:interface#ElectronApp` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:79` |
+| `@flighthq/types:interface#ElectronApp` | `quit` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:68` |
+| `@flighthq/types:interface#ElectronApp` | `relaunch` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:70` |
+| `@flighthq/types:interface#ElectronApp` | `releaseSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:74` |
+| `@flighthq/types:interface#ElectronApp` | `removeAsDefaultProtocolClient` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:77` |
+| `@flighthq/types:interface#ElectronApp` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:80` |
+| `@flighthq/types:interface#ElectronApp` | `requestSingleInstanceLock` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:72` |
+| `@flighthq/types:interface#ElectronApp` | `setActivationPolicy` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:60` |
+| `@flighthq/types:interface#ElectronApp` | `setAppUserModelId` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:59` |
+| `@flighthq/types:interface#ElectronApp` | `setAsDefaultProtocolClient` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:76` |
+| `@flighthq/types:interface#ElectronApp` | `setBadgeCount` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:75` |
+| `@flighthq/types:interface#ElectronApp` | `setLoginItemSettings` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:67` |
+| `@flighthq/types:interface#ElectronApp` | `setName` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:58` |
+| `@flighthq/types:interface#ElectronApp` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:62` |
+| `@flighthq/types:interface#ElectronAutoUpdater` | `checkForUpdates` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:274` |
+| `@flighthq/types:interface#ElectronAutoUpdater` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:276` |
+| `@flighthq/types:interface#ElectronAutoUpdater` | `quitAndInstall` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:275` |
+| `@flighthq/types:interface#ElectronAutoUpdater` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:277` |
+| `@flighthq/types:interface#ElectronAutoUpdater` | `setFeedURL` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:273` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `center` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:332` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:348` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:349` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `flashFrame` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:342` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `focus` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:329` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `getBounds` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:321` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `getTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:318` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:331` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `isDestroyed` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:350` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `isFullScreen` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:338` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `isMaximized` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:328` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `isMinimized` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:327` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `loadFile` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:316` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `loadURL` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:315` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `maximize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:324` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `minimize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:323` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `off` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:352` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:351` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `removeAllListeners` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:353` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `restore` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:326` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setAlwaysOnTop` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:334` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setBounds` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:322` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setContentProtection` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:343` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setFullScreen` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:337` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setHasShadow` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:344` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setIcon` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:339` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setMaximumSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:336` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setMenuBarVisibility` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:346` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setMinimumSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:335` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setOpacity` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:340` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setParentWindow` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:347` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:319` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setProgressBar` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:341` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setResizable` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:333` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:320` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setSkipTaskbar` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:345` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:317` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:330` |
+| `@flighthq/types:interface#ElectronBrowserWindow` | `unmaximize` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:325` |
+| `@flighthq/types:interface#ElectronBrowserWindowConstructor` | `fromId` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:283` |
+| `@flighthq/types:interface#ElectronBrowserWindowConstructor` | `getAllWindows` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:282` |
+| `@flighthq/types:interface#ElectronClipboard` | `availableFormats` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:119` |
+| `@flighthq/types:interface#ElectronClipboard` | `clear` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:120` |
+| `@flighthq/types:interface#ElectronClipboard` | `has` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:118` |
+| `@flighthq/types:interface#ElectronClipboard` | `read` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:116` |
+| `@flighthq/types:interface#ElectronClipboard` | `readBookmark` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:112` |
+| `@flighthq/types:interface#ElectronClipboard` | `readHTML` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:108` |
+| `@flighthq/types:interface#ElectronClipboard` | `readImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:114` |
+| `@flighthq/types:interface#ElectronClipboard` | `readRTF` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:110` |
+| `@flighthq/types:interface#ElectronClipboard` | `readText` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:106` |
+| `@flighthq/types:interface#ElectronClipboard` | `write` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:117` |
+| `@flighthq/types:interface#ElectronClipboard` | `writeBookmark` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:113` |
+| `@flighthq/types:interface#ElectronClipboard` | `writeHTML` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:109` |
+| `@flighthq/types:interface#ElectronClipboard` | `writeImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:115` |
+| `@flighthq/types:interface#ElectronClipboard` | `writeRTF` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:111` |
+| `@flighthq/types:interface#ElectronClipboard` | `writeText` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:107` |
+| `@flighthq/types:interface#ElectronDialog` | `showMessageBox` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:164` |
+| `@flighthq/types:interface#ElectronDialog` | `showOpenDialog` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:156` |
+| `@flighthq/types:interface#ElectronDialog` | `showSaveDialog` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:160` |
+| `@flighthq/types:interface#ElectronDock` | `bounce` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:99` |
+| `@flighthq/types:interface#ElectronDock` | `cancelBounce` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:100` |
+| `@flighthq/types:interface#ElectronDock` | `setBadge` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:101` |
+| `@flighthq/types:interface#ElectronDock` | `setMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:102` |
 | `@flighthq/types:interface#ElectronFs` | `existsSync` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:43` |
 | `@flighthq/types:interface#ElectronFs` | `readFileSync` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:44` |
-| `@flighthq/types:interface#ElectronFs` | `writeFileSync` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:45` |
-| `@flighthq/types:interface#ElectronGlobalShortcut` | `isRegistered` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:197` |
-| `@flighthq/types:interface#ElectronGlobalShortcut` | `register` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:194` |
-| `@flighthq/types:interface#ElectronGlobalShortcut` | `unregister` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:195` |
-| `@flighthq/types:interface#ElectronGlobalShortcut` | `unregisterAll` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:196` |
-| `@flighthq/types:interface#ElectronIpcMain` | `handle` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:242` |
-| `@flighthq/types:interface#ElectronIpcMain` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:240` |
-| `@flighthq/types:interface#ElectronIpcMain` | `removeHandler` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:243` |
-| `@flighthq/types:interface#ElectronIpcMain` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:241` |
-| `@flighthq/types:interface#ElectronMenu` | `popup` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:337` |
-| `@flighthq/types:interface#ElectronMenuConstructor` | `buildFromTemplate` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:332` |
-| `@flighthq/types:interface#ElectronMenuConstructor` | `setApplicationMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:333` |
+| `@flighthq/types:interface#ElectronFs` | `renameSync` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:45` |
+| `@flighthq/types:interface#ElectronFs` | `unlinkSync` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:46` |
+| `@flighthq/types:interface#ElectronFs` | `writeFileSync` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:47` |
+| `@flighthq/types:interface#ElectronGlobalShortcut` | `isRegistered` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:199` |
+| `@flighthq/types:interface#ElectronGlobalShortcut` | `register` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:196` |
+| `@flighthq/types:interface#ElectronGlobalShortcut` | `unregister` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:197` |
+| `@flighthq/types:interface#ElectronGlobalShortcut` | `unregisterAll` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:198` |
+| `@flighthq/types:interface#ElectronIpcMain` | `handle` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:268` |
+| `@flighthq/types:interface#ElectronIpcMain` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:266` |
+| `@flighthq/types:interface#ElectronIpcMain` | `removeHandler` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:269` |
+| `@flighthq/types:interface#ElectronIpcMain` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:267` |
+| `@flighthq/types:type#ElectronMacosNotificationCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ElectronMenu` | `popup` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:363` |
+| `@flighthq/types:interface#ElectronMenuConstructor` | `buildFromTemplate` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:358` |
+| `@flighthq/types:interface#ElectronMenuConstructor` | `setApplicationMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:359` |
 | `@flighthq/types:type#ElectronMenuItemRole` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#ElectronMenuItemRole` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#ElectronMenuItemRole` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -5990,46 +6539,99 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ElectronMenuItemRole` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#ElectronMenuItemRole` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ElectronMenuItemRole` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#ElectronNativeImage` | `isEmpty` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:236` |
-| `@flighthq/types:interface#ElectronNativeImage` | `toDataURL` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:235` |
-| `@flighthq/types:interface#ElectronNativeImageModule` | `createFromDataURL` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:230` |
-| `@flighthq/types:interface#ElectronNativeImageModule` | `createFromPath` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:231` |
-| `@flighthq/types:interface#ElectronNotification` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:443` |
-| `@flighthq/types:interface#ElectronNotification` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:444` |
-| `@flighthq/types:interface#ElectronNotification` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:442` |
-| `@flighthq/types:interface#ElectronNotificationConstructor` | `isSupported` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:430` |
-| `@flighthq/types:interface#ElectronPowerMonitor` | `getSystemIdleState` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:218` |
-| `@flighthq/types:interface#ElectronPowerMonitor` | `getSystemIdleTime` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:219` |
-| `@flighthq/types:interface#ElectronPowerMonitor` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:216` |
-| `@flighthq/types:interface#ElectronPowerMonitor` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:217` |
-| `@flighthq/types:interface#ElectronPowerSaveBlocker` | `isStarted` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:226` |
-| `@flighthq/types:interface#ElectronPowerSaveBlocker` | `start` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:224` |
-| `@flighthq/types:interface#ElectronPowerSaveBlocker` | `stop` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:225` |
-| `@flighthq/types:interface#ElectronScreen` | `getAllDisplays` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:202` |
-| `@flighthq/types:interface#ElectronScreen` | `getCursorScreenPoint` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:203` |
-| `@flighthq/types:interface#ElectronScreen` | `getPrimaryDisplay` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:201` |
-| `@flighthq/types:interface#ElectronScreen` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:204` |
-| `@flighthq/types:interface#ElectronScreen` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:205` |
-| `@flighthq/types:interface#ElectronShell` | `beep` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:134` |
-| `@flighthq/types:interface#ElectronShell` | `openExternal` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:130` |
-| `@flighthq/types:interface#ElectronShell` | `openPath` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:131` |
-| `@flighthq/types:interface#ElectronShell` | `readShortcutLink` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:135` |
-| `@flighthq/types:interface#ElectronShell` | `showItemInFolder` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:132` |
-| `@flighthq/types:interface#ElectronShell` | `trashItem` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:133` |
-| `@flighthq/types:interface#ElectronShell` | `writeShortcutLink` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:136` |
-| `@flighthq/types:interface#ElectronTray` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:415` |
-| `@flighthq/types:interface#ElectronTray` | `displayBalloon` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:410` |
-| `@flighthq/types:interface#ElectronTray` | `getBounds` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:412` |
-| `@flighthq/types:interface#ElectronTray` | `isDestroyed` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:413` |
-| `@flighthq/types:interface#ElectronTray` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:414` |
-| `@flighthq/types:interface#ElectronTray` | `popUpContextMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:408` |
-| `@flighthq/types:interface#ElectronTray` | `removeBalloon` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:411` |
-| `@flighthq/types:interface#ElectronTray` | `setContextMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:407` |
-| `@flighthq/types:interface#ElectronTray` | `setIgnoreDoubleClickEvents` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:409` |
-| `@flighthq/types:interface#ElectronTray` | `setImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:405` |
-| `@flighthq/types:interface#ElectronTray` | `setPressedImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:406` |
-| `@flighthq/types:interface#ElectronTray` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:404` |
-| `@flighthq/types:interface#ElectronTray` | `setToolTip` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:403` |
+| `@flighthq/types:interface#ElectronNativeImage` | `isEmpty` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:261` |
+| `@flighthq/types:interface#ElectronNativeImage` | `setTemplateImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:262` |
+| `@flighthq/types:interface#ElectronNativeImage` | `toDataURL` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:260` |
+| `@flighthq/types:interface#ElectronNativeImageModule` | `createFromDataURL` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:255` |
+| `@flighthq/types:interface#ElectronNativeImageModule` | `createFromPath` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:256` |
+| `@flighthq/types:interface#ElectronNotification` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:471` |
+| `@flighthq/types:interface#ElectronNotification` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:472` |
+| `@flighthq/types:interface#ElectronNotification` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:470` |
+| `@flighthq/types:type#ElectronNotificationCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ElectronNotificationConstructor` | `isSupported` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:457` |
+| `@flighthq/types:interface#ElectronPowerMonitor` | `getCurrentThermalState` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:242` |
+| `@flighthq/types:interface#ElectronPowerMonitor` | `getSystemIdleState` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:243` |
+| `@flighthq/types:interface#ElectronPowerMonitor` | `getSystemIdleTime` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:244` |
+| `@flighthq/types:interface#ElectronPowerMonitor` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:238` |
+| `@flighthq/types:interface#ElectronPowerMonitor` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:239` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#ElectronPowerMonitorEvent` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#ElectronPowerSaveBlocker` | `isStarted` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:251` |
+| `@flighthq/types:interface#ElectronPowerSaveBlocker` | `start` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:249` |
+| `@flighthq/types:interface#ElectronPowerSaveBlocker` | `stop` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:250` |
+| `@flighthq/types:interface#ElectronScreen` | `getAllDisplays` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:204` |
+| `@flighthq/types:interface#ElectronScreen` | `getCursorScreenPoint` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:205` |
+| `@flighthq/types:interface#ElectronScreen` | `getPrimaryDisplay` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:203` |
+| `@flighthq/types:interface#ElectronScreen` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:206` |
+| `@flighthq/types:interface#ElectronScreen` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:207` |
+| `@flighthq/types:interface#ElectronShell` | `beep` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:136` |
+| `@flighthq/types:interface#ElectronShell` | `openExternal` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:132` |
+| `@flighthq/types:interface#ElectronShell` | `openPath` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:133` |
+| `@flighthq/types:interface#ElectronShell` | `readShortcutLink` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:137` |
+| `@flighthq/types:interface#ElectronShell` | `showItemInFolder` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:134` |
+| `@flighthq/types:interface#ElectronShell` | `trashItem` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:135` |
+| `@flighthq/types:interface#ElectronShell` | `writeShortcutLink` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:138` |
+| `@flighthq/types:interface#ElectronTray` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:442` |
+| `@flighthq/types:interface#ElectronTray` | `displayBalloon` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:436` |
+| `@flighthq/types:interface#ElectronTray` | `getBounds` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:438` |
+| `@flighthq/types:interface#ElectronTray` | `isDestroyed` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:439` |
+| `@flighthq/types:interface#ElectronTray` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:440` |
+| `@flighthq/types:interface#ElectronTray` | `popUpContextMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:434` |
+| `@flighthq/types:interface#ElectronTray` | `removeBalloon` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:437` |
+| `@flighthq/types:interface#ElectronTray` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:441` |
+| `@flighthq/types:interface#ElectronTray` | `setContextMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:433` |
+| `@flighthq/types:interface#ElectronTray` | `setIgnoreDoubleClickEvents` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:435` |
+| `@flighthq/types:interface#ElectronTray` | `setImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:431` |
+| `@flighthq/types:interface#ElectronTray` | `setPressedImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:432` |
+| `@flighthq/types:interface#ElectronTray` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:430` |
+| `@flighthq/types:interface#ElectronTray` | `setToolTip` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:429` |
 | `@flighthq/types:interface#EmissiveMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#EmissiveModifierFacing` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#EmissiveModifierFacing` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -6182,83 +6784,47 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#EulerOrder` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#ExtendedPbrMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#ExternalTexture` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/types:type#FileDialogStartIn` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#FileDialogStartIn` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#FileDialogStartIn` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#FileDialogStartIn` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#FileDialogStartIn` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#FileDialogStartIn` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#FileDialogStartIn` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#FileDialogStartIn` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#FileDialogStartIn` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#FileDialogStartIn` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#FileDialogStartIn` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#FileDialogStartIn` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#FileDialogStartIn` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#FileDialogStartIn` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#FileDialogStartIn` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#FileDialogStartIn` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#FileDialogStartIn` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#FileDialogStartIn` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#FileDialogStartIn` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#FileDialogStartIn` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#FileDialogStartIn` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#FileDialogStartIn` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#FileDialogStartIn` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#FileDialogStartIn` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#FileDialogStartIn` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#FileDialogStartIn` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#FileDialogStartIn` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#FileDialogStartIn` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#FileDialogStartIn` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#FileDialogStartIn` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#FileDialogStartIn` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#FileDialogStartIn` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#FileDialogStartIn` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#FileDialogStartIn` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#FileDialogStartIn` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#FileDialogStartIn` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#FileDialogStartIn` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#FileDialogStartIn` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#FileDialogStartIn` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#FileDialogStartIn` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#FileDialogStartIn` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#FileDialogStartIn` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#FileDialogStartIn` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#FileDialogStartIn` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#FileDialogStartIn` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#FileDialogStartIn` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#FileDialogStartIn` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#FileDialogStartIn` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#FileDialogStartIn` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#FileSystemBackend` | `appendTextFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:71` |
-| `@flighthq/types:interface#FileSystemBackend` | `canAccessFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:87` |
-| `@flighthq/types:interface#FileSystemBackend` | `copy` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:70` |
-| `@flighthq/types:interface#FileSystemBackend` | `createFileSymlink` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:77` |
-| `@flighthq/types:interface#FileSystemBackend` | `directoryExists` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:60` |
-| `@flighthq/types:interface#FileSystemBackend` | `fileExists` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:59` |
-| `@flighthq/types:interface#FileSystemBackend` | `getFilePermissions` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:83` |
-| `@flighthq/types:interface#FileSystemBackend` | `getFileRealPath` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:81` |
-| `@flighthq/types:interface#FileSystemBackend` | `getFileSystemUsage` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:89` |
-| `@flighthq/types:interface#FileSystemBackend` | `getPath` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:92` |
-| `@flighthq/types:interface#FileSystemBackend` | `makeDirectory` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:64` |
-| `@flighthq/types:interface#FileSystemBackend` | `openFileReadStream` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:73` |
-| `@flighthq/types:interface#FileSystemBackend` | `openFileWriteStream` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:75` |
-| `@flighthq/types:interface#FileSystemBackend` | `readBinaryFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:52` |
-| `@flighthq/types:interface#FileSystemBackend` | `readBinaryFileRange` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:55` |
-| `@flighthq/types:interface#FileSystemBackend` | `readDirectory` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:65` |
-| `@flighthq/types:interface#FileSystemBackend` | `readDirectoryRecursive` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:67` |
-| `@flighthq/types:interface#FileSystemBackend` | `readFileSymlink` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:79` |
-| `@flighthq/types:interface#FileSystemBackend` | `readTextFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:50` |
-| `@flighthq/types:interface#FileSystemBackend` | `removeDirectory` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:63` |
-| `@flighthq/types:interface#FileSystemBackend` | `removeFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:61` |
-| `@flighthq/types:interface#FileSystemBackend` | `rename` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:69` |
-| `@flighthq/types:interface#FileSystemBackend` | `setFilePermissions` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:85` |
-| `@flighthq/types:interface#FileSystemBackend` | `statFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:68` |
-| `@flighthq/types:interface#FileSystemBackend` | `watch` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:91` |
-| `@flighthq/types:interface#FileSystemBackend` | `writeBinaryFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:56` |
-| `@flighthq/types:interface#FileSystemBackend` | `writeFileAtomic` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:58` |
-| `@flighthq/types:interface#FileSystemBackend` | `writeTextFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:51` |
+| `@flighthq/types:interface#FileDialogHandle` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#FileLogSink` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#FileOpenDialogBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#FileOpenDialogBackend` | `open` | `receiver-sensitive-method` | `upstream/packages/types/src/FileDialogBackend.ts:15` |
+| `@flighthq/types:interface#FileSaveDialogBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#FileSaveDialogBackend` | `save` | `receiver-sensitive-method` | `upstream/packages/types/src/FileDialogBackend.ts:19` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `appendTextFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:42` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `copy` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:43` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `directoryExists` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:44` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `fileExists` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:45` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `makeDirectory` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:46` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `readBinaryFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:47` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `readDirectory` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:48` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `readTextFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:49` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `removeDirectory` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:50` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `removeFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:51` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `rename` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:52` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `statFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:53` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `writeBinaryFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:54` |
+| `@flighthq/types:interface#FileSystemBasicBackend` | `writeTextFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:55` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `appendTextFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:42` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `canAccessFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:63` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `copy` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:43` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `directoryExists` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:44` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `fileExists` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:45` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `getFileSystemUsage` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:64` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `makeDirectory` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:46` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `openFileReadStream` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:65` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `openFileWriteStream` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:66` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `readBinaryFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:47` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `readBinaryFileRange` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:67` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `readDirectory` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:48` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `readDirectoryRecursive` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:68` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `readTextFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:49` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `removeDirectory` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:50` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `removeFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:51` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `rename` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:52` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `statFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:53` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `writeBinaryFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:54` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `writeFileAtomic` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:69` |
+| `@flighthq/types:interface#FileSystemHostBackend` | `writeTextFile` | `receiver-sensitive-method` | `upstream/packages/types/src/FileSystem.ts:55` |
 | `@flighthq/types:type#FileSystemPathKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#FileSystemPathKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#FileSystemPathKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -6805,6 +7371,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ForceFalloff` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ForceFalloff` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#Frustum` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#FullscreenBackend` | `exit` | `receiver-sensitive-method` | `upstream/packages/types/src/FullscreenBackend.ts:4` |
+| `@flighthq/types:interface#FullscreenBackend` | `request` | `receiver-sensitive-method` | `upstream/packages/types/src/FullscreenBackend.ts:5` |
+| `@flighthq/types:interface#FullscreenBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/FullscreenBackend.ts:6` |
+| `@flighthq/types:interface#FullscreenBackend` | `unsubscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/FullscreenBackend.ts:7` |
 | `@flighthq/types:type#GamepadAxisKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#GamepadAxisKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#GamepadAxisKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -7001,14 +7571,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GamepadMappingKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#GamepadMappingKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#GamepadMappingKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#GeolocationBackend` | `clearWatch` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:51` |
-| `@flighthq/types:interface#GeolocationBackend` | `getCurrentPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:41` |
-| `@flighthq/types:interface#GeolocationBackend` | `getCurrentPositionResult` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:42` |
-| `@flighthq/types:interface#GeolocationBackend` | `getPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:43` |
-| `@flighthq/types:interface#GeolocationBackend` | `isAvailable` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:45` |
-| `@flighthq/types:interface#GeolocationBackend` | `requestPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:52` |
-| `@flighthq/types:interface#GeolocationBackend` | `subscribePermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:53` |
-| `@flighthq/types:interface#GeolocationBackend` | `watchPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:46` |
+| `@flighthq/types:interface#GeolocationBackend` | `clearWatch` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:73` |
+| `@flighthq/types:interface#GeolocationBackend` | `getCurrentPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:64` |
+| `@flighthq/types:interface#GeolocationBackend` | `getCurrentPositionResult` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:65` |
+| `@flighthq/types:interface#GeolocationBackend` | `isAvailable` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:67` |
+| `@flighthq/types:interface#GeolocationBackend` | `promptForAccess` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:76` |
+| `@flighthq/types:interface#GeolocationBackend` | `watchPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/Geolocation.ts:68` |
 | `@flighthq/types:type#GeolocationErrorReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#GeolocationErrorReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#GeolocationErrorReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -7058,55 +7626,6 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GeolocationErrorReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#GeolocationErrorReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#GeolocationErrorReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#GeolocationPermissionState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#GeolocationPermissionState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#GeolocationPermissionState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#GeolocationPermissionState` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#GeolocationPermissionState` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#GeolocationPermissionState` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#GeolocationPermissionState` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#GeolocationPermissionState` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#GeolocationPermissionState` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#GeolocationPermissionState` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#GeolocationPermissionState` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#GeolocationPermissionState` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#GeolocationPermissionState` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#GeolocationPermissionState` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#GeolocationPermissionState` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#GeolocationPermissionState` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#GeolocationPermissionState` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#GeolocationPermissionState` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#GeolocationPermissionState` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#GeolocationPermissionState` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#GeolocationPermissionState` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#GeolocationPermissionState` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#GeolocationPermissionState` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#GeolocationPermissionState` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#GeolocationPermissionState` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#GeolocationPermissionState` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#GeolocationPermissionState` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#GeolocationPermissionState` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#GeolocationPermissionState` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#GeolocationPermissionState` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#GeolocationPermissionState` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#GeolocationPermissionState` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#GeolocationPermissionState` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#GeolocationPermissionState` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#GeolocationPermissionState` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#GeolocationPermissionState` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#GeolocationPermissionState` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#GeolocationPermissionState` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#GeolocationPermissionState` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#GeolocationPermissionState` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#GeolocationPermissionState` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#GeolocationPermissionState` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#GeolocationPermissionState` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#GeolocationPermissionState` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#GeolocationPermissionState` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#GeolocationPermissionState` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#GeolocationPermissionState` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#GeolocationPermissionState` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#GeolocationPermissionState` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#GizmoHandleKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#GizmoHandleKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#GizmoHandleKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -7503,9 +8022,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#GlClassicLightingModel` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#GlClassicLightingModel` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#GlClassicLightingModel` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#GlColorAdjustmentMaterialFeature` | `drawShapeMeshes` | `receiver-sensitive-method` | `upstream/packages/types/src/GlRenderState.ts:98` |
-| `@flighthq/types:interface#GlColorAdjustmentMaterialFeature` | `flush` | `receiver-sensitive-method` | `upstream/packages/types/src/GlRenderState.ts:99` |
-| `@flighthq/types:interface#GlColorAdjustmentMaterialFeature` | `record` | `receiver-sensitive-method` | `upstream/packages/types/src/GlRenderState.ts:100` |
+| `@flighthq/types:interface#GlColorAdjustmentMaterialFeature` | `drawShapeMeshes` | `receiver-sensitive-method` | `upstream/packages/types/src/GlRenderState.ts:115` |
+| `@flighthq/types:interface#GlColorAdjustmentMaterialFeature` | `flush` | `receiver-sensitive-method` | `upstream/packages/types/src/GlRenderState.ts:116` |
+| `@flighthq/types:interface#GlColorAdjustmentMaterialFeature` | `record` | `receiver-sensitive-method` | `upstream/packages/types/src/GlRenderState.ts:117` |
 | `@flighthq/types:interface#GlContext` | `activeTexture` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.dom.d.ts:35310` |
 | `@flighthq/types:interface#GlContext` | `attachShader` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.dom.d.ts:35312` |
 | `@flighthq/types:interface#GlContext` | `bindBuffer` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.dom.d.ts:35316` |
@@ -7607,6 +8126,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlContext` | `vertexAttribDivisor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.dom.d.ts:34542` |
 | `@flighthq/types:interface#GlContext` | `vertexAttribPointer` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.dom.d.ts:35576` |
 | `@flighthq/types:interface#GlContext` | `viewport` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.dom.d.ts:35578` |
+| `@flighthq/types:interface#GlContextState` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#GlCullFaceKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#GlCullFaceKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#GlCullFaceKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -7762,55 +8282,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlModifierSnippet` | `bind` | `receiver-sensitive-method` | `upstream/packages/types/src/GlModifierSnippet.ts:34` |
 | `@flighthq/types:interface#GlModifierSnippet` | `contribution` | `receiver-sensitive-method` | `upstream/packages/types/src/GlModifierSnippet.ts:35` |
 | `@flighthq/types:interface#GlModifierSnippet` | `declarations` | `receiver-sensitive-method` | `upstream/packages/types/src/GlModifierSnippet.ts:36` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#GlobalShortcutBlockReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#GlobalShortcut` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#GlPbrExtensionBindContext` | `bindTexture` | `receiver-sensitive-method` | `upstream/packages/types/src/GlPbrExtensionBindContext.ts:8` |
 | `@flighthq/types:interface#GlPbrExtensionBindContext` | `bindTransmissionSceneColor` | `receiver-sensitive-method` | `upstream/packages/types/src/GlPbrExtensionBindContext.ts:7` |
 | `@flighthq/types:interface#GlPbrExtensionBindContext` | `setFloat` | `receiver-sensitive-method` | `upstream/packages/types/src/GlPbrExtensionBindContext.ts:16` |
@@ -7869,6 +8341,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#GlPbrExtensionRegistration` | `isSupported` | `receiver-sensitive-method` | `upstream/packages/types/src/GlPbrExtensionRegistration.ts:14` |
 | `@flighthq/types:interface#GlPbrExtensionShaderContext` | `hasTransmissionSceneColor` | `receiver-sensitive-method` | `upstream/packages/types/src/GlPbrExtensionShaderContext.ts:5` |
 | `@flighthq/types:interface#GlPbrExtensionShaderContext` | `isTextureReady` | `receiver-sensitive-method` | `upstream/packages/types/src/GlPbrExtensionShaderContext.ts:6` |
+| `@flighthq/types:interface#GlPipeline` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#GlRenderEffectApplicationStatus` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#GlRenderEffectApplicationStatus` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#GlRenderEffectApplicationStatus` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -8597,6 +9070,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#HemisphereLight` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#HierarchyNode` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
 | `@flighthq/types:type#HierarchyNodeAny` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
+| `@flighthq/types:interface#Host` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#HslColor` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:78` |
 | `@flighthq/types:type#HslColor` | `[Symbol.unscopables]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:97` |
 | `@flighthq/types:type#HslColor` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.array.d.ts:24` |
@@ -8969,14 +9443,16 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#InnerEffectSourceMode` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#InnerEffectSourceMode` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#InnerEffectSourceMode` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#InputDropFileBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#InputDropFileBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindowTargetBackend.ts:8` |
+| `@flighthq/types:interface#InputFocusBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#InputFocusBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindowTargetBackend.ts:14` |
 | `@flighthq/types:interface#InputIngressBackend` | `attachGamepad` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:38` |
 | `@flighthq/types:interface#InputIngressBackend` | `attachKeyboard` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:39` |
 | `@flighthq/types:interface#InputIngressBackend` | `attachPointer` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:44` |
 | `@flighthq/types:interface#InputIngressBackend` | `attachRelativePointer` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:45` |
 | `@flighthq/types:interface#InputIngressBackend` | `attachText` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:50` |
 | `@flighthq/types:interface#InputIngressBackend` | `attachWheel` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:51` |
-| `@flighthq/types:interface#InputIngressBackend` | `exitPointerLock` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:52` |
-| `@flighthq/types:interface#InputIngressBackend` | `hasPointerLock` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:53` |
 | `@flighthq/types:interface#InputIngressSink` | `gamepadAxisMove` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:15` |
 | `@flighthq/types:interface#InputIngressSink` | `gamepadButtonDown` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:16` |
 | `@flighthq/types:interface#InputIngressSink` | `gamepadButtonUp` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:17` |
@@ -8995,6 +9471,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#InputIngressSink` | `wheel` | `receiver-sensitive-method` | `upstream/packages/types/src/InputIngressBackend.ts:30` |
 | `@flighthq/types:interface#InputKeyRepeatTimer` | `start` | `receiver-sensitive-method` | `upstream/packages/types/src/InputKeyRepeatTimer.ts:8` |
 | `@flighthq/types:interface#InputKeyRepeatTimer` | `stop` | `receiver-sensitive-method` | `upstream/packages/types/src/InputKeyRepeatTimer.ts:9` |
+| `@flighthq/types:interface#InputPointerLockBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#InputPointerLockBackend` | `exit` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindowTargetBackend.ts:31` |
+| `@flighthq/types:interface#InputPointerLockBackend` | `request` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindowTargetBackend.ts:32` |
+| `@flighthq/types:interface#InputTargetBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#InputTargetBackend` | `prepare` | `receiver-sensitive-method` | `upstream/packages/types/src/InputTargetBackend.ts:10` |
+| `@flighthq/types:interface#InputTargetHandle` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#InstancedMesh` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
 | `@flighthq/types:type#InteractionSignalName` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#InteractionSignalName` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -9094,111 +9576,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#InterpolationMethod` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#InterpolationMethod` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#InterpolationMethod` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#IpcBackend` | `getCapabilities` | `receiver-sensitive-method` | `upstream/packages/types/src/Ipc.ts:25` |
-| `@flighthq/types:interface#IpcBackend` | `handle` | `receiver-sensitive-method` | `upstream/packages/types/src/Ipc.ts:20` |
-| `@flighthq/types:interface#IpcBackend` | `invoke` | `receiver-sensitive-method` | `upstream/packages/types/src/Ipc.ts:16` |
-| `@flighthq/types:interface#IpcBackend` | `send` | `receiver-sensitive-method` | `upstream/packages/types/src/Ipc.ts:15` |
-| `@flighthq/types:interface#IpcBackend` | `sendTo` | `receiver-sensitive-method` | `upstream/packages/types/src/Ipc.ts:23` |
-| `@flighthq/types:interface#IpcBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Ipc.ts:17` |
-| `@flighthq/types:type#IpcErrorCode` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#IpcErrorCode` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#IpcErrorCode` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#IpcErrorCode` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#IpcErrorCode` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#IpcErrorCode` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#IpcErrorCode` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#IpcErrorCode` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#IpcErrorCode` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#IpcErrorCode` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#IpcErrorCode` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#IpcErrorCode` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#IpcErrorCode` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#IpcErrorCode` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#IpcErrorCode` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#IpcErrorCode` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#IpcErrorCode` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#IpcErrorCode` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#IpcErrorCode` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#IpcErrorCode` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#IpcErrorCode` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#IpcErrorCode` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#IpcErrorCode` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#IpcErrorCode` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#IpcErrorCode` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#IpcErrorCode` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#IpcErrorCode` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#IpcErrorCode` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#IpcErrorCode` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#IpcErrorCode` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#IpcErrorCode` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#IpcErrorCode` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#IpcErrorCode` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#IpcErrorCode` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#IpcErrorCode` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#IpcErrorCode` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#IpcErrorCode` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#IpcErrorCode` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#IpcErrorCode` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#IpcErrorCode` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#IpcErrorCode` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#IpcErrorCode` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#IpcErrorCode` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#IpcErrorCode` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#IpcErrorCode` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#IpcErrorCode` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#IpcErrorCode` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#IpcErrorCode` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#IpcErrorCode` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#IpcMessageEvent` | `reply` | `receiver-sensitive-method` | `upstream/packages/types/src/Ipc.ts:40` |
-| `@flighthq/types:type#IpcOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#IpcOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#IpcOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#IpcOperation` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#IpcOperation` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#IpcOperation` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#IpcOperation` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#IpcOperation` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#IpcOperation` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#IpcOperation` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#IpcOperation` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#IpcOperation` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#IpcOperation` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#IpcOperation` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#IpcOperation` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#IpcOperation` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#IpcOperation` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#IpcOperation` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#IpcOperation` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#IpcOperation` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#IpcOperation` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#IpcOperation` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#IpcOperation` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#IpcOperation` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#IpcOperation` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#IpcOperation` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#IpcOperation` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#IpcOperation` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#IpcOperation` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#IpcOperation` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#IpcOperation` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#IpcOperation` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#IpcOperation` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#IpcOperation` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#IpcOperation` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#IpcOperation` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#IpcOperation` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#IpcOperation` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#IpcOperation` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#IpcOperation` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#IpcOperation` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#IpcOperation` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#IpcOperation` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#IpcOperation` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#IpcOperation` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#IpcOperation` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#IpcOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#IpcOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#IpcOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#IpcMessageBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#IpcMessageBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Ipc.ts:23` |
 | `@flighthq/types:interface#IridescencePbrExtension` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#JointStyle` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#JointStyle` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -9608,58 +9987,59 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#LogData` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#LogData` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#LogData` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#LogTransportBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Log.ts:60` |
-| `@flighthq/types:interface#LogTransportBackend` | `flush` | `receiver-sensitive-method` | `upstream/packages/types/src/Log.ts:54` |
-| `@flighthq/types:interface#LogTransportBackend` | `write` | `receiver-sensitive-method` | `upstream/packages/types/src/Log.ts:53` |
-| `@flighthq/types:type#LogTransportOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#LogTransportOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#LogTransportOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#LogTransportOperation` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#LogTransportOperation` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#LogTransportOperation` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#LogTransportOperation` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#LogTransportOperation` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#LogTransportOperation` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#LogTransportOperation` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#LogTransportOperation` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#LogTransportOperation` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#LogTransportOperation` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#LogTransportOperation` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#LogTransportOperation` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#LogTransportOperation` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#LogTransportOperation` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#LogTransportOperation` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#LogTransportOperation` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#LogTransportOperation` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#LogTransportOperation` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#LogTransportOperation` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#LogTransportOperation` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#LogTransportOperation` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#LogTransportOperation` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#LogTransportOperation` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#LogTransportOperation` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#LogTransportOperation` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#LogTransportOperation` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#LogTransportOperation` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#LogTransportOperation` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#LogTransportOperation` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#LogTransportOperation` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#LogTransportOperation` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#LogTransportOperation` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#LogTransportOperation` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#LogTransportOperation` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#LogTransportOperation` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#LogTransportOperation` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#LogTransportOperation` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#LogTransportOperation` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#LogTransportOperation` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#LogTransportOperation` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#LogTransportOperation` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#LogTransportOperation` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#LogTransportOperation` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#LogTransportOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#LogTransportOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#LogTransportOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#LogTransport` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#LogTransport` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Log.ts:89` |
+| `@flighthq/types:interface#LogTransport` | `flush` | `receiver-sensitive-method` | `upstream/packages/types/src/Log.ts:88` |
+| `@flighthq/types:interface#LogTransport` | `write` | `receiver-sensitive-method` | `upstream/packages/types/src/Log.ts:87` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#LogTransportDeliveryBoundary` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#LoopBackend` | `cancelFrame` | `receiver-sensitive-method` | `upstream/packages/types/src/LoopBackend.ts:3` |
 | `@flighthq/types:interface#LoopBackend` | `now` | `receiver-sensitive-method` | `upstream/packages/types/src/LoopBackend.ts:4` |
 | `@flighthq/types:interface#LoopBackend` | `requestFrame` | `receiver-sensitive-method` | `upstream/packages/types/src/LoopBackend.ts:2` |
@@ -9768,6 +10148,106 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Matrix` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#Matrix3` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#Matrix4` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MediaFileCaptureBackend` | `capture` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaFileCapture.ts:30` |
+| `@flighthq/types:interface#MediaFileCaptureBackend` | `captureVideo` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaFileCapture.ts:31` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#MediaFileCaptureFacingMode` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#MediaFileCaptureSource` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#MediaReadyState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#MediaReadyState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#MediaReadyState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -9866,60 +10346,66 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#MediaSessionAction` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#MediaSessionAction` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#MediaSessionAction` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#MediaSessionBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:82` |
-| `@flighthq/types:interface#MediaSessionBackend` | `setActionHandler` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:70` |
-| `@flighthq/types:interface#MediaSessionBackend` | `setMetadata` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:64` |
-| `@flighthq/types:interface#MediaSessionBackend` | `setPlaybackState` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:66` |
-| `@flighthq/types:interface#MediaSessionBackend` | `setPositionState` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:68` |
-| `@flighthq/types:type#MediaSessionOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#MediaSessionOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#MediaSessionOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#MediaSessionOperation` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#MediaSessionOperation` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#MediaSessionOperation` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#MediaSessionOperation` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#MediaSessionOperation` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#MediaSessionOperation` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#MediaSessionOperation` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#MediaSessionOperation` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#MediaSessionOperation` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#MediaSessionOperation` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#MediaSessionOperation` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#MediaSessionOperation` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#MediaSessionOperation` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#MediaSessionOperation` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#MediaSessionOperation` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#MediaSessionOperation` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#MediaSessionOperation` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#MediaSessionOperation` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#MediaSessionOperation` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#MediaSessionOperation` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#MediaSessionOperation` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#MediaSessionOperation` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#MediaSessionOperation` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#MediaSessionOperation` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#MediaSessionOperation` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#MediaSessionOperation` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#MediaSessionOperation` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#MediaSessionOperation` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#MediaSessionOperation` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#MediaSessionOperation` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#MediaSessionOperation` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#MediaSessionOperation` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#MediaSessionOperation` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#MediaSessionOperation` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#MediaSessionOperation` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#MediaSessionOperation` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#MediaSessionOperation` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#MediaSessionOperation` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#MediaSessionOperation` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#MediaSessionOperation` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#MediaSessionOperation` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#MediaSessionOperation` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#MediaSessionOperation` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#MediaSessionOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#MediaSessionOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#MediaSessionOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#MediaSessionActionBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MediaSessionActionBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:118` |
+| `@flighthq/types:interface#MediaSessionActionBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:121` |
+| `@flighthq/types:interface#MediaSessionActionSignal` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MediaSessionBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MediaSessionBackend` | `clearMetadata` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:103` |
+| `@flighthq/types:interface#MediaSessionBackend` | `clearPositionState` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:104` |
+| `@flighthq/types:interface#MediaSessionBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:107` |
+| `@flighthq/types:interface#MediaSessionBackend` | `setMetadata` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:108` |
+| `@flighthq/types:interface#MediaSessionBackend` | `setPlaybackState` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:109` |
+| `@flighthq/types:interface#MediaSessionBackend` | `setPositionState` | `receiver-sensitive-method` | `upstream/packages/types/src/MediaSession.ts:110` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#MediaSessionOperationBlockReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#MediaSessionPlaybackState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#MediaSessionPlaybackState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#MediaSessionPlaybackState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -9969,10 +10455,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#MediaSessionPlaybackState` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#MediaSessionPlaybackState` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#MediaSessionPlaybackState` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#MenuBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Menu.ts:92` |
-| `@flighthq/types:interface#MenuBackend` | `popupContextMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/Menu.ts:94` |
-| `@flighthq/types:interface#MenuBackend` | `setApplicationMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/Menu.ts:93` |
-| `@flighthq/types:interface#MenuBackend` | `subscribeSelect` | `receiver-sensitive-method` | `upstream/packages/types/src/Menu.ts:95` |
+| `@flighthq/types:interface#MenuApplicationBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Menu.ts:55` |
+| `@flighthq/types:interface#MenuApplicationBackend` | `setApplicationMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/Menu.ts:56` |
+| `@flighthq/types:interface#MenuHighlightBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Menu.ts:63` |
 | `@flighthq/types:type#MenuItemRole` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#MenuItemRole` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#MenuItemRole` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -10071,153 +10556,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#MenuItemType` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#MenuItemType` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#MenuItemType` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#MenuReplacementGuarantee` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#MenuReplacementGuaranteeReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#MenuReplacementLiftPremise` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#MenuPopupBackend` | `popup` | `receiver-sensitive-method` | `upstream/packages/types/src/Menu.ts:68` |
+| `@flighthq/types:interface#MenuSelectBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Menu.ts:74` |
 | `@flighthq/types:interface#Mesh` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
 | `@flighthq/types:type#MeshDeformer` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#MeshDeformer` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -10269,6 +10609,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#MeshDeformer` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#MeshDeformer` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#MeshGeometry` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MessageDialogBackend` | `confirm` | `receiver-sensitive-method` | `upstream/packages/types/src/MessageDialogBackend.ts:5` |
+| `@flighthq/types:interface#MessageDialogBackend` | `message` | `receiver-sensitive-method` | `upstream/packages/types/src/MessageDialogBackend.ts:6` |
 | `@flighthq/types:type#MessageDialogKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#MessageDialogKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#MessageDialogKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -10318,6 +10660,186 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#MessageDialogKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#MessageDialogKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#MessageDialogKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#MidiAccess` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MidiAccessBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MidiAccessBackend` | `requestAccess` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:141` |
+| `@flighthq/types:interface#MidiAccessResourceOperations` | `attachStateChange` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:149` |
+| `@flighthq/types:interface#MidiAccessResourceOperations` | `getInputPorts` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:150` |
+| `@flighthq/types:interface#MidiAccessResourceOperations` | `getOutputPorts` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:151` |
+| `@flighthq/types:interface#MidiAccessStateSubscription` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MidiEventAttachment` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MidiEventAttachment` | `release` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:101` |
+| `@flighthq/types:interface#MidiInputMessageSubscription` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MidiInputPort` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MidiInputPortResourceOperations` | `attachMessage` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:163` |
+| `@flighthq/types:interface#MidiInputPortResourceOperations` | `attachStateChange` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:155` |
+| `@flighthq/types:interface#MidiInputPortResourceOperations` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:156` |
+| `@flighthq/types:interface#MidiInputPortResourceOperations` | `getConnection` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:157` |
+| `@flighthq/types:interface#MidiInputPortResourceOperations` | `getState` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:158` |
+| `@flighthq/types:interface#MidiInputPortResourceOperations` | `open` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:159` |
+| `@flighthq/types:interface#MidiOutputPort` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MidiOutputPortResourceOperations` | `attachStateChange` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:155` |
+| `@flighthq/types:interface#MidiOutputPortResourceOperations` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:156` |
+| `@flighthq/types:interface#MidiOutputPortResourceOperations` | `getConnection` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:157` |
+| `@flighthq/types:interface#MidiOutputPortResourceOperations` | `getState` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:158` |
+| `@flighthq/types:interface#MidiOutputPortResourceOperations` | `open` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:159` |
+| `@flighthq/types:interface#MidiOutputPortResourceOperations` | `send` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:167` |
+| `@flighthq/types:interface#MidiPermissionBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#MidiPermissionBackend` | `getPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:145` |
+| `@flighthq/types:type#MidiPort` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#MidiPortConnection` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#MidiPortConnection` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#MidiPortConnection` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#MidiPortConnection` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#MidiPortConnection` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#MidiPortConnection` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#MidiPortConnection` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#MidiPortConnection` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#MidiPortConnection` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#MidiPortConnection` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#MidiPortConnection` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#MidiPortConnection` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#MidiPortConnection` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#MidiPortConnection` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#MidiPortConnection` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#MidiPortConnection` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#MidiPortConnection` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#MidiPortConnection` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#MidiPortConnection` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#MidiPortConnection` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#MidiPortConnection` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#MidiPortConnection` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#MidiPortConnection` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#MidiPortConnection` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#MidiPortConnection` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#MidiPortConnection` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#MidiPortConnection` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#MidiPortConnection` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#MidiPortConnection` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#MidiPortConnection` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#MidiPortConnection` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#MidiPortConnection` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#MidiPortConnection` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#MidiPortConnection` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#MidiPortConnection` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#MidiPortConnection` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#MidiPortConnection` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#MidiPortConnection` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#MidiPortConnection` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#MidiPortConnection` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#MidiPortConnection` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#MidiPortConnection` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#MidiPortConnection` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#MidiPortConnection` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#MidiPortConnection` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#MidiPortConnection` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#MidiPortConnection` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#MidiPortConnection` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#MidiPortConnection` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#MidiPortResourceOperations` | `attachStateChange` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:155` |
+| `@flighthq/types:interface#MidiPortResourceOperations` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:156` |
+| `@flighthq/types:interface#MidiPortResourceOperations` | `getConnection` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:157` |
+| `@flighthq/types:interface#MidiPortResourceOperations` | `getState` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:158` |
+| `@flighthq/types:interface#MidiPortResourceOperations` | `open` | `receiver-sensitive-method` | `upstream/packages/types/src/Midi.ts:159` |
+| `@flighthq/types:type#MidiPortState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#MidiPortState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#MidiPortState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#MidiPortState` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#MidiPortState` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#MidiPortState` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#MidiPortState` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#MidiPortState` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#MidiPortState` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#MidiPortState` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#MidiPortState` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#MidiPortState` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#MidiPortState` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#MidiPortState` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#MidiPortState` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#MidiPortState` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#MidiPortState` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#MidiPortState` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#MidiPortState` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#MidiPortState` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#MidiPortState` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#MidiPortState` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#MidiPortState` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#MidiPortState` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#MidiPortState` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#MidiPortState` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#MidiPortState` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#MidiPortState` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#MidiPortState` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#MidiPortState` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#MidiPortState` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#MidiPortState` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#MidiPortState` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#MidiPortState` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#MidiPortState` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#MidiPortState` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#MidiPortState` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#MidiPortState` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#MidiPortState` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#MidiPortState` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#MidiPortState` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#MidiPortState` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#MidiPortState` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#MidiPortState` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#MidiPortState` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#MidiPortState` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#MidiPortState` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#MidiPortState` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#MidiPortState` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#MidiPortStateSubscription` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#MobileOsProfile` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#MobileOsProfile` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#MobileOsProfile` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#MobileOsProfile` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#MobileOsProfile` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#MobileOsProfile` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#MobileOsProfile` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#MobileOsProfile` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#MobileOsProfile` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#MobileOsProfile` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#MobileOsProfile` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#MobileOsProfile` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#MobileOsProfile` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#MobileOsProfile` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#MobileOsProfile` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#MobileOsProfile` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#MobileOsProfile` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#MobileOsProfile` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#MobileOsProfile` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#MobileOsProfile` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#MobileOsProfile` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#MobileOsProfile` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#MobileOsProfile` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#MobileOsProfile` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#MobileOsProfile` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#MobileOsProfile` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#MobileOsProfile` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#MobileOsProfile` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#MobileOsProfile` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#MobileOsProfile` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#MobileOsProfile` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#MobileOsProfile` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#MobileOsProfile` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#MobileOsProfile` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#MobileOsProfile` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#MobileOsProfile` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#MobileOsProfile` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#MobileOsProfile` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#MobileOsProfile` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#MobileOsProfile` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#MobileOsProfile` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#MobileOsProfile` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#MobileOsProfile` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#MobileOsProfile` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#MobileOsProfile` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#MobileOsProfile` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#MobileOsProfile` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#MobileOsProfile` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#MobileOsProfile` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#ModifierKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#ModifierKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#ModifierKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -10830,24 +11352,18 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#NodeTraitsKey` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:102` |
 | `@flighthq/types:type#NodeTraitsKey` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:105` |
 | `@flighthq/types:interface#NormalMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/types:interface#NotificationBackend` | `cancelScheduledNotification` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:111` |
-| `@flighthq/types:interface#NotificationBackend` | `closeAllNotifications` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:115` |
-| `@flighthq/types:interface#NotificationBackend` | `closeNotification` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:113` |
-| `@flighthq/types:interface#NotificationBackend` | `getActiveNotifications` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:102` |
-| `@flighthq/types:interface#NotificationBackend` | `getCapabilities` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:98` |
-| `@flighthq/types:interface#NotificationBackend` | `getLaunchNotification` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:100` |
-| `@flighthq/types:interface#NotificationBackend` | `getPendingNotifications` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:104` |
-| `@flighthq/types:interface#NotificationBackend` | `getPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:95` |
-| `@flighthq/types:interface#NotificationBackend` | `isSupported` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:96` |
-| `@flighthq/types:interface#NotificationBackend` | `notify` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:92` |
-| `@flighthq/types:interface#NotificationBackend` | `requestPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:93` |
-| `@flighthq/types:interface#NotificationBackend` | `scheduleNotification` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:106` |
-| `@flighthq/types:interface#NotificationBackend` | `subscribeAction` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:120` |
-| `@flighthq/types:interface#NotificationBackend` | `subscribeClick` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:119` |
-| `@flighthq/types:interface#NotificationBackend` | `subscribeDismiss` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:121` |
-| `@flighthq/types:interface#NotificationBackend` | `subscribeReply` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:122` |
-| `@flighthq/types:interface#NotificationBackend` | `subscribeShow` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:123` |
-| `@flighthq/types:interface#NotificationBackend` | `updateNotification` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:118` |
+| `@flighthq/types:interface#Notification` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#NotificationActionBackend` | `attach` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:191` |
+| `@flighthq/types:interface#NotificationActionSubscription` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#NotificationActiveListBackend` | `getActiveNotifications` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:187` |
+| `@flighthq/types:interface#NotificationClickBackend` | `attach` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:197` |
+| `@flighthq/types:interface#NotificationClickSubscription` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#NotificationCloseBackend` | `closeAllNotifications` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:183` |
+| `@flighthq/types:interface#NotificationDeliveryBackend` | `notify` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:170` |
+| `@flighthq/types:interface#NotificationDismissBackend` | `attach` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:201` |
+| `@flighthq/types:interface#NotificationDismissSubscription` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#NotificationEventAttachment` | `release` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:117` |
+| `@flighthq/types:interface#NotificationLifecycleBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:215` |
 | `@flighthq/types:type#NotificationPermission` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#NotificationPermission` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#NotificationPermission` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -10897,6 +11413,64 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#NotificationPermission` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#NotificationPermission` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#NotificationPermission` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#NotificationPermissionBackend` | `getPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:165` |
+| `@flighthq/types:interface#NotificationPermissionBackend` | `requestPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:166` |
+| `@flighthq/types:interface#NotificationReceivedBackend` | `attach` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:211` |
+| `@flighthq/types:interface#NotificationReceivedSubscription` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#NotificationReplyBackend` | `attach` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:205` |
+| `@flighthq/types:interface#NotificationReplySubscription` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#NotificationRequestField` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#NotificationRequestField` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#NotificationRequestField` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#NotificationRequestField` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#NotificationRequestField` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#NotificationRequestField` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#NotificationRequestField` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#NotificationRequestField` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#NotificationRequestField` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#NotificationRequestField` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#NotificationRequestField` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#NotificationRequestField` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#NotificationRequestField` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#NotificationRequestField` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#NotificationRequestField` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#NotificationRequestField` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#NotificationRequestField` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#NotificationRequestField` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#NotificationRequestField` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#NotificationRequestField` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#NotificationRequestField` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#NotificationRequestField` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#NotificationRequestField` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#NotificationRequestField` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#NotificationRequestField` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#NotificationRequestField` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#NotificationRequestField` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#NotificationRequestField` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#NotificationRequestField` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#NotificationRequestField` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#NotificationRequestField` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#NotificationRequestField` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#NotificationRequestField` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#NotificationRequestField` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#NotificationRequestField` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#NotificationRequestField` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#NotificationRequestField` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#NotificationRequestField` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#NotificationRequestField` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#NotificationRequestField` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#NotificationRequestField` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#NotificationRequestField` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#NotificationRequestField` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#NotificationRequestField` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#NotificationRequestField` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#NotificationRequestField` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#NotificationRequestField` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#NotificationRequestField` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#NotificationRequestField` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#NotificationSchedulingBackend` | `cancelAllScheduledNotifications` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:174` |
+| `@flighthq/types:interface#NotificationSchedulingBackend` | `getPendingNotifications` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:175` |
+| `@flighthq/types:interface#NotificationSchedulingBackend` | `scheduleNotification` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:176` |
 | `@flighthq/types:interface#Obb` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#OpenTypeFontExplanationReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#OpenTypeFontExplanationReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -11491,8 +12065,6 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PbrUvSet` | `toPrecision` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:582` |
 | `@flighthq/types:type#PbrUvSet` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:564` |
 | `@flighthq/types:type#PbrUvSet` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:585` |
-| `@flighthq/types:interface#PermissionBackend` | `getState` | `receiver-sensitive-method` | `upstream/packages/types/src/Permission.ts:28` |
-| `@flighthq/types:interface#PermissionBackend` | `request` | `receiver-sensitive-method` | `upstream/packages/types/src/Permission.ts:32` |
 | `@flighthq/types:type#PermissionName` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#PermissionName` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#PermissionName` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -11542,6 +12114,104 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PermissionName` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#PermissionName` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#PermissionName` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#PermissionQueryFailureReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#PermissionRequestFailureReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#PermissionState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#PermissionState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#PermissionState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -11591,55 +12261,6 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PermissionState` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#PermissionState` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#PermissionState` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#PermissionStateSource` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#PermissionStateSource` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#PermissionStateSource` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#PermissionStateSource` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#PermissionStateSource` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#PermissionStateSource` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#PermissionStateSource` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#PermissionStateSource` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#PermissionStateSource` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#PermissionStateSource` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#PermissionStateSource` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#PermissionStateSource` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#PermissionStateSource` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#PermissionStateSource` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#PermissionStateSource` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#PermissionStateSource` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#PermissionStateSource` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#PermissionStateSource` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#PermissionStateSource` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#PermissionStateSource` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#PermissionStateSource` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#PermissionStateSource` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#PermissionStateSource` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#PermissionStateSource` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#PermissionStateSource` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#PermissionStateSource` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#PermissionStateSource` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#PermissionStateSource` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#PermissionStateSource` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#PermissionStateSource` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#PermissionStateSource` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#PermissionStateSource` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#PermissionStateSource` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#PermissionStateSource` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#PermissionStateSource` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#PermissionStateSource` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#PermissionStateSource` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#PermissionStateSource` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#PermissionStateSource` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#PermissionStateSource` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#PermissionStateSource` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#PermissionStateSource` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#PermissionStateSource` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#PermissionStateSource` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#PermissionStateSource` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#PermissionStateSource` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#PermissionStateSource` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#PermissionStateSource` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#PermissionStateSource` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#PhongMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#Physics2DAbi` | `createWorld` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:123` |
 | `@flighthq/types:interface#Physics2DAbi` | `destroyWorld` | `receiver-sensitive-method` | `upstream/packages/types/src/Physics2DAbi.ts:124` |
@@ -12931,20 +13552,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PointerType` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#PointerType` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#PointLight` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/types:interface#PowerBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:34` |
-| `@flighthq/types:interface#PowerBackend` | `getBatteryHealth` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:37` |
-| `@flighthq/types:interface#PowerBackend` | `getStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:38` |
-| `@flighthq/types:interface#PowerBackend` | `getSystemIdleState` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:40` |
-| `@flighthq/types:interface#PowerBackend` | `getSystemIdleTime` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:42` |
-| `@flighthq/types:interface#PowerBackend` | `isKeepAwakeActive` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:44` |
-| `@flighthq/types:interface#PowerBackend` | `setKeepAwake` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:47` |
-| `@flighthq/types:interface#PowerBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:49` |
-| `@flighthq/types:interface#PowerBackend` | `subscribeLockScreen` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:51` |
-| `@flighthq/types:interface#PowerBackend` | `subscribeLowPowerModeChange` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:53` |
-| `@flighthq/types:interface#PowerBackend` | `subscribeResume` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:55` |
-| `@flighthq/types:interface#PowerBackend` | `subscribeSuspend` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:57` |
-| `@flighthq/types:interface#PowerBackend` | `subscribeThermalStateChange` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:59` |
-| `@flighthq/types:interface#PowerBackend` | `subscribeUnlockScreen` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:61` |
+| `@flighthq/types:interface#Power` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#PowerBatteryHealthBackend` | `getBatteryHealth` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:112` |
 | `@flighthq/types:type#PowerBatteryHealthState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#PowerBatteryHealthState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#PowerBatteryHealthState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -12994,6 +13603,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PowerBatteryHealthState` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#PowerBatteryHealthState` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#PowerBatteryHealthState` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#PowerChangeBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:75` |
+| `@flighthq/types:interface#PowerIdleBackend` | `getIdleState` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:91` |
+| `@flighthq/types:interface#PowerIdleBackend` | `getIdleTimeSeconds` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:92` |
 | `@flighthq/types:type#PowerIdleState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#PowerIdleState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#PowerIdleState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -13043,6 +13655,59 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PowerIdleState` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#PowerIdleState` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#PowerIdleState` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#PowerKeepAwakeAcquireReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#PowerKeepAwakeBackend` | `acquire` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:82` |
+| `@flighthq/types:interface#PowerKeepAwakeBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:83` |
+| `@flighthq/types:interface#PowerKeepAwakeBackend` | `isActive` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:84` |
+| `@flighthq/types:interface#PowerKeepAwakeBackend` | `release` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:85` |
 | `@flighthq/types:type#PowerKeepAwakeMode` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#PowerKeepAwakeMode` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#PowerKeepAwakeMode` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -13092,6 +13757,62 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PowerKeepAwakeMode` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#PowerKeepAwakeMode` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#PowerKeepAwakeMode` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#PowerKeepAwakeReleaseReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#PowerSessionLockBackend` | `subscribeLock` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:99` |
+| `@flighthq/types:interface#PowerSessionLockBackend` | `subscribeUnlock` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:100` |
+| `@flighthq/types:interface#PowerStatusBackend` | `getStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:69` |
+| `@flighthq/types:interface#PowerSuspensionBackend` | `subscribeResume` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:106` |
+| `@flighthq/types:interface#PowerSuspensionBackend` | `subscribeSuspend` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:107` |
+| `@flighthq/types:interface#PowerThermalBackend` | `getThermalState` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:119` |
+| `@flighthq/types:interface#PowerThermalBackend` | `subscribeThermalStateChange` | `receiver-sensitive-method` | `upstream/packages/types/src/Power.ts:120` |
 | `@flighthq/types:type#PowerThermalState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#PowerThermalState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#PowerThermalState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -13192,16 +13913,23 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PrimitiveTopology` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#ProgressBarController` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#ProgressBarController` | `[ProgressBarControllerTypeKey]` | `computed-symbol-member` | `upstream/packages/types/src/ProgressBarController.ts:8` |
-| `@flighthq/types:interface#ProtocolBackend` | `drainPendingUrls` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:31` |
-| `@flighthq/types:interface#ProtocolBackend` | `getLaunchUrl` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:29` |
-| `@flighthq/types:interface#ProtocolBackend` | `getRegisteredSchemes` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:24` |
-| `@flighthq/types:interface#ProtocolBackend` | `isDefault` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:26` |
-| `@flighthq/types:interface#ProtocolBackend` | `isRegistered` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:22` |
-| `@flighthq/types:interface#ProtocolBackend` | `register` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:20` |
-| `@flighthq/types:interface#ProtocolBackend` | `removeAsDefault` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:27` |
-| `@flighthq/types:interface#ProtocolBackend` | `setAsDefault` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:25` |
-| `@flighthq/types:interface#ProtocolBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:33` |
-| `@flighthq/types:interface#ProtocolBackend` | `unregister` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:21` |
+| `@flighthq/types:interface#PromptDialogBackend` | `prompt` | `receiver-sensitive-method` | `upstream/packages/types/src/PromptDialogBackend.ts:4` |
+| `@flighthq/types:interface#ProtocolDefaultBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ProtocolDefaultBackend` | `isDefault` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:19` |
+| `@flighthq/types:interface#ProtocolDefaultBackend` | `removeAsDefault` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:20` |
+| `@flighthq/types:interface#ProtocolDefaultBackend` | `setAsDefault` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:21` |
+| `@flighthq/types:interface#ProtocolHandler` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ProtocolLaunchBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ProtocolLaunchBackend` | `getLaunchUrl` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:25` |
+| `@flighthq/types:interface#ProtocolOpenBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ProtocolOpenBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:29` |
+| `@flighthq/types:interface#ProtocolRegistrationBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ProtocolRegistrationBackend` | `getRegisteredSchemes` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:33` |
+| `@flighthq/types:interface#ProtocolRegistrationBackend` | `register` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:34` |
+| `@flighthq/types:interface#ProtocolRegistrationQueryBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ProtocolRegistrationQueryBackend` | `isRegistered` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:38` |
+| `@flighthq/types:interface#ProtocolUnregistrationBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ProtocolUnregistrationBackend` | `unregister` | `receiver-sensitive-method` | `upstream/packages/types/src/Protocol.ts:42` |
 | `@flighthq/types:interface#QuadBatch` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
 | `@flighthq/types:type#QuadTransformType` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#QuadTransformType` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -13460,6 +14188,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#RenderCacheKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#RenderCacheKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#RenderCacheKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#RenderContextBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#RenderContextBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindowTargetBackend.ts:37` |
 | `@flighthq/types:type#RenderEffectInput` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#RenderEffectInput` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#RenderEffectInput` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -13572,6 +14302,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#RenderSortKey` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:564` |
 | `@flighthq/types:type#RenderSortKey` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:585` |
 | `@flighthq/types:interface#RenderState` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#RenderSurfaceBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#RenderSurfaceBackend` | `resize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindowTargetBackend.ts:43` |
 | `@flighthq/types:interface#RenderTarget` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#RenderTargetColorSpace` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#RenderTargetColorSpace` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -14512,13 +15244,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#SceneCoverageCatalog` | `toLocaleString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:1203` |
 | `@flighthq/types:type#SceneCoverageCatalog` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:1199` |
 | `@flighthq/types:type#SceneCoverageCatalog` | `values` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:129` |
-| `@flighthq/types:interface#ScreenBackend` | `getCursorPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:66` |
-| `@flighthq/types:interface#ScreenBackend` | `getModes` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:69` |
-| `@flighthq/types:interface#ScreenBackend` | `getPrimaryScreen` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:62` |
-| `@flighthq/types:interface#ScreenBackend` | `getScreens` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:61` |
-| `@flighthq/types:interface#ScreenBackend` | `queryWindowManagementPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:74` |
-| `@flighthq/types:interface#ScreenBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:64` |
-| `@flighthq/types:interface#ScreenBackend` | `subscribeWindowManagementPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:77` |
+| `@flighthq/types:interface#ScheduledNotification` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ScreenChangeBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ScreenChangeBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:68` |
 | `@flighthq/types:type#ScreenChangeKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#ScreenChangeKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#ScreenChangeKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -14617,55 +15345,11 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ScreenColorSpace` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#ScreenColorSpace` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ScreenColorSpace` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#ScreenOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#ScreenOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#ScreenOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#ScreenOperation` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#ScreenOperation` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#ScreenOperation` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#ScreenOperation` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#ScreenOperation` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#ScreenOperation` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#ScreenOperation` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#ScreenOperation` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#ScreenOperation` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#ScreenOperation` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#ScreenOperation` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#ScreenOperation` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#ScreenOperation` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#ScreenOperation` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#ScreenOperation` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#ScreenOperation` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#ScreenOperation` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#ScreenOperation` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#ScreenOperation` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#ScreenOperation` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#ScreenOperation` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#ScreenOperation` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#ScreenOperation` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#ScreenOperation` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#ScreenOperation` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#ScreenOperation` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#ScreenOperation` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#ScreenOperation` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#ScreenOperation` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#ScreenOperation` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#ScreenOperation` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#ScreenOperation` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#ScreenOperation` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#ScreenOperation` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#ScreenOperation` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#ScreenOperation` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#ScreenOperation` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#ScreenOperation` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#ScreenOperation` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#ScreenOperation` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#ScreenOperation` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#ScreenOperation` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#ScreenOperation` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#ScreenOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#ScreenOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#ScreenOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#ScreenDetailsBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ScreenDetailsBackend` | `queryPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:72` |
+| `@flighthq/types:interface#ScreenDetailsBackend` | `request` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:73` |
+| `@flighthq/types:interface#ScreenInfo` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ScreenMode` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#ScreenOrientation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#ScreenOrientation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#ScreenOrientation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -14715,6 +15399,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ScreenOrientation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#ScreenOrientation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ScreenOrientation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#ScreenPermissionChange` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ScreenPermissionChangeBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ScreenPermissionChangeBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:77` |
 | `@flighthq/types:type#ScreenPermissionState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#ScreenPermissionState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#ScreenPermissionState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -14764,6 +15451,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ScreenPermissionState` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#ScreenPermissionState` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ScreenPermissionState` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#ScreenQueryBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ScreenQueryBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:61` |
+| `@flighthq/types:interface#ScreenQueryBackend` | `getCursorPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:64` |
+| `@flighthq/types:interface#ScreenQueryBackend` | `getPrimaryScreen` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:63` |
+| `@flighthq/types:interface#ScreenQueryBackend` | `getScreens` | `receiver-sensitive-method` | `upstream/packages/types/src/Screen.ts:62` |
+| `@flighthq/types:interface#ScreenSignals` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#ScrollBarController` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#ScrollBarController` | `[ScrollBarControllerTypeKey]` | `computed-symbol-member` | `upstream/packages/types/src/ScrollBarController.ts:9` |
 | `@flighthq/types:interface#ScrollViewController` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
@@ -15148,20 +15841,27 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ShapeTessellationStatus` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#ShapeTessellationStatus` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ShapeTessellationStatus` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#ShareBackend` | `canShare` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:39` |
-| `@flighthq/types:interface#ShareBackend` | `isAvailable` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:38` |
-| `@flighthq/types:interface#ShareBackend` | `share` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:42` |
-| `@flighthq/types:interface#ShareBackend` | `shareWithResult` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:45` |
+| `@flighthq/types:interface#ShareContentBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ShareContentBackend` | `canShareContent` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:29` |
+| `@flighthq/types:interface#ShareContentBackend` | `shareContent` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:30` |
+| `@flighthq/types:interface#ShareContentBackend` | `shareContentWithResult` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:31` |
+| `@flighthq/types:interface#ShareFilesBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ShareFilesBackend` | `canShareContent` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:35` |
+| `@flighthq/types:interface#ShareFilesBackend` | `shareContent` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:36` |
+| `@flighthq/types:interface#ShareFilesBackend` | `shareContentWithResult` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:37` |
+| `@flighthq/types:interface#ShareSignals` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#SheenPbrExtension` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/types:interface#ShellBackend` | `beep` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:7` |
-| `@flighthq/types:interface#ShellBackend` | `moveItemsToTrash` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:8` |
-| `@flighthq/types:interface#ShellBackend` | `moveToTrash` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:9` |
-| `@flighthq/types:interface#ShellBackend` | `openExternal` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:10` |
-| `@flighthq/types:interface#ShellBackend` | `openPath` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:11` |
-| `@flighthq/types:interface#ShellBackend` | `openPathResult` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:13` |
-| `@flighthq/types:interface#ShellBackend` | `readShortcutLink` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:14` |
-| `@flighthq/types:interface#ShellBackend` | `showItemInFolder` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:15` |
-| `@flighthq/types:interface#ShellBackend` | `writeShortcutLink` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:16` |
+| `@flighthq/types:interface#ShellBeepBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ShellBeepBackend` | `beep` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:32` |
+| `@flighthq/types:interface#ShellExternalBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ShellExternalBackend` | `open` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:36` |
+| `@flighthq/types:interface#ShellPathOpenBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ShellPathOpenBackend` | `open` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:40` |
+| `@flighthq/types:interface#ShellPathRevealBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ShellPathRevealBackend` | `reveal` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:44` |
+| `@flighthq/types:interface#ShellShortcutLinkBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ShellShortcutLinkBackend` | `read` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:48` |
+| `@flighthq/types:interface#ShellShortcutLinkBackend` | `write` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:49` |
 | `@flighthq/types:type#ShellShortcutWriteOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#ShellShortcutWriteOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#ShellShortcutWriteOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -15211,13 +15911,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ShellShortcutWriteOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#ShellShortcutWriteOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ShellShortcutWriteOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#ShortcutBackend` | `getRegistered` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:7` |
-| `@flighthq/types:interface#ShortcutBackend` | `isRegistered` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:8` |
-| `@flighthq/types:interface#ShortcutBackend` | `register` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:9` |
-| `@flighthq/types:interface#ShortcutBackend` | `setAllEnabled` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:10` |
-| `@flighthq/types:interface#ShortcutBackend` | `setEnabled` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:11` |
-| `@flighthq/types:interface#ShortcutBackend` | `unregister` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:12` |
-| `@flighthq/types:interface#ShortcutBackend` | `unregisterAll` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:13` |
+| `@flighthq/types:interface#ShellTrashBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ShellTrashBackend` | `moveToTrash` | `receiver-sensitive-method` | `upstream/packages/types/src/Shell.ts:57` |
 | `@flighthq/types:type#ShortcutDigitKeyName` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#ShortcutDigitKeyName` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#ShortcutDigitKeyName` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -15267,55 +15962,6 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ShortcutDigitKeyName` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#ShortcutDigitKeyName` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ShortcutDigitKeyName` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#ShortcutDropReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#ShortcutDropReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#ShortcutDropReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#ShortcutDropReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#ShortcutDropReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#ShortcutDropReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#ShortcutDropReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#ShortcutDropReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#ShortcutDropReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#ShortcutDropReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#ShortcutDropReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#ShortcutDropReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#ShortcutDropReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#ShortcutDropReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#ShortcutDropReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#ShortcutDropReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#ShortcutDropReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#ShortcutDropReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#ShortcutDropReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#ShortcutDropReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#ShortcutDropReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#ShortcutDropReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#ShortcutDropReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#ShortcutDropReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#ShortcutDropReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#ShortcutDropReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#ShortcutDropReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#ShortcutDropReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#ShortcutDropReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#ShortcutDropReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#ShortcutDropReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#ShortcutDropReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#ShortcutDropReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#ShortcutDropReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#ShortcutDropReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#ShortcutDropReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#ShortcutDropReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#ShortcutDropReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#ShortcutDropReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#ShortcutDropReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#ShortcutDropReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#ShortcutDropReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#ShortcutDropReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#ShortcutDropReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#ShortcutDropReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#ShortcutDropReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#ShortcutDropReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#ShortcutDropReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#ShortcutDropReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#ShortcutEditingKeyName` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#ShortcutEditingKeyName` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#ShortcutEditingKeyName` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -15757,55 +16403,6 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ShortcutNumpadKeyName` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#ShortcutNumpadKeyName` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ShortcutNumpadKeyName` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#ShortcutOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#ShortcutOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#ShortcutOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#ShortcutOperation` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#ShortcutOperation` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#ShortcutOperation` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#ShortcutOperation` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#ShortcutOperation` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#ShortcutOperation` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#ShortcutOperation` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#ShortcutOperation` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#ShortcutOperation` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#ShortcutOperation` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#ShortcutOperation` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#ShortcutOperation` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#ShortcutOperation` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#ShortcutOperation` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#ShortcutOperation` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#ShortcutOperation` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#ShortcutOperation` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#ShortcutOperation` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#ShortcutOperation` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#ShortcutOperation` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#ShortcutOperation` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#ShortcutOperation` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#ShortcutOperation` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#ShortcutOperation` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#ShortcutOperation` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#ShortcutOperation` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#ShortcutOperation` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#ShortcutOperation` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#ShortcutOperation` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#ShortcutOperation` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#ShortcutOperation` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#ShortcutOperation` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#ShortcutOperation` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#ShortcutOperation` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#ShortcutOperation` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#ShortcutOperation` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#ShortcutOperation` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#ShortcutOperation` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#ShortcutOperation` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#ShortcutOperation` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#ShortcutOperation` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#ShortcutOperation` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#ShortcutOperation` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#ShortcutOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#ShortcutOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#ShortcutOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#ShortcutPunctuationKeyName` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#ShortcutPunctuationKeyName` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#ShortcutPunctuationKeyName` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -15855,6 +16452,13 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ShortcutPunctuationKeyName` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#ShortcutPunctuationKeyName` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ShortcutPunctuationKeyName` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#ShortcutQueryBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ShortcutQueryBackend` | `isRegistered` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:59` |
+| `@flighthq/types:interface#ShortcutTriggerBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#ShortcutTriggerBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:51` |
+| `@flighthq/types:interface#ShortcutTriggerBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:52` |
+| `@flighthq/types:interface#ShortcutTriggerBackend` | `unsubscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Shortcut.ts:53` |
+| `@flighthq/types:interface#ShortcutTriggerSubscription` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#Skeleton2D` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#Skeleton2DAnimationPath` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#Skeleton2DAnimationPath` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -16283,409 +16887,61 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#SocketReadyState` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#SocketReadyState` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#SocketReadyState` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `getAccessoryBarVisible` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:27` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `getInfo` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:21` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `getResizeMode` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:25` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `getScrollAssistEnabled` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:29` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:24` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `setAccessoryBarVisible` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:28` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `setResizeMode` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:26` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `setScrollAssistEnabled` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:30` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `setStyle` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:31` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:23` |
-| `@flighthq/types:interface#SoftKeyboardBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:22` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingDefaultKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseInKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingEaseOutKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingKeyboardDefaultKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardEasingLinearKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#SoftKeyboardPhase` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#SoftKeyboardAccessoryBarBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#SoftKeyboardAccessoryBarBackend` | `setAccessoryBarVisible` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:64` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#SoftKeyboardAttachResult` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#SoftKeyboardChangeBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#SoftKeyboardChangeBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:47` |
+| `@flighthq/types:interface#SoftKeyboardInfoBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#SoftKeyboardInfoBackend` | `getInfo` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:38` |
 | `@flighthq/types:type#SoftKeyboardResizeMode` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#SoftKeyboardResizeMode` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#SoftKeyboardResizeMode` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -16735,6 +16991,61 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#SoftKeyboardResizeMode` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#SoftKeyboardResizeMode` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#SoftKeyboardResizeMode` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#SoftKeyboardResizeModeWriteBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#SoftKeyboardResizeModeWriteBackend` | `setResizeMode` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:56` |
+| `@flighthq/types:interface#SoftKeyboardScrollAssistBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#SoftKeyboardScrollAssistBackend` | `setScrollAssistEnabled` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:68` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#SoftKeyboardSetterResult` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#SoftKeyboardStyleBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#SoftKeyboardStyleBackend` | `setStyle` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:60` |
 | `@flighthq/types:type#SoftKeyboardStyleKind` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#SoftKeyboardStyleKind` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#SoftKeyboardStyleKind` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -16784,6 +17095,58 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#SoftKeyboardStyleKind` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#SoftKeyboardStyleKind` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#SoftKeyboardStyleKind` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#SoftKeyboardVisibilityBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#SoftKeyboardVisibilityBackend` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:52` |
+| `@flighthq/types:interface#SoftKeyboardVisibilityBackend` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/Keyboard.ts:51` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#SoftKeyboardVisibilityResult` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#Spatial2DNode` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
 | `@flighthq/types:type#SpatialDeclineReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#SpatialDeclineReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -17656,12 +18019,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#StatusBarAnimation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#StatusBarAnimation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#StatusBarAnimation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#StatusBarBackend` | `getInfo` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:42` |
-| `@flighthq/types:interface#StatusBarBackend` | `setBackgroundColor` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:45` |
-| `@flighthq/types:interface#StatusBarBackend` | `setOverlaysContent` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:46` |
-| `@flighthq/types:interface#StatusBarBackend` | `setStyle` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:47` |
-| `@flighthq/types:interface#StatusBarBackend` | `setVisible` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:48` |
-| `@flighthq/types:interface#StatusBarBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:50` |
+| `@flighthq/types:interface#StatusBarChangeBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:42` |
+| `@flighthq/types:interface#StatusBarColorBackend` | `setBackgroundColor` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:61` |
+| `@flighthq/types:interface#StatusBarInfoBackend` | `getInfo` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:47` |
+| `@flighthq/types:interface#StatusBarOverlaysBackend` | `setOverlaysContent` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:51` |
 | `@flighthq/types:type#StatusBarStyle` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#StatusBarStyle` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#StatusBarStyle` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -17711,12 +18072,14 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#StatusBarStyle` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#StatusBarStyle` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#StatusBarStyle` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#StatusBarStyleBackend` | `setStyle` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:55` |
 | `@flighthq/types:type#StatusBarStyleEntryHandle` | `toExponential` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:576` |
 | `@flighthq/types:type#StatusBarStyleEntryHandle` | `toFixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:570` |
 | `@flighthq/types:type#StatusBarStyleEntryHandle` | `toLocaleString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:4578` |
 | `@flighthq/types:type#StatusBarStyleEntryHandle` | `toPrecision` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:582` |
 | `@flighthq/types:type#StatusBarStyleEntryHandle` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:564` |
 | `@flighthq/types:type#StatusBarStyleEntryHandle` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:585` |
+| `@flighthq/types:interface#StatusBarVisibilityBackend` | `setVisible` | `receiver-sensitive-method` | `upstream/packages/types/src/StatusBar.ts:65` |
 | `@flighthq/types:type#StepPosition` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#StepPosition` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#StepPosition` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -17766,63 +18129,364 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#StepPosition` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#StepPosition` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#StepPosition` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#StorageBackend` | `byteSize` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:15` |
-| `@flighthq/types:interface#StorageBackend` | `clear` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:11` |
-| `@flighthq/types:interface#StorageBackend` | `getItem` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:8` |
-| `@flighthq/types:interface#StorageBackend` | `keys` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:12` |
-| `@flighthq/types:interface#StorageBackend` | `removeItem` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:10` |
-| `@flighthq/types:interface#StorageBackend` | `setItem` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:9` |
-| `@flighthq/types:interface#StorageBackend` | `subscribeChanges` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:18` |
-| `@flighthq/types:interface#StorageMigration` | `migrate` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:32` |
-| `@flighthq/types:type#StorageOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#StorageOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#StorageOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#StorageOperation` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#StorageOperation` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#StorageOperation` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#StorageOperation` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#StorageOperation` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#StorageOperation` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#StorageOperation` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#StorageOperation` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#StorageOperation` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#StorageOperation` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#StorageOperation` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#StorageOperation` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#StorageOperation` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#StorageOperation` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#StorageOperation` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#StorageOperation` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#StorageOperation` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#StorageOperation` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#StorageOperation` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#StorageOperation` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#StorageOperation` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#StorageOperation` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#StorageOperation` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#StorageOperation` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#StorageOperation` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#StorageOperation` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#StorageOperation` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#StorageOperation` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#StorageOperation` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#StorageOperation` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#StorageOperation` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#StorageOperation` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#StorageOperation` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#StorageOperation` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#StorageOperation` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#StorageOperation` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#StorageOperation` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#StorageOperation` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#StorageOperation` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#StorageOperation` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#StorageOperation` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#StorageOperation` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#StorageOperation` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#StorageOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#StorageOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#StorageOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#StorageBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#StorageBackend` | `clear` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:126` |
+| `@flighthq/types:interface#StorageBackend` | `getItem` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:127` |
+| `@flighthq/types:interface#StorageBackend` | `keys` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:128` |
+| `@flighthq/types:interface#StorageBackend` | `removeItem` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:129` |
+| `@flighthq/types:interface#StorageBackend` | `setItem` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:130` |
+| `@flighthq/types:interface#StorageChangeBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#StorageChangeBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:136` |
+| `@flighthq/types:interface#StorageChangeBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:137` |
+| `@flighthq/types:type#StorageClearFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#StorageClearFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#StorageClearFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#StorageClearFailureReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#StorageClearFailureReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#StorageClearFailureReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#StorageClearFailureReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#StorageClearFailureReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#StorageClearFailureReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#StorageClearFailureReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#StorageClearFailureReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#StorageClearFailureReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#StorageClearFailureReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#StorageClearFailureReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#StorageClearFailureReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#StorageClearFailureReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#StorageClearFailureReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#StorageClearFailureReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#StorageClearFailureReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#StorageClearFailureReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#StorageClearFailureReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#StorageClearFailureReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#StorageClearFailureReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#StorageClearFailureReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#StorageClearFailureReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#StorageClearFailureReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#StorageClearFailureReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#StorageClearFailureReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#StorageClearFailureReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#StorageClearFailureReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#StorageClearFailureReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#StorageClearFailureReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#StorageClearFailureReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#StorageClearFailureReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#StorageClearFailureReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#StorageClearFailureReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#StorageClearFailureReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#StorageClearFailureReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#StorageClearFailureReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#StorageClearFailureReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#StorageClearFailureReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#StorageClearFailureReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#StorageClearFailureReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#StorageClearFailureReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#StorageClearFailureReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#StorageClearFailureReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#StorageClearFailureReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#StorageClearFailureReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#StorageClearFailureReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#StorageGetItemFailureReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#StorageKeysFailureReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#StorageMigration` | `migrate` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:151` |
+| `@flighthq/types:interface#StoragePersistenceQueryBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#StoragePersistenceQueryBackend` | `getPersistence` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:69` |
+| `@flighthq/types:interface#StoragePersistenceRequestBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#StoragePersistenceRequestBackend` | `requestPersistence` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:73` |
+| `@flighthq/types:type#StorageReadFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#StorageReadFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#StorageReadFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#StorageReadFailureReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#StorageReadFailureReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#StorageReadFailureReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#StorageReadFailureReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#StorageReadFailureReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#StorageReadFailureReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#StorageReadFailureReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#StorageReadFailureReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#StorageReadFailureReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#StorageReadFailureReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#StorageReadFailureReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#StorageReadFailureReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#StorageReadFailureReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#StorageReadFailureReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#StorageReadFailureReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#StorageReadFailureReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#StorageReadFailureReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#StorageReadFailureReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#StorageReadFailureReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#StorageReadFailureReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#StorageReadFailureReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#StorageReadFailureReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#StorageReadFailureReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#StorageReadFailureReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#StorageReadFailureReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#StorageReadFailureReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#StorageReadFailureReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#StorageReadFailureReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#StorageReadFailureReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#StorageReadFailureReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#StorageReadFailureReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#StorageReadFailureReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#StorageReadFailureReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#StorageReadFailureReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#StorageReadFailureReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#StorageReadFailureReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#StorageReadFailureReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#StorageReadFailureReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#StorageReadFailureReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#StorageReadFailureReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#StorageReadFailureReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#StorageReadFailureReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#StorageReadFailureReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#StorageReadFailureReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#StorageReadFailureReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#StorageReadFailureReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#StorageRemoveItemFailureReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#StorageSetItemFailureReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#StorageSignals` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#StorageWriteFailureReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#StrokePathTessellationReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#StrokePathTessellationReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#StrokePathTessellationReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -17882,7 +18546,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TauriClipboardManager` | `clear` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:63` |
 | `@flighthq/types:interface#TauriClipboardManager` | `readText` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:64` |
 | `@flighthq/types:interface#TauriClipboardManager` | `writeText` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:65` |
-| `@flighthq/types:interface#TauriCloseRequestedEvent` | `preventDefault` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:308` |
+| `@flighthq/types:interface#TauriCloseRequestedEvent` | `preventDefault` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:317` |
 | `@flighthq/types:interface#TauriDialogPlugin` | `ask` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:97` |
 | `@flighthq/types:interface#TauriDialogPlugin` | `confirm` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:98` |
 | `@flighthq/types:interface#TauriDialogPlugin` | `message` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:99` |
@@ -17892,10 +18556,12 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TauriGlobalShortcutPlugin` | `register` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:149` |
 | `@flighthq/types:interface#TauriGlobalShortcutPlugin` | `unregister` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:150` |
 | `@flighthq/types:interface#TauriGlobalShortcutPlugin` | `unregisterAll` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:151` |
-| `@flighthq/types:interface#TauriMenu` | `popup` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:209` |
-| `@flighthq/types:interface#TauriMenu` | `setAsAppMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:210` |
+| `@flighthq/types:interface#TauriMenu` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:209` |
+| `@flighthq/types:interface#TauriMenu` | `popup` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:210` |
+| `@flighthq/types:interface#TauriMenu` | `setAsAppMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:211` |
 | `@flighthq/types:interface#TauriMenuFactory` | `new` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:166` |
 | `@flighthq/types:interface#TauriMenuItemFactory` | `new` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:170` |
+| `@flighthq/types:type#TauriNotificationCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#TauriNotificationPermission` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#TauriNotificationPermission` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#TauriNotificationPermission` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -17959,38 +18625,39 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TauriProcessPlugin` | `exit` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:55` |
 | `@flighthq/types:interface#TauriProcessPlugin` | `relaunch` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:56` |
 | `@flighthq/types:interface#TauriSubmenuFactory` | `new` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:174` |
-| `@flighthq/types:interface#TauriTrayIcon` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:240` |
-| `@flighthq/types:interface#TauriTrayIcon` | `setIcon` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:241` |
-| `@flighthq/types:interface#TauriTrayIcon` | `setMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:242` |
-| `@flighthq/types:interface#TauriTrayIcon` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:243` |
-| `@flighthq/types:interface#TauriTrayIcon` | `setTooltip` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:244` |
-| `@flighthq/types:interface#TauriTrayIconFactory` | `new` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:221` |
-| `@flighthq/types:interface#TauriWindow` | `center` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:280` |
-| `@flighthq/types:interface#TauriWindow` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:281` |
-| `@flighthq/types:interface#TauriWindow` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:282` |
-| `@flighthq/types:interface#TauriWindow` | `maximize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:283` |
-| `@flighthq/types:interface#TauriWindow` | `minimize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:284` |
-| `@flighthq/types:interface#TauriWindow` | `onCloseRequested` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:285` |
-| `@flighthq/types:interface#TauriWindow` | `onFocusChanged` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:286` |
-| `@flighthq/types:interface#TauriWindow` | `onMoved` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:287` |
-| `@flighthq/types:interface#TauriWindow` | `onResized` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:288` |
-| `@flighthq/types:interface#TauriWindow` | `requestUserAttention` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:289` |
-| `@flighthq/types:interface#TauriWindow` | `setAlwaysOnTop` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:290` |
-| `@flighthq/types:interface#TauriWindow` | `setContentProtected` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:291` |
-| `@flighthq/types:interface#TauriWindow` | `setFocus` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:292` |
-| `@flighthq/types:interface#TauriWindow` | `setFullscreen` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:293` |
-| `@flighthq/types:interface#TauriWindow` | `setIcon` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:294` |
-| `@flighthq/types:interface#TauriWindow` | `setMaxSize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:295` |
-| `@flighthq/types:interface#TauriWindow` | `setMinSize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:296` |
-| `@flighthq/types:interface#TauriWindow` | `setPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:297` |
-| `@flighthq/types:interface#TauriWindow` | `setResizable` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:298` |
-| `@flighthq/types:interface#TauriWindow` | `setShadow` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:299` |
-| `@flighthq/types:interface#TauriWindow` | `setSize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:300` |
-| `@flighthq/types:interface#TauriWindow` | `setSkipTaskbar` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:301` |
-| `@flighthq/types:interface#TauriWindow` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:302` |
-| `@flighthq/types:interface#TauriWindow` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:303` |
-| `@flighthq/types:interface#TauriWindow` | `unmaximize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:304` |
-| `@flighthq/types:interface#TauriWindowModule` | `getCurrentWindow` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:251` |
+| `@flighthq/types:interface#TauriTrayIcon` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:248` |
+| `@flighthq/types:interface#TauriTrayIcon` | `setIcon` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:249` |
+| `@flighthq/types:interface#TauriTrayIcon` | `setIconAsTemplate` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:250` |
+| `@flighthq/types:interface#TauriTrayIcon` | `setMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:251` |
+| `@flighthq/types:interface#TauriTrayIcon` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:252` |
+| `@flighthq/types:interface#TauriTrayIcon` | `setTooltip` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:253` |
+| `@flighthq/types:interface#TauriTrayIconFactory` | `new` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:222` |
+| `@flighthq/types:interface#TauriWindow` | `center` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:289` |
+| `@flighthq/types:interface#TauriWindow` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:290` |
+| `@flighthq/types:interface#TauriWindow` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:291` |
+| `@flighthq/types:interface#TauriWindow` | `maximize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:292` |
+| `@flighthq/types:interface#TauriWindow` | `minimize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:293` |
+| `@flighthq/types:interface#TauriWindow` | `onCloseRequested` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:294` |
+| `@flighthq/types:interface#TauriWindow` | `onFocusChanged` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:295` |
+| `@flighthq/types:interface#TauriWindow` | `onMoved` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:296` |
+| `@flighthq/types:interface#TauriWindow` | `onResized` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:297` |
+| `@flighthq/types:interface#TauriWindow` | `requestUserAttention` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:298` |
+| `@flighthq/types:interface#TauriWindow` | `setAlwaysOnTop` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:299` |
+| `@flighthq/types:interface#TauriWindow` | `setContentProtected` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:300` |
+| `@flighthq/types:interface#TauriWindow` | `setFocus` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:301` |
+| `@flighthq/types:interface#TauriWindow` | `setFullscreen` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:302` |
+| `@flighthq/types:interface#TauriWindow` | `setIcon` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:303` |
+| `@flighthq/types:interface#TauriWindow` | `setMaxSize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:304` |
+| `@flighthq/types:interface#TauriWindow` | `setMinSize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:305` |
+| `@flighthq/types:interface#TauriWindow` | `setPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:306` |
+| `@flighthq/types:interface#TauriWindow` | `setResizable` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:307` |
+| `@flighthq/types:interface#TauriWindow` | `setShadow` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:308` |
+| `@flighthq/types:interface#TauriWindow` | `setSize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:309` |
+| `@flighthq/types:interface#TauriWindow` | `setSkipTaskbar` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:310` |
+| `@flighthq/types:interface#TauriWindow` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:311` |
+| `@flighthq/types:interface#TauriWindow` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:312` |
+| `@flighthq/types:interface#TauriWindow` | `unmaximize` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:313` |
+| `@flighthq/types:interface#TauriWindowModule` | `getCurrentWindow` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:260` |
 | `@flighthq/types:type#TextAutoSize` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#TextAutoSize` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#TextAutoSize` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -19459,74 +20126,122 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#Transform3D` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#Transform3DNode` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Node.ts:20` |
 | `@flighthq/types:interface#TransmissionVolumePbrExtension` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/types:interface#TrayBackend` | `create` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:74` |
-| `@flighthq/types:interface#TrayBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:75` |
-| `@flighthq/types:interface#TrayBackend` | `displayBalloon` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:76` |
-| `@flighthq/types:interface#TrayBackend` | `getBounds` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:77` |
-| `@flighthq/types:interface#TrayBackend` | `getCapabilities` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:78` |
-| `@flighthq/types:interface#TrayBackend` | `getTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:79` |
-| `@flighthq/types:interface#TrayBackend` | `getTooltip` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:80` |
-| `@flighthq/types:interface#TrayBackend` | `isDestroyed` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:81` |
-| `@flighthq/types:interface#TrayBackend` | `listIds` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:82` |
-| `@flighthq/types:interface#TrayBackend` | `popUpContextMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:83` |
-| `@flighthq/types:interface#TrayBackend` | `removeBalloon` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:84` |
-| `@flighthq/types:interface#TrayBackend` | `setContextMenu` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:85` |
-| `@flighthq/types:interface#TrayBackend` | `setIcon` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:86` |
-| `@flighthq/types:interface#TrayBackend` | `setIgnoreDoubleClickEvents` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:87` |
-| `@flighthq/types:interface#TrayBackend` | `setPressedIcon` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:88` |
-| `@flighthq/types:interface#TrayBackend` | `setTemplate` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:89` |
-| `@flighthq/types:interface#TrayBackend` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:90` |
-| `@flighthq/types:interface#TrayBackend` | `setTooltip` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:91` |
-| `@flighthq/types:interface#TrayBackend` | `subscribe` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:92` |
-| `@flighthq/types:type#TrayEventType` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#TrayEventType` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#TrayEventType` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#TrayEventType` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#TrayEventType` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#TrayEventType` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#TrayEventType` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#TrayEventType` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#TrayEventType` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#TrayEventType` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#TrayEventType` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#TrayEventType` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#TrayEventType` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#TrayEventType` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#TrayEventType` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#TrayEventType` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#TrayEventType` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#TrayEventType` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#TrayEventType` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#TrayEventType` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#TrayEventType` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#TrayEventType` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#TrayEventType` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#TrayEventType` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#TrayEventType` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#TrayEventType` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#TrayEventType` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#TrayEventType` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#TrayEventType` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#TrayEventType` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#TrayEventType` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#TrayEventType` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#TrayEventType` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#TrayEventType` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#TrayEventType` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#TrayEventType` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#TrayEventType` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#TrayEventType` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#TrayEventType` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#TrayEventType` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#TrayEventType` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#TrayEventType` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#TrayEventType` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#TrayEventType` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#TrayEventType` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#TrayEventType` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#TrayEventType` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#TrayEventType` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#TrayEventType` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#TrayBalloonBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayBalloonBackend` | `display` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:302` |
+| `@flighthq/types:interface#TrayBalloonBackend` | `remove` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:303` |
+| `@flighthq/types:interface#TrayBalloonEventsBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayBalloonEventsBackend` | `getSignal` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:315` |
+| `@flighthq/types:interface#TrayBoundsBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayBoundsBackend` | `get` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:286` |
+| `@flighthq/types:interface#TrayDoubleClickPolicyBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayDoubleClickPolicyBackend` | `setIgnore` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:294` |
+| `@flighthq/types:interface#TrayDropEventsBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayDropEventsBackend` | `getSignal` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:319` |
+| `@flighthq/types:interface#TrayEventRelease` | `release` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:239` |
+| `@flighthq/types:interface#TrayIcon` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#TrayIconForHost` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#TrayIconSource` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#TrayIconSource` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#TrayIconSource` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#TrayIconSource` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#TrayIconSource` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#TrayIconSource` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#TrayIconSource` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#TrayIconSource` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#TrayIconSource` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#TrayIconSource` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#TrayIconSource` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#TrayIconSource` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#TrayIconSource` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#TrayIconSource` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#TrayIconSource` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#TrayIconSource` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#TrayIconSource` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#TrayIconSource` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#TrayIconSource` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#TrayIconSource` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#TrayIconSource` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#TrayIconSource` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#TrayIconSource` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#TrayIconSource` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#TrayIconSource` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#TrayIconSource` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#TrayIconSource` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#TrayIconSource` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#TrayIconSource` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#TrayIconSource` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#TrayIconSource` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#TrayIconSource` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#TrayIconSource` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#TrayIconSource` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#TrayIconSource` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#TrayIconSource` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#TrayIconSource` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#TrayIconSource` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#TrayIconSource` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#TrayIconSource` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#TrayIconSource` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#TrayIconSource` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#TrayIconSource` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#TrayIconSource` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#TrayIconSource` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#TrayIconSource` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#TrayIconSource` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#TrayIconSource` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#TrayIconSource` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#TrayImageBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayImageBackend` | `set` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:264` |
+| `@flighthq/types:interface#TrayInteractionEventsBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayInteractionEventsBackend` | `getSignal` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:307` |
+| `@flighthq/types:interface#TrayLifecycleBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayLifecycleBackend` | `create` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:257` |
+| `@flighthq/types:interface#TrayLifecycleBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:258` |
+| `@flighthq/types:interface#TrayLifecycleBackend` | `isDestroyed` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:259` |
+| `@flighthq/types:interface#TrayLifecycleBackend` | `list` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:260` |
+| `@flighthq/types:interface#TrayMenuBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayMenuBackend` | `set` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:278` |
+| `@flighthq/types:interface#TrayMenuSelectionEventsBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayMenuSelectionEventsBackend` | `getSignal` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:311` |
+| `@flighthq/types:interface#TrayPopupMenuBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayPopupMenuBackend` | `popup` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:290` |
+| `@flighthq/types:interface#TrayPressedImageBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayPressedImageBackend` | `set` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:298` |
+| `@flighthq/types:interface#TrayTemplateImageBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayTemplateImageBackend` | `set` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:282` |
+| `@flighthq/types:interface#TrayTitleBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayTitleBackend` | `get` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:268` |
+| `@flighthq/types:interface#TrayTitleBackend` | `set` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:269` |
+| `@flighthq/types:interface#TrayTooltipBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayTooltipBackend` | `get` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:273` |
+| `@flighthq/types:interface#TrayTooltipBackend` | `set` | `receiver-sensitive-method` | `upstream/packages/types/src/Tray.ts:274` |
+| `@flighthq/types:interface#TrayWithBalloon` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithBalloon` | `[TrayBalloonFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:81` |
+| `@flighthq/types:interface#TrayWithBalloonEvents` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithBalloonEvents` | `[TrayBalloonEventsFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:90` |
+| `@flighthq/types:interface#TrayWithBounds` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithBounds` | `[TrayBoundsFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:69` |
+| `@flighthq/types:interface#TrayWithDoubleClickPolicy` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithDoubleClickPolicy` | `[TrayDoubleClickPolicyFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:75` |
+| `@flighthq/types:interface#TrayWithDropEvents` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithDropEvents` | `[TrayDropEventsFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:93` |
+| `@flighthq/types:interface#TrayWithImage` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithImage` | `[TrayImageFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:54` |
+| `@flighthq/types:interface#TrayWithInteractionEvents` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithInteractionEvents` | `[TrayInteractionEventsFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:84` |
+| `@flighthq/types:interface#TrayWithMenu` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithMenu` | `[TrayMenuFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:63` |
+| `@flighthq/types:interface#TrayWithMenuSelectionEvents` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithMenuSelectionEvents` | `[TrayMenuSelectionEventsFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:87` |
+| `@flighthq/types:interface#TrayWithPopupMenu` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithPopupMenu` | `[TrayPopupMenuFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:72` |
+| `@flighthq/types:interface#TrayWithPressedImage` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithPressedImage` | `[TrayPressedImageFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:78` |
+| `@flighthq/types:interface#TrayWithTemplateImage` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithTemplateImage` | `[TrayTemplateImageFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:66` |
+| `@flighthq/types:interface#TrayWithTitle` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithTitle` | `[TrayTitleFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:57` |
+| `@flighthq/types:interface#TrayWithTooltip` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#TrayWithTooltip` | `[TrayTooltipFacetKey]` | `computed-symbol-member` | `upstream/packages/types/src/Tray.ts:60` |
 | `@flighthq/types:interface#TreeViewController` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#TreeViewController` | `[TreeViewControllerTypeKey]` | `computed-symbol-member` | `upstream/packages/types/src/TreeViewController.ts:9` |
 | `@flighthq/types:type#TriangleCulling` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
@@ -19677,76 +20392,10 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#UnpackedRectangleReason` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#UnpackedRectangleReason` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#UnpackedRectangleReason` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#UpdaterBackend` | `cancelDownload` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:79` |
-| `@flighthq/types:interface#UpdaterBackend` | `checkForUpdates` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:80` |
-| `@flighthq/types:interface#UpdaterBackend` | `downloadUpdate` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:81` |
-| `@flighthq/types:interface#UpdaterBackend` | `getChannel` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:82` |
-| `@flighthq/types:interface#UpdaterBackend` | `getConfig` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:83` |
-| `@flighthq/types:interface#UpdaterBackend` | `quitAndInstall` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:84` |
-| `@flighthq/types:interface#UpdaterBackend` | `rollback` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:85` |
-| `@flighthq/types:interface#UpdaterBackend` | `setChannel` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:86` |
-| `@flighthq/types:interface#UpdaterBackend` | `setConfig` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:87` |
-| `@flighthq/types:interface#UpdaterBackend` | `setFeedUrl` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:88` |
-| `@flighthq/types:interface#UpdaterBackend` | `setSignatureConfig` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:89` |
-| `@flighthq/types:interface#UpdaterBackend` | `subscribeChecking` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:90` |
-| `@flighthq/types:interface#UpdaterBackend` | `subscribeDownloadProgress` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:91` |
-| `@flighthq/types:interface#UpdaterBackend` | `subscribeError` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:92` |
-| `@flighthq/types:interface#UpdaterBackend` | `subscribeUpdateAvailable` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:93` |
-| `@flighthq/types:interface#UpdaterBackend` | `subscribeUpdateCancelled` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:94` |
-| `@flighthq/types:interface#UpdaterBackend` | `subscribeUpdateDownloaded` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:95` |
-| `@flighthq/types:interface#UpdaterBackend` | `subscribeUpdateNotAvailable` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:96` |
-| `@flighthq/types:interface#UpdaterBackend` | `subscribeUpdateRolledBack` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:97` |
-| `@flighthq/types:interface#UpdaterBackend` | `subscribeUpdateStaging` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:98` |
-| `@flighthq/types:interface#UpdaterBackend` | `subscribeUpdateVerified` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:99` |
-| `@flighthq/types:type#UpdaterPhase` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#UpdaterPhase` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#UpdaterPhase` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#UpdaterPhase` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#UpdaterPhase` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#UpdaterPhase` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#UpdaterPhase` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#UpdaterPhase` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#UpdaterPhase` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#UpdaterPhase` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#UpdaterPhase` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#UpdaterPhase` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#UpdaterPhase` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#UpdaterPhase` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#UpdaterPhase` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#UpdaterPhase` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#UpdaterPhase` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#UpdaterPhase` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#UpdaterPhase` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#UpdaterPhase` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#UpdaterPhase` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#UpdaterPhase` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#UpdaterPhase` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#UpdaterPhase` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#UpdaterPhase` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#UpdaterPhase` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#UpdaterPhase` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#UpdaterPhase` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#UpdaterPhase` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#UpdaterPhase` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#UpdaterPhase` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#UpdaterPhase` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#UpdaterPhase` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#UpdaterPhase` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#UpdaterPhase` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#UpdaterPhase` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#UpdaterPhase` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#UpdaterPhase` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#UpdaterPhase` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#UpdaterPhase` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#UpdaterPhase` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#UpdaterPhase` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#UpdaterPhase` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#UpdaterPhase` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#UpdaterPhase` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#UpdaterPhase` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#UpdaterPhase` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#UpdaterPhase` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#UpdaterPhase` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#UpdaterCommandBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#UpdaterCommandBackend` | `check` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:32` |
+| `@flighthq/types:interface#UpdaterCommandBackend` | `destroy` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:33` |
+| `@flighthq/types:interface#UpdaterCommandBackend` | `install` | `receiver-sensitive-method` | `upstream/packages/types/src/Updater.ts:34` |
 | `@flighthq/types:interface#Vector2` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#Vector3` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#Vector4` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
@@ -20099,158 +20748,21 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#ViewportScaleMode` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#ViewportScaleMode` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#VoxelGrid` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/types:interface#WebcamBackend` | `capture` | `receiver-sensitive-method` | `upstream/packages/types/src/Webcam.ts:30` |
-| `@flighthq/types:interface#WebcamBackend` | `captureVideo` | `receiver-sensitive-method` | `upstream/packages/types/src/Webcam.ts:31` |
-| `@flighthq/types:interface#WebcamBackend` | `requestPermission` | `receiver-sensitive-method` | `upstream/packages/types/src/Webcam.ts:32` |
-| `@flighthq/types:type#WebcamFacingMode` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#WebcamFacingMode` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#WebcamFacingMode` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#WebcamFacingMode` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#WebcamFacingMode` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#WebcamFacingMode` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#WebcamFacingMode` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#WebcamFacingMode` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#WebcamFacingMode` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#WebcamFacingMode` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#WebcamFacingMode` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#WebcamFacingMode` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#WebcamFacingMode` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#WebcamFacingMode` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#WebcamFacingMode` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#WebcamFacingMode` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#WebcamFacingMode` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#WebcamFacingMode` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#WebcamFacingMode` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#WebcamFacingMode` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#WebcamFacingMode` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#WebcamFacingMode` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#WebcamFacingMode` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#WebcamFacingMode` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#WebcamFacingMode` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#WebcamFacingMode` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#WebcamFacingMode` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#WebcamFacingMode` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#WebcamFacingMode` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#WebcamFacingMode` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#WebcamFacingMode` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#WebcamFacingMode` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#WebcamFacingMode` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#WebcamFacingMode` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#WebcamFacingMode` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#WebcamFacingMode` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#WebcamFacingMode` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#WebcamFacingMode` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#WebcamFacingMode` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#WebcamFacingMode` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#WebcamFacingMode` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#WebcamFacingMode` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#WebcamFacingMode` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#WebcamFacingMode` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#WebcamFacingMode` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#WebcamFacingMode` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#WebcamFacingMode` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#WebcamFacingMode` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#WebcamFacingMode` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:type#WebcamPermissionState` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#WebcamPermissionState` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#WebcamPermissionState` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#WebcamPermissionState` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#WebcamPermissionState` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#WebcamPermissionState` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#WebcamPermissionState` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#WebcamPermissionState` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#WebcamPermissionState` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#WebcamPermissionState` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#WebcamPermissionState` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#WebcamPermissionState` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#WebcamPermissionState` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#WebcamPermissionState` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#WebcamPermissionState` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#WebcamPermissionState` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#WebcamPermissionState` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#WebcamPermissionState` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#WebcamPermissionState` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#WebcamPermissionState` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#WebcamPermissionState` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#WebcamPermissionState` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#WebcamPermissionState` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#WebcamPermissionState` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#WebcamPermissionState` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#WebcamPermissionState` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#WebcamPermissionState` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#WebcamPermissionState` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#WebcamPermissionState` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#WebcamPermissionState` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#WebcamPermissionState` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#WebcamPermissionState` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#WebcamPermissionState` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#WebcamPermissionState` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#WebcamPermissionState` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#WebcamPermissionState` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#WebcamPermissionState` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#WebcamPermissionState` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#WebcamPermissionState` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#WebcamPermissionState` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#WebcamPermissionState` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#WebcamPermissionState` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#WebcamPermissionState` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#WebcamPermissionState` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#WebcamPermissionState` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#WebcamPermissionState` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#WebcamPermissionState` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#WebcamPermissionState` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#WebcamPermissionState` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#WebcamRecording` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/types:type#WebcamSource` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#WebcamSource` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#WebcamSource` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#WebcamSource` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#WebcamSource` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#WebcamSource` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#WebcamSource` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#WebcamSource` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#WebcamSource` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#WebcamSource` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#WebcamSource` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#WebcamSource` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#WebcamSource` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#WebcamSource` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#WebcamSource` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#WebcamSource` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#WebcamSource` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#WebcamSource` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#WebcamSource` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#WebcamSource` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#WebcamSource` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#WebcamSource` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#WebcamSource` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#WebcamSource` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#WebcamSource` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#WebcamSource` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#WebcamSource` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#WebcamSource` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#WebcamSource` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#WebcamSource` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#WebcamSource` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#WebcamSource` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#WebcamSource` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#WebcamSource` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#WebcamSource` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#WebcamSource` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#WebcamSource` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#WebcamSource` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#WebcamSource` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#WebcamSource` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#WebcamSource` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#WebcamSource` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#WebcamSource` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#WebcamSource` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#WebcamSource` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#WebcamSource` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#WebcamSource` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#WebcamSource` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#WebcamSource` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#WebcamStream` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#WebMidiAccessCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#WebMidiPermissionAccessCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#WebPageNotificationCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#WebPageNotificationInstance` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:292` |
+| `@flighthq/types:type#WebServiceWorkerNotificationCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#WebServiceWorkerNotificationInstance` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:311` |
+| `@flighthq/types:interface#WebServiceWorkerNotificationRegistration` | `getNotifications` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:315` |
+| `@flighthq/types:interface#WebServiceWorkerNotificationRegistration` | `showNotification` | `receiver-sensitive-method` | `upstream/packages/types/src/Notification.ts:316` |
+| `@flighthq/types:interface#WebWindowStoragePersistenceApi` | `getPermissionState` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:79` |
+| `@flighthq/types:interface#WebWindowStoragePersistenceApi` | `persist` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:84` |
+| `@flighthq/types:interface#WebWindowStoragePersistenceApi` | `persisted` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:80` |
+| `@flighthq/types:interface#WebWindowStoragePersistenceCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#WebWorkerStoragePersistenceApi` | `getPermissionState` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:79` |
+| `@flighthq/types:interface#WebWorkerStoragePersistenceApi` | `persisted` | `receiver-sensitive-method` | `upstream/packages/types/src/Storage.ts:80` |
+| `@flighthq/types:interface#WebWorkerStoragePersistenceCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#WellKnownMenuItemRoleValue` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#WellKnownMenuItemRoleValue` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#WellKnownMenuItemRoleValue` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -20300,7 +20812,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#WellKnownMenuItemRoleValue` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#WellKnownMenuItemRoleValue` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#WellKnownMenuItemRoleValue` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#WgpuBitmapShader` | `bind` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuRenderState.ts:333` |
+| `@flighthq/types:interface#WgpuBitmapShader` | `bind` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuRenderState.ts:374` |
 | `@flighthq/types:type#WgpuClassicLightingModel` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#WgpuClassicLightingModel` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#WgpuClassicLightingModel` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -20350,9 +20862,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#WgpuClassicLightingModel` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#WgpuClassicLightingModel` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#WgpuClassicLightingModel` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#WgpuColorAdjustmentMaterialFeature` | `drawShapeMeshes` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuRenderState.ts:75` |
-| `@flighthq/types:interface#WgpuColorAdjustmentMaterialFeature` | `record` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuRenderState.ts:81` |
-| `@flighthq/types:interface#WgpuColorAdjustmentMaterialFeature` | `resolveFlush` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuRenderState.ts:86` |
+| `@flighthq/types:interface#WgpuColorAdjustmentMaterialFeature` | `drawShapeMeshes` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuRenderState.ts:102` |
+| `@flighthq/types:interface#WgpuColorAdjustmentMaterialFeature` | `record` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuRenderState.ts:108` |
+| `@flighthq/types:interface#WgpuColorAdjustmentMaterialFeature` | `resolveFlush` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuRenderState.ts:113` |
 | `@flighthq/types:type#WgpuCustomMaterialShaderSource` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#WgpuCustomMaterialShaderSource` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#WgpuCustomMaterialShaderSource` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -20402,6 +20914,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#WgpuCustomMaterialShaderSource` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#WgpuCustomMaterialShaderSource` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#WgpuCustomMaterialShaderSource` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:interface#WgpuDeviceState` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#WgpuEffectBlendMode` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#WgpuEffectBlendMode` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#WgpuEffectBlendMode` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -20451,9 +20964,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#WgpuEffectBlendMode` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#WgpuEffectBlendMode` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#WgpuEffectBlendMode` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#WgpuHostBackend` | `acquire` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuHost.ts:22` |
-| `@flighthq/types:interface#WgpuHostBackend` | `isSupported` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuHost.ts:23` |
-| `@flighthq/types:interface#WgpuHostBackend` | `release` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuHost.ts:24` |
+| `@flighthq/types:interface#WgpuHostBackend` | `acquire` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuHost.ts:42` |
+| `@flighthq/types:interface#WgpuHostBackend` | `isSupported` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuHost.ts:43` |
+| `@flighthq/types:interface#WgpuHostBackend` | `release` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuHost.ts:44` |
 | `@flighthq/types:interface#WgpuMaterialRenderer` | `getShaderModule` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuMaterialRenderer.ts:26` |
 | `@flighthq/types:interface#WgpuMaterialRenderer` | `packInstance` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuMaterialRenderer.ts:31` |
 | `@flighthq/types:interface#WgpuMeshMaterialRenderer` | `bind` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuMeshMaterialRenderer.ts:30` |
@@ -20462,6 +20975,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuModifierSnippet` | `bind` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuModifierSnippet.ts:19` |
 | `@flighthq/types:interface#WgpuModifierSnippet` | `contribution` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuModifierSnippet.ts:20` |
 | `@flighthq/types:interface#WgpuModifierSnippet` | `textures` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuModifierSnippet.ts:27` |
+| `@flighthq/types:interface#WgpuPipeline` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:interface#WgpuPresentationRenderState` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#WgpuRenderEffectApplicationStatus` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#WgpuRenderEffectApplicationStatus` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#WgpuRenderEffectApplicationStatus` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -20571,6 +21086,17 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#WgpuSkinningAdapter` | `getUploadVertices` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuSkinningAdapter.ts:18` |
 | `@flighthq/types:interface#WgpuSkinningAdapter` | `hasBindPose` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuSkinningAdapter.ts:19` |
 | `@flighthq/types:interface#WgpuSkinningAdapter` | `isGpuSkinned` | `receiver-sensitive-method` | `upstream/packages/types/src/WgpuSkinningAdapter.ts:20` |
+| `@flighthq/types:type#WgpuTextureBindings` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:143` |
+| `@flighthq/types:type#WgpuTextureBindings` | `[Symbol.toStringTag]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:137` |
+| `@flighthq/types:type#WgpuTextureBindings` | `clear` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.collection.d.ts:20` |
+| `@flighthq/types:type#WgpuTextureBindings` | `delete` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.collection.d.ts:24` |
+| `@flighthq/types:type#WgpuTextureBindings` | `entries` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:148` |
+| `@flighthq/types:type#WgpuTextureBindings` | `forEach` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.collection.d.ts:28` |
+| `@flighthq/types:type#WgpuTextureBindings` | `get` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.collection.d.ts:33` |
+| `@flighthq/types:type#WgpuTextureBindings` | `has` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.collection.d.ts:37` |
+| `@flighthq/types:type#WgpuTextureBindings` | `keys` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:153` |
+| `@flighthq/types:type#WgpuTextureBindings` | `set` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.collection.d.ts:41` |
+| `@flighthq/types:type#WgpuTextureBindings` | `values` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:158` |
 | `@flighthq/types:type#WindowAttachmentOwnership` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#WindowAttachmentOwnership` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#WindowAttachmentOwnership` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -20620,85 +21146,41 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#WindowAttachmentOwnership` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#WindowAttachmentOwnership` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#WindowAttachmentOwnership` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
-| `@flighthq/types:interface#WindowBackend` | `attach` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:102` |
-| `@flighthq/types:interface#WindowBackend` | `center` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:122` |
-| `@flighthq/types:interface#WindowBackend` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:110` |
-| `@flighthq/types:interface#WindowBackend` | `flashWindowFrame` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:141` |
-| `@flighthq/types:interface#WindowBackend` | `focus` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:119` |
-| `@flighthq/types:interface#WindowBackend` | `getBounds` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:115` |
-| `@flighthq/types:interface#WindowBackend` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:121` |
-| `@flighthq/types:interface#WindowBackend` | `maximize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:117` |
-| `@flighthq/types:interface#WindowBackend` | `minimize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:116` |
-| `@flighthq/types:interface#WindowBackend` | `open` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:105` |
-| `@flighthq/types:interface#WindowBackend` | `requestAttention` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:136` |
-| `@flighthq/types:interface#WindowBackend` | `restore` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:118` |
-| `@flighthq/types:interface#WindowBackend` | `setAlwaysOnTop` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:124` |
-| `@flighthq/types:interface#WindowBackend` | `setContentProtection` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:139` |
-| `@flighthq/types:interface#WindowBackend` | `setFullscreen` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:127` |
-| `@flighthq/types:interface#WindowBackend` | `setHasShadow` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:143` |
-| `@flighthq/types:interface#WindowBackend` | `setIcon` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:128` |
-| `@flighthq/types:interface#WindowBackend` | `setMaximumSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:126` |
-| `@flighthq/types:interface#WindowBackend` | `setMenuBarVisible` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:131` |
-| `@flighthq/types:interface#WindowBackend` | `setMinimumSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:125` |
-| `@flighthq/types:interface#WindowBackend` | `setOpacity` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:129` |
-| `@flighthq/types:interface#WindowBackend` | `setParent` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:132` |
-| `@flighthq/types:interface#WindowBackend` | `setPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:112` |
-| `@flighthq/types:interface#WindowBackend` | `setProgress` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:134` |
-| `@flighthq/types:interface#WindowBackend` | `setResizable` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:123` |
-| `@flighthq/types:interface#WindowBackend` | `setSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:113` |
-| `@flighthq/types:interface#WindowBackend` | `setSkipTaskbar` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:130` |
-| `@flighthq/types:interface#WindowBackend` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:111` |
-| `@flighthq/types:interface#WindowBackend` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:120` |
+| `@flighthq/types:interface#WindowBackend` | `attach` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:107` |
+| `@flighthq/types:interface#WindowBackend` | `center` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:126` |
+| `@flighthq/types:interface#WindowBackend` | `close` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:115` |
+| `@flighthq/types:interface#WindowBackend` | `flashWindowFrame` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:145` |
+| `@flighthq/types:interface#WindowBackend` | `focus` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:123` |
+| `@flighthq/types:interface#WindowBackend` | `getBounds` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:119` |
+| `@flighthq/types:interface#WindowBackend` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:125` |
+| `@flighthq/types:interface#WindowBackend` | `maximize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:121` |
+| `@flighthq/types:interface#WindowBackend` | `minimize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:120` |
+| `@flighthq/types:interface#WindowBackend` | `open` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:110` |
+| `@flighthq/types:interface#WindowBackend` | `requestAttention` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:140` |
+| `@flighthq/types:interface#WindowBackend` | `restore` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:122` |
+| `@flighthq/types:interface#WindowBackend` | `setAlwaysOnTop` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:128` |
+| `@flighthq/types:interface#WindowBackend` | `setContentProtection` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:143` |
+| `@flighthq/types:interface#WindowBackend` | `setFullscreen` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:131` |
+| `@flighthq/types:interface#WindowBackend` | `setHasShadow` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:147` |
+| `@flighthq/types:interface#WindowBackend` | `setIcon` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:132` |
+| `@flighthq/types:interface#WindowBackend` | `setMaximumSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:130` |
+| `@flighthq/types:interface#WindowBackend` | `setMenuBarVisible` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:135` |
+| `@flighthq/types:interface#WindowBackend` | `setMinimumSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:129` |
+| `@flighthq/types:interface#WindowBackend` | `setOpacity` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:133` |
+| `@flighthq/types:interface#WindowBackend` | `setParent` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:136` |
+| `@flighthq/types:interface#WindowBackend` | `setPosition` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:117` |
+| `@flighthq/types:interface#WindowBackend` | `setProgress` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:138` |
+| `@flighthq/types:interface#WindowBackend` | `setResizable` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:127` |
+| `@flighthq/types:interface#WindowBackend` | `setSize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:118` |
+| `@flighthq/types:interface#WindowBackend` | `setSkipTaskbar` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:134` |
+| `@flighthq/types:interface#WindowBackend` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:116` |
+| `@flighthq/types:interface#WindowBackend` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:124` |
+| `@flighthq/types:interface#WindowBackend` | `subscribeClose` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:150` |
+| `@flighthq/types:interface#WindowBackend` | `subscribeMove` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:152` |
+| `@flighthq/types:interface#WindowBackend` | `subscribeOrientation` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:154` |
+| `@flighthq/types:interface#WindowBackend` | `subscribeResize` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:157` |
+| `@flighthq/types:interface#WindowBackend` | `subscribeVisibility` | `receiver-sensitive-method` | `upstream/packages/types/src/ApplicationWindow.ts:162` |
 | `@flighthq/types:interface#WindowController` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#WindowController` | `[WindowControllerTypeKey]` | `computed-symbol-member` | `upstream/packages/types/src/WindowController.ts:10` |
-| `@flighthq/types:type#WindowOperation` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
-| `@flighthq/types:type#WindowOperation` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
-| `@flighthq/types:type#WindowOperation` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
-| `@flighthq/types:type#WindowOperation` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
-| `@flighthq/types:type#WindowOperation` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
-| `@flighthq/types:type#WindowOperation` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
-| `@flighthq/types:type#WindowOperation` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
-| `@flighthq/types:type#WindowOperation` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
-| `@flighthq/types:type#WindowOperation` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
-| `@flighthq/types:type#WindowOperation` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
-| `@flighthq/types:type#WindowOperation` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
-| `@flighthq/types:type#WindowOperation` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
-| `@flighthq/types:type#WindowOperation` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
-| `@flighthq/types:type#WindowOperation` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
-| `@flighthq/types:type#WindowOperation` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
-| `@flighthq/types:type#WindowOperation` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
-| `@flighthq/types:type#WindowOperation` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
-| `@flighthq/types:type#WindowOperation` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
-| `@flighthq/types:type#WindowOperation` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
-| `@flighthq/types:type#WindowOperation` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
-| `@flighthq/types:type#WindowOperation` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
-| `@flighthq/types:type#WindowOperation` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
-| `@flighthq/types:type#WindowOperation` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
-| `@flighthq/types:type#WindowOperation` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
-| `@flighthq/types:type#WindowOperation` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
-| `@flighthq/types:type#WindowOperation` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
-| `@flighthq/types:type#WindowOperation` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
-| `@flighthq/types:type#WindowOperation` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
-| `@flighthq/types:type#WindowOperation` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
-| `@flighthq/types:type#WindowOperation` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
-| `@flighthq/types:type#WindowOperation` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
-| `@flighthq/types:type#WindowOperation` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
-| `@flighthq/types:type#WindowOperation` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
-| `@flighthq/types:type#WindowOperation` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
-| `@flighthq/types:type#WindowOperation` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
-| `@flighthq/types:type#WindowOperation` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
-| `@flighthq/types:type#WindowOperation` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
-| `@flighthq/types:type#WindowOperation` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
-| `@flighthq/types:type#WindowOperation` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
-| `@flighthq/types:type#WindowOperation` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
-| `@flighthq/types:type#WindowOperation` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
-| `@flighthq/types:type#WindowOperation` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
-| `@flighthq/types:type#WindowOperation` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
-| `@flighthq/types:type#WindowOperation` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
-| `@flighthq/types:type#WindowOperation` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
-| `@flighthq/types:type#WindowOperation` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
-| `@flighthq/types:type#WindowOperation` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
-| `@flighthq/types:type#WindowOperation` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
-| `@flighthq/types:type#WindowOperation` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#WireframeMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#WrappedDiffusePbrExtension` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |

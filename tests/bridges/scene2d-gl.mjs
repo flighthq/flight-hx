@@ -32,6 +32,7 @@ export const registerGlStandardMaterial = compiled.flight.Scene2DGl.registerGlSt
 export const registerGlVelocityWriter = compiled.flight.Scene2DGl.registerGlVelocityWriter;
 export const renderGlScene2D = compiled.flight.Scene2DGl.renderGlScene2D;
 export const renderGlVelocity = compiled.flight.Scene2DGl.renderGlVelocity;
+export const scene2dGlPipeline = compiled.flight.Scene2DGl.scene2dGlPipeline;
 export { defaultCanvasShapeCommands as defaultGlShapeCommands } from './scene2d-canvas.mjs';
 export { defaultCanvasTextureShapeCommands as defaultGlTextureShapeCommands } from './scene2d-canvas.mjs';
 export { registerCanvasShapeCommands as registerGlShapeCommands } from './scene2d-canvas.mjs';

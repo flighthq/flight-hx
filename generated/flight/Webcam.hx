@@ -5,40 +5,28 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Webcam as Facade_Webcam_flight__Webcam;
 import flight.types.BackendExplanation;
-import flight.types.WebcamCaptureOptions;
-import flight.types.WebcamFacingMode;
-import flight.types.WebcamPhoto;
-import flight.types.WebcamStream;
-import flight.types.WebcamVideo;
+import flight.types.MediaFileCaptureOptions;
+import flight.types.MediaFileCapturePhoto;
+import flight.types.MediaFileCaptureVideo;
 
 class Webcam {
-  public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):WebcamStream {
-    return cast Facade_Webcam_flight__Webcam.createWebcamStreamEntity(data);
+  public static function explainMediaFileCaptureBackend():BackendExplanation {
+    return cast Facade_Webcam_flight__Webcam.explainMediaFileCaptureBackend();
     return cast null;
   }
 
-  public static function explainWebcamBackend():BackendExplanation {
-    return cast Facade_Webcam_flight__Webcam.explainWebcamBackend();
+  public static function recordMediaFileCaptureVideo(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCaptureVideo>> {
+    return cast Facade_Webcam_flight__Webcam.recordMediaFileCaptureVideo(options);
     return cast null;
   }
 
-  public static function recordWebcamVideo(?options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamVideo>> {
-    return cast Facade_Webcam_flight__Webcam.recordWebcamVideo(options);
+  public static function selectMediaFileCaptureImage(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCapturePhoto>> {
+    return cast Facade_Webcam_flight__Webcam.selectMediaFileCaptureImage(options);
     return cast null;
   }
 
-  public static function requestWebcamPermission():flight._internal._Promise<Bool> {
-    return cast Facade_Webcam_flight__Webcam.requestWebcamPermission();
-    return cast null;
-  }
-
-  public static function selectWebcamImage(?options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamPhoto>> {
-    return cast Facade_Webcam_flight__Webcam.selectWebcamImage(options);
-    return cast null;
-  }
-
-  public static function takeWebcamPhoto(?options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamPhoto>> {
-    return cast Facade_Webcam_flight__Webcam.takeWebcamPhoto(options);
+  public static function takeMediaFileCapturePhoto(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCapturePhoto>> {
+    return cast Facade_Webcam_flight__Webcam.takeMediaFileCapturePhoto(options);
     return cast null;
   }
 }

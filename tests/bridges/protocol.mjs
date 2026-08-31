@@ -6,7 +6,6 @@ export const createProtocolHandler = compiled.flight.Protocol.createProtocolHand
 export const createProtocolUrl = compiled.flight.Protocol.createProtocolUrl;
 export const detachProtocolHandler = compiled.flight.Protocol.detachProtocolHandler;
 export const disposeProtocolHandler = compiled.flight.Protocol.disposeProtocolHandler;
-export const explainProtocolBackend = compiled.flight.Protocol.explainProtocolBackend;
 export const getProtocolLaunchUrl = compiled.flight.Protocol.getProtocolLaunchUrl;
 export const getRegisteredProtocolSchemes = compiled.flight.Protocol.getRegisteredProtocolSchemes;
 export const isProtocolSchemeDefault = compiled.flight.Protocol.isProtocolSchemeDefault;

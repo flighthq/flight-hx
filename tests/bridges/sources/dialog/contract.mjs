@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './dialog.mjs';
+export * from './fileDialog.mjs';

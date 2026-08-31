@@ -886,7 +886,7 @@ class _EffectsGl {
 
   public static function getGlCustomShaderSource(state:GlRenderState, shaderKey:String):Null<String> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:String; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument624:Dynamic = state; __callArgument624; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var customEffectShaders:KeyedTable<String>; }).customEffectShaders : KeyedTable<String>).entries : flight._internal._Map<String, RegistryTableEntry<String>>).get(shaderKey));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument624:Dynamic = state; __callArgument624; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).customEffectShaders : KeyedTable<String>).entries : flight._internal._Map<String, RegistryTableEntry<String>>).get(shaderKey));
     return cast ((cast _Runtime.strictEquals(({ final __structural626 = entry; __structural626 == null ? _Runtime.UNDEFINED : (cast __structural626 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:String; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -910,7 +910,7 @@ class _EffectsGl {
     if ((cast ((cast !_Runtime.strictEquals(previousSource, null) : Bool) && (cast !_Runtime.strictEquals(previousSource, fragmentSource) : Bool)) : Bool)) {
       _Runtime.callOptionalValue(((cast _EffectsGl._sourceGuards__glCustomShaderEffect : flight._internal._WeakMap<GlRenderState, GlCustomShaderSourceGuard>).get(state)), cast ([state, shaderKey, previousSource, fragmentSource] : Array<Dynamic>));
     }
-    ((cast runtime.registries : { var customEffectShaders:KeyedTable<String>; }).customEffectShaders = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var customEffectShaders:KeyedTable<String>; }).customEffectShaders : Dynamic), (cast shaderKey : String), (cast fragmentSource : String)) : KeyedTable<String>) : KeyedTable<String>));
+    ((cast runtime.registries : GlRenderRegistries).customEffectShaders = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).customEffectShaders : Dynamic), (cast shaderKey : String), (cast fragmentSource : String)) : KeyedTable<String>));
   }
 
   @:allow(flight)
@@ -2446,7 +2446,7 @@ class _EffectsGl {
   @:keep
   private static function getGlRenderEffectRunner(state:GlRenderState, kind:String):Null<GlRenderEffectRunner> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:GlRenderEffectRegistration; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1717:Dynamic = state; __callArgument1717; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var renderEffects:KeyedTable<GlRenderEffectRegistration>; }).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get(kind));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1717:Dynamic = state; __callArgument1717; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get(kind));
     return cast ((cast _Runtime.strictEquals(({ final __structural1719 = entry; __structural1719 == null ? _Runtime.UNDEFINED : (cast __structural1719 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).runner : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
@@ -2454,7 +2454,7 @@ class _EffectsGl {
   @:allow(flight)
   @:keep
   private static function hasGlRenderEffectRunner(state:GlRenderState, kind:String):Bool {
-    return cast _Runtime.strictEquals(({ final __structural1724 = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1722:Dynamic = state; __callArgument1722; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var renderEffects:KeyedTable<GlRenderEffectRegistration>; }).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get(kind)); __structural1724 == null ? _Runtime.UNDEFINED : (cast __structural1724 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    return cast _Runtime.strictEquals(({ final __structural1724 = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1722:Dynamic = state; __callArgument1722; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get(kind)); __structural1724 == null ? _Runtime.UNDEFINED : (cast __structural1724 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }
 
@@ -2462,7 +2462,7 @@ class _EffectsGl {
   @:keep
   private static function isGlRenderEffectResolvable(state:GlRenderState, effect:RenderEffect):Bool {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:GlRenderEffectRegistration; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1727:Dynamic = state; __callArgument1727; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : { var renderEffects:KeyedTable<GlRenderEffectRegistration>; }).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get(_Runtime.field(effect, 'kind')));
+    entry = ((cast (cast (cast (cast (cast getGlRenderStateRuntime(({ final __callArgument1727:Dynamic = state; __callArgument1727; })) : GlRenderStateRuntime) : { var registries:GlRenderRegistries; }).registries : GlRenderRegistries).renderEffects : KeyedTable<GlRenderEffectRegistration>).entries : flight._internal._Map<String, RegistryTableEntry<GlRenderEffectRegistration>>).get(_Runtime.field(effect, 'kind')));
     if ((cast !_Runtime.strictEquals(({ final __structural1729 = entry; __structural1729 == null ? _Runtime.UNDEFINED : (cast __structural1729 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool)) { return cast false; }
     return cast ((cast _Runtime.strictEquals((cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).isResolvable, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast (cast entry : { var state:String; var value:GlRenderEffectRegistration; }).value : GlRenderEffectRegistration).isResolvable(({ final __callArgument1730:Dynamic = state; __callArgument1730; }), ({ final __callArgument1731:Dynamic = effect; __callArgument1731; })) : Bool));
     return cast null;
@@ -2471,7 +2471,7 @@ class _EffectsGl {
   public static function registerGlRenderEffect(state:GlRenderState, kind:String, runner:GlRenderEffectRunner, ?isResolvable:GlRenderEffectResolver):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument1732:Dynamic = state; __callArgument1732; })) : GlRenderStateRuntime);
-    ((cast runtime.registries : { var renderEffects:KeyedTable<GlRenderEffectRegistration>; }).renderEffects = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var renderEffects:KeyedTable<GlRenderEffectRegistration>; }).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument1734:Dynamic = { isResolvable: isResolvable, runner: runner }; __callArgument1734; })) : KeyedTable<GlRenderEffectRegistration>) : KeyedTable<GlRenderEffectRegistration>));
+    ((cast runtime.registries : GlRenderRegistries).renderEffects = (cast withRegistryTableEntry((cast (cast runtime.registries : GlRenderRegistries).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument1734:Dynamic = { isResolvable: isResolvable, runner: runner }; __callArgument1734; })) : KeyedTable<GlRenderEffectRegistration>));
   }
 
   public static function applyGlRenderEffectsToRenderTexture(state:GlRenderState, pool:GlRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {

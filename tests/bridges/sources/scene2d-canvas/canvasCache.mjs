@@ -11,7 +11,6 @@ export const defaultCanvasRenderCacheRenderer = api.defaultCanvasRenderCacheRend
 export const destroyCanvasRenderCacheTarget = api.destroyCanvasRenderCacheTarget;
 export const enableCanvasRenderCache = api.enableCanvasRenderCache;
 export const ensureCanvasRenderCacheTarget = api.ensureCanvasRenderCacheTarget;
-export const getCanvasRenderCacheScreenState = api.getCanvasRenderCacheScreenState;
 export const getCanvasRenderCacheTarget = api.getCanvasRenderCacheTarget;
 export const refreshCanvasRenderCache = api.refreshCanvasRenderCache;
 export const releaseCanvasRenderCache = api.releaseCanvasRenderCache;

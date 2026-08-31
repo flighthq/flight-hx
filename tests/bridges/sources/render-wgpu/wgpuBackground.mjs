@@ -10,3 +10,4 @@ export const renderWgpuBackground = api.renderWgpuBackground;
 export const retireWgpuBuffer = api.retireWgpuBuffer;
 export const retireWgpuTexture = api.retireWgpuTexture;
 export const submitWgpuRenderPass = api.submitWgpuRenderPass;
+export const withWgpuFrameBorrow = api.withWgpuFrameBorrow;

@@ -31,6 +31,7 @@ export const registerWgpuStandardMaterial = compiled.flight.Scene2DWgpu.register
 export const registerWgpuVelocityWriter = compiled.flight.Scene2DWgpu.registerWgpuVelocityWriter;
 export const renderWgpuScene2D = compiled.flight.Scene2DWgpu.renderWgpuScene2D;
 export const renderWgpuVelocity = compiled.flight.Scene2DWgpu.renderWgpuVelocity;
+export const scene2dWgpuPipeline = compiled.flight.Scene2DWgpu.scene2dWgpuPipeline;
 export { defaultCanvasShapeCommands as defaultWgpuShapeCommands } from './scene2d-canvas.mjs';
 export { defaultCanvasTextureShapeCommands as defaultWgpuTextureShapeCommands } from './scene2d-canvas.mjs';
 export { registerCanvasShapeCommands as registerWgpuShapeCommands } from './scene2d-canvas.mjs';

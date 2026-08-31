@@ -4,10 +4,10 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Share as Facade_Share_flight__Share;
-import flight.types.BackendExplanation;
+import flight.types.HasShareContent;
+import flight.types.HasShareFiles;
 import flight.types.ShareContent;
 import flight.types.ShareFile;
-import flight.types.ShareOptions;
 import flight.types.ShareResult;
 import flight.types.ShareSignals;
 
@@ -16,8 +16,13 @@ class Share {
     Facade_Share_flight__Share.attachShareSignals(signals);
   }
 
-  public static function canShareContent(content:ShareContent):Bool {
-    return cast Facade_Share_flight__Share.canShareContent(content);
+  public static function canShareContent(host:HasShareContent, content:ShareContent):Bool {
+    return cast Facade_Share_flight__Share.canShareContent(host, content);
+    return cast null;
+  }
+
+  public static function canShareFiles(host:HasShareFiles, files:Array<ShareFile>):Bool {
+    return cast Facade_Share_flight__Share.canShareFiles(host, files);
     return cast null;
   }
 
@@ -34,43 +39,33 @@ class Share {
     return cast null;
   }
 
-  public static function explainShareBackend():BackendExplanation {
-    return cast Facade_Share_flight__Share.explainShareBackend();
-    return cast null;
-  }
-
   public static function hasShareContentFields(content:ShareContent):Bool {
     return cast Facade_Share_flight__Share.hasShareContentFields(content);
     return cast null;
   }
 
-  public static function isShareAvailable():Bool {
-    return cast Facade_Share_flight__Share.isShareAvailable();
+  public static function shareContent(host:HasShareContent, content:ShareContent):flight._internal._Promise<Bool> {
+    return cast Facade_Share_flight__Share.shareContent(host, content);
     return cast null;
   }
 
-  public static function shareContent(content:ShareContent, ?options:ShareOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Share_flight__Share.shareContent(content, options);
+  public static function shareContentWithResult(host:HasShareContent, content:ShareContent):flight._internal._Promise<ShareResult> {
+    return cast Facade_Share_flight__Share.shareContentWithResult(host, content);
     return cast null;
   }
 
-  public static function shareContentWithResult(content:ShareContent, ?options:ShareOptions):flight._internal._Promise<ShareResult> {
-    return cast Facade_Share_flight__Share.shareContentWithResult(content, options);
+  public static function shareFiles(host:HasShareFiles, files:Array<ShareFile>):flight._internal._Promise<Bool> {
+    return cast Facade_Share_flight__Share.shareFiles(host, files);
     return cast null;
   }
 
-  public static function shareFiles(files:Array<ShareFile>, ?options:ShareOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Share_flight__Share.shareFiles(files, options);
+  public static function shareText(host:HasShareContent, text:String):flight._internal._Promise<Bool> {
+    return cast Facade_Share_flight__Share.shareText(host, text);
     return cast null;
   }
 
-  public static function shareText(text:String, ?options:ShareOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Share_flight__Share.shareText(text, options);
-    return cast null;
-  }
-
-  public static function shareUrl(url:String, ?options:ShareOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Share_flight__Share.shareUrl(url, options);
+  public static function shareUrl(host:HasShareContent, url:String):flight._internal._Promise<Bool> {
+    return cast Facade_Share_flight__Share.shareUrl(host, url);
     return cast null;
   }
 }

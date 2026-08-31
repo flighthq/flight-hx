@@ -5,7 +5,14 @@ const api = compiled.flight._Types;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const SoftKeyboardAttachAcquisitionFailedKind = api.SoftKeyboardAttachAcquisitionFailedKind;
+export const SoftKeyboardAttachOkKind = api.SoftKeyboardAttachOkKind;
 export const SoftKeyboardResizeBodyKind = api.SoftKeyboardResizeBodyKind;
 export const SoftKeyboardResizeNoneKind = api.SoftKeyboardResizeNoneKind;
+export const SoftKeyboardSetterOkKind = api.SoftKeyboardSetterOkKind;
+export const SoftKeyboardSetterOperationFailedKind = api.SoftKeyboardSetterOperationFailedKind;
+export const SoftKeyboardSetterOperationUnavailableKind = api.SoftKeyboardSetterOperationUnavailableKind;
 export const SoftKeyboardStyleDarkKind = api.SoftKeyboardStyleDarkKind;
 export const SoftKeyboardStyleDefaultKind = api.SoftKeyboardStyleDefaultKind;
+export const SoftKeyboardVisibilityOkKind = api.SoftKeyboardVisibilityOkKind;
+export const SoftKeyboardVisibilityOperationFailedKind = api.SoftKeyboardVisibilityOperationFailedKind;

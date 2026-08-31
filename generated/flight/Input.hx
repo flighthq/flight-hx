@@ -98,10 +98,6 @@ class Input {
     Facade_Input_flight__Input.endInputStateFrame(state);
   }
 
-  public static function exitInputPointerLock():Void {
-    Facade_Input_flight__Input.exitInputPointerLock();
-  }
-
   public static function getCoalescedInputPointerEvents(event:flight._internal.dom.PointerEvent, callback:InputPointerData->Void):Void {
     Facade_Input_flight__Input.getCoalescedInputPointerEvents(event, callback);
   }
@@ -136,11 +132,6 @@ class Input {
     return cast null;
   }
 
-  public static function hasInputPointerLock():Bool {
-    return cast Facade_Input_flight__Input.hasInputPointerLock();
-    return cast null;
-  }
-
   public static function isInputGamepadButtonDown(state:InputState, gamepad:Float, button:Float):Bool {
     return cast Facade_Input_flight__Input.isInputGamepadButtonDown(state, gamepad, button);
     return cast null;
@@ -158,11 +149,6 @@ class Input {
 
   public static function releaseInputPointerCapture(element:flight._internal.dom.HTMLElement, pointerId:Float):Void {
     Facade_Input_flight__Input.releaseInputPointerCapture(element, pointerId);
-  }
-
-  public static function requestInputPointerLock(element:flight._internal.dom.HTMLElement):flight._internal._Promise<Bool> {
-    return cast Facade_Input_flight__Input.requestInputPointerLock(element);
-    return cast null;
   }
 
   public static function setInputPointerCapture(element:flight._internal.dom.HTMLElement, pointerId:Float):Void {

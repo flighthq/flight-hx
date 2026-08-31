@@ -5,4 +5,5 @@ const api = compiled.flight._HostCapacitor;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createCapacitorDialogBackend = api.createCapacitorDialogBackend;
+export const createCapacitorMessageDialogBackend = api.createCapacitorMessageDialogBackend;
+export const createCapacitorPromptDialogBackend = api.createCapacitorPromptDialogBackend;

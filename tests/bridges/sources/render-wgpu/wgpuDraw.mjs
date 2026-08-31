@@ -11,7 +11,6 @@ export const bindWgpuCompressedImageTexture = api.bindWgpuCompressedImageTexture
 export const bindWgpuImageResourceTexture = api.bindWgpuImageResourceTexture;
 export const bindWgpuTexture = api.bindWgpuTexture;
 export const bindWgpuVideoTexture = api.bindWgpuVideoTexture;
-export const buildWgpuRenderTargetBindGroup = api.buildWgpuRenderTargetBindGroup;
 export const createWgpuTextureEntry = api.createWgpuTextureEntry;
 export const destroyWgpuVideoTexture = api.destroyWgpuVideoTexture;
 export const drawWgpuQuad = api.drawWgpuQuad;

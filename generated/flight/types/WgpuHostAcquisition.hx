@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuHostAcquisition = { var context:flight._internal.dom.GPUCanvasContext; var device:flight._internal.dom.GPUDevice; var format:flight._internal.dom.GPUTextureFormat; var ownership:String; };
+typedef WgpuHostAcquisition = { var context:flight._internal.dom.GPUCanvasContext; var device:flight._internal.dom.GPUDevice; var format:flight._internal.dom.GPUTextureFormat; var ownership:String; var surface:WgpuPresentationSurface; };

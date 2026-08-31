@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebStatusBar = api.enableHostWebStatusBar;
-export const resetHostWebStatusBarForTest = api.resetHostWebStatusBarForTest;
+export const webStatusBarColorBackend = api.webStatusBarColorBackend;

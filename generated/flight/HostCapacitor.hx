@@ -4,52 +4,78 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._HostCapacitor as Facade_HostCapacitor_flight__HostCapacitor;
-import flight.types.AppBackend;
+import flight._HostCapacitor.CapacitorAndroidAppCapabilities__capacitorApp;
+import flight._HostCapacitor.CapacitorAppCapabilitiesFor;
+import flight._HostCapacitor.CapacitorClipboardBackend__capacitorClipboard;
+import flight._HostCapacitor.CapacitorCommonAppCapabilities__capacitorApp;
+import flight._HostCapacitor.CapacitorConnectivityBackend__capacitorConnectivity;
+import flight._HostCapacitor.CapacitorHost__capacitorRegister;
+import flight._HostCapacitor.CapacitorProtocolCapabilities;
+import flight.types.AppActivateBackend;
+import flight.types.AppHideBackend;
+import flight.types.AppNameBackend;
+import flight.types.AppQuitBackend;
+import flight.types.AppVersionBackend;
 import flight.types.CapacitorApi;
-import flight.types.ClipboardBackend;
-import flight.types.ConnectivityBackend;
+import flight.types.CapacitorNotificationCapabilities;
+import flight.types.CapacitorShareContentBackend;
 import flight.types.DeviceBackend;
-import flight.types.DialogBackend;
-import flight.types.FileSystemBackend;
+import flight.types.Entity;
+import flight.types.FileSystemBasicBackend;
 import flight.types.GeolocationBackend;
 import flight.types.HapticsBackend;
-import flight.types.NotificationBackend;
-import flight.types.ShareBackend;
-import flight.types.SoftKeyboardBackend;
-import flight.types.StatusBarBackend;
+import flight.types.MessageDialogBackend;
+import flight.types.MobileOsProfile;
+import flight.types.PromptDialogBackend;
+import flight.types.SoftKeyboardAccessoryBarBackend;
+import flight.types.SoftKeyboardChangeBackend;
+import flight.types.SoftKeyboardInfoBackend;
+import flight.types.SoftKeyboardResizeModeWriteBackend;
+import flight.types.SoftKeyboardScrollAssistBackend;
+import flight.types.SoftKeyboardStyleBackend;
+import flight.types.SoftKeyboardVisibilityBackend;
+import flight.types.StatusBarColorBackend;
+import flight.types.StatusBarInfoBackend;
+import flight.types.StatusBarOverlaysBackend;
+import flight.types.StatusBarStyleBackend;
+import flight.types.StatusBarVisibilityBackend;
 
 class HostCapacitor {
-  public static function createCapacitorAppBackend(capacitor:CapacitorApi):AppBackend {
-    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorAppBackend(capacitor);
+  public static function capacitorHost<Profile:MobileOsProfile>(capacitor:CapacitorApi, profile:Profile):CapacitorHost__capacitorRegister<Profile> {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.capacitorHost(capacitor, profile);
     return cast null;
   }
 
-  public static function createCapacitorClipboardBackend(capacitor:CapacitorApi):ClipboardBackend {
+  @:overload(function<Profile:MobileOsProfile>(capacitor:CapacitorApi, profile:Profile):CapacitorAppCapabilitiesFor<Profile> {})
+  @:overload(function(capacitor:CapacitorApi, profile:String):flight._internal._Intersection2<flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var activate:Null<AppActivateBackend>; @:optional var name:Null<AppNameBackend>; @:optional var version:Null<AppVersionBackend>; }>>, flight._internal._Required<{ @:optional var hide:Null<AppHideBackend>; @:optional var quit:Null<AppQuitBackend>; }>> {})
+  @:overload(function(capacitor:CapacitorApi, profile:String):flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var activate:Null<AppActivateBackend>; @:optional var name:Null<AppNameBackend>; @:optional var version:Null<AppVersionBackend>; }>> {})
+  @:overload(function(capacitor:CapacitorApi, profile:MobileOsProfile):flight._internal._Union2<flight._internal._Intersection2<flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var activate:Null<AppActivateBackend>; @:optional var name:Null<AppNameBackend>; @:optional var version:Null<AppVersionBackend>; }>>, flight._internal._Required<{ @:optional var hide:Null<AppHideBackend>; @:optional var quit:Null<AppQuitBackend>; }>>, flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var activate:Null<AppActivateBackend>; @:optional var name:Null<AppNameBackend>; @:optional var version:Null<AppVersionBackend>; }>>> {})
+  public static function createCapacitorAppCapabilities(capacitor:CapacitorApi, profile:MobileOsProfile):flight._internal._Union2<CapacitorAndroidAppCapabilities__capacitorApp, CapacitorCommonAppCapabilities__capacitorApp> {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorAppCapabilities(capacitor, profile);
+    return cast null;
+  }
+
+  public static function createCapacitorClipboardBackend(capacitor:CapacitorApi):CapacitorClipboardBackend__capacitorClipboard {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorClipboardBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorConnectivityBackend(capacitor:CapacitorApi):ConnectivityBackend {
+  public static function createCapacitorConnectivityBackend(capacitor:CapacitorApi):CapacitorConnectivityBackend__capacitorConnectivity {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorConnectivityBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorDeviceBackend(capacitor:CapacitorApi):DeviceBackend {
+  public static function createCapacitorDeviceBackend(capacitor:CapacitorApi):{ >DeviceBackend, >Entity, } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorDeviceBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorDialogBackend(capacitor:CapacitorApi):DialogBackend {
-    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorDialogBackend(capacitor);
-    return cast null;
-  }
-
-  public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):FileSystemBackend {
+  public static function createCapacitorFileSystemBackend(capacitor:CapacitorApi):{ >FileSystemBasicBackend, >Entity, } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorFileSystemBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorGeolocationBackend(capacitor:CapacitorApi):GeolocationBackend {
+  public static function createCapacitorGeolocationBackend(capacitor:CapacitorApi):{ >GeolocationBackend, >Entity, } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorGeolocationBackend(capacitor);
     return cast null;
   }
@@ -59,27 +85,73 @@ class HostCapacitor {
     return cast null;
   }
 
-  public static function createCapacitorKeyboardBackend(capacitor:CapacitorApi):SoftKeyboardBackend {
-    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorKeyboardBackend(capacitor);
+  public static function createCapacitorMessageDialogBackend(capacitor:CapacitorApi):{ >MessageDialogBackend, >Entity, } {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorMessageDialogBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorNotificationBackend(capacitor:CapacitorApi):NotificationBackend {
-    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorNotificationBackend(capacitor);
+  public static function createCapacitorNotificationCapabilities(capacitor:CapacitorApi):CapacitorNotificationCapabilities {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorNotificationCapabilities(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorShareBackend(capacitor:CapacitorApi):ShareBackend {
-    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorShareBackend(capacitor);
+  public static function createCapacitorPromptDialogBackend(capacitor:CapacitorApi):{ >PromptDialogBackend, >Entity, } {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorPromptDialogBackend(capacitor);
     return cast null;
   }
 
-  public static function createCapacitorStatusBarBackend(capacitor:CapacitorApi):StatusBarBackend {
+  public static function createCapacitorProtocolCapabilities(capacitor:CapacitorApi):CapacitorProtocolCapabilities {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorProtocolCapabilities(capacitor);
+    return cast null;
+  }
+
+  public static function createCapacitorShareContentBackend(capacitor:CapacitorApi):CapacitorShareContentBackend {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorShareContentBackend(capacitor);
+    return cast null;
+  }
+
+  public static function createCapacitorSoftKeyboardAccessoryBarBackend(capacitor:CapacitorApi):{ >SoftKeyboardAccessoryBarBackend, >Entity, } {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardAccessoryBarBackend(capacitor);
+    return cast null;
+  }
+
+  public static function createCapacitorSoftKeyboardChangeBackend(capacitor:CapacitorApi):{ >SoftKeyboardChangeBackend, >Entity, } {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardChangeBackend(capacitor);
+    return cast null;
+  }
+
+  public static function createCapacitorSoftKeyboardInfoBackend(capacitor:CapacitorApi):{ >SoftKeyboardInfoBackend, >Entity, } {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardInfoBackend(capacitor);
+    return cast null;
+  }
+
+  public static function createCapacitorSoftKeyboardResizeModeWriteBackend(capacitor:CapacitorApi):{ >SoftKeyboardResizeModeWriteBackend, >Entity, } {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardResizeModeWriteBackend(capacitor);
+    return cast null;
+  }
+
+  public static function createCapacitorSoftKeyboardScrollAssistBackend(capacitor:CapacitorApi):{ >SoftKeyboardScrollAssistBackend, >Entity, } {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardScrollAssistBackend(capacitor);
+    return cast null;
+  }
+
+  public static function createCapacitorSoftKeyboardStyleBackend(capacitor:CapacitorApi):{ >SoftKeyboardStyleBackend, >Entity, } {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardStyleBackend(capacitor);
+    return cast null;
+  }
+
+  public static function createCapacitorSoftKeyboardVisibilityBackend(capacitor:CapacitorApi):{ >SoftKeyboardVisibilityBackend, >Entity, } {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorSoftKeyboardVisibilityBackend(capacitor);
+    return cast null;
+  }
+
+  public static function createCapacitorStatusBarBackend(capacitor:CapacitorApi):{ >Entity, >StatusBarColorBackend, >StatusBarInfoBackend, >StatusBarOverlaysBackend, >StatusBarStyleBackend, >StatusBarVisibilityBackend, } {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorStatusBarBackend(capacitor);
     return cast null;
   }
 
-  public static function registerCapacitorBackends(capacitor:CapacitorApi):Void {
-    Facade_HostCapacitor_flight__HostCapacitor.registerCapacitorBackends(capacitor);
+  public static function registerCapacitorBackends<Profile:MobileOsProfile>(capacitor:CapacitorApi, profile:Profile):CapacitorHost__capacitorRegister<Profile> {
+    return cast Facade_HostCapacitor_flight__HostCapacitor.registerCapacitorBackends(capacitor, profile);
+    return cast null;
   }
 }

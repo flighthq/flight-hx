@@ -5,14 +5,20 @@ const api = compiled.flight._RenderWgpu;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const copyWgpuRenderStateRegistrations = api.copyWgpuRenderStateRegistrations;
+export const createWgpuAcquisitionFromCanvasElement = api.createWgpuAcquisitionFromCanvasElement;
+export const createWgpuDeviceState = api.createWgpuDeviceState;
 export const createWgpuOffscreenRenderState = api.createWgpuOffscreenRenderState;
 export const createWgpuRenderState = api.createWgpuRenderState;
+export const createWgpuRenderStateFromCanvasElement = api.createWgpuRenderStateFromCanvasElement;
 export const createWgpuRenderStateRuntime = api.createWgpuRenderStateRuntime;
 export const destroyWgpuRenderState = api.destroyWgpuRenderState;
 export const getWgpuColorAdjustmentMaterialFeature = api.getWgpuColorAdjustmentMaterialFeature;
 export const getWgpuColorAdjustmentMaterialFeatureGuard = api.getWgpuColorAdjustmentMaterialFeatureGuard;
+export const getWgpuDeviceRuntime = api.getWgpuDeviceRuntime;
 export const getWgpuRenderStateRuntime = api.getWgpuRenderStateRuntime;
 export const getWgpuSampler = api.getWgpuSampler;
 export const isWgpuSupported = api.isWgpuSupported;
+export const registerWgpuDeviceTeardown = api.registerWgpuDeviceTeardown;
+export const registerWgpuRenderStateTeardown = api.registerWgpuRenderStateTeardown;
+export const releaseWgpuAcquisition = api.releaseWgpuAcquisition;
 export const resolveWgpuApplyBlendMode = api.resolveWgpuApplyBlendMode;

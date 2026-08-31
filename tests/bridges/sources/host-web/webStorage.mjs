@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebStorage = api.enableHostWebStorage;
-export const resetHostWebStorageForTest = api.resetHostWebStorageForTest;
+export const webStorageBackend = api.webStorageBackend;

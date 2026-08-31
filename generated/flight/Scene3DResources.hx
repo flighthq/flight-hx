@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 import flight._Scene3DResources as Facade_Scene3DResources_flight__Scene3DResources;
 import flight.types.ExternalImageResourceReference;
 import flight.types.GltfScene3DDocumentLoadOptions;
+import flight.types.HasNetHttp;
 import flight.types.Image;
 import flight.types.ImageResourceReference;
 import flight.types.LoadScene3DResourcesOptions;
@@ -84,48 +85,48 @@ class Scene3DResources {
     Facade_Scene3DResources_flight__Scene3DResources.getScene3DResourceTextures(out, scene);
   }
 
-  public static function loadScene3DDocumentBytesFromUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentBytesFromUrl(url, options);
+  public static function loadScene3DDocumentBytesFromUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentBytesFromUrl(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFrom3dsUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFrom3dsUrl(url, options);
+  public static function loadScene3DDocumentFrom3dsUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFrom3dsUrl(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromAwd2Url(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromAwd2Url(url, options);
+  public static function loadScene3DDocumentFromAwd2Url(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromAwd2Url(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromGlbUrl(url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromGlbUrl(url, options);
+  public static function loadScene3DDocumentFromGlbUrl(host:HasNetHttp, url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromGlbUrl(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromGltfUrl(url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromGltfUrl(url, options);
+  public static function loadScene3DDocumentFromGltfUrl(host:HasNetHttp, url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromGltfUrl(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromMd2Url(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromMd2Url(url, options);
+  public static function loadScene3DDocumentFromMd2Url(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromMd2Url(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromMd5MeshUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromMd5MeshUrl(url, options);
+  public static function loadScene3DDocumentFromMd5MeshUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromMd5MeshUrl(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromObjUrl(url:String, ?materials:ObjMaterialLibrary, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromObjUrl(url, materials, options);
+  public static function loadScene3DDocumentFromObjUrl(host:HasNetHttp, url:String, ?materials:ObjMaterialLibrary, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentFromObjUrl(host, url, materials, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentTextFromUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<String>> {
-    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentTextFromUrl(url, options);
+  public static function loadScene3DDocumentTextFromUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<String>> {
+    return cast Facade_Scene3DResources_flight__Scene3DResources.loadScene3DDocumentTextFromUrl(host, url, options);
     return cast null;
   }
 

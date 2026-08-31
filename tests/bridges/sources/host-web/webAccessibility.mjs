@@ -5,5 +5,5 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebAccessibility = api.enableHostWebAccessibility;
-export const resetHostWebAccessibilityForTest = api.resetHostWebAccessibilityForTest;
+export const createWebAccessibilityBackend = api.createWebAccessibilityBackend;
+export const webAccessibilityBackend = api.webAccessibilityBackend;

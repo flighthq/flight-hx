@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuRenderTarget = { var height:Float; var width:Float; var bindGroup:flight._internal.dom.GPUBindGroup; var colorSpace:RenderTargetColorSpace; var depthStencilTexture:flight._internal.dom.GPUTexture; var depthStencilView:flight._internal.dom.GPUTextureView; var format:flight._internal.dom.GPUTextureFormat; var sampleCount:Float; var clearColors:Array<Float>; var clearDepth:Float; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; };
+typedef WgpuRenderTarget = { var height:Float; var width:Float; var bindings:WgpuTextureBindings; var colorSpace:RenderTargetColorSpace; var depthStencilTexture:flight._internal.dom.GPUTexture; var mipLevelCount:Float; var depthStencilView:flight._internal.dom.GPUTextureView; var format:flight._internal.dom.GPUTextureFormat; var sampleCount:Float; var clearColors:Array<Float>; var clearDepth:Float; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; };

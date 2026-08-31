@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 import flight._Log.logOnce;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
+import flight.types.HasNetSocket;
 import flight.types.LogLevel;
 import flight.types.Signal;
 import flight.types.Socket;
@@ -43,7 +44,7 @@ class _Socket {
     var url:String = cast _Runtime.UNDEFINED;
     var message:String = cast _Runtime.UNDEFINED;
     url = (cast (cast notice : { var socket:Socket; }).socket : { var url:String; }).url;
-    message = ((cast _Runtime.strictEquals((cast notice : { var reason:String; }).reason, 'no-connection') : Bool) ? (cast 'createSocket: active backend returned no connection — call setSocketBackend(...) with a backend that supports this transport' : Dynamic) : (cast '' + Std.string((cast notice : { var operation:String; var reason:String; var socket:Socket; }).operation) + ': socket is already disposed — call createSocket(...) to create a new socket' : Dynamic));
+    message = ((cast _Runtime.strictEquals((cast notice : { var reason:String; }).reason, 'no-connection') : Bool) ? (cast 'createSocket: the host carries no socket provider for this transport, or its provider returned no connection — pass a host whose net.socket supports it' : Dynamic) : (cast '' + Std.string((cast notice : { var operation:String; var reason:String; var socket:Socket; }).operation) + ': socket is already disposed — call createSocket(...) to create a new socket' : Dynamic));
     (cast logOnce((cast 'socket:' + Std.string((cast notice : { var operation:String; }).operation) + ':' + Std.string((cast notice : { var reason:String; }).reason) + '' : String), ({ final __callArgument0:Dynamic = LogLevel.Warn; __callArgument0; }), (cast { message: message, operation: (cast notice : { var operation:String; }).operation, reason: (cast notice : { var reason:String; }).reason, url: url } : Dynamic), ({ final __callArgument1:Dynamic = 'socket'; __callArgument1; })) : Bool);
   }
 
@@ -80,12 +81,14 @@ class _Socket {
     ({ final __optionalOwner5 = runtime.connection; if (__optionalOwner5 != null) { final __optionalCall4 = (cast __optionalOwner5 : { var closeSocketConnection:Null<Float>->Null<String>->Void; }).closeSocketConnection; if (__optionalCall4 != null) __optionalCall4(code, reason); } });
   }
 
-  public static function createSocket(options:SocketOptions):Socket {
+  public static function createSocket(host:HasNetSocket, options:SocketOptions):Socket {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     var socket:Socket = cast _Runtime.UNDEFINED;
+    var backend:SocketBackend = cast _Runtime.UNDEFINED;
     runtime = (cast { connection: null, signals: null, readyState: 'connecting', delivering: true, disposed: false });
     socket = (cast { url: _Runtime.field(options, 'url'), runtime: runtime });
-    (runtime.connection = cast ((cast (cast getSocketBackend() : SocketBackend) : SocketBackend).openSocket(({ final __callArgument6:Dynamic = options; __callArgument6; }), (cast _Socket.makeSocketEventSink__socket(({ final __callArgument7:Dynamic = runtime; __callArgument7; })) : SocketEventSink)) : Null<SocketConnection>));
+    backend = (cast (cast host : HasNetSocket).net : { var socket:SocketBackend; }).socket;
+    (runtime.connection = cast (((cast _Runtime.strictEquals(backend, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast (cast backend : SocketBackend).openSocket(({ final __callArgument6:Dynamic = options; __callArgument6; }), (cast _Socket.makeSocketEventSink__socket(({ final __callArgument7:Dynamic = runtime; __callArgument7; })) : SocketEventSink)) : Dynamic)) : Null<SocketConnection>));
     if ((cast _Runtime.strictEquals(runtime.connection, null) : Bool)) { _Runtime.callOptionalValue(_Socket._guard__socket, cast ([{ operation: 'createSocket', reason: 'no-connection', socket: socket }] : Array<Dynamic>)); }
     return cast socket;
     return cast null;
@@ -143,33 +146,9 @@ class _Socket {
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function getSocketBackend():SocketBackend {
-    if ((cast !_Runtime.strictEquals(_Socket._custom__socket, null) : Bool)) { return cast _Socket._custom__socket; }
-    if ((cast !_Runtime.strictEquals(_Socket._host__socket, null) : Bool)) { return cast _Socket._host__socket; }
-    if ((cast _Runtime.strictEquals(_Socket._webFallback__socket, null) : Bool)) { (_Socket._webFallback__socket = cast ((cast createWebSocketBackend() : SocketBackend) : Dynamic)); }
-    return cast _Socket._webFallback__socket;
-    return cast null;
-  }
-
   public static function getSocketReadyState(socket:Socket):SocketReadyState {
     return cast (cast socket.runtime : { var readyState:SocketReadyState; }).readyState;
     return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installSocketHostBackend(backend:SocketBackend):Void {
-    if ((cast _Runtime.strictEquals(_Socket._host__socket, null) : Bool)) { (_Socket._host__socket = cast (backend : Dynamic)); }
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetSocketBackendForTest():Void {
-    (_Socket._custom__socket = cast (null : Dynamic));
-    (_Socket._host__socket = cast (null : Dynamic));
-    (_Socket._webFallback__socket = cast (null : Dynamic));
   }
 
   public static function sendSocketMessage(socket:Socket, data:flight._internal._Union2<String, haxe.io.Bytes>):Bool {
@@ -186,23 +165,11 @@ class _Socket {
 
   @:allow(flight)
   @:keep
-  private static function setSocketBackend(backend:Null<SocketBackend>):Void {
-    (_Socket._custom__socket = cast (backend : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
   private static function setSocketGuard(guard:Null<SocketGuard>):Void {
     (_Socket._guard__socket = cast (guard : Dynamic));
   }
 
-  public static var _custom__socket:Null<SocketBackend> = _Runtime.explicitNull();
-
   public static var _guard__socket:Null<SocketGuard> = _Runtime.explicitNull();
-
-  public static var _host__socket:Null<SocketBackend> = _Runtime.explicitNull();
-
-  public static var _webFallback__socket:Null<SocketBackend> = _Runtime.explicitNull();
 
   public static function makeSocketEventSink__socket(runtime:SocketRuntime):SocketEventSink {
     return cast { handleSocketOpen: function():Void {

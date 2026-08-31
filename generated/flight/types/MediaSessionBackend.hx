@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MediaSessionBackend = { @:optional var setMetadata:Null<MediaSessionMetadata>->Void; @:optional var setPlaybackState:MediaSessionPlaybackState->Void; @:optional var setPositionState:Null<MediaSessionPositionState>->Void; @:optional var setActionHandler:MediaSessionAction->Null<MediaSessionActionDetails->Void>->Void; @:optional var destroy:Void->Void; };
+typedef MediaSessionBackend = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var clearMetadata:Void->MediaSessionClearMetadataOutcome; var clearPositionState:Void->MediaSessionClearPositionStateOutcome; var destroy:Void->Void; var setMetadata:MediaSessionMetadata->MediaSessionSetMetadataOutcome; var setPlaybackState:MediaSessionPlaybackState->MediaSessionSetPlaybackStateOutcome; var setPositionState:MediaSessionPositionState->MediaSessionSetPositionStateOutcome; };

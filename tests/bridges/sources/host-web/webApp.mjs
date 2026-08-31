@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebApp = api.enableHostWebApp;
-export const resetHostWebAppForTest = api.resetHostWebAppForTest;
+export const createWebAppCapabilities = api.createWebAppCapabilities;

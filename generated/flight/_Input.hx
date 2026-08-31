@@ -508,11 +508,6 @@ class _Input {
       (cast target : flight._internal.dom.EventTarget).addEventListener('wheel', onWheel, { passive: !(cast preventDefault : Bool) });
       return cast function():Void { (cast target : flight._internal.dom.EventTarget).removeEventListener('wheel', onWheel); };
       return cast _Runtime.UNDEFINED;
-    }, exitPointerLock: function():Void {
-      if (_Runtime.truthy(flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'exitPointerLock'))) { flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'exitPointerLock', cast ([] : Array<Dynamic>)); }
-    }, hasPointerLock: function():Bool {
-      return cast !_Runtime.strictEquals(flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'pointerLockElement'), null);
-      return cast _Runtime.UNDEFINED;
     } };
     return cast null;
   }
@@ -546,10 +541,6 @@ class _Input {
     ((cast state.justReleasedKeys : flight._internal._Set<Float>).clear());
     ((cast state.justPressedGamepadButtons : flight._internal._Set<Float>).clear());
     ((cast state.justReleasedGamepadButtons : flight._internal._Set<Float>).clear());
-  }
-
-  public static function exitInputPointerLock():Void {
-    _Runtime.callOptionalValue((cast (cast getInputIngressBackend() : InputIngressBackend) : InputIngressBackend).exitPointerLock, cast ([] : Array<Dynamic>));
   }
 
   public static function getCoalescedInputPointerEvents(event:flight._internal.dom.PointerEvent, callback:InputPointerData->Void):Void {
@@ -620,11 +611,6 @@ class _Input {
     return cast null;
   }
 
-  public static function hasInputPointerLock():Bool {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast getInputIngressBackend() : InputIngressBackend) : InputIngressBackend).hasPointerLock, cast ([] : Array<Dynamic>)), function():Dynamic return cast false);
-    return cast null;
-  }
-
   @:allow(flight)
   @:keep
   private static function installInputIngressHostBackend(backend:InputIngressBackend):Void {
@@ -651,19 +637,6 @@ class _Input {
       element.releasePointerCapture(pointerId);
     } catch (__error:Dynamic) {
     }
-  }
-
-  public static function requestInputPointerLock(element:flight._internal.dom.HTMLElement):flight._internal._Promise<Bool> {
-    try {
-      var result:flight._internal._Promise<flight._internal._Nothing> = element.requestPointerLock();
-      if ((cast flight._internal._Async.isPromise(result) : Bool)) {
-        return cast _Runtime.callProperty(result, 'then', cast ([function(__unused1:flight._internal._Nothing):Bool return true, function(__unused2:flight._internal._Any):Bool return false] : Array<Dynamic>));
-      }
-      return cast flight._internal._Async.resolve(true);
-    } catch (__error:Dynamic) {
-      return cast flight._internal._Async.resolve(false);
-    }
-    return cast null;
   }
 
   @:allow(flight)

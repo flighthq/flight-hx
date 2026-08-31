@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ElectronDisplay = { var id:Float; var bounds:{ var x:Float; var y:Float; var width:Float; var height:Float; }; var workArea:{ var x:Float; var y:Float; var width:Float; var height:Float; }; var scaleFactor:Float; };
+typedef ElectronDisplay = { var id:Float; var bounds:{ var x:Float; var y:Float; var width:Float; var height:Float; }; var workArea:{ var x:Float; var y:Float; var width:Float; var height:Float; }; var scaleFactor:Float; @:optional var colorDepth:Float; @:optional var colorSpace:String; @:optional var displayFrequency:Float; @:optional var internal:Bool; @:optional var label:String; @:optional var monochrome:Bool; @:optional var rotation:Float; @:optional var touchSupport:String; };

@@ -8,7 +8,7 @@ import flight._Math.RAD_TO_DEG;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.AmbientLightReading;
-import flight.types.BackendExplanation;
+import flight.types.HasSystemSensors;
 import flight.types.MotionReading;
 import flight.types.OrientationReading;
 import flight.types.PressureReading;
@@ -40,7 +40,7 @@ typedef WebOrientationSensor__sensors = { >WebGenericSensor__sensors, @:optional
 
 @:noCompletion
 class _Sensors {
-  public static function attachSensors(sensors:Sensors):Void {
+  public static function attachSensors(host:HasSystemSensors, sensors:Sensors):Void {
     var backend:SensorsBackend = cast _Runtime.UNDEFINED;
     var unsubscribeMotion:Void->Void = cast _Runtime.UNDEFINED;
     var unsubscribeLinearAcceleration:Void->Void = cast _Runtime.UNDEFINED;
@@ -53,7 +53,7 @@ class _Sensors {
     var unsubscribeProximity:Void->Void = cast _Runtime.UNDEFINED;
     var unsubscribeQuaternion:Void->Void = cast _Runtime.UNDEFINED;
     detachSensors(({ final __callArgument0:Dynamic = sensors; __callArgument0; }));
-    backend = (cast getSensorsBackend() : SensorsBackend);
+    backend = (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors;
     unsubscribeMotion = (cast backend : SensorsBackend).subscribeMotion(({ final __callArgument2:Dynamic = function(acceleration:MotionReading, rotationRate:RotationRateReading):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onAccelerometer], [acceleration]]), 1);
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[sensors.onGyroscope], [rotationRate]]), 1);
@@ -663,122 +663,65 @@ class _Sensors {
     detachSensors(({ final __callArgument61:Dynamic = sensors; __callArgument61; }));
   }
 
-  public static function explainSensorsBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Sensors._custom__sensors, null) : Bool)) {
-      return cast { conflict: _Sensors._hostConflict__sensors, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Sensors._host__sensors, null) : Bool)) {
-      return cast { conflict: _Sensors._hostConflict__sensors, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Sensors._hostObservation__sensors, null) : Bool) ? (cast (cast _Sensors._hostObservation__sensors : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Sensors._hostObservation__sensors, null) : Bool) ? (cast (cast _Sensors._hostObservation__sensors : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+  public static function getSensorsPermissionState(host:HasSystemSensors, ?sensor:String):flight._internal._Promise<SensorsPermissionState> {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).getPermissionState(({ final __callArgument63:Dynamic = sensor; __callArgument63; }));
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function getSensorsBackend():SensorsBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Sensors._custom__sensors, function():Dynamic return cast _Sensors._host__sensors), function():Dynamic return cast _Sensors._sentinel__sensors);
+  public static function hasAccelerometer(host:HasSystemSensors):Bool {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isMotionSupported();
     return cast null;
   }
 
-  public static function getSensorsPermissionState(?sensor:String):flight._internal._Promise<SensorsPermissionState> {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).getPermissionState(({ final __callArgument63:Dynamic = sensor; __callArgument63; }));
+  public static function hasAmbientLightSensor(host:HasSystemSensors):Bool {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isAmbientLightSupported();
     return cast null;
   }
 
-  public static function hasAccelerometer():Bool {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).isMotionSupported();
+  public static function hasBarometer(host:HasSystemSensors):Bool {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isBarometerSupported();
     return cast null;
   }
 
-  public static function hasAmbientLightSensor():Bool {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).isAmbientLightSupported();
+  public static function hasGravitySensor(host:HasSystemSensors):Bool {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isGravitySupported();
     return cast null;
   }
 
-  public static function hasBarometer():Bool {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).isBarometerSupported();
+  public static function hasGyroscope(host:HasSystemSensors):Bool {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isGyroscopeSupported();
     return cast null;
   }
 
-  public static function hasGravitySensor():Bool {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).isGravitySupported();
+  public static function hasLinearAccelerationSensor(host:HasSystemSensors):Bool {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isLinearAccelerationSupported();
     return cast null;
   }
 
-  public static function hasGyroscope():Bool {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).isGyroscopeSupported();
+  public static function hasMagnetometer(host:HasSystemSensors):Bool {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isMagnetometerSupported();
     return cast null;
   }
 
-  public static function hasLinearAccelerationSensor():Bool {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).isLinearAccelerationSupported();
+  public static function hasOrientationSensor(host:HasSystemSensors):Bool {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isOrientationSupported();
     return cast null;
   }
 
-  public static function hasMagnetometer():Bool {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).isMagnetometerSupported();
+  public static function hasProximitySensor(host:HasSystemSensors):Bool {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isProximitySupported();
     return cast null;
   }
 
-  public static function hasOrientationSensor():Bool {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).isOrientationSupported();
+  public static function isSensorsSupported(host:HasSystemSensors):Bool {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).isMotionSupported();
     return cast null;
   }
 
-  public static function hasProximitySensor():Bool {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).isProximitySupported();
+  public static function requestSensorsPermission(host:HasSystemSensors):flight._internal._Promise<Bool> {
+    return cast (cast (cast (cast host : HasSystemSensors).system : { var sensors:SensorsBackend; }).sensors : SensorsBackend).requestPermission();
     return cast null;
   }
-
-  @:allow(flight)
-  @:keep
-  private static function installSensorsHostBackend(backend:SensorsBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Sensors._host__sensors, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Sensors._host__sensors, backend) : Bool)) { (_Sensors._hostConflict__sensors = cast (true : Dynamic)); }
-      return;
-    }
-    (_Sensors._host__sensors = cast (backend : Dynamic));
-  }
-
-  public static function isSensorsSupported():Bool {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).isMotionSupported();
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function observeSensorsHostResult(operation:String, succeeded:Bool):Void {
-    (_Sensors._hostObservation__sensors = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
-  }
-
-  public static function requestSensorsPermission():flight._internal._Promise<Bool> {
-    return cast (cast (cast getSensorsBackend() : SensorsBackend) : SensorsBackend).requestPermission();
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetSensorsBackendForTest():Void {
-    (_Sensors._custom__sensors = cast (null : Dynamic));
-    (_Sensors._host__sensors = cast (null : Dynamic));
-    (_Sensors._hostConflict__sensors = cast (false : Dynamic));
-    (_Sensors._hostObservation__sensors = cast (null : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function setSensorsBackend(backend:Null<SensorsBackend>):Void {
-    (_Sensors._custom__sensors = cast (backend : Dynamic));
-  }
-
-  public static var _custom__sensors:Null<SensorsBackend> = _Runtime.explicitNull();
-
-  public static var _host__sensors:Null<SensorsBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__sensors:Bool = false;
-
-  public static var _hostObservation__sensors:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
   public static final _subscriptions__sensors:flight._internal._WeakMap<Sensors, Void->Void> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
 
@@ -799,75 +742,6 @@ class _Sensors {
   public static final _orientation__sensors:OrientationReading = (cast createOrientationReading() : OrientationReading);
 
   public static final _quaternionReading__sensors:QuaternionReading = (cast createQuaternionReading() : QuaternionReading);
-
-  public static final _noopUnsubscribe__sensors:Void->Void = (cast function():Void {
-
-  });
-
-  public static final _sentinel__sensors:SensorsBackend = (cast { getPermissionState: function(?sensor:String):flight._internal._Promise<SensorsPermissionState> {
-    return cast flight._internal._Async.resolve('unsupported');
-    return cast _Runtime.UNDEFINED;
-  }, isAmbientLightSupported: function():Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, isBarometerSupported: function():Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, isGravitySupported: function():Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, isGyroscopeSupported: function():Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, isLinearAccelerationSupported: function():Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, isMagnetometerSupported: function():Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, isMotionSupported: function():Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, isOrientationSupported: function():Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, isProximitySupported: function():Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, requestPermission: function():flight._internal._Promise<Bool> {
-    return cast flight._internal._Async.resolve(false);
-    return cast _Runtime.UNDEFINED;
-  }, subscribeAbsoluteOrientation: function(listener:OrientationReading->Void, ?options:SensorSubscribeOptions):Void->Void {
-    return cast _Sensors._noopUnsubscribe__sensors;
-    return cast _Runtime.UNDEFINED;
-  }, subscribeAmbientLight: function(listener:AmbientLightReading->Void, ?options:SensorSubscribeOptions):Void->Void {
-    return cast _Sensors._noopUnsubscribe__sensors;
-    return cast _Runtime.UNDEFINED;
-  }, subscribeBarometer: function(listener:PressureReading->Void, ?options:SensorSubscribeOptions):Void->Void {
-    return cast _Sensors._noopUnsubscribe__sensors;
-    return cast _Runtime.UNDEFINED;
-  }, subscribeGravity: function(listener:MotionReading->Void, ?options:SensorSubscribeOptions):Void->Void {
-    return cast _Sensors._noopUnsubscribe__sensors;
-    return cast _Runtime.UNDEFINED;
-  }, subscribeLinearAcceleration: function(listener:MotionReading->Void, ?options:SensorSubscribeOptions):Void->Void {
-    return cast _Sensors._noopUnsubscribe__sensors;
-    return cast _Runtime.UNDEFINED;
-  }, subscribeMagnetometer: function(listener:MotionReading->Void, ?options:SensorSubscribeOptions):Void->Void {
-    return cast _Sensors._noopUnsubscribe__sensors;
-    return cast _Runtime.UNDEFINED;
-  }, subscribeMotion: function(listener:MotionReading->RotationRateReading->Void, ?options:SensorSubscribeOptions):Void->Void {
-    return cast _Sensors._noopUnsubscribe__sensors;
-    return cast _Runtime.UNDEFINED;
-  }, subscribeOrientation: function(listener:OrientationReading->Void, ?options:SensorSubscribeOptions):Void->Void {
-    return cast _Sensors._noopUnsubscribe__sensors;
-    return cast _Runtime.UNDEFINED;
-  }, subscribeProximity: function(listener:ProximityReading->Void, ?options:SensorSubscribeOptions):Void->Void {
-    return cast _Sensors._noopUnsubscribe__sensors;
-    return cast _Runtime.UNDEFINED;
-  }, subscribeQuaternion: function(listener:QuaternionReading->Void, ?options:SensorSubscribeOptions):Void->Void {
-    return cast _Sensors._noopUnsubscribe__sensors;
-    return cast _Runtime.UNDEFINED;
-  } });
 
   public static function getWebMagnetometerConstructor__sensors():Null<Dynamic> {
     if ((cast _Runtime.strictEquals(_Runtime.typeofValue(_Sensors.Magnetometer__sensors), 'undefined') : Bool)) { return cast null; }

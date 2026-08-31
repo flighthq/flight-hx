@@ -5,6 +5,7 @@ __syncDependencies();
 
 export * from './enableWgpuColorAdjustmentGuards.mjs';
 export * from './enableWgpuStrokePathTessellation.mjs';
+export * from './scene2dWgpuPipeline.mjs';
 export * from './wgpuBitmapText.mjs';
 export * from './wgpuCache.mjs';
 export * from './wgpuClip.mjs';

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ElectronBackendOptions = { @:optional var storageFileName:String; };
+typedef ElectronBackendOptions = { var platform:PlatformName; @:optional var storageFileName:String; @:optional var updaterFeedUrl:String; };

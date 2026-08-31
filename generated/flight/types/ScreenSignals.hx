@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ScreenSignals = { var onScreenAdded:Signal<ScreenInfo->Void>; var onScreenMetricsChanged:Signal<ScreenChangeEvent->Void>; var onScreenRemoved:Signal<ScreenInfo->Void>; };
+typedef ScreenSignals = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onScreenAdded:Signal<ScreenInfo->Void>; var onScreenMetricsChanged:Signal<ScreenChangeEvent->Void>; var onScreenRemoved:Signal<ScreenInfo->Void>; };

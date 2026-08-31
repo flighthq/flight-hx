@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebShell = api.enableHostWebShell;
-export const resetHostWebShellForTest = api.resetHostWebShellForTest;
+export const webShellExternalBackend = api.webShellExternalBackend;

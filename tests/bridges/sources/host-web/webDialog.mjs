@@ -5,5 +5,8 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebDialog = api.enableHostWebDialog;
-export const resetHostWebDialogForTest = api.resetHostWebDialogForTest;
+export const webDirectoryOpenDialogBackend = api.webDirectoryOpenDialogBackend;
+export const webFileOpenDialogBackend = api.webFileOpenDialogBackend;
+export const webFileSaveDialogBackend = api.webFileSaveDialogBackend;
+export { webMessageDialogBackend } from '@flighthq/dialog/contract';
+export { webPromptDialogBackend } from '@flighthq/dialog/contract';

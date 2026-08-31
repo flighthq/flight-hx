@@ -5,4 +5,5 @@ const api = compiled.flight._HostElectron;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createElectronShortcutBackend = api.createElectronShortcutBackend;
+export const createElectronShortcutQueryBackend = api.createElectronShortcutQueryBackend;
+export const createElectronShortcutTriggerBackend = api.createElectronShortcutTriggerBackend;

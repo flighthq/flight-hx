@@ -4,15 +4,18 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Connectivity as Facade_Connectivity_flight__Connectivity;
-import flight.types.BackendExplanation;
 import flight.types.Connectivity;
 import flight.types.ConnectivityReachability;
 import flight.types.ConnectivityReachabilityOptions;
 import flight.types.ConnectivityStatus;
+import flight.types.HasConnectivityChange;
+import flight.types.HasConnectivityReachability;
+import flight.types.HasConnectivityStatus;
 
 class Connectivity {
-  public static function attachConnectivity(net:flight.types.Connectivity):Void {
-    Facade_Connectivity_flight__Connectivity.attachConnectivity(net);
+  public static function attachConnectivity(host:{ >HasConnectivityStatus, >HasConnectivityChange, }, connectivity:flight.types.Connectivity):Bool {
+    return cast Facade_Connectivity_flight__Connectivity.attachConnectivity(host, connectivity);
+    return cast null;
   }
 
   public static function createConnectivity():flight.types.Connectivity {
@@ -20,26 +23,30 @@ class Connectivity {
     return cast null;
   }
 
-  public static function detachConnectivity(net:flight.types.Connectivity):Void {
-    Facade_Connectivity_flight__Connectivity.detachConnectivity(net);
+  public static function destroyConnectivity(host:HasConnectivityChange):Void {
+    Facade_Connectivity_flight__Connectivity.destroyConnectivity(host);
   }
 
-  public static function detectConnectivityReachability(options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flight._internal._Promise<ConnectivityReachability> {
-    return cast Facade_Connectivity_flight__Connectivity.detectConnectivityReachability(options, out);
+  public static function detachConnectivity(connectivity:flight.types.Connectivity):Void {
+    Facade_Connectivity_flight__Connectivity.detachConnectivity(connectivity);
+  }
+
+  public static function detectConnectivityReachability(host:HasConnectivityReachability, options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flight._internal._Promise<ConnectivityReachability> {
+    return cast Facade_Connectivity_flight__Connectivity.detectConnectivityReachability(host, options, out);
     return cast null;
   }
 
-  public static function disposeConnectivity(net:flight.types.Connectivity):Void {
-    Facade_Connectivity_flight__Connectivity.disposeConnectivity(net);
+  public static function disposeConnectivity(connectivity:flight.types.Connectivity):Void {
+    Facade_Connectivity_flight__Connectivity.disposeConnectivity(connectivity);
   }
 
-  public static function explainConnectivityBackend():BackendExplanation {
-    return cast Facade_Connectivity_flight__Connectivity.explainConnectivityBackend();
+  public static function getConnectivityOnline(host:HasConnectivityStatus):Null<Bool> {
+    return cast Facade_Connectivity_flight__Connectivity.getConnectivityOnline(host);
     return cast null;
   }
 
-  public static function getConnectivityStatus(out:ConnectivityStatus):ConnectivityStatus {
-    return cast Facade_Connectivity_flight__Connectivity.getConnectivityStatus(out);
+  public static function getConnectivityStatus(host:HasConnectivityStatus, out:ConnectivityStatus):ConnectivityStatus {
+    return cast Facade_Connectivity_flight__Connectivity.getConnectivityStatus(host, out);
     return cast null;
   }
 
@@ -48,18 +55,13 @@ class Connectivity {
     return cast null;
   }
 
-  public static function isConnectivityMetered():Bool {
-    return cast Facade_Connectivity_flight__Connectivity.isConnectivityMetered();
+  public static function isConnectivityMetered(host:HasConnectivityStatus):Bool {
+    return cast Facade_Connectivity_flight__Connectivity.isConnectivityMetered(host);
     return cast null;
   }
 
-  public static function isConnectivityOnline():Bool {
-    return cast Facade_Connectivity_flight__Connectivity.isConnectivityOnline();
-    return cast null;
-  }
-
-  public static function isConnectivitySaveDataEnabled():Bool {
-    return cast Facade_Connectivity_flight__Connectivity.isConnectivitySaveDataEnabled();
+  public static function isConnectivitySaveDataEnabled(host:HasConnectivityStatus):Bool {
+    return cast Facade_Connectivity_flight__Connectivity.isConnectivitySaveDataEnabled(host);
     return cast null;
   }
 }

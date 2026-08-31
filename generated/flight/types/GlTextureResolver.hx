@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlTextureResolver = GlRenderState->TextureLike->Bool->TextureColorSpace->Null<flight._internal.dom.WebGLTexture>;
+typedef GlTextureResolver = GlRenderState->TextureLike->Bool->TextureColorSpace->Null<GlTextureRealization>;

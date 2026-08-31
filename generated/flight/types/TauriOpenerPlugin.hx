@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TauriOpenerPlugin = { var openPath:String->String->flight._internal._Promise<flight._internal._Nothing>; var openUrl:String->String->flight._internal._Promise<flight._internal._Nothing>; var revealItemInDir:String->flight._internal._Promise<flight._internal._Nothing>; };
+typedef TauriOpenerPlugin = { var openPath:String->flight._internal._Promise<flight._internal._Nothing>; var openUrl:String->flight._internal._Promise<flight._internal._Nothing>; var revealItemInDir:String->flight._internal._Promise<flight._internal._Nothing>; };

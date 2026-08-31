@@ -4,68 +4,64 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Shell as Facade_Shell_flight__Shell;
-import flight.types.BackendExplanation;
-import flight.types.ShellOpenExternalOptions;
-import flight.types.ShellOpenPathOptions;
+import flight.types.HasShellBeep;
+import flight.types.HasShellExternal;
+import flight.types.HasShellPathOpen;
+import flight.types.HasShellPathReveal;
+import flight.types.HasShellShortcutLink;
+import flight.types.HasShellTrash;
+import flight.types.ShellExternalOutcome;
+import flight.types.ShellExternalUrlPolicy;
+import flight.types.ShellPathOpenOutcome;
+import flight.types.ShellPathRevealOutcome;
 import flight.types.ShellShortcutLink;
+import flight.types.ShellShortcutLinkReadOutcome;
+import flight.types.ShellShortcutLinkWriteOutcome;
 import flight.types.ShellShortcutWriteOperation;
+import flight.types.ShellTrashOutcome;
 
 class Shell {
-  public static function explainShellBackend():BackendExplanation {
-    return cast Facade_Shell_flight__Shell.explainShellBackend();
+  public static function isShellUrlAllowed(url:String, policy:ShellExternalUrlPolicy):Bool {
+    return cast Facade_Shell_flight__Shell.isShellUrlAllowed(url, policy);
     return cast null;
   }
 
-  public static function isShellUrlAllowed(url:String):Bool {
-    return cast Facade_Shell_flight__Shell.isShellUrlAllowed(url);
+  public static function moveShellItemsToTrash(host:HasShellTrash, paths:Array<String>):flight._internal._Promise<Array<ShellTrashOutcome>> {
+    return cast Facade_Shell_flight__Shell.moveShellItemsToTrash(host, paths);
     return cast null;
   }
 
-  public static function moveItemsToTrash(paths:Array<String>):flight._internal._Promise<Array<Bool>> {
-    return cast Facade_Shell_flight__Shell.moveItemsToTrash(paths);
+  public static function moveShellItemToTrash(host:HasShellTrash, path:String):flight._internal._Promise<ShellTrashOutcome> {
+    return cast Facade_Shell_flight__Shell.moveShellItemToTrash(host, path);
     return cast null;
   }
 
-  public static function moveItemToTrash(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_Shell_flight__Shell.moveItemToTrash(path);
+  public static function openShellExternalUrl(host:HasShellExternal, url:String, policy:ShellExternalUrlPolicy):flight._internal._Promise<ShellExternalOutcome> {
+    return cast Facade_Shell_flight__Shell.openShellExternalUrl(host, url, policy);
     return cast null;
   }
 
-  public static function openShellExternalUrl(url:String, ?options:ShellOpenExternalOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Shell_flight__Shell.openShellExternalUrl(url, options);
+  public static function openShellPath(host:HasShellPathOpen, path:String):flight._internal._Promise<ShellPathOpenOutcome> {
+    return cast Facade_Shell_flight__Shell.openShellPath(host, path);
     return cast null;
   }
 
-  public static function openShellPath(path:String, ?options:ShellOpenPathOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Shell_flight__Shell.openShellPath(path, options);
+  public static function readShellShortcutLink(host:HasShellShortcutLink, shortcutPath:String):flight._internal._Promise<ShellShortcutLinkReadOutcome> {
+    return cast Facade_Shell_flight__Shell.readShellShortcutLink(host, shortcutPath);
     return cast null;
   }
 
-  public static function openShellPathResult(path:String, ?options:ShellOpenPathOptions):flight._internal._Promise<String> {
-    return cast Facade_Shell_flight__Shell.openShellPathResult(path, options);
+  public static function revealShellPath(host:HasShellPathReveal, path:String):flight._internal._Promise<ShellPathRevealOutcome> {
+    return cast Facade_Shell_flight__Shell.revealShellPath(host, path);
     return cast null;
   }
 
-  public static function readShellShortcutLink(shortcutPath:String):flight._internal._Promise<Null<ShellShortcutLink>> {
-    return cast Facade_Shell_flight__Shell.readShellShortcutLink(shortcutPath);
-    return cast null;
+  public static function shellBeep(host:HasShellBeep):Void {
+    Facade_Shell_flight__Shell.shellBeep(host);
   }
 
-  public static function setShellUrlSchemeAllowlist(schemes:Null<Array<String>>):Void {
-    Facade_Shell_flight__Shell.setShellUrlSchemeAllowlist(schemes);
-  }
-
-  public static function shellBeep():Void {
-    Facade_Shell_flight__Shell.shellBeep();
-  }
-
-  public static function showItemInFolder(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_Shell_flight__Shell.showItemInFolder(path);
-    return cast null;
-  }
-
-  public static function writeShellShortcutLink(shortcutPath:String, link:ShellShortcutLink, ?operation:ShellShortcutWriteOperation):flight._internal._Promise<Bool> {
-    return cast Facade_Shell_flight__Shell.writeShellShortcutLink(shortcutPath, link, operation);
+  public static function writeShellShortcutLink(host:HasShellShortcutLink, shortcutPath:String, link:ShellShortcutLink, operation:ShellShortcutWriteOperation):flight._internal._Promise<ShellShortcutLinkWriteOutcome> {
+    return cast Facade_Shell_flight__Shell.writeShellShortcutLink(host, shortcutPath, link, operation);
     return cast null;
   }
 }

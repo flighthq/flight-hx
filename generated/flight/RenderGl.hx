@@ -5,16 +5,22 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._RenderGl as Facade_RenderGl_flight__RenderGl;
 import flight.types.CreateExternalTextureOptions;
+import flight.types.GlBlendRealization;
 import flight.types.GlCompressedTextureDecoder;
 import flight.types.GlContext;
 import flight.types.GlContextOptions;
+import flight.types.GlContextState;
+import flight.types.GlPipeline;
 import flight.types.GlRenderOptions;
+import flight.types.GlRenderRegistries;
 import flight.types.GlRenderState;
 import flight.types.GlRenderTarget;
 import flight.types.GlRenderTextureExplanation;
 import flight.types.GlRenderTexturePool;
+import flight.types.GlTextureRealization;
 import flight.types.GlTextureResolver;
 import flight.types.Image;
+import flight.types.KeyedTable;
 import flight.types.Matrix;
 import flight.types.RenderPassPreserve;
 import flight.types.RenderTargetAxes;
@@ -62,8 +68,9 @@ class RenderGl {
     Facade_RenderGl_flight__RenderGl.clearGlRenderTexture(state, renderTexture);
   }
 
-  public static function copyGlRenderStateRegistrations(target:GlRenderState, source:GlRenderState):Void {
-    Facade_RenderGl_flight__RenderGl.copyGlRenderStateRegistrations(target, source);
+  public static function createEmptyGlRegistries():GlRenderRegistries {
+    return cast Facade_RenderGl_flight__RenderGl.createEmptyGlRegistries();
+    return cast null;
   }
 
   public static function createExternalGlTexture(state:GlRenderState, handle:flight._internal.dom.WebGLTexture, options:CreateExternalTextureOptions):Texture {
@@ -81,13 +88,23 @@ class RenderGl {
     return cast null;
   }
 
-  public static function createGlOffscreenRenderState(screenState:GlRenderState):GlRenderState {
-    return cast Facade_RenderGl_flight__RenderGl.createGlOffscreenRenderState(screenState);
+  public static function createGlContextState(gl:GlContext):GlContextState {
+    return cast Facade_RenderGl_flight__RenderGl.createGlContextState(gl);
     return cast null;
   }
 
-  public static function createGlRenderState(gl:GlContext, ?options:GlRenderOptions):GlRenderState {
-    return cast Facade_RenderGl_flight__RenderGl.createGlRenderState(gl, options);
+  public static function createGlOffscreenRenderState(contextState:GlContextState, pipeline:GlPipeline, ?options:GlRenderOptions):GlRenderState {
+    return cast Facade_RenderGl_flight__RenderGl.createGlOffscreenRenderState(contextState, pipeline, options);
+    return cast null;
+  }
+
+  public static function createGlPipeline(registries:GlRenderRegistries):GlPipeline {
+    return cast Facade_RenderGl_flight__RenderGl.createGlPipeline(registries);
+    return cast null;
+  }
+
+  public static function createGlRenderState(contextState:GlContextState, pipeline:GlPipeline, ?options:GlRenderOptions):GlRenderState {
+    return cast Facade_RenderGl_flight__RenderGl.createGlRenderState(contextState, pipeline, options);
     return cast null;
   }
 
@@ -171,6 +188,11 @@ class RenderGl {
     return cast null;
   }
 
+  public static function getGlPipelineRegistries(pipeline:GlPipeline):GlRenderRegistries {
+    return cast Facade_RenderGl_flight__RenderGl.getGlPipelineRegistries(pipeline);
+    return cast null;
+  }
+
   public static function isGlRenderTargetFormatSupported(state:GlRenderState, format:RenderTargetFormat):Bool {
     return cast Facade_RenderGl_flight__RenderGl.isGlRenderTargetFormatSupported(state, format);
     return cast null;
@@ -241,6 +263,10 @@ class RenderGl {
   public static function setGlRenderTransform2D(state:GlRenderState, transform:Matrix):Void {
     Facade_RenderGl_flight__RenderGl.setGlRenderTransform2D(state, transform);
   }
+
+  public static final standardGlBlendRealizations:KeyedTable<GlBlendRealization> = Facade_RenderGl_flight__RenderGl._standardGlBlendRealizations__glDraw;
+
+  public static final standardGlTextureResolvers:KeyedTable<GlRenderState->TextureLike->Bool->TextureColorSpace->Null<GlTextureRealization>> = Facade_RenderGl_flight__RenderGl._standardGlTextureResolvers__glTextureResolver;
 
   public static function uploadGlCompressedTextureContainer(gl:GlContext, container:TextureContainer, payload:flight._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
     return cast Facade_RenderGl_flight__RenderGl.uploadGlCompressedTextureContainer(gl, container, payload, decode, colorSpace);

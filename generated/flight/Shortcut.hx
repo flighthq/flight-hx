@@ -6,59 +6,46 @@ import flight._internal._Runtime;
 import flight._Shortcut as Facade_Shortcut_flight__Shortcut;
 import flight.types.Accelerator;
 import flight.types.AcceleratorParseError;
-import flight.types.BackendExplanation;
-import flight.types.GlobalShortcutExplanation;
+import flight.types.CreateGlobalShortcutOutcome;
+import flight.types.GlobalShortcut;
+import flight.types.GlobalShortcutAttachOutcome;
+import flight.types.GlobalShortcutDetachOutcome;
+import flight.types.GlobalShortcutQueryOutcome;
+import flight.types.HasShortcutQuery;
+import flight.types.HasShortcutTrigger;
 import flight.types.ParsedAccelerator;
-import flight.types.ShortcutEvent;
+import flight.types.PlatformName;
 import flight.types.ShortcutKeyName;
 import flight.types.ShortcutModifier;
-import flight.types.ShortcutSignals;
 
 class Shortcut {
-  public static function createParsedAccelerator():ParsedAccelerator {
-    return cast Facade_Shortcut_flight__Shortcut.createParsedAccelerator();
+  public static function attachGlobalShortcut(host:HasShortcutTrigger, shortcut:GlobalShortcut):flight._internal._Promise<GlobalShortcutAttachOutcome> {
+    return cast Facade_Shortcut_flight__Shortcut.attachGlobalShortcut(host, shortcut);
     return cast null;
   }
 
-  public static function disableGlobalShortcut(accelerator:String):Bool {
-    return cast Facade_Shortcut_flight__Shortcut.disableGlobalShortcut(accelerator);
+  public static function createGlobalShortcut(accelerator:String):CreateGlobalShortcutOutcome {
+    return cast Facade_Shortcut_flight__Shortcut.createGlobalShortcut(accelerator);
     return cast null;
   }
 
-  public static function disableShortcutGuards():Void {
-    Facade_Shortcut_flight__Shortcut.disableShortcutGuards();
-  }
-
-  public static function disposeGlobalShortcutSignals():Void {
-    Facade_Shortcut_flight__Shortcut.disposeGlobalShortcutSignals();
-  }
-
-  public static function enableGlobalShortcut(accelerator:String):Bool {
-    return cast Facade_Shortcut_flight__Shortcut.enableGlobalShortcut(accelerator);
+  public static function destroyShortcutTrigger(host:HasShortcutTrigger):flight._internal._Promise<flight._internal._Nothing> {
+    return cast Facade_Shortcut_flight__Shortcut.destroyShortcutTrigger(host);
     return cast null;
   }
 
-  public static function enableGlobalShortcutSignals():ShortcutSignals {
-    return cast Facade_Shortcut_flight__Shortcut.enableGlobalShortcutSignals();
+  public static function detachGlobalShortcut(host:HasShortcutTrigger, shortcut:GlobalShortcut):flight._internal._Promise<GlobalShortcutDetachOutcome> {
+    return cast Facade_Shortcut_flight__Shortcut.detachGlobalShortcut(host, shortcut);
     return cast null;
   }
 
-  public static function enableShortcutGuards():Void {
-    Facade_Shortcut_flight__Shortcut.enableShortcutGuards();
+  public static function disposeGlobalShortcut(host:HasShortcutTrigger, shortcut:GlobalShortcut):flight._internal._Promise<GlobalShortcutDetachOutcome> {
+    return cast Facade_Shortcut_flight__Shortcut.disposeGlobalShortcut(host, shortcut);
+    return cast null;
   }
 
   public static function equalsAccelerator(a:String, b:String):Bool {
     return cast Facade_Shortcut_flight__Shortcut.equalsAccelerator(a, b);
-    return cast null;
-  }
-
-  public static function explainGlobalShortcutRegistration(accelerator:String):GlobalShortcutExplanation {
-    return cast Facade_Shortcut_flight__Shortcut.explainGlobalShortcutRegistration(accelerator);
-    return cast null;
-  }
-
-  public static function explainShortcutBackend():BackendExplanation {
-    return cast Facade_Shortcut_flight__Shortcut.explainShortcutBackend();
     return cast null;
   }
 
@@ -67,7 +54,7 @@ class Shortcut {
     return cast null;
   }
 
-  public static function formatAcceleratorForDisplay(accelerator:String, ?platform:String):String {
+  public static function formatAcceleratorForDisplay(accelerator:String, platform:PlatformName):String {
     return cast Facade_Shortcut_flight__Shortcut.formatAcceleratorForDisplay(accelerator, platform);
     return cast null;
   }
@@ -82,7 +69,7 @@ class Shortcut {
     return cast null;
   }
 
-  public static function getAcceleratorModifierLabel(modifier:ShortcutModifier, ?platform:String):String {
+  public static function getAcceleratorModifierLabel(modifier:ShortcutModifier, platform:PlatformName):String {
     return cast Facade_Shortcut_flight__Shortcut.getAcceleratorModifierLabel(modifier, platform);
     return cast null;
   }
@@ -92,28 +79,13 @@ class Shortcut {
     return cast null;
   }
 
-  public static function getRegisteredGlobalShortcuts():Array<Accelerator> {
-    return cast Facade_Shortcut_flight__Shortcut.getRegisteredGlobalShortcuts();
-    return cast null;
-  }
-
-  public static function hasGlobalShortcutConflict(accelerator:String):Bool {
-    return cast Facade_Shortcut_flight__Shortcut.hasGlobalShortcutConflict(accelerator);
-    return cast null;
-  }
-
-  public static function hasNativeShortcutBackend():Bool {
-    return cast Facade_Shortcut_flight__Shortcut.hasNativeShortcutBackend();
-    return cast null;
-  }
-
   public static function isAcceleratorValid(input:String):Bool {
     return cast Facade_Shortcut_flight__Shortcut.isAcceleratorValid(input);
     return cast null;
   }
 
-  public static function isGlobalShortcutRegistered(accelerator:String):Bool {
-    return cast Facade_Shortcut_flight__Shortcut.isGlobalShortcutRegistered(accelerator);
+  public static function makeParsedAccelerator():ParsedAccelerator {
+    return cast Facade_Shortcut_flight__Shortcut.makeParsedAccelerator();
     return cast null;
   }
 
@@ -132,30 +104,18 @@ class Shortcut {
     return cast null;
   }
 
-  public static function registerGlobalShortcut(accelerator:String, handler:ShortcutEvent->Void):Bool {
-    return cast Facade_Shortcut_flight__Shortcut.registerGlobalShortcut(accelerator, handler);
+  public static function queryGlobalShortcutConflict(host:HasShortcutQuery, accelerator:String):flight._internal._Promise<GlobalShortcutQueryOutcome> {
+    return cast Facade_Shortcut_flight__Shortcut.queryGlobalShortcutConflict(host, accelerator);
     return cast null;
   }
 
-  public static function resolveCommandOrControlModifier(?platform:String):flight._internal._Exclude<ShortcutModifier, String> {
+  public static function queryGlobalShortcutRegistration(host:HasShortcutQuery, accelerator:String):flight._internal._Promise<GlobalShortcutQueryOutcome> {
+    return cast Facade_Shortcut_flight__Shortcut.queryGlobalShortcutRegistration(host, accelerator);
+    return cast null;
+  }
+
+  public static function resolveCommandOrControlModifier(platform:PlatformName):flight._internal._Exclude<ShortcutModifier, String> {
     return cast Facade_Shortcut_flight__Shortcut.resolveCommandOrControlModifier(platform);
-    return cast null;
-  }
-
-  public static function resumeAllGlobalShortcuts():Void {
-    Facade_Shortcut_flight__Shortcut.resumeAllGlobalShortcuts();
-  }
-
-  public static function suspendAllGlobalShortcuts():Void {
-    Facade_Shortcut_flight__Shortcut.suspendAllGlobalShortcuts();
-  }
-
-  public static function unregisterAllGlobalShortcuts():Void {
-    Facade_Shortcut_flight__Shortcut.unregisterAllGlobalShortcuts();
-  }
-
-  public static function unregisterGlobalShortcut(accelerator:String):Bool {
-    return cast Facade_Shortcut_flight__Shortcut.unregisterGlobalShortcut(accelerator);
     return cast null;
   }
 }

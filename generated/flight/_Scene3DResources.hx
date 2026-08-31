@@ -74,6 +74,7 @@ import flight.types.GltfBuffer;
 import flight.types.GltfDocument;
 import flight.types.GltfExtensionHandler;
 import flight.types.GltfScene3DDocumentLoadOptions;
+import flight.types.HasNetHttp;
 import flight.types.Image;
 import flight.types.ImageResourceFailure;
 import flight.types.ImageResourceFailureKind;
@@ -165,24 +166,24 @@ class _Scene3DResources {
     }; __callArgument1; }));
   }
 
-  public static function loadScene3DDocumentFromAwd2Url(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+  public static function loadScene3DDocumentFromAwd2Url(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var bytes:Null<flight._internal._UInt8Array> = cast _Runtime.UNDEFINED;
         var document:Scene3DDocument = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl((cast url : String), ({ final __callArgument16:Dynamic = options; __callArgument16; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), function(__awaitValue10:Dynamic):Dynamic {
-          bytes = __awaitValue10;
-          var __flowBranch11:Dynamic;
+        return flight._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl(({ final __callArgument18:Dynamic = host; __callArgument18; }), (cast url : String), ({ final __callArgument19:Dynamic = options; __callArgument19; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), function(__awaitValue12:Dynamic):Dynamic {
+          bytes = __awaitValue12;
+          var __flowBranch13:Dynamic;
           if ((cast _Runtime.strictEquals(bytes, null) : Bool)) {
-            __flowBranch11 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch13 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch11 = flight._internal._Async.flowNormal();
+            __flowBranch13 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch11, function():Dynamic {
-            document = (cast (#if js _Runtime.callValue(parseAwd2, cast ([({ final __callArgument13:Dynamic = bytes; __callArgument13; })] : Array<Dynamic>)) #else parseAwd2(({ final __callArgument12:Dynamic = bytes; __callArgument12; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3DDocument);
-            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument14:Dynamic = document; __callArgument14; }), (cast url : String));
+          return flight._internal._Async.continueFlow(__flowBranch13, function():Dynamic {
+            document = (cast (#if js _Runtime.callValue(parseAwd2, cast ([({ final __callArgument15:Dynamic = bytes; __callArgument15; })] : Array<Dynamic>)) #else parseAwd2(({ final __callArgument14:Dynamic = bytes; __callArgument14; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3DDocument);
+            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument16:Dynamic = document; __callArgument16; }), (cast url : String));
             return flight._internal._Async.flowReturn(document);
           });
         });
@@ -193,13 +194,13 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function registerClearcoatPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures(({ final __callArgument18:Dynamic = registry; __callArgument18; }), (cast ClearcoatPbrExtensionKind : String), ({ final __callArgument19:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures(({ final __callArgument22:Dynamic = registry; __callArgument22; }), (cast ClearcoatPbrExtensionKind : String), ({ final __callArgument23:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var clearcoat:ClearcoatPbrExtension = cast _Runtime.UNDEFINED;
       clearcoat = (cast extension : ClearcoatPbrExtension);
       if ((cast !_Runtime.strictEquals(clearcoat.clearcoatMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([clearcoat.clearcoatMap] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(clearcoat.clearcoatNormalMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([clearcoat.clearcoatNormalMap] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(clearcoat.clearcoatRoughnessMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([clearcoat.clearcoatRoughnessMap] : Array<Dynamic>)); }
-    }; __callArgument19; }));
+    }; __callArgument23; }));
   }
 
   public static function areScene3DResourceFailureGuardsEnabled(resolver:Scene3DResourceResolver):Bool {
@@ -212,7 +213,7 @@ class _Scene3DResources {
     var signals:Scene3DResourceSignals = cast _Runtime.UNDEFINED;
     guard = ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).get(resolver));
     if ((cast _Runtime.strictEquals(guard, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    signals = (cast enableScene3DResourceSignals(({ final __callArgument22:Dynamic = resolver; __callArgument22; })) : Scene3DResourceSignals);
+    signals = (cast enableScene3DResourceSignals(({ final __callArgument26:Dynamic = resolver; __callArgument26; })) : Scene3DResourceSignals);
     disconnectSignal((cast signals.onResourceFailed : Dynamic), (cast guard : Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards).failed);
     disconnectSignal((cast signals.onResourceResolved : Dynamic), (cast guard : Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards).resolved);
     ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).delete_(resolver));
@@ -223,23 +224,23 @@ class _Scene3DResources {
     var signals:Scene3DResourceSignals = cast _Runtime.UNDEFINED;
     var failed:Scene3DResourceEvent->Void = cast _Runtime.UNDEFINED;
     var resolved:Scene3DResourceEvent->Void = cast _Runtime.UNDEFINED;
-    if ((cast ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).has(resolver)) : Bool)) { return cast function():Void { disableScene3DResourceFailureGuards(({ final __callArgument24:Dynamic = resolver; __callArgument24; })); }; }
+    if ((cast ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).has(resolver)) : Bool)) { return cast function():Void { disableScene3DResourceFailureGuards(({ final __callArgument28:Dynamic = resolver; __callArgument28; })); }; }
     warned = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
-    signals = (cast enableScene3DResourceSignals(({ final __callArgument26:Dynamic = resolver; __callArgument26; })) : Scene3DResourceSignals);
+    signals = (cast enableScene3DResourceSignals(({ final __callArgument30:Dynamic = resolver; __callArgument30; })) : Scene3DResourceSignals);
     failed = (cast function(event:Scene3DResourceEvent):Void {
       var explanation:ImageResourceReferenceResolutionExplanation = cast _Runtime.UNDEFINED;
       if ((cast ((cast ((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).has(event.ref)) : Bool) && (cast _Runtime.strictEquals(((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).get(event.ref)), (cast event.ref : { var failure:Null<ImageResourceFailure>; }).failure) : Bool)) : Bool)) { return; }
       ((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).set(event.ref, (cast (cast event.ref : { var failure:Null<ImageResourceFailure>; }).failure)));
       explanation = (cast explainImageResourceReferenceResolution(event.ref) : ImageResourceReferenceResolutionExplanation);
-      (cast logOnce((cast 'scene-resources:image-resource-resolution-failed:' + Std.string(++_Scene3DResources._attemptId__enableScene3DResourceFailureGuards) + '' : String), ({ final __callArgument28:Dynamic = LogLevel.Warn; __callArgument28; }), (cast { failureKind: _Runtime.coalesce(({ final __structural29 = (cast explanation : ImageResourceReferenceResolutionExplanation).failure; __structural29 == null ? _Runtime.UNDEFINED : (cast __structural29 : { var kind:ImageResourceFailureKind; }).kind; }), function():Dynamic return cast null), failureName: _Runtime.coalesce(({ final __structural30 = (cast explanation : ImageResourceReferenceResolutionExplanation).failure; __structural30 == null ? _Runtime.UNDEFINED : (cast __structural30 : { var name:Null<String>; }).name; }), function():Dynamic return cast null), failureMessage: _Runtime.coalesce(({ final __structural31 = (cast explanation : ImageResourceReferenceResolutionExplanation).failure; __structural31 == null ? _Runtime.UNDEFINED : (cast __structural31 : { var message:String; }).message; }), function():Dynamic return cast null), message: 'Scene3D resource acquisition failed — call retryFailedScene3DResources to request it again', resourceKind: (cast explanation : ImageResourceReferenceResolutionExplanation).kind } : Dynamic), ({ final __callArgument32:Dynamic = 'scene-resources'; __callArgument32; })) : Bool);
+      (cast logOnce((cast 'scene-resources:image-resource-resolution-failed:' + Std.string(++_Scene3DResources._attemptId__enableScene3DResourceFailureGuards) + '' : String), ({ final __callArgument32:Dynamic = LogLevel.Warn; __callArgument32; }), (cast { failureKind: _Runtime.coalesce(({ final __structural33 = (cast explanation : ImageResourceReferenceResolutionExplanation).failure; __structural33 == null ? _Runtime.UNDEFINED : (cast __structural33 : { var kind:ImageResourceFailureKind; }).kind; }), function():Dynamic return cast null), failureName: _Runtime.coalesce(({ final __structural34 = (cast explanation : ImageResourceReferenceResolutionExplanation).failure; __structural34 == null ? _Runtime.UNDEFINED : (cast __structural34 : { var name:Null<String>; }).name; }), function():Dynamic return cast null), failureMessage: _Runtime.coalesce(({ final __structural35 = (cast explanation : ImageResourceReferenceResolutionExplanation).failure; __structural35 == null ? _Runtime.UNDEFINED : (cast __structural35 : { var message:String; }).message; }), function():Dynamic return cast null), message: 'Scene3D resource acquisition failed — call retryFailedScene3DResources to request it again', resourceKind: (cast explanation : ImageResourceReferenceResolutionExplanation).kind } : Dynamic), ({ final __callArgument36:Dynamic = 'scene-resources'; __callArgument36; })) : Bool);
     });
     resolved = (cast function(event:Scene3DResourceEvent):Void {
       ((cast warned : flight._internal._WeakMap<ImageResourceReference, Null<ImageResourceFailure>>).delete_(event.ref));
     });
-    (#if js _Runtime.callValue(connectSignal, cast ([(cast signals.onResourceFailed : Dynamic), ({ final __callArgument39:Dynamic = failed; __callArgument39; })] : Array<Dynamic>)) #else connectSignal((cast signals.onResourceFailed : Dynamic), ({ final __callArgument38:Dynamic = failed; __callArgument38; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    (#if js _Runtime.callValue(connectSignal, cast ([(cast signals.onResourceResolved : Dynamic), ({ final __callArgument41:Dynamic = resolved; __callArgument41; })] : Array<Dynamic>)) #else connectSignal((cast signals.onResourceResolved : Dynamic), ({ final __callArgument40:Dynamic = resolved; __callArgument40; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast signals.onResourceFailed : Dynamic), ({ final __callArgument43:Dynamic = failed; __callArgument43; })] : Array<Dynamic>)) #else connectSignal((cast signals.onResourceFailed : Dynamic), ({ final __callArgument42:Dynamic = failed; __callArgument42; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast signals.onResourceResolved : Dynamic), ({ final __callArgument45:Dynamic = resolved; __callArgument45; })] : Array<Dynamic>)) #else connectSignal((cast signals.onResourceResolved : Dynamic), ({ final __callArgument44:Dynamic = resolved; __callArgument44; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     ((cast _Scene3DResources._guards__enableScene3DResourceFailureGuards : flight._internal._WeakMap<Scene3DResourceResolver, Scene3DResourceFailureGuard__enableScene3DResourceFailureGuards>).set(resolver, (cast { failed: failed, resolved: resolved })));
-    return cast function():Void { disableScene3DResourceFailureGuards(({ final __callArgument42:Dynamic = resolver; __callArgument42; })); };
+    return cast function():Void { disableScene3DResourceFailureGuards(({ final __callArgument46:Dynamic = resolver; __callArgument46; })); };
     return cast null;
   }
 
@@ -249,13 +250,13 @@ class _Scene3DResources {
 
   public static function explainScene3DResourceCoverage(out:Array<SceneCoverageEntry>, resolver:Scene3DResourceResolver, usage:Scene3DKindUsage, catalog:SceneCoverageCatalog):Void {
     _Runtime.setLength(out, 0.0);
-    (cast _Scene3DResources.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage(({ final __callArgument44:Dynamic = out; __callArgument44; }), ({ final __callArgument45:Dynamic = resolver; __callArgument45; }), ({ final __callArgument46:Dynamic = usage; __callArgument46; }), (cast false : Bool), ({ final __callArgument47:Dynamic = catalog; __callArgument47; })) : Bool);
+    (cast _Scene3DResources.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage(({ final __callArgument48:Dynamic = out; __callArgument48; }), ({ final __callArgument49:Dynamic = resolver; __callArgument49; }), ({ final __callArgument50:Dynamic = usage; __callArgument50; }), (cast false : Bool), ({ final __callArgument51:Dynamic = catalog; __callArgument51; })) : Bool);
   }
 
   @:allow(flight)
   @:keep
   private static function hasScene3DResourceCoverage(resolver:Scene3DResourceResolver, usage:Scene3DKindUsage):Bool {
-    return cast !(cast (cast _Scene3DResources.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage(({ final __callArgument52:Dynamic = null; __callArgument52; }), ({ final __callArgument53:Dynamic = resolver; __callArgument53; }), ({ final __callArgument54:Dynamic = usage; __callArgument54; }), (cast true : Bool), ({ final __callArgument55:Dynamic = null; __callArgument55; })) : Bool) : Bool);
+    return cast !(cast (cast _Scene3DResources.collectScene3DResourceCoverageGaps__explainScene3DResourceCoverage(({ final __callArgument56:Dynamic = null; __callArgument56; }), ({ final __callArgument57:Dynamic = resolver; __callArgument57; }), ({ final __callArgument58:Dynamic = usage; __callArgument58; }), (cast true : Bool), ({ final __callArgument59:Dynamic = null; __callArgument59; })) : Bool) : Bool);
     return cast null;
   }
 
@@ -273,7 +274,7 @@ class _Scene3DResources {
         }
         (found = cast (true : Dynamic));
         if ((cast stopAtFirst : Bool)) { return cast true; }
-        _Runtime.callOptionalProperty(out, 'push', cast ([(cast _Scene3DResources.createShortfallEntry__explainScene3DResourceCoverage(({ final __callArgument60:Dynamic = catalog; __callArgument60; }), (cast false : Bool), ({ final __callArgument61:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument61; }), (cast kind : String), ({ final __callArgument62:Dynamic = RenderRegistry.MaterialTextureLister; __callArgument62; })) : SceneCoverageEntry)] : Array<Dynamic>));
+        _Runtime.callOptionalProperty(out, 'push', cast ([(cast _Scene3DResources.createShortfallEntry__explainScene3DResourceCoverage(({ final __callArgument64:Dynamic = catalog; __callArgument64; }), (cast false : Bool), ({ final __callArgument65:Dynamic = (cast RequirementFacetValue : { var CompressionKind:String; var DocumentFormat:String; var Physics2DJointKind:String; var SceneBlendMode:String; var SceneMaterialKind:String; var SceneModifierKind:String; var SceneNodeKind:String; var SceneResourceMimeType:String; var SceneShapeCommand:String; var SceneTextureSourceKind:String; }).SceneMaterialKind; __callArgument65; }), (cast kind : String), ({ final __callArgument66:Dynamic = RenderRegistry.MaterialTextureLister; __callArgument66; })) : SceneCoverageEntry)] : Array<Dynamic>));
         i++;
       }
     }
@@ -284,7 +285,7 @@ class _Scene3DResources {
   public static function createShortfallEntry__explainScene3DResourceCoverage(catalog:Null<SceneCoverageCatalog>, fallback:Bool, facet:flight._internal._IndexedAccess<SceneCoverageEntry, String>, kind:Kind, registry:flight._internal._IndexedAccess<SceneCoverageEntry, String>):SceneCoverageEntry {
     var registration:Null<CatalogRegistration> = cast _Runtime.UNDEFINED;
     var base:{ var facet:RequirementFacet; var kind:String; var registry:RenderRegistry; } = cast _Runtime.UNDEFINED;
-    registration = (cast _Scene3DResources.findCatalogRegistration__explainScene3DResourceCoverage(({ final __callArgument66:Dynamic = catalog; __callArgument66; }), (cast kind : String), ({ final __callArgument67:Dynamic = registry; __callArgument67; })) : Null<CatalogRegistration>);
+    registration = (cast _Scene3DResources.findCatalogRegistration__explainScene3DResourceCoverage(({ final __callArgument70:Dynamic = catalog; __callArgument70; }), (cast kind : String), ({ final __callArgument71:Dynamic = registry; __callArgument71; })) : Null<CatalogRegistration>);
     base = (cast { facet: facet, kind: kind, registry: registry });
     if ((cast _Runtime.strictEquals(registration, null) : Bool)) {
       return cast _Runtime.mergeObjects([base, { coverage: ((cast fallback : Bool) ? (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).FallbackUnavailable : Dynamic) : (cast (cast SceneCoverageValue : { var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; }).Unavailable : Dynamic)) }]);
@@ -325,46 +326,46 @@ class _Scene3DResources {
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromGlbUrl(url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+  public static function loadScene3DDocumentFromGlbUrl(host:HasNetHttp, url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var bytes:Null<flight._internal._UInt8Array> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl((cast url : String), ({ final __callArgument94:Dynamic = options; __callArgument94; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), function(__awaitValue86:Dynamic):Dynamic {
-          bytes = __awaitValue86;
-          var __flowBranch87:Dynamic;
+        return flight._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl(({ final __callArgument100:Dynamic = host; __callArgument100; }), (cast url : String), ({ final __callArgument101:Dynamic = options; __callArgument101; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), function(__awaitValue92:Dynamic):Dynamic {
+          bytes = __awaitValue92;
+          var __flowBranch93:Dynamic;
           if ((cast _Runtime.strictEquals(bytes, null) : Bool)) {
-            __flowBranch87 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch93 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch87 = flight._internal._Async.flowNormal();
+            __flowBranch93 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch87, function():Dynamic {
-            return flight._internal._Async.flowReturn((cast parseGlb(({ final __callArgument88:Dynamic = bytes; __callArgument88; }), (cast ({ final __structural89 = options; __structural89 == null ? _Runtime.UNDEFINED : (cast __structural89 : { @:optional var diagnostics:Null<Array<ImportDiagnostic>>; }).diagnostics; }) : Dynamic), (cast { basePath: (cast getScene3DDocumentBasePathFromUrl((cast url : String)) : Null<String>), extensionHandlers: ({ final __structural90 = options; __structural90 == null ? _Runtime.UNDEFINED : (cast __structural90 : { @:optional var extensionHandlers:Null<Array<GltfExtensionHandler>>; }).extensionHandlers; }) } : Dynamic)) : Scene3DDocument));
+          return flight._internal._Async.continueFlow(__flowBranch93, function():Dynamic {
+            return flight._internal._Async.flowReturn((cast parseGlb(({ final __callArgument94:Dynamic = bytes; __callArgument94; }), (cast ({ final __structural95 = options; __structural95 == null ? _Runtime.UNDEFINED : (cast __structural95 : { @:optional var diagnostics:Null<Array<ImportDiagnostic>>; }).diagnostics; }) : Dynamic), (cast { basePath: (cast getScene3DDocumentBasePathFromUrl((cast url : String)) : Null<String>), extensionHandlers: ({ final __structural96 = options; __structural96 == null ? _Runtime.UNDEFINED : (cast __structural96 : { @:optional var extensionHandlers:Null<Array<GltfExtensionHandler>>; }).extensionHandlers; }) } : Dynamic)) : Scene3DDocument));
           });
         });
       })
     );
   }
 
-  public static function loadScene3DDocumentFromGltfUrl(url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+  public static function loadScene3DDocumentFromGltfUrl(host:HasNetHttp, url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var source:Null<String> = cast _Runtime.UNDEFINED;
         var gltf:GltfDocument = cast _Runtime.UNDEFINED;
         var basePath:Null<String> = cast _Runtime.UNDEFINED;
         var externalBuffers:Null<flight._internal._Record<String, flight._internal._UInt8Array>> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl((cast url : String), ({ final __callArgument127:Dynamic = options; __callArgument127; })) : flight._internal._Promise<Null<String>>), function(__awaitValue110:Dynamic):Dynamic {
-          source = __awaitValue110;
-          var __flowBranch111:Dynamic;
+        return flight._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl(({ final __callArgument141:Dynamic = host; __callArgument141; }), (cast url : String), ({ final __callArgument142:Dynamic = options; __callArgument142; })) : flight._internal._Promise<Null<String>>), function(__awaitValue122:Dynamic):Dynamic {
+          source = __awaitValue122;
+          var __flowBranch123:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-            __flowBranch111 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch123 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch111 = flight._internal._Async.flowNormal();
+            __flowBranch123 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch111, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch123, function():Dynamic {
             return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
               (gltf = cast ((cast _Runtime.jsonParse(source) : GltfDocument) : Dynamic));
               return flight._internal._Async.flowNormal();
@@ -374,28 +375,28 @@ class _Scene3DResources {
                 return flight._internal._Async.flowReturn(null);
               });
             }), function():Dynamic {
-              var __flowBranch112:Dynamic;
+              var __flowBranch124:Dynamic;
               if ((cast ((cast _Runtime.strictEquals(gltf, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(gltf), 'object') : Bool)) : Bool)) {
-                __flowBranch112 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch124 = flight._internal._Async.protect(function():Dynamic {
                   return flight._internal._Async.flowReturn(null);
                 });
               } else {
-                __flowBranch112 = flight._internal._Async.flowNormal();
+                __flowBranch124 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch112, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch124, function():Dynamic {
                 basePath = (cast getScene3DDocumentBasePathFromUrl((cast url : String)) : Null<String>);
-                return flight._internal._Async.flatMap((cast _Scene3DResources.loadGltfExternalBuffers__gltfLoad(({ final __callArgument121:Dynamic = gltf; __callArgument121; }), ({ final __callArgument122:Dynamic = basePath; __callArgument122; }), ({ final __callArgument123:Dynamic = options; __callArgument123; })) : flight._internal._Promise<Null<flight._internal._Record<String, flight._internal._UInt8Array>>>), function(__awaitValue113:Dynamic):Dynamic {
-                  externalBuffers = __awaitValue113;
-                  var __flowBranch114:Dynamic;
+                return flight._internal._Async.flatMap((cast _Scene3DResources.loadGltfExternalBuffers__gltfLoad(({ final __callArgument133:Dynamic = host; __callArgument133; }), ({ final __callArgument134:Dynamic = gltf; __callArgument134; }), ({ final __callArgument135:Dynamic = basePath; __callArgument135; }), ({ final __callArgument136:Dynamic = options; __callArgument136; })) : flight._internal._Promise<Null<flight._internal._Record<String, flight._internal._UInt8Array>>>), function(__awaitValue125:Dynamic):Dynamic {
+                  externalBuffers = __awaitValue125;
+                  var __flowBranch126:Dynamic;
                   if ((cast _Runtime.strictEquals(externalBuffers, null) : Bool)) {
-                    __flowBranch114 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch126 = flight._internal._Async.protect(function():Dynamic {
                       return flight._internal._Async.flowReturn(null);
                     });
                   } else {
-                    __flowBranch114 = flight._internal._Async.flowNormal();
+                    __flowBranch126 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch114, function():Dynamic {
-                    return flight._internal._Async.flowReturn((cast parseGltf(({ final __callArgument115:Dynamic = gltf; __callArgument115; }), (cast ({ final __structural116 = options; __structural116 == null ? _Runtime.UNDEFINED : (cast __structural116 : { @:optional var diagnostics:Null<Array<ImportDiagnostic>>; }).diagnostics; }) : Dynamic), (cast { basePath: basePath, extensionHandlers: ({ final __structural117 = options; __structural117 == null ? _Runtime.UNDEFINED : (cast __structural117 : { @:optional var extensionHandlers:Null<Array<GltfExtensionHandler>>; }).extensionHandlers; }), externalBuffers: externalBuffers } : Dynamic)) : Scene3DDocument));
+                  return flight._internal._Async.continueFlow(__flowBranch126, function():Dynamic {
+                    return flight._internal._Async.flowReturn((cast parseGltf(({ final __callArgument127:Dynamic = gltf; __callArgument127; }), (cast ({ final __structural128 = options; __structural128 == null ? _Runtime.UNDEFINED : (cast __structural128 : { @:optional var diagnostics:Null<Array<ImportDiagnostic>>; }).diagnostics; }) : Dynamic), (cast { basePath: basePath, extensionHandlers: ({ final __structural129 = options; __structural129 == null ? _Runtime.UNDEFINED : (cast __structural129 : { @:optional var extensionHandlers:Null<Array<GltfExtensionHandler>>; }).extensionHandlers; }), externalBuffers: externalBuffers } : Dynamic)) : Scene3DDocument));
                   });
                 });
               });
@@ -406,7 +407,7 @@ class _Scene3DResources {
     );
   }
 
-  public static function loadGltfExternalBuffers__gltfLoad(gltf:GltfDocument, basePath:Null<String>, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight._internal._Record<String, flight._internal._UInt8Array>>> {
+  public static function loadGltfExternalBuffers__gltfLoad(host:HasNetHttp, gltf:GltfDocument, basePath:Null<String>, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight._internal._Record<String, flight._internal._UInt8Array>>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var uris:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
@@ -420,8 +421,8 @@ class _Scene3DResources {
         }
         externalBuffers = {  };
         entries = _Runtime.concatArrays([_Runtime.toArray(uris)]);
-        return flight._internal._Async.flatMap(flight._internal._Async.all((cast _Runtime.mapArray((cast entries : Array<String>), function(uri:String, __unused0:Float, __unused1:Array<String>):flight._internal._Promise<Null<flight._internal._UInt8Array>> return (cast loadScene3DDocumentBytesFromUrl((cast (cast _Scene3DResources.resolveGltfBufferUrl__gltfLoad((cast uri : String), ({ final __callArgument141:Dynamic = basePath; __callArgument141; })) : String) : String), ({ final __callArgument143:Dynamic = options; __callArgument143; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), _Runtime.UNDEFINED))), function(__awaitValue139:Dynamic):Dynamic {
-          bytes = __awaitValue139;
+        return flight._internal._Async.flatMap(flight._internal._Async.all((cast _Runtime.mapArray((cast entries : Array<String>), function(uri:String, __unused0:Float, __unused1:Array<String>):flight._internal._Promise<Null<flight._internal._UInt8Array>> return (cast loadScene3DDocumentBytesFromUrl(({ final __callArgument159:Dynamic = host; __callArgument159; }), (cast (cast _Scene3DResources.resolveGltfBufferUrl__gltfLoad((cast uri : String), ({ final __callArgument160:Dynamic = basePath; __callArgument160; })) : String) : String), ({ final __callArgument162:Dynamic = options; __callArgument162; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), _Runtime.UNDEFINED))), function(__awaitValue157:Dynamic):Dynamic {
+          bytes = __awaitValue157;
           return flight._internal._Async.continueFlow(flight._internal._Async.protect(function():Dynamic {
             var i:Float = cast _Runtime.UNDEFINED;
             i = 0.0;
@@ -430,15 +431,15 @@ class _Scene3DResources {
               return flight._internal._Async.continueIteration(flight._internal._Async.protect(function():Dynamic {
                 var value:Null<flight._internal._UInt8Array> = cast _Runtime.UNDEFINED;
                 value = flight._internal._StaticIndex.readArray(bytes, i);
-                var __flowBranch140:Dynamic;
+                var __flowBranch158:Dynamic;
                 if ((cast _Runtime.strictEquals(value, null) : Bool)) {
-                  __flowBranch140 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch158 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.flowReturn(null);
                   });
                 } else {
-                  __flowBranch140 = flight._internal._Async.flowNormal();
+                  __flowBranch158 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch140, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch158, function():Dynamic {
                   _Runtime.setIndex(externalBuffers, flight._internal._StaticIndex.readArray(entries, i), value);
                   return flight._internal._Async.flowNormal();
                 });
@@ -467,21 +468,21 @@ class _Scene3DResources {
         var url:String = cast _Runtime.UNDEFINED;
         url = (cast resolveImageResourceUri((cast ref.uri : String), ref.basePath) : String);
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), ({ final __callArgument152:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument152; }), ({ final __callArgument153:Dynamic = signal; __callArgument153; })) : flight._internal._Promise<Image>), function(__awaitValue151:Dynamic):Dynamic {
-            return flight._internal._Async.flowReturn(__awaitValue151);
+          return flight._internal._Async.flatMap((cast loadImageResourceFromUrl((cast url : String), ({ final __callArgument172:Dynamic = _Runtime.field(_Runtime, 'UNDEFINED'); __callArgument172; }), ({ final __callArgument173:Dynamic = signal; __callArgument173; })) : flight._internal._Promise<Image>), function(__awaitValue171:Dynamic):Dynamic {
+            return flight._internal._Async.flowReturn(__awaitValue171);
           });
         }), function(__caughtError:Dynamic):Dynamic {
           var error:Dynamic = __caughtError;
           return flight._internal._Async.protect(function():Dynamic {
-            var __flowBranch156:Dynamic;
+            var __flowBranch176:Dynamic;
             if ((cast signal.aborted : Bool)) {
-              __flowBranch156 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch176 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.reject(error);
               });
             } else {
-              __flowBranch156 = flight._internal._Async.flowNormal();
+              __flowBranch176 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch156, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch176, function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           });
@@ -507,12 +508,12 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function registerIridescencePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures(({ final __callArgument157:Dynamic = registry; __callArgument157; }), (cast IridescencePbrExtensionKind : String), ({ final __callArgument158:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures(({ final __callArgument177:Dynamic = registry; __callArgument177; }), (cast IridescencePbrExtensionKind : String), ({ final __callArgument178:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var iridescence:IridescencePbrExtension = cast _Runtime.UNDEFINED;
       iridescence = (cast extension : IridescencePbrExtension);
       if ((cast !_Runtime.strictEquals(iridescence.iridescenceMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([iridescence.iridescenceMap] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(iridescence.iridescenceThicknessMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([iridescence.iridescenceThicknessMap] : Array<Dynamic>)); }
-    }; __callArgument158; }));
+    }; __callArgument178; }));
   }
 
   public static function loadScene3DResources(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:LoadScene3DResourcesOptions):flight._internal._Promise<flight._internal._Nothing> {
@@ -525,7 +526,7 @@ class _Scene3DResources {
         var loaded:Float = cast _Runtime.UNDEFINED;
         var pending:Array<flight._internal._Promise<flight._internal._Nothing>> = cast _Runtime.UNDEFINED;
         var progress:Null<Signal<Scene3DResourceLoadProgress->Void>> = cast _Runtime.UNDEFINED;
-        resources = (cast updateScene3DResourceStreaming(({ final __callArgument168:Dynamic = scene; __callArgument168; }), ({ final __callArgument169:Dynamic = resolver; __callArgument169; }), (cast options : Dynamic)) : Scene3DResources);
+        resources = (cast updateScene3DResourceStreaming(({ final __callArgument188:Dynamic = scene; __callArgument188; }), ({ final __callArgument189:Dynamic = resolver; __callArgument189; }), (cast options : Dynamic)) : Scene3DResources);
         refs = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
         {
           var i:Float = 0.0;
@@ -545,7 +546,7 @@ class _Scene3DResources {
         total = (cast refs : flight._internal._Set<ImageResourceReference>).size;
         loaded = 0.0;
         pending = cast ([] : Array<Dynamic>);
-        progress = ({ final __typedStruct172 = options; __typedStruct172 == null ? _Runtime.UNDEFINED : __typedStruct172.progress; });
+        progress = ({ final __typedStruct192 = options; __typedStruct192 == null ? _Runtime.UNDEFINED : __typedStruct192.progress; });
         for (ref in _Runtime.iterable(refs)) {
           if ((cast ((cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) {
             loaded++;
@@ -558,18 +559,18 @@ class _Scene3DResources {
             if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: loaded, total: total }]]), 1); }
           }] : Array<Dynamic>))] : Array<Dynamic>));
         }
-        var __flowBranch175:Dynamic;
+        var __flowBranch195:Dynamic;
         if ((cast !_Runtime.strictEquals(progress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          __flowBranch175 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch195 = flight._internal._Async.protect(function():Dynamic {
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[progress], [{ loaded: loaded, total: total }]]), 1);
             return flight._internal._Async.flowNormal();
           });
         } else {
-          __flowBranch175 = flight._internal._Async.flowNormal();
+          __flowBranch195 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch175, function():Dynamic {
-          return flight._internal._Async.flatMap(flight._internal._Async.allSettled(pending), function(__awaitValue176:Dynamic):Dynamic {
-            __awaitValue176;
+        return flight._internal._Async.continueFlow(__flowBranch195, function():Dynamic {
+          return flight._internal._Async.flatMap(flight._internal._Async.allSettled(pending), function(__awaitValue196:Dynamic):Dynamic {
+            __awaitValue196;
             return flight._internal._Async.flowNormal();
           });
         });
@@ -587,32 +588,32 @@ class _Scene3DResources {
         for (entry in _Runtime.iterable(((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).values()))) {
           _Runtime.callProperty(promises, 'push', cast ([entry.promise] : Array<Dynamic>));
         }
-        return flight._internal._Async.flatMap(flight._internal._Async.allSettled(promises), function(__awaitValue181:Dynamic):Dynamic {
-          __awaitValue181;
+        return flight._internal._Async.flatMap(flight._internal._Async.allSettled(promises), function(__awaitValue201:Dynamic):Dynamic {
+          __awaitValue201;
           return flight._internal._Async.flowNormal();
         });
       })
     );
   }
 
-  public static function loadScene3DDocumentFromMd2Url(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+  public static function loadScene3DDocumentFromMd2Url(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var bytes:Null<flight._internal._UInt8Array> = cast _Runtime.UNDEFINED;
         var document:Scene3DDocument = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl((cast url : String), ({ final __callArgument194:Dynamic = options; __callArgument194; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), function(__awaitValue188:Dynamic):Dynamic {
-          bytes = __awaitValue188;
-          var __flowBranch189:Dynamic;
+        return flight._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl(({ final __callArgument216:Dynamic = host; __callArgument216; }), (cast url : String), ({ final __callArgument217:Dynamic = options; __callArgument217; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), function(__awaitValue210:Dynamic):Dynamic {
+          bytes = __awaitValue210;
+          var __flowBranch211:Dynamic;
           if ((cast _Runtime.strictEquals(bytes, null) : Bool)) {
-            __flowBranch189 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch211 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch189 = flight._internal._Async.flowNormal();
+            __flowBranch211 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch189, function():Dynamic {
-            document = (cast (#if js _Runtime.callValue(parseMd2, cast ([({ final __callArgument191:Dynamic = bytes; __callArgument191; })] : Array<Dynamic>)) #else parseMd2(({ final __callArgument190:Dynamic = bytes; __callArgument190; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3DDocument);
-            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument192:Dynamic = document; __callArgument192; }), (cast url : String));
+          return flight._internal._Async.continueFlow(__flowBranch211, function():Dynamic {
+            document = (cast (#if js _Runtime.callValue(parseMd2, cast ([({ final __callArgument213:Dynamic = bytes; __callArgument213; })] : Array<Dynamic>)) #else parseMd2(({ final __callArgument212:Dynamic = bytes; __callArgument212; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3DDocument);
+            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument214:Dynamic = document; __callArgument214; }), (cast url : String));
             return flight._internal._Async.flowReturn(document);
           });
         });
@@ -620,24 +621,24 @@ class _Scene3DResources {
     );
   }
 
-  public static function loadScene3DDocumentFromMd5MeshUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+  public static function loadScene3DDocumentFromMd5MeshUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var source:Null<String> = cast _Runtime.UNDEFINED;
         var document:Scene3DDocument = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl((cast url : String), ({ final __callArgument204:Dynamic = options; __callArgument204; })) : flight._internal._Promise<Null<String>>), function(__awaitValue200:Dynamic):Dynamic {
-          source = __awaitValue200;
-          var __flowBranch201:Dynamic;
+        return flight._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl(({ final __callArgument230:Dynamic = host; __callArgument230; }), (cast url : String), ({ final __callArgument231:Dynamic = options; __callArgument231; })) : flight._internal._Promise<Null<String>>), function(__awaitValue226:Dynamic):Dynamic {
+          source = __awaitValue226;
+          var __flowBranch227:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-            __flowBranch201 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch227 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch201 = flight._internal._Async.flowNormal();
+            __flowBranch227 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch201, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch227, function():Dynamic {
             document = (cast (#if js _Runtime.callValue(parseMd5Mesh, cast ([(cast source : String)] : Array<Dynamic>)) #else parseMd5Mesh((cast source : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3DDocument);
-            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument202:Dynamic = document; __callArgument202; }), (cast url : String));
+            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument228:Dynamic = document; __callArgument228; }), (cast url : String));
             return flight._internal._Async.flowReturn(document);
           });
         });
@@ -645,24 +646,24 @@ class _Scene3DResources {
     );
   }
 
-  public static function loadScene3DDocumentFromObjUrl(url:String, ?materials:ObjMaterialLibrary, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+  public static function loadScene3DDocumentFromObjUrl(host:HasNetHttp, url:String, ?materials:ObjMaterialLibrary, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var source:Null<String> = cast _Runtime.UNDEFINED;
         var document:Scene3DDocument = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl((cast url : String), ({ final __callArgument218:Dynamic = options; __callArgument218; })) : flight._internal._Promise<Null<String>>), function(__awaitValue212:Dynamic):Dynamic {
-          source = __awaitValue212;
-          var __flowBranch213:Dynamic;
+        return flight._internal._Async.flatMap((cast loadScene3DDocumentTextFromUrl(({ final __callArgument248:Dynamic = host; __callArgument248; }), (cast url : String), ({ final __callArgument249:Dynamic = options; __callArgument249; })) : flight._internal._Promise<Null<String>>), function(__awaitValue242:Dynamic):Dynamic {
+          source = __awaitValue242;
+          var __flowBranch243:Dynamic;
           if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-            __flowBranch213 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch243 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch213 = flight._internal._Async.flowNormal();
+            __flowBranch243 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch213, function():Dynamic {
-            document = (cast (#if js _Runtime.callValue(parseObj, cast ([(cast source : String), ({ final __callArgument215:Dynamic = materials; __callArgument215; })] : Array<Dynamic>)) #else parseObj((cast source : String), ({ final __callArgument214:Dynamic = materials; __callArgument214; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3DDocument);
-            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument216:Dynamic = document; __callArgument216; }), (cast url : String));
+          return flight._internal._Async.continueFlow(__flowBranch243, function():Dynamic {
+            document = (cast (#if js _Runtime.callValue(parseObj, cast ([(cast source : String), ({ final __callArgument245:Dynamic = materials; __callArgument245; })] : Array<Dynamic>)) #else parseObj((cast source : String), ({ final __callArgument244:Dynamic = materials; __callArgument244; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3DDocument);
+            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument246:Dynamic = document; __callArgument246; }), (cast url : String));
             return flight._internal._Async.flowReturn(document);
           });
         });
@@ -671,7 +672,7 @@ class _Scene3DResources {
   }
 
   public static function resolveOneScene3DResourceTexture(resolver:Scene3DResourceResolver, ref:ImageResourceReference, signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<TextureSource>> {
-    return cast (cast resolveImageResourceReference(({ final __callArgument220:Dynamic = ref; __callArgument220; }), resolver.fetch, ({ final __callArgument221:Dynamic = signal; __callArgument221; })) : flight._internal._Promise<Null<TextureSource>>);
+    return cast (cast resolveImageResourceReference(({ final __callArgument252:Dynamic = ref; __callArgument252; }), resolver.fetch, ({ final __callArgument253:Dynamic = signal; __callArgument253; })) : flight._internal._Promise<Null<TextureSource>>);
     return cast null;
   }
 
@@ -683,13 +684,13 @@ class _Scene3DResources {
     var unresolved:Array<Scene3DResourceWorkingSet> = cast _Runtime.UNDEFINED;
     runtime = _Runtime.getIndex((cast resolver : Scene3DResourceResolverWithRuntime), Scene3DResourceResolverRuntimeKey);
     textures = (cast cast ([] : Array<Dynamic>));
-    getScene3DResourceTextures(({ final __callArgument224:Dynamic = textures; __callArgument224; }), ({ final __callArgument225:Dynamic = scene; __callArgument225; }));
+    getScene3DResourceTextures(({ final __callArgument256:Dynamic = textures; __callArgument256; }), ({ final __callArgument257:Dynamic = scene; __callArgument257; }));
     working = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(textures, 'length') : Float)) : Bool)) {
         var texture:Texture = flight._internal._StaticIndex.readArray(textures, i);
-        var ref:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument228:Dynamic = scene; __callArgument228; }), ({ final __callArgument229:Dynamic = texture; __callArgument229; })) : Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
+        var ref:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument260:Dynamic = scene; __callArgument260; }), ({ final __callArgument261:Dynamic = texture; __callArgument261; })) : Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
         if ((cast _Runtime.looseEquals(ref, null) : Bool)) { i++; continue; }
         var source:Null<TextureSource> = ((cast _Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool) ? (cast (cast texture : Texture2D).source : Dynamic) : (cast null : Dynamic));
         if ((cast !_Runtime.strictEquals(source, null) : Bool)) {
@@ -697,7 +698,7 @@ class _Scene3DResources {
           ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
           ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
         }
-        if ((cast ((cast !_Runtime.strictEquals(({ final __structural232 = options; __structural232 == null ? _Runtime.UNDEFINED : (cast __structural232 : { @:optional var select:Null<Texture->ImageResourceReference->Bool>; }).select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast _Runtime.callProperty(options, 'select', cast ([texture, ref] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { i++; continue; }
+        if ((cast ((cast !_Runtime.strictEquals(({ final __structural264 = options; __structural264 == null ? _Runtime.UNDEFINED : (cast __structural264 : { @:optional var select:Null<Texture->ImageResourceReference->Bool>; }).select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast _Runtime.callProperty(options, 'select', cast ([texture, ref] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { i++; continue; }
         var subscribers:Null<Array<Texture>> = ((cast working : flight._internal._Map<ImageResourceReference, Array<Texture>>).get(ref));
         if ((cast _Runtime.strictEquals(subscribers, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
           (subscribers = cast (cast ([] : Array<Dynamic>) : Dynamic));
@@ -723,7 +724,7 @@ class _Scene3DResources {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(subscribers, 'length') : Float)) : Bool)) {
-          _Scene3DResources.bindResolvedScene3DResource__resolveScene3DResources(({ final __callArgument235:Dynamic = resolver; __callArgument235; }), flight._internal._StaticIndex.readArray(subscribers, i), ({ final __callArgument236:Dynamic = ref; __callArgument236; }), ({ final __callArgument237:Dynamic = source; __callArgument237; }));
+          _Scene3DResources.bindResolvedScene3DResource__resolveScene3DResources(({ final __callArgument267:Dynamic = resolver; __callArgument267; }), flight._internal._StaticIndex.readArray(subscribers, i), ({ final __callArgument268:Dynamic = ref; __callArgument268; }), ({ final __callArgument269:Dynamic = source; __callArgument269; }));
           i++;
         }
       }
@@ -736,12 +737,12 @@ class _Scene3DResources {
   public static function updateScene3DResourceStreaming(scene:Scene3D, resolver:Scene3DResourceResolver, ?options:UpdateScene3DResourceStreamingOptions):Scene3DResources {
     var resources:Scene3DResources = cast _Runtime.UNDEFINED;
     var working:flight._internal._Map<ImageResourceReference, Array<Texture>> = cast _Runtime.UNDEFINED;
-    resources = (cast resolveScene3DResources(({ final __callArgument241:Dynamic = scene; __callArgument241; }), ({ final __callArgument242:Dynamic = resolver; __callArgument242; }), ({ final __callArgument243:Dynamic = options; __callArgument243; })) : Scene3DResources);
+    resources = (cast resolveScene3DResources(({ final __callArgument273:Dynamic = scene; __callArgument273; }), ({ final __callArgument274:Dynamic = resolver; __callArgument274; }), ({ final __callArgument275:Dynamic = options; __callArgument275; })) : Scene3DResources);
     working = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    _Scene3DResources.addScene3DResourceGroupsToWorkingSet__resolveScene3DResources(({ final __callArgument247:Dynamic = working; __callArgument247; }), ({ final __callArgument248:Dynamic = (cast resources : Scene3DResources).resolved; __callArgument248; }));
-    _Scene3DResources.addScene3DResourceGroupsToWorkingSet__resolveScene3DResources(({ final __callArgument251:Dynamic = working; __callArgument251; }), (cast resources : Scene3DResources).unresolved);
-    _Scene3DResources.cancelDroppedResolutions__resolveScene3DResources(({ final __callArgument253:Dynamic = resolver; __callArgument253; }), ({ final __callArgument254:Dynamic = working; __callArgument254; }));
-    _Scene3DResources.requestWorkingResolutions__resolveScene3DResources(({ final __callArgument257:Dynamic = resolver; __callArgument257; }), ({ final __callArgument258:Dynamic = working; __callArgument258; }), ({ final __callArgument259:Dynamic = options; __callArgument259; }));
+    _Scene3DResources.addScene3DResourceGroupsToWorkingSet__resolveScene3DResources(({ final __callArgument279:Dynamic = working; __callArgument279; }), ({ final __callArgument280:Dynamic = (cast resources : Scene3DResources).resolved; __callArgument280; }));
+    _Scene3DResources.addScene3DResourceGroupsToWorkingSet__resolveScene3DResources(({ final __callArgument283:Dynamic = working; __callArgument283; }), (cast resources : Scene3DResources).unresolved);
+    _Scene3DResources.cancelDroppedResolutions__resolveScene3DResources(({ final __callArgument285:Dynamic = resolver; __callArgument285; }), ({ final __callArgument286:Dynamic = working; __callArgument286; }));
+    _Scene3DResources.requestWorkingResolutions__resolveScene3DResources(({ final __callArgument289:Dynamic = resolver; __callArgument289; }), ({ final __callArgument290:Dynamic = working; __callArgument290; }), ({ final __callArgument291:Dynamic = options; __callArgument291; }));
     return cast resources;
     return cast null;
   }
@@ -788,10 +789,10 @@ class _Scene3DResources {
     if ((cast !_Runtime.strictEquals(((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).get(ref)), entry) : Bool)) { return; }
     ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).delete_(ref));
     if ((cast _Runtime.strictEquals(source, null) : Bool)) {
-      ({ final __nullishOwner265 = ref; final __nullishValue266:Null<ImageResourceFailure> = cast (cast __nullishOwner265 : { var failure:Null<ImageResourceFailure>; }).failure; __nullishValue266 == null ? ((cast __nullishOwner265 : { var failure:Null<ImageResourceFailure>; }).failure = (cast { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: 'Image resource resolution returned no source', name: null } : Null<ImageResourceFailure>)) : (cast __nullishValue266 : Null<ImageResourceFailure>); });
+      ({ final __nullishOwner297 = ref; final __nullishValue298:Null<ImageResourceFailure> = cast (cast __nullishOwner297 : { var failure:Null<ImageResourceFailure>; }).failure; __nullishValue298 == null ? ((cast __nullishOwner297 : { var failure:Null<ImageResourceFailure>; }).failure = (cast { kind: (cast ImageResourceFailureKindValue : { var Error:String; var Unavailable:String; }).Unavailable, message: 'Image resource resolution returned no source', name: null } : Null<ImageResourceFailure>)) : (cast __nullishValue298 : Null<ImageResourceFailure>); });
       ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
       for (texture in _Runtime.iterable(entry.subscribers)) {
-        _Scene3DResources.emitScene3DResourceEvent__resolveScene3DResources(({ final __callArgument269:Dynamic = resolver; __callArgument269; }), ({ final __callArgument270:Dynamic = texture; __callArgument270; }), ({ final __callArgument271:Dynamic = ref; __callArgument271; }), (cast false : Bool));
+        _Scene3DResources.emitScene3DResourceEvent__resolveScene3DResources(({ final __callArgument301:Dynamic = resolver; __callArgument301; }), ({ final __callArgument302:Dynamic = texture; __callArgument302; }), ({ final __callArgument303:Dynamic = ref; __callArgument303; }), (cast false : Bool));
       }
       return;
     }
@@ -799,7 +800,7 @@ class _Scene3DResources {
     ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = null);
     ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Resolved);
     for (texture in _Runtime.iterable(entry.subscribers)) {
-      _Scene3DResources.bindResolvedScene3DResource__resolveScene3DResources(({ final __callArgument277:Dynamic = resolver; __callArgument277; }), ({ final __callArgument278:Dynamic = texture; __callArgument278; }), ({ final __callArgument279:Dynamic = ref; __callArgument279; }), ({ final __callArgument280:Dynamic = source; __callArgument280; }));
+      _Scene3DResources.bindResolvedScene3DResource__resolveScene3DResources(({ final __callArgument309:Dynamic = resolver; __callArgument309; }), ({ final __callArgument310:Dynamic = texture; __callArgument310; }), ({ final __callArgument311:Dynamic = ref; __callArgument311; }), ({ final __callArgument312:Dynamic = source; __callArgument312; }));
     }
   }
 
@@ -812,7 +813,7 @@ class _Scene3DResources {
     ((cast ref : { var failure:Null<ImageResourceFailure>; }).failure = (cast createImageResourceFailure((cast cause : flight._internal._Any)) : ImageResourceFailure));
     ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed);
     for (texture in _Runtime.iterable(entry.subscribers)) {
-      _Scene3DResources.emitScene3DResourceEvent__resolveScene3DResources(({ final __callArgument287:Dynamic = resolver; __callArgument287; }), ({ final __callArgument288:Dynamic = texture; __callArgument288; }), ({ final __callArgument289:Dynamic = ref; __callArgument289; }), (cast false : Bool));
+      _Scene3DResources.emitScene3DResourceEvent__resolveScene3DResources(({ final __callArgument319:Dynamic = resolver; __callArgument319; }), ({ final __callArgument320:Dynamic = texture; __callArgument320; }), ({ final __callArgument321:Dynamic = ref; __callArgument321; }), (cast false : Bool));
     }
   }
 
@@ -821,7 +822,7 @@ class _Scene3DResources {
     if ((cast _Runtime.strictEquals((cast texture : Texture2D).source, source) : Bool)) { return; }
     ((cast texture : Texture2D).source = source);
     ((cast texture : Texture2D).version = _Runtime.unsignedShiftRight(_Runtime.toInt32(((cast texture : Texture2D).version + 1.0)), 0));
-    _Scene3DResources.emitScene3DResourceEvent__resolveScene3DResources(({ final __callArgument293:Dynamic = resolver; __callArgument293; }), ({ final __callArgument294:Dynamic = texture; __callArgument294; }), ({ final __callArgument295:Dynamic = ref; __callArgument295; }), (cast true : Bool));
+    _Scene3DResources.emitScene3DResourceEvent__resolveScene3DResources(({ final __callArgument325:Dynamic = resolver; __callArgument325; }), ({ final __callArgument326:Dynamic = texture; __callArgument326; }), ({ final __callArgument327:Dynamic = ref; __callArgument327; }), (cast true : Bool));
   }
 
   public static function emitScene3DResourceEvent__resolveScene3DResources(resolver:Scene3DResourceResolver, texture:Texture, ref:ImageResourceReference, resolved:Bool):Void {
@@ -846,7 +847,7 @@ class _Scene3DResources {
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(subscribers, 'length') : Float)) : Bool)) {
-            _Scene3DResources.bindResolvedScene3DResource__resolveScene3DResources(({ final __callArgument301:Dynamic = resolver; __callArgument301; }), flight._internal._StaticIndex.readArray(subscribers, i), ({ final __callArgument302:Dynamic = ref; __callArgument302; }), ({ final __callArgument303:Dynamic = resolved; __callArgument303; }));
+            _Scene3DResources.bindResolvedScene3DResource__resolveScene3DResources(({ final __callArgument333:Dynamic = resolver; __callArgument333; }), flight._internal._StaticIndex.readArray(subscribers, i), ({ final __callArgument334:Dynamic = ref; __callArgument334; }), ({ final __callArgument335:Dynamic = resolved; __callArgument335; }));
             i++;
           }
         }
@@ -859,23 +860,23 @@ class _Scene3DResources {
       ((cast ref : { var state:ResourceResolutionState; }).state = (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Loading);
       var controller:flight._internal.dom.AbortController = _Runtime.construct(flight._internal._HostValueLut.get('AbortController'), []);
       var priority:Float = 0.0;
-      if ((cast !_Runtime.strictEquals(({ final __typedStruct307 = options; __typedStruct307 == null ? _Runtime.UNDEFINED : __typedStruct307.priority; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      if ((cast !_Runtime.strictEquals(({ final __typedStruct339 = options; __typedStruct339 == null ? _Runtime.UNDEFINED : __typedStruct339.priority; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
         (priority = cast (HxMath.NEGATIVE_INFINITY : Dynamic));
         {
           var i:Float = 0.0;
           while ((cast ((cast i : Float) < (cast _Runtime.field(subscribers, 'length') : Float)) : Bool)) {
-            (priority = cast (HxMath.max(priority, (options.priority)(flight._internal._StaticIndex.readArray(subscribers, i), ({ final __callArgument308:Dynamic = ref; __callArgument308; }))) : Dynamic));
+            (priority = cast (HxMath.max(priority, (options.priority)(flight._internal._StaticIndex.readArray(subscribers, i), ({ final __callArgument340:Dynamic = ref; __callArgument340; }))) : Dynamic));
             i++;
           }
         }
       }
       var handle:ResourceLoadHandle<Null<TextureSource>> = (cast queueResourceLoad(runtime.loader, (cast { load: function(loaderSignal:flight._internal.dom.AbortSignal, __unused3:ResourceLoadBytesReporter):flight._internal._Promise<Null<TextureSource>> {
         if ((cast (cast loaderSignal : flight._internal.dom.AbortSignal).aborted : Bool)) { (cast controller : flight._internal.dom.AbortController).abort((cast loaderSignal : flight._internal.dom.AbortSignal).reason); } else { (cast loaderSignal : flight._internal.dom.AbortSignal).addEventListener('abort', function(__unused4:flight._internal.dom.Event):Void { (cast controller : flight._internal.dom.AbortController).abort((cast loaderSignal : flight._internal.dom.AbortSignal).reason); }, { once: true }); }
-        return cast (cast resolveOneScene3DResourceTexture(({ final __callArgument309:Dynamic = resolver; __callArgument309; }), ({ final __callArgument310:Dynamic = ref; __callArgument310; }), (cast controller : flight._internal.dom.AbortController).signal) : flight._internal._Promise<Null<TextureSource>>);
+        return cast (cast resolveOneScene3DResourceTexture(({ final __callArgument341:Dynamic = resolver; __callArgument341; }), ({ final __callArgument342:Dynamic = ref; __callArgument342; }), (cast controller : flight._internal.dom.AbortController).signal) : flight._internal._Promise<Null<TextureSource>>);
         return cast _Runtime.UNDEFINED;
       }, priority: priority } : Dynamic)) : ResourceLoadHandle<Null<TextureSource>>);
       var entry:Scene3DResourceInFlight = (cast { controller: controller, promise: _Scene3DResources._resolvedVoid__resolveScene3DResources, subscribers: _Runtime.construct(flight._internal._HostValueLut.get('Set'), [subscribers]) });
-      (entry.promise = cast (_Runtime.callProperty(handle.promise, 'then', cast ([function(source:Null<TextureSource>):Void { _Scene3DResources.finishScene3DResourceResolution__resolveScene3DResources(({ final __callArgument317:Dynamic = resolver; __callArgument317; }), ({ final __callArgument318:Dynamic = ref; __callArgument318; }), ({ final __callArgument319:Dynamic = entry; __callArgument319; }), ({ final __callArgument320:Dynamic = source; __callArgument320; })); }, function(cause:flight._internal._Any):Void { _Scene3DResources.failScene3DResourceResolution__resolveScene3DResources(({ final __callArgument325:Dynamic = resolver; __callArgument325; }), ({ final __callArgument326:Dynamic = ref; __callArgument326; }), ({ final __callArgument327:Dynamic = entry; __callArgument327; }), (cast cause : flight._internal._Any)); }] : Array<Dynamic>)) : flight._internal._Promise<flight._internal._Nothing>));
+      (entry.promise = cast (_Runtime.callProperty(handle.promise, 'then', cast ([function(source:Null<TextureSource>):Void { _Scene3DResources.finishScene3DResourceResolution__resolveScene3DResources(({ final __callArgument349:Dynamic = resolver; __callArgument349; }), ({ final __callArgument350:Dynamic = ref; __callArgument350; }), ({ final __callArgument351:Dynamic = entry; __callArgument351; }), ({ final __callArgument352:Dynamic = source; __callArgument352; })); }, function(cause:flight._internal._Any):Void { _Scene3DResources.failScene3DResourceResolution__resolveScene3DResources(({ final __callArgument357:Dynamic = resolver; __callArgument357; }), ({ final __callArgument358:Dynamic = ref; __callArgument358; }), ({ final __callArgument359:Dynamic = entry; __callArgument359; }), (cast cause : flight._internal._Any)); }] : Array<Dynamic>)) : flight._internal._Promise<flight._internal._Nothing>));
       ((cast runtime.inFlight : flight._internal._Map<ImageResourceReference, Scene3DResourceInFlight>).set(ref, (cast entry)));
     }
   }
@@ -890,16 +891,16 @@ class _Scene3DResources {
     var owners:Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve> = cast _Runtime.UNDEFINED;
     var signals:Scene3DResourceSignals = cast _Runtime.UNDEFINED;
     var slot:{ var texture:Texture; }->Void = cast _Runtime.UNDEFINED;
-    fadeSeconds = _Runtime.coalesce(({ final __typedStruct331 = options; __typedStruct331 == null ? _Runtime.UNDEFINED : __typedStruct331.fadeSeconds; }), function():Dynamic return cast 0.4);
-    from = _Runtime.coalesce(({ final __typedStruct332 = options; __typedStruct332 == null ? _Runtime.UNDEFINED : __typedStruct332.from; }), function():Dynamic return cast 0.0);
-    tweenOptions = ((cast !_Runtime.strictEquals(({ final __typedStruct333 = options; __typedStruct333 == null ? _Runtime.UNDEFINED : __typedStruct333.ease; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { ease: options.ease } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
+    fadeSeconds = _Runtime.coalesce(({ final __typedStruct363 = options; __typedStruct363 == null ? _Runtime.UNDEFINED : __typedStruct363.fadeSeconds; }), function():Dynamic return cast 0.4);
+    from = _Runtime.coalesce(({ final __typedStruct364 = options; __typedStruct364 == null ? _Runtime.UNDEFINED : __typedStruct364.from; }), function():Dynamic return cast 0.0);
+    tweenOptions = ((cast !_Runtime.strictEquals(({ final __typedStruct365 = options; __typedStruct365 == null ? _Runtime.UNDEFINED : __typedStruct365.ease; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast { ease: options.ease } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic));
     ownersByTexture = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     owners = (cast cast ([] : Array<Dynamic>));
-    _Scene3DResources.collectPendingTextureOwners__revealScene3DResourcesOnResolve(({ final __callArgument334:Dynamic = scene; __callArgument334; }), ({ final __callArgument335:Dynamic = resolver; __callArgument335; }), (cast ownersByTexture : Dynamic), (cast owners : Dynamic));
+    _Scene3DResources.collectPendingTextureOwners__revealScene3DResourcesOnResolve(({ final __callArgument366:Dynamic = scene; __callArgument366; }), ({ final __callArgument367:Dynamic = resolver; __callArgument367; }), (cast ownersByTexture : Dynamic), (cast owners : Dynamic));
     for (owner in _Runtime.iterable(owners)) {
       ((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node : { var alpha:Float; }).alpha = cast (from : Float));
     }
-    signals = (cast enableScene3DResourceSignals(({ final __callArgument340:Dynamic = resolver; __callArgument340; })) : Scene3DResourceSignals);
+    signals = (cast enableScene3DResourceSignals(({ final __callArgument372:Dynamic = resolver; __callArgument372; })) : Scene3DResourceSignals);
     slot = (cast function(event:{ var texture:Texture; }):Void {
       var textureOwners:Null<Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>> = cast _Runtime.UNDEFINED;
       textureOwners = ((cast ownersByTexture : flight._internal._Map<Texture, Array<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>>).get((cast event : { var texture:Texture; }).texture));
@@ -908,7 +909,7 @@ class _Scene3DResources {
       for (owner in _Runtime.iterable(textureOwners)) {
         ((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flight._internal._Set<Texture>).delete_((cast event : { var texture:Texture; }).texture));
         if ((cast _Runtime.strictEquals((cast (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).pending : flight._internal._Set<Texture>).size, 0.0) : Bool)) {
-          (cast createTween(({ final __callArgument344:Dynamic = tweenManager; __callArgument344; }), (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node, (cast fadeSeconds : Float), (cast { alpha: 1.0 } : Dynamic), (cast tweenOptions : Dynamic)) : Tween<Node3D>);
+          (cast createTween(({ final __callArgument376:Dynamic = tweenManager; __callArgument376; }), (cast owner : Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve).node, (cast fadeSeconds : Float), (cast { alpha: 1.0 } : Dynamic), (cast tweenOptions : Dynamic)) : Tween<Node3D>);
         }
       }
     });
@@ -939,13 +940,13 @@ class _Scene3DResources {
           var material:Null<Material> = (cast flight._internal._StaticIndex.readArray(materials, i) : Null<Material>);
           if ((cast _Runtime.strictEquals(material, null) : Bool)) { i++; continue; }
           _Runtime.setLength(slots, 0.0);
-          getScene3DMaterialTextures(resolver.registry, ({ final __callArgument346:Dynamic = material; __callArgument346; }), ({ final __callArgument347:Dynamic = slots; __callArgument347; }));
+          getScene3DMaterialTextures(resolver.registry, ({ final __callArgument378:Dynamic = material; __callArgument378; }), ({ final __callArgument379:Dynamic = slots; __callArgument379; }));
           {
             var j:Float = 0.0;
             while ((cast ((cast j : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) {
               var texture:Texture = flight._internal._StaticIndex.readArray(slots, j);
-              var ref:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument350:Dynamic = scene; __callArgument350; }), ({ final __callArgument351:Dynamic = texture; __callArgument351; })) : Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
-              if ((cast ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast (cast hasTextureSource(({ final __callArgument354:Dynamic = texture; __callArgument354; })) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) { j++; continue; }
+              var ref:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument382:Dynamic = scene; __callArgument382; }), ({ final __callArgument383:Dynamic = texture; __callArgument383; })) : Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
+              if ((cast ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast (cast hasTextureSource(({ final __callArgument386:Dynamic = texture; __callArgument386; })) : Bool) : Bool)) : Bool) || (cast _Runtime.strictEquals((cast ref : { var state:ResourceResolutionState; }).state, (cast ResourceResolutionStateValue : { var Failed:String; var Loading:String; var Resolved:String; var Unresolved:String; }).Failed) : Bool)) : Bool)) { j++; continue; }
               var ownerState:Null<Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve> = ((cast ownersByNode : flight._internal._Map<Node3D, Scene3DResourceRevealOwner__revealScene3DResourcesOnResolve>).get(owner));
               if ((cast _Runtime.strictEquals(ownerState, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
                 (ownerState = cast ({ node: owner, pending: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []) } : Dynamic));
@@ -982,21 +983,21 @@ class _Scene3DResources {
     return cast null;
   }
 
-  public static function loadScene3DDocumentBytesFromUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+  public static function loadScene3DDocumentBytesFromUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var response:NetResponse = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast sendNetRequest(({ final __callArgument364:Dynamic = { method: 'GET', responseType: 'arraybuffer', url: url }; __callArgument364; }), (cast _Scene3DResources.createScene3DDocumentNetRequestOptions__sceneDocumentSource((cast url : String), ({ final __callArgument365:Dynamic = options; __callArgument365; })) : Null<NetRequestOptions>)) : flight._internal._Promise<NetResponse>), function(__awaitValue362:Dynamic):Dynamic {
-          response = __awaitValue362;
-          var __flowBranch363:Dynamic;
+        return flight._internal._Async.flatMap((cast sendNetRequest(({ final __callArgument398:Dynamic = host; __callArgument398; }), ({ final __callArgument399:Dynamic = { method: 'GET', responseType: 'arraybuffer', url: url }; __callArgument399; }), (cast _Scene3DResources.createScene3DDocumentNetRequestOptions__sceneDocumentSource((cast url : String), ({ final __callArgument400:Dynamic = options; __callArgument400; })) : Null<NetRequestOptions>)) : flight._internal._Promise<NetResponse>), function(__awaitValue396:Dynamic):Dynamic {
+          response = __awaitValue396;
+          var __flowBranch397:Dynamic;
           if ((cast ((cast !(cast (cast response : NetResponse).ok : Bool) : Bool) || (cast !(cast _Runtime.isInstanceOf((cast response : NetResponse).body, flight._internal._HostValueLut.get('ArrayBuffer')) : Bool) : Bool)) : Bool)) {
-            __flowBranch363 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch397 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch363 = flight._internal._Async.flowNormal();
+            __flowBranch397 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch363, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch397, function():Dynamic {
             return flight._internal._Async.flowReturn(new flight._internal._UInt8Array((cast response : NetResponse).body));
           });
         });
@@ -1004,21 +1005,21 @@ class _Scene3DResources {
     );
   }
 
-  public static function loadScene3DDocumentTextFromUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<String>> {
+  public static function loadScene3DDocumentTextFromUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<String>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var response:NetResponse = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast sendNetRequest(({ final __callArgument378:Dynamic = { method: 'GET', responseType: 'text', url: url }; __callArgument378; }), (cast _Scene3DResources.createScene3DDocumentNetRequestOptions__sceneDocumentSource((cast url : String), ({ final __callArgument379:Dynamic = options; __callArgument379; })) : Null<NetRequestOptions>)) : flight._internal._Promise<NetResponse>), function(__awaitValue376:Dynamic):Dynamic {
-          response = __awaitValue376;
-          var __flowBranch377:Dynamic;
+        return flight._internal._Async.flatMap((cast sendNetRequest(({ final __callArgument416:Dynamic = host; __callArgument416; }), ({ final __callArgument417:Dynamic = { method: 'GET', responseType: 'text', url: url }; __callArgument417; }), (cast _Scene3DResources.createScene3DDocumentNetRequestOptions__sceneDocumentSource((cast url : String), ({ final __callArgument418:Dynamic = options; __callArgument418; })) : Null<NetRequestOptions>)) : flight._internal._Promise<NetResponse>), function(__awaitValue414:Dynamic):Dynamic {
+          response = __awaitValue414;
+          var __flowBranch415:Dynamic;
           if ((cast ((cast !(cast (cast response : NetResponse).ok : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast response : NetResponse).body), 'string') : Bool)) : Bool)) {
-            __flowBranch377 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch415 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch377 = flight._internal._Async.flowNormal();
+            __flowBranch415 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch377, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch415, function():Dynamic {
             return flight._internal._Async.flowReturn((cast response : NetResponse).body);
           });
         });
@@ -1045,11 +1046,11 @@ class _Scene3DResources {
     outputProgress = _Runtime.field(options, 'progress');
     if ((cast !_Runtime.strictEquals(outputProgress, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
       var progress:Signal<NetProgress->Void> = (cast createSignal() : Signal<NetProgress->Void>);
-      (#if js _Runtime.callValue(connectSignal, cast ([(cast progress : Dynamic), ({ final __callArgument387:Dynamic = function(event:NetProgress):Void {
+      (#if js _Runtime.callValue(connectSignal, cast ([(cast progress : Dynamic), ({ final __callArgument427:Dynamic = function(event:NetProgress):Void {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[outputProgress], [{ loaded: _Runtime.field(event, 'loaded'), phase: _Runtime.field(event, 'phase'), total: _Runtime.field(event, 'total'), url: url }]]), 1);
-      }; __callArgument387; })] : Array<Dynamic>)) #else connectSignal((cast progress : Dynamic), ({ final __callArgument386:Dynamic = function(event:NetProgress):Void {
+      }; __callArgument427; })] : Array<Dynamic>)) #else connectSignal((cast progress : Dynamic), ({ final __callArgument426:Dynamic = function(event:NetProgress):Void {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[outputProgress], [{ loaded: _Runtime.field(event, 'loaded'), phase: _Runtime.field(event, 'phase'), total: _Runtime.field(event, 'total'), url: url }]]), 1);
-      }; __callArgument386; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+      }; __callArgument426; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
       ((cast out : NetRequestOptions).progress = progress);
     }
     return cast out;
@@ -1059,7 +1060,7 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function createScene3DMaterialTextureRegistry():Scene3DMaterialTextureRegistry {
-    return cast (cast createEntity(({ final __callArgument388:Dynamic = { extensionListers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), listers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) }; __callArgument388; })) : { >Entity, var extensionListers:flight._internal._Map<flight._internal._Any, flight._internal._Any>; var listers:flight._internal._Map<flight._internal._Any, flight._internal._Any>; });
+    return cast (cast createEntity(({ final __callArgument428:Dynamic = { extensionListers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), listers: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []) }; __callArgument428; })) : { >Entity, var extensionListers:flight._internal._Map<flight._internal._Any, flight._internal._Any>; var listers:flight._internal._Map<flight._internal._Any, flight._internal._Any>; });
     return cast null;
   }
 
@@ -1068,7 +1069,7 @@ class _Scene3DResources {
   private static function getScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry, material:Material, out:Array<Texture>):Void {
     var lister:Null<Scene3DMaterialTextureLister> = cast _Runtime.UNDEFINED;
     lister = ((cast registry.listers : flight._internal._Map<String, Scene3DMaterialTextureLister>).get(_Runtime.field(material, 'kind')));
-    if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister(({ final __callArgument390:Dynamic = material; __callArgument390; }), ({ final __callArgument391:Dynamic = out; __callArgument391; })); }
+    if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister(({ final __callArgument430:Dynamic = material; __callArgument430; }), ({ final __callArgument431:Dynamic = out; __callArgument431; })); }
   }
 
   @:allow(flight)
@@ -1081,20 +1082,20 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function registerExtendedPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DMaterialTextures(({ final __callArgument394:Dynamic = registry; __callArgument394; }), (cast ExtendedPbrMaterialKind : String), ({ final __callArgument401:Dynamic = function(material:Material, out:Array<Texture>):Void {
+    registerScene3DMaterialTextures(({ final __callArgument434:Dynamic = registry; __callArgument434; }), (cast ExtendedPbrMaterialKind : String), ({ final __callArgument441:Dynamic = function(material:Material, out:Array<Texture>):Void {
       var extended:ExtendedPbrMaterial = cast _Runtime.UNDEFINED;
       extended = (cast material : ExtendedPbrMaterial);
-      _Scene3DResources.listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry(extended.standard, ({ final __callArgument395:Dynamic = out; __callArgument395; }));
+      _Scene3DResources.listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry(extended.standard, ({ final __callArgument435:Dynamic = out; __callArgument435; }));
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(extended.extensions, 'length') : Float)) : Bool)) {
           var extension:PbrExtension = flight._internal._StaticIndex.readArray(extended.extensions, i);
           var lister:Null<Scene3DPbrExtensionTextureLister> = ((cast registry.extensionListers : flight._internal._Map<String, Scene3DPbrExtensionTextureLister>).get(extension.kind));
-          if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister(({ final __callArgument397:Dynamic = extension; __callArgument397; }), ({ final __callArgument398:Dynamic = out; __callArgument398; })); }
+          if ((cast !_Runtime.strictEquals(lister, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { lister(({ final __callArgument437:Dynamic = extension; __callArgument437; }), ({ final __callArgument438:Dynamic = out; __callArgument438; })); }
           i++;
         }
       }
-    }; __callArgument401; }));
+    }; __callArgument441; }));
   }
 
   @:allow(flight)
@@ -1112,17 +1113,17 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function registerStandardPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DMaterialTextures(({ final __callArgument410:Dynamic = registry; __callArgument410; }), (cast StandardPbrMaterialKind : String), ({ final __callArgument411:Dynamic = _Scene3DResources.listStandardPbrMaterialTextures__sceneMaterialTextureRegistry; __callArgument411; }));
+    registerScene3DMaterialTextures(({ final __callArgument450:Dynamic = registry; __callArgument450; }), (cast StandardPbrMaterialKind : String), ({ final __callArgument451:Dynamic = _Scene3DResources.listStandardPbrMaterialTextures__sceneMaterialTextureRegistry; __callArgument451; }));
   }
 
   @:allow(flight)
   @:keep
   private static function registerUnlitScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DMaterialTextures(({ final __callArgument414:Dynamic = registry; __callArgument414; }), (cast UnlitMaterialKind : String), ({ final __callArgument415:Dynamic = _Scene3DResources.listUnlitMaterialTextures__sceneMaterialTextureRegistry; __callArgument415; }));
+    registerScene3DMaterialTextures(({ final __callArgument454:Dynamic = registry; __callArgument454; }), (cast UnlitMaterialKind : String), ({ final __callArgument455:Dynamic = _Scene3DResources.listUnlitMaterialTextures__sceneMaterialTextureRegistry; __callArgument455; }));
   }
 
   public static function listStandardPbrMaterialTextures__sceneMaterialTextureRegistry(material:Material, out:Array<Texture>):Void {
-    _Scene3DResources.listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry(({ final __callArgument418:Dynamic = (cast material : StandardPbrMaterial); __callArgument418; }), ({ final __callArgument419:Dynamic = out; __callArgument419; }));
+    _Scene3DResources.listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry(({ final __callArgument458:Dynamic = (cast material : StandardPbrMaterial); __callArgument458; }), ({ final __callArgument459:Dynamic = out; __callArgument459; }));
   }
 
   public static function listStandardPbrPropertiesTextures__sceneMaterialTextureRegistry(pbr:StandardPbrMaterialProperties, out:Array<Texture>):Void {
@@ -1143,27 +1144,27 @@ class _Scene3DResources {
     var textures:Array<Texture> = cast _Runtime.UNDEFINED;
     var reset:flight._internal._Set<ImageResourceReference> = cast _Runtime.UNDEFINED;
     textures = (cast cast ([] : Array<Dynamic>));
-    getScene3DResourceTextures(({ final __callArgument422:Dynamic = textures; __callArgument422; }), ({ final __callArgument423:Dynamic = scene; __callArgument423; }));
+    getScene3DResourceTextures(({ final __callArgument462:Dynamic = textures; __callArgument462; }), ({ final __callArgument463:Dynamic = scene; __callArgument463; }));
     reset = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(textures, 'length') : Float)) : Bool)) {
         var texture:Texture = flight._internal._StaticIndex.readArray(textures, i);
-        var ref:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument426:Dynamic = scene; __callArgument426; }), ({ final __callArgument427:Dynamic = texture; __callArgument427; })) : Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
+        var ref:Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>> = (cast getScene3DTextureResourceReference(({ final __callArgument466:Dynamic = scene; __callArgument466; }), ({ final __callArgument467:Dynamic = texture; __callArgument467; })) : Null<flight._internal._Union2<EmbeddedImageResourceReference, ExternalImageResourceReference>>);
         if ((cast ((cast _Runtime.looseEquals(ref, null) : Bool) || (cast ((cast reset : flight._internal._Set<ImageResourceReference>).has(ref)) : Bool)) : Bool)) { i++; continue; }
-        if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct430 = options; __typedStruct430 == null ? _Runtime.UNDEFINED : __typedStruct430.select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (options.select)(({ final __callArgument431:Dynamic = texture; __callArgument431; }), ({ final __callArgument432:Dynamic = ref; __callArgument432; })) : Bool) : Bool)) : Bool)) { i++; continue; }
-        if ((cast (cast resetFailedImageResourceReference(({ final __callArgument433:Dynamic = ref; __callArgument433; })) : Bool) : Bool)) { ((cast reset : flight._internal._Set<ImageResourceReference>).add(ref)); }
+        if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct470 = options; __typedStruct470 == null ? _Runtime.UNDEFINED : __typedStruct470.select; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !(cast (options.select)(({ final __callArgument471:Dynamic = texture; __callArgument471; }), ({ final __callArgument472:Dynamic = ref; __callArgument472; })) : Bool) : Bool)) : Bool)) { i++; continue; }
+        if ((cast (cast resetFailedImageResourceReference(({ final __callArgument473:Dynamic = ref; __callArgument473; })) : Bool) : Bool)) { ((cast reset : flight._internal._Set<ImageResourceReference>).add(ref)); }
         i++;
       }
     }
-    (cast updateScene3DResourceStreaming(({ final __callArgument435:Dynamic = scene; __callArgument435; }), ({ final __callArgument436:Dynamic = resolver; __callArgument436; }), ({ final __callArgument437:Dynamic = options; __callArgument437; })) : Scene3DResources);
+    (cast updateScene3DResourceStreaming(({ final __callArgument475:Dynamic = scene; __callArgument475; }), ({ final __callArgument476:Dynamic = resolver; __callArgument476; }), ({ final __callArgument477:Dynamic = options; __callArgument477; })) : Scene3DResources);
     return cast (cast reset : flight._internal._Set<ImageResourceReference>).size;
     return cast null;
   }
 
   public static function createBuiltInScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolver {
     var resolver:Scene3DResourceResolver = cast _Runtime.UNDEFINED;
-    resolver = (cast createScene3DResourceResolver(({ final __callArgument441:Dynamic = options; __callArgument441; })) : Scene3DResourceResolver);
+    resolver = (cast createScene3DResourceResolver(({ final __callArgument481:Dynamic = options; __callArgument481; })) : Scene3DResourceResolver);
     registerStandardPbrScene3DMaterialTextures(resolver.registry);
     registerUnlitScene3DMaterialTextures(resolver.registry);
     registerExtendedPbrScene3DMaterialTextures(resolver.registry);
@@ -1173,9 +1174,9 @@ class _Scene3DResources {
 
   public static function createScene3DResourceResolver(?options:Scene3DResourceResolverOptions):Scene3DResourceResolver {
     var loader:ResourceLoader = cast _Runtime.UNDEFINED;
-    loader = (cast createResourceLoader((cast { dedupe: false, maxConcurrent: ({ final __typedStruct443 = options; __typedStruct443 == null ? _Runtime.UNDEFINED : __typedStruct443.maxConcurrent; }), streaming: true } : Dynamic)) : ResourceLoader);
-    startResourceLoad(({ final __callArgument445:Dynamic = loader; __callArgument445; }));
-    return cast (cast createEntity((cast _Runtime.objectFromPairs([{ key: 'fetch', value: _Runtime.coalesce(({ final __typedStruct447 = options; __typedStruct447 == null ? _Runtime.UNDEFINED : __typedStruct447.fetch; }), function():Dynamic return cast fetchWebImageResource) }, { key: 'registry', value: _Runtime.coalesce(({ final __typedStruct448 = options; __typedStruct448 == null ? _Runtime.UNDEFINED : __typedStruct448.registry; }), function():Dynamic return cast (cast createScene3DMaterialTextureRegistry() : Scene3DMaterialTextureRegistry)) }, { key: Scene3DResourceResolverRuntimeKey, value: { inFlight: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), loader: loader, resolved: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), signals: null } }]) : Dynamic)) : { >Entity, var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; var ___u40_Scene3DResourceResolverRuntimeKey_u40_57721:{ var inFlight:flight._internal._Map<flight._internal._Any, flight._internal._Any>; var loader:ResourceLoader; var resolved:flight._internal._Map<flight._internal._Any, flight._internal._Any>; var signals:flight._internal._Any; }; });
+    loader = (cast createResourceLoader((cast { dedupe: false, maxConcurrent: ({ final __typedStruct483 = options; __typedStruct483 == null ? _Runtime.UNDEFINED : __typedStruct483.maxConcurrent; }), streaming: true } : Dynamic)) : ResourceLoader);
+    startResourceLoad(({ final __callArgument485:Dynamic = loader; __callArgument485; }));
+    return cast (cast createEntity((cast _Runtime.objectFromPairs([{ key: 'fetch', value: _Runtime.coalesce(({ final __typedStruct487 = options; __typedStruct487 == null ? _Runtime.UNDEFINED : __typedStruct487.fetch; }), function():Dynamic return cast fetchWebImageResource) }, { key: 'registry', value: _Runtime.coalesce(({ final __typedStruct488 = options; __typedStruct488 == null ? _Runtime.UNDEFINED : __typedStruct488.registry; }), function():Dynamic return cast (cast createScene3DMaterialTextureRegistry() : Scene3DMaterialTextureRegistry)) }, { key: Scene3DResourceResolverRuntimeKey, value: { inFlight: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), loader: loader, resolved: _Runtime.construct(flight._internal._HostValueLut.get('Map'), []), signals: null } }]) : Dynamic)) : { >Entity, var fetch:ImageResourceFetch; var registry:Scene3DMaterialTextureRegistry; var ___u40_Scene3DResourceResolverRuntimeKey_u40_60173:{ var inFlight:flight._internal._Map<flight._internal._Any, flight._internal._Any>; var loader:ResourceLoader; var resolved:flight._internal._Map<flight._internal._Any, flight._internal._Any>; var signals:flight._internal._Any; }; });
     return cast null;
   }
 
@@ -1217,55 +1218,55 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function registerShadedScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DMaterialTextures(({ final __callArgument453:Dynamic = registry; __callArgument453; }), (cast ShadedMaterialKind : String), ({ final __callArgument454:Dynamic = function(material:Material, out:Array<Texture>):Void {
+    registerScene3DMaterialTextures(({ final __callArgument493:Dynamic = registry; __callArgument493; }), (cast ShadedMaterialKind : String), ({ final __callArgument494:Dynamic = function(material:Material, out:Array<Texture>):Void {
       var shaded:ShadedMaterial = cast _Runtime.UNDEFINED;
       shaded = (cast material : ShadedMaterial);
       if ((cast !_Runtime.strictEquals(shaded.diffuseMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([shaded.diffuseMap] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(shaded.normalMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([shaded.normalMap] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(shaded.specularMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([shaded.specularMap] : Array<Dynamic>)); }
-    }; __callArgument454; }));
+    }; __callArgument494; }));
   }
 
   @:allow(flight)
   @:keep
   private static function registerSheenPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures(({ final __callArgument457:Dynamic = registry; __callArgument457; }), (cast SheenPbrExtensionKind : String), ({ final __callArgument458:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures(({ final __callArgument497:Dynamic = registry; __callArgument497; }), (cast SheenPbrExtensionKind : String), ({ final __callArgument498:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var sheen:SheenPbrExtension = cast _Runtime.UNDEFINED;
       sheen = (cast extension : SheenPbrExtension);
       if ((cast !_Runtime.strictEquals(sheen.sheenColorMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([sheen.sheenColorMap] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(sheen.sheenRoughnessMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([sheen.sheenRoughnessMap] : Array<Dynamic>)); }
-    }; __callArgument458; }));
+    }; __callArgument498; }));
   }
 
   @:allow(flight)
   @:keep
   private static function registerSpecularPbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures(({ final __callArgument461:Dynamic = registry; __callArgument461; }), (cast SpecularPbrExtensionKind : String), ({ final __callArgument462:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures(({ final __callArgument501:Dynamic = registry; __callArgument501; }), (cast SpecularPbrExtensionKind : String), ({ final __callArgument502:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var specular:SpecularPbrExtension = cast _Runtime.UNDEFINED;
       specular = (cast extension : SpecularPbrExtension);
       if ((cast !_Runtime.strictEquals(specular.specularMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([specular.specularMap] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(specular.specularColorMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([specular.specularColorMap] : Array<Dynamic>)); }
-    }; __callArgument462; }));
+    }; __callArgument502; }));
   }
 
-  public static function loadScene3DDocumentFrom3dsUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+  public static function loadScene3DDocumentFrom3dsUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var bytes:Null<flight._internal._UInt8Array> = cast _Runtime.UNDEFINED;
         var document:Scene3DDocument = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl((cast url : String), ({ final __callArgument477:Dynamic = options; __callArgument477; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), function(__awaitValue471:Dynamic):Dynamic {
-          bytes = __awaitValue471;
-          var __flowBranch472:Dynamic;
+        return flight._internal._Async.flatMap((cast loadScene3DDocumentBytesFromUrl(({ final __callArgument519:Dynamic = host; __callArgument519; }), (cast url : String), ({ final __callArgument520:Dynamic = options; __callArgument520; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>), function(__awaitValue513:Dynamic):Dynamic {
+          bytes = __awaitValue513;
+          var __flowBranch514:Dynamic;
           if ((cast _Runtime.strictEquals(bytes, null) : Bool)) {
-            __flowBranch472 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch514 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(null);
             });
           } else {
-            __flowBranch472 = flight._internal._Async.flowNormal();
+            __flowBranch514 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch472, function():Dynamic {
-            document = (cast (#if js _Runtime.callValue(parse3ds, cast ([({ final __callArgument474:Dynamic = bytes; __callArgument474; })] : Array<Dynamic>)) #else parse3ds(({ final __callArgument473:Dynamic = bytes; __callArgument473; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3DDocument);
-            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument475:Dynamic = document; __callArgument475; }), (cast url : String));
+          return flight._internal._Async.continueFlow(__flowBranch514, function():Dynamic {
+            document = (cast (#if js _Runtime.callValue(parse3ds, cast ([({ final __callArgument516:Dynamic = bytes; __callArgument516; })] : Array<Dynamic>)) #else parse3ds(({ final __callArgument515:Dynamic = bytes; __callArgument515; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3DDocument);
+            setScene3DDocumentResourceBasePathFromUrl(({ final __callArgument517:Dynamic = document; __callArgument517; }), (cast url : String));
             return flight._internal._Async.flowReturn(document);
           });
         });
@@ -1276,22 +1277,22 @@ class _Scene3DResources {
   @:allow(flight)
   @:keep
   private static function registerTransmissionVolumePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures(({ final __callArgument479:Dynamic = registry; __callArgument479; }), (cast TransmissionVolumePbrExtensionKind : String), ({ final __callArgument480:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures(({ final __callArgument523:Dynamic = registry; __callArgument523; }), (cast TransmissionVolumePbrExtensionKind : String), ({ final __callArgument524:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var transmission:TransmissionVolumePbrExtension = cast _Runtime.UNDEFINED;
       transmission = (cast extension : TransmissionVolumePbrExtension);
       if ((cast !_Runtime.strictEquals(transmission.transmissionMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([transmission.transmissionMap] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(transmission.thicknessMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([transmission.thicknessMap] : Array<Dynamic>)); }
-    }; __callArgument480; }));
+    }; __callArgument524; }));
   }
 
   @:allow(flight)
   @:keep
   private static function registerWrappedDiffusePbrScene3DMaterialTextures(registry:Scene3DMaterialTextureRegistry):Void {
-    registerScene3DPbrExtensionTextures(({ final __callArgument483:Dynamic = registry; __callArgument483; }), (cast WrappedDiffusePbrExtensionKind : String), ({ final __callArgument484:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
+    registerScene3DPbrExtensionTextures(({ final __callArgument527:Dynamic = registry; __callArgument527; }), (cast WrappedDiffusePbrExtensionKind : String), ({ final __callArgument528:Dynamic = function(extension:PbrExtension, out:Array<Texture>):Void {
       var wrappedDiffuse:WrappedDiffusePbrExtension = cast _Runtime.UNDEFINED;
       wrappedDiffuse = (cast extension : WrappedDiffusePbrExtension);
       if ((cast !_Runtime.strictEquals(wrappedDiffuse.wrappedDiffuseMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([wrappedDiffuse.wrappedDiffuseMap] : Array<Dynamic>)); }
       if ((cast !_Runtime.strictEquals(wrappedDiffuse.thicknessMap, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([wrappedDiffuse.thicknessMap] : Array<Dynamic>)); }
-    }; __callArgument484; }));
+    }; __callArgument528; }));
   }
 }

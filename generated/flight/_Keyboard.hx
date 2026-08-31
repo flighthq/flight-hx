@@ -3,137 +3,87 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight.Types.SoftKeyboardResizeNoneKind;
+import flight._Entity.createEntity;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
-import flight._Types.SoftKeyboardResizeNoneKind;
-import flight.types.BackendExplanation;
-import flight.types.BackendOperationExplanation;
+import flight.types.Entity;
+import flight.types.HasSoftKeyboardAccessoryBar;
+import flight.types.HasSoftKeyboardChange;
+import flight.types.HasSoftKeyboardInfo;
+import flight.types.HasSoftKeyboardResizeModeWrite;
+import flight.types.HasSoftKeyboardScrollAssist;
+import flight.types.HasSoftKeyboardStyle;
+import flight.types.HasSoftKeyboardVisibility;
 import flight.types.Signal;
 import flight.types.SoftKeyboard;
-import flight.types.SoftKeyboardBackend;
+import flight.types.SoftKeyboardAccessoryBarBackend;
+import flight.types.SoftKeyboardAttachResult;
+import flight.types.SoftKeyboardChangeBackend;
+import flight.types.SoftKeyboardChangeSubscription;
 import flight.types.SoftKeyboardInfo;
-import flight.types.SoftKeyboardOperation;
-import flight.types.SoftKeyboardPhase;
+import flight.types.SoftKeyboardInfoBackend;
 import flight.types.SoftKeyboardResizeMode;
+import flight.types.SoftKeyboardResizeModeWriteBackend;
+import flight.types.SoftKeyboardScrollAssistBackend;
+import flight.types.SoftKeyboardSetterResult;
+import flight.types.SoftKeyboardStyleBackend;
 import flight.types.SoftKeyboardStyleKind;
-import flight.types.SoftKeyboardTransition;
-
-typedef VirtualKeyboard__keyboard = { >flight._internal.dom.EventTarget, var boundingRect:flight._internal.dom.DOMRect; var overlaysContent:Bool; var show:Void->Void; var hide:Void->Void; };
-
-typedef WebKeyboardGeometry__keyboard = { var height:Float; var width:Float; var x:Float; var y:Float; };
+import flight.types.SoftKeyboardVisibilityBackend;
+import flight.types.SoftKeyboardVisibilityResult;
 
 @:noCompletion
 class _Keyboard {
-  public static function attachSoftKeyboard(keyboard:SoftKeyboard):Void {
-    var backend:SoftKeyboardBackend = cast _Runtime.UNDEFINED;
-    var wasVisible:Bool = cast _Runtime.UNDEFINED;
-    var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
-    detachSoftKeyboard(({ final __callArgument0:Dynamic = keyboard; __callArgument0; }));
-    backend = (cast getSoftKeyboardBackend() : SoftKeyboardBackend);
-    wasVisible = (cast (cast backend : SoftKeyboardBackend).getInfo(({ final __callArgument2:Dynamic = _Keyboard._scratch__keyboard; __callArgument2; })) : { var visible:Bool; }).visible;
-    unsubscribe = (cast backend : SoftKeyboardBackend).subscribe(({ final __callArgument4:Dynamic = function(phase:SoftKeyboardPhase, transition:SoftKeyboardTransition):Void {
-      var prevVisible:Bool = cast _Runtime.UNDEFINED;
-      var info:SoftKeyboardInfo = cast _Runtime.UNDEFINED;
-      var nowVisible:Bool = cast _Runtime.UNDEFINED;
-      prevVisible = wasVisible;
-      info = (cast backend : SoftKeyboardBackend).getInfo(({ final __callArgument3:Dynamic = _Keyboard._scratch__keyboard; __callArgument3; }));
-      nowVisible = info.visible;
-      if ((cast _Runtime.strictEquals(phase, 'will') : Bool)) {
-        if ((cast ((cast nowVisible : Bool) && (cast !(cast prevVisible : Bool) : Bool)) : Bool)) {
-          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onWillShow], [transition]]), 1);
-        } else { if ((cast ((cast !(cast nowVisible : Bool) : Bool) && (cast prevVisible : Bool)) : Bool)) {
-          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onWillHide], [transition]]), 1);
-        } else {
-          _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onWillResize], [transition]]), 1);
-        } }
-      } else {
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onDidResize], [info.height]]), 1);
-        _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onResize], [info.height]]), 1);
-        if ((cast !_Runtime.strictEquals(nowVisible, prevVisible) : Bool)) {
-          (wasVisible = cast (nowVisible : Dynamic));
-          if ((cast nowVisible : Bool)) {
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onDidShow], [info.height]]), 1);
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onShow], [info.height]]), 1);
-          } else {
-            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onDidHide]]), 1);
+  public static function attachSoftKeyboard(host:{ >HasSoftKeyboardChange, >HasSoftKeyboardInfo, }, keyboard:SoftKeyboard):flight._internal._Promise<SoftKeyboardAttachResult> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        var change:SoftKeyboardChangeBackend = cast _Runtime.UNDEFINED;
+        var info:SoftKeyboardInfoBackend = cast _Runtime.UNDEFINED;
+        var prevHeight:Float = cast _Runtime.UNDEFINED;
+        var subscription:SoftKeyboardChangeSubscription = cast _Runtime.UNDEFINED;
+        detachSoftKeyboard(({ final __callArgument5:Dynamic = keyboard; __callArgument5; }));
+        change = (cast (cast host : { var input:{ var softKeyboardChange:SoftKeyboardChangeBackend; var softKeyboardInfo:SoftKeyboardInfoBackend; }; }).input : { var softKeyboardChange:SoftKeyboardChangeBackend; }).softKeyboardChange;
+        info = (cast (cast host : { var input:{ var softKeyboardChange:SoftKeyboardChangeBackend; var softKeyboardInfo:SoftKeyboardInfoBackend; }; }).input : { var softKeyboardInfo:SoftKeyboardInfoBackend; }).softKeyboardInfo;
+        prevHeight = (cast (cast info : SoftKeyboardInfoBackend).getInfo(({ final __callArgument7:Dynamic = _Keyboard._scratch__keyboard; __callArgument7; })) : { var height:Float; }).height;
+        return flight._internal._Async.flatMap((cast change : SoftKeyboardChangeBackend).subscribe(({ final __callArgument11:Dynamic = function():Void {
+          var nowInfo:SoftKeyboardInfo = cast _Runtime.UNDEFINED;
+          var nowHeight:Float = cast _Runtime.UNDEFINED;
+          var wasVisible:Bool = cast _Runtime.UNDEFINED;
+          var nowVisible:Bool = cast _Runtime.UNDEFINED;
+          nowInfo = (cast info : SoftKeyboardInfoBackend).getInfo(({ final __callArgument10:Dynamic = _Keyboard._scratch__keyboard; __callArgument10; }));
+          nowHeight = nowInfo.height;
+          wasVisible = ((cast prevHeight : Float) > (cast 0.0 : Float));
+          nowVisible = ((cast nowHeight : Float) > (cast 0.0 : Float));
+          if ((cast ((cast nowVisible : Bool) && (cast !(cast wasVisible : Bool) : Bool)) : Bool)) {
+            (prevHeight = cast (nowHeight : Dynamic));
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onShow], [nowHeight]]), 1);
+          } else { if ((cast ((cast !(cast nowVisible : Bool) : Bool) && (cast wasVisible : Bool)) : Bool)) {
+            (prevHeight = cast (0.0 : Dynamic));
             _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onHide]]), 1);
+          } else { if ((cast ((cast nowVisible : Bool) && (cast !_Runtime.strictEquals(nowHeight, prevHeight) : Bool)) : Bool)) {
+            (prevHeight = cast (nowHeight : Dynamic));
+            _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[keyboard.onResize], [nowHeight]]), 1);
+          } } }
+        }; __callArgument11; })), function(__awaitValue8:Dynamic):Dynamic {
+          subscription = __awaitValue8;
+          var __flowBranch9:Dynamic;
+          if ((cast !_Runtime.strictEquals((cast subscription : SoftKeyboardChangeSubscription).result, 'ok') : Bool)) {
+            __flowBranch9 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn((cast subscription : SoftKeyboardChangeSubscription).result);
+            });
+          } else {
+            __flowBranch9 = flight._internal._Async.flowNormal();
           }
-        }
-      }
-    }; __callArgument4; }));
-    ((cast _Keyboard._subscriptions__keyboard : flight._internal._WeakMap<SoftKeyboard, Void->Void>).set(keyboard, (cast unsubscribe)));
+          return flight._internal._Async.continueFlow(__flowBranch9, function():Dynamic {
+            ((cast _Keyboard._subscriptions__keyboard : flight._internal._WeakMap<SoftKeyboard, Void->Void>).set(keyboard, (cast (cast subscription : SoftKeyboardChangeSubscription).unsubscribe)));
+            return flight._internal._Async.flowReturn('ok');
+          });
+        });
+      })
+    );
   }
 
-  public static function createSoftKeyboard():SoftKeyboard {
-    return cast { onShow: (cast createSignal() : Signal<Float->Void>), onHide: (cast createSignal() : Signal<Void->Void>), onResize: (cast createSignal() : Signal<Float->Void>), onWillShow: (cast createSignal() : Signal<SoftKeyboardTransition->Void>), onWillHide: (cast createSignal() : Signal<SoftKeyboardTransition->Void>), onWillResize: (cast createSignal() : Signal<SoftKeyboardTransition->Void>), onDidShow: (cast createSignal() : Signal<Float->Void>), onDidHide: (cast createSignal() : Signal<Void->Void>), onDidResize: (cast createSignal() : Signal<Float->Void>) };
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function createSoftKeyboardInfo():SoftKeyboardInfo {
-    return cast { visible: false, height: 0.0, x: 0.0, y: 0.0, width: 0.0 };
-    return cast null;
-  }
-
-  public static function createSoftKeyboardTransition():SoftKeyboardTransition {
-    return cast { durationSeconds: 0.0, height: 0.0 };
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function createWebSoftKeyboardBackend():SoftKeyboardBackend {
-    return cast { getInfo: function(out:SoftKeyboardInfo):SoftKeyboardInfo {
-      var geo:WebKeyboardGeometry__keyboard = cast _Runtime.UNDEFINED;
-      geo = (cast _Keyboard.getWebKeyboardGeometry__keyboard() : WebKeyboardGeometry__keyboard);
-      (out.height = cast ((cast geo : WebKeyboardGeometry__keyboard).height : Float));
-      (out.visible = cast (((cast (cast geo : WebKeyboardGeometry__keyboard).height : Float) > (cast 0.0 : Float)) : Bool));
-      (out.x = cast ((cast geo : WebKeyboardGeometry__keyboard).x : Float));
-      (out.y = cast ((cast geo : WebKeyboardGeometry__keyboard).y : Float));
-      (out.width = cast ((cast geo : WebKeyboardGeometry__keyboard).width : Float));
-      return cast out;
-      return cast _Runtime.UNDEFINED;
-    }, subscribe: function(listener:SoftKeyboardPhase->SoftKeyboardTransition->Void):Void->Void {
-      var transition:SoftKeyboardTransition = cast _Runtime.UNDEFINED;
-      var fire:Void->Void = cast _Runtime.UNDEFINED;
-      var virtualKeyboard:Null<VirtualKeyboard__keyboard> = cast _Runtime.UNDEFINED;
-      var viewport:Null<flight._internal.dom.VisualViewport> = cast _Runtime.UNDEFINED;
-      if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast function():Void {
-
-      }; }
-      transition = (cast { durationSeconds: 0.0, height: 0.0 });
-      fire = (cast function():Void { listener(({ final __callArgument5:Dynamic = 'did'; __callArgument5; }), ({ final __callArgument6:Dynamic = transition; __callArgument6; })); });
-      virtualKeyboard = (cast _Keyboard.getVirtualKeyboard__keyboard() : Null<VirtualKeyboard__keyboard>);
-      if ((cast !_Runtime.strictEquals(virtualKeyboard, null) : Bool)) {
-        (cast virtualKeyboard : VirtualKeyboard__keyboard).addEventListener((cast 'geometrychange' : String), ({ final __callArgument9:Dynamic = fire; __callArgument9; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end);
-        return cast function():Void { (cast virtualKeyboard : VirtualKeyboard__keyboard).removeEventListener((cast 'geometrychange' : String), ({ final __callArgument10:Dynamic = fire; __callArgument10; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end); };
-      }
-      viewport = flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'visualViewport');
-      if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast function():Void {
-
-      }; }
-      (cast viewport : flight._internal.dom.VisualViewport).addEventListener('resize', fire);
-      (cast viewport : flight._internal.dom.VisualViewport).addEventListener('scroll', fire);
-      return cast function():Void {
-        (cast viewport : flight._internal.dom.VisualViewport).removeEventListener('resize', fire);
-        (cast viewport : flight._internal.dom.VisualViewport).removeEventListener('scroll', fire);
-      };
-      return cast _Runtime.UNDEFINED;
-    }, show: function():Void {
-      var vk:Null<VirtualKeyboard__keyboard> = cast _Runtime.UNDEFINED;
-      vk = (cast _Keyboard.getVirtualKeyboard__keyboard() : Null<VirtualKeyboard__keyboard>);
-      if ((cast !_Runtime.strictEquals(vk, null) : Bool)) {
-        (cast vk : VirtualKeyboard__keyboard).show();
-      }
-    }, hide: function():Void {
-      var vk:Null<VirtualKeyboard__keyboard> = cast _Runtime.UNDEFINED;
-      vk = (cast _Keyboard.getVirtualKeyboard__keyboard() : Null<VirtualKeyboard__keyboard>);
-      if ((cast !_Runtime.strictEquals(vk, null) : Bool)) {
-        (cast vk : VirtualKeyboard__keyboard).hide();
-      }
-    } };
+  public static function createSoftKeyboard():{ >SoftKeyboard, >Entity, } {
+    return cast (cast createEntity((cast { onShow: (cast createSignal() : Signal<Float->Void>), onHide: (cast createSignal() : Signal<Void->Void>), onResize: (cast createSignal() : Signal<Float->Void>) } : Dynamic)) : { >Entity, var onShow:Signal<Float->Void>; var onHide:Signal<Void->Void>; var onResize:Signal<Float->Void>; });
     return cast null;
   }
 
@@ -147,188 +97,55 @@ class _Keyboard {
   }
 
   public static function disposeSoftKeyboard(keyboard:SoftKeyboard):Void {
-    detachSoftKeyboard(({ final __callArgument11:Dynamic = keyboard; __callArgument11; }));
+    detachSoftKeyboard(({ final __callArgument12:Dynamic = keyboard; __callArgument12; }));
   }
 
-  public static function explainSoftKeyboardBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Keyboard._custom__keyboard, null) : Bool)) {
-      return cast { conflict: _Keyboard._hostConflict__keyboard, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Keyboard._host__keyboard, null) : Bool)) {
-      return cast { conflict: _Keyboard._hostConflict__keyboard, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Keyboard._hostObservation__keyboard, null) : Bool) ? (cast (cast _Keyboard._hostObservation__keyboard : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Keyboard._hostObservation__keyboard, null) : Bool) ? (cast (cast _Keyboard._hostObservation__keyboard : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+  public static function getSoftKeyboardHeight(host:HasSoftKeyboardInfo):Float {
+    return cast (cast (cast (cast (cast host : HasSoftKeyboardInfo).input : { var softKeyboardInfo:SoftKeyboardInfoBackend; }).softKeyboardInfo : SoftKeyboardInfoBackend).getInfo(({ final __callArgument14:Dynamic = _Keyboard._scratch__keyboard; __callArgument14; })) : { var height:Float; }).height;
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function explainSoftKeyboardOperation(operation:SoftKeyboardOperation):BackendOperationExplanation {
-    if ((cast ((cast !_Runtime.strictEquals(_Keyboard._custom__keyboard, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Keyboard._custom__keyboard, operation)), 'function') : Bool)) : Bool)) {
-      return cast { implemented: true, layer: 'custom', operation: operation };
-    }
-    if ((cast ((cast !_Runtime.strictEquals(_Keyboard._host__keyboard, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Keyboard._host__keyboard, operation)), 'function') : Bool)) : Bool)) {
-      return cast { implemented: true, layer: 'host', operation: operation };
-    }
-    return cast { implemented: false, layer: 'sentinel', operation: operation };
+  public static function getSoftKeyboardInfo(host:HasSoftKeyboardInfo, out:SoftKeyboardInfo):SoftKeyboardInfo {
+    return cast (cast (cast (cast host : HasSoftKeyboardInfo).input : { var softKeyboardInfo:SoftKeyboardInfoBackend; }).softKeyboardInfo : SoftKeyboardInfoBackend).getInfo(({ final __callArgument15:Dynamic = out; __callArgument15; }));
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function getSoftKeyboardBackend():SoftKeyboardBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Keyboard._custom__keyboard, function():Dynamic return cast _Keyboard._host__keyboard), function():Dynamic return cast _Keyboard._sentinel__keyboard);
+  public static function hideSoftKeyboard(host:HasSoftKeyboardVisibility):flight._internal._Promise<SoftKeyboardVisibilityResult> {
+    return cast (cast (cast (cast host : HasSoftKeyboardVisibility).input : { var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }).softKeyboardVisibility : SoftKeyboardVisibilityBackend).hide();
     return cast null;
   }
 
-  public static function getSoftKeyboardHeight():Float {
-    return cast (cast (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getInfo(({ final __callArgument13:Dynamic = _Keyboard._scratch__keyboard; __callArgument13; })) : { var height:Float; }).height;
+  public static function isSoftKeyboardVisible(host:HasSoftKeyboardInfo):Bool {
+    return cast (cast (cast (cast (cast host : HasSoftKeyboardInfo).input : { var softKeyboardInfo:SoftKeyboardInfoBackend; }).softKeyboardInfo : SoftKeyboardInfoBackend).getInfo(({ final __callArgument16:Dynamic = _Keyboard._scratch__keyboard; __callArgument16; })) : { var visible:Bool; }).visible;
     return cast null;
   }
 
-  public static function getSoftKeyboardInfo(out:SoftKeyboardInfo):SoftKeyboardInfo {
-    return cast (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getInfo(({ final __callArgument14:Dynamic = out; __callArgument14; }));
+  public static function setSoftKeyboardAccessoryBarVisible(host:HasSoftKeyboardAccessoryBar, visible:Bool):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast (cast (cast (cast host : HasSoftKeyboardAccessoryBar).input : { var softKeyboardAccessoryBar:SoftKeyboardAccessoryBarBackend; }).softKeyboardAccessoryBar : SoftKeyboardAccessoryBarBackend).setAccessoryBarVisible((cast visible : Bool));
     return cast null;
   }
 
-  public static function getSoftKeyboardResizeMode():SoftKeyboardResizeMode {
-    var backend:SoftKeyboardBackend = cast _Runtime.UNDEFINED;
-    backend = (cast getSoftKeyboardBackend() : SoftKeyboardBackend);
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast backend : SoftKeyboardBackend).getResizeMode, cast ([] : Array<Dynamic>)), function():Dynamic return cast SoftKeyboardResizeNoneKind);
+  public static function setSoftKeyboardResizeMode(host:HasSoftKeyboardResizeModeWrite, mode:SoftKeyboardResizeMode):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast (cast (cast (cast host : HasSoftKeyboardResizeModeWrite).input : { var softKeyboardResizeModeWrite:SoftKeyboardResizeModeWriteBackend; }).softKeyboardResizeModeWrite : SoftKeyboardResizeModeWriteBackend).setResizeMode((cast mode : String));
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function hasSoftKeyboardOperation(operation:SoftKeyboardOperation):Bool {
-    return cast (cast (cast explainSoftKeyboardOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
+  public static function setSoftKeyboardScrollAssistEnabled(host:HasSoftKeyboardScrollAssist, enabled:Bool):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast (cast (cast (cast host : HasSoftKeyboardScrollAssist).input : { var softKeyboardScrollAssist:SoftKeyboardScrollAssistBackend; }).softKeyboardScrollAssist : SoftKeyboardScrollAssistBackend).setScrollAssistEnabled((cast enabled : Bool));
     return cast null;
   }
 
-  public static function hideSoftKeyboard():Void {
-    (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).hide();
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installSoftKeyboardHostBackend(backend:SoftKeyboardBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Keyboard._host__keyboard, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Keyboard._host__keyboard, backend) : Bool)) { (_Keyboard._hostConflict__keyboard = cast (true : Dynamic)); }
-      return;
-    }
-    (_Keyboard._host__keyboard = cast (backend : Dynamic));
-  }
-
-  public static function isSoftKeyboardAccessoryBarVisible():Bool {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getAccessoryBarVisible, cast ([] : Array<Dynamic>)), function():Dynamic return cast false);
+  public static function setSoftKeyboardStyle(host:HasSoftKeyboardStyle, style:SoftKeyboardStyleKind):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast (cast (cast (cast host : HasSoftKeyboardStyle).input : { var softKeyboardStyle:SoftKeyboardStyleBackend; }).softKeyboardStyle : SoftKeyboardStyleBackend).setStyle((cast style : String));
     return cast null;
   }
 
-  public static function isSoftKeyboardScrollAssistEnabled():Bool {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).getScrollAssistEnabled, cast ([] : Array<Dynamic>)), function():Dynamic return cast false);
+  public static function showSoftKeyboard(host:HasSoftKeyboardVisibility):flight._internal._Promise<SoftKeyboardVisibilityResult> {
+    return cast (cast (cast (cast host : HasSoftKeyboardVisibility).input : { var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }).softKeyboardVisibility : SoftKeyboardVisibilityBackend).show();
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function observeSoftKeyboardHostResult(operation:String, succeeded:Bool):Void {
-    (_Keyboard._hostObservation__keyboard = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetSoftKeyboardBackendForTest():Void {
-    (_Keyboard._custom__keyboard = cast (null : Dynamic));
-    (_Keyboard._host__keyboard = cast (null : Dynamic));
-    (_Keyboard._hostConflict__keyboard = cast (false : Dynamic));
-    (_Keyboard._hostObservation__keyboard = cast (null : Dynamic));
-  }
-
-  public static function setSoftKeyboardAccessoryBarVisible(visible:Bool):Void {
-    _Runtime.callOptionalValue((cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).setAccessoryBarVisible, cast ([visible] : Array<Dynamic>));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function setSoftKeyboardBackend(backend:Null<SoftKeyboardBackend>):Void {
-    (_Keyboard._custom__keyboard = cast (backend : Dynamic));
-  }
-
-  public static function setSoftKeyboardResizeMode(mode:SoftKeyboardResizeMode):Void {
-    _Runtime.callOptionalValue((cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).setResizeMode, cast ([mode] : Array<Dynamic>));
-  }
-
-  public static function setSoftKeyboardScrollAssistEnabled(enabled:Bool):Void {
-    _Runtime.callOptionalValue((cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).setScrollAssistEnabled, cast ([enabled] : Array<Dynamic>));
-  }
-
-  public static function setSoftKeyboardStyle(style:SoftKeyboardStyleKind):Void {
-    _Runtime.callOptionalValue((cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).setStyle, cast ([style] : Array<Dynamic>));
-  }
-
-  public static function showSoftKeyboard():Void {
-    (cast (cast getSoftKeyboardBackend() : SoftKeyboardBackend) : SoftKeyboardBackend).show();
-  }
-
-  public static var _custom__keyboard:Null<SoftKeyboardBackend> = _Runtime.explicitNull();
-
-  public static var _host__keyboard:Null<SoftKeyboardBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__keyboard:Bool = false;
-
-  public static var _hostObservation__keyboard:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
-
-  public static final _sentinel__keyboard:SoftKeyboardBackend = (cast { getInfo: function(out:SoftKeyboardInfo):SoftKeyboardInfo {
-    (out.visible = cast (false : Bool));
-    (out.height = cast (0.0 : Float));
-    (out.x = cast (0.0 : Float));
-    (out.y = cast (0.0 : Float));
-    (out.width = cast (0.0 : Float));
-    return cast out;
-    return cast _Runtime.UNDEFINED;
-  }, subscribe: function(listener:SoftKeyboardPhase->SoftKeyboardTransition->Void):Void->Void {
-    return cast function():Void {
-
-    };
-    return cast _Runtime.UNDEFINED;
-  }, show: function():Void {
-
-  }, hide: function():Void {
-
-  } });
-
-  public static final _scratch__keyboard:SoftKeyboardInfo = (cast createSoftKeyboardInfo() : SoftKeyboardInfo);
+  public static final _scratch__keyboard:SoftKeyboardInfo = (cast { visible: false, height: 0.0, x: 0.0, y: 0.0, width: 0.0 });
 
   public static final _subscriptions__keyboard:flight._internal._WeakMap<SoftKeyboard, Void->Void> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
-
-  public static function getVirtualKeyboard__keyboard():Null<VirtualKeyboard__keyboard> {
-    var nav:flight._internal._Intersection2<flight._internal.dom.Navigator, { @:optional var virtualKeyboard:Null<VirtualKeyboard__keyboard>; }> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) { return cast null; }
-    nav = (cast flight._internal.backend.DomNavigatorBackend.value() : flight._internal._Intersection2<flight._internal.dom.Navigator, { @:optional var virtualKeyboard:VirtualKeyboard__keyboard; }>);
-    return cast _Runtime.coalesce(flight._internal.backend.DomNavigatorBackend.field(nav, 'virtualKeyboard'), function():Dynamic return cast null);
-    return cast null;
-  }
-
-  public static function getWebKeyboardGeometry__keyboard():WebKeyboardGeometry__keyboard {
-    var vk:Null<VirtualKeyboard__keyboard> = cast _Runtime.UNDEFINED;
-    var viewport:Null<flight._internal.dom.VisualViewport> = cast _Runtime.UNDEFINED;
-    var shrink:Float = cast _Runtime.UNDEFINED;
-    var height:Float = cast _Runtime.UNDEFINED;
-    var width:Float = cast _Runtime.UNDEFINED;
-    var y:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('window'), 'undefined') : Bool)) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
-    vk = (cast _Keyboard.getVirtualKeyboard__keyboard() : Null<VirtualKeyboard__keyboard>);
-    if ((cast !_Runtime.strictEquals(vk, null) : Bool)) {
-      var rect:flight._internal.dom.DOMRect = (cast vk : VirtualKeyboard__keyboard).boundingRect;
-      return cast { height: (cast rect : flight._internal.dom.DOMRect).height, width: (cast rect : flight._internal.dom.DOMRect).width, x: (cast rect : flight._internal.dom.DOMRect).x, y: (cast rect : flight._internal.dom.DOMRect).y };
-    }
-    viewport = flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'visualViewport');
-    if ((cast ((cast _Runtime.strictEquals(viewport, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(viewport, null) : Bool)) : Bool)) { return cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 }; }
-    shrink = _Runtime.subtractNumbers(flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'innerHeight'), (cast viewport : flight._internal.dom.VisualViewport).height);
-    height = ((cast ((cast shrink : Float) > (cast 0.0 : Float)) : Bool) ? (cast shrink : Dynamic) : (cast 0.0 : Dynamic));
-    width = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast flight._internal.backend.DomWindowBackend.field(flight._internal.backend.DomWindowBackend.value(), 'innerWidth') : Dynamic) : (cast 0.0 : Dynamic));
-    y = ((cast ((cast height : Float) > (cast 0.0 : Float)) : Bool) ? (cast (cast viewport : flight._internal.dom.VisualViewport).height : Dynamic) : (cast 0.0 : Dynamic));
-    return cast { height: height, width: width, x: 0.0, y: y };
-    return cast null;
-  }
 }

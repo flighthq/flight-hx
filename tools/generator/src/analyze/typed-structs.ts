@@ -36,17 +36,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free bitmap region',
   },
   {
-    declarationFingerprint: 'sha256:42e9530ec685e1f00cc45e3695ffe475266047164f10002bcb41a8ad935d17e6',
+    declarationFingerprint: 'sha256:7b13d22a6501300f888dfc1d174bb0d7a4eb02db97f0112d52adcd1f0d4156ba',
     id: '@flighthq/types:interface#GlRenderStateRuntime',
     purpose: 'reviewed escape-free WebGL render-state runtime',
   },
   {
-    declarationFingerprint: 'sha256:9cc616216457e3fabf5cc18316b36ac4a679a51a51daa3184ff23ab653ca7b92',
-    id: '@flighthq/types:interface#WgpuRenderStateRuntime',
-    purpose: 'reviewed escape-free WebGPU render-state runtime',
-  },
-  {
-    declarationFingerprint: 'sha256:77ecafe9197f64a9e574cc139335cb7aff72a45c8b5efecc742d943d53a49e3a',
+    declarationFingerprint: 'sha256:aebdf41761931dac048956317e71e4924db4e1d756cdb71350a0c3395cbc6e8b',
     id: '@flighthq/types:interface#CanvasRenderTarget',
     purpose: 'reviewed escape-free Canvas render target',
   },
@@ -66,7 +61,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free render-target descriptor',
   },
   {
-    declarationFingerprint: 'sha256:de5e0a1a5472a9b3ac12290774a86664d21b2546fec67a47cedd3b96b20ef04f',
+    declarationFingerprint: 'sha256:e8e718c9a2fc110b9f33f3d8af52a03c9cd022c91939c2ac4a89d8bbec43bf81',
     id: '@flighthq/types:interface#WgpuRenderTarget',
     purpose: 'reviewed escape-free WebGPU render target',
   },
@@ -556,7 +551,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free WebGPU scissor rectangle',
   },
   {
-    declarationFingerprint: 'sha256:5af720d86a9638ad751e184c1a7db541300dcdce38e6e5e5168e2c0fe5b00421',
+    declarationFingerprint: 'sha256:49829034e818c85135b2db072891f05b640940dd5d6514596579035b22109f96',
     id: '@flighthq/types:interface#CanvasRenderStateRuntime',
     purpose: 'reviewed escape-free Canvas render-state runtime',
   },
@@ -1301,7 +1296,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Capacitor device info',
   },
   {
-    declarationFingerprint: 'sha256:f0ff8180f6aea9d35478fc8c9e6286d524e4ce32fed7623b2b2e5fe4a65cf11e',
+    declarationFingerprint: 'sha256:021cb40f60ced0ae90a2bcc5ab9547ce29c493b006f71521ee347cd68bfc34fa',
     id: '@flighthq/types:interface#ElectronDisplay',
     purpose: 'reviewed escape-free Electron display',
   },
@@ -1311,7 +1306,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Electron rectangle',
   },
   {
-    declarationFingerprint: 'sha256:b30795d80dbe254f4e9c948d7cb48d343af06663ca1574e18a0ba9a23e6d8a3e',
+    declarationFingerprint: 'sha256:2570847ccc83abcfda2129d907c117c104272439a99cf9c890947af88f800a44',
     id: '@flighthq/types:interface#SoftKeyboard',
     purpose: 'reviewed escape-free soft keyboard',
   },
@@ -1366,7 +1361,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Scene3D forward-light selection',
   },
   {
-    declarationFingerprint: 'sha256:e0a62ab9b91837adf5488e49d0c33cd05027b35154948fc8d2167b4185d6ba2d',
+    declarationFingerprint: 'sha256:7236ded9f6ca6035d9481d6c2aca631ca977acd544e75373b5665c2db7fd3722',
     id: '@flighthq/types:interface#CanvasRenderTargetPool',
     purpose: 'reviewed escape-free Canvas render-target pool',
   },
@@ -1454,11 +1449,6 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     declarationFingerprint: 'sha256:5457497ed09b0fa23e64aa05dce5b60933f498139db0fc6470ba4f0e29804d8d',
     id: '@flighthq/types:interface#WgpuMeshPipeline',
     purpose: 'reviewed escape-free WebGPU mesh pipeline',
-  },
-  {
-    declarationFingerprint: 'sha256:0cd69d580d37270bd7601022682d57f0789628f77872eb1af86902faa8e8080c',
-    id: '@flighthq/types:interface#WgpuRenderOptions',
-    purpose: 'reviewed escape-free WebGPU render options',
   },
   {
     declarationFingerprint: 'sha256:22df7e6d3385e1e076ae9715044784097c49ec0109050e4f7f8424f0fb7c93a1',
@@ -1831,29 +1821,14 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Physics3D generic six-DOF joint',
   },
   {
-    declarationFingerprint: 'sha256:bf54026159b9f0b3aa3951ced7856cb58c83480a7bfffbc5dd32f36ea5a03b02',
-    id: '@flighthq/types:interface#CanvasRenderRegistries',
-    purpose: 'reviewed escape-free Canvas render registries',
-  },
-  {
     declarationFingerprint: 'sha256:3b8ef9dbbfa02ffa5cbfa60a7794d052d50f559167276292a2a620425bedb3e0',
     id: '@flighthq/types:interface#DomRenderRegistries',
     purpose: 'reviewed escape-free DOM render registries',
   },
   {
-    declarationFingerprint: 'sha256:43740eafc1e1c310207dcce7ac38be6340b29e9a1a67fcec617ff72fef5634ea',
-    id: '@flighthq/types:interface#GlRenderRegistries',
-    purpose: 'reviewed escape-free WebGL render registries',
-  },
-  {
-    declarationFingerprint: 'sha256:025737da9ae647cb9dbb97d5b4a0fcee009a6fde35836d07bb03683375d9a3dc',
+    declarationFingerprint: 'sha256:588c462592a24ac1b9e061518dccbccc047d97b96b263401df8da4d7e08e710f',
     id: '@flighthq/types:interface#RenderRegistries',
     purpose: 'reviewed escape-free render registries',
-  },
-  {
-    declarationFingerprint: 'sha256:9fc24ca0be8f86d689020a89a978acdd3d9e5b24efa7cb8473fe58deb4f117df',
-    id: '@flighthq/types:interface#WgpuRenderRegistries',
-    purpose: 'reviewed escape-free WebGPU render registries',
   },
   {
     declarationFingerprint: 'sha256:5ce6595f77e48ec51736d037cd6c477e81146a82bc72dfb055963b7abde227bd',
@@ -2236,15 +2211,28 @@ const approvedTypedStructRenames = new Map<string, string>([
   ['@flighthq/types:interface#SceneAnimationTarget', '@flighthq/types:interface#Scene3DAnimationTarget'],
   ['@flighthq/types:interface#SceneNodeTraits', '@flighthq/types:interface#Node3DTraits'],
   ['@flighthq/types:interface#Surface', '@flighthq/types:interface#Bitmap'],
+  ['@flighthq/types:interface#WebcamCaptureOptions', '@flighthq/types:interface#MediaFileCaptureOptions'],
+  ['@flighthq/types:interface#WebcamPhoto', '@flighthq/types:interface#MediaFileCapturePhoto'],
+  ['@flighthq/types:interface#WebcamVideo', '@flighthq/types:interface#MediaFileCaptureVideo'],
   ['@flighthq/types:type#SceneRuntime', '@flighthq/types:type#Scene3DRuntime'],
 ]);
 
 const approvedTypedStructKindChanges = new Map<string, string>([
   ['@flighthq/types:interface#CubeTexture', '@flighthq/types:type#CubeTexture'],
+  ['@flighthq/types:interface#ShareContent', '@flighthq/types:type#ShareContent'],
   ['@flighthq/types:interface#Texture', '@flighthq/types:type#Texture'],
 ]);
 
 const approvedTypedStructReplacementRemovals = new Map<string, string[]>([
+  [
+    '@flighthq/types:interface#AppUpdater',
+    [
+      '@flighthq/types:interface#DownloadedUpdate',
+      '@flighthq/types:type#AppUpdateCheckOutcome',
+      '@flighthq/types:interface#AppUpdateInstallOutcome',
+      '@flighthq/types:interface#UpdaterCommandBackend',
+    ],
+  ],
   [
     '@flighthq/types:interface#ImageResource',
     [
@@ -2254,12 +2242,73 @@ const approvedTypedStructReplacementRemovals = new Map<string, string[]>([
     ],
   ],
   [
+    '@flighthq/types:interface#IpcBackendCapabilities',
+    ['@flighthq/types:interface#HostIpcCapabilities', '@flighthq/types:interface#IpcMessageBackend'],
+  ],
+  ['@flighthq/types:interface#IpcChannel', ['@flighthq/types:interface#IpcMessageBackend']],
+  ['@flighthq/types:interface#IpcMessageEvent', ['@flighthq/types:interface#IpcMessageBackend']],
+  ['@flighthq/types:interface#IpcSignals', ['@flighthq/types:interface#IpcMessageBackend']],
+  ['@flighthq/types:interface#IpcTarget', ['@flighthq/types:interface#IpcMessageBackend']],
+  ['@flighthq/types:interface#NotificationCapabilities', ['@flighthq/types:interface#HostNotificationCapabilities']],
+  ['@flighthq/types:interface#NotificationChannel', ['@flighthq/types:interface#HostNotificationCapabilities']],
+  [
+    '@flighthq/types:interface#OpenDirectoryDialogOptions',
+    ['@flighthq/types:type#DirectoryOpenDialogResult', '@flighthq/types:interface#DirectoryOpenDialogBackend'],
+  ],
+  ['@flighthq/types:interface#ShareOptions', ['@flighthq/types:interface#CapacitorShareContentOptions']],
+  [
+    '@flighthq/types:interface#ShellOpenExternalOptions',
+    ['@flighthq/types:interface#ShellExternalBackend', '@flighthq/types:interface#ShellExternalUrlPolicy'],
+  ],
+  [
+    '@flighthq/types:interface#ShellOpenPathOptions',
+    ['@flighthq/types:interface#ShellPathOpenBackend', '@flighthq/types:type#ShellPathOpenOutcome'],
+  ],
+  ['@flighthq/types:interface#ShortcutEvent', ['@flighthq/types:interface#GlobalShortcut']],
+  ['@flighthq/types:interface#ShortcutSignals', ['@flighthq/types:interface#GlobalShortcut']],
+  ['@flighthq/types:interface#StorageQuota', ['@flighthq/types:type#StorageByteSizeResult']],
+  [
     '@flighthq/types:interface#Tileset',
     ['@flighthq/types:interface#TiledTileset', '@flighthq/types:interface#TilemapData'],
+  ],
+  ['@flighthq/types:interface#TrayCapabilities', ['@flighthq/types:interface#HostTrayCapabilities']],
+  [
+    '@flighthq/types:interface#TrayEventData',
+    [
+      '@flighthq/types:interface#TrayBalloonEvent',
+      '@flighthq/types:type#TrayDropEvent',
+      '@flighthq/types:interface#TrayInteractionEvent',
+      '@flighthq/types:interface#TrayMenuSelectionEvent',
+    ],
+  ],
+  [
+    '@flighthq/types:interface#UpdateProgress',
+    ['@flighthq/types:type#AppUpdateCheckOutcome', '@flighthq/types:interface#DownloadedUpdate'],
+  ],
+  ['@flighthq/types:interface#UpdaterConfig', ['@flighthq/types:interface#UpdaterCommandBackend']],
+  [
+    '@flighthq/types:interface#UpdaterError',
+    ['@flighthq/types:type#AppUpdateCheckOutcome', '@flighthq/types:interface#AppUpdateInstallOutcome'],
+  ],
+  [
+    '@flighthq/types:interface#UpdaterSignatureConfig',
+    ['@flighthq/types:interface#DownloadedUpdate', '@flighthq/types:interface#UpdaterCommandBackend'],
+  ],
+  [
+    '@flighthq/types:interface#UpdaterState',
+    ['@flighthq/types:type#AppUpdateCheckOutcome', '@flighthq/types:interface#DownloadedUpdate'],
   ],
   [
     '@flighthq/types:interface#VideoTexture',
     ['@flighthq/types:interface#Image', '@flighthq/types:interface#VideoResource', '@flighthq/types:type#Texture'],
+  ],
+  [
+    '@flighthq/types:interface#WebcamStream',
+    [
+      '@flighthq/types:interface#MediaFileCaptureBackend',
+      '@flighthq/types:interface#MediaFileCapturePhoto',
+      '@flighthq/types:interface#MediaFileCaptureVideo',
+    ],
   ],
 ]);
 
@@ -2302,6 +2351,7 @@ export function discoverTypedStructUniverse(
   const baseline = readTypedStructMigrationBaseline(workspaceDirectory);
   const claimedCurrentIds = new Map<string, string>();
   const consumedExceptionalBaselineIds = new Set<string>();
+  const missingMigrationTargets: string[] = [];
   for (const entry of baseline.candidates) {
     const baselineId = typedStructStableId(entry.packageName, entry.declarationKind, entry.name);
     const removalSuccessors = approvedTypedStructReplacementRemovals.get(baselineId);
@@ -2317,9 +2367,8 @@ export function discoverTypedStructUniverse(
       ? candidatesById.get(approvedId)
       : resolveMigratedTypedStructCandidate(entry, candidatesById);
     if (!current) {
-      throw new Error(
-        `Approved typed-struct migration target is missing: ${baselineId} -> ${approvedId ?? '(same-name public owner)'}`,
-      );
+      missingMigrationTargets.push(`${baselineId} -> ${approvedId ?? '(same-name public owner)'}`);
+      continue;
     }
     const currentId = typedStructStableId(current.packageName, current.declarationKind, current.name);
     const previouslyClaimed = claimedCurrentIds.get(currentId);
@@ -2347,6 +2396,15 @@ export function discoverTypedStructUniverse(
       purpose: entry.purpose,
       sourceResolution: status === 'preserved' ? 'exact' : 'relocated',
     });
+  }
+
+  if (missingMigrationTargets.length > 0) {
+    throw new Error(
+      `Typed-struct migration targets are missing:\n${missingMigrationTargets
+        .sort()
+        .map((target) => `- ${target}`)
+        .join('\n')}`,
+    );
   }
 
   for (const addition of reviewedTypedStructDirectAdditions) {
@@ -2988,7 +3046,10 @@ function validateReviewedTypedStructDirectAdditions(schemas: readonly InternalSc
       );
     }
     if (!schema.eligible || schema.emission.mode !== 'direct' || schema.escapes.length > 0) {
-      diagnostics.push(`no longer eligible and escape-free: ${addition.id}`);
+      const reasons = schema.reasons.length > 0 ? schema.reasons.join(', ') : 'none';
+      diagnostics.push(
+        `no longer eligible and escape-free: ${addition.id} (reasons: ${reasons}; escapes: ${schema.escapes.length})`,
+      );
     }
   }
   if (diagnostics.length > 0) {

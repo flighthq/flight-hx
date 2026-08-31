@@ -7,6 +7,7 @@ const api = compiled.flight._ApplicationGl;
 function __syncDependencies() {
   compiled.flight._Node.createViewport = __dependency0.createViewport;
   compiled.flight._RenderGl.createGlContextFromCanvasElement = __dependency1.createGlContextFromCanvasElement;
+  compiled.flight._RenderGl.createGlContextState = __dependency1.createGlContextState;
   compiled.flight._RenderGl.createGlRenderState = __dependency1.createGlRenderState;
   compiled.flight._RenderGl.createGlRenderTarget = __dependency1.createGlRenderTarget;
   compiled.flight._RenderGl.destroyGlRenderState = __dependency1.destroyGlRenderState;

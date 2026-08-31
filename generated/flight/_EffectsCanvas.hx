@@ -3,6 +3,7 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight.Types.EntityRuntimeKey;
 import flight._Adjustments.bakeColorLutForRun;
 import flight._Adjustments.createColorLutCache;
 import flight._Adjustments.fuseColorMatrices;
@@ -13,14 +14,21 @@ import flight._Color.getColorAlpha;
 import flight._Color.getColorRgb;
 import flight._Effects.computeBloomBlurRadius;
 import flight._Registry.withRegistryTableEntry;
+import flight._Scene2DCanvas.acquireCanvasRenderSurface;
 import flight._Scene2DCanvas.beginCanvasRenderPass;
+import flight._Scene2DCanvas.createCanvasRenderState as createExplicitCanvasRenderState;
+import flight._Scene2DCanvas.createCanvasRenderSurface;
 import flight._Scene2DCanvas.createCanvasRenderTarget;
+import flight._Scene2DCanvas.createCanvasRenderTarget as createExplicitCanvasRenderTarget;
+import flight._Scene2DCanvas.createCanvasTextureResolvers;
 import flight._Scene2DCanvas.endCanvasRenderPass;
 import flight._Scene2DCanvas.getCanvasRenderStateRuntime;
 import flight._Scene2DCanvas.getCanvasRenderTextureTarget;
 import flight._Scene2DCanvas.resizeCanvasRenderTarget;
+import flight._Scene2DCanvas.scene2dCanvasPipeline;
 import flight._Scene2DCanvas.writeCanvasRenderTextureTarget;
 import flight._Types.CompositeOperatorValue as CompositeOperatorValues;
+import flight._Types.EntityRuntimeKey;
 import flight._Types.RegistryEntryStateValue;
 import flight.types.Adjustment;
 import flight.types.AdvancedBlendMode;
@@ -29,15 +37,21 @@ import flight.types.BlendEffect;
 import flight.types.BloomEffect;
 import flight.types.BlurEffect;
 import flight.types.CanvasEffectSourceMode;
+import flight.types.CanvasPipeline;
 import flight.types.CanvasRenderEffectContext;
 import flight.types.CanvasRenderEffectPipeline;
 import flight.types.CanvasRenderEffectRunner;
+import flight.types.CanvasRenderOptions;
 import flight.types.CanvasRenderRegistries;
 import flight.types.CanvasRenderState;
 import flight.types.CanvasRenderStateRuntime;
+import flight.types.CanvasRenderSurface;
+import flight.types.CanvasRenderSurfaceCreator;
+import flight.types.CanvasRenderSurfaceOptions;
 import flight.types.CanvasRenderTarget;
 import flight.types.CanvasRenderTargetPool;
 import flight.types.CanvasRenderTexturePool;
+import flight.types.CanvasTextureResolvers;
 import flight.types.ColorLut;
 import flight.types.ColorLutCache;
 import flight.types.CompositeEffect;
@@ -51,6 +65,7 @@ import flight.types.InnerGlowEffect;
 import flight.types.InnerShadowEffect;
 import flight.types.KeyedTable;
 import flight.types.LensDistortionEffect;
+import flight.types.Matrix;
 import flight.types.OuterGlowEffect;
 import flight.types.PixelateEffect;
 import flight.types.PosterizeEffect;
@@ -60,6 +75,7 @@ import flight.types.RenderEffect;
 import flight.types.RenderEffectPipelineOptions;
 import flight.types.RenderTexture;
 import flight.types.ScanlinesEffect;
+import flight.types.Scene3DGraphSyncPolicy;
 import flight.types.TiltShiftEffect;
 import flight.types.VignetteEffect;
 
@@ -73,7 +89,7 @@ class _EffectsCanvas {
     var effect:BevelEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : BevelEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool((cast source.surface : CanvasRenderSurface).creator) : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
     _EffectsCanvas.applyBevelEffectToCanvasWithPool__canvasBevelEffect(({ final __callArgument0:Dynamic = source; __callArgument0; }), ({ final __callArgument1:Dynamic = dest; __callArgument1; }), ({ final __callArgument2:Dynamic = pool; __callArgument2; }), ({ final __callArgument3:Dynamic = effect; __callArgument3; }));
   }
 
@@ -424,7 +440,7 @@ class _EffectsCanvas {
       (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument242:Dynamic = dest; __callArgument242; }), ({ final __callArgument243:Dynamic = source; __callArgument243; }), (cast css : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument240:Dynamic = dest; __callArgument240; }), ({ final __callArgument241:Dynamic = source; __callArgument241; }), (cast css : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
       return;
     }
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool((cast source.surface : CanvasRenderSurface).creator) : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
     _EffectsCanvas.applyDropShadowEffectToCanvasWithPool__canvasDropShadowEffect(({ final __callArgument244:Dynamic = source; __callArgument244; }), ({ final __callArgument245:Dynamic = dest; __callArgument245; }), ({ final __callArgument246:Dynamic = pool; __callArgument246; }), ({ final __callArgument247:Dynamic = effect; __callArgument247; }));
   }
 
@@ -599,6 +615,39 @@ class _EffectsCanvas {
     return cast null;
   }
 
+  public static final canvasTestSurfaceCreator:CanvasRenderSurfaceCreator = (cast _Runtime.objectFromPairs([{ key: EntityRuntimeKey, value: { binding: null } }, { key: 'createRenderSurface', value: function(width:Float, height:Float, pixelRatio:Float):Null<flight._internal.dom.HTMLCanvasElement> {
+    var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
+    canvas = flight._internal.backend.DomDocumentBackend.call(_Runtime.field(flight._internal._HostValueLut.get('globalThis'), 'document'), 'createElement', cast (['canvas'] : Array<Dynamic>));
+    ((cast (cast canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).width = '' + Std.string(width) + 'px');
+    ((cast (cast canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).height = '' + Std.string(height) + 'px');
+    flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', (width * pixelRatio));
+    flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', (height * pixelRatio));
+    return cast canvas;
+    return cast _Runtime.UNDEFINED;
+  } }, { key: 'destroyRenderSurface', value: function(canvas:flight._internal.dom.HTMLCanvasElement):Void {
+    flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', 0.0);
+    flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', 0.0);
+  } }]));
+
+  public static function acquireTestCanvasRenderSurface(width:Float = 1.0, height:Float = 1.0):CanvasRenderSurface {
+    var surface:Null<CanvasRenderSurface> = cast _Runtime.UNDEFINED;
+    surface = (cast acquireCanvasRenderSurface(({ final __callArgument296:Dynamic = canvasTestSurfaceCreator; __callArgument296; }), ({ final __callArgument297:Dynamic = { height: height, pixelRatio: 1.0, width: width }; __callArgument297; })) : Null<CanvasRenderSurface>);
+    if ((cast _Runtime.strictEquals(surface, null) : Bool)) { _Runtime.throwValue(_Runtime.error('Failed to acquire test Canvas surface.')); }
+    return cast surface;
+    return cast null;
+  }
+
+  public static function createCanvasRenderState(canvas:flight._internal.dom.HTMLCanvasElement, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
+    if (options == null) options = cast ({  } : Dynamic);
+    return cast (cast createExplicitCanvasRenderState((cast (#if js _Runtime.callValue(createCanvasRenderSurface, cast ([({ final __callArgument302:Dynamic = canvasTestSurfaceCreator; __callArgument302; }), ({ final __callArgument303:Dynamic = canvas; __callArgument303; })] : Array<Dynamic>)) #else createCanvasRenderSurface(({ final __callArgument300:Dynamic = canvasTestSurfaceCreator; __callArgument300; }), ({ final __callArgument301:Dynamic = canvas; __callArgument301; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : CanvasRenderSurface), ({ final __callArgument304:Dynamic = scene2dCanvasPipeline; __callArgument304; }), (cast createCanvasTextureResolvers(({ final __callArgument305:Dynamic = canvasTestSurfaceCreator; __callArgument305; })) : CanvasTextureResolvers), (cast options : Dynamic)) : CanvasRenderState);
+    return cast null;
+  }
+
+  public static function createCanvasRenderTarget(width:Float, height:Float):CanvasRenderTarget {
+    return cast (cast createExplicitCanvasRenderTarget(({ final __callArgument314:Dynamic = canvasTestSurfaceCreator; __callArgument314; }), (cast width : Float), (cast height : Float)) : CanvasRenderTarget);
+    return cast null;
+  }
+
   @:allow(flight)
   @:keep
   private static function applyFilmGrainEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:FilmGrainEffect):Void {
@@ -615,10 +664,10 @@ class _EffectsCanvas {
     intensity = _Runtime.coalesce(effect.intensity, function():Dynamic return cast 0.1);
     size = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(effect.size, function():Dynamic return cast 1.0)));
     seed = _Runtime.coalesce(effect.seed, function():Dynamic return cast 0.0);
-    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument298:Dynamic = dest; __callArgument298; }), ({ final __callArgument299:Dynamic = source; __callArgument299; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument296:Dynamic = dest; __callArgument296; }), ({ final __callArgument297:Dynamic = source; __callArgument297; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument318:Dynamic = dest; __callArgument318; }), ({ final __callArgument319:Dynamic = source; __callArgument319; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument316:Dynamic = dest; __callArgument316; }), ({ final __callArgument317:Dynamic = source; __callArgument317; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     cells = 64.0;
     patchSize = (cells * size);
-    noise = (cast acquireCanvasRenderTarget(({ final __callArgument300:Dynamic = pool; __callArgument300; }), (cast patchSize : Float), (cast patchSize : Float)) : CanvasRenderTarget);
+    noise = (cast acquireCanvasRenderTarget(({ final __callArgument320:Dynamic = pool; __callArgument320; }), (cast patchSize : Float), (cast patchSize : Float)) : CanvasRenderTarget);
     nctx = noise.context;
     flight._internal.backend.Canvas2dBackend.call(nctx, 'save', cast ([] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.call(nctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -655,7 +704,7 @@ class _EffectsCanvas {
       flight._internal.backend.Canvas2dBackend.call(ctx, 'fillRect', cast ([0.0, 0.0, dest.width, dest.height] : Array<Dynamic>));
     }
     flight._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
-    releaseCanvasRenderTarget(({ final __callArgument302:Dynamic = pool; __callArgument302; }), ({ final __callArgument303:Dynamic = noise; __callArgument303; }));
+    releaseCanvasRenderTarget(({ final __callArgument322:Dynamic = pool; __callArgument322; }), ({ final __callArgument323:Dynamic = noise; __callArgument323; }));
   }
 
   public static final defaultCanvasFilmGrainEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -663,7 +712,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasFilmGrainEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument306:Dynamic = state; __callArgument306; }), (cast 'FilmGrainEffect' : String), ({ final __callArgument307:Dynamic = defaultCanvasFilmGrainEffectRunner; __callArgument307; }));
+    registerCanvasRenderEffect(({ final __callArgument326:Dynamic = state; __callArgument326; }), (cast 'FilmGrainEffect' : String), ({ final __callArgument327:Dynamic = defaultCanvasFilmGrainEffectRunner; __callArgument327; }));
   }
 
   @:allow(flight)
@@ -674,8 +723,8 @@ class _EffectsCanvas {
     var effect:GradientBevelEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : GradientBevelEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
-    _EffectsCanvas.applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect(({ final __callArgument310:Dynamic = source; __callArgument310; }), ({ final __callArgument311:Dynamic = dest; __callArgument311; }), ({ final __callArgument312:Dynamic = pool; __callArgument312; }), ({ final __callArgument313:Dynamic = effect; __callArgument313; }));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool((cast source.surface : CanvasRenderSurface).creator) : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
+    _EffectsCanvas.applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect(({ final __callArgument330:Dynamic = source; __callArgument330; }), ({ final __callArgument331:Dynamic = dest; __callArgument331; }), ({ final __callArgument332:Dynamic = pool; __callArgument332; }), ({ final __callArgument333:Dynamic = effect; __callArgument333; }));
   }
 
   public static final defaultCanvasGradientBevelEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -683,7 +732,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasGradientBevelEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument318:Dynamic = state; __callArgument318; }), (cast 'GradientBevelEffect' : String), ({ final __callArgument319:Dynamic = defaultCanvasGradientBevelEffectRunner; __callArgument319; }));
+    registerCanvasRenderEffect(({ final __callArgument338:Dynamic = state; __callArgument338; }), (cast 'GradientBevelEffect' : String), ({ final __callArgument339:Dynamic = defaultCanvasGradientBevelEffectRunner; __callArgument339; }));
   }
 
   public static function applyGradientBevelEffectToCanvasWithPool__canvasGradientBevelEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:GradientBevelEffect):Void {
@@ -700,12 +749,12 @@ class _EffectsCanvas {
     var offsetY:Float = cast _Runtime.UNDEFINED;
     var strength:Float = cast _Runtime.UNDEFINED;
     var ramp:flight._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
-    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument322:Dynamic = pool; __callArgument322; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    lit = (cast acquireCanvasRenderTarget(({ final __callArgument324:Dynamic = pool; __callArgument324; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    shade = (cast acquireCanvasRenderTarget(({ final __callArgument326:Dynamic = pool; __callArgument326; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    side = (cast acquireCanvasRenderTarget(({ final __callArgument328:Dynamic = pool; __callArgument328; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    ramped = (cast acquireCanvasRenderTarget(({ final __callArgument330:Dynamic = pool; __callArgument330; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    band = (cast acquireCanvasRenderTarget(({ final __callArgument332:Dynamic = pool; __callArgument332; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument342:Dynamic = pool; __callArgument342; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    lit = (cast acquireCanvasRenderTarget(({ final __callArgument344:Dynamic = pool; __callArgument344; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    shade = (cast acquireCanvasRenderTarget(({ final __callArgument346:Dynamic = pool; __callArgument346; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    side = (cast acquireCanvasRenderTarget(({ final __callArgument348:Dynamic = pool; __callArgument348; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    ramped = (cast acquireCanvasRenderTarget(({ final __callArgument350:Dynamic = pool; __callArgument350; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    band = (cast acquireCanvasRenderTarget(({ final __callArgument352:Dynamic = pool; __callArgument352; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0)) / 2.0));
     angle = (_Runtime.multiplyNumbers(_Runtime.coalesce(effect.angle, function():Dynamic return cast 45.0), HxMath.PI) / 180.0);
     distance = _Runtime.coalesce(effect.distance, function():Dynamic return cast 4.0);
@@ -713,32 +762,32 @@ class _EffectsCanvas {
     offsetY = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
     strength = HxMath.min(1.0, _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0));
     ramp = (cast buildCanvasGradientRamp(effect.colors, effect.alphas, effect.ratios) : flight._internal._UInt8ClampedArray);
-    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument336:Dynamic = blurred; __callArgument336; }), ({ final __callArgument337:Dynamic = source; __callArgument337; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument334:Dynamic = blurred; __callArgument334; }), ({ final __callArgument335:Dynamic = source; __callArgument335; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    clearCanvasTarget(({ final __callArgument338:Dynamic = lit; __callArgument338; }));
-    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument342:Dynamic = lit; __callArgument342; }), ({ final __callArgument343:Dynamic = blurred; __callArgument343; }), (cast -offsetX : Float), (cast -offsetY : Float)] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument340:Dynamic = lit; __callArgument340; }), ({ final __callArgument341:Dynamic = blurred; __callArgument341; }), (cast -offsetX : Float), (cast -offsetY : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    clearCanvasTarget(({ final __callArgument344:Dynamic = shade; __callArgument344; }));
-    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument348:Dynamic = shade; __callArgument348; }), ({ final __callArgument349:Dynamic = blurred; __callArgument349; }), (cast offsetX : Float), (cast offsetY : Float)] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument346:Dynamic = shade; __callArgument346; }), ({ final __callArgument347:Dynamic = blurred; __callArgument347; }), (cast offsetX : Float), (cast offsetY : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    clearCanvasTarget(({ final __callArgument350:Dynamic = band; __callArgument350; }));
-    clearCanvasTarget(({ final __callArgument352:Dynamic = side; __callArgument352; }));
-    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument356:Dynamic = side; __callArgument356; }), ({ final __callArgument357:Dynamic = lit; __callArgument357; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument354:Dynamic = side; __callArgument354; }), ({ final __callArgument355:Dynamic = lit; __callArgument355; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    compositeCanvasImage(({ final __callArgument358:Dynamic = side; __callArgument358; }), ({ final __callArgument359:Dynamic = shade; __callArgument359; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flight._internal._Any));
-    applyCanvasGradientRampLookup(({ final __callArgument362:Dynamic = ramped; __callArgument362; }), ({ final __callArgument363:Dynamic = side; __callArgument363; }), ({ final __callArgument364:Dynamic = ramp; __callArgument364; }), (cast 0.5 : Float), (cast (0.5 * strength) : Float));
-    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument370:Dynamic = band; __callArgument370; }), ({ final __callArgument371:Dynamic = ramped; __callArgument371; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument368:Dynamic = band; __callArgument368; }), ({ final __callArgument369:Dynamic = ramped; __callArgument369; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument356:Dynamic = blurred; __callArgument356; }), ({ final __callArgument357:Dynamic = source; __callArgument357; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument354:Dynamic = blurred; __callArgument354; }), ({ final __callArgument355:Dynamic = source; __callArgument355; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    clearCanvasTarget(({ final __callArgument358:Dynamic = lit; __callArgument358; }));
+    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument362:Dynamic = lit; __callArgument362; }), ({ final __callArgument363:Dynamic = blurred; __callArgument363; }), (cast -offsetX : Float), (cast -offsetY : Float)] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument360:Dynamic = lit; __callArgument360; }), ({ final __callArgument361:Dynamic = blurred; __callArgument361; }), (cast -offsetX : Float), (cast -offsetY : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    clearCanvasTarget(({ final __callArgument364:Dynamic = shade; __callArgument364; }));
+    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument368:Dynamic = shade; __callArgument368; }), ({ final __callArgument369:Dynamic = blurred; __callArgument369; }), (cast offsetX : Float), (cast offsetY : Float)] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument366:Dynamic = shade; __callArgument366; }), ({ final __callArgument367:Dynamic = blurred; __callArgument367; }), (cast offsetX : Float), (cast offsetY : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    clearCanvasTarget(({ final __callArgument370:Dynamic = band; __callArgument370; }));
     clearCanvasTarget(({ final __callArgument372:Dynamic = side; __callArgument372; }));
-    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument376:Dynamic = side; __callArgument376; }), ({ final __callArgument377:Dynamic = shade; __callArgument377; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument374:Dynamic = side; __callArgument374; }), ({ final __callArgument375:Dynamic = shade; __callArgument375; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    compositeCanvasImage(({ final __callArgument378:Dynamic = side; __callArgument378; }), ({ final __callArgument379:Dynamic = lit; __callArgument379; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flight._internal._Any));
-    applyCanvasGradientRampLookup(({ final __callArgument382:Dynamic = ramped; __callArgument382; }), ({ final __callArgument383:Dynamic = side; __callArgument383; }), ({ final __callArgument384:Dynamic = ramp; __callArgument384; }), (cast 0.5 : Float), (cast (-0.5 * strength) : Float));
+    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument376:Dynamic = side; __callArgument376; }), ({ final __callArgument377:Dynamic = lit; __callArgument377; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument374:Dynamic = side; __callArgument374; }), ({ final __callArgument375:Dynamic = lit; __callArgument375; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    compositeCanvasImage(({ final __callArgument378:Dynamic = side; __callArgument378; }), ({ final __callArgument379:Dynamic = shade; __callArgument379; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flight._internal._Any));
+    applyCanvasGradientRampLookup(({ final __callArgument382:Dynamic = ramped; __callArgument382; }), ({ final __callArgument383:Dynamic = side; __callArgument383; }), ({ final __callArgument384:Dynamic = ramp; __callArgument384; }), (cast 0.5 : Float), (cast (0.5 * strength) : Float));
     (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument390:Dynamic = band; __callArgument390; }), ({ final __callArgument391:Dynamic = ramped; __callArgument391; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument388:Dynamic = band; __callArgument388; }), ({ final __callArgument389:Dynamic = ramped; __callArgument389; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    clipCanvasBevelBand(({ final __callArgument392:Dynamic = band; __callArgument392; }), ({ final __callArgument393:Dynamic = source; __callArgument393; }), effect.bevelType);
-    clearCanvasTarget(({ final __callArgument396:Dynamic = dest; __callArgument396; }));
-    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'hide') : Bool)) { (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument400:Dynamic = dest; __callArgument400; }), ({ final __callArgument401:Dynamic = source; __callArgument401; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument398:Dynamic = dest; __callArgument398; }), ({ final __callArgument399:Dynamic = source; __callArgument399; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); }
-    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument404:Dynamic = dest; __callArgument404; }), ({ final __callArgument405:Dynamic = band; __callArgument405; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument402:Dynamic = dest; __callArgument402; }), ({ final __callArgument403:Dynamic = band; __callArgument403; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    releaseCanvasRenderTarget(({ final __callArgument406:Dynamic = pool; __callArgument406; }), ({ final __callArgument407:Dynamic = band; __callArgument407; }));
-    releaseCanvasRenderTarget(({ final __callArgument410:Dynamic = pool; __callArgument410; }), ({ final __callArgument411:Dynamic = ramped; __callArgument411; }));
-    releaseCanvasRenderTarget(({ final __callArgument414:Dynamic = pool; __callArgument414; }), ({ final __callArgument415:Dynamic = side; __callArgument415; }));
-    releaseCanvasRenderTarget(({ final __callArgument418:Dynamic = pool; __callArgument418; }), ({ final __callArgument419:Dynamic = shade; __callArgument419; }));
-    releaseCanvasRenderTarget(({ final __callArgument422:Dynamic = pool; __callArgument422; }), ({ final __callArgument423:Dynamic = lit; __callArgument423; }));
-    releaseCanvasRenderTarget(({ final __callArgument426:Dynamic = pool; __callArgument426; }), ({ final __callArgument427:Dynamic = blurred; __callArgument427; }));
+    clearCanvasTarget(({ final __callArgument392:Dynamic = side; __callArgument392; }));
+    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument396:Dynamic = side; __callArgument396; }), ({ final __callArgument397:Dynamic = shade; __callArgument397; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument394:Dynamic = side; __callArgument394; }), ({ final __callArgument395:Dynamic = shade; __callArgument395; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    compositeCanvasImage(({ final __callArgument398:Dynamic = side; __callArgument398; }), ({ final __callArgument399:Dynamic = lit; __callArgument399; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-out' : flight._internal._Any));
+    applyCanvasGradientRampLookup(({ final __callArgument402:Dynamic = ramped; __callArgument402; }), ({ final __callArgument403:Dynamic = side; __callArgument403; }), ({ final __callArgument404:Dynamic = ramp; __callArgument404; }), (cast 0.5 : Float), (cast (-0.5 * strength) : Float));
+    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument410:Dynamic = band; __callArgument410; }), ({ final __callArgument411:Dynamic = ramped; __callArgument411; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument408:Dynamic = band; __callArgument408; }), ({ final __callArgument409:Dynamic = ramped; __callArgument409; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    clipCanvasBevelBand(({ final __callArgument412:Dynamic = band; __callArgument412; }), ({ final __callArgument413:Dynamic = source; __callArgument413; }), effect.bevelType);
+    clearCanvasTarget(({ final __callArgument416:Dynamic = dest; __callArgument416; }));
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'hide') : Bool)) { (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument420:Dynamic = dest; __callArgument420; }), ({ final __callArgument421:Dynamic = source; __callArgument421; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument418:Dynamic = dest; __callArgument418; }), ({ final __callArgument419:Dynamic = source; __callArgument419; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); }
+    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument424:Dynamic = dest; __callArgument424; }), ({ final __callArgument425:Dynamic = band; __callArgument425; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument422:Dynamic = dest; __callArgument422; }), ({ final __callArgument423:Dynamic = band; __callArgument423; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    releaseCanvasRenderTarget(({ final __callArgument426:Dynamic = pool; __callArgument426; }), ({ final __callArgument427:Dynamic = band; __callArgument427; }));
+    releaseCanvasRenderTarget(({ final __callArgument430:Dynamic = pool; __callArgument430; }), ({ final __callArgument431:Dynamic = ramped; __callArgument431; }));
+    releaseCanvasRenderTarget(({ final __callArgument434:Dynamic = pool; __callArgument434; }), ({ final __callArgument435:Dynamic = side; __callArgument435; }));
+    releaseCanvasRenderTarget(({ final __callArgument438:Dynamic = pool; __callArgument438; }), ({ final __callArgument439:Dynamic = shade; __callArgument439; }));
+    releaseCanvasRenderTarget(({ final __callArgument442:Dynamic = pool; __callArgument442; }), ({ final __callArgument443:Dynamic = lit; __callArgument443; }));
+    releaseCanvasRenderTarget(({ final __callArgument446:Dynamic = pool; __callArgument446; }), ({ final __callArgument447:Dynamic = blurred; __callArgument447; }));
   }
 
   @:allow(flight)
@@ -749,8 +798,8 @@ class _EffectsCanvas {
     var effect:GradientGlowEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : GradientGlowEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
-    _EffectsCanvas.applyGradientGlowEffectToCanvasWithPool__canvasGradientGlowEffect(({ final __callArgument430:Dynamic = source; __callArgument430; }), ({ final __callArgument431:Dynamic = dest; __callArgument431; }), ({ final __callArgument432:Dynamic = pool; __callArgument432; }), ({ final __callArgument433:Dynamic = effect; __callArgument433; }));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool((cast source.surface : CanvasRenderSurface).creator) : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
+    _EffectsCanvas.applyGradientGlowEffectToCanvasWithPool__canvasGradientGlowEffect(({ final __callArgument450:Dynamic = source; __callArgument450; }), ({ final __callArgument451:Dynamic = dest; __callArgument451; }), ({ final __callArgument452:Dynamic = pool; __callArgument452; }), ({ final __callArgument453:Dynamic = effect; __callArgument453; }));
   }
 
   public static final defaultCanvasGradientGlowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -758,7 +807,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasGradientGlowEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument438:Dynamic = state; __callArgument438; }), (cast 'GradientGlowEffect' : String), ({ final __callArgument439:Dynamic = defaultCanvasGradientGlowEffectRunner; __callArgument439; }));
+    registerCanvasRenderEffect(({ final __callArgument458:Dynamic = state; __callArgument458; }), (cast 'GradientGlowEffect' : String), ({ final __callArgument459:Dynamic = defaultCanvasGradientGlowEffectRunner; __callArgument459; }));
   }
 
   public static function applyGradientGlowEffectToCanvasWithPool__canvasGradientGlowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:GradientGlowEffect):Void {
@@ -768,29 +817,29 @@ class _EffectsCanvas {
     var glowPasses:Float = cast _Runtime.UNDEFINED;
     var blur:Float = cast _Runtime.UNDEFINED;
     var ramp:flight._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
-    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument442:Dynamic = pool; __callArgument442; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    glow = (cast acquireCanvasRenderTarget(({ final __callArgument444:Dynamic = pool; __callArgument444; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument462:Dynamic = pool; __callArgument462; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    glow = (cast acquireCanvasRenderTarget(({ final __callArgument464:Dynamic = pool; __callArgument464; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0)) / 2.0));
     ramp = (cast buildCanvasGradientRamp(effect.colors, effect.alphas, effect.ratios) : flight._internal._UInt8ClampedArray);
-    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument448:Dynamic = blurred; __callArgument448; }), ({ final __callArgument449:Dynamic = source; __callArgument449; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument446:Dynamic = blurred; __callArgument446; }), ({ final __callArgument447:Dynamic = source; __callArgument447; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    (#if js _Runtime.callValue(applyCanvasGradientRampLookup, cast ([({ final __callArgument453:Dynamic = glow; __callArgument453; }), ({ final __callArgument454:Dynamic = blurred; __callArgument454; }), ({ final __callArgument455:Dynamic = ramp; __callArgument455; })] : Array<Dynamic>)) #else applyCanvasGradientRampLookup(({ final __callArgument450:Dynamic = glow; __callArgument450; }), ({ final __callArgument451:Dynamic = blurred; __callArgument451; }), ({ final __callArgument452:Dynamic = ramp; __callArgument452; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    clearCanvasTarget(({ final __callArgument456:Dynamic = dest; __callArgument456; }));
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument468:Dynamic = blurred; __callArgument468; }), ({ final __callArgument469:Dynamic = source; __callArgument469; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument466:Dynamic = blurred; __callArgument466; }), ({ final __callArgument467:Dynamic = source; __callArgument467; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(applyCanvasGradientRampLookup, cast ([({ final __callArgument473:Dynamic = glow; __callArgument473; }), ({ final __callArgument474:Dynamic = blurred; __callArgument474; }), ({ final __callArgument475:Dynamic = ramp; __callArgument475; })] : Array<Dynamic>)) #else applyCanvasGradientRampLookup(({ final __callArgument470:Dynamic = glow; __callArgument470; }), ({ final __callArgument471:Dynamic = blurred; __callArgument471; }), ({ final __callArgument472:Dynamic = ramp; __callArgument472; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    clearCanvasTarget(({ final __callArgument476:Dynamic = dest; __callArgument476; }));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument460:Dynamic = dest; __callArgument460; }), ({ final __callArgument461:Dynamic = glow; __callArgument461; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument458:Dynamic = dest; __callArgument458; }), ({ final __callArgument459:Dynamic = glow; __callArgument459; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+        (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument480:Dynamic = dest; __callArgument480; }), ({ final __callArgument481:Dynamic = glow; __callArgument481; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument478:Dynamic = dest; __callArgument478; }), ({ final __callArgument479:Dynamic = glow; __callArgument479; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         i++;
       }
     }
-    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'hide') : Bool)) { (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument464:Dynamic = dest; __callArgument464; }), ({ final __callArgument465:Dynamic = source; __callArgument465; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument462:Dynamic = dest; __callArgument462; }), ({ final __callArgument463:Dynamic = source; __callArgument463; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); }
-    releaseCanvasRenderTarget(({ final __callArgument466:Dynamic = pool; __callArgument466; }), ({ final __callArgument467:Dynamic = glow; __callArgument467; }));
-    releaseCanvasRenderTarget(({ final __callArgument470:Dynamic = pool; __callArgument470; }), ({ final __callArgument471:Dynamic = blurred; __callArgument471; }));
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'hide') : Bool)) { (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument484:Dynamic = dest; __callArgument484; }), ({ final __callArgument485:Dynamic = source; __callArgument485; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument482:Dynamic = dest; __callArgument482; }), ({ final __callArgument483:Dynamic = source; __callArgument483; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); }
+    releaseCanvasRenderTarget(({ final __callArgument486:Dynamic = pool; __callArgument486; }), ({ final __callArgument487:Dynamic = glow; __callArgument487; }));
+    releaseCanvasRenderTarget(({ final __callArgument490:Dynamic = pool; __callArgument490; }), ({ final __callArgument491:Dynamic = blurred; __callArgument491; }));
   }
 
   public static function applyCanvasGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flight._internal._UInt8ClampedArray, bias:Float = 0.0, scale:Float = 1.0):Void {
-    drawCanvasImageDataPass(({ final __callArgument474:Dynamic = dest; __callArgument474; }), ({ final __callArgument475:Dynamic = source; __callArgument475; }), ({ final __callArgument476:Dynamic = function(data:flight._internal._UInt8ClampedArray, pixelCount:Float):Void {
+    drawCanvasImageDataPass(({ final __callArgument494:Dynamic = dest; __callArgument494; }), ({ final __callArgument495:Dynamic = source; __callArgument495; }), ({ final __callArgument496:Dynamic = function(data:flight._internal._UInt8ClampedArray, pixelCount:Float):Void {
       {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast pixelCount : Float)) : Bool)) {
@@ -804,7 +853,7 @@ class _EffectsCanvas {
           i++;
         }
       }
-    }; __callArgument476; }));
+    }; __callArgument496; }));
   }
 
   public static function buildCanvasGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flight._internal._UInt8ClampedArray {
@@ -854,8 +903,8 @@ class _EffectsCanvas {
     var effect:InnerGlowEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : InnerGlowEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
-    _EffectsCanvas.applyInnerGlowEffectToCanvasWithPool__canvasInnerGlowEffect(({ final __callArgument480:Dynamic = source; __callArgument480; }), ({ final __callArgument481:Dynamic = dest; __callArgument481; }), ({ final __callArgument482:Dynamic = pool; __callArgument482; }), ({ final __callArgument483:Dynamic = effect; __callArgument483; }));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool((cast source.surface : CanvasRenderSurface).creator) : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
+    _EffectsCanvas.applyInnerGlowEffectToCanvasWithPool__canvasInnerGlowEffect(({ final __callArgument500:Dynamic = source; __callArgument500; }), ({ final __callArgument501:Dynamic = dest; __callArgument501; }), ({ final __callArgument502:Dynamic = pool; __callArgument502; }), ({ final __callArgument503:Dynamic = effect; __callArgument503; }));
   }
 
   public static final defaultCanvasInnerGlowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -863,7 +912,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasInnerGlowEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument488:Dynamic = state; __callArgument488; }), (cast 'InnerGlowEffect' : String), ({ final __callArgument489:Dynamic = defaultCanvasInnerGlowEffectRunner; __callArgument489; }));
+    registerCanvasRenderEffect(({ final __callArgument508:Dynamic = state; __callArgument508; }), (cast 'InnerGlowEffect' : String), ({ final __callArgument509:Dynamic = defaultCanvasInnerGlowEffectRunner; __callArgument509; }));
   }
 
   public static function applyInnerGlowEffectToCanvasWithPool__canvasInnerGlowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:InnerGlowEffect):Void {
@@ -872,25 +921,25 @@ class _EffectsCanvas {
     var strength:Float = cast _Runtime.UNDEFINED;
     var glowPasses:Float = cast _Runtime.UNDEFINED;
     var blur:Float = cast _Runtime.UNDEFINED;
-    mask = (cast acquireCanvasRenderTarget(({ final __callArgument492:Dynamic = pool; __callArgument492; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    glow = (cast acquireCanvasRenderTarget(({ final __callArgument494:Dynamic = pool; __callArgument494; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    mask = (cast acquireCanvasRenderTarget(({ final __callArgument512:Dynamic = pool; __callArgument512; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    glow = (cast acquireCanvasRenderTarget(({ final __callArgument514:Dynamic = pool; __callArgument514; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0)) / 2.0));
-    (#if js _Runtime.callValue(drawCanvasInvertedTintedAlphaMask, cast ([({ final __callArgument498:Dynamic = mask; __callArgument498; }), ({ final __callArgument499:Dynamic = source; __callArgument499; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 4294967295.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast HxMath.min(1.0, strength) : Float)] : Array<Dynamic>)) #else drawCanvasInvertedTintedAlphaMask(({ final __callArgument496:Dynamic = mask; __callArgument496; }), ({ final __callArgument497:Dynamic = source; __callArgument497; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 4294967295.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast HxMath.min(1.0, strength) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument502:Dynamic = glow; __callArgument502; }), ({ final __callArgument503:Dynamic = mask; __callArgument503; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument500:Dynamic = glow; __callArgument500; }), ({ final __callArgument501:Dynamic = mask; __callArgument501; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    compositeCanvasImage(({ final __callArgument504:Dynamic = glow; __callArgument504; }), ({ final __callArgument505:Dynamic = source; __callArgument505; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-in' : flight._internal._Any));
-    clearCanvasTarget(({ final __callArgument508:Dynamic = dest; __callArgument508; }));
-    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'hide') : Bool)) { (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument512:Dynamic = dest; __callArgument512; }), ({ final __callArgument513:Dynamic = source; __callArgument513; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument510:Dynamic = dest; __callArgument510; }), ({ final __callArgument511:Dynamic = source; __callArgument511; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); }
+    (#if js _Runtime.callValue(drawCanvasInvertedTintedAlphaMask, cast ([({ final __callArgument518:Dynamic = mask; __callArgument518; }), ({ final __callArgument519:Dynamic = source; __callArgument519; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 4294967295.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast HxMath.min(1.0, strength) : Float)] : Array<Dynamic>)) #else drawCanvasInvertedTintedAlphaMask(({ final __callArgument516:Dynamic = mask; __callArgument516; }), ({ final __callArgument517:Dynamic = source; __callArgument517; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 4294967295.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast HxMath.min(1.0, strength) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument522:Dynamic = glow; __callArgument522; }), ({ final __callArgument523:Dynamic = mask; __callArgument523; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument520:Dynamic = glow; __callArgument520; }), ({ final __callArgument521:Dynamic = mask; __callArgument521; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    compositeCanvasImage(({ final __callArgument524:Dynamic = glow; __callArgument524; }), ({ final __callArgument525:Dynamic = source; __callArgument525; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-in' : flight._internal._Any));
+    clearCanvasTarget(({ final __callArgument528:Dynamic = dest; __callArgument528; }));
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'hide') : Bool)) { (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument532:Dynamic = dest; __callArgument532; }), ({ final __callArgument533:Dynamic = source; __callArgument533; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument530:Dynamic = dest; __callArgument530; }), ({ final __callArgument531:Dynamic = source; __callArgument531; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument516:Dynamic = dest; __callArgument516; }), ({ final __callArgument517:Dynamic = glow; __callArgument517; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument514:Dynamic = dest; __callArgument514; }), ({ final __callArgument515:Dynamic = glow; __callArgument515; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+        (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument536:Dynamic = dest; __callArgument536; }), ({ final __callArgument537:Dynamic = glow; __callArgument537; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument534:Dynamic = dest; __callArgument534; }), ({ final __callArgument535:Dynamic = glow; __callArgument535; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         i++;
       }
     }
-    releaseCanvasRenderTarget(({ final __callArgument518:Dynamic = pool; __callArgument518; }), ({ final __callArgument519:Dynamic = mask; __callArgument519; }));
-    releaseCanvasRenderTarget(({ final __callArgument522:Dynamic = pool; __callArgument522; }), ({ final __callArgument523:Dynamic = glow; __callArgument523; }));
+    releaseCanvasRenderTarget(({ final __callArgument538:Dynamic = pool; __callArgument538; }), ({ final __callArgument539:Dynamic = mask; __callArgument539; }));
+    releaseCanvasRenderTarget(({ final __callArgument542:Dynamic = pool; __callArgument542; }), ({ final __callArgument543:Dynamic = glow; __callArgument543; }));
   }
 
   @:allow(flight)
@@ -901,8 +950,8 @@ class _EffectsCanvas {
     var effect:InnerShadowEffect = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : InnerShadowEffect));
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
-    _EffectsCanvas.applyInnerShadowEffectToCanvasWithPool__canvasInnerShadowEffect(({ final __callArgument526:Dynamic = source; __callArgument526; }), ({ final __callArgument527:Dynamic = dest; __callArgument527; }), ({ final __callArgument528:Dynamic = pool; __callArgument528; }), ({ final __callArgument529:Dynamic = effect; __callArgument529; }));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool((cast source.surface : CanvasRenderSurface).creator) : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
+    _EffectsCanvas.applyInnerShadowEffectToCanvasWithPool__canvasInnerShadowEffect(({ final __callArgument546:Dynamic = source; __callArgument546; }), ({ final __callArgument547:Dynamic = dest; __callArgument547; }), ({ final __callArgument548:Dynamic = pool; __callArgument548; }), ({ final __callArgument549:Dynamic = effect; __callArgument549; }));
   }
 
   public static final defaultCanvasInnerShadowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -910,7 +959,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasInnerShadowEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument534:Dynamic = state; __callArgument534; }), (cast 'InnerShadowEffect' : String), ({ final __callArgument535:Dynamic = defaultCanvasInnerShadowEffectRunner; __callArgument535; }));
+    registerCanvasRenderEffect(({ final __callArgument554:Dynamic = state; __callArgument554; }), (cast 'InnerShadowEffect' : String), ({ final __callArgument555:Dynamic = defaultCanvasInnerShadowEffectRunner; __callArgument555; }));
   }
 
   public static function applyInnerShadowEffectToCanvasWithPool__canvasInnerShadowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:InnerShadowEffect):Void {
@@ -924,9 +973,9 @@ class _EffectsCanvas {
     var distance:Float = cast _Runtime.UNDEFINED;
     var offsetX:Float = cast _Runtime.UNDEFINED;
     var offsetY:Float = cast _Runtime.UNDEFINED;
-    mask = (cast acquireCanvasRenderTarget(({ final __callArgument538:Dynamic = pool; __callArgument538; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument540:Dynamic = pool; __callArgument540; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    shadow = (cast acquireCanvasRenderTarget(({ final __callArgument542:Dynamic = pool; __callArgument542; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    mask = (cast acquireCanvasRenderTarget(({ final __callArgument558:Dynamic = pool; __callArgument558; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument560:Dynamic = pool; __callArgument560; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    shadow = (cast acquireCanvasRenderTarget(({ final __callArgument562:Dynamic = pool; __callArgument562; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     shadowPasses = HxMath.max(1.0, HxMath.floor(strength));
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(effect.blurX, function():Dynamic return cast 4.0), _Runtime.coalesce(effect.blurY, function():Dynamic return cast 4.0)) / 2.0));
@@ -934,23 +983,23 @@ class _EffectsCanvas {
     distance = _Runtime.coalesce(effect.distance, function():Dynamic return cast 4.0);
     offsetX = _Runtime.multiplyNumbers(HxMath.cos(angle), distance);
     offsetY = _Runtime.multiplyNumbers(HxMath.sin(angle), distance);
-    (#if js _Runtime.callValue(drawCanvasInvertedTintedAlphaMask, cast ([({ final __callArgument546:Dynamic = mask; __callArgument546; }), ({ final __callArgument547:Dynamic = source; __callArgument547; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast HxMath.min(1.0, strength) : Float)] : Array<Dynamic>)) #else drawCanvasInvertedTintedAlphaMask(({ final __callArgument544:Dynamic = mask; __callArgument544; }), ({ final __callArgument545:Dynamic = source; __callArgument545; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast HxMath.min(1.0, strength) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument550:Dynamic = blurred; __callArgument550; }), ({ final __callArgument551:Dynamic = mask; __callArgument551; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument548:Dynamic = blurred; __callArgument548; }), ({ final __callArgument549:Dynamic = mask; __callArgument549; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    clearCanvasTarget(({ final __callArgument552:Dynamic = shadow; __callArgument552; }));
-    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument556:Dynamic = shadow; __callArgument556; }), ({ final __callArgument557:Dynamic = blurred; __callArgument557; }), (cast offsetX : Float), (cast offsetY : Float)] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument554:Dynamic = shadow; __callArgument554; }), ({ final __callArgument555:Dynamic = blurred; __callArgument555; }), (cast offsetX : Float), (cast offsetY : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    compositeCanvasImage(({ final __callArgument558:Dynamic = shadow; __callArgument558; }), ({ final __callArgument559:Dynamic = source; __callArgument559; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-in' : flight._internal._Any));
-    clearCanvasTarget(({ final __callArgument562:Dynamic = dest; __callArgument562; }));
-    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'hide') : Bool)) { (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument566:Dynamic = dest; __callArgument566; }), ({ final __callArgument567:Dynamic = source; __callArgument567; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument564:Dynamic = dest; __callArgument564; }), ({ final __callArgument565:Dynamic = source; __callArgument565; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); }
+    (#if js _Runtime.callValue(drawCanvasInvertedTintedAlphaMask, cast ([({ final __callArgument566:Dynamic = mask; __callArgument566; }), ({ final __callArgument567:Dynamic = source; __callArgument567; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast HxMath.min(1.0, strength) : Float)] : Array<Dynamic>)) #else drawCanvasInvertedTintedAlphaMask(({ final __callArgument564:Dynamic = mask; __callArgument564; }), ({ final __callArgument565:Dynamic = source; __callArgument565; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast HxMath.min(1.0, strength) : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument570:Dynamic = blurred; __callArgument570; }), ({ final __callArgument571:Dynamic = mask; __callArgument571; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument568:Dynamic = blurred; __callArgument568; }), ({ final __callArgument569:Dynamic = mask; __callArgument569; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    clearCanvasTarget(({ final __callArgument572:Dynamic = shadow; __callArgument572; }));
+    (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument576:Dynamic = shadow; __callArgument576; }), ({ final __callArgument577:Dynamic = blurred; __callArgument577; }), (cast offsetX : Float), (cast offsetY : Float)] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument574:Dynamic = shadow; __callArgument574; }), ({ final __callArgument575:Dynamic = blurred; __callArgument575; }), (cast offsetX : Float), (cast offsetY : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    compositeCanvasImage(({ final __callArgument578:Dynamic = shadow; __callArgument578; }), ({ final __callArgument579:Dynamic = source; __callArgument579; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast 'destination-in' : flight._internal._Any));
+    clearCanvasTarget(({ final __callArgument582:Dynamic = dest; __callArgument582; }));
+    if ((cast !_Runtime.strictEquals(_Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw'), 'hide') : Bool)) { (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument586:Dynamic = dest; __callArgument586; }), ({ final __callArgument587:Dynamic = source; __callArgument587; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument584:Dynamic = dest; __callArgument584; }), ({ final __callArgument585:Dynamic = source; __callArgument585; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); }
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast shadowPasses : Float)) : Bool)) {
-        (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument570:Dynamic = dest; __callArgument570; }), ({ final __callArgument571:Dynamic = shadow; __callArgument571; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument568:Dynamic = dest; __callArgument568; }), ({ final __callArgument569:Dynamic = shadow; __callArgument569; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+        (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument590:Dynamic = dest; __callArgument590; }), ({ final __callArgument591:Dynamic = shadow; __callArgument591; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument588:Dynamic = dest; __callArgument588; }), ({ final __callArgument589:Dynamic = shadow; __callArgument589; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         i++;
       }
     }
-    releaseCanvasRenderTarget(({ final __callArgument572:Dynamic = pool; __callArgument572; }), ({ final __callArgument573:Dynamic = mask; __callArgument573; }));
-    releaseCanvasRenderTarget(({ final __callArgument576:Dynamic = pool; __callArgument576; }), ({ final __callArgument577:Dynamic = blurred; __callArgument577; }));
-    releaseCanvasRenderTarget(({ final __callArgument580:Dynamic = pool; __callArgument580; }), ({ final __callArgument581:Dynamic = shadow; __callArgument581; }));
+    releaseCanvasRenderTarget(({ final __callArgument592:Dynamic = pool; __callArgument592; }), ({ final __callArgument593:Dynamic = mask; __callArgument593; }));
+    releaseCanvasRenderTarget(({ final __callArgument596:Dynamic = pool; __callArgument596; }), ({ final __callArgument597:Dynamic = blurred; __callArgument597; }));
+    releaseCanvasRenderTarget(({ final __callArgument600:Dynamic = pool; __callArgument600; }), ({ final __callArgument601:Dynamic = shadow; __callArgument601; }));
   }
 
   @:allow(flight)
@@ -960,7 +1009,7 @@ class _EffectsCanvas {
     var scale:Float = cast _Runtime.UNDEFINED;
     amount = _Runtime.coalesce(_Runtime.field(effect, 'amount'), function():Dynamic return cast 0.2);
     scale = _Runtime.coalesce(_Runtime.field(effect, 'scale'), function():Dynamic return cast 1.0);
-    drawCanvasImageDataPass(({ final __callArgument584:Dynamic = dest; __callArgument584; }), ({ final __callArgument585:Dynamic = source; __callArgument585; }), ({ final __callArgument586:Dynamic = function(data:flight._internal._UInt8ClampedArray, pixelCount:Float):Void {
+    drawCanvasImageDataPass(({ final __callArgument604:Dynamic = dest; __callArgument604; }), ({ final __callArgument605:Dynamic = source; __callArgument605; }), ({ final __callArgument606:Dynamic = function(data:flight._internal._UInt8ClampedArray, pixelCount:Float):Void {
       var width:Float = cast _Runtime.UNDEFINED;
       var height:Float = cast _Runtime.UNDEFINED;
       var snapshot:flight._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
@@ -1017,7 +1066,7 @@ class _EffectsCanvas {
           y++;
         }
       }
-    }; __callArgument586; }));
+    }; __callArgument606; }));
   }
 
   public static final defaultCanvasLensDistortionEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -1025,7 +1074,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasLensDistortionEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument590:Dynamic = state; __callArgument590; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument591:Dynamic = defaultCanvasLensDistortionEffectRunner; __callArgument591; }));
+    registerCanvasRenderEffect(({ final __callArgument610:Dynamic = state; __callArgument610; }), (cast 'LensDistortionEffect' : String), ({ final __callArgument611:Dynamic = defaultCanvasLensDistortionEffectRunner; __callArgument611; }));
   }
 
   @:allow(flight)
@@ -1037,13 +1086,13 @@ class _EffectsCanvas {
     var css:Null<String> = cast _Runtime.UNDEFINED;
     var pool:CanvasRenderTargetPool = cast _Runtime.UNDEFINED;
     effect = _Runtime.coalesce(maybeEffect, function():Dynamic return cast (cast poolOrEffect : OuterGlowEffect));
-    css = (cast computeOuterGlowEffectCss(({ final __callArgument594:Dynamic = effect; __callArgument594; })) : Null<String>);
+    css = (cast computeOuterGlowEffectCss(({ final __callArgument614:Dynamic = effect; __callArgument614; })) : Null<String>);
     if ((cast !_Runtime.strictEquals(css, null) : Bool)) {
-      (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument598:Dynamic = dest; __callArgument598; }), ({ final __callArgument599:Dynamic = source; __callArgument599; }), (cast css : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument596:Dynamic = dest; __callArgument596; }), ({ final __callArgument597:Dynamic = source; __callArgument597; }), (cast css : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+      (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument618:Dynamic = dest; __callArgument618; }), ({ final __callArgument619:Dynamic = source; __callArgument619; }), (cast css : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument616:Dynamic = dest; __callArgument616; }), ({ final __callArgument617:Dynamic = source; __callArgument617; }), (cast css : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
       return;
     }
-    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
-    _EffectsCanvas.applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(({ final __callArgument600:Dynamic = source; __callArgument600; }), ({ final __callArgument601:Dynamic = dest; __callArgument601; }), ({ final __callArgument602:Dynamic = pool; __callArgument602; }), ({ final __callArgument603:Dynamic = effect; __callArgument603; }));
+    pool = ((cast _Runtime.strictEquals(maybeEffect, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast createCanvasRenderTargetPool((cast source.surface : CanvasRenderSurface).creator) : CanvasRenderTargetPool) : Dynamic) : (cast (cast poolOrEffect : CanvasRenderTargetPool) : Dynamic));
+    _EffectsCanvas.applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(({ final __callArgument620:Dynamic = source; __callArgument620; }), ({ final __callArgument621:Dynamic = dest; __callArgument621; }), ({ final __callArgument622:Dynamic = pool; __callArgument622; }), ({ final __callArgument623:Dynamic = effect; __callArgument623; }));
   }
 
   public static final defaultCanvasOuterGlowEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -1051,7 +1100,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasOuterGlowEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument608:Dynamic = state; __callArgument608; }), (cast 'OuterGlowEffect' : String), ({ final __callArgument609:Dynamic = defaultCanvasOuterGlowEffectRunner; __callArgument609; }));
+    registerCanvasRenderEffect(({ final __callArgument628:Dynamic = state; __callArgument628; }), (cast 'OuterGlowEffect' : String), ({ final __callArgument629:Dynamic = defaultCanvasOuterGlowEffectRunner; __callArgument629; }));
   }
 
   public static function applyOuterGlowEffectToCanvasWithPool__canvasOuterGlowEffect(source:CanvasRenderTarget, dest:CanvasRenderTarget, pool:CanvasRenderTargetPool, effect:OuterGlowEffect):Void {
@@ -1062,26 +1111,26 @@ class _EffectsCanvas {
     var glowPasses:Float = cast _Runtime.UNDEFINED;
     var blur:Float = cast _Runtime.UNDEFINED;
     var sourceMode:EffectSourceMode = cast _Runtime.UNDEFINED;
-    mask = (cast acquireCanvasRenderTarget(({ final __callArgument612:Dynamic = pool; __callArgument612; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
-    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument614:Dynamic = pool; __callArgument614; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    mask = (cast acquireCanvasRenderTarget(({ final __callArgument632:Dynamic = pool; __callArgument632; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
+    blurred = (cast acquireCanvasRenderTarget(({ final __callArgument634:Dynamic = pool; __callArgument634; }), (cast source.width : Float), (cast source.height : Float)) : CanvasRenderTarget);
     strength = _Runtime.coalesce(effect.strength, function():Dynamic return cast 1.0);
     tintStrength = HxMath.min(1.0, strength);
     glowPasses = HxMath.max(1.0, HxMath.floor(strength));
     blur = HxMath.max(0.0, (_Runtime.addNumbers(_Runtime.coalesce(effect.blurX, function():Dynamic return cast 6.0), _Runtime.coalesce(effect.blurY, function():Dynamic return cast 6.0)) / 2.0));
     sourceMode = _Runtime.coalesce(effect.sourceMode, function():Dynamic return cast 'draw');
-    drawCanvasTintedAlphaMask(({ final __callArgument616:Dynamic = mask; __callArgument616; }), ({ final __callArgument617:Dynamic = source; __callArgument617; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 4278190335.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast tintStrength : Float));
-    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument622:Dynamic = blurred; __callArgument622; }), ({ final __callArgument623:Dynamic = mask; __callArgument623; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument620:Dynamic = blurred; __callArgument620; }), ({ final __callArgument621:Dynamic = mask; __callArgument621; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    clearCanvasTarget(({ final __callArgument624:Dynamic = dest; __callArgument624; }));
+    drawCanvasTintedAlphaMask(({ final __callArgument636:Dynamic = mask; __callArgument636; }), ({ final __callArgument637:Dynamic = source; __callArgument637; }), (cast _Runtime.coalesce(effect.color, function():Dynamic return cast 4278190335.0) : Float), (cast _Runtime.coalesce(effect.alpha, function():Dynamic return cast 1.0) : Float), (cast tintStrength : Float));
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument642:Dynamic = blurred; __callArgument642; }), ({ final __callArgument643:Dynamic = mask; __callArgument643; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument640:Dynamic = blurred; __callArgument640; }), ({ final __callArgument641:Dynamic = mask; __callArgument641; }), (cast ((cast ((cast blur : Float) > (cast 0.0 : Float)) : Bool) ? (cast 'blur(' + Std.string(blur) + 'px)' : Dynamic) : (cast 'none' : Dynamic)) : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    clearCanvasTarget(({ final __callArgument644:Dynamic = dest; __callArgument644; }));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast glowPasses : Float)) : Bool)) {
-        (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument628:Dynamic = dest; __callArgument628; }), ({ final __callArgument629:Dynamic = blurred; __callArgument629; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument626:Dynamic = dest; __callArgument626; }), ({ final __callArgument627:Dynamic = blurred; __callArgument627; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+        (#if js _Runtime.callValue(compositeCanvasImage, cast ([({ final __callArgument648:Dynamic = dest; __callArgument648; }), ({ final __callArgument649:Dynamic = blurred; __callArgument649; })] : Array<Dynamic>)) #else compositeCanvasImage(({ final __callArgument646:Dynamic = dest; __callArgument646; }), ({ final __callArgument647:Dynamic = blurred; __callArgument647; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         i++;
       }
     }
-    compositeCanvasSourceMode(({ final __callArgument630:Dynamic = dest; __callArgument630; }), ({ final __callArgument631:Dynamic = source; __callArgument631; }), ({ final __callArgument632:Dynamic = sourceMode; __callArgument632; }));
-    releaseCanvasRenderTarget(({ final __callArgument636:Dynamic = pool; __callArgument636; }), ({ final __callArgument637:Dynamic = mask; __callArgument637; }));
-    releaseCanvasRenderTarget(({ final __callArgument640:Dynamic = pool; __callArgument640; }), ({ final __callArgument641:Dynamic = blurred; __callArgument641; }));
+    compositeCanvasSourceMode(({ final __callArgument650:Dynamic = dest; __callArgument650; }), ({ final __callArgument651:Dynamic = source; __callArgument651; }), ({ final __callArgument652:Dynamic = sourceMode; __callArgument652; }));
+    releaseCanvasRenderTarget(({ final __callArgument656:Dynamic = pool; __callArgument656; }), ({ final __callArgument657:Dynamic = mask; __callArgument657; }));
+    releaseCanvasRenderTarget(({ final __callArgument660:Dynamic = pool; __callArgument660; }), ({ final __callArgument661:Dynamic = blurred; __callArgument661; }));
   }
 
   @:allow(flight)
@@ -1096,7 +1145,7 @@ class _EffectsCanvas {
     size = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'size'), function():Dynamic return cast 8.0)));
     smallW = HxMath.max(1.0, HxMath.floor((source.width / size)));
     smallH = HxMath.max(1.0, HxMath.floor((source.height / size)));
-    small = (cast acquireCanvasRenderTarget(({ final __callArgument644:Dynamic = pool; __callArgument644; }), (cast smallW : Float), (cast smallH : Float)) : CanvasRenderTarget);
+    small = (cast acquireCanvasRenderTarget(({ final __callArgument664:Dynamic = pool; __callArgument664; }), (cast smallW : Float), (cast smallH : Float)) : CanvasRenderTarget);
     sctx = small.context;
     flight._internal.backend.Canvas2dBackend.call(sctx, 'save', cast ([] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.call(sctx, 'setTransform', cast ([1.0, 0.0, 0.0, 1.0, 0.0, 0.0] : Array<Dynamic>));
@@ -1118,7 +1167,7 @@ class _EffectsCanvas {
     flight._internal.backend.Canvas2dBackend.call(ctx, 'drawImage', cast ([small.canvas, 0.0, 0.0, smallW, smallH, 0.0, 0.0, dest.width, dest.height] : Array<Dynamic>));
     flight._internal.backend.Canvas2dBackend.setField(ctx, 'imageSmoothingEnabled', true);
     flight._internal.backend.Canvas2dBackend.call(ctx, 'restore', cast ([] : Array<Dynamic>));
-    releaseCanvasRenderTarget(({ final __callArgument646:Dynamic = pool; __callArgument646; }), ({ final __callArgument647:Dynamic = small; __callArgument647; }));
+    releaseCanvasRenderTarget(({ final __callArgument666:Dynamic = pool; __callArgument666; }), ({ final __callArgument667:Dynamic = small; __callArgument667; }));
   }
 
   public static final defaultCanvasPixelateEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -1126,7 +1175,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasPixelateEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument650:Dynamic = state; __callArgument650; }), (cast 'PixelateEffect' : String), ({ final __callArgument651:Dynamic = defaultCanvasPixelateEffectRunner; __callArgument651; }));
+    registerCanvasRenderEffect(({ final __callArgument670:Dynamic = state; __callArgument670; }), (cast 'PixelateEffect' : String), ({ final __callArgument671:Dynamic = defaultCanvasPixelateEffectRunner; __callArgument671; }));
   }
 
   @:allow(flight)
@@ -1134,7 +1183,7 @@ class _EffectsCanvas {
   private static function applyPosterizeEffectToCanvas(source:CanvasRenderTarget, dest:CanvasRenderTarget, effect:PosterizeEffect):Void {
     var levels:Float = cast _Runtime.UNDEFINED;
     levels = HxMath.max(2.0, _Runtime.coalesce(_Runtime.field(effect, 'levels'), function():Dynamic return cast 8.0));
-    drawCanvasImageDataPass(({ final __callArgument654:Dynamic = dest; __callArgument654; }), ({ final __callArgument655:Dynamic = source; __callArgument655; }), ({ final __callArgument656:Dynamic = function(data:flight._internal._UInt8ClampedArray, pixelCount:Float):Void {
+    drawCanvasImageDataPass(({ final __callArgument674:Dynamic = dest; __callArgument674; }), ({ final __callArgument675:Dynamic = source; __callArgument675; }), ({ final __callArgument676:Dynamic = function(data:flight._internal._UInt8ClampedArray, pixelCount:Float):Void {
       {
         var pixel:Float = 0.0;
         while ((cast ((cast pixel : Float) < (cast pixelCount : Float)) : Bool)) {
@@ -1151,7 +1200,7 @@ class _EffectsCanvas {
           pixel++;
         }
       }
-    }; __callArgument656; }));
+    }; __callArgument676; }));
   }
 
   public static final defaultCanvasPosterizeEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -1159,7 +1208,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasPosterizeEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument660:Dynamic = state; __callArgument660; }), (cast 'PosterizeEffect' : String), ({ final __callArgument661:Dynamic = defaultCanvasPosterizeEffectRunner; __callArgument661; }));
+    registerCanvasRenderEffect(({ final __callArgument680:Dynamic = state; __callArgument680; }), (cast 'PosterizeEffect' : String), ({ final __callArgument681:Dynamic = defaultCanvasPosterizeEffectRunner; __callArgument681; }));
   }
 
   @:allow(flight)
@@ -1170,8 +1219,8 @@ class _EffectsCanvas {
     var target:CanvasRenderTarget = cast _Runtime.UNDEFINED;
     w = HxMath.max(1.0, HxMath.ceil(width));
     h = HxMath.max(1.0, HxMath.ceil(height));
-    target = _Runtime.coalesce(_Runtime.callProperty(pool.free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createCanvasRenderTarget((cast w : Float), (cast h : Float)) : CanvasRenderTarget));
-    if ((cast ((cast !_Runtime.strictEquals(target.width, w) : Bool) || (cast !_Runtime.strictEquals(target.height, h) : Bool)) : Bool)) { resizeCanvasRenderTarget(({ final __callArgument664:Dynamic = target; __callArgument664; }), (cast w : Float), (cast h : Float)); }
+    target = _Runtime.coalesce(_Runtime.callProperty(pool.free, 'pop', cast ([] : Array<Dynamic>)), function():Dynamic return cast (cast createCanvasRenderTarget(pool.creator, (cast w : Float), (cast h : Float)) : CanvasRenderTarget));
+    if ((cast ((cast !_Runtime.strictEquals(target.width, w) : Bool) || (cast !_Runtime.strictEquals(target.height, h) : Bool)) : Bool)) { resizeCanvasRenderTarget(({ final __callArgument684:Dynamic = target; __callArgument684; }), (cast w : Float), (cast h : Float)); }
     _Runtime.callProperty(pool.inUse, 'push', cast ([target] : Array<Dynamic>));
     return cast target;
     return cast null;
@@ -1183,23 +1232,23 @@ class _EffectsCanvas {
     w = flight._internal.backend.CanvasElementBackend.field((cast state : CanvasRenderState).canvas, 'width');
     h = flight._internal.backend.CanvasElementBackend.field((cast state : CanvasRenderState).canvas, 'height');
     if ((cast _Runtime.strictEquals(pipeline.sceneTarget, null) : Bool)) {
-      (pipeline.sceneTarget = cast ((cast createCanvasRenderTarget((cast w : Float), (cast h : Float)) : CanvasRenderTarget) : Null<CanvasRenderTarget>));
+      (pipeline.sceneTarget = cast ((cast createCanvasRenderTarget((cast (cast state : CanvasRenderState).surface : CanvasRenderSurface).creator, (cast w : Float), (cast h : Float)) : CanvasRenderTarget) : Null<CanvasRenderTarget>));
     } else {
       resizeCanvasRenderTarget(pipeline.sceneTarget, (cast w : Float), (cast h : Float));
     }
-    (#if js _Runtime.callValue(beginCanvasRenderPass, cast ([({ final __callArgument667:Dynamic = state; __callArgument667; }), pipeline.sceneTarget] : Array<Dynamic>)) #else beginCanvasRenderPass(({ final __callArgument666:Dynamic = state; __callArgument666; }), pipeline.sceneTarget, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(beginCanvasRenderPass, cast ([({ final __callArgument687:Dynamic = state; __callArgument687; }), pipeline.sceneTarget] : Array<Dynamic>)) #else beginCanvasRenderPass(({ final __callArgument686:Dynamic = state; __callArgument686; }), pipeline.sceneTarget, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
   }
 
-  public static function createCanvasRenderEffectPipeline(_state:CanvasRenderState, ?options:RenderEffectPipelineOptions):CanvasRenderEffectPipeline {
+  public static function createCanvasRenderEffectPipeline(state:CanvasRenderState, ?options:RenderEffectPipelineOptions):CanvasRenderEffectPipeline {
     if (options == null) options = cast ({  } : Dynamic);
-    return cast { options: _Runtime.mergeObjects([options]), sceneTarget: null, pool: (cast createCanvasRenderTargetPool() : CanvasRenderTargetPool), lutCache: (cast createColorLutCache() : ColorLutCache) };
+    return cast { options: _Runtime.mergeObjects([options]), sceneTarget: null, pool: (cast createCanvasRenderTargetPool((cast (cast state : CanvasRenderState).surface : CanvasRenderSurface).creator) : CanvasRenderTargetPool), lutCache: (cast createColorLutCache() : ColorLutCache) };
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function createCanvasRenderTargetPool():CanvasRenderTargetPool {
-    return cast { free: cast ([] : Array<Dynamic>), inUse: cast ([] : Array<Dynamic>) };
+  private static function createCanvasRenderTargetPool(creator:CanvasRenderSurfaceCreator):CanvasRenderTargetPool {
+    return cast { creator: creator, free: cast ([] : Array<Dynamic>), inUse: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
@@ -1224,15 +1273,15 @@ class _EffectsCanvas {
     var flushAdjustments:Void->Void = cast _Runtime.UNDEFINED;
     scene = pipeline.sceneTarget;
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return; }
-    endCanvasRenderPass(({ final __callArgument668:Dynamic = state; __callArgument668; }));
+    endCanvasRenderPass(({ final __callArgument688:Dynamic = state; __callArgument688; }));
     pool = pipeline.pool;
     source = scene;
     scratchA = null;
     scratchB = null;
     pending = (cast cast ([] : Array<Dynamic>));
     ensureScratch = (cast function():Void {
-      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireCanvasRenderTarget(({ final __callArgument670:Dynamic = pool; __callArgument670; }), (cast (cast scene : { var width:Float; }).width : Float), (cast (cast scene : { var height:Float; }).height : Float)) : CanvasRenderTarget) : Dynamic)); }
-      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireCanvasRenderTarget(({ final __callArgument672:Dynamic = pool; __callArgument672; }), (cast (cast scene : { var width:Float; }).width : Float), (cast (cast scene : { var height:Float; }).height : Float)) : CanvasRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchA, null) : Bool)) { (scratchA = cast ((cast acquireCanvasRenderTarget(({ final __callArgument690:Dynamic = pool; __callArgument690; }), (cast (cast scene : { var width:Float; }).width : Float), (cast (cast scene : { var height:Float; }).height : Float)) : CanvasRenderTarget) : Dynamic)); }
+      if ((cast _Runtime.strictEquals(scratchB, null) : Bool)) { (scratchB = cast ((cast acquireCanvasRenderTarget(({ final __callArgument692:Dynamic = pool; __callArgument692; }), (cast (cast scene : { var width:Float; }).width : Float), (cast (cast scene : { var height:Float; }).height : Float)) : CanvasRenderTarget) : Dynamic)); }
     });
     flushAdjustments = (cast function():Void {
       var dest:CanvasRenderTarget = cast _Runtime.UNDEFINED;
@@ -1240,34 +1289,34 @@ class _EffectsCanvas {
       ensureScratch();
       dest = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
       if ((cast _Runtime.callProperty(pending, 'some', cast ([isColorLutAdjustment] : Array<Dynamic>)) : Bool)) {
-        applyColorLutPassToCanvas(({ final __callArgument674:Dynamic = source; __callArgument674; }), ({ final __callArgument675:Dynamic = dest; __callArgument675; }), (cast (#if js _Runtime.callValue(bakeColorLutForRun, cast ([pipeline.lutCache, ({ final __callArgument677:Dynamic = pending; __callArgument677; })] : Array<Dynamic>)) #else bakeColorLutForRun(pipeline.lutCache, ({ final __callArgument676:Dynamic = pending; __callArgument676; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ColorLut));
+        applyColorLutPassToCanvas(({ final __callArgument694:Dynamic = source; __callArgument694; }), ({ final __callArgument695:Dynamic = dest; __callArgument695; }), (cast (#if js _Runtime.callValue(bakeColorLutForRun, cast ([pipeline.lutCache, ({ final __callArgument697:Dynamic = pending; __callArgument697; })] : Array<Dynamic>)) #else bakeColorLutForRun(pipeline.lutCache, ({ final __callArgument696:Dynamic = pending; __callArgument696; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : ColorLut));
       } else {
         var matrices:Array<Array<Float>> = (cast cast ([] : Array<Dynamic>));
         for (op in _Runtime.iterable(pending)) {
-          var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument684:Dynamic = op; __callArgument684; })) : Null<Array<Float>>);
+          var matrix:Null<Array<Float>> = (cast getAdjustmentColorMatrix(({ final __callArgument704:Dynamic = op; __callArgument704; })) : Null<Array<Float>>);
           if ((cast !_Runtime.strictEquals(matrix, null) : Bool)) { _Runtime.callProperty(matrices, 'push', cast ([matrix] : Array<Dynamic>)); }
         }
-        applyColorMatrixPassToCanvas(({ final __callArgument686:Dynamic = source; __callArgument686; }), ({ final __callArgument687:Dynamic = dest; __callArgument687; }), (cast fuseColorMatrices(({ final __callArgument688:Dynamic = matrices; __callArgument688; })) : Array<Float>));
+        applyColorMatrixPassToCanvas(({ final __callArgument706:Dynamic = source; __callArgument706; }), ({ final __callArgument707:Dynamic = dest; __callArgument707; }), (cast fuseColorMatrices(({ final __callArgument708:Dynamic = matrices; __callArgument708; })) : Array<Float>));
       }
       (source = cast (dest : Dynamic));
       (pending = cast (cast ([] : Array<Dynamic>) : Dynamic));
     });
     for (operation in _Runtime.iterable(operations)) {
-      if ((cast ((cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument696:Dynamic = operation; __callArgument696; })) : Null<Array<Float>>), null) : Bool) || (cast (cast isColorLutAdjustment(({ final __callArgument698:Dynamic = operation; __callArgument698; })) : Bool) : Bool)) : Bool)) {
+      if ((cast ((cast !_Runtime.strictEquals((cast getAdjustmentColorMatrix(({ final __callArgument716:Dynamic = operation; __callArgument716; })) : Null<Array<Float>>), null) : Bool) || (cast (cast isColorLutAdjustment(({ final __callArgument718:Dynamic = operation; __callArgument718; })) : Bool) : Bool)) : Bool)) {
         _Runtime.callProperty(pending, 'push', cast ([(cast operation : Adjustment)] : Array<Dynamic>));
         continue;
       }
-      var runner:Null<CanvasRenderEffectRunner> = (cast getCanvasRenderEffectRunner(({ final __callArgument700:Dynamic = state; __callArgument700; }), (cast (cast operation : { var kind:String; }).kind : String)) : Null<CanvasRenderEffectRunner>);
+      var runner:Null<CanvasRenderEffectRunner> = (cast getCanvasRenderEffectRunner(({ final __callArgument720:Dynamic = state; __callArgument720; }), (cast (cast operation : { var kind:String; }).kind : String)) : Null<CanvasRenderEffectRunner>);
       flushAdjustments();
       ensureScratch();
       var dest:CanvasRenderTarget = ((cast _Runtime.strictEquals(source, scratchA) : Bool) ? (cast scratchB : Dynamic) : (cast scratchA : Dynamic));
-      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument704:Dynamic = dest; __callArgument704; }), ({ final __callArgument705:Dynamic = source; __callArgument705; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument702:Dynamic = dest; __callArgument702; }), ({ final __callArgument703:Dynamic = source; __callArgument703; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); } else { runner(({ final __callArgument706:Dynamic = { state: state, source: source, dest: dest, pool: pool }; __callArgument706; }), ({ final __callArgument707:Dynamic = operation; __callArgument707; })); }
+      if ((cast _Runtime.strictEquals(runner, null) : Bool)) { (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument724:Dynamic = dest; __callArgument724; }), ({ final __callArgument725:Dynamic = source; __callArgument725; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument722:Dynamic = dest; __callArgument722; }), ({ final __callArgument723:Dynamic = source; __callArgument723; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end); } else { runner(({ final __callArgument726:Dynamic = { state: state, source: source, dest: dest, pool: pool }; __callArgument726; }), ({ final __callArgument727:Dynamic = operation; __callArgument727; })); }
       (source = cast (dest : Dynamic));
     }
     flushAdjustments();
-    _EffectsCanvas.presentCanvasRenderEffectResult__canvasRenderEffectPipeline(({ final __callArgument710:Dynamic = state; __callArgument710; }), ({ final __callArgument711:Dynamic = source; __callArgument711; }));
-    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseCanvasRenderTarget(({ final __callArgument714:Dynamic = pool; __callArgument714; }), ({ final __callArgument715:Dynamic = scratchA; __callArgument715; })); }
-    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseCanvasRenderTarget(({ final __callArgument718:Dynamic = pool; __callArgument718; }), ({ final __callArgument719:Dynamic = scratchB; __callArgument719; })); }
+    _EffectsCanvas.presentCanvasRenderEffectResult__canvasRenderEffectPipeline(({ final __callArgument730:Dynamic = state; __callArgument730; }), ({ final __callArgument731:Dynamic = source; __callArgument731; }));
+    if ((cast !_Runtime.strictEquals(scratchA, null) : Bool)) { releaseCanvasRenderTarget(({ final __callArgument734:Dynamic = pool; __callArgument734; }), ({ final __callArgument735:Dynamic = scratchA; __callArgument735; })); }
+    if ((cast !_Runtime.strictEquals(scratchB, null) : Bool)) { releaseCanvasRenderTarget(({ final __callArgument738:Dynamic = pool; __callArgument738; }), ({ final __callArgument739:Dynamic = scratchB; __callArgument739; })); }
   }
 
   @:allow(flight)
@@ -1296,22 +1345,22 @@ class _EffectsCanvas {
   @:keep
   private static function getCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Null<CanvasRenderEffectRunner> {
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:CanvasRenderEffectRunner; }>> = cast _Runtime.UNDEFINED;
-    entry = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument724:Dynamic = state; __callArgument724; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flight._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind));
-    return cast ((cast _Runtime.strictEquals(({ final __structural726 = entry; __structural726 == null ? _Runtime.UNDEFINED : (cast __structural726 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasRenderEffectRunner; }).value : Dynamic) : (cast null : Dynamic));
+    entry = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument744:Dynamic = state; __callArgument744; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flight._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind));
+    return cast ((cast _Runtime.strictEquals(({ final __structural746 = entry; __structural746 == null ? _Runtime.UNDEFINED : (cast __structural746 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound) : Bool) ? (cast (cast entry : { var state:String; var value:CanvasRenderEffectRunner; }).value : Dynamic) : (cast null : Dynamic));
     return cast null;
   }
 
   @:allow(flight)
   @:keep
   private static function hasCanvasRenderEffectRunner(state:CanvasRenderState, kind:String):Bool {
-    return cast _Runtime.strictEquals(({ final __structural731 = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument729:Dynamic = state; __callArgument729; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flight._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind)); __structural731 == null ? _Runtime.UNDEFINED : (cast __structural731 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
+    return cast _Runtime.strictEquals(({ final __structural751 = ((cast (cast (cast (cast (cast getCanvasRenderStateRuntime(({ final __callArgument749:Dynamic = state; __callArgument749; })) : CanvasRenderStateRuntime) : { var registries:CanvasRenderRegistries; }).registries : CanvasRenderRegistries).renderEffects : KeyedTable<CanvasRenderEffectRunner>).entries : flight._internal._Map<String, RegistryTableEntry<CanvasRenderEffectRunner>>).get(kind)); __structural751 == null ? _Runtime.UNDEFINED : (cast __structural751 : { var state:String; }).state; }), (cast RegistryEntryStateValue : { var Bound:String; var Tombstoned:String; }).Bound);
     return cast null;
   }
 
   public static function registerCanvasRenderEffect(state:CanvasRenderState, kind:String, runner:CanvasRenderEffectRunner):Void {
     var runtime:CanvasRenderStateRuntime = cast _Runtime.UNDEFINED;
-    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument732:Dynamic = state; __callArgument732; })) : CanvasRenderStateRuntime);
-    ((cast runtime.registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects = cast ((cast withRegistryTableEntry((cast (cast runtime.registries : { var renderEffects:KeyedTable<CanvasRenderEffectRunner>; }).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument734:Dynamic = runner; __callArgument734; })) : KeyedTable<CanvasRenderEffectRunner>) : KeyedTable<CanvasRenderEffectRunner>));
+    runtime = (cast getCanvasRenderStateRuntime(({ final __callArgument752:Dynamic = state; __callArgument752; })) : CanvasRenderStateRuntime);
+    ((cast runtime.registries : CanvasRenderRegistries).renderEffects = (cast withRegistryTableEntry((cast (cast runtime.registries : CanvasRenderRegistries).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument754:Dynamic = runner; __callArgument754; })) : KeyedTable<CanvasRenderEffectRunner>));
   }
 
   public static function applyCanvasRenderEffectsToRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
@@ -1321,11 +1370,11 @@ class _EffectsCanvas {
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, scratch) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, scratch) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyCanvasRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
-    sourceTarget = (cast getCanvasRenderTextureTarget(({ final __callArgument736:Dynamic = state; __callArgument736; }), ({ final __callArgument737:Dynamic = source; __callArgument737; })) : Null<CanvasRenderTarget>);
+    sourceTarget = (cast getCanvasRenderTextureTarget(({ final __callArgument756:Dynamic = state; __callArgument756; }), ({ final __callArgument757:Dynamic = source; __callArgument757; })) : Null<CanvasRenderTarget>);
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
     operations = (cast _Runtime.flatMapArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flight._internal._Union2<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }>> {
       var runner:Null<CanvasRenderEffectRunner> = cast _Runtime.UNDEFINED;
-      runner = (cast getCanvasRenderEffectRunner(({ final __callArgument740:Dynamic = state; __callArgument740; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<CanvasRenderEffectRunner>);
+      runner = (cast getCanvasRenderEffectRunner(({ final __callArgument760:Dynamic = state; __callArgument760; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<CanvasRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
@@ -1337,10 +1386,10 @@ class _EffectsCanvas {
         var operation:{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; } = flight._internal._StaticIndex.readArray(operations, index);
         var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
         var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
-        writeCanvasRenderTextureTarget(({ final __callArgument742:Dynamic = state; __callArgument742; }), ({ final __callArgument743:Dynamic = output; __callArgument743; }), (cast function(target:CanvasRenderTarget):Void {
-          (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).runner(({ final __callArgument744:Dynamic = { state: state, source: current, dest: target, pool: pool.effectTargets }; __callArgument744; }), (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).effect);
+        writeCanvasRenderTextureTarget(({ final __callArgument762:Dynamic = state; __callArgument762; }), ({ final __callArgument763:Dynamic = output; __callArgument763; }), (cast function(target:CanvasRenderTarget):Void {
+          (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).runner(({ final __callArgument764:Dynamic = { state: state, source: current, dest: target, pool: pool.effectTargets }; __callArgument764; }), (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).effect);
         } : Dynamic));
-        (current = cast ((cast getCanvasRenderTextureTarget(({ final __callArgument748:Dynamic = state; __callArgument748; }), ({ final __callArgument749:Dynamic = output; __callArgument749; })) : Null<CanvasRenderTarget>) : Dynamic));
+        (current = cast ((cast getCanvasRenderTextureTarget(({ final __callArgument768:Dynamic = state; __callArgument768; }), ({ final __callArgument769:Dynamic = output; __callArgument769; })) : Null<CanvasRenderTarget>) : Dynamic));
         index++;
       }
     }
@@ -1362,7 +1411,7 @@ class _EffectsCanvas {
     var channel:Float = cast _Runtime.UNDEFINED;
     count = HxMath.max(1.0, HxMath.round(_Runtime.coalesce(_Runtime.field(effect, 'count'), function():Dynamic return cast 240.0)));
     intensity = HxMath.max(0.0, HxMath.min(1.0, _Runtime.coalesce(_Runtime.field(effect, 'intensity'), function():Dynamic return cast 0.3)));
-    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument754:Dynamic = dest; __callArgument754; }), ({ final __callArgument755:Dynamic = source; __callArgument755; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument752:Dynamic = dest; __callArgument752; }), ({ final __callArgument753:Dynamic = source; __callArgument753; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument774:Dynamic = dest; __callArgument774; }), ({ final __callArgument775:Dynamic = source; __callArgument775; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument772:Dynamic = dest; __callArgument772; }), ({ final __callArgument773:Dynamic = source; __callArgument773; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     ctx = dest.context;
     w = dest.width;
     h = dest.height;
@@ -1390,7 +1439,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasScanlinesEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument756:Dynamic = state; __callArgument756; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument757:Dynamic = defaultCanvasScanlinesEffectRunner; __callArgument757; }));
+    registerCanvasRenderEffect(({ final __callArgument776:Dynamic = state; __callArgument776; }), (cast 'ScanlinesEffect' : String), ({ final __callArgument777:Dynamic = defaultCanvasScanlinesEffectRunner; __callArgument777; }));
   }
 
   public static function clearCanvasTarget(dest:CanvasRenderTarget):Void {
@@ -1419,7 +1468,7 @@ class _EffectsCanvas {
 
   public static function compositeCanvasSourceMode(dest:CanvasRenderTarget, source:CanvasRenderTarget, sourceMode:CanvasEffectSourceMode):Void {
     if ((cast _Runtime.strictEquals(sourceMode, 'hide') : Bool)) { return; }
-    compositeCanvasImage(({ final __callArgument760:Dynamic = dest; __callArgument760; }), ({ final __callArgument761:Dynamic = source; __callArgument761; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool) ? (cast 'destination-out' : Dynamic) : (cast 'source-over' : Dynamic)) : flight._internal._Any));
+    compositeCanvasImage(({ final __callArgument780:Dynamic = dest; __callArgument780; }), ({ final __callArgument781:Dynamic = source; __callArgument781; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast ((cast _Runtime.strictEquals(sourceMode, 'knockout') : Bool) ? (cast 'destination-out' : Dynamic) : (cast 'source-over' : Dynamic)) : flight._internal._Any));
   }
 
   public static function drawCanvasInvertedTintedAlphaMask(dest:CanvasRenderTarget, source:CanvasRenderTarget, color:Float, alpha:Float, strength:Float, offsetX:Float = 0.0, offsetY:Float = 0.0):Void {
@@ -1476,7 +1525,7 @@ class _EffectsCanvas {
     center = _Runtime.coalesce(effect.center, function():Dynamic return cast 0.5);
     bandWidth = _Runtime.coalesce(effect.width, function():Dynamic return cast 0.3);
     blur = _Runtime.coalesce(effect.blur, function():Dynamic return cast 4.0);
-    drawCanvasImageDataPass(({ final __callArgument764:Dynamic = dest; __callArgument764; }), ({ final __callArgument765:Dynamic = source; __callArgument765; }), ({ final __callArgument766:Dynamic = function(data:flight._internal._UInt8ClampedArray, pixelCount:Float):Void {
+    drawCanvasImageDataPass(({ final __callArgument784:Dynamic = dest; __callArgument784; }), ({ final __callArgument785:Dynamic = source; __callArgument785; }), ({ final __callArgument786:Dynamic = function(data:flight._internal._UInt8ClampedArray, pixelCount:Float):Void {
       var width:Float = cast _Runtime.UNDEFINED;
       var height:Float = cast _Runtime.UNDEFINED;
       var snapshot:flight._internal._UInt8ClampedArray = cast _Runtime.UNDEFINED;
@@ -1525,7 +1574,7 @@ class _EffectsCanvas {
           y++;
         }
       }
-    }; __callArgument766; }));
+    }; __callArgument786; }));
   }
 
   public static final defaultCanvasTiltShiftEffectRunner:CanvasRenderEffectRunner = (cast function(ctx:CanvasRenderEffectContext, effect:RenderEffect):Void {
@@ -1533,7 +1582,7 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasTiltShiftEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument770:Dynamic = state; __callArgument770; }), (cast 'TiltShiftEffect' : String), ({ final __callArgument771:Dynamic = defaultCanvasTiltShiftEffectRunner; __callArgument771; }));
+    registerCanvasRenderEffect(({ final __callArgument790:Dynamic = state; __callArgument790; }), (cast 'TiltShiftEffect' : String), ({ final __callArgument791:Dynamic = defaultCanvasTiltShiftEffectRunner; __callArgument791; }));
   }
 
   public static final TAP_REACH__canvasTiltShiftEffect:Float = 3.0;
@@ -1567,7 +1616,7 @@ class _EffectsCanvas {
     color = _Runtime.coalesce(effect.color, function():Dynamic return cast 255.0);
     colorAlpha = ((_Runtime.toInt32(color) & 255) / 255.0);
     darken = HxMath.max(0.0, HxMath.min(1.0, (intensity * colorAlpha)));
-    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument776:Dynamic = dest; __callArgument776; }), ({ final __callArgument777:Dynamic = source; __callArgument777; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument774:Dynamic = dest; __callArgument774; }), ({ final __callArgument775:Dynamic = source; __callArgument775; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(drawCanvasEffectPass, cast ([({ final __callArgument796:Dynamic = dest; __callArgument796; }), ({ final __callArgument797:Dynamic = source; __callArgument797; }), (cast 'none' : String)] : Array<Dynamic>)) #else drawCanvasEffectPass(({ final __callArgument794:Dynamic = dest; __callArgument794; }), ({ final __callArgument795:Dynamic = source; __callArgument795; }), (cast 'none' : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     ctx = dest.context;
     w = dest.width;
     h = dest.height;
@@ -1601,6 +1650,6 @@ class _EffectsCanvas {
   });
 
   public static function registerCanvasVignetteEffect(state:CanvasRenderState):Void {
-    registerCanvasRenderEffect(({ final __callArgument778:Dynamic = state; __callArgument778; }), (cast 'VignetteEffect' : String), ({ final __callArgument779:Dynamic = defaultCanvasVignetteEffectRunner; __callArgument779; }));
+    registerCanvasRenderEffect(({ final __callArgument798:Dynamic = state; __callArgument798; }), (cast 'VignetteEffect' : String), ({ final __callArgument799:Dynamic = defaultCanvasVignetteEffectRunner; __callArgument799; }));
   }
 }

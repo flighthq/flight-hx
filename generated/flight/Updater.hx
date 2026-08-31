@@ -4,103 +4,23 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Updater as Facade_Updater_flight__Updater;
-import flight.types.AppUpdater;
-import flight.types.BackendExplanation;
-import flight.types.UpdateInfo;
-import flight.types.UpdaterConfig;
-import flight.types.UpdaterSignatureConfig;
-import flight.types.UpdaterState;
+import flight.types.AppUpdateCheckOutcome;
+import flight.types.AppUpdateInstallOutcome;
+import flight.types.DownloadedUpdate;
+import flight.types.HasUpdaterCommand;
 
 class Updater {
-  public static function attachAppUpdater(updater:AppUpdater):Void {
-    Facade_Updater_flight__Updater.attachAppUpdater(updater);
-  }
-
-  public static function cancelAppUpdateDownload():Void {
-    Facade_Updater_flight__Updater.cancelAppUpdateDownload();
-  }
-
-  public static function checkAndDownloadAppUpdate():Void {
-    Facade_Updater_flight__Updater.checkAndDownloadAppUpdate();
-  }
-
-  public static function checkForAppUpdate():Void {
-    Facade_Updater_flight__Updater.checkForAppUpdate();
-  }
-
-  public static function createAppUpdater():AppUpdater {
-    return cast Facade_Updater_flight__Updater.createAppUpdater();
+  public static function checkForAppUpdate(host:HasUpdaterCommand):flight._internal._Promise<AppUpdateCheckOutcome> {
+    return cast Facade_Updater_flight__Updater.checkForAppUpdate(host);
     return cast null;
   }
 
-  public static function createUpdaterConfig():UpdaterConfig {
-    return cast Facade_Updater_flight__Updater.createUpdaterConfig();
+  public static function destroyUpdater(host:HasUpdaterCommand):Void {
+    Facade_Updater_flight__Updater.destroyUpdater(host);
+  }
+
+  public static function installDownloadedUpdate(host:HasUpdaterCommand, update:DownloadedUpdate):flight._internal._Promise<AppUpdateInstallOutcome> {
+    return cast Facade_Updater_flight__Updater.installDownloadedUpdate(host, update);
     return cast null;
-  }
-
-  public static function createUpdaterState():UpdaterState {
-    return cast Facade_Updater_flight__Updater.createUpdaterState();
-    return cast null;
-  }
-
-  public static function detachAppUpdater(updater:AppUpdater):Void {
-    Facade_Updater_flight__Updater.detachAppUpdater(updater);
-  }
-
-  public static function disposeAppUpdater(updater:AppUpdater):Void {
-    Facade_Updater_flight__Updater.disposeAppUpdater(updater);
-  }
-
-  public static function downloadAppUpdate():Void {
-    Facade_Updater_flight__Updater.downloadAppUpdate();
-  }
-
-  public static function explainUpdaterBackend():BackendExplanation {
-    return cast Facade_Updater_flight__Updater.explainUpdaterBackend();
-    return cast null;
-  }
-
-  public static function getAppUpdaterState(updater:AppUpdater):UpdaterState {
-    return cast Facade_Updater_flight__Updater.getAppUpdaterState(updater);
-    return cast null;
-  }
-
-  public static function getUpdaterChannel():String {
-    return cast Facade_Updater_flight__Updater.getUpdaterChannel();
-    return cast null;
-  }
-
-  public static function getUpdaterConfig():UpdaterConfig {
-    return cast Facade_Updater_flight__Updater.getUpdaterConfig();
-    return cast null;
-  }
-
-  public static function isAppUpdateEligible(info:UpdateInfo, rolloutSeed:Float):Bool {
-    return cast Facade_Updater_flight__Updater.isAppUpdateEligible(info, rolloutSeed);
-    return cast null;
-  }
-
-  public static function quitAndInstallUpdate():Void {
-    Facade_Updater_flight__Updater.quitAndInstallUpdate();
-  }
-
-  public static function rollbackAppUpdate():Void {
-    Facade_Updater_flight__Updater.rollbackAppUpdate();
-  }
-
-  public static function setUpdaterChannel(channel:String):Void {
-    Facade_Updater_flight__Updater.setUpdaterChannel(channel);
-  }
-
-  public static function setUpdaterConfig(config:UpdaterConfig):Void {
-    Facade_Updater_flight__Updater.setUpdaterConfig(config);
-  }
-
-  public static function setUpdaterFeedUrl(url:String):Void {
-    Facade_Updater_flight__Updater.setUpdaterFeedUrl(url);
-  }
-
-  public static function setUpdaterSignatureConfig(config:Null<UpdaterSignatureConfig>):Void {
-    Facade_Updater_flight__Updater.setUpdaterSignatureConfig(config);
   }
 }

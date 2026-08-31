@@ -5,33 +5,50 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
-import flight.types.BackendExplanation;
+import flight.types.HasUiStatusBarChange;
+import flight.types.HasUiStatusBarColor;
+import flight.types.HasUiStatusBarInfo;
+import flight.types.HasUiStatusBarOverlays;
+import flight.types.HasUiStatusBarStyle;
+import flight.types.HasUiStatusBarStyleStack;
+import flight.types.HasUiStatusBarVisibility;
 import flight.types.Signal;
 import flight.types.StatusBar;
 import flight.types.StatusBarAnimation;
-import flight.types.StatusBarBackend;
+import flight.types.StatusBarChangeBackend;
+import flight.types.StatusBarColorBackend;
 import flight.types.StatusBarInfo;
+import flight.types.StatusBarInfoBackend;
+import flight.types.StatusBarOverlaysBackend;
 import flight.types.StatusBarStyle;
+import flight.types.StatusBarStyleBackend;
 import flight.types.StatusBarStyleEntry;
 import flight.types.StatusBarStyleEntryHandle;
+import flight.types.StatusBarVisibilityBackend;
+
+typedef StyleStackState__statusbar = { var applied:StatusBarInfo; var baseline:StatusBarInfo; var colorProvider:StatusBarColorBackend; var entries:Array<{ var entry:StatusBarStyleEntry; var handle:StatusBarStyleEntryHandle; }>; var overlaysProvider:StatusBarOverlaysBackend; var styleProvider:StatusBarStyleBackend; var visibilityProvider:StatusBarVisibilityBackend; };
 
 @:noCompletion
 class _StatusBar {
-  public static function attachStatusBar(bar:StatusBar):Void {
-    var backend:StatusBarBackend = cast _Runtime.UNDEFINED;
+  public static function attachStatusBar(host:{ >HasUiStatusBarChange, >HasUiStatusBarInfo, }, bar:StatusBar):Void {
+    var changeProvider:StatusBarChangeBackend = cast _Runtime.UNDEFINED;
+    var infoProvider:StatusBarInfoBackend = cast _Runtime.UNDEFINED;
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;
     detachStatusBar(({ final __callArgument0:Dynamic = bar; __callArgument0; }));
-    backend = (cast getStatusBarBackend() : StatusBarBackend);
-    unsubscribe = (cast backend : StatusBarBackend).subscribe(({ final __callArgument2:Dynamic = function():Void {
-      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[bar.onChange], [(cast backend : StatusBarBackend).getInfo((cast createStatusBarInfo() : StatusBarInfo))]]), 1);
+    changeProvider = (cast (cast host : { var ui:{ var statusBarChange:StatusBarChangeBackend; var statusBarInfo:StatusBarInfoBackend; }; }).ui : { var statusBarChange:StatusBarChangeBackend; }).statusBarChange;
+    infoProvider = (cast (cast host : { var ui:{ var statusBarChange:StatusBarChangeBackend; var statusBarInfo:StatusBarInfoBackend; }; }).ui : { var statusBarInfo:StatusBarInfoBackend; }).statusBarInfo;
+    unsubscribe = (cast changeProvider : StatusBarChangeBackend).subscribe(({ final __callArgument2:Dynamic = function():Void {
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[bar.onChange], [(cast infoProvider : StatusBarInfoBackend).getInfo((cast createStatusBarInfo() : StatusBarInfo))]]), 1);
     }; __callArgument2; }));
     ((cast _StatusBar._subscriptions__statusbar : flight._internal._WeakMap<StatusBar, Void->Void>).set(bar, (cast unsubscribe)));
   }
 
-  public static function clearStatusBarStyleStack():Void {
-    if ((cast _Runtime.strictEquals(_Runtime.field(_StatusBar._styleStack__statusbar, 'length'), 0.0) : Bool)) { return; }
-    _Runtime.setLength(_StatusBar._styleStack__statusbar, 0.0);
-    _StatusBar._applyTopStyleEntry__statusbar();
+  public static function clearStatusBarStyleStack(host:HasUiStatusBarStyleStack):Void {
+    var state:Null<StyleStackState__statusbar> = cast _Runtime.UNDEFINED;
+    state = ((cast _StatusBar._styleStacks__statusbar : flight._internal._WeakMap<HasUiStatusBarStyleStack, StyleStackState__statusbar>).get(host));
+    if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(_Runtime.field((cast state : StyleStackState__statusbar).entries, 'length'), 0.0) : Bool)) : Bool)) { return; }
+    _Runtime.setLength((cast state : StyleStackState__statusbar).entries, 0.0);
+    _StatusBar.applyTopStyleEntry__statusbar(({ final __callArgument3:Dynamic = host; __callArgument3; }), (cast state : Dynamic));
   }
 
   public static function createStatusBar():StatusBar {
@@ -49,64 +66,29 @@ class _StatusBar {
   public static function detachStatusBar(bar:StatusBar):Void {
     var unsubscribe:Null<Void->Void> = cast _Runtime.UNDEFINED;
     unsubscribe = ((cast _StatusBar._subscriptions__statusbar : flight._internal._WeakMap<StatusBar, Void->Void>).get(bar));
-    if ((cast !_Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      unsubscribe();
-      ((cast _StatusBar._subscriptions__statusbar : flight._internal._WeakMap<StatusBar, Void->Void>).delete_(bar));
-    }
+    if ((cast _Runtime.strictEquals(unsubscribe, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
+    unsubscribe();
+    ((cast _StatusBar._subscriptions__statusbar : flight._internal._WeakMap<StatusBar, Void->Void>).delete_(bar));
   }
 
   public static function disposeStatusBar(bar:StatusBar):Void {
-    detachStatusBar(({ final __callArgument3:Dynamic = bar; __callArgument3; }));
+    detachStatusBar(({ final __callArgument5:Dynamic = bar; __callArgument5; }));
   }
 
-  public static function explainStatusBarBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_StatusBar._custom__statusbar, null) : Bool)) {
-      return cast { conflict: _StatusBar._hostConflict__statusbar, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_StatusBar._host__statusbar, null) : Bool)) {
-      return cast { conflict: _StatusBar._hostConflict__statusbar, layer: 'host', operation: ((cast !_Runtime.strictEquals(_StatusBar._hostObservation__statusbar, null) : Bool) ? (cast (cast _StatusBar._hostObservation__statusbar : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_StatusBar._hostObservation__statusbar, null) : Bool) ? (cast (cast _StatusBar._hostObservation__statusbar : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+  public static function getStatusBarHeight(host:HasUiStatusBarInfo):Float {
+    return cast (cast (cast (cast (cast host : HasUiStatusBarInfo).ui : { var statusBarInfo:StatusBarInfoBackend; }).statusBarInfo : StatusBarInfoBackend).getInfo(({ final __callArgument7:Dynamic = _StatusBar._scratchInfo__statusbar; __callArgument7; })) : { var height:Float; }).height;
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function getStatusBarBackend():StatusBarBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_StatusBar._custom__statusbar, function():Dynamic return cast _StatusBar._host__statusbar), function():Dynamic return cast _StatusBar._sentinel__statusbar);
+  public static function getStatusBarInfo(host:HasUiStatusBarInfo, out:StatusBarInfo):StatusBarInfo {
+    return cast (cast (cast (cast host : HasUiStatusBarInfo).ui : { var statusBarInfo:StatusBarInfoBackend; }).statusBarInfo : StatusBarInfoBackend).getInfo(({ final __callArgument8:Dynamic = out; __callArgument8; }));
     return cast null;
   }
 
-  public static function getStatusBarHeight():Float {
-    return cast (cast (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).getInfo(({ final __callArgument5:Dynamic = _StatusBar._scratchInfo__statusbar; __callArgument5; })) : { var height:Float; }).height;
-    return cast null;
-  }
-
-  public static function getStatusBarInfo(out:StatusBarInfo):StatusBarInfo {
-    return cast (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).getInfo(({ final __callArgument6:Dynamic = out; __callArgument6; }));
-    return cast null;
-  }
-
-  public static function hasStatusBarStyleEntry(handle:StatusBarStyleEntryHandle):Bool {
+  public static function hasStatusBarStyleEntry(host:HasUiStatusBarStyleStack, handle:StatusBarStyleEntryHandle):Bool {
     if ((cast _Runtime.strictEquals(handle, _StatusBar.INVALID_HANDLE__statusbar) : Bool)) { return cast false; }
-    return cast _Runtime.callProperty(_StatusBar._styleStack__statusbar, 'some', cast ([function(e:{ var handle:Float; var entry:StatusBarStyleEntry; }, __unused0:Float, __unused1:Array<{ var handle:Float; var entry:StatusBarStyleEntry; }>):Bool return _Runtime.strictEquals((cast e : { var handle:Float; var entry:StatusBarStyleEntry; }).handle, handle)] : Array<Dynamic>));
+    return cast _Runtime.coalesce(_Runtime.callOptionalProperty(({ final __structural10 = ((cast _StatusBar._styleStacks__statusbar : flight._internal._WeakMap<HasUiStatusBarStyleStack, StyleStackState__statusbar>).get(host)); __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var entries:Array<{ var entry:StatusBarStyleEntry; var handle:Float; }>; }).entries; }), 'some', cast ([function(entry:{ var entry:StatusBarStyleEntry; var handle:Float; }, __unused0:Float, __unused1:Array<{ var entry:StatusBarStyleEntry; var handle:Float; }>):Bool return _Runtime.strictEquals((cast entry : { var entry:StatusBarStyleEntry; var handle:Float; }).handle, handle)] : Array<Dynamic>)), function():Dynamic return cast false);
     return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installStatusBarHostBackend(backend:StatusBarBackend):Void {
-    if ((cast !_Runtime.strictEquals(_StatusBar._host__statusbar, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_StatusBar._host__statusbar, backend) : Bool)) { (_StatusBar._hostConflict__statusbar = cast (true : Dynamic)); }
-      return;
-    }
-    (_StatusBar._host__statusbar = cast (backend : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function observeStatusBarHostResult(operation:String, succeeded:Bool):Void {
-    (_StatusBar._hostObservation__statusbar = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   @:allow(flight)
@@ -118,151 +100,93 @@ class _StatusBar {
     return cast null;
   }
 
-  public static function popStatusBarStyleEntry(handle:StatusBarStyleEntryHandle):Void {
-    var idx:Float = cast _Runtime.UNDEFINED;
+  public static function popStatusBarStyleEntry(host:HasUiStatusBarStyleStack, handle:StatusBarStyleEntryHandle):Void {
+    var state:Null<StyleStackState__statusbar> = cast _Runtime.UNDEFINED;
+    var index:Float = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(handle, _StatusBar.INVALID_HANDLE__statusbar) : Bool)) { return; }
-    idx = _Runtime.findIndex(_StatusBar._styleStack__statusbar, function(e:{ var handle:Float; var entry:StatusBarStyleEntry; }, __unused2:Float, __unused3:Array<{ var handle:Float; var entry:StatusBarStyleEntry; }>):Bool return _Runtime.strictEquals((cast e : { var handle:Float; var entry:StatusBarStyleEntry; }).handle, handle));
-    if ((cast _Runtime.strictEquals(idx, -1.0) : Bool)) { return; }
-    _Runtime.splice(_StatusBar._styleStack__statusbar, Std.int(idx), Std.int(1.0), []);
-    _StatusBar._applyTopStyleEntry__statusbar();
+    state = ((cast _StatusBar._styleStacks__statusbar : flight._internal._WeakMap<HasUiStatusBarStyleStack, StyleStackState__statusbar>).get(host));
+    if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
+    index = _Runtime.findIndex((cast state : StyleStackState__statusbar).entries, function(entry:{ var entry:StatusBarStyleEntry; var handle:Float; }, __unused2:Float, __unused3:Array<{ var entry:StatusBarStyleEntry; var handle:Float; }>):Bool return _Runtime.strictEquals((cast entry : { var entry:StatusBarStyleEntry; var handle:Float; }).handle, handle));
+    if ((cast _Runtime.strictEquals(index, -1.0) : Bool)) { return; }
+    _Runtime.splice((cast state : StyleStackState__statusbar).entries, Std.int(index), Std.int(1.0), []);
+    _StatusBar.applyTopStyleEntry__statusbar(({ final __callArgument11:Dynamic = host; __callArgument11; }), (cast state : Dynamic));
   }
 
-  public static function pushStatusBarStyleEntry(entry:StatusBarStyleEntry):StatusBarStyleEntryHandle {
+  public static function pushStatusBarStyleEntry(host:HasUiStatusBarStyleStack, entry:StatusBarStyleEntry):StatusBarStyleEntryHandle {
+    var state:Null<StyleStackState__statusbar> = cast _Runtime.UNDEFINED;
     var handle:Float = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(_StatusBar._styleStack__statusbar, 'length'), 0.0) : Bool)) {
-      (_StatusBar._baseline__statusbar = cast ((cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).getInfo((cast createStatusBarInfo() : StatusBarInfo)) : Dynamic));
-      (_StatusBar._applied__statusbar = cast ((cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).getInfo((cast createStatusBarInfo() : StatusBarInfo)) : Dynamic));
+    state = ((cast _StatusBar._styleStacks__statusbar : flight._internal._WeakMap<HasUiStatusBarStyleStack, StyleStackState__statusbar>).get(host));
+    if ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      var infoProvider:StatusBarInfoBackend = (cast (cast host : { var ui:{ var statusBarColor:StatusBarColorBackend; var statusBarInfo:StatusBarInfoBackend; var statusBarOverlays:StatusBarOverlaysBackend; var statusBarStyle:StatusBarStyleBackend; var statusBarVisibility:StatusBarVisibilityBackend; }; }).ui : { var statusBarInfo:StatusBarInfoBackend; }).statusBarInfo;
+      var baseline:StatusBarInfo = (cast infoProvider : StatusBarInfoBackend).getInfo((cast createStatusBarInfo() : StatusBarInfo));
+      (state = cast ({ applied: _Runtime.mergeObjects([baseline]), baseline: baseline, colorProvider: (cast (cast host : { var ui:{ var statusBarColor:StatusBarColorBackend; var statusBarInfo:StatusBarInfoBackend; var statusBarOverlays:StatusBarOverlaysBackend; var statusBarStyle:StatusBarStyleBackend; var statusBarVisibility:StatusBarVisibilityBackend; }; }).ui : { var statusBarColor:StatusBarColorBackend; }).statusBarColor, entries: cast ([] : Array<Dynamic>), overlaysProvider: (cast (cast host : { var ui:{ var statusBarColor:StatusBarColorBackend; var statusBarInfo:StatusBarInfoBackend; var statusBarOverlays:StatusBarOverlaysBackend; var statusBarStyle:StatusBarStyleBackend; var statusBarVisibility:StatusBarVisibilityBackend; }; }).ui : { var statusBarOverlays:StatusBarOverlaysBackend; }).statusBarOverlays, styleProvider: (cast (cast host : { var ui:{ var statusBarColor:StatusBarColorBackend; var statusBarInfo:StatusBarInfoBackend; var statusBarOverlays:StatusBarOverlaysBackend; var statusBarStyle:StatusBarStyleBackend; var statusBarVisibility:StatusBarVisibilityBackend; }; }).ui : { var statusBarStyle:StatusBarStyleBackend; }).statusBarStyle, visibilityProvider: (cast (cast host : { var ui:{ var statusBarColor:StatusBarColorBackend; var statusBarInfo:StatusBarInfoBackend; var statusBarOverlays:StatusBarOverlaysBackend; var statusBarStyle:StatusBarStyleBackend; var statusBarVisibility:StatusBarVisibilityBackend; }; }).ui : { var statusBarVisibility:StatusBarVisibilityBackend; }).statusBarVisibility } : Dynamic));
+      ((cast _StatusBar._styleStacks__statusbar : flight._internal._WeakMap<HasUiStatusBarStyleStack, StyleStackState__statusbar>).set(host, (cast state)));
     }
     handle = _StatusBar._nextHandle__statusbar++;
-    _Runtime.callProperty(_StatusBar._styleStack__statusbar, 'push', cast ([{ handle: handle, entry: entry }] : Array<Dynamic>));
-    _StatusBar._applyTopStyleEntry__statusbar();
+    _Runtime.callProperty((cast state : StyleStackState__statusbar).entries, 'push', cast ([{ entry: entry, handle: handle }] : Array<Dynamic>));
+    _StatusBar.applyTopStyleEntry__statusbar(({ final __callArgument13:Dynamic = host; __callArgument13; }), (cast state : Dynamic));
     return cast handle;
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function resetStatusBarBackendForTest():Void {
-    (_StatusBar._custom__statusbar = cast (null : Dynamic));
-    (_StatusBar._host__statusbar = cast (null : Dynamic));
-    (_StatusBar._hostConflict__statusbar = cast (false : Dynamic));
-    (_StatusBar._hostObservation__statusbar = cast (null : Dynamic));
+  public static function setStatusBarColor(host:HasUiStatusBarColor, color:Float, ?animated:Bool):Void {
+    (cast (cast (cast host : HasUiStatusBarColor).ui : { var statusBarColor:StatusBarColorBackend; }).statusBarColor : StatusBarColorBackend).setBackgroundColor((cast color : Float), ({ final __callArgument15:Dynamic = animated; __callArgument15; }));
   }
 
-  @:allow(flight)
-  @:keep
-  private static function setStatusBarBackend(backend:Null<StatusBarBackend>):Void {
-    (_StatusBar._custom__statusbar = cast (backend : Dynamic));
+  public static function setStatusBarOverlaysContent(host:HasUiStatusBarOverlays, overlay:Bool):Void {
+    (cast (cast (cast host : HasUiStatusBarOverlays).ui : { var statusBarOverlays:StatusBarOverlaysBackend; }).statusBarOverlays : StatusBarOverlaysBackend).setOverlaysContent((cast overlay : Bool));
   }
 
-  public static function setStatusBarColor(color:Float, ?animated:Bool):Void {
-    (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).setBackgroundColor((cast color : Float), ({ final __callArgument7:Dynamic = animated; __callArgument7; }));
+  public static function setStatusBarStyle(host:HasUiStatusBarStyle, style:StatusBarStyle):Void {
+    (cast (cast (cast host : HasUiStatusBarStyle).ui : { var statusBarStyle:StatusBarStyleBackend; }).statusBarStyle : StatusBarStyleBackend).setStyle(({ final __callArgument16:Dynamic = style; __callArgument16; }));
   }
 
-  public static function setStatusBarOverlaysContent(overlay:Bool):Void {
-    (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).setOverlaysContent((cast overlay : Bool));
+  public static function setStatusBarVisible(host:HasUiStatusBarVisibility, visible:Bool, ?animation:StatusBarAnimation):Void {
+    (cast (cast (cast host : HasUiStatusBarVisibility).ui : { var statusBarVisibility:StatusBarVisibilityBackend; }).statusBarVisibility : StatusBarVisibilityBackend).setVisible((cast visible : Bool), ({ final __callArgument17:Dynamic = animation; __callArgument17; }));
   }
 
-  public static function setStatusBarStyle(style:StatusBarStyle):Void {
-    (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).setStyle(({ final __callArgument8:Dynamic = style; __callArgument8; }));
-  }
-
-  public static function setStatusBarVisible(visible:Bool, ?animation:StatusBarAnimation):Void {
-    (cast (cast getStatusBarBackend() : StatusBarBackend) : StatusBarBackend).setVisible((cast visible : Bool), ({ final __callArgument9:Dynamic = animation; __callArgument9; }));
-  }
-
-  public static final _sentinel__statusbar:StatusBarBackend = (cast { getInfo: function(out:StatusBarInfo):StatusBarInfo {
-    (out.color = cast (0.0 : Float));
-    (out.height = cast (-1.0 : Float));
-    (out.overlaysContent = cast (false : Bool));
-    (out.style = cast ('default' : StatusBarStyle));
-    (out.visible = cast (true : Bool));
-    return cast out;
-    return cast _Runtime.UNDEFINED;
-  }, setBackgroundColor: function(color:Float, ?animated:Bool):Void {
-
-  }, setOverlaysContent: function(overlay:Bool):Void {
-
-  }, setStyle: function(style:StatusBarStyle):Void {
-
-  }, setVisible: function(visible:Bool, ?animation:StatusBarAnimation):Void {
-
-  }, subscribe: function(listener:Void->Void):Void->Void {
-    return cast function():Void {
-
-    };
-    return cast _Runtime.UNDEFINED;
-  } });
-
-  public static var _custom__statusbar:Null<StatusBarBackend> = _Runtime.explicitNull();
-
-  public static var _host__statusbar:Null<StatusBarBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__statusbar:Bool = false;
-
-  public static var _hostObservation__statusbar:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+  public static final INVALID_HANDLE__statusbar:StatusBarStyleEntryHandle = -1.0;
 
   public static var _nextHandle__statusbar:StatusBarStyleEntryHandle = 1.0;
 
   public static final _scratchInfo__statusbar:StatusBarInfo = (cast createStatusBarInfo() : StatusBarInfo);
 
-  public static final _styleStack__statusbar:Array<{ var handle:StatusBarStyleEntryHandle; var entry:StatusBarStyleEntry; }> = (cast cast ([] : Array<Dynamic>));
+  public static final _styleStacks__statusbar:flight._internal._WeakMap<HasUiStatusBarStyleStack, StyleStackState__statusbar> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
 
   public static final _subscriptions__statusbar:flight._internal._WeakMap<StatusBar, Void->Void> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
 
-  public static var _baseline__statusbar:Null<StatusBarInfo> = _Runtime.explicitNull();
-
-  public static var _applied__statusbar:Null<StatusBarInfo> = _Runtime.explicitNull();
-
-  public static final INVALID_HANDLE__statusbar:StatusBarStyleEntryHandle = -1.0;
-
-  public static function _applyTopStyleEntry__statusbar():Void {
-    var backend:StatusBarBackend = cast _Runtime.UNDEFINED;
-    var style:Null<StatusBarStyle> = cast _Runtime.UNDEFINED;
-    var visible:Null<Bool> = cast _Runtime.UNDEFINED;
+  public static function applyTopStyleEntry__statusbar(host:HasUiStatusBarStyleStack, state:StyleStackState__statusbar):Void {
+    var animation:Null<StatusBarAnimation> = cast _Runtime.UNDEFINED;
     var color:Null<Float> = cast _Runtime.UNDEFINED;
     var overlaysContent:Null<Bool> = cast _Runtime.UNDEFINED;
-    var animation:Null<StatusBarAnimation> = cast _Runtime.UNDEFINED;
-    var baseline:Null<StatusBarInfo> = cast _Runtime.UNDEFINED;
-    var applied:Null<StatusBarInfo> = cast _Runtime.UNDEFINED;
-    var next:StatusBarInfo = cast _Runtime.UNDEFINED;
-    backend = (cast getStatusBarBackend() : StatusBarBackend);
+    var style:Null<StatusBarStyle> = cast _Runtime.UNDEFINED;
+    var visible:Null<Bool> = cast _Runtime.UNDEFINED;
     {
-      var i:Float = _Runtime.subtractNumbers(_Runtime.field(_StatusBar._styleStack__statusbar, 'length'), 1.0);
-      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
-        var e:StatusBarStyleEntry = (cast flight._internal._StaticIndex.readArray(_StatusBar._styleStack__statusbar, i) : { var handle:Float; var entry:StatusBarStyleEntry; }).entry;
-        if ((cast ((cast _Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (style = cast (e.style : Dynamic)); }
-        if ((cast ((cast _Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (visible = cast (e.visible : Dynamic)); }
-        if ((cast ((cast _Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (color = cast (e.color : Dynamic)); }
-        if ((cast ((cast _Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (overlaysContent = cast (e.overlaysContent : Dynamic)); }
-        if ((cast ((cast _Runtime.strictEquals(animation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(e.animation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (animation = cast (e.animation : Dynamic)); }
-        i--;
+      var index:Float = _Runtime.subtractNumbers(_Runtime.field((cast state : StyleStackState__statusbar).entries, 'length'), 1.0);
+      while ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool)) {
+        var entry:StatusBarStyleEntry = (cast flight._internal._StaticIndex.readArray((cast state : StyleStackState__statusbar).entries, index) : { var entry:StatusBarStyleEntry; var handle:Float; }).entry;
+        if ((cast ((cast _Runtime.strictEquals(animation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(entry.animation, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (animation = cast (entry.animation : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(entry.color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (color = cast (entry.color : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(entry.overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+          (overlaysContent = cast (entry.overlaysContent : Dynamic));
+        }
+        if ((cast ((cast _Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(entry.style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (style = cast (entry.style : Dynamic)); }
+        if ((cast ((cast _Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(entry.visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (visible = cast (entry.visible : Dynamic)); }
+        index--;
       }
     }
-    baseline = _StatusBar._baseline__statusbar;
-    if ((cast !_Runtime.strictEquals(baseline, null) : Bool)) {
-      if ((cast _Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (style = cast ((cast baseline : { var style:StatusBarStyle; }).style : Dynamic)); }
-      if ((cast _Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (visible = cast ((cast baseline : { var visible:Bool; }).visible : Dynamic)); }
-      if ((cast _Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (color = cast ((cast baseline : { var color:Float; }).color : Dynamic)); }
-      if ((cast _Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (overlaysContent = cast ((cast baseline : { var overlaysContent:Bool; }).overlaysContent : Dynamic)); }
-    }
-    applied = _StatusBar._applied__statusbar;
-    if ((cast ((cast !_Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(style, ({ final __typedStruct10 = applied; __typedStruct10 == null ? _Runtime.UNDEFINED : (cast __typedStruct10 : { var style:StatusBarStyle; }).style; })) : Bool)) : Bool)) { (cast backend : StatusBarBackend).setStyle(({ final __callArgument11:Dynamic = style; __callArgument11; })); }
-    if ((cast ((cast !_Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(visible, ({ final __typedStruct12 = applied; __typedStruct12 == null ? _Runtime.UNDEFINED : (cast __typedStruct12 : { var visible:Bool; }).visible; })) : Bool)) : Bool)) { (cast backend : StatusBarBackend).setVisible((cast visible : Bool), ({ final __callArgument13:Dynamic = _Runtime.coalesce(animation, function():Dynamic return cast 'none'); __callArgument13; })); }
-    if ((cast ((cast !_Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(color, ({ final __typedStruct14 = applied; __typedStruct14 == null ? _Runtime.UNDEFINED : (cast __typedStruct14 : { var color:Float; }).color; })) : Bool)) : Bool)) { (cast backend : StatusBarBackend).setBackgroundColor((cast color : Float), ({ final __callArgument15:Dynamic = false; __callArgument15; })); }
-    if ((cast ((cast !_Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(overlaysContent, ({ final __typedStruct16 = applied; __typedStruct16 == null ? _Runtime.UNDEFINED : (cast __typedStruct16 : { var overlaysContent:Bool; }).overlaysContent; })) : Bool)) : Bool)) {
-      (cast backend : StatusBarBackend).setOverlaysContent((cast overlaysContent : Bool));
-    }
-    if ((cast _Runtime.strictEquals(_Runtime.field(_StatusBar._styleStack__statusbar, 'length'), 0.0) : Bool)) {
-      (_StatusBar._baseline__statusbar = cast (null : Dynamic));
-      (_StatusBar._applied__statusbar = cast (null : Dynamic));
-      return;
-    }
-    next = _Runtime.coalesce(_StatusBar._applied__statusbar, function():Dynamic return cast (cast createStatusBarInfo() : StatusBarInfo));
-    if ((cast !_Runtime.strictEquals(style, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.style = cast (style : StatusBarStyle)); }
-    if ((cast !_Runtime.strictEquals(visible, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.visible = cast (visible : Bool)); }
-    if ((cast !_Runtime.strictEquals(color, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.color = cast (color : Float)); }
-    if ((cast !_Runtime.strictEquals(overlaysContent, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (next.overlaysContent = cast (overlaysContent : Bool)); }
-    (_StatusBar._applied__statusbar = cast (next : Dynamic));
+    (color ??= (cast (cast state : StyleStackState__statusbar).baseline : { var color:Float; }).color);
+    (overlaysContent ??= (cast (cast state : StyleStackState__statusbar).baseline : { var overlaysContent:Bool; }).overlaysContent);
+    (style ??= (cast (cast state : StyleStackState__statusbar).baseline : { var style:StatusBarStyle; }).style);
+    (visible ??= (cast (cast state : StyleStackState__statusbar).baseline : { var visible:Bool; }).visible);
+    if ((cast !_Runtime.strictEquals(color, (cast (cast state : StyleStackState__statusbar).applied : { var color:Float; }).color) : Bool)) { (cast (cast state : StyleStackState__statusbar).colorProvider : StatusBarColorBackend).setBackgroundColor((cast color : Float), ({ final __callArgument18:Dynamic = false; __callArgument18; })); }
+    if ((cast !_Runtime.strictEquals(overlaysContent, (cast (cast state : StyleStackState__statusbar).applied : { var overlaysContent:Bool; }).overlaysContent) : Bool)) { (cast (cast state : StyleStackState__statusbar).overlaysProvider : StatusBarOverlaysBackend).setOverlaysContent((cast overlaysContent : Bool)); }
+    if ((cast !_Runtime.strictEquals(style, (cast (cast state : StyleStackState__statusbar).applied : { var style:StatusBarStyle; }).style) : Bool)) { (cast (cast state : StyleStackState__statusbar).styleProvider : StatusBarStyleBackend).setStyle(({ final __callArgument19:Dynamic = style; __callArgument19; })); }
+    if ((cast !_Runtime.strictEquals(visible, (cast (cast state : StyleStackState__statusbar).applied : { var visible:Bool; }).visible) : Bool)) { (cast (cast state : StyleStackState__statusbar).visibilityProvider : StatusBarVisibilityBackend).setVisible((cast visible : Bool), ({ final __callArgument20:Dynamic = _Runtime.coalesce(animation, function():Dynamic return cast 'none'); __callArgument20; })); }
+    ((cast (cast state : StyleStackState__statusbar).applied : { var color:Float; }).color = cast (color : Float));
+    ((cast (cast state : StyleStackState__statusbar).applied : { var overlaysContent:Bool; }).overlaysContent = cast (overlaysContent : Bool));
+    ((cast (cast state : StyleStackState__statusbar).applied : { var style:StatusBarStyle; }).style = cast (style : StatusBarStyle));
+    ((cast (cast state : StyleStackState__statusbar).applied : { var visible:Bool; }).visible = cast (visible : Bool));
+    if ((cast _Runtime.strictEquals(_Runtime.field((cast state : StyleStackState__statusbar).entries, 'length'), 0.0) : Bool)) { ((cast _StatusBar._styleStacks__statusbar : flight._internal._WeakMap<HasUiStatusBarStyleStack, StyleStackState__statusbar>).delete_(host)); }
   }
 }

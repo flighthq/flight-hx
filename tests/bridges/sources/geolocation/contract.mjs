@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './geolocation.mjs';
+export * from './geolocationAccess.mjs';

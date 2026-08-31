@@ -4,77 +4,16 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Ipc as Facade_Ipc_flight__Ipc;
-import flight.types.BackendExplanation;
-import flight.types.IpcChannel;
-import flight.types.IpcMessageEvent;
-import flight.types.IpcSignals;
-import flight.types.IpcTarget;
+import flight.types.HasIpcMessage;
 
 class Ipc {
-  public static function createIpcChannel(name:String):IpcChannel {
-    return cast Facade_Ipc_flight__Ipc.createIpcChannel(name);
+  public static function onceIpcMessage(host:HasIpcMessage, channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
+    return cast Facade_Ipc_flight__Ipc.onceIpcMessage(host, channel, listener);
     return cast null;
   }
 
-  public static function enableIpcSignals():IpcSignals {
-    return cast Facade_Ipc_flight__Ipc.enableIpcSignals();
+  public static function onIpcMessage(host:HasIpcMessage, channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
+    return cast Facade_Ipc_flight__Ipc.onIpcMessage(host, channel, listener);
     return cast null;
-  }
-
-  public static function explainIpcBackend():BackendExplanation {
-    return cast Facade_Ipc_flight__Ipc.explainIpcBackend();
-    return cast null;
-  }
-
-  public static function getIpcListenerCount(channel:flight._internal._Union2<String, IpcChannel>):Float {
-    return cast Facade_Ipc_flight__Ipc.getIpcListenerCount(channel);
-    return cast null;
-  }
-
-  public static function getIpcSignals():Null<IpcSignals> {
-    return cast Facade_Ipc_flight__Ipc.getIpcSignals();
-    return cast null;
-  }
-
-  public static function invokeIpc(channel:flight._internal._Union2<String, IpcChannel>, ...args:flight._internal._Any):flight._internal._Promise<flight._internal._Any> {
-    return cast _Runtime.callHaxeRestValue(Facade_Ipc_flight__Ipc.invokeIpc, _Runtime.concatArrays([[channel], _Runtime.toArray(args)]), 1);
-    return cast null;
-  }
-
-  public static function invokeIpcWithTimeout(channel:flight._internal._Union2<String, IpcChannel>, timeoutMs:Float, ...args:flight._internal._Any):flight._internal._Promise<flight._internal._Any> {
-    return cast _Runtime.callHaxeRestValue(Facade_Ipc_flight__Ipc.invokeIpcWithTimeout, _Runtime.concatArrays([[channel], [timeoutMs], _Runtime.toArray(args)]), 2);
-    return cast null;
-  }
-
-  public static function onceIpcMessage(channel:flight._internal._Union2<String, IpcChannel>, listener:Array<flight._internal._Any>->Void):Void->Void {
-    return cast Facade_Ipc_flight__Ipc.onceIpcMessage(channel, listener);
-    return cast null;
-  }
-
-  public static function onIpcInvoke(channel:flight._internal._Union2<String, IpcChannel>, handler:Array<flight._internal._Any>->flight._internal._Any):Void->Void {
-    return cast Facade_Ipc_flight__Ipc.onIpcInvoke(channel, handler);
-    return cast null;
-  }
-
-  public static function onIpcMessage(channel:flight._internal._Union2<String, IpcChannel>, listener:Array<flight._internal._Any>->Void):Void->Void {
-    return cast Facade_Ipc_flight__Ipc.onIpcMessage(channel, listener);
-    return cast null;
-  }
-
-  public static function onIpcMessageEvent(channel:flight._internal._Union2<String, IpcChannel>, listener:IpcMessageEvent->Void):Void->Void {
-    return cast Facade_Ipc_flight__Ipc.onIpcMessageEvent(channel, listener);
-    return cast null;
-  }
-
-  public static function removeAllIpcListeners(?channel:flight._internal._Union2<String, IpcChannel>):Void {
-    Facade_Ipc_flight__Ipc.removeAllIpcListeners(channel);
-  }
-
-  public static function sendIpcMessage(channel:flight._internal._Union2<String, IpcChannel>, ...args:flight._internal._Any):Void {
-    _Runtime.callHaxeRestValue(Facade_Ipc_flight__Ipc.sendIpcMessage, _Runtime.concatArrays([[channel], _Runtime.toArray(args)]), 1);
-  }
-
-  public static function sendIpcMessageTo(target:IpcTarget, channel:flight._internal._Union2<String, IpcChannel>, ...args:flight._internal._Any):Void {
-    _Runtime.callHaxeRestValue(Facade_Ipc_flight__Ipc.sendIpcMessageTo, _Runtime.concatArrays([[target], [channel], _Runtime.toArray(args)]), 2);
   }
 }

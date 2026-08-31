@@ -3,5 +3,4 @@
 function __syncDependencies() {}
 __syncDependencies();
 
-export * from './enablePermissionGuards.mjs';
 export * from './permission.mjs';

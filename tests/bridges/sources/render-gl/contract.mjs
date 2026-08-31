@@ -16,6 +16,7 @@ export * from './glExternalTexture.mjs';
 export * from './glFullscreenPass.mjs';
 export * from './glLinearToSrgbPass.mjs';
 export * from './glMaterialRegistry.mjs';
+export * from './glPipeline.mjs';
 export * from './glPresentRenderTarget.mjs';
 export * from './glProgram.mjs';
 export * from './glReadback.mjs';

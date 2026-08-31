@@ -5,9 +5,9 @@ const api = compiled.flight._Scene2DCanvas;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const copyCanvasRenderStateRegistrations = api.copyCanvasRenderStateRegistrations;
 export const createCanvasRenderState = api.createCanvasRenderState;
 export const createCanvasRenderStateRuntime = api.createCanvasRenderStateRuntime;
 export const destroyCanvasRenderState = api.destroyCanvasRenderState;
 export const getCanvasRenderStateRuntime = api.getCanvasRenderStateRuntime;
 export const getCanvasRenderStateTextureResolvers = api.getCanvasRenderStateTextureResolvers;
+export const registerCanvasRenderStateTeardown = api.registerCanvasRenderStateTeardown;

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef UpdateInfo = { var version:String; var notes:String; var releaseDate:String; var deltaFromVersion:Null<String>; var downloadSizeBytes:Float; var isMandatory:Bool; var minimumOsVersion:Null<String>; var sha512:String; var stagedRolloutPercent:Float; };
+typedef UpdateInfo = { var downloadSizeBytes:Null<Float>; var isMandatory:Null<Bool>; var minimumOsVersion:Null<String>; var notes:Null<String>; var releaseDate:Null<String>; var sha512:Null<String>; var version:Null<String>; };

@@ -4,11 +4,12 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Platform as Facade_Platform_flight__Platform;
-import flight.types.BackendExplanation;
+import flight.types.HasSystemPlatform;
 import flight.types.PlatformEngine;
 import flight.types.PlatformInfo;
 import flight.types.PlatformKind;
 import flight.types.PlatformName;
+import flight.types.PlatformRuntime;
 
 class Platform {
   public static function comparePlatformVersions(a:String, b:String):Float {
@@ -16,58 +17,58 @@ class Platform {
     return cast null;
   }
 
-  public static function explainPlatformBackend():BackendExplanation {
-    return cast Facade_Platform_flight__Platform.explainPlatformBackend();
+  public static function getPlatformEngine(host:HasSystemPlatform):PlatformEngine {
+    return cast Facade_Platform_flight__Platform.getPlatformEngine(host);
     return cast null;
   }
 
-  public static function getPlatformEngine():PlatformEngine {
-    return cast Facade_Platform_flight__Platform.getPlatformEngine();
+  public static function getPlatformInfo(host:HasSystemPlatform, out:PlatformInfo):PlatformInfo {
+    return cast Facade_Platform_flight__Platform.getPlatformInfo(host, out);
     return cast null;
   }
 
-  public static function getPlatformInfo(out:PlatformInfo):PlatformInfo {
-    return cast Facade_Platform_flight__Platform.getPlatformInfo(out);
+  public static function getPlatformKind(host:HasSystemPlatform):PlatformKind {
+    return cast Facade_Platform_flight__Platform.getPlatformKind(host);
     return cast null;
   }
 
-  public static function getPlatformKind():PlatformKind {
-    return cast Facade_Platform_flight__Platform.getPlatformKind();
+  public static function getPlatformName(host:HasSystemPlatform):PlatformName {
+    return cast Facade_Platform_flight__Platform.getPlatformName(host);
     return cast null;
   }
 
-  public static function getPlatformName():PlatformName {
-    return cast Facade_Platform_flight__Platform.getPlatformName();
+  public static function getPlatformRuntime(host:HasSystemPlatform):PlatformRuntime {
+    return cast Facade_Platform_flight__Platform.getPlatformRuntime(host);
     return cast null;
   }
 
-  public static function isPlatformDesktop():Bool {
-    return cast Facade_Platform_flight__Platform.isPlatformDesktop();
+  public static function isPlatformDesktop(host:HasSystemPlatform):Bool {
+    return cast Facade_Platform_flight__Platform.isPlatformDesktop(host);
     return cast null;
   }
 
-  public static function isPlatformMobile():Bool {
-    return cast Facade_Platform_flight__Platform.isPlatformMobile();
+  public static function isPlatformMobile(host:HasSystemPlatform):Bool {
+    return cast Facade_Platform_flight__Platform.isPlatformMobile(host);
     return cast null;
   }
 
-  public static function isPlatformNative():Bool {
-    return cast Facade_Platform_flight__Platform.isPlatformNative();
+  public static function isPlatformNative(host:HasSystemPlatform):Bool {
+    return cast Facade_Platform_flight__Platform.isPlatformNative(host);
     return cast null;
   }
 
-  public static function isPlatformTouch():Bool {
-    return cast Facade_Platform_flight__Platform.isPlatformTouch();
+  public static function isPlatformTouch(host:HasSystemPlatform):Bool {
+    return cast Facade_Platform_flight__Platform.isPlatformTouch(host);
     return cast null;
   }
 
-  public static function isPlatformVersionAtLeast(minimum:String):Bool {
-    return cast Facade_Platform_flight__Platform.isPlatformVersionAtLeast(minimum);
+  public static function isPlatformVersionAtLeast(host:HasSystemPlatform, minimum:String):Bool {
+    return cast Facade_Platform_flight__Platform.isPlatformVersionAtLeast(host, minimum);
     return cast null;
   }
 
-  public static function isPlatformWeb():Bool {
-    return cast Facade_Platform_flight__Platform.isPlatformWeb();
+  public static function isPlatformWeb(host:HasSystemPlatform):Bool {
+    return cast Facade_Platform_flight__Platform.isPlatformWeb(host);
     return cast null;
   }
 }

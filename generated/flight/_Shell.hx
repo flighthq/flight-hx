@@ -3,167 +3,77 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight.types.BackendExplanation;
-import flight.types.ShellBackend;
-import flight.types.ShellOpenExternalOptions;
-import flight.types.ShellOpenPathOptions;
+import flight.types.HasShellBeep;
+import flight.types.HasShellExternal;
+import flight.types.HasShellPathOpen;
+import flight.types.HasShellPathReveal;
+import flight.types.HasShellShortcutLink;
+import flight.types.HasShellTrash;
+import flight.types.ShellBeepBackend;
+import flight.types.ShellExternalBackend;
+import flight.types.ShellExternalOutcome;
+import flight.types.ShellExternalUrlPolicy;
+import flight.types.ShellPathOpenBackend;
+import flight.types.ShellPathOpenOutcome;
+import flight.types.ShellPathRevealBackend;
+import flight.types.ShellPathRevealOutcome;
 import flight.types.ShellShortcutLink;
+import flight.types.ShellShortcutLinkBackend;
+import flight.types.ShellShortcutLinkReadOutcome;
+import flight.types.ShellShortcutLinkWriteOutcome;
 import flight.types.ShellShortcutWriteOperation;
+import flight.types.ShellTrashBackend;
+import flight.types.ShellTrashOutcome;
 
 @:noCompletion
 class _Shell {
-  public static function explainShellBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Shell._custom__shell, null) : Bool)) {
-      return cast { conflict: _Shell._hostConflict__shell, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Shell._host__shell, null) : Bool)) {
-      return cast { conflict: _Shell._hostConflict__shell, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Shell._hostObservation__shell, null) : Bool) ? (cast (cast _Shell._hostObservation__shell : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Shell._hostObservation__shell, null) : Bool) ? (cast (cast _Shell._hostObservation__shell : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function getShellBackend():ShellBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Shell._custom__shell, function():Dynamic return cast _Shell._host__shell), function():Dynamic return cast _Shell._sentinel__shell);
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installShellHostBackend(backend:ShellBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Shell._host__shell, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Shell._host__shell, backend) : Bool)) { (_Shell._hostConflict__shell = cast (true : Dynamic)); }
-      return;
-    }
-    (_Shell._host__shell = cast (backend : Dynamic));
-  }
-
-  public static function isShellUrlAllowed(url:String):Bool {
-    if ((cast _Runtime.strictEquals(_Shell._urlSchemeAllowlist__shell, null) : Bool)) { return cast true; }
+  public static function isShellUrlAllowed(url:String, policy:ShellExternalUrlPolicy):Bool {
     try {
-      var scheme:String = _Runtime.replace((cast _Runtime.construct(flight._internal._HostValueLut.get('URL'), [url]) : flight._internal.dom.URL).protocol, _Runtime.regexp(':$$', ''), '', false);
-      return cast _Runtime.includes(_Shell._urlSchemeAllowlist__shell, scheme);
+      var scheme:String = _Runtime.callProperty(_Runtime.replace((cast _Runtime.construct(flight._internal._HostValueLut.get('URL'), [url]) : flight._internal.dom.URL).protocol, _Runtime.regexp(':$$', ''), '', false), 'toLowerCase', cast ([] : Array<Dynamic>));
+      return cast _Runtime.callProperty(_Runtime.field(policy, 'allowedSchemes'), 'some', cast ([function(allowed:String, __unused0:Float, __unused1:Array<String>):Bool return _Runtime.strictEquals(_Runtime.callProperty(allowed, 'toLowerCase', cast ([] : Array<Dynamic>)), scheme)] : Array<Dynamic>));
     } catch (__error:Dynamic) {
       return cast false;
     }
     return cast null;
   }
 
-  public static function moveItemsToTrash(paths:Array<String>):flight._internal._Promise<Array<Bool>> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).moveItemsToTrash(({ final __callArgument0:Dynamic = paths; __callArgument0; }));
+  public static function moveShellItemsToTrash(host:HasShellTrash, paths:Array<String>):flight._internal._Promise<Array<ShellTrashOutcome>> {
+    return cast flight._internal._Async.all((cast _Runtime.mapArray((cast paths : Array<String>), function(path:String, __unused2:Float, __unused3:Array<String>):flight._internal._Promise<ShellTrashOutcome> return (cast (cast (cast host : HasShellTrash).shell : { var trash:ShellTrashBackend; }).trash : ShellTrashBackend).moveToTrash((cast path : String)), _Runtime.UNDEFINED)));
     return cast null;
   }
 
-  public static function moveItemToTrash(path:String):flight._internal._Promise<Bool> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).moveToTrash((cast path : String));
+  public static function moveShellItemToTrash(host:HasShellTrash, path:String):flight._internal._Promise<ShellTrashOutcome> {
+    return cast (cast (cast (cast host : HasShellTrash).shell : { var trash:ShellTrashBackend; }).trash : ShellTrashBackend).moveToTrash((cast path : String));
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function observeShellHostResult(operation:String, succeeded:Bool):Void {
-    (_Shell._hostObservation__shell = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
-  }
-
-  public static function openShellExternalUrl(url:String, ?options:ShellOpenExternalOptions):flight._internal._Promise<Bool> {
-    if ((cast !(cast (cast isShellUrlAllowed((cast url : String)) : Bool) : Bool) : Bool)) { return cast flight._internal._Async.resolve(false); }
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openExternal((cast url : String), ({ final __callArgument1:Dynamic = options; __callArgument1; }));
+  public static function openShellExternalUrl(host:HasShellExternal, url:String, policy:ShellExternalUrlPolicy):flight._internal._Promise<ShellExternalOutcome> {
+    if ((cast !(cast (cast isShellUrlAllowed((cast url : String), ({ final __callArgument0:Dynamic = policy; __callArgument0; })) : Bool) : Bool) : Bool)) { return cast flight._internal._Async.resolve({ reason: 'blocked-scheme' }); }
+    return cast (cast (cast (cast host : HasShellExternal).shell : { var external:ShellExternalBackend; }).external : ShellExternalBackend).open((cast url : String));
     return cast null;
   }
 
-  public static function openShellPath(path:String, ?options:ShellOpenPathOptions):flight._internal._Promise<Bool> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openPath((cast path : String), ({ final __callArgument2:Dynamic = options; __callArgument2; }));
+  public static function openShellPath(host:HasShellPathOpen, path:String):flight._internal._Promise<ShellPathOpenOutcome> {
+    return cast (cast (cast (cast host : HasShellPathOpen).shell : { var pathOpen:ShellPathOpenBackend; }).pathOpen : ShellPathOpenBackend).open((cast path : String));
     return cast null;
   }
 
-  public static function openShellPathResult(path:String, ?options:ShellOpenPathOptions):flight._internal._Promise<String> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).openPathResult((cast path : String), ({ final __callArgument3:Dynamic = options; __callArgument3; }));
+  public static function readShellShortcutLink(host:HasShellShortcutLink, shortcutPath:String):flight._internal._Promise<ShellShortcutLinkReadOutcome> {
+    return cast (cast (cast (cast host : HasShellShortcutLink).shell : { var shortcutLink:ShellShortcutLinkBackend; }).shortcutLink : ShellShortcutLinkBackend).read((cast shortcutPath : String));
     return cast null;
   }
 
-  public static function readShellShortcutLink(shortcutPath:String):flight._internal._Promise<Null<ShellShortcutLink>> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).readShortcutLink((cast shortcutPath : String));
+  public static function revealShellPath(host:HasShellPathReveal, path:String):flight._internal._Promise<ShellPathRevealOutcome> {
+    return cast (cast (cast (cast host : HasShellPathReveal).shell : { var pathReveal:ShellPathRevealBackend; }).pathReveal : ShellPathRevealBackend).reveal((cast path : String));
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function resetShellBackendForTest():Void {
-    (_Shell._custom__shell = cast (null : Dynamic));
-    (_Shell._host__shell = cast (null : Dynamic));
-    (_Shell._hostConflict__shell = cast (false : Dynamic));
-    (_Shell._hostObservation__shell = cast (null : Dynamic));
+  public static function shellBeep(host:HasShellBeep):Void {
+    (cast (cast (cast host : HasShellBeep).shell : { var beep:ShellBeepBackend; }).beep : ShellBeepBackend).beep();
   }
 
-  @:allow(flight)
-  @:keep
-  private static function setShellBackend(backend:Null<ShellBackend>):Void {
-    (_Shell._custom__shell = cast (backend : Dynamic));
-  }
-
-  public static function setShellUrlSchemeAllowlist(schemes:Null<Array<String>>):Void {
-    (_Shell._urlSchemeAllowlist__shell = cast (schemes : Dynamic));
-  }
-
-  public static function shellBeep():Void {
-    (cast (cast getShellBackend() : ShellBackend) : ShellBackend).beep();
-  }
-
-  public static function showItemInFolder(path:String):flight._internal._Promise<Bool> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).showItemInFolder((cast path : String));
+  public static function writeShellShortcutLink(host:HasShellShortcutLink, shortcutPath:String, link:ShellShortcutLink, operation:ShellShortcutWriteOperation):flight._internal._Promise<ShellShortcutLinkWriteOutcome> {
+    return cast (cast (cast (cast host : HasShellShortcutLink).shell : { var shortcutLink:ShellShortcutLinkBackend; }).shortcutLink : ShellShortcutLinkBackend).write((cast shortcutPath : String), ({ final __callArgument2:Dynamic = link; __callArgument2; }), ({ final __callArgument3:Dynamic = operation; __callArgument3; }));
     return cast null;
   }
-
-  public static function writeShellShortcutLink(shortcutPath:String, link:ShellShortcutLink, ?operation:ShellShortcutWriteOperation):flight._internal._Promise<Bool> {
-    return cast (cast (cast getShellBackend() : ShellBackend) : ShellBackend).writeShortcutLink((cast shortcutPath : String), ({ final __callArgument4:Dynamic = link; __callArgument4; }), ({ final __callArgument5:Dynamic = operation; __callArgument5; }));
-    return cast null;
-  }
-
-  public static final _sentinel__shell:ShellBackend = (cast { beep: function():Void {
-
-  }, moveItemsToTrash: function(paths:Array<String>):flight._internal._Promise<Array<Bool>> {
-    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve(cast ([] : Array<Dynamic>));
-    }));
-  }, moveToTrash: function(path:String):flight._internal._Promise<Bool> {
-    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve(false);
-    }));
-  }, openExternal: function(url:String, ?options:ShellOpenExternalOptions):flight._internal._Promise<Bool> {
-    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve(false);
-    }));
-  }, openPath: function(path:String, ?options:ShellOpenPathOptions):flight._internal._Promise<Bool> {
-    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve(false);
-    }));
-  }, openPathResult: function(path:String, ?options:ShellOpenPathOptions):flight._internal._Promise<String> {
-    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve('unavailable on web');
-    }));
-  }, readShortcutLink: function(shortcutPath:String):flight._internal._Promise<Null<ShellShortcutLink>> {
-    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve(null);
-    }));
-  }, showItemInFolder: function(path:String):flight._internal._Promise<Bool> {
-    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve(false);
-    }));
-  }, writeShortcutLink: function(shortcutPath:String, link:ShellShortcutLink, ?operation:ShellShortcutWriteOperation):flight._internal._Promise<Bool> {
-    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve(false);
-    }));
-  } });
-
-  public static var _custom__shell:Null<ShellBackend> = _Runtime.explicitNull();
-
-  public static var _host__shell:Null<ShellBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__shell:Bool = false;
-
-  public static var _hostObservation__shell:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
-
-  public static var _urlSchemeAllowlist__shell:Null<Array<String>> = _Runtime.explicitNull();
 }

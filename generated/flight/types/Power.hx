@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Power = { var onChange:Null<Signal<PowerStatus->Void>>; var onCharging:Null<Signal<Void->Void>>; var onDischarging:Null<Signal<Void->Void>>; var onIdleStateChange:Null<Signal<Void->Void>>; var onLockScreen:Null<Signal<Void->Void>>; var onLowPowerModeChange:Null<Signal<Void->Void>>; var onResume:Null<Signal<Void->Void>>; var onSuspend:Null<Signal<Void->Void>>; var onThermalStateChange:Null<Signal<Void->Void>>; var onUnlockScreen:Null<Signal<Void->Void>>; };
+typedef Power = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onChange:Null<Signal<PowerStatus->Void>>; var onCharging:Null<Signal<Void->Void>>; var onDischarging:Null<Signal<Void->Void>>; var onIdleStateChange:Null<Signal<Void->Void>>; var onLockScreen:Null<Signal<Void->Void>>; var onResume:Null<Signal<Void->Void>>; var onSuspend:Null<Signal<Void->Void>>; var onThermalStateChange:Null<Signal<PowerThermalState->Void>>; var onUnlockScreen:Null<Signal<Void->Void>>; };

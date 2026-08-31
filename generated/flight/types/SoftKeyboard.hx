@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SoftKeyboard = { var onShow:Signal<Float->Void>; var onHide:Signal<Void->Void>; var onResize:Signal<Float->Void>; var onWillShow:Signal<SoftKeyboardTransition->Void>; var onWillHide:Signal<SoftKeyboardTransition->Void>; var onWillResize:Signal<SoftKeyboardTransition->Void>; var onDidShow:Signal<Float->Void>; var onDidHide:Signal<Void->Void>; var onDidResize:Signal<Float->Void>; };
+typedef SoftKeyboard = { var onShow:Signal<Float->Void>; var onHide:Signal<Void->Void>; var onResize:Signal<Float->Void>; };

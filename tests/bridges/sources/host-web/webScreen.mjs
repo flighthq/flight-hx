@@ -5,5 +5,5 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebScreen = api.enableHostWebScreen;
-export const resetHostWebScreenForTest = api.resetHostWebScreenForTest;
+export const createWebScreenCapabilities = api.createWebScreenCapabilities;
+export const webScreenCapabilities = api.webScreenCapabilities;

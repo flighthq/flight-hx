@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TauriTrayIconEvent = { @:optional var button:String; var type:String; };
+typedef TauriTrayIconEvent = { @:optional var buttonState:String; @:optional var button:String; @:optional var position:TauriPhysicalPositionLike; @:optional var rect:{ var position:TauriPhysicalPositionLike; var size:TauriLogicalSizeLike; }; var type:String; };

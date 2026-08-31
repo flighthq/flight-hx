@@ -5,4 +5,4 @@ const api = compiled.flight._HostCapacitor;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createCapacitorAppBackend = api.createCapacitorAppBackend;
+export const createCapacitorAppCapabilities = api.createCapacitorAppCapabilities;

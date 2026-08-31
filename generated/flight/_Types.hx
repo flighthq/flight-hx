@@ -61,6 +61,7 @@ import flight.types.Material;
 import flight.types.MaterialData;
 import flight.types.Matrix;
 import flight.types.Matrix4;
+import flight.types.MenuItemTemplate;
 import flight.types.Mesh;
 import flight.types.MeshGeometry;
 import flight.types.MeshMorph;
@@ -161,6 +162,8 @@ typedef SceneCoverageRemedy__SceneCoverageEntry = { var module:String; var regis
 typedef TextureCommon__Texture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; };
 
 typedef TextureLikeFrom__Texture<Type> = flight._internal._Conditional<Type, Texture, { var dimension:String; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; }, flight._internal._Any>;
+
+typedef TrayFacetFor__Tray<HostType, Slot, Facet> = flight._internal._Conditional<HostType, { var tray:flight._internal._Mapped<Slot, flight._internal._Any>; }, Facet, flight._internal._Any>;
 
 @:noCompletion
 class _Types {
@@ -347,6 +350,20 @@ class _Types {
   public static final SoftKeyboardStyleDefaultKind:String = 'Default';
 
   public static final SoftKeyboardStyleDarkKind:String = 'Dark';
+
+  public static final SoftKeyboardVisibilityOkKind:String = 'ok';
+
+  public static final SoftKeyboardVisibilityOperationFailedKind:String = 'operation-failed';
+
+  public static final SoftKeyboardSetterOkKind:String = 'ok';
+
+  public static final SoftKeyboardSetterOperationUnavailableKind:String = 'operation-unavailable';
+
+  public static final SoftKeyboardSetterOperationFailedKind:String = 'operation-failed';
+
+  public static final SoftKeyboardAttachOkKind:String = 'ok';
+
+  public static final SoftKeyboardAttachAcquisitionFailedKind:String = 'acquisition-failed';
 
   public static final LambertMaterialKind:String = 'LambertMaterial';
 
@@ -563,16 +580,6 @@ class _Types {
   public static final Skeleton2DSlotAnimationPathValue:{ var Attachment:String; var Color:String; } = (cast { Attachment: 'Attachment', Color: 'Color' });
 
   public static var SliderControllerTypeKey__SliderController:flight._internal._Symbol;
-
-  public static final SoftKeyboardEasingDefaultKindValue:String = 'ease';
-
-  public static final SoftKeyboardEasingEaseInKindValue:String = 'easeIn';
-
-  public static final SoftKeyboardEasingEaseOutKindValue:String = 'easeOut';
-
-  public static final SoftKeyboardEasingLinearKindValue:String = 'linear';
-
-  public static final SoftKeyboardEasingKeyboardDefaultKindValue:String = 'keyboardDefault';
 
   public static final SpecularGlossinessPbrMaterialKind:String = 'SpecularGlossinessPbrMaterial';
 
@@ -791,6 +798,34 @@ class _Types {
   public static final TransformMode2D:{ var Normal:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var OnlyTranslation:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoRotationOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScale:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; var NoScaleOrReflection:{ var reflection:Bool; var rotation:Bool; var scale:Bool; var translation:Bool; }; } = (cast { Normal: { reflection: true, rotation: true, scale: true, translation: true }, OnlyTranslation: { reflection: false, rotation: false, scale: false, translation: true }, NoRotationOrReflection: { reflection: false, rotation: false, scale: true, translation: true }, NoScale: { reflection: true, rotation: true, scale: false, translation: true }, NoScaleOrReflection: { reflection: false, rotation: true, scale: false, translation: true } });
 
   public static final TransmissionVolumePbrExtensionKind:String = 'TransmissionVolumePbrExtension';
+
+  public static var TrayImageFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayTitleFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayTooltipFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayMenuFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayTemplateImageFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayBoundsFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayPopupMenuFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayDoubleClickPolicyFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayPressedImageFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayBalloonFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayInteractionEventsFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayMenuSelectionEventsFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayBalloonEventsFacetKey__Tray:flight._internal._Symbol;
+
+  public static var TrayDropEventsFacetKey__Tray:flight._internal._Symbol;
 
   public static var TreeViewControllerTypeKey__TreeViewController:flight._internal._Symbol;
 

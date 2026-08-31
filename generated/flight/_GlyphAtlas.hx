@@ -6,12 +6,14 @@ import flight._internal._Runtime;
 import flight._Bitmap.createBitmap;
 import flight._Bitmap.createBitmapRegion;
 import flight._Bitmap.writeBitmapPixels;
+import flight._Entity.createEntity;
 import flight._Geometry.createRectangle;
 import flight._Log.logOnce;
 import flight.types.BackendExplanation;
 import flight.types.BackendOperationExplanation;
 import flight.types.Bitmap;
 import flight.types.BitmapRegion;
+import flight.types.Entity;
 import flight.types.GlyphAtlas;
 import flight.types.GlyphAtlasEntryExplanation;
 import flight.types.GlyphAtlasOptions;
@@ -67,7 +69,7 @@ class _GlyphAtlas {
       var entry:GlyphEntry = ((cast runtime.entries : flight._internal._Map<Float, GlyphEntry>).get(codepoint));
       return cast { renderable: true, reason: 'ok', glyphWidth: entry.width, glyphHeight: entry.height, usableWidth: usableWidth, usableHeight: usableHeight };
     }
-    bitmap = (cast (cast getGlyphRasterizerBackend() : GlyphRasterizerBackend) : GlyphRasterizerBackend).rasterize((cast codepoint : Float), runtime.rasterizeOptions);
+    bitmap = (cast runtime.rasterizerBackend : GlyphRasterizerBackend).rasterize((cast codepoint : Float), runtime.rasterizeOptions);
     if ((cast _Runtime.strictEquals(bitmap, null) : Bool)) {
       return cast { renderable: false, reason: 'rasterizer-returned-null', glyphWidth: 0.0, glyphHeight: 0.0, usableWidth: usableWidth, usableHeight: usableHeight };
     }
@@ -334,8 +336,8 @@ class _GlyphAtlas {
     return cast null;
   }
 
-  public static function createStubGlyphRasterizerBackend():GlyphRasterizerBackend {
-    return cast { rasterize: function(_codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
+  public static function createStubGlyphRasterizerBackend():{ >GlyphRasterizerBackend, >Entity, } {
+    return cast (cast createEntity((cast { rasterize: function(_codepoint:Float, options:GlyphRasterizeOptions):Null<GlyphRasterizedBitmap> {
       var size:Float = cast _Runtime.UNDEFINED;
       var width:Float = cast _Runtime.UNDEFINED;
       var height:Float = cast _Runtime.UNDEFINED;
@@ -347,7 +349,7 @@ class _GlyphAtlas {
       _Runtime.fill(pixels, 255.0, 0, null, 1);
       return cast { advance: _Runtime.addNumbers(width, HxMath.max(1.0, HxMath.round((size * 0.1)))), bearingX: 0.0, bearingY: height, height: height, pixels: pixels, width: width };
       return cast _Runtime.UNDEFINED;
-    } };
+    } } : Dynamic)) : { >Entity, var rasterize:Float->GlyphRasterizeOptions->Null<GlyphRasterizedBitmap>; });
     return cast null;
   }
 

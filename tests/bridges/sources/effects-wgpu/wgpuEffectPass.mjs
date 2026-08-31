@@ -5,6 +5,7 @@ import * as __dependency0 from '@flighthq/render-wgpu/contract';
 const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
   compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
+  compiled.flight._RenderWgpu.getWgpuSurfaceRenderExtent = __dependency0.getWgpuSurfaceRenderExtent;
 }
 __syncDependencies();
 

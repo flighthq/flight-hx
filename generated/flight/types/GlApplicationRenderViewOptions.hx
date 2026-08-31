@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlApplicationRenderViewOptions = { @:optional var context:GlContextOptions; @:optional var render:GlRenderOptions; @:optional var target:ApplicationRenderViewTargetOptions; };
+typedef GlApplicationRenderViewOptions = { @:optional var context:GlContextOptions; var pipeline:GlPipeline; @:optional var render:GlRenderOptions; @:optional var target:ApplicationRenderViewTargetOptions; };

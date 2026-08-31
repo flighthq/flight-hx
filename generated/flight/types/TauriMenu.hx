@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TauriMenu = { var popup:TauriPhysicalPositionLike->flight._internal._Promise<flight._internal._Nothing>; var setAsAppMenu:Void->flight._internal._Promise<flight._internal._Any>; };
+typedef TauriMenu = { var close:Void->flight._internal._Promise<flight._internal._Nothing>; var popup:TauriPhysicalPositionLike->flight._internal._Promise<flight._internal._Nothing>; var setAsAppMenu:Void->flight._internal._Promise<flight._internal._Any>; };

@@ -4,22 +4,37 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Power as Facade_Power_flight__Power;
-import flight.types.BackendExplanation;
+import flight.types.HasPowerIdle;
+import flight.types.HasPowerKeepAwake;
+import flight.types.HasPowerStatus;
+import flight.types.HasPowerThermal;
 import flight.types.Power;
+import flight.types.PowerAttachHost;
 import flight.types.PowerBatteryHealth;
 import flight.types.PowerIdleState;
+import flight.types.PowerKeepAwakeAcquireResult;
 import flight.types.PowerKeepAwakeMode;
+import flight.types.PowerKeepAwakeReleaseResult;
 import flight.types.PowerStatus;
 import flight.types.PowerThermalState;
 
 class Power {
-  public static function attachPower(power:flight.types.Power, ?idleThresholdSeconds:Float):Void {
-    Facade_Power_flight__Power.attachPower(power, idleThresholdSeconds);
+  public static function acquirePowerKeepAwake(host:HasPowerKeepAwake, ?mode:PowerKeepAwakeMode):flight._internal._Promise<PowerKeepAwakeAcquireResult> {
+    return cast Facade_Power_flight__Power.acquirePowerKeepAwake(host, mode);
+    return cast null;
+  }
+
+  public static function attachPower(host:PowerAttachHost, power:flight.types.Power, ?idleThresholdSeconds:Float):Void {
+    Facade_Power_flight__Power.attachPower(host, power, idleThresholdSeconds);
   }
 
   public static function createPower():flight.types.Power {
     return cast Facade_Power_flight__Power.createPower();
     return cast null;
+  }
+
+  public static function destroyPowerKeepAwake(...hosts:HasPowerKeepAwake):Void {
+    _Runtime.callHaxeRestValue(Facade_Power_flight__Power.destroyPowerKeepAwake, _Runtime.concatArrays([_Runtime.toArray(hosts)]), 0);
   }
 
   public static function detachPower(power:flight.types.Power):Void {
@@ -34,13 +49,8 @@ class Power {
     Facade_Power_flight__Power.enablePowerSignals(power);
   }
 
-  public static function explainPowerBackend():BackendExplanation {
-    return cast Facade_Power_flight__Power.explainPowerBackend();
-    return cast null;
-  }
-
-  public static function getPowerBatteryHealth(out:PowerBatteryHealth):Null<PowerBatteryHealth> {
-    return cast Facade_Power_flight__Power.getPowerBatteryHealth(out);
+  public static function getPowerBatteryHealth(host:{ var power:{ var batteryHealth:{ var getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth; }; }; }, out:PowerBatteryHealth):PowerBatteryHealth {
+    return cast Facade_Power_flight__Power.getPowerBatteryHealth(host, out);
     return cast null;
   }
 
@@ -49,37 +59,47 @@ class Power {
     return cast null;
   }
 
-  public static function getPowerStatus(out:PowerStatus):PowerStatus {
-    return cast Facade_Power_flight__Power.getPowerStatus(out);
+  public static function getPowerStatus(host:HasPowerStatus, out:PowerStatus):PowerStatus {
+    return cast Facade_Power_flight__Power.getPowerStatus(host, out);
     return cast null;
   }
 
-  public static function getPowerSystemIdleState(thresholdSeconds:Float):PowerIdleState {
-    return cast Facade_Power_flight__Power.getPowerSystemIdleState(thresholdSeconds);
+  public static function getPowerSystemIdleState(host:HasPowerIdle, thresholdSeconds:Float):PowerIdleState {
+    return cast Facade_Power_flight__Power.getPowerSystemIdleState(host, thresholdSeconds);
     return cast null;
   }
 
-  public static function getPowerSystemIdleTime():Float {
-    return cast Facade_Power_flight__Power.getPowerSystemIdleTime();
+  public static function getPowerSystemIdleTime(host:HasPowerIdle):Float {
+    return cast Facade_Power_flight__Power.getPowerSystemIdleTime(host);
     return cast null;
   }
 
-  public static function getPowerThermalState():PowerThermalState {
-    return cast Facade_Power_flight__Power.getPowerThermalState();
+  public static function getPowerThermalState(host:HasPowerThermal):PowerThermalState {
+    return cast Facade_Power_flight__Power.getPowerThermalState(host);
     return cast null;
   }
 
-  public static function hasPowerKeepAwake():Bool {
-    return cast Facade_Power_flight__Power.hasPowerKeepAwake();
+  public static function isPowerKeepAwakeActive(host:HasPowerKeepAwake):Bool {
+    return cast Facade_Power_flight__Power.isPowerKeepAwakeActive(host);
+    return cast null;
+  }
+
+  public static function makePowerBatteryHealth():PowerBatteryHealth {
+    return cast Facade_Power_flight__Power.makePowerBatteryHealth();
+    return cast null;
+  }
+
+  public static function makePowerStatus():PowerStatus {
+    return cast Facade_Power_flight__Power.makePowerStatus();
+    return cast null;
+  }
+
+  public static function releasePowerKeepAwake(host:HasPowerKeepAwake):flight._internal._Promise<PowerKeepAwakeReleaseResult> {
+    return cast Facade_Power_flight__Power.releasePowerKeepAwake(host);
     return cast null;
   }
 
   public static function setPowerIdlePollingIntervalMs(intervalMs:Float):Void {
     Facade_Power_flight__Power.setPowerIdlePollingIntervalMs(intervalMs);
-  }
-
-  public static function setPowerKeepAwake(enabled:Bool, ?mode:PowerKeepAwakeMode):Bool {
-    return cast Facade_Power_flight__Power.setPowerKeepAwake(enabled, mode);
-    return cast null;
   }
 }

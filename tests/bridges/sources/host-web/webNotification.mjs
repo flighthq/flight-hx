@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebNotification = api.enableHostWebNotification;
-export const resetHostWebNotificationForTest = api.resetHostWebNotificationForTest;
+export const createWebPageNotificationCapabilities = api.createWebPageNotificationCapabilities;

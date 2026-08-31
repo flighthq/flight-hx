@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FileDialogFilter = { var name:String; var extensions:Array<String>; @:optional var mimeTypes:Array<String>; };
+typedef FileDialogFilter = { var accept:flight._internal._Record<String, Array<String>>; var name:String; };

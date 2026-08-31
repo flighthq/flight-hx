@@ -4,64 +4,91 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Tray as Facade_Tray_flight__Tray;
-import flight.types.BackendExplanation;
+import flight.types.HasTrayLifecycle;
 import flight.types.MenuItemTemplate;
-import flight.types.RectangleLike;
+import flight.types.TrayAnimationStartResult;
+import flight.types.TrayAnimationStopResult;
+import flight.types.TrayBalloonDisplayResult;
+import flight.types.TrayBalloonEvent;
 import flight.types.TrayBalloonOptions;
-import flight.types.TrayCapabilities;
-import flight.types.TrayEventData;
+import flight.types.TrayBalloonRemoveResult;
+import flight.types.TrayBoundsResult;
+import flight.types.TrayCreateResult;
+import flight.types.TrayDestroyResult;
+import flight.types.TrayDoubleClickPolicyUpdateResult;
+import flight.types.TrayDropEvent;
+import flight.types.TrayEventAttachResult;
 import flight.types.TrayIcon;
+import flight.types.TrayIconForHost;
 import flight.types.TrayIconOptions;
+import flight.types.TrayIconSource;
+import flight.types.TrayImageUpdateResult;
+import flight.types.TrayInteractionEvent;
+import flight.types.TrayMenuSelectionEvent;
+import flight.types.TrayMenuUpdateResult;
+import flight.types.TrayPopupMenuResult;
+import flight.types.TrayPressedImageUpdateResult;
+import flight.types.TrayTemplateImageUpdateResult;
+import flight.types.TrayTitleReadResult;
+import flight.types.TrayTitleUpdateResult;
+import flight.types.TrayTooltipReadResult;
+import flight.types.TrayTooltipUpdateResult;
+import flight.types.TrayWithBalloon;
+import flight.types.TrayWithBalloonEvents;
+import flight.types.TrayWithBounds;
+import flight.types.TrayWithDoubleClickPolicy;
+import flight.types.TrayWithDropEvents;
+import flight.types.TrayWithImage;
+import flight.types.TrayWithInteractionEvents;
+import flight.types.TrayWithMenu;
+import flight.types.TrayWithMenuSelectionEvents;
+import flight.types.TrayWithPopupMenu;
+import flight.types.TrayWithPressedImage;
+import flight.types.TrayWithTemplateImage;
+import flight.types.TrayWithTitle;
+import flight.types.TrayWithTooltip;
 import flight.types.Vector2Like;
 
 class Tray {
-  public static function createTrayIcon(?options:TrayIconOptions):Null<TrayIcon> {
-    return cast Facade_Tray_flight__Tray.createTrayIcon(options);
+  public static function createTrayIcon<HostType:HasTrayLifecycle>(host:HostType, ?options:TrayIconOptions):flight._internal._Promise<TrayCreateResult<TrayIconForHost<HostType>>> {
+    return cast Facade_Tray_flight__Tray.createTrayIcon(host, options);
     return cast null;
   }
 
-  public static function destroyTrayIcon(tray:TrayIcon):Void {
-    Facade_Tray_flight__Tray.destroyTrayIcon(tray);
+  public static function destroyTrayIcon(tray:TrayIcon):flight._internal._Promise<TrayDestroyResult> {
+    return cast Facade_Tray_flight__Tray.destroyTrayIcon(tray);
+    return cast null;
   }
 
   public static function disableTrayGuards():Void {
     Facade_Tray_flight__Tray.disableTrayGuards();
   }
 
-  public static function displayTrayBalloon(tray:TrayIcon, options:TrayBalloonOptions):Void {
-    Facade_Tray_flight__Tray.displayTrayBalloon(tray, options);
+  public static function displayTrayBalloon(tray:TrayWithBalloon, options:TrayBalloonOptions):flight._internal._Promise<TrayBalloonDisplayResult> {
+    return cast Facade_Tray_flight__Tray.displayTrayBalloon(tray, options);
+    return cast null;
   }
 
   public static function enableTrayGuards():Void {
     Facade_Tray_flight__Tray.enableTrayGuards();
   }
 
-  public static function explainTrayBackend():BackendExplanation {
-    return cast Facade_Tray_flight__Tray.explainTrayBackend();
-    return cast null;
-  }
-
-  public static function getTrayCapabilities():TrayCapabilities {
-    return cast Facade_Tray_flight__Tray.getTrayCapabilities();
-    return cast null;
-  }
-
-  public static function getTrayIconBounds(tray:TrayIcon):Null<RectangleLike> {
+  public static function getTrayIconBounds(tray:TrayWithBounds):flight._internal._Promise<TrayBoundsResult> {
     return cast Facade_Tray_flight__Tray.getTrayIconBounds(tray);
     return cast null;
   }
 
-  public static function getTrayIcons():Array<TrayIcon> {
-    return cast Facade_Tray_flight__Tray.getTrayIcons();
+  public static function getTrayIcons(host:HasTrayLifecycle):Array<TrayIcon> {
+    return cast Facade_Tray_flight__Tray.getTrayIcons(host);
     return cast null;
   }
 
-  public static function getTrayIconTitle(tray:TrayIcon):String {
+  public static function getTrayIconTitle(tray:TrayWithTitle):flight._internal._Promise<TrayTitleReadResult> {
     return cast Facade_Tray_flight__Tray.getTrayIconTitle(tray);
     return cast null;
   }
 
-  public static function getTrayIconTooltip(tray:TrayIcon):String {
+  public static function getTrayIconTooltip(tray:TrayWithTooltip):flight._internal._Promise<TrayTooltipReadResult> {
     return cast Facade_Tray_flight__Tray.getTrayIconTooltip(tray);
     return cast null;
   }
@@ -76,53 +103,78 @@ class Tray {
     return cast null;
   }
 
-  public static function onTrayEvent(listener:TrayEventData->Void):Void->Void {
-    return cast Facade_Tray_flight__Tray.onTrayEvent(listener);
+  public static function onTrayBalloonEvent(tray:TrayWithBalloonEvents, listener:TrayBalloonEvent->Void):TrayEventAttachResult {
+    return cast Facade_Tray_flight__Tray.onTrayBalloonEvent(tray, listener);
     return cast null;
   }
 
-  public static function popupTrayContextMenu(tray:TrayIcon, ?position:Vector2Like):Void {
-    Facade_Tray_flight__Tray.popupTrayContextMenu(tray, position);
+  public static function onTrayDrop(tray:TrayWithDropEvents, listener:TrayDropEvent->Void):TrayEventAttachResult {
+    return cast Facade_Tray_flight__Tray.onTrayDrop(tray, listener);
+    return cast null;
   }
 
-  public static function removeTrayBalloon(tray:TrayIcon):Void {
-    Facade_Tray_flight__Tray.removeTrayBalloon(tray);
+  public static function onTrayInteraction(tray:TrayWithInteractionEvents, listener:TrayInteractionEvent->Void):TrayEventAttachResult {
+    return cast Facade_Tray_flight__Tray.onTrayInteraction(tray, listener);
+    return cast null;
   }
 
-  public static function setTrayIcon(tray:TrayIcon, icon:String):Void {
-    Facade_Tray_flight__Tray.setTrayIcon(tray, icon);
+  public static function onTrayMenuSelection(tray:TrayWithMenuSelectionEvents, listener:TrayMenuSelectionEvent->Void):TrayEventAttachResult {
+    return cast Facade_Tray_flight__Tray.onTrayMenuSelection(tray, listener);
+    return cast null;
   }
 
-  public static function setTrayIconContextMenu(tray:TrayIcon, items:Array<MenuItemTemplate>):Void {
-    Facade_Tray_flight__Tray.setTrayIconContextMenu(tray, items);
+  public static function popupTrayContextMenu(tray:TrayWithPopupMenu, ?position:Vector2Like):flight._internal._Promise<TrayPopupMenuResult> {
+    return cast Facade_Tray_flight__Tray.popupTrayContextMenu(tray, position);
+    return cast null;
   }
 
-  public static function setTrayIconTemplate(tray:TrayIcon, isTemplate:Bool):Void {
-    Facade_Tray_flight__Tray.setTrayIconTemplate(tray, isTemplate);
+  public static function removeTrayBalloon(tray:TrayWithBalloon):flight._internal._Promise<TrayBalloonRemoveResult> {
+    return cast Facade_Tray_flight__Tray.removeTrayBalloon(tray);
+    return cast null;
   }
 
-  public static function setTrayIconTitle(tray:TrayIcon, title:String):Void {
-    Facade_Tray_flight__Tray.setTrayIconTitle(tray, title);
+  public static function setTrayIcon(tray:TrayWithImage, icon:TrayIconSource):flight._internal._Promise<TrayImageUpdateResult> {
+    return cast Facade_Tray_flight__Tray.setTrayIcon(tray, icon);
+    return cast null;
   }
 
-  public static function setTrayIconTooltip(tray:TrayIcon, tooltip:String):Void {
-    Facade_Tray_flight__Tray.setTrayIconTooltip(tray, tooltip);
+  public static function setTrayIconContextMenu(tray:TrayWithMenu, items:Array<MenuItemTemplate>):flight._internal._Promise<TrayMenuUpdateResult> {
+    return cast Facade_Tray_flight__Tray.setTrayIconContextMenu(tray, items);
+    return cast null;
   }
 
-  public static function setTrayIgnoreDoubleClickEvents(tray:TrayIcon, ignore:Bool):Void {
-    Facade_Tray_flight__Tray.setTrayIgnoreDoubleClickEvents(tray, ignore);
+  public static function setTrayIconTemplate(tray:TrayWithTemplateImage, isTemplate:Bool):flight._internal._Promise<TrayTemplateImageUpdateResult> {
+    return cast Facade_Tray_flight__Tray.setTrayIconTemplate(tray, isTemplate);
+    return cast null;
   }
 
-  public static function setTrayPressedIcon(tray:TrayIcon, icon:String):Void {
-    Facade_Tray_flight__Tray.setTrayPressedIcon(tray, icon);
+  public static function setTrayIconTitle(tray:TrayWithTitle, title:String):flight._internal._Promise<TrayTitleUpdateResult> {
+    return cast Facade_Tray_flight__Tray.setTrayIconTitle(tray, title);
+    return cast null;
   }
 
-  public static function startTrayIconAnimation(tray:TrayIcon, frames:Array<String>, intervalMs:Float):Void->Void {
+  public static function setTrayIconTooltip(tray:TrayWithTooltip, tooltip:String):flight._internal._Promise<TrayTooltipUpdateResult> {
+    return cast Facade_Tray_flight__Tray.setTrayIconTooltip(tray, tooltip);
+    return cast null;
+  }
+
+  public static function setTrayIgnoreDoubleClickEvents(tray:TrayWithDoubleClickPolicy, ignore:Bool):flight._internal._Promise<TrayDoubleClickPolicyUpdateResult> {
+    return cast Facade_Tray_flight__Tray.setTrayIgnoreDoubleClickEvents(tray, ignore);
+    return cast null;
+  }
+
+  public static function setTrayPressedIcon(tray:TrayWithPressedImage, icon:TrayIconSource):flight._internal._Promise<TrayPressedImageUpdateResult> {
+    return cast Facade_Tray_flight__Tray.setTrayPressedIcon(tray, icon);
+    return cast null;
+  }
+
+  public static function startTrayIconAnimation(tray:TrayWithImage, frames:Array<TrayIconSource>, intervalMs:Float):flight._internal._Promise<TrayAnimationStartResult> {
     return cast Facade_Tray_flight__Tray.startTrayIconAnimation(tray, frames, intervalMs);
     return cast null;
   }
 
-  public static function stopTrayIconAnimation(tray:TrayIcon):Void {
-    Facade_Tray_flight__Tray.stopTrayIconAnimation(tray);
+  public static function stopTrayIconAnimation(tray:TrayIcon):TrayAnimationStopResult {
+    return cast Facade_Tray_flight__Tray.stopTrayIconAnimation(tray);
+    return cast null;
   }
 }

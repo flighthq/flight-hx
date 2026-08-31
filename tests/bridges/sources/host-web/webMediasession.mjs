@@ -5,5 +5,7 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebMediaSession = api.enableHostWebMediaSession;
-export const resetHostWebMediasessionForTest = api.resetHostWebMediasessionForTest;
+export const createWebMediaSessionActionBackend = api.createWebMediaSessionActionBackend;
+export const createWebMediaSessionBackend = api.createWebMediaSessionBackend;
+export const webMediaSessionActionBackend = api.webMediaSessionActionBackend;
+export const webMediaSessionBackend = api.webMediaSessionBackend;

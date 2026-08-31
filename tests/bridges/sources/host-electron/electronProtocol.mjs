@@ -5,4 +5,4 @@ const api = compiled.flight._HostElectron;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createElectronProtocolBackend = api.createElectronProtocolBackend;
+export const createElectronProtocolCapabilities = api.createElectronProtocolCapabilities;

@@ -4,41 +4,71 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._HostTauri as Facade_HostTauri_flight__HostTauri;
-import flight.types.AppBackend;
-import flight.types.ClipboardBackend;
-import flight.types.DialogBackend;
-import flight.types.MenuBackend;
-import flight.types.NotificationBackend;
+import flight._HostTauri.TauriAppCapabilities;
+import flight._HostTauri.TauriHost__tauriRegister;
+import flight._HostTauri.TauriTrayCapabilitiesFor;
+import flight.types.ApplicationWindow;
+import flight.types.ClipboardTextBackend;
+import flight.types.DesktopOsProfile;
+import flight.types.DirectoryOpenDialogBackend;
+import flight.types.Entity;
+import flight.types.FileOpenDialogBackend;
+import flight.types.FileSaveDialogBackend;
+import flight.types.HostShellCapabilities;
+import flight.types.MenuApplicationBackend;
+import flight.types.MenuPopupBackend;
+import flight.types.MenuSelectBackend;
+import flight.types.MessageDialogBackend;
 import flight.types.PlatformBackend;
-import flight.types.ShellBackend;
-import flight.types.ShortcutBackend;
+import flight.types.ShellExternalBackend;
+import flight.types.ShellPathOpenBackend;
+import flight.types.ShellPathRevealBackend;
+import flight.types.ShortcutQueryBackend;
+import flight.types.ShortcutTriggerBackend;
 import flight.types.TauriApi;
-import flight.types.TrayBackend;
+import flight.types.TauriNotificationCapabilities;
+import flight.types.WindowAttachmentOwnership;
 import flight.types.WindowBackend;
+import flight.types.WindowOptions;
 
 class HostTauri {
-  public static function createTauriAppBackend(tauri:TauriApi):AppBackend {
-    return cast Facade_HostTauri_flight__HostTauri.createTauriAppBackend(tauri);
+  public static function createTauriAppCapabilities(tauri:TauriApi):TauriAppCapabilities {
+    return cast Facade_HostTauri_flight__HostTauri.createTauriAppCapabilities(tauri);
     return cast null;
   }
 
-  public static function createTauriClipboardBackend(tauri:TauriApi):ClipboardBackend {
+  public static function createTauriClipboardBackend(tauri:TauriApi):ClipboardTextBackend {
     return cast Facade_HostTauri_flight__HostTauri.createTauriClipboardBackend(tauri);
     return cast null;
   }
 
-  public static function createTauriDialogBackend(tauri:TauriApi):DialogBackend {
-    return cast Facade_HostTauri_flight__HostTauri.createTauriDialogBackend(tauri);
+  public static function createTauriDirectoryOpenDialogBackend(tauri:TauriApi):{ >DirectoryOpenDialogBackend, >Entity, } {
+    return cast Facade_HostTauri_flight__HostTauri.createTauriDirectoryOpenDialogBackend(tauri);
     return cast null;
   }
 
-  public static function createTauriMenuBackend(tauri:TauriApi):MenuBackend {
-    return cast Facade_HostTauri_flight__HostTauri.createTauriMenuBackend(tauri);
+  public static function createTauriFileOpenDialogBackend(tauri:TauriApi):{ >FileOpenDialogBackend, >Entity, } {
+    return cast Facade_HostTauri_flight__HostTauri.createTauriFileOpenDialogBackend(tauri);
     return cast null;
   }
 
-  public static function createTauriNotificationBackend(tauri:TauriApi):NotificationBackend {
-    return cast Facade_HostTauri_flight__HostTauri.createTauriNotificationBackend(tauri);
+  public static function createTauriFileSaveDialogBackend(tauri:TauriApi):{ >FileSaveDialogBackend, >Entity, } {
+    return cast Facade_HostTauri_flight__HostTauri.createTauriFileSaveDialogBackend(tauri);
+    return cast null;
+  }
+
+  public static function createTauriMenuBackends(tauri:TauriApi):{ var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; } {
+    return cast Facade_HostTauri_flight__HostTauri.createTauriMenuBackends(tauri);
+    return cast null;
+  }
+
+  public static function createTauriMessageDialogBackend(tauri:TauriApi):MessageDialogBackend {
+    return cast Facade_HostTauri_flight__HostTauri.createTauriMessageDialogBackend(tauri);
+    return cast null;
+  }
+
+  public static function createTauriNotificationCapabilities(tauri:TauriApi):TauriNotificationCapabilities {
+    return cast Facade_HostTauri_flight__HostTauri.createTauriNotificationCapabilities(tauri);
     return cast null;
   }
 
@@ -47,27 +77,33 @@ class HostTauri {
     return cast null;
   }
 
-  public static function createTauriShellBackend(tauri:TauriApi):ShellBackend {
-    return cast Facade_HostTauri_flight__HostTauri.createTauriShellBackend(tauri);
+  public static function createTauriShortcutQueryBackend(tauri:TauriApi):ShortcutQueryBackend {
+    return cast Facade_HostTauri_flight__HostTauri.createTauriShortcutQueryBackend(tauri);
     return cast null;
   }
 
-  public static function createTauriShortcutBackend(tauri:TauriApi):ShortcutBackend {
-    return cast Facade_HostTauri_flight__HostTauri.createTauriShortcutBackend(tauri);
+  public static function createTauriShortcutTriggerBackend(tauri:TauriApi):ShortcutTriggerBackend {
+    return cast Facade_HostTauri_flight__HostTauri.createTauriShortcutTriggerBackend(tauri);
     return cast null;
   }
 
-  public static function createTauriTrayBackend(tauri:TauriApi):TrayBackend {
-    return cast Facade_HostTauri_flight__HostTauri.createTauriTrayBackend(tauri);
+  public static function createTauriTrayCapabilities<Profile:DesktopOsProfile>(tauri:TauriApi, profile:Profile):TauriTrayCapabilitiesFor<Profile> {
+    return cast Facade_HostTauri_flight__HostTauri.createTauriTrayCapabilities(tauri, profile);
     return cast null;
   }
 
-  public static function createTauriWindowBackend(tauri:TauriApi):WindowBackend {
+  public static function createTauriWindowBackend(tauri:TauriApi):flight._internal._Intersection2<WindowBackend, flight._internal._Required<{ @:optional var attach:Null<ApplicationWindow->flight._internal._Any->WindowAttachmentOwnership->Bool>; @:optional var open:Null<ApplicationWindow->WindowOptions->Bool>; @:optional var close:Null<ApplicationWindow->Void>; }>> {
     return cast Facade_HostTauri_flight__HostTauri.createTauriWindowBackend(tauri);
     return cast null;
   }
 
-  public static function registerTauriBackends(tauri:TauriApi):Void {
-    Facade_HostTauri_flight__HostTauri.registerTauriBackends(tauri);
+  public static function makeTauriShellCapabilities(tauri:TauriApi):flight._internal._Intersection2<HostShellCapabilities, flight._internal._Required<{ @:optional var external:Null<ShellExternalBackend>; @:optional var pathOpen:Null<ShellPathOpenBackend>; @:optional var pathReveal:Null<ShellPathRevealBackend>; }>> {
+    return cast Facade_HostTauri_flight__HostTauri.makeTauriShellCapabilities(tauri);
+    return cast null;
+  }
+
+  public static function registerTauriBackends<Profile:DesktopOsProfile>(tauri:TauriApi, profile:Profile):TauriHost__tauriRegister<Profile> {
+    return cast Facade_HostTauri_flight__HostTauri.registerTauriBackends(tauri, profile);
+    return cast null;
   }
 }

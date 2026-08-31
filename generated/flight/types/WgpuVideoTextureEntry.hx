@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuVideoTextureEntry = { var bindGroup:flight._internal.dom.GPUBindGroup; @:optional var bindGroupLinear:flight._internal.dom.GPUBindGroup; @:optional var bindGroupNearest:flight._internal.dom.GPUBindGroup; @:optional var straightAlpha:Bool; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; var height:Float; var sampler:flight._internal.dom.GPUSampler; var uploadedVersion:Float; var width:Float; };
+typedef WgpuVideoTextureEntry = { var mipLevelCount:Float; @:optional var straightAlpha:Bool; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; var bindings:WgpuTextureBindings; var sampler:flight._internal.dom.GPUSampler; var height:Float; var uploadedVersion:Float; var width:Float; };

@@ -4,18 +4,22 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Clipboard as Facade_Clipboard_flight__Clipboard;
-import flight.types.BackendExplanation;
 import flight.types.ClipboardBookmark;
 import flight.types.ClipboardWatch;
 import flight.types.ClipboardWriteItem;
+import flight.types.HasClipboardBookmark;
+import flight.types.HasClipboardChange;
+import flight.types.HasClipboardFormats;
+import flight.types.HasClipboardImage;
+import flight.types.HasClipboardText;
 
 class Clipboard {
-  public static function attachClipboardWatch(watch:ClipboardWatch):Void {
-    Facade_Clipboard_flight__Clipboard.attachClipboardWatch(watch);
+  public static function attachClipboardWatch(host:HasClipboardChange, watch:ClipboardWatch):Void {
+    Facade_Clipboard_flight__Clipboard.attachClipboardWatch(host, watch);
   }
 
-  public static function clearClipboard():flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.clearClipboard();
+  public static function clearClipboard(host:HasClipboardText):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.clearClipboard(host);
     return cast null;
   }
 
@@ -32,128 +36,108 @@ class Clipboard {
     Facade_Clipboard_flight__Clipboard.disposeClipboardWatch(watch);
   }
 
-  public static function explainClipboardBackend():BackendExplanation {
-    return cast Facade_Clipboard_flight__Clipboard.explainClipboardBackend();
+  public static function getClipboardFormats(host:HasClipboardFormats):flight._internal._Promise<Array<String>> {
+    return cast Facade_Clipboard_flight__Clipboard.getClipboardFormats(host);
     return cast null;
   }
 
-  public static function getClipboardChangeCount():Float {
-    return cast Facade_Clipboard_flight__Clipboard.getClipboardChangeCount();
+  public static function hasClipboardBookmark(host:HasClipboardBookmark):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.hasClipboardBookmark(host);
     return cast null;
   }
 
-  public static function getClipboardFormats():flight._internal._Promise<Array<String>> {
-    return cast Facade_Clipboard_flight__Clipboard.getClipboardFormats();
+  public static function hasClipboardFormat(host:HasClipboardFormats, format:String):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.hasClipboardFormat(host, format);
     return cast null;
   }
 
-  public static function hasClipboardBookmark():flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.hasClipboardBookmark();
+  public static function hasClipboardHtml(host:HasClipboardFormats):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.hasClipboardHtml(host);
     return cast null;
   }
 
-  public static function hasClipboardFormat(format:String):flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.hasClipboardFormat(format);
+  public static function hasClipboardImage(host:HasClipboardImage):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.hasClipboardImage(host);
     return cast null;
   }
 
-  public static function hasClipboardHtml():flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.hasClipboardHtml();
+  public static function hasClipboardRTF(host:HasClipboardFormats):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.hasClipboardRTF(host);
     return cast null;
   }
 
-  public static function hasClipboardImage():flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.hasClipboardImage();
+  public static function hasClipboardText(host:HasClipboardText):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.hasClipboardText(host);
     return cast null;
   }
 
-  public static function hasClipboardRTF():flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.hasClipboardRTF();
+  public static function readClipboard(host:HasClipboardFormats, formats:Array<String>):flight._internal._Promise<flight._internal._Record<String, String>> {
+    return cast Facade_Clipboard_flight__Clipboard.readClipboard(host, formats);
     return cast null;
   }
 
-  public static function hasClipboardText():flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.hasClipboardText();
+  public static function readClipboardBookmark(host:HasClipboardBookmark):flight._internal._Promise<Null<ClipboardBookmark>> {
+    return cast Facade_Clipboard_flight__Clipboard.readClipboardBookmark(host);
     return cast null;
   }
 
-  public static function readClipboard(formats:Array<String>):flight._internal._Promise<flight._internal._Record<String, String>> {
-    return cast Facade_Clipboard_flight__Clipboard.readClipboard(formats);
+  public static function readClipboardFormat(host:HasClipboardFormats, format:String):flight._internal._Promise<String> {
+    return cast Facade_Clipboard_flight__Clipboard.readClipboardFormat(host, format);
     return cast null;
   }
 
-  public static function readClipboardBookmark():flight._internal._Promise<Null<ClipboardBookmark>> {
-    return cast Facade_Clipboard_flight__Clipboard.readClipboardBookmark();
+  public static function readClipboardHtml(host:HasClipboardFormats):flight._internal._Promise<String> {
+    return cast Facade_Clipboard_flight__Clipboard.readClipboardHtml(host);
     return cast null;
   }
 
-  public static function readClipboardFiles():flight._internal._Promise<Array<String>> {
-    return cast Facade_Clipboard_flight__Clipboard.readClipboardFiles();
+  public static function readClipboardImage(host:HasClipboardImage):flight._internal._Promise<String> {
+    return cast Facade_Clipboard_flight__Clipboard.readClipboardImage(host);
     return cast null;
   }
 
-  public static function readClipboardFormat(format:String):flight._internal._Promise<String> {
-    return cast Facade_Clipboard_flight__Clipboard.readClipboardFormat(format);
+  public static function readClipboardRTF(host:HasClipboardFormats):flight._internal._Promise<String> {
+    return cast Facade_Clipboard_flight__Clipboard.readClipboardRTF(host);
     return cast null;
   }
 
-  public static function readClipboardHtml():flight._internal._Promise<String> {
-    return cast Facade_Clipboard_flight__Clipboard.readClipboardHtml();
+  public static function readClipboardText(host:HasClipboardText):flight._internal._Promise<String> {
+    return cast Facade_Clipboard_flight__Clipboard.readClipboardText(host);
     return cast null;
   }
 
-  public static function readClipboardImage():flight._internal._Promise<String> {
-    return cast Facade_Clipboard_flight__Clipboard.readClipboardImage();
+  public static function writeClipboard(host:HasClipboardFormats, items:Array<ClipboardWriteItem>):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.writeClipboard(host, items);
     return cast null;
   }
 
-  public static function readClipboardRTF():flight._internal._Promise<String> {
-    return cast Facade_Clipboard_flight__Clipboard.readClipboardRTF();
+  public static function writeClipboardBookmark(host:HasClipboardBookmark, title:String, url:String):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.writeClipboardBookmark(host, title, url);
     return cast null;
   }
 
-  public static function readClipboardText():flight._internal._Promise<String> {
-    return cast Facade_Clipboard_flight__Clipboard.readClipboardText();
+  public static function writeClipboardFormat(host:HasClipboardFormats, format:String, data:String):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.writeClipboardFormat(host, format, data);
     return cast null;
   }
 
-  public static function writeClipboard(items:Array<ClipboardWriteItem>):flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.writeClipboard(items);
+  public static function writeClipboardHtml(host:HasClipboardFormats, html:String):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.writeClipboardHtml(host, html);
     return cast null;
   }
 
-  public static function writeClipboardBookmark(title:String, url:String):flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.writeClipboardBookmark(title, url);
+  public static function writeClipboardImage(host:HasClipboardImage, dataUrl:String):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.writeClipboardImage(host, dataUrl);
     return cast null;
   }
 
-  public static function writeClipboardFiles(paths:Array<String>):flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.writeClipboardFiles(paths);
+  public static function writeClipboardRTF(host:HasClipboardFormats, rtf:String):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.writeClipboardRTF(host, rtf);
     return cast null;
   }
 
-  public static function writeClipboardFormat(format:String, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.writeClipboardFormat(format, data);
-    return cast null;
-  }
-
-  public static function writeClipboardHtml(html:String):flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.writeClipboardHtml(html);
-    return cast null;
-  }
-
-  public static function writeClipboardImage(dataUrl:String):flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.writeClipboardImage(dataUrl);
-    return cast null;
-  }
-
-  public static function writeClipboardRTF(rtf:String):flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.writeClipboardRTF(rtf);
-    return cast null;
-  }
-
-  public static function writeClipboardText(text:String):flight._internal._Promise<Bool> {
-    return cast Facade_Clipboard_flight__Clipboard.writeClipboardText(text);
+  public static function writeClipboardText(host:HasClipboardText, text:String):flight._internal._Promise<Bool> {
+    return cast Facade_Clipboard_flight__Clipboard.writeClipboardText(host, text);
     return cast null;
   }
 }

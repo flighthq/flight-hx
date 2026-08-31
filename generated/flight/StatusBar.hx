@@ -4,7 +4,13 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._StatusBar as Facade_StatusBar_flight__StatusBar;
-import flight.types.BackendExplanation;
+import flight.types.HasUiStatusBarChange;
+import flight.types.HasUiStatusBarColor;
+import flight.types.HasUiStatusBarInfo;
+import flight.types.HasUiStatusBarOverlays;
+import flight.types.HasUiStatusBarStyle;
+import flight.types.HasUiStatusBarStyleStack;
+import flight.types.HasUiStatusBarVisibility;
 import flight.types.StatusBar;
 import flight.types.StatusBarAnimation;
 import flight.types.StatusBarInfo;
@@ -13,12 +19,12 @@ import flight.types.StatusBarStyleEntry;
 import flight.types.StatusBarStyleEntryHandle;
 
 class StatusBar {
-  public static function attachStatusBar(bar:flight.types.StatusBar):Void {
-    Facade_StatusBar_flight__StatusBar.attachStatusBar(bar);
+  public static function attachStatusBar(host:{ >HasUiStatusBarChange, >HasUiStatusBarInfo, }, bar:flight.types.StatusBar):Void {
+    Facade_StatusBar_flight__StatusBar.attachStatusBar(host, bar);
   }
 
-  public static function clearStatusBarStyleStack():Void {
-    Facade_StatusBar_flight__StatusBar.clearStatusBarStyleStack();
+  public static function clearStatusBarStyleStack(host:HasUiStatusBarStyleStack):Void {
+    Facade_StatusBar_flight__StatusBar.clearStatusBarStyleStack(host);
   }
 
   public static function createStatusBar():flight.types.StatusBar {
@@ -34,48 +40,43 @@ class StatusBar {
     Facade_StatusBar_flight__StatusBar.disposeStatusBar(bar);
   }
 
-  public static function explainStatusBarBackend():BackendExplanation {
-    return cast Facade_StatusBar_flight__StatusBar.explainStatusBarBackend();
+  public static function getStatusBarHeight(host:HasUiStatusBarInfo):Float {
+    return cast Facade_StatusBar_flight__StatusBar.getStatusBarHeight(host);
     return cast null;
   }
 
-  public static function getStatusBarHeight():Float {
-    return cast Facade_StatusBar_flight__StatusBar.getStatusBarHeight();
+  public static function getStatusBarInfo(host:HasUiStatusBarInfo, out:StatusBarInfo):StatusBarInfo {
+    return cast Facade_StatusBar_flight__StatusBar.getStatusBarInfo(host, out);
     return cast null;
   }
 
-  public static function getStatusBarInfo(out:StatusBarInfo):StatusBarInfo {
-    return cast Facade_StatusBar_flight__StatusBar.getStatusBarInfo(out);
+  public static function hasStatusBarStyleEntry(host:HasUiStatusBarStyleStack, handle:StatusBarStyleEntryHandle):Bool {
+    return cast Facade_StatusBar_flight__StatusBar.hasStatusBarStyleEntry(host, handle);
     return cast null;
   }
 
-  public static function hasStatusBarStyleEntry(handle:StatusBarStyleEntryHandle):Bool {
-    return cast Facade_StatusBar_flight__StatusBar.hasStatusBarStyleEntry(handle);
+  public static function popStatusBarStyleEntry(host:HasUiStatusBarStyleStack, handle:StatusBarStyleEntryHandle):Void {
+    Facade_StatusBar_flight__StatusBar.popStatusBarStyleEntry(host, handle);
+  }
+
+  public static function pushStatusBarStyleEntry(host:HasUiStatusBarStyleStack, entry:StatusBarStyleEntry):StatusBarStyleEntryHandle {
+    return cast Facade_StatusBar_flight__StatusBar.pushStatusBarStyleEntry(host, entry);
     return cast null;
   }
 
-  public static function popStatusBarStyleEntry(handle:StatusBarStyleEntryHandle):Void {
-    Facade_StatusBar_flight__StatusBar.popStatusBarStyleEntry(handle);
+  public static function setStatusBarColor(host:HasUiStatusBarColor, color:Float, ?animated:Bool):Void {
+    Facade_StatusBar_flight__StatusBar.setStatusBarColor(host, color, animated);
   }
 
-  public static function pushStatusBarStyleEntry(entry:StatusBarStyleEntry):StatusBarStyleEntryHandle {
-    return cast Facade_StatusBar_flight__StatusBar.pushStatusBarStyleEntry(entry);
-    return cast null;
+  public static function setStatusBarOverlaysContent(host:HasUiStatusBarOverlays, overlay:Bool):Void {
+    Facade_StatusBar_flight__StatusBar.setStatusBarOverlaysContent(host, overlay);
   }
 
-  public static function setStatusBarColor(color:Float, ?animated:Bool):Void {
-    Facade_StatusBar_flight__StatusBar.setStatusBarColor(color, animated);
+  public static function setStatusBarStyle(host:HasUiStatusBarStyle, style:StatusBarStyle):Void {
+    Facade_StatusBar_flight__StatusBar.setStatusBarStyle(host, style);
   }
 
-  public static function setStatusBarOverlaysContent(overlay:Bool):Void {
-    Facade_StatusBar_flight__StatusBar.setStatusBarOverlaysContent(overlay);
-  }
-
-  public static function setStatusBarStyle(style:StatusBarStyle):Void {
-    Facade_StatusBar_flight__StatusBar.setStatusBarStyle(style);
-  }
-
-  public static function setStatusBarVisible(visible:Bool, ?animation:StatusBarAnimation):Void {
-    Facade_StatusBar_flight__StatusBar.setStatusBarVisible(visible, animation);
+  public static function setStatusBarVisible(host:HasUiStatusBarVisibility, visible:Bool, ?animation:StatusBarAnimation):Void {
+    Facade_StatusBar_flight__StatusBar.setStatusBarVisible(host, visible, animation);
   }
 }

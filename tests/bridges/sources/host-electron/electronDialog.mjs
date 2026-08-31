@@ -5,4 +5,7 @@ const api = compiled.flight._HostElectron;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createElectronDialogBackend = api.createElectronDialogBackend;
+export const createElectronDirectoryOpenDialogBackend = api.createElectronDirectoryOpenDialogBackend;
+export const createElectronFileOpenDialogBackend = api.createElectronFileOpenDialogBackend;
+export const createElectronFileSaveDialogBackend = api.createElectronFileSaveDialogBackend;
+export const createElectronMessageDialogBackend = api.createElectronMessageDialogBackend;

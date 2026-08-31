@@ -17,13 +17,17 @@ import flight.types.ShapeRasterizer;
 import flight.types.SpriteRenderer;
 import flight.types.Transform2DNode;
 import flight.types.VelocityField;
+import flight.types.WgpuDeviceState;
+import flight.types.WgpuPipeline;
+import flight.types.WgpuPresentationRenderState;
+import flight.types.WgpuRenderOptions;
 import flight.types.WgpuRenderState;
 import flight.types.WgpuRenderTarget;
 import flight.types.WgpuVelocityWriter;
 
 class Scene2DWgpu {
-  public static function createWgpuCacheState(screenState:WgpuRenderState):WgpuRenderState {
-    return cast Facade_Scene2DWgpu_flight__Scene2DWgpu.createWgpuCacheState(screenState);
+  public static function createWgpuCacheState(ownerState:WgpuRenderState, deviceState:WgpuDeviceState, pipeline:WgpuPipeline, ?options:WgpuRenderOptions):WgpuRenderState {
+    return cast Facade_Scene2DWgpu_flight__Scene2DWgpu.createWgpuCacheState(ownerState, deviceState, pipeline, options);
     return cast null;
   }
 
@@ -91,8 +95,8 @@ class Scene2DWgpu {
     return cast null;
   }
 
-  public static function refreshWgpuRenderCache(cacheState:WgpuRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
-    return cast Facade_Scene2DWgpu_flight__Scene2DWgpu.refreshWgpuRenderCache(cacheState, cache, source, options);
+  public static function refreshWgpuRenderCache(ownerState:WgpuPresentationRenderState, cacheState:WgpuRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
+    return cast Facade_Scene2DWgpu_flight__Scene2DWgpu.refreshWgpuRenderCache(ownerState, cacheState, cache, source, options);
     return cast null;
   }
 
@@ -123,4 +127,6 @@ class Scene2DWgpu {
   public static function renderWgpuVelocity<Traits:flight._internal._Object>(state:WgpuRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:WgpuRenderTarget):Void {
     Facade_Scene2DWgpu_flight__Scene2DWgpu.renderWgpuVelocity(state, root, field, target);
   }
+
+  public static final scene2dWgpuPipeline:WgpuPipeline = Facade_Scene2DWgpu_flight__Scene2DWgpu.scene2dWgpuPipeline;
 }

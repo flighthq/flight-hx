@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CapacitorLocalNotificationSchema = { @:optional var body:String; var id:Float; @:optional var schedule:{ @:optional var at:Date; }; var title:String; };
+typedef CapacitorLocalNotificationSchema = { @:optional var body:String; var id:Float; @:optional var schedule:{ @:optional var at:Date; @:optional var every:String; @:optional var repeats:Bool; }; var title:String; };

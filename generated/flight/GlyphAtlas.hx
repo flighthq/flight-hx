@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 import flight._GlyphAtlas as Facade_GlyphAtlas_flight__GlyphAtlas;
 import flight.types.BackendExplanation;
 import flight.types.Bitmap;
+import flight.types.Entity;
 import flight.types.GlyphAtlas;
 import flight.types.GlyphAtlasEntryExplanation;
 import flight.types.GlyphAtlasOptions;
@@ -30,7 +31,7 @@ class GlyphAtlas {
     return cast null;
   }
 
-  public static function createStubGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function createStubGlyphRasterizerBackend():{ >GlyphRasterizerBackend, >Entity, } {
     return cast Facade_GlyphAtlas_flight__GlyphAtlas.createStubGlyphRasterizerBackend();
     return cast null;
   }

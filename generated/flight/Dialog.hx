@@ -4,80 +4,80 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Dialog as Facade_Dialog_flight__Dialog;
-import flight._Dialog.FileSystemDirectoryHandle__dialog;
-import flight._Dialog.FileSystemFileHandle__dialog;
-import flight.types.BackendExplanation;
+import flight.types.DirectoryOpenDialogResult;
 import flight.types.FileDialogHandle;
+import flight.types.FileDialogHandleOperations;
+import flight.types.FileOpenDialogResult;
+import flight.types.FileSaveDialogResult;
+import flight.types.HasDialogDirectoryOpen;
+import flight.types.HasDialogFileOpen;
+import flight.types.HasDialogFileSave;
+import flight.types.HasDialogMessage;
+import flight.types.HasDialogPrompt;
 import flight.types.MessageDialogOptions;
 import flight.types.MessageDialogResult;
-import flight.types.OpenDirectoryDialogOptions;
 import flight.types.OpenFileDialogOptions;
 import flight.types.PromptDialogOptions;
 import flight.types.SaveFileDialogOptions;
 
 class Dialog {
-  public static function explainDialogBackend():BackendExplanation {
-    return cast Facade_Dialog_flight__Dialog.explainDialogBackend();
+  public static function createFileDialogHandle(kind:flight._internal._IndexedAccess<FileDialogHandle, String>, name:String, path:Null<String>, ?operations:Null<FileDialogHandleOperations>):FileDialogHandle {
+    return cast Facade_Dialog_flight__Dialog.createFileDialogHandle(kind, name, path, operations);
     return cast null;
   }
 
-  public static function getWebDirectorySystemHandle(handle:FileDialogHandle):Null<FileSystemDirectoryHandle__dialog> {
-    return cast Facade_Dialog_flight__Dialog.getWebDirectorySystemHandle(handle);
+  public static function getFileDialogHandleOperations(handle:FileDialogHandle):Null<FileDialogHandleOperations> {
+    return cast Facade_Dialog_flight__Dialog.getFileDialogHandleOperations(handle);
     return cast null;
   }
 
-  public static function getWebFileSystemHandle(handle:FileDialogHandle):Null<FileSystemFileHandle__dialog> {
-    return cast Facade_Dialog_flight__Dialog.getWebFileSystemHandle(handle);
+  public static function showConfirmDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<Bool> {
+    return cast Facade_Dialog_flight__Dialog.showConfirmDialog(host, options);
     return cast null;
   }
 
-  public static function showConfirmDialog(options:MessageDialogOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Dialog_flight__Dialog.showConfirmDialog(options);
+  public static function showErrorBox(host:HasDialogMessage, title:String, content:String):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showErrorBox(host, title, content);
     return cast null;
   }
 
-  public static function showErrorBox(title:String, content:String):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Dialog_flight__Dialog.showErrorBox(title, content);
+  public static function showErrorDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showErrorDialog(host, options);
     return cast null;
   }
 
-  public static function showErrorDialog(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Dialog_flight__Dialog.showErrorDialog(options);
+  public static function showInfoDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showInfoDialog(host, options);
     return cast null;
   }
 
-  public static function showInfoDialog(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Dialog_flight__Dialog.showInfoDialog(options);
+  public static function showMessageDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showMessageDialog(host, options);
     return cast null;
   }
 
-  public static function showMessageDialog(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Dialog_flight__Dialog.showMessageDialog(options);
+  public static function showOpenDirectoryDialog(host:HasDialogDirectoryOpen):flight._internal._Promise<DirectoryOpenDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showOpenDirectoryDialog(host);
     return cast null;
   }
 
-  public static function showOpenDirectoryDialog(options:OpenDirectoryDialogOptions):flight._internal._Promise<Array<FileDialogHandle>> {
-    return cast Facade_Dialog_flight__Dialog.showOpenDirectoryDialog(options);
+  public static function showOpenFileDialog(host:HasDialogFileOpen, options:OpenFileDialogOptions):flight._internal._Promise<FileOpenDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showOpenFileDialog(host, options);
     return cast null;
   }
 
-  public static function showOpenFileDialog(options:OpenFileDialogOptions):flight._internal._Promise<Array<FileDialogHandle>> {
-    return cast Facade_Dialog_flight__Dialog.showOpenFileDialog(options);
+  public static function showPromptDialog(host:HasDialogPrompt, options:PromptDialogOptions):flight._internal._Promise<Null<String>> {
+    return cast Facade_Dialog_flight__Dialog.showPromptDialog(host, options);
     return cast null;
   }
 
-  public static function showPromptDialog(options:PromptDialogOptions):flight._internal._Promise<Null<String>> {
-    return cast Facade_Dialog_flight__Dialog.showPromptDialog(options);
+  public static function showSaveFileDialog(host:HasDialogFileSave, options:SaveFileDialogOptions):flight._internal._Promise<FileSaveDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showSaveFileDialog(host, options);
     return cast null;
   }
 
-  public static function showSaveFileDialog(options:SaveFileDialogOptions):flight._internal._Promise<Null<FileDialogHandle>> {
-    return cast Facade_Dialog_flight__Dialog.showSaveFileDialog(options);
-    return cast null;
-  }
-
-  public static function showWarningDialog(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Dialog_flight__Dialog.showWarningDialog(options);
+  public static function showWarningDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showWarningDialog(host, options);
     return cast null;
   }
 }

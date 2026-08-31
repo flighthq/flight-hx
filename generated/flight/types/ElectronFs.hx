@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ElectronFs = { var existsSync:String->Bool; var readFileSync:String->String->String; var writeFileSync:String->String->Void; };
+typedef ElectronFs = { var existsSync:String->Bool; var readFileSync:String->String->String; var renameSync:String->String->Void; var unlinkSync:String->Void; var writeFileSync:String->String->Void; };

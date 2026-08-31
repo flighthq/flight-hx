@@ -4,15 +4,26 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Menu as Facade_Menu_flight__Menu;
-import flight.types.BackendExplanation;
+import flight.types.HasMenuApplication;
+import flight.types.HasMenuHighlight;
+import flight.types.HasMenuPopup;
+import flight.types.HasMenuSelect;
+import flight.types.MenuHighlight;
 import flight.types.MenuItemRole;
 import flight.types.MenuItemTemplate;
 import flight.types.MenuItemType;
-import flight.types.MenuReplacementGuarantee;
-import flight.types.MenuReplacementGuaranteeExplanation;
+import flight.types.MenuSelect;
 import flight.types.MenuSignals;
 
 class Menu {
+  public static function attachMenuHighlight(host:HasMenuHighlight, highlight:MenuHighlight):Void {
+    Facade_Menu_flight__Menu.attachMenuHighlight(host, highlight);
+  }
+
+  public static function attachMenuSelect(host:HasMenuSelect, select:MenuSelect):Void {
+    Facade_Menu_flight__Menu.attachMenuSelect(host, select);
+  }
+
   public static function cloneMenuTemplate(template:MenuItemTemplate):MenuItemTemplate {
     return cast Facade_Menu_flight__Menu.cloneMenuTemplate(template);
     return cast null;
@@ -48,23 +59,43 @@ class Menu {
     return cast null;
   }
 
+  public static function createMenuHighlight():MenuHighlight {
+    return cast Facade_Menu_flight__Menu.createMenuHighlight();
+    return cast null;
+  }
+
   public static function createMenuItemTemplate(?template:{ @:optional var id:Null<String>; @:optional var label:Null<String>; @:optional var type:Null<MenuItemType>; @:optional var role:Null<MenuItemRole>; @:optional var accelerator:Null<String>; @:optional var enabled:Null<Bool>; @:optional var checked:Null<Bool>; @:optional var visible:Null<Bool>; @:optional var sublabel:Null<String>; @:optional var toolTip:Null<String>; @:optional var submenu:Null<Array<MenuItemTemplate>>; }):MenuItemTemplate {
     return cast Facade_Menu_flight__Menu.createMenuItemTemplate(template);
     return cast null;
   }
 
+  public static function createMenuSelect():MenuSelect {
+    return cast Facade_Menu_flight__Menu.createMenuSelect();
+    return cast null;
+  }
+
+  public static function destroyMenuApplication(...hosts:HasMenuApplication):Void {
+    _Runtime.callHaxeRestValue(Facade_Menu_flight__Menu.destroyMenuApplication, _Runtime.concatArrays([_Runtime.toArray(hosts)]), 0);
+  }
+
+  public static function detachMenuHighlight(highlight:MenuHighlight):Void {
+    Facade_Menu_flight__Menu.detachMenuHighlight(highlight);
+  }
+
+  public static function detachMenuSelect(select:MenuSelect):Void {
+    Facade_Menu_flight__Menu.detachMenuSelect(select);
+  }
+
+  public static function disposeMenuHighlight(highlight:MenuHighlight):Void {
+    Facade_Menu_flight__Menu.disposeMenuHighlight(highlight);
+  }
+
+  public static function disposeMenuSelect(select:MenuSelect):Void {
+    Facade_Menu_flight__Menu.disposeMenuSelect(select);
+  }
+
   public static function enableMenuSignals():MenuSignals {
     return cast Facade_Menu_flight__Menu.enableMenuSignals();
-    return cast null;
-  }
-
-  public static function explainMenuBackend():BackendExplanation {
-    return cast Facade_Menu_flight__Menu.explainMenuBackend();
-    return cast null;
-  }
-
-  public static function explainMenuReplacementGuarantee(guarantee:MenuReplacementGuarantee):MenuReplacementGuaranteeExplanation {
-    return cast Facade_Menu_flight__Menu.explainMenuReplacementGuarantee(guarantee);
     return cast null;
   }
 
@@ -73,23 +104,13 @@ class Menu {
     return cast null;
   }
 
-  public static function hasMenuReplacementGuarantee(guarantee:MenuReplacementGuarantee):Bool {
-    return cast Facade_Menu_flight__Menu.hasMenuReplacementGuarantee(guarantee);
+  public static function setApplicationMenu(host:HasMenuApplication, items:Array<MenuItemTemplate>):Bool {
+    return cast Facade_Menu_flight__Menu.setApplicationMenu(host, items);
     return cast null;
   }
 
-  public static function onMenuSelect(listener:String->Void):Void->Void {
-    return cast Facade_Menu_flight__Menu.onMenuSelect(listener);
-    return cast null;
-  }
-
-  public static function setApplicationMenu(items:Array<MenuItemTemplate>):Bool {
-    return cast Facade_Menu_flight__Menu.setApplicationMenu(items);
-    return cast null;
-  }
-
-  public static function showContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
-    return cast Facade_Menu_flight__Menu.showContextMenu(items, x, y);
+  public static function showContextMenu(host:HasMenuPopup, items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
+    return cast Facade_Menu_flight__Menu.showContextMenu(host, items, x, y);
     return cast null;
   }
 

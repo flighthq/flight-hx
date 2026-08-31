@@ -8,5 +8,6 @@ __syncDependencies();
 export const acquireWgpuSurfaceAntialiasView = api.acquireWgpuSurfaceAntialiasView;
 export const clearWgpuSurfacePresentation = api.clearWgpuSurfacePresentation;
 export const encodeWgpuSurfaceAntialiasResolve = api.encodeWgpuSurfaceAntialiasResolve;
+export const getWgpuSurfaceLogicalExtent = api.getWgpuSurfaceLogicalExtent;
 export const getWgpuSurfaceRenderExtent = api.getWgpuSurfaceRenderExtent;
 export const getWgpuSurfaceRenderScale = api.getWgpuSurfaceRenderScale;

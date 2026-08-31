@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ProtocolHandler = { var onOpenUrl:Signal<String->Void>; };
+typedef ProtocolHandler = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onOpenUrl:Signal<String->Void>; };

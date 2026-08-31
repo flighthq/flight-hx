@@ -4,26 +4,47 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Application as Facade_Application_flight__Application;
+import flight._Application.WindowOperationHost__window;
 import flight.types.Application;
 import flight.types.ApplicationLoopOptions;
 import flight.types.ApplicationRenderView;
 import flight.types.ApplicationRenderViewResize;
 import flight.types.ApplicationStepOptions;
 import flight.types.ApplicationWindow;
-import flight.types.BackendExplanation;
-import flight.types.BackendOperationExplanation;
+import flight.types.FullscreenTargetHandle;
+import flight.types.HasAppExitSubscription;
+import flight.types.HasAppLoop;
+import flight.types.HasAppVisibilityQuery;
+import flight.types.HasGraphicsRenderContextSubscription;
+import flight.types.HasGraphicsRenderSurface;
+import flight.types.HasInputDropFileSubscription;
+import flight.types.HasInputFocusSubscription;
+import flight.types.HasInputPointerLock;
+import flight.types.HasInputTargetPreparation;
+import flight.types.HasUiFullscreen;
+import flight.types.HasUiFullscreenSubscription;
+import flight.types.HasWindowAttach;
+import flight.types.HasWindowCloseSubscription;
+import flight.types.HasWindowMoveSubscription;
+import flight.types.HasWindowOpen;
+import flight.types.HasWindowOrientationSubscription;
+import flight.types.HasWindowResizeSubscription;
+import flight.types.HasWindowVisibilitySubscription;
+import flight.types.InputPointerLockExitOutcome;
+import flight.types.InputPointerLockRequestOutcome;
+import flight.types.InputTargetHandle;
 import flight.types.Matrix;
 import flight.types.NativeWindowHandle;
 import flight.types.RenderState;
 import flight.types.RenderTargetDimensions;
 import flight.types.WindowAttachmentOwnership;
 import flight.types.WindowBounds;
-import flight.types.WindowOperation;
 import flight.types.WindowOptions;
+import flight.types.WindowResizeTargetHandle;
 
 class Application {
-  public static function attachApplicationExit(app:flight.types.Application):Void {
-    Facade_Application_flight__Application.attachApplicationExit(app);
+  public static function attachApplicationExit(host:HasAppExitSubscription, app:flight.types.Application):Void {
+    Facade_Application_flight__Application.attachApplicationExit(host, app);
   }
 
   public static function attachApplicationLifecycle(app:flight.types.Application, win:ApplicationWindow):Void {
@@ -34,57 +55,57 @@ class Application {
     Facade_Application_flight__Application.attachApplicationRenderView(view);
   }
 
-  public static function attachWindow(win:ApplicationWindow, handle:NativeWindowHandle, ownership:WindowAttachmentOwnership):Bool {
-    return cast Facade_Application_flight__Application.attachWindow(win, handle, ownership);
+  public static function attachWindow(host:HasWindowAttach, win:ApplicationWindow, handle:NativeWindowHandle, ownership:WindowAttachmentOwnership):Bool {
+    return cast Facade_Application_flight__Application.attachWindow(host, win, handle, ownership);
     return cast null;
   }
 
-  public static function attachWindowClose(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.attachWindowClose(win);
+  public static function attachWindowClose(host:HasWindowCloseSubscription, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.attachWindowClose(host, win);
   }
 
-  public static function attachWindowDropFile(win:ApplicationWindow, element:flight._internal.dom.HTMLElement):Void {
-    Facade_Application_flight__Application.attachWindowDropFile(win, element);
+  public static function attachWindowDropFile(host:HasInputDropFileSubscription, win:ApplicationWindow, target:InputTargetHandle):Void {
+    Facade_Application_flight__Application.attachWindowDropFile(host, win, target);
   }
 
-  public static function attachWindowFocus(win:ApplicationWindow, element:flight._internal.dom.HTMLElement):Void {
-    Facade_Application_flight__Application.attachWindowFocus(win, element);
+  public static function attachWindowFocus(host:HasInputFocusSubscription, win:ApplicationWindow, target:InputTargetHandle):Void {
+    Facade_Application_flight__Application.attachWindowFocus(host, win, target);
   }
 
-  public static function attachWindowFullscreen(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.attachWindowFullscreen(win);
+  public static function attachWindowFullscreen(host:HasUiFullscreenSubscription, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.attachWindowFullscreen(host, win);
   }
 
-  public static function attachWindowMove(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.attachWindowMove(win);
+  public static function attachWindowMove(host:HasWindowMoveSubscription, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.attachWindowMove(host, win);
   }
 
-  public static function attachWindowOrientation(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.attachWindowOrientation(win);
+  public static function attachWindowOrientation(host:HasWindowOrientationSubscription, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.attachWindowOrientation(host, win);
   }
 
-  public static function attachWindowRenderContext(win:ApplicationWindow, canvas:flight._internal.dom.HTMLCanvasElement):Void {
-    Facade_Application_flight__Application.attachWindowRenderContext(win, canvas);
+  public static function attachWindowRenderContext(host:HasGraphicsRenderContextSubscription, win:ApplicationWindow, target:InputTargetHandle):Void {
+    Facade_Application_flight__Application.attachWindowRenderContext(host, win, target);
   }
 
-  public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:flight._internal.dom.HTMLCanvasElement):Void {
-    Facade_Application_flight__Application.attachWindowRenderState(win, state, canvas);
+  public static function attachWindowRenderState(host:HasGraphicsRenderSurface, win:ApplicationWindow, state:RenderState, target:InputTargetHandle):Void {
+    Facade_Application_flight__Application.attachWindowRenderState(host, win, state, target);
   }
 
-  public static function attachWindowResize(win:ApplicationWindow, element:flight._internal.dom.HTMLElement):Void {
-    Facade_Application_flight__Application.attachWindowResize(win, element);
+  public static function attachWindowResize(host:HasWindowResizeSubscription, win:ApplicationWindow, target:WindowResizeTargetHandle):Void {
+    Facade_Application_flight__Application.attachWindowResize(host, win, target);
   }
 
-  public static function attachWindowVisibility(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.attachWindowVisibility(win);
+  public static function attachWindowVisibility(host:HasWindowVisibilitySubscription, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.attachWindowVisibility(host, win);
   }
 
-  public static function centerWindow(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.centerWindow(win);
+  public static function centerWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.centerWindow(host, win);
   }
 
-  public static function closeWindow(win:ApplicationWindow):Bool {
-    return cast Facade_Application_flight__Application.closeWindow(win);
+  public static function closeWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Bool {
+    return cast Facade_Application_flight__Application.closeWindow(host, win);
     return cast null;
   }
 
@@ -168,32 +189,22 @@ class Application {
     Facade_Application_flight__Application.enableApplicationLifecycleSignals(app);
   }
 
-  public static function exitApplicationFullscreen():flight._internal._Promise<flight._internal._Nothing> {
-    return cast Facade_Application_flight__Application.exitApplicationFullscreen();
+  public static function exitApplicationFullscreen(host:HasUiFullscreen):flight._internal._Promise<Bool> {
+    return cast Facade_Application_flight__Application.exitApplicationFullscreen(host);
     return cast null;
   }
 
-  public static function exitApplicationPointerLock():flight._internal._Promise<flight._internal._Nothing> {
-    return cast Facade_Application_flight__Application.exitApplicationPointerLock();
+  public static function exitApplicationPointerLock(host:HasInputPointerLock):flight._internal._Promise<InputPointerLockExitOutcome> {
+    return cast Facade_Application_flight__Application.exitApplicationPointerLock(host);
     return cast null;
   }
 
-  public static function explainWindowBackend():BackendExplanation {
-    return cast Facade_Application_flight__Application.explainWindowBackend();
-    return cast null;
+  public static function flashWindowFrame(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.flashWindowFrame(host, win);
   }
 
-  public static function explainWindowOperation(operation:WindowOperation):BackendOperationExplanation {
-    return cast Facade_Application_flight__Application.explainWindowOperation(operation);
-    return cast null;
-  }
-
-  public static function flashWindowFrame(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.flashWindowFrame(win);
-  }
-
-  public static function focusWindow(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.focusWindow(win);
+  public static function focusWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.focusWindow(host, win);
   }
 
   public static function forEachApplicationWindow(app:flight.types.Application, fn:ApplicationWindow->Void):Void {
@@ -215,23 +226,13 @@ class Application {
     return cast null;
   }
 
-  public static function getWindowBounds(win:ApplicationWindow, out:WindowBounds):WindowBounds {
-    return cast Facade_Application_flight__Application.getWindowBounds(win, out);
+  public static function getWindowBounds(host:WindowOperationHost__window<String>, win:ApplicationWindow, out:WindowBounds):WindowBounds {
+    return cast Facade_Application_flight__Application.getWindowBounds(host, win, out);
     return cast null;
   }
 
-  public static function getWindowDisplay(win:ApplicationWindow):Float {
-    return cast Facade_Application_flight__Application.getWindowDisplay(win);
-    return cast null;
-  }
-
-  public static function hasWindowOperation(operation:WindowOperation):Bool {
-    return cast Facade_Application_flight__Application.hasWindowOperation(operation);
-    return cast null;
-  }
-
-  public static function hideWindow(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.hideWindow(win);
+  public static function hideWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.hideWindow(host, win);
   }
 
   public static function isApplicationRunning(app:flight.types.Application):Bool {
@@ -239,21 +240,21 @@ class Application {
     return cast null;
   }
 
-  public static function lockApplicationPointer(element:flight._internal.dom.HTMLElement):flight._internal._Promise<flight._internal._Nothing> {
-    return cast Facade_Application_flight__Application.lockApplicationPointer(element);
+  public static function lockApplicationPointer(host:HasInputPointerLock, target:InputTargetHandle):flight._internal._Promise<InputPointerLockRequestOutcome> {
+    return cast Facade_Application_flight__Application.lockApplicationPointer(host, target);
     return cast null;
   }
 
-  public static function maximizeWindow(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.maximizeWindow(win);
+  public static function maximizeWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.maximizeWindow(host, win);
   }
 
-  public static function minimizeWindow(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.minimizeWindow(win);
+  public static function minimizeWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.minimizeWindow(host, win);
   }
 
-  public static function openWindow(win:ApplicationWindow, ?options:WindowOptions):Bool {
-    return cast Facade_Application_flight__Application.openWindow(win, options);
+  public static function openWindow(host:HasWindowOpen, win:ApplicationWindow, ?options:WindowOptions):Bool {
+    return cast Facade_Application_flight__Application.openWindow(host, win, options);
     return cast null;
   }
 
@@ -261,21 +262,21 @@ class Application {
     Facade_Application_flight__Application.pauseApplicationLoop(app);
   }
 
-  public static function prepareElementForInput(element:flight._internal.dom.HTMLElement):Void {
-    Facade_Application_flight__Application.prepareElementForInput(element);
+  public static function prepareElementForInput(host:HasInputTargetPreparation, target:InputTargetHandle):Void {
+    Facade_Application_flight__Application.prepareElementForInput(host, target);
   }
 
   public static function registerApplicationWindow(app:flight.types.Application, win:ApplicationWindow):Void {
     Facade_Application_flight__Application.registerApplicationWindow(app, win);
   }
 
-  public static function requestApplicationFullscreen(element:flight._internal.dom.HTMLElement):flight._internal._Promise<flight._internal._Nothing> {
-    return cast Facade_Application_flight__Application.requestApplicationFullscreen(element);
+  public static function requestApplicationFullscreen(host:HasUiFullscreen, target:FullscreenTargetHandle):flight._internal._Promise<Bool> {
+    return cast Facade_Application_flight__Application.requestApplicationFullscreen(host, target);
     return cast null;
   }
 
-  public static function requestWindowAttention(win:ApplicationWindow, attention:Bool):Void {
-    Facade_Application_flight__Application.requestWindowAttention(win, attention);
+  public static function requestWindowAttention(host:WindowOperationHost__window<String>, win:ApplicationWindow, attention:Bool):Void {
+    Facade_Application_flight__Application.requestWindowAttention(host, win, attention);
   }
 
   public static function requestWindowClose(win:ApplicationWindow):Bool {
@@ -283,8 +284,8 @@ class Application {
     return cast null;
   }
 
-  public static function restoreWindow(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.restoreWindow(win);
+  public static function restoreWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.restoreWindow(host, win);
   }
 
   public static function resumeApplicationLoop(app:flight.types.Application):Void {
@@ -295,76 +296,76 @@ class Application {
     Facade_Application_flight__Application.setApplicationMainWindow(app, win);
   }
 
-  public static function setWindowAlwaysOnTop(win:ApplicationWindow, alwaysOnTop:Bool):Void {
-    Facade_Application_flight__Application.setWindowAlwaysOnTop(win, alwaysOnTop);
+  public static function setWindowAlwaysOnTop(host:WindowOperationHost__window<String>, win:ApplicationWindow, alwaysOnTop:Bool):Void {
+    Facade_Application_flight__Application.setWindowAlwaysOnTop(host, win, alwaysOnTop);
   }
 
-  public static function setWindowContentProtection(win:ApplicationWindow, enabled:Bool):Void {
-    Facade_Application_flight__Application.setWindowContentProtection(win, enabled);
+  public static function setWindowContentProtection(host:WindowOperationHost__window<String>, win:ApplicationWindow, enabled:Bool):Void {
+    Facade_Application_flight__Application.setWindowContentProtection(host, win, enabled);
   }
 
-  public static function setWindowFullscreen(win:ApplicationWindow, fullscreen:Bool):Void {
-    Facade_Application_flight__Application.setWindowFullscreen(win, fullscreen);
+  public static function setWindowFullscreen(host:WindowOperationHost__window<String>, win:ApplicationWindow, fullscreen:Bool):Void {
+    Facade_Application_flight__Application.setWindowFullscreen(host, win, fullscreen);
   }
 
-  public static function setWindowHasShadow(win:ApplicationWindow, hasShadow:Bool):Void {
-    Facade_Application_flight__Application.setWindowHasShadow(win, hasShadow);
+  public static function setWindowHasShadow(host:WindowOperationHost__window<String>, win:ApplicationWindow, hasShadow:Bool):Void {
+    Facade_Application_flight__Application.setWindowHasShadow(host, win, hasShadow);
   }
 
-  public static function setWindowIcon(win:ApplicationWindow, icon:String):Void {
-    Facade_Application_flight__Application.setWindowIcon(win, icon);
+  public static function setWindowIcon(host:WindowOperationHost__window<String>, win:ApplicationWindow, icon:String):Void {
+    Facade_Application_flight__Application.setWindowIcon(host, win, icon);
   }
 
-  public static function setWindowMaximumSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    Facade_Application_flight__Application.setWindowMaximumSize(win, width, height);
+  public static function setWindowMaximumSize(host:WindowOperationHost__window<String>, win:ApplicationWindow, width:Float, height:Float):Void {
+    Facade_Application_flight__Application.setWindowMaximumSize(host, win, width, height);
   }
 
-  public static function setWindowMenuBarVisible(win:ApplicationWindow, visible:Bool):Void {
-    Facade_Application_flight__Application.setWindowMenuBarVisible(win, visible);
+  public static function setWindowMenuBarVisible(host:WindowOperationHost__window<String>, win:ApplicationWindow, visible:Bool):Void {
+    Facade_Application_flight__Application.setWindowMenuBarVisible(host, win, visible);
   }
 
-  public static function setWindowMinimumSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    Facade_Application_flight__Application.setWindowMinimumSize(win, width, height);
+  public static function setWindowMinimumSize(host:WindowOperationHost__window<String>, win:ApplicationWindow, width:Float, height:Float):Void {
+    Facade_Application_flight__Application.setWindowMinimumSize(host, win, width, height);
   }
 
-  public static function setWindowOpacity(win:ApplicationWindow, opacity:Float):Void {
-    Facade_Application_flight__Application.setWindowOpacity(win, opacity);
+  public static function setWindowOpacity(host:WindowOperationHost__window<String>, win:ApplicationWindow, opacity:Float):Void {
+    Facade_Application_flight__Application.setWindowOpacity(host, win, opacity);
   }
 
-  public static function setWindowParent(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
-    Facade_Application_flight__Application.setWindowParent(win, parent);
+  public static function setWindowParent(host:WindowOperationHost__window<String>, win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
+    Facade_Application_flight__Application.setWindowParent(host, win, parent);
   }
 
-  public static function setWindowPosition(win:ApplicationWindow, x:Float, y:Float):Void {
-    Facade_Application_flight__Application.setWindowPosition(win, x, y);
+  public static function setWindowPosition(host:WindowOperationHost__window<String>, win:ApplicationWindow, x:Float, y:Float):Void {
+    Facade_Application_flight__Application.setWindowPosition(host, win, x, y);
   }
 
-  public static function setWindowProgress(win:ApplicationWindow, progress:Float):Void {
-    Facade_Application_flight__Application.setWindowProgress(win, progress);
+  public static function setWindowProgress(host:WindowOperationHost__window<String>, win:ApplicationWindow, progress:Float):Void {
+    Facade_Application_flight__Application.setWindowProgress(host, win, progress);
   }
 
-  public static function setWindowResizable(win:ApplicationWindow, resizable:Bool):Void {
-    Facade_Application_flight__Application.setWindowResizable(win, resizable);
+  public static function setWindowResizable(host:WindowOperationHost__window<String>, win:ApplicationWindow, resizable:Bool):Void {
+    Facade_Application_flight__Application.setWindowResizable(host, win, resizable);
   }
 
-  public static function setWindowSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    Facade_Application_flight__Application.setWindowSize(win, width, height);
+  public static function setWindowSize(host:WindowOperationHost__window<String>, win:ApplicationWindow, width:Float, height:Float):Void {
+    Facade_Application_flight__Application.setWindowSize(host, win, width, height);
   }
 
-  public static function setWindowSkipTaskbar(win:ApplicationWindow, skip:Bool):Void {
-    Facade_Application_flight__Application.setWindowSkipTaskbar(win, skip);
+  public static function setWindowSkipTaskbar(host:WindowOperationHost__window<String>, win:ApplicationWindow, skip:Bool):Void {
+    Facade_Application_flight__Application.setWindowSkipTaskbar(host, win, skip);
   }
 
-  public static function setWindowTitle(win:ApplicationWindow, title:String):Void {
-    Facade_Application_flight__Application.setWindowTitle(win, title);
+  public static function setWindowTitle(host:WindowOperationHost__window<String>, win:ApplicationWindow, title:String):Void {
+    Facade_Application_flight__Application.setWindowTitle(host, win, title);
   }
 
-  public static function showWindow(win:ApplicationWindow):Void {
-    Facade_Application_flight__Application.showWindow(win);
+  public static function showWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Application_flight__Application.showWindow(host, win);
   }
 
-  public static function startApplicationLoop(app:flight.types.Application, ?options:ApplicationLoopOptions):Void {
-    Facade_Application_flight__Application.startApplicationLoop(app, options);
+  public static function startApplicationLoop(host:{ >HasAppLoop, >HasAppVisibilityQuery, }, app:flight.types.Application, ?options:ApplicationLoopOptions):Void {
+    Facade_Application_flight__Application.startApplicationLoop(host, app, options);
   }
 
   public static function stepApplicationLoop(app:flight.types.Application, deltaTime:Float, ?options:ApplicationStepOptions):Void {

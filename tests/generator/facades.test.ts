@@ -154,7 +154,7 @@ describe('public Haxe facades', () => {
     );
   });
 
-  it('keeps callable contract, backend-registration, and test-helper exports live', () => {
+  it('keeps callable contract, capability-backend, and test-helper exports live', () => {
     const workspace = process.cwd();
     const entityContract = readFileSync(
       path.join(workspace, 'tests', 'bridges', 'sources', 'entity', 'contract.mjs'),
@@ -175,7 +175,7 @@ describe('public Haxe facades', () => {
     );
 
     expect(entityContract).toContain("export * from './entity.mjs';");
-    expect(dialog).toContain('export const setDialogBackend = api.setDialogBackend;');
+    expect(dialog).toContain('export const webMessageDialogBackend = api.webMessageDialogBackend;');
     expect(renderWgpuContract).toContain("export { installWgpuMock } from './wgpuTestHelper.mjs';");
     expect(renderWgpuTestHelper).toContain('const api = compiled.flight._RenderWgpu;');
     expect(renderWgpuTestHelper).toContain('export const installWgpuMock = api.installWgpuMock;');

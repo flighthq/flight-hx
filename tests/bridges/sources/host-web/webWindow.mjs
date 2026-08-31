@@ -5,5 +5,8 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebWindow = api.enableHostWebWindow;
-export const resetHostWebWindowForTest = api.resetHostWebWindowForTest;
+export const createWebFullscreenTargetHandle = api.createWebFullscreenTargetHandle;
+export const createWebWindowResizeTargetHandle = api.createWebWindowResizeTargetHandle;
+export const resetWebWindowBackendForTest = api.resetWebWindowBackendForTest;
+export const webFullscreenBackend = api.webFullscreenBackend;
+export const webWindowBackend = api.webWindowBackend;

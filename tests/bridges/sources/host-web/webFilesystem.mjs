@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebFileSystem = api.enableHostWebFileSystem;
-export const resetHostWebFilesystemForTest = api.resetHostWebFilesystemForTest;
+export const webFileSystemBackend = api.webFileSystemBackend;

@@ -4,7 +4,6 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._FileSystem as Facade_FileSystem_flight__FileSystem;
-import flight.types.BackendExplanation;
 import flight.types.FileDialogHandle;
 import flight.types.FileEntry;
 import flight.types.FilePermissions;
@@ -13,45 +12,41 @@ import flight.types.FileSystemPathKind;
 import flight.types.FileSystemUsage;
 import flight.types.FileWalkOptions;
 import flight.types.FileWatchEvent;
+import flight.types.HasStorageFileSystem;
 
 class FileSystem {
-  public static function appendTextFile(path:String, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.appendTextFile(path, data);
+  public static function appendTextFile(host:HasStorageFileSystem, path:String, data:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.appendTextFile(host, path, data);
     return cast null;
   }
 
-  public static function canAccessFile(path:String, mode:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.canAccessFile(path, mode);
+  public static function canAccessFile(host:HasStorageFileSystem, path:String, mode:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.canAccessFile(host, path, mode);
     return cast null;
   }
 
-  public static function copyFile(from:String, to:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.copyFile(from, to);
+  public static function copyFile(host:HasStorageFileSystem, from:String, to:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.copyFile(host, from, to);
     return cast null;
   }
 
-  public static function createFileSymlink(target:String, linkPath:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.createFileSymlink(target, linkPath);
+  public static function createFileSymlink(_host:HasStorageFileSystem, _target:String, _linkPath:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.createFileSymlink(_host, _target, _linkPath);
     return cast null;
   }
 
-  public static function directoryExists(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.directoryExists(path);
+  public static function directoryExists(host:HasStorageFileSystem, path:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.directoryExists(host, path);
     return cast null;
   }
 
-  public static function explainFileSystemBackend():BackendExplanation {
-    return cast Facade_FileSystem_flight__FileSystem.explainFileSystemBackend();
+  public static function fileExists(host:HasStorageFileSystem, path:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.fileExists(host, path);
     return cast null;
   }
 
-  public static function fileExists(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.fileExists(path);
-    return cast null;
-  }
-
-  public static function findFiles(rootPath:String, pattern:String):flight._internal._Promise<Array<FileEntry>> {
-    return cast Facade_FileSystem_flight__FileSystem.findFiles(rootPath, pattern);
+  public static function findFiles(host:HasStorageFileSystem, rootPath:String, pattern:String):flight._internal._Promise<Array<FileEntry>> {
+    return cast Facade_FileSystem_flight__FileSystem.findFiles(host, rootPath, pattern);
     return cast null;
   }
 
@@ -70,23 +65,23 @@ class FileSystem {
     return cast null;
   }
 
-  public static function getFilePermissions(path:String):flight._internal._Promise<Null<FilePermissions>> {
-    return cast Facade_FileSystem_flight__FileSystem.getFilePermissions(path);
+  public static function getFilePermissions(_host:HasStorageFileSystem, _path:String):flight._internal._Promise<Null<FilePermissions>> {
+    return cast Facade_FileSystem_flight__FileSystem.getFilePermissions(_host, _path);
     return cast null;
   }
 
-  public static function getFileRealPath(path:String):flight._internal._Promise<Null<String>> {
-    return cast Facade_FileSystem_flight__FileSystem.getFileRealPath(path);
+  public static function getFileRealPath(_host:HasStorageFileSystem, _path:String):flight._internal._Promise<Null<String>> {
+    return cast Facade_FileSystem_flight__FileSystem.getFileRealPath(_host, _path);
     return cast null;
   }
 
-  public static function getFileSystemPath(kind:FileSystemPathKind):String {
-    return cast Facade_FileSystem_flight__FileSystem.getFileSystemPath(kind);
+  public static function getFileSystemPath(_host:HasStorageFileSystem, _kind:FileSystemPathKind):String {
+    return cast Facade_FileSystem_flight__FileSystem.getFileSystemPath(_host, _kind);
     return cast null;
   }
 
-  public static function getFileSystemUsage():flight._internal._Promise<Null<FileSystemUsage>> {
-    return cast Facade_FileSystem_flight__FileSystem.getFileSystemUsage();
+  public static function getFileSystemUsage(host:HasStorageFileSystem):flight._internal._Promise<Null<FileSystemUsage>> {
+    return cast Facade_FileSystem_flight__FileSystem.getFileSystemUsage(host);
     return cast null;
   }
 
@@ -100,8 +95,8 @@ class FileSystem {
     return cast null;
   }
 
-  public static function makeDirectory(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.makeDirectory(path);
+  public static function makeDirectory(host:HasStorageFileSystem, path:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.makeDirectory(host, path);
     return cast null;
   }
 
@@ -110,113 +105,113 @@ class FileSystem {
     return cast null;
   }
 
-  public static function openFileReadStream(path:String):flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>> {
-    return cast Facade_FileSystem_flight__FileSystem.openFileReadStream(path);
+  public static function openFileReadStream(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>> {
+    return cast Facade_FileSystem_flight__FileSystem.openFileReadStream(host, path);
     return cast null;
   }
 
-  public static function openFileWriteStream(path:String):flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>> {
-    return cast Facade_FileSystem_flight__FileSystem.openFileWriteStream(path);
+  public static function openFileWriteStream(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>> {
+    return cast Facade_FileSystem_flight__FileSystem.openFileWriteStream(host, path);
     return cast null;
   }
 
-  public static function readBinaryFile(path:String):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_FileSystem_flight__FileSystem.readBinaryFile(path);
+  public static function readBinaryFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_FileSystem_flight__FileSystem.readBinaryFile(host, path);
     return cast null;
   }
 
-  public static function readBinaryFileRange(path:String, offset:Float, length:Float):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_FileSystem_flight__FileSystem.readBinaryFileRange(path, offset, length);
+  public static function readBinaryFileRange(host:HasStorageFileSystem, path:String, offset:Float, length:Float):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_FileSystem_flight__FileSystem.readBinaryFileRange(host, path, offset, length);
     return cast null;
   }
 
-  public static function readDialogHandleBinaryFile(handle:FileDialogHandle):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_FileSystem_flight__FileSystem.readDialogHandleBinaryFile(handle);
+  public static function readDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_FileSystem_flight__FileSystem.readDialogHandleBinaryFile(host, handle);
     return cast null;
   }
 
-  public static function readDialogHandleTextFile(handle:FileDialogHandle):flight._internal._Promise<Null<String>> {
-    return cast Facade_FileSystem_flight__FileSystem.readDialogHandleTextFile(handle);
+  public static function readDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle):flight._internal._Promise<Null<String>> {
+    return cast Facade_FileSystem_flight__FileSystem.readDialogHandleTextFile(host, handle);
     return cast null;
   }
 
-  public static function readDirectory(path:String):flight._internal._Promise<Array<FileEntry>> {
-    return cast Facade_FileSystem_flight__FileSystem.readDirectory(path);
+  public static function readDirectory(host:HasStorageFileSystem, path:String):flight._internal._Promise<Array<FileEntry>> {
+    return cast Facade_FileSystem_flight__FileSystem.readDirectory(host, path);
     return cast null;
   }
 
-  public static function readDirectoryRecursive(path:String, ?options:FileWalkOptions):flight._internal._Promise<Array<FileEntry>> {
-    return cast Facade_FileSystem_flight__FileSystem.readDirectoryRecursive(path, options);
+  public static function readDirectoryRecursive(host:HasStorageFileSystem, path:String, ?options:FileWalkOptions):flight._internal._Promise<Array<FileEntry>> {
+    return cast Facade_FileSystem_flight__FileSystem.readDirectoryRecursive(host, path, options);
     return cast null;
   }
 
-  public static function readFileSymlink(path:String):flight._internal._Promise<Null<String>> {
-    return cast Facade_FileSystem_flight__FileSystem.readFileSymlink(path);
+  public static function readFileSymlink(_host:HasStorageFileSystem, _path:String):flight._internal._Promise<Null<String>> {
+    return cast Facade_FileSystem_flight__FileSystem.readFileSymlink(_host, _path);
     return cast null;
   }
 
-  public static function readTextFile(path:String):flight._internal._Promise<Null<String>> {
-    return cast Facade_FileSystem_flight__FileSystem.readTextFile(path);
+  public static function readTextFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<String>> {
+    return cast Facade_FileSystem_flight__FileSystem.readTextFile(host, path);
     return cast null;
   }
 
-  public static function removeDirectory(path:String, ?recursive:Bool):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.removeDirectory(path, recursive);
+  public static function removeDirectory(host:HasStorageFileSystem, path:String, ?recursive:Bool):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.removeDirectory(host, path, recursive);
     return cast null;
   }
 
-  public static function removeFile(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.removeFile(path);
+  public static function removeFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.removeFile(host, path);
     return cast null;
   }
 
-  public static function renameFile(from:String, to:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.renameFile(from, to);
+  public static function renameFile(host:HasStorageFileSystem, from:String, to:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.renameFile(host, from, to);
     return cast null;
   }
 
-  public static function setFilePermissions(path:String, permissions:FilePermissions):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.setFilePermissions(path, permissions);
+  public static function setFilePermissions(_host:HasStorageFileSystem, _path:String, _permissions:FilePermissions):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.setFilePermissions(_host, _path, _permissions);
     return cast null;
   }
 
-  public static function statFile(path:String):flight._internal._Promise<Null<FileStat>> {
-    return cast Facade_FileSystem_flight__FileSystem.statFile(path);
+  public static function statFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<FileStat>> {
+    return cast Facade_FileSystem_flight__FileSystem.statFile(host, path);
     return cast null;
   }
 
-  public static function watchPath(path:String, listener:FileWatchEvent->Void):Void->Void {
-    return cast Facade_FileSystem_flight__FileSystem.watchPath(path, listener);
+  public static function watchPath(_host:HasStorageFileSystem, _path:String, _listener:FileWatchEvent->Void):Void->Void {
+    return cast Facade_FileSystem_flight__FileSystem.watchPath(_host, _path, _listener);
     return cast null;
   }
 
-  public static function writeBinaryFile(path:String, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeBinaryFile(path, data);
+  public static function writeBinaryFile(host:HasStorageFileSystem, path:String, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeBinaryFile(host, path, data);
     return cast null;
   }
 
-  public static function writeBinaryFileChunks(path:String, chunks:Dynamic):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeBinaryFileChunks(path, chunks);
+  public static function writeBinaryFileChunks(host:HasStorageFileSystem, path:String, chunks:Dynamic):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeBinaryFileChunks(host, path, chunks);
     return cast null;
   }
 
-  public static function writeDialogHandleBinaryFile(handle:FileDialogHandle, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeDialogHandleBinaryFile(handle, data);
+  public static function writeDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeDialogHandleBinaryFile(host, handle, data);
     return cast null;
   }
 
-  public static function writeDialogHandleTextFile(handle:FileDialogHandle, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeDialogHandleTextFile(handle, data);
+  public static function writeDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeDialogHandleTextFile(host, handle, data);
     return cast null;
   }
 
-  public static function writeFileAtomic(path:String, data:flight._internal._Union2<flight._internal._UInt8Array, String>):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeFileAtomic(path, data);
+  public static function writeFileAtomic(host:HasStorageFileSystem, path:String, data:flight._internal._Union2<flight._internal._UInt8Array, String>):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeFileAtomic(host, path, data);
     return cast null;
   }
 
-  public static function writeTextFile(path:String, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeTextFile(path, data);
+  public static function writeTextFile(host:HasStorageFileSystem, path:String, data:String):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeTextFile(host, path, data);
     return cast null;
   }
 }

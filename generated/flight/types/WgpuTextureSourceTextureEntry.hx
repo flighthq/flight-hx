@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuTextureSourceTextureEntry = { var bindGroup:flight._internal.dom.GPUBindGroup; @:optional var bindGroupLinear:flight._internal.dom.GPUBindGroup; @:optional var bindGroupNearest:flight._internal.dom.GPUBindGroup; @:optional var straightAlpha:Bool; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; var version:Float; };
+typedef WgpuTextureSourceTextureEntry = { var mipLevelCount:Float; @:optional var straightAlpha:Bool; var texture:flight._internal.dom.GPUTexture; var view:flight._internal.dom.GPUTextureView; var bindings:WgpuTextureBindings; @:optional var sampler:flight._internal.dom.GPUSampler; var version:Float; };

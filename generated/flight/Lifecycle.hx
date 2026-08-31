@@ -7,11 +7,11 @@ import flight._Lifecycle as Facade_Lifecycle_flight__Lifecycle;
 import flight.types.AppLaunchKind;
 import flight.types.AppLifecycle;
 import flight.types.AppLifecycleState;
-import flight.types.BackendExplanation;
+import flight.types.HasSystemLifecycle;
 
 class Lifecycle {
-  public static function attachAppLifecycle(app:AppLifecycle):Void {
-    Facade_Lifecycle_flight__Lifecycle.attachAppLifecycle(app);
+  public static function attachAppLifecycle(host:HasSystemLifecycle, app:AppLifecycle):Void {
+    Facade_Lifecycle_flight__Lifecycle.attachAppLifecycle(host, app);
   }
 
   public static function createAppLifecycle():AppLifecycle {
@@ -27,33 +27,28 @@ class Lifecycle {
     Facade_Lifecycle_flight__Lifecycle.disposeAppLifecycle(app);
   }
 
-  public static function explainLifecycleBackend():BackendExplanation {
-    return cast Facade_Lifecycle_flight__Lifecycle.explainLifecycleBackend();
+  public static function getAppLaunchKind(host:HasSystemLifecycle):AppLaunchKind {
+    return cast Facade_Lifecycle_flight__Lifecycle.getAppLaunchKind(host);
     return cast null;
   }
 
-  public static function getAppLaunchKind():AppLaunchKind {
-    return cast Facade_Lifecycle_flight__Lifecycle.getAppLaunchKind();
+  public static function getAppLifecycleState(host:HasSystemLifecycle):AppLifecycleState {
+    return cast Facade_Lifecycle_flight__Lifecycle.getAppLifecycleState(host);
     return cast null;
   }
 
-  public static function getAppLifecycleState():AppLifecycleState {
-    return cast Facade_Lifecycle_flight__Lifecycle.getAppLifecycleState();
+  public static function isAppActive(host:HasSystemLifecycle):Bool {
+    return cast Facade_Lifecycle_flight__Lifecycle.isAppActive(host);
     return cast null;
   }
 
-  public static function isAppActive():Bool {
-    return cast Facade_Lifecycle_flight__Lifecycle.isAppActive();
+  public static function isAppBackground(host:HasSystemLifecycle):Bool {
+    return cast Facade_Lifecycle_flight__Lifecycle.isAppBackground(host);
     return cast null;
   }
 
-  public static function isAppBackground():Bool {
-    return cast Facade_Lifecycle_flight__Lifecycle.isAppBackground();
-    return cast null;
-  }
-
-  public static function isAppInactive():Bool {
-    return cast Facade_Lifecycle_flight__Lifecycle.isAppInactive();
+  public static function isAppInactive(host:HasSystemLifecycle):Bool {
+    return cast Facade_Lifecycle_flight__Lifecycle.isAppInactive(host);
     return cast null;
   }
 

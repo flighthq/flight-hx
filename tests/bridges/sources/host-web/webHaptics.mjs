@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebHaptics = api.enableHostWebHaptics;
-export const resetHostWebHapticsForTest = api.resetHostWebHapticsForTest;
+export const webHapticsBackend = api.webHapticsBackend;

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CapacitorSharePlugin = { var canShare:Void->flight._internal._Promise<CapacitorShareCanResult>; var share:CapacitorShareOptions->flight._internal._Promise<CapacitorShareResult>; };
+typedef CapacitorSharePlugin = { var share:CapacitorShareOptions->flight._internal._Promise<CapacitorShareResult>; };

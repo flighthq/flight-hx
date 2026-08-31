@@ -5,22 +5,12 @@ const api = compiled.flight._Dialog;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createWebDialogBackend = api.createWebDialogBackend;
-export const explainDialogBackend = api.explainDialogBackend;
-export const getDialogBackend = api.getDialogBackend;
-export const getWebDirectorySystemHandle = api.getWebDirectorySystemHandle;
-export const getWebFileSystemHandle = api.getWebFileSystemHandle;
-export const installDialogHostBackend = api.installDialogHostBackend;
-export const observeDialogHostResult = api.observeDialogHostResult;
-export const resetDialogBackendForTest = api.resetDialogBackendForTest;
-export const setDialogBackend = api.setDialogBackend;
 export const showConfirmDialog = api.showConfirmDialog;
 export const showErrorBox = api.showErrorBox;
 export const showErrorDialog = api.showErrorDialog;
 export const showInfoDialog = api.showInfoDialog;
 export const showMessageDialog = api.showMessageDialog;
-export const showOpenDirectoryDialog = api.showOpenDirectoryDialog;
-export const showOpenFileDialog = api.showOpenFileDialog;
 export const showPromptDialog = api.showPromptDialog;
-export const showSaveFileDialog = api.showSaveFileDialog;
 export const showWarningDialog = api.showWarningDialog;
+export const webMessageDialogBackend = api.webMessageDialogBackend;
+export const webPromptDialogBackend = api.webPromptDialogBackend;

@@ -11,6 +11,7 @@ export const bindGlBitmapTexture = api.bindGlBitmapTexture;
 export const bindGlCompressedImageTexture = api.bindGlCompressedImageTexture;
 export const bindGlImageResourceTexture = api.bindGlImageResourceTexture;
 export const bindGlTexture = api.bindGlTexture;
+export const bindGlTextureRealization = api.bindGlTextureRealization;
 export const bindGlVideoTexture = api.bindGlVideoTexture;
 export const createGlTexture = api.createGlTexture;
 export const drawGlQuad = api.drawGlQuad;

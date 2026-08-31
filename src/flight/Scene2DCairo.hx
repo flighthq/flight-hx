@@ -4,12 +4,18 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Scene2DCanvas as Facade_Scene2DCanvas_flight__Scene2DCanvas;
+import flight.types.CanvasPipeline;
+import flight.types.CanvasRenderRegistries;
 import flight.types.CanvasRenderState;
+import flight.types.CanvasRenderSurface;
+import flight.types.CanvasRenderSurfaceCreator;
+import flight.types.CanvasRenderSurfaceOptions;
 import flight.types.CanvasRenderTextureExplanation;
 import flight.types.CanvasRenderTexturePool;
 import flight.types.CanvasShapeCommand;
 import flight.types.CanvasTextureResolver;
 import flight.types.CanvasTextureResolvers;
+import flight.types.KeyedTable;
 import flight.types.Matrix;
 import flight.types.Node2D;
 import flight.types.RenderCache;
@@ -29,20 +35,26 @@ import flight.types.TextureResolutionExplanation;
 import flight.types.TextureSourceKind;
 
 class Scene2DCairo {
+  public static inline function acquireCairoRenderSurface(creator:CanvasRenderSurfaceCreator, options:CanvasRenderSurfaceOptions):Null<CanvasRenderSurface> { return flight.Scene2DCanvas.acquireCanvasRenderSurface(creator, options); }
   public static inline function acquireCairoRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture { return flight.Scene2DCanvas.acquireCanvasRenderTexture(state, pool, descriptor); }
   public static inline function bindCairoRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Null<flight._internal.dom.HTMLCanvasElement> { return flight.Scene2DCanvas.bindCanvasRenderTexture(state, renderTexture); }
+  public static inline function cairoShapeCommandTable():KeyedTable<CanvasShapeCommand<String>> { return flight.Scene2DCanvas.canvasShapeCommandTable(); }
   public static inline function connectCairoTextureResolverMisses(resolvers:CanvasTextureResolvers, state:RenderState):Void { flight.Scene2DCanvas.connectCanvasTextureResolverMisses(resolvers, state); }
-  public static inline function copyCairoRenderStateRegistrations(target:CanvasRenderState, source:CanvasRenderState):Void { flight.Scene2DCanvas.copyCanvasRenderStateRegistrations(target, source); }
-  public static inline function createCairoCacheState(screenState:CanvasRenderState):CanvasRenderState { return flight.Scene2DCanvas.createCanvasCacheState(screenState); }
-  public static inline function createCairoElement(width:Float, height:Float, ?pixelRatio:Float):flight._internal.dom.HTMLCanvasElement { return flight.Scene2DCanvas.createCanvasElement(width, height, pixelRatio); }
-  public static inline function createCairoOffscreenRenderState(screenState:CanvasRenderState):CanvasRenderState { return flight.Scene2DCanvas.createCanvasOffscreenRenderState(screenState); }
-  public static inline function createCairoRenderState(canvas:flight._internal.dom.HTMLCanvasElement, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState { return flight.Scene2DCanvas.createCanvasRenderState(canvas, options); }
-  public static inline function createCairoRenderTexturePool():CanvasRenderTexturePool { return flight.Scene2DCanvas.createCanvasRenderTexturePool(); }
+  public static inline function createCairoCacheState(ownerState:CanvasRenderState, surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState { return flight.Scene2DCanvas.createCanvasCacheState(ownerState, surface, pipeline, canvasTextureResolvers, options); }
+  public static inline function createCairoElement(creator:CanvasRenderSurfaceCreator, width:Float, height:Float, ?pixelRatio:Float):flight._internal.dom.HTMLCanvasElement { return flight.Scene2DCanvas.createCanvasElement(creator, width, height, pixelRatio); }
+  public static inline function createCairoOffscreenRenderState(surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState { return flight.Scene2DCanvas.createCanvasOffscreenRenderState(surface, pipeline, canvasTextureResolvers, options); }
+  public static inline function createCairoPipeline(registries:CanvasRenderRegistries):CanvasPipeline { return flight.Scene2DCanvas.createCanvasPipeline(registries); }
+  public static inline function createCairoRenderState(surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState { return flight.Scene2DCanvas.createCanvasRenderState(surface, pipeline, canvasTextureResolvers, options); }
+  public static inline function createCairoRenderSurface(creator:CanvasRenderSurfaceCreator, canvas:flight._internal.dom.HTMLCanvasElement, ?options:{ @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }):CanvasRenderSurface { return flight.Scene2DCanvas.createCanvasRenderSurface(creator, canvas, options); }
+  public static inline function createCairoRenderTexturePool(creator:CanvasRenderSurfaceCreator):CanvasRenderTexturePool { return flight.Scene2DCanvas.createCanvasRenderTexturePool(creator); }
   public static inline function createCairoShapeRasterizer(resolvers:CanvasTextureResolvers):ShapeRasterizer { return flight.Scene2DCanvas.createCanvasShapeRasterizer(resolvers); }
-  public static inline function createCairoTextureResolvers():CanvasTextureResolvers { return flight.Scene2DCanvas.createCanvasTextureResolvers(); }
+  public static inline function createCairoTextureResolvers(surfaceCreator:CanvasRenderSurfaceCreator):CanvasTextureResolvers { return flight.Scene2DCanvas.createCanvasTextureResolvers(surfaceCreator); }
+  public static inline function createEmptyCairoRegistries():CanvasRenderRegistries { return flight.Scene2DCanvas.createEmptyCanvasRegistries(); }
   public static inline function destroyCairoRenderState(state:CanvasRenderState):Void { flight.Scene2DCanvas.destroyCanvasRenderState(state); }
+  public static inline function destroyCairoRenderSurface(surface:CanvasRenderSurface):Void { flight.Scene2DCanvas.destroyCanvasRenderSurface(surface); }
   public static inline function destroyCairoRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Void { flight.Scene2DCanvas.destroyCanvasRenderTexture(state, renderTexture); }
   public static inline function destroyCairoRenderTexturePool(state:CanvasRenderState, pool:CanvasRenderTexturePool):Void { flight.Scene2DCanvas.destroyCanvasRenderTexturePool(state, pool); }
+  public static inline function destroyCairoTextureResolvers(resolvers:CanvasTextureResolvers):Void { flight.Scene2DCanvas.destroyCanvasTextureResolvers(resolvers); }
   public static inline function enableCairoBlendMode(state:CanvasRenderState):Void { flight.Scene2DCanvas.enableCanvasBlendMode(state); }
   public static inline function enableCairoClip(state:CanvasRenderState):Void { flight.Scene2DCanvas.enableCanvasClip(state); }
   public static inline function enableCairoRenderCache(state:RenderState):Void { flight.Scene2DCanvas.enableCanvasRenderCache(state); }
@@ -51,9 +63,10 @@ class Scene2DCairo {
   public static inline function explainCairoRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):CanvasRenderTextureExplanation { return flight.Scene2DCanvas.explainCanvasRenderTexture(state, renderTexture); }
   public static inline function explainCairoScene2DCoverage(out:Array<SceneCoverageEntry>, state:CanvasRenderState, usage:Scene2DKindUsage, catalog:SceneCoverageCatalog):Void { flight.Scene2DCanvas.explainCanvasScene2DCoverage(out, state, usage, catalog); }
   public static inline function explainCairoTextureResolution(resolvers:CanvasTextureResolvers, texture:Texture):TextureResolutionExplanation { return flight.Scene2DCanvas.explainCanvasTextureResolution(resolvers, texture); }
+  public static inline function getCairoPipelineRegistries(pipeline:CanvasPipeline):CanvasRenderRegistries { return flight.Scene2DCanvas.getCanvasPipelineRegistries(pipeline); }
   public static inline function getCairoRenderStateTextureResolvers(state:CanvasRenderState):CanvasTextureResolvers { return flight.Scene2DCanvas.getCanvasRenderStateTextureResolvers(state); }
   public static inline function hasCairoScene2DCoverage(state:CanvasRenderState, usage:Scene2DKindUsage):Bool { return flight.Scene2DCanvas.hasCanvasScene2DCoverage(state, usage); }
-  public static inline function refreshCairoRenderCache(cacheState:CanvasRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool { return flight.Scene2DCanvas.refreshCanvasRenderCache(cacheState, cache, source, options); }
+  public static inline function refreshCairoRenderCache(ownerState:CanvasRenderState, cacheState:CanvasRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool { return flight.Scene2DCanvas.refreshCanvasRenderCache(ownerState, cacheState, cache, source, options); }
   public static inline function registerCairoBitmapTextureResolver(resolvers:CanvasTextureResolvers):Void { flight.Scene2DCanvas.registerCanvasBitmapTextureResolver(resolvers); }
   public static inline function registerCairoImageTextureResolver(resolvers:CanvasTextureResolvers):Void { flight.Scene2DCanvas.registerCanvasImageTextureResolver(resolvers); }
   public static inline function registerCairoRenderTextureResolver(resolvers:CanvasTextureResolvers, state:CanvasRenderState):Void { flight.Scene2DCanvas.registerCanvasRenderTextureResolver(resolvers, state); }
@@ -62,7 +75,7 @@ class Scene2DCairo {
   public static inline function releaseCairoRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, renderTexture:RenderTexture):Void { flight.Scene2DCanvas.releaseCanvasRenderTexture(state, pool, renderTexture); }
   public static inline function renderCairoBackground(state:CanvasRenderState):Void { flight.Scene2DCanvas.renderCanvasBackground(state); }
   public static inline function renderCairoScene2D(state:CanvasRenderState, source:Node2D):Void { flight.Scene2DCanvas.renderCanvasScene2D(state, source); }
-  public static inline function renderIntoCairoRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void { flight.Scene2DCanvas.renderIntoCanvasRenderTexture(state, renderTexture, callback); }
+  public static inline function renderIntoCairoRenderTexture(ownerState:CanvasRenderState, renderState:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void { flight.Scene2DCanvas.renderIntoCanvasRenderTexture(ownerState, renderState, renderTexture, callback); }
   public static inline function setCairoRenderTransform2D(state:CanvasRenderState, transform:Matrix):Void { flight.Scene2DCanvas.setCanvasRenderTransform2D(state, transform); }
   public static inline function withCairoRenderTextures<T>(state:CanvasRenderState, pool:CanvasRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T { return flight.Scene2DCanvas.withCanvasRenderTextures(state, pool, descriptors, callback); }
   public static var defaultCairoBeginFill(get, never):CanvasShapeCommand<String>;
@@ -117,6 +130,8 @@ class Scene2DCairo {
   static inline function get_defaultCairoTextureShapeCommands():Array<CanvasShapeCommand<String>> return flight.Scene2DCanvas.defaultCanvasTextureShapeCommands;
   public static var defaultCairoTilemapRenderer(get, never):SpriteRenderer;
   static inline function get_defaultCairoTilemapRenderer():SpriteRenderer return flight.Scene2DCanvas.defaultCanvasTilemapRenderer;
+  public static var scene2dCairoPipeline(get, never):CanvasPipeline;
+  static inline function get_scene2dCairoPipeline():CanvasPipeline return flight.Scene2DCanvas.scene2dCanvasPipeline;
   #if lime
   /** Native window-backed presentable surface; handwritten in CairoSurface.hx. */
   public static inline function createCairoSurface(window:lime.ui.Window):flight._internal.dom.HTMLCanvasElement { return flight._internal.scene2DCairo.CairoSurface.createCairoSurface(window); }

@@ -5,21 +5,13 @@ const api = compiled.flight._MediaSession;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const clearMediaSessionActionHandler = api.clearMediaSessionActionHandler;
+export const attachMediaSessionAction = api.attachMediaSessionAction;
 export const clearMediaSessionMetadata = api.clearMediaSessionMetadata;
 export const clearMediaSessionPositionState = api.clearMediaSessionPositionState;
-export const createWebMediaSessionBackend = api.createWebMediaSessionBackend;
-export const destroyMediaSessionBackend = api.destroyMediaSessionBackend;
-export const explainMediaSessionBackend = api.explainMediaSessionBackend;
-export const explainMediaSessionOperation = api.explainMediaSessionOperation;
-export const getMediaSessionBackend = api.getMediaSessionBackend;
-export const hasMediaSessionHostBackend = api.hasMediaSessionHostBackend;
-export const hasMediaSessionOperation = api.hasMediaSessionOperation;
-export const installMediaSessionHostBackend = api.installMediaSessionHostBackend;
-export const observeMediaSessionHostResult = api.observeMediaSessionHostResult;
-export const resetMediaSessionBackendForTest = api.resetMediaSessionBackendForTest;
-export const setMediaSessionActionHandler = api.setMediaSessionActionHandler;
-export const setMediaSessionBackend = api.setMediaSessionBackend;
+export const createMediaSessionActionSignal = api.createMediaSessionActionSignal;
+export const destroyMediaSession = api.destroyMediaSession;
+export const detachMediaSessionAction = api.detachMediaSessionAction;
+export const disposeMediaSessionActionSignal = api.disposeMediaSessionActionSignal;
 export const setMediaSessionMetadata = api.setMediaSessionMetadata;
 export const setMediaSessionPlaybackState = api.setMediaSessionPlaybackState;
 export const setMediaSessionPositionState = api.setMediaSessionPositionState;

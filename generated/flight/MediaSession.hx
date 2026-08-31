@@ -4,44 +4,64 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._MediaSession as Facade_MediaSession_flight__MediaSession;
-import flight.types.BackendExplanation;
+import flight.types.HasMediaSession;
+import flight.types.HasMediaSessionAction;
 import flight.types.MediaSessionAction;
-import flight.types.MediaSessionActionDetails;
+import flight.types.MediaSessionActionSignal;
+import flight.types.MediaSessionClearMetadataOutcome;
+import flight.types.MediaSessionClearPositionStateOutcome;
 import flight.types.MediaSessionMetadata;
 import flight.types.MediaSessionPlaybackState;
 import flight.types.MediaSessionPositionState;
+import flight.types.MediaSessionSetMetadataOutcome;
+import flight.types.MediaSessionSetPlaybackStateOutcome;
+import flight.types.MediaSessionSetPositionStateOutcome;
 
 class MediaSession {
-  public static function clearMediaSessionActionHandler(action:MediaSessionAction):Void {
-    Facade_MediaSession_flight__MediaSession.clearMediaSessionActionHandler(action);
-  }
-
-  public static function clearMediaSessionMetadata():Void {
-    Facade_MediaSession_flight__MediaSession.clearMediaSessionMetadata();
-  }
-
-  public static function clearMediaSessionPositionState():Void {
-    Facade_MediaSession_flight__MediaSession.clearMediaSessionPositionState();
-  }
-
-  public static function explainMediaSessionBackend():BackendExplanation {
-    return cast Facade_MediaSession_flight__MediaSession.explainMediaSessionBackend();
+  public static function attachMediaSessionAction(host:HasMediaSessionAction, signal:MediaSessionActionSignal):Bool {
+    return cast Facade_MediaSession_flight__MediaSession.attachMediaSessionAction(host, signal);
     return cast null;
   }
 
-  public static function setMediaSessionActionHandler(action:MediaSessionAction, handler:MediaSessionActionDetails->Void):Void {
-    Facade_MediaSession_flight__MediaSession.setMediaSessionActionHandler(action, handler);
+  public static function clearMediaSessionMetadata(host:HasMediaSession):MediaSessionClearMetadataOutcome {
+    return cast Facade_MediaSession_flight__MediaSession.clearMediaSessionMetadata(host);
+    return cast null;
   }
 
-  public static function setMediaSessionMetadata(metadata:MediaSessionMetadata):Void {
-    Facade_MediaSession_flight__MediaSession.setMediaSessionMetadata(metadata);
+  public static function clearMediaSessionPositionState(host:HasMediaSession):MediaSessionClearPositionStateOutcome {
+    return cast Facade_MediaSession_flight__MediaSession.clearMediaSessionPositionState(host);
+    return cast null;
   }
 
-  public static function setMediaSessionPlaybackState(state:MediaSessionPlaybackState):Void {
-    Facade_MediaSession_flight__MediaSession.setMediaSessionPlaybackState(state);
+  public static function createMediaSessionActionSignal(action:MediaSessionAction):MediaSessionActionSignal {
+    return cast Facade_MediaSession_flight__MediaSession.createMediaSessionActionSignal(action);
+    return cast null;
   }
 
-  public static function setMediaSessionPositionState(state:MediaSessionPositionState):Void {
-    Facade_MediaSession_flight__MediaSession.setMediaSessionPositionState(state);
+  public static function destroyMediaSession(host:{ >HasMediaSession, >HasMediaSessionAction, }):Void {
+    Facade_MediaSession_flight__MediaSession.destroyMediaSession(host);
+  }
+
+  public static function detachMediaSessionAction(signal:MediaSessionActionSignal):Void {
+    Facade_MediaSession_flight__MediaSession.detachMediaSessionAction(signal);
+  }
+
+  public static function disposeMediaSessionActionSignal(signal:MediaSessionActionSignal):Void {
+    Facade_MediaSession_flight__MediaSession.disposeMediaSessionActionSignal(signal);
+  }
+
+  public static function setMediaSessionMetadata(host:HasMediaSession, metadata:MediaSessionMetadata):MediaSessionSetMetadataOutcome {
+    return cast Facade_MediaSession_flight__MediaSession.setMediaSessionMetadata(host, metadata);
+    return cast null;
+  }
+
+  public static function setMediaSessionPlaybackState(host:HasMediaSession, state:MediaSessionPlaybackState):MediaSessionSetPlaybackStateOutcome {
+    return cast Facade_MediaSession_flight__MediaSession.setMediaSessionPlaybackState(host, state);
+    return cast null;
+  }
+
+  public static function setMediaSessionPositionState(host:HasMediaSession, state:MediaSessionPositionState):MediaSessionSetPositionStateOutcome {
+    return cast Facade_MediaSession_flight__MediaSession.setMediaSessionPositionState(host, state);
+    return cast null;
   }
 }

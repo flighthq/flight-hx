@@ -3,114 +3,37 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight._Log.logOnce;
-import flight._Platform.getPlatformName;
+import flight._Entity.createEntity;
 import flight._Signals.clearSignal;
 import flight._Signals.createSignal;
 import flight._Signals.emitSignal;
 import flight.types.Accelerator;
 import flight.types.AcceleratorParseError;
-import flight.types.AcceleratorParseErrorReason;
-import flight.types.BackendExplanation;
-import flight.types.GlobalShortcutBlockReason;
-import flight.types.GlobalShortcutExplanation;
-import flight.types.LogLevel;
+import flight.types.CreateGlobalShortcutOutcome;
+import flight.types.Entity;
+import flight.types.GlobalShortcut;
+import flight.types.GlobalShortcutAttachOutcome;
+import flight.types.GlobalShortcutDetachOutcome;
+import flight.types.GlobalShortcutQueryOutcome;
+import flight.types.HasShortcutQuery;
+import flight.types.HasShortcutTrigger;
 import flight.types.ParsedAccelerator;
 import flight.types.PlatformName;
-import flight.types.ShortcutBackend;
-import flight.types.ShortcutDrop;
-import flight.types.ShortcutDropGuard;
-import flight.types.ShortcutDropReason;
-import flight.types.ShortcutEvent;
 import flight.types.ShortcutKeyName;
 import flight.types.ShortcutModifier;
-import flight.types.ShortcutOperation;
-import flight.types.ShortcutSignals;
+import flight.types.ShortcutQueryBackend;
+import flight.types.ShortcutTriggerBackend;
+import flight.types.ShortcutTriggerSubscribeOutcome;
+import flight.types.ShortcutTriggerSubscription;
+import flight.types.ShortcutTriggerUnsubscribeOutcome;
 import flight.types.Signal;
 
 typedef _Parsed__shortcut = { var key:ShortcutKeyName; var modifiers:Array<ShortcutModifier>; };
 
+typedef GlobalShortcutAttachment__shortcutExplicitDependency = { var provider:ShortcutTriggerBackend; var subscription:ShortcutTriggerSubscription; };
+
 @:noCompletion
 class _Shortcut {
-  public static function disableShortcutGuards():Void {
-    setShortcutDropGuard((cast null : Dynamic));
-  }
-
-  public static function enableShortcutGuards():Void {
-    setShortcutDropGuard((cast _Shortcut.warnOnShortcutDrop__enableShortcutGuards : Dynamic));
-  }
-
-  public static function warnOnShortcutDrop__enableShortcutGuards(drop:ShortcutDrop):Void {
-    var parseError:Null<AcceleratorParseError> = cast _Runtime.UNDEFINED;
-    var detail:String = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(drop, 'reason'), 'no-native-backend') : Bool)) {
-      (cast logOnce((cast 'shortcut:no-native-backend' : String), ({ final __callArgument0:Dynamic = LogLevel.Warn; __callArgument0; }), (cast { message: '' + Std.string(_Runtime.field(drop, 'operation')) + ': no native shortcut backend is installed, so the default web backend handled this call — a browser cannot register OS-level global hotkeys. Call setShortcutBackend(...) from a native host (Electron/Tauri), and gate the feature on hasNativeShortcutBackend().' } : Dynamic), ({ final __callArgument1:Dynamic = 'shortcut'; __callArgument1; })) : Bool);
-      return;
-    }
-    parseError = _Runtime.field(drop, 'parseError');
-    detail = ((cast _Runtime.strictEquals(parseError, null) : Bool) ? (cast 'it did not parse' : Dynamic) : (cast '' + Std.string((cast parseError : AcceleratorParseError).reason) + '' + Std.string(((cast _Runtime.strictEquals((cast parseError : AcceleratorParseError).token, '') : Bool) ? (cast '' : Dynamic) : (cast ' at \'' + Std.string((cast parseError : AcceleratorParseError).token) + '\'' : Dynamic))) + '' : Dynamic));
-    (cast logOnce((cast 'shortcut:unparseable-accelerator' : String), ({ final __callArgument4:Dynamic = LogLevel.Warn; __callArgument4; }), (cast { message: '' + Std.string(_Runtime.field(drop, 'operation')) + '(\'' + Std.string(_Runtime.field(drop, 'accelerator')) + '\'): the accelerator was dropped because ' + Std.string(detail) + '. Check the spelling against parseAcceleratorDetailed, or explainGlobalShortcutRegistration for the whole picture.' } : Dynamic), ({ final __callArgument5:Dynamic = 'shortcut'; __callArgument5; })) : Bool);
-  }
-
-  public static function explainGlobalShortcutRegistration(accelerator:String):GlobalShortcutExplanation {
-    var parsed:flight._internal._Union2<ParsedAccelerator, AcceleratorParseError> = cast _Runtime.UNDEFINED;
-    var failed:Bool = cast _Runtime.UNDEFINED;
-    var parseError:Null<AcceleratorParseError> = cast _Runtime.UNDEFINED;
-    var normalized:Null<String> = cast _Runtime.UNDEFINED;
-    var hasBackend:Bool = cast _Runtime.UNDEFINED;
-    var registered:Bool = cast _Runtime.UNDEFINED;
-    var reason:GlobalShortcutBlockReason = cast _Runtime.UNDEFINED;
-    parsed = (cast parseAcceleratorDetailed((cast accelerator : String), (cast createParsedAccelerator() : ParsedAccelerator)) : flight._internal._Union2<ParsedAccelerator, AcceleratorParseError>);
-    failed = _Runtime.hasField(parsed, 'reason');
-    parseError = ((cast failed : Bool) ? (cast parsed : Dynamic) : (cast null : Dynamic));
-    normalized = ((cast failed : Bool) ? (cast null : Dynamic) : (cast (cast _Shortcut._joinNormalized__explainGlobalShortcutRegistration(({ final __callArgument8:Dynamic = (cast parsed : { var modifiers:Array<ShortcutModifier>; }).modifiers; __callArgument8; }), (cast (cast parsed : { var key:String; }).key : String)) : String) : Dynamic));
-    hasBackend = (cast hasNativeShortcutBackend() : Bool);
-    registered = ((cast !_Runtime.strictEquals(normalized, null) : Bool) && (cast (cast isGlobalShortcutRegistered((cast normalized : String)) : Bool) : Bool));
-    if ((cast failed : Bool)) { (reason = cast ('unparseable' : Dynamic)); } else { if ((cast !(cast hasBackend : Bool) : Bool)) { (reason = cast ('no-native-backend' : Dynamic)); } else { if ((cast registered : Bool)) { (reason = cast ('already-registered' : Dynamic)); } else { (reason = cast ('ok' : Dynamic)); } } }
-    return cast { accelerator: accelerator, hasNativeBackend: hasBackend, normalized: normalized, parseError: parseError, registered: registered, reason: reason };
-    return cast null;
-  }
-
-  public static function _joinNormalized__explainGlobalShortcutRegistration(modifiers:Array<String>, key:String):String {
-    if ((cast _Runtime.strictEquals(_Runtime.field(modifiers, 'length'), 0.0) : Bool)) { return cast key; }
-    return cast _Runtime.join(_Runtime.concatArrays([_Runtime.toArray(modifiers), [key]]), '+');
-    return cast null;
-  }
-
-  public static function createParsedAccelerator():ParsedAccelerator {
-    return cast { key: '', modifiers: cast ([] : Array<Dynamic>) };
-    return cast null;
-  }
-
-  public static function disableGlobalShortcut(accelerator:String):Bool {
-    var normalized:Null<String> = cast _Runtime.UNDEFINED;
-    normalized = (cast _Shortcut._normalizeForCommand__shortcut((cast accelerator : String), ({ final __callArgument10:Dynamic = 'disableGlobalShortcut'; __callArgument10; })) : Null<String>);
-    if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
-    return cast (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).setEnabled((cast normalized : String), (cast false : Bool));
-    return cast null;
-  }
-
-  public static function disposeGlobalShortcutSignals():Void {
-    if ((cast _Runtime.strictEquals(_Shortcut._signals__shortcut, null) : Bool)) { return; }
-    clearSignal((cast (cast _Shortcut._signals__shortcut : { var onTrigger:Signal<ShortcutEvent->Void>; }).onTrigger : Dynamic));
-    (_Shortcut._signals__shortcut = cast (null : Dynamic));
-  }
-
-  public static function enableGlobalShortcut(accelerator:String):Bool {
-    var normalized:Null<String> = cast _Runtime.UNDEFINED;
-    normalized = (cast _Shortcut._normalizeForCommand__shortcut((cast accelerator : String), ({ final __callArgument12:Dynamic = 'enableGlobalShortcut'; __callArgument12; })) : Null<String>);
-    if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
-    return cast (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).setEnabled((cast normalized : String), (cast true : Bool));
-    return cast null;
-  }
-
-  public static function enableGlobalShortcutSignals():ShortcutSignals {
-    if ((cast !_Runtime.strictEquals(_Shortcut._signals__shortcut, null) : Bool)) { return cast _Shortcut._signals__shortcut; }
-    (_Shortcut._signals__shortcut = cast ({ onTrigger: (cast createSignal() : Signal<ShortcutEvent->Void>) } : Dynamic));
-    return cast _Shortcut._signals__shortcut;
-    return cast null;
-  }
-
   public static function equalsAccelerator(a:String, b:String):Bool {
     var na:Null<String> = cast _Runtime.UNDEFINED;
     var nb:Null<String> = cast _Runtime.UNDEFINED;
@@ -118,17 +41,6 @@ class _Shortcut {
     nb = (cast normalizeAccelerator((cast b : String)) : Null<String>);
     if ((cast ((cast _Runtime.strictEquals(na, null) : Bool) || (cast _Runtime.strictEquals(nb, null) : Bool)) : Bool)) { return cast false; }
     return cast _Runtime.strictEquals(na, nb);
-    return cast null;
-  }
-
-  public static function explainShortcutBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Shortcut._custom__shortcut, null) : Bool)) {
-      return cast { conflict: _Shortcut._hostConflict__shortcut, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Shortcut._host__shortcut, null) : Bool)) {
-      return cast { conflict: _Shortcut._hostConflict__shortcut, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Shortcut._hostObservation__shortcut, null) : Bool) ? (cast (cast _Shortcut._hostObservation__shortcut : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Shortcut._hostObservation__shortcut, null) : Bool) ? (cast (cast _Shortcut._hostObservation__shortcut : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
     return cast null;
   }
 
@@ -143,16 +55,16 @@ class _Shortcut {
     return cast null;
   }
 
-  public static function formatAcceleratorForDisplay(accelerator:String, ?platform:String):String {
+  public static function formatAcceleratorForDisplay(accelerator:String, platform:PlatformName):String {
     var result:Null<_Parsed__shortcut> = cast _Runtime.UNDEFINED;
     var isMac:Bool = cast _Runtime.UNDEFINED;
     var parts:Array<String> = cast _Runtime.UNDEFINED;
     result = (cast _Shortcut._parse__shortcut((cast accelerator : String)) : Null<_Parsed__shortcut>);
     if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast ''; }
-    isMac = (cast _Shortcut._isMacOS__shortcut(({ final __callArgument16:Dynamic = platform; __callArgument16; })) : Bool);
+    isMac = (cast _Shortcut._isMacOS__shortcut(({ final __callArgument2:Dynamic = platform; __callArgument2; })) : Bool);
     parts = (cast cast ([] : Array<Dynamic>));
     for (mod in _Runtime.iterable((cast result : _Parsed__shortcut).modifiers)) {
-      var resolved:String = ((cast _Runtime.strictEquals(mod, 'CommandOrControl') : Bool) ? (cast (cast resolveCommandOrControlModifier(({ final __callArgument20:Dynamic = platform; __callArgument20; })) : String) : Dynamic) : (cast mod : Dynamic));
+      var resolved:String = ((cast _Runtime.strictEquals(mod, 'CommandOrControl') : Bool) ? (cast (cast resolveCommandOrControlModifier(({ final __callArgument6:Dynamic = platform; __callArgument6; })) : String) : Dynamic) : (cast mod : Dynamic));
       _Runtime.callProperty(parts, 'push', cast ([(cast _Shortcut._getModifierLabel__shortcut((cast resolved : String), (cast isMac : Bool)) : String)] : Array<Dynamic>));
     }
     _Runtime.callProperty(parts, 'push', cast ([(cast getAcceleratorKeyLabel((cast result : _Parsed__shortcut).key) : String)] : Array<Dynamic>));
@@ -172,10 +84,10 @@ class _Shortcut {
     return cast null;
   }
 
-  public static function getAcceleratorModifierLabel(modifier:ShortcutModifier, ?platform:String):String {
+  public static function getAcceleratorModifierLabel(modifier:ShortcutModifier, platform:PlatformName):String {
     var resolved:String = cast _Runtime.UNDEFINED;
-    resolved = ((cast _Runtime.strictEquals(modifier, 'CommandOrControl') : Bool) ? (cast (cast resolveCommandOrControlModifier(({ final __callArgument22:Dynamic = platform; __callArgument22; })) : String) : Dynamic) : (cast modifier : Dynamic));
-    return cast (cast _Shortcut._getModifierLabel__shortcut((cast resolved : String), (cast (cast _Shortcut._isMacOS__shortcut(({ final __callArgument24:Dynamic = platform; __callArgument24; })) : Bool) : Bool)) : String);
+    resolved = ((cast _Runtime.strictEquals(modifier, 'CommandOrControl') : Bool) ? (cast (cast resolveCommandOrControlModifier(({ final __callArgument8:Dynamic = platform; __callArgument8; })) : String) : Dynamic) : (cast modifier : Dynamic));
+    return cast (cast _Shortcut._getModifierLabel__shortcut((cast resolved : String), (cast (cast _Shortcut._isMacOS__shortcut(({ final __callArgument10:Dynamic = platform; __callArgument10; })) : Bool) : Bool)) : String);
     return cast null;
   }
 
@@ -191,59 +103,13 @@ class _Shortcut {
     return cast null;
   }
 
-  public static function getRegisteredGlobalShortcuts():Array<Accelerator> {
-    var raw:Array<String> = cast _Runtime.UNDEFINED;
-    var result:Array<Accelerator> = cast _Runtime.UNDEFINED;
-    raw = (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).getRegistered();
-    result = (cast cast ([] : Array<Dynamic>));
-    for (entry in _Runtime.iterable(raw)) {
-      var normalized:Null<String> = (cast normalizeAccelerator((cast entry : String)) : Null<String>);
-      if ((cast !_Runtime.strictEquals(normalized, null) : Bool)) { _Runtime.callProperty(result, 'push', cast ([normalized] : Array<Dynamic>)); }
-    }
-    return cast result;
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function getShortcutBackend():ShortcutBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Shortcut._custom__shortcut, function():Dynamic return cast _Shortcut._host__shortcut), function():Dynamic return cast _Shortcut._sentinel__shortcut);
-    return cast null;
-  }
-
-  public static function hasGlobalShortcutConflict(accelerator:String):Bool {
-    var normalized:Null<String> = cast _Runtime.UNDEFINED;
-    normalized = (cast normalizeAccelerator((cast accelerator : String)) : Null<String>);
-    if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
-    return cast (cast isGlobalShortcutRegistered((cast normalized : String)) : Bool);
-    return cast null;
-  }
-
-  public static function hasNativeShortcutBackend():Bool {
-    return cast ((cast !_Runtime.strictEquals(_Shortcut._custom__shortcut, null) : Bool) || (cast !_Runtime.strictEquals(_Shortcut._host__shortcut, null) : Bool));
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installShortcutHostBackend(backend:ShortcutBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Shortcut._host__shortcut, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Shortcut._host__shortcut, backend) : Bool)) { (_Shortcut._hostConflict__shortcut = cast (true : Dynamic)); }
-      return;
-    }
-    (_Shortcut._host__shortcut = cast (backend : Dynamic));
-  }
-
   public static function isAcceleratorValid(input:String):Bool {
     return cast !_Runtime.strictEquals((cast _Shortcut._parse__shortcut((cast input : String)) : Null<_Parsed__shortcut>), null);
     return cast null;
   }
 
-  public static function isGlobalShortcutRegistered(accelerator:String):Bool {
-    var normalized:Null<String> = cast _Runtime.UNDEFINED;
-    normalized = (cast normalizeAccelerator((cast accelerator : String)) : Null<String>);
-    if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
-    return cast (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).isRegistered((cast normalized : String));
+  public static function makeParsedAccelerator():ParsedAccelerator {
+    return cast { key: '', modifiers: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
@@ -255,17 +121,11 @@ class _Shortcut {
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function observeShortcutHostResult(operation:String, succeeded:Bool):Void {
-    (_Shortcut._hostObservation__shortcut = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
-  }
-
   public static function parseAccelerator(input:String, out:ParsedAccelerator):Null<ParsedAccelerator> {
     var result:Null<_Parsed__shortcut> = cast _Runtime.UNDEFINED;
     result = (cast _Shortcut._parse__shortcut((cast input : String)) : Null<_Parsed__shortcut>);
     if ((cast _Runtime.strictEquals(result, null) : Bool)) { return cast null; }
-    return cast (cast _Shortcut._copyParsed__shortcut((cast result : Dynamic), ({ final __callArgument32:Dynamic = out; __callArgument32; })) : ParsedAccelerator);
+    return cast (cast _Shortcut._copyParsed__shortcut((cast result : Dynamic), ({ final __callArgument16:Dynamic = out; __callArgument16; })) : ParsedAccelerator);
     return cast null;
   }
 
@@ -273,106 +133,14 @@ class _Shortcut {
     var result:flight._internal._Union2<_Parsed__shortcut, AcceleratorParseError> = cast _Runtime.UNDEFINED;
     result = (cast _Shortcut._parseDetailed__shortcut((cast input : String)) : flight._internal._Union2<_Parsed__shortcut, AcceleratorParseError>);
     if ((cast _Runtime.hasField(result, 'reason') : Bool)) { return cast result; }
-    return cast (cast _Shortcut._copyParsed__shortcut((cast result : Dynamic), ({ final __callArgument34:Dynamic = out; __callArgument34; })) : ParsedAccelerator);
+    return cast (cast _Shortcut._copyParsed__shortcut((cast result : Dynamic), ({ final __callArgument18:Dynamic = out; __callArgument18; })) : ParsedAccelerator);
     return cast null;
   }
 
-  public static function registerGlobalShortcut(accelerator:String, handler:ShortcutEvent->Void):Bool {
-    var normalized:Null<String> = cast _Runtime.UNDEFINED;
-    var wrappedHandler:ShortcutEvent->Void = cast _Runtime.UNDEFINED;
-    normalized = (cast _Shortcut._normalizeForCommand__shortcut((cast accelerator : String), ({ final __callArgument36:Dynamic = 'registerGlobalShortcut'; __callArgument36; })) : Null<String>);
-    if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
-    wrappedHandler = (cast function(event:ShortcutEvent):Void {
-      handler(({ final __callArgument38:Dynamic = event; __callArgument38; }));
-      if ((cast !_Runtime.strictEquals(_Shortcut._signals__shortcut, null) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast _Shortcut._signals__shortcut : { var onTrigger:Signal<ShortcutEvent->Void>; }).onTrigger], [event]]), 1); }
-    });
-    return cast (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).register((cast normalized : String), ({ final __callArgument40:Dynamic = wrappedHandler; __callArgument40; }));
+  public static function resolveCommandOrControlModifier(platform:PlatformName):flight._internal._Exclude<ShortcutModifier, String> {
+    return cast ((cast (cast _Shortcut._isMacOS__shortcut(({ final __callArgument20:Dynamic = platform; __callArgument20; })) : Bool) : Bool) ? (cast 'Meta' : Dynamic) : (cast 'Control' : Dynamic));
     return cast null;
   }
-
-  @:allow(flight)
-  @:keep
-  private static function resetShortcutBackendForTest():Void {
-    (_Shortcut._custom__shortcut = cast (null : Dynamic));
-    (_Shortcut._host__shortcut = cast (null : Dynamic));
-    (_Shortcut._hostConflict__shortcut = cast (false : Dynamic));
-    (_Shortcut._hostObservation__shortcut = cast (null : Dynamic));
-  }
-
-  public static function resolveCommandOrControlModifier(?platform:String):flight._internal._Exclude<ShortcutModifier, String> {
-    return cast ((cast (cast _Shortcut._isMacOS__shortcut(({ final __callArgument41:Dynamic = platform; __callArgument41; })) : Bool) : Bool) ? (cast 'Meta' : Dynamic) : (cast 'Control' : Dynamic));
-    return cast null;
-  }
-
-  public static function resumeAllGlobalShortcuts():Void {
-    _Shortcut._reportNoNativeBackend__shortcut(({ final __callArgument43:Dynamic = 'resumeAllGlobalShortcuts'; __callArgument43; }), (cast '' : String));
-    (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).setAllEnabled((cast true : Bool));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function setShortcutBackend(backend:Null<ShortcutBackend>):Void {
-    (_Shortcut._custom__shortcut = cast (backend : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function setShortcutDropGuard(guard:Null<ShortcutDropGuard>):Void {
-    (_Shortcut._dropGuard__shortcut = cast (guard : Dynamic));
-  }
-
-  public static function suspendAllGlobalShortcuts():Void {
-    _Shortcut._reportNoNativeBackend__shortcut(({ final __callArgument45:Dynamic = 'suspendAllGlobalShortcuts'; __callArgument45; }), (cast '' : String));
-    (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).setAllEnabled((cast false : Bool));
-  }
-
-  public static function unregisterAllGlobalShortcuts():Void {
-    _Shortcut._reportNoNativeBackend__shortcut(({ final __callArgument47:Dynamic = 'unregisterAllGlobalShortcuts'; __callArgument47; }), (cast '' : String));
-    (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).unregisterAll();
-  }
-
-  public static function unregisterGlobalShortcut(accelerator:String):Bool {
-    var normalized:Null<String> = cast _Runtime.UNDEFINED;
-    normalized = (cast _Shortcut._normalizeForCommand__shortcut((cast accelerator : String), ({ final __callArgument49:Dynamic = 'unregisterGlobalShortcut'; __callArgument49; })) : Null<String>);
-    if ((cast _Runtime.strictEquals(normalized, null) : Bool)) { return cast false; }
-    return cast (cast (cast getShortcutBackend() : ShortcutBackend) : ShortcutBackend).unregister((cast normalized : String));
-    return cast null;
-  }
-
-  public static var _custom__shortcut:Null<ShortcutBackend> = _Runtime.explicitNull();
-
-  public static var _host__shortcut:Null<ShortcutBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__shortcut:Bool = false;
-
-  public static var _hostObservation__shortcut:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
-
-  public static var _signals__shortcut:Null<ShortcutSignals> = _Runtime.explicitNull();
-
-  public static var _dropGuard__shortcut:Null<ShortcutDropGuard> = _Runtime.explicitNull();
-
-  public static final _emptyList__shortcut:Array<String> = (cast cast ([] : Array<Dynamic>));
-
-  public static final _sentinel__shortcut:ShortcutBackend = (cast { getRegistered: function():Array<String> {
-    return cast _Shortcut._emptyList__shortcut;
-    return cast _Runtime.UNDEFINED;
-  }, isRegistered: function(accelerator:String):Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, register: function(accelerator:String, listener:ShortcutEvent->Void):Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, setAllEnabled: function(enabled:Bool):Void {
-
-  }, setEnabled: function(accelerator:String, enabled:Bool):Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, unregister: function(accelerator:String):Bool {
-    return cast false;
-    return cast _Runtime.UNDEFINED;
-  }, unregisterAll: function():Void {
-
-  } });
 
   public static final _modifierOrder__shortcut:Array<ShortcutModifier> = (cast cast (['Control', 'Alt', 'Shift', 'Meta', 'Super', 'CommandOrControl'] : Array<Dynamic>));
 
@@ -407,9 +175,8 @@ class _Shortcut {
     return cast null;
   }
 
-  public static function _isMacOS__shortcut(?platform:String):Bool {
-    if ((cast !_Runtime.strictEquals(platform, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _Runtime.callProperty(_Runtime.regexp('^mac', 'i'), 'test', cast ([platform] : Array<Dynamic>)); }
-    return cast _Runtime.strictEquals((cast getPlatformName() : PlatformName), 'macos');
+  public static function _isMacOS__shortcut(platform:PlatformName):Bool {
+    return cast _Runtime.strictEquals(platform, 'macos');
     return cast null;
   }
 
@@ -429,19 +196,6 @@ class _Shortcut {
     return cast null;
   }
 
-  public static function _normalizeForCommand__shortcut(accelerator:String, operation:ShortcutOperation):Null<Accelerator> {
-    var result:flight._internal._Union2<_Parsed__shortcut, AcceleratorParseError> = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Shortcut._dropGuard__shortcut, null) : Bool)) { return cast (cast normalizeAccelerator((cast accelerator : String)) : Null<String>); }
-    result = (cast _Shortcut._parseDetailed__shortcut((cast accelerator : String)) : flight._internal._Union2<_Parsed__shortcut, AcceleratorParseError>);
-    if ((cast _Runtime.hasField(result, 'reason') : Bool)) {
-      _Shortcut._dropGuard__shortcut(({ final __callArgument53:Dynamic = { accelerator: accelerator, operation: operation, parseError: result, reason: 'unparseable' }; __callArgument53; }));
-      return cast null;
-    }
-    _Shortcut._reportNoNativeBackend__shortcut(({ final __callArgument55:Dynamic = operation; __callArgument55; }), (cast accelerator : String));
-    return cast (cast _Shortcut._formatNormalized__shortcut((cast result : Dynamic)) : String);
-    return cast null;
-  }
-
   public static function _parse__shortcut(input:String):Null<_Parsed__shortcut> {
     var result:flight._internal._Union2<_Parsed__shortcut, AcceleratorParseError> = cast _Runtime.UNDEFINED;
     result = (cast _Shortcut._parseDetailed__shortcut((cast input : String)) : flight._internal._Union2<_Parsed__shortcut, AcceleratorParseError>);
@@ -455,7 +209,7 @@ class _Shortcut {
     var modifiers:Array<ShortcutModifier> = cast _Runtime.UNDEFINED;
     var key:Null<String> = cast _Runtime.UNDEFINED;
     var canonicalKey:Null<String> = cast _Runtime.UNDEFINED;
-    tokens = (cast _Shortcut._splitTokens__shortcut((cast StringTools.trim(Std.string(input)) : String), ({ final __callArgument57:Dynamic = _Shortcut._tokenScratch__shortcut; __callArgument57; })) : Array<String>);
+    tokens = (cast _Shortcut._splitTokens__shortcut((cast StringTools.trim(Std.string(input)) : String), ({ final __callArgument24:Dynamic = _Shortcut._tokenScratch__shortcut; __callArgument24; })) : Array<String>);
     if ((cast _Runtime.strictEquals(_Runtime.field(tokens, 'length'), 0.0) : Bool)) {
       return cast { reason: 'empty', token: '' };
     }
@@ -488,11 +242,6 @@ class _Shortcut {
     return cast null;
   }
 
-  public static function _reportNoNativeBackend__shortcut(operation:ShortcutOperation, accelerator:String):Void {
-    if ((cast ((cast ((cast _Runtime.strictEquals(_Shortcut._dropGuard__shortcut, null) : Bool) || (cast !_Runtime.strictEquals(_Shortcut._custom__shortcut, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Shortcut._host__shortcut, null) : Bool)) : Bool)) { return; }
-    _Shortcut._dropGuard__shortcut(({ final __callArgument61:Dynamic = { accelerator: accelerator, operation: operation, parseError: null, reason: 'no-native-backend' }; __callArgument61; }));
-  }
-
   public static function _splitTokens__shortcut(input:String, out:Array<String>):Array<String> {
     var start:Float = cast _Runtime.UNDEFINED;
     _Runtime.setLength(out, 0.0);
@@ -514,4 +263,266 @@ class _Shortcut {
   }
 
   public static final _tokenScratch__shortcut:Array<String> = (cast cast ([] : Array<Dynamic>));
+
+  public static final ALREADY_ATTACHED__shortcutExplicitDependency:{ var reason:String; } = (cast flight._internal.DynamicObject.freeze({ reason: 'already-attached' }) : GlobalShortcutAttachOutcome);
+
+  public static final ALREADY_REGISTERED__shortcutExplicitDependency:{ var reason:String; } = (cast flight._internal.DynamicObject.freeze({ reason: 'already-registered' }) : GlobalShortcutAttachOutcome);
+
+  public static final ATTACHED__shortcutExplicitDependency:{ var reason:String; } = (cast flight._internal.DynamicObject.freeze({ reason: 'attached' }) : GlobalShortcutAttachOutcome);
+
+  public static final DETACHED__shortcutExplicitDependency:{ var reason:String; } = (cast flight._internal.DynamicObject.freeze({ reason: 'detached' }) : GlobalShortcutDetachOutcome);
+
+  public static final NATIVE_REFUSED__shortcutExplicitDependency:{ var reason:String; } = (cast flight._internal.DynamicObject.freeze({ reason: 'native-refused' }) : GlobalShortcutAttachOutcome);
+
+  public static final NOT_ATTACHED__shortcutExplicitDependency:{ var reason:String; } = (cast flight._internal.DynamicObject.freeze({ reason: 'not-attached' }) : GlobalShortcutDetachOutcome);
+
+  public static final NOT_REGISTERED__shortcutExplicitDependency:GlobalShortcutQueryOutcome = (cast flight._internal.DynamicObject.freeze({ reason: 'not-registered' }) : GlobalShortcutQueryOutcome);
+
+  public static final QUERY_PROVIDER_FAILED__shortcutExplicitDependency:GlobalShortcutQueryOutcome = (cast flight._internal.DynamicObject.freeze({ reason: 'query-provider-failed' }) : GlobalShortcutQueryOutcome);
+
+  public static final REGISTERED__shortcutExplicitDependency:GlobalShortcutQueryOutcome = (cast flight._internal.DynamicObject.freeze({ reason: 'registered' }) : GlobalShortcutQueryOutcome);
+
+  public static final REGISTRATION_IN_PROGRESS__shortcutExplicitDependency:{ var reason:String; } = (cast flight._internal.DynamicObject.freeze({ reason: 'registration-in-progress' }) : GlobalShortcutAttachOutcome);
+
+  public static final TRIGGER_ATTACH_FAILED__shortcutExplicitDependency:{ var reason:String; } = (cast flight._internal.DynamicObject.freeze({ reason: 'trigger-provider-failed' }) : GlobalShortcutAttachOutcome);
+
+  public static final TRIGGER_DETACH_FAILED__shortcutExplicitDependency:{ var reason:String; } = (cast flight._internal.DynamicObject.freeze({ reason: 'trigger-provider-failed' }) : GlobalShortcutDetachOutcome);
+
+  public static final _attachments__shortcutExplicitDependency:flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
+
+  public static final _attachedByAccelerator__shortcutExplicitDependency:flight._internal._Map<String, GlobalShortcut> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+
+  public static final _pendingAccelerators__shortcutExplicitDependency:flight._internal._Set<String> = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+
+  public static function attachGlobalShortcut(host:HasShortcutTrigger, shortcut:GlobalShortcut):flight._internal._Promise<GlobalShortcutAttachOutcome> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        var provider:ShortcutTriggerBackend = cast _Runtime.UNDEFINED;
+        var __flowBranch34:Dynamic;
+        if ((cast ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).has(shortcut)) : Bool)) {
+          __flowBranch34 = flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flowReturn(_Shortcut.ALREADY_ATTACHED__shortcutExplicitDependency);
+          });
+        } else {
+          __flowBranch34 = flight._internal._Async.flowNormal();
+        }
+        return flight._internal._Async.continueFlow(__flowBranch34, function():Dynamic {
+          var __flowBranch35:Dynamic;
+          if ((cast ((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).has((cast shortcut : GlobalShortcut).accelerator)) : Bool)) {
+            __flowBranch35 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn(_Shortcut.ALREADY_REGISTERED__shortcutExplicitDependency);
+            });
+          } else {
+            __flowBranch35 = flight._internal._Async.flowNormal();
+          }
+          return flight._internal._Async.continueFlow(__flowBranch35, function():Dynamic {
+            var __flowBranch36:Dynamic;
+            if ((cast ((cast _Shortcut._pendingAccelerators__shortcutExplicitDependency : flight._internal._Set<String>).has((cast shortcut : GlobalShortcut).accelerator)) : Bool)) {
+              __flowBranch36 = flight._internal._Async.protect(function():Dynamic {
+                return flight._internal._Async.flowReturn(_Shortcut.REGISTRATION_IN_PROGRESS__shortcutExplicitDependency);
+              });
+            } else {
+              __flowBranch36 = flight._internal._Async.flowNormal();
+            }
+            return flight._internal._Async.continueFlow(__flowBranch36, function():Dynamic {
+              provider = (cast (cast host : HasShortcutTrigger).shortcut : { var trigger:ShortcutTriggerBackend; }).trigger;
+              ((cast _Shortcut._pendingAccelerators__shortcutExplicitDependency : flight._internal._Set<String>).add((cast shortcut : GlobalShortcut).accelerator));
+              return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
+                var outcome:ShortcutTriggerSubscribeOutcome = cast _Runtime.UNDEFINED;
+                var attachment:{ var provider:ShortcutTriggerBackend; var subscription:ShortcutTriggerSubscription; } = cast _Runtime.UNDEFINED;
+                return flight._internal._Async.flatMap((cast provider : ShortcutTriggerBackend).subscribe((cast (cast shortcut : GlobalShortcut).accelerator : String), ({ final __callArgument40:Dynamic = function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast shortcut : GlobalShortcut).onTrigger]]), 1); }; __callArgument40; })), function(__awaitValue37:Dynamic):Dynamic {
+                  outcome = __awaitValue37;
+                  var __flowBranch38:Dynamic;
+                  if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'refused') : Bool)) {
+                    __flowBranch38 = flight._internal._Async.protect(function():Dynamic {
+                      return flight._internal._Async.flowReturn(_Shortcut.NATIVE_REFUSED__shortcutExplicitDependency);
+                    });
+                  } else {
+                    __flowBranch38 = flight._internal._Async.flowNormal();
+                  }
+                  return flight._internal._Async.continueFlow(__flowBranch38, function():Dynamic {
+                    attachment = { provider: provider, subscription: (cast outcome : { var reason:String; var subscription:ShortcutTriggerSubscription; }).subscription };
+                    return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
+                      ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).set(shortcut, (cast attachment)));
+                      ((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).set((cast shortcut : GlobalShortcut).accelerator, (cast shortcut)));
+                      return flight._internal._Async.flowNormal();
+                    }), function(__caughtError:Dynamic):Dynamic {
+                      var __error:Dynamic = __caughtError;
+                      return flight._internal._Async.protect(function():Dynamic {
+                        return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
+                          return flight._internal._Async.flatMap((cast provider : ShortcutTriggerBackend).unsubscribe((cast outcome : { var reason:String; var subscription:ShortcutTriggerSubscription; }).subscription), function(__awaitValue39:Dynamic):Dynamic {
+                            __awaitValue39;
+                            return flight._internal._Async.flowNormal();
+                          });
+                        }), function(__caughtError:Dynamic):Dynamic {
+                          var __error:Dynamic = __caughtError;
+                          return flight._internal._Async.protect(function():Dynamic {
+                            return flight._internal._Async.flowNormal();
+                          });
+                        }), function():Dynamic {
+                          return flight._internal._Async.flowReturn(_Shortcut.TRIGGER_ATTACH_FAILED__shortcutExplicitDependency);
+                        });
+                      });
+                    }), function():Dynamic {
+                      return flight._internal._Async.flowReturn(_Shortcut.ATTACHED__shortcutExplicitDependency);
+                    });
+                  });
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flight._internal._Async.protect(function():Dynamic {
+                  return flight._internal._Async.flowReturn(_Shortcut.TRIGGER_ATTACH_FAILED__shortcutExplicitDependency);
+                });
+              }), function():Dynamic {
+                ((cast _Shortcut._pendingAccelerators__shortcutExplicitDependency : flight._internal._Set<String>).delete_((cast shortcut : GlobalShortcut).accelerator));
+                return flight._internal._Async.flowNormal();
+              }), function():Dynamic {
+                return flight._internal._Async.flowNormal();
+              });
+            });
+          });
+        });
+      })
+    );
+  }
+
+  public static function createGlobalShortcut(accelerator:String):CreateGlobalShortcutOutcome {
+    var parsed:ParsedAccelerator = cast _Runtime.UNDEFINED;
+    var outcome:flight._internal._Union2<ParsedAccelerator, AcceleratorParseError> = cast _Runtime.UNDEFINED;
+    parsed = (cast makeParsedAccelerator() : ParsedAccelerator);
+    outcome = (cast parseAcceleratorDetailed((cast accelerator : String), ({ final __callArgument41:Dynamic = parsed; __callArgument41; })) : flight._internal._Union2<ParsedAccelerator, AcceleratorParseError>);
+    if ((cast _Runtime.hasField(outcome, 'reason') : Bool)) { return cast { parseError: outcome, reason: 'unparseable' }; }
+    return cast { reason: 'created', shortcut: (cast createEntity((cast { accelerator: (cast _Shortcut.formatParsedAccelerator__shortcutExplicitDependency(({ final __callArgument43:Dynamic = outcome; __callArgument43; })) : String), onTrigger: (cast createSignal() : Signal<Void->Void>) } : Dynamic)) : { >Entity, var accelerator:String; var onTrigger:Signal<Void->Void>; }) };
+    return cast null;
+  }
+
+  public static function destroyShortcutTrigger(host:HasShortcutTrigger):flight._internal._Promise<flight._internal._Nothing> {
+    return cast (cast (cast (cast host : HasShortcutTrigger).shortcut : { var trigger:ShortcutTriggerBackend; }).trigger : ShortcutTriggerBackend).destroy();
+    return cast null;
+  }
+
+  public static function detachGlobalShortcut(host:HasShortcutTrigger, shortcut:GlobalShortcut):flight._internal._Promise<GlobalShortcutDetachOutcome> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        var attachment:Null<GlobalShortcutAttachment__shortcutExplicitDependency> = cast _Runtime.UNDEFINED;
+        var selected:ShortcutTriggerBackend = cast _Runtime.UNDEFINED;
+        var provider:ShortcutTriggerBackend = cast _Runtime.UNDEFINED;
+        attachment = ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).get(shortcut));
+        var __flowBranch47:Dynamic;
+        if ((cast _Runtime.strictEquals(attachment, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+          __flowBranch47 = flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flowReturn(_Shortcut.NOT_ATTACHED__shortcutExplicitDependency);
+          });
+        } else {
+          __flowBranch47 = flight._internal._Async.flowNormal();
+        }
+        return flight._internal._Async.continueFlow(__flowBranch47, function():Dynamic {
+          selected = (cast (cast host : HasShortcutTrigger).shortcut : { var trigger:ShortcutTriggerBackend; }).trigger;
+          provider = ((cast _Runtime.strictEquals(selected, (cast attachment : GlobalShortcutAttachment__shortcutExplicitDependency).provider) : Bool) ? (cast selected : Dynamic) : (cast (cast attachment : GlobalShortcutAttachment__shortcutExplicitDependency).provider : Dynamic));
+          return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
+            var outcome:ShortcutTriggerUnsubscribeOutcome = cast _Runtime.UNDEFINED;
+            return flight._internal._Async.flatMap((cast provider : ShortcutTriggerBackend).unsubscribe((cast attachment : GlobalShortcutAttachment__shortcutExplicitDependency).subscription), function(__awaitValue48:Dynamic):Dynamic {
+              outcome = __awaitValue48;
+              var __flowBranch49:Dynamic;
+              if ((cast !_Runtime.strictEquals((cast outcome : ShortcutTriggerUnsubscribeOutcome).reason, 'unsubscribed') : Bool)) {
+                __flowBranch49 = flight._internal._Async.protect(function():Dynamic {
+                  return flight._internal._Async.flowReturn(_Shortcut.TRIGGER_DETACH_FAILED__shortcutExplicitDependency);
+                });
+              } else {
+                __flowBranch49 = flight._internal._Async.flowNormal();
+              }
+              return flight._internal._Async.continueFlow(__flowBranch49, function():Dynamic {
+                return flight._internal._Async.flowNormal();
+              });
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn(_Shortcut.TRIGGER_DETACH_FAILED__shortcutExplicitDependency);
+            });
+          }), function():Dynamic {
+            ((cast _Shortcut._attachments__shortcutExplicitDependency : flight._internal._WeakMap<GlobalShortcut, GlobalShortcutAttachment__shortcutExplicitDependency>).delete_(shortcut));
+            var __flowBranch50:Dynamic;
+            if ((cast _Runtime.strictEquals(((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).get((cast shortcut : GlobalShortcut).accelerator)), shortcut) : Bool)) {
+              __flowBranch50 = flight._internal._Async.protect(function():Dynamic {
+                ((cast _Shortcut._attachedByAccelerator__shortcutExplicitDependency : flight._internal._Map<String, GlobalShortcut>).delete_((cast shortcut : GlobalShortcut).accelerator));
+                return flight._internal._Async.flowNormal();
+              });
+            } else {
+              __flowBranch50 = flight._internal._Async.flowNormal();
+            }
+            return flight._internal._Async.continueFlow(__flowBranch50, function():Dynamic {
+              return flight._internal._Async.flowReturn(_Shortcut.DETACHED__shortcutExplicitDependency);
+            });
+          });
+        });
+      })
+    );
+  }
+
+  public static function disposeGlobalShortcut(host:HasShortcutTrigger, shortcut:GlobalShortcut):flight._internal._Promise<GlobalShortcutDetachOutcome> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.protect(function():Dynamic {
+          return flight._internal._Async.flatMap((cast detachGlobalShortcut(({ final __callArgument58:Dynamic = host; __callArgument58; }), ({ final __callArgument59:Dynamic = shortcut; __callArgument59; })) : flight._internal._Promise<{ var reason:String; }>), function(__awaitValue57:Dynamic):Dynamic {
+            return flight._internal._Async.flowReturn(__awaitValue57);
+          });
+        }), function():Dynamic {
+          clearSignal((cast (cast shortcut : GlobalShortcut).onTrigger : Dynamic));
+          return flight._internal._Async.flowNormal();
+        }), function():Dynamic {
+          return flight._internal._Async.flowNormal();
+        });
+      })
+    );
+  }
+
+  public static function queryGlobalShortcutConflict(host:HasShortcutQuery, accelerator:String):flight._internal._Promise<GlobalShortcutQueryOutcome> {
+    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+      return flight._internal._Async.resolve((cast queryGlobalShortcutRegistration(({ final __callArgument64:Dynamic = host; __callArgument64; }), (cast accelerator : String)) : flight._internal._Promise<GlobalShortcutQueryOutcome>));
+    }));
+  }
+
+  public static function queryGlobalShortcutRegistration(host:HasShortcutQuery, accelerator:String):flight._internal._Promise<GlobalShortcutQueryOutcome> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        var parsed:ParsedAccelerator = cast _Runtime.UNDEFINED;
+        var outcome:flight._internal._Union2<ParsedAccelerator, AcceleratorParseError> = cast _Runtime.UNDEFINED;
+        parsed = (cast makeParsedAccelerator() : ParsedAccelerator);
+        outcome = (cast parseAcceleratorDetailed((cast accelerator : String), ({ final __callArgument70:Dynamic = parsed; __callArgument70; })) : flight._internal._Union2<ParsedAccelerator, AcceleratorParseError>);
+        var __flowBranch72:Dynamic;
+        if ((cast _Runtime.hasField(outcome, 'reason') : Bool)) {
+          __flowBranch72 = flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flowReturn({ parseError: outcome, reason: 'unparseable' });
+          });
+        } else {
+          __flowBranch72 = flight._internal._Async.flowNormal();
+        }
+        return flight._internal._Async.continueFlow(__flowBranch72, function():Dynamic {
+          return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flatMap((cast (cast (cast host : HasShortcutQuery).shortcut : { var query:ShortcutQueryBackend; }).query : ShortcutQueryBackend).isRegistered((cast (cast _Shortcut.formatParsedAccelerator__shortcutExplicitDependency(({ final __callArgument74:Dynamic = outcome; __callArgument74; })) : String) : String)), function(__awaitValue73:Dynamic):Dynamic {
+              if ((cast __awaitValue73 : Bool)) {
+                return flight._internal._Async.flowReturn(_Shortcut.REGISTERED__shortcutExplicitDependency);
+              } else {
+                return flight._internal._Async.flowReturn(_Shortcut.NOT_REGISTERED__shortcutExplicitDependency);
+              }
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var __error:Dynamic = __caughtError;
+            return flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn(_Shortcut.QUERY_PROVIDER_FAILED__shortcutExplicitDependency);
+            });
+          }), function():Dynamic {
+            return flight._internal._Async.flowNormal();
+          });
+        });
+      })
+    );
+  }
+
+  public static function formatParsedAccelerator__shortcutExplicitDependency(parsed:ParsedAccelerator):Accelerator {
+    if ((cast _Runtime.strictEquals(_Runtime.field(parsed.modifiers, 'length'), 0.0) : Bool)) { return cast parsed.key; }
+    return cast _Runtime.join(_Runtime.concatArrays([_Runtime.toArray(parsed.modifiers), [parsed.key]]), '+');
+    return cast null;
+  }
 }

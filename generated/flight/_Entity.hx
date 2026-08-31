@@ -11,7 +11,34 @@ import flight.types.EntityRuntime;
 import flight.types.EntityRuntimeWriteGuard;
 import flight.types.EntityRuntimeWriteSlot;
 import flight.types.EntityWithoutRuntime;
+import flight.types.Host;
+import flight.types.HostAccessibilityCapabilities;
+import flight.types.HostAppCapabilities;
+import flight.types.HostClipboardCapabilities;
+import flight.types.HostConnectivityCapabilities;
+import flight.types.HostDialogCapabilities;
+import flight.types.HostGraphicsCapabilities;
+import flight.types.HostInputCapabilities;
+import flight.types.HostIpcCapabilities;
+import flight.types.HostMediaCapabilities;
+import flight.types.HostMenuCapabilities;
+import flight.types.HostMidiCapabilities;
+import flight.types.HostNetCapabilities;
+import flight.types.HostNotificationCapabilities;
+import flight.types.HostPowerCapabilities;
+import flight.types.HostProtocolCapabilities;
+import flight.types.HostScreenCapabilities;
+import flight.types.HostShareCapabilities;
+import flight.types.HostShellCapabilities;
+import flight.types.HostShortcutCapabilities;
+import flight.types.HostStorageCapabilities;
+import flight.types.HostSystemCapabilities;
+import flight.types.HostTextCapabilities;
+import flight.types.HostTrayCapabilities;
+import flight.types.HostUiCapabilities;
+import flight.types.HostUpdaterCapabilities;
 import flight.types.LogLevel;
+import flight.types.WindowBackend;
 
 @:noCompletion
 class _Entity {
@@ -138,6 +165,14 @@ class _Entity {
   public static var _guardsEnabled__guards:Bool = false;
 
   public static var _writeGuard__guards:Null<EntityRuntimeWriteGuard> = _Runtime.explicitNull();
+
+  @:allow(flight)
+  @:keep
+  private static function createHost<Capabilities:flight._internal._Partial<{ var accessibility:HostAccessibilityCapabilities; var app:HostAppCapabilities; var clipboard:HostClipboardCapabilities; var connectivity:HostConnectivityCapabilities; var dialog:HostDialogCapabilities; var graphics:HostGraphicsCapabilities; var input:HostInputCapabilities; var ipc:HostIpcCapabilities; var media:HostMediaCapabilities; var menu:HostMenuCapabilities; var midi:HostMidiCapabilities; var net:HostNetCapabilities; var power:HostPowerCapabilities; var protocol:HostProtocolCapabilities; var notification:HostNotificationCapabilities; var screen:HostScreenCapabilities; var share:HostShareCapabilities; var shell:HostShellCapabilities; var shortcut:HostShortcutCapabilities; var storage:HostStorageCapabilities; var system:HostSystemCapabilities; var text:HostTextCapabilities; var tray:HostTrayCapabilities; var ui:HostUiCapabilities; var updater:HostUpdaterCapabilities; var window:WindowBackend; }>>(?capabilities:Capabilities):Capabilities {
+    if (capabilities == null) capabilities = cast ((cast {  } : Capabilities) : Dynamic);
+    return cast (cast createEntity((cast _Runtime.mergeObjects([{ accessibility: {  } }, { app: {  } }, { clipboard: {  } }, { connectivity: {  } }, { dialog: {  } }, { graphics: {  } }, { input: {  } }, { ipc: {  } }, { media: {  } }, { menu: {  } }, { midi: {  } }, { net: {  } }, { notification: {  } }, { power: {  } }, { protocol: {  } }, { screen: {  } }, { share: {  } }, { shell: {  } }, { shortcut: {  } }, { storage: {  } }, { system: {  } }, { text: {  } }, { tray: {  } }, { ui: {  } }, { updater: {  } }, { window: {  } }, capabilities]) : Dynamic)) : flight._internal._Intersection2<flight._internal._Intersection2<{ var accessibility:{  }; var app:{  }; var clipboard:{  }; var connectivity:{  }; var dialog:{  }; var graphics:{  }; var input:{  }; var ipc:{  }; var media:{  }; var menu:{  }; var midi:{  }; var net:{  }; var notification:{  }; var power:{  }; var protocol:{  }; var screen:{  }; var share:{  }; var shell:{  }; var shortcut:{  }; var storage:{  }; var system:{  }; var text:{  }; var tray:{  }; var ui:{  }; var updater:{  }; var window:{  }; }, Capabilities>, Entity>);
+    return cast null;
+  }
 
   @:allow(flight)
   @:keep

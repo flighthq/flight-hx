@@ -5,20 +5,12 @@ const api = compiled.flight._Shell;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const explainShellBackend = api.explainShellBackend;
-export const getShellBackend = api.getShellBackend;
-export const installShellHostBackend = api.installShellHostBackend;
 export const isShellUrlAllowed = api.isShellUrlAllowed;
-export const moveItemsToTrash = api.moveItemsToTrash;
-export const moveItemToTrash = api.moveItemToTrash;
-export const observeShellHostResult = api.observeShellHostResult;
+export const moveShellItemsToTrash = api.moveShellItemsToTrash;
+export const moveShellItemToTrash = api.moveShellItemToTrash;
 export const openShellExternalUrl = api.openShellExternalUrl;
 export const openShellPath = api.openShellPath;
-export const openShellPathResult = api.openShellPathResult;
 export const readShellShortcutLink = api.readShellShortcutLink;
-export const resetShellBackendForTest = api.resetShellBackendForTest;
-export const setShellBackend = api.setShellBackend;
-export const setShellUrlSchemeAllowlist = api.setShellUrlSchemeAllowlist;
+export const revealShellPath = api.revealShellPath;
 export const shellBeep = api.shellBeep;
-export const showItemInFolder = api.showItemInFolder;
 export const writeShellShortcutLink = api.writeShellShortcutLink;

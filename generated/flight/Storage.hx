@@ -4,194 +4,222 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Storage as Facade_Storage_flight__Storage;
-import flight.types.BackendExplanation;
+import flight.types.HasStorageChange;
+import flight.types.HasStorageLocal;
+import flight.types.HasStoragePersistenceQuery;
+import flight.types.HasStoragePersistenceRequest;
+import flight.types.StorageBooleanOrResult;
+import flight.types.StorageBooleanResult;
+import flight.types.StorageByteSizeResult;
+import flight.types.StorageClearNamespaceResult;
+import flight.types.StorageClearResult;
+import flight.types.StorageEntriesResult;
+import flight.types.StorageGetItemResult;
+import flight.types.StorageItemCountResult;
+import flight.types.StorageItemOrResult;
+import flight.types.StorageItemsResult;
+import flight.types.StorageJsonOrResult;
+import flight.types.StorageJsonResult;
+import flight.types.StorageJsonWriteResult;
+import flight.types.StorageKeysResult;
 import flight.types.StorageMigration;
+import flight.types.StorageMigrationResult;
 import flight.types.StorageNamespace;
-import flight.types.StorageQuota;
+import flight.types.StorageNumberOrResult;
+import flight.types.StorageNumberResult;
+import flight.types.StoragePersistenceResult;
+import flight.types.StoragePresenceResult;
+import flight.types.StorageRemoveItemResult;
+import flight.types.StorageRemoveItemsResult;
+import flight.types.StorageSetItemResult;
+import flight.types.StorageSetItemsResult;
 import flight.types.StorageSignals;
 
 class Storage {
-  public static function clearStorage():Bool {
-    return cast Facade_Storage_flight__Storage.clearStorage();
+  public static function attachStorage(host:HasStorageChange, signals:StorageSignals):Bool {
+    return cast Facade_Storage_flight__Storage.attachStorage(host, signals);
     return cast null;
   }
 
-  public static function clearStorageNamespace(namespace:StorageNamespace):Bool {
-    return cast Facade_Storage_flight__Storage.clearStorageNamespace(namespace);
+  public static function clearStorage(host:HasStorageLocal, ?signals:Null<StorageSignals>):StorageClearResult {
+    return cast Facade_Storage_flight__Storage.clearStorage(host, signals);
     return cast null;
   }
 
-  public static function createStorageNamespace(prefix:String):StorageNamespace {
-    return cast Facade_Storage_flight__Storage.createStorageNamespace(prefix);
+  public static function clearStorageNamespace(host:HasStorageLocal, namespace:StorageNamespace, ?signals:Null<StorageSignals>):StorageClearNamespaceResult {
+    return cast Facade_Storage_flight__Storage.clearStorageNamespace(host, namespace, signals);
     return cast null;
   }
 
-  public static function disableStorageSignals():Void {
-    Facade_Storage_flight__Storage.disableStorageSignals();
-  }
-
-  public static function enableStorageSignals():StorageSignals {
-    return cast Facade_Storage_flight__Storage.enableStorageSignals();
+  public static function createStorageSignals():StorageSignals {
+    return cast Facade_Storage_flight__Storage.createStorageSignals();
     return cast null;
   }
 
-  public static function explainStorageBackend():BackendExplanation {
-    return cast Facade_Storage_flight__Storage.explainStorageBackend();
+  public static function destroyStorage(host:HasStorageChange):Void {
+    Facade_Storage_flight__Storage.destroyStorage(host);
+  }
+
+  public static function detachStorage(signals:StorageSignals):Void {
+    Facade_Storage_flight__Storage.detachStorage(signals);
+  }
+
+  public static function disposeStorage(signals:StorageSignals):Void {
+    Facade_Storage_flight__Storage.disposeStorage(signals);
+  }
+
+  public static function getNamespacedStorageByteSize(host:HasStorageLocal, namespace:StorageNamespace):StorageByteSizeResult {
+    return cast Facade_Storage_flight__Storage.getNamespacedStorageByteSize(host, namespace);
     return cast null;
   }
 
-  public static function getNamespacedStorageByteSize(namespace:StorageNamespace):Float {
-    return cast Facade_Storage_flight__Storage.getNamespacedStorageByteSize(namespace);
+  public static function getNamespacedStorageEntries(host:HasStorageLocal, namespace:StorageNamespace):StorageEntriesResult {
+    return cast Facade_Storage_flight__Storage.getNamespacedStorageEntries(host, namespace);
     return cast null;
   }
 
-  public static function getNamespacedStorageEntries(namespace:StorageNamespace):Array<Array<String>> {
-    return cast Facade_Storage_flight__Storage.getNamespacedStorageEntries(namespace);
+  public static function getNamespacedStorageItem(host:HasStorageLocal, namespace:StorageNamespace, key:String):StorageGetItemResult {
+    return cast Facade_Storage_flight__Storage.getNamespacedStorageItem(host, namespace, key);
     return cast null;
   }
 
-  public static function getNamespacedStorageItem(namespace:StorageNamespace, key:String):Null<String> {
-    return cast Facade_Storage_flight__Storage.getNamespacedStorageItem(namespace, key);
+  public static function getNamespacedStorageItemPresence(host:HasStorageLocal, namespace:StorageNamespace, key:String):StoragePresenceResult {
+    return cast Facade_Storage_flight__Storage.getNamespacedStorageItemPresence(host, namespace, key);
     return cast null;
   }
 
-  public static function getNamespacedStorageKeys(namespace:StorageNamespace):Array<String> {
-    return cast Facade_Storage_flight__Storage.getNamespacedStorageKeys(namespace);
+  public static function getNamespacedStorageKeys(host:HasStorageLocal, namespace:StorageNamespace):StorageKeysResult {
+    return cast Facade_Storage_flight__Storage.getNamespacedStorageKeys(host, namespace);
     return cast null;
   }
 
-  public static function getStorageBoolean(key:String):Null<Bool> {
-    return cast Facade_Storage_flight__Storage.getStorageBoolean(key);
+  public static function getStorageBoolean(host:HasStorageLocal, key:String):StorageBooleanResult {
+    return cast Facade_Storage_flight__Storage.getStorageBoolean(host, key);
     return cast null;
   }
 
-  public static function getStorageBooleanOr(key:String, fallback:Bool):Bool {
-    return cast Facade_Storage_flight__Storage.getStorageBooleanOr(key, fallback);
+  public static function getStorageBooleanOr(host:HasStorageLocal, key:String, fallback:Bool):StorageBooleanOrResult {
+    return cast Facade_Storage_flight__Storage.getStorageBooleanOr(host, key, fallback);
     return cast null;
   }
 
-  public static function getStorageByteSize():Float {
-    return cast Facade_Storage_flight__Storage.getStorageByteSize();
+  public static function getStorageByteSize(host:HasStorageLocal):StorageByteSizeResult {
+    return cast Facade_Storage_flight__Storage.getStorageByteSize(host);
     return cast null;
   }
 
-  public static function getStorageEntries():Array<Array<String>> {
-    return cast Facade_Storage_flight__Storage.getStorageEntries();
+  public static function getStorageEntries(host:HasStorageLocal):StorageEntriesResult {
+    return cast Facade_Storage_flight__Storage.getStorageEntries(host);
     return cast null;
   }
 
-  public static function getStorageItem(key:String):Null<String> {
-    return cast Facade_Storage_flight__Storage.getStorageItem(key);
+  public static function getStorageItem(host:HasStorageLocal, key:String):StorageGetItemResult {
+    return cast Facade_Storage_flight__Storage.getStorageItem(host, key);
     return cast null;
   }
 
-  public static function getStorageItemCount():Float {
-    return cast Facade_Storage_flight__Storage.getStorageItemCount();
+  public static function getStorageItemCount(host:HasStorageLocal):StorageItemCountResult {
+    return cast Facade_Storage_flight__Storage.getStorageItemCount(host);
     return cast null;
   }
 
-  public static function getStorageItemOr(key:String, fallback:String):String {
-    return cast Facade_Storage_flight__Storage.getStorageItemOr(key, fallback);
+  public static function getStorageItemOr(host:HasStorageLocal, key:String, fallback:String):StorageItemOrResult {
+    return cast Facade_Storage_flight__Storage.getStorageItemOr(host, key, fallback);
     return cast null;
   }
 
-  public static function getStorageItems(keys:Array<String>):Array<Null<String>> {
-    return cast Facade_Storage_flight__Storage.getStorageItems(keys);
+  public static function getStorageItemPresence(host:HasStorageLocal, key:String):StoragePresenceResult {
+    return cast Facade_Storage_flight__Storage.getStorageItemPresence(host, key);
     return cast null;
   }
 
-  public static function getStorageJSON<T>(key:String):Null<T> {
-    return cast Facade_Storage_flight__Storage.getStorageJSON(key);
+  public static function getStorageItems(host:HasStorageLocal, keys:Array<String>):StorageItemsResult {
+    return cast Facade_Storage_flight__Storage.getStorageItems(host, keys);
     return cast null;
   }
 
-  public static function getStorageJSONOr<T>(key:String, fallback:T):T {
-    return cast Facade_Storage_flight__Storage.getStorageJSONOr(key, fallback);
+  public static function getStorageJSON<Value>(host:HasStorageLocal, key:String):StorageJsonResult<Value> {
+    return cast Facade_Storage_flight__Storage.getStorageJSON(host, key);
     return cast null;
   }
 
-  public static function getStorageKeys():Array<String> {
-    return cast Facade_Storage_flight__Storage.getStorageKeys();
+  public static function getStorageJSONOr<Value>(host:HasStorageLocal, key:String, fallback:Value):StorageJsonOrResult<Value> {
+    return cast Facade_Storage_flight__Storage.getStorageJSONOr(host, key, fallback);
     return cast null;
   }
 
-  public static function getStorageNumber(key:String):Null<Float> {
-    return cast Facade_Storage_flight__Storage.getStorageNumber(key);
+  public static function getStorageKeys(host:HasStorageLocal):StorageKeysResult {
+    return cast Facade_Storage_flight__Storage.getStorageKeys(host);
     return cast null;
   }
 
-  public static function getStorageNumberOr(key:String, fallback:Float):Float {
-    return cast Facade_Storage_flight__Storage.getStorageNumberOr(key, fallback);
+  public static function getStorageNumber(host:HasStorageLocal, key:String):StorageNumberResult {
+    return cast Facade_Storage_flight__Storage.getStorageNumber(host, key);
     return cast null;
   }
 
-  public static function getStorageQuotaEstimate():flight._internal._Promise<Null<StorageQuota>> {
-    return cast Facade_Storage_flight__Storage.getStorageQuotaEstimate();
+  public static function getStorageNumberOr(host:HasStorageLocal, key:String, fallback:Float):StorageNumberOrResult {
+    return cast Facade_Storage_flight__Storage.getStorageNumberOr(host, key, fallback);
     return cast null;
   }
 
-  public static function getStorageSignals():Null<StorageSignals> {
-    return cast Facade_Storage_flight__Storage.getStorageSignals();
+  public static function getStoragePersistence(host:HasStoragePersistenceQuery):flight._internal._Promise<StoragePersistenceResult> {
+    return cast Facade_Storage_flight__Storage.getStoragePersistence(host);
     return cast null;
   }
 
-  public static function hasNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
-    return cast Facade_Storage_flight__Storage.hasNamespacedStorageItem(namespace, key);
+  public static function migrateStorage(host:HasStorageLocal, namespace:Null<StorageNamespace>, migrations:Array<StorageMigration>, ?signals:Null<StorageSignals>):StorageMigrationResult {
+    return cast Facade_Storage_flight__Storage.migrateStorage(host, namespace, migrations, signals);
     return cast null;
   }
 
-  public static function hasStorageItem(key:String):Bool {
-    return cast Facade_Storage_flight__Storage.hasStorageItem(key);
+  public static function removeNamespacedStorageItem(host:HasStorageLocal, namespace:StorageNamespace, key:String, ?signals:Null<StorageSignals>):StorageRemoveItemResult {
+    return cast Facade_Storage_flight__Storage.removeNamespacedStorageItem(host, namespace, key, signals);
     return cast null;
   }
 
-  public static function migrateStorage(namespace:Null<StorageNamespace>, migrations:Array<StorageMigration>):Float {
-    return cast Facade_Storage_flight__Storage.migrateStorage(namespace, migrations);
+  public static function removeStorageItem(host:HasStorageLocal, key:String, ?signals:Null<StorageSignals>):StorageRemoveItemResult {
+    return cast Facade_Storage_flight__Storage.removeStorageItem(host, key, signals);
     return cast null;
   }
 
-  public static function removeNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
-    return cast Facade_Storage_flight__Storage.removeNamespacedStorageItem(namespace, key);
+  public static function removeStorageItems(host:HasStorageLocal, keys:Array<String>, ?signals:Null<StorageSignals>):StorageRemoveItemsResult {
+    return cast Facade_Storage_flight__Storage.removeStorageItems(host, keys, signals);
     return cast null;
   }
 
-  public static function removeStorageItem(key:String):Bool {
-    return cast Facade_Storage_flight__Storage.removeStorageItem(key);
+  public static function requestStoragePersistence(host:HasStoragePersistenceRequest):flight._internal._Promise<StoragePersistenceResult> {
+    return cast Facade_Storage_flight__Storage.requestStoragePersistence(host);
     return cast null;
   }
 
-  public static function removeStorageItems(keys:Array<String>):Bool {
-    return cast Facade_Storage_flight__Storage.removeStorageItems(keys);
+  public static function setNamespacedStorageItem(host:HasStorageLocal, namespace:StorageNamespace, key:String, value:String, ?signals:Null<StorageSignals>):StorageSetItemResult {
+    return cast Facade_Storage_flight__Storage.setNamespacedStorageItem(host, namespace, key, value, signals);
     return cast null;
   }
 
-  public static function setNamespacedStorageItem(namespace:StorageNamespace, key:String, value:String):Bool {
-    return cast Facade_Storage_flight__Storage.setNamespacedStorageItem(namespace, key, value);
+  public static function setStorageBoolean(host:HasStorageLocal, key:String, value:Bool, ?signals:Null<StorageSignals>):StorageSetItemResult {
+    return cast Facade_Storage_flight__Storage.setStorageBoolean(host, key, value, signals);
     return cast null;
   }
 
-  public static function setStorageBoolean(key:String, value:Bool):Bool {
-    return cast Facade_Storage_flight__Storage.setStorageBoolean(key, value);
+  public static function setStorageItem(host:HasStorageLocal, key:String, value:String, ?signals:Null<StorageSignals>):StorageSetItemResult {
+    return cast Facade_Storage_flight__Storage.setStorageItem(host, key, value, signals);
     return cast null;
   }
 
-  public static function setStorageItem(key:String, value:String):Bool {
-    return cast Facade_Storage_flight__Storage.setStorageItem(key, value);
+  public static function setStorageItems(host:HasStorageLocal, record:flight._internal._Record<String, String>, ?signals:Null<StorageSignals>):StorageSetItemsResult {
+    return cast Facade_Storage_flight__Storage.setStorageItems(host, record, signals);
     return cast null;
   }
 
-  public static function setStorageItems(record:flight._internal._Record<String, String>):Bool {
-    return cast Facade_Storage_flight__Storage.setStorageItems(record);
+  public static function setStorageJSON<Value>(host:HasStorageLocal, key:String, value:Value, ?signals:Null<StorageSignals>):StorageJsonWriteResult {
+    return cast Facade_Storage_flight__Storage.setStorageJSON(host, key, value, signals);
     return cast null;
   }
 
-  public static function setStorageJSON<T>(key:String, value:T):Bool {
-    return cast Facade_Storage_flight__Storage.setStorageJSON(key, value);
-    return cast null;
-  }
-
-  public static function setStorageNumber(key:String, value:Float):Bool {
-    return cast Facade_Storage_flight__Storage.setStorageNumber(key, value);
+  public static function setStorageNumber(host:HasStorageLocal, key:String, value:Float, ?signals:Null<StorageSignals>):StorageSetItemResult {
+    return cast Facade_Storage_flight__Storage.setStorageNumber(host, key, value, signals);
     return cast null;
   }
 }

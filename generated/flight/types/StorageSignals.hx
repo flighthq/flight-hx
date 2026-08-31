@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef StorageSignals = { var onChange:Signal<StorageChange->Void>; };
+typedef StorageSignals = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onChange:Signal<StorageChange->Void>; };

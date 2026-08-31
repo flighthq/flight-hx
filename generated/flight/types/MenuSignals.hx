@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MenuSignals = { var onContextMenuOpen:Signal<Void->Void>; var onContextMenuClose:Signal<Void->Void>; var onMenuItemHighlight:Signal<String->Void>; var onMenuItemSelect:Signal<String->Void>; };
+typedef MenuSignals = { var onContextMenuClose:Signal<Void->Void>; var onContextMenuOpen:Signal<Void->Void>; };

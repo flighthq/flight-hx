@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef App = { var onActivate:Signal<Void->Void>; var onAllWindowsClosed:Signal<Void->Void>; var onOpenFile:Signal<String->Void>; var onQuitRequest:Signal<Void->Void>; var onReady:Signal<Void->Void>; var onSecondInstance:Signal<Array<String>->Void>; };
+typedef App = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var onActivate:Signal<Void->Void>; var onAllWindowsClosed:Signal<Void->Void>; var onOpenFile:Signal<String->Void>; var onQuitRequest:Signal<Void->Void>; var onReady:Signal<Void->Void>; var onSecondInstance:Signal<Array<String>->Void>; };

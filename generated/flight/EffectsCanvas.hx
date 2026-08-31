@@ -40,8 +40,8 @@ class EffectsCanvas {
     Facade_EffectsCanvas_flight__EffectsCanvas.clipCanvasBevelBand(band, source, bevelType);
   }
 
-  public static function createCanvasRenderEffectPipeline(_state:CanvasRenderState, ?options:RenderEffectPipelineOptions):CanvasRenderEffectPipeline {
-    return cast Facade_EffectsCanvas_flight__EffectsCanvas.createCanvasRenderEffectPipeline(_state, options);
+  public static function createCanvasRenderEffectPipeline(state:CanvasRenderState, ?options:RenderEffectPipelineOptions):CanvasRenderEffectPipeline {
+    return cast Facade_EffectsCanvas_flight__EffectsCanvas.createCanvasRenderEffectPipeline(state, options);
     return cast null;
   }
 

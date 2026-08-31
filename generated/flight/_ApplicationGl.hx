@@ -7,6 +7,7 @@ import flight._Application.createApplicationRenderView;
 import flight._Application.detachApplicationRenderView;
 import flight._Node.createViewport;
 import flight._RenderGl.createGlContextFromCanvasElement;
+import flight._RenderGl.createGlContextState;
 import flight._RenderGl.createGlRenderState;
 import flight._RenderGl.createGlRenderTarget;
 import flight._RenderGl.destroyGlRenderState;
@@ -20,6 +21,8 @@ import flight.types.GlApplicationRenderView;
 import flight.types.GlApplicationRenderViewOptions;
 import flight.types.GlContext;
 import flight.types.GlContextOptions;
+import flight.types.GlContextState;
+import flight.types.GlPipeline;
 import flight.types.GlRenderOptions;
 import flight.types.GlRenderState;
 import flight.types.GlRenderTarget;
@@ -28,11 +31,11 @@ import flight.types.Viewport;
 
 @:noCompletion
 class _ApplicationGl {
-  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:flight._internal.dom.HTMLCanvasElement, ?options:GlApplicationRenderViewOptions):GlApplicationRenderView {
-    if (options == null) options = cast ({  } : Dynamic);
+  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:flight._internal.dom.HTMLCanvasElement, options:GlApplicationRenderViewOptions):GlApplicationRenderView {
     var width:Float = cast _Runtime.UNDEFINED;
     var height:Float = cast _Runtime.UNDEFINED;
     var context:GlContext = cast _Runtime.UNDEFINED;
+    var contextState:GlContextState = cast _Runtime.UNDEFINED;
     var renderState:GlRenderState = cast _Runtime.UNDEFINED;
     var renderTarget:GlRenderTarget = cast _Runtime.UNDEFINED;
     var viewport:Viewport = cast _Runtime.UNDEFINED;
@@ -40,10 +43,11 @@ class _ApplicationGl {
     height = HxMath.max(0.0, HxMath.round((window.height * window.devicePixelRatio)));
     (cast _ApplicationGl.synchronizeGlCanvasBackingStore__glApplicationRenderView(({ final __callArgument0:Dynamic = canvas; __callArgument0; }), (cast width : Float), (cast height : Float)) : Bool);
     context = (cast createGlContextFromCanvasElement(({ final __callArgument2:Dynamic = canvas; __callArgument2; }), ({ final __callArgument3:Dynamic = _Runtime.field(options, 'context'); __callArgument3; })) : GlContext);
-    renderState = (cast createGlRenderState(({ final __callArgument6:Dynamic = context; __callArgument6; }), ({ final __callArgument7:Dynamic = _Runtime.mergeObjects([_Runtime.field(options, 'render'), { pixelRatio: window.devicePixelRatio }]); __callArgument7; })) : GlRenderState);
-    renderTarget = (cast createGlRenderTarget(({ final __callArgument10:Dynamic = renderState; __callArgument10; }), ({ final __callArgument11:Dynamic = _Runtime.mergeObjects([_Runtime.field(options, 'target'), { height: height }, { width: width }]); __callArgument11; })) : GlRenderTarget);
+    contextState = (cast createGlContextState(({ final __callArgument6:Dynamic = context; __callArgument6; })) : GlContextState);
+    renderState = (cast createGlRenderState(({ final __callArgument8:Dynamic = contextState; __callArgument8; }), _Runtime.field(options, 'pipeline'), ({ final __callArgument9:Dynamic = _Runtime.mergeObjects([_Runtime.field(options, 'render'), { pixelRatio: window.devicePixelRatio }]); __callArgument9; })) : GlRenderState);
+    renderTarget = (cast createGlRenderTarget(({ final __callArgument12:Dynamic = renderState; __callArgument12; }), ({ final __callArgument13:Dynamic = _Runtime.mergeObjects([_Runtime.field(options, 'target'), { height: height }, { width: width }]); __callArgument13; })) : GlRenderTarget);
     viewport = (cast createViewport((cast { devicePixelRatio: window.devicePixelRatio, height: height, width: width } : Dynamic)) : Viewport);
-    return cast (cast createApplicationRenderView(({ final __callArgument14:Dynamic = window; __callArgument14; }), ({ final __callArgument15:Dynamic = renderState; __callArgument15; }), ({ final __callArgument16:Dynamic = renderTarget; __callArgument16; }), ({ final __callArgument17:Dynamic = viewport; __callArgument17; }), (cast function(state:GlRenderState, target:GlRenderTarget, nextWidth:Float, nextHeight:Float):Void { _ApplicationGl.resizeGlApplicationRenderView__glApplicationRenderView(({ final __callArgument18:Dynamic = canvas; __callArgument18; }), ({ final __callArgument19:Dynamic = state; __callArgument19; }), ({ final __callArgument20:Dynamic = target; __callArgument20; }), (cast nextWidth : Float), (cast nextHeight : Float)); } : Dynamic)) : ApplicationRenderView<GlRenderState, GlRenderTarget>);
+    return cast (cast createApplicationRenderView(({ final __callArgument16:Dynamic = window; __callArgument16; }), ({ final __callArgument17:Dynamic = renderState; __callArgument17; }), ({ final __callArgument18:Dynamic = renderTarget; __callArgument18; }), ({ final __callArgument19:Dynamic = viewport; __callArgument19; }), (cast function(state:GlRenderState, target:GlRenderTarget, nextWidth:Float, nextHeight:Float):Void { _ApplicationGl.resizeGlApplicationRenderView__glApplicationRenderView(({ final __callArgument20:Dynamic = canvas; __callArgument20; }), ({ final __callArgument21:Dynamic = state; __callArgument21; }), ({ final __callArgument22:Dynamic = target; __callArgument22; }), (cast nextWidth : Float), (cast nextHeight : Float)); } : Dynamic)) : ApplicationRenderView<GlRenderState, GlRenderTarget>);
     return cast null;
   }
 
@@ -56,13 +60,13 @@ class _ApplicationGl {
   public static function resizeGlApplicationRenderView__glApplicationRenderView(canvas:flight._internal.dom.HTMLCanvasElement, renderState:GlRenderState, renderTarget:GlRenderTarget, width:Float, height:Float):Void {
     var storageWidth:Float = cast _Runtime.UNDEFINED;
     var storageHeight:Float = cast _Runtime.UNDEFINED;
-    if ((cast (cast _ApplicationGl.synchronizeGlCanvasBackingStore__glApplicationRenderView(({ final __callArgument34:Dynamic = canvas; __callArgument34; }), (cast width : Float), (cast height : Float)) : Bool) : Bool)) {
-      invalidateGlRenderStateCache(({ final __callArgument36:Dynamic = renderState; __callArgument36; }));
+    if ((cast (cast _ApplicationGl.synchronizeGlCanvasBackingStore__glApplicationRenderView(({ final __callArgument36:Dynamic = canvas; __callArgument36; }), (cast width : Float), (cast height : Float)) : Bool) : Bool)) {
+      invalidateGlRenderStateCache(({ final __callArgument38:Dynamic = renderState; __callArgument38; }));
     }
     storageWidth = HxMath.max(1.0, HxMath.ceil(width));
     storageHeight = HxMath.max(1.0, HxMath.ceil(height));
     if ((cast ((cast !_Runtime.strictEquals(renderTarget.width, storageWidth) : Bool) || (cast !_Runtime.strictEquals(renderTarget.height, storageHeight) : Bool)) : Bool)) {
-      resizeGlRenderTarget(({ final __callArgument38:Dynamic = renderState; __callArgument38; }), ({ final __callArgument39:Dynamic = renderTarget; __callArgument39; }), (cast width : Float), (cast height : Float));
+      resizeGlRenderTarget(({ final __callArgument40:Dynamic = renderState; __callArgument40; }), ({ final __callArgument41:Dynamic = renderTarget; __callArgument41; }), (cast width : Float), (cast height : Float));
     }
   }
 

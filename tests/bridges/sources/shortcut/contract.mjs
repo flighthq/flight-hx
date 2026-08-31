@@ -3,6 +3,5 @@
 function __syncDependencies() {}
 __syncDependencies();
 
-export * from './enableShortcutGuards.mjs';
-export * from './explainGlobalShortcutRegistration.mjs';
 export * from './shortcut.mjs';
+export * from './shortcutExplicitDependency.mjs';

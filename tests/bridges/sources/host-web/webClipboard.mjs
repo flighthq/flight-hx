@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebClipboard = api.enableHostWebClipboard;
-export const resetHostWebClipboardForTest = api.resetHostWebClipboardForTest;
+export const webClipboardBackend = api.webClipboardBackend;

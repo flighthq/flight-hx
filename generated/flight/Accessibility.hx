@@ -6,32 +6,36 @@ import flight._internal._Runtime;
 import flight._Accessibility as Facade_Accessibility_flight__Accessibility;
 import flight.types.AccessibilityLiveness;
 import flight.types.AccessibilityNode;
-import flight.types.BackendExplanation;
+import flight.types.AccessibilityOperationOutcome;
+import flight.types.HasAccessibilityProvider;
 
 class Accessibility {
-  public static function announceAccessibility(message:String, ?liveness:AccessibilityLiveness):Void {
-    Facade_Accessibility_flight__Accessibility.announceAccessibility(message, liveness);
-  }
-
-  public static function clearAccessibilityTree():Void {
-    Facade_Accessibility_flight__Accessibility.clearAccessibilityTree();
-  }
-
-  public static function explainAccessibilityBackend():BackendExplanation {
-    return cast Facade_Accessibility_flight__Accessibility.explainAccessibilityBackend();
+  public static function announceAccessibility(host:HasAccessibilityProvider, message:String, ?liveness:AccessibilityLiveness):AccessibilityOperationOutcome<String> {
+    return cast Facade_Accessibility_flight__Accessibility.announceAccessibility(host, message, liveness);
     return cast null;
   }
 
-  public static function removeAccessibilityNode(id:String):Void {
-    Facade_Accessibility_flight__Accessibility.removeAccessibilityNode(id);
-  }
-
-  public static function setAccessibilityFocus(id:String):Bool {
-    return cast Facade_Accessibility_flight__Accessibility.setAccessibilityFocus(id);
+  public static function clearAccessibilityTree(host:HasAccessibilityProvider):AccessibilityOperationOutcome<String> {
+    return cast Facade_Accessibility_flight__Accessibility.clearAccessibilityTree(host);
     return cast null;
   }
 
-  public static function setAccessibilityNode(node:AccessibilityNode):Void {
-    Facade_Accessibility_flight__Accessibility.setAccessibilityNode(node);
+  public static function destroyAccessibility(host:HasAccessibilityProvider):Void {
+    Facade_Accessibility_flight__Accessibility.destroyAccessibility(host);
+  }
+
+  public static function removeAccessibilityNode(host:HasAccessibilityProvider, id:String):AccessibilityOperationOutcome<String> {
+    return cast Facade_Accessibility_flight__Accessibility.removeAccessibilityNode(host, id);
+    return cast null;
+  }
+
+  public static function setAccessibilityFocus(host:HasAccessibilityProvider, id:String):AccessibilityOperationOutcome<String> {
+    return cast Facade_Accessibility_flight__Accessibility.setAccessibilityFocus(host, id);
+    return cast null;
+  }
+
+  public static function setAccessibilityNode(host:HasAccessibilityProvider, node:AccessibilityNode):AccessibilityOperationOutcome<String> {
+    return cast Facade_Accessibility_flight__Accessibility.setAccessibilityNode(host, node);
+    return cast null;
   }
 }

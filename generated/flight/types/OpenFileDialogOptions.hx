@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef OpenFileDialogOptions = { @:optional var title:String; @:optional var multiple:Bool; @:optional var directory:Bool; @:optional var filters:Array<FileDialogFilter>; @:optional var defaultPath:String; @:optional var startIn:FileDialogStartIn; @:optional var parentWindow:ApplicationWindow; };
+typedef OpenFileDialogOptions = { @:optional var filters:Array<FileDialogFilter>; @:optional var multiple:Bool; };

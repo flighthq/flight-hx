@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayIconOptions = { @:optional var icon:String; @:optional var iconTemplate:Bool; @:optional var title:String; @:optional var tooltip:String; };
+typedef TrayIconOptions = { @:optional var icon:TrayIconSource; @:optional var iconTemplate:Bool; @:optional var signal:flight._internal.dom.AbortSignal; @:optional var title:String; @:optional var tooltip:String; };

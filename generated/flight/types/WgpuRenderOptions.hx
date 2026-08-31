@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuRenderOptions = { @:optional var acquisition:WgpuHostAcquisition; @:optional var antialias:Bool; @:optional var backgroundColor:Float; @:optional var format:flight._internal.dom.GPUTextureFormat; @:optional var imageSmoothingEnabled:Bool; @:optional var pixelRatio:Float; @:optional var powerPreference:flight._internal.dom.GPUPowerPreference; @:optional var roundPixels:Bool; @:optional var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; };
+typedef WgpuRenderOptions = { @:optional var antialias:Bool; @:optional var backgroundColor:Float; @:optional var format:flight._internal.dom.GPUTextureFormat; @:optional var imageSmoothingEnabled:Bool; @:optional var pixelRatio:Float; @:optional var roundPixels:Bool; @:optional var sceneGraphSyncPolicy:Scene3DGraphSyncPolicy; };

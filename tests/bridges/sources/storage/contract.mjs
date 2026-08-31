@@ -4,3 +4,4 @@ function __syncDependencies() {}
 __syncDependencies();
 
 export * from './storage.mjs';
+export * from './storagePersistence.mjs';

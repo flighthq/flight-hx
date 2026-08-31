@@ -4,23 +4,49 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Screen as Facade_Screen_flight__Screen;
-import flight.types.BackendExplanation;
+import flight.types.HasScreenChange;
+import flight.types.HasScreenDetails;
+import flight.types.HasScreenPermissionChange;
+import flight.types.HasScreenQuery;
 import flight.types.RectangleLike;
-import flight.types.ScreenChangeEvent;
 import flight.types.ScreenInfo;
 import flight.types.ScreenMode;
+import flight.types.ScreenPermissionChange;
 import flight.types.ScreenPermissionState;
 import flight.types.ScreenSignals;
 import flight.types.Vector2Like;
 
 class Screen {
-  public static function attachScreenSignals(signals:ScreenSignals):Void {
-    Facade_Screen_flight__Screen.attachScreenSignals(signals);
+  public static function attachScreenPermissionChange(host:HasScreenPermissionChange, permissionChange:ScreenPermissionChange):Void {
+    Facade_Screen_flight__Screen.attachScreenPermissionChange(host, permissionChange);
+  }
+
+  public static function attachScreenSignals(host:HasScreenChange, signals:ScreenSignals):Void {
+    Facade_Screen_flight__Screen.attachScreenSignals(host, signals);
+  }
+
+  public static function createScreenInfo():ScreenInfo {
+    return cast Facade_Screen_flight__Screen.createScreenInfo();
+    return cast null;
   }
 
   public static function createScreenMode():ScreenMode {
     return cast Facade_Screen_flight__Screen.createScreenMode();
     return cast null;
+  }
+
+  public static function createScreenPermissionChange():ScreenPermissionChange {
+    return cast Facade_Screen_flight__Screen.createScreenPermissionChange();
+    return cast null;
+  }
+
+  public static function createScreenSignals():ScreenSignals {
+    return cast Facade_Screen_flight__Screen.createScreenSignals();
+    return cast null;
+  }
+
+  public static function detachScreenPermissionChange(permissionChange:ScreenPermissionChange):Void {
+    Facade_Screen_flight__Screen.detachScreenPermissionChange(permissionChange);
   }
 
   public static function detachScreenSignals(signals:ScreenSignals):Void {
@@ -37,22 +63,16 @@ class Screen {
     return cast null;
   }
 
+  public static function disposeScreenPermissionChange(permissionChange:ScreenPermissionChange):Void {
+    Facade_Screen_flight__Screen.disposeScreenPermissionChange(permissionChange);
+  }
+
   public static function disposeScreenSignals(signals:ScreenSignals):Void {
     Facade_Screen_flight__Screen.disposeScreenSignals(signals);
   }
 
-  public static function enableScreenSignals():ScreenSignals {
-    return cast Facade_Screen_flight__Screen.enableScreenSignals();
-    return cast null;
-  }
-
-  public static function explainScreenBackend():BackendExplanation {
-    return cast Facade_Screen_flight__Screen.explainScreenBackend();
-    return cast null;
-  }
-
-  public static function getPrimaryScreen(out:ScreenInfo):ScreenInfo {
-    return cast Facade_Screen_flight__Screen.getPrimaryScreen(out);
+  public static function getPrimaryScreen(host:HasScreenQuery, out:ScreenInfo):ScreenInfo {
+    return cast Facade_Screen_flight__Screen.getPrimaryScreen(host, out);
     return cast null;
   }
 
@@ -61,13 +81,13 @@ class Screen {
     return cast null;
   }
 
-  public static function getScreenById(id:Float, out:ScreenInfo):Null<ScreenInfo> {
-    return cast Facade_Screen_flight__Screen.getScreenById(id, out);
+  public static function getScreenById(host:HasScreenQuery, id:Float, out:ScreenInfo):Null<ScreenInfo> {
+    return cast Facade_Screen_flight__Screen.getScreenById(host, id, out);
     return cast null;
   }
 
-  public static function getScreenContainingRect(rect:RectangleLike, out:ScreenInfo):ScreenInfo {
-    return cast Facade_Screen_flight__Screen.getScreenContainingRect(rect, out);
+  public static function getScreenContainingRect(host:HasScreenQuery, rect:RectangleLike, out:ScreenInfo):ScreenInfo {
+    return cast Facade_Screen_flight__Screen.getScreenContainingRect(host, rect, out);
     return cast null;
   }
 
@@ -76,38 +96,33 @@ class Screen {
     return cast null;
   }
 
-  public static function getScreenCursorPosition(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
-    return cast Facade_Screen_flight__Screen.getScreenCursorPosition(out);
+  public static function getScreenCursorPosition(host:HasScreenQuery, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
+    return cast Facade_Screen_flight__Screen.getScreenCursorPosition(host, out);
     return cast null;
   }
 
-  public static function getScreenCursorScreen(out:ScreenInfo):ScreenInfo {
-    return cast Facade_Screen_flight__Screen.getScreenCursorScreen(out);
+  public static function getScreenCursorScreen(host:HasScreenQuery, out:ScreenInfo):ScreenInfo {
+    return cast Facade_Screen_flight__Screen.getScreenCursorScreen(host, out);
     return cast null;
   }
 
-  public static function getScreenDetailPermission():flight._internal._Promise<ScreenPermissionState> {
-    return cast Facade_Screen_flight__Screen.getScreenDetailPermission();
+  public static function getScreenDetailPermission(host:HasScreenDetails):flight._internal._Promise<ScreenPermissionState> {
+    return cast Facade_Screen_flight__Screen.getScreenDetailPermission(host);
     return cast null;
   }
 
-  public static function getScreenModes(screen:ScreenInfo, out:Array<ScreenMode>):Array<ScreenMode> {
-    return cast Facade_Screen_flight__Screen.getScreenModes(screen, out);
+  public static function getScreenNearestPoint(host:HasScreenQuery, point:Vector2Like, out:ScreenInfo):ScreenInfo {
+    return cast Facade_Screen_flight__Screen.getScreenNearestPoint(host, point, out);
     return cast null;
   }
 
-  public static function getScreenNearestPoint(point:Vector2Like, out:ScreenInfo):ScreenInfo {
-    return cast Facade_Screen_flight__Screen.getScreenNearestPoint(point, out);
+  public static function getScreenNearestRect(host:HasScreenQuery, rect:RectangleLike, out:ScreenInfo):ScreenInfo {
+    return cast Facade_Screen_flight__Screen.getScreenNearestRect(host, rect, out);
     return cast null;
   }
 
-  public static function getScreenNearestRect(rect:RectangleLike, out:ScreenInfo):ScreenInfo {
-    return cast Facade_Screen_flight__Screen.getScreenNearestRect(rect, out);
-    return cast null;
-  }
-
-  public static function getScreens(out:Array<ScreenInfo>):Array<ScreenInfo> {
-    return cast Facade_Screen_flight__Screen.getScreens(out);
+  public static function getScreens(host:HasScreenQuery, out:Array<ScreenInfo>):Array<ScreenInfo> {
+    return cast Facade_Screen_flight__Screen.getScreens(host, out);
     return cast null;
   }
 
@@ -116,22 +131,8 @@ class Screen {
     return cast null;
   }
 
-  public static function onScreenChange(listener:ScreenChangeEvent->Void):Void->Void {
-    return cast Facade_Screen_flight__Screen.onScreenChange(listener);
-    return cast null;
-  }
-
-  public static function onScreenDetailPermissionChange(listener:ScreenPermissionState->Void):Void->Void {
-    return cast Facade_Screen_flight__Screen.onScreenDetailPermissionChange(listener);
-    return cast null;
-  }
-
-  public static function refreshScreens():Void {
-    Facade_Screen_flight__Screen.refreshScreens();
-  }
-
-  public static function requestScreenDetails():flight._internal._Promise<Bool> {
-    return cast Facade_Screen_flight__Screen.requestScreenDetails();
+  public static function requestScreenDetails(host:HasScreenDetails):flight._internal._Promise<Bool> {
+    return cast Facade_Screen_flight__Screen.requestScreenDetails(host);
     return cast null;
   }
 

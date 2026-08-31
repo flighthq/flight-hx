@@ -4,12 +4,18 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Scene2DCanvas as Facade_Scene2DCanvas_flight__Scene2DCanvas;
+import flight.types.CanvasPipeline;
+import flight.types.CanvasRenderRegistries;
 import flight.types.CanvasRenderState;
+import flight.types.CanvasRenderSurface;
+import flight.types.CanvasRenderSurfaceCreator;
+import flight.types.CanvasRenderSurfaceOptions;
 import flight.types.CanvasRenderTextureExplanation;
 import flight.types.CanvasRenderTexturePool;
 import flight.types.CanvasShapeCommand;
 import flight.types.CanvasTextureResolver;
 import flight.types.CanvasTextureResolvers;
+import flight.types.KeyedTable;
 import flight.types.Matrix;
 import flight.types.Node2D;
 import flight.types.RenderCache;
@@ -29,6 +35,11 @@ import flight.types.TextureResolutionExplanation;
 import flight.types.TextureSourceKind;
 
 class Scene2DCanvas {
+  public static function acquireCanvasRenderSurface(creator:CanvasRenderSurfaceCreator, options:CanvasRenderSurfaceOptions):Null<CanvasRenderSurface> {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.acquireCanvasRenderSurface(creator, options);
+    return cast null;
+  }
+
   public static function acquireCanvasRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, descriptor:RenderTargetDescriptor):RenderTexture {
     return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.acquireCanvasRenderTexture(state, pool, descriptor);
     return cast null;
@@ -39,36 +50,47 @@ class Scene2DCanvas {
     return cast null;
   }
 
+  public static function canvasShapeCommandTable():KeyedTable<CanvasShapeCommand<String>> {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.canvasShapeCommandTable();
+    return cast null;
+  }
+
   public static function connectCanvasTextureResolverMisses(resolvers:CanvasTextureResolvers, state:RenderState):Void {
     Facade_Scene2DCanvas_flight__Scene2DCanvas.connectCanvasTextureResolverMisses(resolvers, state);
   }
 
-  public static function copyCanvasRenderStateRegistrations(target:CanvasRenderState, source:CanvasRenderState):Void {
-    Facade_Scene2DCanvas_flight__Scene2DCanvas.copyCanvasRenderStateRegistrations(target, source);
-  }
-
-  public static function createCanvasCacheState(screenState:CanvasRenderState):CanvasRenderState {
-    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasCacheState(screenState);
+  public static function createCanvasCacheState(ownerState:CanvasRenderState, surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasCacheState(ownerState, surface, pipeline, canvasTextureResolvers, options);
     return cast null;
   }
 
-  public static function createCanvasElement(width:Float, height:Float, ?pixelRatio:Float):flight._internal.dom.HTMLCanvasElement {
-    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasElement(width, height, pixelRatio);
+  public static function createCanvasElement(creator:CanvasRenderSurfaceCreator, width:Float, height:Float, ?pixelRatio:Float):flight._internal.dom.HTMLCanvasElement {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasElement(creator, width, height, pixelRatio);
     return cast null;
   }
 
-  public static function createCanvasOffscreenRenderState(screenState:CanvasRenderState):CanvasRenderState {
-    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasOffscreenRenderState(screenState);
+  public static function createCanvasOffscreenRenderState(surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasOffscreenRenderState(surface, pipeline, canvasTextureResolvers, options);
     return cast null;
   }
 
-  public static function createCanvasRenderState(canvas:flight._internal.dom.HTMLCanvasElement, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
-    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasRenderState(canvas, options);
+  public static function createCanvasPipeline(registries:CanvasRenderRegistries):CanvasPipeline {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasPipeline(registries);
     return cast null;
   }
 
-  public static function createCanvasRenderTexturePool():CanvasRenderTexturePool {
-    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasRenderTexturePool();
+  public static function createCanvasRenderState(surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasRenderState(surface, pipeline, canvasTextureResolvers, options);
+    return cast null;
+  }
+
+  public static function createCanvasRenderSurface(creator:CanvasRenderSurfaceCreator, canvas:flight._internal.dom.HTMLCanvasElement, ?options:{ @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }):CanvasRenderSurface {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasRenderSurface(creator, canvas, options);
+    return cast null;
+  }
+
+  public static function createCanvasRenderTexturePool(creator:CanvasRenderSurfaceCreator):CanvasRenderTexturePool {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasRenderTexturePool(creator);
     return cast null;
   }
 
@@ -77,8 +99,13 @@ class Scene2DCanvas {
     return cast null;
   }
 
-  public static function createCanvasTextureResolvers():CanvasTextureResolvers {
-    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasTextureResolvers();
+  public static function createCanvasTextureResolvers(surfaceCreator:CanvasRenderSurfaceCreator):CanvasTextureResolvers {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createCanvasTextureResolvers(surfaceCreator);
+    return cast null;
+  }
+
+  public static function createEmptyCanvasRegistries():CanvasRenderRegistries {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.createEmptyCanvasRegistries();
     return cast null;
   }
 
@@ -138,12 +165,20 @@ class Scene2DCanvas {
     Facade_Scene2DCanvas_flight__Scene2DCanvas.destroyCanvasRenderState(state);
   }
 
+  public static function destroyCanvasRenderSurface(surface:CanvasRenderSurface):Void {
+    Facade_Scene2DCanvas_flight__Scene2DCanvas.destroyCanvasRenderSurface(surface);
+  }
+
   public static function destroyCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Void {
     Facade_Scene2DCanvas_flight__Scene2DCanvas.destroyCanvasRenderTexture(state, renderTexture);
   }
 
   public static function destroyCanvasRenderTexturePool(state:CanvasRenderState, pool:CanvasRenderTexturePool):Void {
     Facade_Scene2DCanvas_flight__Scene2DCanvas.destroyCanvasRenderTexturePool(state, pool);
+  }
+
+  public static function destroyCanvasTextureResolvers(resolvers:CanvasTextureResolvers):Void {
+    Facade_Scene2DCanvas_flight__Scene2DCanvas.destroyCanvasTextureResolvers(resolvers);
   }
 
   public static function enableCanvasBlendMode(state:CanvasRenderState):Void {
@@ -180,6 +215,11 @@ class Scene2DCanvas {
     return cast null;
   }
 
+  public static function getCanvasPipelineRegistries(pipeline:CanvasPipeline):CanvasRenderRegistries {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.getCanvasPipelineRegistries(pipeline);
+    return cast null;
+  }
+
   public static function getCanvasRenderStateTextureResolvers(state:CanvasRenderState):CanvasTextureResolvers {
     return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.getCanvasRenderStateTextureResolvers(state);
     return cast null;
@@ -190,8 +230,8 @@ class Scene2DCanvas {
     return cast null;
   }
 
-  public static function refreshCanvasRenderCache(cacheState:CanvasRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
-    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.refreshCanvasRenderCache(cacheState, cache, source, options);
+  public static function refreshCanvasRenderCache(ownerState:CanvasRenderState, cacheState:CanvasRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
+    return cast Facade_Scene2DCanvas_flight__Scene2DCanvas.refreshCanvasRenderCache(ownerState, cacheState, cache, source, options);
     return cast null;
   }
 
@@ -227,9 +267,11 @@ class Scene2DCanvas {
     Facade_Scene2DCanvas_flight__Scene2DCanvas.renderCanvasScene2D(state, source);
   }
 
-  public static function renderIntoCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void {
-    Facade_Scene2DCanvas_flight__Scene2DCanvas.renderIntoCanvasRenderTexture(state, renderTexture, callback);
+  public static function renderIntoCanvasRenderTexture(ownerState:CanvasRenderState, renderState:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void {
+    Facade_Scene2DCanvas_flight__Scene2DCanvas.renderIntoCanvasRenderTexture(ownerState, renderState, renderTexture, callback);
   }
+
+  public static final scene2dCanvasPipeline:CanvasPipeline = Facade_Scene2DCanvas_flight__Scene2DCanvas.scene2dCanvasPipeline;
 
   public static function setCanvasRenderTransform2D(state:CanvasRenderState, transform:Matrix):Void {
     Facade_Scene2DCanvas_flight__Scene2DCanvas.setCanvasRenderTransform2D(state, transform);

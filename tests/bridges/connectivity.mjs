@@ -3,12 +3,12 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const attachConnectivity = compiled.flight.Connectivity.attachConnectivity;
 export const createConnectivity = compiled.flight.Connectivity.createConnectivity;
+export const destroyConnectivity = compiled.flight.Connectivity.destroyConnectivity;
 export const detachConnectivity = compiled.flight.Connectivity.detachConnectivity;
 export const detectConnectivityReachability = compiled.flight.Connectivity.detectConnectivityReachability;
 export const disposeConnectivity = compiled.flight.Connectivity.disposeConnectivity;
-export const explainConnectivityBackend = compiled.flight.Connectivity.explainConnectivityBackend;
+export const getConnectivityOnline = compiled.flight.Connectivity.getConnectivityOnline;
 export const getConnectivityStatus = compiled.flight.Connectivity.getConnectivityStatus;
 export const hasConnectivityStatusChanged = compiled.flight.Connectivity.hasConnectivityStatusChanged;
 export const isConnectivityMetered = compiled.flight.Connectivity.isConnectivityMetered;
-export const isConnectivityOnline = compiled.flight.Connectivity.isConnectivityOnline;
 export const isConnectivitySaveDataEnabled = compiled.flight.Connectivity.isConnectivitySaveDataEnabled;

@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Spatial as Facade_Spatial_flight__Spatial;
+import flight.types.Entity;
 import flight.types.SpatialAabb2D;
 import flight.types.SpatialAabb3D;
 import flight.types.SpatialFrustum3D;
@@ -26,7 +27,7 @@ class Spatial {
     Facade_Spatial_flight__Spatial.clearSpatialIndex3D(index);
   }
 
-  public static function createBvhSpatialBackend3D(?margin:Float):SpatialIndexBackend3D {
+  public static function createBvhSpatialBackend3D(?margin:Float):{ >SpatialIndexBackend3D, >Entity, } {
     return cast Facade_Spatial_flight__Spatial.createBvhSpatialBackend3D(margin);
     return cast null;
   }
@@ -41,12 +42,12 @@ class Spatial {
     return cast null;
   }
 
-  public static function createUniformGridSpatialBackend2D(cellSize:Float):SpatialIndexBackend2D {
+  public static function createUniformGridSpatialBackend2D(cellSize:Float):{ >SpatialIndexBackend2D, >Entity, } {
     return cast Facade_Spatial_flight__Spatial.createUniformGridSpatialBackend2D(cellSize);
     return cast null;
   }
 
-  public static function createUniformGridSpatialBackend3D(cellSize:Float):SpatialIndexBackend3D {
+  public static function createUniformGridSpatialBackend3D(cellSize:Float):{ >SpatialIndexBackend3D, >Entity, } {
     return cast Facade_Spatial_flight__Spatial.createUniformGridSpatialBackend3D(cellSize);
     return cast null;
   }

@@ -6,17 +6,18 @@ import * as __dependency2 from './wgpuQuadBatchWriter.mjs';
 
 const api = compiled.flight._Scene2DWgpu;
 function __syncDependencies() {
-  compiled.flight._RenderWgpu.createWgpuRenderStateRuntime = __dependency0.createWgpuRenderStateRuntime;
-  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
-  compiled.flight._RenderWgpu.beginWgpuFrame = __dependency0.beginWgpuFrame;
   compiled.flight._RenderWgpu.beginWgpuRenderPass = __dependency0.beginWgpuRenderPass;
+  compiled.flight._RenderWgpu.createWgpuOffscreenRenderState = __dependency0.createWgpuOffscreenRenderState;
   compiled.flight._RenderWgpu.createWgpuRenderTarget = __dependency0.createWgpuRenderTarget;
+  compiled.flight._RenderWgpu.destroyWgpuRenderState = __dependency0.destroyWgpuRenderState;
   compiled.flight._RenderWgpu.destroyWgpuRenderTarget = __dependency0.destroyWgpuRenderTarget;
   compiled.flight._RenderWgpu.drawWgpuRenderTargetResult = __dependency0.drawWgpuRenderTargetResult;
   compiled.flight._RenderWgpu.endWgpuRenderPass = __dependency0.endWgpuRenderPass;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
   compiled.flight._RenderWgpu.resizeWgpuRenderTarget = __dependency0.resizeWgpuRenderTarget;
+  compiled.flight._RenderWgpu.registerWgpuRenderStateTeardown = __dependency0.registerWgpuRenderStateTeardown;
   compiled.flight._RenderWgpu.setWgpuRenderTransform2D = __dependency0.setWgpuRenderTransform2D;
-  compiled.flight._RenderWgpu.submitWgpuRenderPass = __dependency0.submitWgpuRenderPass;
+  compiled.flight._RenderWgpu.withWgpuFrameBorrow = __dependency0.withWgpuFrameBorrow;
   compiled.flight._Scene2DWgpu.renderWgpuScene2D = __dependency1.renderWgpuScene2D;
   compiled.flight._Scene2DWgpu.flushWgpuQuadBatchWriter = __dependency2.flushWgpuQuadBatchWriter;
 }
@@ -26,7 +27,6 @@ export const createWgpuCacheState = api.createWgpuCacheState;
 export const defaultWgpuRenderCacheRenderer = api.defaultWgpuRenderCacheRenderer;
 export const enableWgpuRenderCache = api.enableWgpuRenderCache;
 export const ensureWgpuRenderCacheTarget = api.ensureWgpuRenderCacheTarget;
-export const getWgpuRenderCacheScreenState = api.getWgpuRenderCacheScreenState;
 export const getWgpuRenderCacheTarget = api.getWgpuRenderCacheTarget;
 export const refreshWgpuRenderCache = api.refreshWgpuRenderCache;
 export const releaseWgpuRenderCache = api.releaseWgpuRenderCache;

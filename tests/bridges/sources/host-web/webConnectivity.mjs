@@ -5,5 +5,5 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebConnectivity = api.enableHostWebConnectivity;
-export const resetHostWebConnectivityForTest = api.resetHostWebConnectivityForTest;
+export const createWebConnectivityBackend = api.createWebConnectivityBackend;
+export const webConnectivityBackend = api.webConnectivityBackend;

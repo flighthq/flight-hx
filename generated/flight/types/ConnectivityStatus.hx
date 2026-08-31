@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ConnectivityStatus = { var online:Bool; var type:ConnectivityConnectionType; var downlink:Float; var downlinkMax:Float; var effectiveType:String; var rtt:Float; var saveData:Bool; var metered:Bool; };
+typedef ConnectivityStatus = { var online:Null<Bool>; var type:ConnectivityConnectionType; var downlink:Float; var downlinkMax:Float; var effectiveType:String; var rtt:Float; var saveData:Bool; var metered:Bool; };

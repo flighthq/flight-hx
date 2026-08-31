@@ -5,4 +5,4 @@ const api = compiled.flight._HostElectron;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createElectronScreenBackend = api.createElectronScreenBackend;
+export const createElectronScreenCapabilities = api.createElectronScreenCapabilities;

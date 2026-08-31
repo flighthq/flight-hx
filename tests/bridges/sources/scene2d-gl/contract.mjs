@@ -32,6 +32,7 @@ export * from './glTextInput.mjs';
 export * from './glTextLabel.mjs';
 export * from './glTilemap.mjs';
 export * from './glVelocity.mjs';
+export * from './scene2dGlPipeline.mjs';
 export { defaultCanvasBeginFill as defaultGlBeginFill } from '@flighthq/scene2d-canvas/contract';
 export { defaultCanvasBeginGradientFill as defaultGlBeginGradientFill } from '@flighthq/scene2d-canvas/contract';
 export { defaultCanvasBeginTextureFill as defaultGlBeginTextureFill } from '@flighthq/scene2d-canvas/contract';

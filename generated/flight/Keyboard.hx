@@ -4,25 +4,30 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Keyboard as Facade_Keyboard_flight__Keyboard;
-import flight.types.BackendExplanation;
+import flight.types.Entity;
+import flight.types.HasSoftKeyboardAccessoryBar;
+import flight.types.HasSoftKeyboardChange;
+import flight.types.HasSoftKeyboardInfo;
+import flight.types.HasSoftKeyboardResizeModeWrite;
+import flight.types.HasSoftKeyboardScrollAssist;
+import flight.types.HasSoftKeyboardStyle;
+import flight.types.HasSoftKeyboardVisibility;
 import flight.types.SoftKeyboard;
+import flight.types.SoftKeyboardAttachResult;
 import flight.types.SoftKeyboardInfo;
 import flight.types.SoftKeyboardResizeMode;
+import flight.types.SoftKeyboardSetterResult;
 import flight.types.SoftKeyboardStyleKind;
-import flight.types.SoftKeyboardTransition;
+import flight.types.SoftKeyboardVisibilityResult;
 
 class Keyboard {
-  public static function attachSoftKeyboard(keyboard:SoftKeyboard):Void {
-    Facade_Keyboard_flight__Keyboard.attachSoftKeyboard(keyboard);
-  }
-
-  public static function createSoftKeyboard():SoftKeyboard {
-    return cast Facade_Keyboard_flight__Keyboard.createSoftKeyboard();
+  public static function attachSoftKeyboard(host:{ >HasSoftKeyboardChange, >HasSoftKeyboardInfo, }, keyboard:SoftKeyboard):flight._internal._Promise<SoftKeyboardAttachResult> {
+    return cast Facade_Keyboard_flight__Keyboard.attachSoftKeyboard(host, keyboard);
     return cast null;
   }
 
-  public static function createSoftKeyboardTransition():SoftKeyboardTransition {
-    return cast Facade_Keyboard_flight__Keyboard.createSoftKeyboardTransition();
+  public static function createSoftKeyboard():{ >SoftKeyboard, >Entity, } {
+    return cast Facade_Keyboard_flight__Keyboard.createSoftKeyboard();
     return cast null;
   }
 
@@ -34,57 +39,48 @@ class Keyboard {
     Facade_Keyboard_flight__Keyboard.disposeSoftKeyboard(keyboard);
   }
 
-  public static function explainSoftKeyboardBackend():BackendExplanation {
-    return cast Facade_Keyboard_flight__Keyboard.explainSoftKeyboardBackend();
+  public static function getSoftKeyboardHeight(host:HasSoftKeyboardInfo):Float {
+    return cast Facade_Keyboard_flight__Keyboard.getSoftKeyboardHeight(host);
     return cast null;
   }
 
-  public static function getSoftKeyboardHeight():Float {
-    return cast Facade_Keyboard_flight__Keyboard.getSoftKeyboardHeight();
+  public static function getSoftKeyboardInfo(host:HasSoftKeyboardInfo, out:SoftKeyboardInfo):SoftKeyboardInfo {
+    return cast Facade_Keyboard_flight__Keyboard.getSoftKeyboardInfo(host, out);
     return cast null;
   }
 
-  public static function getSoftKeyboardInfo(out:SoftKeyboardInfo):SoftKeyboardInfo {
-    return cast Facade_Keyboard_flight__Keyboard.getSoftKeyboardInfo(out);
+  public static function hideSoftKeyboard(host:HasSoftKeyboardVisibility):flight._internal._Promise<SoftKeyboardVisibilityResult> {
+    return cast Facade_Keyboard_flight__Keyboard.hideSoftKeyboard(host);
     return cast null;
   }
 
-  public static function getSoftKeyboardResizeMode():SoftKeyboardResizeMode {
-    return cast Facade_Keyboard_flight__Keyboard.getSoftKeyboardResizeMode();
+  public static function isSoftKeyboardVisible(host:HasSoftKeyboardInfo):Bool {
+    return cast Facade_Keyboard_flight__Keyboard.isSoftKeyboardVisible(host);
     return cast null;
   }
 
-  public static function hideSoftKeyboard():Void {
-    Facade_Keyboard_flight__Keyboard.hideSoftKeyboard();
-  }
-
-  public static function isSoftKeyboardAccessoryBarVisible():Bool {
-    return cast Facade_Keyboard_flight__Keyboard.isSoftKeyboardAccessoryBarVisible();
+  public static function setSoftKeyboardAccessoryBarVisible(host:HasSoftKeyboardAccessoryBar, visible:Bool):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast Facade_Keyboard_flight__Keyboard.setSoftKeyboardAccessoryBarVisible(host, visible);
     return cast null;
   }
 
-  public static function isSoftKeyboardScrollAssistEnabled():Bool {
-    return cast Facade_Keyboard_flight__Keyboard.isSoftKeyboardScrollAssistEnabled();
+  public static function setSoftKeyboardResizeMode(host:HasSoftKeyboardResizeModeWrite, mode:SoftKeyboardResizeMode):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast Facade_Keyboard_flight__Keyboard.setSoftKeyboardResizeMode(host, mode);
     return cast null;
   }
 
-  public static function setSoftKeyboardAccessoryBarVisible(visible:Bool):Void {
-    Facade_Keyboard_flight__Keyboard.setSoftKeyboardAccessoryBarVisible(visible);
+  public static function setSoftKeyboardScrollAssistEnabled(host:HasSoftKeyboardScrollAssist, enabled:Bool):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast Facade_Keyboard_flight__Keyboard.setSoftKeyboardScrollAssistEnabled(host, enabled);
+    return cast null;
   }
 
-  public static function setSoftKeyboardResizeMode(mode:SoftKeyboardResizeMode):Void {
-    Facade_Keyboard_flight__Keyboard.setSoftKeyboardResizeMode(mode);
+  public static function setSoftKeyboardStyle(host:HasSoftKeyboardStyle, style:SoftKeyboardStyleKind):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast Facade_Keyboard_flight__Keyboard.setSoftKeyboardStyle(host, style);
+    return cast null;
   }
 
-  public static function setSoftKeyboardScrollAssistEnabled(enabled:Bool):Void {
-    Facade_Keyboard_flight__Keyboard.setSoftKeyboardScrollAssistEnabled(enabled);
-  }
-
-  public static function setSoftKeyboardStyle(style:SoftKeyboardStyleKind):Void {
-    Facade_Keyboard_flight__Keyboard.setSoftKeyboardStyle(style);
-  }
-
-  public static function showSoftKeyboard():Void {
-    Facade_Keyboard_flight__Keyboard.showSoftKeyboard();
+  public static function showSoftKeyboard(host:HasSoftKeyboardVisibility):flight._internal._Promise<SoftKeyboardVisibilityResult> {
+    return cast Facade_Keyboard_flight__Keyboard.showSoftKeyboard(host);
+    return cast null;
   }
 }

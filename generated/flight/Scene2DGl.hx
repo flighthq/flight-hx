@@ -6,6 +6,9 @@ import flight._internal._Runtime;
 import flight._Scene2DCanvas as Facade_Scene2DGl_flight__Scene2DCanvas;
 import flight._Scene2DGl as Facade_Scene2DGl_flight__Scene2DGl;
 import flight.types.CanvasShapeCommand;
+import flight.types.GlContextState;
+import flight.types.GlPipeline;
+import flight.types.GlRenderOptions;
 import flight.types.GlRenderState;
 import flight.types.GlRenderTarget;
 import flight.types.GlVelocityWriter;
@@ -25,8 +28,8 @@ import flight.types.Transform2DNode;
 import flight.types.VelocityField;
 
 class Scene2DGl {
-  public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
-    return cast Facade_Scene2DGl_flight__Scene2DGl.createGlCacheState(screenState);
+  public static function createGlCacheState(ownerState:GlRenderState, contextState:GlContextState, pipeline:GlPipeline, ?options:GlRenderOptions):GlRenderState {
+    return cast Facade_Scene2DGl_flight__Scene2DGl.createGlCacheState(ownerState, contextState, pipeline, options);
     return cast null;
   }
 
@@ -101,8 +104,8 @@ class Scene2DGl {
     return cast null;
   }
 
-  public static function refreshGlRenderCache(cacheState:GlRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
-    return cast Facade_Scene2DGl_flight__Scene2DGl.refreshGlRenderCache(cacheState, cache, source, options);
+  public static function refreshGlRenderCache(ownerState:GlRenderState, cacheState:GlRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
+    return cast Facade_Scene2DGl_flight__Scene2DGl.refreshGlRenderCache(ownerState, cacheState, cache, source, options);
     return cast null;
   }
 
@@ -133,4 +136,6 @@ class Scene2DGl {
   public static function renderGlVelocity<Traits:flight._internal._Object>(state:GlRenderState, root:Transform2DNode<Traits>, field:VelocityField, target:GlRenderTarget):Void {
     Facade_Scene2DGl_flight__Scene2DGl.renderGlVelocity(state, root, field, target);
   }
+
+  public static final scene2dGlPipeline:GlPipeline = Facade_Scene2DGl_flight__Scene2DGl.scene2dGlPipeline;
 }

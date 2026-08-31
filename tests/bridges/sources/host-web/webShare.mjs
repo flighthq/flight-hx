@@ -5,5 +5,5 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebShare = api.enableHostWebShare;
-export const resetHostWebShareForTest = api.resetHostWebShareForTest;
+export const webShareContentBackend = api.webShareContentBackend;
+export const webShareFilesBackend = api.webShareFilesBackend;

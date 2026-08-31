@@ -4,42 +4,24 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Permissions as Facade_Permissions_flight__Permissions;
-import flight.types.BackendExplanation;
+import flight.types.Host;
 import flight.types.PermissionName;
-import flight.types.PermissionState;
-import flight.types.PermissionStateExplanation;
+import flight.types.PermissionQueryOutcome;
+import flight.types.PermissionRequestOutcome;
 
 class Permissions {
-  public static function disablePermissionGuards():Void {
-    Facade_Permissions_flight__Permissions.disablePermissionGuards();
-  }
-
-  public static function enablePermissionGuards():Void {
-    Facade_Permissions_flight__Permissions.enablePermissionGuards();
-  }
-
-  public static function explainPermissionBackend():BackendExplanation {
-    return cast Facade_Permissions_flight__Permissions.explainPermissionBackend();
+  public static function getPermissionState(host:Host, name:PermissionName):flight._internal._Promise<PermissionQueryOutcome> {
+    return cast Facade_Permissions_flight__Permissions.getPermissionState(host, name);
     return cast null;
   }
 
-  public static function explainPermissionState(name:PermissionName):flight._internal._Promise<PermissionStateExplanation> {
-    return cast Facade_Permissions_flight__Permissions.explainPermissionState(name);
+  public static function getPermissionStates(host:Host, names:Array<PermissionName>):flight._internal._Promise<Array<PermissionQueryOutcome>> {
+    return cast Facade_Permissions_flight__Permissions.getPermissionStates(host, names);
     return cast null;
   }
 
-  public static function getPermissionState(name:PermissionName):flight._internal._Promise<PermissionState> {
-    return cast Facade_Permissions_flight__Permissions.getPermissionState(name);
-    return cast null;
-  }
-
-  public static function getPermissionStates(names:Array<PermissionName>):flight._internal._Promise<Array<PermissionState>> {
-    return cast Facade_Permissions_flight__Permissions.getPermissionStates(names);
-    return cast null;
-  }
-
-  public static function requestPermission(name:PermissionName):flight._internal._Promise<PermissionState> {
-    return cast Facade_Permissions_flight__Permissions.requestPermission(name);
+  public static function requestPermission(host:Host, name:PermissionName):flight._internal._Promise<PermissionRequestOutcome> {
+    return cast Facade_Permissions_flight__Permissions.requestPermission(host, name);
     return cast null;
   }
 }

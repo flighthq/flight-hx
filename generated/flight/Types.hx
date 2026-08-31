@@ -407,23 +407,27 @@ class Types {
 
   public static final Skeleton2DSlotAnimationPath:{ var Attachment:String; var Color:String; } = Facade_Types_flight__Types.Skeleton2DSlotAnimationPathValue;
 
-  public static final SoftKeyboardEasingDefaultKind:String = Facade_Types_flight__Types.SoftKeyboardEasingDefaultKindValue;
+  public static final SoftKeyboardAttachAcquisitionFailedKind:String = Facade_Types_flight__Types.SoftKeyboardAttachAcquisitionFailedKind;
 
-  public static final SoftKeyboardEasingEaseInKind:String = Facade_Types_flight__Types.SoftKeyboardEasingEaseInKindValue;
-
-  public static final SoftKeyboardEasingEaseOutKind:String = Facade_Types_flight__Types.SoftKeyboardEasingEaseOutKindValue;
-
-  public static final SoftKeyboardEasingKeyboardDefaultKind:String = Facade_Types_flight__Types.SoftKeyboardEasingKeyboardDefaultKindValue;
-
-  public static final SoftKeyboardEasingLinearKind:String = Facade_Types_flight__Types.SoftKeyboardEasingLinearKindValue;
+  public static final SoftKeyboardAttachOkKind:String = Facade_Types_flight__Types.SoftKeyboardAttachOkKind;
 
   public static final SoftKeyboardResizeBodyKind:String = Facade_Types_flight__Types.SoftKeyboardResizeBodyKind;
 
   public static final SoftKeyboardResizeNoneKind:String = Facade_Types_flight__Types.SoftKeyboardResizeNoneKind;
 
+  public static final SoftKeyboardSetterOkKind:String = Facade_Types_flight__Types.SoftKeyboardSetterOkKind;
+
+  public static final SoftKeyboardSetterOperationFailedKind:String = Facade_Types_flight__Types.SoftKeyboardSetterOperationFailedKind;
+
+  public static final SoftKeyboardSetterOperationUnavailableKind:String = Facade_Types_flight__Types.SoftKeyboardSetterOperationUnavailableKind;
+
   public static final SoftKeyboardStyleDarkKind:String = Facade_Types_flight__Types.SoftKeyboardStyleDarkKind;
 
   public static final SoftKeyboardStyleDefaultKind:String = Facade_Types_flight__Types.SoftKeyboardStyleDefaultKind;
+
+  public static final SoftKeyboardVisibilityOkKind:String = Facade_Types_flight__Types.SoftKeyboardVisibilityOkKind;
+
+  public static final SoftKeyboardVisibilityOperationFailedKind:String = Facade_Types_flight__Types.SoftKeyboardVisibilityOperationFailedKind;
 
   public static final SpecularGlossinessPbrMaterialKind:String = Facade_Types_flight__Types.SpecularGlossinessPbrMaterialKind;
 

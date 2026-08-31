@@ -4,13 +4,18 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Protocol as Facade_Protocol_flight__Protocol;
-import flight.types.BackendExplanation;
+import flight.types.HasProtocolDefault;
+import flight.types.HasProtocolLaunch;
+import flight.types.HasProtocolOpen;
+import flight.types.HasProtocolRegistration;
+import flight.types.HasProtocolRegistrationQuery;
+import flight.types.HasProtocolUnregistration;
 import flight.types.ParsedProtocolUrl;
 import flight.types.ProtocolHandler;
 
 class Protocol {
-  public static function attachProtocolHandler(handler:ProtocolHandler):Void {
-    Facade_Protocol_flight__Protocol.attachProtocolHandler(handler);
+  public static function attachProtocolHandler(host:HasProtocolOpen, handler:ProtocolHandler):Void {
+    Facade_Protocol_flight__Protocol.attachProtocolHandler(host, handler);
   }
 
   public static function createProtocolHandler():ProtocolHandler {
@@ -31,28 +36,23 @@ class Protocol {
     Facade_Protocol_flight__Protocol.disposeProtocolHandler(handler);
   }
 
-  public static function explainProtocolBackend():BackendExplanation {
-    return cast Facade_Protocol_flight__Protocol.explainProtocolBackend();
+  public static function getProtocolLaunchUrl(host:HasProtocolLaunch):Null<String> {
+    return cast Facade_Protocol_flight__Protocol.getProtocolLaunchUrl(host);
     return cast null;
   }
 
-  public static function getProtocolLaunchUrl():Null<String> {
-    return cast Facade_Protocol_flight__Protocol.getProtocolLaunchUrl();
+  public static function getRegisteredProtocolSchemes(host:HasProtocolRegistration):Array<String> {
+    return cast Facade_Protocol_flight__Protocol.getRegisteredProtocolSchemes(host);
     return cast null;
   }
 
-  public static function getRegisteredProtocolSchemes():Array<String> {
-    return cast Facade_Protocol_flight__Protocol.getRegisteredProtocolSchemes();
+  public static function isProtocolSchemeDefault(host:HasProtocolDefault, scheme:String):Bool {
+    return cast Facade_Protocol_flight__Protocol.isProtocolSchemeDefault(host, scheme);
     return cast null;
   }
 
-  public static function isProtocolSchemeDefault(scheme:String):Bool {
-    return cast Facade_Protocol_flight__Protocol.isProtocolSchemeDefault(scheme);
-    return cast null;
-  }
-
-  public static function isProtocolSchemeRegistered(scheme:String):Bool {
-    return cast Facade_Protocol_flight__Protocol.isProtocolSchemeRegistered(scheme);
+  public static function isProtocolSchemeRegistered(host:HasProtocolRegistrationQuery, scheme:String):Bool {
+    return cast Facade_Protocol_flight__Protocol.isProtocolSchemeRegistered(host, scheme);
     return cast null;
   }
 
@@ -66,33 +66,33 @@ class Protocol {
     return cast null;
   }
 
-  public static function registerProtocolScheme(scheme:String):Bool {
-    return cast Facade_Protocol_flight__Protocol.registerProtocolScheme(scheme);
+  public static function registerProtocolScheme(host:HasProtocolRegistration, scheme:String):Bool {
+    return cast Facade_Protocol_flight__Protocol.registerProtocolScheme(host, scheme);
     return cast null;
   }
 
-  public static function registerProtocolSchemes(schemes:Array<String>):Bool {
-    return cast Facade_Protocol_flight__Protocol.registerProtocolSchemes(schemes);
+  public static function registerProtocolSchemes(host:HasProtocolRegistration, schemes:Array<String>):Bool {
+    return cast Facade_Protocol_flight__Protocol.registerProtocolSchemes(host, schemes);
     return cast null;
   }
 
-  public static function removeProtocolSchemeAsDefault(scheme:String):Bool {
-    return cast Facade_Protocol_flight__Protocol.removeProtocolSchemeAsDefault(scheme);
+  public static function removeProtocolSchemeAsDefault(host:HasProtocolDefault, scheme:String):Bool {
+    return cast Facade_Protocol_flight__Protocol.removeProtocolSchemeAsDefault(host, scheme);
     return cast null;
   }
 
-  public static function setProtocolSchemeAsDefault(scheme:String):Bool {
-    return cast Facade_Protocol_flight__Protocol.setProtocolSchemeAsDefault(scheme);
+  public static function setProtocolSchemeAsDefault(host:HasProtocolDefault, scheme:String):Bool {
+    return cast Facade_Protocol_flight__Protocol.setProtocolSchemeAsDefault(host, scheme);
     return cast null;
   }
 
-  public static function unregisterProtocolScheme(scheme:String):Bool {
-    return cast Facade_Protocol_flight__Protocol.unregisterProtocolScheme(scheme);
+  public static function unregisterProtocolScheme(host:HasProtocolUnregistration, scheme:String):Bool {
+    return cast Facade_Protocol_flight__Protocol.unregisterProtocolScheme(host, scheme);
     return cast null;
   }
 
-  public static function unregisterProtocolSchemes(schemes:Array<String>):Bool {
-    return cast Facade_Protocol_flight__Protocol.unregisterProtocolSchemes(schemes);
+  public static function unregisterProtocolSchemes(host:HasProtocolUnregistration, schemes:Array<String>):Bool {
+    return cast Facade_Protocol_flight__Protocol.unregisterProtocolSchemes(host, schemes);
     return cast null;
   }
 }

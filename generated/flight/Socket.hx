@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Socket as Facade_Socket_flight__Socket;
+import flight.types.HasNetSocket;
 import flight.types.Socket;
 import flight.types.SocketOptions;
 import flight.types.SocketReadyState;
@@ -24,8 +25,8 @@ class Socket {
     Facade_Socket_flight__Socket.closeSocket(socket, code, reason);
   }
 
-  public static function createSocket(options:SocketOptions):flight.types.Socket {
-    return cast Facade_Socket_flight__Socket.createSocket(options);
+  public static function createSocket(host:HasNetSocket, options:SocketOptions):flight.types.Socket {
+    return cast Facade_Socket_flight__Socket.createSocket(host, options);
     return cast null;
   }
 

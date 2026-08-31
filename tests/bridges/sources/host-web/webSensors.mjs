@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebSensors = api.enableHostWebSensors;
-export const resetHostWebSensorsForTest = api.resetHostWebSensorsForTest;
+export const webSensorsBackend = api.webSensorsBackend;

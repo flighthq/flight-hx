@@ -7,9 +7,10 @@ import flight._Geolocation as Facade_Geolocation_flight__Geolocation;
 import flight.types.BackendExplanation;
 import flight.types.GeoPosition;
 import flight.types.GeoPositionResult;
+import flight.types.GeolocationAccessOutcome;
 import flight.types.GeolocationErrorReason;
-import flight.types.GeolocationPermissionState;
 import flight.types.GeolocationRequestOptions;
+import flight.types.Host;
 
 class Geolocation {
   public static function clearGeolocationWatch(id:Float):Void {
@@ -36,23 +37,13 @@ class Geolocation {
     return cast null;
   }
 
-  public static function getGeolocationPermission():flight._internal._Promise<GeolocationPermissionState> {
-    return cast Facade_Geolocation_flight__Geolocation.getGeolocationPermission();
-    return cast null;
-  }
-
   public static function isGeolocationAvailable():Bool {
     return cast Facade_Geolocation_flight__Geolocation.isGeolocationAvailable();
     return cast null;
   }
 
-  public static function onGeolocationPermissionChange(listener:GeolocationPermissionState->Void):Void->Void {
-    return cast Facade_Geolocation_flight__Geolocation.onGeolocationPermissionChange(listener);
-    return cast null;
-  }
-
-  public static function requestGeolocationPermission():flight._internal._Promise<Bool> {
-    return cast Facade_Geolocation_flight__Geolocation.requestGeolocationPermission();
+  public static function promptForGeolocationAccess(host:Host):flight._internal._Promise<GeolocationAccessOutcome> {
+    return cast Facade_Geolocation_flight__Geolocation.promptForGeolocationAccess(host);
     return cast null;
   }
 

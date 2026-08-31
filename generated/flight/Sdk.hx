@@ -8,7 +8,9 @@ import flight._Accessibility as Facade_Sdk_flight__Accessibility;
 import flight._Adjustments as Facade_Sdk_flight__Adjustments;
 import flight._Animation as Facade_Sdk_flight__Animation;
 import flight._App as Facade_Sdk_flight__App;
+import flight._App.HasAllAppEvents__app;
 import flight._Application as Facade_Sdk_flight__Application;
+import flight._Application.WindowOperationHost__window;
 import flight._ApplicationGl as Facade_Sdk_flight__ApplicationGl;
 import flight._Assets as Facade_Sdk_flight__Assets;
 import flight._Audio as Facade_Sdk_flight__Audio;
@@ -32,8 +34,6 @@ import flight._Connectivity as Facade_Sdk_flight__Connectivity;
 import flight._Debug as Facade_Sdk_flight__Debug;
 import flight._Device as Facade_Sdk_flight__Device;
 import flight._Dialog as Facade_Sdk_flight__Dialog;
-import flight._Dialog.FileSystemDirectoryHandle__dialog;
-import flight._Dialog.FileSystemFileHandle__dialog;
 import flight._Easing as Facade_Sdk_flight__Easing;
 import flight._Effects as Facade_Sdk_flight__Effects;
 import flight._EffectsCanvas as Facade_Sdk_flight__EffectsCanvas;
@@ -69,6 +69,7 @@ import flight._Media as Facade_Sdk_flight__Media;
 import flight._MediaSession as Facade_Sdk_flight__MediaSession;
 import flight._Menu as Facade_Sdk_flight__Menu;
 import flight._Mesh as Facade_Sdk_flight__Mesh;
+import flight._Midi as Facade_Sdk_flight__Midi;
 import flight._MotionPath as Facade_Sdk_flight__MotionPath;
 import flight._MovieClip as Facade_Sdk_flight__MovieClip;
 import flight._Net as Facade_Sdk_flight__Net;
@@ -165,6 +166,7 @@ import flight.types.Accelerator;
 import flight.types.AcceleratorParseError;
 import flight.types.AccessibilityLiveness;
 import flight.types.AccessibilityNode;
+import flight.types.AccessibilityOperationOutcome;
 import flight.types.AddNodeChildCommand;
 import flight.types.Adjustment;
 import flight.types.AdvancedBlendMode;
@@ -202,7 +204,8 @@ import flight.types.AppLifecycleState;
 import flight.types.AppLoginItem;
 import flight.types.AppLoginItemLike;
 import flight.types.AppPathKind;
-import flight.types.AppUpdater;
+import flight.types.AppUpdateCheckOutcome;
+import flight.types.AppUpdateInstallOutcome;
 import flight.types.AppearanceFlags as Facade_Sdk_flight_types_AppearanceFlags_AppearanceFlags;
 import flight.types.Application;
 import flight.types.ApplicationLoopOptions;
@@ -310,9 +313,14 @@ import flight.types.CameraMotionBlurEffect;
 import flight.types.CameraShake;
 import flight.types.CameraShakeOffset;
 import flight.types.CameraShakeOptions;
+import flight.types.CanvasPipeline;
 import flight.types.CanvasRenderEffectPipeline;
 import flight.types.CanvasRenderEffectRunner;
+import flight.types.CanvasRenderRegistries;
 import flight.types.CanvasRenderState;
+import flight.types.CanvasRenderSurface;
+import flight.types.CanvasRenderSurfaceCreator;
+import flight.types.CanvasRenderSurfaceOptions;
 import flight.types.CanvasRenderTarget;
 import flight.types.CanvasRenderTextureExplanation;
 import flight.types.CanvasRenderTexturePool;
@@ -404,6 +412,7 @@ import flight.types.ContactShadowsEffect;
 import flight.types.ConvolutionEffect;
 import flight.types.CreateCubeTextureOptions;
 import flight.types.CreateExternalTextureOptions;
+import flight.types.CreateGlobalShortcutOutcome;
 import flight.types.CreateRenderTextureOptions;
 import flight.types.CreateTexture2DOptions;
 import flight.types.CreateTextureOptions;
@@ -426,6 +435,7 @@ import flight.types.DeviceInfo;
 import flight.types.DirectionalBlurEffect;
 import flight.types.DirectionalLight;
 import flight.types.DirectionalLightOptions;
+import flight.types.DirectoryOpenDialogResult;
 import flight.types.DisplacementEffect;
 import flight.types.DisplayObject;
 import flight.types.DissolveModifier;
@@ -433,6 +443,7 @@ import flight.types.DissolveModifierOptions;
 import flight.types.DitherEffect;
 import flight.types.DomRenderState;
 import flight.types.DomTextureResolver;
+import flight.types.DownloadedUpdate;
 import flight.types.DropShadowEffect;
 import flight.types.EasingFunction;
 import flight.types.EasingSegment;
@@ -442,6 +453,7 @@ import flight.types.EmbeddedImageResourceReference;
 import flight.types.EmissiveMaterial;
 import flight.types.EmissiveModifier;
 import flight.types.EmissiveModifierOptions;
+import flight.types.Entity;
 import flight.types.EntityRuntime;
 import flight.types.EnvReflectModifier;
 import flight.types.EnvReflectModifierOptions;
@@ -453,9 +465,13 @@ import flight.types.ExtendedPbrMaterial;
 import flight.types.ExternalAudioResourceReference;
 import flight.types.ExternalImageResourceReference;
 import flight.types.FileDialogHandle;
+import flight.types.FileDialogHandleOperations;
 import flight.types.FileEntry;
 import flight.types.FileLogSink;
+import flight.types.FileLogSinkDestroyOutcome;
+import flight.types.FileOpenDialogResult;
 import flight.types.FilePermissions;
+import flight.types.FileSaveDialogResult;
 import flight.types.FileStat;
 import flight.types.FileSystemPathKind;
 import flight.types.FileSystemUsage;
@@ -492,14 +508,15 @@ import flight.types.FontVariation;
 import flight.types.FrameScript;
 import flight.types.Frustum;
 import flight.types.FrustumLike;
+import flight.types.FullscreenTargetHandle;
 import flight.types.FxaaEffect;
 import flight.types.GamepadAxisKind;
 import flight.types.GamepadButtonKind;
 import flight.types.GamepadMappingKind;
 import flight.types.GeoPosition;
 import flight.types.GeoPositionResult;
+import flight.types.GeolocationAccessOutcome;
 import flight.types.GeolocationErrorReason;
-import flight.types.GeolocationPermissionState;
 import flight.types.GeolocationRequestOptions;
 import flight.types.GizmoCreateOptions;
 import flight.types.GizmoMode;
@@ -510,30 +527,38 @@ import flight.types.GizmoSpace;
 import flight.types.GizmoState;
 import flight.types.GlApplicationRenderView;
 import flight.types.GlApplicationRenderViewOptions;
+import flight.types.GlBlendRealization;
 import flight.types.GlCompressedTextureDecoder;
 import flight.types.GlContext;
 import flight.types.GlContextOptions;
+import flight.types.GlContextState;
 import flight.types.GlCustomMaterialShaderSource;
 import flight.types.GlMeshMaterialRenderer;
 import flight.types.GlMeshUpload;
 import flight.types.GlPbrExtensionIssue;
 import flight.types.GlPbrExtensionRegistration;
 import flight.types.GlPbrTransmissionSceneColor;
+import flight.types.GlPipeline;
 import flight.types.GlRenderEffectApplicationExplanation;
 import flight.types.GlRenderEffectPipeline;
 import flight.types.GlRenderEffectResolver;
 import flight.types.GlRenderEffectRunner;
 import flight.types.GlRenderOptions;
+import flight.types.GlRenderRegistries;
 import flight.types.GlRenderState;
 import flight.types.GlRenderTarget;
 import flight.types.GlRenderTextureExplanation;
 import flight.types.GlRenderTexturePool;
 import flight.types.GlScene3DForwardLightList;
+import flight.types.GlTextureRealization;
 import flight.types.GlTextureResolver;
 import flight.types.GlVelocityWriter;
 import flight.types.GlassExtendedPbrMaterialOptions;
 import flight.types.GlitchEffect;
-import flight.types.GlobalShortcutExplanation;
+import flight.types.GlobalShortcut;
+import flight.types.GlobalShortcutAttachOutcome;
+import flight.types.GlobalShortcutDetachOutcome;
+import flight.types.GlobalShortcutQueryOutcome;
 import flight.types.GltfDocument;
 import flight.types.GltfDracoDecoder;
 import flight.types.GltfExtensionHandler;
@@ -560,6 +585,134 @@ import flight.types.HandleTextInputKeyboardOptions;
 import flight.types.HapticImpactStyle;
 import flight.types.HapticNotificationType;
 import flight.types.HapticsCapabilities;
+import flight.types.HasAccessibilityProvider;
+import flight.types.HasAppActivate;
+import flight.types.HasAppActivationPolicy;
+import flight.types.HasAppAllWindowsClosed;
+import flight.types.HasAppBadge;
+import flight.types.HasAppDock;
+import flight.types.HasAppExitSubscription;
+import flight.types.HasAppFocus;
+import flight.types.HasAppHiddenQuery;
+import flight.types.HasAppHide;
+import flight.types.HasAppLocale;
+import flight.types.HasAppLoginItem;
+import flight.types.HasAppLoop;
+import flight.types.HasAppName;
+import flight.types.HasAppNameWrite;
+import flight.types.HasAppOpenFile;
+import flight.types.HasAppPath;
+import flight.types.HasAppQuit;
+import flight.types.HasAppQuitRequest;
+import flight.types.HasAppReady;
+import flight.types.HasAppRecentDocuments;
+import flight.types.HasAppRelaunch;
+import flight.types.HasAppSecondInstance;
+import flight.types.HasAppShow;
+import flight.types.HasAppSingleInstance;
+import flight.types.HasAppUserModelId;
+import flight.types.HasAppVersion;
+import flight.types.HasAppVisibilityQuery;
+import flight.types.HasClipboardBookmark;
+import flight.types.HasClipboardChange;
+import flight.types.HasClipboardFormats;
+import flight.types.HasClipboardImage;
+import flight.types.HasClipboardText;
+import flight.types.HasConnectivityChange;
+import flight.types.HasConnectivityReachability;
+import flight.types.HasConnectivityStatus;
+import flight.types.HasDialogDirectoryOpen;
+import flight.types.HasDialogFileOpen;
+import flight.types.HasDialogFileSave;
+import flight.types.HasDialogMessage;
+import flight.types.HasDialogPrompt;
+import flight.types.HasGraphicsRenderContextSubscription;
+import flight.types.HasGraphicsRenderSurface;
+import flight.types.HasInputDropFileSubscription;
+import flight.types.HasInputFocusSubscription;
+import flight.types.HasInputHaptics;
+import flight.types.HasInputPointerLock;
+import flight.types.HasInputTargetPreparation;
+import flight.types.HasIpcMessage;
+import flight.types.HasMediaSession;
+import flight.types.HasMediaSessionAction;
+import flight.types.HasMenuApplication;
+import flight.types.HasMenuHighlight;
+import flight.types.HasMenuPopup;
+import flight.types.HasMenuSelect;
+import flight.types.HasMidiAccess;
+import flight.types.HasMidiPermission;
+import flight.types.HasNetHttp;
+import flight.types.HasNetSocket;
+import flight.types.HasNotificationAction;
+import flight.types.HasNotificationActiveList;
+import flight.types.HasNotificationClick;
+import flight.types.HasNotificationClose;
+import flight.types.HasNotificationDelivery;
+import flight.types.HasNotificationDismiss;
+import flight.types.HasNotificationLifecycle;
+import flight.types.HasNotificationPermission;
+import flight.types.HasNotificationReceived;
+import flight.types.HasNotificationReply;
+import flight.types.HasNotificationScheduling;
+import flight.types.HasPowerIdle;
+import flight.types.HasPowerKeepAwake;
+import flight.types.HasPowerStatus;
+import flight.types.HasPowerThermal;
+import flight.types.HasProtocolDefault;
+import flight.types.HasProtocolLaunch;
+import flight.types.HasProtocolOpen;
+import flight.types.HasProtocolRegistration;
+import flight.types.HasProtocolRegistrationQuery;
+import flight.types.HasProtocolUnregistration;
+import flight.types.HasScreenChange;
+import flight.types.HasScreenDetails;
+import flight.types.HasScreenPermissionChange;
+import flight.types.HasScreenQuery;
+import flight.types.HasShareContent;
+import flight.types.HasShareFiles;
+import flight.types.HasShellBeep;
+import flight.types.HasShellExternal;
+import flight.types.HasShellPathOpen;
+import flight.types.HasShellPathReveal;
+import flight.types.HasShellShortcutLink;
+import flight.types.HasShellTrash;
+import flight.types.HasShortcutQuery;
+import flight.types.HasShortcutTrigger;
+import flight.types.HasSoftKeyboardAccessoryBar;
+import flight.types.HasSoftKeyboardChange;
+import flight.types.HasSoftKeyboardInfo;
+import flight.types.HasSoftKeyboardResizeModeWrite;
+import flight.types.HasSoftKeyboardScrollAssist;
+import flight.types.HasSoftKeyboardStyle;
+import flight.types.HasSoftKeyboardVisibility;
+import flight.types.HasStorageChange;
+import flight.types.HasStorageFileSystem;
+import flight.types.HasStorageLocal;
+import flight.types.HasStoragePersistenceQuery;
+import flight.types.HasStoragePersistenceRequest;
+import flight.types.HasSystemDevice;
+import flight.types.HasSystemLifecycle;
+import flight.types.HasSystemPlatform;
+import flight.types.HasSystemSensors;
+import flight.types.HasTrayLifecycle;
+import flight.types.HasUiFullscreen;
+import flight.types.HasUiFullscreenSubscription;
+import flight.types.HasUiStatusBarChange;
+import flight.types.HasUiStatusBarColor;
+import flight.types.HasUiStatusBarInfo;
+import flight.types.HasUiStatusBarOverlays;
+import flight.types.HasUiStatusBarStyle;
+import flight.types.HasUiStatusBarStyleStack;
+import flight.types.HasUiStatusBarVisibility;
+import flight.types.HasUpdaterCommand;
+import flight.types.HasWindowAttach;
+import flight.types.HasWindowCloseSubscription;
+import flight.types.HasWindowMoveSubscription;
+import flight.types.HasWindowOpen;
+import flight.types.HasWindowOrientationSubscription;
+import flight.types.HasWindowResizeSubscription;
+import flight.types.HasWindowVisibilitySubscription;
 import flight.types.HemisphereLight;
 import flight.types.HemisphereLightOptions;
 import flight.types.HierarchyNodeAny;
@@ -567,6 +720,7 @@ import flight.types.HitArea;
 import flight.types.HitTestFunction;
 import flight.types.HitTestPreciseFunction;
 import flight.types.HitTestResult;
+import flight.types.Host;
 import flight.types.HslColor;
 import flight.types.HsvColor;
 import flight.types.HtmlView;
@@ -595,7 +749,10 @@ import flight.types.InputKeyRepeatTimer;
 import flight.types.InputKeyboardData;
 import flight.types.InputManager;
 import flight.types.InputPointerData;
+import flight.types.InputPointerLockExitOutcome;
+import flight.types.InputPointerLockRequestOutcome;
 import flight.types.InputState;
+import flight.types.InputTargetHandle;
 import flight.types.InteractionConnectGuard;
 import flight.types.InteractionHitEligibility;
 import flight.types.InteractionInputSource;
@@ -606,10 +763,6 @@ import flight.types.InteractionSignalName;
 import flight.types.InteractionSignals;
 import flight.types.InterpolationMethod;
 import flight.types.InvertAdjustment;
-import flight.types.IpcChannel;
-import flight.types.IpcMessageEvent;
-import flight.types.IpcSignals;
-import flight.types.IpcTarget;
 import flight.types.IridescencePbrExtension;
 import flight.types.JointStyle;
 import flight.types.KeyboardEventData;
@@ -654,6 +807,7 @@ import flight.types.LogSignals;
 import flight.types.LogSink;
 import flight.types.LogSpan;
 import flight.types.LogTimer;
+import flight.types.LogTransport;
 import flight.types.LookupTableGradeAdjustment;
 import flight.types.LottieDocument;
 import flight.types.LottieDocumentImportOptions;
@@ -671,18 +825,26 @@ import flight.types.Matrix3Like;
 import flight.types.Matrix4;
 import flight.types.Matrix4Like;
 import flight.types.MatrixLike;
+import flight.types.MediaFileCaptureOptions;
+import flight.types.MediaFileCapturePhoto;
+import flight.types.MediaFileCaptureVideo;
 import flight.types.MediaSessionAction;
-import flight.types.MediaSessionActionDetails;
+import flight.types.MediaSessionActionSignal;
+import flight.types.MediaSessionClearMetadataOutcome;
+import flight.types.MediaSessionClearPositionStateOutcome;
 import flight.types.MediaSessionMetadata;
 import flight.types.MediaSessionPlaybackState;
 import flight.types.MediaSessionPositionState;
+import flight.types.MediaSessionSetMetadataOutcome;
+import flight.types.MediaSessionSetPlaybackStateOutcome;
+import flight.types.MediaSessionSetPositionStateOutcome;
 import flight.types.MedianEffect;
 import flight.types.MemoryLogSink;
+import flight.types.MenuHighlight;
 import flight.types.MenuItemRole;
 import flight.types.MenuItemTemplate;
 import flight.types.MenuItemType;
-import flight.types.MenuReplacementGuarantee;
-import flight.types.MenuReplacementGuaranteeExplanation;
+import flight.types.MenuSelect;
 import flight.types.MenuSignals;
 import flight.types.Mesh;
 import flight.types.MeshAttachment2D;
@@ -697,6 +859,25 @@ import flight.types.MeshSubset;
 import flight.types.MeshTriangleVertexIndices;
 import flight.types.MessageDialogOptions;
 import flight.types.MessageDialogResult;
+import flight.types.MidiAccess;
+import flight.types.MidiAccessDisposeOutcome;
+import flight.types.MidiAccessPortsOutcome;
+import flight.types.MidiAccessRequestOutcome;
+import flight.types.MidiAccessStateSubscription;
+import flight.types.MidiInputMessageSubscription;
+import flight.types.MidiInputPort;
+import flight.types.MidiMessageSendOutcome;
+import flight.types.MidiOutputPort;
+import flight.types.MidiPort;
+import flight.types.MidiPortCloseOutcome;
+import flight.types.MidiPortConnectionOutcome;
+import flight.types.MidiPortDisposeOutcome;
+import flight.types.MidiPortOpenOutcome;
+import flight.types.MidiPortStateOutcome;
+import flight.types.MidiPortStateSubscription;
+import flight.types.MidiSubscriptionAttachOutcome;
+import flight.types.MidiSubscriptionDetachOutcome;
+import flight.types.MidiSubscriptionDisposeOutcome;
 import flight.types.Modifier;
 import flight.types.ModifierDefinition;
 import flight.types.ModifierKind;
@@ -738,17 +919,30 @@ import flight.types.NodeRuntime;
 import flight.types.NodeRuntimeFactory;
 import flight.types.NodeSignals;
 import flight.types.NormalMaterial;
-import flight.types.NotificationAction;
-import flight.types.NotificationCapabilities;
-import flight.types.NotificationChannel;
-import flight.types.NotificationPermission;
+import flight.types.Notification;
+import flight.types.NotificationActionSubscription;
+import flight.types.NotificationActiveListOutcome;
+import flight.types.NotificationCancelOutcome;
+import flight.types.NotificationClickSubscription;
+import flight.types.NotificationCloseOutcome;
+import flight.types.NotificationDeliveryOutcome;
+import flight.types.NotificationDismissSubscription;
+import flight.types.NotificationLifecycleOutcome;
+import flight.types.NotificationPendingListOutcome;
+import flight.types.NotificationPermissionQueryOutcome;
+import flight.types.NotificationPermissionRequestOutcome;
+import flight.types.NotificationReceivedSubscription;
+import flight.types.NotificationReplySubscription;
 import flight.types.NotificationRequest;
 import flight.types.NotificationSchedule;
+import flight.types.NotificationScheduleOutcome;
+import flight.types.NotificationSubscriptionAttachOutcome;
+import flight.types.NotificationSubscriptionDetachOutcome;
+import flight.types.NotificationSubscriptionDisposeOutcome;
 import flight.types.NumericProps;
 import flight.types.Obb;
 import flight.types.ObbLike;
 import flight.types.ObjMaterialLibrary;
-import flight.types.OpenDirectoryDialogOptions;
 import flight.types.OpenFileDialogOptions;
 import flight.types.OpenTypeFontExplanation;
 import flight.types.OrbitCameraController;
@@ -803,8 +997,8 @@ import flight.types.PathWinding;
 import flight.types.PbrExtension;
 import flight.types.PbrUvSet;
 import flight.types.PermissionName;
-import flight.types.PermissionState;
-import flight.types.PermissionStateExplanation;
+import flight.types.PermissionQueryOutcome;
+import flight.types.PermissionRequestOutcome;
 import flight.types.PerspectiveProjection;
 import flight.types.PerspectiveProjectionOptions;
 import flight.types.PhongMaterial;
@@ -918,14 +1112,18 @@ import flight.types.PlatformEngine;
 import flight.types.PlatformInfo;
 import flight.types.PlatformKind;
 import flight.types.PlatformName;
+import flight.types.PlatformRuntime;
 import flight.types.PointAttachment2D;
 import flight.types.PointLight;
 import flight.types.PointLightOptions;
 import flight.types.PosterizeEffect;
 import flight.types.Power;
+import flight.types.PowerAttachHost;
 import flight.types.PowerBatteryHealth;
 import flight.types.PowerIdleState;
+import flight.types.PowerKeepAwakeAcquireResult;
 import flight.types.PowerKeepAwakeMode;
+import flight.types.PowerKeepAwakeReleaseResult;
 import flight.types.PowerStatus;
 import flight.types.PowerThermalState;
 import flight.types.ProgressBarController;
@@ -1056,9 +1254,9 @@ import flight.types.Scene3DResources;
 import flight.types.SceneCoverageCatalog;
 import flight.types.SceneCoverageEntry;
 import flight.types.ScheduledNotification;
-import flight.types.ScreenChangeEvent;
 import flight.types.ScreenInfo;
 import flight.types.ScreenMode;
+import flight.types.ScreenPermissionChange;
 import flight.types.ScreenPermissionState;
 import flight.types.ScreenSignals;
 import flight.types.ScreenSpaceFogEffect;
@@ -1093,19 +1291,21 @@ import flight.types.ShapeTessellationExplanation;
 import flight.types.ShapedRun;
 import flight.types.ShareContent;
 import flight.types.ShareFile;
-import flight.types.ShareOptions;
 import flight.types.ShareResult;
 import flight.types.ShareSignals;
 import flight.types.SharpenEffect;
 import flight.types.SheenPbrExtension;
-import flight.types.ShellOpenExternalOptions;
-import flight.types.ShellOpenPathOptions;
+import flight.types.ShellExternalOutcome;
+import flight.types.ShellExternalUrlPolicy;
+import flight.types.ShellPathOpenOutcome;
+import flight.types.ShellPathRevealOutcome;
 import flight.types.ShellShortcutLink;
+import flight.types.ShellShortcutLinkReadOutcome;
+import flight.types.ShellShortcutLinkWriteOutcome;
 import flight.types.ShellShortcutWriteOperation;
-import flight.types.ShortcutEvent;
+import flight.types.ShellTrashOutcome;
 import flight.types.ShortcutKeyName;
 import flight.types.ShortcutModifier;
-import flight.types.ShortcutSignals;
 import flight.types.Signal;
 import flight.types.SignalConnectOptions;
 import flight.types.SignalThrottleOptions;
@@ -1140,10 +1340,12 @@ import flight.types.SocketReadyState;
 import flight.types.SocketSendFailureExplanation;
 import flight.types.SocketSignals;
 import flight.types.SoftKeyboard;
+import flight.types.SoftKeyboardAttachResult;
 import flight.types.SoftKeyboardInfo;
 import flight.types.SoftKeyboardResizeMode;
+import flight.types.SoftKeyboardSetterResult;
 import flight.types.SoftKeyboardStyleKind;
-import flight.types.SoftKeyboardTransition;
+import flight.types.SoftKeyboardVisibilityResult;
 import flight.types.Spatial2DNode;
 import flight.types.SpatialAabb2D;
 import flight.types.SpatialAabb3D;
@@ -1216,9 +1418,31 @@ import flight.types.StatusBarStyleEntry;
 import flight.types.StatusBarStyleEntryHandle;
 import flight.types.StepPosition;
 import flight.types.StopTweenOptions;
+import flight.types.StorageBooleanOrResult;
+import flight.types.StorageBooleanResult;
+import flight.types.StorageByteSizeResult;
+import flight.types.StorageClearNamespaceResult;
+import flight.types.StorageClearResult;
+import flight.types.StorageEntriesResult;
+import flight.types.StorageGetItemResult;
+import flight.types.StorageItemCountResult;
+import flight.types.StorageItemOrResult;
+import flight.types.StorageItemsResult;
+import flight.types.StorageJsonOrResult;
+import flight.types.StorageJsonResult;
+import flight.types.StorageJsonWriteResult;
+import flight.types.StorageKeysResult;
 import flight.types.StorageMigration;
+import flight.types.StorageMigrationResult;
 import flight.types.StorageNamespace;
-import flight.types.StorageQuota;
+import flight.types.StorageNumberOrResult;
+import flight.types.StorageNumberResult;
+import flight.types.StoragePersistenceResult;
+import flight.types.StoragePresenceResult;
+import flight.types.StorageRemoveItemResult;
+import flight.types.StorageRemoveItemsResult;
+import flight.types.StorageSetItemResult;
+import flight.types.StorageSetItemsResult;
 import flight.types.StorageSignals;
 import flight.types.StrokePathTessellationExplanation;
 import flight.types.StrokeStyle;
@@ -1325,11 +1549,47 @@ import flight.types.Transform3D;
 import flight.types.Transform3DLike;
 import flight.types.Transform3DNode;
 import flight.types.TransmissionVolumePbrExtension;
+import flight.types.TrayAnimationStartResult;
+import flight.types.TrayAnimationStopResult;
+import flight.types.TrayBalloonDisplayResult;
+import flight.types.TrayBalloonEvent;
 import flight.types.TrayBalloonOptions;
-import flight.types.TrayCapabilities;
-import flight.types.TrayEventData;
+import flight.types.TrayBalloonRemoveResult;
+import flight.types.TrayBoundsResult;
+import flight.types.TrayCreateResult;
+import flight.types.TrayDestroyResult;
+import flight.types.TrayDoubleClickPolicyUpdateResult;
+import flight.types.TrayDropEvent;
+import flight.types.TrayEventAttachResult;
 import flight.types.TrayIcon;
+import flight.types.TrayIconForHost;
 import flight.types.TrayIconOptions;
+import flight.types.TrayIconSource;
+import flight.types.TrayImageUpdateResult;
+import flight.types.TrayInteractionEvent;
+import flight.types.TrayMenuSelectionEvent;
+import flight.types.TrayMenuUpdateResult;
+import flight.types.TrayPopupMenuResult;
+import flight.types.TrayPressedImageUpdateResult;
+import flight.types.TrayTemplateImageUpdateResult;
+import flight.types.TrayTitleReadResult;
+import flight.types.TrayTitleUpdateResult;
+import flight.types.TrayTooltipReadResult;
+import flight.types.TrayTooltipUpdateResult;
+import flight.types.TrayWithBalloon;
+import flight.types.TrayWithBalloonEvents;
+import flight.types.TrayWithBounds;
+import flight.types.TrayWithDoubleClickPolicy;
+import flight.types.TrayWithDropEvents;
+import flight.types.TrayWithImage;
+import flight.types.TrayWithInteractionEvents;
+import flight.types.TrayWithMenu;
+import flight.types.TrayWithMenuSelectionEvents;
+import flight.types.TrayWithPopupMenu;
+import flight.types.TrayWithPressedImage;
+import flight.types.TrayWithTemplateImage;
+import flight.types.TrayWithTitle;
+import flight.types.TrayWithTooltip;
 import flight.types.TreeViewController;
 import flight.types.TreeViewControllerItem;
 import flight.types.TreeViewControllerOptions;
@@ -1352,11 +1612,7 @@ import flight.types.UnityShape;
 import flight.types.UnitySizeOverLifetime;
 import flight.types.UnlitMaterial;
 import flight.types.UnpackedRectangleExplanation;
-import flight.types.UpdateInfo;
 import flight.types.UpdateScene3DResourceStreamingOptions;
-import flight.types.UpdaterConfig;
-import flight.types.UpdaterSignatureConfig;
-import flight.types.UpdaterState;
 import flight.types.Vector2;
 import flight.types.Vector2Like;
 import flight.types.Vector3;
@@ -1386,18 +1642,21 @@ import flight.types.ViewportScaleMode;
 import flight.types.VignetteEffect;
 import flight.types.VolumetricLightEffect;
 import flight.types.VoxelGrid;
-import flight.types.WebcamCaptureOptions;
-import flight.types.WebcamFacingMode;
-import flight.types.WebcamPhoto;
-import flight.types.WebcamStream;
-import flight.types.WebcamVideo;
 import flight.types.WgpuCompressedTextureDecoder;
 import flight.types.WgpuCustomMaterialShaderSource;
+import flight.types.WgpuDeviceSignals;
+import flight.types.WgpuDeviceState;
+import flight.types.WgpuHostAcquisition;
+import flight.types.WgpuHostAcquisitionOptions;
 import flight.types.WgpuMeshMaterialRenderer;
 import flight.types.WgpuMeshPipeline;
+import flight.types.WgpuOffscreenRenderStateResult;
+import flight.types.WgpuPipeline;
+import flight.types.WgpuPresentationRenderState;
 import flight.types.WgpuRenderEffectPipeline;
 import flight.types.WgpuRenderEffectRunner;
 import flight.types.WgpuRenderOptions;
+import flight.types.WgpuRenderRegistries;
 import flight.types.WgpuRenderState;
 import flight.types.WgpuRenderTarget;
 import flight.types.WgpuRenderTextureExplanation;
@@ -1412,8 +1671,8 @@ import flight.types.WindowBounds;
 import flight.types.WindowController;
 import flight.types.WindowControllerOptions;
 import flight.types.WindowControllerSignals;
-import flight.types.WindowOperation;
 import flight.types.WindowOptions;
+import flight.types.WindowResizeTargetHandle;
 import flight.types.WireframeMaterial;
 import flight.types.WrappedDiffusePbrExtension;
 import flight.types.XmlElement;
@@ -1450,6 +1709,11 @@ class Sdk {
 
   public static function acquireAsset<T>(library:AssetLibrary, id:String):flight._internal._Promise<T> {
     return cast Facade_Sdk_flight__Assets.acquireAsset(library, id);
+    return cast null;
+  }
+
+  public static function acquireCanvasRenderSurface(creator:CanvasRenderSurfaceCreator, options:CanvasRenderSurfaceOptions):Null<CanvasRenderSurface> {
+    return cast Facade_Sdk_flight__Scene2DCanvas.acquireCanvasRenderSurface(creator, options);
     return cast null;
   }
 
@@ -1533,6 +1797,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function acquirePowerKeepAwake(host:HasPowerKeepAwake, ?mode:PowerKeepAwakeMode):flight._internal._Promise<PowerKeepAwakeAcquireResult> {
+    return cast Facade_Sdk_flight__Power.acquirePowerKeepAwake(host, mode);
+    return cast null;
+  }
+
   public static function acquireQuaternion():Quaternion {
     return cast Facade_Sdk_flight__Geometry.acquireQuaternion();
     return cast null;
@@ -1577,8 +1846,8 @@ class Sdk {
     Facade_Sdk_flight__Animation.addAnimationSample(out, base, delta, weight, quaternion);
   }
 
-  public static function addAppRecentDocument(path:String):Void {
-    Facade_Sdk_flight__App.addAppRecentDocument(path);
+  public static function addAppRecentDocument(host:HasAppRecentDocuments, path:String):Void {
+    Facade_Sdk_flight__App.addAppRecentDocument(host, path);
   }
 
   public static function addAudioBusToMixer(mixer:AudioMixer, bus:AudioBus):Void {
@@ -1777,8 +2046,9 @@ class Sdk {
 
   public static final anisotropyPbrGlExtension:GlPbrExtensionRegistration = Facade_Sdk_flight__Scene3DGl.anisotropyPbrGlExtension;
 
-  public static function announceAccessibility(message:String, ?liveness:AccessibilityLiveness):Void {
-    Facade_Sdk_flight__Accessibility.announceAccessibility(message, liveness);
+  public static function announceAccessibility(host:HasAccessibilityProvider, message:String, ?liveness:AccessibilityLiveness):AccessibilityOperationOutcome<String> {
+    return cast Facade_Sdk_flight__Accessibility.announceAccessibility(host, message, liveness);
+    return cast null;
   }
 
   public static function appendMatrix4(out:Matrix4Like, source:Matrix4Like, other:Matrix4Like):Void {
@@ -1992,8 +2262,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function appendTextFile(path:String, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.appendTextFile(path, data);
+  public static function appendTextFile(host:HasStorageFileSystem, path:String, data:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.appendTextFile(host, path, data);
     return cast null;
   }
 
@@ -2291,12 +2561,20 @@ class Sdk {
     return cast null;
   }
 
-  public static function attachApp(app:App):Void {
-    Facade_Sdk_flight__App.attachApp(app);
+  public static function attachApp(host:HasAllAppEvents__app, app:App):Void {
+    Facade_Sdk_flight__App.attachApp(host, app);
   }
 
-  public static function attachApplicationExit(app:Application):Void {
-    Facade_Sdk_flight__Application.attachApplicationExit(app);
+  public static function attachAppActivate(host:HasAppActivate, app:App):Void {
+    Facade_Sdk_flight__App.attachAppActivate(host, app);
+  }
+
+  public static function attachAppAllWindowsClosed(host:HasAppAllWindowsClosed, app:App):Void {
+    Facade_Sdk_flight__App.attachAppAllWindowsClosed(host, app);
+  }
+
+  public static function attachApplicationExit(host:HasAppExitSubscription, app:Application):Void {
+    Facade_Sdk_flight__Application.attachApplicationExit(host, app);
   }
 
   public static function attachApplicationLifecycle(app:Application, win:ApplicationWindow):Void {
@@ -2307,52 +2585,127 @@ class Sdk {
     Facade_Sdk_flight__Application.attachApplicationRenderView(view);
   }
 
-  public static function attachAppLifecycle(app:AppLifecycle):Void {
-    Facade_Sdk_flight__Lifecycle.attachAppLifecycle(app);
+  public static function attachAppLifecycle(host:HasSystemLifecycle, app:AppLifecycle):Void {
+    Facade_Sdk_flight__Lifecycle.attachAppLifecycle(host, app);
   }
 
-  public static function attachAppUpdater(updater:AppUpdater):Void {
-    Facade_Sdk_flight__Updater.attachAppUpdater(updater);
+  public static function attachAppOpenFile(host:HasAppOpenFile, app:App):Void {
+    Facade_Sdk_flight__App.attachAppOpenFile(host, app);
   }
 
-  public static function attachClipboardWatch(watch:ClipboardWatch):Void {
-    Facade_Sdk_flight__Clipboard.attachClipboardWatch(watch);
+  public static function attachAppQuitRequest(host:HasAppQuitRequest, app:App):Void {
+    Facade_Sdk_flight__App.attachAppQuitRequest(host, app);
   }
 
-  public static function attachConnectivity(net:Connectivity):Void {
-    Facade_Sdk_flight__Connectivity.attachConnectivity(net);
+  public static function attachAppReady(host:HasAppReady, app:App):Void {
+    Facade_Sdk_flight__App.attachAppReady(host, app);
+  }
+
+  public static function attachAppSecondInstance(host:HasAppSecondInstance, app:App):Void {
+    Facade_Sdk_flight__App.attachAppSecondInstance(host, app);
+  }
+
+  public static function attachClipboardWatch(host:HasClipboardChange, watch:ClipboardWatch):Void {
+    Facade_Sdk_flight__Clipboard.attachClipboardWatch(host, watch);
+  }
+
+  public static function attachConnectivity(host:{ >HasConnectivityStatus, >HasConnectivityChange, }, connectivity:Connectivity):Bool {
+    return cast Facade_Sdk_flight__Connectivity.attachConnectivity(host, connectivity);
+    return cast null;
   }
 
   public static function attachGamepadInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
     Facade_Sdk_flight__Input.attachGamepadInput(manager, source, options);
   }
 
+  public static function attachGlobalShortcut(host:HasShortcutTrigger, shortcut:GlobalShortcut):flight._internal._Promise<GlobalShortcutAttachOutcome> {
+    return cast Facade_Sdk_flight__Shortcut.attachGlobalShortcut(host, shortcut);
+    return cast null;
+  }
+
   public static function attachKeyboardInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
     Facade_Sdk_flight__Input.attachKeyboardInput(manager, source, options);
+  }
+
+  public static function attachMediaSessionAction(host:HasMediaSessionAction, signal:MediaSessionActionSignal):Bool {
+    return cast Facade_Sdk_flight__MediaSession.attachMediaSessionAction(host, signal);
+    return cast null;
+  }
+
+  public static function attachMenuHighlight(host:HasMenuHighlight, highlight:MenuHighlight):Void {
+    Facade_Sdk_flight__Menu.attachMenuHighlight(host, highlight);
+  }
+
+  public static function attachMenuSelect(host:HasMenuSelect, select:MenuSelect):Void {
+    Facade_Sdk_flight__Menu.attachMenuSelect(host, select);
+  }
+
+  public static function attachMidiAccessStateSubscription(access:MidiAccess, subscription:MidiAccessStateSubscription):flight._internal._Promise<MidiSubscriptionAttachOutcome> {
+    return cast Facade_Sdk_flight__Midi.attachMidiAccessStateSubscription(access, subscription);
+    return cast null;
+  }
+
+  public static function attachMidiInputMessageSubscription(input:MidiInputPort, subscription:MidiInputMessageSubscription):flight._internal._Promise<MidiSubscriptionAttachOutcome> {
+    return cast Facade_Sdk_flight__Midi.attachMidiInputMessageSubscription(input, subscription);
+    return cast null;
+  }
+
+  public static function attachMidiPortStateSubscription(port:MidiPort, subscription:MidiPortStateSubscription):flight._internal._Promise<MidiSubscriptionAttachOutcome> {
+    return cast Facade_Sdk_flight__Midi.attachMidiPortStateSubscription(port, subscription);
+    return cast null;
+  }
+
+  public static function attachNotificationActionSubscription(host:HasNotificationAction, subscription:NotificationActionSubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
+    return cast Facade_Sdk_flight__Notification.attachNotificationActionSubscription(host, subscription);
+    return cast null;
+  }
+
+  public static function attachNotificationClickSubscription(host:HasNotificationClick, subscription:NotificationClickSubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
+    return cast Facade_Sdk_flight__Notification.attachNotificationClickSubscription(host, subscription);
+    return cast null;
+  }
+
+  public static function attachNotificationDismissSubscription(host:HasNotificationDismiss, subscription:NotificationDismissSubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
+    return cast Facade_Sdk_flight__Notification.attachNotificationDismissSubscription(host, subscription);
+    return cast null;
+  }
+
+  public static function attachNotificationReceivedSubscription(host:HasNotificationReceived, subscription:NotificationReceivedSubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
+    return cast Facade_Sdk_flight__Notification.attachNotificationReceivedSubscription(host, subscription);
+    return cast null;
+  }
+
+  public static function attachNotificationReplySubscription(host:HasNotificationReply, subscription:NotificationReplySubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
+    return cast Facade_Sdk_flight__Notification.attachNotificationReplySubscription(host, subscription);
+    return cast null;
   }
 
   public static function attachPointerInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
     Facade_Sdk_flight__Input.attachPointerInput(manager, source, options);
   }
 
-  public static function attachPower(power:Power, ?idleThresholdSeconds:Float):Void {
-    Facade_Sdk_flight__Power.attachPower(power, idleThresholdSeconds);
+  public static function attachPower(host:PowerAttachHost, power:Power, ?idleThresholdSeconds:Float):Void {
+    Facade_Sdk_flight__Power.attachPower(host, power, idleThresholdSeconds);
   }
 
-  public static function attachProtocolHandler(handler:ProtocolHandler):Void {
-    Facade_Sdk_flight__Protocol.attachProtocolHandler(handler);
+  public static function attachProtocolHandler(host:HasProtocolOpen, handler:ProtocolHandler):Void {
+    Facade_Sdk_flight__Protocol.attachProtocolHandler(host, handler);
   }
 
   public static function attachRelativePointerInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
     Facade_Sdk_flight__Input.attachRelativePointerInput(manager, source, options);
   }
 
-  public static function attachScreenSignals(signals:ScreenSignals):Void {
-    Facade_Sdk_flight__Screen.attachScreenSignals(signals);
+  public static function attachScreenPermissionChange(host:HasScreenPermissionChange, permissionChange:ScreenPermissionChange):Void {
+    Facade_Sdk_flight__Screen.attachScreenPermissionChange(host, permissionChange);
   }
 
-  public static function attachSensors(sensors:Sensors):Void {
-    Facade_Sdk_flight__Sensors.attachSensors(sensors);
+  public static function attachScreenSignals(host:HasScreenChange, signals:ScreenSignals):Void {
+    Facade_Sdk_flight__Screen.attachScreenSignals(host, signals);
+  }
+
+  public static function attachSensors(host:HasSystemSensors, sensors:Sensors):Void {
+    Facade_Sdk_flight__Sensors.attachSensors(host, sensors);
   }
 
   public static function attachShareSignals(signals:ShareSignals):Void {
@@ -2363,12 +2716,18 @@ class Sdk {
     Facade_Sdk_flight__Socket.attachSocket(socket);
   }
 
-  public static function attachSoftKeyboard(keyboard:SoftKeyboard):Void {
-    Facade_Sdk_flight__Keyboard.attachSoftKeyboard(keyboard);
+  public static function attachSoftKeyboard(host:{ >HasSoftKeyboardChange, >HasSoftKeyboardInfo, }, keyboard:SoftKeyboard):flight._internal._Promise<SoftKeyboardAttachResult> {
+    return cast Facade_Sdk_flight__Keyboard.attachSoftKeyboard(host, keyboard);
+    return cast null;
   }
 
-  public static function attachStatusBar(bar:StatusBar):Void {
-    Facade_Sdk_flight__StatusBar.attachStatusBar(bar);
+  public static function attachStatusBar(host:{ >HasUiStatusBarChange, >HasUiStatusBarInfo, }, bar:StatusBar):Void {
+    Facade_Sdk_flight__StatusBar.attachStatusBar(host, bar);
+  }
+
+  public static function attachStorage(host:HasStorageChange, signals:StorageSignals):Bool {
+    return cast Facade_Sdk_flight__Storage.attachStorage(host, signals);
+    return cast null;
   }
 
   public static function attachTextInput(manager:InputManager, source:InputIngressSource, ?options:AttachInputOptions):Void {
@@ -2379,49 +2738,49 @@ class Sdk {
     Facade_Sdk_flight__Input.attachWheelInput(manager, source, options);
   }
 
-  public static function attachWindow(win:ApplicationWindow, handle:NativeWindowHandle, ownership:WindowAttachmentOwnership):Bool {
-    return cast Facade_Sdk_flight__Application.attachWindow(win, handle, ownership);
+  public static function attachWindow(host:HasWindowAttach, win:ApplicationWindow, handle:NativeWindowHandle, ownership:WindowAttachmentOwnership):Bool {
+    return cast Facade_Sdk_flight__Application.attachWindow(host, win, handle, ownership);
     return cast null;
   }
 
-  public static function attachWindowClose(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.attachWindowClose(win);
+  public static function attachWindowClose(host:HasWindowCloseSubscription, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.attachWindowClose(host, win);
   }
 
-  public static function attachWindowDropFile(win:ApplicationWindow, element:flight._internal.dom.HTMLElement):Void {
-    Facade_Sdk_flight__Application.attachWindowDropFile(win, element);
+  public static function attachWindowDropFile(host:HasInputDropFileSubscription, win:ApplicationWindow, target:InputTargetHandle):Void {
+    Facade_Sdk_flight__Application.attachWindowDropFile(host, win, target);
   }
 
-  public static function attachWindowFocus(win:ApplicationWindow, element:flight._internal.dom.HTMLElement):Void {
-    Facade_Sdk_flight__Application.attachWindowFocus(win, element);
+  public static function attachWindowFocus(host:HasInputFocusSubscription, win:ApplicationWindow, target:InputTargetHandle):Void {
+    Facade_Sdk_flight__Application.attachWindowFocus(host, win, target);
   }
 
-  public static function attachWindowFullscreen(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.attachWindowFullscreen(win);
+  public static function attachWindowFullscreen(host:HasUiFullscreenSubscription, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.attachWindowFullscreen(host, win);
   }
 
-  public static function attachWindowMove(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.attachWindowMove(win);
+  public static function attachWindowMove(host:HasWindowMoveSubscription, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.attachWindowMove(host, win);
   }
 
-  public static function attachWindowOrientation(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.attachWindowOrientation(win);
+  public static function attachWindowOrientation(host:HasWindowOrientationSubscription, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.attachWindowOrientation(host, win);
   }
 
-  public static function attachWindowRenderContext(win:ApplicationWindow, canvas:flight._internal.dom.HTMLCanvasElement):Void {
-    Facade_Sdk_flight__Application.attachWindowRenderContext(win, canvas);
+  public static function attachWindowRenderContext(host:HasGraphicsRenderContextSubscription, win:ApplicationWindow, target:InputTargetHandle):Void {
+    Facade_Sdk_flight__Application.attachWindowRenderContext(host, win, target);
   }
 
-  public static function attachWindowRenderState(win:ApplicationWindow, state:RenderState, canvas:flight._internal.dom.HTMLCanvasElement):Void {
-    Facade_Sdk_flight__Application.attachWindowRenderState(win, state, canvas);
+  public static function attachWindowRenderState(host:HasGraphicsRenderSurface, win:ApplicationWindow, state:RenderState, target:InputTargetHandle):Void {
+    Facade_Sdk_flight__Application.attachWindowRenderState(host, win, state, target);
   }
 
-  public static function attachWindowResize(win:ApplicationWindow, element:flight._internal.dom.HTMLElement):Void {
-    Facade_Sdk_flight__Application.attachWindowResize(win, element);
+  public static function attachWindowResize(host:HasWindowResizeSubscription, win:ApplicationWindow, target:WindowResizeTargetHandle):Void {
+    Facade_Sdk_flight__Application.attachWindowResize(host, win, target);
   }
 
-  public static function attachWindowVisibility(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.attachWindowVisibility(win);
+  public static function attachWindowVisibility(host:HasWindowVisibilitySubscription, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.attachWindowVisibility(host, win);
   }
 
   public static final AttractorForceKind:String = Facade_Sdk_flight__Types.AttractorForceKind;
@@ -2485,7 +2844,7 @@ class Sdk {
     Facade_Sdk_flight__Velocity.beginVelocityFrame(field);
   }
 
-  public static function beginWgpuFrame(state:WgpuRenderState):Void {
+  public static function beginWgpuFrame(state:WgpuPresentationRenderState):Void {
     Facade_Sdk_flight__RenderWgpu.beginWgpuFrame(state);
   }
 
@@ -2599,8 +2958,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function bounceAppDock():Float {
-    return cast Facade_Sdk_flight__App.bounceAppDock();
+  public static function bounceAppDock(host:HasAppDock):Float {
+    return cast Facade_Sdk_flight__App.bounceAppDock(host);
     return cast null;
   }
 
@@ -2682,25 +3041,21 @@ class Sdk {
 
   public static final BUILT_IN_REGISTRY_CATALOG_ENTRIES:Array<RegistryCatalogEntry> = Facade_Sdk_flight__RegistryCatalog.BUILT_IN_REGISTRY_CATALOG_ENTRIES;
 
-  public static function canAccessFile(path:String, mode:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.canAccessFile(path, mode);
+  public static function canAccessFile(host:HasStorageFileSystem, path:String, mode:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.canAccessFile(host, path, mode);
     return cast null;
   }
 
-  public static function cancelAppAttention(id:Float):Void {
-    Facade_Sdk_flight__App.cancelAppAttention(id);
+  public static function cancelAppAttention(host:HasAppDock, id:Float):Void {
+    Facade_Sdk_flight__App.cancelAppAttention(host, id);
   }
 
-  public static function cancelAppDockBounce(id:Float):Void {
-    Facade_Sdk_flight__App.cancelAppDockBounce(id);
+  public static function cancelAppDockBounce(host:HasAppDock, id:Float):Void {
+    Facade_Sdk_flight__App.cancelAppDockBounce(host, id);
   }
 
-  public static function cancelAppUpdateDownload():Void {
-    Facade_Sdk_flight__Updater.cancelAppUpdateDownload();
-  }
-
-  public static function cancelDeviceVibration():Bool {
-    return cast Facade_Sdk_flight__Haptics.cancelDeviceVibration();
+  public static function cancelDeviceVibration(host:HasInputHaptics):Bool {
+    return cast Facade_Sdk_flight__Haptics.cancelDeviceVibration(host);
     return cast null;
   }
 
@@ -2708,8 +3063,9 @@ class Sdk {
     Facade_Sdk_flight__Loader.cancelResourceLoad(loader);
   }
 
-  public static function cancelScheduledNotification(id:String):Void {
-    Facade_Sdk_flight__Notification.cancelScheduledNotification(id);
+  public static function cancelScheduledNotification(scheduled:ScheduledNotification):flight._internal._Promise<NotificationCancelOutcome> {
+    return cast Facade_Sdk_flight__Notification.cancelScheduledNotification(scheduled);
+    return cast null;
   }
 
   public static function cancelSignal<T>(signal:Signal<T>):Void {
@@ -2747,8 +3103,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function canShareContent(content:ShareContent):Bool {
-    return cast Facade_Sdk_flight__Share.canShareContent(content);
+  public static function canShareContent(host:HasShareContent, content:ShareContent):Bool {
+    return cast Facade_Sdk_flight__Share.canShareContent(host, content);
+    return cast null;
+  }
+
+  public static function canShareFiles(host:HasShareFiles, files:Array<ShareFile>):Bool {
+    return cast Facade_Sdk_flight__Share.canShareFiles(host, files);
     return cast null;
   }
 
@@ -2759,6 +3120,11 @@ class Sdk {
 
   public static function canUndoTextInput(source:RichText):Bool {
     return cast Facade_Sdk_flight__TextInput.canUndoTextInput(source);
+    return cast null;
+  }
+
+  public static function canvasShapeCommandTable():KeyedTable<CanvasShapeCommand<String>> {
+    return cast Facade_Sdk_flight__Scene2DCanvas.canvasShapeCommandTable();
     return cast null;
   }
 
@@ -2804,16 +3170,13 @@ class Sdk {
     Facade_Sdk_flight__Mesh.centerMeshGeometry(geometry);
   }
 
-  public static function centerWindow(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.centerWindow(win);
+  public static function centerWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.centerWindow(host, win);
   }
 
-  public static function checkAndDownloadAppUpdate():Void {
-    Facade_Sdk_flight__Updater.checkAndDownloadAppUpdate();
-  }
-
-  public static function checkForAppUpdate():Void {
-    Facade_Sdk_flight__Updater.checkForAppUpdate();
+  public static function checkForAppUpdate(host:HasUpdaterCommand):flight._internal._Promise<AppUpdateCheckOutcome> {
+    return cast Facade_Sdk_flight__Updater.checkForAppUpdate(host);
+    return cast null;
   }
 
   public static final CIRCLE_KAPPA:Float = Facade_Sdk_flight__Math.CIRCLE_KAPPA;
@@ -2855,16 +3218,17 @@ class Sdk {
     Facade_Sdk_flight__Path.cleanPath(source, tolerance, out, flattenTolerance);
   }
 
-  public static function clearAccessibilityTree():Void {
-    Facade_Sdk_flight__Accessibility.clearAccessibilityTree();
+  public static function clearAccessibilityTree(host:HasAccessibilityProvider):AccessibilityOperationOutcome<String> {
+    return cast Facade_Sdk_flight__Accessibility.clearAccessibilityTree(host);
+    return cast null;
   }
 
-  public static function clearAppRecentDocuments():Void {
-    Facade_Sdk_flight__App.clearAppRecentDocuments();
+  public static function clearAppRecentDocuments(host:HasAppRecentDocuments):Void {
+    Facade_Sdk_flight__App.clearAppRecentDocuments(host);
   }
 
-  public static function clearClipboard():flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.clearClipboard();
+  public static function clearClipboard(host:HasClipboardText):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.clearClipboard(host);
     return cast null;
   }
 
@@ -2960,16 +3324,14 @@ class Sdk {
     Facade_Sdk_flight__Geometry.clearMatrixPool();
   }
 
-  public static function clearMediaSessionActionHandler(action:MediaSessionAction):Void {
-    Facade_Sdk_flight__MediaSession.clearMediaSessionActionHandler(action);
+  public static function clearMediaSessionMetadata(host:HasMediaSession):MediaSessionClearMetadataOutcome {
+    return cast Facade_Sdk_flight__MediaSession.clearMediaSessionMetadata(host);
+    return cast null;
   }
 
-  public static function clearMediaSessionMetadata():Void {
-    Facade_Sdk_flight__MediaSession.clearMediaSessionMetadata();
-  }
-
-  public static function clearMediaSessionPositionState():Void {
-    Facade_Sdk_flight__MediaSession.clearMediaSessionPositionState();
+  public static function clearMediaSessionPositionState(host:HasMediaSession):MediaSessionClearPositionStateOutcome {
+    return cast Facade_Sdk_flight__MediaSession.clearMediaSessionPositionState(host);
+    return cast null;
   }
 
   public static function clearMemoryLogSink(handle:MemoryLogSink):Void {
@@ -3049,17 +3411,17 @@ class Sdk {
     Facade_Sdk_flight__Spatial.clearSpatialIndex3D(index);
   }
 
-  public static function clearStatusBarStyleStack():Void {
-    Facade_Sdk_flight__StatusBar.clearStatusBarStyleStack();
+  public static function clearStatusBarStyleStack(host:HasUiStatusBarStyleStack):Void {
+    Facade_Sdk_flight__StatusBar.clearStatusBarStyleStack(host);
   }
 
-  public static function clearStorage():Bool {
-    return cast Facade_Sdk_flight__Storage.clearStorage();
+  public static function clearStorage(host:HasStorageLocal, ?signals:Null<StorageSignals>):StorageClearResult {
+    return cast Facade_Sdk_flight__Storage.clearStorage(host, signals);
     return cast null;
   }
 
-  public static function clearStorageNamespace(namespace:StorageNamespace):Bool {
-    return cast Facade_Sdk_flight__Storage.clearStorageNamespace(namespace);
+  public static function clearStorageNamespace(host:HasStorageLocal, namespace:StorageNamespace, ?signals:Null<StorageSignals>):StorageClearNamespaceResult {
+    return cast Facade_Sdk_flight__Storage.clearStorageNamespace(host, namespace, signals);
     return cast null;
   }
 
@@ -3382,20 +3744,27 @@ class Sdk {
     return cast null;
   }
 
-  public static function closeAllNotifications():Void {
-    Facade_Sdk_flight__Notification.closeAllNotifications();
+  public static function closeAllNotifications(host:HasNotificationClose):flight._internal._Promise<NotificationLifecycleOutcome> {
+    return cast Facade_Sdk_flight__Notification.closeAllNotifications(host);
+    return cast null;
   }
 
-  public static function closeNotification(id:String):Void {
-    Facade_Sdk_flight__Notification.closeNotification(id);
+  public static function closeMidiPort(port:MidiPort):flight._internal._Promise<MidiPortCloseOutcome> {
+    return cast Facade_Sdk_flight__Midi.closeMidiPort(port);
+    return cast null;
+  }
+
+  public static function closeNotification(notification:Notification):flight._internal._Promise<NotificationCloseOutcome> {
+    return cast Facade_Sdk_flight__Notification.closeNotification(notification);
+    return cast null;
   }
 
   public static function closeSocket(socket:Socket, ?code:Float, ?reason:String):Void {
     Facade_Sdk_flight__Socket.closeSocket(socket, code, reason);
   }
 
-  public static function closeWindow(win:ApplicationWindow):Bool {
-    return cast Facade_Sdk_flight__Application.closeWindow(win);
+  public static function closeWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Bool {
+    return cast Facade_Sdk_flight__Application.closeWindow(host, win);
     return cast null;
   }
 
@@ -4243,10 +4612,6 @@ class Sdk {
     Facade_Sdk_flight__Geometry.copyBoundingSphere(out, source);
   }
 
-  public static function copyCanvasRenderStateRegistrations(target:CanvasRenderState, source:CanvasRenderState):Void {
-    Facade_Sdk_flight__Scene2DCanvas.copyCanvasRenderStateRegistrations(target, source);
-  }
-
   public static function copyClipRegion(out:ClipRegion, source:ClipRegion):Void {
     Facade_Sdk_flight__Clip.copyClipRegion(out, source);
   }
@@ -4263,17 +4628,13 @@ class Sdk {
     Facade_Sdk_flight__Texture.copyCubeTexture(out, source);
   }
 
-  public static function copyFile(from:String, to:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.copyFile(from, to);
+  public static function copyFile(host:HasStorageFileSystem, from:String, to:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.copyFile(host, from, to);
     return cast null;
   }
 
   public static function copyFlyCameraController(out:FlyCameraController, source:FlyCameraController):Void {
     Facade_Sdk_flight__CameraControls.copyFlyCameraController(out, source);
-  }
-
-  public static function copyGlRenderStateRegistrations(target:GlRenderState, source:GlRenderState):Void {
-    Facade_Sdk_flight__RenderGl.copyGlRenderStateRegistrations(target, source);
   }
 
   public static function copyMaterial(out:Material, source:Material):Void {
@@ -4392,10 +4753,6 @@ class Sdk {
 
   public static function copyVideoTexture(out:TextureLike, source:TextureLike):Void {
     Facade_Sdk_flight__Texture.copyVideoTexture(out, source);
-  }
-
-  public static function copyWgpuRenderStateRegistrations(target:WgpuRenderState, source:WgpuRenderState):Void {
-    Facade_Sdk_flight__RenderWgpu.copyWgpuRenderStateRegistrations(target, source);
   }
 
   public static function createAabb(?minX:Float, ?minY:Float, ?minZ:Float, ?maxX:Float, ?maxY:Float, ?maxZ:Float):Aabb {
@@ -4533,16 +4890,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function createAppLoginItem():AppLoginItem {
-    return cast Facade_Sdk_flight__App.createAppLoginItem();
-    return cast null;
-  }
-
-  public static function createAppUpdater():AppUpdater {
-    return cast Facade_Sdk_flight__Updater.createAppUpdater();
-    return cast null;
-  }
-
   public static function createAreaLight(?options:AreaLightOptions):AreaLight {
     return cast Facade_Sdk_flight__Lighting.createAreaLight(options);
     return cast null;
@@ -4633,7 +4980,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBitmapFromWgpuRenderState(state:WgpuRenderState, ?timeoutMs:Float):flight._internal._Promise<Bitmap> {
+  public static function createBitmapFromWgpuRenderState(state:WgpuPresentationRenderState, ?timeoutMs:Float):flight._internal._Promise<Bitmap> {
     return cast Facade_Sdk_flight__RenderWgpu.createBitmapFromWgpuRenderState(state, timeoutMs);
     return cast null;
   }
@@ -4708,7 +5055,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createBvhSpatialBackend3D(?margin:Float):SpatialIndexBackend3D {
+  public static function createBvhSpatialBackend3D(?margin:Float):{ >SpatialIndexBackend3D, >Entity, } {
     return cast Facade_Sdk_flight__Spatial.createBvhSpatialBackend3D(margin);
     return cast null;
   }
@@ -4745,33 +5092,43 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCanvasCacheState(screenState:CanvasRenderState):CanvasRenderState {
-    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasCacheState(screenState);
+  public static function createCanvasCacheState(ownerState:CanvasRenderState, surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
+    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasCacheState(ownerState, surface, pipeline, canvasTextureResolvers, options);
     return cast null;
   }
 
-  public static function createCanvasElement(width:Float, height:Float, ?pixelRatio:Float):flight._internal.dom.HTMLCanvasElement {
-    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasElement(width, height, pixelRatio);
+  public static function createCanvasElement(creator:CanvasRenderSurfaceCreator, width:Float, height:Float, ?pixelRatio:Float):flight._internal.dom.HTMLCanvasElement {
+    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasElement(creator, width, height, pixelRatio);
     return cast null;
   }
 
-  public static function createCanvasOffscreenRenderState(screenState:CanvasRenderState):CanvasRenderState {
-    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasOffscreenRenderState(screenState);
+  public static function createCanvasOffscreenRenderState(surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
+    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasOffscreenRenderState(surface, pipeline, canvasTextureResolvers, options);
     return cast null;
   }
 
-  public static function createCanvasRenderEffectPipeline(_state:CanvasRenderState, ?options:RenderEffectPipelineOptions):CanvasRenderEffectPipeline {
-    return cast Facade_Sdk_flight__EffectsCanvas.createCanvasRenderEffectPipeline(_state, options);
+  public static function createCanvasPipeline(registries:CanvasRenderRegistries):CanvasPipeline {
+    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasPipeline(registries);
     return cast null;
   }
 
-  public static function createCanvasRenderState(canvas:flight._internal.dom.HTMLCanvasElement, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
-    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasRenderState(canvas, options);
+  public static function createCanvasRenderEffectPipeline(state:CanvasRenderState, ?options:RenderEffectPipelineOptions):CanvasRenderEffectPipeline {
+    return cast Facade_Sdk_flight__EffectsCanvas.createCanvasRenderEffectPipeline(state, options);
     return cast null;
   }
 
-  public static function createCanvasRenderTexturePool():CanvasRenderTexturePool {
-    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasRenderTexturePool();
+  public static function createCanvasRenderState(surface:CanvasRenderSurface, pipeline:CanvasPipeline, canvasTextureResolvers:CanvasTextureResolvers, ?options:{ @:optional var backgroundColor:Null<Float>; @:optional var imageSmoothingEnabled:Null<Bool>; @:optional var imageSmoothingQuality:Null<flight._internal.dom.ImageSmoothingQuality>; @:optional var pixelRatio:Null<Float>; @:optional var renderTransform:Null<Matrix>; @:optional var roundPixels:Null<Bool>; @:optional var sceneGraphSyncPolicy:Null<Scene3DGraphSyncPolicy>; }):CanvasRenderState {
+    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasRenderState(surface, pipeline, canvasTextureResolvers, options);
+    return cast null;
+  }
+
+  public static function createCanvasRenderSurface(creator:CanvasRenderSurfaceCreator, canvas:flight._internal.dom.HTMLCanvasElement, ?options:{ @:optional var contextAttributes:Null<flight._internal.dom.CanvasRenderingContext2DSettings>; @:optional var height:Null<Float>; @:optional var pixelRatio:Null<Float>; @:optional var width:Null<Float>; }):CanvasRenderSurface {
+    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasRenderSurface(creator, canvas, options);
+    return cast null;
+  }
+
+  public static function createCanvasRenderTexturePool(creator:CanvasRenderSurfaceCreator):CanvasRenderTexturePool {
+    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasRenderTexturePool(creator);
     return cast null;
   }
 
@@ -4780,8 +5137,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createCanvasTextureResolvers():CanvasTextureResolvers {
-    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasTextureResolvers();
+  public static function createCanvasTextureResolvers(surfaceCreator:CanvasRenderSurfaceCreator):CanvasTextureResolvers {
+    return cast Facade_Sdk_flight__Scene2DCanvas.createCanvasTextureResolvers(surfaceCreator);
     return cast null;
   }
 
@@ -5090,6 +5447,21 @@ class Sdk {
     return cast null;
   }
 
+  public static function createDeviceCapabilities():DeviceCapabilities {
+    return cast Facade_Sdk_flight__Device.createDeviceCapabilities();
+    return cast null;
+  }
+
+  public static function createDeviceDisplayMetrics():DeviceDisplayMetrics {
+    return cast Facade_Sdk_flight__Device.createDeviceDisplayMetrics();
+    return cast null;
+  }
+
+  public static function createDeviceInfo():DeviceInfo {
+    return cast Facade_Sdk_flight__Device.createDeviceInfo();
+    return cast null;
+  }
+
   public static function createDirectionalBlurEffect(?options:{ @:optional var angle:Null<Float>; @:optional var length:Null<Float>; @:optional var samples:Null<Float>; }):DirectionalBlurEffect {
     return cast Facade_Sdk_flight__Effects.createDirectionalBlurEffect(options);
     return cast null;
@@ -5160,6 +5532,16 @@ class Sdk {
     return cast null;
   }
 
+  public static function createEmptyCanvasRegistries():CanvasRenderRegistries {
+    return cast Facade_Sdk_flight__Scene2DCanvas.createEmptyCanvasRegistries();
+    return cast null;
+  }
+
+  public static function createEmptyGlRegistries():GlRenderRegistries {
+    return cast Facade_Sdk_flight__RenderGl.createEmptyGlRegistries();
+    return cast null;
+  }
+
   public static function createEnvironment(?options:EnvironmentOptions):Environment {
     return cast Facade_Sdk_flight__Lighting.createEnvironment(options);
     return cast null;
@@ -5205,13 +5587,18 @@ class Sdk {
     return cast null;
   }
 
-  public static function createFileLogSink(?options:{ @:optional var formatter:LogFormatter; }):FileLogSink {
-    return cast Facade_Sdk_flight__Log.createFileLogSink(options);
+  public static function createFileDialogHandle(kind:flight._internal._IndexedAccess<FileDialogHandle, String>, name:String, path:Null<String>, ?operations:Null<FileDialogHandleOperations>):FileDialogHandle {
+    return cast Facade_Sdk_flight__Dialog.createFileDialogHandle(kind, name, path, operations);
     return cast null;
   }
 
-  public static function createFileSymlink(target:String, linkPath:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.createFileSymlink(target, linkPath);
+  public static function createFileLogSink(transport:LogTransport, ?options:{ @:optional var formatter:LogFormatter; }):FileLogSink {
+    return cast Facade_Sdk_flight__Log.createFileLogSink(transport, options);
+    return cast null;
+  }
+
+  public static function createFileSymlink(_host:HasStorageFileSystem, _target:String, _linkPath:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.createFileSymlink(_host, _target, _linkPath);
     return cast null;
   }
 
@@ -5315,7 +5702,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:flight._internal.dom.HTMLCanvasElement, ?options:GlApplicationRenderViewOptions):GlApplicationRenderView {
+  public static function createGlApplicationRenderView(window:ApplicationWindow, canvas:flight._internal.dom.HTMLCanvasElement, options:GlApplicationRenderViewOptions):GlApplicationRenderView {
     return cast Facade_Sdk_flight__ApplicationGl.createGlApplicationRenderView(window, canvas, options);
     return cast null;
   }
@@ -5325,8 +5712,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlCacheState(screenState:GlRenderState):GlRenderState {
-    return cast Facade_Sdk_flight__Scene2DGl.createGlCacheState(screenState);
+  public static function createGlCacheState(ownerState:GlRenderState, contextState:GlContextState, pipeline:GlPipeline, ?options:GlRenderOptions):GlRenderState {
+    return cast Facade_Sdk_flight__Scene2DGl.createGlCacheState(ownerState, contextState, pipeline, options);
     return cast null;
   }
 
@@ -5340,13 +5727,28 @@ class Sdk {
     return cast null;
   }
 
+  public static function createGlContextState(gl:GlContext):GlContextState {
+    return cast Facade_Sdk_flight__RenderGl.createGlContextState(gl);
+    return cast null;
+  }
+
   public static function createGlitchEffect(?options:{ @:optional var intensity:Null<Float>; @:optional var blockSize:Null<Float>; @:optional var colorShift:Null<Float>; @:optional var seed:Null<Float>; }):GlitchEffect {
     return cast Facade_Sdk_flight__Effects.createGlitchEffect(options);
     return cast null;
   }
 
-  public static function createGlOffscreenRenderState(screenState:GlRenderState):GlRenderState {
-    return cast Facade_Sdk_flight__RenderGl.createGlOffscreenRenderState(screenState);
+  public static function createGlobalShortcut(accelerator:String):CreateGlobalShortcutOutcome {
+    return cast Facade_Sdk_flight__Shortcut.createGlobalShortcut(accelerator);
+    return cast null;
+  }
+
+  public static function createGlOffscreenRenderState(contextState:GlContextState, pipeline:GlPipeline, ?options:GlRenderOptions):GlRenderState {
+    return cast Facade_Sdk_flight__RenderGl.createGlOffscreenRenderState(contextState, pipeline, options);
+    return cast null;
+  }
+
+  public static function createGlPipeline(registries:GlRenderRegistries):GlPipeline {
+    return cast Facade_Sdk_flight__RenderGl.createGlPipeline(registries);
     return cast null;
   }
 
@@ -5355,8 +5757,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlRenderState(gl:GlContext, ?options:GlRenderOptions):GlRenderState {
-    return cast Facade_Sdk_flight__RenderGl.createGlRenderState(gl, options);
+  public static function createGlRenderState(contextState:GlContextState, pipeline:GlPipeline, ?options:GlRenderOptions):GlRenderState {
+    return cast Facade_Sdk_flight__RenderGl.createGlRenderState(contextState, pipeline, options);
     return cast null;
   }
 
@@ -5406,7 +5808,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:GlyphOutlineSource):GlyphRasterizerBackend {
+  public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:GlyphOutlineSource):{ >GlyphRasterizerBackend, >Entity, } {
     return cast Facade_Sdk_flight__Font.createGlyphRasterizerBackendFromGlyphOutlineSource(source);
     return cast null;
   }
@@ -5556,11 +5958,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function createIpcChannel(name:String):IpcChannel {
-    return cast Facade_Sdk_flight__Ipc.createIpcChannel(name);
-    return cast null;
-  }
-
   public static function createIridescencePbrExtension(?opts:{ @:optional var iridescence:Null<Float>; @:optional var iridescenceIor:Null<Float>; @:optional var iridescenceMap:Null<Texture>; @:optional var iridescenceMapUvSet:Null<PbrUvSet>; @:optional var iridescenceThicknessMap:Null<Texture>; @:optional var iridescenceThicknessMapUvSet:Null<PbrUvSet>; @:optional var iridescenceThicknessMax:Null<Float>; @:optional var iridescenceThicknessMin:Null<Float>; @:optional var kind:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):IridescencePbrExtension {
     return cast Facade_Sdk_flight__Materials.createIridescencePbrExtension(opts);
     return cast null;
@@ -5691,13 +6088,28 @@ class Sdk {
     return cast null;
   }
 
+  public static function createMediaSessionActionSignal(action:MediaSessionAction):MediaSessionActionSignal {
+    return cast Facade_Sdk_flight__MediaSession.createMediaSessionActionSignal(action);
+    return cast null;
+  }
+
   public static function createMemoryLogSink(capacity:Float):MemoryLogSink {
     return cast Facade_Sdk_flight__Log.createMemoryLogSink(capacity);
     return cast null;
   }
 
+  public static function createMenuHighlight():MenuHighlight {
+    return cast Facade_Sdk_flight__Menu.createMenuHighlight();
+    return cast null;
+  }
+
   public static function createMenuItemTemplate(?template:{ @:optional var id:Null<String>; @:optional var label:Null<String>; @:optional var type:Null<MenuItemType>; @:optional var role:Null<MenuItemRole>; @:optional var accelerator:Null<String>; @:optional var enabled:Null<Bool>; @:optional var checked:Null<Bool>; @:optional var visible:Null<Bool>; @:optional var sublabel:Null<String>; @:optional var toolTip:Null<String>; @:optional var submenu:Null<Array<MenuItemTemplate>>; }):MenuItemTemplate {
     return cast Facade_Sdk_flight__Menu.createMenuItemTemplate(template);
+    return cast null;
+  }
+
+  public static function createMenuSelect():MenuSelect {
+    return cast Facade_Sdk_flight__Menu.createMenuSelect();
     return cast null;
   }
 
@@ -5713,6 +6125,21 @@ class Sdk {
 
   public static function createMeshGeometryFromAttributes(options:MeshGeometryFromAttributesOptions):MeshGeometry {
     return cast Facade_Sdk_flight__Mesh.createMeshGeometryFromAttributes(options);
+    return cast null;
+  }
+
+  public static function createMidiAccessStateSubscription():MidiAccessStateSubscription {
+    return cast Facade_Sdk_flight__Midi.createMidiAccessStateSubscription();
+    return cast null;
+  }
+
+  public static function createMidiInputMessageSubscription():MidiInputMessageSubscription {
+    return cast Facade_Sdk_flight__Midi.createMidiInputMessageSubscription();
+    return cast null;
+  }
+
+  public static function createMidiPortStateSubscription():MidiPortStateSubscription {
+    return cast Facade_Sdk_flight__Midi.createMidiPortStateSubscription();
     return cast null;
   }
 
@@ -5786,8 +6213,29 @@ class Sdk {
     return cast null;
   }
 
-  public static function createNotificationChannel(channel:NotificationChannel):Void {
-    Facade_Sdk_flight__Notification.createNotificationChannel(channel);
+  public static function createNotificationActionSubscription():NotificationActionSubscription {
+    return cast Facade_Sdk_flight__Notification.createNotificationActionSubscription();
+    return cast null;
+  }
+
+  public static function createNotificationClickSubscription():NotificationClickSubscription {
+    return cast Facade_Sdk_flight__Notification.createNotificationClickSubscription();
+    return cast null;
+  }
+
+  public static function createNotificationDismissSubscription():NotificationDismissSubscription {
+    return cast Facade_Sdk_flight__Notification.createNotificationDismissSubscription();
+    return cast null;
+  }
+
+  public static function createNotificationReceivedSubscription():NotificationReceivedSubscription {
+    return cast Facade_Sdk_flight__Notification.createNotificationReceivedSubscription();
+    return cast null;
+  }
+
+  public static function createNotificationReplySubscription():NotificationReplySubscription {
+    return cast Facade_Sdk_flight__Notification.createNotificationReplySubscription();
+    return cast null;
   }
 
   public static function createObb(centerX:Float, centerY:Float, centerZ:Float, halfExtentX:Float, halfExtentY:Float, halfExtentZ:Float, orientationX:Float, orientationY:Float, orientationZ:Float, orientationW:Float):Obb {
@@ -5832,11 +6280,6 @@ class Sdk {
 
   public static function createPanniniProjectionEffect(?options:{ @:optional var compression:Null<Float>; @:optional var crop:Null<Float>; }):PanniniProjectionEffect {
     return cast Facade_Sdk_flight__Effects.createPanniniProjectionEffect(options);
-    return cast null;
-  }
-
-  public static function createParsedAccelerator():ParsedAccelerator {
-    return cast Facade_Sdk_flight__Shortcut.createParsedAccelerator();
     return cast null;
   }
 
@@ -6360,6 +6803,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function createSafeAreaInsets():SafeAreaInsets {
+    return cast Facade_Sdk_flight__Device.createSafeAreaInsets();
+    return cast null;
+  }
+
   public static function createSampledLogSink(target:LogSink, rate:Float):LogSink {
     return cast Facade_Sdk_flight__Log.createSampledLogSink(target, rate);
     return cast null;
@@ -6530,8 +6978,23 @@ class Sdk {
     return cast null;
   }
 
+  public static function createScreenInfo():ScreenInfo {
+    return cast Facade_Sdk_flight__Screen.createScreenInfo();
+    return cast null;
+  }
+
   public static function createScreenMode():ScreenMode {
     return cast Facade_Sdk_flight__Screen.createScreenMode();
+    return cast null;
+  }
+
+  public static function createScreenPermissionChange():ScreenPermissionChange {
+    return cast Facade_Sdk_flight__Screen.createScreenPermissionChange();
+    return cast null;
+  }
+
+  public static function createScreenSignals():ScreenSignals {
+    return cast Facade_Sdk_flight__Screen.createScreenSignals();
     return cast null;
   }
 
@@ -6660,18 +7123,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function createSocket(options:SocketOptions):Socket {
-    return cast Facade_Sdk_flight__Socket.createSocket(options);
+  public static function createSocket(host:HasNetSocket, options:SocketOptions):Socket {
+    return cast Facade_Sdk_flight__Socket.createSocket(host, options);
     return cast null;
   }
 
-  public static function createSoftKeyboard():SoftKeyboard {
+  public static function createSoftKeyboard():{ >SoftKeyboard, >Entity, } {
     return cast Facade_Sdk_flight__Keyboard.createSoftKeyboard();
-    return cast null;
-  }
-
-  public static function createSoftKeyboardTransition():SoftKeyboardTransition {
-    return cast Facade_Sdk_flight__Keyboard.createSoftKeyboardTransition();
     return cast null;
   }
 
@@ -6830,12 +7288,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function createStorageNamespace(prefix:String):StorageNamespace {
-    return cast Facade_Sdk_flight__Storage.createStorageNamespace(prefix);
+  public static function createStorageSignals():StorageSignals {
+    return cast Facade_Sdk_flight__Storage.createStorageSignals();
     return cast null;
   }
 
-  public static function createStubGlyphRasterizerBackend():GlyphRasterizerBackend {
+  public static function createStubGlyphRasterizerBackend():{ >GlyphRasterizerBackend, >Entity, } {
     return cast Facade_Sdk_flight__GlyphAtlas.createStubGlyphRasterizerBackend();
     return cast null;
   }
@@ -7034,8 +7492,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTrayIcon(?options:TrayIconOptions):Null<TrayIcon> {
-    return cast Facade_Sdk_flight__Tray.createTrayIcon(options);
+  public static function createTrayIcon<HostType:HasTrayLifecycle>(host:HostType, ?options:TrayIconOptions):flight._internal._Promise<TrayCreateResult<TrayIconForHost<HostType>>> {
+    return cast Facade_Sdk_flight__Tray.createTrayIcon(host, options);
     return cast null;
   }
 
@@ -7066,28 +7524,18 @@ class Sdk {
     return cast null;
   }
 
-  public static function createUniformGridSpatialBackend2D(cellSize:Float):SpatialIndexBackend2D {
+  public static function createUniformGridSpatialBackend2D(cellSize:Float):{ >SpatialIndexBackend2D, >Entity, } {
     return cast Facade_Sdk_flight__Spatial.createUniformGridSpatialBackend2D(cellSize);
     return cast null;
   }
 
-  public static function createUniformGridSpatialBackend3D(cellSize:Float):SpatialIndexBackend3D {
+  public static function createUniformGridSpatialBackend3D(cellSize:Float):{ >SpatialIndexBackend3D, >Entity, } {
     return cast Facade_Sdk_flight__Spatial.createUniformGridSpatialBackend3D(cellSize);
     return cast null;
   }
 
   public static function createUnlitMaterial(?opts:{ @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var kind:Null<Kind>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):UnlitMaterial {
     return cast Facade_Sdk_flight__Materials.createUnlitMaterial(opts);
-    return cast null;
-  }
-
-  public static function createUpdaterConfig():UpdaterConfig {
-    return cast Facade_Sdk_flight__Updater.createUpdaterConfig();
-    return cast null;
-  }
-
-  public static function createUpdaterState():UpdaterState {
-    return cast Facade_Sdk_flight__Updater.createUpdaterState();
     return cast null;
   }
 
@@ -7161,13 +7609,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):WebcamStream {
-    return cast Facade_Sdk_flight__Webcam.createWebcamStreamEntity(data);
+  public static function createWgpuAcquisitionFromCanvasElement(canvas:flight._internal.dom.HTMLCanvasElement, ?options:WgpuHostAcquisitionOptions):flight._internal._Promise<Null<WgpuHostAcquisition>> {
+    return cast Facade_Sdk_flight__RenderWgpu.createWgpuAcquisitionFromCanvasElement(canvas, options);
     return cast null;
   }
 
-  public static function createWgpuCacheState(screenState:WgpuRenderState):WgpuRenderState {
-    return cast Facade_Sdk_flight__Scene2DWgpu.createWgpuCacheState(screenState);
+  public static function createWgpuCacheState(ownerState:WgpuRenderState, deviceState:WgpuDeviceState, pipeline:WgpuPipeline, ?options:WgpuRenderOptions):WgpuRenderState {
+    return cast Facade_Sdk_flight__Scene2DWgpu.createWgpuCacheState(ownerState, deviceState, pipeline, options);
     return cast null;
   }
 
@@ -7176,8 +7624,20 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuOffscreenRenderState(screenState:WgpuRenderState):WgpuRenderState {
-    return cast Facade_Sdk_flight__RenderWgpu.createWgpuOffscreenRenderState(screenState);
+  public static function createWgpuDeviceState(device:flight._internal.dom.GPUDevice):WgpuDeviceState {
+    return cast Facade_Sdk_flight__RenderWgpu.createWgpuDeviceState(device);
+    return cast null;
+  }
+
+  @:overload(function(source:WgpuRenderState):WgpuOffscreenRenderStateResult {})
+  @:overload(function(deviceState:WgpuDeviceState, pipeline:WgpuPipeline, ?options:WgpuRenderOptions):WgpuRenderState {})
+  public static function createWgpuOffscreenRenderState(sourceOrDeviceState:flight._internal._Union2<WgpuRenderState, WgpuDeviceState>, ?pipeline:WgpuPipeline, ?options:WgpuRenderOptions):flight._internal._Union2<WgpuRenderState, WgpuOffscreenRenderStateResult> {
+    return cast Facade_Sdk_flight__RenderWgpu.createWgpuOffscreenRenderState(sourceOrDeviceState, pipeline, options);
+    return cast null;
+  }
+
+  public static function createWgpuPipeline(registries:WgpuRenderRegistries):WgpuPipeline {
+    return cast Facade_Sdk_flight__RenderWgpu.createWgpuPipeline(registries);
     return cast null;
   }
 
@@ -7186,8 +7646,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function createWgpuRenderState(canvas:flight._internal.dom.HTMLCanvasElement, ?options:WgpuRenderOptions):flight._internal._Promise<WgpuRenderState> {
-    return cast Facade_Sdk_flight__RenderWgpu.createWgpuRenderState(canvas, options);
+  public static function createWgpuRenderState(acquisition:WgpuHostAcquisition, pipeline:WgpuPipeline, ?options:WgpuRenderOptions):WgpuPresentationRenderState {
+    return cast Facade_Sdk_flight__RenderWgpu.createWgpuRenderState(acquisition, pipeline, options);
+    return cast null;
+  }
+
+  public static function createWgpuRenderStateFromCanvasElement(canvas:flight._internal.dom.HTMLCanvasElement, pipeline:WgpuPipeline, ?options:{ >WgpuRenderOptions, >WgpuHostAcquisitionOptions, }):flight._internal._Promise<WgpuPresentationRenderState> {
+    return cast Facade_Sdk_flight__RenderWgpu.createWgpuRenderStateFromCanvasElement(canvas, pipeline, options);
     return cast null;
   }
 
@@ -7693,10 +8158,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function deleteNotificationChannel(id:String):Void {
-    Facade_Sdk_flight__Notification.deleteNotificationChannel(id);
-  }
-
   public static function deleteTextInputBackward(source:RichText):Void {
     Facade_Sdk_flight__TextInput.deleteTextInputBackward(source);
   }
@@ -7729,6 +8190,10 @@ class Sdk {
     Facade_Sdk_flight__Interaction.describeGraphHit(node, x, y, out);
   }
 
+  public static function destroyAccessibility(host:HasAccessibilityProvider):Void {
+    Facade_Sdk_flight__Accessibility.destroyAccessibility(host);
+  }
+
   public static function destroyAudioChannel(channel:AudioChannel):Void {
     Facade_Sdk_flight__Media.destroyAudioChannel(channel);
   }
@@ -7741,6 +8206,10 @@ class Sdk {
     Facade_Sdk_flight__Scene2DCanvas.destroyCanvasRenderState(state);
   }
 
+  public static function destroyCanvasRenderSurface(surface:CanvasRenderSurface):Void {
+    Facade_Sdk_flight__Scene2DCanvas.destroyCanvasRenderSurface(surface);
+  }
+
   public static function destroyCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture):Void {
     Facade_Sdk_flight__Scene2DCanvas.destroyCanvasRenderTexture(state, renderTexture);
   }
@@ -7749,8 +8218,17 @@ class Sdk {
     Facade_Sdk_flight__Scene2DCanvas.destroyCanvasRenderTexturePool(state, pool);
   }
 
-  public static function destroyFileLogSink(_handle:FileLogSink):Void {
-    Facade_Sdk_flight__Log.destroyFileLogSink(_handle);
+  public static function destroyCanvasTextureResolvers(resolvers:CanvasTextureResolvers):Void {
+    Facade_Sdk_flight__Scene2DCanvas.destroyCanvasTextureResolvers(resolvers);
+  }
+
+  public static function destroyConnectivity(host:HasConnectivityChange):Void {
+    Facade_Sdk_flight__Connectivity.destroyConnectivity(host);
+  }
+
+  public static function destroyFileLogSink(handle:FileLogSink):flight._internal._Promise<FileLogSinkDestroyOutcome> {
+    return cast Facade_Sdk_flight__Log.destroyFileLogSink(handle);
+    return cast null;
   }
 
   public static function destroyGlApplicationRenderView(view:GlApplicationRenderView):Void {
@@ -7773,8 +8251,12 @@ class Sdk {
     Facade_Sdk_flight__RenderGl.destroyGlRenderTexturePool(state, pool);
   }
 
-  public static function destroyLogTransportBackend():Void {
-    Facade_Sdk_flight__Log.destroyLogTransportBackend();
+  public static function destroyMediaSession(host:{ >HasMediaSession, >HasMediaSessionAction, }):Void {
+    Facade_Sdk_flight__MediaSession.destroyMediaSession(host);
+  }
+
+  public static function destroyMenuApplication(...hosts:HasMenuApplication):Void {
+    _Runtime.callHaxeRestValue(Facade_Sdk_flight__Menu.destroyMenuApplication, _Runtime.concatArrays([_Runtime.toArray(hosts)]), 0);
   }
 
   public static function destroyMeshGeometryGlData(geometry:MeshGeometry):Void {
@@ -7783,6 +8265,11 @@ class Sdk {
 
   public static function destroyMeshGeometryWgpuData(geometry:MeshGeometry):Void {
     Facade_Sdk_flight__Mesh.destroyMeshGeometryWgpuData(geometry);
+  }
+
+  public static function destroyNotificationCapabilities(host:HasNotificationLifecycle):flight._internal._Promise<NotificationLifecycleOutcome> {
+    return cast Facade_Sdk_flight__Notification.destroyNotificationCapabilities(host);
+    return cast null;
   }
 
   public static function destroyPhysics2DAbiWorld(abi:Physics2DAbi, world:Physics2DAbiWorldHandle):Bool {
@@ -7795,6 +8282,10 @@ class Sdk {
     return cast null;
   }
 
+  public static function destroyPowerKeepAwake(...hosts:HasPowerKeepAwake):Void {
+    _Runtime.callHaxeRestValue(Facade_Sdk_flight__Power.destroyPowerKeepAwake, _Runtime.concatArrays([_Runtime.toArray(hosts)]), 0);
+  }
+
   public static function destroyRaster2DSurface(surface:Raster2DSurface):Void {
     Facade_Sdk_flight__Render.destroyRaster2DSurface(surface);
   }
@@ -7803,8 +8294,22 @@ class Sdk {
     Facade_Sdk_flight__Render.destroyRenderState(state);
   }
 
-  public static function destroyTrayIcon(tray:TrayIcon):Void {
-    Facade_Sdk_flight__Tray.destroyTrayIcon(tray);
+  public static function destroyShortcutTrigger(host:HasShortcutTrigger):flight._internal._Promise<flight._internal._Nothing> {
+    return cast Facade_Sdk_flight__Shortcut.destroyShortcutTrigger(host);
+    return cast null;
+  }
+
+  public static function destroyStorage(host:HasStorageChange):Void {
+    Facade_Sdk_flight__Storage.destroyStorage(host);
+  }
+
+  public static function destroyTrayIcon(tray:TrayIcon):flight._internal._Promise<TrayDestroyResult> {
+    return cast Facade_Sdk_flight__Tray.destroyTrayIcon(tray);
+    return cast null;
+  }
+
+  public static function destroyUpdater(host:HasUpdaterCommand):Void {
+    Facade_Sdk_flight__Updater.destroyUpdater(host);
   }
 
   public static function destroyVideoChannel(channel:VideoChannel):Void {
@@ -7847,24 +8352,77 @@ class Sdk {
     Facade_Sdk_flight__Lifecycle.detachAppLifecycle(app);
   }
 
-  public static function detachAppUpdater(updater:AppUpdater):Void {
-    Facade_Sdk_flight__Updater.detachAppUpdater(updater);
-  }
-
   public static function detachClipboardWatch(watch:ClipboardWatch):Void {
     Facade_Sdk_flight__Clipboard.detachClipboardWatch(watch);
   }
 
-  public static function detachConnectivity(net:Connectivity):Void {
-    Facade_Sdk_flight__Connectivity.detachConnectivity(net);
+  public static function detachConnectivity(connectivity:Connectivity):Void {
+    Facade_Sdk_flight__Connectivity.detachConnectivity(connectivity);
   }
 
   public static function detachGamepadInput(manager:InputManager, source:InputIngressSource):Void {
     Facade_Sdk_flight__Input.detachGamepadInput(manager, source);
   }
 
+  public static function detachGlobalShortcut(host:HasShortcutTrigger, shortcut:GlobalShortcut):flight._internal._Promise<GlobalShortcutDetachOutcome> {
+    return cast Facade_Sdk_flight__Shortcut.detachGlobalShortcut(host, shortcut);
+    return cast null;
+  }
+
   public static function detachKeyboardInput(manager:InputManager, source:InputIngressSource):Void {
     Facade_Sdk_flight__Input.detachKeyboardInput(manager, source);
+  }
+
+  public static function detachMediaSessionAction(signal:MediaSessionActionSignal):Void {
+    Facade_Sdk_flight__MediaSession.detachMediaSessionAction(signal);
+  }
+
+  public static function detachMenuHighlight(highlight:MenuHighlight):Void {
+    Facade_Sdk_flight__Menu.detachMenuHighlight(highlight);
+  }
+
+  public static function detachMenuSelect(select:MenuSelect):Void {
+    Facade_Sdk_flight__Menu.detachMenuSelect(select);
+  }
+
+  public static function detachMidiAccessStateSubscription(subscription:MidiAccessStateSubscription):flight._internal._Promise<MidiSubscriptionDetachOutcome> {
+    return cast Facade_Sdk_flight__Midi.detachMidiAccessStateSubscription(subscription);
+    return cast null;
+  }
+
+  public static function detachMidiInputMessageSubscription(subscription:MidiInputMessageSubscription):flight._internal._Promise<MidiSubscriptionDetachOutcome> {
+    return cast Facade_Sdk_flight__Midi.detachMidiInputMessageSubscription(subscription);
+    return cast null;
+  }
+
+  public static function detachMidiPortStateSubscription(subscription:MidiPortStateSubscription):flight._internal._Promise<MidiSubscriptionDetachOutcome> {
+    return cast Facade_Sdk_flight__Midi.detachMidiPortStateSubscription(subscription);
+    return cast null;
+  }
+
+  public static function detachNotificationActionSubscription(subscription:NotificationActionSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast Facade_Sdk_flight__Notification.detachNotificationActionSubscription(subscription);
+    return cast null;
+  }
+
+  public static function detachNotificationClickSubscription(subscription:NotificationClickSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast Facade_Sdk_flight__Notification.detachNotificationClickSubscription(subscription);
+    return cast null;
+  }
+
+  public static function detachNotificationDismissSubscription(subscription:NotificationDismissSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast Facade_Sdk_flight__Notification.detachNotificationDismissSubscription(subscription);
+    return cast null;
+  }
+
+  public static function detachNotificationReceivedSubscription(subscription:NotificationReceivedSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast Facade_Sdk_flight__Notification.detachNotificationReceivedSubscription(subscription);
+    return cast null;
+  }
+
+  public static function detachNotificationReplySubscription(subscription:NotificationReplySubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast Facade_Sdk_flight__Notification.detachNotificationReplySubscription(subscription);
+    return cast null;
   }
 
   public static function detachPointerInput(manager:InputManager, source:InputIngressSource):Void {
@@ -7881,6 +8439,10 @@ class Sdk {
 
   public static function detachRelativePointerInput(manager:InputManager, source:InputIngressSource):Void {
     Facade_Sdk_flight__Input.detachRelativePointerInput(manager, source);
+  }
+
+  public static function detachScreenPermissionChange(permissionChange:ScreenPermissionChange):Void {
+    Facade_Sdk_flight__Screen.detachScreenPermissionChange(permissionChange);
   }
 
   public static function detachScreenSignals(signals:ScreenSignals):Void {
@@ -7905,6 +8467,10 @@ class Sdk {
 
   public static function detachStatusBar(bar:StatusBar):Void {
     Facade_Sdk_flight__StatusBar.detachStatusBar(bar);
+  }
+
+  public static function detachStorage(signals:StorageSignals):Void {
+    Facade_Sdk_flight__Storage.detachStorage(signals);
   }
 
   public static function detachTextInput(manager:InputManager, source:InputIngressSource):Void {
@@ -7960,8 +8526,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function detectConnectivityReachability(options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flight._internal._Promise<ConnectivityReachability> {
-    return cast Facade_Sdk_flight__Connectivity.detectConnectivityReachability(options, out);
+  public static function detectConnectivityReachability(host:HasConnectivityReachability, options:ConnectivityReachabilityOptions, out:ConnectivityReachability):flight._internal._Promise<ConnectivityReachability> {
+    return cast Facade_Sdk_flight__Connectivity.detectConnectivityReachability(host, options, out);
     return cast null;
   }
 
@@ -8052,8 +8618,8 @@ class Sdk {
 
   public static final DirectionalLightKind:String = Facade_Sdk_flight__Types.DirectionalLightKind;
 
-  public static function directoryExists(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.directoryExists(path);
+  public static function directoryExists(host:HasStorageFileSystem, path:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.directoryExists(host, path);
     return cast null;
   }
 
@@ -8081,11 +8647,6 @@ class Sdk {
     Facade_Sdk_flight__Geometry.disableGeometryPoolGuards();
   }
 
-  public static function disableGlobalShortcut(accelerator:String):Bool {
-    return cast Facade_Sdk_flight__Shortcut.disableGlobalShortcut(accelerator);
-    return cast null;
-  }
-
   public static function disableGlRenderEffectGuards(state:GlRenderState):Void {
     Facade_Sdk_flight__EffectsGl.disableGlRenderEffectGuards(state);
   }
@@ -8110,10 +8671,6 @@ class Sdk {
     Facade_Sdk_flight__Node.disableNodeGuards();
   }
 
-  public static function disablePermissionGuards():Void {
-    Facade_Sdk_flight__Permissions.disablePermissionGuards();
-  }
-
   public static function disablePhysics2DGuards():Void {
     Facade_Sdk_flight__Physics2D.disablePhysics2DGuards();
   }
@@ -8134,10 +8691,6 @@ class Sdk {
     Facade_Sdk_flight__Shape.disableShapeBoundsGuards();
   }
 
-  public static function disableShortcutGuards():Void {
-    Facade_Sdk_flight__Shortcut.disableShortcutGuards();
-  }
-
   public static function disableSnapshotGuards():Void {
     Facade_Sdk_flight__Snapshot.disableSnapshotGuards();
   }
@@ -8148,10 +8701,6 @@ class Sdk {
 
   public static function disableStatechartGuards(instance:StatechartInstance):Void {
     Facade_Sdk_flight__Statechart.disableStatechartGuards(instance);
-  }
-
-  public static function disableStorageSignals():Void {
-    Facade_Sdk_flight__Storage.disableStorageSignals();
   }
 
   public static function disableSwfGuards():Void {
@@ -8282,8 +8831,9 @@ class Sdk {
 
   public static final DisplayObjectKind:String = Facade_Sdk_flight__Types.DisplayObjectKind;
 
-  public static function displayTrayBalloon(tray:TrayIcon, options:TrayBalloonOptions):Void {
-    Facade_Sdk_flight__Tray.displayTrayBalloon(tray, options);
+  public static function displayTrayBalloon(tray:TrayWithBalloon, options:TrayBalloonOptions):flight._internal._Promise<TrayBalloonDisplayResult> {
+    return cast Facade_Sdk_flight__Tray.displayTrayBalloon(tray, options);
+    return cast null;
   }
 
   public static function disposeApp(app:App):Void {
@@ -8300,10 +8850,6 @@ class Sdk {
 
   public static function disposeAppLifecycle(app:AppLifecycle):Void {
     Facade_Sdk_flight__Lifecycle.disposeAppLifecycle(app);
-  }
-
-  public static function disposeAppUpdater(updater:AppUpdater):Void {
-    Facade_Sdk_flight__Updater.disposeAppUpdater(updater);
   }
 
   public static function disposeAssetLibrary(library:AssetLibrary):Void {
@@ -8330,8 +8876,8 @@ class Sdk {
     Facade_Sdk_flight__Gui.disposeComboBoxController(controller);
   }
 
-  public static function disposeConnectivity(net:Connectivity):Void {
-    Facade_Sdk_flight__Connectivity.disposeConnectivity(net);
+  public static function disposeConnectivity(connectivity:Connectivity):Void {
+    Facade_Sdk_flight__Connectivity.disposeConnectivity(connectivity);
   }
 
   public static function disposeExternalGlTexture(state:GlRenderState, texture:Texture):Bool {
@@ -8348,8 +8894,9 @@ class Sdk {
     Facade_Sdk_flight__Gizmo.disposeGizmoState(state);
   }
 
-  public static function disposeGlobalShortcutSignals():Void {
-    Facade_Sdk_flight__Shortcut.disposeGlobalShortcutSignals();
+  public static function disposeGlobalShortcut(host:HasShortcutTrigger, shortcut:GlobalShortcut):flight._internal._Promise<GlobalShortcutDetachOutcome> {
+    return cast Facade_Sdk_flight__Shortcut.disposeGlobalShortcut(host, shortcut);
+    return cast null;
   }
 
   public static function disposeGlyphAtlas(atlas:GlyphAtlas):Void {
@@ -8362,6 +8909,43 @@ class Sdk {
 
   public static function disposeLogSink(handle:BufferedLogSink):Void {
     Facade_Sdk_flight__Log.disposeLogSink(handle);
+  }
+
+  public static function disposeMediaSessionActionSignal(signal:MediaSessionActionSignal):Void {
+    Facade_Sdk_flight__MediaSession.disposeMediaSessionActionSignal(signal);
+  }
+
+  public static function disposeMenuHighlight(highlight:MenuHighlight):Void {
+    Facade_Sdk_flight__Menu.disposeMenuHighlight(highlight);
+  }
+
+  public static function disposeMenuSelect(select:MenuSelect):Void {
+    Facade_Sdk_flight__Menu.disposeMenuSelect(select);
+  }
+
+  public static function disposeMidiAccess(access:MidiAccess):flight._internal._Promise<MidiAccessDisposeOutcome> {
+    return cast Facade_Sdk_flight__Midi.disposeMidiAccess(access);
+    return cast null;
+  }
+
+  public static function disposeMidiAccessStateSubscription(subscription:MidiAccessStateSubscription):flight._internal._Promise<MidiSubscriptionDisposeOutcome> {
+    return cast Facade_Sdk_flight__Midi.disposeMidiAccessStateSubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeMidiInputMessageSubscription(subscription:MidiInputMessageSubscription):flight._internal._Promise<MidiSubscriptionDisposeOutcome> {
+    return cast Facade_Sdk_flight__Midi.disposeMidiInputMessageSubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeMidiPort(port:MidiPort):flight._internal._Promise<MidiPortDisposeOutcome> {
+    return cast Facade_Sdk_flight__Midi.disposeMidiPort(port);
+    return cast null;
+  }
+
+  public static function disposeMidiPortStateSubscription(subscription:MidiPortStateSubscription):flight._internal._Promise<MidiSubscriptionDisposeOutcome> {
+    return cast Facade_Sdk_flight__Midi.disposeMidiPortStateSubscription(subscription);
+    return cast null;
   }
 
   public static function disposeMovieClipSignals(clip:MovieClip):Void {
@@ -8378,6 +8962,31 @@ class Sdk {
 
   public static function disposeNodeOrderList<Traits:flight._internal._Object>(list:NodeOrderList<Traits>):Void {
     Facade_Sdk_flight__Node.disposeNodeOrderList(list);
+  }
+
+  public static function disposeNotificationActionSubscription(subscription:NotificationActionSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
+    return cast Facade_Sdk_flight__Notification.disposeNotificationActionSubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeNotificationClickSubscription(subscription:NotificationClickSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
+    return cast Facade_Sdk_flight__Notification.disposeNotificationClickSubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeNotificationDismissSubscription(subscription:NotificationDismissSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
+    return cast Facade_Sdk_flight__Notification.disposeNotificationDismissSubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeNotificationReceivedSubscription(subscription:NotificationReceivedSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
+    return cast Facade_Sdk_flight__Notification.disposeNotificationReceivedSubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeNotificationReplySubscription(subscription:NotificationReplySubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
+    return cast Facade_Sdk_flight__Notification.disposeNotificationReplySubscription(subscription);
+    return cast null;
   }
 
   public static function disposePower(power:Power):Void {
@@ -8406,6 +9015,10 @@ class Sdk {
 
   public static function disposeScene3DResourceResolver(resolver:Scene3DResourceResolver):Void {
     Facade_Sdk_flight__Scene3DResources.disposeScene3DResourceResolver(resolver);
+  }
+
+  public static function disposeScreenPermissionChange(permissionChange:ScreenPermissionChange):Void {
+    Facade_Sdk_flight__Screen.disposeScreenPermissionChange(permissionChange);
   }
 
   public static function disposeScreenSignals(signals:ScreenSignals):Void {
@@ -8460,6 +9073,10 @@ class Sdk {
     Facade_Sdk_flight__StatusBar.disposeStatusBar(bar);
   }
 
+  public static function disposeStorage(signals:StorageSignals):Void {
+    Facade_Sdk_flight__Storage.disposeStorage(signals);
+  }
+
   public static function disposeTabBarController(controller:TabBarController):Void {
     Facade_Sdk_flight__Gui.disposeTabBarController(controller);
   }
@@ -8500,6 +9117,10 @@ class Sdk {
     Facade_Sdk_flight__Video.disposeVideoResource(resource);
   }
 
+  public static function disposeWgpuDeviceSignals(state:WgpuRenderState):Void {
+    Facade_Sdk_flight__RenderWgpu.disposeWgpuDeviceSignals(state);
+  }
+
   public static function disposeWindowController(controller:WindowController):Void {
     Facade_Sdk_flight__Gui.disposeWindowController(controller);
   }
@@ -8527,10 +9148,6 @@ class Sdk {
 
   public static function dollyOrbitCameraController(controller:OrbitCameraController, deltaDistance:Float):Void {
     Facade_Sdk_flight__CameraControls.dollyOrbitCameraController(controller, deltaDistance);
-  }
-
-  public static function downloadAppUpdate():Void {
-    Facade_Sdk_flight__Updater.downloadAppUpdate();
   }
 
   public static final DragForceKind:String = Facade_Sdk_flight__Types.DragForceKind;
@@ -8850,16 +9467,6 @@ class Sdk {
     Facade_Sdk_flight__Scene2DGl.enableGlClipSupport(state);
   }
 
-  public static function enableGlobalShortcut(accelerator:String):Bool {
-    return cast Facade_Sdk_flight__Shortcut.enableGlobalShortcut(accelerator);
-    return cast null;
-  }
-
-  public static function enableGlobalShortcutSignals():ShortcutSignals {
-    return cast Facade_Sdk_flight__Shortcut.enableGlobalShortcutSignals();
-    return cast null;
-  }
-
   public static function enableGlPbrExtensionGuards(state:GlRenderState):Void {
     Facade_Sdk_flight__Scene3DGl.enableGlPbrExtensionGuards(state);
   }
@@ -8906,11 +9513,6 @@ class Sdk {
 
   public static function enableInteractionSignals<N:NodeAny>(source:N):InteractionSignals {
     return cast Facade_Sdk_flight__Interaction.enableInteractionSignals(source);
-    return cast null;
-  }
-
-  public static function enableIpcSignals():IpcSignals {
-    return cast Facade_Sdk_flight__Ipc.enableIpcSignals();
     return cast null;
   }
 
@@ -8966,10 +9568,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function enablePermissionGuards():Void {
-    Facade_Sdk_flight__Permissions.enablePermissionGuards();
-  }
-
   public static function enablePhysics2DGuards():Void {
     Facade_Sdk_flight__Physics2D.enablePhysics2DGuards();
   }
@@ -9020,11 +9618,6 @@ class Sdk {
     Facade_Sdk_flight__Render.enableSceneRenderGuards();
   }
 
-  public static function enableScreenSignals():ScreenSignals {
-    return cast Facade_Sdk_flight__Screen.enableScreenSignals();
-    return cast null;
-  }
-
   public static function enableShapeBoundsGuards():Void {
     Facade_Sdk_flight__Shape.enableShapeBoundsGuards();
   }
@@ -9032,10 +9625,6 @@ class Sdk {
   public static function enableShareSignals():ShareSignals {
     return cast Facade_Sdk_flight__Share.enableShareSignals();
     return cast null;
-  }
-
-  public static function enableShortcutGuards():Void {
-    Facade_Sdk_flight__Shortcut.enableShortcutGuards();
   }
 
   public static function enableSnapshotGuards():Void {
@@ -9057,11 +9646,6 @@ class Sdk {
 
   public static function enableStatechartSignals(instance:StatechartInstance):StatechartSignals {
     return cast Facade_Sdk_flight__Statechart.enableStatechartSignals(instance);
-    return cast null;
-  }
-
-  public static function enableStorageSignals():StorageSignals {
-    return cast Facade_Sdk_flight__Storage.enableStorageSignals();
     return cast null;
   }
 
@@ -9106,11 +9690,6 @@ class Sdk {
     Facade_Sdk_flight__Tray.enableTrayGuards();
   }
 
-  public static function enableWebSafeAreaInsets():Void->Void {
-    return cast Facade_Sdk_flight__Device.enableWebSafeAreaInsets();
-    return cast null;
-  }
-
   public static function enableWgpuBlendModeSupport(state:WgpuRenderState):Void {
     Facade_Sdk_flight__RenderWgpu.enableWgpuBlendModeSupport(state);
   }
@@ -9119,7 +9698,12 @@ class Sdk {
     Facade_Sdk_flight__Scene2DWgpu.enableWgpuClipSupport(state);
   }
 
-  public static function enableWgpuFrameCapture(state:WgpuRenderState):Void {
+  public static function enableWgpuDeviceSignals(state:WgpuRenderState):WgpuDeviceSignals {
+    return cast Facade_Sdk_flight__RenderWgpu.enableWgpuDeviceSignals(state);
+    return cast null;
+  }
+
+  public static function enableWgpuFrameCapture(state:WgpuPresentationRenderState):Void {
     Facade_Sdk_flight__RenderWgpu.enableWgpuFrameCapture(state);
   }
 
@@ -9377,18 +9961,14 @@ class Sdk {
     return cast null;
   }
 
-  public static function exitApplicationFullscreen():flight._internal._Promise<flight._internal._Nothing> {
-    return cast Facade_Sdk_flight__Application.exitApplicationFullscreen();
+  public static function exitApplicationFullscreen(host:HasUiFullscreen):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Application.exitApplicationFullscreen(host);
     return cast null;
   }
 
-  public static function exitApplicationPointerLock():flight._internal._Promise<flight._internal._Nothing> {
-    return cast Facade_Sdk_flight__Application.exitApplicationPointerLock();
+  public static function exitApplicationPointerLock(host:HasInputPointerLock):flight._internal._Promise<InputPointerLockExitOutcome> {
+    return cast Facade_Sdk_flight__Application.exitApplicationPointerLock(host);
     return cast null;
-  }
-
-  public static function exitInputPointerLock():Void {
-    Facade_Sdk_flight__Input.exitInputPointerLock();
   }
 
   public static function exitLogSpan(span:LogSpan):Void {
@@ -9410,16 +9990,6 @@ class Sdk {
 
   public static function expandRectangleToPoint(out:RectangleLike, sourceRect:RectangleLike, sourceVec2:Vector2Like):Void {
     Facade_Sdk_flight__Geometry.expandRectangleToPoint(out, sourceRect, sourceVec2);
-  }
-
-  public static function explainAccessibilityBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Accessibility.explainAccessibilityBackend();
-    return cast null;
-  }
-
-  public static function explainAppBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__App.explainAppBackend();
-    return cast null;
   }
 
   public static function explainAssetLoad(library:AssetLibrary, id:String):AssetLoadExplanation {
@@ -9481,11 +10051,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainClipboardBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Clipboard.explainClipboardBackend();
-    return cast null;
-  }
-
   public static function explainCollisionTest2D(a:CollisionShape2D, b:CollisionShape2D):CollisionTestExplanation2D {
     return cast Facade_Sdk_flight__Collision.explainCollisionTest2D(a, b);
     return cast null;
@@ -9501,28 +10066,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainConnectivityBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Connectivity.explainConnectivityBackend();
-    return cast null;
-  }
-
-  public static function explainDeviceBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Device.explainDeviceBackend();
-    return cast null;
-  }
-
-  public static function explainDialogBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Dialog.explainDialogBackend();
-    return cast null;
-  }
-
   public static function explainDomTextureResolution(state:DomRenderState, texture:Texture):TextureResolutionExplanation {
     return cast Facade_Sdk_flight__Scene2DDom.explainDomTextureResolution(state, texture);
-    return cast null;
-  }
-
-  public static function explainFileSystemBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__FileSystem.explainFileSystemBackend();
     return cast null;
   }
 
@@ -9553,11 +10098,6 @@ class Sdk {
 
   public static function explainGeolocationBackend():BackendExplanation {
     return cast Facade_Sdk_flight__Geolocation.explainGeolocationBackend();
-    return cast null;
-  }
-
-  public static function explainGlobalShortcutRegistration(accelerator:String):GlobalShortcutExplanation {
-    return cast Facade_Sdk_flight__Shortcut.explainGlobalShortcutRegistration(accelerator);
     return cast null;
   }
 
@@ -9609,11 +10149,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainHapticsBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Haptics.explainHapticsBackend();
-    return cast null;
-  }
-
   public static function explainImageBackend():BackendExplanation {
     return cast Facade_Sdk_flight__Image.explainImageBackend();
     return cast null;
@@ -9644,43 +10179,18 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainIpcBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Ipc.explainIpcBackend();
-    return cast null;
-  }
-
   public static function explainLayoutResolution(state:LayoutState, tree:LayoutTree, nodeIndex:Float):Null<LayoutResolutionExplanation> {
     return cast Facade_Sdk_flight__Layout.explainLayoutResolution(state, tree, nodeIndex);
     return cast null;
   }
 
-  public static function explainLifecycleBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Lifecycle.explainLifecycleBackend();
-    return cast null;
-  }
-
-  public static function explainMediaSessionBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__MediaSession.explainMediaSessionBackend();
-    return cast null;
-  }
-
-  public static function explainMenuBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Menu.explainMenuBackend();
-    return cast null;
-  }
-
-  public static function explainMenuReplacementGuarantee(guarantee:MenuReplacementGuarantee):MenuReplacementGuaranteeExplanation {
-    return cast Facade_Sdk_flight__Menu.explainMenuReplacementGuarantee(guarantee);
+  public static function explainMediaFileCaptureBackend():BackendExplanation {
+    return cast Facade_Sdk_flight__Webcam.explainMediaFileCaptureBackend();
     return cast null;
   }
 
   public static function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):MorphShapeGradientEndpointExplanation {
     return cast Facade_Sdk_flight__Shape.explainMorphShapeGradientEndpoints(start, end);
-    return cast null;
-  }
-
-  public static function explainNotificationBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Notification.explainNotificationBackend();
     return cast null;
   }
 
@@ -9691,16 +10201,6 @@ class Sdk {
 
   public static function explainPathMorphCreation(start:Path, end:Path):PathMorphCreationExplanation {
     return cast Facade_Sdk_flight__Path.explainPathMorphCreation(start, end);
-    return cast null;
-  }
-
-  public static function explainPermissionBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Permissions.explainPermissionBackend();
-    return cast null;
-  }
-
-  public static function explainPermissionState(name:PermissionName):flight._internal._Promise<PermissionStateExplanation> {
-    return cast Facade_Sdk_flight__Permissions.explainPermissionState(name);
     return cast null;
   }
 
@@ -9734,21 +10234,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainPlatformBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Platform.explainPlatformBackend();
-    return cast null;
-  }
-
-  public static function explainPowerBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Power.explainPowerBackend();
-    return cast null;
-  }
-
-  public static function explainProtocolBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Protocol.explainProtocolBackend();
-    return cast null;
-  }
-
   public static function explainRaster2DSurfaceProvider():BackendExplanation {
     return cast Facade_Sdk_flight__Render.explainRaster2DSurfaceProvider();
     return cast null;
@@ -9768,16 +10253,6 @@ class Sdk {
     Facade_Sdk_flight__Scene3DResources.explainScene3DResourceCoverage(out, resolver, usage, catalog);
   }
 
-  public static function explainScreenBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Screen.explainScreenBackend();
-    return cast null;
-  }
-
-  public static function explainSensorsBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Sensors.explainSensorsBackend();
-    return cast null;
-  }
-
   public static function explainShapeBounds(source:Shape, ?mode:ShapeBoundsMode):ShapeBoundsExplanation {
     return cast Facade_Sdk_flight__Shape.explainShapeBounds(source, mode);
     return cast null;
@@ -9788,21 +10263,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainShareBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Share.explainShareBackend();
-    return cast null;
-  }
-
-  public static function explainShellBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Shell.explainShellBackend();
-    return cast null;
-  }
-
-  public static function explainShortcutBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Shortcut.explainShortcutBackend();
-    return cast null;
-  }
-
   public static function explainSkeleton2DDeformLength(skin:Null<Skin2D>, vertices:Null<flight._internal._Float32Array>, deform:Null<flight._internal._Float32Array>):Skeleton2DDeformLengthExplanation {
     return cast Facade_Sdk_flight__Skeleton2D.explainSkeleton2DDeformLength(skin, vertices, deform);
     return cast null;
@@ -9810,11 +10270,6 @@ class Sdk {
 
   public static function explainSocketSendFailure(socket:Socket):Null<SocketSendFailureExplanation> {
     return cast Facade_Sdk_flight__Socket.explainSocketSendFailure(socket);
-    return cast null;
-  }
-
-  public static function explainSoftKeyboardBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Keyboard.explainSoftKeyboardBackend();
     return cast null;
   }
 
@@ -9843,16 +10298,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainStatusBarBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__StatusBar.explainStatusBarBackend();
-    return cast null;
-  }
-
-  public static function explainStorageBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Storage.explainStorageBackend();
-    return cast null;
-  }
-
   public static function explainStrokePathTessellation(path:Path, style:StrokeStyle, ?tolerance:Float):StrokePathTessellationExplanation {
     return cast Facade_Sdk_flight__Path.explainStrokePathTessellation(path, style, tolerance);
     return cast null;
@@ -9868,18 +10313,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainTrayBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Tray.explainTrayBackend();
-    return cast null;
-  }
-
   public static function explainUnpackedRectangles(rectangles:Array<PackableRectangle>, ?options:BinPackOptions):Array<UnpackedRectangleExplanation> {
     return cast Facade_Sdk_flight__Binpack.explainUnpackedRectangles(rectangles, options);
-    return cast null;
-  }
-
-  public static function explainUpdaterBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Updater.explainUpdaterBackend();
     return cast null;
   }
 
@@ -9898,11 +10333,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function explainWebcamBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Webcam.explainWebcamBackend();
-    return cast null;
-  }
-
   public static function explainWgpuRenderTexture(state:WgpuRenderState, renderTexture:RenderTexture):WgpuRenderTextureExplanation {
     return cast Facade_Sdk_flight__RenderWgpu.explainWgpuRenderTexture(state, renderTexture);
     return cast null;
@@ -9910,16 +10340,6 @@ class Sdk {
 
   public static function explainWgpuTextureResolution(state:WgpuRenderState, texture:TextureLike):TextureResolutionExplanation {
     return cast Facade_Sdk_flight__RenderWgpu.explainWgpuTextureResolution(state, texture);
-    return cast null;
-  }
-
-  public static function explainWindowBackend():BackendExplanation {
-    return cast Facade_Sdk_flight__Application.explainWindowBackend();
-    return cast null;
-  }
-
-  public static function explainWindowOperation(operation:WindowOperation):BackendOperationExplanation {
-    return cast Facade_Sdk_flight__Application.explainWindowOperation(operation);
     return cast null;
   }
 
@@ -9965,8 +10385,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function fileExists(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.fileExists(path);
+  public static function fileExists(host:HasStorageFileSystem, path:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.fileExists(host, path);
     return cast null;
   }
 
@@ -10008,8 +10428,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function findFiles(rootPath:String, pattern:String):flight._internal._Promise<Array<FileEntry>> {
-    return cast Facade_Sdk_flight__FileSystem.findFiles(rootPath, pattern);
+  public static function findFiles(host:HasStorageFileSystem, rootPath:String, pattern:String):flight._internal._Promise<Array<FileEntry>> {
+    return cast Facade_Sdk_flight__FileSystem.findFiles(host, rootPath, pattern);
     return cast null;
   }
 
@@ -10103,8 +10523,8 @@ class Sdk {
     Facade_Sdk_flight__Path.fitPathCurves(source, tolerance, out, flattenTolerance);
   }
 
-  public static function flashWindowFrame(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.flashWindowFrame(win);
+  public static function flashWindowFrame(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.flashWindowFrame(host, win);
   }
 
   public static function flattenPath(path:Path, ?tolerance:Float):Array<Array<Float>> {
@@ -10142,8 +10562,8 @@ class Sdk {
     Facade_Sdk_flight__Log.flushLogSink(handle);
   }
 
-  public static function focusApp():Void {
-    Facade_Sdk_flight__App.focusApp();
+  public static function focusApp(host:HasAppFocus):Void {
+    Facade_Sdk_flight__App.focusApp(host);
   }
 
   public static function focusNextNode<N:NodeAny>(manager:FocusManager<N>):Null<N> {
@@ -10173,8 +10593,8 @@ class Sdk {
     Facade_Sdk_flight__Gui.focusTextInputController(controller);
   }
 
-  public static function focusWindow(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.focusWindow(win);
+  public static function focusWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.focusWindow(host, win);
   }
 
   public static final fogModifierDefinition:ModifierDefinition = Facade_Sdk_flight__Shading.fogModifierDefinition;
@@ -10217,7 +10637,7 @@ class Sdk {
     Facade_Sdk_flight__Path.forEachPathSegment(path, visitor);
   }
 
-  public static function formatAcceleratorForDisplay(accelerator:String, ?platform:String):String {
+  public static function formatAcceleratorForDisplay(accelerator:String, platform:PlatformName):String {
     return cast Facade_Sdk_flight__Shortcut.formatAcceleratorForDisplay(accelerator, platform);
     return cast null;
   }
@@ -10377,7 +10797,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function getAcceleratorModifierLabel(modifier:ShortcutModifier, ?platform:String):String {
+  public static function getAcceleratorModifierLabel(modifier:ShortcutModifier, platform:PlatformName):String {
     return cast Facade_Sdk_flight__Shortcut.getAcceleratorModifierLabel(modifier, platform);
     return cast null;
   }
@@ -10405,8 +10825,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function getActiveNotifications():flight._internal._Promise<Array<NotificationRequest>> {
-    return cast Facade_Sdk_flight__Notification.getActiveNotifications();
+  public static function getActiveNotifications(host:HasNotificationActiveList):flight._internal._Promise<NotificationActiveListOutcome> {
+    return cast Facade_Sdk_flight__Notification.getActiveNotifications(host);
     return cast null;
   }
 
@@ -10444,28 +10864,18 @@ class Sdk {
     return cast null;
   }
 
-  public static function getAppCommandLine():Array<String> {
-    return cast Facade_Sdk_flight__App.getAppCommandLine();
+  public static function getAppDirectoryPath(host:HasAppPath, kind:AppPathKind):String {
+    return cast Facade_Sdk_flight__App.getAppDirectoryPath(host, kind);
     return cast null;
   }
 
-  public static function getAppCommandLineSwitch(name:String):Null<String> {
-    return cast Facade_Sdk_flight__App.getAppCommandLineSwitch(name);
+  public static function getAppExecutablePath(host:HasAppPath):String {
+    return cast Facade_Sdk_flight__App.getAppExecutablePath(host);
     return cast null;
   }
 
-  public static function getAppDirectoryPath(kind:AppPathKind):String {
-    return cast Facade_Sdk_flight__App.getAppDirectoryPath(kind);
-    return cast null;
-  }
-
-  public static function getAppExecutablePath():String {
-    return cast Facade_Sdk_flight__App.getAppExecutablePath();
-    return cast null;
-  }
-
-  public static function getAppLaunchKind():AppLaunchKind {
-    return cast Facade_Sdk_flight__Lifecycle.getAppLaunchKind();
+  public static function getAppLaunchKind(host:HasSystemLifecycle):AppLaunchKind {
+    return cast Facade_Sdk_flight__Lifecycle.getAppLaunchKind(host);
     return cast null;
   }
 
@@ -10484,48 +10894,43 @@ class Sdk {
     return cast null;
   }
 
-  public static function getAppLifecycleState():AppLifecycleState {
-    return cast Facade_Sdk_flight__Lifecycle.getAppLifecycleState();
+  public static function getAppLifecycleState(host:HasSystemLifecycle):AppLifecycleState {
+    return cast Facade_Sdk_flight__Lifecycle.getAppLifecycleState(host);
     return cast null;
   }
 
-  public static function getAppLocale():String {
-    return cast Facade_Sdk_flight__App.getAppLocale();
+  public static function getAppLocale(host:HasAppLocale):String {
+    return cast Facade_Sdk_flight__App.getAppLocale(host);
     return cast null;
   }
 
-  public static function getAppLoginItem():AppLoginItem {
-    return cast Facade_Sdk_flight__App.getAppLoginItem();
+  public static function getAppLoginItem(host:HasAppLoginItem):AppLoginItem {
+    return cast Facade_Sdk_flight__App.getAppLoginItem(host);
     return cast null;
   }
 
-  public static function getAppName():String {
-    return cast Facade_Sdk_flight__App.getAppName();
+  public static function getAppName(host:HasAppName):String {
+    return cast Facade_Sdk_flight__App.getAppName(host);
     return cast null;
   }
 
-  public static function getAppPath():String {
-    return cast Facade_Sdk_flight__App.getAppPath();
+  public static function getAppPath(host:HasAppPath):String {
+    return cast Facade_Sdk_flight__App.getAppPath(host);
     return cast null;
   }
 
-  public static function getAppPreferredSystemLanguages():Array<String> {
-    return cast Facade_Sdk_flight__App.getAppPreferredSystemLanguages();
+  public static function getAppPreferredSystemLanguages(host:HasAppLocale):Array<String> {
+    return cast Facade_Sdk_flight__App.getAppPreferredSystemLanguages(host);
     return cast null;
   }
 
-  public static function getAppSystemLocale():String {
-    return cast Facade_Sdk_flight__App.getAppSystemLocale();
+  public static function getAppSystemLocale(host:HasAppLocale):String {
+    return cast Facade_Sdk_flight__App.getAppSystemLocale(host);
     return cast null;
   }
 
-  public static function getAppUpdaterState(updater:AppUpdater):UpdaterState {
-    return cast Facade_Sdk_flight__Updater.getAppUpdaterState(updater);
-    return cast null;
-  }
-
-  public static function getAppVersion():String {
-    return cast Facade_Sdk_flight__App.getAppVersion();
+  public static function getAppVersion(host:HasAppVersion):String {
+    return cast Facade_Sdk_flight__App.getAppVersion(host);
     return cast null;
   }
 
@@ -10830,6 +11235,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function getCanvasPipelineRegistries(pipeline:CanvasPipeline):CanvasRenderRegistries {
+    return cast Facade_Sdk_flight__Scene2DCanvas.getCanvasPipelineRegistries(pipeline);
+    return cast null;
+  }
+
   public static function getCanvasRenderStateTextureResolvers(state:CanvasRenderState):CanvasTextureResolvers {
     return cast Facade_Sdk_flight__Scene2DCanvas.getCanvasRenderStateTextureResolvers(state);
     return cast null;
@@ -10845,13 +11255,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function getClipboardChangeCount():Float {
-    return cast Facade_Sdk_flight__Clipboard.getClipboardChangeCount();
-    return cast null;
-  }
-
-  public static function getClipboardFormats():flight._internal._Promise<Array<String>> {
-    return cast Facade_Sdk_flight__Clipboard.getClipboardFormats();
+  public static function getClipboardFormats(host:HasClipboardFormats):flight._internal._Promise<Array<String>> {
+    return cast Facade_Sdk_flight__Clipboard.getClipboardFormats(host);
     return cast null;
   }
 
@@ -11025,8 +11430,13 @@ class Sdk {
     Facade_Sdk_flight__Effects.getCompositeOperatorFactors(operator_, sourceAlpha, backdropAlpha, out);
   }
 
-  public static function getConnectivityStatus(out:ConnectivityStatus):ConnectivityStatus {
-    return cast Facade_Sdk_flight__Connectivity.getConnectivityStatus(out);
+  public static function getConnectivityOnline(host:HasConnectivityStatus):Null<Bool> {
+    return cast Facade_Sdk_flight__Connectivity.getConnectivityOnline(host);
+    return cast null;
+  }
+
+  public static function getConnectivityStatus(host:HasConnectivityStatus, out:ConnectivityStatus):ConnectivityStatus {
+    return cast Facade_Sdk_flight__Connectivity.getConnectivityStatus(host, out);
     return cast null;
   }
 
@@ -11070,23 +11480,23 @@ class Sdk {
     return cast null;
   }
 
-  public static function getDeviceCapabilities(out:DeviceCapabilities):DeviceCapabilities {
-    return cast Facade_Sdk_flight__Device.getDeviceCapabilities(out);
+  public static function getDeviceCapabilities(host:HasSystemDevice, out:DeviceCapabilities):DeviceCapabilities {
+    return cast Facade_Sdk_flight__Device.getDeviceCapabilities(host, out);
     return cast null;
   }
 
-  public static function getDeviceDisplayMetrics(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
-    return cast Facade_Sdk_flight__Device.getDeviceDisplayMetrics(out);
+  public static function getDeviceDisplayMetrics(host:HasSystemDevice, out:DeviceDisplayMetrics):DeviceDisplayMetrics {
+    return cast Facade_Sdk_flight__Device.getDeviceDisplayMetrics(host, out);
     return cast null;
   }
 
-  public static function getDeviceId():String {
-    return cast Facade_Sdk_flight__Device.getDeviceId();
+  public static function getDeviceId(host:HasSystemDevice):String {
+    return cast Facade_Sdk_flight__Device.getDeviceId(host);
     return cast null;
   }
 
-  public static function getDeviceInfo(out:DeviceInfo):DeviceInfo {
-    return cast Facade_Sdk_flight__Device.getDeviceInfo(out);
+  public static function getDeviceInfo(host:HasSystemDevice, out:DeviceInfo):DeviceInfo {
+    return cast Facade_Sdk_flight__Device.getDeviceInfo(host, out);
     return cast null;
   }
 
@@ -11125,6 +11535,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function getFileDialogHandleOperations(handle:FileDialogHandle):Null<FileDialogHandleOperations> {
+    return cast Facade_Sdk_flight__Dialog.getFileDialogHandleOperations(handle);
+    return cast null;
+  }
+
   public static function getFileDirectoryName(path:String):String {
     return cast Facade_Sdk_flight__FileSystem.getFileDirectoryName(path);
     return cast null;
@@ -11135,23 +11550,23 @@ class Sdk {
     return cast null;
   }
 
-  public static function getFilePermissions(path:String):flight._internal._Promise<Null<FilePermissions>> {
-    return cast Facade_Sdk_flight__FileSystem.getFilePermissions(path);
+  public static function getFilePermissions(_host:HasStorageFileSystem, _path:String):flight._internal._Promise<Null<FilePermissions>> {
+    return cast Facade_Sdk_flight__FileSystem.getFilePermissions(_host, _path);
     return cast null;
   }
 
-  public static function getFileRealPath(path:String):flight._internal._Promise<Null<String>> {
-    return cast Facade_Sdk_flight__FileSystem.getFileRealPath(path);
+  public static function getFileRealPath(_host:HasStorageFileSystem, _path:String):flight._internal._Promise<Null<String>> {
+    return cast Facade_Sdk_flight__FileSystem.getFileRealPath(_host, _path);
     return cast null;
   }
 
-  public static function getFileSystemPath(kind:FileSystemPathKind):String {
-    return cast Facade_Sdk_flight__FileSystem.getFileSystemPath(kind);
+  public static function getFileSystemPath(_host:HasStorageFileSystem, _kind:FileSystemPathKind):String {
+    return cast Facade_Sdk_flight__FileSystem.getFileSystemPath(_host, _kind);
     return cast null;
   }
 
-  public static function getFileSystemUsage():flight._internal._Promise<Null<FileSystemUsage>> {
-    return cast Facade_Sdk_flight__FileSystem.getFileSystemUsage();
+  public static function getFileSystemUsage(host:HasStorageFileSystem):flight._internal._Promise<Null<FileSystemUsage>> {
+    return cast Facade_Sdk_flight__FileSystem.getFileSystemUsage(host);
     return cast null;
   }
 
@@ -11218,11 +11633,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function getGeolocationPermission():flight._internal._Promise<GeolocationPermissionState> {
-    return cast Facade_Sdk_flight__Geolocation.getGeolocationPermission();
-    return cast null;
-  }
-
   public static function getGizmoMode<NodeType:HierarchyNodeAny>(state:GizmoState<NodeType>):GizmoMode {
     return cast Facade_Sdk_flight__Gizmo.getGizmoMode(state);
     return cast null;
@@ -11250,6 +11660,11 @@ class Sdk {
 
   public static function getGlPbrExtensionRegistration(state:GlRenderState, kind:Kind):Null<GlPbrExtensionRegistration> {
     return cast Facade_Sdk_flight__Scene3DGl.getGlPbrExtensionRegistration(state, kind);
+    return cast null;
+  }
+
+  public static function getGlPipelineRegistries(pipeline:GlPipeline):GlRenderRegistries {
+    return cast Facade_Sdk_flight__RenderGl.getGlPipelineRegistries(pipeline);
     return cast null;
   }
 
@@ -11328,8 +11743,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function getHapticsCapabilities(out:HapticsCapabilities):HapticsCapabilities {
-    return cast Facade_Sdk_flight__Haptics.getHapticsCapabilities(out);
+  public static function getHapticsCapabilities(host:HasInputHaptics, out:HapticsCapabilities):HapticsCapabilities {
+    return cast Facade_Sdk_flight__Haptics.getHapticsCapabilities(host, out);
     return cast null;
   }
 
@@ -11378,16 +11793,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function getIpcListenerCount(channel:flight._internal._Union2<String, IpcChannel>):Float {
-    return cast Facade_Sdk_flight__Ipc.getIpcListenerCount(channel);
-    return cast null;
-  }
-
-  public static function getIpcSignals():Null<IpcSignals> {
-    return cast Facade_Sdk_flight__Ipc.getIpcSignals();
-    return cast null;
-  }
-
   public static function getKeyCodeFromDomKeyboardEvent(event:flight._internal.dom.KeyboardEvent):Float {
     return cast Facade_Sdk_flight__Input.getKeyCodeFromDomKeyboardEvent(event);
     return cast null;
@@ -11400,11 +11805,6 @@ class Sdk {
 
   public static function getLassoSelectionPath(selection:LassoSelection):Path {
     return cast Facade_Sdk_flight__Selection.getLassoSelectionPath(selection);
-    return cast null;
-  }
-
-  public static function getLaunchNotification():flight._internal._Promise<Null<NotificationRequest>> {
-    return cast Facade_Sdk_flight__Notification.getLaunchNotification();
     return cast null;
   }
 
@@ -11609,6 +12009,31 @@ class Sdk {
     Facade_Sdk_flight__Skeleton3D.getMeshSkinExactBounds(out, bindPose, skeleton);
   }
 
+  public static function getMidiAccessInputPorts(access:MidiAccess):MidiAccessPortsOutcome<MidiInputPort> {
+    return cast Facade_Sdk_flight__Midi.getMidiAccessInputPorts(access);
+    return cast null;
+  }
+
+  public static function getMidiAccessOutputPorts(access:MidiAccess):MidiAccessPortsOutcome<MidiOutputPort> {
+    return cast Facade_Sdk_flight__Midi.getMidiAccessOutputPorts(access);
+    return cast null;
+  }
+
+  public static function getMidiPermission(host:HasMidiPermission):flight._internal._Promise<PermissionQueryOutcome> {
+    return cast Facade_Sdk_flight__Midi.getMidiPermission(host);
+    return cast null;
+  }
+
+  public static function getMidiPortConnection(port:MidiPort):MidiPortConnectionOutcome {
+    return cast Facade_Sdk_flight__Midi.getMidiPortConnection(port);
+    return cast null;
+  }
+
+  public static function getMidiPortState(port:MidiPort):MidiPortStateOutcome {
+    return cast Facade_Sdk_flight__Midi.getMidiPortState(port);
+    return cast null;
+  }
+
   public static function getModifierDefineKey(stack:Array<Modifier>, ?registry:ModifierRegistry):String {
     return cast Facade_Sdk_flight__Shading.getModifierDefineKey(stack, registry);
     return cast null;
@@ -11659,23 +12084,28 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNamespacedStorageByteSize(namespace:StorageNamespace):Float {
-    return cast Facade_Sdk_flight__Storage.getNamespacedStorageByteSize(namespace);
+  public static function getNamespacedStorageByteSize(host:HasStorageLocal, namespace:StorageNamespace):StorageByteSizeResult {
+    return cast Facade_Sdk_flight__Storage.getNamespacedStorageByteSize(host, namespace);
     return cast null;
   }
 
-  public static function getNamespacedStorageEntries(namespace:StorageNamespace):Array<Array<String>> {
-    return cast Facade_Sdk_flight__Storage.getNamespacedStorageEntries(namespace);
+  public static function getNamespacedStorageEntries(host:HasStorageLocal, namespace:StorageNamespace):StorageEntriesResult {
+    return cast Facade_Sdk_flight__Storage.getNamespacedStorageEntries(host, namespace);
     return cast null;
   }
 
-  public static function getNamespacedStorageItem(namespace:StorageNamespace, key:String):Null<String> {
-    return cast Facade_Sdk_flight__Storage.getNamespacedStorageItem(namespace, key);
+  public static function getNamespacedStorageItem(host:HasStorageLocal, namespace:StorageNamespace, key:String):StorageGetItemResult {
+    return cast Facade_Sdk_flight__Storage.getNamespacedStorageItem(host, namespace, key);
     return cast null;
   }
 
-  public static function getNamespacedStorageKeys(namespace:StorageNamespace):Array<String> {
-    return cast Facade_Sdk_flight__Storage.getNamespacedStorageKeys(namespace);
+  public static function getNamespacedStorageItemPresence(host:HasStorageLocal, namespace:StorageNamespace, key:String):StoragePresenceResult {
+    return cast Facade_Sdk_flight__Storage.getNamespacedStorageItemPresence(host, namespace, key);
+    return cast null;
+  }
+
+  public static function getNamespacedStorageKeys(host:HasStorageLocal, namespace:StorageNamespace):StorageKeysResult {
+    return cast Facade_Sdk_flight__Storage.getNamespacedStorageKeys(host, namespace);
     return cast null;
   }
 
@@ -11901,18 +12331,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function getNotificationCapabilities():NotificationCapabilities {
-    return cast Facade_Sdk_flight__Notification.getNotificationCapabilities();
-    return cast null;
-  }
-
-  public static function getNotificationChannels():Array<NotificationChannel> {
-    return cast Facade_Sdk_flight__Notification.getNotificationChannels();
-    return cast null;
-  }
-
-  public static function getNotificationPermission():NotificationPermission {
-    return cast Facade_Sdk_flight__Notification.getNotificationPermission();
+  public static function getNotificationPermission(host:HasNotificationPermission):flight._internal._Promise<NotificationPermissionQueryOutcome> {
+    return cast Facade_Sdk_flight__Notification.getNotificationPermission(host);
     return cast null;
   }
 
@@ -12066,18 +12486,18 @@ class Sdk {
     return cast null;
   }
 
-  public static function getPendingNotifications():flight._internal._Promise<Array<ScheduledNotification>> {
-    return cast Facade_Sdk_flight__Notification.getPendingNotifications();
+  public static function getPendingNotifications(host:HasNotificationScheduling):flight._internal._Promise<NotificationPendingListOutcome> {
+    return cast Facade_Sdk_flight__Notification.getPendingNotifications(host);
     return cast null;
   }
 
-  public static function getPermissionState(name:PermissionName):flight._internal._Promise<PermissionState> {
-    return cast Facade_Sdk_flight__Permissions.getPermissionState(name);
+  public static function getPermissionState(host:Host, name:PermissionName):flight._internal._Promise<PermissionQueryOutcome> {
+    return cast Facade_Sdk_flight__Permissions.getPermissionState(host, name);
     return cast null;
   }
 
-  public static function getPermissionStates(names:Array<PermissionName>):flight._internal._Promise<Array<PermissionState>> {
-    return cast Facade_Sdk_flight__Permissions.getPermissionStates(names);
+  public static function getPermissionStates(host:Host, names:Array<PermissionName>):flight._internal._Promise<Array<PermissionQueryOutcome>> {
+    return cast Facade_Sdk_flight__Permissions.getPermissionStates(host, names);
     return cast null;
   }
 
@@ -12150,28 +12570,33 @@ class Sdk {
     return cast null;
   }
 
-  public static function getPlatformEngine():PlatformEngine {
-    return cast Facade_Sdk_flight__Platform.getPlatformEngine();
+  public static function getPlatformEngine(host:HasSystemPlatform):PlatformEngine {
+    return cast Facade_Sdk_flight__Platform.getPlatformEngine(host);
     return cast null;
   }
 
-  public static function getPlatformInfo(out:PlatformInfo):PlatformInfo {
-    return cast Facade_Sdk_flight__Platform.getPlatformInfo(out);
+  public static function getPlatformInfo(host:HasSystemPlatform, out:PlatformInfo):PlatformInfo {
+    return cast Facade_Sdk_flight__Platform.getPlatformInfo(host, out);
     return cast null;
   }
 
-  public static function getPlatformKind():PlatformKind {
-    return cast Facade_Sdk_flight__Platform.getPlatformKind();
+  public static function getPlatformKind(host:HasSystemPlatform):PlatformKind {
+    return cast Facade_Sdk_flight__Platform.getPlatformKind(host);
     return cast null;
   }
 
-  public static function getPlatformName():PlatformName {
-    return cast Facade_Sdk_flight__Platform.getPlatformName();
+  public static function getPlatformName(host:HasSystemPlatform):PlatformName {
+    return cast Facade_Sdk_flight__Platform.getPlatformName(host);
     return cast null;
   }
 
-  public static function getPowerBatteryHealth(out:PowerBatteryHealth):Null<PowerBatteryHealth> {
-    return cast Facade_Sdk_flight__Power.getPowerBatteryHealth(out);
+  public static function getPlatformRuntime(host:HasSystemPlatform):PlatformRuntime {
+    return cast Facade_Sdk_flight__Platform.getPlatformRuntime(host);
+    return cast null;
+  }
+
+  public static function getPowerBatteryHealth(host:{ var power:{ var batteryHealth:{ var getBatteryHealth:PowerBatteryHealth->PowerBatteryHealth; }; }; }, out:PowerBatteryHealth):PowerBatteryHealth {
+    return cast Facade_Sdk_flight__Power.getPowerBatteryHealth(host, out);
     return cast null;
   }
 
@@ -12180,23 +12605,23 @@ class Sdk {
     return cast null;
   }
 
-  public static function getPowerStatus(out:PowerStatus):PowerStatus {
-    return cast Facade_Sdk_flight__Power.getPowerStatus(out);
+  public static function getPowerStatus(host:HasPowerStatus, out:PowerStatus):PowerStatus {
+    return cast Facade_Sdk_flight__Power.getPowerStatus(host, out);
     return cast null;
   }
 
-  public static function getPowerSystemIdleState(thresholdSeconds:Float):PowerIdleState {
-    return cast Facade_Sdk_flight__Power.getPowerSystemIdleState(thresholdSeconds);
+  public static function getPowerSystemIdleState(host:HasPowerIdle, thresholdSeconds:Float):PowerIdleState {
+    return cast Facade_Sdk_flight__Power.getPowerSystemIdleState(host, thresholdSeconds);
     return cast null;
   }
 
-  public static function getPowerSystemIdleTime():Float {
-    return cast Facade_Sdk_flight__Power.getPowerSystemIdleTime();
+  public static function getPowerSystemIdleTime(host:HasPowerIdle):Float {
+    return cast Facade_Sdk_flight__Power.getPowerSystemIdleTime(host);
     return cast null;
   }
 
-  public static function getPowerThermalState():PowerThermalState {
-    return cast Facade_Sdk_flight__Power.getPowerThermalState();
+  public static function getPowerThermalState(host:HasPowerThermal):PowerThermalState {
+    return cast Facade_Sdk_flight__Power.getPowerThermalState(host);
     return cast null;
   }
 
@@ -12210,8 +12635,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function getPrimaryScreen(out:ScreenInfo):ScreenInfo {
-    return cast Facade_Sdk_flight__Screen.getPrimaryScreen(out);
+  public static function getPrimaryScreen(host:HasScreenQuery, out:ScreenInfo):ScreenInfo {
+    return cast Facade_Sdk_flight__Screen.getPrimaryScreen(host, out);
     return cast null;
   }
 
@@ -12220,8 +12645,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function getProtocolLaunchUrl():Null<String> {
-    return cast Facade_Sdk_flight__Protocol.getProtocolLaunchUrl();
+  public static function getProtocolLaunchUrl(host:HasProtocolLaunch):Null<String> {
+    return cast Facade_Sdk_flight__Protocol.getProtocolLaunchUrl(host);
     return cast null;
   }
 
@@ -12361,18 +12786,13 @@ class Sdk {
     Facade_Sdk_flight__Geometry.getRectangleTopLeft(out, source);
   }
 
-  public static function getRegisteredGlobalShortcuts():Array<Accelerator> {
-    return cast Facade_Sdk_flight__Shortcut.getRegisteredGlobalShortcuts();
-    return cast null;
-  }
-
   public static function getRegisteredParticleFormats():Array<String> {
     return cast Facade_Sdk_flight__ParticlesFormats.getRegisteredParticleFormats();
     return cast null;
   }
 
-  public static function getRegisteredProtocolSchemes():Array<String> {
-    return cast Facade_Sdk_flight__Protocol.getRegisteredProtocolSchemes();
+  public static function getRegisteredProtocolSchemes(host:HasProtocolRegistration):Array<String> {
+    return cast Facade_Sdk_flight__Protocol.getRegisteredProtocolSchemes(host);
     return cast null;
   }
 
@@ -12562,8 +12982,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function getSafeAreaInsets(out:SafeAreaInsets):SafeAreaInsets {
-    return cast Facade_Sdk_flight__Device.getSafeAreaInsets(out);
+  public static function getSafeAreaInsets(host:HasSystemDevice, out:SafeAreaInsets):SafeAreaInsets {
+    return cast Facade_Sdk_flight__Device.getSafeAreaInsets(host, out);
     return cast null;
   }
 
@@ -12633,13 +13053,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function getScreenById(id:Float, out:ScreenInfo):Null<ScreenInfo> {
-    return cast Facade_Sdk_flight__Screen.getScreenById(id, out);
+  public static function getScreenById(host:HasScreenQuery, id:Float, out:ScreenInfo):Null<ScreenInfo> {
+    return cast Facade_Sdk_flight__Screen.getScreenById(host, id, out);
     return cast null;
   }
 
-  public static function getScreenContainingRect(rect:RectangleLike, out:ScreenInfo):ScreenInfo {
-    return cast Facade_Sdk_flight__Screen.getScreenContainingRect(rect, out);
+  public static function getScreenContainingRect(host:HasScreenQuery, rect:RectangleLike, out:ScreenInfo):ScreenInfo {
+    return cast Facade_Sdk_flight__Screen.getScreenContainingRect(host, rect, out);
     return cast null;
   }
 
@@ -12648,38 +13068,33 @@ class Sdk {
     return cast null;
   }
 
-  public static function getScreenCursorPosition(out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
-    return cast Facade_Sdk_flight__Screen.getScreenCursorPosition(out);
+  public static function getScreenCursorPosition(host:HasScreenQuery, out:{ var x:Float; var y:Float; }):{ var x:Float; var y:Float; } {
+    return cast Facade_Sdk_flight__Screen.getScreenCursorPosition(host, out);
     return cast null;
   }
 
-  public static function getScreenCursorScreen(out:ScreenInfo):ScreenInfo {
-    return cast Facade_Sdk_flight__Screen.getScreenCursorScreen(out);
+  public static function getScreenCursorScreen(host:HasScreenQuery, out:ScreenInfo):ScreenInfo {
+    return cast Facade_Sdk_flight__Screen.getScreenCursorScreen(host, out);
     return cast null;
   }
 
-  public static function getScreenDetailPermission():flight._internal._Promise<ScreenPermissionState> {
-    return cast Facade_Sdk_flight__Screen.getScreenDetailPermission();
+  public static function getScreenDetailPermission(host:HasScreenDetails):flight._internal._Promise<ScreenPermissionState> {
+    return cast Facade_Sdk_flight__Screen.getScreenDetailPermission(host);
     return cast null;
   }
 
-  public static function getScreenModes(screen:ScreenInfo, out:Array<ScreenMode>):Array<ScreenMode> {
-    return cast Facade_Sdk_flight__Screen.getScreenModes(screen, out);
+  public static function getScreenNearestPoint(host:HasScreenQuery, point:Vector2Like, out:ScreenInfo):ScreenInfo {
+    return cast Facade_Sdk_flight__Screen.getScreenNearestPoint(host, point, out);
     return cast null;
   }
 
-  public static function getScreenNearestPoint(point:Vector2Like, out:ScreenInfo):ScreenInfo {
-    return cast Facade_Sdk_flight__Screen.getScreenNearestPoint(point, out);
+  public static function getScreenNearestRect(host:HasScreenQuery, rect:RectangleLike, out:ScreenInfo):ScreenInfo {
+    return cast Facade_Sdk_flight__Screen.getScreenNearestRect(host, rect, out);
     return cast null;
   }
 
-  public static function getScreenNearestRect(rect:RectangleLike, out:ScreenInfo):ScreenInfo {
-    return cast Facade_Sdk_flight__Screen.getScreenNearestRect(rect, out);
-    return cast null;
-  }
-
-  public static function getScreens(out:Array<ScreenInfo>):Array<ScreenInfo> {
-    return cast Facade_Sdk_flight__Screen.getScreens(out);
+  public static function getScreens(host:HasScreenQuery, out:Array<ScreenInfo>):Array<ScreenInfo> {
+    return cast Facade_Sdk_flight__Screen.getScreens(host, out);
     return cast null;
   }
 
@@ -12733,8 +13148,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function getSensorsPermissionState(?sensor:String):flight._internal._Promise<SensorsPermissionState> {
-    return cast Facade_Sdk_flight__Sensors.getSensorsPermissionState(sensor);
+  public static function getSensorsPermissionState(host:HasSystemSensors, ?sensor:String):flight._internal._Promise<SensorsPermissionState> {
+    return cast Facade_Sdk_flight__Sensors.getSensorsPermissionState(host, sensor);
     return cast null;
   }
 
@@ -12837,18 +13252,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function getSoftKeyboardHeight():Float {
-    return cast Facade_Sdk_flight__Keyboard.getSoftKeyboardHeight();
+  public static function getSoftKeyboardHeight(host:HasSoftKeyboardInfo):Float {
+    return cast Facade_Sdk_flight__Keyboard.getSoftKeyboardHeight(host);
     return cast null;
   }
 
-  public static function getSoftKeyboardInfo(out:SoftKeyboardInfo):SoftKeyboardInfo {
-    return cast Facade_Sdk_flight__Keyboard.getSoftKeyboardInfo(out);
-    return cast null;
-  }
-
-  public static function getSoftKeyboardResizeMode():SoftKeyboardResizeMode {
-    return cast Facade_Sdk_flight__Keyboard.getSoftKeyboardResizeMode();
+  public static function getSoftKeyboardInfo(host:HasSoftKeyboardInfo, out:SoftKeyboardInfo):SoftKeyboardInfo {
+    return cast Facade_Sdk_flight__Keyboard.getSoftKeyboardInfo(host, out);
     return cast null;
   }
 
@@ -12916,88 +13326,88 @@ class Sdk {
     return cast null;
   }
 
-  public static function getStatusBarHeight():Float {
-    return cast Facade_Sdk_flight__StatusBar.getStatusBarHeight();
+  public static function getStatusBarHeight(host:HasUiStatusBarInfo):Float {
+    return cast Facade_Sdk_flight__StatusBar.getStatusBarHeight(host);
     return cast null;
   }
 
-  public static function getStatusBarInfo(out:StatusBarInfo):StatusBarInfo {
-    return cast Facade_Sdk_flight__StatusBar.getStatusBarInfo(out);
+  public static function getStatusBarInfo(host:HasUiStatusBarInfo, out:StatusBarInfo):StatusBarInfo {
+    return cast Facade_Sdk_flight__StatusBar.getStatusBarInfo(host, out);
     return cast null;
   }
 
-  public static function getStorageBoolean(key:String):Null<Bool> {
-    return cast Facade_Sdk_flight__Storage.getStorageBoolean(key);
+  public static function getStorageBoolean(host:HasStorageLocal, key:String):StorageBooleanResult {
+    return cast Facade_Sdk_flight__Storage.getStorageBoolean(host, key);
     return cast null;
   }
 
-  public static function getStorageBooleanOr(key:String, fallback:Bool):Bool {
-    return cast Facade_Sdk_flight__Storage.getStorageBooleanOr(key, fallback);
+  public static function getStorageBooleanOr(host:HasStorageLocal, key:String, fallback:Bool):StorageBooleanOrResult {
+    return cast Facade_Sdk_flight__Storage.getStorageBooleanOr(host, key, fallback);
     return cast null;
   }
 
-  public static function getStorageByteSize():Float {
-    return cast Facade_Sdk_flight__Storage.getStorageByteSize();
+  public static function getStorageByteSize(host:HasStorageLocal):StorageByteSizeResult {
+    return cast Facade_Sdk_flight__Storage.getStorageByteSize(host);
     return cast null;
   }
 
-  public static function getStorageEntries():Array<Array<String>> {
-    return cast Facade_Sdk_flight__Storage.getStorageEntries();
+  public static function getStorageEntries(host:HasStorageLocal):StorageEntriesResult {
+    return cast Facade_Sdk_flight__Storage.getStorageEntries(host);
     return cast null;
   }
 
-  public static function getStorageItem(key:String):Null<String> {
-    return cast Facade_Sdk_flight__Storage.getStorageItem(key);
+  public static function getStorageItem(host:HasStorageLocal, key:String):StorageGetItemResult {
+    return cast Facade_Sdk_flight__Storage.getStorageItem(host, key);
     return cast null;
   }
 
-  public static function getStorageItemCount():Float {
-    return cast Facade_Sdk_flight__Storage.getStorageItemCount();
+  public static function getStorageItemCount(host:HasStorageLocal):StorageItemCountResult {
+    return cast Facade_Sdk_flight__Storage.getStorageItemCount(host);
     return cast null;
   }
 
-  public static function getStorageItemOr(key:String, fallback:String):String {
-    return cast Facade_Sdk_flight__Storage.getStorageItemOr(key, fallback);
+  public static function getStorageItemOr(host:HasStorageLocal, key:String, fallback:String):StorageItemOrResult {
+    return cast Facade_Sdk_flight__Storage.getStorageItemOr(host, key, fallback);
     return cast null;
   }
 
-  public static function getStorageItems(keys:Array<String>):Array<Null<String>> {
-    return cast Facade_Sdk_flight__Storage.getStorageItems(keys);
+  public static function getStorageItemPresence(host:HasStorageLocal, key:String):StoragePresenceResult {
+    return cast Facade_Sdk_flight__Storage.getStorageItemPresence(host, key);
     return cast null;
   }
 
-  public static function getStorageJSON<T>(key:String):Null<T> {
-    return cast Facade_Sdk_flight__Storage.getStorageJSON(key);
+  public static function getStorageItems(host:HasStorageLocal, keys:Array<String>):StorageItemsResult {
+    return cast Facade_Sdk_flight__Storage.getStorageItems(host, keys);
     return cast null;
   }
 
-  public static function getStorageJSONOr<T>(key:String, fallback:T):T {
-    return cast Facade_Sdk_flight__Storage.getStorageJSONOr(key, fallback);
+  public static function getStorageJSON<Value>(host:HasStorageLocal, key:String):StorageJsonResult<Value> {
+    return cast Facade_Sdk_flight__Storage.getStorageJSON(host, key);
     return cast null;
   }
 
-  public static function getStorageKeys():Array<String> {
-    return cast Facade_Sdk_flight__Storage.getStorageKeys();
+  public static function getStorageJSONOr<Value>(host:HasStorageLocal, key:String, fallback:Value):StorageJsonOrResult<Value> {
+    return cast Facade_Sdk_flight__Storage.getStorageJSONOr(host, key, fallback);
     return cast null;
   }
 
-  public static function getStorageNumber(key:String):Null<Float> {
-    return cast Facade_Sdk_flight__Storage.getStorageNumber(key);
+  public static function getStorageKeys(host:HasStorageLocal):StorageKeysResult {
+    return cast Facade_Sdk_flight__Storage.getStorageKeys(host);
     return cast null;
   }
 
-  public static function getStorageNumberOr(key:String, fallback:Float):Float {
-    return cast Facade_Sdk_flight__Storage.getStorageNumberOr(key, fallback);
+  public static function getStorageNumber(host:HasStorageLocal, key:String):StorageNumberResult {
+    return cast Facade_Sdk_flight__Storage.getStorageNumber(host, key);
     return cast null;
   }
 
-  public static function getStorageQuotaEstimate():flight._internal._Promise<Null<StorageQuota>> {
-    return cast Facade_Sdk_flight__Storage.getStorageQuotaEstimate();
+  public static function getStorageNumberOr(host:HasStorageLocal, key:String, fallback:Float):StorageNumberOrResult {
+    return cast Facade_Sdk_flight__Storage.getStorageNumberOr(host, key, fallback);
     return cast null;
   }
 
-  public static function getStorageSignals():Null<StorageSignals> {
-    return cast Facade_Sdk_flight__Storage.getStorageSignals();
+  public static function getStoragePersistence(host:HasStoragePersistenceQuery):flight._internal._Promise<StoragePersistenceResult> {
+    return cast Facade_Sdk_flight__Storage.getStoragePersistence(host);
     return cast null;
   }
 
@@ -13314,27 +13724,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function getTrayCapabilities():TrayCapabilities {
-    return cast Facade_Sdk_flight__Tray.getTrayCapabilities();
-    return cast null;
-  }
-
-  public static function getTrayIconBounds(tray:TrayIcon):Null<RectangleLike> {
+  public static function getTrayIconBounds(tray:TrayWithBounds):flight._internal._Promise<TrayBoundsResult> {
     return cast Facade_Sdk_flight__Tray.getTrayIconBounds(tray);
     return cast null;
   }
 
-  public static function getTrayIcons():Array<TrayIcon> {
-    return cast Facade_Sdk_flight__Tray.getTrayIcons();
+  public static function getTrayIcons(host:HasTrayLifecycle):Array<TrayIcon> {
+    return cast Facade_Sdk_flight__Tray.getTrayIcons(host);
     return cast null;
   }
 
-  public static function getTrayIconTitle(tray:TrayIcon):String {
+  public static function getTrayIconTitle(tray:TrayWithTitle):flight._internal._Promise<TrayTitleReadResult> {
     return cast Facade_Sdk_flight__Tray.getTrayIconTitle(tray);
     return cast null;
   }
 
-  public static function getTrayIconTooltip(tray:TrayIcon):String {
+  public static function getTrayIconTooltip(tray:TrayWithTooltip):flight._internal._Promise<TrayTooltipReadResult> {
     return cast Facade_Sdk_flight__Tray.getTrayIconTooltip(tray);
     return cast null;
   }
@@ -13361,16 +13766,6 @@ class Sdk {
 
   public static function getUnregisteredModifierKinds(registry:ModifierRegistry, stack:Array<Modifier>):Array<ModifierKind> {
     return cast Facade_Sdk_flight__Shading.getUnregisteredModifierKinds(registry, stack);
-    return cast null;
-  }
-
-  public static function getUpdaterChannel():String {
-    return cast Facade_Sdk_flight__Updater.getUpdaterChannel();
-    return cast null;
-  }
-
-  public static function getUpdaterConfig():UpdaterConfig {
-    return cast Facade_Sdk_flight__Updater.getUpdaterConfig();
     return cast null;
   }
 
@@ -13551,13 +13946,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWebDirectorySystemHandle(handle:FileDialogHandle):Null<FileSystemDirectoryHandle__dialog> {
-    return cast Facade_Sdk_flight__Dialog.getWebDirectorySystemHandle(handle);
-    return cast null;
-  }
-
-  public static function getWebFileSystemHandle(handle:FileDialogHandle):Null<FileSystemFileHandle__dialog> {
-    return cast Facade_Sdk_flight__Dialog.getWebFileSystemHandle(handle);
+  public static function getWgpuDeviceLoss(state:WgpuRenderState):Null<flight._internal.dom.GPUDeviceLostInfo> {
+    return cast Facade_Sdk_flight__RenderWgpu.getWgpuDeviceLoss(state);
     return cast null;
   }
 
@@ -13566,18 +13956,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function getWindowBounds(win:ApplicationWindow, out:WindowBounds):WindowBounds {
-    return cast Facade_Sdk_flight__Application.getWindowBounds(win, out);
+  public static function getWindowBounds(host:WindowOperationHost__window<String>, win:ApplicationWindow, out:WindowBounds):WindowBounds {
+    return cast Facade_Sdk_flight__Application.getWindowBounds(host, win, out);
     return cast null;
   }
 
   public static function getWindowControllerSignals(controller:WindowController):WindowControllerSignals {
     return cast Facade_Sdk_flight__Gui.getWindowControllerSignals(controller);
-    return cast null;
-  }
-
-  public static function getWindowDisplay(win:ApplicationWindow):Float {
-    return cast Facade_Sdk_flight__Application.getWindowDisplay(win);
     return cast null;
   }
 
@@ -13669,8 +14054,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasAccelerometer():Bool {
-    return cast Facade_Sdk_flight__Sensors.hasAccelerometer();
+  public static function hasAccelerometer(host:HasSystemSensors):Bool {
+    return cast Facade_Sdk_flight__Sensors.hasAccelerometer(host);
     return cast null;
   }
 
@@ -13679,18 +14064,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasAmbientLightSensor():Bool {
-    return cast Facade_Sdk_flight__Sensors.hasAmbientLightSensor();
+  public static function hasAmbientLightSensor(host:HasSystemSensors):Bool {
+    return cast Facade_Sdk_flight__Sensors.hasAmbientLightSensor(host);
     return cast null;
   }
 
-  public static function hasAppCommandLineSwitch(name:String):Bool {
-    return cast Facade_Sdk_flight__App.hasAppCommandLineSwitch(name);
-    return cast null;
-  }
-
-  public static function hasAppSingleInstanceLock():Bool {
-    return cast Facade_Sdk_flight__App.hasAppSingleInstanceLock();
+  public static function hasAppSingleInstanceLock(host:HasAppSingleInstance):Bool {
+    return cast Facade_Sdk_flight__App.hasAppSingleInstanceLock(host);
     return cast null;
   }
 
@@ -13724,8 +14104,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasBarometer():Bool {
-    return cast Facade_Sdk_flight__Sensors.hasBarometer();
+  public static function hasBarometer(host:HasSystemSensors):Bool {
+    return cast Facade_Sdk_flight__Sensors.hasBarometer(host);
     return cast null;
   }
 
@@ -13744,33 +14124,33 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasClipboardBookmark():flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.hasClipboardBookmark();
+  public static function hasClipboardBookmark(host:HasClipboardBookmark):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.hasClipboardBookmark(host);
     return cast null;
   }
 
-  public static function hasClipboardFormat(format:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.hasClipboardFormat(format);
+  public static function hasClipboardFormat(host:HasClipboardFormats, format:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.hasClipboardFormat(host, format);
     return cast null;
   }
 
-  public static function hasClipboardHtml():flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.hasClipboardHtml();
+  public static function hasClipboardHtml(host:HasClipboardFormats):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.hasClipboardHtml(host);
     return cast null;
   }
 
-  public static function hasClipboardImage():flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.hasClipboardImage();
+  public static function hasClipboardImage(host:HasClipboardImage):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.hasClipboardImage(host);
     return cast null;
   }
 
-  public static function hasClipboardRTF():flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.hasClipboardRTF();
+  public static function hasClipboardRTF(host:HasClipboardFormats):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.hasClipboardRTF(host);
     return cast null;
   }
 
-  public static function hasClipboardText():flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.hasClipboardText();
+  public static function hasClipboardText(host:HasClipboardText):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.hasClipboardText(host);
     return cast null;
   }
 
@@ -13789,11 +14169,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasGlobalShortcutConflict(accelerator:String):Bool {
-    return cast Facade_Sdk_flight__Shortcut.hasGlobalShortcutConflict(accelerator);
-    return cast null;
-  }
-
   public static function hasGlScene2DCoverage(state:GlRenderState, usage:Scene2DKindUsage):Bool {
     return cast Facade_Sdk_flight__Scene2DGl.hasGlScene2DCoverage(state, usage);
     return cast null;
@@ -13809,13 +14184,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasGravitySensor():Bool {
-    return cast Facade_Sdk_flight__Sensors.hasGravitySensor();
+  public static function hasGravitySensor(host:HasSystemSensors):Bool {
+    return cast Facade_Sdk_flight__Sensors.hasGravitySensor(host);
     return cast null;
   }
 
-  public static function hasGyroscope():Bool {
-    return cast Facade_Sdk_flight__Sensors.hasGyroscope();
+  public static function hasGyroscope(host:HasSystemSensors):Bool {
+    return cast Facade_Sdk_flight__Sensors.hasGyroscope(host);
     return cast null;
   }
 
@@ -13854,43 +14229,23 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasInputPointerLock():Bool {
-    return cast Facade_Sdk_flight__Input.hasInputPointerLock();
-    return cast null;
-  }
-
   public static function hasLightInfluenceOnBounds(light:Light, bounds:BoundingSphereLike):Bool {
     return cast Facade_Sdk_flight__Lighting.hasLightInfluenceOnBounds(light, bounds);
     return cast null;
   }
 
-  public static function hasLinearAccelerationSensor():Bool {
-    return cast Facade_Sdk_flight__Sensors.hasLinearAccelerationSensor();
+  public static function hasLinearAccelerationSensor(host:HasSystemSensors):Bool {
+    return cast Facade_Sdk_flight__Sensors.hasLinearAccelerationSensor(host);
     return cast null;
   }
 
-  public static function hasMagnetometer():Bool {
-    return cast Facade_Sdk_flight__Sensors.hasMagnetometer();
-    return cast null;
-  }
-
-  public static function hasMenuReplacementGuarantee(guarantee:MenuReplacementGuarantee):Bool {
-    return cast Facade_Sdk_flight__Menu.hasMenuReplacementGuarantee(guarantee);
+  public static function hasMagnetometer(host:HasSystemSensors):Bool {
+    return cast Facade_Sdk_flight__Sensors.hasMagnetometer(host);
     return cast null;
   }
 
   public static function hasMeshGeometrySkin(geometry:MeshGeometry):Bool {
     return cast Facade_Sdk_flight__Mesh.hasMeshGeometrySkin(geometry);
-    return cast null;
-  }
-
-  public static function hasNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
-    return cast Facade_Sdk_flight__Storage.hasNamespacedStorageItem(namespace, key);
-    return cast null;
-  }
-
-  public static function hasNativeShortcutBackend():Bool {
-    return cast Facade_Sdk_flight__Shortcut.hasNativeShortcutBackend();
     return cast null;
   }
 
@@ -13909,18 +14264,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasOrientationSensor():Bool {
-    return cast Facade_Sdk_flight__Sensors.hasOrientationSensor();
+  public static function hasOrientationSensor(host:HasSystemSensors):Bool {
+    return cast Facade_Sdk_flight__Sensors.hasOrientationSensor(host);
     return cast null;
   }
 
-  public static function hasPowerKeepAwake():Bool {
-    return cast Facade_Sdk_flight__Power.hasPowerKeepAwake();
-    return cast null;
-  }
-
-  public static function hasProximitySensor():Bool {
-    return cast Facade_Sdk_flight__Sensors.hasProximitySensor();
+  public static function hasProximitySensor(host:HasSystemSensors):Bool {
+    return cast Facade_Sdk_flight__Sensors.hasProximitySensor(host);
     return cast null;
   }
 
@@ -13949,13 +14299,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasStatusBarStyleEntry(handle:StatusBarStyleEntryHandle):Bool {
-    return cast Facade_Sdk_flight__StatusBar.hasStatusBarStyleEntry(handle);
-    return cast null;
-  }
-
-  public static function hasStorageItem(key:String):Bool {
-    return cast Facade_Sdk_flight__Storage.hasStorageItem(key);
+  public static function hasStatusBarStyleEntry(host:HasUiStatusBarStyleStack, handle:StatusBarStyleEntryHandle):Bool {
+    return cast Facade_Sdk_flight__StatusBar.hasStatusBarStyleEntry(host, handle);
     return cast null;
   }
 
@@ -13999,28 +14344,23 @@ class Sdk {
     return cast null;
   }
 
-  public static function hasWindowOperation(operation:WindowOperation):Bool {
-    return cast Facade_Sdk_flight__Application.hasWindowOperation(operation);
-    return cast null;
-  }
-
   public static final HemisphereLightKind:String = Facade_Sdk_flight__Types.HemisphereLightKind;
 
-  public static function hideApp():Bool {
-    return cast Facade_Sdk_flight__App.hideApp();
-    return cast null;
+  public static function hideApp(host:HasAppHide):Void {
+    Facade_Sdk_flight__App.hideApp(host);
   }
 
-  public static function hideSoftKeyboard():Void {
-    Facade_Sdk_flight__Keyboard.hideSoftKeyboard();
+  public static function hideSoftKeyboard(host:HasSoftKeyboardVisibility):flight._internal._Promise<SoftKeyboardVisibilityResult> {
+    return cast Facade_Sdk_flight__Keyboard.hideSoftKeyboard(host);
+    return cast null;
   }
 
   public static function hideTooltipController(controller:TooltipController):Void {
     Facade_Sdk_flight__Gui.hideTooltipController(controller);
   }
 
-  public static function hideWindow(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.hideWindow(win);
+  public static function hideWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.hideWindow(host, win);
   }
 
   public static function hitTestAreaQuery(root:Node2D, rect:Rectangle, ?out:Array<Node2D>):Array<Node2D> {
@@ -14178,6 +14518,11 @@ class Sdk {
 
   public static function insertTextInput(source:RichText, text:String):Void {
     Facade_Sdk_flight__TextInput.insertTextInput(source, text);
+  }
+
+  public static function installDownloadedUpdate(host:HasUpdaterCommand, update:DownloadedUpdate):flight._internal._Promise<AppUpdateInstallOutcome> {
+    return cast Facade_Sdk_flight__Updater.installDownloadedUpdate(host, update);
+    return cast null;
   }
 
   public static final InstancedMeshKind:String = Facade_Sdk_flight__Types.InstancedMeshKind;
@@ -14363,16 +14708,6 @@ class Sdk {
     Facade_Sdk_flight__Materials.invertColorScaleBias(out, source);
   }
 
-  public static function invokeIpc(channel:flight._internal._Union2<String, IpcChannel>, ...args:flight._internal._Any):flight._internal._Promise<flight._internal._Any> {
-    return cast _Runtime.callHaxeRestValue(Facade_Sdk_flight__Ipc.invokeIpc, _Runtime.concatArrays([[channel], _Runtime.toArray(args)]), 1);
-    return cast null;
-  }
-
-  public static function invokeIpcWithTimeout(channel:flight._internal._Union2<String, IpcChannel>, timeoutMs:Float, ...args:flight._internal._Any):flight._internal._Promise<flight._internal._Any> {
-    return cast _Runtime.callHaxeRestValue(Facade_Sdk_flight__Ipc.invokeIpcWithTimeout, _Runtime.concatArrays([[channel], [timeoutMs], _Runtime.toArray(args)]), 2);
-    return cast null;
-  }
-
   public static final IridescencePbrExtensionKind:String = Facade_Sdk_flight__Types.IridescencePbrExtensionKind;
 
   public static final iridescencePbrGlExtension:GlPbrExtensionRegistration = Facade_Sdk_flight__Scene3DGl.iridescencePbrGlExtension;
@@ -14422,33 +14757,28 @@ class Sdk {
     return cast null;
   }
 
-  public static function isAppActive():Bool {
-    return cast Facade_Sdk_flight__Lifecycle.isAppActive();
+  public static function isAppActive(host:HasSystemLifecycle):Bool {
+    return cast Facade_Sdk_flight__Lifecycle.isAppActive(host);
     return cast null;
   }
 
-  public static function isAppBackground():Bool {
-    return cast Facade_Sdk_flight__Lifecycle.isAppBackground();
+  public static function isAppBackground(host:HasSystemLifecycle):Bool {
+    return cast Facade_Sdk_flight__Lifecycle.isAppBackground(host);
     return cast null;
   }
 
-  public static function isAppHidden():Bool {
-    return cast Facade_Sdk_flight__App.isAppHidden();
+  public static function isAppHidden(host:HasAppHiddenQuery):Bool {
+    return cast Facade_Sdk_flight__App.isAppHidden(host);
     return cast null;
   }
 
-  public static function isAppInactive():Bool {
-    return cast Facade_Sdk_flight__Lifecycle.isAppInactive();
+  public static function isAppInactive(host:HasSystemLifecycle):Bool {
+    return cast Facade_Sdk_flight__Lifecycle.isAppInactive(host);
     return cast null;
   }
 
   public static function isApplicationRunning(app:Application):Bool {
     return cast Facade_Sdk_flight__Application.isApplicationRunning(app);
-    return cast null;
-  }
-
-  public static function isAppUpdateEligible(info:UpdateInfo, rolloutSeed:Float):Bool {
-    return cast Facade_Sdk_flight__Updater.isAppUpdateEligible(info, rolloutSeed);
     return cast null;
   }
 
@@ -14537,18 +14867,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function isConnectivityMetered():Bool {
-    return cast Facade_Sdk_flight__Connectivity.isConnectivityMetered();
+  public static function isConnectivityMetered(host:HasConnectivityStatus):Bool {
+    return cast Facade_Sdk_flight__Connectivity.isConnectivityMetered(host);
     return cast null;
   }
 
-  public static function isConnectivityOnline():Bool {
-    return cast Facade_Sdk_flight__Connectivity.isConnectivityOnline();
-    return cast null;
-  }
-
-  public static function isConnectivitySaveDataEnabled():Bool {
-    return cast Facade_Sdk_flight__Connectivity.isConnectivitySaveDataEnabled();
+  public static function isConnectivitySaveDataEnabled(host:HasConnectivityStatus):Bool {
+    return cast Facade_Sdk_flight__Connectivity.isConnectivitySaveDataEnabled(host);
     return cast null;
   }
 
@@ -14612,18 +14937,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function isGlobalShortcutRegistered(accelerator:String):Bool {
-    return cast Facade_Sdk_flight__Shortcut.isGlobalShortcutRegistered(accelerator);
-    return cast null;
-  }
-
   public static function isGlRenderTargetFormatSupported(state:GlRenderState, format:RenderTargetFormat):Bool {
     return cast Facade_Sdk_flight__RenderGl.isGlRenderTargetFormatSupported(state, format);
     return cast null;
   }
 
-  public static function isHapticsSupported():Bool {
-    return cast Facade_Sdk_flight__Haptics.isHapticsSupported();
+  public static function isHapticsSupported(host:HasInputHaptics):Bool {
+    return cast Facade_Sdk_flight__Haptics.isHapticsSupported(host);
     return cast null;
   }
 
@@ -14717,11 +15037,6 @@ class Sdk {
     return cast null;
   }
 
-  public static function isNotificationSupported():Bool {
-    return cast Facade_Sdk_flight__Notification.isNotificationSupported();
-    return cast null;
-  }
-
   public static function isObbIntersectingAabb(obb:ObbLike, aabb:AabbLike):Bool {
     return cast Facade_Sdk_flight__Geometry.isObbIntersectingAabb(obb, aabb);
     return cast null;
@@ -14787,33 +15102,33 @@ class Sdk {
     return cast null;
   }
 
-  public static function isPlatformDesktop():Bool {
-    return cast Facade_Sdk_flight__Platform.isPlatformDesktop();
+  public static function isPlatformDesktop(host:HasSystemPlatform):Bool {
+    return cast Facade_Sdk_flight__Platform.isPlatformDesktop(host);
     return cast null;
   }
 
-  public static function isPlatformMobile():Bool {
-    return cast Facade_Sdk_flight__Platform.isPlatformMobile();
+  public static function isPlatformMobile(host:HasSystemPlatform):Bool {
+    return cast Facade_Sdk_flight__Platform.isPlatformMobile(host);
     return cast null;
   }
 
-  public static function isPlatformNative():Bool {
-    return cast Facade_Sdk_flight__Platform.isPlatformNative();
+  public static function isPlatformNative(host:HasSystemPlatform):Bool {
+    return cast Facade_Sdk_flight__Platform.isPlatformNative(host);
     return cast null;
   }
 
-  public static function isPlatformTouch():Bool {
-    return cast Facade_Sdk_flight__Platform.isPlatformTouch();
+  public static function isPlatformTouch(host:HasSystemPlatform):Bool {
+    return cast Facade_Sdk_flight__Platform.isPlatformTouch(host);
     return cast null;
   }
 
-  public static function isPlatformVersionAtLeast(minimum:String):Bool {
-    return cast Facade_Sdk_flight__Platform.isPlatformVersionAtLeast(minimum);
+  public static function isPlatformVersionAtLeast(host:HasSystemPlatform, minimum:String):Bool {
+    return cast Facade_Sdk_flight__Platform.isPlatformVersionAtLeast(host, minimum);
     return cast null;
   }
 
-  public static function isPlatformWeb():Bool {
-    return cast Facade_Sdk_flight__Platform.isPlatformWeb();
+  public static function isPlatformWeb(host:HasSystemPlatform):Bool {
+    return cast Facade_Sdk_flight__Platform.isPlatformWeb(host);
     return cast null;
   }
 
@@ -14822,18 +15137,23 @@ class Sdk {
     return cast null;
   }
 
+  public static function isPowerKeepAwakeActive(host:HasPowerKeepAwake):Bool {
+    return cast Facade_Sdk_flight__Power.isPowerKeepAwakeActive(host);
+    return cast null;
+  }
+
   public static function isPowerOfTwo(n:Float):Bool {
     return cast Facade_Sdk_flight__Math.isPowerOfTwo(n);
     return cast null;
   }
 
-  public static function isProtocolSchemeDefault(scheme:String):Bool {
-    return cast Facade_Sdk_flight__Protocol.isProtocolSchemeDefault(scheme);
+  public static function isProtocolSchemeDefault(host:HasProtocolDefault, scheme:String):Bool {
+    return cast Facade_Sdk_flight__Protocol.isProtocolSchemeDefault(host, scheme);
     return cast null;
   }
 
-  public static function isProtocolSchemeRegistered(scheme:String):Bool {
-    return cast Facade_Sdk_flight__Protocol.isProtocolSchemeRegistered(scheme);
+  public static function isProtocolSchemeRegistered(host:HasProtocolRegistrationQuery, scheme:String):Bool {
+    return cast Facade_Sdk_flight__Protocol.isProtocolSchemeRegistered(host, scheme);
     return cast null;
   }
 
@@ -14847,8 +15167,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function isSensorsSupported():Bool {
-    return cast Facade_Sdk_flight__Sensors.isSensorsSupported();
+  public static function isSensorsSupported(host:HasSystemSensors):Bool {
+    return cast Facade_Sdk_flight__Sensors.isSensorsSupported(host);
     return cast null;
   }
 
@@ -14857,13 +15177,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function isShareAvailable():Bool {
-    return cast Facade_Sdk_flight__Share.isShareAvailable();
-    return cast null;
-  }
-
-  public static function isShellUrlAllowed(url:String):Bool {
-    return cast Facade_Sdk_flight__Shell.isShellUrlAllowed(url);
+  public static function isShellUrlAllowed(url:String, policy:ShellExternalUrlPolicy):Bool {
+    return cast Facade_Sdk_flight__Shell.isShellUrlAllowed(url, policy);
     return cast null;
   }
 
@@ -14872,13 +15187,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function isSoftKeyboardAccessoryBarVisible():Bool {
-    return cast Facade_Sdk_flight__Keyboard.isSoftKeyboardAccessoryBarVisible();
-    return cast null;
-  }
-
-  public static function isSoftKeyboardScrollAssistEnabled():Bool {
-    return cast Facade_Sdk_flight__Keyboard.isSoftKeyboardScrollAssistEnabled();
+  public static function isSoftKeyboardVisible(host:HasSoftKeyboardInfo):Bool {
+    return cast Facade_Sdk_flight__Keyboard.isSoftKeyboardVisible(host);
     return cast null;
   }
 
@@ -15037,6 +15347,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function isWgpuDeviceLost(state:WgpuRenderState):Bool {
+    return cast Facade_Sdk_flight__RenderWgpu.isWgpuDeviceLost(state);
+    return cast null;
+  }
+
   public static function isWgpuRenderTextureReady(state:WgpuRenderState, renderTexture:RenderTexture):Bool {
     return cast Facade_Sdk_flight__RenderWgpu.isWgpuRenderTextureReady(state, renderTexture);
     return cast null;
@@ -15147,13 +15462,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrl(context:flight._internal.dom.AudioContext, url:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
-    return cast Facade_Sdk_flight__Audio.loadAudioResourceFromUrl(context, url, signal);
+  public static function loadAudioResourceFromUrl(host:HasNetHttp, context:flight._internal.dom.AudioContext, url:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
+    return cast Facade_Sdk_flight__Audio.loadAudioResourceFromUrl(host, context, url, signal);
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrls(context:flight._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
-    return cast Facade_Sdk_flight__Audio.loadAudioResourceFromUrls(context, sources, signal);
+  public static function loadAudioResourceFromUrls(host:HasNetHttp, context:flight._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
+    return cast Facade_Sdk_flight__Audio.loadAudioResourceFromUrls(host, context, sources, signal);
     return cast null;
   }
 
@@ -15232,48 +15547,48 @@ class Sdk {
     return cast null;
   }
 
-  public static function loadScene3DDocumentBytesFromUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentBytesFromUrl(url, options);
+  public static function loadScene3DDocumentBytesFromUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentBytesFromUrl(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFrom3dsUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFrom3dsUrl(url, options);
+  public static function loadScene3DDocumentFrom3dsUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFrom3dsUrl(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromAwd2Url(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromAwd2Url(url, options);
+  public static function loadScene3DDocumentFromAwd2Url(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromAwd2Url(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromGlbUrl(url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromGlbUrl(url, options);
+  public static function loadScene3DDocumentFromGlbUrl(host:HasNetHttp, url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromGlbUrl(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromGltfUrl(url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromGltfUrl(url, options);
+  public static function loadScene3DDocumentFromGltfUrl(host:HasNetHttp, url:String, ?options:GltfScene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromGltfUrl(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromMd2Url(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromMd2Url(url, options);
+  public static function loadScene3DDocumentFromMd2Url(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromMd2Url(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromMd5MeshUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromMd5MeshUrl(url, options);
+  public static function loadScene3DDocumentFromMd5MeshUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromMd5MeshUrl(host, url, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentFromObjUrl(url:String, ?materials:ObjMaterialLibrary, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
-    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromObjUrl(url, materials, options);
+  public static function loadScene3DDocumentFromObjUrl(host:HasNetHttp, url:String, ?materials:ObjMaterialLibrary, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<Scene3DDocument>> {
+    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentFromObjUrl(host, url, materials, options);
     return cast null;
   }
 
-  public static function loadScene3DDocumentTextFromUrl(url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<String>> {
-    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentTextFromUrl(url, options);
+  public static function loadScene3DDocumentTextFromUrl(host:HasNetHttp, url:String, ?options:Scene3DDocumentLoadOptions):flight._internal._Promise<Null<String>> {
+    return cast Facade_Sdk_flight__Scene3DResources.loadScene3DDocumentTextFromUrl(host, url, options);
     return cast null;
   }
 
@@ -15317,8 +15632,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function lockApplicationPointer(element:flight._internal.dom.HTMLElement):flight._internal._Promise<flight._internal._Nothing> {
-    return cast Facade_Sdk_flight__Application.lockApplicationPointer(element);
+  public static function lockApplicationPointer(host:HasInputPointerLock, target:InputTargetHandle):flight._internal._Promise<InputPointerLockRequestOutcome> {
+    return cast Facade_Sdk_flight__Application.lockApplicationPointer(host, target);
     return cast null;
   }
 
@@ -15389,8 +15704,23 @@ class Sdk {
 
   public static final LuxLightUnit:String = Facade_Sdk_flight__Types.LuxLightUnit;
 
-  public static function makeDirectory(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.makeDirectory(path);
+  public static function makeDirectory(host:HasStorageFileSystem, path:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.makeDirectory(host, path);
+    return cast null;
+  }
+
+  public static function makeParsedAccelerator():ParsedAccelerator {
+    return cast Facade_Sdk_flight__Shortcut.makeParsedAccelerator();
+    return cast null;
+  }
+
+  public static function makePowerBatteryHealth():PowerBatteryHealth {
+    return cast Facade_Sdk_flight__Power.makePowerBatteryHealth();
+    return cast null;
+  }
+
+  public static function makePowerStatus():PowerStatus {
+    return cast Facade_Sdk_flight__Power.makePowerStatus();
     return cast null;
   }
 
@@ -15452,8 +15782,8 @@ class Sdk {
 
   public static final MAX_INDEXED_CELLS_PER_OBJECT:Float = Facade_Sdk_flight__Spatial.MAX_INDEXED_CELLS_PER_OBJECT;
 
-  public static function maximizeWindow(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.maximizeWindow(win);
+  public static function maximizeWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.maximizeWindow(host, win);
   }
 
   public static function maxVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
@@ -15533,13 +15863,13 @@ class Sdk {
 
   public static final MeshKind:String = Facade_Sdk_flight__Types.MeshKind;
 
-  public static function migrateStorage(namespace:Null<StorageNamespace>, migrations:Array<StorageMigration>):Float {
-    return cast Facade_Sdk_flight__Storage.migrateStorage(namespace, migrations);
+  public static function migrateStorage(host:HasStorageLocal, namespace:Null<StorageNamespace>, migrations:Array<StorageMigration>, ?signals:Null<StorageSignals>):StorageMigrationResult {
+    return cast Facade_Sdk_flight__Storage.migrateStorage(host, namespace, migrations, signals);
     return cast null;
   }
 
-  public static function minimizeWindow(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.minimizeWindow(win);
+  public static function minimizeWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.minimizeWindow(host, win);
   }
 
   public static function minVector2(out:Vector2Like, a:Vector2Like, b:Vector2Like):Void {
@@ -15584,13 +15914,13 @@ class Sdk {
     Facade_Sdk_flight__CameraControls.moveFlyCameraController(controller, forward, right, up);
   }
 
-  public static function moveItemsToTrash(paths:Array<String>):flight._internal._Promise<Array<Bool>> {
-    return cast Facade_Sdk_flight__Shell.moveItemsToTrash(paths);
+  public static function moveShellItemsToTrash(host:HasShellTrash, paths:Array<String>):flight._internal._Promise<Array<ShellTrashOutcome>> {
+    return cast Facade_Sdk_flight__Shell.moveShellItemsToTrash(host, paths);
     return cast null;
   }
 
-  public static function moveItemToTrash(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Shell.moveItemToTrash(path);
+  public static function moveShellItemToTrash(host:HasShellTrash, path:String):flight._internal._Promise<ShellTrashOutcome> {
+    return cast Facade_Sdk_flight__Shell.moveShellItemToTrash(host, path);
     return cast null;
   }
 
@@ -15850,103 +16180,63 @@ class Sdk {
     Facade_Sdk_flight__Color.oklabToLinearRgb(out, L, a, b);
   }
 
-  public static function onceIpcMessage(channel:flight._internal._Union2<String, IpcChannel>, listener:Array<flight._internal._Any>->Void):Void->Void {
-    return cast Facade_Sdk_flight__Ipc.onceIpcMessage(channel, listener);
+  public static function onceIpcMessage(host:HasIpcMessage, channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
+    return cast Facade_Sdk_flight__Ipc.onceIpcMessage(host, channel, listener);
     return cast null;
   }
 
-  public static function onGeolocationPermissionChange(listener:GeolocationPermissionState->Void):Void->Void {
-    return cast Facade_Sdk_flight__Geolocation.onGeolocationPermissionChange(listener);
+  public static function onIpcMessage(host:HasIpcMessage, channel:String, listener:Array<flight._internal._Any>->Void):Void->Void {
+    return cast Facade_Sdk_flight__Ipc.onIpcMessage(host, channel, listener);
     return cast null;
   }
 
-  public static function onIpcInvoke(channel:flight._internal._Union2<String, IpcChannel>, handler:Array<flight._internal._Any>->flight._internal._Any):Void->Void {
-    return cast Facade_Sdk_flight__Ipc.onIpcInvoke(channel, handler);
+  public static function onTrayBalloonEvent(tray:TrayWithBalloonEvents, listener:TrayBalloonEvent->Void):TrayEventAttachResult {
+    return cast Facade_Sdk_flight__Tray.onTrayBalloonEvent(tray, listener);
     return cast null;
   }
 
-  public static function onIpcMessage(channel:flight._internal._Union2<String, IpcChannel>, listener:Array<flight._internal._Any>->Void):Void->Void {
-    return cast Facade_Sdk_flight__Ipc.onIpcMessage(channel, listener);
+  public static function onTrayDrop(tray:TrayWithDropEvents, listener:TrayDropEvent->Void):TrayEventAttachResult {
+    return cast Facade_Sdk_flight__Tray.onTrayDrop(tray, listener);
     return cast null;
   }
 
-  public static function onIpcMessageEvent(channel:flight._internal._Union2<String, IpcChannel>, listener:IpcMessageEvent->Void):Void->Void {
-    return cast Facade_Sdk_flight__Ipc.onIpcMessageEvent(channel, listener);
+  public static function onTrayInteraction(tray:TrayWithInteractionEvents, listener:TrayInteractionEvent->Void):TrayEventAttachResult {
+    return cast Facade_Sdk_flight__Tray.onTrayInteraction(tray, listener);
     return cast null;
   }
 
-  public static function onMenuSelect(listener:String->Void):Void->Void {
-    return cast Facade_Sdk_flight__Menu.onMenuSelect(listener);
+  public static function onTrayMenuSelection(tray:TrayWithMenuSelectionEvents, listener:TrayMenuSelectionEvent->Void):TrayEventAttachResult {
+    return cast Facade_Sdk_flight__Tray.onTrayMenuSelection(tray, listener);
     return cast null;
   }
 
-  public static function onNotificationAction(listener:String->String->Void):Void->Void {
-    return cast Facade_Sdk_flight__Notification.onNotificationAction(listener);
+  public static function openFileReadStream(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>> {
+    return cast Facade_Sdk_flight__FileSystem.openFileReadStream(host, path);
     return cast null;
   }
 
-  public static function onNotificationClick(listener:String->Void):Void->Void {
-    return cast Facade_Sdk_flight__Notification.onNotificationClick(listener);
+  public static function openFileWriteStream(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>> {
+    return cast Facade_Sdk_flight__FileSystem.openFileWriteStream(host, path);
     return cast null;
   }
 
-  public static function onNotificationDismiss(listener:String->Void):Void->Void {
-    return cast Facade_Sdk_flight__Notification.onNotificationDismiss(listener);
+  public static function openMidiPort(port:MidiPort):flight._internal._Promise<MidiPortOpenOutcome> {
+    return cast Facade_Sdk_flight__Midi.openMidiPort(port);
     return cast null;
   }
 
-  public static function onNotificationReply(listener:String->String->String->Void):Void->Void {
-    return cast Facade_Sdk_flight__Notification.onNotificationReply(listener);
+  public static function openShellExternalUrl(host:HasShellExternal, url:String, policy:ShellExternalUrlPolicy):flight._internal._Promise<ShellExternalOutcome> {
+    return cast Facade_Sdk_flight__Shell.openShellExternalUrl(host, url, policy);
     return cast null;
   }
 
-  public static function onNotificationShow(listener:String->Void):Void->Void {
-    return cast Facade_Sdk_flight__Notification.onNotificationShow(listener);
+  public static function openShellPath(host:HasShellPathOpen, path:String):flight._internal._Promise<ShellPathOpenOutcome> {
+    return cast Facade_Sdk_flight__Shell.openShellPath(host, path);
     return cast null;
   }
 
-  public static function onScreenChange(listener:ScreenChangeEvent->Void):Void->Void {
-    return cast Facade_Sdk_flight__Screen.onScreenChange(listener);
-    return cast null;
-  }
-
-  public static function onScreenDetailPermissionChange(listener:ScreenPermissionState->Void):Void->Void {
-    return cast Facade_Sdk_flight__Screen.onScreenDetailPermissionChange(listener);
-    return cast null;
-  }
-
-  public static function onTrayEvent(listener:TrayEventData->Void):Void->Void {
-    return cast Facade_Sdk_flight__Tray.onTrayEvent(listener);
-    return cast null;
-  }
-
-  public static function openFileReadStream(path:String):flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>> {
-    return cast Facade_Sdk_flight__FileSystem.openFileReadStream(path);
-    return cast null;
-  }
-
-  public static function openFileWriteStream(path:String):flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>> {
-    return cast Facade_Sdk_flight__FileSystem.openFileWriteStream(path);
-    return cast null;
-  }
-
-  public static function openShellExternalUrl(url:String, ?options:ShellOpenExternalOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Shell.openShellExternalUrl(url, options);
-    return cast null;
-  }
-
-  public static function openShellPath(path:String, ?options:ShellOpenPathOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Shell.openShellPath(path, options);
-    return cast null;
-  }
-
-  public static function openShellPathResult(path:String, ?options:ShellOpenPathOptions):flight._internal._Promise<String> {
-    return cast Facade_Sdk_flight__Shell.openShellPathResult(path, options);
-    return cast null;
-  }
-
-  public static function openWindow(win:ApplicationWindow, ?options:WindowOptions):Bool {
-    return cast Facade_Sdk_flight__Application.openWindow(win, options);
+  public static function openWindow(host:HasWindowOpen, win:ApplicationWindow, ?options:WindowOptions):Bool {
+    return cast Facade_Sdk_flight__Application.openWindow(host, win, options);
     return cast null;
   }
 
@@ -16772,12 +17062,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function popStatusBarStyleEntry(handle:StatusBarStyleEntryHandle):Void {
-    Facade_Sdk_flight__StatusBar.popStatusBarStyleEntry(handle);
+  public static function popStatusBarStyleEntry(host:HasUiStatusBarStyleStack, handle:StatusBarStyleEntryHandle):Void {
+    Facade_Sdk_flight__StatusBar.popStatusBarStyleEntry(host, handle);
   }
 
-  public static function popupTrayContextMenu(tray:TrayIcon, ?position:Vector2Like):Void {
-    Facade_Sdk_flight__Tray.popupTrayContextMenu(tray, position);
+  public static function popupTrayContextMenu(tray:TrayWithPopupMenu, ?position:Vector2Like):flight._internal._Promise<TrayPopupMenuResult> {
+    return cast Facade_Sdk_flight__Tray.popupTrayContextMenu(tray, position);
+    return cast null;
   }
 
   public static function premultiplyBitmapPixels(out:flight._internal._UInt8ClampedArray, source:flight._internal._UInt8ClampedArray, length:Float):Void {
@@ -16789,8 +17080,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function prepareElementForInput(element:flight._internal.dom.HTMLElement):Void {
-    Facade_Sdk_flight__Application.prepareElementForInput(element);
+  public static function prepareElementForInput(host:HasInputTargetPreparation, target:InputTargetHandle):Void {
+    Facade_Sdk_flight__Application.prepareElementForInput(host, target);
   }
 
   public static function prepareGlScene3DForwardLights(state:GlRenderState, sceneRenderList:Scene3DRenderList, lights:Scene3DLightsLike):GlScene3DForwardLightList {
@@ -16798,8 +17089,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function prepareHaptics():Void {
-    Facade_Sdk_flight__Haptics.prepareHaptics();
+  public static function prepareHaptics(host:HasInputHaptics):Void {
+    Facade_Sdk_flight__Haptics.prepareHaptics(host);
   }
 
   public static function prepareMeshSkinning(mesh:Mesh):Void {
@@ -16886,12 +17177,17 @@ class Sdk {
     Facade_Sdk_flight__Geometry.projectVector4(out, source);
   }
 
+  public static function promptForGeolocationAccess(host:Host):flight._internal._Promise<GeolocationAccessOutcome> {
+    return cast Facade_Sdk_flight__Geolocation.promptForGeolocationAccess(host);
+    return cast null;
+  }
+
   public static function pushFlowState(stack:FlowStack, state:FlowState):Void {
     Facade_Sdk_flight__Flow.pushFlowState(stack, state);
   }
 
-  public static function pushStatusBarStyleEntry(entry:StatusBarStyleEntry):StatusBarStyleEntryHandle {
-    return cast Facade_Sdk_flight__StatusBar.pushStatusBarStyleEntry(entry);
+  public static function pushStatusBarStyleEntry(host:HasUiStatusBarStyleStack, entry:StatusBarStyleEntry):StatusBarStyleEntryHandle {
+    return cast Facade_Sdk_flight__StatusBar.pushStatusBarStyleEntry(host, entry);
     return cast null;
   }
 
@@ -16919,6 +17215,16 @@ class Sdk {
 
   public static function queryCollisionConvexFace3D(shape:CollisionShape3D, dirX:Float, dirY:Float, dirZ:Float, out:Array<Float>):Float {
     return cast Facade_Sdk_flight__Collision.queryCollisionConvexFace3D(shape, dirX, dirY, dirZ, out);
+    return cast null;
+  }
+
+  public static function queryGlobalShortcutConflict(host:HasShortcutQuery, accelerator:String):flight._internal._Promise<GlobalShortcutQueryOutcome> {
+    return cast Facade_Sdk_flight__Shortcut.queryGlobalShortcutConflict(host, accelerator);
+    return cast null;
+  }
+
+  public static function queryGlobalShortcutRegistration(host:HasShortcutQuery, accelerator:String):flight._internal._Promise<GlobalShortcutQueryOutcome> {
+    return cast Facade_Sdk_flight__Shortcut.queryGlobalShortcutRegistration(host, accelerator);
     return cast null;
   }
 
@@ -17061,12 +17367,8 @@ class Sdk {
     Facade_Sdk_flight__Spritesheet.queueSpritesheetAnimation(player, animation);
   }
 
-  public static function quitAndInstallUpdate():Void {
-    Facade_Sdk_flight__Updater.quitAndInstallUpdate();
-  }
-
-  public static function quitApp():Void {
-    Facade_Sdk_flight__App.quitApp();
+  public static function quitApp(host:HasAppQuit):Void {
+    Facade_Sdk_flight__App.quitApp(host);
   }
 
   public static final RAD_TO_DEG:Float = Facade_Sdk_flight__Math.RAD_TO_DEG;
@@ -17167,78 +17469,73 @@ class Sdk {
     return cast null;
   }
 
-  public static function readBinaryFile(path:String):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_Sdk_flight__FileSystem.readBinaryFile(path);
+  public static function readBinaryFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_Sdk_flight__FileSystem.readBinaryFile(host, path);
     return cast null;
   }
 
-  public static function readBinaryFileRange(path:String, offset:Float, length:Float):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_Sdk_flight__FileSystem.readBinaryFileRange(path, offset, length);
+  public static function readBinaryFileRange(host:HasStorageFileSystem, path:String, offset:Float, length:Float):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_Sdk_flight__FileSystem.readBinaryFileRange(host, path, offset, length);
     return cast null;
   }
 
-  public static function readClipboard(formats:Array<String>):flight._internal._Promise<flight._internal._Record<String, String>> {
-    return cast Facade_Sdk_flight__Clipboard.readClipboard(formats);
+  public static function readClipboard(host:HasClipboardFormats, formats:Array<String>):flight._internal._Promise<flight._internal._Record<String, String>> {
+    return cast Facade_Sdk_flight__Clipboard.readClipboard(host, formats);
     return cast null;
   }
 
-  public static function readClipboardBookmark():flight._internal._Promise<Null<ClipboardBookmark>> {
-    return cast Facade_Sdk_flight__Clipboard.readClipboardBookmark();
+  public static function readClipboardBookmark(host:HasClipboardBookmark):flight._internal._Promise<Null<ClipboardBookmark>> {
+    return cast Facade_Sdk_flight__Clipboard.readClipboardBookmark(host);
     return cast null;
   }
 
-  public static function readClipboardFiles():flight._internal._Promise<Array<String>> {
-    return cast Facade_Sdk_flight__Clipboard.readClipboardFiles();
+  public static function readClipboardFormat(host:HasClipboardFormats, format:String):flight._internal._Promise<String> {
+    return cast Facade_Sdk_flight__Clipboard.readClipboardFormat(host, format);
     return cast null;
   }
 
-  public static function readClipboardFormat(format:String):flight._internal._Promise<String> {
-    return cast Facade_Sdk_flight__Clipboard.readClipboardFormat(format);
+  public static function readClipboardHtml(host:HasClipboardFormats):flight._internal._Promise<String> {
+    return cast Facade_Sdk_flight__Clipboard.readClipboardHtml(host);
     return cast null;
   }
 
-  public static function readClipboardHtml():flight._internal._Promise<String> {
-    return cast Facade_Sdk_flight__Clipboard.readClipboardHtml();
+  public static function readClipboardImage(host:HasClipboardImage):flight._internal._Promise<String> {
+    return cast Facade_Sdk_flight__Clipboard.readClipboardImage(host);
     return cast null;
   }
 
-  public static function readClipboardImage():flight._internal._Promise<String> {
-    return cast Facade_Sdk_flight__Clipboard.readClipboardImage();
+  public static function readClipboardRTF(host:HasClipboardFormats):flight._internal._Promise<String> {
+    return cast Facade_Sdk_flight__Clipboard.readClipboardRTF(host);
     return cast null;
   }
 
-  public static function readClipboardRTF():flight._internal._Promise<String> {
-    return cast Facade_Sdk_flight__Clipboard.readClipboardRTF();
+  public static function readClipboardText(host:HasClipboardText):flight._internal._Promise<String> {
+    return cast Facade_Sdk_flight__Clipboard.readClipboardText(host);
     return cast null;
   }
 
-  public static function readClipboardText():flight._internal._Promise<String> {
-    return cast Facade_Sdk_flight__Clipboard.readClipboardText();
+  public static function readDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_Sdk_flight__FileSystem.readDialogHandleBinaryFile(host, handle);
     return cast null;
   }
 
-  public static function readDialogHandleBinaryFile(handle:FileDialogHandle):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_Sdk_flight__FileSystem.readDialogHandleBinaryFile(handle);
+  public static function readDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle):flight._internal._Promise<Null<String>> {
+    return cast Facade_Sdk_flight__FileSystem.readDialogHandleTextFile(host, handle);
     return cast null;
   }
 
-  public static function readDialogHandleTextFile(handle:FileDialogHandle):flight._internal._Promise<Null<String>> {
-    return cast Facade_Sdk_flight__FileSystem.readDialogHandleTextFile(handle);
+  public static function readDirectory(host:HasStorageFileSystem, path:String):flight._internal._Promise<Array<FileEntry>> {
+    return cast Facade_Sdk_flight__FileSystem.readDirectory(host, path);
     return cast null;
   }
 
-  public static function readDirectory(path:String):flight._internal._Promise<Array<FileEntry>> {
-    return cast Facade_Sdk_flight__FileSystem.readDirectory(path);
+  public static function readDirectoryRecursive(host:HasStorageFileSystem, path:String, ?options:FileWalkOptions):flight._internal._Promise<Array<FileEntry>> {
+    return cast Facade_Sdk_flight__FileSystem.readDirectoryRecursive(host, path, options);
     return cast null;
   }
 
-  public static function readDirectoryRecursive(path:String, ?options:FileWalkOptions):flight._internal._Promise<Array<FileEntry>> {
-    return cast Facade_Sdk_flight__FileSystem.readDirectoryRecursive(path, options);
-    return cast null;
-  }
-
-  public static function readFileSymlink(path:String):flight._internal._Promise<Null<String>> {
-    return cast Facade_Sdk_flight__FileSystem.readFileSymlink(path);
+  public static function readFileSymlink(_host:HasStorageFileSystem, _path:String):flight._internal._Promise<Null<String>> {
+    return cast Facade_Sdk_flight__FileSystem.readFileSymlink(_host, _path);
     return cast null;
   }
 
@@ -17272,8 +17569,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function readShellShortcutLink(shortcutPath:String):flight._internal._Promise<Null<ShellShortcutLink>> {
-    return cast Facade_Sdk_flight__Shell.readShellShortcutLink(shortcutPath);
+  public static function readShellShortcutLink(host:HasShellShortcutLink, shortcutPath:String):flight._internal._Promise<ShellShortcutLinkReadOutcome> {
+    return cast Facade_Sdk_flight__Shell.readShellShortcutLink(host, shortcutPath);
     return cast null;
   }
 
@@ -17282,13 +17579,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function readTextFile(path:String):flight._internal._Promise<Null<String>> {
-    return cast Facade_Sdk_flight__FileSystem.readTextFile(path);
+  public static function readTextFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<String>> {
+    return cast Facade_Sdk_flight__FileSystem.readTextFile(host, path);
     return cast null;
   }
 
-  public static function recordWebcamVideo(?options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamVideo>> {
-    return cast Facade_Sdk_flight__Webcam.recordWebcamVideo(options);
+  public static function recordMediaFileCaptureVideo(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCaptureVideo>> {
+    return cast Facade_Sdk_flight__Webcam.recordMediaFileCaptureVideo(options);
     return cast null;
   }
 
@@ -17315,17 +17612,17 @@ class Sdk {
     Facade_Sdk_flight__Geometry.reflectVector4(out, incident, normal);
   }
 
-  public static function refreshCanvasRenderCache(cacheState:CanvasRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
-    return cast Facade_Sdk_flight__Scene2DCanvas.refreshCanvasRenderCache(cacheState, cache, source, options);
+  public static function refreshCanvasRenderCache(ownerState:CanvasRenderState, cacheState:CanvasRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
+    return cast Facade_Sdk_flight__Scene2DCanvas.refreshCanvasRenderCache(ownerState, cacheState, cache, source, options);
     return cast null;
   }
 
-  public static function refreshDeviceInfo():Void {
-    Facade_Sdk_flight__Device.refreshDeviceInfo();
+  public static function refreshDeviceInfo(host:HasSystemDevice):Void {
+    Facade_Sdk_flight__Device.refreshDeviceInfo(host);
   }
 
-  public static function refreshGlRenderCache(cacheState:GlRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
-    return cast Facade_Sdk_flight__Scene2DGl.refreshGlRenderCache(cacheState, cache, source, options);
+  public static function refreshGlRenderCache(ownerState:GlRenderState, cacheState:GlRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
+    return cast Facade_Sdk_flight__Scene2DGl.refreshGlRenderCache(ownerState, cacheState, cache, source, options);
     return cast null;
   }
 
@@ -17341,12 +17638,8 @@ class Sdk {
     Facade_Sdk_flight__Physics3D.refreshRigidBody3DWorldInertia(body);
   }
 
-  public static function refreshScreens():Void {
-    Facade_Sdk_flight__Screen.refreshScreens();
-  }
-
-  public static function refreshWgpuRenderCache(cacheState:WgpuRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
-    return cast Facade_Sdk_flight__Scene2DWgpu.refreshWgpuRenderCache(cacheState, cache, source, options);
+  public static function refreshWgpuRenderCache(ownerState:WgpuPresentationRenderState, cacheState:WgpuRenderState, cache:RenderCache, source:Node2D, ?options:RenderCacheRefreshOptions):Bool {
+    return cast Facade_Sdk_flight__Scene2DWgpu.refreshWgpuRenderCache(ownerState, cacheState, cache, source, options);
     return cast null;
   }
 
@@ -17828,11 +18121,6 @@ class Sdk {
     Facade_Sdk_flight__Scene3DGl.registerGlNormalMaterial(state);
   }
 
-  public static function registerGlobalShortcut(accelerator:String, handler:ShortcutEvent->Void):Bool {
-    return cast Facade_Sdk_flight__Shortcut.registerGlobalShortcut(accelerator, handler);
-    return cast null;
-  }
-
   public static function registerGlOuterGlowEffect(state:GlRenderState):Void {
     Facade_Sdk_flight__EffectsGl.registerGlOuterGlowEffect(state);
   }
@@ -18065,13 +18353,13 @@ class Sdk {
     Facade_Sdk_flight__Physics3D.registerPhysics3DJointSolver(world, kind, solver);
   }
 
-  public static function registerProtocolScheme(scheme:String):Bool {
-    return cast Facade_Sdk_flight__Protocol.registerProtocolScheme(scheme);
+  public static function registerProtocolScheme(host:HasProtocolRegistration, scheme:String):Bool {
+    return cast Facade_Sdk_flight__Protocol.registerProtocolScheme(host, scheme);
     return cast null;
   }
 
-  public static function registerProtocolSchemes(schemes:Array<String>):Bool {
-    return cast Facade_Sdk_flight__Protocol.registerProtocolSchemes(schemes);
+  public static function registerProtocolSchemes(host:HasProtocolRegistration, schemes:Array<String>):Bool {
+    return cast Facade_Sdk_flight__Protocol.registerProtocolSchemes(host, schemes);
     return cast null;
   }
 
@@ -18494,12 +18782,12 @@ class Sdk {
     return cast null;
   }
 
-  public static function relaunchApp():Void {
-    Facade_Sdk_flight__App.relaunchApp();
+  public static function relaunchApp(host:HasAppRelaunch):Void {
+    Facade_Sdk_flight__App.relaunchApp(host);
   }
 
-  public static function releaseAppSingleInstanceLock():Void {
-    Facade_Sdk_flight__App.releaseAppSingleInstanceLock();
+  public static function releaseAppSingleInstanceLock(host:HasAppSingleInstance):Void {
+    Facade_Sdk_flight__App.releaseAppSingleInstanceLock(host);
   }
 
   public static function releaseAsset(library:AssetLibrary, id:String):Void {
@@ -18550,6 +18838,11 @@ class Sdk {
     Facade_Sdk_flight__Path.releasePathMeshTyped(mesh);
   }
 
+  public static function releasePowerKeepAwake(host:HasPowerKeepAwake):flight._internal._Promise<PowerKeepAwakeReleaseResult> {
+    return cast Facade_Sdk_flight__Power.releasePowerKeepAwake(host);
+    return cast null;
+  }
+
   public static function releaseQuaternion(q:Quaternion):Void {
     Facade_Sdk_flight__Geometry.releaseQuaternion(q);
   }
@@ -18578,6 +18871,10 @@ class Sdk {
     Facade_Sdk_flight__Geometry.releaseVector4(v);
   }
 
+  public static function releaseWgpuAcquisition(acquisition:WgpuHostAcquisition):Void {
+    Facade_Sdk_flight__RenderWgpu.releaseWgpuAcquisition(acquisition);
+  }
+
   public static function releaseWgpuRenderTexture(state:WgpuRenderState, pool:WgpuRenderTexturePool, renderTexture:RenderTexture):Void {
     Facade_Sdk_flight__RenderWgpu.releaseWgpuRenderTexture(state, pool, renderTexture);
   }
@@ -18587,25 +18884,22 @@ class Sdk {
     return cast null;
   }
 
-  public static function removeAccessibilityNode(id:String):Void {
-    Facade_Sdk_flight__Accessibility.removeAccessibilityNode(id);
-  }
-
-  public static function removeAllIpcListeners(?channel:flight._internal._Union2<String, IpcChannel>):Void {
-    Facade_Sdk_flight__Ipc.removeAllIpcListeners(channel);
+  public static function removeAccessibilityNode(host:HasAccessibilityProvider, id:String):AccessibilityOperationOutcome<String> {
+    return cast Facade_Sdk_flight__Accessibility.removeAccessibilityNode(host, id);
+    return cast null;
   }
 
   public static function removeClockChild(parent:Clock, child:Clock):Void {
     Facade_Sdk_flight__Clock.removeClockChild(parent, child);
   }
 
-  public static function removeDirectory(path:String, ?recursive:Bool):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.removeDirectory(path, recursive);
+  public static function removeDirectory(host:HasStorageFileSystem, path:String, ?recursive:Bool):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.removeDirectory(host, path, recursive);
     return cast null;
   }
 
-  public static function removeFile(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.removeFile(path);
+  public static function removeFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.removeFile(host, path);
     return cast null;
   }
 
@@ -18618,8 +18912,8 @@ class Sdk {
     Facade_Sdk_flight__MovieClip.removeMovieClipFrameScript(clip, frame);
   }
 
-  public static function removeNamespacedStorageItem(namespace:StorageNamespace, key:String):Bool {
-    return cast Facade_Sdk_flight__Storage.removeNamespacedStorageItem(namespace, key);
+  public static function removeNamespacedStorageItem(host:HasStorageLocal, namespace:StorageNamespace, key:String, ?signals:Null<StorageSignals>):StorageRemoveItemResult {
+    return cast Facade_Sdk_flight__Storage.removeNamespacedStorageItem(host, namespace, key, signals);
     return cast null;
   }
 
@@ -18686,8 +18980,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function removeProtocolSchemeAsDefault(scheme:String):Bool {
-    return cast Facade_Sdk_flight__Protocol.removeProtocolSchemeAsDefault(scheme);
+  public static function removeProtocolSchemeAsDefault(host:HasProtocolDefault, scheme:String):Bool {
+    return cast Facade_Sdk_flight__Protocol.removeProtocolSchemeAsDefault(host, scheme);
     return cast null;
   }
 
@@ -18707,13 +19001,13 @@ class Sdk {
     Facade_Sdk_flight__Spatial.removeSpatialObject3D(index, id);
   }
 
-  public static function removeStorageItem(key:String):Bool {
-    return cast Facade_Sdk_flight__Storage.removeStorageItem(key);
+  public static function removeStorageItem(host:HasStorageLocal, key:String, ?signals:Null<StorageSignals>):StorageRemoveItemResult {
+    return cast Facade_Sdk_flight__Storage.removeStorageItem(host, key, signals);
     return cast null;
   }
 
-  public static function removeStorageItems(keys:Array<String>):Bool {
-    return cast Facade_Sdk_flight__Storage.removeStorageItems(keys);
+  public static function removeStorageItems(host:HasStorageLocal, keys:Array<String>, ?signals:Null<StorageSignals>):StorageRemoveItemsResult {
+    return cast Facade_Sdk_flight__Storage.removeStorageItems(host, keys, signals);
     return cast null;
   }
 
@@ -18726,12 +19020,13 @@ class Sdk {
     Facade_Sdk_flight__Timeline.removeTimelineFrameScript(timeline, frame);
   }
 
-  public static function removeTrayBalloon(tray:TrayIcon):Void {
-    Facade_Sdk_flight__Tray.removeTrayBalloon(tray);
+  public static function removeTrayBalloon(tray:TrayWithBalloon):flight._internal._Promise<TrayBalloonRemoveResult> {
+    return cast Facade_Sdk_flight__Tray.removeTrayBalloon(tray);
+    return cast null;
   }
 
-  public static function renameFile(from:String, to:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.renameFile(from, to);
+  public static function renameFile(host:HasStorageFileSystem, from:String, to:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.renameFile(host, from, to);
     return cast null;
   }
 
@@ -18765,8 +19060,8 @@ class Sdk {
     Facade_Sdk_flight__Scene2DGl.renderGlVelocity(state, root, field, target);
   }
 
-  public static function renderIntoCanvasRenderTexture(state:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void {
-    Facade_Sdk_flight__Scene2DCanvas.renderIntoCanvasRenderTexture(state, renderTexture, callback);
+  public static function renderIntoCanvasRenderTexture(ownerState:CanvasRenderState, renderState:CanvasRenderState, renderTexture:RenderTexture, callback:CanvasRenderState->Void):Void {
+    Facade_Sdk_flight__Scene2DCanvas.renderIntoCanvasRenderTexture(ownerState, renderState, renderTexture, callback);
   }
 
   public static function renderIntoGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture, callback:GlRenderState->Void):Void {
@@ -18779,7 +19074,7 @@ class Sdk {
 
   public static final RenderTargetTextureSourceKind:String = Facade_Sdk_flight__Types.RenderTargetTextureSourceKind;
 
-  public static function renderWgpuBackground(state:WgpuRenderState):Void {
+  public static function renderWgpuBackground(state:WgpuPresentationRenderState):Void {
     Facade_Sdk_flight__RenderWgpu.renderWgpuBackground(state);
   }
 
@@ -18835,8 +19130,8 @@ class Sdk {
     Facade_Sdk_flight__Requirements.reportRequirement(sink, facet, key);
   }
 
-  public static function requestAppAttention(critical:Bool):Float {
-    return cast Facade_Sdk_flight__App.requestAppAttention(critical);
+  public static function requestAppAttention(host:HasAppDock, critical:Bool):Float {
+    return cast Facade_Sdk_flight__App.requestAppAttention(host, critical);
     return cast null;
   }
 
@@ -18845,53 +19140,48 @@ class Sdk {
     return cast null;
   }
 
-  public static function requestApplicationFullscreen(element:flight._internal.dom.HTMLElement):flight._internal._Promise<flight._internal._Nothing> {
-    return cast Facade_Sdk_flight__Application.requestApplicationFullscreen(element);
+  public static function requestApplicationFullscreen(host:HasUiFullscreen, target:FullscreenTargetHandle):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Application.requestApplicationFullscreen(host, target);
     return cast null;
   }
 
-  public static function requestAppSingleInstanceLock():Bool {
-    return cast Facade_Sdk_flight__App.requestAppSingleInstanceLock();
+  public static function requestAppSingleInstanceLock(host:HasAppSingleInstance):Bool {
+    return cast Facade_Sdk_flight__App.requestAppSingleInstanceLock(host);
     return cast null;
   }
 
-  public static function requestGeolocationPermission():flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Geolocation.requestGeolocationPermission();
+  public static function requestMidiAccess(host:HasMidiAccess):flight._internal._Promise<MidiAccessRequestOutcome> {
+    return cast Facade_Sdk_flight__Midi.requestMidiAccess(host);
     return cast null;
   }
 
-  public static function requestInputPointerLock(element:flight._internal.dom.HTMLElement):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Input.requestInputPointerLock(element);
+  public static function requestNotificationPermission(host:HasNotificationPermission):flight._internal._Promise<NotificationPermissionRequestOutcome> {
+    return cast Facade_Sdk_flight__Notification.requestNotificationPermission(host);
     return cast null;
   }
 
-  public static function requestNotificationPermission():flight._internal._Promise<NotificationPermission> {
-    return cast Facade_Sdk_flight__Notification.requestNotificationPermission();
+  public static function requestPermission(host:Host, name:PermissionName):flight._internal._Promise<PermissionRequestOutcome> {
+    return cast Facade_Sdk_flight__Permissions.requestPermission(host, name);
     return cast null;
   }
 
-  public static function requestPermission(name:PermissionName):flight._internal._Promise<PermissionState> {
-    return cast Facade_Sdk_flight__Permissions.requestPermission(name);
+  public static function requestScreenDetails(host:HasScreenDetails):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Screen.requestScreenDetails(host);
     return cast null;
   }
 
-  public static function requestScreenDetails():flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Screen.requestScreenDetails();
+  public static function requestSensorsPermission(host:HasSystemSensors):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Sensors.requestSensorsPermission(host);
     return cast null;
   }
 
-  public static function requestSensorsPermission():flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Sensors.requestSensorsPermission();
+  public static function requestStoragePersistence(host:HasStoragePersistenceRequest):flight._internal._Promise<StoragePersistenceResult> {
+    return cast Facade_Sdk_flight__Storage.requestStoragePersistence(host);
     return cast null;
   }
 
-  public static function requestWebcamPermission():flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Webcam.requestWebcamPermission();
-    return cast null;
-  }
-
-  public static function requestWindowAttention(win:ApplicationWindow, attention:Bool):Void {
-    Facade_Sdk_flight__Application.requestWindowAttention(win, attention);
+  public static function requestWindowAttention(host:WindowOperationHost__window<String>, win:ApplicationWindow, attention:Bool):Void {
+    Facade_Sdk_flight__Application.requestWindowAttention(host, win, attention);
   }
 
   public static function requestWindowClose(win:ApplicationWindow):Bool {
@@ -19014,7 +19304,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveCommandOrControlModifier(?platform:String):flight._internal._Exclude<ShortcutModifier, String> {
+  public static function resolveCommandOrControlModifier(platform:PlatformName):flight._internal._Exclude<ShortcutModifier, String> {
     return cast Facade_Sdk_flight__Shortcut.resolveCommandOrControlModifier(platform);
     return cast null;
   }
@@ -19098,16 +19388,12 @@ class Sdk {
     Facade_Sdk_flight__Snapshot.restoreSnapshot(snapshot, target);
   }
 
-  public static function restoreWindow(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.restoreWindow(win);
+  public static function restoreWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.restoreWindow(host, win);
   }
 
   public static function resumeAllAudioMixerChannels(mixer:AudioMixer):Void {
     Facade_Sdk_flight__Media.resumeAllAudioMixerChannels(mixer);
-  }
-
-  public static function resumeAllGlobalShortcuts():Void {
-    Facade_Sdk_flight__Shortcut.resumeAllGlobalShortcuts();
   }
 
   public static function resumeAllTweens(manager:TweenManager):Void {
@@ -19156,6 +19442,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function revealShellPath(host:HasShellPathReveal, path:String):flight._internal._Promise<ShellPathRevealOutcome> {
+    return cast Facade_Sdk_flight__Shell.revealShellPath(host, path);
+    return cast null;
+  }
+
   public static function reversePath(source:Path, out:Path):Void {
     Facade_Sdk_flight__Path.reversePath(source, out);
   }
@@ -19181,10 +19472,6 @@ class Sdk {
   public static final RiveFieldType:{ var Uint:Float; var String:Float; var Double:Float; var Color:Float; } = Facade_Sdk_flight__Types.RiveFieldTypeValue;
 
   public static final RiveWeightedPointKind:{ var Point:String; var In:String; var Out:String; } = Facade_Sdk_flight__Types.RiveWeightedPointKindValue;
-
-  public static function rollbackAppUpdate():Void {
-    Facade_Sdk_flight__Updater.rollbackAppUpdate();
-  }
 
   public static function rotateBitmap(dest:BitmapRegion, source:BitmapRegion, angle:Float, ?pivotX:Float, ?pivotY:Float, ?edgeMode:BitmapEdgeMode, ?sampleMode:BitmapResizeMode):Void {
     Facade_Sdk_flight__Bitmap.rotateBitmap(dest, source, angle, pivotX, pivotY, edgeMode, sampleMode);
@@ -19365,6 +19652,12 @@ class Sdk {
 
   public static final SCENE2D_WORKING_COLOR_SPACE:RenderTargetColorSpace = Facade_Sdk_flight__Render.SCENE2D_WORKING_COLOR_SPACE;
 
+  public static final scene2dCanvasPipeline:CanvasPipeline = Facade_Sdk_flight__Scene2DCanvas.scene2dCanvasPipeline;
+
+  public static final scene2dGlPipeline:GlPipeline = Facade_Sdk_flight__Scene2DGl.scene2dGlPipeline;
+
+  public static final scene2dWgpuPipeline:WgpuPipeline = Facade_Sdk_flight__Scene2DWgpu.scene2dWgpuPipeline;
+
   public static final Scene3DAnimationPathRotation:String = Facade_Sdk_flight__Types.Scene3DAnimationPathRotation;
 
   public static final Scene3DAnimationPathScale:String = Facade_Sdk_flight__Types.Scene3DAnimationPathScale;
@@ -19377,8 +19670,8 @@ class Sdk {
 
   public static final SceneCoverage:{ var FallbackRemediable:String; var FallbackUnavailable:String; var Satisfied:String; var Unavailable:String; var Unregistered:String; } = Facade_Sdk_flight__Types.SceneCoverageValue;
 
-  public static function scheduleNotification(request:NotificationRequest, schedule:NotificationSchedule):flight._internal._Promise<String> {
-    return cast Facade_Sdk_flight__Notification.scheduleNotification(request, schedule);
+  public static function scheduleNotification(host:HasNotificationScheduling, request:NotificationRequest, schedule:NotificationSchedule):flight._internal._Promise<NotificationScheduleOutcome> {
+    return cast Facade_Sdk_flight__Notification.scheduleNotification(host, request, schedule);
     return cast null;
   }
 
@@ -19448,6 +19741,11 @@ class Sdk {
     Facade_Sdk_flight__TextInput.selectLineAtTextInputIndex(source, index);
   }
 
+  public static function selectMediaFileCaptureImage(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCapturePhoto>> {
+    return cast Facade_Sdk_flight__Webcam.selectMediaFileCaptureImage(options);
+    return cast null;
+  }
+
   public static function selectNode<NodeType:HierarchyNodeAny>(state:SelectionState<NodeType>, node:NodeType):Void {
     Facade_Sdk_flight__Selection.selectNode(state, node);
   }
@@ -19476,25 +19774,17 @@ class Sdk {
     return cast null;
   }
 
-  public static function selectWebcamImage(?options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamPhoto>> {
-    return cast Facade_Sdk_flight__Webcam.selectWebcamImage(options);
-    return cast null;
-  }
-
   public static function selectWordAtTextInputIndex(source:RichText, index:Float):Void {
     Facade_Sdk_flight__TextInput.selectWordAtTextInputIndex(source, index);
   }
 
-  public static function sendIpcMessage(channel:flight._internal._Union2<String, IpcChannel>, ...args:flight._internal._Any):Void {
-    _Runtime.callHaxeRestValue(Facade_Sdk_flight__Ipc.sendIpcMessage, _Runtime.concatArrays([[channel], _Runtime.toArray(args)]), 1);
+  public static function sendMidiMessage(port:MidiOutputPort, data:flight._internal._UInt8Array, ?timestamp:Float):MidiMessageSendOutcome {
+    return cast Facade_Sdk_flight__Midi.sendMidiMessage(port, data, timestamp);
+    return cast null;
   }
 
-  public static function sendIpcMessageTo(target:IpcTarget, channel:flight._internal._Union2<String, IpcChannel>, ...args:flight._internal._Any):Void {
-    _Runtime.callHaxeRestValue(Facade_Sdk_flight__Ipc.sendIpcMessageTo, _Runtime.concatArrays([[target], [channel], _Runtime.toArray(args)]), 2);
-  }
-
-  public static function sendNetRequest(request:NetRequest, ?options:NetRequestOptions):flight._internal._Promise<NetResponse> {
-    return cast Facade_Sdk_flight__Net.sendNetRequest(request, options);
+  public static function sendNetRequest(host:HasNetHttp, request:NetRequest, ?options:NetRequestOptions):flight._internal._Promise<NetResponse> {
+    return cast Facade_Sdk_flight__Net.sendNetRequest(host, request, options);
     return cast null;
   }
 
@@ -19586,13 +19876,14 @@ class Sdk {
     Facade_Sdk_flight__Geometry.setAabbFromPoints(out, points);
   }
 
-  public static function setAccessibilityFocus(id:String):Bool {
-    return cast Facade_Sdk_flight__Accessibility.setAccessibilityFocus(id);
+  public static function setAccessibilityFocus(host:HasAccessibilityProvider, id:String):AccessibilityOperationOutcome<String> {
+    return cast Facade_Sdk_flight__Accessibility.setAccessibilityFocus(host, id);
     return cast null;
   }
 
-  public static function setAccessibilityNode(node:AccessibilityNode):Void {
-    Facade_Sdk_flight__Accessibility.setAccessibilityNode(node);
+  public static function setAccessibilityNode(host:HasAccessibilityProvider, node:AccessibilityNode):AccessibilityOperationOutcome<String> {
+    return cast Facade_Sdk_flight__Accessibility.setAccessibilityNode(host, node);
+    return cast null;
   }
 
   public static function setAnimationBlendTreeInputWeight(tree:AnimationBlendTree, inputIndex:Float, weight:Float):Bool {
@@ -19605,45 +19896,42 @@ class Sdk {
     return cast null;
   }
 
-  public static function setAppActivationPolicy(policy:AppActivationPolicy):Void {
-    Facade_Sdk_flight__App.setAppActivationPolicy(policy);
+  public static function setAppActivationPolicy(host:HasAppActivationPolicy, policy:AppActivationPolicy):Void {
+    Facade_Sdk_flight__App.setAppActivationPolicy(host, policy);
   }
 
-  public static function setAppBadgeCount(count:Float):Bool {
-    return cast Facade_Sdk_flight__App.setAppBadgeCount(count);
+  public static function setAppBadgeCount(host:HasAppBadge, count:Float):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__App.setAppBadgeCount(host, count);
     return cast null;
   }
 
-  public static function setAppDockBadge(text:String):Void {
-    Facade_Sdk_flight__App.setAppDockBadge(text);
+  public static function setAppDockBadge(host:HasAppDock, text:String):Void {
+    Facade_Sdk_flight__App.setAppDockBadge(host, text);
   }
 
-  public static function setAppDockMenu(items:Array<MenuItemTemplate>):Void {
-    Facade_Sdk_flight__App.setAppDockMenu(items);
+  public static function setAppDockMenu(host:HasAppDock, items:Array<MenuItemTemplate>):Void {
+    Facade_Sdk_flight__App.setAppDockMenu(host, items);
   }
 
   public static function setApplicationMainWindow(app:Application, win:ApplicationWindow):Void {
     Facade_Sdk_flight__Application.setApplicationMainWindow(app, win);
   }
 
-  public static function setApplicationMenu(items:Array<MenuItemTemplate>):Bool {
-    return cast Facade_Sdk_flight__Menu.setApplicationMenu(items);
+  public static function setApplicationMenu(host:HasMenuApplication, items:Array<MenuItemTemplate>):Bool {
+    return cast Facade_Sdk_flight__Menu.setApplicationMenu(host, items);
     return cast null;
   }
 
-  public static function setAppLoginItem(settings:AppLoginItemLike):Bool {
-    return cast Facade_Sdk_flight__App.setAppLoginItem(settings);
-    return cast null;
+  public static function setAppLoginItem(host:HasAppLoginItem, settings:AppLoginItemLike):Void {
+    Facade_Sdk_flight__App.setAppLoginItem(host, settings);
   }
 
-  public static function setAppName(name:String):Bool {
-    return cast Facade_Sdk_flight__App.setAppName(name);
-    return cast null;
+  public static function setAppName(host:HasAppNameWrite, name:String):Void {
+    Facade_Sdk_flight__App.setAppName(host, name);
   }
 
-  public static function setAppUserModelId(id:String):Bool {
-    return cast Facade_Sdk_flight__App.setAppUserModelId(id);
-    return cast null;
+  public static function setAppUserModelId(host:HasAppUserModelId, id:String):Void {
+    Facade_Sdk_flight__App.setAppUserModelId(host, id);
   }
 
   public static function setAreaLightOrientation(out:AreaLight, direction:Vector3Like, right:Vector3Like, up:Vector3Like):Void {
@@ -19832,8 +20120,8 @@ class Sdk {
     Facade_Sdk_flight__Geometry.setEmptyRectangle(out);
   }
 
-  public static function setFilePermissions(path:String, permissions:FilePermissions):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.setFilePermissions(path, permissions);
+  public static function setFilePermissions(_host:HasStorageFileSystem, _path:String, _permissions:FilePermissions):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.setFilePermissions(_host, _path, _permissions);
     return cast null;
   }
 
@@ -20030,20 +20318,19 @@ class Sdk {
     Facade_Sdk_flight__Geometry.setMatrixIdentity(out);
   }
 
-  public static function setMediaSessionActionHandler(action:MediaSessionAction, handler:MediaSessionActionDetails->Void):Void {
-    Facade_Sdk_flight__MediaSession.setMediaSessionActionHandler(action, handler);
+  public static function setMediaSessionMetadata(host:HasMediaSession, metadata:MediaSessionMetadata):MediaSessionSetMetadataOutcome {
+    return cast Facade_Sdk_flight__MediaSession.setMediaSessionMetadata(host, metadata);
+    return cast null;
   }
 
-  public static function setMediaSessionMetadata(metadata:MediaSessionMetadata):Void {
-    Facade_Sdk_flight__MediaSession.setMediaSessionMetadata(metadata);
+  public static function setMediaSessionPlaybackState(host:HasMediaSession, state:MediaSessionPlaybackState):MediaSessionSetPlaybackStateOutcome {
+    return cast Facade_Sdk_flight__MediaSession.setMediaSessionPlaybackState(host, state);
+    return cast null;
   }
 
-  public static function setMediaSessionPlaybackState(state:MediaSessionPlaybackState):Void {
-    Facade_Sdk_flight__MediaSession.setMediaSessionPlaybackState(state);
-  }
-
-  public static function setMediaSessionPositionState(state:MediaSessionPositionState):Void {
-    Facade_Sdk_flight__MediaSession.setMediaSessionPositionState(state);
+  public static function setMediaSessionPositionState(host:HasMediaSession, state:MediaSessionPositionState):MediaSessionSetPositionStateOutcome {
+    return cast Facade_Sdk_flight__MediaSession.setMediaSessionPositionState(host, state);
+    return cast null;
   }
 
   public static function setMeshGeometryMorphBindPose(geometry:MeshGeometry, bindPose:Null<MeshMorphBindPose>):Void {
@@ -20114,8 +20401,8 @@ class Sdk {
     Facade_Sdk_flight__MovieClip.setMovieClipSource(clip, source);
   }
 
-  public static function setNamespacedStorageItem(namespace:StorageNamespace, key:String, value:String):Bool {
-    return cast Facade_Sdk_flight__Storage.setNamespacedStorageItem(namespace, key, value);
+  public static function setNamespacedStorageItem(host:HasStorageLocal, namespace:StorageNamespace, key:String, value:String, ?signals:Null<StorageSignals>):StorageSetItemResult {
+    return cast Facade_Sdk_flight__Storage.setNamespacedStorageItem(host, namespace, key, value, signals);
     return cast null;
   }
 
@@ -20351,11 +20638,6 @@ class Sdk {
     Facade_Sdk_flight__Power.setPowerIdlePollingIntervalMs(intervalMs);
   }
 
-  public static function setPowerKeepAwake(enabled:Bool, ?mode:PowerKeepAwakeMode):Bool {
-    return cast Facade_Sdk_flight__Power.setPowerKeepAwake(enabled, mode);
-    return cast null;
-  }
-
   public static function setProgressBarControllerValue(controller:ProgressBarController, value:Float):Void {
     Facade_Sdk_flight__Gui.setProgressBarControllerValue(controller, value);
   }
@@ -20364,8 +20646,8 @@ class Sdk {
     Facade_Sdk_flight__Camera.setProjectionMatrix4(out, projection, aspect, near, far);
   }
 
-  public static function setProtocolSchemeAsDefault(scheme:String):Bool {
-    return cast Facade_Sdk_flight__Protocol.setProtocolSchemeAsDefault(scheme);
+  public static function setProtocolSchemeAsDefault(host:HasProtocolDefault, scheme:String):Bool {
+    return cast Facade_Sdk_flight__Protocol.setProtocolSchemeAsDefault(host, scheme);
     return cast null;
   }
 
@@ -20573,10 +20855,6 @@ class Sdk {
     Facade_Sdk_flight__Gui.setScrollViewControllerPosition(controller, x, y);
   }
 
-  public static function setShellUrlSchemeAllowlist(schemes:Null<Array<String>>):Void {
-    Facade_Sdk_flight__Shell.setShellUrlSchemeAllowlist(schemes);
-  }
-
   public static function setSkeleton2DBindPose(skeleton:Skeleton2D):Void {
     Facade_Sdk_flight__Skeleton2D.setSkeleton2DBindPose(skeleton);
   }
@@ -20594,20 +20872,24 @@ class Sdk {
     Facade_Sdk_flight__Gui.setSliderControllerValue(controller, value);
   }
 
-  public static function setSoftKeyboardAccessoryBarVisible(visible:Bool):Void {
-    Facade_Sdk_flight__Keyboard.setSoftKeyboardAccessoryBarVisible(visible);
+  public static function setSoftKeyboardAccessoryBarVisible(host:HasSoftKeyboardAccessoryBar, visible:Bool):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast Facade_Sdk_flight__Keyboard.setSoftKeyboardAccessoryBarVisible(host, visible);
+    return cast null;
   }
 
-  public static function setSoftKeyboardResizeMode(mode:SoftKeyboardResizeMode):Void {
-    Facade_Sdk_flight__Keyboard.setSoftKeyboardResizeMode(mode);
+  public static function setSoftKeyboardResizeMode(host:HasSoftKeyboardResizeModeWrite, mode:SoftKeyboardResizeMode):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast Facade_Sdk_flight__Keyboard.setSoftKeyboardResizeMode(host, mode);
+    return cast null;
   }
 
-  public static function setSoftKeyboardScrollAssistEnabled(enabled:Bool):Void {
-    Facade_Sdk_flight__Keyboard.setSoftKeyboardScrollAssistEnabled(enabled);
+  public static function setSoftKeyboardScrollAssistEnabled(host:HasSoftKeyboardScrollAssist, enabled:Bool):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast Facade_Sdk_flight__Keyboard.setSoftKeyboardScrollAssistEnabled(host, enabled);
+    return cast null;
   }
 
-  public static function setSoftKeyboardStyle(style:SoftKeyboardStyleKind):Void {
-    Facade_Sdk_flight__Keyboard.setSoftKeyboardStyle(style);
+  public static function setSoftKeyboardStyle(host:HasSoftKeyboardStyle, style:SoftKeyboardStyleKind):flight._internal._Promise<SoftKeyboardSetterResult> {
+    return cast Facade_Sdk_flight__Keyboard.setSoftKeyboardStyle(host, style);
+    return cast null;
   }
 
   public static function setSpatialIndexingGuard(guard:Null<SpatialIndexingGuard>):Void {
@@ -20642,44 +20924,44 @@ class Sdk {
     Facade_Sdk_flight__Statechart.setStatechartRegionDuration(instance, regionIndex, duration);
   }
 
-  public static function setStatusBarColor(color:Float, ?animated:Bool):Void {
-    Facade_Sdk_flight__StatusBar.setStatusBarColor(color, animated);
+  public static function setStatusBarColor(host:HasUiStatusBarColor, color:Float, ?animated:Bool):Void {
+    Facade_Sdk_flight__StatusBar.setStatusBarColor(host, color, animated);
   }
 
-  public static function setStatusBarOverlaysContent(overlay:Bool):Void {
-    Facade_Sdk_flight__StatusBar.setStatusBarOverlaysContent(overlay);
+  public static function setStatusBarOverlaysContent(host:HasUiStatusBarOverlays, overlay:Bool):Void {
+    Facade_Sdk_flight__StatusBar.setStatusBarOverlaysContent(host, overlay);
   }
 
-  public static function setStatusBarStyle(style:StatusBarStyle):Void {
-    Facade_Sdk_flight__StatusBar.setStatusBarStyle(style);
+  public static function setStatusBarStyle(host:HasUiStatusBarStyle, style:StatusBarStyle):Void {
+    Facade_Sdk_flight__StatusBar.setStatusBarStyle(host, style);
   }
 
-  public static function setStatusBarVisible(visible:Bool, ?animation:StatusBarAnimation):Void {
-    Facade_Sdk_flight__StatusBar.setStatusBarVisible(visible, animation);
+  public static function setStatusBarVisible(host:HasUiStatusBarVisibility, visible:Bool, ?animation:StatusBarAnimation):Void {
+    Facade_Sdk_flight__StatusBar.setStatusBarVisible(host, visible, animation);
   }
 
-  public static function setStorageBoolean(key:String, value:Bool):Bool {
-    return cast Facade_Sdk_flight__Storage.setStorageBoolean(key, value);
+  public static function setStorageBoolean(host:HasStorageLocal, key:String, value:Bool, ?signals:Null<StorageSignals>):StorageSetItemResult {
+    return cast Facade_Sdk_flight__Storage.setStorageBoolean(host, key, value, signals);
     return cast null;
   }
 
-  public static function setStorageItem(key:String, value:String):Bool {
-    return cast Facade_Sdk_flight__Storage.setStorageItem(key, value);
+  public static function setStorageItem(host:HasStorageLocal, key:String, value:String, ?signals:Null<StorageSignals>):StorageSetItemResult {
+    return cast Facade_Sdk_flight__Storage.setStorageItem(host, key, value, signals);
     return cast null;
   }
 
-  public static function setStorageItems(record:flight._internal._Record<String, String>):Bool {
-    return cast Facade_Sdk_flight__Storage.setStorageItems(record);
+  public static function setStorageItems(host:HasStorageLocal, record:flight._internal._Record<String, String>, ?signals:Null<StorageSignals>):StorageSetItemsResult {
+    return cast Facade_Sdk_flight__Storage.setStorageItems(host, record, signals);
     return cast null;
   }
 
-  public static function setStorageJSON<T>(key:String, value:T):Bool {
-    return cast Facade_Sdk_flight__Storage.setStorageJSON(key, value);
+  public static function setStorageJSON<Value>(host:HasStorageLocal, key:String, value:Value, ?signals:Null<StorageSignals>):StorageJsonWriteResult {
+    return cast Facade_Sdk_flight__Storage.setStorageJSON(host, key, value, signals);
     return cast null;
   }
 
-  public static function setStorageNumber(key:String, value:Float):Bool {
-    return cast Facade_Sdk_flight__Storage.setStorageNumber(key, value);
+  public static function setStorageNumber(host:HasStorageLocal, key:String, value:Float, ?signals:Null<StorageSignals>):StorageSetItemResult {
+    return cast Facade_Sdk_flight__Storage.setStorageNumber(host, key, value, signals);
     return cast null;
   }
 
@@ -20767,32 +21049,39 @@ class Sdk {
     Facade_Sdk_flight__Geometry.setTransformMatrix(out, scaleX, scaleY, rotation, tx, ty);
   }
 
-  public static function setTrayIcon(tray:TrayIcon, icon:String):Void {
-    Facade_Sdk_flight__Tray.setTrayIcon(tray, icon);
+  public static function setTrayIcon(tray:TrayWithImage, icon:TrayIconSource):flight._internal._Promise<TrayImageUpdateResult> {
+    return cast Facade_Sdk_flight__Tray.setTrayIcon(tray, icon);
+    return cast null;
   }
 
-  public static function setTrayIconContextMenu(tray:TrayIcon, items:Array<MenuItemTemplate>):Void {
-    Facade_Sdk_flight__Tray.setTrayIconContextMenu(tray, items);
+  public static function setTrayIconContextMenu(tray:TrayWithMenu, items:Array<MenuItemTemplate>):flight._internal._Promise<TrayMenuUpdateResult> {
+    return cast Facade_Sdk_flight__Tray.setTrayIconContextMenu(tray, items);
+    return cast null;
   }
 
-  public static function setTrayIconTemplate(tray:TrayIcon, isTemplate:Bool):Void {
-    Facade_Sdk_flight__Tray.setTrayIconTemplate(tray, isTemplate);
+  public static function setTrayIconTemplate(tray:TrayWithTemplateImage, isTemplate:Bool):flight._internal._Promise<TrayTemplateImageUpdateResult> {
+    return cast Facade_Sdk_flight__Tray.setTrayIconTemplate(tray, isTemplate);
+    return cast null;
   }
 
-  public static function setTrayIconTitle(tray:TrayIcon, title:String):Void {
-    Facade_Sdk_flight__Tray.setTrayIconTitle(tray, title);
+  public static function setTrayIconTitle(tray:TrayWithTitle, title:String):flight._internal._Promise<TrayTitleUpdateResult> {
+    return cast Facade_Sdk_flight__Tray.setTrayIconTitle(tray, title);
+    return cast null;
   }
 
-  public static function setTrayIconTooltip(tray:TrayIcon, tooltip:String):Void {
-    Facade_Sdk_flight__Tray.setTrayIconTooltip(tray, tooltip);
+  public static function setTrayIconTooltip(tray:TrayWithTooltip, tooltip:String):flight._internal._Promise<TrayTooltipUpdateResult> {
+    return cast Facade_Sdk_flight__Tray.setTrayIconTooltip(tray, tooltip);
+    return cast null;
   }
 
-  public static function setTrayIgnoreDoubleClickEvents(tray:TrayIcon, ignore:Bool):Void {
-    Facade_Sdk_flight__Tray.setTrayIgnoreDoubleClickEvents(tray, ignore);
+  public static function setTrayIgnoreDoubleClickEvents(tray:TrayWithDoubleClickPolicy, ignore:Bool):flight._internal._Promise<TrayDoubleClickPolicyUpdateResult> {
+    return cast Facade_Sdk_flight__Tray.setTrayIgnoreDoubleClickEvents(tray, ignore);
+    return cast null;
   }
 
-  public static function setTrayPressedIcon(tray:TrayIcon, icon:String):Void {
-    Facade_Sdk_flight__Tray.setTrayPressedIcon(tray, icon);
+  public static function setTrayPressedIcon(tray:TrayWithPressedImage, icon:TrayIconSource):flight._internal._Promise<TrayPressedImageUpdateResult> {
+    return cast Facade_Sdk_flight__Tray.setTrayPressedIcon(tray, icon);
+    return cast null;
   }
 
   public static function setTreeViewControllerItemExpanded(controller:TreeViewController, item:TreeViewControllerItem, expanded:Bool):Void {
@@ -20805,22 +21094,6 @@ class Sdk {
 
   public static function setTweenProgress(tween:Tween<flight._internal._Any>, progress:Float):Void {
     Facade_Sdk_flight__Tween.setTweenProgress(tween, progress);
-  }
-
-  public static function setUpdaterChannel(channel:String):Void {
-    Facade_Sdk_flight__Updater.setUpdaterChannel(channel);
-  }
-
-  public static function setUpdaterConfig(config:UpdaterConfig):Void {
-    Facade_Sdk_flight__Updater.setUpdaterConfig(config);
-  }
-
-  public static function setUpdaterFeedUrl(url:String):Void {
-    Facade_Sdk_flight__Updater.setUpdaterFeedUrl(url);
-  }
-
-  public static function setUpdaterSignatureConfig(config:Null<UpdaterSignatureConfig>):Void {
-    Facade_Sdk_flight__Updater.setUpdaterSignatureConfig(config);
   }
 
   public static function setVector2(out:Vector2Like, x:Float, y:Float):Void {
@@ -20898,12 +21171,12 @@ class Sdk {
     Facade_Sdk_flight__Scene3DWgpu.setWgpuScene3DTime(state, seconds);
   }
 
-  public static function setWindowAlwaysOnTop(win:ApplicationWindow, alwaysOnTop:Bool):Void {
-    Facade_Sdk_flight__Application.setWindowAlwaysOnTop(win, alwaysOnTop);
+  public static function setWindowAlwaysOnTop(host:WindowOperationHost__window<String>, win:ApplicationWindow, alwaysOnTop:Bool):Void {
+    Facade_Sdk_flight__Application.setWindowAlwaysOnTop(host, win, alwaysOnTop);
   }
 
-  public static function setWindowContentProtection(win:ApplicationWindow, enabled:Bool):Void {
-    Facade_Sdk_flight__Application.setWindowContentProtection(win, enabled);
+  public static function setWindowContentProtection(host:WindowOperationHost__window<String>, win:ApplicationWindow, enabled:Bool):Void {
+    Facade_Sdk_flight__Application.setWindowContentProtection(host, win, enabled);
   }
 
   public static function setWindowControllerPosition(controller:WindowController, x:Float, y:Float):Void {
@@ -20914,60 +21187,60 @@ class Sdk {
     Facade_Sdk_flight__Gui.setWindowControllerSize(controller, width, height);
   }
 
-  public static function setWindowFullscreen(win:ApplicationWindow, fullscreen:Bool):Void {
-    Facade_Sdk_flight__Application.setWindowFullscreen(win, fullscreen);
+  public static function setWindowFullscreen(host:WindowOperationHost__window<String>, win:ApplicationWindow, fullscreen:Bool):Void {
+    Facade_Sdk_flight__Application.setWindowFullscreen(host, win, fullscreen);
   }
 
-  public static function setWindowHasShadow(win:ApplicationWindow, hasShadow:Bool):Void {
-    Facade_Sdk_flight__Application.setWindowHasShadow(win, hasShadow);
+  public static function setWindowHasShadow(host:WindowOperationHost__window<String>, win:ApplicationWindow, hasShadow:Bool):Void {
+    Facade_Sdk_flight__Application.setWindowHasShadow(host, win, hasShadow);
   }
 
-  public static function setWindowIcon(win:ApplicationWindow, icon:String):Void {
-    Facade_Sdk_flight__Application.setWindowIcon(win, icon);
+  public static function setWindowIcon(host:WindowOperationHost__window<String>, win:ApplicationWindow, icon:String):Void {
+    Facade_Sdk_flight__Application.setWindowIcon(host, win, icon);
   }
 
-  public static function setWindowMaximumSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    Facade_Sdk_flight__Application.setWindowMaximumSize(win, width, height);
+  public static function setWindowMaximumSize(host:WindowOperationHost__window<String>, win:ApplicationWindow, width:Float, height:Float):Void {
+    Facade_Sdk_flight__Application.setWindowMaximumSize(host, win, width, height);
   }
 
-  public static function setWindowMenuBarVisible(win:ApplicationWindow, visible:Bool):Void {
-    Facade_Sdk_flight__Application.setWindowMenuBarVisible(win, visible);
+  public static function setWindowMenuBarVisible(host:WindowOperationHost__window<String>, win:ApplicationWindow, visible:Bool):Void {
+    Facade_Sdk_flight__Application.setWindowMenuBarVisible(host, win, visible);
   }
 
-  public static function setWindowMinimumSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    Facade_Sdk_flight__Application.setWindowMinimumSize(win, width, height);
+  public static function setWindowMinimumSize(host:WindowOperationHost__window<String>, win:ApplicationWindow, width:Float, height:Float):Void {
+    Facade_Sdk_flight__Application.setWindowMinimumSize(host, win, width, height);
   }
 
-  public static function setWindowOpacity(win:ApplicationWindow, opacity:Float):Void {
-    Facade_Sdk_flight__Application.setWindowOpacity(win, opacity);
+  public static function setWindowOpacity(host:WindowOperationHost__window<String>, win:ApplicationWindow, opacity:Float):Void {
+    Facade_Sdk_flight__Application.setWindowOpacity(host, win, opacity);
   }
 
-  public static function setWindowParent(win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
-    Facade_Sdk_flight__Application.setWindowParent(win, parent);
+  public static function setWindowParent(host:WindowOperationHost__window<String>, win:ApplicationWindow, parent:Null<ApplicationWindow>):Void {
+    Facade_Sdk_flight__Application.setWindowParent(host, win, parent);
   }
 
-  public static function setWindowPosition(win:ApplicationWindow, x:Float, y:Float):Void {
-    Facade_Sdk_flight__Application.setWindowPosition(win, x, y);
+  public static function setWindowPosition(host:WindowOperationHost__window<String>, win:ApplicationWindow, x:Float, y:Float):Void {
+    Facade_Sdk_flight__Application.setWindowPosition(host, win, x, y);
   }
 
-  public static function setWindowProgress(win:ApplicationWindow, progress:Float):Void {
-    Facade_Sdk_flight__Application.setWindowProgress(win, progress);
+  public static function setWindowProgress(host:WindowOperationHost__window<String>, win:ApplicationWindow, progress:Float):Void {
+    Facade_Sdk_flight__Application.setWindowProgress(host, win, progress);
   }
 
-  public static function setWindowResizable(win:ApplicationWindow, resizable:Bool):Void {
-    Facade_Sdk_flight__Application.setWindowResizable(win, resizable);
+  public static function setWindowResizable(host:WindowOperationHost__window<String>, win:ApplicationWindow, resizable:Bool):Void {
+    Facade_Sdk_flight__Application.setWindowResizable(host, win, resizable);
   }
 
-  public static function setWindowSize(win:ApplicationWindow, width:Float, height:Float):Void {
-    Facade_Sdk_flight__Application.setWindowSize(win, width, height);
+  public static function setWindowSize(host:WindowOperationHost__window<String>, win:ApplicationWindow, width:Float, height:Float):Void {
+    Facade_Sdk_flight__Application.setWindowSize(host, win, width, height);
   }
 
-  public static function setWindowSkipTaskbar(win:ApplicationWindow, skip:Bool):Void {
-    Facade_Sdk_flight__Application.setWindowSkipTaskbar(win, skip);
+  public static function setWindowSkipTaskbar(host:WindowOperationHost__window<String>, win:ApplicationWindow, skip:Bool):Void {
+    Facade_Sdk_flight__Application.setWindowSkipTaskbar(host, win, skip);
   }
 
-  public static function setWindowTitle(win:ApplicationWindow, title:String):Void {
-    Facade_Sdk_flight__Application.setWindowTitle(win, title);
+  public static function setWindowTitle(host:WindowOperationHost__window<String>, win:ApplicationWindow, title:String):Void {
+    Facade_Sdk_flight__Application.setWindowTitle(host, win, title);
   }
 
   public static final ShadedMaterialKind:String = Facade_Sdk_flight__Types.ShadedMaterialKind;
@@ -20994,28 +21267,28 @@ class Sdk {
     return cast null;
   }
 
-  public static function shareContent(content:ShareContent, ?options:ShareOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Share.shareContent(content, options);
+  public static function shareContent(host:HasShareContent, content:ShareContent):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Share.shareContent(host, content);
     return cast null;
   }
 
-  public static function shareContentWithResult(content:ShareContent, ?options:ShareOptions):flight._internal._Promise<ShareResult> {
-    return cast Facade_Sdk_flight__Share.shareContentWithResult(content, options);
+  public static function shareContentWithResult(host:HasShareContent, content:ShareContent):flight._internal._Promise<ShareResult> {
+    return cast Facade_Sdk_flight__Share.shareContentWithResult(host, content);
     return cast null;
   }
 
-  public static function shareFiles(files:Array<ShareFile>, ?options:ShareOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Share.shareFiles(files, options);
+  public static function shareFiles(host:HasShareFiles, files:Array<ShareFile>):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Share.shareFiles(host, files);
     return cast null;
   }
 
-  public static function shareText(text:String, ?options:ShareOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Share.shareText(text, options);
+  public static function shareText(host:HasShareContent, text:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Share.shareText(host, text);
     return cast null;
   }
 
-  public static function shareUrl(url:String, ?options:ShareOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Share.shareUrl(url, options);
+  public static function shareUrl(host:HasShareContent, url:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Share.shareUrl(host, url);
     return cast null;
   }
 
@@ -21027,8 +21300,8 @@ class Sdk {
 
   public static final sheenPbrGlExtension:GlPbrExtensionRegistration = Facade_Sdk_flight__Scene3DGl.sheenPbrGlExtension;
 
-  public static function shellBeep():Void {
-    Facade_Sdk_flight__Shell.shellBeep();
+  public static function shellBeep(host:HasShellBeep):Void {
+    Facade_Sdk_flight__Shell.shellBeep(host);
   }
 
   public static function shouldDecodeTextureOnSample(source:TextureColorSpace, working:RenderTargetColorSpace):Bool {
@@ -21041,86 +21314,81 @@ class Sdk {
     return cast null;
   }
 
-  public static function showApp():Bool {
-    return cast Facade_Sdk_flight__App.showApp();
+  public static function showApp(host:HasAppShow):Void {
+    Facade_Sdk_flight__App.showApp(host);
+  }
+
+  public static function showConfirmDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Dialog.showConfirmDialog(host, options);
     return cast null;
   }
 
-  public static function showConfirmDialog(options:MessageDialogOptions):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Dialog.showConfirmDialog(options);
+  public static function showContextMenu(host:HasMenuPopup, items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
+    return cast Facade_Sdk_flight__Menu.showContextMenu(host, items, x, y);
     return cast null;
   }
 
-  public static function showContextMenu(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
-    return cast Facade_Sdk_flight__Menu.showContextMenu(items, x, y);
+  public static function showErrorBox(host:HasDialogMessage, title:String, content:String):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Sdk_flight__Dialog.showErrorBox(host, title, content);
     return cast null;
   }
 
-  public static function showErrorBox(title:String, content:String):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Sdk_flight__Dialog.showErrorBox(title, content);
+  public static function showErrorDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Sdk_flight__Dialog.showErrorDialog(host, options);
     return cast null;
   }
 
-  public static function showErrorDialog(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Sdk_flight__Dialog.showErrorDialog(options);
+  public static function showInfoDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Sdk_flight__Dialog.showInfoDialog(host, options);
     return cast null;
   }
 
-  public static function showInfoDialog(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Sdk_flight__Dialog.showInfoDialog(options);
+  public static function showMessageDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Sdk_flight__Dialog.showMessageDialog(host, options);
     return cast null;
   }
 
-  public static function showItemInFolder(path:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Shell.showItemInFolder(path);
+  public static function showNotification(host:HasNotificationDelivery, request:NotificationRequest):flight._internal._Promise<NotificationDeliveryOutcome> {
+    return cast Facade_Sdk_flight__Notification.showNotification(host, request);
     return cast null;
   }
 
-  public static function showMessageDialog(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Sdk_flight__Dialog.showMessageDialog(options);
+  public static function showOpenDirectoryDialog(host:HasDialogDirectoryOpen):flight._internal._Promise<DirectoryOpenDialogResult> {
+    return cast Facade_Sdk_flight__Dialog.showOpenDirectoryDialog(host);
     return cast null;
   }
 
-  public static function showNotification(request:NotificationRequest):flight._internal._Promise<String> {
-    return cast Facade_Sdk_flight__Notification.showNotification(request);
+  public static function showOpenFileDialog(host:HasDialogFileOpen, options:OpenFileDialogOptions):flight._internal._Promise<FileOpenDialogResult> {
+    return cast Facade_Sdk_flight__Dialog.showOpenFileDialog(host, options);
     return cast null;
   }
 
-  public static function showOpenDirectoryDialog(options:OpenDirectoryDialogOptions):flight._internal._Promise<Array<FileDialogHandle>> {
-    return cast Facade_Sdk_flight__Dialog.showOpenDirectoryDialog(options);
+  public static function showPromptDialog(host:HasDialogPrompt, options:PromptDialogOptions):flight._internal._Promise<Null<String>> {
+    return cast Facade_Sdk_flight__Dialog.showPromptDialog(host, options);
     return cast null;
   }
 
-  public static function showOpenFileDialog(options:OpenFileDialogOptions):flight._internal._Promise<Array<FileDialogHandle>> {
-    return cast Facade_Sdk_flight__Dialog.showOpenFileDialog(options);
+  public static function showSaveFileDialog(host:HasDialogFileSave, options:SaveFileDialogOptions):flight._internal._Promise<FileSaveDialogResult> {
+    return cast Facade_Sdk_flight__Dialog.showSaveFileDialog(host, options);
     return cast null;
   }
 
-  public static function showPromptDialog(options:PromptDialogOptions):flight._internal._Promise<Null<String>> {
-    return cast Facade_Sdk_flight__Dialog.showPromptDialog(options);
+  public static function showSoftKeyboard(host:HasSoftKeyboardVisibility):flight._internal._Promise<SoftKeyboardVisibilityResult> {
+    return cast Facade_Sdk_flight__Keyboard.showSoftKeyboard(host);
     return cast null;
-  }
-
-  public static function showSaveFileDialog(options:SaveFileDialogOptions):flight._internal._Promise<Null<FileDialogHandle>> {
-    return cast Facade_Sdk_flight__Dialog.showSaveFileDialog(options);
-    return cast null;
-  }
-
-  public static function showSoftKeyboard():Void {
-    Facade_Sdk_flight__Keyboard.showSoftKeyboard();
   }
 
   public static function showTooltipController(controller:TooltipController):Void {
     Facade_Sdk_flight__Gui.showTooltipController(controller);
   }
 
-  public static function showWarningDialog(options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Sdk_flight__Dialog.showWarningDialog(options);
+  public static function showWarningDialog(host:HasDialogMessage, options:MessageDialogOptions):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Sdk_flight__Dialog.showWarningDialog(host, options);
     return cast null;
   }
 
-  public static function showWindow(win:ApplicationWindow):Void {
-    Facade_Sdk_flight__Application.showWindow(win);
+  public static function showWindow(host:WindowOperationHost__window<String>, win:ApplicationWindow):Void {
+    Facade_Sdk_flight__Application.showWindow(host, win);
   }
 
   public static function shuffle<T>(random:RandomSource, items:Array<T>):Array<T> {
@@ -21190,23 +21458,27 @@ class Sdk {
     Facade_Sdk_flight__CameraControls.snapOrbitCameraController(controller);
   }
 
-  public static final SoftKeyboardEasingDefaultKind:String = Facade_Sdk_flight__Types.SoftKeyboardEasingDefaultKindValue;
+  public static final SoftKeyboardAttachAcquisitionFailedKind:String = Facade_Sdk_flight__Types.SoftKeyboardAttachAcquisitionFailedKind;
 
-  public static final SoftKeyboardEasingEaseInKind:String = Facade_Sdk_flight__Types.SoftKeyboardEasingEaseInKindValue;
-
-  public static final SoftKeyboardEasingEaseOutKind:String = Facade_Sdk_flight__Types.SoftKeyboardEasingEaseOutKindValue;
-
-  public static final SoftKeyboardEasingKeyboardDefaultKind:String = Facade_Sdk_flight__Types.SoftKeyboardEasingKeyboardDefaultKindValue;
-
-  public static final SoftKeyboardEasingLinearKind:String = Facade_Sdk_flight__Types.SoftKeyboardEasingLinearKindValue;
+  public static final SoftKeyboardAttachOkKind:String = Facade_Sdk_flight__Types.SoftKeyboardAttachOkKind;
 
   public static final SoftKeyboardResizeBodyKind:String = Facade_Sdk_flight__Types.SoftKeyboardResizeBodyKind;
 
   public static final SoftKeyboardResizeNoneKind:String = Facade_Sdk_flight__Types.SoftKeyboardResizeNoneKind;
 
+  public static final SoftKeyboardSetterOkKind:String = Facade_Sdk_flight__Types.SoftKeyboardSetterOkKind;
+
+  public static final SoftKeyboardSetterOperationFailedKind:String = Facade_Sdk_flight__Types.SoftKeyboardSetterOperationFailedKind;
+
+  public static final SoftKeyboardSetterOperationUnavailableKind:String = Facade_Sdk_flight__Types.SoftKeyboardSetterOperationUnavailableKind;
+
   public static final SoftKeyboardStyleDarkKind:String = Facade_Sdk_flight__Types.SoftKeyboardStyleDarkKind;
 
   public static final SoftKeyboardStyleDefaultKind:String = Facade_Sdk_flight__Types.SoftKeyboardStyleDefaultKind;
+
+  public static final SoftKeyboardVisibilityOkKind:String = Facade_Sdk_flight__Types.SoftKeyboardVisibilityOkKind;
+
+  public static final SoftKeyboardVisibilityOperationFailedKind:String = Facade_Sdk_flight__Types.SoftKeyboardVisibilityOperationFailedKind;
 
   public static function solvePhysics2DContacts(world:Physics2DWorld):Void {
     Facade_Sdk_flight__Physics2D.solvePhysics2DContacts(world);
@@ -21269,6 +21541,10 @@ class Sdk {
     return cast null;
   }
 
+  public static final standardGlBlendRealizations:KeyedTable<GlBlendRealization> = Facade_Sdk_flight__RenderGl._standardGlBlendRealizations__glDraw;
+
+  public static final standardGlTextureResolvers:KeyedTable<GlRenderState->TextureLike->Bool->TextureColorSpace->Null<GlTextureRealization>> = Facade_Sdk_flight__RenderGl._standardGlTextureResolvers__glTextureResolver;
+
   public static final StandardMaterialKind:String = Facade_Sdk_flight__Types.StandardMaterialKindValue;
 
   public static final StandardPbrMaterialKind:String = Facade_Sdk_flight__Types.StandardPbrMaterialKind;
@@ -21277,8 +21553,8 @@ class Sdk {
 
   public static final StarlingPexFormatKind:String = Facade_Sdk_flight__Types.StarlingPexFormatKind;
 
-  public static function startApplicationLoop(app:Application, ?options:ApplicationLoopOptions):Void {
-    Facade_Sdk_flight__Application.startApplicationLoop(app, options);
+  public static function startApplicationLoop(host:{ >HasAppLoop, >HasAppVisibilityQuery, }, app:Application, ?options:ApplicationLoopOptions):Void {
+    Facade_Sdk_flight__Application.startApplicationLoop(host, app, options);
   }
 
   public static function startLogTimer(label:String, ?channel:Null<String>):LogTimer {
@@ -21290,7 +21566,7 @@ class Sdk {
     Facade_Sdk_flight__Loader.startResourceLoad(loader);
   }
 
-  public static function startTrayIconAnimation(tray:TrayIcon, frames:Array<String>, intervalMs:Float):Void->Void {
+  public static function startTrayIconAnimation(tray:TrayWithImage, frames:Array<TrayIconSource>, intervalMs:Float):flight._internal._Promise<TrayAnimationStartResult> {
     return cast Facade_Sdk_flight__Tray.startTrayIconAnimation(tray, frames, intervalMs);
     return cast null;
   }
@@ -21305,8 +21581,8 @@ class Sdk {
 
   public static final StatechartTransitionStatus:{ var ConditionsUnmet:String; var ExitTimePending:String; var InvalidRegion:String; var MissingRegionDuration:String; var NoTransitions:String; var Ready:String; var Transitioning:String; } = Facade_Sdk_flight__Types.StatechartTransitionStatusValue;
 
-  public static function statFile(path:String):flight._internal._Promise<Null<FileStat>> {
-    return cast Facade_Sdk_flight__FileSystem.statFile(path);
+  public static function statFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<FileStat>> {
+    return cast Facade_Sdk_flight__FileSystem.statFile(host, path);
     return cast null;
   }
 
@@ -21385,8 +21661,9 @@ class Sdk {
     Facade_Sdk_flight__Timeline.stopTimeline(timeline);
   }
 
-  public static function stopTrayIconAnimation(tray:TrayIcon):Void {
-    Facade_Sdk_flight__Tray.stopTrayIconAnimation(tray);
+  public static function stopTrayIconAnimation(tray:TrayIcon):TrayAnimationStopResult {
+    return cast Facade_Sdk_flight__Tray.stopTrayIconAnimation(tray);
+    return cast null;
   }
 
   public static function stopTween(tween:Tween<flight._internal._Any>, ?options:StopTweenOptions):Void {
@@ -21406,7 +21683,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function submitWgpuRenderPass(state:WgpuRenderState):Void {
+  public static function submitWgpuRenderPass(state:WgpuPresentationRenderState):Void {
     Facade_Sdk_flight__RenderWgpu.submitWgpuRenderPass(state);
   }
 
@@ -21480,10 +21757,6 @@ class Sdk {
     Facade_Sdk_flight__Velocity.suppressVelocity(field, source);
   }
 
-  public static function suspendAllGlobalShortcuts():Void {
-    Facade_Sdk_flight__Shortcut.suspendAllGlobalShortcuts();
-  }
-
   public static function swapNodeChildren<Traits:flight._internal._Object>(target:Node<Traits>, child1:Node<Traits>, child2:Node<Traits>):Void {
     Facade_Sdk_flight__Node.swapNodeChildren(target, child1, child2);
   }
@@ -21523,8 +21796,8 @@ class Sdk {
     Facade_Sdk_flight__Physics3D.syncPhysics3DBodyToNode3D(body, node);
   }
 
-  public static function takeWebcamPhoto(?options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamPhoto>> {
-    return cast Facade_Sdk_flight__Webcam.takeWebcamPhoto(options);
+  public static function takeMediaFileCapturePhoto(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCapturePhoto>> {
+    return cast Facade_Sdk_flight__Webcam.takeMediaFileCapturePhoto(options);
     return cast null;
   }
 
@@ -21937,18 +22210,18 @@ class Sdk {
     Facade_Sdk_flight__Geometry.transposeMatrix4(out, source);
   }
 
-  public static function triggerHapticImpact(style:HapticImpactStyle, ?intensity:Float):Bool {
-    return cast Facade_Sdk_flight__Haptics.triggerHapticImpact(style, intensity);
+  public static function triggerHapticImpact(host:HasInputHaptics, style:HapticImpactStyle, ?intensity:Float):Bool {
+    return cast Facade_Sdk_flight__Haptics.triggerHapticImpact(host, style, intensity);
     return cast null;
   }
 
-  public static function triggerHapticNotification(type:HapticNotificationType):Bool {
-    return cast Facade_Sdk_flight__Haptics.triggerHapticNotification(type);
+  public static function triggerHapticNotification(host:HasInputHaptics, type:HapticNotificationType):Bool {
+    return cast Facade_Sdk_flight__Haptics.triggerHapticNotification(host, type);
     return cast null;
   }
 
-  public static function triggerHapticSelection():Bool {
-    return cast Facade_Sdk_flight__Haptics.triggerHapticSelection();
+  public static function triggerHapticSelection(host:HasInputHaptics):Bool {
+    return cast Facade_Sdk_flight__Haptics.triggerHapticSelection(host);
     return cast null;
   }
 
@@ -22023,10 +22296,6 @@ class Sdk {
     Facade_Sdk_flight__Camera.unprojectCamera2DPoint(camera, screenX, screenY, out);
   }
 
-  public static function unregisterAllGlobalShortcuts():Void {
-    Facade_Sdk_flight__Shortcut.unregisterAllGlobalShortcuts();
-  }
-
   public static function unregisterApplicationWindow(app:Application, win:ApplicationWindow):Void {
     Facade_Sdk_flight__Application.unregisterApplicationWindow(app, win);
   }
@@ -22049,11 +22318,6 @@ class Sdk {
     Facade_Sdk_flight__Compression.unregisterDecompressor(compression);
   }
 
-  public static function unregisterGlobalShortcut(accelerator:String):Bool {
-    return cast Facade_Sdk_flight__Shortcut.unregisterGlobalShortcut(accelerator);
-    return cast null;
-  }
-
   public static function unregisterGltfDracoDecoder():Void {
     Facade_Sdk_flight__Scene3DFormats.unregisterGltfDracoDecoder();
   }
@@ -22071,13 +22335,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function unregisterProtocolScheme(scheme:String):Bool {
-    return cast Facade_Sdk_flight__Protocol.unregisterProtocolScheme(scheme);
+  public static function unregisterProtocolScheme(host:HasProtocolUnregistration, scheme:String):Bool {
+    return cast Facade_Sdk_flight__Protocol.unregisterProtocolScheme(host, scheme);
     return cast null;
   }
 
-  public static function unregisterProtocolSchemes(schemes:Array<String>):Bool {
-    return cast Facade_Sdk_flight__Protocol.unregisterProtocolSchemes(schemes);
+  public static function unregisterProtocolSchemes(host:HasProtocolUnregistration, schemes:Array<String>):Bool {
+    return cast Facade_Sdk_flight__Protocol.unregisterProtocolSchemes(host, schemes);
     return cast null;
   }
 
@@ -22166,11 +22430,6 @@ class Sdk {
 
   public static function updateMovieClip(clip:MovieClip, deltaTime:Float):Void {
     Facade_Sdk_flight__MovieClip.updateMovieClip(clip, deltaTime);
-  }
-
-  public static function updateNotification(id:String, partial:{ @:optional var title:Null<String>; @:optional var id:Null<String>; @:optional var body:Null<String>; @:optional var icon:Null<String>; @:optional var badge:Null<String>; @:optional var tag:Null<String>; @:optional var silent:Null<Bool>; @:optional var actions:Null<Array<NotificationAction>>; @:optional var dir:Null<String>; @:optional var image:Null<String>; @:optional var lang:Null<String>; @:optional var renotify:Null<Bool>; @:optional var requireInteraction:Null<Bool>; @:optional var timestamp:Null<Float>; @:optional var vibrate:Null<Array<Float>>; @:optional var data:flight._internal._Any; }):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Notification.updateNotification(id, partial);
-    return cast null;
   }
 
   public static function updateOrbitCameraController(controller:OrbitCameraController, camera:Camera3D, deltaTime:Float):Void {
@@ -22332,18 +22591,18 @@ class Sdk {
 
   public static final VertexDisplaceModifierSource:{ var HeightMap:String; var Sine:String; } = Facade_Sdk_flight__Types.VertexDisplaceModifierSourceValue;
 
-  public static function vibrateDevice(durationMs:Float):Bool {
-    return cast Facade_Sdk_flight__Haptics.vibrateDevice(durationMs);
+  public static function vibrateDevice(host:HasInputHaptics, durationMs:Float):Bool {
+    return cast Facade_Sdk_flight__Haptics.vibrateDevice(host, durationMs);
     return cast null;
   }
 
-  public static function vibrateDevicePattern(pattern:Array<Float>):Bool {
-    return cast Facade_Sdk_flight__Haptics.vibrateDevicePattern(pattern);
+  public static function vibrateDevicePattern(host:HasInputHaptics, pattern:Array<Float>):Bool {
+    return cast Facade_Sdk_flight__Haptics.vibrateDevicePattern(host, pattern);
     return cast null;
   }
 
-  public static function vibrateDeviceWaveform(timings:Array<Float>, amplitudes:Array<Float>, ?repeat:Float):Bool {
-    return cast Facade_Sdk_flight__Haptics.vibrateDeviceWaveform(timings, amplitudes, repeat);
+  public static function vibrateDeviceWaveform(host:HasInputHaptics, timings:Array<Float>, amplitudes:Array<Float>, ?repeat:Float):Bool {
+    return cast Facade_Sdk_flight__Haptics.vibrateDeviceWaveform(host, timings, amplitudes, repeat);
     return cast null;
   }
 
@@ -22406,8 +22665,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function watchPath(path:String, listener:FileWatchEvent->Void):Void->Void {
-    return cast Facade_Sdk_flight__FileSystem.watchPath(path, listener);
+  public static function watchPath(_host:HasStorageFileSystem, _path:String, _listener:FileWatchEvent->Void):Void->Void {
+    return cast Facade_Sdk_flight__FileSystem.watchPath(_host, _path, _listener);
     return cast null;
   }
 
@@ -22457,6 +22716,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function withWgpuFrameBorrow<T>(ownerState:WgpuPresentationRenderState, borrowerState:WgpuRenderState, callback:Void->T):T {
+    return cast Facade_Sdk_flight__RenderWgpu.withWgpuFrameBorrow(ownerState, borrowerState, callback);
+    return cast null;
+  }
+
   public static function withWgpuRenderTextures<T>(state:WgpuRenderState, pool:WgpuRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
     return cast Facade_Sdk_flight__RenderWgpu.withWgpuRenderTextures(state, pool, descriptors, callback);
     return cast null;
@@ -22466,13 +22730,13 @@ class Sdk {
 
   public static final wrappedDiffusePbrGlExtension:GlPbrExtensionRegistration = Facade_Sdk_flight__Scene3DGl.wrappedDiffusePbrGlExtension;
 
-  public static function writeBinaryFile(path:String, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeBinaryFile(path, data);
+  public static function writeBinaryFile(host:HasStorageFileSystem, path:String, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeBinaryFile(host, path, data);
     return cast null;
   }
 
-  public static function writeBinaryFileChunks(path:String, chunks:Dynamic):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeBinaryFileChunks(path, chunks);
+  public static function writeBinaryFileChunks(host:HasStorageFileSystem, path:String, chunks:Dynamic):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeBinaryFileChunks(host, path, chunks);
     return cast null;
   }
 
@@ -22484,43 +22748,38 @@ class Sdk {
     Facade_Sdk_flight__Bitmap.writeBitmapPixels32(dest, pixels);
   }
 
-  public static function writeClipboard(items:Array<ClipboardWriteItem>):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.writeClipboard(items);
+  public static function writeClipboard(host:HasClipboardFormats, items:Array<ClipboardWriteItem>):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.writeClipboard(host, items);
     return cast null;
   }
 
-  public static function writeClipboardBookmark(title:String, url:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.writeClipboardBookmark(title, url);
+  public static function writeClipboardBookmark(host:HasClipboardBookmark, title:String, url:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.writeClipboardBookmark(host, title, url);
     return cast null;
   }
 
-  public static function writeClipboardFiles(paths:Array<String>):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.writeClipboardFiles(paths);
+  public static function writeClipboardFormat(host:HasClipboardFormats, format:String, data:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.writeClipboardFormat(host, format, data);
     return cast null;
   }
 
-  public static function writeClipboardFormat(format:String, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.writeClipboardFormat(format, data);
+  public static function writeClipboardHtml(host:HasClipboardFormats, html:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.writeClipboardHtml(host, html);
     return cast null;
   }
 
-  public static function writeClipboardHtml(html:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.writeClipboardHtml(html);
+  public static function writeClipboardImage(host:HasClipboardImage, dataUrl:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.writeClipboardImage(host, dataUrl);
     return cast null;
   }
 
-  public static function writeClipboardImage(dataUrl:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.writeClipboardImage(dataUrl);
+  public static function writeClipboardRTF(host:HasClipboardFormats, rtf:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.writeClipboardRTF(host, rtf);
     return cast null;
   }
 
-  public static function writeClipboardRTF(rtf:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.writeClipboardRTF(rtf);
-    return cast null;
-  }
-
-  public static function writeClipboardText(text:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Clipboard.writeClipboardText(text);
+  public static function writeClipboardText(host:HasClipboardText, text:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__Clipboard.writeClipboardText(host, text);
     return cast null;
   }
 
@@ -22537,18 +22796,18 @@ class Sdk {
     Facade_Sdk_flight__Collision.writeCollisionTriangleMeshBounds3D(mesh, out);
   }
 
-  public static function writeDialogHandleBinaryFile(handle:FileDialogHandle, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeDialogHandleBinaryFile(handle, data);
+  public static function writeDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeDialogHandleBinaryFile(host, handle, data);
     return cast null;
   }
 
-  public static function writeDialogHandleTextFile(handle:FileDialogHandle, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeDialogHandleTextFile(handle, data);
+  public static function writeDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeDialogHandleTextFile(host, handle, data);
     return cast null;
   }
 
-  public static function writeFileAtomic(path:String, data:flight._internal._Union2<flight._internal._UInt8Array, String>):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeFileAtomic(path, data);
+  public static function writeFileAtomic(host:HasStorageFileSystem, path:String, data:flight._internal._Union2<flight._internal._UInt8Array, String>):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeFileAtomic(host, path, data);
     return cast null;
   }
 
@@ -22735,13 +22994,13 @@ class Sdk {
     Facade_Sdk_flight__Physics3D.writeRigidBody3DWorldCenter(body, out);
   }
 
-  public static function writeShellShortcutLink(shortcutPath:String, link:ShellShortcutLink, ?operation:ShellShortcutWriteOperation):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__Shell.writeShellShortcutLink(shortcutPath, link, operation);
+  public static function writeShellShortcutLink(host:HasShellShortcutLink, shortcutPath:String, link:ShellShortcutLink, operation:ShellShortcutWriteOperation):flight._internal._Promise<ShellShortcutLinkWriteOutcome> {
+    return cast Facade_Sdk_flight__Shell.writeShellShortcutLink(host, shortcutPath, link, operation);
     return cast null;
   }
 
-  public static function writeTextFile(path:String, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeTextFile(path, data);
+  public static function writeTextFile(host:HasStorageFileSystem, path:String, data:String):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeTextFile(host, path, data);
     return cast null;
   }
 

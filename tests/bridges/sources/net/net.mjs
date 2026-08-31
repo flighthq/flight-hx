@@ -5,9 +5,4 @@ const api = compiled.flight._Net;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createWebNetBackend = api.createWebNetBackend;
-export const getNetBackend = api.getNetBackend;
-export const installNetHostBackend = api.installNetHostBackend;
-export const resetNetBackendForTest = api.resetNetBackendForTest;
 export const sendNetRequest = api.sendNetRequest;
-export const setNetBackend = api.setNetBackend;

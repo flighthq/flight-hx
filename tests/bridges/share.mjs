@@ -3,12 +3,11 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const attachShareSignals = compiled.flight.Share.attachShareSignals;
 export const canShareContent = compiled.flight.Share.canShareContent;
+export const canShareFiles = compiled.flight.Share.canShareFiles;
 export const detachShareSignals = compiled.flight.Share.detachShareSignals;
 export const disposeShareSignals = compiled.flight.Share.disposeShareSignals;
 export const enableShareSignals = compiled.flight.Share.enableShareSignals;
-export const explainShareBackend = compiled.flight.Share.explainShareBackend;
 export const hasShareContentFields = compiled.flight.Share.hasShareContentFields;
-export const isShareAvailable = compiled.flight.Share.isShareAvailable;
 export const shareContent = compiled.flight.Share.shareContent;
 export const shareContentWithResult = compiled.flight.Share.shareContentWithResult;
 export const shareFiles = compiled.flight.Share.shareFiles;

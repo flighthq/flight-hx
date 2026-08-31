@@ -5,4 +5,5 @@ const api = compiled.flight._HostTauri;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createTauriShortcutBackend = api.createTauriShortcutBackend;
+export const createTauriShortcutQueryBackend = api.createTauriShortcutQueryBackend;
+export const createTauriShortcutTriggerBackend = api.createTauriShortcutTriggerBackend;

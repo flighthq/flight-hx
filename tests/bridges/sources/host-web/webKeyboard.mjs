@@ -5,5 +5,6 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebSoftKeyboard = api.enableHostWebSoftKeyboard;
-export const resetHostWebKeyboardForTest = api.resetHostWebKeyboardForTest;
+export const createWebSoftKeyboardChangeBackend = api.createWebSoftKeyboardChangeBackend;
+export const createWebSoftKeyboardInfoBackend = api.createWebSoftKeyboardInfoBackend;
+export const createWebSoftKeyboardVisibilityBackend = api.createWebSoftKeyboardVisibilityBackend;

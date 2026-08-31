@@ -9,8 +9,8 @@ import flight.types.AppLaunchKind;
 import flight.types.AppLifecycle;
 import flight.types.AppLifecycleState;
 import flight.types.AppMemoryPressure;
-import flight.types.BackendExplanation;
 import flight.types.BackendOperationExplanation;
+import flight.types.HasSystemLifecycle;
 import flight.types.LifecycleBackend;
 import flight.types.LifecycleOperation;
 import flight.types.Signal;
@@ -18,14 +18,14 @@ import flight.types.SignalData;
 
 @:noCompletion
 class _Lifecycle {
-  public static function attachAppLifecycle(app:AppLifecycle):Void {
+  public static function attachAppLifecycle(host:HasSystemLifecycle, app:AppLifecycle):Void {
     var backend:LifecycleBackend = cast _Runtime.UNDEFINED;
     var previous:AppLifecycleState = cast _Runtime.UNDEFINED;
     var unsubscribeState:Void->Void = cast _Runtime.UNDEFINED;
     var unsubscribeMemory:Null<Void->Void> = cast _Runtime.UNDEFINED;
     var memSub:Null<(AppMemoryPressure->Void)->(Void->Void)> = cast _Runtime.UNDEFINED;
     detachAppLifecycle(({ final __callArgument0:Dynamic = app; __callArgument0; }));
-    backend = (cast getLifecycleBackend() : LifecycleBackend);
+    backend = (cast (cast host : HasSystemLifecycle).system : { var lifecycle:LifecycleBackend; }).lifecycle;
     previous = (cast backend : LifecycleBackend).getState();
     unsubscribeState = (cast backend : LifecycleBackend).subscribe(({ final __callArgument2:Dynamic = function():Void {
       var state:AppLifecycleState = cast _Runtime.UNDEFINED;
@@ -154,135 +154,56 @@ class _Lifecycle {
     ((cast _Lifecycle._savedState__lifecycle : flight._internal._WeakMap<AppLifecycle, flight._internal._Record<String, flight._internal._Any>>).delete_(app));
   }
 
-  public static function explainLifecycleBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Lifecycle._custom__lifecycle, null) : Bool)) {
-      return cast { conflict: _Lifecycle._hostConflict__lifecycle, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Lifecycle._host__lifecycle, null) : Bool)) {
-      return cast { conflict: _Lifecycle._hostConflict__lifecycle, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Lifecycle._hostObservation__lifecycle, null) : Bool) ? (cast (cast _Lifecycle._hostObservation__lifecycle : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Lifecycle._hostObservation__lifecycle, null) : Bool) ? (cast (cast _Lifecycle._hostObservation__lifecycle : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
-    return cast null;
-  }
-
   @:allow(flight)
   @:keep
-  private static function explainLifecycleOperation(operation:LifecycleOperation):BackendOperationExplanation {
-    if ((cast ((cast !_Runtime.strictEquals(_Lifecycle._custom__lifecycle, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Lifecycle._custom__lifecycle, operation)), 'function') : Bool)) : Bool)) {
-      return cast { implemented: true, layer: 'custom', operation: operation };
-    }
-    if ((cast ((cast !_Runtime.strictEquals(_Lifecycle._host__lifecycle, null) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex(_Lifecycle._host__lifecycle, operation)), 'function') : Bool)) : Bool)) {
-      return cast { implemented: true, layer: 'host', operation: operation };
-    }
-    return cast { implemented: false, layer: 'sentinel', operation: operation };
+  private static function explainLifecycleOperation(host:HasSystemLifecycle, operation:LifecycleOperation):BackendOperationExplanation {
+    var implemented:Bool = cast _Runtime.UNDEFINED;
+    implemented = _Runtime.strictEquals(_Runtime.typeofValue(_Runtime.getIndex((cast (cast host : HasSystemLifecycle).system : { var lifecycle:LifecycleBackend; }).lifecycle, operation)), 'function');
+    return cast { implemented: implemented, layer: ((cast implemented : Bool) ? (cast 'host' : Dynamic) : (cast 'sentinel' : Dynamic)), operation: operation };
     return cast null;
   }
 
-  public static function getAppLaunchKind():AppLaunchKind {
+  public static function getAppLaunchKind(host:HasSystemLifecycle):AppLaunchKind {
     var backend:LifecycleBackend = cast _Runtime.UNDEFINED;
-    backend = (cast getLifecycleBackend() : LifecycleBackend);
+    backend = (cast (cast host : HasSystemLifecycle).system : { var lifecycle:LifecycleBackend; }).lifecycle;
     return cast ((cast !_Runtime.strictEquals((cast backend : LifecycleBackend).getLaunchKind, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast backend : LifecycleBackend).getLaunchKind() : Dynamic) : (cast 'warm' : Dynamic));
     return cast null;
   }
 
-  public static function getAppLifecycleState():AppLifecycleState {
-    return cast (cast (cast getLifecycleBackend() : LifecycleBackend) : LifecycleBackend).getState();
+  public static function getAppLifecycleState(host:HasSystemLifecycle):AppLifecycleState {
+    return cast (cast (cast (cast host : HasSystemLifecycle).system : { var lifecycle:LifecycleBackend; }).lifecycle : LifecycleBackend).getState();
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function getLifecycleBackend():LifecycleBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Lifecycle._custom__lifecycle, function():Dynamic return cast _Lifecycle._host__lifecycle), function():Dynamic return cast _Lifecycle._sentinel__lifecycle);
+  private static function hasLifecycleOperation(host:HasSystemLifecycle, operation:LifecycleOperation):Bool {
+    return cast (cast (cast explainLifecycleOperation(({ final __callArgument14:Dynamic = host; __callArgument14; }), (cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function hasLifecycleOperation(operation:LifecycleOperation):Bool {
-    return cast (cast (cast explainLifecycleOperation((cast operation : String)) : BackendOperationExplanation) : BackendOperationExplanation).implemented;
+  public static function isAppActive(host:HasSystemLifecycle):Bool {
+    return cast _Runtime.strictEquals((cast (cast (cast host : HasSystemLifecycle).system : { var lifecycle:LifecycleBackend; }).lifecycle : LifecycleBackend).getState(), 'active');
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function installLifecycleHostBackend(backend:LifecycleBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Lifecycle._host__lifecycle, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Lifecycle._host__lifecycle, backend) : Bool)) { (_Lifecycle._hostConflict__lifecycle = cast (true : Dynamic)); }
-      return;
-    }
-    (_Lifecycle._host__lifecycle = cast (backend : Dynamic));
-  }
-
-  public static function isAppActive():Bool {
-    return cast _Runtime.strictEquals((cast (cast getLifecycleBackend() : LifecycleBackend) : LifecycleBackend).getState(), 'active');
+  public static function isAppBackground(host:HasSystemLifecycle):Bool {
+    return cast _Runtime.strictEquals((cast (cast (cast host : HasSystemLifecycle).system : { var lifecycle:LifecycleBackend; }).lifecycle : LifecycleBackend).getState(), 'background');
     return cast null;
   }
 
-  public static function isAppBackground():Bool {
-    return cast _Runtime.strictEquals((cast (cast getLifecycleBackend() : LifecycleBackend) : LifecycleBackend).getState(), 'background');
+  public static function isAppInactive(host:HasSystemLifecycle):Bool {
+    return cast _Runtime.strictEquals((cast (cast (cast host : HasSystemLifecycle).system : { var lifecycle:LifecycleBackend; }).lifecycle : LifecycleBackend).getState(), 'inactive');
     return cast null;
-  }
-
-  public static function isAppInactive():Bool {
-    return cast _Runtime.strictEquals((cast (cast getLifecycleBackend() : LifecycleBackend) : LifecycleBackend).getState(), 'inactive');
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function observeLifecycleHostResult(operation:String, succeeded:Bool):Void {
-    (_Lifecycle._hostObservation__lifecycle = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
   public static function requestAppBack(app:AppLifecycle):Bool {
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onBackButton]]), 1);
-    return cast !_Runtime.strictEquals(({ final __typedStruct14 = (cast app.onBackButton : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct14 == null ? _Runtime.UNDEFINED : (cast __typedStruct14 : { var cancelled:Bool; }).cancelled; }), true);
+    return cast !_Runtime.strictEquals(({ final __typedStruct16 = (cast app.onBackButton : { var data:Null<SignalData<Void->Void>>; }).data; __typedStruct16 == null ? _Runtime.UNDEFINED : (cast __typedStruct16 : { var cancelled:Bool; }).cancelled; }), true);
     return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function resetLifecycleBackendForTest():Void {
-    (_Lifecycle._custom__lifecycle = cast (null : Dynamic));
-    (_Lifecycle._host__lifecycle = cast (null : Dynamic));
-    (_Lifecycle._hostConflict__lifecycle = cast (false : Dynamic));
-    (_Lifecycle._hostObservation__lifecycle = cast (null : Dynamic));
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function setLifecycleBackend(backend:Null<LifecycleBackend>):Void {
-    (_Lifecycle._custom__lifecycle = cast (backend : Dynamic));
   }
 
   public static final _savedState__lifecycle:flight._internal._WeakMap<AppLifecycle, flight._internal._Record<String, flight._internal._Any>> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
 
-  public static final _sentinel__lifecycle:LifecycleBackend = (cast { getState: function():AppLifecycleState {
-    return cast 'active';
-    return cast _Runtime.UNDEFINED;
-  }, getLaunchKind: function():AppLaunchKind {
-    return cast 'cold';
-    return cast _Runtime.UNDEFINED;
-  }, subscribe: function(listener:Void->Void):Void->Void {
-    return cast function():Void {
-
-    };
-    return cast _Runtime.UNDEFINED;
-  }, subscribeMemoryWarning: function(listener:AppMemoryPressure->Void):Void->Void {
-    return cast function():Void {
-
-    };
-    return cast _Runtime.UNDEFINED;
-  } });
-
   public static final _subscriptions__lifecycle:flight._internal._WeakMap<AppLifecycle, Void->Void> = _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []);
-
-  public static var _custom__lifecycle:Null<LifecycleBackend> = _Runtime.explicitNull();
-
-  public static var _host__lifecycle:Null<LifecycleBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__lifecycle:Bool = false;
-
-  public static var _hostObservation__lifecycle:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 }

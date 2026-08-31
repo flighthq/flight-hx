@@ -4,49 +4,59 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Device as Facade_Device_flight__Device;
-import flight.types.BackendExplanation;
 import flight.types.DeviceCapabilities;
 import flight.types.DeviceDisplayMetrics;
 import flight.types.DeviceInfo;
+import flight.types.HasSystemDevice;
 import flight.types.SafeAreaInsets;
 
 class Device {
-  public static function enableWebSafeAreaInsets():Void->Void {
-    return cast Facade_Device_flight__Device.enableWebSafeAreaInsets();
+  public static function createDeviceCapabilities():DeviceCapabilities {
+    return cast Facade_Device_flight__Device.createDeviceCapabilities();
     return cast null;
   }
 
-  public static function explainDeviceBackend():BackendExplanation {
-    return cast Facade_Device_flight__Device.explainDeviceBackend();
+  public static function createDeviceDisplayMetrics():DeviceDisplayMetrics {
+    return cast Facade_Device_flight__Device.createDeviceDisplayMetrics();
     return cast null;
   }
 
-  public static function getDeviceCapabilities(out:DeviceCapabilities):DeviceCapabilities {
-    return cast Facade_Device_flight__Device.getDeviceCapabilities(out);
+  public static function createDeviceInfo():DeviceInfo {
+    return cast Facade_Device_flight__Device.createDeviceInfo();
     return cast null;
   }
 
-  public static function getDeviceDisplayMetrics(out:DeviceDisplayMetrics):DeviceDisplayMetrics {
-    return cast Facade_Device_flight__Device.getDeviceDisplayMetrics(out);
+  public static function createSafeAreaInsets():SafeAreaInsets {
+    return cast Facade_Device_flight__Device.createSafeAreaInsets();
     return cast null;
   }
 
-  public static function getDeviceId():String {
-    return cast Facade_Device_flight__Device.getDeviceId();
+  public static function getDeviceCapabilities(host:HasSystemDevice, out:DeviceCapabilities):DeviceCapabilities {
+    return cast Facade_Device_flight__Device.getDeviceCapabilities(host, out);
     return cast null;
   }
 
-  public static function getDeviceInfo(out:DeviceInfo):DeviceInfo {
-    return cast Facade_Device_flight__Device.getDeviceInfo(out);
+  public static function getDeviceDisplayMetrics(host:HasSystemDevice, out:DeviceDisplayMetrics):DeviceDisplayMetrics {
+    return cast Facade_Device_flight__Device.getDeviceDisplayMetrics(host, out);
     return cast null;
   }
 
-  public static function getSafeAreaInsets(out:SafeAreaInsets):SafeAreaInsets {
-    return cast Facade_Device_flight__Device.getSafeAreaInsets(out);
+  public static function getDeviceId(host:HasSystemDevice):String {
+    return cast Facade_Device_flight__Device.getDeviceId(host);
     return cast null;
   }
 
-  public static function refreshDeviceInfo():Void {
-    Facade_Device_flight__Device.refreshDeviceInfo();
+  public static function getDeviceInfo(host:HasSystemDevice, out:DeviceInfo):DeviceInfo {
+    return cast Facade_Device_flight__Device.getDeviceInfo(host, out);
+    return cast null;
+  }
+
+  public static function getSafeAreaInsets(host:HasSystemDevice, out:SafeAreaInsets):SafeAreaInsets {
+    return cast Facade_Device_flight__Device.getSafeAreaInsets(host, out);
+    return cast null;
+  }
+
+  public static function refreshDeviceInfo(host:HasSystemDevice):Void {
+    Facade_Device_flight__Device.refreshDeviceInfo(host);
   }
 }

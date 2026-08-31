@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FileLogSink = { var sink:LogSink; };
+typedef FileLogSink = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var sink:LogSink; };

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ShareContent = { @:optional var title:String; @:optional var text:String; @:optional var url:String; @:optional var files:Array<ShareFile>; };
+typedef ShareContent = flight._internal._Union2<flight._internal._Union2<{ @:optional var text:String; var title:String; @:optional var url:String; }, { var text:String; @:optional var title:String; @:optional var url:String; }>, { @:optional var text:String; @:optional var title:String; var url:String; }>;

@@ -6,6 +6,7 @@ import flight._internal._Runtime;
 import flight._Log as Facade_Log_flight__Log;
 import flight.types.BufferedLogSink;
 import flight.types.FileLogSink;
+import flight.types.FileLogSinkDestroyOutcome;
 import flight.types.LogContext;
 import flight.types.LogData;
 import flight.types.LogDataProvider;
@@ -16,6 +17,7 @@ import flight.types.LogSignals;
 import flight.types.LogSink;
 import flight.types.LogSpan;
 import flight.types.LogTimer;
+import flight.types.LogTransport;
 import flight.types.MemoryLogSink;
 import flight.types.RateLimitedLogSink;
 
@@ -85,8 +87,8 @@ class Log {
     return cast null;
   }
 
-  public static function createFileLogSink(?options:{ @:optional var formatter:LogFormatter; }):FileLogSink {
-    return cast Facade_Log_flight__Log.createFileLogSink(options);
+  public static function createFileLogSink(transport:LogTransport, ?options:{ @:optional var formatter:LogFormatter; }):FileLogSink {
+    return cast Facade_Log_flight__Log.createFileLogSink(transport, options);
     return cast null;
   }
 
@@ -130,12 +132,9 @@ class Log {
     return cast null;
   }
 
-  public static function destroyFileLogSink(_handle:FileLogSink):Void {
-    Facade_Log_flight__Log.destroyFileLogSink(_handle);
-  }
-
-  public static function destroyLogTransportBackend():Void {
-    Facade_Log_flight__Log.destroyLogTransportBackend();
+  public static function destroyFileLogSink(handle:FileLogSink):flight._internal._Promise<FileLogSinkDestroyOutcome> {
+    return cast Facade_Log_flight__Log.destroyFileLogSink(handle);
+    return cast null;
   }
 
   public static function disposeLogSink(handle:BufferedLogSink):Void {

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TauriTrayIconOptions = { @:optional var action:TauriTrayIconEvent->Void; @:optional var icon:String; @:optional var menu:TauriMenu; @:optional var title:String; @:optional var tooltip:String; };
+typedef TauriTrayIconOptions = { @:optional var action:TauriTrayIconEvent->Void; @:optional var icon:String; @:optional var iconAsTemplate:Bool; @:optional var menu:TauriMenu; @:optional var title:String; @:optional var tooltip:String; };

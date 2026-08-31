@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ElectronPowerMonitor = { var on:String->(Void->Void)->Void; var removeListener:String->(Void->Void)->Void; var getSystemIdleState:Float->String; var getSystemIdleTime:Void->Float; @:optional var onBatteryPower:Bool; };
+typedef ElectronPowerMonitor = { var on:ElectronPowerMonitorEvent->(Void->Void)->Void; var removeListener:ElectronPowerMonitorEvent->(Void->Void)->Void; @:optional var getCurrentThermalState:Void->String; var getSystemIdleState:Float->String; var getSystemIdleTime:Void->Float; @:optional var onBatteryPower:Bool; };

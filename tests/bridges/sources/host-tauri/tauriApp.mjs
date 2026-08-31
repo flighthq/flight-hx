@@ -5,4 +5,4 @@ const api = compiled.flight._HostTauri;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createTauriAppBackend = api.createTauriAppBackend;
+export const createTauriAppCapabilities = api.createTauriAppCapabilities;

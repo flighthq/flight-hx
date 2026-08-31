@@ -13,6 +13,7 @@ import flight.types.AudioResourceReferenceResolutionExplanation;
 import flight.types.AudioResourceUrl;
 import flight.types.EmbeddedAudioResourceReference;
 import flight.types.ExternalAudioResourceReference;
+import flight.types.HasNetHttp;
 
 class Audio {
   public static function canPlayAudioType(mimeType:String):Bool {
@@ -149,13 +150,13 @@ class Audio {
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrl(context:flight._internal.dom.AudioContext, url:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
-    return cast Facade_Audio_flight__Audio.loadAudioResourceFromUrl(context, url, signal);
+  public static function loadAudioResourceFromUrl(host:HasNetHttp, context:flight._internal.dom.AudioContext, url:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
+    return cast Facade_Audio_flight__Audio.loadAudioResourceFromUrl(host, context, url, signal);
     return cast null;
   }
 
-  public static function loadAudioResourceFromUrls(context:flight._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
-    return cast Facade_Audio_flight__Audio.loadAudioResourceFromUrls(context, sources, signal);
+  public static function loadAudioResourceFromUrls(host:HasNetHttp, context:flight._internal.dom.AudioContext, sources:Array<AudioResourceUrl>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<AudioResource> {
+    return cast Facade_Audio_flight__Audio.loadAudioResourceFromUrls(host, context, sources, signal);
     return cast null;
   }
 

@@ -4,47 +4,90 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._App as Facade_App_flight__App;
+import flight._App.HasAllAppEvents__app;
 import flight.types.App;
 import flight.types.AppActivationPolicy;
 import flight.types.AppLoginItem;
 import flight.types.AppLoginItemLike;
 import flight.types.AppPathKind;
-import flight.types.BackendExplanation;
+import flight.types.HasAppActivate;
+import flight.types.HasAppActivationPolicy;
+import flight.types.HasAppAllWindowsClosed;
+import flight.types.HasAppBadge;
+import flight.types.HasAppDock;
+import flight.types.HasAppFocus;
+import flight.types.HasAppHiddenQuery;
+import flight.types.HasAppHide;
+import flight.types.HasAppLocale;
+import flight.types.HasAppLoginItem;
+import flight.types.HasAppName;
+import flight.types.HasAppNameWrite;
+import flight.types.HasAppOpenFile;
+import flight.types.HasAppPath;
+import flight.types.HasAppQuit;
+import flight.types.HasAppQuitRequest;
+import flight.types.HasAppReady;
+import flight.types.HasAppRecentDocuments;
+import flight.types.HasAppRelaunch;
+import flight.types.HasAppSecondInstance;
+import flight.types.HasAppShow;
+import flight.types.HasAppSingleInstance;
+import flight.types.HasAppUserModelId;
+import flight.types.HasAppVersion;
 import flight.types.MenuItemTemplate;
 
 class App {
-  public static function addAppRecentDocument(path:String):Void {
-    Facade_App_flight__App.addAppRecentDocument(path);
+  public static function addAppRecentDocument(host:HasAppRecentDocuments, path:String):Void {
+    Facade_App_flight__App.addAppRecentDocument(host, path);
   }
 
-  public static function attachApp(app:flight.types.App):Void {
-    Facade_App_flight__App.attachApp(app);
+  public static function attachApp(host:HasAllAppEvents__app, app:flight.types.App):Void {
+    Facade_App_flight__App.attachApp(host, app);
   }
 
-  public static function bounceAppDock():Float {
-    return cast Facade_App_flight__App.bounceAppDock();
+  public static function attachAppActivate(host:HasAppActivate, app:flight.types.App):Void {
+    Facade_App_flight__App.attachAppActivate(host, app);
+  }
+
+  public static function attachAppAllWindowsClosed(host:HasAppAllWindowsClosed, app:flight.types.App):Void {
+    Facade_App_flight__App.attachAppAllWindowsClosed(host, app);
+  }
+
+  public static function attachAppOpenFile(host:HasAppOpenFile, app:flight.types.App):Void {
+    Facade_App_flight__App.attachAppOpenFile(host, app);
+  }
+
+  public static function attachAppQuitRequest(host:HasAppQuitRequest, app:flight.types.App):Void {
+    Facade_App_flight__App.attachAppQuitRequest(host, app);
+  }
+
+  public static function attachAppReady(host:HasAppReady, app:flight.types.App):Void {
+    Facade_App_flight__App.attachAppReady(host, app);
+  }
+
+  public static function attachAppSecondInstance(host:HasAppSecondInstance, app:flight.types.App):Void {
+    Facade_App_flight__App.attachAppSecondInstance(host, app);
+  }
+
+  public static function bounceAppDock(host:HasAppDock):Float {
+    return cast Facade_App_flight__App.bounceAppDock(host);
     return cast null;
   }
 
-  public static function cancelAppAttention(id:Float):Void {
-    Facade_App_flight__App.cancelAppAttention(id);
+  public static function cancelAppAttention(host:HasAppDock, id:Float):Void {
+    Facade_App_flight__App.cancelAppAttention(host, id);
   }
 
-  public static function cancelAppDockBounce(id:Float):Void {
-    Facade_App_flight__App.cancelAppDockBounce(id);
+  public static function cancelAppDockBounce(host:HasAppDock, id:Float):Void {
+    Facade_App_flight__App.cancelAppDockBounce(host, id);
   }
 
-  public static function clearAppRecentDocuments():Void {
-    Facade_App_flight__App.clearAppRecentDocuments();
+  public static function clearAppRecentDocuments(host:HasAppRecentDocuments):Void {
+    Facade_App_flight__App.clearAppRecentDocuments(host);
   }
 
   public static function createApp():flight.types.App {
     return cast Facade_App_flight__App.createApp();
-    return cast null;
-  }
-
-  public static function createAppLoginItem():AppLoginItem {
-    return cast Facade_App_flight__App.createAppLoginItem();
     return cast null;
   }
 
@@ -56,146 +99,121 @@ class App {
     Facade_App_flight__App.disposeApp(app);
   }
 
-  public static function explainAppBackend():BackendExplanation {
-    return cast Facade_App_flight__App.explainAppBackend();
+  public static function focusApp(host:HasAppFocus):Void {
+    Facade_App_flight__App.focusApp(host);
+  }
+
+  public static function getAppDirectoryPath(host:HasAppPath, kind:AppPathKind):String {
+    return cast Facade_App_flight__App.getAppDirectoryPath(host, kind);
     return cast null;
   }
 
-  public static function focusApp():Void {
-    Facade_App_flight__App.focusApp();
-  }
-
-  public static function getAppCommandLine():Array<String> {
-    return cast Facade_App_flight__App.getAppCommandLine();
+  public static function getAppExecutablePath(host:HasAppPath):String {
+    return cast Facade_App_flight__App.getAppExecutablePath(host);
     return cast null;
   }
 
-  public static function getAppCommandLineSwitch(name:String):Null<String> {
-    return cast Facade_App_flight__App.getAppCommandLineSwitch(name);
+  public static function getAppLocale(host:HasAppLocale):String {
+    return cast Facade_App_flight__App.getAppLocale(host);
     return cast null;
   }
 
-  public static function getAppDirectoryPath(kind:AppPathKind):String {
-    return cast Facade_App_flight__App.getAppDirectoryPath(kind);
+  public static function getAppLoginItem(host:HasAppLoginItem):AppLoginItem {
+    return cast Facade_App_flight__App.getAppLoginItem(host);
     return cast null;
   }
 
-  public static function getAppExecutablePath():String {
-    return cast Facade_App_flight__App.getAppExecutablePath();
+  public static function getAppName(host:HasAppName):String {
+    return cast Facade_App_flight__App.getAppName(host);
     return cast null;
   }
 
-  public static function getAppLocale():String {
-    return cast Facade_App_flight__App.getAppLocale();
+  public static function getAppPath(host:HasAppPath):String {
+    return cast Facade_App_flight__App.getAppPath(host);
     return cast null;
   }
 
-  public static function getAppLoginItem():AppLoginItem {
-    return cast Facade_App_flight__App.getAppLoginItem();
+  public static function getAppPreferredSystemLanguages(host:HasAppLocale):Array<String> {
+    return cast Facade_App_flight__App.getAppPreferredSystemLanguages(host);
     return cast null;
   }
 
-  public static function getAppName():String {
-    return cast Facade_App_flight__App.getAppName();
+  public static function getAppSystemLocale(host:HasAppLocale):String {
+    return cast Facade_App_flight__App.getAppSystemLocale(host);
     return cast null;
   }
 
-  public static function getAppPath():String {
-    return cast Facade_App_flight__App.getAppPath();
+  public static function getAppVersion(host:HasAppVersion):String {
+    return cast Facade_App_flight__App.getAppVersion(host);
     return cast null;
   }
 
-  public static function getAppPreferredSystemLanguages():Array<String> {
-    return cast Facade_App_flight__App.getAppPreferredSystemLanguages();
+  public static function hasAppSingleInstanceLock(host:HasAppSingleInstance):Bool {
+    return cast Facade_App_flight__App.hasAppSingleInstanceLock(host);
     return cast null;
   }
 
-  public static function getAppSystemLocale():String {
-    return cast Facade_App_flight__App.getAppSystemLocale();
+  public static function hideApp(host:HasAppHide):Void {
+    Facade_App_flight__App.hideApp(host);
+  }
+
+  public static function isAppHidden(host:HasAppHiddenQuery):Bool {
+    return cast Facade_App_flight__App.isAppHidden(host);
     return cast null;
   }
 
-  public static function getAppVersion():String {
-    return cast Facade_App_flight__App.getAppVersion();
+  public static function quitApp(host:HasAppQuit):Void {
+    Facade_App_flight__App.quitApp(host);
+  }
+
+  public static function relaunchApp(host:HasAppRelaunch):Void {
+    Facade_App_flight__App.relaunchApp(host);
+  }
+
+  public static function releaseAppSingleInstanceLock(host:HasAppSingleInstance):Void {
+    Facade_App_flight__App.releaseAppSingleInstanceLock(host);
+  }
+
+  public static function requestAppAttention(host:HasAppDock, critical:Bool):Float {
+    return cast Facade_App_flight__App.requestAppAttention(host, critical);
     return cast null;
   }
 
-  public static function hasAppCommandLineSwitch(name:String):Bool {
-    return cast Facade_App_flight__App.hasAppCommandLineSwitch(name);
+  public static function requestAppSingleInstanceLock(host:HasAppSingleInstance):Bool {
+    return cast Facade_App_flight__App.requestAppSingleInstanceLock(host);
     return cast null;
   }
 
-  public static function hasAppSingleInstanceLock():Bool {
-    return cast Facade_App_flight__App.hasAppSingleInstanceLock();
+  public static function setAppActivationPolicy(host:HasAppActivationPolicy, policy:AppActivationPolicy):Void {
+    Facade_App_flight__App.setAppActivationPolicy(host, policy);
+  }
+
+  public static function setAppBadgeCount(host:HasAppBadge, count:Float):flight._internal._Promise<Bool> {
+    return cast Facade_App_flight__App.setAppBadgeCount(host, count);
     return cast null;
   }
 
-  public static function hideApp():Bool {
-    return cast Facade_App_flight__App.hideApp();
-    return cast null;
+  public static function setAppDockBadge(host:HasAppDock, text:String):Void {
+    Facade_App_flight__App.setAppDockBadge(host, text);
   }
 
-  public static function isAppHidden():Bool {
-    return cast Facade_App_flight__App.isAppHidden();
-    return cast null;
+  public static function setAppDockMenu(host:HasAppDock, items:Array<MenuItemTemplate>):Void {
+    Facade_App_flight__App.setAppDockMenu(host, items);
   }
 
-  public static function quitApp():Void {
-    Facade_App_flight__App.quitApp();
+  public static function setAppLoginItem(host:HasAppLoginItem, settings:AppLoginItemLike):Void {
+    Facade_App_flight__App.setAppLoginItem(host, settings);
   }
 
-  public static function relaunchApp():Void {
-    Facade_App_flight__App.relaunchApp();
+  public static function setAppName(host:HasAppNameWrite, name:String):Void {
+    Facade_App_flight__App.setAppName(host, name);
   }
 
-  public static function releaseAppSingleInstanceLock():Void {
-    Facade_App_flight__App.releaseAppSingleInstanceLock();
+  public static function setAppUserModelId(host:HasAppUserModelId, id:String):Void {
+    Facade_App_flight__App.setAppUserModelId(host, id);
   }
 
-  public static function requestAppAttention(critical:Bool):Float {
-    return cast Facade_App_flight__App.requestAppAttention(critical);
-    return cast null;
-  }
-
-  public static function requestAppSingleInstanceLock():Bool {
-    return cast Facade_App_flight__App.requestAppSingleInstanceLock();
-    return cast null;
-  }
-
-  public static function setAppActivationPolicy(policy:AppActivationPolicy):Void {
-    Facade_App_flight__App.setAppActivationPolicy(policy);
-  }
-
-  public static function setAppBadgeCount(count:Float):Bool {
-    return cast Facade_App_flight__App.setAppBadgeCount(count);
-    return cast null;
-  }
-
-  public static function setAppDockBadge(text:String):Void {
-    Facade_App_flight__App.setAppDockBadge(text);
-  }
-
-  public static function setAppDockMenu(items:Array<MenuItemTemplate>):Void {
-    Facade_App_flight__App.setAppDockMenu(items);
-  }
-
-  public static function setAppLoginItem(settings:AppLoginItemLike):Bool {
-    return cast Facade_App_flight__App.setAppLoginItem(settings);
-    return cast null;
-  }
-
-  public static function setAppName(name:String):Bool {
-    return cast Facade_App_flight__App.setAppName(name);
-    return cast null;
-  }
-
-  public static function setAppUserModelId(id:String):Bool {
-    return cast Facade_App_flight__App.setAppUserModelId(id);
-    return cast null;
-  }
-
-  public static function showApp():Bool {
-    return cast Facade_App_flight__App.showApp();
-    return cast null;
+  public static function showApp(host:HasAppShow):Void {
+    Facade_App_flight__App.showApp(host);
   }
 }

@@ -5,5 +5,5 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebMenu = api.enableHostWebMenu;
-export const resetHostWebMenuForTest = api.resetHostWebMenuForTest;
+export const webMenuHighlightBackend = api.webMenuHighlightBackend;
+export const webMenuPopupBackend = api.webMenuPopupBackend;

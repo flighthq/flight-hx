@@ -16,7 +16,15 @@ import flight.types.TextureLike;
 import flight.types.TextureResolutionExplanation;
 import flight.types.TextureSourceKind;
 import flight.types.WgpuCompressedTextureDecoder;
+import flight.types.WgpuDeviceSignals;
+import flight.types.WgpuDeviceState;
+import flight.types.WgpuHostAcquisition;
+import flight.types.WgpuHostAcquisitionOptions;
+import flight.types.WgpuOffscreenRenderStateResult;
+import flight.types.WgpuPipeline;
+import flight.types.WgpuPresentationRenderState;
 import flight.types.WgpuRenderOptions;
+import flight.types.WgpuRenderRegistries;
 import flight.types.WgpuRenderState;
 import flight.types.WgpuRenderTarget;
 import flight.types.WgpuRenderTextureExplanation;
@@ -30,7 +38,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  public static function beginWgpuFrame(state:WgpuRenderState):Void {
+  public static function beginWgpuFrame(state:WgpuPresentationRenderState):Void {
     Facade_RenderWgpu_flight__RenderWgpu.beginWgpuFrame(state);
   }
 
@@ -43,11 +51,7 @@ class RenderWgpu {
     return cast null;
   }
 
-  public static function copyWgpuRenderStateRegistrations(target:WgpuRenderState, source:WgpuRenderState):Void {
-    Facade_RenderWgpu_flight__RenderWgpu.copyWgpuRenderStateRegistrations(target, source);
-  }
-
-  public static function createBitmapFromWgpuRenderState(state:WgpuRenderState, ?timeoutMs:Float):flight._internal._Promise<Bitmap> {
+  public static function createBitmapFromWgpuRenderState(state:WgpuPresentationRenderState, ?timeoutMs:Float):flight._internal._Promise<Bitmap> {
     return cast Facade_RenderWgpu_flight__RenderWgpu.createBitmapFromWgpuRenderState(state, timeoutMs);
     return cast null;
   }
@@ -57,18 +61,40 @@ class RenderWgpu {
     return cast null;
   }
 
+  public static function createWgpuAcquisitionFromCanvasElement(canvas:flight._internal.dom.HTMLCanvasElement, ?options:WgpuHostAcquisitionOptions):flight._internal._Promise<Null<WgpuHostAcquisition>> {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuAcquisitionFromCanvasElement(canvas, options);
+    return cast null;
+  }
+
   public static function createWgpuCanvasElement(width:Float, height:Float, ?pixelRatio:Float):flight._internal.dom.HTMLCanvasElement {
     return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuCanvasElement(width, height, pixelRatio);
     return cast null;
   }
 
-  public static function createWgpuOffscreenRenderState(screenState:WgpuRenderState):WgpuRenderState {
-    return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuOffscreenRenderState(screenState);
+  public static function createWgpuDeviceState(device:flight._internal.dom.GPUDevice):WgpuDeviceState {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuDeviceState(device);
     return cast null;
   }
 
-  public static function createWgpuRenderState(canvas:flight._internal.dom.HTMLCanvasElement, ?options:WgpuRenderOptions):flight._internal._Promise<WgpuRenderState> {
-    return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuRenderState(canvas, options);
+  @:overload(function(source:WgpuRenderState):WgpuOffscreenRenderStateResult {})
+  @:overload(function(deviceState:WgpuDeviceState, pipeline:WgpuPipeline, ?options:WgpuRenderOptions):WgpuRenderState {})
+  public static function createWgpuOffscreenRenderState(sourceOrDeviceState:flight._internal._Union2<WgpuRenderState, WgpuDeviceState>, ?pipeline:WgpuPipeline, ?options:WgpuRenderOptions):flight._internal._Union2<WgpuRenderState, WgpuOffscreenRenderStateResult> {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuOffscreenRenderState(sourceOrDeviceState, pipeline, options);
+    return cast null;
+  }
+
+  public static function createWgpuPipeline(registries:WgpuRenderRegistries):WgpuPipeline {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuPipeline(registries);
+    return cast null;
+  }
+
+  public static function createWgpuRenderState(acquisition:WgpuHostAcquisition, pipeline:WgpuPipeline, ?options:WgpuRenderOptions):WgpuPresentationRenderState {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuRenderState(acquisition, pipeline, options);
+    return cast null;
+  }
+
+  public static function createWgpuRenderStateFromCanvasElement(canvas:flight._internal.dom.HTMLCanvasElement, pipeline:WgpuPipeline, ?options:{ >WgpuRenderOptions, >WgpuHostAcquisitionOptions, }):flight._internal._Promise<WgpuPresentationRenderState> {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.createWgpuRenderStateFromCanvasElement(canvas, pipeline, options);
     return cast null;
   }
 
@@ -104,11 +130,20 @@ class RenderWgpu {
     return cast null;
   }
 
+  public static function disposeWgpuDeviceSignals(state:WgpuRenderState):Void {
+    Facade_RenderWgpu_flight__RenderWgpu.disposeWgpuDeviceSignals(state);
+  }
+
   public static function enableWgpuBlendModeSupport(state:WgpuRenderState):Void {
     Facade_RenderWgpu_flight__RenderWgpu.enableWgpuBlendModeSupport(state);
   }
 
-  public static function enableWgpuFrameCapture(state:WgpuRenderState):Void {
+  public static function enableWgpuDeviceSignals(state:WgpuRenderState):WgpuDeviceSignals {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.enableWgpuDeviceSignals(state);
+    return cast null;
+  }
+
+  public static function enableWgpuFrameCapture(state:WgpuPresentationRenderState):Void {
     Facade_RenderWgpu_flight__RenderWgpu.enableWgpuFrameCapture(state);
   }
 
@@ -127,6 +162,16 @@ class RenderWgpu {
 
   public static function explainWgpuTextureResolution(state:WgpuRenderState, texture:TextureLike):TextureResolutionExplanation {
     return cast Facade_RenderWgpu_flight__RenderWgpu.explainWgpuTextureResolution(state, texture);
+    return cast null;
+  }
+
+  public static function getWgpuDeviceLoss(state:WgpuRenderState):Null<flight._internal.dom.GPUDeviceLostInfo> {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.getWgpuDeviceLoss(state);
+    return cast null;
+  }
+
+  public static function isWgpuDeviceLost(state:WgpuRenderState):Bool {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.isWgpuDeviceLost(state);
     return cast null;
   }
 
@@ -171,6 +216,10 @@ class RenderWgpu {
     Facade_RenderWgpu_flight__RenderWgpu.registerWgpuTextureResolver(state, sourceKind, resolver);
   }
 
+  public static function releaseWgpuAcquisition(acquisition:WgpuHostAcquisition):Void {
+    Facade_RenderWgpu_flight__RenderWgpu.releaseWgpuAcquisition(acquisition);
+  }
+
   public static function releaseWgpuRenderTexture(state:WgpuRenderState, pool:WgpuRenderTexturePool, renderTexture:RenderTexture):Void {
     Facade_RenderWgpu_flight__RenderWgpu.releaseWgpuRenderTexture(state, pool, renderTexture);
   }
@@ -179,7 +228,7 @@ class RenderWgpu {
     Facade_RenderWgpu_flight__RenderWgpu.renderIntoWgpuRenderTexture(state, renderTexture, callback);
   }
 
-  public static function renderWgpuBackground(state:WgpuRenderState):Void {
+  public static function renderWgpuBackground(state:WgpuPresentationRenderState):Void {
     Facade_RenderWgpu_flight__RenderWgpu.renderWgpuBackground(state);
   }
 
@@ -202,8 +251,13 @@ class RenderWgpu {
     Facade_RenderWgpu_flight__RenderWgpu.setWgpuRenderTransform2D(state, transform);
   }
 
-  public static function submitWgpuRenderPass(state:WgpuRenderState):Void {
+  public static function submitWgpuRenderPass(state:WgpuPresentationRenderState):Void {
     Facade_RenderWgpu_flight__RenderWgpu.submitWgpuRenderPass(state);
+  }
+
+  public static function withWgpuFrameBorrow<T>(ownerState:WgpuPresentationRenderState, borrowerState:WgpuRenderState, callback:Void->T):T {
+    return cast Facade_RenderWgpu_flight__RenderWgpu.withWgpuFrameBorrow(ownerState, borrowerState, callback);
+    return cast null;
   }
 
   public static function withWgpuRenderTextures<T>(state:WgpuRenderState, pool:WgpuRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {

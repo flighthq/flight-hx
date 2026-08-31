@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebProtocol = api.enableHostWebProtocol;
-export const resetHostWebProtocolForTest = api.resetHostWebProtocolForTest;
+export const createWebProtocolCapabilities = api.createWebProtocolCapabilities;

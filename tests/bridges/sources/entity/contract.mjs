@@ -8,4 +8,5 @@ export * from './clone.mjs';
 export * from './enableEntityRuntimeGuards.mjs';
 export * from './entity.mjs';
 export * from './guards.mjs';
+export * from './host.mjs';
 export * from './runtime.mjs';

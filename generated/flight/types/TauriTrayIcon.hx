@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TauriTrayIcon = { var close:Void->flight._internal._Promise<flight._internal._Nothing>; var setIcon:Null<String>->flight._internal._Promise<flight._internal._Nothing>; var setMenu:Null<TauriMenu>->flight._internal._Promise<flight._internal._Nothing>; var setTitle:Null<String>->flight._internal._Promise<flight._internal._Nothing>; var setTooltip:Null<String>->flight._internal._Promise<flight._internal._Nothing>; };
+typedef TauriTrayIcon = { var close:Void->flight._internal._Promise<flight._internal._Nothing>; var setIcon:Null<String>->flight._internal._Promise<flight._internal._Nothing>; var setIconAsTemplate:Bool->flight._internal._Promise<flight._internal._Nothing>; var setMenu:Null<TauriMenu>->flight._internal._Promise<flight._internal._Nothing>; var setTitle:Null<String>->flight._internal._Promise<flight._internal._Nothing>; var setTooltip:Null<String>->flight._internal._Promise<flight._internal._Nothing>; };

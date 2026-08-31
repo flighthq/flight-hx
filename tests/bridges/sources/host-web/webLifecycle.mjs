@@ -5,5 +5,4 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebLifecycle = api.enableHostWebLifecycle;
-export const resetHostWebLifecycleForTest = api.resetHostWebLifecycleForTest;
+export const webLifecycleBackend = api.webLifecycleBackend;

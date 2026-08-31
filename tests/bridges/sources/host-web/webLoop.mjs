@@ -5,5 +5,5 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebLoop = api.enableHostWebLoop;
-export const resetHostWebLoopForTest = api.resetHostWebLoopForTest;
+export const webApplicationVisibilityBackend = api.webApplicationVisibilityBackend;
+export const webLoopBackend = api.webLoopBackend;

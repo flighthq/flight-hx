@@ -5,7 +5,6 @@ export const attachAppLifecycle = compiled.flight.Lifecycle.attachAppLifecycle;
 export const createAppLifecycle = compiled.flight.Lifecycle.createAppLifecycle;
 export const detachAppLifecycle = compiled.flight.Lifecycle.detachAppLifecycle;
 export const disposeAppLifecycle = compiled.flight.Lifecycle.disposeAppLifecycle;
-export const explainLifecycleBackend = compiled.flight.Lifecycle.explainLifecycleBackend;
 export const getAppLaunchKind = compiled.flight.Lifecycle.getAppLaunchKind;
 export const getAppLifecycleState = compiled.flight.Lifecycle.getAppLifecycleState;
 export const isAppActive = compiled.flight.Lifecycle.isAppActive;

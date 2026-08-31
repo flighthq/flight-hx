@@ -3,27 +3,185 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Dialog as Facade_HostWeb_flight__Dialog;
 import flight._HostWeb as Facade_HostWeb_flight__HostWeb;
+import flight._HostWeb.WebAppCapabilities__webApp;
+import flight._HostWeb.WebClipboardBackend__webClipboard;
+import flight._HostWeb.WebConnectivityBackend__webConnectivity;
+import flight._HostWeb.WebProtocolCapabilities__webProtocol;
+import flight._HostWeb.WebWindowBackend__webWindow;
+import flight.types.AccessibilityBackend;
+import flight.types.AppBadgeBackend;
+import flight.types.AppFocusBackend;
+import flight.types.AppLocaleBackend;
+import flight.types.AppNameBackend;
+import flight.types.AppQuitBackend;
+import flight.types.AppReadyBackend;
+import flight.types.AppRelaunchBackend;
+import flight.types.ApplicationExitBackend;
+import flight.types.ApplicationVisibilityBackend;
 import flight.types.BitmapReadbackBackend;
+import flight.types.CanvasRenderSurfaceCreator;
+import flight.types.ClipboardFormatsBackend;
+import flight.types.ClipboardImageBackend;
+import flight.types.ClipboardTextBackend;
+import flight.types.ConnectivityChangeBackend;
+import flight.types.ConnectivityReachabilityBackend;
+import flight.types.ConnectivityStatusBackend;
 import flight.types.CursorBackend;
+import flight.types.DeviceBackend;
+import flight.types.DirectoryOpenDialogBackend;
+import flight.types.DirectoryOpenDialogResult;
+import flight.types.Entity;
+import flight.types.EntityRuntime;
+import flight.types.FileOpenDialogBackend;
+import flight.types.FileOpenDialogResult;
+import flight.types.FileSaveDialogBackend;
+import flight.types.FileSaveDialogResult;
+import flight.types.FileSystemHostBackend;
 import flight.types.FontLoadingBackend;
+import flight.types.FullscreenBackend;
+import flight.types.FullscreenTargetHandle;
 import flight.types.GlRenderSurfaceProvider;
+import flight.types.HapticsBackend;
+import flight.types.HasAccessibilityProvider;
+import flight.types.HasClipboardChange;
+import flight.types.HasClipboardFormats;
+import flight.types.HasClipboardImage;
+import flight.types.HasClipboardText;
+import flight.types.HasConnectivityChange;
+import flight.types.HasConnectivityReachability;
+import flight.types.HasConnectivityStatus;
+import flight.types.HasDialogDirectoryOpen;
+import flight.types.HasDialogFileOpen;
+import flight.types.HasDialogFileSave;
+import flight.types.HasDialogMessage;
+import flight.types.HasDialogPrompt;
+import flight.types.HasGraphicsRenderContextSubscription;
+import flight.types.HasGraphicsRenderSurface;
+import flight.types.HasInputDropFileSubscription;
+import flight.types.HasInputFocusSubscription;
+import flight.types.HasInputHaptics;
+import flight.types.HasInputPointerLock;
+import flight.types.HasInputTargetPreparation;
+import flight.types.HasMenuHighlight;
+import flight.types.HasMenuPopup;
+import flight.types.HasShareContent;
+import flight.types.HasShareFiles;
+import flight.types.HasShellExternal;
+import flight.types.HasSoftKeyboardChange;
+import flight.types.HasSoftKeyboardInfo;
+import flight.types.HasSoftKeyboardVisibility;
+import flight.types.Host;
+import flight.types.HostAccessibilityCapabilities;
+import flight.types.HostClipboardCapabilities;
+import flight.types.HostConnectivityCapabilities;
+import flight.types.HostDialogCapabilities;
+import flight.types.HostGraphicsCapabilities;
+import flight.types.HostInputCapabilities;
+import flight.types.HostMenuCapabilities;
+import flight.types.HostScreenCapabilities;
+import flight.types.HostShareCapabilities;
+import flight.types.HostShellCapabilities;
+import flight.types.InputDropFileBackend;
+import flight.types.InputFocusBackend;
+import flight.types.InputPointerLockBackend;
+import flight.types.InputPointerLockExitOutcome;
+import flight.types.InputPointerLockRequestOutcome;
+import flight.types.InputTargetBackend;
+import flight.types.InputTargetHandle;
+import flight.types.LifecycleBackend;
+import flight.types.LoopBackend;
+import flight.types.MediaSessionActionBackend;
+import flight.types.MediaSessionBackend;
+import flight.types.MenuHighlightBackend;
+import flight.types.MenuPopupBackend;
+import flight.types.MessageDialogBackend;
+import flight.types.NetBackend;
+import flight.types.OpenFileDialogOptions;
+import flight.types.PlatformBackend;
+import flight.types.PowerChangeBackend;
+import flight.types.PowerKeepAwakeBackend;
+import flight.types.PowerStatusBackend;
+import flight.types.PowerSuspensionBackend;
+import flight.types.PromptDialogBackend;
 import flight.types.Raster2DSurfaceProvider;
+import flight.types.RenderContextBackend;
+import flight.types.RenderSurfaceBackend;
+import flight.types.SaveFileDialogOptions;
+import flight.types.SensorsBackend;
+import flight.types.ShareContentBackend;
+import flight.types.ShareFilesBackend;
+import flight.types.ShellExternalBackend;
+import flight.types.SocketBackend;
+import flight.types.SoftKeyboardChangeBackend;
+import flight.types.SoftKeyboardInfoBackend;
+import flight.types.SoftKeyboardVisibilityBackend;
+import flight.types.StatusBarColorBackend;
+import flight.types.StorageChange;
+import flight.types.StorageClearFailureReason;
+import flight.types.StorageGetItemFailureReason;
+import flight.types.StoragePersistenceQueryBackend;
+import flight.types.StoragePersistenceRequestBackend;
+import flight.types.StorageRemoveItemFailureReason;
+import flight.types.StorageSetItemFailureReason;
+import flight.types.WebMidiAccessCapabilities;
+import flight.types.WebMidiPermissionAccessCapabilities;
+import flight.types.WebPageNotificationApi;
+import flight.types.WebPageNotificationCapabilities;
+import flight.types.WebServiceWorkerNotificationApi;
+import flight.types.WebServiceWorkerNotificationCapabilities;
+import flight.types.WebServiceWorkerNotificationEvent;
+import flight.types.WebWindowStoragePersistenceApi;
+import flight.types.WebWindowStoragePersistenceCapabilities;
+import flight.types.WebWorkerStoragePersistenceApi;
+import flight.types.WebWorkerStoragePersistenceCapabilities;
 import flight.types.WgpuRenderSurfaceProvider;
+import flight.types.WindowResizeTargetHandle;
 
 class HostWeb {
-  public static function createWebBitmapReadbackBackend():BitmapReadbackBackend {
+  public static function createWebAccessibilityBackend(?container:flight._internal.dom.HTMLElement):AccessibilityBackend {
+    return cast Facade_HostWeb_flight__HostWeb.createWebAccessibilityBackend(container);
+    return cast null;
+  }
+
+  public static function createWebAppCapabilities():WebAppCapabilities__webApp {
+    return cast Facade_HostWeb_flight__HostWeb.createWebAppCapabilities();
+    return cast null;
+  }
+
+  public static function createWebBitmapReadbackBackend():{ >BitmapReadbackBackend, >Entity, } {
     return cast Facade_HostWeb_flight__HostWeb.createWebBitmapReadbackBackend();
     return cast null;
   }
 
-  public static function createWebCursorBackend(element:flight._internal.dom.HTMLElement):CursorBackend {
+  public static function createWebCanvasRenderSurfaceCreator():CanvasRenderSurfaceCreator {
+    return cast Facade_HostWeb_flight__HostWeb.createWebCanvasRenderSurfaceCreator();
+    return cast null;
+  }
+
+  public static function createWebConnectivityBackend():WebConnectivityBackend__webConnectivity {
+    return cast Facade_HostWeb_flight__HostWeb.createWebConnectivityBackend();
+    return cast null;
+  }
+
+  public static function createWebCursorBackend(element:flight._internal.dom.HTMLElement):{ >CursorBackend, >Entity, } {
     return cast Facade_HostWeb_flight__HostWeb.createWebCursorBackend(element);
     return cast null;
   }
 
-  public static function createWebFontLoadingBackend():FontLoadingBackend {
+  public static function createWebDeviceBackend():DeviceBackend {
+    return cast Facade_HostWeb_flight__HostWeb.createWebDeviceBackend();
+    return cast null;
+  }
+
+  public static function createWebFontLoadingBackend():{ >FontLoadingBackend, >Entity, } {
     return cast Facade_HostWeb_flight__HostWeb.createWebFontLoadingBackend();
+    return cast null;
+  }
+
+  public static function createWebFullscreenTargetHandle(element:flight._internal.dom.Element):FullscreenTargetHandle {
+    return cast Facade_HostWeb_flight__HostWeb.createWebFullscreenTargetHandle(element);
     return cast null;
   }
 
@@ -32,8 +190,78 @@ class HostWeb {
     return cast null;
   }
 
+  public static function createWebInputTargetHandle(element:flight._internal.dom.HTMLElement):InputTargetHandle {
+    return cast Facade_HostWeb_flight__HostWeb.createWebInputTargetHandle(element);
+    return cast null;
+  }
+
+  public static function createWebMediaSessionActionBackend():MediaSessionActionBackend {
+    return cast Facade_HostWeb_flight__HostWeb.createWebMediaSessionActionBackend();
+    return cast null;
+  }
+
+  public static function createWebMediaSessionBackend():MediaSessionBackend {
+    return cast Facade_HostWeb_flight__HostWeb.createWebMediaSessionBackend();
+    return cast null;
+  }
+
+  public static function createWebMidiAccessCapabilities(api:flight._internal._Pick<flight._internal.dom.Navigator, String>):WebMidiAccessCapabilities {
+    return cast Facade_HostWeb_flight__HostWeb.createWebMidiAccessCapabilities(api);
+    return cast null;
+  }
+
+  public static function createWebMidiPermissionAccessCapabilities(api:flight._internal._Pick<flight._internal.dom.Navigator, String>):WebMidiPermissionAccessCapabilities {
+    return cast Facade_HostWeb_flight__HostWeb.createWebMidiPermissionAccessCapabilities(api);
+    return cast null;
+  }
+
+  public static function createWebNetBackend():NetBackend {
+    return cast Facade_HostWeb_flight__HostWeb.createWebNetBackend();
+    return cast null;
+  }
+
+  public static function createWebPageNotificationCapabilities(api:WebPageNotificationApi):WebPageNotificationCapabilities {
+    return cast Facade_HostWeb_flight__HostWeb.createWebPageNotificationCapabilities(api);
+    return cast null;
+  }
+
+  public static function createWebPlatformBackend():PlatformBackend {
+    return cast Facade_HostWeb_flight__HostWeb.createWebPlatformBackend();
+    return cast null;
+  }
+
+  public static function createWebProtocolCapabilities():WebProtocolCapabilities__webProtocol {
+    return cast Facade_HostWeb_flight__HostWeb.createWebProtocolCapabilities();
+    return cast null;
+  }
+
   public static function createWebRaster2DSurfaceProvider():Raster2DSurfaceProvider {
     return cast Facade_HostWeb_flight__HostWeb.createWebRaster2DSurfaceProvider();
+    return cast null;
+  }
+
+  public static function createWebScreenCapabilities():flight._internal._Required<HostScreenCapabilities> {
+    return cast Facade_HostWeb_flight__HostWeb.createWebScreenCapabilities();
+    return cast null;
+  }
+
+  public static function createWebServiceWorkerNotificationCapabilities(api:WebServiceWorkerNotificationApi):WebServiceWorkerNotificationCapabilities {
+    return cast Facade_HostWeb_flight__HostWeb.createWebServiceWorkerNotificationCapabilities(api);
+    return cast null;
+  }
+
+  public static function createWebSoftKeyboardChangeBackend():{ >SoftKeyboardChangeBackend, >Entity, } {
+    return cast Facade_HostWeb_flight__HostWeb.createWebSoftKeyboardChangeBackend();
+    return cast null;
+  }
+
+  public static function createWebSoftKeyboardInfoBackend():{ >SoftKeyboardInfoBackend, >Entity, } {
+    return cast Facade_HostWeb_flight__HostWeb.createWebSoftKeyboardInfoBackend();
+    return cast null;
+  }
+
+  public static function createWebSoftKeyboardVisibilityBackend():{ >SoftKeyboardVisibilityBackend, >Entity, } {
+    return cast Facade_HostWeb_flight__HostWeb.createWebSoftKeyboardVisibilityBackend();
     return cast null;
   }
 
@@ -42,16 +270,23 @@ class HostWeb {
     return cast null;
   }
 
+  public static function createWebWindowResizeTargetHandle(element:flight._internal.dom.Element):WindowResizeTargetHandle {
+    return cast Facade_HostWeb_flight__HostWeb.createWebWindowResizeTargetHandle(element);
+    return cast null;
+  }
+
+  public static function createWebWindowStoragePersistenceCapabilities(api:WebWindowStoragePersistenceApi):WebWindowStoragePersistenceCapabilities {
+    return cast Facade_HostWeb_flight__HostWeb.createWebWindowStoragePersistenceCapabilities(api);
+    return cast null;
+  }
+
+  public static function createWebWorkerStoragePersistenceCapabilities(api:WebWorkerStoragePersistenceApi):WebWorkerStoragePersistenceCapabilities {
+    return cast Facade_HostWeb_flight__HostWeb.createWebWorkerStoragePersistenceCapabilities(api);
+    return cast null;
+  }
+
   public static function enableHostWeb():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWeb();
-  }
-
-  public static function enableHostWebAccessibility():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebAccessibility();
-  }
-
-  public static function enableHostWebApp():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebApp();
   }
 
   public static function enableHostWebAudio():Void {
@@ -70,26 +305,6 @@ class HostWeb {
     Facade_HostWeb_flight__HostWeb.enableHostWebBitmapReadback();
   }
 
-  public static function enableHostWebClipboard():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebClipboard();
-  }
-
-  public static function enableHostWebConnectivity():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebConnectivity();
-  }
-
-  public static function enableHostWebDevice():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebDevice();
-  }
-
-  public static function enableHostWebDialog():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebDialog();
-  }
-
-  public static function enableHostWebFileSystem():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebFileSystem();
-  }
-
   public static function enableHostWebFontLoading():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWebFontLoading();
   }
@@ -106,95 +321,146 @@ class HostWeb {
     Facade_HostWeb_flight__HostWeb.enableHostWebGlyphRasterizer();
   }
 
-  public static function enableHostWebHaptics():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebHaptics();
-  }
-
   public static function enableHostWebImage():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWebImage();
   }
 
-  public static function enableHostWebLifecycle():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebLifecycle();
-  }
-
-  public static function enableHostWebLoop():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebLoop();
-  }
-
-  public static function enableHostWebMediaSession():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebMediaSession();
-  }
-
-  public static function enableHostWebMenu():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebMenu();
-  }
-
-  public static function enableHostWebNotification():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebNotification();
-  }
-
-  public static function enableHostWebPermission():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebPermission();
-  }
-
-  public static function enableHostWebPlatform():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebPlatform();
-  }
-
-  public static function enableHostWebPower():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebPower();
-  }
-
-  public static function enableHostWebProtocol():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebProtocol();
+  public static function enableHostWebMediaFileCapture():Void {
+    Facade_HostWeb_flight__HostWeb.enableHostWebMediaFileCapture();
   }
 
   public static function enableHostWebRaster2DSurface():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWebRaster2DSurface();
   }
 
-  public static function enableHostWebScreen():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebScreen();
-  }
-
-  public static function enableHostWebSensors():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebSensors();
-  }
-
-  public static function enableHostWebShare():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebShare();
-  }
-
-  public static function enableHostWebShell():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebShell();
-  }
-
-  public static function enableHostWebSoftKeyboard():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebSoftKeyboard();
-  }
-
-  public static function enableHostWebStatusBar():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebStatusBar();
-  }
-
-  public static function enableHostWebStorage():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebStorage();
-  }
-
   public static function enableHostWebVideoCapability():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWebVideoCapability();
-  }
-
-  public static function enableHostWebWebcam():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebWebcam();
   }
 
   public static function enableHostWebWgpuRenderSurface():Void {
     Facade_HostWeb_flight__HostWeb.enableHostWebWgpuRenderSurface();
   }
 
-  public static function enableHostWebWindow():Void {
-    Facade_HostWeb_flight__HostWeb.enableHostWebWindow();
+  public static function enableWebSafeAreaInsets():Void->Void {
+    return cast Facade_HostWeb_flight__HostWeb.enableWebSafeAreaInsets();
+    return cast null;
   }
+
+  public static function notifyWebServiceWorkerNotificationEvent(capabilities:WebServiceWorkerNotificationCapabilities, event:WebServiceWorkerNotificationEvent):Void {
+    Facade_HostWeb_flight__HostWeb.notifyWebServiceWorkerNotificationEvent(capabilities, event);
+  }
+
+  public static final webAccessibilityBackend:AccessibilityBackend = Facade_HostWeb_flight__HostWeb.webAccessibilityBackend;
+
+  public static final webAccessibilityHost:{ >Host, >HasAccessibilityProvider, } = Facade_HostWeb_flight__HostWeb.webAccessibilityHost;
+
+  public static final webAppHost:{ >Host, var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; } = Facade_HostWeb_flight__HostWeb.webAppHost;
+
+  public static final webApplicationExitBackend:ApplicationExitBackend = Facade_HostWeb_flight__HostWeb.webApplicationExitBackend;
+
+  public static final webApplicationVisibilityBackend:ApplicationVisibilityBackend = Facade_HostWeb_flight__HostWeb.webApplicationVisibilityBackend;
+
+  public static final webCanvasRenderSurfaceCreator:CanvasRenderSurfaceCreator = Facade_HostWeb_flight__HostWeb.webCanvasRenderSurfaceCreator;
+
+  public static final webClipboardBackend:WebClipboardBackend__webClipboard = Facade_HostWeb_flight__HostWeb.webClipboardBackend;
+
+  public static final webClipboardHost:{ >Host, >HasClipboardChange, >HasClipboardFormats, >HasClipboardImage, >HasClipboardText, } = Facade_HostWeb_flight__HostWeb.webClipboardHost;
+
+  public static final webConnectivityBackend:WebConnectivityBackend__webConnectivity = Facade_HostWeb_flight__HostWeb.webConnectivityBackend;
+
+  public static final webConnectivityHost:{ >Host, >HasConnectivityChange, >HasConnectivityReachability, >HasConnectivityStatus, } = Facade_HostWeb_flight__HostWeb.webConnectivityHost;
+
+  public static final webDeviceBackend:DeviceBackend = Facade_HostWeb_flight__HostWeb.webDeviceBackend;
+
+  public static final webDialogHost:{ >Host, >HasDialogDirectoryOpen, >HasDialogFileOpen, >HasDialogFileSave, >HasDialogMessage, >HasDialogPrompt, } = Facade_HostWeb_flight__HostWeb.webDialogHost;
+
+  public static final webDirectoryOpenDialogBackend:{ >Entity, var open:Void->flight._internal._Promise<DirectoryOpenDialogResult>; } = Facade_HostWeb_flight__HostWeb.webDirectoryOpenDialogBackend;
+
+  public static final webFileOpenDialogBackend:{ >Entity, var open:OpenFileDialogOptions->flight._internal._Promise<FileOpenDialogResult>; } = Facade_HostWeb_flight__HostWeb.webFileOpenDialogBackend;
+
+  public static final webFileSaveDialogBackend:{ >Entity, var save:SaveFileDialogOptions->flight._internal._Promise<FileSaveDialogResult>; } = Facade_HostWeb_flight__HostWeb.webFileSaveDialogBackend;
+
+  public static final webFileSystemBackend:FileSystemHostBackend = Facade_HostWeb_flight__HostWeb.webFileSystemBackend;
+
+  public static final webFullscreenBackend:flight._internal._Intersection2<FullscreenBackend, flight._internal._Required<{ @:optional var subscribe:Null<(Bool->Void)->Void>; @:optional var unsubscribe:Null<(Bool->Void)->Void>; }>> = Facade_HostWeb_flight__HostWeb.webFullscreenBackend;
+
+  public static final webGraphicsHost:{ >Host, >HasGraphicsRenderContextSubscription, >HasGraphicsRenderSurface, } = Facade_HostWeb_flight__HostWeb.webGraphicsHost;
+
+  public static final webHapticsBackend:HapticsBackend = Facade_HostWeb_flight__HostWeb.webHapticsBackend;
+
+  public static final webHost:{ >Host, var accessibility:{ >HostAccessibilityCapabilities, var provider:AccessibilityBackend; }; var app:{ var exit:ApplicationExitBackend; var loop:LoopBackend; var visibility:ApplicationVisibilityBackend; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var name:AppNameBackend; var ready:AppReadyBackend; var focus:AppFocusBackend; var badge:AppBadgeBackend; var quit:AppQuitBackend; var locale:AppLocaleBackend; var relaunch:AppRelaunchBackend; }; var clipboard:{ >HostClipboardCapabilities, var change:flight._internal._Any; var formats:ClipboardFormatsBackend; var image:ClipboardImageBackend; var text:ClipboardTextBackend; }; var connectivity:{ >HostConnectivityCapabilities, var change:ConnectivityChangeBackend; var reachability:ConnectivityReachabilityBackend; var status:ConnectivityStatusBackend; }; var dialog:{ >HostDialogCapabilities, var directoryOpen:DirectoryOpenDialogBackend; var fileOpen:FileOpenDialogBackend; var fileSave:FileSaveDialogBackend; var message:MessageDialogBackend; var prompt:PromptDialogBackend; }; var graphics:{ >HostGraphicsCapabilities, var renderContext:RenderContextBackend; var renderSurface:RenderSurfaceBackend; }; var input:{ >HostInputCapabilities, var dropFile:InputDropFileBackend; var focus:InputFocusBackend; var haptics:HapticsBackend; var pointerLock:InputPointerLockBackend; var target:InputTargetBackend; var softKeyboardChange:SoftKeyboardChangeBackend; var softKeyboardInfo:SoftKeyboardInfoBackend; var softKeyboardVisibility:SoftKeyboardVisibilityBackend; }; var ipc:{  }; var media:{ var session:MediaSessionBackend; var sessionAction:MediaSessionActionBackend; }; var menu:{ >HostMenuCapabilities, var highlight:MenuHighlightBackend; var popup:MenuPopupBackend; }; var midi:{  }; var net:{ var http:NetBackend; var socket:SocketBackend; }; var power:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; }; var protocol:WebProtocolCapabilities__webProtocol; var notification:{  }; var screen:flight._internal._Any; var share:{ >HostShareCapabilities, var content:ShareContentBackend; var files:ShareFilesBackend; }; var shell:{ >HostShellCapabilities, var external:ShellExternalBackend; }; var shortcut:{  }; var storage:{ var change:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var fileSystem:FileSystemHostBackend; var local:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var persistenceQuery:StoragePersistenceQueryBackend; var persistenceRequest:StoragePersistenceRequestBackend; }; var system:{ var device:DeviceBackend; var lifecycle:LifecycleBackend; var platform:PlatformBackend; var sensors:SensorsBackend; }; var text:{  }; var tray:{  }; var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; var updater:{  }; var window:WebWindowBackend__webWindow; } = Facade_HostWeb_flight__HostWeb.webHost;
+
+  public static final webHostNet:{ >Host, var net:{ var http:NetBackend; var socket:SocketBackend; }; } = Facade_HostWeb_flight__HostWeb.webHostNet;
+
+  public static final webInputDropFileBackend:{ >Entity, var subscribe:InputTargetHandle->(String->Void)->(Void->Void); } = Facade_HostWeb_flight__HostWeb.webInputDropFileBackend;
+
+  public static final webInputFocusBackend:{ >Entity, var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); } = Facade_HostWeb_flight__HostWeb.webInputFocusBackend;
+
+  public static final webInputHost:{ >Host, >HasInputDropFileSubscription, >HasInputFocusSubscription, >HasInputHaptics, >HasInputPointerLock, >HasInputTargetPreparation, >HasSoftKeyboardChange, >HasSoftKeyboardInfo, >HasSoftKeyboardVisibility, } = Facade_HostWeb_flight__HostWeb.webInputHost;
+
+  public static final webInputPointerLockBackend:{ >Entity, var exit:Void->flight._internal._Promise<InputPointerLockExitOutcome>; var request:InputTargetHandle->flight._internal._Promise<InputPointerLockRequestOutcome>; } = Facade_HostWeb_flight__HostWeb.webInputPointerLockBackend;
+
+  public static final webInputTargetBackend:{ >Entity, var prepare:InputTargetHandle->Void; } = Facade_HostWeb_flight__HostWeb.webInputTargetBackend;
+
+  public static final webLoopBackend:LoopBackend = Facade_HostWeb_flight__HostWeb.webLoopBackend;
+
+  public static final webMediaHost:{ >Host, var media:{ var session:MediaSessionBackend; var sessionAction:MediaSessionActionBackend; }; } = Facade_HostWeb_flight__HostWeb.webMediaHost;
+
+  public static final webMediaSessionActionBackend:MediaSessionActionBackend = Facade_HostWeb_flight__HostWeb.webMediaSessionActionBackend;
+
+  public static final webMediaSessionBackend:MediaSessionBackend = Facade_HostWeb_flight__HostWeb.webMediaSessionBackend;
+
+  public static final webMenuHighlightBackend:MenuHighlightBackend = Facade_HostWeb_flight__HostWeb.webMenuHighlightBackend;
+
+  public static final webMenuHost:{ >Host, >HasMenuHighlight, >HasMenuPopup, } = Facade_HostWeb_flight__HostWeb.webMenuHost;
+
+  public static final webMenuPopupBackend:MenuPopupBackend = Facade_HostWeb_flight__HostWeb.webMenuPopupBackend;
+
+  public static final webMessageDialogBackend:MessageDialogBackend = Facade_HostWeb_flight__Dialog.webMessageDialogBackend;
+
+  public static final webNetBackend:NetBackend = Facade_HostWeb_flight__HostWeb.webNetBackend;
+
+  public static final webPlatformBackend:PlatformBackend = Facade_HostWeb_flight__HostWeb.webPlatformBackend;
+
+  public static final webPowerCapabilities:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; } = Facade_HostWeb_flight__HostWeb.webPowerCapabilities;
+
+  public static final webPowerHost:{ >Host, var power:{ >Entity, var keepAwake:PowerKeepAwakeBackend; var suspension:PowerSuspensionBackend; var change:PowerChangeBackend; var status:PowerStatusBackend; }; } = Facade_HostWeb_flight__HostWeb.webPowerHost;
+
+  public static final webPromptDialogBackend:PromptDialogBackend = Facade_HostWeb_flight__Dialog.webPromptDialogBackend;
+
+  public static final webProtocolHost:{ >Host, var protocol:WebProtocolCapabilities__webProtocol; } = Facade_HostWeb_flight__HostWeb.webProtocolHost;
+
+  public static final webRenderContextBackend:{ >Entity, var subscribe:InputTargetHandle->(Void->Void)->(Void->Void)->(Void->Void); } = Facade_HostWeb_flight__HostWeb.webRenderContextBackend;
+
+  public static final webRenderSurfaceBackend:{ >Entity, var resize:InputTargetHandle->Float->Float->Void; } = Facade_HostWeb_flight__HostWeb.webRenderSurfaceBackend;
+
+  public static final webScreenCapabilities:flight._internal._Any = Facade_HostWeb_flight__HostWeb.webScreenCapabilities;
+
+  public static final webScreenHost:{ >Host, var screen:flight._internal._Any; } = Facade_HostWeb_flight__HostWeb.webScreenHost;
+
+  public static final webShareContentBackend:ShareContentBackend = Facade_HostWeb_flight__HostWeb.webShareContentBackend;
+
+  public static final webShareFilesBackend:ShareFilesBackend = Facade_HostWeb_flight__HostWeb.webShareFilesBackend;
+
+  public static final webShareHost:{ >Host, >HasShareContent, >HasShareFiles, } = Facade_HostWeb_flight__HostWeb.webShareHost;
+
+  public static final webShellExternalBackend:ShellExternalBackend = Facade_HostWeb_flight__HostWeb.webShellExternalBackend;
+
+  public static final webShellHost:{ >Host, >HasShellExternal, } = Facade_HostWeb_flight__HostWeb.webShellHost;
+
+  public static final webSocketBackend:SocketBackend = Facade_HostWeb_flight__HostWeb.webSocketBackend;
+
+  public static final webStatusBarColorBackend:StatusBarColorBackend = Facade_HostWeb_flight__HostWeb.webStatusBarColorBackend;
+
+  public static final webStorageBackend:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; } = Facade_HostWeb_flight__HostWeb.webStorageBackend;
+
+  public static final webStorageHost:{ >Host, var storage:{ var change:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var fileSystem:FileSystemHostBackend; var local:{ >Entity, var clear:Void->flight._internal._Union2<{ var reason:String; }, { var reason:StorageClearFailureReason; }>; var destroy:Void->Void; var getItem:String->flight._internal._Union2<{ var reason:String; var value:Null<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var keys:Void->flight._internal._Union2<{ var reason:String; var value:Array<String>; }, { var reason:StorageGetItemFailureReason; var value:flight._internal._Any; }>; var removeItem:String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageRemoveItemFailureReason; }>; var setItem:String->String->flight._internal._Union2<{ var reason:String; }, { var reason:StorageSetItemFailureReason; }>; var subscribe:(StorageChange->Void)->Null<Void->Void>; }; var persistenceQuery:StoragePersistenceQueryBackend; var persistenceRequest:StoragePersistenceRequestBackend; }; } = Facade_HostWeb_flight__HostWeb.webStorageHost;
+
+  public static final webSystemHost:{ >Host, var system:{ var device:DeviceBackend; var lifecycle:LifecycleBackend; var platform:PlatformBackend; var sensors:SensorsBackend; }; } = Facade_HostWeb_flight__HostWeb.webSystemHost;
+
+  public static final webUiHost:{ >Host, var ui:{ var fullscreen:FullscreenBackend; var statusBarColor:StatusBarColorBackend; }; } = Facade_HostWeb_flight__HostWeb.webUiHost;
+
+  public static final webWindowBackend:WebWindowBackend__webWindow = Facade_HostWeb_flight__HostWeb.webWindowBackend;
+
+  public static final webWindowHost:{ >Host, var window:WebWindowBackend__webWindow; } = Facade_HostWeb_flight__HostWeb.webWindowHost;
 }

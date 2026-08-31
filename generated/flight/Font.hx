@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Font as Facade_Font_flight__Font;
+import flight.types.Entity;
 import flight.types.Font;
 import flight.types.FontResource;
 import flight.types.FontUrl;
@@ -21,7 +22,7 @@ class Font {
     return cast null;
   }
 
-  public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:GlyphOutlineSource):GlyphRasterizerBackend {
+  public static function createGlyphRasterizerBackendFromGlyphOutlineSource(source:GlyphOutlineSource):{ >GlyphRasterizerBackend, >Entity, } {
     return cast Facade_Font_flight__Font.createGlyphRasterizerBackendFromGlyphOutlineSource(source);
     return cast null;
   }

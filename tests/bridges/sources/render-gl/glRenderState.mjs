@@ -5,12 +5,15 @@ const api = compiled.flight._RenderGl;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const copyGlRenderStateRegistrations = api.copyGlRenderStateRegistrations;
+export const createGlContextState = api.createGlContextState;
 export const createGlOffscreenRenderState = api.createGlOffscreenRenderState;
 export const createGlRenderState = api.createGlRenderState;
 export const createGlRenderStateRuntime = api.createGlRenderStateRuntime;
 export const destroyGlRenderState = api.destroyGlRenderState;
 export const getGlColorAdjustmentMaterialFeature = api.getGlColorAdjustmentMaterialFeature;
 export const getGlColorAdjustmentMaterialFeatureGuard = api.getGlColorAdjustmentMaterialFeatureGuard;
+export const getGlContextRuntime = api.getGlContextRuntime;
 export const getGlRenderStateRuntime = api.getGlRenderStateRuntime;
 export const invalidateGlRenderStateCache = api.invalidateGlRenderStateCache;
+export const registerGlContextTeardown = api.registerGlContextTeardown;
+export const registerGlRenderStateTeardown = api.registerGlRenderStateTeardown;

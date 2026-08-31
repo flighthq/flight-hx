@@ -4,118 +4,187 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Notification as Facade_Notification_flight__Notification;
-import flight.types.BackendExplanation;
-import flight.types.NotificationAction;
-import flight.types.NotificationCapabilities;
-import flight.types.NotificationChannel;
-import flight.types.NotificationPermission;
+import flight.types.HasNotificationAction;
+import flight.types.HasNotificationActiveList;
+import flight.types.HasNotificationClick;
+import flight.types.HasNotificationClose;
+import flight.types.HasNotificationDelivery;
+import flight.types.HasNotificationDismiss;
+import flight.types.HasNotificationLifecycle;
+import flight.types.HasNotificationPermission;
+import flight.types.HasNotificationReceived;
+import flight.types.HasNotificationReply;
+import flight.types.HasNotificationScheduling;
+import flight.types.Notification;
+import flight.types.NotificationActionSubscription;
+import flight.types.NotificationActiveListOutcome;
+import flight.types.NotificationCancelOutcome;
+import flight.types.NotificationClickSubscription;
+import flight.types.NotificationCloseOutcome;
+import flight.types.NotificationDeliveryOutcome;
+import flight.types.NotificationDismissSubscription;
+import flight.types.NotificationLifecycleOutcome;
+import flight.types.NotificationPendingListOutcome;
+import flight.types.NotificationPermissionQueryOutcome;
+import flight.types.NotificationPermissionRequestOutcome;
+import flight.types.NotificationReceivedSubscription;
+import flight.types.NotificationReplySubscription;
 import flight.types.NotificationRequest;
 import flight.types.NotificationSchedule;
+import flight.types.NotificationScheduleOutcome;
+import flight.types.NotificationSubscriptionAttachOutcome;
+import flight.types.NotificationSubscriptionDetachOutcome;
+import flight.types.NotificationSubscriptionDisposeOutcome;
 import flight.types.ScheduledNotification;
 
 class Notification {
-  public static function cancelScheduledNotification(id:String):Void {
-    Facade_Notification_flight__Notification.cancelScheduledNotification(id);
-  }
-
-  public static function closeAllNotifications():Void {
-    Facade_Notification_flight__Notification.closeAllNotifications();
-  }
-
-  public static function closeNotification(id:String):Void {
-    Facade_Notification_flight__Notification.closeNotification(id);
-  }
-
-  public static function createNotificationChannel(channel:NotificationChannel):Void {
-    Facade_Notification_flight__Notification.createNotificationChannel(channel);
-  }
-
-  public static function deleteNotificationChannel(id:String):Void {
-    Facade_Notification_flight__Notification.deleteNotificationChannel(id);
-  }
-
-  public static function explainNotificationBackend():BackendExplanation {
-    return cast Facade_Notification_flight__Notification.explainNotificationBackend();
+  public static function attachNotificationActionSubscription(host:HasNotificationAction, subscription:NotificationActionSubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
+    return cast Facade_Notification_flight__Notification.attachNotificationActionSubscription(host, subscription);
     return cast null;
   }
 
-  public static function getActiveNotifications():flight._internal._Promise<Array<NotificationRequest>> {
-    return cast Facade_Notification_flight__Notification.getActiveNotifications();
+  public static function attachNotificationClickSubscription(host:HasNotificationClick, subscription:NotificationClickSubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
+    return cast Facade_Notification_flight__Notification.attachNotificationClickSubscription(host, subscription);
     return cast null;
   }
 
-  public static function getLaunchNotification():flight._internal._Promise<Null<NotificationRequest>> {
-    return cast Facade_Notification_flight__Notification.getLaunchNotification();
+  public static function attachNotificationDismissSubscription(host:HasNotificationDismiss, subscription:NotificationDismissSubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
+    return cast Facade_Notification_flight__Notification.attachNotificationDismissSubscription(host, subscription);
     return cast null;
   }
 
-  public static function getNotificationCapabilities():NotificationCapabilities {
-    return cast Facade_Notification_flight__Notification.getNotificationCapabilities();
+  public static function attachNotificationReceivedSubscription(host:HasNotificationReceived, subscription:NotificationReceivedSubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
+    return cast Facade_Notification_flight__Notification.attachNotificationReceivedSubscription(host, subscription);
     return cast null;
   }
 
-  public static function getNotificationChannels():Array<NotificationChannel> {
-    return cast Facade_Notification_flight__Notification.getNotificationChannels();
+  public static function attachNotificationReplySubscription(host:HasNotificationReply, subscription:NotificationReplySubscription):flight._internal._Promise<NotificationSubscriptionAttachOutcome> {
+    return cast Facade_Notification_flight__Notification.attachNotificationReplySubscription(host, subscription);
     return cast null;
   }
 
-  public static function getNotificationPermission():NotificationPermission {
-    return cast Facade_Notification_flight__Notification.getNotificationPermission();
+  public static function cancelScheduledNotification(scheduled:ScheduledNotification):flight._internal._Promise<NotificationCancelOutcome> {
+    return cast Facade_Notification_flight__Notification.cancelScheduledNotification(scheduled);
     return cast null;
   }
 
-  public static function getPendingNotifications():flight._internal._Promise<Array<ScheduledNotification>> {
-    return cast Facade_Notification_flight__Notification.getPendingNotifications();
+  public static function closeAllNotifications(host:HasNotificationClose):flight._internal._Promise<NotificationLifecycleOutcome> {
+    return cast Facade_Notification_flight__Notification.closeAllNotifications(host);
     return cast null;
   }
 
-  public static function isNotificationSupported():Bool {
-    return cast Facade_Notification_flight__Notification.isNotificationSupported();
+  public static function closeNotification(notification:flight.types.Notification):flight._internal._Promise<NotificationCloseOutcome> {
+    return cast Facade_Notification_flight__Notification.closeNotification(notification);
     return cast null;
   }
 
-  public static function onNotificationAction(listener:String->String->Void):Void->Void {
-    return cast Facade_Notification_flight__Notification.onNotificationAction(listener);
+  public static function createNotificationActionSubscription():NotificationActionSubscription {
+    return cast Facade_Notification_flight__Notification.createNotificationActionSubscription();
     return cast null;
   }
 
-  public static function onNotificationClick(listener:String->Void):Void->Void {
-    return cast Facade_Notification_flight__Notification.onNotificationClick(listener);
+  public static function createNotificationClickSubscription():NotificationClickSubscription {
+    return cast Facade_Notification_flight__Notification.createNotificationClickSubscription();
     return cast null;
   }
 
-  public static function onNotificationDismiss(listener:String->Void):Void->Void {
-    return cast Facade_Notification_flight__Notification.onNotificationDismiss(listener);
+  public static function createNotificationDismissSubscription():NotificationDismissSubscription {
+    return cast Facade_Notification_flight__Notification.createNotificationDismissSubscription();
     return cast null;
   }
 
-  public static function onNotificationReply(listener:String->String->String->Void):Void->Void {
-    return cast Facade_Notification_flight__Notification.onNotificationReply(listener);
+  public static function createNotificationReceivedSubscription():NotificationReceivedSubscription {
+    return cast Facade_Notification_flight__Notification.createNotificationReceivedSubscription();
     return cast null;
   }
 
-  public static function onNotificationShow(listener:String->Void):Void->Void {
-    return cast Facade_Notification_flight__Notification.onNotificationShow(listener);
+  public static function createNotificationReplySubscription():NotificationReplySubscription {
+    return cast Facade_Notification_flight__Notification.createNotificationReplySubscription();
     return cast null;
   }
 
-  public static function requestNotificationPermission():flight._internal._Promise<NotificationPermission> {
-    return cast Facade_Notification_flight__Notification.requestNotificationPermission();
+  public static function destroyNotificationCapabilities(host:HasNotificationLifecycle):flight._internal._Promise<NotificationLifecycleOutcome> {
+    return cast Facade_Notification_flight__Notification.destroyNotificationCapabilities(host);
     return cast null;
   }
 
-  public static function scheduleNotification(request:NotificationRequest, schedule:NotificationSchedule):flight._internal._Promise<String> {
-    return cast Facade_Notification_flight__Notification.scheduleNotification(request, schedule);
+  public static function detachNotificationActionSubscription(subscription:NotificationActionSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast Facade_Notification_flight__Notification.detachNotificationActionSubscription(subscription);
     return cast null;
   }
 
-  public static function showNotification(request:NotificationRequest):flight._internal._Promise<String> {
-    return cast Facade_Notification_flight__Notification.showNotification(request);
+  public static function detachNotificationClickSubscription(subscription:NotificationClickSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast Facade_Notification_flight__Notification.detachNotificationClickSubscription(subscription);
     return cast null;
   }
 
-  public static function updateNotification(id:String, partial:{ @:optional var title:Null<String>; @:optional var id:Null<String>; @:optional var body:Null<String>; @:optional var icon:Null<String>; @:optional var badge:Null<String>; @:optional var tag:Null<String>; @:optional var silent:Null<Bool>; @:optional var actions:Null<Array<NotificationAction>>; @:optional var dir:Null<String>; @:optional var image:Null<String>; @:optional var lang:Null<String>; @:optional var renotify:Null<Bool>; @:optional var requireInteraction:Null<Bool>; @:optional var timestamp:Null<Float>; @:optional var vibrate:Null<Array<Float>>; @:optional var data:flight._internal._Any; }):flight._internal._Promise<Bool> {
-    return cast Facade_Notification_flight__Notification.updateNotification(id, partial);
+  public static function detachNotificationDismissSubscription(subscription:NotificationDismissSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast Facade_Notification_flight__Notification.detachNotificationDismissSubscription(subscription);
+    return cast null;
+  }
+
+  public static function detachNotificationReceivedSubscription(subscription:NotificationReceivedSubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast Facade_Notification_flight__Notification.detachNotificationReceivedSubscription(subscription);
+    return cast null;
+  }
+
+  public static function detachNotificationReplySubscription(subscription:NotificationReplySubscription):flight._internal._Promise<NotificationSubscriptionDetachOutcome> {
+    return cast Facade_Notification_flight__Notification.detachNotificationReplySubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeNotificationActionSubscription(subscription:NotificationActionSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
+    return cast Facade_Notification_flight__Notification.disposeNotificationActionSubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeNotificationClickSubscription(subscription:NotificationClickSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
+    return cast Facade_Notification_flight__Notification.disposeNotificationClickSubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeNotificationDismissSubscription(subscription:NotificationDismissSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
+    return cast Facade_Notification_flight__Notification.disposeNotificationDismissSubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeNotificationReceivedSubscription(subscription:NotificationReceivedSubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
+    return cast Facade_Notification_flight__Notification.disposeNotificationReceivedSubscription(subscription);
+    return cast null;
+  }
+
+  public static function disposeNotificationReplySubscription(subscription:NotificationReplySubscription):flight._internal._Promise<NotificationSubscriptionDisposeOutcome> {
+    return cast Facade_Notification_flight__Notification.disposeNotificationReplySubscription(subscription);
+    return cast null;
+  }
+
+  public static function getActiveNotifications(host:HasNotificationActiveList):flight._internal._Promise<NotificationActiveListOutcome> {
+    return cast Facade_Notification_flight__Notification.getActiveNotifications(host);
+    return cast null;
+  }
+
+  public static function getNotificationPermission(host:HasNotificationPermission):flight._internal._Promise<NotificationPermissionQueryOutcome> {
+    return cast Facade_Notification_flight__Notification.getNotificationPermission(host);
+    return cast null;
+  }
+
+  public static function getPendingNotifications(host:HasNotificationScheduling):flight._internal._Promise<NotificationPendingListOutcome> {
+    return cast Facade_Notification_flight__Notification.getPendingNotifications(host);
+    return cast null;
+  }
+
+  public static function requestNotificationPermission(host:HasNotificationPermission):flight._internal._Promise<NotificationPermissionRequestOutcome> {
+    return cast Facade_Notification_flight__Notification.requestNotificationPermission(host);
+    return cast null;
+  }
+
+  public static function scheduleNotification(host:HasNotificationScheduling, request:NotificationRequest, schedule:NotificationSchedule):flight._internal._Promise<NotificationScheduleOutcome> {
+    return cast Facade_Notification_flight__Notification.scheduleNotification(host, request, schedule);
+    return cast null;
+  }
+
+  public static function showNotification(host:HasNotificationDelivery, request:NotificationRequest):flight._internal._Promise<NotificationDeliveryOutcome> {
+    return cast Facade_Notification_flight__Notification.showNotification(host, request);
     return cast null;
   }
 }

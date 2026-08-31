@@ -932,8 +932,28 @@ function emitFlowStatements(statements: IrStatement[], index = 0): string[] {
         ];
       });
     case 'do':
-    case 'switch':
       return [...emitStatement(statement), ...continuation()];
+    case 'switch': {
+      if (!statementContainsAwait(statement) && !statementContainsReturn(statement)) {
+        return [...emitStatement(statement), ...continuation()];
+      }
+      return emitAwaitedExpression(statement.expression, (value) => {
+        const branch = `__flowBranch${String(temporaryIndex++)}`;
+        const lines = [`var ${branch}:Dynamic = flight._internal._Async.flowNormal();`];
+        groupSwitchCases(statement.cases).forEach((case_, index) => {
+          const prefix = index === 0 ? '' : 'else ';
+          const condition =
+            case_.expressions.length > 0
+              ? `if (${case_.expressions.map((expression) => `${value} == ${emitExpression(expression)}`).join(' || ')})`
+              : '';
+          lines.push(`${prefix}${condition} {`);
+          lines.push(...indent([`${branch} = ${emitFlowProtectedStatements(case_.statements)};`]));
+          lines.push('}');
+        });
+        lines.push(...emitFlowThenContinue(branch, continuation));
+        return lines;
+      });
+    }
     case 'try': {
       let flow = emitFlowProtectedStatements(statementToStatements(statement.tryBody));
       if (statement.catchBody) {
@@ -1288,8 +1308,23 @@ function canFlowStatements(statements: IrStatement[], inLoop = false): boolean {
             canFlowStatements(statementToStatements(statement.body), true))
         );
       case 'do':
-      case 'switch':
         return !statementContainsAwait(statement) && !statementContainsReturn(statement);
+      case 'switch': {
+        if (!expressionSupportsFlatMapExtraction(statement.expression)) return false;
+        const grouped = groupSwitchCases(statement.cases);
+        const defaultIndex = grouped.findIndex((case_) => case_.expressions.length === 0);
+        return (
+          (defaultIndex === -1 || defaultIndex === grouped.length - 1) &&
+          grouped.every(
+            (case_) =>
+              case_.expressions.every(
+                (expression) => !expressionContainsAwait(expression) && expressionSupportsFlatMapExtraction(expression),
+              ) &&
+              !case_.statements.some(statementContainsSwitchBreak) &&
+              canFlowStatements(case_.statements, inLoop),
+          )
+        );
+      }
       case 'try':
         return (
           canFlowStatements(statementToStatements(statement.tryBody), inLoop) &&
@@ -1707,15 +1742,7 @@ function emitStatement(statement: IrStatement): string[] {
       ];
     }
     case 'switch': {
-      const grouped: Array<{ expressions: IrExpression[]; statements: IrStatement[] }> = [];
-      let pending: IrExpression[] = [];
-      for (const case_ of statement.cases) {
-        if (case_.expression) pending.push(case_.expression);
-        const statements = stripTrailingSwitchBreak(case_.statements);
-        if (statements.length === 0 && case_.expression) continue;
-        grouped.push({ expressions: pending, statements });
-        pending = [];
-      }
+      const grouped = groupSwitchCases(statement.cases);
       const wrapsBreak = grouped.some((case_) => case_.statements.some(statementContainsSwitchBreak));
       const hasContinue = wrapsBreak && grouped.some((case_) => case_.statements.some(statementContainsSwitchContinue));
       const continueFlag = hasContinue ? `__switchContinue${String(temporaryIndex++)}` : undefined;
@@ -3754,6 +3781,21 @@ function stripTrailingSwitchBreak(statements: IrStatement[]): IrStatement[] {
   const last = statements.at(-1);
   if (last?.kind !== 'block') return statements;
   return [...statements.slice(0, -1), { ...last, statements: stripTrailingSwitchBreak(last.statements) }];
+}
+
+function groupSwitchCases(
+  cases: Extract<IrStatement, { kind: 'switch' }>['cases'],
+): Array<{ expressions: IrExpression[]; statements: IrStatement[] }> {
+  const grouped: Array<{ expressions: IrExpression[]; statements: IrStatement[] }> = [];
+  let pending: IrExpression[] = [];
+  for (const case_ of cases) {
+    if (case_.expression) pending.push(case_.expression);
+    const statements = stripTrailingSwitchBreak(case_.statements);
+    if (statements.length === 0 && case_.expression) continue;
+    grouped.push({ expressions: pending, statements });
+    pending = [];
+  }
+  return grouped;
 }
 
 function statementContainsSwitchBreak(statement: IrStatement): boolean {

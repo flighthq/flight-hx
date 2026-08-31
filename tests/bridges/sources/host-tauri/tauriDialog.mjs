@@ -5,4 +5,7 @@ const api = compiled.flight._HostTauri;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createTauriDialogBackend = api.createTauriDialogBackend;
+export const createTauriDirectoryOpenDialogBackend = api.createTauriDirectoryOpenDialogBackend;
+export const createTauriFileOpenDialogBackend = api.createTauriFileOpenDialogBackend;
+export const createTauriFileSaveDialogBackend = api.createTauriFileSaveDialogBackend;
+export const createTauriMessageDialogBackend = api.createTauriMessageDialogBackend;

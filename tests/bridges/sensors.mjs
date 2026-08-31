@@ -11,7 +11,6 @@ export const computeWorldAccelerationFromDeviceAcceleration = compiled.flight.Se
 export const createSensors = compiled.flight.Sensors.createSensors;
 export const detachSensors = compiled.flight.Sensors.detachSensors;
 export const disposeSensors = compiled.flight.Sensors.disposeSensors;
-export const explainSensorsBackend = compiled.flight.Sensors.explainSensorsBackend;
 export const getSensorsPermissionState = compiled.flight.Sensors.getSensorsPermissionState;
 export const hasAccelerometer = compiled.flight.Sensors.hasAccelerometer;
 export const hasAmbientLightSensor = compiled.flight.Sensors.hasAmbientLightSensor;

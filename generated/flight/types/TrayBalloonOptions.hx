@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TrayBalloonOptions = { @:optional var icon:String; @:optional var iconType:String; @:optional var largeIcon:Bool; @:optional var noSound:Bool; @:optional var respectQuietTime:Bool; var text:String; var title:String; };
+typedef TrayBalloonOptions = { @:optional var icon:TrayIconSource; @:optional var iconType:String; @:optional var largeIcon:Bool; @:optional var noSound:Bool; @:optional var respectQuietTime:Bool; var text:String; var title:String; };

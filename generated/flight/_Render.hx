@@ -123,8 +123,6 @@ import flight.types.NodeOf;
 import flight.types.NodeRuntime;
 import flight.types.NodeTraits;
 import flight.types.OrthographicProjection;
-import flight.types.Path;
-import flight.types.PathMesh;
 import flight.types.PerspectiveProjection;
 import flight.types.PointLight;
 import flight.types.Projection;
@@ -182,7 +180,7 @@ import flight.types.Skin;
 import flight.types.SlotTable;
 import flight.types.Spatial2DNode;
 import flight.types.SpotLight;
-import flight.types.StrokeStyle;
+import flight.types.StrokeTessellator;
 import flight.types.Transform3DNode;
 import flight.types.Vector2;
 import flight.types.Vector3;
@@ -1105,7 +1103,7 @@ class _Render {
         return cast 'drawGlShape: a fill this node uses has no tessellated form and no rasterizer is registered, so it does not draw — call registerGlShapeRasterizer(state, createCanvasShapeRasterizer(resolvers))';
       }
       else if (__switchValue == RenderRegistry.TextureResolver) {
-        if ((cast _Runtime.hasField(state, 'gl') : Bool)) { return cast 'resolveGlTexture: texture source kind has no registered resolver — call registerGlTextureResolver(state, sourceKind, resolver), or copyGlRenderStateRegistrations(offscreenState, screenState) after a late screen registration'; }
+        if ((cast _Runtime.hasField(state, 'gl') : Bool)) { return cast 'resolveGlTexture: texture source kind has no registered resolver — rebuild the GlPipeline with the required resolver and create the render state from that pipeline'; }
         if ((cast _Runtime.hasField(state, 'device') : Bool)) { return cast 'resolveWgpuTexture: texture source kind has no registered resolver — call registerWgpuTextureResolver(state, sourceKind, resolver)'; }
         if ((cast _Runtime.hasField(state, 'element') : Bool)) { return cast 'resolveDomTexture: texture source kind has no registered resolver — call registerDomTextureResolver(state, sourceKind, resolver)'; }
         return cast 'resolveCanvasTexture: texture source kind has no registered resolver — call registerCanvasTextureResolver(resolvers, sourceKind, resolver) on the set the caller resolves through';
@@ -1163,7 +1161,7 @@ class _Render {
     (runtime.renderProxyMap = cast (_Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []) : flight._internal._WeakMap<Renderable, RenderProxy>));
     (runtime.renderProxySources = cast (_Runtime.construct(flight._internal._HostValueLut.get('Set'), []) : flight._internal._Set<Renderable>));
     (runtime.registryMiss = cast (null : Null<flight._internal._Intersection2<RenderRegistry->String->Void, { var clear:Void->Void; var signals:RenderRegistrySignals; }>>));
-    (runtime.registries = cast ({ renderers: (cast createKeyedTable((cast 'NodeRenderer' : String), (cast 'Unregistered' : String)) : KeyedTable<Renderer>), strokeTessellator: (cast createSlotTable((cast 'StrokeTessellator' : String), (cast 'Rasterize' : String)) : SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>) } : RenderRegistries));
+    (runtime.registries = cast ({ renderers: (cast createKeyedTable((cast 'NodeRenderer' : String), (cast 'Unregistered' : String)) : KeyedTable<Renderer>), strokeTessellator: (cast createSlotTable((cast 'StrokeTessellator' : String), (cast 'Rasterize' : String)) : SlotTable<StrokeTessellator>) } : RenderRegistries));
     (runtime.rendererMapId = cast (0.0 : Float));
     (runtime.tempStack = cast (cast ([] : Array<Dynamic>) : Array<Renderable>));
     return cast runtime;
@@ -1430,7 +1428,7 @@ class _Render {
     ((cast targetRuntime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers = cast ((cast sourceRuntime.registries : { @:optional var effectPaddingResolvers:Null<KeyedTable<RenderEffectPaddingResolver>>; }).effectPaddingResolvers : Null<KeyedTable<RenderEffectPaddingResolver>>));
     ((cast targetRuntime.registries : { @:optional var renderRootGuard:Null<SlotTable<RenderRootGuard>>; }).renderRootGuard = cast ((cast sourceRuntime.registries : { @:optional var renderRootGuard:Null<SlotTable<RenderRootGuard>>; }).renderRootGuard : Null<SlotTable<RenderRootGuard>>));
     ((cast targetRuntime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands = cast ((cast sourceRuntime.registries : { @:optional var canvasShapeCommands:Null<KeyedTable<CanvasShapeCommand<String>>>; }).canvasShapeCommands : Null<KeyedTable<CanvasShapeCommand<String>>>));
-    ((cast targetRuntime.registries : { var strokeTessellator:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator = cast ((cast sourceRuntime.registries : { var strokeTessellator:SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>; }).strokeTessellator : SlotTable<Path->StrokeStyle->Null<Float>->Null<PathMesh>>));
+    ((cast targetRuntime.registries : { var strokeTessellator:SlotTable<StrokeTessellator>; }).strokeTessellator = cast ((cast sourceRuntime.registries : { var strokeTessellator:SlotTable<StrokeTessellator>; }).strokeTessellator : SlotTable<StrokeTessellator>));
   }
 
   @:allow(flight)

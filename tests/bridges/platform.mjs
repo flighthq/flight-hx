@@ -2,11 +2,11 @@
 import compiled from '../../build/haxe-js/flight.cjs';
 
 export const comparePlatformVersions = compiled.flight.Platform.comparePlatformVersions;
-export const explainPlatformBackend = compiled.flight.Platform.explainPlatformBackend;
 export const getPlatformEngine = compiled.flight.Platform.getPlatformEngine;
 export const getPlatformInfo = compiled.flight.Platform.getPlatformInfo;
 export const getPlatformKind = compiled.flight.Platform.getPlatformKind;
 export const getPlatformName = compiled.flight.Platform.getPlatformName;
+export const getPlatformRuntime = compiled.flight.Platform.getPlatformRuntime;
 export const isPlatformDesktop = compiled.flight.Platform.isPlatformDesktop;
 export const isPlatformMobile = compiled.flight.Platform.isPlatformMobile;
 export const isPlatformNative = compiled.flight.Platform.isPlatformNative;

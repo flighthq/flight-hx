@@ -1293,7 +1293,16 @@ function expandPrivateOverloadType(
       };
     case 'named': {
       const substitution = type.arguments.length === 0 ? substitutions.get(type.name) : undefined;
-      if (substitution) return expandPrivateOverloadType(substitution, context, substitutions, stack);
+      if (substitution) {
+        const substitutionKey = `type-parameter:${type.name}`;
+        if (
+          stack.has(substitutionKey) ||
+          (substitution.kind === 'named' && substitution.name === type.name && substitution.arguments.length === 0)
+        ) {
+          return type;
+        }
+        return expandPrivateOverloadType(substitution, context, substitutions, new Set([...stack, substitutionKey]));
+      }
       const declaration = context.privateTypeAliases.get(type.name);
       if (!declaration || stack.has(type.name)) {
         return {
@@ -1953,7 +1962,7 @@ function lowerCheckerTypeUncached(
     return lowerIntersection(
       concrete,
       type.types.some(
-        (item) => (item.flags & ts.TypeFlags.TypeParameter) !== 0 || hostTypeIdentity(item, checker) !== undefined,
+        (item) => checkerTypeContainsTypeParameter(item, checker) || hostTypeIdentity(item, checker) !== undefined,
       ),
     );
   }
@@ -2367,8 +2376,22 @@ function lowerExpressionWithTypeArguments(node: ts.ExpressionWithTypeArguments, 
   const name = node.expression.getText(context.sourceFile);
   const arguments_ = node.typeArguments?.map((argument) => lowerType(argument, context)) ?? [];
   if (standardDynamicTypes.has(name) || context.externalTypes.has(name.split('.')[0]!)) return { kind: 'dynamic' };
-  if (name === 'Omit' || name === 'Partial' || name === 'Pick') return { kind: 'dynamic' };
-  if (name === 'Readonly' && arguments_[0]) {
+  if (
+    [
+      'Exclude',
+      'Extract',
+      'InstanceType',
+      'Omit',
+      'Partial',
+      'Pick',
+      'PropertyKey',
+      'ReturnType',
+      'ThisParameterType',
+    ].includes(name)
+  ) {
+    return { kind: 'dynamic' };
+  }
+  if (['Awaited', 'NonNullable', 'Readonly'].includes(name) && arguments_[0]) {
     return arguments_[0];
   }
   const hostType = context.checker

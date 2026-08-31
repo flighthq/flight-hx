@@ -5,5 +5,7 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebPower = api.enableHostWebPower;
-export const resetHostWebPowerForTest = api.resetHostWebPowerForTest;
+export const createWebPowerReadings = api.createWebPowerReadings;
+export const webPowerCapabilities = api.webPowerCapabilities;
+export const webPowerKeepAwakeBackend = api.webPowerKeepAwakeBackend;
+export const webPowerSuspensionBackend = api.webPowerSuspensionBackend;

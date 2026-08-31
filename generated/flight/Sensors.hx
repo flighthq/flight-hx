@@ -4,7 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Sensors as Facade_Sensors_flight__Sensors;
-import flight.types.BackendExplanation;
+import flight.types.HasSystemSensors;
 import flight.types.MotionReading;
 import flight.types.OrientationReading;
 import flight.types.QuaternionReading;
@@ -12,8 +12,8 @@ import flight.types.Sensors;
 import flight.types.SensorsPermissionState;
 
 class Sensors {
-  public static function attachSensors(sensors:flight.types.Sensors):Void {
-    Facade_Sensors_flight__Sensors.attachSensors(sensors);
+  public static function attachSensors(host:HasSystemSensors, sensors:flight.types.Sensors):Void {
+    Facade_Sensors_flight__Sensors.attachSensors(host, sensors);
   }
 
   public static function computeEulerFromQuaternion(out:OrientationReading, quaternion:QuaternionReading):Void {
@@ -53,68 +53,63 @@ class Sensors {
     Facade_Sensors_flight__Sensors.disposeSensors(sensors);
   }
 
-  public static function explainSensorsBackend():BackendExplanation {
-    return cast Facade_Sensors_flight__Sensors.explainSensorsBackend();
+  public static function getSensorsPermissionState(host:HasSystemSensors, ?sensor:String):flight._internal._Promise<SensorsPermissionState> {
+    return cast Facade_Sensors_flight__Sensors.getSensorsPermissionState(host, sensor);
     return cast null;
   }
 
-  public static function getSensorsPermissionState(?sensor:String):flight._internal._Promise<SensorsPermissionState> {
-    return cast Facade_Sensors_flight__Sensors.getSensorsPermissionState(sensor);
+  public static function hasAccelerometer(host:HasSystemSensors):Bool {
+    return cast Facade_Sensors_flight__Sensors.hasAccelerometer(host);
     return cast null;
   }
 
-  public static function hasAccelerometer():Bool {
-    return cast Facade_Sensors_flight__Sensors.hasAccelerometer();
+  public static function hasAmbientLightSensor(host:HasSystemSensors):Bool {
+    return cast Facade_Sensors_flight__Sensors.hasAmbientLightSensor(host);
     return cast null;
   }
 
-  public static function hasAmbientLightSensor():Bool {
-    return cast Facade_Sensors_flight__Sensors.hasAmbientLightSensor();
+  public static function hasBarometer(host:HasSystemSensors):Bool {
+    return cast Facade_Sensors_flight__Sensors.hasBarometer(host);
     return cast null;
   }
 
-  public static function hasBarometer():Bool {
-    return cast Facade_Sensors_flight__Sensors.hasBarometer();
+  public static function hasGravitySensor(host:HasSystemSensors):Bool {
+    return cast Facade_Sensors_flight__Sensors.hasGravitySensor(host);
     return cast null;
   }
 
-  public static function hasGravitySensor():Bool {
-    return cast Facade_Sensors_flight__Sensors.hasGravitySensor();
+  public static function hasGyroscope(host:HasSystemSensors):Bool {
+    return cast Facade_Sensors_flight__Sensors.hasGyroscope(host);
     return cast null;
   }
 
-  public static function hasGyroscope():Bool {
-    return cast Facade_Sensors_flight__Sensors.hasGyroscope();
+  public static function hasLinearAccelerationSensor(host:HasSystemSensors):Bool {
+    return cast Facade_Sensors_flight__Sensors.hasLinearAccelerationSensor(host);
     return cast null;
   }
 
-  public static function hasLinearAccelerationSensor():Bool {
-    return cast Facade_Sensors_flight__Sensors.hasLinearAccelerationSensor();
+  public static function hasMagnetometer(host:HasSystemSensors):Bool {
+    return cast Facade_Sensors_flight__Sensors.hasMagnetometer(host);
     return cast null;
   }
 
-  public static function hasMagnetometer():Bool {
-    return cast Facade_Sensors_flight__Sensors.hasMagnetometer();
+  public static function hasOrientationSensor(host:HasSystemSensors):Bool {
+    return cast Facade_Sensors_flight__Sensors.hasOrientationSensor(host);
     return cast null;
   }
 
-  public static function hasOrientationSensor():Bool {
-    return cast Facade_Sensors_flight__Sensors.hasOrientationSensor();
+  public static function hasProximitySensor(host:HasSystemSensors):Bool {
+    return cast Facade_Sensors_flight__Sensors.hasProximitySensor(host);
     return cast null;
   }
 
-  public static function hasProximitySensor():Bool {
-    return cast Facade_Sensors_flight__Sensors.hasProximitySensor();
+  public static function isSensorsSupported(host:HasSystemSensors):Bool {
+    return cast Facade_Sensors_flight__Sensors.isSensorsSupported(host);
     return cast null;
   }
 
-  public static function isSensorsSupported():Bool {
-    return cast Facade_Sensors_flight__Sensors.isSensorsSupported();
-    return cast null;
-  }
-
-  public static function requestSensorsPermission():flight._internal._Promise<Bool> {
-    return cast Facade_Sensors_flight__Sensors.requestSensorsPermission();
+  public static function requestSensorsPermission(host:HasSystemSensors):flight._internal._Promise<Bool> {
+    return cast Facade_Sensors_flight__Sensors.requestSensorsPermission(host);
     return cast null;
   }
 }

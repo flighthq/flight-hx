@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ElectronNotificationOptions = { var title:String; @:optional var body:String; @:optional var icon:String; @:optional var silent:Bool; @:optional var actions:Array<{ var text:String; var type:String; }>; };
+typedef ElectronNotificationOptions = { var title:String; @:optional var body:String; @:optional var icon:String; @:optional var silent:Bool; @:optional var actions:Array<{ var text:String; var type:String; }>; @:optional var hasReply:Bool; };

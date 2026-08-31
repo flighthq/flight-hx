@@ -4,63 +4,58 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Haptics as Facade_Haptics_flight__Haptics;
-import flight.types.BackendExplanation;
 import flight.types.HapticImpactStyle;
 import flight.types.HapticNotificationType;
 import flight.types.HapticsCapabilities;
+import flight.types.HasInputHaptics;
 
 class Haptics {
-  public static function cancelDeviceVibration():Bool {
-    return cast Facade_Haptics_flight__Haptics.cancelDeviceVibration();
+  public static function cancelDeviceVibration(host:HasInputHaptics):Bool {
+    return cast Facade_Haptics_flight__Haptics.cancelDeviceVibration(host);
     return cast null;
   }
 
-  public static function explainHapticsBackend():BackendExplanation {
-    return cast Facade_Haptics_flight__Haptics.explainHapticsBackend();
+  public static function getHapticsCapabilities(host:HasInputHaptics, out:HapticsCapabilities):HapticsCapabilities {
+    return cast Facade_Haptics_flight__Haptics.getHapticsCapabilities(host, out);
     return cast null;
   }
 
-  public static function getHapticsCapabilities(out:HapticsCapabilities):HapticsCapabilities {
-    return cast Facade_Haptics_flight__Haptics.getHapticsCapabilities(out);
+  public static function isHapticsSupported(host:HasInputHaptics):Bool {
+    return cast Facade_Haptics_flight__Haptics.isHapticsSupported(host);
     return cast null;
   }
 
-  public static function isHapticsSupported():Bool {
-    return cast Facade_Haptics_flight__Haptics.isHapticsSupported();
+  public static function prepareHaptics(host:HasInputHaptics):Void {
+    Facade_Haptics_flight__Haptics.prepareHaptics(host);
+  }
+
+  public static function triggerHapticImpact(host:HasInputHaptics, style:HapticImpactStyle, ?intensity:Float):Bool {
+    return cast Facade_Haptics_flight__Haptics.triggerHapticImpact(host, style, intensity);
     return cast null;
   }
 
-  public static function prepareHaptics():Void {
-    Facade_Haptics_flight__Haptics.prepareHaptics();
-  }
-
-  public static function triggerHapticImpact(style:HapticImpactStyle, ?intensity:Float):Bool {
-    return cast Facade_Haptics_flight__Haptics.triggerHapticImpact(style, intensity);
+  public static function triggerHapticNotification(host:HasInputHaptics, type:HapticNotificationType):Bool {
+    return cast Facade_Haptics_flight__Haptics.triggerHapticNotification(host, type);
     return cast null;
   }
 
-  public static function triggerHapticNotification(type:HapticNotificationType):Bool {
-    return cast Facade_Haptics_flight__Haptics.triggerHapticNotification(type);
+  public static function triggerHapticSelection(host:HasInputHaptics):Bool {
+    return cast Facade_Haptics_flight__Haptics.triggerHapticSelection(host);
     return cast null;
   }
 
-  public static function triggerHapticSelection():Bool {
-    return cast Facade_Haptics_flight__Haptics.triggerHapticSelection();
+  public static function vibrateDevice(host:HasInputHaptics, durationMs:Float):Bool {
+    return cast Facade_Haptics_flight__Haptics.vibrateDevice(host, durationMs);
     return cast null;
   }
 
-  public static function vibrateDevice(durationMs:Float):Bool {
-    return cast Facade_Haptics_flight__Haptics.vibrateDevice(durationMs);
+  public static function vibrateDevicePattern(host:HasInputHaptics, pattern:Array<Float>):Bool {
+    return cast Facade_Haptics_flight__Haptics.vibrateDevicePattern(host, pattern);
     return cast null;
   }
 
-  public static function vibrateDevicePattern(pattern:Array<Float>):Bool {
-    return cast Facade_Haptics_flight__Haptics.vibrateDevicePattern(pattern);
-    return cast null;
-  }
-
-  public static function vibrateDeviceWaveform(timings:Array<Float>, amplitudes:Array<Float>, ?repeat:Float):Bool {
-    return cast Facade_Haptics_flight__Haptics.vibrateDeviceWaveform(timings, amplitudes, repeat);
+  public static function vibrateDeviceWaveform(host:HasInputHaptics, timings:Array<Float>, amplitudes:Array<Float>, ?repeat:Float):Bool {
+    return cast Facade_Haptics_flight__Haptics.vibrateDeviceWaveform(host, timings, amplitudes, repeat);
     return cast null;
   }
 }

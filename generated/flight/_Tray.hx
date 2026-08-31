@@ -3,18 +3,84 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight.Types.EntityRuntimeKey;
+import flight._Entity.createEntity;
+import flight._Entity.createEntityRuntime;
 import flight._Log.logOnce;
-import flight.types.BackendExplanation;
+import flight._Signals.connectSignal;
+import flight._Signals.disconnectSignal;
+import flight._Types.EntityRuntimeKey;
+import flight.types.EntityRuntime;
+import flight.types.HasTrayLifecycle;
+import flight.types.HostTrayCapabilities;
 import flight.types.LogLevel;
 import flight.types.MenuItemTemplate;
-import flight.types.RectangleLike;
-import flight.types.TrayBackend;
+import flight.types.Signal;
+import flight.types.TrayAnimationStartResult;
+import flight.types.TrayAnimationStopResult;
+import flight.types.TrayBalloonBackend;
+import flight.types.TrayBalloonDisplayResult;
+import flight.types.TrayBalloonEvent;
 import flight.types.TrayBalloonOptions;
-import flight.types.TrayCapabilities;
-import flight.types.TrayEventData;
+import flight.types.TrayBalloonRemoveResult;
+import flight.types.TrayBoundsBackend;
+import flight.types.TrayBoundsResult;
+import flight.types.TrayCreateProviderResult;
+import flight.types.TrayCreateResult;
+import flight.types.TrayDestroyProviderResult;
+import flight.types.TrayDestroyResult;
+import flight.types.TrayDoubleClickPolicyBackend;
+import flight.types.TrayDoubleClickPolicyUpdateResult;
+import flight.types.TrayDropEvent;
+import flight.types.TrayEventAttachResult;
+import flight.types.TrayEventRelease;
 import flight.types.TrayIcon;
+import flight.types.TrayIconForHost;
 import flight.types.TrayIconOptions;
+import flight.types.TrayIconSource;
+import flight.types.TrayImageBackend;
+import flight.types.TrayImageUpdateResult;
+import flight.types.TrayInteractionEvent;
+import flight.types.TrayLifecycleBackend;
+import flight.types.TrayMenuBackend;
+import flight.types.TrayMenuSelectionEvent;
+import flight.types.TrayMenuUpdateResult;
+import flight.types.TrayPopupMenuBackend;
+import flight.types.TrayPopupMenuResult;
+import flight.types.TrayPressedImageBackend;
+import flight.types.TrayPressedImageUpdateResult;
+import flight.types.TrayReleaseResult;
+import flight.types.TrayTemplateImageBackend;
+import flight.types.TrayTemplateImageUpdateResult;
+import flight.types.TrayTitleBackend;
+import flight.types.TrayTitleReadResult;
+import flight.types.TrayTitleUpdateResult;
+import flight.types.TrayTooltipBackend;
+import flight.types.TrayTooltipReadResult;
+import flight.types.TrayTooltipUpdateResult;
+import flight.types.TrayWithBalloon;
+import flight.types.TrayWithBalloonEvents;
+import flight.types.TrayWithBounds;
+import flight.types.TrayWithDoubleClickPolicy;
+import flight.types.TrayWithDropEvents;
+import flight.types.TrayWithImage;
+import flight.types.TrayWithInteractionEvents;
+import flight.types.TrayWithMenu;
+import flight.types.TrayWithMenuSelectionEvents;
+import flight.types.TrayWithPopupMenu;
+import flight.types.TrayWithPressedImage;
+import flight.types.TrayWithTemplateImage;
+import flight.types.TrayWithTitle;
+import flight.types.TrayWithTooltip;
 import flight.types.Vector2Like;
+
+typedef TrayRuntime__tray = { var animationGeneration:Float; var animationTimer:Null<Dynamic>; var animationWriteTail:flight._internal._Promise<flight._internal._Nothing>; var capabilities:HostTrayCapabilities; var destroyPromise:Null<flight._internal._Promise<TrayDestroyResult>>; var lifecycle:flight._internal._IndexedAccess<flight._internal._IndexedAccess<HasTrayLifecycle, String>, String>; var releases:flight._internal._Set<TrayReleaseRuntime__tray>; var state:String; };
+
+typedef TrayReleaseRuntime__tray = { >TrayEventRelease, var released:Bool; };
+
+typedef EventSlot__tray = String;
+
+typedef EventBackend__tray<Event> = { var getSignal:TrayIcon->Null<Signal<Event->Void>>; };
 
 @:noCompletion
 class _Tray {
@@ -31,113 +97,175 @@ class _Tray {
     (cast logOnce((cast 'tray:non-positive-animation-interval' : String), ({ final __callArgument4:Dynamic = LogLevel.Warn; __callArgument4; }), (cast { message: ('startTrayIconAnimation: intervalMs is ' + Std.string(intervalMs) + ', so the icon will be rewritten as fast as the ' + 'host schedules timers rather than on a frame interval. Pass a positive millisecond interval.') } : Dynamic), ({ final __callArgument5:Dynamic = 'tray'; __callArgument5; })) : Bool);
   }
 
-  public static final WEB_CAPABILITIES__tray:TrayCapabilities = (cast { balloon: false, bounds: false, clickEvents: false, dropFiles: false, pressedIcon: false, title: false });
+  public static function createTrayIcon<HostType:HasTrayLifecycle>(host:HostType, ?options:TrayIconOptions):flight._internal._Promise<TrayCreateResult<TrayIconForHost<HostType>>> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        if (options == null) options = cast ({  } : Dynamic);
+        var tray:TrayIconForHost<HostType> = cast _Runtime.UNDEFINED;
+        var result:TrayCreateProviderResult = cast _Runtime.UNDEFINED;
+        var runtime:TrayRuntime__tray = cast _Runtime.UNDEFINED;
+        tray = (cast (#if js _Runtime.callValue(createEntity, cast ([] : Array<Dynamic>)) #else createEntity(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : TrayIconForHost<HostType>);
+        return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
+          return flight._internal._Async.flatMap((cast (cast _Runtime.field(host, 'tray') : { var lifecycle:TrayLifecycleBackend; }).lifecycle : TrayLifecycleBackend).create(({ final __callArgument11:Dynamic = tray; __callArgument11; }), ({ final __callArgument12:Dynamic = options; __callArgument12; })), function(__awaitValue10:Dynamic):Dynamic {
+            (result = cast (__awaitValue10 : Dynamic));
+            return flight._internal._Async.flowNormal();
+          });
+        }), function(__caughtError:Dynamic):Dynamic {
+          var error:Dynamic = __caughtError;
+          return flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flowReturn({ error: error, outcome: 'tray-create-failed' });
+          });
+        }), function():Dynamic {
+          var __flowBranch13:Dynamic;
+          if ((cast !_Runtime.strictEquals((cast result : { var outcome:String; }).outcome, 'created') : Bool)) {
+            __flowBranch13 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn(result);
+            });
+          } else {
+            __flowBranch13 = flight._internal._Async.flowNormal();
+          }
+          return flight._internal._Async.continueFlow(__flowBranch13, function():Dynamic {
+            runtime = (cast createEntityRuntime() : TrayRuntime__tray);
+            ((cast runtime : TrayRuntime__tray).animationGeneration = 0.0);
+            ((cast runtime : TrayRuntime__tray).animationTimer = null);
+            ((cast runtime : TrayRuntime__tray).animationWriteTail = flight._internal._Async.resolve());
+            ((cast runtime : TrayRuntime__tray).capabilities = _Runtime.mergeObjects([_Runtime.field(host, 'tray')]));
+            ((cast runtime : TrayRuntime__tray).destroyPromise = null);
+            ((cast runtime : TrayRuntime__tray).lifecycle = (cast _Runtime.field(host, 'tray') : { var lifecycle:TrayLifecycleBackend; }).lifecycle);
+            ((cast runtime : TrayRuntime__tray).releases = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []));
+            ((cast runtime : TrayRuntime__tray).state = 'active');
+            _Runtime.setIndex(tray, EntityRuntimeKey, runtime);
+            return flight._internal._Async.flowReturn({ outcome: 'created', tray: tray });
+          });
+        });
+      })
+    );
+  }
 
-  public static function createTrayIcon(?options:TrayIconOptions):Null<TrayIcon> {
-    var id:Float = cast _Runtime.UNDEFINED;
-    id = (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).create(({ final __callArgument8:Dynamic = _Runtime.coalesce(options, function():Dynamic return cast {  }); __callArgument8; }));
-    return cast ((cast ((cast id : Float) < (cast 0.0 : Float)) : Bool) ? (cast null : Dynamic) : (cast { id: id } : Dynamic));
+  public static function destroyTrayIcon(tray:TrayIcon):flight._internal._Promise<TrayDestroyResult> {
+    var runtime:Null<TrayRuntime__tray> = cast _Runtime.UNDEFINED;
+    runtime = (cast _Tray.getTrayRuntime__tray(({ final __callArgument14:Dynamic = tray; __callArgument14; })) : Null<TrayRuntime__tray>);
+    if ((cast ((cast _Runtime.strictEquals(runtime, null) : Bool) || (cast _Runtime.strictEquals((cast runtime : TrayRuntime__tray).state, 'destroyed') : Bool)) : Bool)) { return cast flight._internal._Async.resolve({ outcome: 'already-destroyed' }); }
+    if ((cast !_Runtime.strictEquals((cast runtime : TrayRuntime__tray).destroyPromise, null) : Bool)) { return cast (cast runtime : TrayRuntime__tray).destroyPromise; }
+    ((cast runtime : TrayRuntime__tray).destroyPromise = _Runtime.callProperty((cast _Tray.destroyTrayRuntime__tray(({ final __callArgument20:Dynamic = tray; __callArgument20; }), (cast runtime : Dynamic)) : flight._internal._Promise<TrayDestroyResult>), 'finally', cast ([function():Void {
+      ((cast runtime : TrayRuntime__tray).destroyPromise = null);
+    }] : Array<Dynamic>)));
+    return cast (cast runtime : TrayRuntime__tray).destroyPromise;
     return cast null;
   }
 
-  public static function destroyTrayIcon(tray:TrayIcon):Void {
-    stopTrayIconAnimation(({ final __callArgument9:Dynamic = tray; __callArgument9; }));
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).destroy((cast tray.id : Float));
-  }
-
-  public static function displayTrayBalloon(tray:TrayIcon, options:TrayBalloonOptions):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).displayBalloon((cast tray.id : Float), ({ final __callArgument11:Dynamic = options; __callArgument11; }));
-  }
-
-  public static function explainTrayBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Tray._custom__tray, null) : Bool)) {
-      return cast { conflict: _Tray._hostConflict__tray, layer: 'custom', operation: null, viability: 'unobserved' };
-    }
-    if ((cast !_Runtime.strictEquals(_Tray._host__tray, null) : Bool)) {
-      return cast { conflict: _Tray._hostConflict__tray, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Tray._hostObservation__tray, null) : Bool) ? (cast (cast _Tray._hostObservation__tray : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Tray._hostObservation__tray, null) : Bool) ? (cast (cast _Tray._hostObservation__tray : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
-    }
-    return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
+  public static function displayTrayBalloon(tray:TrayWithBalloon, options:TrayBalloonOptions):flight._internal._Promise<TrayBalloonDisplayResult> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument22:Dynamic = tray; __callArgument22; }), (cast 'balloon' : String), (cast 'balloon-display-failed' : String), (cast function(backend:TrayBalloonBackend):flight._internal._Promise<TrayBalloonDisplayResult> return (cast backend : TrayBalloonBackend).display(({ final __callArgument23:Dynamic = tray; __callArgument23; }), ({ final __callArgument24:Dynamic = options; __callArgument24; })) : Dynamic)) : flight._internal._Promise<TrayBalloonDisplayResult>);
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function getTrayBackend():TrayBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Tray._custom__tray, function():Dynamic return cast _Tray._host__tray), function():Dynamic return cast _Tray._sentinel__tray);
+  public static function getTrayIconBounds(tray:TrayWithBounds):flight._internal._Promise<TrayBoundsResult> {
+    return cast (cast _Tray.invokeRead__tray(({ final __callArgument28:Dynamic = tray; __callArgument28; }), (cast 'bounds' : String), (cast 'bounds-read-failed' : String), (cast function(backend:TrayBoundsBackend):flight._internal._Promise<TrayBoundsResult> return (cast backend : TrayBoundsBackend).get(({ final __callArgument29:Dynamic = tray; __callArgument29; })) : Dynamic)) : flight._internal._Promise<TrayBoundsResult>);
     return cast null;
   }
 
-  public static function getTrayCapabilities():TrayCapabilities {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).getCapabilities();
+  public static function destroyTrayRuntime__tray(tray:TrayIcon, runtime:TrayRuntime__tray):flight._internal._Promise<TrayDestroyResult> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        var result:flight._internal._Any = cast _Runtime.UNDEFINED;
+        ((cast runtime : TrayRuntime__tray).state = 'destroying');
+        _Tray.stopTrayAnimationRuntime__tray((cast runtime : Dynamic));
+        var __flowIterator35:Array<Dynamic> = _Runtime.iterable(_Runtime.concatArrays([_Runtime.toArray((cast runtime : TrayRuntime__tray).releases)]));
+        var __flowIndex36:Int = 0;
+        return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
+          if (__flowIndex36 >= __flowIterator35.length) return flight._internal._Async.flowBreak();
+          var release:Dynamic = __flowIterator35[__flowIndex36++];
+          return flight._internal._Async.flatMap((cast release : TrayReleaseRuntime__tray).release(), function(__awaitValue37:Dynamic):Dynamic {
+            __awaitValue37;
+            return flight._internal._Async.flowNormal();
+          });
+        }), function():Dynamic {
+          return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flatMap((cast (cast runtime : TrayRuntime__tray).lifecycle : TrayLifecycleBackend).destroy(({ final __callArgument39:Dynamic = tray; __callArgument39; })), function(__awaitValue38:Dynamic):Dynamic {
+              (result = cast (__awaitValue38 : Dynamic));
+              return flight._internal._Async.flowNormal();
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var error:Dynamic = __caughtError;
+            return flight._internal._Async.protect(function():Dynamic {
+              (result = cast ({ failures: cast ([{ error: error, step: 'native-resource' }] : Array<Dynamic>), outcome: 'tray-destroy-failed' } : Dynamic));
+              return flight._internal._Async.flowNormal();
+            });
+          }), function():Dynamic {
+            var __flowBranch40:Dynamic;
+            if ((cast _Runtime.strictEquals((cast result : { var outcome:String; }).outcome, 'destroyed') : Bool)) {
+              __flowBranch40 = flight._internal._Async.protect(function():Dynamic {
+                ((cast runtime : TrayRuntime__tray).state = 'destroyed');
+                return flight._internal._Async.flowReturn(result);
+              });
+            } else {
+              __flowBranch40 = flight._internal._Async.flowNormal();
+            }
+            return flight._internal._Async.continueFlow(__flowBranch40, function():Dynamic {
+              ((cast runtime : TrayRuntime__tray).state = 'partially-destroyed');
+              return flight._internal._Async.flowReturn(result);
+            });
+          });
+        });
+      })
+    );
+  }
+
+  public static function getTrayIcons(host:HasTrayLifecycle):Array<TrayIcon> {
+    return cast (cast (cast (cast host : HasTrayLifecycle).tray : { var lifecycle:TrayLifecycleBackend; }).lifecycle : TrayLifecycleBackend).list();
     return cast null;
   }
 
-  public static function getTrayIconBounds(tray:TrayIcon):Null<RectangleLike> {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).getBounds((cast tray.id : Float));
+  public static function getTrayIconTitle(tray:TrayWithTitle):flight._internal._Promise<TrayTitleReadResult> {
+    return cast (cast _Tray.invokeRead__tray(({ final __callArgument41:Dynamic = tray; __callArgument41; }), (cast 'title' : String), (cast 'title-read-failed' : String), (cast function(backend:TrayTitleBackend):flight._internal._Promise<TrayTitleReadResult> return (cast backend : TrayTitleBackend).get(({ final __callArgument42:Dynamic = tray; __callArgument42; })) : Dynamic)) : flight._internal._Promise<TrayTitleReadResult>);
     return cast null;
   }
 
-  public static function getTrayIcons():Array<TrayIcon> {
-    return cast (cast _Runtime.mapArray((cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).listIds() : Array<Float>), function(id:Float, __unused0:Float, __unused1:Array<Float>):{ var id:Float; } return { id: id }, _Runtime.UNDEFINED));
+  public static function getTrayIconTooltip(tray:TrayWithTooltip):flight._internal._Promise<TrayTooltipReadResult> {
+    return cast (cast _Tray.invokeRead__tray(({ final __callArgument45:Dynamic = tray; __callArgument45; }), (cast 'tooltip' : String), (cast 'tooltip-read-failed' : String), (cast function(backend:TrayTooltipBackend):flight._internal._Promise<TrayTooltipReadResult> return (cast backend : TrayTooltipBackend).get(({ final __callArgument46:Dynamic = tray; __callArgument46; })) : Dynamic)) : flight._internal._Promise<TrayTooltipReadResult>);
     return cast null;
-  }
-
-  public static function getTrayIconTitle(tray:TrayIcon):String {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).getTitle((cast tray.id : Float));
-    return cast null;
-  }
-
-  public static function getTrayIconTooltip(tray:TrayIcon):String {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).getTooltip((cast tray.id : Float));
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function installTrayHostBackend(backend:TrayBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Tray._host__tray, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Tray._host__tray, backend) : Bool)) { (_Tray._hostConflict__tray = cast (true : Dynamic)); }
-      return;
-    }
-    (_Tray._host__tray = cast (backend : Dynamic));
   }
 
   public static function isTrayDestroyed(tray:TrayIcon):Bool {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).isDestroyed((cast tray.id : Float));
+    var runtime:Null<TrayRuntime__tray> = cast _Runtime.UNDEFINED;
+    runtime = (cast _Tray.getTrayRuntime__tray(({ final __callArgument49:Dynamic = tray; __callArgument49; })) : Null<TrayRuntime__tray>);
+    return cast ((cast ((cast _Runtime.strictEquals(runtime, null) : Bool) || (cast !_Runtime.strictEquals((cast runtime : TrayRuntime__tray).state, 'active') : Bool)) : Bool) || (cast (cast (cast runtime : TrayRuntime__tray).lifecycle : TrayLifecycleBackend).isDestroyed(({ final __callArgument51:Dynamic = tray; __callArgument51; })) : Bool));
     return cast null;
   }
 
   public static function isTrayIconAnimating(tray:TrayIcon):Bool {
-    return cast ((cast _Tray._animations__tray : flight._internal._Map<Float, flight._internal.dom.Timeout>).has(tray.id));
+    return cast !_Runtime.strictEquals(({ final __structural54 = (cast _Tray.getTrayRuntime__tray(({ final __callArgument52:Dynamic = tray; __callArgument52; })) : Null<TrayRuntime__tray>); __structural54 == null ? _Runtime.UNDEFINED : (cast __structural54 : { var animationTimer:Null<flight._internal.dom.Timeout>; }).animationTimer; }), null);
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function observeTrayHostResult(operation:String, succeeded:Bool):Void {
-    (_Tray._hostObservation__tray = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
-  }
-
-  public static function onTrayEvent(listener:TrayEventData->Void):Void->Void {
-    return cast (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).subscribe(({ final __callArgument12:Dynamic = listener; __callArgument12; }));
+  public static function onTrayBalloonEvent(tray:TrayWithBalloonEvents, listener:TrayBalloonEvent->Void):TrayEventAttachResult {
+    return cast (cast (cast _Tray.attachTrayEvent__tray : TrayIcon->String->(TrayBalloonEvent->Void)->TrayEventAttachResult)(({ final __callArgument55:Dynamic = tray; __callArgument55; }), (cast 'balloonEvents' : String), ({ final __callArgument56:Dynamic = listener; __callArgument56; })) : TrayEventAttachResult);
     return cast null;
   }
 
-  public static function popupTrayContextMenu(tray:TrayIcon, ?position:Vector2Like):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).popUpContextMenu((cast tray.id : Float), ({ final __callArgument13:Dynamic = position; __callArgument13; }));
+  public static function onTrayDrop(tray:TrayWithDropEvents, listener:TrayDropEvent->Void):TrayEventAttachResult {
+    return cast (cast (cast _Tray.attachTrayEvent__tray : TrayIcon->String->(TrayDropEvent->Void)->TrayEventAttachResult)(({ final __callArgument59:Dynamic = tray; __callArgument59; }), (cast 'dropEvents' : String), ({ final __callArgument60:Dynamic = listener; __callArgument60; })) : TrayEventAttachResult);
+    return cast null;
   }
 
-  public static function removeTrayBalloon(tray:TrayIcon):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).removeBalloon((cast tray.id : Float));
+  public static function onTrayInteraction(tray:TrayWithInteractionEvents, listener:TrayInteractionEvent->Void):TrayEventAttachResult {
+    return cast (cast (cast _Tray.attachTrayEvent__tray : TrayIcon->String->(TrayInteractionEvent->Void)->TrayEventAttachResult)(({ final __callArgument63:Dynamic = tray; __callArgument63; }), (cast 'interactionEvents' : String), ({ final __callArgument64:Dynamic = listener; __callArgument64; })) : TrayEventAttachResult);
+    return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function resetTrayBackendForTest():Void {
-    (_Tray._custom__tray = cast (null : Dynamic));
-    (_Tray._host__tray = cast (null : Dynamic));
-    (_Tray._hostConflict__tray = cast (false : Dynamic));
-    (_Tray._hostObservation__tray = cast (null : Dynamic));
+  public static function onTrayMenuSelection(tray:TrayWithMenuSelectionEvents, listener:TrayMenuSelectionEvent->Void):TrayEventAttachResult {
+    return cast (cast (cast _Tray.attachTrayEvent__tray : TrayIcon->String->(TrayMenuSelectionEvent->Void)->TrayEventAttachResult)(({ final __callArgument67:Dynamic = tray; __callArgument67; }), (cast 'menuSelectionEvents' : String), ({ final __callArgument68:Dynamic = listener; __callArgument68; })) : TrayEventAttachResult);
+    return cast null;
+  }
+
+  public static function popupTrayContextMenu(tray:TrayWithPopupMenu, ?position:Vector2Like):flight._internal._Promise<TrayPopupMenuResult> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument71:Dynamic = tray; __callArgument71; }), (cast 'popupMenu' : String), (cast 'popup-failed' : String), (cast function(backend:TrayPopupMenuBackend):flight._internal._Promise<TrayPopupMenuResult> return (cast backend : TrayPopupMenuBackend).popup(({ final __callArgument72:Dynamic = tray; __callArgument72; }), ({ final __callArgument73:Dynamic = position; __callArgument73; })) : Dynamic)) : flight._internal._Promise<TrayPopupMenuResult>);
+    return cast null;
+  }
+
+  public static function removeTrayBalloon(tray:TrayWithBalloon):flight._internal._Promise<TrayBalloonRemoveResult> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument77:Dynamic = tray; __callArgument77; }), (cast 'balloon' : String), (cast 'balloon-remove-failed' : String), (cast function(backend:TrayBalloonBackend):flight._internal._Promise<TrayBalloonRemoveResult> return (cast backend : TrayBalloonBackend).remove(({ final __callArgument78:Dynamic = tray; __callArgument78; })) : Dynamic)) : flight._internal._Promise<TrayBalloonRemoveResult>);
+    return cast null;
   }
 
   @:allow(flight)
@@ -146,131 +274,239 @@ class _Tray {
     (_Tray._animationGuard__tray = cast (guard : Dynamic));
   }
 
-  @:allow(flight)
-  @:keep
-  private static function setTrayBackend(backend:Null<TrayBackend>):Void {
-    (_Tray._custom__tray = cast (backend : Dynamic));
-  }
-
-  public static function setTrayIcon(tray:TrayIcon, icon:String):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setIcon((cast tray.id : Float), (cast icon : String));
-  }
-
-  public static function setTrayIconContextMenu(tray:TrayIcon, items:Array<MenuItemTemplate>):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setContextMenu((cast tray.id : Float), ({ final __callArgument14:Dynamic = items; __callArgument14; }));
-  }
-
-  public static function setTrayIconTemplate(tray:TrayIcon, isTemplate:Bool):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setTemplate((cast tray.id : Float), (cast isTemplate : Bool));
-  }
-
-  public static function setTrayIconTitle(tray:TrayIcon, title:String):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setTitle((cast tray.id : Float), (cast title : String));
-  }
-
-  public static function setTrayIconTooltip(tray:TrayIcon, tooltip:String):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setTooltip((cast tray.id : Float), (cast tooltip : String));
-  }
-
-  public static function setTrayIgnoreDoubleClickEvents(tray:TrayIcon, ignore:Bool):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setIgnoreDoubleClickEvents((cast tray.id : Float), (cast ignore : Bool));
-  }
-
-  public static function setTrayPressedIcon(tray:TrayIcon, icon:String):Void {
-    (cast (cast getTrayBackend() : TrayBackend) : TrayBackend).setPressedIcon((cast tray.id : Float), (cast icon : String));
-  }
-
-  public static function startTrayIconAnimation(tray:TrayIcon, frames:Array<String>, intervalMs:Float):Void->Void {
-    var index:Float = cast _Runtime.UNDEFINED;
-    var handle:flight._internal.dom.Timeout = cast _Runtime.UNDEFINED;
-    if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) { return cast _Tray._noopStop__tray; }
-    _Runtime.callOptionalValue(_Tray._animationGuard__tray, cast ([tray, _Runtime.field(frames, 'length'), intervalMs] : Array<Dynamic>));
-    stopTrayIconAnimation(({ final __callArgument15:Dynamic = tray; __callArgument15; }));
-    index = 0.0;
-    setTrayIcon(({ final __callArgument17:Dynamic = tray; __callArgument17; }), (cast flight._internal._StaticIndex.readArray(frames, index) : String));
-    handle = _Runtime.setInterval(function():Void {
-      (index = cast (_Runtime.fmod((index + 1.0), _Runtime.field(frames, 'length')) : Dynamic));
-      setTrayIcon(({ final __callArgument19:Dynamic = tray; __callArgument19; }), (cast flight._internal._StaticIndex.readArray(frames, index) : String));
-    }, intervalMs);
-    ((cast _Tray._animations__tray : flight._internal._Map<Float, flight._internal.dom.Timeout>).set(tray.id, (cast handle)));
-    return cast function():Void {
-      if ((cast !_Runtime.strictEquals(((cast _Tray._animations__tray : flight._internal._Map<Float, flight._internal.dom.Timeout>).get(tray.id)), handle) : Bool)) { return; }
-      _Runtime.clearInterval(handle);
-      ((cast _Tray._animations__tray : flight._internal._Map<Float, flight._internal.dom.Timeout>).delete_(tray.id));
-    };
+  public static function setTrayIcon(tray:TrayWithImage, icon:TrayIconSource):flight._internal._Promise<TrayImageUpdateResult> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument81:Dynamic = tray; __callArgument81; }), (cast 'image' : String), (cast 'image-update-failed' : String), (cast function(backend:TrayImageBackend):flight._internal._Promise<TrayImageUpdateResult> return (cast backend : TrayImageBackend).set(tray, icon) : Dynamic)) : flight._internal._Promise<TrayImageUpdateResult>);
     return cast null;
   }
 
-  public static final _animations__tray:flight._internal._Map<Float, flight._internal.dom.Timeout> = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-
-  public static function _noopStop__tray():Void {
+  public static function setTrayIconContextMenu(tray:TrayWithMenu, items:Array<MenuItemTemplate>):flight._internal._Promise<TrayMenuUpdateResult> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument83:Dynamic = tray; __callArgument83; }), (cast 'menu' : String), (cast 'menu-install-failed' : String), (cast function(backend:TrayMenuBackend):flight._internal._Promise<TrayMenuUpdateResult> return (cast backend : TrayMenuBackend).set(tray, items) : Dynamic)) : flight._internal._Promise<TrayMenuUpdateResult>);
+    return cast null;
   }
 
-  public static function stopTrayIconAnimation(tray:TrayIcon):Void {
-    var handle:Null<flight._internal.dom.Timeout> = cast _Runtime.UNDEFINED;
-    handle = ((cast _Tray._animations__tray : flight._internal._Map<Float, flight._internal.dom.Timeout>).get(tray.id));
-    if ((cast _Runtime.strictEquals(handle, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return; }
-    _Runtime.clearInterval(handle);
-    ((cast _Tray._animations__tray : flight._internal._Map<Float, flight._internal.dom.Timeout>).delete_(tray.id));
+  public static function setTrayIconTemplate(tray:TrayWithTemplateImage, isTemplate:Bool):flight._internal._Promise<TrayTemplateImageUpdateResult> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument85:Dynamic = tray; __callArgument85; }), (cast 'templateImage' : String), (cast 'template-image-update-failed' : String), (cast function(backend:TrayTemplateImageBackend):flight._internal._Promise<TrayTemplateImageUpdateResult> return (cast backend : TrayTemplateImageBackend).set(tray, isTemplate) : Dynamic)) : flight._internal._Promise<TrayTemplateImageUpdateResult>);
+    return cast null;
+  }
+
+  public static function setTrayIconTitle(tray:TrayWithTitle, title:String):flight._internal._Promise<TrayTitleUpdateResult> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument87:Dynamic = tray; __callArgument87; }), (cast 'title' : String), (cast 'title-update-failed' : String), (cast function(backend:TrayTitleBackend):flight._internal._Promise<TrayTitleUpdateResult> return (cast backend : TrayTitleBackend).set(tray, title) : Dynamic)) : flight._internal._Promise<TrayTitleUpdateResult>);
+    return cast null;
+  }
+
+  public static function setTrayIconTooltip(tray:TrayWithTooltip, tooltip:String):flight._internal._Promise<TrayTooltipUpdateResult> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument89:Dynamic = tray; __callArgument89; }), (cast 'tooltip' : String), (cast 'tooltip-update-failed' : String), (cast function(backend:TrayTooltipBackend):flight._internal._Promise<TrayTooltipUpdateResult> return (cast backend : TrayTooltipBackend).set(tray, tooltip) : Dynamic)) : flight._internal._Promise<TrayTooltipUpdateResult>);
+    return cast null;
+  }
+
+  public static function attachTrayEvent__tray<Event:flight._internal._Object, Slot:EventSlot__tray>(tray:TrayIcon, slot:Slot, listener:Event->Void):TrayEventAttachResult {
+    var runtime:Null<TrayRuntime__tray> = cast _Runtime.UNDEFINED;
+    runtime = (cast _Tray.getActiveTrayRuntime__tray(({ final __callArgument91:Dynamic = tray; __callArgument91; })) : Null<TrayRuntime__tray>);
+    if ((cast _Runtime.strictEquals(runtime, null) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
+    try {
+      var backend:Null<EventBackend__tray<Event>> = (cast _Runtime.getIndex((cast runtime : TrayRuntime__tray).capabilities, slot) : Null<EventBackend__tray<Event>>);
+      var signal:Null<Signal<Event->Void>> = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural93 = backend; __structural93 == null ? _Runtime.UNDEFINED : (cast __structural93 : { var getSignal:TrayIcon->Null<Signal<Event->Void>>; }).getSignal; }), cast ([tray] : Array<Dynamic>)), function():Dynamic return cast null);
+      if ((cast _Runtime.strictEquals(signal, null) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
+      (#if js _Runtime.callValue(connectSignal, cast ([(cast signal : Dynamic), (cast listener : Dynamic)] : Array<Dynamic>)) #else connectSignal((cast signal : Dynamic), (cast listener : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+      var release:TrayReleaseRuntime__tray = (cast { released: false, release: function():flight._internal._Promise<TrayReleaseResult> {
+        return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+          if ((cast (cast release : TrayReleaseRuntime__tray).released : Bool)) { return cast { outcome: 'already-released' }; }
+          try {
+            disconnectSignal((cast signal : Dynamic), (cast listener : Dynamic));
+            ((cast release : TrayReleaseRuntime__tray).released = true);
+            ((cast (cast runtime : TrayRuntime__tray).releases : flight._internal._Set<TrayReleaseRuntime__tray>).delete_(release));
+            return cast { outcome: 'released' };
+          } catch (error:Dynamic) {
+            return cast { error: error, outcome: 'release-failed' };
+          }
+          return cast null;
+        }));
+      } });
+      ((cast (cast runtime : TrayRuntime__tray).releases : flight._internal._Set<TrayReleaseRuntime__tray>).add(release));
+      return cast { outcome: 'attached', release: release };
+    } catch (error:Dynamic) {
+      return cast { error: error, outcome: 'subscription-failed' };
+    }
+    return cast null;
+  }
+
+  public static function setTrayIgnoreDoubleClickEvents(tray:TrayWithDoubleClickPolicy, ignore:Bool):flight._internal._Promise<TrayDoubleClickPolicyUpdateResult> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument94:Dynamic = tray; __callArgument94; }), (cast 'doubleClickPolicy' : String), (cast 'double-click-policy-update-failed' : String), (cast function(backend:TrayDoubleClickPolicyBackend):flight._internal._Promise<TrayDoubleClickPolicyUpdateResult> return (cast backend : TrayDoubleClickPolicyBackend).setIgnore(({ final __callArgument95:Dynamic = tray; __callArgument95; }), (cast ignore : Bool)) : Dynamic)) : flight._internal._Promise<TrayDoubleClickPolicyUpdateResult>);
+    return cast null;
+  }
+
+  public static function setTrayPressedIcon(tray:TrayWithPressedImage, icon:TrayIconSource):flight._internal._Promise<TrayPressedImageUpdateResult> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument98:Dynamic = tray; __callArgument98; }), (cast 'pressedImage' : String), (cast 'pressed-image-update-failed' : String), (cast function(backend:TrayPressedImageBackend):flight._internal._Promise<TrayPressedImageUpdateResult> return (cast backend : TrayPressedImageBackend).set(tray, icon) : Dynamic)) : flight._internal._Promise<TrayPressedImageUpdateResult>);
+    return cast null;
+  }
+
+  public static function startTrayIconAnimation(tray:TrayWithImage, frames:Array<TrayIconSource>, intervalMs:Float):flight._internal._Promise<TrayAnimationStartResult> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        var runtime:Null<TrayRuntime__tray> = cast _Runtime.UNDEFINED;
+        var generation:Float = cast _Runtime.UNDEFINED;
+        var first:TrayImageUpdateResult = cast _Runtime.UNDEFINED;
+        var index:Float = cast _Runtime.UNDEFINED;
+        var release:TrayReleaseRuntime__tray = cast _Runtime.UNDEFINED;
+        var __flowBranch106:Dynamic;
+        if ((cast _Runtime.strictEquals(_Runtime.field(frames, 'length'), 0.0) : Bool)) {
+          __flowBranch106 = flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flowReturn({ outcome: 'empty' });
+          });
+        } else {
+          __flowBranch106 = flight._internal._Async.flowNormal();
+        }
+        return flight._internal._Async.continueFlow(__flowBranch106, function():Dynamic {
+          runtime = (cast _Tray.getActiveTrayRuntime__tray(({ final __callArgument107:Dynamic = tray; __callArgument107; })) : Null<TrayRuntime__tray>);
+          var __flowBranch109:Dynamic;
+          if ((cast _Runtime.strictEquals(runtime, null) : Bool)) {
+            __flowBranch109 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn({ outcome: 'tray-destroyed' });
+            });
+          } else {
+            __flowBranch109 = flight._internal._Async.flowNormal();
+          }
+          return flight._internal._Async.continueFlow(__flowBranch109, function():Dynamic {
+            _Runtime.callOptionalValue(_Tray._animationGuard__tray, cast ([tray, _Runtime.field(frames, 'length'), intervalMs] : Array<Dynamic>));
+            _Tray.stopTrayAnimationRuntime__tray((cast runtime : Dynamic));
+            generation = (cast runtime : TrayRuntime__tray).animationGeneration;
+            return flight._internal._Async.flatMap((cast _Tray.queueAnimationWrite__tray(({ final __callArgument115:Dynamic = tray; __callArgument115; }), (cast runtime : Dynamic), (cast generation : Float), (cast flight._internal._StaticIndex.readArray(frames, 0.0) : String)) : flight._internal._Promise<TrayImageUpdateResult>), function(__awaitValue110:Dynamic):Dynamic {
+              first = __awaitValue110;
+              var __flowBranch111:Dynamic;
+              if ((cast !_Runtime.strictEquals((cast first : { var outcome:String; }).outcome, 'updated') : Bool)) {
+                __flowBranch111 = flight._internal._Async.protect(function():Dynamic {
+                  return flight._internal._Async.flowReturn(first);
+                });
+              } else {
+                __flowBranch111 = flight._internal._Async.flowNormal();
+              }
+              return flight._internal._Async.continueFlow(__flowBranch111, function():Dynamic {
+                var __flowBranch112:Dynamic;
+                if ((cast ((cast !_Runtime.strictEquals((cast runtime : TrayRuntime__tray).state, 'active') : Bool) || (cast !_Runtime.strictEquals((cast runtime : TrayRuntime__tray).animationGeneration, generation) : Bool)) : Bool)) {
+                  __flowBranch112 = flight._internal._Async.protect(function():Dynamic {
+                    return flight._internal._Async.flowReturn({ outcome: 'tray-destroyed' });
+                  });
+                } else {
+                  __flowBranch112 = flight._internal._Async.flowNormal();
+                }
+                return flight._internal._Async.continueFlow(__flowBranch112, function():Dynamic {
+                  index = 0.0;
+                  ((cast runtime : TrayRuntime__tray).animationTimer = _Runtime.setInterval(function():Void {
+                    (index = cast (_Runtime.fmod((index + 1.0), _Runtime.field(frames, 'length')) : Dynamic));
+                    _Runtime.voidValue((cast _Tray.queueAnimationWrite__tray(({ final __callArgument113:Dynamic = tray; __callArgument113; }), (cast runtime : Dynamic), (cast generation : Float), (cast flight._internal._StaticIndex.readArray(frames, index) : String)) : flight._internal._Promise<TrayImageUpdateResult>));
+                  }, intervalMs));
+                  release = { released: false, release: function():flight._internal._Promise<TrayReleaseResult> {
+                    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+                      if ((cast (cast release : TrayReleaseRuntime__tray).released : Bool)) { return cast { outcome: 'already-released' }; }
+                      ((cast release : TrayReleaseRuntime__tray).released = true);
+                      if ((cast _Runtime.strictEquals((cast runtime : TrayRuntime__tray).animationGeneration, generation) : Bool)) { _Tray.stopTrayAnimationRuntime__tray((cast runtime : Dynamic)); }
+                      return cast { outcome: 'released' };
+                      return cast null;
+                    }));
+                  } };
+                  return flight._internal._Async.flowReturn({ outcome: 'started', release: release });
+                });
+              });
+            });
+          });
+        });
+      })
+    );
+  }
+
+  public static function queueAnimationWrite__tray(tray:TrayWithImage, runtime:TrayRuntime__tray, generation:Float, frame:TrayIconSource):flight._internal._Promise<TrayImageUpdateResult> {
+    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
+      var result:TrayImageUpdateResult = cast _Runtime.UNDEFINED;
+      result = { outcome: 'tray-destroyed' };
+      ((cast runtime : TrayRuntime__tray).animationWriteTail = _Runtime.callProperty((cast runtime : TrayRuntime__tray).animationWriteTail, 'then', cast ([function(__unused0:flight._internal._Nothing):flight._internal._Promise<flight._internal._Nothing> {
+        return cast flight._internal._Async.finishFlow(
+          flight._internal._Async.protect(function():Dynamic {
+            var __flowBranch121:Dynamic;
+            if ((cast ((cast !_Runtime.strictEquals((cast runtime : TrayRuntime__tray).state, 'active') : Bool) || (cast !_Runtime.strictEquals((cast runtime : TrayRuntime__tray).animationGeneration, generation) : Bool)) : Bool)) {
+              __flowBranch121 = flight._internal._Async.protect(function():Dynamic {
+                return flight._internal._Async.flowReturn(_Runtime.UNDEFINED);
+              });
+            } else {
+              __flowBranch121 = flight._internal._Async.flowNormal();
+            }
+            return flight._internal._Async.continueFlow(__flowBranch121, function():Dynamic {
+              return flight._internal._Async.flatMap((cast setTrayIcon(({ final __callArgument123:Dynamic = tray; __callArgument123; }), (cast frame : String)) : flight._internal._Promise<TrayImageUpdateResult>), function(__awaitValue122:Dynamic):Dynamic {
+                (result = cast (__awaitValue122 : Dynamic));
+                return flight._internal._Async.flowNormal();
+              });
+            });
+          })
+        );
+      }] : Array<Dynamic>)));
+      return flight._internal._Async.flatMap((cast runtime : TrayRuntime__tray).animationWriteTail, function(__awaitValue125:Dynamic):Dynamic {
+        __awaitValue125;
+        return flight._internal._Async.resolve(result);
+      });
+    }));
+  }
+
+  public static function stopTrayAnimationRuntime__tray(runtime:TrayRuntime__tray):Void {
+    (cast runtime : TrayRuntime__tray).animationGeneration++;
+    if ((cast !_Runtime.strictEquals((cast runtime : TrayRuntime__tray).animationTimer, null) : Bool)) { _Runtime.clearInterval((cast runtime : TrayRuntime__tray).animationTimer); }
+    ((cast runtime : TrayRuntime__tray).animationTimer = null);
+  }
+
+  public static function stopTrayIconAnimation(tray:TrayIcon):TrayAnimationStopResult {
+    var runtime:Null<TrayRuntime__tray> = cast _Runtime.UNDEFINED;
+    runtime = (cast _Tray.getTrayRuntime__tray(({ final __callArgument126:Dynamic = tray; __callArgument126; })) : Null<TrayRuntime__tray>);
+    if ((cast ((cast _Runtime.strictEquals(runtime, null) : Bool) || (cast _Runtime.strictEquals((cast runtime : TrayRuntime__tray).animationTimer, null) : Bool)) : Bool)) { return cast { outcome: 'already-stopped' }; }
+    _Tray.stopTrayAnimationRuntime__tray((cast runtime : Dynamic));
+    return cast { outcome: 'stopped' };
+    return cast null;
   }
 
   public static var _animationGuard__tray:Null<TrayIcon->Float->Float->Void> = _Runtime.explicitNull();
 
-  public static var _custom__tray:Null<TrayBackend> = _Runtime.explicitNull();
-
-  public static var _host__tray:Null<TrayBackend> = _Runtime.explicitNull();
-
-  public static var _hostConflict__tray:Bool = false;
-
-  public static var _hostObservation__tray:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
-
-  public static final _sentinel__tray:TrayBackend = (cast { create: function(options:TrayIconOptions):Float {
-    return cast -1.0;
-    return cast _Runtime.UNDEFINED;
-  }, destroy: function(id:Float):Void {
-
-  }, displayBalloon: function(id:Float, options:TrayBalloonOptions):Void {
-
-  }, getBounds: function(id:Float):Null<RectangleLike> {
+  public static function getTrayRuntime__tray(tray:TrayIcon):Null<TrayRuntime__tray> {
+    return cast _Runtime.coalesce((cast _Runtime.getIndex(tray, EntityRuntimeKey) : Null<TrayRuntime__tray>), function():Dynamic return cast null);
     return cast null;
-    return cast _Runtime.UNDEFINED;
-  }, getCapabilities: function():TrayCapabilities {
-    return cast _Tray.WEB_CAPABILITIES__tray;
-    return cast _Runtime.UNDEFINED;
-  }, getTitle: function(id:Float):String {
-    return cast '';
-    return cast _Runtime.UNDEFINED;
-  }, getTooltip: function(id:Float):String {
-    return cast '';
-    return cast _Runtime.UNDEFINED;
-  }, isDestroyed: function(id:Float):Bool {
-    return cast true;
-    return cast _Runtime.UNDEFINED;
-  }, listIds: function():Array<Float> {
-    return cast cast ([] : Array<Dynamic>);
-    return cast _Runtime.UNDEFINED;
-  }, popUpContextMenu: function(id:Float, ?position:Vector2Like):Void {
+  }
 
-  }, removeBalloon: function(id:Float):Void {
+  public static function getActiveTrayRuntime__tray(tray:TrayIcon):Null<TrayRuntime__tray> {
+    var runtime:Null<TrayRuntime__tray> = cast _Runtime.UNDEFINED;
+    runtime = (cast _Tray.getTrayRuntime__tray(({ final __callArgument128:Dynamic = tray; __callArgument128; })) : Null<TrayRuntime__tray>);
+    return cast ((cast _Runtime.strictEquals(({ final __structural130 = runtime; __structural130 == null ? _Runtime.UNDEFINED : (cast __structural130 : { var state:String; }).state; }), 'active') : Bool) ? (cast runtime : Dynamic) : (cast null : Dynamic));
+    return cast null;
+  }
 
-  }, setContextMenu: function(id:Float, items:Array<MenuItemTemplate>):Void {
+  public static function invokeUpdate__tray<Slot, Backend:flight._internal._IndexedAccess<HostTrayCapabilities, Slot>, Result>(tray:TrayIcon, slot:Slot, failure:flight._internal._IndexedAccess<Result, String>, operation:Backend->flight._internal._Promise<Result>):flight._internal._Promise<Result> {
+    return cast flight._internal._Async.finishFlow(
+      flight._internal._Async.protect(function():Dynamic {
+        var runtime:Null<TrayRuntime__tray> = cast _Runtime.UNDEFINED;
+        runtime = (cast _Tray.getActiveTrayRuntime__tray(({ final __callArgument133:Dynamic = tray; __callArgument133; })) : Null<TrayRuntime__tray>);
+        var __flowBranch135:Dynamic;
+        if ((cast _Runtime.strictEquals(runtime, null) : Bool)) {
+          __flowBranch135 = flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flowReturn((cast { outcome: 'tray-destroyed' } : Result));
+          });
+        } else {
+          __flowBranch135 = flight._internal._Async.flowNormal();
+        }
+        return flight._internal._Async.continueFlow(__flowBranch135, function():Dynamic {
+          return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flatMap((cast operation((cast (cast _Runtime.getIndex((cast runtime : TrayRuntime__tray).capabilities, slot) : Backend) : Dynamic)) : flight._internal._Promise<Result>), function(__awaitValue136:Dynamic):Dynamic {
+              return flight._internal._Async.flowReturn(__awaitValue136);
+            });
+          }), function(__caughtError:Dynamic):Dynamic {
+            var error:Dynamic = __caughtError;
+            return flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flowReturn((cast (cast { error: error, outcome: failure } : flight._internal._Any) : Result));
+            });
+          }), function():Dynamic {
+            return flight._internal._Async.flowNormal();
+          });
+        });
+      })
+    );
+  }
 
-  }, setIcon: function(id:Float, icon:String):Void {
-
-  }, setIgnoreDoubleClickEvents: function(id:Float, ignore:Bool):Void {
-
-  }, setPressedIcon: function(id:Float, icon:String):Void {
-
-  }, setTemplate: function(id:Float, isTemplate:Bool):Void {
-
-  }, setTitle: function(id:Float, title:String):Void {
-
-  }, setTooltip: function(id:Float, tooltip:String):Void {
-
-  }, subscribe: function(listener:TrayEventData->Void):Void->Void {
-    return cast function():Void {
-
-    };
-    return cast _Runtime.UNDEFINED;
-  } });
+  public static function invokeRead__tray<Slot, Backend:flight._internal._IndexedAccess<HostTrayCapabilities, Slot>, Result>(tray:TrayIcon, slot:Slot, failure:flight._internal._IndexedAccess<Result, String>, operation:Backend->flight._internal._Promise<Result>):flight._internal._Promise<Result> {
+    return cast (cast _Tray.invokeUpdate__tray(({ final __callArgument137:Dynamic = tray; __callArgument137; }), (cast slot : Dynamic), (cast failure : Dynamic), (cast operation : Dynamic)) : flight._internal._Promise<Result>);
+    return cast null;
+  }
 }

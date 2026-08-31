@@ -3,29 +3,21 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
-import flight.Types.EntityRuntimeKey;
-import flight._Entity.createEntity;
-import flight._Types.EntityRuntimeKey;
 import flight.types.BackendExplanation;
-import flight.types.Entity;
-import flight.types.EntityRuntime;
-import flight.types.WebcamBackend;
-import flight.types.WebcamCaptureOptions;
-import flight.types.WebcamFacingMode;
-import flight.types.WebcamPhoto;
-import flight.types.WebcamStream;
-import flight.types.WebcamStreamRuntime;
-import flight.types.WebcamVideo;
+import flight.types.MediaFileCaptureBackend;
+import flight.types.MediaFileCaptureOptions;
+import flight.types.MediaFileCapturePhoto;
+import flight.types.MediaFileCaptureVideo;
 
 @:noCompletion
 class _Webcam {
   @:allow(flight)
   @:keep
-  private static function createWebWebcamBackend():WebcamBackend {
-    return cast { capture: function(options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamPhoto>> {
+  private static function createWebMediaFileCaptureBackend():MediaFileCaptureBackend {
+    return cast { capture: function(options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCapturePhoto>> {
       return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused0:flight._internal._Any):Void {
         if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) {
-          observeWebcamHostResult((cast 'capture' : String), (cast false : Bool));
+          observeMediaFileCaptureHostResult((cast 'capture' : String), (cast false : Bool));
           resolve(({ final __callArgument0:Dynamic = null; __callArgument0; }));
           return;
         }
@@ -34,11 +26,11 @@ class _Webcam {
           ((cast input : flight._internal.dom.HTMLInputElement).type = 'file');
           ((cast input : flight._internal.dom.HTMLInputElement).accept = 'image/*');
           if ((cast _Runtime.strictEquals(options.source, 'camera') : Bool)) { ((cast input : flight._internal.dom.HTMLInputElement).capture = 'environment'); }
-          var settle:Null<WebcamPhoto>->Void = cast _Runtime.UNDEFINED;
-          settle = (cast function(value:Null<WebcamPhoto>):Void {
+          var settle:Null<MediaFileCapturePhoto>->Void = cast _Runtime.UNDEFINED;
+          settle = (cast function(value:Null<MediaFileCapturePhoto>):Void {
             ((cast input : flight._internal.dom.HTMLInputElement).onchange = null);
             ((cast input : flight._internal.dom.HTMLInputElement).oncancel = null);
-            observeWebcamHostResult((cast 'capture' : String), (cast !_Runtime.strictEquals(value, null) : Bool));
+            observeMediaFileCaptureHostResult((cast 'capture' : String), (cast !_Runtime.strictEquals(value, null) : Bool));
             resolve(({ final __callArgument2:Dynamic = value; __callArgument2; }));
           });
           ((cast input : flight._internal.dom.HTMLInputElement).onchange = function(__unused1:flight._internal.dom.Event):Void {
@@ -59,15 +51,15 @@ class _Webcam {
           ((cast input : flight._internal.dom.HTMLInputElement).oncancel = function(__unused4:flight._internal.dom.Event):Void { settle(({ final __callArgument10:Dynamic = null; __callArgument10; })); });
           (cast input : flight._internal.dom.HTMLInputElement).click();
         } catch (__error:Dynamic) {
-          observeWebcamHostResult((cast 'capture' : String), (cast false : Bool));
+          observeMediaFileCaptureHostResult((cast 'capture' : String), (cast false : Bool));
           resolve(({ final __callArgument12:Dynamic = null; __callArgument12; }));
         }
       });
       return cast _Runtime.UNDEFINED;
-    }, captureVideo: function(options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamVideo>> {
+    }, captureVideo: function(options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCaptureVideo>> {
       return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused5:flight._internal._Any):Void {
         if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) {
-          observeWebcamHostResult((cast 'captureVideo' : String), (cast false : Bool));
+          observeMediaFileCaptureHostResult((cast 'captureVideo' : String), (cast false : Bool));
           resolve(({ final __callArgument14:Dynamic = null; __callArgument14; }));
           return;
         }
@@ -76,11 +68,11 @@ class _Webcam {
           ((cast input : flight._internal.dom.HTMLInputElement).type = 'file');
           ((cast input : flight._internal.dom.HTMLInputElement).accept = 'video/*');
           if ((cast _Runtime.strictEquals(options.source, 'camera') : Bool)) { ((cast input : flight._internal.dom.HTMLInputElement).capture = 'environment'); }
-          var settle:Null<WebcamVideo>->Void = cast _Runtime.UNDEFINED;
-          settle = (cast function(value:Null<WebcamVideo>):Void {
+          var settle:Null<MediaFileCaptureVideo>->Void = cast _Runtime.UNDEFINED;
+          settle = (cast function(value:Null<MediaFileCaptureVideo>):Void {
             ((cast input : flight._internal.dom.HTMLInputElement).onchange = null);
             ((cast input : flight._internal.dom.HTMLInputElement).oncancel = null);
-            observeWebcamHostResult((cast 'captureVideo' : String), (cast !_Runtime.strictEquals(value, null) : Bool));
+            observeMediaFileCaptureHostResult((cast 'captureVideo' : String), (cast !_Runtime.strictEquals(value, null) : Bool));
             resolve(({ final __callArgument16:Dynamic = value; __callArgument16; }));
           });
           ((cast input : flight._internal.dom.HTMLInputElement).onchange = function(__unused6:flight._internal.dom.Event):Void {
@@ -101,68 +93,21 @@ class _Webcam {
           ((cast input : flight._internal.dom.HTMLInputElement).oncancel = function(__unused9:flight._internal.dom.Event):Void { settle(({ final __callArgument24:Dynamic = null; __callArgument24; })); });
           (cast input : flight._internal.dom.HTMLInputElement).click();
         } catch (__error:Dynamic) {
-          observeWebcamHostResult((cast 'captureVideo' : String), (cast false : Bool));
+          observeMediaFileCaptureHostResult((cast 'captureVideo' : String), (cast false : Bool));
           resolve(({ final __callArgument26:Dynamic = null; __callArgument26; }));
         }
       });
       return cast _Runtime.UNDEFINED;
-    }, requestPermission: function():flight._internal._Promise<Bool> {
-      return cast flight._internal._Async.finishFlow(
-        flight._internal._Async.protect(function():Dynamic {
-          var __flowBranch28:Dynamic;
-          if ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('navigator'), 'undefined') : Bool)) {
-            __flowBranch28 = flight._internal._Async.protect(function():Dynamic {
-              observeWebcamHostResult((cast 'requestPermission' : String), (cast false : Bool));
-              return flight._internal._Async.flowReturn(false);
-            });
-          } else {
-            __flowBranch28 = flight._internal._Async.flowNormal();
-          }
-          return flight._internal._Async.continueFlow(__flowBranch28, function():Dynamic {
-            return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              var permissions:flight._internal.dom.Permissions = cast _Runtime.UNDEFINED;
-              var status:flight._internal.dom.PermissionStatus = cast _Runtime.UNDEFINED;
-              var granted:Bool = cast _Runtime.UNDEFINED;
-              permissions = flight._internal.backend.DomNavigatorBackend.field(flight._internal.backend.DomNavigatorBackend.value(), 'permissions');
-              var __flowBranch29:Dynamic;
-              if ((cast ((cast _Runtime.strictEquals(permissions, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue((cast permissions : flight._internal.dom.Permissions).query), 'function') : Bool)) : Bool)) {
-                __flowBranch29 = flight._internal._Async.protect(function():Dynamic {
-                  observeWebcamHostResult((cast 'requestPermission' : String), (cast false : Bool));
-                  return flight._internal._Async.flowReturn(false);
-                });
-              } else {
-                __flowBranch29 = flight._internal._Async.flowNormal();
-              }
-              return flight._internal._Async.continueFlow(__flowBranch29, function():Dynamic {
-                return flight._internal._Async.flatMap((cast permissions : flight._internal.dom.Permissions).query({ name: (cast 'camera' : flight._internal.dom.PermissionName) }), function(__awaitValue30:Dynamic):Dynamic {
-                  status = __awaitValue30;
-                  granted = _Runtime.strictEquals((cast status : flight._internal.dom.PermissionStatus).state, 'granted');
-                  observeWebcamHostResult((cast 'requestPermission' : String), (cast granted : Bool));
-                  return flight._internal._Async.flowReturn(granted);
-                });
-              });
-            }), function(__caughtError:Dynamic):Dynamic {
-              var __error:Dynamic = __caughtError;
-              return flight._internal._Async.protect(function():Dynamic {
-                observeWebcamHostResult((cast 'requestPermission' : String), (cast false : Bool));
-                return flight._internal._Async.flowReturn(false);
-              });
-            }), function():Dynamic {
-              return flight._internal._Async.flowNormal();
-            });
-          });
-        })
-      );
     } };
     return cast null;
   }
 
-  public static function explainWebcamBackend():BackendExplanation {
-    if ((cast !_Runtime.strictEquals(_Webcam._custom__webcam, null) : Bool)) {
-      return cast { conflict: _Webcam._hostConflict__webcam, layer: 'custom', operation: null, viability: 'unobserved' };
+  public static function explainMediaFileCaptureBackend():BackendExplanation {
+    if ((cast !_Runtime.strictEquals(_Webcam._custom__mediaFileCapture, null) : Bool)) {
+      return cast { conflict: _Webcam._hostConflict__mediaFileCapture, layer: 'custom', operation: null, viability: 'unobserved' };
     }
-    if ((cast !_Runtime.strictEquals(_Webcam._host__webcam, null) : Bool)) {
-      return cast { conflict: _Webcam._hostConflict__webcam, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Webcam._hostObservation__webcam, null) : Bool) ? (cast (cast _Webcam._hostObservation__webcam : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Webcam._hostObservation__webcam, null) : Bool) ? (cast (cast _Webcam._hostObservation__webcam : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
+    if ((cast !_Runtime.strictEquals(_Webcam._host__mediaFileCapture, null) : Bool)) {
+      return cast { conflict: _Webcam._hostConflict__mediaFileCapture, layer: 'host', operation: ((cast !_Runtime.strictEquals(_Webcam._hostObservation__mediaFileCapture, null) : Bool) ? (cast (cast _Webcam._hostObservation__mediaFileCapture : { var operation:String; var viability:String; }).operation : Dynamic) : (cast null : Dynamic)), viability: ((cast !_Runtime.strictEquals(_Webcam._hostObservation__mediaFileCapture, null) : Bool) ? (cast (cast _Webcam._hostObservation__mediaFileCapture : { var operation:String; var viability:String; }).viability : Dynamic) : (cast 'unobserved' : Dynamic)) };
     }
     return cast { conflict: false, layer: 'host-not-enabled', operation: null, viability: 'unobserved' };
     return cast null;
@@ -170,101 +115,72 @@ class _Webcam {
 
   @:allow(flight)
   @:keep
-  private static function getWebcamBackend():WebcamBackend {
-    return cast _Runtime.coalesce(_Runtime.coalesce(_Webcam._custom__webcam, function():Dynamic return cast _Webcam._host__webcam), function():Dynamic return cast _Webcam._sentinel__webcam);
+  private static function getMediaFileCaptureBackend():MediaFileCaptureBackend {
+    return cast _Runtime.coalesce(_Runtime.coalesce(_Webcam._custom__mediaFileCapture, function():Dynamic return cast _Webcam._host__mediaFileCapture), function():Dynamic return cast _Webcam._sentinel__mediaFileCapture);
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function installWebcamHostBackend(backend:WebcamBackend):Void {
-    if ((cast !_Runtime.strictEquals(_Webcam._host__webcam, null) : Bool)) {
-      if ((cast !_Runtime.strictEquals(_Webcam._host__webcam, backend) : Bool)) { (_Webcam._hostConflict__webcam = cast (true : Dynamic)); }
+  private static function installMediaFileCaptureHostBackend(backend:MediaFileCaptureBackend):Void {
+    if ((cast !_Runtime.strictEquals(_Webcam._host__mediaFileCapture, null) : Bool)) {
+      if ((cast !_Runtime.strictEquals(_Webcam._host__mediaFileCapture, backend) : Bool)) { (_Webcam._hostConflict__mediaFileCapture = cast (true : Dynamic)); }
       return;
     }
-    (_Webcam._host__webcam = cast (backend : Dynamic));
+    (_Webcam._host__mediaFileCapture = cast (backend : Dynamic));
   }
 
   @:allow(flight)
   @:keep
-  private static function observeWebcamHostResult(operation:String, succeeded:Bool):Void {
-    (_Webcam._hostObservation__webcam = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
+  private static function observeMediaFileCaptureHostResult(operation:String, succeeded:Bool):Void {
+    (_Webcam._hostObservation__mediaFileCapture = cast ({ operation: operation, viability: ((cast succeeded : Bool) ? (cast 'available' : Dynamic) : (cast 'runtime-api-unavailable' : Dynamic)) } : Dynamic));
   }
 
-  public static function recordWebcamVideo(?options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamVideo>> {
-    return cast (cast (cast getWebcamBackend() : WebcamBackend) : WebcamBackend).captureVideo(({ final __callArgument31:Dynamic = _Runtime.mergeObjects([options, { source: 'camera' }]); __callArgument31; }));
-    return cast null;
-  }
-
-  public static function requestWebcamPermission():flight._internal._Promise<Bool> {
-    return cast (cast (cast getWebcamBackend() : WebcamBackend) : WebcamBackend).requestPermission();
+  public static function recordMediaFileCaptureVideo(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCaptureVideo>> {
+    return cast (cast (cast getMediaFileCaptureBackend() : MediaFileCaptureBackend) : MediaFileCaptureBackend).captureVideo(({ final __callArgument28:Dynamic = _Runtime.mergeObjects([options, { source: 'camera' }]); __callArgument28; }));
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function resetWebcamBackendForTest():Void {
-    (_Webcam._custom__webcam = cast (null : Dynamic));
-    (_Webcam._host__webcam = cast (null : Dynamic));
-    (_Webcam._hostConflict__webcam = cast (false : Dynamic));
-    (_Webcam._hostObservation__webcam = cast (null : Dynamic));
+  private static function resetMediaFileCaptureBackendForTest():Void {
+    (_Webcam._custom__mediaFileCapture = cast (null : Dynamic));
+    (_Webcam._host__mediaFileCapture = cast (null : Dynamic));
+    (_Webcam._hostConflict__mediaFileCapture = cast (false : Dynamic));
+    (_Webcam._hostObservation__mediaFileCapture = cast (null : Dynamic));
   }
 
-  public static function selectWebcamImage(?options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamPhoto>> {
-    return cast (cast (cast getWebcamBackend() : WebcamBackend) : WebcamBackend).capture(({ final __callArgument32:Dynamic = _Runtime.mergeObjects([options, { source: 'photos' }]); __callArgument32; }));
+  public static function selectMediaFileCaptureImage(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCapturePhoto>> {
+    return cast (cast (cast getMediaFileCaptureBackend() : MediaFileCaptureBackend) : MediaFileCaptureBackend).capture(({ final __callArgument29:Dynamic = _Runtime.mergeObjects([options, { source: 'photos' }]); __callArgument29; }));
     return cast null;
   }
 
   @:allow(flight)
   @:keep
-  private static function setWebcamBackend(backend:Null<WebcamBackend>):Void {
-    (_Webcam._custom__webcam = cast (backend : Dynamic));
+  private static function setMediaFileCaptureBackend(backend:Null<MediaFileCaptureBackend>):Void {
+    (_Webcam._custom__mediaFileCapture = cast (backend : Dynamic));
   }
 
-  public static function takeWebcamPhoto(?options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamPhoto>> {
-    return cast (cast (cast getWebcamBackend() : WebcamBackend) : WebcamBackend).capture(({ final __callArgument33:Dynamic = _Runtime.mergeObjects([options, { source: 'camera' }]); __callArgument33; }));
+  public static function takeMediaFileCapturePhoto(?options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCapturePhoto>> {
+    return cast (cast (cast getMediaFileCaptureBackend() : MediaFileCaptureBackend) : MediaFileCaptureBackend).capture(({ final __callArgument30:Dynamic = _Runtime.mergeObjects([options, { source: 'camera' }]); __callArgument30; }));
     return cast null;
   }
 
-  public static var _custom__webcam:Null<WebcamBackend> = _Runtime.explicitNull();
+  public static var _custom__mediaFileCapture:Null<MediaFileCaptureBackend> = _Runtime.explicitNull();
 
-  public static var _host__webcam:Null<WebcamBackend> = _Runtime.explicitNull();
+  public static var _host__mediaFileCapture:Null<MediaFileCaptureBackend> = _Runtime.explicitNull();
 
-  public static var _hostConflict__webcam:Bool = false;
+  public static var _hostConflict__mediaFileCapture:Bool = false;
 
-  public static var _hostObservation__webcam:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
+  public static var _hostObservation__mediaFileCapture:Null<{ var operation:String; var viability:String; }> = _Runtime.explicitNull();
 
-  public static final _sentinel__webcam:WebcamBackend = (cast { capture: function(options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamPhoto>> {
+  public static final _sentinel__mediaFileCapture:MediaFileCaptureBackend = (cast { capture: function(options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCapturePhoto>> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       return flight._internal._Async.resolve(null);
     }));
-  }, captureVideo: function(options:WebcamCaptureOptions):flight._internal._Promise<Null<WebcamVideo>> {
+  }, captureVideo: function(options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCaptureVideo>> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
       return flight._internal._Async.resolve(null);
-    }));
-  }, requestPermission: function():flight._internal._Promise<Bool> {
-    return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      return flight._internal._Async.resolve(false);
     }));
   } });
-
-  public static function createWebcamStreamEntity(data:{ var active:Bool; var deviceId:String; var facingMode:Null<WebcamFacingMode>; var frameRate:Float; var height:Float; var id:String; var width:Float; }):WebcamStream {
-    var stream:{ >Entity, var active:Bool; var deviceId:String; var facingMode:Null<String>; var frameRate:Float; var height:Float; var id:String; var width:Float; } = cast _Runtime.UNDEFINED;
-    var rt:WebcamStreamRuntime = cast _Runtime.UNDEFINED;
-    stream = (cast createEntity(({ final __callArgument34:Dynamic = { active: (cast data : { var active:Bool; var deviceId:String; var facingMode:Null<String>; var frameRate:Float; var height:Float; var id:String; var width:Float; }).active, deviceId: (cast data : { var active:Bool; var deviceId:String; var facingMode:Null<String>; var frameRate:Float; var height:Float; var id:String; var width:Float; }).deviceId, facingMode: (cast data : { var active:Bool; var deviceId:String; var facingMode:Null<String>; var frameRate:Float; var height:Float; var id:String; var width:Float; }).facingMode, frameRate: (cast data : { var active:Bool; var deviceId:String; var facingMode:Null<String>; var frameRate:Float; var height:Float; var id:String; var width:Float; }).frameRate, height: (cast data : { var active:Bool; var deviceId:String; var facingMode:Null<String>; var frameRate:Float; var height:Float; var id:String; var width:Float; }).height, id: (cast data : { var active:Bool; var deviceId:String; var facingMode:Null<String>; var frameRate:Float; var height:Float; var id:String; var width:Float; }).id, width: (cast data : { var active:Bool; var deviceId:String; var facingMode:Null<String>; var frameRate:Float; var height:Float; var id:String; var width:Float; }).width }; __callArgument34; })) : { >Entity, var active:Bool; var deviceId:String; var facingMode:Null<String>; var frameRate:Float; var height:Float; var id:String; var width:Float; });
-    rt = (cast { binding: null, mediaStream: null, videoElement: null });
-    _Runtime.setIndex(stream, EntityRuntimeKey, rt);
-    return cast stream;
-    return cast null;
-  }
-
-  @:allow(flight)
-  @:keep
-  private static function getWebcamStreamRuntime(stream:WebcamStream):Null<WebcamStreamRuntime> {
-    var rt:Null<EntityRuntime> = cast _Runtime.UNDEFINED;
-    rt = _Runtime.getIndex(stream, EntityRuntimeKey);
-    if ((cast ((cast _Runtime.strictEquals(rt, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(rt, null) : Bool)) : Bool)) { return cast null; }
-    return cast (cast rt : WebcamStreamRuntime);
-    return cast null;
-  }
 }

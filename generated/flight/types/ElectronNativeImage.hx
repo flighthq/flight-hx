@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ElectronNativeImage = { var toDataURL:Void->String; var isEmpty:Void->Bool; };
+typedef ElectronNativeImage = { var toDataURL:Void->String; var isEmpty:Void->Bool; var setTemplateImage:Bool->Void; };

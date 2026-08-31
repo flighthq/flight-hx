@@ -5,5 +5,6 @@ const api = compiled.flight._HostWeb;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const enableHostWebDevice = api.enableHostWebDevice;
-export const resetHostWebDeviceForTest = api.resetHostWebDeviceForTest;
+export const createWebDeviceBackend = api.createWebDeviceBackend;
+export const enableWebSafeAreaInsets = api.enableWebSafeAreaInsets;
+export const webDeviceBackend = api.webDeviceBackend;

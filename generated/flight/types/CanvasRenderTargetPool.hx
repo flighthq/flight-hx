@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef CanvasRenderTargetPool = { var free:Array<CanvasRenderTarget>; var inUse:Array<CanvasRenderTarget>; };
+typedef CanvasRenderTargetPool = { var creator:CanvasRenderSurfaceCreator; var free:Array<CanvasRenderTarget>; var inUse:Array<CanvasRenderTarget>; };

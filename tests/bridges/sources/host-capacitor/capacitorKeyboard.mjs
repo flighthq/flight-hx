@@ -5,4 +5,10 @@ const api = compiled.flight._HostCapacitor;
 function __syncDependencies() {}
 __syncDependencies();
 
-export const createCapacitorKeyboardBackend = api.createCapacitorKeyboardBackend;
+export const createCapacitorSoftKeyboardAccessoryBarBackend = api.createCapacitorSoftKeyboardAccessoryBarBackend;
+export const createCapacitorSoftKeyboardChangeBackend = api.createCapacitorSoftKeyboardChangeBackend;
+export const createCapacitorSoftKeyboardInfoBackend = api.createCapacitorSoftKeyboardInfoBackend;
+export const createCapacitorSoftKeyboardResizeModeWriteBackend = api.createCapacitorSoftKeyboardResizeModeWriteBackend;
+export const createCapacitorSoftKeyboardScrollAssistBackend = api.createCapacitorSoftKeyboardScrollAssistBackend;
+export const createCapacitorSoftKeyboardStyleBackend = api.createCapacitorSoftKeyboardStyleBackend;
+export const createCapacitorSoftKeyboardVisibilityBackend = api.createCapacitorSoftKeyboardVisibilityBackend;

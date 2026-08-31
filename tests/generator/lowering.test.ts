@@ -871,6 +871,54 @@ describe('TypeScript lowering and Haxe emission', () => {
     ).not.toThrow();
   });
 
+  it('terminates when a private generic overload alias preserves its caller type parameter', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/privateGenericOverload.ts',
+      `
+        type Identity<T> = T;
+        export function choose<T>(value: Identity<T>): T;
+        export function choose<T>(value: T): T {
+          return value;
+        }
+      `,
+    );
+
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'PrivateGenericOverload',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('@:overload(function<T>(value:T):T {})');
+  });
+
+  it('erases standard utility types used as interface heritage', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/utilityHeritage.ts',
+      `
+        declare function createRuntime(): { readonly hidden: string };
+        export interface Runtime extends ReturnType<typeof createRuntime> {
+          count: number;
+        }
+      `,
+    );
+
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'UtilityHeritage',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('typedef Runtime = { var count:Float; };');
+    expect(output).not.toContain('ReturnType');
+  });
+
   it('lowers for-of control flow without diagnostics', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/math/src/sample.ts',
@@ -1167,6 +1215,82 @@ describe('TypeScript lowering and Haxe emission', () => {
               return value;
             });
             if (selected != 2) throw 'synchronous false branch failed';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync(
+        'node',
+        ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '-cp', 'generated', '--main', 'Main', '--interp'],
+        {
+          cwd: path.resolve('.'),
+          stdio: 'pipe',
+        },
+      ),
+    ).not.toThrow();
+  });
+
+  it('propagates returns through a switch after an await', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/sample.ts',
+      `
+        export async function project(pending: Promise<string>): Promise<number> {
+          const outcome = await pending;
+          switch (outcome) {
+            case 'one':
+              return 1;
+            case 'two':
+            case 'second':
+              return 2;
+            default:
+              return 3;
+          }
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'AsyncSwitchFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(output).toContain('_Async.finishFlow');
+    expect(output.match(/_Async\.flowReturn/gu)).toHaveLength(3);
+
+    const fixtureDirectory = path.resolve('build/haxe-async-switch-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flight');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'AsyncSwitchFixture.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        import flight.AsyncSwitchFixture.project;
+        import flight._internal._Async;
+        class Main {
+          static function main() {
+            var result = 0;
+            project(_Async.resolve('one')).then(function(value) {
+              result = Std.int(value);
+              return value;
+            });
+            if (result != 1) throw 'first switch branch failed';
+            project(_Async.resolve('second')).then(function(value) {
+              result = Std.int(value);
+              return value;
+            });
+            if (result != 2) throw 'grouped switch branch failed';
+            project(_Async.resolve('other')).then(function(value) {
+              result = Std.int(value);
+              return value;
+            });
+            if (result != 3) throw 'default switch branch failed';
           }
         }
       `,
@@ -2631,6 +2755,34 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('function merge<T:flight._internal._Object>(fields:T):T');
     expect(output).not.toContain('{ >T,');
     expect(output).toContain('; _Runtime.UNDEFINED; })');
+  });
+
+  it('keeps wrapped generic members of inferred intersections nominal', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/wrappedGenericIntersection.ts',
+      `
+        declare const EntityRuntimeKey: unique symbol;
+        interface Entity { readonly [EntityRuntimeKey]: undefined; }
+        interface Host extends Entity { readonly app: {}; }
+        declare function createEntity<T extends object>(value: T): T & Entity;
+        export function createHost<Capabilities extends Partial<Host>>(
+          capabilities: Readonly<Capabilities>,
+        ): Host & Capabilities {
+          return createEntity({ app: {}, ...capabilities });
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'WrappedGenericIntersectionFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('flight._internal._Intersection2');
+    expect(output).not.toContain('{ >Capabilities,');
   });
 
   it('lowers portable standard identity, constants, and iterable probes explicitly', () => {

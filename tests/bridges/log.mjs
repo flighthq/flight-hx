@@ -26,7 +26,6 @@ export const createRateLimitedLogSink = compiled.flight.Log.createRateLimitedLog
 export const createSampledLogSink = compiled.flight.Log.createSampledLogSink;
 export const createTextLogFormatter = compiled.flight.Log.createTextLogFormatter;
 export const destroyFileLogSink = compiled.flight.Log.destroyFileLogSink;
-export const destroyLogTransportBackend = compiled.flight.Log.destroyLogTransportBackend;
 export const disposeLogSink = compiled.flight.Log.disposeLogSink;
 export const enableLogSignals = compiled.flight.Log.enableLogSignals;
 export const endLogGroup = compiled.flight.Log.endLogGroup;
