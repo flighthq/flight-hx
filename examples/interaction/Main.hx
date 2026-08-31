@@ -133,8 +133,8 @@ class Main extends Application {
       {
         shape: createShape(),
         name: 'Red Rect',
-        baseColor: 0xcc4444,
-        hoverColor: 0xff6666,
+        baseColor: 0xcc4444ff,
+        hoverColor: 0xff6666ff,
         kind: 'rect',
         cx: 100,
         cy: 100,
@@ -144,8 +144,8 @@ class Main extends Application {
       {
         shape: createShape(),
         name: 'Green Circle',
-        baseColor: 0x44cc44,
-        hoverColor: 0x66ff66,
+        baseColor: 0x44cc44ff,
+        hoverColor: 0x66ff66ff,
         kind: 'circle',
         cx: 300,
         cy: 150,
@@ -155,8 +155,8 @@ class Main extends Application {
       {
         shape: createShape(),
         name: 'Blue Rect',
-        baseColor: 0x4444cc,
-        hoverColor: 0x6666ff,
+        baseColor: 0x4444ccff,
+        hoverColor: 0x6666ffff,
         kind: 'rect',
         cx: 500,
         cy: 100,
@@ -166,8 +166,8 @@ class Main extends Application {
       {
         shape: createShape(),
         name: 'Yellow Circle',
-        baseColor: 0xcccc44,
-        hoverColor: 0xffff66,
+        baseColor: 0xcccc44ff,
+        hoverColor: 0xffff66ff,
         kind: 'circle',
         cx: 200,
         cy: 350,
@@ -177,8 +177,8 @@ class Main extends Application {
       {
         shape: createShape(),
         name: 'Cyan Rect',
-        baseColor: 0x44cccc,
-        hoverColor: 0x66ffff,
+        baseColor: 0x44ccccff,
+        hoverColor: 0x66ffffff,
         kind: 'rect',
         cx: 450,
         cy: 300,
@@ -188,8 +188,8 @@ class Main extends Application {
       {
         shape: createShape(),
         name: 'Magenta Circle',
-        baseColor: 0xcc44cc,
-        hoverColor: 0xff66ff,
+        baseColor: 0xcc44ccff,
+        hoverColor: 0xff66ffff,
         kind: 'circle',
         cx: 650,
         cy: 250,
@@ -256,7 +256,7 @@ class Main extends Application {
 
     hudEventLabel = createTextLabel();
     hudEventLabel.data.text = 'Event: none';
-    hudEventLabel.data.textFormat = {size: 14, color: 0xdddddd};
+    hudEventLabel.data.textFormat = {size: 14, color: 0xddddddff};
     hudEventLabel.x = 10;
     hudEventLabel.y = CANVAS_HEIGHT - 80;
     invalidateNodeLocalTransform(hudEventLabel);
@@ -264,7 +264,7 @@ class Main extends Application {
 
     hudHoverLabel = createTextLabel();
     hudHoverLabel.data.text = 'Hovered: none';
-    hudHoverLabel.data.textFormat = {size: 14, color: 0xdddddd};
+    hudHoverLabel.data.textFormat = {size: 14, color: 0xddddddff};
     hudHoverLabel.x = 10;
     hudHoverLabel.y = CANVAS_HEIGHT - 58;
     invalidateNodeLocalTransform(hudHoverLabel);
@@ -272,7 +272,7 @@ class Main extends Application {
 
     hudDragLabel = createTextLabel();
     hudDragLabel.data.text = 'Drag: idle';
-    hudDragLabel.data.textFormat = {size: 14, color: 0xdddddd};
+    hudDragLabel.data.textFormat = {size: 14, color: 0xddddddff};
     hudDragLabel.x = 10;
     hudDragLabel.y = CANVAS_HEIGHT - 36;
     invalidateNodeLocalTransform(hudDragLabel);
@@ -280,7 +280,7 @@ class Main extends Application {
 
     final titleLabel = createTextLabel();
     titleLabel.data.text = 'Drag the shapes around. Hover to highlight.';
-    titleLabel.data.textFormat = {size: 16, color: 0x999999};
+    titleLabel.data.textFormat = {size: 16, color: 0x999999ff};
     titleLabel.x = 10;
     titleLabel.y = 10;
     invalidateNodeLocalTransform(titleLabel);

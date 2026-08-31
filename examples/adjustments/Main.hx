@@ -27,8 +27,8 @@ class Main extends Application {
   // Packed 0xRRGGBBAA colors. Each exceeds the 32-bit signed Int range, so they are built with Float
   // arithmetic (`rgb * 256 + alpha`) rather than a hex Int literal that would overflow to a negative value.
   final SAMPLE_COLORS:Array<Float> = [
-    0xff0000 * 256.0 + 0xff, 0x00ff00 * 256.0 + 0xff, 0x0000ff * 256.0 + 0xff, 0xffff00 * 256.0 + 0xff, 0xff00ff * 256.0 + 0xff,
-    0x00ffff * 256.0 + 0xff, 0xffffff * 256.0 + 0xff, 0x808080 * 256.0 + 0xff,
+    0xff0000ff * 256.0 + 0xff, 0x00ff00ff * 256.0 + 0xff, 0x0000ffff * 256.0 + 0xff, 0xffff00ff * 256.0 + 0xff, 0xff00ffff * 256.0 + 0xff,
+    0x00ffffff * 256.0 + 0xff, 0xffffffff * 256.0 + 0xff, 0x808080ff * 256.0 + 0xff,
   ];
 
   final SWATCH_SIZE = 40;
@@ -214,24 +214,24 @@ class Main extends Application {
     saturationSlider = createSlider('Saturation', 0, 3, 0.01, 1, 20, 110);
 
     // Title and section labels.
-    addNodeChild(root, createLabel('4x5 Color Matrix (fused)', MATRIX_X, MATRIX_Y - 30, 16, 0xcccccc));
+    addNodeChild(root, createLabel('4x5 Color Matrix (fused)', MATRIX_X, MATRIX_Y - 30, 16, 0xccccccff));
 
     for (col in 0...5) {
-      addNodeChild(root, createLabel(COL_LABELS[col], MATRIX_X + 40 + col * MATRIX_CELL_WIDTH, MATRIX_Y - 10, 12, 0x888888));
+      addNodeChild(root, createLabel(COL_LABELS[col], MATRIX_X + 40 + col * MATRIX_CELL_WIDTH, MATRIX_Y - 10, 12, 0x888888ff));
     }
 
     for (row in 0...4) {
-      addNodeChild(root, createLabel(ROW_LABELS[row], MATRIX_X, MATRIX_Y + 14 + row * MATRIX_CELL_HEIGHT, 12, 0x888888));
+      addNodeChild(root, createLabel(ROW_LABELS[row], MATRIX_X, MATRIX_Y + 14 + row * MATRIX_CELL_HEIGHT, 12, 0x888888ff));
       for (col in 0...5) {
-        final label = createLabel('0.000', MATRIX_X + 40 + col * MATRIX_CELL_WIDTH, MATRIX_Y + 14 + row * MATRIX_CELL_HEIGHT, 13, 0xeedd44);
+        final label = createLabel('0.000', MATRIX_X + 40 + col * MATRIX_CELL_WIDTH, MATRIX_Y + 14 + row * MATRIX_CELL_HEIGHT, 13, 0xeedd44ff);
         addNodeChild(root, label);
         matrixLabels.push(label);
       }
     }
 
     // Color swatch shapes: "before" row (original) and "after" row (matrix-transformed).
-    addNodeChild(root, createLabel('Original colors', SWATCHES_X, SWATCHES_BEFORE_Y - 22, 14, 0xcccccc));
-    addNodeChild(root, createLabel('After matrix', SWATCHES_X, SWATCHES_AFTER_Y - 22, 14, 0xcccccc));
+    addNodeChild(root, createLabel('Original colors', SWATCHES_X, SWATCHES_BEFORE_Y - 22, 14, 0xccccccff));
+    addNodeChild(root, createLabel('After matrix', SWATCHES_X, SWATCHES_AFTER_Y - 22, 14, 0xccccccff));
 
     for (i in 0...SAMPLE_COLORS.length) {
       final x = SWATCHES_X + i * (SWATCH_SIZE + SWATCH_GAP);
@@ -249,13 +249,13 @@ class Main extends Application {
     // Hex value labels below each after-swatch.
     for (i in 0...SAMPLE_COLORS.length) {
       final x = SWATCHES_X + i * (SWATCH_SIZE + SWATCH_GAP);
-      final hexLabel = createLabel('', x, SWATCHES_AFTER_Y + SWATCH_SIZE + 4, 9, 0x888888);
+      final hexLabel = createLabel('', x, SWATCHES_AFTER_Y + SWATCH_SIZE + 4, 9, 0x888888ff);
       addNodeChild(root, hexLabel);
       afterHexLabels.push(hexLabel);
     }
 
     // Description label at the bottom.
-    addNodeChild(root, createLabel('Adjustments compose a 4x5 color matrix as pure data. Use sliders to build a fused matrix.', SWATCHES_X, CANVAS_HEIGHT - 40, 12, 0x666666));
+    addNodeChild(root, createLabel('Adjustments compose a 4x5 color matrix as pure data. Use sliders to build a fused matrix.', SWATCHES_X, CANVAS_HEIGHT - 40, 12, 0x666666ff));
 
     // Initial computation.
     recomputeMatrix();

@@ -27,8 +27,8 @@ class Main extends Application {
   final ROW_PADDING = 10;
   final COL_START = 20;
 
-  final FILL_COLOR = 0x4488cc;
-  final STROKE_COLOR = 0x88ccff;
+  final FILL_COLOR = 0x4488ccff;
+  final STROKE_COLOR = 0x88ccffff;
 
   public function new() {
     super();
@@ -179,25 +179,25 @@ class Main extends Application {
     final fillSize = 80;
 
     final solidFill = createShape();
-    appendShapeBeginFill(solidFill, 0xcc4444);
+    appendShapeBeginFill(solidFill, 0xcc4444ff);
     appendShapeRectangle(solidFill, 0, 0, fillSize, fillSize);
     appendShapeEndFill(solidFill);
     placeShape(solidFill, COL_START, row4Y + 15);
 
     final alphaFill = createShape();
-    appendShapeBeginFill(alphaFill, 0x44cc44, 0.5);
+    appendShapeBeginFill(alphaFill, 0x44cc44ff, 0.5);
     appendShapeRectangle(alphaFill, 0, 0, fillSize, fillSize);
     appendShapeEndFill(alphaFill);
     placeShape(alphaFill, COL_START + 140, row4Y + 15);
 
     final strokeOnly = createShape();
-    appendShapeLineStyle(strokeOnly, 3, 0xcccc44);
+    appendShapeLineStyle(strokeOnly, 3, 0xcccc44ff);
     appendShapeRectangle(strokeOnly, 0, 0, fillSize, fillSize);
     placeShape(strokeOnly, COL_START + 280, row4Y + 15);
 
     final fillAndStroke = createShape();
-    appendShapeBeginFill(fillAndStroke, 0x4444cc);
-    appendShapeLineStyle(fillAndStroke, 3, 0xcccc44);
+    appendShapeBeginFill(fillAndStroke, 0x4444ccff);
+    appendShapeLineStyle(fillAndStroke, 3, 0xcccc44ff);
     appendShapeRectangle(fillAndStroke, 0, 0, fillSize, fillSize);
     appendShapeEndFill(fillAndStroke);
     placeShape(fillAndStroke, COL_START + 420, row4Y + 15);
@@ -224,34 +224,34 @@ class Main extends Application {
 
     // Cap styles: none, round, square.
     final capsNone = createShape();
-    appendShapeLineStyle(capsNone, 10, 0xcc8844, 1, false, 'normal', 'none');
+    appendShapeLineStyle(capsNone, 10, 0xcc8844ff, 1, false, 'normal', 'none');
     appendShapeMoveTo(capsNone, 10, 20);
     appendShapeLineTo(capsNone, strokeLineLength - 10, 20);
-    appendShapeLineStyle(capsNone, 10, 0x44cc88, 1, false, 'normal', 'round');
+    appendShapeLineStyle(capsNone, 10, 0x44cc88ff, 1, false, 'normal', 'round');
     appendShapeMoveTo(capsNone, 10, 50);
     appendShapeLineTo(capsNone, strokeLineLength - 10, 50);
-    appendShapeLineStyle(capsNone, 10, 0x8844cc, 1, false, 'normal', 'square');
+    appendShapeLineStyle(capsNone, 10, 0x8844ccff, 1, false, 'normal', 'square');
     appendShapeMoveTo(capsNone, 10, 80);
     appendShapeLineTo(capsNone, strokeLineLength - 10, 80);
     placeShape(capsNone, COL_START + 220, row5Y);
 
     // Join styles: miter, round, bevel.
     final joinMiter = createShape();
-    appendShapeLineStyle(joinMiter, 6, 0xcc8844, 1, false, 'normal', 'none', 'miter');
+    appendShapeLineStyle(joinMiter, 6, 0xcc8844ff, 1, false, 'normal', 'none', 'miter');
     appendShapeMoveTo(joinMiter, 0, 80);
     appendShapeLineTo(joinMiter, 40, 10);
     appendShapeLineTo(joinMiter, 80, 80);
     placeShape(joinMiter, COL_START + 440, row5Y + 10);
 
     final joinRound = createShape();
-    appendShapeLineStyle(joinRound, 6, 0x44cc88, 1, false, 'normal', 'none', 'round');
+    appendShapeLineStyle(joinRound, 6, 0x44cc88ff, 1, false, 'normal', 'none', 'round');
     appendShapeMoveTo(joinRound, 0, 80);
     appendShapeLineTo(joinRound, 40, 10);
     appendShapeLineTo(joinRound, 80, 80);
     placeShape(joinRound, COL_START + 550, row5Y + 10);
 
     final joinBevel = createShape();
-    appendShapeLineStyle(joinBevel, 6, 0x8844cc, 1, false, 'normal', 'none', 'bevel');
+    appendShapeLineStyle(joinBevel, 6, 0x8844ccff, 1, false, 'normal', 'none', 'bevel');
     appendShapeMoveTo(joinBevel, 0, 80);
     appendShapeLineTo(joinBevel, 40, 10);
     appendShapeLineTo(joinBevel, 80, 80);

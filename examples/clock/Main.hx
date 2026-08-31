@@ -116,7 +116,7 @@ class Main extends Application {
 
     // Root clock shape: a square.
     rootShape = createShape();
-    drawSquare(rootShape, 60, 0x4488cc);
+    drawSquare(rootShape, 60, 0x4488ccff);
     rootShape.x = ROOT_X;
     rootShape.y = ROOT_Y;
     invalidateNodeLocalTransform(rootShape);
@@ -124,7 +124,7 @@ class Main extends Application {
 
     // Child A shape: a triangle.
     childShapeA = createShape();
-    drawTriangle(childShapeA, 50, 0x44cc88);
+    drawTriangle(childShapeA, 50, 0x44cc88ff);
     childShapeA.x = CHILD_A_X;
     childShapeA.y = CHILD_A_Y;
     invalidateNodeLocalTransform(childShapeA);
@@ -132,7 +132,7 @@ class Main extends Application {
 
     // Child B shape: a circle with a notch to show rotation.
     childShapeB = createShape();
-    drawNotchedCircle(childShapeB, 30, 0xcc8844);
+    drawNotchedCircle(childShapeB, 30, 0xcc8844ff);
     childShapeB.x = CHILD_B_X;
     childShapeB.y = CHILD_B_Y;
     invalidateNodeLocalTransform(childShapeB);
@@ -140,7 +140,7 @@ class Main extends Application {
 
     // Hierarchy lines connecting root to children.
     final hierarchyLines = createShape();
-    appendShapeLineStyle(hierarchyLines, 2, 0x555555);
+    appendShapeLineStyle(hierarchyLines, 2, 0x555555ff);
     appendShapeMoveTo(hierarchyLines, ROOT_X, ROOT_Y + 30);
     appendShapeLineTo(hierarchyLines, CHILD_A_X, CHILD_A_Y - 40);
     appendShapeMoveTo(hierarchyLines, ROOT_X, ROOT_Y + 30);
@@ -148,40 +148,40 @@ class Main extends Application {
     addNodeChild(root, hierarchyLines);
 
     // HUD labels.
-    final titleLabel = createLabel('Hierarchical Clocks', 20, 10, 24, 0xffffff);
+    final titleLabel = createLabel('Hierarchical Clocks', 20, 10, 24, 0xffffffff);
     addNodeChild(root, titleLabel);
 
     // Root clock labels.
-    final rootNameLabel = createLabel('Root Clock', ROOT_X - 40, ROOT_Y - 55, 14, 0xaaaaaa);
+    final rootNameLabel = createLabel('Root Clock', ROOT_X - 40, ROOT_Y - 55, 14, 0xaaaaaaff);
     addNodeChild(root, rootNameLabel);
-    rootInfoLabel = createLabel('', ROOT_X - 80, ROOT_Y + 40, 12, 0x8888aa);
+    rootInfoLabel = createLabel('', ROOT_X - 80, ROOT_Y + 40, 12, 0x8888aaff);
     addNodeChild(root, rootInfoLabel);
 
     // Child A labels.
-    childANameLabel = createLabel('Child A (1x)', CHILD_A_X - 45, CHILD_A_Y - 55, 14, 0xaaaaaa);
+    childANameLabel = createLabel('Child A (1x)', CHILD_A_X - 45, CHILD_A_Y - 55, 14, 0xaaaaaaff);
     addNodeChild(root, childANameLabel);
-    childAInfoLabel = createLabel('', CHILD_A_X - 80, CHILD_A_Y + 45, 12, 0x88aa88);
+    childAInfoLabel = createLabel('', CHILD_A_X - 80, CHILD_A_Y + 45, 12, 0x88aa88ff);
     addNodeChild(root, childAInfoLabel);
 
     // Child B labels.
-    childBNameLabel = createLabel('Child B (0.5x)', CHILD_B_X - 50, CHILD_B_Y - 55, 14, 0xaaaaaa);
+    childBNameLabel = createLabel('Child B (0.5x)', CHILD_B_X - 50, CHILD_B_Y - 55, 14, 0xaaaaaaff);
     addNodeChild(root, childBNameLabel);
-    childBInfoLabel = createLabel('', CHILD_B_X - 80, CHILD_B_Y + 45, 12, 0xaa8844);
+    childBInfoLabel = createLabel('', CHILD_B_X - 80, CHILD_B_Y + 45, 12, 0xaa8844ff);
     addNodeChild(root, childBInfoLabel);
 
     // Controls label.
     final controlsLabel = createLabel('P root pause    1/2 toggle child pause    Left/Right child A scale    Up/Down child B scale',
-      20, 470, 13, 0x888888);
+      20, 470, 13, 0x888888ff);
     addNodeChild(root, controlsLabel);
 
     // Paused overlay indicators (shown when a clock is paused).
-    rootPausedLabel = createLabel('PAUSED', ROOT_X - 25, ROOT_Y - 8, 14, 0xff4444);
+    rootPausedLabel = createLabel('PAUSED', ROOT_X - 25, ROOT_Y - 8, 14, 0xff4444ff);
     rootPausedLabel.visible = false;
     addNodeChild(root, rootPausedLabel);
-    childAPausedLabel = createLabel('PAUSED', CHILD_A_X - 25, CHILD_A_Y - 8, 14, 0xff4444);
+    childAPausedLabel = createLabel('PAUSED', CHILD_A_X - 25, CHILD_A_Y - 8, 14, 0xff4444ff);
     childAPausedLabel.visible = false;
     addNodeChild(root, childAPausedLabel);
-    childBPausedLabel = createLabel('PAUSED', CHILD_B_X - 25, CHILD_B_Y - 8, 14, 0xff4444);
+    childBPausedLabel = createLabel('PAUSED', CHILD_B_X - 25, CHILD_B_Y - 8, 14, 0xff4444ff);
     childBPausedLabel.visible = false;
     addNodeChild(root, childBPausedLabel);
 
@@ -214,7 +214,7 @@ class Main extends Application {
     appendShapeCircle(shape, 0, 0, radius);
     appendShapeEndFill(shape);
     // Draw a line from center to edge as a rotation indicator.
-    appendShapeLineStyle(shape, 3, 0xffffff);
+    appendShapeLineStyle(shape, 3, 0xffffffff);
     appendShapeMoveTo(shape, 0, 0);
     appendShapeLineTo(shape, radius, 0);
   }

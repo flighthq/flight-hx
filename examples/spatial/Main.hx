@@ -29,12 +29,12 @@ class Main extends Application {
   final CANVAS_WIDTH = 800;
   final CANVAS_HEIGHT = 500;
 
-  final COLOR_IDLE = 0x4488cc;
-  final COLOR_OVERLAP = 0xcc4444;
-  final COLOR_POINT_HIT = 0x44cc44;
-  final COLOR_RAY_HIT = 0xcccc44;
-  final COLOR_REGION_HIT = 0x44cccc;
-  final COLOR_OUTLINE = 0x335577;
+  final COLOR_IDLE = 0x4488ccff;
+  final COLOR_OVERLAP = 0xcc4444ff;
+  final COLOR_POINT_HIT = 0x44cc44ff;
+  final COLOR_RAY_HIT = 0xcccc44ff;
+  final COLOR_REGION_HIT = 0x44ccccff;
+  final COLOR_OUTLINE = 0x335577ff;
 
   final OBJECT_COUNT = 20;
   final MOVING_COUNT = 5;
@@ -152,7 +152,7 @@ class Main extends Application {
     // HUD label.
     hudLabel = createTextLabel();
     hudLabel.data.text = 'Click: point query | R: ray query | Q: region query';
-    hudLabel.data.textFormat = {size: 13, color: 0x888888};
+    hudLabel.data.textFormat = {size: 13, color: 0x888888ff};
     hudLabel.x = 10;
     hudLabel.y = 6;
     invalidateNodeLocalTransform(hudLabel);
@@ -160,7 +160,7 @@ class Main extends Application {
 
     modeLabel = createTextLabel();
     modeLabel.data.text = 'Mode: Pairs';
-    modeLabel.data.textFormat = {size: 14, color: 0xcccccc};
+    modeLabel.data.textFormat = {size: 14, color: 0xccccccff};
     modeLabel.x = 10;
     modeLabel.y = CANVAS_HEIGHT - 30;
     invalidateNodeLocalTransform(modeLabel);

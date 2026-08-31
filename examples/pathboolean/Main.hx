@@ -25,14 +25,14 @@ class Main extends Application {
   final CELL_H = 300;
 
   final FILL_COLORS:Array<Int> = [
-    0x2980b9, // union: blue
-    0x27ae60, // intersect: green
-    0xc0392b, // difference: red
-    0x8e44ad, // xor: purple
+    0x2980b9ff, // union: blue
+    0x27ae60ff, // intersect: green
+    0xc0392bff, // difference: red
+    0x8e44adff, // xor: purple
   ];
 
-  final OUTLINE_COLOR_A = 0x34495e;
-  final OUTLINE_COLOR_B = 0xe67e22;
+  final OUTLINE_COLOR_A = 0x34495eff;
+  final OUTLINE_COLOR_B = 0xe67e22ff;
 
   var root:DisplayObject;
 
@@ -216,7 +216,7 @@ class Main extends Application {
   function addLabel(text:String, col:Int, row:Int):Void {
     final label = createTextLabel();
     label.data.text = text;
-    label.data.textFormat = {size: 14, color: 0x333333};
+    label.data.textFormat = {size: 14, color: 0x333333ff};
     label.x = col * CELL_W + 10;
     label.y = row * CELL_H + 8;
     invalidateNodeLocalTransform(label);

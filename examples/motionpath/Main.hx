@@ -118,7 +118,7 @@ class Main extends Application {
 
     // Draw the visible track on screen as a shape with a line style.
     track = createShape();
-    appendShapeLineStyle(track, 2, 0x4488aa);
+    appendShapeLineStyle(track, 2, 0x4488aaff);
     appendShapeMoveTo(track, 100, 400);
     appendShapeCubicCurveTo(track, 250, 100, 350, 100, 400, 250);
     appendShapeCubicCurveTo(track, 450, 400, 550, 400, 700, 100);
@@ -139,7 +139,7 @@ class Main extends Application {
       final cx = cp[0];
       final cy = cp[1];
       final dot = createShape();
-      appendShapeBeginFill(dot, 0x335566);
+      appendShapeBeginFill(dot, 0x335566ff);
       // Draw a small diamond as a control-point marker.
       final r = 4;
       appendShapeMoveTo(dot, cx, cy - r);
@@ -156,19 +156,19 @@ class Main extends Application {
     drawArrow(100, 400, 0);
     addNodeChild(root, arrow);
 
-    final titleLabel = createLabel('Motion Path', 20, 10, 24, 0xffffff);
+    final titleLabel = createLabel('Motion Path', 20, 10, 24, 0xffffffff);
     addNodeChild(root, titleLabel);
 
-    speedLabel = createLabel('Speed: ' + speed, 20, 445, 16, 0xcccccc);
+    speedLabel = createLabel('Speed: ' + speed, 20, 445, 16, 0xccccccff);
     addNodeChild(root, speedLabel);
 
-    modeLabel = createLabel('Mode: ' + loopMode + ' (1/2/3)', 20, 465, 16, 0xcccccc);
+    modeLabel = createLabel('Mode: ' + loopMode + ' (1/2/3)', 20, 465, 16, 0xccccccff);
     addNodeChild(root, modeLabel);
 
-    progressLabel = createLabel('Progress: 0%', 250, 445, 16, 0xcccccc);
+    progressLabel = createLabel('Progress: 0%', 250, 445, 16, 0xccccccff);
     addNodeChild(root, progressLabel);
 
-    final controlsLabel = createLabel('+/- speed    1 clamp  2 loop  3 pingpong', 250, 465, 14, 0x888888);
+    final controlsLabel = createLabel('+/- speed    1 clamp  2 loop  3 pingpong', 250, 465, 14, 0x888888ff);
     addNodeChild(root, controlsLabel);
 
     ready = true;
@@ -182,7 +182,7 @@ class Main extends Application {
     invalidateNodeLocalTransform(arrow);
 
     // Triangle centered at origin, pointing right (+X).
-    appendShapeBeginFill(arrow, 0xff6644);
+    appendShapeBeginFill(arrow, 0xff6644ff);
     appendShapeMoveTo(arrow, ARROW_LENGTH, 0);
     appendShapeLineTo(arrow, -ARROW_LENGTH / 2, -ARROW_HALF_WIDTH);
     appendShapeLineTo(arrow, -ARROW_LENGTH / 2, ARROW_HALF_WIDTH);

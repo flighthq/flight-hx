@@ -87,42 +87,42 @@ class Main extends Application {
     headingBasics.x = 30;
     headingBasics.y = 20;
     headingBasics.data.text = 'TextLabel Basics';
-    headingBasics.data.textFormat = {font: 'sans-serif', size: 18, bold: true, color: 0x222222};
+    headingBasics.data.textFormat = {font: 'sans-serif', size: 18, bold: true, color: 0x222222ff};
     addNodeChild(root, headingBasics);
 
     final labelSansSerif = createTextLabel();
     labelSansSerif.x = 30;
     labelSansSerif.y = 48;
     labelSansSerif.data.text = 'Sans-serif 16px';
-    labelSansSerif.data.textFormat = {font: 'sans-serif', size: 16, color: 0x333333};
+    labelSansSerif.data.textFormat = {font: 'sans-serif', size: 16, color: 0x333333ff};
     addNodeChild(root, labelSansSerif);
 
     final labelSerif = createTextLabel();
     labelSerif.x = 200;
     labelSerif.y = 48;
     labelSerif.data.text = 'Serif 16px';
-    labelSerif.data.textFormat = {font: 'serif', size: 16, color: 0x333333};
+    labelSerif.data.textFormat = {font: 'serif', size: 16, color: 0x333333ff};
     addNodeChild(root, labelSerif);
 
     final labelMono = createTextLabel();
     labelMono.x = 340;
     labelMono.y = 48;
     labelMono.data.text = 'Monospace 16px';
-    labelMono.data.textFormat = {font: 'monospace', size: 16, color: 0x333333};
+    labelMono.data.textFormat = {font: 'monospace', size: 16, color: 0x333333ff};
     addNodeChild(root, labelMono);
 
     final labelLarge = createTextLabel();
     labelLarge.x = 540;
     labelLarge.y = 40;
     labelLarge.data.text = 'Large 28px';
-    labelLarge.data.textFormat = {font: 'sans-serif', size: 28, color: 0x1a6b3c};
+    labelLarge.data.textFormat = {font: 'sans-serif', size: 28, color: 0x1a6b3cff};
     addNodeChild(root, labelLarge);
 
     final labelSmall = createTextLabel();
     labelSmall.x = 30;
     labelSmall.y = 74;
     labelSmall.data.text = 'Small 12px in a different color';
-    labelSmall.data.textFormat = {font: 'sans-serif', size: 12, color: 0x7a0026};
+    labelSmall.data.textFormat = {font: 'sans-serif', size: 12, color: 0x7a0026ff};
     addNodeChild(root, labelSmall);
 
     // Section 2: Text alignment — left, center, right aligned text labels.
@@ -131,7 +131,7 @@ class Main extends Application {
     headingAlignment.x = 30;
     headingAlignment.y = 110;
     headingAlignment.data.text = 'Text Alignment';
-    headingAlignment.data.textFormat = {font: 'sans-serif', size: 18, bold: true, color: 0x222222};
+    headingAlignment.data.textFormat = {font: 'sans-serif', size: 18, bold: true, color: 0x222222ff};
     addNodeChild(root, headingAlignment);
 
     final alignLeft = createRichText();
@@ -140,9 +140,9 @@ class Main extends Application {
     alignLeft.data.width = 220;
     alignLeft.data.height = 24;
     alignLeft.data.text = 'Left aligned (default)';
-    alignLeft.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0x444444, align: 'left'};
+    alignLeft.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0x444444ff, align: 'left'};
     alignLeft.data.border = true;
-    alignLeft.data.borderColor = 0xcccccc;
+    alignLeft.data.borderColor = 0xccccccff;
     addNodeChild(root, alignLeft);
 
     final alignCenter = createRichText();
@@ -151,9 +151,9 @@ class Main extends Application {
     alignCenter.data.width = 220;
     alignCenter.data.height = 24;
     alignCenter.data.text = 'Center aligned';
-    alignCenter.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0x444444, align: 'center'};
+    alignCenter.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0x444444ff, align: 'center'};
     alignCenter.data.border = true;
-    alignCenter.data.borderColor = 0xcccccc;
+    alignCenter.data.borderColor = 0xccccccff;
     addNodeChild(root, alignCenter);
 
     final alignRight = createRichText();
@@ -162,9 +162,9 @@ class Main extends Application {
     alignRight.data.width = 220;
     alignRight.data.height = 24;
     alignRight.data.text = 'Right aligned';
-    alignRight.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0x444444, align: 'right'};
+    alignRight.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0x444444ff, align: 'right'};
     alignRight.data.border = true;
-    alignRight.data.borderColor = 0xcccccc;
+    alignRight.data.borderColor = 0xccccccff;
     addNodeChild(root, alignRight);
 
     // Section 3: RichText with word wrapping — a paragraph of text.
@@ -173,7 +173,7 @@ class Main extends Application {
     headingWrapping.x = 30;
     headingWrapping.y = 185;
     headingWrapping.data.text = 'Word Wrapping';
-    headingWrapping.data.textFormat = {font: 'sans-serif', size: 18, bold: true, color: 0x222222};
+    headingWrapping.data.textFormat = {font: 'sans-serif', size: 18, bold: true, color: 0x222222ff};
     addNodeChild(root, headingWrapping);
 
     final wrappedText = createRichText();
@@ -186,7 +186,7 @@ class Main extends Application {
       + 'It spans a scene graph, four interchangeable renderers, '
       + 'offscreen image processing, and a full application layer. '
       + 'This paragraph demonstrates word wrapping within a fixed width.';
-    wrappedText.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0x444444, leading: 4};
+    wrappedText.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0x444444ff, leading: 4};
     addNodeChild(root, wrappedText);
 
     final wrappedSerif = createRichText();
@@ -198,7 +198,7 @@ class Main extends Application {
     wrappedSerif.data.text = 'The same paragraph rendered in serif at a slightly larger size. '
       + 'Each renderable node type is identified by a Kind string, and '
       + 'concrete renderers are registered explicitly by the caller.';
-    wrappedSerif.data.defaultTextFormat = {font: 'serif', size: 15, color: 0x555555, leading: 4};
+    wrappedSerif.data.defaultTextFormat = {font: 'serif', size: 15, color: 0x555555ff, leading: 4};
     addNodeChild(root, wrappedSerif);
 
     // Section 4: Styled text — bold, italic, underline via textFormat properties.
@@ -207,56 +207,56 @@ class Main extends Application {
     headingStyles.x = 30;
     headingStyles.y = 345;
     headingStyles.data.text = 'Text Styles';
-    headingStyles.data.textFormat = {font: 'sans-serif', size: 18, bold: true, color: 0x222222};
+    headingStyles.data.textFormat = {font: 'sans-serif', size: 18, bold: true, color: 0x222222ff};
     addNodeChild(root, headingStyles);
 
     final styleBold = createTextLabel();
     styleBold.x = 30;
     styleBold.y = 373;
     styleBold.data.text = 'Bold text';
-    styleBold.data.textFormat = {font: 'sans-serif', size: 16, bold: true, color: 0x333333};
+    styleBold.data.textFormat = {font: 'sans-serif', size: 16, bold: true, color: 0x333333ff};
     addNodeChild(root, styleBold);
 
     final styleItalic = createTextLabel();
     styleItalic.x = 160;
     styleItalic.y = 373;
     styleItalic.data.text = 'Italic text';
-    styleItalic.data.textFormat = {font: 'sans-serif', size: 16, italic: true, color: 0x333333};
+    styleItalic.data.textFormat = {font: 'sans-serif', size: 16, italic: true, color: 0x333333ff};
     addNodeChild(root, styleItalic);
 
     final styleBoldItalic = createTextLabel();
     styleBoldItalic.x = 300;
     styleBoldItalic.y = 373;
     styleBoldItalic.data.text = 'Bold + Italic';
-    styleBoldItalic.data.textFormat = {font: 'sans-serif', size: 16, bold: true, italic: true, color: 0x333333};
+    styleBoldItalic.data.textFormat = {font: 'sans-serif', size: 16, bold: true, italic: true, color: 0x333333ff};
     addNodeChild(root, styleBoldItalic);
 
     final styleUnderline = createTextLabel();
     styleUnderline.x = 470;
     styleUnderline.y = 373;
     styleUnderline.data.text = 'Underlined text';
-    styleUnderline.data.textFormat = {font: 'sans-serif', size: 16, underline: true, color: 0x2255aa};
+    styleUnderline.data.textFormat = {font: 'sans-serif', size: 16, underline: true, color: 0x2255aaff};
     addNodeChild(root, styleUnderline);
 
     final styleLetterSpacing = createTextLabel();
     styleLetterSpacing.x = 30;
     styleLetterSpacing.y = 400;
     styleLetterSpacing.data.text = 'Letter spacing: 4';
-    styleLetterSpacing.data.textFormat = {font: 'sans-serif', size: 14, letterSpacing: 4, color: 0x666666};
+    styleLetterSpacing.data.textFormat = {font: 'sans-serif', size: 14, letterSpacing: 4, color: 0x666666ff};
     addNodeChild(root, styleLetterSpacing);
 
     final styleSerifBold = createTextLabel();
     styleSerifBold.x = 280;
     styleSerifBold.y = 400;
     styleSerifBold.data.text = 'Serif bold italic';
-    styleSerifBold.data.textFormat = {font: 'serif', size: 16, bold: true, italic: true, color: 0x8b4513};
+    styleSerifBold.data.textFormat = {font: 'serif', size: 16, bold: true, italic: true, color: 0x8b4513ff};
     addNodeChild(root, styleSerifBold);
 
     final styleMonoBold = createTextLabel();
     styleMonoBold.x = 500;
     styleMonoBold.y = 400;
     styleMonoBold.data.text = 'Mono bold';
-    styleMonoBold.data.textFormat = {font: 'monospace', size: 14, bold: true, color: 0x2a6e3f};
+    styleMonoBold.data.textFormat = {font: 'monospace', size: 14, bold: true, color: 0x2a6e3fff};
     addNodeChild(root, styleMonoBold);
 
     // Section 5: Text with background and border — RichText with background and border colors.
@@ -265,7 +265,7 @@ class Main extends Application {
     headingBackgrounds.x = 30;
     headingBackgrounds.y = 440;
     headingBackgrounds.data.text = 'Background & Border';
-    headingBackgrounds.data.textFormat = {font: 'sans-serif', size: 18, bold: true, color: 0x222222};
+    headingBackgrounds.data.textFormat = {font: 'sans-serif', size: 18, bold: true, color: 0x222222ff};
     addNodeChild(root, headingBackgrounds);
 
     final bgLight = createRichText();
@@ -274,11 +274,11 @@ class Main extends Application {
     bgLight.data.width = 220;
     bgLight.data.height = 30;
     bgLight.data.text = 'Light background';
-    bgLight.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0x333333};
+    bgLight.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0x333333ff};
     bgLight.data.background = true;
-    bgLight.data.backgroundColor = 0xf0f0f0;
+    bgLight.data.backgroundColor = 0xf0f0f0ff;
     bgLight.data.border = true;
-    bgLight.data.borderColor = 0xcccccc;
+    bgLight.data.borderColor = 0xccccccff;
     addNodeChild(root, bgLight);
 
     final bgColored = createRichText();
@@ -287,11 +287,11 @@ class Main extends Application {
     bgColored.data.width = 220;
     bgColored.data.height = 30;
     bgColored.data.text = 'Colored background';
-    bgColored.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0xffffff};
+    bgColored.data.defaultTextFormat = {font: 'sans-serif', size: 14, color: 0xffffffff};
     bgColored.data.background = true;
-    bgColored.data.backgroundColor = 0x336699;
+    bgColored.data.backgroundColor = 0x336699ff;
     bgColored.data.border = true;
-    bgColored.data.borderColor = 0x224466;
+    bgColored.data.borderColor = 0x224466ff;
     addNodeChild(root, bgColored);
 
     final bgWarning = createRichText();
@@ -300,11 +300,11 @@ class Main extends Application {
     bgWarning.data.width = 220;
     bgWarning.data.height = 30;
     bgWarning.data.text = 'Warning style';
-    bgWarning.data.defaultTextFormat = {font: 'sans-serif', size: 14, bold: true, color: 0x856404};
+    bgWarning.data.defaultTextFormat = {font: 'sans-serif', size: 14, bold: true, color: 0x856404ff};
     bgWarning.data.background = true;
-    bgWarning.data.backgroundColor = 0xfff3cd;
+    bgWarning.data.backgroundColor = 0xfff3cdff;
     bgWarning.data.border = true;
-    bgWarning.data.borderColor = 0xffc107;
+    bgWarning.data.borderColor = 0xffc107ff;
     addNodeChild(root, bgWarning);
 
     final bgMultiline = createRichText();
@@ -316,11 +316,11 @@ class Main extends Application {
     bgMultiline.data.text = 'A multiline RichText with background and border. '
       + 'Word wrapping is enabled so the text flows within the specified width, '
       + 'and the background and border wrap the content area.';
-    bgMultiline.data.defaultTextFormat = {font: 'sans-serif', size: 13, color: 0x333333, leading: 3};
+    bgMultiline.data.defaultTextFormat = {font: 'sans-serif', size: 13, color: 0x333333ff, leading: 3};
     bgMultiline.data.background = true;
-    bgMultiline.data.backgroundColor = 0xeef6ff;
+    bgMultiline.data.backgroundColor = 0xeef6ffff;
     bgMultiline.data.border = true;
-    bgMultiline.data.borderColor = 0x99bbdd;
+    bgMultiline.data.borderColor = 0x99bbddff;
     addNodeChild(root, bgMultiline);
 
     final bgCode = createRichText();
@@ -330,11 +330,11 @@ class Main extends Application {
     bgCode.data.wordWrap = true;
     bgCode.data.multiline = true;
     bgCode.data.text = "const label = createTextLabel();\nlabel.data.text = 'Hello Flight';\nlabel.data.textFormat = { font: 'monospace' };";
-    bgCode.data.defaultTextFormat = {font: 'monospace', size: 13, color: 0xd4d4d4};
+    bgCode.data.defaultTextFormat = {font: 'monospace', size: 13, color: 0xd4d4d4ff};
     bgCode.data.background = true;
-    bgCode.data.backgroundColor = 0x1e1e1e;
+    bgCode.data.backgroundColor = 0x1e1e1eff;
     bgCode.data.border = true;
-    bgCode.data.borderColor = 0x444444;
+    bgCode.data.borderColor = 0x444444ff;
     addNodeChild(root, bgCode);
 
     ready = true;

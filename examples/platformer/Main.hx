@@ -35,13 +35,13 @@ class Main extends Application {
   final PLAYER_HEIGHT = 32;
 
   final platformDefs:Array<{x:Int, y:Int, w:Int, h:Int, color:Int}> = [
-    {x: -200, y: 400, w: 1600, h: 40, color: 0x4a7c59},
-    {x: 100, y: 320, w: 150, h: 16, color: 0x8b6914},
-    {x: 350, y: 260, w: 120, h: 16, color: 0x8b6914},
-    {x: 550, y: 200, w: 180, h: 16, color: 0x8b6914},
-    {x: 780, y: 300, w: 140, h: 16, color: 0x8b6914},
-    {x: 980, y: 220, w: 160, h: 16, color: 0x8b6914},
-    {x: 50, y: 160, w: 100, h: 16, color: 0x8b6914},
+    {x: -200, y: 400, w: 1600, h: 40, color: 0x4a7c59ff},
+    {x: 100, y: 320, w: 150, h: 16, color: 0x8b6914ff},
+    {x: 350, y: 260, w: 120, h: 16, color: 0x8b6914ff},
+    {x: 550, y: 200, w: 180, h: 16, color: 0x8b6914ff},
+    {x: 780, y: 300, w: 140, h: 16, color: 0x8b6914ff},
+    {x: 980, y: 220, w: 160, h: 16, color: 0x8b6914ff},
+    {x: 50, y: 160, w: 100, h: 16, color: 0x8b6914ff},
   ];
 
   var root:DisplayObject;
@@ -157,7 +157,7 @@ class Main extends Application {
 
     titleLabel = createTextLabel();
     titleLabel.data.text = 'PLATFORMER';
-    titleLabel.data.textFormat = {color: 0xffffff, size: 48, font: 'Arial', bold: true, align: 'center'};
+    titleLabel.data.textFormat = {color: 0xffffffff, size: 48, font: 'Arial', bold: true, align: 'center'};
     titleLabel.data.width = CANVAS_WIDTH;
     titleLabel.data.height = 100;
     titleLabel.y = 150;
@@ -167,7 +167,7 @@ class Main extends Application {
 
     subtitleLabel = createTextLabel();
     subtitleLabel.data.text = 'Click to Play';
-    subtitleLabel.data.textFormat = {color: 0xdddddd, size: 24, font: 'Arial', align: 'center'};
+    subtitleLabel.data.textFormat = {color: 0xddddddff, size: 24, font: 'Arial', align: 'center'};
     subtitleLabel.data.width = CANVAS_WIDTH;
     subtitleLabel.data.height = 60;
     subtitleLabel.y = 260;
@@ -177,7 +177,7 @@ class Main extends Application {
 
     gameOverLabel = createTextLabel();
     gameOverLabel.data.text = 'Game Over - Click to Restart';
-    gameOverLabel.data.textFormat = {color: 0xff4444, size: 32, font: 'Arial', bold: true, align: 'center'};
+    gameOverLabel.data.textFormat = {color: 0xff4444ff, size: 32, font: 'Arial', bold: true, align: 'center'};
     gameOverLabel.data.width = CANVAS_WIDTH;
     gameOverLabel.data.height = 80;
     gameOverLabel.y = 200;
@@ -324,7 +324,7 @@ class Main extends Application {
 
   function drawPlayer():Void {
     clearShapeCommands(playerShape);
-    appendShapeBeginFill(playerShape, 0xdd3333);
+    appendShapeBeginFill(playerShape, 0xdd3333ff);
     appendShapeRectangle(playerShape, playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT);
     appendShapeEndFill(playerShape);
     invalidateNodeAppearance(playerShape);

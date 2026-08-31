@@ -192,22 +192,22 @@ class Main extends Application {
     playMovieClip(clip);
 
     // HUD labels.
-    titleLabel = createLabel('Movie Clip', 20, 10, 24, 0xffffff);
+    titleLabel = createLabel('Movie Clip', 20, 10, 24, 0xffffffff);
     addNodeChild(root, titleLabel);
 
-    frameLabel = createLabel('', 20, 50, 16, 0xcccccc);
+    frameLabel = createLabel('', 20, 50, 16, 0xccccccff);
     addNodeChild(root, frameLabel);
 
-    labelLabel = createLabel('', 20, 75, 16, 0x88aacc);
+    labelLabel = createLabel('', 20, 75, 16, 0x88aaccff);
     addNodeChild(root, labelLabel);
 
-    statusLabel = createLabel('', 20, 100, 16, 0x88cc88);
+    statusLabel = createLabel('', 20, 100, 16, 0x88cc88ff);
     addNodeChild(root, statusLabel);
 
-    scriptLabel = createLabel('', 20, 125, 14, 0xccaa44);
+    scriptLabel = createLabel('', 20, 125, 14, 0xccaa44ff);
     addNodeChild(root, scriptLabel);
 
-    controlsLabel = createLabel('Space play/stop   Left/Right step   1 intro   2 loop   3 outro', 20, 470, 13, 0x888888);
+    controlsLabel = createLabel('Space play/stop   Left/Right step   1 intro   2 loop   3 outro', 20, 470, 13, 0x888888ff);
     addNodeChild(root, controlsLabel);
 
     ready = true;

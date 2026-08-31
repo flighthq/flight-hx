@@ -244,8 +244,8 @@ class Main extends Application {
       {
         shape: createShape(),
         label: 'Click (440 Hz)',
-        color: 0x3a7bd5,
-        hoverColor: 0x5a9bf5,
+        color: 0x3a7bd5ff,
+        hoverColor: 0x5a9bf5ff,
         x: 60,
         y: BUTTON_Y,
         w: BUTTON_W,
@@ -256,8 +256,8 @@ class Main extends Application {
       {
         shape: createShape(),
         label: 'Blip (880 Hz)',
-        color: 0x2ecc71,
-        hoverColor: 0x4eec91,
+        color: 0x2ecc71ff,
+        hoverColor: 0x4eec91ff,
         x: 60 + BUTTON_W + BUTTON_GAP,
         y: BUTTON_Y,
         w: BUTTON_W,
@@ -268,8 +268,8 @@ class Main extends Application {
       {
         shape: createShape(),
         label: 'Sweep (200-800 Hz)',
-        color: 0xe74c3c,
-        hoverColor: 0xf76c5c,
+        color: 0xe74c3cff,
+        hoverColor: 0xf76c5cff,
         x: 60 + (BUTTON_W + BUTTON_GAP) * 2,
         y: BUTTON_Y,
         w: BUTTON_W,
@@ -333,7 +333,7 @@ class Main extends Application {
     // Labels.
     final titleLabel = createTextLabel();
     titleLabel.data.text = 'Sound Example - Procedural Audio & Mixer';
-    titleLabel.data.textFormat = {size: 18, color: 0xcccccc};
+    titleLabel.data.textFormat = {size: 18, color: 0xccccccff};
     titleLabel.x = 60;
     titleLabel.y = 30;
     invalidateNodeLocalTransform(titleLabel);
@@ -341,7 +341,7 @@ class Main extends Application {
 
     final instructionLabel = createTextLabel();
     instructionLabel.data.text = 'Click the buttons to play procedurally generated tones.';
-    instructionLabel.data.textFormat = {size: 13, color: 0x888888};
+    instructionLabel.data.textFormat = {size: 13, color: 0x888888ff};
     instructionLabel.x = 60;
     instructionLabel.y = 65;
     invalidateNodeLocalTransform(instructionLabel);
@@ -352,7 +352,7 @@ class Main extends Application {
     for (btn in buttons) {
       final label = createTextLabel();
       label.data.text = btn.label;
-      label.data.textFormat = {size: 14, color: 0xffffff};
+      label.data.textFormat = {size: 14, color: 0xffffffff};
       label.x = btn.x + 12;
       label.y = btn.y + btn.h / 2 - 8;
       invalidateNodeLocalTransform(label);
@@ -361,7 +361,7 @@ class Main extends Application {
 
     final masterLabel = createTextLabel();
     masterLabel.data.text = 'Master Volume';
-    masterLabel.data.textFormat = {size: 13, color: 0xaaaaaa};
+    masterLabel.data.textFormat = {size: 13, color: 0xaaaaaaff};
     masterLabel.x = SLIDER_X;
     masterLabel.y = SLIDER_Y - 24;
     invalidateNodeLocalTransform(masterLabel);
@@ -369,7 +369,7 @@ class Main extends Application {
 
     masterValueLabel = createTextLabel();
     masterValueLabel.data.text = Math.round(masterGain * 100) + '%';
-    masterValueLabel.data.textFormat = {size: 13, color: 0xdddddd};
+    masterValueLabel.data.textFormat = {size: 13, color: 0xddddddff};
     masterValueLabel.x = SLIDER_X + SLIDER_W + 12;
     masterValueLabel.y = SLIDER_Y + 4;
     invalidateNodeLocalTransform(masterValueLabel);
@@ -377,7 +377,7 @@ class Main extends Application {
 
     final sfxBusLabel = createTextLabel();
     sfxBusLabel.data.text = 'SFX Bus Gain';
-    sfxBusLabel.data.textFormat = {size: 12, color: 0x8899bb};
+    sfxBusLabel.data.textFormat = {size: 12, color: 0x8899bbff};
     sfxBusLabel.x = SLIDER_X;
     sfxBusLabel.y = BUS_SLIDER_Y - 20;
     invalidateNodeLocalTransform(sfxBusLabel);
@@ -385,7 +385,7 @@ class Main extends Application {
 
     final musicBusLabel = createTextLabel();
     musicBusLabel.data.text = 'Music Bus Gain';
-    musicBusLabel.data.textFormat = {size: 12, color: 0x88bb99};
+    musicBusLabel.data.textFormat = {size: 12, color: 0x88bb99ff};
     musicBusLabel.x = SLIDER_X + BUS_SLIDER_W + 80;
     musicBusLabel.y = BUS_SLIDER_Y - 20;
     invalidateNodeLocalTransform(musicBusLabel);
@@ -393,7 +393,7 @@ class Main extends Application {
 
     final sfxPanLabel = createTextLabel();
     sfxPanLabel.data.text = 'SFX Bus Pan';
-    sfxPanLabel.data.textFormat = {size: 12, color: 0x8899bb};
+    sfxPanLabel.data.textFormat = {size: 12, color: 0x8899bbff};
     sfxPanLabel.x = SLIDER_X;
     sfxPanLabel.y = PAN_SLIDER_Y - 20;
     invalidateNodeLocalTransform(sfxPanLabel);
@@ -401,7 +401,7 @@ class Main extends Application {
 
     final musicPanLabel = createTextLabel();
     musicPanLabel.data.text = 'Music Bus Pan';
-    musicPanLabel.data.textFormat = {size: 12, color: 0x88bb99};
+    musicPanLabel.data.textFormat = {size: 12, color: 0x88bb99ff};
     musicPanLabel.x = SLIDER_X + BUS_SLIDER_W + 80;
     musicPanLabel.y = PAN_SLIDER_Y - 20;
     invalidateNodeLocalTransform(musicPanLabel);
@@ -409,7 +409,7 @@ class Main extends Application {
 
     statusLabel = createTextLabel();
     statusLabel.data.text = 'Ready';
-    statusLabel.data.textFormat = {size: 13, color: 0x999999};
+    statusLabel.data.textFormat = {size: 13, color: 0x999999ff};
     statusLabel.x = 60;
     statusLabel.y = 530;
     invalidateNodeLocalTransform(statusLabel);
@@ -534,11 +534,11 @@ class Main extends Application {
   }
 
   function drawMasterSlider():Void {
-    drawSliderBar(sliderTrack, sliderFill, SLIDER_X, SLIDER_Y, SLIDER_W, SLIDER_H, masterGain, 0x444444, 0xdddddd);
+    drawSliderBar(sliderTrack, sliderFill, SLIDER_X, SLIDER_Y, SLIDER_W, SLIDER_H, masterGain, 0x444444ff, 0xddddddff);
 
     clearShapeCommands(sliderHandle);
     final handleX = SLIDER_X + SLIDER_W * masterGain - 4;
-    appendShapeBeginFill(sliderHandle, 0xffffff, 1);
+    appendShapeBeginFill(sliderHandle, 0xffffffff, 1);
     appendShapeRectangle(sliderHandle, handleX, SLIDER_Y - 4, 8, SLIDER_H + 8);
     appendShapeEndFill(sliderHandle);
     invalidateNodeLocalTransform(sliderHandle);
@@ -546,16 +546,16 @@ class Main extends Application {
 
   function drawBusSliders():Void {
     drawSliderBar(sfxSliderTrack, sfxSliderFill, SLIDER_X, BUS_SLIDER_Y, BUS_SLIDER_W, BUS_SLIDER_H, sfxBus.gain,
-      0x444444, 0x3a7bd5);
+      0x444444ff, 0x3a7bd5ff);
     drawSliderBar(musicSliderTrack, musicSliderFill, SLIDER_X + BUS_SLIDER_W + 80, BUS_SLIDER_Y, BUS_SLIDER_W,
-      BUS_SLIDER_H, musicBus.gain, 0x444444, 0x2ecc71);
+      BUS_SLIDER_H, musicBus.gain, 0x444444ff, 0x2ecc71ff);
   }
 
   function drawPanSliders():Void {
-    drawPanBar(sfxPanTrack, sfxPanFill, SLIDER_X, PAN_SLIDER_Y, BUS_SLIDER_W, BUS_SLIDER_H, sfxBus.pan, 0x444444,
-      0x3a7bd5);
+    drawPanBar(sfxPanTrack, sfxPanFill, SLIDER_X, PAN_SLIDER_Y, BUS_SLIDER_W, BUS_SLIDER_H, sfxBus.pan, 0x444444ff,
+      0x3a7bd5ff);
     drawPanBar(musicPanTrack, musicPanFill, SLIDER_X + BUS_SLIDER_W + 80, PAN_SLIDER_Y, BUS_SLIDER_W, BUS_SLIDER_H,
-      musicBus.pan, 0x444444, 0x2ecc71);
+      musicBus.pan, 0x444444ff, 0x2ecc71ff);
   }
 
   function updateStatus(text:String):Void {

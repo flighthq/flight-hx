@@ -289,20 +289,20 @@ class Main extends Application {
     addNodeChild(worldContainer, visibleBoundsShape);
 
     final hudBg = createShape();
-    appendShapeBeginFill(hudBg, 0x000000, 0.5);
+    appendShapeBeginFill(hudBg, 0x000000ff, 0.5);
     appendShapeRectangle(hudBg, 8, 8, 260, 80);
     appendShapeEndFill(hudBg);
     addNodeChild(hudContainer, hudBg);
 
     cameraLabel = createTextLabel();
-    cameraLabel.data.textFormat = {size: 13, color: 0xffffff, font: 'monospace'};
+    cameraLabel.data.textFormat = {size: 13, color: 0xffffffff, font: 'monospace'};
     cameraLabel.x = 16;
     cameraLabel.y = 16;
     invalidateNodeLocalTransform(cameraLabel);
     addNodeChild(hudContainer, cameraLabel);
 
     playerLabel = createTextLabel();
-    playerLabel.data.textFormat = {size: 13, color: 0xffffff, font: 'monospace'};
+    playerLabel.data.textFormat = {size: 13, color: 0xffffffff, font: 'monospace'};
     playerLabel.x = 16;
     playerLabel.y = 34;
     invalidateNodeLocalTransform(playerLabel);
@@ -310,7 +310,7 @@ class Main extends Application {
 
     final controlsLabel = createTextLabel();
     controlsLabel.data.text = 'WASD/Arrows: move  Scroll: zoom';
-    controlsLabel.data.textFormat = {size: 13, color: 0xffffff, font: 'monospace'};
+    controlsLabel.data.textFormat = {size: 13, color: 0xffffffff, font: 'monospace'};
     controlsLabel.x = 16;
     controlsLabel.y = 52;
     invalidateNodeLocalTransform(controlsLabel);
@@ -318,7 +318,7 @@ class Main extends Application {
 
     final legendLabel = createTextLabel();
     legendLabel.data.text = 'Green = visible bounds  Red = world border';
-    legendLabel.data.textFormat = {size: 13, color: 0xffffff, font: 'monospace'};
+    legendLabel.data.textFormat = {size: 13, color: 0xffffffff, font: 'monospace'};
     legendLabel.x = 16;
     legendLabel.y = 70;
     invalidateNodeLocalTransform(legendLabel);
@@ -379,12 +379,12 @@ class Main extends Application {
     final ri = Math.round((r + m) * 255);
     final gi = Math.round((g + m) * 255);
     final bi = Math.round((b + m) * 255);
-    return (ri << 16) | (gi << 8) | bi;
+    return (ri << 24) | (gi << 16) | (bi << 8) | 0xFF;
   }
 
   function buildGridShape():Void {
     clearShapeCommands(gridShape);
-    appendShapeLineStyle(gridShape, 1, 0x64788c, 0.15);
+    appendShapeLineStyle(gridShape, 1, 0x64788cff, 0.15);
     final gridSize = 100;
     var x = 0;
     while (x <= WORLD_WIDTH) {
@@ -404,7 +404,7 @@ class Main extends Application {
 
   function buildBorderShape():Void {
     clearShapeCommands(borderShape);
-    appendShapeLineStyle(borderShape, 3, 0xc85050, 0.5);
+    appendShapeLineStyle(borderShape, 3, 0xc85050ff, 0.5);
     appendShapeRectangle(borderShape, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
     appendShapeEndFill(borderShape);
     invalidateNodeAppearance(borderShape);
@@ -413,7 +413,7 @@ class Main extends Application {
   function rebuildStars():Void {
     clearShapeCommands(starsShape);
     for (star in stars) {
-      appendShapeBeginFill(starsShape, 0xffffd0, star.brightness);
+      appendShapeBeginFill(starsShape, 0xffffd0ff, star.brightness);
       appendShapeCircle(starsShape, star.x, star.y, star.radius);
       appendShapeEndFill(starsShape);
     }
@@ -423,7 +423,7 @@ class Main extends Application {
   function rebuildMountains():Void {
     clearShapeCommands(mountainsShape);
     for (mt in mountains) {
-      appendShapeBeginFill(mountainsShape, 0x3c5064, 0.6);
+      appendShapeBeginFill(mountainsShape, 0x3c5064ff, 0.6);
       appendShapePolygon(mountainsShape, [
         mt.x - mt.width * 0.5,
         mt.baseY,
@@ -440,7 +440,7 @@ class Main extends Application {
   function rebuildClouds():Void {
     clearShapeCommands(cloudsShape);
     for (cloud in clouds) {
-      appendShapeBeginFill(cloudsShape, 0xc8d2e6, 0.4);
+      appendShapeBeginFill(cloudsShape, 0xc8d2e6ff, 0.4);
       appendShapeEllipse(
         cloudsShape,
         cloud.x - cloud.width * 0.5,
@@ -550,7 +550,7 @@ class Main extends Application {
     invalidateNodeLocalTransform(worldContainer);
 
     clearShapeCommands(playerShape);
-    appendShapeBeginFill(playerShape, 0xffcc33, 1);
+    appendShapeBeginFill(playerShape, 0xffcc33ff, 1);
     appendShapePolygon(playerShape, [
       player.x,
       player.y - PLAYER_SIZE,
@@ -560,7 +560,7 @@ class Main extends Application {
       player.y + PLAYER_SIZE * 0.6,
     ]);
     appendShapeEndFill(playerShape);
-    appendShapeLineStyle(playerShape, 2, 0xcc9900, 1);
+    appendShapeLineStyle(playerShape, 2, 0xcc9900ff, 1);
     appendShapePolygon(playerShape, [
       player.x,
       player.y - PLAYER_SIZE,
@@ -573,7 +573,7 @@ class Main extends Application {
     invalidateNodeAppearance(playerShape);
 
     clearShapeCommands(visibleBoundsShape);
-    appendShapeLineStyle(visibleBoundsShape, 2, 0x00c864, 0.6);
+    appendShapeLineStyle(visibleBoundsShape, 2, 0x00c864ff, 0.6);
     appendShapeRectangle(visibleBoundsShape, visibleBounds.x, visibleBounds.y, visibleBounds.width, visibleBounds.height);
     appendShapeEndFill(visibleBoundsShape);
     invalidateNodeAppearance(visibleBoundsShape);

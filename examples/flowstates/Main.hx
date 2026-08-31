@@ -123,9 +123,9 @@ class Main extends Application {
       onEnter: function() {
         bootTimer = 0;
         final container = createStateContainer(bootState);
-        addNodeChild(container, createBackground(0x111111, 1));
-        addNodeChild(container, createLabel('FLIGHT SDK', 200, 140, 32, 0xffffff));
-        addNodeChild(container, createLabel('Loading...', 240, 190, 18, 0x888888));
+        addNodeChild(container, createBackground(0x111111ff, 1));
+        addNodeChild(container, createLabel('FLIGHT SDK', 200, 140, 32, 0xffffffff));
+        addNodeChild(container, createLabel('Loading...', 240, 190, 18, 0x888888ff));
       },
       onExit: function() {
         stateContainers.remove(bootState);
@@ -143,11 +143,11 @@ class Main extends Application {
       name: 'Menu',
       onEnter: function() {
         final container = createStateContainer(menuState);
-        addNodeChild(container, createBackground(0x1a3a5c, 1));
-        addNodeChild(container, createLabel('FLOW STATES', 170, 80, 36, 0xffffff));
-        addNodeChild(container, createLabel('A @flighthq/flow demo', 190, 130, 16, 0xaaaaaa));
-        addNodeChild(container, createLabel('Press ENTER to play', 195, 220, 20, 0x44cc88));
-        addNodeChild(container, createLabel('Press Q to clear stack', 195, 260, 16, 0x888888));
+        addNodeChild(container, createBackground(0x1a3a5cff, 1));
+        addNodeChild(container, createLabel('FLOW STATES', 170, 80, 36, 0xffffffff));
+        addNodeChild(container, createLabel('A @flighthq/flow demo', 190, 130, 16, 0xaaaaaaff));
+        addNodeChild(container, createLabel('Press ENTER to play', 195, 220, 20, 0x44cc88ff));
+        addNodeChild(container, createLabel('Press Q to clear stack', 195, 260, 16, 0x888888ff));
       },
       onExit: function() {
         stateContainers.remove(menuState);
@@ -161,15 +161,15 @@ class Main extends Application {
       onEnter: function() {
         score = 0;
         final container = createStateContainer(playState);
-        addNodeChild(container, createBackground(0x2d5016, 1));
-        addNodeChild(container, createLabel('PLAYING', 230, 30, 28, 0xffffff));
-        playScoreLabel = createLabel('Score: 0', 30, 100, 22, 0xeedd44);
+        addNodeChild(container, createBackground(0x2d5016ff, 1));
+        addNodeChild(container, createLabel('PLAYING', 230, 30, 28, 0xffffffff));
+        playScoreLabel = createLabel('Score: 0', 30, 100, 22, 0xeedd44ff);
         addNodeChild(container, playScoreLabel);
-        playTimerLabel = createLabel('', 30, 140, 16, 0xcccccc);
+        playTimerLabel = createLabel('', 30, 140, 16, 0xccccccff);
         addNodeChild(container, playTimerLabel);
-        addNodeChild(container, createLabel('SPACE - score points', 30, 220, 16, 0x88bb88));
-        addNodeChild(container, createLabel('ESCAPE - pause', 30, 250, 16, 0x88bb88));
-        addNodeChild(container, createLabel('G - game over', 30, 280, 16, 0x88bb88));
+        addNodeChild(container, createLabel('SPACE - score points', 30, 220, 16, 0x88bb88ff));
+        addNodeChild(container, createLabel('ESCAPE - pause', 30, 250, 16, 0x88bb88ff));
+        addNodeChild(container, createLabel('G - game over', 30, 280, 16, 0x88bb88ff));
       },
       onExit: function() {
         stateContainers.remove(playState);
@@ -189,9 +189,9 @@ class Main extends Application {
       renderBelow: true,
       onEnter: function() {
         final container = createStateContainer(pauseState);
-        addNodeChild(container, createBackground(0x000000, 0.6));
-        addNodeChild(container, createLabel('PAUSED', 225, 150, 40, 0xffffff));
-        addNodeChild(container, createLabel('Press ESCAPE to resume', 185, 210, 18, 0xcccccc));
+        addNodeChild(container, createBackground(0x000000ff, 0.6));
+        addNodeChild(container, createLabel('PAUSED', 225, 150, 40, 0xffffffff));
+        addNodeChild(container, createLabel('Press ESCAPE to resume', 185, 210, 18, 0xccccccff));
       },
       onExit: function() {
         stateContainers.remove(pauseState);
@@ -202,11 +202,11 @@ class Main extends Application {
       name: 'GameOver',
       onEnter: function() {
         final container = createStateContainer(gameOverState);
-        addNodeChild(container, createBackground(0x5c1a1a, 1));
-        addNodeChild(container, createLabel('GAME OVER', 185, 100, 36, 0xff4444));
-        addNodeChild(container, createLabel('Final Score: ' + score, 200, 160, 24, 0xffffff));
-        addNodeChild(container, createLabel('Press R to restart', 205, 240, 18, 0xcccccc));
-        addNodeChild(container, createLabel('Press M for menu', 215, 275, 18, 0x888888));
+        addNodeChild(container, createBackground(0x5c1a1aff, 1));
+        addNodeChild(container, createLabel('GAME OVER', 185, 100, 36, 0xff4444ff));
+        addNodeChild(container, createLabel('Final Score: ' + score, 200, 160, 24, 0xffffffff));
+        addNodeChild(container, createLabel('Press R to restart', 205, 240, 18, 0xccccccff));
+        addNodeChild(container, createLabel('Press M for menu', 215, 275, 18, 0x888888ff));
       },
       onExit: function() {
         stateContainers.remove(gameOverState);
@@ -216,9 +216,9 @@ class Main extends Application {
     // HUD: a separate display container drawn on top every frame, not a flow state. It reads the stack
     // each frame and shows depth, active state, and full stack contents as diagnostic text.
     hud = createDisplayObject();
-    hudDepthLabel = createLabel('', 400, 10, 14, 0xffff88);
-    hudActiveLabel = createLabel('', 400, 30, 14, 0xffff88);
-    hudStackLabel = createLabel('', 400, 50, 14, 0xffff88);
+    hudDepthLabel = createLabel('', 400, 10, 14, 0xffff88ff);
+    hudActiveLabel = createLabel('', 400, 30, 14, 0xffff88ff);
+    hudStackLabel = createLabel('', 400, 50, 14, 0xffff88ff);
     addNodeChild(hud, hudDepthLabel);
     addNodeChild(hud, hudActiveLabel);
     addNodeChild(hud, hudStackLabel);

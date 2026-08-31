@@ -89,7 +89,7 @@ class Main extends Application {
 
     // Bright shapes on a dark background — bloom makes them glow, vignette draws focus
     // to the center, and tone mapping compresses highlights.
-    final colors = [0xff3366, 0x33ff99, 0x3399ff, 0xffcc33, 0xff66cc];
+    final colors = [0xff3366ff, 0x33ff99ff, 0x3399ffff, 0xffcc33ff, 0xff66ccff];
 
     for (i in 0...colors.length) {
       final shape = createShape();
@@ -105,7 +105,7 @@ class Main extends Application {
 
     // Center diamond shape.
     final center = createShape();
-    appendShapeBeginFill(center, 0xffffff, 1);
+    appendShapeBeginFill(center, 0xffffffff, 1);
     appendShapeRectangle(center, 350, 250, 100, 100);
     appendShapeEndFill(center);
     center.rotation = 45;

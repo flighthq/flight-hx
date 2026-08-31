@@ -122,7 +122,7 @@ class Main extends Application {
 
     spring2D = createSpring2D(STAGE_WIDTH / 2, STAGE_HEIGHT / 2);
     springCircle = createShape();
-    appendShapeBeginFill(springCircle, 0x2196f3);
+    appendShapeBeginFill(springCircle, 0x2196f3ff);
     appendShapeCircle(springCircle, 0, 0, CIRCLE_RADIUS);
     appendShapeEndFill(springCircle);
     springCircle.x = spring2D.x.value;
@@ -133,7 +133,7 @@ class Main extends Application {
     dampX = STAGE_WIDTH / 2;
     dampY = STAGE_HEIGHT / 2;
     dampCircle = createShape();
-    appendShapeBeginFill(dampCircle, 0xff9800);
+    appendShapeBeginFill(dampCircle, 0xff9800ff);
     appendShapeCircle(dampCircle, 0, 0, CIRCLE_RADIUS);
     appendShapeEndFill(dampCircle);
     dampCircle.x = dampX;
@@ -151,10 +151,10 @@ class Main extends Application {
     // Legend — small colored squares with labels drawn as shapes (no font dependency).
     legend = createShape();
     final legendY = STAGE_HEIGHT - 28;
-    appendShapeBeginFill(legend, 0x2196f3);
+    appendShapeBeginFill(legend, 0x2196f3ff);
     appendShapeRectangle(legend, 12, legendY, 12, 12);
     appendShapeEndFill(legend);
-    appendShapeBeginFill(legend, 0xff9800);
+    appendShapeBeginFill(legend, 0xff9800ff);
     appendShapeRectangle(legend, 110, legendY, 12, 12);
     appendShapeEndFill(legend);
     addNodeChild(root, legend);
@@ -167,7 +167,7 @@ class Main extends Application {
   function redrawTargetMarker():Void {
     clearShapeCommands(targetMarker);
     final arm = 10;
-    appendShapeLineStyle(targetMarker, 1.5, 0x999999);
+    appendShapeLineStyle(targetMarker, 1.5, 0x999999ff);
     appendShapeMoveTo(targetMarker, targetX - arm, targetY);
     appendShapeLineTo(targetMarker, targetX + arm, targetY);
     appendShapeMoveTo(targetMarker, targetX, targetY - arm);

@@ -25,9 +25,9 @@ class Main extends Application {
   final CANVAS_WIDTH = 800;
   final CANVAS_HEIGHT = 600;
 
-  final COLOR_IDLE = 0x4488cc;
-  final COLOR_COLLIDING = 0xcc4444;
-  final COLOR_MTV = 0x44cc44;
+  final COLOR_IDLE = 0x4488ccff;
+  final COLOR_COLLIDING = 0xcc4444ff;
+  final COLOR_MTV = 0x44cc44ff;
 
   var main:DisplayObject;
 

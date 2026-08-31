@@ -206,7 +206,7 @@ class Main extends Application {
 
     countLabel = createTextLabel();
     countLabel.data.text = '0 particles';
-    countLabel.data.textFormat = {size: 12, color: 0x999999};
+    countLabel.data.textFormat = {size: 12, color: 0x999999ff};
     countLabel.x = 8 * scale;
     countLabel.y = (HEIGHT - 20) * scale;
     invalidateNodeLocalTransform(countLabel);

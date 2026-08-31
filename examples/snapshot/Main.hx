@@ -149,7 +149,7 @@ class Main extends Application {
 
     scoreLabel = createTextLabel();
     scoreLabel.data.text = 'Score: 0';
-    scoreLabel.data.textFormat = {font: 'monospace', size: 16, color: 0xffffff};
+    scoreLabel.data.textFormat = {font: 'monospace', size: 16, color: 0xffffffff};
     scoreLabel.x = 20;
     scoreLabel.y = 440;
     invalidateNodeLocalTransform(scoreLabel);
@@ -157,7 +157,7 @@ class Main extends Application {
 
     helpLabel = createTextLabel();
     helpLabel.data.text = '[S] Save  [R] Restore  [1-5] Load slot  [I] Interpolate to slot 1';
-    helpLabel.data.textFormat = {font: 'monospace', size: 13, color: 0x999999};
+    helpLabel.data.textFormat = {font: 'monospace', size: 13, color: 0x999999ff};
     helpLabel.x = 20;
     helpLabel.y = 468;
     invalidateNodeLocalTransform(helpLabel);
@@ -165,7 +165,7 @@ class Main extends Application {
 
     statusLabel = createTextLabel();
     statusLabel.data.text = '';
-    statusLabel.data.textFormat = {font: 'monospace', size: 14, color: 0x44cc88};
+    statusLabel.data.textFormat = {font: 'monospace', size: 14, color: 0x44cc88ff};
     statusLabel.x = 400;
     statusLabel.y = 440;
     invalidateNodeLocalTransform(statusLabel);
@@ -258,7 +258,7 @@ class Main extends Application {
     final rightX = x + Math.cos(radians - 2.4) * size;
     final rightY = y + Math.sin(radians - 2.4) * size;
 
-    appendShapeBeginFill(shape, 0x44aaff);
+    appendShapeBeginFill(shape, 0x44aaffff);
     appendShapeMoveTo(shape, tipX, tipY);
     appendShapeLineTo(shape, leftX, leftY);
     appendShapeLineTo(shape, rightX, rightY);
@@ -274,7 +274,7 @@ class Main extends Application {
       invalidateNodeLocalTransform(shape);
       return;
     }
-    appendShapeBeginFill(shape, 0xffcc33);
+    appendShapeBeginFill(shape, 0xffcc33ff);
     appendShapeCircle(shape, item.x, item.y, 10);
     appendShapeEndFill(shape);
     invalidateNodeLocalTransform(shape);
@@ -287,15 +287,15 @@ class Main extends Application {
     for (i in 0...SLOT_COUNT) {
       final cx = startX + i * 24;
       if (snapshots[i] != null) {
-        appendShapeBeginFill(shape, 0x44cc88);
+        appendShapeBeginFill(shape, 0x44cc88ff);
         appendShapeCircle(shape, cx, y, 8);
         appendShapeEndFill(shape);
       } else {
-        appendShapeLineStyle(shape, 2, 0x555555);
+        appendShapeLineStyle(shape, 2, 0x555555ff);
         appendShapeCircle(shape, cx, y, 8);
       }
       // Slot number label drawn as a small tick mark above.
-      appendShapeLineStyle(shape, 1, 0x777777);
+      appendShapeLineStyle(shape, 1, 0x777777ff);
       appendShapeMoveTo(shape, cx, y - 14);
       appendShapeLineTo(shape, cx, y - 18);
     }

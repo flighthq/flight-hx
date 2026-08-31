@@ -127,7 +127,7 @@ class Main extends Application {
 
       final label = createTextLabel();
       label.data.text = easings[i].name;
-      label.data.textFormat = {size: 13, color: 0xcccccc};
+      label.data.textFormat = {size: 13, color: 0xccccccff};
       label.x = cellX + 10;
       label.y = cellY + 8;
       invalidateNodeLocalTransform(label);
@@ -138,7 +138,7 @@ class Main extends Application {
       final trackY = cellY + CELL_HEIGHT * 0.62;
 
       final circle = createShape();
-      appendShapeBeginFill(circle, 0x44aaee);
+      appendShapeBeginFill(circle, 0x44aaeeff);
       appendShapeCircle(circle, 0, 0, CIRCLE_RADIUS);
       appendShapeEndFill(circle);
       circle.x = trackStartX;
