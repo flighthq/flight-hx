@@ -10,7 +10,7 @@ class ClayLifecycle {
 
   /** Install via `flight._Lifecycle.installLifecycleHostBackend`. */
   public static function createClayLifecycleBackend():Dynamic {
-    final backend:Dynamic = Reflect.copy((flight._Lifecycle._sentinel__lifecycle : Dynamic));
+    final backend:Dynamic = ({} : Dynamic);
     backend.subscribe = function(cb:String->Void):(Void->Void) {
       listener = cb;
       return function():Void listener = null;

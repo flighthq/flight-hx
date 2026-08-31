@@ -15,7 +15,7 @@ class ClayNet {
   /** Install via `flight._Net.installNetHostBackend`. */
   public static function createClayNetBackend():NetBackend {
     #if js
-    return flight._Net.createWebNetBackend();
+    return flight._HostWeb.createWebNetBackend();
     #else
     return cast {
       sendNetRequest: function(request:Dynamic, ?options:Dynamic):_Promise<Dynamic> {

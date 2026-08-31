@@ -1,30 +1,29 @@
-// Maintained host adapter: Flight AppBackend over a Clay application.
-// Clay counterpart of flight.hostLime.LimeApp. Clay is single-window and
-// subclass-driven (clay.Clay + a clay.Events), so identity comes off the
-// global Clay.app rather than a passed application handle.
+// Maintained host adapter: Flight `app` capability namespace over a Clay
+// application. Clay counterpart of flight.hostLime.LimeApp. Clay is single-window
+// and subclass-driven (clay.Clay + a clay.Events), so identity comes off the
+// global Clay.app rather than a passed application handle. The upstream host seam
+// decomposed AppBackend into per-field backends; Clay honestly supplies identity
+// and quit, and the remaining fields are omitted so Flight's sentinels stand.
 package flight.hostClay;
 
 #if clay
 import clay.Clay;
-import flight.types.AppBackend;
+import flight.types.HostAppCapabilities;
 
-/** Maps Flight's AppBackend onto the Clay application singleton.
- *
- * Follows hostLime's matured idiom: copy Flight's capability-owned sentinel
- * backend (so unsupported desktop-shell operations retain their sentinel
- * behavior) and override the integrations Clay can honestly supply. */
 class ClayApp {
-  /** Creates a backend without installing it (install via HostClay). */
-  public static function createClayAppBackend():AppBackend {
-    final backend:Dynamic = Reflect.copy((flight._App._sentinel__app : Dynamic));
-    backend.getName = function():String {
-      final id = Clay.app.appId;
-      return id == null ? '' : id;
+  /** Builds the Clay-backed `app` capability namespace (composed by HostClay). */
+  public static function createClayAppCapabilities():HostAppCapabilities {
+    return cast {
+      name: {
+        getName: function():String {
+          final id = Clay.app.appId;
+          return id == null ? '' : id;
+        },
+      },
+      quit: {
+        quit: function():Void Clay.app.shutdown(),
+      },
     };
-    backend.quit = function():Void Clay.app.shutdown();
-    // TODO(hostClay): focus/getAppPath/getCommandLine map onto Clay's runtime
-    // and sys APIs (parallel to LimeApp); sentinels retained until then.
-    return cast backend;
   }
 }
 #end

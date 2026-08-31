@@ -103,7 +103,7 @@ private class ClayGlContext {
   public inline function bufferSubData(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.bufferSubData(cast a0, cast a1, cast a2);
   public inline function checkFramebufferStatus(a0:Dynamic):Dynamic return cast GL.checkFramebufferStatus(cast a0);
   public inline function clear(a0:Dynamic):Void GL.clear(cast a0);
-  public inline function clearBufferfv(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.clearBufferfv(cast a0, cast a1, cast a2, cast a3);
+  public inline function clearBufferfv(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.clearBufferfv(cast a0, cast a1, cast a2);
   public inline function clearColor(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.clearColor(cast a0, cast a1, cast a2, cast a3);
   public inline function clearDepth(a0:Dynamic):Void GL.clearDepth(cast a0);
   public inline function colorMask(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.colorMask(cast a0, cast a1, cast a2, cast a3);
@@ -138,7 +138,7 @@ private class ClayGlContext {
   public inline function getActiveUniform(a0:Dynamic, a1:Dynamic):Dynamic return cast GL.getActiveUniform(cast a0, cast a1);
   public inline function getAttribLocation(a0:Dynamic, a1:Dynamic):Dynamic return cast GL.getAttribLocation(cast a0, cast a1);
   public inline function getError():Dynamic return cast GL.getError();
-  public inline function getExtension(a0:Dynamic):Dynamic return cast GL.getExtension(cast a0);
+  public inline function getExtension(_a0:Dynamic):Dynamic return null; // native GL exposes no WebGL extension objects
   public inline function getParameter(a0:Dynamic):Dynamic return cast GL.getParameter(cast a0);
   public inline function getProgramInfoLog(a0:Dynamic):Dynamic return cast GL.getProgramInfoLog(cast a0);
   public inline function getProgramParameter(a0:Dynamic, a1:Dynamic):Dynamic return cast GL.getProgramParameter(cast a0, cast a1);
@@ -154,7 +154,7 @@ private class ClayGlContext {
   public inline function scissor(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.scissor(cast a0, cast a1, cast a2, cast a3);
   public inline function shaderSource(a0:Dynamic, a1:Dynamic):Void GL.shaderSource(cast a0, cast a1);
   public inline function stencilFunc(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.stencilFunc(cast a0, cast a1, cast a2);
-  public inline function stencilFuncSeparate(a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.stencilFuncSeparate(cast a0, cast a1, cast a2, cast a3);
+  public inline function stencilFuncSeparate(_a0:Dynamic, a1:Dynamic, a2:Dynamic, a3:Dynamic):Void GL.stencilFunc(cast a1, cast a2, cast a3); // linc native GL has no per-face variant; apply to both faces
   public inline function stencilMask(a0:Dynamic):Void GL.stencilMask(cast a0);
   public inline function stencilMaskSeparate(a0:Dynamic, a1:Dynamic):Void GL.stencilMaskSeparate(cast a0, cast a1);
   public inline function stencilOp(a0:Dynamic, a1:Dynamic, a2:Dynamic):Void GL.stencilOp(cast a0, cast a1, cast a2);

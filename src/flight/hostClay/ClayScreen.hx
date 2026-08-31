@@ -1,21 +1,41 @@
-// Maintained host adapter: Flight ScreenBackend for Clay (sentinel-copy + Clay
-// overrides). WRITE-AHEAD against develop 2cf1c5cef. Clay exposes a single
-// screen via Clay.app (screenWidth/Height/Density); multi-display enumeration is
-// a sentinel like hostLime's subset. See agents/host-develop-adaptation.md.
+// Maintained host adapter: Flight `screen` capability namespace for Clay. Clay
+// exposes a single screen via Clay.app (screenWidth/Height/Density); multi-
+// display enumeration, modes, and change delivery are omitted so Flight's
+// sentinels stand. The upstream host seam split ScreenBackend into a `query`
+// backend (enumeration + cursor); this fills the honest Clay geometry.
 package flight.hostClay;
 
 #if clay
 import clay.Clay;
+import flight.types.HostScreenCapabilities;
 
 class ClayScreen {
-  /** Install via `flight._Screen.installScreenHostBackend`. */
-  public static function createClayScreenBackend():Dynamic {
-    final backend:Dynamic = Reflect.copy((flight._Screen._sentinel__screen : Dynamic));
-    backend.getPrimaryDisplayGeometry = function():Dynamic
-      return {x: 0.0, y: 0.0, width: (Clay.app.screenWidth : Float), height: (Clay.app.screenHeight : Float)};
-    backend.getDisplayScale = function():Float return Clay.app.screenDensity;
-    // TODO(develop): display enumeration/modes/orientation via Clay/SDL; sentinel otherwise.
-    return cast backend;
+  public static function createClayScreenCapabilities():HostScreenCapabilities {
+    final fill = function(out:Dynamic):Dynamic {
+      out.x = 0.0;
+      out.y = 0.0;
+      out.width = (Clay.app.screenWidth : Float);
+      out.height = (Clay.app.screenHeight : Float);
+      out.scaleFactor = Clay.app.screenDensity;
+      out.isPrimary = true;
+      return out;
+    };
+    return cast {
+      query: {
+        getPrimaryScreen: function(out:Dynamic):Dynamic return fill(out),
+        getScreens: function(out:Array<Dynamic>):Array<Dynamic> {
+          out.resize(1);
+          if (out[0] == null) out[0] = {};
+          fill(out[0]);
+          return out;
+        },
+        getCursorPosition: function(out:Dynamic):Dynamic {
+          out.x = 0.0;
+          out.y = 0.0;
+          return out;
+        },
+      },
+    };
   }
 }
 #end

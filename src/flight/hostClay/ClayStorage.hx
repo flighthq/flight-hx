@@ -12,17 +12,28 @@ class ClayStorage {
   public static function createClayStorageBackend(?path:String):StorageBackend {
     final file = path == null ? 'flight-storage.json' : path;
     final store = load(file);
-    final backend:Dynamic = Reflect.copy((flight._Storage._sentinel__storage : Dynamic));
-    backend.getItem = function(key:String):Null<String> return store.exists(key) ? store.get(key) : null;
-    backend.setItem = function(key:String, value:String):Bool { store.set(key, value); persist(file, store); return true; };
-    backend.removeItem = function(key:String):Void { store.remove(key); persist(file, store); };
-    backend.clear = function():Void { store.clear(); persist(file, store); };
-    backend.byteSize = function():Float {
-      var n = 0.0;
-      for (k in store.keys()) n += (k.length + store.get(k).length) * 2; // UTF-16 cost like the web backend
-      return n;
+    // The upstream StorageBackend seam returns union results: success is
+    // { reason: 'ok' } (plus `value` for reads). Clay's write-through is
+    // best-effort, so mutations report success optimistically.
+    return cast {
+      getItem: function(key:String):Dynamic return {reason: 'ok', value: store.exists(key) ? store.get(key) : null},
+      setItem: function(key:String, value:String):Dynamic {
+        store.set(key, value);
+        persist(file, store);
+        return {reason: 'ok'};
+      },
+      removeItem: function(key:String):Dynamic {
+        store.remove(key);
+        persist(file, store);
+        return {reason: 'ok'};
+      },
+      clear: function():Dynamic {
+        store.clear();
+        persist(file, store);
+        return {reason: 'ok'};
+      },
+      keys: function():Dynamic return {reason: 'ok', value: [for (k in store.keys()) k]},
     };
-    return cast backend;
   }
 
   static function load(file:String):Map<String, String> {

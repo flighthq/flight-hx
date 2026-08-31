@@ -6,13 +6,13 @@
 package flight.hostClay;
 
 #if clay
-import flight.types.FileSystemBackend;
+import flight.types.FileSystemHostBackend;
 import flight._internal._Promise;
 
 class ClayFileSystem {
   /** Allocation entry point, Flight-style: `createClayFileSystemBackend()`. */
-  public static function createClayFileSystemBackend():FileSystemBackend {
-    final backend:Dynamic = Reflect.copy((flight._FileSystem._sentinel__filesystem : Dynamic));
+  public static function createClayFileSystemBackend():flight.types.FileSystemHostBackend {
+    final backend:Dynamic = ({} : Dynamic);
     #if sys
     backend.readTextFile = function(path:String):_Promise<Dynamic>
       return done(try sys.io.File.getContent(path) catch (_:Dynamic) null);

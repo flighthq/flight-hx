@@ -6,7 +6,7 @@ package flight.hostClay;
 class ClayPlatform {
   /** Install via `flight._Platform.installPlatformHostBackend`. */
   public static function createClayPlatformBackend():Dynamic {
-    final backend:Dynamic = Reflect.copy((flight._Platform._sentinel__platform : Dynamic));
+    final backend:Dynamic = ({} : Dynamic);
     #if sys
     backend.getOsName = function():String return Sys.systemName();
     #end
