@@ -13,13 +13,19 @@ class LimeStorage {
   /** Allocation entry point, Flight-style: `createLimeStorageBackend()`. */
   public static function createLimeStorageBackend(?path:String):flight.types.StorageBackend {
     final store = new LimeStorageStore(path);
+    // The upstream StorageBackend seam returns union results: success is
+    // { reason: 'ok' } (plus `value` for reads), a failure carries a non-'ok'
+    // reason. A single-process file store only fails on persistence denial.
     return cast {
-      getItem: function(key:String):Null<String> return store.get(key),
-      setItem: function(key:String, value:String):Bool return store.set(key, value),
-      removeItem: function(key:String):Bool return store.remove(key),
-      clear: function():Bool return store.clear(),
-      keys: function():Array<String> return store.keys(),
-      byteSize: function():Float return store.byteSize(),
+      getItem: function(key:String):Dynamic return {reason: 'ok', value: store.get(key)},
+      setItem: function(key:String, value:String):Dynamic {
+        return store.set(key, value) ? {reason: 'ok'} : {reason: 'storage-unavailable'};
+      },
+      removeItem: function(key:String):Dynamic {
+        return store.remove(key) ? {reason: 'ok'} : {reason: 'storage-unavailable'};
+      },
+      clear: function():Dynamic return store.clear() ? {reason: 'ok'} : {reason: 'storage-unavailable'},
+      keys: function():Dynamic return {reason: 'ok', value: store.keys()},
     };
   }
 }

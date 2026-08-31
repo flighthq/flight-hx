@@ -32,7 +32,7 @@ class LimeNet {
   /** Allocation entry point, Flight-style: `createLimeNetBackend()`. */
   public static function createLimeNetBackend():NetBackend {
     #if js
-    return flight._Net.createWebNetBackend();
+    return flight._HostWeb.createWebNetBackend();
     #else
     return cast {
       sendNetRequest: function(request:Dynamic, ?options:Dynamic):_Promise<NetResponse> {
