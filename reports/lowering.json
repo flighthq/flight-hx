@@ -3623,7 +3623,7 @@
       "booleanAndExpressions": 2781,
       "booleanConditionalExpressions": 3477,
       "booleanOrExpressions": 3370,
-      "booleanTruthinessUses": 17129,
+      "booleanTruthinessUses": 17127,
       "destructuringEscapes": {
         "regexp-result-array": {
           "assignment": 0,

@@ -56,7 +56,7 @@ class _MediaSession {
     return cast null;
   }
 
-  public static function destroyMediaSession(host:{ >HasMediaSession, >HasMediaSessionAction, }):Void {
+  public static function destroyMediaSession(host:flight._internal._Intersection2<HasMediaSession, HasMediaSessionAction>):Void {
     var providers:flight._internal._Set<flight._internal._Union2<MediaSessionActionBackend, MediaSessionBackend>> = cast _Runtime.UNDEFINED;
     var firstError:flight._internal._Any = cast _Runtime.UNDEFINED;
     var hasError:Bool = cast _Runtime.UNDEFINED;

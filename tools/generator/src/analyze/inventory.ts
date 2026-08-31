@@ -117,7 +117,7 @@ export function sourcePathToHaxePackage(packageName: string, sourcePath: string)
 }
 
 function isInternalSource(filename: string): boolean {
-  return filename.toLowerCase() === 'internal' || /test(?:helper|util)/iu.test(filename);
+  return filename.toLowerCase() === 'internal' || /test(?:helper|support|util)/iu.test(filename);
 }
 
 function pascalCaseFilename(filename: string): string {

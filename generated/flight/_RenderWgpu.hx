@@ -2022,7 +2022,8 @@ class _RenderWgpu {
     cache = (cast (cast runtime : WgpuRenderStateRuntime).context : WgpuDeviceRuntime).samplerCache;
     sampler = ((cast cache : flight._internal._Map<Float, flight._internal.dom.GPUSampler>).get(key));
     if ((cast _Runtime.strictEquals(sampler, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      var descriptor:flight._internal.dom.GPUSamplerDescriptor = (cast { minFilter: effectiveMinFilter, magFilter: effectiveMagFilter, addressModeU: wrapU, addressModeV: wrapV });
+      var descriptor:flight._internal.dom.GPUSamplerDescriptor = cast _Runtime.UNDEFINED;
+      descriptor = (cast { minFilter: effectiveMinFilter, magFilter: effectiveMagFilter, addressModeU: wrapU, addressModeV: wrapV });
       if ((cast !_Runtime.strictEquals(effectiveMipmapFilter, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { (descriptor.mipmapFilter = effectiveMipmapFilter); }
       if ((cast ((cast anisotropy : Float) > (cast 1.0 : Float)) : Bool)) { (descriptor.maxAnisotropy = anisotropy); }
       (sampler = cast (flight._internal.backend.WebGpuDeviceBackend.call((cast state : WgpuRenderState).device, 'createSampler', cast ([descriptor] : Array<Dynamic>)) : Dynamic));

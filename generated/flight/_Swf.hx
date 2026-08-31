@@ -2793,7 +2793,8 @@ class _Swf {
           var strength:Float = (cast reader : SwfReader).readFixed8();
           var flags:Float = (cast reader : SwfReader).readUint8();
           if ((cast !(cast (cast reader : SwfReader).valid : Bool) : Bool)) { return cast false; }
-          var options:{ var alpha:Float; var blurX:Float; var blurY:Float; var color:Float; var quality:Float; var strength:Float; } = (cast { alpha: (cast color : { var alpha:Float; var rgb:Float; }).alpha, blurX: blurX, blurY: blurY, color: (cast color : { var alpha:Float; var rgb:Float; }).rgb, quality: (_Runtime.toInt32(flags) & _Runtime.toInt32(_Swf.FILTER_PASSES__swfFilter)), strength: strength });
+          var options:{ var alpha:Float; var blurX:Float; var blurY:Float; var color:Float; var quality:Float; var strength:Float; } = cast _Runtime.UNDEFINED;
+          options = (cast { alpha: (cast color : { var alpha:Float; var rgb:Float; }).alpha, blurX: blurX, blurY: blurY, color: (cast color : { var alpha:Float; var rgb:Float; }).rgb, quality: (_Runtime.toInt32(flags) & _Runtime.toInt32(_Swf.FILTER_PASSES__swfFilter)), strength: strength });
           _Runtime.callProperty(outEffects, 'push', cast ([((cast !_Runtime.strictEquals((_Runtime.toInt32(flags) & _Runtime.toInt32(_Swf.FILTER_INNER__swfFilter)), 0.0) : Bool) ? (cast (cast createInnerGlowEffect(({ final __callArgument616:Dynamic = options; __callArgument616; })) : InnerGlowEffect) : Dynamic) : (cast (cast createOuterGlowEffect(({ final __callArgument618:Dynamic = options; __callArgument618; })) : OuterGlowEffect) : Dynamic))] : Array<Dynamic>));
           index++;
           continue;
@@ -4468,7 +4469,8 @@ class _Swf {
     minY = HxMath.POSITIVE_INFINITY;
     maxY = -HxMath.POSITIVE_INFINITY;
     for (outline in _Runtime.iterable(outlines)) {
-      var bounds:RectangleLike = (cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 });
+      var bounds:RectangleLike = cast _Runtime.UNDEFINED;
+      bounds = (cast { height: 0.0, width: 0.0, x: 0.0, y: 0.0 });
       if ((cast ((cast _Runtime.strictEquals(outline, null) : Bool) || (cast !(cast (cast getPathBounds(({ final __callArgument1136:Dynamic = outline; __callArgument1136; }), ({ final __callArgument1137:Dynamic = bounds; __callArgument1137; })) : Bool) : Bool) : Bool)) : Bool)) {
         _Runtime.callProperty(advances, 'push', cast ([0.0] : Array<Dynamic>));
         continue;

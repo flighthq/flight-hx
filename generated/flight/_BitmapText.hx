@@ -361,7 +361,8 @@ class _BitmapText {
       var pi:Float = 0.0;
       while ((cast ((cast pi : Float) < (cast _Runtime.field(paragraphs, 'length') : Float)) : Bool)) {
         var tokens:Array<BitmapTextToken__updateBitmapText> = (cast _BitmapText.buildBitmapTextWords__updateBitmapText(({ final __callArgument59:Dynamic = glyphSource; __callArgument59; }), (cast flight._internal._StaticIndex.readArray(paragraphs, pi) : String), (cast data.letterSpacing : Float)) : Array<BitmapTextToken__updateBitmapText>);
-        var current:BitmapTextLine__updateBitmapText = (cast { words: cast ([] : Array<Dynamic>), gaps: cast ([] : Array<Dynamic>), width: 0.0, paragraphEnd: false });
+        var current:BitmapTextLine__updateBitmapText = cast _Runtime.UNDEFINED;
+        current = (cast { words: cast ([] : Array<Dynamic>), gaps: cast ([] : Array<Dynamic>), width: 0.0, paragraphEnd: false });
         for (token in _Runtime.iterable(tokens)) {
           var wraps:Bool = ((cast ((cast !_Runtime.strictEquals(data.wrapWidth, null) : Bool) && (cast ((cast _Runtime.field((cast current : BitmapTextLine__updateBitmapText).words, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast ((cast (((cast current : BitmapTextLine__updateBitmapText).width + (cast token : BitmapTextToken__updateBitmapText).gap) + (cast (cast token : BitmapTextToken__updateBitmapText).word : BitmapTextWord__updateBitmapText).width) : Float) > (cast data.wrapWidth : Float)) : Bool));
           if ((cast wraps : Bool)) {

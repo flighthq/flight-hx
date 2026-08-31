@@ -10,8 +10,8 @@
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 35,
-    "typeUses": 8559,
-    "valueUses": 2094
+    "typeUses": 8726,
+    "valueUses": 2092
   },
   "types": [
     {
@@ -81,7 +81,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/AbortSignal.hx",
-      "uses": 164
+      "uses": 167
     },
     {
       "coverage": "typed",
@@ -122,7 +122,7 @@
         "upstream/packages/media/src/audioDeviceBackend.ts"
       ],
       "provider": "src/flight/_internal/dom/AudioBufferSourceNode.hx",
-      "uses": 28
+      "uses": 29
     },
     {
       "coverage": "dynamic-stub",
@@ -138,7 +138,7 @@
         "upstream/packages/types/src/Scene2DResources.ts"
       ],
       "provider": "src/flight/_internal/dom/AudioContext.hx",
-      "uses": 42
+      "uses": 43
     },
     {
       "coverage": "dynamic-stub",
@@ -261,7 +261,7 @@
         "upstream/packages/types/src/CanvasShapeDrawState.ts"
       ],
       "provider": "src/flight/_internal/dom/CanvasGradient.hx",
-      "uses": 38
+      "uses": 39
     },
     {
       "coverage": "dynamic-stub",
@@ -347,7 +347,7 @@
         "upstream/packages/types/src/CanvasShapeDrawState.ts"
       ],
       "provider": "src/flight/_internal/dom/CanvasPattern.hx",
-      "uses": 34
+      "uses": 36
     },
     {
       "coverage": "dynamic-stub",
@@ -423,7 +423,7 @@
         "upstream/packages/types/src/WgpuRichTextOverlay.ts"
       ],
       "provider": "src/flight/_internal/dom/CanvasRenderingContext2D.hx",
-      "uses": 628
+      "uses": 632
     },
     {
       "coverage": "dynamic-stub",
@@ -431,15 +431,13 @@
       "key": "host:CanvasRenderingContext2DSettings",
       "kind": "host",
       "locations": [
-        "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderState.ts",
         "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts",
-        "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts",
         "upstream/packages/types/src/CanvasRenderState.ts",
         "upstream/packages/types/src/CanvasRenderSurface.ts"
       ],
       "provider": "src/flight/_internal/dom/CanvasRenderingContext2DSettings.hx",
-      "uses": 14
+      "uses": 12
     },
     {
       "coverage": "dynamic-stub",
@@ -462,7 +460,7 @@
         "upstream/packages/host-web/src/webClipboard.ts"
       ],
       "provider": "src/flight/_internal/dom/Clipboard.hx",
-      "uses": 21
+      "uses": 22
     },
     {
       "coverage": "dynamic-stub",
@@ -525,7 +523,6 @@
       "key": "host:CSSStyleDeclaration",
       "kind": "host",
       "locations": [
-        "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts",
         "upstream/packages/host-web/src/webAccessibility.ts",
         "upstream/packages/host-web/src/webCanvasRenderSurface.ts",
         "upstream/packages/host-web/src/webCursor.ts",
@@ -534,7 +531,6 @@
         "upstream/packages/host-web/src/webInputTarget.ts",
         "upstream/packages/host-web/src/webMenu.ts",
         "upstream/packages/host-web/src/webWgpuRenderSurface.ts",
-        "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts",
         "upstream/packages/scene2d-dom/src/domBackground.ts",
         "upstream/packages/scene2d-dom/src/domCache.ts",
         "upstream/packages/scene2d-dom/src/domClipRectangle.ts",
@@ -551,7 +547,7 @@
         "upstream/packages/scene2d-dom/src/domTransform.ts"
       ],
       "provider": "src/flight/_internal/dom/CSSStyleDeclaration.hx",
-      "uses": 164
+      "uses": 158
     },
     {
       "coverage": "dynamic-stub",
@@ -581,7 +577,6 @@
       "key": "host:Document",
       "kind": "host",
       "locations": [
-        "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts",
         "upstream/packages/host-web/src/webAccessibility.ts",
         "upstream/packages/host-web/src/webApp.ts",
         "upstream/packages/host-web/src/webBitmapEncode.ts",
@@ -603,7 +598,6 @@
         "upstream/packages/image/src/imageBackend.ts",
         "upstream/packages/lifecycle/src/lifecycle.ts",
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts",
-        "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts",
         "upstream/packages/scene2d-dom/src/domNativeText.ts",
         "upstream/packages/scene2d-dom/src/domRichText.ts",
         "upstream/packages/scene2d-dom/src/domScale9Shape.ts",
@@ -615,7 +609,7 @@
         "upstream/packages/webcam/src/mediaFileCapture.ts"
       ],
       "provider": "src/flight/_internal/dom/Document.hx",
-      "uses": 146
+      "uses": 142
     },
     {
       "coverage": "typed",
@@ -691,7 +685,7 @@
         "upstream/packages/scene2d-dom/src/domTextInput.ts"
       ],
       "provider": "src/flight/_internal/dom/Element.hx",
-      "uses": 21
+      "uses": 22
     },
     {
       "coverage": "dynamic-stub",
@@ -710,7 +704,7 @@
         "upstream/packages/webcam/src/mediaFileCapture.ts"
       ],
       "provider": "src/flight/_internal/dom/Event.hx",
-      "uses": 51
+      "uses": 55
     },
     {
       "coverage": "dynamic-stub",
@@ -759,7 +753,7 @@
         "upstream/packages/input/src/inputManager.ts"
       ],
       "provider": "src/flight/_internal/dom/EventTarget.hx",
-      "uses": 41
+      "uses": 42
     },
     {
       "coverage": "dynamic-stub",
@@ -805,7 +799,7 @@
         "upstream/packages/types/src/GlContextRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/EXT_texture_filter_anisotropic.hx",
-      "uses": 7
+      "uses": 8
     },
     {
       "coverage": "dynamic-stub",
@@ -820,7 +814,7 @@
         "upstream/packages/webcam/src/mediaFileCapture.ts"
       ],
       "provider": "src/flight/_internal/dom/File.hx",
-      "uses": 35
+      "uses": 36
     },
     {
       "coverage": "dynamic-stub",
@@ -845,7 +839,7 @@
         "upstream/packages/webcam/src/mediaFileCapture.ts"
       ],
       "provider": "src/flight/_internal/dom/FileReader.hx",
-      "uses": 19
+      "uses": 23
     },
     {
       "coverage": "dynamic-stub",
@@ -942,7 +936,7 @@
         "upstream/packages/media/src/audioMixer.ts"
       ],
       "provider": "src/flight/_internal/dom/GainNode.hx",
-      "uses": 47
+      "uses": 50
     },
     {
       "coverage": "dynamic-stub",
@@ -986,7 +980,7 @@
         "upstream/packages/geolocation/src/geolocation.ts"
       ],
       "provider": "src/flight/_internal/dom/Geolocation.hx",
-      "uses": 13
+      "uses": 14
     },
     {
       "coverage": "dynamic-stub",
@@ -1047,7 +1041,7 @@
         "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
       ],
       "provider": "src/flight/_internal/dom/GPU.hx",
-      "uses": 9
+      "uses": 10
     },
     {
       "coverage": "dynamic-stub",
@@ -1129,7 +1123,7 @@
         "upstream/packages/types/src/WgpuSkinningAdapter.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBindGroup.hx",
-      "uses": 202
+      "uses": 209
     },
     {
       "coverage": "dynamic-stub",
@@ -1193,7 +1187,7 @@
         "upstream/packages/types/src/WgpuSkinningAdapter.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBindGroupLayout.hx",
-      "uses": 277
+      "uses": 283
     },
     {
       "coverage": "dynamic-stub",
@@ -1256,7 +1250,7 @@
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBlendState.hx",
-      "uses": 61
+      "uses": 62
     },
     {
       "coverage": "dynamic-stub",
@@ -1302,7 +1296,7 @@
         "upstream/packages/types/src/WgpuWireframePipeline.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBuffer.hx",
-      "uses": 300
+      "uses": 301
     },
     {
       "coverage": "dynamic-stub",
@@ -1890,7 +1884,7 @@
         "upstream/packages/types/src/WgpuRenderState.ts"
       ],
       "provider": "src/flight/_internal/dom/GPURenderPassEncoder.hx",
-      "uses": 258
+      "uses": 265
     },
     {
       "coverage": "dynamic-stub",
@@ -1930,7 +1924,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/GPURenderPipeline.hx",
-      "uses": 113
+      "uses": 122
     },
     {
       "coverage": "dynamic-stub",
@@ -1981,7 +1975,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUSampler.hx",
-      "uses": 215
+      "uses": 222
     },
     {
       "coverage": "dynamic-stub",
@@ -2037,7 +2031,7 @@
         "upstream/packages/types/src/WgpuRenderState.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUShaderModule.hx",
-      "uses": 155
+      "uses": 156
     },
     {
       "coverage": "dynamic-stub",
@@ -2085,7 +2079,7 @@
         "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUStencilFaceState.hx",
-      "uses": 8
+      "uses": 9
     },
     {
       "coverage": "dynamic-stub",
@@ -2196,7 +2190,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUTexture.hx",
-      "uses": 229
+      "uses": 235
     },
     {
       "coverage": "typed",
@@ -2320,7 +2314,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUTextureView.hx",
-      "uses": 290
+      "uses": 297
     },
     {
       "coverage": "dynamic-stub",
@@ -2372,7 +2366,6 @@
         "upstream/packages/effects-canvas/src/canvasBlendEffect.ts",
         "upstream/packages/effects-canvas/src/canvasCompositeEffect.ts",
         "upstream/packages/effects-canvas/src/canvasEffectCompositing.ts",
-        "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts",
         "upstream/packages/effects-canvas/src/canvasFilmGrainEffect.ts",
         "upstream/packages/effects-canvas/src/canvasPixelateEffect.ts",
         "upstream/packages/effects-canvas/src/canvasRenderEffectPipeline.ts",
@@ -2416,7 +2409,6 @@
         "upstream/packages/scene2d-canvas/src/canvasRenderTextureResolver.ts",
         "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts",
         "upstream/packages/scene2d-canvas/src/canvasSprite.ts",
-        "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts",
         "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
         "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts",
         "upstream/packages/scene2d-canvas/src/canvasTilemap.ts",
@@ -2445,7 +2437,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLCanvasElement.hx",
-      "uses": 312
+      "uses": 301
     },
     {
       "coverage": "dynamic-stub",
@@ -2501,7 +2493,7 @@
         "upstream/packages/types/src/NativeText.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLElement.hx",
-      "uses": 277
+      "uses": 279
     },
     {
       "coverage": "dynamic-stub",
@@ -2554,7 +2546,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLImageElement.hx",
-      "uses": 78
+      "uses": 87
     },
     {
       "coverage": "dynamic-stub",
@@ -2644,7 +2636,7 @@
         "upstream/packages/host-web/src/webMenu.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLUListElement.hx",
-      "uses": 13
+      "uses": 14
     },
     {
       "coverage": "dynamic-stub",
@@ -2681,7 +2673,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/HTMLVideoElement.hx",
-      "uses": 152
+      "uses": 163
     },
     {
       "coverage": "dynamic-stub",
@@ -2720,7 +2712,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/ImageBitmap.hx",
-      "uses": 63
+      "uses": 72
     },
     {
       "coverage": "dynamic-stub",
@@ -2836,7 +2828,7 @@
         "upstream/packages/permissions/src/permission.ts"
       ],
       "provider": "src/flight/_internal/dom/MediaDevices.hx",
-      "uses": 5
+      "uses": 6
     },
     {
       "coverage": "dynamic-stub",
@@ -2870,7 +2862,7 @@
         "upstream/packages/host-web/src/webMediasession.ts"
       ],
       "provider": "src/flight/_internal/dom/MediaSession.hx",
-      "uses": 36
+      "uses": 37
     },
     {
       "coverage": "dynamic-stub",
@@ -3049,7 +3041,7 @@
         "upstream/packages/sensors/src/sensors.ts"
       ],
       "provider": "src/flight/_internal/dom/Navigator.hx",
-      "uses": 85
+      "uses": 87
     },
     {
       "coverage": "dynamic-stub",
@@ -3061,7 +3053,7 @@
         "upstream/packages/scene2d-dom/src/domReconcile.ts"
       ],
       "provider": "src/flight/_internal/dom/Node.hx",
-      "uses": 4
+      "uses": 5
     },
     {
       "coverage": "dynamic-stub",
@@ -3124,7 +3116,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/OffscreenCanvas.hx",
-      "uses": 59
+      "uses": 67
     },
     {
       "coverage": "dynamic-stub",
@@ -3138,7 +3130,7 @@
         "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
       ],
       "provider": "src/flight/_internal/dom/OffscreenCanvasRenderingContext2D.hx",
-      "uses": 21
+      "uses": 25
     },
     {
       "coverage": "dynamic-stub",
@@ -3282,7 +3274,7 @@
         "upstream/packages/webcam/src/mediaFileCapture.ts"
       ],
       "provider": "src/flight/_internal/dom/ProgressEvent.hx",
-      "uses": 2
+      "uses": 6
     },
     {
       "coverage": "dynamic-stub",
@@ -3413,7 +3405,7 @@
         "upstream/packages/host-web/src/webStorage.ts"
       ],
       "provider": "src/flight/_internal/dom/Storage.hx",
-      "uses": 13
+      "uses": 14
     },
     {
       "coverage": "dynamic-stub",
@@ -3482,7 +3474,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/SVGImageElement.hx",
-      "uses": 33
+      "uses": 41
     },
     {
       "coverage": "dynamic-stub",
@@ -3639,7 +3631,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/VideoFrame.hx",
-      "uses": 46
+      "uses": 54
     },
     {
       "coverage": "dynamic-stub",
@@ -3937,7 +3929,7 @@
         "upstream/packages/types/src/GlShapeMeshBinding.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLProgram.hx",
-      "uses": 239
+      "uses": 252
     },
     {
       "coverage": "dynamic-stub",
@@ -3972,7 +3964,7 @@
         "upstream/packages/render-gl/src/glProgram.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLShader.hx",
-      "uses": 3
+      "uses": 4
     },
     {
       "coverage": "dynamic-stub",
@@ -4087,7 +4079,7 @@
         "upstream/packages/types/src/GlTextureResolver.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLTexture.hx",
-      "uses": 400
+      "uses": 416
     },
     {
       "coverage": "dynamic-stub",
@@ -4202,7 +4194,7 @@
         "upstream/packages/types/src/GlWireframeProgram.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLUniformLocation.hx",
-      "uses": 370
+      "uses": 375
     },
     {
       "coverage": "dynamic-stub",
@@ -4222,7 +4214,7 @@
         "upstream/packages/types/src/GlWireframeProgram.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLVertexArrayObject.hx",
-      "uses": 33
+      "uses": 34
     },
     {
       "coverage": "dynamic-stub",
@@ -4271,7 +4263,7 @@
         "upstream/packages/sensors/src/sensors.ts"
       ],
       "provider": "src/flight/_internal/dom/Window.hx",
-      "uses": 144
+      "uses": 145
     },
     {
       "coverage": "dynamic-stub",
@@ -4588,15 +4580,13 @@
       "coverage": "portable",
       "key": "global:globalThis",
       "locations": [
-        "generated/flight/_EffectsCanvas.hx",
         "generated/flight/_HostWeb.hx",
         "generated/flight/_Image.hx",
         "generated/flight/_RenderWgpu.hx",
-        "generated/flight/_Scene2DCanvas.hx",
         "generated/flight/_Sensors.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 9
+      "uses": 7
     },
     {
       "coverage": "js-only",

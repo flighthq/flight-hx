@@ -2609,7 +2609,7 @@ class Sdk {
     Facade_Sdk_flight__Clipboard.attachClipboardWatch(host, watch);
   }
 
-  public static function attachConnectivity(host:{ >HasConnectivityStatus, >HasConnectivityChange, }, connectivity:Connectivity):Bool {
+  public static function attachConnectivity(host:flight._internal._Intersection2<HasConnectivityStatus, HasConnectivityChange>, connectivity:Connectivity):Bool {
     return cast Facade_Sdk_flight__Connectivity.attachConnectivity(host, connectivity);
     return cast null;
   }
@@ -2716,12 +2716,12 @@ class Sdk {
     Facade_Sdk_flight__Socket.attachSocket(socket);
   }
 
-  public static function attachSoftKeyboard(host:{ >HasSoftKeyboardChange, >HasSoftKeyboardInfo, }, keyboard:SoftKeyboard):flight._internal._Promise<SoftKeyboardAttachResult> {
+  public static function attachSoftKeyboard(host:flight._internal._Intersection2<HasSoftKeyboardChange, HasSoftKeyboardInfo>, keyboard:SoftKeyboard):flight._internal._Promise<SoftKeyboardAttachResult> {
     return cast Facade_Sdk_flight__Keyboard.attachSoftKeyboard(host, keyboard);
     return cast null;
   }
 
-  public static function attachStatusBar(host:{ >HasUiStatusBarChange, >HasUiStatusBarInfo, }, bar:StatusBar):Void {
+  public static function attachStatusBar(host:flight._internal._Intersection2<HasUiStatusBarChange, HasUiStatusBarInfo>, bar:StatusBar):Void {
     Facade_Sdk_flight__StatusBar.attachStatusBar(host, bar);
   }
 
@@ -8251,7 +8251,7 @@ class Sdk {
     Facade_Sdk_flight__RenderGl.destroyGlRenderTexturePool(state, pool);
   }
 
-  public static function destroyMediaSession(host:{ >HasMediaSession, >HasMediaSessionAction, }):Void {
+  public static function destroyMediaSession(host:flight._internal._Intersection2<HasMediaSession, HasMediaSessionAction>):Void {
     Facade_Sdk_flight__MediaSession.destroyMediaSession(host);
   }
 
@@ -21553,7 +21553,7 @@ class Sdk {
 
   public static final StarlingPexFormatKind:String = Facade_Sdk_flight__Types.StarlingPexFormatKind;
 
-  public static function startApplicationLoop(host:{ >HasAppLoop, >HasAppVisibilityQuery, }, app:Application, ?options:ApplicationLoopOptions):Void {
+  public static function startApplicationLoop(host:flight._internal._Intersection2<HasAppLoop, HasAppVisibilityQuery>, app:Application, ?options:ApplicationLoopOptions):Void {
     Facade_Sdk_flight__Application.startApplicationLoop(host, app, options);
   }
 

@@ -1800,9 +1800,9 @@ class _Shape {
 
   @:allow(flight)
   @:keep
-  private static final defaultShapeBoundsFlush:ShapeBoundsCommandHandler = (cast function(context:ShapeBoundsContext, __unused0:ShapeCommandArgumentCursor):Void {
+  private static final defaultShapeBoundsFlush:ShapeBoundsCommandHandler = (cast function(__unused1:ShapeBoundsContext, __unused2:ShapeCommandArgumentCursor):Void { _Runtime.callValue(function(context:ShapeBoundsContext, __unused0:ShapeCommandArgumentCursor):Void {
     (cast context : ShapeBoundsContext).flushPath();
-  });
+  }, cast ([__unused1] : Array<Dynamic>)); });
 
   @:allow(flight)
   @:keep

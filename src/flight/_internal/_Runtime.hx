@@ -903,6 +903,14 @@ class _Runtime {
     #end
   }
 
+  public static function queueMicrotask(callback:Void->Void):Void {
+    #if js
+    js.Syntax.code('globalThis.queueMicrotask({0})', callback);
+    #else
+    haxe.Timer.delay(callback, 0);
+    #end
+  }
+
   public static inline function setDynamicField(target:Dynamic, key:Dynamic, value:Dynamic):Dynamic {
     #if js
     js.Syntax.code('globalThis.Reflect.set({0}, {1}, {2})', target, key, value);

@@ -19,7 +19,7 @@ import flight.types.StatusBarStyleEntry;
 import flight.types.StatusBarStyleEntryHandle;
 
 class StatusBar {
-  public static function attachStatusBar(host:{ >HasUiStatusBarChange, >HasUiStatusBarInfo, }, bar:flight.types.StatusBar):Void {
+  public static function attachStatusBar(host:flight._internal._Intersection2<HasUiStatusBarChange, HasUiStatusBarInfo>, bar:flight.types.StatusBar):Void {
     Facade_StatusBar_flight__StatusBar.attachStatusBar(host, bar);
   }
 

@@ -744,7 +744,7 @@ class _Midi {
     var state:Null<flight._internal._Union2<MidiInputPortResourceState__midiResource, MidiOutputPortResourceState__midiResource>> = cast _Runtime.UNDEFINED;
     state = (cast getMidiPortResourceState(({ final __callArgument171:Dynamic = port; __callArgument171; })) : Null<flight._internal._Union2<MidiInputPortResourceState__midiResource, MidiOutputPortResourceState__midiResource>>);
     if ((cast ((cast _Runtime.strictEquals(state, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast state : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return cast flight._internal._Async.resolve((cast _Midi.attachFailure__midiSubscription() : MidiSubscriptionAttachOutcome)); }
-    return cast (cast _Midi.attachMidiSubscription__midiSubscription(({ final __callArgument173:Dynamic = subscription; __callArgument173; }), (cast state : { var stateSubscriptions:flight._internal._Set<MidiPortStateSubscription>; }).stateSubscriptions, (cast function(listener:{  }):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast state : { var operations:flight._internal._Union2<MidiInputPortResourceOperations, MidiOutputPortResourceOperations>; }).operations : { var attachStateChange:(Void->Void)->flight._internal._Promise<MidiEventBackendAttachOutcome>; }).attachStateChange(({ final __callArgument174:Dynamic = listener; __callArgument174; })) : Dynamic), ({ final __callArgument175:Dynamic = function(__unused0:Arguments):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast subscription : MidiPortStateSubscription).onMidiPortStateChange], [port]]), 1); }, cast ([] : Array<Dynamic>)); }; __callArgument175; })) : flight._internal._Promise<MidiSubscriptionAttachOutcome>);
+    return cast (cast _Midi.attachMidiSubscription__midiSubscription(({ final __callArgument173:Dynamic = subscription; __callArgument173; }), (cast state : { var stateSubscriptions:flight._internal._Set<MidiPortStateSubscription>; }).stateSubscriptions, (cast function(listener:{  }):flight._internal._Promise<MidiEventBackendAttachOutcome> return (cast (cast state : { var operations:flight._internal._Union2<MidiInputPortResourceOperations, MidiOutputPortResourceOperations>; }).operations : { var attachStateChange:(Void->Void)->flight._internal._Promise<MidiEventBackendAttachOutcome>; }).attachStateChange(({ final __callArgument174:Dynamic = listener; __callArgument174; })) : Dynamic), ({ final __callArgument175:Dynamic = function(__unused0:flight._internal._Any):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast subscription : MidiPortStateSubscription).onMidiPortStateChange], [port]]), 1); }, cast ([] : Array<Dynamic>)); }; __callArgument175; })) : flight._internal._Promise<MidiSubscriptionAttachOutcome>);
     return cast null;
   }
 
@@ -1030,77 +1030,77 @@ class _Midi {
         var attachFailed:Bool = cast _Runtime.UNDEFINED;
         var releaseFailed:Bool = cast _Runtime.UNDEFINED;
         runtime = ((cast _Midi.subscriptionStates__midiSubscription : flight._internal._WeakMap<Entity, MidiSubscriptionRuntime__midiSubscription>).get(subscription));
-        var __flowBranch252:Dynamic;
+        var __flowBranch253:Dynamic;
         if ((cast ((cast _Runtime.strictEquals(runtime, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast (cast runtime : MidiSubscriptionRuntime__midiSubscription).disposeCompleted : Bool)) : Bool)) {
-          __flowBranch252 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch253 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ reason: 'already-disposed' });
           });
         } else {
-          __flowBranch252 = flight._internal._Async.flowNormal();
+          __flowBranch253 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch252, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch253, function():Dynamic {
           ((cast runtime : MidiSubscriptionRuntime__midiSubscription).disposed = true);
           (cast runtime : MidiSubscriptionRuntime__midiSubscription).generation++;
           attachFailed = false;
           releaseFailed = false;
-          var __flowBranch253:Dynamic;
+          var __flowBranch254:Dynamic;
           if ((cast !_Runtime.strictEquals((cast runtime : MidiSubscriptionRuntime__midiSubscription).attaching, null) : Bool)) {
-            __flowBranch253 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch254 = flight._internal._Async.protect(function():Dynamic {
               var outcome:MidiSubscriptionAttachOutcome = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast runtime : MidiSubscriptionRuntime__midiSubscription).attaching, function(__awaitValue254:Dynamic):Dynamic {
-                outcome = __awaitValue254;
-                var __flowBranch255:Dynamic;
+              return flight._internal._Async.flatMap((cast runtime : MidiSubscriptionRuntime__midiSubscription).attaching, function(__awaitValue255:Dynamic):Dynamic {
+                outcome = __awaitValue255;
+                var __flowBranch256:Dynamic;
                 if ((cast _Runtime.strictEquals((cast outcome : { var reason:String; }).reason, 'operation-failed') : Bool)) {
-                  __flowBranch255 = flight._internal._Async.protect(function():Dynamic {
-                    ({ attachFailed: attachFailed, releaseFailed: releaseFailed } = cast (outcome : Dynamic));
+                  __flowBranch256 = flight._internal._Async.protect(function():Dynamic {
+                    ({ var __destructure257:Dynamic = outcome; attachFailed = cast _Runtime.field(__destructure257, 'attachFailed'); releaseFailed = cast _Runtime.field(__destructure257, 'releaseFailed'); __destructure257; });
                     return flight._internal._Async.flowNormal();
                   });
                 } else {
-                  __flowBranch255 = flight._internal._Async.flowNormal();
+                  __flowBranch256 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch255, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch256, function():Dynamic {
                   return flight._internal._Async.flowNormal();
                 });
               });
             });
           } else {
-            __flowBranch253 = flight._internal._Async.flowNormal();
+            __flowBranch254 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch253, function():Dynamic {
-            var __flowBranch256:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch254, function():Dynamic {
+            var __flowBranch258:Dynamic;
             if ((cast !(cast releaseFailed : Bool) : Bool)) {
-              __flowBranch256 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch258 = flight._internal._Async.protect(function():Dynamic {
                 var detached:MidiSubscriptionDetachOutcome = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap((cast _Midi.detachMidiSubscription__midiSubscription(({ final __callArgument259:Dynamic = subscription; __callArgument259; })) : flight._internal._Promise<MidiSubscriptionDetachOutcome>), function(__awaitValue257:Dynamic):Dynamic {
-                  detached = __awaitValue257;
-                  var __flowBranch258:Dynamic;
+                return flight._internal._Async.flatMap((cast _Midi.detachMidiSubscription__midiSubscription(({ final __callArgument261:Dynamic = subscription; __callArgument261; })) : flight._internal._Promise<MidiSubscriptionDetachOutcome>), function(__awaitValue259:Dynamic):Dynamic {
+                  detached = __awaitValue259;
+                  var __flowBranch260:Dynamic;
                   if ((cast _Runtime.strictEquals((cast detached : { var reason:String; }).reason, 'operation-failed') : Bool)) {
-                    __flowBranch258 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch260 = flight._internal._Async.protect(function():Dynamic {
                       (releaseFailed = cast (true : Dynamic));
                       return flight._internal._Async.flowNormal();
                     });
                   } else {
-                    __flowBranch258 = flight._internal._Async.flowNormal();
+                    __flowBranch260 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch258, function():Dynamic {
+                  return flight._internal._Async.continueFlow(__flowBranch260, function():Dynamic {
                     return flight._internal._Async.flowNormal();
                   });
                 });
               });
             } else {
-              __flowBranch256 = flight._internal._Async.flowNormal();
+              __flowBranch258 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch256, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch258, function():Dynamic {
               clearSignal((cast signal : Dynamic));
-              var __flowBranch261:Dynamic;
+              var __flowBranch263:Dynamic;
               if ((cast ((cast attachFailed : Bool) || (cast releaseFailed : Bool)) : Bool)) {
-                __flowBranch261 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch263 = flight._internal._Async.protect(function():Dynamic {
                   return flight._internal._Async.flowReturn({ attachFailed: attachFailed, reason: 'operation-failed', releaseFailed: releaseFailed });
                 });
               } else {
-                __flowBranch261 = flight._internal._Async.flowNormal();
+                __flowBranch263 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch261, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch263, function():Dynamic {
                 ((cast runtime : MidiSubscriptionRuntime__midiSubscription).disposeCompleted = true);
                 return flight._internal._Async.flowReturn({ reason: 'ok' });
               });
@@ -1120,8 +1120,8 @@ class _Midi {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap((cast attachment : MidiEventAttachment).release(), function(__awaitValue262:Dynamic):Dynamic {
-            return flight._internal._Async.flowReturn(_Runtime.strictEquals((cast __awaitValue262 : MidiEventReleaseOutcome).reason, 'ok'));
+          return flight._internal._Async.flatMap((cast attachment : MidiEventAttachment).release(), function(__awaitValue264:Dynamic):Dynamic {
+            return flight._internal._Async.flowReturn(_Runtime.strictEquals((cast __awaitValue264 : MidiEventReleaseOutcome).reason, 'ok'));
           });
         }), function(__caughtError:Dynamic):Dynamic {
           var __error:Dynamic = __caughtError;
@@ -1139,32 +1139,32 @@ class _Midi {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         if ((cast _Runtime.strictEquals((cast runtime : MidiSubscriptionRuntime__midiSubscription).attachment, null) : Bool)) {
-          var __flowBranch269:Dynamic;
+          var __flowBranch271:Dynamic;
           if ((cast _Runtime.strictEquals((cast runtime : MidiSubscriptionRuntime__midiSubscription).attachment, null) : Bool)) {
-            __flowBranch269 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch271 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch269 = flight._internal._Async.flowNormal();
+            __flowBranch271 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch269, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch271, function():Dynamic {
             ((cast runtime : MidiSubscriptionRuntime__midiSubscription).attachment = null);
-            _Midi.untrackMidiSubscription__midiSubscription(({ final __callArgument270:Dynamic = subscription; __callArgument270; }), (cast runtime : Dynamic));
+            _Midi.untrackMidiSubscription__midiSubscription(({ final __callArgument272:Dynamic = subscription; __callArgument272; }), (cast runtime : Dynamic));
             return flight._internal._Async.flowReturn(true);
           });
         } else {
-          return flight._internal._Async.flatMap((cast _Midi.releaseMidiAttachment__midiSubscription((cast runtime : MidiSubscriptionRuntime__midiSubscription).attachment) : flight._internal._Promise<Bool>), function(__awaitValue265:Dynamic):Dynamic {
-            var __flowBranch266:Dynamic;
-            if ((cast !_Runtime.truthy(__awaitValue265) : Bool)) {
-              __flowBranch266 = flight._internal._Async.protect(function():Dynamic {
+          return flight._internal._Async.flatMap((cast _Midi.releaseMidiAttachment__midiSubscription((cast runtime : MidiSubscriptionRuntime__midiSubscription).attachment) : flight._internal._Promise<Bool>), function(__awaitValue267:Dynamic):Dynamic {
+            var __flowBranch268:Dynamic;
+            if ((cast !_Runtime.truthy(__awaitValue267) : Bool)) {
+              __flowBranch268 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn(false);
               });
             } else {
-              __flowBranch266 = flight._internal._Async.flowNormal();
+              __flowBranch268 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch266, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch268, function():Dynamic {
               ((cast runtime : MidiSubscriptionRuntime__midiSubscription).attachment = null);
-              _Midi.untrackMidiSubscription__midiSubscription(({ final __callArgument267:Dynamic = subscription; __callArgument267; }), (cast runtime : Dynamic));
+              _Midi.untrackMidiSubscription__midiSubscription(({ final __callArgument269:Dynamic = subscription; __callArgument269; }), (cast runtime : Dynamic));
               return flight._internal._Async.flowReturn(true);
             });
           });
@@ -1174,7 +1174,7 @@ class _Midi {
   }
 
   public static function untrackMidiSubscription__midiSubscription(subscription:Entity, runtime:MidiSubscriptionRuntime__midiSubscription):Void {
-    ({ final __collection272:Dynamic = (cast runtime : MidiSubscriptionRuntime__midiSubscription).ownerSubscriptions; __collection272 == null ? _Runtime.UNDEFINED : ((cast __collection272 : flight._internal._Set<Entity>).delete_(subscription)); });
+    ({ final __collection274:Dynamic = (cast runtime : MidiSubscriptionRuntime__midiSubscription).ownerSubscriptions; __collection274 == null ? _Runtime.UNDEFINED : ((cast __collection274 : flight._internal._Set<Entity>).delete_(subscription)); });
     ((cast runtime : MidiSubscriptionRuntime__midiSubscription).ownerSubscriptions = null);
   }
 
@@ -1182,8 +1182,8 @@ class _Midi {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap(pending, function(__awaitValue273:Dynamic):Dynamic {
-            return flight._internal._Async.flowReturn(__awaitValue273);
+          return flight._internal._Async.flatMap(pending, function(__awaitValue275:Dynamic):Dynamic {
+            return flight._internal._Async.flowReturn(__awaitValue275);
           });
         }), function(__caughtError:Dynamic):Dynamic {
           var __error:Dynamic = __caughtError;

@@ -10,6 +10,7 @@ import {
 } from '../../tools/generator/src/emit/core.ts';
 import {
   emitHaxeModule,
+  emitType,
   resetStaticLoweringEmissionCounts,
   staticLoweringEmissionCounts,
 } from '../../tools/generator/src/emit/haxe.ts';
@@ -47,6 +48,31 @@ function typedSource(
 }
 
 describe('TypeScript lowering and Haxe emission', () => {
+  it('flattens nested anonymous inheritance before Haxe type emission', () => {
+    const output = emitType({
+      extends: [
+        {
+          extends: [{ arguments: [], kind: 'named', name: 'Host' }],
+          fields: [
+            {
+              name: 'app',
+              optional: false,
+              type: { name: 'String', kind: 'primitive' },
+            },
+          ],
+          kind: 'anonymous',
+        },
+        { arguments: [], kind: 'named', name: 'HasNotificationAction' },
+        { arguments: [], kind: 'named', name: 'HasNotificationReply' },
+      ],
+      fields: [],
+      kind: 'anonymous',
+    });
+
+    expect(output).toBe('{ >Host, >HasNotificationAction, >HasNotificationReply, var app:String; }');
+    expect(output).not.toContain('>{');
+  });
+
   it('normalizes pure functions into deterministic executable Haxe', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/math/src/sample.ts',
@@ -2704,6 +2730,7 @@ describe('TypeScript lowering and Haxe emission', () => {
         export function merge(target: any, source: any) {
           Object.assign(target, source);
           const dictionary = Object.create(null);
+          Object.fromEntries(Object.entries(target));
           return Object.keys(target).length + Object.entries(target).length + (Object.hasOwn(dictionary, 'key') ? 1 : 0);
         }
       `,
@@ -2723,6 +2750,9 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain('flight._internal.DynamicObject.assign(target, source)');
     expect(output).toContain('flight._internal.DynamicObject.keys(target)');
     expect(output).toContain('flight._internal.DynamicObject.entries(target)');
+    expect(output).toContain(
+      'flight._internal.DynamicObject.fromEntries(flight._internal.DynamicObject.entries(target))',
+    );
     expect(output).toContain('flight._internal.DynamicObject.create(null)');
     expect(output).toContain("flight._internal.DynamicObject.hasOwn(dictionary, 'key')");
     expect(output).not.toContain("_HostValueLut.get('Object')");
@@ -2783,6 +2813,168 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(lowered.diagnostics).toEqual([]);
     expect(output).toContain('flight._internal._Intersection2');
     expect(output).not.toContain('{ >Capabilities,');
+  });
+
+  it('keeps intersections with conflicting structural fields nominal', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/overlappingIntersection.ts',
+      `
+        interface SessionBackend { destroy(): void; }
+        interface ActionBackend { destroy(): void; }
+        interface HasSession { media: { session: SessionBackend }; }
+        interface HasAction { media: { action: ActionBackend }; }
+        export function destroy(host: HasSession & HasAction): void {
+          host.media.session.destroy();
+          host.media.action.destroy();
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'OverlappingIntersectionFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('host:flight._internal._Intersection2<HasSession, HasAction>');
+    expect(output).not.toContain('host:{ >HasSession, >HasAction, }');
+  });
+
+  it('keeps Host intersections with conflicting capability fields nominal', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/hostIntersection.ts',
+      `
+        interface Host { clipboard: { text: { read(): string } }; }
+        interface HasClipboardChange { clipboard: { change: { listen(): void } }; }
+        export const host = {} as Host & HasClipboardChange;
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'HostIntersectionFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('flight._internal._Intersection2<Host, HasClipboardChange>');
+    expect(output).not.toContain('{ >Host, >HasClipboardChange, }');
+  });
+
+  it('keeps nested Host capability intersections with conflicting fields nominal', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/hostCapabilityIntersection.ts',
+      `
+        interface HostClipboardCapabilities { change?: { subscribe(listener: () => void): void }; }
+        export function combine(
+          value: HostClipboardCapabilities & { change: unknown; text: { read(): string } },
+        ): void { void value; }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'HostCapabilityIntersectionFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('flight._internal._Intersection2<HostClipboardCapabilities');
+    expect(output).not.toContain('{ >HostClipboardCapabilities, var change:');
+  });
+
+  it('expands Partial interface heritage into optional structural fields', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/partialHeritage.ts',
+      `
+        interface BasicBackend { copy(from: string, to: string): Promise<boolean>; remove(path: string): void; }
+        export interface HostBackend extends Partial<BasicBackend> { usage?(): Promise<number>; }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'PartialHeritageFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('@:optional var copy:Null<String->String->flight._internal._Promise<Bool>>');
+    expect(output).toContain('@:optional var remove:Null<String->Void>');
+  });
+
+  it('keeps options refinements with conflicting fields nominal', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/optionsRefinement.ts',
+      `
+        type Platform = 'linux' | 'windows';
+        interface ElectronBackendOptions { platform: Platform; }
+        export function register<Profile extends Platform>(
+          options: Readonly<ElectronBackendOptions> & { readonly platform: Profile },
+        ): void { void options; }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'OptionsRefinementFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('flight._internal._Intersection2<ElectronBackendOptions');
+    expect(output).not.toContain('{ >ElectronBackendOptions, var platform:Profile; }');
+  });
+
+  it('erases local type parameters from generic arrow signatures', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/genericArrow.ts',
+      `
+        type Failure = 'failed';
+        declare function classify<T>(value: T): T;
+        export const persist = <FailureReason extends Failure>(
+          fallback: FailureReason,
+        ): { reason: 'ok' | FailureReason } => ({ reason: classify(fallback) });
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'GenericArrowFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).not.toContain('FailureReason');
+    expect(output).toMatch(/fallback:(?:Dynamic|flight\._internal\._Any)/u);
+  });
+
+  it('erases generic contextual padding parameter types', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/contextualPadding.ts',
+      `
+        type Listener<Arguments extends unknown[]> = (...args: Arguments) => void;
+        declare function use<Arguments extends unknown[]>(listener: Listener<Arguments>): void;
+        export function attach(): void { use(() => {}); }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ContextualPaddingFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).not.toMatch(/__unused\d+:Arguments/u);
   });
 
   it('lowers portable standard identity, constants, and iterable probes explicitly', () => {
@@ -3172,6 +3364,104 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).toContain("_Runtime.defaultUndefined(_Runtime.field(__destructure0, 'mode')");
   });
 
+  it('lowers object destructuring assignments through a single evaluated temporary', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/objectAssignment.ts',
+      `
+        export function update(value: any): boolean {
+          let attachFailed = false;
+          let releaseFailed = false;
+          ({ attachFailed, releaseFailed } = value);
+          return attachFailed || releaseFailed;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ObjectAssignmentFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain("attachFailed = cast _Runtime.field(__destructure0, 'attachFailed')");
+    expect(output).toContain("releaseFailed = cast _Runtime.field(__destructure0, 'releaseFailed')");
+    expect(output).not.toContain('} = value');
+  });
+
+  it('routes queueMicrotask through the portable runtime', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/microtask.ts',
+      `export function schedule(callback: () => void): void { queueMicrotask(callback); }`,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'MicrotaskFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('_Runtime.queueMicrotask(callback)');
+    expect(output).not.toContain("_HostValueLut.get('queueMicrotask')");
+  });
+
+  it('widens shorter callbacks assigned to typed function variables', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/callbackAssignment.ts',
+      `
+        function noop(): void {}
+        export function bind(): (outcome: string) => void {
+          let resolve: (outcome: string) => void = noop;
+          return resolve;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'CallbackAssignmentFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toMatch(/resolve = \(cast function\(__unused\d+:String\):Void/u);
+  });
+
+  it('declares object bindings before initializers that capture their owner', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/example/src/objectRecursion.ts',
+      `
+        export function create() {
+          const release = { released: false, run() { release.released = true; } };
+          return release;
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ObjectRecursionFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toMatch(/var release:[^;]+ = cast _Runtime\.UNDEFINED;\s+release =/u);
+  });
+
   it('emits direct Array destructuring reads while keeping unapproved receiver shapes dynamic', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/destructuring.ts',
@@ -3511,6 +3801,29 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output.match(/_Runtime\.andValue\(flag/gu)).toHaveLength(1);
     expect(output).not.toContain('_Runtime.select(flag');
     expect(output).toContain('_Runtime.select(maybe');
+  });
+
+  it('sequences void-valued logical branches without using Void as a value', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/voidLogical.ts',
+      `
+        export function subscribe(active: boolean, listener: () => void): () => void {
+          const handle = () => active && listener();
+          return handle;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'VoidLogicalFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('function():Dynamic { listener(); return _Runtime.UNDEFINED; }');
+    expect(output).not.toContain('function():Dynamic return cast listener()');
   });
 
   it('emits all proven indexed families while retaining ambiguous receivers', () => {

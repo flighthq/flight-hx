@@ -1816,7 +1816,9 @@ function emitVariable(variable: IrVariable, includeSemicolon: boolean): string {
 }
 
 function emitScopedVariable(variable: IrVariable): string[] {
-  if (variable.initializer?.kind !== 'function') return [`${emitVariable(variable, true)};`];
+  if (variable.initializer?.kind !== 'function' && variable.initializer?.kind !== 'object') {
+    return [`${emitVariable(variable, true)};`];
+  }
   // A TypeScript closure can capture the const/let binding that owns it. Haxe does
   // not put a local binding in scope until its initializer has finished, so nested
   // recursive closures need a declaration followed by assignment. The assignment
@@ -2287,6 +2289,20 @@ function emitExpression(expression: IrExpression): string {
       }
       if (
         expression.kind === 'assignment' &&
+        expression.operator === '=' &&
+        expression.left.kind === 'object' &&
+        expression.left.properties.every((property) => property.kind === 'property')
+      ) {
+        const temporary = `__destructure${String(temporaryIndex++)}`;
+        return `({ var ${temporary}:Dynamic = ${emitExpression(expression.right)}; ${expression.left.properties
+          .map(
+            (property) =>
+              `${emitExpression(property.value)} = cast _Runtime.field(${temporary}, ${quote(property.name)})`,
+          )
+          .join('; ')}; ${temporary}; })`;
+      }
+      if (
+        expression.kind === 'assignment' &&
         expression.left.kind === 'property' &&
         expression.left.name === 'length'
       ) {
@@ -2510,6 +2526,9 @@ function emitExpression(expression: IrExpression): string {
             `(${emitBooleanExpression(expression.left)} || ${emitBooleanExpression(expression.right)})`,
           );
         }
+        if (expression.right.type && isVoidType(expression.right.type)) {
+          return `_Runtime.orValue(${emitExpression(expression.left)}, function():Dynamic { ${emitExpression(expression.right)}; return _Runtime.UNDEFINED; })`;
+        }
         return `_Runtime.orValue(${emitExpression(expression.left)}, function():Dynamic return cast ${emitExpression(expression.right)})`;
       }
       if (expression.kind === 'binary' && expression.operator === '&&') {
@@ -2518,6 +2537,9 @@ function emitExpression(expression: IrExpression): string {
             'booleanAndExpressions',
             `(${emitBooleanExpression(expression.left)} && ${emitBooleanExpression(expression.right)})`,
           );
+        }
+        if (expression.right.type && isVoidType(expression.right.type)) {
+          return `_Runtime.andValue(${emitExpression(expression.left)}, function():Dynamic { ${emitExpression(expression.right)}; return _Runtime.UNDEFINED; })`;
         }
         return `_Runtime.andValue(${emitExpression(expression.left)}, function():Dynamic return cast ${emitExpression(expression.right)})`;
       }
@@ -3890,12 +3912,32 @@ function typedArrayConstructor(expression: IrExpression): string | undefined {
   }[name];
 }
 
+function flattenAnonymousType(type: Extract<IrType, { kind: 'anonymous' }>): {
+  extends: IrType[];
+  fields: Extract<IrType, { kind: 'anonymous' }>['fields'];
+} {
+  const extends_: IrType[] = [];
+  const fields: Extract<IrType, { kind: 'anonymous' }>['fields'] = [];
+  for (const parent of type.extends) {
+    if (parent.kind === 'anonymous') {
+      const nested = flattenAnonymousType(parent);
+      extends_.push(...nested.extends);
+      fields.push(...nested.fields);
+    } else if (parent.kind !== 'dynamic') {
+      extends_.push(parent);
+    }
+  }
+  fields.push(...type.fields);
+  return { extends: extends_, fields };
+}
+
 export function emitType(type: IrType): string {
   switch (type.kind) {
     case 'anonymous': {
+      const flattened = flattenAnonymousType(type);
       const members = [
-        ...type.extends.filter((parent) => parent.kind !== 'dynamic').map((parent) => `>${emitType(parent)},`),
-        ...type.fields.map(
+        ...flattened.extends.map((parent) => `>${emitType(parent)},`),
+        ...flattened.fields.map(
           (field) => `${field.optional ? '@:optional ' : ''}var ${safeName(field.name)}:${emitValueType(field.type)};`,
         ),
       ];

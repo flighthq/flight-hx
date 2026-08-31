@@ -732,7 +732,8 @@ class _Scene3D {
             var channel:Scene3DDocumentAnimationChannel = flight._internal._StaticIndex.readArray((cast source : Scene3DDocumentAnimation).channels, c);
             var node:Node3D = flight._internal._StaticIndex.readArray(nodes, (cast channel : Scene3DDocumentAnimationChannel).node);
             if ((cast _Runtime.strictEquals(node, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { c++; continue; }
-            var target:Scene3DAnimationTarget = (cast { node: node, path: (cast channel : Scene3DDocumentAnimationChannel).path });
+            var target:Scene3DAnimationTarget = cast _Runtime.UNDEFINED;
+            target = (cast { node: node, path: (cast channel : Scene3DDocumentAnimationChannel).path });
             _Runtime.callProperty(channels, 'push', cast ([(cast createAnimationChannel((cast channel : Scene3DDocumentAnimationChannel).track, (cast target : flight._internal._Any)) : AnimationChannel)] : Array<Dynamic>));
             c++;
           }

@@ -23,7 +23,7 @@ import flight.types.Signal;
 
 @:noCompletion
 class _Connectivity {
-  public static function attachConnectivity(host:{ >HasConnectivityStatus, >HasConnectivityChange, }, connectivity:Connectivity):Bool {
+  public static function attachConnectivity(host:flight._internal._Intersection2<HasConnectivityStatus, HasConnectivityChange>, connectivity:Connectivity):Bool {
     var statusBackend:ConnectivityStatusBackend = cast _Runtime.UNDEFINED;
     var initial:ConnectivityStatus = cast _Runtime.UNDEFINED;
     var wasOnline:Null<Bool> = cast _Runtime.UNDEFINED;

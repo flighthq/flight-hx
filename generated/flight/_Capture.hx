@@ -25,7 +25,8 @@ class _Capture {
     sorted = (cast {  });
     for (column in _Runtime.iterable(_Runtime.callProperty(flight._internal.DynamicObject.keys(baseline), 'sort', cast ([] : Array<Dynamic>)))) {
       var entry:CaptureColumnBaseline = _Runtime.getIndex(baseline, column);
-      var out:CaptureColumnBaseline = (cast {  });
+      var out:CaptureColumnBaseline = cast _Runtime.UNDEFINED;
+      out = (cast {  });
       if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).fingerprint, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).fingerprint = (cast entry : CaptureColumnBaseline).fingerprint); }
       if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).sourceHash, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).sourceHash = (cast entry : CaptureColumnBaseline).sourceHash); }
       if ((cast !_Runtime.strictEquals((cast entry : CaptureColumnBaseline).sha256, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : CaptureColumnBaseline).sha256 = (cast entry : CaptureColumnBaseline).sha256); }

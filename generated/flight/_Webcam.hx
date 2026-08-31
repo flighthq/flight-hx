@@ -33,7 +33,7 @@ class _Webcam {
             observeMediaFileCaptureHostResult((cast 'capture' : String), (cast !_Runtime.strictEquals(value, null) : Bool));
             resolve(({ final __callArgument2:Dynamic = value; __callArgument2; }));
           });
-          ((cast input : flight._internal.dom.HTMLInputElement).onchange = function(__unused1:flight._internal.dom.Event):Void {
+          ((cast input : flight._internal.dom.HTMLInputElement).onchange = function(__unused6:flight._internal.dom.Event):Void { _Runtime.callValue(function(__unused1:flight._internal.dom.Event):Void {
             var file:Null<flight._internal.dom.File> = cast _Runtime.UNDEFINED;
             var reader:flight._internal.dom.FileReader = cast _Runtime.UNDEFINED;
             file = _Runtime.coalesce(_Runtime.optionalIndex((cast input : flight._internal.dom.HTMLInputElement).files, 0.0), function():Dynamic return cast null);
@@ -42,13 +42,13 @@ class _Webcam {
               return;
             }
             reader = _Runtime.construct(flight._internal._HostValueLut.get('FileReader'), []);
-            ((cast reader : flight._internal.dom.FileReader).onload = function(__unused2:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void {
+            ((cast reader : flight._internal.dom.FileReader).onload = function(__unused3:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void { _Runtime.callValue(function(__unused2:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void {
               settle(({ final __callArgument6:Dynamic = { dataUrl: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast reader : flight._internal.dom.FileReader).result), 'string') : Bool) ? (cast (cast reader : flight._internal.dom.FileReader).result : Dynamic) : (cast '' : Dynamic)), width: 0.0, height: 0.0, format: (cast file : flight._internal.dom.File).type }; __callArgument6; }));
-            });
-            ((cast reader : flight._internal.dom.FileReader).onerror = function(__unused3:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void { settle(({ final __callArgument8:Dynamic = null; __callArgument8; })); });
+            }, cast ([] : Array<Dynamic>)); });
+            ((cast reader : flight._internal.dom.FileReader).onerror = function(__unused5:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void { _Runtime.callValue(function(__unused4:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void { settle(({ final __callArgument8:Dynamic = null; __callArgument8; })); }, cast ([] : Array<Dynamic>)); });
             (cast reader : flight._internal.dom.FileReader).readAsDataURL(file);
-          });
-          ((cast input : flight._internal.dom.HTMLInputElement).oncancel = function(__unused4:flight._internal.dom.Event):Void { settle(({ final __callArgument10:Dynamic = null; __callArgument10; })); });
+          }, cast ([] : Array<Dynamic>)); });
+          ((cast input : flight._internal.dom.HTMLInputElement).oncancel = function(__unused8:flight._internal.dom.Event):Void { _Runtime.callValue(function(__unused7:flight._internal.dom.Event):Void { settle(({ final __callArgument10:Dynamic = null; __callArgument10; })); }, cast ([] : Array<Dynamic>)); });
           (cast input : flight._internal.dom.HTMLInputElement).click();
         } catch (__error:Dynamic) {
           observeMediaFileCaptureHostResult((cast 'capture' : String), (cast false : Bool));
@@ -57,7 +57,7 @@ class _Webcam {
       });
       return cast _Runtime.UNDEFINED;
     }, captureVideo: function(options:MediaFileCaptureOptions):flight._internal._Promise<Null<MediaFileCaptureVideo>> {
-      return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused5:flight._internal._Any):Void {
+      return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused9:flight._internal._Any):Void {
         if ((cast ((cast _Runtime.strictEquals(flight._internal._HostValueLut.typeofValue('document'), 'undefined') : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(flight._internal.backend.DomDocumentBackend.field(flight._internal.backend.DomDocumentBackend.value(), 'createElement')), 'function') : Bool)) : Bool)) {
           observeMediaFileCaptureHostResult((cast 'captureVideo' : String), (cast false : Bool));
           resolve(({ final __callArgument14:Dynamic = null; __callArgument14; }));
@@ -75,7 +75,7 @@ class _Webcam {
             observeMediaFileCaptureHostResult((cast 'captureVideo' : String), (cast !_Runtime.strictEquals(value, null) : Bool));
             resolve(({ final __callArgument16:Dynamic = value; __callArgument16; }));
           });
-          ((cast input : flight._internal.dom.HTMLInputElement).onchange = function(__unused6:flight._internal.dom.Event):Void {
+          ((cast input : flight._internal.dom.HTMLInputElement).onchange = function(__unused15:flight._internal.dom.Event):Void { _Runtime.callValue(function(__unused10:flight._internal.dom.Event):Void {
             var file:Null<flight._internal.dom.File> = cast _Runtime.UNDEFINED;
             var reader:flight._internal.dom.FileReader = cast _Runtime.UNDEFINED;
             file = _Runtime.coalesce(_Runtime.optionalIndex((cast input : flight._internal.dom.HTMLInputElement).files, 0.0), function():Dynamic return cast null);
@@ -84,13 +84,13 @@ class _Webcam {
               return;
             }
             reader = _Runtime.construct(flight._internal._HostValueLut.get('FileReader'), []);
-            ((cast reader : flight._internal.dom.FileReader).onload = function(__unused7:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void {
+            ((cast reader : flight._internal.dom.FileReader).onload = function(__unused12:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void { _Runtime.callValue(function(__unused11:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void {
               settle(({ final __callArgument20:Dynamic = { dataUrl: ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast reader : flight._internal.dom.FileReader).result), 'string') : Bool) ? (cast (cast reader : flight._internal.dom.FileReader).result : Dynamic) : (cast '' : Dynamic)), duration: 0.0, format: (cast file : flight._internal.dom.File).type }; __callArgument20; }));
-            });
-            ((cast reader : flight._internal.dom.FileReader).onerror = function(__unused8:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void { settle(({ final __callArgument22:Dynamic = null; __callArgument22; })); });
+            }, cast ([] : Array<Dynamic>)); });
+            ((cast reader : flight._internal.dom.FileReader).onerror = function(__unused14:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void { _Runtime.callValue(function(__unused13:flight._internal.dom.ProgressEvent<flight._internal.dom.FileReader>):Void { settle(({ final __callArgument22:Dynamic = null; __callArgument22; })); }, cast ([] : Array<Dynamic>)); });
             (cast reader : flight._internal.dom.FileReader).readAsDataURL(file);
-          });
-          ((cast input : flight._internal.dom.HTMLInputElement).oncancel = function(__unused9:flight._internal.dom.Event):Void { settle(({ final __callArgument24:Dynamic = null; __callArgument24; })); });
+          }, cast ([] : Array<Dynamic>)); });
+          ((cast input : flight._internal.dom.HTMLInputElement).oncancel = function(__unused17:flight._internal.dom.Event):Void { _Runtime.callValue(function(__unused16:flight._internal.dom.Event):Void { settle(({ final __callArgument24:Dynamic = null; __callArgument24; })); }, cast ([] : Array<Dynamic>)); });
           (cast input : flight._internal.dom.HTMLInputElement).click();
         } catch (__error:Dynamic) {
           observeMediaFileCaptureHostResult((cast 'captureVideo' : String), (cast false : Bool));

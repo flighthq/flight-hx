@@ -364,7 +364,7 @@ class Application {
     Facade_Application_flight__Application.showWindow(host, win);
   }
 
-  public static function startApplicationLoop(host:{ >HasAppLoop, >HasAppVisibilityQuery, }, app:flight.types.Application, ?options:ApplicationLoopOptions):Void {
+  public static function startApplicationLoop(host:flight._internal._Intersection2<HasAppLoop, HasAppVisibilityQuery>, app:flight.types.Application, ?options:ApplicationLoopOptions):Void {
     Facade_Application_flight__Application.startApplicationLoop(host, app, options);
   }
 

@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
   "summary": {
-    "calls": 1413,
-    "memberAccesses": 2906,
-    "reads": 1062,
-    "typeReferences": 5652,
+    "calls": 1411,
+    "memberAccesses": 2888,
+    "reads": 1058,
+    "typeReferences": 5837,
     "types": 237,
-    "writes": 431
+    "writes": 419
   },
   "types": [
     {
@@ -201,7 +201,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 26,
+            "column": 13,
             "line": 31,
             "source": "upstream/packages/host-web/src/webConnectivity.ts"
           },
@@ -213,7 +213,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 13,
             "line": 15,
             "source": "upstream/packages/host-web/src/webNet.ts"
           },
@@ -594,7 +594,7 @@
         "arities": [
           0
         ],
-        "count": 122,
+        "count": 125,
         "locations": [
           {
             "arity": 0,
@@ -742,6 +742,12 @@
           },
           {
             "arity": 0,
+            "column": 13,
+            "line": 33,
+            "source": "upstream/packages/host-web/src/webConnectivity.ts"
+          },
+          {
+            "arity": 0,
             "column": 30,
             "line": 33,
             "source": "upstream/packages/host-web/src/webConnectivity.ts"
@@ -749,12 +755,6 @@
           {
             "arity": 0,
             "column": 47,
-            "line": 33,
-            "source": "upstream/packages/host-web/src/webConnectivity.ts"
-          },
-          {
-            "arity": 0,
-            "column": 99,
             "line": 33,
             "source": "upstream/packages/host-web/src/webConnectivity.ts"
           },
@@ -1030,6 +1030,12 @@
           },
           {
             "arity": 0,
+            "column": 23,
+            "line": 70,
+            "source": "upstream/packages/loader/src/resourceLoader.ts"
+          },
+          {
+            "arity": 0,
             "column": 3,
             "line": 70,
             "source": "upstream/packages/loader/src/resourceLoader.ts"
@@ -1048,7 +1054,7 @@
           },
           {
             "arity": 0,
-            "column": 37,
+            "column": 9,
             "line": 22,
             "source": "upstream/packages/scene2d-resources/src/loadScene2DAudioResources.ts"
           },
@@ -1060,13 +1066,19 @@
           },
           {
             "arity": 0,
+            "column": 57,
+            "line": 51,
+            "source": "upstream/packages/scene2d-resources/src/loadScene2DAudioResources.ts"
+          },
+          {
+            "arity": 0,
             "column": 18,
             "line": 23,
             "source": "upstream/packages/scene2d-resources/src/loadScene2DImageResources.ts"
           },
           {
             "arity": 0,
-            "column": 37,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/scene2d-resources/src/loadScene2DImageResources.ts"
           },
@@ -1078,13 +1090,19 @@
           },
           {
             "arity": 0,
+            "column": 57,
+            "line": 65,
+            "source": "upstream/packages/scene2d-resources/src/loadScene2DImageResources.ts"
+          },
+          {
+            "arity": 0,
             "column": 18,
             "line": 16,
             "source": "upstream/packages/scene2d-resources/src/scene2DDocumentSource.ts"
           },
           {
             "arity": 0,
-            "column": 37,
+            "column": 9,
             "line": 16,
             "source": "upstream/packages/scene2d-resources/src/scene2DDocumentSource.ts"
           },
@@ -1555,7 +1573,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 15,
             "source": "upstream/packages/audio/src/audioResourceFrom.ts"
           },
@@ -1591,13 +1609,13 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
             "line": 106,
             "source": "upstream/packages/media/src/audioChannel.ts"
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 14,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
@@ -1609,19 +1627,19 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 15,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 13,
             "line": 41,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 13,
             "line": 59,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
@@ -1633,7 +1651,7 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 13,
             "line": 87,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
@@ -1813,11 +1831,17 @@
         "arities": [
           0
         ],
-        "count": 14,
+        "count": 15,
         "locations": [
           {
             "arity": 0,
             "column": 17,
+            "line": 11,
+            "source": "upstream/packages/host-web/src/webAudioDevice.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 11,
             "source": "upstream/packages/host-web/src/webAudioDevice.ts"
           },
@@ -1835,7 +1859,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 15,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
@@ -1877,7 +1901,7 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 13,
             "line": 87,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
@@ -2065,7 +2089,7 @@
         "arities": [
           0
         ],
-        "count": 28,
+        "count": 29,
         "locations": [
           {
             "arity": 0,
@@ -2153,25 +2177,25 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 13,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 15,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 39,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 51,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
@@ -2183,7 +2207,7 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 13,
             "line": 87,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
@@ -2220,6 +2244,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 23,
+            "source": "upstream/packages/scene2d-resources/src/loadScene2DAudioResources.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/scene2d-resources/src/loadScene2DAudioResources.ts"
           },
@@ -2562,7 +2592,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 28,
+            "column": 11,
             "line": 108,
             "source": "upstream/packages/host-web/src/webWindow.ts"
           },
@@ -2805,7 +2835,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 22,
             "source": "upstream/packages/image-codec/src/registerWebImageEncoders.ts"
           },
@@ -3309,12 +3339,6 @@
           "calls": 0,
           "locations": [
             {
-              "column": 5,
-              "line": 23,
-              "operation": "write",
-              "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-            },
-            {
               "column": 3,
               "line": 144,
               "operation": "write",
@@ -3337,12 +3361,6 @@
               "line": 13,
               "operation": "write",
               "source": "upstream/packages/host-web/src/webWgpuRenderSurface.ts"
-            },
-            {
-              "column": 7,
-              "line": 27,
-              "operation": "write",
-              "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
             },
             {
               "column": 3,
@@ -3395,7 +3413,7 @@
           ],
           "name": "height",
           "reads": 0,
-          "writes": 14
+          "writes": 12
         },
         {
           "calls": 0,
@@ -3897,12 +3915,6 @@
           "calls": 0,
           "locations": [
             {
-              "column": 5,
-              "line": 22,
-              "operation": "write",
-              "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-            },
-            {
               "column": 3,
               "line": 143,
               "operation": "write",
@@ -3925,12 +3937,6 @@
               "line": 12,
               "operation": "write",
               "source": "upstream/packages/host-web/src/webWgpuRenderSurface.ts"
-            },
-            {
-              "column": 7,
-              "line": 26,
-              "operation": "write",
-              "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
             },
             {
               "column": 3,
@@ -3983,7 +3989,7 @@
           ],
           "name": "width",
           "reads": 0,
-          "writes": 14
+          "writes": 12
         }
       ],
       "name": "CSSStyleDeclaration",
@@ -3991,17 +3997,11 @@
         "arities": [
           0
         ],
-        "count": 34,
+        "count": 32,
         "locations": [
           {
             "arity": 0,
-            "column": 5,
-            "line": 22,
-            "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 141,
             "source": "upstream/packages/host-web/src/webAccessibility.ts"
           },
@@ -4058,12 +4058,6 @@
             "column": 7,
             "line": 12,
             "source": "upstream/packages/host-web/src/webWgpuRenderSurface.ts"
-          },
-          {
-            "arity": 0,
-            "column": 7,
-            "line": 26,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
           },
           {
             "arity": 0,
@@ -4290,7 +4284,7 @@
         "arities": [
           0
         ],
-        "count": 31,
+        "count": 32,
         "locations": [
           {
             "arity": 0,
@@ -4312,7 +4306,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 53,
             "source": "upstream/packages/effects-canvas/src/canvasVignetteEffect.ts"
           },
@@ -4404,6 +4398,12 @@
             "arity": 0,
             "column": 27,
             "line": 368,
+            "source": "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 84,
             "source": "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts"
           },
           {
@@ -4720,7 +4720,7 @@
         "arities": [
           0
         ],
-        "count": 34,
+        "count": 36,
         "locations": [
           {
             "arity": 0,
@@ -4730,7 +4730,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 57,
             "source": "upstream/packages/effects-canvas/src/canvasFilmGrainEffect.ts"
           },
@@ -4826,6 +4826,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 32,
+            "source": "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts"
+          },
+          {
+            "arity": 0,
             "column": 21,
             "line": 32,
             "source": "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts"
@@ -4852,6 +4858,12 @@
             "arity": 0,
             "column": 27,
             "line": 368,
+            "source": "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 84,
             "source": "upstream/packages/scene2d-canvas/src/canvasShapeCommands.ts"
           },
           {
@@ -8098,11 +8110,17 @@
         "arities": [
           0
         ],
-        "count": 165,
+        "count": 169,
         "locations": [
           {
             "arity": 0,
             "column": 19,
+            "line": 12,
+            "source": "upstream/packages/bitmap/src/bitmapDraw.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 12,
             "source": "upstream/packages/bitmap/src/bitmapDraw.ts"
           },
@@ -8114,7 +8132,13 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
+            "line": 25,
+            "source": "upstream/packages/bitmap/src/bitmapFrom.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 40,
             "source": "upstream/packages/effects-canvas/src/canvasBlendEffect.ts"
           },
@@ -8126,7 +8150,7 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
             "line": 35,
             "source": "upstream/packages/effects-canvas/src/canvasCompositeEffect.ts"
           },
@@ -8138,7 +8162,7 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
             "line": 20,
             "source": "upstream/packages/effects-canvas/src/canvasEffectCompositing.ts"
           },
@@ -8150,37 +8174,37 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 33,
             "source": "upstream/packages/effects-canvas/src/canvasFilmGrainEffect.ts"
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 26,
             "source": "upstream/packages/effects-canvas/src/canvasPixelateEffect.ts"
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 174,
             "source": "upstream/packages/effects-canvas/src/canvasRenderEffectPipeline.ts"
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/effects-canvas/src/canvasScanlinesEffect.ts"
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
             "line": 4,
             "source": "upstream/packages/effects-canvas/src/canvasSourceModeCompositing.ts"
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
             "line": 36,
             "source": "upstream/packages/effects-canvas/src/canvasVignetteEffect.ts"
           },
@@ -8192,7 +8216,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 14,
             "source": "upstream/packages/host-web/src/webBitmapReadback.ts"
           },
@@ -8207,6 +8231,12 @@
             "column": 8,
             "line": 192,
             "source": "upstream/packages/host-web/src/webDevice.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 14,
+            "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
           },
           {
             "arity": 0,
@@ -8240,7 +8270,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 56,
             "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
           },
@@ -8276,7 +8306,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
           },
@@ -8366,7 +8396,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 15,
             "source": "upstream/packages/scene2d-canvas/src/canvasMaterialRegistry.ts"
           },
@@ -8384,13 +8414,13 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 22,
             "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 19,
             "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
           },
@@ -8408,7 +8438,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 47,
             "source": "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts"
           },
@@ -8462,7 +8492,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 50,
             "source": "upstream/packages/scene2d-canvas/src/canvasRichText.ts"
           },
@@ -8474,7 +8504,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 27,
             "source": "upstream/packages/scene2d-canvas/src/canvasScale9Shape.ts"
           },
@@ -8504,7 +8534,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 25,
             "source": "upstream/packages/scene2d-canvas/src/canvasShape.ts"
           },
@@ -8684,7 +8714,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 25,
             "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
           },
@@ -8696,7 +8726,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 34,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextInput.ts"
           },
@@ -8708,7 +8738,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 24,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
           },
@@ -8720,7 +8750,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 10,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextMeasure.ts"
           },
@@ -8732,7 +8762,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 19,
             "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
           },
@@ -8816,7 +8846,7 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
             "line": 74,
             "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts"
           },
@@ -8834,7 +8864,7 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
             "line": 63,
             "source": "upstream/packages/scene2d-dom/src/domShape.ts"
           },
@@ -8852,7 +8882,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 86,
             "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
           },
@@ -9038,6 +9068,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 31,
+            "source": "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
+          },
+          {
+            "arity": 0,
             "column": 52,
             "line": 38,
             "source": "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
@@ -9107,14 +9143,8 @@
         "arities": [
           0
         ],
-        "count": 14,
+        "count": 12,
         "locations": [
-          {
-            "arity": 0,
-            "column": 5,
-            "line": 45,
-            "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-          },
           {
             "arity": 0,
             "column": 3,
@@ -9135,7 +9165,7 @@
           },
           {
             "arity": 0,
-            "column": 38,
+            "column": 9,
             "line": 46,
             "source": "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts"
           },
@@ -9168,12 +9198,6 @@
             "column": 28,
             "line": 54,
             "source": "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts"
-          },
-          {
-            "arity": 0,
-            "column": 5,
-            "line": 52,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
           },
           {
             "arity": 0,
@@ -9263,7 +9287,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 211,
             "source": "upstream/packages/host-web/src/webAccessibility.ts"
           },
@@ -9275,7 +9299,7 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 7,
             "line": 58,
             "source": "upstream/packages/scene2d-dom/src/domReconcile.ts"
           },
@@ -9431,7 +9455,7 @@
         "arities": [
           0
         ],
-        "count": 5,
+        "count": 6,
         "locations": [
           {
             "arity": 0,
@@ -9443,6 +9467,12 @@
             "arity": 0,
             "column": 37,
             "line": 196,
+            "source": "upstream/packages/host-web/src/webClipboard.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 29,
             "source": "upstream/packages/host-web/src/webClipboard.ts"
           },
           {
@@ -9892,7 +9922,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 9,
             "line": 147,
             "source": "upstream/packages/loader/src/resourceLoader.ts"
           },
@@ -10064,19 +10094,19 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 93,
             "source": "upstream/packages/host-web/src/webKeyboard.ts"
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 13,
             "line": 36,
             "source": "upstream/packages/host-web/src/webMenu.ts"
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 68,
             "source": "upstream/packages/scene2d-dom/src/domNativeText.ts"
           },
@@ -10356,14 +10386,8 @@
           "writes": 0
         },
         {
-          "calls": 44,
+          "calls": 42,
           "locations": [
-            {
-              "column": 20,
-              "line": 21,
-              "operation": "call",
-              "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-            },
             {
               "column": 21,
               "line": 139,
@@ -10537,12 +10561,6 @@
               "line": 287,
               "operation": "call",
               "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
-            },
-            {
-              "column": 22,
-              "line": 25,
-              "operation": "call",
-              "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
             },
             {
               "column": 15,
@@ -11029,14 +11047,8 @@
         "arities": [
           0
         ],
-        "count": 37,
+        "count": 35,
         "locations": [
-          {
-            "arity": 0,
-            "column": 20,
-            "line": 21,
-            "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-          },
           {
             "arity": 0,
             "column": 50,
@@ -11165,7 +11177,7 @@
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 11,
             "line": 63,
             "source": "upstream/packages/host-web/src/webWindow.ts"
           },
@@ -11192,12 +11204,6 @@
             "column": 17,
             "line": 273,
             "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
-          },
-          {
-            "arity": 0,
-            "column": 22,
-            "line": 25,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
           },
           {
             "arity": 0,
@@ -11309,7 +11315,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 24,
+            "column": 11,
             "line": 19,
             "source": "upstream/packages/host-web/src/webInputTarget.ts"
           },
@@ -11327,7 +11333,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 20,
             "source": "upstream/packages/host-web/src/webInputTarget.ts"
           },
@@ -11464,7 +11470,7 @@
         "arities": [
           0
         ],
-        "count": 5,
+        "count": 6,
         "locations": [
           {
             "arity": 0,
@@ -11474,13 +11480,19 @@
           },
           {
             "arity": 0,
-            "column": 13,
+            "column": 7,
             "line": 553,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
           {
             "arity": 0,
             "column": 15,
+            "line": 86,
+            "source": "upstream/packages/render-gl/src/glDraw.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 86,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
@@ -11568,7 +11580,7 @@
         "arities": [
           0
         ],
-        "count": 16,
+        "count": 17,
         "locations": [
           {
             "arity": 0,
@@ -11578,13 +11590,13 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 80,
             "line": 211,
             "source": "upstream/packages/host-web/src/webInputTarget.ts"
           },
           {
             "arity": 0,
-            "column": 80,
+            "column": 9,
             "line": 211,
             "source": "upstream/packages/host-web/src/webInputTarget.ts"
           },
@@ -11608,7 +11620,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 10,
             "source": "upstream/packages/host-web/src/webStatusbar.ts"
           },
@@ -11617,6 +11629,12 @@
             "column": 9,
             "line": 13,
             "source": "upstream/packages/host-web/src/webStatusbar.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 138,
+            "source": "upstream/packages/host-web/src/webWindow.ts"
           },
           {
             "arity": 0,
@@ -11729,11 +11747,11 @@
         "arities": [
           0
         ],
-        "count": 45,
+        "count": 49,
         "locations": [
           {
             "arity": 0,
-            "column": 27,
+            "column": 11,
             "line": 106,
             "source": "upstream/packages/host-web/src/webInputTarget.ts"
           },
@@ -11793,7 +11811,7 @@
           },
           {
             "arity": 0,
-            "column": 34,
+            "column": 13,
             "line": 340,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11811,7 +11829,7 @@
           },
           {
             "arity": 0,
-            "column": 37,
+            "column": 13,
             "line": 351,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11823,7 +11841,7 @@
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 13,
             "line": 418,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11835,7 +11853,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 425,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11847,7 +11865,7 @@
           },
           {
             "arity": 0,
-            "column": 29,
+            "column": 13,
             "line": 445,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11859,7 +11877,7 @@
           },
           {
             "arity": 0,
-            "column": 31,
+            "column": 13,
             "line": 448,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11871,7 +11889,7 @@
           },
           {
             "arity": 0,
-            "column": 29,
+            "column": 13,
             "line": 454,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11883,7 +11901,7 @@
           },
           {
             "arity": 0,
-            "column": 29,
+            "column": 13,
             "line": 460,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11895,7 +11913,7 @@
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 13,
             "line": 466,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11907,7 +11925,7 @@
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 13,
             "line": 491,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11919,7 +11937,7 @@
           },
           {
             "arity": 0,
-            "column": 29,
+            "column": 13,
             "line": 506,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11931,7 +11949,7 @@
           },
           {
             "arity": 0,
-            "column": 35,
+            "column": 13,
             "line": 513,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11943,7 +11961,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 532,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -11955,7 +11973,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 13,
             "line": 144,
             "source": "upstream/packages/lifecycle/src/lifecycle.ts"
           },
@@ -11997,8 +12015,32 @@
           },
           {
             "arity": 0,
+            "column": 20,
+            "line": 80,
+            "source": "upstream/packages/socket/src/socket.ts"
+          },
+          {
+            "arity": 0,
             "column": 28,
             "line": 32,
+            "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
+          },
+          {
+            "arity": 0,
+            "column": 28,
+            "line": 50,
+            "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
+          },
+          {
+            "arity": 0,
+            "column": 28,
+            "line": 76,
+            "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
+          },
+          {
+            "arity": 0,
+            "column": 28,
+            "line": 93,
             "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
           }
         ]
@@ -12046,13 +12088,13 @@
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 37,
             "line": 133,
             "source": "upstream/packages/host-web/src/webMidi.ts"
           },
           {
             "arity": 0,
-            "column": 37,
+            "column": 9,
             "line": 133,
             "source": "upstream/packages/host-web/src/webMidi.ts"
           },
@@ -12376,7 +12418,7 @@
         "arities": [
           0
         ],
-        "count": 13,
+        "count": 14,
         "locations": [
           {
             "arity": 0,
@@ -12416,13 +12458,13 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 39,
             "line": 1167,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
           {
             "arity": 0,
-            "column": 39,
+            "column": 9,
             "line": 1167,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -12436,6 +12478,12 @@
             "arity": 0,
             "column": 70,
             "line": 1173,
+            "source": "upstream/packages/input/src/inputManager.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 332,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
           {
@@ -12653,7 +12701,7 @@
         "arities": [
           0
         ],
-        "count": 16,
+        "count": 17,
         "locations": [
           {
             "arity": 0,
@@ -12741,6 +12789,12 @@
           },
           {
             "arity": 0,
+            "column": 19,
+            "line": 33,
+            "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
+          },
+          {
+            "arity": 0,
             "column": 26,
             "line": 33,
             "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
@@ -12788,7 +12842,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 21,
+            "column": 13,
             "line": 109,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
@@ -12958,11 +13012,11 @@
         "arities": [
           0
         ],
-        "count": 4,
+        "count": 8,
         "locations": [
           {
             "arity": 0,
-            "column": 22,
+            "column": 13,
             "line": 209,
             "source": "upstream/packages/host-web/src/webClipboard.ts"
           },
@@ -12974,7 +13028,13 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 24,
+            "line": 211,
+            "source": "upstream/packages/host-web/src/webClipboard.ts"
+          },
+          {
+            "arity": 0,
+            "column": 19,
             "line": 38,
             "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
           },
@@ -12982,6 +13042,24 @@
             "arity": 0,
             "column": 29,
             "line": 39,
+            "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
+          },
+          {
+            "arity": 0,
+            "column": 30,
+            "line": 47,
+            "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
+          },
+          {
+            "arity": 0,
+            "column": 29,
+            "line": 83,
+            "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
+          },
+          {
+            "arity": 0,
+            "column": 30,
+            "line": 90,
             "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
           }
         ]
@@ -13109,7 +13187,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 13,
             "line": 23,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
@@ -13325,7 +13403,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 7,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
@@ -13399,7 +13477,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 24,
+            "column": 13,
             "line": 29,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
@@ -13500,7 +13578,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 31,
             "source": "upstream/packages/font/src/_fontFaceLoad.ts"
           },
@@ -13578,13 +13656,13 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 22,
             "line": 15,
             "source": "upstream/packages/font/src/fontResourceFrom.ts"
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 9,
             "line": 15,
             "source": "upstream/packages/font/src/fontResourceFrom.ts"
           },
@@ -13596,13 +13674,13 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 23,
             "line": 25,
             "source": "upstream/packages/font/src/fontResourceFrom.ts"
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 9,
             "line": 25,
             "source": "upstream/packages/font/src/fontResourceFrom.ts"
           },
@@ -13834,7 +13912,7 @@
         "arities": [
           0
         ],
-        "count": 7,
+        "count": 8,
         "locations": [
           {
             "arity": 0,
@@ -13846,6 +13924,12 @@
             "arity": 0,
             "column": 24,
             "line": 75,
+            "source": "upstream/packages/render-wgpu/src/wgpuHost.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 8,
             "source": "upstream/packages/render-wgpu/src/wgpuHost.ts"
           },
           {
@@ -13966,7 +14050,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 11,
             "source": "upstream/packages/render-wgpu/src/wgpuHost.ts"
           },
@@ -14093,7 +14177,7 @@
         "arities": [
           0
         ],
-        "count": 202,
+        "count": 209,
         "locations": [
           {
             "arity": 0,
@@ -14103,13 +14187,19 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
+            "line": 23,
+            "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 26,
             "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 9,
             "line": 103,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
@@ -14139,7 +14229,7 @@
           },
           {
             "arity": 0,
-            "column": 12,
+            "column": 7,
             "line": 141,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
@@ -14181,7 +14271,13 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 9,
+            "line": 42,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 65,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
           },
@@ -14193,7 +14289,13 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
+            "line": 40,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 50,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
           },
@@ -14217,7 +14319,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 218,
             "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
           },
@@ -14283,19 +14385,25 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 82,
+            "source": "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts"
+          },
+          {
+            "arity": 0,
             "column": 30,
             "line": 82,
             "source": "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts"
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 11,
             "line": 28,
             "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 9,
             "line": 198,
             "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
           },
@@ -14367,9 +14475,15 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 9,
             "line": 204,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 175,
+            "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
           },
           {
             "arity": 0,
@@ -14505,6 +14619,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 99,
+            "source": "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts"
+          },
+          {
+            "arity": 0,
             "column": 30,
             "line": 99,
             "source": "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts"
@@ -14619,6 +14739,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 44,
+            "source": "upstream/packages/scene3d-wgpu/src/shadedWgpuMeshMaterialRenderer.ts"
+          },
+          {
+            "arity": 0,
             "column": 19,
             "line": 44,
             "source": "upstream/packages/scene3d-wgpu/src/shadedWgpuMeshMaterialRenderer.ts"
@@ -14709,7 +14835,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 11,
             "line": 40,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts"
           },
@@ -14757,7 +14883,7 @@
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 9,
             "line": 25,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
           },
@@ -14835,7 +14961,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 11,
             "line": 59,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts"
           },
@@ -14985,7 +15111,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 9,
             "line": 179,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
           },
@@ -15093,7 +15219,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 11,
             "line": 44,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
           },
@@ -15165,7 +15291,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 11,
             "line": 38,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuWireframePrelude.ts"
           },
@@ -15442,11 +15568,17 @@
         "arities": [
           0
         ],
-        "count": 277,
+        "count": 283,
         "locations": [
           {
             "arity": 0,
             "column": 14,
+            "line": 23,
+            "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
           },
@@ -15483,6 +15615,12 @@
           {
             "arity": 0,
             "column": 16,
+            "line": 57,
+            "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
             "line": 57,
             "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
           },
@@ -15578,7 +15716,7 @@
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 9,
             "line": 90,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
@@ -15603,6 +15741,12 @@
           {
             "arity": 0,
             "column": 14,
+            "line": 42,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 42,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
           },
@@ -15651,6 +15795,12 @@
           {
             "arity": 0,
             "column": 14,
+            "line": 40,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 40,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
           },
@@ -15710,7 +15860,7 @@
           },
           {
             "arity": 0,
-            "column": 34,
+            "column": 9,
             "line": 17,
             "source": "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts"
           },
@@ -15782,7 +15932,13 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
+            "line": 21,
+            "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
           },
@@ -15801,6 +15957,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 65,
+            "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 65,
             "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
           },
@@ -15902,7 +16064,7 @@
           },
           {
             "arity": 0,
-            "column": 34,
+            "column": 9,
             "line": 162,
             "source": "upstream/packages/render-wgpu/src/wgpuShader.ts"
           },
@@ -16010,7 +16172,7 @@
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 9,
             "line": 585,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
           },
@@ -16148,7 +16310,7 @@
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 9,
             "line": 326,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts"
           },
@@ -16670,7 +16832,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 9,
             "line": 164,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
           },
@@ -16712,7 +16874,7 @@
           },
           {
             "arity": 0,
-            "column": 35,
+            "column": 9,
             "line": 33,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuPbrPipelineCache.ts"
           },
@@ -17295,7 +17457,7 @@
         "arities": [
           0
         ],
-        "count": 61,
+        "count": 62,
         "locations": [
           {
             "arity": 0,
@@ -17528,6 +17690,12 @@
           {
             "arity": 0,
             "column": 17,
+            "line": 229,
+            "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 229,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
           },
@@ -17893,7 +18061,7 @@
         "arities": [
           0
         ],
-        "count": 274,
+        "count": 275,
         "locations": [
           {
             "arity": 0,
@@ -17945,7 +18113,7 @@
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 9,
             "line": 82,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
@@ -17987,7 +18155,7 @@
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 9,
             "line": 193,
             "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
           },
@@ -18035,7 +18203,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 56,
             "source": "upstream/packages/render-wgpu/src/wgpuSurface.ts"
           },
@@ -18053,7 +18221,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 9,
             "line": 111,
             "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
           },
@@ -18413,6 +18581,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 74,
+            "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
+          },
+          {
+            "arity": 0,
             "column": 26,
             "line": 74,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
@@ -18545,7 +18719,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 36,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts"
           },
@@ -18701,7 +18875,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 55,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts"
           },
@@ -19079,7 +19253,7 @@
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 9,
             "line": 152,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
           },
@@ -19253,7 +19427,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 39,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
           },
@@ -19295,7 +19469,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 65,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts"
           },
@@ -19349,7 +19523,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 34,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuWireframePrelude.ts"
           },
@@ -20257,13 +20431,13 @@
         "locations": [
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 73,
             "source": "upstream/packages/render-wgpu/src/wgpuBackground.ts"
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 15,
             "line": 32,
             "source": "upstream/packages/render-wgpu/src/wgpuHost.ts"
           },
@@ -20797,7 +20971,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 24,
             "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
           },
@@ -20875,7 +21049,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 149,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
           },
@@ -20887,7 +21061,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 81,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts"
           },
@@ -23170,7 +23344,7 @@
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 13,
             "line": 28,
             "source": "upstream/packages/render-wgpu/src/wgpuHost.ts"
           },
@@ -23296,7 +23470,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 112,
             "source": "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts"
           },
@@ -23416,7 +23590,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 80,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts"
           },
@@ -23446,7 +23620,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 54,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
           },
@@ -23494,7 +23668,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 31,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentCube.ts"
           },
@@ -23548,19 +23722,19 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 40,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshUpload.ts"
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 150,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 29,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuPbrPipelineCache.ts"
           },
@@ -23602,7 +23776,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 26,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuWireframeUpload.ts"
           },
@@ -23762,7 +23936,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 50,
             "source": "upstream/packages/render-wgpu/src/wgpuDeviceLoss.ts"
           },
@@ -23786,7 +23960,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 81,
             "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
           },
@@ -23921,7 +24095,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 24,
+            "column": 9,
             "line": 120,
             "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
           },
@@ -23945,13 +24119,13 @@
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 30,
             "line": 219,
             "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
           },
           {
             "arity": 0,
-            "column": 30,
+            "column": 9,
             "line": 219,
             "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
           },
@@ -24466,7 +24640,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 28,
+            "column": 11,
             "line": 83,
             "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
           },
@@ -24478,7 +24652,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 9,
             "line": 237,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
@@ -24496,7 +24670,7 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 11,
             "line": 185,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
           },
@@ -24514,7 +24688,7 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 11,
             "line": 119,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
           },
@@ -24526,7 +24700,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 139,
             "source": "upstream/packages/render-wgpu/src/wgpuAntialias.ts"
           },
@@ -24538,7 +24712,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 9,
             "line": 37,
             "source": "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts"
           },
@@ -24628,7 +24802,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 177,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts"
           },
@@ -24640,7 +24814,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 588,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
           },
@@ -24652,7 +24826,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 9,
             "line": 117,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
           },
@@ -24670,7 +24844,7 @@
           },
           {
             "arity": 0,
-            "column": 30,
+            "column": 9,
             "line": 102,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
           },
@@ -24688,7 +24862,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 195,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
           },
@@ -24700,7 +24874,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 335,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts"
           },
@@ -24712,7 +24886,7 @@
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 9,
             "line": 255,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
           },
@@ -24736,7 +24910,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 97,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts"
           },
@@ -24748,7 +24922,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 146,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
@@ -24766,7 +24940,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 9,
             "line": 173,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
           },
@@ -24790,7 +24964,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 195,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts"
           },
@@ -25330,7 +25504,7 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 55,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
           },
@@ -25426,7 +25600,7 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 252,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts"
           },
@@ -26482,7 +26656,7 @@
         "arities": [
           0
         ],
-        "count": 103,
+        "count": 110,
         "locations": [
           {
             "arity": 0,
@@ -26492,7 +26666,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 23,
+            "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
+          },
+          {
+            "arity": 0,
             "column": 16,
+            "line": 47,
+            "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 47,
             "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
           },
@@ -26546,7 +26732,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 42,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
+          },
+          {
+            "arity": 0,
             "column": 22,
+            "line": 73,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 73,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
           },
@@ -26558,13 +26756,25 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 40,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
+          },
+          {
+            "arity": 0,
             "column": 16,
             "line": 69,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
+            "line": 69,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 78,
             "source": "upstream/packages/render-wgpu/src/wgpuAntialias.ts"
           },
@@ -26588,7 +26798,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 367,
             "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
           },
@@ -26600,7 +26810,7 @@
           },
           {
             "arity": 0,
-            "column": 53,
+            "column": 9,
             "line": 78,
             "source": "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts"
           },
@@ -26612,7 +26822,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 35,
             "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
           },
@@ -26630,7 +26840,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 28,
             "source": "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts"
           },
@@ -26714,7 +26924,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 50,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts"
           },
@@ -26726,7 +26936,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 18,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuClipRectangle.ts"
           },
@@ -26756,7 +26966,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 336,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
           },
@@ -26774,7 +26984,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 189,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
           },
@@ -26798,7 +27008,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 51,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
           },
@@ -26834,6 +27044,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 237,
+            "source": "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts"
+          },
+          {
+            "arity": 0,
             "column": 20,
             "line": 239,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts"
@@ -26858,7 +27074,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 41,
             "source": "upstream/packages/scene3d-wgpu/src/blinnPhongWgpuMeshMaterialRenderer.ts"
           },
@@ -26876,13 +27092,13 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 65,
             "source": "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts"
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 32,
             "source": "upstream/packages/scene3d-wgpu/src/depthWgpuMeshMaterialRenderer.ts"
           },
@@ -26894,7 +27110,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 37,
             "source": "upstream/packages/scene3d-wgpu/src/emissiveWgpuMeshMaterialRenderer.ts"
           },
@@ -26906,7 +27122,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 40,
             "source": "upstream/packages/scene3d-wgpu/src/lambertWgpuMeshMaterialRenderer.ts"
           },
@@ -26918,7 +27134,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 40,
             "source": "upstream/packages/scene3d-wgpu/src/matcapWgpuMeshMaterialRenderer.ts"
           },
@@ -26930,7 +27146,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 38,
             "source": "upstream/packages/scene3d-wgpu/src/normalWgpuMeshMaterialRenderer.ts"
           },
@@ -26942,7 +27158,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 41,
             "source": "upstream/packages/scene3d-wgpu/src/phongWgpuMeshMaterialRenderer.ts"
           },
@@ -26954,7 +27170,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 34,
             "source": "upstream/packages/scene3d-wgpu/src/shadedWgpuMeshMaterialRenderer.ts"
           },
@@ -26966,7 +27182,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 64,
             "source": "upstream/packages/scene3d-wgpu/src/specularGlossinessPbrWgpuMeshMaterialRenderer.ts"
           },
@@ -26978,7 +27194,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 207,
             "source": "upstream/packages/scene3d-wgpu/src/standardPbrWgpuMeshMaterialRenderer.ts"
           },
@@ -26990,7 +27206,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 53,
             "source": "upstream/packages/scene3d-wgpu/src/toonWgpuMeshMaterialRenderer.ts"
           },
@@ -27002,7 +27218,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 38,
             "source": "upstream/packages/scene3d-wgpu/src/unlitWgpuMeshMaterialRenderer.ts"
           },
@@ -27014,7 +27230,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 34,
             "source": "upstream/packages/scene3d-wgpu/src/vertexColorWgpuMeshMaterialRenderer.ts"
           },
@@ -27026,13 +27242,13 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 150,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 26,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts"
           },
@@ -27044,7 +27260,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 46,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
           },
@@ -27068,7 +27284,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 442,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
           },
@@ -27080,13 +27296,13 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 115,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts"
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 37,
             "source": "upstream/packages/scene3d-wgpu/src/wireframeWgpuMeshMaterialRenderer.ts"
           },
@@ -27119,7 +27335,7 @@
         "arities": [
           0
         ],
-        "count": 113,
+        "count": 122,
         "locations": [
           {
             "arity": 0,
@@ -27171,19 +27387,25 @@
           },
           {
             "arity": 0,
+            "column": 7,
+            "line": 213,
+            "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
+          },
+          {
+            "arity": 0,
             "column": 15,
             "line": 215,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 56,
             "line": 241,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
           {
             "arity": 0,
-            "column": 56,
+            "column": 9,
             "line": 241,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
@@ -27195,13 +27417,13 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 56,
             "line": 270,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
           {
             "arity": 0,
-            "column": 56,
+            "column": 9,
             "line": 270,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
@@ -27267,7 +27489,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 74,
             "source": "upstream/packages/render-wgpu/src/wgpuAntialias.ts"
           },
@@ -27285,13 +27507,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 463,
+            "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
+          },
+          {
+            "arity": 0,
             "column": 3,
             "line": 492,
             "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 42,
             "source": "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts"
           },
@@ -27309,7 +27537,13 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
+            "line": 21,
+            "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 22,
             "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
           },
@@ -27322,6 +27556,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 65,
+            "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 65,
             "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
           },
@@ -27387,6 +27627,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 232,
+            "source": "upstream/packages/render-wgpu/src/wgpuShader.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 129,
             "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
@@ -27423,13 +27669,13 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 47,
             "line": 182,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts"
           },
           {
             "arity": 0,
-            "column": 47,
+            "column": 9,
             "line": 182,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts"
           },
@@ -27447,7 +27693,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 589,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
           },
@@ -27466,6 +27712,12 @@
           {
             "arity": 0,
             "column": 20,
+            "line": 136,
+            "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 136,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
           },
@@ -27501,13 +27753,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 188,
+            "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
+          },
+          {
+            "arity": 0,
             "column": 4,
             "line": 213,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 7,
             "line": 215,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
           },
@@ -27519,7 +27777,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 225,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
           },
@@ -27657,6 +27915,12 @@
           },
           {
             "arity": 0,
+            "column": 7,
+            "line": 212,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
+          },
+          {
+            "arity": 0,
             "column": 38,
             "line": 213,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
@@ -27670,6 +27934,12 @@
           {
             "arity": 0,
             "column": 25,
+            "line": 113,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 113,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts"
           },
@@ -27883,11 +28153,17 @@
         "arities": [
           0
         ],
-        "count": 215,
+        "count": 222,
         "locations": [
           {
             "arity": 0,
             "column": 14,
+            "line": 23,
+            "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
           },
@@ -27941,7 +28217,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 115,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
@@ -28002,6 +28278,12 @@
           {
             "arity": 0,
             "column": 14,
+            "line": 42,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 42,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
           },
@@ -28091,6 +28373,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 40,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
+          },
+          {
+            "arity": 0,
             "column": 41,
             "line": 50,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
@@ -28163,7 +28451,7 @@
           },
           {
             "arity": 0,
-            "column": 74,
+            "column": 9,
             "line": 174,
             "source": "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts"
           },
@@ -28283,6 +28571,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 36,
+            "source": "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts"
+          },
+          {
+            "arity": 0,
             "column": 101,
             "line": 37,
             "source": "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts"
@@ -28301,7 +28595,7 @@
           },
           {
             "arity": 0,
-            "column": 77,
+            "column": 11,
             "line": 90,
             "source": "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts"
           },
@@ -28355,13 +28649,13 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 407,
             "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 7,
             "line": 408,
             "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
           },
@@ -28632,6 +28926,12 @@
           {
             "arity": 0,
             "column": 17,
+            "line": 120,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
             "line": 120,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts"
           },
@@ -28961,6 +29261,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 111,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
+          },
+          {
+            "arity": 0,
             "column": 15,
             "line": 119,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
@@ -29034,6 +29340,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 34,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 34,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts"
           },
@@ -29252,11 +29564,11 @@
         "arities": [
           0
         ],
-        "count": 155,
+        "count": 156,
         "locations": [
           {
             "arity": 0,
-            "column": 26,
+            "column": 11,
             "line": 82,
             "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
           },
@@ -29280,7 +29592,7 @@
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 9,
             "line": 236,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts"
           },
@@ -29322,7 +29634,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 11,
             "line": 184,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
           },
@@ -29364,7 +29676,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 11,
             "line": 118,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
           },
@@ -29388,7 +29700,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 140,
             "source": "upstream/packages/render-wgpu/src/wgpuAntialias.ts"
           },
@@ -29412,7 +29724,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 40,
             "source": "upstream/packages/render-wgpu/src/wgpuFullscreenPass.ts"
           },
@@ -29436,7 +29748,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 74,
             "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
           },
@@ -29460,7 +29772,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 241,
             "source": "upstream/packages/render-wgpu/src/wgpuShader.ts"
           },
@@ -29520,7 +29832,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 173,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuClipContours.ts"
           },
@@ -29586,7 +29898,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 271,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuColorAdjustmentMaterialFeature.ts"
           },
@@ -29622,7 +29934,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 121,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
           },
@@ -29670,6 +29982,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 187,
+            "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
+          },
+          {
+            "arity": 0,
             "column": 20,
             "line": 188,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
@@ -29700,7 +30018,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 191,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeMesh.ts"
           },
@@ -29736,7 +30054,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 20,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuStandardMaterial.ts"
           },
@@ -29748,7 +30066,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 325,
             "source": "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts"
           },
@@ -29790,7 +30108,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 107,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuClassicPrelude.ts"
           },
@@ -29808,7 +30126,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 82,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts"
           },
@@ -29826,7 +30144,7 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 9,
             "line": 258,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
           },
@@ -29898,7 +30216,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 87,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts"
           },
@@ -29910,7 +30228,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 102,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts"
           },
@@ -30006,7 +30324,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 30,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuPbrPipelineCache.ts"
           },
@@ -30024,7 +30342,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 271,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
           },
@@ -30042,7 +30360,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 192,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuShadowMap.ts"
           },
@@ -30072,13 +30390,13 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 91,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 138,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts"
           },
@@ -30096,7 +30414,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 71,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuWireframePrelude.ts"
           },
@@ -30888,7 +31206,7 @@
         "arities": [
           0
         ],
-        "count": 8,
+        "count": 9,
         "locations": [
           {
             "arity": 0,
@@ -30899,6 +31217,12 @@
           {
             "arity": 0,
             "column": 23,
+            "line": 237,
+            "source": "upstream/packages/render-wgpu/src/wgpuShader.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 237,
             "source": "upstream/packages/render-wgpu/src/wgpuShader.ts"
           },
@@ -31029,7 +31353,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 11,
             "source": "upstream/packages/render-wgpu/src/wgpuAdapterCapabilities.ts"
           },
@@ -31145,7 +31469,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 12,
             "source": "upstream/packages/render-wgpu/src/wgpuAdapterCapabilities.ts"
           },
@@ -31249,7 +31573,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 24,
+            "column": 9,
             "line": 120,
             "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
           },
@@ -31325,7 +31649,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 24,
+            "column": 9,
             "line": 120,
             "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
           },
@@ -31861,7 +32185,7 @@
         "arities": [
           0
         ],
-        "count": 156,
+        "count": 162,
         "locations": [
           {
             "arity": 0,
@@ -31884,6 +32208,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 24,
+            "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 24,
             "source": "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts"
           },
@@ -31913,13 +32243,19 @@
           },
           {
             "arity": 0,
+            "column": 7,
+            "line": 23,
+            "source": "upstream/packages/effects-wgpu/src/wgpuEffectGradientRamp.ts"
+          },
+          {
+            "arity": 0,
             "column": 27,
             "line": 26,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectGradientRamp.ts"
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 7,
             "line": 29,
             "source": "upstream/packages/effects-wgpu/src/wgpuEffectGradientRamp.ts"
           },
@@ -31943,6 +32279,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 81,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
+          },
+          {
+            "arity": 0,
             "column": 31,
             "line": 85,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts"
@@ -31950,6 +32292,12 @@
           {
             "arity": 0,
             "column": 23,
+            "line": 49,
+            "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 49,
             "source": "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts"
           },
@@ -32009,7 +32357,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 39,
             "source": "upstream/packages/render-wgpu/src/wgpuAntialias.ts"
           },
@@ -32039,7 +32387,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/render-wgpu/src/wgpuBackground.ts"
           },
@@ -32075,6 +32423,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 170,
+            "source": "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 175,
             "source": "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts"
@@ -32087,7 +32441,7 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 11,
             "line": 98,
             "source": "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts"
           },
@@ -32249,7 +32603,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 122,
             "source": "upstream/packages/render-wgpu/src/wgpuRenderTarget.ts"
           },
@@ -32279,7 +32633,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 27,
             "source": "upstream/packages/render-wgpu/src/wgpuSurface.ts"
           },
@@ -32423,7 +32777,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 33,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentCube.ts"
           },
@@ -32519,6 +32873,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 35,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
+          },
+          {
+            "arity": 0,
             "column": 31,
             "line": 40,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
@@ -32573,7 +32933,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 403,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
           },
@@ -33786,7 +34146,7 @@
         "arities": [
           0
         ],
-        "count": 290,
+        "count": 297,
         "locations": [
           {
             "arity": 0,
@@ -34168,7 +34528,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 172,
             "source": "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts"
           },
@@ -34258,7 +34618,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 33,
             "source": "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts"
           },
@@ -34294,7 +34654,7 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 11,
             "line": 26,
             "source": "upstream/packages/render-wgpu/src/wgpuMipmap.ts"
           },
@@ -34540,6 +34900,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 272,
+            "source": "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts"
+          },
+          {
+            "arity": 0,
             "column": 5,
             "line": 279,
             "source": "upstream/packages/scene3d-wgpu/src/customShaderWgpuMeshMaterialRenderer.ts"
@@ -34696,6 +35062,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 20,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
+          },
+          {
+            "arity": 0,
             "column": 42,
             "line": 203,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentIblBake.ts"
@@ -34757,6 +35129,12 @@
           {
             "arity": 0,
             "column": 20,
+            "line": 22,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 22,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuEnvironmentSkybox.ts"
           },
@@ -35092,6 +35470,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 361,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
+          },
+          {
+            "arity": 0,
             "column": 57,
             "line": 362,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
@@ -35130,6 +35514,12 @@
             "arity": 0,
             "column": 3,
             "line": 136,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 140,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
           },
           {
@@ -35242,7 +35632,7 @@
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 9,
             "line": 42,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts"
           },
@@ -35269,6 +35659,12 @@
             "column": 64,
             "line": 98,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuSkinPalette.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 43,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
           },
           {
             "arity": 0,
@@ -35303,6 +35699,12 @@
           {
             "arity": 0,
             "column": 16,
+            "line": 35,
+            "source": "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 35,
             "source": "upstream/packages/scene3d-wgpu/src/wgpuUnlitPrelude.ts"
           },
@@ -35877,11 +36279,17 @@
         "arities": [
           0
         ],
-        "count": 22,
+        "count": 25,
         "locations": [
           {
             "arity": 0,
             "column": 17,
+            "line": 11,
+            "source": "upstream/packages/host-web/src/webAudioDevice.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 11,
             "source": "upstream/packages/host-web/src/webAudioDevice.ts"
           },
@@ -35899,13 +36307,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 17,
+            "source": "upstream/packages/media/src/audioChannel.ts"
+          },
+          {
+            "arity": 0,
             "column": 5,
             "line": 19,
             "source": "upstream/packages/media/src/audioChannel.ts"
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 15,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
@@ -35947,7 +36361,7 @@
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 13,
             "line": 61,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
@@ -35959,7 +36373,7 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 13,
             "line": 87,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
@@ -35977,7 +36391,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 17,
             "source": "upstream/packages/media/src/audioMixer.ts"
           },
@@ -36008,6 +36422,12 @@
           {
             "arity": 0,
             "column": 20,
+            "line": 88,
+            "source": "upstream/packages/media/src/audioMixer.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 88,
             "source": "upstream/packages/media/src/audioMixer.ts"
           }
@@ -36199,7 +36619,7 @@
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 15,
             "line": 342,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -36465,12 +36885,18 @@
         "arities": [
           0
         ],
-        "count": 3,
+        "count": 4,
         "locations": [
           {
             "arity": 0,
             "column": 31,
             "line": 210,
+            "source": "upstream/packages/geolocation/src/geolocation.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 35,
             "source": "upstream/packages/geolocation/src/geolocation.ts"
           },
           {
@@ -36605,7 +37031,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 216,
             "source": "upstream/packages/geolocation/src/geolocation.ts"
           }
@@ -37030,18 +37456,6 @@
               "source": "upstream/packages/bitmap/src/bitmapFrom.ts"
             },
             {
-              "column": 5,
-              "line": 25,
-              "operation": "write",
-              "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-            },
-            {
-              "column": 5,
-              "line": 30,
-              "operation": "write",
-              "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-            },
-            {
               "column": 47,
               "line": 180,
               "operation": "read",
@@ -37180,18 +37594,6 @@
               "source": "upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts"
             },
             {
-              "column": 7,
-              "line": 29,
-              "operation": "write",
-              "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-            },
-            {
-              "column": 7,
-              "line": 34,
-              "operation": "write",
-              "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-            },
-            {
               "column": 56,
               "line": 75,
               "operation": "read",
@@ -37224,7 +37626,7 @@
           ],
           "name": "height",
           "reads": 17,
-          "writes": 18
+          "writes": 14
         },
         {
           "calls": 2,
@@ -37249,18 +37651,6 @@
         {
           "calls": 0,
           "locations": [
-            {
-              "column": 5,
-              "line": 22,
-              "operation": "read",
-              "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-            },
-            {
-              "column": 5,
-              "line": 23,
-              "operation": "read",
-              "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-            },
             {
               "column": 7,
               "line": 10,
@@ -37302,18 +37692,6 @@
               "line": 13,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webWgpuRenderSurface.ts"
-            },
-            {
-              "column": 7,
-              "line": 26,
-              "operation": "read",
-              "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-            },
-            {
-              "column": 7,
-              "line": 27,
-              "operation": "read",
-              "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
             },
             {
               "column": 3,
@@ -37389,7 +37767,7 @@
             }
           ],
           "name": "style",
-          "reads": 23,
+          "reads": 19,
           "writes": 0
         },
         {
@@ -37426,18 +37804,6 @@
               "line": 23,
               "operation": "read",
               "source": "upstream/packages/bitmap/src/bitmapFrom.ts"
-            },
-            {
-              "column": 5,
-              "line": 24,
-              "operation": "write",
-              "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-            },
-            {
-              "column": 5,
-              "line": 29,
-              "operation": "write",
-              "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
             },
             {
               "column": 27,
@@ -37578,18 +37944,6 @@
               "source": "upstream/packages/scene2d-canvas/src/canvasRenderTarget.ts"
             },
             {
-              "column": 7,
-              "line": 28,
-              "operation": "write",
-              "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-            },
-            {
-              "column": 7,
-              "line": 33,
-              "operation": "write",
-              "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-            },
-            {
               "column": 29,
               "line": 75,
               "operation": "read",
@@ -37622,7 +37976,7 @@
           ],
           "name": "width",
           "reads": 17,
-          "writes": 18
+          "writes": 14
         }
       ],
       "name": "HTMLCanvasElement",
@@ -37630,7 +37984,7 @@
         "arities": [
           0
         ],
-        "count": 197,
+        "count": 198,
         "locations": [
           {
             "arity": 0,
@@ -37718,36 +38072,6 @@
           },
           {
             "arity": 0,
-            "column": 69,
-            "line": 18,
-            "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 3,
-            "line": 20,
-            "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 20,
-            "line": 21,
-            "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 11,
-            "line": 41,
-            "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 5,
-            "line": 45,
-            "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts"
-          },
-          {
-            "arity": 0,
             "column": 37,
             "line": 57,
             "source": "upstream/packages/effects-canvas/src/canvasFilmGrainEffect.ts"
@@ -37772,13 +38096,13 @@
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 15,
             "line": 17,
             "source": "upstream/packages/host-web/src/webBitmapEncode.ts"
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 13,
             "line": 10,
             "source": "upstream/packages/host-web/src/webBitmapReadback.ts"
           },
@@ -37802,19 +38126,25 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 6,
+            "source": "upstream/packages/host-web/src/webCanvasRenderSurface.ts"
+          },
+          {
+            "arity": 0,
             "column": 77,
             "line": 7,
             "source": "upstream/packages/host-web/src/webCanvasRenderSurface.ts"
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 13,
             "line": 8,
             "source": "upstream/packages/host-web/src/webCanvasRenderSurface.ts"
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 189,
             "source": "upstream/packages/host-web/src/webDevice.ts"
           },
@@ -37826,7 +38156,7 @@
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 13,
             "line": 11,
             "source": "upstream/packages/host-web/src/webGlRenderSurface.ts"
           },
@@ -37844,7 +38174,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 96,
             "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
           },
@@ -37868,7 +38198,7 @@
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 13,
             "line": 11,
             "source": "upstream/packages/host-web/src/webWgpuRenderSurface.ts"
           },
@@ -37880,7 +38210,7 @@
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 13,
             "line": 14,
             "source": "upstream/packages/image/src/imageBackend.ts"
           },
@@ -37889,6 +38219,12 @@
             "column": 14,
             "line": 20,
             "source": "upstream/packages/image/src/imageBackend.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 66,
+            "source": "upstream/packages/image/src/imageResource.ts"
           },
           {
             "arity": 0,
@@ -37971,6 +38307,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 6,
+            "source": "upstream/packages/render-gl/src/glElement.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 6,
             "source": "upstream/packages/render-gl/src/glElement.ts"
           },
@@ -38066,6 +38408,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 6,
+            "source": "upstream/packages/render-wgpu/src/wgpuElement.ts"
+          },
+          {
+            "arity": 0,
             "column": 32,
             "line": 7,
             "source": "upstream/packages/render-wgpu/src/wgpuElement.ts"
@@ -38132,7 +38480,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 287,
             "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
           },
@@ -38168,6 +38516,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 37,
+            "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
+          },
+          {
+            "arity": 0,
             "column": 22,
             "line": 37,
             "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
@@ -38180,13 +38534,13 @@
           },
           {
             "arity": 0,
-            "column": 51,
+            "column": 9,
             "line": 19,
             "source": "upstream/packages/scene2d-canvas/src/canvasBitmapTextureResolver.ts"
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 7,
             "line": 20,
             "source": "upstream/packages/scene2d-canvas/src/canvasBitmapTextureResolver.ts"
           },
@@ -38258,6 +38612,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 9,
+            "source": "upstream/packages/scene2d-canvas/src/canvasElement.ts"
+          },
+          {
+            "arity": 0,
             "column": 13,
             "line": 119,
             "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
@@ -38265,6 +38625,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 24,
+            "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 24,
             "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
           },
@@ -38288,7 +38654,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 15,
+            "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 14,
             "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
           },
@@ -38307,6 +38685,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 13,
+            "source": "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 13,
             "source": "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts"
           },
@@ -38432,51 +38816,9 @@
           },
           {
             "arity": 0,
-            "column": 70,
-            "line": 22,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 19,
-            "line": 23,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 32,
-            "line": 23,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 77,
-            "line": 24,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 22,
-            "line": 25,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 34,
-            "line": 32,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 11,
-            "line": 48,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
-          },
-          {
-            "arity": 0,
-            "column": 5,
-            "line": 52,
-            "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts"
+            "column": 9,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
           },
           {
             "arity": 0,
@@ -38492,19 +38834,25 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 16,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
+          },
+          {
+            "arity": 0,
             "column": 18,
             "line": 43,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
           },
           {
             "arity": 0,
-            "column": 58,
+            "column": 9,
             "line": 43,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 7,
             "line": 44,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
           },
@@ -38540,6 +38888,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 13,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
+          },
+          {
+            "arity": 0,
             "column": 62,
             "line": 10,
             "source": "upstream/packages/scene2d-dom/src/domBitmapTextureResolver.ts"
@@ -38552,13 +38906,13 @@
           },
           {
             "arity": 0,
-            "column": 49,
+            "column": 9,
             "line": 18,
             "source": "upstream/packages/scene2d-dom/src/domBitmapTextureResolver.ts"
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 7,
             "line": 19,
             "source": "upstream/packages/scene2d-dom/src/domBitmapTextureResolver.ts"
           },
@@ -38672,6 +39026,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 38,
+            "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
+          },
+          {
+            "arity": 0,
             "column": 31,
             "line": 57,
             "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
@@ -38696,7 +39056,7 @@
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 13,
             "line": 158,
             "source": "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
           },
@@ -39066,7 +39426,7 @@
           },
           {
             "arity": 0,
-            "column": 14,
+            "column": 9,
             "line": 127,
             "source": "upstream/packages/host-web/src/webDevice.ts"
           },
@@ -39078,7 +39438,7 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 11,
             "line": 30,
             "source": "upstream/packages/host-web/src/webMenu.ts"
           },
@@ -40130,7 +40490,7 @@
         "arities": [
           0
         ],
-        "count": 146,
+        "count": 148,
         "locations": [
           {
             "arity": 0,
@@ -40194,7 +40554,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 13,
             "source": "upstream/packages/host-web/src/webAccessibility.ts"
           },
@@ -40212,7 +40572,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 9,
             "line": 14,
             "source": "upstream/packages/host-web/src/webAccessibility.ts"
           },
@@ -40374,6 +40734,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 17,
+            "source": "upstream/packages/host-web/src/webInputTarget.ts"
+          },
+          {
+            "arity": 0,
             "column": 21,
             "line": 17,
             "source": "upstream/packages/host-web/src/webInputTarget.ts"
@@ -40410,7 +40776,7 @@
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 15,
             "line": 180,
             "source": "upstream/packages/host-web/src/webMenu.ts"
           },
@@ -40440,7 +40806,7 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 11,
             "line": 53,
             "source": "upstream/packages/host-web/src/webMenu.ts"
           },
@@ -40452,7 +40818,7 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 13,
             "line": 56,
             "source": "upstream/packages/host-web/src/webMenu.ts"
           },
@@ -40536,6 +40902,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 20,
+            "source": "upstream/packages/scene2d-dom/src/domClipRectangle.ts"
+          },
+          {
+            "arity": 0,
             "column": 22,
             "line": 35,
             "source": "upstream/packages/scene2d-dom/src/domClipRectangle.ts"
@@ -40566,7 +40938,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 10,
             "source": "upstream/packages/scene2d-dom/src/domHtmlView.ts"
           },
@@ -40620,7 +40992,7 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 7,
             "line": 35,
             "source": "upstream/packages/scene2d-dom/src/domNativeText.ts"
           },
@@ -40662,7 +41034,7 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/scene2d-dom/src/domNode2D.ts"
           },
@@ -40680,7 +41052,7 @@
           },
           {
             "arity": 0,
-            "column": 45,
+            "column": 11,
             "line": 30,
             "source": "upstream/packages/scene2d-dom/src/domReconcile.ts"
           },
@@ -40698,7 +41070,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 52,
             "source": "upstream/packages/scene2d-dom/src/domReconcile.ts"
           },
@@ -41282,7 +41654,7 @@
         "arities": [
           0
         ],
-        "count": 59,
+        "count": 68,
         "locations": [
           {
             "arity": 0,
@@ -41292,7 +41664,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 13,
             "line": 24,
             "source": "upstream/packages/image/src/imageBackend.ts"
           },
@@ -41301,6 +41673,12 @@
             "column": 14,
             "line": 45,
             "source": "upstream/packages/image/src/imageBackend.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 66,
+            "source": "upstream/packages/image/src/imageResource.ts"
           },
           {
             "arity": 0,
@@ -41418,7 +41796,7 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 273,
             "source": "upstream/packages/render-wgpu/src/wgpuTestHelper.ts"
           },
@@ -41442,6 +41820,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 37,
+            "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
+          },
+          {
+            "arity": 0,
             "column": 22,
             "line": 37,
             "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
@@ -41455,6 +41839,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 24,
+            "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 24,
             "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
           },
@@ -41478,7 +41868,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 15,
+            "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 14,
             "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
           },
@@ -41508,6 +41910,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 87,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts"
@@ -41520,7 +41928,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 16,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 13,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 13,
             "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
           },
@@ -41563,6 +41983,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 38,
+            "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 38,
             "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
           },
@@ -41902,13 +42328,13 @@
         "locations": [
           {
             "arity": 0,
-            "column": 19,
+            "column": 11,
             "line": 89,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 17,
             "line": 22,
             "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
           }
@@ -42116,7 +42542,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 16,
+            "column": 11,
             "line": 127,
             "source": "upstream/packages/host-web/src/webMenu.ts"
           }
@@ -42171,13 +42597,13 @@
         "locations": [
           {
             "arity": 0,
-            "column": 16,
+            "column": 39,
             "line": 75,
             "source": "upstream/packages/host-web/src/webWindow.ts"
           },
           {
             "arity": 0,
-            "column": 39,
+            "column": 9,
             "line": 75,
             "source": "upstream/packages/host-web/src/webWindow.ts"
           },
@@ -42369,13 +42795,13 @@
         "locations": [
           {
             "arity": 0,
-            "column": 20,
+            "column": 13,
             "line": 147,
             "source": "upstream/packages/host-web/src/webMenu.ts"
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 211,
             "source": "upstream/packages/scene2d-dom/src/domRichText.ts"
           }
@@ -42429,7 +42855,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 74,
             "source": "upstream/packages/scene2d-dom/src/domTextInput.ts"
           }
@@ -42549,12 +42975,18 @@
         "arities": [
           0
         ],
-        "count": 2,
+        "count": 3,
         "locations": [
           {
             "arity": 0,
             "column": 99,
             "line": 105,
+            "source": "upstream/packages/host-web/src/webMenu.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 32,
             "source": "upstream/packages/host-web/src/webMenu.ts"
           },
           {
@@ -43164,7 +43596,7 @@
         "arities": [
           0
         ],
-        "count": 83,
+        "count": 94,
         "locations": [
           {
             "arity": 0,
@@ -43228,6 +43660,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 5,
+            "source": "upstream/packages/media/src/videoChannel.ts"
+          },
+          {
+            "arity": 0,
             "column": 21,
             "line": 7,
             "source": "upstream/packages/media/src/videoChannel.ts"
@@ -43240,13 +43678,13 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 35,
             "line": 22,
             "source": "upstream/packages/render-gl/src/glTextureVideoUpload.ts"
           },
           {
             "arity": 0,
-            "column": 35,
+            "column": 9,
             "line": 22,
             "source": "upstream/packages/render-gl/src/glTextureVideoUpload.ts"
           },
@@ -43294,12 +43732,6 @@
           },
           {
             "arity": 0,
-            "column": 19,
-            "line": 233,
-            "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
-          },
-          {
-            "arity": 0,
             "column": 20,
             "line": 233,
             "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
@@ -43307,6 +43739,12 @@
           {
             "arity": 0,
             "column": 46,
+            "line": 233,
+            "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 233,
             "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
           },
@@ -43366,6 +43804,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 37,
+            "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
+          },
+          {
+            "arity": 0,
             "column": 22,
             "line": 37,
             "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
@@ -43379,6 +43823,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 24,
+            "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 24,
             "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
           },
@@ -43402,7 +43852,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 15,
+            "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 14,
             "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
           },
@@ -43432,6 +43894,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 87,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts"
@@ -43444,7 +43912,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 16,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 13,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 13,
             "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
           },
@@ -43487,6 +43967,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 38,
+            "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 38,
             "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
           },
@@ -43541,6 +44027,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 51,
+            "source": "upstream/packages/texture/src/videoTexture.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 51,
             "source": "upstream/packages/texture/src/videoTexture.ts"
           },
@@ -43661,6 +44153,12 @@
           {
             "arity": 0,
             "column": 83,
+            "line": 9,
+            "source": "upstream/packages/video/src/videoResourceFrom.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 9,
             "source": "upstream/packages/video/src/videoResourceFrom.ts"
           }
@@ -43846,7 +44344,7 @@
         "arities": [
           0
         ],
-        "count": 54,
+        "count": 63,
         "locations": [
           {
             "arity": 0,
@@ -43856,15 +44354,21 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 24,
             "line": 23,
             "source": "upstream/packages/image-codec/src/registerWebImageDecoders.ts"
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/image-codec/src/registerWebImageDecoders.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 66,
+            "source": "upstream/packages/image/src/imageResource.ts"
           },
           {
             "arity": 0,
@@ -44006,6 +44510,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 37,
+            "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
+          },
+          {
+            "arity": 0,
             "column": 22,
             "line": 37,
             "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
@@ -44019,6 +44529,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 24,
+            "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 24,
             "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
           },
@@ -44042,7 +44558,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 15,
+            "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 14,
             "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
           },
@@ -44072,6 +44600,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 87,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts"
@@ -44084,7 +44618,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 16,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 13,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 13,
             "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
           },
@@ -44109,6 +44655,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 38,
+            "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 38,
             "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
           },
@@ -44341,13 +44893,13 @@
         "locations": [
           {
             "arity": 0,
-            "column": 24,
+            "column": 9,
             "line": 13,
             "source": "upstream/packages/bitmap/src/bitmapDraw.ts"
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
             "line": 26,
             "source": "upstream/packages/bitmap/src/bitmapFrom.ts"
           },
@@ -44359,13 +44911,13 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 9,
             "line": 73,
             "source": "upstream/packages/effects-canvas/src/canvasEffectCompositing.ts"
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 15,
             "line": 20,
             "source": "upstream/packages/host-web/src/webBitmapEncode.ts"
           },
@@ -44383,7 +44935,7 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 106,
             "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
           },
@@ -44401,7 +44953,7 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 13,
             "line": 17,
             "source": "upstream/packages/image/src/imageBackend.ts"
           },
@@ -44608,7 +45160,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 28,
+            "column": 15,
             "line": 508,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -44858,7 +45410,7 @@
           },
           {
             "arity": 0,
-            "column": 31,
+            "column": 15,
             "line": 420,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -45084,7 +45636,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 9,
             "line": 46,
             "source": "upstream/packages/host-web/src/webMidi.ts"
           },
@@ -45248,7 +45800,7 @@
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 9,
             "line": 47,
             "source": "upstream/packages/host-web/src/webMidi.ts"
           },
@@ -45485,7 +46037,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 9,
             "line": 48,
             "source": "upstream/packages/host-web/src/webMidi.ts"
           },
@@ -45641,11 +46193,17 @@
         "arities": [
           0
         ],
-        "count": 3,
+        "count": 4,
         "locations": [
           {
             "arity": 0,
             "column": 24,
+            "line": 298,
+            "source": "upstream/packages/permissions/src/permission.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 298,
             "source": "upstream/packages/permissions/src/permission.ts"
           },
@@ -45682,7 +46240,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 21,
+            "column": 13,
             "line": 141,
             "source": "upstream/packages/host-web/src/webMediasession.ts"
           },
@@ -45950,11 +46508,11 @@
         "arities": [
           0
         ],
-        "count": 19,
+        "count": 20,
         "locations": [
           {
             "arity": 0,
-            "column": 24,
+            "column": 9,
             "line": 131,
             "source": "upstream/packages/host-web/src/webMediasession.ts"
           },
@@ -45966,13 +46524,13 @@
           },
           {
             "arity": 0,
-            "column": 35,
+            "column": 7,
             "line": 17,
             "source": "upstream/packages/host-web/src/webMediasession.ts"
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/host-web/src/webMediasession.ts"
           },
@@ -46040,6 +46598,12 @@
             "arity": 0,
             "column": 21,
             "line": 413,
+            "source": "upstream/packages/host-web/src/webMediasession.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 75,
             "source": "upstream/packages/host-web/src/webMediasession.ts"
           },
           {
@@ -46370,7 +46934,7 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 15,
             "line": 493,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -46847,7 +47411,7 @@
         "arities": [
           0
         ],
-        "count": 37,
+        "count": 39,
         "locations": [
           {
             "arity": 0,
@@ -46881,7 +47445,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 13,
             "line": 52,
             "source": "upstream/packages/host-web/src/webConnectivity.ts"
           },
@@ -46893,7 +47457,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 13,
             "line": 18,
             "source": "upstream/packages/host-web/src/webDevice.ts"
           },
@@ -46941,6 +47505,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 78,
+            "source": "upstream/packages/host-web/src/webKeyboard.ts"
+          },
+          {
+            "arity": 0,
             "column": 43,
             "line": 329,
             "source": "upstream/packages/host-web/src/webMediasession.ts"
@@ -46971,13 +47541,13 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 50,
             "line": 21,
             "source": "upstream/packages/host-web/src/webPlatform.ts"
           },
           {
             "arity": 0,
-            "column": 50,
+            "column": 9,
             "line": 21,
             "source": "upstream/packages/host-web/src/webPlatform.ts"
           },
@@ -46990,6 +47560,12 @@
           {
             "arity": 0,
             "column": 28,
+            "line": 189,
+            "source": "upstream/packages/host-web/src/webPower.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 189,
             "source": "upstream/packages/host-web/src/webPower.ts"
           },
@@ -47088,7 +47664,7 @@
         "arities": [
           0
         ],
-        "count": 4,
+        "count": 5,
         "locations": [
           {
             "arity": 0,
@@ -47099,6 +47675,12 @@
           {
             "arity": 0,
             "column": 41,
+            "line": 211,
+            "source": "upstream/packages/host-web/src/webInputTarget.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 211,
             "source": "upstream/packages/host-web/src/webInputTarget.ts"
           },
@@ -47136,7 +47718,7 @@
         "locations": [
           {
             "arity": 1,
-            "column": 28,
+            "column": 11,
             "line": 53,
             "source": "upstream/packages/host-web/src/webMenu.ts"
           },
@@ -47276,7 +47858,7 @@
         "arities": [
           0
         ],
-        "count": 50,
+        "count": 58,
         "locations": [
           {
             "arity": 0,
@@ -47286,7 +47868,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 96,
             "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
           },
@@ -47298,13 +47880,13 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 26,
             "source": "upstream/packages/image-codec/src/registerWebImageDecoders.ts"
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 17,
             "source": "upstream/packages/image-codec/src/registerWebImageEncoders.ts"
           },
@@ -47424,6 +48006,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 37,
+            "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
+          },
+          {
+            "arity": 0,
             "column": 22,
             "line": 37,
             "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
@@ -47437,6 +48025,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 24,
+            "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 24,
             "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
           },
@@ -47460,7 +48054,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 15,
+            "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 14,
             "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
           },
@@ -47490,6 +48096,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 87,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts"
@@ -47502,7 +48114,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 16,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 13,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 13,
             "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
           },
@@ -47532,6 +48156,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 38,
+            "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
+          },
+          {
+            "arity": 0,
             "column": 31,
             "line": 57,
             "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
@@ -47544,7 +48174,7 @@
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 13,
             "line": 148,
             "source": "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
           },
@@ -47638,8 +48268,14 @@
         "arities": [
           0
         ],
-        "count": 18,
+        "count": 22,
         "locations": [
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 14,
+            "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
+          },
           {
             "arity": 0,
             "column": 23,
@@ -47672,7 +48308,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 52,
             "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
           },
@@ -47708,6 +48344,18 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 27,
+            "source": "upstream/packages/image-codec/src/registerWebImageDecoders.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 18,
+            "source": "upstream/packages/image-codec/src/registerWebImageEncoders.ts"
+          },
+          {
+            "arity": 0,
             "column": 21,
             "line": 18,
             "source": "upstream/packages/image-codec/src/registerWebImageEncoders.ts"
@@ -47726,7 +48374,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 13,
             "line": 149,
             "source": "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
           },
@@ -47739,6 +48387,12 @@
           {
             "arity": 0,
             "column": 15,
+            "line": 31,
+            "source": "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 31,
             "source": "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
           },
@@ -47944,7 +48598,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 130,
             "source": "upstream/packages/lifecycle/src/lifecycle.ts"
           },
@@ -48170,7 +48824,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 34,
             "source": "upstream/packages/host-web/src/webHost.ts"
           },
@@ -48182,7 +48836,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 171,
             "source": "upstream/packages/host-web/src/webMidi.ts"
           },
@@ -48194,7 +48848,7 @@
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 15,
             "line": 246,
             "source": "upstream/packages/host-web/src/webScreen.ts"
           },
@@ -48224,7 +48878,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 9,
             "source": "upstream/packages/host-web/src/webStorageHost.ts"
           },
@@ -48236,7 +48890,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 11,
             "line": 145,
             "source": "upstream/packages/permissions/src/permission.ts"
           },
@@ -48248,7 +48902,7 @@
           },
           {
             "arity": 0,
-            "column": 22,
+            "column": 13,
             "line": 731,
             "source": "upstream/packages/sensors/src/sensors.ts"
           },
@@ -48396,7 +49050,7 @@
           },
           {
             "arity": 0,
-            "column": 25,
+            "column": 11,
             "line": 126,
             "source": "upstream/packages/permissions/src/permission.ts"
           },
@@ -48716,13 +49370,13 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 70,
             "line": 597,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
           {
             "arity": 0,
-            "column": 70,
+            "column": 9,
             "line": 597,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -48877,7 +49531,7 @@
         "arities": [
           1
         ],
-        "count": 2,
+        "count": 6,
         "locations": [
           {
             "arity": 1,
@@ -48887,8 +49541,32 @@
           },
           {
             "arity": 1,
+            "column": 24,
+            "line": 211,
+            "source": "upstream/packages/host-web/src/webClipboard.ts"
+          },
+          {
+            "arity": 1,
             "column": 29,
             "line": 39,
+            "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
+          },
+          {
+            "arity": 1,
+            "column": 30,
+            "line": 47,
+            "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
+          },
+          {
+            "arity": 1,
+            "column": 29,
+            "line": 83,
+            "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
+          },
+          {
+            "arity": 1,
+            "column": 30,
+            "line": 90,
             "source": "upstream/packages/webcam/src/mediaFileCapture.ts"
           }
         ]
@@ -48983,7 +49661,7 @@
           },
           {
             "arity": 1,
-            "column": 18,
+            "column": 9,
             "line": 99,
             "source": "upstream/packages/host-web/src/webNet.ts"
           },
@@ -49030,7 +49708,7 @@
         "locations": [
           {
             "arity": 1,
-            "column": 18,
+            "column": 9,
             "line": 109,
             "source": "upstream/packages/host-web/src/webNet.ts"
           }
@@ -49191,19 +49869,19 @@
         "locations": [
           {
             "arity": 0,
-            "column": 20,
-            "line": 146,
-            "source": "upstream/packages/host-web/src/webDevice.ts"
-          },
-          {
-            "arity": 0,
             "column": 60,
             "line": 146,
             "source": "upstream/packages/host-web/src/webDevice.ts"
           },
           {
             "arity": 0,
-            "column": 41,
+            "column": 9,
+            "line": 146,
+            "source": "upstream/packages/host-web/src/webDevice.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
             "line": 140,
             "source": "upstream/packages/host-web/src/webWindow.ts"
           }
@@ -49464,7 +50142,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 24,
+            "column": 13,
             "line": 21,
             "source": "upstream/packages/host-web/src/webClipboard.ts"
           },
@@ -49476,7 +50154,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 15,
             "line": 36,
             "source": "upstream/packages/host-web/src/webConnectivity.ts"
           },
@@ -49488,7 +50166,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 15,
             "line": 18,
             "source": "upstream/packages/host-web/src/webNet.ts"
           },
@@ -49539,7 +50217,7 @@
         "arities": [
           0
         ],
-        "count": 33,
+        "count": 41,
         "locations": [
           {
             "arity": 0,
@@ -49591,6 +50269,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 37,
+            "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
+          },
+          {
+            "arity": 0,
             "column": 22,
             "line": 37,
             "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
@@ -49604,6 +50288,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 24,
+            "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 24,
             "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
           },
@@ -49627,7 +50317,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 15,
+            "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 14,
             "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
           },
@@ -49657,6 +50359,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 87,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts"
@@ -49669,7 +50377,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 16,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 13,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 13,
             "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
           },
@@ -49694,6 +50414,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 38,
+            "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 38,
             "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
           },
@@ -49919,7 +50645,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 19,
+            "column": 13,
             "line": 33,
             "source": "upstream/packages/host-web/src/webDevice.ts"
           },
@@ -50241,7 +50967,7 @@
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 11,
             "line": 292,
             "source": "upstream/packages/media/src/audioMixer.ts"
           },
@@ -50366,7 +51092,7 @@
         "arities": [
           0
         ],
-        "count": 5,
+        "count": 6,
         "locations": [
           {
             "arity": 0,
@@ -50378,6 +51104,12 @@
             "arity": 0,
             "column": 32,
             "line": 148,
+            "source": "upstream/packages/host-web/src/webStorage.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 23,
             "source": "upstream/packages/host-web/src/webStorage.ts"
           },
           {
@@ -50448,7 +51180,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 24,
+            "column": 13,
             "line": 58,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
@@ -50542,7 +51274,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 21,
+            "column": 11,
             "line": 97,
             "source": "upstream/packages/host-web/src/webStorage.ts"
           },
@@ -50660,7 +51392,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 21,
+            "column": 11,
             "line": 55,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
@@ -51144,7 +51876,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 20,
             "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts"
           },
@@ -51168,13 +51900,13 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 43,
             "line": 224,
             "source": "upstream/packages/scene2d-dom/src/domRichText.ts"
           },
           {
             "arity": 0,
-            "column": 43,
+            "column": 9,
             "line": 224,
             "source": "upstream/packages/scene2d-dom/src/domRichText.ts"
           },
@@ -51216,7 +51948,7 @@
           },
           {
             "arity": 0,
-            "column": 26,
+            "column": 13,
             "line": 56,
             "source": "upstream/packages/textshaper-canvas/src/canvasTextShaper.ts"
           }
@@ -51277,7 +52009,7 @@
           },
           {
             "arity": 0,
-            "column": 23,
+            "column": 13,
             "line": 32,
             "source": "upstream/packages/host-web/src/webConnectivity.ts"
           },
@@ -51385,7 +52117,7 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 11,
             "line": 90,
             "source": "upstream/packages/power/src/power.ts"
           },
@@ -51611,7 +52343,7 @@
         "arities": [
           0
         ],
-        "count": 44,
+        "count": 52,
         "locations": [
           {
             "arity": 0,
@@ -51729,6 +52461,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 37,
+            "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
+          },
+          {
+            "arity": 0,
             "column": 22,
             "line": 37,
             "source": "upstream/packages/scene2d-canvas/src/canvasBitmapText.ts"
@@ -51742,6 +52480,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 24,
+            "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 24,
             "source": "upstream/packages/scene2d-canvas/src/canvasFillPattern.ts"
           },
@@ -51765,7 +52509,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 15,
+            "source": "upstream/packages/scene2d-canvas/src/canvasParticleEmitter2D.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 14,
             "source": "upstream/packages/scene2d-canvas/src/canvasQuadBatch.ts"
           },
@@ -51795,6 +52551,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 14,
+            "source": "upstream/packages/scene2d-canvas/src/canvasSprite.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 87,
             "source": "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts"
@@ -51807,7 +52569,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 16,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTextureWindowSource.ts"
+          },
+          {
+            "arity": 0,
             "column": 17,
+            "line": 13,
+            "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 13,
             "source": "upstream/packages/scene2d-canvas/src/canvasTilemap.ts"
           },
@@ -51832,6 +52606,12 @@
           {
             "arity": 0,
             "column": 18,
+            "line": 38,
+            "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 38,
             "source": "upstream/packages/scene2d-dom/src/domSprite.ts"
           },
@@ -51959,7 +52739,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 24,
+            "column": 13,
             "line": 24,
             "source": "upstream/packages/host-web/src/webKeyboard.ts"
           },
@@ -52144,7 +52924,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 17,
+            "column": 11,
             "line": 194,
             "source": "upstream/packages/host-web/src/webDevice.ts"
           },
@@ -52181,7 +52961,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 338,
             "source": "upstream/packages/permissions/src/permission.ts"
           }
@@ -52321,7 +53101,7 @@
         "locations": [
           {
             "arity": 0,
-            "column": 18,
+            "column": 11,
             "line": 66,
             "source": "upstream/packages/scene3d-gl/src/enableGlScene3DCustomShaderGuards.ts"
           },
@@ -52376,7 +53156,7 @@
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 9,
             "line": 23,
             "source": "upstream/packages/render-gl/src/glRenderState.ts"
           },
@@ -52430,7 +53210,7 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 9,
             "line": 109,
             "source": "upstream/packages/scene2d-gl/src/glParticleEmitter2D.ts"
           },
@@ -52478,7 +53258,7 @@
           },
           {
             "arity": 0,
-            "column": 36,
+            "column": 11,
             "line": 284,
             "source": "upstream/packages/scene2d-gl/src/glQuadBatchWriter.ts"
           },
@@ -52568,7 +53348,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 69,
             "source": "upstream/packages/scene3d-gl/src/glEnvironmentSkybox.ts"
           },
@@ -52628,7 +53408,7 @@
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 9,
             "line": 136,
             "source": "upstream/packages/scene3d-gl/src/glParticleEmitter3D.ts"
           },
@@ -52822,7 +53602,7 @@
           },
           {
             "arity": 0,
-            "column": 48,
+            "column": 9,
             "line": 29,
             "source": "upstream/packages/render-gl/src/glReadback.ts"
           },
@@ -52996,13 +53776,13 @@
           },
           {
             "arity": 0,
-            "column": 27,
+            "column": 70,
             "line": 69,
             "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
           },
           {
             "arity": 0,
-            "column": 70,
+            "column": 9,
             "line": 69,
             "source": "upstream/packages/scene3d-gl/src/glShadowMap.ts"
           },
@@ -53078,7 +53858,7 @@
         "arities": [
           0
         ],
-        "count": 239,
+        "count": 252,
         "locations": [
           {
             "arity": 0,
@@ -53478,13 +54258,13 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 69,
             "line": 39,
             "source": "upstream/packages/render-gl/src/enableGlRenderStateGuards.ts"
           },
           {
             "arity": 0,
-            "column": 69,
+            "column": 9,
             "line": 39,
             "source": "upstream/packages/render-gl/src/enableGlRenderStateGuards.ts"
           },
@@ -53496,7 +54276,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 531,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
@@ -53550,6 +54330,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 38,
+            "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 48,
             "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
@@ -53586,7 +54372,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 29,
             "source": "upstream/packages/render-gl/src/glProgram.ts"
           },
@@ -53610,7 +54396,7 @@
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 156,
             "source": "upstream/packages/render-gl/src/glRenderState.ts"
           },
@@ -53653,6 +54439,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 42,
+            "source": "upstream/packages/render-gl/src/glShader.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 42,
             "source": "upstream/packages/render-gl/src/glShader.ts"
           },
@@ -53826,6 +54618,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 84,
+            "source": "upstream/packages/scene2d-gl/src/glParticleEmitter2D.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 85,
             "source": "upstream/packages/scene2d-gl/src/glParticleEmitter2D.ts"
@@ -53863,6 +54661,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 82,
+            "source": "upstream/packages/scene2d-gl/src/glQuadBatchWriter.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 82,
             "source": "upstream/packages/scene2d-gl/src/glQuadBatchWriter.ts"
           },
@@ -54078,6 +54882,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 43,
+            "source": "upstream/packages/scene3d-gl/src/glClassicPrelude.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 44,
             "source": "upstream/packages/scene3d-gl/src/glClassicPrelude.ts"
@@ -54091,6 +54901,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 48,
+            "source": "upstream/packages/scene3d-gl/src/glDebugPrelude.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 48,
             "source": "upstream/packages/scene3d-gl/src/glDebugPrelude.ts"
           },
@@ -54216,6 +55032,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 43,
+            "source": "upstream/packages/scene3d-gl/src/glMatcapPrelude.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 44,
             "source": "upstream/packages/scene3d-gl/src/glMatcapPrelude.ts"
@@ -54253,6 +55075,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 126,
+            "source": "upstream/packages/scene3d-gl/src/glParticleEmitter3D.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 126,
             "source": "upstream/packages/scene3d-gl/src/glParticleEmitter3D.ts"
           },
@@ -54300,6 +55128,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 26,
+            "source": "upstream/packages/scene3d-gl/src/glPbrProgramCache.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 27,
             "source": "upstream/packages/scene3d-gl/src/glPbrProgramCache.ts"
@@ -54331,6 +55165,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 74,
+            "source": "upstream/packages/scene3d-gl/src/glShadedPrelude.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 74,
             "source": "upstream/packages/scene3d-gl/src/glShadedPrelude.ts"
           },
@@ -54384,6 +55224,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 27,
+            "source": "upstream/packages/scene3d-gl/src/glToonPrelude.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 28,
             "source": "upstream/packages/scene3d-gl/src/glToonPrelude.ts"
@@ -54402,6 +55248,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 54,
+            "source": "upstream/packages/scene3d-gl/src/glUnlitPrelude.ts"
+          },
+          {
+            "arity": 0,
             "column": 10,
             "line": 55,
             "source": "upstream/packages/scene3d-gl/src/glUnlitPrelude.ts"
@@ -54409,6 +55261,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 19,
+            "source": "upstream/packages/scene3d-gl/src/glWireframePrelude.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 19,
             "source": "upstream/packages/scene3d-gl/src/glWireframePrelude.ts"
           },
@@ -54625,13 +55483,13 @@
         "locations": [
           {
             "arity": 0,
-            "column": 38,
-            "line": 191,
+            "column": 11,
+            "line": 190,
             "source": "upstream/packages/host-web/src/webDevice.ts"
           },
           {
             "arity": 0,
-            "column": 8,
+            "column": 38,
             "line": 191,
             "source": "upstream/packages/host-web/src/webDevice.ts"
           },
@@ -54670,11 +55528,17 @@
         "arities": [
           0
         ],
-        "count": 3,
+        "count": 4,
         "locations": [
           {
             "arity": 0,
             "column": 18,
+            "line": 10,
+            "source": "upstream/packages/render-gl/src/glProgram.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 10,
             "source": "upstream/packages/render-gl/src/glProgram.ts"
           },
@@ -54707,7 +55571,7 @@
         "arities": [
           0
         ],
-        "count": 400,
+        "count": 416,
         "locations": [
           {
             "arity": 0,
@@ -54730,6 +55594,12 @@
           {
             "arity": 0,
             "column": 20,
+            "line": 30,
+            "source": "upstream/packages/effects-gl/src/glBlendEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 30,
             "source": "upstream/packages/effects-gl/src/glBlendEffect.ts"
           },
@@ -54909,6 +55779,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 30,
+            "source": "upstream/packages/effects-gl/src/glColorLutPass.ts"
+          },
+          {
+            "arity": 0,
             "column": 3,
             "line": 32,
             "source": "upstream/packages/effects-gl/src/glColorLutPass.ts"
@@ -54952,6 +55828,12 @@
           {
             "arity": 0,
             "column": 20,
+            "line": 32,
+            "source": "upstream/packages/effects-gl/src/glCompositeEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 32,
             "source": "upstream/packages/effects-gl/src/glCompositeEffect.ts"
           },
@@ -55137,7 +56019,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 16,
             "source": "upstream/packages/effects-gl/src/glEffectGradientRamp.ts"
           },
@@ -55245,6 +56127,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 107,
+            "source": "upstream/packages/effects-gl/src/glGradientBevelEffect.ts"
+          },
+          {
+            "arity": 0,
             "column": 3,
             "line": 108,
             "source": "upstream/packages/effects-gl/src/glGradientBevelEffect.ts"
@@ -55294,6 +56182,12 @@
           {
             "arity": 0,
             "column": 16,
+            "line": 75,
+            "source": "upstream/packages/effects-gl/src/glGradientGlowEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 75,
             "source": "upstream/packages/effects-gl/src/glGradientGlowEffect.ts"
           },
@@ -55839,13 +56733,13 @@
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 9,
             "line": 195,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 7,
             "line": 196,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
@@ -55882,7 +56776,7 @@
           {
             "arity": 0,
             "column": 9,
-            "line": 237,
+            "line": 235,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
           {
@@ -55905,7 +56799,7 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 7,
             "line": 242,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
@@ -55947,13 +56841,13 @@
           },
           {
             "arity": 0,
-            "column": 10,
-            "line": 285,
+            "column": 9,
+            "line": 283,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
           {
             "arity": 0,
-            "column": 52,
+            "column": 10,
             "line": 285,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
@@ -55971,7 +56865,7 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 7,
             "line": 287,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
@@ -56031,13 +56925,13 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 11,
             "line": 94,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
           {
             "arity": 0,
-            "column": 59,
+            "column": 21,
             "line": 94,
             "source": "upstream/packages/render-gl/src/glDraw.ts"
           },
@@ -56073,7 +56967,7 @@
           },
           {
             "arity": 0,
-            "column": 18,
+            "column": 9,
             "line": 51,
             "source": "upstream/packages/render-gl/src/glExternalTexture.ts"
           },
@@ -56289,7 +57183,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 9,
             "line": 34,
             "source": "upstream/packages/render-gl/src/glRenderTexture.ts"
           },
@@ -56391,6 +57285,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 55,
+            "source": "upstream/packages/scene2d-gl/src/glBitmapText.ts"
+          },
+          {
+            "arity": 0,
             "column": 23,
             "line": 55,
             "source": "upstream/packages/scene2d-gl/src/glBitmapText.ts"
@@ -56421,6 +57321,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 44,
+            "source": "upstream/packages/scene2d-gl/src/glQuadBatch.ts"
+          },
+          {
+            "arity": 0,
             "column": 16,
             "line": 53,
             "source": "upstream/packages/scene2d-gl/src/glQuadBatch.ts"
@@ -56434,6 +57340,12 @@
           {
             "arity": 0,
             "column": 19,
+            "line": 158,
+            "source": "upstream/packages/scene2d-gl/src/glQuadBatchWriter.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 158,
             "source": "upstream/packages/scene2d-gl/src/glQuadBatchWriter.ts"
           },
@@ -56469,6 +57381,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 83,
+            "source": "upstream/packages/scene2d-gl/src/glRasterShapeRenderer.ts"
+          },
+          {
+            "arity": 0,
             "column": 16,
             "line": 86,
             "source": "upstream/packages/scene2d-gl/src/glRasterShapeRenderer.ts"
@@ -56481,13 +57399,13 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 50,
             "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 51,
             "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
           },
@@ -56511,13 +57429,13 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 64,
             "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 9,
             "line": 65,
             "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
           },
@@ -56541,6 +57459,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 45,
+            "source": "upstream/packages/scene2d-gl/src/glShapeData.ts"
+          },
+          {
+            "arity": 0,
             "column": 28,
             "line": 47,
             "source": "upstream/packages/scene2d-gl/src/glShapeData.ts"
@@ -56554,6 +57478,12 @@
           {
             "arity": 0,
             "column": 21,
+            "line": 28,
+            "source": "upstream/packages/scene2d-gl/src/glSprite.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 28,
             "source": "upstream/packages/scene2d-gl/src/glSprite.ts"
           },
@@ -56589,6 +57519,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 71,
+            "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
+          },
+          {
+            "arity": 0,
             "column": 28,
             "line": 73,
             "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
@@ -56602,6 +57538,12 @@
           {
             "arity": 0,
             "column": 21,
+            "line": 39,
+            "source": "upstream/packages/scene2d-gl/src/glTilemap.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
             "line": 39,
             "source": "upstream/packages/scene2d-gl/src/glTilemap.ts"
           },
@@ -56697,13 +57639,19 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 18,
+            "source": "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts"
+          },
+          {
+            "arity": 0,
             "column": 26,
             "line": 42,
             "source": "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts"
           },
           {
             "arity": 0,
-            "column": 55,
+            "column": 9,
             "line": 42,
             "source": "upstream/packages/scene3d-gl/src/glEnvironmentIblBake.ts"
           },
@@ -56787,6 +57735,12 @@
           },
           {
             "arity": 0,
+            "column": 9,
+            "line": 19,
+            "source": "upstream/packages/scene3d-gl/src/glEnvironmentSkybox.ts"
+          },
+          {
+            "arity": 0,
             "column": 39,
             "line": 41,
             "source": "upstream/packages/scene3d-gl/src/glEnvironmentSkybox.ts"
@@ -56832,6 +57786,12 @@
             "column": 9,
             "line": 30,
             "source": "upstream/packages/scene3d-gl/src/glMatcapPrelude.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 234,
+            "source": "upstream/packages/scene3d-gl/src/glParticleEmitter3D.ts"
           },
           {
             "arity": 0,
@@ -57126,7 +58086,7 @@
         "arities": [
           0
         ],
-        "count": 370,
+        "count": 375,
         "locations": [
           {
             "arity": 0,
@@ -57184,6 +58144,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 40,
+            "source": "upstream/packages/effects-gl/src/glBlendEffect.ts"
+          },
+          {
+            "arity": 0,
             "column": 21,
             "line": 40,
             "source": "upstream/packages/effects-gl/src/glBlendEffect.ts"
@@ -57238,6 +58204,12 @@
           },
           {
             "arity": 0,
+            "column": 11,
+            "line": 41,
+            "source": "upstream/packages/effects-gl/src/glCompositeEffect.ts"
+          },
+          {
+            "arity": 0,
             "column": 25,
             "line": 41,
             "source": "upstream/packages/effects-gl/src/glCompositeEffect.ts"
@@ -57259,6 +58231,12 @@
             "column": 18,
             "line": 21,
             "source": "upstream/packages/effects-gl/src/glCrtEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 40,
+            "source": "upstream/packages/effects-gl/src/glCustomShaderEffect.ts"
           },
           {
             "arity": 0,
@@ -57388,13 +58366,19 @@
           },
           {
             "arity": 0,
+            "column": 7,
+            "line": 32,
+            "source": "upstream/packages/effects-gl/src/glEffectProgramCache.ts"
+          },
+          {
+            "arity": 0,
             "column": 36,
             "line": 35,
             "source": "upstream/packages/effects-gl/src/glEffectProgramCache.ts"
           },
           {
             "arity": 0,
-            "column": 20,
+            "column": 9,
             "line": 37,
             "source": "upstream/packages/effects-gl/src/glEffectProgramCache.ts"
           },
@@ -57724,7 +58708,7 @@
           },
           {
             "arity": 0,
-            "column": 17,
+            "column": 11,
             "line": 42,
             "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
           },
@@ -57846,6 +58830,12 @@
             "arity": 0,
             "column": 39,
             "line": 895,
+            "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 906,
             "source": "upstream/packages/scene2d-gl/src/glColorAdjustmentMaterialFeature.ts"
           },
           {
@@ -59365,11 +60355,17 @@
         "arities": [
           0
         ],
-        "count": 33,
+        "count": 34,
         "locations": [
           {
             "arity": 0,
             "column": 17,
+            "line": 125,
+            "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
             "line": 125,
             "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
           },
@@ -59501,7 +60497,7 @@
           },
           {
             "arity": 0,
-            "column": 15,
+            "column": 9,
             "line": 132,
             "source": "upstream/packages/scene3d-gl/src/glParticleEmitter3D.ts"
           },
@@ -59701,7 +60697,7 @@
           {
             "arity": 0,
             "column": 13,
-            "line": 74,
+            "line": 71,
             "source": "upstream/packages/socket/src/socket.ts"
           }
         ]
@@ -59774,7 +60770,7 @@
           },
           {
             "arity": 0,
-            "column": 28,
+            "column": 15,
             "line": 534,
             "source": "upstream/packages/input/src/inputManager.ts"
           },
@@ -60618,7 +61614,7 @@
         "arities": [
           0
         ],
-        "count": 39,
+        "count": 40,
         "locations": [
           {
             "arity": 0,
@@ -60640,7 +61636,7 @@
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 11,
             "line": 12,
             "source": "upstream/packages/host-web/src/webApplicationExit.ts"
           },
@@ -60652,7 +61648,7 @@
           },
           {
             "arity": 0,
-            "column": 24,
+            "column": 11,
             "line": 7,
             "source": "upstream/packages/host-web/src/webApplicationExit.ts"
           },
@@ -60682,7 +61678,7 @@
           },
           {
             "arity": 0,
-            "column": 19,
+            "column": 13,
             "line": 32,
             "source": "upstream/packages/host-web/src/webDevice.ts"
           },
@@ -60808,13 +61804,13 @@
           },
           {
             "arity": 0,
-            "column": 21,
+            "column": 39,
             "line": 274,
             "source": "upstream/packages/host-web/src/webWindow.ts"
           },
           {
             "arity": 0,
-            "column": 39,
+            "column": 9,
             "line": 274,
             "source": "upstream/packages/host-web/src/webWindow.ts"
           },
@@ -60828,6 +61824,12 @@
             "arity": 0,
             "column": 33,
             "line": 30,
+            "source": "upstream/packages/host-web/src/webWindow.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 33,
             "source": "upstream/packages/host-web/src/webWindow.ts"
           },
           {
@@ -60903,13 +61905,13 @@
           },
           {
             "arity": 1,
-            "column": 18,
+            "column": 24,
             "line": 230,
             "source": "upstream/packages/filesystem/src/filesystem.ts"
           },
           {
             "arity": 1,
-            "column": 24,
+            "column": 9,
             "line": 230,
             "source": "upstream/packages/filesystem/src/filesystem.ts"
           },
@@ -61014,7 +62016,7 @@
         "locations": [
           {
             "arity": 1,
-            "column": 18,
+            "column": 9,
             "line": 232,
             "source": "upstream/packages/filesystem/src/filesystem.ts"
           }

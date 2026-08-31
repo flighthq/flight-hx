@@ -86,9 +86,9 @@ class _Image {
                 var rejectAbort:flight._internal._Any->Void = cast _Runtime.UNDEFINED;
                 var abortPromise:flight._internal._Promise<flight._internal._Any> = cast _Runtime.UNDEFINED;
                 var onAbort:Void->Void = cast _Runtime.UNDEFINED;
-                rejectAbort = function(__unused0:flight._internal._Any):Void {
+                rejectAbort = function(__unused1:flight._internal._Any):Void { _Runtime.callValue(function(__unused0:flight._internal._Any):Void {
 
-                };
+                }, cast ([] : Array<Dynamic>)); };
                 abortPromise = flight._internal._Async.create(function(_:flight._internal._Any, reject:flight._internal._Any):Void {
                   (rejectAbort = cast (reject : Dynamic));
                 });

@@ -287,6 +287,7 @@ describe('packageNameToModule', () => {
   it('hides internal and test-helper implementation modules', () => {
     expect(sourcePathToModule('upstream/packages/signals/src/internal.ts')).toBeUndefined();
     expect(sourcePathToModule('upstream/packages/render-wgpu/src/wgpuTestHelper.ts')).toBeUndefined();
+    expect(sourcePathToModule('upstream/packages/scene2d-canvas/src/canvasTestSupport.ts')).toBeUndefined();
     expect(sourcePathToImplementationModule('upstream/packages/signals/src/internal.ts')).toBe('_Internal');
     expect(sourcePathToHaxePackage('@flighthq/signals', 'upstream/packages/signals/src/internal.ts')).toBe(
       'flight._internal',

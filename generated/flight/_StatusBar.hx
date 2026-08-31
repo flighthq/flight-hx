@@ -30,7 +30,7 @@ typedef StyleStackState__statusbar = { var applied:StatusBarInfo; var baseline:S
 
 @:noCompletion
 class _StatusBar {
-  public static function attachStatusBar(host:{ >HasUiStatusBarChange, >HasUiStatusBarInfo, }, bar:StatusBar):Void {
+  public static function attachStatusBar(host:flight._internal._Intersection2<HasUiStatusBarChange, HasUiStatusBarInfo>, bar:StatusBar):Void {
     var changeProvider:StatusBarChangeBackend = cast _Runtime.UNDEFINED;
     var infoProvider:StatusBarInfoBackend = cast _Runtime.UNDEFINED;
     var unsubscribe:Void->Void = cast _Runtime.UNDEFINED;

@@ -2792,7 +2792,7 @@ function lowerPackage(
       (file) =>
         file.endsWith('.ts') &&
         !file.endsWith('.test.ts') &&
-        (!/test(?:helper|util)/iu.test(file) || publicSourceNames.has(file)) &&
+        (!/test(?:helper|support|util)/iu.test(file) || publicSourceNames.has(file)) &&
         file !== 'index.ts',
     )
     .map((file) => path.join(directory, file))

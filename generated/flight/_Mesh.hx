@@ -1817,7 +1817,8 @@ class _Mesh {
     triangleCount = (cast getMeshGeometryTriangleCount(({ final __callArgument306:Dynamic = geometry; __callArgument306; })) : Float);
     cornerIndices = new flight._internal._UInt32Array((triangleCount * 3.0));
     {
-      var corner:MeshTriangleVertexIndices = (cast { i0: 0.0, i1: 0.0, i2: 0.0 });
+      var corner:MeshTriangleVertexIndices = cast _Runtime.UNDEFINED;
+      corner = (cast { i0: 0.0, i1: 0.0, i2: 0.0 });
       {
         var triangle:Float = 0.0;
         while ((cast ((cast triangle : Float) < (cast triangleCount : Float)) : Bool)) {

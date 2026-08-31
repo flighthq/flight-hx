@@ -101,7 +101,7 @@ class _Permissions {
   }
 
   public static function captureNotificationPermission__permission(host:Host):Null<NotificationPermissionProjectionBackend__permission> {
-    var notification:{ >HostNotificationCapabilities, @:optional var permission:Null<NotificationPermissionProjectionBackend__permission>; } = cast _Runtime.UNDEFINED;
+    var notification:flight._internal._Intersection2<HostNotificationCapabilities, { @:optional var permission:Null<NotificationPermissionProjectionBackend__permission>; }> = cast _Runtime.UNDEFINED;
     notification = (cast (cast host : Host).notification : flight._internal._Intersection2<flight._internal._IndexedAccess<Host, String>, { @:optional var permission:NotificationPermissionProjectionBackend__permission; }>);
     return cast _Runtime.coalesce((cast notification : { @:optional var permission:Null<{ >NotificationPermissionBackend, >NotificationPermissionProjectionBackend__permission, }>; }).permission, function():Dynamic return cast null);
     return cast null;

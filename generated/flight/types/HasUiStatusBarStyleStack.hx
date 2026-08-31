@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HasUiStatusBarStyleStack = { var ui:{ var statusBarColor:StatusBarColorBackend; }; };
+typedef HasUiStatusBarStyleStack = flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HasUiStatusBarColor, HasUiStatusBarInfo>, HasUiStatusBarOverlays>, HasUiStatusBarStyle>, HasUiStatusBarVisibility>;

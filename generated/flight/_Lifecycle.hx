@@ -39,7 +39,8 @@ class _Lifecycle {
         }
       } else { if ((cast ((cast !_Runtime.strictEquals(state, 'active') : Bool) && (cast _Runtime.strictEquals(previous, 'active') : Bool)) : Bool)) {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onPause]]), 1);
-        var stateBag:flight._internal._Record<String, flight._internal._Any> = (cast {  });
+        var stateBag:flight._internal._Record<String, flight._internal._Any> = cast _Runtime.UNDEFINED;
+        stateBag = (cast {  });
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[app.onSaveState], [stateBag]]), 1);
         ((cast _Lifecycle._savedState__lifecycle : flight._internal._WeakMap<AppLifecycle, flight._internal._Record<String, flight._internal._Any>>).set(app, (cast stateBag)));
       } }

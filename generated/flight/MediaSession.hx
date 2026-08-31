@@ -38,7 +38,7 @@ class MediaSession {
     return cast null;
   }
 
-  public static function destroyMediaSession(host:{ >HasMediaSession, >HasMediaSessionAction, }):Void {
+  public static function destroyMediaSession(host:flight._internal._Intersection2<HasMediaSession, HasMediaSessionAction>):Void {
     Facade_MediaSession_flight__MediaSession.destroyMediaSession(host);
   }
 

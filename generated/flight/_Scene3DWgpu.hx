@@ -3988,7 +3988,8 @@ class _Scene3DWgpu {
         flight._internal._StaticIndex.writeArray(snippets, index, snippet);
         if ((cast _Runtime.strictEquals(snippet, null) : Bool)) { index++; continue; }
         var base:Float = (index * _Scene3DWgpu.MODIFIER_FLOATS__wgpuShadedPrelude);
-        var context:WgpuModifierCompileContext = (cast { acquireTexture: function(__unused2:Texture):Float return (6.0 + textureCount++), uniformBase: base });
+        var context:WgpuModifierCompileContext = cast _Runtime.UNDEFINED;
+        context = (cast { acquireTexture: function(__unused2:Texture):Float return (6.0 + textureCount++), uniformBase: base });
         var contribution:WgpuModifierContribution = (cast snippet : WgpuModifierSnippet).contribution(({ final __callArgument1572:Dynamic = modifier; __callArgument1572; }), (cast index : Float), ({ final __callArgument1573:Dynamic = context; __callArgument1573; }));
         if ((cast !_Runtime.strictEquals((cast contribution : WgpuModifierContribution).declarations, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast declarations : flight._internal._Set<String>).add(StringTools.trim(Std.string((cast contribution : WgpuModifierContribution).declarations)))); }
         var source:String = (cast _Scene3DWgpu.delimitContribution__wgpuShadedPrelude((cast (cast contribution : WgpuModifierContribution).source : String)) : String);

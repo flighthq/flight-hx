@@ -316,7 +316,8 @@ class _Text {
     if ((cast !_Runtime.strictEquals(url, null) : Bool)) {
       var signals:Null<TextFieldSignals> = (cast (cast getNode2DRuntime(({ final __callArgument65:Dynamic = source; __callArgument65; })) : RichTextRuntime) : { var textFieldSignals:Null<TextFieldSignals>; }).textFieldSignals;
       if ((cast !_Runtime.strictEquals(signals, null) : Bool)) {
-        var event:TextFieldLinkEvent = (cast { url: url, x: x, y: y });
+        var event:TextFieldLinkEvent = cast _Runtime.UNDEFINED;
+        event = (cast { url: url, x: x, y: y });
         ((cast (cast signals : TextFieldSignals).onTextFieldLink : { var emit:TextFieldLinkEvent->Void; }).emit)(({ final __callArgument67:Dynamic = event; __callArgument67; }));
       }
     }

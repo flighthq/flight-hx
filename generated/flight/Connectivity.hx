@@ -13,7 +13,7 @@ import flight.types.HasConnectivityReachability;
 import flight.types.HasConnectivityStatus;
 
 class Connectivity {
-  public static function attachConnectivity(host:{ >HasConnectivityStatus, >HasConnectivityChange, }, connectivity:flight.types.Connectivity):Bool {
+  public static function attachConnectivity(host:flight._internal._Intersection2<HasConnectivityStatus, HasConnectivityChange>, connectivity:flight.types.Connectivity):Bool {
     return cast Facade_Connectivity_flight__Connectivity.attachConnectivity(host, connectivity);
     return cast null;
   }

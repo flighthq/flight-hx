@@ -25,7 +25,11 @@ class CoreSmoke {
 
     // Cairo alias surface: the derived Cairo-named entry points and typedefs
     // must forward to the canvas originals with reference identity.
-    final cairoResolvers:flight.types.CairoTextureResolvers = flight.Scene2DCairo.createCairoTextureResolvers();
+    final surfaceCreator:flight.types.CanvasRenderSurfaceCreator = cast {
+      createRenderSurface: function(_:Float, _:Float, _:Float):flight._internal.dom.HTMLCanvasElement return null,
+      destroyRenderSurface: function(_:flight._internal.dom.HTMLCanvasElement):Void {}
+    };
+    final cairoResolvers:flight.types.CairoTextureResolvers = flight.Scene2DCairo.createCairoTextureResolvers(surfaceCreator);
     final canvasResolvers:Dynamic = cairoResolvers;
     if (canvasResolvers == null) throw 'cairo alias returned null resolvers';
     if (flight.Scene2DCairo.defaultCairoShapeCommands != flight.Scene2DCanvas.defaultCanvasShapeCommands) {

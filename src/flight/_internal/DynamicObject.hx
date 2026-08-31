@@ -25,6 +25,14 @@ class DynamicObject {
     return [for (name in Reflect.fields(source)) [name, Reflect.field(source, name)]];
   }
 
+  public static inline function fromEntries(entries:Array<Array<Dynamic>>):Dynamic {
+    final result:Dynamic = {};
+    for (entry in entries) {
+      if (entry.length >= 2) Reflect.setField(result, Std.string(entry[0]), entry[1]);
+    }
+    return result;
+  }
+
   public static inline function create(prototype:Dynamic):Dynamic {
     #if js
     return js.Syntax.code('Object.create({0})', prototype);

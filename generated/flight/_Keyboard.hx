@@ -33,7 +33,7 @@ import flight.types.SoftKeyboardVisibilityResult;
 
 @:noCompletion
 class _Keyboard {
-  public static function attachSoftKeyboard(host:{ >HasSoftKeyboardChange, >HasSoftKeyboardInfo, }, keyboard:SoftKeyboard):flight._internal._Promise<SoftKeyboardAttachResult> {
+  public static function attachSoftKeyboard(host:flight._internal._Intersection2<HasSoftKeyboardChange, HasSoftKeyboardInfo>, keyboard:SoftKeyboard):flight._internal._Promise<SoftKeyboardAttachResult> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var change:SoftKeyboardChangeBackend = cast _Runtime.UNDEFINED;

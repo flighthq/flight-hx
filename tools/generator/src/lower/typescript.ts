@@ -409,6 +409,7 @@ export function lowerTypeScriptSource(
     domNavigatorBindingNames,
     domWindowBindingNames,
     dynamicThisCapture: undefined,
+    erasedExpressionTypeParameters: new Set(),
     externalTypes,
     externalValues,
     erasedLocalTypes,
@@ -502,10 +503,29 @@ export function lowerTypeScriptSource(
         const mutable = (statement.declarationList.flags & ts.NodeFlags.Const) === 0;
         for (const declaration of statement.declarationList.declarations) {
           if (!ts.isIdentifier(declaration.name)) unsupported(declaration.name, context, 'binding pattern declaration');
-          const initializer = declaration.initializer ? lowerExpression(declaration.initializer, context) : undefined;
-          const type = declaration.type
+          const inferred = declaration.type
             ? lowerType(declaration.type, context)
             : inferredType(declaration.name, context);
+          const erasedTypeParameters = new Set(
+            declaration.initializer &&
+              (ts.isArrowFunction(declaration.initializer) || ts.isFunctionExpression(declaration.initializer))
+              ? (declaration.initializer.typeParameters?.map((parameter) => parameter.name.text) ?? [])
+              : [],
+          );
+          const type = inferred ? eraseLocalTypeParameters(inferred, erasedTypeParameters) : undefined;
+          const loweredInitializer = declaration.initializer
+            ? lowerExpression(declaration.initializer, context)
+            : undefined;
+          const initializer =
+            declaration.initializer && loweredInitializer
+              ? adaptFunctionValueToType(
+                  declaration.initializer,
+                  loweredInitializer,
+                  context.checker?.getTypeAtLocation(declaration.name),
+                  context,
+                  type,
+                )
+              : loweredInitializer;
           widenObjectMethodArities(declaration, initializer, type, context);
           declarations.push({
             exported,
@@ -1049,6 +1069,7 @@ interface LoweringContext {
   domNavigatorBindingNames: ReadonlySet<string>;
   domWindowBindingNames: ReadonlySet<string>;
   dynamicThisCapture?: string | undefined;
+  erasedExpressionTypeParameters: ReadonlySet<string>;
   externalTypes: ReadonlySet<string>;
   externalValues: ReadonlyMap<string, { imported: string; specifier: string }>;
   erasedLocalTypes: ReadonlySet<string>;
@@ -1717,7 +1738,14 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     return lowerIntersection(
       concrete,
       concrete.some((item) => item.kind === 'named' && context.utilityAliasNames.has(item.name)) ||
-        Boolean(context.checker && node.types.some((item) => context.checker!.getTypeFromTypeNode(item).isUnion())),
+        Boolean(
+          context.checker &&
+          (node.types.some((item) => context.checker!.getTypeFromTypeNode(item).isUnion()) ||
+            checkerTypesHaveConflictingProperties(
+              node.types.map((item) => context.checker!.getTypeFromTypeNode(item)),
+              context.checker,
+            )),
+        ),
     );
   }
   if (ts.isIndexedAccessTypeNode(node)) {
@@ -1963,7 +1991,7 @@ function lowerCheckerTypeUncached(
       concrete,
       type.types.some(
         (item) => checkerTypeContainsTypeParameter(item, checker) || hostTypeIdentity(item, checker) !== undefined,
-      ),
+      ) || checkerTypesHaveConflictingProperties(type.types, checker),
     );
   }
   const hostType = hostTypeIdentity(type, checker);
@@ -2376,6 +2404,15 @@ function lowerExpressionWithTypeArguments(node: ts.ExpressionWithTypeArguments, 
   const name = node.expression.getText(context.sourceFile);
   const arguments_ = node.typeArguments?.map((argument) => lowerType(argument, context)) ?? [];
   if (standardDynamicTypes.has(name) || context.externalTypes.has(name.split('.')[0]!)) return { kind: 'dynamic' };
+  if (name === 'Partial' && context.checker) {
+    const mapped = lowerConcreteClosedMappedCheckerType(
+      context.checker.getTypeAtLocation(node),
+      node,
+      context,
+      new Set(),
+    );
+    if (mapped) return mapped;
+  }
   if (
     [
       'Exclude',
@@ -3000,11 +3037,31 @@ function typeOnlyHasFlags(
 function lowerVariables(node: ts.VariableDeclarationList, mutable: boolean, context: LoweringContext): IrVariable[] {
   return node.declarations.flatMap((declaration) => {
     if (ts.isIdentifier(declaration.name)) {
+      const erasedTypeParameters = new Set(
+        declaration.initializer &&
+          (ts.isArrowFunction(declaration.initializer) || ts.isFunctionExpression(declaration.initializer))
+          ? (declaration.initializer.typeParameters?.map((parameter) => parameter.name.text) ?? [])
+          : [],
+      );
+      const type = declaration.type ? lowerType(declaration.type, context) : inferredType(declaration.name, context);
+      const loweredInitializer = declaration.initializer
+        ? lowerExpression(declaration.initializer, context)
+        : undefined;
+      const initializer =
+        declaration.initializer && loweredInitializer
+          ? adaptFunctionValueToType(
+              declaration.initializer,
+              loweredInitializer,
+              context.checker?.getTypeAtLocation(declaration.name),
+              context,
+              type,
+            )
+          : loweredInitializer;
       return {
-        initializer: declaration.initializer ? lowerExpression(declaration.initializer, context) : undefined,
+        initializer,
         mutable,
         name: declaration.name.text,
-        type: declaration.type ? lowerType(declaration.type, context) : inferredType(declaration.name, context),
+        type: type ? eraseLocalTypeParameters(type, erasedTypeParameters) : undefined,
       };
     }
     if (!declaration.initializer) unsupported(declaration.name, context, 'uninitialized binding pattern variable');
@@ -3495,6 +3552,36 @@ function checkerTypeContainsTypeParameter(type: ts.Type, checker: ts.TypeChecker
   );
 }
 
+function checkerTypesHaveConflictingProperties(types: readonly ts.Type[], checker: ts.TypeChecker): boolean {
+  if (
+    !types.some((type) => {
+      return [type, ...checkerTypeArguments(type, checker)].some((candidate) => {
+        const name = (candidate.aliasSymbol ?? candidate.getSymbol())?.getName();
+        return name?.startsWith('Host') || name?.startsWith('Has') || name?.endsWith('Options');
+      });
+    })
+  ) {
+    return false;
+  }
+  const propertyTypes = new Map<string, string>();
+  for (const type of types) {
+    for (const property of checker.getPropertiesOfType(type)) {
+      const name = property.getName();
+      const declaration = property.valueDeclaration ?? property.declarations?.[0];
+      if (!declaration) continue;
+      const propertyType = checker.typeToString(
+        checker.getTypeOfSymbolAtLocation(property, declaration),
+        undefined,
+        ts.TypeFormatFlags.NoTruncation,
+      );
+      const previous = propertyTypes.get(name);
+      if (previous !== undefined && previous !== propertyType) return true;
+      propertyTypes.set(name, propertyType);
+    }
+  }
+  return false;
+}
+
 function isTypedStructWrite(node: ts.PropertyAccessExpression): boolean {
   const parent = node.parent;
   if (
@@ -3519,12 +3606,23 @@ function lowerExpression(node: ts.Expression, context: LoweringContext): IrExpre
     context.preserveExpressionTypes && ts.isCallExpression(node) ? context.checker?.getContextualType(node) : undefined;
   const loweredContextualType = contextualType ? lowerCheckerType(contextualType, node, context, new Set()) : undefined;
   const loweredInferredType = context.preserveExpressionTypes ? inferredType(node, context) : undefined;
-  const type =
+  const inferredExpressionType =
     context.preserveExpressionTypes && preservesExpressionType(node)
       ? loweredInferredType && loweredInferredType.kind !== 'dynamic'
         ? loweredInferredType
         : (loweredContextualType ?? loweredInferredType)
       : undefined;
+  const expressionTypeParameters =
+    ts.isArrowFunction(node) || ts.isFunctionExpression(node)
+      ? new Set([
+          ...context.erasedExpressionTypeParameters,
+          ...(node.typeParameters?.map((parameter) => parameter.name.text) ?? []),
+        ])
+      : context.erasedExpressionTypeParameters;
+  const type =
+    inferredExpressionType && expressionTypeParameters.size > 0
+      ? eraseLocalTypeParameters(inferredExpressionType, expressionTypeParameters)
+      : inferredExpressionType;
   // Anonymous object shapes are already explicit in object-expression IR and
   // on each structural member binding. Repeating their full field graph on
   // every intermediate expression makes module transforms quadratic without
@@ -3896,13 +3994,13 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     const left = lowerExpression(assignment ? unwrapAssignmentTarget(node.left) : node.left, context);
     const loweredRight = lowerExpression(node.right, context);
     const right =
-      assignment && operator === '=' && left.kind === 'property' && left.typedStructBinding
+      assignment && operator === '='
         ? adaptFunctionValueToType(
             node.right,
             loweredRight,
             context.checker?.getTypeAtLocation(node.left),
             context,
-            left.type ?? left.typedStructBinding.field.type,
+            left.kind === 'property' ? (left.type ?? left.typedStructBinding?.field.type) : left.type,
           )
         : loweredRight;
     if (assignment) return { kind: 'assignment', left, operator, right };
@@ -3925,6 +4023,7 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
   if (ts.isArrowFunction(node) || ts.isFunctionExpression(node)) {
     const previousClassThis = context.classThis;
     const previousDynamicThisCapture = context.dynamicThisCapture;
+    const previousErasedExpressionTypeParameters = context.erasedExpressionTypeParameters;
     const thisCapture = ts.isFunctionExpression(node) ? dynamicThisCapture(node, context) : undefined;
     if (ts.isFunctionExpression(node)) {
       context.classThis = false;
@@ -3932,8 +4031,24 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
     }
     try {
       const loweredParameters = lowerParameterList(node.parameters, context);
-      const parameters = padContextualFunctionParameters(node, loweredParameters.parameters, context);
+      const erasedTypeParameters = new Set(node.typeParameters?.map((parameter) => parameter.name.text) ?? []);
+      context.erasedExpressionTypeParameters = new Set([
+        ...previousErasedExpressionTypeParameters,
+        ...erasedTypeParameters,
+      ]);
+      const parameters = padContextualFunctionParameters(node, loweredParameters.parameters, context).map(
+        (parameter) => ({
+          ...parameter,
+          type: eraseLocalTypeParameters(parameter.type, erasedTypeParameters),
+        }),
+      );
       const expression = ts.isBlock(node.body) ? undefined : lowerExpression(node.body, context);
+      const loweredReturnType =
+        (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ??
+        (hasModifier(node, ts.SyntaxKind.AsyncKeyword) ? promiseOfDynamic() : undefined);
+      const returnType = loweredReturnType
+        ? eraseLocalTypeParameters(loweredReturnType, erasedTypeParameters)
+        : undefined;
       return {
         async: hasModifier(node, ts.SyntaxKind.AsyncKeyword),
         body: ts.isBlock(node.body)
@@ -3945,14 +4060,13 @@ function lowerExpressionNode(node: ts.Expression, context: LoweringContext): IrE
         kind: 'function',
         name: ts.isFunctionExpression(node) ? node.name?.text : undefined,
         parameters,
-        returns:
-          (node.type ? lowerType(node.type, context) : inferredReturnType(node, context)) ??
-          (hasModifier(node, ts.SyntaxKind.AsyncKeyword) ? promiseOfDynamic() : undefined),
+        returns: returnType,
         ...(thisCapture ? { thisCapture } : {}),
       };
     } finally {
       context.classThis = previousClassThis;
       context.dynamicThisCapture = previousDynamicThisCapture;
+      context.erasedExpressionTypeParameters = previousErasedExpressionTypeParameters;
     }
   }
   return unsupported(node, context, `expression ${ts.SyntaxKind[node.kind] ?? node.kind}`);
@@ -4092,6 +4206,7 @@ function adaptFunctionValueToType(
         ? expectedIrType.inner
         : undefined;
   const parameters: IrParameter[] = [];
+  const erasedTypeParameters = enclosingTypeParameterNames(node);
   for (const parameter of expectedParameters) {
     const actualParameter = actualParameters[parameters.length];
     const sourceParameter = actualParameter ?? parameter;
@@ -4103,7 +4218,7 @@ function adaptFunctionValueToType(
       sourceDefinedNamedType(candidate.aliasSymbol ?? candidate.getSymbol()),
     );
     const expectedIrParameter = expectedIrSignature?.parameters[parameters.length];
-    const type = expectedIrParameter
+    const rawType = expectedIrParameter
       ? expectedIrParameter
       : checkerType && (directArgumentTypeIsVisible(checkerType, context) || sourceVisible)
         ? checkerType
@@ -4113,7 +4228,9 @@ function adaptFunctionValueToType(
             declaration.getSourceFile() === context.sourceFile
           ? lowerType(declaration.type, context)
           : ({ kind: 'dynamic' } as const);
-    if (!type) return lowered;
+    if (!rawType) return lowered;
+    const parameterTypeNames = new Set([...erasedTypeParameters, ...enclosingTypeParameterNames(declaration ?? node)]);
+    const type = eraseLocalTypeParameters(rawType, parameterTypeNames);
     parameters.push({
       name: `__unused${String(context.temporaryIndex++)}`,
       optional: false,
@@ -4257,6 +4374,23 @@ function signatureParameterIsRest(parameter: ts.Symbol): boolean {
   );
 }
 
+function enclosingTypeParameterNames(node: ts.Node): ReadonlySet<string> {
+  const names = new Set<string>();
+  let current: ts.Node | undefined = node;
+  while (current) {
+    if (
+      ts.isFunctionLike(current) ||
+      ts.isClassLike(current) ||
+      ts.isInterfaceDeclaration(current) ||
+      ts.isTypeAliasDeclaration(current)
+    ) {
+      current.typeParameters?.forEach((parameter) => names.add(parameter.name.text));
+    }
+    current = current.parent;
+  }
+  return names;
+}
+
 function padContextualFunctionParameters(
   node: ts.ArrowFunction | ts.FunctionExpression,
   parameters: IrParameter[],
@@ -4273,9 +4407,18 @@ function padContextualFunctionParameters(
     return parameters;
   }
   const padded = [...parameters];
+  const erasedTypeParameters = enclosingTypeParameterNames(node);
   for (let index = parameters.length; index < contextualParameters.length; index++) {
     const parameter = contextualParameters[index]!;
-    const type = lowerCheckerType(checker.getTypeOfSymbolAtLocation(parameter, node), node, context, new Set());
+    const declaration = parameter.valueDeclaration ?? parameter.declarations?.[0];
+    const checkerType = checker.getTypeOfSymbolAtLocation(parameter, node);
+    const loweredType = lowerCheckerType(checkerType, node, context, new Set());
+    const parameterTypeNames = new Set([...erasedTypeParameters, ...enclosingTypeParameterNames(declaration ?? node)]);
+    const type = checkerTypeContainsTypeParameter(checkerType, checker)
+      ? { kind: 'dynamic' as const, reason: 'source-unknown' as const }
+      : loweredType
+        ? eraseLocalTypeParameters(loweredType, parameterTypeNames)
+        : undefined;
     if (!type) return parameters;
     padded.push({
       name: `__unused${String(context.temporaryIndex++)}`,
@@ -4345,6 +4488,9 @@ function lowerIdentifier(node: ts.Identifier, context: LoweringContext, locallyB
   if (name === 'NaN') return { kind: 'property', name: 'NaN', object: { kind: 'identifier', name: 'HxMath' } };
   if (name === 'Infinity') {
     return { kind: 'property', name: 'POSITIVE_INFINITY', object: { kind: 'identifier', name: 'HxMath' } };
+  }
+  if (name === 'queueMicrotask' && !locallyBound) {
+    return { kind: 'property', name: 'queueMicrotask', object: { kind: 'identifier', name: '_Runtime' } };
   }
   const external = context.externalValues.get(name);
   if (external) {

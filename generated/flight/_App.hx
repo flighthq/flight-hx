@@ -65,7 +65,7 @@ import flight.types.MenuItemTemplate;
 import flight.types.Signal;
 import flight.types.SignalData;
 
-typedef HasAllAppEvents__app = { >HasAppActivate, >HasAppAllWindowsClosed, >HasAppOpenFile, >HasAppQuitRequest, >HasAppReady, >HasAppSecondInstance, };
+typedef HasAllAppEvents__app = flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<flight._internal._Intersection2<HasAppActivate, HasAppAllWindowsClosed>, HasAppOpenFile>, HasAppQuitRequest>, HasAppReady>, HasAppSecondInstance>;
 
 typedef AppSubscriptions__app = { @:optional var activate:Void->Void; @:optional var allWindowsClosed:Void->Void; @:optional var openFile:Void->Void; @:optional var quitRequest:Void->Void; @:optional var ready:Void->Void; @:optional var secondInstance:Void->Void; };
 

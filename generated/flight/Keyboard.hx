@@ -21,7 +21,7 @@ import flight.types.SoftKeyboardStyleKind;
 import flight.types.SoftKeyboardVisibilityResult;
 
 class Keyboard {
-  public static function attachSoftKeyboard(host:{ >HasSoftKeyboardChange, >HasSoftKeyboardInfo, }, keyboard:SoftKeyboard):flight._internal._Promise<SoftKeyboardAttachResult> {
+  public static function attachSoftKeyboard(host:flight._internal._Intersection2<HasSoftKeyboardChange, HasSoftKeyboardInfo>, keyboard:SoftKeyboard):flight._internal._Promise<SoftKeyboardAttachResult> {
     return cast Facade_Keyboard_flight__Keyboard.attachSoftKeyboard(host, keyboard);
     return cast null;
   }

@@ -308,7 +308,8 @@ class _Tray {
       var signal:Null<Signal<Event->Void>> = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural93 = backend; __structural93 == null ? _Runtime.UNDEFINED : (cast __structural93 : { var getSignal:TrayIcon->Null<Signal<Event->Void>>; }).getSignal; }), cast ([tray] : Array<Dynamic>)), function():Dynamic return cast null);
       if ((cast _Runtime.strictEquals(signal, null) : Bool)) { return cast { outcome: 'tray-destroyed' }; }
       (#if js _Runtime.callValue(connectSignal, cast ([(cast signal : Dynamic), (cast listener : Dynamic)] : Array<Dynamic>)) #else connectSignal((cast signal : Dynamic), (cast listener : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-      var release:TrayReleaseRuntime__tray = (cast { released: false, release: function():flight._internal._Promise<TrayReleaseResult> {
+      var release:TrayReleaseRuntime__tray = cast _Runtime.UNDEFINED;
+      release = (cast { released: false, release: function():flight._internal._Promise<TrayReleaseResult> {
         return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
           if ((cast (cast release : TrayReleaseRuntime__tray).released : Bool)) { return cast { outcome: 'already-released' }; }
           try {

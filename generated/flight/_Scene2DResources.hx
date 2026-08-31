@@ -191,7 +191,7 @@ class _Scene2DResources {
     );
   }
 
-  public static final rejectExternalAudioResource__loadScene2DAudioResources:AudioResourceFetch = (cast function(__unused4:ExternalAudioResourceReference, __unused5:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<AudioResource>> return flight._internal._Async.resolve(null));
+  public static final rejectExternalAudioResource__loadScene2DAudioResources:AudioResourceFetch = (cast function(__unused6:ExternalAudioResourceReference, __unused7:flight._internal.dom.AbortSignal):flight._internal._Promise<flight._internal._Any> return _Runtime.callValue(function(__unused4:ExternalAudioResourceReference, __unused5:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<AudioResource>> return flight._internal._Async.resolve(null), cast ([] : Array<Dynamic>)));
 
   public static function loadScene2DImageResources(document:Scene2DDocument, ?options:LoadScene2DImageResourcesOptions):flight._internal._Promise<Scene2DImageResources> {
     return cast flight._internal._Async.finishFlow(
@@ -271,7 +271,7 @@ class _Scene2DResources {
     }
   }
 
-  public static final rejectExternalImageResource__loadScene2DImageResources:ImageResourceFetch = (cast function(__unused4:ExternalImageResourceReference, __unused5:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<Image>> return flight._internal._Async.resolve(null));
+  public static final rejectExternalImageResource__loadScene2DImageResources:ImageResourceFetch = (cast function(__unused6:ExternalImageResourceReference, __unused7:flight._internal.dom.AbortSignal):flight._internal._Promise<flight._internal._Any> return _Runtime.callValue(function(__unused4:ExternalImageResourceReference, __unused5:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<Image>> return flight._internal._Async.resolve(null), cast ([] : Array<Dynamic>)));
 
   public static function resolveScene2DResources(document:Scene2DDocument, ?options:ResolveScene2DResourcesOptions):Scene2DResources {
     var resolved:flight._internal._IndexedAccess<Scene2DResources, String> = cast _Runtime.UNDEFINED;

@@ -1616,15 +1616,6 @@
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 1,
-        "standard-toolkit-boundary": 2
-      },
-      "module": "flight._EffectsCanvas",
-      "source": "upstream/packages/effects-canvas/src/canvasEffectTestSupport.ts",
-      "total": 3
-    },
-    {
-      "byReason": {
         "standard-toolkit-boundary": 23
       },
       "module": "flight._EffectsCanvas",
@@ -3364,13 +3355,13 @@
       "byReason": {
         "source-any": 7,
         "source-null": 10,
-        "source-unknown": 14,
+        "source-unknown": 21,
         "standard-toolkit-boundary": 19,
         "unclassified": 1
       },
       "module": "flight._HostElectron",
       "source": "upstream/packages/host-electron/src/electronStorage.ts",
-      "total": 51
+      "total": 58
     },
     {
       "byReason": {
@@ -3503,13 +3494,12 @@
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 2,
         "source-any": 12,
         "standard-toolkit-boundary": 15
       },
       "module": "flight._HostWeb",
       "source": "upstream/packages/host-web/src/webApp.ts",
-      "total": 29
+      "total": 27
     },
     {
       "byReason": {
@@ -3655,11 +3645,11 @@
     {
       "byReason": {
         "source-null": 8,
-        "standard-toolkit-boundary": 9
+        "standard-toolkit-boundary": 10
       },
       "module": "flight._HostWeb",
       "source": "upstream/packages/host-web/src/webHost.ts",
-      "total": 17
+      "total": 18
     },
     {
       "byReason": {
@@ -3864,12 +3854,12 @@
         "external-toolkit-boundary": 2,
         "source-any": 1,
         "source-never": 2,
-        "source-unknown": 3,
+        "source-unknown": 4,
         "standard-toolkit-boundary": 31
       },
       "module": "flight._Image",
       "source": "upstream/packages/image/src/imageBackend.ts",
-      "total": 39
+      "total": 40
     },
     {
       "byReason": {
@@ -4229,13 +4219,13 @@
         "source-any": 6,
         "source-never": 3,
         "source-undefined": 1,
-        "source-unknown": 65,
+        "source-unknown": 66,
         "standard-toolkit-boundary": 77,
         "unclassified": 1
       },
       "module": "flight._Loader",
       "source": "upstream/packages/loader/src/resourceLoader.ts",
-      "total": 153
+      "total": 154
     },
     {
       "byReason": {
@@ -4614,12 +4604,12 @@
     },
     {
       "byReason": {
-        "source-unknown": 3,
+        "source-unknown": 4,
         "standard-toolkit-boundary": 15
       },
       "module": "flight._Midi",
       "source": "upstream/packages/midi/src/midiSubscription.ts",
-      "total": 18
+      "total": 19
     },
     {
       "byReason": {
@@ -6656,15 +6646,6 @@
     },
     {
       "byReason": {
-        "external-toolkit-boundary": 1,
-        "standard-toolkit-boundary": 2
-      },
-      "module": "flight._Scene2DCanvas",
-      "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts",
-      "total": 3
-    },
-    {
-      "byReason": {
         "standard-toolkit-boundary": 16
       },
       "module": "flight._Scene2DCanvas",
@@ -6930,13 +6911,13 @@
     {
       "byReason": {
         "source-any": 11,
-        "source-unknown": 85,
+        "source-unknown": 86,
         "standard-toolkit-boundary": 183,
         "unclassified": 2
       },
       "module": "flight._Scene2DFormats",
       "source": "upstream/packages/scene2d-formats/src/lottieDocument.ts",
-      "total": 281
+      "total": 282
     },
     {
       "byReason": {
@@ -7289,21 +7270,21 @@
     },
     {
       "byReason": {
-        "source-null": 2,
+        "source-null": 3,
         "standard-toolkit-boundary": 8
       },
       "module": "flight._Scene2DResources",
       "source": "upstream/packages/scene2d-resources/src/loadScene2DAudioResources.ts",
-      "total": 10
+      "total": 11
     },
     {
       "byReason": {
-        "source-null": 2,
+        "source-null": 3,
         "standard-toolkit-boundary": 8
       },
       "module": "flight._Scene2DResources",
       "source": "upstream/packages/scene2d-resources/src/loadScene2DImageResources.ts",
-      "total": 10
+      "total": 11
     },
     {
       "byReason": {
@@ -12014,17 +11995,17 @@
   "schemaVersion": 1,
   "summary": {
     "byReason": {
-      "external-toolkit-boundary": 602,
+      "external-toolkit-boundary": 598,
       "source-any": 1168,
       "source-never": 143,
-      "source-null": 204,
+      "source-null": 206,
       "source-undefined": 532,
-      "source-unknown": 4468,
-      "standard-toolkit-boundary": 21584,
+      "source-unknown": 4479,
+      "standard-toolkit-boundary": 21581,
       "unclassified": 496
     },
     "checkerKnownUnrepresentable": 0,
-    "modules": 1414,
-    "total": 29197
+    "modules": 1412,
+    "total": 29203
   }
 }

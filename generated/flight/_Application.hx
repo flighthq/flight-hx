@@ -243,7 +243,7 @@ class _Application {
     ((cast _Application._mainWindows__application : flight._internal._WeakMap<Application, ApplicationWindow>).set(app, (cast win)));
   }
 
-  public static function startApplicationLoop(host:{ >HasAppLoop, >HasAppVisibilityQuery, }, app:Application, ?options:ApplicationLoopOptions):Void {
+  public static function startApplicationLoop(host:flight._internal._Intersection2<HasAppLoop, HasAppVisibilityQuery>, app:Application, ?options:ApplicationLoopOptions):Void {
     if (options == null) options = cast ({  } : Dynamic);
     var tick:Float->Void = cast _Runtime.UNDEFINED;
     var observers:flight._internal._Map<flight._internal._Symbol, Void->Void> = cast _Runtime.UNDEFINED;

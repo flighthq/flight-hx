@@ -568,7 +568,8 @@ class SceneDocumentYamlSubsetParser__sceneDocumentYamlSubset {
     token = flight._internal._StaticIndex.readArray(tokens, start);
     if ((cast _Runtime.strictEquals(token, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast _SceneDocument.PARSE_FAILURE__sceneDocumentYamlSubset; }
     if ((cast _Runtime.strictEquals((cast token : SceneDocumentYamlSubsetToken__sceneDocumentYamlSubset).kind, 'flow-mapping-start') : Bool)) {
-      var cursor:{ var index:Float; } = (cast { index: start });
+      var cursor:{ var index:Float; } = cast _Runtime.UNDEFINED;
+      cursor = (cast { index: start });
       var value:SceneDocumentYamlSubsetParseValue__sceneDocumentYamlSubset = (cast this : SceneDocumentYamlSubsetParser__sceneDocumentYamlSubset).parseFlowMapping(tokens, cursor, depth);
       if ((cast _Runtime.strictEquals(value, _SceneDocument.PARSE_FAILURE__sceneDocumentYamlSubset) : Bool)) { return cast _SceneDocument.PARSE_FAILURE__sceneDocumentYamlSubset; }
       if ((cast !_Runtime.strictEquals((cast cursor : { var index:Float; }).index, _Runtime.field(tokens, 'length')) : Bool)) {

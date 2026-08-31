@@ -89,11 +89,10 @@ class RuntimeToolkitSmoke {
     if (flight._internal._URL.resolveObjectURL(objectUrl) != null) throw 'portable object URL revocation failed';
     final parsedUrl:flight._internal._URL = _Runtime.construct(_HostValueLut.get('URL'), ['HTTPS://Example.com/path']);
     if (parsedUrl.protocol != 'https:' || parsedUrl.origin != 'https://example.com') throw 'portable URL parsing failed';
-    flight.Shell.setShellUrlSchemeAllowlist(['https']);
-    if (!flight.Shell.isShellUrlAllowed('https://example.com') || flight.Shell.isShellUrlAllowed('file:///tmp/example')) {
+    final shellPolicy:flight.types.ShellExternalUrlPolicy = {allowedSchemes: ['https']};
+    if (!flight.Shell.isShellUrlAllowed('https://example.com', shellPolicy) || flight.Shell.isShellUrlAllowed('file:///tmp/example', shellPolicy)) {
       throw 'portable URL scheme allowlist failed';
     }
-    flight.Shell.setShellUrlSchemeAllowlist(null);
 
     final controller:flight._internal.dom.AbortController = _Runtime.construct(_HostValueLut.get('AbortController'), []);
     var abortCalls = 0;
@@ -115,7 +114,11 @@ class RuntimeToolkitSmoke {
 
     final left:flight._internal.dom.AbortController = _Runtime.construct(_HostValueLut.get('AbortController'), []);
     final right:flight._internal.dom.AbortController = _Runtime.construct(_HostValueLut.get('AbortController'), []);
-    final combined = flight._Connectivity.anyAbortSignal__connectivity(left.signal, right.signal);
+    final combined:flight._internal.dom.AbortSignal = _Runtime.callProperty(
+      _HostValueLut.get('AbortSignal'),
+      'any',
+      [[left.signal, right.signal]]
+    );
     right.abort('combined');
     if (!combined.aborted || combined.reason != 'combined') {
       throw 'portable AbortSignal.any failed: aborted=' + combined.aborted + ', reason=' + Std.string(combined.reason);
