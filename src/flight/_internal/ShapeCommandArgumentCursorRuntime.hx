@@ -2,6 +2,10 @@ package flight._internal;
 
 import flight.types.ShapeCommandToken;
 
+// @:keep — generated shape-bounds code reaches getArgument only via dynamic
+// dispatch (_Runtime.callProperty), so DCE must not strip it (matches the
+// @:keep on the other reflectively-reached _internal runtime classes).
+@:keep
 @:noCompletion
 class ShapeCommandArgumentCursorRuntime {
   public var argumentCount:Float;
