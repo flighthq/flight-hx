@@ -58,6 +58,7 @@ class Main extends Application {
         backgroundColor: 0x1a1a2eff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
+      enableFlightDiagnostics(renderState);
       registerRenderer(renderState, TextLabelKind, defaultCanvasTextLabelRenderer);
       registerRenderer(renderState, RichTextKind, defaultCanvasRichTextRenderer);
       registerCanvasImageTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
@@ -70,6 +71,7 @@ class Main extends Application {
         backgroundColor: 0x1a1a2eff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
+      enableFlightDiagnostics(renderState);
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, TextLabelKind, defaultGlTextLabelRenderer);

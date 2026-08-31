@@ -95,6 +95,7 @@ class Main extends Application {
         backgroundColor: 0x0a0a14ff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
+      enableFlightDiagnostics(renderState);
       registerRenderer(renderState, ShapeKind, defaultCanvasShapeRenderer);
       registerRenderer(renderState, TextLabelKind, defaultCanvasTextLabelRenderer);
       registerCanvasShapeCommands(renderState, defaultCanvasShapeCommands);
@@ -108,6 +109,7 @@ class Main extends Application {
         backgroundColor: 0x0a0a14ff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
+      enableFlightDiagnostics(renderState);
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);

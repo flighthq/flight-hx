@@ -66,6 +66,7 @@ class Main extends Application {
       pixelRatio: window.scale,
       backgroundColor: 0x1a1c24ff,
     });
+    enableFlightDiagnostics(renderState);
     registerGlStandardPbrMaterial(renderState);
 
     pipeline = createGlRenderEffectPipeline(renderState, {

@@ -55,6 +55,7 @@ class Main extends Application {
         backgroundColor: 0xf0f0f0ff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
+      enableFlightDiagnostics(renderState);
       registerRenderer(renderState, SpriteKind, defaultCanvasSpriteRenderer);
       registerCanvasShapeCommands(renderState, defaultCanvasShapeCommands);
       registerCanvasImageTextureResolver(getCanvasRenderStateTextureResolvers(renderState));
@@ -67,6 +68,7 @@ class Main extends Application {
         backgroundColor: 0xf0f0f0ff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
+      enableFlightDiagnostics(renderState);
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, SpriteKind, defaultGlSpriteRenderer);

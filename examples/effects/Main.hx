@@ -49,6 +49,7 @@ class Main extends Application {
         pixelRatio: window.scale,
         backgroundColor: 0x0a0c14ff,
       });
+      enableFlightDiagnostics(renderState);
       registerRenderer(renderState, ShapeKind, defaultCanvasShapeRenderer);
       registerCanvasShapeCommands(renderState, defaultCanvasShapeCommands);
       registerCanvasBloomEffect(renderState);
@@ -62,6 +63,7 @@ class Main extends Application {
         pixelRatio: window.scale,
         backgroundColor: 0x0a0c14ff,
       });
+      enableFlightDiagnostics(renderState);
       registerGlStandardMaterial(renderState);
       registerStandardGlTextureResolvers(renderState);
       registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);
