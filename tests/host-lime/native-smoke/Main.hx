@@ -119,6 +119,10 @@ class Main extends Application {
         format: 'rgba16f',
       });
       assert(rgba16fTarget != null, 'native rgba16f render-target creation succeeds');
+      WebGl2Backend.bindFramebuffer(renderState.gl, WebGl2Backend.FRAMEBUFFER, (cast rgba16fTarget).framebuffer);
+      assert(WebGl2Backend.checkFramebufferStatus(renderState.gl, WebGl2Backend.FRAMEBUFFER) == WebGl2Backend.FRAMEBUFFER_COMPLETE,
+        'native rgba16f render target is framebuffer-complete');
+      WebGl2Backend.bindFramebuffer(renderState.gl, WebGl2Backend.FRAMEBUFFER, null);
       flight.RenderGl.destroyGlRenderTarget(renderState, cast rgba16fTarget);
 
       // A 3D draw can leave the native window's depth buffer populated before the effect pipeline
@@ -137,6 +141,26 @@ class Main extends Application {
       assert(GL.getError() == GL.NO_ERROR, 'native effect-pipeline present completes without a GL error');
       assert(pixel.get(0) == 0 && pixel.get(1) == 255 && pixel.get(2) == 0 && pixel.get(3) == 255,
         'native effect-pipeline present ignores stale window depth');
+
+      // Exercise real registered effect runners, shader programs, and scratch targets rather than
+      // treating an empty pipeline present as evidence that post-processing works.
+      flight.EffectsGl.registerGlBloomEffect(renderState);
+      flight.EffectsGl.registerGlVignetteEffect(renderState);
+      final realEffectPipeline = flight.EffectsGl.createGlRenderEffectPipeline(renderState, {format: 'rgba16f'});
+      flight.EffectsGl.beginGlRenderEffectPipeline(renderState, realEffectPipeline);
+      flight.RenderGl.renderGlBackground(renderState);
+      final realEffects:Array<flight.types.RenderEffect> = [
+        cast flight.Effects.createBloomEffect({threshold: 0.1, intensity: 0.2, radius: 2}),
+        cast flight.Effects.createVignetteEffect({intensity: 1, radius: 0.5, softness: 0.25, color: 0x000000ff}),
+      ];
+      flight.EffectsGl.endGlRenderEffectPipeline(renderState, realEffectPipeline, cast realEffects);
+      GL.finish();
+      GL.readPixels(Std.int(window.width / 2), Std.int(window.height / 2), 1, 1, GL.RGBA, GL.UNSIGNED_BYTE, pixel);
+      final centerGreen = pixel.get(1);
+      GL.readPixels(0, 0, 1, 1, GL.RGBA, GL.UNSIGNED_BYTE, pixel);
+      assert(GL.getError() == GL.NO_ERROR, 'native bloom and vignette passes complete without a GL error');
+      assert(centerGreen > 200 && pixel.get(1) < 32,
+        'native bloom and vignette visibly preserve the center and darken the edge');
       flight.RenderGl.destroyGlRenderState(renderState);
 
       assert(flight.Application.closeWindow(cast host, attachedWindow), 'Flight detaches the host-owned window');

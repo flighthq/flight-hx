@@ -222,6 +222,8 @@ class WebGl2Backend {
   // currently uses so DOM-source uploads can apply the conversion on CPU and
   // state brackets can read it without sending an invalid enum to the driver.
   static final nativeUnpackPremultiplyAlpha = new haxe.ds.ObjectMap<Dynamic, Bool>();
+  static final nativeFloatColorBufferSupport = new haxe.ds.ObjectMap<Dynamic, Bool>();
+  static final nativeFloatColorBufferExtension:Dynamic = {};
   #end
 
   #if !js
@@ -677,22 +679,51 @@ class WebGl2Backend {
     final extension = gl.getExtension(name);
     #if (lime && !js)
     // Lime enumerates native extensions through the legacy GL_EXTENSIONS
-    // string, which is empty on desktop core profiles. Float color targets
-    // are core in desktop OpenGL 3+, so expose the WebGL capability marker
-    // that the generated format policy expects there. OpenGL ES continues to
-    // require Lime's real EXT_color_buffer_float result.
+    // string, which is empty on desktop core profiles. Probe the storage that
+    // Flight actually allocates instead of inferring renderability from the GL
+    // version: compatibility contexts and drivers can expose the enum while
+    // rejecting the framebuffer. OpenGL ES continues to require Lime's real
+    // EXT_color_buffer_float result.
     final nativeGl:Dynamic = gl;
     if (
       extension == null &&
       name == 'EXT_color_buffer_float' &&
       Reflect.field(nativeGl, 'type') == 'opengl' &&
-      Std.int(Reflect.field(nativeGl, 'version')) >= 3
+      supportsNativeFloatColorBuffer(gl)
     ) {
-      return {};
+      return nativeFloatColorBufferExtension;
     }
     #end
     return extension;
   }
+
+  #if (lime && !js)
+  static function supportsNativeFloatColorBuffer(gl:GlContext):Bool {
+    final key:Dynamic = cast gl;
+    if (nativeFloatColorBufferSupport.exists(key)) return nativeFloatColorBufferSupport.get(key);
+
+    final previousFramebuffer:Null<GlFramebuffer> = cast gl.getParameter(FRAMEBUFFER_BINDING);
+    final previousTexture:Null<GlTexture> = cast gl.getParameter(TEXTURE_BINDING_2D);
+    final framebuffer = createFramebuffer(gl);
+    final texture = createTexture(gl);
+
+    bindTexture(gl, TEXTURE_2D, texture);
+    texImage2D(gl, TEXTURE_2D, 0, RGBA16F, 1, 1, 0, RGBA, HALF_FLOAT, null);
+    texParameteri(gl, TEXTURE_2D, TEXTURE_MIN_FILTER, NEAREST);
+    texParameteri(gl, TEXTURE_2D, TEXTURE_MAG_FILTER, NEAREST);
+    bindFramebuffer(gl, FRAMEBUFFER, framebuffer);
+    framebufferTexture2D(gl, FRAMEBUFFER, COLOR_ATTACHMENT0, TEXTURE_2D, texture, 0);
+    final supported = checkFramebufferStatus(gl, FRAMEBUFFER) == FRAMEBUFFER_COMPLETE;
+
+    bindFramebuffer(gl, FRAMEBUFFER, previousFramebuffer);
+    bindTexture(gl, TEXTURE_2D, previousTexture);
+    deleteFramebuffer(gl, framebuffer);
+    deleteTexture(gl, texture);
+
+    nativeFloatColorBufferSupport.set(key, supported);
+    return supported;
+  }
+  #end
 
   public static inline function getParameter(gl:GlContext, pname:Float):Dynamic {
     #if js

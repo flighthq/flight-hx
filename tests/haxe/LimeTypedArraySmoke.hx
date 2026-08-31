@@ -52,6 +52,35 @@ class LimeTypedArraySmoke {
     }
     if (gl.shader.indexOf('void main() {}') < 0) throw 'native shader source lost GLSL';
 
+    final extension = WebGl2Backend.getExtension(gl, 'EXT_color_buffer_float');
+    if (extension == null) throw 'complete RGBA16F framebuffer was not exposed';
+    if (WebGl2Backend.getExtension(gl, 'EXT_color_buffer_float') != extension) throw 'float extension marker identity';
+    if (gl.createdFramebuffers != 1) throw 'float framebuffer support was not cached';
+    if (gl.drawFramebuffer != gl.originalDrawFramebuffer) throw 'float probe changed framebuffer binding';
+    if (gl.texture != gl.originalTexture) throw 'float probe changed texture binding';
+
+    final incompleteGl = new FakeGl();
+    incompleteGl.framebufferStatus = 36054;
+    if (WebGl2Backend.getExtension(incompleteGl, 'EXT_color_buffer_float') != null) {
+      throw 'incomplete RGBA16F framebuffer was exposed';
+    }
+    if (WebGl2Backend.getExtension(incompleteGl, 'EXT_color_buffer_float') != null || incompleteGl.createdFramebuffers != 1) {
+      throw 'negative float framebuffer support was not cached';
+    }
+
+    final esGl = new FakeGl();
+    esGl.type = 'opengles';
+    if (WebGl2Backend.getExtension(esGl, 'EXT_color_buffer_float') != null || esGl.createdFramebuffers != 0) {
+      throw 'OpenGL ES bypassed its real extension result';
+    }
+
+    final extensionGl = new FakeGl();
+    extensionGl.extension = {name: 'real extension'};
+    if (WebGl2Backend.getExtension(extensionGl, 'EXT_color_buffer_float') != extensionGl.extension
+      || extensionGl.createdFramebuffers != 0) {
+      throw 'real float extension was replaced by a probe';
+    }
+
     gl.type = 'opengles';
     WebGl2Backend.shaderSource(gl, null, '#version 300 es\nprecision highp float;');
     if (!StringTools.startsWith(gl.shader, '#version 300 es\n')) throw 'ES shader changed';
@@ -59,17 +88,76 @@ class LimeTypedArraySmoke {
 }
 
 class FakeGl {
+  public final originalDrawFramebuffer:Dynamic = {name: 'draw'};
+  public final originalReadFramebuffer:Dynamic = {name: 'read'};
+  public final originalTexture:Dynamic = {name: 'texture'};
+  public var createdFramebuffers = 0;
+  public var drawFramebuffer:Dynamic;
+  public var extension:Dynamic;
+  public var framebufferStatus = 36053;
+  public var readFramebuffer:Dynamic;
   public var type = 'opengl';
+  public var texture:Dynamic;
   public var upload:Dynamic;
   public var shader:String;
 
-  public function new() {}
+  public function new() {
+    drawFramebuffer = originalDrawFramebuffer;
+    readFramebuffer = originalReadFramebuffer;
+    texture = originalTexture;
+  }
+
+  public function bindFramebuffer(target:Int, framebuffer:Dynamic):Void {
+    if (target == 36160 || target == 36009) drawFramebuffer = framebuffer;
+    if (target == 36160 || target == 36008) readFramebuffer = framebuffer;
+  }
+
+  public function bindTexture(_target:Int, texture:Dynamic):Void {
+    this.texture = texture;
+  }
 
   public function bufferData(target:Dynamic, data:Dynamic, usage:Dynamic):Void {
     upload = data;
   }
 
+  public function checkFramebufferStatus(_target:Int):Int {
+    return framebufferStatus;
+  }
+
+  public function createFramebuffer():Dynamic {
+    createdFramebuffers++;
+    return {name: 'probe framebuffer'};
+  }
+
+  public function createTexture():Dynamic {
+    return {name: 'probe texture'};
+  }
+
+  public function deleteFramebuffer(_framebuffer:Dynamic):Void {}
+
+  public function deleteTexture(_texture:Dynamic):Void {}
+
+  public function framebufferTexture2D(_target:Int, _attachment:Int, _textarget:Int, _texture:Dynamic, _level:Int):Void {}
+
+  public function getExtension(_name:String):Dynamic {
+    return extension;
+  }
+
+  public function getParameter(parameter:Int):Dynamic {
+    return switch (parameter) {
+      case 36006: drawFramebuffer;
+      case 36010: readFramebuffer;
+      case 32873: texture;
+      default: null;
+    }
+  }
+
   public function shaderSource(shader:Dynamic, source:String):Void {
     this.shader = source;
   }
+
+  public function texImage2D(_target:Int, _level:Int, _internalformat:Int, _width:Int, _height:Int, _border:Int,
+      _format:Int, _type:Int, _pixels:Dynamic):Void {}
+
+  public function texParameteri(_target:Int, _pname:Int, _param:Int):Void {}
 }
