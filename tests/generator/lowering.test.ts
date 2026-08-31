@@ -48,6 +48,32 @@ function typedSource(
 }
 
 describe('TypeScript lowering and Haxe emission', () => {
+  it('orders static fields used through eagerly called helpers before their consumers', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/sample/src/pipeline.ts',
+      `
+        export function buildPipeline(): string {
+          return renderer;
+        }
+        export const pipeline = buildPipeline();
+        export const renderer = 'ready';
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/sample', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'PipelineFixture',
+      packageName: '@flighthq/sample',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output.indexOf('static final renderer')).toBeLessThan(output.indexOf('static final pipeline'));
+  });
+
   it('flattens nested anonymous inheritance before Haxe type emission', () => {
     const output = emitType({
       extends: [

@@ -368,17 +368,49 @@ function emitDeclarationInitializer(type: IrType | undefined, initializer: IrExp
  * combines many TypeScript source modules, so their lexical file order can
  * place a field before another field used by its initializer. Keep functions
  * in their existing slots, but stably topologically order static variables by
- * the module variables referenced while their initializer is evaluated.
+ * the module variables referenced while their initializer is evaluated,
+ * including through local helper functions called eagerly by that initializer.
  */
 function orderValueDeclarations(
   declarations: Array<Extract<IrDeclaration, { kind: 'function' | 'variable' }>>,
 ): Array<Extract<IrDeclaration, { kind: 'function' | 'variable' }>> {
   const variables = declarations.filter((declaration) => declaration.kind === 'variable');
   const variablesByName = new Map(variables.map((declaration) => [declaration.name, declaration]));
+  const functionsByName = new Map(
+    declarations
+      .filter((declaration) => declaration.kind === 'function')
+      .map((declaration) => [declaration.name, declaration]),
+  );
+  const functionNames = new Set(functionsByName.keys());
+  const functionReferences = new Map(
+    [...functionsByName].map(([name, declaration]) => {
+      const identifiers = new Set<string>();
+      const calls = new Set<string>();
+      collectEvaluatedIdentifiers(declaration.body, identifiers, calls, functionNames);
+      return [name, { calls, identifiers }] as const;
+    }),
+  );
+  let referencesChanged = true;
+  while (referencesChanged) {
+    referencesChanged = false;
+    for (const references of functionReferences.values()) {
+      for (const calledName of references.calls) {
+        for (const identifier of functionReferences.get(calledName)?.identifiers ?? []) {
+          if (references.identifiers.has(identifier)) continue;
+          references.identifiers.add(identifier);
+          referencesChanged = true;
+        }
+      }
+    }
+  }
   const dependencies = new Map(
     variables.map((declaration) => {
       const names = new Set<string>();
-      collectInitializerIdentifiers(declaration.initializer, names);
+      const calls = new Set<string>();
+      collectEvaluatedIdentifiers(declaration.initializer, names, calls, functionNames);
+      for (const calledName of calls) {
+        for (const identifier of functionReferences.get(calledName)?.identifiers ?? []) names.add(identifier);
+      }
       return [
         declaration.name,
         new Set([...names].filter((name) => name !== declaration.name && variablesByName.has(name))),
@@ -405,32 +437,39 @@ function orderValueDeclarations(
   return declarations.map((declaration) => (declaration.kind === 'variable' ? ordered[variableIndex++]! : declaration));
 }
 
-function collectInitializerIdentifiers(expression: IrExpression | undefined, output: Set<string>): void {
-  if (!expression || expression.kind === 'function') return;
-  if (expression.kind === 'identifier') {
-    output.add(expression.name);
+function collectEvaluatedIdentifiers(
+  value: unknown,
+  output: Set<string>,
+  calledFunctions: Set<string>,
+  functionNames: ReadonlySet<string>,
+): void {
+  if (!value) return;
+  if (Array.isArray(value)) {
+    for (const item of value) collectEvaluatedIdentifiers(item, output, calledFunctions, functionNames);
     return;
   }
-  for (const value of Object.values(expression)) {
-    if (Array.isArray(value)) {
-      for (const item of value) {
-        if (item && typeof item === 'object') {
-          const record = item as Record<string, unknown>;
-          if (record.kind === 'function') continue;
-          if (record.kind === 'property' || record.kind === 'computedProperty') {
-            collectInitializerIdentifiers(record.value as IrExpression, output);
-            if (record.kind === 'computedProperty') collectInitializerIdentifiers(record.key as IrExpression, output);
-          } else if (record.kind === 'spread') {
-            collectInitializerIdentifiers(record.expression as IrExpression, output);
-          } else {
-            collectInitializerIdentifiers(item as IrExpression, output);
-          }
-        }
-      }
-    } else if (value && typeof value === 'object') {
-      collectInitializerIdentifiers(value as IrExpression, output);
-    }
+  if (typeof value !== 'object') return;
+
+  const record = value as Record<string, unknown>;
+  if (record.kind === 'identifier') {
+    output.add(record.name as string);
+    return;
   }
+  if (record.kind === 'function') return;
+  if (record.kind === 'call') {
+    const call = value as Extract<IrExpression, { kind: 'call' }>;
+    collectEvaluatedIdentifiers(call.callee, output, calledFunctions, functionNames);
+    collectEvaluatedIdentifiers(call.arguments, output, calledFunctions, functionNames);
+    if (call.callee.kind === 'identifier' && functionNames.has(call.callee.name)) {
+      calledFunctions.add(call.callee.name);
+    } else if (call.callee.kind === 'function') {
+      collectEvaluatedIdentifiers(call.callee.body, output, calledFunctions, functionNames);
+      collectEvaluatedIdentifiers(call.callee.expression, output, calledFunctions, functionNames);
+    }
+    return;
+  }
+  for (const nested of Object.values(record))
+    collectEvaluatedIdentifiers(nested, output, calledFunctions, functionNames);
 }
 
 function emitDeclaration(declaration: IrDeclaration): string[] {
