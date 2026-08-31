@@ -62,7 +62,7 @@ class Main extends Application {
     }
     scale = window.scale;
     final canvas = flight.hostLime.GlSurface.createGlSurface(window);
-    renderState = createGlRenderState(createGlContextState(createGlContextFromCanvasElement(canvas, {contextAttributes: {alpha: false, preserveDrawingBuffer: true}})), createGlPipeline(createEmptyGlRegistries()), {
+    renderState = createGlRenderState(createGlContextState(createGlContextFromCanvasElement(canvas, {contextAttributes: {alpha: false, preserveDrawingBuffer: true}})), scene2dGlPipeline, {
       pixelRatio: window.scale,
       backgroundColor: 0x1a1c24ff,
     });
