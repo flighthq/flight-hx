@@ -19,7 +19,7 @@ import flight.types.RenderTexture;
 
 class EffectsCairo {
   public static inline function applyCairoGradientRampLookup(dest:CanvasRenderTarget, source:CanvasRenderTarget, ramp:flight._internal._UInt8ClampedArray, ?bias:Float, ?scale:Float):Void { flight.EffectsCanvas.applyCanvasGradientRampLookup(dest, source, ramp, bias, scale); }
-  public static inline function applyCairoRenderEffectsToRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool { return flight.EffectsCanvas.applyCanvasRenderEffectsToRenderTexture(state, pool, source, dest, scratch, effects); }
+  public static inline function applyCairoRenderEffectsToRenderTexture(ownerState:CanvasRenderState, effectState:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool { return flight.EffectsCanvas.applyCanvasRenderEffectsToRenderTexture(ownerState, effectState, pool, source, dest, scratch, effects); }
   public static inline function beginCairoRenderEffectPipeline(state:CanvasRenderState, pipeline:CanvasRenderEffectPipeline):Void { flight.EffectsCanvas.beginCanvasRenderEffectPipeline(state, pipeline); }
   public static inline function buildCairoGradientRamp(colors:Array<Float>, alphas:Array<Float>, ratios:Array<Float>):flight._internal._UInt8ClampedArray { return flight.EffectsCanvas.buildCanvasGradientRamp(colors, alphas, ratios); }
   public static inline function clipCairoBevelBand(band:CanvasRenderTarget, source:CanvasRenderTarget, bevelType:flight._internal._IndexedAccess<BevelEffect, String>):Void { flight.EffectsCanvas.clipCanvasBevelBand(band, source, bevelType); }
