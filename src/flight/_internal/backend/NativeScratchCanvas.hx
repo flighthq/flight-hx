@@ -17,6 +17,12 @@ class NativeScratchCanvas {
   public var width:Int = 0;
   public var height:Int = 0;
 
+  // Populated only when a scratch canvas doubles as a `Raster2DSurface` for GL
+  // text rasterization: the surface's `image` is read structurally by generated
+  // renderers, so it lives here as a plain field (a property would reflect as
+  // absent) alongside the plain `width`/`height` the renderer resizes.
+  public var image:Dynamic = null;
+
   #if (lime && !js && lime_cairo)
   final context:NativeCanvas2dContext = new NativeCanvas2dContext();
 

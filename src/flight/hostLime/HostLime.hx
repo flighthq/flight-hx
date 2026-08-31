@@ -21,6 +21,7 @@ import lime.app.Application;
  */
 class HostLime {
   static final hosts = new ObjectMap<Application, Host>();
+  static var raster2DSurfaceEnabled = false;
 
   /**
    * Builds the composed Lime host, cached once per application.
@@ -70,7 +71,28 @@ class HostLime {
    */
   public static function enableHostLime(application:Application):Void {
     enableHostLimeGlyphRasterizer(application);
+    enableHostLimeRaster2DSurface(application);
     enableHostLimeImage(application);
+  }
+
+  /**
+   * Installs the native Raster2DSurface provider GL text rasterization needs.
+   *
+   * Idempotent: the provider is a fresh object each call, and the installer is
+   * first-wins (a second, different provider flags a conflict), so guard so
+   * repeated `enableHostLime` calls install exactly one. Returns false when the
+   * active Lime build has no native Cairo support (no scratch surface to draw
+   * glyphs onto), matching the glyph rasterizer's Cairo requirement.
+   */
+  public static function enableHostLimeRaster2DSurface(application:Application):Bool {
+    if (raster2DSurfaceEnabled) return true;
+    #if (!js && lime_cairo)
+    flight._Render.installRaster2DSurfaceHostProvider(flight.Scene2DCairo.createCairoRaster2DSurfaceProvider());
+    raster2DSurfaceEnabled = true;
+    return true;
+    #else
+    return false;
+    #end
   }
 
   /** Returns false when the active Lime build has no native Cairo support. */

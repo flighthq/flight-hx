@@ -56,6 +56,45 @@ class CairoSurface {
     };
   }
 
+  /**
+   * The native `Raster2DSurface` provider for GL text rasterization.
+   *
+   * GL renderers rasterize text (and other 2D fallbacks) onto a backend-neutral
+   * `Raster2DSurface` and upload the result as a texture; the canvas render path
+   * draws text directly and needs no such surface. Web installs its provider
+   * from `enableHostWeb`; this is the native counterpart. A `NativeScratchCanvas`
+   * doubles as the surface: it already exposes the plain `width`/`height` the
+   * renderer resizes, the cairo-backed `context` it draws with, and the
+   * `NativeScratchCanvas` identity the GL texture upload path recognizes — it
+   * only needs the uploadable `image` attached here. Without an installed
+   * provider, `createRaster2DSurface` returns the sentinel's null and GL text
+   * renders nothing. Cairo/runtime-specific rather than app-host-specific, so
+   * both Lime and Clay hosts reuse it.
+   */
+  public static function createCairoRaster2DSurfaceProvider():flight.types.Raster2DSurfaceProvider {
+    return cast {
+      createRaster2DSurface: function(width:Float, height:Float):Dynamic {
+        #if (!js && lime_cairo)
+        final canvas = new flight._internal.backend.NativeScratchCanvas();
+        canvas.width = Std.int(width);
+        canvas.height = Std.int(height);
+        canvas.image = flight.Image.createImageResourceFromCanvas(cast canvas);
+        return canvas;
+        #else
+        return null;
+        #end
+      },
+      destroyRaster2DSurface: function(surface:Dynamic):Void {
+        #if (!js && lime_cairo)
+        final canvas:flight._internal.backend.NativeScratchCanvas = cast surface;
+        canvas.width = 0;
+        canvas.height = 0;
+        canvas.image = null;
+        #end
+      },
+    };
+  }
+
   public var width:Int = 0;
   public var height:Int = 0;
 

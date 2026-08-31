@@ -130,6 +130,10 @@ function deriveFacade({ cairoModule, canvasModule }) {
     lines.push(
       '  public static inline function createCairoRenderSurfaceCreator():flight.types.CanvasRenderSurfaceCreator { return flight._internal.scene2DCairo.CairoSurface.createCairoRenderSurfaceCreator(); }',
     );
+    lines.push('  /** Native Raster2DSurface provider for GL text; handwritten in CairoSurface.hx. */');
+    lines.push(
+      '  public static inline function createCairoRaster2DSurfaceProvider():flight.types.Raster2DSurfaceProvider { return flight._internal.scene2DCairo.CairoSurface.createCairoRaster2DSurfaceProvider(); }',
+    );
     lines.push('  #end');
   }
   if (lines.length === 0) throw new Error(`derive-cairo-aliases: ${canvasModule} yielded no aliases`);
