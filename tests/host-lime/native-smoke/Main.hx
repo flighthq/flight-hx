@@ -9,6 +9,7 @@ import lime.graphics.opengl.GL;
 import lime.system.System;
 
 class Main extends Application {
+  var host:flight.types.Host;
   var attachedWindow:ApplicationWindow;
   var renderState:GlRenderState;
   var rendered = false;
@@ -26,25 +27,25 @@ class Main extends Application {
         default: false;
       }, 'Lime window uses a hardware GL context');
 
+      // The window capability is now composed into a Host and passed explicitly
+      // to Flight's window functions rather than installed globally.
       HostLime.enableHostLime(this);
-      assert(flight.Application.explainWindowBackend().layer == 'host', 'HostLime installed the window backend');
-      assert(flight.Application.hasWindowOperation(cast 'open'), 'Lime window backend declares open');
-      assert(flight.Application.hasWindowOperation(cast 'setSize'), 'Lime window backend declares setSize');
+      host = HostLime.createLimeHost(this);
 
       attachedWindow = flight.Application.createApplicationWindow();
-      assert(flight.Application.attachWindow(attachedWindow, window, 'host'), 'attach the existing Lime window');
-      assert(flight.Application.attachWindow(attachedWindow, window, 'host'), 'same attachment is idempotent');
+      assert(flight.Application.attachWindow(cast host, attachedWindow, cast window, cast 'host'), 'attach the existing Lime window');
+      assert(flight.Application.attachWindow(cast host, attachedWindow, cast window, cast 'host'), 'same attachment is idempotent');
       assert(attachedWindow.width == window.width && attachedWindow.height == window.height, 'attachment mirrors native size');
       assert(attachedWindow.devicePixelRatio == window.scale, 'attachment mirrors native scale');
 
       final conflicting = flight.Application.createApplicationWindow();
-      assert(!flight.Application.attachWindow(conflicting, window, 'host'), 'one native handle cannot back two entities');
+      assert(!flight.Application.attachWindow(cast host, conflicting, cast window, cast 'host'), 'one native handle cannot back two entities');
 
-      flight.Application.setWindowTitle(attachedWindow, 'HostLime Native Smoke Ready');
+      flight.Application.setWindowTitle(cast host, attachedWindow, 'HostLime Native Smoke Ready');
       assert(window.title == 'HostLime Native Smoke Ready', 'Flight title command reaches Lime');
-      flight.Application.setWindowSize(attachedWindow, 160, 96);
+      flight.Application.setWindowSize(cast host, attachedWindow, 160, 96);
       assert(window.width == 160 && window.height == 96, 'Flight size command reaches Lime');
-      final bounds = flight.Application.getWindowBounds(attachedWindow, {x: 0, y: 0, width: 0, height: 0});
+      final bounds = flight.Application.getWindowBounds(cast host, attachedWindow, {x: 0, y: 0, width: 0, height: 0});
       assert(bounds.width == window.width && bounds.height == window.height, 'Flight bounds read the native window');
 
       window.onMove.dispatch(17, 23);
@@ -53,14 +54,14 @@ class Main extends Application {
       assert(attachedWindow.width == 160 && attachedWindow.height == 96, 'native resize events update the Flight entity');
 
       final ownedWindow = flight.Application.createApplicationWindow();
-      assert(flight.Application.openWindow(ownedWindow, {
+      assert(flight.Application.openWindow(cast host, ownedWindow, {
         title: 'HostLime Owned Window',
         width: 80,
         height: 64,
         visible: false,
       }), 'Flight opens a Lime-owned native window');
       assert(windows.length == 2, 'opened native window joins the Lime application');
-      assert(flight.Application.closeWindow(ownedWindow), 'Flight closes its owned native window');
+      assert(flight.Application.closeWindow(cast host, ownedWindow), 'Flight closes its owned native window');
       assert(windows.length == 1, 'closing an owned window releases it from Lime');
 
       final surface = GlSurface.createGlSurface(window);
@@ -69,7 +70,8 @@ class Main extends Application {
       });
       final expectedContext:Dynamic = window.context.webgl2 == null ? window.context.webgl : window.context.webgl2;
       assert((cast context : Dynamic) == expectedContext, 'Flight preserves the caller-owned Lime GL context');
-      renderState = flight.RenderGl.createGlRenderState(context, {
+      final pipeline = flight.RenderGl.createGlPipeline(flight.RenderGl.createEmptyGlRegistries());
+      renderState = flight.RenderGl.createGlRenderState(context, pipeline, {
         backgroundColor: 0x00ff00ff,
         pixelRatio: window.scale,
       });
@@ -93,7 +95,7 @@ class Main extends Application {
         'Flight GL background reaches a real native framebuffer');
       flight.RenderGl.destroyGlRenderState(renderState);
 
-      assert(flight.Application.closeWindow(attachedWindow), 'Flight detaches the host-owned window');
+      assert(flight.Application.closeWindow(cast host, attachedWindow), 'Flight detaches the host-owned window');
       assert(window.context != null && windows.length == 1, 'host-owned close leaves the Lime window alive');
       Sys.println('HOST_LIME_NATIVE_SMOKE_OK');
       System.exit(0);
