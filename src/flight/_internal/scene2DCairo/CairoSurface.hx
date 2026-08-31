@@ -29,6 +29,33 @@ class CairoSurface {
     return cast new CairoSurface(window);
   }
 
+  /**
+   * The native canvas render-surface creator for Cairo rendering.
+   *
+   * The upstream render-pipeline seam makes surface allocation host-provided
+   * (web supplies `createWebCanvasRenderSurfaceCreator`). This is the native
+   * counterpart: child surfaces are allocated as `NativeScratchCanvas` (which
+   * lazily owns a Cairo image surface) and destroyed by zeroing their backing
+   * dimensions — the same ownership contract the web creator uses. It is
+   * Cairo/runtime-specific rather than application-host-specific, so both Lime
+   * and Clay reuse it.
+   */
+  public static function createCairoRenderSurfaceCreator():flight.types.CanvasRenderSurfaceCreator {
+    return cast {
+      __EntityRuntimeKey: {binding: null},
+      createRenderSurface: function(width:Float, height:Float, pixelRatio:Float) {
+        final canvas = new flight._internal.backend.NativeScratchCanvas();
+        canvas.width = Std.int(width * pixelRatio);
+        canvas.height = Std.int(height * pixelRatio);
+        return cast canvas;
+      },
+      destroyRenderSurface: function(canvas:flight._internal.dom.HTMLCanvasElement):Void {
+        flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', 0);
+        flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', 0);
+      },
+    };
+  }
+
   public var width:Int = 0;
   public var height:Int = 0;
 

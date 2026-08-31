@@ -126,6 +126,10 @@ function deriveFacade({ cairoModule, canvasModule }) {
     lines.push(
       '  public static inline function createCairoSurface(window:lime.ui.Window):flight._internal.dom.HTMLCanvasElement { return flight._internal.scene2DCairo.CairoSurface.createCairoSurface(window); }',
     );
+    lines.push('  /** Native canvas render-surface creator for Cairo; handwritten in CairoSurface.hx. */');
+    lines.push(
+      '  public static inline function createCairoRenderSurfaceCreator():flight.types.CanvasRenderSurfaceCreator { return flight._internal.scene2DCairo.CairoSurface.createCairoRenderSurfaceCreator(); }',
+    );
     lines.push('  #end');
   }
   if (lines.length === 0) throw new Error(`derive-cairo-aliases: ${canvasModule} yielded no aliases`);

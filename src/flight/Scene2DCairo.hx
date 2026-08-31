@@ -135,5 +135,7 @@ class Scene2DCairo {
   #if lime
   /** Native window-backed presentable surface; handwritten in CairoSurface.hx. */
   public static inline function createCairoSurface(window:lime.ui.Window):flight._internal.dom.HTMLCanvasElement { return flight._internal.scene2DCairo.CairoSurface.createCairoSurface(window); }
+  /** Native canvas render-surface creator for Cairo; handwritten in CairoSurface.hx. */
+  public static inline function createCairoRenderSurfaceCreator():flight.types.CanvasRenderSurfaceCreator { return flight._internal.scene2DCairo.CairoSurface.createCairoRenderSurfaceCreator(); }
   #end
 }
