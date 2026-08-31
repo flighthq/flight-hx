@@ -46,9 +46,10 @@ class Main extends Application {
         throw 'Flight examples require an OpenGL/WebGL or cairo render context.';
     }
     scale = window.scale;
+    final surfaceCreator = flight.Scene2DCairo.createCairoRenderSurfaceCreator();
     if (usingCairo) {
       final canvas = flight.Scene2DCairo.createCairoSurface(window);
-      renderState = createCanvasRenderState(canvas, {
+      renderState = createCanvasRenderState(createCanvasRenderSurface(surfaceCreator, canvas, {pixelRatio: window.scale}), createCanvasPipeline(createEmptyCanvasRegistries()), createCanvasTextureResolvers(surfaceCreator), {
         pixelRatio: window.scale,
         backgroundColor: 0x1a1a2eff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
@@ -60,10 +61,9 @@ class Main extends Application {
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = flight.hostLime.GlSurface.createGlSurface(window);
-      renderState = createGlRenderState(canvas, {
+      renderState = createGlRenderState(createGlContextState(createGlContextFromCanvasElement(canvas, {contextAttributes: {alpha: false, preserveDrawingBuffer: true}})), createGlPipeline(createEmptyGlRegistries()), {
         pixelRatio: window.scale,
         backgroundColor: 0x1a1a2eff,
-        contextAttributes: {alpha: false, preserveDrawingBuffer: true},
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
       registerGlStandardMaterial(renderState);
@@ -71,7 +71,7 @@ class Main extends Application {
       registerRenderer(renderState, ShapeKind, defaultGlShapeRenderer);
       // Upstream f1a7a9a0: gradient and texture fills have no tessellated form on this backend, so
       // they draw through an explicit canvas rasterizer alongside the GPU mesh command lane.
-      final shapeRasterizerResolvers = createCanvasTextureResolvers();
+      final shapeRasterizerResolvers = createCanvasTextureResolvers(surfaceCreator);
       connectCanvasTextureResolverMisses(shapeRasterizerResolvers, renderState);
       registerCanvasBitmapTextureResolver(shapeRasterizerResolvers);
       registerCanvasImageTextureResolver(shapeRasterizerResolvers);

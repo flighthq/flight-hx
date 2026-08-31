@@ -69,9 +69,10 @@ class Main extends Application {
         throw 'Flight examples require an OpenGL/WebGL or cairo render context.';
     }
     scale = window.scale;
+    final surfaceCreator = flight.Scene2DCairo.createCairoRenderSurfaceCreator();
     if (usingCairo) {
       final canvas = flight.Scene2DCairo.createCairoSurface(window);
-      renderState = createCanvasRenderState(canvas, {
+      renderState = createCanvasRenderState(createCanvasRenderSurface(surfaceCreator, canvas, {pixelRatio: window.scale}), createCanvasPipeline(createEmptyCanvasRegistries()), createCanvasTextureResolvers(surfaceCreator), {
         pixelRatio: window.scale,
         backgroundColor: 0x0a0a14ff,
         sceneGraphSyncPolicy: 'requiresInvalidation',
@@ -83,10 +84,9 @@ class Main extends Application {
       enableCanvasBlendMode(renderState);
     } else {
       final canvas = flight.hostLime.GlSurface.createGlSurface(window);
-      renderState = createGlRenderState(canvas, {
+      renderState = createGlRenderState(createGlContextState(createGlContextFromCanvasElement(canvas, {contextAttributes: {alpha: false, preserveDrawingBuffer: true}})), createGlPipeline(createEmptyGlRegistries()), {
         pixelRatio: window.scale,
         backgroundColor: 0x0a0a14ff,
-        contextAttributes: {alpha: false, preserveDrawingBuffer: true},
         sceneGraphSyncPolicy: 'requiresInvalidation',
       });
       registerGlStandardMaterial(renderState);
