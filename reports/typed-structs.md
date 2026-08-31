@@ -1,22 +1,22 @@
 # Typed Struct Audit
 
-Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
+Upstream commit: `2e86cd620a53121aa6c9230215f44c6c9a3bf816`
 
 The candidate universe is checker-derived. Member escapes, presence and width sensitivity, class feasibility, containment, and provenance are applied as rules. Eligibility is audited independently from emission; newly discovered schemas are reported as unreviewed and remain reflective until their audit diff is approved.
 
 | Metric | Count |
 | --- | ---: |
-| Candidates | 2849 |
-| Eligible | 2158 |
-| Ineligible | 691 |
-| Audit-only schemas | 2088 |
+| Candidates | 2857 |
+| Eligible | 2159 |
+| Ineligible | 698 |
+| Audit-only schemas | 2096 |
 | Direct schemas | 758 |
-| Declared fields | 29364 |
+| Declared fields | 29491 |
 | Bindable accesses | 39997 |
 | Pending accesses | 14159 |
 | Directly emitted accesses | 25838 |
 | Reflective survivors | 452 |
-| Dynamic escapes | 14602 |
+| Dynamic escapes | 14607 |
 
 ## Review status since baseline
 
@@ -32,7 +32,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | Renamed | 26 |
 | Declaration-kind changes | 3 |
 | Replacement removals | 26 |
-| Unreviewed additions, audit-only | 2088 |
+| Unreviewed additions, audit-only | 2096 |
 
 | Removed baseline identity | Checker-discovered successors |
 | --- | --- |
@@ -67,13 +67,6 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 
 | Candidate identity | Mode | Migration | Baseline identity | Purpose | Fields | Reads | Writes | Calls | Pending | Direct | Reflective survivors | Escapes | Eligible | Reasons |
 | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :---: | --- |
-| `@flighthq/host-capacitor:type#CapacitorAppCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/host-capacitor:type#CapacitorProtocolCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/host-electron:type#ElectronAppCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/host-electron:type#ElectronProtocolCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/host-electron:type#ElectronTrayCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/host-tauri:type#TauriAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
-| `@flighthq/host-tauri:type#TauriTrayCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#Aabb` | `direct` | `preserved` | `@flighthq/types:interface#Aabb` | 3D axis-aligned bounds entity | 2 | 30 | 0 | 0 | 0 | 30 | 0 | 0 | yes | — |
 | `@flighthq/types:type#AabbLike` | `direct` | `preserved` | `@flighthq/types:type#AabbLike` | structural 3D axis-aligned bounds carrier | 2 | 280 | 0 | 0 | 0 | 280 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#AbcClass` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -369,12 +362,15 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CanvasTextShaperBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:type#CanvasTextureResolver` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#CanvasTextureResolvers` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 4 | 7 | 1 | 12 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:type#CapacitorAndroidAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#CapacitorApi` | `direct` | `new` | — | reviewed escape-free Capacitor API | 12 | 24 | 0 | 0 | 0 | 24 | 0 | 0 | yes | — |
+| `@flighthq/types:type#CapacitorAppCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#CapacitorAppInfo` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorAppPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#CapacitorClipboardPlugin` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | yes | — |
 | `@flighthq/types:interface#CapacitorClipboardReadResult` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorClipboardWriteOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#CapacitorCommonAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | no | `unsupported-shape` |
 | `@flighthq/types:interface#CapacitorConnectionStatus` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorDeviceId` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorDeviceInfo` | `direct` | `new` | — | reviewed escape-free Capacitor device info | 8 | 11 | 0 | 0 | 0 | 11 | 0 | 0 | yes | — |
@@ -414,6 +410,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CapacitorPluginListenerHandle` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | yes | — |
 | `@flighthq/types:interface#CapacitorPosition` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorPositionCoords` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#CapacitorProtocolCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#CapacitorShareContentBackend` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorShareContentOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorShareOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -608,6 +605,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#EffectSourceMode` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ElectronApi` | `direct` | `new` | — | reviewed escape-free Electron API | 16 | 36 | 0 | 0 | 0 | 36 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronApp` | `audit-only` | `new` | — | checker-discovered public declaration | 31 | 1 | 0 | 0 | 1 | 0 | 0 | 38 | yes | — |
+| `@flighthq/types:type#ElectronAppCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#ElectronAutoUpdater` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#ElectronBackendOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 8 | 0 | 0 | 8 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#ElectronBrowserWindow` | `audit-only` | `new` | — | checker-discovered public declaration | 40 | 4 | 0 | 0 | 4 | 0 | 0 | 34 | yes | — |
@@ -615,14 +613,17 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronBrowserWindowOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronClipboard` | `audit-only` | `new` | — | checker-discovered public declaration | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | yes | — |
 | `@flighthq/types:interface#ElectronClipboardData` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#ElectronCommonAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | no | `unsupported-shape` |
 | `@flighthq/types:interface#ElectronDialog` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#ElectronDisplay` | `direct` | `new` | — | reviewed escape-free Electron display | 12 | 28 | 0 | 0 | 0 | 28 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronDock` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | yes | — |
 | `@flighthq/types:interface#ElectronFs` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | yes | — |
 | `@flighthq/types:interface#ElectronGlobalShortcut` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
 | `@flighthq/types:interface#ElectronIpcMain` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
+| `@flighthq/types:type#ElectronLinuxAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#ElectronLoginItemSettings` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronLoginItemSettingsLike` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#ElectronMacosAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 23 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#ElectronMacosNotificationCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#ElectronMenu` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ElectronMenuConstructor` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | no | `constructable-schema` |
@@ -639,6 +640,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronPowerMonitor` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 2 | 0 | 0 | 2 | 0 | 0 | 17 | yes | — |
 | `@flighthq/types:type#ElectronPowerMonitorEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:interface#ElectronPowerSaveBlocker` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | yes | — |
+| `@flighthq/types:type#ElectronProtocolCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#ElectronRectangle` | `direct` | `new` | — | reviewed escape-free Electron rectangle | 4 | 12 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronSaveDialogOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronScreen` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | yes | — |
@@ -646,7 +648,9 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronShortcutDetails` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 7 | 0 | 0 | 7 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#ElectronTray` | `audit-only` | `new` | — | checker-discovered public declaration | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 18 | yes | — |
 | `@flighthq/types:interface#ElectronTrayBalloonOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#ElectronTrayCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#ElectronTrayConstructor` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `constructable-schema` |
+| `@flighthq/types:type#ElectronWindowsAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#EmbeddedAudioResourceReference` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 6 | 2 | 0 | 8 | 0 | 0 | 20 | yes | — |
 | `@flighthq/types:interface#EmbeddedImageResourceReference` | `direct` | `renamed` | `@flighthq/types:interface#EmbeddedSceneResourceRef` | broad scene document | 8 | 15 | 2 | 0 | 0 | 17 | 55 | 55 | yes | — |
 | `@flighthq/types:interface#EmissiveMaterial` | `direct` | `new` | — | reviewed escape-free emissive material | 9 | 17 | 3 | 0 | 0 | 20 | 0 | 0 | yes | — |
@@ -1153,7 +1157,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#HitTestFunction` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:type#HitTestPreciseFunction` | `audit-only` | `new` | — | checker-discovered public declaration | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `callable-schema` |
 | `@flighthq/types:interface#HitTestResult` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 4 | 0 | 4 | 0 | 0 | 0 | yes | — |
-| `@flighthq/types:interface#Host` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 6 | 0 | 0 | 6 | 0 | 0 | 9 | yes | — |
+| `@flighthq/types:interface#Host` | `audit-only` | `new` | — | checker-discovered public declaration | 26 | 6 | 0 | 0 | 6 | 0 | 0 | 10 | yes | — |
 | `@flighthq/types:interface#HostAccessibilityCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#HostAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 27 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#HostClipboardCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -1655,6 +1659,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#PbrExtension` | `direct` | `new` | — | reviewed escape-free PBR extension | 1 | 13 | 0 | 0 | 0 | 13 | 0 | 0 | yes | — |
 | `@flighthq/types:type#PbrUvSet` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#PermissionName` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
+| `@flighthq/types:interface#PermissionNativeHolding` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#PermissionQueryFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
 | `@flighthq/types:type#PermissionQueryOutcome` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:type#PermissionRequestFailureReason` | `audit-only` | `new` | — | checker-discovered public declaration | 49 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape`, `index-signature` |
@@ -2437,6 +2443,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TabBarControllerOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TabBarControllerSignals` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriApi` | `direct` | `new` | — | reviewed escape-free Tauri API | 11 | 26 | 0 | 0 | 0 | 26 | 0 | 0 | yes | — |
+| `@flighthq/types:type#TauriAppCapabilities` | `audit-only` | `new` | — | checker-discovered public declaration | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#TauriAppModule` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#TauriClipboardManager` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | yes | — |
 | `@flighthq/types:interface#TauriCloseRequestedEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
@@ -2469,6 +2476,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#TauriShortcutEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 2 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriSubmenuFactory` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | yes | — |
 | `@flighthq/types:interface#TauriSubmenuOptions` | `audit-only` | `new` | — | checker-discovered public declaration | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:type#TauriTrayCapabilitiesFor` | `audit-only` | `new` | — | checker-discovered public declaration | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `unsupported-shape` |
 | `@flighthq/types:interface#TauriTrayIcon` | `audit-only` | `new` | — | checker-discovered public declaration | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | yes | — |
 | `@flighthq/types:interface#TauriTrayIconEvent` | `audit-only` | `new` | — | checker-discovered public declaration | 5 | 11 | 0 | 0 | 11 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#TauriTrayIconFactory` | `audit-only` | `new` | — | checker-discovered public declaration | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
@@ -2921,11 +2929,6 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 
 | Candidate identity | Member | Reason | Source identity |
 | --- | --- | --- | --- |
-| `@flighthq/host-capacitor:type#CapacitorAppCapabilitiesFor` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/host-capacitor:type#CapacitorProtocolCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/host-electron:type#ElectronAppCapabilitiesFor` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/host-electron:type#ElectronProtocolCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
-| `@flighthq/host-tauri:type#TauriAppCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#Aabb` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#AbcMultinameKind` | `toExponential` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:576` |
 | `@flighthq/types:type#AbcMultinameKind` | `toFixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:570` |
@@ -5228,12 +5231,15 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#CanvasRenderTextureStatus` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:interface#CanvasTextShaperBackend` | `clearCache` | `receiver-sensitive-method` | `upstream/packages/types/src/CanvasTextShaperBackend.ts:7` |
 | `@flighthq/types:interface#CanvasTextureResolvers` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#CapacitorAndroidAppCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#CapacitorAppCapabilitiesFor` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#CapacitorAppPlugin` | `addListener` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:59` |
 | `@flighthq/types:interface#CapacitorAppPlugin` | `exitApp` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:67` |
 | `@flighthq/types:interface#CapacitorAppPlugin` | `getInfo` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:68` |
 | `@flighthq/types:interface#CapacitorAppPlugin` | `minimizeApp` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:69` |
 | `@flighthq/types:interface#CapacitorClipboardPlugin` | `read` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:83` |
 | `@flighthq/types:interface#CapacitorClipboardPlugin` | `write` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:84` |
+| `@flighthq/types:type#CapacitorCommonAppCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#CapacitorDevicePlugin` | `getId` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:102` |
 | `@flighthq/types:interface#CapacitorDevicePlugin` | `getInfo` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:103` |
 | `@flighthq/types:interface#CapacitorDialogPlugin` | `alert` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:125` |
@@ -5277,6 +5283,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#CapacitorNetworkPlugin` | `getStatus` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:374` |
 | `@flighthq/types:type#CapacitorNotificationCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#CapacitorPluginListenerHandle` | `remove` | `receiver-sensitive-method` | `upstream/packages/types/src/CapacitorApi.ts:53` |
+| `@flighthq/types:type#CapacitorProtocolCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#CapacitorShareContentBackend` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#CapacitorShareContentBackend` | `canShareContent` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:29` |
 | `@flighthq/types:interface#CapacitorShareContentBackend` | `shareContent` | `receiver-sensitive-method` | `upstream/packages/types/src/Share.ts:47` |
@@ -6405,6 +6412,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronApp` | `setLoginItemSettings` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:67` |
 | `@flighthq/types:interface#ElectronApp` | `setName` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:58` |
 | `@flighthq/types:interface#ElectronApp` | `show` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:62` |
+| `@flighthq/types:type#ElectronAppCapabilitiesFor` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#ElectronAutoUpdater` | `checkForUpdates` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:274` |
 | `@flighthq/types:interface#ElectronAutoUpdater` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:276` |
 | `@flighthq/types:interface#ElectronAutoUpdater` | `quitAndInstall` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:275` |
@@ -6466,6 +6474,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronClipboard` | `writeImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:115` |
 | `@flighthq/types:interface#ElectronClipboard` | `writeRTF` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:111` |
 | `@flighthq/types:interface#ElectronClipboard` | `writeText` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:107` |
+| `@flighthq/types:type#ElectronCommonAppCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#ElectronDialog` | `showMessageBox` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:164` |
 | `@flighthq/types:interface#ElectronDialog` | `showOpenDialog` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:156` |
 | `@flighthq/types:interface#ElectronDialog` | `showSaveDialog` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:160` |
@@ -6486,6 +6495,8 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronIpcMain` | `on` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:266` |
 | `@flighthq/types:interface#ElectronIpcMain` | `removeHandler` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:269` |
 | `@flighthq/types:interface#ElectronIpcMain` | `removeListener` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:267` |
+| `@flighthq/types:type#ElectronLinuxAppCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
+| `@flighthq/types:type#ElectronMacosAppCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#ElectronMacosNotificationCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#ElectronMenu` | `popup` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:363` |
 | `@flighthq/types:interface#ElectronMenuConstructor` | `buildFromTemplate` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:358` |
@@ -6606,6 +6617,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronPowerSaveBlocker` | `isStarted` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:251` |
 | `@flighthq/types:interface#ElectronPowerSaveBlocker` | `start` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:249` |
 | `@flighthq/types:interface#ElectronPowerSaveBlocker` | `stop` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:250` |
+| `@flighthq/types:type#ElectronProtocolCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#ElectronScreen` | `getAllDisplays` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:204` |
 | `@flighthq/types:interface#ElectronScreen` | `getCursorScreenPoint` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:205` |
 | `@flighthq/types:interface#ElectronScreen` | `getPrimaryDisplay` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:203` |
@@ -6632,6 +6644,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#ElectronTray` | `setPressedImage` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:432` |
 | `@flighthq/types:interface#ElectronTray` | `setTitle` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:430` |
 | `@flighthq/types:interface#ElectronTray` | `setToolTip` | `receiver-sensitive-method` | `upstream/packages/types/src/ElectronApi.ts:429` |
+| `@flighthq/types:type#ElectronWindowsAppCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#EmissiveMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:type#EmissiveModifierFacing` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#EmissiveModifierFacing` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
@@ -12114,6 +12127,55 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:type#PermissionName` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
 | `@flighthq/types:type#PermissionName` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
 | `@flighthq/types:type#PermissionName` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `big` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:469` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `blink` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:475` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `bold` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:481` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `charAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:418` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `charCodeAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:424` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `codePointAt` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:410` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `concat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:430` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `endsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:426` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `fixed` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:487` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `fontcolor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:493` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `fontsize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:499` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `includes` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:419` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `indexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:437` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `italics` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:511` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `lastIndexOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:444` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `link` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:517` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `localeCompare` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:450` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `match` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:456` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `matchAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2020.string.d.ts:29` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `normalize` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:434` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `padEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:44` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `padStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2017.string.d.ts:31` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `repeat` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:449` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `replace` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:463` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `replaceAll` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2021.string.d.ts:25` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `search` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:476` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `slice` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:484` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `small` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:523` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `split` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:491` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `startsWith` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:456` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `strike` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:529` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `sub` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:535` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `substr` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:526` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `substring` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:499` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `sup` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:541` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `toLocaleLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:505` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `toLocaleUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:511` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `toLowerCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:502` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `toString` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:412` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `toUpperCase` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:508` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `trim` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:514` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `trimEnd` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:21` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `trimLeft` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:30` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `trimRight` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:36` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `trimStart` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2019.string.d.ts:24` |
+| `@flighthq/types:type#PermissionNativeHoldingId` | `valueOf` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es5.d.ts:529` |
 | `@flighthq/types:type#PermissionQueryFailureReason` | `[Symbol.iterator]` | `computed-symbol-member` | `node_modules/typescript/lib/lib.es2015.iterable.d.ts:272` |
 | `@flighthq/types:type#PermissionQueryFailureReason` | `anchor` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2015.core.d.ts:463` |
 | `@flighthq/types:type#PermissionQueryFailureReason` | `at` | `receiver-sensitive-method` | `node_modules/typescript/lib/lib.es2022.string.d.ts:24` |
@@ -18539,6 +18601,7 @@ Baseline report SHA-256: `01780f464ad52d5b386fc4d707fbd00a7d1ccc1e1f15426fbc514c
 | `@flighthq/types:interface#SurfaceMaterial` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#TabBarController` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#TabBarController` | `[TabBarControllerTypeKey]` | `computed-symbol-member` | `upstream/packages/types/src/TabBarController.ts:9` |
+| `@flighthq/types:type#TauriAppCapabilities` | `[EntityRuntimeKey]` | `computed-symbol-member` | `upstream/packages/types/src/Entity.ts:3` |
 | `@flighthq/types:interface#TauriAppModule` | `getName` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:47` |
 | `@flighthq/types:interface#TauriAppModule` | `getVersion` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:48` |
 | `@flighthq/types:interface#TauriAppModule` | `hide` | `receiver-sensitive-method` | `upstream/packages/types/src/TauriApi.ts:49` |

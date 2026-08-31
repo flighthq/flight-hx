@@ -1,16 +1,16 @@
 # Upstream Inventory
 
-Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
+Upstream commit: `2e86cd620a53121aa6c9230215f44c6c9a3bf816`
 
 | Metric | Count |
 | --- | ---: |
 | Packages | 159 |
 | Derived package exclusions | 2 |
-| Source files | 2922 |
+| Source files | 2930 |
 | Test files | 1704 |
 | Public export lanes | 331 |
-| Public export records | 40677 |
-| Root-lane exports | 15914 |
+| Public export records | 40706 |
+| Root-lane exports | 15921 |
 | Export conflicts | 0 |
 
 | Upstream package | Haxe module | Sources | Tests | Lanes | Export records | SDK | Conflicts |
@@ -59,9 +59,9 @@ Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
 | `@flighthq/glyphatlas` | `flight.GlyphAtlas` | 10 | 8 | 2 | 40 | yes | 0 |
 | `@flighthq/gui` | `flight.Gui` | 19 | 17 | 2 | 158 | yes | 0 |
 | `@flighthq/haptics` | `flight.Haptics` | 3 | 1 | 2 | 20 | yes | 0 |
-| `@flighthq/host-capacitor` | `flight.HostCapacitor` | 16 | 14 | 2 | 48 | no | 0 |
-| `@flighthq/host-electron` | `flight.HostElectron` | 20 | 18 | 2 | 56 | no | 0 |
-| `@flighthq/host-tauri` | `flight.HostTauri` | 13 | 11 | 2 | 34 | no | 0 |
+| `@flighthq/host-capacitor` | `flight.HostCapacitor` | 16 | 14 | 2 | 44 | no | 0 |
+| `@flighthq/host-electron` | `flight.HostElectron` | 20 | 18 | 2 | 50 | no | 0 |
+| `@flighthq/host-tauri` | `flight.HostTauri` | 13 | 11 | 2 | 30 | no | 0 |
 | `@flighthq/host-web` | `flight.HostWeb` | 69 | 60 | 2 | 216 | no | 0 |
 | `@flighthq/image` | `flight.Image` | 6 | 4 | 2 | 55 | yes | 0 |
 | `@flighthq/image-codec` | `flight.ImageCodec` | 12 | 10 | 2 | 46 | yes | 0 |
@@ -125,7 +125,7 @@ Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
 | `@flighthq/scene3d-resources` | `flight.Scene3DResources` | 28 | 27 | 2 | 79 | yes | 0 |
 | `@flighthq/scene3d-wgpu` | `flight.Scene3DWgpu` | 49 | 46 | 2 | 189 | yes | 0 |
 | `@flighthq/screen` | `flight.Screen` | 3 | 1 | 2 | 54 | yes | 0 |
-| `@flighthq/sdk` | `flight.Sdk` | 15 | 1 | 15 | 23011 | no | 0 |
+| `@flighthq/sdk` | `flight.Sdk` | 15 | 1 | 15 | 23032 | no | 0 |
 | `@flighthq/selection` | `flight.Selection` | 6 | 4 | 2 | 54 | yes | 0 |
 | `@flighthq/sensors` | `flight.Sensors` | 3 | 2 | 2 | 52 | yes | 0 |
 | `@flighthq/shading` | `flight.Shading` | 18 | 16 | 2 | 52 | yes | 0 |
@@ -167,7 +167,7 @@ Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
 | `@flighthq/tool-registry` | `flight.ToolRegistry` | 4 | 1 | 2 | 4 | no | 0 |
 | `@flighthq/tray` | `flight.Tray` | 4 | 2 | 2 | 53 | yes | 0 |
 | `@flighthq/tween` | `flight.Tween` | 10 | 7 | 2 | 54 | yes | 0 |
-| `@flighthq/types` | `flight.Types` | 939 | 35 | 2 | 6188 | yes | 0 |
+| `@flighthq/types` | `flight.Types` | 947 | 35 | 2 | 6210 | yes | 0 |
 | `@flighthq/updater` | `flight.Updater` | 3 | 1 | 2 | 6 | yes | 0 |
 | `@flighthq/useragent` | `flight.UserAgent` | 4 | 2 | 2 | 23 | yes | 0 |
 | `@flighthq/velocity` | `flight.Velocity` | 5 | 3 | 2 | 41 | yes | 0 |
@@ -272,12 +272,12 @@ Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
 | `@flighthq/gui/contract` | `upstream/packages/gui/src/contract.ts` | 79 | 0 |
 | `@flighthq/haptics` | `upstream/packages/haptics/src/index.ts` | 10 | 0 |
 | `@flighthq/haptics/contract` | `upstream/packages/haptics/src/contract.ts` | 10 | 0 |
-| `@flighthq/host-capacitor` | `upstream/packages/host-capacitor/src/index.ts` | 24 | 0 |
-| `@flighthq/host-capacitor/contract` | `upstream/packages/host-capacitor/src/contract.ts` | 24 | 0 |
-| `@flighthq/host-electron` | `upstream/packages/host-electron/src/index.ts` | 28 | 0 |
-| `@flighthq/host-electron/contract` | `upstream/packages/host-electron/src/contract.ts` | 28 | 0 |
-| `@flighthq/host-tauri` | `upstream/packages/host-tauri/src/index.ts` | 17 | 0 |
-| `@flighthq/host-tauri/contract` | `upstream/packages/host-tauri/src/contract.ts` | 17 | 0 |
+| `@flighthq/host-capacitor` | `upstream/packages/host-capacitor/src/index.ts` | 22 | 0 |
+| `@flighthq/host-capacitor/contract` | `upstream/packages/host-capacitor/src/contract.ts` | 22 | 0 |
+| `@flighthq/host-electron` | `upstream/packages/host-electron/src/index.ts` | 25 | 0 |
+| `@flighthq/host-electron/contract` | `upstream/packages/host-electron/src/contract.ts` | 25 | 0 |
+| `@flighthq/host-tauri` | `upstream/packages/host-tauri/src/index.ts` | 15 | 0 |
+| `@flighthq/host-tauri/contract` | `upstream/packages/host-tauri/src/contract.ts` | 15 | 0 |
 | `@flighthq/host-web` | `upstream/packages/host-web/src/index.ts` | 102 | 0 |
 | `@flighthq/host-web/contract` | `upstream/packages/host-web/src/contract.ts` | 114 | 0 |
 | `@flighthq/image` | `upstream/packages/image/src/index.ts` | 24 | 0 |
@@ -404,11 +404,11 @@ Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
 | `@flighthq/scene3d-wgpu/contract` | `upstream/packages/scene3d-wgpu/src/contract.ts` | 160 | 0 |
 | `@flighthq/screen` | `upstream/packages/screen/src/index.ts` | 27 | 0 |
 | `@flighthq/screen/contract` | `upstream/packages/screen/src/contract.ts` | 27 | 0 |
-| `@flighthq/sdk` | `upstream/packages/sdk/src/index.ts` | 7792 | 0 |
+| `@flighthq/sdk` | `upstream/packages/sdk/src/index.ts` | 7799 | 0 |
 | `@flighthq/sdk/animation` | `upstream/packages/sdk/src/animation.ts` | 222 | 0 |
 | `@flighthq/sdk/application` | `upstream/packages/sdk/src/application.ts` | 244 | 0 |
-| `@flighthq/sdk/contract` | `upstream/packages/sdk/src/contract.ts` | 7412 | 0 |
-| `@flighthq/sdk/core` | `upstream/packages/sdk/src/core.ts` | 3717 | 0 |
+| `@flighthq/sdk/contract` | `upstream/packages/sdk/src/contract.ts` | 7419 | 0 |
+| `@flighthq/sdk/core` | `upstream/packages/sdk/src/core.ts` | 3724 | 0 |
 | `@flighthq/sdk/formats` | `upstream/packages/sdk/src/formats.ts` | 196 | 0 |
 | `@flighthq/sdk/game` | `upstream/packages/sdk/src/game.ts` | 633 | 0 |
 | `@flighthq/sdk/interaction` | `upstream/packages/sdk/src/interaction.ts` | 223 | 0 |
@@ -501,8 +501,8 @@ Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
 | `@flighthq/tray/contract` | `upstream/packages/tray/src/contract.ts` | 27 | 0 |
 | `@flighthq/tween` | `upstream/packages/tween/src/index.ts` | 26 | 0 |
 | `@flighthq/tween/contract` | `upstream/packages/tween/src/contract.ts` | 28 | 0 |
-| `@flighthq/types` | `upstream/packages/types/src/index.ts` | 3078 | 0 |
-| `@flighthq/types/contract` | `upstream/packages/types/src/contract.ts` | 3110 | 0 |
+| `@flighthq/types` | `upstream/packages/types/src/index.ts` | 3085 | 0 |
+| `@flighthq/types/contract` | `upstream/packages/types/src/contract.ts` | 3125 | 0 |
 | `@flighthq/updater` | `upstream/packages/updater/src/index.ts` | 3 | 0 |
 | `@flighthq/updater/contract` | `upstream/packages/updater/src/contract.ts` | 3 | 0 |
 | `@flighthq/useragent` | `upstream/packages/useragent/src/index.ts` | 11 | 0 |

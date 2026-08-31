@@ -3,7 +3,7 @@
 | Metric | Count |
 | --- | ---: |
 | Packages | 157 |
-| Source files | 2878 |
+| Source files | 2886 |
 | Candidate declarations | 16807 |
 | Lowered declarations | 16807 |
 | Current diagnostics | 0 |
@@ -135,9 +135,9 @@
 | `@flighthq/glyphatlas` | 39 | 39 | 0 | 52 | 15 | 0 | 0 |
 | `@flighthq/gui` | 138 | 138 | 0 | 217 | 23 | 4 | 0 |
 | `@flighthq/haptics` | 10 | 10 | 0 | 3 | 0 | 0 | 0 |
-| `@flighthq/host-capacitor` | 57 | 57 | 0 | 96 | 6 | 2 | 0 |
-| `@flighthq/host-electron` | 105 | 105 | 0 | 255 | 16 | 18 | 0 |
-| `@flighthq/host-tauri` | 43 | 43 | 0 | 125 | 8 | 1 | 0 |
+| `@flighthq/host-capacitor` | 53 | 53 | 0 | 96 | 6 | 2 | 0 |
+| `@flighthq/host-electron` | 95 | 95 | 0 | 255 | 16 | 18 | 0 |
+| `@flighthq/host-tauri` | 37 | 37 | 0 | 125 | 8 | 1 | 0 |
 | `@flighthq/host-web` | 327 | 327 | 0 | 745 | 40 | 15 | 3 |
 | `@flighthq/image` | 46 | 46 | 0 | 38 | 3 | 10 | 1 |
 | `@flighthq/image-codec` | 37 | 37 | 0 | 62 | 7 | 53 | 0 |
@@ -170,7 +170,7 @@
 | `@flighthq/path` | 186 | 186 | 0 | 544 | 278 | 569 | 0 |
 | `@flighthq/path-boolean` | 76 | 76 | 0 | 186 | 102 | 119 | 0 |
 | `@flighthq/path-formats` | 5 | 5 | 0 | 129 | 12 | 0 | 0 |
-| `@flighthq/permissions` | 37 | 37 | 0 | 64 | 0 | 0 | 0 |
+| `@flighthq/permissions` | 35 | 35 | 0 | 64 | 0 | 0 | 0 |
 | `@flighthq/physics2d` | 262 | 262 | 0 | 1060 | 235 | 395 | 0 |
 | `@flighthq/physics2d-abi` | 150 | 150 | 0 | 439 | 70 | 219 | 0 |
 | `@flighthq/physics3d` | 549 | 549 | 0 | 1230 | 293 | 1104 | 0 |
@@ -241,7 +241,7 @@
 | `@flighthq/timeline` | 30 | 30 | 0 | 32 | 5 | 0 | 0 |
 | `@flighthq/tray` | 41 | 41 | 0 | 25 | 1 | 2 | 0 |
 | `@flighthq/tween` | 37 | 37 | 0 | 65 | 13 | 4 | 0 |
-| `@flighthq/types` | 3199 | 3199 | 0 | 0 | 0 | 0 | 0 |
+| `@flighthq/types` | 3221 | 3221 | 0 | 0 | 0 | 0 | 0 |
 | `@flighthq/updater` | 10 | 10 | 0 | 5 | 0 | 0 | 0 |
 | `@flighthq/useragent` | 12 | 12 | 0 | 58 | 1 | 3 | 0 |
 | `@flighthq/velocity` | 22 | 22 | 0 | 21 | 6 | 0 | 0 |

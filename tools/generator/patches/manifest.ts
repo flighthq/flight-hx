@@ -51,14 +51,14 @@ export default definePatches([
   },
   {
     expect: {
-      astHash: 'sha256:c9f7e40c68e9aa3e64b72655fb256482b9e2272f4fe1c03e91b3a09fa5f92be8',
+      astHash: 'sha256:500b25d369a38f3546e52f19b5e28242c48129246ad75ece9ef42427b9202c58',
       kind: 'function',
     },
     fragment: 'tools/generator/patches/bodies/shape/createShapeCommandArgumentCursor.hx',
     id: 'shape.create-command-argument-cursor.portable-length',
     operation: 'replaceBody',
     reason:
-      'Portable Haxe anonymous structures cannot preserve a TypeScript object-literal getter, so a typed runtime class materializes its length field.',
+      'Portable Haxe anonymous structures cannot preserve a TypeScript object-literal getter, so the patch materializes its length field while retaining the upstream closure-bound method.',
     target: {
       export: 'createShapeCommandArgumentCursor__shapeBounds',
       package: '@flighthq/shape',

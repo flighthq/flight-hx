@@ -1,13 +1,13 @@
 # Typed Struct Provenance Audit
 
-Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
+Upstream commit: `2e86cd620a53121aa6c9230215f44c6c9a3bf816`
 
 This reporting-only audit tests nominal-identity closure for the clean required-field set. It does not enable class emission. Bridge exposure is reported separately and is not itself a closure blocker.
 
 | Metric | Count |
 | --- | ---: |
-| Clean required-field candidates | 1138 |
-| Nominally closed candidates | 842 |
+| Clean required-field candidates | 1139 |
+| Nominally closed candidates | 843 |
 | Blocked candidates | 296 |
 | Normalization-provenance blockers only | 197 |
 | Container-transfer blockers only | 81 |
@@ -617,6 +617,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#PathBooleanBackend` | 0 | 1 | 2 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#PathMeshTyped` | 0 | 2 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#PathMorph` | 0 | 4 | 2 | 0 | 2 | 0 | 3 | 4 | no | `normalization-provenance` |
+| `@flighthq/types:interface#PermissionNativeHolding` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#PerspectiveProjection` | 11 | 3 | 4 | 0 | 2 | 0 | 6 | 6 | no | `normalization-provenance` |
 | `@flighthq/types:interface#Physics2DAbi` | 0 | 14 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#Physics2DAbiBodyBuffer` | 0 | 5 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |

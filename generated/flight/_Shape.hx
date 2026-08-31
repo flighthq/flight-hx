@@ -1367,7 +1367,18 @@ class _Shape {
   }
 
   public static function createShapeCommandArgumentCursor__shapeBounds(commands:Array<ShapeCommandToken>):ShapeCommandArgumentCursorInternal__shapeBounds {
-    return cast new flight._internal.ShapeCommandArgumentCursorRuntime(commands);
+    var cursor:ShapeCommandArgumentCursorInternal__shapeBounds = cast null;
+    cursor = cast {
+      argumentCount: 0.0,
+      argumentOffset: 0.0,
+      commands: commands,
+      getArgument: function(relativeIndex:Float):Null<ShapeCommandToken> {
+        if (relativeIndex < 0 || relativeIndex >= cursor.argumentCount) return null;
+        return cursor.commands[Std.int(cursor.argumentOffset + relativeIndex)];
+      },
+      length: 0.0,
+    };
+    return cursor;
     return cast null;
   }
 
@@ -1709,10 +1720,9 @@ class _Shape {
   }
 
   public static function setShapeCommandArgumentCursor__shapeBounds(cursor:ShapeCommandArgumentCursorInternal__shapeBounds, argumentOffset:Float, argumentCount:Float):Void {
-    final runtime:flight._internal.ShapeCommandArgumentCursorRuntime = cast cursor;
-    runtime.argumentOffset = argumentOffset;
-    runtime.argumentCount = argumentCount;
-    runtime.length = argumentCount;
+    cursor.argumentOffset = argumentOffset;
+    cursor.argumentCount = argumentCount;
+    cursor.length = argumentCount;
   }
 
   public static function writeShapeBoundsRectangle__shapeBounds(out:Rectangle, accumulator:ShapeBoundsAccumulator__shapeBounds):Void {

@@ -1013,10 +1013,10 @@
       }
     },
     {
-      "declarations": 57,
+      "declarations": 53,
       "diagnostics": [],
       "files": 16,
-      "lowered": 57,
+      "lowered": 53,
       "packageName": "@flighthq/host-capacitor",
       "staticFacts": {
         "booleanConditionalTruthiness": 10,
@@ -1036,10 +1036,10 @@
       }
     },
     {
-      "declarations": 105,
+      "declarations": 95,
       "diagnostics": [],
       "files": 20,
-      "lowered": 105,
+      "lowered": 95,
       "packageName": "@flighthq/host-electron",
       "staticFacts": {
         "booleanConditionalTruthiness": 33,
@@ -1059,10 +1059,10 @@
       }
     },
     {
-      "declarations": 43,
+      "declarations": 37,
       "diagnostics": [],
       "files": 13,
-      "lowered": 43,
+      "lowered": 37,
       "packageName": "@flighthq/host-tauri",
       "staticFacts": {
         "booleanConditionalTruthiness": 21,
@@ -1818,10 +1818,10 @@
       }
     },
     {
-      "declarations": 37,
+      "declarations": 35,
       "diagnostics": [],
       "files": 4,
-      "lowered": 37,
+      "lowered": 35,
       "packageName": "@flighthq/permissions",
       "staticFacts": {
         "booleanConditionalTruthiness": 13,
@@ -3451,10 +3451,10 @@
       }
     },
     {
-      "declarations": 3199,
+      "declarations": 3221,
       "diagnostics": [],
-      "files": 939,
-      "lowered": 3199,
+      "files": 947,
+      "lowered": 3221,
       "packageName": "@flighthq/types",
       "staticFacts": {
         "booleanConditionalTruthiness": 0,
@@ -3616,7 +3616,7 @@
   "summary": {
     "declarations": 16807,
     "diagnostics": 0,
-    "files": 2878,
+    "files": 2886,
     "lowered": 16807,
     "packages": 157,
     "staticEmission": {

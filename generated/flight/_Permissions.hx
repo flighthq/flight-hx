@@ -13,6 +13,7 @@ import flight.types.HostSystemCapabilities;
 import flight.types.MidiPermissionBackend;
 import flight.types.NotificationPermissionBackend;
 import flight.types.PermissionName;
+import flight.types.PermissionNativeHolding;
 import flight.types.PermissionQueryOutcome;
 import flight.types.PermissionRequestOutcome;
 import flight.types.PermissionState;
@@ -33,10 +34,6 @@ typedef MidiPermissionProjectionBackend__permission = { var getPermission:Void->
 typedef WebPermissionQueryOrigin__permission = flight._internal._Union2<{ var permissions:flight._internal.dom.Permissions; var reason:String; }, { var reason:String; }>;
 
 typedef WakeLockLike__permission = { @:optional var release:Void->flight._internal._Promise<flight._internal._Nothing>; };
-
-typedef PermissionNativeHoldingId = String;
-
-typedef PermissionNativeHolding = { var futureClaimingDomain:PermissionNativeHoldingId; var id:PermissionNativeHoldingId; var mode:String; var permissionNames:Array<String>; };
 
 @:noCompletion
 class _Permissions {

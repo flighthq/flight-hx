@@ -22,8 +22,8 @@ class EffectsCanvas {
     Facade_EffectsCanvas_flight__EffectsCanvas.applyCanvasGradientRampLookup(dest, source, ramp, bias, scale);
   }
 
-  public static function applyCanvasRenderEffectsToRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
-    return cast Facade_EffectsCanvas_flight__EffectsCanvas.applyCanvasRenderEffectsToRenderTexture(state, pool, source, dest, scratch, effects);
+  public static function applyCanvasRenderEffectsToRenderTexture(ownerState:CanvasRenderState, effectState:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
+    return cast Facade_EffectsCanvas_flight__EffectsCanvas.applyCanvasRenderEffectsToRenderTexture(ownerState, effectState, pool, source, dest, scratch, effects);
     return cast null;
   }
 

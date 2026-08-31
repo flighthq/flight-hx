@@ -1316,18 +1316,18 @@ class _EffectsCanvas {
     ((cast runtime.registries : CanvasRenderRegistries).renderEffects = (cast withRegistryTableEntry((cast (cast runtime.registries : CanvasRenderRegistries).renderEffects : Dynamic), (cast kind : String), ({ final __callArgument734:Dynamic = runner; __callArgument734; })) : KeyedTable<CanvasRenderEffectRunner>));
   }
 
-  public static function applyCanvasRenderEffectsToRenderTexture(state:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
+  public static function applyCanvasRenderEffectsToRenderTexture(ownerState:CanvasRenderState, effectState:CanvasRenderState, pool:CanvasRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
     var sourceTarget:Null<CanvasRenderTarget> = cast _Runtime.UNDEFINED;
     var operations:Array<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }> = cast _Runtime.UNDEFINED;
     var current:CanvasRenderTarget = cast _Runtime.UNDEFINED;
     if ((cast ((cast ((cast _Runtime.strictEquals(source, dest) : Bool) || (cast _Runtime.strictEquals(source, scratch) : Bool)) : Bool) || (cast _Runtime.strictEquals(dest, scratch) : Bool)) : Bool)) {
       _Runtime.throwValue(_Runtime.error('applyCanvasRenderEffectsToRenderTexture: source, destination, and scratch must be distinct'));
     }
-    sourceTarget = (cast getCanvasRenderTextureTarget(({ final __callArgument736:Dynamic = state; __callArgument736; }), ({ final __callArgument737:Dynamic = source; __callArgument737; })) : Null<CanvasRenderTarget>);
+    sourceTarget = (cast getCanvasRenderTextureTarget(({ final __callArgument736:Dynamic = ownerState; __callArgument736; }), ({ final __callArgument737:Dynamic = source; __callArgument737; })) : Null<CanvasRenderTarget>);
     if ((cast _Runtime.strictEquals(sourceTarget, null) : Bool)) { return cast false; }
     operations = (cast _Runtime.flatMapArray((cast effects : Array<RenderEffect>), function(effect:RenderEffect, __unused0:Float, __unused1:Array<RenderEffect>):flight._internal._Union2<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }, Array<{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }>> {
       var runner:Null<CanvasRenderEffectRunner> = cast _Runtime.UNDEFINED;
-      runner = (cast getCanvasRenderEffectRunner(({ final __callArgument740:Dynamic = state; __callArgument740; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<CanvasRenderEffectRunner>);
+      runner = (cast getCanvasRenderEffectRunner(({ final __callArgument740:Dynamic = effectState; __callArgument740; }), (cast _Runtime.field(effect, 'kind') : String)) : Null<CanvasRenderEffectRunner>);
       return cast ((cast _Runtime.strictEquals(runner, null) : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([{ effect: effect, runner: runner }] : Array<Dynamic>) : Dynamic));
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
@@ -1339,10 +1339,10 @@ class _EffectsCanvas {
         var operation:{ var effect:RenderEffect; var runner:CanvasRenderEffectRunner; } = flight._internal._StaticIndex.readArray(operations, index);
         var remaining:Float = _Runtime.subtractNumbers(_Runtime.field(operations, 'length'), index);
         var output:RenderTexture = ((cast _Runtime.strictEquals(_Runtime.fmod(remaining, 2.0), 1.0) : Bool) ? (cast dest : Dynamic) : (cast scratch : Dynamic));
-        writeCanvasRenderTextureTarget(({ final __callArgument742:Dynamic = state; __callArgument742; }), ({ final __callArgument743:Dynamic = output; __callArgument743; }), (cast function(target:CanvasRenderTarget):Void {
-          (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).runner(({ final __callArgument744:Dynamic = { state: state, source: current, dest: target, pool: pool.effectTargets }; __callArgument744; }), (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).effect);
+        writeCanvasRenderTextureTarget(({ final __callArgument742:Dynamic = ownerState; __callArgument742; }), ({ final __callArgument743:Dynamic = output; __callArgument743; }), (cast function(target:CanvasRenderTarget):Void {
+          (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).runner(({ final __callArgument744:Dynamic = { state: effectState, source: current, dest: target, pool: pool.effectTargets }; __callArgument744; }), (cast operation : { var effect:RenderEffect; var runner:CanvasRenderEffectRunner; }).effect);
         } : Dynamic));
-        (current = cast ((cast getCanvasRenderTextureTarget(({ final __callArgument748:Dynamic = state; __callArgument748; }), ({ final __callArgument749:Dynamic = output; __callArgument749; })) : Null<CanvasRenderTarget>) : Dynamic));
+        (current = cast ((cast getCanvasRenderTextureTarget(({ final __callArgument748:Dynamic = ownerState; __callArgument748; }), ({ final __callArgument749:Dynamic = output; __callArgument749; })) : Null<CanvasRenderTarget>) : Dynamic));
         index++;
       }
     }

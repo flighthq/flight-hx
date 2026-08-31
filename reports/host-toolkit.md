@@ -1,6 +1,6 @@
 # Host Toolkit Dependency Audit
 
-Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
+Upstream commit: `2e86cd620a53121aa6c9230215f44c6c9a3bf816`
 
 Generated code owns checker-known source types and stable lookup keys. Maintained source owns the declarations, target values, and adapters behind those keys. Generation fails when a referenced key has no declared toolkit provider; Dynamic compatibility declarations remain visible as toolkit debt rather than changing the generated type or member expression.
 

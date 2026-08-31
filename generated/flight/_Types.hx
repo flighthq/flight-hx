@@ -22,6 +22,7 @@ import flight.types.ButtonController;
 import flight.types.Camera2D;
 import flight.types.CollisionResponse;
 import flight.types.ColorAdjustmentRuntime;
+import flight.types.DesktopOsProfile;
 import flight.types.DisplayObject;
 import flight.types.EasingFunction;
 import flight.types.Entity;
@@ -44,6 +45,7 @@ import flight.types.HasTransform2DRuntime;
 import flight.types.HasTransform3D;
 import flight.types.HasTransform3DRuntime;
 import flight.types.HierarchyNodeAny;
+import flight.types.HostTrayCapabilities;
 import flight.types.Image;
 import flight.types.ImageBitmapComposition;
 import flight.types.ImageResourceFailure;
@@ -140,6 +142,21 @@ import flight.types.TextureUvTransform;
 import flight.types.Timeline;
 import flight.types.ToggleController;
 import flight.types.TransformInherit2D;
+import flight.types.TrayBalloonBackend;
+import flight.types.TrayBalloonEventsBackend;
+import flight.types.TrayBoundsBackend;
+import flight.types.TrayDoubleClickPolicyBackend;
+import flight.types.TrayDropEventsBackend;
+import flight.types.TrayImageBackend;
+import flight.types.TrayInteractionEventsBackend;
+import flight.types.TrayLifecycleBackend;
+import flight.types.TrayMenuBackend;
+import flight.types.TrayMenuSelectionEventsBackend;
+import flight.types.TrayPopupMenuBackend;
+import flight.types.TrayPressedImageBackend;
+import flight.types.TrayTemplateImageBackend;
+import flight.types.TrayTitleBackend;
+import flight.types.TrayTooltipBackend;
 import flight.types.Vector2;
 import flight.types.Vector2Like;
 import flight.types.Vector3;
@@ -151,6 +168,12 @@ typedef AudioResourceReferenceBase__AudioResourceReference = { var failure:Null<
 
 typedef CreateTextureVariantOptions__CreateTextureOptions<Type> = flight._internal._Conditional<Type, TextureLike, flight._internal._Intersection2<flight._internal._Omit<{ @:optional var version:Null<Float>; @:optional var dimension:Null<String>; @:optional var colorSpace:Null<TextureColorSpace>; @:optional var sampler:Null<Sampler>; @:optional var flipX:Null<Bool>; @:optional var flipY:Null<Bool>; @:optional var uvOffset:Null<Vector2>; @:optional var uvRotation:Null<Float>; @:optional var uvScale:Null<Vector2>; }, String>, flight._internal._Conditional<flight._internal._IndexedAccess<Type, String>, String, { @:optional var dimension:String; }, { var dimension:flight._internal._IndexedAccess<Type, String>; }>>, flight._internal._Any>;
 
+typedef ElectronCommonTrayCapabilities__ElectronTrayCapabilitiesFor = flight._internal._Required<{ @:optional var bounds:Null<TrayBoundsBackend>; @:optional var image:Null<TrayImageBackend>; @:optional var interactionEvents:Null<TrayInteractionEventsBackend>; @:optional var lifecycle:Null<TrayLifecycleBackend>; @:optional var menu:Null<TrayMenuBackend>; @:optional var menuSelectionEvents:Null<TrayMenuSelectionEventsBackend>; @:optional var popupMenu:Null<TrayPopupMenuBackend>; @:optional var tooltip:Null<TrayTooltipBackend>; }>;
+
+typedef ElectronMacosTrayCapabilities__ElectronTrayCapabilitiesFor = flight._internal._Intersection2<ElectronCommonTrayCapabilities__ElectronTrayCapabilitiesFor, flight._internal._Required<{ @:optional var doubleClickPolicy:Null<TrayDoubleClickPolicyBackend>; @:optional var dropEvents:Null<TrayDropEventsBackend>; @:optional var pressedImage:Null<TrayPressedImageBackend>; @:optional var templateImage:Null<TrayTemplateImageBackend>; @:optional var title:Null<TrayTitleBackend>; }>>;
+
+typedef ElectronWindowsTrayCapabilities__ElectronTrayCapabilitiesFor = flight._internal._Intersection2<ElectronCommonTrayCapabilities__ElectronTrayCapabilitiesFor, flight._internal._Required<{ @:optional var balloon:Null<TrayBalloonBackend>; @:optional var balloonEvents:Null<TrayBalloonEventsBackend>; }>>;
+
 typedef GlContextMember__GlContext = String;
 
 typedef ImageResourceReferenceBase__ImageResourceReference = { var failure:Null<ImageResourceFailure>; var mimeType:Null<String>; var state:ResourceResolutionState; @:optional var textures:Array<Texture>; };
@@ -158,6 +181,14 @@ typedef ImageResourceReferenceBase__ImageResourceReference = { var failure:Null<
 typedef SceneCoverageEntryBase__SceneCoverageEntry = { var facet:RequirementFacet; var kind:Kind; var registry:RenderRegistry; };
 
 typedef SceneCoverageRemedy__SceneCoverageEntry = { var module:String; var registrar:String; };
+
+typedef TauriCommonTrayCapabilities__TauriTrayCapabilitiesFor = flight._internal._Required<{ @:optional var image:Null<TrayImageBackend>; @:optional var lifecycle:Null<TrayLifecycleBackend>; @:optional var menu:Null<TrayMenuBackend>; @:optional var menuSelectionEvents:Null<TrayMenuSelectionEventsBackend>; }>;
+
+typedef TauriLinuxTrayCapabilities__TauriTrayCapabilitiesFor = flight._internal._Intersection2<TauriCommonTrayCapabilities__TauriTrayCapabilitiesFor, flight._internal._Required<{ @:optional var title:Null<TrayTitleBackend>; }>>;
+
+typedef TauriMacosTrayCapabilities__TauriTrayCapabilitiesFor = flight._internal._Intersection2<TauriCommonTrayCapabilities__TauriTrayCapabilitiesFor, flight._internal._Required<{ @:optional var interactionEvents:Null<TrayInteractionEventsBackend>; @:optional var templateImage:Null<TrayTemplateImageBackend>; @:optional var title:Null<TrayTitleBackend>; @:optional var tooltip:Null<TrayTooltipBackend>; }>>;
+
+typedef TauriWindowsTrayCapabilities__TauriTrayCapabilitiesFor = flight._internal._Intersection2<TauriCommonTrayCapabilities__TauriTrayCapabilitiesFor, flight._internal._Required<{ @:optional var interactionEvents:Null<TrayInteractionEventsBackend>; @:optional var tooltip:Null<TrayTooltipBackend>; }>>;
 
 typedef TextureCommon__Texture = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; };
 

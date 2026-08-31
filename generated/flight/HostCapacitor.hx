@@ -4,20 +4,15 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._HostCapacitor as Facade_HostCapacitor_flight__HostCapacitor;
-import flight._HostCapacitor.CapacitorAndroidAppCapabilities__capacitorApp;
-import flight._HostCapacitor.CapacitorAppCapabilitiesFor;
 import flight._HostCapacitor.CapacitorClipboardBackend__capacitorClipboard;
-import flight._HostCapacitor.CapacitorCommonAppCapabilities__capacitorApp;
 import flight._HostCapacitor.CapacitorConnectivityBackend__capacitorConnectivity;
 import flight._HostCapacitor.CapacitorHost__capacitorRegister;
-import flight._HostCapacitor.CapacitorProtocolCapabilities;
-import flight.types.AppActivateBackend;
-import flight.types.AppHideBackend;
-import flight.types.AppNameBackend;
-import flight.types.AppQuitBackend;
-import flight.types.AppVersionBackend;
+import flight.types.CapacitorAndroidAppCapabilities;
 import flight.types.CapacitorApi;
+import flight.types.CapacitorAppCapabilitiesFor;
+import flight.types.CapacitorCommonAppCapabilities;
 import flight.types.CapacitorNotificationCapabilities;
+import flight.types.CapacitorProtocolCapabilities;
 import flight.types.CapacitorShareContentBackend;
 import flight.types.DeviceBackend;
 import flight.types.Entity;
@@ -47,10 +42,10 @@ class HostCapacitor {
   }
 
   @:overload(function<Profile:MobileOsProfile>(capacitor:CapacitorApi, profile:Profile):CapacitorAppCapabilitiesFor<Profile> {})
-  @:overload(function(capacitor:CapacitorApi, profile:String):flight._internal._Intersection2<flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var activate:Null<AppActivateBackend>; @:optional var name:Null<AppNameBackend>; @:optional var version:Null<AppVersionBackend>; }>>, flight._internal._Required<{ @:optional var hide:Null<AppHideBackend>; @:optional var quit:Null<AppQuitBackend>; }>> {})
-  @:overload(function(capacitor:CapacitorApi, profile:String):flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var activate:Null<AppActivateBackend>; @:optional var name:Null<AppNameBackend>; @:optional var version:Null<AppVersionBackend>; }>> {})
-  @:overload(function(capacitor:CapacitorApi, profile:MobileOsProfile):flight._internal._Union2<flight._internal._Intersection2<flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var activate:Null<AppActivateBackend>; @:optional var name:Null<AppNameBackend>; @:optional var version:Null<AppVersionBackend>; }>>, flight._internal._Required<{ @:optional var hide:Null<AppHideBackend>; @:optional var quit:Null<AppQuitBackend>; }>>, flight._internal._Intersection2<Entity, flight._internal._Required<{ @:optional var activate:Null<AppActivateBackend>; @:optional var name:Null<AppNameBackend>; @:optional var version:Null<AppVersionBackend>; }>>> {})
-  public static function createCapacitorAppCapabilities(capacitor:CapacitorApi, profile:MobileOsProfile):flight._internal._Union2<CapacitorAndroidAppCapabilities__capacitorApp, CapacitorCommonAppCapabilities__capacitorApp> {
+  @:overload(function(capacitor:CapacitorApi, profile:String):CapacitorAndroidAppCapabilities {})
+  @:overload(function(capacitor:CapacitorApi, profile:String):CapacitorCommonAppCapabilities {})
+  @:overload(function(capacitor:CapacitorApi, profile:MobileOsProfile):flight._internal._Union2<CapacitorAndroidAppCapabilities, CapacitorCommonAppCapabilities> {})
+  public static function createCapacitorAppCapabilities(capacitor:CapacitorApi, profile:MobileOsProfile):flight._internal._Union2<CapacitorAndroidAppCapabilities, CapacitorCommonAppCapabilities> {
     return cast Facade_HostCapacitor_flight__HostCapacitor.createCapacitorAppCapabilities(capacitor, profile);
     return cast null;
   }

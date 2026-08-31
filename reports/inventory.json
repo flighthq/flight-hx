@@ -16333,7 +16333,7 @@
               "source": "upstream/packages/effects-canvas/src/canvasGradientRamp.ts"
             },
             {
-              "fingerprint": "sha256:190af2bcfaae652b0f310344ce3aa44b6318ec96e635e7cd6219ba32e3f674f8",
+              "fingerprint": "sha256:0ebdd0a78150319fcfc159ad09a853b9f70655afe2a17566272d06a1fa156da3",
               "kind": "function",
               "name": "applyCanvasRenderEffectsToRenderTexture",
               "runtime": true,
@@ -16731,7 +16731,7 @@
               "source": "upstream/packages/effects-canvas/src/canvasGradientRamp.ts"
             },
             {
-              "fingerprint": "sha256:190af2bcfaae652b0f310344ce3aa44b6318ec96e635e7cd6219ba32e3f674f8",
+              "fingerprint": "sha256:0ebdd0a78150319fcfc159ad09a853b9f70655afe2a17566272d06a1fa156da3",
               "kind": "function",
               "name": "applyCanvasRenderEffectsToRenderTexture",
               "runtime": true,
@@ -30932,25 +30932,11 @@
           "exportConflicts": [],
           "exports": [
             {
-              "fingerprint": "sha256:e64366e9386be98bdae7e2fe54af7fdf81b998e9bc1d8a3a489d9e94d4db3854",
-              "kind": "type",
-              "name": "CapacitorAppCapabilitiesFor",
-              "runtime": false,
-              "source": "upstream/packages/host-capacitor/src/capacitorApp.ts"
-            },
-            {
               "fingerprint": "sha256:3c7255b7567ac1c9f1d8cc5d1120e15c047bd5704a143caa82d699419d052c1e",
               "kind": "function",
               "name": "capacitorHost",
               "runtime": true,
               "source": "upstream/packages/host-capacitor/src/capacitorRegister.ts"
-            },
-            {
-              "fingerprint": "sha256:bf505c06d1a414d81cd4b784a4568e706eff6a6b3b27ded3e257248605e14e80",
-              "kind": "type",
-              "name": "CapacitorProtocolCapabilities",
-              "runtime": false,
-              "source": "upstream/packages/host-capacitor/src/capacitorProtocol.ts"
             },
             {
               "fingerprint": "sha256:38c8498af8e33e77c94266b34e63d5bd7b3f340d06173afe0c38133a08d8fbb0",
@@ -31120,25 +31106,11 @@
           "exportConflicts": [],
           "exports": [
             {
-              "fingerprint": "sha256:e64366e9386be98bdae7e2fe54af7fdf81b998e9bc1d8a3a489d9e94d4db3854",
-              "kind": "type",
-              "name": "CapacitorAppCapabilitiesFor",
-              "runtime": false,
-              "source": "upstream/packages/host-capacitor/src/capacitorApp.ts"
-            },
-            {
               "fingerprint": "sha256:3c7255b7567ac1c9f1d8cc5d1120e15c047bd5704a143caa82d699419d052c1e",
               "kind": "function",
               "name": "capacitorHost",
               "runtime": true,
               "source": "upstream/packages/host-capacitor/src/capacitorRegister.ts"
-            },
-            {
-              "fingerprint": "sha256:bf505c06d1a414d81cd4b784a4568e706eff6a6b3b27ded3e257248605e14e80",
-              "kind": "type",
-              "name": "CapacitorProtocolCapabilities",
-              "runtime": false,
-              "source": "upstream/packages/host-capacitor/src/capacitorProtocol.ts"
             },
             {
               "fingerprint": "sha256:38c8498af8e33e77c94266b34e63d5bd7b3f340d06173afe0c38133a08d8fbb0",
@@ -31475,27 +31447,6 @@
               "source": "upstream/packages/host-electron/src/electronWindow.ts"
             },
             {
-              "fingerprint": "sha256:ae349dc50d4eee4ec840b5a2fed6ac6551c83b2654581be2108cb78ac0e457af",
-              "kind": "type",
-              "name": "ElectronAppCapabilitiesFor",
-              "runtime": false,
-              "source": "upstream/packages/host-electron/src/electronApp.ts"
-            },
-            {
-              "fingerprint": "sha256:384c347e4329d273350e0413a8134e5cc1b3bd270626962a17e5888d21df777b",
-              "kind": "type",
-              "name": "ElectronProtocolCapabilities",
-              "runtime": false,
-              "source": "upstream/packages/host-electron/src/electronProtocol.ts"
-            },
-            {
-              "fingerprint": "sha256:bc304cab58935fc7398b3c50385ac166bbd382573482a7c91793a7e7bd191ae8",
-              "kind": "type",
-              "name": "ElectronTrayCapabilitiesFor",
-              "runtime": false,
-              "source": "upstream/packages/host-electron/src/electronTray.ts"
-            },
-            {
               "fingerprint": "sha256:47e23606751322c5e49b943fbb16dfa0bc4f5f93aac4699c81f94fded5675a05",
               "kind": "function",
               "name": "getApplicationWindowForElectronId",
@@ -31691,27 +31642,6 @@
               "source": "upstream/packages/host-electron/src/electronWindow.ts"
             },
             {
-              "fingerprint": "sha256:ae349dc50d4eee4ec840b5a2fed6ac6551c83b2654581be2108cb78ac0e457af",
-              "kind": "type",
-              "name": "ElectronAppCapabilitiesFor",
-              "runtime": false,
-              "source": "upstream/packages/host-electron/src/electronApp.ts"
-            },
-            {
-              "fingerprint": "sha256:384c347e4329d273350e0413a8134e5cc1b3bd270626962a17e5888d21df777b",
-              "kind": "type",
-              "name": "ElectronProtocolCapabilities",
-              "runtime": false,
-              "source": "upstream/packages/host-electron/src/electronProtocol.ts"
-            },
-            {
-              "fingerprint": "sha256:bc304cab58935fc7398b3c50385ac166bbd382573482a7c91793a7e7bd191ae8",
-              "kind": "type",
-              "name": "ElectronTrayCapabilitiesFor",
-              "runtime": false,
-              "source": "upstream/packages/host-electron/src/electronTray.ts"
-            },
-            {
               "fingerprint": "sha256:47e23606751322c5e49b943fbb16dfa0bc4f5f93aac4699c81f94fded5675a05",
               "kind": "function",
               "name": "getApplicationWindowForElectronId",
@@ -31905,20 +31835,6 @@
               "name": "registerTauriBackends",
               "runtime": true,
               "source": "upstream/packages/host-tauri/src/tauriRegister.ts"
-            },
-            {
-              "fingerprint": "sha256:ac4f85991385f5a2c2577943587a6f0e9613e26d9c91c09f15a735387cb54272",
-              "kind": "type",
-              "name": "TauriAppCapabilities",
-              "runtime": false,
-              "source": "upstream/packages/host-tauri/src/tauriApp.ts"
-            },
-            {
-              "fingerprint": "sha256:38b7db63bdde6b1a221029afb656b60f7e457220201b7eef071894540792f099",
-              "kind": "type",
-              "name": "TauriTrayCapabilitiesFor",
-              "runtime": false,
-              "source": "upstream/packages/host-tauri/src/tauriTray.ts"
             }
           ],
           "source": "upstream/packages/host-tauri/src/index.ts",
@@ -32044,20 +31960,6 @@
               "name": "registerTauriBackends",
               "runtime": true,
               "source": "upstream/packages/host-tauri/src/tauriRegister.ts"
-            },
-            {
-              "fingerprint": "sha256:ac4f85991385f5a2c2577943587a6f0e9613e26d9c91c09f15a735387cb54272",
-              "kind": "type",
-              "name": "TauriAppCapabilities",
-              "runtime": false,
-              "source": "upstream/packages/host-tauri/src/tauriApp.ts"
-            },
-            {
-              "fingerprint": "sha256:38b7db63bdde6b1a221029afb656b60f7e457220201b7eef071894540792f099",
-              "kind": "type",
-              "name": "TauriTrayCapabilitiesFor",
-              "runtime": false,
-              "source": "upstream/packages/host-tauri/src/tauriTray.ts"
             }
           ],
           "source": "upstream/packages/host-tauri/src/contract.ts",
@@ -32578,7 +32480,7 @@
               "source": "upstream/packages/host-web/src/webHaptics.ts"
             },
             {
-              "fingerprint": "sha256:ba5dcea252a5930fd4d654fb73b9dcfc0a36428cf3b5c002d120170ee6fe4f5e",
+              "fingerprint": "sha256:ec071125f82cda00b0d7950728d309f0971c8cc75f565b656ab9f5ca76aabb80",
               "kind": "variable",
               "name": "webHost",
               "runtime": true,
@@ -33389,7 +33291,7 @@
               "source": "upstream/packages/host-web/src/webHaptics.ts"
             },
             {
-              "fingerprint": "sha256:ba5dcea252a5930fd4d654fb73b9dcfc0a36428cf3b5c002d120170ee6fe4f5e",
+              "fingerprint": "sha256:ec071125f82cda00b0d7950728d309f0971c8cc75f565b656ab9f5ca76aabb80",
               "kind": "variable",
               "name": "webHost",
               "runtime": true,
@@ -74259,7 +74161,7 @@
               "source": "upstream/packages/effects-canvas/src/canvasGradientRamp.ts"
             },
             {
-              "fingerprint": "sha256:190af2bcfaae652b0f310344ce3aa44b6318ec96e635e7cd6219ba32e3f674f8",
+              "fingerprint": "sha256:0ebdd0a78150319fcfc159ad09a853b9f70655afe2a17566272d06a1fa156da3",
               "kind": "function",
               "name": "applyCanvasRenderEffectsToRenderTexture",
               "runtime": true,
@@ -76960,6 +76862,13 @@
               "source": "upstream/packages/types/src/CapacitorApi.ts"
             },
             {
+              "fingerprint": "sha256:e64366e9386be98bdae7e2fe54af7fdf81b998e9bc1d8a3a489d9e94d4db3854",
+              "kind": "type",
+              "name": "CapacitorAppCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:2371806e5bb53aeb4c9a888a7f152ff0d64cfd81c40a93fcb1f2de6d290995e5",
               "kind": "interface",
               "name": "CapacitorAppInfo",
@@ -77266,6 +77175,13 @@
               "name": "CapacitorPositionCoords",
               "runtime": false,
               "source": "upstream/packages/types/src/CapacitorApi.ts"
+            },
+            {
+              "fingerprint": "sha256:bf505c06d1a414d81cd4b784a4568e706eff6a6b3b27ded3e257248605e14e80",
+              "kind": "type",
+              "name": "CapacitorProtocolCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorProtocolCapabilities.ts"
             },
             {
               "fingerprint": "sha256:b56db52c88b9f467d939513c4f91b43e63963ca718594912e0eeea576537d78e",
@@ -88875,6 +88791,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:ae349dc50d4eee4ec840b5a2fed6ac6551c83b2654581be2108cb78ac0e457af",
+              "kind": "type",
+              "name": "ElectronAppCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:af9b44b45fd162436246f44f47fbd690e6070ac46912849ddeb93bdb4b92ed0c",
               "kind": "interface",
               "name": "ElectronAutoUpdater",
@@ -89092,6 +89015,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:384c347e4329d273350e0413a8134e5cc1b3bd270626962a17e5888d21df777b",
+              "kind": "type",
+              "name": "ElectronProtocolCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronProtocolCapabilities.ts"
+            },
+            {
               "fingerprint": "sha256:b6d1c737450f66fa221301095025d2d5cc6e89f73afe45f736ec72dc3c1b39eb",
               "kind": "interface",
               "name": "ElectronRectangle",
@@ -89139,6 +89069,13 @@
               "name": "ElectronTrayBalloonOptions",
               "runtime": false,
               "source": "upstream/packages/types/src/ElectronApi.ts"
+            },
+            {
+              "fingerprint": "sha256:bc304cab58935fc7398b3c50385ac166bbd382573482a7c91793a7e7bd191ae8",
+              "kind": "type",
+              "name": "ElectronTrayCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronTrayCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:2d53e9b7bc654216df32ecd30d6dc22c6655e51f7821e164c6c7a0928f21488b",
@@ -121686,6 +121623,13 @@
               "source": "upstream/packages/types/src/TauriApi.ts"
             },
             {
+              "fingerprint": "sha256:ac4f85991385f5a2c2577943587a6f0e9613e26d9c91c09f15a735387cb54272",
+              "kind": "type",
+              "name": "TauriAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/TauriAppCapabilities.ts"
+            },
+            {
               "fingerprint": "sha256:08ba953ebe17678812ac5f1d64dbc33f14efaf9220a0f1cee1e2230703b4bab2",
               "kind": "interface",
               "name": "TauriAppModule",
@@ -121908,6 +121852,13 @@
               "name": "TauriSubmenuOptions",
               "runtime": false,
               "source": "upstream/packages/types/src/TauriApi.ts"
+            },
+            {
+              "fingerprint": "sha256:38b7db63bdde6b1a221029afb656b60f7e457220201b7eef071894540792f099",
+              "kind": "type",
+              "name": "TauriTrayCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/TauriTrayCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:8dc857af7c3ad53eae4d871e4a60f877204c559399bcd55f65eef9f872d3c813",
@@ -132311,7 +132262,7 @@
               "source": "upstream/packages/effects-canvas/src/canvasGradientRamp.ts"
             },
             {
-              "fingerprint": "sha256:190af2bcfaae652b0f310344ce3aa44b6318ec96e635e7cd6219ba32e3f674f8",
+              "fingerprint": "sha256:0ebdd0a78150319fcfc159ad09a853b9f70655afe2a17566272d06a1fa156da3",
               "kind": "function",
               "name": "applyCanvasRenderEffectsToRenderTexture",
               "runtime": true,
@@ -134907,6 +134858,13 @@
               "source": "upstream/packages/types/src/CapacitorApi.ts"
             },
             {
+              "fingerprint": "sha256:e64366e9386be98bdae7e2fe54af7fdf81b998e9bc1d8a3a489d9e94d4db3854",
+              "kind": "type",
+              "name": "CapacitorAppCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:2371806e5bb53aeb4c9a888a7f152ff0d64cfd81c40a93fcb1f2de6d290995e5",
               "kind": "interface",
               "name": "CapacitorAppInfo",
@@ -135213,6 +135171,13 @@
               "name": "CapacitorPositionCoords",
               "runtime": false,
               "source": "upstream/packages/types/src/CapacitorApi.ts"
+            },
+            {
+              "fingerprint": "sha256:bf505c06d1a414d81cd4b784a4568e706eff6a6b3b27ded3e257248605e14e80",
+              "kind": "type",
+              "name": "CapacitorProtocolCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorProtocolCapabilities.ts"
             },
             {
               "fingerprint": "sha256:b56db52c88b9f467d939513c4f91b43e63963ca718594912e0eeea576537d78e",
@@ -146262,6 +146227,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:ae349dc50d4eee4ec840b5a2fed6ac6551c83b2654581be2108cb78ac0e457af",
+              "kind": "type",
+              "name": "ElectronAppCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:af9b44b45fd162436246f44f47fbd690e6070ac46912849ddeb93bdb4b92ed0c",
               "kind": "interface",
               "name": "ElectronAutoUpdater",
@@ -146479,6 +146451,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:384c347e4329d273350e0413a8134e5cc1b3bd270626962a17e5888d21df777b",
+              "kind": "type",
+              "name": "ElectronProtocolCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronProtocolCapabilities.ts"
+            },
+            {
               "fingerprint": "sha256:b6d1c737450f66fa221301095025d2d5cc6e89f73afe45f736ec72dc3c1b39eb",
               "kind": "interface",
               "name": "ElectronRectangle",
@@ -146526,6 +146505,13 @@
               "name": "ElectronTrayBalloonOptions",
               "runtime": false,
               "source": "upstream/packages/types/src/ElectronApi.ts"
+            },
+            {
+              "fingerprint": "sha256:bc304cab58935fc7398b3c50385ac166bbd382573482a7c91793a7e7bd191ae8",
+              "kind": "type",
+              "name": "ElectronTrayCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronTrayCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:2d53e9b7bc654216df32ecd30d6dc22c6655e51f7821e164c6c7a0928f21488b",
@@ -177442,6 +177428,13 @@
               "source": "upstream/packages/types/src/TauriApi.ts"
             },
             {
+              "fingerprint": "sha256:ac4f85991385f5a2c2577943587a6f0e9613e26d9c91c09f15a735387cb54272",
+              "kind": "type",
+              "name": "TauriAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/TauriAppCapabilities.ts"
+            },
+            {
               "fingerprint": "sha256:08ba953ebe17678812ac5f1d64dbc33f14efaf9220a0f1cee1e2230703b4bab2",
               "kind": "interface",
               "name": "TauriAppModule",
@@ -177664,6 +177657,13 @@
               "name": "TauriSubmenuOptions",
               "runtime": false,
               "source": "upstream/packages/types/src/TauriApi.ts"
+            },
+            {
+              "fingerprint": "sha256:38b7db63bdde6b1a221029afb656b60f7e457220201b7eef071894540792f099",
+              "kind": "type",
+              "name": "TauriTrayCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/TauriTrayCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:8dc857af7c3ad53eae4d871e4a60f877204c559399bcd55f65eef9f872d3c813",
@@ -185240,6 +185240,13 @@
               "source": "upstream/packages/types/src/CapacitorApi.ts"
             },
             {
+              "fingerprint": "sha256:e64366e9386be98bdae7e2fe54af7fdf81b998e9bc1d8a3a489d9e94d4db3854",
+              "kind": "type",
+              "name": "CapacitorAppCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:2371806e5bb53aeb4c9a888a7f152ff0d64cfd81c40a93fcb1f2de6d290995e5",
               "kind": "interface",
               "name": "CapacitorAppInfo",
@@ -185546,6 +185553,13 @@
               "name": "CapacitorPositionCoords",
               "runtime": false,
               "source": "upstream/packages/types/src/CapacitorApi.ts"
+            },
+            {
+              "fingerprint": "sha256:bf505c06d1a414d81cd4b784a4568e706eff6a6b3b27ded3e257248605e14e80",
+              "kind": "type",
+              "name": "CapacitorProtocolCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorProtocolCapabilities.ts"
             },
             {
               "fingerprint": "sha256:b56db52c88b9f467d939513c4f91b43e63963ca718594912e0eeea576537d78e",
@@ -188111,6 +188125,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:ae349dc50d4eee4ec840b5a2fed6ac6551c83b2654581be2108cb78ac0e457af",
+              "kind": "type",
+              "name": "ElectronAppCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:af9b44b45fd162436246f44f47fbd690e6070ac46912849ddeb93bdb4b92ed0c",
               "kind": "interface",
               "name": "ElectronAutoUpdater",
@@ -188328,6 +188349,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:384c347e4329d273350e0413a8134e5cc1b3bd270626962a17e5888d21df777b",
+              "kind": "type",
+              "name": "ElectronProtocolCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronProtocolCapabilities.ts"
+            },
+            {
               "fingerprint": "sha256:b6d1c737450f66fa221301095025d2d5cc6e89f73afe45f736ec72dc3c1b39eb",
               "kind": "interface",
               "name": "ElectronRectangle",
@@ -188375,6 +188403,13 @@
               "name": "ElectronTrayBalloonOptions",
               "runtime": false,
               "source": "upstream/packages/types/src/ElectronApi.ts"
+            },
+            {
+              "fingerprint": "sha256:bc304cab58935fc7398b3c50385ac166bbd382573482a7c91793a7e7bd191ae8",
+              "kind": "type",
+              "name": "ElectronTrayCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronTrayCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:2d53e9b7bc654216df32ecd30d6dc22c6655e51f7821e164c6c7a0928f21488b",
@@ -204787,6 +204822,13 @@
               "source": "upstream/packages/types/src/TauriApi.ts"
             },
             {
+              "fingerprint": "sha256:ac4f85991385f5a2c2577943587a6f0e9613e26d9c91c09f15a735387cb54272",
+              "kind": "type",
+              "name": "TauriAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/TauriAppCapabilities.ts"
+            },
+            {
               "fingerprint": "sha256:08ba953ebe17678812ac5f1d64dbc33f14efaf9220a0f1cee1e2230703b4bab2",
               "kind": "interface",
               "name": "TauriAppModule",
@@ -205009,6 +205051,13 @@
               "name": "TauriSubmenuOptions",
               "runtime": false,
               "source": "upstream/packages/types/src/TauriApi.ts"
+            },
+            {
+              "fingerprint": "sha256:38b7db63bdde6b1a221029afb656b60f7e457220201b7eef071894540792f099",
+              "kind": "type",
+              "name": "TauriTrayCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/TauriTrayCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:8dc857af7c3ad53eae4d871e4a60f877204c559399bcd55f65eef9f872d3c813",
@@ -220233,7 +220282,7 @@
               "source": "upstream/packages/effects-canvas/src/canvasGradientRamp.ts"
             },
             {
-              "fingerprint": "sha256:190af2bcfaae652b0f310344ce3aa44b6318ec96e635e7cd6219ba32e3f674f8",
+              "fingerprint": "sha256:0ebdd0a78150319fcfc159ad09a853b9f70655afe2a17566272d06a1fa156da3",
               "kind": "function",
               "name": "applyCanvasRenderEffectsToRenderTexture",
               "runtime": true,
@@ -254865,6 +254914,13 @@
               "source": "upstream/packages/types/src/CapacitorApi.ts"
             },
             {
+              "fingerprint": "sha256:e64366e9386be98bdae7e2fe54af7fdf81b998e9bc1d8a3a489d9e94d4db3854",
+              "kind": "type",
+              "name": "CapacitorAppCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:2371806e5bb53aeb4c9a888a7f152ff0d64cfd81c40a93fcb1f2de6d290995e5",
               "kind": "interface",
               "name": "CapacitorAppInfo",
@@ -255171,6 +255227,13 @@
               "name": "CapacitorPositionCoords",
               "runtime": false,
               "source": "upstream/packages/types/src/CapacitorApi.ts"
+            },
+            {
+              "fingerprint": "sha256:bf505c06d1a414d81cd4b784a4568e706eff6a6b3b27ded3e257248605e14e80",
+              "kind": "type",
+              "name": "CapacitorProtocolCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorProtocolCapabilities.ts"
             },
             {
               "fingerprint": "sha256:b56db52c88b9f467d939513c4f91b43e63963ca718594912e0eeea576537d78e",
@@ -256784,6 +256847,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:ae349dc50d4eee4ec840b5a2fed6ac6551c83b2654581be2108cb78ac0e457af",
+              "kind": "type",
+              "name": "ElectronAppCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:af9b44b45fd162436246f44f47fbd690e6070ac46912849ddeb93bdb4b92ed0c",
               "kind": "interface",
               "name": "ElectronAutoUpdater",
@@ -257001,6 +257071,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:384c347e4329d273350e0413a8134e5cc1b3bd270626962a17e5888d21df777b",
+              "kind": "type",
+              "name": "ElectronProtocolCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronProtocolCapabilities.ts"
+            },
+            {
               "fingerprint": "sha256:b6d1c737450f66fa221301095025d2d5cc6e89f73afe45f736ec72dc3c1b39eb",
               "kind": "interface",
               "name": "ElectronRectangle",
@@ -257048,6 +257125,13 @@
               "name": "ElectronTrayBalloonOptions",
               "runtime": false,
               "source": "upstream/packages/types/src/ElectronApi.ts"
+            },
+            {
+              "fingerprint": "sha256:bc304cab58935fc7398b3c50385ac166bbd382573482a7c91793a7e7bd191ae8",
+              "kind": "type",
+              "name": "ElectronTrayCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronTrayCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:2d53e9b7bc654216df32ecd30d6dc22c6655e51f7821e164c6c7a0928f21488b",
@@ -270485,6 +270569,13 @@
               "source": "upstream/packages/types/src/TauriApi.ts"
             },
             {
+              "fingerprint": "sha256:ac4f85991385f5a2c2577943587a6f0e9613e26d9c91c09f15a735387cb54272",
+              "kind": "type",
+              "name": "TauriAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/TauriAppCapabilities.ts"
+            },
+            {
               "fingerprint": "sha256:08ba953ebe17678812ac5f1d64dbc33f14efaf9220a0f1cee1e2230703b4bab2",
               "kind": "interface",
               "name": "TauriAppModule",
@@ -270707,6 +270798,13 @@
               "name": "TauriSubmenuOptions",
               "runtime": false,
               "source": "upstream/packages/types/src/TauriApi.ts"
+            },
+            {
+              "fingerprint": "sha256:38b7db63bdde6b1a221029afb656b60f7e457220201b7eef071894540792f099",
+              "kind": "type",
+              "name": "TauriTrayCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/TauriTrayCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:8dc857af7c3ad53eae4d871e4a60f877204c559399bcd55f65eef9f872d3c813",
@@ -276687,11 +276785,25 @@
               "source": "upstream/packages/types/src/CanvasTextureResolver.ts"
             },
             {
+              "fingerprint": "sha256:7c65235579692578092b594e299547dfdf4ac74f547a78feee3d5e4f522066c4",
+              "kind": "type",
+              "name": "CapacitorAndroidAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:b0dc0c96ded1a17737bca7c5890baa1686ceb20716717440a7c6d69ac0b5e6fc",
               "kind": "interface",
               "name": "CapacitorApi",
               "runtime": false,
               "source": "upstream/packages/types/src/CapacitorApi.ts"
+            },
+            {
+              "fingerprint": "sha256:e64366e9386be98bdae7e2fe54af7fdf81b998e9bc1d8a3a489d9e94d4db3854",
+              "kind": "type",
+              "name": "CapacitorAppCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorAppCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:2371806e5bb53aeb4c9a888a7f152ff0d64cfd81c40a93fcb1f2de6d290995e5",
@@ -276727,6 +276839,13 @@
               "name": "CapacitorClipboardWriteOptions",
               "runtime": false,
               "source": "upstream/packages/types/src/CapacitorApi.ts"
+            },
+            {
+              "fingerprint": "sha256:d3cfec855db9f6e06bc723895c0b2c104afc5cbdf83a90df1c2a2ea1382f0873",
+              "kind": "type",
+              "name": "CapacitorCommonAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorAppCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:bb97f345c6f1dfbf691db41dd1fed96d2d93880f74297edb1ca2ea96f8b83058",
@@ -277000,6 +277119,13 @@
               "name": "CapacitorPositionCoords",
               "runtime": false,
               "source": "upstream/packages/types/src/CapacitorApi.ts"
+            },
+            {
+              "fingerprint": "sha256:bf505c06d1a414d81cd4b784a4568e706eff6a6b3b27ded3e257248605e14e80",
+              "kind": "type",
+              "name": "CapacitorProtocolCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/CapacitorProtocolCapabilities.ts"
             },
             {
               "fingerprint": "sha256:b56db52c88b9f467d939513c4f91b43e63963ca718594912e0eeea576537d78e",
@@ -278613,6 +278739,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:ae349dc50d4eee4ec840b5a2fed6ac6551c83b2654581be2108cb78ac0e457af",
+              "kind": "type",
+              "name": "ElectronAppCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:af9b44b45fd162436246f44f47fbd690e6070ac46912849ddeb93bdb4b92ed0c",
               "kind": "interface",
               "name": "ElectronAutoUpdater",
@@ -278662,6 +278795,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:65061f4925b5e9476c4d96f915e268abe7aae43520c698a96bada96e009d8fa4",
+              "kind": "type",
+              "name": "ElectronCommonAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:95a800bbf1d57a449fccd7abfeb872c00f6159899cf1252f6edcd7aab5ac2e34",
               "kind": "interface",
               "name": "ElectronDialog",
@@ -278704,6 +278844,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:fcc87c7979e63f85d2bdcd0a4b86a6929a8dd0802dc05c3b70bf80d70c07fbcf",
+              "kind": "type",
+              "name": "ElectronLinuxAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronAppCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:f16dca8a64510b52937957ae11ce1e642946e1b3e7b8a9b9cc8ac5004885887f",
               "kind": "interface",
               "name": "ElectronLoginItemSettings",
@@ -278716,6 +278863,13 @@
               "name": "ElectronLoginItemSettingsLike",
               "runtime": false,
               "source": "upstream/packages/types/src/ElectronApi.ts"
+            },
+            {
+              "fingerprint": "sha256:eb60a30a9d08ab54ca20f71dd24fdb227adf3634dcf6f26b88c9e01bf16b9e74",
+              "kind": "type",
+              "name": "ElectronMacosAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronAppCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:02d1b406e09a317deee01b6db0df031413e755f83db33612a945c6764b98f8f9",
@@ -278830,6 +278984,13 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:384c347e4329d273350e0413a8134e5cc1b3bd270626962a17e5888d21df777b",
+              "kind": "type",
+              "name": "ElectronProtocolCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronProtocolCapabilities.ts"
+            },
+            {
               "fingerprint": "sha256:b6d1c737450f66fa221301095025d2d5cc6e89f73afe45f736ec72dc3c1b39eb",
               "kind": "interface",
               "name": "ElectronRectangle",
@@ -278879,11 +279040,25 @@
               "source": "upstream/packages/types/src/ElectronApi.ts"
             },
             {
+              "fingerprint": "sha256:bc304cab58935fc7398b3c50385ac166bbd382573482a7c91793a7e7bd191ae8",
+              "kind": "type",
+              "name": "ElectronTrayCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronTrayCapabilitiesFor.ts"
+            },
+            {
               "fingerprint": "sha256:2d53e9b7bc654216df32ecd30d6dc22c6655e51f7821e164c6c7a0928f21488b",
               "kind": "interface",
               "name": "ElectronTrayConstructor",
               "runtime": false,
               "source": "upstream/packages/types/src/ElectronApi.ts"
+            },
+            {
+              "fingerprint": "sha256:a6400139823cc6942a3f25eb3a473e769bbf1aebdfa314e60cddfdbfa071d09f",
+              "kind": "type",
+              "name": "ElectronWindowsAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/ElectronAppCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:f53d303e14071b87725ebb2c99ea470ca01a53a413735dde4c715ae89d3e5bf3",
@@ -286465,6 +286640,20 @@
               "source": "upstream/packages/types/src/Permission.ts"
             },
             {
+              "fingerprint": "sha256:88b9dc0c6411904c7be95c5c97c72677eda2fb1aead005f2d3d94de09f3f5037",
+              "kind": "interface",
+              "name": "PermissionNativeHolding",
+              "runtime": false,
+              "source": "upstream/packages/types/src/PermissionNativeHolding.ts"
+            },
+            {
+              "fingerprint": "sha256:0a32f8c62c2602b8180652b36b6cec807822bbf430773d3aba7725f9b68b118c",
+              "kind": "type",
+              "name": "PermissionNativeHoldingId",
+              "runtime": false,
+              "source": "upstream/packages/types/src/PermissionNativeHolding.ts"
+            },
+            {
               "fingerprint": "sha256:52160301e125399798e4f5e0b23e05e62679df1563ae118d82c14ee13ab2df1c",
               "kind": "type",
               "name": "PermissionQueryFailureReason",
@@ -292482,6 +292671,13 @@
               "source": "upstream/packages/types/src/TauriApi.ts"
             },
             {
+              "fingerprint": "sha256:ac4f85991385f5a2c2577943587a6f0e9613e26d9c91c09f15a735387cb54272",
+              "kind": "type",
+              "name": "TauriAppCapabilities",
+              "runtime": false,
+              "source": "upstream/packages/types/src/TauriAppCapabilities.ts"
+            },
+            {
               "fingerprint": "sha256:08ba953ebe17678812ac5f1d64dbc33f14efaf9220a0f1cee1e2230703b4bab2",
               "kind": "interface",
               "name": "TauriAppModule",
@@ -292704,6 +292900,13 @@
               "name": "TauriSubmenuOptions",
               "runtime": false,
               "source": "upstream/packages/types/src/TauriApi.ts"
+            },
+            {
+              "fingerprint": "sha256:38b7db63bdde6b1a221029afb656b60f7e457220201b7eef071894540792f099",
+              "kind": "type",
+              "name": "TauriTrayCapabilitiesFor",
+              "runtime": false,
+              "source": "upstream/packages/types/src/TauriTrayCapabilitiesFor.ts"
             },
             {
               "fingerprint": "sha256:8dc857af7c3ad53eae4d871e4a60f877204c559399bcd55f65eef9f872d3c813",
@@ -296461,7 +296664,7 @@
         }
       ],
       "sdkIncluded": true,
-      "sourceFiles": 939,
+      "sourceFiles": 947,
       "testFiles": 35,
       "version": "0.4.0"
     },
@@ -297882,11 +298085,11 @@
     "excludedPackages": 2,
     "exportConflicts": 0,
     "exportLanes": 331,
-    "exports": 40677,
+    "exports": 40706,
     "packages": 159,
-    "rootExports": 15914,
-    "sourceFiles": 2922,
+    "rootExports": 15921,
+    "sourceFiles": 2930,
     "testFiles": 1704
   },
-  "upstreamCommit": "31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8"
+  "upstreamCommit": "2e86cd620a53121aa6c9230215f44c6c9a3bf816"
 }

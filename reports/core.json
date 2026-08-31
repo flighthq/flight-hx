@@ -1,6 +1,6 @@
 {
   "contractSurface": {
-    "noCompletionDeclarations": 32,
+    "noCompletionDeclarations": 40,
     "omittedModules": [
       {
         "module": "flight._Abc",
@@ -945,7 +945,7 @@
         "source": "upstream/packages/xml/src/contract.ts"
       }
     ],
-    "protectedDeclarationIdentities": 1401,
+    "protectedDeclarationIdentities": 1409,
     "restrictedMemberDeclarations": 1369
   },
   "excludedPackages": [
@@ -1180,17 +1180,17 @@
       "module": "flight._Haptics"
     },
     {
-      "declarations": 53,
+      "declarations": 49,
       "diagnostics": [],
       "module": "flight._HostCapacitor"
     },
     {
-      "declarations": 93,
+      "declarations": 83,
       "diagnostics": [],
       "module": "flight._HostElectron"
     },
     {
-      "declarations": 43,
+      "declarations": 37,
       "diagnostics": [],
       "module": "flight._HostTauri"
     },
@@ -1355,7 +1355,7 @@
       "module": "flight._PathFormats"
     },
     {
-      "declarations": 37,
+      "declarations": 35,
       "diagnostics": [],
       "module": "flight._Permissions"
     },
@@ -1705,7 +1705,7 @@
       "module": "flight._Tween"
     },
     {
-      "declarations": 351,
+      "declarations": 358,
       "diagnostics": [],
       "module": "flight._Types"
     },
@@ -3987,7 +3987,17 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.CapacitorAndroidAppCapabilities"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.CapacitorApi"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.CapacitorAppCapabilitiesFor"
     },
     {
       "declarations": 1,
@@ -4013,6 +4023,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.CapacitorClipboardWriteOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.CapacitorCommonAppCapabilities"
     },
     {
       "declarations": 1,
@@ -4208,6 +4223,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.CapacitorPositionCoords"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.CapacitorProtocolCapabilities"
     },
     {
       "declarations": 1,
@@ -5182,6 +5202,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.ElectronAppCapabilitiesFor"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.ElectronAutoUpdater"
     },
     {
@@ -5217,6 +5242,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.ElectronCommonAppCapabilities"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.ElectronDialog"
     },
     {
@@ -5247,12 +5277,22 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.ElectronLinuxAppCapabilities"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.ElectronLoginItemSettings"
     },
     {
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.ElectronLoginItemSettingsLike"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.ElectronMacosAppCapabilities"
     },
     {
       "declarations": 1,
@@ -5337,6 +5377,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.ElectronProtocolCapabilities"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.ElectronRectangle"
     },
     {
@@ -5372,7 +5417,17 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.ElectronTrayCapabilitiesFor"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.ElectronTrayConstructor"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.ElectronWindowsAppCapabilities"
     },
     {
       "declarations": 1,
@@ -10422,6 +10477,16 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.PermissionNativeHolding"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.PermissionNativeHoldingId"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.PermissionQueryFailureReason"
     },
     {
@@ -14337,6 +14402,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.TauriAppCapabilities"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.TauriAppModule"
     },
     {
@@ -14493,6 +14563,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.TauriSubmenuOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TauriTrayCapabilitiesFor"
     },
     {
       "declarations": 1,
@@ -20067,12 +20142,12 @@
       {
         "byReason": {
           "source-any": 6,
-          "source-undefined": 14,
+          "source-undefined": 10,
           "standard-toolkit-boundary": 8
         },
         "module": "flight._HostCapacitor",
         "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
-        "total": 28
+        "total": 24
       },
       {
         "byReason": {
@@ -20333,12 +20408,12 @@
       {
         "byReason": {
           "source-any": 7,
-          "source-undefined": 40,
+          "source-undefined": 20,
           "standard-toolkit-boundary": 10
         },
         "module": "flight._HostTauri",
         "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-        "total": 57
+        "total": 37
       },
       {
         "byReason": {
@@ -28935,14 +29010,14 @@
         "source-any": 1168,
         "source-never": 143,
         "source-null": 206,
-        "source-undefined": 532,
+        "source-undefined": 508,
         "source-unknown": 4479,
         "standard-toolkit-boundary": 21581,
         "unclassified": 496
       },
       "checkerKnownUnrepresentable": 0,
       "modules": 1412,
-      "total": 29203
+      "total": 29179
     }
   }
 }

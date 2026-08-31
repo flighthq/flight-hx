@@ -1,6 +1,6 @@
 # Host Endpoint Audit
 
-Upstream commit: `31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8`
+Upstream commit: `2e86cd620a53121aa6c9230215f44c6c9a3bf816`
 
 Receiver identities and member use are checker-derived. The shared contract selects explicit host backends where maintained target semantics exist and the maintained dynamic runtime otherwise; generation validates both routes.
 

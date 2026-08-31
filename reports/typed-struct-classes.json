@@ -11538,7 +11538,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 91,
+        "inputSignatures": 92,
         "outputSignatures": 5
       },
       "construction": {
@@ -25253,7 +25253,7 @@
       },
       "name": "Entity",
       "oracle": {
-        "enumerations": 9,
+        "enumerations": 4,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0,
@@ -25267,7 +25267,7 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 8
+        "objectSpreads": 4
       },
       "sites": [
         {
@@ -26138,69 +26138,6 @@
         {
           "column": 12,
           "kind": "enumeration",
-          "line": 41,
-          "scope": "test",
-          "source": "upstream/packages/host-capacitor/src/capacitorApp.test.ts"
-        },
-        {
-          "column": 28,
-          "kind": "enumeration",
-          "line": 42,
-          "scope": "test",
-          "source": "upstream/packages/host-capacitor/src/capacitorApp.test.ts"
-        },
-        {
-          "column": 12,
-          "kind": "enumeration",
-          "line": 48,
-          "scope": "test",
-          "source": "upstream/packages/host-capacitor/src/capacitorApp.test.ts"
-        },
-        {
-          "column": 5,
-          "kind": "object-spread",
-          "line": 58,
-          "scope": "production",
-          "source": "upstream/packages/host-capacitor/src/capacitorApp.ts"
-        },
-        {
-          "column": 12,
-          "kind": "enumeration",
-          "line": 77,
-          "scope": "test",
-          "source": "upstream/packages/host-electron/src/electronApp.test.ts"
-        },
-        {
-          "column": 28,
-          "kind": "enumeration",
-          "line": 99,
-          "scope": "test",
-          "source": "upstream/packages/host-electron/src/electronApp.test.ts"
-        },
-        {
-          "column": 7,
-          "kind": "object-spread",
-          "line": 125,
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronApp.ts"
-        },
-        {
-          "column": 7,
-          "kind": "object-spread",
-          "line": 155,
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronApp.ts"
-        },
-        {
-          "column": 5,
-          "kind": "object-spread",
-          "line": 163,
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronApp.ts"
-        },
-        {
-          "column": 12,
-          "kind": "enumeration",
           "line": 10,
           "scope": "test",
           "source": "upstream/packages/host-web/src/webApp.test.ts"
@@ -26222,7 +26159,7 @@
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 53,
+          "line": 52,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         },
@@ -49343,7 +49280,7 @@
         {
           "column": 8,
           "kind": "object-literal-spread",
-          "line": 52,
+          "line": 51,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         }
@@ -49820,7 +49757,7 @@
         {
           "column": 8,
           "kind": "optional-omission",
-          "line": 64,
+          "line": 63,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         }
@@ -49905,7 +49842,7 @@
         {
           "column": 10,
           "kind": "optional-omission",
-          "line": 65,
+          "line": 64,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         },
@@ -50059,7 +49996,7 @@
         {
           "column": 9,
           "kind": "optional-omission",
-          "line": 71,
+          "line": 70,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         }
@@ -50073,10 +50010,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 5,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 4,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 5,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -50219,7 +50156,7 @@
         {
           "column": 17,
           "kind": "optional-omission",
-          "line": 77,
+          "line": 76,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         }
@@ -50298,7 +50235,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 73,
+          "line": 72,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -50373,7 +50310,7 @@
         {
           "column": 13,
           "kind": "cross-schema-transfer",
-          "line": 74,
+          "line": 73,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -50456,7 +50393,7 @@
         {
           "column": 11,
           "kind": "anonymous-structural-transfer",
-          "line": 78,
+          "line": 77,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         },
@@ -50775,7 +50712,7 @@
         {
           "column": 13,
           "kind": "optional-omission",
-          "line": 82,
+          "line": 81,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         }
@@ -50952,7 +50889,7 @@
         {
           "column": 11,
           "kind": "optional-omission",
-          "line": 90,
+          "line": 89,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         },
@@ -51043,7 +50980,7 @@
         {
           "column": 9,
           "kind": "optional-omission",
-          "line": 96,
+          "line": 95,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         }
@@ -51123,7 +51060,7 @@
         {
           "column": 9,
           "kind": "optional-omission",
-          "line": 97,
+          "line": 96,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         },
@@ -51222,7 +51159,7 @@
         {
           "column": 7,
           "kind": "optional-omission",
-          "line": 98,
+          "line": 97,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         },
@@ -51306,7 +51243,7 @@
         {
           "column": 12,
           "kind": "optional-omission",
-          "line": 99,
+          "line": 98,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webHost.ts"
         }
@@ -73149,6 +73086,52 @@
         }
       ],
       "source": "upstream/packages/types/src/PbrExtension.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 4,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 4,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#PermissionNativeHolding",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "PermissionNativeHolding",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/PermissionNativeHolding.ts"
     },
     {
       "bridge": {
@@ -106353,7 +106336,7 @@
         {
           "column": 12,
           "kind": "cross-schema-transfer",
-          "line": 86,
+          "line": 85,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -106496,7 +106479,7 @@
         {
           "column": 13,
           "kind": "cross-schema-transfer",
-          "line": 84,
+          "line": 83,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Entity"
           ],
@@ -109268,7 +109251,7 @@
         {
           "column": 51,
           "kind": "optional-omission",
-          "line": 59,
+          "line": 44,
           "scope": "production",
           "source": "upstream/packages/host-tauri/src/tauriTray.ts"
         }
@@ -132683,27 +132666,27 @@
   ],
   "summary": {
     "anonymousStructuralTransfers": 202,
-    "bridgeInputSignatures": 10281,
+    "bridgeInputSignatures": 10282,
     "bridgeOutputSignatures": 2351,
     "crossSchemaTransfers": 1912,
     "directAccesses": 25838,
     "dynamicIngresses": 69,
-    "mechanicallyCompatibleSchemas": 1585,
+    "mechanicallyCompatibleSchemas": 1586,
     "normalizationRequiredSchemas": 573,
-    "objectLiterals": 2294,
+    "objectLiterals": 2297,
     "objectLiteralsOmittingOptionalFields": 512,
     "objectLiteralsWithComputedKeys": 8,
     "objectLiteralsWithSpread": 230,
     "observabilityReviewSchemas": 303,
     "optionalFields": 2508,
-    "oracleObservations": 388,
+    "oracleObservations": 383,
     "productionEnumerations": 11,
     "productionJsonSerializations": 6,
     "productionObjectRests": 0,
-    "productionObjectSpreads": 139,
+    "productionObjectSpreads": 135,
     "requiredUndefinedFields": 3,
-    "schemas": 2158,
+    "schemas": 2159,
     "testObjectLiterals": 6701
   },
-  "upstreamCommit": "31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8"
+  "upstreamCommit": "2e86cd620a53121aa6c9230215f44c6c9a3bf816"
 }

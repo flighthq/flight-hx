@@ -53073,6 +53073,27 @@
     },
     {
       "bridgeExposure": {
+        "inputPaths": [],
+        "outputPaths": []
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 4,
+      "id": "@flighthq/types:interface#PermissionNativeHolding",
+      "name": "PermissionNativeHolding",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/PermissionNativeHolding.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
         "inputPaths": [
           {
             "path": [
@@ -85285,8 +85306,8 @@
     "bridgeInputExposedSchemas": 766,
     "bridgeOutputExposedSchemas": 769,
     "blockedSchemas": 296,
-    "candidateSchemas": 1138,
-    "closedSchemas": 842,
+    "candidateSchemas": 1139,
+    "closedSchemas": 843,
     "combinedBlockedSchemas": 18,
     "containmentEdges": 2768,
     "containerOnlyBlockedSchemas": 81,
@@ -85298,5 +85319,5 @@
     "normalizationProvenanceBlockedSchemas": 215,
     "normalizationRoots": 579
   },
-  "upstreamCommit": "31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8"
+  "upstreamCommit": "2e86cd620a53121aa6c9230215f44c6c9a3bf816"
 }

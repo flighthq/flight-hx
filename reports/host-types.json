@@ -306,26 +306,26 @@
               "source": "upstream/packages/audio/src/audioResourceReference.ts"
             },
             {
+              "column": 11,
+              "line": 53,
+              "operation": "read",
+              "source": "upstream/packages/host-electron/src/electronTray.ts"
+            },
+            {
               "column": 13,
-              "line": 107,
+              "line": 91,
               "operation": "read",
               "source": "upstream/packages/host-electron/src/electronTray.ts"
             },
             {
               "column": 11,
-              "line": 69,
-              "operation": "read",
-              "source": "upstream/packages/host-electron/src/electronTray.ts"
-            },
-            {
-              "column": 11,
-              "line": 56,
+              "line": 41,
               "operation": "read",
               "source": "upstream/packages/host-tauri/src/tauriTray.ts"
             },
             {
               "column": 11,
-              "line": 72,
+              "line": 57,
               "operation": "read",
               "source": "upstream/packages/host-tauri/src/tauriTray.ts"
             },
@@ -689,13 +689,13 @@
           {
             "arity": 0,
             "column": 11,
-            "line": 69,
+            "line": 53,
             "source": "upstream/packages/host-electron/src/electronTray.ts"
           },
           {
             "arity": 0,
             "column": 11,
-            "line": 56,
+            "line": 41,
             "source": "upstream/packages/host-tauri/src/tauriTray.ts"
           },
           {
@@ -47180,7 +47180,7 @@
           "locations": [
             {
               "column": 26,
-              "line": 34,
+              "line": 33,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webHost.ts"
             },
@@ -47332,13 +47332,13 @@
             },
             {
               "column": 12,
-              "line": 38,
+              "line": 37,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webHost.ts"
             },
             {
               "column": 12,
-              "line": 41,
+              "line": 40,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webHost.ts"
             },
@@ -47488,7 +47488,7 @@
           {
             "arity": 0,
             "column": 26,
-            "line": 34,
+            "line": 33,
             "source": "upstream/packages/host-web/src/webHost.ts"
           },
           {
@@ -48679,7 +48679,7 @@
           {
             "arity": 0,
             "column": 86,
-            "line": 34,
+            "line": 33,
             "source": "upstream/packages/host-web/src/webHost.ts"
           },
           {
@@ -48751,7 +48751,7 @@
           "locations": [
             {
               "column": 12,
-              "line": 35,
+              "line": 34,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webHost.ts"
             },
@@ -48825,13 +48825,13 @@
           {
             "arity": 0,
             "column": 11,
-            "line": 34,
+            "line": 33,
             "source": "upstream/packages/host-web/src/webHost.ts"
           },
           {
             "arity": 0,
             "column": 26,
-            "line": 34,
+            "line": 33,
             "source": "upstream/packages/host-web/src/webHost.ts"
           },
           {
@@ -48929,7 +48929,7 @@
           "locations": [
             {
               "column": 26,
-              "line": 34,
+              "line": 33,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webHost.ts"
             },
@@ -48997,7 +48997,7 @@
           {
             "arity": 0,
             "column": 26,
-            "line": 34,
+            "line": 33,
             "source": "upstream/packages/host-web/src/webHost.ts"
           },
           {
@@ -51347,7 +51347,7 @@
           "locations": [
             {
               "column": 12,
-              "line": 38,
+              "line": 37,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webHost.ts"
             },
@@ -51367,7 +51367,7 @@
           "locations": [
             {
               "column": 12,
-              "line": 41,
+              "line": 40,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webHost.ts"
             },
@@ -51399,7 +51399,7 @@
           {
             "arity": 0,
             "column": 12,
-            "line": 38,
+            "line": 37,
             "source": "upstream/packages/host-web/src/webHost.ts"
           },
           {
@@ -62024,5 +62024,5 @@
       }
     }
   ],
-  "upstreamCommit": "31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8"
+  "upstreamCommit": "2e86cd620a53121aa6c9230215f44c6c9a3bf816"
 }

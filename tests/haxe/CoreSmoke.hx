@@ -172,7 +172,7 @@ class CoreSmoke {
     final cursorTokens:Array<flight.types.ShapeCommandToken> = cast (
       ['moveTo', 2.0, 10.0, 20.0] : Array<Dynamic>
     );
-    final cursorRuntime = new flight._internal.ShapeCommandArgumentCursorRuntime(cursorTokens);
+    final cursorRuntime:Dynamic = flight._Shape.createShapeCommandArgumentCursor__shapeBounds(cursorTokens);
     flight._Shape.setShapeCommandArgumentCursor__shapeBounds(cast cursorRuntime, 2.0, 2.0);
     final publicCursor:flight.types.ShapeCommandArgumentCursor = cast cursorRuntime;
     if (publicCursor.length != 2.0 || publicCursor.getArgument(0.0) != 10.0 || publicCursor.getArgument(2.0) != null) {

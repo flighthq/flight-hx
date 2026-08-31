@@ -3131,12 +3131,12 @@
     {
       "byReason": {
         "source-any": 6,
-        "source-undefined": 14,
+        "source-undefined": 10,
         "standard-toolkit-boundary": 8
       },
       "module": "flight._HostCapacitor",
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
-      "total": 28
+      "total": 24
     },
     {
       "byReason": {
@@ -3397,12 +3397,12 @@
     {
       "byReason": {
         "source-any": 7,
-        "source-undefined": 40,
+        "source-undefined": 20,
         "standard-toolkit-boundary": 10
       },
       "module": "flight._HostTauri",
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-      "total": 57
+      "total": 37
     },
     {
       "byReason": {
@@ -11999,13 +11999,13 @@
       "source-any": 1168,
       "source-never": 143,
       "source-null": 206,
-      "source-undefined": 532,
+      "source-undefined": 508,
       "source-unknown": 4479,
       "standard-toolkit-boundary": 21581,
       "unclassified": 496
     },
     "checkerKnownUnrepresentable": 0,
     "modules": 1412,
-    "total": 29203
+    "total": 29179
   }
 }

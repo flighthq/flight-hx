@@ -5203,7 +5203,7 @@
       "sites": [
         {
           "column": 26,
-          "line": 34,
+          "line": 33,
           "source": "upstream/packages/host-web/src/webHost.ts"
         },
         {
@@ -5401,12 +5401,12 @@
         },
         {
           "column": 12,
-          "line": 38,
+          "line": 37,
           "source": "upstream/packages/host-web/src/webHost.ts"
         },
         {
           "column": 12,
-          "line": 41,
+          "line": 40,
           "source": "upstream/packages/host-web/src/webHost.ts"
         },
         {
@@ -23852,5 +23852,5 @@
     "reads": 1078,
     "writes": 225
   },
-  "upstreamCommit": "31c77cd6f21a2c9fff9d6d18b0ff0bc767047ec8"
+  "upstreamCommit": "2e86cd620a53121aa6c9230215f44c6c9a3bf816"
 }
