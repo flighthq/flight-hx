@@ -71,7 +71,7 @@ class Main extends Application {
       final expectedContext:Dynamic = window.context.webgl2 == null ? window.context.webgl : window.context.webgl2;
       assert((cast context : Dynamic) == expectedContext, 'Flight preserves the caller-owned Lime GL context');
       final pipeline = flight.RenderGl.createGlPipeline(flight.RenderGl.createEmptyGlRegistries());
-      renderState = flight.RenderGl.createGlRenderState(context, pipeline, {
+      renderState = flight.RenderGl.createGlRenderState(flight.RenderGl.createGlContextState(context), pipeline, {
         backgroundColor: 0x00ff00ff,
         pixelRatio: window.scale,
       });
