@@ -1722,7 +1722,7 @@ class _Shape {
   public static function setShapeCommandArgumentCursor__shapeBounds(cursor:ShapeCommandArgumentCursorInternal__shapeBounds, argumentOffset:Float, argumentCount:Float):Void {
     cursor.argumentOffset = argumentOffset;
     cursor.argumentCount = argumentCount;
-    cursor.length = argumentCount;
+    _Runtime.setField(cursor, 'length', argumentCount);
   }
 
   public static function writeShapeBoundsRectangle__shapeBounds(out:Rectangle, accumulator:ShapeBoundsAccumulator__shapeBounds):Void {

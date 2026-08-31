@@ -1,3 +1,3 @@
 cursor.argumentOffset = argumentOffset;
 cursor.argumentCount = argumentCount;
-cursor.length = argumentCount;
+_Runtime.setField(cursor, 'length', argumentCount);
