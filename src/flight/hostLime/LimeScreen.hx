@@ -1,7 +1,7 @@
 package flight.hostLime;
 
 #if lime
-import flight.types.ScreenBackend;
+import flight.types.HostScreenCapabilities;
 import lime.app.Application;
 import lime.system.Display;
 import lime.system.DisplayMode;
@@ -9,9 +9,15 @@ import lime.system.Orientation;
 import lime.system.System;
 import lime.ui.Window;
 
-/** Display enumeration and change delivery over Lime's native display APIs. */
+/**
+ * Display enumeration and change delivery over Lime's native display APIs.
+ *
+ * The upstream host seam split the former `ScreenBackend` into a `query`
+ * backend (enumeration + cursor position) and a `change` backend
+ * (subscription); the former `getModes` has no host-screen home and is dropped.
+ */
 class LimeScreen {
-  public static function createLimeScreenBackend(application:Application):ScreenBackend {
+  public static function createLimeScreenCapabilities(application:Application):HostScreenCapabilities {
     var cursorX = 0.0;
     var cursorY = 0.0;
     var cursorTracking = false;
@@ -31,66 +37,59 @@ class LimeScreen {
     };
     cursorWindowHandler = attachCursor;
 
+    final getScreens = function(out:Array<Dynamic>):Array<Dynamic> {
+      final count = try System.numDisplays catch (_:Dynamic) 0;
+      out.resize(count);
+      for (index in 0...count) {
+        if (out[index] == null) out[index] = emptyScreen();
+        fillScreen(System.getDisplay(index), out[index]);
+      }
+      return out;
+    };
+    final getPrimaryScreen = function(out:Dynamic):Dynamic {
+      fillScreen(try System.getDisplay(0) catch (_:Dynamic) null, out);
+      return out;
+    };
+    final getCursorPosition = function(out:Dynamic):Dynamic {
+      if (!cursorTracking) {
+        cursorTracking = true;
+        for (window in application.windows) attachCursor(window);
+        application.onCreateWindow.add(cursorWindowHandler);
+      }
+      out.x = cursorX;
+      out.y = cursorY;
+      return out;
+    };
+    final subscribe = function(listener:Dynamic):Void->Void {
+      final windows:Array<Window> = [];
+      final handlers:Array<Int->Int->Void> = [];
+      final attachResize = function(window:Window):Void {
+        if (windows.indexOf(window) >= 0) return;
+        final handler = function(_width:Int, _height:Int):Void {
+          final display = window.display;
+          if (display != null) emitChange(listener, display, true, true, false);
+        };
+        windows.push(window);
+        handlers.push(handler);
+        window.onResize.add(handler);
+      };
+      final orientation = function(displayId:Int, _value:Orientation):Void {
+        final display = try System.getDisplay(displayId) catch (_:Dynamic) null;
+        if (display != null) emitChange(listener, display, false, false, true);
+      };
+      for (window in application.windows) attachResize(window);
+      application.onCreateWindow.add(attachResize);
+      application.onDisplayOrientationChange.add(orientation);
+      return function():Void {
+        application.onCreateWindow.remove(attachResize);
+        application.onDisplayOrientationChange.remove(orientation);
+        for (index in 0...windows.length) windows[index].onResize.remove(handlers[index]);
+      };
+    };
+
     return cast {
-      getScreens: function(out:Array<Dynamic>):Array<Dynamic> {
-        final count = try System.numDisplays catch (_:Dynamic) 0;
-        out.resize(count);
-        for (index in 0...count) {
-          if (out[index] == null) out[index] = emptyScreen();
-          fillScreen(System.getDisplay(index), out[index]);
-        }
-        return out;
-      },
-      getPrimaryScreen: function(out:Dynamic):Dynamic {
-        fillScreen(try System.getDisplay(0) catch (_:Dynamic) null, out);
-        return out;
-      },
-      subscribe: function(listener:Dynamic):Void->Void {
-        final windows:Array<Window> = [];
-        final handlers:Array<Int->Int->Void> = [];
-        final attachResize = function(window:Window):Void {
-          if (windows.indexOf(window) >= 0) return;
-          final handler = function(_width:Int, _height:Int):Void {
-            final display = window.display;
-            if (display != null) emitChange(listener, display, true, true, false);
-          };
-          windows.push(window);
-          handlers.push(handler);
-          window.onResize.add(handler);
-        };
-        final orientation = function(displayId:Int, _value:Orientation):Void {
-          final display = try System.getDisplay(displayId) catch (_:Dynamic) null;
-          if (display != null) emitChange(listener, display, false, false, true);
-        };
-        for (window in application.windows) attachResize(window);
-        application.onCreateWindow.add(attachResize);
-        application.onDisplayOrientationChange.add(orientation);
-        return function():Void {
-          application.onCreateWindow.remove(attachResize);
-          application.onDisplayOrientationChange.remove(orientation);
-          for (index in 0...windows.length) windows[index].onResize.remove(handlers[index]);
-        };
-      },
-      getCursorPosition: function(out:Dynamic):Dynamic {
-        if (!cursorTracking) {
-          cursorTracking = true;
-          for (window in application.windows) attachCursor(window);
-          application.onCreateWindow.add(cursorWindowHandler);
-        }
-        out.x = cursorX;
-        out.y = cursorY;
-        return out;
-      },
-      getModes: function(screen:Dynamic, out:Array<Dynamic>):Array<Dynamic> {
-        final display = try System.getDisplay(Std.int(screen.id)) catch (_:Dynamic) null;
-        final modes = display == null || display.supportedModes == null ? [] : display.supportedModes;
-        out.resize(modes.length);
-        for (index in 0...modes.length) {
-          if (out[index] == null) out[index] = {};
-          fillMode(modes[index], out[index]);
-        }
-        return out;
-      },
+      query: {getScreens: getScreens, getPrimaryScreen: getPrimaryScreen, getCursorPosition: getCursorPosition},
+      change: {subscribe: subscribe},
     };
   }
 

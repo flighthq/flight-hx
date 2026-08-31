@@ -10,52 +10,57 @@ package flight.hostLime;
 #if lime
 import flight._internal._Promise;
 import flight._internal._Runtime;
+import flight.types.HostDialogCapabilities;
 import lime.app.Application;
 import lime.ui.FileDialog;
 import lime.ui.FileDialogType;
 import lime.ui.Window;
 
 class LimeDialog {
-  /** Allocation entry point, Flight-style: `createLimeDialogBackend(window)`. */
-  public static function createLimeDialogBackend(window:Window):flight.types.DialogBackend {
-    return createBackend(function():Null<Window> return window);
+  /** Builds Flight's `dialog` capability namespace bound to a Lime window. */
+  public static function createLimeDialogCapabilities(window:Window):HostDialogCapabilities {
+    return createCapabilities(function():Null<Window> return window);
   }
 
   /** Application-owned variant that follows Lime when its primary window changes. */
-  public static function createLimeApplicationDialogBackend(application:Application):flight.types.DialogBackend {
-    return createBackend(function():Null<Window> return application.window);
+  public static function createLimeApplicationDialogCapabilities(application:Application):HostDialogCapabilities {
+    return createCapabilities(function():Null<Window> return application.window);
   }
 
-  static function createBackend(getWindow:Void->Null<Window>):flight.types.DialogBackend {
+  static function createCapabilities(getWindow:Void->Null<Window>):HostDialogCapabilities {
+    final message = function(options:Dynamic):_Promise<Dynamic> {
+      final window = getWindow();
+      if (window == null) {
+        return _Promise.resolve(({buttonIndex: -1.0, cancelled: true, checkboxChecked: false} : Dynamic));
+      }
+      window.alert(messageText(options), _Runtime.field(options, 'title'));
+      return _Promise.resolve(({buttonIndex: 0.0, cancelled: false, checkboxChecked: false} : Dynamic));
+    };
+    final saveFile = function(options:Dynamic):_Promise<Dynamic> {
+      return new _Promise(function(resolve:Dynamic->Void, _reject) {
+        final dialog = new FileDialog();
+        dialog.onSelect.add(function(path:String) resolve(handleFor(path, 'File')));
+        dialog.onCancel.add(function() resolve(null));
+        final opened = dialog.browse(FileDialogType.SAVE, filterFor(options), _Runtime.field(options, 'defaultPath'),
+          _Runtime.field(options, 'title'));
+        if (!opened) resolve(null);
+      });
+    };
+
     return cast {
-      message: function(options:Dynamic):_Promise<Dynamic> {
-        final window = getWindow();
-        if (window == null) {
-          return _Promise.resolve(({buttonIndex: -1.0, cancelled: true, checkboxChecked: false} : Dynamic));
-        }
-        window.alert(messageText(options), _Runtime.field(options, 'title'));
-        return _Promise.resolve(({buttonIndex: 0.0, cancelled: false, checkboxChecked: false} : Dynamic));
+      // Lime has no native two-button confirmation or text prompt, so those
+      // resolve to their denied/cancelled sentinels instead of a false choice.
+      message: {message: message, confirm: function(_options:Dynamic):_Promise<Dynamic> return _Promise.resolve(false)},
+      prompt: {prompt: function(_options:Dynamic):_Promise<Dynamic> return _Promise.resolve(null)},
+      fileOpen: {
+        open: function(options:Dynamic):_Promise<Dynamic> {
+          final multiple:Bool = _Runtime.field(options, 'multiple') == true;
+          return browse(multiple ? FileDialogType.OPEN_MULTIPLE : FileDialogType.OPEN, options, 'File');
+        },
       },
-      confirm: function(_options:Dynamic):_Promise<Dynamic> return _Promise.resolve(false),
-      prompt: function(_options:Dynamic):_Promise<Dynamic> {
-        return _Promise.resolve(null);
-      },
-      openFile: function(options:Dynamic):_Promise<Dynamic> {
-        final multiple:Bool = _Runtime.field(options, 'multiple') == true;
-        return browse(multiple ? FileDialogType.OPEN_MULTIPLE : FileDialogType.OPEN, options, 'File');
-      },
-      openDirectory: function(options:Dynamic):_Promise<Dynamic> {
-        return browse(FileDialogType.OPEN_DIRECTORY, options, 'Directory');
-      },
-      saveFile: function(options:Dynamic):_Promise<Dynamic> {
-        return new _Promise(function(resolve:Dynamic->Void, _reject) {
-          final dialog = new FileDialog();
-          dialog.onSelect.add(function(path:String) resolve(handleFor(path, 'File')));
-          dialog.onCancel.add(function() resolve(null));
-          final opened = dialog.browse(FileDialogType.SAVE, filterFor(options), _Runtime.field(options, 'defaultPath'),
-            _Runtime.field(options, 'title'));
-          if (!opened) resolve(null);
-        });
+      fileSave: {save: saveFile},
+      directoryOpen: {
+        open: function():_Promise<Dynamic> return browse(FileDialogType.OPEN_DIRECTORY, {}, 'Directory'),
       },
     };
   }

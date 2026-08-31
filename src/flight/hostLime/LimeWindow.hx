@@ -2,7 +2,6 @@ package flight.hostLime;
 
 #if lime
 import flight._Application.notifyWindowClosed;
-import flight._Application.observeWindowHostResult;
 import flight._Application.requestWindowClose;
 import flight.types.ApplicationWindow;
 import flight.types.WindowAttachmentOwnership;
@@ -158,20 +157,16 @@ class LimeWindow {
       if (record == null) return;
       try {
         callback(record.handle);
-        observeWindowHostResult(operation, true);
       } catch (_:Dynamic) {
-        observeWindowHostResult(operation, false);
       }
     };
 
     return cast {
       attach: function(win:ApplicationWindow, handle:Dynamic, ownership:WindowAttachmentOwnership):Bool {
         if (!Std.isOfType(handle, Window)) {
-          observeWindowHostResult('attach', false);
           return false;
         }
         final attached = attach(win, cast handle, ownership);
-        observeWindowHostResult('attach', attached);
         return attached;
       },
       center: function(win:ApplicationWindow):Void {
@@ -184,7 +179,6 @@ class LimeWindow {
       },
       close: function(win:ApplicationWindow):Void {
         detach(win, true);
-        observeWindowHostResult('close', true);
       },
       focus: function(win:ApplicationWindow):Void run(win, 'focus', function(handle:Window):Void handle.focus()),
       getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
@@ -195,10 +189,8 @@ class LimeWindow {
           out.y = record.handle.y;
           out.width = record.handle.width;
           out.height = record.handle.height;
-          observeWindowHostResult('getBounds', true);
         } catch (_:Dynamic) {
           copyBounds(win, out);
-          observeWindowHostResult('getBounds', false);
         }
         return out;
       },
@@ -223,17 +215,14 @@ class LimeWindow {
         if (Reflect.hasField(options, 'frame')) attributes.borderless = options.frame == false;
         final handle = try application.createWindow(attributes) catch (_:Dynamic) null;
         if (handle == null) {
-          observeWindowHostResult('open', false);
           return false;
         }
         if (!attach(win, handle, 'flight')) {
           handle.close();
-          observeWindowHostResult('open', false);
           return false;
         }
         if (win.minWidth > 0 || win.minHeight > 0) handle.setMinSize(Std.int(win.minWidth), Std.int(win.minHeight));
         if (win.maxWidth >= 0 && win.maxHeight >= 0) handle.setMaxSize(Std.int(win.maxWidth), Std.int(win.maxHeight));
-        observeWindowHostResult('open', true);
         return true;
       },
       restore: function(win:ApplicationWindow):Void run(win, 'restore', function(handle:Window):Void {

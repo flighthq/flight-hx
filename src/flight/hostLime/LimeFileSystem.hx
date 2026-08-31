@@ -21,7 +21,7 @@ class LimeFileSystem {
   static var atomicCounter = 0;
 
   /** Allocation entry point, Flight-style: `createLimeFileSystemBackend()`. */
-  public static function createLimeFileSystemBackend():flight.types.FileSystemBackend {
+  public static function createLimeFileSystemBackend():flight.types.FileSystemHostBackend {
     return cast {
       readTextFile: function(path:String):_Promise<Dynamic> {
         return done(try File.getContent(path) catch (_:Dynamic) null);

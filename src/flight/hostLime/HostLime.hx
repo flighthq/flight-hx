@@ -1,186 +1,99 @@
 package flight.hostLime;
 
 #if lime
-import flight._App.installAppHostBackend;
-import flight._Application.installLoopHostBackend;
-import flight._Application.installWindowHostBackend;
-import flight._Clipboard.installClipboardHostBackend;
-import flight._Dialog.installDialogHostBackend;
+import flight._Entity.createHost;
 import flight._GlyphAtlas.installGlyphRasterizerHostBackend;
-import flight._Haptics.installHapticsHostBackend;
 import flight._Image.installImageHostBackend;
 import flight._Image.observeImageHostResult;
-import flight._Lifecycle.installLifecycleHostBackend;
-import flight._Platform.installPlatformHostBackend;
-import flight._Screen.installScreenHostBackend;
-#if sys
-import flight._FileSystem.installFileSystemHostBackend;
-import flight._Storage.installStorageHostBackend;
-#end
+import flight.types.Host;
 import haxe.ds.ObjectMap;
 import lime.app.Application;
 
-/** Installs Lime-owned Flight capability backends with host-layer precedence. */
+/**
+ * Composes a Lime-backed Flight `Host` and installs the surviving global
+ * provider backends.
+ *
+ * The upstream host seam moved most capabilities from global installation to an
+ * explicit host argument: build the host with `createLimeHost(application)` and
+ * pass it (or its capability slices) to Flight functions. `enableHostLime`
+ * installs only the provider-style backends Flight still resolves globally
+ * (glyph rasterizer, image). Input, networking, and audio remain per-context.
+ */
 class HostLime {
-  static final installations = new ObjectMap<Application, LimeInstallation>();
+  static final hosts = new ObjectMap<Application, Host>();
 
   /**
-   * Enables every capability HostLime can implement honestly.
+   * Builds the composed Lime host, cached once per application.
    *
-   * Call this once the first Lime window exists (normally from
-   * `onWindowCreate`). Repeating it for the same application is idempotent.
-   * Input, networking, and audio are intentionally separate: input attachment
-   * is explicit and disposable per window; Flight networking does not yet
-   * expose a host-layer installation seam; and audio is a per-context service
-   * created with `LimeAudio.createLimeAudioContext()`.
+   * Every capability HostLime can implement honestly is composed here:
+   * identity/paths/locale/visibility/quit + loop (app), clipboard, dialog,
+   * screen, window, haptics (input), networking (net), platform + lifecycle
+   * (system), and — on `sys` targets — local storage + the file system.
+   */
+  public static function createLimeHost(application:Application):Host {
+    var host = hosts.get(application);
+    if (host != null) return host;
+
+    // app.loop lives inside the app namespace in the new host contract.
+    final app:Dynamic = LimeApp.createLimeAppCapabilities(application);
+    app.loop = LimeLoop.createLimeLoopBackend(application);
+
+    host = cast createHost({
+      app: app,
+      clipboard: LimeClipboard.createLimeClipboardCapabilities(),
+      dialog: LimeDialog.createLimeApplicationDialogCapabilities(application),
+      screen: LimeScreen.createLimeScreenCapabilities(application),
+      window: LimeWindow.createLimeWindowBackend(application),
+      input: {haptics: LimeHaptics.createLimeHapticsBackend()},
+      net: {http: LimeNet.createLimeNetBackend()},
+      system: {
+        platform: LimePlatform.createLimePlatformBackend(),
+        lifecycle: LimeLifecycle.createLimeLifecycleBackend(application),
+      },
+      #if sys
+      storage: {
+        local: LimeStorage.createLimeStorageBackend(),
+        fileSystem: cast LimeFileSystem.createLimeFileSystemBackend(),
+      },
+      #end
+    });
+    hosts.set(application, host);
+    return host;
+  }
+
+  /**
+   * Installs the provider-style backends Flight still resolves globally.
+   *
+   * Call once the first Lime window exists (normally from `onWindowCreate`).
+   * The composed capabilities (createLimeHost) are passed to Flight explicitly
+   * rather than installed.
    */
   public static function enableHostLime(application:Application):Void {
-    enableHostLimeApp(application);
-    enableHostLimeClipboard(application);
-    enableHostLimeDialog(application);
     enableHostLimeGlyphRasterizer(application);
-    enableHostLimeHaptics(application);
     enableHostLimeImage(application);
-    enableHostLimeLifecycle(application);
-    enableHostLimeLoop(application);
-    enableHostLimeWindow(application);
-    enableHostLimePlatform(application);
-    enableHostLimeScreen(application);
-    #if sys
-    enableHostLimeFileSystem(application);
-    enableHostLimeStorage(application);
-    #end
-  }
-
-  public static function enableHostLimeApp(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.app == null) installation.app = LimeApp.createLimeAppBackend(application);
-    installAppHostBackend(installation.app);
-  }
-
-  public static function enableHostLimeClipboard(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.clipboard == null) installation.clipboard = LimeClipboard.createLimeClipboardBackend();
-    installClipboardHostBackend(installation.clipboard);
-  }
-
-  /** Returns false when called before Lime has created a window. */
-  public static function enableHostLimeDialog(application:Application):Bool {
-    final window = application.window;
-    if (window == null) return false;
-    final installation = forApplication(application);
-    if (installation.dialog == null) installation.dialog = LimeDialog.createLimeApplicationDialogBackend(application);
-    installDialogHostBackend(installation.dialog);
-    return true;
-  }
-
-  public static function enableHostLimeHaptics(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.haptics == null) installation.haptics = LimeHaptics.createLimeHapticsBackend();
-    installHapticsHostBackend(installation.haptics);
   }
 
   /** Returns false when the active Lime build has no native Cairo support. */
   public static function enableHostLimeGlyphRasterizer(application:Application):Bool {
-    final installation = forApplication(application);
-    if (installation.glyphRasterizer == null) {
-      installation.glyphRasterizer = LimeGlyphRasterizer.createLimeGlyphRasterizerBackend();
-    }
-    if (installation.glyphRasterizer == null) return false;
-    installGlyphRasterizerHostBackend(installation.glyphRasterizer);
+    final backend = LimeGlyphRasterizer.createLimeGlyphRasterizerBackend();
+    if (backend == null) return false;
+    installGlyphRasterizerHostBackend(backend);
     return true;
   }
 
   public static function enableHostLimeImage(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.image == null) {
-      final inner = LimeImage.createLimeImageBackend();
-      installation.image = cast {
-        loadImageFromUrl: function(url:String, crossOrigin:Null<String>, signal:Null<flight._internal.dom.AbortSignal>) {
-          return inner.loadImageFromUrl(url, crossOrigin, signal).then(function(image) {
-            observeImageHostResult('loadImageFromUrl', true);
-            return image;
-          }, function(error):flight.types.Image {
-            observeImageHostResult('loadImageFromUrl', false);
-            throw error;
-          });
-        },
-      };
-    }
-    installImageHostBackend(installation.image);
+    final inner = LimeImage.createLimeImageBackend();
+    installImageHostBackend(cast {
+      loadImageFromUrl: function(url:String, crossOrigin:Null<String>, signal:Null<flight._internal.dom.AbortSignal>) {
+        return inner.loadImageFromUrl(url, crossOrigin, signal).then(function(image) {
+          observeImageHostResult('loadImageFromUrl', true);
+          return image;
+        }, function(error):flight.types.Image {
+          observeImageHostResult('loadImageFromUrl', false);
+          throw error;
+        });
+      },
+    });
   }
-
-  public static function enableHostLimeLifecycle(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.lifecycle == null) installation.lifecycle = LimeLifecycle.createLimeLifecycleBackend(application);
-    installLifecycleHostBackend(installation.lifecycle);
-  }
-
-  public static function enableHostLimeLoop(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.loop == null) installation.loop = LimeLoop.createLimeLoopBackend(application);
-    installLoopHostBackend(installation.loop);
-  }
-
-  public static function enableHostLimeWindow(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.window == null) installation.window = LimeWindow.createLimeWindowBackend(application);
-    installWindowHostBackend(installation.window);
-  }
-
-  public static function enableHostLimePlatform(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.platform == null) installation.platform = LimePlatform.createLimePlatformBackend();
-    installPlatformHostBackend(installation.platform);
-  }
-
-  public static function enableHostLimeScreen(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.screen == null) installation.screen = LimeScreen.createLimeScreenBackend(application);
-    installScreenHostBackend(installation.screen);
-  }
-
-  #if sys
-  public static function enableHostLimeFileSystem(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.fileSystem == null) installation.fileSystem = LimeFileSystem.createLimeFileSystemBackend();
-    installFileSystemHostBackend(installation.fileSystem);
-  }
-
-  public static function enableHostLimeStorage(application:Application):Void {
-    final installation = forApplication(application);
-    if (installation.storage == null) installation.storage = LimeStorage.createLimeStorageBackend();
-    installStorageHostBackend(installation.storage);
-  }
-  #end
-
-  static function forApplication(application:Application):LimeInstallation {
-    var installation = installations.get(application);
-    if (installation == null) {
-      installation = new LimeInstallation();
-      installations.set(application, installation);
-    }
-    return installation;
-  }
-}
-
-private class LimeInstallation {
-  public var app:Dynamic;
-  public var clipboard:Dynamic;
-  public var dialog:Dynamic;
-  public var haptics:Dynamic;
-  public var glyphRasterizer:Dynamic;
-  public var image:Dynamic;
-  public var lifecycle:Dynamic;
-  public var loop:Dynamic;
-  public var window:Dynamic;
-  public var platform:Dynamic;
-  public var screen:Dynamic;
-  #if sys
-  public var fileSystem:Dynamic;
-  public var storage:Dynamic;
-  #end
-
-  public function new() {}
 }
 #end
