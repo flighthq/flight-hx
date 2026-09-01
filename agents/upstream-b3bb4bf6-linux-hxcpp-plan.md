@@ -18,6 +18,8 @@ typedef NodeOf<Traits> = flight._internal._Intersection2<Node<Traits>, Traits>;
 
 Both camera2d and particles then compiled successfully for Linux hxcpp.
 
+Upstream commit `bc784801a` also migrated 64 SDK tests from module-level `vi.mock` factories to `vi.spyOn` namespace calls. Source bridges originally synchronized only hoisted module mocks, so the new spies never reached the corresponding compiled Haxe statics. Bridge analysis now maps namespace imports in adjacent tests, records the exact spied exports, and refreshes those bindings immediately before each exported function call. Function-valued constants retain identity through a wrapper that is installed back onto the compiled static field, preserving effect-runner registry equality. Focused application-gl, glTF, drop-shadow, and glitch parity exercises direct package, local/transitive, and callable-constant cases.
+
 ## Audit delta
 
 The source inventory grows modestly while preserving all package and export-lane coverage:

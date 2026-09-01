@@ -2197,11 +2197,21 @@ function emitJavaScriptSourceBridge(
       }
       if (declaration.kind === 'enum') return `export const ${exportedName} = api.__enum_${declaration.name};`;
       if (declaration.kind === 'function') {
-        return mutatesAnyName(declaration.body, mutableNames)
-          ? `export function ${exportedName}(...args) { const result = api.${declaration.name}(...args); __syncMutableExports(); return result; }`
-          : `export const ${exportedName} = api.${declaration.name};`;
+        const syncsMutableExports = mutatesAnyName(declaration.body, mutableNames);
+        if (dependencies.length === 0 && !syncsMutableExports) {
+          return `export const ${exportedName} = api.${declaration.name};`;
+        }
+        return `export function ${exportedName}(...args) {${dependencies.length > 0 ? ' __syncDependencies();' : ''} const result = api.${declaration.name}(...args);${syncsMutableExports ? ' __syncMutableExports();' : ''} return result; }`;
       }
       if (declaration.kind === 'variable') {
+        if (dependencies.length > 0 && !declaration.mutable && declaration.initializer?.kind === 'function') {
+          const implementationName = `__bridgeImplementation_${declaration.name}`;
+          return [
+            `const ${implementationName} = api.${declaration.name};`,
+            `export function ${exportedName}(...args) { __syncDependencies(); return ${implementationName}(...args); }`,
+            `api.${declaration.name} = ${exportedName};`,
+          ].join('\n');
+        }
         return declaration.mutable
           ? `export let ${exportedName} = api.${declaration.name};`
           : `export const ${exportedName} = api.${declaration.name};`;
@@ -2226,6 +2236,17 @@ function collectAdjacentTestMocks(sourceFile: string): Map<string, MockedSpecifi
     ts.ScriptKind.TS,
   );
   const specifiers = new Map<string, MockedSpecifier>();
+  const namespaceSpecifiers = new Map<string, string>();
+  for (const statement of source.statements) {
+    if (
+      ts.isImportDeclaration(statement) &&
+      ts.isStringLiteral(statement.moduleSpecifier) &&
+      statement.importClause?.namedBindings &&
+      ts.isNamespaceImport(statement.importClause.namedBindings)
+    ) {
+      namespaceSpecifiers.set(statement.importClause.namedBindings.name.text, statement.moduleSpecifier.text);
+    }
+  }
   const visit = (node: ts.Node): void => {
     if (
       ts.isCallExpression(node) &&
@@ -2269,6 +2290,24 @@ function collectAdjacentTestMocks(sourceFile: string): Map<string, MockedSpecifi
         }
       }
       specifiers.set(specifier, policy);
+    }
+    if (
+      ts.isCallExpression(node) &&
+      ts.isPropertyAccessExpression(node.expression) &&
+      ts.isIdentifier(node.expression.expression) &&
+      node.expression.expression.text === 'vi' &&
+      node.expression.name.text === 'spyOn' &&
+      node.arguments[0] &&
+      ts.isIdentifier(node.arguments[0]) &&
+      node.arguments[1] &&
+      (ts.isStringLiteral(node.arguments[1]) || ts.isNoSubstitutionTemplateLiteral(node.arguments[1]))
+    ) {
+      const specifier = namespaceSpecifiers.get(node.arguments[0].text);
+      if (specifier) {
+        const policy = specifiers.get(specifier) ?? { allExports: false, exports: new Set<string>() };
+        policy.exports.add(node.arguments[1].text);
+        specifiers.set(specifier, policy);
+      }
     }
     ts.forEachChild(node, visit);
   };
