@@ -58,6 +58,8 @@ class Scene2DGl {
 
   public static final defaultGlScale9ShapeRenderer:Scene2DRenderer = Facade_Scene2DGl_flight__Scene2DGl.defaultGlScale9ShapeRenderer;
 
+  public static final defaultGlScene2DRenderer:Scene2DRenderer = Facade_Scene2DGl_flight__Scene2DGl.defaultGlScene2DRenderer;
+
   public static final defaultGlShapeCommands:Array<CanvasShapeCommand<String>> = Facade_Scene2DGl_flight__Scene2DCanvas.defaultCanvasShapeCommands;
 
   public static final defaultGlShapeRenderer:Scene2DRenderer = Facade_Scene2DGl_flight__Scene2DGl.defaultGlShapeRenderer;

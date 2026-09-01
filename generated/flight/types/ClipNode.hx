@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ClipNode<Traits> = flight._internal._Intersection2<Node<Traits>, HasClip>;
+typedef ClipNode<Traits> = flight._internal._Intersection2<NodeOf<Traits>, HasClip>;

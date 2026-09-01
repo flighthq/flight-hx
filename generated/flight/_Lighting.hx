@@ -170,7 +170,7 @@ class _Lighting {
   }
 
   public static function createEnvironment(?options:EnvironmentOptions):Environment {
-    return cast (cast createEntity((cast { environment: _Runtime.coalesce(({ final __structural157 = options; __structural157 == null ? _Runtime.UNDEFINED : (cast __structural157 : { @:optional var environment:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).environment; }), function():Dynamic return cast null), intensity: _Runtime.coalesce(({ final __structural158 = options; __structural158 == null ? _Runtime.UNDEFINED : (cast __structural158 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), kind: EnvironmentKind } : Dynamic)) : { >Entity, var environment:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; var intensity:Float; var kind:String; });
+    return cast (cast createEntity((cast { environment: _Runtime.coalesce(({ final __structural157 = options; __structural157 == null ? _Runtime.UNDEFINED : (cast __structural157 : { @:optional var environment:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).environment; }), function():Dynamic return cast null), intensity: _Runtime.coalesce(({ final __structural158 = options; __structural158 == null ? _Runtime.UNDEFINED : (cast __structural158 : { @:optional var intensity:Null<Float>; }).intensity; }), function():Dynamic return cast 1.0), kind: EnvironmentKind } : Dynamic)) : { >Entity, var environment:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; var intensity:Float; var kind:String; });
     return cast null;
   }
 
@@ -221,7 +221,7 @@ class _Lighting {
 
   public static function getLightInfluenceBounds(out:BoundingSphereLike, light:Light):Void {
     var kind:String = cast _Runtime.UNDEFINED;
-    kind = light.kind;
+    kind = _Runtime.field(light, 'kind');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, DirectionalLightKind) : Bool)) : Bool)) {
       ((cast out.center : { var x:Float; }).x = cast (0.0 : Float));
       ((cast out.center : { var y:Float; }).y = cast (0.0 : Float));
@@ -271,7 +271,7 @@ class _Lighting {
     var dz:Float = cast _Runtime.UNDEFINED;
     var distSq:Float = cast _Runtime.UNDEFINED;
     var radSum:Float = cast _Runtime.UNDEFINED;
-    kind = light.kind;
+    kind = _Runtime.field(light, 'kind');
     if ((cast ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, DirectionalLightKind) : Bool)) : Bool)) {
       return cast true;
     }
@@ -290,11 +290,11 @@ class _Lighting {
 
   public static function isLightCastingShadow(light:Light):Bool {
     var kind:String = cast _Runtime.UNDEFINED;
-    kind = light.kind;
+    kind = _Runtime.field(light, 'kind');
     if ((cast ((cast ((cast _Runtime.strictEquals(kind, AmbientLightKind) : Bool) || (cast _Runtime.strictEquals(kind, HemisphereLightKind) : Bool)) : Bool) || (cast _Runtime.strictEquals(kind, EnvironmentKind) : Bool)) : Bool)) {
       return cast false;
     }
-    return cast (cast (cast (cast light : flight._internal._Any) : { var castsShadow:Bool; }) : { var castsShadow:Bool; }).castsShadow;
+    return cast ((cast _Runtime.hasField(light, 'castsShadow') : Bool) && (cast _Runtime.strictEquals((cast light : { var castsShadow:flight._internal._Any; }).castsShadow, true) : Bool));
     return cast null;
   }
 

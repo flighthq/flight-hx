@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 @:noCompletion
-typedef SelectionStateRuntime<NodeType> = { var binding:Null<flight._internal._Object>; var activeNode:Null<NodeType>; var selectedNodeSet:flight._internal._Set<NodeType>; var selectedNodes:Array<NodeType>; var signals:SelectionSignals<NodeType>; };
+typedef SelectionStateRuntime<NodeType> = { var binding:Null<flight._internal._Object>; @:optional var uid:String; var activeNode:Null<NodeType>; var selectedNodeSet:flight._internal._Set<NodeType>; var selectedNodes:Array<NodeType>; var signals:SelectionSignals<NodeType>; };

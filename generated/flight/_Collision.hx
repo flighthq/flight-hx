@@ -1577,6 +1577,18 @@ class _Collision {
 
   public static final scratchVertices__collisionSupport2D:flight._internal._Float64Array = new flight._internal._Float64Array(8.0);
 
+  @:allow(flight)
+  @:keep
+  private static function clearCollisionPairTests3D():Void {
+    ((cast _Collision.collisionPairTests3D__collisionSupport3D : flight._internal._Map<String, CollisionPairTest3D>).clear());
+  }
+
+  @:allow(flight)
+  @:keep
+  private static function clearCollisionSupports3D():Void {
+    ((cast _Collision.collisionSupports3D__collisionSupport3D : flight._internal._Map<CollisionShapeKind3D, CollisionSupport3D>).clear());
+  }
+
   public static function getCollisionPairTest3D(kindA:CollisionShapeKind3D, kindB:CollisionShapeKind3D):Null<CollisionPairTest3D> {
     return cast _Runtime.coalesce(((cast _Collision.collisionPairTests3D__collisionSupport3D : flight._internal._Map<String, CollisionPairTest3D>).get((cast _Collision.getCollisionPairKey3D__collisionSupport3D(({ final __callArgument302:Dynamic = kindA; __callArgument302; }), ({ final __callArgument303:Dynamic = kindB; __callArgument303; })) : String))), function():Dynamic return cast null);
     return cast null;
@@ -5773,11 +5785,11 @@ class _Collision {
     var overlapZ:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast !(cast (cast _Collision.isValidAabb3D__shapeCollision3D(({ final __callArgument1193:Dynamic = a; __callArgument1193; })) : Bool) : Bool) : Bool) || (cast !(cast (cast _Collision.isValidAabb3D__shapeCollision3D(({ final __callArgument1195:Dynamic = b; __callArgument1195; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _Collision.clearAndMiss__shapeCollision3D(({ final __callArgument1197:Dynamic = out; __callArgument1197; })) : Bool); }
     overlapX = HxMath.min(_Runtime.subtractNumbers(_Runtime.field(a, 'maxX'), _Runtime.field(b, 'minX')), _Runtime.subtractNumbers(_Runtime.field(b, 'maxX'), _Runtime.field(a, 'minX')));
-    if ((cast ((cast overlapX : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast _Collision.clearAndMiss__shapeCollision3D(({ final __callArgument1199:Dynamic = out; __callArgument1199; })) : Bool); }
+    if ((cast ((cast overlapX : Float) < (cast 0.0 : Float)) : Bool)) { return cast (cast _Collision.clearAndMiss__shapeCollision3D(({ final __callArgument1199:Dynamic = out; __callArgument1199; })) : Bool); }
     overlapY = HxMath.min(_Runtime.subtractNumbers(_Runtime.field(a, 'maxY'), _Runtime.field(b, 'minY')), _Runtime.subtractNumbers(_Runtime.field(b, 'maxY'), _Runtime.field(a, 'minY')));
-    if ((cast ((cast overlapY : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast _Collision.clearAndMiss__shapeCollision3D(({ final __callArgument1201:Dynamic = out; __callArgument1201; })) : Bool); }
+    if ((cast ((cast overlapY : Float) < (cast 0.0 : Float)) : Bool)) { return cast (cast _Collision.clearAndMiss__shapeCollision3D(({ final __callArgument1201:Dynamic = out; __callArgument1201; })) : Bool); }
     overlapZ = HxMath.min(_Runtime.subtractNumbers(_Runtime.field(a, 'maxZ'), _Runtime.field(b, 'minZ')), _Runtime.subtractNumbers(_Runtime.field(b, 'maxZ'), _Runtime.field(a, 'minZ')));
-    if ((cast ((cast overlapZ : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast _Collision.clearAndMiss__shapeCollision3D(({ final __callArgument1203:Dynamic = out; __callArgument1203; })) : Bool); }
+    if ((cast ((cast overlapZ : Float) < (cast 0.0 : Float)) : Bool)) { return cast (cast _Collision.clearAndMiss__shapeCollision3D(({ final __callArgument1203:Dynamic = out; __callArgument1203; })) : Bool); }
     ((cast out : CollisionManifold3D).normalX = 0.0);
     ((cast out : CollisionManifold3D).normalY = 0.0);
     ((cast out : CollisionManifold3D).normalZ = 0.0);
@@ -5865,8 +5877,9 @@ class _Collision {
         var radiusB:Float = ((_Runtime.multiplyNumbers(_Runtime.field(b, 'halfX'), HxMath.abs((((axisX * flight._internal._StaticIndex.readFloat64ArrayTyped((cast _Collision.boxAxesB__shapeCollision3D : flight._internal._Float64Array), (cast 0.0 : Float))) + (axisY * flight._internal._StaticIndex.readFloat64ArrayTyped((cast _Collision.boxAxesB__shapeCollision3D : flight._internal._Float64Array), (cast 1.0 : Float)))) + (axisZ * flight._internal._StaticIndex.readFloat64ArrayTyped((cast _Collision.boxAxesB__shapeCollision3D : flight._internal._Float64Array), (cast 2.0 : Float)))))) + _Runtime.multiplyNumbers(_Runtime.field(b, 'halfY'), HxMath.abs((((axisX * flight._internal._StaticIndex.readFloat64ArrayTyped((cast _Collision.boxAxesB__shapeCollision3D : flight._internal._Float64Array), (cast 3.0 : Float))) + (axisY * flight._internal._StaticIndex.readFloat64ArrayTyped((cast _Collision.boxAxesB__shapeCollision3D : flight._internal._Float64Array), (cast 4.0 : Float)))) + (axisZ * flight._internal._StaticIndex.readFloat64ArrayTyped((cast _Collision.boxAxesB__shapeCollision3D : flight._internal._Float64Array), (cast 5.0 : Float))))))) + _Runtime.multiplyNumbers(_Runtime.field(b, 'halfZ'), HxMath.abs((((axisX * flight._internal._StaticIndex.readFloat64ArrayTyped((cast _Collision.boxAxesB__shapeCollision3D : flight._internal._Float64Array), (cast 6.0 : Float))) + (axisY * flight._internal._StaticIndex.readFloat64ArrayTyped((cast _Collision.boxAxesB__shapeCollision3D : flight._internal._Float64Array), (cast 7.0 : Float)))) + (axisZ * flight._internal._StaticIndex.readFloat64ArrayTyped((cast _Collision.boxAxesB__shapeCollision3D : flight._internal._Float64Array), (cast 8.0 : Float)))))));
         var centreProjection:Float = (((deltaX * axisX) + (deltaY * axisY)) + (deltaZ * axisZ));
         var overlap:Float = _Runtime.subtractNumbers((radiusA + radiusB), HxMath.abs(centreProjection));
-        if ((cast ((cast overlap : Float) <= (cast 0.0 : Float)) : Bool)) { return cast (cast _Collision.clearAndMiss__shapeCollision3D(({ final __callArgument1215:Dynamic = out; __callArgument1215; })) : Bool); }
-        if ((cast ((cast overlap : Float) < (cast bestDepth : Float)) : Bool)) {
+        if ((cast ((cast overlap : Float) < (cast 0.0 : Float)) : Bool)) { return cast (cast _Collision.clearAndMiss__shapeCollision3D(({ final __callArgument1215:Dynamic = out; __callArgument1215; })) : Bool); }
+        var effective:Float = ((cast ((cast axis : Float) >= (cast 6.0 : Float)) : Bool) ? (cast (overlap * (1.0 + _Collision.BOX_EDGE_BIAS__shapeCollision3D)) : Dynamic) : (cast overlap : Dynamic));
+        if ((cast ((cast effective : Float) < (cast bestDepth : Float)) : Bool)) {
           var sign:Float = ((cast ((cast centreProjection : Float) < (cast 0.0 : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
           (bestDepth = cast (overlap : Dynamic));
           (bestNormalX = cast ((axisX * sign) : Dynamic));
@@ -6189,6 +6202,8 @@ class _Collision {
   public static final RELATIVE_EPSILON__shapeCollision3D:Float = 1e-12;
 
   public static final BOX_PARALLEL_AXIS_EPSILON__shapeCollision3D:Float = 1e-12;
+
+  public static final BOX_EDGE_BIAS__shapeCollision3D:Float = 0.005;
 
   public static final boxAxesA__shapeCollision3D:flight._internal._Float64Array = new flight._internal._Float64Array(9.0);
 

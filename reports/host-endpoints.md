@@ -1,6 +1,6 @@
 # Host Endpoint Audit
 
-Upstream commit: `2e86cd620a53121aa6c9230215f44c6c9a3bf816`
+Upstream commit: `b3bb4bf61833f7723e7033dd5c732e91a6601400`
 
 Receiver identities and member use are checker-derived. The shared contract selects explicit host backends where maintained target semantics exist and the maintained dynamic runtime otherwise; generation validates both routes.
 
@@ -8,9 +8,9 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | --- | ---: |
 | Receiver bindings | 10 |
 | Canonical endpoints | 402 |
-| Property accesses | 3593 |
-| Calls | 2290 |
-| Reads | 1078 |
+| Property accesses | 3615 |
+| Calls | 2302 |
+| Reads | 1088 |
 | Writes | 225 |
 | Backend contract endpoints | 397 |
 | Dynamic-fallback endpoints in use | 21 |
@@ -173,7 +173,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `bindRenderbuffer` | `call` | `bindRenderbuffer` | `backend` | 3 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `bindTexture` | `call` | `bindTexture` | `backend` | 35 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `bindVertexArray` | `call` | `bindVertexArray` | `backend` | 20 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `BLEND` | `read` | `BLEND` | `backend` | 17 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `BLEND` | `read` | `BLEND` | `backend` | 20 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `BLEND_DST_ALPHA` | `read` | `BLEND_DST_ALPHA` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `BLEND_DST_RGB` | `read` | `BLEND_DST_RGB` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `BLEND_EQUATION_ALPHA` | `read` | `BLEND_EQUATION_ALPHA` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
@@ -211,7 +211,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `createShader` | `call` | `createShader` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `createTexture` | `call` | `createTexture` | `backend` | 14 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `createVertexArray` | `call` | `createVertexArray` | `backend` | 6 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `CULL_FACE` | `read` | `CULL_FACE` | `backend` | 11 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `CULL_FACE` | `read` | `CULL_FACE` | `backend` | 14 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `CULL_FACE_MODE` | `read` | `CULL_FACE_MODE` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `cullFace` | `call` | `cullFace` | `backend` | 4 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `CURRENT_PROGRAM` | `read` | `CURRENT_PROGRAM` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
@@ -228,12 +228,12 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `DEPTH_FUNC` | `read` | `DEPTH_FUNC` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `DEPTH_STENCIL` | `read` | `DEPTH_STENCIL` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `DEPTH_STENCIL_ATTACHMENT` | `read` | `DEPTH_STENCIL_ATTACHMENT` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `DEPTH_TEST` | `read` | `DEPTH_TEST` | `backend` | 13 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `DEPTH_WRITEMASK` | `read` | `DEPTH_WRITEMASK` | `backend` | 3 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `DEPTH_TEST` | `read` | `DEPTH_TEST` | `backend` | 16 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `DEPTH_WRITEMASK` | `read` | `DEPTH_WRITEMASK` | `backend` | 4 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `DEPTH24_STENCIL8` | `read` | `DEPTH24_STENCIL8` | `backend` | 3 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `depthFunc` | `call` | `depthFunc` | `backend` | 3 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `depthMask` | `call` | `depthMask` | `backend` | 10 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `disable` | `call` | `disable` | `backend` | 21 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `depthMask` | `call` | `depthMask` | `backend` | 12 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `disable` | `call` | `disable` | `backend` | 24 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `disableVertexAttribArray` | `call` | `disableVertexAttribArray` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `DRAW_FRAMEBUFFER` | `read` | `DRAW_FRAMEBUFFER` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `drawArrays` | `call` | `drawArrays` | `backend` | 6 | `src/flight/_internal/backend/WebGl2Backend.hx` |
@@ -245,7 +245,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `DST_COLOR` | `read` | `DST_COLOR` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `DYNAMIC_DRAW` | `read` | `DYNAMIC_DRAW` | `backend` | 11 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `ELEMENT_ARRAY_BUFFER` | `read` | `ELEMENT_ARRAY_BUFFER` | `backend` | 15 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `enable` | `call` | `enable` | `backend` | 21 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `enable` | `call` | `enable` | `backend` | 24 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `enableVertexAttribArray` | `call` | `enableVertexAttribArray` | `backend` | 35 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `EQUAL` | `read` | `EQUAL` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `FLOAT` | `read` | `FLOAT` | `backend` | 42 | `src/flight/_internal/backend/WebGl2Backend.hx` |
@@ -271,7 +271,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `getActiveUniform` | `call` | `getActiveUniform` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `getAttribLocation` | `call` | `getAttribLocation` | `backend` | 11 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `getExtension` | `call` | `getExtension` | `backend` | 20 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `getParameter` | `call` | `getParameter` | `backend` | 51 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `getParameter` | `call` | `getParameter` | `backend` | 52 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `getProgramInfoLog` | `call` | `getProgramInfoLog` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `getProgramParameter` | `call` | `getProgramParameter` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `getShaderInfoLog` | `call` | `getShaderInfoLog` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
@@ -280,7 +280,7 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `HALF_FLOAT` | `read` | `HALF_FLOAT` | `backend` | 3 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `INCR_WRAP` | `read` | `INCR_WRAP` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `INVERT` | `read` | `INVERT` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `isEnabled` | `call` | `isEnabled` | `backend` | 11 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `isEnabled` | `call` | `isEnabled` | `backend` | 14 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `KEEP` | `read` | `KEEP` | `backend` | 9 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `LESS` | `read` | `LESS` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `LINE_STRIP` | `read` | `LINE_STRIP` | `backend` | 1 | `src/flight/_internal/backend/WebGl2Backend.hx` |

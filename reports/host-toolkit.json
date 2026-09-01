@@ -10,8 +10,8 @@
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 35,
-    "typeUses": 8718,
-    "valueUses": 2092
+    "typeUses": 8738,
+    "valueUses": 2084
   },
   "types": [
     {
@@ -1187,7 +1187,7 @@
         "upstream/packages/types/src/WgpuSkinningAdapter.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBindGroupLayout.hx",
-      "uses": 283
+      "uses": 281
     },
     {
       "coverage": "dynamic-stub",
@@ -1924,7 +1924,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/GPURenderPipeline.hx",
-      "uses": 122
+      "uses": 120
     },
     {
       "coverage": "dynamic-stub",
@@ -3820,7 +3820,7 @@
         "upstream/packages/types/src/GlScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLFramebuffer.hx",
-      "uses": 39
+      "uses": 45
     },
     {
       "coverage": "dynamic-stub",
@@ -3929,7 +3929,7 @@
         "upstream/packages/types/src/GlShapeMeshBinding.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLProgram.hx",
-      "uses": 248
+      "uses": 252
     },
     {
       "coverage": "dynamic-stub",
@@ -3942,7 +3942,7 @@
         "upstream/packages/types/src/GlRenderTarget.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLRenderbuffer.hx",
-      "uses": 6
+      "uses": 11
     },
     {
       "coverage": "dynamic-stub",
@@ -4079,7 +4079,7 @@
         "upstream/packages/types/src/GlTextureResolver.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLTexture.hx",
-      "uses": 414
+      "uses": 422
     },
     {
       "coverage": "dynamic-stub",
@@ -4194,7 +4194,7 @@
         "upstream/packages/types/src/GlWireframeProgram.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLUniformLocation.hx",
-      "uses": 374
+      "uses": 375
     },
     {
       "coverage": "dynamic-stub",
@@ -4290,7 +4290,7 @@
       "uses": 4
     }
   ],
-  "upstreamCommit": "2e86cd620a53121aa6c9230215f44c6c9a3bf816",
+  "upstreamCommit": "b3bb4bf61833f7723e7033dd5c732e91a6601400",
   "values": [
     {
       "coverage": "portable",
@@ -4774,7 +4774,7 @@
         "generated/flight/_Tween.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 362
+      "uses": 359
     },
     {
       "coverage": "js-only",
@@ -5189,7 +5189,7 @@
         "generated/flight/_Velocity.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 226
+      "uses": 221
     },
     {
       "coverage": "portable",

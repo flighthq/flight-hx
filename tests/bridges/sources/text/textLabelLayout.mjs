@@ -8,3 +8,4 @@ __syncDependencies();
 export const ensureTextLayout = api.ensureTextLayout;
 export const getTextLayout = api.getTextLayout;
 export const getTextLayoutMetrics = api.getTextLayoutMetrics;
+export const setTextLabelGuard = api.setTextLabelGuard;

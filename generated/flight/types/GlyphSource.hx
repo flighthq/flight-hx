@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GlyphSource = { var getGlyphAtlasImage:Float->Null<TextureSource>; var getGlyphEntry:Float->Null<GlyphEntry>; var getGlyphKerning:Float->Float->Float; var getGlyphMetrics:Void->GlyphMetrics; };
+typedef GlyphSource = { var getGlyphAtlasImage:Float->Null<TextureSource>; var getGlyphEntry:Float->Null<GlyphEntry>; var getGlyphKerning:Float->Float->Float; var getGlyphLayoutVersion:Void->Float; var getGlyphMetrics:Void->GlyphMetrics; };

@@ -21,6 +21,14 @@ class BitmapText {
     return cast null;
   }
 
+  public static function disableBitmapTextGuards():Void {
+    Facade_BitmapText_flight__BitmapText.disableBitmapTextGuards();
+  }
+
+  public static function enableBitmapTextGuards():Void {
+    Facade_BitmapText_flight__BitmapText.enableBitmapTextGuards();
+  }
+
   public static function getBitmapTextBounds(source:flight.types.BitmapText):Rectangle {
     return cast Facade_BitmapText_flight__BitmapText.getBitmapTextBounds(source);
     return cast null;
@@ -28,6 +36,16 @@ class BitmapText {
 
   public static function getBitmapTextPages(source:flight.types.BitmapText):Array<BitmapTextPage> {
     return cast Facade_BitmapText_flight__BitmapText.getBitmapTextPages(source);
+    return cast null;
+  }
+
+  public static function isBitmapTextGlyphLayoutStale(source:flight.types.BitmapText):Bool {
+    return cast Facade_BitmapText_flight__BitmapText.isBitmapTextGlyphLayoutStale(source);
+    return cast null;
+  }
+
+  public static function refreshBitmapTextGlyphLayout(bitmapText:flight.types.BitmapText):Bool {
+    return cast Facade_BitmapText_flight__BitmapText.refreshBitmapTextGlyphLayout(bitmapText);
     return cast null;
   }
 

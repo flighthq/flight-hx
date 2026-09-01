@@ -35,7 +35,6 @@ import flight.types.MeshGeometry;
 import flight.types.MeshMorph;
 import flight.types.MeshRuntime;
 import flight.types.MeshSkinBindPose;
-import flight.types.Node;
 import flight.types.Node3D;
 import flight.types.Node3DTraits;
 import flight.types.NodeAny;
@@ -264,7 +263,7 @@ class _Skeleton3D {
 
   public static function prepareScene3DSkinning(scene:NodeAny):Void {
     var mesh:Mesh = cast _Runtime.UNDEFINED;
-    var children:Null<Array<Node<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(scene, 'enabled') : Bool) : Bool)) { return; }
     mesh = (cast (cast scene : flight._internal._Any) : Mesh);
     if ((cast !_Runtime.looseEquals(mesh.geometry, null) : Bool)) { prepareMeshSkinning(({ final __callArgument20:Dynamic = mesh; __callArgument20; })); }

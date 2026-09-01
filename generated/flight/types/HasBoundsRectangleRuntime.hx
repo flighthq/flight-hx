@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HasBoundsRectangleRuntime = { var binding:Null<flight._internal._Object>; var boundsRectangle:Null<Rectangle>; var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; var localBoundsRectangle:Null<Rectangle>; var worldBoundsRectangle:Null<Rectangle>; };
+typedef HasBoundsRectangleRuntime = { var binding:Null<flight._internal._Object>; @:optional var uid:String; var boundsRectangle:Null<Rectangle>; var computeLocalBoundsRectangle:Rectangle->BoundsNodeAny->Void; var isLocalBoundsRectangleValid:Null<BoundsNodeAny->Bool>; var localBoundsRectangle:Null<Rectangle>; var worldBoundsRectangle:Null<Rectangle>; };

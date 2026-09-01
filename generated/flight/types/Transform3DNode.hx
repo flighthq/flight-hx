@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Transform3DNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var position:Vector3; var rotation:Quaternion; var scale:Vector3; };
+typedef Transform3DNode<Traits> = { var position:Vector3; var rotation:Quaternion; var scale:Vector3; };

@@ -1689,7 +1689,7 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
       Required: 'flight._internal._Required',
     }[name];
     if (utilityType && standardType) return { arguments: arguments_, kind: 'named', name: utilityType };
-    if (['Awaited', 'NonNullable', 'Readonly'].includes(name) && arguments_[0]) {
+    if (standardType && ['Awaited', 'NoInfer', 'NonNullable', 'Readonly'].includes(name) && arguments_[0]) {
       return arguments_[0];
     }
     if (name === 'Parameters') return { element: { kind: 'dynamic' }, kind: 'array' };
@@ -1731,7 +1731,8 @@ function lowerType(node: ts.TypeNode, context: LoweringContext): IrType {
     const nodeType = types.find((item) => item.kind === 'named' && item.name === 'Node');
     const genericIndex = node.types.findIndex((item) => {
       if (context.checker) {
-        return (context.checker.getTypeFromTypeNode(item).flags & ts.TypeFlags.TypeParameter) !== 0;
+        const candidate = unwrapStandardTransparentTypeNode(item, context.checker);
+        return (context.checker.getTypeFromTypeNode(candidate).flags & ts.TypeFlags.TypeParameter) !== 0;
       }
       return ts.isTypeReferenceNode(item) && ['D', 'R', 'T', 'Traits', 'Type', 'U'].includes(item.typeName.getText());
     });
@@ -1951,7 +1952,7 @@ function lowerCheckerTypeUncached(
   const arguments_ = rawArguments.map(
     (argument) => lowerCheckerType(argument, node, context, nextSeen) ?? ({ kind: 'dynamic' } as const),
   );
-  if (name === 'Readonly' && rawArguments[0]) {
+  if (name && ['NoInfer', 'Readonly'].includes(name) && standardLibraryType(type, name) && rawArguments[0]) {
     return lowerCheckerType(rawArguments[0], node, context, nextSeen);
   }
   const standardGenericType =
@@ -2168,6 +2169,18 @@ function isNullishType(node: ts.TypeNode): boolean {
     node.kind === ts.SyntaxKind.NullKeyword ||
     (ts.isLiteralTypeNode(node) && node.literal.kind === ts.SyntaxKind.NullKeyword)
   );
+}
+
+function unwrapStandardTransparentTypeNode(node: ts.TypeNode, checker: ts.TypeChecker): ts.TypeNode {
+  let current = node;
+  while (ts.isTypeReferenceNode(current) && current.typeArguments?.length === 1) {
+    const symbol = originalSymbolAtLocation(current.typeName, checker);
+    if (!['Awaited', 'NoInfer', 'NonNullable', 'Readonly'].some((name) => standardLibraryTypeSymbol(symbol, name))) {
+      break;
+    }
+    current = current.typeArguments[0]!;
+  }
+  return current;
 }
 
 function lowerTypeMembers(members: ts.NodeArray<ts.TypeElement>, context: LoweringContext) {

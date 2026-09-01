@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ColorScaleBiasNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var colorScaleBias:Null<ColorScaleBias>; };
+typedef ColorScaleBiasNode<Traits> = { var colorScaleBias:Null<ColorScaleBias>; };

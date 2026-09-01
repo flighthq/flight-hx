@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Spatial2DNode<Traits> = flight._internal._Intersection2<flight._internal._Intersection2<Node<Traits>, HasBoundsRectangle>, HasTransform2D>;
+typedef Spatial2DNode<Traits> = flight._internal._Intersection2<flight._internal._Intersection2<NodeOf<Traits>, HasBoundsRectangle>, HasTransform2D>;

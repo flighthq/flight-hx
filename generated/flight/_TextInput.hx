@@ -4,6 +4,7 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Node.invalidateNodeAppearance;
+import flight._Node.invalidateNodeLocalContent;
 import flight._Signals.connectSignal;
 import flight._Signals.disconnectSignal;
 import flight._Text.getRichTextRuntime;
@@ -623,7 +624,7 @@ class _TextInput {
     if ((cast ((cast !_Runtime.strictEquals(({ final __structural284 = options; __structural284 == null ? _Runtime.UNDEFINED : (cast __structural284 : { @:optional var skipHistory:Null<Bool>; }).skipHistory; }), true) : Bool) && (cast ((cast state.historyLimit : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) {
       _TextInput.recordTextInputEdit__textInputEditing(({ final __callArgument285:Dynamic = state; __callArgument285; }), (cast textBefore : String), (cast data.text : String), (cast caretBefore : Float), (cast selectionBefore : Float), ({ final __callArgument287:Dynamic = _Runtime.coalesce(({ final __structural286 = options; __structural286 == null ? _Runtime.UNDEFINED : (cast __structural286 : { @:optional var mergeKind:Null<String>; }).mergeKind; }), function():Dynamic return cast null); __callArgument287; }));
     }
-    invalidateNodeAppearance((cast source : Dynamic));
+    invalidateNodeLocalContent((cast source : Dynamic));
   }
 
   public static function scrollTextInputCaretIntoView(source:RichText, layout:TextLayoutResult, viewportWidth:Float, viewportHeight:Float):Void {
@@ -789,7 +790,7 @@ class _TextInput {
     (state.caretIndex = cast ((cast _TextInput.clampIndex__textInputEditing((cast caretIndex : Float), (cast _Runtime.field(text, 'length') : Float)) : Float) : Float));
     (state.selectionIndex = cast ((cast _TextInput.clampIndex__textInputEditing((cast selectionIndex : Float), (cast _Runtime.field(text, 'length') : Float)) : Float) : Float));
     (state.desiredCaretX = cast (_TextInput.DESIRED_CARET_X_UNSET__textInputEditing : Float));
-    invalidateNodeAppearance((cast source : Dynamic));
+    invalidateNodeLocalContent((cast source : Dynamic));
   }
 
   public static function clampIndex__textInputEditing(value:Float, length:Float):Float {

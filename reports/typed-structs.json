@@ -13463,7 +13463,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:1206541436dbd2f98867827f4b01fecb86820ede63bc9237c0b21d9bcedb36fc",
+      "declarationFingerprint": "sha256:bfbd67e0c125de07f01f60fb382cc1bb55f4f041320e03646823af7fc253a024",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
       "eligible": false,
@@ -30028,7 +30028,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits>[] | null"
+          "type": "NodeOf<Node3DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -30140,7 +30140,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits> | null"
+          "type": "NodeOf<Node3DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -30173,6 +30173,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node3DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldAlpha",
@@ -41201,7 +41209,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 8,
+        "reads": 10,
         "writes": 0
       },
       "declarationFingerprint": "sha256:9d0dd7c810abb4bb0279f61cd201ee7648448b026b33fd765828f8e9f89f242a",
@@ -41211,7 +41219,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 8,
+        "pendingAccesses": 10,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -42076,7 +42084,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 13,
+        "reads": 15,
         "writes": 12
       },
       "declarationFingerprint": "sha256:63846610c575904018effbac806a0440c7a5eeadaee51b0834ffb45fbf7fd44b",
@@ -42084,7 +42092,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 25,
+        "directAccesses": 27,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -42310,15 +42318,15 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 15,
-        "writes": 3
+        "reads": 16,
+        "writes": 7
       },
-      "declarationFingerprint": "sha256:d4322da6611176c711c3b0f309d5c790a93ca34a66a751617060eefc278bf549",
+      "declarationFingerprint": "sha256:51fd90371ed793b2a0ea3f8784b335ed1ff2a7a7749be968805fd04754d0f5d4",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 18,
+        "directAccesses": 23,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -42379,7 +42387,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -42412,6 +42420,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "(out: Rectangle, source: Readonly<BoundsNodeAny>) => void"
+        },
+        {
+          "name": "glyphLayoutVersion",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
         },
         {
           "name": "interactionSignals",
@@ -42515,7 +42531,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -42580,6 +42596,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -43412,7 +43436,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:682dc986a960120460ce15424fdc03b0f86e4e790640b3452e845120e89c6535",
+      "declarationFingerprint": "sha256:8ab7810474cd276837ffe05bc3883d0e526ff405635e30f79288701019f6255b",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
       "eligible": false,
@@ -43498,7 +43522,7 @@
         "reads": 32,
         "writes": 11
       },
-      "declarationFingerprint": "sha256:1ad81b90e44e80bd524b045aac2be2bc6a069473749743258d893377441f0194",
+      "declarationFingerprint": "sha256:fc92192bbae7a57eeb08054226aa4afeb15de7cf2c60739109a4b5803a61bb20",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -43572,7 +43596,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"BlinnPhongMaterial\""
         },
         {
           "name": "name",
@@ -45359,7 +45383,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:8fddb53399dce104a81ccb3922daaad01147fa43545a5ab9705329b6ee7c44f3",
+      "declarationFingerprint": "sha256:a7a6979ffb6ba403c2eb8122531b1aa0e1162ccad5b107484d404ba505b06055",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
       "eligible": false,
@@ -49803,6 +49827,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "Renderable[]"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         }
       ],
       "id": "@flighthq/types:interface#CanvasRenderStateRuntime",
@@ -61347,7 +61379,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:dc1acf36df8ea13ca9d52998f125def6512ad669abfd31590fa73865c2bbd85a",
+      "declarationFingerprint": "sha256:df7eef456eef67adfcf5fff894aca0dde9a2a2c8f7293e8a4c9731e07b003ebb",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
       "eligible": false,
@@ -82472,7 +82504,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:c5e6a9258fbb6a3cd8c6386936d53229385808d99395817f572e7cd9b6a853d3",
+      "declarationFingerprint": "sha256:50c00aa50f3c480c51fbc56032efea273ed8109b2e11df0d79ecdda88082f288",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
       "eligible": false,
@@ -89643,7 +89675,7 @@
         "reads": 6,
         "writes": 2
       },
-      "declarationFingerprint": "sha256:2b6e077b6b1679a2d911c05c53b37f74ef4d6522381ff80e683b663407c47559",
+      "declarationFingerprint": "sha256:68e7295714b2fbaa9741f254f5f12995e21e9b4a8db40c02677f0694edaf83f9",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -89701,7 +89733,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"DepthMaterial\""
         },
         {
           "name": "name",
@@ -90430,7 +90462,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:d9234d0fef6bd22728456865cec0d55d8c5ad54e516c9d2687070fec558bb782",
+      "declarationFingerprint": "sha256:4314c8953391a9ad077567c0fd96cd834078047a30b04a8a20fe2965857f43d1",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -90475,6 +90507,13 @@
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/device/src/device.ts",
           "line": 81
+        },
+        {
+          "column": 3,
+          "member": "refresh",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/device/src/device.ts",
+          "line": 85
         }
       ],
       "fields": [
@@ -90517,6 +90556,14 @@
           "receiverSensitive": true,
           "requiredUndefined": false,
           "type": "(out: SafeAreaInsets) => SafeAreaInsets"
+        },
+        {
+          "name": "refresh",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": true,
+          "requiredUndefined": false,
+          "type": "(() => void) | undefined"
         }
       ],
       "id": "@flighthq/types:interface#DeviceBackend",
@@ -90545,6 +90592,11 @@
           "member": "getSafeAreaInsets",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/types/src/Device.ts:53"
+        },
+        {
+          "member": "refresh",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/types/src/Device.ts:54"
         }
       ],
       "migration": {
@@ -92360,7 +92412,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -92488,7 +92540,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -92553,6 +92605,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -94916,6 +94976,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "Renderable[]"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         }
       ],
       "id": "@flighthq/types:interface#DomRenderStateRuntime",
@@ -105310,7 +105378,7 @@
         "reads": 17,
         "writes": 3
       },
-      "declarationFingerprint": "sha256:69801d3535461cd2a982b945b3099efbf3129d5d5152ed829a5e5ab849141c58",
+      "declarationFingerprint": "sha256:f6ce7b48e8cfcf10e0d23b4d42b6c4889c92638bfc8343e6505fae82bbb7b586",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -105384,7 +105452,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"EmissiveMaterial\""
         },
         {
           "name": "name",
@@ -106354,6 +106422,24 @@
           "line": 20
         },
         {
+          "column": 7,
+          "reason": "computed-key",
+          "source": "upstream/packages/entity/src/entityUid.ts",
+          "line": 20
+        },
+        {
+          "column": 5,
+          "reason": "computed-key",
+          "source": "upstream/packages/entity/src/entityUid.ts",
+          "line": 21
+        },
+        {
+          "column": 10,
+          "reason": "computed-key",
+          "source": "upstream/packages/entity/src/entityUid.ts",
+          "line": 23
+        },
+        {
           "column": 10,
           "reason": "computed-key",
           "source": "upstream/packages/entity/src/runtime.ts",
@@ -106449,17 +106535,17 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 1,
-        "writes": 1
+        "reads": 3,
+        "writes": 3
       },
-      "declarationFingerprint": "sha256:2442a2b2f11e739d0ec1d2f573d38c0fe55fef3a64723ef98ff3c0f7b4981bdb",
+      "declarationFingerprint": "sha256:1cf5391e066be9b56b535bc6b8ef1dcbbd6d8b57ae1fa1f7da43b6575f4d12d9",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 2,
+        "pendingAccesses": 6,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -106471,6 +106557,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "object | null"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         }
       ],
       "id": "@flighthq/types:interface#EntityRuntime",
@@ -128028,35 +128122,35 @@
           "member": "directional",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 72
+          "line": 70
         },
         {
           "column": 19,
           "member": "ambient",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 79
+          "line": 77
         },
         {
           "column": 17,
           "member": "point",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 86
+          "line": 84
         },
         {
           "column": 16,
           "member": "spot",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 95
+          "line": 93
         },
         {
           "column": 22,
           "member": "hemisphere",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 104
+          "line": 102
         },
         {
           "column": 22,
@@ -129337,70 +129431,70 @@
           "member": "a",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 187
+          "line": 184
         },
         {
           "column": 43,
           "member": "a",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+          "line": 184
+        },
+        {
+          "column": 28,
+          "member": "b",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+          "line": 185
+        },
+        {
+          "column": 43,
+          "member": "b",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+          "line": 185
+        },
+        {
+          "column": 28,
+          "member": "c",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+          "line": 186
+        },
+        {
+          "column": 43,
+          "member": "c",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+          "line": 186
+        },
+        {
+          "column": 28,
+          "member": "d",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
           "line": 187
         },
         {
-          "column": 28,
-          "member": "b",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 188
-        },
-        {
-          "column": 43,
-          "member": "b",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 188
-        },
-        {
-          "column": 28,
-          "member": "c",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 189
-        },
-        {
-          "column": 43,
-          "member": "c",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 189
-        },
-        {
-          "column": 28,
-          "member": "d",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 190
-        },
-        {
           "column": 43,
           "member": "d",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 190
+          "line": 187
         },
         {
           "column": 49,
           "member": "tx",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 191
+          "line": 188
         },
         {
           "column": 55,
           "member": "ty",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 191
+          "line": 188
         },
         {
           "column": 14,
@@ -129740,59 +129834,59 @@
         },
         {
           "column": 36,
-          "member": "minFilter",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 406
-        },
-        {
-          "column": 36,
-          "member": "magFilter",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 407
-        },
-        {
-          "column": 5,
-          "member": "mipmaps",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 409
-        },
-        {
-          "column": 24,
-          "member": "minFilter",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 409
-        },
-        {
-          "column": 9,
           "member": "minFilter",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
           "line": 410
         },
         {
+          "column": 36,
+          "member": "magFilter",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+          "line": 411
+        },
+        {
+          "column": 5,
+          "member": "mipmaps",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+          "line": 413
+        },
+        {
+          "column": 24,
+          "member": "minFilter",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+          "line": 413
+        },
+        {
+          "column": 9,
+          "member": "minFilter",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
+          "line": 414
+        },
+        {
           "column": 11,
           "member": "wrapU",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 424
+          "line": 428
         },
         {
           "column": 11,
           "member": "wrapV",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 425
+          "line": 429
         },
         {
           "column": 11,
           "member": "anisotropy",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 427
+          "line": 431
         },
         {
           "column": 37,
@@ -130190,7 +130284,7 @@
           "column": 28,
           "reason": "presence-sensitive",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-          "line": 820
+          "line": 821
         },
         {
           "column": 17,
@@ -130267,7 +130361,20 @@
           "member": "m",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 99
+          "line": 102
+        },
+        {
+          "column": 39,
+          "member": "kind",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene3d/src/sceneDocument.ts",
+          "line": 175
+        },
+        {
+          "column": 10,
+          "reason": "presence-sensitive",
+          "source": "upstream/packages/scene3d/src/sceneDocument.ts",
+          "line": 179
         },
         {
           "column": 3,
@@ -134750,6 +134857,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "FileDialogHandleOperations | null"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         }
       ],
       "id": "@flighthq/types:interface#FileDialogHandleRuntime",
@@ -141195,7 +141310,7 @@
           "column": 5,
           "reason": "dynamic-enumeration",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.ts",
-          "line": 312
+          "line": 310
         }
       ],
       "fields": [
@@ -155305,7 +155420,7 @@
           "member": "bind",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts",
-          "line": 122
+          "line": 123
         }
       ],
       "fields": [
@@ -156846,7 +156961,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 7,
+        "reads": 8,
         "writes": 0
       },
       "declarationFingerprint": "sha256:47cb66d99fe4424f5173f83d93556fe967f733d2a3dd7792e8d54fe119727d65",
@@ -156856,7 +156971,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 7,
+        "pendingAccesses": 8,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -158773,7 +158888,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 782,
+        "reads": 801,
         "writes": 0
       },
       "declarationFingerprint": "sha256:38fcc7afaaa3f22576bbd55664610f1c51c559deeae3051a537970af67defbe5",
@@ -158783,7 +158898,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 782,
+        "pendingAccesses": 801,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -161571,81 +161686,235 @@
           "line": 51
         },
         {
+          "column": 5,
+          "member": "useProgram",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 73
+        },
+        {
+          "column": 5,
+          "member": "bindFramebuffer",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 79
+        },
+        {
+          "column": 3,
+          "member": "viewport",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 84
+        },
+        {
+          "column": 5,
+          "member": "activeTexture",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 88
+        },
+        {
+          "column": 5,
+          "member": "bindTexture",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 89
+        },
+        {
+          "column": 30,
+          "member": "uniform1i",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 90
+        },
+        {
+          "column": 3,
+          "member": "activeTexture",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 92
+        },
+        {
+          "column": 24,
+          "member": "isEnabled",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 116
+        },
+        {
+          "column": 27,
+          "member": "isEnabled",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 117
+        },
+        {
+          "column": 28,
+          "member": "isEnabled",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 118
+        },
+        {
+          "column": 29,
+          "member": "getParameter",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 119
+        },
+        {
+          "column": 22,
+          "member": "enable",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 120
+        },
+        {
+          "column": 24,
+          "member": "disable",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 121
+        },
+        {
+          "column": 25,
+          "member": "disable",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 122
+        },
+        {
+          "column": 26,
+          "member": "depthMask",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 123
+        },
+        {
+          "column": 26,
+          "member": "depthMask",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 136
+        },
+        {
+          "column": 25,
+          "member": "enable",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 137
+        },
+        {
+          "column": 24,
+          "member": "enable",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 138
+        },
+        {
+          "column": 22,
+          "member": "disable",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 139
+        },
+        {
+          "column": 5,
+          "member": "activeTexture",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 146
+        },
+        {
+          "column": 5,
+          "member": "bindTexture",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 147
+        },
+        {
+          "column": 3,
+          "member": "activeTexture",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
+          "line": 149
+        },
+        {
           "column": 15,
           "member": "createVertexArray",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 127
+          "line": 164
         },
         {
           "column": 3,
           "member": "bindVertexArray",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 130
+          "line": 167
         },
         {
           "column": 3,
           "member": "bindBuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 151
+          "line": 188
         },
         {
           "column": 3,
           "member": "bufferSubData",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 152
+          "line": 189
         },
         {
           "column": 3,
           "member": "bindBuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 153
+          "line": 190
         },
         {
           "column": 3,
           "member": "enableVertexAttribArray",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 154
+          "line": 191
         },
         {
           "column": 3,
           "member": "enableVertexAttribArray",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 155
+          "line": 192
         },
         {
           "column": 3,
           "member": "vertexAttribPointer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 156
+          "line": 193
         },
         {
           "column": 3,
           "member": "vertexAttribPointer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 157
+          "line": 194
         },
         {
           "column": 3,
           "member": "drawElements",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 158
+          "line": 195
         },
         {
           "column": 3,
           "member": "bindVertexArray",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-          "line": 162
+          "line": 199
         },
         {
           "column": 18,
@@ -162527,420 +162796,420 @@
           "member": "createFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 69
+          "line": 76
         },
         {
           "column": 3,
           "member": "bindFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 80
+          "line": 106
         },
         {
           "column": 3,
           "member": "deleteFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 101
+          "line": 127
         },
         {
           "column": 34,
           "member": "deleteFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 102
+          "line": 128
         },
         {
           "column": 42,
           "member": "deleteTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 103
+          "line": 129
         },
         {
           "column": 47,
           "member": "deleteRenderbuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 104
+          "line": 130
         },
         {
           "column": 28,
           "member": "deleteTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 105
+          "line": 131
         },
         {
           "column": 40,
           "member": "deleteRenderbuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 106
+          "line": 132
         },
         {
           "column": 42,
           "member": "deleteTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 183
+          "line": 209
         },
         {
           "column": 47,
           "member": "deleteRenderbuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 184
+          "line": 210
         },
         {
           "column": 28,
           "member": "deleteTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 185
+          "line": 211
         },
         {
           "column": 40,
           "member": "deleteRenderbuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 186
+          "line": 212
         },
         {
           "column": 5,
           "member": "deleteFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 188
+          "line": 214
         },
         {
           "column": 3,
           "member": "bindFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 203
+          "line": 229
         },
         {
           "column": 27,
           "member": "disable",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 222
+          "line": 248
         },
         {
           "column": 5,
           "member": "bindFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 223
+          "line": 249
         },
         {
           "column": 5,
           "member": "bindFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 224
+          "line": 250
         },
         {
           "column": 7,
           "member": "readBuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 226
+          "line": 252
         },
         {
           "column": 7,
           "member": "drawBuffers",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 227
+          "line": 253
         },
         {
           "column": 7,
           "member": "blitFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 228
+          "line": 254
         },
         {
           "column": 5,
           "member": "bindFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 244
+          "line": 270
         },
         {
           "column": 5,
           "member": "bindFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 245
+          "line": 271
         },
         {
           "column": 7,
           "member": "enable",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 247
+          "line": 273
         },
         {
           "column": 7,
           "member": "scissor",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 248
+          "line": 274
         },
         {
           "column": 3,
           "member": "flush",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 255
+          "line": 281
         },
         {
           "column": 18,
           "member": "getExtension",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 297
+          "line": 323
         },
         {
           "column": 45,
           "member": "createFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 300
+          "line": 326
         },
         {
           "column": 3,
           "member": "bindFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 301
+          "line": 327
         },
         {
           "column": 21,
           "member": "createTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 305
+          "line": 331
         },
         {
           "column": 5,
           "member": "bindTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 306
+          "line": 332
         },
         {
           "column": 5,
           "member": "texImage2D",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 307
+          "line": 333
         },
         {
           "column": 5,
           "member": "texParameteri",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 309
+          "line": 335
         },
         {
           "column": 5,
           "member": "texParameteri",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 310
+          "line": 336
         },
         {
           "column": 5,
           "member": "texParameteri",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 311
+          "line": 337
         },
         {
           "column": 5,
           "member": "texParameteri",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 312
+          "line": 338
         },
         {
           "column": 5,
           "member": "framebufferTexture2D",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 313
+          "line": 339
         },
         {
           "column": 24,
           "member": "drawBuffers",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 317
+          "line": 343
         },
         {
           "column": 5,
           "member": "bindFramebuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 321
-        },
-        {
-          "column": 18,
-          "member": "createRenderbuffer",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 324
-        },
-        {
-          "column": 7,
-          "member": "bindRenderbuffer",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 325
-        },
-        {
-          "column": 7,
-          "member": "renderbufferStorageMultisample",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 326
-        },
-        {
-          "column": 7,
-          "member": "framebufferRenderbuffer",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 327
-        },
-        {
-          "column": 26,
-          "member": "drawBuffers",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 330
-        },
-        {
-          "column": 28,
-          "member": "createTexture",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 337
-        },
-        {
-          "column": 7,
-          "member": "bindTexture",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 338
-        },
-        {
-          "column": 7,
-          "member": "texImage2D",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 339
-        },
-        {
-          "column": 7,
-          "member": "texParameteri",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 340
-        },
-        {
-          "column": 7,
-          "member": "texParameteri",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 341
-        },
-        {
-          "column": 7,
-          "member": "bindFramebuffer",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 342
-        },
-        {
-          "column": 7,
-          "member": "framebufferTexture2D",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 343
-        },
-        {
-          "column": 18,
-          "member": "createRenderbuffer",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 346
-        },
-        {
-          "column": 7,
-          "member": "bindRenderbuffer",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
           "line": 347
         },
         {
-          "column": 25,
-          "member": "renderbufferStorageMultisample",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 348
-        },
-        {
-          "column": 12,
-          "member": "renderbufferStorage",
-          "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 349
-        },
-        {
-          "column": 7,
-          "member": "bindFramebuffer",
+          "column": 18,
+          "member": "createRenderbuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
           "line": 350
         },
         {
           "column": 7,
-          "member": "framebufferRenderbuffer",
+          "member": "bindRenderbuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
           "line": 351
+        },
+        {
+          "column": 7,
+          "member": "renderbufferStorageMultisample",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 352
+        },
+        {
+          "column": 7,
+          "member": "framebufferRenderbuffer",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 353
+        },
+        {
+          "column": 26,
+          "member": "drawBuffers",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 356
+        },
+        {
+          "column": 28,
+          "member": "createTexture",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 363
+        },
+        {
+          "column": 7,
+          "member": "bindTexture",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 364
+        },
+        {
+          "column": 7,
+          "member": "texImage2D",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 365
+        },
+        {
+          "column": 7,
+          "member": "texParameteri",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 366
+        },
+        {
+          "column": 7,
+          "member": "texParameteri",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 367
+        },
+        {
+          "column": 7,
+          "member": "bindFramebuffer",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 368
+        },
+        {
+          "column": 7,
+          "member": "framebufferTexture2D",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 369
+        },
+        {
+          "column": 18,
+          "member": "createRenderbuffer",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 372
+        },
+        {
+          "column": 7,
+          "member": "bindRenderbuffer",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 373
+        },
+        {
+          "column": 25,
+          "member": "renderbufferStorageMultisample",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 374
+        },
+        {
+          "column": 12,
+          "member": "renderbufferStorage",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 375
+        },
+        {
+          "column": 7,
+          "member": "bindFramebuffer",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 376
+        },
+        {
+          "column": 7,
+          "member": "framebufferRenderbuffer",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
+          "line": 377
         },
         {
           "column": 3,
           "member": "bindRenderbuffer",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 356
+          "line": 382
         },
         {
           "column": 3,
           "member": "bindTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 357
+          "line": 383
         },
         {
           "column": 48,
           "member": "getExtension",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 377
+          "line": 404
         },
         {
           "column": 58,
           "member": "getParameter",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 411
+          "line": 438
         },
         {
           "column": 18,
@@ -164487,21 +164756,21 @@
           "member": "deleteTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts",
-          "line": 53
+          "line": 54
         },
         {
           "column": 5,
           "member": "deleteTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 67
+          "line": 68
         },
         {
           "column": 5,
           "member": "deleteTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene2d-gl/src/glShapeData.ts",
-          "line": 47
+          "line": 48
         },
         {
           "column": 3,
@@ -164620,7 +164889,7 @@
           "member": "deleteTexture",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts",
-          "line": 73
+          "line": 67
         },
         {
           "column": 3,
@@ -171882,8 +172151,8 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 104,
-        "writes": 37
+        "reads": 105,
+        "writes": 41
       },
       "declarationFingerprint": "sha256:8f29edae9696d4a3689b68f0f7f660d91f6aaf0860eb87835d337b9e7c54c4b4",
       "declarationKind": "interface",
@@ -171892,7 +172161,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 141,
+        "pendingAccesses": 146,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -172088,6 +172357,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "WeakMap<TextureSource, { texture: WebGLTexture; version: number; }>"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "videoSrgbTextureCache",
@@ -174604,7 +174881,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 137,
+        "reads": 142,
         "writes": 0
       },
       "declarationFingerprint": "sha256:4a6e4eb3b93808f0ccd4b27918297fc8be16015058c903937fdf0a3c7bf69ae4",
@@ -174614,7 +174891,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 137,
+        "pendingAccesses": 142,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -180564,7 +180841,7 @@
     {
       "accesses": {
         "calls": 4,
-        "reads": 247,
+        "reads": 248,
         "writes": 5
       },
       "declarationFingerprint": "sha256:8bf2c46da5a3a37678dda70498807943307c263ced5ca9613912e81ab2346518",
@@ -180574,7 +180851,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 256,
+        "pendingAccesses": 257,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -180755,15 +181032,15 @@
     {
       "accesses": {
         "calls": 8,
-        "reads": 307,
-        "writes": 107
+        "reads": 313,
+        "writes": 109
       },
       "declarationFingerprint": "sha256:7b13d22a6501300f888dfc1d174bb0d7a4eb02db97f0112d52adcd1f0d4156ba",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 422,
+        "directAccesses": 430,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -181115,6 +181392,14 @@
           "type": "Renderable[]"
         },
         {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
+        },
+        {
           "name": "webglShaderBindingResolver",
           "optional": true,
           "readonly": false,
@@ -181291,15 +181576,15 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 275,
-        "writes": 27
+        "reads": 264,
+        "writes": 24
       },
-      "declarationFingerprint": "sha256:a70ee9ffbaf0c1d0fd73965076d56028db2ce78f1dda4c9006e35974be0fe408",
+      "declarationFingerprint": "sha256:e4935b11659066d8df77aaa20b30893233c77e02a633645dc163e6a9aa544f59",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 302,
+        "directAccesses": 288,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -181452,7 +181737,13 @@
         }
       ],
       "id": "@flighthq/types:interface#GlRenderTarget",
-      "memberEscapes": [],
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
       "migration": {
         "baselineId": null,
         "status": "new"
@@ -183708,7 +183999,7 @@
           "member": "bind",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts",
-          "line": 122
+          "line": 123
         }
       ],
       "fields": [
@@ -184182,7 +184473,7 @@
         "reads": 9,
         "writes": 7
       },
-      "declarationFingerprint": "sha256:2e974f7ae0bf0f6972aa160d471db04fc37c6c6309f4c1d2f1627b6293829b1e",
+      "declarationFingerprint": "sha256:1bdd157fa0fc26ff269d89b93a87f8fdec95c934d02cdafdfd30875efb8edf63",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -184252,7 +184543,13 @@
         }
       ],
       "id": "@flighthq/types:interface#GlShapeRendererData",
-      "memberEscapes": [],
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
       "migration": {
         "baselineId": null,
         "status": "new"
@@ -191153,7 +191450,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 8,
+        "reads": 9,
         "writes": 0
       },
       "declarationFingerprint": "sha256:8e4d8aabe5261fd2a81059c9e8298e9eef9beea41daee9fbb92c9c0e4b57d96d",
@@ -191161,7 +191458,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 8,
+        "directAccesses": 9,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -192090,15 +192387,15 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 76,
-        "writes": 20
+        "reads": 78,
+        "writes": 22
       },
-      "declarationFingerprint": "sha256:3ef83b4b6d0ad8ffc83ef2348a77fec59fe2d5a883a7bbad4ee57b101d44aa87",
+      "declarationFingerprint": "sha256:7fb0450ffbf5d6f670611fa111a8bf766d89d0a69b69e0ce2dfd3ae7447cc00a",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 96,
+        "directAccesses": 100,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -192168,6 +192465,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "Map<number, GlyphEntry>"
+        },
+        {
+          "name": "layoutVersion",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
         },
         {
           "name": "lru",
@@ -193010,7 +193315,7 @@
           "member": "measureMetrics",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/glyphatlas/src/glyphAtlas.ts",
-          "line": 95
+          "line": 108
         },
         {
           "column": 18,
@@ -193055,12 +193360,12 @@
         {
           "member": "measureMetrics",
           "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/types/src/GlyphSource.ts:87"
+          "source": "upstream/packages/types/src/GlyphSource.ts:101"
         },
         {
           "member": "rasterize",
           "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/types/src/GlyphSource.ts:82"
+          "source": "upstream/packages/types/src/GlyphSource.ts:96"
         }
       ],
       "migration": {
@@ -193765,7 +194070,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:a56e3b8bc0ff437f5e9e09aaf5066e2be6dd10ceb3b0795577a2adb4d652ec8a",
+      "declarationFingerprint": "sha256:b9745aa5e29a6bb4f1b408ec6e7c4b7440e811c2e7f8545a8deae401a7eca562",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -193775,46 +194080,74 @@
         "pendingAccesses": 0,
         "reflectiveSurvivors": [
           {
-            "accesses": 5,
+            "accesses": 9,
             "reason": "receiver-sensitive-method"
           }
         ]
       },
       "escapes": [
         {
-          "column": 19,
-          "member": "getGlyphMetrics",
+          "column": 81,
+          "member": "getGlyphLayoutVersion",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/bitmaptext/src/bitmapText.ts",
+          "line": 102
+        },
+        {
+          "column": 21,
+          "member": "getGlyphLayoutVersion",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/bitmaptext/src/updateBitmapText.ts",
-          "line": 49
+          "line": 67
+        },
+        {
+          "column": 9,
+          "member": "getGlyphLayoutVersion",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/bitmaptext/src/updateBitmapText.ts",
+          "line": 69
+        },
+        {
+          "column": 32,
+          "member": "getGlyphLayoutVersion",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/bitmaptext/src/updateBitmapText.ts",
+          "line": 80
         },
         {
           "column": 26,
           "member": "getGlyphEntry",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/bitmaptext/src/updateBitmapText.ts",
-          "line": 150
+          "line": 127
         },
         {
           "column": 19,
           "member": "getGlyphEntry",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/bitmaptext/src/updateBitmapText.ts",
-          "line": 154
+          "line": 131
         },
         {
           "column": 40,
           "member": "getGlyphKerning",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/bitmaptext/src/updateBitmapText.ts",
-          "line": 156
+          "line": 133
         },
         {
           "column": 17,
           "member": "getGlyphAtlasImage",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/bitmaptext/src/updateBitmapText.ts",
-          "line": 178
+          "line": 155
+        },
+        {
+          "column": 19,
+          "member": "getGlyphMetrics",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/bitmaptext/src/updateBitmapText.ts",
+          "line": 234
         }
       ],
       "fields": [
@@ -193843,6 +194176,14 @@
           "type": "(left: number, right: number) => number"
         },
         {
+          "name": "getGlyphLayoutVersion",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": true,
+          "requiredUndefined": false,
+          "type": "() => number"
+        },
+        {
           "name": "getGlyphMetrics",
           "optional": false,
           "readonly": false,
@@ -193869,9 +194210,14 @@
           "source": "upstream/packages/types/src/GlyphSource.ts:25"
         },
         {
+          "member": "getGlyphLayoutVersion",
+          "reason": "receiver-sensitive-method",
+          "source": "upstream/packages/types/src/GlyphSource.ts:39"
+        },
+        {
           "member": "getGlyphMetrics",
           "reason": "receiver-sensitive-method",
-          "source": "upstream/packages/types/src/GlyphSource.ts:27"
+          "source": "upstream/packages/types/src/GlyphSource.ts:41"
         }
       ],
       "migration": {
@@ -196220,7 +196566,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits>[] | null"
+          "type": "NodeOf<Node3DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -196332,7 +196678,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits> | null"
+          "type": "NodeOf<Node3DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -196365,6 +196711,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node3DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldAlpha",
@@ -200849,7 +201203,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 3,
+        "reads": 2,
         "writes": 2
       },
       "declarationFingerprint": "sha256:13dfd355603960d1b4add1a1a1892729ae295119b141568c82c4d558e22338b5",
@@ -200859,7 +201213,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 5,
+        "pendingAccesses": 4,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -201119,14 +201473,14 @@
           "member": "deformedLocalBounds",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 281
+          "line": 278
         },
         {
           "column": 18,
           "member": "deformedLocalBounds",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 284
+          "line": 281
         },
         {
           "column": 28,
@@ -201277,6 +201631,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "object | null"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldAlpha",
@@ -202978,6 +203340,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "Rectangle | null"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -208863,6 +209233,14 @@
           "type": "number"
         },
         {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
+        },
+        {
           "name": "worldMatrix",
           "optional": false,
           "readonly": false,
@@ -209063,14 +209441,14 @@
           "member": "deformedLocalBounds",
           "reason": "unknown-member",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 281
+          "line": 278
         },
         {
           "column": 18,
           "member": "deformedLocalBounds",
           "reason": "unknown-member",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 284
+          "line": 281
         },
         {
           "column": 28,
@@ -209237,6 +209615,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "boolean"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldMatrix4",
@@ -215405,7 +215791,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -215533,7 +215919,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -215598,6 +215984,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -223534,7 +223928,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits>[] | null"
+          "type": "NodeOf<Node3DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -223646,7 +224040,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits> | null"
+          "type": "NodeOf<Node3DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -223679,6 +224073,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node3DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldAlpha",
@@ -228191,7 +228593,7 @@
         "reads": 14,
         "writes": 4
       },
-      "declarationFingerprint": "sha256:2d0f9e3abe6c598f4700dd1dcfca1aa30bc6c7bff1a53bd74e2cbd646349b722",
+      "declarationFingerprint": "sha256:7989056728641ab50c58e89af6020dcefd9fe796a4b99bba6047a58af20c103c",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -228273,7 +228675,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"LambertMaterial\""
         },
         {
           "name": "name",
@@ -228406,6 +228808,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "Path"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         }
       ],
       "id": "@flighthq/types:interface#LassoSelectionRuntime",
@@ -231646,12 +232056,26 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 11,
-        "mode": "direct",
-        "pendingAccesses": 0,
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 11,
         "reflectiveSurvivors": []
       },
-      "escapes": [],
+      "escapes": [
+        {
+          "column": 10,
+          "reason": "presence-sensitive",
+          "source": "upstream/packages/lighting/src/lightAnalysis.ts",
+          "line": 154
+        },
+        {
+          "column": 36,
+          "member": "castsShadow",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/lighting/src/lightAnalysis.ts",
+          "line": 154
+        }
+      ],
       "fields": [
         {
           "name": "kind",
@@ -231676,7 +232100,7 @@
       },
       "name": "Light",
       "packageName": "@flighthq/types",
-      "purpose": "reviewed escape-free light",
+      "purpose": "checker-discovered public declaration",
       "reasons": [],
       "source": "upstream/packages/types/src/Light.ts",
       "sourceProvenance": {
@@ -232435,43 +232859,55 @@
           "column": 51,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 296
+          "line": 293
         },
         {
           "column": 51,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 297
+          "line": 294
         },
         {
           "column": 51,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 298
+          "line": 295
         },
         {
           "column": 55,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 307
+          "line": 304
         },
         {
           "column": 55,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 308
+          "line": 305
         },
         {
           "column": 55,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 309
+          "line": 306
         },
         {
           "column": 22,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 318
+          "line": 315
+        },
+        {
+          "column": 22,
+          "reason": "computed-key",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 316
+        },
+        {
+          "column": 22,
+          "reason": "computed-key",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 317
         },
         {
           "column": 22,
@@ -232489,55 +232925,43 @@
           "column": 22,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 322
+          "line": 321
         },
         {
           "column": 22,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 323
+          "line": 337
         },
         {
           "column": 22,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 324
+          "line": 338
         },
         {
           "column": 22,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 340
+          "line": 339
         },
         {
           "column": 22,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 341
+          "line": 353
         },
         {
           "column": 22,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 342
+          "line": 354
         },
         {
           "column": 22,
           "reason": "computed-key",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 356
-        },
-        {
-          "column": 22,
-          "reason": "computed-key",
-          "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 357
-        },
-        {
-          "column": 22,
-          "reason": "computed-key",
-          "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 358
+          "line": 355
         },
         {
           "column": 36,
@@ -235120,7 +235544,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits>[] | null"
+          "type": "NodeOf<Node3DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -235232,7 +235656,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits> | null"
+          "type": "NodeOf<Node3DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -235265,6 +235689,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node3DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldAlpha",
@@ -245181,6 +245613,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "number"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         }
       ],
       "id": "@flighthq/types:interface#MarqueeSelectionRuntime",
@@ -245208,7 +245648,7 @@
         "reads": 11,
         "writes": 2
       },
-      "declarationFingerprint": "sha256:8b4467696325ff69cdbe538077a2259a9bd9f7007df08e3a49a165bf267de4e8",
+      "declarationFingerprint": "sha256:9120c1f4326056903cb3c9f42bd0a00ecc74b9e9b0656c18fdcf8047e92f363c",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -245258,7 +245698,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"MatcapMaterial\""
         },
         {
           "name": "matcap",
@@ -245375,6 +245815,19 @@
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d-formats/src/gltfUnlit.ts",
           "line": 21
+        },
+        {
+          "column": 39,
+          "member": "kind",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene3d/src/sceneDocument.ts",
+          "line": 175
+        },
+        {
+          "column": 10,
+          "reason": "presence-sensitive",
+          "source": "upstream/packages/scene3d/src/sceneDocument.ts",
+          "line": 179
         }
       ],
       "fields": [
@@ -246203,6 +246656,19 @@
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d-formats/src/gltfUnlit.ts",
           "line": 21
+        },
+        {
+          "column": 39,
+          "member": "kind",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene3d/src/sceneDocument.ts",
+          "line": 175
+        },
+        {
+          "column": 10,
+          "reason": "presence-sensitive",
+          "source": "upstream/packages/scene3d/src/sceneDocument.ts",
+          "line": 179
         }
       ],
       "fields": [
@@ -246248,7 +246714,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:e30a568fec2eeea97adb852cb0aa803330e195caa60677fa862123007e17fad4",
+      "declarationFingerprint": "sha256:2c0b94d6ae603b5dfd1f3b50bf7d785d985302c0818fe9d0846b13ea2ec1aaa8",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
       "eligible": false,
@@ -247484,7 +247950,7 @@
           "member": "m",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 99
+          "line": 102
         }
       ],
       "fields": [
@@ -249652,70 +250118,70 @@
           "member": "a",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 187
+          "line": 184
         },
         {
           "column": 43,
           "member": "a",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+          "line": 184
+        },
+        {
+          "column": 28,
+          "member": "b",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+          "line": 185
+        },
+        {
+          "column": 43,
+          "member": "b",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+          "line": 185
+        },
+        {
+          "column": 28,
+          "member": "c",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+          "line": 186
+        },
+        {
+          "column": 43,
+          "member": "c",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
+          "line": 186
+        },
+        {
+          "column": 28,
+          "member": "d",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
           "line": 187
         },
         {
-          "column": 28,
-          "member": "b",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 188
-        },
-        {
-          "column": 43,
-          "member": "b",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 188
-        },
-        {
-          "column": 28,
-          "member": "c",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 189
-        },
-        {
-          "column": 43,
-          "member": "c",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 189
-        },
-        {
-          "column": 28,
-          "member": "d",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 190
-        },
-        {
           "column": 43,
           "member": "d",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 190
+          "line": 187
         },
         {
           "column": 49,
           "member": "tx",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 191
+          "line": 188
         },
         {
           "column": 55,
           "member": "ty",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
-          "line": 191
+          "line": 188
         },
         {
           "column": 14,
@@ -257763,7 +258229,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 72,
+        "reads": 71,
         "writes": 8
       },
       "declarationFingerprint": "sha256:7706a57bd2ba7e0313a79f3f77ee6031a1740fc17da12c42efc4657bbd66b507",
@@ -257771,7 +258237,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 80,
+        "directAccesses": 79,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -258710,14 +259176,14 @@
           "member": "deformedLocalBounds",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 281
+          "line": 278
         },
         {
           "column": 18,
           "member": "deformedLocalBounds",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 284
+          "line": 281
         },
         {
           "column": 9,
@@ -259221,6 +259687,14 @@
           "type": "MeshSkinBindPose | null"
         },
         {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
+        },
+        {
           "name": "webglData",
           "optional": false,
           "readonly": false,
@@ -259471,14 +259945,14 @@
           "member": "deformedLocalBounds",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 281
+          "line": 278
         },
         {
           "column": 18,
           "member": "deformedLocalBounds",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 284
+          "line": 281
         },
         {
           "column": 9,
@@ -259549,7 +260023,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits>[] | null"
+          "type": "NodeOf<Node3DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -259669,7 +260143,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits> | null"
+          "type": "NodeOf<Node3DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -259702,6 +260176,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node3DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldAlpha",
@@ -268580,7 +269062,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -268708,7 +269190,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -268781,6 +269263,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -271078,7 +271568,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -271214,7 +271704,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -271279,6 +271769,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -271788,7 +272286,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -271940,7 +272438,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -272005,6 +272503,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -275383,7 +275889,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 9,
+        "reads": 5,
         "writes": 2
       },
       "declarationFingerprint": "sha256:426dc2d14c89b2af765f48019e4ba9f16cf36c7064b91789ac3a6f185cbf142e",
@@ -275393,7 +275899,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 11,
+        "pendingAccesses": 7,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -275767,46 +276273,74 @@
           "line": 194
         },
         {
-          "column": 20,
-          "member": "pivotX",
+          "column": 10,
+          "member": "enabled",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 223
+        },
+        {
+          "column": 10,
+          "member": "enabled",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 262
+        },
+        {
+          "column": 12,
+          "member": "enabled",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 294
+        },
+        {
+          "column": 11,
+          "member": "name",
           "reason": "width-sensitive",
           "source": "upstream/packages/node/src/hierarchy.ts",
-          "line": 372
+          "line": 175
         },
         {
           "column": 20,
-          "member": "pivotY",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/node/src/hierarchy.ts",
-          "line": 373
-        },
-        {
-          "column": 5,
           "member": "pivotX",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/node/src/hierarchy.ts",
-          "line": 375
-        },
-        {
-          "column": 5,
-          "member": "pivotY",
           "reason": "width-sensitive",
           "source": "upstream/packages/node/src/hierarchy.ts",
           "line": 376
         },
         {
-          "column": 5,
-          "member": "x",
+          "column": 20,
+          "member": "pivotY",
           "reason": "width-sensitive",
           "source": "upstream/packages/node/src/hierarchy.ts",
           "line": 377
         },
         {
           "column": 5,
+          "member": "pivotX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/hierarchy.ts",
+          "line": 379
+        },
+        {
+          "column": 5,
+          "member": "pivotY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/hierarchy.ts",
+          "line": 380
+        },
+        {
+          "column": 5,
+          "member": "x",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/hierarchy.ts",
+          "line": 381
+        },
+        {
+          "column": 5,
           "member": "y",
           "reason": "width-sensitive",
           "source": "upstream/packages/node/src/hierarchy.ts",
-          "line": 378
+          "line": 382
         },
         {
           "column": 16,
@@ -276268,7 +276802,27 @@
           "member": "enabled",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 204
+          "line": 202
+        },
+        {
+          "column": 27,
+          "member": "visible",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 202
+        },
+        {
+          "column": 10,
+          "reason": "presence-sensitive",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 442
+        },
+        {
+          "column": 32,
+          "member": "geometry",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 442
         },
         {
           "column": 61,
@@ -276940,14 +277494,14 @@
           "member": "enabled",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
-          "line": 134
+          "line": 135
         },
         {
           "column": 7,
           "member": "kind",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
-          "line": 135
+          "line": 136
         },
         {
           "column": 30,
@@ -277017,28 +277571,28 @@
           "member": "position",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 78
+          "line": 81
         },
         {
           "column": 17,
           "member": "rotation",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 79
+          "line": 82
         },
         {
           "column": 14,
           "member": "scale",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 80
+          "line": 83
         },
         {
           "column": 20,
           "member": "name",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 94
+          "line": 97
         },
         {
           "column": 39,
@@ -279446,7 +280000,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -279574,7 +280128,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -279639,6 +280193,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -280916,6 +281478,33 @@
           "line": 204
         },
         {
+          "column": 10,
+          "member": "enabled",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 202
+        },
+        {
+          "column": 27,
+          "member": "visible",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 202
+        },
+        {
+          "column": 10,
+          "reason": "presence-sensitive",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 442
+        },
+        {
+          "column": 32,
+          "member": "geometry",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 442
+        },
+        {
           "column": 9,
           "member": "name",
           "reason": "width-sensitive",
@@ -280997,28 +281586,28 @@
           "member": "position",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 78
+          "line": 81
         },
         {
           "column": 17,
           "member": "rotation",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 79
+          "line": 82
         },
         {
           "column": 14,
           "member": "scale",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 80
+          "line": 83
         },
         {
           "column": 20,
           "member": "name",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 94
+          "line": 97
         },
         {
           "column": 39,
@@ -281186,14 +281775,14 @@
           "member": "deformedLocalBounds",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 281
+          "line": 278
         },
         {
           "column": 18,
           "member": "deformedLocalBounds",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 284
+          "line": 281
         },
         {
           "column": 28,
@@ -281383,7 +281972,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits>[] | null"
+          "type": "NodeOf<Node3DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -281495,7 +282084,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits> | null"
+          "type": "NodeOf<Node3DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -281528,6 +282117,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node3DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldAlpha",
@@ -281634,7 +282231,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 16,
+        "reads": 17,
         "writes": 2
       },
       "declarationFingerprint": "sha256:3e3d0a1c44ce498238a9db4e196862dba545b8acdb4add0c8b704a3c87187cd9",
@@ -281642,13 +282239,21 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 18,
+        "directAccesses": 19,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": [
           {
-            "accesses": 10,
+            "accesses": 1,
+            "reason": "presence-sensitive"
+          },
+          {
+            "accesses": 11,
             "reason": "unknown-member"
+          },
+          {
+            "accesses": 1,
+            "reason": "width-sensitive"
           }
         ]
       },
@@ -281659,6 +282264,26 @@
           "reason": "unknown-member",
           "source": "upstream/packages/picking/src/pickScene3D.ts",
           "line": 204
+        },
+        {
+          "column": 10,
+          "member": "enabled",
+          "reason": "unknown-member",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 202
+        },
+        {
+          "column": 10,
+          "reason": "presence-sensitive",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 442
+        },
+        {
+          "column": 32,
+          "member": "geometry",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/render/src/sceneRender.ts",
+          "line": 442
         },
         {
           "column": 9,
@@ -281700,7 +282325,7 @@
           "member": "name",
           "reason": "unknown-member",
           "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-          "line": 94
+          "line": 97
         },
         {
           "column": 39,
@@ -281932,13 +282557,6 @@
           "line": 38
         },
         {
-          "column": 10,
-          "member": "enabled",
-          "reason": "width-sensitive",
-          "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 204
-        },
-        {
           "column": 61,
           "member": "kind",
           "reason": "width-sensitive",
@@ -281985,14 +282603,14 @@
           "member": "enabled",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
-          "line": 134
+          "line": 135
         },
         {
           "column": 7,
           "member": "kind",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts",
-          "line": 135
+          "line": 136
         },
         {
           "column": 8,
@@ -282276,7 +282894,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:5d1ab7ee845efa54f0ac99eff03034223dba1f7df72bdf0d6aba7c8e6ad5e93c",
+      "declarationFingerprint": "sha256:09e817bed14a7cfb5cf4dc4fd94d8545d19ddda9e1d59db7b337488b870e2bde",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
       "eligible": false,
@@ -282286,7 +282904,498 @@
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
       },
-      "escapes": [],
+      "escapes": [
+        {
+          "column": 7,
+          "member": "scaleY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 167
+        },
+        {
+          "column": 44,
+          "member": "scaleY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 170
+        },
+        {
+          "column": 3,
+          "member": "scaleY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 178
+        },
+        {
+          "column": 29,
+          "member": "scaleY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 178
+        },
+        {
+          "column": 7,
+          "member": "scaleX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 183
+        },
+        {
+          "column": 44,
+          "member": "scaleX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 186
+        },
+        {
+          "column": 3,
+          "member": "scaleX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 194
+        },
+        {
+          "column": 29,
+          "member": "scaleX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 194
+        },
+        {
+          "column": 10,
+          "member": "enabled",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 223
+        },
+        {
+          "column": 10,
+          "member": "enabled",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 262
+        },
+        {
+          "column": 12,
+          "member": "enabled",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/boundsRectangle.ts",
+          "line": 294
+        },
+        {
+          "column": 11,
+          "member": "name",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/hierarchy.ts",
+          "line": 175
+        },
+        {
+          "column": 20,
+          "member": "pivotX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/hierarchy.ts",
+          "line": 376
+        },
+        {
+          "column": 20,
+          "member": "pivotY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/hierarchy.ts",
+          "line": 377
+        },
+        {
+          "column": 5,
+          "member": "pivotX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/hierarchy.ts",
+          "line": 379
+        },
+        {
+          "column": 5,
+          "member": "pivotY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/hierarchy.ts",
+          "line": 380
+        },
+        {
+          "column": 5,
+          "member": "x",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/hierarchy.ts",
+          "line": 381
+        },
+        {
+          "column": 5,
+          "member": "y",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/hierarchy.ts",
+          "line": 382
+        },
+        {
+          "column": 16,
+          "member": "pivotX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 83
+        },
+        {
+          "column": 16,
+          "member": "pivotY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 84
+        },
+        {
+          "column": 18,
+          "member": "rotation",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 85
+        },
+        {
+          "column": 16,
+          "member": "scaleX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 86
+        },
+        {
+          "column": 16,
+          "member": "scaleY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 87
+        },
+        {
+          "column": 15,
+          "member": "skewX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 88
+        },
+        {
+          "column": 15,
+          "member": "skewY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 89
+        },
+        {
+          "column": 11,
+          "member": "x",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 90
+        },
+        {
+          "column": 11,
+          "member": "y",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 91
+        },
+        {
+          "column": 3,
+          "member": "pivotX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 115
+        },
+        {
+          "column": 3,
+          "member": "pivotY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 116
+        },
+        {
+          "column": 3,
+          "member": "rotation",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 117
+        },
+        {
+          "column": 3,
+          "member": "scaleX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 118
+        },
+        {
+          "column": 3,
+          "member": "scaleY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 119
+        },
+        {
+          "column": 3,
+          "member": "skewX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 120
+        },
+        {
+          "column": 3,
+          "member": "skewY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 121
+        },
+        {
+          "column": 3,
+          "member": "x",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 122
+        },
+        {
+          "column": 3,
+          "member": "y",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 123
+        },
+        {
+          "column": 7,
+          "member": "rotation",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 131
+        },
+        {
+          "column": 17,
+          "member": "rotation",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 133
+        },
+        {
+          "column": 7,
+          "member": "skewX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 148
+        },
+        {
+          "column": 29,
+          "member": "skewY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 148
+        },
+        {
+          "column": 41,
+          "member": "scaleX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 149
+        },
+        {
+          "column": 39,
+          "member": "scaleX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 150
+        },
+        {
+          "column": 40,
+          "member": "scaleY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 151
+        },
+        {
+          "column": 41,
+          "member": "scaleY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 152
+        },
+        {
+          "column": 43,
+          "member": "skewY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 154
+        },
+        {
+          "column": 43,
+          "member": "skewX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 155
+        },
+        {
+          "column": 33,
+          "member": "scaleX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 156
+        },
+        {
+          "column": 33,
+          "member": "scaleX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 157
+        },
+        {
+          "column": 34,
+          "member": "scaleY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 158
+        },
+        {
+          "column": 33,
+          "member": "scaleY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 159
+        },
+        {
+          "column": 15,
+          "member": "x",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 162
+        },
+        {
+          "column": 38,
+          "member": "pivotX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 162
+        },
+        {
+          "column": 65,
+          "member": "pivotY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 162
+        },
+        {
+          "column": 15,
+          "member": "y",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 163
+        },
+        {
+          "column": 38,
+          "member": "pivotX",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 163
+        },
+        {
+          "column": 65,
+          "member": "pivotY",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform2d.ts",
+          "line": 163
+        },
+        {
+          "column": 29,
+          "member": "position",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 86
+        },
+        {
+          "column": 32,
+          "member": "rotation",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 87
+        },
+        {
+          "column": 26,
+          "member": "scale",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 88
+        },
+        {
+          "column": 15,
+          "member": "position",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 126
+        },
+        {
+          "column": 18,
+          "member": "rotation",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 127
+        },
+        {
+          "column": 15,
+          "member": "scale",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 128
+        },
+        {
+          "column": 20,
+          "member": "position",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 138
+        },
+        {
+          "column": 37,
+          "member": "rotation",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 138
+        },
+        {
+          "column": 54,
+          "member": "scale",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 138
+        },
+        {
+          "column": 40,
+          "member": "position",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 147
+        },
+        {
+          "column": 57,
+          "member": "rotation",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 147
+        },
+        {
+          "column": 74,
+          "member": "scale",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/node/src/nodeTransform3d.ts",
+          "line": 147
+        },
+        {
+          "column": 49,
+          "member": "kind",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-gl/src/glVelocity.ts",
+          "line": 349
+        },
+        {
+          "column": 51,
+          "member": "kind",
+          "reason": "width-sensitive",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuVelocity.ts",
+          "line": 369
+        }
+      ],
       "fields": [
         {
           "name": "data",
@@ -282455,7 +283564,7 @@
         "reads": 115,
         "writes": 58
       },
-      "declarationFingerprint": "sha256:67ed4d560c545470b8b71012083fb82e169a3a89c21d01422aa62a02e5ad64b2",
+      "declarationFingerprint": "sha256:51686612804680c5d7daa61966c5c58c612d7dac03ee6d74d6503eaa3ffaa5d5",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -282890,14 +283999,14 @@
           "member": "deformedLocalBounds",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 281
+          "line": 278
         },
         {
           "column": 18,
           "member": "deformedLocalBounds",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 284
+          "line": 281
         },
         {
           "column": 3,
@@ -283213,7 +284322,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Traits>[] | null"
+          "type": "NodeOf<Traits>[] | null"
         },
         {
           "name": "childrenId",
@@ -283309,7 +284418,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Traits> | null"
+          "type": "NodeOf<Traits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -283342,6 +284451,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Traits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsUsingLocalBoundsId",
@@ -283686,7 +284803,7 @@
         "reads": 7,
         "writes": 2
       },
-      "declarationFingerprint": "sha256:c70d8469431bf75424c4a4a457ce0d99ad98a217f88c1bfe6c687de4407e4031",
+      "declarationFingerprint": "sha256:f5890f2123b567fa23eb37ae03f8a1a034edb3401d767ecf0ebe2b21c4150aeb",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -283736,7 +284853,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"NormalMaterial\""
         },
         {
           "name": "name",
@@ -289938,14 +291055,14 @@
           "member": "kind",
           "reason": "incompatible-union",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 372
+          "line": 369
         },
         {
           "column": 7,
           "member": "kind",
           "reason": "incompatible-union",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 406
+          "line": 403
         },
         {
           "column": 7,
@@ -289973,7 +291090,7 @@
           "member": "kind",
           "reason": "incompatible-union",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-          "line": 1070
+          "line": 1071
         },
         {
           "column": 7,
@@ -293661,7 +294778,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -293789,7 +294906,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -293854,6 +294971,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -294119,7 +295244,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits>[] | null"
+          "type": "NodeOf<Node3DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -294231,7 +295356,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node3DTraits> | null"
+          "type": "NodeOf<Node3DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -294264,6 +295389,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node3DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldAlpha",
@@ -297650,13 +298783,13 @@
           "column": 19,
           "reason": "computed-key",
           "source": "upstream/packages/path-boolean/src/martinezKernel.ts",
-          "line": 541
+          "line": 545
         },
         {
           "column": 19,
           "reason": "computed-key",
           "source": "upstream/packages/path-boolean/src/martinezKernel.ts",
-          "line": 542
+          "line": 546
         },
         {
           "column": 28,
@@ -306470,14 +307603,14 @@
           "member": "kind",
           "reason": "incompatible-union",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 372
+          "line": 369
         },
         {
           "column": 7,
           "member": "kind",
           "reason": "incompatible-union",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 406
+          "line": 403
         },
         {
           "column": 7,
@@ -306505,7 +307638,7 @@
           "member": "kind",
           "reason": "incompatible-union",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-          "line": 1070
+          "line": 1071
         },
         {
           "column": 7,
@@ -306620,7 +307753,7 @@
         "reads": 36,
         "writes": 7
       },
-      "declarationFingerprint": "sha256:64e437f2e5a0160d04bbc20e190fa582580cd6407ac92088e8b008e8c8d4aa9b",
+      "declarationFingerprint": "sha256:0510aa935e4804e99b66c1a10f6e1279ab32589493498ca1dbebaf24176c331f",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -306686,7 +307819,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"PhongMaterial\""
         },
         {
           "name": "name",
@@ -349906,7 +351039,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -350042,7 +351175,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -350107,6 +351240,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -362716,6 +363857,104 @@
       },
       "escapes": [
         {
+          "column": 11,
+          "member": "surface",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts",
+          "line": 51
+        },
+        {
+          "column": 11,
+          "member": "surface",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 61
+        },
+        {
+          "column": 19,
+          "member": "lastContentId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 92
+        },
+        {
+          "column": 60,
+          "member": "lastPixelRatio",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 92
+        },
+        {
+          "column": 5,
+          "member": "lastContentId",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 108
+        },
+        {
+          "column": 5,
+          "member": "lastPixelRatio",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 109
+        },
+        {
+          "column": 5,
+          "member": "logW",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 110
+        },
+        {
+          "column": 5,
+          "member": "logH",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 111
+        },
+        {
+          "column": 5,
+          "member": "logW",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 151
+        },
+        {
+          "column": 5,
+          "member": "logH",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 152
+        },
+        {
+          "column": 7,
+          "member": "logW",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 155
+        },
+        {
+          "column": 29,
+          "member": "logH",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 155
+        },
+        {
+          "column": 17,
+          "member": "logW",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 179
+        },
+        {
+          "column": 17,
+          "member": "logH",
+          "reason": "unknown-member",
+          "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
+          "line": 180
+        },
+        {
           "column": 17,
           "member": "textureIdentity",
           "reason": "unknown-member",
@@ -363047,7 +364286,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 287,
+        "reads": 288,
         "writes": 12
       },
       "declarationFingerprint": "sha256:272ac35d464e6e3a9ff7ab35c445b3fd389a16e2ffc6b301a47f16b3b2d11dcc",
@@ -363057,7 +364296,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 299,
+        "pendingAccesses": 300,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -364282,6 +365521,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "Renderable[]"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         }
       ],
       "id": "@flighthq/types:interface#RenderStateRuntime",
@@ -364607,13 +365854,13 @@
           "column": 28,
           "reason": "dynamic-enumeration",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 94
+          "line": 120
         },
         {
           "column": 5,
           "reason": "dynamic-enumeration",
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-          "line": 173
+          "line": 199
         },
         {
           "column": 28,
@@ -372264,14 +373511,14 @@
       "accesses": {
         "calls": 0,
         "reads": 38,
-        "writes": 23
+        "writes": 24
       },
       "declarationFingerprint": "sha256:8366b22af6581d9b3d860205d8d5245e7bb40398342313332aa3c7da2e420aa1",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 61,
+        "directAccesses": 62,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -372340,7 +373587,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -372476,7 +373723,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -372583,12 +373830,28 @@
           "type": "number"
         },
         {
+          "name": "textLayoutUsingText",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | null"
+        },
+        {
           "name": "traits",
           "optional": true,
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -376855,56 +378118,56 @@
           "member": "minFilter",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 406
+          "line": 410
         },
         {
           "column": 36,
           "member": "magFilter",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 407
+          "line": 411
         },
         {
           "column": 5,
           "member": "mipmaps",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 409
+          "line": 413
         },
         {
           "column": 24,
           "member": "minFilter",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 409
+          "line": 413
         },
         {
           "column": 9,
           "member": "minFilter",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 410
+          "line": 414
         },
         {
           "column": 11,
           "member": "wrapU",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 424
+          "line": 428
         },
         {
           "column": 11,
           "member": "wrapV",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 425
+          "line": 429
         },
         {
           "column": 11,
           "member": "anisotropy",
           "reason": "width-sensitive",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 427
+          "line": 431
         },
         {
           "column": 17,
@@ -377989,7 +379252,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -378117,7 +379380,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -378190,6 +379453,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -382488,6 +383759,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "Scene2DSignals | null"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         }
       ],
       "id": "@flighthq/types:interface#Scene2DRuntime",
@@ -386201,35 +387480,35 @@
           "member": "directional",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 72
+          "line": 70
         },
         {
           "column": 19,
           "member": "ambient",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 79
+          "line": 77
         },
         {
           "column": 17,
           "member": "point",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 86
+          "line": 84
         },
         {
           "column": 16,
           "member": "spot",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 95
+          "line": 93
         },
         {
           "column": 22,
           "member": "hemisphere",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 104
+          "line": 102
         },
         {
           "column": 11,
@@ -386531,35 +387810,35 @@
           "member": "directional",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 72
+          "line": 70
         },
         {
           "column": 19,
           "member": "ambient",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 79
+          "line": 77
         },
         {
           "column": 17,
           "member": "point",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 86
+          "line": 84
         },
         {
           "column": 16,
           "member": "spot",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 95
+          "line": 93
         },
         {
           "column": 22,
           "member": "hemisphere",
           "reason": "width-sensitive",
           "source": "upstream/packages/render/src/sceneRender.ts",
-          "line": 104
+          "line": 102
         },
         {
           "column": 11,
@@ -388154,6 +389433,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "object | null"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         }
       ],
       "id": "@flighthq/types:type#Scene3DRuntime",
@@ -393756,6 +395043,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "SelectionSignals<NodeType>"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         }
       ],
       "id": "@flighthq/types:interface#SelectionStateRuntime",
@@ -396098,7 +397393,7 @@
         "reads": 44,
         "writes": 12
       },
-      "declarationFingerprint": "sha256:f012cad97304e5b646c0f93382b021b88256802524f06f31c7c237f4904454f6",
+      "declarationFingerprint": "sha256:0cc5d013eb9ecafdeb4d08c1a88a6db2734c337e645bf5418e9d7f11c3d797ea",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -396164,7 +397459,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"ShadedMaterial\""
         },
         {
           "name": "modifiers",
@@ -400339,7 +401634,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -400467,7 +401762,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -400540,6 +401835,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -425678,7 +426981,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:fd7d412c542ae8c3de6675e94131f1b2b5d5387ab2f73f83b3cb7b4f4fa7affe",
+      "declarationFingerprint": "sha256:ff00a5b58fc277953ef8fa710b6450005c6466053ecc3e2c6e427a6ebaecd4a5",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
       "eligible": false,
@@ -429977,7 +431280,7 @@
         "reads": 36,
         "writes": 16
       },
-      "declarationFingerprint": "sha256:0507be5be486444087da384892e2e4cc933f986b96fce65dc8cae8f6304a069f",
+      "declarationFingerprint": "sha256:a4bf57d5ee691bc8b9bbd14d7522a743ffab830d31566f22e4deef7b6d723d58",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -430075,7 +431378,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"SpecularGlossinessPbrMaterial\""
         },
         {
           "name": "name",
@@ -434193,7 +435496,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -434337,7 +435640,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -434402,6 +435705,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -439748,7 +441059,7 @@
         "reads": 24,
         "writes": 6
       },
-      "declarationFingerprint": "sha256:75623596e21f7fa8bdb96972f77d790d3fa4eaa91a9a238efce37fd2c87cff25",
+      "declarationFingerprint": "sha256:eb3c5963e698ab1eed121c92ac6e155716fa5e4290d28387409fcdbc96ba6647",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -439846,7 +441157,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"StandardPbrMaterial\""
         },
         {
           "name": "metallic",
@@ -461577,19 +462888,19 @@
           "column": 30,
           "reason": "dynamic-enumeration",
           "source": "upstream/packages/text/src/richText.ts",
-          "line": 214
+          "line": 215
         },
         {
           "column": 16,
           "reason": "dynamic-enumeration",
           "source": "upstream/packages/text/src/richText.ts",
-          "line": 220
+          "line": 221
         },
         {
           "column": 45,
           "reason": "computed-key",
           "source": "upstream/packages/text/src/richText.ts",
-          "line": 222
+          "line": 223
         },
         {
           "column": 61,
@@ -463232,7 +464543,7 @@
           "column": 73,
           "reason": "dynamic-enumeration",
           "source": "upstream/packages/text/src/richText.ts",
-          "line": 443
+          "line": 444
         }
       ],
       "fields": [
@@ -464926,7 +466237,7 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 28,
+        "reads": 32,
         "writes": 0
       },
       "declarationFingerprint": "sha256:f0658231700532c1d5a1d52e203c8f41115d1e60669fa2fd9a98bad1aacb4416",
@@ -464934,7 +466245,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 28,
+        "directAccesses": 32,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -465122,7 +466433,77 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 44,
+        "reads": 0,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:84aa77622f772746c3239ca262cfcd23b12ba939f7345ed396d28b52be0ada65",
+      "declarationKind": "interface",
+      "definingPackageName": "@flighthq/types",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 0,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "agreement",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "boolean"
+        },
+        {
+          "name": "liveString",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string"
+        },
+        {
+          "name": "rasterizedString",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | null"
+        },
+        {
+          "name": "revision",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "number"
+        }
+      ],
+      "id": "@flighthq/types:interface#TextLabelContentExplanation",
+      "memberEscapes": [],
+      "migration": {
+        "baselineId": null,
+        "status": "new"
+      },
+      "name": "TextLabelContentExplanation",
+      "packageName": "@flighthq/types",
+      "purpose": "checker-discovered public declaration",
+      "reasons": [],
+      "source": "upstream/packages/types/src/TextLabelContentExplanation.ts",
+      "sourceProvenance": {
+        "configuredDeclarationKind": "interface",
+        "configuredName": "TextLabelContentExplanation",
+        "configuredPackageName": "@flighthq/types",
+        "configuredSource": "upstream/packages/types/src/TextLabelContentExplanation.ts",
+        "resolution": "exact"
+      }
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 48,
         "writes": 7
       },
       "declarationFingerprint": "sha256:d94505d93827743797a2c6724668ebc639ebab71ea755df4bdc4fee0ae7971e5",
@@ -465130,7 +466511,7 @@
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 51,
+        "directAccesses": 55,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -465208,15 +466589,15 @@
     {
       "accesses": {
         "calls": 1,
-        "reads": 5,
-        "writes": 6
+        "reads": 9,
+        "writes": 8
       },
-      "declarationFingerprint": "sha256:db7e05906a3f2b5f6884a839980220d5bdfa14ef1bb5a1d9e1899983f004d07f",
+      "declarationFingerprint": "sha256:668abe75927fb5e032cce2bf278377fd1515b63ef688c280c1aa75fc7c8b8a99",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
-        "directAccesses": 12,
+        "directAccesses": 18,
         "mode": "direct",
         "pendingAccesses": 0,
         "reflectiveSurvivors": []
@@ -465285,7 +466666,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -465413,7 +466794,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -465488,12 +466869,28 @@
           "type": "number"
         },
         {
+          "name": "textLayoutUsingText",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | null"
+        },
+        {
           "name": "traits",
           "optional": true,
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -469365,13 +470762,13 @@
           "member": "sampler",
           "reason": "incompatible-union",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-          "line": 722
+          "line": 723
         },
         {
           "column": 28,
           "reason": "presence-sensitive",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-          "line": 820
+          "line": 821
         },
         {
           "column": 11,
@@ -489431,7 +490828,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits>[] | null"
+          "type": "NodeOf<Node2DTraits>[] | null"
         },
         {
           "name": "childrenId",
@@ -489559,7 +490956,7 @@
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "Node<Node2DTraits> | null"
+          "type": "NodeOf<Node2DTraits> | null"
         },
         {
           "name": "parentReferenceId",
@@ -489624,6 +491021,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "NodeTraitsKey<Node2DTraits> | undefined"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "worldBoundsRectangle",
@@ -493342,7 +494747,7 @@
         "reads": 17,
         "writes": 4
       },
-      "declarationFingerprint": "sha256:1c993883bad8944cd6da043e55da9b6014270eb750d3a0fbc840c9cd107de2b0",
+      "declarationFingerprint": "sha256:18941a2c71192e6c26ca772bcfe4339627f7d9de02702c8ca85e91f143e56b31",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -493408,7 +494813,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"ToonMaterial\""
         },
         {
           "name": "name",
@@ -494238,7 +495643,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:c744a508e3181c3c31e026d800f8f5928e2793b375bf32ecd637815510d9ab88",
+      "declarationFingerprint": "sha256:fc6313f3f0bff0f41c8b3d5f8f2fcae3b0a5ee8fd2b560443a942d53411eaeaf",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
       "eligible": false,
@@ -494254,42 +495659,42 @@
           "member": "pivotX",
           "reason": "width-sensitive",
           "source": "upstream/packages/node/src/hierarchy.ts",
-          "line": 372
+          "line": 376
         },
         {
           "column": 20,
           "member": "pivotY",
           "reason": "width-sensitive",
           "source": "upstream/packages/node/src/hierarchy.ts",
-          "line": 373
+          "line": 377
         },
         {
           "column": 5,
           "member": "pivotX",
           "reason": "width-sensitive",
           "source": "upstream/packages/node/src/hierarchy.ts",
-          "line": 375
+          "line": 379
         },
         {
           "column": 5,
           "member": "pivotY",
           "reason": "width-sensitive",
           "source": "upstream/packages/node/src/hierarchy.ts",
-          "line": 376
+          "line": 380
         },
         {
           "column": 5,
           "member": "x",
           "reason": "width-sensitive",
           "source": "upstream/packages/node/src/hierarchy.ts",
-          "line": 377
+          "line": 381
         },
         {
           "column": 5,
           "member": "y",
           "reason": "width-sensitive",
           "source": "upstream/packages/node/src/hierarchy.ts",
-          "line": 378
+          "line": 382
         },
         {
           "column": 16,
@@ -495109,7 +496514,7 @@
         "reads": 0,
         "writes": 0
       },
-      "declarationFingerprint": "sha256:da9298db6d25709679d19c3277a12efc13fb2ea8c4793a128cb1288dba978dcf",
+      "declarationFingerprint": "sha256:348d7425cf1234eb0f58670fc4e75ff67ab3bb760d5dccd26134b1e3ab14ee84",
       "declarationKind": "type",
       "definingPackageName": "@flighthq/types",
       "eligible": false,
@@ -502943,7 +504348,7 @@
         "reads": 15,
         "writes": 6
       },
-      "declarationFingerprint": "sha256:eb909d67f4277244c321489bb2cd34a8cb5cc3de0bfade3146aa4c09fb4b27f0",
+      "declarationFingerprint": "sha256:417acaac58c0e2858150ca2c9b932592fac6c505e7cf14fcc530a0751bbb7d65",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -503009,7 +504414,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"UnlitMaterial\""
         },
         {
           "name": "name",
@@ -518093,7 +519498,7 @@
         "reads": 8,
         "writes": 1
       },
-      "declarationFingerprint": "sha256:9d8cc36eaecca7c66c0ce29413c59ec9780d206a161003fb62f06b580efd7d2b",
+      "declarationFingerprint": "sha256:4bf6ae337857c46e758e1e6d3c41b4e825691cb9c928807201900208e1193f81",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -518143,7 +519548,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"VertexColorMaterial\""
         },
         {
           "name": "name",
@@ -527313,14 +528718,14 @@
           "member": "resolveFlush",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 144
+          "line": 148
         },
         {
           "column": 5,
           "member": "record",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 358
+          "line": 362
         },
         {
           "column": 5,
@@ -528470,17 +529875,17 @@
     {
       "accesses": {
         "calls": 0,
-        "reads": 70,
-        "writes": 29
+        "reads": 46,
+        "writes": 18
       },
-      "declarationFingerprint": "sha256:53e13bde8988885a58a15937a680f26c170f2792d67b5ecca89e67e6dbfcedb4",
+      "declarationFingerprint": "sha256:14e5bdc5ca20ecb6324735feab619dba27ce5c4dc3b8a48898529cd08d5eb8c6",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 99,
+        "pendingAccesses": 64,
         "reflectiveSurvivors": []
       },
       "escapes": [],
@@ -528518,14 +529923,6 @@
           "type": "GPUDevice"
         },
         {
-          "name": "linearSampler",
-          "optional": false,
-          "readonly": false,
-          "receiverSensitive": false,
-          "requiredUndefined": false,
-          "type": "GPUSampler"
-        },
-        {
           "name": "lost",
           "optional": false,
           "readonly": false,
@@ -528540,14 +529937,6 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "Map<GPUTextureFormat, { bindGroupLayout: GPUBindGroupLayout; pipeline: GPURenderPipeline; }>"
-        },
-        {
-          "name": "nearestSampler",
-          "optional": false,
-          "readonly": false,
-          "receiverSensitive": false,
-          "requiredUndefined": false,
-          "type": "GPUSampler"
         },
         {
           "name": "packedTintModule",
@@ -528588,6 +529977,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "number"
+        },
+        {
+          "name": "resources",
+          "optional": false,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "WgpuDeviceRuntimeResources | null"
         },
         {
           "name": "samplerCache",
@@ -528638,14 +530035,6 @@
           "type": "((device: GPUDevice) => void)[]"
         },
         {
-          "name": "textureBindGroupLayout",
-          "optional": false,
-          "readonly": false,
-          "receiverSensitive": false,
-          "requiredUndefined": false,
-          "type": "GPUBindGroupLayout"
-        },
-        {
           "name": "textureCache",
           "optional": false,
           "readonly": false,
@@ -528686,12 +530075,12 @@
           "type": "WeakMap<TextureSource, WgpuTextureSourceTextureEntry>"
         },
         {
-          "name": "uniformBindGroupLayout",
-          "optional": false,
+          "name": "uid",
+          "optional": true,
           "readonly": false,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "GPUBindGroupLayout"
+          "type": "string | undefined"
         },
         {
           "name": "videoSrgbTextureCache",
@@ -528740,6 +530129,76 @@
       "sourceProvenance": {
         "configuredDeclarationKind": "interface",
         "configuredName": "WgpuDeviceRuntime",
+        "configuredPackageName": "@flighthq/types",
+        "configuredSource": "upstream/packages/types/src/WgpuDeviceRuntime.ts",
+        "resolution": "exact"
+      }
+    },
+    {
+      "accesses": {
+        "calls": 0,
+        "reads": 25,
+        "writes": 0
+      },
+      "declarationFingerprint": "sha256:861239ac850cde9cc8c60f45366c8d28478995f24f17710fb63596cedea64b5e",
+      "declarationKind": "interface",
+      "definingPackageName": "@flighthq/types",
+      "eligible": true,
+      "emission": {
+        "directAccesses": 0,
+        "mode": "audit-only",
+        "pendingAccesses": 25,
+        "reflectiveSurvivors": []
+      },
+      "escapes": [],
+      "fields": [
+        {
+          "name": "linearSampler",
+          "optional": false,
+          "readonly": true,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "GPUSampler"
+        },
+        {
+          "name": "nearestSampler",
+          "optional": false,
+          "readonly": true,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "GPUSampler"
+        },
+        {
+          "name": "textureBindGroupLayout",
+          "optional": false,
+          "readonly": true,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "GPUBindGroupLayout"
+        },
+        {
+          "name": "uniformBindGroupLayout",
+          "optional": false,
+          "readonly": true,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "GPUBindGroupLayout"
+        }
+      ],
+      "id": "@flighthq/types:interface#WgpuDeviceRuntimeResources",
+      "memberEscapes": [],
+      "migration": {
+        "baselineId": null,
+        "status": "new"
+      },
+      "name": "WgpuDeviceRuntimeResources",
+      "packageName": "@flighthq/types",
+      "purpose": "checker-discovered public declaration",
+      "reasons": [],
+      "source": "upstream/packages/types/src/WgpuDeviceRuntime.ts",
+      "sourceProvenance": {
+        "configuredDeclarationKind": "interface",
+        "configuredName": "WgpuDeviceRuntimeResources",
         "configuredPackageName": "@flighthq/types",
         "configuredSource": "upstream/packages/types/src/WgpuDeviceRuntime.ts",
         "resolution": "exact"
@@ -528812,25 +530271,25 @@
           "column": 3,
           "reason": "computed-key",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 55
+          "line": 56
         },
         {
           "column": 5,
           "reason": "presence-sensitive",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 141
+          "line": 142
         },
         {
           "column": 7,
           "reason": "presence-sensitive",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 147
+          "line": 148
         },
         {
           "column": 10,
           "reason": "computed-key",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 366
+          "line": 367
         }
       ],
       "fields": [
@@ -529778,7 +531237,7 @@
           "column": 14,
           "reason": "dynamic-enumeration",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 46
+          "line": 47
         }
       ],
       "fields": [
@@ -529864,14 +531323,14 @@
           "member": "format",
           "reason": "width-sensitive",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 130
+          "line": 131
         },
         {
           "column": 22,
           "member": "powerPreference",
           "reason": "width-sensitive",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 131
+          "line": 132
         }
       ],
       "fields": [
@@ -529933,42 +531392,42 @@
           "member": "acquire",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 45
+          "line": 46
         },
         {
           "column": 45,
           "member": "release",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 117
+          "line": 118
         },
         {
           "column": 29,
           "member": "acquire",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 129
+          "line": 130
         },
         {
           "column": 7,
           "member": "release",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 318
+          "line": 319
         },
         {
           "column": 10,
           "member": "isSupported",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 425
+          "line": 430
         },
         {
           "column": 3,
           "member": "release",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 481
+          "line": 482
         }
       ],
       "fields": [
@@ -530201,13 +531660,13 @@
           "column": 18,
           "reason": "computed-key",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-          "line": 856
+          "line": 857
         },
         {
           "column": 6,
           "reason": "computed-key",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-          "line": 858
+          "line": 859
         }
       ],
       "fields": [
@@ -530293,14 +531752,14 @@
           "member": "getShaderModule",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 187
+          "line": 191
         },
         {
           "column": 3,
           "member": "packInstance",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts",
-          "line": 285
+          "line": 289
         }
       ],
       "fields": [
@@ -532826,20 +534285,20 @@
           "member": "format",
           "reason": "width-sensitive",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 130
+          "line": 131
         },
         {
           "column": 22,
           "member": "powerPreference",
           "reason": "width-sensitive",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 131
+          "line": 132
         },
         {
           "column": 74,
           "reason": "dynamic-enumeration",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 175
+          "line": 176
         }
       ],
       "fields": [
@@ -532940,7 +534399,7 @@
           "column": 26,
           "reason": "dynamic-enumeration",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 338
+          "line": 339
         },
         {
           "column": 3,
@@ -533163,13 +534622,13 @@
           "column": 3,
           "reason": "computed-key",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 217
+          "line": 218
         },
         {
           "column": 10,
           "reason": "computed-key",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 372
+          "line": 377
         },
         {
           "column": 24,
@@ -533344,7 +534803,7 @@
     {
       "accesses": {
         "calls": 12,
-        "reads": 467,
+        "reads": 450,
         "writes": 229
       },
       "declarationFingerprint": "sha256:98f76831e154a026450321ea0bfc3cef4b621c07bc1dd110b6bbe79adf8982f2",
@@ -533354,7 +534813,7 @@
       "emission": {
         "directAccesses": 0,
         "mode": "audit-only",
-        "pendingAccesses": 708,
+        "pendingAccesses": 691,
         "reflectiveSurvivors": []
       },
       "escapes": [
@@ -533362,13 +534821,13 @@
           "column": 5,
           "reason": "presence-sensitive",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 141
+          "line": 142
         },
         {
           "column": 7,
           "reason": "presence-sensitive",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-          "line": 147
+          "line": 148
         }
       ],
       "fields": [
@@ -534131,6 +535590,14 @@
           "receiverSensitive": false,
           "requiredUndefined": false,
           "type": "WeakMap<TextureSource, WgpuTextureSourceTextureEntry>"
+        },
+        {
+          "name": "uid",
+          "optional": true,
+          "readonly": false,
+          "receiverSensitive": false,
+          "requiredUndefined": false,
+          "type": "string | undefined"
         },
         {
           "name": "uniformBindGroup",
@@ -537011,7 +538478,7 @@
         "reads": 11,
         "writes": 7
       },
-      "declarationFingerprint": "sha256:14f4588c80a91b071109c03fdcd722fb54b4ddf1673b2815a754c927e90a2fc2",
+      "declarationFingerprint": "sha256:92fef010744eaee91acad5aea117b6edee38f2f89e6546173d8728ac627f103a",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -537089,7 +538556,13 @@
         }
       ],
       "id": "@flighthq/types:interface#WgpuShapeRendererData",
-      "memberEscapes": [],
+      "memberEscapes": [
+        {
+          "member": "[EntityRuntimeKey]",
+          "reason": "computed-symbol-member",
+          "source": "upstream/packages/types/src/Entity.ts:3"
+        }
+      ],
       "migration": {
         "baselineId": null,
         "status": "new"
@@ -537136,21 +538609,21 @@
           "member": "getMeshDrawLayout",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-          "line": 132
+          "line": 133
         },
         {
           "column": 9,
           "member": "getMeshDrawBindGroup",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-          "line": 221
+          "line": 222
         },
         {
           "column": 41,
           "member": "extendMeshPrelude",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts",
-          "line": 741
+          "line": 742
         },
         {
           "column": 62,
@@ -537371,7 +538844,7 @@
           "member": "clear",
           "reason": "receiver-sensitive-method",
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts",
-          "line": 107
+          "line": 106
         },
         {
           "column": 18,
@@ -537573,7 +539046,7 @@
           "column": 50,
           "reason": "dynamic-enumeration",
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts",
-          "line": 112
+          "line": 111
         }
       ],
       "fields": [
@@ -540429,7 +541902,7 @@
         "reads": 6,
         "writes": 2
       },
-      "declarationFingerprint": "sha256:99fe447361adb31ff8434deb7f21c124b509a725ca83f0248cfb14280692d699",
+      "declarationFingerprint": "sha256:ab30087b99039af61030abaaff2f6f9edad3bd9efe3df354900c8d3b8cfc158a",
       "declarationKind": "interface",
       "definingPackageName": "@flighthq/types",
       "eligible": true,
@@ -540487,7 +541960,7 @@
           "readonly": true,
           "receiverSensitive": false,
           "requiredUndefined": false,
-          "type": "string"
+          "type": "\"WireframeMaterial\""
         },
         {
           "name": "name",
@@ -541215,7 +542688,7 @@
     "summary": {
       "baseline": 405,
       "kindChanged": 3,
-      "newAuditOnly": 2096,
+      "newAuditOnly": 2099,
       "preserved": 204,
       "relocated": 146,
       "removed": 26,
@@ -541224,17 +542697,17 @@
   },
   "schemaVersion": 5,
   "summary": {
-    "auditOnlySchemas": 2096,
-    "bindableAccesses": 39965,
-    "candidates": 2857,
-    "directAccesses": 25827,
-    "directSchemas": 758,
-    "eligible": 2159,
-    "escapes": 14597,
-    "fields": 29491,
+    "auditOnlySchemas": 2099,
+    "bindableAccesses": 39992,
+    "candidates": 2859,
+    "directAccesses": 25837,
+    "directSchemas": 757,
+    "eligible": 2161,
+    "escapes": 14732,
+    "fields": 29544,
     "ineligible": 698,
-    "pendingAccesses": 14138,
-    "reflectiveSurvivors": 452
+    "pendingAccesses": 14155,
+    "reflectiveSurvivors": 459
   },
-  "upstreamCommit": "2e86cd620a53121aa6c9230215f44c6c9a3bf816"
+  "upstreamCommit": "b3bb4bf61833f7723e7033dd5c732e91a6601400"
 }

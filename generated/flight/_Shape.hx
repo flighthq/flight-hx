@@ -1880,6 +1880,13 @@ class _Shape {
 
   @:allow(flight)
   @:keep
+  private static function clearShapeBoundsCommands():Void {
+    ((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).clear());
+    _Shape._revision__shapeBoundsRegistry++;
+  }
+
+  @:allow(flight)
+  @:keep
   private static function getShapeBoundsCommand(key:String):Null<ShapeBoundsCommand<String>> {
     return cast _Runtime.coalesce(((cast _Shape._commands__shapeBoundsRegistry : flight._internal._Map<String, ShapeBoundsCommand<String>>).get(key)), function():Dynamic return cast null);
     return cast null;

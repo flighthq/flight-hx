@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FileDialogHandleRuntime = { var binding:Null<flight._internal._Object>; var operations:Null<FileDialogHandleOperations>; };
+typedef FileDialogHandleRuntime = { var binding:Null<flight._internal._Object>; @:optional var uid:String; var operations:Null<FileDialogHandleOperations>; };

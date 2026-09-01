@@ -5,6 +5,7 @@ const api = compiled.flight._Shape;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const clearShapeBoundsCommands = api.clearShapeBoundsCommands;
 export const getShapeBoundsCommand = api.getShapeBoundsCommand;
 export const getShapeBoundsCommandRegistryRevision = api.getShapeBoundsCommandRegistryRevision;
 export const registerShapeBoundsCommand = api.registerShapeBoundsCommand;

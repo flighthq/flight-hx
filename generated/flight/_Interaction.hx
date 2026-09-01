@@ -233,7 +233,7 @@ class _Interaction {
   }
 
   public static function hasEligibleNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
-    var children:Null<Array<Node<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast (cast isNodeHitTestEnabled(({ final __callArgument22:Dynamic = node; __callArgument22; })) : Bool) : Bool)) { return cast true; }
     children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<flight._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
@@ -246,7 +246,7 @@ class _Interaction {
   }
 
   public static function hasFocusableNodeInSubtree__enableInteractionGuards(node:NodeAny):Bool {
-    var children:Null<Array<Node<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast (cast isNodeFocusable(({ final __callArgument28:Dynamic = node; __callArgument28; })) : Bool) : Bool)) { return cast true; }
     children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<flight._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
@@ -407,7 +407,7 @@ class _Interaction {
   }
 
   public static function collectFocusStops__focusManager(node:NodeAny, out:Array<NodeAny>):Void {
-    var children:Null<Array<Node<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
     if ((cast (cast isNodeFocusable(({ final __callArgument84:Dynamic = node; __callArgument84; })) : Bool) : Bool)) { _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>)); }
     children = _Runtime.field((cast getNodeRuntime((cast node : Dynamic)) : NodeRuntime<flight._internal._Any>), 'children');
@@ -586,7 +586,7 @@ class _Interaction {
     var state:Null<NodeInteractionState> = cast _Runtime.UNDEFINED;
     var enabled:Bool = cast _Runtime.UNDEFINED;
     var hitArea:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Path, Rectangle>, String>, NodeAny>> = cast _Runtime.UNDEFINED;
-    var children:Null<Array<Node<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return cast null; }
     state = (cast getNodeInteractionState(({ final __callArgument119:Dynamic = node; __callArgument119; })) : Null<NodeInteractionState>);
     enabled = _Runtime.strictEquals(({ final __typedStruct121 = state; __typedStruct121 == null ? _Runtime.UNDEFINED : (cast __typedStruct121 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
@@ -614,7 +614,7 @@ class _Interaction {
     var state:Null<NodeInteractionState> = cast _Runtime.UNDEFINED;
     var enabled:Bool = cast _Runtime.UNDEFINED;
     var hitArea:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Path, Rectangle>, String>, NodeAny>> = cast _Runtime.UNDEFINED;
-    var children:Null<Array<Node<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return cast false; }
     state = (cast getNodeInteractionState(({ final __callArgument131:Dynamic = node; __callArgument131; })) : Null<NodeInteractionState>);
     enabled = _Runtime.strictEquals(({ final __typedStruct133 = state; __typedStruct133 == null ? _Runtime.UNDEFINED : (cast __typedStruct133 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
@@ -635,7 +635,7 @@ class _Interaction {
     var state:Null<NodeInteractionState> = cast _Runtime.UNDEFINED;
     var enabled:Bool = cast _Runtime.UNDEFINED;
     var hitArea:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Path, Rectangle>, String>, NodeAny>> = cast _Runtime.UNDEFINED;
-    var children:Null<Array<Node<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
     state = (cast getNodeInteractionState(({ final __callArgument145:Dynamic = node; __callArgument145; })) : Null<NodeInteractionState>);
     enabled = _Runtime.strictEquals(({ final __typedStruct147 = state; __typedStruct147 == null ? _Runtime.UNDEFINED : (cast __typedStruct147 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
@@ -982,7 +982,7 @@ class _Interaction {
     while ((cast !_Runtime.strictEquals(current, null) : Bool)) {
       _Interaction.setInteractionSignalCurrentTarget__interactionManager((cast data : Dynamic), ({ final __callArgument322:Dynamic = target; __callArgument322; }), ({ final __callArgument323:Dynamic = current; __callArgument323; }));
       _Interaction.emitInteractionSignalDirect__interactionManager((cast current : Dynamic), (cast name : Dynamic), (cast data : Dynamic));
-      if ((cast (cast (cast _Interaction.isInteractionSignalCancelled__interactionManager : { var ___u40_EntityRuntimeKey_u40_10487:Null<NodeRuntime<flight._internal._Any>>; var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument326:Dynamic = current; __callArgument326; }), (cast name : String)) : Bool) : Bool)) { break; }
+      if ((cast (cast (cast _Interaction.isInteractionSignalCancelled__interactionManager : { var ___u40_EntityRuntimeKey_u40_10509:Null<NodeRuntime<flight._internal._Any>>; var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument326:Dynamic = current; __callArgument326; }), (cast name : String)) : Bool) : Bool)) { break; }
       if ((cast _Runtime.strictEquals(current, root) : Bool)) { break; }
       (current = cast ((cast getNodeParent((cast current : Dynamic)) : Null<N>) : Dynamic));
     }
@@ -1056,19 +1056,19 @@ class _Interaction {
   public static function hasInteractionSignalSubscriber__interactionManager<N:NodeAny>(manager:InteractionManager<N>, name:InteractionSignalName):Bool {
     if ((cast ((cast _Runtime.coalesce(((cast manager.signalSubscriberCounts : flight._internal._Map<String, Float>).get(name)), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool)) { return cast true; }
     if ((cast manager.trackedSubscribersOnly : Bool)) { return cast false; }
-    return cast (cast (cast _Interaction.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_10487:Null<NodeRuntime<flight._internal._Any>>; var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument333:Dynamic = manager.root; __callArgument333; }), (cast name : String)) : Bool);
+    return cast (cast (cast _Interaction.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_10509:Null<NodeRuntime<flight._internal._Any>>; var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument333:Dynamic = manager.root; __callArgument333; }), (cast name : String)) : Bool);
     return cast null;
   }
 
   public static function hasInteractionSignalSubscriberInGraph__interactionManager<N:NodeAny>(source:N, name:InteractionSignalName):Bool {
     var signal:Null<flight._internal._Union2<flight._internal._Union2<Signal<KeyboardEventData->Void>, Signal<PointerEventData->Void>>, Signal<FocusEventData->Void>>> = cast _Runtime.UNDEFINED;
-    var children:Null<Array<Node<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     signal = (cast _Interaction.getInteractionSignal__interactionManager((cast source : Dynamic), (cast name : String)) : Null<flight._internal._Union2<flight._internal._Union2<Signal<KeyboardEventData->Void>, Signal<PointerEventData->Void>>, Signal<FocusEventData->Void>>>);
     if ((cast ((cast !_Runtime.strictEquals(({ final __typedStruct335 = signal; __typedStruct335 == null ? _Runtime.UNDEFINED : (cast __typedStruct335 : { var data:Null<flight._internal._Union2<flight._internal._Union2<SignalData<KeyboardEventData->Void>, SignalData<PointerEventData->Void>>, SignalData<FocusEventData->Void>>>; }).data; }), null) : Bool) && (cast !_Runtime.strictEquals(signal, null) : Bool)) : Bool)) { return cast true; }
     children = _Runtime.field((cast getNodeRuntime((cast source : Dynamic)) : NodeRuntime<flight._internal._Any>), 'children');
     if ((cast !_Runtime.strictEquals(children, null) : Bool)) {
       for (child in _Runtime.iterable(children)) {
-        if ((cast (cast (cast _Interaction.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_10487:Null<NodeRuntime<flight._internal._Any>>; var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument338:Dynamic = (cast child : N); __callArgument338; }), (cast name : String)) : Bool) : Bool)) { return cast true; }
+        if ((cast (cast (cast _Interaction.hasInteractionSignalSubscriberInGraph__interactionManager : { var ___u40_EntityRuntimeKey_u40_10509:Null<NodeRuntime<flight._internal._Any>>; var data:Null<flight._internal._Object>; var enabled:Bool; var kind:String; var name:Null<String>; }->String->Bool)(({ final __callArgument338:Dynamic = (cast child : N); __callArgument338; }), (cast name : String)) : Bool) : Bool)) { return cast true; }
       }
     }
     return cast false;
@@ -1249,7 +1249,7 @@ class _Interaction {
   public static function collectSpatialCandidates__interactionSpatialIndex(node:NodeAny, out:Array<NodeAny>):Void {
     var state:Null<NodeInteractionState> = cast _Runtime.UNDEFINED;
     var enabled:Bool = cast _Runtime.UNDEFINED;
-    var children:Null<Array<Node<flight._internal._Any>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<flight._internal._Any>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
     state = (cast getNodeInteractionState(({ final __callArgument386:Dynamic = node; __callArgument386; })) : Null<NodeInteractionState>);
     enabled = _Runtime.strictEquals(({ final __typedStruct388 = state; __typedStruct388 == null ? _Runtime.UNDEFINED : (cast __typedStruct388 : { var hitTestEnabled:Bool; }).hitTestEnabled; }), true);
@@ -1378,14 +1378,14 @@ class _Interaction {
 
   public static function hitTestSpriteAlpha__registerSpriteHitTest(source:NodeAny, x:Float, y:Float, alphaThreshold:Float):Float {
     var sprite:Sprite = cast _Runtime.UNDEFINED;
-    var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
+    var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>> = cast _Runtime.UNDEFINED;
     var image:Null<TextureSource> = cast _Runtime.UNDEFINED;
     var bitmap:Null<Bitmap> = cast _Runtime.UNDEFINED;
     var px:Float = cast _Runtime.UNDEFINED;
     var py:Float = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast hitTestGraphLocalBounds((cast source : Dynamic), (cast x : Float), (cast y : Float)) : Bool) : Bool) : Bool)) { return cast -1.0; }
     sprite = (cast source : Sprite);
-    texture = (cast sprite.data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
+    texture = (cast sprite.data : { var texture:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Texture2D, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:Array<Null<TextureSource>>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var source:Null<VoxelGrid>; }>, { var colorSpace:TextureColorSpace; var sampler:Sampler; var version:Float; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var flipX:Bool; var flipY:Bool; var uvOffset:Vector2; var uvRotation:Float; var uvScale:Vector2; var dimension:String; var sources:TextureSourceCubeFaces; }>>; }).texture;
     if ((cast ((cast _Runtime.strictEquals(texture, null) : Bool) || (cast !_Runtime.strictEquals((cast texture : { var dimension:String; }).dimension, '2d') : Bool)) : Bool)) { return cast 0.0; }
     image = (cast texture : Texture2D).source;
     if ((cast _Runtime.strictEquals(image, null) : Bool)) { return cast 0.0; }
@@ -1438,7 +1438,7 @@ class _Interaction {
   public static function hitTestAreaQuery(root:Node2D, rect:Rectangle, ?out:Array<Node2D>):Array<Node2D> {
     if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
     var worldBounds:Rectangle = cast _Runtime.UNDEFINED;
-    var children:Null<Array<Node<Node2DTraits>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<NodeOf<Node2DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast root : { var enabled:Bool; }).enabled : Bool) : Bool)) { return cast out; }
     worldBounds = (cast getNodeWorldBoundsRectangle((cast root : Dynamic)) : Rectangle);
     if ((cast (cast intersectsRectangle(({ final __callArgument481:Dynamic = worldBounds; __callArgument481; }), ({ final __callArgument482:Dynamic = rect; __callArgument482; })) : Bool) : Bool)) {
@@ -1461,7 +1461,7 @@ class _Interaction {
     var nearY:Float = cast _Runtime.UNDEFINED;
     var dx:Float = cast _Runtime.UNDEFINED;
     var dy:Float = cast _Runtime.UNDEFINED;
-    var children:Null<Array<Node<Node2DTraits>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<NodeOf<Node2DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast root : { var enabled:Bool; }).enabled : Bool) : Bool)) { return cast out; }
     b = (cast getNodeWorldBoundsRectangle((cast root : Dynamic)) : Rectangle);
     nearX = HxMath.max(b.x, HxMath.min(cx, (b.x + b.width)));

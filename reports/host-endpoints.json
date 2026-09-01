@@ -74,22 +74,22 @@
         },
         {
           "column": 7,
-          "line": 61,
+          "line": 78,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 3,
-          "line": 154,
+          "line": 155,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 9,
-          "line": 175,
+          "line": 176,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 9,
-          "line": 184,
+          "line": 185,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -271,17 +271,17 @@
         },
         {
           "column": 3,
-          "line": 99,
+          "line": 100,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 5,
-          "line": 122,
+          "line": 123,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 5,
-          "line": 138,
+          "line": 132,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
@@ -340,7 +340,7 @@
         },
         {
           "column": 3,
-          "line": 156,
+          "line": 157,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -726,7 +726,7 @@
         },
         {
           "column": 5,
-          "line": 103,
+          "line": 104,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -845,17 +845,17 @@
         },
         {
           "column": 5,
-          "line": 49,
+          "line": 68,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 5,
-          "line": 102,
+          "line": 103,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 5,
-          "line": 164,
+          "line": 165,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -870,7 +870,7 @@
         },
         {
           "column": 7,
-          "line": 144,
+          "line": 138,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
@@ -929,17 +929,17 @@
         },
         {
           "column": 5,
-          "line": 55,
+          "line": 72,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 5,
-          "line": 168,
+          "line": 169,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 7,
-          "line": 146,
+          "line": 140,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
@@ -1096,13 +1096,13 @@
           "source": "upstream/packages/scene2d-canvas/src/canvasRichText.ts"
         },
         {
-          "column": 5,
-          "line": 30,
+          "column": 7,
+          "line": 47,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 5,
-          "line": 48,
+          "line": 67,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
@@ -1127,22 +1127,22 @@
         },
         {
           "column": 5,
-          "line": 163,
+          "line": 164,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 5,
-          "line": 204,
+          "line": 205,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 7,
-          "line": 98,
+          "line": 92,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
           "column": 7,
-          "line": 143,
+          "line": 137,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
@@ -1379,7 +1379,7 @@
         },
         {
           "column": 3,
-          "line": 26,
+          "line": 37,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
@@ -1782,17 +1782,17 @@
         },
         {
           "column": 7,
-          "line": 63,
+          "line": 80,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 9,
-          "line": 177,
+          "line": 178,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 9,
-          "line": 186,
+          "line": 187,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -1836,17 +1836,17 @@
         },
         {
           "column": 7,
-          "line": 60,
+          "line": 77,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 5,
-          "line": 108,
+          "line": 109,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 7,
-          "line": 172,
+          "line": 173,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -1894,8 +1894,8 @@
           "source": "upstream/packages/scene2d-canvas/src/canvasRichText.ts"
         },
         {
-          "column": 12,
-          "line": 31,
+          "column": 14,
+          "line": 48,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
@@ -1920,12 +1920,12 @@
         },
         {
           "column": 12,
-          "line": 205,
+          "line": 206,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 14,
-          "line": 99,
+          "line": 93,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
@@ -2068,17 +2068,17 @@
         },
         {
           "column": 7,
-          "line": 62,
+          "line": 79,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 9,
-          "line": 176,
+          "line": 177,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 9,
-          "line": 185,
+          "line": 186,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -2190,7 +2190,7 @@
         },
         {
           "column": 3,
-          "line": 155,
+          "line": 156,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -2344,7 +2344,7 @@
         },
         {
           "column": 3,
-          "line": 192,
+          "line": 193,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -2531,7 +2531,7 @@
         },
         {
           "column": 3,
-          "line": 153,
+          "line": 154,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -2754,22 +2754,22 @@
         },
         {
           "column": 3,
-          "line": 98,
+          "line": 99,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 5,
-          "line": 121,
+          "line": 122,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 5,
-          "line": 125,
+          "line": 126,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 5,
-          "line": 137,
+          "line": 131,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
@@ -2833,17 +2833,17 @@
         },
         {
           "column": 7,
-          "line": 64,
+          "line": 81,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 9,
-          "line": 178,
+          "line": 179,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 9,
-          "line": 187,
+          "line": 188,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -2877,7 +2877,7 @@
         },
         {
           "column": 5,
-          "line": 109,
+          "line": 110,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -2916,17 +2916,17 @@
         },
         {
           "column": 7,
-          "line": 59,
+          "line": 76,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 5,
-          "line": 107,
+          "line": 108,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 7,
-          "line": 171,
+          "line": 172,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
@@ -2970,17 +2970,17 @@
         },
         {
           "column": 3,
-          "line": 45,
+          "line": 64,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 3,
-          "line": 158,
+          "line": 159,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 5,
-          "line": 140,
+          "line": 134,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
@@ -3024,17 +3024,17 @@
         },
         {
           "column": 3,
-          "line": 44,
+          "line": 63,
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts"
         },
         {
           "column": 3,
-          "line": 157,
+          "line": 158,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 5,
-          "line": 139,
+          "line": 133,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
@@ -3337,12 +3337,12 @@
         },
         {
           "column": 14,
-          "line": 144,
+          "line": 143,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
           "column": 14,
-          "line": 156,
+          "line": 155,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
@@ -3412,7 +3412,7 @@
         },
         {
           "column": 24,
-          "line": 170,
+          "line": 173,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuScene3DTestHelper.ts"
         }
       ]
@@ -3772,12 +3772,12 @@
         },
         {
           "column": 13,
-          "line": 143,
+          "line": 142,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
           "column": 13,
-          "line": 155,
+          "line": 154,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
@@ -3847,7 +3847,7 @@
         },
         {
           "column": 46,
-          "line": 170,
+          "line": 173,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuScene3DTestHelper.ts"
         }
       ]
@@ -4888,7 +4888,7 @@
       "sites": [
         {
           "column": 10,
-          "line": 193,
+          "line": 205,
           "source": "upstream/packages/host-web/src/webClipboard.ts"
         }
       ]
@@ -5550,7 +5550,7 @@
         },
         {
           "column": 9,
-          "line": 179,
+          "line": 191,
           "source": "upstream/packages/host-web/src/webClipboard.ts"
         },
         {
@@ -6196,7 +6196,7 @@
         },
         {
           "column": 7,
-          "line": 184,
+          "line": 196,
           "source": "upstream/packages/host-web/src/webClipboard.ts"
         },
         {
@@ -6609,12 +6609,12 @@
         },
         {
           "column": 5,
-          "line": 109,
+          "line": 146,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
           "column": 3,
-          "line": 112,
+          "line": 149,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -6884,12 +6884,12 @@
         },
         {
           "column": 17,
-          "line": 151,
+          "line": 188,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
           "column": 20,
-          "line": 152,
+          "line": 189,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -7284,12 +7284,12 @@
         },
         {
           "column": 3,
-          "line": 151,
+          "line": 188,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
           "column": 3,
-          "line": 153,
+          "line": 190,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -7564,52 +7564,52 @@
         },
         {
           "column": 3,
-          "line": 80,
+          "line": 106,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 3,
-          "line": 203,
+          "line": 229,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 5,
-          "line": 223,
+          "line": 249,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 5,
-          "line": 224,
+          "line": 250,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 5,
-          "line": 244,
+          "line": 270,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 5,
-          "line": 245,
+          "line": 271,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 3,
-          "line": 301,
+          "line": 327,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 5,
-          "line": 321,
+          "line": 347,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 7,
-          "line": 342,
+          "line": 368,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 7,
-          "line": 350,
+          "line": 376,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -7669,17 +7669,17 @@
       "sites": [
         {
           "column": 7,
-          "line": 325,
+          "line": 351,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 7,
-          "line": 347,
+          "line": 373,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 3,
-          "line": 356,
+          "line": 382,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -7749,7 +7749,7 @@
         },
         {
           "column": 5,
-          "line": 110,
+          "line": 147,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -7759,17 +7759,17 @@
         },
         {
           "column": 5,
-          "line": 306,
+          "line": 332,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 7,
-          "line": 338,
+          "line": 364,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 3,
-          "line": 357,
+          "line": 383,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -7889,12 +7889,12 @@
       "sites": [
         {
           "column": 3,
-          "line": 130,
+          "line": 167,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
           "column": 3,
-          "line": 162,
+          "line": 199,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -7990,7 +7990,7 @@
       ]
     },
     {
-      "accesses": 17,
+      "accesses": 20,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "BLEND",
@@ -8002,6 +8002,21 @@
       "runtimeEndpoint": "BLEND",
       "runtimePath": "src/flight/_internal/backend/WebGl2Backend.hx",
       "sites": [
+        {
+          "column": 37,
+          "line": 116,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 32,
+          "line": 120,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 33,
+          "line": 139,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
         {
           "column": 13,
           "line": 108,
@@ -8359,7 +8374,7 @@
       "sites": [
         {
           "column": 7,
-          "line": 228,
+          "line": 254,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -8524,7 +8539,7 @@
         },
         {
           "column": 3,
-          "line": 152,
+          "line": 189,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -8664,12 +8679,12 @@
         },
         {
           "column": 56,
-          "line": 311,
+          "line": 337,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 56,
-          "line": 312,
+          "line": 338,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -8894,27 +8909,27 @@
       "sites": [
         {
           "column": 21,
-          "line": 226,
+          "line": 252,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 45,
-          "line": 313,
+          "line": 339,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 50,
-          "line": 327,
+          "line": 353,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 48,
-          "line": 362,
+          "line": 389,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 62,
-          "line": 368,
+          "line": 395,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -8954,7 +8969,7 @@
         },
         {
           "column": 9,
-          "line": 237,
+          "line": 263,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -9274,12 +9289,12 @@
       "sites": [
         {
           "column": 18,
-          "line": 69,
+          "line": 76,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 45,
-          "line": 300,
+          "line": 326,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -9324,12 +9339,12 @@
       "sites": [
         {
           "column": 18,
-          "line": 324,
+          "line": 350,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 18,
-          "line": 346,
+          "line": 372,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -9399,12 +9414,12 @@
         },
         {
           "column": 21,
-          "line": 305,
+          "line": 331,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 28,
-          "line": 337,
+          "line": 363,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -9454,7 +9469,7 @@
       "sites": [
         {
           "column": 15,
-          "line": 127,
+          "line": 164,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -9485,7 +9500,7 @@
       ]
     },
     {
-      "accesses": 11,
+      "accesses": 14,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "CULL_FACE",
@@ -9497,6 +9512,21 @@
       "runtimeEndpoint": "CULL_FACE",
       "runtimePath": "src/flight/_internal/backend/WebGl2Backend.hx",
       "sites": [
+        {
+          "column": 40,
+          "line": 117,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 35,
+          "line": 121,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 34,
+          "line": 138,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
         {
           "column": 27,
           "line": 70,
@@ -9784,17 +9814,17 @@
       "sites": [
         {
           "column": 3,
-          "line": 101,
+          "line": 127,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 34,
-          "line": 102,
+          "line": 128,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 5,
-          "line": 188,
+          "line": 214,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -9859,22 +9889,22 @@
       "sites": [
         {
           "column": 47,
-          "line": 104,
+          "line": 130,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 40,
-          "line": 106,
+          "line": 132,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 47,
-          "line": 184,
+          "line": 210,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 40,
-          "line": 186,
+          "line": 212,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -9934,22 +9964,22 @@
         },
         {
           "column": 42,
-          "line": 103,
+          "line": 129,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 28,
-          "line": 105,
+          "line": 131,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 42,
-          "line": 183,
+          "line": 209,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 28,
-          "line": 185,
+          "line": 211,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -9959,22 +9989,22 @@
         },
         {
           "column": 5,
-          "line": 53,
+          "line": 54,
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts"
         },
         {
           "column": 5,
-          "line": 67,
+          "line": 68,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
           "column": 5,
-          "line": 47,
+          "line": 48,
           "source": "upstream/packages/scene2d-gl/src/glShapeData.ts"
         },
         {
           "column": 5,
-          "line": 73,
+          "line": 67,
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts"
         },
         {
@@ -10089,7 +10119,7 @@
         },
         {
           "column": 69,
-          "line": 339,
+          "line": 365,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -10109,18 +10139,18 @@
       "sites": [
         {
           "column": 47,
-          "line": 343,
+          "line": 369,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 50,
-          "line": 351,
+          "line": 377,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
     },
     {
-      "accesses": 13,
+      "accesses": 16,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "DEPTH_TEST",
@@ -10132,6 +10162,21 @@
       "runtimeEndpoint": "DEPTH_TEST",
       "runtimePath": "src/flight/_internal/backend/WebGl2Backend.hx",
       "sites": [
+        {
+          "column": 41,
+          "line": 118,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 36,
+          "line": 122,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 35,
+          "line": 137,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
         {
           "column": 14,
           "line": 110,
@@ -10200,7 +10245,7 @@
       ]
     },
     {
-      "accesses": 3,
+      "accesses": 4,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "DEPTH_WRITEMASK",
@@ -10212,6 +10257,11 @@
       "runtimeEndpoint": "DEPTH_WRITEMASK",
       "runtimePath": "src/flight/_internal/backend/WebGl2Backend.hx",
       "sites": [
+        {
+          "column": 45,
+          "line": 119,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
         {
           "column": 32,
           "line": 102,
@@ -10244,17 +10294,17 @@
       "sites": [
         {
           "column": 39,
-          "line": 339,
+          "line": 365,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 89,
-          "line": 348,
+          "line": 374,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 52,
-          "line": 349,
+          "line": 375,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -10290,7 +10340,7 @@
       ]
     },
     {
-      "accesses": 10,
+      "accesses": 12,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "depthMask",
@@ -10302,6 +10352,16 @@
       "runtimeEndpoint": "depthMask",
       "runtimePath": "src/flight/_internal/backend/WebGl2Backend.hx",
       "sites": [
+        {
+          "column": 26,
+          "line": 123,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 26,
+          "line": 136,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
         {
           "column": 3,
           "line": 176,
@@ -10355,7 +10415,7 @@
       ]
     },
     {
-      "accesses": 21,
+      "accesses": 24,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "disable",
@@ -10367,6 +10427,21 @@
       "runtimeEndpoint": "disable",
       "runtimePath": "src/flight/_internal/backend/WebGl2Backend.hx",
       "sites": [
+        {
+          "column": 24,
+          "line": 121,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 25,
+          "line": 122,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 22,
+          "line": 139,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
         {
           "column": 29,
           "line": 135,
@@ -10394,7 +10469,7 @@
         },
         {
           "column": 27,
-          "line": 222,
+          "line": 248,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -10514,12 +10589,12 @@
       "sites": [
         {
           "column": 24,
-          "line": 224,
+          "line": 250,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 24,
-          "line": 245,
+          "line": 271,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -10584,17 +10659,17 @@
       "sites": [
         {
           "column": 7,
-          "line": 227,
+          "line": 253,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 24,
-          "line": 317,
+          "line": 343,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 26,
-          "line": 330,
+          "line": 356,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -10619,7 +10694,7 @@
         },
         {
           "column": 3,
-          "line": 158,
+          "line": 195,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -10714,7 +10789,7 @@
         },
         {
           "column": 45,
-          "line": 143,
+          "line": 169,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -10749,7 +10824,7 @@
         },
         {
           "column": 45,
-          "line": 153,
+          "line": 154,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
@@ -10804,7 +10879,7 @@
         },
         {
           "column": 44,
-          "line": 142,
+          "line": 168,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -10839,7 +10914,7 @@
         },
         {
           "column": 44,
-          "line": 152,
+          "line": 153,
           "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts"
         },
         {
@@ -10969,7 +11044,7 @@
         },
         {
           "column": 17,
-          "line": 153,
+          "line": 190,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -11040,7 +11115,7 @@
       ]
     },
     {
-      "accesses": 21,
+      "accesses": 24,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "enable",
@@ -11052,6 +11127,21 @@
       "runtimeEndpoint": "enable",
       "runtimePath": "src/flight/_internal/backend/WebGl2Backend.hx",
       "sites": [
+        {
+          "column": 22,
+          "line": 120,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 25,
+          "line": 137,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 24,
+          "line": 138,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
         {
           "column": 3,
           "line": 298,
@@ -11074,7 +11164,7 @@
         },
         {
           "column": 7,
-          "line": 247,
+          "line": 273,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -11174,12 +11264,12 @@
       "sites": [
         {
           "column": 3,
-          "line": 154,
+          "line": 191,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
           "column": 3,
-          "line": 155,
+          "line": 192,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -11384,12 +11474,12 @@
       "sites": [
         {
           "column": 50,
-          "line": 156,
+          "line": 193,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
           "column": 50,
-          "line": 157,
+          "line": 194,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -11399,7 +11489,7 @@
         },
         {
           "column": 67,
-          "line": 467,
+          "line": 494,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -11749,7 +11839,7 @@
       "sites": [
         {
           "column": 3,
-          "line": 255,
+          "line": 281,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -11814,52 +11904,52 @@
         },
         {
           "column": 22,
-          "line": 80,
+          "line": 106,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 22,
-          "line": 203,
+          "line": 229,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 22,
-          "line": 301,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 29,
-          "line": 313,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 24,
-          "line": 321,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 34,
           "line": 327,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
-          "column": 26,
-          "line": 342,
+          "column": 29,
+          "line": 339,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
-          "column": 31,
-          "line": 343,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 26,
-          "line": 350,
+          "column": 24,
+          "line": 347,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 34,
-          "line": 351,
+          "line": 353,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 26,
+          "line": 368,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 31,
+          "line": 369,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 26,
+          "line": 376,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 34,
+          "line": 377,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -11979,12 +12069,12 @@
       "sites": [
         {
           "column": 7,
-          "line": 327,
+          "line": 353,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 7,
-          "line": 351,
+          "line": 377,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -12004,12 +12094,12 @@
       "sites": [
         {
           "column": 5,
-          "line": 313,
+          "line": 339,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 7,
-          "line": 343,
+          "line": 369,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -12369,12 +12459,12 @@
         },
         {
           "column": 18,
-          "line": 297,
+          "line": 323,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 48,
-          "line": 377,
+          "line": 404,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -12390,7 +12480,7 @@
       ]
     },
     {
-      "accesses": 51,
+      "accesses": 52,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "getParameter",
@@ -12411,6 +12501,11 @@
           "column": 44,
           "line": 557,
           "source": "upstream/packages/render-gl/src/glDraw.ts"
+        },
+        {
+          "column": 29,
+          "line": 119,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
           "column": 16,
@@ -12614,7 +12709,7 @@
         },
         {
           "column": 58,
-          "line": 411,
+          "line": 438,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -14584,7 +14679,7 @@
       "sites": [
         {
           "column": 67,
-          "line": 465,
+          "line": 492,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -14640,7 +14735,7 @@
       ]
     },
     {
-      "accesses": 11,
+      "accesses": 14,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "isEnabled",
@@ -14652,6 +14747,21 @@
       "runtimeEndpoint": "isEnabled",
       "runtimePath": "src/flight/_internal/backend/WebGl2Backend.hx",
       "sites": [
+        {
+          "column": 24,
+          "line": 116,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 27,
+          "line": 117,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
+        {
+          "column": 28,
+          "line": 118,
+          "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
+        },
         {
           "column": 12,
           "line": 152,
@@ -14874,7 +14984,7 @@
         },
         {
           "column": 43,
-          "line": 308,
+          "line": 334,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -15074,7 +15184,7 @@
       "sites": [
         {
           "column": 74,
-          "line": 411,
+          "line": 438,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -15179,22 +15289,22 @@
         },
         {
           "column": 9,
-          "line": 238,
+          "line": 264,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 55,
-          "line": 308,
+          "line": 334,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 62,
-          "line": 340,
+          "line": 366,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 62,
-          "line": 341,
+          "line": 367,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -15264,7 +15374,7 @@
       "sites": [
         {
           "column": 89,
-          "line": 368,
+          "line": 395,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -15519,12 +15629,12 @@
         },
         {
           "column": 24,
-          "line": 223,
+          "line": 249,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 24,
-          "line": 244,
+          "line": 270,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -15544,7 +15654,7 @@
       "sites": [
         {
           "column": 7,
-          "line": 226,
+          "line": 252,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -15584,42 +15694,42 @@
       "sites": [
         {
           "column": 27,
-          "line": 325,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 41,
-          "line": 326,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 76,
-          "line": 327,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 27,
-          "line": 347,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 59,
-          "line": 348,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 35,
-          "line": 349,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 79,
           "line": 351,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
+          "column": 41,
+          "line": 352,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 76,
+          "line": 353,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 27,
+          "line": 373,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 59,
+          "line": 374,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 35,
+          "line": 375,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 79,
+          "line": 377,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
           "column": 23,
-          "line": 356,
+          "line": 382,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -15639,7 +15749,7 @@
       "sites": [
         {
           "column": 12,
-          "line": 349,
+          "line": 375,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -15659,12 +15769,12 @@
       "sites": [
         {
           "column": 7,
-          "line": 326,
+          "line": 352,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 25,
-          "line": 348,
+          "line": 374,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -15764,17 +15874,17 @@
         },
         {
           "column": 52,
-          "line": 465,
+          "line": 492,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 52,
-          "line": 467,
+          "line": 494,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 50,
-          "line": 469,
+          "line": 496,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -15879,7 +15989,7 @@
       "sites": [
         {
           "column": 32,
-          "line": 465,
+          "line": 492,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -15909,7 +16019,7 @@
       "sites": [
         {
           "column": 32,
-          "line": 467,
+          "line": 494,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -15944,7 +16054,7 @@
         },
         {
           "column": 32,
-          "line": 469,
+          "line": 496,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -15974,7 +16084,7 @@
         },
         {
           "column": 7,
-          "line": 248,
+          "line": 274,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -16044,12 +16154,12 @@
         },
         {
           "column": 38,
-          "line": 222,
+          "line": 248,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 17,
-          "line": 247,
+          "line": 273,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -16834,12 +16944,12 @@
         },
         {
           "column": 5,
-          "line": 307,
+          "line": 333,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 7,
-          "line": 339,
+          "line": 365,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -17064,32 +17174,32 @@
         },
         {
           "column": 5,
-          "line": 309,
+          "line": 335,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 5,
-          "line": 310,
+          "line": 336,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 5,
-          "line": 311,
+          "line": 337,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 5,
-          "line": 312,
+          "line": 338,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 7,
-          "line": 340,
+          "line": 366,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 7,
-          "line": 341,
+          "line": 367,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -17429,7 +17539,7 @@
         },
         {
           "column": 20,
-          "line": 110,
+          "line": 147,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -17439,37 +17549,27 @@
         },
         {
           "column": 20,
-          "line": 306,
+          "line": 332,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 19,
-          "line": 307,
+          "line": 333,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 22,
-          "line": 309,
+          "line": 335,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 22,
-          "line": 310,
+          "line": 336,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 22,
-          "line": 311,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 22,
-          "line": 312,
-          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
-        },
-        {
-          "column": 71,
-          "line": 313,
+          "line": 337,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -17478,28 +17578,38 @@
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
-          "column": 21,
+          "column": 71,
           "line": 339,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
-          "column": 24,
-          "line": 340,
+          "column": 22,
+          "line": 364,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 21,
+          "line": 365,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 24,
-          "line": 341,
+          "line": 366,
+          "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
+        },
+        {
+          "column": 24,
+          "line": 367,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 76,
-          "line": 343,
+          "line": 369,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 18,
-          "line": 357,
+          "line": 383,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -17939,12 +18049,12 @@
         },
         {
           "column": 37,
-          "line": 310,
+          "line": 336,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 39,
-          "line": 341,
+          "line": 367,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -18039,12 +18149,12 @@
         },
         {
           "column": 37,
-          "line": 309,
+          "line": 335,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
           "column": 39,
-          "line": 340,
+          "line": 366,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -18149,7 +18259,7 @@
         },
         {
           "column": 37,
-          "line": 311,
+          "line": 337,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -18214,7 +18324,7 @@
         },
         {
           "column": 37,
-          "line": 312,
+          "line": 338,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -18279,12 +18389,12 @@
         },
         {
           "column": 22,
-          "line": 109,
+          "line": 146,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
           "column": 20,
-          "line": 112,
+          "line": 149,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -18629,7 +18739,7 @@
         },
         {
           "column": 19,
-          "line": 158,
+          "line": 195,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -20774,7 +20884,7 @@
         },
         {
           "column": 65,
-          "line": 469,
+          "line": 496,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         },
         {
@@ -20864,7 +20974,7 @@
       "sites": [
         {
           "column": 87,
-          "line": 339,
+          "line": 365,
           "source": "upstream/packages/render-gl/src/glRenderTarget.ts"
         }
       ]
@@ -20889,7 +20999,7 @@
         },
         {
           "column": 36,
-          "line": 158,
+          "line": 195,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -21274,12 +21384,12 @@
       "sites": [
         {
           "column": 3,
-          "line": 156,
+          "line": 193,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
           "column": 3,
-          "line": 157,
+          "line": 194,
           "source": "upstream/packages/render-gl/src/glFullscreenPass.ts"
         },
         {
@@ -21653,7 +21763,7 @@
       "sites": [
         {
           "column": 3,
-          "line": 165,
+          "line": 166,
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         }
       ]
@@ -21780,7 +21890,7 @@
         },
         {
           "column": 28,
-          "line": 198,
+          "line": 199,
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         },
         {
@@ -21790,27 +21900,27 @@
         },
         {
           "column": 28,
-          "line": 204,
+          "line": 205,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
         },
         {
           "column": 29,
-          "line": 331,
+          "line": 332,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
         },
         {
           "column": 29,
-          "line": 182,
+          "line": 186,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
           "column": 31,
-          "line": 197,
+          "line": 201,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
           "column": 10,
-          "line": 414,
+          "line": 418,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
@@ -21835,7 +21945,7 @@
         },
         {
           "column": 23,
-          "line": 40,
+          "line": 39,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts"
         },
         {
@@ -21860,52 +21970,52 @@
         },
         {
           "column": 23,
-          "line": 59,
+          "line": 58,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts"
         },
         {
           "column": 10,
-          "line": 81,
+          "line": 82,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 10,
-          "line": 98,
+          "line": 99,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 28,
-          "line": 251,
+          "line": 252,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 319,
+          "line": 320,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 478,
+          "line": 479,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 35,
-          "line": 649,
+          "line": 650,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 27,
-          "line": 875,
+          "line": 876,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 23,
-          "line": 1057,
+          "line": 1058,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 26,
-          "line": 179,
+          "line": 180,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
@@ -21935,7 +22045,7 @@
         },
         {
           "column": 23,
-          "line": 44,
+          "line": 43,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -22019,17 +22129,17 @@
         },
         {
           "column": 35,
-          "line": 107,
+          "line": 108,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
         },
         {
           "column": 35,
-          "line": 92,
+          "line": 96,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
           "column": 35,
-          "line": 98,
+          "line": 102,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
@@ -22059,7 +22169,7 @@
         },
         {
           "column": 35,
-          "line": 83,
+          "line": 82,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts"
         },
         {
@@ -22084,42 +22194,42 @@
         },
         {
           "column": 35,
-          "line": 103,
+          "line": 102,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts"
         },
         {
           "column": 29,
-          "line": 341,
+          "line": 342,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 29,
-          "line": 500,
+          "line": 501,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 34,
-          "line": 572,
+          "line": 573,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 33,
-          "line": 577,
+          "line": 578,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 694,
+          "line": 695,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 23,
-          "line": 164,
+          "line": 165,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
           "column": 25,
-          "line": 167,
+          "line": 168,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
@@ -22144,7 +22254,7 @@
         },
         {
           "column": 35,
-          "line": 94,
+          "line": 93,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -22178,7 +22288,7 @@
         },
         {
           "column": 25,
-          "line": 193,
+          "line": 194,
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         },
         {
@@ -22198,12 +22308,12 @@
         },
         {
           "column": 36,
-          "line": 182,
+          "line": 183,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
         },
         {
           "column": 10,
-          "line": 386,
+          "line": 390,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
@@ -22233,7 +22343,7 @@
         },
         {
           "column": 20,
-          "line": 36,
+          "line": 35,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts"
         },
         {
@@ -22248,47 +22358,47 @@
         },
         {
           "column": 20,
-          "line": 55,
+          "line": 54,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts"
         },
         {
           "column": 25,
-          "line": 245,
+          "line": 246,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 30,
-          "line": 271,
+          "line": 272,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 20,
-          "line": 375,
+          "line": 376,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 33,
-          "line": 408,
+          "line": 409,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 30,
-          "line": 426,
+          "line": 427,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 20,
-          "line": 527,
+          "line": 528,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 33,
-          "line": 626,
+          "line": 627,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 20,
-          "line": 1053,
+          "line": 1054,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -22303,22 +22413,22 @@
         },
         {
           "column": 24,
-          "line": 152,
+          "line": 153,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
           "column": 23,
-          "line": 158,
+          "line": 159,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
           "column": 23,
-          "line": 175,
+          "line": 176,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
           "column": 18,
-          "line": 246,
+          "line": 247,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
@@ -22328,7 +22438,7 @@
         },
         {
           "column": 20,
-          "line": 39,
+          "line": 38,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -22456,17 +22566,17 @@
         },
         {
           "column": 26,
-          "line": 117,
+          "line": 118,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
         },
         {
           "column": 30,
-          "line": 102,
+          "line": 106,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
           "column": 34,
-          "line": 106,
+          "line": 110,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
@@ -22496,12 +22606,12 @@
         },
         {
           "column": 18,
-          "line": 146,
+          "line": 147,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 26,
-          "line": 173,
+          "line": 174,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
@@ -22570,7 +22680,7 @@
         },
         {
           "column": 20,
-          "line": 244,
+          "line": 245,
           "source": "upstream/packages/render-wgpu/src/wgpuShader.ts"
         },
         {
@@ -22585,12 +22695,12 @@
         },
         {
           "column": 20,
-          "line": 139,
+          "line": 140,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
         },
         {
           "column": 20,
-          "line": 241,
+          "line": 245,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
@@ -22625,12 +22735,12 @@
         },
         {
           "column": 20,
-          "line": 147,
+          "line": 148,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 14,
-          "line": 215,
+          "line": 216,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
@@ -22659,17 +22769,17 @@
         },
         {
           "column": 15,
-          "line": 418,
+          "line": 423,
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         },
         {
-          "column": 27,
-          "line": 452,
+          "column": 25,
+          "line": 454,
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         },
         {
-          "column": 28,
-          "line": 458,
+          "column": 26,
+          "line": 460,
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         },
         {
@@ -22684,22 +22794,22 @@
         },
         {
           "column": 24,
-          "line": 278,
+          "line": 279,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 37,
-          "line": 414,
+          "line": 415,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 24,
-          "line": 432,
+          "line": 433,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 37,
-          "line": 632,
+          "line": 633,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         }
       ]
@@ -22768,7 +22878,7 @@
         },
         {
           "column": 18,
-          "line": 241,
+          "line": 242,
           "source": "upstream/packages/render-wgpu/src/wgpuShader.ts"
         },
         {
@@ -22798,7 +22908,7 @@
         },
         {
           "column": 18,
-          "line": 121,
+          "line": 122,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
         },
         {
@@ -22828,7 +22938,7 @@
         },
         {
           "column": 18,
-          "line": 82,
+          "line": 81,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts"
         },
         {
@@ -22853,12 +22963,12 @@
         },
         {
           "column": 18,
-          "line": 102,
+          "line": 101,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts"
         },
         {
           "column": 13,
-          "line": 192,
+          "line": 193,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
@@ -22878,7 +22988,7 @@
         },
         {
           "column": 18,
-          "line": 91,
+          "line": 90,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -22937,7 +23047,7 @@
         },
         {
           "column": 19,
-          "line": 163,
+          "line": 162,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
@@ -23002,37 +23112,37 @@
         },
         {
           "column": 33,
-          "line": 287,
+          "line": 288,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 293,
+          "line": 294,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 417,
+          "line": 418,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 33,
-          "line": 439,
+          "line": 440,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 445,
+          "line": 446,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 21,
-          "line": 553,
+          "line": 554,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 32,
-          "line": 637,
+          "line": 638,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -23124,7 +23234,7 @@
         },
         {
           "column": 39,
-          "line": 191,
+          "line": 192,
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         },
         {
@@ -23227,7 +23337,7 @@
         },
         {
           "column": 5,
-          "line": 183,
+          "line": 182,
           "source": "upstream/packages/render-wgpu/src/wgpuDraw.ts"
         },
         {
@@ -23282,17 +23392,17 @@
         },
         {
           "column": 3,
-          "line": 275,
+          "line": 276,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
         },
         {
           "column": 3,
-          "line": 162,
+          "line": 166,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
           "column": 5,
-          "line": 171,
+          "line": 175,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
@@ -23322,7 +23432,7 @@
         },
         {
           "column": 3,
-          "line": 56,
+          "line": 55,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts"
         },
         {
@@ -23347,32 +23457,32 @@
         },
         {
           "column": 3,
-          "line": 79,
+          "line": 78,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts"
         },
         {
           "column": 3,
-          "line": 313,
+          "line": 314,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 467,
+          "line": 468,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 5,
-          "line": 558,
+          "line": 559,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 683,
+          "line": 684,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 1132,
+          "line": 1133,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -23387,17 +23497,17 @@
         },
         {
           "column": 3,
-          "line": 156,
+          "line": 157,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
           "column": 3,
-          "line": 162,
+          "line": 163,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
           "column": 3,
-          "line": 355,
+          "line": 356,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
@@ -23422,7 +23532,7 @@
         },
         {
           "column": 3,
-          "line": 65,
+          "line": 64,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -23524,7 +23634,7 @@
       "sites": [
         {
           "column": 39,
-          "line": 191,
+          "line": 192,
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts"
         }
       ]
@@ -23621,17 +23731,17 @@
         },
         {
           "column": 3,
-          "line": 275,
+          "line": 276,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuParticleEmitter2D.ts"
         },
         {
           "column": 3,
-          "line": 162,
+          "line": 166,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
           "column": 5,
-          "line": 171,
+          "line": 175,
           "source": "upstream/packages/scene2d-wgpu/src/wgpuQuadBatchWriter.ts"
         },
         {
@@ -23676,7 +23786,7 @@
         },
         {
           "column": 3,
-          "line": 56,
+          "line": 55,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuDebugPrelude.ts"
         },
         {
@@ -23691,27 +23801,27 @@
         },
         {
           "column": 3,
-          "line": 79,
+          "line": 78,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMatcapPrelude.ts"
         },
         {
           "column": 3,
-          "line": 313,
+          "line": 314,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 467,
+          "line": 468,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 683,
+          "line": 684,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
           "column": 3,
-          "line": 1132,
+          "line": 1133,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -23731,17 +23841,17 @@
         },
         {
           "column": 3,
-          "line": 156,
+          "line": 157,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
           "column": 3,
-          "line": 162,
+          "line": 163,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
           "column": 3,
-          "line": 355,
+          "line": 356,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
         },
         {
@@ -23756,7 +23866,7 @@
         },
         {
           "column": 3,
-          "line": 65,
+          "line": 64,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuToonPrelude.ts"
         },
         {
@@ -23820,7 +23930,7 @@
         },
         {
           "column": 5,
-          "line": 558,
+          "line": 559,
           "source": "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
         },
         {
@@ -23843,14 +23953,14 @@
   ],
   "schemaVersion": 1,
   "summary": {
-    "accesses": 3593,
+    "accesses": 3615,
     "backendContractEndpoints": 397,
     "bindings": 10,
-    "calls": 2290,
+    "calls": 2302,
     "dynamicFallbackEndpoints": 21,
     "endpoints": 402,
-    "reads": 1078,
+    "reads": 1088,
     "writes": 225
   },
-  "upstreamCommit": "2e86cd620a53121aa6c9230215f44c6c9a3bf816"
+  "upstreamCommit": "b3bb4bf61833f7723e7033dd5c732e91a6601400"
 }

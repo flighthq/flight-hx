@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MaterialNode<Traits> = { var data:Null<NodeData>; var enabled:Bool; var kind:Kind; var name:Null<String>; @:optional var __EntityRuntimeKey:Null<NodeRuntime<Traits>>; var material:Null<Material>; var materialData:Null<MaterialData>; };
+typedef MaterialNode<Traits> = { var material:Null<Material>; var materialData:Null<MaterialData>; };

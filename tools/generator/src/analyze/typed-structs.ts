@@ -46,7 +46,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free Canvas render target',
   },
   {
-    declarationFingerprint: 'sha256:a70ee9ffbaf0c1d0fd73965076d56028db2ce78f1dda4c9006e35974be0fe408',
+    declarationFingerprint: 'sha256:e4935b11659066d8df77aaa20b30893233c77e02a633645dc163e6a9aa544f59',
     id: '@flighthq/types:interface#GlRenderTarget',
     purpose: 'reviewed escape-free WebGL render target',
   },
@@ -246,22 +246,22 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free standard PBR material properties',
   },
   {
-    declarationFingerprint: 'sha256:f012cad97304e5b646c0f93382b021b88256802524f06f31c7c237f4904454f6',
+    declarationFingerprint: 'sha256:0cc5d013eb9ecafdeb4d08c1a88a6db2734c337e645bf5418e9d7f11c3d797ea',
     id: '@flighthq/types:interface#ShadedMaterial',
     purpose: 'reviewed escape-free shaded material',
   },
   {
-    declarationFingerprint: 'sha256:0507be5be486444087da384892e2e4cc933f986b96fce65dc8cae8f6304a069f',
+    declarationFingerprint: 'sha256:a4bf57d5ee691bc8b9bbd14d7522a743ffab830d31566f22e4deef7b6d723d58',
     id: '@flighthq/types:interface#SpecularGlossinessPbrMaterial',
     purpose: 'reviewed escape-free specular-glossiness PBR material',
   },
   {
-    declarationFingerprint: 'sha256:64e437f2e5a0160d04bbc20e190fa582580cd6407ac92088e8b008e8c8d4aa9b',
+    declarationFingerprint: 'sha256:0510aa935e4804e99b66c1a10f6e1279ab32589493498ca1dbebaf24176c331f',
     id: '@flighthq/types:interface#PhongMaterial',
     purpose: 'reviewed escape-free Phong material',
   },
   {
-    declarationFingerprint: 'sha256:1ad81b90e44e80bd524b045aac2be2bc6a069473749743258d893377441f0194',
+    declarationFingerprint: 'sha256:fc92192bbae7a57eeb08054226aa4afeb15de7cf2c60739109a4b5803a61bb20',
     id: '@flighthq/types:interface#BlinnPhongMaterial',
     purpose: 'reviewed escape-free Blinn-Phong material',
   },
@@ -766,7 +766,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free path mesh',
   },
   {
-    declarationFingerprint: 'sha256:75623596e21f7fa8bdb96972f77d790d3fa4eaa91a9a238efce37fd2c87cff25',
+    declarationFingerprint: 'sha256:eb3c5963e698ab1eed121c92ac6e155716fa5e4290d28387409fcdbc96ba6647',
     id: '@flighthq/types:interface#StandardPbrMaterial',
     purpose: 'reviewed escape-free standard PBR material',
   },
@@ -941,12 +941,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free log entry',
   },
   {
-    declarationFingerprint: 'sha256:1c993883bad8944cd6da043e55da9b6014270eb750d3a0fbc840c9cd107de2b0',
+    declarationFingerprint: 'sha256:18941a2c71192e6c26ca772bcfe4339627f7d9de02702c8ca85e91f143e56b31',
     id: '@flighthq/types:interface#ToonMaterial',
     purpose: 'reviewed escape-free toon material',
   },
   {
-    declarationFingerprint: 'sha256:eb909d67f4277244c321489bb2cd34a8cb5cc3de0bfade3146aa4c09fb4b27f0',
+    declarationFingerprint: 'sha256:417acaac58c0e2858150ca2c9b932592fac6c505e7cf14fcc530a0751bbb7d65',
     id: '@flighthq/types:interface#UnlitMaterial',
     purpose: 'reviewed escape-free unlit material',
   },
@@ -956,7 +956,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free convolution effect',
   },
   {
-    declarationFingerprint: 'sha256:69801d3535461cd2a982b945b3099efbf3129d5d5152ed829a5e5ab849141c58',
+    declarationFingerprint: 'sha256:f6ce7b48e8cfcf10e0d23b4d42b6c4889c92638bfc8343e6505fae82bbb7b586',
     id: '@flighthq/types:interface#EmissiveMaterial',
     purpose: 'reviewed escape-free emissive material',
   },
@@ -986,7 +986,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free animation clip event',
   },
   {
-    declarationFingerprint: 'sha256:d4322da6611176c711c3b0f309d5c790a93ca34a66a751617060eefc278bf549',
+    declarationFingerprint: 'sha256:51fd90371ed793b2a0ea3f8784b335ed1ff2a7a7749be968805fd04754d0f5d4',
     id: '@flighthq/types:interface#BitmapTextRuntime',
     purpose: 'reviewed escape-free bitmap-text runtime',
   },
@@ -996,7 +996,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free WebGL color scale-bias instanced shader',
   },
   {
-    declarationFingerprint: 'sha256:2d0f9e3abe6c598f4700dd1dcfca1aa30bc6c7bff1a53bd74e2cbd646349b722',
+    declarationFingerprint: 'sha256:7989056728641ab50c58e89af6020dcefd9fe796a4b99bba6047a58af20c103c',
     id: '@flighthq/types:interface#LambertMaterial',
     purpose: 'reviewed escape-free Lambert material',
   },
@@ -1006,7 +1006,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free orbit-camera options',
   },
   {
-    declarationFingerprint: 'sha256:14f4588c80a91b071109c03fdcd722fb54b4ddf1673b2815a754c927e90a2fc2',
+    declarationFingerprint: 'sha256:92fef010744eaee91acad5aea117b6edee38f2f89e6546173d8728ac627f103a',
     id: '@flighthq/types:interface#WgpuShapeRendererData',
     purpose: 'reviewed escape-free WebGPU shape-renderer data',
   },
@@ -1031,7 +1031,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free WebGL shaded program',
   },
   {
-    declarationFingerprint: 'sha256:2e974f7ae0bf0f6972aa160d471db04fc37c6c6309f4c1d2f1627b6293829b1e',
+    declarationFingerprint: 'sha256:1bdd157fa0fc26ff269d89b93a87f8fdec95c934d02cdafdfd30875efb8edf63',
     id: '@flighthq/types:interface#GlShapeRendererData',
     purpose: 'reviewed escape-free WebGL shape-renderer data',
   },
@@ -1186,7 +1186,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free native text runtime',
   },
   {
-    declarationFingerprint: 'sha256:8b4467696325ff69cdbe538077a2259a9bd9f7007df08e3a49a165bf267de4e8',
+    declarationFingerprint: 'sha256:9120c1f4326056903cb3c9f42bd0a00ecc74b9e9b0656c18fdcf8047e92f363c',
     id: '@flighthq/types:interface#MatcapMaterial',
     purpose: 'reviewed escape-free matcap material',
   },
@@ -1276,7 +1276,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free native text',
   },
   {
-    declarationFingerprint: 'sha256:db7e05906a3f2b5f6884a839980220d5bdfa14ef1bb5a1d9e1899983f004d07f',
+    declarationFingerprint: 'sha256:668abe75927fb5e032cce2bf278377fd1515b63ef688c280c1aa75fc7c8b8a99',
     id: '@flighthq/types:interface#TextLabelRuntime',
     purpose: 'reviewed escape-free text-label runtime',
   },
@@ -1429,11 +1429,6 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     declarationFingerprint: 'sha256:ae22f5138e53cd2df7b843f130bdd9febf39d2cad6f130edf563bb11fc9f4431',
     id: '@flighthq/types:interface#DirectionalLightOptions',
     purpose: 'reviewed escape-free directional-light options',
-  },
-  {
-    declarationFingerprint: 'sha256:11378cc025586905b984f2649a5cbdfc57d770ba6450991d9acb4714ea46dae7',
-    id: '@flighthq/types:interface#Light',
-    purpose: 'reviewed escape-free light',
   },
   {
     declarationFingerprint: 'sha256:89b8cf222fe23605091e257b356350a8d4bf1de8cd89062a08a65cc99128f75a',
@@ -1636,22 +1631,22 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free anisotropy PBR extension',
   },
   {
-    declarationFingerprint: 'sha256:2b6e077b6b1679a2d911c05c53b37f74ef4d6522381ff80e683b663407c47559',
+    declarationFingerprint: 'sha256:68e7295714b2fbaa9741f254f5f12995e21e9b4a8db40c02677f0694edaf83f9',
     id: '@flighthq/types:interface#DepthMaterial',
     purpose: 'reviewed escape-free depth material',
   },
   {
-    declarationFingerprint: 'sha256:c70d8469431bf75424c4a4a457ce0d99ad98a217f88c1bfe6c687de4407e4031',
+    declarationFingerprint: 'sha256:f5890f2123b567fa23eb37ae03f8a1a034edb3401d767ecf0ebe2b21c4150aeb',
     id: '@flighthq/types:interface#NormalMaterial',
     purpose: 'reviewed escape-free normal material',
   },
   {
-    declarationFingerprint: 'sha256:9d8cc36eaecca7c66c0ce29413c59ec9780d206a161003fb62f06b580efd7d2b',
+    declarationFingerprint: 'sha256:4bf6ae337857c46e758e1e6d3c41b4e825691cb9c928807201900208e1193f81',
     id: '@flighthq/types:interface#VertexColorMaterial',
     purpose: 'reviewed escape-free vertex-color material',
   },
   {
-    declarationFingerprint: 'sha256:99fe447361adb31ff8434deb7f21c124b509a725ca83f0248cfb14280692d699',
+    declarationFingerprint: 'sha256:ab30087b99039af61030abaaff2f6f9edad3bd9efe3df354900c8d3b8cfc158a',
     id: '@flighthq/types:interface#WireframeMaterial',
     purpose: 'reviewed escape-free wireframe material',
   },

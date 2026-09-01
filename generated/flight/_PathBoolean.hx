@@ -19,7 +19,7 @@ import flight.types.PathOffsetJoin;
 import flight.types.PathOffsetOptions;
 import flight.types.PathWinding;
 
-typedef SweepEvent__martinezKernel = { var x:Float; var y:Float; var left:Bool; var otherEvent:SweepEvent__martinezKernel; var isSubject:Bool; var id:Float; var windingDelta:Float; };
+typedef SweepEvent__martinezKernel = { var x:Float; var y:Float; var left:Bool; var otherEvent:Null<SweepEvent__martinezKernel>; var isSubject:Bool; var id:Float; var windingDelta:Float; };
 
 typedef ArrangementSegment__martinezKernel = { var ax:Float; var ay:Float; var bx:Float; var by:Float; var isSubject:Bool; var windingDelta:Float; };
 
@@ -286,7 +286,7 @@ class _PathBoolean {
         if ((cast !_Runtime.strictEquals(next, null) : Bool)) { _PathBoolean.possibleIntersection__martinezKernel((cast event : Dynamic), (cast next : Dynamic), (cast heap : Dynamic)); }
         if ((cast !_Runtime.strictEquals(prev, null) : Bool)) { _PathBoolean.possibleIntersection__martinezKernel((cast prev : Dynamic), (cast event : Dynamic), (cast heap : Dynamic)); }
       } else {
-        var leftEvent:SweepEvent__martinezKernel = (cast event : SweepEvent__martinezKernel).otherEvent;
+        var leftEvent:SweepEvent__martinezKernel = (cast _PathBoolean.getOtherEvent__martinezKernel((cast event : Dynamic)) : SweepEvent__martinezKernel);
         var index:Float = (cast _PathBoolean.findStatus__martinezKernel((cast status : Dynamic), (cast leftEvent : Dynamic)) : Float);
         if ((cast !_Runtime.strictEquals(index, -1.0) : Bool)) {
           var prev:Null<SweepEvent__martinezKernel> = ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) ? (cast flight._internal._StaticIndex.readArray(status, (index - 1.0)) : Dynamic) : (cast null : Dynamic));
@@ -350,13 +350,17 @@ class _PathBoolean {
   }
 
   public static function createEvent__martinezKernel(x:Float, y:Float, isSubject:Bool):SweepEvent__martinezKernel {
-    return cast { x: x, y: y, left: false, otherEvent: (cast (cast null : flight._internal._Any) : SweepEvent__martinezKernel), isSubject: isSubject, id: _PathBoolean.nextEventId__martinezKernel++, windingDelta: 0.0 };
+    return cast { x: x, y: y, left: false, otherEvent: null, isSubject: isSubject, id: _PathBoolean.nextEventId__martinezKernel++, windingDelta: 0.0 };
     return cast null;
   }
 
   public static function possibleIntersection__martinezKernel(le1:SweepEvent__martinezKernel, le2:SweepEvent__martinezKernel, heap:EventHeap__martinezKernel):Void {
+    var le1Other:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
+    var le2Other:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
     var inter:Null<Array<Array<Float>>> = cast _Runtime.UNDEFINED;
-    inter = (cast _PathBoolean.segmentIntersection__martinezKernel((cast (cast le1 : SweepEvent__martinezKernel).x : Float), (cast (cast le1 : SweepEvent__martinezKernel).y : Float), (cast (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Null<Array<Array<Float>>>);
+    le1Other = (cast _PathBoolean.getOtherEvent__martinezKernel((cast le1 : Dynamic)) : SweepEvent__martinezKernel);
+    le2Other = (cast _PathBoolean.getOtherEvent__martinezKernel((cast le2 : Dynamic)) : SweepEvent__martinezKernel);
+    inter = (cast _PathBoolean.segmentIntersection__martinezKernel((cast (cast le1 : SweepEvent__martinezKernel).x : Float), (cast (cast le1 : SweepEvent__martinezKernel).y : Float), (cast (cast le1Other : SweepEvent__martinezKernel).x : Float), (cast (cast le1Other : SweepEvent__martinezKernel).y : Float), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float), (cast (cast le2Other : SweepEvent__martinezKernel).x : Float), (cast (cast le2Other : SweepEvent__martinezKernel).y : Float)) : Null<Array<Array<Float>>>);
     if ((cast _Runtime.strictEquals(inter, null) : Bool)) { return; }
     if ((cast _Runtime.strictEquals(_Runtime.field(inter, 'length'), 1.0) : Bool)) {
       var ix:Float = flight._internal._StaticIndex.readFloatArrayTyped((cast flight._internal._StaticIndex.readArray(inter, 0.0) : Array<Float>), (cast 0.0 : Float));
@@ -366,20 +370,22 @@ class _PathBoolean {
       return;
     }
     _PathBoolean.divideIfInterior__martinezKernel((cast le1 : Dynamic), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float), (cast heap : Dynamic));
-    _PathBoolean.divideIfInterior__martinezKernel((cast le1 : Dynamic), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast heap : Dynamic));
+    _PathBoolean.divideIfInterior__martinezKernel((cast le1 : Dynamic), (cast (cast le2Other : SweepEvent__martinezKernel).x : Float), (cast (cast le2Other : SweepEvent__martinezKernel).y : Float), (cast heap : Dynamic));
     _PathBoolean.divideIfInterior__martinezKernel((cast le2 : Dynamic), (cast (cast le1 : SweepEvent__martinezKernel).x : Float), (cast (cast le1 : SweepEvent__martinezKernel).y : Float), (cast heap : Dynamic));
-    _PathBoolean.divideIfInterior__martinezKernel((cast le2 : Dynamic), (cast (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast heap : Dynamic));
+    _PathBoolean.divideIfInterior__martinezKernel((cast le2 : Dynamic), (cast (cast le1Other : SweepEvent__martinezKernel).x : Float), (cast (cast le1Other : SweepEvent__martinezKernel).y : Float), (cast heap : Dynamic));
   }
 
   public static function divideIfInterior__martinezKernel(le:SweepEvent__martinezKernel, x:Float, y:Float, heap:EventHeap__martinezKernel):Void {
-    if ((cast (cast _PathBoolean.pointStrictlyInside__martinezKernel((cast (cast le : SweepEvent__martinezKernel).x : Float), (cast (cast le : SweepEvent__martinezKernel).y : Float), (cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { _PathBoolean.divideSegment__martinezKernel((cast le : Dynamic), (cast x : Float), (cast y : Float), (cast heap : Dynamic)); }
+    var other:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
+    other = (cast _PathBoolean.getOtherEvent__martinezKernel((cast le : Dynamic)) : SweepEvent__martinezKernel);
+    if ((cast (cast _PathBoolean.pointStrictlyInside__martinezKernel((cast (cast le : SweepEvent__martinezKernel).x : Float), (cast (cast le : SweepEvent__martinezKernel).y : Float), (cast (cast other : SweepEvent__martinezKernel).x : Float), (cast (cast other : SweepEvent__martinezKernel).y : Float), (cast x : Float), (cast y : Float)) : Bool) : Bool)) { _PathBoolean.divideSegment__martinezKernel((cast le : Dynamic), (cast x : Float), (cast y : Float), (cast heap : Dynamic)); }
   }
 
   public static function divideSegment__martinezKernel(le:SweepEvent__martinezKernel, x:Float, y:Float, heap:EventHeap__martinezKernel):Void {
     var right:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
     var newRight:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
     var newLeft:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
-    right = (cast le : SweepEvent__martinezKernel).otherEvent;
+    right = (cast _PathBoolean.getOtherEvent__martinezKernel((cast le : Dynamic)) : SweepEvent__martinezKernel);
     newRight = (cast _PathBoolean.createEvent__martinezKernel((cast x : Float), (cast y : Float), (cast (cast le : SweepEvent__martinezKernel).isSubject : Bool)) : SweepEvent__martinezKernel);
     newLeft = (cast _PathBoolean.createEvent__martinezKernel((cast x : Float), (cast y : Float), (cast (cast le : SweepEvent__martinezKernel).isSubject : Bool)) : SweepEvent__martinezKernel);
     ((cast newRight : SweepEvent__martinezKernel).left = false);
@@ -394,7 +400,9 @@ class _PathBoolean {
   }
 
   public static function pointOnEndpoint__martinezKernel(le:SweepEvent__martinezKernel, x:Float, y:Float):Bool {
-    return cast _Runtime.orValue(_Runtime.andValue((cast _PathBoolean.approxEqual__martinezKernel((cast (cast le : SweepEvent__martinezKernel).x : Float), (cast x : Float)) : Bool), function():Dynamic return cast (cast _PathBoolean.approxEqual__martinezKernel((cast (cast le : SweepEvent__martinezKernel).y : Float), (cast y : Float)) : Bool)), function():Dynamic return cast _Runtime.andValue((cast _PathBoolean.approxEqual__martinezKernel((cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast x : Float)) : Bool), function():Dynamic return cast (cast _PathBoolean.approxEqual__martinezKernel((cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast y : Float)) : Bool)));
+    var other:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
+    other = (cast _PathBoolean.getOtherEvent__martinezKernel((cast le : Dynamic)) : SweepEvent__martinezKernel);
+    return cast ((cast _Runtime.andValue((cast _PathBoolean.approxEqual__martinezKernel((cast (cast le : SweepEvent__martinezKernel).x : Float), (cast x : Float)) : Bool), function():Dynamic return cast (cast _PathBoolean.approxEqual__martinezKernel((cast (cast le : SweepEvent__martinezKernel).y : Float), (cast y : Float)) : Bool)) : Bool) || (cast _Runtime.andValue((cast _PathBoolean.approxEqual__martinezKernel((cast (cast other : SweepEvent__martinezKernel).x : Float), (cast x : Float)) : Bool), function():Dynamic return cast (cast _PathBoolean.approxEqual__martinezKernel((cast (cast other : SweepEvent__martinezKernel).y : Float), (cast y : Float)) : Bool)) : Bool));
     return cast null;
   }
 
@@ -440,6 +448,8 @@ class _PathBoolean {
   public static function compareSegments__martinezKernel(le1:SweepEvent__martinezKernel, le2:SweepEvent__martinezKernel):Float {
     var a1x:Float = cast _Runtime.UNDEFINED;
     var a1y:Float = cast _Runtime.UNDEFINED;
+    var le2Other:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
+    var le1Other:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
     var a2x:Float = cast _Runtime.UNDEFINED;
     var a2y:Float = cast _Runtime.UNDEFINED;
     var s1:Float = cast _Runtime.UNDEFINED;
@@ -447,12 +457,14 @@ class _PathBoolean {
     if ((cast _Runtime.strictEquals(le1, le2) : Bool)) { return cast 0.0; }
     a1x = (cast le1 : SweepEvent__martinezKernel).x;
     a1y = (cast le1 : SweepEvent__martinezKernel).y;
-    a2x = (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x;
-    a2y = (cast (cast le1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y;
+    le2Other = (cast _PathBoolean.getOtherEvent__martinezKernel((cast le2 : Dynamic)) : SweepEvent__martinezKernel);
+    le1Other = (cast _PathBoolean.getOtherEvent__martinezKernel((cast le1 : Dynamic)) : SweepEvent__martinezKernel);
+    a2x = (cast le1Other : SweepEvent__martinezKernel).x;
+    a2y = (cast le1Other : SweepEvent__martinezKernel).y;
     s1 = (cast _PathBoolean.signedArea__martinezKernel((cast a1x : Float), (cast a1y : Float), (cast a2x : Float), (cast a2y : Float), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float)) : Float);
-    s2 = (cast _PathBoolean.signedArea__martinezKernel((cast a1x : Float), (cast a1y : Float), (cast a2x : Float), (cast a2y : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Float);
+    s2 = (cast _PathBoolean.signedArea__martinezKernel((cast a1x : Float), (cast a1y : Float), (cast a2x : Float), (cast a2y : Float), (cast (cast le2Other : SweepEvent__martinezKernel).x : Float), (cast (cast le2Other : SweepEvent__martinezKernel).y : Float)) : Float);
     if ((cast ((cast !_Runtime.strictEquals(s1, 0.0) : Bool) || (cast !_Runtime.strictEquals(s2, 0.0) : Bool)) : Bool)) {
-      if ((cast ((cast _Runtime.strictEquals(a1x, (cast le2 : SweepEvent__martinezKernel).x) : Bool) && (cast _Runtime.strictEquals(a1y, (cast le2 : SweepEvent__martinezKernel).y) : Bool)) : Bool)) { return cast ((cast (cast _PathBoolean.isBelow__martinezKernel((cast le1 : Dynamic), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+      if ((cast ((cast _Runtime.strictEquals(a1x, (cast le2 : SweepEvent__martinezKernel).x) : Bool) && (cast _Runtime.strictEquals(a1y, (cast le2 : SweepEvent__martinezKernel).y) : Bool)) : Bool)) { return cast ((cast (cast _PathBoolean.isBelow__martinezKernel((cast le1 : Dynamic), (cast (cast le2Other : SweepEvent__martinezKernel).x : Float), (cast (cast le2Other : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
       if ((cast _Runtime.strictEquals(a1x, (cast le2 : SweepEvent__martinezKernel).x) : Bool)) { return cast ((cast ((cast a1y : Float) < (cast (cast le2 : SweepEvent__martinezKernel).y : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
       if ((cast _Runtime.strictEquals((cast _PathBoolean.compareEvents__martinezKernel((cast le1 : Dynamic), (cast le2 : Dynamic)) : Float), 1.0) : Bool)) { return cast ((cast (cast _PathBoolean.isBelow__martinezKernel((cast le2 : Dynamic), (cast a1x : Float), (cast a1y : Float)) : Bool) : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)); }
       return cast ((cast (cast _PathBoolean.isBelow__martinezKernel((cast le1 : Dynamic), (cast (cast le2 : SweepEvent__martinezKernel).x : Float), (cast (cast le2 : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
@@ -464,20 +476,34 @@ class _PathBoolean {
   }
 
   public static function isBelow__martinezKernel(le:SweepEvent__martinezKernel, x:Float, y:Float):Bool {
-    return cast ((cast (cast le : SweepEvent__martinezKernel).left : Bool) ? (cast ((cast (cast _PathBoolean.signedArea__martinezKernel((cast (cast le : SweepEvent__martinezKernel).x : Float), (cast (cast le : SweepEvent__martinezKernel).y : Float), (cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast x : Float), (cast y : Float)) : Float) : Float) > (cast 0.0 : Float)) : Dynamic) : (cast ((cast (cast _PathBoolean.signedArea__martinezKernel((cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast le : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast (cast le : SweepEvent__martinezKernel).x : Float), (cast (cast le : SweepEvent__martinezKernel).y : Float), (cast x : Float), (cast y : Float)) : Float) : Float) > (cast 0.0 : Float)) : Dynamic));
+    var other:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
+    other = (cast _PathBoolean.getOtherEvent__martinezKernel((cast le : Dynamic)) : SweepEvent__martinezKernel);
+    return cast ((cast (cast le : SweepEvent__martinezKernel).left : Bool) ? (cast ((cast (cast _PathBoolean.signedArea__martinezKernel((cast (cast le : SweepEvent__martinezKernel).x : Float), (cast (cast le : SweepEvent__martinezKernel).y : Float), (cast (cast other : SweepEvent__martinezKernel).x : Float), (cast (cast other : SweepEvent__martinezKernel).y : Float), (cast x : Float), (cast y : Float)) : Float) : Float) > (cast 0.0 : Float)) : Dynamic) : (cast ((cast (cast _PathBoolean.signedArea__martinezKernel((cast (cast other : SweepEvent__martinezKernel).x : Float), (cast (cast other : SweepEvent__martinezKernel).y : Float), (cast (cast le : SweepEvent__martinezKernel).x : Float), (cast (cast le : SweepEvent__martinezKernel).y : Float), (cast x : Float), (cast y : Float)) : Float) : Float) > (cast 0.0 : Float)) : Dynamic));
     return cast null;
   }
 
   public static function compareEvents__martinezKernel(e1:SweepEvent__martinezKernel, e2:SweepEvent__martinezKernel):Float {
+    var e1Other:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
+    var e2Other:SweepEvent__martinezKernel = cast _Runtime.UNDEFINED;
     var area:Float = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals((cast e1 : SweepEvent__martinezKernel).x, (cast e2 : SweepEvent__martinezKernel).x) : Bool)) { return cast ((cast ((cast (cast e1 : SweepEvent__martinezKernel).x : Float) < (cast (cast e2 : SweepEvent__martinezKernel).x : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
     if ((cast !_Runtime.strictEquals((cast e1 : SweepEvent__martinezKernel).y, (cast e2 : SweepEvent__martinezKernel).y) : Bool)) { return cast ((cast ((cast (cast e1 : SweepEvent__martinezKernel).y : Float) < (cast (cast e2 : SweepEvent__martinezKernel).y : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
     if ((cast _Runtime.strictEquals(e1, e2) : Bool)) { return cast 0.0; }
     if ((cast !_Runtime.strictEquals((cast e1 : SweepEvent__martinezKernel).left, (cast e2 : SweepEvent__martinezKernel).left) : Bool)) { return cast ((cast (cast e1 : SweepEvent__martinezKernel).left : Bool) ? (cast 1.0 : Dynamic) : (cast -1.0 : Dynamic)); }
-    area = (cast _PathBoolean.signedArea__martinezKernel((cast (cast e1 : SweepEvent__martinezKernel).x : Float), (cast (cast e1 : SweepEvent__martinezKernel).y : Float), (cast (cast (cast e1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast e1 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float), (cast (cast (cast e2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast e2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Float);
-    if ((cast !_Runtime.strictEquals(area, 0.0) : Bool)) { return cast ((cast (cast _PathBoolean.isBelow__martinezKernel((cast e1 : Dynamic), (cast (cast (cast e2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).x : Float), (cast (cast (cast e2 : SweepEvent__martinezKernel).otherEvent : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
+    e1Other = (cast _PathBoolean.getOtherEvent__martinezKernel((cast e1 : Dynamic)) : SweepEvent__martinezKernel);
+    e2Other = (cast _PathBoolean.getOtherEvent__martinezKernel((cast e2 : Dynamic)) : SweepEvent__martinezKernel);
+    area = (cast _PathBoolean.signedArea__martinezKernel((cast (cast e1 : SweepEvent__martinezKernel).x : Float), (cast (cast e1 : SweepEvent__martinezKernel).y : Float), (cast (cast e1Other : SweepEvent__martinezKernel).x : Float), (cast (cast e1Other : SweepEvent__martinezKernel).y : Float), (cast (cast e2Other : SweepEvent__martinezKernel).x : Float), (cast (cast e2Other : SweepEvent__martinezKernel).y : Float)) : Float);
+    if ((cast !_Runtime.strictEquals(area, 0.0) : Bool)) { return cast ((cast (cast _PathBoolean.isBelow__martinezKernel((cast e1 : Dynamic), (cast (cast e2Other : SweepEvent__martinezKernel).x : Float), (cast (cast e2Other : SweepEvent__martinezKernel).y : Float)) : Bool) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
     if ((cast !_Runtime.strictEquals((cast e1 : SweepEvent__martinezKernel).isSubject, (cast e2 : SweepEvent__martinezKernel).isSubject) : Bool)) { return cast ((cast (cast e1 : SweepEvent__martinezKernel).isSubject : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic)); }
     return cast ((cast ((cast (cast e1 : SweepEvent__martinezKernel).id : Float) < (cast (cast e2 : SweepEvent__martinezKernel).id : Float)) : Bool) ? (cast -1.0 : Dynamic) : (cast 1.0 : Dynamic));
+    return cast null;
+  }
+
+  public static function getOtherEvent__martinezKernel(event:SweepEvent__martinezKernel):SweepEvent__martinezKernel {
+    if ((cast _Runtime.strictEquals((cast event : SweepEvent__martinezKernel).otherEvent, null) : Bool)) {
+      _Runtime.throwValue(_Runtime.error('Sweep event entered the Martinez queue before its endpoint pair was linked'));
+    }
+    return cast (cast event : SweepEvent__martinezKernel).otherEvent;
     return cast null;
   }
 

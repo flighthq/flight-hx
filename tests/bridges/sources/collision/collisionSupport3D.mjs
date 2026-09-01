@@ -5,6 +5,8 @@ const api = compiled.flight._Collision;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const clearCollisionPairTests3D = api.clearCollisionPairTests3D;
+export const clearCollisionSupports3D = api.clearCollisionSupports3D;
 export const getCollisionPairTest3D = api.getCollisionPairTest3D;
 export const getCollisionSupport3D = api.getCollisionSupport3D;
 export const registerBuiltInCollisionSupports3D = api.registerBuiltInCollisionSupports3D;

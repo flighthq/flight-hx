@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef VertexColorMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var tint:Float; };
+typedef VertexColorMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Dynamic; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var tint:Float; };

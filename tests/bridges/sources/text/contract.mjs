@@ -3,6 +3,8 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './enableTextLabelGuards.mjs';
+export * from './explainTextLabelContent.mjs';
 export * from './nativeText.mjs';
 export * from './richText.mjs';
 export * from './textFormatFont.mjs';

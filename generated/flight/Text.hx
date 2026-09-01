@@ -17,6 +17,7 @@ import flight.types.TextFormat;
 import flight.types.TextFormatAlign;
 import flight.types.TextFormatRange;
 import flight.types.TextLabel;
+import flight.types.TextLabelContentExplanation;
 import flight.types.TextLayoutParams;
 import flight.types.TextLayoutResult;
 import flight.types.TextLineMetrics;
@@ -74,6 +75,10 @@ class Text {
     return cast null;
   }
 
+  public static function disableTextLabelGuards():Void {
+    Facade_Text_flight__Text.disableTextLabelGuards();
+  }
+
   public static function dispatchRichTextLinkAtPoint(source:RichText, x:Float, y:Float):Null<String> {
     return cast Facade_Text_flight__Text.dispatchRichTextLinkAtPoint(source, x, y);
     return cast null;
@@ -85,6 +90,15 @@ class Text {
 
   public static function enableTextFieldSignals(source:RichText):TextFieldSignals {
     return cast Facade_Text_flight__Text.enableTextFieldSignals(source);
+    return cast null;
+  }
+
+  public static function enableTextLabelGuards():Void {
+    Facade_Text_flight__Text.enableTextLabelGuards();
+  }
+
+  public static function explainTextLabelContent(source:TextLabel):TextLabelContentExplanation {
+    return cast Facade_Text_flight__Text.explainTextLabelContent(source);
     return cast null;
   }
 

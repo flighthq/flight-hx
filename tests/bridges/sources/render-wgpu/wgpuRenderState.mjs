@@ -15,6 +15,7 @@ export const destroyWgpuRenderState = api.destroyWgpuRenderState;
 export const getWgpuColorAdjustmentMaterialFeature = api.getWgpuColorAdjustmentMaterialFeature;
 export const getWgpuColorAdjustmentMaterialFeatureGuard = api.getWgpuColorAdjustmentMaterialFeatureGuard;
 export const getWgpuDeviceRuntime = api.getWgpuDeviceRuntime;
+export const getWgpuRenderStateDeviceResources = api.getWgpuRenderStateDeviceResources;
 export const getWgpuRenderStateRuntime = api.getWgpuRenderStateRuntime;
 export const getWgpuSampler = api.getWgpuSampler;
 export const isWgpuSupported = api.isWgpuSupported;

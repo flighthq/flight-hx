@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef DeviceBackend = { var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; };
+typedef DeviceBackend = { var getCapabilities:DeviceCapabilities->DeviceCapabilities; var getDisplayMetrics:DeviceDisplayMetrics->DeviceDisplayMetrics; var getId:Void->String; var getInfo:DeviceInfo->DeviceInfo; var getSafeAreaInsets:SafeAreaInsets->SafeAreaInsets; @:optional var refresh:Void->Void; };

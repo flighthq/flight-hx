@@ -19,22 +19,6 @@ export default definePatches([
   },
   {
     expect: {
-      astHash: 'sha256:4fd73157da56cf435825260a527f7c6efb36a59b791b2cd63d2b628014b24597',
-      kind: 'function',
-    },
-    fragment: 'tools/generator/patches/bodies/render-gl/drawGlFullscreenPass.hx',
-    id: 'render-gl.fullscreen-pass.ignore-native-window-depth',
-    operation: 'replaceBody',
-    reason:
-      'Lime retains native window depth across presented frames, so fullscreen passes temporarily disable depth testing and writes to match WebGL drawing-buffer behavior.',
-    target: {
-      export: 'drawGlFullscreenPass',
-      package: '@flighthq/render-gl',
-      source: 'upstream/packages/render-gl/src/glFullscreenPass.ts',
-    },
-  },
-  {
-    expect: {
       astHash: 'sha256:8f338bafdcbe00d549a1c7dde5ccd4b8f9ced16d370fb2ef500efd6e5e5efbd1',
       kind: 'function',
     },

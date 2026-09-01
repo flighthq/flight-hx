@@ -5,4 +5,6 @@ const api = compiled.flight._BitmapText;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const refreshBitmapTextGlyphLayout = api.refreshBitmapTextGlyphLayout;
+export const setBitmapTextLayoutGuard = api.setBitmapTextLayoutGuard;
 export const updateBitmapText = api.updateBitmapText;

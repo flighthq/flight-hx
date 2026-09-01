@@ -60,12 +60,6 @@ class _Device {
   }
 
   public static function refreshDeviceInfo(host:HasSystemDevice):Void {
-    var backend:DeviceBackend = cast _Runtime.UNDEFINED;
-    var maybeRefreshable:{ @:optional var refresh:Null<Void->Void>; } = cast _Runtime.UNDEFINED;
-    backend = (cast (cast host : HasSystemDevice).system : { var device:DeviceBackend; }).device;
-    maybeRefreshable = (cast (cast backend : flight._internal._Any) : { @:optional var refresh:Void->Void; });
-    if ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast maybeRefreshable : { @:optional var refresh:Null<Void->Void>; }).refresh), 'function') : Bool)) {
-      (cast maybeRefreshable : { @:optional var refresh:Null<Void->Void>; }).refresh();
-    }
+    _Runtime.callOptionalValue((cast (cast (cast host : HasSystemDevice).system : { var device:DeviceBackend; }).device : DeviceBackend).refresh, cast ([] : Array<Dynamic>));
   }
 }

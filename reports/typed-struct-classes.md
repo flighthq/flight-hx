@@ -1,33 +1,33 @@
 # Typed Struct Class Feasibility Audit
 
-Upstream commit: `2e86cd620a53121aa6c9230215f44c6c9a3bf816`
+Upstream commit: `b3bb4bf61833f7723e7033dd5c732e91a6601400`
 
 This is a construction, structural-flow, and observability census. It does not enable class emission.
 
 | Metric | Count |
 | --- | ---: |
-| Eligible canonical schemas | 2159 |
-| Direct field accesses | 25827 |
-| Declared optional fields | 2508 |
+| Eligible canonical schemas | 2161 |
+| Direct field accesses | 25837 |
+| Declared optional fields | 2543 |
 | Declared required-undefined fields | 3 |
-| Production object literals | 2297 |
-| Production object literals omitting optional fields | 512 |
+| Production object literals | 2295 |
+| Production object literals omitting optional fields | 528 |
 | Production object literals with spread | 230 |
 | Production object literals with computed keys | 8 |
-| Test object literals | 6701 |
-| Cross-schema transfers | 1912 |
-| Anonymous structural transfers | 202 |
-| Dynamic ingresses | 69 |
+| Test object literals | 6734 |
+| Cross-schema transfers | 1927 |
+| Anonymous structural transfers | 203 |
+| Dynamic ingresses | 61 |
 | Production enumerations | 11 |
 | Production JSON serializations | 6 |
 | Production object rests | 0 |
 | Production object spreads | 135 |
-| Exported input signature references | 10282 |
-| Exported output signature references | 2351 |
-| Vitest oracle observations | 383 |
+| Exported input signature references | 10289 |
+| Exported output signature references | 2354 |
+| Vitest oracle observations | 384 |
 | Mechanically compatible schemas | 1586 |
-| Schemas requiring normalization | 573 |
-| Schemas requiring observability review | 303 |
+| Schemas requiring normalization | 575 |
+| Schemas requiring observability review | 309 |
 
 Counts below are per canonical schema. Exact source locations and related schema identities are in `typed-struct-classes.json`.
 
@@ -203,11 +203,11 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#BitmapResizeOptions` | 0 | 3 | 3 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#BitmapShadowBlurOptions` | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#BitmapSharpenOptions` | 0 | 4 | 4 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#BitmapText` | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#BitmapTextData` | 25 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#BitmapTextOptions` | 10 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 28 | 0 | yes | — | — |
+| `@flighthq/types:interface#BitmapText` | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#BitmapTextData` | 27 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#BitmapTextOptions` | 10 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 46 | 0 | yes | — | — |
 | `@flighthq/types:interface#BitmapTextPage` | 39 | 4 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#BitmapTextRuntime` | 18 | 39 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#BitmapTextRuntime` | 23 | 41 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#BlendEffect` | 9 | 4 | 2 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 3 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#BlinnPhongMaterial` | 43 | 14 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#BloomEffect` | 0 | 5 | 4 | 0 | 1 | 0 | 1 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 1 | 10 | 2 | no | `cross-schema-transfer`, `object-literal-spread` | `object-spread` |
@@ -240,7 +240,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#CanvasRenderOptions` | 0 | 7 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 6 | 0 | yes | — | — |
 | `@flighthq/types:interface#CanvasRenderRegistries` | 0 | 10 | 7 | 0 | 3 | 1 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 2 | 1 | 1 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#CanvasRenderState` | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 92 | 5 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#CanvasRenderStateRuntime` | 34 | 16 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#CanvasRenderStateRuntime` | 34 | 17 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#CanvasRenderSurface` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 5 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#CanvasRenderSurfaceCreator` | 0 | 2 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 4 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-computed` | — |
 | `@flighthq/types:interface#CanvasRenderSurfaceOptions` | 0 | 4 | 1 | 0 | 5 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 6 | 0 | yes | — | `optional-omission` |
@@ -410,17 +410,17 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#DebugSubsystemHooks` | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 13 | 0 | yes | — | — |
 | `@flighthq/types:interface#DecodedImage` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 6 | 0 | yes | — | — |
 | `@flighthq/types:interface#DepthMaterial` | 8 | 8 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
-| `@flighthq/types:interface#DeviceBackend` | 0 | 5 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 1 | no | `cross-schema-transfer` | `object-spread` |
+| `@flighthq/types:interface#DeviceBackend` | 0 | 6 | 1 | 0 | 2 | 2 | 0 | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 1 | no | `cross-schema-transfer` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#DeviceCapabilities` | 6 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#DeviceDisplayMetrics` | 14 | 7 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#DeviceInfo` | 50 | 25 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#DirectionalBlurEffect` | 8 | 4 | 3 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#DirectionalLight` | 24 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#DirectionalLightOptions` | 7 | 7 | 7 | 0 | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 32 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#DirectionalLightOptions` | 7 | 7 | 7 | 0 | 2 | 2 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 33 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#DirectoryOpenDialogBackend` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#DisplacementEffect` | 0 | 4 | 3 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 2 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#DisplayObject` | 12 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 3 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#DisplayObjectRuntime` | 0 | 38 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#DisplayObjectRuntime` | 0 | 39 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#DissolveModifier` | 17 | 7 | 3 | 0 | 1 | 1 | 0 | 0 | 1 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#DissolveModifierOptions` | 6 | 5 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 13 | 0 | yes | — | — |
 | `@flighthq/types:interface#DitherEffect` | 0 | 2 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
@@ -429,7 +429,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#DomRenderOptions` | 0 | 5 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#DomRenderRegistries` | 9 | 9 | 5 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#DomRenderState` | 0 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 34 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#DomRenderStateRuntime` | 57 | 19 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#DomRenderStateRuntime` | 57 | 20 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#DomScene2DRectangle` | 0 | 4 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#DownloadedUpdate` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#DragForce` | 3 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 2 | 0 | yes | — | — |
@@ -473,8 +473,8 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#EmissiveMaterial` | 20 | 9 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#EmissiveModifier` | 26 | 7 | 3 | 0 | 1 | 1 | 0 | 0 | 1 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#EmissiveModifierOptions` | 6 | 5 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 37 | 0 | yes | — | — |
-| `@flighthq/types:interface#Entity` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 127 | 1 | 2 | 0 | 0 | 0 | 4 | 10 | 74 | 0 | 4 | no | `anonymous-structural-transfer`, `cross-schema-transfer`, `dynamic-ingress` | `enumeration`, `object-spread` |
-| `@flighthq/types:interface#EntityRuntime` | 0 | 1 | 0 | 0 | 9 | 9 | 0 | 0 | 0 | 13 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 1 | 1 | no | `anonymous-structural-transfer`, `cross-schema-transfer` | `strict-equality` |
+| `@flighthq/types:interface#Entity` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 127 | 1 | 2 | 0 | 0 | 0 | 4 | 12 | 74 | 0 | 4 | no | `anonymous-structural-transfer`, `cross-schema-transfer`, `dynamic-ingress` | `enumeration`, `object-spread` |
+| `@flighthq/types:interface#EntityRuntime` | 0 | 2 | 1 | 0 | 9 | 9 | 0 | 0 | 9 | 13 | 6 | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 1 | 1 | no | `anonymous-structural-transfer`, `cross-schema-transfer` | `optional-omission`, `strict-equality` |
 | `@flighthq/types:interface#Environment` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | 2 | 13 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#EnvironmentOptions` | 0 | 2 | 2 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 0 | yes | — | — |
 | `@flighthq/types:interface#EnvReflectModifier` | 0 | 6 | 3 | 0 | 1 | 1 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | no | `cross-schema-transfer` | — |
@@ -489,7 +489,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#FileDialogFilter` | 7 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | yes | — | — |
 | `@flighthq/types:interface#FileDialogHandle` | 8 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 1 | no | `cross-schema-transfer` | `json-serialization` |
 | `@flighthq/types:interface#FileDialogHandleOperations` | 0 | 4 | 4 | 0 | 2 | 2 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#FileDialogHandleRuntime` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#FileDialogHandleRuntime` | 0 | 3 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#FileEntry` | 2 | 3 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#FileLogSink` | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `object-literal-computed` | — |
 | `@flighthq/types:interface#FileLogSinkDestroyOutcome` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 | yes | — | `object-spread` |
@@ -510,7 +510,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#FlightDocument` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 1 | 7 | 6 | yes | — | `object-spread` |
 | `@flighthq/types:interface#FlightDocumentFieldSchema` | 0 | 4 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#FlightDocumentNode` | 0 | 3 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 70 | 0 | no | `anonymous-structural-transfer` | — |
-| `@flighthq/types:interface#FlightDocumentNodeSchema` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | yes | — | — |
+| `@flighthq/types:interface#FlightDocumentNodeSchema` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | 0 | yes | — | — |
 | `@flighthq/types:interface#FlightDocumentRefusalExplanation` | 0 | 10 | 0 | 0 | 6 | 2 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 9 | 0 | 0 | no | `object-literal-spread` | `object-spread` |
 | `@flighthq/types:interface#FlightDocumentResourceDescriptor` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | yes | — | — |
 | `@flighthq/types:interface#FlightDocumentResourceResolverRegistry` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 1 | 0 | yes | — | — |
@@ -564,7 +564,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#GlContext` | 0 | 236 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 38 | 1 | 0 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#GlContextLossSignals` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlContextOptions` | 0 | 3 | 3 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#GlContextRuntime` | 0 | 26 | 8 | 0 | 1 | 1 | 0 | 0 | 1 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
+| `@flighthq/types:interface#GlContextRuntime` | 0 | 27 | 9 | 0 | 1 | 1 | 0 | 0 | 1 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#GlContextState` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#GlCustomMaterialShaderSource` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 3 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlDebugDefineKey` | 0 | 3 | 1 | 0 | 3 | 2 | 1 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | 5 | 2 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
@@ -601,10 +601,10 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#GlRenderOptions` | 0 | 6 | 6 | 0 | 5 | 4 | 1 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | 7 | 0 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#GlRenderRegistries` | 0 | 24 | 7 | 0 | 3 | 1 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 2 | 1 | 4 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#GlRenderState` | 0 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 375 | 4 | 1 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#GlRenderStateRuntime` | 422 | 44 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#GlRenderStateRuntime` | 430 | 45 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#GlRenderStats` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlRenderSurfaceProvider` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 9 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlRenderTarget` | 302 | 18 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 130 | 15 | 8 | 0 | no | `anonymous-structural-transfer` | — |
+| `@flighthq/types:interface#GlRenderTarget` | 288 | 18 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | 0 | 0 | 0 | 130 | 15 | 2 | 0 | no | `anonymous-structural-transfer`, `cross-schema-transfer` | — |
 | `@flighthq/types:interface#GlRenderTargetPool` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlRenderTextureEntry` | 24 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlRenderTextureExplanation` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
@@ -623,7 +623,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#GlShapeMeshBinding` | 11 | 6 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlShapeMeshColorScaleBiasShader` | 9 | 7 | 1 | 0 | 2 | 2 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#GlShapeMeshResources` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlShapeRendererData` | 16 | 7 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 2 | 1 | 1 | 0 | no | `dynamic-ingress` | — |
+| `@flighthq/types:interface#GlShapeRendererData` | 16 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#GlSkinPaletteTexture` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 3 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlTextureDescriptor` | 0 | 8 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlTextureRealization` | 0 | 2 | 0 | 0 | 15 | 15 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 14 | 0 | no | `anonymous-structural-transfer` | — |
@@ -677,20 +677,20 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#GlViewportRect` | 0 | 4 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#GlWireframeProgram` | 0 | 18 | 12 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#GlWireframeUpload` | 10 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlyphAtlas` | 8 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 10 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#GlyphAtlas` | 9 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 11 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlyphAtlasEntryExplanation` | 0 | 6 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlyphAtlasOptions` | 13 | 11 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 52 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlyphAtlasRuntime` | 96 | 20 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#GlyphAtlasOptions` | 13 | 11 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 63 | 0 | yes | — | — |
+| `@flighthq/types:interface#GlyphAtlasRuntime` | 100 | 21 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlyphAtlasShelf` | 6 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlyphEntry` | 53 | 8 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 10 | 0 | yes | — | — |
+| `@flighthq/types:interface#GlyphEntry` | 53 | 8 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 12 | 1 | yes | — | `object-spread` |
 | `@flighthq/types:interface#GlyphExtents` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 4 | 1 | yes | — | `object-spread` |
-| `@flighthq/types:interface#GlyphMetrics` | 11 | 3 | 0 | 0 | 6 | 5 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 12 | 0 | no | `object-literal-spread` | `object-spread` |
+| `@flighthq/types:interface#GlyphMetrics` | 11 | 3 | 0 | 0 | 6 | 5 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 13 | 0 | no | `object-literal-spread` | `object-spread` |
 | `@flighthq/types:interface#GlyphOutlineMetrics` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlyphOutlineSource` | 0 | 4 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 3 | 1 | 0 | yes | — | — |
-| `@flighthq/types:interface#GlyphRasterizedBitmap` | 27 | 6 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 0 | yes | — | — |
+| `@flighthq/types:interface#GlyphRasterizedBitmap` | 27 | 6 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 15 | 0 | yes | — | — |
 | `@flighthq/types:interface#GlyphRasterizeOptions` | 9 | 4 | 2 | 0 | 5 | 4 | 1 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 17 | 0 | no | `object-literal-spread` | `optional-omission` |
-| `@flighthq/types:interface#GlyphRasterizerBackend` | 0 | 2 | 1 | 0 | 3 | 3 | 0 | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 4 | 25 | 2 | no | `cross-schema-transfer` | `object-spread`, `optional-omission` |
-| `@flighthq/types:interface#GlyphSource` | 0 | 4 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 5 | 0 | yes | — | — |
+| `@flighthq/types:interface#GlyphRasterizerBackend` | 0 | 2 | 1 | 0 | 3 | 3 | 0 | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 4 | 28 | 2 | no | `cross-schema-transfer` | `object-spread`, `optional-omission` |
+| `@flighthq/types:interface#GlyphSource` | 0 | 5 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 6 | 0 | yes | — | — |
 | `@flighthq/types:interface#GodRaysEffect` | 26 | 8 | 7 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | 1 | 4 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#GradientBevelEffect` | 34 | 12 | 8 | 0 | 1 | 0 | 1 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 1 | 3 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#GradientGlowEffect` | 25 | 9 | 5 | 0 | 1 | 0 | 1 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
@@ -712,8 +712,8 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#HasAppAllWindowsClosed` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#HasAppBadge` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#HasAppDock` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#HasAppearance` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 2 | 0 | 0 | 0 | 0 | 7 | 0 | 0 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | — |
-| `@flighthq/types:interface#HasAppearanceRuntime` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#HasAppearance` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 7 | 0 | 0 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | — |
+| `@flighthq/types:interface#HasAppearanceRuntime` | 0 | 6 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#HasAppExitSubscription` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#HasAppFocus` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#HasAppHiddenQuery` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
@@ -738,7 +738,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#HasAppVisibilityQuery` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#HasBlendMode` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#HasBoundsRectangle` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#HasBoundsRectangleRuntime` | 18 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#HasBoundsRectangleRuntime` | 18 | 7 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#HasClip` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#HasClipboardBookmark` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 4 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#HasClipboardChange` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
@@ -845,9 +845,9 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#HasTextSegmenter` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#HasTextShaper` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#HasTransform2D` | 77 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 33 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#HasTransform2DRuntime` | 27 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#HasTransform2DRuntime` | 27 | 7 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#HasTransform3D` | 15 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#HasTransform3DRuntime` | 24 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#HasTransform3DRuntime` | 24 | 5 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 5 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#HasTrayBalloon` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#HasTrayBalloonEvents` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#HasTrayBounds` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
@@ -910,9 +910,9 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#HostUpdaterCapabilities` | 0 | 1 | 1 | 0 | 5 | 5 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#HtmlView` | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#HtmlViewData` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#HtmlViewRuntime` | 0 | 38 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#HtmlViewRuntime` | 0 | 39 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#HueSaturationAdjustment` | 0 | 5 | 3 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `object-literal-spread` | — |
-| `@flighthq/types:interface#Image` | 0 | 7 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 12 | 49 | 0 | no | `cross-schema-transfer`, `object-literal-computed` | — |
+| `@flighthq/types:interface#Image` | 0 | 7 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 12 | 50 | 0 | no | `cross-schema-transfer`, `object-literal-computed` | — |
 | `@flighthq/types:interface#ImageBackend` | 0 | 2 | 1 | 0 | 3 | 3 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 9 | 4 | yes | — | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#ImageBitmapComposition` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | yes | — | — |
 | `@flighthq/types:interface#ImageDecodeOptions` | 0 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — | — |
@@ -956,7 +956,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#KuwaharaEffect` | 0 | 2 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#LambertMaterial` | 18 | 10 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#LassoSelection` | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | no | `object-literal-computed` | — |
-| `@flighthq/types:interface#LassoSelectionRuntime` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#LassoSelectionRuntime` | 0 | 4 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#LayoutNode` | 30 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 17 | yes | — | `object-spread` |
 | `@flighthq/types:interface#LayoutResolutionExplanation` | 0 | 6 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#LayoutState` | 28 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | 1 | 0 | 0 | yes | — | — |
@@ -975,7 +975,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#LibgdxSerializeOptions` | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#LifecycleBackend` | 0 | 4 | 2 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 6 | 0 | yes | — | — |
 | `@flighthq/types:interface#LiftGammaGainAdjustment` | 0 | 5 | 3 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `object-literal-spread` | — |
-| `@flighthq/types:interface#Light` | 11 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 1 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 1 | 0 | no | `anonymous-structural-transfer`, `cross-schema-transfer` | — |
+| `@flighthq/types:interface#Light` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 1 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 1 | 0 | no | `anonymous-structural-transfer`, `cross-schema-transfer` | — |
 | `@flighthq/types:interface#ListController` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#ListControllerOptions` | 0 | 7 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 8 | 0 | yes | — | — |
 | `@flighthq/types:interface#ListControllerSignals` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
@@ -1031,9 +1031,9 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#MarkupTagEffect` | 0 | 3 | 3 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#MarkupTagRegistry` | 0 | 3 | 2 | 0 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#MarqueeSelection` | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | no | `object-literal-computed` | — |
-| `@flighthq/types:interface#MarqueeSelectionRuntime` | 0 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#MarqueeSelectionRuntime` | 0 | 6 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#MatcapMaterial` | 13 | 8 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
-| `@flighthq/types:interface#Material` | 0 | 2 | 1 | 0 | 5 | 5 | 0 | 0 | 5 | 2 | 0 | 6 | 0 | 0 | 0 | 0 | 19 | 5 | 6 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | `optional-omission` |
+| `@flighthq/types:interface#Material` | 0 | 2 | 1 | 0 | 5 | 5 | 0 | 0 | 5 | 3 | 0 | 6 | 0 | 0 | 0 | 0 | 19 | 5 | 6 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | `optional-omission` |
 | `@flighthq/types:interface#Matrix` | 806 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 95 | 9 | 1 | 2 | no | `cross-schema-transfer`, `dynamic-ingress` | `strict-equality` |
 | `@flighthq/types:interface#Matrix3` | 51 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 41 | 4 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#Matrix4` | 133 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 89 | 9 | 1 | 0 | no | `cross-schema-transfer` | — |
@@ -1064,14 +1064,14 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#MenuSelect` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#MenuSelectBackend` | 0 | 1 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#MenuSignals` | 2 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Mesh` | 80 | 13 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 7 | 0 | 0 | 0 | 0 | 11 | 2 | 0 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | — |
+| `@flighthq/types:interface#Mesh` | 79 | 13 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 6 | 0 | 0 | 0 | 0 | 11 | 2 | 0 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | — |
 | `@flighthq/types:interface#MeshAttachment2D` | 0 | 7 | 3 | 0 | 6 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 5 | 0 | yes | — | — |
 | `@flighthq/types:interface#MeshDeformRuntime` | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#MeshGeometry` | 329 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 76 | 28 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#MeshGeometryFromAttributesOptions` | 0 | 4 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 7 | 0 | yes | — | — |
 | `@flighthq/types:interface#MeshGeometryGlData` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#MeshGeometryOptions` | 7 | 5 | 3 | 0 | 11 | 11 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 137 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#MeshGeometryRuntime` | 18 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#MeshGeometryRuntime` | 18 | 9 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 14 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#MeshGeometryWgpuData` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | no | `dynamic-ingress` | — |
 | `@flighthq/types:interface#MeshMorph` | 12 | 2 | 0 | 0 | 3 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 25 | 0 | yes | — | — |
 | `@flighthq/types:interface#MeshMorphBindPose` | 11 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 | 0 | yes | — | — |
@@ -1110,7 +1110,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#MorphShapeLineEndpoint` | 9 | 3 | 1 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#MorphShapeLinePaintBinding` | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#MorphShapePathBinding` | 6 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#MorphShapeRuntime` | 0 | 39 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#MorphShapeRuntime` | 0 | 40 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#MorphShapeTexturePaintBinding` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#MorphTarget` | 0 | 3 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 24 | 0 | yes | — | — |
 | `@flighthq/types:interface#MotionBlurEffect` | 0 | 3 | 2 | 0 | 1 | 0 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 1 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
@@ -1118,24 +1118,24 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#MotionReading` | 38 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#MovieClip` | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#MovieClipData` | 32 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#MovieClipRuntime` | 0 | 39 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#MovieClipRuntime` | 0 | 40 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#NativeText` | 12 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#NativeTextData` | 26 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#NativeTextRuntime` | 13 | 41 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#NativeTextRuntime` | 13 | 42 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#NativeTextStyle` | 0 | 7 | 7 | 0 | 2 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 1 | 2 | 0 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#NetBackend` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 19 | 0 | yes | — | — |
 | `@flighthq/types:interface#NetProgress` | 0 | 3 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | yes | — | `object-spread` |
 | `@flighthq/types:interface#NetRequest` | 15 | 8 | 6 | 0 | 3 | 3 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 15 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#NetRequestOptions` | 0 | 2 | 2 | 0 | 2 | 2 | 0 | 0 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | no | `anonymous-structural-transfer` | `optional-omission` |
 | `@flighthq/types:interface#NetResponse` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 10 | 0 | yes | — | — |
-| `@flighthq/types:interface#Node` | 0 | 4 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 344 | 0 | 0 | 0 | 0 | 0 | 0 | 361 | 47 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-computed` | — |
+| `@flighthq/types:interface#Node` | 0 | 4 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 345 | 0 | 0 | 0 | 0 | 0 | 0 | 361 | 47 | 0 | 0 | no | `cross-schema-transfer`, `object-literal-computed` | — |
 | `@flighthq/types:interface#Node2DAnimationTarget` | 0 | 2 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | no | `dynamic-ingress` | — |
 | `@flighthq/types:interface#Node2DData` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#Node2DTraits` | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 47 | 7 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Node3DTraits` | 18 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 35 | 9 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#Node3DTraits` | 19 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 35 | 9 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#NodeInteractionState` | 19 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#NodeOrderList` | 41 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 15 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#NodeRuntime` | 0 | 27 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 9 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#NodeRuntime` | 0 | 28 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 9 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#NodeSignals` | 15 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#NodeTraits` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#NormalMaterial` | 9 | 8 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
@@ -1189,7 +1189,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#ParticleDesignerParseOptions` | 2 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 11 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#ParticleDesignerSerializeOptions` | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#ParticleEmitter2D` | 54 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 3 | 0 | 0 | 0 | 0 | 25 | 2 | 0 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | — |
-| `@flighthq/types:interface#ParticleEmitter2DRuntime` | 6 | 38 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#ParticleEmitter2DRuntime` | 6 | 39 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#ParticleEmitter3D` | 55 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 23 | 2 | 0 | 0 | no | `dynamic-ingress` | — |
 | `@flighthq/types:interface#ParticleEmitterCallbacks` | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 0 | 6 | 0 | yes | — | — |
 | `@flighthq/types:interface#ParticleEmitterConfig` | 729 | 52 | 0 | 0 | 2 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 26 | 9 | 0 | 0 | no | `object-literal-spread` | `object-spread` |
@@ -1365,7 +1365,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#ProximityReading` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#QuadBatch` | 28 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 2 | 0 | 0 | 0 | 0 | 26 | 2 | 0 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | — |
 | `@flighthq/types:interface#QuadBatchData` | 130 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#QuadBatchRuntime` | 9 | 39 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | — |
+| `@flighthq/types:interface#QuadBatchRuntime` | 9 | 40 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | — |
 | `@flighthq/types:interface#QuadBatchSignals` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Quaternion` | 245 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 35 | 4 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#QuaternionReading` | 32 | 7 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | yes | — | — |
@@ -1395,7 +1395,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#RenderEffectPaddingExplanation` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#RenderEffectPipelineOptions` | 0 | 3 | 3 | 0 | 6 | 3 | 3 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 3 | 0 | 8 | 0 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#Renderer` | 0 | 5 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 40 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 12 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#RendererData` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 5 | 0 | 0 | 0 | 0 | 12 | 10 | 0 | 0 | no | `cross-schema-transfer`, `dynamic-ingress` | — |
+| `@flighthq/types:interface#RendererData` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 11 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#RenderPassPreserve` | 0 | 2 | 2 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 8 | 0 | yes | — | — |
 | `@flighthq/types:interface#RenderProxy` | 66 | 22 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 22 | 1 | 0 | 0 | 0 | 0 | 0 | 12 | 1 | 0 | 0 | no | `anonymous-structural-transfer`, `cross-schema-transfer` | — |
 | `@flighthq/types:interface#RenderProxy2D` | 0 | 25 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 70 | 3 | 0 | 0 | no | `cross-schema-transfer` | — |
@@ -1406,13 +1406,13 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#RenderRegistryMissExplanation` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#RenderRegistrySignals` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#RenderState` | 0 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 68 | 0 | 0 | 0 | 0 | 0 | 0 | 90 | 2 | 1 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#RenderStateRuntime` | 91 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#RenderStateRuntime` | 91 | 11 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#RenderStateStats` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#RenderSurfaceBackend` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#RenderTarget` | 49 | 14 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#RenderTargetAxes` | 0 | 8 | 0 | 0 | 6 | 5 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 5 | 8 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | `object-spread` |
+| `@flighthq/types:interface#RenderTargetAxes` | 0 | 8 | 0 | 0 | 6 | 5 | 1 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 5 | 3 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | `object-spread` |
 | `@flighthq/types:interface#RenderTargetAxisDifference` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#RenderTargetDescriptor` | 50 | 10 | 8 | 0 | 6 | 4 | 2 | 0 | 4 | 5 | 30 | 0 | 0 | 0 | 0 | 0 | 22 | 0 | 157 | 0 | no | `anonymous-structural-transfer`, `cross-schema-transfer`, `object-literal-spread` | `optional-omission` |
+| `@flighthq/types:interface#RenderTargetDescriptor` | 50 | 10 | 8 | 0 | 6 | 4 | 2 | 0 | 4 | 5 | 30 | 0 | 0 | 0 | 0 | 0 | 22 | 0 | 158 | 0 | no | `anonymous-structural-transfer`, `cross-schema-transfer`, `object-literal-spread` | `optional-omission` |
 | `@flighthq/types:interface#RenderTargetDimensions` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#RenderTargetExplanation` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#RenderTexture` | 30 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 46 | 4 | 0 | 0 | no | `cross-schema-transfer` | — |
@@ -1435,7 +1435,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#RichText` | 173 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 0 | 0 | 0 | 0 | 0 | 0 | 91 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#RichTextContent` | 48 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 3 | 11 | 0 | yes | — | — |
 | `@flighthq/types:interface#RichTextData` | 256 | 21 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 2 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#RichTextRuntime` | 61 | 46 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#RichTextRuntime` | 62 | 48 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#RigidBody2D` | 0 | 26 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 29 | 5 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#RigidBody3D` | 0 | 53 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 81 | 4 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#RimModifier` | 0 | 6 | 3 | 0 | 1 | 1 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 0 | no | `cross-schema-transfer` | — |
@@ -1470,7 +1470,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#Scale9Mapper` | 0 | 2 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 4 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#Scale9Shape` | 39 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#Scale9ShapeData` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Scale9ShapeRuntime` | 0 | 39 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#Scale9ShapeRuntime` | 0 | 40 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#ScanlinesEffect` | 0 | 3 | 2 | 0 | 1 | 0 | 1 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 2 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#Scene2D` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#Scene2DAudioResourceLoadProgress` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — | `object-spread` |
@@ -1489,7 +1489,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#Scene2DRenderer` | 0 | 5 | 3 | 0 | 34 | 34 | 0 | 0 | 34 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 38 | 0 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#Scene2DRenderExplanation` | 0 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Scene2DResources` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#Scene2DRuntime` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#Scene2DRuntime` | 0 | 3 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#Scene2DSignals` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Scene2DSlotReference` | 0 | 5 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Scene2DSlotResolution` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
@@ -1502,9 +1502,9 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#Scene3DDocumentLight` | 0 | 4 | 2 | 0 | 7 | 6 | 1 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 0 | 30 | 0 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#Scene3DDocumentLoadOptions` | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 7 | 0 | 1 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#Scene3DDocumentLoadProgress` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — | `object-spread` |
-| `@flighthq/types:interface#Scene3DDocumentMesh` | 12 | 5 | 3 | 0 | 8 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#Scene3DDocumentNode` | 24 | 5 | 2 | 0 | 18 | 18 | 0 | 0 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#Scene3DDocumentScene` | 10 | 2 | 1 | 0 | 5 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#Scene3DDocumentMesh` | 12 | 5 | 3 | 0 | 8 | 8 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#Scene3DDocumentNode` | 24 | 5 | 2 | 0 | 18 | 18 | 0 | 0 | 16 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | 0 | yes | — | `optional-omission` |
+| `@flighthq/types:interface#Scene3DDocumentScene` | 10 | 2 | 1 | 0 | 5 | 5 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 0 | yes | — | `optional-omission` |
 | `@flighthq/types:interface#Scene3DDocumentSkin` | 0 | 2 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#Scene3DForwardLightSelection` | 11 | 3 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#Scene3DForwardLightSelectionExplanation` | 0 | 4 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | yes | — | — |
@@ -1550,7 +1550,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#SelectionModifierState` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#SelectionSignals` | 0 | 2 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#SelectionState` | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 14 | 1 | 0 | 0 | no | `object-literal-computed` | — |
-| `@flighthq/types:interface#SelectionStateRuntime` | 0 | 5 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#SelectionStateRuntime` | 0 | 6 | 1 | 0 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
 | `@flighthq/types:interface#SensorReading` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Sensors` | 11 | 11 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#SensorsBackend` | 0 | 21 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | yes | — | — |
@@ -1576,7 +1576,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#ShapeJsonFormatOptions` | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#ShapeJsonParseOptions` | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 3 | 0 | yes | — | — |
 | `@flighthq/types:interface#ShapeRunOptions` | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 4 | 0 | no | `anonymous-structural-transfer` | — |
-| `@flighthq/types:interface#ShapeRuntime` | 0 | 39 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#ShapeRuntime` | 0 | 40 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#ShapeStrokeRegion` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#ShapeTessellationExplanation` | 0 | 2 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#ShapeTextureReference` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
@@ -1688,7 +1688,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#Sprite` | 17 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 2 | 2 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#SpriteData` | 14 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#SpriteRenderer` | 0 | 5 | 3 | 0 | 12 | 12 | 0 | 0 | 12 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 12 | 0 | 0 | yes | — | `optional-omission` |
-| `@flighthq/types:interface#SpriteRuntime` | 0 | 40 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#SpriteRuntime` | 0 | 41 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#Spritesheet` | 13 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 4 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#SpritesheetAnimation` | 38 | 7 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 6 | 3 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#SpritesheetAnimationData` | 38 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
@@ -1809,9 +1809,10 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#TextInputSource` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#TextInputState` | 100 | 15 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#TextItem` | 0 | 4 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#TextLabel` | 28 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 27 | 0 | 0 | 0 | 0 | 0 | 0 | 15 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#TextLabelData` | 51 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#TextLabelRuntime` | 12 | 41 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#TextLabel` | 32 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 27 | 0 | 0 | 0 | 0 | 0 | 0 | 16 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#TextLabelContentExplanation` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#TextLabelData` | 55 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | yes | — | — |
+| `@flighthq/types:interface#TextLabelRuntime` | 18 | 43 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 2 | 1 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#TextLayoutGroup` | 300 | 12 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 7 | 0 | yes | — | — |
 | `@flighthq/types:interface#TextLayoutParams` | 17 | 14 | 9 | 0 | 10 | 10 | 0 | 0 | 10 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 25 | 1 | yes | — | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#TextLayoutResult` | 128 | 9 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 36 | 3 | 7 | 0 | yes | — | — |
@@ -1887,7 +1888,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#TiledTilesetTileFrame` | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#Tilemap` | 17 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 0 | 18 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#TilemapData` | 70 | 7 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | yes | — | — |
-| `@flighthq/types:interface#TilemapRuntime` | 0 | 38 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#TilemapRuntime` | 0 | 39 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#TilemapSignals` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#TiltShiftEffect` | 10 | 4 | 3 | 0 | 1 | 0 | 1 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 9 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | — |
 | `@flighthq/types:interface#Timeline` | 55 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 18 | 1 | 2 | 1 | yes | — | `strict-equality` |
@@ -2036,7 +2037,8 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#WgpuCompressedTextureSupport` | 0 | 3 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuDebugDefineKey` | 0 | 2 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | 3 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuDebugPipeline` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
-| `@flighthq/types:interface#WgpuDeviceRuntime` | 0 | 30 | 12 | 0 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
+| `@flighthq/types:interface#WgpuDeviceRuntime` | 0 | 28 | 13 | 0 | 1 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | `optional-omission` |
+| `@flighthq/types:interface#WgpuDeviceRuntimeResources` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#WgpuDeviceSignals` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuDeviceState` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 5 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#WgpuFullscreenPipeline` | 0 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 0 | 0 | yes | — | — |
@@ -2066,8 +2068,8 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#WgpuRenderEffectPipeline` | 29 | 6 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuRenderOptions` | 0 | 7 | 7 | 0 | 6 | 5 | 1 | 0 | 5 | 1 | 0 | 0 | 0 | 0 | 0 | 1 | 6 | 0 | 21 | 0 | no | `cross-schema-transfer`, `object-literal-spread` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#WgpuRenderRegistries` | 0 | 20 | 7 | 0 | 3 | 1 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 1 | 2 | 0 | 0 | no | `object-literal-spread` | `object-spread`, `optional-omission` |
-| `@flighthq/types:interface#WgpuRenderState` | 0 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 19 | 0 | 0 | 0 | 0 | 0 | 0 | 370 | 3 | 3 | 2 | no | `cross-schema-transfer` | `prototype-observation` |
-| `@flighthq/types:interface#WgpuRenderStateRuntime` | 0 | 108 | 24 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
+| `@flighthq/types:interface#WgpuRenderState` | 0 | 17 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 20 | 0 | 0 | 0 | 0 | 0 | 0 | 371 | 3 | 3 | 2 | no | `cross-schema-transfer` | `prototype-observation` |
+| `@flighthq/types:interface#WgpuRenderStateRuntime` | 0 | 109 | 25 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#WgpuRenderStats` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | no | `anonymous-structural-transfer` | — |
 | `@flighthq/types:interface#WgpuRenderSurfaceProvider` | 0 | 1 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 2 | 8 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuRenderTarget` | 140 | 13 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 129 | 7 | 7 | 0 | no | `anonymous-structural-transfer` | — |
@@ -2084,9 +2086,9 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:interface#WgpuScene3DShadow` | 19 | 9 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 4 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuScissorRect` | 36 | 4 | 0 | 0 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 2 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuShapeMesh` | 13 | 4 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 7 | 6 | yes | — | `object-spread` |
-| `@flighthq/types:interface#WgpuShapeMeshBuffers` | 24 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 2 | 0 | yes | — | — |
+| `@flighthq/types:interface#WgpuShapeMeshBuffers` | 24 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 | 1 | 0 | yes | — | — |
 | `@flighthq/types:interface#WgpuShapeMeshPipeline` | 0 | 2 | 0 | 0 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | no | `dynamic-ingress` | — |
-| `@flighthq/types:interface#WgpuShapeRendererData` | 18 | 8 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | yes | — | — |
+| `@flighthq/types:interface#WgpuShapeRendererData` | 18 | 8 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | no | `cross-schema-transfer` | — |
 | `@flighthq/types:interface#WgpuSkinningAdapter` | 0 | 10 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 7 | 2 | 0 | 0 | no | `dynamic-ingress` | — |
 | `@flighthq/types:interface#WgpuTextureEntry` | 0 | 6 | 2 | 0 | 7 | 7 | 0 | 0 | 6 | 5 | 0 | 0 | 0 | 0 | 0 | 1 | 5 | 7 | 2 | 0 | no | `cross-schema-transfer` | `object-spread`, `optional-omission` |
 | `@flighthq/types:interface#WgpuTextureResource` | 0 | 4 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
@@ -2171,7 +2173,7 @@ Counts below are per canonical schema. Exact source locations and related schema
 | `@flighthq/types:type#RenderProxyResolver` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:type#SamplerLike` | 0 | 6 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 15 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:type#Scene3DLightsLike` | 0 | 5 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 13 | 0 | 0 | 0 | yes | — | — |
-| `@flighthq/types:type#Scene3DRuntime` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
+| `@flighthq/types:type#Scene3DRuntime` | 0 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — | — |
 | `@flighthq/types:type#ShellExternalOutcome` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:type#ShellPathRevealOutcome` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |
 | `@flighthq/types:type#ShellShortcutLinkWriteOutcome` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | yes | — | — |

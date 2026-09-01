@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef BoundsNode<Traits> = flight._internal._Intersection2<Node<Traits>, HasBoundsRectangle>;
+typedef BoundsNode<Traits> = flight._internal._Intersection2<NodeOf<Traits>, HasBoundsRectangle>;

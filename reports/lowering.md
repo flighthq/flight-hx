@@ -3,25 +3,25 @@
 | Metric | Count |
 | --- | ---: |
 | Packages | 157 |
-| Source files | 2886 |
-| Candidate declarations | 16807 |
-| Lowered declarations | 16807 |
+| Source files | 2891 |
+| Candidate declarations | 16850 |
+| Lowered declarations | 16850 |
 | Current diagnostics | 0 |
-| Proven explicit Boolean truthiness uses | 17158 |
-| Proven Boolean conditional conditions | 3485 |
-| Proven Boolean logical-left truthiness uses | 6511 |
-| Proven Boolean logical expressions | 6180 |
-| Proven numeric relations | 7793 |
-| Direct Boolean truthiness uses | 17123 |
-| Direct Boolean conditional expressions | 3477 |
-| Direct Boolean `&&` expressions | 2781 |
-| Direct Boolean `\|\|` expressions | 3370 |
-| Direct numeric relations | 7780 |
-| Proven indexed expressions | 13436 |
-| Proven indexed reads | 9142 |
+| Proven explicit Boolean truthiness uses | 17207 |
+| Proven Boolean conditional conditions | 3488 |
+| Proven Boolean logical-left truthiness uses | 6514 |
+| Proven Boolean logical expressions | 6184 |
+| Proven numeric relations | 7800 |
+| Direct Boolean truthiness uses | 17172 |
+| Direct Boolean conditional expressions | 3480 |
+| Direct Boolean `&&` expressions | 2780 |
+| Direct Boolean `\|\|` expressions | 3375 |
+| Direct numeric relations | 7787 |
+| Proven indexed expressions | 13441 |
+| Proven indexed reads | 9147 |
 | Proven indexed writes | 4441 |
 | Parked width-sensitive mixed indexed writes | 19 |
-| Direct indexed reads | 9607 |
+| Direct indexed reads | 9610 |
 | Direct indexed writes | 4436 |
 | Guarded in-bounds async-flow for-of Array reads | 21 |
 | Guarded in-bounds async-flow for-in key reads | 0 |
@@ -37,7 +37,7 @@
 
 | Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `Array` | 7619 | 6220 | 1463 | 6685 | 1463 |
+| `Array` | 7624 | 6225 | 1463 | 6688 | 1463 |
 | `ArrayOrFloat32Array` | 56 | 13 | 43 | 15 | 43 |
 | `Float32Array` | 3846 | 1805 | 2113 | 1805 | 2113 |
 | `Float64Array` | 396 | 178 | 228 | 178 | 228 |
@@ -104,27 +104,27 @@
 | `@flighthq/bitmap` | 209 | 209 | 0 | 829 | 630 | 761 | 7 |
 | `@flighthq/bitmapfont` | 20 | 20 | 0 | 12 | 7 | 2 | 0 |
 | `@flighthq/bitmapfont-formats` | 21 | 21 | 0 | 107 | 9 | 3 | 0 |
-| `@flighthq/bitmaptext` | 34 | 34 | 0 | 49 | 18 | 8 | 0 |
+| `@flighthq/bitmaptext` | 43 | 43 | 0 | 55 | 19 | 8 | 0 |
 | `@flighthq/camera` | 76 | 76 | 0 | 42 | 16 | 155 | 2 |
 | `@flighthq/camera-controls` | 56 | 56 | 0 | 23 | 14 | 0 | 0 |
 | `@flighthq/capture` | 13 | 13 | 0 | 12 | 2 | 0 | 0 |
 | `@flighthq/clip` | 36 | 36 | 0 | 83 | 34 | 24 | 0 |
 | `@flighthq/clipboard` | 27 | 27 | 0 | 1 | 0 | 0 | 0 |
 | `@flighthq/clock` | 14 | 14 | 0 | 13 | 2 | 2 | 0 |
-| `@flighthq/collision` | 505 | 505 | 0 | 1442 | 742 | 1067 | 0 |
+| `@flighthq/collision` | 508 | 508 | 0 | 1443 | 743 | 1067 | 0 |
 | `@flighthq/color` | 32 | 32 | 0 | 23 | 13 | 75 | 0 |
 | `@flighthq/command` | 40 | 40 | 0 | 47 | 21 | 24 | 0 |
 | `@flighthq/compression` | 30 | 30 | 0 | 55 | 36 | 39 | 1 |
 | `@flighthq/connectivity` | 13 | 13 | 0 | 14 | 0 | 0 | 0 |
 | `@flighthq/debug` | 22 | 22 | 0 | 14 | 1 | 1 | 0 |
-| `@flighthq/device` | 10 | 10 | 0 | 1 | 0 | 0 | 0 |
+| `@flighthq/device` | 10 | 10 | 0 | 0 | 0 | 0 | 0 |
 | `@flighthq/dialog` | 16 | 16 | 0 | 6 | 0 | 0 | 0 |
 | `@flighthq/easing` | 69 | 69 | 0 | 74 | 48 | 6 | 0 |
 | `@flighthq/effects` | 186 | 186 | 0 | 94 | 48 | 119 | 1 |
 | `@flighthq/effects-canvas` | 120 | 120 | 0 | 100 | 46 | 101 | 0 |
 | `@flighthq/effects-gl` | 316 | 316 | 0 | 142 | 27 | 55 | 0 |
 | `@flighthq/effects-wgpu` | 320 | 320 | 0 | 141 | 28 | 283 | 0 |
-| `@flighthq/entity` | 19 | 19 | 0 | 14 | 0 | 0 | 0 |
+| `@flighthq/entity` | 24 | 24 | 0 | 16 | 0 | 0 | 0 |
 | `@flighthq/filesystem` | 42 | 42 | 0 | 29 | 5 | 2 | 0 |
 | `@flighthq/flow` | 9 | 9 | 0 | 11 | 10 | 9 | 0 |
 | `@flighthq/font` | 37 | 37 | 0 | 70 | 17 | 34 | 0 |
@@ -132,7 +132,7 @@
 | `@flighthq/geolocation` | 26 | 26 | 0 | 23 | 0 | 0 | 0 |
 | `@flighthq/geometry` | 418 | 418 | 0 | 488 | 305 | 910 | 11 |
 | `@flighthq/gizmo` | 64 | 64 | 0 | 84 | 13 | 26 | 0 |
-| `@flighthq/glyphatlas` | 39 | 39 | 0 | 52 | 15 | 0 | 0 |
+| `@flighthq/glyphatlas` | 42 | 42 | 0 | 54 | 16 | 0 | 0 |
 | `@flighthq/gui` | 138 | 138 | 0 | 217 | 23 | 4 | 0 |
 | `@flighthq/haptics` | 10 | 10 | 0 | 3 | 0 | 0 | 0 |
 | `@flighthq/host-capacitor` | 53 | 53 | 0 | 96 | 6 | 2 | 0 |
@@ -149,10 +149,10 @@
 | `@flighthq/keyboard` | 15 | 15 | 0 | 10 | 2 | 0 | 0 |
 | `@flighthq/layout` | 53 | 53 | 0 | 251 | 53 | 52 | 0 |
 | `@flighthq/lifecycle` | 15 | 15 | 0 | 20 | 1 | 1 | 0 |
-| `@flighthq/lighting` | 41 | 41 | 0 | 50 | 27 | 17 | 0 |
+| `@flighthq/lighting` | 41 | 41 | 0 | 51 | 27 | 17 | 0 |
 | `@flighthq/loader` | 39 | 39 | 0 | 92 | 14 | 1 | 0 |
 | `@flighthq/log` | 93 | 93 | 0 | 116 | 13 | 2 | 0 |
-| `@flighthq/materials` | 91 | 91 | 0 | 68 | 15 | 15 | 0 |
+| `@flighthq/materials` | 91 | 91 | 0 | 71 | 15 | 15 | 0 |
 | `@flighthq/math` | 80 | 80 | 0 | 109 | 58 | 20 | 0 |
 | `@flighthq/media` | 96 | 96 | 0 | 125 | 5 | 1 | 0 |
 | `@flighthq/mediasession` | 16 | 16 | 0 | 18 | 3 | 0 | 0 |
@@ -166,9 +166,9 @@
 | `@flighthq/notification` | 46 | 46 | 0 | 26 | 0 | 0 | 0 |
 | `@flighthq/particleemitter` | 81 | 81 | 0 | 376 | 190 | 587 | 0 |
 | `@flighthq/particles` | 52 | 52 | 0 | 184 | 96 | 249 | 0 |
-| `@flighthq/particles-formats` | 139 | 139 | 0 | 522 | 49 | 22 | 0 |
+| `@flighthq/particles-formats` | 147 | 147 | 0 | 535 | 49 | 24 | 0 |
 | `@flighthq/path` | 186 | 186 | 0 | 544 | 278 | 569 | 0 |
-| `@flighthq/path-boolean` | 76 | 76 | 0 | 186 | 102 | 119 | 0 |
+| `@flighthq/path-boolean` | 77 | 77 | 0 | 187 | 102 | 119 | 0 |
 | `@flighthq/path-formats` | 5 | 5 | 0 | 129 | 12 | 0 | 0 |
 | `@flighthq/permissions` | 35 | 35 | 0 | 64 | 0 | 0 | 0 |
 | `@flighthq/physics2d` | 262 | 262 | 0 | 1060 | 235 | 395 | 0 |
@@ -183,19 +183,19 @@
 | `@flighthq/registry` | 12 | 12 | 0 | 23 | 3 | 4 | 0 |
 | `@flighthq/registry-catalog` | 8 | 8 | 0 | 4 | 0 | 1 | 0 |
 | `@flighthq/registry-codegen` | 2 | 2 | 0 | 2 | 0 | 0 | 0 |
-| `@flighthq/render` | 141 | 141 | 0 | 213 | 28 | 134 | 1 |
-| `@flighthq/render-gl` | 240 | 240 | 0 | 259 | 37 | 110 | 0 |
-| `@flighthq/render-wgpu` | 248 | 248 | 0 | 432 | 74 | 97 | 0 |
+| `@flighthq/render` | 142 | 142 | 0 | 214 | 28 | 134 | 1 |
+| `@flighthq/render-gl` | 241 | 241 | 0 | 273 | 39 | 113 | 0 |
+| `@flighthq/render-wgpu` | 249 | 249 | 0 | 432 | 74 | 97 | 0 |
 | `@flighthq/requirements` | 9 | 9 | 0 | 4 | 0 | 1 | 0 |
 | `@flighthq/scene-document` | 132 | 132 | 0 | 474 | 62 | 51 | 0 |
 | `@flighthq/scene2d` | 40 | 40 | 0 | 20 | 3 | 22 | 0 |
-| `@flighthq/scene2d-canvas` | 197 | 197 | 0 | 349 | 70 | 171 | 0 |
+| `@flighthq/scene2d-canvas` | 199 | 199 | 0 | 352 | 70 | 171 | 0 |
 | `@flighthq/scene2d-dom` | 123 | 123 | 0 | 192 | 38 | 25 | 0 |
 | `@flighthq/scene2d-formats` | 712 | 712 | 0 | 1269 | 246 | 501 | 0 |
-| `@flighthq/scene2d-gl` | 220 | 220 | 0 | 406 | 112 | 243 | 3 |
+| `@flighthq/scene2d-gl` | 218 | 218 | 0 | 406 | 112 | 243 | 3 |
 | `@flighthq/scene2d-resources` | 26 | 26 | 0 | 41 | 6 | 13 | 0 |
 | `@flighthq/scene2d-wgpu` | 216 | 216 | 0 | 469 | 128 | 311 | 4 |
-| `@flighthq/scene3d` | 87 | 87 | 0 | 117 | 32 | 92 | 1 |
+| `@flighthq/scene3d` | 89 | 89 | 0 | 120 | 32 | 92 | 1 |
 | `@flighthq/scene3d-formats` | 399 | 399 | 0 | 1332 | 501 | 668 | 6 |
 | `@flighthq/scene3d-gl` | 401 | 401 | 0 | 659 | 77 | 259 | 0 |
 | `@flighthq/scene3d-resources` | 72 | 72 | 0 | 142 | 17 | 17 | 0 |
@@ -205,7 +205,7 @@
 | `@flighthq/selection` | 36 | 36 | 0 | 57 | 14 | 12 | 0 |
 | `@flighthq/sensors` | 54 | 54 | 0 | 38 | 1 | 13 | 0 |
 | `@flighthq/shading` | 31 | 31 | 0 | 25 | 2 | 0 | 0 |
-| `@flighthq/shape` | 181 | 181 | 0 | 316 | 108 | 306 | 0 |
+| `@flighthq/shape` | 182 | 182 | 0 | 316 | 108 | 306 | 0 |
 | `@flighthq/shape-formats` | 24 | 24 | 0 | 67 | 5 | 5 | 0 |
 | `@flighthq/share` | 14 | 14 | 0 | 14 | 0 | 1 | 0 |
 | `@flighthq/shell` | 9 | 9 | 0 | 2 | 0 | 0 | 0 |
@@ -224,7 +224,7 @@
 | `@flighthq/statusbar` | 23 | 23 | 0 | 24 | 1 | 1 | 0 |
 | `@flighthq/storage` | 46 | 46 | 0 | 73 | 3 | 0 | 0 |
 | `@flighthq/swf` | 462 | 462 | 0 | 1105 | 178 | 181 | 8 |
-| `@flighthq/text` | 96 | 96 | 0 | 90 | 22 | 3 | 0 |
+| `@flighthq/text` | 102 | 102 | 0 | 96 | 24 | 3 | 0 |
 | `@flighthq/text-markup` | 51 | 51 | 0 | 116 | 9 | 11 | 0 |
 | `@flighthq/textbidi` | 45 | 45 | 0 | 176 | 60 | 131 | 0 |
 | `@flighthq/textinput` | 83 | 83 | 0 | 262 | 84 | 17 | 0 |
@@ -241,7 +241,7 @@
 | `@flighthq/timeline` | 30 | 30 | 0 | 32 | 5 | 0 | 0 |
 | `@flighthq/tray` | 41 | 41 | 0 | 25 | 1 | 2 | 0 |
 | `@flighthq/tween` | 37 | 37 | 0 | 65 | 13 | 4 | 0 |
-| `@flighthq/types` | 3221 | 3221 | 0 | 0 | 0 | 0 | 0 |
+| `@flighthq/types` | 3223 | 3223 | 0 | 0 | 0 | 0 | 0 |
 | `@flighthq/updater` | 10 | 10 | 0 | 5 | 0 | 0 | 0 |
 | `@flighthq/useragent` | 12 | 12 | 0 | 58 | 1 | 3 | 0 |
 | `@flighthq/velocity` | 22 | 22 | 0 | 21 | 6 | 0 | 0 |

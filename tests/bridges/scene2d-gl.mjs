@@ -13,6 +13,7 @@ export const defaultGlQuadBatchRenderer = compiled.flight.Scene2DGl.defaultGlQua
 export const defaultGlRasterShapeRenderer = compiled.flight.Scene2DGl.defaultGlRasterShapeRenderer;
 export const defaultGlRichTextRenderer = compiled.flight.Scene2DGl.defaultGlRichTextRenderer;
 export const defaultGlScale9ShapeRenderer = compiled.flight.Scene2DGl.defaultGlScale9ShapeRenderer;
+export const defaultGlScene2DRenderer = compiled.flight.Scene2DGl.defaultGlScene2DRenderer;
 export const defaultGlShapeRenderer = compiled.flight.Scene2DGl.defaultGlShapeRenderer;
 export const defaultGlSpriteRenderer = compiled.flight.Scene2DGl.defaultGlSpriteRenderer;
 export const defaultGlTextLabelRenderer = compiled.flight.Scene2DGl.defaultGlTextLabelRenderer;

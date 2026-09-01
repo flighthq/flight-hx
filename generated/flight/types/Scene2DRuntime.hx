@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef Scene2DRuntime = { var binding:Null<flight._internal._Object>; var scene2dSignals:Null<Scene2DSignals>; };
+typedef Scene2DRuntime = { var binding:Null<flight._internal._Object>; @:optional var uid:String; var scene2dSignals:Null<Scene2DSignals>; };

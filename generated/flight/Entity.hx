@@ -3,3 +3,16 @@ package flight;
 
 import Math as HxMath;
 import flight._internal._Runtime;
+import flight._Entity as Facade_Entity_flight__Entity;
+import flight.types.Entity;
+
+class Entity {
+  public static function getEntityUid(source:flight.types.Entity):String {
+    return cast Facade_Entity_flight__Entity.getEntityUid(source);
+    return cast null;
+  }
+
+  public static function setEntityUid(source:flight.types.Entity, uid:String):Void {
+    Facade_Entity_flight__Entity.setEntityUid(source, uid);
+  }
+}

@@ -1,13 +1,13 @@
 # Host Type Census
 
-Upstream commit: `2e86cd620a53121aa6c9230215f44c6c9a3bf816`
+Upstream commit: `b3bb4bf61833f7723e7033dd5c732e91a6601400`
 
 Host identities are derived from the TypeScript checker and their ambient declaration origins. Every emitted identity maps mechanically to `flight._internal.dom.<SameTypeName>`; this census is descriptive, not an eligibility list.
 
 | Metric | Count |
 | --- | ---: |
 | Host types | 237 |
-| Type references | 5829 |
+| Type references | 5849 |
 | Member accesses | 2888 |
 | Reads | 1058 |
 | Writes | 419 |
@@ -76,7 +76,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `GPUAllowSharedBufferSource` | `node_modules/@webgpu/types/dist/index.d.ts` | 2 | 0 | 1 | 2 | 0 | 0 |
 | `GPUBindGroup` | `node_modules/@webgpu/types/dist/index.d.ts` | 209 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBindGroupEntry` | `node_modules/@webgpu/types/dist/index.d.ts` | 13 | 0 | 1 | 0 | 2 | 0 |
-| `GPUBindGroupLayout` | `node_modules/@webgpu/types/dist/index.d.ts` | 283 | 0 | 0 | 0 | 0 | 0 |
+| `GPUBindGroupLayout` | `node_modules/@webgpu/types/dist/index.d.ts` | 281 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBindGroupLayoutEntry` | `node_modules/@webgpu/types/dist/index.d.ts` | 10 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBlendComponent` | `node_modules/@webgpu/types/dist/index.d.ts` | 3 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBlendFactor` | `node_modules/@webgpu/types/dist/index.d.ts` | 2 | 0 | 0 | 0 | 0 | 0 |
@@ -115,7 +115,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `GPUPrimitiveTopology` | `node_modules/@webgpu/types/dist/index.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `GPUQueue` | `node_modules/@webgpu/types/dist/index.d.ts` | 37 | 0 | 4 | 0 | 0 | 51 |
 | `GPURenderPassEncoder` | `node_modules/@webgpu/types/dist/index.d.ts` | 110 | 0 | 10 | 0 | 0 | 155 |
-| `GPURenderPipeline` | `node_modules/@webgpu/types/dist/index.d.ts` | 122 | 0 | 0 | 0 | 0 | 0 |
+| `GPURenderPipeline` | `node_modules/@webgpu/types/dist/index.d.ts` | 120 | 0 | 0 | 0 | 0 | 0 |
 | `GPURenderPipelineDescriptor` | `node_modules/@webgpu/types/dist/index.d.ts` | 8 | 0 | 0 | 0 | 0 | 0 |
 | `GPUSampler` | `node_modules/@webgpu/types/dist/index.d.ts` | 222 | 0 | 0 | 0 | 0 | 0 |
 | `GPUSamplerDescriptor` | `node_modules/@webgpu/types/dist/index.d.ts` | 2 | 0 | 2 | 0 | 2 | 0 |
@@ -238,14 +238,14 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `WebGLActiveInfo` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 2 | 6 | 0 | 0 |
 | `WebGLBuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 67 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLContextAttributes` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLFramebuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 39 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLFramebuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 45 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLPowerPreference` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLProgram` | `node_modules/typescript/lib/lib.dom.d.ts` | 248 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLRenderbuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLProgram` | `node_modules/typescript/lib/lib.dom.d.ts` | 252 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLRenderbuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 11 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLRenderingContext` | `node_modules/typescript/lib/lib.dom.d.ts` | 5 | 0 | 2 | 0 | 0 | 3 |
 | `WebGLShader` | `node_modules/typescript/lib/lib.dom.d.ts` | 4 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLTexture` | `node_modules/typescript/lib/lib.dom.d.ts` | 414 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLUniformLocation` | `node_modules/typescript/lib/lib.dom.d.ts` | 374 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLTexture` | `node_modules/typescript/lib/lib.dom.d.ts` | 422 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLUniformLocation` | `node_modules/typescript/lib/lib.dom.d.ts` | 375 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLVertexArrayObject` | `node_modules/typescript/lib/lib.dom.d.ts` | 34 | 0 | 0 | 0 | 0 | 0 |
 | `WebSocket` | `node_modules/@types/node/web-globals/fetch.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 8 | 1 | 5 | 2 |
 | `WheelEvent` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 3 | 2 | 0 | 1 |

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HasAppearanceRuntime = { var binding:Null<flight._internal._Object>; var worldAlpha:Null<Float>; var worldAlphaUsingAppearanceId:Float; var worldAlphaUsingParentAppearanceId:Float; var worldAppearanceId:Float; };
+typedef HasAppearanceRuntime = { var binding:Null<flight._internal._Object>; @:optional var uid:String; var worldAlpha:Null<Float>; var worldAlphaUsingAppearanceId:Float; var worldAlphaUsingParentAppearanceId:Float; var worldAppearanceId:Float; };

@@ -138,6 +138,9 @@ class _BitmapFont {
     }, getGlyphKerning: function(left:Float, right:Float):Float {
       return cast (cast getBitmapFontKerning(({ final __callArgument12:Dynamic = font; __callArgument12; }), (cast left : Float), (cast right : Float)) : Float);
       return cast _Runtime.UNDEFINED;
+    }, getGlyphLayoutVersion: function():Float {
+      return cast 0.0;
+      return cast _Runtime.UNDEFINED;
     }, getGlyphMetrics: function():GlyphMetrics {
       return cast (cast getBitmapFontMetrics(({ final __callArgument14:Dynamic = font; __callArgument14; })) : GlyphMetrics);
       return cast _Runtime.UNDEFINED;

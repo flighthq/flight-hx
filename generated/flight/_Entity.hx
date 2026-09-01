@@ -112,6 +112,38 @@ class _Entity {
     return cast null;
   }
 
+  public static function getEntityUid(source:Entity):String {
+    var runtime:EntityRuntime = cast _Runtime.UNDEFINED;
+    var uid:String = cast _Runtime.UNDEFINED;
+    runtime = (cast _Entity.ensureEntityRuntime__entityUid(({ final __callArgument10:Dynamic = source; __callArgument10; })) : EntityRuntime);
+    if ((cast !_Runtime.strictEquals((cast runtime : EntityRuntime).uid, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast (cast runtime : EntityRuntime).uid; }
+    uid = (cast _Entity.generateEntityUid__entityUid() : String);
+    ((cast runtime : EntityRuntime).uid = uid);
+    return cast uid;
+    return cast null;
+  }
+
+  public static function setEntityUid(source:Entity, uid:String):Void {
+    var runtime:EntityRuntime = cast _Runtime.UNDEFINED;
+    runtime = (cast _Entity.ensureEntityRuntime__entityUid(({ final __callArgument12:Dynamic = source; __callArgument12; })) : EntityRuntime);
+    ((cast runtime : EntityRuntime).uid = uid);
+  }
+
+  public static function ensureEntityRuntime__entityUid(source:Entity):EntityRuntime {
+    if ((cast _Runtime.strictEquals(_Runtime.getIndex(source, EntityRuntimeKey), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      _Runtime.setIndex(source, EntityRuntimeKey, (cast createEntityRuntime() : EntityRuntime));
+    }
+    return cast _Runtime.getIndex(source, EntityRuntimeKey);
+    return cast null;
+  }
+
+  public static function generateEntityUid__entityUid():String {
+    return cast 'entity-' + Std.string(_Entity._nextEntityUidCounter__entityUid++) + '';
+    return cast null;
+  }
+
+  public static var _nextEntityUidCounter__entityUid:Float = 1.0;
+
   @:allow(flight)
   @:keep
   private static function areEntityRuntimeGuardsEnabled():Bool {

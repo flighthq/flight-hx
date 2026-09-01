@@ -7,6 +7,7 @@ export * from './binding.mjs';
 export * from './clone.mjs';
 export * from './enableEntityRuntimeGuards.mjs';
 export * from './entity.mjs';
+export * from './entityUid.mjs';
 export * from './guards.mjs';
 export * from './host.mjs';
 export * from './runtime.mjs';

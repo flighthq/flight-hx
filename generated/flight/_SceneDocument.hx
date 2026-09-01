@@ -703,7 +703,7 @@ class _SceneDocument {
 
   public static function appendLight__flightDocumentText(lines:Array<String>, light:Scene3DDocumentLight):Void {
     _Runtime.callProperty(lines, 'push', cast (['      - descriptor:'] : Array<Dynamic>));
-    _Runtime.callProperty(lines, 'push', cast ([('          kind: ' + (cast _SceneDocument.formatString__flightDocumentText((cast (cast _Runtime.field(light, 'descriptor') : { var kind:String; }).kind : String)) : String))] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast ([('          kind: ' + (cast _SceneDocument.formatString__flightDocumentText((cast (cast _Runtime.field(light, 'descriptor') : Light).kind : String)) : String))] : Array<Dynamic>));
     _SceneDocument.appendObjectEntries__flightDocumentText(({ final __callArgument54:Dynamic = lines; __callArgument54; }), ({ final __callArgument55:Dynamic = _Runtime.field(light, 'descriptor'); __callArgument55; }), (cast 10.0 : Float), ({ final __callArgument56:Dynamic = cast (['kind'] : Array<Dynamic>); __callArgument56; }));
     if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'name'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(lines, 'push', cast ([('        name: ' + (cast _SceneDocument.formatString__flightDocumentText((cast _Runtime.field(light, 'name') : String)) : String))] : Array<Dynamic>)); }
     if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'node'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(lines, 'push', cast ([('        node: ' + (cast _SceneDocument.formatNumber__flightDocumentText((cast _Runtime.field(light, 'node') : Float)) : String))] : Array<Dynamic>)); }
@@ -1562,7 +1562,7 @@ class _SceneDocument {
   }
 
   public static function createEmptyResourceLookup__sceneDocumentScene2DMaterialization():FlightDocumentResourceLookup {
-    return cast (cast (cast { resolve: function():flight._internal._Any return null } : flight._internal._Any) : FlightDocumentResourceLookup);
+    return cast {  };
     return cast null;
   }
 
@@ -1638,13 +1638,13 @@ class _SceneDocument {
     ambientCount = 0.0;
     directionalCount = 0.0;
     for (light in _Runtime.iterable(lights)) {
-      if ((cast _Runtime.strictEquals((cast _Runtime.field(light, 'descriptor') : { var kind:String; }).kind, AmbientLightKind) : Bool)) {
+      if ((cast _Runtime.strictEquals((cast _Runtime.field(light, 'descriptor') : Light).kind, AmbientLightKind) : Bool)) {
         ambientCount++;
         if ((cast ((cast ambientCount : Float) > (cast 1.0 : Float)) : Bool)) {
           return cast (cast createSceneRefusal(({ final __callArgument368:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).DuplicateAmbientLight; __callArgument368; }), (cast sceneIndex : Float), (cast 'lights' : String)) : FlightDocumentRefusalExplanation);
         }
       }
-      if ((cast _Runtime.strictEquals((cast _Runtime.field(light, 'descriptor') : { var kind:String; }).kind, DirectionalLightKind) : Bool)) {
+      if ((cast _Runtime.strictEquals((cast _Runtime.field(light, 'descriptor') : Light).kind, DirectionalLightKind) : Bool)) {
         directionalCount++;
         if ((cast ((cast directionalCount : Float) > (cast 1.0 : Float)) : Bool)) {
           return cast (cast createSceneRefusal(({ final __callArgument370:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).DuplicateDirectionalLight; __callArgument370; }), (cast sceneIndex : Float), (cast 'lights' : String)) : FlightDocumentRefusalExplanation);
@@ -1787,7 +1787,7 @@ class _SceneDocument {
     var runtime:Null<{ @:optional var traits:flight._internal._Any; }> = cast _Runtime.UNDEFINED;
     schema = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(documentRoot, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
     if ((cast _Runtime.strictEquals(schema, null) : Bool)) { return cast null; }
-    probe = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(documentRoot, 'fields'), ({ final __callArgument443:Dynamic = (cast (cast { resolve: function():flight._internal._Any return null } : flight._internal._Any) : FlightDocumentResourceLookup); __callArgument443; }));
+    probe = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(documentRoot, 'fields'), ({ final __callArgument443:Dynamic = {  }; __callArgument443; }));
     if ((cast _Runtime.strictEquals(probe, null) : Bool)) { return cast null; }
     runtime = (cast getEntityRuntime(({ final __callArgument444:Dynamic = probe; __callArgument444; })) : Null<{ @:optional var traits:flight._internal._Any; }>);
     if ((cast _Runtime.strictEquals(({ final __structural446 = runtime; __structural446 == null ? _Runtime.UNDEFINED : (cast __structural446 : { @:optional var traits:flight._internal._Any; }).traits; }), Node3DTraitsKey) : Bool)) { return cast null; }

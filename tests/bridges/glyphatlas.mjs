@@ -15,6 +15,7 @@ export const getGlyphAtlasBitmap = compiled.flight.GlyphAtlas.getGlyphAtlasBitma
 export const getGlyphAtlasDirtyRegion = compiled.flight.GlyphAtlas.getGlyphAtlasDirtyRegion;
 export const getGlyphAtlasEntry = compiled.flight.GlyphAtlas.getGlyphAtlasEntry;
 export const getGlyphAtlasKerning = compiled.flight.GlyphAtlas.getGlyphAtlasKerning;
+export const getGlyphAtlasLayoutVersion = compiled.flight.GlyphAtlas.getGlyphAtlasLayoutVersion;
 export const getGlyphAtlasMetrics = compiled.flight.GlyphAtlas.getGlyphAtlasMetrics;
 export const getGlyphRasterizerBackend = compiled.flight.GlyphAtlas.getGlyphRasterizerBackend;
 export const setGlyphRasterizerBackend = compiled.flight.GlyphAtlas.setGlyphRasterizerBackend;

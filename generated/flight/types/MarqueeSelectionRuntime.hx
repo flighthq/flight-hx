@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 @:noCompletion
-typedef MarqueeSelectionRuntime = { var binding:Null<flight._internal._Object>; var active:Bool; var rectangle:Rectangle; var startX:Float; var startY:Float; };
+typedef MarqueeSelectionRuntime = { var binding:Null<flight._internal._Object>; @:optional var uid:String; var active:Bool; var rectangle:Rectangle; var startX:Float; var startY:Float; };

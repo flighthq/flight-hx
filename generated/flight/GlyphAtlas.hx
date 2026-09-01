@@ -83,6 +83,11 @@ class GlyphAtlas {
     return cast null;
   }
 
+  public static function getGlyphAtlasLayoutVersion(atlas:flight.types.GlyphAtlas):Float {
+    return cast Facade_GlyphAtlas_flight__GlyphAtlas.getGlyphAtlasLayoutVersion(atlas);
+    return cast null;
+  }
+
   public static function getGlyphAtlasMetrics(atlas:flight.types.GlyphAtlas):GlyphMetrics {
     return cast Facade_GlyphAtlas_flight__GlyphAtlas.getGlyphAtlasMetrics(atlas);
     return cast null;

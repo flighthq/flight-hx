@@ -882,11 +882,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 12
+        "standard-toolkit-boundary": 14
       },
       "module": "flight._Collision",
       "source": "upstream/packages/collision/src/collisionSupport3D.ts",
-      "total": 12
+      "total": 14
     },
     {
       "byReason": {
@@ -1169,14 +1169,6 @@
       "module": "flight._Debug",
       "source": "upstream/packages/debug/src/debug.ts",
       "total": 10
-    },
-    {
-      "byReason": {
-        "source-unknown": 1
-      },
-      "module": "flight._Device",
-      "source": "upstream/packages/device/src/device.ts",
-      "total": 1
     },
     {
       "byReason": {
@@ -4182,12 +4174,12 @@
     },
     {
       "byReason": {
-        "source-unknown": 1,
+        "source-unknown": 3,
         "standard-toolkit-boundary": 16
       },
       "module": "flight._Lighting",
       "source": "upstream/packages/lighting/src/lightAnalysis.ts",
-      "total": 17
+      "total": 19
     },
     {
       "byReason": {
@@ -4249,6 +4241,14 @@
     },
     {
       "byReason": {
+        "unclassified": 3
+      },
+      "module": "flight._Materials",
+      "source": "upstream/packages/materials/src/classicMaterials.ts",
+      "total": 3
+    },
+    {
+      "byReason": {
         "standard-toolkit-boundary": 2
       },
       "module": "flight._Materials",
@@ -4266,11 +4266,19 @@
     {
       "byReason": {
         "source-unknown": 25,
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 8
       },
       "module": "flight._Materials",
       "source": "upstream/packages/materials/src/material.ts",
-      "total": 29
+      "total": 33
+    },
+    {
+      "byReason": {
+        "unclassified": 10
+      },
+      "module": "flight._Materials",
+      "source": "upstream/packages/materials/src/materialPresets.ts",
+      "total": 10
     },
     {
       "byReason": {
@@ -4282,11 +4290,12 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 12
+        "standard-toolkit-boundary": 12,
+        "unclassified": 2
       },
       "module": "flight._Materials",
       "source": "upstream/packages/materials/src/pbrMaterials.ts",
-      "total": 12
+      "total": 14
     },
     {
       "byReason": {
@@ -4303,6 +4312,14 @@
       "module": "flight._Materials",
       "source": "upstream/packages/materials/src/transmissionVolumePbrExtension.ts",
       "total": 4
+    },
+    {
+      "byReason": {
+        "unclassified": 8
+      },
+      "module": "flight._Materials",
+      "source": "upstream/packages/materials/src/unlitMaterials.ts",
+      "total": 8
     },
     {
       "byReason": {
@@ -4673,11 +4690,11 @@
     {
       "byReason": {
         "source-unknown": 1,
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 5
       },
       "module": "flight._Node",
       "source": "upstream/packages/node/src/node.ts",
-      "total": 5
+      "total": 6
     },
     {
       "byReason": {
@@ -4934,13 +4951,14 @@
     },
     {
       "byReason": {
-        "source-any": 26,
-        "source-unknown": 333,
-        "standard-toolkit-boundary": 39
+        "source-any": 42,
+        "source-never": 3,
+        "source-unknown": 384,
+        "standard-toolkit-boundary": 44
       },
       "module": "flight._ParticlesFormats",
       "source": "upstream/packages/particles-formats/src/spineParse.ts",
-      "total": 398
+      "total": 473
     },
     {
       "byReason": {
@@ -5139,8 +5157,7 @@
     },
     {
       "byReason": {
-        "source-unknown": 1,
-        "standard-toolkit-boundary": 53
+        "standard-toolkit-boundary": 54
       },
       "module": "flight._PathBoolean",
       "source": "upstream/packages/path-boolean/src/martinezKernel.ts",
@@ -5639,9 +5656,8 @@
     },
     {
       "byReason": {
-        "source-any": 1,
         "source-null": 2,
-        "source-unknown": 1,
+        "source-unknown": 2,
         "standard-toolkit-boundary": 3
       },
       "module": "flight._Picking",
@@ -5869,14 +5885,13 @@
     },
     {
       "byReason": {
-        "source-any": 6,
-        "source-unknown": 2,
+        "source-unknown": 3,
         "standard-toolkit-boundary": 17,
         "unclassified": 1
       },
       "module": "flight._Render",
       "source": "upstream/packages/render/src/sceneRender.ts",
-      "total": 26
+      "total": 21
     },
     {
       "byReason": {
@@ -5945,11 +5960,12 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 24
+        "source-any": 1,
+        "standard-toolkit-boundary": 46
       },
       "module": "flight._RenderGl",
       "source": "upstream/packages/render-gl/src/glFullscreenPass.ts",
-      "total": 24
+      "total": 47
     },
     {
       "byReason": {
@@ -6021,12 +6037,11 @@
     {
       "byReason": {
         "source-any": 3,
-        "source-unknown": 1,
         "standard-toolkit-boundary": 76
       },
       "module": "flight._RenderGl",
       "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
-      "total": 80
+      "total": 79
     },
     {
       "byReason": {
@@ -6240,14 +6255,13 @@
     {
       "byReason": {
         "external-toolkit-boundary": 12,
-        "source-any": 12,
+        "source-any": 6,
         "source-undefined": 7,
-        "source-unknown": 4,
-        "standard-toolkit-boundary": 23
+        "standard-toolkit-boundary": 21
       },
       "module": "flight._RenderWgpu",
       "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
-      "total": 58
+      "total": 46
     },
     {
       "byReason": {
@@ -7182,17 +7196,17 @@
     },
     {
       "byReason": {
-        "source-unknown": 3,
+        "source-null": 2,
         "standard-toolkit-boundary": 35,
         "unclassified": 3
       },
       "module": "flight._Scene2DGl",
       "source": "upstream/packages/scene2d-gl/src/glRichText.ts",
-      "total": 41
+      "total": 40
     },
     {
       "byReason": {
-        "source-unknown": 2,
+        "source-null": 2,
         "standard-toolkit-boundary": 14,
         "unclassified": 1
       },
@@ -7202,12 +7216,12 @@
     },
     {
       "byReason": {
-        "source-unknown": 2,
+        "source-null": 4,
         "standard-toolkit-boundary": 3
       },
       "module": "flight._Scene2DGl",
       "source": "upstream/packages/scene2d-gl/src/glShapeData.ts",
-      "total": 5
+      "total": 7
     },
     {
       "byReason": {
@@ -7235,7 +7249,7 @@
     },
     {
       "byReason": {
-        "source-unknown": 2,
+        "source-null": 2,
         "standard-toolkit-boundary": 18
       },
       "module": "flight._Scene2DGl",
@@ -7405,14 +7419,6 @@
     },
     {
       "byReason": {
-        "source-unknown": 2
-      },
-      "module": "flight._Scene2DWgpu",
-      "source": "upstream/packages/scene2d-wgpu/src/wgpuRendererData.ts",
-      "total": 2
-    },
-    {
-      "byReason": {
         "standard-toolkit-boundary": 5
       },
       "module": "flight._Scene2DWgpu",
@@ -7422,33 +7428,37 @@
     {
       "byReason": {
         "external-toolkit-boundary": 1,
+        "source-null": 4,
         "source-undefined": 1,
         "standard-toolkit-boundary": 46,
         "unclassified": 3
       },
       "module": "flight._Scene2DWgpu",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuRichText.ts",
-      "total": 51
+      "total": 55
     },
     {
       "byReason": {
         "external-toolkit-boundary": 1,
+        "source-null": 4,
         "source-undefined": 1,
         "standard-toolkit-boundary": 13
       },
       "module": "flight._Scene2DWgpu",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuScale9Shape.ts",
-      "total": 15
+      "total": 19
     },
     {
       "byReason": {
         "external-toolkit-boundary": 5,
+        "source-never": 32,
+        "source-null": 8,
         "source-undefined": 5,
         "standard-toolkit-boundary": 2
       },
       "module": "flight._Scene2DWgpu",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuShapeData.ts",
-      "total": 12
+      "total": 52
     },
     {
       "byReason": {
@@ -7488,12 +7498,13 @@
     {
       "byReason": {
         "external-toolkit-boundary": 1,
+        "source-null": 4,
         "source-undefined": 1,
         "standard-toolkit-boundary": 23
       },
       "module": "flight._Scene2DWgpu",
       "source": "upstream/packages/scene2d-wgpu/src/wgpuTextLabel.ts",
-      "total": 25
+      "total": 29
     },
     {
       "byReason": {
@@ -7525,7 +7536,7 @@
     },
     {
       "byReason": {
-        "source-any": 1,
+        "source-unknown": 1,
         "standard-toolkit-boundary": 1
       },
       "module": "flight._Scene3D",
@@ -7542,7 +7553,7 @@
     },
     {
       "byReason": {
-        "source-any": 1,
+        "source-unknown": 1,
         "standard-toolkit-boundary": 1
       },
       "module": "flight._Scene3D",
@@ -7578,12 +7589,12 @@
     {
       "byReason": {
         "source-null": 3,
-        "source-unknown": 4,
-        "standard-toolkit-boundary": 11
+        "source-unknown": 3,
+        "standard-toolkit-boundary": 14
       },
       "module": "flight._Scene3D",
       "source": "upstream/packages/scene3d/src/sceneDocument.ts",
-      "total": 18
+      "total": 20
     },
     {
       "byReason": {
@@ -7595,7 +7606,7 @@
     },
     {
       "byReason": {
-        "source-any": 1,
+        "source-unknown": 1,
         "standard-toolkit-boundary": 6
       },
       "module": "flight._Scene3D",
@@ -7620,7 +7631,7 @@
     },
     {
       "byReason": {
-        "source-any": 1
+        "source-unknown": 1
       },
       "module": "flight._Scene3D",
       "source": "upstream/packages/scene3d/src/sceneNodeBounds.ts",
@@ -7628,7 +7639,7 @@
     },
     {
       "byReason": {
-        "source-any": 1,
+        "source-unknown": 1,
         "standard-toolkit-boundary": 1
       },
       "module": "flight._Scene3D",
@@ -7808,8 +7819,7 @@
     },
     {
       "byReason": {
-        "source-any": 1,
-        "source-unknown": 1,
+        "source-unknown": 2,
         "standard-toolkit-boundary": 2
       },
       "module": "flight._Scene3DFormats",
@@ -8253,7 +8263,7 @@
     },
     {
       "byReason": {
-        "source-any": 1,
+        "source-unknown": 1,
         "standard-toolkit-boundary": 11
       },
       "module": "flight._Scene3DResources",
@@ -8763,24 +8773,24 @@
     {
       "byReason": {
         "source-any": 7,
-        "source-null": 11,
-        "source-unknown": 25,
+        "source-null": 9,
+        "source-unknown": 24,
         "standard-toolkit-boundary": 1
       },
       "module": "flight._SceneDocument",
       "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.ts",
-      "total": 44
+      "total": 41
     },
     {
       "byReason": {
         "source-any": 7,
-        "source-null": 15,
-        "source-unknown": 24,
+        "source-null": 13,
+        "source-unknown": 23,
         "standard-toolkit-boundary": 8
       },
       "module": "flight._SceneDocument",
       "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.ts",
-      "total": 54
+      "total": 51
     },
     {
       "byReason": {
@@ -8801,22 +8811,24 @@
     },
     {
       "byReason": {
+        "source-any": 1,
         "source-never": 2,
         "source-null": 1,
         "standard-toolkit-boundary": 22
       },
       "module": "flight._Selection",
       "source": "upstream/packages/selection/src/lassoSelection.ts",
-      "total": 25
+      "total": 26
     },
     {
       "byReason": {
+        "source-any": 2,
         "source-null": 1,
         "standard-toolkit-boundary": 9
       },
       "module": "flight._Selection",
       "source": "upstream/packages/selection/src/marqueeSelection.ts",
-      "total": 10
+      "total": 12
     },
     {
       "byReason": {
@@ -8948,11 +8960,11 @@
     },
     {
       "byReason": {
-        "standard-toolkit-boundary": 4
+        "standard-toolkit-boundary": 5
       },
       "module": "flight._Shape",
       "source": "upstream/packages/shape/src/shapeBoundsRegistry.ts",
-      "total": 4
+      "total": 5
     },
     {
       "byReason": {
@@ -9627,6 +9639,14 @@
       "module": "flight._Swf",
       "source": "upstream/packages/swf/src/swfText.ts",
       "total": 42
+    },
+    {
+      "byReason": {
+        "standard-toolkit-boundary": 2
+      },
+      "module": "flight._Text",
+      "source": "upstream/packages/text/src/enableTextLabelGuards.ts",
+      "total": 2
     },
     {
       "byReason": {
@@ -10439,6 +10459,38 @@
     },
     {
       "byReason": {
+        "unclassified": 3
+      },
+      "module": "flight.Materials",
+      "source": "upstream/packages/materials/src/classicMaterials.ts",
+      "total": 3
+    },
+    {
+      "byReason": {
+        "unclassified": 10
+      },
+      "module": "flight.Materials",
+      "source": "upstream/packages/materials/src/materialPresets.ts",
+      "total": 10
+    },
+    {
+      "byReason": {
+        "unclassified": 2
+      },
+      "module": "flight.Materials",
+      "source": "upstream/packages/materials/src/pbrMaterials.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "unclassified": 8
+      },
+      "module": "flight.Materials",
+      "source": "upstream/packages/materials/src/unlitMaterials.ts",
+      "total": 8
+    },
+    {
+      "byReason": {
         "source-unknown": 2
       },
       "module": "flight.Registry",
@@ -10479,7 +10531,7 @@
     },
     {
       "byReason": {
-        "source-any": 1
+        "source-unknown": 1
       },
       "module": "flight.Scene3D",
       "source": "upstream/packages/scene3d/src/mesh.ts",
@@ -10607,6 +10659,38 @@
     },
     {
       "byReason": {
+        "unclassified": 3
+      },
+      "module": "flight.Sdk",
+      "source": "upstream/packages/materials/src/classicMaterials.ts",
+      "total": 3
+    },
+    {
+      "byReason": {
+        "unclassified": 10
+      },
+      "module": "flight.Sdk",
+      "source": "upstream/packages/materials/src/materialPresets.ts",
+      "total": 10
+    },
+    {
+      "byReason": {
+        "unclassified": 2
+      },
+      "module": "flight.Sdk",
+      "source": "upstream/packages/materials/src/pbrMaterials.ts",
+      "total": 2
+    },
+    {
+      "byReason": {
+        "unclassified": 8
+      },
+      "module": "flight.Sdk",
+      "source": "upstream/packages/materials/src/unlitMaterials.ts",
+      "total": 8
+    },
+    {
+      "byReason": {
         "source-unknown": 2
       },
       "module": "flight.Sdk",
@@ -10647,7 +10731,7 @@
     },
     {
       "byReason": {
-        "source-any": 1
+        "source-unknown": 1
       },
       "module": "flight.Sdk",
       "source": "upstream/packages/scene3d/src/mesh.ts",
@@ -11019,6 +11103,14 @@
       "byReason": {
         "unclassified": 1
       },
+      "module": "flight.types.BlinnPhongMaterial",
+      "source": "upstream/packages/types/src/BlinnPhongMaterial.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
       "module": "flight.types.ByteReader",
       "source": "upstream/packages/types/src/ByteReader.ts",
       "total": 1
@@ -11085,6 +11177,14 @@
       },
       "module": "flight.types.DeepReadonly",
       "source": "upstream/packages/types/src/Snapshot.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flight.types.DepthMaterial",
+      "source": "upstream/packages/types/src/DepthMaterial.ts",
       "total": 1
     },
     {
@@ -11173,6 +11273,14 @@
       },
       "module": "flight.types.ElectronTrayConstructor",
       "source": "upstream/packages/types/src/ElectronApi.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flight.types.EmissiveMaterial",
+      "source": "upstream/packages/types/src/EmissiveMaterial.ts",
       "total": 1
     },
     {
@@ -11347,6 +11455,14 @@
       "byReason": {
         "unclassified": 1
       },
+      "module": "flight.types.LambertMaterial",
+      "source": "upstream/packages/types/src/LambertMaterial.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
       "module": "flight.types.LayoutResolutionFailureKind",
       "source": "upstream/packages/types/src/Layout.ts",
       "total": 1
@@ -11411,6 +11527,14 @@
       "byReason": {
         "unclassified": 1
       },
+      "module": "flight.types.MatcapMaterial",
+      "source": "upstream/packages/types/src/MatcapMaterial.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
       "module": "flight.types.MeshGeometryRuntime",
       "source": "upstream/packages/types/src/MeshGeometry.ts",
       "total": 1
@@ -11457,6 +11581,14 @@
     },
     {
       "byReason": {
+        "unclassified": 1
+      },
+      "module": "flight.types.NormalMaterial",
+      "source": "upstream/packages/types/src/NormalMaterial.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
         "source-unknown": 1
       },
       "module": "flight.types.NotificationRequest",
@@ -11485,6 +11617,14 @@
       },
       "module": "flight.types.PathCommand",
       "source": "upstream/packages/types/src/Path.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flight.types.PhongMaterial",
+      "source": "upstream/packages/types/src/PhongMaterial.ts",
       "total": 1
     },
     {
@@ -11595,6 +11735,14 @@
       "byReason": {
         "unclassified": 1
       },
+      "module": "flight.types.ShadedMaterial",
+      "source": "upstream/packages/types/src/ShadedMaterial.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
       "module": "flight.types.ShapeCommandRegistry",
       "source": "upstream/packages/types/src/ShapeCommand.ts",
       "total": 1
@@ -11659,8 +11807,24 @@
       "byReason": {
         "unclassified": 1
       },
+      "module": "flight.types.SpecularGlossinessPbrMaterial",
+      "source": "upstream/packages/types/src/SpecularGlossinessPbrMaterial.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
       "module": "flight.types.StandardMaterialKind",
       "source": "upstream/packages/types/src/StandardMaterial.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flight.types.StandardPbrMaterial",
+      "source": "upstream/packages/types/src/StandardPbrMaterial.ts",
       "total": 1
     },
     {
@@ -11773,6 +11937,14 @@
       },
       "module": "flight.types.TimelineFrameEntryCause",
       "source": "upstream/packages/types/src/TimelineCue.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flight.types.ToonMaterial",
+      "source": "upstream/packages/types/src/ToonMaterial.ts",
       "total": 1
     },
     {
@@ -11931,8 +12103,24 @@
       "byReason": {
         "unclassified": 1
       },
+      "module": "flight.types.UnlitMaterial",
+      "source": "upstream/packages/types/src/UnlitMaterial.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
       "module": "flight.types.UnregisteredSceneCoverageEntry",
       "source": "upstream/packages/types/src/SceneCoverageEntry.ts",
+      "total": 1
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flight.types.VertexColorMaterial",
+      "source": "upstream/packages/types/src/VertexColorMaterial.ts",
       "total": 1
     },
     {
@@ -11990,22 +12178,30 @@
       "module": "flight.types.WgpuScene3DRuntime",
       "source": "upstream/packages/types/src/WgpuScene3DRuntime.ts",
       "total": 3
+    },
+    {
+      "byReason": {
+        "unclassified": 1
+      },
+      "module": "flight.types.WireframeMaterial",
+      "source": "upstream/packages/types/src/WireframeMaterial.ts",
+      "total": 1
     }
   ],
   "schemaVersion": 1,
   "summary": {
     "byReason": {
       "external-toolkit-boundary": 598,
-      "source-any": 1168,
-      "source-never": 143,
-      "source-null": 206,
+      "source-any": 1166,
+      "source-never": 178,
+      "source-null": 232,
       "source-undefined": 508,
-      "source-unknown": 4479,
-      "standard-toolkit-boundary": 21570,
-      "unclassified": 496
+      "source-unknown": 4522,
+      "standard-toolkit-boundary": 21609,
+      "unclassified": 579
     },
     "checkerKnownUnrepresentable": 0,
-    "modules": 1412,
-    "total": 29168
+    "modules": 1436,
+    "total": 29392
   }
 }

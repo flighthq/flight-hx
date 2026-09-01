@@ -3,8 +3,12 @@ import compiled from '../../build/haxe-js/flight.cjs';
 
 export const computeBitmapTextLocalBoundsRectangle = compiled.flight.BitmapText.computeBitmapTextLocalBoundsRectangle;
 export const createBitmapText = compiled.flight.BitmapText.createBitmapText;
+export const disableBitmapTextGuards = compiled.flight.BitmapText.disableBitmapTextGuards;
+export const enableBitmapTextGuards = compiled.flight.BitmapText.enableBitmapTextGuards;
 export const getBitmapTextBounds = compiled.flight.BitmapText.getBitmapTextBounds;
 export const getBitmapTextPages = compiled.flight.BitmapText.getBitmapTextPages;
+export const isBitmapTextGlyphLayoutStale = compiled.flight.BitmapText.isBitmapTextGlyphLayoutStale;
+export const refreshBitmapTextGlyphLayout = compiled.flight.BitmapText.refreshBitmapTextGlyphLayout;
 export const reserveBitmapText = compiled.flight.BitmapText.reserveBitmapText;
 export const setBitmapTextAlign = compiled.flight.BitmapText.setBitmapTextAlign;
 export const setBitmapTextGlyphSource = compiled.flight.BitmapText.setBitmapTextGlyphSource;

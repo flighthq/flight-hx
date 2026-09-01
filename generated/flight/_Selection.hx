@@ -80,7 +80,7 @@ class _Selection {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(candidates, 'length') : Float)) : Bool)) {
         var candidate:NodeType = flight._internal._StaticIndex.readArray(candidates, i);
-        var bounds:Rectangle = (cast getNodeLocalBoundsRectangle((cast candidate : Dynamic)) : Rectangle);
+        var bounds:Rectangle = (cast getNodeLocalBoundsRectangle((cast candidate : flight._internal._Any)) : Rectangle);
         if ((cast (cast _Selection.isPointInPolygon__lassoSelection((cast path : Path).data, (cast (bounds.x + (bounds.width / 2.0)) : Float), (cast (bounds.y + (bounds.height / 2.0)) : Float)) : Bool) : Bool)) {
           _Runtime.callProperty(matches, 'push', cast ([candidate] : Array<Dynamic>));
         }
@@ -173,7 +173,7 @@ class _Selection {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(candidates, 'length') : Float)) : Bool)) {
         var candidate:NodeType = flight._internal._StaticIndex.readArray(candidates, i);
-        var bounds:Rectangle = (cast getNodeLocalBoundsRectangle((cast candidate : Dynamic)) : Rectangle);
+        var bounds:Rectangle = (cast (cast getNodeLocalBoundsRectangle : flight._internal._Any->Rectangle)((cast candidate : flight._internal._Any)) : Rectangle);
         if ((cast ((cast _Runtime.strictEquals(mode, 'contain') : Bool) ? (cast (cast enclosesRectangle(({ final __callArgument16:Dynamic = rectangle; __callArgument16; }), ({ final __callArgument17:Dynamic = bounds; __callArgument17; })) : Bool) : Dynamic) : (cast (cast intersectsRectangle(({ final __callArgument20:Dynamic = rectangle; __callArgument20; }), ({ final __callArgument21:Dynamic = bounds; __callArgument21; })) : Bool) : Dynamic)) : Bool)) {
           _Runtime.callProperty(matches, 'push', cast ([candidate] : Array<Dynamic>));
         }

@@ -798,6 +798,7 @@ export * from './TextInputState.mjs';
 export * from './TextItem.mjs';
 export * from './TextJustification.mjs';
 export * from './TextLabel.mjs';
+export * from './TextLabelContentExplanation.mjs';
 export * from './TextLayout.mjs';
 export * from './TextLineMetrics.mjs';
 export * from './TextListMarker.mjs';

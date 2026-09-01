@@ -5,4 +5,4 @@ import Math as HxMath;
 import flight._internal._Runtime;
 
 @:noCompletion
-typedef LassoSelectionRuntime = { var binding:Null<flight._internal._Object>; var active:Bool; var path:Path; };
+typedef LassoSelectionRuntime = { var binding:Null<flight._internal._Object>; @:optional var uid:String; var active:Bool; var path:Path; };

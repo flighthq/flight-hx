@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef EntityRuntime = { var binding:Null<flight._internal._Object>; };
+typedef EntityRuntime = { var binding:Null<flight._internal._Object>; @:optional var uid:String; };

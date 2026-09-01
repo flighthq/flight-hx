@@ -2869,6 +2869,46 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output).not.toContain('{ >Capabilities,');
   });
 
+  it('preserves generic intersection members wrapped in the standard NoInfer intrinsic', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/noInferIntersection.ts',
+      `
+        interface Node<Traits extends object> { runtime?: Traits; }
+        export type NodeOf<Traits extends object> = Node<Traits> & NoInfer<Traits>;
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'NoInferIntersectionFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('typedef NodeOf<Traits> = flight._internal._Intersection2<Node<Traits>, Traits>;');
+  });
+
+  it('keeps a source-defined NoInfer alias nominal', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/shadowedNoInfer.ts',
+      `
+        export type NoInfer<Type> = { value: Type };
+        export type Wrapped<Type> = NoInfer<Type>;
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'ShadowedNoInferFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('typedef Wrapped<Type> = NoInfer<Type>;');
+  });
+
   it('keeps intersections with conflicting structural fields nominal', () => {
     const { checker, source } = typedSource(
       '/workspace/upstream/packages/example/src/overlappingIntersection.ts',

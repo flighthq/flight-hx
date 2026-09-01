@@ -37,10 +37,10 @@ import flight.types.Mesh;
 import flight.types.MeshGeometry;
 import flight.types.MeshRuntime;
 import flight.types.MeshTriangleVertexIndices;
-import flight.types.Node;
 import flight.types.Node3D;
 import flight.types.Node3DTraits;
 import flight.types.NodeAny;
+import flight.types.NodeOf;
 import flight.types.NodeRuntime;
 import flight.types.PerspectiveProjection;
 import flight.types.Projection;
@@ -146,7 +146,7 @@ class _Picking {
   }
 
   public static function pickNode__pickScene3D(node:Node3D, ray:Ray3D, predicate:Null<Mesh->Bool>, maxDistance:Float, cullBackfaces:Bool, onHit:Scene3DHit->Void):Void {
-    var children:Null<Array<Node<Node3DTraits>>> = cast _Runtime.UNDEFINED;
+    var children:Null<Array<NodeOf<Node3DTraits>>> = cast _Runtime.UNDEFINED;
     if ((cast !(cast _Runtime.field(node, 'enabled') : Bool) : Bool)) { return; }
     if ((cast ((cast (cast isMesh((cast node : flight._internal._Any)) : Bool) : Bool) && (cast _Runtime.orValue(_Runtime.strictEquals(predicate, _Runtime.field(_Runtime, 'UNDEFINED')), function():Dynamic return cast (cast (cast predicate : Mesh->Bool)(({ final __callArgument71:Dynamic = node; __callArgument71; })) : Bool)) : Bool)) : Bool)) {
       _Picking.intersectMeshTriangles__pickScene3D(({ final __callArgument73:Dynamic = node; __callArgument73; }), ({ final __callArgument74:Dynamic = ray; __callArgument74; }), (cast maxDistance : Float), (cast cullBackfaces : Bool), ({ final __callArgument75:Dynamic = onHit; __callArgument75; }));

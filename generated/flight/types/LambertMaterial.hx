@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef LambertMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Kind; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var diffuse:Float; var diffuseMap:Null<Texture>; var emissive:Float; var emissiveMap:Null<Texture>; };
+typedef LambertMaterial = { @:optional var __EntityRuntimeKey:Null<EntityRuntime>; var kind:Dynamic; @:optional var name:Null<String>; var alphaCutoff:Float; var alphaMode:MaterialAlphaMode; var blendMode:BlendMode; var doubleSided:Bool; var diffuse:Float; var diffuseMap:Null<Texture>; var emissive:Float; var emissiveMap:Null<Texture>; };

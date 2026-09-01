@@ -205,7 +205,7 @@ class _HostCapacitor {
 
     })) }; __callArgument20; })) : { >Entity, var hideApp:Void->flight._internal._Any; }) }, { quit: (cast createEntity(({ final __callArgument22:Dynamic = { quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).exitApp(), function(__unused2:flight._internal._Any):Void {
 
-    })) }; __callArgument22; })) : { >Entity, var quit:Void->flight._internal._Any; }) }]) : Dynamic)) : { >Entity, var hide:{ >Entity, var hideApp:Void->flight._internal._Any; }; var quit:{ >Entity, var quit:Void->flight._internal._Any; }; var ___u40_EntityRuntimeKey_u40_10487:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var activate:AppActivateBackend; });
+    })) }; __callArgument22; })) : { >Entity, var quit:Void->flight._internal._Any; }) }]) : Dynamic)) : { >Entity, var hide:{ >Entity, var hideApp:Void->flight._internal._Any; }; var quit:{ >Entity, var quit:Void->flight._internal._Any; }; var ___u40_EntityRuntimeKey_u40_10509:Null<EntityRuntime>; var name:AppNameBackend; var version:AppVersionBackend; var activate:AppActivateBackend; });
     return cast null;
   }
 

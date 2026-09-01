@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MeshGeometryRuntime = { var binding:Null<flight._internal._Object>; var attributeDataView:Null<{ var buffer:flight._internal._ArrayBufferLike; var byteOffset:Float; var byteLength:Float; var view:Dynamic; }>; var boundsVersion:Float; var morphBindPose:Null<MeshMorphBindPose>; var morphBlendedWeights:Null<flight._internal._Float32Array>; var skinBindPose:Null<MeshSkinBindPose>; var webglData:Null<MeshGeometryGlData>; var webgpuData:Null<MeshGeometryWgpuData>; };
+typedef MeshGeometryRuntime = { var binding:Null<flight._internal._Object>; @:optional var uid:String; var attributeDataView:Null<{ var buffer:flight._internal._ArrayBufferLike; var byteOffset:Float; var byteLength:Float; var view:Dynamic; }>; var boundsVersion:Float; var morphBindPose:Null<MeshMorphBindPose>; var morphBlendedWeights:Null<flight._internal._Float32Array>; var skinBindPose:Null<MeshSkinBindPose>; var webglData:Null<MeshGeometryGlData>; var webgpuData:Null<MeshGeometryWgpuData>; };

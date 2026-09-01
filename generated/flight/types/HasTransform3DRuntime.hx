@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HasTransform3DRuntime = { var binding:Null<flight._internal._Object>; var localMatrix4:Null<Matrix4>; var localMatrix4Detached:Bool; var worldMatrix4:Null<Matrix4>; };
+typedef HasTransform3DRuntime = { var binding:Null<flight._internal._Object>; @:optional var uid:String; var localMatrix4:Null<Matrix4>; var localMatrix4Detached:Bool; var worldMatrix4:Null<Matrix4>; };

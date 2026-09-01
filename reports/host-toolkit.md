@@ -1,6 +1,6 @@
 # Host Toolkit Dependency Audit
 
-Upstream commit: `2e86cd620a53121aa6c9230215f44c6c9a3bf816`
+Upstream commit: `b3bb4bf61833f7723e7033dd5c732e91a6601400`
 
 Generated code owns checker-known source types and stable lookup keys. Maintained source owns the declarations, target values, and adapters behind those keys. Generation fails when a referenced key has no declared toolkit provider; Dynamic compatibility declarations remain visible as toolkit debt rather than changing the generated type or member expression.
 
@@ -13,8 +13,8 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | Portable global value keys | 35 |
 | JavaScript-only global value keys | 35 |
 | Module value keys | 0 |
-| Type uses | 8718 |
-| Value uses | 2092 |
+| Type uses | 8738 |
+| Value uses | 2084 |
 | Missing toolkit entries | 0 |
 
 ## Types
@@ -92,7 +92,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:GPUAllowSharedBufferSource` | `host` | `flight._internal.dom.GPUAllowSharedBufferSource` | `src/flight/_internal/dom/GPUAllowSharedBufferSource.hx` | `typed` | 4 |
 | `host:GPUBindGroup` | `host` | `flight._internal.dom.GPUBindGroup` | `src/flight/_internal/dom/GPUBindGroup.hx` | `dynamic-stub` | 209 |
 | `host:GPUBindGroupEntry` | `host` | `flight._internal.dom.GPUBindGroupEntry` | `src/flight/_internal/dom/GPUBindGroupEntry.hx` | `dynamic-stub` | 15 |
-| `host:GPUBindGroupLayout` | `host` | `flight._internal.dom.GPUBindGroupLayout` | `src/flight/_internal/dom/GPUBindGroupLayout.hx` | `dynamic-stub` | 283 |
+| `host:GPUBindGroupLayout` | `host` | `flight._internal.dom.GPUBindGroupLayout` | `src/flight/_internal/dom/GPUBindGroupLayout.hx` | `dynamic-stub` | 281 |
 | `host:GPUBindGroupLayoutEntry` | `host` | `flight._internal.dom.GPUBindGroupLayoutEntry` | `src/flight/_internal/dom/GPUBindGroupLayoutEntry.hx` | `dynamic-stub` | 10 |
 | `host:GPUBlendComponent` | `host` | `flight._internal.dom.GPUBlendComponent` | `src/flight/_internal/dom/GPUBlendComponent.hx` | `dynamic-stub` | 3 |
 | `host:GPUBlendFactor` | `host` | `flight._internal.dom.GPUBlendFactor` | `src/flight/_internal/dom/GPUBlendFactor.hx` | `dynamic-stub` | 2 |
@@ -131,7 +131,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:GPUPrimitiveTopology` | `host` | `flight._internal.dom.GPUPrimitiveTopology` | `src/flight/_internal/dom/GPUPrimitiveTopology.hx` | `dynamic-stub` | 1 |
 | `host:GPUQueue` | `host` | `flight._internal.dom.GPUQueue` | `src/flight/_internal/dom/GPUQueue.hx` | `dynamic-stub` | 88 |
 | `host:GPURenderPassEncoder` | `host` | `flight._internal.dom.GPURenderPassEncoder` | `src/flight/_internal/dom/GPURenderPassEncoder.hx` | `dynamic-stub` | 265 |
-| `host:GPURenderPipeline` | `host` | `flight._internal.dom.GPURenderPipeline` | `src/flight/_internal/dom/GPURenderPipeline.hx` | `dynamic-stub` | 122 |
+| `host:GPURenderPipeline` | `host` | `flight._internal.dom.GPURenderPipeline` | `src/flight/_internal/dom/GPURenderPipeline.hx` | `dynamic-stub` | 120 |
 | `host:GPURenderPipelineDescriptor` | `host` | `flight._internal.dom.GPURenderPipelineDescriptor` | `src/flight/_internal/dom/GPURenderPipelineDescriptor.hx` | `dynamic-stub` | 8 |
 | `host:GPUSampler` | `host` | `flight._internal.dom.GPUSampler` | `src/flight/_internal/dom/GPUSampler.hx` | `dynamic-stub` | 222 |
 | `host:GPUSamplerDescriptor` | `host` | `flight._internal.dom.GPUSamplerDescriptor` | `src/flight/_internal/dom/GPUSamplerDescriptor.hx` | `dynamic-stub` | 4 |
@@ -245,14 +245,14 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `host:WebGLActiveInfo` | `host` | `flight._internal.dom.WebGLActiveInfo` | `src/flight/_internal/dom/WebGLActiveInfo.hx` | `dynamic-stub` | 8 |
 | `host:WebGLBuffer` | `host` | `flight._internal.dom.WebGLBuffer` | `src/flight/_internal/dom/WebGLBuffer.hx` | `dynamic-stub` | 67 |
 | `host:WebGLContextAttributes` | `host` | `flight._internal.dom.WebGLContextAttributes` | `src/flight/_internal/dom/WebGLContextAttributes.hx` | `dynamic-stub` | 1 |
-| `host:WebGLFramebuffer` | `host` | `flight._internal.dom.WebGLFramebuffer` | `src/flight/_internal/dom/WebGLFramebuffer.hx` | `dynamic-stub` | 39 |
+| `host:WebGLFramebuffer` | `host` | `flight._internal.dom.WebGLFramebuffer` | `src/flight/_internal/dom/WebGLFramebuffer.hx` | `dynamic-stub` | 45 |
 | `host:WebGLPowerPreference` | `host` | `flight._internal.dom.WebGLPowerPreference` | `src/flight/_internal/dom/WebGLPowerPreference.hx` | `dynamic-stub` | 1 |
-| `host:WebGLProgram` | `host` | `flight._internal.dom.WebGLProgram` | `src/flight/_internal/dom/WebGLProgram.hx` | `dynamic-stub` | 248 |
-| `host:WebGLRenderbuffer` | `host` | `flight._internal.dom.WebGLRenderbuffer` | `src/flight/_internal/dom/WebGLRenderbuffer.hx` | `dynamic-stub` | 6 |
+| `host:WebGLProgram` | `host` | `flight._internal.dom.WebGLProgram` | `src/flight/_internal/dom/WebGLProgram.hx` | `dynamic-stub` | 252 |
+| `host:WebGLRenderbuffer` | `host` | `flight._internal.dom.WebGLRenderbuffer` | `src/flight/_internal/dom/WebGLRenderbuffer.hx` | `dynamic-stub` | 11 |
 | `host:WebGLRenderingContext` | `host` | `flight._internal.dom.WebGLRenderingContext` | `src/flight/_internal/dom/WebGLRenderingContext.hx` | `dynamic-stub` | 8 |
 | `host:WebGLShader` | `host` | `flight._internal.dom.WebGLShader` | `src/flight/_internal/dom/WebGLShader.hx` | `dynamic-stub` | 4 |
-| `host:WebGLTexture` | `host` | `flight._internal.dom.WebGLTexture` | `src/flight/_internal/dom/WebGLTexture.hx` | `dynamic-stub` | 414 |
-| `host:WebGLUniformLocation` | `host` | `flight._internal.dom.WebGLUniformLocation` | `src/flight/_internal/dom/WebGLUniformLocation.hx` | `dynamic-stub` | 374 |
+| `host:WebGLTexture` | `host` | `flight._internal.dom.WebGLTexture` | `src/flight/_internal/dom/WebGLTexture.hx` | `dynamic-stub` | 422 |
+| `host:WebGLUniformLocation` | `host` | `flight._internal.dom.WebGLUniformLocation` | `src/flight/_internal/dom/WebGLUniformLocation.hx` | `dynamic-stub` | 375 |
 | `host:WebGLVertexArrayObject` | `host` | `flight._internal.dom.WebGLVertexArrayObject` | `src/flight/_internal/dom/WebGLVertexArrayObject.hx` | `dynamic-stub` | 34 |
 | `host:WebSocket` | `host` | `flight._internal.dom.WebSocket` | `src/flight/_internal/dom/WebSocket.hx` | `dynamic-stub` | 9 |
 | `host:WheelEvent` | `host` | `flight._internal.dom.WheelEvent` | `src/flight/_internal/dom/WheelEvent.hx` | `dynamic-stub` | 9 |
@@ -303,7 +303,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:KeyboardEvent` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 5 |
 | `global:localStorage` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:location` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 7 |
-| `global:Map` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 362 |
+| `global:Map` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 359 |
 | `global:matchMedia` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 6 |
 | `global:MediaMetadata` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 2 |
 | `global:navigator` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 29 |
@@ -329,7 +329,7 @@ Generated code owns checker-known source types and stable lookup keys. Maintaine
 | `global:URL` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 8 |
 | `global:URLSearchParams` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 1 |
 | `global:VideoFrame` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 2 |
-| `global:WeakMap` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 226 |
+| `global:WeakMap` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 221 |
 | `global:WeakSet` | `src/flight/_internal/_HostValueLut.hx` | `portable` | 20 |
 | `global:WebSocket` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 4 |
 | `global:WheelEvent` | `src/flight/_internal/_HostValueLut.hx` | `js-only` | 3 |
