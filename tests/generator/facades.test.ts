@@ -109,7 +109,7 @@ describe('public Haxe facades', () => {
     expect(packageBridge('@flighthq/compression')).toBe(path.join(workspace, 'tests', 'bridges', 'compression.mjs'));
   });
 
-  it('routes mocked contract imports to their canonical compiled owners', () => {
+  it('omits dependency rebinding for contract imports migrated to spies', () => {
     const workspace = process.cwd();
     const applicationGl = readFileSync(
       path.join(workspace, 'tests', 'bridges', 'sources', 'application-gl', 'glApplicationRenderView.mjs'),
@@ -132,26 +132,11 @@ describe('public Haxe facades', () => {
       'utf8',
     );
 
-    expect(applicationGl).toContain("import * as __dependency0 from '@flighthq/node/contract';");
-    expect(applicationGl).toContain("import * as __dependency1 from '@flighthq/render-gl/contract';");
-    expect(applicationGl).toContain('compiled.flight._Node.createViewport = __dependency0.createViewport;');
-    expect(applicationGl).toContain(
-      'compiled.flight._RenderGl.createGlRenderState = __dependency1.createGlRenderState;',
-    );
-    expect(applicationGl).toContain(
-      'compiled.flight._RenderGl.createGlRenderTarget = __dependency1.createGlRenderTarget;',
-    );
-    expect(gltfLoad).toContain("import * as __dependency0 from '@flighthq/scene3d-formats/contract';");
-    expect(gltfLoad).toContain("import * as __dependency1 from '@flighthq/net/contract';");
-    expect(gltfLoad).toContain('compiled.flight._Net.sendNetRequest = __dependency1.sendNetRequest;');
-    expect(ambientLight).not.toContain('__dependency');
-    expect(glDropShadow).toContain(
-      'compiled.flight._RenderGl.acquireGlRenderTarget = __dependency0.acquireGlRenderTarget;',
-    );
-    expect(glDropShadow).not.toContain('getGlRenderStateRuntime = __dependency0.getGlRenderStateRuntime;');
-    expect(glChromaticAberration).toContain(
-      'compiled.flight._EffectsGl.getGlEffectProgram = __dependency1.getGlEffectProgram;',
-    );
+    // Upstream migrated these suites from vi.mock modules to vi.spyOn. Source bridges must not retain
+    // dependency-rebinding machinery for imports that are no longer module-mocked.
+    for (const bridge of [applicationGl, gltfLoad, ambientLight, glDropShadow, glChromaticAberration]) {
+      expect(bridge).not.toContain('__dependency');
+    }
   });
 
   it('keeps callable contract, capability-backend, and test-helper exports live', () => {
