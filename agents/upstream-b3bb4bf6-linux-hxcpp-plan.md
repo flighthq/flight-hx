@@ -1,10 +1,6 @@
 # Flight b3bb4bf6 Refresh and Linux hxcpp Plan
 
-> **Current pin:** this filename and the measurements below deliberately retain the `b3bb4bf6`
-> benchmark baseline. The repository has since advanced to `98a7a58a934f55555a561a308cc23c1363c45652`,
-> which is 47 commits later on the same `develop` lineage. Full generation and the deterministic
-> generation check pass at the newer pin; benchmark numbers remain attributed to the older pin until
-> they are rerun.
+> **Current pin:** this filename and the measurements below deliberately retain the `b3bb4bf6` benchmark baseline. The repository has since advanced to `98a7a58a934f55555a561a308cc23c1363c45652`, which is 47 commits later on the same `develop` lineage. Full generation and the deterministic generation check pass at the newer pin; benchmark numbers remain attributed to the older pin until they are rerun.
 
 ## Decision
 
@@ -193,12 +189,7 @@ This phase is complete when one generated tree can run both representations dete
 
 Acceptance requires zero residual generic `createEntity` erasure for concrete Entity results, a clean class-vs-typedef behavioral differential, full typedef-oracle parity, portable class compilation, native runtime guards, pixels, and the Scene3D/Horse Stacker performance gates.
 
-Activation is gated separately from closure work. Closure and normalization may land in reviewable
-tranches while only the two pilots remain enabled, but any tranche that enables additional classes
-must earn its own paired native benchmark and native `-dce full` smoke. The default-class behavioral
-lane must exercise the newly enabled identities rather than only `Camera2D` and
-`ParticleEmitterState`. The final uniform Entity activation remains blocked until provenance is
-closed for the complete enabled set; no green subset makes an unproven sibling safe.
+Activation is gated separately from closure work. Closure and normalization may land in reviewable tranches while only the two pilots remain enabled, but any tranche that enables additional classes must earn its own paired native benchmark and native `-dce full` smoke. The default-class behavioral lane must exercise the newly enabled identities rather than only `Camera2D` and `ParticleEmitterState`. The final uniform Entity activation remains blocked until provenance is closed for the complete enabled set; no green subset makes an unproven sibling safe.
 
 ### P3: remove camera invalidation/render cost
 

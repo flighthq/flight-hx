@@ -205,7 +205,10 @@ function auditFactorySite(
       schema !== undefined &&
       !shape.hasComputed &&
       !shape.hasUnsupported &&
-      sameFieldSet(constructionFields, schema.fields.map((field) => field.name));
+      sameFieldSet(
+        constructionFields,
+        schema.fields.map((field) => field.name),
+      );
     if (shape.hasSpread) {
       if (exactSpreadProjection) normalizations.push('spread-projection');
       else blockers.push('spread-construction');
