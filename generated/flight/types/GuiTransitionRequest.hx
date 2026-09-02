@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GuiTransitionRequest = { var apply:GuiTransitionValue->Void; var from:GuiTransitionValue; var property:GuiTransitionProperty; var target:Node2D; var value:GuiTransitionValue; };
+typedef GuiTransitionRequest = NodeInteractiveStateTransitionRequest<Node2D, GuiTransitionProperty>;

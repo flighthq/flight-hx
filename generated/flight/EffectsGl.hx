@@ -44,6 +44,8 @@ class EffectsGl {
 
   public static final defaultGlBevelEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flight__EffectsGl.defaultGlBevelEffectRunner;
 
+  public static final defaultGlBitmapDisplacementEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flight__EffectsGl.defaultGlBitmapDisplacementEffectRunner;
+
   public static final defaultGlBlendEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flight__EffectsGl.defaultGlBlendEffectRunner;
 
   public static final defaultGlBloomEffectRunner:GlRenderEffectRunner = Facade_EffectsGl_flight__EffectsGl.defaultGlBloomEffectRunner;
@@ -158,6 +160,10 @@ class EffectsGl {
 
   public static function registerGlBevelEffect(state:GlRenderState):Void {
     Facade_EffectsGl_flight__EffectsGl.registerGlBevelEffect(state);
+  }
+
+  public static function registerGlBitmapDisplacementEffect(state:GlRenderState):Void {
+    Facade_EffectsGl_flight__EffectsGl.registerGlBitmapDisplacementEffect(state);
   }
 
   public static function registerGlBlendEffect(state:GlRenderState):Void {

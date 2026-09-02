@@ -4,12 +4,14 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._RenderGl as Facade_RenderGl_flight__RenderGl;
+import flight.types.BlendMode;
 import flight.types.CreateExternalTextureOptions;
 import flight.types.GlBlendRealization;
 import flight.types.GlCompressedTextureDecoder;
 import flight.types.GlContext;
 import flight.types.GlContextOptions;
 import flight.types.GlContextState;
+import flight.types.GlFullscreenProgram;
 import flight.types.GlPipeline;
 import flight.types.GlRenderOptions;
 import flight.types.GlRenderRegistries;
@@ -45,6 +47,10 @@ class RenderGl {
     return cast null;
   }
 
+  public static function applyGlBlendMode(state:GlRenderState, blendMode:Null<BlendMode>):Void {
+    Facade_RenderGl_flight__RenderGl.applyGlBlendMode(state, blendMode);
+  }
+
   public static function beginGlRenderPass(state:GlRenderState, target:GlRenderTarget, ?preserve:RenderPassPreserve, ?viewport:Viewport):Void {
     Facade_RenderGl_flight__RenderGl.beginGlRenderPass(state, target, preserve, viewport);
   }
@@ -66,6 +72,11 @@ class RenderGl {
 
   public static function clearGlRenderTexture(state:GlRenderState, renderTexture:RenderTexture):Void {
     Facade_RenderGl_flight__RenderGl.clearGlRenderTexture(state, renderTexture);
+  }
+
+  public static function compileGlFullscreenProgram(gl:GlContext, fragmentSource:String):GlFullscreenProgram {
+    return cast Facade_RenderGl_flight__RenderGl.compileGlFullscreenProgram(gl, fragmentSource);
+    return cast null;
   }
 
   public static function createEmptyGlRegistries():GlRenderRegistries {
@@ -148,6 +159,14 @@ class RenderGl {
     return cast null;
   }
 
+  public static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<flight._internal.dom.WebGLTexture>, dest:Null<GlRenderTarget>, setUniforms:GlContext->GlFullscreenProgram->Void):Void {
+    Facade_RenderGl_flight__RenderGl.drawGlFullscreenPass(state, program, inputs, dest, setUniforms);
+  }
+
+  public static function drawGlQuad(state:GlRenderState, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+    Facade_RenderGl_flight__RenderGl.drawGlQuad(state, x0, y0, x1, y1, u0, v0, u1, v1);
+  }
+
   public static function enableGlBlendModeSupport(state:GlRenderState):Void {
     Facade_RenderGl_flight__RenderGl.enableGlBlendModeSupport(state);
   }
@@ -193,13 +212,25 @@ class RenderGl {
     return cast null;
   }
 
+  public static function invalidateGlRenderStateCache(state:GlRenderState):Void {
+    Facade_RenderGl_flight__RenderGl.invalidateGlRenderStateCache(state);
+  }
+
   public static function isGlRenderTargetFormatSupported(state:GlRenderState, format:RenderTargetFormat):Bool {
     return cast Facade_RenderGl_flight__RenderGl.isGlRenderTargetFormatSupported(state, format);
     return cast null;
   }
 
+  public static function popGlRenderState(state:GlRenderState):Void {
+    Facade_RenderGl_flight__RenderGl.popGlRenderState(state);
+  }
+
   public static function presentGlRenderTarget(state:GlRenderState, target:GlRenderTarget, ?dest:Null<GlRenderTarget>):Void {
     Facade_RenderGl_flight__RenderGl.presentGlRenderTarget(state, target, dest);
+  }
+
+  public static function pushGlRenderState(state:GlRenderState):Void {
+    Facade_RenderGl_flight__RenderGl.pushGlRenderState(state);
   }
 
   public static function registerGlBitmapTextureResolver(state:GlRenderState):Void {
@@ -270,6 +301,11 @@ class RenderGl {
 
   public static function uploadGlCompressedTextureContainer(gl:GlContext, container:TextureContainer, payload:flight._internal._UInt8Array, ?decode:GlCompressedTextureDecoder, ?colorSpace:TextureColorSpace):Bool {
     return cast Facade_RenderGl_flight__RenderGl.uploadGlCompressedTextureContainer(gl, container, payload, decode, colorSpace);
+    return cast null;
+  }
+
+  public static function withGlRenderState<T>(state:GlRenderState, callback:Void->T):T {
+    return cast Facade_RenderGl_flight__RenderGl.withGlRenderState(state, callback);
     return cast null;
   }
 

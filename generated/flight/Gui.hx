@@ -10,6 +10,11 @@ import flight.types.ButtonControllerSignals;
 import flight.types.ComboBoxController;
 import flight.types.ComboBoxControllerOptions;
 import flight.types.ComboBoxControllerSignals;
+import flight.types.GuiDialog;
+import flight.types.GuiDialogCloseResult;
+import flight.types.GuiDialogEntry;
+import flight.types.GuiDialogOptions;
+import flight.types.GuiDialogSignals;
 import flight.types.InputKeyboardData;
 import flight.types.ListController;
 import flight.types.ListControllerOptions;
@@ -55,6 +60,11 @@ class Gui {
     Facade_Gui_flight__Gui.blurTextInputController(controller);
   }
 
+  public static function closeGuiDialog(dialog:GuiDialog, result:GuiDialogCloseResult):Bool {
+    return cast Facade_Gui_flight__Gui.closeGuiDialog(dialog, result);
+    return cast null;
+  }
+
   public static function createButtonController(options:ButtonControllerOptions):ButtonController {
     return cast Facade_Gui_flight__Gui.createButtonController(options);
     return cast null;
@@ -62,6 +72,11 @@ class Gui {
 
   public static function createComboBoxController(options:ComboBoxControllerOptions):ComboBoxController {
     return cast Facade_Gui_flight__Gui.createComboBoxController(options);
+    return cast null;
+  }
+
+  public static function createGuiDialog(?options:GuiDialogOptions):GuiDialog {
+    return cast Facade_Gui_flight__Gui.createGuiDialog(options);
     return cast null;
   }
 
@@ -148,6 +163,10 @@ class Gui {
     Facade_Gui_flight__Gui.disposeComboBoxController(controller);
   }
 
+  public static function disposeGuiDialog(dialog:GuiDialog):Void {
+    Facade_Gui_flight__Gui.disposeGuiDialog(dialog);
+  }
+
   public static function disposeListController(controller:ListController):Void {
     Facade_Gui_flight__Gui.disposeListController(controller);
   }
@@ -200,8 +219,18 @@ class Gui {
     Facade_Gui_flight__Gui.disposeWindowController(controller);
   }
 
+  public static function enqueueGuiDialog(dialog:GuiDialog, entry:GuiDialogEntry):Bool {
+    return cast Facade_Gui_flight__Gui.enqueueGuiDialog(dialog, entry);
+    return cast null;
+  }
+
   public static function focusTextInputController(controller:TextInputController):Void {
     Facade_Gui_flight__Gui.focusTextInputController(controller);
+  }
+
+  public static function getActiveGuiDialogEntry(dialog:GuiDialog):Null<GuiDialogEntry> {
+    return cast Facade_Gui_flight__Gui.getActiveGuiDialogEntry(dialog);
+    return cast null;
   }
 
   public static function getButtonControllerSignals(controller:ButtonController):ButtonControllerSignals {
@@ -211,6 +240,16 @@ class Gui {
 
   public static function getComboBoxControllerSignals(controller:ComboBoxController):ComboBoxControllerSignals {
     return cast Facade_Gui_flight__Gui.getComboBoxControllerSignals(controller);
+    return cast null;
+  }
+
+  public static function getGuiDialogEntries(dialog:GuiDialog, ?out:Array<GuiDialogEntry>):Array<GuiDialogEntry> {
+    return cast Facade_Gui_flight__Gui.getGuiDialogEntries(dialog, out);
+    return cast null;
+  }
+
+  public static function getGuiDialogSignals(dialog:GuiDialog):GuiDialogSignals {
+    return cast Facade_Gui_flight__Gui.getGuiDialogSignals(dialog);
     return cast null;
   }
 
@@ -340,6 +379,11 @@ class Gui {
 
   public static function isTreeViewControllerItemExpanded(controller:TreeViewController, item:TreeViewControllerItem):Bool {
     return cast Facade_Gui_flight__Gui.isTreeViewControllerItemExpanded(controller, item);
+    return cast null;
+  }
+
+  public static function removeGuiDialogEntry(dialog:GuiDialog, id:String):Bool {
+    return cast Facade_Gui_flight__Gui.removeGuiDialogEntry(dialog, id);
     return cast null;
   }
 

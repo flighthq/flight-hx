@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GuiTransitionDescriptor = { var run:GuiTransitionRequest->Void; };
+typedef GuiTransitionDescriptor = NodeInteractiveStateTransition<Node2D, GuiTransitionProperty>;

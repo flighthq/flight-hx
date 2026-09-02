@@ -12,4 +12,5 @@ export const enableSocketGuards = compiled.flight.Socket.enableSocketGuards;
 export const enableSocketSignals = compiled.flight.Socket.enableSocketSignals;
 export const explainSocketSendFailure = compiled.flight.Socket.explainSocketSendFailure;
 export const getSocketReadyState = compiled.flight.Socket.getSocketReadyState;
+export const openTcpSocket = compiled.flight.Socket.openTcpSocket;
 export const sendSocketMessage = compiled.flight.Socket.sendSocketMessage;

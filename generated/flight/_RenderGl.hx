@@ -616,9 +616,7 @@ class _RenderGl {
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function applyGlBlendMode(state:GlRenderState, blendMode:Null<BlendMode>):Void {
+  public static function applyGlBlendMode(state:GlRenderState, blendMode:Null<BlendMode>):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:GlContext = cast _Runtime.UNDEFINED;
     var entry:Null<flight._internal._Union2<{ var state:String; }, { var state:String; var value:GlBlendRealization; }>> = cast _Runtime.UNDEFINED;
@@ -790,9 +788,7 @@ class _RenderGl {
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function drawGlQuad(state:GlRenderState, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+  public static function drawGlQuad(state:GlRenderState, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:GlContext = cast _Runtime.UNDEFINED;
     var __destructure0:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -1128,9 +1124,7 @@ class _RenderGl {
     ((cast runtime.context : GlContextRuntime).currentBlendSignature = null);
   }
 
-  @:allow(flight)
-  @:keep
-  private static function compileGlFullscreenProgram(gl:GlContext, fragmentSource:String):GlFullscreenProgram {
+  public static function compileGlFullscreenProgram(gl:GlContext, fragmentSource:String):GlFullscreenProgram {
     var program:flight._internal.dom.WebGLProgram = cast _Runtime.UNDEFINED;
     var textures:Array<flight._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
     var single:Null<flight._internal.dom.WebGLUniformLocation> = cast _Runtime.UNDEFINED;
@@ -1150,9 +1144,7 @@ class _RenderGl {
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<flight._internal.dom.WebGLTexture>, dest:Null<GlRenderTarget>, setUniforms:GlContext->GlFullscreenProgram->Void):Void {
+  public static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<flight._internal.dom.WebGLTexture>, dest:Null<GlRenderTarget>, setUniforms:GlContext->GlFullscreenProgram->Void):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:GlContext = cast _Runtime.UNDEFINED;
     var destFramebuffer:Null<flight._internal.dom.WebGLFramebuffer> = cast _Runtime.UNDEFINED;
@@ -1847,9 +1839,7 @@ class _RenderGl {
     return cast null;
   }
 
-  @:allow(flight)
-  @:keep
-  private static function invalidateGlRenderStateCache(state:GlRenderState):Void {
+  public static function invalidateGlRenderStateCache(state:GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     runtime = (cast getGlRenderStateRuntime(({ final __callArgument557:Dynamic = state; __callArgument557; })) : GlRenderStateRuntime);
     ((cast runtime.context : GlContextRuntime).currentBlendSignature = null);
@@ -1875,9 +1865,7 @@ class _RenderGl {
 
   public static final _destroyedStates__glRenderState:flight._internal._WeakSet<GlRenderState> = _Runtime.construct(flight._internal._HostValueLut.get('WeakSet'), []);
 
-  @:allow(flight)
-  @:keep
-  private static function popGlRenderState(state:GlRenderState):Void {
+  public static function popGlRenderState(state:GlRenderState):Void {
     var saved:Null<SavedGlRenderState__glRenderStateBracket> = cast _Runtime.UNDEFINED;
     var gl:GlContext = cast _Runtime.UNDEFINED;
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
@@ -1928,9 +1916,7 @@ class _RenderGl {
     (runtime.renderTargetViewport = cast ((cast saved : SavedGlRenderState__glRenderStateBracket).renderTargetViewport : Null<GlViewportRect>));
   }
 
-  @:allow(flight)
-  @:keep
-  private static function pushGlRenderState(state:GlRenderState):Void {
+  public static function pushGlRenderState(state:GlRenderState):Void {
     var runtime:GlRenderStateRuntime = cast _Runtime.UNDEFINED;
     var gl:GlContext = cast _Runtime.UNDEFINED;
     var activeTexture:Float = cast _Runtime.UNDEFINED;
@@ -1958,9 +1944,7 @@ class _RenderGl {
     _Runtime.callProperty(stack, 'push', cast ([{ activeTexture: activeTexture, blend: flight._internal.backend.WebGl2Backend.isEnabled(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND', flight._internal.backend.WebGl2Backend.BLEND)), blendDstAlpha: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_DST_ALPHA', flight._internal.backend.WebGl2Backend.BLEND_DST_ALPHA)) : Float), blendDstRgb: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_DST_RGB', flight._internal.backend.WebGl2Backend.BLEND_DST_RGB)) : Float), blendEquationAlpha: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_EQUATION_ALPHA', flight._internal.backend.WebGl2Backend.BLEND_EQUATION_ALPHA)) : Float), blendEquationRgb: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_EQUATION_RGB', flight._internal.backend.WebGl2Backend.BLEND_EQUATION_RGB)) : Float), blendSrcAlpha: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_SRC_ALPHA', flight._internal.backend.WebGl2Backend.BLEND_SRC_ALPHA)) : Float), blendSrcRgb: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'BLEND_SRC_RGB', flight._internal.backend.WebGl2Backend.BLEND_SRC_RGB)) : Float), clearColor: (cast _RenderGl.readGlBox__glRenderStateBracket(({ final __callArgument586:Dynamic = gl; __callArgument586; }), (cast flight._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_CLEAR_VALUE', flight._internal.backend.WebGl2Backend.COLOR_CLEAR_VALUE) : Float)) : GlBox__glRenderStateBracket), colorMask: (cast _RenderGl.readGlBooleanQuad__glRenderStateBracket(({ final __callArgument588:Dynamic = gl; __callArgument588; }), (cast flight._internal.backend.WebGl2Backend.contextConstant(gl, 'COLOR_WRITEMASK', flight._internal.backend.WebGl2Backend.COLOR_WRITEMASK) : Float)) : GlBooleanQuad__glRenderStateBracket), cullFace: flight._internal.backend.WebGl2Backend.isEnabled(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE', flight._internal.backend.WebGl2Backend.CULL_FACE)), cullFaceMode: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'CULL_FACE_MODE', flight._internal.backend.WebGl2Backend.CULL_FACE_MODE)) : Float), frontFace: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'FRONT_FACE', flight._internal.backend.WebGl2Backend.FRONT_FACE)) : Float), stencilBackFail: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_BACK_FAIL', flight._internal.backend.WebGl2Backend.STENCIL_BACK_FAIL)) : Float), stencilBackFunc: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_BACK_FUNC', flight._internal.backend.WebGl2Backend.STENCIL_BACK_FUNC)) : Float), stencilBackPassDepthFail: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_BACK_PASS_DEPTH_FAIL', flight._internal.backend.WebGl2Backend.STENCIL_BACK_PASS_DEPTH_FAIL)) : Float), stencilBackPassDepthPass: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_BACK_PASS_DEPTH_PASS', flight._internal.backend.WebGl2Backend.STENCIL_BACK_PASS_DEPTH_PASS)) : Float), stencilBackRef: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_BACK_REF', flight._internal.backend.WebGl2Backend.STENCIL_BACK_REF)) : Float), stencilBackValueMask: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_BACK_VALUE_MASK', flight._internal.backend.WebGl2Backend.STENCIL_BACK_VALUE_MASK)) : Float), stencilBackWriteMask: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_BACK_WRITEMASK', flight._internal.backend.WebGl2Backend.STENCIL_BACK_WRITEMASK)) : Float), stencilFail: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_FAIL', flight._internal.backend.WebGl2Backend.STENCIL_FAIL)) : Float), stencilFunc: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_FUNC', flight._internal.backend.WebGl2Backend.STENCIL_FUNC)) : Float), stencilPassDepthFail: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_PASS_DEPTH_FAIL', flight._internal.backend.WebGl2Backend.STENCIL_PASS_DEPTH_FAIL)) : Float), stencilPassDepthPass: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_PASS_DEPTH_PASS', flight._internal.backend.WebGl2Backend.STENCIL_PASS_DEPTH_PASS)) : Float), stencilRef: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_REF', flight._internal.backend.WebGl2Backend.STENCIL_REF)) : Float), stencilTest: flight._internal.backend.WebGl2Backend.isEnabled(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_TEST', flight._internal.backend.WebGl2Backend.STENCIL_TEST)), stencilValueMask: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_VALUE_MASK', flight._internal.backend.WebGl2Backend.STENCIL_VALUE_MASK)) : Float), stencilWriteMask: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'STENCIL_WRITEMASK', flight._internal.backend.WebGl2Backend.STENCIL_WRITEMASK)) : Float), currentFramebuffer: runtime.currentFramebuffer, currentBlendSignature: (cast runtime.context : GlContextRuntime).currentBlendSignature, currentRenderTarget: runtime.currentRenderTarget, currentShader: (cast runtime.context : GlContextRuntime).currentShader, currentScissorRect: runtime.currentScissorRect, currentTextureRealization: (cast runtime.context : GlContextRuntime).currentTextureRealization, depthFunc: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_FUNC', flight._internal.backend.WebGl2Backend.DEPTH_FUNC)) : Float), depthMask: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_WRITEMASK', flight._internal.backend.WebGl2Backend.DEPTH_WRITEMASK)) : Bool), depthTest: flight._internal.backend.WebGl2Backend.isEnabled(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'DEPTH_TEST', flight._internal.backend.WebGl2Backend.DEPTH_TEST)), framebuffer: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'FRAMEBUFFER_BINDING', flight._internal.backend.WebGl2Backend.FRAMEBUFFER_BINDING)) : Null<flight._internal.dom.WebGLFramebuffer>), program: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'CURRENT_PROGRAM', flight._internal.backend.WebGl2Backend.CURRENT_PROGRAM)) : Null<flight._internal.dom.WebGLProgram>), renderTargetViewport: runtime.renderTargetViewport, scissorBox: (cast _RenderGl.readGlBox__glRenderStateBracket(({ final __callArgument590:Dynamic = gl; __callArgument590; }), (cast flight._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_BOX', flight._internal.backend.WebGl2Backend.SCISSOR_BOX) : Float)) : GlBox__glRenderStateBracket), scissorTest: flight._internal.backend.WebGl2Backend.isEnabled(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'SCISSOR_TEST', flight._internal.backend.WebGl2Backend.SCISSOR_TEST)), texture2DByUnit: texture2DByUnit, unpackPremultiplyAlpha: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'UNPACK_PREMULTIPLY_ALPHA_WEBGL', flight._internal.backend.WebGl2Backend.UNPACK_PREMULTIPLY_ALPHA_WEBGL)) : Bool), vertexArray: (cast flight._internal.backend.WebGl2Backend.getParameter(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'VERTEX_ARRAY_BINDING', flight._internal.backend.WebGl2Backend.VERTEX_ARRAY_BINDING)) : Null<flight._internal.dom.WebGLVertexArrayObject>), viewport: (cast _RenderGl.readGlBox__glRenderStateBracket(({ final __callArgument592:Dynamic = gl; __callArgument592; }), (cast flight._internal.backend.WebGl2Backend.contextConstant(gl, 'VIEWPORT', flight._internal.backend.WebGl2Backend.VIEWPORT) : Float)) : GlBox__glRenderStateBracket) }] : Array<Dynamic>));
   }
 
-  @:allow(flight)
-  @:keep
-  private static function withGlRenderState<T>(state:GlRenderState, callback:Void->T):T {
+  public static function withGlRenderState<T>(state:GlRenderState, callback:Void->T):T {
     pushGlRenderState(({ final __callArgument594:Dynamic = state; __callArgument594; }));
     try {
       try {

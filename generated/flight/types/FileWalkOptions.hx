@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FileWalkOptions = { @:optional var maxDepth:Float; };
+typedef FileWalkOptions = { @:optional var maxDepth:Float; @:optional var signal:flight._internal.dom.AbortSignal; };

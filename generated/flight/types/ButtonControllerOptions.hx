@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ButtonControllerOptions = { @:optional var transition:GuiTransitionDescriptor; @:optional var disabled:Bool; @:optional var downState:Node2D; @:optional var hitArea:Node2D; @:optional var overState:Node2D; var upState:Node2D; };
+typedef ButtonControllerOptions = { @:optional var transition:GuiTransitionDescriptor; @:optional var disabled:Bool; @:optional var downState:Node2D; @:optional var hitArea:Node2D; @:optional var interactiveStateBinding:NodeInteractiveStateBinding; @:optional var overState:Node2D; var upState:Node2D; };

@@ -9,6 +9,66 @@ import flight.types.Compression;
 import flight.types.CompressionFraming;
 import flight.types.Decompressor;
 
+@:keep
+class DeflateBitWriter__compress {
+  private var bitCount:Float = 0.0;
+  private var bitBuffer:Float = 0.0;
+  private var bytes:flight._internal._UInt8Array = new flight._internal._UInt8Array(_Compression.INITIAL_OUTPUT_BYTES__compress);
+  private var length:Float = 0.0;
+  public function new():Void {
+  }
+  public function writeBits(value:Float, count:Float):Void {
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast count : Float)) : Bool)) {
+        (cast this : DeflateBitWriter__compress).writeBit((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(value), _Runtime.toInt32(i))) & 1));
+        i++;
+      }
+    }
+  }
+  public function writeCode(code:Float, count:Float):Void {
+    {
+      var i:Float = (count - 1.0);
+      while ((cast ((cast i : Float) >= (cast 0.0 : Float)) : Bool)) {
+        (cast this : DeflateBitWriter__compress).writeBit((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(code), _Runtime.toInt32(i))) & 1));
+        i--;
+      }
+    }
+  }
+  public function alignToByte():Void {
+    if ((cast !_Runtime.strictEquals(this.bitCount, 0.0) : Bool)) {
+      (cast this : DeflateBitWriter__compress).push(this.bitBuffer);
+      (this.bitBuffer = 0.0);
+      (this.bitCount = 0.0);
+    }
+  }
+  public function writeByte(value:Float):Void {
+    (cast this : DeflateBitWriter__compress).push(value);
+  }
+  public function finish():flight._internal._UInt8Array {
+    (cast this : DeflateBitWriter__compress).alignToByte();
+    return cast _Runtime.slice(this.bytes, 0.0, this.length);
+    return cast null;
+  }
+  private function writeBit(bit:Float):Void {
+    (this.bitBuffer = (_Runtime.toInt32(this.bitBuffer) | _Runtime.toInt32((_Runtime.toInt32(bit) << _Runtime.toInt32(this.bitCount)))));
+    this.bitCount++;
+    if ((cast _Runtime.strictEquals(this.bitCount, 8.0) : Bool)) {
+      (cast this : DeflateBitWriter__compress).push(this.bitBuffer);
+      (this.bitBuffer = 0.0);
+      (this.bitCount = 0.0);
+    }
+  }
+  private function push(value:Float):Void {
+    if ((cast _Runtime.strictEquals(this.length, _Runtime.field(this.bytes, 'length')) : Bool)) {
+      var grown:flight._internal._UInt8Array = new flight._internal._UInt8Array(_Runtime.multiplyNumbers(_Runtime.field(this.bytes, 'length'), 2.0));
+      (cast grown : flight._internal._UInt8Array).set(this.bytes);
+      (this.bytes = grown);
+    }
+    flight._internal._StaticIndex.writeUint8ArrayTyped((cast this.bytes : flight._internal._UInt8Array), (cast this.length++ : Float), (cast value : Float));
+  }
+}
+
 typedef HuffmanTree__deflate = { var counts:Array<Float>; var symbols:Array<Float>; };
 
 @:keep
@@ -65,6 +125,208 @@ class InflateState__deflate {
 
 @:noCompletion
 class _Compression {
+  public static function compressDeflate(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
+    var input:flight._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var huffman:flight._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    input = (cast bytes : flight._internal._UInt8Array);
+    huffman = (cast _Compression.encodeFixedHuffmanBlock__compress(({ final __callArgument0:Dynamic = input; __callArgument0; })) : flight._internal._UInt8Array);
+    return cast ((cast ((cast _Runtime.field(huffman, 'length') : Float) <= (cast (cast _Compression.storedLength__compress((cast _Runtime.field(input, 'length') : Float)) : Float) : Float)) : Bool) ? (cast huffman : Dynamic) : (cast (cast _Compression.encodeStoredBlocks__compress(({ final __callArgument2:Dynamic = input; __callArgument2; })) : flight._internal._UInt8Array) : Dynamic));
+    return cast null;
+  }
+
+  public static function compressDeflateZlib(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
+    var deflated:flight._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var out:flight._internal._UInt8Array = cast _Runtime.UNDEFINED;
+    var checksum:Float = cast _Runtime.UNDEFINED;
+    var trailer:Float = cast _Runtime.UNDEFINED;
+    deflated = (cast compressDeflate(({ final __callArgument4:Dynamic = bytes; __callArgument4; })) : flight._internal._UInt8Array);
+    out = new flight._internal._UInt8Array((_Runtime.addNumbers(_Compression.ZLIB_HEADER_BYTES__compress, _Runtime.field(deflated, 'length')) + _Compression.ZLIB_TRAILER_BYTES__compress));
+    flight._internal._StaticIndex.writeUint8ArrayTyped((cast out : flight._internal._UInt8Array), (cast 0.0 : Float), (cast _Compression.ZLIB_CMF__compress : Float));
+    flight._internal._StaticIndex.writeUint8ArrayTyped((cast out : flight._internal._UInt8Array), (cast 1.0 : Float), (cast _Compression.ZLIB_FLG__compress : Float));
+    (cast out : flight._internal._UInt8Array).set(deflated, Std.int(_Compression.ZLIB_HEADER_BYTES__compress));
+    checksum = (cast computeAdler32(({ final __callArgument6:Dynamic = bytes; __callArgument6; })) : Float);
+    trailer = _Runtime.addNumbers(_Compression.ZLIB_HEADER_BYTES__compress, _Runtime.field(deflated, 'length'));
+    flight._internal._StaticIndex.writeUint8ArrayTyped((cast out : flight._internal._UInt8Array), (cast trailer : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(checksum), 24)) & 255) : Float));
+    flight._internal._StaticIndex.writeUint8ArrayTyped((cast out : flight._internal._UInt8Array), (cast (trailer + 1.0) : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(checksum), 16)) & 255) : Float));
+    flight._internal._StaticIndex.writeUint8ArrayTyped((cast out : flight._internal._UInt8Array), (cast (trailer + 2.0) : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(checksum), 8)) & 255) : Float));
+    flight._internal._StaticIndex.writeUint8ArrayTyped((cast out : flight._internal._UInt8Array), (cast (trailer + 3.0) : Float), (cast (_Runtime.toInt32(checksum) & 255) : Float));
+    return cast out;
+    return cast null;
+  }
+
+  public static function encodeFixedHuffmanBlock__compress(input:flight._internal._UInt8Array):flight._internal._UInt8Array {
+    var writer:DeflateBitWriter__compress = cast _Runtime.UNDEFINED;
+    var head:flight._internal._Int32Array = cast _Runtime.UNDEFINED;
+    var previous:flight._internal._Int32Array = cast _Runtime.UNDEFINED;
+    var position:Float = cast _Runtime.UNDEFINED;
+    writer = new DeflateBitWriter__compress();
+    (cast writer : DeflateBitWriter__compress).writeBits(1.0, 1.0);
+    (cast writer : DeflateBitWriter__compress).writeBits(_Compression.FIXED_HUFFMAN_BLOCK__compress, 2.0);
+    head = _Runtime.fill(new flight._internal._Int32Array(_Compression.HASH_SIZE__compress), -1.0, 0, null, 1);
+    previous = _Runtime.fill(new flight._internal._Int32Array(_Runtime.field(input, 'length')), -1.0, 0, null, 1);
+    position = 0.0;
+    while ((cast ((cast position : Float) < (cast _Runtime.field(input, 'length') : Float)) : Bool)) {
+      var matchLength:Float = 0.0;
+      var matchDistance:Float = 0.0;
+      if ((cast ((cast (position + _Compression.MIN_MATCH__compress) : Float) <= (cast _Runtime.field(input, 'length') : Float)) : Bool)) {
+        var key:Float = (cast _Compression.hashAt__compress(({ final __callArgument8:Dynamic = input; __callArgument8; }), (cast position : Float)) : Float);
+        var candidate:Float = flight._internal._StaticIndex.readInt32ArrayTyped((cast head : flight._internal._Int32Array), (cast key : Float));
+        var attempts:Float = 0.0;
+        while ((cast ((cast ((cast candidate : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast attempts : Float) < (cast _Compression.MAX_CHAIN__compress : Float)) : Bool)) : Bool)) {
+          var distance:Float = (position - candidate);
+          if ((cast ((cast distance : Float) > (cast _Compression.MAX_DISTANCE__compress : Float)) : Bool)) { break; }
+          var length:Float = (cast _Compression.matchRunLength__compress(({ final __callArgument10:Dynamic = input; __callArgument10; }), (cast candidate : Float), (cast position : Float)) : Float);
+          if ((cast ((cast length : Float) > (cast matchLength : Float)) : Bool)) {
+            (matchLength = cast (length : Dynamic));
+            (matchDistance = cast (distance : Dynamic));
+            if ((cast _Runtime.strictEquals(length, _Compression.MAX_MATCH__compress) : Bool)) { break; }
+          }
+          (candidate = cast (flight._internal._StaticIndex.readInt32ArrayTyped((cast previous : flight._internal._Int32Array), (cast candidate : Float)) : Dynamic));
+          attempts++;
+        }
+        flight._internal._StaticIndex.writeInt32ArrayTyped((cast previous : flight._internal._Int32Array), (cast position : Float), (cast flight._internal._StaticIndex.readInt32ArrayTyped((cast head : flight._internal._Int32Array), (cast key : Float)) : Float));
+        flight._internal._StaticIndex.writeInt32ArrayTyped((cast head : flight._internal._Int32Array), (cast key : Float), (cast position : Float));
+      }
+      if ((cast ((cast matchLength : Float) >= (cast _Compression.MIN_MATCH__compress : Float)) : Bool)) {
+        _Compression.writeLengthSymbol__compress((cast writer : Dynamic), (cast matchLength : Float));
+        _Compression.writeDistanceSymbol__compress((cast writer : Dynamic), (cast matchDistance : Float));
+        {
+          var i:Float = 1.0;
+          while ((cast ((cast i : Float) < (cast matchLength : Float)) : Bool)) {
+            var inner:Float = (position + i);
+            if ((cast ((cast (inner + _Compression.MIN_MATCH__compress) : Float) <= (cast _Runtime.field(input, 'length') : Float)) : Bool)) {
+              var key:Float = (cast _Compression.hashAt__compress(({ final __callArgument12:Dynamic = input; __callArgument12; }), (cast inner : Float)) : Float);
+              flight._internal._StaticIndex.writeInt32ArrayTyped((cast previous : flight._internal._Int32Array), (cast inner : Float), (cast flight._internal._StaticIndex.readInt32ArrayTyped((cast head : flight._internal._Int32Array), (cast key : Float)) : Float));
+              flight._internal._StaticIndex.writeInt32ArrayTyped((cast head : flight._internal._Int32Array), (cast key : Float), (cast inner : Float));
+            }
+            i++;
+          }
+        }
+        (position = cast ((position + matchLength) : Dynamic));
+        continue;
+      }
+      _Compression.writeLiteralSymbol__compress((cast writer : Dynamic), (cast flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast position : Float)) : Float));
+      position++;
+    }
+    _Compression.writeLiteralSymbol__compress((cast writer : Dynamic), (cast _Compression.END_OF_BLOCK__compress : Float));
+    return cast (cast writer : DeflateBitWriter__compress).finish();
+    return cast null;
+  }
+
+  public static function encodeStoredBlocks__compress(input:flight._internal._UInt8Array):flight._internal._UInt8Array {
+    var writer:DeflateBitWriter__compress = cast _Runtime.UNDEFINED;
+    var offset:Float = cast _Runtime.UNDEFINED;
+    writer = new DeflateBitWriter__compress();
+    offset = 0.0;
+    do {
+      var size:Float = HxMath.min(_Compression.STORED_BLOCK_MAX__compress, _Runtime.subtractNumbers(_Runtime.field(input, 'length'), offset));
+      var final_:Float = ((cast ((cast (offset + size) : Float) >= (cast _Runtime.field(input, 'length') : Float)) : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic));
+      (cast writer : DeflateBitWriter__compress).writeBits(final_, 1.0);
+      (cast writer : DeflateBitWriter__compress).writeBits(_Compression.STORED_BLOCK__compress, 2.0);
+      (cast writer : DeflateBitWriter__compress).alignToByte();
+      (cast writer : DeflateBitWriter__compress).writeByte((_Runtime.toInt32(size) & 255));
+      (cast writer : DeflateBitWriter__compress).writeByte((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(size), 8)) & 255));
+      (cast writer : DeflateBitWriter__compress).writeByte((_Runtime.toInt32(~_Runtime.toInt32(size)) & 255));
+      (cast writer : DeflateBitWriter__compress).writeByte((_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32(~_Runtime.toInt32(size)), 8)) & 255));
+      {
+        var i:Float = 0.0;
+        while ((cast ((cast i : Float) < (cast size : Float)) : Bool)) {
+          (cast writer : DeflateBitWriter__compress).writeByte(flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast (offset + i) : Float)));
+          i++;
+        }
+      }
+      (offset = cast ((offset + size) : Dynamic));
+    } while ((cast ((cast offset : Float) < (cast _Runtime.field(input, 'length') : Float)) : Bool));
+    return cast (cast writer : DeflateBitWriter__compress).finish();
+    return cast null;
+  }
+
+  public static function storedLength__compress(inputLength:Float):Float {
+    var blocks:Float = cast _Runtime.UNDEFINED;
+    blocks = HxMath.max(1.0, HxMath.ceil((inputLength / _Compression.STORED_BLOCK_MAX__compress)));
+    return cast ((blocks * _Compression.STORED_BLOCK_OVERHEAD__compress) + inputLength);
+    return cast null;
+  }
+
+  public static function writeLiteralSymbol__compress(writer:DeflateBitWriter__compress, symbol:Float):Void {
+    if ((cast ((cast symbol : Float) <= (cast 143.0 : Float)) : Bool)) {
+      (cast writer : DeflateBitWriter__compress).writeCode((48.0 + symbol), 8.0);
+    } else { if ((cast ((cast symbol : Float) <= (cast 255.0 : Float)) : Bool)) {
+      (cast writer : DeflateBitWriter__compress).writeCode(((400.0 + symbol) - 144.0), 9.0);
+    } else { if ((cast ((cast symbol : Float) <= (cast 279.0 : Float)) : Bool)) {
+      (cast writer : DeflateBitWriter__compress).writeCode((symbol - 256.0), 7.0);
+    } else {
+      (cast writer : DeflateBitWriter__compress).writeCode(((192.0 + symbol) - 280.0), 8.0);
+    } } }
+  }
+
+  public static function writeLengthSymbol__compress(writer:DeflateBitWriter__compress, length:Float):Void {
+    var index:Float = cast _Runtime.UNDEFINED;
+    index = (LENGTH_BASE.length - 1.0);
+    while ((cast ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast flight._internal._StaticIndex.readFloatArrayTyped((cast LENGTH_BASE : Array<Float>), (cast index : Float)) : Float) > (cast length : Float)) : Bool)) : Bool)) { index--; }
+    _Compression.writeLiteralSymbol__compress((cast writer : Dynamic), (cast (_Compression.FIRST_LENGTH_SYMBOL__compress + index) : Float));
+    (cast writer : DeflateBitWriter__compress).writeBits((length - flight._internal._StaticIndex.readFloatArrayTyped((cast LENGTH_BASE : Array<Float>), (cast index : Float))), flight._internal._StaticIndex.readFloatArrayTyped((cast LENGTH_EXTRA : Array<Float>), (cast index : Float)));
+  }
+
+  public static function writeDistanceSymbol__compress(writer:DeflateBitWriter__compress, distance:Float):Void {
+    var index:Float = cast _Runtime.UNDEFINED;
+    index = (DISTANCE_BASE.length - 1.0);
+    while ((cast ((cast ((cast index : Float) > (cast 0.0 : Float)) : Bool) && (cast ((cast flight._internal._StaticIndex.readFloatArrayTyped((cast DISTANCE_BASE : Array<Float>), (cast index : Float)) : Float) > (cast distance : Float)) : Bool)) : Bool)) { index--; }
+    (cast writer : DeflateBitWriter__compress).writeCode(index, 5.0);
+    (cast writer : DeflateBitWriter__compress).writeBits((distance - flight._internal._StaticIndex.readFloatArrayTyped((cast DISTANCE_BASE : Array<Float>), (cast index : Float))), flight._internal._StaticIndex.readFloatArrayTyped((cast DISTANCE_EXTRA : Array<Float>), (cast index : Float)));
+  }
+
+  public static function matchRunLength__compress(input:flight._internal._UInt8Array, candidate:Float, position:Float):Float {
+    var limit:Float = cast _Runtime.UNDEFINED;
+    var length:Float = cast _Runtime.UNDEFINED;
+    limit = HxMath.min(_Runtime.subtractNumbers(_Runtime.field(input, 'length'), position), _Compression.MAX_MATCH__compress);
+    length = 0.0;
+    while ((cast ((cast ((cast length : Float) < (cast limit : Float)) : Bool) && (cast _Runtime.strictEquals(flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast (candidate + length) : Float)), flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast (position + length) : Float))) : Bool)) : Bool)) { length++; }
+    return cast length;
+    return cast null;
+  }
+
+  public static function hashAt__compress(input:flight._internal._UInt8Array, position:Float):Float {
+    return cast (_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast position : Float))) << 10)) ^ _Runtime.toInt32((_Runtime.toInt32(flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast (position + 1.0) : Float))) << 5)))) ^ _Runtime.toInt32(flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast (position + 2.0) : Float))))) & _Runtime.toInt32(_Compression.HASH_MASK__compress));
+    return cast null;
+  }
+
+  public static final END_OF_BLOCK__compress:Float = 256.0;
+
+  public static final FIRST_LENGTH_SYMBOL__compress:Float = 257.0;
+
+  public static final FIXED_HUFFMAN_BLOCK__compress:Float = 1.0;
+
+  public static final HASH_BITS__compress:Float = 15.0;
+
+  public static final HASH_MASK__compress:Float = ((1 << _Runtime.toInt32(_Compression.HASH_BITS__compress)) - 1.0);
+
+  public static final HASH_SIZE__compress:Float = (1 << _Runtime.toInt32(_Compression.HASH_BITS__compress));
+
+  public static final INITIAL_OUTPUT_BYTES__compress:Float = 1024.0;
+
+  public static final MAX_CHAIN__compress:Float = 32.0;
+
+  public static final MAX_DISTANCE__compress:Float = 32768.0;
+
+  public static final MAX_MATCH__compress:Float = 258.0;
+
+  public static final MIN_MATCH__compress:Float = 3.0;
+
+  public static final STORED_BLOCK__compress:Float = 0.0;
+
+  public static final STORED_BLOCK_MAX__compress:Float = 65535.0;
+
+  public static final STORED_BLOCK_OVERHEAD__compress:Float = 5.0;
+
+  public static final ZLIB_CMF__compress:Float = 120.0;
+
+  public static final ZLIB_FLG__compress:Float = 1.0;
+
+  public static final ZLIB_HEADER_BYTES__compress:Float = 2.0;
+
+  public static final ZLIB_TRAILER_BYTES__compress:Float = 4.0;
+
   public static function getDecompressor(compression:Compression):Null<Decompressor> {
     return cast _Runtime.coalesce(((cast _Compression._decompressors__decompressor : flight._internal._Map<Compression, Decompressor>).get(compression)), function():Dynamic return cast null);
     return cast null;
@@ -102,7 +364,7 @@ class _Compression {
     } else { if ((cast !_Runtime.strictEquals(framing, (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Raw) : Bool)) { return cast null; } }
     try {
       var output:flight._internal._UInt8Array = (cast _Compression.rawInflate__deflate((cast input : flight._internal._UInt8Array).subarray(Std.int(0.0), Std.int(end)), (cast start : Float), (cast uncompressedLength : Float)) : flight._internal._UInt8Array);
-      if ((cast ((cast _Runtime.strictEquals(framing, (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Rfc1950) : Bool) && (cast !_Runtime.strictEquals((cast _Compression.readZlibAdler32__deflate(({ final __callArgument0:Dynamic = input; __callArgument0; }), (cast end : Float)) : Float), (cast _Compression.computeAdler32__deflate(({ final __callArgument2:Dynamic = output; __callArgument2; })) : Float)) : Bool)) : Bool)) { return cast null; }
+      if ((cast ((cast _Runtime.strictEquals(framing, (cast CompressionFramingValue : { var Raw:String; var Rfc1950:String; }).Rfc1950) : Bool) && (cast !_Runtime.strictEquals((cast _Compression.readZlibAdler32__deflate(({ final __callArgument14:Dynamic = input; __callArgument14; }), (cast end : Float)) : Float), (cast computeAdler32(({ final __callArgument16:Dynamic = output; __callArgument16; })) : Float)) : Bool)) : Bool)) { return cast null; }
       return cast output;
     } catch (__error:Dynamic) {
       return cast null;
@@ -111,16 +373,8 @@ class _Compression {
   });
 
   public static function registerDeflateDecompressor():Void {
-    registerDecompressor(({ final __callArgument4:Dynamic = (cast CompressionValue : { var Brotli:String; var Deflate:String; var Lzma:String; }).Deflate; __callArgument4; }), ({ final __callArgument5:Dynamic = inflateDeflate; __callArgument5; }));
+    registerDecompressor(({ final __callArgument18:Dynamic = (cast CompressionValue : { var Brotli:String; var Deflate:String; var Lzma:String; }).Deflate; __callArgument18; }), ({ final __callArgument19:Dynamic = inflateDeflate; __callArgument19; }));
   }
-
-  public static final LENGTH_BASE__deflate:Array<Float> = (cast cast ([3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 13.0, 15.0, 17.0, 19.0, 23.0, 27.0, 31.0, 35.0, 43.0, 51.0, 59.0, 67.0, 83.0, 99.0, 115.0, 131.0, 163.0, 195.0, 227.0, 258.0] : Array<Dynamic>));
-
-  public static final LENGTH_EXTRA__deflate:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 5.0, 5.0, 5.0, 5.0, 0.0] : Array<Dynamic>));
-
-  public static final DISTANCE_BASE__deflate:Array<Float> = (cast cast ([1.0, 2.0, 3.0, 4.0, 5.0, 7.0, 9.0, 13.0, 17.0, 25.0, 33.0, 49.0, 65.0, 97.0, 129.0, 193.0, 257.0, 385.0, 513.0, 769.0, 1025.0, 1537.0, 2049.0, 3073.0, 4097.0, 6145.0, 8193.0, 12289.0, 16385.0, 24577.0] : Array<Dynamic>));
-
-  public static final DISTANCE_EXTRA__deflate:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0, 4.0, 4.0, 5.0, 5.0, 6.0, 6.0, 7.0, 7.0, 8.0, 8.0, 9.0, 9.0, 10.0, 10.0, 11.0, 11.0, 12.0, 12.0, 13.0, 13.0] : Array<Dynamic>));
 
   public static final CODE_LENGTH_ORDER__deflate:Array<Float> = (cast cast ([16.0, 17.0, 18.0, 0.0, 8.0, 7.0, 9.0, 6.0, 10.0, 5.0, 11.0, 4.0, 12.0, 3.0, 13.0, 2.0, 14.0, 1.0, 15.0] : Array<Dynamic>));
 
@@ -170,11 +424,11 @@ class _Compression {
           continue;
         }
         var lengthIndex:Float = (symbol - 257.0);
-        if ((cast ((cast lengthIndex : Float) >= (cast _Compression.LENGTH_BASE__deflate.length : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: invalid length symbol')); }
-        var length:Float = (cast state : InflateState__deflate).readBits(flight._internal._StaticIndex.readFloatArrayTyped((cast _Compression.LENGTH_EXTRA__deflate : Array<Float>), (cast lengthIndex : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Compression.LENGTH_BASE__deflate : Array<Float>), (cast lengthIndex : Float)));
+        if ((cast ((cast lengthIndex : Float) >= (cast LENGTH_BASE.length : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: invalid length symbol')); }
+        var length:Float = (cast state : InflateState__deflate).readBits(flight._internal._StaticIndex.readFloatArrayTyped((cast LENGTH_EXTRA : Array<Float>), (cast lengthIndex : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast LENGTH_BASE : Array<Float>), (cast lengthIndex : Float)));
         var distanceSymbol:Float = (cast _Compression.decodeSymbol__deflate((cast state : Dynamic), (cast distanceTree : Dynamic)) : Float);
-        if ((cast ((cast distanceSymbol : Float) >= (cast _Compression.DISTANCE_BASE__deflate.length : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: invalid distance symbol')); }
-        var distance:Float = (cast state : InflateState__deflate).readBits(flight._internal._StaticIndex.readFloatArrayTyped((cast _Compression.DISTANCE_EXTRA__deflate : Array<Float>), (cast distanceSymbol : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast _Compression.DISTANCE_BASE__deflate : Array<Float>), (cast distanceSymbol : Float)));
+        if ((cast ((cast distanceSymbol : Float) >= (cast DISTANCE_BASE.length : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: invalid distance symbol')); }
+        var distance:Float = (cast state : InflateState__deflate).readBits(flight._internal._StaticIndex.readFloatArrayTyped((cast DISTANCE_EXTRA : Array<Float>), (cast distanceSymbol : Float)), flight._internal._StaticIndex.readFloatArrayTyped((cast DISTANCE_BASE : Array<Float>), (cast distanceSymbol : Float)));
         var source:Float = ((cast state : InflateState__deflate).outputLength - distance);
         if ((cast ((cast source : Float) < (cast 0.0 : Float)) : Bool)) { _Runtime.throwValue(_Runtime.error('deflate: back-reference before start of output')); }
         {
@@ -210,7 +464,7 @@ class _Compression {
         i++;
       }
     }
-    codeLengthTree = (cast _Compression.buildHuffmanTree__deflate(({ final __callArgument8:Dynamic = codeLengthLengths; __callArgument8; }), (cast 19.0 : Float)) : HuffmanTree__deflate);
+    codeLengthTree = (cast _Compression.buildHuffmanTree__deflate(({ final __callArgument22:Dynamic = codeLengthLengths; __callArgument22; }), (cast 19.0 : Float)) : HuffmanTree__deflate);
     lengths = _Runtime.fill(_Runtime.createArray((literalCount + distanceCount)), 0.0, 0, null, 1);
     i = 0.0;
     while ((cast ((cast i : Float) < (cast _Runtime.field(lengths, 'length') : Float)) : Bool)) {
@@ -313,21 +567,6 @@ class _Compression {
     return cast null;
   }
 
-  public static function computeAdler32__deflate(input:flight._internal._UInt8Array):Float {
-    var first:Float = cast _Runtime.UNDEFINED;
-    var second:Float = cast _Runtime.UNDEFINED;
-    first = 1.0;
-    second = 0.0;
-    for (byte in _Runtime.iterable(input)) {
-      (first = cast ((first + byte) : Dynamic));
-      if ((cast ((cast first : Float) >= (cast _Compression.ADLER_MODULUS__deflate : Float)) : Bool)) { (first = cast ((first - _Compression.ADLER_MODULUS__deflate) : Dynamic)); }
-      (second = cast ((second + first) : Dynamic));
-      if ((cast ((cast second : Float) >= (cast _Compression.ADLER_MODULUS__deflate : Float)) : Bool)) { (second = cast ((second - _Compression.ADLER_MODULUS__deflate) : Dynamic)); }
-    }
-    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(second) << 16)) | _Runtime.toInt32(first))), 0);
-    return cast null;
-  }
-
   public static function readZlibAdler32__deflate(input:flight._internal._UInt8Array, offset:Float):Float {
     return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast offset : Float))) << 24)) | _Runtime.toInt32((_Runtime.toInt32(flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast (offset + 1.0) : Float))) << 16)))) | _Runtime.toInt32((_Runtime.toInt32(flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast (offset + 2.0) : Float))) << 8)))) | _Runtime.toInt32(flight._internal._StaticIndex.readUint8ArrayTyped((cast input : flight._internal._UInt8Array), (cast (offset + 3.0) : Float))))), 0);
     return cast null;
@@ -368,7 +607,7 @@ class _Compression {
         i++;
       }
     }
-    return cast (cast _Compression.buildHuffmanTree__deflate(({ final __callArgument12:Dynamic = lengths; __callArgument12; }), (cast 288.0 : Float)) : HuffmanTree__deflate);
+    return cast (cast _Compression.buildHuffmanTree__deflate(({ final __callArgument24:Dynamic = lengths; __callArgument24; }), (cast 288.0 : Float)) : HuffmanTree__deflate);
     return cast null;
   }
 
@@ -380,5 +619,28 @@ class _Compression {
 
   public static final ZLIB_TRAILER_BYTES__deflate:Float = 4.0;
 
-  public static final ADLER_MODULUS__deflate:Float = 65521.0;
+  public static final LENGTH_BASE:Array<Float> = (cast cast ([3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 13.0, 15.0, 17.0, 19.0, 23.0, 27.0, 31.0, 35.0, 43.0, 51.0, 59.0, 67.0, 83.0, 99.0, 115.0, 131.0, 163.0, 195.0, 227.0, 258.0] : Array<Dynamic>));
+
+  public static final LENGTH_EXTRA:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 5.0, 5.0, 5.0, 5.0, 0.0] : Array<Dynamic>));
+
+  public static final DISTANCE_BASE:Array<Float> = (cast cast ([1.0, 2.0, 3.0, 4.0, 5.0, 7.0, 9.0, 13.0, 17.0, 25.0, 33.0, 49.0, 65.0, 97.0, 129.0, 193.0, 257.0, 385.0, 513.0, 769.0, 1025.0, 1537.0, 2049.0, 3073.0, 4097.0, 6145.0, 8193.0, 12289.0, 16385.0, 24577.0] : Array<Dynamic>));
+
+  public static final DISTANCE_EXTRA:Array<Float> = (cast cast ([0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0, 4.0, 4.0, 5.0, 5.0, 6.0, 6.0, 7.0, 7.0, 8.0, 8.0, 9.0, 9.0, 10.0, 10.0, 11.0, 11.0, 12.0, 12.0, 13.0, 13.0] : Array<Dynamic>));
+
+  public static function computeAdler32(input:flight._internal._UInt8Array):Float {
+    var first:Float = cast _Runtime.UNDEFINED;
+    var second:Float = cast _Runtime.UNDEFINED;
+    first = 1.0;
+    second = 0.0;
+    for (byte in _Runtime.iterable(input)) {
+      (first = cast ((first + byte) : Dynamic));
+      if ((cast ((cast first : Float) >= (cast _Compression.ADLER_MODULUS__deflateFormat : Float)) : Bool)) { (first = cast ((first - _Compression.ADLER_MODULUS__deflateFormat) : Dynamic)); }
+      (second = cast ((second + first) : Dynamic));
+      if ((cast ((cast second : Float) >= (cast _Compression.ADLER_MODULUS__deflateFormat : Float)) : Bool)) { (second = cast ((second - _Compression.ADLER_MODULUS__deflateFormat) : Dynamic)); }
+    }
+    return cast _Runtime.unsignedShiftRight(_Runtime.toInt32((_Runtime.toInt32((_Runtime.toInt32(second) << 16)) | _Runtime.toInt32(first))), 0);
+    return cast null;
+  }
+
+  public static final ADLER_MODULUS__deflateFormat:Float = 65521.0;
 }

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef AudioChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var playbackRate:Float; var source:AudioResource; var state:AudioChannelState; var onComplete:Signal<Void->Void>; };
+typedef AudioChannel = { var currentTime:Float; var gain:Float; var length:Float; var loops:Float; var pan:Float; var playbackRate:Float; var source:AudioResource; var state:AudioChannelState; var onComplete:Signal<Void->Void>; };

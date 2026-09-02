@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentScene3D = { var cameras:Array<Scene3DDocumentCamera>; var kind:String; var lights:Array<Scene3DDocumentLight>; var scene:FlightDocumentNode; };
+typedef FlightDocumentScene3D = { var cameras:Array<Scene3DDocumentCamera>; var kind:String; var layouts:Array<FlightDocumentLayoutDescriptor>; var lights:Array<Scene3DDocumentLight>; var scene:FlightDocumentNode; var tokens:Array<FlightDocumentToken>; };

@@ -42,6 +42,7 @@ export const setAudioBusMuted = compiled.flight.Media.setAudioBusMuted;
 export const setAudioBusPan = compiled.flight.Media.setAudioBusPan;
 export const setAudioChannelCurrentTime = compiled.flight.Media.setAudioChannelCurrentTime;
 export const setAudioChannelGain = compiled.flight.Media.setAudioChannelGain;
+export const setAudioChannelPan = compiled.flight.Media.setAudioChannelPan;
 export const setAudioChannelPlaybackRate = compiled.flight.Media.setAudioChannelPlaybackRate;
 export const setAudioDeviceBackend = compiled.flight.Media.setAudioDeviceBackend;
 export const setAudioMixerMasterGain = compiled.flight.Media.setAudioMixerMasterGain;

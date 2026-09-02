@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef WgpuRenderEffectApplicationExplanation = { var registeredCount:Float; var requestedCount:Float; var status:WgpuRenderEffectApplicationStatus; var unregisteredKinds:Array<String>; };
+typedef WgpuRenderEffectApplicationExplanation = { var registeredCount:Float; var requestedCount:Float; var status:WgpuRenderEffectApplicationStatus; var unregisteredKinds:Array<String>; var unresolvedIndexes:Array<Float>; };

@@ -2824,6 +2824,7 @@ describe('TypeScript lowering and Haxe emission', () => {
         export function merge(target: any, source: any) {
           Object.assign(target, source);
           const dictionary = Object.create(null);
+          Object.getPrototypeOf(target);
           Object.fromEntries(Object.entries(target));
           return Object.keys(target).length + Object.entries(target).length + (Object.hasOwn(dictionary, 'key') ? 1 : 0);
         }
@@ -2848,6 +2849,7 @@ describe('TypeScript lowering and Haxe emission', () => {
       'flight._internal.DynamicObject.fromEntries(flight._internal.DynamicObject.entries(target))',
     );
     expect(output).toContain('flight._internal.DynamicObject.create(null)');
+    expect(output).toContain('flight._internal.DynamicObject.getPrototypeOf(target)');
     expect(output).toContain("flight._internal.DynamicObject.hasOwn(dictionary, 'key')");
     expect(output).not.toContain("_HostValueLut.get('Object')");
     expect(output).not.toContain('Reflect.fields');

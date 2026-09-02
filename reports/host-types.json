@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
   "summary": {
-    "calls": 1411,
-    "memberAccesses": 2888,
-    "reads": 1058,
-    "typeReferences": 5849,
+    "calls": 1497,
+    "memberAccesses": 3044,
+    "reads": 1127,
+    "typeReferences": 6046,
     "types": 237,
-    "writes": 419
+    "writes": 420
   },
   "types": [
     {
@@ -307,6 +307,150 @@
             },
             {
               "column": 11,
+              "line": 19,
+              "operation": "read",
+              "source": "upstream/packages/dialog/src/dialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 29,
+              "operation": "read",
+              "source": "upstream/packages/dialog/src/dialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 46,
+              "operation": "read",
+              "source": "upstream/packages/dialog/src/dialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 131,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 142,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 153,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 166,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 177,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 197,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 20,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 208,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 220,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 266,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 282,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 343,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 355,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 11,
+              "line": 10,
+              "operation": "read",
+              "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 22,
+              "operation": "read",
+              "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 33,
+              "operation": "read",
+              "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 119,
+              "operation": "read",
+              "source": "upstream/packages/host-electron/src/electronDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 20,
+              "operation": "read",
+              "source": "upstream/packages/host-electron/src/electronDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 42,
+              "operation": "read",
+              "source": "upstream/packages/host-electron/src/electronDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 69,
+              "operation": "read",
+              "source": "upstream/packages/host-electron/src/electronDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 93,
+              "operation": "read",
+              "source": "upstream/packages/host-electron/src/electronDialog.ts"
+            },
+            {
+              "column": 11,
               "line": 53,
               "operation": "read",
               "source": "upstream/packages/host-electron/src/electronTray.ts"
@@ -319,6 +463,36 @@
             },
             {
               "column": 11,
+              "line": 110,
+              "operation": "read",
+              "source": "upstream/packages/host-tauri/src/tauriDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 22,
+              "operation": "read",
+              "source": "upstream/packages/host-tauri/src/tauriDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 45,
+              "operation": "read",
+              "source": "upstream/packages/host-tauri/src/tauriDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 72,
+              "operation": "read",
+              "source": "upstream/packages/host-tauri/src/tauriDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 96,
+              "operation": "read",
+              "source": "upstream/packages/host-tauri/src/tauriDialog.ts"
+            },
+            {
+              "column": 11,
               "line": 41,
               "operation": "read",
               "source": "upstream/packages/host-tauri/src/tauriTray.ts"
@@ -328,6 +502,66 @@
               "line": 57,
               "operation": "read",
               "source": "upstream/packages/host-tauri/src/tauriTray.ts"
+            },
+            {
+              "column": 7,
+              "line": 154,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 298,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 33,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 49,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 62,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 82,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 155,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 11,
+              "line": 172,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 11,
+              "line": 254,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 368,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 9,
@@ -379,12 +613,18 @@
             }
           ],
           "name": "aborted",
-          "reads": 13,
+          "reads": 52,
           "writes": 0
         },
         {
-          "calls": 7,
+          "calls": 11,
           "locations": [
+            {
+              "column": 3,
+              "line": 292,
+              "operation": "call",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
             {
               "column": 3,
               "line": 132,
@@ -396,6 +636,24 @@
               "line": 133,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webConnectivity.ts"
+            },
+            {
+              "column": 5,
+              "line": 144,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 37,
+              "line": 308,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 3,
+              "line": 378,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 7,
@@ -435,6 +693,180 @@
         {
           "calls": 0,
           "locations": [
+            {
+              "column": 46,
+              "line": 131,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 46,
+              "line": 142,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 46,
+              "line": 153,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 46,
+              "line": 166,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 46,
+              "line": 177,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 46,
+              "line": 197,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 46,
+              "line": 20,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 55,
+              "line": 208,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 46,
+              "line": 220,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 46,
+              "line": 266,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 24,
+              "line": 283,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 11,
+              "line": 284,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 33,
+              "line": 290,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 24,
+              "line": 304,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 46,
+              "line": 343,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 46,
+              "line": 355,
+              "operation": "read",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 28,
+              "line": 299,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 11,
+              "line": 300,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 38,
+              "line": 306,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 13,
+              "line": 313,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 24,
+              "line": 320,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 34,
+              "line": 155,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 43,
+              "line": 172,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 34,
+              "line": 254,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 26,
+              "line": 369,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 11,
+              "line": 370,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 35,
+              "line": 376,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 13,
+              "line": 383,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 24,
+              "line": 390,
+              "operation": "read",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
             {
               "column": 24,
               "line": 158,
@@ -497,12 +929,18 @@
             }
           ],
           "name": "reason",
-          "reads": 10,
+          "reads": 39,
           "writes": 0
         },
         {
-          "calls": 5,
+          "calls": 9,
           "locations": [
+            {
+              "column": 5,
+              "line": 307,
+              "operation": "call",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
             {
               "column": 5,
               "line": 129,
@@ -514,6 +952,24 @@
               "line": 130,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webConnectivity.ts"
+            },
+            {
+              "column": 7,
+              "line": 104,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 5,
+              "line": 323,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 5,
+              "line": 393,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 51,
@@ -539,7 +995,7 @@
           "writes": 0
         },
         {
-          "calls": 7,
+          "calls": 66,
           "locations": [
             {
               "column": 3,
@@ -552,6 +1008,360 @@
               "line": 63,
               "operation": "call",
               "source": "upstream/packages/audio/src/audioResourceFrom.ts"
+            },
+            {
+              "column": 3,
+              "line": 189,
+              "operation": "call",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 3,
+              "line": 278,
+              "operation": "call",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 295,
+              "operation": "call",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 298,
+              "operation": "call",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 3,
+              "line": 317,
+              "operation": "call",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 3,
+              "line": 330,
+              "operation": "call",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 101,
+              "operation": "call",
+              "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 136,
+              "operation": "call",
+              "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 16,
+              "operation": "call",
+              "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 23,
+              "operation": "call",
+              "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 27,
+              "operation": "call",
+              "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 36,
+              "operation": "call",
+              "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 43,
+              "operation": "call",
+              "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 47,
+              "operation": "call",
+              "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 94,
+              "operation": "call",
+              "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 225,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 233,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 246,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 253,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 261,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 268,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 276,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 7,
+              "line": 280,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 3,
+              "line": 291,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webDialog.ts"
+            },
+            {
+              "column": 5,
+              "line": 100,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 108,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 116,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 118,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 126,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 135,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 137,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 9,
+              "line": 14,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 140,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 9,
+              "line": 146,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 160,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 162,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 165,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 177,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 179,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 187,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 20,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 236,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 240,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 246,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 249,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 7,
+              "line": 251,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 261,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 347,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 3,
+              "line": 358,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 3,
+              "line": 360,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 7,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 74,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 76,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 78,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 86,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 88,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 9,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 90,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 5,
+              "line": 98,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 7,
@@ -594,7 +1404,7 @@
         "arities": [
           0
         ],
-        "count": 125,
+        "count": 232,
         "locations": [
           {
             "arity": 0,
@@ -688,9 +1498,441 @@
           },
           {
             "arity": 0,
+            "column": 38,
+            "line": 106,
+            "source": "upstream/packages/dialog/src/dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 19,
+            "source": "upstream/packages/dialog/src/dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 65,
+            "source": "upstream/packages/dialog/src/dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 5,
+            "line": 68,
+            "source": "upstream/packages/dialog/src/dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 70,
+            "source": "upstream/packages/dialog/src/dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 38,
+            "line": 78,
+            "source": "upstream/packages/dialog/src/dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 38,
+            "line": 85,
+            "source": "upstream/packages/dialog/src/dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 129,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 132,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 46,
+            "line": 134,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 140,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 143,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 46,
+            "line": 145,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 151,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 154,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 46,
+            "line": 156,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 164,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 167,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 62,
+            "line": 169,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 175,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 36,
+            "line": 178,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 179,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 18,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 42,
+            "line": 181,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 187,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 36,
+            "line": 190,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 191,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 42,
+            "line": 193,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 82,
+            "line": 196,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 198,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 46,
+            "line": 20,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
+            "line": 20,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 46,
+            "line": 200,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 21,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 81,
+            "line": 219,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 221,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 46,
+            "line": 223,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 54,
+            "line": 23,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 264,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 267,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 53,
+            "line": 269,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 276,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 24,
+            "line": 279,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 315,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 36,
+            "line": 318,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 319,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 47,
+            "line": 321,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 328,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 36,
+            "line": 331,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 332,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 47,
+            "line": 334,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 341,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 344,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 53,
+            "line": 346,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 353,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 356,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 53,
+            "line": 358,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 10,
+            "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 10,
+            "line": 14,
+            "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 23,
+            "line": 14,
+            "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
+            "line": 16,
+            "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 61,
+            "line": 100,
+            "source": "upstream/packages/host-electron/src/electronDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 108,
+            "source": "upstream/packages/host-electron/src/electronDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 108,
+            "source": "upstream/packages/host-electron/src/electronDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 49,
+            "line": 108,
+            "source": "upstream/packages/host-electron/src/electronDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 59,
+            "line": 108,
+            "source": "upstream/packages/host-electron/src/electronDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 61,
+            "line": 120,
+            "source": "upstream/packages/host-electron/src/electronDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 128,
+            "source": "upstream/packages/host-electron/src/electronDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 128,
+            "source": "upstream/packages/host-electron/src/electronDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 49,
+            "line": 128,
+            "source": "upstream/packages/host-electron/src/electronDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 20,
+            "source": "upstream/packages/host-electron/src/electronDialog.ts"
+          },
+          {
+            "arity": 0,
             "column": 11,
             "line": 53,
             "source": "upstream/packages/host-electron/src/electronTray.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 22,
+            "source": "upstream/packages/host-tauri/src/tauriDialog.ts"
           },
           {
             "arity": 0,
@@ -763,6 +2005,84 @@
             "column": 51,
             "line": 36,
             "source": "upstream/packages/host-web/src/webConnectivity.ts"
+          },
+          {
+            "arity": 0,
+            "column": 10,
+            "line": 223,
+            "source": "upstream/packages/host-web/src/webDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 10,
+            "line": 244,
+            "source": "upstream/packages/host-web/src/webDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 277,
+            "source": "upstream/packages/host-web/src/webDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 289,
+            "source": "upstream/packages/host-web/src/webDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 28,
+            "line": 299,
+            "source": "upstream/packages/host-web/src/webDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
+            "line": 33,
+            "source": "upstream/packages/host-web/src/webDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 34,
+            "line": 155,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 169,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 21,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 344,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 76,
+            "line": 357,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 60,
+            "line": 5,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 5,
+            "line": 7,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
@@ -1252,6 +2572,138 @@
           },
           {
             "arity": 0,
+            "column": 35,
+            "line": 23,
+            "source": "upstream/packages/types/src/Dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 33,
+            "line": 24,
+            "source": "upstream/packages/types/src/Dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 64,
+            "line": 25,
+            "source": "upstream/packages/types/src/Dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 48,
+            "line": 26,
+            "source": "upstream/packages/types/src/Dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 21,
+            "line": 36,
+            "source": "upstream/packages/types/src/Dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 21,
+            "line": 40,
+            "source": "upstream/packages/types/src/Dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 21,
+            "line": 46,
+            "source": "upstream/packages/types/src/Dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 75,
+            "source": "upstream/packages/types/src/Dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 96,
+            "source": "upstream/packages/types/src/Dialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 191,
+            "source": "upstream/packages/types/src/ElectronApi.ts"
+          },
+          {
+            "arity": 0,
+            "column": 55,
+            "line": 42,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 41,
+            "line": 47,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 40,
+            "line": 48,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 39,
+            "line": 49,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 70,
+            "line": 54,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 54,
+            "line": 55,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 48,
+            "line": 62,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 46,
+            "line": 65,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 47,
+            "line": 66,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 79,
+            "line": 67,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 80,
+            "line": 69,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 76,
+            "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 0,
             "column": 89,
             "line": 31,
             "source": "upstream/packages/types/src/Image.ts"
@@ -1394,7 +2846,7 @@
             },
             {
               "column": 30,
-              "line": 43,
+              "line": 44,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -1621,44 +3073,44 @@
           },
           {
             "arity": 0,
-            "column": 7,
-            "line": 146,
-            "source": "upstream/packages/media/src/audioDeviceBackend.ts"
-          },
-          {
-            "arity": 0,
             "column": 9,
             "line": 15,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
-            "column": 13,
-            "line": 41,
+            "column": 7,
+            "line": 160,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 13,
-            "line": 59,
+            "line": 42,
+            "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 60,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 32,
-            "line": 64,
+            "line": 70,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 13,
-            "line": 87,
+            "line": 94,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 7,
-            "line": 89,
+            "line": 96,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
@@ -1670,7 +3122,7 @@
           {
             "arity": 0,
             "column": 11,
-            "line": 24,
+            "line": 27,
             "source": "upstream/packages/types/src/AudioResource.ts"
           }
         ]
@@ -1690,7 +3142,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 146,
+              "line": 160,
               "operation": "write",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -1704,7 +3156,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 147,
+              "line": 161,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -1718,19 +3170,19 @@
           "locations": [
             {
               "column": 9,
-              "line": 143,
-              "operation": "call",
-              "source": "upstream/packages/media/src/audioDeviceBackend.ts"
-            },
-            {
-              "column": 7,
-              "line": 167,
+              "line": 106,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
             {
               "column": 9,
-              "line": 99,
+              "line": 157,
+              "operation": "call",
+              "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+            },
+            {
+              "column": 7,
+              "line": 181,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -1744,25 +3196,25 @@
           "locations": [
             {
               "column": 9,
-              "line": 137,
+              "line": 151,
               "operation": "write",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
             {
               "column": 7,
-              "line": 148,
+              "line": 162,
               "operation": "write",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
             {
               "column": 7,
-              "line": 161,
+              "line": 175,
               "operation": "write",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
             {
               "column": 9,
-              "line": 91,
+              "line": 98,
               "operation": "write",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -1776,7 +3228,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 130,
+              "line": 144,
               "operation": "read",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -1790,7 +3242,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 155,
+              "line": 169,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -1803,20 +3255,20 @@
           "calls": 3,
           "locations": [
             {
+              "column": 28,
+              "line": 101,
+              "operation": "call",
+              "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+            },
+            {
               "column": 11,
-              "line": 139,
+              "line": 153,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
             {
               "column": 9,
-              "line": 163,
-              "operation": "call",
-              "source": "upstream/packages/media/src/audioDeviceBackend.ts"
-            },
-            {
-              "column": 28,
-              "line": 94,
+              "line": 177,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -1866,61 +3318,61 @@
           {
             "arity": 0,
             "column": 59,
-            "line": 172,
+            "line": 186,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 14,
-            "line": 174,
+            "line": 188,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 76,
-            "line": 213,
+            "line": 227,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 45,
-            "line": 215,
+            "line": 229,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 57,
-            "line": 260,
+            "line": 274,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 10,
-            "line": 31,
+            "line": 32,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 13,
-            "line": 87,
+            "line": 94,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 7,
-            "line": 89,
+            "line": 96,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 11,
-            "line": 90,
+            "line": 97,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 9,
-            "line": 91,
+            "line": 98,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           }
         ]
@@ -1940,7 +3392,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 82,
+              "line": 89,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -1954,7 +3406,7 @@
           "locations": [
             {
               "column": 26,
-              "line": 145,
+              "line": 159,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -1968,7 +3420,7 @@
           "locations": [
             {
               "column": 24,
-              "line": 61,
+              "line": 62,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
@@ -1990,8 +3442,14 @@
           "writes": 0
         },
         {
-          "calls": 1,
+          "calls": 2,
           "locations": [
+            {
+              "column": 26,
+              "line": 67,
+              "operation": "call",
+              "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+            },
             {
               "column": 14,
               "line": 20,
@@ -2014,7 +3472,7 @@
           "locations": [
             {
               "column": 38,
-              "line": 107,
+              "line": 115,
               "operation": "read",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
@@ -2048,7 +3506,7 @@
           "locations": [
             {
               "column": 24,
-              "line": 62,
+              "line": 63,
               "operation": "read",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
@@ -2074,7 +3532,7 @@
           "locations": [
             {
               "column": 34,
-              "line": 118,
+              "line": 126,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             }
@@ -2190,31 +3648,31 @@
           {
             "arity": 0,
             "column": 13,
-            "line": 39,
+            "line": 40,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 13,
-            "line": 51,
+            "line": 52,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 32,
-            "line": 64,
+            "line": 70,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 13,
-            "line": 87,
+            "line": 94,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 7,
-            "line": 89,
+            "line": 96,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
@@ -2287,7 +3745,7 @@
           {
             "arity": 0,
             "column": 24,
-            "line": 62,
+            "line": 63,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
@@ -2336,7 +3794,7 @@
           {
             "arity": 0,
             "column": 20,
-            "line": 178,
+            "line": 191,
             "source": "upstream/packages/media/src/audioChannel.ts"
           },
           {
@@ -2354,7 +3812,7 @@
           {
             "arity": 0,
             "column": 7,
-            "line": 62,
+            "line": 63,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
@@ -2453,13 +3911,19 @@
             },
             {
               "column": 7,
-              "line": 124,
+              "line": 132,
               "operation": "write",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
             {
               "column": 7,
-              "line": 130,
+              "line": 138,
+              "operation": "write",
+              "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+            },
+            {
+              "column": 7,
+              "line": 144,
               "operation": "write",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
@@ -2514,7 +3978,7 @@
           ],
           "name": "value",
           "reads": 2,
-          "writes": 9
+          "writes": 10
         }
       ],
       "name": "AudioParam",
@@ -2533,7 +3997,7 @@
           {
             "arity": 0,
             "column": 7,
-            "line": 124,
+            "line": 132,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
@@ -2632,13 +4096,13 @@
             },
             {
               "column": 80,
-              "line": 148,
+              "line": 163,
               "operation": "call",
               "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
             },
             {
               "column": 35,
-              "line": 101,
+              "line": 129,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
@@ -2658,7 +4122,7 @@
           "locations": [
             {
               "column": 44,
-              "line": 144,
+              "line": 159,
               "operation": "call",
               "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
             },
@@ -2705,7 +4169,7 @@
         "arities": [
           0
         ],
-        "count": 35,
+        "count": 37,
         "locations": [
           {
             "arity": 0,
@@ -2722,37 +4186,49 @@
           {
             "arity": 0,
             "column": 39,
-            "line": 143,
+            "line": 158,
             "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
           },
           {
             "arity": 0,
             "column": 44,
-            "line": 144,
+            "line": 159,
             "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
           },
           {
             "arity": 0,
             "column": 40,
-            "line": 147,
+            "line": 162,
             "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
           },
           {
             "arity": 0,
-            "column": 16,
+            "column": 17,
             "line": 17,
             "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
           },
           {
             "arity": 0,
-            "column": 33,
-            "line": 17,
+            "column": 9,
+            "line": 19,
             "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
           },
           {
             "arity": 0,
-            "column": 16,
-            "line": 32,
+            "column": 14,
+            "line": 24,
+            "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 17,
+            "line": 37,
+            "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 44,
             "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
           },
           {
@@ -2806,7 +4282,7 @@
           {
             "arity": 0,
             "column": 35,
-            "line": 101,
+            "line": 129,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
@@ -9600,7 +11076,7 @@
           "locations": [
             {
               "column": 42,
-              "line": 79,
+              "line": 81,
               "operation": "read",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -9614,7 +11090,7 @@
           "locations": [
             {
               "column": 62,
-              "line": 79,
+              "line": 81,
               "operation": "read",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -9628,7 +11104,7 @@
           "locations": [
             {
               "column": 86,
-              "line": 79,
+              "line": 81,
               "operation": "read",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -9648,19 +11124,19 @@
           {
             "arity": 0,
             "column": 20,
-            "line": 78,
+            "line": 80,
             "source": "upstream/packages/socket/src/socket.ts"
           },
           {
             "arity": 0,
             "column": 28,
-            "line": 78,
+            "line": 80,
             "source": "upstream/packages/socket/src/socket.ts"
           },
           {
             "arity": 0,
             "column": 42,
-            "line": 79,
+            "line": 81,
             "source": "upstream/packages/socket/src/socket.ts"
           }
         ]
@@ -10438,13 +11914,13 @@
             },
             {
               "column": 12,
-              "line": 80,
+              "line": 85,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
             {
               "column": 19,
-              "line": 89,
+              "line": 94,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
@@ -11100,7 +12576,7 @@
           {
             "arity": 0,
             "column": 12,
-            "line": 80,
+            "line": 85,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
@@ -11998,7 +13474,7 @@
           {
             "arity": 0,
             "column": 28,
-            "line": 148,
+            "line": 162,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
@@ -12010,13 +13486,13 @@
           {
             "arity": 0,
             "column": 19,
-            "line": 76,
+            "line": 78,
             "source": "upstream/packages/socket/src/socket.ts"
           },
           {
             "arity": 0,
             "column": 20,
-            "line": 80,
+            "line": 82,
             "source": "upstream/packages/socket/src/socket.ts"
           },
           {
@@ -12522,31 +13998,31 @@
           "locations": [
             {
               "column": 37,
-              "line": 215,
+              "line": 227,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
             {
               "column": 37,
-              "line": 235,
+              "line": 255,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
             {
-              "column": 42,
-              "line": 199,
-              "operation": "call",
-              "source": "upstream/packages/host-web/src/webFilesystem.ts"
-            },
-            {
-              "column": 42,
-              "line": 40,
-              "operation": "call",
-              "source": "upstream/packages/host-web/src/webFilesystem.ts"
-            },
-            {
               "column": 35,
-              "line": 90,
+              "line": 110,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 42,
+              "line": 250,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 42,
+              "line": 45,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -12560,13 +14036,13 @@
           "locations": [
             {
               "column": 24,
-              "line": 175,
+              "line": 221,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 25,
-              "line": 178,
+              "line": 224,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -12580,7 +14056,7 @@
           "locations": [
             {
               "column": 40,
-              "line": 112,
+              "line": 118,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
@@ -12599,14 +14075,14 @@
           "calls": 0,
           "locations": [
             {
-              "column": 21,
-              "line": 100,
+              "column": 19,
+              "line": 127,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 17,
-              "line": 179,
+              "line": 225,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -12620,7 +14096,7 @@
           "locations": [
             {
               "column": 35,
-              "line": 101,
+              "line": 129,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -12634,7 +14110,7 @@
           "locations": [
             {
               "column": 14,
-              "line": 72,
+              "line": 80,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -12648,25 +14124,25 @@
           "locations": [
             {
               "column": 22,
-              "line": 222,
+              "line": 235,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
             {
               "column": 22,
-              "line": 242,
+              "line": 270,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
             {
               "column": 26,
-              "line": 11,
+              "line": 15,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 20,
-              "line": 143,
+              "line": 189,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -12701,54 +14177,90 @@
         "arities": [
           0
         ],
-        "count": 17,
+        "count": 23,
         "locations": [
           {
             "arity": 0,
             "column": 41,
-            "line": 111,
+            "line": 117,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
             "column": 42,
-            "line": 111,
+            "line": 117,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
             "column": 57,
-            "line": 112,
+            "line": 118,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
             "column": 39,
-            "line": 211,
+            "line": 222,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
-            "column": 28,
-            "line": 234,
+            "column": 17,
+            "line": 247,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
             "column": 22,
-            "line": 277,
+            "line": 249,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
-            "column": 27,
-            "line": 11,
+            "column": 17,
+            "line": 262,
+            "source": "upstream/packages/host-web/src/webDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 22,
+            "line": 331,
+            "source": "upstream/packages/host-web/src/webDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 15,
+            "line": 102,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
-            "column": 33,
-            "line": 11,
+            "column": 20,
+            "line": 104,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 15,
+            "line": 120,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 15,
+            "line": 13,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 28,
+            "line": 13,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 15,
+            "line": 181,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
@@ -12823,7 +14335,7 @@
           "locations": [
             {
               "column": 29,
-              "line": 110,
+              "line": 116,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             }
@@ -12843,13 +14355,13 @@
           {
             "arity": 0,
             "column": 13,
-            "line": 109,
+            "line": 115,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
             "column": 29,
-            "line": 110,
+            "line": 116,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
@@ -13080,7 +14592,7 @@
           "locations": [
             {
               "column": 53,
-              "line": 230,
+              "line": 283,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -13094,7 +14606,7 @@
           "locations": [
             {
               "column": 18,
-              "line": 245,
+              "line": 298,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -13108,13 +14620,13 @@
           "locations": [
             {
               "column": 13,
-              "line": 156,
+              "line": 202,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 11,
-              "line": 274,
+              "line": 327,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -13134,109 +14646,109 @@
           {
             "arity": 0,
             "column": 31,
-            "line": 114,
+            "line": 145,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 42,
-            "line": 114,
+            "line": 145,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 13,
-            "line": 133,
+            "line": 169,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 14,
-            "line": 214,
+            "line": 267,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 50,
-            "line": 215,
+            "line": 268,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 10,
-            "line": 216,
+            "line": 269,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 64,
-            "line": 218,
+            "line": 271,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 9,
-            "line": 224,
-            "source": "upstream/packages/host-web/src/webFilesystem.ts"
-          },
-          {
-            "arity": 0,
-            "column": 12,
-            "line": 227,
+            "line": 277,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 13,
-            "line": 23,
+            "line": 28,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 26,
-            "line": 23,
+            "line": 28,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 12,
+            "line": 280,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 53,
-            "line": 230,
+            "line": 283,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 38,
-            "line": 24,
+            "line": 29,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 57,
-            "line": 24,
+            "line": 29,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 35,
-            "line": 251,
+            "line": 304,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 18,
-            "line": 256,
+            "line": 309,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 14,
-            "line": 286,
+            "line": 339,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 37,
-            "line": 297,
+            "line": 352,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           }
         ]
@@ -13256,31 +14768,31 @@
           "locations": [
             {
               "column": 30,
-              "line": 29,
+              "line": 34,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 33,
-              "line": 304,
+              "line": 361,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
-              "column": 28,
-              "line": 306,
+              "column": 22,
+              "line": 364,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 35,
-              "line": 79,
+              "line": 89,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 21,
-              "line": 81,
+              "line": 92,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -13293,50 +14805,50 @@
           "calls": 8,
           "locations": [
             {
-              "column": 33,
-              "line": 11,
+              "column": 20,
+              "line": 104,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
-              "column": 27,
-              "line": 143,
+              "column": 20,
+              "line": 122,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 28,
-              "line": 173,
+              "line": 13,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
-              "column": 49,
-              "line": 199,
+              "column": 20,
+              "line": 183,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
-              "column": 49,
-              "line": 40,
-              "operation": "call",
-              "source": "upstream/packages/host-web/src/webFilesystem.ts"
-            },
-            {
-              "column": 21,
-              "line": 72,
-              "operation": "call",
-              "source": "upstream/packages/host-web/src/webFilesystem.ts"
-            },
-            {
-              "column": 42,
-              "line": 90,
+              "column": 28,
+              "line": 219,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 26,
-              "line": 99,
+              "line": 248,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 49,
+              "line": 45,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 21,
+              "line": 80,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -13355,62 +14867,62 @@
         "locations": [
           {
             "arity": 0,
-            "column": 33,
-            "line": 11,
+            "column": 28,
+            "line": 13,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 31,
-            "line": 114,
+            "line": 145,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 42,
-            "line": 114,
+            "line": 145,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 27,
-            "line": 215,
+            "line": 268,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 10,
-            "line": 216,
+            "line": 269,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 41,
-            "line": 218,
+            "line": 271,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 70,
-            "line": 237,
+            "line": 290,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 18,
-            "line": 245,
+            "line": 298,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 11,
-            "line": 7,
+            "line": 8,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 26,
-            "line": 7,
+            "line": 8,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           }
         ]
@@ -13426,11 +14938,29 @@
       "haxeType": "flight._internal.dom.FileSystemWritableFileStream",
       "members": [
         {
-          "calls": 1,
+          "calls": 4,
           "locations": [
             {
               "column": 13,
-              "line": 30,
+              "line": 35,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 11,
+              "line": 369,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 20,
+              "line": 376,
+              "operation": "call",
+              "source": "upstream/packages/host-web/src/webFilesystem.ts"
+            },
+            {
+              "column": 38,
+              "line": 388,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -13444,7 +14974,7 @@
           "locations": [
             {
               "column": 11,
-              "line": 308,
+              "line": 385,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -13458,7 +14988,7 @@
           "locations": [
             {
               "column": 11,
-              "line": 307,
+              "line": 380,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -13473,18 +15003,30 @@
         "arities": [
           0
         ],
-        "count": 2,
+        "count": 4,
         "locations": [
           {
             "arity": 0,
             "column": 13,
-            "line": 29,
+            "line": 34,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 30,
-            "line": 29,
+            "line": 34,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 17,
+            "line": 362,
+            "source": "upstream/packages/host-web/src/webFilesystem.ts"
+          },
+          {
+            "arity": 0,
+            "column": 22,
+            "line": 364,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           }
         ]
@@ -13509,7 +15051,7 @@
           {
             "arity": 0,
             "column": 34,
-            "line": 307,
+            "line": 380,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           }
         ]
@@ -14177,8 +15719,26 @@
         "arities": [
           0
         ],
-        "count": 209,
+        "count": 212,
         "locations": [
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 43,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 43,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 44,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 14,
@@ -15568,8 +17128,50 @@
         "arities": [
           0
         ],
-        "count": 281,
+        "count": 288,
         "locations": [
+          {
+            "arity": 0,
+            "column": 52,
+            "line": 137,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 23,
+            "line": 138,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 43,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 43,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 56,
+            "line": 44,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 45,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 53,
+            "line": 51,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 14,
@@ -17445,8 +19047,44 @@
         "arities": [
           0
         ],
-        "count": 62,
+        "count": 68,
         "locations": [
+          {
+            "arity": 0,
+            "column": 49,
+            "line": 142,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 17,
+            "line": 145,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 18,
+            "line": 148,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 19,
+            "line": 148,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 36,
+            "line": 148,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 22,
+            "line": 210,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 22,
@@ -18049,8 +19687,14 @@
         "arities": [
           0
         ],
-        "count": 275,
+        "count": 276,
         "locations": [
+          {
+            "arity": 0,
+            "column": 51,
+            "line": 55,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 31,
@@ -19718,8 +21362,14 @@
         "arities": [
           0
         ],
-        "count": 10,
+        "count": 11,
         "locations": [
+          {
+            "arity": 0,
+            "column": 51,
+            "line": 55,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 31,
@@ -21237,8 +22887,20 @@
       "haxeType": "flight._internal.dom.GPUDevice",
       "members": [
         {
-          "calls": 48,
+          "calls": 50,
           "locations": [
+            {
+              "column": 27,
+              "line": 44,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
+            {
+              "column": 24,
+              "line": 51,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
             {
               "column": 20,
               "line": 26,
@@ -22025,8 +23687,14 @@
           "writes": 0
         },
         {
-          "calls": 23,
+          "calls": 24,
           "locations": [
+            {
+              "column": 18,
+              "line": 137,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
             {
               "column": 28,
               "line": 83,
@@ -22171,8 +23839,14 @@
           "writes": 0
         },
         {
-          "calls": 23,
+          "calls": 24,
           "locations": [
+            {
+              "column": 15,
+              "line": 142,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
             {
               "column": 25,
               "line": 86,
@@ -22385,8 +24059,14 @@
           "writes": 0
         },
         {
-          "calls": 35,
+          "calls": 36,
           "locations": [
+            {
+              "column": 24,
+              "line": 134,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
             {
               "column": 26,
               "line": 82,
@@ -23214,8 +24894,14 @@
         "arities": [
           0
         ],
-        "count": 98,
+        "count": 99,
         "locations": [
+          {
+            "arity": 0,
+            "column": 27,
+            "line": 44,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 11,
@@ -24165,8 +25851,14 @@
         "arities": [
           0
         ],
-        "count": 10,
+        "count": 11,
         "locations": [
+          {
+            "arity": 0,
+            "column": 51,
+            "line": 55,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 31,
@@ -24269,8 +25961,14 @@
         "arities": [
           0
         ],
-        "count": 14,
+        "count": 15,
         "locations": [
+          {
+            "arity": 0,
+            "column": 44,
+            "line": 115,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 20,
@@ -24489,8 +26187,14 @@
         "arities": [
           0
         ],
-        "count": 4,
+        "count": 5,
         "locations": [
+          {
+            "arity": 0,
+            "column": 68,
+            "line": 119,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 23,
@@ -24624,8 +26328,20 @@
         "arities": [
           0
         ],
-        "count": 60,
+        "count": 62,
         "locations": [
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 137,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 49,
+            "line": 142,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 11,
@@ -25629,8 +27345,14 @@
       "haxeType": "flight._internal.dom.GPURenderPassEncoder",
       "members": [
         {
-          "calls": 20,
+          "calls": 21,
           "locations": [
+            {
+              "column": 3,
+              "line": 75,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
             {
               "column": 3,
               "line": 52,
@@ -25795,8 +27517,14 @@
           "writes": 0
         },
         {
-          "calls": 19,
+          "calls": 20,
           "locations": [
+            {
+              "column": 3,
+              "line": 76,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
             {
               "column": 3,
               "line": 53,
@@ -25917,8 +27645,26 @@
           "writes": 0
         },
         {
-          "calls": 63,
+          "calls": 66,
           "locations": [
+            {
+              "column": 3,
+              "line": 72,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
+            {
+              "column": 3,
+              "line": 73,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
+            {
+              "column": 3,
+              "line": 74,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
             {
               "column": 3,
               "line": 49,
@@ -26341,8 +28087,14 @@
           "writes": 0
         },
         {
-          "calls": 22,
+          "calls": 23,
           "locations": [
+            {
+              "column": 3,
+              "line": 71,
+              "operation": "call",
+              "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+            },
             {
               "column": 3,
               "line": 48,
@@ -26644,8 +28396,32 @@
         "arities": [
           0
         ],
-        "count": 110,
+        "count": 114,
         "locations": [
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 43,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 43,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 16,
+            "line": 70,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 70,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 14,
@@ -27323,8 +29099,26 @@
         "arities": [
           0
         ],
-        "count": 120,
+        "count": 123,
         "locations": [
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 140,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 3,
+            "line": 140,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 20,
+            "line": 71,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 20,
@@ -28129,8 +29923,86 @@
         "arities": [
           0
         ],
-        "count": 222,
+        "count": 235,
         "locations": [
+          {
+            "arity": 0,
+            "column": 95,
+            "line": 102,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 10,
+            "line": 104,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 43,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 43,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 56,
+            "line": 44,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 46,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 31,
+            "line": 48,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
+            "line": 48,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 53,
+            "line": 51,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 53,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 31,
+            "line": 55,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 51,
+            "line": 55,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
+            "line": 55,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 14,
@@ -29540,8 +31412,32 @@
         "arities": [
           0
         ],
-        "count": 156,
+        "count": 160,
         "locations": [
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 134,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 49,
+            "line": 142,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 15,
+            "line": 144,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 17,
+            "line": 145,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 11,
@@ -32161,8 +34057,14 @@
         "arities": [
           0
         ],
-        "count": 162,
+        "count": 163,
         "locations": [
+          {
+            "arity": 0,
+            "column": 51,
+            "line": 55,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 4,
@@ -33024,7 +34926,7 @@
           {
             "arity": 0,
             "column": 20,
-            "line": 44,
+            "line": 51,
             "source": "upstream/packages/types/src/WgpuRenderEffectPipeline.ts"
           },
           {
@@ -33298,8 +35200,14 @@
         "arities": [
           0
         ],
-        "count": 59,
+        "count": 60,
         "locations": [
+          {
+            "arity": 0,
+            "column": 72,
+            "line": 124,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 57,
@@ -34122,8 +36030,56 @@
         "arities": [
           0
         ],
-        "count": 297,
+        "count": 305,
         "locations": [
+          {
+            "arity": 0,
+            "column": 56,
+            "line": 44,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 46,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 31,
+            "line": 47,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
+            "line": 47,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 53,
+            "line": 51,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 14,
+            "line": 53,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
+            "line": 54,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 51,
+            "line": 55,
+            "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+          },
           {
             "arity": 0,
             "column": 43,
@@ -36086,13 +38042,13 @@
             },
             {
               "column": 5,
-              "line": 242,
+              "line": 256,
               "operation": "call",
               "source": "upstream/packages/media/src/audioChannel.ts"
             },
             {
               "column": 7,
-              "line": 62,
+              "line": 63,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
@@ -36130,13 +38086,13 @@
             },
             {
               "column": 5,
-              "line": 241,
+              "line": 255,
               "operation": "call",
               "source": "upstream/packages/media/src/audioChannel.ts"
             },
             {
               "column": 7,
-              "line": 101,
+              "line": 109,
               "operation": "call",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
@@ -36186,7 +38142,7 @@
             },
             {
               "column": 7,
-              "line": 124,
+              "line": 132,
               "operation": "read",
               "source": "upstream/packages/media/src/audioDeviceBackend.ts"
             },
@@ -36302,61 +38258,61 @@
           {
             "arity": 0,
             "column": 51,
-            "line": 177,
+            "line": 191,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 14,
-            "line": 179,
+            "line": 193,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 68,
-            "line": 219,
+            "line": 233,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 45,
-            "line": 221,
+            "line": 235,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 49,
-            "line": 261,
+            "line": 275,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 10,
-            "line": 31,
+            "line": 32,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 13,
-            "line": 61,
+            "line": 62,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 32,
-            "line": 64,
+            "line": 70,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 13,
-            "line": 87,
+            "line": 94,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
             "arity": 0,
             "column": 7,
-            "line": 89,
+            "line": 96,
             "source": "upstream/packages/media/src/audioDeviceBackend.ts"
           },
           {
@@ -42057,7 +44013,7 @@
           "locations": [
             {
               "column": 24,
-              "line": 93,
+              "line": 98,
               "operation": "write",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
@@ -42083,13 +44039,13 @@
           "locations": [
             {
               "column": 5,
-              "line": 132,
+              "line": 141,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
             {
               "column": 5,
-              "line": 133,
+              "line": 142,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             }
@@ -42123,7 +44079,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 136,
+              "line": 146,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
@@ -42149,7 +44105,7 @@
           "locations": [
             {
               "column": 21,
-              "line": 109,
+              "line": 115,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
@@ -42175,7 +44131,7 @@
           "locations": [
             {
               "column": 5,
-              "line": 91,
+              "line": 96,
               "operation": "write",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             }
@@ -42253,13 +44209,13 @@
           "locations": [
             {
               "column": 7,
-              "line": 96,
+              "line": 101,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
             {
               "column": 7,
-              "line": 97,
+              "line": 102,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             }
@@ -42273,7 +44229,7 @@
           "locations": [
             {
               "column": 5,
-              "line": 90,
+              "line": 95,
               "operation": "write",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
@@ -42305,7 +44261,7 @@
           {
             "arity": 0,
             "column": 11,
-            "line": 89,
+            "line": 94,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
@@ -46799,7 +48755,7 @@
           "locations": [
             {
               "column": 90,
-              "line": 77,
+              "line": 79,
               "operation": "read",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -46819,19 +48775,19 @@
           {
             "arity": 1,
             "column": 22,
-            "line": 77,
+            "line": 79,
             "source": "upstream/packages/socket/src/socket.ts"
           },
           {
             "arity": 1,
             "column": 30,
-            "line": 77,
+            "line": 79,
             "source": "upstream/packages/socket/src/socket.ts"
           },
           {
             "arity": 1,
             "column": 90,
-            "line": 77,
+            "line": 79,
             "source": "upstream/packages/socket/src/socket.ts"
           }
         ]
@@ -47296,13 +49252,13 @@
           "locations": [
             {
               "column": 19,
-              "line": 253,
+              "line": 306,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 21,
-              "line": 55,
+              "line": 60,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
@@ -47452,7 +49408,7 @@
           {
             "arity": 0,
             "column": 21,
-            "line": 55,
+            "line": 60,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
@@ -49585,18 +51541,30 @@
         "arities": [
           1
         ],
-        "count": 10,
+        "count": 15,
         "locations": [
           {
             "arity": 1,
             "column": 12,
-            "line": 120,
+            "line": 130,
             "source": "upstream/packages/filesystem/src/filesystem.ts"
           },
           {
             "arity": 1,
-            "column": 10,
-            "line": 121,
+            "column": 31,
+            "line": 131,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 1,
+            "column": 9,
+            "line": 132,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 1,
+            "column": 46,
+            "line": 134,
             "source": "upstream/packages/filesystem/src/filesystem.ts"
           },
           {
@@ -49608,19 +51576,19 @@
           {
             "arity": 1,
             "column": 3,
-            "line": 68,
+            "line": 73,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 1,
             "column": 14,
-            "line": 72,
+            "line": 80,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 1,
             "column": 62,
-            "line": 72,
+            "line": 80,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
@@ -49643,9 +51611,27 @@
           },
           {
             "arity": 1,
-            "column": 46,
+            "column": 68,
             "line": 65,
             "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 1,
+            "column": 20,
+            "line": 49,
+            "source": "upstream/packages/types/src/Shell.ts"
+          },
+          {
+            "arity": 1,
+            "column": 20,
+            "line": 51,
+            "source": "upstream/packages/types/src/Shell.ts"
+          },
+          {
+            "arity": 1,
+            "column": 22,
+            "line": 81,
+            "source": "upstream/packages/types/src/Socket.ts"
           }
         ]
       }
@@ -50856,8 +52842,14 @@
       "haxeType": "flight._internal.dom.StereoPannerNode",
       "members": [
         {
-          "calls": 1,
+          "calls": 2,
           "locations": [
+            {
+              "column": 7,
+              "line": 68,
+              "operation": "call",
+              "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+            },
             {
               "column": 5,
               "line": 24,
@@ -50870,8 +52862,14 @@
           "writes": 0
         },
         {
-          "calls": 1,
+          "calls": 2,
           "locations": [
+            {
+              "column": 7,
+              "line": 108,
+              "operation": "call",
+              "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+            },
             {
               "column": 61,
               "line": 71,
@@ -50887,6 +52885,12 @@
           "calls": 0,
           "locations": [
             {
+              "column": 7,
+              "line": 138,
+              "operation": "read",
+              "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+            },
+            {
               "column": 5,
               "line": 22,
               "operation": "read",
@@ -50900,7 +52904,7 @@
             }
           ],
           "name": "pan",
-          "reads": 2,
+          "reads": 3,
           "writes": 0
         }
       ],
@@ -50909,8 +52913,38 @@
         "arities": [
           0
         ],
-        "count": 7,
+        "count": 12,
         "locations": [
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 15,
+            "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 67,
+            "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+          },
+          {
+            "arity": 0,
+            "column": 32,
+            "line": 70,
+            "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+          },
+          {
+            "arity": 0,
+            "column": 13,
+            "line": 94,
+            "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+          },
+          {
+            "arity": 0,
+            "column": 7,
+            "line": 96,
+            "source": "upstream/packages/media/src/audioDeviceBackend.ts"
+          },
           {
             "arity": 0,
             "column": 19,
@@ -51123,7 +53157,7 @@
           "locations": [
             {
               "column": 28,
-              "line": 59,
+              "line": 64,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -51137,7 +53171,7 @@
           "locations": [
             {
               "column": 60,
-              "line": 59,
+              "line": 64,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -51157,13 +53191,13 @@
           {
             "arity": 0,
             "column": 13,
-            "line": 58,
+            "line": 63,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 0,
             "column": 30,
-            "line": 58,
+            "line": 63,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           }
         ]
@@ -51283,13 +53317,13 @@
           "locations": [
             {
               "column": 41,
-              "line": 56,
+              "line": 61,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 30,
-              "line": 58,
+              "line": 63,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -51303,13 +53337,13 @@
           "locations": [
             {
               "column": 39,
-              "line": 254,
+              "line": 307,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             },
             {
               "column": 18,
-              "line": 256,
+              "line": 309,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webFilesystem.ts"
             }
@@ -51369,7 +53403,7 @@
           {
             "arity": 0,
             "column": 11,
-            "line": 55,
+            "line": 60,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
@@ -51998,19 +54032,19 @@
           {
             "arity": 0,
             "column": 11,
-            "line": 99,
+            "line": 105,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
             "column": 32,
-            "line": 99,
+            "line": 105,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
             "column": 45,
-            "line": 99,
+            "line": 105,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
@@ -52196,7 +54230,7 @@
           "locations": [
             {
               "column": 20,
-              "line": 23,
+              "line": 26,
               "operation": "read",
               "source": "upstream/packages/shell/src/shell.ts"
             }
@@ -52222,7 +54256,7 @@
           {
             "arity": 0,
             "column": 20,
-            "line": 23,
+            "line": 26,
             "source": "upstream/packages/shell/src/shell.ts"
           }
         ]
@@ -55607,7 +57641,7 @@
         "arities": [
           0
         ],
-        "count": 422,
+        "count": 427,
         "locations": [
           {
             "arity": 0,
@@ -55626,6 +57660,36 @@
             "column": 37,
             "line": 178,
             "source": "upstream/packages/effects-gl/src/glBevelEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 44,
+            "line": 24,
+            "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 9,
+            "line": 24,
+            "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 46,
+            "line": 31,
+            "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 47,
+            "line": 31,
+            "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 5,
+            "line": 31,
+            "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
           },
           {
             "arity": 0,
@@ -58158,7 +60222,7 @@
         "arities": [
           0
         ],
-        "count": 375,
+        "count": 378,
         "locations": [
           {
             "arity": 0,
@@ -58213,6 +60277,24 @@
             "column": 5,
             "line": 204,
             "source": "upstream/packages/effects-gl/src/glBevelEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 11,
+            "line": 45,
+            "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 27,
+            "line": 45,
+            "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+          },
+          {
+            "arity": 0,
+            "column": 46,
+            "line": 51,
+            "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
           },
           {
             "arity": 0,
@@ -60651,7 +62733,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 75,
+              "line": 77,
               "operation": "write",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -60665,7 +62747,7 @@
           "locations": [
             {
               "column": 11,
-              "line": 88,
+              "line": 90,
               "operation": "call",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -60679,7 +62761,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 78,
+              "line": 80,
               "operation": "write",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -60693,7 +62775,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 80,
+              "line": 82,
               "operation": "write",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -60707,7 +62789,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 77,
+              "line": 79,
               "operation": "write",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -60721,7 +62803,7 @@
           "locations": [
             {
               "column": 7,
-              "line": 76,
+              "line": 78,
               "operation": "write",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -60735,7 +62817,7 @@
           "locations": [
             {
               "column": 15,
-              "line": 83,
+              "line": 85,
               "operation": "read",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -60749,7 +62831,7 @@
           "locations": [
             {
               "column": 11,
-              "line": 84,
+              "line": 86,
               "operation": "call",
               "source": "upstream/packages/socket/src/socket.ts"
             }
@@ -60769,7 +62851,7 @@
           {
             "arity": 0,
             "column": 13,
-            "line": 71,
+            "line": 73,
             "source": "upstream/packages/socket/src/socket.ts"
           }
         ]
@@ -60917,13 +62999,13 @@
             },
             {
               "column": 5,
-              "line": 134,
+              "line": 143,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
             {
               "column": 12,
-              "line": 82,
+              "line": 87,
               "operation": "read",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
@@ -61051,13 +63133,13 @@
           "locations": [
             {
               "column": 51,
-              "line": 28,
+              "line": 30,
               "operation": "read",
               "source": "upstream/packages/dialog/src/dialog.ts"
             },
             {
               "column": 9,
-              "line": 32,
+              "line": 34,
               "operation": "call",
               "source": "upstream/packages/dialog/src/dialog.ts"
             }
@@ -61091,13 +63173,13 @@
           "locations": [
             {
               "column": 51,
-              "line": 19,
+              "line": 20,
               "operation": "read",
               "source": "upstream/packages/dialog/src/dialog.ts"
             },
             {
               "column": 16,
-              "line": 21,
+              "line": 22,
               "operation": "call",
               "source": "upstream/packages/dialog/src/dialog.ts"
             }
@@ -61353,13 +63435,13 @@
           "locations": [
             {
               "column": 51,
-              "line": 44,
+              "line": 47,
               "operation": "read",
               "source": "upstream/packages/dialog/src/dialog.ts"
             },
             {
               "column": 16,
-              "line": 46,
+              "line": 49,
               "operation": "call",
               "source": "upstream/packages/dialog/src/dialog.ts"
             }
@@ -61415,7 +63497,7 @@
             },
             {
               "column": 7,
-              "line": 98,
+              "line": 103,
               "operation": "call",
               "source": "upstream/packages/host-web/src/webDialog.ts"
             },
@@ -61691,7 +63773,7 @@
           {
             "arity": 0,
             "column": 51,
-            "line": 19,
+            "line": 20,
             "source": "upstream/packages/dialog/src/dialog.ts"
           },
           {
@@ -61762,26 +63844,26 @@
           },
           {
             "arity": 0,
-            "column": 46,
-            "line": 310,
-            "source": "upstream/packages/host-web/src/webDialog.ts"
-          },
-          {
-            "arity": 0,
             "column": 19,
-            "line": 33,
+            "line": 35,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
             "column": 46,
-            "line": 49,
+            "line": 364,
+            "source": "upstream/packages/host-web/src/webDialog.ts"
+          },
+          {
+            "arity": 0,
+            "column": 46,
+            "line": 52,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
             "arity": 0,
             "column": 8,
-            "line": 55,
+            "line": 58,
             "source": "upstream/packages/host-web/src/webDialog.ts"
           },
           {
@@ -61946,7 +64028,7 @@
           "locations": [
             {
               "column": 18,
-              "line": 232,
+              "line": 281,
               "operation": "call",
               "source": "upstream/packages/filesystem/src/filesystem.ts"
             }
@@ -61961,36 +64043,48 @@
         "arities": [
           1
         ],
-        "count": 10,
+        "count": 14,
         "locations": [
           {
             "arity": 1,
             "column": 12,
-            "line": 127,
+            "line": 141,
             "source": "upstream/packages/filesystem/src/filesystem.ts"
           },
           {
             "arity": 1,
-            "column": 10,
-            "line": 128,
-            "source": "upstream/packages/filesystem/src/filesystem.ts"
-          },
-          {
-            "arity": 1,
-            "column": 24,
-            "line": 230,
+            "column": 31,
+            "line": 142,
             "source": "upstream/packages/filesystem/src/filesystem.ts"
           },
           {
             "arity": 1,
             "column": 9,
-            "line": 230,
+            "line": 143,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 1,
+            "column": 46,
+            "line": 145,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 1,
+            "column": 24,
+            "line": 279,
+            "source": "upstream/packages/filesystem/src/filesystem.ts"
+          },
+          {
+            "arity": 1,
+            "column": 9,
+            "line": 279,
             "source": "upstream/packages/filesystem/src/filesystem.ts"
           },
           {
             "arity": 1,
             "column": 18,
-            "line": 232,
+            "line": 281,
             "source": "upstream/packages/filesystem/src/filesystem.ts"
           },
           {
@@ -62002,26 +64096,38 @@
           {
             "arity": 1,
             "column": 3,
-            "line": 77,
+            "line": 85,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 1,
             "column": 14,
-            "line": 81,
+            "line": 92,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 1,
             "column": 60,
-            "line": 81,
+            "line": 92,
             "source": "upstream/packages/host-web/src/webFilesystem.ts"
           },
           {
             "arity": 1,
-            "column": 47,
+            "column": 69,
             "line": 66,
             "source": "upstream/packages/types/src/FileSystem.ts"
+          },
+          {
+            "arity": 1,
+            "column": 19,
+            "line": 50,
+            "source": "upstream/packages/types/src/Shell.ts"
+          },
+          {
+            "arity": 1,
+            "column": 22,
+            "line": 82,
+            "source": "upstream/packages/types/src/Socket.ts"
           }
         ]
       }
@@ -62037,11 +64143,23 @@
       "haxeType": "flight._internal.dom.WritableStreamDefaultWriter",
       "members": [
         {
-          "calls": 1,
+          "calls": 3,
           "locations": [
             {
               "column": 11,
-              "line": 238,
+              "line": 283,
+              "operation": "call",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 20,
+              "line": 290,
+              "operation": "call",
+              "source": "upstream/packages/filesystem/src/filesystem.ts"
+            },
+            {
+              "column": 38,
+              "line": 302,
               "operation": "call",
               "source": "upstream/packages/filesystem/src/filesystem.ts"
             }
@@ -62055,7 +64173,7 @@
           "locations": [
             {
               "column": 11,
-              "line": 235,
+              "line": 299,
               "operation": "call",
               "source": "upstream/packages/filesystem/src/filesystem.ts"
             }
@@ -62068,8 +64186,8 @@
           "calls": 1,
           "locations": [
             {
-              "column": 45,
-              "line": 234,
+              "column": 13,
+              "line": 296,
               "operation": "call",
               "source": "upstream/packages/filesystem/src/filesystem.ts"
             }
@@ -62089,12 +64207,12 @@
           {
             "arity": 1,
             "column": 9,
-            "line": 232,
+            "line": 281,
             "source": "upstream/packages/filesystem/src/filesystem.ts"
           }
         ]
       }
     }
   ],
-  "upstreamCommit": "b3bb4bf61833f7723e7033dd5c732e91a6601400"
+  "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"
 }

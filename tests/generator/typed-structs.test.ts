@@ -46,10 +46,10 @@ describe('typed struct stable declaration identity', () => {
     );
 
     expect(discovery.migration.summary).toMatchObject({
-      baseline: 405,
+      baseline: 404,
       kindChanged: 3,
-      preserved: 204,
-      relocated: 146,
+      preserved: 214,
+      relocated: 135,
       removed: 26,
       renamed: 26,
     });
@@ -64,7 +64,7 @@ describe('typed struct stable declaration identity', () => {
         discovery.candidates.filter((candidate) => candidate.migration.status === 'new').length,
     );
     const relocated = discovery.candidates.filter((candidate) => candidate.migration.status === 'relocated');
-    expect(relocated).toHaveLength(146);
+    expect(relocated).toHaveLength(135);
     expect(
       relocated.every(
         (candidate) =>
@@ -2578,7 +2578,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free vertex-displacement modifier options',
       },
       {
-        declarationFingerprint: 'sha256:2ad7549c058e1efa23cb19f7996356cd3cc5f03d86fc0819502c27ee9e1ef575',
+        declarationFingerprint: 'sha256:a54f58b205d53b959529e62ab802c89eab67ac85849468b97f99d2f06f71e5aa',
         id: '@flighthq/types:interface#InteractionManager',
         purpose: 'reviewed escape-free interaction manager',
       },
@@ -2593,12 +2593,12 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free pointer event data',
       },
       {
-        declarationFingerprint: 'sha256:1a80443ef92b7e9bc7ac2dd87e10ced28db13469f8d2df5f858aa35a5a986944',
+        declarationFingerprint: 'sha256:c1566a9ef3f76a0a5845445ebb0ad24f240f195794ca401aff5832dc9ead917b',
         id: '@flighthq/types:interface#NodeInteractionState',
         purpose: 'reviewed escape-free node interaction state',
       },
       {
-        declarationFingerprint: 'sha256:6c846f5649ce0d7c3800c0bf309bebafb3e4bc1f67b56d12bc9e2acce5c9d262',
+        declarationFingerprint: 'sha256:2c60e479926c797a20ea429b5a01bfba2c2b8d18bb72b90d1cad2d33d7bf9d60',
         id: '@flighthq/types:interface#InteractionPointerState',
         purpose: 'reviewed escape-free interaction pointer state',
       },
@@ -3218,7 +3218,7 @@ describe('typed struct stable declaration identity', () => {
         purpose: 'reviewed escape-free shaded-material options',
       },
       {
-        declarationFingerprint: 'sha256:b38af857c9f1ced8a0efa777f84273e301f75abdceb65a7180dd2eef56c4802d',
+        declarationFingerprint: 'sha256:d113313a017369bd2254f2d17a856a87160bc56d6a23b1099d81bb802192ff51',
         id: '@flighthq/types:interface#RenderEffectPadding',
         purpose: 'reviewed escape-free render-effect padding',
       },
@@ -5363,10 +5363,10 @@ describe('typed struct analysis', () => {
       ),
     });
     expect(report.migration.summary).toMatchObject({
-      baseline: 405,
+      baseline: 404,
       kindChanged: 3,
-      preserved: 204,
-      relocated: 146,
+      preserved: 214,
+      relocated: 135,
       removed: 26,
       renamed: 26,
     });
@@ -5520,7 +5520,7 @@ describe('typed struct analysis', () => {
     expect(wgpuRenderStateRuntime).toMatchObject({
       declarationFingerprint: 'sha256:98f76831e154a026450321ea0bfc3cef4b621c07bc1dd110b6bbe79adf8982f2',
       eligible: true,
-      emission: { directAccesses: 0, mode: 'audit-only', pendingAccesses: 691, reflectiveSurvivors: [] },
+      emission: { directAccesses: 0, mode: 'audit-only', pendingAccesses: 692, reflectiveSurvivors: [] },
       escapes: expect.arrayContaining([expect.objectContaining({ reason: 'presence-sensitive' })]),
       migration: { baselineId: null, status: 'new' },
       purpose: 'checker-discovered public declaration',
@@ -5603,7 +5603,7 @@ describe('typed struct analysis', () => {
     for (const [name, declarationFingerprint, purpose] of [
       [
         'InteractionManager',
-        'sha256:2ad7549c058e1efa23cb19f7996356cd3cc5f03d86fc0819502c27ee9e1ef575',
+        'sha256:a54f58b205d53b959529e62ab802c89eab67ac85849468b97f99d2f06f71e5aa',
         'reviewed escape-free interaction manager',
       ],
       [
@@ -5618,12 +5618,12 @@ describe('typed struct analysis', () => {
       ],
       [
         'NodeInteractionState',
-        'sha256:1a80443ef92b7e9bc7ac2dd87e10ced28db13469f8d2df5f858aa35a5a986944',
+        'sha256:c1566a9ef3f76a0a5845445ebb0ad24f240f195794ca401aff5832dc9ead917b',
         'reviewed escape-free node interaction state',
       ],
       [
         'InteractionPointerState',
-        'sha256:6c846f5649ce0d7c3800c0bf309bebafb3e4bc1f67b56d12bc9e2acce5c9d262',
+        'sha256:2c60e479926c797a20ea429b5a01bfba2c2b8d18bb72b90d1cad2d33d7bf9d60',
         'reviewed escape-free interaction pointer state',
       ],
     ] as const) {
@@ -6522,7 +6522,7 @@ describe('typed struct analysis', () => {
       ],
       [
         'RenderEffectPadding',
-        'sha256:b38af857c9f1ced8a0efa777f84273e301f75abdceb65a7180dd2eef56c4802d',
+        'sha256:d113313a017369bd2254f2d17a856a87160bc56d6a23b1099d81bb802192ff51',
         'reviewed escape-free render-effect padding',
       ],
     ] as const) {
@@ -7400,7 +7400,7 @@ describe('typed struct analysis', () => {
     for (const [name, declarationFingerprint, pendingAccesses] of [
       ['CanvasRenderRegistries', 'sha256:548d036e6d8839aa0630872584d45c63301c735f9804f2dc56cacec0164e56f7', 10],
       ['GlRenderRegistries', 'sha256:43740eafc1e1c310207dcce7ac38be6340b29e9a1a67fcec617ff72fef5634ea', 71],
-      ['WgpuRenderRegistries', 'sha256:9fc24ca0be8f86d689020a89a978acdd3d9e5b24efa7cb8473fe58deb4f117df', 52],
+      ['WgpuRenderRegistries', 'sha256:f5551d589160fc35e1139116253248f4c16e1ad60ac13a770de379aeceed80d9', 53],
     ] as const) {
       expect(fortySixthHighAccessFrontierCandidates.get(name)).toMatchObject({
         declarationFingerprint,
@@ -8398,7 +8398,7 @@ describe('typed struct analysis', () => {
       ),
     ).toBe(true);
     expect(reviewedDirectCandidates.reduce((total, candidate) => total + candidate.emission.directAccesses, 0)).toBe(
-      13_821,
+      13_928,
     );
 
     // Merged implementation modules invalidate whole-file receiver-name scans:

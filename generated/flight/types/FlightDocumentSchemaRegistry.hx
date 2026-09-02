@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentSchemaRegistry = { var nodeSchemas:KeyedTable<FlightDocumentNodeSchema>; var resourceSchemas:KeyedTable<FlightDocumentResourceSchema>; var shapeCommandSchemas:KeyedTable<ShapeCommandSchema<String>>; };
+typedef FlightDocumentSchemaRegistry = { var interactiveStateExtensionSchemas:KeyedTable<FlightDocumentInteractiveStateExtensionSchema>; var interactiveStateTransitionSchemas:KeyedTable<FlightDocumentInteractiveStateTransitionSchema>; var nodeSchemas:KeyedTable<FlightDocumentNodeSchema>; var resourceSchemas:KeyedTable<FlightDocumentResourceSchema>; var shapeCommandSchemas:KeyedTable<ShapeCommandSchema<String>>; };

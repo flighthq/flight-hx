@@ -5,7 +5,10 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight._SceneDocument as Facade_SceneDocument_flight__SceneDocument;
 import flight.types.FlightDocument;
+import flight.types.FlightDocumentInteractiveStateBinding;
+import flight.types.FlightDocumentLayoutBinding;
 import flight.types.FlightDocumentRefusalExplanation;
+import flight.types.FlightDocumentResourceDescriptor;
 import flight.types.FlightDocumentResourceResolverRegistry;
 import flight.types.FlightDocumentScene2D;
 import flight.types.FlightDocumentScene2DMaterialization;
@@ -13,19 +16,21 @@ import flight.types.FlightDocumentScene3D;
 import flight.types.FlightDocumentScene3DMaterialization;
 import flight.types.FlightDocumentSchemaRegistry;
 import flight.types.FlightDocumentText;
+import flight.types.Node2D;
+import flight.types.Node3D;
 import flight.types.Scene2D;
 import flight.types.Scene3D;
 import flight.types.Scene3DDocumentCamera;
 import flight.types.Scene3DDocumentLight;
 
 class SceneDocument {
-  public static function createFlightDocumentFromScene2D(source:Scene2D, schemas:FlightDocumentSchemaRegistry):FlightDocumentScene2D {
-    return cast Facade_SceneDocument_flight__SceneDocument.createFlightDocumentFromScene2D(source, schemas);
+  public static function createFlightDocumentFromScene2D(source:Scene2D, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>):FlightDocumentScene2D {
+    return cast Facade_SceneDocument_flight__SceneDocument.createFlightDocumentFromScene2D(source, schemas, interactiveStateBindings, layoutBindings);
     return cast null;
   }
 
-  public static function createFlightDocumentFromScene3D(source:Scene3D, cameras:Array<Scene3DDocumentCamera>, lights:Array<Scene3DDocumentLight>, schemas:FlightDocumentSchemaRegistry):FlightDocumentScene3D {
-    return cast Facade_SceneDocument_flight__SceneDocument.createFlightDocumentFromScene3D(source, cameras, lights, schemas);
+  public static function createFlightDocumentFromScene3D(source:Scene3D, cameras:Array<Scene3DDocumentCamera>, lights:Array<Scene3DDocumentLight>, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>):FlightDocumentScene3D {
+    return cast Facade_SceneDocument_flight__SceneDocument.createFlightDocumentFromScene3D(source, cameras, lights, schemas, interactiveStateBindings, layoutBindings);
     return cast null;
   }
 
@@ -76,6 +81,11 @@ class SceneDocument {
 
   public static function formatFlightDocumentText(document:FlightDocument):FlightDocumentText {
     return cast Facade_SceneDocument_flight__SceneDocument.formatFlightDocumentText(document);
+    return cast null;
+  }
+
+  public static function getFlightDocumentResourceDependencies(document:FlightDocument, schemas:FlightDocumentSchemaRegistry):Null<Array<FlightDocumentResourceDescriptor>> {
+    return cast Facade_SceneDocument_flight__SceneDocument.getFlightDocumentResourceDependencies(document, schemas);
     return cast null;
   }
 

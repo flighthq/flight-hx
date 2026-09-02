@@ -45,7 +45,7 @@ class TextureAtlas {
     Facade_TextureAtlas_flight__TextureAtlas.clearTextureAtlasRegions(target);
   }
 
-  public static function createTextureAtlas(?obj:{ @:optional var texture:Null<Texture2D>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flight.types.TextureAtlas {
+  public static function createTextureAtlas(?obj:{ @:optional var imageHeight:Null<Float>; @:optional var imageName:Null<String>; @:optional var imageWidth:Null<Float>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var scale:Null<Float>; @:optional var texture:Null<Texture2D>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):flight.types.TextureAtlas {
     return cast Facade_TextureAtlas_flight__TextureAtlas.createTextureAtlas(obj);
     return cast null;
   }
@@ -75,7 +75,7 @@ class TextureAtlas {
     return cast null;
   }
 
-  public static function createTextureAtlasRegion(?obj:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):TextureAtlasRegion {
+  public static function createTextureAtlasRegion(?obj:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var pageName:Null<String>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):TextureAtlasRegion {
     return cast Facade_TextureAtlas_flight__TextureAtlas.createTextureAtlasRegion(obj);
     return cast null;
   }
@@ -182,7 +182,7 @@ class TextureAtlas {
     return cast null;
   }
 
-  public static function setTextureAtlasRegion(out:TextureAtlasRegion, source:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):Void {
+  public static function setTextureAtlasRegion(out:TextureAtlasRegion, source:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var pageName:Null<String>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):Void {
     Facade_TextureAtlas_flight__TextureAtlas.setTextureAtlasRegion(out, source);
   }
 }

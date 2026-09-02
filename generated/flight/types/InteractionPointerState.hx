@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InteractionPointerState<N> = { var lastClickTarget:Null<N>; var lastClickTime:Float; var pointerDownTarget:Null<N>; var pointerOverTarget:Null<N>; };
+typedef InteractionPointerState<N> = { var lastClickTarget:Null<N>; var lastClickTime:Float; var lastPointerClickButton:Float; var lastPointerClickInteractionState:Null<NodeInteractionState>; var lastPointerClickTarget:Null<N>; var lastPointerClickTime:Float; var lastPointerClickX:Float; var lastPointerClickY:Float; var pointerDownTarget:Null<N>; var pointerOverTarget:Null<N>; };

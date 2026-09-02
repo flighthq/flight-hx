@@ -36,7 +36,19 @@ import flight.types.Camera3DOptions;
 import flight.types.Entity;
 import flight.types.FlightDocument;
 import flight.types.FlightDocumentFieldSchema;
+import flight.types.FlightDocumentFieldValidator;
 import flight.types.FlightDocumentFields;
+import flight.types.FlightDocumentInteractiveState;
+import flight.types.FlightDocumentInteractiveStateBinding;
+import flight.types.FlightDocumentInteractiveStateExtensionDescriptor;
+import flight.types.FlightDocumentInteractiveStateExtensionSchema;
+import flight.types.FlightDocumentInteractiveStateTransitionDescriptor;
+import flight.types.FlightDocumentInteractiveStateTransitionSchema;
+import flight.types.FlightDocumentInteractiveStates;
+import flight.types.FlightDocumentLayoutBinding;
+import flight.types.FlightDocumentLayoutDescriptor;
+import flight.types.FlightDocumentLayoutNode;
+import flight.types.FlightDocumentLayoutTree;
 import flight.types.FlightDocumentNode;
 import flight.types.FlightDocumentNodeFactory;
 import flight.types.FlightDocumentNodeFieldWriter;
@@ -48,6 +60,7 @@ import flight.types.FlightDocumentResourceDescriptor;
 import flight.types.FlightDocumentResourceLookup;
 import flight.types.FlightDocumentResourceResolver;
 import flight.types.FlightDocumentResourceResolverRegistry;
+import flight.types.FlightDocumentResourceSchema;
 import flight.types.FlightDocumentScene;
 import flight.types.FlightDocumentScene2D;
 import flight.types.FlightDocumentScene2DMaterialization;
@@ -55,6 +68,8 @@ import flight.types.FlightDocumentScene3D;
 import flight.types.FlightDocumentScene3DMaterialization;
 import flight.types.FlightDocumentSchemaRegistry;
 import flight.types.FlightDocumentText;
+import flight.types.FlightDocumentToken;
+import flight.types.FlightDocumentTokenValues;
 import flight.types.FlightDocumentValue;
 import flight.types.KeyedTable;
 import flight.types.Light;
@@ -87,6 +102,8 @@ typedef FlightDocumentTextReadResult__flightDocumentText = { var document:Null<F
 typedef FlightDocumentTextVector3__flightDocumentText = { var x:Float; var y:Float; var z:Float; };
 
 typedef FlightDocumentTextQuaternion__flightDocumentText = { >FlightDocumentTextVector3__flightDocumentText, var w:Float; };
+
+typedef FlightDocumentInteractiveStateMetadata__sceneDocumentInteractiveStateBindings = { var interactiveStates:Null<FlightDocumentInteractiveStates>; var transition:Null<FlightDocumentInteractiveStateTransitionDescriptor>; };
 
 typedef FlightDocumentSceneSelection__sceneDocumentMaterializationSelection = flight._internal._Union2<{ var refusal:FlightDocumentRefusalExplanation; var scene:Dynamic; var sceneIndex:Dynamic; }, { var refusal:Dynamic; var scene:FlightDocumentScene; var sceneIndex:Float; }>;
 
@@ -649,6 +666,14 @@ class SceneDocumentYamlSubsetParser__sceneDocumentYamlSubset {
 
 @:noCompletion
 class _SceneDocument {
+  public static function getFlightDocumentResourceDependencies(document:FlightDocument, schemas:FlightDocumentSchemaRegistry):Null<Array<FlightDocumentResourceDescriptor>> {
+    for (descriptor in _Runtime.iterable(_Runtime.field(document, 'resources'))) {
+      if ((cast _Runtime.strictEquals((cast getRegistryTableEntry((cast _Runtime.field(schemas, 'resourceSchemas') : Dynamic), (cast (cast descriptor : FlightDocumentResourceDescriptor).kind : String)) : Null<FlightDocumentResourceSchema>), null) : Bool)) { return cast null; }
+    }
+    return cast _Runtime.field(document, 'resources');
+    return cast null;
+  }
+
   public static function explainFlightDocumentText(text:FlightDocumentText):Null<FlightDocumentRefusalExplanation> {
     return cast (cast (cast _SceneDocument.readFlightDocumentText__flightDocumentText((cast text : String)) : FlightDocumentTextReadResult__flightDocumentText) : FlightDocumentTextReadResult__flightDocumentText).refusal;
     return cast null;
@@ -664,10 +689,10 @@ class _SceneDocument {
       _Runtime.throwValue(_Runtime.rangeError('FlightDocument.defaultScene must index FlightDocument.scenes'));
     }
     lines = (cast cast (['flight: 1', ('defaultScene: ' + Std.string(_Runtime.field(document, 'defaultScene')))] : Array<Dynamic>));
-    if ((cast ((cast _Runtime.field(_Runtime.field(document, 'resources'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _SceneDocument.appendResources__flightDocumentText(({ final __callArgument38:Dynamic = lines; __callArgument38; }), _Runtime.field(document, 'resources')); }
+    if ((cast ((cast _Runtime.field(_Runtime.field(document, 'resources'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) { _SceneDocument.appendResources__flightDocumentText(({ final __callArgument40:Dynamic = lines; __callArgument40; }), _Runtime.field(document, 'resources')); }
     _Runtime.callProperty(lines, 'push', cast (['scenes:'] : Array<Dynamic>));
     for (scene in _Runtime.iterable(_Runtime.field(document, 'scenes'))) {
-      _SceneDocument.appendScene__flightDocumentText(({ final __callArgument42:Dynamic = lines; __callArgument42; }), ({ final __callArgument43:Dynamic = scene; __callArgument43; }));
+      _SceneDocument.appendScene__flightDocumentText(({ final __callArgument44:Dynamic = lines; __callArgument44; }), ({ final __callArgument45:Dynamic = scene; __callArgument45; }));
     }
     text = (_Runtime.join(lines, '\n') + '\n');
     emitted = (cast parseSceneDocumentYamlSubset((cast text : String)) : SceneDocumentYamlSubsetResult__sceneDocumentYamlSubset);
@@ -689,33 +714,33 @@ class _SceneDocument {
     _Runtime.callProperty(lines, 'push', cast ([('        near: ' + (cast _SceneDocument.formatNumber__flightDocumentText((cast _Runtime.field(camera, 'near') : Float)) : String))] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(_Runtime.field(camera, 'node'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(lines, 'push', cast ([('        node: ' + (cast _SceneDocument.formatNumber__flightDocumentText((cast _Runtime.field(camera, 'node') : Float)) : String))] : Array<Dynamic>)); }
     _Runtime.callProperty(lines, 'push', cast (['        projection:'] : Array<Dynamic>));
-    _SceneDocument.appendProjection__flightDocumentText(({ final __callArgument46:Dynamic = lines; __callArgument46; }), _Runtime.field(camera, 'projection'), (cast 10.0 : Float));
+    _SceneDocument.appendProjection__flightDocumentText(({ final __callArgument48:Dynamic = lines; __callArgument48; }), _Runtime.field(camera, 'projection'), (cast 10.0 : Float));
     _Runtime.callProperty(lines, 'push', cast (['        transform:'] : Array<Dynamic>));
-    _SceneDocument.appendTransform3D__flightDocumentText(({ final __callArgument48:Dynamic = lines; __callArgument48; }), _Runtime.field(camera, 'transform'), (cast 10.0 : Float));
+    _SceneDocument.appendTransform3D__flightDocumentText(({ final __callArgument50:Dynamic = lines; __callArgument50; }), _Runtime.field(camera, 'transform'), (cast 10.0 : Float));
   }
 
   public static function appendFields__flightDocumentText(lines:Array<String>, fields:FlightDocumentFields, indent:Float, reserved:Array<String>):Void {
     for (key in _Runtime.iterable(_Runtime.callProperty(flight._internal.DynamicObject.keys(fields), 'sort', cast ([] : Array<Dynamic>)))) {
       if ((cast _Runtime.includes(reserved, key) : Bool)) { _Runtime.throwValue(_Runtime.typeError(('FlightDocument field collides with structural key: ' + key))); }
-      _SceneDocument.appendMappingEntry__flightDocumentText(({ final __callArgument52:Dynamic = lines; __callArgument52; }), (cast key : String), (cast _Runtime.getIndex(fields, key) : flight._internal._Any), (cast indent : Float));
+      _SceneDocument.appendMappingEntry__flightDocumentText(({ final __callArgument54:Dynamic = lines; __callArgument54; }), (cast key : String), (cast _Runtime.getIndex(fields, key) : flight._internal._Any), (cast indent : Float));
     }
   }
 
   public static function appendLight__flightDocumentText(lines:Array<String>, light:Scene3DDocumentLight):Void {
     _Runtime.callProperty(lines, 'push', cast (['      - descriptor:'] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast ([('          kind: ' + (cast _SceneDocument.formatString__flightDocumentText((cast (cast _Runtime.field(light, 'descriptor') : Light).kind : String)) : String))] : Array<Dynamic>));
-    _SceneDocument.appendObjectEntries__flightDocumentText(({ final __callArgument54:Dynamic = lines; __callArgument54; }), ({ final __callArgument55:Dynamic = _Runtime.field(light, 'descriptor'); __callArgument55; }), (cast 10.0 : Float), ({ final __callArgument56:Dynamic = cast (['kind'] : Array<Dynamic>); __callArgument56; }));
+    _SceneDocument.appendObjectEntries__flightDocumentText(({ final __callArgument56:Dynamic = lines; __callArgument56; }), ({ final __callArgument57:Dynamic = _Runtime.field(light, 'descriptor'); __callArgument57; }), (cast 10.0 : Float), ({ final __callArgument58:Dynamic = cast (['kind'] : Array<Dynamic>); __callArgument58; }));
     if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'name'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(lines, 'push', cast ([('        name: ' + (cast _SceneDocument.formatString__flightDocumentText((cast _Runtime.field(light, 'name') : String)) : String))] : Array<Dynamic>)); }
     if ((cast !_Runtime.strictEquals(_Runtime.field(light, 'node'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(lines, 'push', cast ([('        node: ' + (cast _SceneDocument.formatNumber__flightDocumentText((cast _Runtime.field(light, 'node') : Float)) : String))] : Array<Dynamic>)); }
     _Runtime.callProperty(lines, 'push', cast (['        transform:'] : Array<Dynamic>));
-    _SceneDocument.appendTransform3D__flightDocumentText(({ final __callArgument60:Dynamic = lines; __callArgument60; }), _Runtime.field(light, 'transform'), (cast 10.0 : Float));
+    _SceneDocument.appendTransform3D__flightDocumentText(({ final __callArgument62:Dynamic = lines; __callArgument62; }), _Runtime.field(light, 'transform'), (cast 10.0 : Float));
   }
 
   public static function appendMappingEntry__flightDocumentText(lines:Array<String>, key:String, value:flight._internal._Any, indent:Float):Void {
     var prefix:String = cast _Runtime.UNDEFINED;
     prefix = ((_Runtime.repeat(' ', indent) + (cast _SceneDocument.formatKey__flightDocumentText((cast key : String)) : String)) + ':');
     if ((cast (cast _SceneDocument.isFlightDocumentScalar__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast ([((prefix + ' ') + (cast _SceneDocument.formatScalar__flightDocumentText(({ final __callArgument62:Dynamic = value; __callArgument62; })) : String))] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast ([((prefix + ' ') + (cast _SceneDocument.formatScalar__flightDocumentText(({ final __callArgument64:Dynamic = value; __callArgument64; })) : String))] : Array<Dynamic>));
       return;
     }
     if ((cast _Runtime.isArray(value) : Bool)) {
@@ -723,7 +748,7 @@ class _SceneDocument {
         _Runtime.throwValue(_Runtime.typeError('The FlightDocument YAML subset cannot represent an empty sequence field'));
       }
       _Runtime.callProperty(lines, 'push', cast ([prefix] : Array<Dynamic>));
-      _SceneDocument.appendSequence__flightDocumentText(({ final __callArgument64:Dynamic = lines; __callArgument64; }), ({ final __callArgument65:Dynamic = value; __callArgument65; }), (cast (indent + 2.0) : Float));
+      _SceneDocument.appendSequence__flightDocumentText(({ final __callArgument66:Dynamic = lines; __callArgument66; }), ({ final __callArgument67:Dynamic = value; __callArgument67; }), (cast (indent + 2.0) : Float));
       return;
     }
     if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool)) { _Runtime.throwValue(_Runtime.typeError('FlightDocument contains a value outside its YAML subset')); }
@@ -732,18 +757,19 @@ class _SceneDocument {
       return;
     }
     _Runtime.callProperty(lines, 'push', cast ([prefix] : Array<Dynamic>));
-    _SceneDocument.appendObjectEntries__flightDocumentText(({ final __callArgument68:Dynamic = lines; __callArgument68; }), ({ final __callArgument69:Dynamic = value; __callArgument69; }), (cast (indent + 2.0) : Float), ({ final __callArgument70:Dynamic = cast ([] : Array<Dynamic>); __callArgument70; }));
+    _SceneDocument.appendObjectEntries__flightDocumentText(({ final __callArgument70:Dynamic = lines; __callArgument70; }), ({ final __callArgument71:Dynamic = value; __callArgument71; }), (cast (indent + 2.0) : Float), ({ final __callArgument72:Dynamic = cast ([] : Array<Dynamic>); __callArgument72; }));
   }
 
   public static function appendNode__flightDocumentText(lines:Array<String>, node:FlightDocumentNode, indent:Float):Void {
     var prefix:String = cast _Runtime.UNDEFINED;
     prefix = _Runtime.repeat(' ', indent);
     _Runtime.callProperty(lines, 'push', cast ([((prefix + 'kind: ') + (cast _SceneDocument.formatString__flightDocumentText((cast _Runtime.field(node, 'kind') : String)) : String))] : Array<Dynamic>));
-    _SceneDocument.appendFields__flightDocumentText(({ final __callArgument74:Dynamic = lines; __callArgument74; }), _Runtime.field(node, 'fields'), (cast indent : Float), ({ final __callArgument75:Dynamic = _SceneDocument.NODE_RESERVED_FIELDS__flightDocumentText; __callArgument75; }));
+    _SceneDocument.appendFields__flightDocumentText(({ final __callArgument76:Dynamic = lines; __callArgument76; }), _Runtime.field(node, 'fields'), (cast indent : Float), ({ final __callArgument77:Dynamic = _SceneDocument.NODE_RESERVED_FIELDS__flightDocumentText; __callArgument77; }));
+    _SceneDocument.appendNodeInteractiveMetadata__flightDocumentText(({ final __callArgument80:Dynamic = lines; __callArgument80; }), ({ final __callArgument81:Dynamic = node; __callArgument81; }), (cast indent : Float));
     if ((cast ((cast _Runtime.field(_Runtime.field(node, 'children'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast ([(prefix + 'children:')] : Array<Dynamic>));
       for (child in _Runtime.iterable(_Runtime.field(node, 'children'))) {
-        _SceneDocument.appendNodeSequenceItem__flightDocumentText(({ final __callArgument80:Dynamic = lines; __callArgument80; }), ({ final __callArgument81:Dynamic = child; __callArgument81; }), (cast (indent + 2.0) : Float));
+        _SceneDocument.appendNodeSequenceItem__flightDocumentText(({ final __callArgument86:Dynamic = lines; __callArgument86; }), ({ final __callArgument87:Dynamic = child; __callArgument87; }), (cast (indent + 2.0) : Float));
       }
     }
   }
@@ -752,28 +778,94 @@ class _SceneDocument {
     var prefix:String = cast _Runtime.UNDEFINED;
     prefix = _Runtime.repeat(' ', indent);
     _Runtime.callProperty(lines, 'push', cast ([((prefix + '- kind: ') + (cast _SceneDocument.formatString__flightDocumentText((cast _Runtime.field(node, 'kind') : String)) : String))] : Array<Dynamic>));
-    _SceneDocument.appendFields__flightDocumentText(({ final __callArgument84:Dynamic = lines; __callArgument84; }), _Runtime.field(node, 'fields'), (cast (indent + 2.0) : Float), ({ final __callArgument85:Dynamic = _SceneDocument.NODE_RESERVED_FIELDS__flightDocumentText; __callArgument85; }));
+    _SceneDocument.appendFields__flightDocumentText(({ final __callArgument90:Dynamic = lines; __callArgument90; }), _Runtime.field(node, 'fields'), (cast (indent + 2.0) : Float), ({ final __callArgument91:Dynamic = _SceneDocument.NODE_RESERVED_FIELDS__flightDocumentText; __callArgument91; }));
+    _SceneDocument.appendNodeInteractiveMetadata__flightDocumentText(({ final __callArgument94:Dynamic = lines; __callArgument94; }), ({ final __callArgument95:Dynamic = node; __callArgument95; }), (cast (indent + 2.0) : Float));
     if ((cast ((cast _Runtime.field(_Runtime.field(node, 'children'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast ([(prefix + '  children:')] : Array<Dynamic>));
       for (child in _Runtime.iterable(_Runtime.field(node, 'children'))) {
-        _SceneDocument.appendNodeSequenceItem__flightDocumentText(({ final __callArgument90:Dynamic = lines; __callArgument90; }), ({ final __callArgument91:Dynamic = child; __callArgument91; }), (cast (indent + 4.0) : Float));
+        _SceneDocument.appendNodeSequenceItem__flightDocumentText(({ final __callArgument100:Dynamic = lines; __callArgument100; }), ({ final __callArgument101:Dynamic = child; __callArgument101; }), (cast (indent + 4.0) : Float));
       }
     }
   }
 
+  public static function appendInteractiveState__flightDocumentText(lines:Array<String>, state:FlightDocumentInteractiveState, indent:Float):Void {
+    var entries:Array<Array<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>>> = cast _Runtime.UNDEFINED;
+    entries = (cast _SceneDocument.getInteractiveStateEntries__flightDocumentText(({ final __callArgument104:Dynamic = state; __callArgument104; })) : Array<Array<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>>>);
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field(entries, 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'extensions'), 'length'), 0.0) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.typeError('FlightDocument interactive state must not be empty'));
+    }
+    for (__iteration0 in _Runtime.iterable(entries)) {
+      var property:String = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var value:flight._internal._Union2<Float, Bool> = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
+      _SceneDocument.appendMappingEntry__flightDocumentText(({ final __callArgument108:Dynamic = lines; __callArgument108; }), (cast property : String), (cast value : flight._internal._Any), (cast indent : Float));
+    }
+    if ((cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'extensions'), 'length'), 0.0) : Bool)) { return; }
+    _Runtime.callProperty(lines, 'push', cast ([(_Runtime.repeat(' ', indent) + 'extensions:')] : Array<Dynamic>));
+    for (extension in _Runtime.iterable(_Runtime.field(state, 'extensions'))) {
+      _Runtime.callProperty(lines, 'push', cast ([((_Runtime.repeat(' ', (indent + 2.0)) + '- kind: ') + (cast _SceneDocument.formatString__flightDocumentText((cast (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind : String)) : String))] : Array<Dynamic>));
+      _SceneDocument.appendFields__flightDocumentText(({ final __callArgument112:Dynamic = lines; __callArgument112; }), (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).fields, (cast (indent + 4.0) : Float), ({ final __callArgument113:Dynamic = _SceneDocument.DESCRIPTOR_RESERVED_FIELDS__flightDocumentText; __callArgument113; }));
+    }
+  }
+
+  public static function appendNodeInteractiveMetadata__flightDocumentText(lines:Array<String>, node:FlightDocumentNode, indent:Float):Void {
+    var prefix:String = cast _Runtime.UNDEFINED;
+    var phases:Array<Array<flight._internal._Union2<String, FlightDocumentInteractiveState>>> = cast _Runtime.UNDEFINED;
+    prefix = _Runtime.repeat(' ', indent);
+    if ((cast _Runtime.looseEquals(_Runtime.field(node, 'interactiveStates'), null) : Bool)) {
+      if ((cast !_Runtime.looseEquals(_Runtime.field(node, 'transition'), null) : Bool)) { _Runtime.throwValue(_Runtime.typeError('FlightDocument transition requires interactiveStates')); }
+      return;
+    }
+    phases = (cast _SceneDocument.getInteractiveStatePhases__flightDocumentText(_Runtime.field(node, 'interactiveStates')) : Array<Array<flight._internal._Union2<String, FlightDocumentInteractiveState>>>);
+    if ((cast _Runtime.strictEquals(_Runtime.field(phases, 'length'), 0.0) : Bool)) { _Runtime.throwValue(_Runtime.typeError('FlightDocument interactiveStates must not be empty')); }
+    _Runtime.callProperty(lines, 'push', cast ([(prefix + 'interactiveStates:')] : Array<Dynamic>));
+    for (__iteration1 in _Runtime.iterable(phases)) {
+      var phase:String = flight._internal._StaticIndex.readArray(__iteration1, 0.0);
+      var state:FlightDocumentInteractiveState = flight._internal._StaticIndex.readArray(__iteration1, 1.0);
+      _Runtime.callProperty(lines, 'push', cast ([(((prefix + '  ') + phase) + ':')] : Array<Dynamic>));
+      _SceneDocument.appendInteractiveState__flightDocumentText(({ final __callArgument118:Dynamic = lines; __callArgument118; }), ({ final __callArgument119:Dynamic = state; __callArgument119; }), (cast (indent + 4.0) : Float));
+    }
+    if ((cast !_Runtime.looseEquals(_Runtime.field(node, 'transition'), null) : Bool)) {
+      _Runtime.callProperty(lines, 'push', cast ([(prefix + 'transition:')] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast ([((prefix + '  kind: ') + (cast _SceneDocument.formatString__flightDocumentText((cast (cast _Runtime.field(node, 'transition') : FlightDocumentInteractiveStateTransitionDescriptor).kind : String)) : String))] : Array<Dynamic>));
+      _SceneDocument.appendFields__flightDocumentText(({ final __callArgument122:Dynamic = lines; __callArgument122; }), (cast _Runtime.field(node, 'transition') : FlightDocumentInteractiveStateTransitionDescriptor).fields, (cast (indent + 2.0) : Float), ({ final __callArgument123:Dynamic = _SceneDocument.DESCRIPTOR_RESERVED_FIELDS__flightDocumentText; __callArgument123; }));
+    }
+  }
+
+  public static function getInteractiveStateEntries__flightDocumentText(state:FlightDocumentInteractiveState):Array<Array<flight._internal._Union2<flight._internal._Union2<String, Bool>, Float>>> {
+    var out:Array<Array<flight._internal._Union2<flight._internal._Union2<String, Bool>, Float>>> = cast _Runtime.UNDEFINED;
+    out = (cast cast ([] : Array<Dynamic>));
+    for (property in _Runtime.iterable(_SceneDocument.INTERACTIVE_STATE_PROPERTIES__flightDocumentText)) {
+      var value:Null<flight._internal._Union2<Float, Bool>> = _Runtime.getIndex(state, property);
+      if ((cast !_Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Runtime.callProperty(out, 'push', cast ([cast ([property, value] : Array<Dynamic>)] : Array<Dynamic>)); }
+    }
+    return cast out;
+    return cast null;
+  }
+
+  public static function getInteractiveStatePhases__flightDocumentText(states:FlightDocumentInteractiveStates):Array<Array<flight._internal._Union2<String, FlightDocumentInteractiveState>>> {
+    var out:Array<Array<flight._internal._Union2<String, FlightDocumentInteractiveState>>> = cast _Runtime.UNDEFINED;
+    out = (cast cast ([] : Array<Dynamic>));
+    for (phase in _Runtime.iterable(_SceneDocument.INTERACTIVE_STATE_PHASES__flightDocumentText)) {
+      var state:Null<FlightDocumentInteractiveState> = _Runtime.getIndex(states, phase);
+      if ((cast !_Runtime.strictEquals(state, null) : Bool)) { _Runtime.callProperty(out, 'push', cast ([cast ([phase, state] : Array<Dynamic>)] : Array<Dynamic>)); }
+    }
+    return cast out;
+    return cast null;
+  }
+
   public static function appendObjectEntries__flightDocumentText(lines:Array<String>, value:flight._internal._Object, indent:Float, reserved:Array<String>):Void {
-    for (__iteration0 in _Runtime.iterable(_Runtime.callProperty(flight._internal.DynamicObject.entries(value), 'sort', cast ([function(__parameter1:Array<flight._internal._Any>, __parameter2:Array<flight._internal._Any>):Float {
+    for (__iteration2 in _Runtime.iterable(_Runtime.callProperty(flight._internal.DynamicObject.entries(value), 'sort', cast ([function(__parameter3:Array<flight._internal._Any>, __parameter4:Array<flight._internal._Any>):Float {
       var left:String = cast _Runtime.UNDEFINED;
       var right:String = cast _Runtime.UNDEFINED;
-      left = flight._internal._StaticIndex.readArray(__parameter1, 0.0);
-      right = flight._internal._StaticIndex.readArray(__parameter2, 0.0);
+      left = flight._internal._StaticIndex.readArray(__parameter3, 0.0);
+      right = flight._internal._StaticIndex.readArray(__parameter4, 0.0);
       return cast _Runtime.callProperty(left, 'localeCompare', cast ([right] : Array<Dynamic>));
       return cast _Runtime.UNDEFINED;
     }] : Array<Dynamic>)))) {
-      var key:String = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
-      var entry:flight._internal._Any = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
+      var key:String = flight._internal._StaticIndex.readArray(__iteration2, 0.0);
+      var entry:flight._internal._Any = flight._internal._StaticIndex.readArray(__iteration2, 1.0);
       if ((cast _Runtime.includes(reserved, key) : Bool)) { continue; }
-      if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _SceneDocument.appendMappingEntry__flightDocumentText(({ final __callArgument96:Dynamic = lines; __callArgument96; }), (cast key : String), (cast entry : flight._internal._Any), (cast indent : Float)); }
+      if ((cast !_Runtime.strictEquals(entry, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _SceneDocument.appendMappingEntry__flightDocumentText(({ final __callArgument132:Dynamic = lines; __callArgument132; }), (cast key : String), (cast entry : flight._internal._Any), (cast indent : Float)); }
     }
   }
 
@@ -795,7 +887,7 @@ class _SceneDocument {
     for (resource in _Runtime.iterable(resources)) {
       _Runtime.callProperty(lines, 'push', cast ([('  - kind: ' + (cast _SceneDocument.formatString__flightDocumentText((cast _Runtime.field(resource, 'kind') : String)) : String))] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast ([('    key: ' + (cast _SceneDocument.formatString__flightDocumentText((cast _Runtime.field(resource, 'key') : String)) : String))] : Array<Dynamic>));
-      _SceneDocument.appendFields__flightDocumentText(({ final __callArgument100:Dynamic = lines; __callArgument100; }), _Runtime.field(resource, 'fields'), (cast 4.0 : Float), ({ final __callArgument101:Dynamic = _SceneDocument.RESOURCE_RESERVED_FIELDS__flightDocumentText; __callArgument101; }));
+      _SceneDocument.appendFields__flightDocumentText(({ final __callArgument136:Dynamic = lines; __callArgument136; }), _Runtime.field(resource, 'fields'), (cast 4.0 : Float), ({ final __callArgument137:Dynamic = _SceneDocument.RESOURCE_RESERVED_FIELDS__flightDocumentText; __callArgument137; }));
     }
   }
 
@@ -809,18 +901,71 @@ class _SceneDocument {
       if ((cast ((cast _Runtime.field(_Runtime.field(scene, 'cameras'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
         _Runtime.callProperty(lines, 'push', cast (['    cameras:'] : Array<Dynamic>));
         for (camera in _Runtime.iterable(_Runtime.field(scene, 'cameras'))) {
-          _SceneDocument.appendCamera__flightDocumentText(({ final __callArgument106:Dynamic = lines; __callArgument106; }), ({ final __callArgument107:Dynamic = camera; __callArgument107; }));
+          _SceneDocument.appendCamera__flightDocumentText(({ final __callArgument142:Dynamic = lines; __callArgument142; }), ({ final __callArgument143:Dynamic = camera; __callArgument143; }));
         }
       }
       if ((cast ((cast _Runtime.field(_Runtime.field(scene, 'lights'), 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
         _Runtime.callProperty(lines, 'push', cast (['    lights:'] : Array<Dynamic>));
         for (light in _Runtime.iterable(_Runtime.field(scene, 'lights'))) {
-          _SceneDocument.appendLight__flightDocumentText(({ final __callArgument112:Dynamic = lines; __callArgument112; }), ({ final __callArgument113:Dynamic = light; __callArgument113; }));
+          _SceneDocument.appendLight__flightDocumentText(({ final __callArgument148:Dynamic = lines; __callArgument148; }), ({ final __callArgument149:Dynamic = light; __callArgument149; }));
         }
       }
     }
     _Runtime.callProperty(lines, 'push', cast (['    scene:'] : Array<Dynamic>));
-    _SceneDocument.appendNode__flightDocumentText(({ final __callArgument116:Dynamic = lines; __callArgument116; }), (cast scene : { var scene:FlightDocumentNode; }).scene, (cast 6.0 : Float));
+    _SceneDocument.appendNode__flightDocumentText(({ final __callArgument152:Dynamic = lines; __callArgument152; }), (cast scene : { var scene:FlightDocumentNode; }).scene, (cast 6.0 : Float));
+    _SceneDocument.appendLayouts__flightDocumentText(({ final __callArgument154:Dynamic = lines; __callArgument154; }), (cast scene : { var layouts:Array<FlightDocumentLayoutDescriptor>; }).layouts);
+    _SceneDocument.appendTokens__flightDocumentText(({ final __callArgument156:Dynamic = lines; __callArgument156; }), (cast scene : { var tokens:Array<FlightDocumentToken>; }).tokens);
+  }
+
+  public static function appendLayouts__flightDocumentText(lines:Array<String>, layouts:Array<FlightDocumentLayoutDescriptor>):Void {
+    var seenTargets:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(layouts, 'length'), 0.0) : Bool)) { return; }
+    seenTargets = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+    _Runtime.callProperty(lines, 'push', cast (['    layouts:'] : Array<Dynamic>));
+    for (layout in _Runtime.iterable(layouts)) {
+      var nodes:Array<FlightDocumentLayoutNode> = (cast _Runtime.field(layout, 'tree') : FlightDocumentLayoutTree).nodes;
+      if ((cast _Runtime.strictEquals(_Runtime.field(nodes, 'length'), 0.0) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout tree must not be empty')); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(layout, 'targets'), 'length'), _Runtime.field(nodes, 'length')) : Bool)) {
+        _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout targets must match its tree nodes index-for-index'));
+      }
+      _Runtime.callProperty(lines, 'push', cast (['      - targets:'] : Array<Dynamic>));
+      for (target in _Runtime.iterable(_Runtime.field(layout, 'targets'))) {
+        if ((cast _Runtime.strictEquals(_Runtime.field(target, 'length'), 0.0) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout target names must not be empty')); }
+        if ((cast ((cast seenTargets : flight._internal._Set<String>).has(target)) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout targets must be unique per scene')); }
+        ((cast seenTargets : flight._internal._Set<String>).add(target));
+        _Runtime.callProperty(lines, 'push', cast ([('          - ' + (cast _SceneDocument.formatString__flightDocumentText((cast target : String)) : String))] : Array<Dynamic>));
+      }
+      _Runtime.callProperty(lines, 'push', cast (['        tree:'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['          nodes:'] : Array<Dynamic>));
+      {
+        var index:Float = 0.0;
+        while ((cast ((cast index : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
+          _SceneDocument.appendLayoutNode__flightDocumentText(({ final __callArgument162:Dynamic = lines; __callArgument162; }), flight._internal._StaticIndex.readArray(nodes, index), (cast index : Float));
+          index++;
+        }
+      }
+    }
+  }
+
+  public static function appendLayoutNode__flightDocumentText(lines:Array<String>, node:FlightDocumentLayoutNode, index:Float):Void {
+    if ((cast _Runtime.strictEquals(_Runtime.field(node.kind, 'length'), 0.0) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout node kinds must not be empty')); }
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isInteger', cast ([node.parentIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast node.parentIndex : Float) < (cast -1.0 : Float)) : Bool)) : Bool) || (cast ((cast node.parentIndex : Float) >= (cast index : Float)) : Bool)) : Bool)) {
+      _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout parentIndex must be -1 or precede its node'));
+    }
+    _Runtime.callProperty(lines, 'push', cast ([('            - kind: ' + (cast _SceneDocument.formatString__flightDocumentText((cast node.kind : String)) : String))] : Array<Dynamic>));
+    _Runtime.callProperty(lines, 'push', cast ([('              parentIndex: ' + Std.string(node.parentIndex))] : Array<Dynamic>));
+    if ((cast !_Runtime.strictEquals(node.containerStyle, null) : Bool)) { _SceneDocument.appendMappingEntry__flightDocumentText(({ final __callArgument164:Dynamic = lines; __callArgument164; }), (cast 'containerStyle' : String), (cast node.containerStyle : flight._internal._Any), (cast 14.0 : Float)); }
+    if ((cast !_Runtime.strictEquals(node.itemStyle, null) : Bool)) { _SceneDocument.appendMappingEntry__flightDocumentText(({ final __callArgument166:Dynamic = lines; __callArgument166; }), (cast 'itemStyle' : String), (cast node.itemStyle : flight._internal._Any), (cast 14.0 : Float)); }
+  }
+
+  public static function appendTokens__flightDocumentText(lines:Array<String>, tokens:Array<FlightDocumentToken>):Void {
+    if ((cast _Runtime.strictEquals(_Runtime.field(tokens, 'length'), 0.0) : Bool)) { return; }
+    _Runtime.callProperty(lines, 'push', cast (['    tokens:'] : Array<Dynamic>));
+    for (token in _Runtime.iterable(tokens)) {
+      _Runtime.callProperty(lines, 'push', cast ([('      - kind: ' + (cast _SceneDocument.formatString__flightDocumentText((cast _Runtime.field(token, 'kind') : String)) : String))] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast ([('        key: ' + (cast _SceneDocument.formatString__flightDocumentText((cast _Runtime.field(token, 'key') : String)) : String))] : Array<Dynamic>));
+      _SceneDocument.appendFields__flightDocumentText(({ final __callArgument170:Dynamic = lines; __callArgument170; }), ({ final __callArgument171:Dynamic = _Runtime.field(token, 'values'); __callArgument171; }), (cast 8.0 : Float), ({ final __callArgument172:Dynamic = _SceneDocument.TOKEN_RESERVED_FIELDS__flightDocumentText; __callArgument172; }));
+    }
   }
 
   public static function appendSequence__flightDocumentText(lines:Array<String>, values:Array<flight._internal._Any>, indent:Float):Void {
@@ -828,7 +973,7 @@ class _SceneDocument {
     prefix = _Runtime.repeat(' ', indent);
     for (value in _Runtime.iterable(values)) {
       if ((cast (cast _SceneDocument.isFlightDocumentScalar__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool)) {
-        _Runtime.callProperty(lines, 'push', cast ([((prefix + '- ') + (cast _SceneDocument.formatScalar__flightDocumentText(({ final __callArgument120:Dynamic = value; __callArgument120; })) : String))] : Array<Dynamic>));
+        _Runtime.callProperty(lines, 'push', cast ([((prefix + '- ') + (cast _SceneDocument.formatScalar__flightDocumentText(({ final __callArgument178:Dynamic = value; __callArgument178; })) : String))] : Array<Dynamic>));
         continue;
       }
       if ((cast _Runtime.isArray(value) : Bool)) {
@@ -836,7 +981,7 @@ class _SceneDocument {
           _Runtime.throwValue(_Runtime.typeError('The FlightDocument YAML subset cannot represent an empty sequence field'));
         }
         _Runtime.callProperty(lines, 'push', cast ([(prefix + '-')] : Array<Dynamic>));
-        _SceneDocument.appendSequence__flightDocumentText(({ final __callArgument122:Dynamic = lines; __callArgument122; }), ({ final __callArgument123:Dynamic = value; __callArgument123; }), (cast (indent + 2.0) : Float));
+        _SceneDocument.appendSequence__flightDocumentText(({ final __callArgument180:Dynamic = lines; __callArgument180; }), ({ final __callArgument181:Dynamic = value; __callArgument181; }), (cast (indent + 2.0) : Float));
         continue;
       }
       if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool)) { _Runtime.throwValue(_Runtime.typeError('FlightDocument contains a value outside its YAML subset')); }
@@ -845,7 +990,7 @@ class _SceneDocument {
         continue;
       }
       _Runtime.callProperty(lines, 'push', cast ([(prefix + '-')] : Array<Dynamic>));
-      _SceneDocument.appendObjectEntries__flightDocumentText(({ final __callArgument126:Dynamic = lines; __callArgument126; }), ({ final __callArgument127:Dynamic = value; __callArgument127; }), (cast (indent + 2.0) : Float), ({ final __callArgument128:Dynamic = cast ([] : Array<Dynamic>); __callArgument128; }));
+      _SceneDocument.appendObjectEntries__flightDocumentText(({ final __callArgument184:Dynamic = lines; __callArgument184; }), ({ final __callArgument185:Dynamic = value; __callArgument185; }), (cast (indent + 2.0) : Float), ({ final __callArgument186:Dynamic = cast ([] : Array<Dynamic>); __callArgument186; }));
     }
   }
 
@@ -853,12 +998,12 @@ class _SceneDocument {
     var prefix:String = cast _Runtime.UNDEFINED;
     prefix = _Runtime.repeat(' ', indent);
     _Runtime.callProperty(lines, 'push', cast ([(prefix + 'position:')] : Array<Dynamic>));
-    _SceneDocument.appendVector3__flightDocumentText(({ final __callArgument132:Dynamic = lines; __callArgument132; }), (cast _Runtime.field(transform, 'position') : Dynamic), (cast (indent + 2.0) : Float));
+    _SceneDocument.appendVector3__flightDocumentText(({ final __callArgument190:Dynamic = lines; __callArgument190; }), (cast _Runtime.field(transform, 'position') : Dynamic), (cast (indent + 2.0) : Float));
     _Runtime.callProperty(lines, 'push', cast ([(prefix + 'rotation:')] : Array<Dynamic>));
     _Runtime.callProperty(lines, 'push', cast ([((_Runtime.repeat(' ', (indent + 2.0)) + 'w: ') + (cast _SceneDocument.formatNumber__flightDocumentText((cast (cast _Runtime.field(transform, 'rotation') : { var w:Float; }).w : Float)) : String))] : Array<Dynamic>));
-    _SceneDocument.appendVector3__flightDocumentText(({ final __callArgument134:Dynamic = lines; __callArgument134; }), (cast _Runtime.field(transform, 'rotation') : Dynamic), (cast (indent + 2.0) : Float));
+    _SceneDocument.appendVector3__flightDocumentText(({ final __callArgument192:Dynamic = lines; __callArgument192; }), (cast _Runtime.field(transform, 'rotation') : Dynamic), (cast (indent + 2.0) : Float));
     _Runtime.callProperty(lines, 'push', cast ([(prefix + 'scale:')] : Array<Dynamic>));
-    _SceneDocument.appendVector3__flightDocumentText(({ final __callArgument136:Dynamic = lines; __callArgument136; }), (cast _Runtime.field(transform, 'scale') : Dynamic), (cast (indent + 2.0) : Float));
+    _SceneDocument.appendVector3__flightDocumentText(({ final __callArgument194:Dynamic = lines; __callArgument194; }), (cast _Runtime.field(transform, 'scale') : Dynamic), (cast (indent + 2.0) : Float));
   }
 
   public static function appendVector3__flightDocumentText(lines:Array<String>, value:FlightDocumentTextVector3__flightDocumentText, indent:Float):Void {
@@ -898,7 +1043,7 @@ class _SceneDocument {
       }
       return cast out;
     }
-    if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuseValue__flightDocumentText((cast context : Dynamic), (cast (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid : String), (cast path : String)) : flight._internal._Symbol); }
+    if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuseValue__flightDocumentText((cast context : Dynamic), (cast (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid : String), (cast path : String)) : flight._internal._Symbol); }
     out = (cast {  });
     for (key in _Runtime.iterable(flight._internal.DynamicObject.keys(value))) {
       var item:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>, FlightDocumentFields>, Array<FlightDocumentValue>>, flight._internal._Symbol>> = (cast _SceneDocument.copyFlightDocumentValue__flightDocumentText((cast _Runtime.getIndex(value, key) : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast key : String)) : String) : String), (cast context : Dynamic)) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>, FlightDocumentFields>, Array<FlightDocumentValue>>, flight._internal._Symbol>>);
@@ -940,7 +1085,7 @@ class _SceneDocument {
   }
 
   public static function hasOnlyKeys__flightDocumentText(mapping:flight._internal._Record<String, flight._internal._Any>, allowed:Array<String>):Bool {
-    return cast _Runtime.callProperty(flight._internal.DynamicObject.keys(mapping), 'every', cast ([function(key:String, __unused3:Float, __unused4:Array<String>):Bool return _Runtime.includes(allowed, key)] : Array<Dynamic>));
+    return cast _Runtime.callProperty(flight._internal.DynamicObject.keys(mapping), 'every', cast ([function(key:String, __unused5:Float, __unused6:Array<String>):Bool return _Runtime.includes(allowed, key)] : Array<Dynamic>));
     return cast null;
   }
 
@@ -962,7 +1107,7 @@ class _SceneDocument {
     var camera:Scene3DDocumentCamera = cast _Runtime.UNDEFINED;
     var name:flight._internal._Any = cast _Runtime.UNDEFINED;
     var node:Null<flight._internal._Union2<Float, flight._internal._Symbol>> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument142:Dynamic = value; __callArgument142; }), ({ final __callArgument143:Dynamic = _SceneDocument.CAMERA_KEYS__flightDocumentText; __callArgument143; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<Scene3DDocumentCamera>); }
+    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument200:Dynamic = value; __callArgument200; }), ({ final __callArgument201:Dynamic = _SceneDocument.CAMERA_KEYS__flightDocumentText; __callArgument201; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<Scene3DDocumentCamera>); }
     far = _Runtime.getIndex(value, 'far');
     near = _Runtime.getIndex(value, 'near');
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(far), 'number') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'far' : String)) : String) : String)) : Null<Scene3DDocumentCamera>); }
@@ -996,38 +1141,38 @@ class _SceneDocument {
     var firstScene:FlightDocumentScene = cast _Runtime.UNDEFINED;
     parsed = (cast parseSceneDocumentYamlSubset((cast text : String)) : SceneDocumentYamlSubsetResult__sceneDocumentYamlSubset);
     if ((cast !(cast (cast parsed : { var ok:Bool; }).ok : Bool) : Bool)) {
-      return cast { document: null, refusal: { actual: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).actual, column: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).column, kind: null, limit: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).limit, line: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).line, offset: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).offset, path: '', reason: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).kind, resourceKey: null, version: null } };
+      return cast { document: null, refusal: { actual: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).actual, column: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).column, kind: null, limit: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).limit, line: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).line, mode: null, offset: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).offset, path: '', reason: (cast parsed : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset).kind, resourceKey: null, tokenKey: null, version: null } };
     }
     context = (cast { refusal: null });
-    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast (cast parsed : SceneDocumentYamlSubsetSuccess__sceneDocumentYamlSubset).value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument146:Dynamic = (cast parsed : SceneDocumentYamlSubsetSuccess__sceneDocumentYamlSubset).value; __callArgument146; }), ({ final __callArgument147:Dynamic = _SceneDocument.DOCUMENT_KEYS__flightDocumentText; __callArgument147; })) : Bool) : Bool) : Bool)) : Bool)) {
-      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument150:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument150; }), (cast '' : String)) : FlightDocumentRefusalExplanation) };
+    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast (cast parsed : SceneDocumentYamlSubsetSuccess__sceneDocumentYamlSubset).value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument204:Dynamic = (cast parsed : SceneDocumentYamlSubsetSuccess__sceneDocumentYamlSubset).value; __callArgument204; }), ({ final __callArgument205:Dynamic = _SceneDocument.DOCUMENT_KEYS__flightDocumentText; __callArgument205; })) : Bool) : Bool) : Bool)) : Bool)) {
+      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument208:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument208; }), (cast '' : String)) : FlightDocumentRefusalExplanation) };
     }
     mapping = (cast parsed : SceneDocumentYamlSubsetSuccess__sceneDocumentYamlSubset).value;
     version = _Runtime.getIndex(mapping, 'flight');
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(version), 'number') : Bool)) {
-      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument152:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument152; }), (cast 'flight' : String)) : FlightDocumentRefusalExplanation) };
+      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument210:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument210; }), (cast 'flight' : String)) : FlightDocumentRefusalExplanation) };
     }
     if ((cast !_Runtime.strictEquals(version, 1.0) : Bool)) {
-      var refusal:FlightDocumentRefusalExplanation = (cast createDocumentRefusal(({ final __callArgument154:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).VersionUnsupported; __callArgument154; }), (cast 'version' : String)) : FlightDocumentRefusalExplanation);
+      var refusal:FlightDocumentRefusalExplanation = (cast createDocumentRefusal(({ final __callArgument212:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).VersionUnsupported; __callArgument212; }), (cast 'version' : String)) : FlightDocumentRefusalExplanation);
       ((cast refusal : FlightDocumentRefusalExplanation).version = version);
       return cast { document: null, refusal: refusal };
     }
     scenesRaw = _Runtime.getIndex(mapping, 'scenes');
     if ((cast _Runtime.strictEquals(scenesRaw, null) : Bool)) {
-      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument156:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).ScenesEmpty; __callArgument156; }), (cast 'scenes' : String)) : FlightDocumentRefusalExplanation) };
+      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument214:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).ScenesEmpty; __callArgument214; }), (cast 'scenes' : String)) : FlightDocumentRefusalExplanation) };
     }
     if ((cast !(cast _Runtime.isArray(scenesRaw) : Bool) : Bool)) {
-      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument158:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument158; }), (cast 'scenes' : String)) : FlightDocumentRefusalExplanation) };
+      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument216:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument216; }), (cast 'scenes' : String)) : FlightDocumentRefusalExplanation) };
     }
     if ((cast _Runtime.strictEquals(_Runtime.field(scenesRaw, 'length'), 0.0) : Bool)) {
-      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument160:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).ScenesEmpty; __callArgument160; }), (cast 'scenes' : String)) : FlightDocumentRefusalExplanation) };
+      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument218:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).ScenesEmpty; __callArgument218; }), (cast 'scenes' : String)) : FlightDocumentRefusalExplanation) };
     }
     defaultScene = _Runtime.getIndex(mapping, 'defaultScene');
     if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(defaultScene), 'number') : Bool) || (cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isInteger', cast ([defaultScene] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
-      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument162:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument162; }), (cast 'defaultScene' : String)) : FlightDocumentRefusalExplanation) };
+      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument220:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument220; }), (cast 'defaultScene' : String)) : FlightDocumentRefusalExplanation) };
     }
     if ((cast ((cast ((cast defaultScene : Float) < (cast 0.0 : Float)) : Bool) || (cast ((cast defaultScene : Float) >= (cast _Runtime.field(scenesRaw, 'length') : Float)) : Bool)) : Bool)) {
-      var refusal:FlightDocumentRefusalExplanation = (cast createDocumentRefusal(({ final __callArgument164:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).DefaultSceneOutOfRange; __callArgument164; }), (cast 'defaultScene' : String)) : FlightDocumentRefusalExplanation);
+      var refusal:FlightDocumentRefusalExplanation = (cast createDocumentRefusal(({ final __callArgument222:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).DefaultSceneOutOfRange; __callArgument222; }), (cast 'defaultScene' : String)) : FlightDocumentRefusalExplanation);
       ((cast refusal : FlightDocumentRefusalExplanation).actual = defaultScene);
       ((cast refusal : FlightDocumentRefusalExplanation).limit = _Runtime.subtractNumbers(_Runtime.field(scenesRaw, 'length'), 1.0));
       return cast { document: null, refusal: refusal };
@@ -1046,7 +1191,7 @@ class _SceneDocument {
     }
     firstScene = flight._internal._StaticIndex.readArray(scenes, 0.0);
     if ((cast _Runtime.strictEquals(firstScene, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument166:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).ScenesEmpty; __callArgument166; }), (cast 'scenes' : String)) : FlightDocumentRefusalExplanation) };
+      return cast { document: null, refusal: (cast createDocumentRefusal(({ final __callArgument224:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).ScenesEmpty; __callArgument224; }), (cast 'scenes' : String)) : FlightDocumentRefusalExplanation) };
     }
     return cast { document: { defaultScene: defaultScene, resources: resources, scenes: _Runtime.concatArrays([[firstScene], _Runtime.toArray(_Runtime.slice(scenes, 1.0, null))]), version: 1.0 }, refusal: null };
     return cast null;
@@ -1062,13 +1207,13 @@ class _SceneDocument {
     var light:Scene3DDocumentLight = cast _Runtime.UNDEFINED;
     var name:flight._internal._Any = cast _Runtime.UNDEFINED;
     var node:Null<flight._internal._Union2<Float, flight._internal._Symbol>> = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument168:Dynamic = value; __callArgument168; }), ({ final __callArgument169:Dynamic = _SceneDocument.LIGHT_KEYS__flightDocumentText; __callArgument169; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<Scene3DDocumentLight>); }
+    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument226:Dynamic = value; __callArgument226; }), ({ final __callArgument227:Dynamic = _SceneDocument.LIGHT_KEYS__flightDocumentText; __callArgument227; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<Scene3DDocumentLight>); }
     descriptorRaw = _Runtime.getIndex(value, 'descriptor');
     descriptorPath = (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'descriptor' : String)) : String);
     if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast descriptorRaw : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast descriptorPath : String)) : Null<Scene3DDocumentLight>); }
     kind = _Runtime.getIndex(descriptorRaw, 'kind');
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(kind), 'string') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast descriptorPath : String), (cast 'kind' : String)) : String) : String)) : Null<Scene3DDocumentLight>); }
-    descriptorFields = (cast _SceneDocument.copyFlightDocumentFields__flightDocumentText(({ final __callArgument172:Dynamic = descriptorRaw; __callArgument172; }), ({ final __callArgument173:Dynamic = cast (['kind'] : Array<Dynamic>); __callArgument173; }), (cast descriptorPath : String), (cast context : Dynamic)) : Null<FlightDocumentFields>);
+    descriptorFields = (cast _SceneDocument.copyFlightDocumentFields__flightDocumentText(({ final __callArgument230:Dynamic = descriptorRaw; __callArgument230; }), ({ final __callArgument231:Dynamic = cast (['kind'] : Array<Dynamic>); __callArgument231; }), (cast descriptorPath : String), (cast context : Dynamic)) : Null<FlightDocumentFields>);
     if ((cast _Runtime.strictEquals(descriptorFields, null) : Bool)) { return cast null; }
     descriptor = flight._internal.DynamicObject.assign(_Runtime.objectFromPairs([{ key: EntityRuntimeKey, value: _Runtime.field(_Runtime, 'UNDEFINED') }, { key: 'kind', value: kind }]), descriptorFields);
     transform = (cast _SceneDocument.readTransform3D__flightDocumentText((cast _Runtime.getIndex(value, 'transform') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'transform' : String)) : String) : String), (cast context : Dynamic)) : Null<Transform3D>);
@@ -1086,10 +1231,96 @@ class _SceneDocument {
     return cast null;
   }
 
-  public static function readNode__flightDocumentText(value:flight._internal._Any, path:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<FlightDocumentNode> {
+  public static function readInteractiveState__flightDocumentText(value:flight._internal._Any, path:String, dimension:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<FlightDocumentInteractiveState> {
+    var state:FlightDocumentInteractiveState = cast _Runtime.UNDEFINED;
+    var extensionsRaw:flight._internal._Any = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument234:Dynamic = value; __callArgument234; }), ({ final __callArgument235:Dynamic = _SceneDocument.INTERACTIVE_STATE_KEYS__flightDocumentText; __callArgument235; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentInteractiveState>); }
+    state = (cast { extensions: cast ([] : Array<Dynamic>) });
+    for (property in _Runtime.iterable(_SceneDocument.INTERACTIVE_STATE_PROPERTIES__flightDocumentText)) {
+      var propertyValue:flight._internal._Any = _Runtime.getIndex(value, property);
+      if ((cast _Runtime.strictEquals(propertyValue, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+      if ((cast _Runtime.strictEquals(property, 'visible') : Bool)) {
+        if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(propertyValue), 'boolean') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast property : String)) : String) : String)) : Null<FlightDocumentInteractiveState>); }
+      } else { if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(propertyValue), 'number') : Bool) || (cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([propertyValue] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) {
+        return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast property : String)) : String) : String)) : Null<FlightDocumentInteractiveState>);
+      } }
+      if ((cast ((cast _Runtime.strictEquals(dimension, 'Scene3D') : Bool) && (cast _Runtime.includes(_SceneDocument.INTERACTIVE_STATE_2D_PROPERTIES__flightDocumentText, property) : Bool)) : Bool)) {
+        return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast property : String)) : String) : String)) : Null<FlightDocumentInteractiveState>);
+      }
+      flight._internal.DynamicObject.assign(state, _Runtime.objectFromPairs([{ key: property, value: propertyValue }]));
+    }
+    extensionsRaw = _Runtime.getIndex(value, 'extensions');
+    if ((cast !_Runtime.strictEquals(extensionsRaw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      if ((cast !(cast _Runtime.isArray(extensionsRaw) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'extensions' : String)) : String) : String)) : Null<FlightDocumentInteractiveState>); }
+      var kinds:flight._internal._Set<String> = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+      {
+        var i:Float = 0.0;
+        while ((cast ((cast i : Float) < (cast _Runtime.field(extensionsRaw, 'length') : Float)) : Bool)) {
+          var extensionPath:String = '' + Std.string(path) + '.extensions[' + Std.string(i) + ']';
+          var extension:Null<FlightDocumentInteractiveStateExtensionDescriptor> = (cast _SceneDocument.readInteractiveStateExtension__flightDocumentText((cast flight._internal._StaticIndex.readArray(extensionsRaw, i) : flight._internal._Any), (cast extensionPath : String), (cast context : Dynamic)) : Null<FlightDocumentInteractiveStateExtensionDescriptor>);
+          if ((cast _Runtime.strictEquals(extension, null) : Bool)) { return cast null; }
+          if ((cast ((cast kinds : flight._internal._Set<String>).has((cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind)) : Bool)) {
+            return cast (cast _SceneDocument.refuseWithReason__flightDocumentText((cast context : Dynamic), (cast (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).InteractiveStateExtensionKindDuplicate : String), (cast extensionPath : String), (cast (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind : String)) : Null<FlightDocumentInteractiveState>);
+          }
+          ((cast kinds : flight._internal._Set<String>).add((cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind));
+          _Runtime.callProperty((cast state : FlightDocumentInteractiveState).extensions, 'push', cast ([extension] : Array<Dynamic>));
+          i++;
+        }
+      }
+    }
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.field((cast _SceneDocument.getInteractiveStateEntries__flightDocumentText(({ final __callArgument240:Dynamic = state; __callArgument240; })) : Array<Array<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>>>), 'length'), 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field((cast state : FlightDocumentInteractiveState).extensions, 'length'), 0.0) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentInteractiveState>); }
+    return cast state;
+    return cast null;
+  }
+
+  public static function readInteractiveStateExtension__flightDocumentText(value:flight._internal._Any, path:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<FlightDocumentInteractiveStateExtensionDescriptor> {
+    var kind:flight._internal._Any = cast _Runtime.UNDEFINED;
+    var fields:Null<FlightDocumentFields> = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentInteractiveStateExtensionDescriptor>); }
+    kind = _Runtime.getIndex(value, 'kind');
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(kind), 'string') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'kind' : String)) : String) : String)) : Null<FlightDocumentInteractiveStateExtensionDescriptor>); }
+    fields = (cast _SceneDocument.copyFlightDocumentFields__flightDocumentText(({ final __callArgument242:Dynamic = value; __callArgument242; }), ({ final __callArgument243:Dynamic = _SceneDocument.DESCRIPTOR_RESERVED_FIELDS__flightDocumentText; __callArgument243; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentFields>);
+    return cast ((cast _Runtime.strictEquals(fields, null) : Bool) ? (cast null : Dynamic) : (cast { fields: fields, kind: kind } : Dynamic));
+    return cast null;
+  }
+
+  public static function readInteractiveStates__flightDocumentText(value:flight._internal._Any, path:String, dimension:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<FlightDocumentInteractiveStates> {
+    var states:FlightDocumentInteractiveStates = cast _Runtime.UNDEFINED;
+    var count:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument246:Dynamic = value; __callArgument246; }), ({ final __callArgument247:Dynamic = _SceneDocument.INTERACTIVE_STATE_PHASES__flightDocumentText; __callArgument247; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentInteractiveStates>); }
+    states = (cast { disabled: null, hover: null, pressed: null });
+    count = 0.0;
+    for (phase in _Runtime.iterable(_SceneDocument.INTERACTIVE_STATE_PHASES__flightDocumentText)) {
+      var stateRaw:flight._internal._Any = _Runtime.getIndex(value, phase);
+      if ((cast _Runtime.strictEquals(stateRaw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+      var state:Null<FlightDocumentInteractiveState> = (cast _SceneDocument.readInteractiveState__flightDocumentText((cast stateRaw : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast phase : String)) : String) : String), (cast dimension : String), (cast context : Dynamic)) : Null<FlightDocumentInteractiveState>);
+      if ((cast _Runtime.strictEquals(state, null) : Bool)) { return cast null; }
+      _Runtime.setIndex(states, phase, state);
+      count++;
+    }
+    return cast ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentInteractiveStates>) : Dynamic) : (cast states : Dynamic));
+    return cast null;
+  }
+
+  public static function readInteractiveStateTransition__flightDocumentText(value:flight._internal._Any, path:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<FlightDocumentInteractiveStateTransitionDescriptor> {
+    var kind:flight._internal._Any = cast _Runtime.UNDEFINED;
+    var fields:Null<FlightDocumentFields> = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentInteractiveStateTransitionDescriptor>); }
+    kind = _Runtime.getIndex(value, 'kind');
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(kind), 'string') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'kind' : String)) : String) : String)) : Null<FlightDocumentInteractiveStateTransitionDescriptor>); }
+    fields = (cast _SceneDocument.copyFlightDocumentFields__flightDocumentText(({ final __callArgument252:Dynamic = value; __callArgument252; }), ({ final __callArgument253:Dynamic = _SceneDocument.DESCRIPTOR_RESERVED_FIELDS__flightDocumentText; __callArgument253; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentFields>);
+    return cast ((cast _Runtime.strictEquals(fields, null) : Bool) ? (cast null : Dynamic) : (cast { fields: fields, kind: kind } : Dynamic));
+    return cast null;
+  }
+
+  public static function readNode__flightDocumentText(value:flight._internal._Any, path:String, dimension:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<FlightDocumentNode> {
     var kind:flight._internal._Any = cast _Runtime.UNDEFINED;
     var childrenRaw:flight._internal._Any = cast _Runtime.UNDEFINED;
     var children:Array<FlightDocumentNode> = cast _Runtime.UNDEFINED;
+    var interactiveStatesRaw:flight._internal._Any = cast _Runtime.UNDEFINED;
+    var interactiveStates:Null<FlightDocumentInteractiveStates> = cast _Runtime.UNDEFINED;
+    var transitionRaw:flight._internal._Any = cast _Runtime.UNDEFINED;
+    var transition:Null<FlightDocumentInteractiveStateTransitionDescriptor> = cast _Runtime.UNDEFINED;
     var fields:Null<FlightDocumentFields> = cast _Runtime.UNDEFINED;
     if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentNode>); }
     kind = _Runtime.getIndex(value, 'kind');
@@ -1101,15 +1332,28 @@ class _SceneDocument {
       {
         var index:Float = 0.0;
         while ((cast ((cast index : Float) < (cast _Runtime.field(childrenRaw, 'length') : Float)) : Bool)) {
-          var child:Null<FlightDocumentNode> = (cast _SceneDocument.readNode__flightDocumentText((cast flight._internal._StaticIndex.readArray(childrenRaw, index) : flight._internal._Any), (cast '' + Std.string(path) + '.children[' + Std.string(index) + ']' : String), (cast context : Dynamic)) : Null<FlightDocumentNode>);
+          var child:Null<FlightDocumentNode> = (cast _SceneDocument.readNode__flightDocumentText((cast flight._internal._StaticIndex.readArray(childrenRaw, index) : flight._internal._Any), (cast '' + Std.string(path) + '.children[' + Std.string(index) + ']' : String), (cast dimension : String), (cast context : Dynamic)) : Null<FlightDocumentNode>);
           if ((cast _Runtime.strictEquals(child, null) : Bool)) { return cast null; }
           _Runtime.callProperty(children, 'push', cast ([child] : Array<Dynamic>));
           index++;
         }
       }
     }
-    fields = (cast _SceneDocument.copyFlightDocumentFields__flightDocumentText(({ final __callArgument176:Dynamic = value; __callArgument176; }), ({ final __callArgument177:Dynamic = _SceneDocument.NODE_RESERVED_FIELDS__flightDocumentText; __callArgument177; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentFields>);
-    return cast ((cast _Runtime.strictEquals(fields, null) : Bool) ? (cast null : Dynamic) : (cast { children: children, fields: fields, kind: kind } : Dynamic));
+    interactiveStatesRaw = _Runtime.getIndex(value, 'interactiveStates');
+    interactiveStates = null;
+    if ((cast !_Runtime.strictEquals(interactiveStatesRaw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      (interactiveStates = cast ((cast _SceneDocument.readInteractiveStates__flightDocumentText((cast interactiveStatesRaw : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'interactiveStates' : String)) : String) : String), (cast dimension : String), (cast context : Dynamic)) : Null<FlightDocumentInteractiveStates>) : Dynamic));
+      if ((cast _Runtime.strictEquals(interactiveStates, null) : Bool)) { return cast null; }
+    }
+    transitionRaw = _Runtime.getIndex(value, 'transition');
+    if ((cast ((cast !_Runtime.strictEquals(transitionRaw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(interactiveStates, null) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'transition' : String)) : String) : String)) : Null<FlightDocumentNode>); }
+    transition = null;
+    if ((cast !_Runtime.strictEquals(transitionRaw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      (transition = cast ((cast _SceneDocument.readInteractiveStateTransition__flightDocumentText((cast transitionRaw : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'transition' : String)) : String) : String), (cast context : Dynamic)) : Null<FlightDocumentInteractiveStateTransitionDescriptor>) : Dynamic));
+      if ((cast _Runtime.strictEquals(transition, null) : Bool)) { return cast null; }
+    }
+    fields = (cast _SceneDocument.copyFlightDocumentFields__flightDocumentText(({ final __callArgument256:Dynamic = value; __callArgument256; }), ({ final __callArgument257:Dynamic = _SceneDocument.NODE_RESERVED_FIELDS__flightDocumentText; __callArgument257; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentFields>);
+    return cast ((cast _Runtime.strictEquals(fields, null) : Bool) ? (cast null : Dynamic) : (cast { children: children, fields: fields, interactiveStates: interactiveStates, kind: kind, transition: transition } : Dynamic));
     return cast null;
   }
 
@@ -1126,7 +1370,7 @@ class _SceneDocument {
     if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<flight._internal._Union2<OrthographicProjection, PerspectiveProjection>>); }
     kind = _Runtime.getIndex(value, 'kind');
     if ((cast _Runtime.strictEquals(kind, 'orthographic') : Bool)) {
-      if ((cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument180:Dynamic = value; __callArgument180; }), ({ final __callArgument181:Dynamic = _SceneDocument.ORTHOGRAPHIC_PROJECTION_KEYS__flightDocumentText; __callArgument181; })) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<flight._internal._Union2<OrthographicProjection, PerspectiveProjection>>); }
+      if ((cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument260:Dynamic = value; __callArgument260; }), ({ final __callArgument261:Dynamic = _SceneDocument.ORTHOGRAPHIC_PROJECTION_KEYS__flightDocumentText; __callArgument261; })) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<flight._internal._Union2<OrthographicProjection, PerspectiveProjection>>); }
       var halfHeight:flight._internal._Any = _Runtime.getIndex(value, 'halfHeight');
       var halfWidth:flight._internal._Any = _Runtime.getIndex(value, 'halfWidth');
       if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(halfHeight), 'number') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'halfHeight' : String)) : String) : String)) : Null<flight._internal._Union2<OrthographicProjection, PerspectiveProjection>>); }
@@ -1134,7 +1378,7 @@ class _SceneDocument {
       return cast { halfHeight: halfHeight, halfWidth: halfWidth, kind: kind };
     }
     if ((cast _Runtime.strictEquals(kind, 'perspective') : Bool)) {
-      if ((cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument184:Dynamic = value; __callArgument184; }), ({ final __callArgument185:Dynamic = _SceneDocument.PERSPECTIVE_PROJECTION_KEYS__flightDocumentText; __callArgument185; })) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<flight._internal._Union2<OrthographicProjection, PerspectiveProjection>>); }
+      if ((cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument264:Dynamic = value; __callArgument264; }), ({ final __callArgument265:Dynamic = _SceneDocument.PERSPECTIVE_PROJECTION_KEYS__flightDocumentText; __callArgument265; })) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<flight._internal._Union2<OrthographicProjection, PerspectiveProjection>>); }
       var aspect:flight._internal._Any = _Runtime.getIndex(value, 'aspect');
       var fovY:flight._internal._Any = _Runtime.getIndex(value, 'fovY');
       if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(aspect), 'number') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'aspect' : String)) : String) : String)) : Null<flight._internal._Union2<OrthographicProjection, PerspectiveProjection>>); }
@@ -1148,8 +1392,8 @@ class _SceneDocument {
   public static function readQuaternion__flightDocumentText(value:flight._internal._Any, path:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<FlightDocumentTextQuaternion__flightDocumentText> {
     var vector:Null<FlightDocumentTextVector3__flightDocumentText> = cast _Runtime.UNDEFINED;
     var w:flight._internal._Any = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument188:Dynamic = value; __callArgument188; }), ({ final __callArgument189:Dynamic = _SceneDocument.QUATERNION_KEYS__flightDocumentText; __callArgument189; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentTextQuaternion__flightDocumentText>); }
-    vector = (cast _SceneDocument.readVector3__flightDocumentText((cast value : flight._internal._Any), (cast path : String), (cast context : Dynamic), ({ final __callArgument192:Dynamic = _SceneDocument.QUATERNION_KEYS__flightDocumentText; __callArgument192; })) : Null<FlightDocumentTextVector3__flightDocumentText>);
+    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument268:Dynamic = value; __callArgument268; }), ({ final __callArgument269:Dynamic = _SceneDocument.QUATERNION_KEYS__flightDocumentText; __callArgument269; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentTextQuaternion__flightDocumentText>); }
+    vector = (cast _SceneDocument.readVector3__flightDocumentText((cast value : flight._internal._Any), (cast path : String), (cast context : Dynamic), ({ final __callArgument272:Dynamic = _SceneDocument.QUATERNION_KEYS__flightDocumentText; __callArgument272; })) : Null<FlightDocumentTextVector3__flightDocumentText>);
     if ((cast _Runtime.strictEquals(vector, null) : Bool)) { return cast null; }
     w = _Runtime.getIndex(value, 'w');
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(w), 'number') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'w' : String)) : String) : String)) : Null<FlightDocumentTextQuaternion__flightDocumentText>); }
@@ -1172,7 +1416,7 @@ class _SceneDocument {
         var key:flight._internal._Any = _Runtime.getIndex(raw, 'key');
         if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(kind), 'string') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'kind' : String)) : String) : String)) : Null<Array<FlightDocumentResourceDescriptor>>); }
         if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(key), 'string') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'key' : String)) : String) : String)) : Null<Array<FlightDocumentResourceDescriptor>>); }
-        var fields:Null<FlightDocumentFields> = (cast _SceneDocument.copyFlightDocumentFields__flightDocumentText(({ final __callArgument194:Dynamic = raw; __callArgument194; }), ({ final __callArgument195:Dynamic = _SceneDocument.RESOURCE_RESERVED_FIELDS__flightDocumentText; __callArgument195; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentFields>);
+        var fields:Null<FlightDocumentFields> = (cast _SceneDocument.copyFlightDocumentFields__flightDocumentText(({ final __callArgument274:Dynamic = raw; __callArgument274; }), ({ final __callArgument275:Dynamic = _SceneDocument.RESOURCE_RESERVED_FIELDS__flightDocumentText; __callArgument275; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentFields>);
         if ((cast _Runtime.strictEquals(fields, null) : Bool)) { return cast null; }
         _Runtime.callProperty(resources, 'push', cast ([{ fields: fields, key: key, kind: kind }] : Array<Dynamic>));
         index++;
@@ -1188,8 +1432,8 @@ class _SceneDocument {
     path = 'scenes[' + Std.string(index) + ']';
     if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<flight._internal._Union2<FlightDocumentScene2D, FlightDocumentScene3D>>); }
     kind = _Runtime.getIndex(value, 'kind');
-    if ((cast _Runtime.strictEquals(kind, 'Scene2D') : Bool)) { return cast (cast _SceneDocument.readScene2D__flightDocumentText(({ final __callArgument198:Dynamic = value; __callArgument198; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentScene2D>); }
-    if ((cast _Runtime.strictEquals(kind, 'Scene3D') : Bool)) { return cast (cast _SceneDocument.readScene3D__flightDocumentText(({ final __callArgument200:Dynamic = value; __callArgument200; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentScene3D>); }
+    if ((cast _Runtime.strictEquals(kind, 'Scene2D') : Bool)) { return cast (cast _SceneDocument.readScene2D__flightDocumentText(({ final __callArgument278:Dynamic = value; __callArgument278; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentScene2D>); }
+    if ((cast _Runtime.strictEquals(kind, 'Scene3D') : Bool)) { return cast (cast _SceneDocument.readScene3D__flightDocumentText(({ final __callArgument280:Dynamic = value; __callArgument280; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentScene3D>); }
     return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'kind' : String)) : String) : String)) : Null<flight._internal._Union2<FlightDocumentScene2D, FlightDocumentScene3D>>);
     return cast null;
   }
@@ -1197,14 +1441,20 @@ class _SceneDocument {
   public static function readScene2D__flightDocumentText(mapping:flight._internal._Record<String, flight._internal._Any>, path:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<FlightDocumentScene2D> {
     var backgroundColor:flight._internal._Any = cast _Runtime.UNDEFINED;
     var scene:Null<FlightDocumentNode> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument202:Dynamic = mapping; __callArgument202; }), ({ final __callArgument203:Dynamic = _SceneDocument.SCENE_2D_KEYS__flightDocumentText; __callArgument203; })) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentScene2D>); }
+    var layouts:Null<Array<FlightDocumentLayoutDescriptor>> = cast _Runtime.UNDEFINED;
+    var tokens:Null<Array<FlightDocumentToken>> = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument282:Dynamic = mapping; __callArgument282; }), ({ final __callArgument283:Dynamic = _SceneDocument.SCENE_2D_KEYS__flightDocumentText; __callArgument283; })) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentScene2D>); }
     backgroundColor = _Runtime.getIndex(mapping, 'backgroundColor');
     if ((cast ((cast ((cast !_Runtime.strictEquals(backgroundColor, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast !_Runtime.strictEquals(backgroundColor, null) : Bool)) : Bool) && (cast !_Runtime.strictEquals(_Runtime.typeofValue(backgroundColor), 'number') : Bool)) : Bool)) {
       return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'backgroundColor' : String)) : String) : String)) : Null<FlightDocumentScene2D>);
     }
-    scene = (cast _SceneDocument.readNode__flightDocumentText((cast _Runtime.getIndex(mapping, 'scene') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'scene' : String)) : String) : String), (cast context : Dynamic)) : Null<FlightDocumentNode>);
+    scene = (cast _SceneDocument.readNode__flightDocumentText((cast _Runtime.getIndex(mapping, 'scene') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'scene' : String)) : String) : String), (cast 'Scene2D' : String), (cast context : Dynamic)) : Null<FlightDocumentNode>);
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return cast null; }
-    return cast { backgroundColor: _Runtime.coalesce(backgroundColor, function():Dynamic return cast null), kind: 'Scene2D', scene: scene };
+    layouts = (cast _SceneDocument.readLayouts__flightDocumentText((cast _Runtime.getIndex(mapping, 'layouts') : flight._internal._Any), (cast path : String), (cast context : Dynamic)) : Null<Array<FlightDocumentLayoutDescriptor>>);
+    if ((cast _Runtime.strictEquals(layouts, null) : Bool)) { return cast null; }
+    tokens = (cast _SceneDocument.readTokens__flightDocumentText((cast _Runtime.getIndex(mapping, 'tokens') : flight._internal._Any), (cast path : String), (cast context : Dynamic)) : Null<Array<FlightDocumentToken>>);
+    if ((cast _Runtime.strictEquals(tokens, null) : Bool)) { return cast null; }
+    return cast { backgroundColor: _Runtime.coalesce(backgroundColor, function():Dynamic return cast null), kind: 'Scene2D', layouts: layouts, scene: scene, tokens: tokens };
     return cast null;
   }
 
@@ -1214,7 +1464,9 @@ class _SceneDocument {
     var lightsRaw:flight._internal._Any = cast _Runtime.UNDEFINED;
     var lights:Array<Scene3DDocumentLight> = cast _Runtime.UNDEFINED;
     var scene:Null<FlightDocumentNode> = cast _Runtime.UNDEFINED;
-    if ((cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument206:Dynamic = mapping; __callArgument206; }), ({ final __callArgument207:Dynamic = _SceneDocument.SCENE_3D_KEYS__flightDocumentText; __callArgument207; })) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentScene3D>); }
+    var layouts:Null<Array<FlightDocumentLayoutDescriptor>> = cast _Runtime.UNDEFINED;
+    var tokens:Null<Array<FlightDocumentToken>> = cast _Runtime.UNDEFINED;
+    if ((cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument286:Dynamic = mapping; __callArgument286; }), ({ final __callArgument287:Dynamic = _SceneDocument.SCENE_3D_KEYS__flightDocumentText; __callArgument287; })) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentScene3D>); }
     camerasRaw = _Runtime.getIndex(mapping, 'cameras');
     cameras = (cast cast ([] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(camerasRaw, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
@@ -1243,9 +1495,146 @@ class _SceneDocument {
         }
       }
     }
-    scene = (cast _SceneDocument.readNode__flightDocumentText((cast _Runtime.getIndex(mapping, 'scene') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'scene' : String)) : String) : String), (cast context : Dynamic)) : Null<FlightDocumentNode>);
+    scene = (cast _SceneDocument.readNode__flightDocumentText((cast _Runtime.getIndex(mapping, 'scene') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'scene' : String)) : String) : String), (cast 'Scene3D' : String), (cast context : Dynamic)) : Null<FlightDocumentNode>);
     if ((cast _Runtime.strictEquals(scene, null) : Bool)) { return cast null; }
-    return cast { cameras: cameras, kind: 'Scene3D', lights: lights, scene: scene };
+    layouts = (cast _SceneDocument.readLayouts__flightDocumentText((cast _Runtime.getIndex(mapping, 'layouts') : flight._internal._Any), (cast path : String), (cast context : Dynamic)) : Null<Array<FlightDocumentLayoutDescriptor>>);
+    if ((cast _Runtime.strictEquals(layouts, null) : Bool)) { return cast null; }
+    tokens = (cast _SceneDocument.readTokens__flightDocumentText((cast _Runtime.getIndex(mapping, 'tokens') : flight._internal._Any), (cast path : String), (cast context : Dynamic)) : Null<Array<FlightDocumentToken>>);
+    if ((cast _Runtime.strictEquals(tokens, null) : Bool)) { return cast null; }
+    return cast { cameras: cameras, kind: 'Scene3D', layouts: layouts, lights: lights, scene: scene, tokens: tokens };
+    return cast null;
+  }
+
+  public static function readLayouts__flightDocumentText(value:flight._internal._Any, scenePath:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<Array<FlightDocumentLayoutDescriptor>> {
+    var layoutsPath:String = cast _Runtime.UNDEFINED;
+    var layouts:Array<FlightDocumentLayoutDescriptor> = cast _Runtime.UNDEFINED;
+    var seenTargets:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cast ([] : Array<Dynamic>); }
+    layoutsPath = (cast _SceneDocument.appendPath__flightDocumentText((cast scenePath : String), (cast 'layouts' : String)) : String);
+    if ((cast !(cast _Runtime.isArray(value) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast layoutsPath : String)) : Null<Array<FlightDocumentLayoutDescriptor>>); }
+    layouts = (cast cast ([] : Array<Dynamic>));
+    seenTargets = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+    {
+      var layoutIndex:Float = 0.0;
+      while ((cast ((cast layoutIndex : Float) < (cast _Runtime.field(value, 'length') : Float)) : Bool)) {
+        var layoutPath:String = '' + Std.string(layoutsPath) + '[' + Std.string(layoutIndex) + ']';
+        var raw:flight._internal._Any = flight._internal._StaticIndex.readArray(value, layoutIndex);
+        if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast raw : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument290:Dynamic = raw; __callArgument290; }), ({ final __callArgument291:Dynamic = _SceneDocument.LAYOUT_KEYS__flightDocumentText; __callArgument291; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast layoutPath : String)) : Null<Array<FlightDocumentLayoutDescriptor>>); }
+        var targetsPath:String = (cast _SceneDocument.appendPath__flightDocumentText((cast layoutPath : String), (cast 'targets' : String)) : String);
+        var targetsRaw:flight._internal._Any = _Runtime.getIndex(raw, 'targets');
+        if ((cast ((cast !(cast _Runtime.isArray(targetsRaw) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(targetsRaw, 'length'), 0.0) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast targetsPath : String)) : Null<Array<FlightDocumentLayoutDescriptor>>); }
+        var targets:Array<String> = (cast cast ([] : Array<Dynamic>));
+        {
+          var targetIndex:Float = 0.0;
+          while ((cast ((cast targetIndex : Float) < (cast _Runtime.field(targetsRaw, 'length') : Float)) : Bool)) {
+            var targetPath:String = '' + Std.string(targetsPath) + '[' + Std.string(targetIndex) + ']';
+            var target:flight._internal._Any = flight._internal._StaticIndex.readArray(targetsRaw, targetIndex);
+            if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'string') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(target, 'length'), 0.0) : Bool)) : Bool) || (cast ((cast seenTargets : flight._internal._Set<String>).has(target)) : Bool)) : Bool)) {
+              return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast targetPath : String)) : Null<Array<FlightDocumentLayoutDescriptor>>);
+            }
+            ((cast seenTargets : flight._internal._Set<String>).add(target));
+            _Runtime.callProperty(targets, 'push', cast ([target] : Array<Dynamic>));
+            targetIndex++;
+          }
+        }
+        var treePath:String = (cast _SceneDocument.appendPath__flightDocumentText((cast layoutPath : String), (cast 'tree' : String)) : String);
+        var treeRaw:flight._internal._Any = _Runtime.getIndex(raw, 'tree');
+        if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast treeRaw : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument294:Dynamic = treeRaw; __callArgument294; }), ({ final __callArgument295:Dynamic = _SceneDocument.LAYOUT_TREE_KEYS__flightDocumentText; __callArgument295; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast treePath : String)) : Null<Array<FlightDocumentLayoutDescriptor>>); }
+        var nodesPath:String = (cast _SceneDocument.appendPath__flightDocumentText((cast treePath : String), (cast 'nodes' : String)) : String);
+        var nodesRaw:flight._internal._Any = _Runtime.getIndex(treeRaw, 'nodes');
+        if ((cast ((cast !(cast _Runtime.isArray(nodesRaw) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(nodesRaw, 'length'), 0.0) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast nodesPath : String)) : Null<Array<FlightDocumentLayoutDescriptor>>); }
+        var nodes:Array<FlightDocumentLayoutNode> = (cast cast ([] : Array<Dynamic>));
+        {
+          var nodeIndex:Float = 0.0;
+          while ((cast ((cast nodeIndex : Float) < (cast _Runtime.field(nodesRaw, 'length') : Float)) : Bool)) {
+            var node:Null<FlightDocumentLayoutNode> = (cast _SceneDocument.readLayoutNode__flightDocumentText((cast flight._internal._StaticIndex.readArray(nodesRaw, nodeIndex) : flight._internal._Any), (cast nodeIndex : Float), (cast '' + Std.string(nodesPath) + '[' + Std.string(nodeIndex) + ']' : String), (cast context : Dynamic)) : Null<FlightDocumentLayoutNode>);
+            if ((cast _Runtime.strictEquals(node, null) : Bool)) { return cast null; }
+            _Runtime.callProperty(nodes, 'push', cast ([node] : Array<Dynamic>));
+            nodeIndex++;
+          }
+        }
+        if ((cast !_Runtime.strictEquals(_Runtime.field(targets, 'length'), _Runtime.field(nodes, 'length')) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast targetsPath : String)) : Null<Array<FlightDocumentLayoutDescriptor>>); }
+        _Runtime.callProperty(layouts, 'push', cast ([{ targets: targets, tree: { nodes: nodes } }] : Array<Dynamic>));
+        layoutIndex++;
+      }
+    }
+    return cast layouts;
+    return cast null;
+  }
+
+  public static function readLayoutNode__flightDocumentText(value:flight._internal._Any, index:Float, path:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<FlightDocumentLayoutNode> {
+    var kind:flight._internal._Any = cast _Runtime.UNDEFINED;
+    var parentIndex:flight._internal._Any = cast _Runtime.UNDEFINED;
+    var containerStyle:Null<flight._internal._Union2<FlightDocumentFields, flight._internal._Symbol>> = cast _Runtime.UNDEFINED;
+    var itemStyle:Null<flight._internal._Union2<FlightDocumentFields, flight._internal._Symbol>> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument298:Dynamic = value; __callArgument298; }), ({ final __callArgument299:Dynamic = _SceneDocument.LAYOUT_NODE_KEYS__flightDocumentText; __callArgument299; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentLayoutNode>); }
+    kind = _Runtime.getIndex(value, 'kind');
+    if ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(kind), 'string') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(kind, 'length'), 0.0) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'kind' : String)) : String) : String)) : Null<FlightDocumentLayoutNode>); }
+    parentIndex = _Runtime.getIndex(value, 'parentIndex');
+    if ((cast ((cast ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isInteger', cast ([parentIndex] : Array<Dynamic>)) : Bool) : Bool) || (cast ((cast (cast parentIndex : Float) : Float) < (cast -1.0 : Float)) : Bool)) : Bool) || (cast ((cast (cast parentIndex : Float) : Float) >= (cast index : Float)) : Bool)) : Bool)) {
+      return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'parentIndex' : String)) : String) : String)) : Null<FlightDocumentLayoutNode>);
+    }
+    containerStyle = (cast _SceneDocument.readLayoutStyle__flightDocumentText((cast _Runtime.getIndex(value, 'containerStyle') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'containerStyle' : String)) : String) : String), (cast context : Dynamic)) : Null<flight._internal._Union2<FlightDocumentFields, flight._internal._Symbol>>);
+    if ((cast _Runtime.strictEquals(containerStyle, _SceneDocument.INVALID_LAYOUT_STYLE__flightDocumentText) : Bool)) { return cast null; }
+    itemStyle = (cast _SceneDocument.readLayoutStyle__flightDocumentText((cast _Runtime.getIndex(value, 'itemStyle') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'itemStyle' : String)) : String) : String), (cast context : Dynamic)) : Null<flight._internal._Union2<FlightDocumentFields, flight._internal._Symbol>>);
+    if ((cast _Runtime.strictEquals(itemStyle, _SceneDocument.INVALID_LAYOUT_STYLE__flightDocumentText) : Bool)) { return cast null; }
+    return cast { containerStyle: containerStyle, itemStyle: itemStyle, kind: kind, parentIndex: (cast parentIndex : Float) };
+    return cast null;
+  }
+
+  public static function readLayoutStyle__flightDocumentText(value:flight._internal._Any, path:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<Dynamic> {
+    var fields:Null<FlightDocumentFields> = cast _Runtime.UNDEFINED;
+    if ((cast ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(value, null) : Bool)) : Bool)) { return cast null; }
+    if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool)) {
+      _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String));
+      return cast _SceneDocument.INVALID_LAYOUT_STYLE__flightDocumentText;
+    }
+    fields = (cast _SceneDocument.copyFlightDocumentFields__flightDocumentText(({ final __callArgument302:Dynamic = value; __callArgument302; }), ({ final __callArgument303:Dynamic = cast ([] : Array<Dynamic>); __callArgument303; }), (cast path : String), (cast context : Dynamic)) : Null<FlightDocumentFields>);
+    return cast _Runtime.coalesce(fields, function():Dynamic return cast _SceneDocument.INVALID_LAYOUT_STYLE__flightDocumentText);
+    return cast null;
+  }
+
+  public static function readTokens__flightDocumentText(value:flight._internal._Any, path:String, context:FlightDocumentTextReadContext__flightDocumentText):Null<Array<FlightDocumentToken>> {
+    var tokens:Array<FlightDocumentToken> = cast _Runtime.UNDEFINED;
+    var seen:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast cast ([] : Array<Dynamic>); }
+    if ((cast !(cast _Runtime.isArray(value) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'tokens' : String)) : String) : String)) : Null<Array<FlightDocumentToken>>); }
+    tokens = (cast cast ([] : Array<Dynamic>));
+    seen = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+    {
+      var index:Float = 0.0;
+      while ((cast ((cast index : Float) < (cast _Runtime.field(value, 'length') : Float)) : Bool)) {
+        var rowPath:String = '' + Std.string(path) + '.tokens[' + Std.string(index) + ']';
+        var raw:flight._internal._Any = flight._internal._StaticIndex.readArray(value, index);
+        if ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast raw : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast rowPath : String)) : Null<Array<FlightDocumentToken>>); }
+        var kind:flight._internal._Any = _Runtime.getIndex(raw, 'kind');
+        var key:flight._internal._Any = _Runtime.getIndex(raw, 'key');
+        if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(kind), 'string') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast rowPath : String), (cast 'kind' : String)) : String) : String)) : Null<Array<FlightDocumentToken>>); }
+        if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(key), 'string') : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast rowPath : String), (cast 'key' : String)) : String) : String)) : Null<Array<FlightDocumentToken>>); }
+        if ((cast !(cast _Runtime.callProperty(_SceneDocument.SAFE_PLAIN_SCALAR_PATTERN__flightDocumentText, 'test', cast ([key] : Array<Dynamic>)) : Bool) : Bool)) {
+          return cast (cast _SceneDocument.refuseToken__flightDocumentText((cast context : Dynamic), (cast (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).TokenKeyInvalid : String), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast rowPath : String), (cast 'key' : String)) : String) : String), (cast key : String), ({ final __callArgument306:Dynamic = null; __callArgument306; })) : Null<Array<FlightDocumentToken>>);
+        }
+        if ((cast ((cast seen : flight._internal._Set<String>).has(key)) : Bool)) {
+          return cast (cast _SceneDocument.refuseToken__flightDocumentText((cast context : Dynamic), (cast (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).TokenKeyDuplicate : String), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast rowPath : String), (cast 'key' : String)) : String) : String), (cast key : String), ({ final __callArgument308:Dynamic = null; __callArgument308; })) : Null<Array<FlightDocumentToken>>);
+        }
+        ((cast seen : flight._internal._Set<String>).add(key));
+        var values:FlightDocumentTokenValues = cast _Runtime.UNDEFINED;
+        values = (cast {  });
+        for (mode in _Runtime.iterable(flight._internal.DynamicObject.keys(raw))) {
+          if ((cast _Runtime.includes(_SceneDocument.TOKEN_RESERVED_FIELDS__flightDocumentText, mode) : Bool)) { continue; }
+          var modePath:String = (cast _SceneDocument.appendPath__flightDocumentText((cast rowPath : String), (cast mode : String)) : String);
+          if ((cast !(cast _Runtime.callProperty(_SceneDocument.SAFE_PLAIN_SCALAR_PATTERN__flightDocumentText, 'test', cast ([mode] : Array<Dynamic>)) : Bool) : Bool)) {
+            return cast (cast _SceneDocument.refuseToken__flightDocumentText((cast context : Dynamic), (cast (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).TokenModeInvalid : String), (cast modePath : String), (cast key : String), ({ final __callArgument312:Dynamic = mode; __callArgument312; })) : Null<Array<FlightDocumentToken>>);
+          }
+          var modeValue:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>, FlightDocumentFields>, Array<FlightDocumentValue>>, flight._internal._Symbol>> = (cast _SceneDocument.copyFlightDocumentValue__flightDocumentText((cast _Runtime.getIndex(raw, mode) : flight._internal._Any), (cast modePath : String), (cast context : Dynamic)) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>, FlightDocumentFields>, Array<FlightDocumentValue>>, flight._internal._Symbol>>);
+          if ((cast _Runtime.strictEquals(modeValue, _SceneDocument.INVALID_FLIGHT_DOCUMENT_VALUE__flightDocumentText) : Bool)) { return cast null; }
+          _Runtime.setIndex(values, mode, modeValue);
+        }
+        _Runtime.callProperty(tokens, 'push', cast ([{ key: key, kind: kind, values: values }] : Array<Dynamic>));
+        index++;
+      }
+    }
+    return cast tokens;
     return cast null;
   }
 
@@ -1254,12 +1643,12 @@ class _SceneDocument {
     var rotation:Null<FlightDocumentTextQuaternion__flightDocumentText> = cast _Runtime.UNDEFINED;
     var scale:Null<FlightDocumentTextVector3__flightDocumentText> = cast _Runtime.UNDEFINED;
     var transform:Transform3D = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument210:Dynamic = value; __callArgument210; }), ({ final __callArgument211:Dynamic = _SceneDocument.TRANSFORM_3D_KEYS__flightDocumentText; __callArgument211; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<Transform3D>); }
-    position = (cast _SceneDocument.readVector3__flightDocumentText((cast _Runtime.getIndex(value, 'position') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'position' : String)) : String) : String), (cast context : Dynamic), ({ final __callArgument214:Dynamic = _SceneDocument.VECTOR_3_KEYS__flightDocumentText; __callArgument214; })) : Null<FlightDocumentTextVector3__flightDocumentText>);
+    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument314:Dynamic = value; __callArgument314; }), ({ final __callArgument315:Dynamic = _SceneDocument.TRANSFORM_3D_KEYS__flightDocumentText; __callArgument315; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<Transform3D>); }
+    position = (cast _SceneDocument.readVector3__flightDocumentText((cast _Runtime.getIndex(value, 'position') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'position' : String)) : String) : String), (cast context : Dynamic), ({ final __callArgument318:Dynamic = _SceneDocument.VECTOR_3_KEYS__flightDocumentText; __callArgument318; })) : Null<FlightDocumentTextVector3__flightDocumentText>);
     if ((cast _Runtime.strictEquals(position, null) : Bool)) { return cast null; }
     rotation = (cast _SceneDocument.readQuaternion__flightDocumentText((cast _Runtime.getIndex(value, 'rotation') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'rotation' : String)) : String) : String), (cast context : Dynamic)) : Null<FlightDocumentTextQuaternion__flightDocumentText>);
     if ((cast _Runtime.strictEquals(rotation, null) : Bool)) { return cast null; }
-    scale = (cast _SceneDocument.readVector3__flightDocumentText((cast _Runtime.getIndex(value, 'scale') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'scale' : String)) : String) : String), (cast context : Dynamic), ({ final __callArgument216:Dynamic = _SceneDocument.VECTOR_3_KEYS__flightDocumentText; __callArgument216; })) : Null<FlightDocumentTextVector3__flightDocumentText>);
+    scale = (cast _SceneDocument.readVector3__flightDocumentText((cast _Runtime.getIndex(value, 'scale') : flight._internal._Any), (cast (cast _SceneDocument.appendPath__flightDocumentText((cast path : String), (cast 'scale' : String)) : String) : String), (cast context : Dynamic), ({ final __callArgument320:Dynamic = _SceneDocument.VECTOR_3_KEYS__flightDocumentText; __callArgument320; })) : Null<FlightDocumentTextVector3__flightDocumentText>);
     if ((cast _Runtime.strictEquals(scale, null) : Bool)) { return cast null; }
     transform = (cast createTransform3D() : Transform3D);
     flight._internal.DynamicObject.assign((cast transform : Transform3D).position, position);
@@ -1273,7 +1662,7 @@ class _SceneDocument {
     var x:flight._internal._Any = cast _Runtime.UNDEFINED;
     var y:flight._internal._Any = cast _Runtime.UNDEFINED;
     var z:flight._internal._Any = cast _Runtime.UNDEFINED;
-    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument218:Dynamic = value; __callArgument218; }), ({ final __callArgument219:Dynamic = allowed; __callArgument219; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentTextVector3__flightDocumentText>); }
+    if ((cast ((cast !(cast (cast _SceneDocument.isMapping__flightDocumentText((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__flightDocumentText(({ final __callArgument322:Dynamic = value; __callArgument322; }), ({ final __callArgument323:Dynamic = allowed; __callArgument323; })) : Bool) : Bool) : Bool)) : Bool)) { return cast (cast _SceneDocument.refuse__flightDocumentText((cast context : Dynamic), (cast path : String)) : Null<FlightDocumentTextVector3__flightDocumentText>); }
     x = _Runtime.getIndex(value, 'x');
     y = _Runtime.getIndex(value, 'y');
     z = _Runtime.getIndex(value, 'z');
@@ -1285,13 +1674,32 @@ class _SceneDocument {
   }
 
   public static function refuse__flightDocumentText(context:FlightDocumentTextReadContext__flightDocumentText, path:String):Dynamic {
-    ({ final __nullishOwner222 = context; final __nullishValue223:Null<FlightDocumentRefusalExplanation> = cast (cast __nullishOwner222 : FlightDocumentTextReadContext__flightDocumentText).refusal; __nullishValue223 == null ? ((cast __nullishOwner222 : FlightDocumentTextReadContext__flightDocumentText).refusal = (cast (cast createDocumentRefusal(({ final __callArgument224:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument224; }), (cast path : String)) : FlightDocumentRefusalExplanation) : Null<FlightDocumentRefusalExplanation>)) : (cast __nullishValue223 : Null<FlightDocumentRefusalExplanation>); });
+    ({ final __nullishOwner326 = context; final __nullishValue327:Null<FlightDocumentRefusalExplanation> = cast (cast __nullishOwner326 : FlightDocumentTextReadContext__flightDocumentText).refusal; __nullishValue327 == null ? ((cast __nullishOwner326 : FlightDocumentTextReadContext__flightDocumentText).refusal = (cast (cast createDocumentRefusal(({ final __callArgument328:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument328; }), (cast path : String)) : FlightDocumentRefusalExplanation) : Null<FlightDocumentRefusalExplanation>)) : (cast __nullishValue327 : Null<FlightDocumentRefusalExplanation>); });
+    return cast null;
+    return cast null;
+  }
+
+  public static function refuseWithReason__flightDocumentText(context:FlightDocumentTextReadContext__flightDocumentText, reason:Dynamic, path:String, kind:String):Dynamic {
+    if ((cast _Runtime.strictEquals((cast context : FlightDocumentTextReadContext__flightDocumentText).refusal, null) : Bool)) {
+      ((cast context : FlightDocumentTextReadContext__flightDocumentText).refusal = (cast createDocumentRefusal(({ final __callArgument330:Dynamic = reason; __callArgument330; }), (cast path : String)) : FlightDocumentRefusalExplanation));
+      ((cast (cast context : FlightDocumentTextReadContext__flightDocumentText).refusal : FlightDocumentRefusalExplanation).kind = kind);
+    }
+    return cast null;
+    return cast null;
+  }
+
+  public static function refuseToken__flightDocumentText(context:FlightDocumentTextReadContext__flightDocumentText, reason:Dynamic, path:String, tokenKey:String, mode:Null<String>):Dynamic {
+    var refusal:FlightDocumentRefusalExplanation = cast _Runtime.UNDEFINED;
+    refusal = (cast createDocumentRefusal(({ final __callArgument332:Dynamic = reason; __callArgument332; }), (cast path : String)) : FlightDocumentRefusalExplanation);
+    ((cast refusal : FlightDocumentRefusalExplanation).mode = mode);
+    ((cast refusal : FlightDocumentRefusalExplanation).tokenKey = tokenKey);
+    ({ final __nullishOwner334 = context; final __nullishValue335:Null<FlightDocumentRefusalExplanation> = cast (cast __nullishOwner334 : FlightDocumentTextReadContext__flightDocumentText).refusal; __nullishValue335 == null ? ((cast __nullishOwner334 : FlightDocumentTextReadContext__flightDocumentText).refusal = (cast refusal : Null<FlightDocumentRefusalExplanation>)) : (cast __nullishValue335 : Null<FlightDocumentRefusalExplanation>); });
     return cast null;
     return cast null;
   }
 
   public static function refuseValue__flightDocumentText(context:FlightDocumentTextReadContext__flightDocumentText, reason:Dynamic, path:String):Dynamic {
-    ({ final __nullishOwner226 = context; final __nullishValue227:Null<FlightDocumentRefusalExplanation> = cast (cast __nullishOwner226 : FlightDocumentTextReadContext__flightDocumentText).refusal; __nullishValue227 == null ? ((cast __nullishOwner226 : FlightDocumentTextReadContext__flightDocumentText).refusal = (cast (cast createDocumentRefusal(({ final __callArgument228:Dynamic = reason; __callArgument228; }), (cast path : String)) : FlightDocumentRefusalExplanation) : Null<FlightDocumentRefusalExplanation>)) : (cast __nullishValue227 : Null<FlightDocumentRefusalExplanation>); });
+    ({ final __nullishOwner336 = context; final __nullishValue337:Null<FlightDocumentRefusalExplanation> = cast (cast __nullishOwner336 : FlightDocumentTextReadContext__flightDocumentText).refusal; __nullishValue337 == null ? ((cast __nullishOwner336 : FlightDocumentTextReadContext__flightDocumentText).refusal = (cast (cast createDocumentRefusal(({ final __callArgument338:Dynamic = reason; __callArgument338; }), (cast path : String)) : FlightDocumentRefusalExplanation) : Null<FlightDocumentRefusalExplanation>)) : (cast __nullishValue337 : Null<FlightDocumentRefusalExplanation>); });
     return cast _SceneDocument.INVALID_FLIGHT_DOCUMENT_VALUE__flightDocumentText;
     return cast null;
   }
@@ -1303,15 +1711,33 @@ class _SceneDocument {
 
   public static final INVALID_FLIGHT_DOCUMENT_VALUE__flightDocumentText:flight._internal._Symbol = _Runtime.symbol('invalid-flight-document-value');
 
+  public static final INVALID_LAYOUT_STYLE__flightDocumentText:flight._internal._Symbol = _Runtime.symbol('invalid-layout-style');
+
   public static final INVALID_OPTIONAL_INDEX__flightDocumentText:flight._internal._Symbol = _Runtime.symbol('invalid-flight-document-optional-index');
 
   public static final CAMERA_KEYS__flightDocumentText:Array<String> = (cast cast (['far', 'name', 'near', 'node', 'projection', 'transform'] : Array<Dynamic>));
 
+  public static final DESCRIPTOR_RESERVED_FIELDS__flightDocumentText:Array<String> = (cast cast (['kind'] : Array<Dynamic>));
+
   public static final DOCUMENT_KEYS__flightDocumentText:Array<String> = (cast cast (['defaultScene', 'flight', 'resources', 'scenes'] : Array<Dynamic>));
+
+  public static final INTERACTIVE_STATE_2D_PROPERTIES__flightDocumentText:Array<String> = (cast cast (['scaleX', 'scaleY', 'x', 'y'] : Array<Dynamic>));
+
+  public static final INTERACTIVE_STATE_KEYS__flightDocumentText:Array<String> = (cast cast (['alpha', 'extensions', 'scaleX', 'scaleY', 'visible', 'x', 'y'] : Array<Dynamic>));
+
+  public static final INTERACTIVE_STATE_PHASES__flightDocumentText:Array<String> = (cast cast (['disabled', 'hover', 'pressed'] : Array<Dynamic>));
+
+  public static final INTERACTIVE_STATE_PROPERTIES__flightDocumentText:Array<String> = (cast cast (['alpha', 'scaleX', 'scaleY', 'visible', 'x', 'y'] : Array<Dynamic>));
 
   public static final LIGHT_KEYS__flightDocumentText:Array<String> = (cast cast (['descriptor', 'name', 'node', 'transform'] : Array<Dynamic>));
 
-  public static final NODE_RESERVED_FIELDS__flightDocumentText:Array<String> = (cast cast (['children', 'kind'] : Array<Dynamic>));
+  public static final LAYOUT_KEYS__flightDocumentText:Array<String> = (cast cast (['targets', 'tree'] : Array<Dynamic>));
+
+  public static final LAYOUT_NODE_KEYS__flightDocumentText:Array<String> = (cast cast (['containerStyle', 'itemStyle', 'kind', 'parentIndex'] : Array<Dynamic>));
+
+  public static final LAYOUT_TREE_KEYS__flightDocumentText:Array<String> = (cast cast (['nodes'] : Array<Dynamic>));
+
+  public static final NODE_RESERVED_FIELDS__flightDocumentText:Array<String> = (cast cast (['children', 'interactiveStates', 'kind', 'transition'] : Array<Dynamic>));
 
   public static final ORTHOGRAPHIC_PROJECTION_KEYS__flightDocumentText:Array<String> = (cast cast (['halfHeight', 'halfWidth', 'kind'] : Array<Dynamic>));
 
@@ -1323,34 +1749,372 @@ class _SceneDocument {
 
   public static final SAFE_PLAIN_SCALAR_PATTERN__flightDocumentText:flight._internal._Any = _Runtime.regexp('^[A-Za-z_][A-Za-z0-9_.-]*$$', '');
 
-  public static final SCENE_2D_KEYS__flightDocumentText:Array<String> = (cast cast (['backgroundColor', 'kind', 'scene'] : Array<Dynamic>));
+  public static final SCENE_2D_KEYS__flightDocumentText:Array<String> = (cast cast (['backgroundColor', 'kind', 'layouts', 'scene', 'tokens'] : Array<Dynamic>));
 
-  public static final SCENE_3D_KEYS__flightDocumentText:Array<String> = (cast cast (['cameras', 'kind', 'lights', 'scene'] : Array<Dynamic>));
+  public static final SCENE_3D_KEYS__flightDocumentText:Array<String> = (cast cast (['cameras', 'kind', 'layouts', 'lights', 'scene', 'tokens'] : Array<Dynamic>));
+
+  public static final TOKEN_RESERVED_FIELDS__flightDocumentText:Array<String> = (cast cast (['key', 'kind'] : Array<Dynamic>));
 
   public static final TRANSFORM_3D_KEYS__flightDocumentText:Array<String> = (cast cast (['position', 'rotation', 'scale'] : Array<Dynamic>));
 
   public static final VECTOR_3_KEYS__flightDocumentText:Array<String> = (cast cast (['x', 'y', 'z'] : Array<Dynamic>));
+
+  public static function assertAllInteractiveStateBindingsUsed(bindings:flight._internal._Map<NodeAny, flight._internal._Any>, usedBindings:flight._internal._Set<NodeAny>):Void {
+    if ((cast !_Runtime.strictEquals((cast bindings : flight._internal._Map<NodeAny, flight._internal._Any>).size, (cast usedBindings : flight._internal._Set<NodeAny>).size) : Bool)) {
+      _Runtime.throwValue(_Runtime.rangeError('FlightDocument interactive-state binding references a node outside the written scene'));
+    }
+  }
+
+  public static function createInteractiveStateBindingLookup<N:NodeAny>(bindings:Array<FlightDocumentInteractiveStateBinding<N>>):flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<N>> {
+    var out:flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<N>> = cast _Runtime.UNDEFINED;
+    out = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    for (binding in _Runtime.iterable(bindings)) {
+      if ((cast ((cast out : flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<N>>).has(_Runtime.field(binding, 'node'))) : Bool)) { _Runtime.throwValue(_Runtime.rangeError('Duplicate FlightDocument interactive-state node binding')); }
+      ((cast out : flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<N>>).set(_Runtime.field(binding, 'node'), (cast binding)));
+    }
+    return cast out;
+    return cast null;
+  }
+
+  public static function isInteractiveStateBindingTargetSupported(node:NodeAny, documentNode:FlightDocumentNode, schemas:FlightDocumentSchemaRegistry):Bool {
+    if ((cast _Runtime.looseEquals(_Runtime.field(documentNode, 'interactiveStates'), null) : Bool)) { return cast true; }
+    for (state in _Runtime.iterable(cast ([(cast _Runtime.field(documentNode, 'interactiveStates') : FlightDocumentInteractiveStates).disabled, (cast _Runtime.field(documentNode, 'interactiveStates') : FlightDocumentInteractiveStates).hover, (cast _Runtime.field(documentNode, 'interactiveStates') : FlightDocumentInteractiveStates).pressed] : Array<Dynamic>))) {
+      if ((cast _Runtime.strictEquals(state, null) : Bool)) { continue; }
+      for (extension in _Runtime.iterable((cast state : FlightDocumentInteractiveState).extensions)) {
+        var schema:Null<FlightDocumentInteractiveStateExtensionSchema> = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'interactiveStateExtensionSchemas') : Dynamic), (cast (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind : String)) : Null<FlightDocumentInteractiveStateExtensionSchema>);
+        if ((cast ((cast _Runtime.strictEquals(schema, null) : Bool) || (cast !(cast (cast schema : FlightDocumentInteractiveStateExtensionSchema).isSupported(({ final __callArgument346:Dynamic = node; __callArgument346; })) : Bool) : Bool)) : Bool)) { return cast false; }
+      }
+    }
+    return cast true;
+    return cast null;
+  }
+
+  public static function readInteractiveStateBindingMetadata(node:NodeAny, bindings:flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<Dynamic>>, usedBindings:flight._internal._Set<NodeAny>, schemas:FlightDocumentSchemaRegistry):FlightDocumentInteractiveStateMetadata__sceneDocumentInteractiveStateBindings {
+    var binding:Null<FlightDocumentInteractiveStateBinding<NodeAny>> = cast _Runtime.UNDEFINED;
+    var interactiveStates:FlightDocumentInteractiveStates = cast _Runtime.UNDEFINED;
+    var transition:Null<FlightDocumentInteractiveStateTransitionDescriptor> = cast _Runtime.UNDEFINED;
+    binding = ((cast bindings : flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<NodeAny>>).get(node));
+    if ((cast _Runtime.strictEquals(binding, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast { interactiveStates: null, transition: null }; }
+    ((cast usedBindings : flight._internal._Set<NodeAny>).add(node));
+    interactiveStates = (cast _SceneDocument.cloneInteractiveStates__sceneDocumentInteractiveStateBindings(_Runtime.field(binding, 'interactiveStates')) : FlightDocumentInteractiveStates);
+    for (state in _Runtime.iterable(cast ([(cast interactiveStates : FlightDocumentInteractiveStates).disabled, (cast interactiveStates : FlightDocumentInteractiveStates).hover, (cast interactiveStates : FlightDocumentInteractiveStates).pressed] : Array<Dynamic>))) {
+      if ((cast _Runtime.strictEquals(state, null) : Bool)) { continue; }
+      for (extension in _Runtime.iterable((cast state : FlightDocumentInteractiveState).extensions)) {
+        var schema:Null<FlightDocumentInteractiveStateExtensionSchema> = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'interactiveStateExtensionSchemas') : Dynamic), (cast (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind : String)) : Null<FlightDocumentInteractiveStateExtensionSchema>);
+        if ((cast !_Runtime.strictEquals(schema, null) : Bool)) { _SceneDocument.elideDefaultFields__sceneDocumentInteractiveStateBindings((cast extension : FlightDocumentInteractiveStateExtensionDescriptor).fields, ({ final __callArgument351:Dynamic = (cast schema : FlightDocumentInteractiveStateExtensionSchema).fields; __callArgument351; })); }
+      }
+    }
+    transition = ((cast _Runtime.strictEquals(_Runtime.field(binding, 'transition'), null) : Bool) ? (cast null : Dynamic) : (cast (cast _SceneDocument.cloneTransition__sceneDocumentInteractiveStateBindings(_Runtime.field(binding, 'transition')) : FlightDocumentInteractiveStateTransitionDescriptor) : Dynamic));
+    if ((cast !_Runtime.strictEquals(transition, null) : Bool)) {
+      var schema:Null<FlightDocumentInteractiveStateTransitionSchema> = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'interactiveStateTransitionSchemas') : Dynamic), (cast (cast transition : FlightDocumentInteractiveStateTransitionDescriptor).kind : String)) : Null<FlightDocumentInteractiveStateTransitionSchema>);
+      if ((cast !_Runtime.strictEquals(schema, null) : Bool)) { _SceneDocument.elideDefaultFields__sceneDocumentInteractiveStateBindings((cast transition : FlightDocumentInteractiveStateTransitionDescriptor).fields, ({ final __callArgument353:Dynamic = (cast schema : FlightDocumentInteractiveStateTransitionSchema).fields; __callArgument353; })); }
+    }
+    return cast { interactiveStates: interactiveStates, transition: transition };
+    return cast null;
+  }
+
+  public static function cloneInteractiveState__sceneDocumentInteractiveStateBindings(state:FlightDocumentInteractiveState):FlightDocumentInteractiveState {
+    var out:FlightDocumentInteractiveState = cast _Runtime.UNDEFINED;
+    out = (cast { extensions: (cast _Runtime.mapArray((cast _Runtime.field(state, 'extensions') : Array<FlightDocumentInteractiveStateExtensionDescriptor>), function(extension:FlightDocumentInteractiveStateExtensionDescriptor, __unused0:Float, __unused1:Array<FlightDocumentInteractiveStateExtensionDescriptor>):{ var fields:FlightDocumentFields; var kind:String; } return { fields: (cast _SceneDocument.cloneFields__sceneDocumentInteractiveStateBindings((cast extension : FlightDocumentInteractiveStateExtensionDescriptor).fields) : FlightDocumentFields), kind: (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind }, _Runtime.UNDEFINED)) });
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'alpha'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : FlightDocumentInteractiveState).alpha = _Runtime.field(state, 'alpha')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'scaleX'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : FlightDocumentInteractiveState).scaleX = _Runtime.field(state, 'scaleX')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'scaleY'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : FlightDocumentInteractiveState).scaleY = _Runtime.field(state, 'scaleY')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'visible'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : FlightDocumentInteractiveState).visible = _Runtime.field(state, 'visible')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'x'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : FlightDocumentInteractiveState).x = _Runtime.field(state, 'x')); }
+    if ((cast !_Runtime.strictEquals(_Runtime.field(state, 'y'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { ((cast out : FlightDocumentInteractiveState).y = _Runtime.field(state, 'y')); }
+    return cast out;
+    return cast null;
+  }
+
+  public static function cloneInteractiveStates__sceneDocumentInteractiveStateBindings(states:FlightDocumentInteractiveStates):FlightDocumentInteractiveStates {
+    return cast { disabled: ((cast _Runtime.strictEquals(_Runtime.field(states, 'disabled'), null) : Bool) ? (cast null : Dynamic) : (cast (cast _SceneDocument.cloneInteractiveState__sceneDocumentInteractiveStateBindings(_Runtime.field(states, 'disabled')) : FlightDocumentInteractiveState) : Dynamic)), hover: ((cast _Runtime.strictEquals(_Runtime.field(states, 'hover'), null) : Bool) ? (cast null : Dynamic) : (cast (cast _SceneDocument.cloneInteractiveState__sceneDocumentInteractiveStateBindings(_Runtime.field(states, 'hover')) : FlightDocumentInteractiveState) : Dynamic)), pressed: ((cast _Runtime.strictEquals(_Runtime.field(states, 'pressed'), null) : Bool) ? (cast null : Dynamic) : (cast (cast _SceneDocument.cloneInteractiveState__sceneDocumentInteractiveStateBindings(_Runtime.field(states, 'pressed')) : FlightDocumentInteractiveState) : Dynamic)) };
+    return cast null;
+  }
+
+  public static function cloneTransition__sceneDocumentInteractiveStateBindings(transition:FlightDocumentInteractiveStateTransitionDescriptor):FlightDocumentInteractiveStateTransitionDescriptor {
+    return cast { fields: (cast _SceneDocument.cloneFields__sceneDocumentInteractiveStateBindings(_Runtime.field(transition, 'fields')) : FlightDocumentFields), kind: _Runtime.field(transition, 'kind') };
+    return cast null;
+  }
+
+  public static function cloneFields__sceneDocumentInteractiveStateBindings(fields:FlightDocumentFields):FlightDocumentFields {
+    var out:FlightDocumentFields = cast _Runtime.UNDEFINED;
+    out = (cast {  });
+    for (__iteration2 in _Runtime.iterable(flight._internal.DynamicObject.entries(fields))) {
+      var name:String = flight._internal._StaticIndex.readArray(__iteration2, 0.0);
+      var value:FlightDocumentValue = flight._internal._StaticIndex.readArray(__iteration2, 1.0);
+      _Runtime.setIndex(out, name, (cast _SceneDocument.cloneValue__sceneDocumentInteractiveStateBindings(({ final __callArgument357:Dynamic = value; __callArgument357; })) : FlightDocumentValue));
+    }
+    return cast out;
+    return cast null;
+  }
+
+  public static function elideDefaultFields__sceneDocumentInteractiveStateBindings(fields:FlightDocumentFields, fieldSchemas:Array<{ @:optional var defaultValue:FlightDocumentValue; var name:String; }>):Void {
+    for (fieldSchema in _Runtime.iterable(fieldSchemas)) {
+      if ((cast ((cast !_Runtime.strictEquals((cast fieldSchema : { @:optional var defaultValue:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>, FlightDocumentFields>, Array<FlightDocumentValue>>>; var name:String; }).defaultValue, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.getIndex(fields, (cast fieldSchema : { @:optional var defaultValue:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>, FlightDocumentFields>, Array<FlightDocumentValue>>>; var name:String; }).name), (cast fieldSchema : { @:optional var defaultValue:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>, FlightDocumentFields>, Array<FlightDocumentValue>>>; var name:String; }).defaultValue) : Bool)) : Bool)) {
+        _Runtime.deleteIndex(fields, (cast fieldSchema : { @:optional var defaultValue:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>, FlightDocumentFields>, Array<FlightDocumentValue>>>; var name:String; }).name);
+      }
+    }
+  }
+
+  public static function cloneValue__sceneDocumentInteractiveStateBindings(value:FlightDocumentValue):FlightDocumentValue {
+    if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) { return cast value; }
+    if ((cast _Runtime.isArray(value) : Bool)) { return cast (cast _Runtime.mapArray((cast value : Array<FlightDocumentValue>), function(entry:FlightDocumentValue, __unused3:Float, __unused4:Array<FlightDocumentValue>):FlightDocumentValue return (cast _SceneDocument.cloneValue__sceneDocumentInteractiveStateBindings(({ final __callArgument361:Dynamic = entry; __callArgument361; })) : FlightDocumentValue), _Runtime.UNDEFINED)); }
+    return cast (cast _SceneDocument.cloneFields__sceneDocumentInteractiveStateBindings(({ final __callArgument363:Dynamic = value; __callArgument363; })) : FlightDocumentFields);
+    return cast null;
+  }
+
+  public static function checkFlightDocumentLayoutTargets(layouts:Array<FlightDocumentLayoutDescriptor>, root:FlightDocumentNode, sceneIndex:Float):Null<FlightDocumentRefusalExplanation> {
+    var targetPaths:flight._internal._Map<String, String> = cast _Runtime.UNDEFINED;
+    var matchCounts:flight._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
+    if ((cast !(cast _Runtime.isArray(layouts) : Bool) : Bool)) {
+      return cast (cast createSceneRefusal(({ final __callArgument365:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument365; }), (cast sceneIndex : Float), (cast 'layouts' : String)) : FlightDocumentRefusalExplanation);
+    }
+    targetPaths = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    {
+      var layoutIndex:Float = 0.0;
+      while ((cast ((cast layoutIndex : Float) < (cast _Runtime.field(layouts, 'length') : Float)) : Bool)) {
+        var layout:flight._internal._Any = flight._internal._StaticIndex.readArray(layouts, layoutIndex);
+        var layoutPath:String = 'layouts[' + Std.string(layoutIndex) + ']';
+        if ((cast ((cast !(cast (cast _SceneDocument.isRecord__sceneDocumentLayoutBindings((cast layout : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__sceneDocumentLayoutBindings(({ final __callArgument367:Dynamic = layout; __callArgument367; }), ({ final __callArgument368:Dynamic = _SceneDocument.LAYOUT_KEYS__sceneDocumentLayoutBindings; __callArgument368; })) : Bool) : Bool) : Bool)) : Bool)) {
+          return cast (cast createSceneRefusal(({ final __callArgument371:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument371; }), (cast sceneIndex : Float), (cast layoutPath : String)) : FlightDocumentRefusalExplanation);
+        }
+        var tree:flight._internal._Any = (cast layout : { var tree:flight._internal._Any; }).tree;
+        if ((cast ((cast !(cast (cast _SceneDocument.isRecord__sceneDocumentLayoutBindings((cast tree : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__sceneDocumentLayoutBindings(({ final __callArgument373:Dynamic = tree; __callArgument373; }), ({ final __callArgument374:Dynamic = _SceneDocument.LAYOUT_TREE_KEYS__sceneDocumentLayoutBindings; __callArgument374; })) : Bool) : Bool) : Bool)) : Bool)) {
+          return cast (cast createSceneRefusal(({ final __callArgument377:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument377; }), (cast sceneIndex : Float), (cast '' + Std.string(layoutPath) + '.tree' : String)) : FlightDocumentRefusalExplanation);
+        }
+        var nodes:flight._internal._Any = (cast tree : { var nodes:flight._internal._Any; }).nodes;
+        if ((cast ((cast !(cast _Runtime.isArray(nodes) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(nodes, 'length'), 0.0) : Bool)) : Bool)) {
+          return cast (cast createSceneRefusal(({ final __callArgument379:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument379; }), (cast sceneIndex : Float), (cast '' + Std.string(layoutPath) + '.tree.nodes' : String)) : FlightDocumentRefusalExplanation);
+        }
+        if ((cast ((cast !(cast _Runtime.isArray((cast layout : { var targets:flight._internal._Any; }).targets) : Bool) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field((cast layout : { var targets:flight._internal._Any; }).targets, 'length'), _Runtime.field(nodes, 'length')) : Bool)) : Bool)) {
+          return cast (cast createSceneRefusal(({ final __callArgument381:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument381; }), (cast sceneIndex : Float), (cast '' + Std.string(layoutPath) + '.targets' : String)) : FlightDocumentRefusalExplanation);
+        }
+        {
+          var nodeIndex:Float = 0.0;
+          while ((cast ((cast nodeIndex : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
+            var nodePath:String = '' + Std.string(layoutPath) + '.tree.nodes[' + Std.string(nodeIndex) + ']';
+            if ((cast !(cast (cast _SceneDocument.isFlightDocumentLayoutNode__sceneDocumentLayoutBindings((cast flight._internal._StaticIndex.readArray(nodes, nodeIndex) : flight._internal._Any), (cast nodeIndex : Float)) : Bool) : Bool) : Bool)) {
+              return cast (cast createSceneRefusal(({ final __callArgument383:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument383; }), (cast sceneIndex : Float), (cast nodePath : String)) : FlightDocumentRefusalExplanation);
+            }
+            nodeIndex++;
+          }
+        }
+        {
+          var targetIndex:Float = 0.0;
+          while ((cast ((cast targetIndex : Float) < (cast _Runtime.field((cast layout : { var targets:flight._internal._Any; }).targets, 'length') : Float)) : Bool)) {
+            var target:flight._internal._Any = flight._internal._StaticIndex.readArray((cast layout : { var targets:flight._internal._Any; }).targets, targetIndex);
+            var targetPath:String = '' + Std.string(layoutPath) + '.targets[' + Std.string(targetIndex) + ']';
+            if ((cast ((cast ((cast !_Runtime.strictEquals(_Runtime.typeofValue(target), 'string') : Bool) || (cast _Runtime.strictEquals(_Runtime.field(target, 'length'), 0.0) : Bool)) : Bool) || (cast ((cast targetPaths : flight._internal._Map<String, String>).has(target)) : Bool)) : Bool)) {
+              return cast (cast createSceneRefusal(({ final __callArgument385:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument385; }), (cast sceneIndex : Float), (cast targetPath : String)) : FlightDocumentRefusalExplanation);
+            }
+            ((cast targetPaths : flight._internal._Map<String, String>).set(target, (cast targetPath)));
+            targetIndex++;
+          }
+        }
+        layoutIndex++;
+      }
+    }
+    matchCounts = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    _SceneDocument.collectAuthoredTargetMatches__sceneDocumentLayoutBindings(({ final __callArgument387:Dynamic = root; __callArgument387; }), ({ final __callArgument388:Dynamic = targetPaths; __callArgument388; }), ({ final __callArgument389:Dynamic = matchCounts; __callArgument389; }));
+    for (__iteration0 in _Runtime.iterable(targetPaths)) {
+      var target:String = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var targetPath:String = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
+      var count:Float = _Runtime.coalesce(((cast matchCounts : flight._internal._Map<String, Float>).get(target)), function():Dynamic return cast 0.0);
+      if ((cast _Runtime.strictEquals(count, 1.0) : Bool)) { continue; }
+      return cast (cast createSceneRefusal(({ final __callArgument395:Dynamic = ((cast _Runtime.strictEquals(count, 0.0) : Bool) ? (cast (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).LayoutTargetUnresolved : Dynamic) : (cast (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).LayoutTargetAmbiguous : Dynamic)); __callArgument395; }), (cast sceneIndex : Float), (cast targetPath : String)) : FlightDocumentRefusalExplanation);
+    }
+    return cast null;
+    return cast null;
+  }
+
+  public static function createFlightDocumentLayoutBindings<N:NodeAny>(layouts:Array<FlightDocumentLayoutDescriptor>, root:FlightDocumentNode, materializedNodes:flight._internal._Map<FlightDocumentNode, N>):Null<Array<FlightDocumentLayoutBinding<N>>> {
+    var targetNames:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
+    var nodesByName:flight._internal._Map<String, N> = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(layouts, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
+    targetNames = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [(cast _Runtime.flatMapArray((cast layouts : Array<FlightDocumentLayoutDescriptor>), function(layout:FlightDocumentLayoutDescriptor, __unused1:Float, __unused2:Array<FlightDocumentLayoutDescriptor>):flight._internal._Union2<String, Array<String>> return _Runtime.field(layout, 'targets'), _Runtime.UNDEFINED))]);
+    nodesByName = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    if ((cast !(cast (cast _SceneDocument.collectMaterializedNodesByName__sceneDocumentLayoutBindings(({ final __callArgument397:Dynamic = root; __callArgument397; }), ({ final __callArgument398:Dynamic = targetNames; __callArgument398; }), (cast materializedNodes : Dynamic), (cast nodesByName : Dynamic)) : Bool) : Bool) : Bool)) { return cast null; }
+    return cast (cast _Runtime.mapArray((cast layouts : Array<FlightDocumentLayoutDescriptor>), function(layout:FlightDocumentLayoutDescriptor, __unused3:Float, __unused4:Array<FlightDocumentLayoutDescriptor>):{ var targets:Array<N>; var tree:FlightDocumentLayoutTree; } return { targets: (cast _Runtime.mapArray((cast _Runtime.field(layout, 'targets') : Array<String>), function(target:String, __unused5:Float, __unused6:Array<String>):N return (cast ((cast nodesByName : flight._internal._Map<String, N>).get(target)) : N), _Runtime.UNDEFINED)), tree: _Runtime.field(layout, 'tree') }, _Runtime.UNDEFINED));
+    return cast null;
+  }
+
+  public static function writeFlightDocumentLayoutBindings<N:NodeAny>(bindings:Array<FlightDocumentLayoutBinding<N>>, root:N, writtenNodes:flight._internal._Map<NodeAny, FlightDocumentNode>):Array<FlightDocumentLayoutDescriptor> {
+    var sceneNodes:flight._internal._Set<NodeAny> = cast _Runtime.UNDEFINED;
+    var nameCounts:flight._internal._Map<String, Float> = cast _Runtime.UNDEFINED;
+    var usedTargets:flight._internal._Set<NodeAny> = cast _Runtime.UNDEFINED;
+    var layouts:Array<FlightDocumentLayoutDescriptor> = cast _Runtime.UNDEFINED;
+    if ((cast _Runtime.strictEquals(_Runtime.field(bindings, 'length'), 0.0) : Bool)) { return cast cast ([] : Array<Dynamic>); }
+    sceneNodes = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+    nameCounts = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    _SceneDocument.collectLiveNodes__sceneDocumentLayoutBindings(({ final __callArgument401:Dynamic = root; __callArgument401; }), ({ final __callArgument402:Dynamic = sceneNodes; __callArgument402; }), ({ final __callArgument403:Dynamic = nameCounts; __callArgument403; }));
+    usedTargets = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+    layouts = (cast cast ([] : Array<Dynamic>));
+    for (binding in _Runtime.iterable(bindings)) {
+      if ((cast ((cast !(cast (cast _SceneDocument.isRecord__sceneDocumentLayoutBindings((cast binding : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__sceneDocumentLayoutBindings(({ final __callArgument409:Dynamic = binding; __callArgument409; }), ({ final __callArgument410:Dynamic = _SceneDocument.LAYOUT_KEYS__sceneDocumentLayoutBindings; __callArgument410; })) : Bool) : Bool) : Bool)) : Bool)) {
+        _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout binding must contain only targets and tree'));
+      }
+      var tree:FlightDocumentLayoutTree = _Runtime.field(binding, 'tree');
+      if ((cast ((cast !(cast (cast _SceneDocument.isRecord__sceneDocumentLayoutBindings((cast tree : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__sceneDocumentLayoutBindings(({ final __callArgument413:Dynamic = tree; __callArgument413; }), ({ final __callArgument414:Dynamic = _SceneDocument.LAYOUT_TREE_KEYS__sceneDocumentLayoutBindings; __callArgument414; })) : Bool) : Bool) : Bool)) : Bool)) {
+        _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout binding tree must contain only nodes'));
+      }
+      var nodes:Array<FlightDocumentLayoutNode> = (cast tree : { var nodes:Array<FlightDocumentLayoutNode>; }).nodes;
+      if ((cast ((cast ((cast ((cast !(cast _Runtime.isArray(nodes) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(nodes, 'length'), 0.0) : Bool)) : Bool) || (cast !(cast _Runtime.isArray(_Runtime.field(binding, 'targets')) : Bool) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(_Runtime.field(binding, 'targets'), 'length'), _Runtime.field(nodes, 'length')) : Bool)) : Bool)) {
+        _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout targets must match a non-empty tree index-for-index'));
+      }
+      {
+        var nodeIndex:Float = 0.0;
+        while ((cast ((cast nodeIndex : Float) < (cast _Runtime.field(nodes, 'length') : Float)) : Bool)) {
+          if ((cast !(cast (cast _SceneDocument.isFlightDocumentLayoutNode__sceneDocumentLayoutBindings((cast flight._internal._StaticIndex.readArray(nodes, nodeIndex) : flight._internal._Any), (cast nodeIndex : Float)) : Bool) : Bool) : Bool)) {
+            _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout tree must use document-safe styles and parent-before-child indices'));
+          }
+          nodeIndex++;
+        }
+      }
+      var targets:Array<String> = (cast cast ([] : Array<Dynamic>));
+      for (target in _Runtime.iterable(_Runtime.field(binding, 'targets'))) {
+        if ((cast ((cast !(cast ((cast sceneNodes : flight._internal._Set<NodeAny>).has(target)) : Bool) : Bool) || (cast ((cast usedTargets : flight._internal._Set<NodeAny>).has(target)) : Bool)) : Bool)) {
+          _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout targets must be unique members of the written scene'));
+        }
+        ((cast usedTargets : flight._internal._Set<NodeAny>).add(target));
+        var name:Null<String> = _Runtime.field(target, 'name');
+        if ((cast ((cast ((cast _Runtime.strictEquals(name, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.field(name, 'length'), 0.0) : Bool)) : Bool) || (cast !_Runtime.strictEquals(((cast nameCounts : flight._internal._Map<String, Float>).get(name)), 1.0) : Bool)) : Bool)) {
+          _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout targets require unique non-empty Node.name values'));
+        }
+        var written:Null<FlightDocumentNode> = ((cast writtenNodes : flight._internal._Map<NodeAny, FlightDocumentNode>).get(target));
+        if ((cast !_Runtime.strictEquals(_Runtime.optionalIndex(({ final __structural420 = written; __structural420 == null ? _Runtime.UNDEFINED : (cast __structural420 : { var fields:FlightDocumentFields; }).fields; }), 'name'), name) : Bool)) {
+          _Runtime.throwValue(_Runtime.rangeError('FlightDocument layout target Node.name must be represented by its node schema'));
+        }
+        _Runtime.callProperty(targets, 'push', cast ([name] : Array<Dynamic>));
+      }
+      _Runtime.callProperty(layouts, 'push', cast ([{ targets: targets, tree: { nodes: (cast _Runtime.mapArray((cast nodes : Array<FlightDocumentLayoutNode>), _SceneDocument.cloneLayoutNode__sceneDocumentLayoutBindings, _Runtime.UNDEFINED)) } }] : Array<Dynamic>));
+    }
+    return cast layouts;
+    return cast null;
+  }
+
+  public static function collectAuthoredTargetMatches__sceneDocumentLayoutBindings(node:FlightDocumentNode, targetPaths:flight._internal._Map<String, String>, counts:flight._internal._Map<String, Float>):Void {
+    var name:FlightDocumentValue = cast _Runtime.UNDEFINED;
+    name = _Runtime.getIndex(_Runtime.field(node, 'fields'), 'name');
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(name), 'string') : Bool) && (cast ((cast targetPaths : flight._internal._Map<String, String>).has(name)) : Bool)) : Bool)) { ((cast counts : flight._internal._Map<String, Float>).set(name, (cast _Runtime.addNumbers(_Runtime.coalesce(((cast counts : flight._internal._Map<String, Float>).get(name)), function():Dynamic return cast 0.0), 1.0)))); }
+    for (child in _Runtime.iterable(_Runtime.field(node, 'children'))) {
+      _SceneDocument.collectAuthoredTargetMatches__sceneDocumentLayoutBindings(({ final __callArgument423:Dynamic = child; __callArgument423; }), ({ final __callArgument424:Dynamic = targetPaths; __callArgument424; }), ({ final __callArgument425:Dynamic = counts; __callArgument425; }));
+    }
+  }
+
+  public static function collectMaterializedNodesByName__sceneDocumentLayoutBindings<N:NodeAny>(documentNode:FlightDocumentNode, targetNames:flight._internal._Set<String>, materializedNodes:flight._internal._Map<FlightDocumentNode, N>, out:flight._internal._Map<String, N>):Bool {
+    var name:FlightDocumentValue = cast _Runtime.UNDEFINED;
+    name = _Runtime.getIndex(_Runtime.field(documentNode, 'fields'), 'name');
+    if ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue(name), 'string') : Bool) && (cast ((cast targetNames : flight._internal._Set<String>).has(name)) : Bool)) : Bool)) {
+      var materialized:Null<N> = ((cast materializedNodes : flight._internal._Map<FlightDocumentNode, N>).get(documentNode));
+      if ((cast _Runtime.strictEquals(materialized, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
+      ((cast out : flight._internal._Map<String, N>).set(name, (cast materialized)));
+    }
+    for (child in _Runtime.iterable(_Runtime.field(documentNode, 'children'))) {
+      if ((cast !(cast (cast _SceneDocument.collectMaterializedNodesByName__sceneDocumentLayoutBindings(({ final __callArgument431:Dynamic = child; __callArgument431; }), ({ final __callArgument432:Dynamic = targetNames; __callArgument432; }), (cast materializedNodes : Dynamic), (cast out : Dynamic)) : Bool) : Bool) : Bool)) { return cast false; }
+    }
+    return cast true;
+    return cast null;
+  }
+
+  public static function collectLiveNodes__sceneDocumentLayoutBindings(node:NodeAny, nodes:flight._internal._Set<NodeAny>, nameCounts:flight._internal._Map<String, Float>):Void {
+    ((cast nodes : flight._internal._Set<NodeAny>).add(node));
+    if ((cast !_Runtime.strictEquals(_Runtime.field(node, 'name'), null) : Bool)) { ((cast nameCounts : flight._internal._Map<String, Float>).set(_Runtime.field(node, 'name'), (cast _Runtime.addNumbers(_Runtime.coalesce(((cast nameCounts : flight._internal._Map<String, Float>).get(_Runtime.field(node, 'name'))), function():Dynamic return cast 0.0), 1.0)))); }
+    for (child in _Runtime.iterable((cast getNodeChildren((cast node : Dynamic)) : Array<flight._internal._Any>))) {
+      _SceneDocument.collectLiveNodes__sceneDocumentLayoutBindings(({ final __callArgument437:Dynamic = child; __callArgument437; }), ({ final __callArgument438:Dynamic = nodes; __callArgument438; }), ({ final __callArgument439:Dynamic = nameCounts; __callArgument439; }));
+    }
+  }
+
+  public static function isFlightDocumentLayoutNode__sceneDocumentLayoutBindings(value:flight._internal._Any, index:Float):Bool {
+    var node:{ @:optional var containerStyle:Null<FlightDocumentFields>; @:optional var itemStyle:Null<FlightDocumentFields>; @:optional var kind:Null<String>; @:optional var parentIndex:Null<Float>; } = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast (cast _SceneDocument.isRecord__sceneDocumentLayoutBindings((cast value : flight._internal._Any)) : Bool) : Bool) : Bool) || (cast !(cast (cast _SceneDocument.hasOnlyKeys__sceneDocumentLayoutBindings(({ final __callArgument443:Dynamic = value; __callArgument443; }), ({ final __callArgument444:Dynamic = _SceneDocument.LAYOUT_NODE_KEYS__sceneDocumentLayoutBindings; __callArgument444; })) : Bool) : Bool) : Bool)) : Bool)) { return cast false; }
+    node = (cast value : { @:optional var containerStyle:Null<FlightDocumentFields>; @:optional var itemStyle:Null<FlightDocumentFields>; @:optional var kind:Null<String>; @:optional var parentIndex:Null<Float>; });
+    return cast _Runtime.andValue(((cast ((cast ((cast ((cast ((cast ((cast _Runtime.strictEquals(_Runtime.typeofValue((cast node : { @:optional var containerStyle:Null<FlightDocumentFields>; @:optional var itemStyle:Null<FlightDocumentFields>; @:optional var kind:Null<String>; @:optional var parentIndex:Null<Float>; }).kind), 'string') : Bool) && (cast ((cast _Runtime.field((cast node : { @:optional var containerStyle:Null<FlightDocumentFields>; @:optional var itemStyle:Null<FlightDocumentFields>; @:optional var kind:Null<String>; @:optional var parentIndex:Null<Float>; }).kind, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool) && (cast _Runtime.strictEquals(_Runtime.typeofValue((cast node : { @:optional var containerStyle:Null<FlightDocumentFields>; @:optional var itemStyle:Null<FlightDocumentFields>; @:optional var kind:Null<String>; @:optional var parentIndex:Null<Float>; }).parentIndex), 'number') : Bool)) : Bool) && (cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isInteger', cast ([(cast node : { @:optional var containerStyle:Null<FlightDocumentFields>; @:optional var itemStyle:Null<FlightDocumentFields>; @:optional var kind:Null<String>; @:optional var parentIndex:Null<Float>; }).parentIndex] : Array<Dynamic>)) : Bool)) : Bool) && (cast ((cast (cast node : { @:optional var containerStyle:Null<FlightDocumentFields>; @:optional var itemStyle:Null<FlightDocumentFields>; @:optional var kind:Null<String>; @:optional var parentIndex:Null<Float>; }).parentIndex : Float) >= (cast -1.0 : Float)) : Bool)) : Bool) && (cast ((cast (cast node : { @:optional var containerStyle:Null<FlightDocumentFields>; @:optional var itemStyle:Null<FlightDocumentFields>; @:optional var kind:Null<String>; @:optional var parentIndex:Null<Float>; }).parentIndex : Float) < (cast index : Float)) : Bool)) : Bool) && (cast (cast _SceneDocument.isStyle__sceneDocumentLayoutBindings((cast (cast node : { @:optional var containerStyle:Null<FlightDocumentFields>; @:optional var itemStyle:Null<FlightDocumentFields>; @:optional var kind:Null<String>; @:optional var parentIndex:Null<Float>; }).containerStyle : flight._internal._Any)) : Bool) : Bool)), function():Dynamic return cast (cast _SceneDocument.isStyle__sceneDocumentLayoutBindings((cast (cast node : { @:optional var containerStyle:Null<FlightDocumentFields>; @:optional var itemStyle:Null<FlightDocumentFields>; @:optional var kind:Null<String>; @:optional var parentIndex:Null<Float>; }).itemStyle : flight._internal._Any)) : Bool));
+    return cast null;
+  }
+
+  public static function isStyle__sceneDocumentLayoutBindings(value:flight._internal._Any):Bool {
+    return cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast _Runtime.andValue((cast _SceneDocument.isRecord__sceneDocumentLayoutBindings((cast value : flight._internal._Any)) : Bool), function():Dynamic return cast (cast _SceneDocument.isFlightDocumentValue__sceneDocumentLayoutBindings((cast value : flight._internal._Any), _Runtime.construct(flight._internal._HostValueLut.get('Set'), [])) : Bool)) : Bool));
+    return cast null;
+  }
+
+  public static function isFlightDocumentValue__sceneDocumentLayoutBindings(value:flight._internal._Any, ancestors:flight._internal._Set<flight._internal._Object>):Bool {
+    var valid:Bool = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'boolean') : Bool)) : Bool) || (cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'string') : Bool)) : Bool)) { return cast true; }
+    if ((cast _Runtime.strictEquals(_Runtime.typeofValue(value), 'number') : Bool)) {
+      return cast ((cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) && (cast _Runtime.orValue(!(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isInteger', cast ([value] : Array<Dynamic>)) : Bool), function():Dynamic return cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isSafeInteger', cast ([value] : Array<Dynamic>))) : Bool));
+    }
+    if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) { return cast false; }
+    if ((cast ((cast ancestors : flight._internal._Set<flight._internal._Object>).has(value)) : Bool)) { return cast false; }
+    ((cast ancestors : flight._internal._Set<flight._internal._Object>).add(value));
+    valid = ((cast _Runtime.isArray(value) : Bool) ? (cast _Runtime.callProperty(value, 'every', cast ([function(entry:flight._internal._Any, __unused9:Float, __unused10:Array<flight._internal._Any>):Bool return (cast _SceneDocument.isFlightDocumentValue__sceneDocumentLayoutBindings((cast entry : flight._internal._Any), ({ final __callArgument447:Dynamic = ancestors; __callArgument447; })) : Bool)] : Array<Dynamic>)) : Dynamic) : (cast _Runtime.callProperty(flight._internal.DynamicObject.values(value), 'every', cast ([function(entry:flight._internal._Any, __unused7:Float, __unused8:Array<flight._internal._Any>):Bool return (cast _SceneDocument.isFlightDocumentValue__sceneDocumentLayoutBindings((cast entry : flight._internal._Any), ({ final __callArgument449:Dynamic = ancestors; __callArgument449; })) : Bool)] : Array<Dynamic>)) : Dynamic));
+    ((cast ancestors : flight._internal._Set<flight._internal._Object>).delete_(value));
+    return cast valid;
+    return cast null;
+  }
+
+  public static function hasOnlyKeys__sceneDocumentLayoutBindings(value:flight._internal._Record<String, flight._internal._Any>, allowed:Array<String>):Bool {
+    return cast _Runtime.callProperty(flight._internal.DynamicObject.keys(value), 'every', cast ([function(key:String, __unused11:Float, __unused12:Array<String>):Bool return _Runtime.includes(allowed, key)] : Array<Dynamic>));
+    return cast null;
+  }
+
+  public static function isRecord__sceneDocumentLayoutBindings(value:flight._internal._Any):Bool {
+    var prototype:flight._internal._Any = cast _Runtime.UNDEFINED;
+    if ((cast ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool) || (cast _Runtime.isArray(value) : Bool)) : Bool)) { return cast false; }
+    prototype = (cast flight._internal.DynamicObject.getPrototypeOf(value) : flight._internal._Any);
+    return cast ((cast _Runtime.strictEquals(prototype, null) : Bool) || (cast _Runtime.strictEquals(prototype, flight._internal.DynamicObject.field('prototype')) : Bool));
+    return cast null;
+  }
+
+  public static function cloneLayoutNode__sceneDocumentLayoutBindings(source:FlightDocumentLayoutNode):FlightDocumentLayoutNode {
+    return cast { containerStyle: ((cast _Runtime.strictEquals(source.containerStyle, null) : Bool) ? (cast null : Dynamic) : (cast (cast _SceneDocument.cloneFields__sceneDocumentLayoutBindings(source.containerStyle) : FlightDocumentFields) : Dynamic)), itemStyle: ((cast _Runtime.strictEquals(source.itemStyle, null) : Bool) ? (cast null : Dynamic) : (cast (cast _SceneDocument.cloneFields__sceneDocumentLayoutBindings(source.itemStyle) : FlightDocumentFields) : Dynamic)), kind: source.kind, parentIndex: source.parentIndex };
+    return cast null;
+  }
+
+  public static function cloneFields__sceneDocumentLayoutBindings(source:FlightDocumentFields):FlightDocumentFields {
+    var out:FlightDocumentFields = cast _Runtime.UNDEFINED;
+    out = (cast {  });
+    for (__iteration13 in _Runtime.iterable(flight._internal.DynamicObject.entries(source))) {
+      var name:String = flight._internal._StaticIndex.readArray(__iteration13, 0.0);
+      var value:FlightDocumentValue = flight._internal._StaticIndex.readArray(__iteration13, 1.0);
+      _Runtime.setIndex(out, name, (cast _SceneDocument.cloneValue__sceneDocumentLayoutBindings(({ final __callArgument453:Dynamic = value; __callArgument453; })) : FlightDocumentValue));
+    }
+    return cast out;
+    return cast null;
+  }
+
+  public static function cloneValue__sceneDocumentLayoutBindings(value:FlightDocumentValue):FlightDocumentValue {
+    if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'object') : Bool)) : Bool)) { return cast value; }
+    if ((cast _Runtime.isArray(value) : Bool)) { return cast (cast _Runtime.mapArray((cast value : Array<flight._internal._Any>), _SceneDocument.cloneValue__sceneDocumentLayoutBindings, _Runtime.UNDEFINED)); }
+    return cast (cast _SceneDocument.cloneFields__sceneDocumentLayoutBindings((cast value : FlightDocumentFields)) : FlightDocumentFields);
+    return cast null;
+  }
+
+  public static final LAYOUT_KEYS__sceneDocumentLayoutBindings:Array<String> = (cast cast (['targets', 'tree'] : Array<Dynamic>));
+
+  public static final LAYOUT_NODE_KEYS__sceneDocumentLayoutBindings:Array<String> = (cast cast (['containerStyle', 'itemStyle', 'kind', 'parentIndex'] : Array<Dynamic>));
+
+  public static final LAYOUT_TREE_KEYS__sceneDocumentLayoutBindings:Array<String> = (cast cast (['nodes'] : Array<Dynamic>));
 
   public static function selectFlightDocumentScene(document:FlightDocument, dimension:String, ?requestedSceneIndex:Float):FlightDocumentSceneSelection__sceneDocumentMaterializationSelection {
     if (requestedSceneIndex == null) requestedSceneIndex = cast (_Runtime.field(document, 'defaultScene') : Dynamic);
     var scenes:Array<FlightDocumentScene> = cast _Runtime.UNDEFINED;
     var scene:FlightDocumentScene = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(_Runtime.field(document, 'version'), 1.0) : Bool)) {
-      return cast { refusal: _Runtime.mergeObjects([(cast createDocumentRefusal(({ final __callArgument230:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).VersionUnsupported; __callArgument230; }), (cast 'version' : String)) : FlightDocumentRefusalExplanation), { version: _Runtime.field(document, 'version') }]), scene: null, sceneIndex: null };
+      return cast { refusal: _Runtime.mergeObjects([(cast createDocumentRefusal(({ final __callArgument455:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).VersionUnsupported; __callArgument455; }), (cast 'version' : String)) : FlightDocumentRefusalExplanation), { version: _Runtime.field(document, 'version') }]), scene: null, sceneIndex: null };
     }
     scenes = (cast _Runtime.field(document, 'scenes') : Array<FlightDocumentScene>);
     if ((cast _Runtime.strictEquals(_Runtime.field(scenes, 'length'), 0.0) : Bool)) {
-      return cast { refusal: (cast createDocumentRefusal(({ final __callArgument232:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).ScenesEmpty; __callArgument232; }), (cast 'scenes' : String)) : FlightDocumentRefusalExplanation), scene: null, sceneIndex: null };
+      return cast { refusal: (cast createDocumentRefusal(({ final __callArgument457:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).ScenesEmpty; __callArgument457; }), (cast 'scenes' : String)) : FlightDocumentRefusalExplanation), scene: null, sceneIndex: null };
     }
     if ((cast !(cast (cast _SceneDocument.isSceneIndex__sceneDocumentMaterializationSelection((cast _Runtime.field(document, 'defaultScene') : Float), (cast _Runtime.field(scenes, 'length') : Float)) : Bool) : Bool) : Bool)) {
-      return cast { refusal: _Runtime.mergeObjects([(cast createDocumentRefusal(({ final __callArgument234:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).DefaultSceneOutOfRange; __callArgument234; }), (cast 'defaultScene' : String)) : FlightDocumentRefusalExplanation), { actual: _Runtime.field(document, 'defaultScene') }]), scene: null, sceneIndex: null };
+      return cast { refusal: _Runtime.mergeObjects([(cast createDocumentRefusal(({ final __callArgument459:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).DefaultSceneOutOfRange; __callArgument459; }), (cast 'defaultScene' : String)) : FlightDocumentRefusalExplanation), { actual: _Runtime.field(document, 'defaultScene') }]), scene: null, sceneIndex: null };
     }
     if ((cast !(cast (cast _SceneDocument.isSceneIndex__sceneDocumentMaterializationSelection((cast requestedSceneIndex : Float), (cast _Runtime.field(scenes, 'length') : Float)) : Bool) : Bool) : Bool)) {
-      return cast { refusal: (cast createSceneRefusal(({ final __callArgument236:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument236; }), (cast requestedSceneIndex : Float), (cast '' : String)) : FlightDocumentRefusalExplanation), scene: null, sceneIndex: null };
+      return cast { refusal: (cast createSceneRefusal(({ final __callArgument461:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument461; }), (cast requestedSceneIndex : Float), (cast '' : String)) : FlightDocumentRefusalExplanation), scene: null, sceneIndex: null };
     }
     scene = flight._internal._StaticIndex.readArray(scenes, requestedSceneIndex);
     if ((cast !_Runtime.strictEquals((cast scene : { var kind:String; }).kind, dimension) : Bool)) {
-      return cast { refusal: (cast createSceneRefusal(({ final __callArgument238:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument238; }), (cast requestedSceneIndex : Float), (cast 'kind' : String)) : FlightDocumentRefusalExplanation), scene: null, sceneIndex: null };
+      return cast { refusal: (cast createSceneRefusal(({ final __callArgument463:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument463; }), (cast requestedSceneIndex : Float), (cast 'kind' : String)) : FlightDocumentRefusalExplanation), scene: null, sceneIndex: null };
     }
     return cast { refusal: null, scene: scene, sceneIndex: requestedSceneIndex };
     return cast null;
@@ -1361,11 +2125,150 @@ class _SceneDocument {
     return cast null;
   }
 
+  public static function checkFlightDocumentFields(fields:FlightDocumentFields, fieldSchemas:Array<FlightDocumentFieldSchema>, sceneIndex:Float, fieldsPath:String):Null<FlightDocumentRefusalExplanation> {
+    for (fieldSchema in _Runtime.iterable(fieldSchemas)) {
+      var hasValue:Bool = _Runtime.callProperty(_Runtime.field(flight._internal.DynamicObject.field('prototype'), 'hasOwnProperty'), 'call', cast ([fields, _Runtime.field(fieldSchema, 'name')] : Array<Dynamic>));
+      if ((cast !(cast hasValue : Bool) : Bool)) {
+        if ((cast ((cast _Runtime.field(fieldSchema, 'required') : Bool) && (cast _Runtime.strictEquals(_Runtime.field(fieldSchema, 'defaultValue'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+          return cast (cast createSceneRefusal(({ final __callArgument467:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).FieldInvalid; __callArgument467; }), (cast sceneIndex : Float), (cast (cast _SceneDocument.appendFieldPath__sceneDocumentRefusal((cast fieldsPath : String), (cast _Runtime.field(fieldSchema, 'name') : String)) : String) : String)) : FlightDocumentRefusalExplanation);
+        }
+        continue;
+      }
+      if ((cast !(cast _Runtime.callProperty(fieldSchema, 'validate', cast ([_Runtime.getIndex(fields, _Runtime.field(fieldSchema, 'name'))] : Array<Dynamic>)) : Bool) : Bool)) {
+        return cast (cast createSceneRefusal(({ final __callArgument469:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).FieldInvalid; __callArgument469; }), (cast sceneIndex : Float), (cast (cast _SceneDocument.appendFieldPath__sceneDocumentRefusal((cast fieldsPath : String), (cast _Runtime.field(fieldSchema, 'name') : String)) : String) : String)) : FlightDocumentRefusalExplanation);
+      }
+    }
+    for (name in _Runtime.iterable(flight._internal.DynamicObject.keys(fields))) {
+      if ((cast _Runtime.callProperty(fieldSchemas, 'some', cast ([function(fieldSchema:FlightDocumentFieldSchema, __unused0:Float, __unused1:Array<FlightDocumentFieldSchema>):Bool return _Runtime.strictEquals(_Runtime.field(fieldSchema, 'name'), name)] : Array<Dynamic>)) : Bool)) { continue; }
+      return cast (cast createSceneRefusal(({ final __callArgument473:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).FieldInvalid; __callArgument473; }), (cast sceneIndex : Float), (cast (cast _SceneDocument.appendFieldPath__sceneDocumentRefusal((cast fieldsPath : String), (cast name : String)) : String) : String)) : FlightDocumentRefusalExplanation);
+    }
+    return cast null;
+    return cast null;
+  }
+
+  public static function checkFlightDocumentInteractiveStates(node:FlightDocumentNode, dimension:String, schemas:FlightDocumentSchemaRegistry, sceneIndex:Float, nodePath:String):Null<FlightDocumentRefusalExplanation> {
+    var states:Null<FlightDocumentInteractiveStates> = cast _Runtime.UNDEFINED;
+    states = _Runtime.coalesce(_Runtime.field(node, 'interactiveStates'), function():Dynamic return cast null);
+    if ((cast _Runtime.strictEquals(states, null) : Bool)) {
+      if ((cast !_Runtime.looseEquals(_Runtime.field(node, 'transition'), null) : Bool)) {
+        return cast (cast createSceneRefusal(({ final __callArgument475:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument475; }), (cast sceneIndex : Float), (cast '' + Std.string(nodePath) + '.transition' : String)) : FlightDocumentRefusalExplanation);
+      }
+    } else {
+      for (phase in _Runtime.iterable(flight._internal.DynamicObject.keys(states))) {
+        if ((cast !(cast _Runtime.includes(_SceneDocument.INTERACTIVE_STATE_PHASES__sceneDocumentRefusal, (cast phase : flight._internal._IndexedAccess<Dynamic, Float>)) : Bool) : Bool)) {
+          return cast (cast createSceneRefusal(({ final __callArgument479:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument479; }), (cast sceneIndex : Float), (cast '' + Std.string(nodePath) + '.interactiveStates.' + Std.string(phase) + '' : String)) : FlightDocumentRefusalExplanation);
+        }
+      }
+      var phaseCount:Float = 0.0;
+      for (phase in _Runtime.iterable(_SceneDocument.INTERACTIVE_STATE_PHASES__sceneDocumentRefusal)) {
+        var state:Null<FlightDocumentInteractiveState> = _Runtime.getIndex(states, phase);
+        if ((cast _Runtime.strictEquals(state, null) : Bool)) { continue; }
+        phaseCount++;
+        var refusal:Null<FlightDocumentRefusalExplanation> = (cast _SceneDocument.checkInteractiveState__sceneDocumentRefusal(({ final __callArgument483:Dynamic = node; __callArgument483; }), ({ final __callArgument484:Dynamic = state; __callArgument484; }), (cast dimension : String), ({ final __callArgument485:Dynamic = schemas; __callArgument485; }), (cast sceneIndex : Float), (cast '' + Std.string(nodePath) + '.interactiveStates.' + Std.string(phase) + '' : String)) : Null<FlightDocumentRefusalExplanation>);
+        if ((cast !_Runtime.strictEquals(refusal, null) : Bool)) { return cast refusal; }
+      }
+      if ((cast _Runtime.strictEquals(phaseCount, 0.0) : Bool)) {
+        return cast (cast createSceneRefusal(({ final __callArgument489:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument489; }), (cast sceneIndex : Float), (cast '' + Std.string(nodePath) + '.interactiveStates' : String)) : FlightDocumentRefusalExplanation);
+      }
+      if ((cast !_Runtime.looseEquals(_Runtime.field(node, 'transition'), null) : Bool)) {
+        var transitionSchema:Null<FlightDocumentInteractiveStateTransitionSchema> = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'interactiveStateTransitionSchemas') : Dynamic), (cast (cast _Runtime.field(node, 'transition') : FlightDocumentInteractiveStateTransitionDescriptor).kind : String)) : Null<FlightDocumentInteractiveStateTransitionSchema>);
+        if ((cast _Runtime.strictEquals(transitionSchema, null) : Bool)) {
+          return cast (cast _SceneDocument.createKindRefusal__sceneDocumentRefusal(({ final __callArgument491:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).InteractiveStateTransitionKindUnregistered; __callArgument491; }), (cast sceneIndex : Float), (cast '' + Std.string(nodePath) + '.transition' : String), (cast (cast _Runtime.field(node, 'transition') : FlightDocumentInteractiveStateTransitionDescriptor).kind : String)) : FlightDocumentRefusalExplanation);
+        }
+        var transitionRefusal:Null<FlightDocumentRefusalExplanation> = (cast checkFlightDocumentFields((cast _Runtime.field(node, 'transition') : FlightDocumentInteractiveStateTransitionDescriptor).fields, (cast transitionSchema : FlightDocumentInteractiveStateTransitionSchema).fields, (cast sceneIndex : Float), (cast '' + Std.string(nodePath) + '.transition' : String)) : Null<FlightDocumentRefusalExplanation>);
+        if ((cast !_Runtime.strictEquals(transitionRefusal, null) : Bool)) { return cast transitionRefusal; }
+      }
+    }
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(node, 'children'), 'length') : Float)) : Bool)) {
+        var childRefusal:Null<FlightDocumentRefusalExplanation> = (cast checkFlightDocumentInteractiveStates(flight._internal._StaticIndex.readArray(_Runtime.field(node, 'children'), i), (cast dimension : String), ({ final __callArgument493:Dynamic = schemas; __callArgument493; }), (cast sceneIndex : Float), (cast '' + Std.string(nodePath) + '.children[' + Std.string(i) + ']' : String)) : Null<FlightDocumentRefusalExplanation>);
+        if ((cast !_Runtime.strictEquals(childRefusal, null) : Bool)) { return cast childRefusal; }
+        i++;
+      }
+    }
+    return cast null;
+    return cast null;
+  }
+
+  public static function checkFlightDocumentNodeFields(node:FlightDocumentNode, schemas:FlightDocumentSchemaRegistry, sceneIndex:Float, nodePath:String):Null<FlightDocumentRefusalExplanation> {
+    var schema:Null<FlightDocumentNodeSchema> = cast _Runtime.UNDEFINED;
+    var fieldRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    schema = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(node, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
+    if ((cast _Runtime.strictEquals(schema, null) : Bool)) { return cast null; }
+    fieldRefusal = (cast checkFlightDocumentFields(_Runtime.field(node, 'fields'), (cast schema : FlightDocumentNodeSchema).fields, (cast sceneIndex : Float), (cast nodePath : String)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(fieldRefusal, null) : Bool)) { return cast fieldRefusal; }
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(node, 'children'), 'length') : Float)) : Bool)) {
+        var childPath:String = '' + Std.string(nodePath) + '.children[' + Std.string(i) + ']';
+        var childRefusal:Null<FlightDocumentRefusalExplanation> = (cast checkFlightDocumentNodeFields(flight._internal._StaticIndex.readArray(_Runtime.field(node, 'children'), i), ({ final __callArgument495:Dynamic = schemas; __callArgument495; }), (cast sceneIndex : Float), (cast childPath : String)) : Null<FlightDocumentRefusalExplanation>);
+        if ((cast !_Runtime.strictEquals(childRefusal, null) : Bool)) { return cast childRefusal; }
+        i++;
+      }
+    }
+    return cast null;
+    return cast null;
+  }
+
+  public static function checkInteractiveState__sceneDocumentRefusal(documentNode:FlightDocumentNode, state:FlightDocumentInteractiveState, dimension:String, schemas:FlightDocumentSchemaRegistry, sceneIndex:Float, statePath:String):Null<FlightDocumentRefusalExplanation> {
+    var stateValue:flight._internal._Record<String, flight._internal._Any> = cast _Runtime.UNDEFINED;
+    var fieldCount:Float = cast _Runtime.UNDEFINED;
+    var kinds:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
+    stateValue = (cast (cast state : flight._internal._Any) : flight._internal._Record<String, flight._internal._Any>);
+    for (name in _Runtime.iterable(flight._internal.DynamicObject.keys(stateValue))) {
+      if ((cast !(cast _Runtime.includes(_SceneDocument.INTERACTIVE_STATE_KEYS__sceneDocumentRefusal, name) : Bool) : Bool)) {
+        return cast (cast createSceneRefusal(({ final __callArgument499:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).FieldInvalid; __callArgument499; }), (cast sceneIndex : Float), (cast '' + Std.string(statePath) + '.' + Std.string(name) + '' : String)) : FlightDocumentRefusalExplanation);
+      }
+    }
+    if ((cast !(cast _Runtime.isArray(_Runtime.field(state, 'extensions')) : Bool) : Bool)) {
+      return cast (cast createSceneRefusal(({ final __callArgument501:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument501; }), (cast sceneIndex : Float), (cast '' + Std.string(statePath) + '.extensions' : String)) : FlightDocumentRefusalExplanation);
+    }
+    fieldCount = 0.0;
+    for (property in _Runtime.iterable(_SceneDocument.INTERACTIVE_STATE_PROPERTIES__sceneDocumentRefusal)) {
+      var value:Null<flight._internal._Union2<Float, Bool>> = _Runtime.getIndex(state, property);
+      if ((cast _Runtime.strictEquals(value, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { continue; }
+      fieldCount++;
+      if ((cast ((cast ((cast _Runtime.andValue(_Runtime.strictEquals(property, 'visible'), function():Dynamic return cast !_Runtime.strictEquals(_Runtime.typeofValue(value), 'boolean')) : Bool) || (cast _Runtime.andValue(!_Runtime.strictEquals(property, 'visible'), function():Dynamic return cast _Runtime.orValue(!_Runtime.strictEquals(_Runtime.typeofValue(value), 'number'), function():Dynamic return cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool))) : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals(dimension, 'Scene3D'), function():Dynamic return cast _Runtime.includes(_SceneDocument.INTERACTIVE_STATE_2D_PROPERTIES__sceneDocumentRefusal, property)) : Bool)) : Bool)) {
+        return cast (cast createSceneRefusal(({ final __callArgument505:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).FieldInvalid; __callArgument505; }), (cast sceneIndex : Float), (cast '' + Std.string(statePath) + '.' + Std.string(property) + '' : String)) : FlightDocumentRefusalExplanation);
+      }
+    }
+    if ((cast ((cast _Runtime.strictEquals(fieldCount, 0.0) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(_Runtime.field(state, 'extensions'), 'length'), 0.0) : Bool)) : Bool)) {
+      return cast (cast createSceneRefusal(({ final __callArgument507:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).StructureInvalid; __callArgument507; }), (cast sceneIndex : Float), (cast statePath : String)) : FlightDocumentRefusalExplanation);
+    }
+    kinds = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(state, 'extensions'), 'length') : Float)) : Bool)) {
+        var extension:FlightDocumentInteractiveStateExtensionDescriptor = flight._internal._StaticIndex.readArray(_Runtime.field(state, 'extensions'), i);
+        var extensionPath:String = '' + Std.string(statePath) + '.extensions[' + Std.string(i) + ']';
+        if ((cast ((cast kinds : flight._internal._Set<String>).has((cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind)) : Bool)) {
+          return cast (cast _SceneDocument.createKindRefusal__sceneDocumentRefusal(({ final __callArgument509:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).InteractiveStateExtensionKindDuplicate; __callArgument509; }), (cast sceneIndex : Float), (cast extensionPath : String), (cast (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind : String)) : FlightDocumentRefusalExplanation);
+        }
+        ((cast kinds : flight._internal._Set<String>).add((cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind));
+        var schema:Null<FlightDocumentInteractiveStateExtensionSchema> = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'interactiveStateExtensionSchemas') : Dynamic), (cast (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind : String)) : Null<FlightDocumentInteractiveStateExtensionSchema>);
+        if ((cast _Runtime.strictEquals(schema, null) : Bool)) {
+          return cast (cast _SceneDocument.createKindRefusal__sceneDocumentRefusal(({ final __callArgument511:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).InteractiveStateExtensionKindUnregistered; __callArgument511; }), (cast sceneIndex : Float), (cast extensionPath : String), (cast (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind : String)) : FlightDocumentRefusalExplanation);
+        }
+        var fieldsRefusal:Null<FlightDocumentRefusalExplanation> = (cast checkFlightDocumentFields((cast extension : FlightDocumentInteractiveStateExtensionDescriptor).fields, (cast schema : FlightDocumentInteractiveStateExtensionSchema).fields, (cast sceneIndex : Float), (cast extensionPath : String)) : Null<FlightDocumentRefusalExplanation>);
+        if ((cast !_Runtime.strictEquals(fieldsRefusal, null) : Bool)) { return cast fieldsRefusal; }
+        var nodeSchema:Null<FlightDocumentNodeSchema> = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(documentNode, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
+        var probe:Null<NodeAny> = _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural513 = nodeSchema; __structural513 == null ? _Runtime.UNDEFINED : (cast __structural513 : { var createNode:FlightDocumentNodeFactory; }).createNode; }), cast ([_Runtime.field(documentNode, 'fields'), {  }] : Array<Dynamic>)), function():Dynamic return cast null);
+        if ((cast ((cast !_Runtime.strictEquals(probe, null) : Bool) && (cast !(cast (cast schema : FlightDocumentInteractiveStateExtensionSchema).isSupported((cast probe : NodeAny)) : Bool) : Bool)) : Bool)) {
+          return cast (cast _SceneDocument.createKindRefusal__sceneDocumentRefusal(({ final __callArgument514:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).InteractiveStateTargetUnsupported; __callArgument514; }), (cast sceneIndex : Float), (cast extensionPath : String), (cast (cast extension : FlightDocumentInteractiveStateExtensionDescriptor).kind : String)) : FlightDocumentRefusalExplanation);
+        }
+        i++;
+      }
+    }
+    return cast null;
+    return cast null;
+  }
+
   public static function checkUnregisteredNodeKinds(node:FlightDocumentNode, schemas:FlightDocumentSchemaRegistry, sceneIndex:Float, nodePath:String):Null<FlightDocumentRefusalExplanation> {
     var schema:Null<FlightDocumentNodeSchema> = cast _Runtime.UNDEFINED;
     schema = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(node, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
     if ((cast _Runtime.strictEquals(schema, null) : Bool)) {
-      var refusal:FlightDocumentRefusalExplanation = (cast createSceneRefusal(({ final __callArgument240:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).NodeKindUnregistered; __callArgument240; }), (cast sceneIndex : Float), (cast nodePath : String)) : FlightDocumentRefusalExplanation);
+      var refusal:FlightDocumentRefusalExplanation = (cast createSceneRefusal(({ final __callArgument516:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).NodeKindUnregistered; __callArgument516; }), (cast sceneIndex : Float), (cast nodePath : String)) : FlightDocumentRefusalExplanation);
       ((cast refusal : FlightDocumentRefusalExplanation).kind = _Runtime.field(node, 'kind'));
       return cast refusal;
     }
@@ -1373,7 +2276,7 @@ class _SceneDocument {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(_Runtime.field(node, 'children'), 'length') : Float)) : Bool)) {
         var childPath:String = '' + Std.string(nodePath) + '.children[' + Std.string(i) + ']';
-        var childRefusal:Null<FlightDocumentRefusalExplanation> = (cast checkUnregisteredNodeKinds(flight._internal._StaticIndex.readArray(_Runtime.field(node, 'children'), i), ({ final __callArgument242:Dynamic = schemas; __callArgument242; }), (cast sceneIndex : Float), (cast childPath : String)) : Null<FlightDocumentRefusalExplanation>);
+        var childRefusal:Null<FlightDocumentRefusalExplanation> = (cast checkUnregisteredNodeKinds(flight._internal._StaticIndex.readArray(_Runtime.field(node, 'children'), i), ({ final __callArgument518:Dynamic = schemas; __callArgument518; }), (cast sceneIndex : Float), (cast childPath : String)) : Null<FlightDocumentRefusalExplanation>);
         if ((cast !_Runtime.strictEquals(childRefusal, null) : Bool)) { return cast childRefusal; }
         i++;
       }
@@ -1393,7 +2296,7 @@ class _SceneDocument {
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue(kind), 'string') : Bool)) { return cast null; }
     schema = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast kind : String)) : Null<FlightDocumentNodeSchema>);
     if ((cast _Runtime.strictEquals(schema, null) : Bool)) {
-      var refusal:FlightDocumentRefusalExplanation = (cast createSceneRefusal(({ final __callArgument244:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).NodeKindUnregistered; __callArgument244; }), (cast sceneIndex : Float), (cast nodePath : String)) : FlightDocumentRefusalExplanation);
+      var refusal:FlightDocumentRefusalExplanation = (cast createSceneRefusal(({ final __callArgument520:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).NodeKindUnregistered; __callArgument520; }), (cast sceneIndex : Float), (cast nodePath : String)) : FlightDocumentRefusalExplanation);
       ((cast refusal : FlightDocumentRefusalExplanation).kind = kind);
       return cast refusal;
     }
@@ -1403,7 +2306,7 @@ class _SceneDocument {
         var i:Float = 0.0;
         while ((cast ((cast i : Float) < (cast _Runtime.field(childrenRaw, 'length') : Float)) : Bool)) {
           var childPath:String = '' + Std.string(nodePath) + '.children[' + Std.string(i) + ']';
-          var childRefusal:Null<FlightDocumentRefusalExplanation> = (cast checkUnregisteredNodeKindsFromRaw((cast flight._internal._StaticIndex.readArray(childrenRaw, i) : flight._internal._Any), ({ final __callArgument246:Dynamic = schemas; __callArgument246; }), (cast sceneIndex : Float), (cast childPath : String)) : Null<FlightDocumentRefusalExplanation>);
+          var childRefusal:Null<FlightDocumentRefusalExplanation> = (cast checkUnregisteredNodeKindsFromRaw((cast flight._internal._StaticIndex.readArray(childrenRaw, i) : flight._internal._Any), ({ final __callArgument522:Dynamic = schemas; __callArgument522; }), (cast sceneIndex : Float), (cast childPath : String)) : Null<FlightDocumentRefusalExplanation>);
           if ((cast !_Runtime.strictEquals(childRefusal, null) : Bool)) { return cast childRefusal; }
           i++;
         }
@@ -1414,19 +2317,51 @@ class _SceneDocument {
   }
 
   public static function createDocumentRefusal(reason:FlightDocumentRefusalReasonType, path:String):FlightDocumentRefusalExplanation {
-    return cast { actual: null, column: null, kind: null, limit: null, line: null, offset: null, path: path, reason: reason, resourceKey: null, version: null };
+    return cast { actual: null, column: null, kind: null, limit: null, line: null, mode: null, offset: null, path: path, reason: reason, resourceKey: null, tokenKey: null, version: null };
     return cast null;
   }
 
   public static function createSceneRefusal(reason:FlightDocumentRefusalReasonType, sceneIndex:Float, innerPath:String):FlightDocumentRefusalExplanation {
     var path:String = cast _Runtime.UNDEFINED;
     path = ((cast _Runtime.strictEquals(innerPath, '') : Bool) ? (cast 'scenes[' + Std.string(sceneIndex) + ']' : Dynamic) : (cast 'scenes[' + Std.string(sceneIndex) + '].' + Std.string(innerPath) + '' : Dynamic));
-    return cast (cast createDocumentRefusal(({ final __callArgument248:Dynamic = reason; __callArgument248; }), (cast path : String)) : FlightDocumentRefusalExplanation);
+    return cast (cast createDocumentRefusal(({ final __callArgument524:Dynamic = reason; __callArgument524; }), (cast path : String)) : FlightDocumentRefusalExplanation);
     return cast null;
   }
 
-  public static function createFlightDocumentFromScene2D(source:Scene2D, schemas:FlightDocumentSchemaRegistry):FlightDocumentScene2D {
-    return cast { backgroundColor: _Runtime.field(source, 'color'), kind: 'Scene2D', scene: (cast _SceneDocument.writeNode__sceneDocumentScene2DMaterialization(({ final __callArgument250:Dynamic = _Runtime.field(source, 'root'); __callArgument250; }), ({ final __callArgument251:Dynamic = schemas; __callArgument251; })) : FlightDocumentNode) };
+  public static function createKindRefusal__sceneDocumentRefusal(reason:FlightDocumentRefusalReasonType, sceneIndex:Float, innerPath:String, kind:String):FlightDocumentRefusalExplanation {
+    var refusal:FlightDocumentRefusalExplanation = cast _Runtime.UNDEFINED;
+    refusal = (cast createSceneRefusal(({ final __callArgument526:Dynamic = reason; __callArgument526; }), (cast sceneIndex : Float), (cast innerPath : String)) : FlightDocumentRefusalExplanation);
+    ((cast refusal : FlightDocumentRefusalExplanation).kind = kind);
+    return cast refusal;
+    return cast null;
+  }
+
+  public static function appendFieldPath__sceneDocumentRefusal(path:String, field:String):String {
+    return cast ((cast _Runtime.strictEquals(path, '') : Bool) ? (cast field : Dynamic) : (cast '' + Std.string(path) + '.' + Std.string(field) + '' : Dynamic));
+    return cast null;
+  }
+
+  public static final INTERACTIVE_STATE_2D_PROPERTIES__sceneDocumentRefusal:Array<String> = (cast cast (['scaleX', 'scaleY', 'x', 'y'] : Array<Dynamic>));
+
+  public static final INTERACTIVE_STATE_KEYS__sceneDocumentRefusal:Array<String> = (cast cast (['alpha', 'extensions', 'scaleX', 'scaleY', 'visible', 'x', 'y'] : Array<Dynamic>));
+
+  public static final INTERACTIVE_STATE_PHASES__sceneDocumentRefusal:Array<String> = (cast cast (['disabled', 'hover', 'pressed'] : Array<Dynamic>));
+
+  public static final INTERACTIVE_STATE_PROPERTIES__sceneDocumentRefusal:Array<String> = (cast cast (['alpha', 'scaleX', 'scaleY', 'visible', 'x', 'y'] : Array<Dynamic>));
+
+  public static function createFlightDocumentFromScene2D(source:Scene2D, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>):FlightDocumentScene2D {
+    if (interactiveStateBindings == null) interactiveStateBindings = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    if (layoutBindings == null) layoutBindings = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    var bindingLookup:flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<Node2D>> = cast _Runtime.UNDEFINED;
+    var usedBindings:flight._internal._Set<NodeAny> = cast _Runtime.UNDEFINED;
+    var writtenNodes:flight._internal._Map<NodeAny, FlightDocumentNode> = cast _Runtime.UNDEFINED;
+    var scene:FlightDocumentNode = cast _Runtime.UNDEFINED;
+    bindingLookup = (cast (cast createInteractiveStateBindingLookup : Array<FlightDocumentInteractiveStateBinding<Node2D>>->flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<Node2D>>)(({ final __callArgument528:Dynamic = interactiveStateBindings; __callArgument528; })) : flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<Node2D>>);
+    usedBindings = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+    writtenNodes = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    scene = (cast _SceneDocument.writeNode__sceneDocumentScene2DMaterialization(({ final __callArgument530:Dynamic = _Runtime.field(source, 'root'); __callArgument530; }), ({ final __callArgument531:Dynamic = schemas; __callArgument531; }), ({ final __callArgument532:Dynamic = bindingLookup; __callArgument532; }), ({ final __callArgument533:Dynamic = usedBindings; __callArgument533; }), ({ final __callArgument534:Dynamic = writtenNodes; __callArgument534; })) : FlightDocumentNode);
+    assertAllInteractiveStateBindingsUsed(({ final __callArgument540:Dynamic = bindingLookup; __callArgument540; }), ({ final __callArgument541:Dynamic = usedBindings; __callArgument541; }));
+    return cast { backgroundColor: _Runtime.field(source, 'color'), kind: 'Scene2D', layouts: (cast writeFlightDocumentLayoutBindings(({ final __callArgument544:Dynamic = layoutBindings; __callArgument544; }), _Runtime.field(source, 'root'), ({ final __callArgument545:Dynamic = writtenNodes; __callArgument545; })) : Array<FlightDocumentLayoutDescriptor>), scene: scene, tokens: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
@@ -1435,18 +2370,38 @@ class _SceneDocument {
     var selection:FlightDocumentSceneSelection__sceneDocumentMaterializationSelection = cast _Runtime.UNDEFINED;
     var documentScene:FlightDocumentScene2D = cast _Runtime.UNDEFINED;
     var unregisteredRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    var fieldRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    var interactiveRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    var layoutRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
     var scene:Scene2D = cast _Runtime.UNDEFINED;
     var resources:flight._internal._Record<String, flight._internal._Any> = cast _Runtime.UNDEFINED;
-    selection = (cast selectFlightDocumentScene(({ final __callArgument254:Dynamic = document; __callArgument254; }), (cast 'Scene2D' : String), (cast sceneIndex : Float)) : FlightDocumentSceneSelection__sceneDocumentMaterializationSelection);
+    var materializedNodes:flight._internal._Map<FlightDocumentNode, Node2D> = cast _Runtime.UNDEFINED;
+    var interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>> = cast _Runtime.UNDEFINED;
+    var layoutBindings:Null<Array<FlightDocumentLayoutBinding<Node2D>>> = cast _Runtime.UNDEFINED;
+    selection = (cast selectFlightDocumentScene(({ final __callArgument548:Dynamic = document; __callArgument548; }), (cast 'Scene2D' : String), (cast sceneIndex : Float)) : FlightDocumentSceneSelection__sceneDocumentMaterializationSelection);
     if ((cast ((cast !_Runtime.strictEquals((cast selection : { var refusal:Null<FlightDocumentRefusalExplanation>; }).refusal, null) : Bool) || (cast !_Runtime.strictEquals((cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var kind:String; }).kind, 'Scene2D') : Bool)) : Bool)) { return cast null; }
     documentScene = (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene;
-    unregisteredRefusal = (cast checkUnregisteredNodeKinds(_Runtime.field(documentScene, 'scene'), ({ final __callArgument256:Dynamic = schemas; __callArgument256; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    unregisteredRefusal = (cast checkUnregisteredNodeKinds(_Runtime.field(documentScene, 'scene'), ({ final __callArgument550:Dynamic = schemas; __callArgument550; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
     if ((cast !_Runtime.strictEquals(unregisteredRefusal, null) : Bool)) { return cast null; }
-    scene = (cast createScene2D(({ final __callArgument258:Dynamic = { color: _Runtime.field(documentScene, 'backgroundColor') }; __callArgument258; })) : Scene2D);
-    resources = (cast _SceneDocument.resolveResources__sceneDocumentScene2DMaterialization(_Runtime.field(document, 'resources'), ({ final __callArgument260:Dynamic = resolvers; __callArgument260; })) : flight._internal._Record<String, flight._internal._Any>);
-    if ((cast !(cast (cast _SceneDocument.adoptDocumentRoot2D__sceneDocumentScene2DMaterialization(({ final __callArgument262:Dynamic = scene; __callArgument262; }), _Runtime.field(documentScene, 'scene'), ({ final __callArgument263:Dynamic = schemas; __callArgument263; }), ({ final __callArgument264:Dynamic = resources; __callArgument264; })) : Bool) : Bool) : Bool)) { return cast null; }
-    _SceneDocument.materializeChildren__sceneDocumentScene2DMaterialization(({ final __callArgument268:Dynamic = (cast scene : Scene2D).root; __callArgument268; }), (cast _Runtime.field(documentScene, 'scene') : FlightDocumentNode).children, ({ final __callArgument269:Dynamic = schemas; __callArgument269; }), ({ final __callArgument270:Dynamic = resources; __callArgument270; }));
-    return cast { scene: scene };
+    fieldRefusal = (cast checkFlightDocumentNodeFields(_Runtime.field(documentScene, 'scene'), ({ final __callArgument552:Dynamic = schemas; __callArgument552; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(fieldRefusal, null) : Bool)) { return cast null; }
+    interactiveRefusal = (cast checkFlightDocumentInteractiveStates(_Runtime.field(documentScene, 'scene'), (cast 'Scene2D' : String), ({ final __callArgument554:Dynamic = schemas; __callArgument554; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(interactiveRefusal, null) : Bool)) { return cast null; }
+    layoutRefusal = (cast checkFlightDocumentLayoutTargets((cast _Runtime.field(documentScene, 'layouts') : Dynamic), _Runtime.field(documentScene, 'scene'), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(layoutRefusal, null) : Bool)) { return cast null; }
+    scene = (cast createScene2D(({ final __callArgument556:Dynamic = { color: _Runtime.field(documentScene, 'backgroundColor') }; __callArgument556; })) : Scene2D);
+    resources = (cast _SceneDocument.resolveResources__sceneDocumentScene2DMaterialization(_Runtime.field(document, 'resources'), ({ final __callArgument558:Dynamic = resolvers; __callArgument558; })) : flight._internal._Record<String, flight._internal._Any>);
+    if ((cast !(cast (cast _SceneDocument.adoptDocumentRoot2D__sceneDocumentScene2DMaterialization(({ final __callArgument560:Dynamic = scene; __callArgument560; }), _Runtime.field(documentScene, 'scene'), ({ final __callArgument561:Dynamic = schemas; __callArgument561; }), ({ final __callArgument562:Dynamic = resources; __callArgument562; })) : Bool) : Bool) : Bool)) { return cast null; }
+    materializedNodes = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    ((cast materializedNodes : flight._internal._Map<FlightDocumentNode, Node2D>).set(_Runtime.field(documentScene, 'scene'), (cast (cast scene : Scene2D).root)));
+    interactiveStateBindings = (cast cast ([] : Array<Dynamic>));
+    if ((cast !(cast (cast _SceneDocument.appendInteractiveStateBinding__sceneDocumentScene2DMaterialization(({ final __callArgument566:Dynamic = interactiveStateBindings; __callArgument566; }), (cast scene : Scene2D).root, _Runtime.field(documentScene, 'scene'), ({ final __callArgument567:Dynamic = schemas; __callArgument567; })) : Bool) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast _SceneDocument.materializeChildren__sceneDocumentScene2DMaterialization(({ final __callArgument570:Dynamic = (cast scene : Scene2D).root; __callArgument570; }), (cast _Runtime.field(documentScene, 'scene') : FlightDocumentNode).children, ({ final __callArgument571:Dynamic = schemas; __callArgument571; }), ({ final __callArgument572:Dynamic = resources; __callArgument572; }), ({ final __callArgument573:Dynamic = interactiveStateBindings; __callArgument573; }), ({ final __callArgument574:Dynamic = materializedNodes; __callArgument574; })) : Bool) : Bool) : Bool)) {
+      return cast null;
+    }
+    layoutBindings = (cast createFlightDocumentLayoutBindings((cast _Runtime.field(documentScene, 'layouts') : Dynamic), _Runtime.field(documentScene, 'scene'), ({ final __callArgument580:Dynamic = materializedNodes; __callArgument580; })) : Null<Array<FlightDocumentLayoutBinding<Node2D>>>);
+    if ((cast _Runtime.strictEquals(layoutBindings, null) : Bool)) { return cast null; }
+    return cast { interactiveStateBindings: interactiveStateBindings, layoutBindings: layoutBindings, scene: scene };
     return cast null;
   }
 
@@ -1454,7 +2409,7 @@ class _SceneDocument {
     var document:Null<FlightDocument> = cast _Runtime.UNDEFINED;
     document = (cast parseFlightDocumentText((cast text : String)) : Null<FlightDocument>);
     if ((cast _Runtime.strictEquals(document, null) : Bool)) { return cast null; }
-    return cast (cast createFlightDocumentScene2DMaterialization(({ final __callArgument274:Dynamic = document; __callArgument274; }), ({ final __callArgument275:Dynamic = schemas; __callArgument275; }), ({ final __callArgument276:Dynamic = resolvers; __callArgument276; }), #if js (cast sceneIndex : Float) #else (cast sceneIndex : Null<Float>) #end) : Null<FlightDocumentScene2DMaterialization>);
+    return cast (cast createFlightDocumentScene2DMaterialization(({ final __callArgument582:Dynamic = document; __callArgument582; }), ({ final __callArgument583:Dynamic = schemas; __callArgument583; }), ({ final __callArgument584:Dynamic = resolvers; __callArgument584; }), #if js (cast sceneIndex : Float) #else (cast sceneIndex : Null<Float>) #end) : Null<FlightDocumentScene2DMaterialization>);
     return cast null;
   }
 
@@ -1462,11 +2417,20 @@ class _SceneDocument {
     if (sceneIndex == null) sceneIndex = cast (_Runtime.field(document, 'defaultScene') : Dynamic);
     var selection:FlightDocumentSceneSelection__sceneDocumentMaterializationSelection = cast _Runtime.UNDEFINED;
     var unregistered:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
-    selection = (cast selectFlightDocumentScene(({ final __callArgument280:Dynamic = document; __callArgument280; }), (cast dimension : String), (cast sceneIndex : Float)) : FlightDocumentSceneSelection__sceneDocumentMaterializationSelection);
+    var fieldRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    var interactiveRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    var layoutRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    selection = (cast selectFlightDocumentScene(({ final __callArgument588:Dynamic = document; __callArgument588; }), (cast dimension : String), (cast sceneIndex : Float)) : FlightDocumentSceneSelection__sceneDocumentMaterializationSelection);
     if ((cast !_Runtime.strictEquals((cast selection : { var refusal:Null<FlightDocumentRefusalExplanation>; }).refusal, null) : Bool)) { return cast (cast selection : { var refusal:FlightDocumentRefusalExplanation; var scene:flight._internal._Any; var sceneIndex:flight._internal._Any; }).refusal; }
-    unregistered = (cast checkUnregisteredNodeKinds((cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var scene:FlightDocumentNode; }).scene, ({ final __callArgument282:Dynamic = schemas; __callArgument282; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    unregistered = (cast checkUnregisteredNodeKinds((cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var scene:FlightDocumentNode; }).scene, ({ final __callArgument590:Dynamic = schemas; __callArgument590; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
     if ((cast !_Runtime.strictEquals(unregistered, null) : Bool)) { return cast unregistered; }
-    return cast (cast _SceneDocument.checkRootKindDimension__sceneDocumentScene2DMaterialization((cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var scene:FlightDocumentNode; }).scene, (cast dimension : String), ({ final __callArgument284:Dynamic = schemas; __callArgument284; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float)) : Null<FlightDocumentRefusalExplanation>);
+    fieldRefusal = (cast checkFlightDocumentNodeFields((cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var scene:FlightDocumentNode; }).scene, ({ final __callArgument592:Dynamic = schemas; __callArgument592; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(fieldRefusal, null) : Bool)) { return cast fieldRefusal; }
+    interactiveRefusal = (cast checkFlightDocumentInteractiveStates((cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var scene:FlightDocumentNode; }).scene, (cast dimension : String), ({ final __callArgument594:Dynamic = schemas; __callArgument594; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(interactiveRefusal, null) : Bool)) { return cast interactiveRefusal; }
+    layoutRefusal = (cast checkFlightDocumentLayoutTargets((cast (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var layouts:Array<FlightDocumentLayoutDescriptor>; }).layouts : Dynamic), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var scene:FlightDocumentNode; }).scene, (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(layoutRefusal, null) : Bool)) { return cast layoutRefusal; }
+    return cast (cast _SceneDocument.checkRootKindDimension__sceneDocumentScene2DMaterialization((cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var scene:FlightDocumentNode; }).scene, (cast dimension : String), ({ final __callArgument596:Dynamic = schemas; __callArgument596; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float)) : Null<FlightDocumentRefusalExplanation>);
     return cast null;
   }
 
@@ -1474,19 +2438,33 @@ class _SceneDocument {
     var document:Null<FlightDocument> = cast _Runtime.UNDEFINED;
     document = (cast parseFlightDocumentText((cast text : String)) : Null<FlightDocument>);
     if ((cast _Runtime.strictEquals(document, null) : Bool)) { return cast (cast explainFlightDocumentText((cast text : String)) : Null<FlightDocumentRefusalExplanation>); }
-    return cast (cast explainFlightDocumentRefusal(({ final __callArgument286:Dynamic = document; __callArgument286; }), (cast dimension : String), ({ final __callArgument287:Dynamic = schemas; __callArgument287; }), #if js (cast sceneIndex : Float) #else (cast sceneIndex : Null<Float>) #end) : Null<FlightDocumentRefusalExplanation>);
+    return cast (cast explainFlightDocumentRefusal(({ final __callArgument598:Dynamic = document; __callArgument598; }), (cast dimension : String), ({ final __callArgument599:Dynamic = schemas; __callArgument599; }), #if js (cast sceneIndex : Float) #else (cast sceneIndex : Null<Float>) #end) : Null<FlightDocumentRefusalExplanation>);
     return cast null;
   }
 
-  public static function materializeChildren__sceneDocumentScene2DMaterialization(parent:NodeAny, children:Array<FlightDocumentNode>, schemas:FlightDocumentSchemaRegistry, resources:FlightDocumentResourceLookup):Void {
+  public static function materializeChildren__sceneDocumentScene2DMaterialization(parent:NodeAny, children:Array<FlightDocumentNode>, schemas:FlightDocumentSchemaRegistry, resources:FlightDocumentResourceLookup, interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>, materializedNodes:flight._internal._Map<FlightDocumentNode, Node2D>):Bool {
     for (child in _Runtime.iterable(children)) {
       var schema:Null<FlightDocumentNodeSchema> = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(child, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
       if ((cast _Runtime.strictEquals(schema, null) : Bool)) { continue; }
-      var node:Null<NodeAny> = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(child, 'fields'), ({ final __callArgument292:Dynamic = resources; __callArgument292; }));
+      var node:Null<NodeAny> = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(child, 'fields'), ({ final __callArgument604:Dynamic = resources; __callArgument604; }));
       if ((cast _Runtime.strictEquals(node, null) : Bool)) { continue; }
       addNodeChild((cast parent : Dynamic), (cast node : Dynamic));
-      _SceneDocument.materializeChildren__sceneDocumentScene2DMaterialization(({ final __callArgument293:Dynamic = node; __callArgument293; }), _Runtime.field(child, 'children'), ({ final __callArgument294:Dynamic = schemas; __callArgument294; }), ({ final __callArgument295:Dynamic = resources; __callArgument295; }));
+      ((cast materializedNodes : flight._internal._Map<FlightDocumentNode, Node2D>).set(child, (cast (cast node : Node2D))));
+      if ((cast !(cast (cast _SceneDocument.appendInteractiveStateBinding__sceneDocumentScene2DMaterialization(({ final __callArgument605:Dynamic = interactiveStateBindings; __callArgument605; }), (cast node : Node2D), ({ final __callArgument606:Dynamic = child; __callArgument606; }), ({ final __callArgument607:Dynamic = schemas; __callArgument607; })) : Bool) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast (cast _SceneDocument.materializeChildren__sceneDocumentScene2DMaterialization(({ final __callArgument611:Dynamic = node; __callArgument611; }), _Runtime.field(child, 'children'), ({ final __callArgument612:Dynamic = schemas; __callArgument612; }), ({ final __callArgument613:Dynamic = resources; __callArgument613; }), ({ final __callArgument614:Dynamic = interactiveStateBindings; __callArgument614; }), ({ final __callArgument615:Dynamic = materializedNodes; __callArgument615; })) : Bool) : Bool) : Bool)) {
+        return cast false;
+      }
     }
+    return cast true;
+    return cast null;
+  }
+
+  public static function appendInteractiveStateBinding__sceneDocumentScene2DMaterialization(out:Array<FlightDocumentInteractiveStateBinding<Node2D>>, node:Node2D, documentNode:FlightDocumentNode, schemas:FlightDocumentSchemaRegistry):Bool {
+    if ((cast _Runtime.looseEquals(_Runtime.field(documentNode, 'interactiveStates'), null) : Bool)) { return cast true; }
+    if ((cast !(cast (cast isInteractiveStateBindingTargetSupported(({ final __callArgument621:Dynamic = node; __callArgument621; }), ({ final __callArgument622:Dynamic = documentNode; __callArgument622; }), ({ final __callArgument623:Dynamic = schemas; __callArgument623; })) : Bool) : Bool) : Bool)) { return cast false; }
+    _Runtime.callProperty(out, 'push', cast ([{ interactiveStates: _Runtime.field(documentNode, 'interactiveStates'), node: node, transition: _Runtime.coalesce(_Runtime.field(documentNode, 'transition'), function():Dynamic return cast null) }] : Array<Dynamic>));
+    return cast true;
+    return cast null;
   }
 
   public static function resolveResources__sceneDocumentScene2DMaterialization(descriptors:Array<FlightDocumentResourceDescriptor>, ?resolvers:FlightDocumentResourceResolverRegistry):FlightDocumentResourceLookup {
@@ -1496,24 +2474,29 @@ class _SceneDocument {
     for (descriptor in _Runtime.iterable(descriptors)) {
       var resolver:Null<FlightDocumentResourceResolver> = (cast getRegistryTableEntry((cast _Runtime.field(resolvers, 'resolvers') : Dynamic), (cast _Runtime.field(descriptor, 'kind') : String)) : Null<FlightDocumentResourceResolver>);
       if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { continue; }
-      var resolved:flight._internal._Any = resolver((cast _Runtime.field(descriptor, 'key') : String), ({ final __callArgument301:Dynamic = descriptor; __callArgument301; }));
+      var resolved:flight._internal._Any = resolver((cast _Runtime.field(descriptor, 'key') : String), ({ final __callArgument629:Dynamic = descriptor; __callArgument629; }));
       if ((cast !_Runtime.strictEquals(resolved, null) : Bool)) { _Runtime.setIndex(out, _Runtime.field(descriptor, 'key'), resolved); }
     }
     return cast out;
     return cast null;
   }
 
-  public static function writeNode__sceneDocumentScene2DMaterialization(source:NodeAny, schemas:FlightDocumentSchemaRegistry):FlightDocumentNode {
+  public static function writeNode__sceneDocumentScene2DMaterialization(source:NodeAny, schemas:FlightDocumentSchemaRegistry, bindings:flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<Dynamic>>, usedBindings:flight._internal._Set<NodeAny>, writtenNodes:flight._internal._Map<NodeAny, FlightDocumentNode>):FlightDocumentNode {
     var fields:FlightDocumentFields = cast _Runtime.UNDEFINED;
     var schema:Null<FlightDocumentNodeSchema> = cast _Runtime.UNDEFINED;
     var children:Array<flight._internal._Any> = cast _Runtime.UNDEFINED;
+    var metadata:FlightDocumentInteractiveStateMetadata__sceneDocumentInteractiveStateBindings = cast _Runtime.UNDEFINED;
+    var documentNode:FlightDocumentNode = cast _Runtime.UNDEFINED;
     fields = (cast {  });
     schema = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(source, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
     if ((cast !_Runtime.strictEquals(schema, null) : Bool)) {
-      _SceneDocument.writeFieldsWithDefaults__sceneDocumentScene2DMaterialization(({ final __callArgument303:Dynamic = fields; __callArgument303; }), ({ final __callArgument304:Dynamic = source; __callArgument304; }), ({ final __callArgument305:Dynamic = schema; __callArgument305; }));
+      _SceneDocument.writeFieldsWithDefaults__sceneDocumentScene2DMaterialization(({ final __callArgument631:Dynamic = fields; __callArgument631; }), ({ final __callArgument632:Dynamic = source; __callArgument632; }), ({ final __callArgument633:Dynamic = schema; __callArgument633; }));
     }
     children = (cast getNodeChildren((cast source : Dynamic)) : Array<flight._internal._Any>);
-    return cast { children: (cast _Runtime.mapArray((cast children : Array<flight._internal._Any>), function(child:flight._internal._Any, __unused0:Float, __unused1:Array<flight._internal._Any>):FlightDocumentNode return (cast _SceneDocument.writeNode__sceneDocumentScene2DMaterialization(({ final __callArgument309:Dynamic = child; __callArgument309; }), ({ final __callArgument310:Dynamic = schemas; __callArgument310; })) : FlightDocumentNode), _Runtime.UNDEFINED)), fields: fields, kind: _Runtime.field(source, 'kind') };
+    metadata = (cast readInteractiveStateBindingMetadata(({ final __callArgument637:Dynamic = source; __callArgument637; }), ({ final __callArgument638:Dynamic = bindings; __callArgument638; }), ({ final __callArgument639:Dynamic = usedBindings; __callArgument639; }), ({ final __callArgument640:Dynamic = schemas; __callArgument640; })) : FlightDocumentInteractiveStateMetadata__sceneDocumentInteractiveStateBindings);
+    documentNode = (cast { children: (cast _Runtime.mapArray((cast children : Array<flight._internal._Any>), function(child:flight._internal._Any, __unused0:Float, __unused1:Array<flight._internal._Any>):FlightDocumentNode return (cast _SceneDocument.writeNode__sceneDocumentScene2DMaterialization(({ final __callArgument645:Dynamic = child; __callArgument645; }), ({ final __callArgument646:Dynamic = schemas; __callArgument646; }), ({ final __callArgument647:Dynamic = bindings; __callArgument647; }), ({ final __callArgument648:Dynamic = usedBindings; __callArgument648; }), ({ final __callArgument649:Dynamic = writtenNodes; __callArgument649; })) : FlightDocumentNode), _Runtime.UNDEFINED)), fields: fields, interactiveStates: (cast metadata : FlightDocumentInteractiveStateMetadata__sceneDocumentInteractiveStateBindings).interactiveStates, kind: _Runtime.field(source, 'kind'), transition: (cast metadata : FlightDocumentInteractiveStateMetadata__sceneDocumentInteractiveStateBindings).transition });
+    ((cast writtenNodes : flight._internal._Map<NodeAny, FlightDocumentNode>).set(source, (cast documentNode)));
+    return cast documentNode;
     return cast null;
   }
 
@@ -1533,10 +2516,10 @@ class _SceneDocument {
     var previous:Node2D = cast _Runtime.UNDEFINED;
     schema = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(documentRoot, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
     if ((cast _Runtime.strictEquals(schema, null) : Bool)) { return cast true; }
-    root = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(documentRoot, 'fields'), ({ final __callArgument315:Dynamic = resources; __callArgument315; }));
+    root = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(documentRoot, 'fields'), ({ final __callArgument657:Dynamic = resources; __callArgument657; }));
     if ((cast _Runtime.strictEquals(root, null) : Bool)) { return cast false; }
-    runtime = (cast getEntityRuntime(({ final __callArgument316:Dynamic = root; __callArgument316; })) : Null<{ @:optional var traits:flight._internal._Any; }>);
-    if ((cast !_Runtime.strictEquals(({ final __structural318 = runtime; __structural318 == null ? _Runtime.UNDEFINED : (cast __structural318 : { @:optional var traits:flight._internal._Any; }).traits; }), Node2DTraitsKey) : Bool)) { return cast false; }
+    runtime = (cast getEntityRuntime(({ final __callArgument658:Dynamic = root; __callArgument658; })) : Null<{ @:optional var traits:flight._internal._Any; }>);
+    if ((cast !_Runtime.strictEquals(({ final __structural660 = runtime; __structural660 == null ? _Runtime.UNDEFINED : (cast __structural660 : { @:optional var traits:flight._internal._Any; }).traits; }), Node2DTraitsKey) : Bool)) { return cast false; }
     previous = (cast scene : Scene2D).root;
     ((cast scene : Scene2D).root = (cast root : Node2D));
     ((cast (cast getNodeRuntime((cast root : Dynamic)) : Node2DRuntime) : { var scene2d:Null<Scene2D>; }).scene2d = scene);
@@ -1554,10 +2537,10 @@ class _SceneDocument {
     if ((cast _Runtime.strictEquals(schema, null) : Bool)) { return cast null; }
     probe = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(documentRoot, 'fields'), (cast _SceneDocument.createEmptyResourceLookup__sceneDocumentScene2DMaterialization() : flight._internal._Record<String, flight._internal._Any>));
     if ((cast _Runtime.strictEquals(probe, null) : Bool)) { return cast null; }
-    runtime = (cast getEntityRuntime(({ final __callArgument319:Dynamic = probe; __callArgument319; })) : Null<{ @:optional var traits:flight._internal._Any; }>);
+    runtime = (cast getEntityRuntime(({ final __callArgument661:Dynamic = probe; __callArgument661; })) : Null<{ @:optional var traits:flight._internal._Any; }>);
     expected = ((cast _Runtime.strictEquals(dimension, 'Scene2D') : Bool) ? (cast Node2DTraitsKey : Dynamic) : (cast Node3DTraitsKey : Dynamic));
-    if ((cast _Runtime.strictEquals(({ final __structural321 = runtime; __structural321 == null ? _Runtime.UNDEFINED : (cast __structural321 : { @:optional var traits:flight._internal._Any; }).traits; }), expected) : Bool)) { return cast null; }
-    return cast _Runtime.mergeObjects([(cast createSceneRefusal(({ final __callArgument322:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).RootKindMismatch; __callArgument322; }), (cast sceneIndex : Float), (cast 'scene' : String)) : FlightDocumentRefusalExplanation), { kind: _Runtime.field(documentRoot, 'kind') }]);
+    if ((cast _Runtime.strictEquals(({ final __structural663 = runtime; __structural663 == null ? _Runtime.UNDEFINED : (cast __structural663 : { @:optional var traits:flight._internal._Any; }).traits; }), expected) : Bool)) { return cast null; }
+    return cast _Runtime.mergeObjects([(cast createSceneRefusal(({ final __callArgument664:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).RootKindMismatch; __callArgument664; }), (cast sceneIndex : Float), (cast 'scene' : String)) : FlightDocumentRefusalExplanation), { kind: _Runtime.field(documentRoot, 'kind') }]);
     return cast null;
   }
 
@@ -1566,8 +2549,19 @@ class _SceneDocument {
     return cast null;
   }
 
-  public static function createFlightDocumentFromScene3D(source:Scene3D, cameras:Array<Scene3DDocumentCamera>, lights:Array<Scene3DDocumentLight>, schemas:FlightDocumentSchemaRegistry):FlightDocumentScene3D {
-    return cast { cameras: (cast _Runtime.mapArray((cast cameras : Array<Scene3DDocumentCamera>), function(c:Scene3DDocumentCamera, __unused0:Float, __unused1:Array<Scene3DDocumentCamera>):{ var far:Float; @:optional var name:Null<String>; var near:Float; @:optional var node:Null<Float>; var projection:Projection; var transform:Transform3D; } return _Runtime.mergeObjects([c]), _Runtime.UNDEFINED)), kind: 'Scene3D', lights: (cast _Runtime.mapArray((cast lights : Array<Scene3DDocumentLight>), function(l:Scene3DDocumentLight, __unused2:Float, __unused3:Array<Scene3DDocumentLight>):{ var descriptor:Light; @:optional var name:Null<String>; @:optional var node:Null<Float>; var transform:Transform3D; } return _Runtime.mergeObjects([l]), _Runtime.UNDEFINED)), scene: (cast _SceneDocument.writeNode__sceneDocumentScene3DMaterialization(({ final __callArgument324:Dynamic = source.root; __callArgument324; }), ({ final __callArgument325:Dynamic = schemas; __callArgument325; })) : FlightDocumentNode) };
+  public static function createFlightDocumentFromScene3D(source:Scene3D, cameras:Array<Scene3DDocumentCamera>, lights:Array<Scene3DDocumentLight>, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>):FlightDocumentScene3D {
+    if (interactiveStateBindings == null) interactiveStateBindings = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    if (layoutBindings == null) layoutBindings = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    var bindingLookup:flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<Node3D>> = cast _Runtime.UNDEFINED;
+    var usedBindings:flight._internal._Set<NodeAny> = cast _Runtime.UNDEFINED;
+    var writtenNodes:flight._internal._Map<NodeAny, FlightDocumentNode> = cast _Runtime.UNDEFINED;
+    var scene:FlightDocumentNode = cast _Runtime.UNDEFINED;
+    bindingLookup = (cast (cast createInteractiveStateBindingLookup : Array<FlightDocumentInteractiveStateBinding<Node3D>>->flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<Node3D>>)(({ final __callArgument666:Dynamic = interactiveStateBindings; __callArgument666; })) : flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<Node3D>>);
+    usedBindings = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
+    writtenNodes = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    scene = (cast _SceneDocument.writeNode__sceneDocumentScene3DMaterialization(({ final __callArgument668:Dynamic = source.root; __callArgument668; }), ({ final __callArgument669:Dynamic = schemas; __callArgument669; }), ({ final __callArgument670:Dynamic = bindingLookup; __callArgument670; }), ({ final __callArgument671:Dynamic = usedBindings; __callArgument671; }), ({ final __callArgument672:Dynamic = writtenNodes; __callArgument672; })) : FlightDocumentNode);
+    assertAllInteractiveStateBindingsUsed(({ final __callArgument678:Dynamic = bindingLookup; __callArgument678; }), ({ final __callArgument679:Dynamic = usedBindings; __callArgument679; }));
+    return cast { cameras: (cast _Runtime.mapArray((cast cameras : Array<Scene3DDocumentCamera>), function(c:Scene3DDocumentCamera, __unused0:Float, __unused1:Array<Scene3DDocumentCamera>):{ var far:Float; @:optional var name:Null<String>; var near:Float; @:optional var node:Null<Float>; var projection:Projection; var transform:Transform3D; } return _Runtime.mergeObjects([c]), _Runtime.UNDEFINED)), kind: 'Scene3D', layouts: (cast writeFlightDocumentLayoutBindings(({ final __callArgument682:Dynamic = layoutBindings; __callArgument682; }), source.root, ({ final __callArgument683:Dynamic = writtenNodes; __callArgument683; })) : Array<FlightDocumentLayoutDescriptor>), lights: (cast _Runtime.mapArray((cast lights : Array<Scene3DDocumentLight>), function(l:Scene3DDocumentLight, __unused2:Float, __unused3:Array<Scene3DDocumentLight>):{ var descriptor:Light; @:optional var name:Null<String>; @:optional var node:Null<Float>; var transform:Transform3D; } return _Runtime.mergeObjects([l]), _Runtime.UNDEFINED)), scene: scene, tokens: cast ([] : Array<Dynamic>) };
     return cast null;
   }
 
@@ -1577,26 +2571,46 @@ class _SceneDocument {
     var documentScene:FlightDocumentScene3D = cast _Runtime.UNDEFINED;
     var duplicateRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
     var unregisteredRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    var fieldRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    var interactiveRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    var layoutRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
     var scene:Scene3D = cast _Runtime.UNDEFINED;
     var resources:flight._internal._Record<String, flight._internal._Any> = cast _Runtime.UNDEFINED;
+    var materializedDocumentNodes:flight._internal._Map<FlightDocumentNode, Node3D> = cast _Runtime.UNDEFINED;
+    var interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>> = cast _Runtime.UNDEFINED;
+    var layoutBindings:Null<Array<FlightDocumentLayoutBinding<Node3D>>> = cast _Runtime.UNDEFINED;
     var materializedNodes:Array<Node3D> = cast _Runtime.UNDEFINED;
     var cameras:Array<Camera3D> = cast _Runtime.UNDEFINED;
     var lights:Scene3DLights = cast _Runtime.UNDEFINED;
-    selection = (cast selectFlightDocumentScene(({ final __callArgument328:Dynamic = document; __callArgument328; }), (cast 'Scene3D' : String), (cast sceneIndex : Float)) : FlightDocumentSceneSelection__sceneDocumentMaterializationSelection);
+    selection = (cast selectFlightDocumentScene(({ final __callArgument686:Dynamic = document; __callArgument686; }), (cast 'Scene3D' : String), (cast sceneIndex : Float)) : FlightDocumentSceneSelection__sceneDocumentMaterializationSelection);
     if ((cast ((cast !_Runtime.strictEquals((cast selection : { var refusal:Null<FlightDocumentRefusalExplanation>; }).refusal, null) : Bool) || (cast !_Runtime.strictEquals((cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var kind:String; }).kind, 'Scene3D') : Bool)) : Bool)) { return cast null; }
     documentScene = (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene;
     duplicateRefusal = (cast _SceneDocument.checkDuplicateLights__sceneDocumentScene3DMaterialization(_Runtime.field(documentScene, 'lights'), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float)) : Null<FlightDocumentRefusalExplanation>);
     if ((cast !_Runtime.strictEquals(duplicateRefusal, null) : Bool)) { return cast null; }
-    unregisteredRefusal = (cast checkUnregisteredNodeKinds(_Runtime.field(documentScene, 'scene'), ({ final __callArgument330:Dynamic = schemas; __callArgument330; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    unregisteredRefusal = (cast checkUnregisteredNodeKinds(_Runtime.field(documentScene, 'scene'), ({ final __callArgument688:Dynamic = schemas; __callArgument688; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
     if ((cast !_Runtime.strictEquals(unregisteredRefusal, null) : Bool)) { return cast null; }
+    fieldRefusal = (cast checkFlightDocumentNodeFields(_Runtime.field(documentScene, 'scene'), ({ final __callArgument690:Dynamic = schemas; __callArgument690; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(fieldRefusal, null) : Bool)) { return cast null; }
+    interactiveRefusal = (cast checkFlightDocumentInteractiveStates(_Runtime.field(documentScene, 'scene'), (cast 'Scene3D' : String), ({ final __callArgument692:Dynamic = schemas; __callArgument692; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(interactiveRefusal, null) : Bool)) { return cast null; }
+    layoutRefusal = (cast checkFlightDocumentLayoutTargets((cast _Runtime.field(documentScene, 'layouts') : Dynamic), _Runtime.field(documentScene, 'scene'), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(layoutRefusal, null) : Bool)) { return cast null; }
     scene = (cast (#if js _Runtime.callValue(createScene3D, cast ([] : Array<Dynamic>)) #else createScene3D(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Scene3D);
-    resources = (cast _SceneDocument.resolveResources__sceneDocumentScene3DMaterialization(_Runtime.field(document, 'resources'), ({ final __callArgument332:Dynamic = resolvers; __callArgument332; })) : flight._internal._Record<String, flight._internal._Any>);
-    if ((cast !(cast (cast _SceneDocument.adoptDocumentRoot3D__sceneDocumentScene3DMaterialization(({ final __callArgument334:Dynamic = scene; __callArgument334; }), _Runtime.field(documentScene, 'scene'), ({ final __callArgument335:Dynamic = schemas; __callArgument335; }), ({ final __callArgument336:Dynamic = resources; __callArgument336; })) : Bool) : Bool) : Bool)) { return cast null; }
-    _SceneDocument.materializeChildren__sceneDocumentScene3DMaterialization(({ final __callArgument340:Dynamic = scene.root; __callArgument340; }), (cast _Runtime.field(documentScene, 'scene') : FlightDocumentNode).children, ({ final __callArgument341:Dynamic = schemas; __callArgument341; }), ({ final __callArgument342:Dynamic = resources; __callArgument342; }));
+    resources = (cast _SceneDocument.resolveResources__sceneDocumentScene3DMaterialization(_Runtime.field(document, 'resources'), ({ final __callArgument694:Dynamic = resolvers; __callArgument694; })) : flight._internal._Record<String, flight._internal._Any>);
+    if ((cast !(cast (cast _SceneDocument.adoptDocumentRoot3D__sceneDocumentScene3DMaterialization(({ final __callArgument696:Dynamic = scene; __callArgument696; }), _Runtime.field(documentScene, 'scene'), ({ final __callArgument697:Dynamic = schemas; __callArgument697; }), ({ final __callArgument698:Dynamic = resources; __callArgument698; })) : Bool) : Bool) : Bool)) { return cast null; }
+    materializedDocumentNodes = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
+    ((cast materializedDocumentNodes : flight._internal._Map<FlightDocumentNode, Node3D>).set(_Runtime.field(documentScene, 'scene'), (cast scene.root)));
+    interactiveStateBindings = (cast cast ([] : Array<Dynamic>));
+    if ((cast !(cast (cast _SceneDocument.appendInteractiveStateBinding__sceneDocumentScene3DMaterialization(({ final __callArgument702:Dynamic = interactiveStateBindings; __callArgument702; }), scene.root, _Runtime.field(documentScene, 'scene'), ({ final __callArgument703:Dynamic = schemas; __callArgument703; })) : Bool) : Bool) : Bool)) { return cast null; }
+    if ((cast !(cast (cast _SceneDocument.materializeChildren__sceneDocumentScene3DMaterialization(({ final __callArgument706:Dynamic = scene.root; __callArgument706; }), (cast _Runtime.field(documentScene, 'scene') : FlightDocumentNode).children, ({ final __callArgument707:Dynamic = schemas; __callArgument707; }), ({ final __callArgument708:Dynamic = resources; __callArgument708; }), ({ final __callArgument709:Dynamic = interactiveStateBindings; __callArgument709; }), ({ final __callArgument710:Dynamic = materializedDocumentNodes; __callArgument710; })) : Bool) : Bool) : Bool)) {
+      return cast null;
+    }
+    layoutBindings = (cast createFlightDocumentLayoutBindings((cast _Runtime.field(documentScene, 'layouts') : Dynamic), _Runtime.field(documentScene, 'scene'), ({ final __callArgument716:Dynamic = materializedDocumentNodes; __callArgument716; })) : Null<Array<FlightDocumentLayoutBinding<Node3D>>>);
+    if ((cast _Runtime.strictEquals(layoutBindings, null) : Bool)) { return cast null; }
     materializedNodes = (cast _SceneDocument.getMaterializedNodes__sceneDocumentScene3DMaterialization(scene.root) : Array<Node3D>);
-    cameras = (cast _SceneDocument.materializeCameras__sceneDocumentScene3DMaterialization(_Runtime.field(documentScene, 'cameras'), ({ final __callArgument346:Dynamic = materializedNodes; __callArgument346; })) : Array<Camera3D>);
-    lights = (cast _SceneDocument.materializeLights__sceneDocumentScene3DMaterialization(_Runtime.field(documentScene, 'lights'), ({ final __callArgument348:Dynamic = materializedNodes; __callArgument348; })) : Scene3DLights);
-    return cast { cameras: cameras, lights: lights, scene: scene };
+    cameras = (cast _SceneDocument.materializeCameras__sceneDocumentScene3DMaterialization(_Runtime.field(documentScene, 'cameras'), ({ final __callArgument718:Dynamic = materializedNodes; __callArgument718; })) : Array<Camera3D>);
+    lights = (cast _SceneDocument.materializeLights__sceneDocumentScene3DMaterialization(_Runtime.field(documentScene, 'lights'), ({ final __callArgument720:Dynamic = materializedNodes; __callArgument720; })) : Scene3DLights);
+    return cast { cameras: cameras, interactiveStateBindings: interactiveStateBindings, layoutBindings: layoutBindings, lights: lights, scene: scene };
     return cast null;
   }
 
@@ -1604,7 +2618,7 @@ class _SceneDocument {
     var document:Null<FlightDocument> = cast _Runtime.UNDEFINED;
     document = (cast parseFlightDocumentText((cast text : String)) : Null<FlightDocument>);
     if ((cast _Runtime.strictEquals(document, null) : Bool)) { return cast null; }
-    return cast (cast createFlightDocumentScene3DMaterialization(({ final __callArgument350:Dynamic = document; __callArgument350; }), ({ final __callArgument351:Dynamic = schemas; __callArgument351; }), ({ final __callArgument352:Dynamic = resolvers; __callArgument352; }), #if js (cast sceneIndex : Float) #else (cast sceneIndex : Null<Float>) #end) : Null<FlightDocumentScene3DMaterialization>);
+    return cast (cast createFlightDocumentScene3DMaterialization(({ final __callArgument722:Dynamic = document; __callArgument722; }), ({ final __callArgument723:Dynamic = schemas; __callArgument723; }), ({ final __callArgument724:Dynamic = resolvers; __callArgument724; }), #if js (cast sceneIndex : Float) #else (cast sceneIndex : Null<Float>) #end) : Null<FlightDocumentScene3DMaterialization>);
     return cast null;
   }
 
@@ -1613,14 +2627,23 @@ class _SceneDocument {
     var selection:FlightDocumentSceneSelection__sceneDocumentMaterializationSelection = cast _Runtime.UNDEFINED;
     var lightRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
     var unregistered:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
-    selection = (cast selectFlightDocumentScene(({ final __callArgument356:Dynamic = document; __callArgument356; }), (cast 'Scene3D' : String), (cast sceneIndex : Float)) : FlightDocumentSceneSelection__sceneDocumentMaterializationSelection);
+    var fieldRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    var interactiveRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    var layoutRefusal:Null<FlightDocumentRefusalExplanation> = cast _Runtime.UNDEFINED;
+    selection = (cast selectFlightDocumentScene(({ final __callArgument728:Dynamic = document; __callArgument728; }), (cast 'Scene3D' : String), (cast sceneIndex : Float)) : FlightDocumentSceneSelection__sceneDocumentMaterializationSelection);
     if ((cast !_Runtime.strictEquals((cast selection : { var refusal:Null<FlightDocumentRefusalExplanation>; }).refusal, null) : Bool)) { return cast (cast selection : { var refusal:FlightDocumentRefusalExplanation; var scene:flight._internal._Any; var sceneIndex:flight._internal._Any; }).refusal; }
     if ((cast !_Runtime.strictEquals((cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene : { var kind:String; }).kind, 'Scene3D') : Bool)) { return cast null; }
     lightRefusal = (cast _SceneDocument.checkDuplicateLights__sceneDocumentScene3DMaterialization(_Runtime.field((cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene, 'lights'), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float)) : Null<FlightDocumentRefusalExplanation>);
     if ((cast !_Runtime.strictEquals(lightRefusal, null) : Bool)) { return cast lightRefusal; }
-    unregistered = (cast checkUnregisteredNodeKinds(_Runtime.field((cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene, 'scene'), ({ final __callArgument358:Dynamic = schemas; __callArgument358; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    unregistered = (cast checkUnregisteredNodeKinds(_Runtime.field((cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene, 'scene'), ({ final __callArgument730:Dynamic = schemas; __callArgument730; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
     if ((cast !_Runtime.strictEquals(unregistered, null) : Bool)) { return cast unregistered; }
-    return cast (cast _SceneDocument.checkRootKindDimension3D__sceneDocumentScene3DMaterialization(_Runtime.field((cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene, 'scene'), ({ final __callArgument360:Dynamic = schemas; __callArgument360; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float)) : Null<FlightDocumentRefusalExplanation>);
+    fieldRefusal = (cast checkFlightDocumentNodeFields(_Runtime.field((cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene, 'scene'), ({ final __callArgument732:Dynamic = schemas; __callArgument732; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(fieldRefusal, null) : Bool)) { return cast fieldRefusal; }
+    interactiveRefusal = (cast checkFlightDocumentInteractiveStates(_Runtime.field((cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene, 'scene'), (cast 'Scene3D' : String), ({ final __callArgument734:Dynamic = schemas; __callArgument734; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float), (cast 'scene' : String)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(interactiveRefusal, null) : Bool)) { return cast interactiveRefusal; }
+    layoutRefusal = (cast checkFlightDocumentLayoutTargets((cast _Runtime.field((cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene, 'layouts') : Dynamic), _Runtime.field((cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene, 'scene'), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float)) : Null<FlightDocumentRefusalExplanation>);
+    if ((cast !_Runtime.strictEquals(layoutRefusal, null) : Bool)) { return cast layoutRefusal; }
+    return cast (cast _SceneDocument.checkRootKindDimension3D__sceneDocumentScene3DMaterialization(_Runtime.field((cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).scene, 'scene'), ({ final __callArgument736:Dynamic = schemas; __callArgument736; }), (cast (cast selection : { var refusal:flight._internal._Any; var scene:FlightDocumentScene; var sceneIndex:Float; }).sceneIndex : Float)) : Null<FlightDocumentRefusalExplanation>);
     return cast null;
   }
 
@@ -1628,7 +2651,7 @@ class _SceneDocument {
     var document:Null<FlightDocument> = cast _Runtime.UNDEFINED;
     document = (cast parseFlightDocumentText((cast text : String)) : Null<FlightDocument>);
     if ((cast _Runtime.strictEquals(document, null) : Bool)) { return cast (cast explainFlightDocumentText((cast text : String)) : Null<FlightDocumentRefusalExplanation>); }
-    return cast (cast explainFlightDocumentScene3DRefusal(({ final __callArgument362:Dynamic = document; __callArgument362; }), ({ final __callArgument363:Dynamic = schemas; __callArgument363; }), #if js (cast sceneIndex : Float) #else (cast sceneIndex : Null<Float>) #end) : Null<FlightDocumentRefusalExplanation>);
+    return cast (cast explainFlightDocumentScene3DRefusal(({ final __callArgument738:Dynamic = document; __callArgument738; }), ({ final __callArgument739:Dynamic = schemas; __callArgument739; }), #if js (cast sceneIndex : Float) #else (cast sceneIndex : Null<Float>) #end) : Null<FlightDocumentRefusalExplanation>);
     return cast null;
   }
 
@@ -1641,13 +2664,13 @@ class _SceneDocument {
       if ((cast _Runtime.strictEquals((cast _Runtime.field(light, 'descriptor') : Light).kind, AmbientLightKind) : Bool)) {
         ambientCount++;
         if ((cast ((cast ambientCount : Float) > (cast 1.0 : Float)) : Bool)) {
-          return cast (cast createSceneRefusal(({ final __callArgument368:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).DuplicateAmbientLight; __callArgument368; }), (cast sceneIndex : Float), (cast 'lights' : String)) : FlightDocumentRefusalExplanation);
+          return cast (cast createSceneRefusal(({ final __callArgument744:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).DuplicateAmbientLight; __callArgument744; }), (cast sceneIndex : Float), (cast 'lights' : String)) : FlightDocumentRefusalExplanation);
         }
       }
       if ((cast _Runtime.strictEquals((cast _Runtime.field(light, 'descriptor') : Light).kind, DirectionalLightKind) : Bool)) {
         directionalCount++;
         if ((cast ((cast directionalCount : Float) > (cast 1.0 : Float)) : Bool)) {
-          return cast (cast createSceneRefusal(({ final __callArgument370:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).DuplicateDirectionalLight; __callArgument370; }), (cast sceneIndex : Float), (cast 'lights' : String)) : FlightDocumentRefusalExplanation);
+          return cast (cast createSceneRefusal(({ final __callArgument746:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).DuplicateDirectionalLight; __callArgument746; }), (cast sceneIndex : Float), (cast 'lights' : String)) : FlightDocumentRefusalExplanation);
         }
       }
     }
@@ -1663,18 +2686,18 @@ class _SceneDocument {
     view = (cast acquireMatrix4() : Matrix4);
     out = (cast cast ([] : Array<Dynamic>));
     for (source in _Runtime.iterable(cameras)) {
-      var camera:Camera3D = (cast createCamera3D(({ final __callArgument374:Dynamic = { far: _Runtime.field(source, 'far'), near: _Runtime.field(source, 'near'), projection: _Runtime.field(source, 'projection') }; __callArgument374; })) : Camera3D);
-      var boundNode:Null<Node3D> = (cast _SceneDocument.getBoundMaterializedNode__sceneDocumentScene3DMaterialization(_Runtime.field(source, 'node'), ({ final __callArgument376:Dynamic = materializedNodes; __callArgument376; })) : Null<Node3D>);
+      var camera:Camera3D = (cast createCamera3D(({ final __callArgument750:Dynamic = { far: _Runtime.field(source, 'far'), near: _Runtime.field(source, 'near'), projection: _Runtime.field(source, 'projection') }; __callArgument750; })) : Camera3D);
+      var boundNode:Null<Node3D> = (cast _SceneDocument.getBoundMaterializedNode__sceneDocumentScene3DMaterialization(_Runtime.field(source, 'node'), ({ final __callArgument752:Dynamic = materializedNodes; __callArgument752; })) : Null<Node3D>);
       if ((cast _Runtime.strictEquals(boundNode, null) : Bool)) {
-        composeMatrix4FromTransform3D(({ final __callArgument378:Dynamic = placement; __callArgument378; }), ({ final __callArgument379:Dynamic = _Runtime.field(source, 'transform'); __callArgument379; }));
-        if ((cast (cast inverseMatrix4(({ final __callArgument382:Dynamic = view; __callArgument382; }), ({ final __callArgument383:Dynamic = placement; __callArgument383; })) : Bool) : Bool)) { setCamera3DViewMatrix4FromMatrix4(({ final __callArgument386:Dynamic = camera; __callArgument386; }), ({ final __callArgument387:Dynamic = view; __callArgument387; })); }
-      } else { if ((cast (cast inverseMatrix4(({ final __callArgument390:Dynamic = view; __callArgument390; }), (cast getNodeWorldMatrix4((cast boundNode : Dynamic)) : Matrix4Like)) : Bool) : Bool)) {
-        setCamera3DViewMatrix4FromMatrix4(({ final __callArgument392:Dynamic = camera; __callArgument392; }), ({ final __callArgument393:Dynamic = view; __callArgument393; }));
+        composeMatrix4FromTransform3D(({ final __callArgument754:Dynamic = placement; __callArgument754; }), ({ final __callArgument755:Dynamic = _Runtime.field(source, 'transform'); __callArgument755; }));
+        if ((cast (cast inverseMatrix4(({ final __callArgument758:Dynamic = view; __callArgument758; }), ({ final __callArgument759:Dynamic = placement; __callArgument759; })) : Bool) : Bool)) { setCamera3DViewMatrix4FromMatrix4(({ final __callArgument762:Dynamic = camera; __callArgument762; }), ({ final __callArgument763:Dynamic = view; __callArgument763; })); }
+      } else { if ((cast (cast inverseMatrix4(({ final __callArgument766:Dynamic = view; __callArgument766; }), (cast getNodeWorldMatrix4((cast boundNode : Dynamic)) : Matrix4Like)) : Bool) : Bool)) {
+        setCamera3DViewMatrix4FromMatrix4(({ final __callArgument768:Dynamic = camera; __callArgument768; }), ({ final __callArgument769:Dynamic = view; __callArgument769; }));
       } }
       _Runtime.callProperty(out, 'push', cast ([camera] : Array<Dynamic>));
     }
-    releaseMatrix4(({ final __callArgument396:Dynamic = view; __callArgument396; }));
-    releaseMatrix4(({ final __callArgument398:Dynamic = placement; __callArgument398; }));
+    releaseMatrix4(({ final __callArgument772:Dynamic = view; __callArgument772; }));
+    releaseMatrix4(({ final __callArgument774:Dynamic = placement; __callArgument774; }));
     return cast out;
     return cast null;
   }
@@ -1688,7 +2711,7 @@ class _SceneDocument {
   public static function getMaterializedNodes__sceneDocumentScene3DMaterialization(root:Node3D):Array<Node3D> {
     var out:Array<Node3D> = cast _Runtime.UNDEFINED;
     out = (cast cast ([] : Array<Dynamic>));
-    _SceneDocument.appendMaterializedNodes__sceneDocumentScene3DMaterialization(({ final __callArgument400:Dynamic = out; __callArgument400; }), ({ final __callArgument401:Dynamic = root; __callArgument401; }));
+    _SceneDocument.appendMaterializedNodes__sceneDocumentScene3DMaterialization(({ final __callArgument776:Dynamic = out; __callArgument776; }), ({ final __callArgument777:Dynamic = root; __callArgument777; }));
     return cast out;
     return cast null;
   }
@@ -1696,7 +2719,7 @@ class _SceneDocument {
   public static function appendMaterializedNodes__sceneDocumentScene3DMaterialization(out:Array<Node3D>, node:Node3D):Void {
     _Runtime.callProperty(out, 'push', cast ([node] : Array<Dynamic>));
     for (child in _Runtime.iterable((cast getNodeChildren((cast node : Dynamic)) : Array<NodeOf<Node3DTraits>>))) {
-      _SceneDocument.appendMaterializedNodes__sceneDocumentScene3DMaterialization(({ final __callArgument406:Dynamic = out; __callArgument406; }), (cast child : Node3D));
+      _SceneDocument.appendMaterializedNodes__sceneDocumentScene3DMaterialization(({ final __callArgument782:Dynamic = out; __callArgument782; }), (cast child : Node3D));
     }
   }
 
@@ -1706,27 +2729,41 @@ class _SceneDocument {
     resolvedLights = (cast _Runtime.mapArray((cast lights : Array<Scene3DDocumentLight>), function(source:Scene3DDocumentLight, __unused4:Float, __unused5:Array<Scene3DDocumentLight>):{ var descriptor:Light; @:optional var name:Null<String>; @:optional var node:Null<Float>; var transform:Transform3D; } {
       var boundNode:Null<Node3D> = cast _Runtime.UNDEFINED;
       var transform:Transform3D = cast _Runtime.UNDEFINED;
-      boundNode = (cast _SceneDocument.getBoundMaterializedNode__sceneDocumentScene3DMaterialization(_Runtime.field(source, 'node'), ({ final __callArgument408:Dynamic = materializedNodes; __callArgument408; })) : Null<Node3D>);
+      boundNode = (cast _SceneDocument.getBoundMaterializedNode__sceneDocumentScene3DMaterialization(_Runtime.field(source, 'node'), ({ final __callArgument784:Dynamic = materializedNodes; __callArgument784; })) : Null<Node3D>);
       if ((cast _Runtime.strictEquals(boundNode, null) : Bool)) { return cast _Runtime.mergeObjects([source]); }
       transform = (cast createTransform3D() : Transform3D);
-      decomposeMatrix4ToTransform3D(({ final __callArgument410:Dynamic = transform; __callArgument410; }), (cast getNodeWorldMatrix4((cast boundNode : Dynamic)) : Matrix4Like));
+      decomposeMatrix4ToTransform3D(({ final __callArgument786:Dynamic = transform; __callArgument786; }), (cast getNodeWorldMatrix4((cast boundNode : Dynamic)) : Matrix4Like));
       return cast _Runtime.mergeObjects([source, { transform: transform }]);
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
     document = (cast { animations: cast ([] : Array<Dynamic>), cameras: cast ([] : Array<Dynamic>), lights: resolvedLights, materials: cast ([] : Array<Dynamic>), meshes: cast ([] : Array<Dynamic>), metadata: null, nodes: cast ([] : Array<Dynamic>), resources: cast ([] : Array<Dynamic>), scenes: cast ([] : Array<Dynamic>), skins: cast ([] : Array<Dynamic>) });
-    return cast (cast createScene3DLightsFromDocument(({ final __callArgument412:Dynamic = document; __callArgument412; })) : Scene3DLights);
+    return cast (cast createScene3DLightsFromDocument(({ final __callArgument788:Dynamic = document; __callArgument788; })) : Scene3DLights);
     return cast null;
   }
 
-  public static function materializeChildren__sceneDocumentScene3DMaterialization(parent:NodeAny, children:Array<FlightDocumentNode>, schemas:FlightDocumentSchemaRegistry, resources:FlightDocumentResourceLookup):Void {
+  public static function materializeChildren__sceneDocumentScene3DMaterialization(parent:NodeAny, children:Array<FlightDocumentNode>, schemas:FlightDocumentSchemaRegistry, resources:FlightDocumentResourceLookup, interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>, materializedNodes:flight._internal._Map<FlightDocumentNode, Node3D>):Bool {
     for (child in _Runtime.iterable(children)) {
       var schema:Null<FlightDocumentNodeSchema> = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(child, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
       if ((cast _Runtime.strictEquals(schema, null) : Bool)) { continue; }
-      var node:Null<NodeAny> = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(child, 'fields'), ({ final __callArgument416:Dynamic = resources; __callArgument416; }));
+      var node:Null<NodeAny> = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(child, 'fields'), ({ final __callArgument792:Dynamic = resources; __callArgument792; }));
       if ((cast _Runtime.strictEquals(node, null) : Bool)) { continue; }
       addNodeChild((cast parent : Dynamic), (cast node : Dynamic));
-      _SceneDocument.materializeChildren__sceneDocumentScene3DMaterialization(({ final __callArgument417:Dynamic = node; __callArgument417; }), _Runtime.field(child, 'children'), ({ final __callArgument418:Dynamic = schemas; __callArgument418; }), ({ final __callArgument419:Dynamic = resources; __callArgument419; }));
+      ((cast materializedNodes : flight._internal._Map<FlightDocumentNode, Node3D>).set(child, (cast (cast node : Node3D))));
+      if ((cast !(cast (cast _SceneDocument.appendInteractiveStateBinding__sceneDocumentScene3DMaterialization(({ final __callArgument793:Dynamic = interactiveStateBindings; __callArgument793; }), (cast node : Node3D), ({ final __callArgument794:Dynamic = child; __callArgument794; }), ({ final __callArgument795:Dynamic = schemas; __callArgument795; })) : Bool) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast (cast _SceneDocument.materializeChildren__sceneDocumentScene3DMaterialization(({ final __callArgument799:Dynamic = node; __callArgument799; }), _Runtime.field(child, 'children'), ({ final __callArgument800:Dynamic = schemas; __callArgument800; }), ({ final __callArgument801:Dynamic = resources; __callArgument801; }), ({ final __callArgument802:Dynamic = interactiveStateBindings; __callArgument802; }), ({ final __callArgument803:Dynamic = materializedNodes; __callArgument803; })) : Bool) : Bool) : Bool)) {
+        return cast false;
+      }
     }
+    return cast true;
+    return cast null;
+  }
+
+  public static function appendInteractiveStateBinding__sceneDocumentScene3DMaterialization(out:Array<FlightDocumentInteractiveStateBinding<Node3D>>, node:Node3D, documentNode:FlightDocumentNode, schemas:FlightDocumentSchemaRegistry):Bool {
+    if ((cast _Runtime.looseEquals(_Runtime.field(documentNode, 'interactiveStates'), null) : Bool)) { return cast true; }
+    if ((cast !(cast (cast isInteractiveStateBindingTargetSupported(({ final __callArgument809:Dynamic = node; __callArgument809; }), ({ final __callArgument810:Dynamic = documentNode; __callArgument810; }), ({ final __callArgument811:Dynamic = schemas; __callArgument811; })) : Bool) : Bool) : Bool)) { return cast false; }
+    _Runtime.callProperty(out, 'push', cast ([{ interactiveStates: _Runtime.field(documentNode, 'interactiveStates'), node: node, transition: _Runtime.coalesce(_Runtime.field(documentNode, 'transition'), function():Dynamic return cast null) }] : Array<Dynamic>));
+    return cast true;
+    return cast null;
   }
 
   public static function resolveResources__sceneDocumentScene3DMaterialization(descriptors:Array<FlightDocumentResourceDescriptor>, ?resolvers:FlightDocumentResourceResolverRegistry):FlightDocumentResourceLookup {
@@ -1736,24 +2773,29 @@ class _SceneDocument {
     for (descriptor in _Runtime.iterable(descriptors)) {
       var resolver:Null<FlightDocumentResourceResolver> = (cast getRegistryTableEntry((cast _Runtime.field(resolvers, 'resolvers') : Dynamic), (cast _Runtime.field(descriptor, 'kind') : String)) : Null<FlightDocumentResourceResolver>);
       if ((cast _Runtime.strictEquals(resolver, null) : Bool)) { continue; }
-      var resolved:flight._internal._Any = resolver((cast _Runtime.field(descriptor, 'key') : String), ({ final __callArgument425:Dynamic = descriptor; __callArgument425; }));
+      var resolved:flight._internal._Any = resolver((cast _Runtime.field(descriptor, 'key') : String), ({ final __callArgument817:Dynamic = descriptor; __callArgument817; }));
       if ((cast !_Runtime.strictEquals(resolved, null) : Bool)) { _Runtime.setIndex(out, _Runtime.field(descriptor, 'key'), resolved); }
     }
     return cast out;
     return cast null;
   }
 
-  public static function writeNode__sceneDocumentScene3DMaterialization(source:NodeAny, schemas:FlightDocumentSchemaRegistry):FlightDocumentNode {
+  public static function writeNode__sceneDocumentScene3DMaterialization(source:NodeAny, schemas:FlightDocumentSchemaRegistry, bindings:flight._internal._Map<NodeAny, FlightDocumentInteractiveStateBinding<Dynamic>>, usedBindings:flight._internal._Set<NodeAny>, writtenNodes:flight._internal._Map<NodeAny, FlightDocumentNode>):FlightDocumentNode {
     var fields:FlightDocumentFields = cast _Runtime.UNDEFINED;
     var schema:Null<FlightDocumentNodeSchema> = cast _Runtime.UNDEFINED;
     var children:Array<flight._internal._Any> = cast _Runtime.UNDEFINED;
+    var metadata:FlightDocumentInteractiveStateMetadata__sceneDocumentInteractiveStateBindings = cast _Runtime.UNDEFINED;
+    var documentNode:FlightDocumentNode = cast _Runtime.UNDEFINED;
     fields = (cast {  });
     schema = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(source, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
     if ((cast !_Runtime.strictEquals(schema, null) : Bool)) {
-      _SceneDocument.writeFieldsWithDefaults__sceneDocumentScene3DMaterialization(({ final __callArgument427:Dynamic = fields; __callArgument427; }), ({ final __callArgument428:Dynamic = source; __callArgument428; }), ({ final __callArgument429:Dynamic = schema; __callArgument429; }));
+      _SceneDocument.writeFieldsWithDefaults__sceneDocumentScene3DMaterialization(({ final __callArgument819:Dynamic = fields; __callArgument819; }), ({ final __callArgument820:Dynamic = source; __callArgument820; }), ({ final __callArgument821:Dynamic = schema; __callArgument821; }));
     }
     children = (cast getNodeChildren((cast source : Dynamic)) : Array<flight._internal._Any>);
-    return cast { children: (cast _Runtime.mapArray((cast children : Array<flight._internal._Any>), function(child:flight._internal._Any, __unused6:Float, __unused7:Array<flight._internal._Any>):FlightDocumentNode return (cast _SceneDocument.writeNode__sceneDocumentScene3DMaterialization(({ final __callArgument433:Dynamic = child; __callArgument433; }), ({ final __callArgument434:Dynamic = schemas; __callArgument434; })) : FlightDocumentNode), _Runtime.UNDEFINED)), fields: fields, kind: _Runtime.field(source, 'kind') };
+    metadata = (cast readInteractiveStateBindingMetadata(({ final __callArgument825:Dynamic = source; __callArgument825; }), ({ final __callArgument826:Dynamic = bindings; __callArgument826; }), ({ final __callArgument827:Dynamic = usedBindings; __callArgument827; }), ({ final __callArgument828:Dynamic = schemas; __callArgument828; })) : FlightDocumentInteractiveStateMetadata__sceneDocumentInteractiveStateBindings);
+    documentNode = (cast { children: (cast _Runtime.mapArray((cast children : Array<flight._internal._Any>), function(child:flight._internal._Any, __unused6:Float, __unused7:Array<flight._internal._Any>):FlightDocumentNode return (cast _SceneDocument.writeNode__sceneDocumentScene3DMaterialization(({ final __callArgument833:Dynamic = child; __callArgument833; }), ({ final __callArgument834:Dynamic = schemas; __callArgument834; }), ({ final __callArgument835:Dynamic = bindings; __callArgument835; }), ({ final __callArgument836:Dynamic = usedBindings; __callArgument836; }), ({ final __callArgument837:Dynamic = writtenNodes; __callArgument837; })) : FlightDocumentNode), _Runtime.UNDEFINED)), fields: fields, interactiveStates: (cast metadata : FlightDocumentInteractiveStateMetadata__sceneDocumentInteractiveStateBindings).interactiveStates, kind: _Runtime.field(source, 'kind'), transition: (cast metadata : FlightDocumentInteractiveStateMetadata__sceneDocumentInteractiveStateBindings).transition });
+    ((cast writtenNodes : flight._internal._Map<NodeAny, FlightDocumentNode>).set(source, (cast documentNode)));
+    return cast documentNode;
     return cast null;
   }
 
@@ -1772,10 +2814,10 @@ class _SceneDocument {
     var runtime:Null<{ @:optional var traits:flight._internal._Any; }> = cast _Runtime.UNDEFINED;
     schema = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(documentRoot, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
     if ((cast _Runtime.strictEquals(schema, null) : Bool)) { return cast true; }
-    root = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(documentRoot, 'fields'), ({ final __callArgument439:Dynamic = resources; __callArgument439; }));
+    root = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(documentRoot, 'fields'), ({ final __callArgument845:Dynamic = resources; __callArgument845; }));
     if ((cast _Runtime.strictEquals(root, null) : Bool)) { return cast false; }
-    runtime = (cast getEntityRuntime(({ final __callArgument440:Dynamic = root; __callArgument440; })) : Null<{ @:optional var traits:flight._internal._Any; }>);
-    if ((cast !_Runtime.strictEquals(({ final __structural442 = runtime; __structural442 == null ? _Runtime.UNDEFINED : (cast __structural442 : { @:optional var traits:flight._internal._Any; }).traits; }), Node3DTraitsKey) : Bool)) { return cast false; }
+    runtime = (cast getEntityRuntime(({ final __callArgument846:Dynamic = root; __callArgument846; })) : Null<{ @:optional var traits:flight._internal._Any; }>);
+    if ((cast !_Runtime.strictEquals(({ final __structural848 = runtime; __structural848 == null ? _Runtime.UNDEFINED : (cast __structural848 : { @:optional var traits:flight._internal._Any; }).traits; }), Node3DTraitsKey) : Bool)) { return cast false; }
     (scene.root = cast ((cast root : Node3D) : Node3D));
     return cast true;
     return cast null;
@@ -1787,11 +2829,11 @@ class _SceneDocument {
     var runtime:Null<{ @:optional var traits:flight._internal._Any; }> = cast _Runtime.UNDEFINED;
     schema = (cast getRegistryTableEntry((cast _Runtime.field(schemas, 'nodeSchemas') : Dynamic), (cast _Runtime.field(documentRoot, 'kind') : String)) : Null<FlightDocumentNodeSchema>);
     if ((cast _Runtime.strictEquals(schema, null) : Bool)) { return cast null; }
-    probe = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(documentRoot, 'fields'), ({ final __callArgument443:Dynamic = {  }; __callArgument443; }));
+    probe = (cast schema : FlightDocumentNodeSchema).createNode(_Runtime.field(documentRoot, 'fields'), ({ final __callArgument849:Dynamic = {  }; __callArgument849; }));
     if ((cast _Runtime.strictEquals(probe, null) : Bool)) { return cast null; }
-    runtime = (cast getEntityRuntime(({ final __callArgument444:Dynamic = probe; __callArgument444; })) : Null<{ @:optional var traits:flight._internal._Any; }>);
-    if ((cast _Runtime.strictEquals(({ final __structural446 = runtime; __structural446 == null ? _Runtime.UNDEFINED : (cast __structural446 : { @:optional var traits:flight._internal._Any; }).traits; }), Node3DTraitsKey) : Bool)) { return cast null; }
-    return cast _Runtime.mergeObjects([(cast createSceneRefusal(({ final __callArgument447:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).RootKindMismatch; __callArgument447; }), (cast sceneIndex : Float), (cast 'scene' : String)) : FlightDocumentRefusalExplanation), { kind: _Runtime.field(documentRoot, 'kind') }]);
+    runtime = (cast getEntityRuntime(({ final __callArgument850:Dynamic = probe; __callArgument850; })) : Null<{ @:optional var traits:flight._internal._Any; }>);
+    if ((cast _Runtime.strictEquals(({ final __structural852 = runtime; __structural852 == null ? _Runtime.UNDEFINED : (cast __structural852 : { @:optional var traits:flight._internal._Any; }).traits; }), Node3DTraitsKey) : Bool)) { return cast null; }
+    return cast _Runtime.mergeObjects([(cast createSceneRefusal(({ final __callArgument853:Dynamic = (cast FlightDocumentRefusalReasonValue : { var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; }).RootKindMismatch; __callArgument853; }), (cast sceneIndex : Float), (cast 'scene' : String)) : FlightDocumentRefusalExplanation), { kind: _Runtime.field(documentRoot, 'kind') }]);
     return cast null;
   }
 
@@ -1801,7 +2843,7 @@ class _SceneDocument {
     var lexed:SceneDocumentYamlSubsetLexResult__sceneDocumentYamlSubset = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.field(source, 'length') : Float) > (cast _SceneDocument.MAX_DOCUMENT_CODE_UNITS__sceneDocumentYamlSubset : Float)) : Bool)) {
       var position:SceneDocumentYamlSubsetPosition__sceneDocumentYamlSubset = (cast _SceneDocument.getSceneDocumentYamlSubsetPosition__sceneDocumentYamlSubset((cast source : String), (cast _SceneDocument.MAX_DOCUMENT_CODE_UNITS__sceneDocumentYamlSubset : Float)) : SceneDocumentYamlSubsetPosition__sceneDocumentYamlSubset);
-      return cast (cast _SceneDocument.createSceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset((cast 'flight-document.limit.document-code-units' : Dynamic), (cast position : Dynamic), ({ final __callArgument449:Dynamic = _SceneDocument.MAX_DOCUMENT_CODE_UNITS__sceneDocumentYamlSubset; __callArgument449; }), ({ final __callArgument450:Dynamic = _Runtime.field(source, 'length'); __callArgument450; })) : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset);
+      return cast (cast _SceneDocument.createSceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset((cast 'flight-document.limit.document-code-units' : Dynamic), (cast position : Dynamic), ({ final __callArgument855:Dynamic = _SceneDocument.MAX_DOCUMENT_CODE_UNITS__sceneDocumentYamlSubset; __callArgument855; }), ({ final __callArgument856:Dynamic = _Runtime.field(source, 'length'); __callArgument856; })) : SceneDocumentYamlSubsetRefusal__sceneDocumentYamlSubset);
     }
     lexed = (cast new SceneDocumentYamlSubsetLexer__sceneDocumentYamlSubset(source) : SceneDocumentYamlSubsetLexer__sceneDocumentYamlSubset).lex();
     if ((cast !(cast (cast lexed : { var ok:Bool; }).ok : Bool) : Bool)) { return cast lexed; }
@@ -1858,7 +2900,7 @@ class _SceneDocument {
   public static function isSceneDocumentYamlSubsetDocumentSeparator__sceneDocumentYamlSubset(source:String, offset:Float):Bool {
     var candidate:String = cast _Runtime.UNDEFINED;
     candidate = _Runtime.slice(source, offset, (offset + 3.0));
-    return cast ((cast _Runtime.orValue(_Runtime.strictEquals(candidate, '---'), function():Dynamic return cast _Runtime.strictEquals(candidate, '...')) : Bool) && (cast (cast _SceneDocument.isSceneDocumentYamlSubsetSeparation__sceneDocumentYamlSubset(({ final __callArgument453:Dynamic = _Runtime.getIndex(source, (offset + 3.0)); __callArgument453; })) : Bool) : Bool));
+    return cast ((cast _Runtime.orValue(_Runtime.strictEquals(candidate, '---'), function():Dynamic return cast _Runtime.strictEquals(candidate, '...')) : Bool) && (cast (cast _SceneDocument.isSceneDocumentYamlSubsetSeparation__sceneDocumentYamlSubset(({ final __callArgument859:Dynamic = _Runtime.getIndex(source, (offset + 3.0)); __callArgument859; })) : Bool) : Bool));
     return cast null;
   }
 
@@ -1868,12 +2910,12 @@ class _SceneDocument {
   }
 
   public static function isSceneDocumentYamlSubsetMappingColon__sceneDocumentYamlSubset(character:Null<String>):Bool {
-    return cast ((cast ((cast ((cast (cast _SceneDocument.isSceneDocumentYamlSubsetSeparation__sceneDocumentYamlSubset(({ final __callArgument455:Dynamic = character; __callArgument455; })) : Bool) : Bool) || (cast _Runtime.strictEquals(character, '{') : Bool)) : Bool) || (cast _Runtime.strictEquals(character, '"') : Bool)) : Bool) || (cast _Runtime.strictEquals(character, '\'') : Bool));
+    return cast ((cast ((cast ((cast (cast _SceneDocument.isSceneDocumentYamlSubsetSeparation__sceneDocumentYamlSubset(({ final __callArgument861:Dynamic = character; __callArgument861; })) : Bool) : Bool) || (cast _Runtime.strictEquals(character, '{') : Bool)) : Bool) || (cast _Runtime.strictEquals(character, '"') : Bool)) : Bool) || (cast _Runtime.strictEquals(character, '\'') : Bool));
     return cast null;
   }
 
   public static function isSceneDocumentYamlSubsetSeparation__sceneDocumentYamlSubset(character:Null<String>):Bool {
-    return cast _Runtime.orValue(((cast ((cast _Runtime.strictEquals(character, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(character, ' ') : Bool)) : Bool) || (cast _Runtime.strictEquals(character, '	') : Bool)), function():Dynamic return cast (cast _SceneDocument.isSceneDocumentYamlSubsetLineBreak__sceneDocumentYamlSubset(({ final __callArgument457:Dynamic = character; __callArgument457; })) : Bool));
+    return cast _Runtime.orValue(((cast ((cast _Runtime.strictEquals(character, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(character, ' ') : Bool)) : Bool) || (cast _Runtime.strictEquals(character, '	') : Bool)), function():Dynamic return cast (cast _SceneDocument.isSceneDocumentYamlSubsetLineBreak__sceneDocumentYamlSubset(({ final __callArgument863:Dynamic = character; __callArgument863; })) : Bool));
     return cast null;
   }
 

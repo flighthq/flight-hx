@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentScene2DMaterialization = { var scene:Scene2D; };
+typedef FlightDocumentScene2DMaterialization = { var interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>; var layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>; var scene:Scene2D; };

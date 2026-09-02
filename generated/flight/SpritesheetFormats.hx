@@ -10,6 +10,7 @@ import flight.types.AsepriteSerializeOptions;
 import flight.types.CocosPlistFrame;
 import flight.types.CocosPlistMetadata;
 import flight.types.CocosPlistParsed;
+import flight.types.ImportDiagnostic;
 import flight.types.LibgdxAtlasParseOptions;
 import flight.types.SpritesheetData;
 import flight.types.SpritesheetFormatKind;
@@ -37,28 +38,28 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  public static function parseAsepriteSpritesheet(json:String):SpritesheetData {
-    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseAsepriteSpritesheet(json);
+  public static function parseAsepriteSpritesheet(json:String, ?diagnostics:Array<ImportDiagnostic>):SpritesheetData {
+    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseAsepriteSpritesheet(json, diagnostics);
     return cast null;
   }
 
-  public static function parseAsepriteSpritesheetDocument(json:String):AsepriteParsed {
-    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseAsepriteSpritesheetDocument(json);
+  public static function parseAsepriteSpritesheetDocument(json:String, ?diagnostics:Array<ImportDiagnostic>):AsepriteParsed {
+    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseAsepriteSpritesheetDocument(json, diagnostics);
     return cast null;
   }
 
-  public static function parseCocosPlistSpritesheet(xml:String):SpritesheetData {
-    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseCocosPlistSpritesheet(xml);
+  public static function parseCocosPlistSpritesheet(xml:String, ?diagnostics:Array<ImportDiagnostic>):SpritesheetData {
+    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseCocosPlistSpritesheet(xml, diagnostics);
     return cast null;
   }
 
-  public static function parseCocosPlistSpritesheetDocument(xml:String):CocosPlistParsed {
-    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseCocosPlistSpritesheetDocument(xml);
+  public static function parseCocosPlistSpritesheetDocument(xml:String, ?diagnostics:Array<ImportDiagnostic>):CocosPlistParsed {
+    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseCocosPlistSpritesheetDocument(xml, diagnostics);
     return cast null;
   }
 
-  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):SpritesheetData {
-    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseLibgdxAtlasSpritesheet(text, options);
+  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions, ?diagnostics:Array<ImportDiagnostic>):SpritesheetData {
+    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseLibgdxAtlasSpritesheet(text, options, diagnostics);
     return cast null;
   }
 
@@ -67,23 +68,23 @@ class SpritesheetFormats {
     return cast null;
   }
 
-  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):SpritesheetData {
-    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseStarlingSpritesheet(xml, options);
+  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions, ?diagnostics:Array<ImportDiagnostic>):SpritesheetData {
+    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseStarlingSpritesheet(xml, options, diagnostics);
     return cast null;
   }
 
-  public static function parseStarlingSpritesheetDocument(xml:String, ?options:StarlingParseOptions):StarlingParsed {
-    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseStarlingSpritesheetDocument(xml, options);
+  public static function parseStarlingSpritesheetDocument(xml:String, ?options:StarlingParseOptions, ?diagnostics:Array<ImportDiagnostic>):StarlingParsed {
+    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseStarlingSpritesheetDocument(xml, options, diagnostics);
     return cast null;
   }
 
-  public static function parseTexturePackerSpritesheet(json:String):SpritesheetData {
-    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseTexturePackerSpritesheet(json);
+  public static function parseTexturePackerSpritesheet(json:String, ?diagnostics:Array<ImportDiagnostic>):SpritesheetData {
+    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseTexturePackerSpritesheet(json, diagnostics);
     return cast null;
   }
 
-  public static function parseTexturePackerSpritesheetDocument(json:String):TexturePackerParsed {
-    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseTexturePackerSpritesheetDocument(json);
+  public static function parseTexturePackerSpritesheetDocument(json:String, ?diagnostics:Array<ImportDiagnostic>):TexturePackerParsed {
+    return cast Facade_SpritesheetFormats_flight__SpritesheetFormats.parseTexturePackerSpritesheetDocument(json, diagnostics);
     return cast null;
   }
 

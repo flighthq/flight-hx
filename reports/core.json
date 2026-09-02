@@ -201,6 +201,12 @@
         "source": "upstream/packages/effects-wgpu/src/contract.ts"
       },
       {
+        "module": "flight._Encoding",
+        "packageName": "@flighthq/encoding",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/encoding/src/contract.ts"
+      },
+      {
         "module": "flight._Entity",
         "packageName": "@flighthq/entity",
         "reason": "header-only-contract-export-lane",
@@ -891,6 +897,12 @@
         "source": "upstream/packages/timeline/src/contract.ts"
       },
       {
+        "module": "flight._Tokens",
+        "packageName": "@flighthq/tokens",
+        "reason": "header-only-contract-export-lane",
+        "source": "upstream/packages/tokens/src/contract.ts"
+      },
+      {
         "module": "flight._Tray",
         "packageName": "@flighthq/tray",
         "reason": "header-only-contract-export-lane",
@@ -952,6 +964,10 @@
     {
       "packageName": "@flighthq/tool-capture",
       "reason": "Tooling CLI (1 bin), absent from SDK barrels, with production host dependencies/imports limited to Node built-ins and Playwright (1 dependency, 8 imports)."
+    },
+    {
+      "packageName": "@flighthq/tool-pipeline",
+      "reason": "Tooling CLI (1 bin), absent from SDK barrels, with a production Node entrypoint and no portable SDK exposure."
     },
     {
       "packageName": "@flighthq/tool-registry",
@@ -1075,7 +1091,7 @@
       "module": "flight._Command"
     },
     {
-      "declarations": 30,
+      "declarations": 59,
       "diagnostics": [],
       "module": "flight._Compression"
     },
@@ -1105,7 +1121,7 @@
       "module": "flight._Easing"
     },
     {
-      "declarations": 186,
+      "declarations": 198,
       "diagnostics": [],
       "module": "flight._Effects"
     },
@@ -1115,14 +1131,19 @@
       "module": "flight._EffectsCanvas"
     },
     {
-      "declarations": 312,
+      "declarations": 319,
       "diagnostics": [],
       "module": "flight._EffectsGl"
     },
     {
-      "declarations": 320,
+      "declarations": 334,
       "diagnostics": [],
       "module": "flight._EffectsWgpu"
+    },
+    {
+      "declarations": 8,
+      "diagnostics": [],
+      "module": "flight._Encoding"
     },
     {
       "declarations": 24,
@@ -1160,7 +1181,7 @@
       "module": "flight._Geometry"
     },
     {
-      "declarations": 64,
+      "declarations": 67,
       "diagnostics": [],
       "module": "flight._Gizmo"
     },
@@ -1170,7 +1191,7 @@
       "module": "flight._GlyphAtlas"
     },
     {
-      "declarations": 135,
+      "declarations": 147,
       "diagnostics": [],
       "module": "flight._Gui"
     },
@@ -1220,7 +1241,7 @@
       "module": "flight._Input"
     },
     {
-      "declarations": 152,
+      "declarations": 181,
       "diagnostics": [],
       "module": "flight._Interaction"
     },
@@ -1275,7 +1296,7 @@
       "module": "flight._Math"
     },
     {
-      "declarations": 96,
+      "declarations": 97,
       "diagnostics": [],
       "module": "flight._Media"
     },
@@ -1325,12 +1346,12 @@
       "module": "flight._Notification"
     },
     {
-      "declarations": 81,
+      "declarations": 84,
       "diagnostics": [],
       "module": "flight._ParticleEmitter"
     },
     {
-      "declarations": 52,
+      "declarations": 54,
       "diagnostics": [],
       "module": "flight._Particles"
     },
@@ -1500,7 +1521,7 @@
       "module": "flight._Scene3DWgpu"
     },
     {
-      "declarations": 132,
+      "declarations": 200,
       "diagnostics": [],
       "module": "flight._SceneDocument"
     },
@@ -1540,7 +1561,7 @@
       "module": "flight._Share"
     },
     {
-      "declarations": 9,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flight._Shell"
     },
@@ -1550,7 +1571,7 @@
       "module": "flight._Shortcut"
     },
     {
-      "declarations": 14,
+      "declarations": 25,
       "diagnostics": [],
       "module": "flight._Signals"
     },
@@ -1575,7 +1596,7 @@
       "module": "flight._Snapshot"
     },
     {
-      "declarations": 19,
+      "declarations": 20,
       "diagnostics": [],
       "module": "flight._Socket"
     },
@@ -1585,7 +1606,7 @@
       "module": "flight._Spatial"
     },
     {
-      "declarations": 14,
+      "declarations": 23,
       "diagnostics": [],
       "module": "flight._Spring"
     },
@@ -1670,7 +1691,7 @@
       "module": "flight._TextureAtlas"
     },
     {
-      "declarations": 31,
+      "declarations": 35,
       "diagnostics": [],
       "module": "flight._TextureAtlasFormats"
     },
@@ -1685,7 +1706,7 @@
       "module": "flight._Tilemap"
     },
     {
-      "declarations": 71,
+      "declarations": 75,
       "diagnostics": [],
       "module": "flight._TilemapFormats"
     },
@@ -1693,6 +1714,11 @@
       "declarations": 30,
       "diagnostics": [],
       "module": "flight._Timeline"
+    },
+    {
+      "declarations": 32,
+      "diagnostics": [],
+      "module": "flight._Tokens"
     },
     {
       "declarations": 41,
@@ -1705,7 +1731,7 @@
       "module": "flight._Tween"
     },
     {
-      "declarations": 358,
+      "declarations": 361,
       "diagnostics": [],
       "module": "flight._Types"
     },
@@ -1855,7 +1881,7 @@
       "module": "flight.Command"
     },
     {
-      "declarations": 6,
+      "declarations": 8,
       "diagnostics": [],
       "module": "flight.Compression"
     },
@@ -1885,7 +1911,7 @@
       "module": "flight.Easing"
     },
     {
-      "declarations": 152,
+      "declarations": 156,
       "diagnostics": [],
       "module": "flight.Effects"
     },
@@ -1895,14 +1921,19 @@
       "module": "flight.EffectsCanvas"
     },
     {
-      "declarations": 106,
+      "declarations": 108,
       "diagnostics": [],
       "module": "flight.EffectsGl"
     },
     {
-      "declarations": 97,
+      "declarations": 99,
       "diagnostics": [],
       "module": "flight.EffectsWgpu"
+    },
+    {
+      "declarations": 2,
+      "diagnostics": [],
+      "module": "flight.Encoding"
     },
     {
       "declarations": 2,
@@ -1940,7 +1971,7 @@
       "module": "flight.Geometry"
     },
     {
-      "declarations": 16,
+      "declarations": 18,
       "diagnostics": [],
       "module": "flight.Gizmo"
     },
@@ -1950,7 +1981,7 @@
       "module": "flight.GlyphAtlas"
     },
     {
-      "declarations": 79,
+      "declarations": 87,
       "diagnostics": [],
       "module": "flight.Gui"
     },
@@ -2000,7 +2031,7 @@
       "module": "flight.Input"
     },
     {
-      "declarations": 66,
+      "declarations": 74,
       "diagnostics": [],
       "module": "flight.Interaction"
     },
@@ -2055,7 +2086,7 @@
       "module": "flight.Math"
     },
     {
-      "declarations": 52,
+      "declarations": 53,
       "diagnostics": [],
       "module": "flight.Media"
     },
@@ -2205,7 +2236,7 @@
       "module": "flight.Render"
     },
     {
-      "declarations": 52,
+      "declarations": 60,
       "diagnostics": [],
       "module": "flight.RenderGl"
     },
@@ -2280,7 +2311,7 @@
       "module": "flight.Scene3DWgpu"
     },
     {
-      "declarations": 13,
+      "declarations": 14,
       "diagnostics": [],
       "module": "flight.SceneDocument"
     },
@@ -2290,7 +2321,7 @@
       "module": "flight.Screen"
     },
     {
-      "declarations": 5042,
+      "declarations": 5106,
       "diagnostics": [],
       "module": "flight.Sdk"
     },
@@ -2325,7 +2356,7 @@
       "module": "flight.Share"
     },
     {
-      "declarations": 9,
+      "declarations": 10,
       "diagnostics": [],
       "module": "flight.Shell"
     },
@@ -2335,7 +2366,7 @@
       "module": "flight.Shortcut"
     },
     {
-      "declarations": 11,
+      "declarations": 18,
       "diagnostics": [],
       "module": "flight.Signals"
     },
@@ -2360,7 +2391,7 @@
       "module": "flight.Snapshot"
     },
     {
-      "declarations": 12,
+      "declarations": 13,
       "diagnostics": [],
       "module": "flight.Socket"
     },
@@ -2370,7 +2401,7 @@
       "module": "flight.Spatial"
     },
     {
-      "declarations": 12,
+      "declarations": 21,
       "diagnostics": [],
       "module": "flight.Spring"
     },
@@ -2480,6 +2511,11 @@
       "module": "flight.Timeline"
     },
     {
+      "declarations": 5,
+      "diagnostics": [],
+      "module": "flight.Tokens"
+    },
+    {
       "declarations": 26,
       "diagnostics": [],
       "module": "flight.Tray"
@@ -2490,7 +2526,7 @@
       "module": "flight.Tween"
     },
     {
-      "declarations": 315,
+      "declarations": 316,
       "diagnostics": [],
       "module": "flight.Types"
     },
@@ -3458,6 +3494,16 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.BitmapConvolutionOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.BitmapDisplacementEffect"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.BitmapDisplacementEffectEdgeMode"
     },
     {
       "declarations": 1,
@@ -5712,6 +5758,71 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.FlightDocumentInteractiveState"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentInteractiveStateBinding"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentInteractiveStateExtensionDescriptor"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentInteractiveStateExtensionSchema"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentInteractiveStateProperty"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentInteractiveStates"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentInteractiveStateTransitionDescriptor"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentInteractiveStateTransitionSchema"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentInteractiveStateValue"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentLayoutBinding"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentLayoutDescriptor"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentLayoutNode"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentLayoutTree"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.FlightDocumentNode"
     },
     {
@@ -5803,6 +5914,31 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.FlightDocumentText"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentToken"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentTokenResolution"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentTokenResolver"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentTokenResolverRegistry"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.FlightDocumentTokenValues"
     },
     {
       "declarations": 1,
@@ -5997,6 +6133,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.GizmoAlignment"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.GizmoCreateOptions"
     },
     {
@@ -6023,6 +6164,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.GizmoSignals"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.GizmoSmartGuideResult"
     },
     {
       "declarations": 1,
@@ -6988,6 +7134,36 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.GuiControllerOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.GuiDialog"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.GuiDialogCloseReason"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.GuiDialogCloseResult"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.GuiDialogEntry"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.GuiDialogOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.GuiDialogSignals"
     },
     {
       "declarations": 1,
@@ -8363,6 +8539,16 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.InteractionConnectGuard"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.InteractionDispatchLayer"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.InteractionDispatchLayerOptions"
     },
     {
       "declarations": 1,
@@ -9862,6 +10048,56 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.NodeInteractiveStateBinding"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.NodeInteractiveStateBindingRuntime"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.NodeInteractiveStateExplanation"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.NodeInteractiveStateExtensionRuntime"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.NodeInteractiveStateFlags"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.NodeInteractiveStateProperty"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.NodeInteractiveStateRefusalReason"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.NodeInteractiveStateTransition"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.NodeInteractiveStateTransitionRequest"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.NodeInteractiveStateTransitionValue"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.NodeOf"
     },
     {
@@ -10118,6 +10354,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.ObjMaterialLibrary"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.OpenDirectoryDialogOptions"
     },
     {
       "declarations": 1,
@@ -11752,6 +11993,11 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.RenderEffectCaptureGeometry"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.RenderEffectInput"
     },
     {
@@ -13072,6 +13318,31 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.ShellProcess"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.ShellProcessBackend"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.ShellProcessExitStatus"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.ShellProcessHost"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.ShellProcessOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.ShellShortcutLink"
     },
     {
@@ -13213,6 +13484,11 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.SignalThrottleOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.SignalTrackedConnectOptions"
     },
     {
       "declarations": 1,
@@ -14612,6 +14888,16 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.TcpSocketConnection"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TcpSocketOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.TextAutoSize"
     },
     {
@@ -14912,61 +15198,6 @@
     {
       "declarations": 1,
       "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerArrayDocument"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerArrayFrame"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerDocument"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerFrameTag"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerHashDocument"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerHashFrame"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerMeta"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerParseOptions"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerPivot"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerRect"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasPackerSize"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
       "module": "flight.types.TextureAtlasParseOptions"
     },
     {
@@ -14993,11 +15224,6 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.TextureAtlasRegionTextureStatus"
-    },
-    {
-      "declarations": 1,
-      "diagnostics": [],
-      "module": "flight.types.TextureAtlasStarlingParseOptions"
     },
     {
       "declarations": 1,
@@ -15063,6 +15289,61 @@
       "declarations": 1,
       "diagnostics": [],
       "module": "flight.types.TexturePackerArrayFrame"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasArrayDocument"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasArrayFrame"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasDocument"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasFrameTag"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasHashDocument"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasHashFrame"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasMeta"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasParseOptions"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasPivot"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasRect"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.TexturePackerAtlasSize"
     },
     {
       "declarations": 1,
@@ -16517,6 +16798,16 @@
     {
       "declarations": 1,
       "diagnostics": [],
+      "module": "flight.types.WgpuRenderEffectRegistration"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
+      "module": "flight.types.WgpuRenderEffectResolver"
+    },
+    {
+      "declarations": 1,
+      "diagnostics": [],
       "module": "flight.types.WgpuRenderEffectRunner"
     },
     {
@@ -16847,10 +17138,10 @@
   ],
   "schemaVersion": 7,
   "staticLowering": {
-    "booleanAndExpressions": 2780,
-    "booleanConditionalExpressions": 3480,
-    "booleanOrExpressions": 3375,
-    "booleanTruthinessUses": 17172,
+    "booleanAndExpressions": 2827,
+    "booleanConditionalExpressions": 3566,
+    "booleanOrExpressions": 3469,
+    "booleanTruthinessUses": 17717,
     "destructuringEscapes": {
       "regexp-result-array": {
         "assignment": 0,
@@ -16870,9 +17161,9 @@
         "proven": 30
       },
       "declaration": {
-        "direct": 199,
+        "direct": 200,
         "parked": 12,
-        "proven": 199
+        "proven": 200
       },
       "parameter": {
         "direct": 18,
@@ -16883,7 +17174,7 @@
     "destructuringReceivers": {
       "Array": {
         "assignment": 30,
-        "declaration": 199,
+        "declaration": 200,
         "parameter": 18
       },
       "ArrayOrFloat32Array": {
@@ -16947,21 +17238,21 @@
       "asyncFlowForOfValues": 21
     },
     "indexedAccesses": {
-      "reads": 9612,
-      "writes": 4436
+      "reads": 9712,
+      "writes": 4477
     },
     "indexedReceivers": {
       "Array": {
-        "reads": 6690,
-        "writes": 1463
+        "reads": 6765,
+        "writes": 1474
       },
       "ArrayOrFloat32Array": {
         "reads": 15,
-        "writes": 43
+        "writes": 45
       },
       "Float32Array": {
         "reads": 1805,
-        "writes": 2113
+        "writes": 2117
       },
       "Float64Array": {
         "reads": 178,
@@ -16972,8 +17263,8 @@
         "writes": 4
       },
       "Int32Array": {
-        "reads": 51,
-        "writes": 32
+        "reads": 55,
+        "writes": 39
       },
       "Int8Array": {
         "reads": 11,
@@ -16992,20 +17283,20 @@
         "writes": 65
       },
       "Uint8Array": {
-        "reads": 361,
-        "writes": 46
+        "reads": 382,
+        "writes": 63
       },
       "Uint8ClampedArray": {
         "reads": 367,
         "writes": 402
       }
     },
-    "numericRelations": 7787,
+    "numericRelations": 7898,
     "syntheticArrayReads": {
       "highArityArguments": 27,
-      "iterationBindings": 191
+      "iterationBindings": 205
     },
-    "typedArraySetCalls": 90,
+    "typedArraySetCalls": 92,
     "typedArraySetReceivers": {
       "Float32Array": 41,
       "Float64Array": 0,
@@ -17015,7 +17306,7 @@
       "Uint16Array": 6,
       "Uint16ArrayOrUint32Array": 1,
       "Uint32Array": 7,
-      "Uint8Array": 24,
+      "Uint8Array": 26,
       "Uint8ClampedArray": 10
     }
   },
@@ -18161,6 +18452,14 @@
       },
       {
         "byReason": {
+          "standard-toolkit-boundary": 13
+        },
+        "module": "flight._Compression",
+        "source": "upstream/packages/compression/src/compress.ts",
+        "total": 13
+      },
+      {
+        "byReason": {
           "standard-toolkit-boundary": 4
         },
         "module": "flight._Compression",
@@ -18326,6 +18625,14 @@
         "module": "flight._Effects",
         "source": "upstream/packages/effects/src/bevelEffect.ts",
         "total": 5
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 8
+        },
+        "module": "flight._Effects",
+        "source": "upstream/packages/effects/src/bitmapDisplacementEffect.ts",
+        "total": 8
       },
       {
         "byReason": {
@@ -18505,6 +18812,14 @@
       },
       {
         "byReason": {
+          "source-any": 2
+        },
+        "module": "flight._Effects",
+        "source": "upstream/packages/effects/src/renderEffectCaptureGeometry.ts",
+        "total": 2
+      },
+      {
+        "byReason": {
           "source-unknown": 25,
           "standard-toolkit-boundary": 4
         },
@@ -18523,12 +18838,12 @@
       },
       {
         "byReason": {
-          "source-any": 10,
-          "standard-toolkit-boundary": 39
+          "source-any": 8,
+          "standard-toolkit-boundary": 38
         },
         "module": "flight._Effects",
         "source": "upstream/packages/effects/src/renderEffectPadding.ts",
-        "total": 49
+        "total": 46
       },
       {
         "byReason": {
@@ -18778,6 +19093,14 @@
         "module": "flight._EffectsGl",
         "source": "upstream/packages/effects-gl/src/glBevelEffect.ts",
         "total": 25
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 6
+        },
+        "module": "flight._EffectsGl",
+        "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts",
+        "total": 6
       },
       {
         "byReason": {
@@ -19215,11 +19538,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 6
+          "standard-toolkit-boundary": 9
         },
         "module": "flight._EffectsWgpu",
         "source": "upstream/packages/effects-wgpu/src/enableWgpuRenderEffectGuards.ts",
-        "total": 6
+        "total": 9
       },
       {
         "byReason": {
@@ -19228,6 +19551,17 @@
         "module": "flight._EffectsWgpu",
         "source": "upstream/packages/effects-wgpu/src/wgpuBevelEffect.ts",
         "total": 15
+      },
+      {
+        "byReason": {
+          "external-toolkit-boundary": 11,
+          "source-any": 2,
+          "source-undefined": 6,
+          "standard-toolkit-boundary": 10
+        },
+        "module": "flight._EffectsWgpu",
+        "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
+        "total": 29
       },
       {
         "byReason": {
@@ -19497,19 +19831,27 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 2
+          "standard-toolkit-boundary": 3
         },
         "module": "flight._EffectsWgpu",
         "source": "upstream/packages/effects-wgpu/src/wgpuRenderEffectRegistry.ts",
-        "total": 2
+        "total": 3
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 8
+          "standard-toolkit-boundary": 9
         },
         "module": "flight._EffectsWgpu",
         "source": "upstream/packages/effects-wgpu/src/wgpuRenderTextureEffect.ts",
-        "total": 8
+        "total": 9
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 17
+        },
+        "module": "flight._Encoding",
+        "source": "upstream/packages/encoding/src/utf8.ts",
+        "total": 17
       },
       {
         "byReason": {
@@ -19533,14 +19875,15 @@
       },
       {
         "byReason": {
-          "source-never": 2,
+          "source-any": 19,
+          "source-never": 3,
           "source-null": 10,
-          "standard-toolkit-boundary": 79,
+          "standard-toolkit-boundary": 116,
           "unclassified": 2
         },
         "module": "flight._FileSystem",
         "source": "upstream/packages/filesystem/src/filesystem.ts",
-        "total": 93
+        "total": 150
       },
       {
         "byReason": {
@@ -19930,12 +20273,20 @@
       },
       {
         "byReason": {
+          "standard-toolkit-boundary": 8
+        },
+        "module": "flight._Gizmo",
+        "source": "upstream/packages/gizmo/src/gizmoAlignment.ts",
+        "total": 8
+      },
+      {
+        "byReason": {
           "source-never": 2,
-          "standard-toolkit-boundary": 76
+          "standard-toolkit-boundary": 72
         },
         "module": "flight._Gizmo",
         "source": "upstream/packages/gizmo/src/gizmoState.ts",
-        "total": 78
+        "total": 74
       },
       {
         "byReason": {
@@ -20013,6 +20364,16 @@
         "module": "flight._Gui",
         "source": "upstream/packages/gui/src/guiController.ts",
         "total": 30
+      },
+      {
+        "byReason": {
+          "source-any": 2,
+          "standard-toolkit-boundary": 6,
+          "unclassified": 4
+        },
+        "module": "flight._Gui",
+        "source": "upstream/packages/gui/src/guiDialog.ts",
+        "total": 12
       },
       {
         "byReason": {
@@ -20179,12 +20540,14 @@
       },
       {
         "byReason": {
+          "source-any": 1,
           "source-unknown": 3,
-          "standard-toolkit-boundary": 6
+          "standard-toolkit-boundary": 17,
+          "unclassified": 1
         },
         "module": "flight._HostCapacitor",
         "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts",
-        "total": 9
+        "total": 22
       },
       {
         "byReason": {
@@ -20596,23 +20959,29 @@
       {
         "byReason": {
           "external-toolkit-boundary": 1,
-          "source-unknown": 14,
-          "standard-toolkit-boundary": 40,
+          "source-any": 8,
+          "source-never": 1,
+          "source-null": 1,
+          "source-unknown": 20,
+          "standard-toolkit-boundary": 62,
           "unclassified": 3
         },
         "module": "flight._HostWeb",
         "source": "upstream/packages/host-web/src/webDialog.ts",
-        "total": 58
+        "total": 96
       },
       {
         "byReason": {
+          "source-any": 11,
+          "source-never": 1,
+          "source-null": 1,
           "source-unknown": 3,
-          "standard-toolkit-boundary": 47,
+          "standard-toolkit-boundary": 90,
           "unclassified": 2
         },
         "module": "flight._HostWeb",
         "source": "upstream/packages/host-web/src/webFilesystem.ts",
-        "total": 52
+        "total": 108
       },
       {
         "byReason": {
@@ -21003,12 +21372,12 @@
           "source-any": 27,
           "source-never": 10,
           "source-unknown": 2,
-          "standard-toolkit-boundary": 33,
+          "standard-toolkit-boundary": 37,
           "unclassified": 1
         },
         "module": "flight._Interaction",
         "source": "upstream/packages/interaction/src/interactionManager.ts",
-        "total": 73
+        "total": 77
       },
       {
         "byReason": {
@@ -21026,6 +21395,16 @@
         "module": "flight._Interaction",
         "source": "upstream/packages/interaction/src/nodeInteractionState.ts",
         "total": 12
+      },
+      {
+        "byReason": {
+          "source-unknown": 12,
+          "standard-toolkit-boundary": 19,
+          "unclassified": 4
+        },
+        "module": "flight._Interaction",
+        "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts",
+        "total": 35
       },
       {
         "byReason": {
@@ -21424,11 +21803,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 9
+          "standard-toolkit-boundary": 11
         },
         "module": "flight._Math",
         "source": "upstream/packages/math/src/rounding.ts",
-        "total": 9
+        "total": 11
       },
       {
         "byReason": {
@@ -21448,21 +21827,21 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 28
+          "standard-toolkit-boundary": 29
         },
         "module": "flight._Media",
         "source": "upstream/packages/media/src/audioChannel.ts",
-        "total": 28
+        "total": 29
       },
       {
         "byReason": {
           "source-any": 2,
           "source-unknown": 3,
-          "standard-toolkit-boundary": 41
+          "standard-toolkit-boundary": 45
         },
         "module": "flight._Media",
         "source": "upstream/packages/media/src/audioDeviceBackend.ts",
-        "total": 46
+        "total": 50
       },
       {
         "byReason": {
@@ -21761,19 +22140,19 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 15
+          "standard-toolkit-boundary": 8
         },
         "module": "flight._ParticleEmitter",
         "source": "upstream/packages/particleemitter/src/emitParticleBurst2D.ts",
-        "total": 15
+        "total": 8
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 35
+          "standard-toolkit-boundary": 29
         },
         "module": "flight._ParticleEmitter",
         "source": "upstream/packages/particleemitter/src/emitParticleBurst3D.ts",
-        "total": 35
+        "total": 29
       },
       {
         "byReason": {
@@ -21820,20 +22199,20 @@
       {
         "byReason": {
           "source-unknown": 1,
-          "standard-toolkit-boundary": 41
+          "standard-toolkit-boundary": 35
         },
         "module": "flight._ParticleEmitter",
         "source": "upstream/packages/particleemitter/src/updateParticleEmitter2D.ts",
-        "total": 42
+        "total": 36
       },
       {
         "byReason": {
           "source-unknown": 2,
-          "standard-toolkit-boundary": 41
+          "standard-toolkit-boundary": 35
         },
         "module": "flight._ParticleEmitter",
         "source": "upstream/packages/particleemitter/src/updateParticleEmitter3D.ts",
-        "total": 43
+        "total": 37
       },
       {
         "byReason": {
@@ -21886,11 +22265,19 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 15
+          "standard-toolkit-boundary": 11
+        },
+        "module": "flight._Particles",
+        "source": "upstream/packages/particles/src/particleSpawnOffset.ts",
+        "total": 11
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 8
         },
         "module": "flight._Particles",
         "source": "upstream/packages/particles/src/updateParticleObjects.ts",
-        "total": 15
+        "total": 8
       },
       {
         "byReason": {
@@ -25760,16 +26147,36 @@
       },
       {
         "byReason": {
-          "source-any": 27,
-          "source-null": 1,
+          "source-any": 48,
+          "source-null": 2,
           "source-undefined": 1,
-          "source-unknown": 167,
-          "standard-toolkit-boundary": 140,
-          "unclassified": 5
+          "source-unknown": 263,
+          "standard-toolkit-boundary": 209,
+          "unclassified": 10
         },
         "module": "flight._SceneDocument",
         "source": "upstream/packages/scene-document/src/flightDocumentText.ts",
-        "total": 341
+        "total": 533
+      },
+      {
+        "byReason": {
+          "source-unknown": 2,
+          "standard-toolkit-boundary": 12,
+          "unclassified": 1
+        },
+        "module": "flight._SceneDocument",
+        "source": "upstream/packages/scene-document/src/sceneDocumentInteractiveStateBindings.ts",
+        "total": 15
+      },
+      {
+        "byReason": {
+          "source-any": 24,
+          "source-unknown": 43,
+          "standard-toolkit-boundary": 73
+        },
+        "module": "flight._SceneDocument",
+        "source": "upstream/packages/scene-document/src/sceneDocumentLayoutBindings.ts",
+        "total": 140
       },
       {
         "byReason": {
@@ -25784,34 +26191,37 @@
       {
         "byReason": {
           "source-any": 3,
-          "source-unknown": 10,
-          "standard-toolkit-boundary": 4
+          "source-unknown": 13,
+          "standard-toolkit-boundary": 23,
+          "unclassified": 1
         },
         "module": "flight._SceneDocument",
         "source": "upstream/packages/scene-document/src/sceneDocumentRefusal.ts",
-        "total": 17
+        "total": 40
       },
       {
         "byReason": {
           "source-any": 7,
-          "source-null": 9,
-          "source-unknown": 24,
-          "standard-toolkit-boundary": 1
+          "source-null": 19,
+          "source-unknown": 25,
+          "standard-toolkit-boundary": 5,
+          "unclassified": 1
         },
         "module": "flight._SceneDocument",
         "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.ts",
-        "total": 41
+        "total": 57
       },
       {
         "byReason": {
           "source-any": 7,
-          "source-null": 13,
-          "source-unknown": 23,
-          "standard-toolkit-boundary": 8
+          "source-null": 23,
+          "source-unknown": 24,
+          "standard-toolkit-boundary": 12,
+          "unclassified": 1
         },
         "module": "flight._SceneDocument",
         "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.ts",
-        "total": 51
+        "total": 67
       },
       {
         "byReason": {
@@ -26071,12 +26481,43 @@
       },
       {
         "byReason": {
+          "source-any": 7,
+          "source-unknown": 2,
+          "standard-toolkit-boundary": 2,
+          "unclassified": 1
+        },
+        "module": "flight._Signals",
+        "source": "upstream/packages/signals/src/connection.ts",
+        "total": 12
+      },
+      {
+        "byReason": {
           "source-any": 3,
           "unclassified": 1
         },
         "module": "flight._Signals",
         "source": "upstream/packages/signals/src/emitter.ts",
         "total": 4
+      },
+      {
+        "byReason": {
+          "source-any": 3,
+          "source-unknown": 1,
+          "standard-toolkit-boundary": 3,
+          "unclassified": 1
+        },
+        "module": "flight._Signals",
+        "source": "upstream/packages/signals/src/safe.ts",
+        "total": 8
+      },
+      {
+        "byReason": {
+          "source-any": 10,
+          "standard-toolkit-boundary": 1
+        },
+        "module": "flight._Signals",
+        "source": "upstream/packages/signals/src/scope.ts",
+        "total": 11
       },
       {
         "byReason": {
@@ -26089,9 +26530,9 @@
       },
       {
         "byReason": {
-          "source-any": 9,
-          "source-unknown": 3,
-          "standard-toolkit-boundary": 13
+          "source-any": 11,
+          "source-unknown": 4,
+          "standard-toolkit-boundary": 10
         },
         "module": "flight._Signals",
         "source": "upstream/packages/signals/src/slot.ts",
@@ -26408,19 +26849,19 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 16
+          "standard-toolkit-boundary": 18
         },
         "module": "flight._Spring",
         "source": "upstream/packages/spring/src/spring.ts",
-        "total": 16
+        "total": 18
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 4
+          "standard-toolkit-boundary": 10
         },
         "module": "flight._Spring",
         "source": "upstream/packages/spring/src/springConfig.ts",
-        "total": 4
+        "total": 10
       },
       {
         "byReason": {
@@ -26959,11 +27400,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 12
+          "standard-toolkit-boundary": 4
         },
         "module": "flight._TextureAtlasFormats",
-        "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerParse.ts",
-        "total": 12
+        "source": "upstream/packages/textureatlas-formats/src/textureAtlasPageMeta.ts",
+        "total": 4
       },
       {
         "byReason": {
@@ -26972,6 +27413,14 @@
         "module": "flight._TextureAtlasFormats",
         "source": "upstream/packages/textureatlas-formats/src/textureAtlasStarlingParse.ts",
         "total": 2
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 12
+        },
+        "module": "flight._TextureAtlasFormats",
+        "source": "upstream/packages/textureatlas-formats/src/texturePackerAtlasParse.ts",
+        "total": 12
       },
       {
         "byReason": {
@@ -27062,12 +27511,12 @@
       {
         "byReason": {
           "source-any": 7,
-          "source-unknown": 37,
+          "source-unknown": 38,
           "standard-toolkit-boundary": 32
         },
         "module": "flight._TilemapFormats",
         "source": "upstream/packages/tilemap-formats/src/tiledJsonParse.ts",
-        "total": 76
+        "total": 77
       },
       {
         "byReason": {
@@ -27097,11 +27546,11 @@
       },
       {
         "byReason": {
-          "standard-toolkit-boundary": 22
+          "standard-toolkit-boundary": 24
         },
         "module": "flight._TilemapFormats",
         "source": "upstream/packages/tilemap-formats/src/tiledXmlParse.ts",
-        "total": 22
+        "total": 24
       },
       {
         "byReason": {
@@ -27111,6 +27560,35 @@
         "module": "flight._Timeline",
         "source": "upstream/packages/timeline/src/timeline.ts",
         "total": 18
+      },
+      {
+        "byReason": {
+          "source-any": 2,
+          "source-undefined": 1,
+          "standard-toolkit-boundary": 12,
+          "unclassified": 3
+        },
+        "module": "flight._Tokens",
+        "source": "upstream/packages/tokens/src/flightDocumentSceneTokens.ts",
+        "total": 18
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 13,
+          "unclassified": 2
+        },
+        "module": "flight._Tokens",
+        "source": "upstream/packages/tokens/src/flightDocumentTokenReference.ts",
+        "total": 15
+      },
+      {
+        "byReason": {
+          "standard-toolkit-boundary": 3,
+          "unclassified": 1
+        },
+        "module": "flight._Tokens",
+        "source": "upstream/packages/tokens/src/substituteFlightDocumentSceneTokens.ts",
+        "total": 4
       },
       {
         "byReason": {
@@ -27760,12 +28238,29 @@
       },
       {
         "byReason": {
+          "source-any": 4
+        },
+        "module": "flight.Sdk",
+        "source": "upstream/packages/signals/src/connection.ts",
+        "total": 4
+      },
+      {
+        "byReason": {
           "source-any": 2,
           "unclassified": 1
         },
         "module": "flight.Sdk",
         "source": "upstream/packages/signals/src/emitter.ts",
         "total": 3
+      },
+      {
+        "byReason": {
+          "source-any": 1,
+          "unclassified": 1
+        },
+        "module": "flight.Sdk",
+        "source": "upstream/packages/signals/src/safe.ts",
+        "total": 2
       },
       {
         "byReason": {
@@ -27889,12 +28384,29 @@
       },
       {
         "byReason": {
+          "source-any": 4
+        },
+        "module": "flight.Signals",
+        "source": "upstream/packages/signals/src/connection.ts",
+        "total": 4
+      },
+      {
+        "byReason": {
           "source-any": 2,
           "unclassified": 1
         },
         "module": "flight.Signals",
         "source": "upstream/packages/signals/src/emitter.ts",
         "total": 3
+      },
+      {
+        "byReason": {
+          "source-any": 1,
+          "unclassified": 1
+        },
+        "module": "flight.Signals",
+        "source": "upstream/packages/signals/src/safe.ts",
+        "total": 2
       },
       {
         "byReason": {
@@ -28346,6 +28858,14 @@
       },
       {
         "byReason": {
+          "unclassified": 2
+        },
+        "module": "flight.types.FlightDocumentInteractiveStateTransitionSchema",
+        "source": "upstream/packages/types/src/FlightDocumentInteractiveStateTransitionSchema.ts",
+        "total": 2
+      },
+      {
+        "byReason": {
           "unclassified": 1
         },
         "module": "flight.types.FlightDocumentRefusalReason",
@@ -28406,6 +28926,14 @@
         },
         "module": "flight.types.GltfMaterial",
         "source": "upstream/packages/types/src/GltfSchema.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "source-unknown": 1
+        },
+        "module": "flight.types.GuiDialogCloseResult",
+        "source": "upstream/packages/types/src/GuiDialog.ts",
         "total": 1
       },
       {
@@ -28598,6 +29126,22 @@
         },
         "module": "flight.types.NodeAny",
         "source": "upstream/packages/types/src/Node.ts",
+        "total": 1
+      },
+      {
+        "byReason": {
+          "unclassified": 4
+        },
+        "module": "flight.types.NodeInteractiveStateExtensionRuntime",
+        "source": "upstream/packages/types/src/NodeInteractiveStateBinding.ts",
+        "total": 4
+      },
+      {
+        "byReason": {
+          "unclassified": 1
+        },
+        "module": "flight.types.NodeInteractiveStateRefusalReason",
+        "source": "upstream/packages/types/src/NodeInteractiveStateBinding.ts",
         "total": 1
       },
       {
@@ -29212,18 +29756,18 @@
     "schemaVersion": 1,
     "summary": {
       "byReason": {
-        "external-toolkit-boundary": 598,
-        "source-any": 1166,
-        "source-never": 178,
-        "source-null": 232,
-        "source-undefined": 508,
-        "source-unknown": 4522,
-        "standard-toolkit-boundary": 21609,
-        "unclassified": 579
+        "external-toolkit-boundary": 609,
+        "source-any": 1288,
+        "source-never": 181,
+        "source-null": 255,
+        "source-undefined": 515,
+        "source-unknown": 4692,
+        "standard-toolkit-boundary": 22025,
+        "unclassified": 614
       },
       "checkerKnownUnrepresentable": 0,
-      "modules": 1436,
-      "total": 29392
+      "modules": 1463,
+      "total": 30179
     }
   }
 }

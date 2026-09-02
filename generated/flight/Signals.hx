@@ -6,7 +6,10 @@ import flight._internal._Runtime;
 import flight._Signals as Facade_Signals_flight__Signals;
 import flight.types.Signal;
 import flight.types.SignalConnectOptions;
+import flight.types.SignalConnection;
+import flight.types.SignalScope;
 import flight.types.SignalThrottleOptions;
+import flight.types.SignalTrackedConnectOptions;
 
 class Signals {
   public static function cancelSignal<T>(signal:Signal<T>):Void {
@@ -36,8 +39,18 @@ class Signals {
     return cast null;
   }
 
+  public static function connectSignalTracked<T>(signal:Signal<T>, slot:T, ?options:SignalTrackedConnectOptions):SignalConnection<T> {
+    return cast Facade_Signals_flight__Signals.connectSignalTracked(signal, slot, options);
+    return cast null;
+  }
+
   public static function createSignal<T>():Signal<T> {
     return cast Facade_Signals_flight__Signals.createSignal();
+    return cast null;
+  }
+
+  public static function createSignalScope():SignalScope {
+    return cast Facade_Signals_flight__Signals.createSignalScope();
     return cast null;
   }
 
@@ -45,8 +58,20 @@ class Signals {
     Facade_Signals_flight__Signals.disconnectSignal(signal, slot);
   }
 
+  public static function disconnectSignalConnection<T>(connection:SignalConnection<T>):Void {
+    Facade_Signals_flight__Signals.disconnectSignalConnection(connection);
+  }
+
+  public static function disconnectSignalScope(scope:SignalScope):Void {
+    Facade_Signals_flight__Signals.disconnectSignalScope(scope);
+  }
+
   public static function emitSignal<T>(signal:Signal<T>, ...args:Dynamic):Void {
     _Runtime.callHaxeRestValue(Facade_Signals_flight__Signals.emitSignal, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]), 1);
+  }
+
+  public static function emitSignalSafe<T>(signal:Signal<T>, ...args:Dynamic):Void {
+    _Runtime.callHaxeRestValue(Facade_Signals_flight__Signals.emitSignalSafe, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]), 1);
   }
 
   public static function hasSignalSlots<T>(signal:Signal<T>):Bool {
@@ -57,5 +82,13 @@ class Signals {
   public static function isSlotConnected<T>(signal:Signal<T>, slot:T):Bool {
     return cast Facade_Signals_flight__Signals.isSlotConnected(signal, slot);
     return cast null;
+  }
+
+  public static function pauseSignalConnection<T>(connection:SignalConnection<T>):Void {
+    Facade_Signals_flight__Signals.pauseSignalConnection(connection);
+  }
+
+  public static function resumeSignalConnection<T>(connection:SignalConnection<T>):Void {
+    Facade_Signals_flight__Signals.resumeSignalConnection(connection);
   }
 }

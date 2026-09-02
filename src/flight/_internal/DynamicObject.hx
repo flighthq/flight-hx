@@ -45,6 +45,18 @@ class DynamicObject {
     #end
   }
 
+  public static inline function getPrototypeOf(source:Dynamic):Dynamic {
+    #if js
+    return js.Syntax.code('Object.getPrototypeOf({0})', source);
+    #else
+    return switch (Type.typeof(source)) {
+      case TClass(type): type;
+      case TEnum(type): type;
+      default: null;
+    };
+    #end
+  }
+
   public static function hasOwn(source:Dynamic, name:String):Bool {
     #if js
     return js.Syntax.code('Object.prototype.hasOwnProperty.call({0}, {1})', source, name);

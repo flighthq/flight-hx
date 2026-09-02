@@ -1132,90 +1132,82 @@
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "TextureAtlasPackerArrayDocument",
-      "packageName": "@flighthq/textureatlas-formats",
+      "name": "TexturePackerAtlasArrayDocument",
+      "packageName": "@flighthq/types",
       "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
     },
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "TextureAtlasPackerArrayFrame",
-      "packageName": "@flighthq/textureatlas-formats",
+      "name": "TexturePackerAtlasArrayFrame",
+      "packageName": "@flighthq/types",
       "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
     },
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "TextureAtlasPackerFrameTag",
-      "packageName": "@flighthq/textureatlas-formats",
+      "name": "TexturePackerAtlasFrameTag",
+      "packageName": "@flighthq/types",
       "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
     },
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "TextureAtlasPackerHashDocument",
-      "packageName": "@flighthq/textureatlas-formats",
+      "name": "TexturePackerAtlasHashDocument",
+      "packageName": "@flighthq/types",
       "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
     },
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "TextureAtlasPackerHashFrame",
-      "packageName": "@flighthq/textureatlas-formats",
+      "name": "TexturePackerAtlasHashFrame",
+      "packageName": "@flighthq/types",
       "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
     },
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "TextureAtlasPackerMeta",
-      "packageName": "@flighthq/textureatlas-formats",
+      "name": "TexturePackerAtlasMeta",
+      "packageName": "@flighthq/types",
       "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
     },
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "TextureAtlasPackerParseOptions",
-      "packageName": "@flighthq/textureatlas-formats",
+      "name": "TexturePackerAtlasParseOptions",
+      "packageName": "@flighthq/types",
       "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerParse.ts"
+      "source": "upstream/packages/types/src/TexturePackerAtlasParseOptions.ts"
     },
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "TextureAtlasPackerPivot",
-      "packageName": "@flighthq/textureatlas-formats",
+      "name": "TexturePackerAtlasPivot",
+      "packageName": "@flighthq/types",
       "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
     },
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "TextureAtlasPackerRect",
-      "packageName": "@flighthq/textureatlas-formats",
+      "name": "TexturePackerAtlasRect",
+      "packageName": "@flighthq/types",
       "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
     },
     {
       "declarationKind": "interface",
       "emission": "direct",
-      "name": "TextureAtlasPackerSize",
-      "packageName": "@flighthq/textureatlas-formats",
+      "name": "TexturePackerAtlasSize",
+      "packageName": "@flighthq/types",
       "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerSchema.ts"
-    },
-    {
-      "declarationKind": "interface",
-      "emission": "direct",
-      "name": "TextureAtlasStarlingParseOptions",
-      "packageName": "@flighthq/textureatlas-formats",
-      "purpose": "broad serialization document",
-      "source": "upstream/packages/textureatlas-formats/src/textureAtlasStarlingParse.ts"
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
     },
     {
       "declarationKind": "interface",

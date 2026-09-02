@@ -4,17 +4,24 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._Gizmo as Facade_Gizmo_flight__Gizmo;
+import flight.types.GizmoAlignment;
 import flight.types.GizmoCreateOptions;
 import flight.types.GizmoMode;
 import flight.types.GizmoNode2DFeatures;
 import flight.types.GizmoPivot;
 import flight.types.GizmoSignals;
+import flight.types.GizmoSmartGuideResult;
 import flight.types.GizmoSpace;
 import flight.types.GizmoState;
 import flight.types.HierarchyNodeAny;
 import flight.types.Node2D;
+import flight.types.RectangleLike;
 
 class Gizmo {
+  public static function computeGizmoAlignmentDeltas(out:Array<Float>, bounds:Array<RectangleLike>, alignment:GizmoAlignment):Void {
+    Facade_Gizmo_flight__Gizmo.computeGizmoAlignmentDeltas(out, bounds, alignment);
+  }
+
   public static function createGizmoState<NodeType:HierarchyNodeAny>(options:GizmoCreateOptions<NodeType>):GizmoState<NodeType> {
     return cast Facade_Gizmo_flight__Gizmo.createGizmoState(options);
     return cast null;
@@ -27,6 +34,11 @@ class Gizmo {
 
   public static function disposeGizmoState<NodeType:HierarchyNodeAny>(state:GizmoState<NodeType>):Void {
     Facade_Gizmo_flight__Gizmo.disposeGizmoState(state);
+  }
+
+  public static function findGizmoSmartGuides(out:GizmoSmartGuideResult, movingBounds:RectangleLike, candidateBounds:Array<RectangleLike>, threshold:Float):Bool {
+    return cast Facade_Gizmo_flight__Gizmo.findGizmoSmartGuides(out, movingBounds, candidateBounds, threshold);
+    return cast null;
   }
 
   public static function getGizmoMode<NodeType:HierarchyNodeAny>(state:GizmoState<NodeType>):GizmoMode {

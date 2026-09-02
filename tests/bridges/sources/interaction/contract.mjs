@@ -11,6 +11,7 @@ export * from './hitTests.mjs';
 export * from './interactionManager.mjs';
 export * from './interactionSpatialIndex.mjs';
 export * from './nodeInteractionState.mjs';
+export * from './nodeInteractiveStateBinding.mjs';
 export * from './registerDefaultHitTests.mjs';
 export * from './registerShapeHitTest.mjs';
 export * from './registerSpriteHitTest.mjs';

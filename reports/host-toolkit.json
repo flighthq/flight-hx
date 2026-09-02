@@ -10,8 +10,8 @@
     "missingEntries": 0,
     "moduleValueKeys": 0,
     "portableGlobalValueKeys": 35,
-    "typeUses": 8738,
-    "valueUses": 2084
+    "typeUses": 9091,
+    "valueUses": 2124
   },
   "types": [
     {
@@ -52,9 +52,17 @@
       "locations": [
         "upstream/packages/audio/src/audioResourceFrom.ts",
         "upstream/packages/audio/src/audioResourceReference.ts",
+        "upstream/packages/dialog/src/dialog.ts",
+        "upstream/packages/filesystem/src/filesystem.ts",
+        "upstream/packages/host-capacitor/src/capacitorDialog.ts",
+        "upstream/packages/host-capacitor/src/capacitorFileSystem.ts",
+        "upstream/packages/host-electron/src/electronDialog.ts",
         "upstream/packages/host-electron/src/electronTray.ts",
+        "upstream/packages/host-tauri/src/tauriDialog.ts",
         "upstream/packages/host-tauri/src/tauriTray.ts",
         "upstream/packages/host-web/src/webConnectivity.ts",
+        "upstream/packages/host-web/src/webDialog.ts",
+        "upstream/packages/host-web/src/webFilesystem.ts",
         "upstream/packages/host-web/src/webImage.ts",
         "upstream/packages/host-web/src/webNet.ts",
         "upstream/packages/image/src/imageBackend.ts",
@@ -71,6 +79,9 @@
         "upstream/packages/textureatlas/src/textureAtlasFrom.ts",
         "upstream/packages/types/src/AudioResourceReference.ts",
         "upstream/packages/types/src/Connectivity.ts",
+        "upstream/packages/types/src/Dialog.ts",
+        "upstream/packages/types/src/ElectronApi.ts",
+        "upstream/packages/types/src/FileSystem.ts",
         "upstream/packages/types/src/Image.ts",
         "upstream/packages/types/src/ImageResourceReference.ts",
         "upstream/packages/types/src/Net.ts",
@@ -81,7 +92,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/AbortSignal.hx",
-      "uses": 167
+      "uses": 409
     },
     {
       "coverage": "typed",
@@ -138,7 +149,7 @@
         "upstream/packages/types/src/Scene2DResources.ts"
       ],
       "provider": "src/flight/_internal/dom/AudioContext.hx",
-      "uses": 43
+      "uses": 44
     },
     {
       "coverage": "dynamic-stub",
@@ -176,7 +187,7 @@
         "upstream/packages/media/src/audioMixer.ts"
       ],
       "provider": "src/flight/_internal/dom/AudioParam.hx",
-      "uses": 20
+      "uses": 21
     },
     {
       "coverage": "dynamic-stub",
@@ -210,7 +221,7 @@
         "upstream/packages/video/src/videoResourceFrom.ts"
       ],
       "provider": "src/flight/_internal/dom/Blob.hx",
-      "uses": 44
+      "uses": 46
     },
     {
       "coverage": "dynamic-stub",
@@ -814,7 +825,7 @@
         "upstream/packages/webcam/src/mediaFileCapture.ts"
       ],
       "provider": "src/flight/_internal/dom/File.hx",
-      "uses": 36
+      "uses": 42
     },
     {
       "coverage": "dynamic-stub",
@@ -872,7 +883,7 @@
         "upstream/packages/host-web/src/webFilesystem.ts"
       ],
       "provider": "src/flight/_internal/dom/FileSystemWritableFileStream.hx",
-      "uses": 5
+      "uses": 10
     },
     {
       "coverage": "dynamic-stub",
@@ -1073,6 +1084,7 @@
       "key": "host:GPUBindGroup",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
@@ -1123,7 +1135,7 @@
         "upstream/packages/types/src/WgpuSkinningAdapter.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBindGroup.hx",
-      "uses": 209
+      "uses": 212
     },
     {
       "coverage": "dynamic-stub",
@@ -1144,6 +1156,7 @@
       "key": "host:GPUBindGroupLayout",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
@@ -1187,7 +1200,7 @@
         "upstream/packages/types/src/WgpuSkinningAdapter.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBindGroupLayout.hx",
-      "uses": 281
+      "uses": 288
     },
     {
       "coverage": "dynamic-stub",
@@ -1240,6 +1253,7 @@
       "key": "host:GPUBlendState",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/render-wgpu/src/wgpuShader.ts",
@@ -1250,7 +1264,7 @@
         "upstream/packages/scene3d-wgpu/src/wgpuParticleEmitter3D.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBlendState.hx",
-      "uses": 62
+      "uses": 68
     },
     {
       "coverage": "dynamic-stub",
@@ -1258,6 +1272,7 @@
       "key": "host:GPUBuffer",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
@@ -1296,7 +1311,7 @@
         "upstream/packages/types/src/WgpuWireframePipeline.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBuffer.hx",
-      "uses": 301
+      "uses": 302
     },
     {
       "coverage": "dynamic-stub",
@@ -1304,6 +1319,7 @@
       "key": "host:GPUBufferBinding",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
@@ -1316,7 +1332,7 @@
         "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUBufferBinding.hx",
-      "uses": 10
+      "uses": 11
     },
     {
       "coverage": "typed",
@@ -1499,6 +1515,7 @@
       "key": "host:GPUDevice",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectGradientRamp.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
@@ -1554,7 +1571,7 @@
         "upstream/packages/types/src/WgpuRenderTexture.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUDevice.hx",
-      "uses": 408
+      "uses": 414
     },
     {
       "coverage": "dynamic-stub",
@@ -1621,6 +1638,7 @@
       "key": "host:GPUExternalTexture",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientGlowEffect.ts",
@@ -1633,7 +1651,7 @@
         "upstream/packages/scene3d-wgpu/src/wgpuShadedPrelude.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUExternalTexture.hx",
-      "uses": 10
+      "uses": 11
     },
     {
       "coverage": "dynamic-stub",
@@ -1652,6 +1670,7 @@
       "key": "host:GPUFilterMode",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/render-wgpu/src/wgpuDraw.ts",
         "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
@@ -1659,7 +1678,7 @@
         "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUFilterMode.hx",
-      "uses": 14
+      "uses": 15
     },
     {
       "coverage": "dynamic-stub",
@@ -1702,12 +1721,13 @@
       "key": "host:GPUMipmapFilterMode",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts",
         "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
         "upstream/packages/scene3d-wgpu/src/wgpuMeshPipeline.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUMipmapFilterMode.hx",
-      "uses": 4
+      "uses": 5
     },
     {
       "coverage": "dynamic-stub",
@@ -1738,6 +1758,7 @@
       "key": "host:GPUPipelineLayout",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
@@ -1763,7 +1784,7 @@
         "upstream/packages/types/src/WgpuQuadBatchResources.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUPipelineLayout.hx",
-      "uses": 60
+      "uses": 62
     },
     {
       "coverage": "dynamic-stub",
@@ -1833,6 +1854,7 @@
       "key": "host:GPURenderPassEncoder",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
@@ -1884,7 +1906,7 @@
         "upstream/packages/types/src/WgpuRenderState.ts"
       ],
       "provider": "src/flight/_internal/dom/GPURenderPassEncoder.hx",
-      "uses": 265
+      "uses": 275
     },
     {
       "coverage": "dynamic-stub",
@@ -1892,6 +1914,7 @@
       "key": "host:GPURenderPipeline",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
@@ -1924,7 +1947,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/GPURenderPipeline.hx",
-      "uses": 120
+      "uses": 123
     },
     {
       "coverage": "dynamic-stub",
@@ -1943,6 +1966,7 @@
       "key": "host:GPUSampler",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
@@ -1975,7 +1999,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUSampler.hx",
-      "uses": 222
+      "uses": 235
     },
     {
       "coverage": "dynamic-stub",
@@ -1994,6 +2018,7 @@
       "key": "host:GPUShaderModule",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
@@ -2031,7 +2056,7 @@
         "upstream/packages/types/src/WgpuRenderState.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUShaderModule.hx",
-      "uses": 156
+      "uses": 160
     },
     {
       "coverage": "dynamic-stub",
@@ -2150,6 +2175,7 @@
       "key": "host:GPUTexture",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectGradientRamp.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
@@ -2190,7 +2216,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUTexture.hx",
-      "uses": 235
+      "uses": 236
     },
     {
       "coverage": "typed",
@@ -2209,6 +2235,7 @@
       "key": "host:GPUTextureFormat",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/render-wgpu/src/wgpuCompressedTexture.ts",
@@ -2242,7 +2269,7 @@
         "upstream/packages/types/src/WgpuRenderTarget.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUTextureFormat.hx",
-      "uses": 59
+      "uses": 60
     },
     {
       "coverage": "dynamic-stub",
@@ -2276,6 +2303,7 @@
       "key": "host:GPUTextureView",
       "kind": "host",
       "locations": [
+        "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts",
         "upstream/packages/effects-wgpu/src/wgpuColorLutPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuEffectPass.ts",
         "upstream/packages/effects-wgpu/src/wgpuGradientBevelEffect.ts",
@@ -2314,7 +2342,7 @@
         "upstream/packages/types/src/WgpuScene3DRuntime.ts"
       ],
       "provider": "src/flight/_internal/dom/GPUTextureView.hx",
-      "uses": 297
+      "uses": 305
     },
     {
       "coverage": "dynamic-stub",
@@ -3285,10 +3313,12 @@
         "upstream/packages/filesystem/src/filesystem.ts",
         "upstream/packages/host-web/src/webFilesystem.ts",
         "upstream/packages/host-web/src/webNet.ts",
-        "upstream/packages/types/src/FileSystem.ts"
+        "upstream/packages/types/src/FileSystem.ts",
+        "upstream/packages/types/src/Shell.ts",
+        "upstream/packages/types/src/Socket.ts"
       ],
       "provider": "src/flight/_internal/dom/ReadableStream.hx",
-      "uses": 12
+      "uses": 17
     },
     {
       "coverage": "dynamic-stub",
@@ -3390,10 +3420,11 @@
       "key": "host:StereoPannerNode",
       "kind": "host",
       "locations": [
+        "upstream/packages/media/src/audioDeviceBackend.ts",
         "upstream/packages/media/src/audioMixer.ts"
       ],
       "provider": "src/flight/_internal/dom/StereoPannerNode.hx",
-      "uses": 11
+      "uses": 19
     },
     {
       "coverage": "dynamic-stub",
@@ -3973,6 +4004,7 @@
       "kind": "host",
       "locations": [
         "upstream/packages/effects-gl/src/glBevelEffect.ts",
+        "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts",
         "upstream/packages/effects-gl/src/glBlendEffect.ts",
         "upstream/packages/effects-gl/src/glBloomEffect.ts",
         "upstream/packages/effects-gl/src/glBlurEffect.ts",
@@ -4079,7 +4111,7 @@
         "upstream/packages/types/src/GlTextureResolver.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLTexture.hx",
-      "uses": 422
+      "uses": 427
     },
     {
       "coverage": "dynamic-stub",
@@ -4088,6 +4120,7 @@
       "kind": "host",
       "locations": [
         "upstream/packages/effects-gl/src/glBevelEffect.ts",
+        "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts",
         "upstream/packages/effects-gl/src/glBlendEffect.ts",
         "upstream/packages/effects-gl/src/glBloomEffect.ts",
         "upstream/packages/effects-gl/src/glBlurEffect.ts",
@@ -4194,7 +4227,7 @@
         "upstream/packages/types/src/GlWireframeProgram.ts"
       ],
       "provider": "src/flight/_internal/dom/WebGLUniformLocation.hx",
-      "uses": 375
+      "uses": 378
     },
     {
       "coverage": "dynamic-stub",
@@ -4273,10 +4306,12 @@
       "locations": [
         "upstream/packages/filesystem/src/filesystem.ts",
         "upstream/packages/host-web/src/webFilesystem.ts",
-        "upstream/packages/types/src/FileSystem.ts"
+        "upstream/packages/types/src/FileSystem.ts",
+        "upstream/packages/types/src/Shell.ts",
+        "upstream/packages/types/src/Socket.ts"
       ],
       "provider": "src/flight/_internal/dom/WritableStream.hx",
-      "uses": 11
+      "uses": 15
     },
     {
       "coverage": "dynamic-stub",
@@ -4287,10 +4322,10 @@
         "upstream/packages/filesystem/src/filesystem.ts"
       ],
       "provider": "src/flight/_internal/dom/WritableStreamDefaultWriter.hx",
-      "uses": 4
+      "uses": 6
     }
   ],
-  "upstreamCommit": "b3bb4bf61833f7723e7033dd5c732e91a6601400",
+  "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652",
   "values": [
     {
       "coverage": "portable",
@@ -4459,14 +4494,13 @@
       "locations": [
         "generated/flight/_HostCapacitor.hx",
         "generated/flight/_HostWeb.hx",
-        "generated/flight/_Interaction.hx",
         "generated/flight/_Loader.hx",
         "generated/flight/_Log.hx",
         "generated/flight/_Signals.hx",
         "generated/flight/_Snapshot.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 16
+      "uses": 14
     },
     {
       "coverage": "portable",
@@ -4752,6 +4786,7 @@
         "generated/flight/_Scene3DGl.hx",
         "generated/flight/_Scene3DResources.hx",
         "generated/flight/_Scene3DWgpu.hx",
+        "generated/flight/_SceneDocument.hx",
         "generated/flight/_Shading.hx",
         "generated/flight/_Shape.hx",
         "generated/flight/_Shortcut.hx",
@@ -4771,10 +4806,11 @@
         "generated/flight/_TextureAtlas.hx",
         "generated/flight/_TilemapFormats.hx",
         "generated/flight/_Timeline.hx",
+        "generated/flight/_Tokens.hx",
         "generated/flight/_Tween.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 359
+      "uses": 372
     },
     {
       "coverage": "js-only",
@@ -4819,6 +4855,7 @@
         "generated/flight/_Easing.hx",
         "generated/flight/_Effects.hx",
         "generated/flight/_EffectsWgpu.hx",
+        "generated/flight/_Encoding.hx",
         "generated/flight/_Font.hx",
         "generated/flight/_FontFormats.hx",
         "generated/flight/_Gizmo.hx",
@@ -4857,16 +4894,19 @@
         "generated/flight/_Skeleton2D.hx",
         "generated/flight/_Skeleton2DFormats.hx",
         "generated/flight/_Spatial.hx",
+        "generated/flight/_Spring.hx",
         "generated/flight/_Statechart.hx",
         "generated/flight/_Storage.hx",
         "generated/flight/_TextInput.hx",
         "generated/flight/_TextLayout.hx",
         "generated/flight/_TextMarkup.hx",
+        "generated/flight/_TextureAtlasFormats.hx",
         "generated/flight/_TilemapFormats.hx",
+        "generated/flight/_Tokens.hx",
         "generated/flight/_Xml.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 782
+      "uses": 798
     },
     {
       "coverage": "js-only",
@@ -5018,6 +5058,7 @@
         "generated/flight/_Scene3DGl.hx",
         "generated/flight/_Scene3DResources.hx",
         "generated/flight/_Scene3DWgpu.hx",
+        "generated/flight/_SceneDocument.hx",
         "generated/flight/_Selection.hx",
         "generated/flight/_Shading.hx",
         "generated/flight/_Shape.hx",
@@ -5031,10 +5072,11 @@
         "generated/flight/_TextLayout.hx",
         "generated/flight/_TextureFormats.hx",
         "generated/flight/_TilemapFormats.hx",
+        "generated/flight/_Tokens.hx",
         "generated/flight/_Tray.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 156
+      "uses": 168
     },
     {
       "coverage": "portable",
@@ -5189,7 +5231,7 @@
         "generated/flight/_Velocity.hx"
       ],
       "provider": "src/flight/_internal/_HostValueLut.hx",
-      "uses": 221
+      "uses": 222
     },
     {
       "coverage": "portable",

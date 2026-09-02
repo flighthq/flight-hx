@@ -13,4 +13,5 @@ export const explainFlightDocumentScene3DRefusal = compiled.flight.SceneDocument
 export const explainFlightDocumentScene3DRefusalFromText = compiled.flight.SceneDocument.explainFlightDocumentScene3DRefusalFromText;
 export const explainFlightDocumentText = compiled.flight.SceneDocument.explainFlightDocumentText;
 export const formatFlightDocumentText = compiled.flight.SceneDocument.formatFlightDocumentText;
+export const getFlightDocumentResourceDependencies = compiled.flight.SceneDocument.getFlightDocumentResourceDependencies;
 export const parseFlightDocumentText = compiled.flight.SceneDocument.parseFlightDocumentText;

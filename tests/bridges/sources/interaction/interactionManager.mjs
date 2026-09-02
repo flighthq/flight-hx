@@ -7,6 +7,7 @@ __syncDependencies();
 
 export const captureInteractionPointer = api.captureInteractionPointer;
 export const connectInputToInteraction = api.connectInputToInteraction;
+export const connectInteractionDispatchLayer = api.connectInteractionDispatchLayer;
 export const connectInteractionSignal = api.connectInteractionSignal;
 export const createInteractionManager = api.createInteractionManager;
 export const createInteractionSignals = api.createInteractionSignals;
@@ -21,5 +22,6 @@ export const dispatchInteractionPointerUp = api.dispatchInteractionPointerUp;
 export const dispatchInteractionWheel = api.dispatchInteractionWheel;
 export const enableInteractionSignals = api.enableInteractionSignals;
 export const getInteractionSignals = api.getInteractionSignals;
+export const invalidateInteractionCursor = api.invalidateInteractionCursor;
 export const releaseInteractionPointer = api.releaseInteractionPointer;
 export const setInteractionConnectGuard = api.setInteractionConnectGuard;

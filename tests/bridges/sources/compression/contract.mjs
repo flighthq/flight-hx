@@ -3,5 +3,6 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './compress.mjs';
 export * from './decompressor.mjs';
 export * from './deflate.mjs';

@@ -56,23 +56,23 @@ class TilemapFormats {
     return cast null;
   }
 
-  public static function parseTiledTileset(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
-    return cast Facade_TilemapFormats_flight__TilemapFormats.parseTiledTileset(text, _options);
+  public static function parseTiledTileset(text:String, ?_options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledTileset> {
+    return cast Facade_TilemapFormats_flight__TilemapFormats.parseTiledTileset(text, _options, diagnostics);
     return cast null;
   }
 
-  public static function parseTiledTilesetJson(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
-    return cast Facade_TilemapFormats_flight__TilemapFormats.parseTiledTilesetJson(text, _options);
+  public static function parseTiledTilesetJson(text:String, ?_options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledTileset> {
+    return cast Facade_TilemapFormats_flight__TilemapFormats.parseTiledTilesetJson(text, _options, diagnostics);
     return cast null;
   }
 
-  public static function parseTiledTmj(text:String, ?options:TiledParseOptions):Null<TiledMap> {
-    return cast Facade_TilemapFormats_flight__TilemapFormats.parseTiledTmj(text, options);
+  public static function parseTiledTmj(text:String, ?options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledMap> {
+    return cast Facade_TilemapFormats_flight__TilemapFormats.parseTiledTmj(text, options, diagnostics);
     return cast null;
   }
 
-  public static function parseTiledTmx(text:String, ?options:TiledParseOptions):Null<TiledMap> {
-    return cast Facade_TilemapFormats_flight__TilemapFormats.parseTiledTmx(text, options);
+  public static function parseTiledTmx(text:String, ?options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledMap> {
+    return cast Facade_TilemapFormats_flight__TilemapFormats.parseTiledTmx(text, options, diagnostics);
     return cast null;
   }
 }

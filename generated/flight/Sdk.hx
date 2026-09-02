@@ -39,6 +39,7 @@ import flight._Effects as Facade_Sdk_flight__Effects;
 import flight._EffectsCanvas as Facade_Sdk_flight__EffectsCanvas;
 import flight._EffectsGl as Facade_Sdk_flight__EffectsGl;
 import flight._EffectsWgpu as Facade_Sdk_flight__EffectsWgpu;
+import flight._Encoding as Facade_Sdk_flight__Encoding;
 import flight._Entity as Facade_Sdk_flight__Entity;
 import flight._FileSystem as Facade_Sdk_flight__FileSystem;
 import flight._Flow as Facade_Sdk_flight__Flow;
@@ -149,6 +150,7 @@ import flight._TextureFormats as Facade_Sdk_flight__TextureFormats;
 import flight._Tilemap as Facade_Sdk_flight__Tilemap;
 import flight._TilemapFormats as Facade_Sdk_flight__TilemapFormats;
 import flight._Timeline as Facade_Sdk_flight__Timeline;
+import flight._Tokens as Facade_Sdk_flight__Tokens;
 import flight._Tray as Facade_Sdk_flight__Tray;
 import flight._Tween as Facade_Sdk_flight__Tween;
 import flight._Tween.ColorComponents__colorTween;
@@ -251,6 +253,7 @@ import flight.types.BarrelDistortionEffect;
 import flight.types.BatchBarrier as Facade_Sdk_flight_types_BatchBarrier_BatchBarrier;
 import flight.types.BatchFormat as Facade_Sdk_flight_types_BatchFormat_BatchFormat;
 import flight.types.BevelEffect;
+import flight.types.BidiClassBackend;
 import flight.types.BidiDirection;
 import flight.types.BidiRun;
 import flight.types.Billboard;
@@ -261,6 +264,8 @@ import flight.types.BitmapBevelOptions;
 import flight.types.BitmapBoxBlurOptions;
 import flight.types.BitmapCompositeMode;
 import flight.types.BitmapConvolutionOptions;
+import flight.types.BitmapDisplacementEffect;
+import flight.types.BitmapDisplacementEffectEdgeMode;
 import flight.types.BitmapDisplacementMapOptions;
 import flight.types.BitmapDropShadowOptions;
 import flight.types.BitmapEdgeMode;
@@ -482,14 +487,22 @@ import flight.types.FilmEmulationEffect;
 import flight.types.FilmGrainEffect;
 import flight.types.FilmicToneMapOptions;
 import flight.types.FlightDocument;
+import flight.types.FlightDocumentInteractiveStateBinding;
+import flight.types.FlightDocumentInteractiveStateTransitionDescriptor;
+import flight.types.FlightDocumentInteractiveStates;
+import flight.types.FlightDocumentLayoutBinding;
 import flight.types.FlightDocumentRefusalExplanation;
+import flight.types.FlightDocumentResourceDescriptor;
 import flight.types.FlightDocumentResourceResolverRegistry;
+import flight.types.FlightDocumentScene;
 import flight.types.FlightDocumentScene2D;
 import flight.types.FlightDocumentScene2DMaterialization;
 import flight.types.FlightDocumentScene3D;
 import flight.types.FlightDocumentScene3DMaterialization;
 import flight.types.FlightDocumentSchemaRegistry;
 import flight.types.FlightDocumentText;
+import flight.types.FlightDocumentTokenResolution;
+import flight.types.FlightDocumentTokenResolverRegistry;
 import flight.types.FlowStack;
 import flight.types.FlowState;
 import flight.types.FlyCameraController;
@@ -519,11 +532,13 @@ import flight.types.GeoPositionResult;
 import flight.types.GeolocationAccessOutcome;
 import flight.types.GeolocationErrorReason;
 import flight.types.GeolocationRequestOptions;
+import flight.types.GizmoAlignment;
 import flight.types.GizmoCreateOptions;
 import flight.types.GizmoMode;
 import flight.types.GizmoNode2DFeatures;
 import flight.types.GizmoPivot;
 import flight.types.GizmoSignals;
+import flight.types.GizmoSmartGuideResult;
 import flight.types.GizmoSpace;
 import flight.types.GizmoState;
 import flight.types.GlApplicationRenderView;
@@ -534,6 +549,7 @@ import flight.types.GlContext;
 import flight.types.GlContextOptions;
 import flight.types.GlContextState;
 import flight.types.GlCustomMaterialShaderSource;
+import flight.types.GlFullscreenProgram;
 import flight.types.GlMeshMaterialRenderer;
 import flight.types.GlMeshUpload;
 import flight.types.GlPbrExtensionIssue;
@@ -581,6 +597,11 @@ import flight.types.GradientSpread;
 import flight.types.GradientType;
 import flight.types.GrayscaleAdjustment;
 import flight.types.GridSliceOptions;
+import flight.types.GuiDialog;
+import flight.types.GuiDialogCloseResult;
+import flight.types.GuiDialogEntry;
+import flight.types.GuiDialogOptions;
+import flight.types.GuiDialogSignals;
 import flight.types.HalftoneEffect;
 import flight.types.HandleTextInputKeyboardOptions;
 import flight.types.HapticImpactStyle;
@@ -755,6 +776,8 @@ import flight.types.InputPointerLockRequestOutcome;
 import flight.types.InputState;
 import flight.types.InputTargetHandle;
 import flight.types.InteractionConnectGuard;
+import flight.types.InteractionDispatchLayer;
+import flight.types.InteractionDispatchLayerOptions;
 import flight.types.InteractionHitEligibility;
 import flight.types.InteractionInputSource;
 import flight.types.InteractionManager;
@@ -913,6 +936,9 @@ import flight.types.NodeData;
 import flight.types.NodeDataFactory;
 import flight.types.NodeDescendantVisitor;
 import flight.types.NodeInteractionState;
+import flight.types.NodeInteractiveStateBinding;
+import flight.types.NodeInteractiveStateExplanation;
+import flight.types.NodeInteractiveStateFlags;
 import flight.types.NodeOf;
 import flight.types.NodeOrderList;
 import flight.types.NodeOrderListEntryVisitor;
@@ -944,6 +970,7 @@ import flight.types.NumericProps;
 import flight.types.Obb;
 import flight.types.ObbLike;
 import flight.types.ObjMaterialLibrary;
+import flight.types.OpenDirectoryDialogOptions;
 import flight.types.OpenFileDialogOptions;
 import flight.types.OpenTypeFontExplanation;
 import flight.types.OrbitCameraController;
@@ -1161,6 +1188,7 @@ import flight.types.RenderCache;
 import flight.types.RenderCacheAdapter;
 import flight.types.RenderCacheRefreshOptions;
 import flight.types.RenderEffect;
+import flight.types.RenderEffectCaptureGeometry;
 import flight.types.RenderEffectInput;
 import flight.types.RenderEffectPadding;
 import flight.types.RenderEffectPaddingExplanation;
@@ -1300,6 +1328,9 @@ import flight.types.ShellExternalOutcome;
 import flight.types.ShellExternalUrlPolicy;
 import flight.types.ShellPathOpenOutcome;
 import flight.types.ShellPathRevealOutcome;
+import flight.types.ShellProcess;
+import flight.types.ShellProcessHost;
+import flight.types.ShellProcessOptions;
 import flight.types.ShellShortcutLink;
 import flight.types.ShellShortcutLinkReadOutcome;
 import flight.types.ShellShortcutLinkWriteOutcome;
@@ -1309,7 +1340,10 @@ import flight.types.ShortcutKeyName;
 import flight.types.ShortcutModifier;
 import flight.types.Signal;
 import flight.types.SignalConnectOptions;
+import flight.types.SignalConnection;
+import flight.types.SignalScope;
 import flight.types.SignalThrottleOptions;
+import flight.types.SignalTrackedConnectOptions;
 import flight.types.Skeleton2D;
 import flight.types.Skeleton2DAnimationPath;
 import flight.types.Skeleton2DAnimationTarget;
@@ -1455,6 +1489,8 @@ import flight.types.TaaEffect;
 import flight.types.TabBarController;
 import flight.types.TabBarControllerOptions;
 import flight.types.TabBarControllerSignals;
+import flight.types.TcpSocketConnection;
+import flight.types.TcpSocketOptions;
 import flight.types.TextAutoSize;
 import flight.types.TextBoundsSpec;
 import flight.types.TextFieldSignals;
@@ -1491,12 +1527,9 @@ import flight.types.Texture2D;
 import flight.types.TextureAtlas;
 import flight.types.TextureAtlasAsepriteDocument;
 import flight.types.TextureAtlasFormatKind;
-import flight.types.TextureAtlasPackerDocument;
-import flight.types.TextureAtlasPackerParseOptions;
 import flight.types.TextureAtlasParseOptions;
 import flight.types.TextureAtlasRegion;
 import flight.types.TextureAtlasRegionTextureExplanation;
-import flight.types.TextureAtlasStarlingParseOptions;
 import flight.types.TextureColorSpace;
 import flight.types.TextureContainer;
 import flight.types.TextureContainerFormat;
@@ -1505,6 +1538,8 @@ import flight.types.TextureContainerLevel;
 import flight.types.TextureContainerParseExplanation;
 import flight.types.TextureFilter;
 import flight.types.TextureLike;
+import flight.types.TexturePackerAtlasDocument;
+import flight.types.TexturePackerAtlasParseOptions;
 import flight.types.TexturePackerDocument;
 import flight.types.TexturePackerParsed;
 import flight.types.TexturePackerSerializeOptions;
@@ -1656,6 +1691,7 @@ import flight.types.WgpuOffscreenRenderStateResult;
 import flight.types.WgpuPipeline;
 import flight.types.WgpuPresentationRenderState;
 import flight.types.WgpuRenderEffectPipeline;
+import flight.types.WgpuRenderEffectResolver;
 import flight.types.WgpuRenderEffectRunner;
 import flight.types.WgpuRenderOptions;
 import flight.types.WgpuRenderRegistries;
@@ -2264,8 +2300,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function appendTextFile(host:HasStorageFileSystem, path:String, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.appendTextFile(host, path, data);
+  public static function appendTextFile(host:HasStorageFileSystem, path:String, data:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.appendTextFile(host, path, data, signal);
     return cast null;
   }
 
@@ -2355,6 +2391,10 @@ class Sdk {
     return cast null;
   }
 
+  public static function applyGlBlendMode(state:GlRenderState, blendMode:Null<BlendMode>):Void {
+    Facade_Sdk_flight__RenderGl.applyGlBlendMode(state, blendMode);
+  }
+
   public static function applyGlRenderEffectsToRenderTexture(state:GlRenderState, pool:GlRenderTexturePool, source:RenderTexture, dest:RenderTexture, scratch:RenderTexture, effects:Array<RenderEffect>):Bool {
     return cast Facade_Sdk_flight__EffectsGl.applyGlRenderEffectsToRenderTexture(state, pool, source, dest, scratch, effects);
     return cast null;
@@ -2367,6 +2407,11 @@ class Sdk {
 
   public static function applyMorphShapeAnimationSample(sampled:flight._internal._ArrayLike<Float>, channel:AnimationChannel):Bool {
     return cast Facade_Sdk_flight__Shape.applyMorphShapeAnimationSample(sampled, channel);
+    return cast null;
+  }
+
+  public static function applyNodeInteractiveStates(binding:NodeInteractiveStateBinding, flags:NodeInteractiveStateFlags):Bool {
+    return cast Facade_Sdk_flight__Interaction.applyNodeInteractiveStates(binding, flags);
     return cast null;
   }
 
@@ -2450,6 +2495,18 @@ class Sdk {
 
   public static function applyPointerUpSelectionPolicy<NodeType:HierarchyNodeAny>(state:SelectionState<NodeType>, hit:Null<NodeType>, modifiers:SelectionModifierState, didDrag:Bool):Void {
     Facade_Sdk_flight__Selection.applyPointerUpSelectionPolicy(state, hit, modifiers, didDrag);
+  }
+
+  public static function applySpringImpulse(spring:Spring, velocity:Float):Void {
+    Facade_Sdk_flight__Spring.applySpringImpulse(spring, velocity);
+  }
+
+  public static function applySpringImpulse2D(spring2D:Spring2D, velocityX:Float, velocityY:Float):Void {
+    Facade_Sdk_flight__Spring.applySpringImpulse2D(spring2D, velocityX, velocityY);
+  }
+
+  public static function applySpringImpulse3D(spring3D:Spring3D, velocityX:Float, velocityY:Float, velocityZ:Float):Void {
+    Facade_Sdk_flight__Spring.applySpringImpulse3D(spring3D, velocityX, velocityY, velocityZ);
   }
 
   public static function applyTextInputRestriction(source:RichText, text:String, ?replaceLength:Float):String {
@@ -3751,6 +3808,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function closeGuiDialog(dialog:GuiDialog, result:GuiDialogCloseResult):Bool {
+    return cast Facade_Sdk_flight__Gui.closeGuiDialog(dialog, result);
+    return cast null;
+  }
+
   public static function closeMidiPort(port:MidiPort):flight._internal._Promise<MidiPortCloseOutcome> {
     return cast Facade_Sdk_flight__Midi.closeMidiPort(port);
     return cast null;
@@ -3915,6 +3977,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function compileGlFullscreenProgram(gl:GlContext, fragmentSource:String):GlFullscreenProgram {
+    return cast Facade_Sdk_flight__RenderGl.compileGlFullscreenProgram(gl, fragmentSource);
+    return cast null;
+  }
+
   public static function completeTween<T:flight._internal._Object>(tween:Tween<T>):Void {
     Facade_Sdk_flight__Tween.completeTween(tween);
   }
@@ -3938,6 +4005,16 @@ class Sdk {
   public static final CompositeCommandKind:String = Facade_Sdk_flight__Types.CompositeCommandKind;
 
   public static final CompositeOperator:{ var Clear:String; var Copy:String; var DestinationAtop:String; var DestinationIn:String; var DestinationOut:String; var DestinationOver:String; var SourceAtop:String; var SourceIn:String; var SourceOut:String; var SourceOver:String; var Xor:String; } = Facade_Sdk_flight__Types.CompositeOperatorValue;
+
+  public static function compressDeflate(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
+    return cast Facade_Sdk_flight__Compression.compressDeflate(bytes);
+    return cast null;
+  }
+
+  public static function compressDeflateZlib(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
+    return cast Facade_Sdk_flight__Compression.compressDeflateZlib(bytes);
+    return cast null;
+  }
 
   public static final CompressedImageTextureSourceKind:String = Facade_Sdk_flight__Types.CompressedImageTextureSourceKind;
 
@@ -4033,6 +4110,10 @@ class Sdk {
   public static function computeGaussianSigmaFromRadius(radius:Float):Float {
     return cast Facade_Sdk_flight__Effects.computeGaussianSigmaFromRadius(radius);
     return cast null;
+  }
+
+  public static function computeGizmoAlignmentDeltas(out:Array<Float>, bounds:Array<RectangleLike>, alignment:GizmoAlignment):Void {
+    Facade_Sdk_flight__Gizmo.computeGizmoAlignmentDeltas(out, bounds, alignment);
   }
 
   public static function computeGodRaysAccumulationScale(effect:GodRaysEffect):Float {
@@ -4207,8 +4288,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function computeRenderEffectPadding(state:RenderState, effects:flight._internal._Union2<RenderEffect, Array<RenderEffect>>):RenderEffectPadding {
-    return cast Facade_Sdk_flight__Effects.computeRenderEffectPadding(state, effects);
+  public static function computeRenderEffectCaptureGeometry(out:RenderEffectCaptureGeometry, state:RenderState, source:NodeAny, effects:flight._internal._Union2<RenderEffect, Array<RenderEffect>>):Bool {
+    return cast Facade_Sdk_flight__Effects.computeRenderEffectCaptureGeometry(out, state, source, effects);
+    return cast null;
+  }
+
+  public static function computeRenderEffectPadding(state:RenderState, effects:flight._internal._Union2<RenderEffect, Array<RenderEffect>>, ?out:RenderEffectPadding):RenderEffectPadding {
+    return cast Facade_Sdk_flight__Effects.computeRenderEffectPadding(state, effects, out);
     return cast null;
   }
 
@@ -4481,6 +4567,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function connectInteractionDispatchLayer<N:NodeAny>(manager:InteractionManager<N>, layer:InteractionDispatchLayer<N>, ?options:InteractionDispatchLayerOptions):Void->Void {
+    return cast Facade_Sdk_flight__Interaction.connectInteractionDispatchLayer(manager, layer, options);
+    return cast null;
+  }
+
   public static function connectInteractionSignal<N:NodeAny, Name:InteractionSignalName>(manager:InteractionManager<N>, target:N, name:Name, slot:InteractionSignalSlot__interactionManager<Name>, ?options:SignalConnectOptions):Void {
     Facade_Sdk_flight__Interaction.connectInteractionSignal(manager, target, name, slot, options);
   }
@@ -4501,6 +4592,11 @@ class Sdk {
 
   public static function connectSignalThrottled<T>(source:Signal<T>, intervalMs:Float, slot:T, ?options:SignalThrottleOptions):Void->Void {
     return cast Facade_Sdk_flight__Signals.connectSignalThrottled(source, intervalMs, slot, options);
+    return cast null;
+  }
+
+  public static function connectSignalTracked<T>(signal:Signal<T>, slot:T, ?options:SignalTrackedConnectOptions):SignalConnection<T> {
+    return cast Facade_Sdk_flight__Signals.connectSignalTracked(signal, slot, options);
     return cast null;
   }
 
@@ -4954,6 +5050,11 @@ class Sdk {
 
   public static function createBitmap(width:Float, height:Float, ?color:Float):Bitmap {
     return cast Facade_Sdk_flight__Bitmap.createBitmap(width, height, color);
+    return cast null;
+  }
+
+  public static function createBitmapDisplacementEffect(map:Null<Texture2D>, ?options:{ @:optional var componentX:Null<ImageChannel>; @:optional var componentY:Null<ImageChannel>; @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var edgeMode:Null<BitmapDisplacementEffectEdgeMode>; }):BitmapDisplacementEffect {
+    return cast Facade_Sdk_flight__Effects.createBitmapDisplacementEffect(map, options);
     return cast null;
   }
 
@@ -5619,13 +5720,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function createFlightDocumentFromScene2D(source:Scene2D, schemas:FlightDocumentSchemaRegistry):FlightDocumentScene2D {
-    return cast Facade_Sdk_flight__SceneDocument.createFlightDocumentFromScene2D(source, schemas);
+  public static function createFlightDocumentFromScene2D(source:Scene2D, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node2D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node2D>>):FlightDocumentScene2D {
+    return cast Facade_Sdk_flight__SceneDocument.createFlightDocumentFromScene2D(source, schemas, interactiveStateBindings, layoutBindings);
     return cast null;
   }
 
-  public static function createFlightDocumentFromScene3D(source:Scene3D, cameras:Array<Scene3DDocumentCamera>, lights:Array<Scene3DDocumentLight>, schemas:FlightDocumentSchemaRegistry):FlightDocumentScene3D {
-    return cast Facade_Sdk_flight__SceneDocument.createFlightDocumentFromScene3D(source, cameras, lights, schemas);
+  public static function createFlightDocumentFromScene3D(source:Scene3D, cameras:Array<Scene3DDocumentCamera>, lights:Array<Scene3DDocumentLight>, schemas:FlightDocumentSchemaRegistry, ?interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>, ?layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>):FlightDocumentScene3D {
+    return cast Facade_Sdk_flight__SceneDocument.createFlightDocumentFromScene3D(source, cameras, lights, schemas, interactiveStateBindings, layoutBindings);
     return cast null;
   }
 
@@ -5646,6 +5747,11 @@ class Sdk {
 
   public static function createFlightDocumentScene3DMaterializationFromText(text:String, schemas:FlightDocumentSchemaRegistry, ?resolvers:FlightDocumentResourceResolverRegistry, ?sceneIndex:Float):Null<FlightDocumentScene3DMaterialization> {
     return cast Facade_Sdk_flight__SceneDocument.createFlightDocumentScene3DMaterializationFromText(text, schemas, resolvers, sceneIndex);
+    return cast null;
+  }
+
+  public static function createFlightDocumentTokenResolverRegistry():FlightDocumentTokenResolverRegistry {
+    return cast Facade_Sdk_flight__Tokens.createFlightDocumentTokenResolverRegistry();
     return cast null;
   }
 
@@ -5852,6 +5958,11 @@ class Sdk {
 
   public static function createGrayscaleAdjustment(?options:{ @:optional var intensity:Null<Float>; }):GrayscaleAdjustment {
     return cast Facade_Sdk_flight__Adjustments.createGrayscaleAdjustment(options);
+    return cast null;
+  }
+
+  public static function createGuiDialog(?options:GuiDialogOptions):GuiDialog {
+    return cast Facade_Sdk_flight__Gui.createGuiDialog(options);
     return cast null;
   }
 
@@ -6202,6 +6313,11 @@ class Sdk {
 
   public static function createNodeInteractionState():NodeInteractionState {
     return cast Facade_Sdk_flight__Interaction.createNodeInteractionState();
+    return cast null;
+  }
+
+  public static function createNodeInteractiveStateBinding(node:NodeAny, interactiveStates:FlightDocumentInteractiveStates, schemas:FlightDocumentSchemaRegistry, ?transition:Null<FlightDocumentInteractiveStateTransitionDescriptor>):Null<NodeInteractiveStateBinding> {
+    return cast Facade_Sdk_flight__Interaction.createNodeInteractiveStateBinding(node, interactiveStates, schemas, transition);
     return cast null;
   }
 
@@ -7075,6 +7191,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function createSignalScope():SignalScope {
+    return cast Facade_Sdk_flight__Signals.createSignalScope();
+    return cast null;
+  }
+
   public static function createSilverStandardPbrMaterial(?opts:{ @:optional var kind:Dynamic; @:optional var alphaCutoff:Null<Float>; @:optional var alphaMode:Null<MaterialAlphaMode>; @:optional var blendMode:Null<BlendMode>; @:optional var doubleSided:Null<Bool>; @:optional var name:Null<String>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; @:optional var alphaMap:Null<Texture>; @:optional var baseColor:Null<Float>; @:optional var baseColorMap:Null<Texture>; @:optional var emissive:Null<Float>; @:optional var emissiveMap:Null<Texture>; @:optional var emissiveStrength:Null<Float>; @:optional var metallic:Null<Float>; @:optional var metallicRoughnessMap:Null<Texture>; @:optional var normalMap:Null<Texture>; @:optional var normalScale:Null<Float>; @:optional var occlusionMap:Null<Texture>; @:optional var occlusionStrength:Null<Float>; @:optional var roughness:Null<Float>; }):StandardPbrMaterial {
     return cast Facade_Sdk_flight__Materials.createSilverStandardPbrMaterial(opts);
     return cast null;
@@ -7374,7 +7495,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTextureAtlas(?obj:{ @:optional var texture:Null<Texture2D>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):TextureAtlas {
+  public static function createTextureAtlas(?obj:{ @:optional var imageHeight:Null<Float>; @:optional var imageName:Null<String>; @:optional var imageWidth:Null<Float>; @:optional var regions:Null<Array<TextureAtlasRegion>>; @:optional var scale:Null<Float>; @:optional var texture:Null<Texture2D>; @:optional var __EntityRuntimeKey:Null<EntityRuntime>; }):TextureAtlas {
     return cast Facade_Sdk_flight__TextureAtlas.createTextureAtlas(obj);
     return cast null;
   }
@@ -7404,7 +7525,7 @@ class Sdk {
     return cast null;
   }
 
-  public static function createTextureAtlasRegion(?obj:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):TextureAtlasRegion {
+  public static function createTextureAtlasRegion(?obj:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var pageName:Null<String>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):TextureAtlasRegion {
     return cast Facade_Sdk_flight__TextureAtlas.createTextureAtlasRegion(obj);
     return cast null;
   }
@@ -7781,6 +7902,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function decodeUTF8(bytes:flight._internal._UInt8Array, ?offset:Float, ?length:Float):String {
+    return cast Facade_Sdk_flight__Encoding.decodeUTF8(bytes, offset, length);
+    return cast null;
+  }
+
   public static function decomposeMatrix4(outPosition:Vector3Like, outRotation:QuaternionLike, outScale:Vector3Like, m:Matrix4Like):Void {
     Facade_Sdk_flight__Geometry.decomposeMatrix4(outPosition, outRotation, outScale, m);
   }
@@ -7898,6 +8024,8 @@ class Sdk {
   public static final defaultDomTextLabelRenderer:Scene2DRenderer = Facade_Sdk_flight__Scene2DDom.defaultDomTextLabelRenderer;
 
   public static final defaultGlBevelEffectRunner:GlRenderEffectRunner = Facade_Sdk_flight__EffectsGl.defaultGlBevelEffectRunner;
+
+  public static final defaultGlBitmapDisplacementEffectRunner:GlRenderEffectRunner = Facade_Sdk_flight__EffectsGl.defaultGlBitmapDisplacementEffectRunner;
 
   public static final defaultGlBitmapTextRenderer:SpriteRenderer = Facade_Sdk_flight__Scene2DGl.defaultGlBitmapTextRenderer;
 
@@ -8026,6 +8154,8 @@ class Sdk {
   public static final defaultShapeCommandSchemas:KeyedTable<ShapeCommandSchema<String>> = Facade_Sdk_flight__ShapeFormats.defaultShapeCommandSchemas;
 
   public static final defaultWgpuBevelEffectRunner:WgpuRenderEffectRunner = Facade_Sdk_flight__EffectsWgpu.defaultWgpuBevelEffectRunner;
+
+  public static final defaultWgpuBitmapDisplacementEffectRunner:WgpuRenderEffectRunner = Facade_Sdk_flight__EffectsWgpu.defaultWgpuBitmapDisplacementEffectRunner;
 
   public static final defaultWgpuBitmapTextRenderer:SpriteRenderer = Facade_Sdk_flight__Scene2DWgpu.defaultWgpuBitmapTextRenderer;
 
@@ -8747,6 +8877,14 @@ class Sdk {
     Facade_Sdk_flight__Signals.disconnectSignal(signal, slot);
   }
 
+  public static function disconnectSignalConnection<T>(connection:SignalConnection<T>):Void {
+    Facade_Sdk_flight__Signals.disconnectSignalConnection(connection);
+  }
+
+  public static function disconnectSignalScope(scope:SignalScope):Void {
+    Facade_Sdk_flight__Signals.disconnectSignalScope(scope);
+  }
+
   public static function dispatchInteractionContextMenu<N:NodeAny>(manager:InteractionManager<N>, x:Float, y:Float, ?button:Float, ?options:InteractionPointerOptions):Void {
     Facade_Sdk_flight__Interaction.dispatchInteractionContextMenu(manager, x, y, button, options);
   }
@@ -8915,6 +9053,10 @@ class Sdk {
     Facade_Sdk_flight__GlyphAtlas.disposeGlyphAtlas(atlas);
   }
 
+  public static function disposeGuiDialog(dialog:GuiDialog):Void {
+    Facade_Sdk_flight__Gui.disposeGuiDialog(dialog);
+  }
+
   public static function disposeListController(controller:ListController):Void {
     Facade_Sdk_flight__Gui.disposeListController(controller);
   }
@@ -8970,6 +9112,10 @@ class Sdk {
 
   public static function disposeNode3D(node:Node3D):Void {
     Facade_Sdk_flight__Scene3D.disposeNode3D(node);
+  }
+
+  public static function disposeNodeInteractiveStateBinding(binding:NodeInteractiveStateBinding):Void {
+    Facade_Sdk_flight__Interaction.disposeNodeInteractiveStateBinding(binding);
   }
 
   public static function disposeNodeOrderList<Traits:flight._internal._Object>(list:NodeOrderList<Traits>):Void {
@@ -9172,6 +9318,14 @@ class Sdk {
     Facade_Sdk_flight__Scene3DGl.drawGlEnvironmentSkybox(state, environment, camera, aspect);
   }
 
+  public static function drawGlFullscreenPass(state:GlRenderState, program:GlFullscreenProgram, inputs:Array<flight._internal.dom.WebGLTexture>, dest:Null<GlRenderTarget>, setUniforms:GlContext->GlFullscreenProgram->Void):Void {
+    Facade_Sdk_flight__RenderGl.drawGlFullscreenPass(state, program, inputs, dest, setUniforms);
+  }
+
+  public static function drawGlQuad(state:GlRenderState, x0:Float, y0:Float, x1:Float, y1:Float, u0:Float, v0:Float, u1:Float, v1:Float):Void {
+    Facade_Sdk_flight__RenderGl.drawGlQuad(state, x0, y0, x1, y1, u0, v0, u1, v1);
+  }
+
   public static function drawGlScene3D(state:GlRenderState, scene:Node3D, camera:Camera3D, lights:Scene3DLightsLike, ?forwardLights:GlScene3DForwardLightList):Void {
     Facade_Sdk_flight__Scene3DGl.drawGlScene3D(state, scene, camera, lights, forwardLights);
   }
@@ -9370,6 +9524,10 @@ class Sdk {
 
   public static function emitSignal<T>(signal:Signal<T>, ...args:Dynamic):Void {
     _Runtime.callHaxeRestValue(Facade_Sdk_flight__Signals.emitSignal, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]), 1);
+  }
+
+  public static function emitSignalSafe<T>(signal:Signal<T>, ...args:Dynamic):Void {
+    _Runtime.callHaxeRestValue(Facade_Sdk_flight__Signals.emitSignalSafe, _Runtime.concatArrays([[signal], _Runtime.toArray(args)]), 1);
   }
 
   public static function enableAnimationPlayerSignals(player:AnimationPlayer):Void {
@@ -9762,6 +9920,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function encodeUTF8(text:String):flight._internal._UInt8Array {
+    return cast Facade_Sdk_flight__Encoding.encodeUTF8(text);
+    return cast null;
+  }
+
   public static function endCanvasRenderEffectPipeline(state:CanvasRenderState, pipeline:CanvasRenderEffectPipeline, operations:Array<flight._internal._Union2<RenderEffect, Adjustment>>):Void {
     Facade_Sdk_flight__EffectsCanvas.endCanvasRenderEffectPipeline(state, pipeline, operations);
   }
@@ -9813,6 +9976,11 @@ class Sdk {
 
   public static function endWgpuRenderPass(state:WgpuRenderState):Void {
     Facade_Sdk_flight__RenderWgpu.endWgpuRenderPass(state);
+  }
+
+  public static function enqueueGuiDialog(dialog:GuiDialog, entry:GuiDialogEntry):Bool {
+    return cast Facade_Sdk_flight__Gui.enqueueGuiDialog(dialog, entry);
+    return cast null;
   }
 
   public static function ensureGlMeshUpload(state:GlRenderState, geometry:MeshGeometry, ?gpuSkinned:Bool):GlMeshUpload {
@@ -10111,6 +10279,16 @@ class Sdk {
     return cast null;
   }
 
+  public static function explainFlightDocumentSceneTokenResolution(scene:FlightDocumentScene, mode:String, ?resolvers:FlightDocumentTokenResolverRegistry):Null<FlightDocumentRefusalExplanation> {
+    return cast Facade_Sdk_flight__Tokens.explainFlightDocumentSceneTokenResolution(scene, mode, resolvers);
+    return cast null;
+  }
+
+  public static function explainFlightDocumentSceneTokenSubstitution(scene:FlightDocumentScene, resolution:FlightDocumentTokenResolution):Null<FlightDocumentRefusalExplanation> {
+    return cast Facade_Sdk_flight__Tokens.explainFlightDocumentSceneTokenSubstitution(scene, resolution);
+    return cast null;
+  }
+
   public static function explainFlightDocumentText(text:FlightDocumentText):Null<FlightDocumentRefusalExplanation> {
     return cast Facade_Sdk_flight__SceneDocument.explainFlightDocumentText(text);
     return cast null;
@@ -10211,6 +10389,11 @@ class Sdk {
 
   public static function explainMorphShapeGradientEndpoints(start:MorphShapeGradientEndpoint, end:MorphShapeGradientEndpoint):MorphShapeGradientEndpointExplanation {
     return cast Facade_Sdk_flight__Shape.explainMorphShapeGradientEndpoints(start, end);
+    return cast null;
+  }
+
+  public static function explainNodeInteractiveStateBinding(node:NodeAny, interactiveStates:FlightDocumentInteractiveStates, schemas:FlightDocumentSchemaRegistry, ?transition:Null<FlightDocumentInteractiveStateTransitionDescriptor>):Null<NodeInteractiveStateExplanation> {
+    return cast Facade_Sdk_flight__Interaction.explainNodeInteractiveStateBinding(node, interactiveStates, schemas, transition);
     return cast null;
   }
 
@@ -10453,8 +10636,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function findFiles(host:HasStorageFileSystem, rootPath:String, pattern:String):flight._internal._Promise<Array<FileEntry>> {
-    return cast Facade_Sdk_flight__FileSystem.findFiles(host, rootPath, pattern);
+  public static function findFiles(host:HasStorageFileSystem, rootPath:String, pattern:String, ?options:FileWalkOptions):flight._internal._Promise<Array<FileEntry>> {
+    return cast Facade_Sdk_flight__FileSystem.findFiles(host, rootPath, pattern, options);
+    return cast null;
+  }
+
+  public static function findGizmoSmartGuides(out:GizmoSmartGuideResult, movingBounds:RectangleLike, candidateBounds:Array<RectangleLike>, threshold:Float):Bool {
+    return cast Facade_Sdk_flight__Gizmo.findGizmoSmartGuides(out, movingBounds, candidateBounds, threshold);
     return cast null;
   }
 
@@ -10559,7 +10747,7 @@ class Sdk {
 
   public static final FlexLayoutKind:String = Facade_Sdk_flight__Types.FlexLayoutKind;
 
-  public static final FlightDocumentRefusalReason:{ var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var KeyCodeUnitsLimitExceeded:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; } = Facade_Sdk_flight__Types.FlightDocumentRefusalReasonValue;
+  public static final FlightDocumentRefusalReason:{ var AliasUnsupported:String; var AnchorUnsupported:String; var BlockScalarUnsupported:String; var CollectionEntriesLimitExceeded:String; var DefaultSceneOutOfRange:String; var DocumentCodeUnitsLimitExceeded:String; var DocumentSeparatorUnsupported:String; var DuplicateAmbientLight:String; var DuplicateDirectionalLight:String; var DuplicateKey:String; var ExpectedFlowDelimiter:String; var ExpectedMappingEntry:String; var ExpectedMappingKey:String; var ExpectedScalar:String; var ExpectedValue:String; var FieldInvalid:String; var FlowSequenceUnsupported:String; var InvalidDocument:String; var InvalidEscape:String; var InteractiveStateExtensionKindDuplicate:String; var InteractiveStateExtensionKindUnregistered:String; var InteractiveStateTargetUnsupported:String; var InteractiveStateTransitionKindUnregistered:String; var KeyCodeUnitsLimitExceeded:String; var LayoutTargetAmbiguous:String; var LayoutTargetUnresolved:String; var MixedCollection:String; var MultipleRootValues:String; var NestingDepthLimitExceeded:String; var NodeKindUnregistered:String; var NumberOutOfRange:String; var ResourceKindUnregistered:String; var ResourceResolverUnregistered:String; var ResourceUnresolved:String; var RootIndentation:String; var RootKindMismatch:String; var ScalarCodeUnitsLimitExceeded:String; var ScalarInvalid:String; var ShapeCommandUnregistered:String; var ScenesEmpty:String; var StructureInvalid:String; var TabCharacter:String; var TagUnsupported:String; var TokenKeyDuplicate:String; var TokenKeyInvalid:String; var TokenKindMismatch:String; var TokenModeInvalid:String; var TokenModeUnresolved:String; var TokenReferenceCycle:String; var TokenReferenceInvalid:String; var TokenResolverUnregistered:String; var TokenUnresolved:String; var TokenValueInvalid:String; var TotalNodesLimitExceeded:String; var TrailingFlowComma:String; var TrailingFlowContent:String; var UnexpectedIndentation:String; var UnexpectedToken:String; var UnterminatedFlowMapping:String; var UnterminatedQuotedScalar:String; var VersionUnsupported:String; } = Facade_Sdk_flight__Types.FlightDocumentRefusalReasonValue;
 
   public static function flipBitmapHorizontal(dest:BitmapRegion, source:BitmapRegion):Void {
     Facade_Sdk_flight__Bitmap.flipBitmapHorizontal(dest, source);
@@ -10845,6 +11033,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function getActiveGuiDialogEntry(dialog:GuiDialog):Null<GuiDialogEntry> {
+    return cast Facade_Sdk_flight__Gui.getActiveGuiDialogEntry(dialog);
+    return cast null;
+  }
+
   public static function getActiveNode<NodeType:HierarchyNodeAny>(state:SelectionState<NodeType>):Null<NodeType> {
     return cast Facade_Sdk_flight__Selection.getActiveNode(state);
     return cast null;
@@ -11059,8 +11252,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {
-    return cast Facade_Sdk_flight__TextBidi.getBidiRuns(text, baseDirection);
+  public static function getBidiRuns(text:String, baseDirection:BidiDirection, ?bidiClassBackend:BidiClassBackend):Array<BidiRun> {
+    return cast Facade_Sdk_flight__TextBidi.getBidiRuns(text, baseDirection, bidiClassBackend);
     return cast null;
   }
 
@@ -11076,6 +11269,11 @@ class Sdk {
 
   public static function getBitmapCoverage(source:Bitmap, backgroundColor:Float, ?channelTolerance:Float):Float {
     return cast Facade_Sdk_flight__Bitmap.getBitmapCoverage(source, backgroundColor, channelTolerance);
+    return cast null;
+  }
+
+  public static function getBitmapDisplacementEffectPadding(effect:BitmapDisplacementEffect):RenderEffectPadding {
+    return cast Facade_Sdk_flight__Effects.getBitmapDisplacementEffectPadding(effect);
     return cast null;
   }
 
@@ -11600,6 +11798,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function getFlightDocumentResourceDependencies(document:FlightDocument, schemas:FlightDocumentSchemaRegistry):Null<Array<FlightDocumentResourceDescriptor>> {
+    return cast Facade_Sdk_flight__SceneDocument.getFlightDocumentResourceDependencies(document, schemas);
+    return cast null;
+  }
+
   public static function getFlowStackDepth(stack:FlowStack):Float {
     return cast Facade_Sdk_flight__Flow.getFlowStackDepth(stack);
     return cast null;
@@ -11775,6 +11978,16 @@ class Sdk {
 
   public static function getGradientGlowEffectPadding(effect:GradientGlowEffect):RenderEffectPadding {
     return cast Facade_Sdk_flight__Effects.getGradientGlowEffectPadding(effect);
+    return cast null;
+  }
+
+  public static function getGuiDialogEntries(dialog:GuiDialog, ?out:Array<GuiDialogEntry>):Array<GuiDialogEntry> {
+    return cast Facade_Sdk_flight__Gui.getGuiDialogEntries(dialog, out);
+    return cast null;
+  }
+
+  public static function getGuiDialogSignals(dialog:GuiDialog):GuiDialogSignals {
+    return cast Facade_Sdk_flight__Gui.getGuiDialogSignals(dialog);
     return cast null;
   }
 
@@ -14659,6 +14872,14 @@ class Sdk {
     Facade_Sdk_flight__Collision.invalidateCollisionTriangleMesh3D(mesh);
   }
 
+  public static function invalidateGlRenderStateCache(state:GlRenderState):Void {
+    Facade_Sdk_flight__RenderGl.invalidateGlRenderStateCache(state);
+  }
+
+  public static function invalidateInteractionCursor<N:NodeAny>(manager:InteractionManager<N>):Void {
+    Facade_Sdk_flight__Interaction.invalidateInteractionCursor(manager);
+  }
+
   public static function invalidateMeshGeometry(geometry:MeshGeometry):Void {
     Facade_Sdk_flight__Mesh.invalidateMeshGeometry(geometry);
   }
@@ -15064,6 +15285,11 @@ class Sdk {
 
   public static function isNodeLocalMatrix4Detached<Traits:flight._internal._Object>(target:Transform3DNode<Traits>):Bool {
     return cast Facade_Sdk_flight__Node.isNodeLocalMatrix4Detached(target);
+    return cast null;
+  }
+
+  public static function isNodePointerDoubleClickEnabled(source:NodeAny):Bool {
+    return cast Facade_Sdk_flight__Interaction.isNodePointerDoubleClickEnabled(source);
     return cast null;
   }
 
@@ -16115,6 +16341,8 @@ class Sdk {
 
   public static final Node3DTraitsKey:flight._internal._Symbol = Facade_Sdk_flight__Types.Node3DTraitsKey;
 
+  public static final NodeInteractiveStateRefusalReason:{ var ExtensionCreationFailed:String; var ExtensionKindUnregistered:String; var ExtensionTargetUnsupported:String; var PropertyTargetUnsupported:String; var TransitionCreationFailed:String; var TransitionKindUnregistered:String; } = Facade_Sdk_flight__Types.NodeInteractiveStateRefusalReasonValue;
+
   public static final NodeKind:String = Facade_Sdk_flight__Types.NodeKind;
 
   public static function normalizeAccelerator(input:String):Null<Accelerator> {
@@ -16250,13 +16478,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function openFileReadStream(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>> {
-    return cast Facade_Sdk_flight__FileSystem.openFileReadStream(host, path);
+  public static function openFileReadStream(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>> {
+    return cast Facade_Sdk_flight__FileSystem.openFileReadStream(host, path, signal);
     return cast null;
   }
 
-  public static function openFileWriteStream(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>> {
-    return cast Facade_Sdk_flight__FileSystem.openFileWriteStream(host, path);
+  public static function openFileWriteStream(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>> {
+    return cast Facade_Sdk_flight__FileSystem.openFileWriteStream(host, path, signal);
     return cast null;
   }
 
@@ -16272,6 +16500,11 @@ class Sdk {
 
   public static function openShellPath(host:HasShellPathOpen, path:String):flight._internal._Promise<ShellPathOpenOutcome> {
     return cast Facade_Sdk_flight__Shell.openShellPath(host, path);
+    return cast null;
+  }
+
+  public static function openTcpSocket(host:HasNetSocket, options:TcpSocketOptions):Null<TcpSocketConnection> {
+    return cast Facade_Sdk_flight__Socket.openTcpSocket(host, options);
     return cast null;
   }
 
@@ -16342,13 +16575,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseAsepriteSpritesheet(json:String):SpritesheetData {
-    return cast Facade_Sdk_flight__SpritesheetFormats.parseAsepriteSpritesheet(json);
+  public static function parseAsepriteSpritesheet(json:String, ?diagnostics:Array<ImportDiagnostic>):SpritesheetData {
+    return cast Facade_Sdk_flight__SpritesheetFormats.parseAsepriteSpritesheet(json, diagnostics);
     return cast null;
   }
 
-  public static function parseAsepriteSpritesheetDocument(json:String):AsepriteParsed {
-    return cast Facade_Sdk_flight__SpritesheetFormats.parseAsepriteSpritesheetDocument(json);
+  public static function parseAsepriteSpritesheetDocument(json:String, ?diagnostics:Array<ImportDiagnostic>):AsepriteParsed {
+    return cast Facade_Sdk_flight__SpritesheetFormats.parseAsepriteSpritesheetDocument(json, diagnostics);
     return cast null;
   }
 
@@ -16397,13 +16630,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseCocosPlistSpritesheet(xml:String):SpritesheetData {
-    return cast Facade_Sdk_flight__SpritesheetFormats.parseCocosPlistSpritesheet(xml);
+  public static function parseCocosPlistSpritesheet(xml:String, ?diagnostics:Array<ImportDiagnostic>):SpritesheetData {
+    return cast Facade_Sdk_flight__SpritesheetFormats.parseCocosPlistSpritesheet(xml, diagnostics);
     return cast null;
   }
 
-  public static function parseCocosPlistSpritesheetDocument(xml:String):CocosPlistParsed {
-    return cast Facade_Sdk_flight__SpritesheetFormats.parseCocosPlistSpritesheetDocument(xml);
+  public static function parseCocosPlistSpritesheetDocument(xml:String, ?diagnostics:Array<ImportDiagnostic>):CocosPlistParsed {
+    return cast Facade_Sdk_flight__SpritesheetFormats.parseCocosPlistSpritesheetDocument(xml, diagnostics);
     return cast null;
   }
 
@@ -16437,8 +16670,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions):SpritesheetData {
-    return cast Facade_Sdk_flight__SpritesheetFormats.parseLibgdxAtlasSpritesheet(text, options);
+  public static function parseLibgdxAtlasSpritesheet(text:String, ?options:LibgdxAtlasParseOptions, ?diagnostics:Array<ImportDiagnostic>):SpritesheetData {
+    return cast Facade_Sdk_flight__SpritesheetFormats.parseLibgdxAtlasSpritesheet(text, options, diagnostics);
     return cast null;
   }
 
@@ -16577,13 +16810,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions):SpritesheetData {
-    return cast Facade_Sdk_flight__SpritesheetFormats.parseStarlingSpritesheet(xml, options);
+  public static function parseStarlingSpritesheet(xml:String, ?options:StarlingParseOptions, ?diagnostics:Array<ImportDiagnostic>):SpritesheetData {
+    return cast Facade_Sdk_flight__SpritesheetFormats.parseStarlingSpritesheet(xml, options, diagnostics);
     return cast null;
   }
 
-  public static function parseStarlingSpritesheetDocument(xml:String, ?options:StarlingParseOptions):StarlingParsed {
-    return cast Facade_Sdk_flight__SpritesheetFormats.parseStarlingSpritesheetDocument(xml, options);
+  public static function parseStarlingSpritesheetDocument(xml:String, ?options:StarlingParseOptions, ?diagnostics:Array<ImportDiagnostic>):StarlingParsed {
+    return cast Facade_Sdk_flight__SpritesheetFormats.parseStarlingSpritesheetDocument(xml, options, diagnostics);
     return cast null;
   }
 
@@ -16617,28 +16850,28 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
-    return cast Facade_Sdk_flight__TextureAtlasFormats.parseTextureAtlasPackerDocument(doc, atlas, options);
+  public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas):TextureAtlas {
+    return cast Facade_Sdk_flight__TextureAtlasFormats.parseTextureAtlasStarlingXml(xml, atlas);
     return cast null;
   }
 
-  public static function parseTextureAtlasPackerJson(json:String, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
-    return cast Facade_Sdk_flight__TextureAtlasFormats.parseTextureAtlasPackerJson(json, atlas, options);
+  public static function parseTexturePackerAtlasDocument(doc:TexturePackerAtlasDocument, atlas:TextureAtlas, ?options:TexturePackerAtlasParseOptions):TextureAtlas {
+    return cast Facade_Sdk_flight__TextureAtlasFormats.parseTexturePackerAtlasDocument(doc, atlas, options);
     return cast null;
   }
 
-  public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {
-    return cast Facade_Sdk_flight__TextureAtlasFormats.parseTextureAtlasStarlingXml(xml, atlas, _options);
+  public static function parseTexturePackerAtlasJson(json:String, atlas:TextureAtlas, ?options:TexturePackerAtlasParseOptions):TextureAtlas {
+    return cast Facade_Sdk_flight__TextureAtlasFormats.parseTexturePackerAtlasJson(json, atlas, options);
     return cast null;
   }
 
-  public static function parseTexturePackerSpritesheet(json:String):SpritesheetData {
-    return cast Facade_Sdk_flight__SpritesheetFormats.parseTexturePackerSpritesheet(json);
+  public static function parseTexturePackerSpritesheet(json:String, ?diagnostics:Array<ImportDiagnostic>):SpritesheetData {
+    return cast Facade_Sdk_flight__SpritesheetFormats.parseTexturePackerSpritesheet(json, diagnostics);
     return cast null;
   }
 
-  public static function parseTexturePackerSpritesheetDocument(json:String):TexturePackerParsed {
-    return cast Facade_Sdk_flight__SpritesheetFormats.parseTexturePackerSpritesheetDocument(json);
+  public static function parseTexturePackerSpritesheetDocument(json:String, ?diagnostics:Array<ImportDiagnostic>):TexturePackerParsed {
+    return cast Facade_Sdk_flight__SpritesheetFormats.parseTexturePackerSpritesheetDocument(json, diagnostics);
     return cast null;
   }
 
@@ -16647,23 +16880,23 @@ class Sdk {
     return cast null;
   }
 
-  public static function parseTiledTileset(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
-    return cast Facade_Sdk_flight__TilemapFormats.parseTiledTileset(text, _options);
+  public static function parseTiledTileset(text:String, ?_options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledTileset> {
+    return cast Facade_Sdk_flight__TilemapFormats.parseTiledTileset(text, _options, diagnostics);
     return cast null;
   }
 
-  public static function parseTiledTilesetJson(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
-    return cast Facade_Sdk_flight__TilemapFormats.parseTiledTilesetJson(text, _options);
+  public static function parseTiledTilesetJson(text:String, ?_options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledTileset> {
+    return cast Facade_Sdk_flight__TilemapFormats.parseTiledTilesetJson(text, _options, diagnostics);
     return cast null;
   }
 
-  public static function parseTiledTmj(text:String, ?options:TiledParseOptions):Null<TiledMap> {
-    return cast Facade_Sdk_flight__TilemapFormats.parseTiledTmj(text, options);
+  public static function parseTiledTmj(text:String, ?options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledMap> {
+    return cast Facade_Sdk_flight__TilemapFormats.parseTiledTmj(text, options, diagnostics);
     return cast null;
   }
 
-  public static function parseTiledTmx(text:String, ?options:TiledParseOptions):Null<TiledMap> {
-    return cast Facade_Sdk_flight__TilemapFormats.parseTiledTmx(text, options);
+  public static function parseTiledTmx(text:String, ?options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledMap> {
+    return cast Facade_Sdk_flight__TilemapFormats.parseTiledTmx(text, options, diagnostics);
     return cast null;
   }
 
@@ -16793,6 +17026,10 @@ class Sdk {
 
   public static function pauseResourceLoad(loader:ResourceLoader):Void {
     Facade_Sdk_flight__Loader.pauseResourceLoad(loader);
+  }
+
+  public static function pauseSignalConnection<T>(connection:SignalConnection<T>):Void {
+    Facade_Sdk_flight__Signals.pauseSignalConnection(connection);
   }
 
   public static function pauseSpritesheetPlayer(player:SpritesheetPlayer):Void {
@@ -17102,6 +17339,10 @@ class Sdk {
     return cast null;
   }
 
+  public static function popGlRenderState(state:GlRenderState):Void {
+    Facade_Sdk_flight__RenderGl.popGlRenderState(state);
+  }
+
   public static function popStatusBarStyleEntry(host:HasUiStatusBarStyleStack, handle:StatusBarStyleEntryHandle):Void {
     Facade_Sdk_flight__StatusBar.popStatusBarStyleEntry(host, handle);
   }
@@ -17224,6 +17465,10 @@ class Sdk {
 
   public static function pushFlowState(stack:FlowStack, state:FlowState):Void {
     Facade_Sdk_flight__Flow.pushFlowState(stack, state);
+  }
+
+  public static function pushGlRenderState(state:GlRenderState):Void {
+    Facade_Sdk_flight__RenderGl.pushGlRenderState(state);
   }
 
   public static function pushStatusBarStyleEntry(host:HasUiStatusBarStyleStack, entry:StatusBarStyleEntry):StatusBarStyleEntryHandle {
@@ -17509,13 +17754,13 @@ class Sdk {
     return cast null;
   }
 
-  public static function readBinaryFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_Sdk_flight__FileSystem.readBinaryFile(host, path);
+  public static function readBinaryFile(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_Sdk_flight__FileSystem.readBinaryFile(host, path, signal);
     return cast null;
   }
 
-  public static function readBinaryFileRange(host:HasStorageFileSystem, path:String, offset:Float, length:Float):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_Sdk_flight__FileSystem.readBinaryFileRange(host, path, offset, length);
+  public static function readBinaryFileRange(host:HasStorageFileSystem, path:String, offset:Float, length:Float, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_Sdk_flight__FileSystem.readBinaryFileRange(host, path, offset, length, signal);
     return cast null;
   }
 
@@ -17554,18 +17799,18 @@ class Sdk {
     return cast null;
   }
 
-  public static function readDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_Sdk_flight__FileSystem.readDialogHandleBinaryFile(host, handle);
+  public static function readDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_Sdk_flight__FileSystem.readDialogHandleBinaryFile(host, handle, signal);
     return cast null;
   }
 
-  public static function readDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle):flight._internal._Promise<Null<String>> {
-    return cast Facade_Sdk_flight__FileSystem.readDialogHandleTextFile(host, handle);
+  public static function readDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<String>> {
+    return cast Facade_Sdk_flight__FileSystem.readDialogHandleTextFile(host, handle, signal);
     return cast null;
   }
 
-  public static function readDirectory(host:HasStorageFileSystem, path:String):flight._internal._Promise<Array<FileEntry>> {
-    return cast Facade_Sdk_flight__FileSystem.readDirectory(host, path);
+  public static function readDirectory(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Array<FileEntry>> {
+    return cast Facade_Sdk_flight__FileSystem.readDirectory(host, path, signal);
     return cast null;
   }
 
@@ -17619,8 +17864,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function readTextFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<String>> {
-    return cast Facade_Sdk_flight__FileSystem.readTextFile(host, path);
+  public static function readTextFile(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<String>> {
+    return cast Facade_Sdk_flight__FileSystem.readTextFile(host, path, signal);
     return cast null;
   }
 
@@ -17716,6 +17961,10 @@ class Sdk {
 
   public static function registerBevelEffectPaddingResolver(state:RenderState):Void {
     Facade_Sdk_flight__Effects.registerBevelEffectPaddingResolver(state);
+  }
+
+  public static function registerBitmapDisplacementEffectPaddingResolver(state:RenderState):Void {
+    Facade_Sdk_flight__Effects.registerBitmapDisplacementEffectPaddingResolver(state);
   }
 
   public static function registerBloomEffectPaddingResolver(state:RenderState):Void {
@@ -17964,6 +18213,10 @@ class Sdk {
 
   public static function registerGlBevelEffect(state:GlRenderState):Void {
     Facade_Sdk_flight__EffectsGl.registerGlBevelEffect(state);
+  }
+
+  public static function registerGlBitmapDisplacementEffect(state:GlRenderState):Void {
+    Facade_Sdk_flight__EffectsGl.registerGlBitmapDisplacementEffect(state);
   }
 
   public static function registerGlBitmapTextureResolver(state:GlRenderState):Void {
@@ -18520,6 +18773,10 @@ class Sdk {
     Facade_Sdk_flight__EffectsWgpu.registerWgpuBevelEffect(state);
   }
 
+  public static function registerWgpuBitmapDisplacementEffect(state:WgpuRenderState):Void {
+    Facade_Sdk_flight__EffectsWgpu.registerWgpuBitmapDisplacementEffect(state);
+  }
+
   public static function registerWgpuBitmapTextureResolver(state:WgpuRenderState):Void {
     Facade_Sdk_flight__RenderWgpu.registerWgpuBitmapTextureResolver(state);
   }
@@ -18724,8 +18981,8 @@ class Sdk {
     Facade_Sdk_flight__EffectsWgpu.registerWgpuRadialBlurEffect(state);
   }
 
-  public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
-    Facade_Sdk_flight__EffectsWgpu.registerWgpuRenderEffect(state, kind, runner);
+  public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner, ?isResolvable:WgpuRenderEffectResolver):Void {
+    Facade_Sdk_flight__EffectsWgpu.registerWgpuRenderEffect(state, kind, runner, isResolvable);
   }
 
   public static function registerWgpuRenderTextureResolver(state:WgpuRenderState):Void {
@@ -18945,6 +19202,11 @@ class Sdk {
 
   public static function removeFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Bool> {
     return cast Facade_Sdk_flight__FileSystem.removeFile(host, path);
+    return cast null;
+  }
+
+  public static function removeGuiDialogEntry(dialog:GuiDialog, id:String):Bool {
+    return cast Facade_Sdk_flight__Gui.removeGuiDialogEntry(dialog, id);
     return cast null;
   }
 
@@ -19309,6 +19571,14 @@ class Sdk {
     Facade_Sdk_flight__Spring.resetSpring(spring, value, velocity);
   }
 
+  public static function resetSpring2D(spring2D:Spring2D, valueX:Float, valueY:Float, ?velocityX:Float, ?velocityY:Float):Void {
+    Facade_Sdk_flight__Spring.resetSpring2D(spring2D, valueX, valueY, velocityX, velocityY);
+  }
+
+  public static function resetSpring3D(spring3D:Spring3D, valueX:Float, valueY:Float, valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):Void {
+    Facade_Sdk_flight__Spring.resetSpring3D(spring3D, valueX, valueY, valueZ, velocityX, velocityY, velocityZ);
+  }
+
   public static function resetTextureUvTransform(texture:TextureLike):Void {
     Facade_Sdk_flight__Texture.resetTextureUvTransform(texture);
   }
@@ -19334,8 +19604,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):flight._internal._UInt8Array {
-    return cast Facade_Sdk_flight__TextBidi.resolveBidiLevels(text, baseDirection);
+  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection, ?bidiClassBackend:BidiClassBackend):flight._internal._UInt8Array {
+    return cast Facade_Sdk_flight__TextBidi.resolveBidiLevels(text, baseDirection, bidiClassBackend);
     return cast null;
   }
 
@@ -19351,6 +19621,11 @@ class Sdk {
 
   public static function resolveCommandOrControlModifier(platform:PlatformName):flight._internal._Exclude<ShortcutModifier, String> {
     return cast Facade_Sdk_flight__Shortcut.resolveCommandOrControlModifier(platform);
+    return cast null;
+  }
+
+  public static function resolveFlightDocumentSceneTokens(scene:FlightDocumentScene, mode:String, ?resolvers:FlightDocumentTokenResolverRegistry):Null<FlightDocumentTokenResolution> {
+    return cast Facade_Sdk_flight__Tokens.resolveFlightDocumentSceneTokens(scene, mode, resolvers);
     return cast null;
   }
 
@@ -19459,6 +19734,10 @@ class Sdk {
 
   public static function resumeResourceLoad(loader:ResourceLoader):Void {
     Facade_Sdk_flight__Loader.resumeResourceLoad(loader);
+  }
+
+  public static function resumeSignalConnection<T>(connection:SignalConnection<T>):Void {
+    Facade_Sdk_flight__Signals.resumeSignalConnection(connection);
   }
 
   public static function resumeSpritesheetPlayer(player:SpritesheetPlayer):Void {
@@ -20008,6 +20287,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function setAudioChannelPan(channel:AudioChannel, value:Float):Float {
+    return cast Facade_Sdk_flight__Media.setAudioChannelPan(channel, value);
+    return cast null;
+  }
+
   public static function setAudioChannelPlaybackRate(channel:AudioChannel, value:Float):Float {
     return cast Facade_Sdk_flight__Media.setAudioChannelPlaybackRate(channel, value);
     return cast null;
@@ -20551,6 +20835,10 @@ class Sdk {
     Facade_Sdk_flight__Node.setNodeOrderListFromNodeChildren(list, source);
   }
 
+  public static function setNodePointerDoubleClickEnabled(source:NodeAny, enabled:Bool):Void {
+    Facade_Sdk_flight__Interaction.setNodePointerDoubleClickEnabled(source, enabled);
+  }
+
   public static final SetNodePropertyCommandKind:String = Facade_Sdk_flight__Types.SetNodePropertyCommandKind;
 
   public static function setNodeTabIndex(source:NodeAny, tabIndex:Float):Void {
@@ -21050,7 +21338,7 @@ class Sdk {
     Facade_Sdk_flight__TextLayout.setTextLayoutMeasureProvider(measure);
   }
 
-  public static function setTextureAtlasRegion(out:TextureAtlasRegion, source:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):Void {
+  public static function setTextureAtlasRegion(out:TextureAtlasRegion, source:{ @:optional var height:Null<Float>; @:optional var width:Null<Float>; @:optional var x:Null<Float>; @:optional var y:Null<Float>; @:optional var pivotX:Null<Float>; @:optional var pivotY:Null<Float>; @:optional var name:Null<String>; @:optional var id:Null<Float>; @:optional var originalHeight:Null<Float>; @:optional var originalWidth:Null<Float>; @:optional var pageName:Null<String>; @:optional var rotated:Null<Bool>; @:optional var sourceX:Null<Float>; @:optional var sourceY:Null<Float>; @:optional var trimmed:Null<Bool>; }):Void {
     Facade_Sdk_flight__TextureAtlas.setTextureAtlasRegion(out, source);
   }
 
@@ -21377,8 +21665,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function showErrorBox(host:HasDialogMessage, title:String, content:String):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Sdk_flight__Dialog.showErrorBox(host, title, content);
+  public static function showErrorBox(host:HasDialogMessage, title:String, content:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Sdk_flight__Dialog.showErrorBox(host, title, content, signal);
     return cast null;
   }
 
@@ -21402,8 +21690,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function showOpenDirectoryDialog(host:HasDialogDirectoryOpen):flight._internal._Promise<DirectoryOpenDialogResult> {
-    return cast Facade_Sdk_flight__Dialog.showOpenDirectoryDialog(host);
+  public static function showOpenDirectoryDialog(host:HasDialogDirectoryOpen, ?options:OpenDirectoryDialogOptions):flight._internal._Promise<DirectoryOpenDialogResult> {
+    return cast Facade_Sdk_flight__Dialog.showOpenDirectoryDialog(host, options);
     return cast null;
   }
 
@@ -21551,6 +21839,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function spawnShellProcess(host:ShellProcessHost, command:String, args:Array<String>, ?options:ShellProcessOptions):Null<ShellProcess> {
+    return cast Facade_Sdk_flight__Shell.spawnShellProcess(host, command, args, options);
+    return cast null;
+  }
+
   public static final SpecularGlossinessPbrMaterialKind:String = Facade_Sdk_flight__Types.SpecularGlossinessPbrMaterialKind;
 
   public static final SpecularPbrExtensionKind:String = Facade_Sdk_flight__Types.SpecularPbrExtensionKind;
@@ -21567,6 +21860,12 @@ class Sdk {
   }
 
   public static final SpotLightKind:String = Facade_Sdk_flight__Types.SpotLightKind;
+
+  public static final SpringPresetBouncy:SpringConfig = Facade_Sdk_flight__Spring.SpringPresetBouncy;
+
+  public static final SpringPresetGentle:SpringConfig = Facade_Sdk_flight__Spring.SpringPresetGentle;
+
+  public static final SpringPresetStiff:SpringConfig = Facade_Sdk_flight__Spring.SpringPresetStiff;
 
   public static final SpriteKind:String = Facade_Sdk_flight__Types.SpriteKind;
 
@@ -21734,6 +22033,11 @@ class Sdk {
 
   public static function submitWgpuRenderPass(state:WgpuPresentationRenderState):Void {
     Facade_Sdk_flight__RenderWgpu.submitWgpuRenderPass(state);
+  }
+
+  public static function substituteFlightDocumentSceneTokens<T:FlightDocumentScene>(scene:T, resolution:FlightDocumentTokenResolution):Null<T> {
+    return cast Facade_Sdk_flight__Tokens.substituteFlightDocumentSceneTokens(scene, resolution);
+    return cast null;
   }
 
   public static function subtractVector2(out:Vector2Like, source:Vector2Like, other:Vector2Like):Void {
@@ -22540,6 +22844,10 @@ class Sdk {
     Facade_Sdk_flight__Spring.updateSpring3D(spring3D, targetX, targetY, targetZ, config, deltaTime);
   }
 
+  public static function updateSpringAngle(spring:Spring, target:Float, fullTurn:Float, config:SpringConfig, deltaTime:Float):Void {
+    Facade_Sdk_flight__Spring.updateSpringAngle(spring, target, fullTurn, config, deltaTime);
+  }
+
   public static function updateSpritesheetPlayer(player:SpritesheetPlayer, deltaTime:Float):Bool {
     return cast Facade_Sdk_flight__Spritesheet.updateSpritesheetPlayer(player, deltaTime);
     return cast null;
@@ -22745,6 +23053,11 @@ class Sdk {
     return cast null;
   }
 
+  public static function withGlRenderState<T>(state:GlRenderState, callback:Void->T):T {
+    return cast Facade_Sdk_flight__RenderGl.withGlRenderState(state, callback);
+    return cast null;
+  }
+
   public static function withGlRenderTextures<T>(state:GlRenderState, pool:GlRenderTexturePool, descriptors:Array<RenderTargetDescriptor>, callback:Array<RenderTexture>->T):T {
     return cast Facade_Sdk_flight__RenderGl.withGlRenderTextures(state, pool, descriptors, callback);
     return cast null;
@@ -22779,13 +23092,13 @@ class Sdk {
 
   public static final wrappedDiffusePbrGlExtension:GlPbrExtensionRegistration = Facade_Sdk_flight__Scene3DGl.wrappedDiffusePbrGlExtension;
 
-  public static function writeBinaryFile(host:HasStorageFileSystem, path:String, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeBinaryFile(host, path, data);
+  public static function writeBinaryFile(host:HasStorageFileSystem, path:String, data:flight._internal._UInt8Array, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeBinaryFile(host, path, data, signal);
     return cast null;
   }
 
-  public static function writeBinaryFileChunks(host:HasStorageFileSystem, path:String, chunks:Dynamic):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeBinaryFileChunks(host, path, chunks);
+  public static function writeBinaryFileChunks(host:HasStorageFileSystem, path:String, chunks:Dynamic, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeBinaryFileChunks(host, path, chunks, signal);
     return cast null;
   }
 
@@ -22845,18 +23158,18 @@ class Sdk {
     Facade_Sdk_flight__Collision.writeCollisionTriangleMeshBounds3D(mesh, out);
   }
 
-  public static function writeDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeDialogHandleBinaryFile(host, handle, data);
+  public static function writeDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:flight._internal._UInt8Array, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeDialogHandleBinaryFile(host, handle, data, signal);
     return cast null;
   }
 
-  public static function writeDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeDialogHandleTextFile(host, handle, data);
+  public static function writeDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeDialogHandleTextFile(host, handle, data, signal);
     return cast null;
   }
 
-  public static function writeFileAtomic(host:HasStorageFileSystem, path:String, data:flight._internal._Union2<flight._internal._UInt8Array, String>):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeFileAtomic(host, path, data);
+  public static function writeFileAtomic(host:HasStorageFileSystem, path:String, data:flight._internal._Union2<flight._internal._UInt8Array, String>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeFileAtomic(host, path, data, signal);
     return cast null;
   }
 
@@ -23048,8 +23361,8 @@ class Sdk {
     return cast null;
   }
 
-  public static function writeTextFile(host:HasStorageFileSystem, path:String, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_Sdk_flight__FileSystem.writeTextFile(host, path, data);
+  public static function writeTextFile(host:HasStorageFileSystem, path:String, data:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_Sdk_flight__FileSystem.writeTextFile(host, path, data, signal);
     return cast null;
   }
 

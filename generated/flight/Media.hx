@@ -212,6 +212,11 @@ class Media {
     return cast null;
   }
 
+  public static function setAudioChannelPan(channel:AudioChannel, value:Float):Float {
+    return cast Facade_Media_flight__Media.setAudioChannelPan(channel, value);
+    return cast null;
+  }
+
   public static function setAudioChannelPlaybackRate(channel:AudioChannel, value:Float):Float {
     return cast Facade_Media_flight__Media.setAudioChannelPlaybackRate(channel, value);
     return cast null;

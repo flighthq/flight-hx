@@ -16,6 +16,7 @@ import flight.types.HasDialogMessage;
 import flight.types.HasDialogPrompt;
 import flight.types.MessageDialogOptions;
 import flight.types.MessageDialogResult;
+import flight.types.OpenDirectoryDialogOptions;
 import flight.types.OpenFileDialogOptions;
 import flight.types.PromptDialogOptions;
 import flight.types.SaveFileDialogOptions;
@@ -36,8 +37,8 @@ class Dialog {
     return cast null;
   }
 
-  public static function showErrorBox(host:HasDialogMessage, title:String, content:String):flight._internal._Promise<MessageDialogResult> {
-    return cast Facade_Dialog_flight__Dialog.showErrorBox(host, title, content);
+  public static function showErrorBox(host:HasDialogMessage, title:String, content:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<MessageDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showErrorBox(host, title, content, signal);
     return cast null;
   }
 
@@ -56,8 +57,8 @@ class Dialog {
     return cast null;
   }
 
-  public static function showOpenDirectoryDialog(host:HasDialogDirectoryOpen):flight._internal._Promise<DirectoryOpenDialogResult> {
-    return cast Facade_Dialog_flight__Dialog.showOpenDirectoryDialog(host);
+  public static function showOpenDirectoryDialog(host:HasDialogDirectoryOpen, ?options:OpenDirectoryDialogOptions):flight._internal._Promise<DirectoryOpenDialogResult> {
+    return cast Facade_Dialog_flight__Dialog.showOpenDirectoryDialog(host, options);
     return cast null;
   }
 

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ElectronMessageBoxOptions = { @:optional var type:String; @:optional var title:String; var message:String; @:optional var detail:String; @:optional var buttons:Array<String>; @:optional var defaultId:Float; @:optional var cancelId:Float; @:optional var checkboxLabel:String; @:optional var checkboxChecked:Bool; };
+typedef ElectronMessageBoxOptions = { @:optional var type:String; @:optional var title:String; var message:String; @:optional var detail:String; @:optional var buttons:Array<String>; @:optional var defaultId:Float; @:optional var cancelId:Float; @:optional var signal:flight._internal.dom.AbortSignal; @:optional var checkboxLabel:String; @:optional var checkboxChecked:Bool; };

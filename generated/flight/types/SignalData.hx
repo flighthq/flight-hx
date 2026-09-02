@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SignalData<T> = { var slots:Array<T>; var priorities:Array<Float>; var repeat:Array<Bool>; var cancelled:Bool; };
+typedef SignalData<T> = { var slots:Array<Null<T>>; var priorities:Array<Float>; var repeat:Array<Bool>; var cancelled:Bool; var depth:Float; };

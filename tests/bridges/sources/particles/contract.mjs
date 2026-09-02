@@ -10,6 +10,7 @@ export * from './particleEmitterConfig.mjs';
 export * from './particleEmitterSignals.mjs';
 export * from './particleEmitterState.mjs';
 export * from './particleObjectsState.mjs';
+export * from './particleSpawnOffset.mjs';
 export * from './stepParticleObjects.mjs';
 export * from './updateParticleObjects.mjs';
 export * from './validateParticleEmitterConfig.mjs';

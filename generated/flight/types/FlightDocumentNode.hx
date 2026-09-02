@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentNode = { var children:Array<FlightDocumentNode>; var fields:FlightDocumentFields; var kind:Kind; };
+typedef FlightDocumentNode = { var children:Array<FlightDocumentNode>; var fields:FlightDocumentFields; @:optional var interactiveStates:Null<FlightDocumentInteractiveStates>; var kind:Kind; @:optional var transition:Null<FlightDocumentInteractiveStateTransitionDescriptor>; };

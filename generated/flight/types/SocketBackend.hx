@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SocketBackend = { var openSocket:SocketOptions->SocketEventSink->Null<SocketConnection>; };
+typedef SocketBackend = { var openSocket:SocketOptions->SocketEventSink->Null<SocketConnection>; @:optional var openTcpSocket:TcpSocketOptions->Null<TcpSocketConnection>; };

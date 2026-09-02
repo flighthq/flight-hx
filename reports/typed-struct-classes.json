@@ -4545,14 +4545,14 @@
         {
           "column": 68,
           "kind": "anonymous-structural-transfer",
-          "line": 105,
+          "line": 95,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/asepriteSerialize.ts"
         },
         {
           "column": 12,
           "kind": "json-serialization",
-          "line": 110,
+          "line": 100,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/asepriteSerialize.ts"
         }
@@ -4654,7 +4654,7 @@
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 87,
+          "line": 85,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/asepriteSerialize.ts"
         }
@@ -4756,7 +4756,7 @@
         {
           "column": 10,
           "kind": "json-serialization",
-          "line": 114,
+          "line": 104,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/asepriteSerialize.ts"
         }
@@ -4860,28 +4860,28 @@
         {
           "column": 30,
           "kind": "optional-omission",
-          "line": 134,
+          "line": 129,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/asepriteParse.ts"
         },
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 27,
+          "line": 25,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/asepriteSerialize.ts"
         },
         {
           "column": 41,
           "kind": "optional-omission",
-          "line": 32,
+          "line": 30,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/asepriteSerialize.ts"
         },
         {
           "column": 71,
           "kind": "optional-omission",
-          "line": 32,
+          "line": 30,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/asepriteSerialize.ts"
         }
@@ -5856,7 +5856,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 16,
+        "inputSignatures": 17,
         "outputSignatures": 2
       },
       "construction": {
@@ -5867,11 +5867,11 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 41,
+      "directAccesses": 45,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 8
+        "total": 9
       },
       "id": "@flighthq/types:interface#AudioChannel",
       "migration": {
@@ -5917,7 +5917,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 13
+        "total": 14
       },
       "id": "@flighthq/types:interface#AudioDeviceBackend",
       "migration": {
@@ -5973,21 +5973,21 @@
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 123,
+          "line": 184,
           "scope": "test",
           "source": "upstream/packages/media/src/audioDeviceBackend.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 145,
+          "line": 206,
           "scope": "test",
           "source": "upstream/packages/media/src/audioDeviceBackend.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 177,
+          "line": 238,
           "scope": "test",
           "source": "upstream/packages/media/src/audioDeviceBackend.test.ts"
         }
@@ -6687,7 +6687,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 3,
         "outputSignatures": 2
       },
       "construction": {
@@ -6696,7 +6696,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 2
+        "testObjectLiterals": 6
       },
       "directAccesses": 0,
       "fields": {
@@ -7022,7 +7022,7 @@
         {
           "column": 55,
           "kind": "cross-schema-transfer",
-          "line": 27,
+          "line": 31,
           "relatedSchemaIds": [
             "@flighthq/types:interface#TextureSource"
           ],
@@ -7189,6 +7189,113 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/BitmapConvolutionOptions.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 4,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 1,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 2
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 5,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#BitmapDisplacementEffect",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "cross-schema-transfer",
+          "object-literal-spread"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "BitmapDisplacementEffect",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 5,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 70,
+          "kind": "cross-schema-transfer",
+          "line": 61,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#RenderEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+        },
+        {
+          "column": 16,
+          "kind": "cross-schema-transfer",
+          "line": 68,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#RenderEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+        },
+        {
+          "column": 72,
+          "kind": "cross-schema-transfer",
+          "line": 80,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#RenderEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+        },
+        {
+          "column": 16,
+          "kind": "cross-schema-transfer",
+          "line": 87,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#RenderEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+        },
+        {
+          "column": 10,
+          "kind": "object-literal-spread",
+          "line": 15,
+          "scope": "production",
+          "source": "upstream/packages/effects/src/bitmapDisplacementEffect.ts"
+        },
+        {
+          "column": 45,
+          "kind": "cross-schema-transfer",
+          "line": 29,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#RenderEffect"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/effects/src/bitmapDisplacementEffect.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/BitmapDisplacementEffect.ts"
     },
     {
       "bridge": {
@@ -10099,13 +10206,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 8
+        "testObjectLiterals": 9
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 5,
+        "optional": 6,
         "requiredUndefined": 0,
-        "total": 6
+        "total": 7
       },
       "id": "@flighthq/types:interface#ButtonControllerOptions",
       "migration": {
@@ -12529,7 +12636,7 @@
         {
           "column": 26,
           "kind": "optional-omission",
-          "line": 10,
+          "line": 17,
           "scope": "production",
           "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts"
         }
@@ -12585,7 +12692,7 @@
         {
           "column": 43,
           "kind": "optional-omission",
-          "line": 15,
+          "line": 23,
           "scope": "production",
           "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts"
         }
@@ -12733,7 +12840,7 @@
         {
           "column": 42,
           "kind": "optional-omission",
-          "line": 25,
+          "line": 34,
           "scope": "production",
           "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts"
         }
@@ -13109,9 +13216,9 @@
       },
       "sites": [
         {
-          "column": 61,
+          "column": 43,
           "kind": "optional-omission",
-          "line": 32,
+          "line": 39,
           "scope": "production",
           "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
         }
@@ -13305,14 +13412,14 @@
         {
           "column": 36,
           "kind": "optional-omission",
-          "line": 39,
+          "line": 49,
           "scope": "production",
           "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
         },
         {
           "column": 37,
           "kind": "optional-omission",
-          "line": 123,
+          "line": 138,
           "scope": "production",
           "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts"
         }
@@ -15971,7 +16078,7 @@
         {
           "column": 10,
           "kind": "optional-omission",
-          "line": 82,
+          "line": 86,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/cocosPlistSerialize.ts"
         }
@@ -19668,7 +19775,7 @@
         {
           "column": 13,
           "kind": "cross-schema-transfer",
-          "line": 29,
+          "line": 33,
           "relatedSchemaIds": [
             "@flighthq/types:interface#TextureSource"
           ],
@@ -20578,7 +20685,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
       "directAccesses": 0,
       "fields": {
@@ -23577,22 +23684,24 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
-        "objectLiteralsOmittingOptionalFields": 1,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "objectLiterals": 6,
+        "objectLiteralsOmittingOptionalFields": 4,
+        "objectLiteralsWithSpread": 2,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 8,
+        "optional": 9,
         "requiredUndefined": 0,
-        "total": 9
+        "total": 10
       },
       "id": "@flighthq/types:interface#ElectronMessageBoxOptions",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "object-literal-spread"
+        ],
         "observabilityReasons": [
           "optional-omission"
         ]
@@ -23618,8 +23727,43 @@
       "sites": [
         {
           "column": 61,
+          "kind": "object-literal-spread",
+          "line": 100,
+          "scope": "production",
+          "source": "upstream/packages/host-electron/src/electronDialog.ts"
+        },
+        {
+          "column": 44,
           "kind": "optional-omission",
           "line": 108,
+          "scope": "production",
+          "source": "upstream/packages/host-electron/src/electronDialog.ts"
+        },
+        {
+          "column": 49,
+          "kind": "optional-omission",
+          "line": 108,
+          "scope": "production",
+          "source": "upstream/packages/host-electron/src/electronDialog.ts"
+        },
+        {
+          "column": 61,
+          "kind": "object-literal-spread",
+          "line": 120,
+          "scope": "production",
+          "source": "upstream/packages/host-electron/src/electronDialog.ts"
+        },
+        {
+          "column": 44,
+          "kind": "optional-omission",
+          "line": 128,
+          "scope": "production",
+          "source": "upstream/packages/host-electron/src/electronDialog.ts"
+        },
+        {
+          "column": 49,
+          "kind": "optional-omission",
+          "line": 128,
           "scope": "production",
           "source": "upstream/packages/host-electron/src/electronDialog.ts"
         }
@@ -23859,14 +24003,14 @@
         {
           "column": 63,
           "kind": "optional-omission",
-          "line": 23,
+          "line": 24,
           "scope": "production",
           "source": "upstream/packages/host-electron/src/electronDialog.ts"
         },
         {
           "column": 63,
           "kind": "optional-omission",
-          "line": 46,
+          "line": 48,
           "scope": "production",
           "source": "upstream/packages/host-electron/src/electronDialog.ts"
         }
@@ -24060,7 +24204,7 @@
         {
           "column": 63,
           "kind": "optional-omission",
-          "line": 70,
+          "line": 73,
           "scope": "production",
           "source": "upstream/packages/host-electron/src/electronDialog.ts"
         }
@@ -24714,7 +24858,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 1,
-        "crossSchemaTransfers": 127,
+        "crossSchemaTransfers": 135,
         "dynamicIngresses": 2,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -24753,7 +24897,7 @@
         {
           "column": 67,
           "kind": "cross-schema-transfer",
-          "line": 80,
+          "line": 84,
           "relatedSchemaIds": [
             "@flighthq/types:interface#ButtonController"
           ],
@@ -24763,7 +24907,7 @@
         {
           "column": 24,
           "kind": "cross-schema-transfer",
-          "line": 81,
+          "line": 85,
           "relatedSchemaIds": [
             "@flighthq/types:interface#ButtonController"
           ],
@@ -24773,7 +24917,7 @@
         {
           "column": 58,
           "kind": "cross-schema-transfer",
-          "line": 89,
+          "line": 95,
           "relatedSchemaIds": [
             "@flighthq/types:interface#ButtonController"
           ],
@@ -24783,7 +24927,7 @@
         {
           "column": 58,
           "kind": "cross-schema-transfer",
-          "line": 93,
+          "line": 99,
           "relatedSchemaIds": [
             "@flighthq/types:interface#ButtonController"
           ],
@@ -24793,7 +24937,7 @@
         {
           "column": 67,
           "kind": "cross-schema-transfer",
-          "line": 97,
+          "line": 103,
           "relatedSchemaIds": [
             "@flighthq/types:interface#ButtonController"
           ],
@@ -24856,6 +25000,86 @@
           "line": 76,
           "scope": "production",
           "source": "upstream/packages/gui/src/guiController.ts"
+        },
+        {
+          "column": 60,
+          "kind": "cross-schema-transfer",
+          "line": 32,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#GuiDialog"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gui/src/guiDialog.ts"
+        },
+        {
+          "column": 60,
+          "kind": "cross-schema-transfer",
+          "line": 80,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#GuiDialog"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gui/src/guiDialog.ts"
+        },
+        {
+          "column": 24,
+          "kind": "cross-schema-transfer",
+          "line": 85,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#GuiDialog"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gui/src/guiDialog.ts"
+        },
+        {
+          "column": 60,
+          "kind": "cross-schema-transfer",
+          "line": 94,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#GuiDialog"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gui/src/guiDialog.ts"
+        },
+        {
+          "column": 51,
+          "kind": "cross-schema-transfer",
+          "line": 111,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#GuiDialog"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gui/src/guiDialog.ts"
+        },
+        {
+          "column": 60,
+          "kind": "cross-schema-transfer",
+          "line": 118,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#GuiDialog"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gui/src/guiDialog.ts"
+        },
+        {
+          "column": 51,
+          "kind": "cross-schema-transfer",
+          "line": 125,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#GuiDialog"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gui/src/guiDialog.ts"
+        },
+        {
+          "column": 60,
+          "kind": "cross-schema-transfer",
+          "line": 129,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#GuiDialog"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gui/src/guiDialog.ts"
         },
         {
           "column": 65,
@@ -26055,7 +26279,7 @@
         {
           "column": 36,
           "kind": "cross-schema-transfer",
-          "line": 170,
+          "line": 287,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node",
             "@flighthq/types:type#NodeAny"
@@ -26066,7 +26290,7 @@
         {
           "column": 36,
           "kind": "cross-schema-transfer",
-          "line": 192,
+          "line": 309,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node",
             "@flighthq/types:type#NodeAny"
@@ -26077,7 +26301,7 @@
         {
           "column": 36,
           "kind": "cross-schema-transfer",
-          "line": 291,
+          "line": 406,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node",
             "@flighthq/types:type#NodeAny"
@@ -26088,7 +26312,7 @@
         {
           "column": 36,
           "kind": "cross-schema-transfer",
-          "line": 307,
+          "line": 422,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node",
             "@flighthq/types:type#NodeAny"
@@ -26159,7 +26383,7 @@
         {
           "column": 30,
           "kind": "cross-schema-transfer",
-          "line": 28,
+          "line": 29,
           "relatedSchemaIds": [
             "@flighthq/types:interface#FileDialogHandleRuntime"
           ],
@@ -26190,7 +26414,7 @@
         {
           "column": 29,
           "kind": "anonymous-structural-transfer",
-          "line": 164,
+          "line": 168,
           "scope": "production",
           "source": "upstream/packages/gizmo/src/gizmoState.ts"
         },
@@ -27182,7 +27406,7 @@
         {
           "column": 10,
           "kind": "optional-omission",
-          "line": 212,
+          "line": 223,
           "scope": "production",
           "source": "upstream/packages/host-web/src/webDialog.ts"
         }
@@ -27238,7 +27462,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 26,
+          "line": 27,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
@@ -27248,7 +27472,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 37,
+          "line": 38,
           "relatedSchemaIds": [
             "@flighthq/types:interface#EntityRuntime"
           ],
@@ -27664,7 +27888,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 18
+        "testObjectLiterals": 20
       },
       "directAccesses": 0,
       "fields": {
@@ -27715,7 +27939,7 @@
         {
           "column": 12,
           "kind": "enumeration",
-          "line": 7,
+          "line": 9,
           "scope": "test",
           "source": "upstream/packages/host-web/src/webFilesystem.test.ts"
         }
@@ -27770,7 +27994,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 0
       },
       "construction": {
@@ -27779,13 +28003,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
-      "directAccesses": 1,
+      "directAccesses": 9,
       "fields": {
-        "optional": 1,
+        "optional": 2,
         "requiredUndefined": 0,
-        "total": 1
+        "total": 2
       },
       "id": "@flighthq/types:interface#FileWalkOptions",
       "migration": {
@@ -28209,7 +28433,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 6,
+        "inputSignatures": 7,
         "outputSignatures": 1
       },
       "construction": {
@@ -28218,7 +28442,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 7
+        "testObjectLiterals": 12
       },
       "directAccesses": 0,
       "fields": {
@@ -28239,7 +28463,7 @@
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 6,
+        "objectSpreads": 8,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -28270,37 +28494,51 @@
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 138,
+          "line": 222,
           "scope": "test",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 206,
+          "line": 408,
           "scope": "test",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 269,
+          "line": 314,
           "scope": "test",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 356,
+          "line": 409,
           "scope": "test",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.test.ts"
+        },
+        {
+          "column": 9,
+          "kind": "object-spread",
+          "line": 30,
+          "scope": "test",
+          "source": "upstream/packages/tokens/src/flightDocumentSceneTokenPipeline.test.ts"
+        },
+        {
+          "column": 9,
+          "kind": "object-spread",
+          "line": 44,
+          "scope": "test",
+          "source": "upstream/packages/tokens/src/flightDocumentSceneTokenPipeline.test.ts"
         }
       ],
       "source": "upstream/packages/types/src/FlightDocument.ts"
     },
     {
       "bridge": {
-        "inputSignatures": 0,
+        "inputSignatures": 1,
         "outputSignatures": 0
       },
       "construction": {
@@ -28309,7 +28547,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 0
+        "testObjectLiterals": 12
       },
       "directAccesses": 0,
       "fields": {
@@ -28321,9 +28559,135 @@
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "object-spread"
+        ]
       },
       "name": "FlightDocumentFieldSchema",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 2,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 74,
+          "kind": "object-spread",
+          "line": 324,
+          "scope": "test",
+          "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.test.ts"
+        },
+        {
+          "column": 77,
+          "kind": "object-spread",
+          "line": 379,
+          "scope": "test",
+          "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.test.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/FlightDocumentFieldSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 2,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 30
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 6,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#FlightDocumentInteractiveState",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "FlightDocumentInteractiveState",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 49,
+          "kind": "optional-omission",
+          "line": 589,
+          "scope": "production",
+          "source": "upstream/packages/scene-document/src/flightDocumentText.ts"
+        },
+        {
+          "column": 47,
+          "kind": "optional-omission",
+          "line": 85,
+          "scope": "production",
+          "source": "upstream/packages/scene-document/src/sceneDocumentInteractiveStateBindings.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/FlightDocumentInteractiveState.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 4,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 4
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#FlightDocumentInteractiveStateBinding",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentInteractiveStateBinding",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -28342,20 +28706,122 @@
         "objectSpreads": 0
       },
       "sites": [],
-      "source": "upstream/packages/types/src/FlightDocumentFieldSchema.ts"
+      "source": "upstream/packages/types/src/FlightDocumentInteractiveState.ts"
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 0,
         "outputSignatures": 0
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
-        "testObjectLiterals": 70
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 8
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#FlightDocumentInteractiveStateExtensionDescriptor",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentInteractiveStateExtensionDescriptor",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 1,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 10,
+          "kind": "anonymous-structural-transfer",
+          "line": 637,
+          "scope": "production",
+          "source": "upstream/packages/scene-document/src/flightDocumentText.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/FlightDocumentInteractiveState.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 4
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#FlightDocumentInteractiveStateExtensionSchema",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentInteractiveStateExtensionSchema",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/FlightDocumentInteractiveStateExtensionSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 24
       },
       "directAccesses": 0,
       "fields": {
@@ -28363,13 +28829,311 @@
         "requiredUndefined": 0,
         "total": 3
       },
-      "id": "@flighthq/types:interface#FlightDocumentNode",
+      "id": "@flighthq/types:interface#FlightDocumentInteractiveStates",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "enumeration"
+        ]
+      },
+      "name": "FlightDocumentInteractiveStates",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 1,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 25,
+          "kind": "enumeration",
+          "line": 61,
+          "scope": "production",
+          "source": "upstream/packages/scene-document/src/sceneDocumentRefusal.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/FlightDocumentInteractiveState.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 6
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#FlightDocumentInteractiveStateTransitionDescriptor",
       "migration": {
         "mechanicallyCompatible": false,
         "normalizationReasons": [
           "anonymous-structural-transfer"
         ],
         "observabilityReasons": []
+      },
+      "name": "FlightDocumentInteractiveStateTransitionDescriptor",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 1,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 10,
+          "kind": "anonymous-structural-transfer",
+          "line": 669,
+          "scope": "production",
+          "source": "upstream/packages/scene-document/src/flightDocumentText.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/FlightDocumentInteractiveState.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 2
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#FlightDocumentInteractiveStateTransitionSchema",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentInteractiveStateTransitionSchema",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/FlightDocumentInteractiveStateTransitionSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 3,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 11
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#FlightDocumentLayoutBinding",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentLayoutBinding",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/FlightDocumentLayout.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 4
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#FlightDocumentLayoutDescriptor",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentLayoutDescriptor",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/FlightDocumentLayout.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 5
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#FlightDocumentLayoutTree",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentLayoutTree",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/FlightDocumentLayout.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 8,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 4,
+        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 4,
+        "testObjectLiterals": 107
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 2,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#FlightDocumentNode",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
       },
       "name": "FlightDocumentNode",
       "oracle": {
@@ -28393,9 +29157,16 @@
         {
           "column": 10,
           "kind": "anonymous-structural-transfer",
-          "line": 477,
+          "line": 710,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/flightDocumentText.ts"
+        },
+        {
+          "column": 10,
+          "kind": "optional-omission",
+          "line": 73,
+          "scope": "production",
+          "source": "upstream/packages/tokens/src/substituteFlightDocumentSceneTokens.ts"
         }
       ],
       "source": "upstream/packages/types/src/FlightDocument.ts"
@@ -28411,7 +29182,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 10
+        "testObjectLiterals": 15
       },
       "directAccesses": 0,
       "fields": {
@@ -28423,14 +29194,16 @@
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "object-spread"
+        ]
       },
       "name": "FlightDocumentNodeSchema",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 0,
+        "objectSpreads": 2,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -28443,27 +29216,42 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 7,
+          "kind": "object-spread",
+          "line": 323,
+          "scope": "test",
+          "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.test.ts"
+        },
+        {
+          "column": 7,
+          "kind": "object-spread",
+          "line": 378,
+          "scope": "test",
+          "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.test.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/FlightDocumentNodeSchema.ts"
     },
     {
       "bridge": {
         "inputSignatures": 0,
-        "outputSignatures": 9
+        "outputSignatures": 15
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 6,
+        "objectLiterals": 8,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 4,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 10
+        "total": 12
       },
       "id": "@flighthq/types:interface#FlightDocumentRefusalExplanation",
       "migration": {
@@ -28525,28 +29313,28 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 195,
+          "line": 312,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.ts"
         },
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 196,
+          "line": 313,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene2DMaterialization.ts"
         },
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 309,
+          "line": 424,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.ts"
         },
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 310,
+          "line": 425,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.ts"
         }
@@ -28556,7 +29344,7 @@
     {
       "bridge": {
         "inputSignatures": 0,
-        "outputSignatures": 0
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -28564,7 +29352,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 3
+        "testObjectLiterals": 4
       },
       "directAccesses": 0,
       "fields": {
@@ -28656,7 +29444,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 0
+        "testObjectLiterals": 1
       },
       "directAccesses": 0,
       "fields": {
@@ -28693,8 +29481,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 1
+        "inputSignatures": 4,
+        "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -28702,13 +29490,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 2,
-        "testObjectLiterals": 0
+        "testObjectLiterals": 2
       },
       "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 3
+        "total": 5
       },
       "id": "@flighthq/types:interface#FlightDocumentScene2D",
       "migration": {
@@ -28754,7 +29542,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 1
+        "total": 3
       },
       "id": "@flighthq/types:interface#FlightDocumentScene2DMaterialization",
       "migration": {
@@ -28785,8 +29573,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 1
+        "inputSignatures": 4,
+        "outputSignatures": 2
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -28794,13 +29582,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 2,
-        "testObjectLiterals": 0
+        "testObjectLiterals": 1
       },
       "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 4
+        "total": 6
       },
       "id": "@flighthq/types:interface#FlightDocumentScene3D",
       "migration": {
@@ -28846,7 +29634,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 3
+        "total": 5
       },
       "id": "@flighthq/types:interface#FlightDocumentScene3DMaterialization",
       "migration": {
@@ -28877,7 +29665,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 12,
+        "inputSignatures": 19,
         "outputSignatures": 0
       },
       "construction": {
@@ -28886,13 +29674,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 4
+        "testObjectLiterals": 9
       },
       "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 3
+        "total": 5
       },
       "id": "@flighthq/types:interface#FlightDocumentSchemaRegistry",
       "migration": {
@@ -28920,6 +29708,144 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/FlightDocumentSchemaRegistry.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 26
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#FlightDocumentToken",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentToken",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/FlightDocumentToken.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#FlightDocumentTokenResolution",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentTokenResolution",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/FlightDocumentToken.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#FlightDocumentTokenResolverRegistry",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentTokenResolverRegistry",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/FlightDocumentToken.ts"
     },
     {
       "bridge": {
@@ -30349,6 +31275,52 @@
     },
     {
       "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 3
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#GizmoSmartGuideResult",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "GizmoSmartGuideResult",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/GizmoAlignment.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 14,
         "outputSignatures": 1
       },
@@ -30405,7 +31377,7 @@
         {
           "column": 17,
           "kind": "object-literal-computed",
-          "line": 121,
+          "line": 125,
           "scope": "production",
           "source": "upstream/packages/gizmo/src/gizmoState.ts"
         }
@@ -31232,7 +32204,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 0
+        "testObjectLiterals": 1
       },
       "directAccesses": 0,
       "fields": {
@@ -33691,7 +34663,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 46,
+        "inputSignatures": 47,
         "outputSignatures": 0
       },
       "construction": {
@@ -33702,7 +34674,7 @@
         "plainObjectLiterals": 2,
         "testObjectLiterals": 0
       },
-      "directAccesses": 156,
+      "directAccesses": 159,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -34038,7 +35010,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 375,
+        "inputSignatures": 378,
         "outputSignatures": 4
       },
       "construction": {
@@ -34047,7 +35019,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
       "directAccesses": 0,
       "fields": {
@@ -34298,7 +35270,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 130,
+        "inputSignatures": 132,
         "outputSignatures": 15
       },
       "construction": {
@@ -34307,9 +35279,9 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 2
+        "testObjectLiterals": 4
       },
-      "directAccesses": 288,
+      "directAccesses": 293,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -34322,14 +35294,16 @@
           "anonymous-structural-transfer",
           "cross-schema-transfer"
         ],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "object-spread"
+        ]
       },
       "name": "GlRenderTarget",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 0,
+        "objectSpreads": 1,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -34343,6 +35317,13 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 16,
+          "kind": "object-spread",
+          "line": 30,
+          "scope": "test",
+          "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.test.ts"
+        },
         {
           "column": 63,
           "kind": "anonymous-structural-transfer",
@@ -39696,8 +40677,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 0
+        "inputSignatures": 7,
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -39705,21 +40686,21 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 2
+        "testObjectLiterals": 0
       },
       "directAccesses": 0,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 1
+        "total": 0
       },
-      "id": "@flighthq/types:interface#GuiTransitionDescriptor",
+      "id": "@flighthq/types:interface#GuiDialog",
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
         "observabilityReasons": []
       },
-      "name": "GuiTransitionDescriptor",
+      "name": "GuiDialog",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -39738,12 +40719,170 @@
         "objectSpreads": 0
       },
       "sites": [],
-      "source": "upstream/packages/types/src/GuiController.ts"
+      "source": "upstream/packages/types/src/GuiDialog.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 7
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#GuiDialogCloseResult",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "GuiDialogCloseResult",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 30,
+          "kind": "optional-omission",
+          "line": 72,
+          "scope": "production",
+          "source": "upstream/packages/gui/src/guiDialog.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/GuiDialog.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 2
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 19
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 2,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#GuiDialogEntry",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "GuiDialogEntry",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/GuiDialog.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 5
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 3,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#GuiDialogOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "GuiDialogOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 71,
+          "kind": "optional-omission",
+          "line": 51,
+          "scope": "production",
+          "source": "upstream/packages/gui/src/guiDialog.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/GuiDialog.ts"
     },
     {
       "bridge": {
         "inputSignatures": 0,
-        "outputSignatures": 0
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -39757,15 +40896,15 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 5
+        "total": 3
       },
-      "id": "@flighthq/types:interface#GuiTransitionRequest",
+      "id": "@flighthq/types:interface#GuiDialogSignals",
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
         "observabilityReasons": []
       },
-      "name": "GuiTransitionRequest",
+      "name": "GuiDialogSignals",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -39784,7 +40923,7 @@
         "objectSpreads": 0
       },
       "sites": [],
-      "source": "upstream/packages/types/src/GuiController.ts"
+      "source": "upstream/packages/types/src/GuiDialog.ts"
     },
     {
       "bridge": {
@@ -43798,7 +44937,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
+        "inputSignatures": 2,
         "outputSignatures": 0
       },
       "construction": {
@@ -43807,7 +44946,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 4
+        "testObjectLiterals": 5
       },
       "directAccesses": 0,
       "fields": {
@@ -46661,7 +47800,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 77,
+      "directAccesses": 79,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -49905,9 +51044,9 @@
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 6,
+        "optional": 7,
         "requiredUndefined": 0,
-        "total": 6
+        "total": 7
       },
       "id": "@flighthq/types:interface#HostShellCapabilities",
       "migration": {
@@ -51497,7 +52636,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 61,
+        "inputSignatures": 74,
         "outputSignatures": 1
       },
       "construction": {
@@ -52284,7 +53423,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 2
       },
-      "directAccesses": 45,
+      "directAccesses": 46,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -52661,6 +53800,62 @@
     },
     {
       "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 8
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#InteractionDispatchLayerOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "InteractionDispatchLayerOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 56,
+          "kind": "optional-omission",
+          "line": 105,
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/interactionManager.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/InteractionManager.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 0,
         "outputSignatures": 1
       },
@@ -52707,7 +53902,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 15,
+        "inputSignatures": 17,
         "outputSignatures": 1
       },
       "construction": {
@@ -52718,11 +53913,11 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 49,
+      "directAccesses": 79,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 11
+        "total": 14
       },
       "id": "@flighthq/types:interface#InteractionManager",
       "migration": {
@@ -52762,13 +53957,13 @@
         "objectLiteralsOmittingOptionalFields": 1,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 9
+        "testObjectLiterals": 17
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 5,
+        "optional": 7,
         "requiredUndefined": 0,
-        "total": 5
+        "total": 7
       },
       "id": "@flighthq/types:interface#InteractionManagerOptions",
       "migration": {
@@ -52800,7 +53995,7 @@
         {
           "column": 50,
           "kind": "optional-omission",
-          "line": 131,
+          "line": 163,
           "scope": "production",
           "source": "upstream/packages/interaction/src/interactionManager.ts"
         }
@@ -52818,13 +54013,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 11
+        "testObjectLiterals": 18
       },
-      "directAccesses": 12,
+      "directAccesses": 15,
       "fields": {
-        "optional": 7,
+        "optional": 8,
         "requiredUndefined": 0,
-        "total": 7
+        "total": 8
       },
       "id": "@flighthq/types:interface#InteractionPointerOptions",
       "migration": {
@@ -52856,16 +54051,6 @@
         {
           "column": 71,
           "kind": "cross-schema-transfer",
-          "line": 65,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#InputPointerData"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/interaction/src/interactionManager.ts"
-        },
-        {
-          "column": 82,
-          "kind": "cross-schema-transfer",
           "line": 67,
           "relatedSchemaIds": [
             "@flighthq/types:interface#InputPointerData"
@@ -52884,7 +54069,7 @@
           "source": "upstream/packages/interaction/src/interactionManager.ts"
         },
         {
-          "column": 92,
+          "column": 82,
           "kind": "cross-schema-transfer",
           "line": 71,
           "relatedSchemaIds": [
@@ -52894,9 +54079,19 @@
           "source": "upstream/packages/interaction/src/interactionManager.ts"
         },
         {
-          "column": 89,
+          "column": 96,
           "kind": "cross-schema-transfer",
           "line": 73,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#InputPointerData"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/interactionManager.ts"
+        },
+        {
+          "column": 89,
+          "kind": "cross-schema-transfer",
+          "line": 75,
           "relatedSchemaIds": [
             "@flighthq/types:interface#InputPointerData"
           ],
@@ -52919,11 +54114,11 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 15,
+      "directAccesses": 36,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 4
+        "total": 10
       },
       "id": "@flighthq/types:interface#InteractionPointerState",
       "migration": {
@@ -52969,7 +54164,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 17
+        "total": 18
       },
       "id": "@flighthq/types:interface#InteractionSignals",
       "migration": {
@@ -53662,7 +54857,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 21
       },
-      "directAccesses": 30,
+      "directAccesses": 46,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -53796,21 +54991,21 @@
         {
           "column": 56,
           "kind": "object-spread",
-          "line": 67,
+          "line": 86,
           "scope": "test",
           "source": "upstream/packages/layout/src/resolveLayoutTree.test.ts"
         },
         {
           "column": 29,
           "kind": "object-spread",
-          "line": 116,
+          "line": 135,
           "scope": "test",
           "source": "upstream/packages/layout/src/resolveLayoutTree.test.ts"
         },
         {
           "column": 29,
           "kind": "object-spread",
-          "line": 123,
+          "line": 142,
           "scope": "test",
           "source": "upstream/packages/layout/src/resolveLayoutTree.test.ts"
         }
@@ -54927,7 +56122,7 @@
         {
           "column": 29,
           "kind": "anonymous-structural-transfer",
-          "line": 447,
+          "line": 567,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/flightDocumentText.ts"
         },
@@ -61095,22 +62290,23 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 4,
-        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiterals": 5,
+        "objectLiteralsOmittingOptionalFields": 2,
         "objectLiteralsWithSpread": 3,
-        "plainObjectLiterals": 1,
-        "testObjectLiterals": 13
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 15
       },
-      "directAccesses": 28,
+      "directAccesses": 47,
       "fields": {
-        "optional": 9,
+        "optional": 10,
         "requiredUndefined": 0,
-        "total": 10
+        "total": 11
       },
       "id": "@flighthq/types:interface#MessageDialogOptions",
       "migration": {
         "mechanicallyCompatible": false,
         "normalizationReasons": [
+          "anonymous-structural-transfer",
           "object-literal-spread"
         ],
         "observabilityReasons": [
@@ -61128,7 +62324,7 @@
         "strictEqualityAssertions": 0
       },
       "production": {
-        "anonymousStructuralTransfers": 0,
+        "anonymousStructuralTransfers": 1,
         "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
@@ -61138,51 +62334,65 @@
       },
       "sites": [
         {
-          "column": 38,
+          "column": 5,
+          "kind": "anonymous-structural-transfer",
+          "line": 68,
+          "scope": "production",
+          "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 9,
           "kind": "optional-omission",
-          "line": 59,
+          "line": 69,
+          "scope": "production",
+          "source": "upstream/packages/dialog/src/dialog.ts"
+        },
+        {
+          "column": 9,
+          "kind": "optional-omission",
+          "line": 70,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 38,
           "kind": "object-literal-spread",
-          "line": 66,
+          "line": 78,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 40,
           "kind": "object-spread",
-          "line": 66,
+          "line": 78,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 38,
           "kind": "object-literal-spread",
-          "line": 73,
+          "line": 85,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 40,
           "kind": "object-spread",
-          "line": 73,
+          "line": 85,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 38,
           "kind": "object-literal-spread",
-          "line": 94,
+          "line": 106,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         },
         {
           "column": 40,
           "kind": "object-spread",
-          "line": 94,
+          "line": 106,
           "scope": "production",
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
@@ -63776,7 +64986,7 @@
         {
           "column": 44,
           "kind": "object-spread",
-          "line": 193,
+          "line": 260,
           "scope": "test",
           "source": "upstream/packages/host-web/src/webNet.test.ts"
         }
@@ -63794,7 +65004,7 @@
         "objectLiteralsOmittingOptionalFields": 3,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 3,
-        "testObjectLiterals": 15
+        "testObjectLiterals": 19
       },
       "directAccesses": 15,
       "fields": {
@@ -63864,7 +65074,7 @@
         "objectLiteralsOmittingOptionalFields": 2,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 2,
-        "testObjectLiterals": 2
+        "testObjectLiterals": 6
       },
       "directAccesses": 0,
       "fields": {
@@ -63973,8 +65183,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 361,
-        "outputSignatures": 47
+        "inputSignatures": 385,
+        "outputSignatures": 49
       },
       "construction": {
         "computedObjectLiterals": 1,
@@ -64010,7 +65220,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 345,
+        "crossSchemaTransfers": 349,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -64209,9 +65419,19 @@
           "source": "upstream/packages/command/src/commandBinding.ts"
         },
         {
+          "column": 22,
+          "kind": "cross-schema-transfer",
+          "line": 32,
+          "relatedSchemaIds": [
+            "@flighthq/types:type#NodeAny"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/effects/src/renderEffectCaptureGeometry.ts"
+        },
+        {
           "column": 16,
           "kind": "cross-schema-transfer",
-          "line": 165,
+          "line": 169,
           "relatedSchemaIds": [
             "@flighthq/types:interface#DisplayObject"
           ],
@@ -64221,7 +65441,7 @@
         {
           "column": 29,
           "kind": "cross-schema-transfer",
-          "line": 165,
+          "line": 169,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Shape"
           ],
@@ -64231,7 +65451,7 @@
         {
           "column": 16,
           "kind": "cross-schema-transfer",
-          "line": 166,
+          "line": 170,
           "relatedSchemaIds": [
             "@flighthq/types:interface#DisplayObject"
           ],
@@ -64241,7 +65461,7 @@
         {
           "column": 29,
           "kind": "cross-schema-transfer",
-          "line": 166,
+          "line": 170,
           "relatedSchemaIds": [
             "@flighthq/types:interface#DisplayObject"
           ],
@@ -64251,7 +65471,7 @@
         {
           "column": 16,
           "kind": "cross-schema-transfer",
-          "line": 167,
+          "line": 171,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -64261,7 +65481,7 @@
         {
           "column": 43,
           "kind": "cross-schema-transfer",
-          "line": 167,
+          "line": 171,
           "relatedSchemaIds": [
             "@flighthq/types:interface#DisplayObject"
           ],
@@ -64271,7 +65491,7 @@
         {
           "column": 32,
           "kind": "cross-schema-transfer",
-          "line": 180,
+          "line": 184,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -64281,7 +65501,7 @@
         {
           "column": 40,
           "kind": "cross-schema-transfer",
-          "line": 181,
+          "line": 185,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -64291,7 +65511,7 @@
         {
           "column": 48,
           "kind": "cross-schema-transfer",
-          "line": 181,
+          "line": 185,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -64301,7 +65521,7 @@
         {
           "column": 57,
           "kind": "cross-schema-transfer",
-          "line": 369,
+          "line": 373,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -64311,7 +65531,7 @@
         {
           "column": 69,
           "kind": "cross-schema-transfer",
-          "line": 369,
+          "line": 373,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Shape"
           ],
@@ -64321,7 +65541,7 @@
         {
           "column": 32,
           "kind": "cross-schema-transfer",
-          "line": 533,
+          "line": 537,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -64331,7 +65551,7 @@
         {
           "column": 28,
           "kind": "cross-schema-transfer",
-          "line": 539,
+          "line": 543,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -64531,7 +65751,7 @@
         {
           "column": 34,
           "kind": "cross-schema-transfer",
-          "line": 342,
+          "line": 410,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64541,7 +65761,7 @@
         {
           "column": 26,
           "kind": "cross-schema-transfer",
-          "line": 347,
+          "line": 415,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64551,7 +65771,7 @@
         {
           "column": 29,
           "kind": "cross-schema-transfer",
-          "line": 429,
+          "line": 524,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64561,7 +65781,7 @@
         {
           "column": 29,
           "kind": "cross-schema-transfer",
-          "line": 465,
+          "line": 562,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64571,7 +65791,7 @@
         {
           "column": 55,
           "kind": "cross-schema-transfer",
-          "line": 501,
+          "line": 613,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64581,7 +65801,7 @@
         {
           "column": 88,
           "kind": "cross-schema-transfer",
-          "line": 501,
+          "line": 613,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64591,7 +65811,7 @@
         {
           "column": 29,
           "kind": "cross-schema-transfer",
-          "line": 527,
+          "line": 748,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64601,7 +65821,7 @@
         {
           "column": 34,
           "kind": "cross-schema-transfer",
-          "line": 536,
+          "line": 757,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64611,7 +65831,7 @@
         {
           "column": 35,
           "kind": "cross-schema-transfer",
-          "line": 570,
+          "line": 791,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64621,7 +65841,7 @@
         {
           "column": 34,
           "kind": "cross-schema-transfer",
-          "line": 708,
+          "line": 933,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64641,7 +65861,7 @@
         {
           "column": 34,
           "kind": "cross-schema-transfer",
-          "line": 24,
+          "line": 25,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -64651,12 +65871,32 @@
         {
           "column": 26,
           "kind": "cross-schema-transfer",
-          "line": 40,
+          "line": 41,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
           "scope": "production",
           "source": "upstream/packages/interaction/src/nodeInteractionState.ts"
+        },
+        {
+          "column": 80,
+          "kind": "cross-schema-transfer",
+          "line": 137,
+          "relatedSchemaIds": [
+            "@flighthq/types:type#NodeAny"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
+        },
+        {
+          "column": 37,
+          "kind": "cross-schema-transfer",
+          "line": 138,
+          "relatedSchemaIds": [
+            "@flighthq/types:type#NodeAny"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
         },
         {
           "column": 32,
@@ -64969,7 +66209,7 @@
         {
           "column": 29,
           "kind": "cross-schema-transfer",
-          "line": 478,
+          "line": 474,
           "relatedSchemaIds": [
             "@flighthq/types:interface#ParticleEmitter2D"
           ],
@@ -65253,9 +66493,19 @@
           "source": "upstream/packages/render/src/sceneRender.ts"
         },
         {
+          "column": 39,
+          "kind": "cross-schema-transfer",
+          "line": 180,
+          "relatedSchemaIds": [
+            "@flighthq/types:type#NodeAny"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/scene-document/src/sceneDocumentLayoutBindings.ts"
+        },
+        {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 107,
+          "line": 192,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -65265,7 +66515,7 @@
         {
           "column": 26,
           "kind": "cross-schema-transfer",
-          "line": 107,
+          "line": 192,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -65275,7 +66525,7 @@
         {
           "column": 36,
           "kind": "cross-schema-transfer",
-          "line": 133,
+          "line": 245,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -65285,7 +66535,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 174,
+          "line": 291,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -65295,7 +66545,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 175,
+          "line": 292,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node2DTraits"
           ],
@@ -65305,7 +66555,7 @@
         {
           "column": 39,
           "kind": "cross-schema-transfer",
-          "line": 191,
+          "line": 272,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Node3DTraits"
           ],
@@ -65315,7 +66565,7 @@
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 231,
+          "line": 314,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -65325,7 +66575,7 @@
         {
           "column": 26,
           "kind": "cross-schema-transfer",
-          "line": 231,
+          "line": 314,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -65335,7 +66585,7 @@
         {
           "column": 36,
           "kind": "cross-schema-transfer",
-          "line": 257,
+          "line": 367,
           "relatedSchemaIds": [
             "@flighthq/types:type#NodeAny"
           ],
@@ -67619,7 +68869,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 47,
+        "inputSignatures": 50,
         "outputSignatures": 7
       },
       "construction": {
@@ -67665,7 +68915,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 35,
+        "inputSignatures": 37,
         "outputSignatures": 9
       },
       "construction": {
@@ -67722,11 +68972,11 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 19,
+      "directAccesses": 23,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 5
+        "total": 6
       },
       "id": "@flighthq/types:interface#NodeInteractionState",
       "migration": {
@@ -67754,6 +69004,402 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/NodeInteractionState.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 0
+      },
+      "id": "@flighthq/types:interface#NodeInteractiveStateBinding",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "dynamic-ingress"
+        ],
+        "observabilityReasons": []
+      },
+      "name": "NodeInteractiveStateBinding",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 1,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 10,
+          "kind": "dynamic-ingress",
+          "line": 82,
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/NodeInteractiveStateBinding.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#NodeInteractiveStateBindingRuntime",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "NodeInteractiveStateBindingRuntime",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/NodeInteractiveStateBinding.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 7,
+        "objectLiteralsOmittingOptionalFields": 6,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 7,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#NodeInteractiveStateExplanation",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "NodeInteractiveStateExplanation",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 22,
+          "kind": "optional-omission",
+          "line": 169,
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
+        },
+        {
+          "column": 22,
+          "kind": "optional-omission",
+          "line": 179,
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
+        },
+        {
+          "column": 22,
+          "kind": "optional-omission",
+          "line": 194,
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
+        },
+        {
+          "column": 22,
+          "kind": "optional-omission",
+          "line": 201,
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
+        },
+        {
+          "column": 22,
+          "kind": "optional-omission",
+          "line": 209,
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
+        },
+        {
+          "column": 22,
+          "kind": "optional-omission",
+          "line": 218,
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/NodeInteractiveStateBinding.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#NodeInteractiveStateExtensionRuntime",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "NodeInteractiveStateExtensionRuntime",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/NodeInteractiveStateBinding.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 3,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 1,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 10
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#NodeInteractiveStateFlags",
+      "migration": {
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "object-literal-spread"
+        ],
+        "observabilityReasons": [
+          "object-spread"
+        ]
+      },
+      "name": "NodeInteractiveStateFlags",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 1
+      },
+      "sites": [
+        {
+          "column": 19,
+          "kind": "object-literal-spread",
+          "line": 70,
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
+        },
+        {
+          "column": 21,
+          "kind": "object-spread",
+          "line": 70,
+          "scope": "production",
+          "source": "upstream/packages/interaction/src/nodeInteractiveStateBinding.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/NodeInteractiveStateBinding.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#NodeInteractiveStateTransition",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "NodeInteractiveStateTransition",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/NodeInteractiveStateBinding.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 2,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 2,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#NodeInteractiveStateTransitionRequest",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "NodeInteractiveStateTransitionRequest",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/NodeInteractiveStateBinding.ts"
     },
     {
       "bridge": {
@@ -69350,17 +70996,73 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 1,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#OpenDirectoryDialogOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "OpenDirectoryDialogOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 78,
+          "kind": "optional-omission",
+          "line": 32,
+          "scope": "production",
+          "source": "upstream/packages/host-web/src/webDialog.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/Dialog.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
         "objectLiterals": 0,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 17
+        "testObjectLiterals": 21
       },
-      "directAccesses": 8,
+      "directAccesses": 15,
       "fields": {
-        "optional": 2,
+        "optional": 3,
         "requiredUndefined": 0,
-        "total": 2
+        "total": 3
       },
       "id": "@flighthq/types:interface#OpenFileDialogOptions",
       "migration": {
@@ -70982,7 +72684,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 6
+        "testObjectLiterals": 7
       },
       "directAccesses": 0,
       "fields": {
@@ -71019,7 +72721,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 26,
+        "inputSignatures": 27,
         "outputSignatures": 9
       },
       "construction": {
@@ -71030,7 +72732,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 729,
+      "directAccesses": 707,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -71187,7 +72889,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 236,
+      "directAccesses": 230,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -71356,7 +73058,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 40,
+      "directAccesses": 37,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -71400,7 +73102,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 3
+        "testObjectLiterals": 5
       },
       "directAccesses": 4,
       "fields": {
@@ -79896,7 +81598,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 2
       },
-      "directAccesses": 99,
+      "directAccesses": 101,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -79935,7 +81637,7 @@
         {
           "column": 12,
           "kind": "object-spread",
-          "line": 732,
+          "line": 781,
           "scope": "test",
           "source": "upstream/packages/gizmo/src/gizmoState.test.ts"
         },
@@ -79949,7 +81651,7 @@
         {
           "column": 25,
           "kind": "cross-schema-transfer",
-          "line": 636,
+          "line": 861,
           "relatedSchemaIds": [
             "@flighthq/types:interface#FocusEventData"
           ],
@@ -81103,13 +82805,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 4
+        "testObjectLiterals": 6
       },
-      "directAccesses": 6,
+      "directAccesses": 8,
       "fields": {
-        "optional": 4,
+        "optional": 5,
         "requiredUndefined": 0,
-        "total": 5
+        "total": 6
       },
       "id": "@flighthq/types:interface#PromptDialogOptions",
       "migration": {
@@ -82324,7 +84026,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 115,
+        "inputSignatures": 118,
         "outputSignatures": 16
       },
       "construction": {
@@ -83017,7 +84719,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 130,
+        "inputSignatures": 136,
         "outputSignatures": 0
       },
       "construction": {
@@ -83026,7 +84728,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 23
+        "testObjectLiterals": 29
       },
       "directAccesses": 0,
       "fields": {
@@ -83093,9 +84795,9 @@
           "source": "upstream/packages/effects-wgpu/src/wgpuRenderEffectPipeline.ts"
         },
         {
-          "column": 33,
+          "column": 20,
           "kind": "dynamic-ingress",
-          "line": 45,
+          "line": 105,
           "scope": "production",
           "source": "upstream/packages/effects/src/renderEffectPadding.ts"
         },
@@ -83168,17 +84870,63 @@
     {
       "bridge": {
         "inputSignatures": 1,
-        "outputSignatures": 21
+        "outputSignatures": 0
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 12,
+        "objectLiterals": 0,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 12,
+        "plainObjectLiterals": 0,
         "testObjectLiterals": 1
       },
-      "directAccesses": 12,
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#RenderEffectCaptureGeometry",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "RenderEffectCaptureGeometry",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/RenderEffectCaptureGeometry.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 2,
+        "outputSignatures": 22
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 14,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 14,
+        "testObjectLiterals": 5
+      },
+      "directAccesses": 26,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -84655,7 +86403,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 90,
+        "inputSignatures": 92,
         "outputSignatures": 2
       },
       "construction": {
@@ -85385,7 +87133,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 91,
+      "directAccesses": 92,
       "fields": {
         "optional": 1,
         "requiredUndefined": 0,
@@ -85742,7 +87490,7 @@
         "objectLiteralsOmittingOptionalFields": 4,
         "objectLiteralsWithSpread": 2,
         "plainObjectLiterals": 4,
-        "testObjectLiterals": 158
+        "testObjectLiterals": 160
       },
       "directAccesses": 50,
       "fields": {
@@ -88901,7 +90649,7 @@
         "plainObjectLiterals": 2,
         "testObjectLiterals": 0
       },
-      "directAccesses": 100,
+      "directAccesses": 107,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -88991,13 +90739,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 10
+        "testObjectLiterals": 11
       },
-      "directAccesses": 7,
+      "directAccesses": 10,
       "fields": {
-        "optional": 2,
+        "optional": 3,
         "requiredUndefined": 0,
-        "total": 2
+        "total": 3
       },
       "id": "@flighthq/types:interface#SaveFileDialogOptions",
       "migration": {
@@ -90693,7 +92441,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 21,
+      "directAccesses": 24,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -90972,14 +92720,14 @@
         {
           "column": 41,
           "kind": "optional-omission",
-          "line": 340,
+          "line": 458,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/flightDocumentText.ts"
         },
         {
           "column": 36,
           "kind": "object-spread",
-          "line": 53,
+          "line": 78,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.ts"
         },
@@ -91094,28 +92842,28 @@
         {
           "column": 39,
           "kind": "optional-omission",
-          "line": 450,
+          "line": 570,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/flightDocumentText.ts"
         },
         {
           "column": 34,
           "kind": "object-spread",
-          "line": 55,
+          "line": 81,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.ts"
         },
         {
           "column": 38,
           "kind": "object-spread",
-          "line": 200,
+          "line": 281,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.ts"
         },
         {
           "column": 14,
           "kind": "object-spread",
-          "line": 203,
+          "line": 284,
           "scope": "production",
           "source": "upstream/packages/scene-document/src/sceneDocumentScene3DMaterialization.ts"
         },
@@ -96448,6 +98196,236 @@
     },
     {
       "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:interface#ShellProcess",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "ShellProcess",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Shell.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#ShellProcessBackend",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "ShellProcessBackend",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Shell.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#ShellProcessExitStatus",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "ShellProcessExitStatus",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Shell.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 2
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#ShellProcessHost",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "ShellProcessHost",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Shell.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 2,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#ShellProcessOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "ShellProcessOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Shell.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 1,
         "outputSignatures": 0
       },
@@ -96849,7 +98827,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 11,
+        "inputSignatures": 13,
         "outputSignatures": 4
       },
       "construction": {
@@ -96860,7 +98838,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 2
       },
-      "directAccesses": 41,
+      "directAccesses": 47,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -96896,7 +98874,7 @@
         {
           "column": 18,
           "kind": "anonymous-structural-transfer",
-          "line": 176,
+          "line": 212,
           "scope": "production",
           "source": "upstream/packages/interaction/src/interactionManager.ts"
         }
@@ -96905,15 +98883,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
+        "inputSignatures": 3,
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -96924,8 +98902,10 @@
       },
       "id": "@flighthq/types:interface#SignalConnection",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "dynamic-ingress"
+        ],
         "observabilityReasons": []
       },
       "name": "SignalConnection",
@@ -96940,13 +98920,21 @@
       "production": {
         "anonymousStructuralTransfers": 0,
         "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
+        "dynamicIngresses": 1,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 36,
+          "kind": "dynamic-ingress",
+          "line": 28,
+          "scope": "production",
+          "source": "upstream/packages/signals/src/connection.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/SignalConnection.ts"
     },
     {
@@ -96956,11 +98944,11 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 1,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 9
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 14
       },
       "directAccesses": 0,
       "fields": {
@@ -96970,9 +98958,13 @@
       },
       "id": "@flighthq/types:interface#SignalConnectOptions",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
       },
       "name": "SignalConnectOptions",
       "oracle": {
@@ -96984,7 +98976,7 @@
         "strictEqualityAssertions": 0
       },
       "production": {
-        "anonymousStructuralTransfers": 0,
+        "anonymousStructuralTransfers": 1,
         "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
@@ -96992,7 +98984,22 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 38,
+          "kind": "anonymous-structural-transfer",
+          "line": 25,
+          "scope": "production",
+          "source": "upstream/packages/signals/src/connection.ts"
+        },
+        {
+          "column": 75,
+          "kind": "optional-omission",
+          "line": 25,
+          "scope": "production",
+          "source": "upstream/packages/signals/src/connection.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/SignalConnectOptions.ts"
     },
     {
@@ -97006,13 +99013,13 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 3
+        "testObjectLiterals": 4
       },
-      "directAccesses": 30,
+      "directAccesses": 73,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 4
+        "total": 5
       },
       "id": "@flighthq/types:interface#SignalData",
       "migration": {
@@ -97043,15 +99050,15 @@
     },
     {
       "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
+        "inputSignatures": 1,
+        "outputSignatures": 1
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -97132,6 +99139,52 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/SignalThrottleOptions.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 24
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 3,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#SignalTrackedConnectOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "SignalTrackedConnectOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/SignalTrackedConnectOptions.ts"
     },
     {
       "bridge": {
@@ -98771,14 +100824,14 @@
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 783,
+          "line": 785,
           "scope": "test",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.test.ts"
         },
         {
           "column": 7,
           "kind": "object-spread",
-          "line": 805,
+          "line": 807,
           "scope": "test",
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.test.ts"
         },
@@ -99147,22 +101200,24 @@
       "construction": {
         "computedObjectLiterals": 0,
         "objectLiterals": 1,
-        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsOmittingOptionalFields": 1,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 1,
-        "testObjectLiterals": 4
+        "testObjectLiterals": 6
       },
       "directAccesses": 0,
       "fields": {
-        "optional": 0,
+        "optional": 1,
         "requiredUndefined": 0,
-        "total": 1
+        "total": 2
       },
       "id": "@flighthq/types:interface#SocketBackend",
       "migration": {
         "mechanicallyCompatible": true,
         "normalizationReasons": [],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "optional-omission"
+        ]
       },
       "name": "SocketBackend",
       "oracle": {
@@ -99182,7 +101237,15 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 10,
+          "kind": "optional-omission",
+          "line": 70,
+          "scope": "production",
+          "source": "upstream/packages/socket/src/socket.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Socket.ts"
     },
     {
@@ -99326,14 +101389,14 @@
         {
           "column": 9,
           "kind": "object-spread",
-          "line": 261,
+          "line": 272,
           "scope": "test",
           "source": "upstream/packages/socket/src/socket.test.ts"
         },
         {
           "column": 12,
           "kind": "object-spread",
-          "line": 474,
+          "line": 522,
           "scope": "test",
           "source": "upstream/packages/socket/src/socket.test.ts"
         }
@@ -101759,7 +103822,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 3,
+        "inputSignatures": 5,
         "outputSignatures": 1
       },
       "construction": {
@@ -101805,7 +103868,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 2,
+        "inputSignatures": 4,
         "outputSignatures": 1
       },
       "construction": {
@@ -101851,7 +103914,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 2,
+        "inputSignatures": 4,
         "outputSignatures": 1
       },
       "construction": {
@@ -101897,8 +103960,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 3,
-        "outputSignatures": 2
+        "inputSignatures": 4,
+        "outputSignatures": 5
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -101916,21 +103979,25 @@
       },
       "id": "@flighthq/types:interface#SpringConfig",
       "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
+        "mechanicallyCompatible": false,
+        "normalizationReasons": [
+          "anonymous-structural-transfer"
+        ],
+        "observabilityReasons": [
+          "object-spread"
+        ]
       },
       "name": "SpringConfig",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 0,
+        "objectSpreads": 1,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
       "production": {
-        "anonymousStructuralTransfers": 0,
+        "anonymousStructuralTransfers": 3,
         "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
@@ -101938,7 +104005,36 @@
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [],
+      "sites": [
+        {
+          "column": 26,
+          "kind": "object-spread",
+          "line": 42,
+          "scope": "test",
+          "source": "upstream/packages/spring/src/springConfig.test.ts"
+        },
+        {
+          "column": 59,
+          "kind": "anonymous-structural-transfer",
+          "line": 6,
+          "scope": "production",
+          "source": "upstream/packages/spring/src/springConfig.ts"
+        },
+        {
+          "column": 59,
+          "kind": "anonymous-structural-transfer",
+          "line": 9,
+          "scope": "production",
+          "source": "upstream/packages/spring/src/springConfig.ts"
+        },
+        {
+          "column": 58,
+          "kind": "anonymous-structural-transfer",
+          "line": 12,
+          "scope": "production",
+          "source": "upstream/packages/spring/src/springConfig.ts"
+        }
+      ],
       "source": "upstream/packages/types/src/Spring.ts"
     },
     {
@@ -102775,7 +104871,7 @@
         {
           "column": 52,
           "kind": "optional-omission",
-          "line": 141,
+          "line": 145,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/spritesheetDetect.ts"
         }
@@ -103801,14 +105897,14 @@
         {
           "column": 36,
           "kind": "optional-omission",
-          "line": 41,
+          "line": 44,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/starlingParse.ts"
         },
         {
           "column": 34,
           "kind": "optional-omission",
-          "line": 7,
+          "line": 4,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/starlingSerialize.ts"
         }
@@ -106514,14 +108610,14 @@
         {
           "column": 45,
           "kind": "optional-omission",
-          "line": 93,
+          "line": 103,
           "scope": "production",
           "source": "upstream/packages/host-tauri/src/tauriDialog.ts"
         },
         {
           "column": 46,
           "kind": "optional-omission",
-          "line": 100,
+          "line": 111,
           "scope": "production",
           "source": "upstream/packages/host-tauri/src/tauriDialog.ts"
         }
@@ -107917,6 +110013,98 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/TauriApi.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 1
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 3
+      },
+      "id": "@flighthq/types:interface#TcpSocketConnection",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "TcpSocketConnection",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Socket.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 4
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#TcpSocketOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "TcpSocketOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/Socket.ts"
     },
     {
       "bridge": {
@@ -110437,7 +112625,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 87,
+        "inputSignatures": 88,
         "outputSignatures": 11
       },
       "construction": {
@@ -110446,7 +112634,7 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 0,
-        "testObjectLiterals": 1
+        "testObjectLiterals": 2
       },
       "directAccesses": 0,
       "fields": {
@@ -110515,7 +112703,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 26,
+        "inputSignatures": 27,
         "outputSignatures": 19
       },
       "construction": {
@@ -110526,11 +112714,11 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 41
       },
-      "directAccesses": 108,
+      "directAccesses": 123,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 2
+        "total": 6
       },
       "id": "@flighthq/types:interface#TextureAtlas",
       "migration": {
@@ -110836,7 +113024,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 2
       },
-      "directAccesses": 0,
+      "directAccesses": 4,
       "fields": {
         "optional": 1,
         "requiredUndefined": 0,
@@ -110928,7 +113116,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 5
       },
-      "directAccesses": 2,
+      "directAccesses": 4,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -110963,522 +113151,6 @@
     },
     {
       "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 2
-      },
-      "directAccesses": 0,
-      "fields": {
-        "optional": 0,
-        "requiredUndefined": 0,
-        "total": 2
-      },
-      "id": "@flighthq/types:interface#TextureAtlasPackerArrayDocument",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": [
-          "json-serialization"
-        ]
-      },
-      "name": "TextureAtlasPackerArrayDocument",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 2,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [
-        {
-          "column": 18,
-          "kind": "json-serialization",
-          "line": 187,
-          "scope": "test",
-          "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerParse.test.ts"
-        },
-        {
-          "column": 48,
-          "kind": "json-serialization",
-          "line": 211,
-          "scope": "test",
-          "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerParse.test.ts"
-        }
-      ],
-      "source": "upstream/packages/types/src/TextureAtlasPackerSchema.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 3
-      },
-      "directAccesses": 1,
-      "fields": {
-        "optional": 1,
-        "requiredUndefined": 0,
-        "total": 7
-      },
-      "id": "@flighthq/types:interface#TextureAtlasPackerArrayFrame",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
-      },
-      "name": "TextureAtlasPackerArrayFrame",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [],
-      "source": "upstream/packages/types/src/TextureAtlasPackerSchema.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 0
-      },
-      "directAccesses": 0,
-      "fields": {
-        "optional": 1,
-        "requiredUndefined": 0,
-        "total": 4
-      },
-      "id": "@flighthq/types:interface#TextureAtlasPackerFrameTag",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
-      },
-      "name": "TextureAtlasPackerFrameTag",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [],
-      "source": "upstream/packages/types/src/TextureAtlasPackerSchema.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 1,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 2
-      },
-      "directAccesses": 0,
-      "fields": {
-        "optional": 0,
-        "requiredUndefined": 0,
-        "total": 2
-      },
-      "id": "@flighthq/types:interface#TextureAtlasPackerHashDocument",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": [
-          "json-serialization"
-        ]
-      },
-      "name": "TextureAtlasPackerHashDocument",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 1,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [
-        {
-          "column": 33,
-          "kind": "json-serialization",
-          "line": 206,
-          "scope": "test",
-          "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerParse.test.ts"
-        }
-      ],
-      "source": "upstream/packages/types/src/TextureAtlasPackerSchema.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 3
-      },
-      "directAccesses": 0,
-      "fields": {
-        "optional": 1,
-        "requiredUndefined": 0,
-        "total": 6
-      },
-      "id": "@flighthq/types:interface#TextureAtlasPackerHashFrame",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
-      },
-      "name": "TextureAtlasPackerHashFrame",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [],
-      "source": "upstream/packages/types/src/TextureAtlasPackerSchema.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 4
-      },
-      "directAccesses": 0,
-      "fields": {
-        "optional": 1,
-        "requiredUndefined": 0,
-        "total": 7
-      },
-      "id": "@flighthq/types:interface#TextureAtlasPackerMeta",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
-      },
-      "name": "TextureAtlasPackerMeta",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [],
-      "source": "upstream/packages/types/src/TextureAtlasPackerSchema.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 3,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 2,
-        "objectLiteralsOmittingOptionalFields": 2,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
-        "testObjectLiterals": 1
-      },
-      "directAccesses": 1,
-      "fields": {
-        "optional": 1,
-        "requiredUndefined": 0,
-        "total": 1
-      },
-      "id": "@flighthq/types:interface#TextureAtlasPackerParseOptions",
-      "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
-        "observabilityReasons": [
-          "optional-omission"
-        ]
-      },
-      "name": "TextureAtlasPackerParseOptions",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [
-        {
-          "column": 85,
-          "kind": "cross-schema-transfer",
-          "line": 68,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#TextureAtlasStarlingParseOptions"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/textureatlas-formats/src/textureAtlasDetect.ts"
-        },
-        {
-          "column": 40,
-          "kind": "optional-omission",
-          "line": 16,
-          "scope": "production",
-          "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerParse.ts"
-        },
-        {
-          "column": 40,
-          "kind": "optional-omission",
-          "line": 36,
-          "scope": "production",
-          "source": "upstream/packages/textureatlas-formats/src/textureAtlasPackerParse.ts"
-        }
-      ],
-      "source": "upstream/packages/types/src/TextureAtlasPackerParseOptions.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 2
-      },
-      "directAccesses": 2,
-      "fields": {
-        "optional": 0,
-        "requiredUndefined": 0,
-        "total": 2
-      },
-      "id": "@flighthq/types:interface#TextureAtlasPackerPivot",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
-      },
-      "name": "TextureAtlasPackerPivot",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [],
-      "source": "upstream/packages/types/src/TextureAtlasPackerSchema.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 12
-      },
-      "directAccesses": 8,
-      "fields": {
-        "optional": 0,
-        "requiredUndefined": 0,
-        "total": 4
-      },
-      "id": "@flighthq/types:interface#TextureAtlasPackerRect",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
-      },
-      "name": "TextureAtlasPackerRect",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [],
-      "source": "upstream/packages/types/src/TextureAtlasPackerSchema.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 0,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 10
-      },
-      "directAccesses": 2,
-      "fields": {
-        "optional": 0,
-        "requiredUndefined": 0,
-        "total": 2
-      },
-      "id": "@flighthq/types:interface#TextureAtlasPackerSize",
-      "migration": {
-        "mechanicallyCompatible": true,
-        "normalizationReasons": [],
-        "observabilityReasons": []
-      },
-      "name": "TextureAtlasPackerSize",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 0,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [],
-      "source": "upstream/packages/types/src/TextureAtlasPackerSchema.ts"
-    },
-    {
-      "bridge": {
         "inputSignatures": 8,
         "outputSignatures": 6
       },
@@ -111494,7 +113166,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 14
+        "total": 15
       },
       "id": "@flighthq/types:interface#TextureAtlasRegion",
       "migration": {
@@ -111568,65 +113240,6 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/TextureAtlasRegionTextureExplanation.ts"
-    },
-    {
-      "bridge": {
-        "inputSignatures": 2,
-        "outputSignatures": 0
-      },
-      "construction": {
-        "computedObjectLiterals": 0,
-        "objectLiterals": 0,
-        "objectLiteralsOmittingOptionalFields": 0,
-        "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
-        "testObjectLiterals": 0
-      },
-      "directAccesses": 0,
-      "fields": {
-        "optional": 2,
-        "requiredUndefined": 0,
-        "total": 2
-      },
-      "id": "@flighthq/types:interface#TextureAtlasStarlingParseOptions",
-      "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
-        "observabilityReasons": []
-      },
-      "name": "TextureAtlasStarlingParseOptions",
-      "oracle": {
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0,
-        "prototypeObservations": 0,
-        "strictEqualityAssertions": 0
-      },
-      "production": {
-        "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
-        "dynamicIngresses": 0,
-        "enumerations": 0,
-        "jsonSerializations": 0,
-        "objectRests": 0,
-        "objectSpreads": 0
-      },
-      "sites": [
-        {
-          "column": 86,
-          "kind": "cross-schema-transfer",
-          "line": 64,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#TextureAtlasPackerParseOptions"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/textureatlas-formats/src/textureAtlasDetect.ts"
-        }
-      ],
-      "source": "upstream/packages/types/src/TextureAtlasStarlingParseOptions.ts"
     },
     {
       "bridge": {
@@ -111900,14 +113513,14 @@
         {
           "column": 68,
           "kind": "anonymous-structural-transfer",
-          "line": 93,
+          "line": 83,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/texturePackerSerialize.ts"
         },
         {
           "column": 12,
           "kind": "json-serialization",
-          "line": 98,
+          "line": 88,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/texturePackerSerialize.ts"
         }
@@ -111959,6 +113572,517 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/TexturePackerSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 2
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#TexturePackerAtlasArrayDocument",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "json-serialization"
+        ]
+      },
+      "name": "TexturePackerAtlasArrayDocument",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 2,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 18,
+          "kind": "json-serialization",
+          "line": 187,
+          "scope": "test",
+          "source": "upstream/packages/textureatlas-formats/src/texturePackerAtlasParse.test.ts"
+        },
+        {
+          "column": 48,
+          "kind": "json-serialization",
+          "line": 211,
+          "scope": "test",
+          "source": "upstream/packages/textureatlas-formats/src/texturePackerAtlasParse.test.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 3
+      },
+      "directAccesses": 1,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#TexturePackerAtlasArrayFrame",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "TexturePackerAtlasArrayFrame",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#TexturePackerAtlasFrameTag",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "TexturePackerAtlasFrameTag",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 2
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#TexturePackerAtlasHashDocument",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "json-serialization"
+        ]
+      },
+      "name": "TexturePackerAtlasHashDocument",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 1,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 33,
+          "kind": "json-serialization",
+          "line": 206,
+          "scope": "test",
+          "source": "upstream/packages/textureatlas-formats/src/texturePackerAtlasParse.test.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 3
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 6
+      },
+      "id": "@flighthq/types:interface#TexturePackerAtlasHashFrame",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "TexturePackerAtlasHashFrame",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 4
+      },
+      "directAccesses": 4,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 7
+      },
+      "id": "@flighthq/types:interface#TexturePackerAtlasMeta",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "TexturePackerAtlasMeta",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 3,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 3,
+        "objectLiteralsOmittingOptionalFields": 3,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 3,
+        "testObjectLiterals": 3
+      },
+      "directAccesses": 1,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:interface#TexturePackerAtlasParseOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": [
+          "optional-omission"
+        ]
+      },
+      "name": "TexturePackerAtlasParseOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [
+        {
+          "column": 60,
+          "kind": "optional-omission",
+          "line": 172,
+          "scope": "production",
+          "source": "upstream/packages/textureatlas-formats/src/textureAtlasDetect.ts"
+        },
+        {
+          "column": 40,
+          "kind": "optional-omission",
+          "line": 18,
+          "scope": "production",
+          "source": "upstream/packages/textureatlas-formats/src/texturePackerAtlasParse.ts"
+        },
+        {
+          "column": 40,
+          "kind": "optional-omission",
+          "line": 38,
+          "scope": "production",
+          "source": "upstream/packages/textureatlas-formats/src/texturePackerAtlasParse.ts"
+        }
+      ],
+      "source": "upstream/packages/types/src/TexturePackerAtlasParseOptions.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 2
+      },
+      "directAccesses": 2,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#TexturePackerAtlasPivot",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "TexturePackerAtlasPivot",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 12
+      },
+      "directAccesses": 8,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:interface#TexturePackerAtlasRect",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "TexturePackerAtlasRect",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 10
+      },
+      "directAccesses": 4,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#TexturePackerAtlasSize",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "TexturePackerAtlasSize",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/TexturePackerAtlasSchema.ts"
     },
     {
       "bridge": {
@@ -112055,7 +114179,7 @@
         {
           "column": 10,
           "kind": "json-serialization",
-          "line": 102,
+          "line": 92,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/texturePackerSerialize.ts"
         }
@@ -112114,21 +114238,21 @@
         {
           "column": 10,
           "kind": "object-literal-spread",
-          "line": 43,
+          "line": 41,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/texturePackerSerialize.ts"
         },
         {
           "column": 108,
           "kind": "optional-omission",
-          "line": 45,
+          "line": 43,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/texturePackerSerialize.ts"
         },
         {
           "column": 5,
           "kind": "object-spread",
-          "line": 75,
+          "line": 73,
           "scope": "production",
           "source": "upstream/packages/spritesheet-formats/src/texturePackerSerialize.ts"
         }
@@ -112480,7 +114604,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 0
       },
-      "directAccesses": 28,
+      "directAccesses": 29,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -113555,7 +115679,7 @@
         "plainObjectLiterals": 0,
         "testObjectLiterals": 2
       },
-      "directAccesses": 2,
+      "directAccesses": 4,
       "fields": {
         "optional": 1,
         "requiredUndefined": 0,
@@ -119688,7 +121812,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 428,
+      "directAccesses": 430,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -123919,7 +126043,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 4
+        "total": 5
       },
       "id": "@flighthq/types:interface#WgpuRenderEffectApplicationExplanation",
       "migration": {
@@ -123950,7 +126074,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 44,
+        "inputSignatures": 45,
         "outputSignatures": 0
       },
       "construction": {
@@ -123961,7 +126085,7 @@
         "plainObjectLiterals": 2,
         "testObjectLiterals": 0
       },
-      "directAccesses": 148,
+      "directAccesses": 151,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -124020,6 +126144,52 @@
         "observabilityReasons": []
       },
       "name": "WgpuRenderEffectPipeline",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/WgpuRenderEffectPipeline.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 1,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 1,
+        "testObjectLiterals": 1
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 2
+      },
+      "id": "@flighthq/types:interface#WgpuRenderEffectRegistration",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "WgpuRenderEffectRegistration",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -124241,7 +126411,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 371,
+        "inputSignatures": 375,
         "outputSignatures": 3
       },
       "construction": {
@@ -124687,7 +126857,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 129,
+        "inputSignatures": 131,
         "outputSignatures": 7
       },
       "construction": {
@@ -124696,9 +126866,9 @@
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
         "plainObjectLiterals": 2,
-        "testObjectLiterals": 7
+        "testObjectLiterals": 9
       },
-      "directAccesses": 140,
+      "directAccesses": 145,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -124710,14 +126880,16 @@
         "normalizationReasons": [
           "anonymous-structural-transfer"
         ],
-        "observabilityReasons": []
+        "observabilityReasons": [
+          "object-spread"
+        ]
       },
       "name": "WgpuRenderTarget",
       "oracle": {
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
-        "objectSpreads": 0,
+        "objectSpreads": 1,
         "prototypeObservations": 0,
         "strictEqualityAssertions": 0
       },
@@ -124731,6 +126903,13 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 16,
+          "kind": "object-spread",
+          "line": 26,
+          "scope": "test",
+          "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.test.ts"
+        },
         {
           "column": 65,
           "kind": "anonymous-structural-transfer",
@@ -127187,7 +129366,7 @@
         "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
-      "directAccesses": 74,
+      "directAccesses": 77,
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
@@ -127879,7 +130058,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 867,
+        "inputSignatures": 870,
         "outputSignatures": 15
       },
       "construction": {
@@ -127943,6 +130122,52 @@
         }
       ],
       "source": "upstream/packages/types/src/Entity.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 4
+      },
+      "id": "@flighthq/types:type#FlightDocumentLayoutNode",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "FlightDocumentLayoutNode",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/FlightDocumentLayout.ts"
     },
     {
       "bridge": {
@@ -128330,6 +130555,98 @@
       },
       "sites": [],
       "source": "upstream/packages/types/src/Shortcut.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 1,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:type#GuiTransitionDescriptor",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "GuiTransitionDescriptor",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/GuiController.ts"
+    },
+    {
+      "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 0,
+        "requiredUndefined": 0,
+        "total": 5
+      },
+      "id": "@flighthq/types:type#GuiTransitionRequest",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "GuiTransitionRequest",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/GuiController.ts"
     },
     {
       "bridge": {
@@ -129732,7 +132049,7 @@
         {
           "column": 37,
           "kind": "cross-schema-transfer",
-          "line": 159,
+          "line": 240,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Matrix4"
           ],
@@ -129742,7 +132059,7 @@
         {
           "column": 26,
           "kind": "cross-schema-transfer",
-          "line": 160,
+          "line": 241,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Matrix4"
           ],
@@ -129752,7 +132069,7 @@
         {
           "column": 31,
           "kind": "cross-schema-transfer",
-          "line": 161,
+          "line": 242,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Matrix4"
           ],
@@ -130092,7 +132409,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 74,
+        "crossSchemaTransfers": 76,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -130171,6 +132488,27 @@
           ],
           "scope": "production",
           "source": "upstream/packages/camera/src/visibleBounds.ts"
+        },
+        {
+          "column": 39,
+          "kind": "cross-schema-transfer",
+          "line": 39,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Matrix"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/effects/src/renderEffectCaptureGeometry.ts"
+        },
+        {
+          "column": 14,
+          "kind": "cross-schema-transfer",
+          "line": 43,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Matrix",
+            "@flighthq/types:type#EntityWithoutRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/effects/src/renderEffectCaptureGeometry.ts"
         },
         {
           "column": 14,
@@ -131393,7 +133731,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 17
+        "total": 18
       },
       "id": "@flighthq/types:type#Node2DInteractionSignals",
       "migration": {
@@ -131424,8 +133762,8 @@
     },
     {
       "bridge": {
-        "inputSignatures": 139,
-        "outputSignatures": 16
+        "inputSignatures": 158,
+        "outputSignatures": 18
       },
       "construction": {
         "computedObjectLiterals": 0,
@@ -132352,7 +134690,7 @@
     },
     {
       "bridge": {
-        "inputSignatures": 93,
+        "inputSignatures": 96,
         "outputSignatures": 3
       },
       "construction": {
@@ -132388,7 +134726,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 51,
+        "crossSchemaTransfers": 53,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -132536,6 +134874,27 @@
           ],
           "scope": "production",
           "source": "upstream/packages/clip/src/clipRegion.ts"
+        },
+        {
+          "column": 39,
+          "kind": "cross-schema-transfer",
+          "line": 34,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Rectangle"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/effects/src/renderEffectCaptureGeometry.ts"
+        },
+        {
+          "column": 17,
+          "kind": "cross-schema-transfer",
+          "line": 41,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Rectangle",
+            "@flighthq/types:type#EntityWithoutRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/effects/src/renderEffectCaptureGeometry.ts"
         },
         {
           "column": 28,
@@ -132891,7 +135250,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 213,
+          "line": 214,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Rectangle",
             "@flighthq/types:type#EntityWithoutRuntime"
@@ -132902,7 +135261,7 @@
         {
           "column": 12,
           "kind": "cross-schema-transfer",
-          "line": 345,
+          "line": 346,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Rectangle",
             "@flighthq/types:type#EntityWithoutRuntime"
@@ -132913,7 +135272,7 @@
         {
           "column": 10,
           "kind": "cross-schema-transfer",
-          "line": 356,
+          "line": 357,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Rectangle",
             "@flighthq/types:type#EntityWithoutRuntime"
@@ -133639,6 +135998,52 @@
     },
     {
       "bridge": {
+        "inputSignatures": 0,
+        "outputSignatures": 0
+      },
+      "construction": {
+        "computedObjectLiterals": 0,
+        "objectLiterals": 0,
+        "objectLiteralsOmittingOptionalFields": 0,
+        "objectLiteralsWithSpread": 0,
+        "plainObjectLiterals": 0,
+        "testObjectLiterals": 0
+      },
+      "directAccesses": 0,
+      "fields": {
+        "optional": 1,
+        "requiredUndefined": 0,
+        "total": 1
+      },
+      "id": "@flighthq/types:type#TextureAtlasParseOptions",
+      "migration": {
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
+        "observabilityReasons": []
+      },
+      "name": "TextureAtlasParseOptions",
+      "oracle": {
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0,
+        "prototypeObservations": 0,
+        "strictEqualityAssertions": 0
+      },
+      "production": {
+        "anonymousStructuralTransfers": 0,
+        "crossSchemaTransfers": 0,
+        "dynamicIngresses": 0,
+        "enumerations": 0,
+        "jsonSerializations": 0,
+        "objectRests": 0,
+        "objectSpreads": 0
+      },
+      "sites": [],
+      "source": "upstream/packages/types/src/TextureAtlasParseOptions.ts"
+    },
+    {
+      "bridge": {
         "inputSignatures": 2,
         "outputSignatures": 0
       },
@@ -133654,7 +136059,7 @@
       "fields": {
         "optional": 0,
         "requiredUndefined": 0,
-        "total": 14
+        "total": 15
       },
       "id": "@flighthq/types:type#TextureAtlasRegionLike",
       "migration": {
@@ -133813,7 +136218,7 @@
         {
           "column": 35,
           "kind": "cross-schema-transfer",
-          "line": 202,
+          "line": 283,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Transform3D"
           ],
@@ -134069,7 +136474,7 @@
         {
           "column": 18,
           "kind": "cross-schema-transfer",
-          "line": 148,
+          "line": 152,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Vector2"
           ],
@@ -134079,7 +136484,7 @@
         {
           "column": 17,
           "kind": "cross-schema-transfer",
-          "line": 149,
+          "line": 153,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Vector2"
           ],
@@ -134089,7 +136494,7 @@
         {
           "column": 19,
           "kind": "cross-schema-transfer",
-          "line": 154,
+          "line": 158,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Vector2"
           ],
@@ -134099,7 +136504,7 @@
         {
           "column": 85,
           "kind": "cross-schema-transfer",
-          "line": 273,
+          "line": 277,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Vector2",
             "@flighthq/types:type#EntityWithoutRuntime"
@@ -134110,7 +136515,18 @@
         {
           "column": 38,
           "kind": "cross-schema-transfer",
-          "line": 511,
+          "line": 515,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Vector2",
+            "@flighthq/types:type#EntityWithoutRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gizmo/src/gizmoState.ts"
+        },
+        {
+          "column": 59,
+          "kind": "cross-schema-transfer",
+          "line": 566,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Vector2",
             "@flighthq/types:type#EntityWithoutRuntime"
@@ -134120,39 +136536,6 @@
         },
         {
           "column": 61,
-          "kind": "cross-schema-transfer",
-          "line": 604,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Vector2",
-            "@flighthq/types:type#EntityWithoutRuntime"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/gizmo/src/gizmoState.ts"
-        },
-        {
-          "column": 76,
-          "kind": "cross-schema-transfer",
-          "line": 607,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Vector2",
-            "@flighthq/types:type#EntityWithoutRuntime"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/gizmo/src/gizmoState.ts"
-        },
-        {
-          "column": 92,
-          "kind": "cross-schema-transfer",
-          "line": 610,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Vector2",
-            "@flighthq/types:type#EntityWithoutRuntime"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/gizmo/src/gizmoState.ts"
-        },
-        {
-          "column": 77,
           "kind": "cross-schema-transfer",
           "line": 613,
           "relatedSchemaIds": [
@@ -134163,9 +136546,31 @@
           "source": "upstream/packages/gizmo/src/gizmoState.ts"
         },
         {
-          "column": 81,
+          "column": 76,
           "kind": "cross-schema-transfer",
-          "line": 740,
+          "line": 616,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Vector2",
+            "@flighthq/types:type#EntityWithoutRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gizmo/src/gizmoState.ts"
+        },
+        {
+          "column": 92,
+          "kind": "cross-schema-transfer",
+          "line": 619,
+          "relatedSchemaIds": [
+            "@flighthq/types:interface#Vector2",
+            "@flighthq/types:type#EntityWithoutRuntime"
+          ],
+          "scope": "production",
+          "source": "upstream/packages/gizmo/src/gizmoState.ts"
+        },
+        {
+          "column": 77,
+          "kind": "cross-schema-transfer",
+          "line": 622,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Vector2",
             "@flighthq/types:type#EntityWithoutRuntime"
@@ -134176,7 +136581,7 @@
         {
           "column": 61,
           "kind": "cross-schema-transfer",
-          "line": 741,
+          "line": 749,
           "relatedSchemaIds": [
             "@flighthq/types:interface#Vector2",
             "@flighthq/types:type#EntityWithoutRuntime"
@@ -134219,7 +136624,7 @@
         {
           "column": 33,
           "kind": "anonymous-structural-transfer",
-          "line": 702,
+          "line": 927,
           "scope": "production",
           "source": "upstream/packages/interaction/src/interactionManager.ts"
         },
@@ -135319,13 +137724,13 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 6,
-        "objectLiteralsOmittingOptionalFields": 4,
+        "objectLiterals": 7,
+        "objectLiteralsOmittingOptionalFields": 5,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 6,
+        "plainObjectLiterals": 7,
         "testObjectLiterals": 0
       },
-      "directAccesses": 10,
+      "directAccesses": 11,
       "fields": {
         "optional": 2,
         "requiredUndefined": 0,
@@ -135358,6 +137763,13 @@
         "objectSpreads": 0
       },
       "sites": [
+        {
+          "column": 14,
+          "kind": "optional-omission",
+          "line": 140,
+          "scope": "production",
+          "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+        },
         {
           "column": 16,
           "kind": "optional-omission",
@@ -135588,28 +138000,28 @@
     }
   ],
   "summary": {
-    "anonymousStructuralTransfers": 222,
-    "bridgeInputSignatures": 10289,
-    "bridgeOutputSignatures": 2354,
-    "crossSchemaTransfers": 2174,
-    "directAccesses": 25837,
-    "dynamicIngresses": 70,
-    "mechanicallyCompatibleSchemas": 1663,
-    "normalizationRequiredSchemas": 498,
-    "objectLiterals": 2466,
-    "objectLiteralsOmittingOptionalFields": 528,
+    "anonymousStructuralTransfers": 229,
+    "bridgeInputSignatures": 10470,
+    "bridgeOutputSignatures": 2387,
+    "crossSchemaTransfers": 2193,
+    "directAccesses": 26054,
+    "dynamicIngresses": 72,
+    "mechanicallyCompatibleSchemas": 1696,
+    "normalizationRequiredSchemas": 505,
+    "objectLiterals": 2515,
+    "objectLiteralsOmittingOptionalFields": 549,
     "objectLiteralsWithComputedKeys": 8,
-    "objectLiteralsWithSpread": 230,
-    "observabilityReviewSchemas": 310,
-    "optionalFields": 2543,
-    "oracleObservations": 384,
-    "productionEnumerations": 11,
+    "objectLiteralsWithSpread": 234,
+    "observabilityReviewSchemas": 326,
+    "optionalFields": 2583,
+    "oracleObservations": 393,
+    "productionEnumerations": 12,
     "productionJsonSerializations": 6,
     "productionObjectRests": 0,
-    "productionObjectSpreads": 136,
+    "productionObjectSpreads": 137,
     "requiredUndefinedFields": 3,
-    "schemas": 2161,
-    "testObjectLiterals": 6793
+    "schemas": 2201,
+    "testObjectLiterals": 7150
   },
-  "upstreamCommit": "b3bb4bf61833f7723e7033dd5c732e91a6601400"
+  "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"
 }

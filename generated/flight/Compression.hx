@@ -8,6 +8,16 @@ import flight.types.Compression;
 import flight.types.Decompressor;
 
 class Compression {
+  public static function compressDeflate(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
+    return cast Facade_Compression_flight__Compression.compressDeflate(bytes);
+    return cast null;
+  }
+
+  public static function compressDeflateZlib(bytes:flight._internal._UInt8Array):flight._internal._UInt8Array {
+    return cast Facade_Compression_flight__Compression.compressDeflateZlib(bytes);
+    return cast null;
+  }
+
   public static function getDecompressor(compression:flight.types.Compression):Null<Decompressor> {
     return cast Facade_Compression_flight__Compression.getDecompressor(compression);
     return cast null;

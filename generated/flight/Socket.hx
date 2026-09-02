@@ -10,6 +10,8 @@ import flight.types.SocketOptions;
 import flight.types.SocketReadyState;
 import flight.types.SocketSendFailureExplanation;
 import flight.types.SocketSignals;
+import flight.types.TcpSocketConnection;
+import flight.types.TcpSocketOptions;
 
 class Socket {
   public static function areSocketGuardsEnabled():Bool {
@@ -58,6 +60,11 @@ class Socket {
 
   public static function getSocketReadyState(socket:flight.types.Socket):SocketReadyState {
     return cast Facade_Socket_flight__Socket.getSocketReadyState(socket);
+    return cast null;
+  }
+
+  public static function openTcpSocket(host:HasNetSocket, options:TcpSocketOptions):Null<TcpSocketConnection> {
+    return cast Facade_Socket_flight__Socket.openTcpSocket(host, options);
     return cast null;
   }
 

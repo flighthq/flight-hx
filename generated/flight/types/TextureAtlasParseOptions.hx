@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef TextureAtlasParseOptions = { @:optional var stripPathPrefix:Bool; @:optional var imageWidth:Float; @:optional var imageHeight:Float; };
+typedef TextureAtlasParseOptions = TexturePackerAtlasParseOptions;

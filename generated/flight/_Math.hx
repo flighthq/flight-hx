@@ -513,8 +513,11 @@ class _Math {
   }
 
   public static function roundTo(value:Float, step:Float):Float {
+    var magnitude:Float = cast _Runtime.UNDEFINED;
     if ((cast ((cast step : Float) <= (cast 0.0 : Float)) : Bool)) { return cast value; }
-    return cast _Runtime.multiplyNumbers(HxMath.round((value / step)), step);
+    magnitude = _Runtime.multiplyNumbers(HxMath.round(_Runtime.divideNumbers(HxMath.abs(value), step)), step);
+    if ((cast _Runtime.strictEquals(magnitude, 0.0) : Bool)) { return cast 0.0; }
+    return cast ((cast ((cast value : Float) < (cast 0.0 : Float)) : Bool) ? (cast -magnitude : Dynamic) : (cast magnitude : Dynamic));
     return cast null;
   }
 

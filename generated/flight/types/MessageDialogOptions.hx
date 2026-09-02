@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef MessageDialogOptions = { @:optional var title:String; var message:String; @:optional var detail:String; @:optional var buttons:Array<String>; @:optional var kind:MessageDialogKind; @:optional var checkboxLabel:String; @:optional var checkboxChecked:Bool; @:optional var defaultId:Float; @:optional var cancelId:Float; @:optional var parentWindow:ApplicationWindow; };
+typedef MessageDialogOptions = { @:optional var title:String; var message:String; @:optional var detail:String; @:optional var buttons:Array<String>; @:optional var kind:MessageDialogKind; @:optional var checkboxLabel:String; @:optional var checkboxChecked:Bool; @:optional var defaultId:Float; @:optional var cancelId:Float; @:optional var parentWindow:ApplicationWindow; @:optional var signal:flight._internal.dom.AbortSignal; };

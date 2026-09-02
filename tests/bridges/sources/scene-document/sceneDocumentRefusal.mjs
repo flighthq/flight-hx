@@ -5,6 +5,9 @@ const api = compiled.flight._SceneDocument;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const checkFlightDocumentFields = api.checkFlightDocumentFields;
+export const checkFlightDocumentInteractiveStates = api.checkFlightDocumentInteractiveStates;
+export const checkFlightDocumentNodeFields = api.checkFlightDocumentNodeFields;
 export const checkUnregisteredNodeKinds = api.checkUnregisteredNodeKinds;
 export const checkUnregisteredNodeKindsFromRaw = api.checkUnregisteredNodeKindsFromRaw;
 export const createDocumentRefusal = api.createDocumentRefusal;

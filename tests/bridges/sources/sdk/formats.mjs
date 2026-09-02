@@ -19,4 +19,5 @@ export * from '@flighthq/swf';
 export * from '@flighthq/texture-formats';
 export * from '@flighthq/textureatlas-formats';
 export * from '@flighthq/tilemap-formats';
+export * from '@flighthq/tokens';
 export * from '@flighthq/xml';

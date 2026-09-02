@@ -9,6 +9,8 @@ import flight.types.AgxToneMapOptions;
 import flight.types.AutoExposureEffect;
 import flight.types.BarrelDistortionEffect;
 import flight.types.BevelEffect;
+import flight.types.BitmapDisplacementEffect;
+import flight.types.BitmapDisplacementEffectEdgeMode;
 import flight.types.BlendEffect;
 import flight.types.BloomEffect;
 import flight.types.BlurEffect;
@@ -35,6 +37,7 @@ import flight.types.GodRaysEffect;
 import flight.types.GradientBevelEffect;
 import flight.types.GradientGlowEffect;
 import flight.types.HalftoneEffect;
+import flight.types.ImageChannel;
 import flight.types.InnerEffectSourceMode;
 import flight.types.InnerGlowEffect;
 import flight.types.InnerShadowEffect;
@@ -45,6 +48,7 @@ import flight.types.LensDistortionEffect;
 import flight.types.LensFlareEffect;
 import flight.types.MedianEffect;
 import flight.types.MotionBlurEffect;
+import flight.types.NodeAny;
 import flight.types.OuterGlowEffect;
 import flight.types.OutlineEffect;
 import flight.types.PanniniProjectionEffect;
@@ -52,6 +56,7 @@ import flight.types.PixelateEffect;
 import flight.types.PosterizeEffect;
 import flight.types.RadialBlurEffect;
 import flight.types.RenderEffect;
+import flight.types.RenderEffectCaptureGeometry;
 import flight.types.RenderEffectInput;
 import flight.types.RenderEffectPadding;
 import flight.types.RenderEffectPaddingExplanation;
@@ -65,6 +70,7 @@ import flight.types.SmaaEffect;
 import flight.types.SsaoEffect;
 import flight.types.SsrEffect;
 import flight.types.TaaEffect;
+import flight.types.Texture2D;
 import flight.types.TiltShiftEffect;
 import flight.types.ToneMapEffect;
 import flight.types.ToneMapOperator;
@@ -230,8 +236,13 @@ class Effects {
     return cast null;
   }
 
-  public static function computeRenderEffectPadding(state:RenderState, effects:flight._internal._Union2<RenderEffect, Array<RenderEffect>>):RenderEffectPadding {
-    return cast Facade_Effects_flight__Effects.computeRenderEffectPadding(state, effects);
+  public static function computeRenderEffectCaptureGeometry(out:RenderEffectCaptureGeometry, state:RenderState, source:NodeAny, effects:flight._internal._Union2<RenderEffect, Array<RenderEffect>>):Bool {
+    return cast Facade_Effects_flight__Effects.computeRenderEffectCaptureGeometry(out, state, source, effects);
+    return cast null;
+  }
+
+  public static function computeRenderEffectPadding(state:RenderState, effects:flight._internal._Union2<RenderEffect, Array<RenderEffect>>, ?out:RenderEffectPadding):RenderEffectPadding {
+    return cast Facade_Effects_flight__Effects.computeRenderEffectPadding(state, effects, out);
     return cast null;
   }
 
@@ -279,6 +290,11 @@ class Effects {
 
   public static function createBevelEffect(?options:{ @:optional var angle:Null<Float>; @:optional var bevelType:Null<String>; @:optional var blurX:Null<Float>; @:optional var blurY:Null<Float>; @:optional var distance:Null<Float>; @:optional var highlightAlpha:Null<Float>; @:optional var highlightColor:Null<Float>; @:optional var quality:Null<Float>; @:optional var shadowAlpha:Null<Float>; @:optional var shadowColor:Null<Float>; @:optional var sourceMode:Null<EffectSourceMode>; @:optional var strength:Null<Float>; }):BevelEffect {
     return cast Facade_Effects_flight__Effects.createBevelEffect(options);
+    return cast null;
+  }
+
+  public static function createBitmapDisplacementEffect(map:Null<Texture2D>, ?options:{ @:optional var componentX:Null<ImageChannel>; @:optional var componentY:Null<ImageChannel>; @:optional var scaleX:Null<Float>; @:optional var scaleY:Null<Float>; @:optional var edgeMode:Null<BitmapDisplacementEffectEdgeMode>; }):BitmapDisplacementEffect {
+    return cast Facade_Effects_flight__Effects.createBitmapDisplacementEffect(map, options);
     return cast null;
   }
 
@@ -559,6 +575,11 @@ class Effects {
     return cast null;
   }
 
+  public static function getBitmapDisplacementEffectPadding(effect:BitmapDisplacementEffect):RenderEffectPadding {
+    return cast Facade_Effects_flight__Effects.getBitmapDisplacementEffectPadding(effect);
+    return cast null;
+  }
+
   public static function getBloomEffectPadding(effect:BloomEffect):RenderEffectPadding {
     return cast Facade_Effects_flight__Effects.getBloomEffectPadding(effect);
     return cast null;
@@ -719,6 +740,10 @@ class Effects {
 
   public static function registerBevelEffectPaddingResolver(state:RenderState):Void {
     Facade_Effects_flight__Effects.registerBevelEffectPaddingResolver(state);
+  }
+
+  public static function registerBitmapDisplacementEffectPaddingResolver(state:RenderState):Void {
+    Facade_Effects_flight__Effects.registerBitmapDisplacementEffectPaddingResolver(state);
   }
 
   public static function registerBloomEffectPaddingResolver(state:RenderState):Void {

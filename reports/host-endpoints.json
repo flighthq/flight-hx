@@ -4178,7 +4178,7 @@
         },
         {
           "column": 19,
-          "line": 89,
+          "line": 94,
           "source": "upstream/packages/host-web/src/webDialog.ts"
         },
         {
@@ -4387,7 +4387,7 @@
       "sites": [
         {
           "column": 12,
-          "line": 80,
+          "line": 85,
           "source": "upstream/packages/host-web/src/webDialog.ts"
         },
         {
@@ -5391,12 +5391,12 @@
       "sites": [
         {
           "column": 21,
-          "line": 55,
+          "line": 60,
           "source": "upstream/packages/host-web/src/webFilesystem.ts"
         },
         {
           "column": 19,
-          "line": 253,
+          "line": 306,
           "source": "upstream/packages/host-web/src/webFilesystem.ts"
         },
         {
@@ -5565,7 +5565,7 @@
         },
         {
           "column": 5,
-          "line": 134,
+          "line": 143,
           "source": "upstream/packages/host-web/src/webDialog.ts"
         },
         {
@@ -5679,7 +5679,7 @@
         },
         {
           "column": 12,
-          "line": 82,
+          "line": 87,
           "source": "upstream/packages/host-web/src/webDialog.ts"
         },
         {
@@ -5703,7 +5703,7 @@
       "sites": [
         {
           "column": 9,
-          "line": 32,
+          "line": 34,
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ]
@@ -5722,7 +5722,7 @@
       "sites": [
         {
           "column": 51,
-          "line": 28,
+          "line": 30,
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ]
@@ -5765,7 +5765,7 @@
       "sites": [
         {
           "column": 16,
-          "line": 21,
+          "line": 22,
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ]
@@ -5784,7 +5784,7 @@
       "sites": [
         {
           "column": 51,
-          "line": 19,
+          "line": 20,
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ]
@@ -6153,7 +6153,7 @@
       "sites": [
         {
           "column": 16,
-          "line": 46,
+          "line": 49,
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ]
@@ -6172,7 +6172,7 @@
       "sites": [
         {
           "column": 51,
-          "line": 44,
+          "line": 47,
           "source": "upstream/packages/dialog/src/dialog.ts"
         }
       ]
@@ -6221,7 +6221,7 @@
         },
         {
           "column": 7,
-          "line": 98,
+          "line": 103,
           "source": "upstream/packages/host-web/src/webDialog.ts"
         },
         {
@@ -19720,7 +19720,7 @@
       ]
     },
     {
-      "accesses": 59,
+      "accesses": 63,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "uniform1i",
@@ -19732,6 +19732,26 @@
       "runtimeEndpoint": "uniform1i",
       "runtimePath": "src/flight/_internal/backend/WebGl2Backend.hx",
       "sites": [
+        {
+          "column": 33,
+          "line": 51,
+          "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+        },
+        {
+          "column": 33,
+          "line": 52,
+          "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+        },
+        {
+          "column": 31,
+          "line": 53,
+          "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+        },
+        {
+          "column": 40,
+          "line": 54,
+          "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+        },
         {
           "column": 27,
           "line": 43,
@@ -20030,7 +20050,7 @@
       ]
     },
     {
-      "accesses": 33,
+      "accesses": 35,
       "binding": "WebGl2Backend",
       "contract": "backend",
       "member": "uniform2f",
@@ -20046,6 +20066,16 @@
           "column": 5,
           "line": 193,
           "source": "upstream/packages/effects-gl/src/glBevelEffect.ts"
+        },
+        {
+          "column": 33,
+          "line": 55,
+          "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
+        },
+        {
+          "column": 28,
+          "line": 56,
+          "source": "upstream/packages/effects-gl/src/glBitmapDisplacementEffect.ts"
         },
         {
           "column": 5,
@@ -21807,7 +21837,7 @@
       ]
     },
     {
-      "accesses": 48,
+      "accesses": 50,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createBindGroup",
@@ -21818,6 +21848,16 @@
       "runtimeEndpoint": "createBindGroup",
       "runtimePath": "src/flight/_internal/backend/WebGpuDeviceBackend.hx",
       "sites": [
+        {
+          "column": 27,
+          "line": 44,
+          "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+        },
+        {
+          "column": 24,
+          "line": 51,
+          "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+        },
         {
           "column": 20,
           "line": 26,
@@ -22493,7 +22533,7 @@
       ]
     },
     {
-      "accesses": 23,
+      "accesses": 24,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createPipelineLayout",
@@ -22504,6 +22544,11 @@
       "runtimeEndpoint": "createPipelineLayout",
       "runtimePath": "src/flight/_internal/backend/WebGpuDeviceBackend.hx",
       "sites": [
+        {
+          "column": 18,
+          "line": 137,
+          "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+        },
         {
           "column": 28,
           "line": 83,
@@ -22622,7 +22667,7 @@
       ]
     },
     {
-      "accesses": 23,
+      "accesses": 24,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createRenderPipeline",
@@ -22633,6 +22678,11 @@
       "runtimeEndpoint": "createRenderPipeline",
       "runtimePath": "src/flight/_internal/backend/WebGpuDeviceBackend.hx",
       "sites": [
+        {
+          "column": 15,
+          "line": 142,
+          "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+        },
         {
           "column": 25,
           "line": 86,
@@ -22815,7 +22865,7 @@
       ]
     },
     {
-      "accesses": 35,
+      "accesses": 36,
       "binding": "WebGpuDeviceBackend",
       "contract": "backend",
       "member": "createShaderModule",
@@ -22826,6 +22876,11 @@
       "runtimeEndpoint": "createShaderModule",
       "runtimePath": "src/flight/_internal/backend/WebGpuDeviceBackend.hx",
       "sites": [
+        {
+          "column": 24,
+          "line": 134,
+          "source": "upstream/packages/effects-wgpu/src/wgpuBitmapDisplacementEffect.ts"
+        },
         {
           "column": 26,
           "line": 82,
@@ -23953,14 +24008,14 @@
   ],
   "schemaVersion": 1,
   "summary": {
-    "accesses": 3615,
+    "accesses": 3626,
     "backendContractEndpoints": 397,
     "bindings": 10,
-    "calls": 2302,
+    "calls": 2313,
     "dynamicFallbackEndpoints": 21,
     "endpoints": 402,
     "reads": 1088,
     "writes": 225
   },
-  "upstreamCommit": "b3bb4bf61833f7723e7033dd5c732e91a6601400"
+  "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"
 }

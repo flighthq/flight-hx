@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FileDialogHandleOperations = { @:optional var readBinary:Void->flight._internal._Promise<Null<flight._internal._UInt8Array>>; @:optional var readText:Void->flight._internal._Promise<Null<String>>; @:optional var writeBinary:flight._internal._UInt8Array->flight._internal._Promise<Bool>; @:optional var writeText:String->flight._internal._Promise<Bool>; };
+typedef FileDialogHandleOperations = { @:optional var readBinary:flight._internal.dom.AbortSignal->flight._internal._Promise<Null<flight._internal._UInt8Array>>; @:optional var readText:flight._internal.dom.AbortSignal->flight._internal._Promise<Null<String>>; @:optional var writeBinary:flight._internal._UInt8Array->flight._internal.dom.AbortSignal->flight._internal._Promise<Bool>; @:optional var writeText:String->flight._internal.dom.AbortSignal->flight._internal._Promise<Bool>; };

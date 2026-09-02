@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef HostShellCapabilities = { @:optional var beep:ShellBeepBackend; @:optional var external:ShellExternalBackend; @:optional var pathOpen:ShellPathOpenBackend; @:optional var pathReveal:ShellPathRevealBackend; @:optional var shortcutLink:ShellShortcutLinkBackend; @:optional var trash:ShellTrashBackend; };
+typedef HostShellCapabilities = { @:optional var beep:ShellBeepBackend; @:optional var external:ShellExternalBackend; @:optional var pathOpen:ShellPathOpenBackend; @:optional var pathReveal:ShellPathRevealBackend; @:optional var process:ShellProcessBackend; @:optional var shortcutLink:ShellShortcutLinkBackend; @:optional var trash:ShellTrashBackend; };

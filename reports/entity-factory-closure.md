@@ -1,6 +1,6 @@
 # Entity Factory Closure Audit
 
-Upstream commit: `b3bb4bf61833f7723e7033dd5c732e91a6601400`
+Upstream commit: `98a7a58a934f55555a561a308cc23c1363c45652`
 
 This audit inventories exact calls to Flight's production `createEntity` helper. A ready site has a declared concrete Entity identity plus an exact ordered object construction. It reports closure prerequisites; it does not activate class emission.
 
@@ -208,7 +208,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/camera-controls/src/orbitCameraController.ts:42:10` | `createOrbitCameraController` | `@flighthq/types:interface#OrbitCameraController` | `contextual` | `object` | 12 | ready | — |
 | `upstream/packages/camera/src/camera.ts:20:10` | `createCamera3D` | `@flighthq/types:interface#Camera3D` | `contextual` | `object` | 6 | ready | — |
 | `upstream/packages/connectivity/src/connectivity.ts:50:10` | `createConnectivity` | `@flighthq/types:interface#Connectivity` | `contextual` | `object` | 5 | ready | — |
-| `upstream/packages/dialog/src/fileDialog.ts:25:18` | `createFileDialogHandle` | `@flighthq/types:interface#FileDialogHandle` | `contextual` | `object` | 3 | ready | — |
+| `upstream/packages/dialog/src/fileDialog.ts:26:18` | `createFileDialogHandle` | `@flighthq/types:interface#FileDialogHandle` | `contextual` | `object` | 3 | ready | — |
 | `upstream/packages/entity/src/clone.ts:12:10` | `cloneEntity` | `generic-entity` | `contextual` | `other` | 0 | blocked | `generic-entity-destination`, `non-object-construction` |
 | `upstream/packages/entity/src/host.ts:8:10` | `createHost` | `structural-entity` | `contextual` | `object` | 26 | blocked | `spread-construction`, `structural-entity-destination` |
 | `upstream/packages/font/src/font.ts:5:10` | `createFont` | `@flighthq/types:interface#Font` | `contextual` | `object` | 1 | ready | — |
@@ -242,7 +242,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-capacitor/src/capacitorConnectivity.ts:70:10` | `createCapacitorConnectivityBackend` | `structural-entity` | `contextual` | `object` | 3 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-capacitor/src/capacitorDevice.ts:42:10` | `createCapacitorDeviceBackend` | `structural-entity` | `contextual` | `object` | 5 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-capacitor/src/capacitorDialog.ts:8:10` | `createCapacitorMessageDialogBackend` | `structural-entity` | `contextual` | `object` | 2 | blocked | `structural-entity-destination` |
-| `upstream/packages/host-capacitor/src/capacitorDialog.ts:23:10` | `createCapacitorPromptDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
+| `upstream/packages/host-capacitor/src/capacitorDialog.ts:31:10` | `createCapacitorPromptDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-capacitor/src/capacitorFileSystem.ts:14:10` | `createCapacitorFileSystemBackend` | `structural-entity` | `contextual` | `object` | 14 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-capacitor/src/capacitorGeolocation.ts:24:10` | `createCapacitorGeolocationBackend` | `structural-entity` | `contextual` | `object` | 6 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-capacitor/src/capacitorKeyboard.ts:32:10` | `createCapacitorSoftKeyboardAccessoryBarBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
@@ -289,8 +289,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-electron/src/electronApp.ts:150:10` | `createElectronRecentDocumentsBackend` | `structural-entity` | `return` | `object` | 2 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-electron/src/electronClipboard.ts:23:10` | `createElectronClipboardBackend` | `structural-entity` | `contextual` | `object` | 19 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-electron/src/electronDialog.ts:18:10` | `createElectronDirectoryOpenDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronDialog.ts:39:10` | `createElectronFileOpenDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronDialog.ts:65:10` | `createElectronFileSaveDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
+| `upstream/packages/host-electron/src/electronDialog.ts:40:10` | `createElectronFileOpenDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
+| `upstream/packages/host-electron/src/electronDialog.ts:67:10` | `createElectronFileSaveDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-electron/src/electronIpc.ts:13:10` | `createElectronIpcMessageBackend` | `@flighthq/types:interface#IpcMessageBackend` | `contextual` | `object` | 1 | ready | — |
 | `upstream/packages/host-electron/src/electronMenu.ts:29:18` | `createElectronMenuBackends` | `@flighthq/types:interface#MenuApplicationBackend` | `contextual` | `object` | 2 | not-entity | — |
 | `upstream/packages/host-electron/src/electronMenu.ts:44:12` | `createElectronMenuBackends` | `@flighthq/types:interface#MenuPopupBackend` | `contextual` | `object` | 1 | not-entity | — |
@@ -353,8 +353,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-tauri/src/tauriApp.ts:31:14` | `createTauriAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-tauri/src/tauriClipboard.ts:8:10` | `createTauriClipboardBackend` | `@flighthq/types:interface#ClipboardTextBackend` | `contextual` | `object` | 4 | blocked | `field-order-mismatch` |
 | `upstream/packages/host-tauri/src/tauriDialog.ts:20:10` | `createTauriDirectoryOpenDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriDialog.ts:42:10` | `createTauriFileOpenDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
-| `upstream/packages/host-tauri/src/tauriDialog.ts:68:10` | `createTauriFileSaveDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
+| `upstream/packages/host-tauri/src/tauriDialog.ts:43:10` | `createTauriFileOpenDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
+| `upstream/packages/host-tauri/src/tauriDialog.ts:70:10` | `createTauriFileSaveDialogBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-tauri/src/tauriMenu.ts:30:18` | `createTauriMenuBackends` | `@flighthq/types:interface#MenuApplicationBackend` | `contextual` | `object` | 2 | not-entity | — |
 | `upstream/packages/host-tauri/src/tauriMenu.ts:51:12` | `createTauriMenuBackends` | `@flighthq/types:interface#MenuPopupBackend` | `contextual` | `object` | 1 | not-entity | — |
 | `upstream/packages/host-tauri/src/tauriMenu.ts:62:13` | `createTauriMenuBackends` | `@flighthq/types:interface#MenuSelectBackend` | `contextual` | `object` | 1 | not-entity | — |
@@ -390,9 +390,9 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-web/src/webClipboard.ts:113:10` | `createWebClipboardProviderBackend` | `structural-entity` | `contextual` | `object` | 19 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-web/src/webConnectivity.ts:17:10` | `createWebConnectivityBackend` | `structural-entity` | `contextual` | `object` | 4 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-web/src/webCursor.ts:5:10` | `createWebCursorBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webDialog.ts:19:46` | `<module>` | `structural-entity` | `variable` | `object` | 1 | blocked | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webDialog.ts:23:41` | `<module>` | `structural-entity` | `variable` | `object` | 1 | blocked | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webDialog.ts:27:41` | `<module>` | `structural-entity` | `variable` | `object` | 1 | blocked | `structural-entity-destination` |
+| `upstream/packages/host-web/src/webDialog.ts:20:46` | `<module>` | `structural-entity` | `variable` | `object` | 1 | blocked | `structural-entity-destination` |
+| `upstream/packages/host-web/src/webDialog.ts:24:41` | `<module>` | `structural-entity` | `variable` | `object` | 1 | blocked | `structural-entity-destination` |
+| `upstream/packages/host-web/src/webDialog.ts:28:41` | `<module>` | `structural-entity` | `variable` | `object` | 1 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-web/src/webFontLoading.ts:6:10` | `createWebFontLoadingBackend` | `structural-entity` | `contextual` | `object` | 4 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-web/src/webGlyphRasterizer.ts:12:10` | `createWebGlyphRasterizerBackend` | `structural-entity` | `contextual` | `object` | 2 | blocked | `structural-entity-destination` |
 | `upstream/packages/host-web/src/webInputTarget.ts:15:40` | `<module>` | `@flighthq/types:interface#InputDropFileBackend` | `contextual` | `object` | 1 | ready | — |
@@ -539,6 +539,6 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/texture/src/texture.ts:133:17` | `createTexture` | `@flighthq/types:type#Texture` | `assignment` | `object` | 2 | blocked | `field-set-mismatch`, `spread-construction` |
 | `upstream/packages/texture/src/texture.ts:153:19` | `createTexture2D` | `@flighthq/types:interface#Texture2D` | `contextual` | `object` | 2 | blocked | `field-set-mismatch`, `spread-construction` |
 | `upstream/packages/texture/src/videoTexture.ts:97:17` | `createVideoImageResource` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | blocked | `field-order-mismatch` |
-| `upstream/packages/textureatlas/src/textureAtlas.ts:6:10` | `createTextureAtlas` | `@flighthq/types:interface#TextureAtlas` | `contextual` | `object` | 2 | ready | — |
-| `upstream/packages/textureatlas/src/textureAtlasRegion.ts:121:10` | `createTextureAtlasRegion` | `@flighthq/types:interface#TextureAtlasRegion` | `contextual` | `object` | 14 | blocked | `field-order-mismatch` |
+| `upstream/packages/textureatlas/src/textureAtlas.ts:6:10` | `createTextureAtlas` | `@flighthq/types:interface#TextureAtlas` | `contextual` | `object` | 6 | ready | — |
+| `upstream/packages/textureatlas/src/textureAtlasRegion.ts:121:10` | `createTextureAtlasRegion` | `@flighthq/types:interface#TextureAtlasRegion` | `contextual` | `object` | 15 | blocked | `field-order-mismatch` |
 | `upstream/packages/tray/src/tray.ts:75:16` | `createTrayIcon` | `@flighthq/types:type#TrayIconForHost` | `contextual` | `omitted` | 0 | blocked | `omitted-construction`, `parameterized-destination` |

@@ -6,5 +6,5 @@ __syncDependencies();
 export * from './textureAtlasAsepriteParse.mjs';
 export * from './textureAtlasDetect.mjs';
 export * from './textureAtlasLibgdxParse.mjs';
-export * from './textureAtlasPackerParse.mjs';
 export * from './textureAtlasStarlingParse.mjs';
+export * from './texturePackerAtlasParse.mjs';

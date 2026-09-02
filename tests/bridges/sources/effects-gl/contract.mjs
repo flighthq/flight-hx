@@ -8,11 +8,13 @@ function __syncDependencies() {
   compiled.flight._RenderGl.compileGlFullscreenProgram = __dependency0.compileGlFullscreenProgram;
   compiled.flight._RenderGl.drawGlFullscreenPass = __dependency0.drawGlFullscreenPass;
   compiled.flight._RenderGl.releaseGlRenderTarget = __dependency0.releaseGlRenderTarget;
+  compiled.flight._RenderGl.resolveGlTexture = __dependency0.resolveGlTexture;
 }
 __syncDependencies();
 
 export * from './enableGlRenderEffectGuards.mjs';
 export * from './glBevelEffect.mjs';
+export * from './glBitmapDisplacementEffect.mjs';
 export * from './glBlendEffect.mjs';
 export * from './glBloomEffect.mjs';
 export * from './glBlurEffect.mjs';

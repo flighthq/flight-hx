@@ -143,6 +143,14 @@ class RuntimeToolkitSmoke {
     final cyclicClone:Dynamic = _Runtime.callValue(_HostValueLut.get('structuredClone'), [cyclic]);
     if (cyclicClone == cyclic || cyclicClone.self != cyclicClone) throw 'portable structuredClone cycle failed';
 
+    final objectPrototype = flight._internal.DynamicObject.field('prototype');
+    if (flight._internal.DynamicObject.getPrototypeOf({value: 1}) != objectPrototype) {
+      throw 'portable anonymous-object prototype failed';
+    }
+    if (flight._internal.DynamicObject.getPrototypeOf(new RuntimePrototypeFixture()) == objectPrototype) {
+      throw 'portable class prototype collapsed to Object.prototype';
+    }
+
     final identityKey:Array<Dynamic> = [];
     final weakMap = _Runtime.construct(_HostValueLut.get('WeakMap'), []);
     _Runtime.callProperty(weakMap, 'set', [identityKey, 'identity']);
@@ -169,4 +177,8 @@ class RuntimeToolkitSmoke {
     _Runtime.clearInterval(interval);
     #end
   }
+}
+
+private class RuntimePrototypeFixture {
+  public function new() {}
 }

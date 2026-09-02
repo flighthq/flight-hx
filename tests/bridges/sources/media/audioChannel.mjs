@@ -20,5 +20,6 @@ export const playAudioResource = api.playAudioResource;
 export const resumeAudioChannel = api.resumeAudioChannel;
 export const setAudioChannelCurrentTime = api.setAudioChannelCurrentTime;
 export const setAudioChannelGain = api.setAudioChannelGain;
+export const setAudioChannelPan = api.setAudioChannelPan;
 export const setAudioChannelPlaybackRate = api.setAudioChannelPlaybackRate;
 export const stopAudioChannel = api.stopAudioChannel;

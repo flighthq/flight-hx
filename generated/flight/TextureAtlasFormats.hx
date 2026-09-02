@@ -7,10 +7,9 @@ import flight._TextureAtlasFormats as Facade_TextureAtlasFormats_flight__Texture
 import flight.types.TextureAtlas;
 import flight.types.TextureAtlasAsepriteDocument;
 import flight.types.TextureAtlasFormatKind;
-import flight.types.TextureAtlasPackerDocument;
-import flight.types.TextureAtlasPackerParseOptions;
 import flight.types.TextureAtlasParseOptions;
-import flight.types.TextureAtlasStarlingParseOptions;
+import flight.types.TexturePackerAtlasDocument;
+import flight.types.TexturePackerAtlasParseOptions;
 
 class TextureAtlasFormats {
   public static function detectTextureAtlasFormat(content:String):Null<TextureAtlasFormatKind> {
@@ -48,18 +47,18 @@ class TextureAtlasFormats {
     return cast null;
   }
 
-  public static function parseTextureAtlasPackerDocument(doc:TextureAtlasPackerDocument, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
-    return cast Facade_TextureAtlasFormats_flight__TextureAtlasFormats.parseTextureAtlasPackerDocument(doc, atlas, options);
+  public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas):TextureAtlas {
+    return cast Facade_TextureAtlasFormats_flight__TextureAtlasFormats.parseTextureAtlasStarlingXml(xml, atlas);
     return cast null;
   }
 
-  public static function parseTextureAtlasPackerJson(json:String, atlas:TextureAtlas, ?options:TextureAtlasPackerParseOptions):TextureAtlas {
-    return cast Facade_TextureAtlasFormats_flight__TextureAtlasFormats.parseTextureAtlasPackerJson(json, atlas, options);
+  public static function parseTexturePackerAtlasDocument(doc:TexturePackerAtlasDocument, atlas:TextureAtlas, ?options:TexturePackerAtlasParseOptions):TextureAtlas {
+    return cast Facade_TextureAtlasFormats_flight__TextureAtlasFormats.parseTexturePackerAtlasDocument(doc, atlas, options);
     return cast null;
   }
 
-  public static function parseTextureAtlasStarlingXml(xml:String, atlas:TextureAtlas, ?_options:TextureAtlasStarlingParseOptions):TextureAtlas {
-    return cast Facade_TextureAtlasFormats_flight__TextureAtlasFormats.parseTextureAtlasStarlingXml(xml, atlas, _options);
+  public static function parseTexturePackerAtlasJson(json:String, atlas:TextureAtlas, ?options:TexturePackerAtlasParseOptions):TextureAtlas {
+    return cast Facade_TextureAtlasFormats_flight__TextureAtlasFormats.parseTexturePackerAtlasJson(json, atlas, options);
     return cast null;
   }
 

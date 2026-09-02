@@ -22,6 +22,8 @@ import flight.types.SocketReadyState;
 import flight.types.SocketRuntime;
 import flight.types.SocketSendFailureExplanation;
 import flight.types.SocketSignals;
+import flight.types.TcpSocketConnection;
+import flight.types.TcpSocketOptions;
 
 @:noCompletion
 class _Socket {
@@ -151,6 +153,11 @@ class _Socket {
     return cast null;
   }
 
+  public static function openTcpSocket(host:HasNetSocket, options:TcpSocketOptions):Null<TcpSocketConnection> {
+    return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural13 = (cast (cast host : HasNetSocket).net : { var socket:SocketBackend; }).socket; __structural13 == null ? _Runtime.UNDEFINED : (cast __structural13 : SocketBackend).openTcpSocket; }), cast ([options] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast null;
+  }
+
   public static function sendSocketMessage(socket:Socket, data:flight._internal._Union2<String, haxe.io.Bytes>):Bool {
     var runtime:SocketRuntime = cast _Runtime.UNDEFINED;
     runtime = socket.runtime;
@@ -159,7 +166,7 @@ class _Socket {
       return cast false;
     }
     if ((cast ((cast !_Runtime.strictEquals(runtime.readyState, 'open') : Bool) || (cast _Runtime.strictEquals(runtime.connection, null) : Bool)) : Bool)) { return cast false; }
-    return cast (cast runtime.connection : SocketConnection).sendSocketFrame(({ final __callArgument13:Dynamic = data; __callArgument13; }));
+    return cast (cast runtime.connection : SocketConnection).sendSocketFrame(({ final __callArgument14:Dynamic = data; __callArgument14; }));
     return cast null;
   }
 

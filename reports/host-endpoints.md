@@ -1,6 +1,6 @@
 # Host Endpoint Audit
 
-Upstream commit: `b3bb4bf61833f7723e7033dd5c732e91a6601400`
+Upstream commit: `98a7a58a934f55555a561a308cc23c1363c45652`
 
 Receiver identities and member use are checker-derived. The shared contract selects explicit host backends where maintained target semantics exist and the maintained dynamic runtime otherwise; generation validates both routes.
 
@@ -8,8 +8,8 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | --- | ---: |
 | Receiver bindings | 10 |
 | Canonical endpoints | 402 |
-| Property accesses | 3615 |
-| Calls | 2302 |
+| Property accesses | 3626 |
+| Calls | 2313 |
 | Reads | 1088 |
 | Writes | 225 |
 | Backend contract endpoints | 397 |
@@ -373,8 +373,8 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGl2Backend` | `TRIANGLES` | `read` | `TRIANGLES` | `backend` | 8 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `uniform1f` | `call` | `uniform1f` | `backend` | 179 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `uniform1fv` | `call` | `uniform1fv` | `backend` | 4 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `uniform1i` | `call` | `uniform1i` | `backend` | 59 | `src/flight/_internal/backend/WebGl2Backend.hx` |
-| `WebGl2Backend` | `uniform2f` | `call` | `uniform2f` | `backend` | 33 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `uniform1i` | `call` | `uniform1i` | `backend` | 63 | `src/flight/_internal/backend/WebGl2Backend.hx` |
+| `WebGl2Backend` | `uniform2f` | `call` | `uniform2f` | `backend` | 35 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `uniform2fv` | `call` | `uniform2fv` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `uniform3f` | `call` | `uniform3f` | `backend` | 20 | `src/flight/_internal/backend/WebGl2Backend.hx` |
 | `WebGl2Backend` | `uniform3fv` | `call` | `uniform3fv` | `backend` | 2 | `src/flight/_internal/backend/WebGl2Backend.hx` |
@@ -399,14 +399,14 @@ Receiver identities and member use are checker-derived. The shared contract sele
 | `WebGpuCanvasContextBackend` | `configure` | `call` | `configure` | `backend` | 1 | `src/flight/_internal/backend/WebGpuCanvasContextBackend.hx` |
 | `WebGpuCanvasContextBackend` | `getCurrentTexture` | `call` | `getCurrentTexture` | `backend` | 1 | `src/flight/_internal/backend/WebGpuCanvasContextBackend.hx` |
 | `WebGpuCanvasContextBackend` | `unconfigure` | `call` | `unconfigure` | `dynamic-fallback` | 1 | `src/flight/_internal/_Runtime.hx` |
-| `WebGpuDeviceBackend` | `createBindGroup` | `call` | `createBindGroup` | `backend` | 48 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createBindGroup` | `call` | `createBindGroup` | `backend` | 50 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createBindGroupLayout` | `call` | `createBindGroupLayout` | `backend` | 39 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createBuffer` | `call` | `createBuffer` | `backend` | 35 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createCommandEncoder` | `call` | `createCommandEncoder` | `backend` | 4 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
-| `WebGpuDeviceBackend` | `createPipelineLayout` | `call` | `createPipelineLayout` | `backend` | 23 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
-| `WebGpuDeviceBackend` | `createRenderPipeline` | `call` | `createRenderPipeline` | `backend` | 23 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createPipelineLayout` | `call` | `createPipelineLayout` | `backend` | 24 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createRenderPipeline` | `call` | `createRenderPipeline` | `backend` | 24 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createSampler` | `call` | `createSampler` | `backend` | 10 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
-| `WebGpuDeviceBackend` | `createShaderModule` | `call` | `createShaderModule` | `backend` | 35 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
+| `WebGpuDeviceBackend` | `createShaderModule` | `call` | `createShaderModule` | `backend` | 36 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `createTexture` | `call` | `createTexture` | `backend` | 29 | `src/flight/_internal/backend/WebGpuDeviceBackend.hx` |
 | `WebGpuDeviceBackend` | `destroy` | `call` | `destroy` | `dynamic-fallback` | 2 | `src/flight/_internal/_Runtime.hx` |
 | `WebGpuDeviceBackend` | `features` | `read` | `features` | `dynamic-fallback` | 3 | `src/flight/_internal/_Runtime.hx` |

@@ -3,5 +3,6 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './gizmoAlignment.mjs';
 export * from './gizmoState.mjs';
 export * from './node2dGizmoFeatures.mjs';

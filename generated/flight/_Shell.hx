@@ -17,6 +17,10 @@ import flight.types.ShellPathOpenBackend;
 import flight.types.ShellPathOpenOutcome;
 import flight.types.ShellPathRevealBackend;
 import flight.types.ShellPathRevealOutcome;
+import flight.types.ShellProcess;
+import flight.types.ShellProcessBackend;
+import flight.types.ShellProcessHost;
+import flight.types.ShellProcessOptions;
 import flight.types.ShellShortcutLink;
 import flight.types.ShellShortcutLinkBackend;
 import flight.types.ShellShortcutLinkReadOutcome;
@@ -72,8 +76,13 @@ class _Shell {
     (cast (cast (cast host : HasShellBeep).shell : { var beep:ShellBeepBackend; }).beep : ShellBeepBackend).beep();
   }
 
+  public static function spawnShellProcess(host:ShellProcessHost, command:String, args:Array<String>, ?options:ShellProcessOptions):Null<ShellProcess> {
+    return cast _Runtime.coalesce(_Runtime.callOptionalValue(({ final __structural2 = (cast (cast host : ShellProcessHost).shell : { @:optional var process:Null<ShellProcessBackend>; }).process; __structural2 == null ? _Runtime.UNDEFINED : (cast __structural2 : { var spawn:String->Array<String>->Null<ShellProcessOptions>->ShellProcess; }).spawn; }), cast ([command, args, options] : Array<Dynamic>)), function():Dynamic return cast null);
+    return cast null;
+  }
+
   public static function writeShellShortcutLink(host:HasShellShortcutLink, shortcutPath:String, link:ShellShortcutLink, operation:ShellShortcutWriteOperation):flight._internal._Promise<ShellShortcutLinkWriteOutcome> {
-    return cast (cast (cast (cast host : HasShellShortcutLink).shell : { var shortcutLink:ShellShortcutLinkBackend; }).shortcutLink : ShellShortcutLinkBackend).write((cast shortcutPath : String), ({ final __callArgument2:Dynamic = link; __callArgument2; }), ({ final __callArgument3:Dynamic = operation; __callArgument3; }));
+    return cast (cast (cast (cast host : HasShellShortcutLink).shell : { var shortcutLink:ShellShortcutLinkBackend; }).shortcutLink : ShellShortcutLinkBackend).write((cast shortcutPath : String), ({ final __callArgument3:Dynamic = link; __callArgument3; }), ({ final __callArgument4:Dynamic = operation; __callArgument4; }));
     return cast null;
   }
 }

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentScene3DMaterialization = { var cameras:Array<Camera3D>; var lights:Scene3DLights; var scene:Scene3D; };
+typedef FlightDocumentScene3DMaterialization = { var cameras:Array<Camera3D>; var interactiveStateBindings:Array<FlightDocumentInteractiveStateBinding<Node3D>>; var layoutBindings:Array<FlightDocumentLayoutBinding<Node3D>>; var lights:Scene3DLights; var scene:Scene3D; };

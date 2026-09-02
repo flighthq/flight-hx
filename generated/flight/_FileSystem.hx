@@ -18,8 +18,12 @@ import flight.types.HasStorageFileSystem;
 
 @:noCompletion
 class _FileSystem {
-  public static function appendTextFile(host:HasStorageFileSystem, path:String, data:String):flight._internal._Promise<Bool> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).appendTextFile, cast ([path, data] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(false));
+  public static function appendTextFile(host:HasStorageFileSystem, path:String, data:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    var append:Null<String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType0 = signal; __hostType0 == null ? _Runtime.UNDEFINED : __hostType0.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    append = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).appendTextFile;
+    if ((cast _Runtime.strictEquals(append, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(false); }
+    return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(append, cast ([(cast path : String), (cast data : String)] : Array<Dynamic>)) #else append((cast path : String), (cast data : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Bool>) : Dynamic) : (cast (cast append((cast path : String), (cast data : String), ({ final __callArgument1:Dynamic = signal; __callArgument1; })) : flight._internal._Promise<Bool>) : Dynamic));
     return cast null;
   }
 
@@ -48,22 +52,22 @@ class _FileSystem {
     return cast null;
   }
 
-  public static function findFiles(host:HasStorageFileSystem, rootPath:String, pattern:String):flight._internal._Promise<Array<FileEntry>> {
+  public static function findFiles(host:HasStorageFileSystem, rootPath:String, pattern:String, ?options:FileWalkOptions):flight._internal._Promise<Array<FileEntry>> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var all:Array<FileEntry> = cast _Runtime.UNDEFINED;
         var re:flight._internal._Any = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast (#if js _Runtime.callValue(readDirectoryRecursive, cast ([({ final __callArgument5:Dynamic = host; __callArgument5; }), (cast rootPath : String)] : Array<Dynamic>)) #else readDirectoryRecursive(({ final __callArgument4:Dynamic = host; __callArgument4; }), (cast rootPath : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Array<FileEntry>>), function(__awaitValue2:Dynamic):Dynamic {
-          all = __awaitValue2;
-          var __flowBranch3:Dynamic;
+        return flight._internal._Async.flatMap((cast readDirectoryRecursive(({ final __callArgument9:Dynamic = host; __callArgument9; }), (cast rootPath : String), ({ final __callArgument10:Dynamic = options; __callArgument10; })) : flight._internal._Promise<Array<FileEntry>>), function(__awaitValue7:Dynamic):Dynamic {
+          all = __awaitValue7;
+          var __flowBranch8:Dynamic;
           if ((cast _Runtime.strictEquals(_Runtime.field(all, 'length'), 0.0) : Bool)) {
-            __flowBranch3 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch8 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(cast ([] : Array<Dynamic>));
             });
           } else {
-            __flowBranch3 = flight._internal._Async.flowNormal();
+            __flowBranch8 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch3, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch8, function():Dynamic {
             re = _FileSystem.globToRegExp__filesystem((cast pattern : String));
             return flight._internal._Async.flowReturn((cast _Runtime.filterArray((cast all : Array<FileEntry>), function(entry:FileEntry, __unused0:Float, __unused1:Array<FileEntry>):Bool return ((cast _Runtime.callProperty(re, 'test', cast ([entry.name] : Array<Dynamic>)) : Bool) || (cast _Runtime.callProperty(re, 'test', cast ([entry.path] : Array<Dynamic>)) : Bool)), _Runtime.UNDEFINED)));
           });
@@ -150,53 +154,81 @@ class _FileSystem {
     return cast null;
   }
 
-  public static function openFileReadStream(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).openFileReadStream, cast ([path] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(null));
+  public static function openFileReadStream(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>> {
+    var open:Null<String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType17 = signal; __hostType17 == null ? _Runtime.UNDEFINED : __hostType17.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    open = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).openFileReadStream;
+    if ((cast _Runtime.strictEquals(open, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(null); }
+    return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(open, cast ([(cast path : String)] : Array<Dynamic>)) #else open((cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>>) : Dynamic) : (cast (cast open((cast path : String), ({ final __callArgument18:Dynamic = signal; __callArgument18; })) : flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>>) : Dynamic));
     return cast null;
   }
 
-  public static function openFileWriteStream(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).openFileWriteStream, cast ([path] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(null));
+  public static function openFileWriteStream(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>> {
+    var open:Null<String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType20 = signal; __hostType20 == null ? _Runtime.UNDEFINED : __hostType20.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    open = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).openFileWriteStream;
+    if ((cast _Runtime.strictEquals(open, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(null); }
+    return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(open, cast ([(cast path : String)] : Array<Dynamic>)) #else open((cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>>) : Dynamic) : (cast (cast open((cast path : String), ({ final __callArgument21:Dynamic = signal; __callArgument21; })) : flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>>) : Dynamic));
     return cast null;
   }
 
-  public static function readBinaryFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).readBinaryFile, cast ([path] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(null));
+  public static function readBinaryFile(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    var read:Null<String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType23 = signal; __hostType23 == null ? _Runtime.UNDEFINED : __hostType23.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    read = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).readBinaryFile;
+    if ((cast _Runtime.strictEquals(read, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(null); }
+    return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(read, cast ([(cast path : String)] : Array<Dynamic>)) #else read((cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Null<flight._internal._UInt8Array>>) : Dynamic) : (cast (cast read((cast path : String), ({ final __callArgument24:Dynamic = signal; __callArgument24; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>) : Dynamic));
     return cast null;
   }
 
-  public static function readBinaryFileRange(host:HasStorageFileSystem, path:String, offset:Float, length:Float):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).readBinaryFileRange, cast ([path, offset, length] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(null));
+  public static function readBinaryFileRange(host:HasStorageFileSystem, path:String, offset:Float, length:Float, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    var read:Null<String->Float->Float->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType26 = signal; __hostType26 == null ? _Runtime.UNDEFINED : __hostType26.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    read = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).readBinaryFileRange;
+    if ((cast _Runtime.strictEquals(read, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(null); }
+    return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(read, cast ([(cast path : String), (cast offset : Float), (cast length : Float)] : Array<Dynamic>)) #else read((cast path : String), (cast offset : Float), (cast length : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Null<flight._internal._UInt8Array>>) : Dynamic) : (cast (cast read((cast path : String), (cast offset : Float), (cast length : Float), ({ final __callArgument27:Dynamic = signal; __callArgument27; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>) : Dynamic));
     return cast null;
   }
 
-  public static function readDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+  public static function readDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      var read:Null<Void->flight._internal._Promise<Null<flight._internal._UInt8Array>>> = cast _Runtime.UNDEFINED;
-      if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) { return cast (cast readBinaryFile(({ final __callArgument10:Dynamic = host; __callArgument10; }), (cast handle.path : String)) : flight._internal._Promise<Null<flight._internal._UInt8Array>>); }
-      read = ({ final __structural14 = (cast getFileDialogHandleOperations(({ final __callArgument12:Dynamic = handle; __callArgument12; })) : Null<FileDialogHandleOperations>); __structural14 == null ? _Runtime.UNDEFINED : (cast __structural14 : { @:optional var readBinary:Null<Void->flight._internal._Promise<Null<flight._internal._UInt8Array>>>; }).readBinary; });
-      return cast ((cast _Runtime.strictEquals(read, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast (cast read() : flight._internal._Promise<Null<flight._internal._UInt8Array>>) : Dynamic));
+      var read:Null<Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>> = cast _Runtime.UNDEFINED;
+      if (_Runtime.truthy(({ final __hostType29 = signal; __hostType29 == null ? _Runtime.UNDEFINED : __hostType29.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+      if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) { return cast (cast readBinaryFile(({ final __callArgument30:Dynamic = host; __callArgument30; }), (cast handle.path : String), ({ final __callArgument31:Dynamic = signal; __callArgument31; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>); }
+      read = ({ final __structural36 = (cast getFileDialogHandleOperations(({ final __callArgument34:Dynamic = handle; __callArgument34; })) : Null<FileDialogHandleOperations>); __structural36 == null ? _Runtime.UNDEFINED : (cast __structural36 : { @:optional var readBinary:Null<Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<flight._internal._UInt8Array>>>; }).readBinary; });
+      if ((cast _Runtime.strictEquals(read, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
+      return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(read, cast ([] : Array<Dynamic>)) #else read(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Null<flight._internal._UInt8Array>>) : Dynamic) : (cast (cast read(({ final __callArgument37:Dynamic = signal; __callArgument37; })) : flight._internal._Promise<Null<flight._internal._UInt8Array>>) : Dynamic));
       return cast null;
     }));
   }
 
-  public static function readDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle):flight._internal._Promise<Null<String>> {
+  public static function readDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<String>> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      var read:Null<Void->flight._internal._Promise<Null<String>>> = cast _Runtime.UNDEFINED;
-      if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) { return cast (cast readTextFile(({ final __callArgument15:Dynamic = host; __callArgument15; }), (cast handle.path : String)) : flight._internal._Promise<Null<String>>); }
-      read = ({ final __structural19 = (cast getFileDialogHandleOperations(({ final __callArgument17:Dynamic = handle; __callArgument17; })) : Null<FileDialogHandleOperations>); __structural19 == null ? _Runtime.UNDEFINED : (cast __structural19 : { @:optional var readText:Null<Void->flight._internal._Promise<Null<String>>>; }).readText; });
-      return cast ((cast _Runtime.strictEquals(read, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast null : Dynamic) : (cast (cast read() : flight._internal._Promise<Null<String>>) : Dynamic));
+      var read:Null<Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>> = cast _Runtime.UNDEFINED;
+      ({ final __hostTypeCall39 = signal; __hostTypeCall39 == null ? _Runtime.UNDEFINED : __hostTypeCall39.throwIfAborted(); });
+      if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) { return cast (cast readTextFile(({ final __callArgument40:Dynamic = host; __callArgument40; }), (cast handle.path : String), ({ final __callArgument41:Dynamic = signal; __callArgument41; })) : flight._internal._Promise<Null<String>>); }
+      read = ({ final __structural46 = (cast getFileDialogHandleOperations(({ final __callArgument44:Dynamic = handle; __callArgument44; })) : Null<FileDialogHandleOperations>); __structural46 == null ? _Runtime.UNDEFINED : (cast __structural46 : { @:optional var readText:Null<Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>>; }).readText; });
+      if ((cast _Runtime.strictEquals(read, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
+      return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(read, cast ([] : Array<Dynamic>)) #else read(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Null<String>>) : Dynamic) : (cast (cast read(({ final __callArgument47:Dynamic = signal; __callArgument47; })) : flight._internal._Promise<Null<String>>) : Dynamic));
       return cast null;
     }));
   }
 
-  public static function readDirectory(host:HasStorageFileSystem, path:String):flight._internal._Promise<Array<FileEntry>> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).readDirectory, cast ([path] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(cast ([] : Array<Dynamic>)));
+  public static function readDirectory(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Array<FileEntry>> {
+    var read:Null<String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Array<FileEntry>>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType49 = signal; __hostType49 == null ? _Runtime.UNDEFINED : __hostType49.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    read = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).readDirectory;
+    if ((cast _Runtime.strictEquals(read, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(cast ([] : Array<Dynamic>)); }
+    return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(read, cast ([(cast path : String)] : Array<Dynamic>)) #else read((cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Array<FileEntry>>) : Dynamic) : (cast (cast read((cast path : String), ({ final __callArgument50:Dynamic = signal; __callArgument50; })) : flight._internal._Promise<Array<FileEntry>>) : Dynamic));
     return cast null;
   }
 
   public static function readDirectoryRecursive(host:HasStorageFileSystem, path:String, ?options:FileWalkOptions):flight._internal._Promise<Array<FileEntry>> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).readDirectoryRecursive, cast ([path, options] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(cast ([] : Array<Dynamic>)));
+    var read:Null<String->Null<FileWalkOptions>->flight._internal._Promise<Array<FileEntry>>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType53 = ({ final __typedStruct52 = options; __typedStruct52 == null ? _Runtime.UNDEFINED : __typedStruct52.signal; }); __hostType53 == null ? _Runtime.UNDEFINED : (cast __hostType53 : flight._internal.dom.AbortSignal).aborted; }))) { return cast flight._internal._Async.reject((cast options.signal : flight._internal.dom.AbortSignal).reason); }
+    read = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).readDirectoryRecursive;
+    if ((cast _Runtime.strictEquals(read, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(cast ([] : Array<Dynamic>)); }
+    return cast ((cast _Runtime.strictEquals(options, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(read, cast ([(cast path : String)] : Array<Dynamic>)) #else read((cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Array<FileEntry>>) : Dynamic) : (cast (cast read((cast path : String), ({ final __callArgument54:Dynamic = options; __callArgument54; })) : flight._internal._Promise<Array<FileEntry>>) : Dynamic));
     return cast null;
   }
 
@@ -205,8 +237,12 @@ class _FileSystem {
     return cast null;
   }
 
-  public static function readTextFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<String>> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).readTextFile, cast ([path] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(null));
+  public static function readTextFile(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<String>> {
+    var read:Null<String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Null<String>>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType56 = signal; __hostType56 == null ? _Runtime.UNDEFINED : __hostType56.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    read = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).readTextFile;
+    if ((cast _Runtime.strictEquals(read, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(null); }
+    return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(read, cast ([(cast path : String)] : Array<Dynamic>)) #else read((cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Null<String>>) : Dynamic) : (cast (cast read((cast path : String), ({ final __callArgument57:Dynamic = signal; __callArgument57; })) : flight._internal._Promise<Null<String>>) : Dynamic));
     return cast null;
   }
 
@@ -242,55 +278,119 @@ class _FileSystem {
     return cast null;
   }
 
-  public static function writeBinaryFile(host:HasStorageFileSystem, path:String, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).writeBinaryFile, cast ([path, data] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(false));
+  public static function writeBinaryFile(host:HasStorageFileSystem, path:String, data:flight._internal._UInt8Array, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    var write:Null<String->flight._internal._UInt8Array->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType59 = signal; __hostType59 == null ? _Runtime.UNDEFINED : __hostType59.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    write = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).writeBinaryFile;
+    if ((cast _Runtime.strictEquals(write, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(false); }
+    return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(write, cast ([(cast path : String), ({ final __callArgument61:Dynamic = data; __callArgument61; })] : Array<Dynamic>)) #else write((cast path : String), ({ final __callArgument60:Dynamic = data; __callArgument60; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Bool>) : Dynamic) : (cast (cast write((cast path : String), ({ final __callArgument62:Dynamic = data; __callArgument62; }), ({ final __callArgument63:Dynamic = signal; __callArgument63; })) : flight._internal._Promise<Bool>) : Dynamic));
     return cast null;
   }
 
-  public static function writeBinaryFileChunks(host:HasStorageFileSystem, path:String, chunks:Dynamic):flight._internal._Promise<Bool> {
+  public static function writeBinaryFileChunks(host:HasStorageFileSystem, path:String, chunks:Dynamic, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var stream:Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>> = cast _Runtime.UNDEFINED;
         var writer:flight._internal.dom.WritableStreamDefaultWriter<flight._internal._UInt8Array> = cast _Runtime.UNDEFINED;
-        return flight._internal._Async.flatMap((cast openFileWriteStream(({ final __callArgument31:Dynamic = host; __callArgument31; }), (cast path : String)) : flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>>), function(__awaitValue24:Dynamic):Dynamic {
-          stream = __awaitValue24;
-          var __flowBranch25:Dynamic;
+        var aborted:Bool = cast _Runtime.UNDEFINED;
+        var abortPromise:Null<flight._internal._Promise<flight._internal._Nothing>> = cast _Runtime.UNDEFINED;
+        var onAbort:Void->Void = cast _Runtime.UNDEFINED;
+        ({ final __hostTypeCall87 = signal; __hostTypeCall87 == null ? _Runtime.UNDEFINED : __hostTypeCall87.throwIfAborted(); });
+        return flight._internal._Async.flatMap((cast openFileWriteStream(({ final __callArgument108:Dynamic = host; __callArgument108; }), (cast path : String), ({ final __callArgument109:Dynamic = signal; __callArgument109; })) : flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>>), function(__awaitValue88:Dynamic):Dynamic {
+          stream = __awaitValue88;
+          var __flowBranch89:Dynamic;
           if ((cast _Runtime.strictEquals(stream, null) : Bool)) {
-            __flowBranch25 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch89 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn(false);
             });
           } else {
-            __flowBranch25 = flight._internal._Async.flowNormal();
+            __flowBranch89 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch25, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch89, function():Dynamic {
             writer = (cast stream : flight._internal.dom.WritableStream<Dynamic>).getWriter();
-            return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-              var __flowIterator26:Dynamic = _Runtime.asyncIterator(chunks);
-              return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-                return flight._internal._Async.flatMap(_Runtime.callProperty(__flowIterator26, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
-                  if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flight._internal._Async.flowBreak();
-                  var chunk:Dynamic = _Runtime.field(__step, 'value');
-                  return flight._internal._Async.flatMap((cast writer : flight._internal.dom.WritableStreamDefaultWriter<Dynamic>).write(_Runtime.slice(chunk, 0, null)), function(__awaitValue28:Dynamic):Dynamic {
-                    __awaitValue28;
-                    return flight._internal._Async.flowNormal();
+            var __flowBranch91:Dynamic;
+            if (_Runtime.truthy(({ final __hostType90 = signal; __hostType90 == null ? _Runtime.UNDEFINED : __hostType90.aborted; }))) {
+              __flowBranch91 = flight._internal._Async.protect(function():Dynamic {
+                return flight._internal._Async.flatMap(flight._internal._Async.recover((cast writer : flight._internal.dom.WritableStreamDefaultWriter<Dynamic>).abort(signal.reason), function(__unused2:flight._internal._Any):Void {
+
+                }), function(__awaitValue92:Dynamic):Dynamic {
+                  __awaitValue92;
+                  return flight._internal._Async.reject(signal.reason);
+                });
+              });
+            } else {
+              __flowBranch91 = flight._internal._Async.flowNormal();
+            }
+            return flight._internal._Async.continueFlow(__flowBranch91, function():Dynamic {
+              aborted = false;
+              abortPromise = null;
+              onAbort = function():Void {
+                (aborted = cast (true : Dynamic));
+                (abortPromise = cast (flight._internal._Async.recover((cast writer : flight._internal.dom.WritableStreamDefaultWriter<Dynamic>).abort(({ final __hostType94 = signal; __hostType94 == null ? _Runtime.UNDEFINED : __hostType94.reason; })), function(__unused3:flight._internal._Any):Void {
+
+                }) : Dynamic));
+              };
+              ({ final __hostTypeCall95 = signal; __hostTypeCall95 == null ? _Runtime.UNDEFINED : __hostTypeCall95.addEventListener('abort', onAbort, { once: true }); });
+              return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
+                var __flowIterator96:Dynamic = _Runtime.asyncIterator(chunks);
+                return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
+                  return flight._internal._Async.flatMap(_Runtime.callProperty(__flowIterator96, 'next', cast ([] : Array<Dynamic>)), function(__step:Dynamic):Dynamic {
+                    if (_Runtime.truthy(_Runtime.field(__step, 'done'))) return flight._internal._Async.flowBreak();
+                    var chunk:Dynamic = _Runtime.field(__step, 'value');
+                    ({ final __hostTypeCall98 = signal; __hostTypeCall98 == null ? _Runtime.UNDEFINED : __hostTypeCall98.throwIfAborted(); });
+                    return flight._internal._Async.flatMap((cast writer : flight._internal.dom.WritableStreamDefaultWriter<Dynamic>).write(_Runtime.slice(chunk, 0, null)), function(__awaitValue99:Dynamic):Dynamic {
+                      __awaitValue99;
+                      return flight._internal._Async.flowNormal();
+                    });
+                  });
+                }), function():Dynamic {
+                  ({ final __hostTypeCall100 = signal; __hostTypeCall100 == null ? _Runtime.UNDEFINED : __hostTypeCall100.throwIfAborted(); });
+                  return flight._internal._Async.flatMap((cast writer : flight._internal.dom.WritableStreamDefaultWriter<Dynamic>).close(), function(__awaitValue101:Dynamic):Dynamic {
+                    __awaitValue101;
+                    return flight._internal._Async.flowReturn(true);
+                  });
+                });
+              }), function(__caughtError:Dynamic):Dynamic {
+                var __error:Dynamic = __caughtError;
+                return flight._internal._Async.protect(function():Dynamic {
+                  var __flowBranch102:Dynamic;
+                  if ((cast _Runtime.strictEquals(abortPromise, null) : Bool)) {
+                    __flowBranch102 = flight._internal._Async.protect(function():Dynamic {
+                      return flight._internal._Async.flatMap(flight._internal._Async.recover((cast writer : flight._internal.dom.WritableStreamDefaultWriter<Dynamic>).abort(), function(__unused4:flight._internal._Any):Void {
+
+                      }), function(__awaitValue103:Dynamic):Dynamic {
+                        __awaitValue103;
+                        return flight._internal._Async.flowNormal();
+                      });
+                    });
+                  } else {
+                    __flowBranch102 = flight._internal._Async.protect(function():Dynamic {
+                      return flight._internal._Async.flatMap(abortPromise, function(__awaitValue104:Dynamic):Dynamic {
+                        __awaitValue104;
+                        return flight._internal._Async.flowNormal();
+                      });
+                    });
+                  }
+                  return flight._internal._Async.continueFlow(__flowBranch102, function():Dynamic {
+                    var __flowBranch105:Dynamic;
+                    if ((cast aborted : Bool)) {
+                      __flowBranch105 = flight._internal._Async.protect(function():Dynamic {
+                        return flight._internal._Async.reject(({ final __hostType106 = signal; __hostType106 == null ? _Runtime.UNDEFINED : __hostType106.reason; }));
+                      });
+                    } else {
+                      __flowBranch105 = flight._internal._Async.flowNormal();
+                    }
+                    return flight._internal._Async.continueFlow(__flowBranch105, function():Dynamic {
+                      return flight._internal._Async.flowReturn(false);
+                    });
                   });
                 });
               }), function():Dynamic {
-                return flight._internal._Async.flatMap((cast writer : flight._internal.dom.WritableStreamDefaultWriter<Dynamic>).close(), function(__awaitValue29:Dynamic):Dynamic {
-                  __awaitValue29;
-                  return flight._internal._Async.flowReturn(true);
-                });
+                ({ final __hostTypeCall107 = signal; __hostTypeCall107 == null ? _Runtime.UNDEFINED : __hostTypeCall107.removeEventListener('abort', onAbort); });
+                return flight._internal._Async.flowNormal();
+              }), function():Dynamic {
+                return flight._internal._Async.flowNormal();
               });
-            }), function(__caughtError:Dynamic):Dynamic {
-              var __error:Dynamic = __caughtError;
-              return flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap((cast writer : flight._internal.dom.WritableStreamDefaultWriter<Dynamic>).abort(), function(__awaitValue30:Dynamic):Dynamic {
-                  __awaitValue30;
-                  return flight._internal._Async.flowReturn(false);
-                });
-              });
-            }), function():Dynamic {
-              return flight._internal._Async.flowNormal();
             });
           });
         });
@@ -298,33 +398,45 @@ class _FileSystem {
     );
   }
 
-  public static function writeDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
+  public static function writeDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:flight._internal._UInt8Array, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      var write:Null<flight._internal._UInt8Array->flight._internal._Promise<Bool>> = cast _Runtime.UNDEFINED;
-      if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) { return cast (cast writeBinaryFile(({ final __callArgument33:Dynamic = host; __callArgument33; }), (cast handle.path : String), ({ final __callArgument34:Dynamic = data; __callArgument34; })) : flight._internal._Promise<Bool>); }
-      write = ({ final __structural39 = (cast getFileDialogHandleOperations(({ final __callArgument37:Dynamic = handle; __callArgument37; })) : Null<FileDialogHandleOperations>); __structural39 == null ? _Runtime.UNDEFINED : (cast __structural39 : { @:optional var writeBinary:Null<flight._internal._UInt8Array->flight._internal._Promise<Bool>>; }).writeBinary; });
-      return cast ((cast _Runtime.strictEquals(write, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast false : Dynamic) : (cast (cast write(({ final __callArgument40:Dynamic = data; __callArgument40; })) : flight._internal._Promise<Bool>) : Dynamic));
+      var write:Null<flight._internal._UInt8Array->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>> = cast _Runtime.UNDEFINED;
+      ({ final __hostTypeCall112 = signal; __hostTypeCall112 == null ? _Runtime.UNDEFINED : __hostTypeCall112.throwIfAborted(); });
+      if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) { return cast (cast writeBinaryFile(({ final __callArgument113:Dynamic = host; __callArgument113; }), (cast handle.path : String), ({ final __callArgument114:Dynamic = data; __callArgument114; }), ({ final __callArgument115:Dynamic = signal; __callArgument115; })) : flight._internal._Promise<Bool>); }
+      write = ({ final __structural121 = (cast getFileDialogHandleOperations(({ final __callArgument119:Dynamic = handle; __callArgument119; })) : Null<FileDialogHandleOperations>); __structural121 == null ? _Runtime.UNDEFINED : (cast __structural121 : { @:optional var writeBinary:Null<flight._internal._UInt8Array->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>>; }).writeBinary; });
+      if ((cast _Runtime.strictEquals(write, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
+      return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(write, cast ([({ final __callArgument123:Dynamic = data; __callArgument123; })] : Array<Dynamic>)) #else write(({ final __callArgument122:Dynamic = data; __callArgument122; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Bool>) : Dynamic) : (cast (cast write(({ final __callArgument124:Dynamic = data; __callArgument124; }), ({ final __callArgument125:Dynamic = signal; __callArgument125; })) : flight._internal._Promise<Bool>) : Dynamic));
       return cast null;
     }));
   }
 
-  public static function writeDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:String):flight._internal._Promise<Bool> {
+  public static function writeDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
     return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-      var write:Null<String->flight._internal._Promise<Bool>> = cast _Runtime.UNDEFINED;
-      if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) { return cast (cast writeTextFile(({ final __callArgument42:Dynamic = host; __callArgument42; }), (cast handle.path : String), (cast data : String)) : flight._internal._Promise<Bool>); }
-      write = ({ final __structural46 = (cast getFileDialogHandleOperations(({ final __callArgument44:Dynamic = handle; __callArgument44; })) : Null<FileDialogHandleOperations>); __structural46 == null ? _Runtime.UNDEFINED : (cast __structural46 : { @:optional var writeText:Null<String->flight._internal._Promise<Bool>>; }).writeText; });
-      return cast ((cast _Runtime.strictEquals(write, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast false : Dynamic) : (cast (cast write((cast data : String)) : flight._internal._Promise<Bool>) : Dynamic));
+      var write:Null<String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>> = cast _Runtime.UNDEFINED;
+      ({ final __hostTypeCall128 = signal; __hostTypeCall128 == null ? _Runtime.UNDEFINED : __hostTypeCall128.throwIfAborted(); });
+      if ((cast !_Runtime.strictEquals(handle.path, null) : Bool)) { return cast (cast writeTextFile(({ final __callArgument129:Dynamic = host; __callArgument129; }), (cast handle.path : String), (cast data : String), ({ final __callArgument130:Dynamic = signal; __callArgument130; })) : flight._internal._Promise<Bool>); }
+      write = ({ final __structural135 = (cast getFileDialogHandleOperations(({ final __callArgument133:Dynamic = handle; __callArgument133; })) : Null<FileDialogHandleOperations>); __structural135 == null ? _Runtime.UNDEFINED : (cast __structural135 : { @:optional var writeText:Null<String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>>; }).writeText; });
+      if ((cast _Runtime.strictEquals(write, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast false; }
+      return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(write, cast ([(cast data : String)] : Array<Dynamic>)) #else write((cast data : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Bool>) : Dynamic) : (cast (cast write((cast data : String), ({ final __callArgument136:Dynamic = signal; __callArgument136; })) : flight._internal._Promise<Bool>) : Dynamic));
       return cast null;
     }));
   }
 
-  public static function writeFileAtomic(host:HasStorageFileSystem, path:String, data:flight._internal._Union2<flight._internal._UInt8Array, String>):flight._internal._Promise<Bool> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).writeFileAtomic, cast ([path, data] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(false));
+  public static function writeFileAtomic(host:HasStorageFileSystem, path:String, data:flight._internal._Union2<flight._internal._UInt8Array, String>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    var write:Null<String->flight._internal._Union2<String, flight._internal._UInt8Array>->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType138 = signal; __hostType138 == null ? _Runtime.UNDEFINED : __hostType138.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    write = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).writeFileAtomic;
+    if ((cast _Runtime.strictEquals(write, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(false); }
+    return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(write, cast ([(cast path : String), ({ final __callArgument140:Dynamic = data; __callArgument140; })] : Array<Dynamic>)) #else write((cast path : String), ({ final __callArgument139:Dynamic = data; __callArgument139; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Bool>) : Dynamic) : (cast (cast write((cast path : String), ({ final __callArgument141:Dynamic = data; __callArgument141; }), ({ final __callArgument142:Dynamic = signal; __callArgument142; })) : flight._internal._Promise<Bool>) : Dynamic));
     return cast null;
   }
 
-  public static function writeTextFile(host:HasStorageFileSystem, path:String, data:String):flight._internal._Promise<Bool> {
-    return cast _Runtime.coalesce(_Runtime.callOptionalValue((cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).writeTextFile, cast ([path, data] : Array<Dynamic>)), function():Dynamic return cast flight._internal._Async.resolve(false));
+  public static function writeTextFile(host:HasStorageFileSystem, path:String, data:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    var write:Null<String->String->Null<flight._internal.dom.AbortSignal>->flight._internal._Promise<Bool>> = cast _Runtime.UNDEFINED;
+    if (_Runtime.truthy(({ final __hostType145 = signal; __hostType145 == null ? _Runtime.UNDEFINED : __hostType145.aborted; }))) { return cast flight._internal._Async.reject(signal.reason); }
+    write = (cast (cast (cast host : HasStorageFileSystem).storage : { var fileSystem:FileSystemHostBackend; }).fileSystem : FileSystemHostBackend).writeTextFile;
+    if ((cast _Runtime.strictEquals(write, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast flight._internal._Async.resolve(false); }
+    return cast ((cast _Runtime.strictEquals(signal, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast (cast (#if js _Runtime.callValue(write, cast ([(cast path : String), (cast data : String)] : Array<Dynamic>)) #else write((cast path : String), (cast data : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : flight._internal._Promise<Bool>) : Dynamic) : (cast (cast write((cast path : String), (cast data : String), ({ final __callArgument146:Dynamic = signal; __callArgument146; })) : flight._internal._Promise<Bool>) : Dynamic));
     return cast null;
   }
 
@@ -350,7 +462,7 @@ class _FileSystem {
   }
 
   public static function splitPath__filesystem(path:String):Array<String> {
-    return cast (cast _Runtime.filterArray((cast _Runtime.callProperty(path, 'split', cast (['/'] : Array<Dynamic>)) : Array<String>), function(segment:String, __unused2:Float, __unused3:Array<String>):Bool return ((cast !_Runtime.strictEquals(segment, '') : Bool) && (cast !_Runtime.strictEquals(segment, '.') : Bool)), _Runtime.UNDEFINED));
+    return cast (cast _Runtime.filterArray((cast _Runtime.callProperty(path, 'split', cast (['/'] : Array<Dynamic>)) : Array<String>), function(segment:String, __unused5:Float, __unused6:Array<String>):Bool return ((cast !_Runtime.strictEquals(segment, '') : Bool) && (cast !_Runtime.strictEquals(segment, '.') : Bool)), _Runtime.UNDEFINED));
     return cast null;
   }
 }

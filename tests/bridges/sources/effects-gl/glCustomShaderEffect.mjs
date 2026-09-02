@@ -7,6 +7,7 @@ const api = compiled.flight._EffectsGl;
 function __syncDependencies() {
   compiled.flight._RenderGl.drawGlFullscreenPass = __dependency0.drawGlFullscreenPass;
   compiled.flight._EffectsGl.getGlEffectProgram = __dependency1.getGlEffectProgram;
+  compiled.flight._EffectsGl.getGlEffectUniformLocation = __dependency1.getGlEffectUniformLocation;
 }
 __syncDependencies();
 

@@ -618,7 +618,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free vertex-displacement modifier options',
   },
   {
-    declarationFingerprint: 'sha256:2ad7549c058e1efa23cb19f7996356cd3cc5f03d86fc0819502c27ee9e1ef575',
+    declarationFingerprint: 'sha256:a54f58b205d53b959529e62ab802c89eab67ac85849468b97f99d2f06f71e5aa',
     id: '@flighthq/types:interface#InteractionManager',
     purpose: 'reviewed escape-free interaction manager',
   },
@@ -633,12 +633,12 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free pointer event data',
   },
   {
-    declarationFingerprint: 'sha256:1a80443ef92b7e9bc7ac2dd87e10ced28db13469f8d2df5f858aa35a5a986944',
+    declarationFingerprint: 'sha256:c1566a9ef3f76a0a5845445ebb0ad24f240f195794ca401aff5832dc9ead917b',
     id: '@flighthq/types:interface#NodeInteractionState',
     purpose: 'reviewed escape-free node interaction state',
   },
   {
-    declarationFingerprint: 'sha256:6c846f5649ce0d7c3800c0bf309bebafb3e4bc1f67b56d12bc9e2acce5c9d262',
+    declarationFingerprint: 'sha256:2c60e479926c797a20ea429b5a01bfba2c2b8d18bb72b90d1cad2d33d7bf9d60',
     id: '@flighthq/types:interface#InteractionPointerState',
     purpose: 'reviewed escape-free interaction pointer state',
   },
@@ -1258,7 +1258,7 @@ export const reviewedTypedStructDirectAdditions: readonly ReviewedTypedStructDir
     purpose: 'reviewed escape-free shaded-material options',
   },
   {
-    declarationFingerprint: 'sha256:b38af857c9f1ced8a0efa777f84273e301f75abdceb65a7180dd2eef56c4802d',
+    declarationFingerprint: 'sha256:d113313a017369bd2254f2d17a856a87160bc56d6a23b1099d81bb802192ff51',
     id: '@flighthq/types:interface#RenderEffectPadding',
     purpose: 'reviewed escape-free render-effect padding',
   },

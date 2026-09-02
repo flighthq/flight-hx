@@ -4,9 +4,13 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight.Types.EntityRuntimeKey;
+import flight._Interaction.applyNodeInteractiveStates;
+import flight._Interaction.disposeNodeInteractiveStateBinding;
 import flight._Interaction.enableInteractionSignals;
+import flight._Interaction.getFocusedNode;
 import flight._Interaction.getNodeHitArea;
 import flight._Interaction.isNodeHitTestEnabled;
+import flight._Interaction.setFocusedNode;
 import flight._Interaction.setNodeHitArea;
 import flight._Interaction.setNodeHitTestEnabled;
 import flight._Node.getNodeHeight;
@@ -40,10 +44,15 @@ import flight.types.ComboBoxControllerOptions;
 import flight.types.ComboBoxControllerSignals;
 import flight.types.Entity;
 import flight.types.EntityRuntime;
+import flight.types.FocusManager;
+import flight.types.GuiDialog;
+import flight.types.GuiDialogCloseResult;
+import flight.types.GuiDialogEntry;
+import flight.types.GuiDialogOptions;
+import flight.types.GuiDialogSignals;
 import flight.types.GuiOrientation;
 import flight.types.GuiTransitionDescriptor;
 import flight.types.GuiTransitionProperty;
-import flight.types.GuiTransitionRequest;
 import flight.types.GuiTransitionValue;
 import flight.types.InputKeyboardData;
 import flight.types.InputTextData;
@@ -54,6 +63,11 @@ import flight.types.ListControllerOptions;
 import flight.types.ListControllerSignals;
 import flight.types.Node2D;
 import flight.types.NodeAny;
+import flight.types.NodeInteractiveStateBinding;
+import flight.types.NodeInteractiveStateFlags;
+import flight.types.NodeInteractiveStateProperty;
+import flight.types.NodeInteractiveStateTransitionRequest;
+import flight.types.NodeInteractiveStateTransitionValue;
 import flight.types.Path;
 import flight.types.PointerEventData;
 import flight.types.ProgressBarController;
@@ -106,11 +120,13 @@ import flight.types.WindowController;
 import flight.types.WindowControllerOptions;
 import flight.types.WindowControllerSignals;
 
-typedef ButtonControllerFields__buttonController = { var disabled:Bool; var downState:Null<Node2D>; var over:Bool; var overState:Null<Node2D>; var pressed:Bool; var signals:ButtonControllerSignals; var upState:Null<Node2D>; };
+typedef ButtonControllerFields__buttonController = { var disabled:Bool; var downState:Null<Node2D>; var interactiveStateBinding:Null<NodeInteractiveStateBinding>; var over:Bool; var overState:Null<Node2D>; var pressed:Bool; var signals:ButtonControllerSignals; var upState:Null<Node2D>; };
 
 typedef ComboBoxControllerFields__comboBoxController = { var button:Null<ButtonController>; var display:Null<Node2D>; var list:Null<ListController>; var open:Bool; var signals:ComboBoxControllerSignals; };
 
 typedef GuiControllerRuntime__guiController = { >EntityRuntime, var cleanups:Array<Void->Void>; var disposed:Bool; var hitStates:flight._internal._Map<Node2D, Bool>; var transition:Null<GuiTransitionDescriptor>; };
+
+typedef GuiDialogFields__guiDialog = { var backdrop:Null<Node2D>; var entries:Array<GuiDialogEntry>; var focusManager:Null<FocusManager<Node2D>>; var hasFocusSnapshot:Bool; var previousFocus:Null<Node2D>; var signals:GuiDialogSignals; };
 
 typedef ListControllerFields__listController = { var baseContentY:Float; var content:Null<Node2D>; var items:Array<Node2D>; var scrollBar:Null<ScrollBarController>; var selectable:Bool; var selectedIndex:Float; var signals:ListControllerSignals; var viewport:Null<Node2D>; };
 
@@ -145,7 +161,7 @@ class _Gui {
     var controller:ButtonController = cast _Runtime.UNDEFINED;
     var target:Node2D = cast _Runtime.UNDEFINED;
     var release:Void->Void = cast _Runtime.UNDEFINED;
-    runtime = (cast createGuiControllerRuntime((cast { disabled: _Runtime.coalesce(_Runtime.field(options, 'disabled'), function():Dynamic return cast false), downState: _Runtime.coalesce(_Runtime.field(options, 'downState'), function():Dynamic return cast null), over: false, overState: _Runtime.coalesce(_Runtime.field(options, 'overState'), function():Dynamic return cast null), pressed: false, signals: { onClick: (cast createSignal() : Signal<Void->Void>), onPress: (cast createSignal() : Signal<Void->Void>), onRelease: (cast createSignal() : Signal<Void->Void>) }, upState: _Runtime.field(options, 'upState') } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >ButtonControllerFields__buttonController, >GuiControllerRuntime__guiController, });
+    runtime = (cast createGuiControllerRuntime((cast { disabled: _Runtime.coalesce(_Runtime.field(options, 'disabled'), function():Dynamic return cast false), downState: _Runtime.coalesce(_Runtime.field(options, 'downState'), function():Dynamic return cast null), interactiveStateBinding: _Runtime.coalesce(_Runtime.field(options, 'interactiveStateBinding'), function():Dynamic return cast null), over: false, overState: _Runtime.coalesce(_Runtime.field(options, 'overState'), function():Dynamic return cast null), pressed: false, signals: { onClick: (cast createSignal() : Signal<Void->Void>), onPress: (cast createSignal() : Signal<Void->Void>), onRelease: (cast createSignal() : Signal<Void->Void>) }, upState: _Runtime.field(options, 'upState') } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >ButtonControllerFields__buttonController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : ButtonController);
     target = _Runtime.field(options, 'upState');
     if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'hitArea'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { configureGuiHitArea((cast runtime : Dynamic), ({ final __callArgument0:Dynamic = target; __callArgument0; }), _Runtime.field(options, 'hitArea')); }
@@ -184,7 +200,9 @@ class _Gui {
     var runtime:{ >ButtonControllerFields__buttonController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     runtime = (cast getGuiControllerRuntime(({ final __callArgument30:Dynamic = controller; __callArgument30; })) : { >ButtonControllerFields__buttonController, >GuiControllerRuntime__guiController, });
     disposeGuiController(({ final __callArgument32:Dynamic = controller; __callArgument32; }), ({ final __callArgument33:Dynamic = function():Void {
+      if ((cast !_Runtime.strictEquals((cast runtime : { var interactiveStateBinding:Null<NodeInteractiveStateBinding>; }).interactiveStateBinding, null) : Bool)) { disposeNodeInteractiveStateBinding((cast runtime : { var interactiveStateBinding:Null<NodeInteractiveStateBinding>; }).interactiveStateBinding); }
       ((cast runtime : { var downState:Null<Node2D>; }).downState = null);
+      ((cast runtime : { var interactiveStateBinding:Null<NodeInteractiveStateBinding>; }).interactiveStateBinding = null);
       ((cast runtime : { var overState:Null<Node2D>; }).overState = null);
       ((cast runtime : { var upState:Null<Node2D>; }).upState = null);
     }; __callArgument33; }));
@@ -217,6 +235,9 @@ class _Gui {
     setGuiVisible((cast runtime : Dynamic), (cast runtime : { var upState:Null<Node2D>; }).upState, (cast ((cast !(cast down : Bool) : Bool) && (cast !(cast over : Bool) : Bool)) : Bool));
     setGuiVisible((cast runtime : Dynamic), (cast runtime : { var overState:Null<Node2D>; }).overState, (cast over : Bool));
     setGuiVisible((cast runtime : Dynamic), (cast runtime : { var downState:Null<Node2D>; }).downState, (cast down : Bool));
+    if ((cast !_Runtime.strictEquals((cast runtime : { var interactiveStateBinding:Null<NodeInteractiveStateBinding>; }).interactiveStateBinding, null) : Bool)) {
+      (cast applyNodeInteractiveStates((cast runtime : { var interactiveStateBinding:Null<NodeInteractiveStateBinding>; }).interactiveStateBinding, ({ final __callArgument42:Dynamic = { disabled: (cast runtime : { var disabled:Bool; }).disabled, hovered: (cast runtime : { var over:Bool; }).over, pressed: (cast runtime : { var pressed:Bool; }).pressed }; __callArgument42; })) : Bool);
+    }
   }
 
   public static function createComboBoxController(options:ComboBoxControllerOptions):ComboBoxController {
@@ -224,13 +245,13 @@ class _Gui {
     var controller:ComboBoxController = cast _Runtime.UNDEFINED;
     runtime = (cast createGuiControllerRuntime((cast { button: _Runtime.field(options, 'button'), display: _Runtime.coalesce(_Runtime.field(options, 'display'), function():Dynamic return cast null), list: _Runtime.field(options, 'list'), open: _Runtime.coalesce(_Runtime.field(options, 'open'), function():Dynamic return cast false), signals: { onChange: (cast createSignal() : Signal<Float->Void>), onOpenChange: (cast createSignal() : Signal<Bool->Void>) } } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : ComboBoxController);
-    connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getButtonControllerSignals(_Runtime.field(options, 'button')) : ButtonControllerSignals), 'onClick') : Dynamic), ({ final __callArgument44:Dynamic = function():Void {
-      setComboBoxControllerOpen(({ final __callArgument42:Dynamic = controller; __callArgument42; }), (cast !(cast (cast runtime : { var open:Bool; }).open : Bool) : Bool));
-    }; __callArgument44; }));
-    connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getListControllerSignals(_Runtime.field(options, 'list')) : ListControllerSignals), 'onSelect') : Dynamic), ({ final __callArgument50:Dynamic = function(index:Float):Void {
+    connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getButtonControllerSignals(_Runtime.field(options, 'button')) : ButtonControllerSignals), 'onClick') : Dynamic), ({ final __callArgument46:Dynamic = function():Void {
+      setComboBoxControllerOpen(({ final __callArgument44:Dynamic = controller; __callArgument44; }), (cast !(cast (cast runtime : { var open:Bool; }).open : Bool) : Bool));
+    }; __callArgument46; }));
+    connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getListControllerSignals(_Runtime.field(options, 'list')) : ListControllerSignals), 'onSelect') : Dynamic), ({ final __callArgument52:Dynamic = function(index:Float):Void {
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:ComboBoxControllerSignals; }).signals : ComboBoxControllerSignals).onChange], [index]]), 1);
-      setComboBoxControllerOpen(({ final __callArgument48:Dynamic = controller; __callArgument48; }), (cast false : Bool));
-    }; __callArgument50; }));
+      setComboBoxControllerOpen(({ final __callArgument50:Dynamic = controller; __callArgument50; }), (cast false : Bool));
+    }; __callArgument52; }));
     setListControllerVisible(_Runtime.field(options, 'list'), (cast (cast runtime : { var open:Bool; }).open : Bool));
     return cast controller;
     return cast null;
@@ -238,27 +259,27 @@ class _Gui {
 
   public static function disposeComboBoxController(controller:ComboBoxController):Void {
     var runtime:{ >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument54:Dynamic = controller; __callArgument54; })) : { >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument56:Dynamic = controller; __callArgument56; }), ({ final __callArgument57:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument56:Dynamic = controller; __callArgument56; })) : { >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument58:Dynamic = controller; __callArgument58; }), ({ final __callArgument59:Dynamic = function():Void {
       ((cast runtime : { var button:Null<ButtonController>; }).button = null);
       ((cast runtime : { var display:Null<Node2D>; }).display = null);
       ((cast runtime : { var list:Null<ListController>; }).list = null);
-    }; __callArgument57; }));
+    }; __callArgument59; }));
   }
 
   public static function getComboBoxControllerSignals(controller:ComboBoxController):ComboBoxControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument60:Dynamic = controller; __callArgument60; })) : { >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, }) : { var signals:ComboBoxControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument62:Dynamic = controller; __callArgument62; })) : { >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, }) : { var signals:ComboBoxControllerSignals; }).signals;
     return cast null;
   }
 
   public static function isComboBoxControllerOpen(controller:ComboBoxController):Bool {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument62:Dynamic = controller; __callArgument62; })) : { >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, }) : { var open:Bool; }).open;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument64:Dynamic = controller; __callArgument64; })) : { >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, }) : { var open:Bool; }).open;
     return cast null;
   }
 
   public static function setComboBoxControllerOpen(controller:ComboBoxController, open:Bool):Void {
     var runtime:{ >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument64:Dynamic = controller; __callArgument64; })) : { >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument66:Dynamic = controller; __callArgument66; })) : { >ComboBoxControllerFields__comboBoxController, >GuiControllerRuntime__guiController, });
     if ((cast ((cast ((cast _Runtime.strictEquals((cast runtime : { var open:Bool; }).open, open) : Bool) || (cast _Runtime.strictEquals((cast runtime : { var list:Null<ListController>; }).list, null) : Bool)) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return; }
     ((cast runtime : { var open:Bool; }).open = open);
     setListControllerVisible((cast runtime : { var list:Null<ListController>; }).list, (cast open : Bool));
@@ -267,27 +288,27 @@ class _Gui {
 
   public static function clampGuiValue(value:Float, minimum:Float, maximum:Float):Float {
     if ((cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([value] : Array<Dynamic>)) : Bool) : Bool)) { return cast minimum; }
-    if ((cast ((cast minimum : Float) > (cast maximum : Float)) : Bool)) { ({ var __destructure66:Dynamic = cast ([maximum, minimum] : Array<Dynamic>); minimum = cast flight._internal._StaticIndex.readArray(__destructure66, 0); maximum = cast flight._internal._StaticIndex.readArray(__destructure66, 1); __destructure66; }); }
+    if ((cast ((cast minimum : Float) > (cast maximum : Float)) : Bool)) { ({ var __destructure68:Dynamic = cast ([maximum, minimum] : Array<Dynamic>); minimum = cast flight._internal._StaticIndex.readArray(__destructure68, 0); maximum = cast flight._internal._StaticIndex.readArray(__destructure68, 1); __destructure68; }); }
     return cast HxMath.max(minimum, HxMath.min(maximum, value));
     return cast null;
   }
 
   public static function configureGuiHitArea(runtime:GuiControllerRuntime__guiController, target:Node2D, hitArea:Node2D):Void {
     var previous:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Path, Rectangle>, String>, NodeAny>> = cast _Runtime.UNDEFINED;
-    previous = (cast getNodeHitArea(({ final __callArgument67:Dynamic = target; __callArgument67; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Path, Rectangle>, String>, NodeAny>>);
-    setNodeHitArea(({ final __callArgument69:Dynamic = target; __callArgument69; }), (cast hitArea : Dynamic));
-    _Runtime.callProperty((cast runtime : GuiControllerRuntime__guiController).cleanups, 'push', cast ([function():Void { setNodeHitArea(({ final __callArgument71:Dynamic = target; __callArgument71; }), (cast previous : Dynamic)); }] : Array<Dynamic>));
+    previous = (cast getNodeHitArea(({ final __callArgument69:Dynamic = target; __callArgument69; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<Path, Rectangle>, String>, NodeAny>>);
+    setNodeHitArea(({ final __callArgument71:Dynamic = target; __callArgument71; }), (cast hitArea : Dynamic));
+    _Runtime.callProperty((cast runtime : GuiControllerRuntime__guiController).cleanups, 'push', cast ([function():Void { setNodeHitArea(({ final __callArgument73:Dynamic = target; __callArgument73; }), (cast previous : Dynamic)); }] : Array<Dynamic>));
   }
 
   public static function connectGuiInteraction(runtime:GuiControllerRuntime__guiController, target:Node2D, name:String, slot:Array<flight._internal._Any>->Void):Void {
     var signal:Signal<Array<flight._internal._Any>->Void> = cast _Runtime.UNDEFINED;
     if ((cast !(cast ((cast (cast runtime : GuiControllerRuntime__guiController).hitStates : flight._internal._Map<Node2D, Bool>).has(target)) : Bool) : Bool)) {
-      ((cast (cast runtime : GuiControllerRuntime__guiController).hitStates : flight._internal._Map<Node2D, Bool>).set(target, (cast (cast isNodeHitTestEnabled(({ final __callArgument73:Dynamic = target; __callArgument73; })) : Bool))));
-      setNodeHitTestEnabled(({ final __callArgument75:Dynamic = target; __callArgument75; }), (cast true : Bool));
+      ((cast (cast runtime : GuiControllerRuntime__guiController).hitStates : flight._internal._Map<Node2D, Bool>).set(target, (cast (cast isNodeHitTestEnabled(({ final __callArgument75:Dynamic = target; __callArgument75; })) : Bool))));
+      setNodeHitTestEnabled(({ final __callArgument77:Dynamic = target; __callArgument77; }), (cast true : Bool));
     }
-    signal = (cast _Runtime.getIndex((cast (cast enableInteractionSignals : Node2D->InteractionSignals)(({ final __callArgument79:Dynamic = target; __callArgument79; })) : InteractionSignals), name) : Signal<Array<flight._internal._Any>->Void>);
-    (#if js _Runtime.callValue(connectSignal, cast ([({ final __callArgument83:Dynamic = signal; __callArgument83; }), ({ final __callArgument84:Dynamic = slot; __callArgument84; })] : Array<Dynamic>)) #else connectSignal(({ final __callArgument81:Dynamic = signal; __callArgument81; }), ({ final __callArgument82:Dynamic = slot; __callArgument82; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    _Runtime.callProperty((cast runtime : GuiControllerRuntime__guiController).cleanups, 'push', cast ([function():Void { (cast disconnectSignal : Signal<Array<flight._internal._Any>->Void>->(Array<flight._internal._Any>->Void)->Void)(({ final __callArgument85:Dynamic = signal; __callArgument85; }), ({ final __callArgument86:Dynamic = slot; __callArgument86; })); }] : Array<Dynamic>));
+    signal = (cast _Runtime.getIndex((cast (cast enableInteractionSignals : Node2D->InteractionSignals)(({ final __callArgument81:Dynamic = target; __callArgument81; })) : InteractionSignals), name) : Signal<Array<flight._internal._Any>->Void>);
+    (#if js _Runtime.callValue(connectSignal, cast ([({ final __callArgument85:Dynamic = signal; __callArgument85; }), ({ final __callArgument86:Dynamic = slot; __callArgument86; })] : Array<Dynamic>)) #else connectSignal(({ final __callArgument83:Dynamic = signal; __callArgument83; }), ({ final __callArgument84:Dynamic = slot; __callArgument84; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    _Runtime.callProperty((cast runtime : GuiControllerRuntime__guiController).cleanups, 'push', cast ([function():Void { (cast disconnectSignal : Signal<Array<flight._internal._Any>->Void>->(Array<flight._internal._Any>->Void)->Void)(({ final __callArgument87:Dynamic = signal; __callArgument87; }), ({ final __callArgument88:Dynamic = slot; __callArgument88; })); }] : Array<Dynamic>));
   }
 
   public static function connectGuiSignal<T>(runtime:GuiControllerRuntime__guiController, signal:Signal<T>, slot:T):Void {
@@ -309,7 +330,7 @@ class _Gui {
 
   public static function disposeGuiController(controller:Entity, clear:Void->Void):Void {
     var runtime:GuiControllerRuntime__guiController = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument89:Dynamic = controller; __callArgument89; })) : GuiControllerRuntime__guiController);
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument91:Dynamic = controller; __callArgument91; })) : GuiControllerRuntime__guiController);
     if ((cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
     ((cast runtime : { var disposed:Bool; }).disposed = true);
     {
@@ -323,7 +344,7 @@ class _Gui {
     for (__iteration0 in _Runtime.iterable((cast runtime : { var hitStates:flight._internal._Map<Node2D, Bool>; }).hitStates)) {
       var target:Node2D = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
       var enabled:Bool = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
-      setNodeHitTestEnabled(({ final __callArgument93:Dynamic = target; __callArgument93; }), (cast enabled : Bool));
+      setNodeHitTestEnabled(({ final __callArgument95:Dynamic = target; __callArgument95; }), (cast enabled : Bool));
     }
     ((cast (cast runtime : { var hitStates:flight._internal._Map<Node2D, Bool>; }).hitStates : flight._internal._Map<Node2D, Bool>).clear());
     clear();
@@ -345,20 +366,20 @@ class _Gui {
   }
 
   public static function setGuiPosition(runtime:GuiControllerRuntime__guiController, target:Null<Node2D>, orientation:GuiOrientation, value:Float):Void {
-    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument95:Dynamic = target; __callArgument95; }), ({ final __callArgument96:Dynamic = ((cast _Runtime.strictEquals(orientation, 'horizontal') : Bool) ? (cast 'x' : Dynamic) : (cast 'y' : Dynamic)); __callArgument96; }), ({ final __callArgument97:Dynamic = value; __callArgument97; }));
+    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument97:Dynamic = target; __callArgument97; }), ({ final __callArgument98:Dynamic = ((cast _Runtime.strictEquals(orientation, 'horizontal') : Bool) ? (cast 'x' : Dynamic) : (cast 'y' : Dynamic)); __callArgument98; }), ({ final __callArgument99:Dynamic = value; __callArgument99; }));
   }
 
   public static function setGuiScale(runtime:GuiControllerRuntime__guiController, target:Null<Node2D>, orientation:GuiOrientation, value:Float):Void {
-    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument101:Dynamic = target; __callArgument101; }), ({ final __callArgument102:Dynamic = ((cast _Runtime.strictEquals(orientation, 'horizontal') : Bool) ? (cast 'scaleX' : Dynamic) : (cast 'scaleY' : Dynamic)); __callArgument102; }), ({ final __callArgument103:Dynamic = value; __callArgument103; }));
+    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument103:Dynamic = target; __callArgument103; }), ({ final __callArgument104:Dynamic = ((cast _Runtime.strictEquals(orientation, 'horizontal') : Bool) ? (cast 'scaleX' : Dynamic) : (cast 'scaleY' : Dynamic)); __callArgument104; }), ({ final __callArgument105:Dynamic = value; __callArgument105; }));
   }
 
   public static function setGuiVisible(runtime:GuiControllerRuntime__guiController, target:Null<Node2D>, visible:Bool):Void {
-    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument107:Dynamic = target; __callArgument107; }), ({ final __callArgument108:Dynamic = 'visible'; __callArgument108; }), ({ final __callArgument109:Dynamic = visible; __callArgument109; }));
+    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument109:Dynamic = target; __callArgument109; }), ({ final __callArgument110:Dynamic = 'visible'; __callArgument110; }), ({ final __callArgument111:Dynamic = visible; __callArgument111; }));
   }
 
   public static function setGuiVisualProperty(runtime:GuiControllerRuntime__guiController, target:Null<Node2D>, property:GuiTransitionProperty, value:GuiTransitionValue):Void {
     var from:flight._internal._Union2<Float, Bool> = cast _Runtime.UNDEFINED;
-    var apply:GuiTransitionValue->Void = cast _Runtime.UNDEFINED;
+    var apply:NodeInteractiveStateTransitionValue->Void = cast _Runtime.UNDEFINED;
     if ((cast ((cast _Runtime.strictEquals(target, null) : Bool) || (cast (cast runtime : GuiControllerRuntime__guiController).disposed : Bool)) : Bool)) { return; }
     from = _Runtime.getIndex(target, property);
     if ((cast _Runtime.strictEquals(from, value) : Bool)) { return; }
@@ -377,27 +398,161 @@ class _Gui {
     return cast null;
   }
 
+  public static function closeGuiDialog(dialog:GuiDialog, result:GuiDialogCloseResult):Bool {
+    var runtime:{ >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
+    var active:GuiDialogEntry = cast _Runtime.UNDEFINED;
+    var next:GuiDialogEntry = cast _Runtime.UNDEFINED;
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument115:Dynamic = dialog; __callArgument115; })) : { >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, });
+    active = flight._internal._StaticIndex.readArray((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries, 0.0);
+    if ((cast ((cast ((cast (cast runtime : { var disposed:Bool; }).disposed : Bool) || (cast _Runtime.strictEquals(active, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool) || (cast !_Runtime.strictEquals(_Runtime.field(active, 'id'), _Runtime.field(result, 'entryId')) : Bool)) : Bool)) { return cast false; }
+    _Runtime.callProperty((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries, 'shift', cast ([] : Array<Dynamic>));
+    setGuiVisible((cast runtime : Dynamic), ({ final __callArgument117:Dynamic = _Runtime.field(active, 'root'); __callArgument117; }), (cast false : Bool));
+    next = _Runtime.coalesce(flight._internal._StaticIndex.readArray((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries, 0.0), function():Dynamic return cast null);
+    if ((cast _Runtime.strictEquals(next, null) : Bool)) {
+      setGuiVisible((cast runtime : Dynamic), (cast runtime : { var backdrop:Null<Node2D>; }).backdrop, (cast false : Bool));
+      _Gui.restoreGuiDialogFocus__guiDialog((cast runtime : Dynamic));
+    } else {
+      _Gui.activateGuiDialogEntry__guiDialog((cast runtime : Dynamic), ({ final __callArgument119:Dynamic = next; __callArgument119; }));
+    }
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:GuiDialogSignals; }).signals : GuiDialogSignals).onActiveChange], [next]]), 1);
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:GuiDialogSignals; }).signals : GuiDialogSignals).onQueueChange]]), 1);
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:GuiDialogSignals; }).signals : GuiDialogSignals).onClose], [result]]), 1);
+    return cast true;
+    return cast null;
+  }
+
+  public static function createGuiDialog(?options:GuiDialogOptions):GuiDialog {
+    if (options == null) options = cast ({  } : Dynamic);
+    var runtime:{ >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
+    var dialog:GuiDialog = cast _Runtime.UNDEFINED;
+    runtime = (cast createGuiControllerRuntime((cast { backdrop: _Runtime.coalesce(_Runtime.field(options, 'backdrop'), function():Dynamic return cast null), entries: cast ([] : Array<Dynamic>), focusManager: _Runtime.coalesce(_Runtime.field(options, 'focusManager'), function():Dynamic return cast null), hasFocusSnapshot: false, previousFocus: null, signals: { onActiveChange: (cast createSignal() : Signal<Null<GuiDialogEntry>->Void>), onClose: (cast createSignal() : Signal<GuiDialogCloseResult->Void>), onQueueChange: (cast createSignal() : Signal<Void->Void>) } } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, });
+    dialog = (cast createGuiController((cast runtime : Dynamic)) : GuiDialog);
+    if ((cast !_Runtime.strictEquals((cast runtime : { var backdrop:Null<Node2D>; }).backdrop, null) : Bool)) {
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var backdrop:Null<Node2D>; }).backdrop, (cast 'onClick' : String), ({ final __callArgument125:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+        var active:GuiDialogEntry = cast _Runtime.UNDEFINED;
+        active = flight._internal._StaticIndex.readArray((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries, 0.0);
+        if ((cast !_Runtime.strictEquals(_Runtime.optionalField(active, 'dismissOnBackdrop'), true) : Bool)) { return; }
+        (cast closeGuiDialog(({ final __callArgument121:Dynamic = dialog; __callArgument121; }), ({ final __callArgument122:Dynamic = { entryId: _Runtime.field(active, 'id'), reason: 'dismissed' }; __callArgument122; })) : Bool);
+      }, cast ([] : Array<Dynamic>)); }; __callArgument125; }));
+    }
+    setGuiVisible((cast runtime : Dynamic), (cast runtime : { var backdrop:Null<Node2D>; }).backdrop, (cast false : Bool));
+    return cast dialog;
+    return cast null;
+  }
+
+  public static function disposeGuiDialog(dialog:GuiDialog):Void {
+    var runtime:{ >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument131:Dynamic = dialog; __callArgument131; })) : { >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, });
+    if ((cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) { return; }
+    for (entry in _Runtime.iterable((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries)) {
+      setGuiVisible((cast runtime : Dynamic), ({ final __callArgument135:Dynamic = _Runtime.field(entry, 'root'); __callArgument135; }), (cast false : Bool));
+    }
+    setGuiVisible((cast runtime : Dynamic), (cast runtime : { var backdrop:Null<Node2D>; }).backdrop, (cast false : Bool));
+    _Gui.restoreGuiDialogFocus__guiDialog((cast runtime : Dynamic));
+    disposeGuiController(({ final __callArgument137:Dynamic = dialog; __callArgument137; }), ({ final __callArgument138:Dynamic = function():Void {
+      ((cast runtime : { var backdrop:Null<Node2D>; }).backdrop = null);
+      _Runtime.setLength((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries, 0.0);
+      ((cast runtime : { var focusManager:Null<FocusManager<Node2D>>; }).focusManager = null);
+      ((cast runtime : { var previousFocus:Null<Node2D>; }).previousFocus = null);
+    }; __callArgument138; }));
+  }
+
+  public static function enqueueGuiDialog(dialog:GuiDialog, entry:GuiDialogEntry):Bool {
+    var runtime:{ >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
+    var activate:Bool = cast _Runtime.UNDEFINED;
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument141:Dynamic = dialog; __callArgument141; })) : { >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, });
+    if ((cast ((cast (cast runtime : { var disposed:Bool; }).disposed : Bool) || (cast _Runtime.callProperty((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries, 'some', cast ([function(candidate:GuiDialogEntry, __unused1:Float, __unused2:Array<GuiDialogEntry>):Bool return _Runtime.strictEquals(_Runtime.field(candidate, 'id'), _Runtime.field(entry, 'id'))] : Array<Dynamic>)) : Bool)) : Bool)) { return cast false; }
+    activate = _Runtime.strictEquals(_Runtime.field((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries, 'length'), 0.0);
+    _Runtime.callProperty((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries, 'push', cast ([entry] : Array<Dynamic>));
+    if ((cast activate : Bool)) {
+      _Gui.snapshotGuiDialogFocus__guiDialog((cast runtime : Dynamic));
+      _Gui.activateGuiDialogEntry__guiDialog((cast runtime : Dynamic), ({ final __callArgument143:Dynamic = entry; __callArgument143; }));
+      _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:GuiDialogSignals; }).signals : GuiDialogSignals).onActiveChange], [entry]]), 1);
+    } else {
+      setGuiVisible((cast runtime : Dynamic), ({ final __callArgument145:Dynamic = _Runtime.field(entry, 'root'); __callArgument145; }), (cast false : Bool));
+    }
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:GuiDialogSignals; }).signals : GuiDialogSignals).onQueueChange]]), 1);
+    return cast true;
+    return cast null;
+  }
+
+  public static function getActiveGuiDialogEntry(dialog:GuiDialog):Null<GuiDialogEntry> {
+    return cast _Runtime.coalesce(flight._internal._StaticIndex.readArray((cast (cast getGuiControllerRuntime(({ final __callArgument147:Dynamic = dialog; __callArgument147; })) : { >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, }) : { var entries:Array<GuiDialogEntry>; }).entries, 0.0), function():Dynamic return cast null);
+    return cast null;
+  }
+
+  public static function getGuiDialogEntries(dialog:GuiDialog, ?out:Array<GuiDialogEntry>):Array<GuiDialogEntry> {
+    if (out == null) out = cast (cast ([] : Array<Dynamic>) : Dynamic);
+    var entries:Array<GuiDialogEntry> = cast _Runtime.UNDEFINED;
+    entries = (cast (cast getGuiControllerRuntime(({ final __callArgument149:Dynamic = dialog; __callArgument149; })) : { >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, }) : { var entries:Array<GuiDialogEntry>; }).entries;
+    _Runtime.setLength(out, 0.0);
+    _Runtime.callProperty(out, 'push', _Runtime.concatArrays([_Runtime.toArray(entries)]));
+    return cast out;
+    return cast null;
+  }
+
+  public static function getGuiDialogSignals(dialog:GuiDialog):GuiDialogSignals {
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument151:Dynamic = dialog; __callArgument151; })) : { >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, }) : { var signals:GuiDialogSignals; }).signals;
+    return cast null;
+  }
+
+  public static function removeGuiDialogEntry(dialog:GuiDialog, id:String):Bool {
+    var runtime:{ >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
+    var index:Float = cast _Runtime.UNDEFINED;
+    var __destructure4:Dynamic = cast _Runtime.UNDEFINED;
+    var removed:GuiDialogEntry = cast _Runtime.UNDEFINED;
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument153:Dynamic = dialog; __callArgument153; })) : { >GuiDialogFields__guiDialog, >GuiControllerRuntime__guiController, });
+    if ((cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) { return cast false; }
+    index = _Runtime.findIndex((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries, function(entry:GuiDialogEntry, entryIndex:Float, __unused3:Array<GuiDialogEntry>):Bool return ((cast ((cast entryIndex : Float) > (cast 0.0 : Float)) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(entry, 'id'), id) : Bool)));
+    if ((cast ((cast index : Float) < (cast 0.0 : Float)) : Bool)) { return cast false; }
+    __destructure4 = _Runtime.splice((cast runtime : { var entries:Array<GuiDialogEntry>; }).entries, Std.int(index), Std.int(1.0), []);
+    removed = flight._internal._StaticIndex.readArray(__destructure4, 0.0);
+    setGuiVisible((cast runtime : Dynamic), ({ final __callArgument155:Dynamic = _Runtime.field(removed, 'root'); __callArgument155; }), (cast false : Bool));
+    _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:GuiDialogSignals; }).signals : GuiDialogSignals).onQueueChange]]), 1);
+    return cast true;
+    return cast null;
+  }
+
+  public static function activateGuiDialogEntry__guiDialog(runtime:Dynamic, entry:GuiDialogEntry):Void {
+    setGuiVisible((cast runtime : Dynamic), ({ final __callArgument157:Dynamic = _Runtime.field(entry, 'root'); __callArgument157; }), (cast true : Bool));
+    setGuiVisible((cast runtime : Dynamic), (cast runtime : { var backdrop:Null<Node2D>; }).backdrop, (cast true : Bool));
+    if ((cast ((cast !_Runtime.strictEquals((cast runtime : { var focusManager:Null<FocusManager<Node2D>>; }).focusManager, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.field(entry, 'initialFocus'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { (cast (cast setFocusedNode : FocusManager<Node2D>->Null<Node2D>->Bool)((cast runtime : { var focusManager:Null<FocusManager<Node2D>>; }).focusManager, ({ final __callArgument159:Dynamic = _Runtime.field(entry, 'initialFocus'); __callArgument159; })) : Bool); }
+  }
+
+  public static function restoreGuiDialogFocus__guiDialog(runtime:Dynamic):Void {
+    if ((cast ((cast !(cast (cast runtime : { var hasFocusSnapshot:Bool; }).hasFocusSnapshot : Bool) : Bool) || (cast _Runtime.strictEquals((cast runtime : { var focusManager:Null<FocusManager<Node2D>>; }).focusManager, null) : Bool)) : Bool)) { return; }
+    (cast (cast setFocusedNode : FocusManager<Node2D>->Null<Node2D>->Bool)((cast runtime : { var focusManager:Null<FocusManager<Node2D>>; }).focusManager, (cast runtime : { var previousFocus:Null<Node2D>; }).previousFocus) : Bool);
+    ((cast runtime : { var hasFocusSnapshot:Bool; }).hasFocusSnapshot = false);
+    ((cast runtime : { var previousFocus:Null<Node2D>; }).previousFocus = null);
+  }
+
+  public static function snapshotGuiDialogFocus__guiDialog(runtime:Dynamic):Void {
+    if ((cast _Runtime.strictEquals((cast runtime : { var focusManager:Null<FocusManager<Node2D>>; }).focusManager, null) : Bool)) { return; }
+    ((cast runtime : { var previousFocus:Null<Node2D>; }).previousFocus = (cast (cast getFocusedNode : FocusManager<Node2D>->Null<Node2D>)((cast runtime : { var focusManager:Null<FocusManager<Node2D>>; }).focusManager) : Null<Node2D>));
+    ((cast runtime : { var hasFocusSnapshot:Bool; }).hasFocusSnapshot = true);
+  }
+
   public static function createListController(options:ListControllerOptions):ListController {
     var runtime:{ >ListControllerFields__listController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var controller:ListController = cast _Runtime.UNDEFINED;
     runtime = (cast createGuiControllerRuntime((cast { baseContentY: (cast _Runtime.field(options, 'content') : { var y:Float; }).y, content: _Runtime.field(options, 'content'), items: _Runtime.slice(_Runtime.field(options, 'items'), 0, null), scrollBar: _Runtime.coalesce(_Runtime.field(options, 'scrollBar'), function():Dynamic return cast null), selectable: _Runtime.coalesce(_Runtime.field(options, 'selectable'), function():Dynamic return cast true), selectedIndex: (cast _Gui.normalizeListIndex__listController((cast _Runtime.coalesce(_Runtime.field(options, 'selectedIndex'), function():Dynamic return cast -1.0) : Float), (cast _Runtime.field(_Runtime.field(options, 'items'), 'length') : Float)) : Float), signals: { onActivate: (cast createSignal() : Signal<Float->Void>), onSelect: (cast createSignal() : Signal<Float->Void>) }, viewport: _Runtime.field(options, 'viewport') } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : ListController);
     _Runtime.forEachArray((cast (cast runtime : { var items:Array<Node2D>; }).items : Array<Node2D>), function(item:Node2D, index:Float, __unused0:Array<Node2D>):Void {
-      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument113:Dynamic = item; __callArgument113; }), (cast 'onClick' : String), ({ final __callArgument116:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
-        if ((cast (cast runtime : { var selectable:Bool; }).selectable : Bool)) { setListControllerSelectedIndex(({ final __callArgument114:Dynamic = controller; __callArgument114; }), (cast index : Float)); }
-      }, cast ([] : Array<Dynamic>)); }; __callArgument116; }));
-      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument121:Dynamic = item; __callArgument121; }), (cast 'onDoubleClick' : String), ({ final __callArgument122:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:ListControllerSignals; }).signals : ListControllerSignals).onActivate], [index]]), 1); }, cast ([] : Array<Dynamic>)); }; __callArgument122; }));
-      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument125:Dynamic = item; __callArgument125; }), (cast 'onKeyDown' : String), ({ final __callArgument130:Dynamic = function(data:KeyboardEventData):Void {
-        _Gui.handleListControllerKeyDown__listController(({ final __callArgument126:Dynamic = controller; __callArgument126; }), ({ final __callArgument127:Dynamic = data; __callArgument127; }));
-      }; __callArgument130; }));
+      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument161:Dynamic = item; __callArgument161; }), (cast 'onClick' : String), ({ final __callArgument164:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+        if ((cast (cast runtime : { var selectable:Bool; }).selectable : Bool)) { setListControllerSelectedIndex(({ final __callArgument162:Dynamic = controller; __callArgument162; }), (cast index : Float)); }
+      }, cast ([] : Array<Dynamic>)); }; __callArgument164; }));
+      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument169:Dynamic = item; __callArgument169; }), (cast 'onDoubleClick' : String), ({ final __callArgument170:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:ListControllerSignals; }).signals : ListControllerSignals).onActivate], [index]]), 1); }, cast ([] : Array<Dynamic>)); }; __callArgument170; }));
+      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument173:Dynamic = item; __callArgument173; }), (cast 'onKeyDown' : String), ({ final __callArgument178:Dynamic = function(data:KeyboardEventData):Void {
+        _Gui.handleListControllerKeyDown__listController(({ final __callArgument174:Dynamic = controller; __callArgument174; }), ({ final __callArgument175:Dynamic = data; __callArgument175; }));
+      }; __callArgument178; }));
     }, _Runtime.UNDEFINED);
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onKeyDown' : String), ({ final __callArgument141:Dynamic = function(data:KeyboardEventData):Void {
-      _Gui.handleListControllerKeyDown__listController(({ final __callArgument137:Dynamic = controller; __callArgument137; }), ({ final __callArgument138:Dynamic = data; __callArgument138; }));
-    }; __callArgument141; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onKeyDown' : String), ({ final __callArgument189:Dynamic = function(data:KeyboardEventData):Void {
+      _Gui.handleListControllerKeyDown__listController(({ final __callArgument185:Dynamic = controller; __callArgument185; }), ({ final __callArgument186:Dynamic = data; __callArgument186; }));
+    }; __callArgument189; }));
     if ((cast !_Runtime.strictEquals((cast runtime : { var scrollBar:Null<ScrollBarController>; }).scrollBar, null) : Bool)) {
-      connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getScrollBarControllerSignals((cast runtime : { var scrollBar:Null<ScrollBarController>; }).scrollBar) : ScrollBarControllerSignals), 'onChange') : Dynamic), ({ final __callArgument151:Dynamic = function(value:Float):Void {
-        setGuiVisualProperty((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, ({ final __callArgument147:Dynamic = 'y'; __callArgument147; }), ({ final __callArgument148:Dynamic = ((cast runtime : { var baseContentY:Float; }).baseContentY - value); __callArgument148; }));
-      }; __callArgument151; }));
+      connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getScrollBarControllerSignals((cast runtime : { var scrollBar:Null<ScrollBarController>; }).scrollBar) : ScrollBarControllerSignals), 'onChange') : Dynamic), ({ final __callArgument199:Dynamic = function(value:Float):Void {
+        setGuiVisualProperty((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, ({ final __callArgument195:Dynamic = 'y'; __callArgument195; }), ({ final __callArgument196:Dynamic = ((cast runtime : { var baseContentY:Float; }).baseContentY - value); __callArgument196; }));
+      }; __callArgument199; }));
     }
     return cast controller;
     return cast null;
@@ -405,29 +560,29 @@ class _Gui {
 
   public static function disposeListController(controller:ListController):Void {
     var runtime:{ >ListControllerFields__listController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument157:Dynamic = controller; __callArgument157; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument159:Dynamic = controller; __callArgument159; }), ({ final __callArgument160:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument205:Dynamic = controller; __callArgument205; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument207:Dynamic = controller; __callArgument207; }), ({ final __callArgument208:Dynamic = function():Void {
       ((cast runtime : { var content:Null<Node2D>; }).content = null);
       _Runtime.setLength((cast runtime : { var items:Array<Node2D>; }).items, 0.0);
       ((cast runtime : { var scrollBar:Null<ScrollBarController>; }).scrollBar = null);
       ((cast runtime : { var viewport:Null<Node2D>; }).viewport = null);
-    }; __callArgument160; }));
+    }; __callArgument208; }));
   }
 
   public static function getListControllerSelectedIndex(controller:ListController):Float {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument163:Dynamic = controller; __callArgument163; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, }) : { var selectedIndex:Float; }).selectedIndex;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument211:Dynamic = controller; __callArgument211; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, }) : { var selectedIndex:Float; }).selectedIndex;
     return cast null;
   }
 
   public static function getListControllerSignals(controller:ListController):ListControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument165:Dynamic = controller; __callArgument165; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, }) : { var signals:ListControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument213:Dynamic = controller; __callArgument213; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, }) : { var signals:ListControllerSignals; }).signals;
     return cast null;
   }
 
   public static function setListControllerSelectedIndex(controller:ListController, index:Float):Void {
     var runtime:{ >ListControllerFields__listController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var next:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument167:Dynamic = controller; __callArgument167; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument215:Dynamic = controller; __callArgument215; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, });
     next = (cast _Gui.normalizeListIndex__listController((cast index : Float), (cast _Runtime.field((cast runtime : { var items:Array<Node2D>; }).items, 'length') : Float)) : Float);
     if ((cast ((cast _Runtime.strictEquals((cast runtime : { var selectedIndex:Float; }).selectedIndex, next) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return; }
     ((cast runtime : { var selectedIndex:Float; }).selectedIndex = next);
@@ -436,15 +591,15 @@ class _Gui {
 
   public static function setListControllerVisible(controller:ListController, visible:Bool):Void {
     var runtime:{ >ListControllerFields__listController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument169:Dynamic = controller; __callArgument169; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument217:Dynamic = controller; __callArgument217; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, });
     setGuiVisible((cast runtime : Dynamic), (cast runtime : { var viewport:Null<Node2D>; }).viewport, (cast visible : Bool));
     setGuiVisible((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, (cast visible : Bool));
   }
 
   public static function handleListControllerKeyDown__listController(controller:ListController, data:KeyboardEventData):Void {
     var runtime:{ >ListControllerFields__listController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument171:Dynamic = controller; __callArgument171; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, });
-    if ((cast _Runtime.strictEquals(data.key, 'ArrowDown') : Bool)) { setListControllerSelectedIndex(({ final __callArgument173:Dynamic = controller; __callArgument173; }), (cast HxMath.min(_Runtime.subtractNumbers(_Runtime.field((cast runtime : { var items:Array<Node2D>; }).items, 'length'), 1.0), ((cast runtime : { var selectedIndex:Float; }).selectedIndex + 1.0)) : Float)); } else { if ((cast _Runtime.strictEquals(data.key, 'ArrowUp') : Bool)) { setListControllerSelectedIndex(({ final __callArgument175:Dynamic = controller; __callArgument175; }), (cast HxMath.max(0.0, ((cast runtime : { var selectedIndex:Float; }).selectedIndex - 1.0)) : Float)); } else { if ((cast _Runtime.strictEquals(data.key, 'Home') : Bool)) { setListControllerSelectedIndex(({ final __callArgument177:Dynamic = controller; __callArgument177; }), (cast ((cast _Runtime.strictEquals(_Runtime.field((cast runtime : { var items:Array<Node2D>; }).items, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float)); } else { if ((cast _Runtime.strictEquals(data.key, 'End') : Bool)) { setListControllerSelectedIndex(({ final __callArgument179:Dynamic = controller; __callArgument179; }), (cast _Runtime.subtractNumbers(_Runtime.field((cast runtime : { var items:Array<Node2D>; }).items, 'length'), 1.0) : Float)); } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'Enter') : Bool) && (cast ((cast (cast runtime : { var selectedIndex:Float; }).selectedIndex : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:ListControllerSignals; }).signals : ListControllerSignals).onActivate], [(cast runtime : { var selectedIndex:Float; }).selectedIndex]]), 1); } } } } }
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument219:Dynamic = controller; __callArgument219; })) : { >ListControllerFields__listController, >GuiControllerRuntime__guiController, });
+    if ((cast _Runtime.strictEquals(data.key, 'ArrowDown') : Bool)) { setListControllerSelectedIndex(({ final __callArgument221:Dynamic = controller; __callArgument221; }), (cast HxMath.min(_Runtime.subtractNumbers(_Runtime.field((cast runtime : { var items:Array<Node2D>; }).items, 'length'), 1.0), ((cast runtime : { var selectedIndex:Float; }).selectedIndex + 1.0)) : Float)); } else { if ((cast _Runtime.strictEquals(data.key, 'ArrowUp') : Bool)) { setListControllerSelectedIndex(({ final __callArgument223:Dynamic = controller; __callArgument223; }), (cast HxMath.max(0.0, ((cast runtime : { var selectedIndex:Float; }).selectedIndex - 1.0)) : Float)); } else { if ((cast _Runtime.strictEquals(data.key, 'Home') : Bool)) { setListControllerSelectedIndex(({ final __callArgument225:Dynamic = controller; __callArgument225; }), (cast ((cast _Runtime.strictEquals(_Runtime.field((cast runtime : { var items:Array<Node2D>; }).items, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast 0.0 : Dynamic)) : Float)); } else { if ((cast _Runtime.strictEquals(data.key, 'End') : Bool)) { setListControllerSelectedIndex(({ final __callArgument227:Dynamic = controller; __callArgument227; }), (cast _Runtime.subtractNumbers(_Runtime.field((cast runtime : { var items:Array<Node2D>; }).items, 'length'), 1.0) : Float)); } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'Enter') : Bool) && (cast ((cast (cast runtime : { var selectedIndex:Float; }).selectedIndex : Float) >= (cast 0.0 : Float)) : Bool)) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:ListControllerSignals; }).signals : ListControllerSignals).onActivate], [(cast runtime : { var selectedIndex:Float; }).selectedIndex]]), 1); } } } } }
   }
 
   public static function normalizeListIndex__listController(index:Float, length:Float):Float {
@@ -470,22 +625,22 @@ class _Gui {
 
   public static function disposeProgressBarController(controller:ProgressBarController):Void {
     var runtime:{ >ProgressBarControllerFields__progressBarController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument181:Dynamic = controller; __callArgument181; })) : { >ProgressBarControllerFields__progressBarController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument183:Dynamic = controller; __callArgument183; }), ({ final __callArgument184:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument229:Dynamic = controller; __callArgument229; })) : { >ProgressBarControllerFields__progressBarController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument231:Dynamic = controller; __callArgument231; }), ({ final __callArgument232:Dynamic = function():Void {
       ((cast runtime : { var fill:Null<Node2D>; }).fill = null);
       ((cast runtime : { var track:Null<Node2D>; }).track = null);
-    }; __callArgument184; }));
+    }; __callArgument232; }));
   }
 
   public static function getProgressBarControllerValue(controller:ProgressBarController):Float {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument187:Dynamic = controller; __callArgument187; })) : { >ProgressBarControllerFields__progressBarController, >GuiControllerRuntime__guiController, }) : { var value:Float; }).value;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument235:Dynamic = controller; __callArgument235; })) : { >ProgressBarControllerFields__progressBarController, >GuiControllerRuntime__guiController, }) : { var value:Float; }).value;
     return cast null;
   }
 
   public static function setProgressBarControllerValue(controller:ProgressBarController, value:Float):Void {
     var runtime:{ >ProgressBarControllerFields__progressBarController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var next:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument189:Dynamic = controller; __callArgument189; })) : { >ProgressBarControllerFields__progressBarController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument237:Dynamic = controller; __callArgument237; })) : { >ProgressBarControllerFields__progressBarController, >GuiControllerRuntime__guiController, });
     next = (cast clampGuiValue((cast value : Float), (cast (cast runtime : { var minimum:Float; }).minimum : Float), (cast (cast runtime : { var maximum:Float; }).maximum : Float)) : Float);
     if ((cast _Runtime.strictEquals((cast runtime : { var value:Float; }).value, next) : Bool)) { return; }
     ((cast runtime : { var value:Float; }).value = next);
@@ -506,31 +661,31 @@ class _Gui {
     runtime = (cast (#if js _Runtime.callValue(createGuiControllerRuntime, cast ([(cast { selectedIndex: -1.0, signals: { onChange: (cast createSignal() : Signal<Float->Void>) }, toggles: _Runtime.slice(_Runtime.field(options, 'toggles'), 0, null), updating: false } : Dynamic)] : Array<Dynamic>)) #else createGuiControllerRuntime((cast { selectedIndex: -1.0, signals: { onChange: (cast createSignal() : Signal<Float->Void>) }, toggles: _Runtime.slice(_Runtime.field(options, 'toggles'), 0, null), updating: false } : Dynamic), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : { >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : RadioGroupController);
     _Runtime.forEachArray((cast (cast runtime : { var toggles:Array<ToggleController>; }).toggles : Array<ToggleController>), function(toggle:ToggleController, index:Float, __unused0:Array<ToggleController>):Void {
-      connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getToggleControllerSignals(({ final __callArgument191:Dynamic = toggle; __callArgument191; })) : ToggleControllerSignals), 'onChange') : Dynamic), ({ final __callArgument197:Dynamic = function(checked:Bool):Void {
+      connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getToggleControllerSignals(({ final __callArgument239:Dynamic = toggle; __callArgument239; })) : ToggleControllerSignals), 'onChange') : Dynamic), ({ final __callArgument245:Dynamic = function(checked:Bool):Void {
         if ((cast (cast runtime : { var updating:Bool; }).updating : Bool)) { return; }
-        if ((cast checked : Bool)) { setRadioGroupControllerSelectedIndex(({ final __callArgument193:Dynamic = controller; __callArgument193; }), (cast index : Float)); } else { if ((cast _Runtime.strictEquals((cast runtime : { var selectedIndex:Float; }).selectedIndex, index) : Bool)) { setRadioGroupControllerSelectedIndex(({ final __callArgument195:Dynamic = controller; __callArgument195; }), (cast -1.0 : Float)); } }
-      }; __callArgument197; }));
+        if ((cast checked : Bool)) { setRadioGroupControllerSelectedIndex(({ final __callArgument241:Dynamic = controller; __callArgument241; }), (cast index : Float)); } else { if ((cast _Runtime.strictEquals((cast runtime : { var selectedIndex:Float; }).selectedIndex, index) : Bool)) { setRadioGroupControllerSelectedIndex(({ final __callArgument243:Dynamic = controller; __callArgument243; }), (cast -1.0 : Float)); } }
+      }; __callArgument245; }));
     }, _Runtime.UNDEFINED);
-    setRadioGroupControllerSelectedIndex(({ final __callArgument205:Dynamic = controller; __callArgument205; }), (cast _Runtime.coalesce(_Runtime.field(options, 'selectedIndex'), function():Dynamic return cast ((cast _Runtime.strictEquals(_Runtime.field((cast runtime : { var toggles:Array<ToggleController>; }).toggles, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast 0.0 : Dynamic))) : Float));
+    setRadioGroupControllerSelectedIndex(({ final __callArgument253:Dynamic = controller; __callArgument253; }), (cast _Runtime.coalesce(_Runtime.field(options, 'selectedIndex'), function():Dynamic return cast ((cast _Runtime.strictEquals(_Runtime.field((cast runtime : { var toggles:Array<ToggleController>; }).toggles, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast 0.0 : Dynamic))) : Float));
     return cast controller;
     return cast null;
   }
 
   public static function disposeRadioGroupController(controller:RadioGroupController):Void {
     var runtime:{ >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument207:Dynamic = controller; __callArgument207; })) : { >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument209:Dynamic = controller; __callArgument209; }), ({ final __callArgument210:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument255:Dynamic = controller; __callArgument255; })) : { >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument257:Dynamic = controller; __callArgument257; }), ({ final __callArgument258:Dynamic = function():Void {
       _Runtime.setLength((cast runtime : { var toggles:Array<ToggleController>; }).toggles, 0.0);
-    }; __callArgument210; }));
+    }; __callArgument258; }));
   }
 
   public static function getRadioGroupControllerSelectedIndex(controller:RadioGroupController):Float {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument213:Dynamic = controller; __callArgument213; })) : { >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, }) : { var selectedIndex:Float; }).selectedIndex;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument261:Dynamic = controller; __callArgument261; })) : { >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, }) : { var selectedIndex:Float; }).selectedIndex;
     return cast null;
   }
 
   public static function getRadioGroupControllerSignals(controller:RadioGroupController):RadioGroupControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument215:Dynamic = controller; __callArgument215; })) : { >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, }) : { var signals:RadioGroupControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument263:Dynamic = controller; __callArgument263; })) : { >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, }) : { var signals:RadioGroupControllerSignals; }).signals;
     return cast null;
   }
 
@@ -538,13 +693,13 @@ class _Gui {
     var runtime:{ >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var next:Float = cast _Runtime.UNDEFINED;
     var changed:Bool = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument217:Dynamic = controller; __callArgument217; })) : { >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument265:Dynamic = controller; __callArgument265; })) : { >RadioGroupControllerFields__radioGroupController, >GuiControllerRuntime__guiController, });
     next = ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field((cast runtime : { var toggles:Array<ToggleController>; }).toggles, 'length') : Float)) : Bool)) : Bool) ? (cast index : Dynamic) : (cast -1.0 : Dynamic));
     if ((cast _Runtime.strictEquals((cast runtime : { var selectedIndex:Float; }).selectedIndex, next) : Bool)) { return; }
     changed = !_Runtime.strictEquals((cast runtime : { var selectedIndex:Float; }).selectedIndex, next);
     ((cast runtime : { var selectedIndex:Float; }).selectedIndex = next);
     ((cast runtime : { var updating:Bool; }).updating = true);
-    _Runtime.forEachArray((cast (cast runtime : { var toggles:Array<ToggleController>; }).toggles : Array<ToggleController>), function(toggle:ToggleController, i:Float, __unused1:Array<ToggleController>):Void { setToggleControllerChecked(({ final __callArgument219:Dynamic = toggle; __callArgument219; }), (cast _Runtime.strictEquals(i, next) : Bool)); }, _Runtime.UNDEFINED);
+    _Runtime.forEachArray((cast (cast runtime : { var toggles:Array<ToggleController>; }).toggles : Array<ToggleController>), function(toggle:ToggleController, i:Float, __unused1:Array<ToggleController>):Void { setToggleControllerChecked(({ final __callArgument267:Dynamic = toggle; __callArgument267; }), (cast _Runtime.strictEquals(i, next) : Bool)); }, _Runtime.UNDEFINED);
     ((cast runtime : { var updating:Bool; }).updating = false);
     if ((cast changed : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:RadioGroupControllerSignals; }).signals : RadioGroupControllerSignals).onChange], [next]]), 1); }
   }
@@ -560,7 +715,7 @@ class _Gui {
     runtime = (cast createGuiControllerRuntime((cast { downButton: _Runtime.coalesce(_Runtime.field(options, 'downButton'), function():Dynamic return cast null), dragPointer: -1.0, dragStartCoordinate: 0.0, dragStartValue: minimum, lineSize: HxMath.abs(_Runtime.coalesce(_Runtime.field(options, 'lineSize'), function():Dynamic return cast 1.0)), maximum: maximum, minimum: minimum, orientation: _Runtime.coalesce(_Runtime.field(options, 'orientation'), function():Dynamic return cast 'vertical'), pageSize: HxMath.abs(_Runtime.coalesce(_Runtime.field(options, 'pageSize'), function():Dynamic return cast 10.0)), repeatInterval: HxMath.max(1.0, _Runtime.coalesce(_Runtime.field(options, 'repeatInterval'), function():Dynamic return cast 100.0)), repeatTimer: null, signals: { onChange: (cast createSignal() : Signal<Float->Void>) }, thumb: _Runtime.field(options, 'thumb'), track: _Runtime.field(options, 'track'), upButton: _Runtime.coalesce(_Runtime.field(options, 'upButton'), function():Dynamic return cast null), value: (cast clampGuiValue((cast _Runtime.coalesce(_Runtime.field(options, 'value'), function():Dynamic return cast minimum) : Float), (cast minimum : Float), (cast maximum : Float)) : Float) } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : ScrollBarController);
     _Runtime.callProperty((cast runtime : { var cleanups:Array<Void->Void>; }).cleanups, 'push', cast ([function():Void { _Gui.stopScrollBarRepeat__scrollBarController((cast runtime : Dynamic)); }] : Array<Dynamic>));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'track'), (cast 'onPointerDown' : String), ({ final __callArgument227:Dynamic = function(data:PointerEventData):Void {
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'track'), (cast 'onPointerDown' : String), ({ final __callArgument275:Dynamic = function(data:PointerEventData):Void {
       var coordinate:Float = cast _Runtime.UNDEFINED;
       var thumb:Null<Node2D> = cast _Runtime.UNDEFINED;
       var thumbPosition:Float = cast _Runtime.UNDEFINED;
@@ -568,32 +723,32 @@ class _Gui {
       coordinate = ((cast _Runtime.strictEquals((cast runtime : { var orientation:GuiOrientation; }).orientation, 'horizontal') : Bool) ? (cast data.localX : Dynamic) : (cast data.localY : Dynamic));
       thumb = (cast runtime : { var thumb:Null<Node2D>; }).thumb;
       if ((cast _Runtime.strictEquals(thumb, null) : Bool)) { return; }
-      thumbPosition = ((cast getGuiPosition(({ final __callArgument221:Dynamic = thumb; __callArgument221; }), (cast runtime : { var orientation:GuiOrientation; }).orientation) : Float) - (cast getGuiPosition(_Runtime.field(options, 'track'), (cast runtime : { var orientation:GuiOrientation; }).orientation) : Float));
-      delta = ((cast ((cast coordinate : Float) < (cast thumbPosition : Float)) : Bool) ? (cast -(cast runtime : { var pageSize:Float; }).pageSize : Dynamic) : (cast ((cast ((cast coordinate : Float) > (cast (thumbPosition + (cast getGuiLength(({ final __callArgument223:Dynamic = thumb; __callArgument223; }), (cast runtime : { var orientation:GuiOrientation; }).orientation) : Float)) : Float)) : Bool) ? (cast (cast runtime : { var pageSize:Float; }).pageSize : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
-      if ((cast !_Runtime.strictEquals(delta, 0.0) : Bool)) { setScrollBarControllerValue(({ final __callArgument225:Dynamic = controller; __callArgument225; }), (cast ((cast runtime : { var value:Float; }).value + delta) : Float)); }
-    }; __callArgument227; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerDown' : String), ({ final __callArgument235:Dynamic = function(data:PointerEventData):Void {
+      thumbPosition = ((cast getGuiPosition(({ final __callArgument269:Dynamic = thumb; __callArgument269; }), (cast runtime : { var orientation:GuiOrientation; }).orientation) : Float) - (cast getGuiPosition(_Runtime.field(options, 'track'), (cast runtime : { var orientation:GuiOrientation; }).orientation) : Float));
+      delta = ((cast ((cast coordinate : Float) < (cast thumbPosition : Float)) : Bool) ? (cast -(cast runtime : { var pageSize:Float; }).pageSize : Dynamic) : (cast ((cast ((cast coordinate : Float) > (cast (thumbPosition + (cast getGuiLength(({ final __callArgument271:Dynamic = thumb; __callArgument271; }), (cast runtime : { var orientation:GuiOrientation; }).orientation) : Float)) : Float)) : Bool) ? (cast (cast runtime : { var pageSize:Float; }).pageSize : Dynamic) : (cast 0.0 : Dynamic)) : Dynamic));
+      if ((cast !_Runtime.strictEquals(delta, 0.0) : Bool)) { setScrollBarControllerValue(({ final __callArgument273:Dynamic = controller; __callArgument273; }), (cast ((cast runtime : { var value:Float; }).value + delta) : Float)); }
+    }; __callArgument275; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerDown' : String), ({ final __callArgument283:Dynamic = function(data:PointerEventData):Void {
       ((cast runtime : { var dragPointer:Float; }).dragPointer = data.pointerId);
       ((cast runtime : { var dragStartCoordinate:Float; }).dragStartCoordinate = ((cast _Runtime.strictEquals((cast runtime : { var orientation:GuiOrientation; }).orientation, 'horizontal') : Bool) ? (cast data.worldX : Dynamic) : (cast data.worldY : Dynamic)));
       ((cast runtime : { var dragStartValue:Float; }).dragStartValue = (cast runtime : { var value:Float; }).value);
-    }; __callArgument235; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerMove' : String), ({ final __callArgument239:Dynamic = function(data:PointerEventData):Void {
+    }; __callArgument283; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerMove' : String), ({ final __callArgument287:Dynamic = function(data:PointerEventData):Void {
       var travel:Float = cast _Runtime.UNDEFINED;
       var coordinate:Float = cast _Runtime.UNDEFINED;
       if ((cast !_Runtime.strictEquals((cast runtime : { var dragPointer:Float; }).dragPointer, data.pointerId) : Bool)) { return; }
       travel = (cast _Gui.getScrollBarTravel__scrollBarController((cast runtime : Dynamic)) : Float);
       if ((cast ((cast travel : Float) <= (cast 0.0 : Float)) : Bool)) { return; }
       coordinate = ((cast _Runtime.strictEquals((cast runtime : { var orientation:GuiOrientation; }).orientation, 'horizontal') : Bool) ? (cast data.worldX : Dynamic) : (cast data.worldY : Dynamic));
-      setScrollBarControllerValue(({ final __callArgument237:Dynamic = controller; __callArgument237; }), (cast ((cast runtime : { var dragStartValue:Float; }).dragStartValue + (((coordinate - (cast runtime : { var dragStartCoordinate:Float; }).dragStartCoordinate) / travel) * ((cast runtime : { var maximum:Float; }).maximum - (cast runtime : { var minimum:Float; }).minimum))) : Float));
-    }; __callArgument239; }));
+      setScrollBarControllerValue(({ final __callArgument285:Dynamic = controller; __callArgument285; }), (cast ((cast runtime : { var dragStartValue:Float; }).dragStartValue + (((coordinate - (cast runtime : { var dragStartCoordinate:Float; }).dragStartCoordinate) / travel) * ((cast runtime : { var maximum:Float; }).maximum - (cast runtime : { var minimum:Float; }).minimum))) : Float));
+    }; __callArgument287; }));
     endDrag = (cast function(data:PointerEventData):Void {
       if ((cast _Runtime.strictEquals((cast runtime : { var dragPointer:Float; }).dragPointer, data.pointerId) : Bool)) { ((cast runtime : { var dragPointer:Float; }).dragPointer = -1.0); }
     });
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerUp' : String), ({ final __callArgument243:Dynamic = endDrag; __callArgument243; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerCancel' : String), ({ final __callArgument245:Dynamic = endDrag; __callArgument245; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onReleaseOutside' : String), ({ final __callArgument247:Dynamic = endDrag; __callArgument247; }));
-    if ((cast !_Runtime.strictEquals((cast runtime : { var upButton:Null<Node2D>; }).upButton, null) : Bool)) { _Gui.connectScrollBarRepeatButton__scrollBarController((cast runtime : Dynamic), ({ final __callArgument249:Dynamic = controller; __callArgument249; }), (cast runtime : { var upButton:Null<Node2D>; }).upButton, (cast -1.0 : Float)); }
-    if ((cast !_Runtime.strictEquals((cast runtime : { var downButton:Null<Node2D>; }).downButton, null) : Bool)) { _Gui.connectScrollBarRepeatButton__scrollBarController((cast runtime : Dynamic), ({ final __callArgument251:Dynamic = controller; __callArgument251; }), (cast runtime : { var downButton:Null<Node2D>; }).downButton, (cast 1.0 : Float)); }
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerUp' : String), ({ final __callArgument291:Dynamic = endDrag; __callArgument291; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerCancel' : String), ({ final __callArgument293:Dynamic = endDrag; __callArgument293; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onReleaseOutside' : String), ({ final __callArgument295:Dynamic = endDrag; __callArgument295; }));
+    if ((cast !_Runtime.strictEquals((cast runtime : { var upButton:Null<Node2D>; }).upButton, null) : Bool)) { _Gui.connectScrollBarRepeatButton__scrollBarController((cast runtime : Dynamic), ({ final __callArgument297:Dynamic = controller; __callArgument297; }), (cast runtime : { var upButton:Null<Node2D>; }).upButton, (cast -1.0 : Float)); }
+    if ((cast !_Runtime.strictEquals((cast runtime : { var downButton:Null<Node2D>; }).downButton, null) : Bool)) { _Gui.connectScrollBarRepeatButton__scrollBarController((cast runtime : Dynamic), ({ final __callArgument299:Dynamic = controller; __callArgument299; }), (cast runtime : { var downButton:Null<Node2D>; }).downButton, (cast 1.0 : Float)); }
     _Gui.updateScrollBarControllerVisual__scrollBarController((cast runtime : Dynamic));
     return cast controller;
     return cast null;
@@ -601,29 +756,29 @@ class _Gui {
 
   public static function disposeScrollBarController(controller:ScrollBarController):Void {
     var runtime:{ >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument253:Dynamic = controller; __callArgument253; })) : { >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument255:Dynamic = controller; __callArgument255; }), ({ final __callArgument256:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument301:Dynamic = controller; __callArgument301; })) : { >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument303:Dynamic = controller; __callArgument303; }), ({ final __callArgument304:Dynamic = function():Void {
       ((cast runtime : { var downButton:Null<Node2D>; }).downButton = null);
       ((cast runtime : { var thumb:Null<Node2D>; }).thumb = null);
       ((cast runtime : { var track:Null<Node2D>; }).track = null);
       ((cast runtime : { var upButton:Null<Node2D>; }).upButton = null);
-    }; __callArgument256; }));
+    }; __callArgument304; }));
   }
 
   public static function getScrollBarControllerSignals(controller:ScrollBarController):ScrollBarControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument259:Dynamic = controller; __callArgument259; })) : { >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, }) : { var signals:ScrollBarControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument307:Dynamic = controller; __callArgument307; })) : { >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, }) : { var signals:ScrollBarControllerSignals; }).signals;
     return cast null;
   }
 
   public static function getScrollBarControllerValue(controller:ScrollBarController):Float {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument261:Dynamic = controller; __callArgument261; })) : { >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, }) : { var value:Float; }).value;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument309:Dynamic = controller; __callArgument309; })) : { >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, }) : { var value:Float; }).value;
     return cast null;
   }
 
   public static function setScrollBarControllerValue(controller:ScrollBarController, value:Float):Void {
     var runtime:{ >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var next:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument263:Dynamic = controller; __callArgument263; })) : { >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument311:Dynamic = controller; __callArgument311; })) : { >ScrollBarControllerFields__scrollBarController, >GuiControllerRuntime__guiController, });
     next = (cast clampGuiValue((cast value : Float), (cast (cast runtime : { var minimum:Float; }).minimum : Float), (cast (cast runtime : { var maximum:Float; }).maximum : Float)) : Float);
     if ((cast ((cast _Runtime.strictEquals((cast runtime : { var value:Float; }).value, next) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return; }
     ((cast runtime : { var value:Float; }).value = next);
@@ -633,16 +788,16 @@ class _Gui {
 
   public static function connectScrollBarRepeatButton__scrollBarController(runtime:Dynamic, controller:ScrollBarController, target:Node2D, direction:Float):Void {
     var advance:Void->Void = cast _Runtime.UNDEFINED;
-    advance = (cast function():Void { setScrollBarControllerValue(({ final __callArgument265:Dynamic = controller; __callArgument265; }), (cast ((cast runtime : { var value:Float; }).value + (direction * (cast runtime : { var lineSize:Float; }).lineSize)) : Float)); });
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument267:Dynamic = target; __callArgument267; }), (cast 'onPointerDown' : String), ({ final __callArgument268:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+    advance = (cast function():Void { setScrollBarControllerValue(({ final __callArgument313:Dynamic = controller; __callArgument313; }), (cast ((cast runtime : { var value:Float; }).value + (direction * (cast runtime : { var lineSize:Float; }).lineSize)) : Float)); });
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument315:Dynamic = target; __callArgument315; }), (cast 'onPointerDown' : String), ({ final __callArgument316:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
       _Gui.stopScrollBarRepeat__scrollBarController((cast runtime : Dynamic));
       advance();
       ((cast runtime : { var repeatTimer:Null<flight._internal.dom.Timeout>; }).repeatTimer = _Runtime.setInterval(advance, (cast runtime : { var repeatInterval:Float; }).repeatInterval));
-    }, cast ([] : Array<Dynamic>)); }; __callArgument268; }));
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument271:Dynamic = target; __callArgument271; }), (cast 'onPointerUp' : String), ({ final __callArgument272:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Gui.stopScrollBarRepeat__scrollBarController((cast runtime : Dynamic)); }, cast ([] : Array<Dynamic>)); }; __callArgument272; }));
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument275:Dynamic = target; __callArgument275; }), (cast 'onPointerCancel' : String), ({ final __callArgument276:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Gui.stopScrollBarRepeat__scrollBarController((cast runtime : Dynamic)); }, cast ([] : Array<Dynamic>)); }; __callArgument276; }));
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument279:Dynamic = target; __callArgument279; }), (cast 'onPointerOut' : String), ({ final __callArgument280:Dynamic = function(__unused3:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Gui.stopScrollBarRepeat__scrollBarController((cast runtime : Dynamic)); }, cast ([] : Array<Dynamic>)); }; __callArgument280; }));
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument283:Dynamic = target; __callArgument283; }), (cast 'onReleaseOutside' : String), ({ final __callArgument284:Dynamic = function(__unused4:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Gui.stopScrollBarRepeat__scrollBarController((cast runtime : Dynamic)); }, cast ([] : Array<Dynamic>)); }; __callArgument284; }));
+    }, cast ([] : Array<Dynamic>)); }; __callArgument316; }));
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument319:Dynamic = target; __callArgument319; }), (cast 'onPointerUp' : String), ({ final __callArgument320:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Gui.stopScrollBarRepeat__scrollBarController((cast runtime : Dynamic)); }, cast ([] : Array<Dynamic>)); }; __callArgument320; }));
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument323:Dynamic = target; __callArgument323; }), (cast 'onPointerCancel' : String), ({ final __callArgument324:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Gui.stopScrollBarRepeat__scrollBarController((cast runtime : Dynamic)); }, cast ([] : Array<Dynamic>)); }; __callArgument324; }));
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument327:Dynamic = target; __callArgument327; }), (cast 'onPointerOut' : String), ({ final __callArgument328:Dynamic = function(__unused3:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Gui.stopScrollBarRepeat__scrollBarController((cast runtime : Dynamic)); }, cast ([] : Array<Dynamic>)); }; __callArgument328; }));
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument331:Dynamic = target; __callArgument331; }), (cast 'onReleaseOutside' : String), ({ final __callArgument332:Dynamic = function(__unused4:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { _Gui.stopScrollBarRepeat__scrollBarController((cast runtime : Dynamic)); }, cast ([] : Array<Dynamic>)); }; __callArgument332; }));
   }
 
   public static function getScrollBarTravel__scrollBarController(runtime:Dynamic):Float {
@@ -674,35 +829,35 @@ class _Gui {
     var endDrag:PointerEventData->Void = cast _Runtime.UNDEFINED;
     runtime = (cast createGuiControllerRuntime((cast { baseContentX: (cast _Runtime.field(options, 'content') : { var x:Float; }).x, baseContentY: (cast _Runtime.field(options, 'content') : { var y:Float; }).y, content: _Runtime.field(options, 'content'), dragPointer: -1.0, dragStartWorldX: 0.0, dragStartWorldY: 0.0, dragStartX: 0.0, dragStartY: 0.0, horizontalScrollBar: _Runtime.coalesce(_Runtime.field(options, 'horizontalScrollBar'), function():Dynamic return cast null), mouseWheelEnabled: _Runtime.coalesce(_Runtime.field(options, 'mouseWheelEnabled'), function():Dynamic return cast true), signals: { onScroll: (cast createSignal() : Signal<Float->Float->Void>) }, verticalScrollBar: _Runtime.coalesce(_Runtime.field(options, 'verticalScrollBar'), function():Dynamic return cast null), viewport: _Runtime.field(options, 'viewport'), x: 0.0, y: 0.0 } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : ScrollViewController);
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onPointerDown' : String), ({ final __callArgument287:Dynamic = function(data:PointerEventData):Void {
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onPointerDown' : String), ({ final __callArgument335:Dynamic = function(data:PointerEventData):Void {
       ((cast runtime : { var dragPointer:Float; }).dragPointer = data.pointerId);
       ((cast runtime : { var dragStartWorldX:Float; }).dragStartWorldX = data.worldX);
       ((cast runtime : { var dragStartWorldY:Float; }).dragStartWorldY = data.worldY);
       ((cast runtime : { var dragStartX:Float; }).dragStartX = (cast runtime : { var x:Float; }).x);
       ((cast runtime : { var dragStartY:Float; }).dragStartY = (cast runtime : { var y:Float; }).y);
-    }; __callArgument287; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onPointerMove' : String), ({ final __callArgument291:Dynamic = function(data:PointerEventData):Void {
+    }; __callArgument335; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onPointerMove' : String), ({ final __callArgument339:Dynamic = function(data:PointerEventData):Void {
       if ((cast !_Runtime.strictEquals(data.pointerId, (cast runtime : { var dragPointer:Float; }).dragPointer) : Bool)) { return; }
-      setScrollViewControllerPosition(({ final __callArgument289:Dynamic = controller; __callArgument289; }), (cast ((cast runtime : { var dragStartX:Float; }).dragStartX - (data.worldX - (cast runtime : { var dragStartWorldX:Float; }).dragStartWorldX)) : Float), (cast ((cast runtime : { var dragStartY:Float; }).dragStartY - (data.worldY - (cast runtime : { var dragStartWorldY:Float; }).dragStartWorldY)) : Float));
-    }; __callArgument291; }));
+      setScrollViewControllerPosition(({ final __callArgument337:Dynamic = controller; __callArgument337; }), (cast ((cast runtime : { var dragStartX:Float; }).dragStartX - (data.worldX - (cast runtime : { var dragStartWorldX:Float; }).dragStartWorldX)) : Float), (cast ((cast runtime : { var dragStartY:Float; }).dragStartY - (data.worldY - (cast runtime : { var dragStartWorldY:Float; }).dragStartWorldY)) : Float));
+    }; __callArgument339; }));
     endDrag = (cast function(data:PointerEventData):Void {
       if ((cast _Runtime.strictEquals(data.pointerId, (cast runtime : { var dragPointer:Float; }).dragPointer) : Bool)) { ((cast runtime : { var dragPointer:Float; }).dragPointer = -1.0); }
     });
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onPointerUp' : String), ({ final __callArgument295:Dynamic = endDrag; __callArgument295; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onPointerCancel' : String), ({ final __callArgument297:Dynamic = endDrag; __callArgument297; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onReleaseOutside' : String), ({ final __callArgument299:Dynamic = endDrag; __callArgument299; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onWheel' : String), ({ final __callArgument303:Dynamic = function(data:PointerEventData):Void {
-      if ((cast (cast runtime : { var mouseWheelEnabled:Bool; }).mouseWheelEnabled : Bool)) { setScrollViewControllerPosition(({ final __callArgument301:Dynamic = controller; __callArgument301; }), (cast ((cast runtime : { var x:Float; }).x + data.deltaX) : Float), (cast ((cast runtime : { var y:Float; }).y + data.deltaY) : Float)); }
-    }; __callArgument303; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onPointerUp' : String), ({ final __callArgument343:Dynamic = endDrag; __callArgument343; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onPointerCancel' : String), ({ final __callArgument345:Dynamic = endDrag; __callArgument345; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onReleaseOutside' : String), ({ final __callArgument347:Dynamic = endDrag; __callArgument347; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'viewport'), (cast 'onWheel' : String), ({ final __callArgument351:Dynamic = function(data:PointerEventData):Void {
+      if ((cast (cast runtime : { var mouseWheelEnabled:Bool; }).mouseWheelEnabled : Bool)) { setScrollViewControllerPosition(({ final __callArgument349:Dynamic = controller; __callArgument349; }), (cast ((cast runtime : { var x:Float; }).x + data.deltaX) : Float), (cast ((cast runtime : { var y:Float; }).y + data.deltaY) : Float)); }
+    }; __callArgument351; }));
     if ((cast !_Runtime.strictEquals((cast runtime : { var horizontalScrollBar:Null<ScrollBarController>; }).horizontalScrollBar, null) : Bool)) {
-      connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getScrollBarControllerSignals((cast runtime : { var horizontalScrollBar:Null<ScrollBarController>; }).horizontalScrollBar) : ScrollBarControllerSignals), 'onChange') : Dynamic), ({ final __callArgument309:Dynamic = function(value:Float):Void {
-        setScrollViewControllerPosition(({ final __callArgument307:Dynamic = controller; __callArgument307; }), (cast value : Float), (cast (cast runtime : { var y:Float; }).y : Float));
-      }; __callArgument309; }));
+      connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getScrollBarControllerSignals((cast runtime : { var horizontalScrollBar:Null<ScrollBarController>; }).horizontalScrollBar) : ScrollBarControllerSignals), 'onChange') : Dynamic), ({ final __callArgument357:Dynamic = function(value:Float):Void {
+        setScrollViewControllerPosition(({ final __callArgument355:Dynamic = controller; __callArgument355; }), (cast value : Float), (cast (cast runtime : { var y:Float; }).y : Float));
+      }; __callArgument357; }));
     }
     if ((cast !_Runtime.strictEquals((cast runtime : { var verticalScrollBar:Null<ScrollBarController>; }).verticalScrollBar, null) : Bool)) {
-      connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getScrollBarControllerSignals((cast runtime : { var verticalScrollBar:Null<ScrollBarController>; }).verticalScrollBar) : ScrollBarControllerSignals), 'onChange') : Dynamic), ({ final __callArgument315:Dynamic = function(value:Float):Void {
-        setScrollViewControllerPosition(({ final __callArgument313:Dynamic = controller; __callArgument313; }), (cast (cast runtime : { var x:Float; }).x : Float), (cast value : Float));
-      }; __callArgument315; }));
+      connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getScrollBarControllerSignals((cast runtime : { var verticalScrollBar:Null<ScrollBarController>; }).verticalScrollBar) : ScrollBarControllerSignals), 'onChange') : Dynamic), ({ final __callArgument363:Dynamic = function(value:Float):Void {
+        setScrollViewControllerPosition(({ final __callArgument361:Dynamic = controller; __callArgument361; }), (cast (cast runtime : { var x:Float; }).x : Float), (cast value : Float));
+      }; __callArgument363; }));
     }
     _Gui.updateScrollViewControllerVisual__scrollViewController((cast runtime : Dynamic));
     return cast controller;
@@ -711,27 +866,27 @@ class _Gui {
 
   public static function disposeScrollViewController(controller:ScrollViewController):Void {
     var runtime:{ >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument319:Dynamic = controller; __callArgument319; })) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument321:Dynamic = controller; __callArgument321; }), ({ final __callArgument322:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument367:Dynamic = controller; __callArgument367; })) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument369:Dynamic = controller; __callArgument369; }), ({ final __callArgument370:Dynamic = function():Void {
       ((cast runtime : { var content:Null<Node2D>; }).content = null);
       ((cast runtime : { var horizontalScrollBar:Null<ScrollBarController>; }).horizontalScrollBar = null);
       ((cast runtime : { var verticalScrollBar:Null<ScrollBarController>; }).verticalScrollBar = null);
       ((cast runtime : { var viewport:Null<Node2D>; }).viewport = null);
-    }; __callArgument322; }));
+    }; __callArgument370; }));
   }
 
   public static function getScrollViewControllerSignals(controller:ScrollViewController):ScrollViewControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument325:Dynamic = controller; __callArgument325; })) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, }) : { var signals:ScrollViewControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument373:Dynamic = controller; __callArgument373; })) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, }) : { var signals:ScrollViewControllerSignals; }).signals;
     return cast null;
   }
 
   public static function getScrollViewControllerX(controller:ScrollViewController):Float {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument327:Dynamic = controller; __callArgument327; })) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, }) : { var x:Float; }).x;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument375:Dynamic = controller; __callArgument375; })) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, }) : { var x:Float; }).x;
     return cast null;
   }
 
   public static function getScrollViewControllerY(controller:ScrollViewController):Float {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument329:Dynamic = controller; __callArgument329; })) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, }) : { var y:Float; }).y;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument377:Dynamic = controller; __callArgument377; })) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, }) : { var y:Float; }).y;
     return cast null;
   }
 
@@ -739,7 +894,7 @@ class _Gui {
     var runtime:{ >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var nextX:Float = cast _Runtime.UNDEFINED;
     var nextY:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument331:Dynamic = controller; __callArgument331; })) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument379:Dynamic = controller; __callArgument379; })) : { >ScrollViewControllerFields__scrollViewController, >GuiControllerRuntime__guiController, });
     if ((cast ((cast ((cast _Runtime.strictEquals((cast runtime : { var content:Null<Node2D>; }).content, null) : Bool) || (cast _Runtime.strictEquals((cast runtime : { var viewport:Null<Node2D>; }).viewport, null) : Bool)) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return; }
     nextX = (cast clampGuiValue((cast x : Float), (cast 0.0 : Float), (cast HxMath.max(0.0, ((cast getNodeWidth((cast (cast runtime : { var content:Null<Node2D>; }).content : Dynamic)) : Float) - (cast getNodeWidth((cast (cast runtime : { var viewport:Null<Node2D>; }).viewport : Dynamic)) : Float))) : Float)) : Float);
     nextY = (cast clampGuiValue((cast y : Float), (cast 0.0 : Float), (cast HxMath.max(0.0, ((cast getNodeHeight((cast (cast runtime : { var content:Null<Node2D>; }).content : Dynamic)) : Float) - (cast getNodeHeight((cast (cast runtime : { var viewport:Null<Node2D>; }).viewport : Dynamic)) : Float))) : Float)) : Float);
@@ -751,8 +906,8 @@ class _Gui {
   }
 
   public static function updateScrollViewControllerVisual__scrollViewController(runtime:Dynamic):Void {
-    setGuiVisualProperty((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, ({ final __callArgument333:Dynamic = 'x'; __callArgument333; }), ({ final __callArgument334:Dynamic = ((cast runtime : { var baseContentX:Float; }).baseContentX - (cast runtime : { var x:Float; }).x); __callArgument334; }));
-    setGuiVisualProperty((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, ({ final __callArgument337:Dynamic = 'y'; __callArgument337; }), ({ final __callArgument338:Dynamic = ((cast runtime : { var baseContentY:Float; }).baseContentY - (cast runtime : { var y:Float; }).y); __callArgument338; }));
+    setGuiVisualProperty((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, ({ final __callArgument381:Dynamic = 'x'; __callArgument381; }), ({ final __callArgument382:Dynamic = ((cast runtime : { var baseContentX:Float; }).baseContentX - (cast runtime : { var x:Float; }).x); __callArgument382; }));
+    setGuiVisualProperty((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, ({ final __callArgument385:Dynamic = 'y'; __callArgument385; }), ({ final __callArgument386:Dynamic = ((cast runtime : { var baseContentY:Float; }).baseContentY - (cast runtime : { var y:Float; }).y); __callArgument386; }));
     if ((cast !_Runtime.strictEquals((cast runtime : { var horizontalScrollBar:Null<ScrollBarController>; }).horizontalScrollBar, null) : Bool)) { setScrollBarControllerValue((cast runtime : { var horizontalScrollBar:Null<ScrollBarController>; }).horizontalScrollBar, (cast (cast runtime : { var x:Float; }).x : Float)); }
     if ((cast !_Runtime.strictEquals((cast runtime : { var verticalScrollBar:Null<ScrollBarController>; }).verticalScrollBar, null) : Bool)) { setScrollBarControllerValue((cast runtime : { var verticalScrollBar:Null<ScrollBarController>; }).verticalScrollBar, (cast (cast runtime : { var y:Float; }).y : Float)); }
   }
@@ -768,15 +923,15 @@ class _Gui {
     maximum = HxMath.max(minimum, _Runtime.coalesce(_Runtime.field(options, 'maximum'), function():Dynamic return cast 1.0));
     runtime = (cast createGuiControllerRuntime((cast { dragPointer: -1.0, dragStartCoordinate: 0.0, dragStartValue: minimum, maximum: maximum, minimum: minimum, orientation: _Runtime.coalesce(_Runtime.field(options, 'orientation'), function():Dynamic return cast 'horizontal'), signals: { onChange: (cast createSignal() : Signal<Float->Void>) }, step: _Runtime.coalesce(_Runtime.field(options, 'step'), function():Dynamic return cast null), thumb: _Runtime.field(options, 'thumb'), track: _Runtime.field(options, 'track'), value: (cast clampGuiValue((cast _Runtime.coalesce(_Runtime.field(options, 'value'), function():Dynamic return cast minimum) : Float), (cast minimum : Float), (cast maximum : Float)) : Float) } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : SliderController);
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'track'), (cast 'onPointerDown' : String), ({ final __callArgument343:Dynamic = function(data:PointerEventData):Void {
-      _Gui.setSliderFromTrackCoordinate__sliderController(({ final __callArgument341:Dynamic = controller; __callArgument341; }), (cast ((cast _Runtime.strictEquals((cast runtime : { var orientation:GuiOrientation; }).orientation, 'horizontal') : Bool) ? (cast data.localX : Dynamic) : (cast data.localY : Dynamic)) : Float));
-    }; __callArgument343; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerDown' : String), ({ final __callArgument347:Dynamic = function(data:PointerEventData):Void {
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'track'), (cast 'onPointerDown' : String), ({ final __callArgument391:Dynamic = function(data:PointerEventData):Void {
+      _Gui.setSliderFromTrackCoordinate__sliderController(({ final __callArgument389:Dynamic = controller; __callArgument389; }), (cast ((cast _Runtime.strictEquals((cast runtime : { var orientation:GuiOrientation; }).orientation, 'horizontal') : Bool) ? (cast data.localX : Dynamic) : (cast data.localY : Dynamic)) : Float));
+    }; __callArgument391; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerDown' : String), ({ final __callArgument395:Dynamic = function(data:PointerEventData):Void {
       ((cast runtime : { var dragPointer:Float; }).dragPointer = data.pointerId);
       ((cast runtime : { var dragStartCoordinate:Float; }).dragStartCoordinate = ((cast _Runtime.strictEquals((cast runtime : { var orientation:GuiOrientation; }).orientation, 'horizontal') : Bool) ? (cast data.worldX : Dynamic) : (cast data.worldY : Dynamic)));
       ((cast runtime : { var dragStartValue:Float; }).dragStartValue = (cast runtime : { var value:Float; }).value);
-    }; __callArgument347; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerMove' : String), ({ final __callArgument351:Dynamic = function(data:PointerEventData):Void {
+    }; __callArgument395; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerMove' : String), ({ final __callArgument399:Dynamic = function(data:PointerEventData):Void {
       var coordinate:Float = cast _Runtime.UNDEFINED;
       var travel:Float = cast _Runtime.UNDEFINED;
       var range:Float = cast _Runtime.UNDEFINED;
@@ -784,17 +939,17 @@ class _Gui {
       coordinate = ((cast _Runtime.strictEquals((cast runtime : { var orientation:GuiOrientation; }).orientation, 'horizontal') : Bool) ? (cast data.worldX : Dynamic) : (cast data.worldY : Dynamic));
       travel = (cast _Gui.getSliderTravel__sliderController((cast runtime : Dynamic)) : Float);
       range = ((cast runtime : { var maximum:Float; }).maximum - (cast runtime : { var minimum:Float; }).minimum);
-      if ((cast ((cast travel : Float) > (cast 0.0 : Float)) : Bool)) { setSliderControllerValue(({ final __callArgument349:Dynamic = controller; __callArgument349; }), (cast ((cast runtime : { var dragStartValue:Float; }).dragStartValue + (((coordinate - (cast runtime : { var dragStartCoordinate:Float; }).dragStartCoordinate) / travel) * range)) : Float)); }
-    }; __callArgument351; }));
+      if ((cast ((cast travel : Float) > (cast 0.0 : Float)) : Bool)) { setSliderControllerValue(({ final __callArgument397:Dynamic = controller; __callArgument397; }), (cast ((cast runtime : { var dragStartValue:Float; }).dragStartValue + (((coordinate - (cast runtime : { var dragStartCoordinate:Float; }).dragStartCoordinate) / travel) * range)) : Float)); }
+    }; __callArgument399; }));
     endDrag = (cast function(data:PointerEventData):Void {
       if ((cast _Runtime.strictEquals((cast runtime : { var dragPointer:Float; }).dragPointer, data.pointerId) : Bool)) { ((cast runtime : { var dragPointer:Float; }).dragPointer = -1.0); }
     });
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerUp' : String), ({ final __callArgument355:Dynamic = endDrag; __callArgument355; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerCancel' : String), ({ final __callArgument357:Dynamic = endDrag; __callArgument357; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onReleaseOutside' : String), ({ final __callArgument359:Dynamic = endDrag; __callArgument359; }));
-    keyDown = (cast function(data:KeyboardEventData):Void { _Gui.handleSliderKeyDown__sliderController(({ final __callArgument361:Dynamic = controller; __callArgument361; }), ({ final __callArgument362:Dynamic = data; __callArgument362; })); });
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'track'), (cast 'onKeyDown' : String), ({ final __callArgument365:Dynamic = keyDown; __callArgument365; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onKeyDown' : String), ({ final __callArgument367:Dynamic = keyDown; __callArgument367; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerUp' : String), ({ final __callArgument403:Dynamic = endDrag; __callArgument403; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onPointerCancel' : String), ({ final __callArgument405:Dynamic = endDrag; __callArgument405; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onReleaseOutside' : String), ({ final __callArgument407:Dynamic = endDrag; __callArgument407; }));
+    keyDown = (cast function(data:KeyboardEventData):Void { _Gui.handleSliderKeyDown__sliderController(({ final __callArgument409:Dynamic = controller; __callArgument409; }), ({ final __callArgument410:Dynamic = data; __callArgument410; })); });
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'track'), (cast 'onKeyDown' : String), ({ final __callArgument413:Dynamic = keyDown; __callArgument413; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'thumb'), (cast 'onKeyDown' : String), ({ final __callArgument415:Dynamic = keyDown; __callArgument415; }));
     _Gui.updateSliderControllerVisual__sliderController((cast runtime : Dynamic));
     return cast controller;
     return cast null;
@@ -802,27 +957,27 @@ class _Gui {
 
   public static function disposeSliderController(controller:SliderController):Void {
     var runtime:{ >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument369:Dynamic = controller; __callArgument369; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument371:Dynamic = controller; __callArgument371; }), ({ final __callArgument372:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument417:Dynamic = controller; __callArgument417; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument419:Dynamic = controller; __callArgument419; }), ({ final __callArgument420:Dynamic = function():Void {
       ((cast runtime : { var thumb:Null<Node2D>; }).thumb = null);
       ((cast runtime : { var track:Null<Node2D>; }).track = null);
-    }; __callArgument372; }));
+    }; __callArgument420; }));
   }
 
   public static function getSliderControllerSignals(controller:SliderController):SliderControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument375:Dynamic = controller; __callArgument375; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, }) : { var signals:SliderControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument423:Dynamic = controller; __callArgument423; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, }) : { var signals:SliderControllerSignals; }).signals;
     return cast null;
   }
 
   public static function getSliderControllerValue(controller:SliderController):Float {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument377:Dynamic = controller; __callArgument377; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, }) : { var value:Float; }).value;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument425:Dynamic = controller; __callArgument425; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, }) : { var value:Float; }).value;
     return cast null;
   }
 
   public static function setSliderControllerValue(controller:SliderController, value:Float):Void {
     var runtime:{ >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var next:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument379:Dynamic = controller; __callArgument379; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument427:Dynamic = controller; __callArgument427; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, });
     next = (cast clampGuiValue((cast (cast snapGuiValue((cast value : Float), (cast (cast runtime : { var minimum:Float; }).minimum : Float), (cast runtime : { var step:Null<Float>; }).step) : Float) : Float), (cast (cast runtime : { var minimum:Float; }).minimum : Float), (cast (cast runtime : { var maximum:Float; }).maximum : Float)) : Float);
     if ((cast ((cast _Runtime.strictEquals((cast runtime : { var value:Float; }).value, next) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return; }
     ((cast runtime : { var value:Float; }).value = next);
@@ -839,20 +994,20 @@ class _Gui {
   public static function handleSliderKeyDown__sliderController(controller:SliderController, data:KeyboardEventData):Void {
     var runtime:{ >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var step:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument381:Dynamic = controller; __callArgument381; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument429:Dynamic = controller; __callArgument429; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, });
     step = _Runtime.coalesce((cast runtime : { var step:Null<Float>; }).step, function():Dynamic return cast _Runtime.orValue((((cast runtime : { var maximum:Float; }).maximum - (cast runtime : { var minimum:Float; }).minimum) / 100.0), function():Dynamic return cast 1.0));
-    if ((cast _Runtime.strictEquals(data.key, 'Home') : Bool)) { setSliderControllerValue(({ final __callArgument383:Dynamic = controller; __callArgument383; }), (cast (cast runtime : { var minimum:Float; }).minimum : Float)); } else { if ((cast _Runtime.strictEquals(data.key, 'End') : Bool)) { setSliderControllerValue(({ final __callArgument385:Dynamic = controller; __callArgument385; }), (cast (cast runtime : { var maximum:Float; }).maximum : Float)); } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowLeft') : Bool) || (cast _Runtime.strictEquals(data.key, 'ArrowDown') : Bool)) : Bool)) { setSliderControllerValue(({ final __callArgument387:Dynamic = controller; __callArgument387; }), (cast ((cast runtime : { var value:Float; }).value - step) : Float)); } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowRight') : Bool) || (cast _Runtime.strictEquals(data.key, 'ArrowUp') : Bool)) : Bool)) { setSliderControllerValue(({ final __callArgument389:Dynamic = controller; __callArgument389; }), (cast ((cast runtime : { var value:Float; }).value + step) : Float)); } } } }
+    if ((cast _Runtime.strictEquals(data.key, 'Home') : Bool)) { setSliderControllerValue(({ final __callArgument431:Dynamic = controller; __callArgument431; }), (cast (cast runtime : { var minimum:Float; }).minimum : Float)); } else { if ((cast _Runtime.strictEquals(data.key, 'End') : Bool)) { setSliderControllerValue(({ final __callArgument433:Dynamic = controller; __callArgument433; }), (cast (cast runtime : { var maximum:Float; }).maximum : Float)); } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowLeft') : Bool) || (cast _Runtime.strictEquals(data.key, 'ArrowDown') : Bool)) : Bool)) { setSliderControllerValue(({ final __callArgument435:Dynamic = controller; __callArgument435; }), (cast ((cast runtime : { var value:Float; }).value - step) : Float)); } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowRight') : Bool) || (cast _Runtime.strictEquals(data.key, 'ArrowUp') : Bool)) : Bool)) { setSliderControllerValue(({ final __callArgument437:Dynamic = controller; __callArgument437; }), (cast ((cast runtime : { var value:Float; }).value + step) : Float)); } } } }
   }
 
   public static function setSliderFromTrackCoordinate__sliderController(controller:SliderController, coordinate:Float):Void {
     var runtime:{ >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var length:Float = cast _Runtime.UNDEFINED;
     var ratio:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument391:Dynamic = controller; __callArgument391; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument439:Dynamic = controller; __callArgument439; })) : { >SliderControllerFields__sliderController, >GuiControllerRuntime__guiController, });
     if ((cast _Runtime.strictEquals((cast runtime : { var track:Null<Node2D>; }).track, null) : Bool)) { return; }
     length = (cast getGuiLength((cast runtime : { var track:Null<Node2D>; }).track, (cast runtime : { var orientation:GuiOrientation; }).orientation) : Float);
     ratio = ((cast ((cast length : Float) <= (cast 0.0 : Float)) : Bool) ? (cast 0.0 : Dynamic) : (cast (cast clampGuiValue((cast (coordinate / length) : Float), (cast 0.0 : Float), (cast 1.0 : Float)) : Float) : Dynamic));
-    setSliderControllerValue(({ final __callArgument393:Dynamic = controller; __callArgument393; }), (cast ((cast runtime : { var minimum:Float; }).minimum + (ratio * ((cast runtime : { var maximum:Float; }).maximum - (cast runtime : { var minimum:Float; }).minimum))) : Float));
+    setSliderControllerValue(({ final __callArgument441:Dynamic = controller; __callArgument441; }), (cast ((cast runtime : { var minimum:Float; }).minimum + (ratio * ((cast runtime : { var maximum:Float; }).maximum - (cast runtime : { var minimum:Float; }).minimum))) : Float));
   }
 
   public static function updateSliderControllerVisual__sliderController(runtime:Dynamic):Void {
@@ -879,32 +1034,32 @@ class _Gui {
     var controller:SplitPaneController = cast _Runtime.UNDEFINED;
     var endDrag:PointerEventData->Void = cast _Runtime.UNDEFINED;
     orientation = _Runtime.coalesce(_Runtime.field(options, 'orientation'), function():Dynamic return cast 'horizontal');
-    dividerLength = (cast getGuiLength(_Runtime.field(options, 'divider'), ({ final __callArgument395:Dynamic = orientation; __callArgument395; })) : Float);
-    firstLength = (cast getGuiLength(_Runtime.field(options, 'firstRegion'), ({ final __callArgument397:Dynamic = orientation; __callArgument397; })) : Float);
-    secondLength = (cast getGuiLength(_Runtime.field(options, 'secondRegion'), ({ final __callArgument399:Dynamic = orientation; __callArgument399; })) : Float);
+    dividerLength = (cast getGuiLength(_Runtime.field(options, 'divider'), ({ final __callArgument443:Dynamic = orientation; __callArgument443; })) : Float);
+    firstLength = (cast getGuiLength(_Runtime.field(options, 'firstRegion'), ({ final __callArgument445:Dynamic = orientation; __callArgument445; })) : Float);
+    secondLength = (cast getGuiLength(_Runtime.field(options, 'secondRegion'), ({ final __callArgument447:Dynamic = orientation; __callArgument447; })) : Float);
     totalSize = HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(options, 'totalSize'), function():Dynamic return cast ((firstLength + dividerLength) + secondLength)));
     minimumFirst = HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(options, 'minimumFirst'), function():Dynamic return cast 0.0));
     minimumSecond = HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(options, 'minimumSecond'), function():Dynamic return cast 0.0));
     maximumFirst = HxMath.min(_Runtime.coalesce(_Runtime.field(options, 'maximumFirst'), function():Dynamic return cast HxMath.POSITIVE_INFINITY), HxMath.max(minimumFirst, ((totalSize - dividerLength) - minimumSecond)));
-    runtime = (cast createGuiControllerRuntime((cast { divider: _Runtime.field(options, 'divider'), dragPointer: -1.0, dragStartCoordinate: 0.0, dragStartPosition: 0.0, firstBaseLength: firstLength, firstBaseScale: ((cast _Runtime.strictEquals(orientation, 'horizontal') : Bool) ? (cast (cast _Runtime.field(options, 'firstRegion') : { var scaleX:Float; }).scaleX : Dynamic) : (cast (cast _Runtime.field(options, 'firstRegion') : { var scaleY:Float; }).scaleY : Dynamic)), firstOrigin: (cast getGuiPosition(_Runtime.field(options, 'firstRegion'), ({ final __callArgument401:Dynamic = orientation; __callArgument401; })) : Float), firstRegion: _Runtime.field(options, 'firstRegion'), maximumFirst: maximumFirst, minimumFirst: minimumFirst, minimumSecond: minimumSecond, orientation: orientation, position: (cast clampGuiValue((cast _Runtime.coalesce(_Runtime.field(options, 'position'), function():Dynamic return cast firstLength) : Float), (cast minimumFirst : Float), (cast maximumFirst : Float)) : Float), secondBaseLength: secondLength, secondBaseScale: ((cast _Runtime.strictEquals(orientation, 'horizontal') : Bool) ? (cast (cast _Runtime.field(options, 'secondRegion') : { var scaleX:Float; }).scaleX : Dynamic) : (cast (cast _Runtime.field(options, 'secondRegion') : { var scaleY:Float; }).scaleY : Dynamic)), secondRegion: _Runtime.field(options, 'secondRegion'), signals: { onChange: (cast createSignal() : Signal<Float->Void>) }, totalSize: totalSize } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, });
+    runtime = (cast createGuiControllerRuntime((cast { divider: _Runtime.field(options, 'divider'), dragPointer: -1.0, dragStartCoordinate: 0.0, dragStartPosition: 0.0, firstBaseLength: firstLength, firstBaseScale: ((cast _Runtime.strictEquals(orientation, 'horizontal') : Bool) ? (cast (cast _Runtime.field(options, 'firstRegion') : { var scaleX:Float; }).scaleX : Dynamic) : (cast (cast _Runtime.field(options, 'firstRegion') : { var scaleY:Float; }).scaleY : Dynamic)), firstOrigin: (cast getGuiPosition(_Runtime.field(options, 'firstRegion'), ({ final __callArgument449:Dynamic = orientation; __callArgument449; })) : Float), firstRegion: _Runtime.field(options, 'firstRegion'), maximumFirst: maximumFirst, minimumFirst: minimumFirst, minimumSecond: minimumSecond, orientation: orientation, position: (cast clampGuiValue((cast _Runtime.coalesce(_Runtime.field(options, 'position'), function():Dynamic return cast firstLength) : Float), (cast minimumFirst : Float), (cast maximumFirst : Float)) : Float), secondBaseLength: secondLength, secondBaseScale: ((cast _Runtime.strictEquals(orientation, 'horizontal') : Bool) ? (cast (cast _Runtime.field(options, 'secondRegion') : { var scaleX:Float; }).scaleX : Dynamic) : (cast (cast _Runtime.field(options, 'secondRegion') : { var scaleY:Float; }).scaleY : Dynamic)), secondRegion: _Runtime.field(options, 'secondRegion'), signals: { onChange: (cast createSignal() : Signal<Float->Void>) }, totalSize: totalSize } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : SplitPaneController);
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'divider'), (cast 'onPointerDown' : String), ({ final __callArgument405:Dynamic = function(data:PointerEventData):Void {
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'divider'), (cast 'onPointerDown' : String), ({ final __callArgument453:Dynamic = function(data:PointerEventData):Void {
       ((cast runtime : { var dragPointer:Float; }).dragPointer = data.pointerId);
       ((cast runtime : { var dragStartCoordinate:Float; }).dragStartCoordinate = ((cast _Runtime.strictEquals(orientation, 'horizontal') : Bool) ? (cast data.worldX : Dynamic) : (cast data.worldY : Dynamic)));
       ((cast runtime : { var dragStartPosition:Float; }).dragStartPosition = (cast runtime : { var position:Float; }).position);
-    }; __callArgument405; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'divider'), (cast 'onPointerMove' : String), ({ final __callArgument409:Dynamic = function(data:PointerEventData):Void {
+    }; __callArgument453; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'divider'), (cast 'onPointerMove' : String), ({ final __callArgument457:Dynamic = function(data:PointerEventData):Void {
       var coordinate:Float = cast _Runtime.UNDEFINED;
       if ((cast !_Runtime.strictEquals(data.pointerId, (cast runtime : { var dragPointer:Float; }).dragPointer) : Bool)) { return; }
       coordinate = ((cast _Runtime.strictEquals(orientation, 'horizontal') : Bool) ? (cast data.worldX : Dynamic) : (cast data.worldY : Dynamic));
-      setSplitPaneControllerPosition(({ final __callArgument407:Dynamic = controller; __callArgument407; }), (cast (((cast runtime : { var dragStartPosition:Float; }).dragStartPosition + coordinate) - (cast runtime : { var dragStartCoordinate:Float; }).dragStartCoordinate) : Float));
-    }; __callArgument409; }));
+      setSplitPaneControllerPosition(({ final __callArgument455:Dynamic = controller; __callArgument455; }), (cast (((cast runtime : { var dragStartPosition:Float; }).dragStartPosition + coordinate) - (cast runtime : { var dragStartCoordinate:Float; }).dragStartCoordinate) : Float));
+    }; __callArgument457; }));
     endDrag = (cast function(data:PointerEventData):Void {
       if ((cast _Runtime.strictEquals(data.pointerId, (cast runtime : { var dragPointer:Float; }).dragPointer) : Bool)) { ((cast runtime : { var dragPointer:Float; }).dragPointer = -1.0); }
     });
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'divider'), (cast 'onPointerUp' : String), ({ final __callArgument413:Dynamic = endDrag; __callArgument413; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'divider'), (cast 'onPointerCancel' : String), ({ final __callArgument415:Dynamic = endDrag; __callArgument415; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'divider'), (cast 'onReleaseOutside' : String), ({ final __callArgument417:Dynamic = endDrag; __callArgument417; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'divider'), (cast 'onPointerUp' : String), ({ final __callArgument461:Dynamic = endDrag; __callArgument461; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'divider'), (cast 'onPointerCancel' : String), ({ final __callArgument463:Dynamic = endDrag; __callArgument463; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'divider'), (cast 'onReleaseOutside' : String), ({ final __callArgument465:Dynamic = endDrag; __callArgument465; }));
     _Gui.updateSplitPaneControllerVisual__splitPaneController((cast runtime : Dynamic));
     return cast controller;
     return cast null;
@@ -912,28 +1067,28 @@ class _Gui {
 
   public static function disposeSplitPaneController(controller:SplitPaneController):Void {
     var runtime:{ >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument419:Dynamic = controller; __callArgument419; })) : { >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument421:Dynamic = controller; __callArgument421; }), ({ final __callArgument422:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument467:Dynamic = controller; __callArgument467; })) : { >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument469:Dynamic = controller; __callArgument469; }), ({ final __callArgument470:Dynamic = function():Void {
       ((cast runtime : { var divider:Null<Node2D>; }).divider = null);
       ((cast runtime : { var firstRegion:Null<Node2D>; }).firstRegion = null);
       ((cast runtime : { var secondRegion:Null<Node2D>; }).secondRegion = null);
-    }; __callArgument422; }));
+    }; __callArgument470; }));
   }
 
   public static function getSplitPaneControllerPosition(controller:SplitPaneController):Float {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument425:Dynamic = controller; __callArgument425; })) : { >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, }) : { var position:Float; }).position;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument473:Dynamic = controller; __callArgument473; })) : { >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, }) : { var position:Float; }).position;
     return cast null;
   }
 
   public static function getSplitPaneControllerSignals(controller:SplitPaneController):SplitPaneControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument427:Dynamic = controller; __callArgument427; })) : { >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, }) : { var signals:SplitPaneControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument475:Dynamic = controller; __callArgument475; })) : { >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, }) : { var signals:SplitPaneControllerSignals; }).signals;
     return cast null;
   }
 
   public static function setSplitPaneControllerPosition(controller:SplitPaneController, position:Float):Void {
     var runtime:{ >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var next:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument429:Dynamic = controller; __callArgument429; })) : { >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument477:Dynamic = controller; __callArgument477; })) : { >SplitPaneControllerFields__splitPaneController, >GuiControllerRuntime__guiController, });
     next = (cast clampGuiValue((cast position : Float), (cast (cast runtime : { var minimumFirst:Float; }).minimumFirst : Float), (cast (cast runtime : { var maximumFirst:Float; }).maximumFirst : Float)) : Float);
     if ((cast ((cast _Runtime.strictEquals((cast runtime : { var position:Float; }).position, next) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return; }
     ((cast runtime : { var position:Float; }).position = next);
@@ -961,29 +1116,29 @@ class _Gui {
       var targets:Array<Node2D> = cast _Runtime.UNDEFINED;
       targets = (cast _Runtime.filterArray((cast cast ([_Runtime.field(tab, 'selectedState'), _Runtime.field(tab, 'unselectedState')] : Array<Dynamic>) : Array<Dynamic>), function(target:Node2D, i:Float, all:Array<Node2D>):Bool return _Runtime.strictEquals(_Runtime.callProperty(all, 'indexOf', cast ([target] : Array<Dynamic>)), i), _Runtime.UNDEFINED));
       for (target in _Runtime.iterable(targets)) {
-        connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument433:Dynamic = target; __callArgument433; }), (cast 'onClick' : String), ({ final __callArgument436:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { setTabBarControllerSelectedIndex(({ final __callArgument434:Dynamic = controller; __callArgument434; }), (cast index : Float)); }, cast ([] : Array<Dynamic>)); }; __callArgument436; }));
+        connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument481:Dynamic = target; __callArgument481; }), (cast 'onClick' : String), ({ final __callArgument484:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { setTabBarControllerSelectedIndex(({ final __callArgument482:Dynamic = controller; __callArgument482; }), (cast index : Float)); }, cast ([] : Array<Dynamic>)); }; __callArgument484; }));
       }
     }, _Runtime.UNDEFINED);
-    setTabBarControllerSelectedIndex(({ final __callArgument441:Dynamic = controller; __callArgument441; }), (cast _Runtime.coalesce(_Runtime.field(options, 'selectedIndex'), function():Dynamic return cast ((cast _Runtime.strictEquals(_Runtime.field((cast runtime : { var tabs:Array<TabBarControllerItem>; }).tabs, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast 0.0 : Dynamic))) : Float));
+    setTabBarControllerSelectedIndex(({ final __callArgument489:Dynamic = controller; __callArgument489; }), (cast _Runtime.coalesce(_Runtime.field(options, 'selectedIndex'), function():Dynamic return cast ((cast _Runtime.strictEquals(_Runtime.field((cast runtime : { var tabs:Array<TabBarControllerItem>; }).tabs, 'length'), 0.0) : Bool) ? (cast -1.0 : Dynamic) : (cast 0.0 : Dynamic))) : Float));
     return cast controller;
     return cast null;
   }
 
   public static function disposeTabBarController(controller:TabBarController):Void {
     var runtime:{ >TabBarControllerFields__tabBarController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument443:Dynamic = controller; __callArgument443; })) : { >TabBarControllerFields__tabBarController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument445:Dynamic = controller; __callArgument445; }), ({ final __callArgument446:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument491:Dynamic = controller; __callArgument491; })) : { >TabBarControllerFields__tabBarController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument493:Dynamic = controller; __callArgument493; }), ({ final __callArgument494:Dynamic = function():Void {
       _Runtime.setLength((cast runtime : { var tabs:Array<TabBarControllerItem>; }).tabs, 0.0);
-    }; __callArgument446; }));
+    }; __callArgument494; }));
   }
 
   public static function getTabBarControllerSelectedIndex(controller:TabBarController):Float {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument449:Dynamic = controller; __callArgument449; })) : { >TabBarControllerFields__tabBarController, >GuiControllerRuntime__guiController, }) : { var selectedIndex:Float; }).selectedIndex;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument497:Dynamic = controller; __callArgument497; })) : { >TabBarControllerFields__tabBarController, >GuiControllerRuntime__guiController, }) : { var selectedIndex:Float; }).selectedIndex;
     return cast null;
   }
 
   public static function getTabBarControllerSignals(controller:TabBarController):TabBarControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument451:Dynamic = controller; __callArgument451; })) : { >TabBarControllerFields__tabBarController, >GuiControllerRuntime__guiController, }) : { var signals:TabBarControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument499:Dynamic = controller; __callArgument499; })) : { >TabBarControllerFields__tabBarController, >GuiControllerRuntime__guiController, }) : { var signals:TabBarControllerSignals; }).signals;
     return cast null;
   }
 
@@ -991,20 +1146,20 @@ class _Gui {
     var runtime:{ >TabBarControllerFields__tabBarController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var next:Float = cast _Runtime.UNDEFINED;
     var changed:Bool = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument453:Dynamic = controller; __callArgument453; })) : { >TabBarControllerFields__tabBarController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument501:Dynamic = controller; __callArgument501; })) : { >TabBarControllerFields__tabBarController, >GuiControllerRuntime__guiController, });
     next = ((cast ((cast ((cast index : Float) >= (cast 0.0 : Float)) : Bool) && (cast ((cast index : Float) < (cast _Runtime.field((cast runtime : { var tabs:Array<TabBarControllerItem>; }).tabs, 'length') : Float)) : Bool)) : Bool) ? (cast index : Dynamic) : (cast -1.0 : Dynamic));
     changed = !_Runtime.strictEquals((cast runtime : { var selectedIndex:Float; }).selectedIndex, next);
     ((cast runtime : { var selectedIndex:Float; }).selectedIndex = next);
     _Runtime.forEachArray((cast (cast runtime : { var tabs:Array<TabBarControllerItem>; }).tabs : Array<TabBarControllerItem>), function(tab:TabBarControllerItem, i:Float, __unused2:Array<TabBarControllerItem>):Void {
-      setGuiVisible((cast runtime : Dynamic), ({ final __callArgument455:Dynamic = _Runtime.field(tab, 'selectedState'); __callArgument455; }), (cast _Runtime.strictEquals(i, next) : Bool));
-      setGuiVisible((cast runtime : Dynamic), ({ final __callArgument457:Dynamic = _Runtime.field(tab, 'unselectedState'); __callArgument457; }), (cast !_Runtime.strictEquals(i, next) : Bool));
+      setGuiVisible((cast runtime : Dynamic), ({ final __callArgument503:Dynamic = _Runtime.field(tab, 'selectedState'); __callArgument503; }), (cast _Runtime.strictEquals(i, next) : Bool));
+      setGuiVisible((cast runtime : Dynamic), ({ final __callArgument505:Dynamic = _Runtime.field(tab, 'unselectedState'); __callArgument505; }), (cast !_Runtime.strictEquals(i, next) : Bool));
     }, _Runtime.UNDEFINED);
     if ((cast changed : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:TabBarControllerSignals; }).signals : TabBarControllerSignals).onChange], [next]]), 1); }
   }
 
   public static function blurTextInputController(controller:TextInputController):Void {
     var runtime:{ >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument459:Dynamic = controller; __callArgument459; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument507:Dynamic = controller; __callArgument507; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, });
     if ((cast _Runtime.strictEquals((cast runtime : { var textField:Null<RichText>; }).textField, null) : Bool)) { return; }
     blurTextInput((cast runtime : { var manager:TextInputManager; }).manager);
     setGuiVisible((cast runtime : Dynamic), (cast runtime : { var caret:Null<Node2D>; }).caret, (cast false : Bool));
@@ -1022,29 +1177,29 @@ class _Gui {
       _Gui.updateTextInputControllerCaret__textInputController((cast runtime : Dynamic));
       _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:TextInputControllerSignals; }).signals : TextInputControllerSignals).onChange], [_Runtime.field(event, 'text')]]), 1);
     } : Dynamic));
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument461:Dynamic = _Runtime.field(options, 'textField'); __callArgument461; }), (cast 'onPointerDown' : String), ({ final __callArgument462:Dynamic = function(data:PointerEventData):Void {
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument509:Dynamic = _Runtime.field(options, 'textField'); __callArgument509; }), (cast 'onPointerDown' : String), ({ final __callArgument510:Dynamic = function(data:PointerEventData):Void {
       (#if js _Runtime.callValue(dispatchTextInputPointerDown, cast ([(cast runtime : { var manager:TextInputManager; }).manager, _Runtime.field(options, 'textField'), (cast data.localX : Float), (cast data.localY : Float), (cast data.shiftKey : Bool)] : Array<Dynamic>)) #else dispatchTextInputPointerDown((cast runtime : { var manager:TextInputManager; }).manager, _Runtime.field(options, 'textField'), (cast data.localX : Float), (cast data.localY : Float), (cast data.shiftKey : Bool), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
       _Gui.updateTextInputControllerCaret__textInputController((cast runtime : Dynamic));
-    }; __callArgument462; }));
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument465:Dynamic = _Runtime.field(options, 'textField'); __callArgument465; }), (cast 'onPointerMove' : String), ({ final __callArgument466:Dynamic = function(data:PointerEventData):Void {
+    }; __callArgument510; }));
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument513:Dynamic = _Runtime.field(options, 'textField'); __callArgument513; }), (cast 'onPointerMove' : String), ({ final __callArgument514:Dynamic = function(data:PointerEventData):Void {
       if ((cast !_Runtime.strictEquals(data.buttons, 0.0) : Bool)) {
         dispatchTextInputPointerMove((cast runtime : { var manager:TextInputManager; }).manager, (cast data.localX : Float), (cast data.localY : Float));
         _Gui.updateTextInputControllerCaret__textInputController((cast runtime : Dynamic));
       }
-    }; __callArgument466; }));
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument469:Dynamic = _Runtime.field(options, 'textField'); __callArgument469; }), (cast 'onWheel' : String), ({ final __callArgument470:Dynamic = function(data:PointerEventData):Void {
+    }; __callArgument514; }));
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument517:Dynamic = _Runtime.field(options, 'textField'); __callArgument517; }), (cast 'onWheel' : String), ({ final __callArgument518:Dynamic = function(data:PointerEventData):Void {
       dispatchTextInputWheel((cast runtime : { var manager:TextInputManager; }).manager, (cast data.deltaY : Float));
-    }; __callArgument470; }));
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument473:Dynamic = _Runtime.field(options, 'textField'); __callArgument473; }), (cast 'onFocusIn' : String), ({ final __callArgument476:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { focusTextInputController(({ final __callArgument474:Dynamic = controller; __callArgument474; })); }, cast ([] : Array<Dynamic>)); }; __callArgument476; }));
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument481:Dynamic = _Runtime.field(options, 'textField'); __callArgument481; }), (cast 'onFocusOut' : String), ({ final __callArgument484:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { blurTextInputController(({ final __callArgument482:Dynamic = controller; __callArgument482; })); }, cast ([] : Array<Dynamic>)); }; __callArgument484; }));
-    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument489:Dynamic = _Runtime.field(options, 'textField'); __callArgument489; }), (cast 'onKeyDown' : String), ({ final __callArgument496:Dynamic = function(data:KeyboardEventData):Void {
-      (cast dispatchTextInputControllerKeyDown(({ final __callArgument490:Dynamic = controller; __callArgument490; }), (cast _Gui.keyboardEventToInput__textInputController(({ final __callArgument491:Dynamic = data; __callArgument491; })) : InputKeyboardData)) : Bool);
-    }; __callArgument496; }));
+    }; __callArgument518; }));
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument521:Dynamic = _Runtime.field(options, 'textField'); __callArgument521; }), (cast 'onFocusIn' : String), ({ final __callArgument524:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { focusTextInputController(({ final __callArgument522:Dynamic = controller; __callArgument522; })); }, cast ([] : Array<Dynamic>)); }; __callArgument524; }));
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument529:Dynamic = _Runtime.field(options, 'textField'); __callArgument529; }), (cast 'onFocusOut' : String), ({ final __callArgument532:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { blurTextInputController(({ final __callArgument530:Dynamic = controller; __callArgument530; })); }, cast ([] : Array<Dynamic>)); }; __callArgument532; }));
+    connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument537:Dynamic = _Runtime.field(options, 'textField'); __callArgument537; }), (cast 'onKeyDown' : String), ({ final __callArgument544:Dynamic = function(data:KeyboardEventData):Void {
+      (cast dispatchTextInputControllerKeyDown(({ final __callArgument538:Dynamic = controller; __callArgument538; }), (cast _Gui.keyboardEventToInput__textInputController(({ final __callArgument539:Dynamic = data; __callArgument539; })) : InputKeyboardData)) : Bool);
+    }; __callArgument544; }));
     if ((cast !_Runtime.strictEquals(_Runtime.field(options, 'input'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-      connectGuiSignal((cast runtime : Dynamic), (cast (cast _Runtime.field(options, 'input') : TextInputSource).onKeyDown : Dynamic), ({ final __callArgument509:Dynamic = function(data:InputKeyboardData):Void {
-        (cast dispatchTextInputControllerKeyDown(({ final __callArgument505:Dynamic = controller; __callArgument505; }), ({ final __callArgument506:Dynamic = data; __callArgument506; })) : Bool);
-      }; __callArgument509; }));
-      connectGuiSignal((cast runtime : Dynamic), (cast (cast _Runtime.field(options, 'input') : TextInputSource).onTextInput : Dynamic), (cast function(data:InputTextData):Void { (cast dispatchTextInputControllerText(({ final __callArgument515:Dynamic = controller; __callArgument515; }), (cast data.text : String)) : Bool); } : Dynamic));
+      connectGuiSignal((cast runtime : Dynamic), (cast (cast _Runtime.field(options, 'input') : TextInputSource).onKeyDown : Dynamic), ({ final __callArgument557:Dynamic = function(data:InputKeyboardData):Void {
+        (cast dispatchTextInputControllerKeyDown(({ final __callArgument553:Dynamic = controller; __callArgument553; }), ({ final __callArgument554:Dynamic = data; __callArgument554; })) : Bool);
+      }; __callArgument557; }));
+      connectGuiSignal((cast runtime : Dynamic), (cast (cast _Runtime.field(options, 'input') : TextInputSource).onTextInput : Dynamic), (cast function(data:InputTextData):Void { (cast dispatchTextInputControllerText(({ final __callArgument563:Dynamic = controller; __callArgument563; }), (cast data.text : String)) : Bool); } : Dynamic));
     }
     setGuiVisible((cast runtime : Dynamic), (cast runtime : { var caret:Null<Node2D>; }).caret, (cast false : Bool));
     return cast controller;
@@ -1055,11 +1210,11 @@ class _Gui {
     var runtime:{ >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var previousText:String = cast _Runtime.UNDEFINED;
     var handled:Bool = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument519:Dynamic = controller; __callArgument519; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument567:Dynamic = controller; __callArgument567; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, });
     if ((cast _Runtime.strictEquals((cast runtime : { var textField:Null<RichText>; }).textField, null) : Bool)) { return cast false; }
     if ((cast _Runtime.strictEquals(data.key, 'Enter') : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:TextInputControllerSignals; }).signals : TextInputControllerSignals).onSubmit], [(cast (cast (cast runtime : { var textField:Null<RichText>; }).textField : { var data:RichTextData; }).data : { var text:String; }).text]]), 1); }
     previousText = (cast (cast (cast runtime : { var textField:Null<RichText>; }).textField : { var data:RichTextData; }).data : { var text:String; }).text;
-    handled = (cast (#if js _Runtime.callValue(dispatchTextInputKeyDown, cast ([(cast runtime : { var manager:TextInputManager; }).manager, ({ final __callArgument522:Dynamic = data; __callArgument522; })] : Array<Dynamic>)) #else dispatchTextInputKeyDown((cast runtime : { var manager:TextInputManager; }).manager, ({ final __callArgument521:Dynamic = data; __callArgument521; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bool);
+    handled = (cast (#if js _Runtime.callValue(dispatchTextInputKeyDown, cast ([(cast runtime : { var manager:TextInputManager; }).manager, ({ final __callArgument570:Dynamic = data; __callArgument570; })] : Array<Dynamic>)) #else dispatchTextInputKeyDown((cast runtime : { var manager:TextInputManager; }).manager, ({ final __callArgument569:Dynamic = data; __callArgument569; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Bool);
     if ((cast !_Runtime.strictEquals((cast (cast (cast runtime : { var textField:Null<RichText>; }).textField : { var data:RichTextData; }).data : { var text:String; }).text, previousText) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:TextInputControllerSignals; }).signals : TextInputControllerSignals).onChange], [(cast (cast (cast runtime : { var textField:Null<RichText>; }).textField : { var data:RichTextData; }).data : { var text:String; }).text]]), 1); }
     _Gui.updateTextInputControllerCaret__textInputController((cast runtime : Dynamic));
     return cast handled;
@@ -1070,7 +1225,7 @@ class _Gui {
     var runtime:{ >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var previousText:String = cast _Runtime.UNDEFINED;
     var handled:Bool = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument523:Dynamic = controller; __callArgument523; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument571:Dynamic = controller; __callArgument571; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, });
     if ((cast _Runtime.strictEquals((cast runtime : { var textField:Null<RichText>; }).textField, null) : Bool)) { return cast false; }
     previousText = (cast (cast (cast runtime : { var textField:Null<RichText>; }).textField : { var data:RichTextData; }).data : { var text:String; }).text;
     handled = (cast dispatchTextInput((cast runtime : { var manager:TextInputManager; }).manager, (cast text : String)) : Bool);
@@ -1082,8 +1237,8 @@ class _Gui {
 
   public static function disposeTextInputController(controller:TextInputController):Void {
     var runtime:{ >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument525:Dynamic = controller; __callArgument525; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument527:Dynamic = controller; __callArgument527; }), ({ final __callArgument528:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument573:Dynamic = controller; __callArgument573; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument575:Dynamic = controller; __callArgument575; }), ({ final __callArgument576:Dynamic = function():Void {
       if ((cast !_Runtime.strictEquals((cast runtime : { var textField:Null<RichText>; }).textField, null) : Bool)) {
         if ((cast _Runtime.strictEquals((cast (cast runtime : { var manager:TextInputManager; }).manager : { var focused:Null<RichText>; }).focused, (cast runtime : { var textField:Null<RichText>; }).textField) : Bool)) { blurTextInput((cast runtime : { var manager:TextInputManager; }).manager); }
         if ((cast (cast runtime : { var ownsInput:Bool; }).ownsInput : Bool)) { disableTextInput((cast runtime : { var textField:Null<RichText>; }).textField); }
@@ -1091,12 +1246,12 @@ class _Gui {
       ((cast runtime : { var background:Null<Node2D>; }).background = null);
       ((cast runtime : { var caret:Null<Node2D>; }).caret = null);
       ((cast runtime : { var textField:Null<RichText>; }).textField = null);
-    }; __callArgument528; }));
+    }; __callArgument576; }));
   }
 
   public static function focusTextInputController(controller:TextInputController):Void {
     var runtime:{ >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument531:Dynamic = controller; __callArgument531; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument579:Dynamic = controller; __callArgument579; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, });
     if ((cast _Runtime.strictEquals((cast runtime : { var textField:Null<RichText>; }).textField, null) : Bool)) { return; }
     focusTextInput((cast runtime : { var manager:TextInputManager; }).manager, (cast runtime : { var textField:Null<RichText>; }).textField);
     setGuiVisible((cast runtime : Dynamic), (cast runtime : { var caret:Null<Node2D>; }).caret, (cast true : Bool));
@@ -1104,7 +1259,7 @@ class _Gui {
   }
 
   public static function getTextInputControllerSignals(controller:TextInputController):TextInputControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument533:Dynamic = controller; __callArgument533; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, }) : { var signals:TextInputControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument581:Dynamic = controller; __callArgument581; })) : { >TextInputControllerFields__textInputController, >GuiControllerRuntime__guiController, }) : { var signals:TextInputControllerSignals; }).signals;
     return cast null;
   }
 
@@ -1120,9 +1275,9 @@ class _Gui {
     layout = (cast (cast getRichTextRuntime((cast runtime : { var textField:Null<RichText>; }).textField) : RichTextRuntime) : { var textLayout:Null<TextLayoutResult>; }).textLayout;
     if ((cast _Runtime.strictEquals(layout, null) : Bool)) { return; }
     rectangle = (cast { height: 0.0, lineIndex: 0.0, width: 0.0, x: 0.0, y: 0.0 });
-    getTextInputCaretRectangle(({ final __callArgument535:Dynamic = rectangle; __callArgument535; }), (cast runtime : { var textField:Null<RichText>; }).textField, ({ final __callArgument536:Dynamic = layout; __callArgument536; }));
-    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument539:Dynamic = (cast runtime : { var caret:Null<Node2D>; }).caret; __callArgument539; }), ({ final __callArgument540:Dynamic = 'x'; __callArgument540; }), ({ final __callArgument541:Dynamic = (cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x; __callArgument541; }));
-    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument545:Dynamic = (cast runtime : { var caret:Null<Node2D>; }).caret; __callArgument545; }), ({ final __callArgument546:Dynamic = 'y'; __callArgument546; }), ({ final __callArgument547:Dynamic = (cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y; __callArgument547; }));
+    getTextInputCaretRectangle(({ final __callArgument583:Dynamic = rectangle; __callArgument583; }), (cast runtime : { var textField:Null<RichText>; }).textField, ({ final __callArgument584:Dynamic = layout; __callArgument584; }));
+    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument587:Dynamic = (cast runtime : { var caret:Null<Node2D>; }).caret; __callArgument587; }), ({ final __callArgument588:Dynamic = 'x'; __callArgument588; }), ({ final __callArgument589:Dynamic = (cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).x; __callArgument589; }));
+    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument593:Dynamic = (cast runtime : { var caret:Null<Node2D>; }).caret; __callArgument593; }), ({ final __callArgument594:Dynamic = 'y'; __callArgument594; }), ({ final __callArgument595:Dynamic = (cast rectangle : { var height:Float; var lineIndex:Float; var width:Float; var x:Float; var y:Float; }).y; __callArgument595; }));
   }
 
   public static function createToggleController(options:ToggleControllerOptions):ToggleController {
@@ -1133,15 +1288,15 @@ class _Gui {
     controller = (cast createGuiController((cast runtime : Dynamic)) : ToggleController);
     targets = (cast _Runtime.filterArray((cast cast ([_Runtime.field(options, 'uncheckedState'), _Runtime.field(options, 'checkedState'), _Runtime.field(options, 'label')] : Array<Dynamic>) : Array<Dynamic>), function(target:Null<Node2D>, index:Float, all:Array<Null<Node2D>>):Bool return ((cast !_Runtime.strictEquals(target, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) && (cast _Runtime.strictEquals(_Runtime.callProperty(all, 'indexOf', cast ([target] : Array<Dynamic>)), index) : Bool)), _Runtime.UNDEFINED));
     for (target in _Runtime.iterable(targets)) {
-      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument553:Dynamic = target; __callArgument553; }), (cast 'onClick' : String), ({ final __callArgument556:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { setToggleControllerChecked(({ final __callArgument554:Dynamic = controller; __callArgument554; }), (cast !(cast (cast runtime : { var checked:Bool; }).checked : Bool) : Bool)); }, cast ([] : Array<Dynamic>)); }; __callArgument556; }));
-      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument561:Dynamic = target; __callArgument561; }), (cast 'onPointerOver' : String), ({ final __callArgument562:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument601:Dynamic = target; __callArgument601; }), (cast 'onClick' : String), ({ final __callArgument604:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { setToggleControllerChecked(({ final __callArgument602:Dynamic = controller; __callArgument602; }), (cast !(cast (cast runtime : { var checked:Bool; }).checked : Bool) : Bool)); }, cast ([] : Array<Dynamic>)); }; __callArgument604; }));
+      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument609:Dynamic = target; __callArgument609; }), (cast 'onPointerOver' : String), ({ final __callArgument610:Dynamic = function(__unused1:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
         ((cast runtime : { var over:Bool; }).over = true);
         _Gui.updateToggleControllerVisuals__toggleController((cast runtime : Dynamic));
-      }, cast ([] : Array<Dynamic>)); }; __callArgument562; }));
-      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument565:Dynamic = target; __callArgument565; }), (cast 'onPointerOut' : String), ({ final __callArgument566:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+      }, cast ([] : Array<Dynamic>)); }; __callArgument610; }));
+      connectGuiInteraction((cast runtime : Dynamic), ({ final __callArgument613:Dynamic = target; __callArgument613; }), (cast 'onPointerOut' : String), ({ final __callArgument614:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
         ((cast runtime : { var over:Bool; }).over = false);
         _Gui.updateToggleControllerVisuals__toggleController((cast runtime : Dynamic));
-      }, cast ([] : Array<Dynamic>)); }; __callArgument566; }));
+      }, cast ([] : Array<Dynamic>)); }; __callArgument614; }));
     }
     _Gui.updateToggleControllerVisuals__toggleController((cast runtime : Dynamic));
     return cast controller;
@@ -1150,28 +1305,28 @@ class _Gui {
 
   public static function disposeToggleController(controller:ToggleController):Void {
     var runtime:{ >ToggleControllerFields__toggleController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument569:Dynamic = controller; __callArgument569; })) : { >ToggleControllerFields__toggleController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument571:Dynamic = controller; __callArgument571; }), ({ final __callArgument572:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument617:Dynamic = controller; __callArgument617; })) : { >ToggleControllerFields__toggleController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument619:Dynamic = controller; __callArgument619; }), ({ final __callArgument620:Dynamic = function():Void {
       ((cast runtime : { var checkedState:Null<Node2D>; }).checkedState = null);
       ((cast runtime : { var label:Null<Node2D>; }).label = null);
       ((cast runtime : { var overState:Null<Node2D>; }).overState = null);
       ((cast runtime : { var uncheckedState:Null<Node2D>; }).uncheckedState = null);
-    }; __callArgument572; }));
+    }; __callArgument620; }));
   }
 
   public static function getToggleControllerSignals(controller:ToggleController):ToggleControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument575:Dynamic = controller; __callArgument575; })) : { >ToggleControllerFields__toggleController, >GuiControllerRuntime__guiController, }) : { var signals:ToggleControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument623:Dynamic = controller; __callArgument623; })) : { >ToggleControllerFields__toggleController, >GuiControllerRuntime__guiController, }) : { var signals:ToggleControllerSignals; }).signals;
     return cast null;
   }
 
   public static function isToggleControllerChecked(controller:ToggleController):Bool {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument577:Dynamic = controller; __callArgument577; })) : { >ToggleControllerFields__toggleController, >GuiControllerRuntime__guiController, }) : { var checked:Bool; }).checked;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument625:Dynamic = controller; __callArgument625; })) : { >ToggleControllerFields__toggleController, >GuiControllerRuntime__guiController, }) : { var checked:Bool; }).checked;
     return cast null;
   }
 
   public static function setToggleControllerChecked(controller:ToggleController, checked:Bool):Void {
     var runtime:{ >ToggleControllerFields__toggleController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument579:Dynamic = controller; __callArgument579; })) : { >ToggleControllerFields__toggleController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument627:Dynamic = controller; __callArgument627; })) : { >ToggleControllerFields__toggleController, >GuiControllerRuntime__guiController, });
     if ((cast ((cast _Runtime.strictEquals((cast runtime : { var checked:Bool; }).checked, checked) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return; }
     ((cast runtime : { var checked:Bool; }).checked = checked);
     _Gui.updateToggleControllerVisuals__toggleController((cast runtime : Dynamic));
@@ -1187,45 +1342,45 @@ class _Gui {
   public static function createTooltipController(options:TooltipControllerOptions):TooltipController {
     var runtime:{ >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var controller:TooltipController = cast _Runtime.UNDEFINED;
-    runtime = (cast createGuiControllerRuntime((cast { content: _Runtime.field(options, 'content'), delay: HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(options, 'delay'), function():Dynamic return cast 500.0)), offsetX: _Runtime.coalesce(({ final __typedStruct581 = _Runtime.field(options, 'offset'); __typedStruct581 == null ? _Runtime.UNDEFINED : (cast __typedStruct581 : { var x:Float; }).x; }), function():Dynamic return cast 0.0), offsetY: _Runtime.coalesce(({ final __typedStruct582 = _Runtime.field(options, 'offset'); __typedStruct582 == null ? _Runtime.UNDEFINED : (cast __typedStruct582 : { var y:Float; }).y; }), function():Dynamic return cast 20.0), target: _Runtime.field(options, 'target'), timer: null, worldX: 0.0, worldY: 0.0 } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, });
+    runtime = (cast createGuiControllerRuntime((cast { content: _Runtime.field(options, 'content'), delay: HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(options, 'delay'), function():Dynamic return cast 500.0)), offsetX: _Runtime.coalesce(({ final __typedStruct629 = _Runtime.field(options, 'offset'); __typedStruct629 == null ? _Runtime.UNDEFINED : (cast __typedStruct629 : { var x:Float; }).x; }), function():Dynamic return cast 0.0), offsetY: _Runtime.coalesce(({ final __typedStruct630 = _Runtime.field(options, 'offset'); __typedStruct630 == null ? _Runtime.UNDEFINED : (cast __typedStruct630 : { var y:Float; }).y; }), function():Dynamic return cast 20.0), target: _Runtime.field(options, 'target'), timer: null, worldX: 0.0, worldY: 0.0 } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : TooltipController);
     _Runtime.callProperty((cast runtime : { var cleanups:Array<Void->Void>; }).cleanups, 'push', cast ([function():Void { _Gui.clearTooltipControllerTimer__tooltipController((cast runtime : Dynamic)); }] : Array<Dynamic>));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'target'), (cast 'onPointerOver' : String), ({ final __callArgument589:Dynamic = function(data:PointerEventData):Void {
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'target'), (cast 'onPointerOver' : String), ({ final __callArgument637:Dynamic = function(data:PointerEventData):Void {
       ((cast runtime : { var worldX:Float; }).worldX = data.worldX);
       ((cast runtime : { var worldY:Float; }).worldY = data.worldY);
       _Gui.clearTooltipControllerTimer__tooltipController((cast runtime : Dynamic));
-      if ((cast _Runtime.strictEquals((cast runtime : { var delay:Float; }).delay, 0.0) : Bool)) { showTooltipController(({ final __callArgument585:Dynamic = controller; __callArgument585; })); } else { ((cast runtime : { var timer:Null<flight._internal.dom.Timeout>; }).timer = _Runtime.setTimeout(function():Void { showTooltipController(({ final __callArgument587:Dynamic = controller; __callArgument587; })); }, (cast runtime : { var delay:Float; }).delay)); }
-    }; __callArgument589; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'target'), (cast 'onPointerMove' : String), ({ final __callArgument596:Dynamic = function(data:PointerEventData):Void {
+      if ((cast _Runtime.strictEquals((cast runtime : { var delay:Float; }).delay, 0.0) : Bool)) { showTooltipController(({ final __callArgument633:Dynamic = controller; __callArgument633; })); } else { ((cast runtime : { var timer:Null<flight._internal.dom.Timeout>; }).timer = _Runtime.setTimeout(function():Void { showTooltipController(({ final __callArgument635:Dynamic = controller; __callArgument635; })); }, (cast runtime : { var delay:Float; }).delay)); }
+    }; __callArgument637; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'target'), (cast 'onPointerMove' : String), ({ final __callArgument644:Dynamic = function(data:PointerEventData):Void {
       ((cast runtime : { var worldX:Float; }).worldX = data.worldX);
       ((cast runtime : { var worldY:Float; }).worldY = data.worldY);
-      if ((cast _Runtime.strictEquals(({ final __structural595 = (cast runtime : { var content:Null<Node2D>; }).content; __structural595 == null ? _Runtime.UNDEFINED : (cast __structural595 : { var visible:Bool; }).visible; }), true) : Bool)) { _Gui.positionTooltipController__tooltipController((cast runtime : Dynamic)); }
-    }; __callArgument596; }));
-    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'target'), (cast 'onPointerOut' : String), ({ final __callArgument601:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { hideTooltipController(({ final __callArgument599:Dynamic = controller; __callArgument599; })); }, cast ([] : Array<Dynamic>)); }; __callArgument601; }));
-    setGuiVisible((cast runtime : Dynamic), ({ final __callArgument605:Dynamic = _Runtime.field(options, 'content'); __callArgument605; }), (cast false : Bool));
+      if ((cast _Runtime.strictEquals(({ final __structural643 = (cast runtime : { var content:Null<Node2D>; }).content; __structural643 == null ? _Runtime.UNDEFINED : (cast __structural643 : { var visible:Bool; }).visible; }), true) : Bool)) { _Gui.positionTooltipController__tooltipController((cast runtime : Dynamic)); }
+    }; __callArgument644; }));
+    connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(options, 'target'), (cast 'onPointerOut' : String), ({ final __callArgument649:Dynamic = function(__unused0:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { hideTooltipController(({ final __callArgument647:Dynamic = controller; __callArgument647; })); }, cast ([] : Array<Dynamic>)); }; __callArgument649; }));
+    setGuiVisible((cast runtime : Dynamic), ({ final __callArgument653:Dynamic = _Runtime.field(options, 'content'); __callArgument653; }), (cast false : Bool));
     return cast controller;
     return cast null;
   }
 
   public static function disposeTooltipController(controller:TooltipController):Void {
     var runtime:{ >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument607:Dynamic = controller; __callArgument607; })) : { >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument609:Dynamic = controller; __callArgument609; }), ({ final __callArgument610:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument655:Dynamic = controller; __callArgument655; })) : { >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument657:Dynamic = controller; __callArgument657; }), ({ final __callArgument658:Dynamic = function():Void {
       ((cast runtime : { var content:Null<Node2D>; }).content = null);
       ((cast runtime : { var target:Null<Node2D>; }).target = null);
-    }; __callArgument610; }));
+    }; __callArgument658; }));
   }
 
   public static function hideTooltipController(controller:TooltipController):Void {
     var runtime:{ >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument613:Dynamic = controller; __callArgument613; })) : { >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument661:Dynamic = controller; __callArgument661; })) : { >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, });
     _Gui.clearTooltipControllerTimer__tooltipController((cast runtime : Dynamic));
     setGuiVisible((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, (cast false : Bool));
   }
 
   public static function showTooltipController(controller:TooltipController):Void {
     var runtime:{ >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument615:Dynamic = controller; __callArgument615; })) : { >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument663:Dynamic = controller; __callArgument663; })) : { >TooltipControllerFields__tooltipController, >GuiControllerRuntime__guiController, });
     _Gui.clearTooltipControllerTimer__tooltipController((cast runtime : Dynamic));
     _Gui.positionTooltipController__tooltipController((cast runtime : Dynamic));
     setGuiVisible((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, (cast true : Bool));
@@ -1238,8 +1393,8 @@ class _Gui {
   }
 
   public static function positionTooltipController__tooltipController(runtime:Dynamic):Void {
-    setGuiVisualProperty((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, ({ final __callArgument617:Dynamic = 'x'; __callArgument617; }), ({ final __callArgument618:Dynamic = ((cast runtime : { var worldX:Float; }).worldX + (cast runtime : { var offsetX:Float; }).offsetX); __callArgument618; }));
-    setGuiVisualProperty((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, ({ final __callArgument621:Dynamic = 'y'; __callArgument621; }), ({ final __callArgument622:Dynamic = ((cast runtime : { var worldY:Float; }).worldY + (cast runtime : { var offsetY:Float; }).offsetY); __callArgument622; }));
+    setGuiVisualProperty((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, ({ final __callArgument665:Dynamic = 'x'; __callArgument665; }), ({ final __callArgument666:Dynamic = ((cast runtime : { var worldX:Float; }).worldX + (cast runtime : { var offsetX:Float; }).offsetX); __callArgument666; }));
+    setGuiVisualProperty((cast runtime : Dynamic), (cast runtime : { var content:Null<Node2D>; }).content, ({ final __callArgument669:Dynamic = 'y'; __callArgument669; }), ({ final __callArgument670:Dynamic = ((cast runtime : { var worldY:Float; }).worldY + (cast runtime : { var offsetY:Float; }).offsetY); __callArgument670; }));
   }
 
   public static function createTreeViewController(options:TreeViewControllerOptions):TreeViewController {
@@ -1251,18 +1406,18 @@ class _Gui {
     items = (cast cast ([] : Array<Dynamic>));
     parents = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     expanded = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
-    _Gui.collectTreeViewItems__treeViewController(_Runtime.field(options, 'items'), ({ final __callArgument625:Dynamic = null; __callArgument625; }), ({ final __callArgument626:Dynamic = items; __callArgument626; }), ({ final __callArgument627:Dynamic = parents; __callArgument627; }), ({ final __callArgument628:Dynamic = expanded; __callArgument628; }));
+    _Gui.collectTreeViewItems__treeViewController(_Runtime.field(options, 'items'), ({ final __callArgument673:Dynamic = null; __callArgument673; }), ({ final __callArgument674:Dynamic = items; __callArgument674; }), ({ final __callArgument675:Dynamic = parents; __callArgument675; }), ({ final __callArgument676:Dynamic = expanded; __callArgument676; }));
     runtime = (cast createGuiControllerRuntime((cast { expanded: expanded, items: items, parents: parents, roots: _Runtime.slice(_Runtime.field(options, 'items'), 0, null), selectedItem: _Runtime.coalesce(_Runtime.field(options, 'selectedItem'), function():Dynamic return cast null), signals: { onActivate: (cast createSignal() : Signal<TreeViewControllerItem->Void>), onExpandChange: (cast createSignal() : Signal<TreeViewControllerItem->Bool->Void>), onSelect: (cast createSignal() : Signal<Null<TreeViewControllerItem>->Void>) } } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : TreeViewController);
     _Runtime.forEachArray((cast (cast runtime : { var items:Array<TreeViewControllerItem>; }).items : Array<TreeViewControllerItem>), function(item:TreeViewControllerItem, __unused0:Float, __unused1:Array<TreeViewControllerItem>):Void {
-      connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(item, 'visual'), (cast 'onClick' : String), ({ final __callArgument637:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { setTreeViewControllerSelectedItem(({ final __callArgument633:Dynamic = controller; __callArgument633; }), ({ final __callArgument634:Dynamic = item; __callArgument634; })); }, cast ([] : Array<Dynamic>)); }; __callArgument637; }));
-      connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(item, 'visual'), (cast 'onDoubleClick' : String), ({ final __callArgument647:Dynamic = function(__unused3:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
+      connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(item, 'visual'), (cast 'onClick' : String), ({ final __callArgument685:Dynamic = function(__unused2:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void { setTreeViewControllerSelectedItem(({ final __callArgument681:Dynamic = controller; __callArgument681; }), ({ final __callArgument682:Dynamic = item; __callArgument682; })); }, cast ([] : Array<Dynamic>)); }; __callArgument685; }));
+      connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(item, 'visual'), (cast 'onDoubleClick' : String), ({ final __callArgument695:Dynamic = function(__unused3:Array<flight._internal._Any>):Void { _Runtime.callValue(function():Void {
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:TreeViewControllerSignals; }).signals : TreeViewControllerSignals).onActivate], [item]]), 1);
-        if ((cast ((cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(item, 'children'), 'length'), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool)) { toggleTreeViewControllerItem(({ final __callArgument643:Dynamic = controller; __callArgument643; }), ({ final __callArgument644:Dynamic = item; __callArgument644; })); }
-      }, cast ([] : Array<Dynamic>)); }; __callArgument647; }));
-      connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(item, 'visual'), (cast 'onKeyDown' : String), ({ final __callArgument657:Dynamic = function(data:KeyboardEventData):Void {
-        _Gui.handleTreeViewControllerKeyDown__treeViewController(({ final __callArgument653:Dynamic = controller; __callArgument653; }), ({ final __callArgument654:Dynamic = data; __callArgument654; }));
-      }; __callArgument657; }));
+        if ((cast ((cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(item, 'children'), 'length'), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool)) { toggleTreeViewControllerItem(({ final __callArgument691:Dynamic = controller; __callArgument691; }), ({ final __callArgument692:Dynamic = item; __callArgument692; })); }
+      }, cast ([] : Array<Dynamic>)); }; __callArgument695; }));
+      connectGuiInteraction((cast runtime : Dynamic), _Runtime.field(item, 'visual'), (cast 'onKeyDown' : String), ({ final __callArgument705:Dynamic = function(data:KeyboardEventData):Void {
+        _Gui.handleTreeViewControllerKeyDown__treeViewController(({ final __callArgument701:Dynamic = controller; __callArgument701; }), ({ final __callArgument702:Dynamic = data; __callArgument702; }));
+      }; __callArgument705; }));
     }, _Runtime.UNDEFINED);
     _Gui.updateTreeViewControllerVisibility__treeViewController((cast runtime : Dynamic));
     return cast controller;
@@ -1271,35 +1426,35 @@ class _Gui {
 
   public static function disposeTreeViewController(controller:TreeViewController):Void {
     var runtime:{ >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument663:Dynamic = controller; __callArgument663; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument665:Dynamic = controller; __callArgument665; }), ({ final __callArgument666:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument711:Dynamic = controller; __callArgument711; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument713:Dynamic = controller; __callArgument713; }), ({ final __callArgument714:Dynamic = function():Void {
       ((cast (cast runtime : { var expanded:flight._internal._Set<TreeViewControllerItem>; }).expanded : flight._internal._Set<TreeViewControllerItem>).clear());
       _Runtime.setLength((cast runtime : { var items:Array<TreeViewControllerItem>; }).items, 0.0);
       ((cast (cast runtime : { var parents:flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>; }).parents : flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>).clear());
       _Runtime.setLength((cast runtime : { var roots:Array<TreeViewControllerItem>; }).roots, 0.0);
       ((cast runtime : { var selectedItem:Null<TreeViewControllerItem>; }).selectedItem = null);
-    }; __callArgument666; }));
+    }; __callArgument714; }));
   }
 
   public static function getTreeViewControllerSelectedItem(controller:TreeViewController):Null<TreeViewControllerItem> {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument669:Dynamic = controller; __callArgument669; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, }) : { var selectedItem:Null<TreeViewControllerItem>; }).selectedItem;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument717:Dynamic = controller; __callArgument717; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, }) : { var selectedItem:Null<TreeViewControllerItem>; }).selectedItem;
     return cast null;
   }
 
   public static function getTreeViewControllerSignals(controller:TreeViewController):TreeViewControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument671:Dynamic = controller; __callArgument671; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, }) : { var signals:TreeViewControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument719:Dynamic = controller; __callArgument719; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, }) : { var signals:TreeViewControllerSignals; }).signals;
     return cast null;
   }
 
   public static function isTreeViewControllerItemExpanded(controller:TreeViewController, item:TreeViewControllerItem):Bool {
-    return cast ((cast (cast (cast getGuiControllerRuntime(({ final __callArgument675:Dynamic = controller; __callArgument675; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, }) : { var expanded:flight._internal._Set<TreeViewControllerItem>; }).expanded : flight._internal._Set<TreeViewControllerItem>).has(item));
+    return cast ((cast (cast (cast getGuiControllerRuntime(({ final __callArgument723:Dynamic = controller; __callArgument723; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, }) : { var expanded:flight._internal._Set<TreeViewControllerItem>; }).expanded : flight._internal._Set<TreeViewControllerItem>).has(item));
     return cast null;
   }
 
   public static function setTreeViewControllerItemExpanded(controller:TreeViewController, item:TreeViewControllerItem, expanded:Bool):Void {
     var runtime:{ >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var previous:Bool = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument677:Dynamic = controller; __callArgument677; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument725:Dynamic = controller; __callArgument725; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, });
     if ((cast ((cast ((cast !(cast ((cast (cast runtime : { var parents:flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>; }).parents : flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>).has(item)) : Bool) : Bool) || (cast _Runtime.strictEquals(_Runtime.coalesce(_Runtime.optionalField(_Runtime.field(item, 'children'), 'length'), function():Dynamic return cast 0.0), 0.0) : Bool)) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return; }
     previous = ((cast (cast runtime : { var expanded:flight._internal._Set<TreeViewControllerItem>; }).expanded : flight._internal._Set<TreeViewControllerItem>).has(item));
     if ((cast _Runtime.strictEquals(previous, expanded) : Bool)) { return; }
@@ -1311,7 +1466,7 @@ class _Gui {
   public static function setTreeViewControllerSelectedItem(controller:TreeViewController, item:Null<TreeViewControllerItem>):Void {
     var runtime:{ >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var next:Null<TreeViewControllerItem> = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument679:Dynamic = controller; __callArgument679; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument727:Dynamic = controller; __callArgument727; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, });
     next = ((cast ((cast !_Runtime.strictEquals(item, null) : Bool) && (cast ((cast (cast runtime : { var parents:flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>; }).parents : flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>).has(item)) : Bool)) : Bool) ? (cast item : Dynamic) : (cast null : Dynamic));
     if ((cast ((cast _Runtime.strictEquals((cast runtime : { var selectedItem:Null<TreeViewControllerItem>; }).selectedItem, next) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return; }
     ((cast runtime : { var selectedItem:Null<TreeViewControllerItem>; }).selectedItem = next);
@@ -1319,7 +1474,7 @@ class _Gui {
   }
 
   public static function toggleTreeViewControllerItem(controller:TreeViewController, item:TreeViewControllerItem):Void {
-    setTreeViewControllerItemExpanded(({ final __callArgument681:Dynamic = controller; __callArgument681; }), ({ final __callArgument682:Dynamic = item; __callArgument682; }), (cast !(cast (cast isTreeViewControllerItemExpanded(({ final __callArgument683:Dynamic = controller; __callArgument683; }), ({ final __callArgument684:Dynamic = item; __callArgument684; })) : Bool) : Bool) : Bool));
+    setTreeViewControllerItemExpanded(({ final __callArgument729:Dynamic = controller; __callArgument729; }), ({ final __callArgument730:Dynamic = item; __callArgument730; }), (cast !(cast (cast isTreeViewControllerItemExpanded(({ final __callArgument731:Dynamic = controller; __callArgument731; }), ({ final __callArgument732:Dynamic = item; __callArgument732; })) : Bool) : Bool) : Bool));
   }
 
   public static function collectTreeViewItems__treeViewController(source:Array<TreeViewControllerItem>, parent:Null<TreeViewControllerItem>, items:Array<TreeViewControllerItem>, parents:flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>, expanded:flight._internal._Set<TreeViewControllerItem>):Void {
@@ -1327,12 +1482,12 @@ class _Gui {
       _Runtime.callProperty(items, 'push', cast ([item] : Array<Dynamic>));
       ((cast parents : flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>).set(item, (cast parent)));
       if ((cast _Runtime.strictEquals(_Runtime.field(item, 'expanded'), true) : Bool)) { ((cast expanded : flight._internal._Set<TreeViewControllerItem>).add(item)); }
-      if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'children'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Gui.collectTreeViewItems__treeViewController(_Runtime.field(item, 'children'), ({ final __callArgument695:Dynamic = item; __callArgument695; }), ({ final __callArgument696:Dynamic = items; __callArgument696; }), ({ final __callArgument697:Dynamic = parents; __callArgument697; }), ({ final __callArgument698:Dynamic = expanded; __callArgument698; })); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(item, 'children'), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { _Gui.collectTreeViewItems__treeViewController(_Runtime.field(item, 'children'), ({ final __callArgument743:Dynamic = item; __callArgument743; }), ({ final __callArgument744:Dynamic = items; __callArgument744; }), ({ final __callArgument745:Dynamic = parents; __callArgument745; }), ({ final __callArgument746:Dynamic = expanded; __callArgument746; })); }
     }
   }
 
   public static function getVisibleTreeViewItems__treeViewController(runtime:Dynamic):Array<TreeViewControllerItem> {
-    return cast (cast _Runtime.filterArray((cast (cast runtime : { var items:Array<TreeViewControllerItem>; }).items : Array<TreeViewControllerItem>), function(item:TreeViewControllerItem, __unused4:Float, __unused5:Array<TreeViewControllerItem>):Bool return (cast _Gui.isTreeViewItemVisible__treeViewController((cast runtime : Dynamic), ({ final __callArgument703:Dynamic = item; __callArgument703; })) : Bool), _Runtime.UNDEFINED));
+    return cast (cast _Runtime.filterArray((cast (cast runtime : { var items:Array<TreeViewControllerItem>; }).items : Array<TreeViewControllerItem>), function(item:TreeViewControllerItem, __unused4:Float, __unused5:Array<TreeViewControllerItem>):Bool return (cast _Gui.isTreeViewItemVisible__treeViewController((cast runtime : Dynamic), ({ final __callArgument751:Dynamic = item; __callArgument751; })) : Bool), _Runtime.UNDEFINED));
     return cast null;
   }
 
@@ -1341,14 +1496,14 @@ class _Gui {
     var selected:Null<TreeViewControllerItem> = cast _Runtime.UNDEFINED;
     var visible:Array<TreeViewControllerItem> = cast _Runtime.UNDEFINED;
     var index:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument705:Dynamic = controller; __callArgument705; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument753:Dynamic = controller; __callArgument753; })) : { >TreeViewControllerFields__treeViewController, >GuiControllerRuntime__guiController, });
     selected = (cast runtime : { var selectedItem:Null<TreeViewControllerItem>; }).selectedItem;
     visible = (cast _Gui.getVisibleTreeViewItems__treeViewController((cast runtime : Dynamic)) : Array<TreeViewControllerItem>);
     index = ((cast _Runtime.strictEquals(selected, null) : Bool) ? (cast -1.0 : Dynamic) : (cast _Runtime.callProperty(visible, 'indexOf', cast ([selected] : Array<Dynamic>)) : Dynamic));
-    if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowDown') : Bool) && (cast ((cast _Runtime.field(visible, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { setTreeViewControllerSelectedItem(({ final __callArgument707:Dynamic = controller; __callArgument707; }), ({ final __callArgument708:Dynamic = flight._internal._StaticIndex.readArray(visible, HxMath.min(_Runtime.subtractNumbers(_Runtime.field(visible, 'length'), 1.0), (index + 1.0))); __callArgument708; })); } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowUp') : Bool) && (cast ((cast _Runtime.field(visible, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { setTreeViewControllerSelectedItem(({ final __callArgument711:Dynamic = controller; __callArgument711; }), ({ final __callArgument712:Dynamic = flight._internal._StaticIndex.readArray(visible, HxMath.max(0.0, (index - 1.0))); __callArgument712; })); } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowRight') : Bool) && (cast !_Runtime.strictEquals(selected, null) : Bool)) : Bool)) {
-      if ((cast ((cast ((cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(selected, 'children'), 'length'), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast ((cast (cast runtime : { var expanded:flight._internal._Set<TreeViewControllerItem>; }).expanded : flight._internal._Set<TreeViewControllerItem>).has(selected)) : Bool) : Bool)) : Bool)) { setTreeViewControllerItemExpanded(({ final __callArgument715:Dynamic = controller; __callArgument715; }), ({ final __callArgument716:Dynamic = selected; __callArgument716; }), (cast true : Bool)); } else { if ((cast ((cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(selected, 'children'), 'length'), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool)) { setTreeViewControllerSelectedItem(({ final __callArgument719:Dynamic = controller; __callArgument719; }), ({ final __callArgument720:Dynamic = flight._internal._StaticIndex.readArray(_Runtime.field(selected, 'children'), 0.0); __callArgument720; })); } }
+    if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowDown') : Bool) && (cast ((cast _Runtime.field(visible, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { setTreeViewControllerSelectedItem(({ final __callArgument755:Dynamic = controller; __callArgument755; }), ({ final __callArgument756:Dynamic = flight._internal._StaticIndex.readArray(visible, HxMath.min(_Runtime.subtractNumbers(_Runtime.field(visible, 'length'), 1.0), (index + 1.0))); __callArgument756; })); } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowUp') : Bool) && (cast ((cast _Runtime.field(visible, 'length') : Float) > (cast 0.0 : Float)) : Bool)) : Bool)) { setTreeViewControllerSelectedItem(({ final __callArgument759:Dynamic = controller; __callArgument759; }), ({ final __callArgument760:Dynamic = flight._internal._StaticIndex.readArray(visible, HxMath.max(0.0, (index - 1.0))); __callArgument760; })); } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowRight') : Bool) && (cast !_Runtime.strictEquals(selected, null) : Bool)) : Bool)) {
+      if ((cast ((cast ((cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(selected, 'children'), 'length'), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool) && (cast !(cast ((cast (cast runtime : { var expanded:flight._internal._Set<TreeViewControllerItem>; }).expanded : flight._internal._Set<TreeViewControllerItem>).has(selected)) : Bool) : Bool)) : Bool)) { setTreeViewControllerItemExpanded(({ final __callArgument763:Dynamic = controller; __callArgument763; }), ({ final __callArgument764:Dynamic = selected; __callArgument764; }), (cast true : Bool)); } else { if ((cast ((cast _Runtime.coalesce(_Runtime.optionalField(_Runtime.field(selected, 'children'), 'length'), function():Dynamic return cast 0.0) : Float) > (cast 0.0 : Float)) : Bool)) { setTreeViewControllerSelectedItem(({ final __callArgument767:Dynamic = controller; __callArgument767; }), ({ final __callArgument768:Dynamic = flight._internal._StaticIndex.readArray(_Runtime.field(selected, 'children'), 0.0); __callArgument768; })); } }
     } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'ArrowLeft') : Bool) && (cast !_Runtime.strictEquals(selected, null) : Bool)) : Bool)) {
-      if ((cast ((cast (cast runtime : { var expanded:flight._internal._Set<TreeViewControllerItem>; }).expanded : flight._internal._Set<TreeViewControllerItem>).has(selected)) : Bool)) { setTreeViewControllerItemExpanded(({ final __callArgument723:Dynamic = controller; __callArgument723; }), ({ final __callArgument724:Dynamic = selected; __callArgument724; }), (cast false : Bool)); } else { setTreeViewControllerSelectedItem(({ final __callArgument727:Dynamic = controller; __callArgument727; }), ({ final __callArgument728:Dynamic = _Runtime.coalesce(((cast (cast runtime : { var parents:flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>; }).parents : flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>).get(selected)), function():Dynamic return cast null); __callArgument728; })); }
+      if ((cast ((cast (cast runtime : { var expanded:flight._internal._Set<TreeViewControllerItem>; }).expanded : flight._internal._Set<TreeViewControllerItem>).has(selected)) : Bool)) { setTreeViewControllerItemExpanded(({ final __callArgument771:Dynamic = controller; __callArgument771; }), ({ final __callArgument772:Dynamic = selected; __callArgument772; }), (cast false : Bool)); } else { setTreeViewControllerSelectedItem(({ final __callArgument775:Dynamic = controller; __callArgument775; }), ({ final __callArgument776:Dynamic = _Runtime.coalesce(((cast (cast runtime : { var parents:flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>; }).parents : flight._internal._Map<TreeViewControllerItem, Null<TreeViewControllerItem>>).get(selected)), function():Dynamic return cast null); __callArgument776; })); }
     } else { if ((cast ((cast _Runtime.strictEquals(data.key, 'Enter') : Bool) && (cast !_Runtime.strictEquals(selected, null) : Bool)) : Bool)) { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:TreeViewControllerSignals; }).signals : TreeViewControllerSignals).onActivate], [selected]]), 1); } } } } }
   }
 
@@ -1364,7 +1519,7 @@ class _Gui {
   }
 
   public static function updateTreeViewControllerVisibility__treeViewController(runtime:Dynamic):Void {
-    _Runtime.forEachArray((cast (cast runtime : { var items:Array<TreeViewControllerItem>; }).items : Array<TreeViewControllerItem>), function(item:TreeViewControllerItem, __unused6:Float, __unused7:Array<TreeViewControllerItem>):Void { setGuiVisible((cast runtime : Dynamic), (cast _Runtime.field(item, 'visual') : Dynamic), (cast (cast _Gui.isTreeViewItemVisible__treeViewController((cast runtime : Dynamic), ({ final __callArgument731:Dynamic = item; __callArgument731; })) : Bool) : Bool)); }, _Runtime.UNDEFINED);
+    _Runtime.forEachArray((cast (cast runtime : { var items:Array<TreeViewControllerItem>; }).items : Array<TreeViewControllerItem>), function(item:TreeViewControllerItem, __unused6:Float, __unused7:Array<TreeViewControllerItem>):Void { setGuiVisible((cast runtime : Dynamic), (cast _Runtime.field(item, 'visual') : Dynamic), (cast (cast _Gui.isTreeViewItemVisible__treeViewController((cast runtime : Dynamic), ({ final __callArgument779:Dynamic = item; __callArgument779; })) : Bool) : Bool)); }, _Runtime.UNDEFINED);
   }
 
   public static function createWindowController(options:WindowControllerOptions):WindowController {
@@ -1377,49 +1532,49 @@ class _Gui {
     runtime = (cast createGuiControllerRuntime((cast { closeButton: _Runtime.coalesce(_Runtime.field(options, 'closeButton'), function():Dynamic return cast null), content: _Runtime.coalesce(_Runtime.field(options, 'content'), function():Dynamic return cast null), dragPointer: -1.0, dragStartFrameX: 0.0, dragStartFrameY: 0.0, dragStartWorldX: 0.0, dragStartWorldY: 0.0, draggable: _Runtime.coalesce(_Runtime.field(options, 'draggable'), function():Dynamic return cast true), frame: _Runtime.field(options, 'frame'), frameBaseHeight: height, frameBaseScaleX: (cast _Runtime.field(options, 'frame') : { var scaleX:Float; }).scaleX, frameBaseScaleY: (cast _Runtime.field(options, 'frame') : { var scaleY:Float; }).scaleY, frameBaseWidth: width, minimumHeight: HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(options, 'minimumHeight'), function():Dynamic return cast 0.0)), minimumWidth: HxMath.max(0.0, _Runtime.coalesce(_Runtime.field(options, 'minimumWidth'), function():Dynamic return cast 0.0)), resizeHandle: _Runtime.coalesce(_Runtime.field(options, 'resizeHandle'), function():Dynamic return cast null), resizePointer: -1.0, resizeStartHeight: 0.0, resizeStartWidth: 0.0, resizeStartWorldX: 0.0, resizeStartWorldY: 0.0, resizable: _Runtime.coalesce(_Runtime.field(options, 'resizable'), function():Dynamic return cast true), signals: { onClose: (cast createSignal() : Signal<Void->Void>), onMove: (cast createSignal() : Signal<Float->Float->Void>), onResize: (cast createSignal() : Signal<Float->Float->Void>) }, titleBar: _Runtime.coalesce(_Runtime.field(options, 'titleBar'), function():Dynamic return cast null) } : Dynamic), (cast _Runtime.field(options, 'transition') : Dynamic)) : { >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, });
     controller = (cast createGuiController((cast runtime : Dynamic)) : WindowController);
     if ((cast !_Runtime.strictEquals((cast runtime : { var closeButton:Null<ButtonController>; }).closeButton, null) : Bool)) {
-      connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getButtonControllerSignals((cast runtime : { var closeButton:Null<ButtonController>; }).closeButton) : ButtonControllerSignals), 'onClick') : Dynamic), ({ final __callArgument735:Dynamic = function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:WindowControllerSignals; }).signals : WindowControllerSignals).onClose]]), 1); }; __callArgument735; }));
+      connectGuiSignal((cast runtime : Dynamic), (cast _Runtime.field((cast getButtonControllerSignals((cast runtime : { var closeButton:Null<ButtonController>; }).closeButton) : ButtonControllerSignals), 'onClick') : Dynamic), ({ final __callArgument783:Dynamic = function():Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:WindowControllerSignals; }).signals : WindowControllerSignals).onClose]]), 1); }; __callArgument783; }));
     }
     if ((cast !_Runtime.strictEquals((cast runtime : { var titleBar:Null<Node2D>; }).titleBar, null) : Bool)) {
-      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var titleBar:Null<Node2D>; }).titleBar, (cast 'onPointerDown' : String), ({ final __callArgument737:Dynamic = function(data:PointerEventData):Void {
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var titleBar:Null<Node2D>; }).titleBar, (cast 'onPointerDown' : String), ({ final __callArgument785:Dynamic = function(data:PointerEventData):Void {
         if ((cast ((cast !(cast (cast runtime : { var draggable:Bool; }).draggable : Bool) : Bool) || (cast _Runtime.strictEquals((cast runtime : { var frame:Null<Node2D>; }).frame, null) : Bool)) : Bool)) { return; }
         ((cast runtime : { var dragPointer:Float; }).dragPointer = data.pointerId);
         ((cast runtime : { var dragStartWorldX:Float; }).dragStartWorldX = data.worldX);
         ((cast runtime : { var dragStartWorldY:Float; }).dragStartWorldY = data.worldY);
         ((cast runtime : { var dragStartFrameX:Float; }).dragStartFrameX = (cast (cast runtime : { var frame:Null<Node2D>; }).frame : { var x:Float; }).x);
         ((cast runtime : { var dragStartFrameY:Float; }).dragStartFrameY = (cast (cast runtime : { var frame:Null<Node2D>; }).frame : { var y:Float; }).y);
-      }; __callArgument737; }));
-      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var titleBar:Null<Node2D>; }).titleBar, (cast 'onPointerMove' : String), ({ final __callArgument741:Dynamic = function(data:PointerEventData):Void {
+      }; __callArgument785; }));
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var titleBar:Null<Node2D>; }).titleBar, (cast 'onPointerMove' : String), ({ final __callArgument789:Dynamic = function(data:PointerEventData):Void {
         if ((cast !_Runtime.strictEquals(data.pointerId, (cast runtime : { var dragPointer:Float; }).dragPointer) : Bool)) { return; }
-        setWindowControllerPosition(({ final __callArgument739:Dynamic = controller; __callArgument739; }), (cast (((cast runtime : { var dragStartFrameX:Float; }).dragStartFrameX + data.worldX) - (cast runtime : { var dragStartWorldX:Float; }).dragStartWorldX) : Float), (cast (((cast runtime : { var dragStartFrameY:Float; }).dragStartFrameY + data.worldY) - (cast runtime : { var dragStartWorldY:Float; }).dragStartWorldY) : Float));
-      }; __callArgument741; }));
+        setWindowControllerPosition(({ final __callArgument787:Dynamic = controller; __callArgument787; }), (cast (((cast runtime : { var dragStartFrameX:Float; }).dragStartFrameX + data.worldX) - (cast runtime : { var dragStartWorldX:Float; }).dragStartWorldX) : Float), (cast (((cast runtime : { var dragStartFrameY:Float; }).dragStartFrameY + data.worldY) - (cast runtime : { var dragStartWorldY:Float; }).dragStartWorldY) : Float));
+      }; __callArgument789; }));
       var endDrag:PointerEventData->Void = cast _Runtime.UNDEFINED;
       endDrag = (cast function(data:PointerEventData):Void {
         if ((cast _Runtime.strictEquals(data.pointerId, (cast runtime : { var dragPointer:Float; }).dragPointer) : Bool)) { ((cast runtime : { var dragPointer:Float; }).dragPointer = -1.0); }
       });
-      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var titleBar:Null<Node2D>; }).titleBar, (cast 'onPointerUp' : String), ({ final __callArgument745:Dynamic = endDrag; __callArgument745; }));
-      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var titleBar:Null<Node2D>; }).titleBar, (cast 'onPointerCancel' : String), ({ final __callArgument747:Dynamic = endDrag; __callArgument747; }));
-      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var titleBar:Null<Node2D>; }).titleBar, (cast 'onReleaseOutside' : String), ({ final __callArgument749:Dynamic = endDrag; __callArgument749; }));
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var titleBar:Null<Node2D>; }).titleBar, (cast 'onPointerUp' : String), ({ final __callArgument793:Dynamic = endDrag; __callArgument793; }));
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var titleBar:Null<Node2D>; }).titleBar, (cast 'onPointerCancel' : String), ({ final __callArgument795:Dynamic = endDrag; __callArgument795; }));
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var titleBar:Null<Node2D>; }).titleBar, (cast 'onReleaseOutside' : String), ({ final __callArgument797:Dynamic = endDrag; __callArgument797; }));
     }
     if ((cast !_Runtime.strictEquals((cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, null) : Bool)) {
-      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, (cast 'onPointerDown' : String), ({ final __callArgument751:Dynamic = function(data:PointerEventData):Void {
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, (cast 'onPointerDown' : String), ({ final __callArgument799:Dynamic = function(data:PointerEventData):Void {
         if ((cast ((cast !(cast (cast runtime : { var resizable:Bool; }).resizable : Bool) : Bool) || (cast _Runtime.strictEquals((cast runtime : { var frame:Null<Node2D>; }).frame, null) : Bool)) : Bool)) { return; }
         ((cast runtime : { var resizePointer:Float; }).resizePointer = data.pointerId);
         ((cast runtime : { var resizeStartWorldX:Float; }).resizeStartWorldX = data.worldX);
         ((cast runtime : { var resizeStartWorldY:Float; }).resizeStartWorldY = data.worldY);
         ((cast runtime : { var resizeStartWidth:Float; }).resizeStartWidth = (cast getNodeWidth((cast (cast runtime : { var frame:Null<Node2D>; }).frame : Dynamic)) : Float));
         ((cast runtime : { var resizeStartHeight:Float; }).resizeStartHeight = (cast getNodeHeight((cast (cast runtime : { var frame:Null<Node2D>; }).frame : Dynamic)) : Float));
-      }; __callArgument751; }));
-      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, (cast 'onPointerMove' : String), ({ final __callArgument755:Dynamic = function(data:PointerEventData):Void {
+      }; __callArgument799; }));
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, (cast 'onPointerMove' : String), ({ final __callArgument803:Dynamic = function(data:PointerEventData):Void {
         if ((cast !_Runtime.strictEquals(data.pointerId, (cast runtime : { var resizePointer:Float; }).resizePointer) : Bool)) { return; }
-        setWindowControllerSize(({ final __callArgument753:Dynamic = controller; __callArgument753; }), (cast (((cast runtime : { var resizeStartWidth:Float; }).resizeStartWidth + data.worldX) - (cast runtime : { var resizeStartWorldX:Float; }).resizeStartWorldX) : Float), (cast (((cast runtime : { var resizeStartHeight:Float; }).resizeStartHeight + data.worldY) - (cast runtime : { var resizeStartWorldY:Float; }).resizeStartWorldY) : Float));
-      }; __callArgument755; }));
+        setWindowControllerSize(({ final __callArgument801:Dynamic = controller; __callArgument801; }), (cast (((cast runtime : { var resizeStartWidth:Float; }).resizeStartWidth + data.worldX) - (cast runtime : { var resizeStartWorldX:Float; }).resizeStartWorldX) : Float), (cast (((cast runtime : { var resizeStartHeight:Float; }).resizeStartHeight + data.worldY) - (cast runtime : { var resizeStartWorldY:Float; }).resizeStartWorldY) : Float));
+      }; __callArgument803; }));
       var endResize:PointerEventData->Void = cast _Runtime.UNDEFINED;
       endResize = (cast function(data:PointerEventData):Void {
         if ((cast _Runtime.strictEquals(data.pointerId, (cast runtime : { var resizePointer:Float; }).resizePointer) : Bool)) { ((cast runtime : { var resizePointer:Float; }).resizePointer = -1.0); }
       });
-      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, (cast 'onPointerUp' : String), ({ final __callArgument759:Dynamic = endResize; __callArgument759; }));
-      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, (cast 'onPointerCancel' : String), ({ final __callArgument761:Dynamic = endResize; __callArgument761; }));
-      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, (cast 'onReleaseOutside' : String), ({ final __callArgument763:Dynamic = endResize; __callArgument763; }));
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, (cast 'onPointerUp' : String), ({ final __callArgument807:Dynamic = endResize; __callArgument807; }));
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, (cast 'onPointerCancel' : String), ({ final __callArgument809:Dynamic = endResize; __callArgument809; }));
+      connectGuiInteraction((cast runtime : Dynamic), (cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle, (cast 'onReleaseOutside' : String), ({ final __callArgument811:Dynamic = endResize; __callArgument811; }));
     }
     return cast controller;
     return cast null;
@@ -1427,27 +1582,27 @@ class _Gui {
 
   public static function disposeWindowController(controller:WindowController):Void {
     var runtime:{ >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument765:Dynamic = controller; __callArgument765; })) : { >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, });
-    disposeGuiController(({ final __callArgument767:Dynamic = controller; __callArgument767; }), ({ final __callArgument768:Dynamic = function():Void {
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument813:Dynamic = controller; __callArgument813; })) : { >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, });
+    disposeGuiController(({ final __callArgument815:Dynamic = controller; __callArgument815; }), ({ final __callArgument816:Dynamic = function():Void {
       ((cast runtime : { var closeButton:Null<ButtonController>; }).closeButton = null);
       ((cast runtime : { var content:Null<Node2D>; }).content = null);
       ((cast runtime : { var frame:Null<Node2D>; }).frame = null);
       ((cast runtime : { var resizeHandle:Null<Node2D>; }).resizeHandle = null);
       ((cast runtime : { var titleBar:Null<Node2D>; }).titleBar = null);
-    }; __callArgument768; }));
+    }; __callArgument816; }));
   }
 
   public static function getWindowControllerSignals(controller:WindowController):WindowControllerSignals {
-    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument771:Dynamic = controller; __callArgument771; })) : { >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, }) : { var signals:WindowControllerSignals; }).signals;
+    return cast (cast (cast getGuiControllerRuntime(({ final __callArgument819:Dynamic = controller; __callArgument819; })) : { >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, }) : { var signals:WindowControllerSignals; }).signals;
     return cast null;
   }
 
   public static function setWindowControllerPosition(controller:WindowController, x:Float, y:Float):Void {
     var runtime:{ >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument773:Dynamic = controller; __callArgument773; })) : { >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument821:Dynamic = controller; __callArgument821; })) : { >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, });
     if ((cast ((cast ((cast _Runtime.strictEquals((cast runtime : { var frame:Null<Node2D>; }).frame, null) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool) || (cast _Runtime.andValue(_Runtime.strictEquals((cast (cast runtime : { var frame:Null<Node2D>; }).frame : { var x:Float; }).x, x), function():Dynamic return cast _Runtime.strictEquals((cast (cast runtime : { var frame:Null<Node2D>; }).frame : { var y:Float; }).y, y)) : Bool)) : Bool)) { return; }
-    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument775:Dynamic = (cast runtime : { var frame:Null<Node2D>; }).frame; __callArgument775; }), ({ final __callArgument776:Dynamic = 'x'; __callArgument776; }), ({ final __callArgument777:Dynamic = x; __callArgument777; }));
-    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument781:Dynamic = (cast runtime : { var frame:Null<Node2D>; }).frame; __callArgument781; }), ({ final __callArgument782:Dynamic = 'y'; __callArgument782; }), ({ final __callArgument783:Dynamic = y; __callArgument783; }));
+    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument823:Dynamic = (cast runtime : { var frame:Null<Node2D>; }).frame; __callArgument823; }), ({ final __callArgument824:Dynamic = 'x'; __callArgument824; }), ({ final __callArgument825:Dynamic = x; __callArgument825; }));
+    setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument829:Dynamic = (cast runtime : { var frame:Null<Node2D>; }).frame; __callArgument829; }), ({ final __callArgument830:Dynamic = 'y'; __callArgument830; }), ({ final __callArgument831:Dynamic = y; __callArgument831; }));
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:WindowControllerSignals; }).signals : WindowControllerSignals).onMove], [x], [y]]), 1);
   }
 
@@ -1455,12 +1610,12 @@ class _Gui {
     var runtime:{ >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, } = cast _Runtime.UNDEFINED;
     var nextWidth:Float = cast _Runtime.UNDEFINED;
     var nextHeight:Float = cast _Runtime.UNDEFINED;
-    runtime = (cast getGuiControllerRuntime(({ final __callArgument787:Dynamic = controller; __callArgument787; })) : { >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, });
+    runtime = (cast getGuiControllerRuntime(({ final __callArgument835:Dynamic = controller; __callArgument835; })) : { >WindowControllerFields__windowController, >GuiControllerRuntime__guiController, });
     if ((cast ((cast _Runtime.strictEquals((cast runtime : { var frame:Null<Node2D>; }).frame, null) : Bool) || (cast (cast runtime : { var disposed:Bool; }).disposed : Bool)) : Bool)) { return; }
     nextWidth = HxMath.max((cast runtime : { var minimumWidth:Float; }).minimumWidth, width);
     nextHeight = HxMath.max((cast runtime : { var minimumHeight:Float; }).minimumHeight, height);
-    if ((cast ((cast (cast runtime : { var frameBaseWidth:Float; }).frameBaseWidth : Float) > (cast 0.0 : Float)) : Bool)) { setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument789:Dynamic = (cast runtime : { var frame:Null<Node2D>; }).frame; __callArgument789; }), ({ final __callArgument790:Dynamic = 'scaleX'; __callArgument790; }), ({ final __callArgument791:Dynamic = (((cast runtime : { var frameBaseScaleX:Float; }).frameBaseScaleX * nextWidth) / (cast runtime : { var frameBaseWidth:Float; }).frameBaseWidth); __callArgument791; })); }
-    if ((cast ((cast (cast runtime : { var frameBaseHeight:Float; }).frameBaseHeight : Float) > (cast 0.0 : Float)) : Bool)) { setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument795:Dynamic = (cast runtime : { var frame:Null<Node2D>; }).frame; __callArgument795; }), ({ final __callArgument796:Dynamic = 'scaleY'; __callArgument796; }), ({ final __callArgument797:Dynamic = (((cast runtime : { var frameBaseScaleY:Float; }).frameBaseScaleY * nextHeight) / (cast runtime : { var frameBaseHeight:Float; }).frameBaseHeight); __callArgument797; })); }
+    if ((cast ((cast (cast runtime : { var frameBaseWidth:Float; }).frameBaseWidth : Float) > (cast 0.0 : Float)) : Bool)) { setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument837:Dynamic = (cast runtime : { var frame:Null<Node2D>; }).frame; __callArgument837; }), ({ final __callArgument838:Dynamic = 'scaleX'; __callArgument838; }), ({ final __callArgument839:Dynamic = (((cast runtime : { var frameBaseScaleX:Float; }).frameBaseScaleX * nextWidth) / (cast runtime : { var frameBaseWidth:Float; }).frameBaseWidth); __callArgument839; })); }
+    if ((cast ((cast (cast runtime : { var frameBaseHeight:Float; }).frameBaseHeight : Float) > (cast 0.0 : Float)) : Bool)) { setGuiVisualProperty((cast runtime : Dynamic), ({ final __callArgument843:Dynamic = (cast runtime : { var frame:Null<Node2D>; }).frame; __callArgument843; }), ({ final __callArgument844:Dynamic = 'scaleY'; __callArgument844; }), ({ final __callArgument845:Dynamic = (((cast runtime : { var frameBaseScaleY:Float; }).frameBaseScaleY * nextHeight) / (cast runtime : { var frameBaseHeight:Float; }).frameBaseHeight); __callArgument845; })); }
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : { var signals:WindowControllerSignals; }).signals : WindowControllerSignals).onResize], [nextWidth], [nextHeight]]), 1);
   }
 }

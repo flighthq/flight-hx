@@ -109,21 +109,33 @@ class _TilemapFormats {
 
   public static final TILE_ID_MASK__tiledGid:Float = 536870911.0;
 
-  public static function parseTiledTilesetJson(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
+  public static function parseTiledTilesetJson(text:String, ?_options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledTileset> {
     var root:Null<JsonObject__tiledJsonParse> = cast _Runtime.UNDEFINED;
     root = (cast _TilemapFormats.parseJson__tiledJsonParse((cast text : String)) : Null<JsonObject__tiledJsonParse>);
-    if ((cast _Runtime.strictEquals(root, null) : Bool)) { return cast null; }
-    return cast (cast _TilemapFormats.buildTiledTilesetFromJson__tiledJsonParse((cast root : Dynamic)) : TiledTileset);
+    if ((cast _Runtime.strictEquals(root, null) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument2:Dynamic = diagnostics; __callArgument2; }), ({ final __callArgument3:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument3; }), (cast 'tiled.json-malformed' : String), (cast 'parseTiledTilesetJson' : String), ({ final __callArgument4:Dynamic = { path: 'tileset' }; __callArgument4; }));
+      return cast null;
+    }
+    return cast (cast _TilemapFormats.buildTiledTilesetFromJson__tiledJsonParse((cast root : Dynamic), ({ final __callArgument8:Dynamic = diagnostics; __callArgument8; }), (cast 'tileset' : String)) : TiledTileset);
     return cast null;
   }
 
-  public static function parseTiledTmj(text:String, ?options:TiledParseOptions):Null<TiledMap> {
+  public static function parseTiledTmj(text:String, ?options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledMap> {
     var root:Null<JsonObject__tiledJsonParse> = cast _Runtime.UNDEFINED;
     var background:Null<String> = cast _Runtime.UNDEFINED;
     root = (cast _TilemapFormats.parseJson__tiledJsonParse((cast text : String)) : Null<JsonObject__tiledJsonParse>);
-    if ((cast _Runtime.strictEquals(root, null) : Bool)) { return cast null; }
+    if ((cast _Runtime.strictEquals(root, null) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument10:Dynamic = diagnostics; __callArgument10; }), ({ final __callArgument11:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument11; }), (cast 'tiled.json-malformed' : String), (cast 'parseTiledTmj' : String), ({ final __callArgument12:Dynamic = { path: 'map' }; __callArgument12; }));
+      return cast null;
+    }
+    if ((cast !_Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      _TilemapFormats.reportMissingJsonField__tiledJsonParse((cast root : Dynamic), (cast 'height' : String), ({ final __callArgument16:Dynamic = diagnostics; __callArgument16; }), (cast 'parseTiledTmj' : String), (cast 'map' : String));
+      _TilemapFormats.reportMissingJsonField__tiledJsonParse((cast root : Dynamic), (cast 'tileheight' : String), ({ final __callArgument18:Dynamic = diagnostics; __callArgument18; }), (cast 'parseTiledTmj' : String), (cast 'map' : String));
+      _TilemapFormats.reportMissingJsonField__tiledJsonParse((cast root : Dynamic), (cast 'tilewidth' : String), ({ final __callArgument20:Dynamic = diagnostics; __callArgument20; }), (cast 'parseTiledTmj' : String), (cast 'map' : String));
+      _TilemapFormats.reportMissingJsonField__tiledJsonParse((cast root : Dynamic), (cast 'width' : String), ({ final __callArgument22:Dynamic = diagnostics; __callArgument22; }), (cast 'parseTiledTmj' : String), (cast 'map' : String));
+    }
     background = (cast _TilemapFormats.strField__tiledJsonParse((cast root : Dynamic), (cast 'backgroundcolor' : String)) : Null<String>);
-    return cast { backgroundColor: ((cast !_Runtime.strictEquals(background, null) : Bool) ? (cast (cast parseTiledColor((cast background : String)) : Null<Float>) : Dynamic) : (cast null : Dynamic)), height: (cast _TilemapFormats.numField__tiledJsonParse((cast root : Dynamic), (cast 'height' : String), (cast 0.0 : Float)) : Float), infinite: (cast _TilemapFormats.boolField__tiledJsonParse((cast root : Dynamic), (cast 'infinite' : String), (cast false : Bool)) : Bool), layers: (cast _Runtime.filterArray((cast (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast root : Dynamic), (cast 'layers' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), function(layer:JsonObject__tiledJsonParse, __unused0:Float, __unused1:Array<JsonObject__tiledJsonParse>):Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>> return (cast _TilemapFormats.buildTiledLayerFromJson__tiledJsonParse((cast layer : Dynamic), ({ final __callArgument4:Dynamic = options; __callArgument4; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>), _Runtime.UNDEFINED)) : Array<Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>>), function(layer:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>, __unused2:Float, __unused3:Array<Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>>):Bool return !_Runtime.strictEquals(layer, null), _Runtime.UNDEFINED)), orientation: (cast _TilemapFormats.asOrientation__tiledJsonParse((cast _TilemapFormats.strField__tiledJsonParse((cast root : Dynamic), (cast 'orientation' : String)) : Null<String>)) : TiledOrientation), properties: (cast _TilemapFormats.buildTiledPropertiesFromJson__tiledJsonParse((cast root : Dynamic)) : Array<TiledProperty>), renderOrder: (cast _TilemapFormats.asRenderOrder__tiledJsonParse((cast _TilemapFormats.strField__tiledJsonParse((cast root : Dynamic), (cast 'renderorder' : String)) : Null<String>)) : TiledRenderOrder), tileHeight: (cast _TilemapFormats.numField__tiledJsonParse((cast root : Dynamic), (cast 'tileheight' : String), (cast 0.0 : Float)) : Float), tileWidth: (cast _TilemapFormats.numField__tiledJsonParse((cast root : Dynamic), (cast 'tilewidth' : String), (cast 0.0 : Float)) : Float), tiledVersion: (cast _TilemapFormats.strField__tiledJsonParse((cast root : Dynamic), (cast 'tiledversion' : String)) : Null<String>), tilesets: (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast root : Dynamic), (cast 'tilesets' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), _TilemapFormats.buildTiledTilesetRefFromJson__tiledJsonParse, _Runtime.UNDEFINED)), version: (cast _TilemapFormats.stringOr__tiledJsonParse((cast _TilemapFormats.numOrString__tiledJsonParse((cast (cast root : { var version:flight._internal._Any; }).version : flight._internal._Any)) : Null<flight._internal._Union2<String, Float>>), (cast '1.0' : String)) : String), width: (cast _TilemapFormats.numField__tiledJsonParse((cast root : Dynamic), (cast 'width' : String), (cast 0.0 : Float)) : Float) };
+    return cast { backgroundColor: ((cast !_Runtime.strictEquals(background, null) : Bool) ? (cast (cast parseTiledColor((cast background : String)) : Null<Float>) : Dynamic) : (cast null : Dynamic)), height: (cast _TilemapFormats.numField__tiledJsonParse((cast root : Dynamic), (cast 'height' : String), (cast 0.0 : Float)) : Float), infinite: (cast _TilemapFormats.boolField__tiledJsonParse((cast root : Dynamic), (cast 'infinite' : String), (cast false : Bool)) : Bool), layers: (cast _Runtime.filterArray((cast (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast root : Dynamic), (cast 'layers' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), function(layer:JsonObject__tiledJsonParse, index:Float, __unused0:Array<JsonObject__tiledJsonParse>):Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>> return (cast _TilemapFormats.buildTiledLayerFromJson__tiledJsonParse((cast layer : Dynamic), ({ final __callArgument28:Dynamic = options; __callArgument28; }), ({ final __callArgument29:Dynamic = diagnostics; __callArgument29; }), (cast ((cast _Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast 'map.layers[' + Std.string(index) + ']' : Dynamic)) : String)) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>), _Runtime.UNDEFINED)) : Array<Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>>), function(layer:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>, __unused1:Float, __unused2:Array<Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>>):Bool return !_Runtime.strictEquals(layer, null), _Runtime.UNDEFINED)), orientation: (cast _TilemapFormats.asOrientation__tiledJsonParse((cast _TilemapFormats.strField__tiledJsonParse((cast root : Dynamic), (cast 'orientation' : String)) : Null<String>)) : TiledOrientation), properties: (cast _TilemapFormats.buildTiledPropertiesFromJson__tiledJsonParse((cast root : Dynamic)) : Array<TiledProperty>), renderOrder: (cast _TilemapFormats.asRenderOrder__tiledJsonParse((cast _TilemapFormats.strField__tiledJsonParse((cast root : Dynamic), (cast 'renderorder' : String)) : Null<String>)) : TiledRenderOrder), tileHeight: (cast _TilemapFormats.numField__tiledJsonParse((cast root : Dynamic), (cast 'tileheight' : String), (cast 0.0 : Float)) : Float), tileWidth: (cast _TilemapFormats.numField__tiledJsonParse((cast root : Dynamic), (cast 'tilewidth' : String), (cast 0.0 : Float)) : Float), tiledVersion: (cast _TilemapFormats.strField__tiledJsonParse((cast root : Dynamic), (cast 'tiledversion' : String)) : Null<String>), tilesets: (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast root : Dynamic), (cast 'tilesets' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), function(tileset:JsonObject__tiledJsonParse, index:Float, __unused3:Array<JsonObject__tiledJsonParse>):TiledTilesetRef return (cast _TilemapFormats.buildTiledTilesetRefFromJson__tiledJsonParse((cast tileset : Dynamic), ({ final __callArgument32:Dynamic = diagnostics; __callArgument32; }), (cast ((cast _Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast 'map.tilesets[' + Std.string(index) + ']' : Dynamic)) : String)) : TiledTilesetRef), _Runtime.UNDEFINED)), version: (cast _TilemapFormats.stringOr__tiledJsonParse((cast _TilemapFormats.numOrString__tiledJsonParse((cast (cast root : { var version:flight._internal._Any; }).version : flight._internal._Any)) : Null<flight._internal._Union2<String, Float>>), (cast '1.0' : String)) : String), width: (cast _TilemapFormats.numField__tiledJsonParse((cast root : Dynamic), (cast 'width' : String), (cast 0.0 : Float)) : Float) };
     return cast null;
   }
 
@@ -167,7 +179,7 @@ class _TilemapFormats {
     return cast null;
   }
 
-  public static function buildTiledLayerDataFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse, width:Float, height:Float, ?options:TiledParseOptions):flight._internal._UInt32Array {
+  public static function buildTiledLayerDataFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse, width:Float, height:Float, ?options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>, path:String = ''):flight._internal._UInt32Array {
     var grid:flight._internal._UInt32Array = cast _Runtime.UNDEFINED;
     var data:flight._internal._Any = cast _Runtime.UNDEFINED;
     var decoded:Null<flight._internal._UInt32Array> = cast _Runtime.UNDEFINED;
@@ -177,23 +189,43 @@ class _TilemapFormats {
     if ((cast _Runtime.isArray(data) : Bool)) {
       (decoded = cast (new flight._internal._UInt32Array(data) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(_Runtime.typeofValue(data), 'string') : Bool)) {
-      (decoded = cast (((cast _Runtime.strictEquals((cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'encoding' : String)) : Null<String>), 'csv') : Bool) ? (cast (cast decodeTiledCsvLayer((cast data : String)) : flight._internal._UInt32Array) : Dynamic) : (cast (cast decodeTiledBase64Layer((cast data : String), (cast _TilemapFormats.asCompression__tiledJsonParse((cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'compression' : String)) : Null<String>)) : Null<String>), (cast ({ final __typedStruct6 = options; __typedStruct6 == null ? _Runtime.UNDEFINED : __typedStruct6.inflate; }) : Dynamic)) : Null<flight._internal._UInt32Array>) : Dynamic)) : Dynamic));
-    } }
+      var encoding:Null<String> = (cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'encoding' : String)) : Null<String>);
+      if ((cast _Runtime.strictEquals(encoding, 'csv') : Bool)) {
+        (decoded = cast ((cast decodeTiledCsvLayer((cast data : String)) : flight._internal._UInt32Array) : Dynamic));
+      } else {
+        if ((cast _Runtime.strictEquals(encoding, null) : Bool)) {
+          _TilemapFormats.reportMissingRequiredField__tiledJsonParse(({ final __callArgument34:Dynamic = diagnostics; __callArgument34; }), (cast 'buildTiledLayerDataFromJson' : String), (cast path : String), ({ final __callArgument35:Dynamic = 'encoding'; __callArgument35; }));
+        } else { if ((cast !_Runtime.strictEquals(encoding, 'base64') : Bool)) {
+          reportImportDiagnostic(({ final __callArgument38:Dynamic = diagnostics; __callArgument38; }), ({ final __callArgument39:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument39; }), (cast 'tiled.layer-encoding-invalid' : String), (cast 'buildTiledLayerDataFromJson' : String), ({ final __callArgument40:Dynamic = { encoding: encoding, path: '' + Std.string(path) + '.encoding' }; __callArgument40; }));
+        } }
+        var compression:Null<String> = (cast _TilemapFormats.asCompression__tiledJsonParse((cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'compression' : String)) : Null<String>)) : Null<String>);
+        if ((cast ((cast !_Runtime.strictEquals(compression, null) : Bool) && (cast _Runtime.strictEquals(({ final __typedStruct44 = options; __typedStruct44 == null ? _Runtime.UNDEFINED : __typedStruct44.inflate; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+          reportImportDiagnostic(({ final __callArgument45:Dynamic = diagnostics; __callArgument45; }), ({ final __callArgument46:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument46; }), (cast 'tiled.layer-inflate-unavailable' : String), (cast 'buildTiledLayerDataFromJson' : String), ({ final __callArgument47:Dynamic = { compression: compression, path: path }; __callArgument47; }));
+        }
+        (decoded = cast ((cast decodeTiledBase64Layer((cast data : String), ({ final __callArgument51:Dynamic = compression; __callArgument51; }), (cast ({ final __typedStruct52 = options; __typedStruct52 == null ? _Runtime.UNDEFINED : __typedStruct52.inflate; }) : Dynamic)) : Null<flight._internal._UInt32Array>) : Dynamic));
+      }
+    } else { if ((cast _Runtime.strictEquals(data, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      (#if js _Runtime.callValue(_TilemapFormats.reportMissingRequiredField__tiledJsonParse, cast ([({ final __callArgument56:Dynamic = diagnostics; __callArgument56; }), (cast 'buildTiledLayerDataFromJson' : String), (cast path : String)] : Array<Dynamic>)) #else _TilemapFormats.reportMissingRequiredField__tiledJsonParse(({ final __callArgument55:Dynamic = diagnostics; __callArgument55; }), (cast 'buildTiledLayerDataFromJson' : String), (cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    } } }
     if ((cast _Runtime.strictEquals(decoded, null) : Bool)) { return cast grid; }
     (cast grid : flight._internal._UInt32Array).set((cast decoded : flight._internal._UInt32Array).subarray(Std.int(0.0), Std.int(_Runtime.field(grid, 'length'))));
     return cast grid;
     return cast null;
   }
 
-  public static function buildTiledLayerFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse, ?options:TiledParseOptions):Null<TiledLayer> {
+  public static function buildTiledLayerFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse, ?options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>, path:String = ''):Null<TiledLayer> {
     var base:{ var id:Float; var name:String; var offsetX:Float; var offsetY:Float; var opacity:Float; var properties:Array<TiledProperty>; var visible:Bool; } = cast _Runtime.UNDEFINED;
     var type:Null<String> = cast _Runtime.UNDEFINED;
     base = (cast _TilemapFormats.buildTiledLayerBaseFromJson__tiledJsonParse((cast obj : Dynamic)) : { var id:Float; var name:String; var offsetX:Float; var offsetY:Float; var opacity:Float; var properties:Array<TiledProperty>; var visible:Bool; });
     type = (cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'type' : String)) : Null<String>);
     if ((cast _Runtime.strictEquals(type, 'tilelayer') : Bool)) {
+      if ((cast !_Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        _TilemapFormats.reportMissingJsonField__tiledJsonParse((cast obj : Dynamic), (cast 'height' : String), ({ final __callArgument57:Dynamic = diagnostics; __callArgument57; }), (cast 'buildTiledLayerFromJson' : String), (cast path : String));
+        _TilemapFormats.reportMissingJsonField__tiledJsonParse((cast obj : Dynamic), (cast 'width' : String), ({ final __callArgument59:Dynamic = diagnostics; __callArgument59; }), (cast 'buildTiledLayerFromJson' : String), (cast path : String));
+      }
       var width:Float = (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'width' : String), (cast 0.0 : Float)) : Float);
       var height:Float = (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'height' : String), (cast 0.0 : Float)) : Float);
-      return cast _Runtime.mergeObjects([base, { data: (cast _TilemapFormats.buildTiledLayerDataFromJson__tiledJsonParse((cast obj : Dynamic), (cast width : Float), (cast height : Float), ({ final __callArgument8:Dynamic = options; __callArgument8; })) : flight._internal._UInt32Array) }, { height: height }, { type: 'tilelayer' }, { width: width }]);
+      return cast _Runtime.mergeObjects([base, { data: (cast _TilemapFormats.buildTiledLayerDataFromJson__tiledJsonParse((cast obj : Dynamic), (cast width : Float), (cast height : Float), ({ final __callArgument61:Dynamic = options; __callArgument61; }), ({ final __callArgument62:Dynamic = diagnostics; __callArgument62; }), (cast ((cast _Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast '' + Std.string(path) + '.data' : Dynamic)) : String)) : flight._internal._UInt32Array) }, { height: height }, { type: 'tilelayer' }, { width: width }]);
     }
     if ((cast _Runtime.strictEquals(type, 'objectgroup') : Bool)) {
       return cast _Runtime.mergeObjects([base, { objects: (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast obj : Dynamic), (cast 'objects' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), _TilemapFormats.buildTiledObjectFromJson__tiledJsonParse, _Runtime.UNDEFINED)) }, { type: 'objectgroup' }]);
@@ -202,7 +234,10 @@ class _TilemapFormats {
       return cast _Runtime.mergeObjects([base, { image: _Runtime.coalesce((cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'image' : String)) : Null<String>), function():Dynamic return cast '') }, { type: 'imagelayer' }]);
     }
     if ((cast _Runtime.strictEquals(type, 'group') : Bool)) {
-      return cast _Runtime.mergeObjects([base, { layers: (cast _Runtime.filterArray((cast (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast obj : Dynamic), (cast 'layers' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), function(layer:JsonObject__tiledJsonParse, __unused5:Float, __unused6:Array<JsonObject__tiledJsonParse>):Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>> return (cast _TilemapFormats.buildTiledLayerFromJson__tiledJsonParse((cast layer : Dynamic), ({ final __callArgument12:Dynamic = options; __callArgument12; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>), _Runtime.UNDEFINED)) : Array<Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>>), function(layer:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>, __unused7:Float, __unused8:Array<Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>>):Bool return !_Runtime.strictEquals(layer, null), _Runtime.UNDEFINED)) }, { type: 'group' }]);
+      return cast _Runtime.mergeObjects([base, { layers: (cast _Runtime.filterArray((cast (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast obj : Dynamic), (cast 'layers' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), function(layer:JsonObject__tiledJsonParse, index:Float, __unused5:Array<JsonObject__tiledJsonParse>):Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>> return (cast _TilemapFormats.buildTiledLayerFromJson__tiledJsonParse((cast layer : Dynamic), ({ final __callArgument69:Dynamic = options; __callArgument69; }), ({ final __callArgument70:Dynamic = diagnostics; __callArgument70; }), (cast ((cast _Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast '' + Std.string(path) + '.layers[' + Std.string(index) + ']' : Dynamic)) : String)) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>), _Runtime.UNDEFINED)) : Array<Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>>), function(layer:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>, __unused6:Float, __unused7:Array<Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>>):Bool return !_Runtime.strictEquals(layer, null), _Runtime.UNDEFINED)) }, { type: 'group' }]);
+    }
+    if ((cast _Runtime.strictEquals(type, null) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument73:Dynamic = diagnostics; __callArgument73; }), ({ final __callArgument74:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument74; }), (cast 'tiled.required-field-missing' : String), (cast 'buildTiledLayerFromJson' : String), ({ final __callArgument75:Dynamic = { path: '' + Std.string(path) + '.type' }; __callArgument75; }));
     }
     return cast null;
     return cast null;
@@ -216,26 +251,31 @@ class _TilemapFormats {
   }
 
   public static function buildTiledPropertiesFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):Array<TiledProperty> {
-    return cast (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast obj : Dynamic), (cast 'properties' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), function(property:JsonObject__tiledJsonParse, __unused9:Float, __unused10:Array<JsonObject__tiledJsonParse>):{ var name:String; var type:TiledPropertyType; var value:flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>; } {
+    return cast (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast obj : Dynamic), (cast 'properties' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), function(property:JsonObject__tiledJsonParse, __unused8:Float, __unused9:Array<JsonObject__tiledJsonParse>):{ var name:String; var type:TiledPropertyType; var value:flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>; } {
       var type:TiledPropertyType = cast _Runtime.UNDEFINED;
       var raw:flight._internal._Any = cast _Runtime.UNDEFINED;
       type = (cast _TilemapFormats.asPropertyType__tiledJsonParse((cast _TilemapFormats.strField__tiledJsonParse((cast property : Dynamic), (cast 'type' : String)) : Null<String>)) : TiledPropertyType);
       raw = (cast property : { var value:flight._internal._Any; }).value;
-      return cast { name: _Runtime.coalesce((cast _TilemapFormats.strField__tiledJsonParse((cast property : Dynamic), (cast 'name' : String)) : Null<String>), function():Dynamic return cast ''), type: type, value: (cast _TilemapFormats.coercePropertyValue__tiledJsonParse(({ final __callArgument14:Dynamic = type; __callArgument14; }), (cast raw : flight._internal._Any)) : flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>) };
+      return cast { name: _Runtime.coalesce((cast _TilemapFormats.strField__tiledJsonParse((cast property : Dynamic), (cast 'name' : String)) : Null<String>), function():Dynamic return cast ''), type: type, value: (cast _TilemapFormats.coercePropertyValue__tiledJsonParse(({ final __callArgument79:Dynamic = type; __callArgument79; }), (cast raw : flight._internal._Any)) : flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>) };
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
     return cast null;
   }
 
-  public static function buildTiledTilesetFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledTileset {
+  public static function buildTiledTilesetFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse, ?diagnostics:Array<ImportDiagnostic>, path:String = ''):TiledTileset {
+    if ((cast !_Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      _TilemapFormats.reportMissingJsonField__tiledJsonParse((cast obj : Dynamic), (cast 'name' : String), ({ final __callArgument81:Dynamic = diagnostics; __callArgument81; }), (cast 'buildTiledTilesetFromJson' : String), (cast path : String));
+      _TilemapFormats.reportMissingJsonField__tiledJsonParse((cast obj : Dynamic), (cast 'tileheight' : String), ({ final __callArgument83:Dynamic = diagnostics; __callArgument83; }), (cast 'buildTiledTilesetFromJson' : String), (cast path : String));
+      _TilemapFormats.reportMissingJsonField__tiledJsonParse((cast obj : Dynamic), (cast 'tilewidth' : String), ({ final __callArgument85:Dynamic = diagnostics; __callArgument85; }), (cast 'buildTiledTilesetFromJson' : String), (cast path : String));
+    }
     return cast { columns: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'columns' : String), (cast 0.0 : Float)) : Float), image: (cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'image' : String)) : Null<String>), imageHeight: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'imageheight' : String), (cast 0.0 : Float)) : Float), imageWidth: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'imagewidth' : String), (cast 0.0 : Float)) : Float), margin: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'margin' : String), (cast 0.0 : Float)) : Float), name: _Runtime.coalesce((cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'name' : String)) : Null<String>), function():Dynamic return cast ''), properties: (cast _TilemapFormats.buildTiledPropertiesFromJson__tiledJsonParse((cast obj : Dynamic)) : Array<TiledProperty>), spacing: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'spacing' : String), (cast 0.0 : Float)) : Float), tileCount: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'tilecount' : String), (cast 0.0 : Float)) : Float), tileHeight: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'tileheight' : String), (cast 0.0 : Float)) : Float), tileWidth: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'tilewidth' : String), (cast 0.0 : Float)) : Float), tiles: (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast obj : Dynamic), (cast 'tiles' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), _TilemapFormats.buildTiledTilesetTileFromJson__tiledJsonParse, _Runtime.UNDEFINED)) };
     return cast null;
   }
 
-  public static function buildTiledTilesetRefFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse):TiledTilesetRef {
+  public static function buildTiledTilesetRefFromJson__tiledJsonParse(obj:JsonObject__tiledJsonParse, ?diagnostics:Array<ImportDiagnostic>, path:String = ''):TiledTilesetRef {
     var source:Null<String> = cast _Runtime.UNDEFINED;
     source = (cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'source' : String)) : Null<String>);
-    return cast { firstGid: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'firstgid' : String), (cast 1.0 : Float)) : Float), source: source, tileset: ((cast !_Runtime.strictEquals(source, null) : Bool) ? (cast null : Dynamic) : (cast (cast _TilemapFormats.buildTiledTilesetFromJson__tiledJsonParse((cast obj : Dynamic)) : TiledTileset) : Dynamic)) };
+    return cast { firstGid: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'firstgid' : String), (cast 1.0 : Float)) : Float), source: source, tileset: ((cast !_Runtime.strictEquals(source, null) : Bool) ? (cast null : Dynamic) : (cast (cast _TilemapFormats.buildTiledTilesetFromJson__tiledJsonParse((cast obj : Dynamic), ({ final __callArgument87:Dynamic = diagnostics; __callArgument87; }), (cast path : String)) : TiledTileset) : Dynamic)) };
     return cast null;
   }
 
@@ -245,7 +285,7 @@ class _TilemapFormats {
     var frames:Null<Array<TiledTilesetTileFrame>> = cast _Runtime.UNDEFINED;
     animation = (cast obj : { var animation:flight._internal._Any; }).animation;
     objectGroup = ((cast (cast _TilemapFormats.isJsonObject__tiledJsonParse((cast (cast obj : { var objectgroup:flight._internal._Any; }).objectgroup : flight._internal._Any)) : Bool) : Bool) ? (cast (cast obj : { var objectgroup:flight._internal._Any; }).objectgroup : Dynamic) : (cast null : Dynamic));
-    frames = ((cast _Runtime.isArray(animation) : Bool) ? (cast (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast animation : Array<flight._internal._Any>), _TilemapFormats.isJsonObject__tiledJsonParse, _Runtime.UNDEFINED)) : Array<JsonObject__tiledJsonParse>), function(frame:JsonObject__tiledJsonParse, __unused11:Float, __unused12:Array<JsonObject__tiledJsonParse>):{ var duration:Float; var tileId:Float; } return { duration: (cast _TilemapFormats.numField__tiledJsonParse((cast frame : Dynamic), (cast 'duration' : String), (cast 0.0 : Float)) : Float), tileId: (cast _TilemapFormats.numField__tiledJsonParse((cast frame : Dynamic), (cast 'tileid' : String), (cast 0.0 : Float)) : Float) }, _Runtime.UNDEFINED)) : Dynamic) : (cast null : Dynamic));
+    frames = ((cast _Runtime.isArray(animation) : Bool) ? (cast (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast animation : Array<flight._internal._Any>), _TilemapFormats.isJsonObject__tiledJsonParse, _Runtime.UNDEFINED)) : Array<JsonObject__tiledJsonParse>), function(frame:JsonObject__tiledJsonParse, __unused10:Float, __unused11:Array<JsonObject__tiledJsonParse>):{ var duration:Float; var tileId:Float; } return { duration: (cast _TilemapFormats.numField__tiledJsonParse((cast frame : Dynamic), (cast 'duration' : String), (cast 0.0 : Float)) : Float), tileId: (cast _TilemapFormats.numField__tiledJsonParse((cast frame : Dynamic), (cast 'tileid' : String), (cast 0.0 : Float)) : Float) }, _Runtime.UNDEFINED)) : Dynamic) : (cast null : Dynamic));
     return cast { animation: frames, id: (cast _TilemapFormats.numField__tiledJsonParse((cast obj : Dynamic), (cast 'id' : String), (cast 0.0 : Float)) : Float), image: (cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'image' : String)) : Null<String>), objects: ((cast !_Runtime.strictEquals(objectGroup, null) : Bool) ? (cast (cast _Runtime.mapArray((cast (cast _TilemapFormats.arrayField__tiledJsonParse((cast objectGroup : Dynamic), (cast 'objects' : String)) : Array<JsonObject__tiledJsonParse>) : Array<JsonObject__tiledJsonParse>), _TilemapFormats.buildTiledObjectFromJson__tiledJsonParse, _Runtime.UNDEFINED)) : Dynamic) : (cast null : Dynamic)), properties: (cast _TilemapFormats.buildTiledPropertiesFromJson__tiledJsonParse((cast obj : Dynamic)) : Array<TiledProperty>), type: _Runtime.coalesce(_Runtime.coalesce((cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'type' : String)) : Null<String>), function():Dynamic return cast (cast _TilemapFormats.strField__tiledJsonParse((cast obj : Dynamic), (cast 'class' : String)) : Null<String>)), function():Dynamic return cast '') };
     return cast null;
   }
@@ -291,8 +331,17 @@ class _TilemapFormats {
     var value:flight._internal._Any = cast _Runtime.UNDEFINED;
     value = _Runtime.getIndex(obj, key);
     if ((cast !(cast _Runtime.isArray(value) : Bool) : Bool)) { return cast null; }
-    return cast (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast value : Array<flight._internal._Any>), _TilemapFormats.isJsonObject__tiledJsonParse, _Runtime.UNDEFINED)) : Array<JsonObject__tiledJsonParse>), function(point:JsonObject__tiledJsonParse, __unused13:Float, __unused14:Array<JsonObject__tiledJsonParse>):{ var x:Float; var y:Float; } return { x: (cast _TilemapFormats.numField__tiledJsonParse((cast point : Dynamic), (cast 'x' : String), (cast 0.0 : Float)) : Float), y: (cast _TilemapFormats.numField__tiledJsonParse((cast point : Dynamic), (cast 'y' : String), (cast 0.0 : Float)) : Float) }, _Runtime.UNDEFINED));
+    return cast (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast value : Array<flight._internal._Any>), _TilemapFormats.isJsonObject__tiledJsonParse, _Runtime.UNDEFINED)) : Array<JsonObject__tiledJsonParse>), function(point:JsonObject__tiledJsonParse, __unused12:Float, __unused13:Array<JsonObject__tiledJsonParse>):{ var x:Float; var y:Float; } return { x: (cast _TilemapFormats.numField__tiledJsonParse((cast point : Dynamic), (cast 'x' : String), (cast 0.0 : Float)) : Float), y: (cast _TilemapFormats.numField__tiledJsonParse((cast point : Dynamic), (cast 'y' : String), (cast 0.0 : Float)) : Float) }, _Runtime.UNDEFINED));
     return cast null;
+  }
+
+  public static function reportMissingJsonField__tiledJsonParse(obj:JsonObject__tiledJsonParse, key:String, diagnostics:Null<Array<ImportDiagnostic>>, origin:String, path:String):Void {
+    if ((cast ((cast _Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals(_Runtime.getIndex(obj, key), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return; }
+    _TilemapFormats.reportMissingRequiredField__tiledJsonParse(({ final __callArgument89:Dynamic = diagnostics; __callArgument89; }), (cast origin : String), (cast path : String), ({ final __callArgument90:Dynamic = key; __callArgument90; }));
+  }
+
+  public static function reportMissingRequiredField__tiledJsonParse(diagnostics:Null<Array<ImportDiagnostic>>, origin:String, path:String, ?field:String):Void {
+    reportImportDiagnostic(({ final __callArgument93:Dynamic = diagnostics; __callArgument93; }), ({ final __callArgument94:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument94; }), (cast 'tiled.required-field-missing' : String), (cast origin : String), ({ final __callArgument95:Dynamic = { path: ((cast _Runtime.strictEquals(field, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast path : Dynamic) : (cast '' + Std.string(path) + '.' + Std.string(field) + '' : Dynamic)) }; __callArgument95; }));
   }
 
   public static function stringOr__tiledJsonParse(value:Null<flight._internal._Union2<String, Float>>, fallback:String):String {
@@ -315,7 +364,7 @@ class _TilemapFormats {
     bytes = (cast _TilemapFormats.decodeBase64__tiledLayerData((cast text : String)) : flight._internal._UInt8Array);
     if ((cast !_Runtime.strictEquals(compression, null) : Bool)) {
       if ((cast _Runtime.strictEquals(inflate, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { return cast null; }
-      var inflated:Null<flight._internal._UInt8Array> = (cast inflate(({ final __callArgument16:Dynamic = bytes; __callArgument16; }), ({ final __callArgument17:Dynamic = compression; __callArgument17; })) : Null<flight._internal._UInt8Array>);
+      var inflated:Null<flight._internal._UInt8Array> = (cast inflate(({ final __callArgument99:Dynamic = bytes; __callArgument99; }), ({ final __callArgument100:Dynamic = compression; __callArgument100; })) : Null<flight._internal._UInt8Array>);
       if ((cast _Runtime.strictEquals(inflated, null) : Bool)) { return cast null; }
       (bytes = cast (inflated : Dynamic));
     }
@@ -403,7 +452,7 @@ class _TilemapFormats {
         var __destructure1:TiledGid = (cast decodeTiledGid((cast flight._internal._StaticIndex.readUint32ArrayTyped((cast data : flight._internal._UInt32Array), (cast i : Float)) : Float)) : TiledGid);
         var tileId:Float = __destructure1.tileId;
         if ((cast ((cast tileId : Float) <= (cast 0.0 : Float)) : Bool)) { i++; continue; }
-        var ref:Null<TiledTilesetRef> = (cast getTiledTilesetRefForGid(({ final __callArgument22:Dynamic = map; __callArgument22; }), (cast tileId : Float)) : Null<TiledTilesetRef>);
+        var ref:Null<TiledTilesetRef> = (cast getTiledTilesetRefForGid(({ final __callArgument105:Dynamic = map; __callArgument105; }), (cast tileId : Float)) : Null<TiledTilesetRef>);
         if ((cast _Runtime.strictEquals(ref, null) : Bool)) {
           cellsWithoutTileset++;
           i++;
@@ -411,7 +460,7 @@ class _TilemapFormats {
         }
         var group:Null<TilesetGroup__tiledProject> = ((cast byFirstGid : flight._internal._Map<Float, Null<TilesetGroup__tiledProject>>).get((cast ref : { var firstGid:Float; }).firstGid));
         if ((cast _Runtime.strictEquals(group, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-          var layout:Null<{ var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }> = (cast resolveTileset(({ final __callArgument24:Dynamic = ref; __callArgument24; })) : Null<{ var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }>);
+          var layout:Null<{ var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }> = (cast resolveTileset(({ final __callArgument107:Dynamic = ref; __callArgument107; })) : Null<{ var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }>);
           if ((cast _Runtime.strictEquals(layout, null) : Bool)) {
             ((cast byFirstGid : flight._internal._Map<Float, Null<TilesetGroup__tiledProject>>).set((cast ref : { var firstGid:Float; }).firstGid, (cast null)));
             (group = cast (null : Dynamic));
@@ -433,10 +482,10 @@ class _TilemapFormats {
       }
     }
     if ((cast ((cast cellsWithoutTileset : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument26:Dynamic = diagnostics; __callArgument26; }), ({ final __callArgument27:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument27; }), (cast 'tiled.tile-outside-every-tileset' : String), (cast 'buildTilemapLayersFromTiled' : String), ({ final __callArgument28:Dynamic = { cells: cellsWithoutTileset, layerIndex: layerIndex }; __callArgument28; }));
+      reportImportDiagnostic(({ final __callArgument109:Dynamic = diagnostics; __callArgument109; }), ({ final __callArgument110:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument110; }), (cast 'tiled.tile-outside-every-tileset' : String), (cast 'buildTilemapLayersFromTiled' : String), ({ final __callArgument111:Dynamic = { cells: cellsWithoutTileset, layerIndex: layerIndex }; __callArgument111; }));
     }
     if ((cast ((cast cellsLeftEmpty : Float) > (cast 0.0 : Float)) : Bool)) {
-      reportImportDiagnostic(({ final __callArgument32:Dynamic = diagnostics; __callArgument32; }), ({ final __callArgument33:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument33; }), (cast 'tiled.tileset-unresolved' : String), (cast 'buildTilemapLayersFromTiled' : String), ({ final __callArgument34:Dynamic = { cells: cellsLeftEmpty, layerIndex: layerIndex, tilesets: (cast unresolvedTilesets : flight._internal._Set<Float>).size }; __callArgument34; }));
+      reportImportDiagnostic(({ final __callArgument115:Dynamic = diagnostics; __callArgument115; }), ({ final __callArgument116:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Drop; __callArgument116; }), (cast 'tiled.tileset-unresolved' : String), (cast 'buildTilemapLayersFromTiled' : String), ({ final __callArgument117:Dynamic = { cells: cellsLeftEmpty, layerIndex: layerIndex, tilesets: (cast unresolvedTilesets : flight._internal._Set<Float>).size }; __callArgument117; }));
     }
     if ((cast !(cast anyResolved : Bool) : Bool)) { return cast null; }
     return cast (cast _Runtime.mapArray((cast groups : Array<TilesetGroup__tiledProject>), function(group:TilesetGroup__tiledProject, __unused2:Float, __unused3:Array<TilesetGroup__tiledProject>):TilemapData return (cast createTilemapData((cast { atlas: (cast (cast group : TilesetGroup__tiledProject).layout : { var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }).atlas, columns: width, rows: height, tileHeight: (cast (cast group : TilesetGroup__tiledProject).layout : { var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }).tileHeight, tileWidth: (cast (cast group : TilesetGroup__tiledProject).layout : { var atlas:Null<TextureAtlas>; var tileHeight:Float; var tileWidth:Float; }).tileWidth, tiles: (cast group : TilesetGroup__tiledProject).tiles } : Dynamic)) : TilemapData), _Runtime.UNDEFINED));
@@ -447,22 +496,22 @@ class _TilemapFormats {
     var lines:Array<String> = cast _Runtime.UNDEFINED;
     var open:String = cast _Runtime.UNDEFINED;
     lines = (cast cast (['<?xml version="1.0" encoding="UTF-8"?>'] : Array<Dynamic>));
-    open = '<map' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'version' : String), ({ final __callArgument38:Dynamic = map.version; __callArgument38; })) : String)) + '';
-    if ((cast !_Runtime.strictEquals(map.tiledVersion, null) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'tiledversion' : String), ({ final __callArgument40:Dynamic = map.tiledVersion; __callArgument40; })) : String)) : Dynamic)); }
-    (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'orientation' : String), ({ final __callArgument42:Dynamic = map.orientation; __callArgument42; })) : String)) : Dynamic));
-    (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'renderorder' : String), ({ final __callArgument44:Dynamic = map.renderOrder; __callArgument44; })) : String)) : Dynamic));
-    (open = cast ((open + ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument46:Dynamic = map.width; __callArgument46; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument48:Dynamic = map.height; __callArgument48; })) : String))) : Dynamic));
-    (open = cast ((open + ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'tilewidth' : String), ({ final __callArgument50:Dynamic = map.tileWidth; __callArgument50; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'tileheight' : String), ({ final __callArgument52:Dynamic = map.tileHeight; __callArgument52; })) : String))) : Dynamic));
-    (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'infinite' : String), ({ final __callArgument54:Dynamic = ((cast map.infinite : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)); __callArgument54; })) : String)) : Dynamic));
-    if ((cast !_Runtime.strictEquals(map.backgroundColor, null) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'backgroundcolor' : String), ({ final __callArgument56:Dynamic = (cast formatTiledColor((cast map.backgroundColor : Float)) : String); __callArgument56; })) : String)) : Dynamic)); }
+    open = '<map' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'version' : String), ({ final __callArgument121:Dynamic = map.version; __callArgument121; })) : String)) + '';
+    if ((cast !_Runtime.strictEquals(map.tiledVersion, null) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'tiledversion' : String), ({ final __callArgument123:Dynamic = map.tiledVersion; __callArgument123; })) : String)) : Dynamic)); }
+    (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'orientation' : String), ({ final __callArgument125:Dynamic = map.orientation; __callArgument125; })) : String)) : Dynamic));
+    (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'renderorder' : String), ({ final __callArgument127:Dynamic = map.renderOrder; __callArgument127; })) : String)) : Dynamic));
+    (open = cast ((open + ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument129:Dynamic = map.width; __callArgument129; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument131:Dynamic = map.height; __callArgument131; })) : String))) : Dynamic));
+    (open = cast ((open + ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'tilewidth' : String), ({ final __callArgument133:Dynamic = map.tileWidth; __callArgument133; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'tileheight' : String), ({ final __callArgument135:Dynamic = map.tileHeight; __callArgument135; })) : String))) : Dynamic));
+    (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'infinite' : String), ({ final __callArgument137:Dynamic = ((cast map.infinite : Bool) ? (cast 1.0 : Dynamic) : (cast 0.0 : Dynamic)); __callArgument137; })) : String)) : Dynamic));
+    if ((cast !_Runtime.strictEquals(map.backgroundColor, null) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'backgroundcolor' : String), ({ final __callArgument139:Dynamic = (cast formatTiledColor((cast map.backgroundColor : Float)) : String); __callArgument139; })) : String)) : Dynamic)); }
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
     for (ref in _Runtime.iterable(map.tilesets)) {
-      _TilemapFormats.writeTilesetRef__tiledTmxFormat(({ final __callArgument60:Dynamic = lines; __callArgument60; }), ({ final __callArgument61:Dynamic = ref; __callArgument61; }));
+      _TilemapFormats.writeTilesetRef__tiledTmxFormat(({ final __callArgument143:Dynamic = lines; __callArgument143; }), ({ final __callArgument144:Dynamic = ref; __callArgument144; }));
     }
     for (layer in _Runtime.iterable(map.layers)) {
-      _TilemapFormats.writeLayer__tiledTmxFormat(({ final __callArgument66:Dynamic = lines; __callArgument66; }), ({ final __callArgument67:Dynamic = layer; __callArgument67; }));
+      _TilemapFormats.writeLayer__tiledTmxFormat(({ final __callArgument149:Dynamic = lines; __callArgument149; }), ({ final __callArgument150:Dynamic = layer; __callArgument150; }));
     }
-    _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument70:Dynamic = lines; __callArgument70; }), map.properties);
+    _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument153:Dynamic = lines; __callArgument153; }), map.properties);
     _Runtime.callProperty(lines, 'push', cast (['</map>'] : Array<Dynamic>));
     return cast _Runtime.join(lines, '\n');
     return cast null;
@@ -480,11 +529,11 @@ class _TilemapFormats {
 
   public static function formatLayerBaseAttrs__tiledTmxFormat(layer:TiledLayer):String {
     var out:String = cast _Runtime.UNDEFINED;
-    out = ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument72:Dynamic = (cast layer : { var id:Float; }).id; __callArgument72; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument74:Dynamic = (cast layer : { var name:String; }).name; __callArgument74; })) : String));
-    if ((cast !_Runtime.strictEquals((cast layer : { var opacity:Float; }).opacity, 1.0) : Bool)) { (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'opacity' : String), ({ final __callArgument76:Dynamic = (cast layer : { var opacity:Float; }).opacity; __callArgument76; })) : String)) : Dynamic)); }
-    if ((cast !(cast (cast layer : { var visible:Bool; }).visible : Bool) : Bool)) { (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'visible' : String), ({ final __callArgument78:Dynamic = 0.0; __callArgument78; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals((cast layer : { var offsetX:Float; }).offsetX, 0.0) : Bool)) { (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'offsetx' : String), ({ final __callArgument80:Dynamic = (cast layer : { var offsetX:Float; }).offsetX; __callArgument80; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals((cast layer : { var offsetY:Float; }).offsetY, 0.0) : Bool)) { (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'offsety' : String), ({ final __callArgument82:Dynamic = (cast layer : { var offsetY:Float; }).offsetY; __callArgument82; })) : String)) : Dynamic)); }
+    out = ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument155:Dynamic = (cast layer : { var id:Float; }).id; __callArgument155; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument157:Dynamic = (cast layer : { var name:String; }).name; __callArgument157; })) : String));
+    if ((cast !_Runtime.strictEquals((cast layer : { var opacity:Float; }).opacity, 1.0) : Bool)) { (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'opacity' : String), ({ final __callArgument159:Dynamic = (cast layer : { var opacity:Float; }).opacity; __callArgument159; })) : String)) : Dynamic)); }
+    if ((cast !(cast (cast layer : { var visible:Bool; }).visible : Bool) : Bool)) { (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'visible' : String), ({ final __callArgument161:Dynamic = 0.0; __callArgument161; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast layer : { var offsetX:Float; }).offsetX, 0.0) : Bool)) { (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'offsetx' : String), ({ final __callArgument163:Dynamic = (cast layer : { var offsetX:Float; }).offsetX; __callArgument163; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals((cast layer : { var offsetY:Float; }).offsetY, 0.0) : Bool)) { (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'offsety' : String), ({ final __callArgument165:Dynamic = (cast layer : { var offsetY:Float; }).offsetY; __callArgument165; })) : String)) : Dynamic)); }
     return cast out;
     return cast null;
   }
@@ -496,9 +545,9 @@ class _TilemapFormats {
 
   public static function writeLayer__tiledTmxFormat(lines:Array<String>, layer:TiledLayer):Void {
     var base:String = cast _Runtime.UNDEFINED;
-    base = (cast _TilemapFormats.formatLayerBaseAttrs__tiledTmxFormat(({ final __callArgument84:Dynamic = layer; __callArgument84; })) : String);
+    base = (cast _TilemapFormats.formatLayerBaseAttrs__tiledTmxFormat(({ final __callArgument167:Dynamic = layer; __callArgument167; })) : String);
     if ((cast _Runtime.strictEquals((cast layer : { var type:String; }).type, 'tilelayer') : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast (['<layer' + Std.string(base) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument86:Dynamic = _Runtime.field(layer, 'width'); __callArgument86; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument88:Dynamic = _Runtime.field(layer, 'height'); __callArgument88; })) : String)) + '>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['<layer' + Std.string(base) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument169:Dynamic = _Runtime.field(layer, 'width'); __callArgument169; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument171:Dynamic = _Runtime.field(layer, 'height'); __callArgument171; })) : String)) + '>'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['<data encoding="csv">'] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast ([_Runtime.join((cast _Runtime.toArray(_Runtime.field(layer, 'data')) : Array<Float>), ',')] : Array<Dynamic>));
       _Runtime.callProperty(lines, 'push', cast (['</data>'] : Array<Dynamic>));
@@ -508,37 +557,37 @@ class _TilemapFormats {
     if ((cast _Runtime.strictEquals((cast layer : { var type:String; }).type, 'objectgroup') : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<objectgroup' + Std.string(base) + '>'] : Array<Dynamic>));
       for (object in _Runtime.iterable(_Runtime.field(layer, 'objects'))) {
-        _TilemapFormats.writeObject__tiledTmxFormat(({ final __callArgument92:Dynamic = lines; __callArgument92; }), ({ final __callArgument93:Dynamic = object; __callArgument93; }));
+        _TilemapFormats.writeObject__tiledTmxFormat(({ final __callArgument175:Dynamic = lines; __callArgument175; }), ({ final __callArgument176:Dynamic = object; __callArgument176; }));
       }
-      _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument96:Dynamic = lines; __callArgument96; }), _Runtime.field(layer, 'properties'));
+      _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument179:Dynamic = lines; __callArgument179; }), _Runtime.field(layer, 'properties'));
       _Runtime.callProperty(lines, 'push', cast (['</objectgroup>'] : Array<Dynamic>));
       return;
     }
     if ((cast _Runtime.strictEquals((cast layer : { var type:String; }).type, 'imagelayer') : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<imagelayer' + Std.string(base) + '>'] : Array<Dynamic>));
-      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument98:Dynamic = _Runtime.field(layer, 'image'); __callArgument98; })) : String)) + '/>'] : Array<Dynamic>));
-      _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument100:Dynamic = lines; __callArgument100; }), _Runtime.field(layer, 'properties'));
+      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument181:Dynamic = _Runtime.field(layer, 'image'); __callArgument181; })) : String)) + '/>'] : Array<Dynamic>));
+      _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument183:Dynamic = lines; __callArgument183; }), _Runtime.field(layer, 'properties'));
       _Runtime.callProperty(lines, 'push', cast (['</imagelayer>'] : Array<Dynamic>));
       return;
     }
     _Runtime.callProperty(lines, 'push', cast (['<group' + Std.string(base) + '>'] : Array<Dynamic>));
     for (child in _Runtime.iterable(_Runtime.field(layer, 'layers'))) {
-      _TilemapFormats.writeLayer__tiledTmxFormat(({ final __callArgument104:Dynamic = lines; __callArgument104; }), ({ final __callArgument105:Dynamic = child; __callArgument105; }));
+      _TilemapFormats.writeLayer__tiledTmxFormat(({ final __callArgument187:Dynamic = lines; __callArgument187; }), ({ final __callArgument188:Dynamic = child; __callArgument188; }));
     }
-    _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument108:Dynamic = lines; __callArgument108; }), _Runtime.field(layer, 'properties'));
+    _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument191:Dynamic = lines; __callArgument191; }), _Runtime.field(layer, 'properties'));
     _Runtime.callProperty(lines, 'push', cast (['</group>'] : Array<Dynamic>));
   }
 
   public static function writeObject__tiledTmxFormat(lines:Array<String>, object:TiledObject):Void {
     var open:String = cast _Runtime.UNDEFINED;
     var hasBody:Bool = cast _Runtime.UNDEFINED;
-    open = '<object' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument110:Dynamic = object.id; __callArgument110; })) : String)) + '';
-    if ((cast !_Runtime.strictEquals(object.name, '') : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument112:Dynamic = object.name; __callArgument112; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(object.type, '') : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument114:Dynamic = object.type; __callArgument114; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(object.gid, null) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'gid' : String), ({ final __callArgument116:Dynamic = object.gid; __callArgument116; })) : String)) : Dynamic)); }
-    (open = cast ((open + ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'x' : String), ({ final __callArgument118:Dynamic = object.x; __callArgument118; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'y' : String), ({ final __callArgument120:Dynamic = object.y; __callArgument120; })) : String))) : Dynamic));
-    if ((cast !_Runtime.strictEquals(object.width, 0.0) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument122:Dynamic = object.width; __callArgument122; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(object.height, 0.0) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument124:Dynamic = object.height; __callArgument124; })) : String)) : Dynamic)); }
+    open = '<object' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument193:Dynamic = object.id; __callArgument193; })) : String)) + '';
+    if ((cast !_Runtime.strictEquals(object.name, '') : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument195:Dynamic = object.name; __callArgument195; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(object.type, '') : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument197:Dynamic = object.type; __callArgument197; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(object.gid, null) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'gid' : String), ({ final __callArgument199:Dynamic = object.gid; __callArgument199; })) : String)) : Dynamic)); }
+    (open = cast ((open + ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'x' : String), ({ final __callArgument201:Dynamic = object.x; __callArgument201; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'y' : String), ({ final __callArgument203:Dynamic = object.y; __callArgument203; })) : String))) : Dynamic));
+    if ((cast !_Runtime.strictEquals(object.width, 0.0) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument205:Dynamic = object.width; __callArgument205; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(object.height, 0.0) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument207:Dynamic = object.height; __callArgument207; })) : String)) : Dynamic)); }
     hasBody = ((cast ((cast ((cast ((cast object.point : Bool) || (cast object.ellipse : Bool)) : Bool) || (cast !_Runtime.strictEquals(object.polygon, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(object.polyline, null) : Bool)) : Bool) || (cast ((cast _Runtime.field(object.properties, 'length') : Float) > (cast 0.0 : Float)) : Bool));
     if ((cast !(cast hasBody : Bool) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '/>'] : Array<Dynamic>));
@@ -547,9 +596,9 @@ class _TilemapFormats {
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
     if ((cast object.point : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<point/>'] : Array<Dynamic>)); }
     if ((cast object.ellipse : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<ellipse/>'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(object.polygon, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polygon' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'points' : String), ({ final __callArgument128:Dynamic = (cast _TilemapFormats.formatPoints__tiledTmxFormat(({ final __callArgument126:Dynamic = object.polygon; __callArgument126; })) : String); __callArgument128; })) : String)) + '/>'] : Array<Dynamic>)); }
-    if ((cast !_Runtime.strictEquals(object.polyline, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polyline' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'points' : String), ({ final __callArgument134:Dynamic = (cast _TilemapFormats.formatPoints__tiledTmxFormat(({ final __callArgument132:Dynamic = object.polyline; __callArgument132; })) : String); __callArgument134; })) : String)) + '/>'] : Array<Dynamic>)); }
-    _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument138:Dynamic = lines; __callArgument138; }), object.properties);
+    if ((cast !_Runtime.strictEquals(object.polygon, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polygon' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'points' : String), ({ final __callArgument211:Dynamic = (cast _TilemapFormats.formatPoints__tiledTmxFormat(({ final __callArgument209:Dynamic = object.polygon; __callArgument209; })) : String); __callArgument211; })) : String)) + '/>'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(object.polyline, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<polyline' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'points' : String), ({ final __callArgument217:Dynamic = (cast _TilemapFormats.formatPoints__tiledTmxFormat(({ final __callArgument215:Dynamic = object.polyline; __callArgument215; })) : String); __callArgument217; })) : String)) + '/>'] : Array<Dynamic>)); }
+    _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument221:Dynamic = lines; __callArgument221; }), object.properties);
     _Runtime.callProperty(lines, 'push', cast (['</object>'] : Array<Dynamic>));
   }
 
@@ -557,9 +606,9 @@ class _TilemapFormats {
     if ((cast _Runtime.strictEquals(_Runtime.field(properties, 'length'), 0.0) : Bool)) { return; }
     _Runtime.callProperty(lines, 'push', cast (['<properties>'] : Array<Dynamic>));
     for (property in _Runtime.iterable(properties)) {
-      var out:String = '<property' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument142:Dynamic = property.name; __callArgument142; })) : String)) + '';
-      if ((cast !_Runtime.strictEquals(property.type, 'string') : Bool)) { (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument144:Dynamic = property.type; __callArgument144; })) : String)) : Dynamic)); }
-      (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'value' : String), ({ final __callArgument146:Dynamic = Std.string(property.value); __callArgument146; })) : String)) : Dynamic));
+      var out:String = '<property' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument225:Dynamic = property.name; __callArgument225; })) : String)) + '';
+      if ((cast !_Runtime.strictEquals(property.type, 'string') : Bool)) { (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument227:Dynamic = property.type; __callArgument227; })) : String)) : Dynamic)); }
+      (out = cast ((out + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'value' : String), ({ final __callArgument229:Dynamic = Std.string(property.value); __callArgument229; })) : String)) : Dynamic));
       _Runtime.callProperty(lines, 'push', cast (['' + Std.string(out) + '/>'] : Array<Dynamic>));
     }
     _Runtime.callProperty(lines, 'push', cast (['</properties>'] : Array<Dynamic>));
@@ -567,92 +616,114 @@ class _TilemapFormats {
 
   public static function writeTileset__tiledTmxFormat(lines:Array<String>, tileset:TiledTileset, firstGid:Float):Void {
     var open:String = cast _Runtime.UNDEFINED;
-    open = '<tileset' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'firstgid' : String), ({ final __callArgument148:Dynamic = firstGid; __callArgument148; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument150:Dynamic = tileset.name; __callArgument150; })) : String)) + '';
-    (open = cast ((open + ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'tilewidth' : String), ({ final __callArgument152:Dynamic = tileset.tileWidth; __callArgument152; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'tileheight' : String), ({ final __callArgument154:Dynamic = tileset.tileHeight; __callArgument154; })) : String))) : Dynamic));
-    (open = cast ((open + ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'tilecount' : String), ({ final __callArgument156:Dynamic = tileset.tileCount; __callArgument156; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'columns' : String), ({ final __callArgument158:Dynamic = tileset.columns; __callArgument158; })) : String))) : Dynamic));
-    if ((cast !_Runtime.strictEquals(tileset.margin, 0.0) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'margin' : String), ({ final __callArgument160:Dynamic = tileset.margin; __callArgument160; })) : String)) : Dynamic)); }
-    if ((cast !_Runtime.strictEquals(tileset.spacing, 0.0) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'spacing' : String), ({ final __callArgument162:Dynamic = tileset.spacing; __callArgument162; })) : String)) : Dynamic)); }
+    open = '<tileset' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'firstgid' : String), ({ final __callArgument231:Dynamic = firstGid; __callArgument231; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'name' : String), ({ final __callArgument233:Dynamic = tileset.name; __callArgument233; })) : String)) + '';
+    (open = cast ((open + ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'tilewidth' : String), ({ final __callArgument235:Dynamic = tileset.tileWidth; __callArgument235; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'tileheight' : String), ({ final __callArgument237:Dynamic = tileset.tileHeight; __callArgument237; })) : String))) : Dynamic));
+    (open = cast ((open + ((cast _TilemapFormats.attr__tiledTmxFormat((cast 'tilecount' : String), ({ final __callArgument239:Dynamic = tileset.tileCount; __callArgument239; })) : String) + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'columns' : String), ({ final __callArgument241:Dynamic = tileset.columns; __callArgument241; })) : String))) : Dynamic));
+    if ((cast !_Runtime.strictEquals(tileset.margin, 0.0) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'margin' : String), ({ final __callArgument243:Dynamic = tileset.margin; __callArgument243; })) : String)) : Dynamic)); }
+    if ((cast !_Runtime.strictEquals(tileset.spacing, 0.0) : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'spacing' : String), ({ final __callArgument245:Dynamic = tileset.spacing; __callArgument245; })) : String)) : Dynamic)); }
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
     if ((cast !_Runtime.strictEquals(tileset.image, null) : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument164:Dynamic = tileset.image; __callArgument164; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument166:Dynamic = tileset.imageWidth; __callArgument166; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument168:Dynamic = tileset.imageHeight; __callArgument168; })) : String)) + '/>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument247:Dynamic = tileset.image; __callArgument247; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'width' : String), ({ final __callArgument249:Dynamic = tileset.imageWidth; __callArgument249; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'height' : String), ({ final __callArgument251:Dynamic = tileset.imageHeight; __callArgument251; })) : String)) + '/>'] : Array<Dynamic>));
     }
     for (tile in _Runtime.iterable(tileset.tiles)) {
-      _TilemapFormats.writeTilesetTile__tiledTmxFormat(({ final __callArgument172:Dynamic = lines; __callArgument172; }), ({ final __callArgument173:Dynamic = tile; __callArgument173; }));
+      _TilemapFormats.writeTilesetTile__tiledTmxFormat(({ final __callArgument255:Dynamic = lines; __callArgument255; }), ({ final __callArgument256:Dynamic = tile; __callArgument256; }));
     }
-    _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument176:Dynamic = lines; __callArgument176; }), tileset.properties);
+    _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument259:Dynamic = lines; __callArgument259; }), tileset.properties);
     _Runtime.callProperty(lines, 'push', cast (['</tileset>'] : Array<Dynamic>));
   }
 
   public static function writeTilesetRef__tiledTmxFormat(lines:Array<String>, ref:TiledTilesetRef):Void {
     if ((cast !_Runtime.strictEquals(ref.source, null) : Bool)) {
-      _Runtime.callProperty(lines, 'push', cast (['<tileset' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'firstgid' : String), ({ final __callArgument178:Dynamic = ref.firstGid; __callArgument178; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument180:Dynamic = ref.source; __callArgument180; })) : String)) + '/>'] : Array<Dynamic>));
+      _Runtime.callProperty(lines, 'push', cast (['<tileset' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'firstgid' : String), ({ final __callArgument261:Dynamic = ref.firstGid; __callArgument261; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument263:Dynamic = ref.source; __callArgument263; })) : String)) + '/>'] : Array<Dynamic>));
       return;
     }
-    if ((cast !_Runtime.strictEquals(ref.tileset, null) : Bool)) { _TilemapFormats.writeTileset__tiledTmxFormat(({ final __callArgument182:Dynamic = lines; __callArgument182; }), ref.tileset, (cast ref.firstGid : Float)); }
+    if ((cast !_Runtime.strictEquals(ref.tileset, null) : Bool)) { _TilemapFormats.writeTileset__tiledTmxFormat(({ final __callArgument265:Dynamic = lines; __callArgument265; }), ref.tileset, (cast ref.firstGid : Float)); }
   }
 
   public static function writeTilesetTile__tiledTmxFormat(lines:Array<String>, tile:TiledTilesetTile):Void {
     var open:String = cast _Runtime.UNDEFINED;
     var hasBody:Bool = cast _Runtime.UNDEFINED;
-    open = '<tile' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument184:Dynamic = tile.id; __callArgument184; })) : String)) + '';
-    if ((cast !_Runtime.strictEquals(tile.type, '') : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument186:Dynamic = tile.type; __callArgument186; })) : String)) : Dynamic)); }
+    open = '<tile' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'id' : String), ({ final __callArgument267:Dynamic = tile.id; __callArgument267; })) : String)) + '';
+    if ((cast !_Runtime.strictEquals(tile.type, '') : Bool)) { (open = cast ((open + (cast _TilemapFormats.attr__tiledTmxFormat((cast 'type' : String), ({ final __callArgument269:Dynamic = tile.type; __callArgument269; })) : String)) : Dynamic)); }
     hasBody = ((cast ((cast ((cast !_Runtime.strictEquals(tile.image, null) : Bool) || (cast !_Runtime.strictEquals(tile.animation, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals(tile.objects, null) : Bool)) : Bool) || (cast ((cast _Runtime.field(tile.properties, 'length') : Float) > (cast 0.0 : Float)) : Bool));
     if ((cast !(cast hasBody : Bool) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '/>'] : Array<Dynamic>));
       return;
     }
     _Runtime.callProperty(lines, 'push', cast (['' + Std.string(open) + '>'] : Array<Dynamic>));
-    if ((cast !_Runtime.strictEquals(tile.image, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument188:Dynamic = tile.image; __callArgument188; })) : String)) + '/>'] : Array<Dynamic>)); }
+    if ((cast !_Runtime.strictEquals(tile.image, null) : Bool)) { _Runtime.callProperty(lines, 'push', cast (['<image' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'source' : String), ({ final __callArgument271:Dynamic = tile.image; __callArgument271; })) : String)) + '/>'] : Array<Dynamic>)); }
     if ((cast !_Runtime.strictEquals(tile.animation, null) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<animation>'] : Array<Dynamic>));
       for (frame in _Runtime.iterable(tile.animation)) {
-        _Runtime.callProperty(lines, 'push', cast (['<frame' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'tileid' : String), ({ final __callArgument192:Dynamic = frame.tileId; __callArgument192; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'duration' : String), ({ final __callArgument194:Dynamic = frame.duration; __callArgument194; })) : String)) + '/>'] : Array<Dynamic>));
+        _Runtime.callProperty(lines, 'push', cast (['<frame' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'tileid' : String), ({ final __callArgument275:Dynamic = frame.tileId; __callArgument275; })) : String)) + '' + Std.string((cast _TilemapFormats.attr__tiledTmxFormat((cast 'duration' : String), ({ final __callArgument277:Dynamic = frame.duration; __callArgument277; })) : String)) + '/>'] : Array<Dynamic>));
       }
       _Runtime.callProperty(lines, 'push', cast (['</animation>'] : Array<Dynamic>));
     }
     if ((cast !_Runtime.strictEquals(tile.objects, null) : Bool)) {
       _Runtime.callProperty(lines, 'push', cast (['<objectgroup>'] : Array<Dynamic>));
       for (object in _Runtime.iterable(tile.objects)) {
-        _TilemapFormats.writeObject__tiledTmxFormat(({ final __callArgument198:Dynamic = lines; __callArgument198; }), ({ final __callArgument199:Dynamic = object; __callArgument199; }));
+        _TilemapFormats.writeObject__tiledTmxFormat(({ final __callArgument281:Dynamic = lines; __callArgument281; }), ({ final __callArgument282:Dynamic = object; __callArgument282; }));
       }
       _Runtime.callProperty(lines, 'push', cast (['</objectgroup>'] : Array<Dynamic>));
     }
-    _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument202:Dynamic = lines; __callArgument202; }), tile.properties);
+    _TilemapFormats.writeProperties__tiledTmxFormat(({ final __callArgument285:Dynamic = lines; __callArgument285; }), tile.properties);
     _Runtime.callProperty(lines, 'push', cast (['</tile>'] : Array<Dynamic>));
   }
 
-  public static function parseTiledTileset(text:String, ?_options:TiledParseOptions):Null<TiledTileset> {
+  public static function parseTiledTileset(text:String, ?_options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledTileset> {
     var root:Null<XmlElement> = cast _Runtime.UNDEFINED;
     root = (cast parseXmlDocument((cast text : String)) : Null<XmlElement>);
-    if ((cast ((cast _Runtime.strictEquals(root, null) : Bool) || (cast !_Runtime.strictEquals((cast root : { var name:String; }).name, 'tileset') : Bool)) : Bool)) { return cast null; }
-    return cast (cast _TilemapFormats.buildTiledTilesetFromXml__tiledXmlParse(({ final __callArgument204:Dynamic = root; __callArgument204; })) : TiledTileset);
+    if ((cast _Runtime.strictEquals(root, null) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument287:Dynamic = diagnostics; __callArgument287; }), ({ final __callArgument288:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument288; }), (cast 'tiled.xml-malformed' : String), (cast 'parseTiledTileset' : String), ({ final __callArgument289:Dynamic = { path: 'tileset' }; __callArgument289; }));
+      return cast null;
+    }
+    if ((cast !_Runtime.strictEquals((cast root : { var name:String; }).name, 'tileset') : Bool)) {
+      reportImportDiagnostic(({ final __callArgument293:Dynamic = diagnostics; __callArgument293; }), ({ final __callArgument294:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument294; }), (cast 'tiled.root-unexpected' : String), (cast 'parseTiledTileset' : String), ({ final __callArgument295:Dynamic = { actual: (cast root : { var name:String; }).name, path: 'tileset' }; __callArgument295; }));
+      return cast null;
+    }
+    return cast (cast _TilemapFormats.buildTiledTilesetFromXml__tiledXmlParse(({ final __callArgument299:Dynamic = root; __callArgument299; }), ({ final __callArgument300:Dynamic = diagnostics; __callArgument300; }), (cast 'tileset' : String)) : TiledTileset);
     return cast null;
   }
 
-  public static function parseTiledTmx(text:String, ?options:TiledParseOptions):Null<TiledMap> {
+  public static function parseTiledTmx(text:String, ?options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>):Null<TiledMap> {
     var root:Null<XmlElement> = cast _Runtime.UNDEFINED;
     var tilesets:Array<TiledTilesetRef> = cast _Runtime.UNDEFINED;
     var layers:Array<TiledLayer> = cast _Runtime.UNDEFINED;
     var background:Null<String> = cast _Runtime.UNDEFINED;
     root = (cast parseXmlDocument((cast text : String)) : Null<XmlElement>);
-    if ((cast ((cast _Runtime.strictEquals(root, null) : Bool) || (cast !_Runtime.strictEquals((cast root : { var name:String; }).name, 'map') : Bool)) : Bool)) { return cast null; }
+    if ((cast _Runtime.strictEquals(root, null) : Bool)) {
+      reportImportDiagnostic(({ final __callArgument303:Dynamic = diagnostics; __callArgument303; }), ({ final __callArgument304:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument304; }), (cast 'tiled.xml-malformed' : String), (cast 'parseTiledTmx' : String), ({ final __callArgument305:Dynamic = { path: 'map' }; __callArgument305; }));
+      return cast null;
+    }
+    if ((cast !_Runtime.strictEquals((cast root : { var name:String; }).name, 'map') : Bool)) {
+      reportImportDiagnostic(({ final __callArgument309:Dynamic = diagnostics; __callArgument309; }), ({ final __callArgument310:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Reject; __callArgument310; }), (cast 'tiled.root-unexpected' : String), (cast 'parseTiledTmx' : String), ({ final __callArgument311:Dynamic = { actual: (cast root : { var name:String; }).name, path: 'map' }; __callArgument311; }));
+      return cast null;
+    }
+    if ((cast !_Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      _TilemapFormats.reportMissingXmlAttribute__tiledXmlParse(({ final __callArgument315:Dynamic = root; __callArgument315; }), (cast 'height' : String), ({ final __callArgument316:Dynamic = diagnostics; __callArgument316; }), (cast 'parseTiledTmx' : String), (cast 'map' : String));
+      _TilemapFormats.reportMissingXmlAttribute__tiledXmlParse(({ final __callArgument319:Dynamic = root; __callArgument319; }), (cast 'tileheight' : String), ({ final __callArgument320:Dynamic = diagnostics; __callArgument320; }), (cast 'parseTiledTmx' : String), (cast 'map' : String));
+      _TilemapFormats.reportMissingXmlAttribute__tiledXmlParse(({ final __callArgument323:Dynamic = root; __callArgument323; }), (cast 'tilewidth' : String), ({ final __callArgument324:Dynamic = diagnostics; __callArgument324; }), (cast 'parseTiledTmx' : String), (cast 'map' : String));
+      _TilemapFormats.reportMissingXmlAttribute__tiledXmlParse(({ final __callArgument327:Dynamic = root; __callArgument327; }), (cast 'width' : String), ({ final __callArgument328:Dynamic = diagnostics; __callArgument328; }), (cast 'parseTiledTmx' : String), (cast 'map' : String));
+    }
     tilesets = (cast cast ([] : Array<Dynamic>));
-    for (element in _Runtime.iterable((cast getXmlElementChildrenByName(({ final __callArgument208:Dynamic = root; __callArgument208; }), (cast 'tileset' : String)) : Array<XmlElement>))) {
-      _Runtime.callProperty(tilesets, 'push', cast ([(cast _TilemapFormats.buildTiledTilesetRefFromXml__tiledXmlParse(({ final __callArgument210:Dynamic = element; __callArgument210; })) : TiledTilesetRef)] : Array<Dynamic>));
+    for (__iteration0 in _Runtime.iterable(_Runtime.callProperty((cast getXmlElementChildrenByName(({ final __callArgument337:Dynamic = root; __callArgument337; }), (cast 'tileset' : String)) : Array<XmlElement>), 'entries', cast ([] : Array<Dynamic>)))) {
+      var index:Float = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
+      var element:XmlElement = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
+      _Runtime.callProperty(tilesets, 'push', cast ([(cast _TilemapFormats.buildTiledTilesetRefFromXml__tiledXmlParse(({ final __callArgument339:Dynamic = element; __callArgument339; }), ({ final __callArgument340:Dynamic = diagnostics; __callArgument340; }), (cast ((cast _Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast 'map.tilesets[' + Std.string(index) + ']' : Dynamic)) : String)) : TiledTilesetRef)] : Array<Dynamic>));
     }
     layers = (cast cast ([] : Array<Dynamic>));
     for (element in _Runtime.iterable((cast root : { var children:Array<XmlElement>; }).children)) {
-      var layer:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>> = (cast _TilemapFormats.buildTiledLayerFromXml__tiledXmlParse(({ final __callArgument214:Dynamic = element; __callArgument214; }), ({ final __callArgument215:Dynamic = options; __callArgument215; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>);
+      var layer:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>> = (cast _TilemapFormats.buildTiledLayerFromXml__tiledXmlParse(({ final __callArgument345:Dynamic = element; __callArgument345; }), ({ final __callArgument346:Dynamic = options; __callArgument346; }), ({ final __callArgument347:Dynamic = diagnostics; __callArgument347; }), (cast ((cast _Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast 'map.layers[' + Std.string(_Runtime.field(layers, 'length')) + ']' : Dynamic)) : String)) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>);
       if ((cast !_Runtime.strictEquals(layer, null) : Bool)) { _Runtime.callProperty(layers, 'push', cast ([layer] : Array<Dynamic>)); }
     }
-    background = (cast getXmlElementAttribute(({ final __callArgument218:Dynamic = root; __callArgument218; }), (cast 'backgroundcolor' : String)) : Null<String>);
-    return cast { backgroundColor: ((cast !_Runtime.strictEquals(background, null) : Bool) ? (cast (cast parseTiledColor((cast background : String)) : Null<Float>) : Dynamic) : (cast null : Dynamic)), height: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument220:Dynamic = root; __callArgument220; }), (cast 'height' : String), (cast 0.0 : Float)) : Float), infinite: (cast _TilemapFormats.attrBool__tiledXmlParse(({ final __callArgument222:Dynamic = root; __callArgument222; }), (cast 'infinite' : String), (cast false : Bool)) : Bool), layers: layers, orientation: (cast _TilemapFormats.asOrientation__tiledXmlParse((cast getXmlElementAttribute(({ final __callArgument224:Dynamic = root; __callArgument224; }), (cast 'orientation' : String)) : Null<String>)) : TiledOrientation), properties: (cast _TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse(({ final __callArgument228:Dynamic = root; __callArgument228; })) : Array<TiledProperty>), renderOrder: (cast _TilemapFormats.asRenderOrder__tiledXmlParse((cast getXmlElementAttribute(({ final __callArgument230:Dynamic = root; __callArgument230; }), (cast 'renderorder' : String)) : Null<String>)) : TiledRenderOrder), tileHeight: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument234:Dynamic = root; __callArgument234; }), (cast 'tileheight' : String), (cast 0.0 : Float)) : Float), tileWidth: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument236:Dynamic = root; __callArgument236; }), (cast 'tilewidth' : String), (cast 0.0 : Float)) : Float), tiledVersion: (cast getXmlElementAttribute(({ final __callArgument238:Dynamic = root; __callArgument238; }), (cast 'tiledversion' : String)) : Null<String>), tilesets: tilesets, version: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument240:Dynamic = root; __callArgument240; }), (cast 'version' : String), (cast '1.0' : String)) : String), width: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument242:Dynamic = root; __callArgument242; }), (cast 'width' : String), (cast 0.0 : Float)) : Float) };
+    background = (cast getXmlElementAttribute(({ final __callArgument351:Dynamic = root; __callArgument351; }), (cast 'backgroundcolor' : String)) : Null<String>);
+    return cast { backgroundColor: ((cast !_Runtime.strictEquals(background, null) : Bool) ? (cast (cast parseTiledColor((cast background : String)) : Null<Float>) : Dynamic) : (cast null : Dynamic)), height: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument353:Dynamic = root; __callArgument353; }), (cast 'height' : String), (cast 0.0 : Float)) : Float), infinite: (cast _TilemapFormats.attrBool__tiledXmlParse(({ final __callArgument355:Dynamic = root; __callArgument355; }), (cast 'infinite' : String), (cast false : Bool)) : Bool), layers: layers, orientation: (cast _TilemapFormats.asOrientation__tiledXmlParse((cast getXmlElementAttribute(({ final __callArgument357:Dynamic = root; __callArgument357; }), (cast 'orientation' : String)) : Null<String>)) : TiledOrientation), properties: (cast _TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse(({ final __callArgument361:Dynamic = root; __callArgument361; })) : Array<TiledProperty>), renderOrder: (cast _TilemapFormats.asRenderOrder__tiledXmlParse((cast getXmlElementAttribute(({ final __callArgument363:Dynamic = root; __callArgument363; }), (cast 'renderorder' : String)) : Null<String>)) : TiledRenderOrder), tileHeight: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument367:Dynamic = root; __callArgument367; }), (cast 'tileheight' : String), (cast 0.0 : Float)) : Float), tileWidth: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument369:Dynamic = root; __callArgument369; }), (cast 'tilewidth' : String), (cast 0.0 : Float)) : Float), tiledVersion: (cast getXmlElementAttribute(({ final __callArgument371:Dynamic = root; __callArgument371; }), (cast 'tiledversion' : String)) : Null<String>), tilesets: tilesets, version: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument373:Dynamic = root; __callArgument373; }), (cast 'version' : String), (cast '1.0' : String)) : String), width: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument375:Dynamic = root; __callArgument375; }), (cast 'width' : String), (cast 0.0 : Float)) : Float) };
     return cast null;
   }
 
   public static function attrBool__tiledXmlParse(element:XmlElement, name:String, fallback:Bool):Bool {
     var value:Null<String> = cast _Runtime.UNDEFINED;
-    value = (cast getXmlElementAttribute(({ final __callArgument244:Dynamic = element; __callArgument244; }), (cast name : String)) : Null<String>);
+    value = (cast getXmlElementAttribute(({ final __callArgument377:Dynamic = element; __callArgument377; }), (cast name : String)) : Null<String>);
     if ((cast _Runtime.strictEquals(value, null) : Bool)) { return cast fallback; }
     return cast ((cast _Runtime.strictEquals(value, '1') : Bool) || (cast _Runtime.strictEquals(value, 'true') : Bool));
     return cast null;
@@ -661,7 +732,7 @@ class _TilemapFormats {
   public static function attrNumber__tiledXmlParse(element:XmlElement, name:String, fallback:Float):Float {
     var value:Null<String> = cast _Runtime.UNDEFINED;
     var n:Float = cast _Runtime.UNDEFINED;
-    value = (cast getXmlElementAttribute(({ final __callArgument246:Dynamic = element; __callArgument246; }), (cast name : String)) : Null<String>);
+    value = (cast getXmlElementAttribute(({ final __callArgument379:Dynamic = element; __callArgument379; }), (cast name : String)) : Null<String>);
     if ((cast ((cast _Runtime.strictEquals(value, null) : Bool) || (cast _Runtime.strictEquals(StringTools.trim(Std.string(value)), '') : Bool)) : Bool)) { return cast fallback; }
     n = _Runtime.callValue(flight._internal._HostValueLut.get('Number'), cast ([value] : Array<Dynamic>));
     return cast ((cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([n] : Array<Dynamic>)) : Bool) ? (cast n : Dynamic) : (cast fallback : Dynamic));
@@ -670,35 +741,39 @@ class _TilemapFormats {
 
   public static function attrString__tiledXmlParse(element:XmlElement, name:String, fallback:String):String {
     var value:Null<String> = cast _Runtime.UNDEFINED;
-    value = (cast getXmlElementAttribute(({ final __callArgument248:Dynamic = element; __callArgument248; }), (cast name : String)) : Null<String>);
+    value = (cast getXmlElementAttribute(({ final __callArgument381:Dynamic = element; __callArgument381; }), (cast name : String)) : Null<String>);
     return cast ((cast !_Runtime.strictEquals(value, null) : Bool) ? (cast value : Dynamic) : (cast fallback : Dynamic));
     return cast null;
   }
 
   public static function buildTiledLayerBaseFromXml__tiledXmlParse(element:XmlElement):{ var id:Float; var name:String; var offsetX:Float; var offsetY:Float; var opacity:Float; var properties:Array<TiledProperty>; var visible:Bool; } {
-    return cast { id: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument250:Dynamic = element; __callArgument250; }), (cast 'id' : String), (cast 0.0 : Float)) : Float), name: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument252:Dynamic = element; __callArgument252; }), (cast 'name' : String), (cast '' : String)) : String), offsetX: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument254:Dynamic = element; __callArgument254; }), (cast 'offsetx' : String), (cast 0.0 : Float)) : Float), offsetY: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument256:Dynamic = element; __callArgument256; }), (cast 'offsety' : String), (cast 0.0 : Float)) : Float), opacity: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument258:Dynamic = element; __callArgument258; }), (cast 'opacity' : String), (cast 1.0 : Float)) : Float), properties: (cast _TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse(({ final __callArgument260:Dynamic = element; __callArgument260; })) : Array<TiledProperty>), visible: (cast _TilemapFormats.attrBool__tiledXmlParse(({ final __callArgument262:Dynamic = element; __callArgument262; }), (cast 'visible' : String), (cast true : Bool)) : Bool) };
+    return cast { id: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument383:Dynamic = element; __callArgument383; }), (cast 'id' : String), (cast 0.0 : Float)) : Float), name: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument385:Dynamic = element; __callArgument385; }), (cast 'name' : String), (cast '' : String)) : String), offsetX: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument387:Dynamic = element; __callArgument387; }), (cast 'offsetx' : String), (cast 0.0 : Float)) : Float), offsetY: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument389:Dynamic = element; __callArgument389; }), (cast 'offsety' : String), (cast 0.0 : Float)) : Float), opacity: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument391:Dynamic = element; __callArgument391; }), (cast 'opacity' : String), (cast 1.0 : Float)) : Float), properties: (cast _TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse(({ final __callArgument393:Dynamic = element; __callArgument393; })) : Array<TiledProperty>), visible: (cast _TilemapFormats.attrBool__tiledXmlParse(({ final __callArgument395:Dynamic = element; __callArgument395; }), (cast 'visible' : String), (cast true : Bool)) : Bool) };
     return cast null;
   }
 
-  public static function buildTiledLayerFromXml__tiledXmlParse(element:XmlElement, ?options:TiledParseOptions):Null<TiledLayer> {
+  public static function buildTiledLayerFromXml__tiledXmlParse(element:XmlElement, ?options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>, path:String = ''):Null<TiledLayer> {
     var base:{ var id:Float; var name:String; var offsetX:Float; var offsetY:Float; var opacity:Float; var properties:Array<TiledProperty>; var visible:Bool; } = cast _Runtime.UNDEFINED;
-    base = (cast _TilemapFormats.buildTiledLayerBaseFromXml__tiledXmlParse(({ final __callArgument264:Dynamic = element; __callArgument264; })) : { var id:Float; var name:String; var offsetX:Float; var offsetY:Float; var opacity:Float; var properties:Array<TiledProperty>; var visible:Bool; });
+    base = (cast _TilemapFormats.buildTiledLayerBaseFromXml__tiledXmlParse(({ final __callArgument397:Dynamic = element; __callArgument397; })) : { var id:Float; var name:String; var offsetX:Float; var offsetY:Float; var opacity:Float; var properties:Array<TiledProperty>; var visible:Bool; });
     if ((cast _Runtime.strictEquals(element.name, 'layer') : Bool)) {
-      var width:Float = (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument266:Dynamic = element; __callArgument266; }), (cast 'width' : String), (cast 0.0 : Float)) : Float);
-      var height:Float = (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument268:Dynamic = element; __callArgument268; }), (cast 'height' : String), (cast 0.0 : Float)) : Float);
-      return cast _Runtime.mergeObjects([base, { data: (cast _TilemapFormats.buildTiledLayerDataFromXml__tiledXmlParse(({ final __callArgument270:Dynamic = element; __callArgument270; }), (cast width : Float), (cast height : Float), ({ final __callArgument271:Dynamic = options; __callArgument271; })) : flight._internal._UInt32Array) }, { height: height }, { type: 'tilelayer' }, { width: width }]);
+      if ((cast !_Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+        _TilemapFormats.reportMissingXmlAttribute__tiledXmlParse(({ final __callArgument399:Dynamic = element; __callArgument399; }), (cast 'height' : String), ({ final __callArgument400:Dynamic = diagnostics; __callArgument400; }), (cast 'buildTiledLayerFromXml' : String), (cast path : String));
+        _TilemapFormats.reportMissingXmlAttribute__tiledXmlParse(({ final __callArgument403:Dynamic = element; __callArgument403; }), (cast 'width' : String), ({ final __callArgument404:Dynamic = diagnostics; __callArgument404; }), (cast 'buildTiledLayerFromXml' : String), (cast path : String));
+      }
+      var width:Float = (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument407:Dynamic = element; __callArgument407; }), (cast 'width' : String), (cast 0.0 : Float)) : Float);
+      var height:Float = (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument409:Dynamic = element; __callArgument409; }), (cast 'height' : String), (cast 0.0 : Float)) : Float);
+      return cast _Runtime.mergeObjects([base, { data: (cast _TilemapFormats.buildTiledLayerDataFromXml__tiledXmlParse(({ final __callArgument411:Dynamic = element; __callArgument411; }), (cast width : Float), (cast height : Float), ({ final __callArgument412:Dynamic = options; __callArgument412; }), ({ final __callArgument413:Dynamic = diagnostics; __callArgument413; }), (cast ((cast _Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast '' + Std.string(path) + '.data' : Dynamic)) : String)) : flight._internal._UInt32Array) }, { height: height }, { type: 'tilelayer' }, { width: width }]);
     }
     if ((cast _Runtime.strictEquals(element.name, 'objectgroup') : Bool)) {
-      return cast _Runtime.mergeObjects([base, { objects: (cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument276:Dynamic = element; __callArgument276; }), (cast 'object' : String)) : Array<XmlElement>) : Array<XmlElement>), _TilemapFormats.buildTiledObjectFromXml__tiledXmlParse, _Runtime.UNDEFINED)) }, { type: 'objectgroup' }]);
+      return cast _Runtime.mergeObjects([base, { objects: (cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument419:Dynamic = element; __callArgument419; }), (cast 'object' : String)) : Array<XmlElement>) : Array<XmlElement>), _TilemapFormats.buildTiledObjectFromXml__tiledXmlParse, _Runtime.UNDEFINED)) }, { type: 'objectgroup' }]);
     }
     if ((cast _Runtime.strictEquals(element.name, 'imagelayer') : Bool)) {
-      var image:Null<XmlElement> = (cast getXmlElementChildByName(({ final __callArgument278:Dynamic = element; __callArgument278; }), (cast 'image' : String)) : Null<XmlElement>);
-      return cast _Runtime.mergeObjects([base, { image: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument280:Dynamic = image; __callArgument280; }), (cast 'source' : String), (cast '' : String)) : String) : Dynamic) : (cast '' : Dynamic)) }, { type: 'imagelayer' }]);
+      var image:Null<XmlElement> = (cast getXmlElementChildByName(({ final __callArgument421:Dynamic = element; __callArgument421; }), (cast 'image' : String)) : Null<XmlElement>);
+      return cast _Runtime.mergeObjects([base, { image: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument423:Dynamic = image; __callArgument423; }), (cast 'source' : String), (cast '' : String)) : String) : Dynamic) : (cast '' : Dynamic)) }, { type: 'imagelayer' }]);
     }
     if ((cast _Runtime.strictEquals(element.name, 'group') : Bool)) {
       var layers:Array<TiledLayer> = (cast cast ([] : Array<Dynamic>));
       for (child in _Runtime.iterable(element.children)) {
-        var layer:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>> = (cast _TilemapFormats.buildTiledLayerFromXml__tiledXmlParse(({ final __callArgument284:Dynamic = child; __callArgument284; }), ({ final __callArgument285:Dynamic = options; __callArgument285; })) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>);
+        var layer:Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>> = (cast _TilemapFormats.buildTiledLayerFromXml__tiledXmlParse(({ final __callArgument427:Dynamic = child; __callArgument427; }), ({ final __callArgument428:Dynamic = options; __callArgument428; }), ({ final __callArgument429:Dynamic = diagnostics; __callArgument429; }), (cast ((cast _Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast '' : Dynamic) : (cast '' + Std.string(path) + '.layers[' + Std.string(_Runtime.field(layers, 'length')) + ']' : Dynamic)) : String)) : Null<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<TiledTileLayer, TiledObjectGroup>, TiledImageLayer>, TiledGroupLayer>>);
         if ((cast !_Runtime.strictEquals(layer, null) : Bool)) { _Runtime.callProperty(layers, 'push', cast ([layer] : Array<Dynamic>)); }
       }
       return cast _Runtime.mergeObjects([base, { layers: layers }, { type: 'group' }]);
@@ -707,21 +782,31 @@ class _TilemapFormats {
     return cast null;
   }
 
-  public static function buildTiledLayerDataFromXml__tiledXmlParse(element:XmlElement, width:Float, height:Float, ?options:TiledParseOptions):flight._internal._UInt32Array {
+  public static function buildTiledLayerDataFromXml__tiledXmlParse(element:XmlElement, width:Float, height:Float, ?options:TiledParseOptions, ?diagnostics:Array<ImportDiagnostic>, path:String = ''):flight._internal._UInt32Array {
     var grid:flight._internal._UInt32Array = cast _Runtime.UNDEFINED;
     var data:Null<XmlElement> = cast _Runtime.UNDEFINED;
     var encoding:Null<String> = cast _Runtime.UNDEFINED;
     var decoded:Null<flight._internal._UInt32Array> = cast _Runtime.UNDEFINED;
     grid = new flight._internal._UInt32Array((width * height));
-    data = (cast getXmlElementChildByName(({ final __callArgument288:Dynamic = element; __callArgument288; }), (cast 'data' : String)) : Null<XmlElement>);
-    if ((cast _Runtime.strictEquals(data, null) : Bool)) { return cast grid; }
-    encoding = (cast getXmlElementAttribute(({ final __callArgument290:Dynamic = data; __callArgument290; }), (cast 'encoding' : String)) : Null<String>);
+    data = (cast getXmlElementChildByName(({ final __callArgument433:Dynamic = element; __callArgument433; }), (cast 'data' : String)) : Null<XmlElement>);
+    if ((cast _Runtime.strictEquals(data, null) : Bool)) {
+      (#if js _Runtime.callValue(_TilemapFormats.reportMissingRequiredField__tiledXmlParse, cast ([({ final __callArgument436:Dynamic = diagnostics; __callArgument436; }), (cast 'buildTiledLayerDataFromXml' : String), (cast path : String)] : Array<Dynamic>)) #else _TilemapFormats.reportMissingRequiredField__tiledXmlParse(({ final __callArgument435:Dynamic = diagnostics; __callArgument435; }), (cast 'buildTiledLayerDataFromXml' : String), (cast path : String), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+      return cast grid;
+    }
+    encoding = (cast getXmlElementAttribute(({ final __callArgument437:Dynamic = data; __callArgument437; }), (cast 'encoding' : String)) : Null<String>);
     if ((cast _Runtime.strictEquals(encoding, 'csv') : Bool)) {
       (decoded = cast ((cast decodeTiledCsvLayer((cast (cast data : { var text:String; }).text : String)) : flight._internal._UInt32Array) : Dynamic));
     } else { if ((cast _Runtime.strictEquals(encoding, 'base64') : Bool)) {
-      (decoded = cast ((cast decodeTiledBase64Layer((cast (cast data : { var text:String; }).text : String), (cast _TilemapFormats.asCompression__tiledXmlParse((cast getXmlElementAttribute(({ final __callArgument292:Dynamic = data; __callArgument292; }), (cast 'compression' : String)) : Null<String>)) : Null<String>), (cast ({ final __typedStruct296 = options; __typedStruct296 == null ? _Runtime.UNDEFINED : __typedStruct296.inflate; }) : Dynamic)) : Null<flight._internal._UInt32Array>) : Dynamic));
+      var compression:Null<String> = (cast _TilemapFormats.asCompression__tiledXmlParse((cast getXmlElementAttribute(({ final __callArgument439:Dynamic = data; __callArgument439; }), (cast 'compression' : String)) : Null<String>)) : Null<String>);
+      if ((cast ((cast !_Runtime.strictEquals(compression, null) : Bool) && (cast _Runtime.strictEquals(({ final __typedStruct443 = options; __typedStruct443 == null ? _Runtime.UNDEFINED : __typedStruct443.inflate; }), _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) {
+        reportImportDiagnostic(({ final __callArgument444:Dynamic = diagnostics; __callArgument444; }), ({ final __callArgument445:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument445; }), (cast 'tiled.layer-inflate-unavailable' : String), (cast 'buildTiledLayerDataFromXml' : String), ({ final __callArgument446:Dynamic = { compression: compression, path: path }; __callArgument446; }));
+      }
+      (decoded = cast ((cast decodeTiledBase64Layer((cast (cast data : { var text:String; }).text : String), ({ final __callArgument450:Dynamic = compression; __callArgument450; }), (cast ({ final __typedStruct451 = options; __typedStruct451 == null ? _Runtime.UNDEFINED : __typedStruct451.inflate; }) : Dynamic)) : Null<flight._internal._UInt32Array>) : Dynamic));
     } else {
-      (decoded = cast (new flight._internal._UInt32Array((cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument304:Dynamic = data; __callArgument304; }), (cast 'tile' : String)) : Array<XmlElement>) : Array<XmlElement>), function(tile:XmlElement, __unused0:Float, __unused1:Array<XmlElement>):Float return _Runtime.unsignedShiftRight(_Runtime.toInt32((cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument306:Dynamic = tile; __callArgument306; }), (cast 'gid' : String), (cast 0.0 : Float)) : Float)), 0), _Runtime.UNDEFINED))) : Dynamic));
+      if ((cast !_Runtime.strictEquals(encoding, null) : Bool)) {
+        reportImportDiagnostic(({ final __callArgument454:Dynamic = diagnostics; __callArgument454; }), ({ final __callArgument455:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument455; }), (cast 'tiled.layer-encoding-invalid' : String), (cast 'buildTiledLayerDataFromXml' : String), ({ final __callArgument456:Dynamic = { encoding: encoding, path: '' + Std.string(path) + '.encoding' }; __callArgument456; }));
+      }
+      (decoded = cast (new flight._internal._UInt32Array((cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument462:Dynamic = data; __callArgument462; }), (cast 'tile' : String)) : Array<XmlElement>) : Array<XmlElement>), function(tile:XmlElement, __unused1:Float, __unused2:Array<XmlElement>):Float return _Runtime.unsignedShiftRight(_Runtime.toInt32((cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument464:Dynamic = tile; __callArgument464; }), (cast 'gid' : String), (cast 0.0 : Float)) : Float)), 0), _Runtime.UNDEFINED))) : Dynamic));
     } }
     if ((cast _Runtime.strictEquals(decoded, null) : Bool)) { return cast grid; }
     (cast grid : flight._internal._UInt32Array).set((cast decoded : flight._internal._UInt32Array).subarray(Std.int(0.0), Std.int(_Runtime.field(grid, 'length'))));
@@ -733,39 +818,44 @@ class _TilemapFormats {
     var gid:Null<String> = cast _Runtime.UNDEFINED;
     var polygon:Null<XmlElement> = cast _Runtime.UNDEFINED;
     var polyline:Null<XmlElement> = cast _Runtime.UNDEFINED;
-    gid = (cast getXmlElementAttribute(({ final __callArgument308:Dynamic = element; __callArgument308; }), (cast 'gid' : String)) : Null<String>);
-    polygon = (cast getXmlElementChildByName(({ final __callArgument310:Dynamic = element; __callArgument310; }), (cast 'polygon' : String)) : Null<XmlElement>);
-    polyline = (cast getXmlElementChildByName(({ final __callArgument312:Dynamic = element; __callArgument312; }), (cast 'polyline' : String)) : Null<XmlElement>);
-    return cast { ellipse: !_Runtime.strictEquals((cast getXmlElementChildByName(({ final __callArgument314:Dynamic = element; __callArgument314; }), (cast 'ellipse' : String)) : Null<XmlElement>), null), gid: ((cast !_Runtime.strictEquals(gid, null) : Bool) ? (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callValue(flight._internal._HostValueLut.get('Number'), cast ([gid] : Array<Dynamic>))), 0) : Dynamic) : (cast null : Dynamic)), height: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument316:Dynamic = element; __callArgument316; }), (cast 'height' : String), (cast 0.0 : Float)) : Float), id: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument318:Dynamic = element; __callArgument318; }), (cast 'id' : String), (cast 0.0 : Float)) : Float), name: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument320:Dynamic = element; __callArgument320; }), (cast 'name' : String), (cast '' : String)) : String), point: !_Runtime.strictEquals((cast getXmlElementChildByName(({ final __callArgument322:Dynamic = element; __callArgument322; }), (cast 'point' : String)) : Null<XmlElement>), null), polygon: ((cast !_Runtime.strictEquals(polygon, null) : Bool) ? (cast (cast _TilemapFormats.parseTiledPoints__tiledXmlParse((cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument324:Dynamic = polygon; __callArgument324; }), (cast 'points' : String), (cast '' : String)) : String) : String)) : Array<Vector2Like>) : Dynamic) : (cast null : Dynamic)), polyline: ((cast !_Runtime.strictEquals(polyline, null) : Bool) ? (cast (cast _TilemapFormats.parseTiledPoints__tiledXmlParse((cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument328:Dynamic = polyline; __callArgument328; }), (cast 'points' : String), (cast '' : String)) : String) : String)) : Array<Vector2Like>) : Dynamic) : (cast null : Dynamic)), properties: (cast _TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse(({ final __callArgument332:Dynamic = element; __callArgument332; })) : Array<TiledProperty>), type: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument334:Dynamic = element; __callArgument334; }), (cast 'type' : String), (cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument335:Dynamic = element; __callArgument335; }), (cast 'class' : String), (cast '' : String)) : String) : String)) : String), width: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument340:Dynamic = element; __callArgument340; }), (cast 'width' : String), (cast 0.0 : Float)) : Float), x: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument342:Dynamic = element; __callArgument342; }), (cast 'x' : String), (cast 0.0 : Float)) : Float), y: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument344:Dynamic = element; __callArgument344; }), (cast 'y' : String), (cast 0.0 : Float)) : Float) };
+    gid = (cast getXmlElementAttribute(({ final __callArgument466:Dynamic = element; __callArgument466; }), (cast 'gid' : String)) : Null<String>);
+    polygon = (cast getXmlElementChildByName(({ final __callArgument468:Dynamic = element; __callArgument468; }), (cast 'polygon' : String)) : Null<XmlElement>);
+    polyline = (cast getXmlElementChildByName(({ final __callArgument470:Dynamic = element; __callArgument470; }), (cast 'polyline' : String)) : Null<XmlElement>);
+    return cast { ellipse: !_Runtime.strictEquals((cast getXmlElementChildByName(({ final __callArgument472:Dynamic = element; __callArgument472; }), (cast 'ellipse' : String)) : Null<XmlElement>), null), gid: ((cast !_Runtime.strictEquals(gid, null) : Bool) ? (cast _Runtime.unsignedShiftRight(_Runtime.toInt32(_Runtime.callValue(flight._internal._HostValueLut.get('Number'), cast ([gid] : Array<Dynamic>))), 0) : Dynamic) : (cast null : Dynamic)), height: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument474:Dynamic = element; __callArgument474; }), (cast 'height' : String), (cast 0.0 : Float)) : Float), id: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument476:Dynamic = element; __callArgument476; }), (cast 'id' : String), (cast 0.0 : Float)) : Float), name: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument478:Dynamic = element; __callArgument478; }), (cast 'name' : String), (cast '' : String)) : String), point: !_Runtime.strictEquals((cast getXmlElementChildByName(({ final __callArgument480:Dynamic = element; __callArgument480; }), (cast 'point' : String)) : Null<XmlElement>), null), polygon: ((cast !_Runtime.strictEquals(polygon, null) : Bool) ? (cast (cast _TilemapFormats.parseTiledPoints__tiledXmlParse((cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument482:Dynamic = polygon; __callArgument482; }), (cast 'points' : String), (cast '' : String)) : String) : String)) : Array<Vector2Like>) : Dynamic) : (cast null : Dynamic)), polyline: ((cast !_Runtime.strictEquals(polyline, null) : Bool) ? (cast (cast _TilemapFormats.parseTiledPoints__tiledXmlParse((cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument486:Dynamic = polyline; __callArgument486; }), (cast 'points' : String), (cast '' : String)) : String) : String)) : Array<Vector2Like>) : Dynamic) : (cast null : Dynamic)), properties: (cast _TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse(({ final __callArgument490:Dynamic = element; __callArgument490; })) : Array<TiledProperty>), type: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument492:Dynamic = element; __callArgument492; }), (cast 'type' : String), (cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument493:Dynamic = element; __callArgument493; }), (cast 'class' : String), (cast '' : String)) : String) : String)) : String), width: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument498:Dynamic = element; __callArgument498; }), (cast 'width' : String), (cast 0.0 : Float)) : Float), x: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument500:Dynamic = element; __callArgument500; }), (cast 'x' : String), (cast 0.0 : Float)) : Float), y: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument502:Dynamic = element; __callArgument502; }), (cast 'y' : String), (cast 0.0 : Float)) : Float) };
     return cast null;
   }
 
   public static function buildTiledPropertiesFromXml__tiledXmlParse(element:XmlElement):Array<TiledProperty> {
     var container:Null<XmlElement> = cast _Runtime.UNDEFINED;
-    container = (cast getXmlElementChildByName(({ final __callArgument346:Dynamic = element; __callArgument346; }), (cast 'properties' : String)) : Null<XmlElement>);
+    container = (cast getXmlElementChildByName(({ final __callArgument504:Dynamic = element; __callArgument504; }), (cast 'properties' : String)) : Null<XmlElement>);
     if ((cast _Runtime.strictEquals(container, null) : Bool)) { return cast cast ([] : Array<Dynamic>); }
-    return cast (cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument350:Dynamic = container; __callArgument350; }), (cast 'property' : String)) : Array<XmlElement>) : Array<XmlElement>), function(property:XmlElement, __unused2:Float, __unused3:Array<XmlElement>):{ var name:String; var type:TiledPropertyType; var value:flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>; } {
+    return cast (cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument508:Dynamic = container; __callArgument508; }), (cast 'property' : String)) : Array<XmlElement>) : Array<XmlElement>), function(property:XmlElement, __unused3:Float, __unused4:Array<XmlElement>):{ var name:String; var type:TiledPropertyType; var value:flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>; } {
       var type:TiledPropertyType = cast _Runtime.UNDEFINED;
       var raw:String = cast _Runtime.UNDEFINED;
-      type = (cast _TilemapFormats.asPropertyType__tiledXmlParse((cast getXmlElementAttribute(({ final __callArgument352:Dynamic = property; __callArgument352; }), (cast 'type' : String)) : Null<String>)) : TiledPropertyType);
-      raw = _Runtime.coalesce((cast getXmlElementAttribute(({ final __callArgument356:Dynamic = property; __callArgument356; }), (cast 'value' : String)) : Null<String>), function():Dynamic return cast property.text);
-      return cast { name: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument358:Dynamic = property; __callArgument358; }), (cast 'name' : String), (cast '' : String)) : String), type: type, value: (cast _TilemapFormats.parsePropertyValue__tiledXmlParse(({ final __callArgument360:Dynamic = type; __callArgument360; }), (cast raw : String)) : flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>) };
+      type = (cast _TilemapFormats.asPropertyType__tiledXmlParse((cast getXmlElementAttribute(({ final __callArgument510:Dynamic = property; __callArgument510; }), (cast 'type' : String)) : Null<String>)) : TiledPropertyType);
+      raw = _Runtime.coalesce((cast getXmlElementAttribute(({ final __callArgument514:Dynamic = property; __callArgument514; }), (cast 'value' : String)) : Null<String>), function():Dynamic return cast property.text);
+      return cast { name: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument516:Dynamic = property; __callArgument516; }), (cast 'name' : String), (cast '' : String)) : String), type: type, value: (cast _TilemapFormats.parsePropertyValue__tiledXmlParse(({ final __callArgument518:Dynamic = type; __callArgument518; }), (cast raw : String)) : flight._internal._Union2<flight._internal._Union2<String, Float>, Bool>) };
       return cast _Runtime.UNDEFINED;
     }, _Runtime.UNDEFINED));
     return cast null;
   }
 
-  public static function buildTiledTilesetFromXml__tiledXmlParse(element:XmlElement):TiledTileset {
+  public static function buildTiledTilesetFromXml__tiledXmlParse(element:XmlElement, ?diagnostics:Array<ImportDiagnostic>, path:String = ''):TiledTileset {
     var image:Null<XmlElement> = cast _Runtime.UNDEFINED;
-    image = (cast getXmlElementChildByName(({ final __callArgument362:Dynamic = element; __callArgument362; }), (cast 'image' : String)) : Null<XmlElement>);
-    return cast { columns: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument364:Dynamic = element; __callArgument364; }), (cast 'columns' : String), (cast 0.0 : Float)) : Float), image: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument366:Dynamic = image; __callArgument366; }), (cast 'source' : String), (cast '' : String)) : String) : Dynamic) : (cast null : Dynamic)), imageHeight: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument368:Dynamic = image; __callArgument368; }), (cast 'height' : String), (cast 0.0 : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)), imageWidth: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument370:Dynamic = image; __callArgument370; }), (cast 'width' : String), (cast 0.0 : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)), margin: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument372:Dynamic = element; __callArgument372; }), (cast 'margin' : String), (cast 0.0 : Float)) : Float), name: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument374:Dynamic = element; __callArgument374; }), (cast 'name' : String), (cast '' : String)) : String), properties: (cast _TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse(({ final __callArgument376:Dynamic = element; __callArgument376; })) : Array<TiledProperty>), spacing: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument378:Dynamic = element; __callArgument378; }), (cast 'spacing' : String), (cast 0.0 : Float)) : Float), tileCount: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument380:Dynamic = element; __callArgument380; }), (cast 'tilecount' : String), (cast 0.0 : Float)) : Float), tileHeight: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument382:Dynamic = element; __callArgument382; }), (cast 'tileheight' : String), (cast 0.0 : Float)) : Float), tileWidth: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument384:Dynamic = element; __callArgument384; }), (cast 'tilewidth' : String), (cast 0.0 : Float)) : Float), tiles: (cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument388:Dynamic = element; __callArgument388; }), (cast 'tile' : String)) : Array<XmlElement>) : Array<XmlElement>), _TilemapFormats.buildTiledTilesetTileFromXml__tiledXmlParse, _Runtime.UNDEFINED)) };
+    if ((cast !_Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
+      _TilemapFormats.reportMissingXmlAttribute__tiledXmlParse(({ final __callArgument520:Dynamic = element; __callArgument520; }), (cast 'name' : String), ({ final __callArgument521:Dynamic = diagnostics; __callArgument521; }), (cast 'buildTiledTilesetFromXml' : String), (cast path : String));
+      _TilemapFormats.reportMissingXmlAttribute__tiledXmlParse(({ final __callArgument524:Dynamic = element; __callArgument524; }), (cast 'tileheight' : String), ({ final __callArgument525:Dynamic = diagnostics; __callArgument525; }), (cast 'buildTiledTilesetFromXml' : String), (cast path : String));
+      _TilemapFormats.reportMissingXmlAttribute__tiledXmlParse(({ final __callArgument528:Dynamic = element; __callArgument528; }), (cast 'tilewidth' : String), ({ final __callArgument529:Dynamic = diagnostics; __callArgument529; }), (cast 'buildTiledTilesetFromXml' : String), (cast path : String));
+    }
+    image = (cast getXmlElementChildByName(({ final __callArgument532:Dynamic = element; __callArgument532; }), (cast 'image' : String)) : Null<XmlElement>);
+    return cast { columns: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument534:Dynamic = element; __callArgument534; }), (cast 'columns' : String), (cast 0.0 : Float)) : Float), image: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument536:Dynamic = image; __callArgument536; }), (cast 'source' : String), (cast '' : String)) : String) : Dynamic) : (cast null : Dynamic)), imageHeight: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument538:Dynamic = image; __callArgument538; }), (cast 'height' : String), (cast 0.0 : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)), imageWidth: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument540:Dynamic = image; __callArgument540; }), (cast 'width' : String), (cast 0.0 : Float)) : Float) : Dynamic) : (cast 0.0 : Dynamic)), margin: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument542:Dynamic = element; __callArgument542; }), (cast 'margin' : String), (cast 0.0 : Float)) : Float), name: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument544:Dynamic = element; __callArgument544; }), (cast 'name' : String), (cast '' : String)) : String), properties: (cast _TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse(({ final __callArgument546:Dynamic = element; __callArgument546; })) : Array<TiledProperty>), spacing: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument548:Dynamic = element; __callArgument548; }), (cast 'spacing' : String), (cast 0.0 : Float)) : Float), tileCount: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument550:Dynamic = element; __callArgument550; }), (cast 'tilecount' : String), (cast 0.0 : Float)) : Float), tileHeight: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument552:Dynamic = element; __callArgument552; }), (cast 'tileheight' : String), (cast 0.0 : Float)) : Float), tileWidth: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument554:Dynamic = element; __callArgument554; }), (cast 'tilewidth' : String), (cast 0.0 : Float)) : Float), tiles: (cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument558:Dynamic = element; __callArgument558; }), (cast 'tile' : String)) : Array<XmlElement>) : Array<XmlElement>), _TilemapFormats.buildTiledTilesetTileFromXml__tiledXmlParse, _Runtime.UNDEFINED)) };
     return cast null;
   }
 
-  public static function buildTiledTilesetRefFromXml__tiledXmlParse(element:XmlElement):TiledTilesetRef {
+  public static function buildTiledTilesetRefFromXml__tiledXmlParse(element:XmlElement, ?diagnostics:Array<ImportDiagnostic>, path:String = ''):TiledTilesetRef {
     var source:Null<String> = cast _Runtime.UNDEFINED;
-    source = (cast getXmlElementAttribute(({ final __callArgument390:Dynamic = element; __callArgument390; }), (cast 'source' : String)) : Null<String>);
-    return cast { firstGid: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument392:Dynamic = element; __callArgument392; }), (cast 'firstgid' : String), (cast 1.0 : Float)) : Float), source: source, tileset: ((cast !_Runtime.strictEquals(source, null) : Bool) ? (cast null : Dynamic) : (cast (cast _TilemapFormats.buildTiledTilesetFromXml__tiledXmlParse(({ final __callArgument394:Dynamic = element; __callArgument394; })) : TiledTileset) : Dynamic)) };
+    source = (cast getXmlElementAttribute(({ final __callArgument560:Dynamic = element; __callArgument560; }), (cast 'source' : String)) : Null<String>);
+    return cast { firstGid: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument562:Dynamic = element; __callArgument562; }), (cast 'firstgid' : String), (cast 1.0 : Float)) : Float), source: source, tileset: ((cast !_Runtime.strictEquals(source, null) : Bool) ? (cast null : Dynamic) : (cast (cast _TilemapFormats.buildTiledTilesetFromXml__tiledXmlParse(({ final __callArgument564:Dynamic = element; __callArgument564; }), ({ final __callArgument565:Dynamic = diagnostics; __callArgument565; }), (cast path : String)) : TiledTileset) : Dynamic)) };
     return cast null;
   }
 
@@ -774,11 +864,11 @@ class _TilemapFormats {
     var objectGroup:Null<XmlElement> = cast _Runtime.UNDEFINED;
     var image:Null<XmlElement> = cast _Runtime.UNDEFINED;
     var frames:Null<Array<TiledTilesetTileFrame>> = cast _Runtime.UNDEFINED;
-    animation = (cast getXmlElementChildByName(({ final __callArgument396:Dynamic = element; __callArgument396; }), (cast 'animation' : String)) : Null<XmlElement>);
-    objectGroup = (cast getXmlElementChildByName(({ final __callArgument398:Dynamic = element; __callArgument398; }), (cast 'objectgroup' : String)) : Null<XmlElement>);
-    image = (cast getXmlElementChildByName(({ final __callArgument400:Dynamic = element; __callArgument400; }), (cast 'image' : String)) : Null<XmlElement>);
-    frames = ((cast !_Runtime.strictEquals(animation, null) : Bool) ? (cast (cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument404:Dynamic = animation; __callArgument404; }), (cast 'frame' : String)) : Array<XmlElement>) : Array<XmlElement>), function(frame:XmlElement, __unused4:Float, __unused5:Array<XmlElement>):{ var duration:Float; var tileId:Float; } return { duration: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument406:Dynamic = frame; __callArgument406; }), (cast 'duration' : String), (cast 0.0 : Float)) : Float), tileId: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument408:Dynamic = frame; __callArgument408; }), (cast 'tileid' : String), (cast 0.0 : Float)) : Float) }, _Runtime.UNDEFINED)) : Dynamic) : (cast null : Dynamic));
-    return cast { animation: frames, id: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument410:Dynamic = element; __callArgument410; }), (cast 'id' : String), (cast 0.0 : Float)) : Float), image: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument412:Dynamic = image; __callArgument412; }), (cast 'source' : String), (cast '' : String)) : String) : Dynamic) : (cast null : Dynamic)), objects: ((cast !_Runtime.strictEquals(objectGroup, null) : Bool) ? (cast (cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument416:Dynamic = objectGroup; __callArgument416; }), (cast 'object' : String)) : Array<XmlElement>) : Array<XmlElement>), _TilemapFormats.buildTiledObjectFromXml__tiledXmlParse, _Runtime.UNDEFINED)) : Dynamic) : (cast null : Dynamic)), properties: (cast _TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse(({ final __callArgument418:Dynamic = element; __callArgument418; })) : Array<TiledProperty>), type: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument420:Dynamic = element; __callArgument420; }), (cast 'type' : String), (cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument421:Dynamic = element; __callArgument421; }), (cast 'class' : String), (cast '' : String)) : String) : String)) : String) };
+    animation = (cast getXmlElementChildByName(({ final __callArgument568:Dynamic = element; __callArgument568; }), (cast 'animation' : String)) : Null<XmlElement>);
+    objectGroup = (cast getXmlElementChildByName(({ final __callArgument570:Dynamic = element; __callArgument570; }), (cast 'objectgroup' : String)) : Null<XmlElement>);
+    image = (cast getXmlElementChildByName(({ final __callArgument572:Dynamic = element; __callArgument572; }), (cast 'image' : String)) : Null<XmlElement>);
+    frames = ((cast !_Runtime.strictEquals(animation, null) : Bool) ? (cast (cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument576:Dynamic = animation; __callArgument576; }), (cast 'frame' : String)) : Array<XmlElement>) : Array<XmlElement>), function(frame:XmlElement, __unused5:Float, __unused6:Array<XmlElement>):{ var duration:Float; var tileId:Float; } return { duration: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument578:Dynamic = frame; __callArgument578; }), (cast 'duration' : String), (cast 0.0 : Float)) : Float), tileId: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument580:Dynamic = frame; __callArgument580; }), (cast 'tileid' : String), (cast 0.0 : Float)) : Float) }, _Runtime.UNDEFINED)) : Dynamic) : (cast null : Dynamic));
+    return cast { animation: frames, id: (cast _TilemapFormats.attrNumber__tiledXmlParse(({ final __callArgument582:Dynamic = element; __callArgument582; }), (cast 'id' : String), (cast 0.0 : Float)) : Float), image: ((cast !_Runtime.strictEquals(image, null) : Bool) ? (cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument584:Dynamic = image; __callArgument584; }), (cast 'source' : String), (cast '' : String)) : String) : Dynamic) : (cast null : Dynamic)), objects: ((cast !_Runtime.strictEquals(objectGroup, null) : Bool) ? (cast (cast _Runtime.mapArray((cast (cast getXmlElementChildrenByName(({ final __callArgument588:Dynamic = objectGroup; __callArgument588; }), (cast 'object' : String)) : Array<XmlElement>) : Array<XmlElement>), _TilemapFormats.buildTiledObjectFromXml__tiledXmlParse, _Runtime.UNDEFINED)) : Dynamic) : (cast null : Dynamic)), properties: (cast _TilemapFormats.buildTiledPropertiesFromXml__tiledXmlParse(({ final __callArgument590:Dynamic = element; __callArgument590; })) : Array<TiledProperty>), type: (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument592:Dynamic = element; __callArgument592; }), (cast 'type' : String), (cast (cast _TilemapFormats.attrString__tiledXmlParse(({ final __callArgument593:Dynamic = element; __callArgument593; }), (cast 'class' : String), (cast '' : String)) : String) : String)) : String) };
     return cast null;
   }
 
@@ -787,13 +877,22 @@ class _TilemapFormats {
     points = (cast cast ([] : Array<Dynamic>));
     for (pair in _Runtime.iterable(_Runtime.callProperty(StringTools.trim(Std.string(text)), 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)))) {
       if ((cast _Runtime.strictEquals(pair, '') : Bool)) { continue; }
-      var __destructure6 = _Runtime.callProperty(pair, 'split', cast ([','] : Array<Dynamic>));
-      var x:String = flight._internal._StaticIndex.readArray(__destructure6, 0.0);
-      var y:String = flight._internal._StaticIndex.readArray(__destructure6, 1.0);
+      var __destructure7 = _Runtime.callProperty(pair, 'split', cast ([','] : Array<Dynamic>));
+      var x:String = flight._internal._StaticIndex.readArray(__destructure7, 0.0);
+      var y:String = flight._internal._StaticIndex.readArray(__destructure7, 1.0);
       _Runtime.callProperty(points, 'push', cast ([{ x: _Runtime.orValue(_Runtime.callValue(flight._internal._HostValueLut.get('Number'), cast ([x] : Array<Dynamic>)), function():Dynamic return cast 0.0), y: _Runtime.orValue(_Runtime.callValue(flight._internal._HostValueLut.get('Number'), cast ([y] : Array<Dynamic>)), function():Dynamic return cast 0.0) }] : Array<Dynamic>));
     }
     return cast points;
     return cast null;
+  }
+
+  public static function reportMissingRequiredField__tiledXmlParse(diagnostics:Null<Array<ImportDiagnostic>>, origin:String, path:String, ?field:String):Void {
+    reportImportDiagnostic(({ final __callArgument600:Dynamic = diagnostics; __callArgument600; }), ({ final __callArgument601:Dynamic = (cast ImportDiagnosticSeverityValue : { var Drop:String; var Recover:String; var Reject:String; var Skip:String; }).Recover; __callArgument601; }), (cast 'tiled.required-field-missing' : String), (cast origin : String), ({ final __callArgument602:Dynamic = { path: ((cast _Runtime.strictEquals(field, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast path : Dynamic) : (cast '' + Std.string(path) + '.' + Std.string(field) + '' : Dynamic)) }; __callArgument602; }));
+  }
+
+  public static function reportMissingXmlAttribute__tiledXmlParse(element:XmlElement, name:String, diagnostics:Null<Array<ImportDiagnostic>>, origin:String, path:String):Void {
+    if ((cast ((cast _Runtime.strictEquals(diagnostics, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast !_Runtime.strictEquals((cast getXmlElementAttribute(({ final __callArgument606:Dynamic = element; __callArgument606; }), (cast name : String)) : Null<String>), null) : Bool)) : Bool)) { return; }
+    _TilemapFormats.reportMissingRequiredField__tiledXmlParse(({ final __callArgument608:Dynamic = diagnostics; __callArgument608; }), (cast origin : String), (cast path : String), ({ final __callArgument609:Dynamic = name; __callArgument609; }));
   }
 
   public static function asCompression__tiledXmlParse(value:Null<String>):Null<TiledCompression> {

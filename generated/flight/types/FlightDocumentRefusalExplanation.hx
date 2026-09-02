@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentRefusalExplanation = { var actual:Null<Float>; var column:Null<Float>; var kind:Null<Kind>; var limit:Null<Float>; var line:Null<Float>; var offset:Null<Float>; var path:String; var reason:FlightDocumentRefusalReason; var resourceKey:Null<String>; var version:Null<Float>; };
+typedef FlightDocumentRefusalExplanation = { var actual:Null<Float>; var column:Null<Float>; var kind:Null<Kind>; var limit:Null<Float>; var line:Null<Float>; var mode:Null<String>; var offset:Null<Float>; var path:String; var reason:FlightDocumentRefusalReason; var resourceKey:Null<String>; var tokenKey:Null<String>; var version:Null<Float>; };

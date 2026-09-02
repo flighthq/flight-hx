@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef NodeInteractionState = { var hitTestEnabled:Bool; var hitArea:Null<HitArea>; var cursor:Null<Cursor>; var focusable:Bool; var tabIndex:Float; };
+typedef NodeInteractionState = { var hitTestEnabled:Bool; var hitArea:Null<HitArea>; var cursor:Null<Cursor>; var focusable:Bool; var pointerDoubleClickEnabled:Bool; var tabIndex:Float; };

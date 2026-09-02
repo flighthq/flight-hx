@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef PromptDialogOptions = { @:optional var title:String; var message:String; @:optional var defaultValue:String; @:optional var placeholder:String; @:optional var parentWindow:ApplicationWindow; };
+typedef PromptDialogOptions = { @:optional var title:String; var message:String; @:optional var defaultValue:String; @:optional var placeholder:String; @:optional var parentWindow:ApplicationWindow; @:optional var signal:flight._internal.dom.AbortSignal; };

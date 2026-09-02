@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef FlightDocumentScene2D = { var backgroundColor:Null<Float>; var kind:String; var scene:FlightDocumentNode; };
+typedef FlightDocumentScene2D = { var backgroundColor:Null<Float>; var kind:String; var layouts:Array<FlightDocumentLayoutDescriptor>; var scene:FlightDocumentNode; var tokens:Array<FlightDocumentToken>; };

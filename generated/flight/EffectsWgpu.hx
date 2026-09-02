@@ -10,6 +10,7 @@ import flight.types.RenderEffectPipelineOptions;
 import flight.types.RenderTargetColorSpace;
 import flight.types.RenderTexture;
 import flight.types.WgpuRenderEffectPipeline;
+import flight.types.WgpuRenderEffectResolver;
 import flight.types.WgpuRenderEffectRunner;
 import flight.types.WgpuRenderState;
 import flight.types.WgpuRenderTarget;
@@ -31,6 +32,8 @@ class EffectsWgpu {
   }
 
   public static final defaultWgpuBevelEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flight__EffectsWgpu.defaultWgpuBevelEffectRunner;
+
+  public static final defaultWgpuBitmapDisplacementEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flight__EffectsWgpu.defaultWgpuBitmapDisplacementEffectRunner;
 
   public static final defaultWgpuBlendEffectRunner:WgpuRenderEffectRunner = Facade_EffectsWgpu_flight__EffectsWgpu.defaultWgpuBlendEffectRunner;
 
@@ -132,6 +135,10 @@ class EffectsWgpu {
 
   public static function registerWgpuBevelEffect(state:WgpuRenderState):Void {
     Facade_EffectsWgpu_flight__EffectsWgpu.registerWgpuBevelEffect(state);
+  }
+
+  public static function registerWgpuBitmapDisplacementEffect(state:WgpuRenderState):Void {
+    Facade_EffectsWgpu_flight__EffectsWgpu.registerWgpuBitmapDisplacementEffect(state);
   }
 
   public static function registerWgpuBlendEffect(state:WgpuRenderState):Void {
@@ -270,8 +277,8 @@ class EffectsWgpu {
     Facade_EffectsWgpu_flight__EffectsWgpu.registerWgpuRadialBlurEffect(state);
   }
 
-  public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner):Void {
-    Facade_EffectsWgpu_flight__EffectsWgpu.registerWgpuRenderEffect(state, kind, runner);
+  public static function registerWgpuRenderEffect(state:WgpuRenderState, kind:String, runner:WgpuRenderEffectRunner, ?isResolvable:WgpuRenderEffectResolver):Void {
+    Facade_EffectsWgpu_flight__EffectsWgpu.registerWgpuRenderEffect(state, kind, runner, isResolvable);
   }
 
   public static function registerWgpuScanlinesEffect(state:WgpuRenderState):Void {

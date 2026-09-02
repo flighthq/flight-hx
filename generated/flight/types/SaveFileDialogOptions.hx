@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef SaveFileDialogOptions = { @:optional var defaultName:String; @:optional var filters:Array<FileDialogFilter>; };
+typedef SaveFileDialogOptions = { @:optional var defaultName:String; @:optional var filters:Array<FileDialogFilter>; @:optional var signal:flight._internal.dom.AbortSignal; };

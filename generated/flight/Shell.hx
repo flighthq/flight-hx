@@ -14,6 +14,9 @@ import flight.types.ShellExternalOutcome;
 import flight.types.ShellExternalUrlPolicy;
 import flight.types.ShellPathOpenOutcome;
 import flight.types.ShellPathRevealOutcome;
+import flight.types.ShellProcess;
+import flight.types.ShellProcessHost;
+import flight.types.ShellProcessOptions;
 import flight.types.ShellShortcutLink;
 import flight.types.ShellShortcutLinkReadOutcome;
 import flight.types.ShellShortcutLinkWriteOutcome;
@@ -58,6 +61,11 @@ class Shell {
 
   public static function shellBeep(host:HasShellBeep):Void {
     Facade_Shell_flight__Shell.shellBeep(host);
+  }
+
+  public static function spawnShellProcess(host:ShellProcessHost, command:String, args:Array<String>, ?options:ShellProcessOptions):Null<ShellProcess> {
+    return cast Facade_Shell_flight__Shell.spawnShellProcess(host, command, args, options);
+    return cast null;
   }
 
   public static function writeShellShortcutLink(host:HasShellShortcutLink, shortcutPath:String, link:ShellShortcutLink, operation:ShellShortcutWriteOperation):flight._internal._Promise<ShellShortcutLinkWriteOutcome> {

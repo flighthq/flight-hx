@@ -9,4 +9,5 @@ export const openShellPath = compiled.flight.Shell.openShellPath;
 export const readShellShortcutLink = compiled.flight.Shell.readShellShortcutLink;
 export const revealShellPath = compiled.flight.Shell.revealShellPath;
 export const shellBeep = compiled.flight.Shell.shellBeep;
+export const spawnShellProcess = compiled.flight.Shell.spawnShellProcess;
 export const writeShellShortcutLink = compiled.flight.Shell.writeShellShortcutLink;

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InteractionManagerOptions = { @:optional var cursorBackend:Null<CursorBackend>; @:optional var enabled:Bool; @:optional var precise:Bool; @:optional var spatialIndex:Null<SpatialIndex2D>; @:optional var trackedSubscribersOnly:Bool; };
+typedef InteractionManagerOptions = { @:optional var cursorBackend:Null<CursorBackend>; @:optional var doubleClickDelay:Float; @:optional var doubleClickDistance:Float; @:optional var enabled:Bool; @:optional var precise:Bool; @:optional var spatialIndex:Null<SpatialIndex2D>; @:optional var trackedSubscribersOnly:Bool; };

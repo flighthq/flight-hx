@@ -13,6 +13,10 @@ import flight.types.SpringConfig;
 
 @:noCompletion
 class _Spring {
+  public static function applySpringImpulse(spring:Spring, velocity:Float):Void {
+    ((cast spring : Spring).velocity += velocity);
+  }
+
   public static function createSpring(value:Float = 0.0, velocity:Float = 0.0):Spring {
     return cast { value: value, velocity: velocity };
     return cast null;
@@ -84,7 +88,25 @@ class _Spring {
     ((cast spring : Spring).velocity = ((velPosCoef * c0) + (velVelCoef * velocity)));
   }
 
+  public static function updateSpringAngle(spring:Spring, target:Float, fullTurn:Float, config:SpringConfig, deltaTime:Float):Void {
+    var value:Float = cast _Runtime.UNDEFINED;
+    var halfTurn:Float = cast _Runtime.UNDEFINED;
+    var wrappedDelta:Float = cast _Runtime.UNDEFINED;
+    var shortestDelta:Float = cast _Runtime.UNDEFINED;
+    if ((cast ((cast !(cast _Runtime.compare(fullTurn, 0.0, '>') : Bool) : Bool) || (cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([fullTurn] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return; }
+    value = (cast spring : Spring).value;
+    halfTurn = (fullTurn * 0.5);
+    wrappedDelta = _Runtime.fmod((_Runtime.fmod((target - value), fullTurn) + fullTurn), fullTurn);
+    shortestDelta = ((cast ((cast wrappedDelta : Float) > (cast halfTurn : Float)) : Bool) ? (cast (wrappedDelta - fullTurn) : Dynamic) : (cast wrappedDelta : Dynamic));
+    updateSpring(({ final __callArgument0:Dynamic = spring; __callArgument0; }), (cast (value + shortestDelta) : Float), ({ final __callArgument1:Dynamic = config; __callArgument1; }), (cast deltaTime : Float));
+  }
+
   public static final CRITICAL_BAND__spring:Float = 0.0001;
+
+  public static function applySpringImpulse2D(spring2D:Spring2D, velocityX:Float, velocityY:Float):Void {
+    applySpringImpulse((cast spring2D : Spring2D).x, (cast velocityX : Float));
+    applySpringImpulse((cast spring2D : Spring2D).y, (cast velocityY : Float));
+  }
 
   public static function createSpring2D(valueX:Float = 0.0, valueY:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0):Spring2D {
     return cast { x: (cast createSpring((cast valueX : Float), (cast velocityX : Float)) : Spring), y: (cast createSpring((cast valueY : Float), (cast velocityY : Float)) : Spring) };
@@ -96,9 +118,20 @@ class _Spring {
     return cast null;
   }
 
+  public static function resetSpring2D(spring2D:Spring2D, valueX:Float, valueY:Float, velocityX:Float = 0.0, velocityY:Float = 0.0):Void {
+    resetSpring((cast spring2D : Spring2D).x, (cast valueX : Float), (cast velocityX : Float));
+    resetSpring((cast spring2D : Spring2D).y, (cast valueY : Float), (cast velocityY : Float));
+  }
+
   public static function updateSpring2D(spring2D:Spring2D, targetX:Float, targetY:Float, config:SpringConfig, deltaTime:Float):Void {
-    updateSpring((cast spring2D : Spring2D).x, (cast targetX : Float), ({ final __callArgument0:Dynamic = config; __callArgument0; }), (cast deltaTime : Float));
-    updateSpring((cast spring2D : Spring2D).y, (cast targetY : Float), ({ final __callArgument2:Dynamic = config; __callArgument2; }), (cast deltaTime : Float));
+    updateSpring((cast spring2D : Spring2D).x, (cast targetX : Float), ({ final __callArgument4:Dynamic = config; __callArgument4; }), (cast deltaTime : Float));
+    updateSpring((cast spring2D : Spring2D).y, (cast targetY : Float), ({ final __callArgument6:Dynamic = config; __callArgument6; }), (cast deltaTime : Float));
+  }
+
+  public static function applySpringImpulse3D(spring3D:Spring3D, velocityX:Float, velocityY:Float, velocityZ:Float):Void {
+    applySpringImpulse((cast spring3D : Spring3D).x, (cast velocityX : Float));
+    applySpringImpulse((cast spring3D : Spring3D).y, (cast velocityY : Float));
+    applySpringImpulse((cast spring3D : Spring3D).z, (cast velocityZ : Float));
   }
 
   public static function createSpring3D(valueX:Float = 0.0, valueY:Float = 0.0, valueZ:Float = 0.0, velocityX:Float = 0.0, velocityY:Float = 0.0, velocityZ:Float = 0.0):Spring3D {
@@ -111,11 +144,23 @@ class _Spring {
     return cast null;
   }
 
-  public static function updateSpring3D(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
-    updateSpring((cast spring3D : Spring3D).x, (cast targetX : Float), ({ final __callArgument4:Dynamic = config; __callArgument4; }), (cast deltaTime : Float));
-    updateSpring((cast spring3D : Spring3D).y, (cast targetY : Float), ({ final __callArgument6:Dynamic = config; __callArgument6; }), (cast deltaTime : Float));
-    updateSpring((cast spring3D : Spring3D).z, (cast targetZ : Float), ({ final __callArgument8:Dynamic = config; __callArgument8; }), (cast deltaTime : Float));
+  public static function resetSpring3D(spring3D:Spring3D, valueX:Float, valueY:Float, valueZ:Float, velocityX:Float = 0.0, velocityY:Float = 0.0, velocityZ:Float = 0.0):Void {
+    resetSpring((cast spring3D : Spring3D).x, (cast valueX : Float), (cast velocityX : Float));
+    resetSpring((cast spring3D : Spring3D).y, (cast valueY : Float), (cast velocityY : Float));
+    resetSpring((cast spring3D : Spring3D).z, (cast valueZ : Float), (cast velocityZ : Float));
   }
+
+  public static function updateSpring3D(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
+    updateSpring((cast spring3D : Spring3D).x, (cast targetX : Float), ({ final __callArgument8:Dynamic = config; __callArgument8; }), (cast deltaTime : Float));
+    updateSpring((cast spring3D : Spring3D).y, (cast targetY : Float), ({ final __callArgument10:Dynamic = config; __callArgument10; }), (cast deltaTime : Float));
+    updateSpring((cast spring3D : Spring3D).z, (cast targetZ : Float), ({ final __callArgument12:Dynamic = config; __callArgument12; }), (cast deltaTime : Float));
+  }
+
+  public static final SpringPresetBouncy:SpringConfig = flight._internal.DynamicObject.freeze({ dampingRatio: 0.35, frequency: 2.0 });
+
+  public static final SpringPresetGentle:SpringConfig = flight._internal.DynamicObject.freeze({ dampingRatio: 0.8, frequency: 1.5 });
+
+  public static final SpringPresetStiff:SpringConfig = flight._internal.DynamicObject.freeze({ dampingRatio: 1.0, frequency: 4.0 });
 
   public static function createSpringConfig(frequency:Float, dampingRatio:Float):SpringConfig {
     return cast { dampingRatio: dampingRatio, frequency: frequency };

@@ -15,4 +15,5 @@ export { explainFlightDocumentScene3DRefusal } from './sceneDocumentScene3DMater
 export { explainFlightDocumentScene3DRefusalFromText } from './sceneDocumentScene3DMaterialization.mjs';
 export { explainFlightDocumentText } from './flightDocumentText.mjs';
 export { formatFlightDocumentText } from './flightDocumentText.mjs';
+export { getFlightDocumentResourceDependencies } from './flightDocumentResourceDependencies.mjs';
 export { parseFlightDocumentText } from './flightDocumentText.mjs';

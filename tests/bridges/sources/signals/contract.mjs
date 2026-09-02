@@ -3,7 +3,10 @@
 function __syncDependencies() {}
 __syncDependencies();
 
+export * from './connection.mjs';
 export * from './emitter.mjs';
+export * from './safe.mjs';
+export * from './scope.mjs';
 export * from './signal.mjs';
 export * from './slot.mjs';
 export * from './throttle.mjs';

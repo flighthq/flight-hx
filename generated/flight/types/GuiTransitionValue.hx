@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GuiTransitionValue = flight._internal._Union2<Bool, Float>;
+typedef GuiTransitionValue = NodeInteractiveStateTransitionValue;

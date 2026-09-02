@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef ParticleObjectsUpdateOptions = { @:optional var callbacks:{ @:optional var onDeath:Void->Void; @:optional var onSpawn:Float->Float->Void; }; @:optional var emitterX:Float; @:optional var emitterY:Float; };
+typedef ParticleObjectsUpdateOptions = { @:optional var callbacks:ParticleEmitterCallbacks; @:optional var emitterX:Float; @:optional var emitterY:Float; };

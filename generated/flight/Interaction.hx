@@ -6,6 +6,9 @@ import flight._internal._Runtime;
 import flight._Interaction as Facade_Interaction_flight__Interaction;
 import flight._Interaction.InteractionSignalSlot__interactionManager;
 import flight.types.Cursor;
+import flight.types.FlightDocumentInteractiveStateTransitionDescriptor;
+import flight.types.FlightDocumentInteractiveStates;
+import flight.types.FlightDocumentSchemaRegistry;
 import flight.types.FocusDirection;
 import flight.types.FocusManager;
 import flight.types.FocusManagerOptions;
@@ -16,6 +19,8 @@ import flight.types.HitTestFunction;
 import flight.types.HitTestPreciseFunction;
 import flight.types.HitTestResult;
 import flight.types.InteractionConnectGuard;
+import flight.types.InteractionDispatchLayer;
+import flight.types.InteractionDispatchLayerOptions;
 import flight.types.InteractionHitEligibility;
 import flight.types.InteractionInputSource;
 import flight.types.InteractionManager;
@@ -28,10 +33,18 @@ import flight.types.Node;
 import flight.types.Node2D;
 import flight.types.NodeAny;
 import flight.types.NodeInteractionState;
+import flight.types.NodeInteractiveStateBinding;
+import flight.types.NodeInteractiveStateExplanation;
+import flight.types.NodeInteractiveStateFlags;
 import flight.types.Rectangle;
 import flight.types.SignalConnectOptions;
 
 class Interaction {
+  public static function applyNodeInteractiveStates(binding:NodeInteractiveStateBinding, flags:NodeInteractiveStateFlags):Bool {
+    return cast Facade_Interaction_flight__Interaction.applyNodeInteractiveStates(binding, flags);
+    return cast null;
+  }
+
   public static function captureInteractionPointer<N:NodeAny>(manager:InteractionManager<N>, pointerId:Float, target:N):Void {
     Facade_Interaction_flight__Interaction.captureInteractionPointer(manager, pointerId, target);
   }
@@ -47,6 +60,11 @@ class Interaction {
 
   public static function connectInputToInteraction<N:NodeAny>(input:InteractionInputSource, manager:InteractionManager<N>, ?coordScale:Float):Void->Void {
     return cast Facade_Interaction_flight__Interaction.connectInputToInteraction(input, manager, coordScale);
+    return cast null;
+  }
+
+  public static function connectInteractionDispatchLayer<N:NodeAny>(manager:InteractionManager<N>, layer:InteractionDispatchLayer<N>, ?options:InteractionDispatchLayerOptions):Void->Void {
+    return cast Facade_Interaction_flight__Interaction.connectInteractionDispatchLayer(manager, layer, options);
     return cast null;
   }
 
@@ -71,6 +89,11 @@ class Interaction {
 
   public static function createNodeInteractionState():NodeInteractionState {
     return cast Facade_Interaction_flight__Interaction.createNodeInteractionState();
+    return cast null;
+  }
+
+  public static function createNodeInteractiveStateBinding(node:NodeAny, interactiveStates:FlightDocumentInteractiveStates, schemas:FlightDocumentSchemaRegistry, ?transition:Null<FlightDocumentInteractiveStateTransitionDescriptor>):Null<NodeInteractiveStateBinding> {
+    return cast Facade_Interaction_flight__Interaction.createNodeInteractiveStateBinding(node, interactiveStates, schemas, transition);
     return cast null;
   }
 
@@ -118,6 +141,10 @@ class Interaction {
     Facade_Interaction_flight__Interaction.dispatchInteractionWheel(manager, x, y, deltaX, deltaY, options);
   }
 
+  public static function disposeNodeInteractiveStateBinding(binding:NodeInteractiveStateBinding):Void {
+    Facade_Interaction_flight__Interaction.disposeNodeInteractiveStateBinding(binding);
+  }
+
   public static function enableInteractionGuards():Void {
     Facade_Interaction_flight__Interaction.enableInteractionGuards();
   }
@@ -134,6 +161,11 @@ class Interaction {
 
   public static function explainInteractionHitEligibility(node:NodeAny):InteractionHitEligibility {
     return cast Facade_Interaction_flight__Interaction.explainInteractionHitEligibility(node);
+    return cast null;
+  }
+
+  public static function explainNodeInteractiveStateBinding(node:NodeAny, interactiveStates:FlightDocumentInteractiveStates, schemas:FlightDocumentSchemaRegistry, ?transition:Null<FlightDocumentInteractiveStateTransitionDescriptor>):Null<NodeInteractiveStateExplanation> {
+    return cast Facade_Interaction_flight__Interaction.explainNodeInteractiveStateBinding(node, interactiveStates, schemas, transition);
     return cast null;
   }
 
@@ -257,6 +289,10 @@ class Interaction {
     return cast null;
   }
 
+  public static function invalidateInteractionCursor<N:NodeAny>(manager:InteractionManager<N>):Void {
+    Facade_Interaction_flight__Interaction.invalidateInteractionCursor(manager);
+  }
+
   public static function isNodeFocusable(source:NodeAny):Bool {
     return cast Facade_Interaction_flight__Interaction.isNodeFocusable(source);
     return cast null;
@@ -269,6 +305,11 @@ class Interaction {
 
   public static function isNodeHitTestEnabled(source:NodeAny):Bool {
     return cast Facade_Interaction_flight__Interaction.isNodeHitTestEnabled(source);
+    return cast null;
+  }
+
+  public static function isNodePointerDoubleClickEnabled(source:NodeAny):Bool {
+    return cast Facade_Interaction_flight__Interaction.isNodePointerDoubleClickEnabled(source);
     return cast null;
   }
 
@@ -327,6 +368,10 @@ class Interaction {
 
   public static function setNodeHitTestEnabled(source:NodeAny, enabled:Bool):Void {
     Facade_Interaction_flight__Interaction.setNodeHitTestEnabled(source, enabled);
+  }
+
+  public static function setNodePointerDoubleClickEnabled(source:NodeAny, enabled:Bool):Void {
+    Facade_Interaction_flight__Interaction.setNodePointerDoubleClickEnabled(source, enabled);
   }
 
   public static function setNodeTabIndex(source:NodeAny, tabIndex:Float):Void {

@@ -15,8 +15,8 @@ import flight.types.FileWatchEvent;
 import flight.types.HasStorageFileSystem;
 
 class FileSystem {
-  public static function appendTextFile(host:HasStorageFileSystem, path:String, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.appendTextFile(host, path, data);
+  public static function appendTextFile(host:HasStorageFileSystem, path:String, data:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.appendTextFile(host, path, data, signal);
     return cast null;
   }
 
@@ -45,8 +45,8 @@ class FileSystem {
     return cast null;
   }
 
-  public static function findFiles(host:HasStorageFileSystem, rootPath:String, pattern:String):flight._internal._Promise<Array<FileEntry>> {
-    return cast Facade_FileSystem_flight__FileSystem.findFiles(host, rootPath, pattern);
+  public static function findFiles(host:HasStorageFileSystem, rootPath:String, pattern:String, ?options:FileWalkOptions):flight._internal._Promise<Array<FileEntry>> {
+    return cast Facade_FileSystem_flight__FileSystem.findFiles(host, rootPath, pattern, options);
     return cast null;
   }
 
@@ -105,38 +105,38 @@ class FileSystem {
     return cast null;
   }
 
-  public static function openFileReadStream(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>> {
-    return cast Facade_FileSystem_flight__FileSystem.openFileReadStream(host, path);
+  public static function openFileReadStream(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal.dom.ReadableStream<flight._internal._UInt8Array>>> {
+    return cast Facade_FileSystem_flight__FileSystem.openFileReadStream(host, path, signal);
     return cast null;
   }
 
-  public static function openFileWriteStream(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>> {
-    return cast Facade_FileSystem_flight__FileSystem.openFileWriteStream(host, path);
+  public static function openFileWriteStream(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal.dom.WritableStream<flight._internal._UInt8Array>>> {
+    return cast Facade_FileSystem_flight__FileSystem.openFileWriteStream(host, path, signal);
     return cast null;
   }
 
-  public static function readBinaryFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_FileSystem_flight__FileSystem.readBinaryFile(host, path);
+  public static function readBinaryFile(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_FileSystem_flight__FileSystem.readBinaryFile(host, path, signal);
     return cast null;
   }
 
-  public static function readBinaryFileRange(host:HasStorageFileSystem, path:String, offset:Float, length:Float):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_FileSystem_flight__FileSystem.readBinaryFileRange(host, path, offset, length);
+  public static function readBinaryFileRange(host:HasStorageFileSystem, path:String, offset:Float, length:Float, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_FileSystem_flight__FileSystem.readBinaryFileRange(host, path, offset, length, signal);
     return cast null;
   }
 
-  public static function readDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
-    return cast Facade_FileSystem_flight__FileSystem.readDialogHandleBinaryFile(host, handle);
+  public static function readDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<flight._internal._UInt8Array>> {
+    return cast Facade_FileSystem_flight__FileSystem.readDialogHandleBinaryFile(host, handle, signal);
     return cast null;
   }
 
-  public static function readDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle):flight._internal._Promise<Null<String>> {
-    return cast Facade_FileSystem_flight__FileSystem.readDialogHandleTextFile(host, handle);
+  public static function readDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<String>> {
+    return cast Facade_FileSystem_flight__FileSystem.readDialogHandleTextFile(host, handle, signal);
     return cast null;
   }
 
-  public static function readDirectory(host:HasStorageFileSystem, path:String):flight._internal._Promise<Array<FileEntry>> {
-    return cast Facade_FileSystem_flight__FileSystem.readDirectory(host, path);
+  public static function readDirectory(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Array<FileEntry>> {
+    return cast Facade_FileSystem_flight__FileSystem.readDirectory(host, path, signal);
     return cast null;
   }
 
@@ -150,8 +150,8 @@ class FileSystem {
     return cast null;
   }
 
-  public static function readTextFile(host:HasStorageFileSystem, path:String):flight._internal._Promise<Null<String>> {
-    return cast Facade_FileSystem_flight__FileSystem.readTextFile(host, path);
+  public static function readTextFile(host:HasStorageFileSystem, path:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Null<String>> {
+    return cast Facade_FileSystem_flight__FileSystem.readTextFile(host, path, signal);
     return cast null;
   }
 
@@ -185,33 +185,33 @@ class FileSystem {
     return cast null;
   }
 
-  public static function writeBinaryFile(host:HasStorageFileSystem, path:String, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeBinaryFile(host, path, data);
+  public static function writeBinaryFile(host:HasStorageFileSystem, path:String, data:flight._internal._UInt8Array, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeBinaryFile(host, path, data, signal);
     return cast null;
   }
 
-  public static function writeBinaryFileChunks(host:HasStorageFileSystem, path:String, chunks:Dynamic):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeBinaryFileChunks(host, path, chunks);
+  public static function writeBinaryFileChunks(host:HasStorageFileSystem, path:String, chunks:Dynamic, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeBinaryFileChunks(host, path, chunks, signal);
     return cast null;
   }
 
-  public static function writeDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:flight._internal._UInt8Array):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeDialogHandleBinaryFile(host, handle, data);
+  public static function writeDialogHandleBinaryFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:flight._internal._UInt8Array, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeDialogHandleBinaryFile(host, handle, data, signal);
     return cast null;
   }
 
-  public static function writeDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeDialogHandleTextFile(host, handle, data);
+  public static function writeDialogHandleTextFile(host:HasStorageFileSystem, handle:FileDialogHandle, data:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeDialogHandleTextFile(host, handle, data, signal);
     return cast null;
   }
 
-  public static function writeFileAtomic(host:HasStorageFileSystem, path:String, data:flight._internal._Union2<flight._internal._UInt8Array, String>):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeFileAtomic(host, path, data);
+  public static function writeFileAtomic(host:HasStorageFileSystem, path:String, data:flight._internal._Union2<flight._internal._UInt8Array, String>, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeFileAtomic(host, path, data, signal);
     return cast null;
   }
 
-  public static function writeTextFile(host:HasStorageFileSystem, path:String, data:String):flight._internal._Promise<Bool> {
-    return cast Facade_FileSystem_flight__FileSystem.writeTextFile(host, path, data);
+  public static function writeTextFile(host:HasStorageFileSystem, path:String, data:String, ?signal:flight._internal.dom.AbortSignal):flight._internal._Promise<Bool> {
+    return cast Facade_FileSystem_flight__FileSystem.writeTextFile(host, path, data, signal);
     return cast null;
   }
 }

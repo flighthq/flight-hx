@@ -7,3 +7,6 @@ __syncDependencies();
 
 export const createSpringConfig = api.createSpringConfig;
 export const createSpringConfigFromPhysical = api.createSpringConfigFromPhysical;
+export const SpringPresetBouncy = api.SpringPresetBouncy;
+export const SpringPresetGentle = api.SpringPresetGentle;
+export const SpringPresetStiff = api.SpringPresetStiff;

@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef InteractionPointerOptions = { @:optional var altKey:Bool; @:optional var buttons:Float; @:optional var ctrlKey:Bool; @:optional var metaKey:Bool; @:optional var pointerId:Float; @:optional var pointerType:PointerType; @:optional var shiftKey:Bool; };
+typedef InteractionPointerOptions = { @:optional var altKey:Bool; @:optional var buttons:Float; @:optional var ctrlKey:Bool; @:optional var metaKey:Bool; @:optional var pointerId:Float; @:optional var pointerType:PointerType; @:optional var shiftKey:Bool; @:optional var timeStamp:Float; };

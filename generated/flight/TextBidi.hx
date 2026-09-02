@@ -4,12 +4,13 @@ package flight;
 import Math as HxMath;
 import flight._internal._Runtime;
 import flight._TextBidi as Facade_TextBidi_flight__TextBidi;
+import flight.types.BidiClassBackend;
 import flight.types.BidiDirection;
 import flight.types.BidiRun;
 
 class TextBidi {
-  public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {
-    return cast Facade_TextBidi_flight__TextBidi.getBidiRuns(text, baseDirection);
+  public static function getBidiRuns(text:String, baseDirection:BidiDirection, ?bidiClassBackend:BidiClassBackend):Array<BidiRun> {
+    return cast Facade_TextBidi_flight__TextBidi.getBidiRuns(text, baseDirection, bidiClassBackend);
     return cast null;
   }
 
@@ -17,8 +18,8 @@ class TextBidi {
     Facade_TextBidi_flight__TextBidi.reorderBidiLine(levels, start, end, out);
   }
 
-  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):flight._internal._UInt8Array {
-    return cast Facade_TextBidi_flight__TextBidi.resolveBidiLevels(text, baseDirection);
+  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection, ?bidiClassBackend:BidiClassBackend):flight._internal._UInt8Array {
+    return cast Facade_TextBidi_flight__TextBidi.resolveBidiLevels(text, baseDirection, bidiClassBackend);
     return cast null;
   }
 }

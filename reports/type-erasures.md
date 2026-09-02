@@ -4,19 +4,19 @@ This report counts explicit `IrType.dynamic` nodes after module construction, in
 
 | Metric | Count |
 | --- | ---: |
-| Total erasures | 29392 |
-| Modules with erasure | 1436 |
+| Total erasures | 30179 |
+| Modules with erasure | 1463 |
 | Checker-known unrepresentable erasures | 0 |
 
 ## Reasons
 
 | Reason | Count |
 | --- | ---: |
-| `external-toolkit-boundary` | 598 |
-| `source-any` | 1166 |
-| `source-never` | 178 |
-| `source-null` | 232 |
-| `source-undefined` | 508 |
-| `source-unknown` | 4522 |
-| `standard-toolkit-boundary` | 21609 |
-| `unclassified` | 579 |
+| `external-toolkit-boundary` | 609 |
+| `source-any` | 1288 |
+| `source-never` | 181 |
+| `source-null` | 255 |
+| `source-undefined` | 515 |
+| `source-unknown` | 4692 |
+| `standard-toolkit-boundary` | 22025 |
+| `unclassified` | 614 |

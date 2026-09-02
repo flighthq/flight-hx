@@ -9,6 +9,10 @@ import flight._Camera.unprojectCamera2DPoint;
 import flight._Geometry.copyRectangle;
 import flight._Geometry.createRectangle;
 import flight._Geometry.createVector2;
+import flight._Geometry.getRectangleMaxX;
+import flight._Geometry.getRectangleMaxY;
+import flight._Geometry.getRectangleMinX;
+import flight._Geometry.getRectangleMinY;
 import flight._Geometry.matrixTransformPointXY;
 import flight._Interaction.enableInteractionSignals;
 import flight._Interaction.setNodeCursor;
@@ -16,6 +20,7 @@ import flight._Interaction.setNodeHitArea;
 import flight._Interaction.setNodeHitTestEnabled;
 import flight._Math.DEG_TO_RAD;
 import flight._Math.RAD_TO_DEG;
+import flight._Math.roundTo;
 import flight._Node.addNodeChild;
 import flight._Node.getNodeParent;
 import flight._Node.getNodeWorldBoundsRectangle;
@@ -45,12 +50,14 @@ import flight.types.Camera2D;
 import flight.types.CapsStyle;
 import flight.types.DisplayObject;
 import flight.types.EntityRuntime;
+import flight.types.GizmoAlignment;
 import flight.types.GizmoCreateOptions;
 import flight.types.GizmoHandleKind;
 import flight.types.GizmoMode;
 import flight.types.GizmoNode2DFeatures;
 import flight.types.GizmoPivot;
 import flight.types.GizmoSignals;
+import flight.types.GizmoSmartGuideResult;
 import flight.types.GizmoSpace;
 import flight.types.GizmoState;
 import flight.types.GizmoTransformMode;
@@ -74,7 +81,7 @@ import flight.types.Signal;
 import flight.types.Vector2;
 import flight.types.Vector2Like;
 
-typedef GizmoDrag__gizmoState = { var axisRotation:Float; var handle:GizmoHandleKind; var mode:GizmoTransformMode; var pivotScreenX:Float; var pivotScreenY:Float; var pointerId:Float; var screenRotation:Float; var startScreenX:Float; var startScreenY:Float; };
+typedef GizmoDrag__gizmoState = { var axisRotation:Float; var handle:GizmoHandleKind; var mode:GizmoTransformMode; var pivotWorldX:Float; var pivotWorldY:Float; var pivotScreenX:Float; var pivotScreenY:Float; var pointerId:Float; var screenRotation:Float; var startScreenX:Float; var startScreenY:Float; var startWorldX:Float; var startWorldY:Float; };
 
 typedef GizmoHandle__gizmoState = { var kind:GizmoHandleKind; var node:Shape; var placement:GizmoHandlePlacement__gizmoState; };
 
@@ -84,6 +91,107 @@ typedef GizmoRuntime__gizmoState<NodeType> = { >EntityRuntime, var bounds:Rectan
 
 @:noCompletion
 class _Gizmo {
+  public static function computeGizmoAlignmentDeltas(out:Array<Float>, bounds:Array<RectangleLike>, alignment:GizmoAlignment):Void {
+    var horizontal:Bool = cast _Runtime.UNDEFINED;
+    var minimum:Float = cast _Runtime.UNDEFINED;
+    var maximum:Float = cast _Runtime.UNDEFINED;
+    var target:Float = cast _Runtime.UNDEFINED;
+    _Runtime.setLength(out, _Runtime.multiplyNumbers(_Runtime.field(bounds, 'length'), 2.0));
+    if ((cast _Runtime.strictEquals(_Runtime.field(bounds, 'length'), 0.0) : Bool)) { return; }
+    horizontal = ((cast ((cast _Runtime.strictEquals(alignment, 'horizontal-center') : Bool) || (cast _Runtime.strictEquals(alignment, 'left') : Bool)) : Bool) || (cast _Runtime.strictEquals(alignment, 'right') : Bool));
+    minimum = HxMath.POSITIVE_INFINITY;
+    maximum = -HxMath.POSITIVE_INFINITY;
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(bounds, 'length') : Float)) : Bool)) {
+        var source:RectangleLike = flight._internal._StaticIndex.readArray(bounds, i);
+        var start:Float = ((cast horizontal : Bool) ? (cast (cast getRectangleMinX(({ final __callArgument0:Dynamic = source; __callArgument0; })) : Float) : Dynamic) : (cast (cast getRectangleMinY(({ final __callArgument2:Dynamic = source; __callArgument2; })) : Float) : Dynamic));
+        var end:Float = ((cast horizontal : Bool) ? (cast (cast getRectangleMaxX(({ final __callArgument4:Dynamic = source; __callArgument4; })) : Float) : Dynamic) : (cast (cast getRectangleMaxY(({ final __callArgument6:Dynamic = source; __callArgument6; })) : Float) : Dynamic));
+        (minimum = cast (HxMath.min(minimum, start) : Dynamic));
+        (maximum = cast (HxMath.max(maximum, end) : Dynamic));
+        i++;
+      }
+    }
+    target = ((cast ((cast _Runtime.strictEquals(alignment, 'left') : Bool) || (cast _Runtime.strictEquals(alignment, 'top') : Bool)) : Bool) ? (cast minimum : Dynamic) : (cast ((cast ((cast _Runtime.strictEquals(alignment, 'right') : Bool) || (cast _Runtime.strictEquals(alignment, 'bottom') : Bool)) : Bool) ? (cast maximum : Dynamic) : (cast ((minimum + maximum) * 0.5) : Dynamic)) : Dynamic));
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(bounds, 'length') : Float)) : Bool)) {
+        var source:RectangleLike = flight._internal._StaticIndex.readArray(bounds, i);
+        var start:Float = ((cast horizontal : Bool) ? (cast (cast getRectangleMinX(({ final __callArgument8:Dynamic = source; __callArgument8; })) : Float) : Dynamic) : (cast (cast getRectangleMinY(({ final __callArgument10:Dynamic = source; __callArgument10; })) : Float) : Dynamic));
+        var end:Float = ((cast horizontal : Bool) ? (cast (cast getRectangleMaxX(({ final __callArgument12:Dynamic = source; __callArgument12; })) : Float) : Dynamic) : (cast (cast getRectangleMaxY(({ final __callArgument14:Dynamic = source; __callArgument14; })) : Float) : Dynamic));
+        var anchor:Float = ((cast ((cast _Runtime.strictEquals(alignment, 'left') : Bool) || (cast _Runtime.strictEquals(alignment, 'top') : Bool)) : Bool) ? (cast start : Dynamic) : (cast ((cast ((cast _Runtime.strictEquals(alignment, 'right') : Bool) || (cast _Runtime.strictEquals(alignment, 'bottom') : Bool)) : Bool) ? (cast end : Dynamic) : (cast ((start + end) * 0.5) : Dynamic)) : Dynamic));
+        flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast (i * 2.0) : Float), (cast ((cast horizontal : Bool) ? (cast (target - anchor) : Dynamic) : (cast 0.0 : Dynamic)) : Float));
+        flight._internal._StaticIndex.writeFloatArrayTyped((cast out : Array<Float>), (cast ((i * 2.0) + 1.0) : Float), (cast ((cast horizontal : Bool) ? (cast 0.0 : Dynamic) : (cast (target - anchor) : Dynamic)) : Float));
+        i++;
+      }
+    }
+  }
+
+  public static function findGizmoSmartGuides(out:GizmoSmartGuideResult, movingBounds:RectangleLike, candidateBounds:Array<RectangleLike>, threshold:Float):Bool {
+    var foundX:Bool = cast _Runtime.UNDEFINED;
+    var foundY:Bool = cast _Runtime.UNDEFINED;
+    ((cast out : GizmoSmartGuideResult).deltaX = 0.0);
+    ((cast out : GizmoSmartGuideResult).deltaY = 0.0);
+    ((cast out : GizmoSmartGuideResult).guideX = null);
+    ((cast out : GizmoSmartGuideResult).guideY = null);
+    if ((cast ((cast ((cast threshold : Float) < (cast 0.0 : Float)) : Bool) || (cast !(cast _Runtime.callProperty(flight._internal._HostValueLut.get('Number'), 'isFinite', cast ([threshold] : Array<Dynamic>)) : Bool) : Bool)) : Bool)) { return cast false; }
+    foundX = (cast _Gizmo.findGizmoSmartGuideAxis__gizmoAlignment(({ final __callArgument16:Dynamic = out; __callArgument16; }), (cast (cast getRectangleMinX(({ final __callArgument17:Dynamic = movingBounds; __callArgument17; })) : Float) : Float), (cast (cast getRectangleMaxX(({ final __callArgument19:Dynamic = movingBounds; __callArgument19; })) : Float) : Float), ({ final __callArgument21:Dynamic = candidateBounds; __callArgument21; }), (cast threshold : Float), (cast true : Bool)) : Bool);
+    foundY = (cast _Gizmo.findGizmoSmartGuideAxis__gizmoAlignment(({ final __callArgument28:Dynamic = out; __callArgument28; }), (cast (cast getRectangleMinY(({ final __callArgument29:Dynamic = movingBounds; __callArgument29; })) : Float) : Float), (cast (cast getRectangleMaxY(({ final __callArgument31:Dynamic = movingBounds; __callArgument31; })) : Float) : Float), ({ final __callArgument33:Dynamic = candidateBounds; __callArgument33; }), (cast threshold : Float), (cast false : Bool)) : Bool);
+    return cast ((cast foundX : Bool) || (cast foundY : Bool));
+    return cast null;
+  }
+
+  public static function findGizmoSmartGuideAxis__gizmoAlignment(out:GizmoSmartGuideResult, movingStart:Float, movingEnd:Float, candidateBounds:Array<RectangleLike>, threshold:Float, horizontal:Bool):Bool {
+    var movingCenter:Float = cast _Runtime.UNDEFINED;
+    var bestDistance:Float = cast _Runtime.UNDEFINED;
+    var bestDelta:Float = cast _Runtime.UNDEFINED;
+    var bestGuide:Float = cast _Runtime.UNDEFINED;
+    movingCenter = ((movingStart + movingEnd) * 0.5);
+    bestDistance = HxMath.POSITIVE_INFINITY;
+    bestDelta = 0.0;
+    bestGuide = 0.0;
+    {
+      var candidateIndex:Float = 0.0;
+      while ((cast ((cast candidateIndex : Float) < (cast _Runtime.field(candidateBounds, 'length') : Float)) : Bool)) {
+        var candidate:RectangleLike = flight._internal._StaticIndex.readArray(candidateBounds, candidateIndex);
+        var candidateStart:Float = ((cast horizontal : Bool) ? (cast (cast getRectangleMinX(({ final __callArgument40:Dynamic = candidate; __callArgument40; })) : Float) : Dynamic) : (cast (cast getRectangleMinY(({ final __callArgument42:Dynamic = candidate; __callArgument42; })) : Float) : Dynamic));
+        var candidateEnd:Float = ((cast horizontal : Bool) ? (cast (cast getRectangleMaxX(({ final __callArgument44:Dynamic = candidate; __callArgument44; })) : Float) : Dynamic) : (cast (cast getRectangleMaxY(({ final __callArgument46:Dynamic = candidate; __callArgument46; })) : Float) : Dynamic));
+        var candidateCenter:Float = ((candidateStart + candidateEnd) * 0.5);
+        {
+          var candidateAnchor:Float = 0.0;
+          while ((cast ((cast candidateAnchor : Float) < (cast 3.0 : Float)) : Bool)) {
+            var guide:Float = ((cast _Runtime.strictEquals(candidateAnchor, 0.0) : Bool) ? (cast candidateStart : Dynamic) : (cast ((cast _Runtime.strictEquals(candidateAnchor, 1.0) : Bool) ? (cast candidateCenter : Dynamic) : (cast candidateEnd : Dynamic)) : Dynamic));
+            {
+              var movingAnchor:Float = 0.0;
+              while ((cast ((cast movingAnchor : Float) < (cast 3.0 : Float)) : Bool)) {
+                var source:Float = ((cast _Runtime.strictEquals(movingAnchor, 0.0) : Bool) ? (cast movingStart : Dynamic) : (cast ((cast _Runtime.strictEquals(movingAnchor, 1.0) : Bool) ? (cast movingCenter : Dynamic) : (cast movingEnd : Dynamic)) : Dynamic));
+                var delta:Float = (guide - source);
+                var distance:Float = HxMath.abs(delta);
+                if ((cast ((cast ((cast distance : Float) > (cast threshold : Float)) : Bool) || (cast ((cast distance : Float) >= (cast bestDistance : Float)) : Bool)) : Bool)) { movingAnchor++; continue; }
+                (bestDistance = cast (distance : Dynamic));
+                (bestDelta = cast (delta : Dynamic));
+                (bestGuide = cast (guide : Dynamic));
+                movingAnchor++;
+              }
+            }
+            candidateAnchor++;
+          }
+        }
+        candidateIndex++;
+      }
+    }
+    if ((cast _Runtime.strictEquals(bestDistance, HxMath.POSITIVE_INFINITY) : Bool)) { return cast false; }
+    if ((cast horizontal : Bool)) {
+      ((cast out : GizmoSmartGuideResult).deltaX = bestDelta);
+      ((cast out : GizmoSmartGuideResult).guideX = bestGuide);
+    } else {
+      ((cast out : GizmoSmartGuideResult).deltaY = bestDelta);
+      ((cast out : GizmoSmartGuideResult).guideY = bestGuide);
+    }
+    return cast true;
+    return cast null;
+  }
+
   public static function createGizmoState<NodeType:HierarchyNodeAny>(options:GizmoCreateOptions<NodeType>):GizmoState<NodeType> {
     var state:GizmoState<NodeType> = cast _Runtime.UNDEFINED;
     var overlayRoot:DisplayObject = cast _Runtime.UNDEFINED;
@@ -94,7 +202,7 @@ class _Gizmo {
     overlayRoot = (cast createDisplayObject((cast { name: 'GizmoRoot' } : Dynamic)) : DisplayObject);
     outline = (cast createShape((cast { name: 'GizmoSelectionOutline' } : Dynamic)) : Shape);
     handleRoot = (cast createDisplayObject((cast { name: 'GizmoHandleRoot' } : Dynamic)) : DisplayObject);
-    runtime = (cast { binding: null, bounds: (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle), camera: _Runtime.field(options, 'camera'), cleanups: cast ([] : Array<Dynamic>), customPivotX: 0.0, customPivotY: 0.0, disposed: false, drag: null, features: _Runtime.field(options, 'features'), handleRoot: handleRoot, handles: (cast _Gizmo.createGizmoHandles__gizmoState(({ final __callArgument0:Dynamic = handleRoot; __callArgument0; })) : Array<GizmoHandle__gizmoState>), mode: 'translate', nodeBounds: (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle), outline: outline, outlineColor: _Gizmo.defaultOutlineColor__gizmoState, outlineEnabled: true, outlinePoints: _Runtime.fill(_Runtime.createArray(8.0), HxMath.NaN, 0, null, 1), overlay: _Runtime.field(options, 'overlayScene'), overlayRoot: overlayRoot, pivot: 'center', pivotScreen: (cast (#if js _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) #else createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector2), pivotWorld: (cast (#if js _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) #else createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector2), snapRotation: 0.0, snapScale: 0.0, snapTranslate: 0.0, space: 'world', scratchPoint: (cast (#if js _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) #else createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector2), selection: _Runtime.field(options, 'selection'), signals: { onRotate: (cast createSignal() : Signal<Float->Void>), onScale: (cast createSignal() : Signal<Float->Float->Void>), onTransformBegin: (cast createSignal() : Signal<Void->Void>), onTransformEnd: (cast createSignal() : Signal<Void->Void>), onTranslate: (cast createSignal() : Signal<Float->Float->Void>) } });
+    runtime = (cast { binding: null, bounds: (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle), camera: _Runtime.field(options, 'camera'), cleanups: cast ([] : Array<Dynamic>), customPivotX: 0.0, customPivotY: 0.0, disposed: false, drag: null, features: _Runtime.field(options, 'features'), handleRoot: handleRoot, handles: (cast _Gizmo.createGizmoHandles__gizmoState(({ final __callArgument48:Dynamic = handleRoot; __callArgument48; })) : Array<GizmoHandle__gizmoState>), mode: 'translate', nodeBounds: (cast (#if js _Runtime.callValue(createRectangle, cast ([] : Array<Dynamic>)) #else createRectangle(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Rectangle), outline: outline, outlineColor: _Gizmo.defaultOutlineColor__gizmoState, outlineEnabled: true, outlinePoints: _Runtime.fill(_Runtime.createArray(8.0), HxMath.NaN, 0, null, 1), overlay: _Runtime.field(options, 'overlayScene'), overlayRoot: overlayRoot, pivot: 'center', pivotScreen: (cast (#if js _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) #else createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector2), pivotWorld: (cast (#if js _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) #else createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector2), snapRotation: 0.0, snapScale: 0.0, snapTranslate: 0.0, space: 'world', scratchPoint: (cast (#if js _Runtime.callValue(createVector2, cast ([] : Array<Dynamic>)) #else createVector2(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector2), selection: _Runtime.field(options, 'selection'), signals: { onRotate: (cast createSignal() : Signal<Float->Void>), onScale: (cast createSignal() : Signal<Float->Float->Void>), onTransformBegin: (cast createSignal() : Signal<Void->Void>), onTransformEnd: (cast createSignal() : Signal<Void->Void>), onTranslate: (cast createSignal() : Signal<Float->Float->Void>) } });
     _Runtime.setIndex(state, EntityRuntimeKey, runtime);
     (cast addNodeChild((cast overlayRoot : Dynamic), (cast outline : Dynamic)) : NodeOf<Node2DTraits>);
     (cast addNodeChild((cast overlayRoot : Dynamic), (cast handleRoot : Dynamic)) : NodeOf<Node2DTraits>);
@@ -201,11 +309,11 @@ class _Gizmo {
     }
     _Gizmo.setGizmoNodeVisible__gizmoState((cast runtime : GizmoRuntime__gizmoState<NodeType>).overlayRoot, (cast true : Bool));
     _Gizmo.resolveGizmoPivot__gizmoState((cast runtime : Dynamic));
-    projectCamera2DPoint(({ final __callArgument2:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument2; }), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotWorld : { var x:Float; }).x : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotWorld : { var y:Float; }).y : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotScreen);
+    projectCamera2DPoint(({ final __callArgument50:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument50; }), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotWorld : { var x:Float; }).x : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotWorld : { var y:Float; }).y : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotScreen);
     _Gizmo.setGizmoNodeTransform__gizmoState((cast runtime : GizmoRuntime__gizmoState<NodeType>).handleRoot, (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotScreen : { var x:Float; }).x : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotScreen : { var y:Float; }).y : Float), (cast (cast _Gizmo.resolveGizmoScreenRotation__gizmoState((cast runtime : Dynamic)) : Float) : Float));
     _Gizmo.setGizmoNodeVisible__gizmoState((cast runtime : GizmoRuntime__gizmoState<NodeType>).handleRoot, (cast !_Runtime.strictEquals((cast runtime : GizmoRuntime__gizmoState<NodeType>).mode, 'none') : Bool));
     _Gizmo.updateGizmoHandleVisibility__gizmoState((cast runtime : Dynamic), (cast runtime : GizmoRuntime__gizmoState<NodeType>).mode);
-    _Gizmo.setGizmoNodeVisible__gizmoState(({ final __callArgument4:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).outline; __callArgument4; }), (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).outlineEnabled : Bool));
+    _Gizmo.setGizmoNodeVisible__gizmoState(({ final __callArgument52:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).outline; __callArgument52; }), (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).outlineEnabled : Bool));
     _Gizmo.updateGizmoOutline__gizmoState((cast runtime : Dynamic));
     _Gizmo.updateGizmoHandleLayout__gizmoState((cast runtime : Dynamic));
   }
@@ -255,22 +363,22 @@ class _Gizmo {
     var onPointerMove:PointerEventData->Void = cast _Runtime.UNDEFINED;
     var onPointerEnd:PointerEventData->Void = cast _Runtime.UNDEFINED;
     signals = (cast enableInteractionSignals((cast handle : GizmoHandle__gizmoState).node) : InteractionSignals);
-    onPointerDown = (cast function(data:PointerEventData):Void { _Gizmo.startGizmoTransform__gizmoState((cast runtime : Dynamic), (cast handle : GizmoHandle__gizmoState).kind, ({ final __callArgument6:Dynamic = data; __callArgument6; })); });
-    onPointerMove = (cast function(data:PointerEventData):Void { _Gizmo.updateGizmoTransform__gizmoState((cast runtime : Dynamic), ({ final __callArgument8:Dynamic = data; __callArgument8; })); });
+    onPointerDown = (cast function(data:PointerEventData):Void { _Gizmo.startGizmoTransform__gizmoState((cast runtime : Dynamic), (cast handle : GizmoHandle__gizmoState).kind, ({ final __callArgument54:Dynamic = data; __callArgument54; })); });
+    onPointerMove = (cast function(data:PointerEventData):Void { _Gizmo.updateGizmoTransform__gizmoState((cast runtime : Dynamic), ({ final __callArgument56:Dynamic = data; __callArgument56; })); });
     onPointerEnd = (cast function(data:PointerEventData):Void {
-      if ((cast _Runtime.strictEquals(({ final __structural10 = (cast runtime : GizmoRuntime__gizmoState<NodeType>).drag; __structural10 == null ? _Runtime.UNDEFINED : (cast __structural10 : { var pointerId:Float; }).pointerId; }), data.pointerId) : Bool)) { _Gizmo.finishGizmoTransform__gizmoState((cast runtime : Dynamic)); }
+      if ((cast _Runtime.strictEquals(({ final __structural58 = (cast runtime : GizmoRuntime__gizmoState<NodeType>).drag; __structural58 == null ? _Runtime.UNDEFINED : (cast __structural58 : { var pointerId:Float; }).pointerId; }), data.pointerId) : Bool)) { _Gizmo.finishGizmoTransform__gizmoState((cast runtime : Dynamic)); }
     });
-    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast signals : InteractionSignals).onPointerDown : Dynamic), ({ final __callArgument12:Dynamic = onPointerDown; __callArgument12; })] : Array<Dynamic>)) #else connectSignal((cast (cast signals : InteractionSignals).onPointerDown : Dynamic), ({ final __callArgument11:Dynamic = onPointerDown; __callArgument11; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast signals : InteractionSignals).onPointerMove : Dynamic), ({ final __callArgument14:Dynamic = onPointerMove; __callArgument14; })] : Array<Dynamic>)) #else connectSignal((cast (cast signals : InteractionSignals).onPointerMove : Dynamic), ({ final __callArgument13:Dynamic = onPointerMove; __callArgument13; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast signals : InteractionSignals).onPointerUp : Dynamic), ({ final __callArgument16:Dynamic = onPointerEnd; __callArgument16; })] : Array<Dynamic>)) #else connectSignal((cast (cast signals : InteractionSignals).onPointerUp : Dynamic), ({ final __callArgument15:Dynamic = onPointerEnd; __callArgument15; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast signals : InteractionSignals).onPointerCancel : Dynamic), ({ final __callArgument18:Dynamic = onPointerEnd; __callArgument18; })] : Array<Dynamic>)) #else connectSignal((cast (cast signals : InteractionSignals).onPointerCancel : Dynamic), ({ final __callArgument17:Dynamic = onPointerEnd; __callArgument17; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast signals : InteractionSignals).onReleaseOutside : Dynamic), ({ final __callArgument20:Dynamic = onPointerEnd; __callArgument20; })] : Array<Dynamic>)) #else connectSignal((cast (cast signals : InteractionSignals).onReleaseOutside : Dynamic), ({ final __callArgument19:Dynamic = onPointerEnd; __callArgument19; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast signals : InteractionSignals).onPointerDown : Dynamic), ({ final __callArgument60:Dynamic = onPointerDown; __callArgument60; })] : Array<Dynamic>)) #else connectSignal((cast (cast signals : InteractionSignals).onPointerDown : Dynamic), ({ final __callArgument59:Dynamic = onPointerDown; __callArgument59; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast signals : InteractionSignals).onPointerMove : Dynamic), ({ final __callArgument62:Dynamic = onPointerMove; __callArgument62; })] : Array<Dynamic>)) #else connectSignal((cast (cast signals : InteractionSignals).onPointerMove : Dynamic), ({ final __callArgument61:Dynamic = onPointerMove; __callArgument61; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast signals : InteractionSignals).onPointerUp : Dynamic), ({ final __callArgument64:Dynamic = onPointerEnd; __callArgument64; })] : Array<Dynamic>)) #else connectSignal((cast (cast signals : InteractionSignals).onPointerUp : Dynamic), ({ final __callArgument63:Dynamic = onPointerEnd; __callArgument63; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast signals : InteractionSignals).onPointerCancel : Dynamic), ({ final __callArgument66:Dynamic = onPointerEnd; __callArgument66; })] : Array<Dynamic>)) #else connectSignal((cast (cast signals : InteractionSignals).onPointerCancel : Dynamic), ({ final __callArgument65:Dynamic = onPointerEnd; __callArgument65; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(connectSignal, cast ([(cast (cast signals : InteractionSignals).onReleaseOutside : Dynamic), ({ final __callArgument68:Dynamic = onPointerEnd; __callArgument68; })] : Array<Dynamic>)) #else connectSignal((cast (cast signals : InteractionSignals).onReleaseOutside : Dynamic), ({ final __callArgument67:Dynamic = onPointerEnd; __callArgument67; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     _Runtime.callProperty((cast runtime : GizmoRuntime__gizmoState<NodeType>).cleanups, 'push', cast ([function():Void {
-      disconnectSignal((cast (cast signals : InteractionSignals).onPointerDown : Dynamic), ({ final __callArgument21:Dynamic = onPointerDown; __callArgument21; }));
-      disconnectSignal((cast (cast signals : InteractionSignals).onPointerMove : Dynamic), ({ final __callArgument23:Dynamic = onPointerMove; __callArgument23; }));
-      disconnectSignal((cast (cast signals : InteractionSignals).onPointerUp : Dynamic), ({ final __callArgument25:Dynamic = onPointerEnd; __callArgument25; }));
-      disconnectSignal((cast (cast signals : InteractionSignals).onPointerCancel : Dynamic), ({ final __callArgument27:Dynamic = onPointerEnd; __callArgument27; }));
-      disconnectSignal((cast (cast signals : InteractionSignals).onReleaseOutside : Dynamic), ({ final __callArgument29:Dynamic = onPointerEnd; __callArgument29; }));
+      disconnectSignal((cast (cast signals : InteractionSignals).onPointerDown : Dynamic), ({ final __callArgument69:Dynamic = onPointerDown; __callArgument69; }));
+      disconnectSignal((cast (cast signals : InteractionSignals).onPointerMove : Dynamic), ({ final __callArgument71:Dynamic = onPointerMove; __callArgument71; }));
+      disconnectSignal((cast (cast signals : InteractionSignals).onPointerUp : Dynamic), ({ final __callArgument73:Dynamic = onPointerEnd; __callArgument73; }));
+      disconnectSignal((cast (cast signals : InteractionSignals).onPointerCancel : Dynamic), ({ final __callArgument75:Dynamic = onPointerEnd; __callArgument75; }));
+      disconnectSignal((cast (cast signals : InteractionSignals).onReleaseOutside : Dynamic), ({ final __callArgument77:Dynamic = onPointerEnd; __callArgument77; }));
     }] : Array<Dynamic>));
   }
 
@@ -287,16 +395,16 @@ class _Gizmo {
   public static function createGizmoHandle__gizmoState(kind:GizmoHandleKind, placement:GizmoHandlePlacement__gizmoState):GizmoHandle__gizmoState {
     var node:Shape = cast _Runtime.UNDEFINED;
     node = (cast createShape((cast { name: 'Gizmo' + Std.string((cast _Gizmo.toGizmoHandleName__gizmoState((cast placement : Dynamic)) : String)) + 'Handle' } : Dynamic)) : Shape);
-    setNodeHitTestEnabled(({ final __callArgument31:Dynamic = node; __callArgument31; }), (cast true : Bool));
-    setNodeCursor(({ final __callArgument33:Dynamic = node; __callArgument33; }), ({ final __callArgument36:Dynamic = (cast _Gizmo.getGizmoHandleCursor__gizmoState(({ final __callArgument34:Dynamic = kind; __callArgument34; })) : String); __callArgument36; }));
-    _Gizmo.drawGizmoHandle__gizmoState(({ final __callArgument41:Dynamic = node; __callArgument41; }), ({ final __callArgument42:Dynamic = kind; __callArgument42; }));
+    setNodeHitTestEnabled(({ final __callArgument79:Dynamic = node; __callArgument79; }), (cast true : Bool));
+    setNodeCursor(({ final __callArgument81:Dynamic = node; __callArgument81; }), ({ final __callArgument84:Dynamic = (cast _Gizmo.getGizmoHandleCursor__gizmoState(({ final __callArgument82:Dynamic = kind; __callArgument82; })) : String); __callArgument84; }));
+    _Gizmo.drawGizmoHandle__gizmoState(({ final __callArgument89:Dynamic = node; __callArgument89; }), ({ final __callArgument90:Dynamic = kind; __callArgument90; }));
     return cast { kind: kind, node: node, placement: placement };
     return cast null;
   }
 
   public static function createGizmoHandles__gizmoState(handleRoot:Node2D):Array<GizmoHandle__gizmoState> {
     var handles:Array<GizmoHandle__gizmoState> = cast _Runtime.UNDEFINED;
-    handles = (cast cast ([(cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument45:Dynamic = 'rotate'; __callArgument45; }), (cast 'rotate' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument47:Dynamic = 'translate-x'; __callArgument47; }), (cast 'translate-x' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument49:Dynamic = 'translate-y'; __callArgument49; }), (cast 'translate-y' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument51:Dynamic = 'translate-xy'; __callArgument51; }), (cast 'translate-xy' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument53:Dynamic = 'scale-x'; __callArgument53; }), (cast 'scale-east' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument55:Dynamic = 'scale-x'; __callArgument55; }), (cast 'scale-west' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument57:Dynamic = 'scale-y'; __callArgument57; }), (cast 'scale-north' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument59:Dynamic = 'scale-y'; __callArgument59; }), (cast 'scale-south' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument61:Dynamic = 'scale-xy'; __callArgument61; }), (cast 'scale-northeast' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument63:Dynamic = 'scale-xy'; __callArgument63; }), (cast 'scale-northwest' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument65:Dynamic = 'scale-xy'; __callArgument65; }), (cast 'scale-southeast' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument67:Dynamic = 'scale-xy'; __callArgument67; }), (cast 'scale-southwest' : Dynamic)) : GizmoHandle__gizmoState)] : Array<Dynamic>));
+    handles = (cast cast ([(cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument93:Dynamic = 'rotate'; __callArgument93; }), (cast 'rotate' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument95:Dynamic = 'translate-x'; __callArgument95; }), (cast 'translate-x' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument97:Dynamic = 'translate-y'; __callArgument97; }), (cast 'translate-y' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument99:Dynamic = 'translate-xy'; __callArgument99; }), (cast 'translate-xy' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument101:Dynamic = 'scale-x'; __callArgument101; }), (cast 'scale-east' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument103:Dynamic = 'scale-x'; __callArgument103; }), (cast 'scale-west' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument105:Dynamic = 'scale-y'; __callArgument105; }), (cast 'scale-north' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument107:Dynamic = 'scale-y'; __callArgument107; }), (cast 'scale-south' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument109:Dynamic = 'scale-xy'; __callArgument109; }), (cast 'scale-northeast' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument111:Dynamic = 'scale-xy'; __callArgument111; }), (cast 'scale-northwest' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument113:Dynamic = 'scale-xy'; __callArgument113; }), (cast 'scale-southeast' : Dynamic)) : GizmoHandle__gizmoState), (cast _Gizmo.createGizmoHandle__gizmoState(({ final __callArgument115:Dynamic = 'scale-xy'; __callArgument115; }), (cast 'scale-southwest' : Dynamic)) : GizmoHandle__gizmoState)] : Array<Dynamic>));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(handles, 'length') : Float)) : Bool)) {
@@ -309,63 +417,63 @@ class _Gizmo {
   }
 
   public static function drawGizmoAxis__gizmoState(shape:Shape, color:Float, endX:Float, endY:Float):Void {
-    (#if js _Runtime.callValue(appendShapeLineStyle, cast ([({ final __callArgument71:Dynamic = shape; __callArgument71; }), (cast 2.0 : Float), (cast color : Float), (cast 1.0 : Float), (cast false : Bool), ({ final __callArgument72:Dynamic = 'none'; __callArgument72; })] : Array<Dynamic>)) #else appendShapeLineStyle(({ final __callArgument69:Dynamic = shape; __callArgument69; }), (cast 2.0 : Float), (cast color : Float), (cast 1.0 : Float), (cast false : Bool), ({ final __callArgument70:Dynamic = 'none'; __callArgument70; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    appendShapeMoveTo(({ final __callArgument73:Dynamic = shape; __callArgument73; }), (cast ((cast _Runtime.strictEquals(endX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(_Runtime.sign(endX), _Gizmo.handleCenterSize__gizmoState) : Dynamic)) : Float), (cast ((cast _Runtime.strictEquals(endY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(_Runtime.sign(endY), _Gizmo.handleCenterSize__gizmoState) : Dynamic)) : Float));
-    appendShapeLineTo(({ final __callArgument75:Dynamic = shape; __callArgument75; }), (cast endX : Float), (cast endY : Float));
+    (#if js _Runtime.callValue(appendShapeLineStyle, cast ([({ final __callArgument119:Dynamic = shape; __callArgument119; }), (cast 2.0 : Float), (cast color : Float), (cast 1.0 : Float), (cast false : Bool), ({ final __callArgument120:Dynamic = 'none'; __callArgument120; })] : Array<Dynamic>)) #else appendShapeLineStyle(({ final __callArgument117:Dynamic = shape; __callArgument117; }), (cast 2.0 : Float), (cast color : Float), (cast 1.0 : Float), (cast false : Bool), ({ final __callArgument118:Dynamic = 'none'; __callArgument118; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    appendShapeMoveTo(({ final __callArgument121:Dynamic = shape; __callArgument121; }), (cast ((cast _Runtime.strictEquals(endX, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(_Runtime.sign(endX), _Gizmo.handleCenterSize__gizmoState) : Dynamic)) : Float), (cast ((cast _Runtime.strictEquals(endY, 0.0) : Bool) ? (cast 0.0 : Dynamic) : (cast _Runtime.multiplyNumbers(_Runtime.sign(endY), _Gizmo.handleCenterSize__gizmoState) : Dynamic)) : Float));
+    appendShapeLineTo(({ final __callArgument123:Dynamic = shape; __callArgument123; }), (cast endX : Float), (cast endY : Float));
   }
 
   public static function drawGizmoHandle__gizmoState(shape:Shape, kind:GizmoHandleKind):Void {
     {
       var __switchValue = kind;
       if (__switchValue == 'rotate') {
-        _Gizmo.drawGizmoRotateHandle__gizmoState(({ final __callArgument77:Dynamic = shape; __callArgument77; }), (cast _Gizmo.minimumRotateRadius__gizmoState : Float));
+        _Gizmo.drawGizmoRotateHandle__gizmoState(({ final __callArgument125:Dynamic = shape; __callArgument125; }), (cast _Gizmo.minimumRotateRadius__gizmoState : Float));
       }
       else if (__switchValue == 'translate-x') {
-        _Gizmo.drawGizmoAxis__gizmoState(({ final __callArgument79:Dynamic = shape; __callArgument79; }), (cast _Gizmo.xAxisColor__gizmoState : Float), (cast _Gizmo.handleLength__gizmoState : Float), (cast 0.0 : Float));
-        (#if js _Runtime.callValue(appendShapeBeginFill, cast ([({ final __callArgument82:Dynamic = shape; __callArgument82; }), (cast _Gizmo.xAxisColor__gizmoState : Float)] : Array<Dynamic>)) #else appendShapeBeginFill(({ final __callArgument81:Dynamic = shape; __callArgument81; }), (cast _Gizmo.xAxisColor__gizmoState : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-        appendShapePolygon(({ final __callArgument83:Dynamic = shape; __callArgument83; }), ({ final __callArgument84:Dynamic = cast ([_Gizmo.handleLength__gizmoState, 0.0, (_Gizmo.handleLength__gizmoState - _Gizmo.arrowSize__gizmoState), -_Gizmo.arrowSize__gizmoState, (_Gizmo.handleLength__gizmoState - _Gizmo.arrowSize__gizmoState), _Gizmo.arrowSize__gizmoState] : Array<Dynamic>); __callArgument84; }));
-        appendShapeEndFill(({ final __callArgument87:Dynamic = shape; __callArgument87; }));
-        setNodeHitArea(({ final __callArgument89:Dynamic = shape; __callArgument89; }), (cast (cast createRectangle(({ final __callArgument90:Dynamic = _Gizmo.handleCenterSize__gizmoState; __callArgument90; }), ({ final __callArgument91:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument91; }), ({ final __callArgument92:Dynamic = (_Gizmo.handleLength__gizmoState - _Gizmo.handleCenterSize__gizmoState); __callArgument92; }), ({ final __callArgument93:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument93; })) : Rectangle) : Dynamic));
+        _Gizmo.drawGizmoAxis__gizmoState(({ final __callArgument127:Dynamic = shape; __callArgument127; }), (cast _Gizmo.xAxisColor__gizmoState : Float), (cast _Gizmo.handleLength__gizmoState : Float), (cast 0.0 : Float));
+        (#if js _Runtime.callValue(appendShapeBeginFill, cast ([({ final __callArgument130:Dynamic = shape; __callArgument130; }), (cast _Gizmo.xAxisColor__gizmoState : Float)] : Array<Dynamic>)) #else appendShapeBeginFill(({ final __callArgument129:Dynamic = shape; __callArgument129; }), (cast _Gizmo.xAxisColor__gizmoState : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+        appendShapePolygon(({ final __callArgument131:Dynamic = shape; __callArgument131; }), ({ final __callArgument132:Dynamic = cast ([_Gizmo.handleLength__gizmoState, 0.0, (_Gizmo.handleLength__gizmoState - _Gizmo.arrowSize__gizmoState), -_Gizmo.arrowSize__gizmoState, (_Gizmo.handleLength__gizmoState - _Gizmo.arrowSize__gizmoState), _Gizmo.arrowSize__gizmoState] : Array<Dynamic>); __callArgument132; }));
+        appendShapeEndFill(({ final __callArgument135:Dynamic = shape; __callArgument135; }));
+        setNodeHitArea(({ final __callArgument137:Dynamic = shape; __callArgument137; }), (cast (cast createRectangle(({ final __callArgument138:Dynamic = _Gizmo.handleCenterSize__gizmoState; __callArgument138; }), ({ final __callArgument139:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument139; }), ({ final __callArgument140:Dynamic = (_Gizmo.handleLength__gizmoState - _Gizmo.handleCenterSize__gizmoState); __callArgument140; }), ({ final __callArgument141:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument141; })) : Rectangle) : Dynamic));
       }
       else if (__switchValue == 'translate-y') {
-        _Gizmo.drawGizmoAxis__gizmoState(({ final __callArgument107:Dynamic = shape; __callArgument107; }), (cast _Gizmo.yAxisColor__gizmoState : Float), (cast 0.0 : Float), (cast -_Gizmo.handleLength__gizmoState : Float));
-        (#if js _Runtime.callValue(appendShapeBeginFill, cast ([({ final __callArgument110:Dynamic = shape; __callArgument110; }), (cast _Gizmo.yAxisColor__gizmoState : Float)] : Array<Dynamic>)) #else appendShapeBeginFill(({ final __callArgument109:Dynamic = shape; __callArgument109; }), (cast _Gizmo.yAxisColor__gizmoState : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-        appendShapePolygon(({ final __callArgument111:Dynamic = shape; __callArgument111; }), ({ final __callArgument112:Dynamic = cast ([0.0, -_Gizmo.handleLength__gizmoState, -_Gizmo.arrowSize__gizmoState, (-_Gizmo.handleLength__gizmoState + _Gizmo.arrowSize__gizmoState), _Gizmo.arrowSize__gizmoState, (-_Gizmo.handleLength__gizmoState + _Gizmo.arrowSize__gizmoState)] : Array<Dynamic>); __callArgument112; }));
-        appendShapeEndFill(({ final __callArgument115:Dynamic = shape; __callArgument115; }));
-        setNodeHitArea(({ final __callArgument117:Dynamic = shape; __callArgument117; }), (cast (cast createRectangle(({ final __callArgument118:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument118; }), ({ final __callArgument119:Dynamic = -_Gizmo.handleLength__gizmoState; __callArgument119; }), ({ final __callArgument120:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument120; }), ({ final __callArgument121:Dynamic = (_Gizmo.handleLength__gizmoState - _Gizmo.handleCenterSize__gizmoState); __callArgument121; })) : Rectangle) : Dynamic));
+        _Gizmo.drawGizmoAxis__gizmoState(({ final __callArgument155:Dynamic = shape; __callArgument155; }), (cast _Gizmo.yAxisColor__gizmoState : Float), (cast 0.0 : Float), (cast -_Gizmo.handleLength__gizmoState : Float));
+        (#if js _Runtime.callValue(appendShapeBeginFill, cast ([({ final __callArgument158:Dynamic = shape; __callArgument158; }), (cast _Gizmo.yAxisColor__gizmoState : Float)] : Array<Dynamic>)) #else appendShapeBeginFill(({ final __callArgument157:Dynamic = shape; __callArgument157; }), (cast _Gizmo.yAxisColor__gizmoState : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+        appendShapePolygon(({ final __callArgument159:Dynamic = shape; __callArgument159; }), ({ final __callArgument160:Dynamic = cast ([0.0, -_Gizmo.handleLength__gizmoState, -_Gizmo.arrowSize__gizmoState, (-_Gizmo.handleLength__gizmoState + _Gizmo.arrowSize__gizmoState), _Gizmo.arrowSize__gizmoState, (-_Gizmo.handleLength__gizmoState + _Gizmo.arrowSize__gizmoState)] : Array<Dynamic>); __callArgument160; }));
+        appendShapeEndFill(({ final __callArgument163:Dynamic = shape; __callArgument163; }));
+        setNodeHitArea(({ final __callArgument165:Dynamic = shape; __callArgument165; }), (cast (cast createRectangle(({ final __callArgument166:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument166; }), ({ final __callArgument167:Dynamic = -_Gizmo.handleLength__gizmoState; __callArgument167; }), ({ final __callArgument168:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument168; }), ({ final __callArgument169:Dynamic = (_Gizmo.handleLength__gizmoState - _Gizmo.handleCenterSize__gizmoState); __callArgument169; })) : Rectangle) : Dynamic));
       }
       else if (__switchValue == 'translate-xy') {
-        appendShapeBeginFill(({ final __callArgument135:Dynamic = shape; __callArgument135; }), (cast _Gizmo.centerColor__gizmoState : Float), (cast 0.9 : Float));
-        appendShapeRectangle(({ final __callArgument137:Dynamic = shape; __callArgument137; }), (cast -_Gizmo.handleCenterSize__gizmoState : Float), (cast -_Gizmo.handleCenterSize__gizmoState : Float), (cast (_Gizmo.handleCenterSize__gizmoState * 2.0) : Float), (cast (_Gizmo.handleCenterSize__gizmoState * 2.0) : Float));
-        appendShapeEndFill(({ final __callArgument139:Dynamic = shape; __callArgument139; }));
-        setNodeHitArea(({ final __callArgument141:Dynamic = shape; __callArgument141; }), (cast (cast createRectangle(({ final __callArgument142:Dynamic = -_Gizmo.handleCenterSize__gizmoState; __callArgument142; }), ({ final __callArgument143:Dynamic = -_Gizmo.handleCenterSize__gizmoState; __callArgument143; }), ({ final __callArgument144:Dynamic = (_Gizmo.handleCenterSize__gizmoState * 2.0); __callArgument144; }), ({ final __callArgument145:Dynamic = (_Gizmo.handleCenterSize__gizmoState * 2.0); __callArgument145; })) : Rectangle) : Dynamic));
+        appendShapeBeginFill(({ final __callArgument183:Dynamic = shape; __callArgument183; }), (cast _Gizmo.centerColor__gizmoState : Float), (cast 0.9 : Float));
+        appendShapeRectangle(({ final __callArgument185:Dynamic = shape; __callArgument185; }), (cast -_Gizmo.handleCenterSize__gizmoState : Float), (cast -_Gizmo.handleCenterSize__gizmoState : Float), (cast (_Gizmo.handleCenterSize__gizmoState * 2.0) : Float), (cast (_Gizmo.handleCenterSize__gizmoState * 2.0) : Float));
+        appendShapeEndFill(({ final __callArgument187:Dynamic = shape; __callArgument187; }));
+        setNodeHitArea(({ final __callArgument189:Dynamic = shape; __callArgument189; }), (cast (cast createRectangle(({ final __callArgument190:Dynamic = -_Gizmo.handleCenterSize__gizmoState; __callArgument190; }), ({ final __callArgument191:Dynamic = -_Gizmo.handleCenterSize__gizmoState; __callArgument191; }), ({ final __callArgument192:Dynamic = (_Gizmo.handleCenterSize__gizmoState * 2.0); __callArgument192; }), ({ final __callArgument193:Dynamic = (_Gizmo.handleCenterSize__gizmoState * 2.0); __callArgument193; })) : Rectangle) : Dynamic));
       }
       else if (__switchValue == 'scale-x') {
-        (#if js _Runtime.callValue(appendShapeBeginFill, cast ([({ final __callArgument160:Dynamic = shape; __callArgument160; }), (cast _Gizmo.xAxisColor__gizmoState : Float)] : Array<Dynamic>)) #else appendShapeBeginFill(({ final __callArgument159:Dynamic = shape; __callArgument159; }), (cast _Gizmo.xAxisColor__gizmoState : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-        appendShapeRectangle(({ final __callArgument161:Dynamic = shape; __callArgument161; }), (cast (-_Gizmo.scaleBoxSize__gizmoState / 2.0) : Float), (cast (-_Gizmo.scaleBoxSize__gizmoState / 2.0) : Float), (cast _Gizmo.scaleBoxSize__gizmoState : Float), (cast _Gizmo.scaleBoxSize__gizmoState : Float));
-        appendShapeEndFill(({ final __callArgument163:Dynamic = shape; __callArgument163; }));
-        setNodeHitArea(({ final __callArgument165:Dynamic = shape; __callArgument165; }), (cast (cast createRectangle(({ final __callArgument166:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument166; }), ({ final __callArgument167:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument167; }), ({ final __callArgument168:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument168; }), ({ final __callArgument169:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument169; })) : Rectangle) : Dynamic));
-      }
-      else if (__switchValue == 'scale-y') {
-        (#if js _Runtime.callValue(appendShapeBeginFill, cast ([({ final __callArgument184:Dynamic = shape; __callArgument184; }), (cast _Gizmo.yAxisColor__gizmoState : Float)] : Array<Dynamic>)) #else appendShapeBeginFill(({ final __callArgument183:Dynamic = shape; __callArgument183; }), (cast _Gizmo.yAxisColor__gizmoState : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-        appendShapeRectangle(({ final __callArgument185:Dynamic = shape; __callArgument185; }), (cast (-_Gizmo.scaleBoxSize__gizmoState / 2.0) : Float), (cast (-_Gizmo.scaleBoxSize__gizmoState / 2.0) : Float), (cast _Gizmo.scaleBoxSize__gizmoState : Float), (cast _Gizmo.scaleBoxSize__gizmoState : Float));
-        appendShapeEndFill(({ final __callArgument187:Dynamic = shape; __callArgument187; }));
-        setNodeHitArea(({ final __callArgument189:Dynamic = shape; __callArgument189; }), (cast (cast createRectangle(({ final __callArgument190:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument190; }), ({ final __callArgument191:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument191; }), ({ final __callArgument192:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument192; }), ({ final __callArgument193:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument193; })) : Rectangle) : Dynamic));
-      }
-      else if (__switchValue == 'scale-xy') {
-        appendShapeBeginFill(({ final __callArgument207:Dynamic = shape; __callArgument207; }), (cast _Gizmo.centerColor__gizmoState : Float), (cast 0.9 : Float));
+        (#if js _Runtime.callValue(appendShapeBeginFill, cast ([({ final __callArgument208:Dynamic = shape; __callArgument208; }), (cast _Gizmo.xAxisColor__gizmoState : Float)] : Array<Dynamic>)) #else appendShapeBeginFill(({ final __callArgument207:Dynamic = shape; __callArgument207; }), (cast _Gizmo.xAxisColor__gizmoState : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
         appendShapeRectangle(({ final __callArgument209:Dynamic = shape; __callArgument209; }), (cast (-_Gizmo.scaleBoxSize__gizmoState / 2.0) : Float), (cast (-_Gizmo.scaleBoxSize__gizmoState / 2.0) : Float), (cast _Gizmo.scaleBoxSize__gizmoState : Float), (cast _Gizmo.scaleBoxSize__gizmoState : Float));
         appendShapeEndFill(({ final __callArgument211:Dynamic = shape; __callArgument211; }));
         setNodeHitArea(({ final __callArgument213:Dynamic = shape; __callArgument213; }), (cast (cast createRectangle(({ final __callArgument214:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument214; }), ({ final __callArgument215:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument215; }), ({ final __callArgument216:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument216; }), ({ final __callArgument217:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument217; })) : Rectangle) : Dynamic));
+      }
+      else if (__switchValue == 'scale-y') {
+        (#if js _Runtime.callValue(appendShapeBeginFill, cast ([({ final __callArgument232:Dynamic = shape; __callArgument232; }), (cast _Gizmo.yAxisColor__gizmoState : Float)] : Array<Dynamic>)) #else appendShapeBeginFill(({ final __callArgument231:Dynamic = shape; __callArgument231; }), (cast _Gizmo.yAxisColor__gizmoState : Float), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+        appendShapeRectangle(({ final __callArgument233:Dynamic = shape; __callArgument233; }), (cast (-_Gizmo.scaleBoxSize__gizmoState / 2.0) : Float), (cast (-_Gizmo.scaleBoxSize__gizmoState / 2.0) : Float), (cast _Gizmo.scaleBoxSize__gizmoState : Float), (cast _Gizmo.scaleBoxSize__gizmoState : Float));
+        appendShapeEndFill(({ final __callArgument235:Dynamic = shape; __callArgument235; }));
+        setNodeHitArea(({ final __callArgument237:Dynamic = shape; __callArgument237; }), (cast (cast createRectangle(({ final __callArgument238:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument238; }), ({ final __callArgument239:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument239; }), ({ final __callArgument240:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument240; }), ({ final __callArgument241:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument241; })) : Rectangle) : Dynamic));
+      }
+      else if (__switchValue == 'scale-xy') {
+        appendShapeBeginFill(({ final __callArgument255:Dynamic = shape; __callArgument255; }), (cast _Gizmo.centerColor__gizmoState : Float), (cast 0.9 : Float));
+        appendShapeRectangle(({ final __callArgument257:Dynamic = shape; __callArgument257; }), (cast (-_Gizmo.scaleBoxSize__gizmoState / 2.0) : Float), (cast (-_Gizmo.scaleBoxSize__gizmoState / 2.0) : Float), (cast _Gizmo.scaleBoxSize__gizmoState : Float), (cast _Gizmo.scaleBoxSize__gizmoState : Float));
+        appendShapeEndFill(({ final __callArgument259:Dynamic = shape; __callArgument259; }));
+        setNodeHitArea(({ final __callArgument261:Dynamic = shape; __callArgument261; }), (cast (cast createRectangle(({ final __callArgument262:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument262; }), ({ final __callArgument263:Dynamic = -_Gizmo.hitThickness__gizmoState; __callArgument263; }), ({ final __callArgument264:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument264; }), ({ final __callArgument265:Dynamic = (_Gizmo.hitThickness__gizmoState * 2.0); __callArgument265; })) : Rectangle) : Dynamic));
       }
     }
   }
 
   public static function drawGizmoRotateHandle__gizmoState(shape:Shape, radius:Float):Void {
-    clearShapeCommands(({ final __callArgument231:Dynamic = shape; __callArgument231; }));
-    (#if js _Runtime.callValue(appendShapeLineStyle, cast ([({ final __callArgument235:Dynamic = shape; __callArgument235; }), (cast 3.0 : Float), (cast _Gizmo.rotateColor__gizmoState : Float), (cast 1.0 : Float), (cast false : Bool), ({ final __callArgument236:Dynamic = 'none'; __callArgument236; })] : Array<Dynamic>)) #else appendShapeLineStyle(({ final __callArgument233:Dynamic = shape; __callArgument233; }), (cast 3.0 : Float), (cast _Gizmo.rotateColor__gizmoState : Float), (cast 1.0 : Float), (cast false : Bool), ({ final __callArgument234:Dynamic = 'none'; __callArgument234; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    appendShapeCircle(({ final __callArgument237:Dynamic = shape; __callArgument237; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast radius : Float));
-    setNodeHitArea(({ final __callArgument239:Dynamic = shape; __callArgument239; }), (cast (cast createRectangle(({ final __callArgument240:Dynamic = (-radius - 6.0); __callArgument240; }), ({ final __callArgument241:Dynamic = (-radius - 6.0); __callArgument241; }), ({ final __callArgument242:Dynamic = ((radius * 2.0) + 12.0); __callArgument242; }), ({ final __callArgument243:Dynamic = ((radius * 2.0) + 12.0); __callArgument243; })) : Rectangle) : Dynamic));
+    clearShapeCommands(({ final __callArgument279:Dynamic = shape; __callArgument279; }));
+    (#if js _Runtime.callValue(appendShapeLineStyle, cast ([({ final __callArgument283:Dynamic = shape; __callArgument283; }), (cast 3.0 : Float), (cast _Gizmo.rotateColor__gizmoState : Float), (cast 1.0 : Float), (cast false : Bool), ({ final __callArgument284:Dynamic = 'none'; __callArgument284; })] : Array<Dynamic>)) #else appendShapeLineStyle(({ final __callArgument281:Dynamic = shape; __callArgument281; }), (cast 3.0 : Float), (cast _Gizmo.rotateColor__gizmoState : Float), (cast 1.0 : Float), (cast false : Bool), ({ final __callArgument282:Dynamic = 'none'; __callArgument282; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    appendShapeCircle(({ final __callArgument285:Dynamic = shape; __callArgument285; }), (cast 0.0 : Float), (cast 0.0 : Float), (cast radius : Float));
+    setNodeHitArea(({ final __callArgument287:Dynamic = shape; __callArgument287; }), (cast (cast createRectangle(({ final __callArgument288:Dynamic = (-radius - 6.0); __callArgument288; }), ({ final __callArgument289:Dynamic = (-radius - 6.0); __callArgument289; }), ({ final __callArgument290:Dynamic = ((radius * 2.0) + 12.0); __callArgument290; }), ({ final __callArgument291:Dynamic = ((radius * 2.0) + 12.0); __callArgument291; })) : Rectangle) : Dynamic));
   }
 
   public static function finishGizmoTransform__gizmoState<NodeType:HierarchyNodeAny>(runtime:GizmoRuntime__gizmoState<NodeType>):Void {
@@ -455,12 +563,12 @@ class _Gizmo {
   }
 
   public static function snapGizmoDelta__gizmoState(value:Float, step:Float):Float {
-    return cast ((cast _Runtime.strictEquals(step, 0.0) : Bool) ? (cast value : Dynamic) : (cast _Runtime.multiplyNumbers(HxMath.round((value / step)), step) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(step, 0.0) : Bool) ? (cast value : Dynamic) : (cast (cast roundTo((cast value : Float), (cast step : Float)) : Float) : Dynamic));
     return cast null;
   }
 
   public static function snapGizmoScale__gizmoState(value:Float, step:Float):Float {
-    return cast ((cast _Runtime.strictEquals(step, 0.0) : Bool) ? (cast value : Dynamic) : (cast (1.0 + _Runtime.multiplyNumbers(HxMath.round(((value - 1.0) / step)), step)) : Dynamic));
+    return cast ((cast _Runtime.strictEquals(step, 0.0) : Bool) ? (cast value : Dynamic) : (cast (1.0 + (cast roundTo((cast (value - 1.0) : Float), (cast step : Float)) : Float)) : Dynamic));
     return cast null;
   }
 
@@ -468,11 +576,12 @@ class _Gizmo {
     var mode:GizmoTransformMode = cast _Runtime.UNDEFINED;
     var active:Null<NodeType> = cast _Runtime.UNDEFINED;
     var axisRotation:Float = cast _Runtime.UNDEFINED;
-    mode = (cast _Gizmo.getGizmoTransformMode__gizmoState(({ final __callArgument257:Dynamic = handle; __callArgument257; })) : GizmoTransformMode);
+    mode = (cast _Gizmo.getGizmoTransformMode__gizmoState(({ final __callArgument305:Dynamic = handle; __callArgument305; })) : GizmoTransformMode);
     if ((cast ((cast ((cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).disposed : Bool) || (cast !_Runtime.strictEquals((cast runtime : GizmoRuntime__gizmoState<NodeType>).drag, null) : Bool)) : Bool) || (cast !_Runtime.strictEquals((cast runtime : GizmoRuntime__gizmoState<NodeType>).mode, mode) : Bool)) : Bool)) { return; }
     active = (cast getActiveNode((cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).selection : Dynamic)) : Null<NodeType>);
     axisRotation = ((cast ((cast _Runtime.strictEquals((cast runtime : GizmoRuntime__gizmoState<NodeType>).space, 'local') : Bool) && (cast !_Runtime.strictEquals(active, null) : Bool)) : Bool) ? (cast _Runtime.callProperty((cast runtime : GizmoRuntime__gizmoState<NodeType>).features, 'getWorldRotation', cast ([active] : Array<Dynamic>)) : Dynamic) : (cast ((cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera : { var rotation:Float; }).rotation * RAD_TO_DEG) : Dynamic));
-    ((cast runtime : GizmoRuntime__gizmoState<NodeType>).drag = { axisRotation: axisRotation, handle: handle, mode: mode, pivotScreenX: (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotScreen : { var x:Float; }).x, pivotScreenY: (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotScreen : { var y:Float; }).y, pointerId: data.pointerId, screenRotation: ((cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).handleRoot : { var rotation:Float; }).rotation * DEG_TO_RAD), startScreenX: data.x, startScreenY: data.y });
+    unprojectCamera2DPoint(({ final __callArgument307:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument307; }), (cast data.x : Float), (cast data.y : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
+    ((cast runtime : GizmoRuntime__gizmoState<NodeType>).drag = { axisRotation: axisRotation, handle: handle, mode: mode, pivotWorldX: (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotWorld : { var x:Float; }).x, pivotWorldY: (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotWorld : { var y:Float; }).y, pivotScreenX: (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotScreen : { var x:Float; }).x, pivotScreenY: (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotScreen : { var y:Float; }).y, pointerId: data.pointerId, screenRotation: ((cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).handleRoot : { var rotation:Float; }).rotation * DEG_TO_RAD), startScreenX: data.x, startScreenY: data.y, startWorldX: (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var x:Float; }).x, startWorldY: (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var y:Float; }).y });
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).signals : GizmoSignals).onTransformBegin]]), 1);
   }
 
@@ -497,7 +606,7 @@ class _Gizmo {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field((cast runtime : GizmoRuntime__gizmoState<NodeType>).handles, 'length') : Float)) : Bool)) {
         var handle:GizmoHandle__gizmoState = flight._internal._StaticIndex.readArray((cast runtime : GizmoRuntime__gizmoState<NodeType>).handles, i);
-        _Gizmo.setGizmoNodeVisible__gizmoState(({ final __callArgument259:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument259; }), (cast _Runtime.strictEquals((cast _Gizmo.getGizmoTransformMode__gizmoState((cast handle : GizmoHandle__gizmoState).kind) : GizmoTransformMode), mode) : Bool));
+        _Gizmo.setGizmoNodeVisible__gizmoState(({ final __callArgument309:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument309; }), (cast _Runtime.strictEquals((cast _Gizmo.getGizmoTransformMode__gizmoState((cast handle : GizmoHandle__gizmoState).kind) : GizmoTransformMode), mode) : Bool));
         i++;
       }
     }
@@ -508,20 +617,20 @@ class _Gizmo {
     var points:Array<Float> = cast _Runtime.UNDEFINED;
     bounds = (cast runtime : GizmoRuntime__gizmoState<NodeType>).bounds;
     points = (cast runtime : GizmoRuntime__gizmoState<NodeType>).outlinePoints;
-    projectCamera2DPoint(({ final __callArgument261:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument261; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
+    projectCamera2DPoint(({ final __callArgument311:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument311; }), (cast bounds.x : Float), (cast bounds.y : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
     flight._internal._StaticIndex.writeFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var x:Float; }).x : Float));
     flight._internal._StaticIndex.writeFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var y:Float; }).y : Float));
-    projectCamera2DPoint(({ final __callArgument263:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument263; }), (cast (bounds.x + bounds.width) : Float), (cast bounds.y : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
+    projectCamera2DPoint(({ final __callArgument313:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument313; }), (cast (bounds.x + bounds.width) : Float), (cast bounds.y : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
     flight._internal._StaticIndex.writeFloatArrayTyped((cast points : Array<Float>), (cast 2.0 : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var x:Float; }).x : Float));
     flight._internal._StaticIndex.writeFloatArrayTyped((cast points : Array<Float>), (cast 3.0 : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var y:Float; }).y : Float));
-    projectCamera2DPoint(({ final __callArgument265:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument265; }), (cast (bounds.x + bounds.width) : Float), (cast (bounds.y + bounds.height) : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
+    projectCamera2DPoint(({ final __callArgument315:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument315; }), (cast (bounds.x + bounds.width) : Float), (cast (bounds.y + bounds.height) : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
     flight._internal._StaticIndex.writeFloatArrayTyped((cast points : Array<Float>), (cast 4.0 : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var x:Float; }).x : Float));
     flight._internal._StaticIndex.writeFloatArrayTyped((cast points : Array<Float>), (cast 5.0 : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var y:Float; }).y : Float));
-    projectCamera2DPoint(({ final __callArgument267:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument267; }), (cast bounds.x : Float), (cast (bounds.y + bounds.height) : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
+    projectCamera2DPoint(({ final __callArgument317:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument317; }), (cast bounds.x : Float), (cast (bounds.y + bounds.height) : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
     flight._internal._StaticIndex.writeFloatArrayTyped((cast points : Array<Float>), (cast 6.0 : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var x:Float; }).x : Float));
     flight._internal._StaticIndex.writeFloatArrayTyped((cast points : Array<Float>), (cast 7.0 : Float), (cast (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var y:Float; }).y : Float));
     clearShapeCommands((cast runtime : GizmoRuntime__gizmoState<NodeType>).outline);
-    (#if js _Runtime.callValue(appendShapeLineStyle, cast ([(cast runtime : GizmoRuntime__gizmoState<NodeType>).outline, (cast 1.0 : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((cast runtime : GizmoRuntime__gizmoState<NodeType>).outlineColor), 8)) & 16777215) : Float), (cast ((_Runtime.toInt32((cast runtime : GizmoRuntime__gizmoState<NodeType>).outlineColor) & 255) / 255.0) : Float), (cast false : Bool), ({ final __callArgument270:Dynamic = 'none'; __callArgument270; })] : Array<Dynamic>)) #else appendShapeLineStyle((cast runtime : GizmoRuntime__gizmoState<NodeType>).outline, (cast 1.0 : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((cast runtime : GizmoRuntime__gizmoState<NodeType>).outlineColor), 8)) & 16777215) : Float), (cast ((_Runtime.toInt32((cast runtime : GizmoRuntime__gizmoState<NodeType>).outlineColor) & 255) / 255.0) : Float), (cast false : Bool), ({ final __callArgument269:Dynamic = 'none'; __callArgument269; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    (#if js _Runtime.callValue(appendShapeLineStyle, cast ([(cast runtime : GizmoRuntime__gizmoState<NodeType>).outline, (cast 1.0 : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((cast runtime : GizmoRuntime__gizmoState<NodeType>).outlineColor), 8)) & 16777215) : Float), (cast ((_Runtime.toInt32((cast runtime : GizmoRuntime__gizmoState<NodeType>).outlineColor) & 255) / 255.0) : Float), (cast false : Bool), ({ final __callArgument320:Dynamic = 'none'; __callArgument320; })] : Array<Dynamic>)) #else appendShapeLineStyle((cast runtime : GizmoRuntime__gizmoState<NodeType>).outline, (cast 1.0 : Float), (cast (_Runtime.toInt32(_Runtime.unsignedShiftRight(_Runtime.toInt32((cast runtime : GizmoRuntime__gizmoState<NodeType>).outlineColor), 8)) & 16777215) : Float), (cast ((_Runtime.toInt32((cast runtime : GizmoRuntime__gizmoState<NodeType>).outlineColor) & 255) / 255.0) : Float), (cast false : Bool), ({ final __callArgument319:Dynamic = 'none'; __callArgument319; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
     appendShapeMoveTo((cast runtime : GizmoRuntime__gizmoState<NodeType>).outline, (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 0.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 1.0 : Float)) : Float));
     appendShapeLineTo((cast runtime : GizmoRuntime__gizmoState<NodeType>).outline, (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 2.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 3.0 : Float)) : Float));
     appendShapeLineTo((cast runtime : GizmoRuntime__gizmoState<NodeType>).outline, (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 4.0 : Float)) : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast points : Array<Float>), (cast 5.0 : Float)) : Float));
@@ -571,21 +680,21 @@ class _Gizmo {
         if ((cast _Runtime.strictEquals((cast handle : GizmoHandle__gizmoState).placement, 'rotate') : Bool)) {
           _Gizmo.drawGizmoRotateHandle__gizmoState((cast handle : GizmoHandle__gizmoState).node, (cast rotateRadius : Float));
         } else { if ((cast _Runtime.strictEquals((cast handle : GizmoHandle__gizmoState).placement, 'scale-east') : Bool)) {
-          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument271:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument271; }), (cast maxX : Float), (cast centerY : Float), (cast 0.0 : Float));
+          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument321:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument321; }), (cast maxX : Float), (cast centerY : Float), (cast 0.0 : Float));
         } else { if ((cast _Runtime.strictEquals((cast handle : GizmoHandle__gizmoState).placement, 'scale-west') : Bool)) {
-          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument273:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument273; }), (cast minX : Float), (cast centerY : Float), (cast 0.0 : Float));
+          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument323:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument323; }), (cast minX : Float), (cast centerY : Float), (cast 0.0 : Float));
         } else { if ((cast _Runtime.strictEquals((cast handle : GizmoHandle__gizmoState).placement, 'scale-north') : Bool)) {
-          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument275:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument275; }), (cast centerX : Float), (cast minY : Float), (cast 0.0 : Float));
+          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument325:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument325; }), (cast centerX : Float), (cast minY : Float), (cast 0.0 : Float));
         } else { if ((cast _Runtime.strictEquals((cast handle : GizmoHandle__gizmoState).placement, 'scale-south') : Bool)) {
-          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument277:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument277; }), (cast centerX : Float), (cast maxY : Float), (cast 0.0 : Float));
+          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument327:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument327; }), (cast centerX : Float), (cast maxY : Float), (cast 0.0 : Float));
         } else { if ((cast _Runtime.strictEquals((cast handle : GizmoHandle__gizmoState).placement, 'scale-northeast') : Bool)) {
-          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument279:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument279; }), (cast maxX : Float), (cast minY : Float), (cast 0.0 : Float));
+          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument329:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument329; }), (cast maxX : Float), (cast minY : Float), (cast 0.0 : Float));
         } else { if ((cast _Runtime.strictEquals((cast handle : GizmoHandle__gizmoState).placement, 'scale-northwest') : Bool)) {
-          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument281:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument281; }), (cast minX : Float), (cast minY : Float), (cast 0.0 : Float));
+          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument331:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument331; }), (cast minX : Float), (cast minY : Float), (cast 0.0 : Float));
         } else { if ((cast _Runtime.strictEquals((cast handle : GizmoHandle__gizmoState).placement, 'scale-southeast') : Bool)) {
-          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument283:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument283; }), (cast maxX : Float), (cast maxY : Float), (cast 0.0 : Float));
+          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument333:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument333; }), (cast maxX : Float), (cast maxY : Float), (cast 0.0 : Float));
         } else { if ((cast _Runtime.strictEquals((cast handle : GizmoHandle__gizmoState).placement, 'scale-southwest') : Bool)) {
-          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument285:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument285; }), (cast minX : Float), (cast maxY : Float), (cast 0.0 : Float));
+          _Gizmo.setGizmoNodeTransform__gizmoState(({ final __callArgument335:Dynamic = (cast handle : GizmoHandle__gizmoState).node; __callArgument335; }), (cast minX : Float), (cast maxY : Float), (cast 0.0 : Float));
         } } } } } } } } }
         i++;
       }
@@ -653,18 +762,21 @@ class _Gizmo {
     var sin:Float = cast _Runtime.UNDEFINED;
     var localX:Float = cast _Runtime.UNDEFINED;
     var localY:Float = cast _Runtime.UNDEFINED;
-    unprojectCamera2DPoint(({ final __callArgument287:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument287; }), (cast _Runtime.field(drag, 'startScreenX') : Float), (cast _Runtime.field(drag, 'startScreenY') : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotWorld);
-    unprojectCamera2DPoint(({ final __callArgument289:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument289; }), (cast screenX : Float), (cast screenY : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
-    deltaX = ((cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var x:Float; }).x - (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotWorld : { var x:Float; }).x);
-    deltaY = ((cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var y:Float; }).y - (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).pivotWorld : { var y:Float; }).y);
+    unprojectCamera2DPoint(({ final __callArgument337:Dynamic = (cast runtime : GizmoRuntime__gizmoState<NodeType>).camera; __callArgument337; }), (cast screenX : Float), (cast screenY : Float), (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint);
+    deltaX = _Runtime.subtractNumbers((cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var x:Float; }).x, _Runtime.field(drag, 'startWorldX'));
+    deltaY = _Runtime.subtractNumbers((cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).scratchPoint : { var y:Float; }).y, _Runtime.field(drag, 'startWorldY'));
     radians = _Runtime.multiplyNumbers(_Runtime.field(drag, 'axisRotation'), DEG_TO_RAD);
     cos = HxMath.cos(radians);
     sin = HxMath.sin(radians);
     localX = ((deltaX * cos) + (deltaY * sin));
     localY = ((-deltaX * sin) + (deltaY * cos));
     if ((cast _Runtime.strictEquals(_Runtime.field(drag, 'handle'), 'translate-x') : Bool)) { (localY = cast (0.0 : Dynamic)); } else { if ((cast _Runtime.strictEquals(_Runtime.field(drag, 'handle'), 'translate-y') : Bool)) { (localX = cast (0.0 : Dynamic)); } }
-    (localX = cast ((cast _Gizmo.snapGizmoDelta__gizmoState((cast localX : Float), (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).snapTranslate : Float)) : Float) : Dynamic));
-    (localY = cast ((cast _Gizmo.snapGizmoDelta__gizmoState((cast localY : Float), (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).snapTranslate : Float)) : Float) : Dynamic));
+    if ((cast !_Runtime.strictEquals((cast runtime : GizmoRuntime__gizmoState<NodeType>).snapTranslate, 0.0) : Bool)) {
+      var pivotLocalX:Float = (_Runtime.multiplyNumbers(_Runtime.field(drag, 'pivotWorldX'), cos) + _Runtime.multiplyNumbers(_Runtime.field(drag, 'pivotWorldY'), sin));
+      var pivotLocalY:Float = (_Runtime.multiplyNumbers(-_Runtime.field(drag, 'pivotWorldX'), sin) + _Runtime.multiplyNumbers(_Runtime.field(drag, 'pivotWorldY'), cos));
+      if ((cast !_Runtime.strictEquals(_Runtime.field(drag, 'handle'), 'translate-y') : Bool)) { (localX = cast (((cast roundTo((cast (pivotLocalX + localX) : Float), (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).snapTranslate : Float)) : Float) - pivotLocalX) : Dynamic)); }
+      if ((cast !_Runtime.strictEquals(_Runtime.field(drag, 'handle'), 'translate-x') : Bool)) { (localY = cast (((cast roundTo((cast (pivotLocalY + localY) : Float), (cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).snapTranslate : Float)) : Float) - pivotLocalY) : Dynamic)); }
+    }
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast (cast runtime : GizmoRuntime__gizmoState<NodeType>).signals : GizmoSignals).onTranslate], [((localX * cos) - (localY * sin))], [((localX * sin) + (localY * cos))]]), 1);
   }
 
@@ -698,13 +810,13 @@ class _Gizmo {
   }
 
   public static function getNode2DGizmoWorldBoundsRectangle__node2dGizmoFeatures(out:Rectangle, node:Node2D):Bool {
-    copyRectangle(({ final __callArgument291:Dynamic = out; __callArgument291; }), ({ final __callArgument292:Dynamic = (cast getNodeWorldBoundsRectangle((cast node : Dynamic)) : Rectangle); __callArgument292; }));
+    copyRectangle(({ final __callArgument339:Dynamic = out; __callArgument339; }), ({ final __callArgument340:Dynamic = (cast getNodeWorldBoundsRectangle((cast node : Dynamic)) : Rectangle); __callArgument340; }));
     return cast true;
     return cast null;
   }
 
   public static function getNode2DGizmoWorldOrigin__node2dGizmoFeatures(out:Vector2Like, node:Node2D):Void {
-    matrixTransformPointXY(({ final __callArgument295:Dynamic = out; __callArgument295; }), ({ final __callArgument296:Dynamic = (cast getNodeWorldMatrix((cast node : Dynamic)) : Matrix); __callArgument296; }), (cast _Runtime.field(node, 'pivotX') : Float), (cast _Runtime.field(node, 'pivotY') : Float));
+    matrixTransformPointXY(({ final __callArgument343:Dynamic = out; __callArgument343; }), ({ final __callArgument344:Dynamic = (cast getNodeWorldMatrix((cast node : Dynamic)) : Matrix); __callArgument344; }), (cast _Runtime.field(node, 'pivotX') : Float), (cast _Runtime.field(node, 'pivotY') : Float));
   }
 
   public static function getNode2DGizmoWorldRotation__node2dGizmoFeatures(node:Node2D):Float {

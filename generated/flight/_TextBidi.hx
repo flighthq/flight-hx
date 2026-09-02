@@ -106,12 +106,12 @@ class _TextBidi {
 
   public static final _rangeCount__bidiClassBackend:Float = _Runtime.divideNumbers(_Runtime.field(_TextBidi._ranges__bidiClassBackend, 'length'), 3.0);
 
-  public static function getBidiRuns(text:String, baseDirection:BidiDirection):Array<BidiRun> {
+  public static function getBidiRuns(text:String, baseDirection:BidiDirection, ?bidiClassBackend:BidiClassBackend):Array<BidiRun> {
     var levels:flight._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var runs:Array<BidiRun> = cast _Runtime.UNDEFINED;
     var length:Float = cast _Runtime.UNDEFINED;
     var start:Float = cast _Runtime.UNDEFINED;
-    levels = (cast resolveBidiLevels((cast text : String), ({ final __callArgument0:Dynamic = baseDirection; __callArgument0; })) : flight._internal._UInt8Array);
+    levels = (cast resolveBidiLevels((cast text : String), ({ final __callArgument0:Dynamic = baseDirection; __callArgument0; }), ({ final __callArgument1:Dynamic = bidiClassBackend; __callArgument1; })) : flight._internal._UInt8Array);
     runs = (cast cast ([] : Array<Dynamic>));
     length = _Runtime.field(levels, 'length');
     start = 0.0;
@@ -179,7 +179,7 @@ class _TextBidi {
     }
   }
 
-  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection):flight._internal._UInt8Array {
+  public static function resolveBidiLevels(text:String, baseDirection:BidiDirection, ?bidiClassBackend:BidiClassBackend):flight._internal._UInt8Array {
     var length:Float = cast _Runtime.UNDEFINED;
     var levels:flight._internal._UInt8Array = cast _Runtime.UNDEFINED;
     var backend:BidiClassBackend = cast _Runtime.UNDEFINED;
@@ -192,7 +192,7 @@ class _TextBidi {
     length = _Runtime.field(text, 'length');
     levels = new flight._internal._UInt8Array(length);
     if ((cast _Runtime.strictEquals(length, 0.0) : Bool)) { return cast levels; }
-    backend = (cast getBidiClassBackend() : BidiClassBackend);
+    backend = _Runtime.coalesce(bidiClassBackend, function():Dynamic return cast (cast getBidiClassBackend() : BidiClassBackend));
     original = _Runtime.createArray(length);
     {
       var i:Float = 0.0;
@@ -207,15 +207,15 @@ class _TextBidi {
         i++;
       }
     }
-    paragraphLevel = ((cast _Runtime.strictEquals(baseDirection, 'ltr') : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(baseDirection, 'rtl') : Bool) ? (cast 1.0 : Dynamic) : (cast (cast _TextBidi.computeParagraphLevel__resolveBidiLevels(({ final __callArgument2:Dynamic = original; __callArgument2; }), (cast 0.0 : Float), (cast length : Float)) : Float) : Dynamic)) : Dynamic));
+    paragraphLevel = ((cast _Runtime.strictEquals(baseDirection, 'ltr') : Bool) ? (cast 0.0 : Dynamic) : (cast ((cast _Runtime.strictEquals(baseDirection, 'rtl') : Bool) ? (cast 1.0 : Dynamic) : (cast (cast _TextBidi.computeParagraphLevel__resolveBidiLevels(({ final __callArgument4:Dynamic = original; __callArgument4; }), (cast 0.0 : Float), (cast length : Float)) : Float) : Dynamic)) : Dynamic));
     matchingPdi = _Runtime.fill(new flight._internal._Int32Array(length), length, 0, null, 1);
     matchingInitiator = _Runtime.fill(new flight._internal._Int32Array(length), -1.0, 0, null, 1);
-    _TextBidi.pairIsolates__resolveBidiLevels(({ final __callArgument4:Dynamic = original; __callArgument4; }), ({ final __callArgument5:Dynamic = matchingPdi; __callArgument5; }), ({ final __callArgument6:Dynamic = matchingInitiator; __callArgument6; }));
+    _TextBidi.pairIsolates__resolveBidiLevels(({ final __callArgument6:Dynamic = original; __callArgument6; }), ({ final __callArgument7:Dynamic = matchingPdi; __callArgument7; }), ({ final __callArgument8:Dynamic = matchingInitiator; __callArgument8; }));
     working = _Runtime.slice(original, 0, null);
     levelArray = _Runtime.createArray(length);
-    _TextBidi.applyExplicitLevels__resolveBidiLevels(({ final __callArgument10:Dynamic = original; __callArgument10; }), ({ final __callArgument11:Dynamic = working; __callArgument11; }), ({ final __callArgument12:Dynamic = levelArray; __callArgument12; }), ({ final __callArgument13:Dynamic = matchingPdi; __callArgument13; }), (cast paragraphLevel : Float));
-    _TextBidi.resolveIsolatingRunSequences__resolveBidiLevels(({ final __callArgument18:Dynamic = original; __callArgument18; }), ({ final __callArgument19:Dynamic = working; __callArgument19; }), ({ final __callArgument20:Dynamic = levelArray; __callArgument20; }), ({ final __callArgument21:Dynamic = matchingPdi; __callArgument21; }), ({ final __callArgument22:Dynamic = matchingInitiator; __callArgument22; }), (cast paragraphLevel : Float));
-    _TextBidi.applyLineReset__resolveBidiLevels(({ final __callArgument28:Dynamic = original; __callArgument28; }), ({ final __callArgument29:Dynamic = levelArray; __callArgument29; }), (cast paragraphLevel : Float));
+    _TextBidi.applyExplicitLevels__resolveBidiLevels(({ final __callArgument12:Dynamic = original; __callArgument12; }), ({ final __callArgument13:Dynamic = working; __callArgument13; }), ({ final __callArgument14:Dynamic = levelArray; __callArgument14; }), ({ final __callArgument15:Dynamic = matchingPdi; __callArgument15; }), (cast paragraphLevel : Float));
+    _TextBidi.resolveIsolatingRunSequences__resolveBidiLevels(({ final __callArgument20:Dynamic = original; __callArgument20; }), ({ final __callArgument21:Dynamic = working; __callArgument21; }), ({ final __callArgument22:Dynamic = levelArray; __callArgument22; }), ({ final __callArgument23:Dynamic = matchingPdi; __callArgument23; }), ({ final __callArgument24:Dynamic = matchingInitiator; __callArgument24; }), (cast paragraphLevel : Float));
+    _TextBidi.applyLineReset__resolveBidiLevels(({ final __callArgument30:Dynamic = original; __callArgument30; }), ({ final __callArgument31:Dynamic = levelArray; __callArgument31; }), (cast paragraphLevel : Float));
     {
       var i:Float = 0.0;
       while ((cast ((cast i : Float) < (cast length : Float)) : Bool)) {
@@ -309,7 +309,7 @@ class _TextBidi {
               flight._internal._StaticIndex.writeFloatArrayTyped((cast levelArray : Array<Float>), (cast i : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast stackLevel : Array<Float>), (cast top : Float)) : Float));
               if ((cast !_Runtime.strictEquals(flight._internal._StaticIndex.readArray(stackOverride, top), null) : Bool)) { flight._internal._StaticIndex.writeArray(working, i, (cast flight._internal._StaticIndex.readArray(stackOverride, top) : BidiClass)); }
               var asRtl:Bool = _Runtime.strictEquals(t, 'RLI');
-              if ((cast _Runtime.strictEquals(t, 'FSI') : Bool)) { (asRtl = cast (_Runtime.strictEquals((cast _TextBidi.computeParagraphLevel__resolveBidiLevels(({ final __callArgument32:Dynamic = original; __callArgument32; }), (cast (i + 1.0) : Float), (cast flight._internal._StaticIndex.readInt32ArrayTyped((cast matchingPdi : flight._internal._Int32Array), (cast i : Float)) : Float)) : Float), 1.0) : Dynamic)); }
+              if ((cast _Runtime.strictEquals(t, 'FSI') : Bool)) { (asRtl = cast (_Runtime.strictEquals((cast _TextBidi.computeParagraphLevel__resolveBidiLevels(({ final __callArgument34:Dynamic = original; __callArgument34; }), (cast (i + 1.0) : Float), (cast flight._internal._StaticIndex.readInt32ArrayTyped((cast matchingPdi : flight._internal._Int32Array), (cast i : Float)) : Float)) : Float), 1.0) : Dynamic)); }
               var newLevel:Float = ((cast asRtl : Bool) ? (cast (cast _TextBidi.nextOdd__resolveBidiLevels((cast flight._internal._StaticIndex.readFloatArrayTyped((cast stackLevel : Array<Float>), (cast top : Float)) : Float)) : Float) : Dynamic) : (cast (cast _TextBidi.nextEven__resolveBidiLevels((cast flight._internal._StaticIndex.readFloatArrayTyped((cast stackLevel : Array<Float>), (cast top : Float)) : Float)) : Float) : Dynamic));
               if ((cast ((cast ((cast ((cast newLevel : Float) <= (cast MAX_DEPTH : Float)) : Bool) && (cast _Runtime.strictEquals(overflowIsolate, 0.0) : Bool)) : Bool) && (cast _Runtime.strictEquals(overflowEmbedding, 0.0) : Bool)) : Bool)) {
                 validIsolate++;
@@ -459,7 +459,7 @@ class _TextBidi {
             }
           }
         }
-        _TextBidi.resolveSequence__resolveBidiLevels(({ final __callArgument34:Dynamic = original; __callArgument34; }), ({ final __callArgument35:Dynamic = working; __callArgument35; }), ({ final __callArgument36:Dynamic = levelArray; __callArgument36; }), ({ final __callArgument37:Dynamic = kept; __callArgument37; }), ({ final __callArgument38:Dynamic = sequence; __callArgument38; }), (cast keptStart : Float), (cast keptEnd : Float), ({ final __callArgument39:Dynamic = matchingPdi; __callArgument39; }), (cast paragraphLevel : Float));
+        _TextBidi.resolveSequence__resolveBidiLevels(({ final __callArgument36:Dynamic = original; __callArgument36; }), ({ final __callArgument37:Dynamic = working; __callArgument37; }), ({ final __callArgument38:Dynamic = levelArray; __callArgument38; }), ({ final __callArgument39:Dynamic = kept; __callArgument39; }), ({ final __callArgument40:Dynamic = sequence; __callArgument40; }), (cast keptStart : Float), (cast keptEnd : Float), ({ final __callArgument41:Dynamic = matchingPdi; __callArgument41; }), (cast paragraphLevel : Float));
         r++;
       }
     }

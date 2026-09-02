@@ -4,4 +4,4 @@ package flight.types;
 import Math as HxMath;
 import flight._internal._Runtime;
 
-typedef GuiTransitionProperty = String;
+typedef GuiTransitionProperty = NodeInteractiveStateProperty;

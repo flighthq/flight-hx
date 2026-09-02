@@ -10,6 +10,18 @@ import flight.types.Spring3D;
 import flight.types.SpringConfig;
 
 class Spring {
+  public static function applySpringImpulse(spring:flight.types.Spring, velocity:Float):Void {
+    Facade_Spring_flight__Spring.applySpringImpulse(spring, velocity);
+  }
+
+  public static function applySpringImpulse2D(spring2D:Spring2D, velocityX:Float, velocityY:Float):Void {
+    Facade_Spring_flight__Spring.applySpringImpulse2D(spring2D, velocityX, velocityY);
+  }
+
+  public static function applySpringImpulse3D(spring3D:Spring3D, velocityX:Float, velocityY:Float, velocityZ:Float):Void {
+    Facade_Spring_flight__Spring.applySpringImpulse3D(spring3D, velocityX, velocityY, velocityZ);
+  }
+
   public static function createSpring(?value:Float, ?velocity:Float):flight.types.Spring {
     return cast Facade_Spring_flight__Spring.createSpring(value, velocity);
     return cast null;
@@ -54,6 +66,20 @@ class Spring {
     Facade_Spring_flight__Spring.resetSpring(spring, value, velocity);
   }
 
+  public static function resetSpring2D(spring2D:Spring2D, valueX:Float, valueY:Float, ?velocityX:Float, ?velocityY:Float):Void {
+    Facade_Spring_flight__Spring.resetSpring2D(spring2D, valueX, valueY, velocityX, velocityY);
+  }
+
+  public static function resetSpring3D(spring3D:Spring3D, valueX:Float, valueY:Float, valueZ:Float, ?velocityX:Float, ?velocityY:Float, ?velocityZ:Float):Void {
+    Facade_Spring_flight__Spring.resetSpring3D(spring3D, valueX, valueY, valueZ, velocityX, velocityY, velocityZ);
+  }
+
+  public static final SpringPresetBouncy:SpringConfig = Facade_Spring_flight__Spring.SpringPresetBouncy;
+
+  public static final SpringPresetGentle:SpringConfig = Facade_Spring_flight__Spring.SpringPresetGentle;
+
+  public static final SpringPresetStiff:SpringConfig = Facade_Spring_flight__Spring.SpringPresetStiff;
+
   public static function updateSpring(spring:flight.types.Spring, target:Float, config:SpringConfig, deltaTime:Float):Void {
     Facade_Spring_flight__Spring.updateSpring(spring, target, config, deltaTime);
   }
@@ -64,5 +90,9 @@ class Spring {
 
   public static function updateSpring3D(spring3D:Spring3D, targetX:Float, targetY:Float, targetZ:Float, config:SpringConfig, deltaTime:Float):Void {
     Facade_Spring_flight__Spring.updateSpring3D(spring3D, targetX, targetY, targetZ, config, deltaTime);
+  }
+
+  public static function updateSpringAngle(spring:flight.types.Spring, target:Float, fullTurn:Float, config:SpringConfig, deltaTime:Float):Void {
+    Facade_Spring_flight__Spring.updateSpringAngle(spring, target, fullTurn, config, deltaTime);
   }
 }

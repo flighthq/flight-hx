@@ -5,11 +5,48 @@ import Math as HxMath;
 import flight._internal._Runtime;
 import flight.types.Signal;
 import flight.types.SignalConnectOptions;
+import flight.types.SignalConnection;
 import flight.types.SignalData;
+import flight.types.SignalScope;
 import flight.types.SignalThrottleOptions;
+import flight.types.SignalTrackedConnectOptions;
 
 @:noCompletion
 class _Signals {
+  public static function connectSignalTracked<T>(signal:Signal<T>, slot:T, ?options:SignalTrackedConnectOptions):SignalConnection<T> {
+    var connection:SignalConnection<T> = cast _Runtime.UNDEFINED;
+    var once:Bool = cast _Runtime.UNDEFINED;
+    var trackedSlot:T = cast _Runtime.UNDEFINED;
+    var priority:Null<Float> = cast _Runtime.UNDEFINED;
+    connection = (cast { connected: true, paused: false, signal: signal, slot: slot });
+    once = _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var once:Null<Bool>; }).once; }), function():Dynamic return cast false);
+    trackedSlot = (cast (cast _Runtime.haxeRest(function(...args:Dynamic):Void {
+      if ((cast (cast connection : SignalConnection<T>).paused : Bool)) { return; }
+      if ((cast once : Bool)) { disconnectSignalConnection((cast connection : Dynamic)); }
+      _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(args)]));
+    }, 0) : flight._internal._Any) : T);
+    ((cast connection : { var slot:T; }).slot = trackedSlot);
+    priority = ({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var priority:Null<Float>; }).priority; });
+    connectSignal((cast signal : Dynamic), (cast trackedSlot : Dynamic), (cast ((cast _Runtime.strictEquals(priority, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast { priority: priority } : Dynamic)) : Dynamic));
+    _Runtime.callOptionalProperty(({ final __structural5 = ({ final __structural4 = options; __structural4 == null ? _Runtime.UNDEFINED : (cast __structural4 : { @:optional var scope:Null<SignalScope>; }).scope; }); __structural5 == null ? _Runtime.UNDEFINED : (cast __structural5 : { var connections:Array<SignalConnection<Array<flight._internal._Any>->Void>>; }).connections; }), 'push', cast ([(cast (cast connection : flight._internal._Any) : SignalConnection<Array<flight._internal._Any>->Void>)] : Array<Dynamic>));
+    return cast connection;
+    return cast null;
+  }
+
+  public static function disconnectSignalConnection<T>(connection:SignalConnection<T>):Void {
+    if ((cast !(cast (cast connection : SignalConnection<T>).connected : Bool) : Bool)) { return; }
+    ((cast connection : SignalConnection<T>).connected = false);
+    disconnectSignal((cast (cast connection : SignalConnection<T>).signal : Dynamic), (cast (cast connection : SignalConnection<T>).slot : Dynamic));
+  }
+
+  public static function pauseSignalConnection<T>(connection:SignalConnection<T>):Void {
+    if ((cast (cast connection : SignalConnection<T>).connected : Bool)) { ((cast connection : SignalConnection<T>).paused = true); }
+  }
+
+  public static function resumeSignalConnection<T>(connection:SignalConnection<T>):Void {
+    if ((cast (cast connection : SignalConnection<T>).connected : Bool)) { ((cast connection : SignalConnection<T>).paused = false); }
+  }
+
   public static function cancelSignal<T>(signal:Signal<T>):Void {
     if ((cast !_Runtime.strictEquals(signal.data, null) : Bool)) { ((cast signal.data : { var cancelled:Bool; }).cancelled = cast (true : Bool)); }
   }
@@ -21,6 +58,104 @@ class _Signals {
   public static final nullSignalEmit:Void->Void = (cast function():Void {
 
   });
+
+  public static function emitSignalSafe<T>(signal:Signal<T>, ...args:Dynamic):Void {
+    var data:Null<SignalData<T>> = cast _Runtime.UNDEFINED;
+    var slots:Array<Null<T>> = cast _Runtime.UNDEFINED;
+    var priorities:Array<Float> = cast _Runtime.UNDEFINED;
+    var repeat:Array<Bool> = cast _Runtime.UNDEFINED;
+    data = signal.data;
+    if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
+    slots = _Runtime.slice(data.slots, 0, null);
+    priorities = _Runtime.slice(data.priorities, 0, null);
+    repeat = _Runtime.slice(data.repeat, 0, null);
+    (data.cancelled = cast (false : Bool));
+    data.depth++;
+    try {
+      try {
+        {
+          var i:Float = 0.0;
+          while ((cast ((cast i : Float) < (cast _Runtime.field(slots, 'length') : Float)) : Bool)) {
+            var slot:Null<T> = flight._internal._StaticIndex.readArray(slots, i);
+            if ((cast _Runtime.strictEquals(slot, null) : Bool)) { i++; continue; }
+            if ((cast !(cast flight._internal._StaticIndex.readArray(repeat, i) : Bool) : Bool)) { _Signals.tombstoneOnceSlot__safe((cast data : Dynamic), (cast slot : Dynamic), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast priorities : Array<Float>), (cast i : Float)) : Float)); }
+            _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(args)]));
+            if ((cast data.cancelled : Bool)) { break; }
+            i++;
+          }
+        }
+      } catch (__error:Dynamic) { _Runtime.throwValue(__error); }
+    } catch (__finallyError6:Dynamic) {
+      {
+        data.depth--;
+        if ((cast _Runtime.strictEquals(data.depth, 0.0) : Bool)) { _Signals.compactSignalData__safe((cast signal : Dynamic), (cast data : Dynamic)); }
+      }
+      _Runtime.throwValue(__finallyError6);
+    }
+    {
+      data.depth--;
+      if ((cast _Runtime.strictEquals(data.depth, 0.0) : Bool)) { _Signals.compactSignalData__safe((cast signal : Dynamic), (cast data : Dynamic)); }
+    }
+  }
+
+  public static function tombstoneOnceSlot__safe<T>(data:SignalData<T>, slot:T, priority:Float):Void {
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(data.slots, 'length') : Float)) : Bool)) {
+        if ((cast ((cast ((cast !_Runtime.strictEquals(flight._internal._StaticIndex.readArray(data.slots, i), slot) : Bool) || (cast flight._internal._StaticIndex.readArray(data.repeat, i) : Bool)) : Bool) || (cast !_Runtime.strictEquals(flight._internal._StaticIndex.readFloatArrayTyped((cast data.priorities : Array<Float>), (cast i : Float)), priority) : Bool)) : Bool)) { i++; continue; }
+        flight._internal._StaticIndex.writeArray(data.slots, i, null);
+        return;
+        i++;
+      }
+    }
+  }
+
+  public static function compactSignalData__safe<T>(signal:Signal<T>, data:SignalData<T>):Void {
+    var write:Float = cast _Runtime.UNDEFINED;
+    write = 0.0;
+    {
+      var read:Float = 0.0;
+      while ((cast ((cast read : Float) < (cast _Runtime.field(data.slots, 'length') : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(flight._internal._StaticIndex.readArray(data.slots, read), null) : Bool)) { read++; continue; }
+        if ((cast !_Runtime.strictEquals(write, read) : Bool)) {
+          flight._internal._StaticIndex.writeArray(data.slots, write, flight._internal._StaticIndex.readArray(data.slots, read));
+          flight._internal._StaticIndex.writeFloatArrayTyped((cast data.priorities : Array<Float>), (cast write : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data.priorities : Array<Float>), (cast read : Float)) : Float));
+          flight._internal._StaticIndex.writeArray(data.repeat, write, flight._internal._StaticIndex.readArray(data.repeat, read));
+        }
+        write++;
+        read++;
+      }
+    }
+    if ((cast _Runtime.strictEquals(write, _Runtime.field(data.slots, 'length')) : Bool)) { return; }
+    _Runtime.setLength(data.slots, write);
+    _Runtime.setLength(data.priorities, write);
+    _Runtime.setLength(data.repeat, write);
+    if ((cast ((cast _Runtime.strictEquals(write, 0.0) : Bool) && (cast _Runtime.strictEquals(signal.data, data) : Bool)) : Bool)) {
+      (signal.emit = cast ((cast (cast nullSignalEmit : flight._internal._Any) : T) : T));
+      (signal.data = cast (null : Null<SignalData<T>>));
+    }
+  }
+
+  public static function createSignalScope():SignalScope {
+    return cast { connections: cast ([] : Array<Dynamic>) };
+    return cast null;
+  }
+
+  public static function disconnectSignalScope(scope:SignalScope):Void {
+    var members:Array<SignalConnection<Array<flight._internal._Any>->Void>> = cast _Runtime.UNDEFINED;
+    var pending:Array<SignalConnection<Array<flight._internal._Any>->Void>> = cast _Runtime.UNDEFINED;
+    members = (cast scope : SignalScope).connections;
+    if ((cast _Runtime.strictEquals(_Runtime.field(members, 'length'), 0.0) : Bool)) { return; }
+    pending = _Runtime.slice(members, 0, null);
+    _Runtime.setLength(members, 0.0);
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(pending, 'length') : Float)) : Bool)) {
+        disconnectSignalConnection((cast flight._internal._StaticIndex.readArray(pending, i) : Dynamic));
+        i++;
+      }
+    }
+  }
 
   public static function createSignal<T>():Signal<T> {
     return cast { emit: (cast (cast nullSignalEmit : flight._internal._Any) : T), data: null };
@@ -36,8 +171,8 @@ class _Signals {
     var priority:Float = cast _Runtime.UNDEFINED;
     var repeat:Bool = cast _Runtime.UNDEFINED;
     var data:SignalData<T> = cast _Runtime.UNDEFINED;
-    priority = _Runtime.coalesce(({ final __structural0 = options; __structural0 == null ? _Runtime.UNDEFINED : (cast __structural0 : { @:optional var priority:Null<Float>; }).priority; }), function():Dynamic return cast 0.0);
-    repeat = !(cast _Runtime.coalesce(({ final __structural1 = options; __structural1 == null ? _Runtime.UNDEFINED : (cast __structural1 : { @:optional var once:Null<Bool>; }).once; }), function():Dynamic return cast false) : Bool);
+    priority = _Runtime.coalesce(({ final __structural7 = options; __structural7 == null ? _Runtime.UNDEFINED : (cast __structural7 : { @:optional var priority:Null<Float>; }).priority; }), function():Dynamic return cast 0.0);
+    repeat = !(cast _Runtime.coalesce(({ final __structural8 = options; __structural8 == null ? _Runtime.UNDEFINED : (cast __structural8 : { @:optional var once:Null<Bool>; }).once; }), function():Dynamic return cast false) : Bool);
     _Signals.initSignal__slot((cast signal : Dynamic));
     data = signal.data;
     {
@@ -59,58 +194,110 @@ class _Signals {
 
   public static function disconnectSignal<T>(signal:Signal<T>, slot:T):Void {
     var data:Null<SignalData<T>> = cast _Runtime.UNDEFINED;
+    var dispatching:Bool = cast _Runtime.UNDEFINED;
     var i:Float = cast _Runtime.UNDEFINED;
     data = signal.data;
     if ((cast _Runtime.strictEquals(data, null) : Bool)) { return; }
+    dispatching = ((cast data.depth : Float) > (cast 0.0 : Float));
     i = _Runtime.field(data.slots, 'length');
     while ((cast ((cast --i : Float) >= (cast 0.0 : Float)) : Bool)) {
-      if ((cast _Runtime.strictEquals(flight._internal._StaticIndex.readArray(data.slots, i), slot) : Bool)) {
-        _Runtime.splice(data.slots, Std.int(i), Std.int(1.0), []);
-        _Runtime.splice(data.priorities, Std.int(i), Std.int(1.0), []);
-        _Runtime.splice(data.repeat, Std.int(i), Std.int(1.0), []);
+      if ((cast !_Runtime.strictEquals(flight._internal._StaticIndex.readArray(data.slots, i), slot) : Bool)) { continue; }
+      if ((cast dispatching : Bool)) {
+        flight._internal._StaticIndex.writeArray(data.slots, i, null);
+        continue;
       }
+      _Runtime.splice(data.slots, Std.int(i), Std.int(1.0), []);
+      _Runtime.splice(data.priorities, Std.int(i), Std.int(1.0), []);
+      _Runtime.splice(data.repeat, Std.int(i), Std.int(1.0), []);
     }
-    if ((cast _Runtime.strictEquals(_Runtime.field(data.slots, 'length'), 0.0) : Bool)) {
+    if ((cast ((cast !(cast dispatching : Bool) : Bool) && (cast _Runtime.strictEquals(_Runtime.field(data.slots, 'length'), 0.0) : Bool)) : Bool)) {
       (signal.emit = cast ((cast (cast nullSignalEmit : flight._internal._Any) : T) : T));
       (signal.data = cast (null : Null<SignalData<T>>));
     }
   }
 
   public static function hasSignalSlots<T>(signal:Signal<T>):Bool {
-    return cast ((cast !_Runtime.strictEquals(signal.data, null) : Bool) && (cast ((cast _Runtime.field((cast signal.data : { var slots:Array<T>; }).slots, 'length') : Float) > (cast 0.0 : Float)) : Bool));
+    var data:Null<SignalData<T>> = cast _Runtime.UNDEFINED;
+    data = signal.data;
+    if ((cast _Runtime.strictEquals(data, null) : Bool)) { return cast false; }
+    if ((cast _Runtime.strictEquals(data.depth, 0.0) : Bool)) { return cast ((cast _Runtime.field(data.slots, 'length') : Float) > (cast 0.0 : Float)); }
+    return cast ((cast (cast _Signals.countLiveSlots__slot((cast data : Dynamic)) : Float) : Float) > (cast 0.0 : Float));
     return cast null;
   }
 
   public static function initSignal__slot<T>(signal:Signal<T>):Void {
     var data:SignalData<T> = cast _Runtime.UNDEFINED;
     if ((cast !_Runtime.strictEquals(signal.data, null) : Bool)) { return; }
-    data = (cast { slots: cast ([] : Array<Dynamic>), priorities: cast ([] : Array<Dynamic>), repeat: cast ([] : Array<Dynamic>), cancelled: false });
+    data = (cast { slots: cast ([] : Array<Dynamic>), priorities: cast ([] : Array<Dynamic>), repeat: cast ([] : Array<Dynamic>), cancelled: false, depth: 0.0 });
     (signal.data = cast (data : Null<SignalData<T>>));
-    (signal.emit = cast ((cast _Signals.makeDispatch__slot((cast data : Dynamic)) : T) : T));
+    (signal.emit = cast ((cast _Signals.makeDispatch__slot((cast signal : Dynamic), (cast data : Dynamic)) : T) : T));
   }
 
   public static function isSlotConnected<T>(signal:Signal<T>, slot:T):Bool {
-    return cast ((cast !_Runtime.strictEquals(signal.data, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callProperty((cast signal.data : { var slots:Array<T>; }).slots, 'indexOf', cast ([slot] : Array<Dynamic>)), -1.0) : Bool));
+    return cast ((cast !_Runtime.strictEquals(signal.data, null) : Bool) && (cast !_Runtime.strictEquals(_Runtime.callProperty((cast signal.data : { var slots:Array<Null<T>>; }).slots, 'indexOf', cast ([slot] : Array<Dynamic>)), -1.0) : Bool));
     return cast null;
   }
 
-  public static function makeDispatch__slot<T>(data:SignalData<T>):T {
+  public static function makeDispatch__slot<T>(signal:Signal<T>, data:SignalData<T>):T {
     return cast (cast (cast _Runtime.haxeRest(function(...args:flight._internal._Any):Void {
       var i:Float = cast _Runtime.UNDEFINED;
       (data.cancelled = cast (false : Bool));
+      data.depth++;
       i = 0.0;
       while ((cast ((cast i : Float) < (cast _Runtime.field(data.slots, 'length') : Float)) : Bool)) {
-        _Runtime.apply(flight._internal._StaticIndex.readArray(data.slots, i), _Runtime.concatArrays([_Runtime.toArray(args)]));
-        if ((cast data.cancelled : Bool)) { break; }
-        if ((cast !(cast flight._internal._StaticIndex.readArray(data.repeat, i) : Bool) : Bool)) {
-          _Runtime.splice(data.slots, Std.int(i), Std.int(1.0), []);
-          _Runtime.splice(data.priorities, Std.int(i), Std.int(1.0), []);
-          _Runtime.splice(data.repeat, Std.int(i), Std.int(1.0), []);
-        } else {
+        var slot:Null<T> = flight._internal._StaticIndex.readArray(data.slots, i);
+        if ((cast _Runtime.strictEquals(slot, null) : Bool)) {
           i++;
+          continue;
         }
+        _Runtime.apply(slot, _Runtime.concatArrays([_Runtime.toArray(args)]));
+        if ((cast data.cancelled : Bool)) { break; }
+        if ((cast !(cast flight._internal._StaticIndex.readArray(data.repeat, i) : Bool) : Bool)) { flight._internal._StaticIndex.writeArray(data.slots, i, null); }
+        i++;
       }
+      data.depth--;
+      if ((cast _Runtime.strictEquals(data.depth, 0.0) : Bool)) { _Signals.compactSignalData__slot((cast signal : Dynamic), (cast data : Dynamic)); }
     }, 0) : flight._internal._Any) : T);
+    return cast null;
+  }
+
+  public static function compactSignalData__slot<T>(signal:Signal<T>, data:SignalData<T>):Void {
+    var write:Float = cast _Runtime.UNDEFINED;
+    write = 0.0;
+    {
+      var read:Float = 0.0;
+      while ((cast ((cast read : Float) < (cast _Runtime.field(data.slots, 'length') : Float)) : Bool)) {
+        if ((cast _Runtime.strictEquals(flight._internal._StaticIndex.readArray(data.slots, read), null) : Bool)) { read++; continue; }
+        if ((cast !_Runtime.strictEquals(write, read) : Bool)) {
+          flight._internal._StaticIndex.writeArray(data.slots, write, flight._internal._StaticIndex.readArray(data.slots, read));
+          flight._internal._StaticIndex.writeFloatArrayTyped((cast data.priorities : Array<Float>), (cast write : Float), (cast flight._internal._StaticIndex.readFloatArrayTyped((cast data.priorities : Array<Float>), (cast read : Float)) : Float));
+          flight._internal._StaticIndex.writeArray(data.repeat, write, flight._internal._StaticIndex.readArray(data.repeat, read));
+        }
+        write++;
+        read++;
+      }
+    }
+    if ((cast _Runtime.strictEquals(write, _Runtime.field(data.slots, 'length')) : Bool)) { return; }
+    _Runtime.setLength(data.slots, write);
+    _Runtime.setLength(data.priorities, write);
+    _Runtime.setLength(data.repeat, write);
+    if ((cast ((cast _Runtime.strictEquals(write, 0.0) : Bool) && (cast _Runtime.strictEquals(signal.data, data) : Bool)) : Bool)) {
+      (signal.emit = cast ((cast (cast nullSignalEmit : flight._internal._Any) : T) : T));
+      (signal.data = cast (null : Null<SignalData<T>>));
+    }
+  }
+
+  public static function countLiveSlots__slot<T>(data:SignalData<T>):Float {
+    var live:Float = cast _Runtime.UNDEFINED;
+    live = 0.0;
+    {
+      var i:Float = 0.0;
+      while ((cast ((cast i : Float) < (cast _Runtime.field(data.slots, 'length') : Float)) : Bool)) {
+        if ((cast !_Runtime.strictEquals(flight._internal._StaticIndex.readArray(data.slots, i), null) : Bool)) { live++; }
+        i++;
+      }
+    }
+    return cast live;
     return cast null;
   }
 
@@ -127,8 +314,8 @@ class _Signals {
         (elapsed = cast (_Runtime.fmod(elapsed, period) : Dynamic));
       }
     });
-    (#if js _Runtime.callValue(connectSignal, cast ([({ final __callArgument4:Dynamic = source; __callArgument4; }), ({ final __callArgument5:Dynamic = handler; __callArgument5; })] : Array<Dynamic>)) #else connectSignal(({ final __callArgument2:Dynamic = source; __callArgument2; }), ({ final __callArgument3:Dynamic = handler; __callArgument3; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
-    return cast function():Void { (cast disconnectSignal : Signal<Float->Void>->(Float->Void)->Void)(({ final __callArgument6:Dynamic = source; __callArgument6; }), ({ final __callArgument7:Dynamic = handler; __callArgument7; })); };
+    (#if js _Runtime.callValue(connectSignal, cast ([({ final __callArgument11:Dynamic = source; __callArgument11; }), ({ final __callArgument12:Dynamic = handler; __callArgument12; })] : Array<Dynamic>)) #else connectSignal(({ final __callArgument9:Dynamic = source; __callArgument9; }), ({ final __callArgument10:Dynamic = handler; __callArgument10; }), #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end);
+    return cast function():Void { (cast disconnectSignal : Signal<Float->Void>->(Float->Void)->Void)(({ final __callArgument13:Dynamic = source; __callArgument13; }), ({ final __callArgument14:Dynamic = handler; __callArgument14; })); };
     return cast null;
   }
 
@@ -140,8 +327,8 @@ class _Signals {
     var leadingFired:Bool = cast _Runtime.UNDEFINED;
     var clearTimer:Void->Void = cast _Runtime.UNDEFINED;
     var handler:T = cast _Runtime.UNDEFINED;
-    leading = _Runtime.coalesce(({ final __typedStruct10 = options; __typedStruct10 == null ? _Runtime.UNDEFINED : __typedStruct10.leading; }), function():Dynamic return cast false);
-    trailing = _Runtime.coalesce(({ final __typedStruct11 = options; __typedStruct11 == null ? _Runtime.UNDEFINED : __typedStruct11.trailing; }), function():Dynamic return cast true);
+    leading = _Runtime.coalesce(({ final __typedStruct17 = options; __typedStruct17 == null ? _Runtime.UNDEFINED : __typedStruct17.leading; }), function():Dynamic return cast false);
+    trailing = _Runtime.coalesce(({ final __typedStruct18 = options; __typedStruct18 == null ? _Runtime.UNDEFINED : __typedStruct18.trailing; }), function():Dynamic return cast true);
     timer = null;
     lastArgs = null;
     leadingFired = false;
@@ -184,8 +371,8 @@ class _Signals {
     var clearTrailing:Void->Void = cast _Runtime.UNDEFINED;
     var scheduleTrailing:Float->Void = cast _Runtime.UNDEFINED;
     var handler:T = cast _Runtime.UNDEFINED;
-    leading = _Runtime.coalesce(({ final __typedStruct12 = options; __typedStruct12 == null ? _Runtime.UNDEFINED : __typedStruct12.leading; }), function():Dynamic return cast true);
-    trailing = _Runtime.coalesce(({ final __typedStruct13 = options; __typedStruct13 == null ? _Runtime.UNDEFINED : __typedStruct13.trailing; }), function():Dynamic return cast true);
+    leading = _Runtime.coalesce(({ final __typedStruct19 = options; __typedStruct19 == null ? _Runtime.UNDEFINED : __typedStruct19.leading; }), function():Dynamic return cast true);
+    trailing = _Runtime.coalesce(({ final __typedStruct20 = options; __typedStruct20 == null ? _Runtime.UNDEFINED : __typedStruct20.trailing; }), function():Dynamic return cast true);
     lastFiredAt = -HxMath.POSITIVE_INFINITY;
     trailingTimer = null;
     lastArgs = null;

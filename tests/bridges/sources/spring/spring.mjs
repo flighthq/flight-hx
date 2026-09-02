@@ -5,7 +5,9 @@ const api = compiled.flight._Spring;
 function __syncDependencies() {}
 __syncDependencies();
 
+export const applySpringImpulse = api.applySpringImpulse;
 export const createSpring = api.createSpring;
 export const isSpringSettled = api.isSpringSettled;
 export const resetSpring = api.resetSpring;
 export const updateSpring = api.updateSpring;
+export const updateSpringAngle = api.updateSpringAngle;

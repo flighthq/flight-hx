@@ -138,6 +138,7 @@ export const Node2DAnimationPathY = compiled.flight.Types.Node2DAnimationPathY;
 export const Node2DTraitsKey = compiled.flight.Types.Node2DTraitsKey;
 export const Node3DKind = compiled.flight.Types.Node3DKind;
 export const Node3DTraitsKey = compiled.flight.Types.Node3DTraitsKey;
+export const NodeInteractiveStateRefusalReason = compiled.flight.Types.NodeInteractiveStateRefusalReason;
 export const NodeKind = compiled.flight.Types.NodeKind;
 export const NormalMaterialKind = compiled.flight.Types.NormalMaterialKind;
 export const NullScene3D = compiled.flight.Types.NullScene3D;

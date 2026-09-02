@@ -13,4 +13,5 @@ export const openShellPath = api.openShellPath;
 export const readShellShortcutLink = api.readShellShortcutLink;
 export const revealShellPath = api.revealShellPath;
 export const shellBeep = api.shellBeep;
+export const spawnShellProcess = api.spawnShellProcess;
 export const writeShellShortcutLink = api.writeShellShortcutLink;

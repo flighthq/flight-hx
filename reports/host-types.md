@@ -1,31 +1,31 @@
 # Host Type Census
 
-Upstream commit: `b3bb4bf61833f7723e7033dd5c732e91a6601400`
+Upstream commit: `98a7a58a934f55555a561a308cc23c1363c45652`
 
 Host identities are derived from the TypeScript checker and their ambient declaration origins. Every emitted identity maps mechanically to `flight._internal.dom.<SameTypeName>`; this census is descriptive, not an eligibility list.
 
 | Metric | Count |
 | --- | ---: |
 | Host types | 237 |
-| Type references | 5849 |
-| Member accesses | 2888 |
-| Reads | 1058 |
-| Writes | 419 |
-| Calls | 1411 |
+| Type references | 6046 |
+| Member accesses | 3044 |
+| Reads | 1127 |
+| Writes | 420 |
+| Calls | 1497 |
 
 | Host type | Ambient declarations | Type refs | Arities | Members | Reads | Writes | Calls |
 | --- | --- | ---: | --- | ---: | ---: | ---: | ---: |
 | `AbortController` | `node_modules/@types/node/web-globals/abortcontroller.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 14 | 0 | 2 | 11 | 0 | 15 |
-| `AbortSignal` | `node_modules/@types/node/web-globals/abortcontroller.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 125 | 0 | 5 | 23 | 0 | 19 |
+| `AbortSignal` | `node_modules/@types/node/web-globals/abortcontroller.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 232 | 0 | 5 | 91 | 0 | 86 |
 | `AddEventListenerOptions` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `AudioBuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 24 | 0 | 6 | 11 | 0 | 4 |
 | `AudioBufferSourceNode` | `node_modules/typescript/lib/lib.dom.d.ts` | 15 | 0 | 7 | 1 | 5 | 8 |
-| `AudioContext` | `node_modules/typescript/lib/lib.dom.d.ts` | 29 | 0 | 8 | 6 | 0 | 8 |
+| `AudioContext` | `node_modules/typescript/lib/lib.dom.d.ts` | 29 | 0 | 8 | 6 | 0 | 9 |
 | `AudioDestinationNode` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 0 | 0 | 0 | 0 |
 | `AudioNode` | `node_modules/typescript/lib/lib.dom.d.ts` | 9 | 0 | 0 | 0 | 0 | 0 |
-| `AudioParam` | `node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 3 | 0 | 4 | 2 | 9 | 6 |
+| `AudioParam` | `node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 3 | 0 | 4 | 2 | 10 | 6 |
 | `BeforeUnloadEvent` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 2 | 0 | 1 | 1 |
-| `Blob` | `node_modules/@types/node/buffer.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 35 | 0 | 3 | 2 | 0 | 7 |
+| `Blob` | `node_modules/@types/node/buffer.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 37 | 0 | 3 | 2 | 0 | 7 |
 | `BodyInit` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `CSSStyleDeclaration` | `node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 32 | 0 | 35 | 6 | 120 | 0 |
 | `CanvasFillRule` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
@@ -61,12 +61,12 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `EventListenerObject` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `EventListenerOptions` | `node_modules/@types/node/web-globals/events.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `EventTarget` | `node_modules/@types/node/web-globals/events.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 14 | 0 | 2 | 0 | 0 | 28 |
-| `File` | `node_modules/@types/node/buffer.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 17 | 0 | 8 | 8 | 0 | 11 |
+| `File` | `node_modules/@types/node/buffer.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 23 | 0 | 8 | 8 | 0 | 11 |
 | `FileList` | `node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 4 | 0 | 1 | 1 | 0 | 0 |
 | `FileReader` | `node_modules/typescript/lib/lib.dom.d.ts` | 8 | 0 | 5 | 6 | 6 | 3 |
 | `FileSystemDirectoryHandle` | `node_modules/typescript/lib/lib.dom.asynciterable.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 18 | 0 | 3 | 0 | 0 | 4 |
 | `FileSystemFileHandle` | `node_modules/typescript/lib/lib.dom.d.ts` | 10 | 0 | 2 | 2 | 0 | 11 |
-| `FileSystemWritableFileStream` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 3 | 0 | 0 | 3 |
+| `FileSystemWritableFileStream` | `node_modules/typescript/lib/lib.dom.d.ts` | 4 | 0 | 3 | 0 | 0 | 6 |
 | `FileSystemWriteChunkType` | `node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `FontFace` | `node_modules/typescript/lib/lib.dom.d.ts` | 34 | 0 | 1 | 0 | 0 | 1 |
 | `FontFaceSet` | `node_modules/typescript/lib/lib.dom.d.ts`<br>`node_modules/typescript/lib/lib.dom.iterable.d.ts` | 2 | 0 | 4 | 1 | 0 | 3 |
@@ -74,16 +74,16 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `GPU` | `node_modules/@webgpu/types/dist/index.d.ts` | 8 | 0 | 2 | 0 | 0 | 2 |
 | `GPUAdapter` | `node_modules/@webgpu/types/dist/index.d.ts` | 12 | 0 | 3 | 4 | 0 | 1 |
 | `GPUAllowSharedBufferSource` | `node_modules/@webgpu/types/dist/index.d.ts` | 2 | 0 | 1 | 2 | 0 | 0 |
-| `GPUBindGroup` | `node_modules/@webgpu/types/dist/index.d.ts` | 209 | 0 | 0 | 0 | 0 | 0 |
+| `GPUBindGroup` | `node_modules/@webgpu/types/dist/index.d.ts` | 212 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBindGroupEntry` | `node_modules/@webgpu/types/dist/index.d.ts` | 13 | 0 | 1 | 0 | 2 | 0 |
-| `GPUBindGroupLayout` | `node_modules/@webgpu/types/dist/index.d.ts` | 281 | 0 | 0 | 0 | 0 | 0 |
+| `GPUBindGroupLayout` | `node_modules/@webgpu/types/dist/index.d.ts` | 288 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBindGroupLayoutEntry` | `node_modules/@webgpu/types/dist/index.d.ts` | 10 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBlendComponent` | `node_modules/@webgpu/types/dist/index.d.ts` | 3 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBlendFactor` | `node_modules/@webgpu/types/dist/index.d.ts` | 2 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBlendOperation` | `node_modules/@webgpu/types/dist/index.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
-| `GPUBlendState` | `node_modules/@webgpu/types/dist/index.d.ts` | 62 | 0 | 0 | 0 | 0 | 0 |
-| `GPUBuffer` | `node_modules/@webgpu/types/dist/index.d.ts` | 275 | 0 | 7 | 3 | 0 | 23 |
-| `GPUBufferBinding` | `node_modules/@webgpu/types/dist/index.d.ts` | 10 | 0 | 0 | 0 | 0 | 0 |
+| `GPUBlendState` | `node_modules/@webgpu/types/dist/index.d.ts` | 68 | 0 | 0 | 0 | 0 | 0 |
+| `GPUBuffer` | `node_modules/@webgpu/types/dist/index.d.ts` | 276 | 0 | 7 | 3 | 0 | 23 |
+| `GPUBufferBinding` | `node_modules/@webgpu/types/dist/index.d.ts` | 11 | 0 | 0 | 0 | 0 | 0 |
 | `GPUBufferDescriptor` | `node_modules/@webgpu/types/dist/index.d.ts` | 6 | 0 | 2 | 2 | 0 | 0 |
 | `GPUBufferUsage` | `node_modules/@webgpu/types/dist/index.d.ts` | 0 | 0 | 6 | 71 | 0 | 0 |
 | `GPUCanvasContext` | `node_modules/@webgpu/types/dist/index.d.ts` | 13 | 0 | 3 | 0 | 0 | 3 |
@@ -95,31 +95,31 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `GPUCopyExternalImageDestInfo` | `node_modules/@webgpu/types/dist/index.d.ts` | 4 | 0 | 0 | 0 | 0 | 0 |
 | `GPUCopyExternalImageSource` | `node_modules/@webgpu/types/dist/index.d.ts` | 8 | 0 | 0 | 0 | 0 | 0 |
 | `GPUCopyExternalImageSourceInfo` | `node_modules/@webgpu/types/dist/index.d.ts` | 4 | 0 | 0 | 0 | 0 | 0 |
-| `GPUDevice` | `node_modules/@webgpu/types/dist/index.d.ts` | 98 | 0 | 14 | 62 | 0 | 248 |
+| `GPUDevice` | `node_modules/@webgpu/types/dist/index.d.ts` | 99 | 0 | 14 | 62 | 0 | 253 |
 | `GPUDeviceDescriptor` | `node_modules/@webgpu/types/dist/index.d.ts` | 2 | 0 | 2 | 0 | 2 | 0 |
 | `GPUDeviceLostInfo` | `node_modules/@webgpu/types/dist/index.d.ts` | 14 | 0 | 1 | 1 | 0 | 0 |
 | `GPUExtent3D` | `node_modules/@webgpu/types/dist/index.d.ts` | 3 | 0 | 0 | 0 | 0 | 0 |
 | `GPUExtent3DDict` | `node_modules/@webgpu/types/dist/index.d.ts` | 7 | 0 | 3 | 3 | 0 | 0 |
 | `GPUExtent3DDictStrict` | `node_modules/@webgpu/types/dist/index.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
-| `GPUExternalTexture` | `node_modules/@webgpu/types/dist/index.d.ts` | 10 | 0 | 0 | 0 | 0 | 0 |
+| `GPUExternalTexture` | `node_modules/@webgpu/types/dist/index.d.ts` | 11 | 0 | 0 | 0 | 0 | 0 |
 | `GPUFeatureName` | `node_modules/@webgpu/types/dist/index.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
-| `GPUFilterMode` | `node_modules/@webgpu/types/dist/index.d.ts` | 14 | 0 | 0 | 0 | 0 | 0 |
+| `GPUFilterMode` | `node_modules/@webgpu/types/dist/index.d.ts` | 15 | 0 | 0 | 0 | 0 | 0 |
 | `GPUIndexFormat` | `node_modules/@webgpu/types/dist/index.d.ts` | 2 | 0 | 0 | 0 | 0 | 0 |
 | `GPULoadOp` | `node_modules/@webgpu/types/dist/index.d.ts` | 6 | 0 | 0 | 0 | 0 | 0 |
 | `GPUMapMode` | `node_modules/@webgpu/types/dist/index.d.ts` | 0 | 0 | 1 | 1 | 0 | 0 |
-| `GPUMipmapFilterMode` | `node_modules/@webgpu/types/dist/index.d.ts` | 4 | 0 | 0 | 0 | 0 | 0 |
+| `GPUMipmapFilterMode` | `node_modules/@webgpu/types/dist/index.d.ts` | 5 | 0 | 0 | 0 | 0 | 0 |
 | `GPUOrigin3D` | `node_modules/@webgpu/types/dist/index.d.ts` | 3 | 0 | 0 | 0 | 0 | 0 |
 | `GPUOrigin3DDict` | `node_modules/@webgpu/types/dist/index.d.ts` | 6 | 0 | 0 | 0 | 0 | 0 |
-| `GPUPipelineLayout` | `node_modules/@webgpu/types/dist/index.d.ts` | 60 | 0 | 0 | 0 | 0 | 0 |
+| `GPUPipelineLayout` | `node_modules/@webgpu/types/dist/index.d.ts` | 62 | 0 | 0 | 0 | 0 | 0 |
 | `GPUPowerPreference` | `node_modules/@webgpu/types/dist/index.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `GPUPrimitiveTopology` | `node_modules/@webgpu/types/dist/index.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `GPUQueue` | `node_modules/@webgpu/types/dist/index.d.ts` | 37 | 0 | 4 | 0 | 0 | 51 |
-| `GPURenderPassEncoder` | `node_modules/@webgpu/types/dist/index.d.ts` | 110 | 0 | 10 | 0 | 0 | 155 |
-| `GPURenderPipeline` | `node_modules/@webgpu/types/dist/index.d.ts` | 120 | 0 | 0 | 0 | 0 | 0 |
+| `GPURenderPassEncoder` | `node_modules/@webgpu/types/dist/index.d.ts` | 114 | 0 | 10 | 0 | 0 | 161 |
+| `GPURenderPipeline` | `node_modules/@webgpu/types/dist/index.d.ts` | 123 | 0 | 0 | 0 | 0 | 0 |
 | `GPURenderPipelineDescriptor` | `node_modules/@webgpu/types/dist/index.d.ts` | 8 | 0 | 0 | 0 | 0 | 0 |
-| `GPUSampler` | `node_modules/@webgpu/types/dist/index.d.ts` | 222 | 0 | 0 | 0 | 0 | 0 |
+| `GPUSampler` | `node_modules/@webgpu/types/dist/index.d.ts` | 235 | 0 | 0 | 0 | 0 | 0 |
 | `GPUSamplerDescriptor` | `node_modules/@webgpu/types/dist/index.d.ts` | 2 | 0 | 2 | 0 | 2 | 0 |
-| `GPUShaderModule` | `node_modules/@webgpu/types/dist/index.d.ts` | 156 | 0 | 0 | 0 | 0 | 0 |
+| `GPUShaderModule` | `node_modules/@webgpu/types/dist/index.d.ts` | 160 | 0 | 0 | 0 | 0 | 0 |
 | `GPUShaderStage` | `node_modules/@webgpu/types/dist/index.d.ts` | 0 | 0 | 2 | 109 | 0 | 0 |
 | `GPUStencilFaceState` | `node_modules/@webgpu/types/dist/index.d.ts` | 9 | 0 | 0 | 0 | 0 | 0 |
 | `GPUStencilOperation` | `node_modules/@webgpu/types/dist/index.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
@@ -127,11 +127,11 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `GPUSupportedLimits` | `node_modules/@webgpu/types/dist/index.d.ts` | 7 | 0 | 3 | 9 | 0 | 0 |
 | `GPUTexelCopyBufferLayout` | `node_modules/@webgpu/types/dist/index.d.ts` | 7 | 0 | 3 | 3 | 0 | 0 |
 | `GPUTexelCopyTextureInfo` | `node_modules/@webgpu/types/dist/index.d.ts` | 7 | 0 | 1 | 1 | 0 | 0 |
-| `GPUTexture` | `node_modules/@webgpu/types/dist/index.d.ts` | 162 | 0 | 5 | 5 | 0 | 68 |
+| `GPUTexture` | `node_modules/@webgpu/types/dist/index.d.ts` | 163 | 0 | 5 | 5 | 0 | 68 |
 | `GPUTextureDescriptor` | `node_modules/@webgpu/types/dist/index.d.ts` | 7 | 0 | 6 | 6 | 0 | 0 |
-| `GPUTextureFormat` | `node_modules/@webgpu/types/dist/index.d.ts` | 59 | 0 | 0 | 0 | 0 | 0 |
+| `GPUTextureFormat` | `node_modules/@webgpu/types/dist/index.d.ts` | 60 | 0 | 0 | 0 | 0 | 0 |
 | `GPUTextureUsage` | `node_modules/@webgpu/types/dist/index.d.ts` | 0 | 0 | 4 | 67 | 0 | 0 |
-| `GPUTextureView` | `node_modules/@webgpu/types/dist/index.d.ts` | 297 | 0 | 0 | 0 | 0 | 0 |
+| `GPUTextureView` | `node_modules/@webgpu/types/dist/index.d.ts` | 305 | 0 | 0 | 0 | 0 | 0 |
 | `GPUVertexBufferLayout` | `node_modules/@webgpu/types/dist/index.d.ts` | 23 | 0 | 0 | 0 | 0 | 0 |
 | `GainNode` | `node_modules/typescript/lib/lib.dom.d.ts` | 25 | 0 | 3 | 14 | 0 | 11 |
 | `Gamepad` | `node_modules/typescript/lib/lib.dom.d.ts` | 5 | 0 | 5 | 20 | 0 | 0 |
@@ -201,7 +201,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `PositionOptions` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 0 | 0 | 0 | 0 |
 | `Process` | `node_modules/@types/node/process.d.ts` | 1 | 0 | 0 | 0 | 0 | 0 |
 | `ProgressEvent` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 1 | 0 | 0 | 0 | 0 |
-| `ReadableStream` | `node_modules/@types/node/stream/web.d.ts`<br>`node_modules/typescript/lib/lib.dom.asynciterable.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 10 | 1 | 1 | 1 | 0 | 1 |
+| `ReadableStream` | `node_modules/@types/node/stream/web.d.ts`<br>`node_modules/typescript/lib/lib.dom.asynciterable.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 15 | 1 | 1 | 1 | 0 | 1 |
 | `ReadableStreamDefaultReader` | `node_modules/@types/node/stream/web.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 1 | 1 | 1 | 0 | 0 | 1 |
 | `RequestInit` | `node_modules/@types/node/web-globals/fetch.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 4 | 0 | 4 | 0 |
 | `ResizeObserver` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 2 | 0 | 0 | 4 |
@@ -211,7 +211,7 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `Screen` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 7 | 17 | 0 | 0 |
 | `ScreenOrientation` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 2 | 0 | 0 | 2 |
 | `ShareData` | `node_modules/typescript/lib/lib.dom.d.ts` | 11 | 0 | 3 | 0 | 3 | 0 |
-| `StereoPannerNode` | `node_modules/typescript/lib/lib.dom.d.ts` | 7 | 0 | 3 | 2 | 0 | 2 |
+| `StereoPannerNode` | `node_modules/typescript/lib/lib.dom.d.ts` | 12 | 0 | 3 | 3 | 0 | 4 |
 | `Storage` | `node_modules/@types/node/web-globals/storage.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 6 | 1 | 0 | 7 |
 | `StorageEstimate` | `node_modules/typescript/lib/lib.dom.d.ts` | 2 | 0 | 2 | 2 | 0 | 0 |
 | `StorageEvent` | `node_modules/typescript/lib/lib.dom.d.ts` | 3 | 0 | 4 | 5 | 0 | 0 |
@@ -244,11 +244,11 @@ Host identities are derived from the TypeScript checker and their ambient declar
 | `WebGLRenderbuffer` | `node_modules/typescript/lib/lib.dom.d.ts` | 11 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLRenderingContext` | `node_modules/typescript/lib/lib.dom.d.ts` | 5 | 0 | 2 | 0 | 0 | 3 |
 | `WebGLShader` | `node_modules/typescript/lib/lib.dom.d.ts` | 4 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLTexture` | `node_modules/typescript/lib/lib.dom.d.ts` | 422 | 0 | 0 | 0 | 0 | 0 |
-| `WebGLUniformLocation` | `node_modules/typescript/lib/lib.dom.d.ts` | 375 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLTexture` | `node_modules/typescript/lib/lib.dom.d.ts` | 427 | 0 | 0 | 0 | 0 | 0 |
+| `WebGLUniformLocation` | `node_modules/typescript/lib/lib.dom.d.ts` | 378 | 0 | 0 | 0 | 0 | 0 |
 | `WebGLVertexArrayObject` | `node_modules/typescript/lib/lib.dom.d.ts` | 34 | 0 | 0 | 0 | 0 | 0 |
 | `WebSocket` | `node_modules/@types/node/web-globals/fetch.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 1 | 0 | 8 | 1 | 5 | 2 |
 | `WheelEvent` | `node_modules/typescript/lib/lib.dom.d.ts` | 6 | 0 | 3 | 2 | 0 | 1 |
 | `Window` | `node_modules/typescript/lib/lib.dom.d.ts` | 40 | 0 | 21 | 44 | 0 | 61 |
-| `WritableStream` | `node_modules/@types/node/stream/web.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 10 | 1 | 1 | 0 | 0 | 1 |
-| `WritableStreamDefaultWriter` | `node_modules/@types/node/stream/web.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 1 | 1 | 3 | 0 | 0 | 3 |
+| `WritableStream` | `node_modules/@types/node/stream/web.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 14 | 1 | 1 | 0 | 0 | 1 |
+| `WritableStreamDefaultWriter` | `node_modules/@types/node/stream/web.d.ts`<br>`node_modules/typescript/lib/lib.dom.d.ts` | 1 | 1 | 3 | 0 | 0 | 5 |

@@ -5,6 +5,7 @@ __syncDependencies();
 
 export * from './buttonController.mjs';
 export * from './comboBoxController.mjs';
+export * from './guiDialog.mjs';
 export * from './progressBarController.mjs';
 export * from './radioGroupController.mjs';
 export * from './scrollBarController.mjs';
