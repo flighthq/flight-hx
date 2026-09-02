@@ -17,8 +17,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyOuterGlowEffectToCanvas(...args) { __syncDependencies(); const result = api.applyOuterGlowEffectToCanvas(...args); return result; }
+const __bridgeImplementation_applyOuterGlowEffectToCanvas = api.applyOuterGlowEffectToCanvas;
+export function applyOuterGlowEffectToCanvas(...args) { __syncDependencies(); const result = __bridgeImplementation_applyOuterGlowEffectToCanvas(...args); return result; }
+api.applyOuterGlowEffectToCanvas = applyOuterGlowEffectToCanvas;
+compiled.flight.EffectsCanvas.applyOuterGlowEffectToCanvas = applyOuterGlowEffectToCanvas;
 const __bridgeImplementation_defaultCanvasOuterGlowEffectRunner = api.defaultCanvasOuterGlowEffectRunner;
 export function defaultCanvasOuterGlowEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultCanvasOuterGlowEffectRunner(...args); }
 api.defaultCanvasOuterGlowEffectRunner = defaultCanvasOuterGlowEffectRunner;
-export function registerCanvasOuterGlowEffect(...args) { __syncDependencies(); const result = api.registerCanvasOuterGlowEffect(...args); return result; }
+const __bridgeImplementation_registerCanvasOuterGlowEffect = api.registerCanvasOuterGlowEffect;
+export function registerCanvasOuterGlowEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerCanvasOuterGlowEffect(...args); return result; }
+api.registerCanvasOuterGlowEffect = registerCanvasOuterGlowEffect;
+compiled.flight.EffectsCanvas.registerCanvasOuterGlowEffect = registerCanvasOuterGlowEffect;

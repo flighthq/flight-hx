@@ -19,8 +19,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyBevelEffectToGl(...args) { __syncDependencies(); const result = api.applyBevelEffectToGl(...args); return result; }
+const __bridgeImplementation_applyBevelEffectToGl = api.applyBevelEffectToGl;
+export function applyBevelEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyBevelEffectToGl(...args); return result; }
+api.applyBevelEffectToGl = applyBevelEffectToGl;
+compiled.flight.EffectsGl.applyBevelEffectToGl = applyBevelEffectToGl;
 const __bridgeImplementation_defaultGlBevelEffectRunner = api.defaultGlBevelEffectRunner;
 export function defaultGlBevelEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlBevelEffectRunner(...args); }
 api.defaultGlBevelEffectRunner = defaultGlBevelEffectRunner;
-export function registerGlBevelEffect(...args) { __syncDependencies(); const result = api.registerGlBevelEffect(...args); return result; }
+const __bridgeImplementation_registerGlBevelEffect = api.registerGlBevelEffect;
+export function registerGlBevelEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlBevelEffect(...args); return result; }
+api.registerGlBevelEffect = registerGlBevelEffect;
+compiled.flight.EffectsGl.registerGlBevelEffect = registerGlBevelEffect;

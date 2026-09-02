@@ -10,4 +10,7 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function loadScene3DDocumentFromMd5MeshUrl(...args) { __syncDependencies(); const result = api.loadScene3DDocumentFromMd5MeshUrl(...args); return result; }
+const __bridgeImplementation_loadScene3DDocumentFromMd5MeshUrl = api.loadScene3DDocumentFromMd5MeshUrl;
+export function loadScene3DDocumentFromMd5MeshUrl(...args) { __syncDependencies(); const result = __bridgeImplementation_loadScene3DDocumentFromMd5MeshUrl(...args); return result; }
+api.loadScene3DDocumentFromMd5MeshUrl = loadScene3DDocumentFromMd5MeshUrl;
+compiled.flight.Scene3DResources.loadScene3DDocumentFromMd5MeshUrl = loadScene3DDocumentFromMd5MeshUrl;

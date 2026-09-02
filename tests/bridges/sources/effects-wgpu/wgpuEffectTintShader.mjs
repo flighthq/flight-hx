@@ -11,6 +11,15 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyWgpuEffectInnerClipPass(...args) { __syncDependencies(); const result = api.applyWgpuEffectInnerClipPass(...args); return result; }
-export function applyWgpuEffectInvertTintPass(...args) { __syncDependencies(); const result = api.applyWgpuEffectInvertTintPass(...args); return result; }
-export function applyWgpuEffectTintPass(...args) { __syncDependencies(); const result = api.applyWgpuEffectTintPass(...args); return result; }
+const __bridgeImplementation_applyWgpuEffectInnerClipPass = api.applyWgpuEffectInnerClipPass;
+export function applyWgpuEffectInnerClipPass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyWgpuEffectInnerClipPass(...args); return result; }
+api.applyWgpuEffectInnerClipPass = applyWgpuEffectInnerClipPass;
+compiled.flight.EffectsWgpu.applyWgpuEffectInnerClipPass = applyWgpuEffectInnerClipPass;
+const __bridgeImplementation_applyWgpuEffectInvertTintPass = api.applyWgpuEffectInvertTintPass;
+export function applyWgpuEffectInvertTintPass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyWgpuEffectInvertTintPass(...args); return result; }
+api.applyWgpuEffectInvertTintPass = applyWgpuEffectInvertTintPass;
+compiled.flight.EffectsWgpu.applyWgpuEffectInvertTintPass = applyWgpuEffectInvertTintPass;
+const __bridgeImplementation_applyWgpuEffectTintPass = api.applyWgpuEffectTintPass;
+export function applyWgpuEffectTintPass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyWgpuEffectTintPass(...args); return result; }
+api.applyWgpuEffectTintPass = applyWgpuEffectTintPass;
+compiled.flight.EffectsWgpu.applyWgpuEffectTintPass = applyWgpuEffectTintPass;

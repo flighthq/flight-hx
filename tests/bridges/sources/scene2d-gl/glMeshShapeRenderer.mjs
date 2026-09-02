@@ -9,4 +9,7 @@ function __syncDependencies() {
 __syncDependencies();
 
 export const defaultGlMeshShapeRenderer = api.defaultGlMeshShapeRenderer;
-export function drawGlMeshShape(...args) { __syncDependencies(); const result = api.drawGlMeshShape(...args); return result; }
+const __bridgeImplementation_drawGlMeshShape = api.drawGlMeshShape;
+export function drawGlMeshShape(...args) { __syncDependencies(); const result = __bridgeImplementation_drawGlMeshShape(...args); return result; }
+api.drawGlMeshShape = drawGlMeshShape;
+compiled.flight.Scene2DGl.drawGlMeshShape = drawGlMeshShape;

@@ -17,8 +17,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyDropShadowEffectToCanvas(...args) { __syncDependencies(); const result = api.applyDropShadowEffectToCanvas(...args); return result; }
+const __bridgeImplementation_applyDropShadowEffectToCanvas = api.applyDropShadowEffectToCanvas;
+export function applyDropShadowEffectToCanvas(...args) { __syncDependencies(); const result = __bridgeImplementation_applyDropShadowEffectToCanvas(...args); return result; }
+api.applyDropShadowEffectToCanvas = applyDropShadowEffectToCanvas;
+compiled.flight.EffectsCanvas.applyDropShadowEffectToCanvas = applyDropShadowEffectToCanvas;
 const __bridgeImplementation_defaultCanvasDropShadowEffectRunner = api.defaultCanvasDropShadowEffectRunner;
 export function defaultCanvasDropShadowEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultCanvasDropShadowEffectRunner(...args); }
 api.defaultCanvasDropShadowEffectRunner = defaultCanvasDropShadowEffectRunner;
-export function registerCanvasDropShadowEffect(...args) { __syncDependencies(); const result = api.registerCanvasDropShadowEffect(...args); return result; }
+const __bridgeImplementation_registerCanvasDropShadowEffect = api.registerCanvasDropShadowEffect;
+export function registerCanvasDropShadowEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerCanvasDropShadowEffect(...args); return result; }
+api.registerCanvasDropShadowEffect = registerCanvasDropShadowEffect;
+compiled.flight.EffectsCanvas.registerCanvasDropShadowEffect = registerCanvasDropShadowEffect;

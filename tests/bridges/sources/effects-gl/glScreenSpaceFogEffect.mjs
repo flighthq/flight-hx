@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyScreenSpaceFogEffectToGl(...args) { __syncDependencies(); const result = api.applyScreenSpaceFogEffectToGl(...args); return result; }
+const __bridgeImplementation_applyScreenSpaceFogEffectToGl = api.applyScreenSpaceFogEffectToGl;
+export function applyScreenSpaceFogEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyScreenSpaceFogEffectToGl(...args); return result; }
+api.applyScreenSpaceFogEffectToGl = applyScreenSpaceFogEffectToGl;
+compiled.flight.EffectsGl.applyScreenSpaceFogEffectToGl = applyScreenSpaceFogEffectToGl;
 const __bridgeImplementation_defaultGlScreenSpaceFogEffectRunner = api.defaultGlScreenSpaceFogEffectRunner;
 export function defaultGlScreenSpaceFogEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlScreenSpaceFogEffectRunner(...args); }
 api.defaultGlScreenSpaceFogEffectRunner = defaultGlScreenSpaceFogEffectRunner;
-export function registerGlScreenSpaceFogEffect(...args) { __syncDependencies(); const result = api.registerGlScreenSpaceFogEffect(...args); return result; }
+const __bridgeImplementation_registerGlScreenSpaceFogEffect = api.registerGlScreenSpaceFogEffect;
+export function registerGlScreenSpaceFogEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlScreenSpaceFogEffect(...args); return result; }
+api.registerGlScreenSpaceFogEffect = registerGlScreenSpaceFogEffect;
+compiled.flight.EffectsGl.registerGlScreenSpaceFogEffect = registerGlScreenSpaceFogEffect;

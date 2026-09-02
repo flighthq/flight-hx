@@ -2472,6 +2472,18 @@ function emitExpression(expression: IrExpression): string {
           if (expression.left.optional) {
             throw new Error(`Optional structural assignment is not supported: ${expression.left.name}`);
           }
+          if (safeName(expression.left.name) !== expression.left.name) {
+            const current = `_Runtime.field(${object}, ${quote(expression.left.name)})`;
+            if (expression.operator === '??=') {
+              const ownerTemporary = `__nullishOwner${String(temporaryIndex++)}`;
+              const valueTemporary = `__nullishValue${String(temporaryIndex++)}`;
+              return `({ final ${ownerTemporary}:Dynamic = ${object}; final ${valueTemporary}:Dynamic = _Runtime.field(${ownerTemporary}, ${quote(expression.left.name)}); ${valueTemporary} == null ? _Runtime.setField(${ownerTemporary}, ${quote(expression.left.name)}, ${emitExpression(expression.right)}) : ${valueTemporary}; })`;
+            }
+            if (expression.operator === '=') {
+              return `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitExpression(expression.right)})`;
+            }
+            return `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitCompoundOperation(current, expression.operator.slice(0, -1), expression.right, compoundUsesRuntimeNumber(expression))})`;
+          }
           if (expression.operator === '??=') {
             const left = expression.left;
             return emitDirectNullishAssignment(
@@ -3009,6 +3021,9 @@ function emitExpression(expression: IrExpression): string {
           if (expression.operand.optional) {
             throw new Error(`Optional structural mutation is not supported: ${expression.operand.name}`);
           }
+          if (safeName(expression.operand.name) !== expression.operand.name) {
+            return `_Runtime.incrementField(${emitExpression(expression.operand.object)}, ${quote(expression.operand.name)}, ${expression.operator === '++' ? '1' : '-1'}, ${expression.postfix ? 'true' : 'false'})`;
+          }
           const field = directStructuralField(expression.operand);
           return expression.postfix ? `${field}${expression.operator}` : `${expression.operator}${field}`;
         }
@@ -3137,11 +3152,19 @@ function directStructuralField(
   if (!expression.structuralReceiverType) {
     throw new Error(`Missing structural receiver type: ${currentSourceIdentity}:${expression.name}`);
   }
+  if (safeName(expression.name) !== expression.name) {
+    throw new Error(`Reserved structural field requires runtime access: ${currentSourceIdentity}:${expression.name}`);
+  }
   return `(cast ${owner} : ${emitType(expression.structuralReceiverType)}).${safeName(expression.name)}`;
 }
 
 function emitStructuralRead(expression: Extract<IrExpression, { kind: 'property' }>): string {
   const owner = emitExpression(expression.object);
+  if (safeName(expression.name) !== expression.name) {
+    return expression.optional
+      ? `_Runtime.optionalField(${owner}, ${quote(expression.name)})`
+      : `_Runtime.field(${owner}, ${quote(expression.name)})`;
+  }
   if (!expression.optional) return directStructuralField(expression, owner);
   const temporary = `__structural${String(temporaryIndex++)}`;
   return `({ final ${temporary} = ${owner}; ${temporary} == null ? _Runtime.UNDEFINED : ${directStructuralField(expression, temporary)}; })`;
@@ -3512,6 +3535,10 @@ function emitCall(expression: Extract<IrExpression, { kind: 'call' }>): string {
       return `_Runtime.callOptionalValue(${emitTypedStructRead(expression.callee)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
     }
     if (expression.callee.structuralReceiverType) {
+      if (safeName(expression.callee.name) !== expression.callee.name) {
+        const method = expression.optional || expression.callee.optional ? 'callOptionalProperty' : 'callProperty';
+        return `_Runtime.${method}(${owner}, ${quote(expression.callee.name)}, cast ([${expression.arguments.map(emitExpression).join(', ')}] : Array<Dynamic>))`;
+      }
       if (!(expression.optional || expression.callee.optional)) {
         return `${directStructuralField(expression.callee, owner)}(${expression.arguments.map((argument, index) => emitCheckedCallArgument(expression, argument, index)).join(', ')})`;
       }

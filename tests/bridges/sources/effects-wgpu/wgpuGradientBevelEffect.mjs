@@ -18,11 +18,18 @@ function __syncDependencies() {
   compiled.flight._EffectsWgpu.clearWgpuEffectTarget = __dependency4.clearWgpuEffectTarget;
   compiled.flight._EffectsWgpu.getWgpuEffectPassState = __dependency4.getWgpuEffectPassState;
   compiled.flight._EffectsWgpu.applyWgpuEffectTintPass = __dependency5.applyWgpuEffectTintPass;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 
-export function applyGradientBevelEffectToWgpu(...args) { __syncDependencies(); const result = api.applyGradientBevelEffectToWgpu(...args); return result; }
+const __bridgeImplementation_applyGradientBevelEffectToWgpu = api.applyGradientBevelEffectToWgpu;
+export function applyGradientBevelEffectToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyGradientBevelEffectToWgpu(...args); return result; }
+api.applyGradientBevelEffectToWgpu = applyGradientBevelEffectToWgpu;
+compiled.flight.EffectsWgpu.applyGradientBevelEffectToWgpu = applyGradientBevelEffectToWgpu;
 const __bridgeImplementation_defaultWgpuGradientBevelEffectRunner = api.defaultWgpuGradientBevelEffectRunner;
 export function defaultWgpuGradientBevelEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultWgpuGradientBevelEffectRunner(...args); }
 api.defaultWgpuGradientBevelEffectRunner = defaultWgpuGradientBevelEffectRunner;
-export function registerWgpuGradientBevelEffect(...args) { __syncDependencies(); const result = api.registerWgpuGradientBevelEffect(...args); return result; }
+const __bridgeImplementation_registerWgpuGradientBevelEffect = api.registerWgpuGradientBevelEffect;
+export function registerWgpuGradientBevelEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerWgpuGradientBevelEffect(...args); return result; }
+api.registerWgpuGradientBevelEffect = registerWgpuGradientBevelEffect;
+compiled.flight.EffectsWgpu.registerWgpuGradientBevelEffect = registerWgpuGradientBevelEffect;

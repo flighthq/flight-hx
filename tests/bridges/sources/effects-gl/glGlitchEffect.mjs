@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyGlitchEffectToGl(...args) { __syncDependencies(); const result = api.applyGlitchEffectToGl(...args); return result; }
+const __bridgeImplementation_applyGlitchEffectToGl = api.applyGlitchEffectToGl;
+export function applyGlitchEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyGlitchEffectToGl(...args); return result; }
+api.applyGlitchEffectToGl = applyGlitchEffectToGl;
+compiled.flight.EffectsGl.applyGlitchEffectToGl = applyGlitchEffectToGl;
 const __bridgeImplementation_defaultGlGlitchEffectRunner = api.defaultGlGlitchEffectRunner;
 export function defaultGlGlitchEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlGlitchEffectRunner(...args); }
 api.defaultGlGlitchEffectRunner = defaultGlGlitchEffectRunner;
-export function registerGlGlitchEffect(...args) { __syncDependencies(); const result = api.registerGlGlitchEffect(...args); return result; }
+const __bridgeImplementation_registerGlGlitchEffect = api.registerGlGlitchEffect;
+export function registerGlGlitchEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlGlitchEffect(...args); return result; }
+api.registerGlGlitchEffect = registerGlGlitchEffect;
+compiled.flight.EffectsGl.registerGlGlitchEffect = registerGlGlitchEffect;

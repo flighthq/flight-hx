@@ -16,11 +16,18 @@ function __syncDependencies() {
   compiled.flight._EffectsWgpu.applyWgpuEffectBoxBlur = __dependency2.applyWgpuEffectBoxBlur;
   compiled.flight._EffectsWgpu.clearWgpuEffectTarget = __dependency3.clearWgpuEffectTarget;
   compiled.flight._EffectsWgpu.applyWgpuEffectTintPass = __dependency4.applyWgpuEffectTintPass;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 
-export function applyDropShadowEffectToWgpu(...args) { __syncDependencies(); const result = api.applyDropShadowEffectToWgpu(...args); return result; }
+const __bridgeImplementation_applyDropShadowEffectToWgpu = api.applyDropShadowEffectToWgpu;
+export function applyDropShadowEffectToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyDropShadowEffectToWgpu(...args); return result; }
+api.applyDropShadowEffectToWgpu = applyDropShadowEffectToWgpu;
+compiled.flight.EffectsWgpu.applyDropShadowEffectToWgpu = applyDropShadowEffectToWgpu;
 const __bridgeImplementation_defaultWgpuDropShadowEffectRunner = api.defaultWgpuDropShadowEffectRunner;
 export function defaultWgpuDropShadowEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultWgpuDropShadowEffectRunner(...args); }
 api.defaultWgpuDropShadowEffectRunner = defaultWgpuDropShadowEffectRunner;
-export function registerWgpuDropShadowEffect(...args) { __syncDependencies(); const result = api.registerWgpuDropShadowEffect(...args); return result; }
+const __bridgeImplementation_registerWgpuDropShadowEffect = api.registerWgpuDropShadowEffect;
+export function registerWgpuDropShadowEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerWgpuDropShadowEffect(...args); return result; }
+api.registerWgpuDropShadowEffect = registerWgpuDropShadowEffect;
+compiled.flight.EffectsWgpu.registerWgpuDropShadowEffect = registerWgpuDropShadowEffect;

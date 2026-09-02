@@ -10,9 +10,15 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyConvolutionEffectToGl(...args) { __syncDependencies(); const result = api.applyConvolutionEffectToGl(...args); return result; }
+const __bridgeImplementation_applyConvolutionEffectToGl = api.applyConvolutionEffectToGl;
+export function applyConvolutionEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyConvolutionEffectToGl(...args); return result; }
+api.applyConvolutionEffectToGl = applyConvolutionEffectToGl;
+compiled.flight.EffectsGl.applyConvolutionEffectToGl = applyConvolutionEffectToGl;
 const __bridgeImplementation_defaultGlConvolutionEffectRunner = api.defaultGlConvolutionEffectRunner;
 export function defaultGlConvolutionEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlConvolutionEffectRunner(...args); }
 api.defaultGlConvolutionEffectRunner = defaultGlConvolutionEffectRunner;
 export const MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE = api.MAX_CONVOLUTION_EFFECT_GL_KERNEL_SIZE;
-export function registerGlConvolutionEffect(...args) { __syncDependencies(); const result = api.registerGlConvolutionEffect(...args); return result; }
+const __bridgeImplementation_registerGlConvolutionEffect = api.registerGlConvolutionEffect;
+export function registerGlConvolutionEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlConvolutionEffect(...args); return result; }
+api.registerGlConvolutionEffect = registerGlConvolutionEffect;
+compiled.flight.EffectsGl.registerGlConvolutionEffect = registerGlConvolutionEffect;

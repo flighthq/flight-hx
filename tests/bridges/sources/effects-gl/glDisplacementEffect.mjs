@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyDisplacementEffectToGl(...args) { __syncDependencies(); const result = api.applyDisplacementEffectToGl(...args); return result; }
+const __bridgeImplementation_applyDisplacementEffectToGl = api.applyDisplacementEffectToGl;
+export function applyDisplacementEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyDisplacementEffectToGl(...args); return result; }
+api.applyDisplacementEffectToGl = applyDisplacementEffectToGl;
+compiled.flight.EffectsGl.applyDisplacementEffectToGl = applyDisplacementEffectToGl;
 const __bridgeImplementation_defaultGlDisplacementEffectRunner = api.defaultGlDisplacementEffectRunner;
 export function defaultGlDisplacementEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlDisplacementEffectRunner(...args); }
 api.defaultGlDisplacementEffectRunner = defaultGlDisplacementEffectRunner;
-export function registerGlDisplacementEffect(...args) { __syncDependencies(); const result = api.registerGlDisplacementEffect(...args); return result; }
+const __bridgeImplementation_registerGlDisplacementEffect = api.registerGlDisplacementEffect;
+export function registerGlDisplacementEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlDisplacementEffect(...args); return result; }
+api.registerGlDisplacementEffect = registerGlDisplacementEffect;
+compiled.flight.EffectsGl.registerGlDisplacementEffect = registerGlDisplacementEffect;

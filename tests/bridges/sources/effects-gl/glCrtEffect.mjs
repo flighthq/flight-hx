@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyCrtEffectToGl(...args) { __syncDependencies(); const result = api.applyCrtEffectToGl(...args); return result; }
+const __bridgeImplementation_applyCrtEffectToGl = api.applyCrtEffectToGl;
+export function applyCrtEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyCrtEffectToGl(...args); return result; }
+api.applyCrtEffectToGl = applyCrtEffectToGl;
+compiled.flight.EffectsGl.applyCrtEffectToGl = applyCrtEffectToGl;
 const __bridgeImplementation_defaultGlCrtEffectRunner = api.defaultGlCrtEffectRunner;
 export function defaultGlCrtEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlCrtEffectRunner(...args); }
 api.defaultGlCrtEffectRunner = defaultGlCrtEffectRunner;
-export function registerGlCrtEffect(...args) { __syncDependencies(); const result = api.registerGlCrtEffect(...args); return result; }
+const __bridgeImplementation_registerGlCrtEffect = api.registerGlCrtEffect;
+export function registerGlCrtEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlCrtEffect(...args); return result; }
+api.registerGlCrtEffect = registerGlCrtEffect;
+compiled.flight.EffectsGl.registerGlCrtEffect = registerGlCrtEffect;

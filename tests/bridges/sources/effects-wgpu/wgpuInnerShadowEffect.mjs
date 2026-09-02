@@ -16,11 +16,18 @@ function __syncDependencies() {
   compiled.flight._EffectsWgpu.clearWgpuEffectTarget = __dependency3.clearWgpuEffectTarget;
   compiled.flight._EffectsWgpu.applyWgpuEffectInnerClipPass = __dependency4.applyWgpuEffectInnerClipPass;
   compiled.flight._EffectsWgpu.applyWgpuEffectInvertTintPass = __dependency4.applyWgpuEffectInvertTintPass;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 
-export function applyInnerShadowEffectToWgpu(...args) { __syncDependencies(); const result = api.applyInnerShadowEffectToWgpu(...args); return result; }
+const __bridgeImplementation_applyInnerShadowEffectToWgpu = api.applyInnerShadowEffectToWgpu;
+export function applyInnerShadowEffectToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyInnerShadowEffectToWgpu(...args); return result; }
+api.applyInnerShadowEffectToWgpu = applyInnerShadowEffectToWgpu;
+compiled.flight.EffectsWgpu.applyInnerShadowEffectToWgpu = applyInnerShadowEffectToWgpu;
 const __bridgeImplementation_defaultWgpuInnerShadowEffectRunner = api.defaultWgpuInnerShadowEffectRunner;
 export function defaultWgpuInnerShadowEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultWgpuInnerShadowEffectRunner(...args); }
 api.defaultWgpuInnerShadowEffectRunner = defaultWgpuInnerShadowEffectRunner;
-export function registerWgpuInnerShadowEffect(...args) { __syncDependencies(); const result = api.registerWgpuInnerShadowEffect(...args); return result; }
+const __bridgeImplementation_registerWgpuInnerShadowEffect = api.registerWgpuInnerShadowEffect;
+export function registerWgpuInnerShadowEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerWgpuInnerShadowEffect(...args); return result; }
+api.registerWgpuInnerShadowEffect = registerWgpuInnerShadowEffect;
+compiled.flight.EffectsWgpu.registerWgpuInnerShadowEffect = registerWgpuInnerShadowEffect;

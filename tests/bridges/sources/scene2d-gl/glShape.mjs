@@ -11,4 +11,8 @@ __syncDependencies();
 
 export const defaultGlMorphShapeRenderer = api.defaultGlMorphShapeRenderer;
 export const defaultGlShapeRenderer = api.defaultGlShapeRenderer;
-export function drawGlShape(...args) { __syncDependencies(); const result = api.drawGlShape(...args); return result; }
+const __bridgeImplementation_drawGlShape = api.drawGlShape;
+export function drawGlShape(...args) { __syncDependencies(); const result = __bridgeImplementation_drawGlShape(...args); return result; }
+api.drawGlShape = drawGlShape;
+compiled.flight.Scene2DGl.drawGlShape = drawGlShape;
+api.defaultGlShapeRenderer["submit"] = drawGlShape;

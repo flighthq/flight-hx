@@ -21,11 +21,11 @@
 | Proven indexed reads | 9147 |
 | Proven indexed writes | 4441 |
 | Parked width-sensitive mixed indexed writes | 19 |
-| Direct indexed reads | 9610 |
+| Direct indexed reads | 9612 |
 | Direct indexed writes | 4436 |
 | Guarded in-bounds async-flow for-of Array reads | 21 |
 | Guarded in-bounds async-flow for-in key reads | 0 |
-| Direct synthetic iteration-binding Array reads | 189 |
+| Direct synthetic iteration-binding Array reads | 191 |
 | Direct synthetic high-arity-argument Array reads | 27 |
 | Proven typed-array `set` calls | 96 |
 | Direct typed-array `set` calls | 90 |
@@ -37,7 +37,7 @@
 
 | Indexed receiver | Proven expressions | Proven reads | Proven writes | Direct reads | Direct writes |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `Array` | 7624 | 6225 | 1463 | 6688 | 1463 |
+| `Array` | 7624 | 6225 | 1463 | 6690 | 1463 |
 | `ArrayOrFloat32Array` | 56 | 13 | 43 | 15 | 43 |
 | `Float32Array` | 3846 | 1805 | 2113 | 1805 | 2113 |
 | `Float64Array` | 396 | 178 | 228 | 178 | 228 |

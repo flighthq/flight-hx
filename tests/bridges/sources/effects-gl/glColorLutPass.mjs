@@ -10,4 +10,7 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyColorLutPassToGl(...args) { __syncDependencies(); const result = api.applyColorLutPassToGl(...args); return result; }
+const __bridgeImplementation_applyColorLutPassToGl = api.applyColorLutPassToGl;
+export function applyColorLutPassToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyColorLutPassToGl(...args); return result; }
+api.applyColorLutPassToGl = applyColorLutPassToGl;
+compiled.flight.EffectsGl.applyColorLutPassToGl = applyColorLutPassToGl;

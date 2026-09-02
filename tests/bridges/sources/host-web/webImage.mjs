@@ -8,5 +8,11 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function enableHostWebImage(...args) { __syncDependencies(); const result = api.enableHostWebImage(...args); return result; }
-export function resetHostWebImageForTest(...args) { __syncDependencies(); const result = api.resetHostWebImageForTest(...args); return result; }
+const __bridgeImplementation_enableHostWebImage = api.enableHostWebImage;
+export function enableHostWebImage(...args) { __syncDependencies(); const result = __bridgeImplementation_enableHostWebImage(...args); return result; }
+api.enableHostWebImage = enableHostWebImage;
+compiled.flight.HostWeb.enableHostWebImage = enableHostWebImage;
+const __bridgeImplementation_resetHostWebImageForTest = api.resetHostWebImageForTest;
+export function resetHostWebImageForTest(...args) { __syncDependencies(); const result = __bridgeImplementation_resetHostWebImageForTest(...args); return result; }
+api.resetHostWebImageForTest = resetHostWebImageForTest;
+compiled.flight.HostWeb.resetHostWebImageForTest = resetHostWebImageForTest;

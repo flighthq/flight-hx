@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyChromaticAberrationEffectToGl(...args) { __syncDependencies(); const result = api.applyChromaticAberrationEffectToGl(...args); return result; }
+const __bridgeImplementation_applyChromaticAberrationEffectToGl = api.applyChromaticAberrationEffectToGl;
+export function applyChromaticAberrationEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyChromaticAberrationEffectToGl(...args); return result; }
+api.applyChromaticAberrationEffectToGl = applyChromaticAberrationEffectToGl;
+compiled.flight.EffectsGl.applyChromaticAberrationEffectToGl = applyChromaticAberrationEffectToGl;
 const __bridgeImplementation_defaultGlChromaticAberrationEffectRunner = api.defaultGlChromaticAberrationEffectRunner;
 export function defaultGlChromaticAberrationEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlChromaticAberrationEffectRunner(...args); }
 api.defaultGlChromaticAberrationEffectRunner = defaultGlChromaticAberrationEffectRunner;
-export function registerGlChromaticAberrationEffect(...args) { __syncDependencies(); const result = api.registerGlChromaticAberrationEffect(...args); return result; }
+const __bridgeImplementation_registerGlChromaticAberrationEffect = api.registerGlChromaticAberrationEffect;
+export function registerGlChromaticAberrationEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlChromaticAberrationEffect(...args); return result; }
+api.registerGlChromaticAberrationEffect = registerGlChromaticAberrationEffect;
+compiled.flight.EffectsGl.registerGlChromaticAberrationEffect = registerGlChromaticAberrationEffect;

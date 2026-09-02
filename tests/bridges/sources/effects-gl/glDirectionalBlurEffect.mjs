@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyDirectionalBlurEffectToGl(...args) { __syncDependencies(); const result = api.applyDirectionalBlurEffectToGl(...args); return result; }
+const __bridgeImplementation_applyDirectionalBlurEffectToGl = api.applyDirectionalBlurEffectToGl;
+export function applyDirectionalBlurEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyDirectionalBlurEffectToGl(...args); return result; }
+api.applyDirectionalBlurEffectToGl = applyDirectionalBlurEffectToGl;
+compiled.flight.EffectsGl.applyDirectionalBlurEffectToGl = applyDirectionalBlurEffectToGl;
 const __bridgeImplementation_defaultGlDirectionalBlurEffectRunner = api.defaultGlDirectionalBlurEffectRunner;
 export function defaultGlDirectionalBlurEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlDirectionalBlurEffectRunner(...args); }
 api.defaultGlDirectionalBlurEffectRunner = defaultGlDirectionalBlurEffectRunner;
-export function registerGlDirectionalBlurEffect(...args) { __syncDependencies(); const result = api.registerGlDirectionalBlurEffect(...args); return result; }
+const __bridgeImplementation_registerGlDirectionalBlurEffect = api.registerGlDirectionalBlurEffect;
+export function registerGlDirectionalBlurEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlDirectionalBlurEffect(...args); return result; }
+api.registerGlDirectionalBlurEffect = registerGlDirectionalBlurEffect;
+compiled.flight.EffectsGl.registerGlDirectionalBlurEffect = registerGlDirectionalBlurEffect;

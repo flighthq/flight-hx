@@ -14,11 +14,18 @@ function __syncDependencies() {
   compiled.flight._EffectsWgpu.drawWgpuDualSourceEffectPass = __dependency2.drawWgpuDualSourceEffectPass;
   compiled.flight._EffectsWgpu.drawWgpuEffectPass = __dependency2.drawWgpuEffectPass;
   compiled.flight._EffectsWgpu.getWgpuEffectPipeline = __dependency3.getWgpuEffectPipeline;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 
-export function applyLensDirtEffectToWgpu(...args) { __syncDependencies(); const result = api.applyLensDirtEffectToWgpu(...args); return result; }
+const __bridgeImplementation_applyLensDirtEffectToWgpu = api.applyLensDirtEffectToWgpu;
+export function applyLensDirtEffectToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyLensDirtEffectToWgpu(...args); return result; }
+api.applyLensDirtEffectToWgpu = applyLensDirtEffectToWgpu;
+compiled.flight.EffectsWgpu.applyLensDirtEffectToWgpu = applyLensDirtEffectToWgpu;
 const __bridgeImplementation_defaultWgpuLensDirtEffectRunner = api.defaultWgpuLensDirtEffectRunner;
 export function defaultWgpuLensDirtEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultWgpuLensDirtEffectRunner(...args); }
 api.defaultWgpuLensDirtEffectRunner = defaultWgpuLensDirtEffectRunner;
-export function registerWgpuLensDirtEffect(...args) { __syncDependencies(); const result = api.registerWgpuLensDirtEffect(...args); return result; }
+const __bridgeImplementation_registerWgpuLensDirtEffect = api.registerWgpuLensDirtEffect;
+export function registerWgpuLensDirtEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerWgpuLensDirtEffect(...args); return result; }
+api.registerWgpuLensDirtEffect = registerWgpuLensDirtEffect;
+compiled.flight.EffectsWgpu.registerWgpuLensDirtEffect = registerWgpuLensDirtEffect;

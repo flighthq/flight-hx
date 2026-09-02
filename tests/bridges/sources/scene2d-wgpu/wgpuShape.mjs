@@ -11,4 +11,8 @@ __syncDependencies();
 
 export const defaultWgpuMorphShapeRenderer = api.defaultWgpuMorphShapeRenderer;
 export const defaultWgpuShapeRenderer = api.defaultWgpuShapeRenderer;
-export function drawWgpuShape(...args) { __syncDependencies(); const result = api.drawWgpuShape(...args); return result; }
+const __bridgeImplementation_drawWgpuShape = api.drawWgpuShape;
+export function drawWgpuShape(...args) { __syncDependencies(); const result = __bridgeImplementation_drawWgpuShape(...args); return result; }
+api.drawWgpuShape = drawWgpuShape;
+compiled.flight.Scene2DWgpu.drawWgpuShape = drawWgpuShape;
+api.defaultWgpuShapeRenderer["submit"] = drawWgpuShape;

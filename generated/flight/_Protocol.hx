@@ -97,7 +97,7 @@ class _Protocol {
   }
 
   public static function isProtocolSchemeDefault(host:HasProtocolDefault, scheme:String):Bool {
-    return cast ((cast (cast isValidProtocolScheme((cast scheme : String)) : Bool) : Bool) && (cast (cast (cast (cast host : HasProtocolDefault).protocol : { var default_:ProtocolDefaultBackend; }).default_ : ProtocolDefaultBackend).isDefault((cast scheme : String)) : Bool));
+    return cast ((cast (cast isValidProtocolScheme((cast scheme : String)) : Bool) : Bool) && (cast (cast _Runtime.field((cast host : HasProtocolDefault).protocol, 'default') : ProtocolDefaultBackend).isDefault((cast scheme : String)) : Bool));
     return cast null;
   }
 
@@ -178,12 +178,12 @@ class _Protocol {
   }
 
   public static function removeProtocolSchemeAsDefault(host:HasProtocolDefault, scheme:String):Bool {
-    return cast ((cast (cast isValidProtocolScheme((cast scheme : String)) : Bool) : Bool) && (cast (cast (cast (cast host : HasProtocolDefault).protocol : { var default_:ProtocolDefaultBackend; }).default_ : ProtocolDefaultBackend).removeAsDefault((cast scheme : String)) : Bool));
+    return cast ((cast (cast isValidProtocolScheme((cast scheme : String)) : Bool) : Bool) && (cast (cast _Runtime.field((cast host : HasProtocolDefault).protocol, 'default') : ProtocolDefaultBackend).removeAsDefault((cast scheme : String)) : Bool));
     return cast null;
   }
 
   public static function setProtocolSchemeAsDefault(host:HasProtocolDefault, scheme:String):Bool {
-    return cast ((cast (cast isValidProtocolScheme((cast scheme : String)) : Bool) : Bool) && (cast (cast (cast (cast host : HasProtocolDefault).protocol : { var default_:ProtocolDefaultBackend; }).default_ : ProtocolDefaultBackend).setAsDefault((cast scheme : String)) : Bool));
+    return cast ((cast (cast isValidProtocolScheme((cast scheme : String)) : Bool) : Bool) && (cast (cast _Runtime.field((cast host : HasProtocolDefault).protocol, 'default') : ProtocolDefaultBackend).setAsDefault((cast scheme : String)) : Bool));
     return cast null;
   }
 

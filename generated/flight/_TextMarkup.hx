@@ -100,7 +100,7 @@ class _TextMarkup {
       var classes:String = cast _Runtime.UNDEFINED;
       var format:TextFormat = cast _Runtime.UNDEFINED;
       resolve = _Runtime.field(registry, 'classResolver');
-      classes = (cast attributes : { var class_:String; }).class_;
+      classes = _Runtime.field(attributes, 'class');
       if ((cast ((cast _Runtime.strictEquals(resolve, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) || (cast _Runtime.strictEquals(classes, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) : Bool)) { return cast {  }; }
       format = (cast {  });
       for (name in _Runtime.iterable(_Runtime.callProperty(classes, 'split', cast ([_Runtime.regexp('\\s+', '')] : Array<Dynamic>)))) {

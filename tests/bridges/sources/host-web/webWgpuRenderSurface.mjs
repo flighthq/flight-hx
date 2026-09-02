@@ -8,6 +8,15 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function createWebWgpuRenderSurfaceProvider(...args) { __syncDependencies(); const result = api.createWebWgpuRenderSurfaceProvider(...args); return result; }
-export function enableHostWebWgpuRenderSurface(...args) { __syncDependencies(); const result = api.enableHostWebWgpuRenderSurface(...args); return result; }
-export function resetHostWebWgpuRenderSurfaceForTest(...args) { __syncDependencies(); const result = api.resetHostWebWgpuRenderSurfaceForTest(...args); return result; }
+const __bridgeImplementation_createWebWgpuRenderSurfaceProvider = api.createWebWgpuRenderSurfaceProvider;
+export function createWebWgpuRenderSurfaceProvider(...args) { __syncDependencies(); const result = __bridgeImplementation_createWebWgpuRenderSurfaceProvider(...args); return result; }
+api.createWebWgpuRenderSurfaceProvider = createWebWgpuRenderSurfaceProvider;
+compiled.flight.HostWeb.createWebWgpuRenderSurfaceProvider = createWebWgpuRenderSurfaceProvider;
+const __bridgeImplementation_enableHostWebWgpuRenderSurface = api.enableHostWebWgpuRenderSurface;
+export function enableHostWebWgpuRenderSurface(...args) { __syncDependencies(); const result = __bridgeImplementation_enableHostWebWgpuRenderSurface(...args); return result; }
+api.enableHostWebWgpuRenderSurface = enableHostWebWgpuRenderSurface;
+compiled.flight.HostWeb.enableHostWebWgpuRenderSurface = enableHostWebWgpuRenderSurface;
+const __bridgeImplementation_resetHostWebWgpuRenderSurfaceForTest = api.resetHostWebWgpuRenderSurfaceForTest;
+export function resetHostWebWgpuRenderSurfaceForTest(...args) { __syncDependencies(); const result = __bridgeImplementation_resetHostWebWgpuRenderSurfaceForTest(...args); return result; }
+api.resetHostWebWgpuRenderSurfaceForTest = resetHostWebWgpuRenderSurfaceForTest;
+compiled.flight.HostWeb.resetHostWebWgpuRenderSurfaceForTest = resetHostWebWgpuRenderSurfaceForTest;

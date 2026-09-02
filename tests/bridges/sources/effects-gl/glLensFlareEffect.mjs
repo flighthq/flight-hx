@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyLensFlareEffectToGl(...args) { __syncDependencies(); const result = api.applyLensFlareEffectToGl(...args); return result; }
+const __bridgeImplementation_applyLensFlareEffectToGl = api.applyLensFlareEffectToGl;
+export function applyLensFlareEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyLensFlareEffectToGl(...args); return result; }
+api.applyLensFlareEffectToGl = applyLensFlareEffectToGl;
+compiled.flight.EffectsGl.applyLensFlareEffectToGl = applyLensFlareEffectToGl;
 const __bridgeImplementation_defaultGlLensFlareEffectRunner = api.defaultGlLensFlareEffectRunner;
 export function defaultGlLensFlareEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlLensFlareEffectRunner(...args); }
 api.defaultGlLensFlareEffectRunner = defaultGlLensFlareEffectRunner;
-export function registerGlLensFlareEffect(...args) { __syncDependencies(); const result = api.registerGlLensFlareEffect(...args); return result; }
+const __bridgeImplementation_registerGlLensFlareEffect = api.registerGlLensFlareEffect;
+export function registerGlLensFlareEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlLensFlareEffect(...args); return result; }
+api.registerGlLensFlareEffect = registerGlLensFlareEffect;
+compiled.flight.EffectsGl.registerGlLensFlareEffect = registerGlLensFlareEffect;

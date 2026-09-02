@@ -2,16 +2,24 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from './wgpuEffectPass.mjs';
 import * as __dependency1 from './wgpuEffectProgramCache.mjs';
+import * as __dependency2 from '@flighthq/render-wgpu/contract';
 
 const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
   compiled.flight._EffectsWgpu.drawWgpuEffectPass = __dependency0.drawWgpuEffectPass;
   compiled.flight._EffectsWgpu.getWgpuEffectPipeline = __dependency1.getWgpuEffectPipeline;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency2.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 
-export function applyGodRaysEffectToWgpu(...args) { __syncDependencies(); const result = api.applyGodRaysEffectToWgpu(...args); return result; }
+const __bridgeImplementation_applyGodRaysEffectToWgpu = api.applyGodRaysEffectToWgpu;
+export function applyGodRaysEffectToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyGodRaysEffectToWgpu(...args); return result; }
+api.applyGodRaysEffectToWgpu = applyGodRaysEffectToWgpu;
+compiled.flight.EffectsWgpu.applyGodRaysEffectToWgpu = applyGodRaysEffectToWgpu;
 const __bridgeImplementation_defaultWgpuGodRaysEffectRunner = api.defaultWgpuGodRaysEffectRunner;
 export function defaultWgpuGodRaysEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultWgpuGodRaysEffectRunner(...args); }
 api.defaultWgpuGodRaysEffectRunner = defaultWgpuGodRaysEffectRunner;
-export function registerWgpuGodRaysEffect(...args) { __syncDependencies(); const result = api.registerWgpuGodRaysEffect(...args); return result; }
+const __bridgeImplementation_registerWgpuGodRaysEffect = api.registerWgpuGodRaysEffect;
+export function registerWgpuGodRaysEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerWgpuGodRaysEffect(...args); return result; }
+api.registerWgpuGodRaysEffect = registerWgpuGodRaysEffect;
+compiled.flight.EffectsWgpu.registerWgpuGodRaysEffect = registerWgpuGodRaysEffect;

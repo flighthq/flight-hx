@@ -11,5 +11,11 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function loadScene3DDocumentFromGlbUrl(...args) { __syncDependencies(); const result = api.loadScene3DDocumentFromGlbUrl(...args); return result; }
-export function loadScene3DDocumentFromGltfUrl(...args) { __syncDependencies(); const result = api.loadScene3DDocumentFromGltfUrl(...args); return result; }
+const __bridgeImplementation_loadScene3DDocumentFromGlbUrl = api.loadScene3DDocumentFromGlbUrl;
+export function loadScene3DDocumentFromGlbUrl(...args) { __syncDependencies(); const result = __bridgeImplementation_loadScene3DDocumentFromGlbUrl(...args); return result; }
+api.loadScene3DDocumentFromGlbUrl = loadScene3DDocumentFromGlbUrl;
+compiled.flight.Scene3DResources.loadScene3DDocumentFromGlbUrl = loadScene3DDocumentFromGlbUrl;
+const __bridgeImplementation_loadScene3DDocumentFromGltfUrl = api.loadScene3DDocumentFromGltfUrl;
+export function loadScene3DDocumentFromGltfUrl(...args) { __syncDependencies(); const result = __bridgeImplementation_loadScene3DDocumentFromGltfUrl(...args); return result; }
+api.loadScene3DDocumentFromGltfUrl = loadScene3DDocumentFromGltfUrl;
+compiled.flight.Scene3DResources.loadScene3DDocumentFromGltfUrl = loadScene3DDocumentFromGltfUrl;

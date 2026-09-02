@@ -15,11 +15,18 @@ function __syncDependencies() {
   compiled.flight._EffectsWgpu.applyWgpuEffectBoxBlur = __dependency2.applyWgpuEffectBoxBlur;
   compiled.flight._EffectsWgpu.clearWgpuEffectTarget = __dependency3.clearWgpuEffectTarget;
   compiled.flight._EffectsWgpu.applyWgpuEffectTintPass = __dependency4.applyWgpuEffectTintPass;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 
-export function applyOuterGlowEffectToWgpu(...args) { __syncDependencies(); const result = api.applyOuterGlowEffectToWgpu(...args); return result; }
+const __bridgeImplementation_applyOuterGlowEffectToWgpu = api.applyOuterGlowEffectToWgpu;
+export function applyOuterGlowEffectToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyOuterGlowEffectToWgpu(...args); return result; }
+api.applyOuterGlowEffectToWgpu = applyOuterGlowEffectToWgpu;
+compiled.flight.EffectsWgpu.applyOuterGlowEffectToWgpu = applyOuterGlowEffectToWgpu;
 const __bridgeImplementation_defaultWgpuOuterGlowEffectRunner = api.defaultWgpuOuterGlowEffectRunner;
 export function defaultWgpuOuterGlowEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultWgpuOuterGlowEffectRunner(...args); }
 api.defaultWgpuOuterGlowEffectRunner = defaultWgpuOuterGlowEffectRunner;
-export function registerWgpuOuterGlowEffect(...args) { __syncDependencies(); const result = api.registerWgpuOuterGlowEffect(...args); return result; }
+const __bridgeImplementation_registerWgpuOuterGlowEffect = api.registerWgpuOuterGlowEffect;
+export function registerWgpuOuterGlowEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerWgpuOuterGlowEffect(...args); return result; }
+api.registerWgpuOuterGlowEffect = registerWgpuOuterGlowEffect;
+compiled.flight.EffectsWgpu.registerWgpuOuterGlowEffect = registerWgpuOuterGlowEffect;

@@ -8,5 +8,11 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function getGlEffectProgram(...args) { __syncDependencies(); const result = api.getGlEffectProgram(...args); return result; }
-export function getGlEffectUniformLocation(...args) { __syncDependencies(); const result = api.getGlEffectUniformLocation(...args); return result; }
+const __bridgeImplementation_getGlEffectProgram = api.getGlEffectProgram;
+export function getGlEffectProgram(...args) { __syncDependencies(); const result = __bridgeImplementation_getGlEffectProgram(...args); return result; }
+api.getGlEffectProgram = getGlEffectProgram;
+compiled.flight.EffectsGl.getGlEffectProgram = getGlEffectProgram;
+const __bridgeImplementation_getGlEffectUniformLocation = api.getGlEffectUniformLocation;
+export function getGlEffectUniformLocation(...args) { __syncDependencies(); const result = __bridgeImplementation_getGlEffectUniformLocation(...args); return result; }
+api.getGlEffectUniformLocation = getGlEffectUniformLocation;
+compiled.flight.EffectsGl.getGlEffectUniformLocation = getGlEffectUniformLocation;

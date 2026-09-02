@@ -8,4 +8,7 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function getWgpuEffectPipeline(...args) { __syncDependencies(); const result = api.getWgpuEffectPipeline(...args); return result; }
+const __bridgeImplementation_getWgpuEffectPipeline = api.getWgpuEffectPipeline;
+export function getWgpuEffectPipeline(...args) { __syncDependencies(); const result = __bridgeImplementation_getWgpuEffectPipeline(...args); return result; }
+api.getWgpuEffectPipeline = getWgpuEffectPipeline;
+compiled.flight.EffectsWgpu.getWgpuEffectPipeline = getWgpuEffectPipeline;

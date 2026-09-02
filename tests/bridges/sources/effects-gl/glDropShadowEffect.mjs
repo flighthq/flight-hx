@@ -18,8 +18,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyDropShadowEffectToGl(...args) { __syncDependencies(); const result = api.applyDropShadowEffectToGl(...args); return result; }
+const __bridgeImplementation_applyDropShadowEffectToGl = api.applyDropShadowEffectToGl;
+export function applyDropShadowEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyDropShadowEffectToGl(...args); return result; }
+api.applyDropShadowEffectToGl = applyDropShadowEffectToGl;
+compiled.flight.EffectsGl.applyDropShadowEffectToGl = applyDropShadowEffectToGl;
 const __bridgeImplementation_defaultGlDropShadowEffectRunner = api.defaultGlDropShadowEffectRunner;
 export function defaultGlDropShadowEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlDropShadowEffectRunner(...args); }
 api.defaultGlDropShadowEffectRunner = defaultGlDropShadowEffectRunner;
-export function registerGlDropShadowEffect(...args) { __syncDependencies(); const result = api.registerGlDropShadowEffect(...args); return result; }
+const __bridgeImplementation_registerGlDropShadowEffect = api.registerGlDropShadowEffect;
+export function registerGlDropShadowEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlDropShadowEffect(...args); return result; }
+api.registerGlDropShadowEffect = registerGlDropShadowEffect;
+compiled.flight.EffectsGl.registerGlDropShadowEffect = registerGlDropShadowEffect;

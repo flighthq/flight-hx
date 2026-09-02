@@ -22,3 +22,4 @@ export const registerGlBlendMode = api.registerGlBlendMode;
 export const setGlQuadMatrixFromOffset = api.setGlQuadMatrixFromOffset;
 export const updateGlTexture = api.updateGlTexture;
 export const useGlProgram = api.useGlProgram;
+export const standardGlBlendRealizations = compiled.flight.RenderGl.standardGlBlendRealizations;

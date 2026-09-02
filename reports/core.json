@@ -1425,7 +1425,7 @@
       "module": "flight._Render"
     },
     {
-      "declarations": 226,
+      "declarations": 228,
       "diagnostics": [],
       "module": "flight._RenderGl"
     },
@@ -16947,12 +16947,12 @@
       "asyncFlowForOfValues": 21
     },
     "indexedAccesses": {
-      "reads": 9610,
+      "reads": 9612,
       "writes": 4436
     },
     "indexedReceivers": {
       "Array": {
-        "reads": 6688,
+        "reads": 6690,
         "writes": 1463
       },
       "ArrayOrFloat32Array": {
@@ -17003,7 +17003,7 @@
     "numericRelations": 7787,
     "syntheticArrayReads": {
       "highArityArguments": 27,
-      "iterationBindings": 189
+      "iterationBindings": 191
     },
     "typedArraySetCalls": 90,
     "typedArraySetReceivers": {

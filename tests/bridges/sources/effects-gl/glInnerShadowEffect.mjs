@@ -19,8 +19,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyInnerShadowEffectToGl(...args) { __syncDependencies(); const result = api.applyInnerShadowEffectToGl(...args); return result; }
+const __bridgeImplementation_applyInnerShadowEffectToGl = api.applyInnerShadowEffectToGl;
+export function applyInnerShadowEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyInnerShadowEffectToGl(...args); return result; }
+api.applyInnerShadowEffectToGl = applyInnerShadowEffectToGl;
+compiled.flight.EffectsGl.applyInnerShadowEffectToGl = applyInnerShadowEffectToGl;
 const __bridgeImplementation_defaultGlInnerShadowEffectRunner = api.defaultGlInnerShadowEffectRunner;
 export function defaultGlInnerShadowEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlInnerShadowEffectRunner(...args); }
 api.defaultGlInnerShadowEffectRunner = defaultGlInnerShadowEffectRunner;
-export function registerGlInnerShadowEffect(...args) { __syncDependencies(); const result = api.registerGlInnerShadowEffect(...args); return result; }
+const __bridgeImplementation_registerGlInnerShadowEffect = api.registerGlInnerShadowEffect;
+export function registerGlInnerShadowEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlInnerShadowEffect(...args); return result; }
+api.registerGlInnerShadowEffect = registerGlInnerShadowEffect;
+compiled.flight.EffectsGl.registerGlInnerShadowEffect = registerGlInnerShadowEffect;

@@ -14,8 +14,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyLensDirtEffectToGl(...args) { __syncDependencies(); const result = api.applyLensDirtEffectToGl(...args); return result; }
+const __bridgeImplementation_applyLensDirtEffectToGl = api.applyLensDirtEffectToGl;
+export function applyLensDirtEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyLensDirtEffectToGl(...args); return result; }
+api.applyLensDirtEffectToGl = applyLensDirtEffectToGl;
+compiled.flight.EffectsGl.applyLensDirtEffectToGl = applyLensDirtEffectToGl;
 const __bridgeImplementation_defaultGlLensDirtEffectRunner = api.defaultGlLensDirtEffectRunner;
 export function defaultGlLensDirtEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlLensDirtEffectRunner(...args); }
 api.defaultGlLensDirtEffectRunner = defaultGlLensDirtEffectRunner;
-export function registerGlLensDirtEffect(...args) { __syncDependencies(); const result = api.registerGlLensDirtEffect(...args); return result; }
+const __bridgeImplementation_registerGlLensDirtEffect = api.registerGlLensDirtEffect;
+export function registerGlLensDirtEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlLensDirtEffect(...args); return result; }
+api.registerGlLensDirtEffect = registerGlLensDirtEffect;
+compiled.flight.EffectsGl.registerGlLensDirtEffect = registerGlLensDirtEffect;

@@ -8,5 +8,8 @@ function __syncMutableExports() {
   _textShaperBackendHook = api._textShaperBackendHook;
 }
 
-export function _setTextShaperBackendHook(...args) { const result = api._setTextShaperBackendHook(...args); __syncMutableExports(); return result; }
+const __bridgeImplementation__setTextShaperBackendHook = api._setTextShaperBackendHook;
+export function _setTextShaperBackendHook(...args) { const result = __bridgeImplementation__setTextShaperBackendHook(...args); __syncMutableExports(); return result; }
+api._setTextShaperBackendHook = _setTextShaperBackendHook;
+compiled.flight.TextShaper._setTextShaperBackendHook = _setTextShaperBackendHook;
 export let _textShaperBackendHook = api._textShaperBackendHook;

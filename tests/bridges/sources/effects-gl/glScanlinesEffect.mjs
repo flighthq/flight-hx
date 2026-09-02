@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyScanlinesEffectToGl(...args) { __syncDependencies(); const result = api.applyScanlinesEffectToGl(...args); return result; }
+const __bridgeImplementation_applyScanlinesEffectToGl = api.applyScanlinesEffectToGl;
+export function applyScanlinesEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyScanlinesEffectToGl(...args); return result; }
+api.applyScanlinesEffectToGl = applyScanlinesEffectToGl;
+compiled.flight.EffectsGl.applyScanlinesEffectToGl = applyScanlinesEffectToGl;
 const __bridgeImplementation_defaultGlScanlinesEffectRunner = api.defaultGlScanlinesEffectRunner;
 export function defaultGlScanlinesEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlScanlinesEffectRunner(...args); }
 api.defaultGlScanlinesEffectRunner = defaultGlScanlinesEffectRunner;
-export function registerGlScanlinesEffect(...args) { __syncDependencies(); const result = api.registerGlScanlinesEffect(...args); return result; }
+const __bridgeImplementation_registerGlScanlinesEffect = api.registerGlScanlinesEffect;
+export function registerGlScanlinesEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlScanlinesEffect(...args); return result; }
+api.registerGlScanlinesEffect = registerGlScanlinesEffect;
+compiled.flight.EffectsGl.registerGlScanlinesEffect = registerGlScanlinesEffect;

@@ -17,8 +17,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyOuterGlowEffectToGl(...args) { __syncDependencies(); const result = api.applyOuterGlowEffectToGl(...args); return result; }
+const __bridgeImplementation_applyOuterGlowEffectToGl = api.applyOuterGlowEffectToGl;
+export function applyOuterGlowEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyOuterGlowEffectToGl(...args); return result; }
+api.applyOuterGlowEffectToGl = applyOuterGlowEffectToGl;
+compiled.flight.EffectsGl.applyOuterGlowEffectToGl = applyOuterGlowEffectToGl;
 const __bridgeImplementation_defaultGlOuterGlowEffectRunner = api.defaultGlOuterGlowEffectRunner;
 export function defaultGlOuterGlowEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlOuterGlowEffectRunner(...args); }
 api.defaultGlOuterGlowEffectRunner = defaultGlOuterGlowEffectRunner;
-export function registerGlOuterGlowEffect(...args) { __syncDependencies(); const result = api.registerGlOuterGlowEffect(...args); return result; }
+const __bridgeImplementation_registerGlOuterGlowEffect = api.registerGlOuterGlowEffect;
+export function registerGlOuterGlowEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlOuterGlowEffect(...args); return result; }
+api.registerGlOuterGlowEffect = registerGlOuterGlowEffect;
+compiled.flight.EffectsGl.registerGlOuterGlowEffect = registerGlOuterGlowEffect;

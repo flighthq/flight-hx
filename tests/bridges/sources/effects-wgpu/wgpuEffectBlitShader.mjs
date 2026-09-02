@@ -9,6 +9,15 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyWgpuEffectBlitOffsetPass(...args) { __syncDependencies(); const result = api.applyWgpuEffectBlitOffsetPass(...args); return result; }
-export function applyWgpuEffectBlitPass(...args) { __syncDependencies(); const result = api.applyWgpuEffectBlitPass(...args); return result; }
-export function applyWgpuEffectErasePass(...args) { __syncDependencies(); const result = api.applyWgpuEffectErasePass(...args); return result; }
+const __bridgeImplementation_applyWgpuEffectBlitOffsetPass = api.applyWgpuEffectBlitOffsetPass;
+export function applyWgpuEffectBlitOffsetPass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyWgpuEffectBlitOffsetPass(...args); return result; }
+api.applyWgpuEffectBlitOffsetPass = applyWgpuEffectBlitOffsetPass;
+compiled.flight.EffectsWgpu.applyWgpuEffectBlitOffsetPass = applyWgpuEffectBlitOffsetPass;
+const __bridgeImplementation_applyWgpuEffectBlitPass = api.applyWgpuEffectBlitPass;
+export function applyWgpuEffectBlitPass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyWgpuEffectBlitPass(...args); return result; }
+api.applyWgpuEffectBlitPass = applyWgpuEffectBlitPass;
+compiled.flight.EffectsWgpu.applyWgpuEffectBlitPass = applyWgpuEffectBlitPass;
+const __bridgeImplementation_applyWgpuEffectErasePass = api.applyWgpuEffectErasePass;
+export function applyWgpuEffectErasePass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyWgpuEffectErasePass(...args); return result; }
+api.applyWgpuEffectErasePass = applyWgpuEffectErasePass;
+compiled.flight.EffectsWgpu.applyWgpuEffectErasePass = applyWgpuEffectErasePass;

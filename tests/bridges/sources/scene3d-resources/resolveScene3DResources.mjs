@@ -8,6 +8,15 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function resolveOneScene3DResourceTexture(...args) { __syncDependencies(); const result = api.resolveOneScene3DResourceTexture(...args); return result; }
-export function resolveScene3DResources(...args) { __syncDependencies(); const result = api.resolveScene3DResources(...args); return result; }
-export function updateScene3DResourceStreaming(...args) { __syncDependencies(); const result = api.updateScene3DResourceStreaming(...args); return result; }
+const __bridgeImplementation_resolveOneScene3DResourceTexture = api.resolveOneScene3DResourceTexture;
+export function resolveOneScene3DResourceTexture(...args) { __syncDependencies(); const result = __bridgeImplementation_resolveOneScene3DResourceTexture(...args); return result; }
+api.resolveOneScene3DResourceTexture = resolveOneScene3DResourceTexture;
+compiled.flight.Scene3DResources.resolveOneScene3DResourceTexture = resolveOneScene3DResourceTexture;
+const __bridgeImplementation_resolveScene3DResources = api.resolveScene3DResources;
+export function resolveScene3DResources(...args) { __syncDependencies(); const result = __bridgeImplementation_resolveScene3DResources(...args); return result; }
+api.resolveScene3DResources = resolveScene3DResources;
+compiled.flight.Scene3DResources.resolveScene3DResources = resolveScene3DResources;
+const __bridgeImplementation_updateScene3DResourceStreaming = api.updateScene3DResourceStreaming;
+export function updateScene3DResourceStreaming(...args) { __syncDependencies(); const result = __bridgeImplementation_updateScene3DResourceStreaming(...args); return result; }
+api.updateScene3DResourceStreaming = updateScene3DResourceStreaming;
+compiled.flight.Scene3DResources.updateScene3DResourceStreaming = updateScene3DResourceStreaming;

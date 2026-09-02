@@ -17,5 +17,11 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function createGlApplicationRenderView(...args) { __syncDependencies(); const result = api.createGlApplicationRenderView(...args); return result; }
-export function destroyGlApplicationRenderView(...args) { __syncDependencies(); const result = api.destroyGlApplicationRenderView(...args); return result; }
+const __bridgeImplementation_createGlApplicationRenderView = api.createGlApplicationRenderView;
+export function createGlApplicationRenderView(...args) { __syncDependencies(); const result = __bridgeImplementation_createGlApplicationRenderView(...args); return result; }
+api.createGlApplicationRenderView = createGlApplicationRenderView;
+compiled.flight.ApplicationGl.createGlApplicationRenderView = createGlApplicationRenderView;
+const __bridgeImplementation_destroyGlApplicationRenderView = api.destroyGlApplicationRenderView;
+export function destroyGlApplicationRenderView(...args) { __syncDependencies(); const result = __bridgeImplementation_destroyGlApplicationRenderView(...args); return result; }
+api.destroyGlApplicationRenderView = destroyGlApplicationRenderView;
+compiled.flight.ApplicationGl.destroyGlApplicationRenderView = destroyGlApplicationRenderView;

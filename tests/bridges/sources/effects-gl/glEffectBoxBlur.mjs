@@ -9,4 +9,7 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyGlEffectBoxBlur(...args) { __syncDependencies(); const result = api.applyGlEffectBoxBlur(...args); return result; }
+const __bridgeImplementation_applyGlEffectBoxBlur = api.applyGlEffectBoxBlur;
+export function applyGlEffectBoxBlur(...args) { __syncDependencies(); const result = __bridgeImplementation_applyGlEffectBoxBlur(...args); return result; }
+api.applyGlEffectBoxBlur = applyGlEffectBoxBlur;
+compiled.flight.EffectsGl.applyGlEffectBoxBlur = applyGlEffectBoxBlur;

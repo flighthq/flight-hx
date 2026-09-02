@@ -20,10 +20,28 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function createWgpuCacheState(...args) { __syncDependencies(); const result = api.createWgpuCacheState(...args); return result; }
+const __bridgeImplementation_createWgpuCacheState = api.createWgpuCacheState;
+export function createWgpuCacheState(...args) { __syncDependencies(); const result = __bridgeImplementation_createWgpuCacheState(...args); return result; }
+api.createWgpuCacheState = createWgpuCacheState;
+compiled.flight.Scene2DWgpu.createWgpuCacheState = createWgpuCacheState;
 export const defaultWgpuRenderCacheRenderer = api.defaultWgpuRenderCacheRenderer;
-export function enableWgpuRenderCache(...args) { __syncDependencies(); const result = api.enableWgpuRenderCache(...args); return result; }
-export function ensureWgpuRenderCacheTarget(...args) { __syncDependencies(); const result = api.ensureWgpuRenderCacheTarget(...args); return result; }
-export function getWgpuRenderCacheTarget(...args) { __syncDependencies(); const result = api.getWgpuRenderCacheTarget(...args); return result; }
-export function refreshWgpuRenderCache(...args) { __syncDependencies(); const result = api.refreshWgpuRenderCache(...args); return result; }
-export function releaseWgpuRenderCache(...args) { __syncDependencies(); const result = api.releaseWgpuRenderCache(...args); return result; }
+const __bridgeImplementation_enableWgpuRenderCache = api.enableWgpuRenderCache;
+export function enableWgpuRenderCache(...args) { __syncDependencies(); const result = __bridgeImplementation_enableWgpuRenderCache(...args); return result; }
+api.enableWgpuRenderCache = enableWgpuRenderCache;
+compiled.flight.Scene2DWgpu.enableWgpuRenderCache = enableWgpuRenderCache;
+const __bridgeImplementation_ensureWgpuRenderCacheTarget = api.ensureWgpuRenderCacheTarget;
+export function ensureWgpuRenderCacheTarget(...args) { __syncDependencies(); const result = __bridgeImplementation_ensureWgpuRenderCacheTarget(...args); return result; }
+api.ensureWgpuRenderCacheTarget = ensureWgpuRenderCacheTarget;
+compiled.flight.Scene2DWgpu.ensureWgpuRenderCacheTarget = ensureWgpuRenderCacheTarget;
+const __bridgeImplementation_getWgpuRenderCacheTarget = api.getWgpuRenderCacheTarget;
+export function getWgpuRenderCacheTarget(...args) { __syncDependencies(); const result = __bridgeImplementation_getWgpuRenderCacheTarget(...args); return result; }
+api.getWgpuRenderCacheTarget = getWgpuRenderCacheTarget;
+compiled.flight.Scene2DWgpu.getWgpuRenderCacheTarget = getWgpuRenderCacheTarget;
+const __bridgeImplementation_refreshWgpuRenderCache = api.refreshWgpuRenderCache;
+export function refreshWgpuRenderCache(...args) { __syncDependencies(); const result = __bridgeImplementation_refreshWgpuRenderCache(...args); return result; }
+api.refreshWgpuRenderCache = refreshWgpuRenderCache;
+compiled.flight.Scene2DWgpu.refreshWgpuRenderCache = refreshWgpuRenderCache;
+const __bridgeImplementation_releaseWgpuRenderCache = api.releaseWgpuRenderCache;
+export function releaseWgpuRenderCache(...args) { __syncDependencies(); const result = __bridgeImplementation_releaseWgpuRenderCache(...args); return result; }
+api.releaseWgpuRenderCache = releaseWgpuRenderCache;
+compiled.flight.Scene2DWgpu.releaseWgpuRenderCache = releaseWgpuRenderCache;

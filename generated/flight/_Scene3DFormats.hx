@@ -4861,7 +4861,7 @@ class _Scene3DFormats {
       return cast scene;
     }
     clip = (cast parseMd5Anim((cast animSource : String), (cast joints : Dynamic), ({ final __callArgument1841:Dynamic = diagnostics; __callArgument1841; })) : Null<AnimationClip>);
-    if ((cast !_Runtime.strictEquals(clip, null) : Bool)) { ((cast scene.animations : { var default_:AnimationClip; }).default_ = clip); }
+    if ((cast !_Runtime.strictEquals(clip, null) : Bool)) { _Runtime.setField(scene.animations, 'default', clip); }
     return cast scene;
     return cast null;
   }

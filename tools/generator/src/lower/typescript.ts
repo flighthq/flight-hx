@@ -300,6 +300,7 @@ export function lowerTypeScriptSource(
 ): LoweringResult {
   const diagnostics: LoweringDiagnostic[] = [];
   const declarations: IrDeclaration[] = [];
+  const moduleRuntimeStatements: IrStatement[] = [];
   const hostTypes = new Map<string, HostTypeUse>();
   let accountedDeclarations = 0;
   const erasedLocalTypes = new Set<string>();
@@ -543,10 +544,60 @@ export function lowerTypeScriptSource(
           unsupported(statement, context, `declaration ${ts.SyntaxKind[statement.kind] ?? statement.kind}`);
         }
         accountedDeclarations += 1;
+      } else if (
+        !ts.isImportDeclaration(statement) &&
+        !ts.isExportDeclaration(statement) &&
+        !ts.isExportAssignment(statement)
+      ) {
+        moduleRuntimeStatements.push(lowerStatement(statement, context));
       }
     } catch (error) {
       if (!(error instanceof UnsupportedSyntaxError)) throw error;
     }
+  }
+
+  if (moduleRuntimeStatements.length > 0) {
+    const declarationNames = new Set(declarations.map((declaration) => declaration.name));
+    const uniqueName = (base: string): string => {
+      let name = base;
+      let suffix = 0;
+      while (declarationNames.has(name)) name = `${base}${String(++suffix)}`;
+      declarationNames.add(name);
+      return name;
+    };
+    const initializerName = uniqueName('__flightModuleInitialize');
+    const initializedName = uniqueName('__flightModuleInitialized');
+    const booleanType = { kind: 'primitive', name: 'Bool' } as const;
+    declarations.push(
+      {
+        body: [...moduleRuntimeStatements, { expression: { kind: 'literal', value: true }, kind: 'return' }],
+        exported: false,
+        kind: 'function',
+        name: initializerName,
+        noCompletion: true,
+        origin: origin(sourceFile, context),
+        parameters: [],
+        returns: booleanType,
+        typeParameters: [],
+      },
+      {
+        exported: false,
+        initializer: {
+          arguments: [],
+          callee: { kind: 'identifier', name: initializerName },
+          direct: true,
+          kind: 'call',
+          type: booleanType,
+          typeArguments: [],
+        },
+        kind: 'variable',
+        mutable: false,
+        name: initializedName,
+        noCompletion: true,
+        origin: origin(sourceFile, context),
+        type: booleanType,
+      },
+    );
   }
 
   return {

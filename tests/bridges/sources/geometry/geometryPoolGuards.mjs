@@ -9,4 +9,7 @@ function __syncMutableExports() {
 }
 
 export let geometryPoolReleaseGuard = api.geometryPoolReleaseGuard;
-export function setGeometryPoolReleaseGuard(...args) { const result = api.setGeometryPoolReleaseGuard(...args); __syncMutableExports(); return result; }
+const __bridgeImplementation_setGeometryPoolReleaseGuard = api.setGeometryPoolReleaseGuard;
+export function setGeometryPoolReleaseGuard(...args) { const result = __bridgeImplementation_setGeometryPoolReleaseGuard(...args); __syncMutableExports(); return result; }
+api.setGeometryPoolReleaseGuard = setGeometryPoolReleaseGuard;
+compiled.flight.Geometry.setGeometryPoolReleaseGuard = setGeometryPoolReleaseGuard;

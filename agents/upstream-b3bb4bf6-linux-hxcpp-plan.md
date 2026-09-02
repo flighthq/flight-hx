@@ -20,6 +20,16 @@ Both camera2d and particles then compiled successfully for Linux hxcpp.
 
 Upstream commit `bc784801a` also migrated 64 SDK tests from module-level `vi.mock` factories to `vi.spyOn` namespace calls. Source bridges originally synchronized only hoisted module mocks, so the new spies never reached the corresponding compiled Haxe statics. Bridge analysis now maps namespace imports in adjacent tests, records the exact spied exports, and refreshes those bindings immediately before each exported function call. Function-valued constants retain identity through a wrapper that is installed back onto the compiled static field, preserving effect-runner registry equality. Focused application-gl, glTF, drop-shadow, and glitch parity exercises direct package, local/transitive, and callable-constant cases.
 
+The complete parity pass exposed two broader forms of the same problem. A test can spy on a shared module while exercising consumers from several other source files, so bridge analysis now aggregates spy targets across the package and refreshes every importing consumer. Wrappers capture the original compiled implementation before installing themselves, avoiding recursion, and update object-literal function fields when upstream observes function identity. The generator also preserves source-local export aliases, secondary class constructor paths, and structural properties whose JavaScript name is a Haxe keyword.
+
+One runtime semantic gap was independent of test bridging: `render-gl/glDraw.ts` populates its standard blend table in a top-level `for...of`, while lowering previously retained only declarations. Top-level executable statements now lower into a deterministic static initializer ordered after their referenced fields. The regenerated table carries all six modes. A focused post-repair parity run passes all 107 tests across the WGPU logical-resolution suite, GL draw, and the scene2d GL pipeline.
+
+## Parity assessment
+
+The complete report-only upstream run finished successfully across all 159 packages. It classified 143 packages as matching and 16 as nonmatching: four previously reviewed differences, 12 awaiting review, and six packages fixed since their prior review. The high-count SWF failure was one constructor-path defect (78 assertions), while protocol and render-gl isolated reserved-property, local-alias, and module-initialization defects. Those generic generator faults are repaired above rather than recorded as expected drift.
+
+The remaining report entries are not evidence for a native-performance change. They cluster around known-answer random/hash values, `null` versus `undefined`, host provider identity, source-format edge cases, a JSDOM surface assumption, an excluded Playwright tool package, and a Vitest worker teardown after all scene3d-gl assertions pass. They should be reviewed independently; none changes the hxcpp measurements or the implementation priorities below.
+
 ## Audit delta
 
 The source inventory grows modestly while preserving all package and export-lane coverage:

@@ -8,8 +8,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyContactShadowsEffectToGl(...args) { __syncDependencies(); const result = api.applyContactShadowsEffectToGl(...args); return result; }
+const __bridgeImplementation_applyContactShadowsEffectToGl = api.applyContactShadowsEffectToGl;
+export function applyContactShadowsEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyContactShadowsEffectToGl(...args); return result; }
+api.applyContactShadowsEffectToGl = applyContactShadowsEffectToGl;
+compiled.flight.EffectsGl.applyContactShadowsEffectToGl = applyContactShadowsEffectToGl;
 const __bridgeImplementation_defaultGlContactShadowsEffectRunner = api.defaultGlContactShadowsEffectRunner;
 export function defaultGlContactShadowsEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlContactShadowsEffectRunner(...args); }
 api.defaultGlContactShadowsEffectRunner = defaultGlContactShadowsEffectRunner;
-export function registerGlContactShadowsEffect(...args) { __syncDependencies(); const result = api.registerGlContactShadowsEffect(...args); return result; }
+const __bridgeImplementation_registerGlContactShadowsEffect = api.registerGlContactShadowsEffect;
+export function registerGlContactShadowsEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlContactShadowsEffect(...args); return result; }
+api.registerGlContactShadowsEffect = registerGlContactShadowsEffect;
+compiled.flight.EffectsGl.registerGlContactShadowsEffect = registerGlContactShadowsEffect;

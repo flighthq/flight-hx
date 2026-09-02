@@ -9,4 +9,7 @@ function __syncDependencies() {
 __syncDependencies();
 
 export const defaultWgpuMeshShapeRenderer = api.defaultWgpuMeshShapeRenderer;
-export function drawWgpuMeshShape(...args) { __syncDependencies(); const result = api.drawWgpuMeshShape(...args); return result; }
+const __bridgeImplementation_drawWgpuMeshShape = api.drawWgpuMeshShape;
+export function drawWgpuMeshShape(...args) { __syncDependencies(); const result = __bridgeImplementation_drawWgpuMeshShape(...args); return result; }
+api.drawWgpuMeshShape = drawWgpuMeshShape;
+compiled.flight.Scene2DWgpu.drawWgpuMeshShape = drawWgpuMeshShape;

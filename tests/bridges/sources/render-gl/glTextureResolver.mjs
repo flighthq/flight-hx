@@ -12,3 +12,4 @@ export const registerGlRenderTextureResolver = api.registerGlRenderTextureResolv
 export const registerGlTextureResolver = api.registerGlTextureResolver;
 export const registerStandardGlTextureResolvers = api.registerStandardGlTextureResolvers;
 export const resolveGlTexture = api.resolveGlTexture;
+export const standardGlTextureResolvers = compiled.flight.RenderGl.standardGlTextureResolvers;

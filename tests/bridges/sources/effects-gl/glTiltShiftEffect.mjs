@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyTiltShiftEffectToGl(...args) { __syncDependencies(); const result = api.applyTiltShiftEffectToGl(...args); return result; }
+const __bridgeImplementation_applyTiltShiftEffectToGl = api.applyTiltShiftEffectToGl;
+export function applyTiltShiftEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyTiltShiftEffectToGl(...args); return result; }
+api.applyTiltShiftEffectToGl = applyTiltShiftEffectToGl;
+compiled.flight.EffectsGl.applyTiltShiftEffectToGl = applyTiltShiftEffectToGl;
 const __bridgeImplementation_defaultGlTiltShiftEffectRunner = api.defaultGlTiltShiftEffectRunner;
 export function defaultGlTiltShiftEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlTiltShiftEffectRunner(...args); }
 api.defaultGlTiltShiftEffectRunner = defaultGlTiltShiftEffectRunner;
-export function registerGlTiltShiftEffect(...args) { __syncDependencies(); const result = api.registerGlTiltShiftEffect(...args); return result; }
+const __bridgeImplementation_registerGlTiltShiftEffect = api.registerGlTiltShiftEffect;
+export function registerGlTiltShiftEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlTiltShiftEffect(...args); return result; }
+api.registerGlTiltShiftEffect = registerGlTiltShiftEffect;
+compiled.flight.EffectsGl.registerGlTiltShiftEffect = registerGlTiltShiftEffect;

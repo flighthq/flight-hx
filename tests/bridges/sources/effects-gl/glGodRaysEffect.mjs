@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyGodRaysEffectToGl(...args) { __syncDependencies(); const result = api.applyGodRaysEffectToGl(...args); return result; }
+const __bridgeImplementation_applyGodRaysEffectToGl = api.applyGodRaysEffectToGl;
+export function applyGodRaysEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyGodRaysEffectToGl(...args); return result; }
+api.applyGodRaysEffectToGl = applyGodRaysEffectToGl;
+compiled.flight.EffectsGl.applyGodRaysEffectToGl = applyGodRaysEffectToGl;
 const __bridgeImplementation_defaultGlGodRaysEffectRunner = api.defaultGlGodRaysEffectRunner;
 export function defaultGlGodRaysEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlGodRaysEffectRunner(...args); }
 api.defaultGlGodRaysEffectRunner = defaultGlGodRaysEffectRunner;
-export function registerGlGodRaysEffect(...args) { __syncDependencies(); const result = api.registerGlGodRaysEffect(...args); return result; }
+const __bridgeImplementation_registerGlGodRaysEffect = api.registerGlGodRaysEffect;
+export function registerGlGodRaysEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlGodRaysEffect(...args); return result; }
+api.registerGlGodRaysEffect = registerGlGodRaysEffect;
+compiled.flight.EffectsGl.registerGlGodRaysEffect = registerGlGodRaysEffect;

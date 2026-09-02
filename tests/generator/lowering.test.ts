@@ -48,6 +48,42 @@ function typedSource(
 }
 
 describe('TypeScript lowering and Haxe emission', () => {
+  it('executes top-level runtime statements after their static dependencies initialize', () => {
+    const source = ts.createSourceFile(
+      '/workspace/upstream/packages/sample/src/registry.ts',
+      `
+        const entries = [['ready', 1]] as const;
+        export let registry: Record<string, number> = {};
+        for (const [key, value] of entries) {
+          registry = { ...registry, [key]: value };
+        }
+      `,
+      ts.ScriptTarget.Latest,
+      true,
+      ts.ScriptKind.TS,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/sample', '/workspace');
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'RegistryFixture',
+      packageName: '@flighthq/sample',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('static function __flightModuleInitialize():Bool');
+    expect(output).toContain('for (__iteration');
+    expect(output).toContain(
+      'static final __flightModuleInitialized:Bool = (cast RegistryFixture.__flightModuleInitialize() : Bool);',
+    );
+    expect(output.indexOf('static final entries')).toBeLessThan(
+      output.indexOf('static final __flightModuleInitialized'),
+    );
+    expect(output.indexOf('static var registry')).toBeLessThan(
+      output.indexOf('static final __flightModuleInitialized'),
+    );
+  });
+
   it('orders static fields used through eagerly called helpers before their consumers', () => {
     const source = ts.createSourceFile(
       '/workspace/upstream/packages/sample/src/pipeline.ts',

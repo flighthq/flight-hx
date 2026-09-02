@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyMotionBlurEffectToGl(...args) { __syncDependencies(); const result = api.applyMotionBlurEffectToGl(...args); return result; }
+const __bridgeImplementation_applyMotionBlurEffectToGl = api.applyMotionBlurEffectToGl;
+export function applyMotionBlurEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyMotionBlurEffectToGl(...args); return result; }
+api.applyMotionBlurEffectToGl = applyMotionBlurEffectToGl;
+compiled.flight.EffectsGl.applyMotionBlurEffectToGl = applyMotionBlurEffectToGl;
 const __bridgeImplementation_defaultGlMotionBlurEffectRunner = api.defaultGlMotionBlurEffectRunner;
 export function defaultGlMotionBlurEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlMotionBlurEffectRunner(...args); }
 api.defaultGlMotionBlurEffectRunner = defaultGlMotionBlurEffectRunner;
-export function registerGlMotionBlurEffect(...args) { __syncDependencies(); const result = api.registerGlMotionBlurEffect(...args); return result; }
+const __bridgeImplementation_registerGlMotionBlurEffect = api.registerGlMotionBlurEffect;
+export function registerGlMotionBlurEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlMotionBlurEffect(...args); return result; }
+api.registerGlMotionBlurEffect = registerGlMotionBlurEffect;
+compiled.flight.EffectsGl.registerGlMotionBlurEffect = registerGlMotionBlurEffect;

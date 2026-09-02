@@ -9,4 +9,7 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyWgpuEffectBoxBlur(...args) { __syncDependencies(); const result = api.applyWgpuEffectBoxBlur(...args); return result; }
+const __bridgeImplementation_applyWgpuEffectBoxBlur = api.applyWgpuEffectBoxBlur;
+export function applyWgpuEffectBoxBlur(...args) { __syncDependencies(); const result = __bridgeImplementation_applyWgpuEffectBoxBlur(...args); return result; }
+api.applyWgpuEffectBoxBlur = applyWgpuEffectBoxBlur;
+compiled.flight.EffectsWgpu.applyWgpuEffectBoxBlur = applyWgpuEffectBoxBlur;

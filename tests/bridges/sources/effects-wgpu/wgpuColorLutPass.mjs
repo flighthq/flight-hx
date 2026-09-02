@@ -8,4 +8,7 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyColorLutPassToWgpu(...args) { __syncDependencies(); const result = api.applyColorLutPassToWgpu(...args); return result; }
+const __bridgeImplementation_applyColorLutPassToWgpu = api.applyColorLutPassToWgpu;
+export function applyColorLutPassToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyColorLutPassToWgpu(...args); return result; }
+api.applyColorLutPassToWgpu = applyColorLutPassToWgpu;
+compiled.flight.EffectsWgpu.applyColorLutPassToWgpu = applyColorLutPassToWgpu;

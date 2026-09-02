@@ -10,4 +10,7 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyColorMatrixPassToWgpu(...args) { __syncDependencies(); const result = api.applyColorMatrixPassToWgpu(...args); return result; }
+const __bridgeImplementation_applyColorMatrixPassToWgpu = api.applyColorMatrixPassToWgpu;
+export function applyColorMatrixPassToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyColorMatrixPassToWgpu(...args); return result; }
+api.applyColorMatrixPassToWgpu = applyColorMatrixPassToWgpu;
+compiled.flight.EffectsWgpu.applyColorMatrixPassToWgpu = applyColorMatrixPassToWgpu;

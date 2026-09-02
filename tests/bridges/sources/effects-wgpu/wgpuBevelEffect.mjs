@@ -17,11 +17,18 @@ function __syncDependencies() {
   compiled.flight._EffectsWgpu.createWgpuDualSourceEffectPipeline = __dependency3.createWgpuDualSourceEffectPipeline;
   compiled.flight._EffectsWgpu.drawWgpuDualSourceEffectPass = __dependency3.drawWgpuDualSourceEffectPass;
   compiled.flight._EffectsWgpu.applyWgpuEffectTintPass = __dependency4.applyWgpuEffectTintPass;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency0.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 
-export function applyBevelEffectToWgpu(...args) { __syncDependencies(); const result = api.applyBevelEffectToWgpu(...args); return result; }
+const __bridgeImplementation_applyBevelEffectToWgpu = api.applyBevelEffectToWgpu;
+export function applyBevelEffectToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyBevelEffectToWgpu(...args); return result; }
+api.applyBevelEffectToWgpu = applyBevelEffectToWgpu;
+compiled.flight.EffectsWgpu.applyBevelEffectToWgpu = applyBevelEffectToWgpu;
 const __bridgeImplementation_defaultWgpuBevelEffectRunner = api.defaultWgpuBevelEffectRunner;
 export function defaultWgpuBevelEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultWgpuBevelEffectRunner(...args); }
 api.defaultWgpuBevelEffectRunner = defaultWgpuBevelEffectRunner;
-export function registerWgpuBevelEffect(...args) { __syncDependencies(); const result = api.registerWgpuBevelEffect(...args); return result; }
+const __bridgeImplementation_registerWgpuBevelEffect = api.registerWgpuBevelEffect;
+export function registerWgpuBevelEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerWgpuBevelEffect(...args); return result; }
+api.registerWgpuBevelEffect = registerWgpuBevelEffect;
+compiled.flight.EffectsWgpu.registerWgpuBevelEffect = registerWgpuBevelEffect;

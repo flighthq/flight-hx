@@ -18,8 +18,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyInnerGlowEffectToGl(...args) { __syncDependencies(); const result = api.applyInnerGlowEffectToGl(...args); return result; }
+const __bridgeImplementation_applyInnerGlowEffectToGl = api.applyInnerGlowEffectToGl;
+export function applyInnerGlowEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyInnerGlowEffectToGl(...args); return result; }
+api.applyInnerGlowEffectToGl = applyInnerGlowEffectToGl;
+compiled.flight.EffectsGl.applyInnerGlowEffectToGl = applyInnerGlowEffectToGl;
 const __bridgeImplementation_defaultGlInnerGlowEffectRunner = api.defaultGlInnerGlowEffectRunner;
 export function defaultGlInnerGlowEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlInnerGlowEffectRunner(...args); }
 api.defaultGlInnerGlowEffectRunner = defaultGlInnerGlowEffectRunner;
-export function registerGlInnerGlowEffect(...args) { __syncDependencies(); const result = api.registerGlInnerGlowEffect(...args); return result; }
+const __bridgeImplementation_registerGlInnerGlowEffect = api.registerGlInnerGlowEffect;
+export function registerGlInnerGlowEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlInnerGlowEffect(...args); return result; }
+api.registerGlInnerGlowEffect = registerGlInnerGlowEffect;
+compiled.flight.EffectsGl.registerGlInnerGlowEffect = registerGlInnerGlowEffect;

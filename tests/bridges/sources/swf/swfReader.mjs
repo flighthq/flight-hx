@@ -4,4 +4,4 @@ import compiled from '../../../../build/haxe-js/flight.cjs';
 function __syncDependencies() {}
 __syncDependencies();
 
-export const SwfReader = compiled.flight._Swf.SwfReader;
+export const SwfReader = compiled.flight.SwfReader;

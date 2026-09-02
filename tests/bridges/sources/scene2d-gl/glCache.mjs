@@ -18,10 +18,28 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function createGlCacheState(...args) { __syncDependencies(); const result = api.createGlCacheState(...args); return result; }
+const __bridgeImplementation_createGlCacheState = api.createGlCacheState;
+export function createGlCacheState(...args) { __syncDependencies(); const result = __bridgeImplementation_createGlCacheState(...args); return result; }
+api.createGlCacheState = createGlCacheState;
+compiled.flight.Scene2DGl.createGlCacheState = createGlCacheState;
 export const defaultGlRenderCacheRenderer = api.defaultGlRenderCacheRenderer;
-export function enableGlRenderCache(...args) { __syncDependencies(); const result = api.enableGlRenderCache(...args); return result; }
-export function ensureGlRenderCacheTarget(...args) { __syncDependencies(); const result = api.ensureGlRenderCacheTarget(...args); return result; }
-export function getGlRenderCacheTarget(...args) { __syncDependencies(); const result = api.getGlRenderCacheTarget(...args); return result; }
-export function refreshGlRenderCache(...args) { __syncDependencies(); const result = api.refreshGlRenderCache(...args); return result; }
-export function releaseGlRenderCache(...args) { __syncDependencies(); const result = api.releaseGlRenderCache(...args); return result; }
+const __bridgeImplementation_enableGlRenderCache = api.enableGlRenderCache;
+export function enableGlRenderCache(...args) { __syncDependencies(); const result = __bridgeImplementation_enableGlRenderCache(...args); return result; }
+api.enableGlRenderCache = enableGlRenderCache;
+compiled.flight.Scene2DGl.enableGlRenderCache = enableGlRenderCache;
+const __bridgeImplementation_ensureGlRenderCacheTarget = api.ensureGlRenderCacheTarget;
+export function ensureGlRenderCacheTarget(...args) { __syncDependencies(); const result = __bridgeImplementation_ensureGlRenderCacheTarget(...args); return result; }
+api.ensureGlRenderCacheTarget = ensureGlRenderCacheTarget;
+compiled.flight.Scene2DGl.ensureGlRenderCacheTarget = ensureGlRenderCacheTarget;
+const __bridgeImplementation_getGlRenderCacheTarget = api.getGlRenderCacheTarget;
+export function getGlRenderCacheTarget(...args) { __syncDependencies(); const result = __bridgeImplementation_getGlRenderCacheTarget(...args); return result; }
+api.getGlRenderCacheTarget = getGlRenderCacheTarget;
+compiled.flight.Scene2DGl.getGlRenderCacheTarget = getGlRenderCacheTarget;
+const __bridgeImplementation_refreshGlRenderCache = api.refreshGlRenderCache;
+export function refreshGlRenderCache(...args) { __syncDependencies(); const result = __bridgeImplementation_refreshGlRenderCache(...args); return result; }
+api.refreshGlRenderCache = refreshGlRenderCache;
+compiled.flight.Scene2DGl.refreshGlRenderCache = refreshGlRenderCache;
+const __bridgeImplementation_releaseGlRenderCache = api.releaseGlRenderCache;
+export function releaseGlRenderCache(...args) { __syncDependencies(); const result = __bridgeImplementation_releaseGlRenderCache(...args); return result; }
+api.releaseGlRenderCache = releaseGlRenderCache;
+compiled.flight.Scene2DGl.releaseGlRenderCache = releaseGlRenderCache;

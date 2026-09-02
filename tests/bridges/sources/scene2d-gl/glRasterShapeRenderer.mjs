@@ -10,4 +10,8 @@ function __syncDependencies() {
 __syncDependencies();
 
 export const defaultGlRasterShapeRenderer = api.defaultGlRasterShapeRenderer;
-export function drawGlRasterShape(...args) { __syncDependencies(); const result = api.drawGlRasterShape(...args); return result; }
+const __bridgeImplementation_drawGlRasterShape = api.drawGlRasterShape;
+export function drawGlRasterShape(...args) { __syncDependencies(); const result = __bridgeImplementation_drawGlRasterShape(...args); return result; }
+api.drawGlRasterShape = drawGlRasterShape;
+compiled.flight.Scene2DGl.drawGlRasterShape = drawGlRasterShape;
+api.defaultGlRasterShapeRenderer["submit"] = drawGlRasterShape;

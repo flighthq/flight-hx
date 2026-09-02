@@ -9,6 +9,15 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyGlEffectBlitOffsetPass(...args) { __syncDependencies(); const result = api.applyGlEffectBlitOffsetPass(...args); return result; }
-export function applyGlEffectBlitPass(...args) { __syncDependencies(); const result = api.applyGlEffectBlitPass(...args); return result; }
-export function applyGlEffectErasePass(...args) { __syncDependencies(); const result = api.applyGlEffectErasePass(...args); return result; }
+const __bridgeImplementation_applyGlEffectBlitOffsetPass = api.applyGlEffectBlitOffsetPass;
+export function applyGlEffectBlitOffsetPass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyGlEffectBlitOffsetPass(...args); return result; }
+api.applyGlEffectBlitOffsetPass = applyGlEffectBlitOffsetPass;
+compiled.flight.EffectsGl.applyGlEffectBlitOffsetPass = applyGlEffectBlitOffsetPass;
+const __bridgeImplementation_applyGlEffectBlitPass = api.applyGlEffectBlitPass;
+export function applyGlEffectBlitPass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyGlEffectBlitPass(...args); return result; }
+api.applyGlEffectBlitPass = applyGlEffectBlitPass;
+compiled.flight.EffectsGl.applyGlEffectBlitPass = applyGlEffectBlitPass;
+const __bridgeImplementation_applyGlEffectErasePass = api.applyGlEffectErasePass;
+export function applyGlEffectErasePass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyGlEffectErasePass(...args); return result; }
+api.applyGlEffectErasePass = applyGlEffectErasePass;
+compiled.flight.EffectsGl.applyGlEffectErasePass = applyGlEffectErasePass;

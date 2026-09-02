@@ -135,6 +135,10 @@ describe('public Haxe facades', () => {
       path.join(workspace, 'tests', 'bridges', 'sources', 'effects-gl', 'glChromaticAberrationEffect.mjs'),
       'utf8',
     );
+    const wgpuTiltShift = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'effects-wgpu', 'wgpuTiltShiftEffect.mjs'),
+      'utf8',
+    );
 
     expect(applicationGl).toContain("import * as __dependency0 from '@flighthq/node/contract';");
     expect(applicationGl).toContain("import * as __dependency1 from '@flighthq/render-gl/contract';");
@@ -144,6 +148,9 @@ describe('public Haxe facades', () => {
     );
     expect(applicationGl).toContain(
       'compiled.flight._RenderGl.createGlRenderTarget = __dependency1.createGlRenderTarget;',
+    );
+    expect(applicationGl).toContain(
+      'const __bridgeImplementation_createGlApplicationRenderView = api.createGlApplicationRenderView;',
     );
     expect(applicationGl).toContain('export function createGlApplicationRenderView(...args) { __syncDependencies();');
     expect(gltfLoad).toContain("import * as __dependency0 from '@flighthq/scene3d-formats/contract';");
@@ -162,6 +169,32 @@ describe('public Haxe facades', () => {
     expect(glChromaticAberration).toContain(
       'compiled.flight._EffectsGl.getGlEffectProgram = __dependency1.getGlEffectProgram;',
     );
+    expect(wgpuTiltShift).toContain("import * as __dependency0 from './wgpuEffectPass.mjs';");
+    expect(wgpuTiltShift).toContain(
+      'compiled.flight._EffectsWgpu.drawWgpuEffectPass = __dependency0.drawWgpuEffectPass;',
+    );
+    expect(wgpuTiltShift).toContain('export function applyTiltShiftEffectToWgpu(...args) { __syncDependencies();');
+  });
+
+  it('preserves secondary class constructors, local export aliases, and reserved structural fields', () => {
+    const workspace = process.cwd();
+    const swfReader = readFileSync(path.join(workspace, 'tests', 'bridges', 'sources', 'swf', 'swfReader.mjs'), 'utf8');
+    const glDraw = readFileSync(path.join(workspace, 'tests', 'bridges', 'sources', 'render-gl', 'glDraw.mjs'), 'utf8');
+    const glShape = readFileSync(
+      path.join(workspace, 'tests', 'bridges', 'sources', 'scene2d-gl', 'glShape.mjs'),
+      'utf8',
+    );
+    const protocol = readFileSync(path.join(workspace, 'generated', 'flight', '_Protocol.hx'), 'utf8');
+
+    expect(swfReader).toContain('export const SwfReader = compiled.flight.SwfReader;');
+    expect(swfReader).not.toContain('compiled.flight._Swf.SwfReader');
+    expect(glDraw).toContain(
+      'export const standardGlBlendRealizations = compiled.flight.RenderGl.standardGlBlendRealizations;',
+    );
+    expect(glShape).toContain('const __bridgeImplementation_drawGlShape = api.drawGlShape;');
+    expect(glShape).toContain('api.defaultGlShapeRenderer["submit"] = drawGlShape;');
+    expect(protocol).toContain("_Runtime.field((cast host : HasProtocolDefault).protocol, 'default')");
+    expect(protocol).not.toContain('.protocol : { var default_:ProtocolDefaultBackend; }).default_');
   });
 
   it('keeps callable contract, capability-backend, and test-helper exports live', () => {
@@ -190,7 +223,7 @@ describe('public Haxe facades', () => {
     expect(renderWgpuTestHelper).toContain('const api = compiled.flight._RenderWgpu;');
     expect(renderWgpuTestHelper).toContain('export const installWgpuMock = api.installWgpuMock;');
     expect(wgpuBlendEffect).toContain('const api = compiled.flight._EffectsWgpu;');
-    expect(wgpuBlendEffect).toContain('export const applyBlendEffectToWgpu = api.applyBlendEffectToWgpu;');
+    expect(wgpuBlendEffect).toContain('export function applyBlendEffectToWgpu(...args) { __syncDependencies();');
   });
 
   it('emits checker-proven runtime values and TypeScript-shaped enums', () => {

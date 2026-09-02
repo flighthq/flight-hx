@@ -10,4 +10,7 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyColorMatrixPassToGl(...args) { __syncDependencies(); const result = api.applyColorMatrixPassToGl(...args); return result; }
+const __bridgeImplementation_applyColorMatrixPassToGl = api.applyColorMatrixPassToGl;
+export function applyColorMatrixPassToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyColorMatrixPassToGl(...args); return result; }
+api.applyColorMatrixPassToGl = applyColorMatrixPassToGl;
+compiled.flight.EffectsGl.applyColorMatrixPassToGl = applyColorMatrixPassToGl;

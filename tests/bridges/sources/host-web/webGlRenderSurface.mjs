@@ -8,6 +8,15 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function createWebGlRenderSurfaceProvider(...args) { __syncDependencies(); const result = api.createWebGlRenderSurfaceProvider(...args); return result; }
-export function enableHostWebGlRenderSurface(...args) { __syncDependencies(); const result = api.enableHostWebGlRenderSurface(...args); return result; }
-export function resetHostWebGlRenderSurfaceForTest(...args) { __syncDependencies(); const result = api.resetHostWebGlRenderSurfaceForTest(...args); return result; }
+const __bridgeImplementation_createWebGlRenderSurfaceProvider = api.createWebGlRenderSurfaceProvider;
+export function createWebGlRenderSurfaceProvider(...args) { __syncDependencies(); const result = __bridgeImplementation_createWebGlRenderSurfaceProvider(...args); return result; }
+api.createWebGlRenderSurfaceProvider = createWebGlRenderSurfaceProvider;
+compiled.flight.HostWeb.createWebGlRenderSurfaceProvider = createWebGlRenderSurfaceProvider;
+const __bridgeImplementation_enableHostWebGlRenderSurface = api.enableHostWebGlRenderSurface;
+export function enableHostWebGlRenderSurface(...args) { __syncDependencies(); const result = __bridgeImplementation_enableHostWebGlRenderSurface(...args); return result; }
+api.enableHostWebGlRenderSurface = enableHostWebGlRenderSurface;
+compiled.flight.HostWeb.enableHostWebGlRenderSurface = enableHostWebGlRenderSurface;
+const __bridgeImplementation_resetHostWebGlRenderSurfaceForTest = api.resetHostWebGlRenderSurfaceForTest;
+export function resetHostWebGlRenderSurfaceForTest(...args) { __syncDependencies(); const result = __bridgeImplementation_resetHostWebGlRenderSurfaceForTest(...args); return result; }
+api.resetHostWebGlRenderSurfaceForTest = resetHostWebGlRenderSurfaceForTest;
+compiled.flight.HostWeb.resetHostWebGlRenderSurfaceForTest = resetHostWebGlRenderSurfaceForTest;

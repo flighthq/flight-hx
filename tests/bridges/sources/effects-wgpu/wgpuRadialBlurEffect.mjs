@@ -2,16 +2,24 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from './wgpuEffectPass.mjs';
 import * as __dependency1 from './wgpuEffectProgramCache.mjs';
+import * as __dependency2 from '@flighthq/render-wgpu/contract';
 
 const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
   compiled.flight._EffectsWgpu.drawWgpuEffectPass = __dependency0.drawWgpuEffectPass;
   compiled.flight._EffectsWgpu.getWgpuEffectPipeline = __dependency1.getWgpuEffectPipeline;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency2.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 
-export function applyRadialBlurEffectToWgpu(...args) { __syncDependencies(); const result = api.applyRadialBlurEffectToWgpu(...args); return result; }
+const __bridgeImplementation_applyRadialBlurEffectToWgpu = api.applyRadialBlurEffectToWgpu;
+export function applyRadialBlurEffectToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyRadialBlurEffectToWgpu(...args); return result; }
+api.applyRadialBlurEffectToWgpu = applyRadialBlurEffectToWgpu;
+compiled.flight.EffectsWgpu.applyRadialBlurEffectToWgpu = applyRadialBlurEffectToWgpu;
 const __bridgeImplementation_defaultWgpuRadialBlurEffectRunner = api.defaultWgpuRadialBlurEffectRunner;
 export function defaultWgpuRadialBlurEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultWgpuRadialBlurEffectRunner(...args); }
 api.defaultWgpuRadialBlurEffectRunner = defaultWgpuRadialBlurEffectRunner;
-export function registerWgpuRadialBlurEffect(...args) { __syncDependencies(); const result = api.registerWgpuRadialBlurEffect(...args); return result; }
+const __bridgeImplementation_registerWgpuRadialBlurEffect = api.registerWgpuRadialBlurEffect;
+export function registerWgpuRadialBlurEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerWgpuRadialBlurEffect(...args); return result; }
+api.registerWgpuRadialBlurEffect = registerWgpuRadialBlurEffect;
+compiled.flight.EffectsWgpu.registerWgpuRadialBlurEffect = registerWgpuRadialBlurEffect;

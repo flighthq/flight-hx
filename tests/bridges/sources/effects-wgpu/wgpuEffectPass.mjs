@@ -8,10 +8,28 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function clearWgpuEffectTarget(...args) { __syncDependencies(); const result = api.clearWgpuEffectTarget(...args); return result; }
-export function createWgpuDualSourceEffectPipeline(...args) { __syncDependencies(); const result = api.createWgpuDualSourceEffectPipeline(...args); return result; }
-export function createWgpuEffectPipeline(...args) { __syncDependencies(); const result = api.createWgpuEffectPipeline(...args); return result; }
-export function drawWgpuDualSourceEffectPass(...args) { __syncDependencies(); const result = api.drawWgpuDualSourceEffectPass(...args); return result; }
-export function drawWgpuEffectPass(...args) { __syncDependencies(); const result = api.drawWgpuEffectPass(...args); return result; }
+const __bridgeImplementation_clearWgpuEffectTarget = api.clearWgpuEffectTarget;
+export function clearWgpuEffectTarget(...args) { __syncDependencies(); const result = __bridgeImplementation_clearWgpuEffectTarget(...args); return result; }
+api.clearWgpuEffectTarget = clearWgpuEffectTarget;
+compiled.flight.EffectsWgpu.clearWgpuEffectTarget = clearWgpuEffectTarget;
+const __bridgeImplementation_createWgpuDualSourceEffectPipeline = api.createWgpuDualSourceEffectPipeline;
+export function createWgpuDualSourceEffectPipeline(...args) { __syncDependencies(); const result = __bridgeImplementation_createWgpuDualSourceEffectPipeline(...args); return result; }
+api.createWgpuDualSourceEffectPipeline = createWgpuDualSourceEffectPipeline;
+compiled.flight.EffectsWgpu.createWgpuDualSourceEffectPipeline = createWgpuDualSourceEffectPipeline;
+const __bridgeImplementation_createWgpuEffectPipeline = api.createWgpuEffectPipeline;
+export function createWgpuEffectPipeline(...args) { __syncDependencies(); const result = __bridgeImplementation_createWgpuEffectPipeline(...args); return result; }
+api.createWgpuEffectPipeline = createWgpuEffectPipeline;
+compiled.flight.EffectsWgpu.createWgpuEffectPipeline = createWgpuEffectPipeline;
+const __bridgeImplementation_drawWgpuDualSourceEffectPass = api.drawWgpuDualSourceEffectPass;
+export function drawWgpuDualSourceEffectPass(...args) { __syncDependencies(); const result = __bridgeImplementation_drawWgpuDualSourceEffectPass(...args); return result; }
+api.drawWgpuDualSourceEffectPass = drawWgpuDualSourceEffectPass;
+compiled.flight.EffectsWgpu.drawWgpuDualSourceEffectPass = drawWgpuDualSourceEffectPass;
+const __bridgeImplementation_drawWgpuEffectPass = api.drawWgpuEffectPass;
+export function drawWgpuEffectPass(...args) { __syncDependencies(); const result = __bridgeImplementation_drawWgpuEffectPass(...args); return result; }
+api.drawWgpuEffectPass = drawWgpuEffectPass;
+compiled.flight.EffectsWgpu.drawWgpuEffectPass = drawWgpuEffectPass;
 export const EFFECT_VERTEX_WGSL = api.EFFECT_VERTEX_WGSL;
-export function getWgpuEffectPassState(...args) { __syncDependencies(); const result = api.getWgpuEffectPassState(...args); return result; }
+const __bridgeImplementation_getWgpuEffectPassState = api.getWgpuEffectPassState;
+export function getWgpuEffectPassState(...args) { __syncDependencies(); const result = __bridgeImplementation_getWgpuEffectPassState(...args); return result; }
+api.getWgpuEffectPassState = getWgpuEffectPassState;
+compiled.flight.EffectsWgpu.getWgpuEffectPassState = getWgpuEffectPassState;

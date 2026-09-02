@@ -10,4 +10,8 @@ function __syncDependencies() {
 __syncDependencies();
 
 export const defaultWgpuRasterShapeRenderer = api.defaultWgpuRasterShapeRenderer;
-export function drawWgpuRasterShape(...args) { __syncDependencies(); const result = api.drawWgpuRasterShape(...args); return result; }
+const __bridgeImplementation_drawWgpuRasterShape = api.drawWgpuRasterShape;
+export function drawWgpuRasterShape(...args) { __syncDependencies(); const result = __bridgeImplementation_drawWgpuRasterShape(...args); return result; }
+api.drawWgpuRasterShape = drawWgpuRasterShape;
+compiled.flight.Scene2DWgpu.drawWgpuRasterShape = drawWgpuRasterShape;
+api.defaultWgpuRasterShapeRenderer["submit"] = drawWgpuRasterShape;

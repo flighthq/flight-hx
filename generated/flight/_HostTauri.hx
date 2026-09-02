@@ -511,7 +511,7 @@ class _HostTauri {
           var menu:TauriMenu = cast _Runtime.UNDEFINED;
           return flight._internal._Async.flatMap((cast _HostTauri.buildItems__tauriMenu(({ final __callArgument109:Dynamic = menuModule; __callArgument109; }), ({ final __callArgument110:Dynamic = items; __callArgument110; }), ({ final __callArgument111:Dynamic = function(id:String):Void { _Runtime.callOptionalValue(selectListener, cast ([id] : Array<Dynamic>)); }; __callArgument111; })) : flight._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue106:Dynamic):Dynamic {
             built = __awaitValue106;
-            return flight._internal._Async.flatMap((cast (cast menuModule : TauriMenuModule).Menu : TauriMenuFactory).new_((cast { items: built } : Dynamic)), function(__awaitValue107:Dynamic):Dynamic {
+            return flight._internal._Async.flatMap(_Runtime.callProperty((cast menuModule : TauriMenuModule).Menu, 'new', cast ([{ items: built }] : Array<Dynamic>)), function(__awaitValue107:Dynamic):Dynamic {
               menu = __awaitValue107;
               return flight._internal._Async.flatMap((cast menu : TauriMenu).setAsAppMenu(), function(__awaitValue108:Dynamic):Dynamic {
                 __awaitValue108;
@@ -533,7 +533,7 @@ class _HostTauri {
             var menu:TauriMenu = cast _Runtime.UNDEFINED;
             return flight._internal._Async.flatMap((cast _HostTauri.buildItems__tauriMenu(({ final __callArgument151:Dynamic = menuModule; __callArgument151; }), ({ final __callArgument152:Dynamic = items; __callArgument152; }), ({ final __callArgument155:Dynamic = function(id:String):Void { resolve(({ final __callArgument153:Dynamic = id; __callArgument153; })); }; __callArgument155; })) : flight._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue148:Dynamic):Dynamic {
               built = __awaitValue148;
-              return flight._internal._Async.flatMap((cast (cast menuModule : TauriMenuModule).Menu : TauriMenuFactory).new_((cast { items: built } : Dynamic)), function(__awaitValue149:Dynamic):Dynamic {
+              return flight._internal._Async.flatMap(_Runtime.callProperty((cast menuModule : TauriMenuModule).Menu, 'new', cast ([{ items: built }] : Array<Dynamic>)), function(__awaitValue149:Dynamic):Dynamic {
                 menu = __awaitValue149;
                 return flight._internal._Async.flatMap((cast menu : TauriMenu).popup((cast _Runtime.construct((cast tauri.window : TauriWindowModule).LogicalPosition, [x, y]) : Dynamic)), function(__awaitValue150:Dynamic):Dynamic {
                   __awaitValue150;
@@ -580,30 +580,30 @@ class _HostTauri {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var id:Null<String> = cast _Runtime.UNDEFINED;
-        var __flowBranch217:Dynamic;
+        var __flowBranch216:Dynamic;
         if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
-          __flowBranch217 = flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flowReturn((cast (cast menuModule : { var PredefinedMenuItem:TauriPredefinedMenuItemFactory; }).PredefinedMenuItem : TauriPredefinedMenuItemFactory).new_(({ final __callArgument218:Dynamic = { item: 'Separator' }; __callArgument218; })));
+          __flowBranch216 = flight._internal._Async.protect(function():Dynamic {
+            return flight._internal._Async.flowReturn(_Runtime.callProperty((cast menuModule : { var PredefinedMenuItem:TauriPredefinedMenuItemFactory; }).PredefinedMenuItem, 'new', cast ([{ item: 'Separator' }] : Array<Dynamic>)));
           });
         } else {
-          __flowBranch217 = flight._internal._Async.flowNormal();
+          __flowBranch216 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch217, function():Dynamic {
-          var __flowBranch219:Dynamic;
+        return flight._internal._Async.continueFlow(__flowBranch216, function():Dynamic {
+          var __flowBranch217:Dynamic;
           if (_Runtime.truthy(item.submenu)) {
-            __flowBranch219 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch217 = flight._internal._Async.protect(function():Dynamic {
               var children:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
-              return flight._internal._Async.flatMap((cast _HostTauri.buildItems__tauriMenu(({ final __callArgument221:Dynamic = menuModule; __callArgument221; }), item.submenu, ({ final __callArgument222:Dynamic = onSelect; __callArgument222; })) : flight._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue220:Dynamic):Dynamic {
-                children = __awaitValue220;
-                return flight._internal._Async.flowReturn((cast (cast menuModule : { var Submenu:TauriSubmenuFactory; }).Submenu : TauriSubmenuFactory).new_((cast { text: item.label, enabled: item.enabled, items: children } : Dynamic)));
+              return flight._internal._Async.flatMap((cast _HostTauri.buildItems__tauriMenu(({ final __callArgument219:Dynamic = menuModule; __callArgument219; }), item.submenu, ({ final __callArgument220:Dynamic = onSelect; __callArgument220; })) : flight._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue218:Dynamic):Dynamic {
+                children = __awaitValue218;
+                return flight._internal._Async.flowReturn(_Runtime.callProperty((cast menuModule : { var Submenu:TauriSubmenuFactory; }).Submenu, 'new', cast ([{ text: item.label, enabled: item.enabled, items: children }] : Array<Dynamic>)));
               });
             });
           } else {
-            __flowBranch219 = flight._internal._Async.flowNormal();
+            __flowBranch217 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch219, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch217, function():Dynamic {
             id = item.id;
-            return flight._internal._Async.flowReturn((cast (cast menuModule : { var MenuItem:TauriMenuItemFactory; }).MenuItem : TauriMenuItemFactory).new_((cast { id: id, text: item.label, enabled: item.enabled, accelerator: item.accelerator, action: ((cast !_Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast function(__unused3:String):Void { onSelect((cast id : String)); } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) } : Dynamic)));
+            return flight._internal._Async.flowReturn(_Runtime.callProperty((cast menuModule : { var MenuItem:TauriMenuItemFactory; }).MenuItem, 'new', cast ([{ id: id, text: item.label, enabled: item.enabled, accelerator: item.accelerator, action: ((cast !_Runtime.strictEquals(id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast function(__unused3:String):Void { onSelect((cast id : String)); } : Dynamic) : (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic)) }] : Array<Dynamic>)));
           });
         });
       })
@@ -623,28 +623,28 @@ class _HostTauri {
           var invalid:Array<String> = cast _Runtime.UNDEFINED;
           var granted:Bool = cast _Runtime.UNDEFINED;
           var id:String = cast _Runtime.UNDEFINED;
-          var __flowBranch225:Dynamic;
+          var __flowBranch223:Dynamic;
           if ((cast destroyed : Bool)) {
-            __flowBranch225 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch223 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ reason: 'operation-failed' });
             });
           } else {
-            __flowBranch225 = flight._internal._Async.flowNormal();
+            __flowBranch223 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch225, function():Dynamic {
-            invalid = (cast _HostTauri.getTauriInvalidNotificationRequestFields__tauriNotification(({ final __callArgument226:Dynamic = request; __callArgument226; })) : Array<String>);
-            var __flowBranch228:Dynamic;
+          return flight._internal._Async.continueFlow(__flowBranch223, function():Dynamic {
+            invalid = (cast _HostTauri.getTauriInvalidNotificationRequestFields__tauriNotification(({ final __callArgument224:Dynamic = request; __callArgument224; })) : Array<String>);
+            var __flowBranch226:Dynamic;
             if ((cast ((cast _Runtime.field(invalid, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-              __flowBranch228 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch226 = flight._internal._Async.protect(function():Dynamic {
                 return flight._internal._Async.flowReturn({ fields: invalid, reason: 'invalid-request' });
               });
             } else {
-              __flowBranch228 = flight._internal._Async.flowNormal();
+              __flowBranch226 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch228, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch226, function():Dynamic {
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap((cast notification : TauriNotificationPlugin).isPermissionGranted(), function(__awaitValue229:Dynamic):Dynamic {
-                  (granted = cast (__awaitValue229 : Dynamic));
+                return flight._internal._Async.flatMap((cast notification : TauriNotificationPlugin).isPermissionGranted(), function(__awaitValue227:Dynamic):Dynamic {
+                  (granted = cast (__awaitValue227 : Dynamic));
                   return flight._internal._Async.flowNormal();
                 });
               }), function(__caughtError:Dynamic):Dynamic {
@@ -653,18 +653,18 @@ class _HostTauri {
                   return flight._internal._Async.flowReturn({ reason: 'operation-failed' });
                 });
               }), function():Dynamic {
-                var __flowBranch230:Dynamic;
+                var __flowBranch228:Dynamic;
                 if ((cast !(cast granted : Bool) : Bool)) {
-                  __flowBranch230 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch228 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.flowReturn({ reason: 'permission-denied' });
                   });
                 } else {
-                  __flowBranch230 = flight._internal._Async.flowNormal();
+                  __flowBranch228 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch230, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch228, function():Dynamic {
                   id = _Runtime.coalesce(request.id, function():Dynamic return cast 'tauri-notification-' + Std.string(nextId++) + '');
                   return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                    (cast notification : TauriNotificationPlugin).sendNotification(({ final __callArgument231:Dynamic = { body: request.body, icon: request.icon, title: request.title }; __callArgument231; }));
+                    (cast notification : TauriNotificationPlugin).sendNotification(({ final __callArgument229:Dynamic = { body: request.body, icon: request.icon, title: request.title }; __callArgument229; }));
                     return flight._internal._Async.flowNormal();
                   }), function(__caughtError:Dynamic):Dynamic {
                     var __error:Dynamic = __caughtError;
@@ -691,8 +691,8 @@ class _HostTauri {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast notification : TauriNotificationPlugin).isPermissionGranted(), function(__awaitValue232:Dynamic):Dynamic {
-              return flight._internal._Async.flowReturn({ permission: _Runtime.select(__awaitValue232, function():Dynamic return cast 'granted', function():Dynamic return cast 'default'), reason: 'ok' });
+            return flight._internal._Async.flatMap((cast notification : TauriNotificationPlugin).isPermissionGranted(), function(__awaitValue230:Dynamic):Dynamic {
+              return flight._internal._Async.flowReturn({ permission: _Runtime.select(__awaitValue230, function():Dynamic return cast 'granted', function():Dynamic return cast 'default'), reason: 'ok' });
             });
           }), function(__caughtError:Dynamic):Dynamic {
             var __error:Dynamic = __caughtError;
@@ -709,8 +709,8 @@ class _HostTauri {
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
             var permission:TauriNotificationPermission = cast _Runtime.UNDEFINED;
-            return flight._internal._Async.flatMap((cast notification : TauriNotificationPlugin).requestPermission(), function(__awaitValue233:Dynamic):Dynamic {
-              permission = __awaitValue233;
+            return flight._internal._Async.flatMap((cast notification : TauriNotificationPlugin).requestPermission(), function(__awaitValue231:Dynamic):Dynamic {
+              permission = __awaitValue231;
               return flight._internal._Async.flowReturn({ reason: ((cast _Runtime.strictEquals(permission, 'default') : Bool) ? (cast 'dismissed' : Dynamic) : (cast permission : Dynamic)) });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -778,16 +778,16 @@ class _HostTauri {
     var menu:{ var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; } = cast _Runtime.UNDEFINED;
     var shell:HostShellCapabilities = cast _Runtime.UNDEFINED;
     var window:WindowBackend = cast _Runtime.UNDEFINED;
-    clipboard = (cast createTauriClipboardBackend(({ final __callArgument243:Dynamic = tauri; __callArgument243; })) : ClipboardTextBackend);
-    app = (cast createTauriAppCapabilities(({ final __callArgument245:Dynamic = tauri; __callArgument245; })) : TauriAppCapabilities);
-    dialog = (cast { directoryOpen: (cast createTauriDirectoryOpenDialogBackend(({ final __callArgument247:Dynamic = tauri; __callArgument247; })) : { >DirectoryOpenDialogBackend, >Entity, }), fileOpen: (cast createTauriFileOpenDialogBackend(({ final __callArgument249:Dynamic = tauri; __callArgument249; })) : { >FileOpenDialogBackend, >Entity, }), fileSave: (cast createTauriFileSaveDialogBackend(({ final __callArgument251:Dynamic = tauri; __callArgument251; })) : { >FileSaveDialogBackend, >Entity, }), message: (cast createTauriMessageDialogBackend(({ final __callArgument253:Dynamic = tauri; __callArgument253; })) : MessageDialogBackend) });
-    notification = (cast createTauriNotificationCapabilities(({ final __callArgument255:Dynamic = tauri; __callArgument255; })) : TauriNotificationCapabilities);
-    query = (cast createTauriShortcutQueryBackend(({ final __callArgument257:Dynamic = tauri; __callArgument257; })) : ShortcutQueryBackend);
-    trigger = (cast createTauriShortcutTriggerBackend(({ final __callArgument259:Dynamic = tauri; __callArgument259; })) : ShortcutTriggerBackend);
-    menu = (cast createTauriMenuBackends(({ final __callArgument261:Dynamic = tauri; __callArgument261; })) : { var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; });
-    shell = (cast makeTauriShellCapabilities(({ final __callArgument263:Dynamic = tauri; __callArgument263; })) : HostShellCapabilities);
-    window = (cast createTauriWindowBackend(({ final __callArgument265:Dynamic = tauri; __callArgument265; })) : WindowBackend);
-    return cast (cast createEntity((cast { accessibility: {  }, app: app, clipboard: { text: clipboard }, connectivity: {  }, dialog: dialog, graphics: {  }, input: {  }, ipc: {  }, media: {  }, menu: menu, midi: {  }, net: {  }, power: {  }, protocol: {  }, notification: notification, shortcut: { query: query, trigger: trigger }, screen: {  }, share: {  }, shell: shell, storage: {  }, system: { platform: (cast createTauriPlatformBackend(({ final __callArgument267:Dynamic = tauri; __callArgument267; })) : PlatformBackend) }, text: {  }, tray: (cast createTauriTrayCapabilities(({ final __callArgument269:Dynamic = tauri; __callArgument269; }), (cast profile : Dynamic)) : TauriTrayCapabilitiesFor<Profile>), ui: {  }, updater: {  }, window: window } : Dynamic)) : { >Entity, var accessibility:{  }; var app:TauriAppCapabilities; var clipboard:{ var text:ClipboardTextBackend; }; var connectivity:{  }; var dialog:{ var directoryOpen:{ >DirectoryOpenDialogBackend, >Entity, }; var fileOpen:{ >FileOpenDialogBackend, >Entity, }; var fileSave:{ >FileSaveDialogBackend, >Entity, }; var message:MessageDialogBackend; }; var graphics:{  }; var input:{  }; var ipc:{  }; var media:{  }; var menu:{ var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; }; var midi:{  }; var net:{  }; var power:{  }; var protocol:{  }; var notification:TauriNotificationCapabilities; var shortcut:{ var query:ShortcutQueryBackend; var trigger:ShortcutTriggerBackend; }; var screen:{  }; var share:{  }; var shell:HostShellCapabilities; var storage:{  }; var system:{ var platform:PlatformBackend; }; var text:{  }; var tray:TauriTrayCapabilitiesFor<Profile>; var ui:{  }; var updater:{  }; var window:WindowBackend; });
+    clipboard = (cast createTauriClipboardBackend(({ final __callArgument241:Dynamic = tauri; __callArgument241; })) : ClipboardTextBackend);
+    app = (cast createTauriAppCapabilities(({ final __callArgument243:Dynamic = tauri; __callArgument243; })) : TauriAppCapabilities);
+    dialog = (cast { directoryOpen: (cast createTauriDirectoryOpenDialogBackend(({ final __callArgument245:Dynamic = tauri; __callArgument245; })) : { >DirectoryOpenDialogBackend, >Entity, }), fileOpen: (cast createTauriFileOpenDialogBackend(({ final __callArgument247:Dynamic = tauri; __callArgument247; })) : { >FileOpenDialogBackend, >Entity, }), fileSave: (cast createTauriFileSaveDialogBackend(({ final __callArgument249:Dynamic = tauri; __callArgument249; })) : { >FileSaveDialogBackend, >Entity, }), message: (cast createTauriMessageDialogBackend(({ final __callArgument251:Dynamic = tauri; __callArgument251; })) : MessageDialogBackend) });
+    notification = (cast createTauriNotificationCapabilities(({ final __callArgument253:Dynamic = tauri; __callArgument253; })) : TauriNotificationCapabilities);
+    query = (cast createTauriShortcutQueryBackend(({ final __callArgument255:Dynamic = tauri; __callArgument255; })) : ShortcutQueryBackend);
+    trigger = (cast createTauriShortcutTriggerBackend(({ final __callArgument257:Dynamic = tauri; __callArgument257; })) : ShortcutTriggerBackend);
+    menu = (cast createTauriMenuBackends(({ final __callArgument259:Dynamic = tauri; __callArgument259; })) : { var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; });
+    shell = (cast makeTauriShellCapabilities(({ final __callArgument261:Dynamic = tauri; __callArgument261; })) : HostShellCapabilities);
+    window = (cast createTauriWindowBackend(({ final __callArgument263:Dynamic = tauri; __callArgument263; })) : WindowBackend);
+    return cast (cast createEntity((cast { accessibility: {  }, app: app, clipboard: { text: clipboard }, connectivity: {  }, dialog: dialog, graphics: {  }, input: {  }, ipc: {  }, media: {  }, menu: menu, midi: {  }, net: {  }, power: {  }, protocol: {  }, notification: notification, shortcut: { query: query, trigger: trigger }, screen: {  }, share: {  }, shell: shell, storage: {  }, system: { platform: (cast createTauriPlatformBackend(({ final __callArgument265:Dynamic = tauri; __callArgument265; })) : PlatformBackend) }, text: {  }, tray: (cast createTauriTrayCapabilities(({ final __callArgument267:Dynamic = tauri; __callArgument267; }), (cast profile : Dynamic)) : TauriTrayCapabilitiesFor<Profile>), ui: {  }, updater: {  }, window: window } : Dynamic)) : { >Entity, var accessibility:{  }; var app:TauriAppCapabilities; var clipboard:{ var text:ClipboardTextBackend; }; var connectivity:{  }; var dialog:{ var directoryOpen:{ >DirectoryOpenDialogBackend, >Entity, }; var fileOpen:{ >FileOpenDialogBackend, >Entity, }; var fileSave:{ >FileSaveDialogBackend, >Entity, }; var message:MessageDialogBackend; }; var graphics:{  }; var input:{  }; var ipc:{  }; var media:{  }; var menu:{ var application:MenuApplicationBackend; var popup:MenuPopupBackend; var select:MenuSelectBackend; }; var midi:{  }; var net:{  }; var power:{  }; var protocol:{  }; var notification:TauriNotificationCapabilities; var shortcut:{ var query:ShortcutQueryBackend; var trigger:ShortcutTriggerBackend; }; var screen:{  }; var share:{  }; var shell:HostShellCapabilities; var storage:{  }; var system:{ var platform:PlatformBackend; }; var text:{  }; var tray:TauriTrayCapabilitiesFor<Profile>; var ui:{  }; var updater:{  }; var window:WindowBackend; });
     return cast null;
   }
 
@@ -797,12 +797,12 @@ class _HostTauri {
     var pathOpen:ShellPathOpenBackend = cast _Runtime.UNDEFINED;
     var pathReveal:ShellPathRevealBackend = cast _Runtime.UNDEFINED;
     opener = tauri.opener;
-    external = (cast createEntity(({ final __callArgument276:Dynamic = { open: function(url:String):flight._internal._Promise<ShellExternalOutcome> {
+    external = (cast createEntity(({ final __callArgument274:Dynamic = { open: function(url:String):flight._internal._Promise<ShellExternalOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openUrl((cast url : String)), function(__awaitValue275:Dynamic):Dynamic {
-              __awaitValue275;
+            return flight._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openUrl((cast url : String)), function(__awaitValue273:Dynamic):Dynamic {
+              __awaitValue273;
               return flight._internal._Async.flowReturn({ reason: 'ok' });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -815,13 +815,13 @@ class _HostTauri {
           });
         })
       );
-    } }; __callArgument276; })) : { >Entity, var open:String->flight._internal._Promise<{ var reason:String; }>; });
-    pathOpen = (cast createEntity(({ final __callArgument280:Dynamic = { open: function(path:String):flight._internal._Promise<ShellPathOpenOutcome> {
+    } }; __callArgument274; })) : { >Entity, var open:String->flight._internal._Promise<{ var reason:String; }>; });
+    pathOpen = (cast createEntity(({ final __callArgument278:Dynamic = { open: function(path:String):flight._internal._Promise<ShellPathOpenOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath((cast path : String)), function(__awaitValue279:Dynamic):Dynamic {
-              __awaitValue279;
+            return flight._internal._Async.flatMap((cast opener : TauriOpenerPlugin).openPath((cast path : String)), function(__awaitValue277:Dynamic):Dynamic {
+              __awaitValue277;
               return flight._internal._Async.flowReturn({ reason: 'ok' });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -834,13 +834,13 @@ class _HostTauri {
           });
         })
       );
-    } }; __callArgument280; })) : { >Entity, var open:String->flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var message:flight._internal._Any; }, { var message:String; var reason:String; }>>; });
-    pathReveal = (cast createEntity(({ final __callArgument284:Dynamic = { reveal: function(path:String):flight._internal._Promise<ShellPathRevealOutcome> {
+    } }; __callArgument278; })) : { >Entity, var open:String->flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var message:flight._internal._Any; }, { var message:String; var reason:String; }>>; });
+    pathReveal = (cast createEntity(({ final __callArgument282:Dynamic = { reveal: function(path:String):flight._internal._Promise<ShellPathRevealOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast opener : TauriOpenerPlugin).revealItemInDir((cast path : String)), function(__awaitValue283:Dynamic):Dynamic {
-              __awaitValue283;
+            return flight._internal._Async.flatMap((cast opener : TauriOpenerPlugin).revealItemInDir((cast path : String)), function(__awaitValue281:Dynamic):Dynamic {
+              __awaitValue281;
               return flight._internal._Async.flowReturn({ reason: 'ok' });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -853,7 +853,7 @@ class _HostTauri {
           });
         })
       );
-    } }; __callArgument284; })) : { >Entity, var reveal:String->flight._internal._Promise<{ var reason:String; }>; });
+    } }; __callArgument282; })) : { >Entity, var reveal:String->flight._internal._Promise<{ var reason:String; }>; });
     return cast { external: external, pathOpen: pathOpen, pathReveal: pathReveal };
     return cast null;
   }
@@ -865,13 +865,13 @@ class _HostTauri {
 
   public static function createTauriShortcutQueryBackend(tauri:TauriApi):ShortcutQueryBackend {
     var provider:{ >Entity, var isRegistered:String->flight._internal._Promise<Bool>; } = cast _Runtime.UNDEFINED;
-    provider = (cast createEntity(({ final __callArgument288:Dynamic = { isRegistered: function(accelerator:Accelerator):flight._internal._Promise<Bool> {
+    provider = (cast createEntity(({ final __callArgument286:Dynamic = { isRegistered: function(accelerator:Accelerator):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.flatMap((cast tauri.globalShortcut : TauriGlobalShortcutPlugin).isRegistered((cast accelerator : String)), function(__awaitValue287:Dynamic):Dynamic {
-          return flight._internal._Async.resolve(__awaitValue287);
+        return flight._internal._Async.flatMap((cast tauri.globalShortcut : TauriGlobalShortcutPlugin).isRegistered((cast accelerator : String)), function(__awaitValue285:Dynamic):Dynamic {
+          return flight._internal._Async.resolve(__awaitValue285);
         });
       }));
-    } }; __callArgument288; })) : { >Entity, var isRegistered:String->flight._internal._Promise<Bool>; });
+    } }; __callArgument286; })) : { >Entity, var isRegistered:String->flight._internal._Promise<Bool>; });
     return cast provider;
     return cast null;
   }
@@ -885,8 +885,8 @@ class _HostTauri {
     releaseAccelerator = (cast function(accelerator:Accelerator):flight._internal._Promise<flight._internal._Nothing> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap((cast globalShortcut : TauriGlobalShortcutPlugin).unregister((cast accelerator : String)), function(__awaitValue291:Dynamic):Dynamic {
-            __awaitValue291;
+          return flight._internal._Async.flatMap((cast globalShortcut : TauriGlobalShortcutPlugin).unregister((cast accelerator : String)), function(__awaitValue289:Dynamic):Dynamic {
+            __awaitValue289;
             for (__iteration0 in _Runtime.iterable(registrations)) {
               var subscription:ShortcutTriggerSubscription = flight._internal._StaticIndex.readArray(__iteration0, 0.0);
               var registered:String = flight._internal._StaticIndex.readArray(__iteration0, 1.0);
@@ -905,32 +905,32 @@ class _HostTauri {
         flight._internal._Async.protect(function():Dynamic {
           var firstError:flight._internal._Any = cast _Runtime.UNDEFINED;
           var accelerators:flight._internal._Set<String> = cast _Runtime.UNDEFINED;
-          return flight._internal._Async.flatMap(flight._internal._Async.allSettled(_Runtime.concatArrays([_Runtime.toArray(pending)])), function(__awaitValue294:Dynamic):Dynamic {
-            __awaitValue294;
+          return flight._internal._Async.flatMap(flight._internal._Async.allSettled(_Runtime.concatArrays([_Runtime.toArray(pending)])), function(__awaitValue292:Dynamic):Dynamic {
+            __awaitValue292;
             accelerators = _Runtime.construct(flight._internal._HostValueLut.get('Set'), [((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).values())]);
-            var __flowIterator295:Array<Dynamic> = _Runtime.iterable(accelerators);
-            var __flowIndex296:Int = 0;
+            var __flowIterator293:Array<Dynamic> = _Runtime.iterable(accelerators);
+            var __flowIndex294:Int = 0;
             return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-              if (__flowIndex296 >= __flowIterator295.length) return flight._internal._Async.flowBreak();
-              var accelerator:Dynamic = __flowIterator295[__flowIndex296++];
+              if (__flowIndex294 >= __flowIterator293.length) return flight._internal._Async.flowBreak();
+              var accelerator:Dynamic = __flowIterator293[__flowIndex294++];
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                return flight._internal._Async.flatMap((cast releaseAccelerator((cast accelerator : String)) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue297:Dynamic):Dynamic {
-                  __awaitValue297;
+                return flight._internal._Async.flatMap((cast releaseAccelerator((cast accelerator : String)) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue295:Dynamic):Dynamic {
+                  __awaitValue295;
                   return flight._internal._Async.flowNormal();
                 });
               }), function(__caughtError:Dynamic):Dynamic {
                 var error:Dynamic = __caughtError;
                 return flight._internal._Async.protect(function():Dynamic {
-                  var __flowBranch298:Dynamic;
+                  var __flowBranch296:Dynamic;
                   if ((cast _Runtime.strictEquals(firstError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                    __flowBranch298 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch296 = flight._internal._Async.protect(function():Dynamic {
                       (firstError = cast (error : Dynamic));
                       return flight._internal._Async.flowNormal();
                     });
                   } else {
-                    __flowBranch298 = flight._internal._Async.flowNormal();
+                    __flowBranch296 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch298, function():Dynamic {
+                  return flight._internal._Async.continueFlow(__flowBranch296, function():Dynamic {
                     return flight._internal._Async.flowNormal();
                   });
                 });
@@ -938,15 +938,15 @@ class _HostTauri {
                 return flight._internal._Async.flowNormal();
               });
             }), function():Dynamic {
-              var __flowBranch299:Dynamic;
+              var __flowBranch297:Dynamic;
               if ((cast !_Runtime.strictEquals(firstError, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-                __flowBranch299 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch297 = flight._internal._Async.protect(function():Dynamic {
                   return flight._internal._Async.reject(firstError);
                 });
               } else {
-                __flowBranch299 = flight._internal._Async.flowNormal();
+                __flowBranch297 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch299, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch297, function():Dynamic {
                 return flight._internal._Async.flowNormal();
               });
             });
@@ -964,8 +964,8 @@ class _HostTauri {
           } : Dynamic));
           ((cast pending : flight._internal._Set<flight._internal._Promise<flight._internal._Nothing>>).add(registration));
           return flight._internal._Async.continueFlow(flight._internal._Async.finalizeFlow(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap(registration, function(__awaitValue300:Dynamic):Dynamic {
-              __awaitValue300;
+            return flight._internal._Async.flatMap(registration, function(__awaitValue298:Dynamic):Dynamic {
+              __awaitValue298;
               ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).set(subscription, (cast accelerator)));
               return flight._internal._Async.flowReturn({ reason: 'subscribed', subscription: subscription });
             });
@@ -982,17 +982,17 @@ class _HostTauri {
         flight._internal._Async.protect(function():Dynamic {
           var accelerator:Null<String> = cast _Runtime.UNDEFINED;
           accelerator = ((cast registrations : flight._internal._Map<ShortcutTriggerSubscription, String>).get(subscription));
-          var __flowBranch301:Dynamic;
+          var __flowBranch299:Dynamic;
           if ((cast _Runtime.strictEquals(accelerator, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            __flowBranch301 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch299 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ reason: 'unknown-subscription' });
             });
           } else {
-            __flowBranch301 = flight._internal._Async.flowNormal();
+            __flowBranch299 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch301, function():Dynamic {
-            return flight._internal._Async.flatMap((cast releaseAccelerator((cast accelerator : String)) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue302:Dynamic):Dynamic {
-              __awaitValue302;
+          return flight._internal._Async.continueFlow(__flowBranch299, function():Dynamic {
+            return flight._internal._Async.flatMap((cast releaseAccelerator((cast accelerator : String)) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue300:Dynamic):Dynamic {
+              __awaitValue300;
               return flight._internal._Async.flowReturn({ reason: 'unsubscribed' });
             });
           });
@@ -1013,58 +1013,58 @@ class _HostTauri {
     var interactionEvents:{ >Entity, var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>; } = cast _Runtime.UNDEFINED;
     var tooltip:{ >Entity, var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; } = cast _Runtime.UNDEFINED;
     records = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    lifecycle = (cast createEntity(({ final __callArgument334:Dynamic = { create: function(tray:TrayIcon, options:TrayIconOptions):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    lifecycle = (cast createEntity(({ final __callArgument331:Dynamic = { create: function(tray:TrayIcon, options:TrayIconOptions):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var interactionEvents:Signal<TrayInteractionEvent->Void> = cast _Runtime.UNDEFINED;
           var menuSelectionEvents:Signal<TrayMenuSelectionEvent->Void> = cast _Runtime.UNDEFINED;
           var nativeOptions:TauriTrayIconOptions = cast _Runtime.UNDEFINED;
           var icon:TauriTrayIcon = cast _Runtime.UNDEFINED;
-          var __flowBranch313:Dynamic;
-          if (_Runtime.truthy(({ final __hostType312 = options.signal; __hostType312 == null ? _Runtime.UNDEFINED : (cast __hostType312 : flight._internal.dom.AbortSignal).aborted; }))) {
-            __flowBranch313 = flight._internal._Async.protect(function():Dynamic {
+          var __flowBranch311:Dynamic;
+          if (_Runtime.truthy(({ final __hostType310 = options.signal; __hostType310 == null ? _Runtime.UNDEFINED : (cast __hostType310 : flight._internal.dom.AbortSignal).aborted; }))) {
+            __flowBranch311 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
             });
           } else {
-            __flowBranch313 = flight._internal._Async.flowNormal();
+            __flowBranch311 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch313, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch311, function():Dynamic {
             interactionEvents = (cast (cast createSignal : Void->Signal<TrayInteractionEvent->Void>)() : Signal<TrayInteractionEvent->Void>);
             menuSelectionEvents = (cast (cast createSignal : Void->Signal<TrayMenuSelectionEvent->Void>)() : Signal<TrayMenuSelectionEvent->Void>);
-            nativeOptions = { action: function(event:TauriTrayIconEvent):Void { _HostTauri.emitInteraction__tauriTray(({ final __callArgument314:Dynamic = interactionEvents; __callArgument314; }), ({ final __callArgument315:Dynamic = event; __callArgument315; })); }, icon: options.icon };
-            var __flowBranch318:Dynamic;
+            nativeOptions = { action: function(event:TauriTrayIconEvent):Void { _HostTauri.emitInteraction__tauriTray(({ final __callArgument312:Dynamic = interactionEvents; __callArgument312; }), ({ final __callArgument313:Dynamic = event; __callArgument313; })); }, icon: options.icon };
+            var __flowBranch316:Dynamic;
             if ((cast ((cast _Runtime.strictEquals(profile, 'linux') : Bool) || (cast _Runtime.strictEquals(profile, 'macos') : Bool)) : Bool)) {
-              __flowBranch318 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch316 = flight._internal._Async.protect(function():Dynamic {
                 ((cast nativeOptions : TauriTrayIconOptions).title = options.title);
                 return flight._internal._Async.flowNormal();
               });
             } else {
-              __flowBranch318 = flight._internal._Async.flowNormal();
+              __flowBranch316 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch318, function():Dynamic {
-              var __flowBranch319:Dynamic;
+            return flight._internal._Async.continueFlow(__flowBranch316, function():Dynamic {
+              var __flowBranch317:Dynamic;
               if ((cast ((cast _Runtime.strictEquals(profile, 'windows') : Bool) || (cast _Runtime.strictEquals(profile, 'macos') : Bool)) : Bool)) {
-                __flowBranch319 = flight._internal._Async.protect(function():Dynamic {
+                __flowBranch317 = flight._internal._Async.protect(function():Dynamic {
                   ((cast nativeOptions : TauriTrayIconOptions).tooltip = options.tooltip);
                   return flight._internal._Async.flowNormal();
                 });
               } else {
-                __flowBranch319 = flight._internal._Async.flowNormal();
+                __flowBranch317 = flight._internal._Async.flowNormal();
               }
-              return flight._internal._Async.continueFlow(__flowBranch319, function():Dynamic {
-                var __flowBranch320:Dynamic;
+              return flight._internal._Async.continueFlow(__flowBranch317, function():Dynamic {
+                var __flowBranch318:Dynamic;
                 if ((cast _Runtime.strictEquals(profile, 'macos') : Bool)) {
-                  __flowBranch320 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch318 = flight._internal._Async.protect(function():Dynamic {
                     ((cast nativeOptions : TauriTrayIconOptions).iconAsTemplate = options.iconTemplate);
                     return flight._internal._Async.flowNormal();
                   });
                 } else {
-                  __flowBranch320 = flight._internal._Async.flowNormal();
+                  __flowBranch318 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch320, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch318, function():Dynamic {
                   return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                    return flight._internal._Async.flatMap((cast (cast tauri.tray : TauriTrayModule).TrayIcon : TauriTrayIconFactory).new_(({ final __callArgument322:Dynamic = nativeOptions; __callArgument322; })), function(__awaitValue321:Dynamic):Dynamic {
-                      (icon = cast (__awaitValue321 : Dynamic));
+                    return flight._internal._Async.flatMap(_Runtime.callProperty((cast tauri.tray : TauriTrayModule).TrayIcon, 'new', cast ([nativeOptions] : Array<Dynamic>)), function(__awaitValue319:Dynamic):Dynamic {
+                      (icon = cast (__awaitValue319 : Dynamic));
                       return flight._internal._Async.flowNormal();
                     });
                   }), function(__caughtError:Dynamic):Dynamic {
@@ -1073,12 +1073,12 @@ class _HostTauri {
                       return flight._internal._Async.flowReturn({ error: error, outcome: 'tray-create-failed' });
                     });
                   }), function():Dynamic {
-                    var __flowBranch324:Dynamic;
-                    if (_Runtime.truthy(({ final __hostType323 = options.signal; __hostType323 == null ? _Runtime.UNDEFINED : (cast __hostType323 : flight._internal.dom.AbortSignal).aborted; }))) {
-                      __flowBranch324 = flight._internal._Async.protect(function():Dynamic {
+                    var __flowBranch321:Dynamic;
+                    if (_Runtime.truthy(({ final __hostType320 = options.signal; __hostType320 == null ? _Runtime.UNDEFINED : (cast __hostType320 : flight._internal.dom.AbortSignal).aborted; }))) {
+                      __flowBranch321 = flight._internal._Async.protect(function():Dynamic {
                         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                          return flight._internal._Async.flatMap((cast icon : TauriTrayIcon).close(), function(__awaitValue325:Dynamic):Dynamic {
-                            __awaitValue325;
+                          return flight._internal._Async.flatMap((cast icon : TauriTrayIcon).close(), function(__awaitValue322:Dynamic):Dynamic {
+                            __awaitValue322;
                             return flight._internal._Async.flowReturn({ outcome: 'cancelled' });
                           });
                         }), function(__caughtError:Dynamic):Dynamic {
@@ -1091,9 +1091,9 @@ class _HostTauri {
                         });
                       });
                     } else {
-                      __flowBranch324 = flight._internal._Async.flowNormal();
+                      __flowBranch321 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch324, function():Dynamic {
+                    return flight._internal._Async.continueFlow(__flowBranch321, function():Dynamic {
                       ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).set(tray, (cast { destroying: false, icon: icon, interactionEvents: interactionEvents, menuGeneration: 0.0, menus: cast ([] : Array<Dynamic>), menuSelectionEvents: menuSelectionEvents, nativePending: true, pendingMenuOperations: _Runtime.construct(flight._internal._HostValueLut.get('Set'), []), title: _Runtime.coalesce(options.title, function():Dynamic return cast ''), tooltip: _Runtime.coalesce(options.tooltip, function():Dynamic return cast '') })));
                       return flight._internal._Async.flowReturn({ outcome: 'created' });
                     });
@@ -1110,19 +1110,19 @@ class _HostTauri {
           var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
           var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }> = cast _Runtime.UNDEFINED;
           record = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get(tray));
-          var __flowBranch326:Dynamic;
+          var __flowBranch323:Dynamic;
           if ((cast _Runtime.strictEquals(record, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) {
-            __flowBranch326 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch323 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ outcome: 'destroyed' });
             });
           } else {
-            __flowBranch326 = flight._internal._Async.flowNormal();
+            __flowBranch323 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch326, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch323, function():Dynamic {
             ((cast record : TrayRecord__tauriTray).destroying = true);
             (cast record : TrayRecord__tauriTray).menuGeneration++;
-            return flight._internal._Async.flatMap(flight._internal._Async.all(_Runtime.concatArrays([_Runtime.toArray((cast record : TrayRecord__tauriTray).pendingMenuOperations)])), function(__awaitValue327:Dynamic):Dynamic {
-              __awaitValue327;
+            return flight._internal._Async.flatMap(flight._internal._Async.all(_Runtime.concatArrays([_Runtime.toArray((cast record : TrayRecord__tauriTray).pendingMenuOperations)])), function(__awaitValue324:Dynamic):Dynamic {
+              __awaitValue324;
               failures = cast ([] : Array<Dynamic>);
               return flight._internal._Async.continueFlow(flight._internal._Async.protect(function():Dynamic {
                 var index:Float = cast _Runtime.UNDEFINED;
@@ -1133,8 +1133,8 @@ class _HostTauri {
                     var closed:Bool = cast _Runtime.UNDEFINED;
                     closed = false;
                     return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                      return flight._internal._Async.flatMap((cast flight._internal._StaticIndex.readArray((cast record : TrayRecord__tauriTray).menus, index) : TauriMenu).close(), function(__awaitValue328:Dynamic):Dynamic {
-                        __awaitValue328;
+                      return flight._internal._Async.flatMap((cast flight._internal._StaticIndex.readArray((cast record : TrayRecord__tauriTray).menus, index) : TauriMenu).close(), function(__awaitValue325:Dynamic):Dynamic {
+                        __awaitValue325;
                         (closed = cast (true : Dynamic));
                         return flight._internal._Async.flowNormal();
                       });
@@ -1145,16 +1145,16 @@ class _HostTauri {
                         return flight._internal._Async.flowNormal();
                       });
                     }), function():Dynamic {
-                      var __flowBranch329:Dynamic;
+                      var __flowBranch326:Dynamic;
                       if ((cast closed : Bool)) {
-                        __flowBranch329 = flight._internal._Async.protect(function():Dynamic {
+                        __flowBranch326 = flight._internal._Async.protect(function():Dynamic {
                           _Runtime.splice((cast record : TrayRecord__tauriTray).menus, Std.int(index), Std.int(1.0), []);
                           return flight._internal._Async.flowNormal();
                         });
                       } else {
-                        __flowBranch329 = flight._internal._Async.flowNormal();
+                        __flowBranch326 = flight._internal._Async.flowNormal();
                       }
-                      return flight._internal._Async.continueFlow(__flowBranch329, function():Dynamic {
+                      return flight._internal._Async.continueFlow(__flowBranch326, function():Dynamic {
                         return flight._internal._Async.flowNormal();
                       });
                     });
@@ -1164,12 +1164,12 @@ class _HostTauri {
                   });
                 });
               }), function():Dynamic {
-                var __flowBranch330:Dynamic;
+                var __flowBranch327:Dynamic;
                 if ((cast (cast record : TrayRecord__tauriTray).nativePending : Bool)) {
-                  __flowBranch330 = flight._internal._Async.protect(function():Dynamic {
+                  __flowBranch327 = flight._internal._Async.protect(function():Dynamic {
                     return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                      return flight._internal._Async.flatMap((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).close(), function(__awaitValue331:Dynamic):Dynamic {
-                        __awaitValue331;
+                      return flight._internal._Async.flatMap((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).close(), function(__awaitValue328:Dynamic):Dynamic {
+                        __awaitValue328;
                         ((cast record : TrayRecord__tauriTray).nativePending = false);
                         return flight._internal._Async.flowNormal();
                       });
@@ -1184,18 +1184,18 @@ class _HostTauri {
                     });
                   });
                 } else {
-                  __flowBranch330 = flight._internal._Async.flowNormal();
+                  __flowBranch327 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch330, function():Dynamic {
-                  var __flowBranch332:Dynamic;
+                return flight._internal._Async.continueFlow(__flowBranch327, function():Dynamic {
+                  var __flowBranch329:Dynamic;
                   if ((cast ((cast _Runtime.field(failures, 'length') : Float) > (cast 0.0 : Float)) : Bool)) {
-                    __flowBranch332 = flight._internal._Async.protect(function():Dynamic {
+                    __flowBranch329 = flight._internal._Async.protect(function():Dynamic {
                       return flight._internal._Async.flowReturn({ failures: failures, outcome: 'tray-destroy-failed' });
                     });
                   } else {
-                    __flowBranch332 = flight._internal._Async.flowNormal();
+                    __flowBranch329 = flight._internal._Async.flowNormal();
                   }
-                  return flight._internal._Async.continueFlow(__flowBranch332, function():Dynamic {
+                  return flight._internal._Async.continueFlow(__flowBranch329, function():Dynamic {
                     ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).delete_(tray));
                     return flight._internal._Async.flowReturn({ outcome: 'destroyed' });
                   });
@@ -1205,7 +1205,7 @@ class _HostTauri {
           });
         })
       );
-    }, isDestroyed: function(tray:TrayIcon):Bool return _Runtime.coalesce(({ final __structural333 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get(tray)); __structural333 == null ? _Runtime.UNDEFINED : (cast __structural333 : { var destroying:Bool; }).destroying; }), function():Dynamic return cast true), list: function():Array<TrayIcon> return (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast _Runtime.concatArrays([_Runtime.toArray(((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).entries()))]) : Array<Dynamic>), function(__parameter0:Array<flight._internal._Union2<TrayIcon, TrayRecord__tauriTray>>, __unused1:Float, __unused2:Array<Array<flight._internal._Union2<TrayIcon, TrayRecord__tauriTray>>>):Bool {
+    }, isDestroyed: function(tray:TrayIcon):Bool return _Runtime.coalesce(({ final __structural330 = ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get(tray)); __structural330 == null ? _Runtime.UNDEFINED : (cast __structural330 : { var destroying:Bool; }).destroying; }), function():Dynamic return cast true), list: function():Array<TrayIcon> return (cast _Runtime.mapArray((cast (cast _Runtime.filterArray((cast _Runtime.concatArrays([_Runtime.toArray(((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).entries()))]) : Array<Dynamic>), function(__parameter0:Array<flight._internal._Union2<TrayIcon, TrayRecord__tauriTray>>, __unused1:Float, __unused2:Array<Array<flight._internal._Union2<TrayIcon, TrayRecord__tauriTray>>>):Bool {
       var record:TrayRecord__tauriTray = cast _Runtime.UNDEFINED;
       record = flight._internal._StaticIndex.readArray(__parameter0, 1.0);
       return cast !(cast (cast record : TrayRecord__tauriTray).destroying : Bool);
@@ -1215,32 +1215,32 @@ class _HostTauri {
       tray = flight._internal._StaticIndex.readArray(__parameter3, 0.0);
       return cast tray;
       return cast _Runtime.UNDEFINED;
-    }, _Runtime.UNDEFINED)) }; __callArgument334; })) : { >Entity, var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; var destroy:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>>; var isDestroyed:TrayIcon->Bool; var list:Void->Array<TrayIcon>; });
-    image = (cast createEntity(({ final __callArgument362:Dynamic = { set: function(tray:TrayIcon, icon:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    }, _Runtime.UNDEFINED)) }; __callArgument331; })) : { >Entity, var create:TrayIcon->TrayIconOptions->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; var destroy:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<{ @:optional var error:flight._internal._Any; var step:String; }>; var outcome:String; }>>; var isDestroyed:TrayIcon->Bool; var list:Void->Array<TrayIcon>; });
+    image = (cast createEntity(({ final __callArgument358:Dynamic = { set: function(tray:TrayIcon, icon:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.resolve((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument358:Dynamic = tray; __callArgument358; }), (cast 'image-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
+        return flight._internal._Async.resolve((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument354:Dynamic = tray; __callArgument354; }), (cast 'image-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
           return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.resolve((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).setIcon(({ final __callArgument359:Dynamic = icon; __callArgument359; })));
+            return flight._internal._Async.resolve((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).setIcon(({ final __callArgument355:Dynamic = icon; __callArgument355; })));
           }));
         } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>));
       }));
-    } }; __callArgument362; })) : { >Entity, var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; });
-    menu = (cast createEntity(({ final __callArgument393:Dynamic = { set: function(tray:TrayIcon, items:Array<MenuItemTemplate>):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>> {
+    } }; __callArgument358; })) : { >Entity, var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; });
+    menu = (cast createEntity(({ final __callArgument389:Dynamic = { set: function(tray:TrayIcon, items:Array<MenuItemTemplate>):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
           var finishOperation:Void->Void = cast _Runtime.UNDEFINED;
           var pendingOperation:flight._internal._Promise<flight._internal._Nothing> = cast _Runtime.UNDEFINED;
-          record = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument368:Dynamic = tray; __callArgument368; })) : Null<TrayRecord__tauriTray>);
-          var __flowBranch370:Dynamic;
+          record = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument364:Dynamic = tray; __callArgument364; })) : Null<TrayRecord__tauriTray>);
+          var __flowBranch366:Dynamic;
           if ((cast _Runtime.strictEquals(record, null) : Bool)) {
-            __flowBranch370 = flight._internal._Async.protect(function():Dynamic {
+            __flowBranch366 = flight._internal._Async.protect(function():Dynamic {
               return flight._internal._Async.flowReturn({ outcome: 'tray-destroyed' });
             });
           } else {
-            __flowBranch370 = flight._internal._Async.flowNormal();
+            __flowBranch366 = flight._internal._Async.flowNormal();
           }
-          return flight._internal._Async.continueFlow(__flowBranch370, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch366, function():Dynamic {
             pendingOperation = flight._internal._Async.create(function(resolve:flight._internal._Any, __unused6:flight._internal._Any):Void {
               (finishOperation = cast (resolve : Dynamic));
             });
@@ -1253,10 +1253,10 @@ class _HostTauri {
               generation = ++(cast record : TrayRecord__tauriTray).menuGeneration;
               return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
                 var handles:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
-                return flight._internal._Async.flatMap((cast _HostTauri.buildTrayItems__tauriTray(tauri.menu, ({ final __callArgument373:Dynamic = items; __callArgument373; }), ({ final __callArgument374:Dynamic = function(id:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__tauriTray).menuSelectionEvents], [{ id: id }]]), 1); }; __callArgument374; })) : flight._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue371:Dynamic):Dynamic {
-                  handles = __awaitValue371;
-                  return flight._internal._Async.flatMap((cast (cast tauri.menu : TauriMenuModule).Menu : TauriMenuFactory).new_((cast { items: handles } : Dynamic)), function(__awaitValue372:Dynamic):Dynamic {
-                    (built = cast (__awaitValue372 : Dynamic));
+                return flight._internal._Async.flatMap((cast _HostTauri.buildTrayItems__tauriTray(tauri.menu, ({ final __callArgument369:Dynamic = items; __callArgument369; }), ({ final __callArgument370:Dynamic = function(id:String):Void { _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[(cast record : TrayRecord__tauriTray).menuSelectionEvents], [{ id: id }]]), 1); }; __callArgument370; })) : flight._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue367:Dynamic):Dynamic {
+                  handles = __awaitValue367;
+                  return flight._internal._Async.flatMap(_Runtime.callProperty((cast tauri.menu : TauriMenuModule).Menu, 'new', cast ([{ items: handles }] : Array<Dynamic>)), function(__awaitValue368:Dynamic):Dynamic {
+                    (built = cast (__awaitValue368 : Dynamic));
                     return flight._internal._Async.flowNormal();
                   });
                 });
@@ -1266,55 +1266,55 @@ class _HostTauri {
                   return flight._internal._Async.flowReturn({ error: error, outcome: 'menu-build-failed' });
                 });
               }), function():Dynamic {
-                var __flowBranch377:Dynamic;
+                var __flowBranch373:Dynamic;
                 if ((cast ((cast (cast record : TrayRecord__tauriTray).destroying : Bool) || (cast !_Runtime.strictEquals(generation, (cast record : TrayRecord__tauriTray).menuGeneration) : Bool)) : Bool)) {
-                  __flowBranch377 = flight._internal._Async.protect(function():Dynamic {
-                    return flight._internal._Async.flatMap((cast _HostTauri.closeStaleMenu__tauriTray((cast record : Dynamic), ({ final __callArgument379:Dynamic = built; __callArgument379; })) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue378:Dynamic):Dynamic {
-                      __awaitValue378;
+                  __flowBranch373 = flight._internal._Async.protect(function():Dynamic {
+                    return flight._internal._Async.flatMap((cast _HostTauri.closeStaleMenu__tauriTray((cast record : Dynamic), ({ final __callArgument375:Dynamic = built; __callArgument375; })) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue374:Dynamic):Dynamic {
+                      __awaitValue374;
                       return flight._internal._Async.flowReturn(((cast (cast record : TrayRecord__tauriTray).destroying : Bool) ? (cast { outcome: 'tray-destroyed' } : Dynamic) : (cast { error: _Runtime.error('A newer Tray menu superseded this build'), outcome: 'menu-install-failed' } : Dynamic)));
                     });
                   });
                 } else {
-                  __flowBranch377 = flight._internal._Async.flowNormal();
+                  __flowBranch373 = flight._internal._Async.flowNormal();
                 }
-                return flight._internal._Async.continueFlow(__flowBranch377, function():Dynamic {
+                return flight._internal._Async.continueFlow(__flowBranch373, function():Dynamic {
                   return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                    return flight._internal._Async.flatMap((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).setMenu(({ final __callArgument382:Dynamic = built; __callArgument382; })), function(__awaitValue381:Dynamic):Dynamic {
-                      __awaitValue381;
+                    return flight._internal._Async.flatMap((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).setMenu(({ final __callArgument378:Dynamic = built; __callArgument378; })), function(__awaitValue377:Dynamic):Dynamic {
+                      __awaitValue377;
                       return flight._internal._Async.flowNormal();
                     });
                   }), function(__caughtError:Dynamic):Dynamic {
                     var error:Dynamic = __caughtError;
                     return flight._internal._Async.protect(function():Dynamic {
-                      return flight._internal._Async.flatMap((cast _HostTauri.closeStaleMenu__tauriTray((cast record : Dynamic), ({ final __callArgument384:Dynamic = built; __callArgument384; })) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue383:Dynamic):Dynamic {
-                        __awaitValue383;
+                      return flight._internal._Async.flatMap((cast _HostTauri.closeStaleMenu__tauriTray((cast record : Dynamic), ({ final __callArgument380:Dynamic = built; __callArgument380; })) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue379:Dynamic):Dynamic {
+                        __awaitValue379;
                         return flight._internal._Async.flowReturn({ error: error, outcome: 'menu-install-failed' });
                       });
                     });
                   }), function():Dynamic {
-                    var __flowBranch386:Dynamic;
+                    var __flowBranch382:Dynamic;
                     if ((cast ((cast (cast record : TrayRecord__tauriTray).destroying : Bool) || (cast !_Runtime.strictEquals(generation, (cast record : TrayRecord__tauriTray).menuGeneration) : Bool)) : Bool)) {
-                      __flowBranch386 = flight._internal._Async.protect(function():Dynamic {
-                        return flight._internal._Async.flatMap((cast _HostTauri.closeStaleMenu__tauriTray((cast record : Dynamic), ({ final __callArgument388:Dynamic = built; __callArgument388; })) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue387:Dynamic):Dynamic {
-                          __awaitValue387;
+                      __flowBranch382 = flight._internal._Async.protect(function():Dynamic {
+                        return flight._internal._Async.flatMap((cast _HostTauri.closeStaleMenu__tauriTray((cast record : Dynamic), ({ final __callArgument384:Dynamic = built; __callArgument384; })) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue383:Dynamic):Dynamic {
+                          __awaitValue383;
                           return flight._internal._Async.flowReturn(((cast (cast record : TrayRecord__tauriTray).destroying : Bool) ? (cast { outcome: 'tray-destroyed' } : Dynamic) : (cast { error: _Runtime.error('A newer Tray menu superseded this install'), outcome: 'menu-install-failed' } : Dynamic)));
                         });
                       });
                     } else {
-                      __flowBranch386 = flight._internal._Async.flowNormal();
+                      __flowBranch382 = flight._internal._Async.flowNormal();
                     }
-                    return flight._internal._Async.continueFlow(__flowBranch386, function():Dynamic {
+                    return flight._internal._Async.continueFlow(__flowBranch382, function():Dynamic {
                       previous = _Runtime.slice((cast record : TrayRecord__tauriTray).menus, 0, null);
                       _Runtime.callProperty((cast record : TrayRecord__tauriTray).menus, 'push', cast ([built] : Array<Dynamic>));
                       failures = cast ([] : Array<Dynamic>);
-                      var __flowIterator390:Array<Dynamic> = _Runtime.iterable(previous);
-                      var __flowIndex391:Int = 0;
+                      var __flowIterator386:Array<Dynamic> = _Runtime.iterable(previous);
+                      var __flowIndex387:Int = 0;
                       return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-                        if (__flowIndex391 >= __flowIterator390.length) return flight._internal._Async.flowBreak();
-                        var oldMenu:Dynamic = __flowIterator390[__flowIndex391++];
+                        if (__flowIndex387 >= __flowIterator386.length) return flight._internal._Async.flowBreak();
+                        var oldMenu:Dynamic = __flowIterator386[__flowIndex387++];
                         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-                          return flight._internal._Async.flatMap((cast oldMenu : TauriMenu).close(), function(__awaitValue392:Dynamic):Dynamic {
-                            __awaitValue392;
+                          return flight._internal._Async.flatMap((cast oldMenu : TauriMenu).close(), function(__awaitValue388:Dynamic):Dynamic {
+                            __awaitValue388;
                             _Runtime.splice((cast record : TrayRecord__tauriTray).menus, Std.int(_Runtime.callProperty((cast record : TrayRecord__tauriTray).menus, 'indexOf', cast ([oldMenu] : Array<Dynamic>))), Std.int(1.0), []);
                             return flight._internal._Async.flowNormal();
                           });
@@ -1344,86 +1344,86 @@ class _HostTauri {
           });
         })
       );
-    } }; __callArgument393; })) : { >Entity, var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>>; });
-    common = (cast { image: image, lifecycle: lifecycle, menu: menu, menuSelectionEvents: (cast createEntity(({ final __callArgument423:Dynamic = { getSignal: function(tray:TrayIcon):Null<Signal<TrayMenuSelectionEvent->Void>> return _Runtime.coalesce(({ final __structural422 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument420:Dynamic = tray; __callArgument420; })) : Null<TrayRecord__tauriTray>); __structural422 == null ? _Runtime.UNDEFINED : (cast __structural422 : { var menuSelectionEvents:Signal<TrayMenuSelectionEvent->Void>; }).menuSelectionEvents; }), function():Dynamic return cast null) }; __callArgument423; })) : { >Entity, var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>; }) });
-    title = (cast createEntity(({ final __callArgument436:Dynamic = { get: function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>> {
+    } }; __callArgument389; })) : { >Entity, var set:TrayIcon->Array<MenuItemTemplate>->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<flight._internal._Union2<{ var error:flight._internal._Any; var outcome:String; }, { var outcome:String; @:optional var error:flight._internal._Any; }>, { var error:flight._internal._Any; var outcome:String; }>, { var error:Array<flight._internal._Any>; var outcome:String; }>>; });
+    common = (cast { image: image, lifecycle: lifecycle, menu: menu, menuSelectionEvents: (cast createEntity(({ final __callArgument419:Dynamic = { getSignal: function(tray:TrayIcon):Null<Signal<TrayMenuSelectionEvent->Void>> return _Runtime.coalesce(({ final __structural418 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument416:Dynamic = tray; __callArgument416; })) : Null<TrayRecord__tauriTray>); __structural418 == null ? _Runtime.UNDEFINED : (cast __structural418 : { var menuSelectionEvents:Signal<TrayMenuSelectionEvent->Void>; }).menuSelectionEvents; }), function():Dynamic return cast null) }; __callArgument419; })) : { >Entity, var getSignal:TrayIcon->Null<Signal<TrayMenuSelectionEvent->Void>>; }) });
+    title = (cast createEntity(({ final __callArgument432:Dynamic = { get: function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
-        record = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument428:Dynamic = tray; __callArgument428; })) : Null<TrayRecord__tauriTray>);
+        record = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument424:Dynamic = tray; __callArgument424; })) : Null<TrayRecord__tauriTray>);
         return flight._internal._Async.resolve(((cast _Runtime.strictEquals(record, null) : Bool) ? (cast { outcome: 'tray-destroyed' } : Dynamic) : (cast { outcome: 'available', title: (cast record : TrayRecord__tauriTray).title } : Dynamic)));
       }));
     }, set: function(tray:TrayIcon, value:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var result:flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }> = cast _Runtime.UNDEFINED;
-          return flight._internal._Async.flatMap((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument432:Dynamic = tray; __callArgument432; }), (cast 'title-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
+          return flight._internal._Async.flatMap((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument428:Dynamic = tray; __callArgument428; }), (cast 'title-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
             return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.resolve((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).setTitle(({ final __callArgument433:Dynamic = value; __callArgument433; })));
+              return flight._internal._Async.resolve((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).setTitle(({ final __callArgument429:Dynamic = value; __callArgument429; })));
             }));
-          } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>), function(__awaitValue430:Dynamic):Dynamic {
-            result = __awaitValue430;
-            var __flowBranch431:Dynamic;
+          } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>), function(__awaitValue426:Dynamic):Dynamic {
+            result = __awaitValue426;
+            var __flowBranch427:Dynamic;
             if ((cast _Runtime.strictEquals((cast result : { var outcome:String; }).outcome, 'updated') : Bool)) {
-              __flowBranch431 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch427 = flight._internal._Async.protect(function():Dynamic {
                 ((cast ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get(tray)) : TrayRecord__tauriTray).title = value);
                 return flight._internal._Async.flowNormal();
               });
             } else {
-              __flowBranch431 = flight._internal._Async.flowNormal();
+              __flowBranch427 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch431, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch427, function():Dynamic {
               return flight._internal._Async.flowReturn(result);
             });
           });
         })
       );
-    } }; __callArgument436; })) : { >Entity, var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; });
+    } }; __callArgument432; })) : { >Entity, var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var title:flight._internal._Any; }, { var outcome:String; var title:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; });
     if ((cast _Runtime.strictEquals(profile, 'linux') : Bool)) { return cast (cast (cast _Runtime.mergeObjects([common, { title: title }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>); }
-    interactionEvents = (cast createEntity(({ final __callArgument449:Dynamic = { getSignal: function(tray:TrayIcon):Null<Signal<TrayInteractionEvent->Void>> return _Runtime.coalesce(({ final __structural448 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument446:Dynamic = tray; __callArgument446; })) : Null<TrayRecord__tauriTray>); __structural448 == null ? _Runtime.UNDEFINED : (cast __structural448 : { var interactionEvents:Signal<TrayInteractionEvent->Void>; }).interactionEvents; }), function():Dynamic return cast null) }; __callArgument449; })) : { >Entity, var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>; });
-    tooltip = (cast createEntity(({ final __callArgument462:Dynamic = { get: function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>> {
+    interactionEvents = (cast createEntity(({ final __callArgument445:Dynamic = { getSignal: function(tray:TrayIcon):Null<Signal<TrayInteractionEvent->Void>> return _Runtime.coalesce(({ final __structural444 = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument442:Dynamic = tray; __callArgument442; })) : Null<TrayRecord__tauriTray>); __structural444 == null ? _Runtime.UNDEFINED : (cast __structural444 : { var interactionEvents:Signal<TrayInteractionEvent->Void>; }).interactionEvents; }), function():Dynamic return cast null) }; __callArgument445; })) : { >Entity, var getSignal:TrayIcon->Null<Signal<TrayInteractionEvent->Void>>; });
+    tooltip = (cast createEntity(({ final __callArgument458:Dynamic = { get: function(tray:TrayIcon):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
-        record = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument454:Dynamic = tray; __callArgument454; })) : Null<TrayRecord__tauriTray>);
+        record = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument450:Dynamic = tray; __callArgument450; })) : Null<TrayRecord__tauriTray>);
         return flight._internal._Async.resolve(((cast _Runtime.strictEquals(record, null) : Bool) ? (cast { outcome: 'tray-destroyed' } : Dynamic) : (cast { outcome: 'available', tooltip: (cast record : TrayRecord__tauriTray).tooltip } : Dynamic)));
       }));
     }, set: function(tray:TrayIcon, value:String):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var result:flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }> = cast _Runtime.UNDEFINED;
-          return flight._internal._Async.flatMap((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument458:Dynamic = tray; __callArgument458; }), (cast 'tooltip-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
+          return flight._internal._Async.flatMap((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument454:Dynamic = tray; __callArgument454; }), (cast 'tooltip-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
             return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.resolve((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).setTooltip(({ final __callArgument459:Dynamic = value; __callArgument459; })));
+              return flight._internal._Async.resolve((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).setTooltip(({ final __callArgument455:Dynamic = value; __callArgument455; })));
             }));
-          } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>), function(__awaitValue456:Dynamic):Dynamic {
-            result = __awaitValue456;
-            var __flowBranch457:Dynamic;
+          } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>), function(__awaitValue452:Dynamic):Dynamic {
+            result = __awaitValue452;
+            var __flowBranch453:Dynamic;
             if ((cast _Runtime.strictEquals((cast result : { var outcome:String; }).outcome, 'updated') : Bool)) {
-              __flowBranch457 = flight._internal._Async.protect(function():Dynamic {
+              __flowBranch453 = flight._internal._Async.protect(function():Dynamic {
                 ((cast ((cast records : flight._internal._Map<TrayIcon, TrayRecord__tauriTray>).get(tray)) : TrayRecord__tauriTray).tooltip = value);
                 return flight._internal._Async.flowNormal();
               });
             } else {
-              __flowBranch457 = flight._internal._Async.flowNormal();
+              __flowBranch453 = flight._internal._Async.flowNormal();
             }
-            return flight._internal._Async.continueFlow(__flowBranch457, function():Dynamic {
+            return flight._internal._Async.continueFlow(__flowBranch453, function():Dynamic {
               return flight._internal._Async.flowReturn(result);
             });
           });
         })
       );
-    } }; __callArgument462; })) : { >Entity, var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; });
+    } }; __callArgument458; })) : { >Entity, var get:TrayIcon->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var tooltip:flight._internal._Any; }, { var outcome:String; var tooltip:String; }>>; var set:TrayIcon->String->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; });
     if ((cast _Runtime.strictEquals(profile, 'windows') : Bool)) {
       return cast (cast (cast _Runtime.mergeObjects([common, { interactionEvents: interactionEvents }, { tooltip: tooltip }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>);
     }
-    return cast (cast (cast _Runtime.mergeObjects([common, { interactionEvents: interactionEvents }, { templateImage: (cast createEntity(({ final __callArgument474:Dynamic = { set: function(tray:TrayIcon, isTemplate:Bool):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
+    return cast (cast (cast _Runtime.mergeObjects([common, { interactionEvents: interactionEvents }, { templateImage: (cast createEntity(({ final __callArgument470:Dynamic = { set: function(tray:TrayIcon, isTemplate:Bool):flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
-        return flight._internal._Async.resolve((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument472:Dynamic = tray; __callArgument472; }), (cast 'template-image-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
+        return flight._internal._Async.resolve((cast _HostTauri.update__tauriTray((cast records : Dynamic), ({ final __callArgument468:Dynamic = tray; __callArgument468; }), (cast 'template-image-update-failed' : String), (cast function(record:TrayRecord__tauriTray):flight._internal._Promise<flight._internal._Nothing> {
           return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.resolve((cast (cast record : TrayRecord__tauriTray).icon : TauriTrayIcon).setIconAsTemplate((cast isTemplate : Bool)));
           }));
         } : Dynamic)) : flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>));
       }));
-    } }; __callArgument474; })) : { >Entity, var set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }) }, { title: title }, { tooltip: tooltip }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>);
+    } }; __callArgument470; })) : { >Entity, var set:TrayIcon->Bool->flight._internal._Promise<flight._internal._Union2<{ var outcome:String; @:optional var error:flight._internal._Any; }, { var error:flight._internal._Any; var outcome:String; }>>; }) }, { title: title }, { tooltip: tooltip }]) : flight._internal._Any) : TauriTrayCapabilitiesFor<Profile>);
     return cast null;
   }
 
@@ -1436,7 +1436,7 @@ class _HostTauri {
 
   public static function emitInteraction__tauriTray(signal:Signal<TrayInteractionEvent->Void>, event:TauriTrayIconEvent):Void {
     var type:Null<String> = cast _Runtime.UNDEFINED;
-    type = (cast _HostTauri.toInteractionType__tauriTray(({ final __callArgument478:Dynamic = event; __callArgument478; })) : Null<String>);
+    type = (cast _HostTauri.toInteractionType__tauriTray(({ final __callArgument474:Dynamic = event; __callArgument474; })) : Null<String>);
     if ((cast _Runtime.strictEquals(type, null) : Bool)) { return; }
     _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[signal], [{ altKey: false, bounds: _Runtime.select(_Runtime.field(event, 'rect'), function():Dynamic return cast { height: (cast (cast _Runtime.field(event, 'rect') : { var position:TauriPhysicalPositionLike; var size:TauriLogicalSizeLike; }).size : TauriLogicalSizeLike).height, width: (cast (cast _Runtime.field(event, 'rect') : { var position:TauriPhysicalPositionLike; var size:TauriLogicalSizeLike; }).size : TauriLogicalSizeLike).width, x: (cast (cast _Runtime.field(event, 'rect') : { var position:TauriPhysicalPositionLike; var size:TauriLogicalSizeLike; }).position : TauriPhysicalPositionLike).x, y: (cast (cast _Runtime.field(event, 'rect') : { var position:TauriPhysicalPositionLike; var size:TauriLogicalSizeLike; }).position : TauriPhysicalPositionLike).y }, function():Dynamic return cast null), ctrlKey: false, metaKey: false, position: _Runtime.select(_Runtime.field(event, 'position'), function():Dynamic return cast { x: (cast _Runtime.field(event, 'position') : TauriPhysicalPositionLike).x, y: (cast _Runtime.field(event, 'position') : TauriPhysicalPositionLike).y }, function():Dynamic return cast null), shiftKey: false, type: type }]]), 1);
   }
@@ -1453,45 +1453,45 @@ class _HostTauri {
       flight._internal._Async.protect(function():Dynamic {
         var built:Array<TauriMenuItemHandle> = cast _Runtime.UNDEFINED;
         built = cast ([] : Array<Dynamic>);
-        var __flowIterator487:Array<Dynamic> = _Runtime.iterable(items);
-        var __flowIndex488:Int = 0;
+        var __flowIterator482:Array<Dynamic> = _Runtime.iterable(items);
+        var __flowIndex483:Int = 0;
         return flight._internal._Async.continueFlow(flight._internal._Async.repeatFlow(function():Dynamic {
-          if (__flowIndex488 >= __flowIterator487.length) return flight._internal._Async.flowBreak();
-          var item:Dynamic = __flowIterator487[__flowIndex488++];
-          var __flowBranch489:Dynamic;
+          if (__flowIndex483 >= __flowIterator482.length) return flight._internal._Async.flowBreak();
+          var item:Dynamic = __flowIterator482[__flowIndex483++];
+          var __flowBranch484:Dynamic;
           if ((cast _Runtime.strictEquals(item.type, 'separator') : Bool)) {
-            __flowBranch489 = flight._internal._Async.protect(function():Dynamic {
-              return flight._internal._Async.flatMap((cast (cast menuModule : { var PredefinedMenuItem:TauriPredefinedMenuItemFactory; }).PredefinedMenuItem : TauriPredefinedMenuItemFactory).new_(({ final __callArgument491:Dynamic = { item: 'Separator' }; __callArgument491; })), function(__awaitValue490:Dynamic):Dynamic {
-                _Runtime.callProperty(built, 'push', cast ([__awaitValue490] : Array<Dynamic>));
+            __flowBranch484 = flight._internal._Async.protect(function():Dynamic {
+              return flight._internal._Async.flatMap(_Runtime.callProperty((cast menuModule : { var PredefinedMenuItem:TauriPredefinedMenuItemFactory; }).PredefinedMenuItem, 'new', cast ([{ item: 'Separator' }] : Array<Dynamic>)), function(__awaitValue485:Dynamic):Dynamic {
+                _Runtime.callProperty(built, 'push', cast ([__awaitValue485] : Array<Dynamic>));
                 return flight._internal._Async.flowNormal();
               });
             });
           } else {
-            __flowBranch489 = flight._internal._Async.protect(function():Dynamic {
-              var __flowBranch492:Dynamic;
+            __flowBranch484 = flight._internal._Async.protect(function():Dynamic {
+              var __flowBranch486:Dynamic;
               if (_Runtime.truthy(item.submenu)) {
-                __flowBranch492 = flight._internal._Async.protect(function():Dynamic {
-                  return flight._internal._Async.flatMap((cast _HostTauri.buildTrayItems__tauriTray(({ final __callArgument495:Dynamic = menuModule; __callArgument495; }), item.submenu, ({ final __callArgument496:Dynamic = onSelect; __callArgument496; })) : flight._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue493:Dynamic):Dynamic {
-                    return flight._internal._Async.flatMap((cast (cast menuModule : { var Submenu:TauriSubmenuFactory; }).Submenu : TauriSubmenuFactory).new_((cast { enabled: item.enabled, items: __awaitValue493, text: item.label } : Dynamic)), function(__awaitValue494:Dynamic):Dynamic {
-                      _Runtime.callProperty(built, 'push', cast ([__awaitValue494] : Array<Dynamic>));
+                __flowBranch486 = flight._internal._Async.protect(function():Dynamic {
+                  return flight._internal._Async.flatMap((cast _HostTauri.buildTrayItems__tauriTray(({ final __callArgument489:Dynamic = menuModule; __callArgument489; }), item.submenu, ({ final __callArgument490:Dynamic = onSelect; __callArgument490; })) : flight._internal._Promise<Array<TauriMenuItemHandle>>), function(__awaitValue487:Dynamic):Dynamic {
+                    return flight._internal._Async.flatMap(_Runtime.callProperty((cast menuModule : { var Submenu:TauriSubmenuFactory; }).Submenu, 'new', cast ([{ enabled: item.enabled, items: __awaitValue487, text: item.label }] : Array<Dynamic>)), function(__awaitValue488:Dynamic):Dynamic {
+                      _Runtime.callProperty(built, 'push', cast ([__awaitValue488] : Array<Dynamic>));
                       return flight._internal._Async.flowNormal();
                     });
                   });
                 });
               } else {
-                __flowBranch492 = flight._internal._Async.protect(function():Dynamic {
-                  return flight._internal._Async.flatMap((cast (cast menuModule : { var MenuItem:TauriMenuItemFactory; }).MenuItem : TauriMenuItemFactory).new_((cast { accelerator: item.accelerator, action: ((cast _Runtime.strictEquals(item.id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast function(__unused7:String):Void { onSelect((cast item.id : String)); } : Dynamic)), enabled: item.enabled, id: item.id, text: item.label } : Dynamic)), function(__awaitValue499:Dynamic):Dynamic {
-                    _Runtime.callProperty(built, 'push', cast ([__awaitValue499] : Array<Dynamic>));
+                __flowBranch486 = flight._internal._Async.protect(function():Dynamic {
+                  return flight._internal._Async.flatMap(_Runtime.callProperty((cast menuModule : { var MenuItem:TauriMenuItemFactory; }).MenuItem, 'new', cast ([{ accelerator: item.accelerator, action: ((cast _Runtime.strictEquals(item.id, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool) ? (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) : (cast function(__unused7:String):Void { onSelect((cast item.id : String)); } : Dynamic)), enabled: item.enabled, id: item.id, text: item.label }] : Array<Dynamic>)), function(__awaitValue493:Dynamic):Dynamic {
+                    _Runtime.callProperty(built, 'push', cast ([__awaitValue493] : Array<Dynamic>));
                     return flight._internal._Async.flowNormal();
                   });
                 });
               }
-              return flight._internal._Async.continueFlow(__flowBranch492, function():Dynamic {
+              return flight._internal._Async.continueFlow(__flowBranch486, function():Dynamic {
                 return flight._internal._Async.flowNormal();
               });
             });
           }
-          return flight._internal._Async.continueFlow(__flowBranch489, function():Dynamic {
+          return flight._internal._Async.continueFlow(__flowBranch484, function():Dynamic {
             return flight._internal._Async.flowNormal();
           });
         }), function():Dynamic {
@@ -1505,8 +1505,8 @@ class _HostTauri {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-          return flight._internal._Async.flatMap((cast menu : TauriMenu).close(), function(__awaitValue500:Dynamic):Dynamic {
-            __awaitValue500;
+          return flight._internal._Async.flatMap((cast menu : TauriMenu).close(), function(__awaitValue494:Dynamic):Dynamic {
+            __awaitValue494;
             return flight._internal._Async.flowNormal();
           });
         }), function(__caughtError:Dynamic):Dynamic {
@@ -1526,19 +1526,19 @@ class _HostTauri {
     return cast flight._internal._Async.finishFlow(
       flight._internal._Async.protect(function():Dynamic {
         var record:Null<TrayRecord__tauriTray> = cast _Runtime.UNDEFINED;
-        record = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument503:Dynamic = tray; __callArgument503; })) : Null<TrayRecord__tauriTray>);
-        var __flowBranch505:Dynamic;
+        record = (cast _HostTauri.activeRecord__tauriTray((cast records : Dynamic), ({ final __callArgument497:Dynamic = tray; __callArgument497; })) : Null<TrayRecord__tauriTray>);
+        var __flowBranch499:Dynamic;
         if ((cast _Runtime.strictEquals(record, null) : Bool)) {
-          __flowBranch505 = flight._internal._Async.protect(function():Dynamic {
+          __flowBranch499 = flight._internal._Async.protect(function():Dynamic {
             return flight._internal._Async.flowReturn({ outcome: 'tray-destroyed' });
           });
         } else {
-          __flowBranch505 = flight._internal._Async.flowNormal();
+          __flowBranch499 = flight._internal._Async.flowNormal();
         }
-        return flight._internal._Async.continueFlow(__flowBranch505, function():Dynamic {
+        return flight._internal._Async.continueFlow(__flowBranch499, function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
-            return flight._internal._Async.flatMap((cast operation((cast record : Dynamic)) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue506:Dynamic):Dynamic {
-              __awaitValue506;
+            return flight._internal._Async.flatMap((cast operation((cast record : Dynamic)) : flight._internal._Promise<flight._internal._Nothing>), function(__awaitValue500:Dynamic):Dynamic {
+              __awaitValue500;
               return flight._internal._Async.flowReturn({ outcome: 'updated' });
             });
           }), function(__caughtError:Dynamic):Dynamic {
@@ -1615,25 +1615,25 @@ class _HostTauri {
         (win.height = cast ((cast (cast event : { var payload:TauriLogicalSizeLike; }).payload : TauriLogicalSizeLike).height : Float));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[win.onResize]]), 1);
       } : Dynamic)));
-      addCleanup((cast record : Dynamic), (cast handle : TauriWindow).onFocusChanged(({ final __callArgument509:Dynamic = function(event:{ var payload:Bool; }):Void {
+      addCleanup((cast record : Dynamic), (cast handle : TauriWindow).onFocusChanged(({ final __callArgument503:Dynamic = function(event:{ var payload:Bool; }):Void {
         (win.focused = cast ((cast event : { var payload:Bool; }).payload : Bool));
         _Runtime.callHaxeRestValue(emitSignal, _Runtime.concatArrays([[((cast (cast event : { var payload:Bool; }).payload : Bool) ? (cast win.onFocusIn : Dynamic) : (cast win.onFocusOut : Dynamic))]]), 1);
-      }; __callArgument509; })));
+      }; __callArgument503; })));
       addCleanup((cast record : Dynamic), (cast handle : TauriWindow).onCloseRequested((cast function(__unused3:TauriCloseRequestedEvent):Void { _Runtime.callValue(function(__unused2:TauriCloseRequestedEvent):Void {
-        (cast detach(({ final __callArgument511:Dynamic = win; __callArgument511; })) : Null<TauriWindowRecord__tauriWindow>);
-        notifyWindowClosed(({ final __callArgument513:Dynamic = win; __callArgument513; }));
+        (cast detach(({ final __callArgument505:Dynamic = win; __callArgument505; })) : Null<TauriWindowRecord__tauriWindow>);
+        notifyWindowClosed(({ final __callArgument507:Dynamic = win; __callArgument507; }));
       }, cast ([] : Array<Dynamic>)); } : Dynamic)));
       return cast true;
       return cast _Runtime.UNDEFINED;
     });
     return cast { attach: function(win:ApplicationWindow, handle:flight._internal._Any, ownership:WindowAttachmentOwnership):Bool {
       if ((cast !(cast (cast _HostTauri.isTauriWindow__tauriWindow((cast handle : flight._internal._Any)) : Bool) : Bool) : Bool)) { return cast false; }
-      return cast (cast attach(({ final __callArgument519:Dynamic = win; __callArgument519; }), ({ final __callArgument520:Dynamic = handle; __callArgument520; }), ({ final __callArgument521:Dynamic = ownership; __callArgument521; })) : Bool);
+      return cast (cast attach(({ final __callArgument513:Dynamic = win; __callArgument513; }), ({ final __callArgument514:Dynamic = handle; __callArgument514; }), ({ final __callArgument515:Dynamic = ownership; __callArgument515; })) : Bool);
       return cast _Runtime.UNDEFINED;
     }, open: function(win:ApplicationWindow, options:WindowOptions):Bool {
       var w:TauriWindow = cast _Runtime.UNDEFINED;
       w = (cast windowModule : TauriWindowModule).getCurrentWindow();
-      if ((cast !(cast (cast attach(({ final __callArgument525:Dynamic = win; __callArgument525; }), ({ final __callArgument526:Dynamic = w; __callArgument526; }), ({ final __callArgument527:Dynamic = 'host'; __callArgument527; })) : Bool) : Bool) : Bool)) { return cast false; }
+      if ((cast !(cast (cast attach(({ final __callArgument519:Dynamic = win; __callArgument519; }), ({ final __callArgument520:Dynamic = w; __callArgument520; }), ({ final __callArgument521:Dynamic = 'host'; __callArgument521; })) : Bool) : Bool) : Bool)) { return cast false; }
       if ((cast !_Runtime.strictEquals(options.title, _Runtime.field(_Runtime, 'UNDEFINED')) : Bool)) { flight._internal._Async.recover((cast w : TauriWindow).setTitle((cast options.title : String)), function(__unused4:flight._internal._Any):Void {
 
       }); }
@@ -1681,16 +1681,16 @@ class _HostTauri {
       return cast _Runtime.UNDEFINED;
     }, close: function(win:ApplicationWindow):Void {
       var record:Null<TauriWindowRecord__tauriWindow> = cast _Runtime.UNDEFINED;
-      record = (cast detach(({ final __callArgument531:Dynamic = win; __callArgument531; })) : Null<TauriWindowRecord__tauriWindow>);
-      if ((cast _Runtime.strictEquals(({ final __structural533 = record; __structural533 == null ? _Runtime.UNDEFINED : (cast __structural533 : { var ownership:WindowAttachmentOwnership; }).ownership; }), 'flight') : Bool)) { flight._internal._Async.recover((cast (cast record : TauriWindowRecord__tauriWindow).handle : TauriWindow).close(), function(__unused16:flight._internal._Any):Void {
+      record = (cast detach(({ final __callArgument525:Dynamic = win; __callArgument525; })) : Null<TauriWindowRecord__tauriWindow>);
+      if ((cast _Runtime.strictEquals(({ final __structural527 = record; __structural527 == null ? _Runtime.UNDEFINED : (cast __structural527 : { var ownership:WindowAttachmentOwnership; }).ownership; }), 'flight') : Bool)) { flight._internal._Async.recover((cast (cast record : TauriWindowRecord__tauriWindow).handle : TauriWindow).close(), function(__unused16:flight._internal._Any):Void {
 
       }); }
     }, setTitle: function(win:ApplicationWindow, title:String):Void {
-      run(({ final __callArgument534:Dynamic = win; __callArgument534; }), ({ final __callArgument535:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setTitle((cast title : String)); __callArgument535; }));
+      run(({ final __callArgument528:Dynamic = win; __callArgument528; }), ({ final __callArgument529:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setTitle((cast title : String)); __callArgument529; }));
     }, setPosition: function(win:ApplicationWindow, x:Float, y:Float):Void {
-      run(({ final __callArgument538:Dynamic = win; __callArgument538; }), ({ final __callArgument539:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setPosition(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalPosition, [x, y])); __callArgument539; }));
+      run(({ final __callArgument532:Dynamic = win; __callArgument532; }), ({ final __callArgument533:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setPosition(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalPosition, [x, y])); __callArgument533; }));
     }, setSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
-      run(({ final __callArgument542:Dynamic = win; __callArgument542; }), ({ final __callArgument543:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setSize(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [width, height])); __callArgument543; }));
+      run(({ final __callArgument536:Dynamic = win; __callArgument536; }), ({ final __callArgument537:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setSize(_Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [width, height])); __callArgument537; }));
     }, getBounds: function(win:ApplicationWindow, out:WindowBounds):WindowBounds {
       (out.x = cast (win.x : Float));
       (out.y = cast (win.y : Float));
@@ -1699,41 +1699,41 @@ class _HostTauri {
       return cast out;
       return cast _Runtime.UNDEFINED;
     }, minimize: function(win:ApplicationWindow):Void {
-      run(({ final __callArgument546:Dynamic = win; __callArgument546; }), ({ final __callArgument547:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).minimize(); __callArgument547; }));
+      run(({ final __callArgument540:Dynamic = win; __callArgument540; }), ({ final __callArgument541:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).minimize(); __callArgument541; }));
     }, maximize: function(win:ApplicationWindow):Void {
-      run(({ final __callArgument550:Dynamic = win; __callArgument550; }), ({ final __callArgument551:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).maximize(); __callArgument551; }));
+      run(({ final __callArgument544:Dynamic = win; __callArgument544; }), ({ final __callArgument545:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).maximize(); __callArgument545; }));
     }, restore: function(win:ApplicationWindow):Void {
-      run(({ final __callArgument554:Dynamic = win; __callArgument554; }), ({ final __callArgument555:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).unmaximize(); __callArgument555; }));
+      run(({ final __callArgument548:Dynamic = win; __callArgument548; }), ({ final __callArgument549:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).unmaximize(); __callArgument549; }));
     }, focus: function(win:ApplicationWindow):Void {
-      run(({ final __callArgument558:Dynamic = win; __callArgument558; }), ({ final __callArgument559:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setFocus(); __callArgument559; }));
+      run(({ final __callArgument552:Dynamic = win; __callArgument552; }), ({ final __callArgument553:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setFocus(); __callArgument553; }));
     }, show: function(win:ApplicationWindow):Void {
-      run(({ final __callArgument562:Dynamic = win; __callArgument562; }), ({ final __callArgument563:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).show(); __callArgument563; }));
+      run(({ final __callArgument556:Dynamic = win; __callArgument556; }), ({ final __callArgument557:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).show(); __callArgument557; }));
     }, hide: function(win:ApplicationWindow):Void {
-      run(({ final __callArgument566:Dynamic = win; __callArgument566; }), ({ final __callArgument567:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).hide(); __callArgument567; }));
+      run(({ final __callArgument560:Dynamic = win; __callArgument560; }), ({ final __callArgument561:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).hide(); __callArgument561; }));
     }, center: function(win:ApplicationWindow):Void {
-      run(({ final __callArgument570:Dynamic = win; __callArgument570; }), ({ final __callArgument571:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).center(); __callArgument571; }));
+      run(({ final __callArgument564:Dynamic = win; __callArgument564; }), ({ final __callArgument565:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).center(); __callArgument565; }));
     }, setResizable: function(win:ApplicationWindow, resizable:Bool):Void {
-      run(({ final __callArgument574:Dynamic = win; __callArgument574; }), ({ final __callArgument575:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setResizable((cast resizable : Bool)); __callArgument575; }));
+      run(({ final __callArgument568:Dynamic = win; __callArgument568; }), ({ final __callArgument569:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setResizable((cast resizable : Bool)); __callArgument569; }));
     }, setAlwaysOnTop: function(win:ApplicationWindow, alwaysOnTop:Bool):Void {
-      run(({ final __callArgument578:Dynamic = win; __callArgument578; }), ({ final __callArgument579:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setAlwaysOnTop((cast alwaysOnTop : Bool)); __callArgument579; }));
+      run(({ final __callArgument572:Dynamic = win; __callArgument572; }), ({ final __callArgument573:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setAlwaysOnTop((cast alwaysOnTop : Bool)); __callArgument573; }));
     }, setMinimumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
-      run(({ final __callArgument582:Dynamic = win; __callArgument582; }), ({ final __callArgument583:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setMinSize((cast _Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [width, height]) : Dynamic)); __callArgument583; }));
+      run(({ final __callArgument576:Dynamic = win; __callArgument576; }), ({ final __callArgument577:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setMinSize((cast _Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [width, height]) : Dynamic)); __callArgument577; }));
     }, setMaximumSize: function(win:ApplicationWindow, width:Float, height:Float):Void {
-      run(({ final __callArgument586:Dynamic = win; __callArgument586; }), ({ final __callArgument587:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setMaxSize((cast _Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [width, height]) : Dynamic)); __callArgument587; }));
+      run(({ final __callArgument580:Dynamic = win; __callArgument580; }), ({ final __callArgument581:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setMaxSize((cast _Runtime.construct((cast windowModule : TauriWindowModule).LogicalSize, [width, height]) : Dynamic)); __callArgument581; }));
     }, setFullscreen: function(win:ApplicationWindow, fullscreen:Bool):Void {
-      run(({ final __callArgument590:Dynamic = win; __callArgument590; }), ({ final __callArgument591:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setFullscreen((cast fullscreen : Bool)); __callArgument591; }));
+      run(({ final __callArgument584:Dynamic = win; __callArgument584; }), ({ final __callArgument585:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setFullscreen((cast fullscreen : Bool)); __callArgument585; }));
     }, setIcon: function(win:ApplicationWindow, icon:String):Void {
-      run(({ final __callArgument594:Dynamic = win; __callArgument594; }), ({ final __callArgument595:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setIcon((cast icon : String)); __callArgument595; }));
+      run(({ final __callArgument588:Dynamic = win; __callArgument588; }), ({ final __callArgument589:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setIcon((cast icon : String)); __callArgument589; }));
     }, setSkipTaskbar: function(win:ApplicationWindow, skip:Bool):Void {
-      run(({ final __callArgument598:Dynamic = win; __callArgument598; }), ({ final __callArgument599:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setSkipTaskbar((cast skip : Bool)); __callArgument599; }));
+      run(({ final __callArgument592:Dynamic = win; __callArgument592; }), ({ final __callArgument593:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setSkipTaskbar((cast skip : Bool)); __callArgument593; }));
     }, requestAttention: function(win:ApplicationWindow, attention:Bool):Void {
-      run(({ final __callArgument602:Dynamic = win; __callArgument602; }), ({ final __callArgument603:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).requestUserAttention(((cast attention : Bool) ? (cast 1.0 : Dynamic) : (cast null : Dynamic))); __callArgument603; }));
+      run(({ final __callArgument596:Dynamic = win; __callArgument596; }), ({ final __callArgument597:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).requestUserAttention(((cast attention : Bool) ? (cast 1.0 : Dynamic) : (cast null : Dynamic))); __callArgument597; }));
     }, setContentProtection: function(win:ApplicationWindow, enabled:Bool):Void {
-      run(({ final __callArgument606:Dynamic = win; __callArgument606; }), ({ final __callArgument607:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setContentProtected((cast enabled : Bool)); __callArgument607; }));
+      run(({ final __callArgument600:Dynamic = win; __callArgument600; }), ({ final __callArgument601:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setContentProtected((cast enabled : Bool)); __callArgument601; }));
     }, flashWindowFrame: function(win:ApplicationWindow):Void {
-      run(({ final __callArgument610:Dynamic = win; __callArgument610; }), ({ final __callArgument612:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).requestUserAttention(({ final __callArgument611:Dynamic = 2.0; __callArgument611; })); __callArgument612; }));
+      run(({ final __callArgument604:Dynamic = win; __callArgument604; }), ({ final __callArgument606:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).requestUserAttention(({ final __callArgument605:Dynamic = 2.0; __callArgument605; })); __callArgument606; }));
     }, setHasShadow: function(win:ApplicationWindow, hasShadow:Bool):Void {
-      run(({ final __callArgument616:Dynamic = win; __callArgument616; }), ({ final __callArgument617:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setShadow((cast hasShadow : Bool)); __callArgument617; }));
+      run(({ final __callArgument610:Dynamic = win; __callArgument610; }), ({ final __callArgument611:Dynamic = function(w:TauriWindow):flight._internal._Promise<flight._internal._Any> return (cast w : TauriWindow).setShadow((cast hasShadow : Bool)); __callArgument611; }));
     } };
     return cast null;
   }

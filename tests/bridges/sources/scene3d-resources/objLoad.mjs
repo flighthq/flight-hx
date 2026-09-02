@@ -10,4 +10,7 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function loadScene3DDocumentFromObjUrl(...args) { __syncDependencies(); const result = api.loadScene3DDocumentFromObjUrl(...args); return result; }
+const __bridgeImplementation_loadScene3DDocumentFromObjUrl = api.loadScene3DDocumentFromObjUrl;
+export function loadScene3DDocumentFromObjUrl(...args) { __syncDependencies(); const result = __bridgeImplementation_loadScene3DDocumentFromObjUrl(...args); return result; }
+api.loadScene3DDocumentFromObjUrl = loadScene3DDocumentFromObjUrl;
+compiled.flight.Scene3DResources.loadScene3DDocumentFromObjUrl = loadScene3DDocumentFromObjUrl;

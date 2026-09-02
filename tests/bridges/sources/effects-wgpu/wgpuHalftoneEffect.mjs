@@ -2,16 +2,24 @@
 import compiled from '../../../../build/haxe-js/flight.cjs';
 import * as __dependency0 from './wgpuEffectPass.mjs';
 import * as __dependency1 from './wgpuEffectProgramCache.mjs';
+import * as __dependency2 from '@flighthq/render-wgpu/contract';
 
 const api = compiled.flight._EffectsWgpu;
 function __syncDependencies() {
   compiled.flight._EffectsWgpu.drawWgpuEffectPass = __dependency0.drawWgpuEffectPass;
   compiled.flight._EffectsWgpu.getWgpuEffectPipeline = __dependency1.getWgpuEffectPipeline;
+  compiled.flight._RenderWgpu.getWgpuRenderStateRuntime = __dependency2.getWgpuRenderStateRuntime;
 }
 __syncDependencies();
 
-export function applyHalftoneEffectToWgpu(...args) { __syncDependencies(); const result = api.applyHalftoneEffectToWgpu(...args); return result; }
+const __bridgeImplementation_applyHalftoneEffectToWgpu = api.applyHalftoneEffectToWgpu;
+export function applyHalftoneEffectToWgpu(...args) { __syncDependencies(); const result = __bridgeImplementation_applyHalftoneEffectToWgpu(...args); return result; }
+api.applyHalftoneEffectToWgpu = applyHalftoneEffectToWgpu;
+compiled.flight.EffectsWgpu.applyHalftoneEffectToWgpu = applyHalftoneEffectToWgpu;
 const __bridgeImplementation_defaultWgpuHalftoneEffectRunner = api.defaultWgpuHalftoneEffectRunner;
 export function defaultWgpuHalftoneEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultWgpuHalftoneEffectRunner(...args); }
 api.defaultWgpuHalftoneEffectRunner = defaultWgpuHalftoneEffectRunner;
-export function registerWgpuHalftoneEffect(...args) { __syncDependencies(); const result = api.registerWgpuHalftoneEffect(...args); return result; }
+const __bridgeImplementation_registerWgpuHalftoneEffect = api.registerWgpuHalftoneEffect;
+export function registerWgpuHalftoneEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerWgpuHalftoneEffect(...args); return result; }
+api.registerWgpuHalftoneEffect = registerWgpuHalftoneEffect;
+compiled.flight.EffectsWgpu.registerWgpuHalftoneEffect = registerWgpuHalftoneEffect;

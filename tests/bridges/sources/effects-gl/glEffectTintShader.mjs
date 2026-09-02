@@ -9,5 +9,11 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyGlEffectInvertTintPass(...args) { __syncDependencies(); const result = api.applyGlEffectInvertTintPass(...args); return result; }
-export function applyGlEffectTintPass(...args) { __syncDependencies(); const result = api.applyGlEffectTintPass(...args); return result; }
+const __bridgeImplementation_applyGlEffectInvertTintPass = api.applyGlEffectInvertTintPass;
+export function applyGlEffectInvertTintPass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyGlEffectInvertTintPass(...args); return result; }
+api.applyGlEffectInvertTintPass = applyGlEffectInvertTintPass;
+compiled.flight.EffectsGl.applyGlEffectInvertTintPass = applyGlEffectInvertTintPass;
+const __bridgeImplementation_applyGlEffectTintPass = api.applyGlEffectTintPass;
+export function applyGlEffectTintPass(...args) { __syncDependencies(); const result = __bridgeImplementation_applyGlEffectTintPass(...args); return result; }
+api.applyGlEffectTintPass = applyGlEffectTintPass;
+compiled.flight.EffectsGl.applyGlEffectTintPass = applyGlEffectTintPass;

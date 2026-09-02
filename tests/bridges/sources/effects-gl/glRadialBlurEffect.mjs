@@ -10,8 +10,14 @@ function __syncDependencies() {
 }
 __syncDependencies();
 
-export function applyRadialBlurEffectToGl(...args) { __syncDependencies(); const result = api.applyRadialBlurEffectToGl(...args); return result; }
+const __bridgeImplementation_applyRadialBlurEffectToGl = api.applyRadialBlurEffectToGl;
+export function applyRadialBlurEffectToGl(...args) { __syncDependencies(); const result = __bridgeImplementation_applyRadialBlurEffectToGl(...args); return result; }
+api.applyRadialBlurEffectToGl = applyRadialBlurEffectToGl;
+compiled.flight.EffectsGl.applyRadialBlurEffectToGl = applyRadialBlurEffectToGl;
 const __bridgeImplementation_defaultGlRadialBlurEffectRunner = api.defaultGlRadialBlurEffectRunner;
 export function defaultGlRadialBlurEffectRunner(...args) { __syncDependencies(); return __bridgeImplementation_defaultGlRadialBlurEffectRunner(...args); }
 api.defaultGlRadialBlurEffectRunner = defaultGlRadialBlurEffectRunner;
-export function registerGlRadialBlurEffect(...args) { __syncDependencies(); const result = api.registerGlRadialBlurEffect(...args); return result; }
+const __bridgeImplementation_registerGlRadialBlurEffect = api.registerGlRadialBlurEffect;
+export function registerGlRadialBlurEffect(...args) { __syncDependencies(); const result = __bridgeImplementation_registerGlRadialBlurEffect(...args); return result; }
+api.registerGlRadialBlurEffect = registerGlRadialBlurEffect;
+compiled.flight.EffectsGl.registerGlRadialBlurEffect = registerGlRadialBlurEffect;
