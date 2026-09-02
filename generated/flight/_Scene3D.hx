@@ -576,7 +576,7 @@ class _Scene3D {
   public static function createScene3D(?obj:flight._internal._Partial<{ var enabled:Bool; var name:Null<String>; }>):Scene3D {
     var root:Node3D = cast _Runtime.UNDEFINED;
     root = (cast createNode3D((cast Node3DKind : String), ({ final __callArgument100:Dynamic = obj; __callArgument100; })) : Node3D);
-    return cast (cast createEntity(({ final __callArgument102:Dynamic = { animations: {  }, metadata: null, resources: cast ([] : Array<Dynamic>), root: root }; __callArgument102; })) : Scene3D);
+    return cast (cast (cast createEntity(({ final __callArgument102:Dynamic = ({ animations: {  }, metadata: null, resources: cast ([] : Array<Dynamic>), root: root } : Scene3D); __callArgument102; })) : Scene3D) : Scene3D);
     return cast null;
   }
 

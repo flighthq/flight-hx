@@ -120,7 +120,7 @@ class _Dialog {
     if (operations == null) operations = cast (null : Dynamic);
     var handle:FileDialogHandle = cast _Runtime.UNDEFINED;
     var runtime:FileDialogHandleRuntime = cast _Runtime.UNDEFINED;
-    handle = (cast createEntity(({ final __callArgument7:Dynamic = { kind: kind, name: name, path: path }; __callArgument7; })) : FileDialogHandle);
+    handle = (cast (cast createEntity(({ final __callArgument7:Dynamic = ({ kind: kind, name: name, path: path } : FileDialogHandle); __callArgument7; })) : FileDialogHandle) : FileDialogHandle);
     runtime = (cast createEntityRuntime() : FileDialogHandleRuntime);
     ((cast runtime : FileDialogHandleRuntime).operations = operations);
     _Runtime.setIndex(handle, EntityRuntimeKey, runtime);

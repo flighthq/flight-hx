@@ -14163,12 +14163,6 @@
       "reasons": [
         "cross-schema-transfer"
       ],
-      "schemaId": "@flighthq/types:interface#AccessibilityBackend"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
       "schemaId": "@flighthq/types:interface#AddNodeChildCommand"
     },
     {
@@ -14431,12 +14425,6 @@
         "cross-schema-transfer"
       ],
       "schemaId": "@flighthq/types:interface#CapacitorGeolocationOptions"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#CapacitorShareContentBackend"
     },
     {
       "reasons": [
@@ -15326,12 +15314,6 @@
       "reasons": [
         "cross-schema-transfer"
       ],
-      "schemaId": "@flighthq/types:interface#IpcMessageBackend"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
       "schemaId": "@flighthq/types:interface#IridescencePbrExtension"
     },
     {
@@ -15514,27 +15496,9 @@
     },
     {
       "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#MenuApplicationBackend"
-    },
-    {
-      "reasons": [
         "object-literal-spread"
       ],
       "schemaId": "@flighthq/types:interface#MenuItemTemplate"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#MenuPopupBackend"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#MenuSelectBackend"
     },
     {
       "reasons": [
@@ -16076,12 +16040,6 @@
       "reasons": [
         "cross-schema-transfer"
       ],
-      "schemaId": "@flighthq/types:interface#PowerThermalBackend"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
       "schemaId": "@flighthq/types:interface#PromptDialogBackend"
     },
     {
@@ -16397,18 +16355,6 @@
     },
     {
       "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#ShareContentBackend"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#ShareFilesBackend"
-    },
-    {
-      "reasons": [
         "anonymous-structural-transfer"
       ],
       "schemaId": "@flighthq/types:interface#ShareFilesContent"
@@ -16425,42 +16371,6 @@
         "cross-schema-transfer"
       ],
       "schemaId": "@flighthq/types:interface#SheenPbrExtension"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#ShellBeepBackend"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#ShellExternalBackend"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#ShellPathOpenBackend"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#ShellPathRevealBackend"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#ShellShortcutLinkBackend"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#ShellTrashBackend"
     },
     {
       "reasons": [
@@ -16995,12 +16905,6 @@
         "anonymous-structural-transfer"
       ],
       "schemaId": "@flighthq/types:interface#UpdateInfo"
-    },
-    {
-      "reasons": [
-        "cross-schema-transfer"
-      ],
-      "schemaId": "@flighthq/types:interface#UpdaterCommandBackend"
     },
     {
       "reasons": [
@@ -18248,6 +18152,76 @@
       },
       "normalizationProvenance": [],
       "source": "upstream/packages/types/src/AcceleratorParseError.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasAccessibilityProvider",
+              "accessibility.provider:@flighthq/types:interface#AccessibilityBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasAccessibilityProvider"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "accessibility:@flighthq/types:interface#HostAccessibilityCapabilities",
+              "provider:@flighthq/types:interface#AccessibilityBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#AccessibilityBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#AccessibilityBackend"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HasAccessibilityProvider",
+              "accessibility.provider:@flighthq/types:interface#AccessibilityBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasAccessibilityProvider"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "accessibility:@flighthq/types:interface#HostAccessibilityCapabilities",
+              "provider:@flighthq/types:interface#AccessibilityBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#AccessibilityBackend",
+            "fieldPath": "accessibility.provider",
+            "parentSchemaId": "@flighthq/types:interface#HasAccessibilityProvider"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#AccessibilityBackend",
+            "fieldPath": "provider",
+            "parentSchemaId": "@flighthq/types:interface#HostAccessibilityCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 6,
+      "id": "@flighthq/types:interface#AccessibilityBackend",
+      "name": "AccessibilityBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Accessibility.ts",
       "transfers": []
     },
     {
@@ -27331,6 +27305,34 @@
       },
       "normalizationProvenance": [],
       "source": "upstream/packages/types/src/CapacitorApi.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#CapacitorShareContentBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#CapacitorShareContentBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": []
+      },
+      "directAccesses": 0,
+      "fields": 3,
+      "id": "@flighthq/types:interface#CapacitorShareContentBackend",
+      "name": "CapacitorShareContentBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Share.ts",
       "transfers": []
     },
     {
@@ -47474,6 +47476,76 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasMenuPopup",
+              "menu.popup:@flighthq/types:interface#MenuPopupBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasMenuPopup"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "menu:@flighthq/types:interface#HostMenuCapabilities",
+              "popup:@flighthq/types:interface#MenuPopupBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasMenuPopup",
+              "menu.popup:@flighthq/types:interface#MenuPopupBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasMenuPopup"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "menu:@flighthq/types:interface#HostMenuCapabilities",
+              "popup:@flighthq/types:interface#MenuPopupBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#MenuPopupBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#MenuPopupBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#MenuPopupBackend",
+            "fieldPath": "menu.popup",
+            "parentSchemaId": "@flighthq/types:interface#HasMenuPopup"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#MenuPopupBackend",
+            "fieldPath": "popup",
+            "parentSchemaId": "@flighthq/types:interface#HostMenuCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#MenuPopupBackend",
+      "name": "MenuPopupBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Menu.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#MenuSelect"
             ],
             "rootSchemaId": "@flighthq/types:interface#MenuSelect"
@@ -47508,6 +47580,70 @@
       },
       "normalizationProvenance": [],
       "source": "upstream/packages/types/src/MenuSelect.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasMenuSelect",
+              "menu.select:@flighthq/types:interface#MenuSelectBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasMenuSelect"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "menu:@flighthq/types:interface#HostMenuCapabilities",
+              "select:@flighthq/types:interface#MenuSelectBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasMenuSelect",
+              "menu.select:@flighthq/types:interface#MenuSelectBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasMenuSelect"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "menu:@flighthq/types:interface#HostMenuCapabilities",
+              "select:@flighthq/types:interface#MenuSelectBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#MenuSelectBackend",
+            "fieldPath": "menu.select",
+            "parentSchemaId": "@flighthq/types:interface#HasMenuSelect"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#MenuSelectBackend",
+            "fieldPath": "select",
+            "parentSchemaId": "@flighthq/types:interface#HostMenuCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#MenuSelectBackend",
+      "name": "MenuSelectBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Menu.ts",
       "transfers": []
     },
     {
@@ -62153,6 +62289,84 @@
     },
     {
       "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasPowerThermal",
+              "power.thermal:@flighthq/types:interface#PowerThermalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasPowerThermal"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "power:@flighthq/types:interface#HostPowerCapabilities",
+              "thermal:@flighthq/types:interface#PowerThermalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#PowerAttachHost",
+              "power<Partial:0>:@flighthq/types:interface#HostPowerCapabilities",
+              "thermal:@flighthq/types:interface#PowerThermalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#PowerAttachHost"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "power:@flighthq/types:interface#HostPowerCapabilities",
+              "thermal:@flighthq/types:interface#PowerThermalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#PowerThermalBackend",
+            "fieldPath": "power.thermal",
+            "parentSchemaId": "@flighthq/types:interface#HasPowerThermal"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#PowerThermalBackend",
+            "fieldPath": "thermal",
+            "parentSchemaId": "@flighthq/types:interface#HostPowerCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 2,
+      "id": "@flighthq/types:interface#PowerThermalBackend",
+      "name": "PowerThermalBackend",
+      "nominalIdentity": {
+        "blockerReasons": [
+          "normalization-provenance"
+        ],
+        "closed": false
+      },
+      "normalizationProvenance": [
+        {
+          "path": [
+            "@flighthq/types:interface#HostPowerCapabilities",
+            "thermal:@flighthq/types:interface#PowerThermalBackend"
+          ],
+          "reasons": [
+            "cross-schema-transfer"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#HostPowerCapabilities"
+        }
+      ],
+      "source": "upstream/packages/types/src/Power.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
         "inputPaths": [],
         "outputPaths": [
           {
@@ -71970,6 +72184,76 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasShareContent",
+              "share.content:@flighthq/types:interface#ShareContentBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShareContent"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "share:@flighthq/types:interface#HostShareCapabilities",
+              "content:@flighthq/types:interface#ShareContentBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShareContent",
+              "share.content:@flighthq/types:interface#ShareContentBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShareContent"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "share:@flighthq/types:interface#HostShareCapabilities",
+              "content:@flighthq/types:interface#ShareContentBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#ShareContentBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#ShareContentBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#ShareContentBackend",
+            "fieldPath": "share.content",
+            "parentSchemaId": "@flighthq/types:interface#HasShareContent"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#ShareContentBackend",
+            "fieldPath": "content",
+            "parentSchemaId": "@flighthq/types:interface#HostShareCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 3,
+      "id": "@flighthq/types:interface#ShareContentBackend",
+      "name": "ShareContentBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Share.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#ShareFile"
             ],
             "rootSchemaId": "@flighthq/types:interface#ShareFile"
@@ -72010,6 +72294,76 @@
         }
       ],
       "source": "upstream/packages/types/src/ShareFile.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShareFiles",
+              "share.files:@flighthq/types:interface#ShareFilesBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShareFiles"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "share:@flighthq/types:interface#HostShareCapabilities",
+              "files:@flighthq/types:interface#ShareFilesBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShareFiles",
+              "share.files:@flighthq/types:interface#ShareFilesBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShareFiles"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "share:@flighthq/types:interface#HostShareCapabilities",
+              "files:@flighthq/types:interface#ShareFilesBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#ShareFilesBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#ShareFilesBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#ShareFilesBackend",
+            "fieldPath": "share.files",
+            "parentSchemaId": "@flighthq/types:interface#HasShareFiles"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#ShareFilesBackend",
+            "fieldPath": "files",
+            "parentSchemaId": "@flighthq/types:interface#HostShareCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 3,
+      "id": "@flighthq/types:interface#ShareFilesBackend",
+      "name": "ShareFilesBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Share.ts",
       "transfers": []
     },
     {
@@ -72086,6 +72440,182 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasShellBeep",
+              "shell.beep:@flighthq/types:interface#ShellBeepBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellBeep"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "beep:@flighthq/types:interface#ShellBeepBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShellBeep",
+              "shell.beep:@flighthq/types:interface#ShellBeepBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellBeep"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "beep:@flighthq/types:interface#ShellBeepBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostShellCapabilities",
+              "beep:@flighthq/types:interface#ShellBeepBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellBeepBackend",
+            "fieldPath": "shell.beep",
+            "parentSchemaId": "@flighthq/types:interface#HasShellBeep"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellBeepBackend",
+            "fieldPath": "beep",
+            "parentSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#ShellBeepBackend",
+      "name": "ShellBeepBackend",
+      "nominalIdentity": {
+        "blockerReasons": [
+          "normalization-provenance"
+        ],
+        "closed": false
+      },
+      "normalizationProvenance": [
+        {
+          "path": [
+            "@flighthq/types:interface#HostShellCapabilities",
+            "beep:@flighthq/types:interface#ShellBeepBackend"
+          ],
+          "reasons": [
+            "anonymous-structural-transfer",
+            "object-literal-spread"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+        }
+      ],
+      "source": "upstream/packages/types/src/Shell.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShellExternal",
+              "shell.external:@flighthq/types:interface#ShellExternalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellExternal"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "external:@flighthq/types:interface#ShellExternalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShellExternal",
+              "shell.external:@flighthq/types:interface#ShellExternalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellExternal"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "external:@flighthq/types:interface#ShellExternalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostShellCapabilities",
+              "external:@flighthq/types:interface#ShellExternalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#ShellExternalBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#ShellExternalBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellExternalBackend",
+            "fieldPath": "shell.external",
+            "parentSchemaId": "@flighthq/types:interface#HasShellExternal"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellExternalBackend",
+            "fieldPath": "external",
+            "parentSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#ShellExternalBackend",
+      "name": "ShellExternalBackend",
+      "nominalIdentity": {
+        "blockerReasons": [
+          "normalization-provenance"
+        ],
+        "closed": false
+      },
+      "normalizationProvenance": [
+        {
+          "path": [
+            "@flighthq/types:interface#HostShellCapabilities",
+            "external:@flighthq/types:interface#ShellExternalBackend"
+          ],
+          "reasons": [
+            "anonymous-structural-transfer",
+            "object-literal-spread"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+        }
+      ],
+      "source": "upstream/packages/types/src/Shell.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#ShellExternalUrlPolicy"
             ],
             "rootSchemaId": "@flighthq/types:interface#ShellExternalUrlPolicy"
@@ -72106,6 +72636,339 @@
         "closed": true
       },
       "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Shell.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShellPathOpen",
+              "shell.pathOpen:@flighthq/types:interface#ShellPathOpenBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellPathOpen"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "pathOpen:@flighthq/types:interface#ShellPathOpenBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShellPathOpen",
+              "shell.pathOpen:@flighthq/types:interface#ShellPathOpenBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellPathOpen"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "pathOpen:@flighthq/types:interface#ShellPathOpenBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostShellCapabilities",
+              "pathOpen:@flighthq/types:interface#ShellPathOpenBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellPathOpenBackend",
+            "fieldPath": "shell.pathOpen",
+            "parentSchemaId": "@flighthq/types:interface#HasShellPathOpen"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellPathOpenBackend",
+            "fieldPath": "pathOpen",
+            "parentSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#ShellPathOpenBackend",
+      "name": "ShellPathOpenBackend",
+      "nominalIdentity": {
+        "blockerReasons": [
+          "normalization-provenance"
+        ],
+        "closed": false
+      },
+      "normalizationProvenance": [
+        {
+          "path": [
+            "@flighthq/types:interface#HostShellCapabilities",
+            "pathOpen:@flighthq/types:interface#ShellPathOpenBackend"
+          ],
+          "reasons": [
+            "anonymous-structural-transfer",
+            "object-literal-spread"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+        }
+      ],
+      "source": "upstream/packages/types/src/Shell.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShellPathReveal",
+              "shell.pathReveal:@flighthq/types:interface#ShellPathRevealBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellPathReveal"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "pathReveal:@flighthq/types:interface#ShellPathRevealBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShellPathReveal",
+              "shell.pathReveal:@flighthq/types:interface#ShellPathRevealBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellPathReveal"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "pathReveal:@flighthq/types:interface#ShellPathRevealBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostShellCapabilities",
+              "pathReveal:@flighthq/types:interface#ShellPathRevealBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellPathRevealBackend",
+            "fieldPath": "shell.pathReveal",
+            "parentSchemaId": "@flighthq/types:interface#HasShellPathReveal"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellPathRevealBackend",
+            "fieldPath": "pathReveal",
+            "parentSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#ShellPathRevealBackend",
+      "name": "ShellPathRevealBackend",
+      "nominalIdentity": {
+        "blockerReasons": [
+          "normalization-provenance"
+        ],
+        "closed": false
+      },
+      "normalizationProvenance": [
+        {
+          "path": [
+            "@flighthq/types:interface#HostShellCapabilities",
+            "pathReveal:@flighthq/types:interface#ShellPathRevealBackend"
+          ],
+          "reasons": [
+            "anonymous-structural-transfer",
+            "object-literal-spread"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+        }
+      ],
+      "source": "upstream/packages/types/src/Shell.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShellShortcutLink",
+              "shell.shortcutLink:@flighthq/types:interface#ShellShortcutLinkBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellShortcutLink"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "shortcutLink:@flighthq/types:interface#ShellShortcutLinkBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "shortcutLink:@flighthq/types:interface#ShellShortcutLinkBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostShellCapabilities",
+              "shortcutLink:@flighthq/types:interface#ShellShortcutLinkBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellShortcutLinkBackend",
+            "fieldPath": "shell.shortcutLink",
+            "parentSchemaId": "@flighthq/types:interface#HasShellShortcutLink"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellShortcutLinkBackend",
+            "fieldPath": "shortcutLink",
+            "parentSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 2,
+      "id": "@flighthq/types:interface#ShellShortcutLinkBackend",
+      "name": "ShellShortcutLinkBackend",
+      "nominalIdentity": {
+        "blockerReasons": [
+          "normalization-provenance"
+        ],
+        "closed": false
+      },
+      "normalizationProvenance": [
+        {
+          "path": [
+            "@flighthq/types:interface#HostShellCapabilities",
+            "shortcutLink:@flighthq/types:interface#ShellShortcutLinkBackend"
+          ],
+          "reasons": [
+            "anonymous-structural-transfer",
+            "object-literal-spread"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+        }
+      ],
+      "source": "upstream/packages/types/src/Shell.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShellTrash",
+              "shell.trash:@flighthq/types:interface#ShellTrashBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellTrash"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "trash:@flighthq/types:interface#ShellTrashBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasShellTrash",
+              "shell.trash:@flighthq/types:interface#ShellTrashBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasShellTrash"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "shell:@flighthq/types:interface#HostShellCapabilities",
+              "trash:@flighthq/types:interface#ShellTrashBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#HostShellCapabilities",
+              "trash:@flighthq/types:interface#ShellTrashBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellTrashBackend",
+            "fieldPath": "shell.trash",
+            "parentSchemaId": "@flighthq/types:interface#HasShellTrash"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#ShellTrashBackend",
+            "fieldPath": "trash",
+            "parentSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 1,
+      "id": "@flighthq/types:interface#ShellTrashBackend",
+      "name": "ShellTrashBackend",
+      "nominalIdentity": {
+        "blockerReasons": [
+          "normalization-provenance"
+        ],
+        "closed": false
+      },
+      "normalizationProvenance": [
+        {
+          "path": [
+            "@flighthq/types:interface#HostShellCapabilities",
+            "trash:@flighthq/types:interface#ShellTrashBackend"
+          ],
+          "reasons": [
+            "anonymous-structural-transfer",
+            "object-literal-spread"
+          ],
+          "rootSchemaId": "@flighthq/types:interface#HostShellCapabilities"
+        }
+      ],
       "source": "upstream/packages/types/src/Shell.ts",
       "transfers": []
     },
@@ -86474,6 +87337,76 @@
         "inputPaths": [
           {
             "path": [
+              "@flighthq/types:interface#HasUpdaterCommand",
+              "updater.command:@flighthq/types:interface#UpdaterCommandBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasUpdaterCommand"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "updater:@flighthq/types:interface#HostUpdaterCapabilities",
+              "command:@flighthq/types:interface#UpdaterCommandBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          }
+        ],
+        "outputPaths": [
+          {
+            "path": [
+              "@flighthq/types:interface#HasUpdaterCommand",
+              "updater.command:@flighthq/types:interface#UpdaterCommandBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#HasUpdaterCommand"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#Host",
+              "updater:@flighthq/types:interface#HostUpdaterCapabilities",
+              "command:@flighthq/types:interface#UpdaterCommandBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#Host"
+          },
+          {
+            "path": [
+              "@flighthq/types:interface#UpdaterCommandBackend"
+            ],
+            "rootSchemaId": "@flighthq/types:interface#UpdaterCommandBackend"
+          }
+        ]
+      },
+      "containment": {
+        "children": [],
+        "parents": [
+          {
+            "childSchemaId": "@flighthq/types:interface#UpdaterCommandBackend",
+            "fieldPath": "updater.command",
+            "parentSchemaId": "@flighthq/types:interface#HasUpdaterCommand"
+          },
+          {
+            "childSchemaId": "@flighthq/types:interface#UpdaterCommandBackend",
+            "fieldPath": "command",
+            "parentSchemaId": "@flighthq/types:interface#HostUpdaterCapabilities"
+          }
+        ]
+      },
+      "directAccesses": 0,
+      "fields": 3,
+      "id": "@flighthq/types:interface#UpdaterCommandBackend",
+      "name": "UpdaterCommandBackend",
+      "nominalIdentity": {
+        "blockerReasons": [],
+        "closed": true
+      },
+      "normalizationProvenance": [],
+      "source": "upstream/packages/types/src/Updater.ts",
+      "transfers": []
+    },
+    {
+      "bridgeExposure": {
+        "inputPaths": [
+          {
+            "path": [
               "@flighthq/types:interface#AnimatedNormalModifierOptions",
               "scroll:@flighthq/types:interface#Vector2"
             ],
@@ -95119,11 +96052,11 @@
   ],
   "summary": {
     "anonymousContainerTransferSchemas": 76,
-    "bridgeInputExposedSchemas": 815,
-    "bridgeOutputExposedSchemas": 829,
-    "blockedSchemas": 307,
-    "candidateSchemas": 1190,
-    "closedSchemas": 883,
+    "bridgeInputExposedSchemas": 828,
+    "bridgeOutputExposedSchemas": 843,
+    "blockedSchemas": 314,
+    "candidateSchemas": 1204,
+    "closedSchemas": 890,
     "combinedBlockedSchemas": 17,
     "containmentEdges": 2797,
     "containerOnlyBlockedSchemas": 81,
@@ -95131,9 +96064,9 @@
     "crossSchemaContainerTransferSchemas": 26,
     "dynamicContainerTransferSchemas": 21,
     "jsonParseRoots": 10,
-    "normalizationOnlyBlockedSchemas": 209,
-    "normalizationProvenanceBlockedSchemas": 226,
-    "normalizationRoots": 520
+    "normalizationOnlyBlockedSchemas": 216,
+    "normalizationProvenanceBlockedSchemas": 233,
+    "normalizationRoots": 504
   },
   "upstreamCommit": "b3bb4bf61833f7723e7033dd5c732e91a6601400"
 }

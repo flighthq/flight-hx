@@ -2,6 +2,11 @@ import path from 'node:path';
 import ts from 'typescript';
 
 import { upstreamTypeScriptProgram, type UpstreamTypeScriptProgram } from './program.ts';
+import {
+  entityFactoryObjectLiteral,
+  entityFactoryObjectShape,
+  isFlightCreateEntityCall,
+} from './entity-factory-call.ts';
 import { typedStructRegistry, type TypedStructRegistry, type TypedStructSchemaAudit } from './typed-structs.ts';
 
 export type TypedStructClassFeasibilityScope = 'production' | 'test';
@@ -390,21 +395,14 @@ function isCreateEntityFactoryTransfer(
   target: MutableSchema,
   checker: ts.TypeChecker,
 ): boolean {
-  if (!ts.isCallExpression(expression) || expression.arguments.length !== 1) return false;
-  const object = expression.arguments[0];
-  if (!object || !ts.isObjectLiteralExpression(object)) return false;
-  let symbol = checker.getSymbolAtLocation(expression.expression);
-  if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
-  if (symbol?.getName() !== 'createEntity') return false;
-  const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
-  const declarationSource = declaration?.getSourceFile().fileName.split(path.sep).join('/');
-  if (!declarationSource?.endsWith('/upstream/packages/entity/src/entity.ts')) return false;
-  const fields = object.properties.map((property) => {
-    if (!ts.isPropertyAssignment(property) && !ts.isShorthandPropertyAssignment(property)) return undefined;
-    return propertyName(property.name);
-  });
-  if (fields.some((field) => field === undefined) || fields.length !== target.fieldNames.size) return false;
-  return fields.every((field) => field !== undefined && target.fieldNames.has(field));
+  if (!ts.isCallExpression(expression) || !isFlightCreateEntityCall(expression, checker)) return false;
+  const object = entityFactoryObjectLiteral(expression);
+  if (!object) return target.fieldNames.size === 0 && expression.arguments.length === 0;
+  const shape = entityFactoryObjectShape(object);
+  if (shape.hasComputed || shape.hasSpread || shape.hasUnsupported || shape.fields.length !== target.fieldNames.size) {
+    return false;
+  }
+  return shape.fields.every((field) => target.fieldNames.has(field));
 }
 
 function isFactoryBackedMatrix4ViewTransfer(

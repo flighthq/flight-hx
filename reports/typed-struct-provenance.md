@@ -6,22 +6,22 @@ This reporting-only audit tests nominal-identity closure for the clean required-
 
 | Metric | Count |
 | --- | ---: |
-| Clean required-field candidates | 1190 |
-| Nominally closed candidates | 883 |
-| Blocked candidates | 307 |
-| Normalization-provenance blockers only | 209 |
+| Clean required-field candidates | 1204 |
+| Nominally closed candidates | 890 |
+| Blocked candidates | 314 |
+| Normalization-provenance blockers only | 216 |
 | Container-transfer blockers only | 81 |
 | Both blocker classes | 17 |
-| Normalization roots (all eligible schemas) | 520 |
+| Normalization roots (all eligible schemas) | 504 |
 | JSON.parse roots | 10 |
 | Containment edges (all eligible schemas) | 2797 |
-| Candidates blocked by normalization provenance | 226 |
+| Candidates blocked by normalization provenance | 233 |
 | Candidates blocked by container transfers | 98 |
 | Candidates with anonymous container transfers | 76 |
 | Candidates with cross-schema container transfers | 26 |
 | Candidates with dynamic container transfers | 21 |
-| Candidates exposed through bridge inputs | 815 |
-| Candidates exposed through bridge outputs | 829 |
+| Candidates exposed through bridge inputs | 828 |
+| Candidates exposed through bridge outputs | 843 |
 
 Exact containment paths, roots, transfer locations, and bridge paths are in `typed-struct-provenance.json`.
 
@@ -40,6 +40,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#AbcScript` | 0 | 2 | 1 | 1 | 1 | 0 | 0 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#AbcTrait` | 16 | 11 | 4 | 0 | 1 | 2 | 0 | 1 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#AcceleratorParseError` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
+| `@flighthq/types:interface#AccessibilityBackend` | 0 | 6 | 2 | 0 | 0 | 0 | 2 | 3 | yes | — |
 | `@flighthq/types:interface#AmbientLightReading` | 3 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#AnimationBlendTree` | 17 | 4 | 3 | 3 | 0 | 0 | 5 | 5 | yes | — |
 | `@flighthq/types:interface#AnimationBlendTreeChannel` | 9 | 3 | 1 | 3 | 0 | 0 | 5 | 5 | yes | — |
@@ -177,6 +178,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#CapacitorNetworkPlugin` | 0 | 2 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorPluginListenerHandle` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorPosition` | 0 | 2 | 0 | 1 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#CapacitorShareContentBackend` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#CapacitorSharePlugin` | 0 | 1 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#CapacitorStatusBarPlugin` | 0 | 6 | 1 | 0 | 0 | 0 | 1 | 0 | yes | — |
 | `@flighthq/types:interface#Capsule` | 54 | 7 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
@@ -575,7 +577,9 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#MemoryLogSink` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#MenuHighlight` | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#MenuHighlightBackend` | 0 | 1 | 2 | 0 | 0 | 0 | 2 | 3 | yes | — |
+| `@flighthq/types:interface#MenuPopupBackend` | 0 | 1 | 2 | 0 | 0 | 0 | 2 | 3 | yes | — |
 | `@flighthq/types:interface#MenuSelect` | 0 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#MenuSelectBackend` | 0 | 1 | 2 | 0 | 0 | 0 | 2 | 2 | yes | — |
 | `@flighthq/types:interface#MenuSignals` | 2 | 2 | 0 | 2 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#MeshGeometry` | 329 | 7 | 5 | 3 | 2 | 1 | 6 | 7 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#MeshGeometryGlData` | 0 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | no | `normalization-provenance` |
@@ -739,6 +743,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#PowerStatus` | 20 | 8 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#PowerStatusBackend` | 0 | 1 | 2 | 0 | 1 | 0 | 3 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#PowerSuspensionBackend` | 0 | 2 | 2 | 0 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
+| `@flighthq/types:interface#PowerThermalBackend` | 0 | 2 | 2 | 0 | 1 | 0 | 3 | 1 | no | `normalization-provenance` |
 | `@flighthq/types:interface#PressureReading` | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ProgressBarController` | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#ProtocolDefaultBackend` | 0 | 3 | 2 | 0 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
@@ -874,10 +879,18 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#ShapeStrokeRegion` | 0 | 4 | 0 | 2 | 0 | 7 | 0 | 1 | no | `container-transfer` |
 | `@flighthq/types:interface#ShapeTessellationExplanation` | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ShapeTextureReference` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
+| `@flighthq/types:interface#ShareContentBackend` | 0 | 3 | 2 | 0 | 0 | 0 | 2 | 3 | yes | — |
 | `@flighthq/types:interface#ShareFile` | 0 | 3 | 1 | 0 | 1 | 0 | 1 | 0 | no | `normalization-provenance` |
+| `@flighthq/types:interface#ShareFilesBackend` | 0 | 3 | 2 | 0 | 0 | 0 | 2 | 3 | yes | — |
 | `@flighthq/types:interface#ShareResult` | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#ShareSignals` | 2 | 1 | 0 | 1 | 0 | 0 | 1 | 1 | yes | — |
+| `@flighthq/types:interface#ShellBeepBackend` | 0 | 1 | 2 | 0 | 1 | 0 | 2 | 3 | no | `normalization-provenance` |
+| `@flighthq/types:interface#ShellExternalBackend` | 0 | 1 | 2 | 0 | 1 | 0 | 2 | 4 | no | `normalization-provenance` |
 | `@flighthq/types:interface#ShellExternalUrlPolicy` | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | yes | — |
+| `@flighthq/types:interface#ShellPathOpenBackend` | 0 | 1 | 2 | 0 | 1 | 0 | 2 | 3 | no | `normalization-provenance` |
+| `@flighthq/types:interface#ShellPathRevealBackend` | 0 | 1 | 2 | 0 | 1 | 0 | 2 | 3 | no | `normalization-provenance` |
+| `@flighthq/types:interface#ShellShortcutLinkBackend` | 0 | 2 | 2 | 0 | 1 | 0 | 2 | 2 | no | `normalization-provenance` |
+| `@flighthq/types:interface#ShellTrashBackend` | 0 | 1 | 2 | 0 | 1 | 0 | 2 | 3 | no | `normalization-provenance` |
 | `@flighthq/types:interface#ShortcutTriggerUnsubscribeOutcome` | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SignalConnection` | 0 | 4 | 1 | 1 | 0 | 0 | 0 | 0 | yes | — |
 | `@flighthq/types:interface#SignalData` | 30 | 4 | 1 | 0 | 31 | 0 | 73 | 106 | no | `normalization-provenance` |
@@ -1111,6 +1124,7 @@ Exact containment paths, roots, transfer locations, and bridge paths are in `typ
 | `@flighthq/types:interface#UnityShape` | 0 | 5 | 1 | 0 | 0 | 0 | 1 | 1 | yes | — |
 | `@flighthq/types:interface#UnpackedRectangleExplanation` | 0 | 4 | 0 | 0 | 0 | 0 | 0 | 1 | yes | — |
 | `@flighthq/types:interface#UnregisteredSceneCoverageEntry` | 0 | 6 | 0 | 0 | 0 | 6 | 1 | 0 | no | `container-transfer` |
+| `@flighthq/types:interface#UpdaterCommandBackend` | 0 | 3 | 2 | 0 | 0 | 0 | 2 | 3 | yes | — |
 | `@flighthq/types:interface#Vector2` | 428 | 2 | 18 | 0 | 48 | 2 | 69 | 76 | no | `container-transfer`, `normalization-provenance` |
 | `@flighthq/types:interface#Vector3` | 1402 | 3 | 54 | 0 | 16 | 0 | 38 | 29 | no | `normalization-provenance` |
 | `@flighthq/types:interface#Vector4` | 0 | 4 | 0 | 0 | 0 | 0 | 1 | 1 | yes | — |

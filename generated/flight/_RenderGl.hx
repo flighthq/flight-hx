@@ -1331,7 +1331,7 @@ class _RenderGl {
 
   public static function createGlPipeline(registries:GlRenderRegistries):GlPipeline {
     var pipeline:GlPipeline = cast _Runtime.UNDEFINED;
-    pipeline = (cast createEntity(({ final __callArgument418:Dynamic = { registries: registries }; __callArgument418; })) : GlPipeline);
+    pipeline = (cast (cast createEntity(({ final __callArgument418:Dynamic = ({ registries: registries } : GlPipeline); __callArgument418; })) : GlPipeline) : GlPipeline);
     _Runtime.setIndex(pipeline, EntityRuntimeKey, { binding: null });
     return cast pipeline;
     return cast null;
@@ -1694,7 +1694,7 @@ class _RenderGl {
     flight._internal.backend.WebGl2Backend.bindBuffer(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flight._internal.backend.WebGl2Backend.ARRAY_BUFFER), quadVertexBuffer);
     flight._internal.backend.WebGl2Backend.bufferData(gl, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'ARRAY_BUFFER', flight._internal.backend.WebGl2Backend.ARRAY_BUFFER), 64.0, flight._internal.backend.WebGl2Backend.contextConstant(gl, 'DYNAMIC_DRAW', flight._internal.backend.WebGl2Backend.DYNAMIC_DRAW));
     contextRuntime = (cast { binding: null, colorAdjustmentResources: null, currentBlendSignature: null, currentShader: null, currentTextureRealization: null, gl: gl, particleResources: null, quadBatchResources: null, quadIndexBuffer: quadIndexBuffer, quadVertexBuffer: quadVertexBuffer, references: 0.0, shapeMeshResources: null, teardowns: cast ([] : Array<Dynamic>), textureCache: _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []), textureSourcePremultipliedSrgbTextureCache: _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []), textureSourcePremultipliedTextureCache: _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []), textureSourceStraightSrgbTextureCache: _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []), textureSourceStraightTextureCache: _Runtime.construct(flight._internal._HostValueLut.get('WeakMap'), []) });
-    state = (cast createEntity(({ final __callArgument521:Dynamic = { gl: gl }; __callArgument521; })) : GlContextState);
+    state = (cast (cast createEntity(({ final __callArgument521:Dynamic = ({ gl: gl } : GlContextState); __callArgument521; })) : GlContextState) : GlContextState);
     _Runtime.setIndex(state, EntityRuntimeKey, contextRuntime);
     return cast state;
     return cast null;

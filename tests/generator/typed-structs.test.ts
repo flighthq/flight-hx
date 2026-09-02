@@ -3,6 +3,7 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
+import { auditEntityFactoryClosure } from '../../tools/generator/src/analyze/entity-factory-closure.ts';
 import { auditTypedStructClassFeasibility } from '../../tools/generator/src/analyze/typed-struct-classes.ts';
 import { auditTypedStructProvenance } from '../../tools/generator/src/analyze/typed-struct-provenance.ts';
 import {
@@ -18,6 +19,7 @@ import { upstreamTypeScriptProgram } from '../../tools/generator/src/analyze/pro
 import { validateCppStructInitProvenance } from '../../tools/generator/src/emit/core.ts';
 import { emitHaxeModule } from '../../tools/generator/src/emit/haxe.ts';
 import {
+  entityFactoryClosureSummary,
   typedStructClassFeasibilitySummary,
   typedStructProvenanceSummary,
   typedStructSummary,
@@ -4320,6 +4322,7 @@ describe('typed struct analysis', () => {
     const report = registry.report;
     const classAudit = auditTypedStructClassFeasibility(workspace, 'fixture', registry, programAndChecker);
     const provenance = auditTypedStructProvenance(workspace, 'fixture', registry, classAudit, programAndChecker);
+    const entityFactories = auditEntityFactoryClosure(workspace, 'fixture', registry, programAndChecker);
     const classAuditById = new Map(classAudit.schemas.map((schema) => [schema.id, schema]));
     const provenanceById = new Map(provenance.schemas.map((schema) => [schema.id, schema]));
     const renderTextureSource = programAndChecker.program.getSourceFile(
@@ -4336,6 +4339,53 @@ describe('typed struct analysis', () => {
     const renderTextureReturn = programAndChecker.checker.getReturnTypeOfSignature(createRenderTextureSignature);
     expect(registry.resolve(renderTextureReturn).schemas.map((schema) => schema.name)).toEqual(['RenderTexture']);
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
+    expect(entityFactories.summary).toEqual({
+      bareEntityCalls: 0,
+      blockedEntityCalls: 231,
+      calls: 368,
+      exactEntityCalls: 191,
+      exactEntitySchemas: 148,
+      exactNonEntityCalls: 9,
+      genericEntityCalls: 3,
+      readyEntityCalls: 128,
+      structuralEntityCalls: 141,
+      unresolvedCalls: 24,
+    });
+    expect(entityFactories.sites.find((site) => site.factory.name === 'createMatrix4')).toMatchObject({
+      blockers: [],
+      destination: { kind: 'exact-entity', schemaName: 'Matrix4' },
+      status: 'ready',
+    });
+    expect(entityFactories.sites.find((site) => site.factory.name === 'cloneEntity')).toMatchObject({
+      blockers: ['generic-entity-destination', 'non-object-construction'],
+      destination: { kind: 'generic-entity' },
+      status: 'blocked',
+    });
+    expect(entityFactories.sites.find((site) => site.factory.name === 'createHost')).toMatchObject({
+      blockers: ['spread-construction', 'structural-entity-destination'],
+      destination: { kind: 'structural-entity' },
+      status: 'blocked',
+    });
+    expect(entityFactories.sites.find((site) => site.factory.name === 'createApplicationRenderView')).toMatchObject({
+      blockers: ['parameterized-destination'],
+      destination: { kind: 'exact-entity', schemaName: 'ApplicationRenderView' },
+      status: 'blocked',
+    });
+    expect(
+      entityFactories.sites.find((site) => site.factory.name === 'createElectronShortcutTriggerBackend'),
+    ).toMatchObject({
+      blockers: ['returned-variable-destination'],
+      destination: { kind: 'exact-entity', route: 'returned-variable', schemaName: 'ShortcutTriggerBackend' },
+      status: 'blocked',
+    });
+    expect(
+      entityFactories.sites.find(
+        (site) =>
+          site.source.endsWith('/host-tauri/src/tauriPlatform.ts') &&
+          site.factory.name === 'createTauriPlatformBackend',
+      ),
+    ).toMatchObject({ destination: { kind: 'exact-non-entity', schemaName: 'PlatformBackend' }, status: 'not-entity' });
+    expect(entityFactoryClosureSummary(entityFactories)).toContain('| Production createEntity calls | 368 |');
     const typeErasureReport = JSON.parse(readFileSync('reports/type-erasures.json', 'utf8')) as {
       modules: Array<{ byReason: Record<string, number>; module: string; source: string; total: number }>;
       summary: { byReason: Record<string, number>; total: number };

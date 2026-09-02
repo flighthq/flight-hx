@@ -392,7 +392,7 @@ class _Shortcut {
     parsed = (cast makeParsedAccelerator() : ParsedAccelerator);
     outcome = (cast parseAcceleratorDetailed((cast accelerator : String), ({ final __callArgument41:Dynamic = parsed; __callArgument41; })) : flight._internal._Union2<ParsedAccelerator, AcceleratorParseError>);
     if ((cast _Runtime.hasField(outcome, 'reason') : Bool)) { return cast { parseError: outcome, reason: 'unparseable' }; }
-    return cast { reason: 'created', shortcut: (cast createEntity((cast { accelerator: (cast _Shortcut.formatParsedAccelerator__shortcutExplicitDependency(({ final __callArgument43:Dynamic = outcome; __callArgument43; })) : String), onTrigger: (cast createSignal() : Signal<Void->Void>) } : Dynamic)) : { >Entity, var accelerator:String; var onTrigger:Signal<Void->Void>; }) };
+    return cast { reason: 'created', shortcut: (cast createEntity((cast ({ accelerator: (cast _Shortcut.formatParsedAccelerator__shortcutExplicitDependency(({ final __callArgument43:Dynamic = outcome; __callArgument43; })) : String), onTrigger: (cast createSignal() : Signal<Void->Void>) } : GlobalShortcut) : Dynamic)) : GlobalShortcut) };
     return cast null;
   }
 

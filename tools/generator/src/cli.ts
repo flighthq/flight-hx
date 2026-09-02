@@ -2,6 +2,7 @@ import { mkdirSync } from 'node:fs';
 import path from 'node:path';
 
 import { portConfig } from '../port.config.ts';
+import { auditEntityFactoryClosure } from './analyze/entity-factory-closure.ts';
 import { auditHostEndpoints } from './analyze/host-endpoints.ts';
 import { auditHostToolkit } from './analyze/host-toolkit.ts';
 import { analyzeUpstream } from './analyze/inventory.ts';
@@ -9,9 +10,11 @@ import { auditLowering } from './analyze/lowering.ts';
 import { auditTypedStructClassFeasibility } from './analyze/typed-struct-classes.ts';
 import { auditTypedStructProvenance } from './analyze/typed-struct-provenance.ts';
 import { typedStructRegistry } from './analyze/typed-structs.ts';
+import { upstreamTypeScriptProgram } from './analyze/program.ts';
 import { generateCoreModules } from './emit/core.ts';
 import {
   createApiReport,
+  entityFactoryClosureSummary,
   hostEndpointSummary,
   hostToolkitSummary,
   hostTypeSummary,
@@ -33,20 +36,31 @@ const reportsDirectory = path.join(workspaceDirectory, portConfig.reportsDirecto
 
 try {
   const inventory = analyzeUpstream(workspaceDirectory);
+  const programAndChecker = apiOnly ? undefined : upstreamTypeScriptProgram(workspaceDirectory);
   const hostEndpoints = apiOnly
     ? undefined
     : auditHostEndpoints(workspaceDirectory, inventory.upstreamCommit, undefined, undefined, inventory);
   const typedStructs = apiOnly
     ? undefined
-    : typedStructRegistry(workspaceDirectory, inventory.upstreamCommit, undefined, undefined, inventory);
+    : typedStructRegistry(workspaceDirectory, inventory.upstreamCommit, undefined, programAndChecker, inventory);
   const typedStructClasses =
-    apiOnly || !typedStructs
+    apiOnly || !typedStructs || !programAndChecker
       ? undefined
-      : auditTypedStructClassFeasibility(workspaceDirectory, inventory.upstreamCommit, typedStructs);
+      : auditTypedStructClassFeasibility(workspaceDirectory, inventory.upstreamCommit, typedStructs, programAndChecker);
   const typedStructProvenance =
-    apiOnly || !typedStructs || !typedStructClasses
+    apiOnly || !typedStructs || !typedStructClasses || !programAndChecker
       ? undefined
-      : auditTypedStructProvenance(workspaceDirectory, inventory.upstreamCommit, typedStructs, typedStructClasses);
+      : auditTypedStructProvenance(
+          workspaceDirectory,
+          inventory.upstreamCommit,
+          typedStructs,
+          typedStructClasses,
+          programAndChecker,
+        );
+  const entityFactoryClosure =
+    apiOnly || !typedStructs || !programAndChecker
+      ? undefined
+      : auditEntityFactoryClosure(workspaceDirectory, inventory.upstreamCommit, typedStructs, programAndChecker);
   const lowering = apiOnly ? undefined : auditLowering(workspaceDirectory, typedStructs, inventory);
   const api = createApiReport(inventory);
 
@@ -57,6 +71,7 @@ try {
     if (!apiOnly) {
       if (!typedStructs) throw new Error('Expected typed-struct audit');
       if (!typedStructProvenance) throw new Error('Expected typed-struct provenance audit');
+      if (!entityFactoryClosure) throw new Error('Expected Entity factory closure audit');
       if (!hostEndpoints) throw new Error('Expected host-endpoint audit');
       const core = generateCoreModules(workspaceDirectory, check, typedStructs, typedStructProvenance, hostEndpoints);
       for (const excluded of core.excludedPackages) {
@@ -64,6 +79,12 @@ try {
       }
       writeOrCheck(path.join(reportsDirectory, 'inventory.json'), stableJson(inventory), check);
       writeOrCheck(path.join(reportsDirectory, 'inventory.md'), inventorySummary(inventory), check);
+      writeOrCheck(path.join(reportsDirectory, 'entity-factory-closure.json'), stableJson(entityFactoryClosure), check);
+      writeOrCheck(
+        path.join(reportsDirectory, 'entity-factory-closure.md'),
+        entityFactoryClosureSummary(entityFactoryClosure),
+        check,
+      );
       writeOrCheck(path.join(reportsDirectory, 'host-endpoints.json'), stableJson(hostEndpoints), check);
       writeOrCheck(path.join(reportsDirectory, 'host-endpoints.md'), hostEndpointSummary(hostEndpoints), check);
       writeOrCheck(path.join(reportsDirectory, 'host-types.json'), stableJson(core.hostTypes), check);

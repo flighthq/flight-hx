@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
+import type { EntityFactoryClosureAudit } from '../analyze/entity-factory-closure.ts';
 import type { HostEndpointAudit } from '../analyze/host-endpoints.ts';
 import type { HostToolkitAudit } from '../analyze/host-toolkit.ts';
 import type { HostTypeAudit } from '../analyze/host-types.ts';
@@ -22,6 +23,54 @@ export function createApiReport(inventory: UpstreamInventory): ApiReport {
     schemaVersion: 3,
     upstreamCommit: inventory.upstreamCommit,
   };
+}
+
+export function entityFactoryClosureSummary(audit: EntityFactoryClosureAudit): string {
+  const summary = audit.summary;
+  const lines = [
+    '# Entity Factory Closure Audit',
+    '',
+    `Upstream commit: \`${audit.upstreamCommit}\``,
+    '',
+    "This audit inventories exact calls to Flight's production `createEntity` helper. A ready site has a declared concrete Entity identity plus an exact ordered object construction. It reports closure prerequisites; it does not activate class emission.",
+    '',
+    '| Metric | Count |',
+    '| --- | ---: |',
+    `| Production createEntity calls | ${summary.calls} |`,
+    `| Exact concrete Entity calls | ${summary.exactEntityCalls} |`,
+    `| Exact concrete Entity schemas | ${summary.exactEntitySchemas} |`,
+    `| Constructor-ready Entity calls | ${summary.readyEntityCalls} |`,
+    `| Blocked Entity calls | ${summary.blockedEntityCalls} |`,
+    `| Bare Entity calls | ${summary.bareEntityCalls} |`,
+    `| Generic Entity calls | ${summary.genericEntityCalls} |`,
+    `| Structural Entity calls | ${summary.structuralEntityCalls} |`,
+    `| Exact non-Entity calls | ${summary.exactNonEntityCalls} |`,
+    `| Unresolved calls | ${summary.unresolvedCalls} |`,
+    '',
+    '## Concrete Entity identities',
+    '',
+    '| Identity | Calls | Ready | Blocked | Factory owners |',
+    '| --- | ---: | ---: | ---: | --- |',
+  ];
+  for (const schema of audit.schemas) {
+    lines.push(
+      `| \`${schema.schemaId}\` | ${schema.sites.length} | ${schema.readyCalls} | ${schema.blockedCalls} | ${schema.factories.map((factory) => `\`${factory}\``).join(', ')} |`,
+    );
+  }
+  lines.push(
+    '',
+    '## Sites',
+    '',
+    '| Source | Factory | Destination | Route | Argument | Fields | Status | Blockers |',
+    '| --- | --- | --- | --- | --- | ---: | :---: | --- |',
+  );
+  for (const site of audit.sites) {
+    lines.push(
+      `| \`${site.source}:${site.line}:${site.column}\` | \`${site.factory.name}\` | \`${site.destination.schemaId ?? site.destination.kind}\` | \`${site.destination.route ?? '—'}\` | \`${site.argument.kind}\` | ${site.argument.fields.length} | ${site.status} | ${site.blockers.length > 0 ? site.blockers.map((blocker) => `\`${blocker}\``).join(', ') : '—'} |`,
+    );
+  }
+  lines.push('');
+  return lines.join('\n');
 }
 
 export function inventorySummary(inventory: UpstreamInventory): string {

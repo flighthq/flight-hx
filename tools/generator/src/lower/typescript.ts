@@ -4,6 +4,11 @@ import ts from 'typescript';
 
 import { auditStaticFacts } from '../analyze/static-facts.ts';
 import {
+  createEntityCallForObjectLiteral,
+  entityFactoryDestinationCandidates,
+  entityFactoryObjectShape,
+} from '../analyze/entity-factory-call.ts';
+import {
   hostTypeIdentity,
   hostTypeIdentityForExpression,
   hostTypeIdentityForTypeNode,
@@ -3677,44 +3682,21 @@ function cppStructInitEntityFactoryConstruction(
 ): IrCppStructInitConstruction | undefined {
   const checker = context.checker;
   const registry = context.typedStructs;
-  const call = node.parent;
-  if (
-    !checker ||
-    !registry ||
-    !ts.isCallExpression(call) ||
-    call.arguments.length !== 1 ||
-    call.arguments[0] !== node
-  ) {
-    return undefined;
-  }
-  let symbol = checker.getSymbolAtLocation(call.expression);
-  if (symbol && (symbol.flags & ts.SymbolFlags.Alias) !== 0) symbol = checker.getAliasedSymbol(symbol);
-  if (symbol?.getName() !== 'createEntity') return undefined;
-  const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
-  const declarationSource = declaration?.getSourceFile().fileName.split(path.sep).join('/');
-  if (!declarationSource?.endsWith('/upstream/packages/entity/src/entity.ts')) return undefined;
-  let binding: IrCppStructInitConstruction | undefined;
-  if (ts.isVariableDeclaration(call.parent) && call.parent.initializer === call) {
-    binding = registry.resolveFactoryIdentityConstruction(checker.getTypeAtLocation(call.parent.name));
-  } else if (ts.isReturnStatement(call.parent) && call.parent.expression === call) {
-    const owner = ts.findAncestor(call.parent.parent, (ancestor): ancestor is ts.SignatureDeclaration =>
-      ts.isFunctionLike(ancestor),
-    );
-    const signature = owner ? checker.getSignatureFromDeclaration(owner) : undefined;
-    binding = signature
-      ? registry.resolveFactoryIdentityConstruction(checker.getReturnTypeOfSignature(signature))
-      : undefined;
-  }
+  if (!checker || !registry) return undefined;
+  const call = createEntityCallForObjectLiteral(node, checker);
+  if (!call) return undefined;
+  const binding = entityFactoryDestinationCandidates(call, checker)
+    .filter((candidate) => candidate.route !== 'returned-variable')
+    .map((candidate) => registry.resolveFactoryIdentityConstruction(candidate.type))
+    .find((candidate) => candidate !== undefined);
   if (!binding) return undefined;
-  const fields = node.properties.map((property) => {
-    if (ts.isShorthandPropertyAssignment(property)) return property.name.text;
-    if (!ts.isPropertyAssignment(property)) return undefined;
-    const name = property.name;
-    return ts.isIdentifier(name) || ts.isStringLiteral(name) || ts.isNumericLiteral(name) ? name.text : undefined;
-  });
+  const shape = entityFactoryObjectShape(node);
   if (
-    fields.length !== binding.fieldNames.length ||
-    fields.some((field, index) => field === undefined || field !== binding.fieldNames[index])
+    shape.hasComputed ||
+    shape.hasSpread ||
+    shape.hasUnsupported ||
+    shape.fields.length !== binding.fieldNames.length ||
+    shape.fields.some((field, index) => field !== binding.fieldNames[index])
   ) {
     return undefined;
   }

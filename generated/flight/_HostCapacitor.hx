@@ -197,9 +197,9 @@ class _HostCapacitor {
     }] : Array<Dynamic>)), function(__unused0:flight._internal._Any):Void {
 
     }));
-    common = (cast createEntity((cast { activate: (cast createEntity(({ final __callArgument2:Dynamic = { subscribe: function(listener:Void->Void):Void->Void return (cast _HostCapacitor.toCapacitorUnsubscribe__capacitorApp((cast capacitor.app : CapacitorAppPlugin).addListener((cast 'appStateChange' : String), ({ final __callArgument0:Dynamic = function(state:{ var isActive:Bool; }):Void {
+    common = (cast createEntity((cast ({ activate: (cast createEntity(({ final __callArgument2:Dynamic = { subscribe: function(listener:Void->Void):Void->Void return (cast _HostCapacitor.toCapacitorUnsubscribe__capacitorApp((cast capacitor.app : CapacitorAppPlugin).addListener((cast 'appStateChange' : String), ({ final __callArgument0:Dynamic = function(state:{ var isActive:Bool; }):Void {
       if ((cast (cast state : { var isActive:Bool; }).isActive : Bool)) { listener(); }
-    }; __callArgument0; }))) : Void->Void) }; __callArgument2; })) : { >Entity, var subscribe:(Void->Void)->(Void->Void); }), name: (cast createEntity(({ final __callArgument6:Dynamic = { getName: function():String return name }; __callArgument6; })) : { >Entity, var getName:Void->String; }), version: (cast createEntity(({ final __callArgument8:Dynamic = { getVersion: function():String return version }; __callArgument8; })) : { >Entity, var getVersion:Void->String; }) } : Dynamic)) : { >Entity, var activate:{ >Entity, var subscribe:(Void->Void)->(Void->Void); }; var name:{ >Entity, var getName:Void->String; }; var version:{ >Entity, var getVersion:Void->String; }; });
+    }; __callArgument0; }))) : Void->Void) }; __callArgument2; })) : { >Entity, var subscribe:(Void->Void)->(Void->Void); }), name: (cast createEntity(({ final __callArgument6:Dynamic = { getName: function():String return name }; __callArgument6; })) : { >Entity, var getName:Void->String; }), version: (cast createEntity(({ final __callArgument8:Dynamic = { getVersion: function():String return version }; __callArgument8; })) : { >Entity, var getVersion:Void->String; }) } : CapacitorCommonAppCapabilities) : Dynamic)) : CapacitorCommonAppCapabilities);
     if ((cast _Runtime.strictEquals(profile, 'ios') : Bool)) { return cast common; }
     return cast (cast createEntity((cast _Runtime.mergeObjects([common, { hide: (cast createEntity(({ final __callArgument20:Dynamic = { hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast capacitor.app : CapacitorAppPlugin).minimizeApp(), function(__unused1:flight._internal._Any):Void {
 
@@ -1448,7 +1448,7 @@ class _HostCapacitor {
     destroyCompleted = false;
     nextAttachmentId = 1.0;
     nextNumericId = 1.0;
-    return cast (cast createEntity(({ final __callArgument436:Dynamic = { action: { attach: function(listener:Notification->String->Void):flight._internal._Promise<NotificationEventBackendAttachOutcome> {
+    return cast (cast createEntity(({ final __callArgument436:Dynamic = ({ action: { attach: function(listener:Notification->String->Void):flight._internal._Promise<NotificationEventBackendAttachOutcome> {
       return cast (cast attachEvent(({ final __callArgument385:Dynamic = function(action:CapacitorLocalNotificationAction):Void { listener((cast getNotification((cast (cast _Runtime.field(action, 'notification') : { var id:Float; }).id : Float)) : Notification), (cast _Runtime.field(action, 'actionId') : String)); }; __callArgument385; })) : flight._internal._Promise<NotificationEventBackendAttachOutcome>);
       return cast _Runtime.UNDEFINED;
     } }, click: { attach: function(listener:Notification->Void):flight._internal._Promise<NotificationEventBackendAttachOutcome> {
@@ -1760,7 +1760,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } }; __callArgument436; })) : { >Entity, var action:{ var attach:(Notification->String->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }; var click:{ var attach:(Notification->Void)->flight._internal._Promise<NotificationEventBackendAttachOutcome>; }; var delivery:{ var notify:NotificationRequest->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var notification:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var notification:flight._internal._Any; }>, { var notification:Notification; var reason:String; @:optional var fields:flight._internal._Any; }>>; }; var lifecycle:{ var destroy:Void->flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var failures:flight._internal._Any; }, { var failures:Array<NotificationLifecycleFailure>; var reason:String; }>>; }; var permission:{ var getPermission:Void->flight._internal._Promise<flight._internal._Union2<{ var permission:String; var reason:String; }, { var reason:String; @:optional var permission:flight._internal._Any; }>>; var requestPermission:Void->flight._internal._Promise<{ var reason:String; }>; }; var scheduling:{ var cancelAllScheduledNotifications:Void->flight._internal._Promise<NotificationLifecycleOutcome>; var getPendingNotifications:Void->flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var notifications:flight._internal._Any; }, { var notifications:Array<ScheduledNotification>; var reason:String; }>>; var scheduleNotification:NotificationRequest->NotificationSchedule->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var precision:flight._internal._Any; @:optional var scheduled:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var precision:flight._internal._Any; @:optional var scheduled:flight._internal._Any; }>, { var precision:String; var reason:String; var scheduled:ScheduledNotification; @:optional var fields:flight._internal._Any; }>>; }; });
+    } } } : CapacitorNotificationCapabilities); __callArgument436; })) : CapacitorNotificationCapabilities);
     return cast null;
   }
 
@@ -1800,10 +1800,10 @@ class _HostCapacitor {
   }
 
   public static function createCapacitorProtocolCapabilities(capacitor:CapacitorApi):CapacitorProtocolCapabilities {
-    return cast (cast createEntity((cast { open: (cast createEntity(({ final __callArgument493:Dynamic = { subscribe: function(listener:String->Void):Void->Void {
+    return cast (cast createEntity((cast ({ open: (cast createEntity(({ final __callArgument493:Dynamic = { subscribe: function(listener:String->Void):Void->Void {
       return cast (cast _HostCapacitor.toCapacitorUnsubscribe__capacitorProtocol((cast capacitor.app : CapacitorAppPlugin).addListener((cast 'appUrlOpen' : String), ({ final __callArgument491:Dynamic = function(event:{ var url:String; }):Void { listener((cast (cast event : { var url:String; }).url : String)); }; __callArgument491; }))) : Void->Void);
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument493; })) : { >Entity, var subscribe:(String->Void)->(Void->Void); }) } : Dynamic)) : { >Entity, var open:{ >Entity, var subscribe:(String->Void)->(Void->Void); }; });
+    } }; __callArgument493; })) : { >Entity, var subscribe:(String->Void)->(Void->Void); }) } : CapacitorProtocolCapabilities) : Dynamic)) : CapacitorProtocolCapabilities);
     return cast null;
   }
 
@@ -1851,7 +1851,7 @@ class _HostCapacitor {
   public static function createCapacitorShareContentBackend(capacitor:CapacitorApi):CapacitorShareContentBackend {
     var share:CapacitorSharePlugin = cast _Runtime.UNDEFINED;
     share = capacitor.share;
-    return cast (cast createEntity((cast { canShareContent: _HostCapacitor.hasShareableContent__capacitorShare, shareContent: function(content:ShareContent, options:Null<CapacitorShareContentOptions>):flight._internal._Promise<Bool> {
+    return cast (cast createEntity((cast ({ canShareContent: _HostCapacitor.hasShareableContent__capacitorShare, shareContent: function(content:ShareContent, options:Null<CapacitorShareContentOptions>):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var __flowBranch579:Dynamic;
@@ -1908,7 +1908,7 @@ class _HostCapacitor {
           });
         })
       );
-    } } : Dynamic)) : { >Entity, var canShareContent:ShareContent->Bool; var shareContent:ShareContent->Null<CapacitorShareContentOptions>->flight._internal._Promise<Bool>; var shareContentWithResult:ShareContent->Null<CapacitorShareContentOptions>->flight._internal._Promise<flight._internal._Union2<{ var activityType:flight._internal._Any; var completed:Bool; var dismissed:Bool; }, { var activityType:Null<String>; var completed:Bool; var dismissed:Bool; }>>; });
+    } } : CapacitorShareContentBackend) : Dynamic)) : CapacitorShareContentBackend);
     return cast null;
   }
 

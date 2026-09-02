@@ -830,10 +830,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -844,10 +844,8 @@
       },
       "id": "@flighthq/types:interface#AccessibilityBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "AccessibilityBackend",
@@ -861,26 +859,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 10,
-          "kind": "cross-schema-transfer",
-          "line": 47,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity",
-            "@flighthq/types:type#EntityWithoutRuntime"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-web/src/webAccessibility.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Accessibility.ts"
     },
     {
@@ -14165,10 +14151,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -14179,10 +14165,8 @@
       },
       "id": "@flighthq/types:interface#CapacitorShareContentBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "CapacitorShareContentBackend",
@@ -14196,25 +14180,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 10,
-          "kind": "cross-schema-transfer",
-          "line": 13,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-capacitor/src/capacitorShare.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Share.ts"
     },
     {
@@ -15563,10 +15536,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -15594,7 +15567,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 3,
+        "crossSchemaTransfers": 2,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -15623,16 +15596,6 @@
           ],
           "scope": "production",
           "source": "upstream/packages/host-electron/src/electronRegister.ts"
-        },
-        {
-          "column": 10,
-          "kind": "cross-schema-transfer",
-          "line": 8,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-tauri/src/tauriClipboard.ts"
         }
       ],
       "source": "upstream/packages/types/src/Clipboard.ts"
@@ -24715,10 +24678,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -53098,10 +53061,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -53112,10 +53075,8 @@
       },
       "id": "@flighthq/types:interface#IpcMessageBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": [
           "enumeration"
         ]
@@ -53131,7 +53092,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -53145,17 +53106,6 @@
           "line": 58,
           "scope": "test",
           "source": "upstream/packages/host-electron/src/electronIpc.test.ts"
-        },
-        {
-          "column": 10,
-          "kind": "cross-schema-transfer",
-          "line": 13,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity",
-            "@flighthq/types:type#EntityWithoutRuntime"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronIpc.ts"
         }
       ],
       "source": "upstream/packages/types/src/Ipc.ts"
@@ -59422,10 +59372,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -59436,10 +59386,8 @@
       },
       "id": "@flighthq/types:interface#MenuApplicationBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "MenuApplicationBackend",
@@ -59453,35 +59401,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 2,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 18,
-          "kind": "cross-schema-transfer",
-          "line": 29,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronMenu.ts"
-        },
-        {
-          "column": 18,
-          "kind": "cross-schema-transfer",
-          "line": 30,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-tauri/src/tauriMenu.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Menu.ts"
     },
     {
@@ -59951,10 +59878,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 3,
+        "objectLiterals": 5,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 3,
+        "plainObjectLiterals": 5,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -59965,10 +59892,8 @@
       },
       "id": "@flighthq/types:interface#MenuPopupBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "MenuPopupBackend",
@@ -59982,35 +59907,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 2,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 12,
-          "kind": "cross-schema-transfer",
-          "line": 44,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronMenu.ts"
-        },
-        {
-          "column": 12,
-          "kind": "cross-schema-transfer",
-          "line": 51,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-tauri/src/tauriMenu.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Menu.ts"
     },
     {
@@ -60066,10 +59970,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 4,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 4,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -60080,10 +59984,8 @@
       },
       "id": "@flighthq/types:interface#MenuSelectBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "MenuSelectBackend",
@@ -60097,35 +59999,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 2,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 13,
-          "kind": "cross-schema-transfer",
-          "line": 59,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronMenu.ts"
-        },
-        {
-          "column": 13,
-          "kind": "cross-schema-transfer",
-          "line": 62,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-tauri/src/tauriMenu.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Menu.ts"
     },
     {
@@ -79848,10 +79729,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 2,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 2,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -79879,7 +79760,7 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 2,
+        "crossSchemaTransfers": 1,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
@@ -79896,16 +79777,6 @@
           ],
           "scope": "production",
           "source": "upstream/packages/host-electron/src/electronRegister.ts"
-        },
-        {
-          "column": 10,
-          "kind": "cross-schema-transfer",
-          "line": 17,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-tauri/src/tauriPlatform.ts"
         }
       ],
       "source": "upstream/packages/types/src/Platform.ts"
@@ -80985,10 +80856,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 1,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 1,
+        "plainObjectLiterals": 2,
         "testObjectLiterals": 1
       },
       "directAccesses": 0,
@@ -80999,10 +80870,8 @@
       },
       "id": "@flighthq/types:interface#PowerThermalBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "PowerThermalBackend",
@@ -81016,25 +80885,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 14,
-          "kind": "cross-schema-transfer",
-          "line": 146,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronPower.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Power.ts"
     },
     {
@@ -95914,10 +95772,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -95928,10 +95786,8 @@
       },
       "id": "@flighthq/types:interface#ShareContentBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "ShareContentBackend",
@@ -95945,25 +95801,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 60,
-          "kind": "cross-schema-transfer",
-          "line": 11,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-web/src/webShare.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Share.ts"
     },
     {
@@ -96019,10 +95864,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -96033,10 +95878,8 @@
       },
       "id": "@flighthq/types:interface#ShareFilesBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "ShareFilesBackend",
@@ -96050,25 +95893,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 56,
-          "kind": "cross-schema-transfer",
-          "line": 27,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-web/src/webShare.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Share.ts"
     },
     {
@@ -96391,10 +96223,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -96405,10 +96237,8 @@
       },
       "id": "@flighthq/types:interface#ShellBeepBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "ShellBeepBackend",
@@ -96422,25 +96252,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 34,
-          "kind": "cross-schema-transfer",
-          "line": 25,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronShell.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Shell.ts"
     },
     {
@@ -96450,10 +96269,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 3,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 3,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -96464,10 +96283,8 @@
       },
       "id": "@flighthq/types:interface#ShellExternalBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "ShellExternalBackend",
@@ -96481,45 +96298,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 3,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 42,
-          "kind": "cross-schema-transfer",
-          "line": 30,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronShell.ts"
-        },
-        {
-          "column": 42,
-          "kind": "cross-schema-transfer",
-          "line": 17,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-tauri/src/tauriShell.ts"
-        },
-        {
-          "column": 62,
-          "kind": "cross-schema-transfer",
-          "line": 6,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-web/src/webShell.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Shell.ts"
     },
     {
@@ -96575,10 +96361,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 2,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -96589,10 +96375,8 @@
       },
       "id": "@flighthq/types:interface#ShellPathOpenBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "ShellPathOpenBackend",
@@ -96606,35 +96390,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 2,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 42,
-          "kind": "cross-schema-transfer",
-          "line": 40,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronShell.ts"
-        },
-        {
-          "column": 42,
-          "kind": "cross-schema-transfer",
-          "line": 27,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-tauri/src/tauriShell.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Shell.ts"
     },
     {
@@ -96644,10 +96407,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 2,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 2,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -96658,10 +96421,8 @@
       },
       "id": "@flighthq/types:interface#ShellPathRevealBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "ShellPathRevealBackend",
@@ -96675,35 +96436,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 2,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 46,
-          "kind": "cross-schema-transfer",
-          "line": 50,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronShell.ts"
-        },
-        {
-          "column": 46,
-          "kind": "cross-schema-transfer",
-          "line": 37,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-tauri/src/tauriShell.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Shell.ts"
     },
     {
@@ -96759,10 +96499,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -96773,10 +96513,8 @@
       },
       "id": "@flighthq/types:interface#ShellShortcutLinkBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "ShellShortcutLinkBackend",
@@ -96790,25 +96528,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 10,
-          "kind": "cross-schema-transfer",
-          "line": 77,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronShell.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Shell.ts"
     },
     {
@@ -96818,10 +96545,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -96832,10 +96559,8 @@
       },
       "id": "@flighthq/types:interface#ShellTrashBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "ShellTrashBackend",
@@ -96849,25 +96574,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 36,
-          "kind": "cross-schema-transfer",
-          "line": 60,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronShell.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Shell.ts"
     },
     {
@@ -119863,10 +119577,10 @@
       },
       "construction": {
         "computedObjectLiterals": 0,
-        "objectLiterals": 0,
+        "objectLiterals": 1,
         "objectLiteralsOmittingOptionalFields": 0,
         "objectLiteralsWithSpread": 0,
-        "plainObjectLiterals": 0,
+        "plainObjectLiterals": 1,
         "testObjectLiterals": 0
       },
       "directAccesses": 0,
@@ -119877,10 +119591,8 @@
       },
       "id": "@flighthq/types:interface#UpdaterCommandBackend",
       "migration": {
-        "mechanicallyCompatible": false,
-        "normalizationReasons": [
-          "cross-schema-transfer"
-        ],
+        "mechanicallyCompatible": true,
+        "normalizationReasons": [],
         "observabilityReasons": []
       },
       "name": "UpdaterCommandBackend",
@@ -119894,25 +119606,14 @@
       },
       "production": {
         "anonymousStructuralTransfers": 0,
-        "crossSchemaTransfers": 1,
+        "crossSchemaTransfers": 0,
         "dynamicIngresses": 0,
         "enumerations": 0,
         "jsonSerializations": 0,
         "objectRests": 0,
         "objectSpreads": 0
       },
-      "sites": [
-        {
-          "column": 10,
-          "kind": "cross-schema-transfer",
-          "line": 71,
-          "relatedSchemaIds": [
-            "@flighthq/types:interface#Entity"
-          ],
-          "scope": "production",
-          "source": "upstream/packages/host-electron/src/electronUpdater.ts"
-        }
-      ],
+      "sites": [],
       "source": "upstream/packages/types/src/Updater.ts"
     },
     {
@@ -135890,12 +135591,12 @@
     "anonymousStructuralTransfers": 222,
     "bridgeInputSignatures": 10289,
     "bridgeOutputSignatures": 2354,
-    "crossSchemaTransfers": 2199,
+    "crossSchemaTransfers": 2174,
     "directAccesses": 25837,
     "dynamicIngresses": 70,
-    "mechanicallyCompatibleSchemas": 1647,
-    "normalizationRequiredSchemas": 514,
-    "objectLiterals": 2439,
+    "mechanicallyCompatibleSchemas": 1663,
+    "normalizationRequiredSchemas": 498,
+    "objectLiterals": 2466,
     "objectLiteralsOmittingOptionalFields": 528,
     "objectLiteralsWithComputedKeys": 8,
     "objectLiteralsWithSpread": 230,

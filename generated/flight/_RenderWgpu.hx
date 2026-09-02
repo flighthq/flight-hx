@@ -1691,7 +1691,7 @@ class _RenderWgpu {
 
   public static function createWgpuPipeline(registries:WgpuRenderRegistries):WgpuPipeline {
     var pipeline:WgpuPipeline = cast _Runtime.UNDEFINED;
-    pipeline = (cast createEntity(({ final __callArgument405:Dynamic = { registries: registries }; __callArgument405; })) : WgpuPipeline);
+    pipeline = (cast (cast createEntity(({ final __callArgument405:Dynamic = ({ registries: registries } : WgpuPipeline); __callArgument405; })) : WgpuPipeline) : WgpuPipeline);
     _Runtime.setIndex(pipeline, EntityRuntimeKey, { binding: null });
     return cast pipeline;
     return cast null;
@@ -1732,7 +1732,7 @@ class _RenderWgpu {
     var deviceRuntime:WgpuDeviceRuntime = cast _Runtime.UNDEFINED;
     var state:WgpuDeviceState = cast _Runtime.UNDEFINED;
     deviceRuntime = (cast _RenderWgpu.createMinimalDeviceRuntime__wgpuRenderState(({ final __callArgument412:Dynamic = device; __callArgument412; })) : WgpuDeviceRuntime);
-    state = (cast createEntity(({ final __callArgument414:Dynamic = { device: device }; __callArgument414; })) : WgpuDeviceState);
+    state = (cast (cast createEntity(({ final __callArgument414:Dynamic = ({ device: device } : WgpuDeviceState); __callArgument414; })) : WgpuDeviceState) : WgpuDeviceState);
     _Runtime.setIndex(state, EntityRuntimeKey, deviceRuntime);
     return cast state;
     return cast null;

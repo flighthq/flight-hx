@@ -501,7 +501,7 @@ class _HostTauri {
     menuModule = tauri.menu;
     selectListener = null;
     destroyed = false;
-    return cast { application: (cast createEntity(({ final __callArgument115:Dynamic = { destroy: function():Void {
+    return cast { application: (cast createEntity(({ final __callArgument115:Dynamic = ({ destroy: function():Void {
       if ((cast destroyed : Bool)) { return; }
       (destroyed = cast (true : Dynamic));
     }, setApplicationMenu: function(items:Array<MenuItemTemplate>):Bool {
@@ -525,7 +525,7 @@ class _HostTauri {
       }));
       return cast true;
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument115; })) : { >MenuApplicationBackend, >Entity, }), popup: (cast createEntity(({ final __callArgument163:Dynamic = { popup: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
+    } } : MenuApplicationBackend); __callArgument115; })) : MenuApplicationBackend), popup: (cast createEntity(({ final __callArgument163:Dynamic = ({ popup: function(items:Array<MenuItemTemplate>, x:Float, y:Float):flight._internal._Promise<Null<String>> {
       return cast flight._internal._Async.create(function(resolve:flight._internal._Any, __unused1:flight._internal._Any):Void {
         _Runtime.voidValue(flight._internal._Async.recover(_Runtime.callValue(function():flight._internal._Promise<flight._internal._Nothing> {
           return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
@@ -545,13 +545,13 @@ class _HostTauri {
         }, cast ([] : Array<Dynamic>)), function(__unused2:flight._internal._Any):Void { resolve(({ final __callArgument161:Dynamic = null; __callArgument161; })); }));
       });
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument163; })) : { >MenuPopupBackend, >Entity, }), select: (cast createEntity(({ final __callArgument193:Dynamic = { subscribe: function(listener:String->Void):Void->Void {
+    } } : MenuPopupBackend); __callArgument163; })) : MenuPopupBackend), select: (cast createEntity(({ final __callArgument193:Dynamic = ({ subscribe: function(listener:String->Void):Void->Void {
       (selectListener = cast (listener : Dynamic));
       return cast function():Void {
         if ((cast _Runtime.strictEquals(selectListener, listener) : Bool)) { (selectListener = cast (null : Dynamic)); }
       };
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument193; })) : { >MenuSelectBackend, >Entity, }) };
+    } } : MenuSelectBackend); __callArgument193; })) : MenuSelectBackend) };
     return cast null;
   }
 
@@ -617,7 +617,7 @@ class _HostTauri {
     notification = tauri.notification;
     destroyed = false;
     nextId = 1.0;
-    return cast (cast createEntity((cast { delivery: { notify: function(request:NotificationRequest):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var notification:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var notification:flight._internal._Any; }>, { var notification:Notification; var reason:String; @:optional var fields:flight._internal._Any; }>> {
+    return cast (cast createEntity((cast ({ delivery: { notify: function(request:NotificationRequest):flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var notification:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var notification:flight._internal._Any; }>, { var notification:Notification; var reason:String; @:optional var fields:flight._internal._Any; }>> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var invalid:Array<String> = cast _Runtime.UNDEFINED;
@@ -723,7 +723,7 @@ class _HostTauri {
           });
         })
       );
-    } } } : Dynamic)) : { >Entity, var delivery:{ var notify:NotificationRequest->flight._internal._Promise<flight._internal._Union2<flight._internal._Union2<{ var reason:String; @:optional var fields:flight._internal._Any; @:optional var notification:flight._internal._Any; }, { var fields:Array<String>; var reason:String; @:optional var notification:flight._internal._Any; }>, { var notification:Notification; var reason:String; @:optional var fields:flight._internal._Any; }>>; }; var lifecycle:{ var destroy:Void->flight._internal._Promise<{ var reason:String; }>; }; var permission:{ var getPermission:Void->flight._internal._Promise<flight._internal._Union2<{ var permission:String; var reason:String; }, { var reason:String; @:optional var permission:flight._internal._Any; }>>; var requestPermission:Void->flight._internal._Promise<{ var reason:String; }>; }; });
+    } } } : TauriNotificationCapabilities) : Dynamic)) : TauriNotificationCapabilities);
     return cast null;
   }
 
@@ -744,7 +744,7 @@ class _HostTauri {
     }] : Array<Dynamic>)), function(__unused0:flight._internal._Any):Void {
 
     });
-    return cast (cast createEntity((cast { getInfo: function(out:PlatformInfo):PlatformInfo {
+    return cast (cast createEntity((cast ({ getInfo: function(out:PlatformInfo):PlatformInfo {
       (out.name = cast ((cast _HostTauri.toPlatformName__tauriPlatform((cast (cast os : TauriOsModule).platform() : String)) : PlatformName) : PlatformName));
       (out.kind = cast ('desktop' : PlatformKind));
       (out.version = cast ((cast os : TauriOsModule).version() : String));
@@ -754,7 +754,7 @@ class _HostTauri {
       (out.runtime = cast ('tauri' : PlatformRuntime));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } } : Dynamic)) : { >Entity, var getInfo:PlatformInfo->PlatformInfo; });
+    } } : PlatformBackend) : Dynamic)) : PlatformBackend);
     return cast null;
   }
 
@@ -797,7 +797,7 @@ class _HostTauri {
     var pathOpen:ShellPathOpenBackend = cast _Runtime.UNDEFINED;
     var pathReveal:ShellPathRevealBackend = cast _Runtime.UNDEFINED;
     opener = tauri.opener;
-    external = (cast createEntity(({ final __callArgument274:Dynamic = { open: function(url:String):flight._internal._Promise<ShellExternalOutcome> {
+    external = (cast createEntity(({ final __callArgument274:Dynamic = ({ open: function(url:String):flight._internal._Promise<ShellExternalOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -815,8 +815,8 @@ class _HostTauri {
           });
         })
       );
-    } }; __callArgument274; })) : { >Entity, var open:String->flight._internal._Promise<{ var reason:String; }>; });
-    pathOpen = (cast createEntity(({ final __callArgument278:Dynamic = { open: function(path:String):flight._internal._Promise<ShellPathOpenOutcome> {
+    } } : ShellExternalBackend); __callArgument274; })) : ShellExternalBackend);
+    pathOpen = (cast createEntity(({ final __callArgument278:Dynamic = ({ open: function(path:String):flight._internal._Promise<ShellPathOpenOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -834,8 +834,8 @@ class _HostTauri {
           });
         })
       );
-    } }; __callArgument278; })) : { >Entity, var open:String->flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var message:flight._internal._Any; }, { var message:String; var reason:String; }>>; });
-    pathReveal = (cast createEntity(({ final __callArgument282:Dynamic = { reveal: function(path:String):flight._internal._Promise<ShellPathRevealOutcome> {
+    } } : ShellPathOpenBackend); __callArgument278; })) : ShellPathOpenBackend);
+    pathReveal = (cast createEntity(({ final __callArgument282:Dynamic = ({ reveal: function(path:String):flight._internal._Promise<ShellPathRevealOutcome> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -853,7 +853,7 @@ class _HostTauri {
           });
         })
       );
-    } }; __callArgument282; })) : { >Entity, var reveal:String->flight._internal._Promise<{ var reason:String; }>; });
+    } } : ShellPathRevealBackend); __callArgument282; })) : ShellPathRevealBackend);
     return cast { external: external, pathOpen: pathOpen, pathReveal: pathReveal };
     return cast null;
   }

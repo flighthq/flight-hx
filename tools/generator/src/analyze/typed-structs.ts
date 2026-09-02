@@ -7,6 +7,7 @@ import patches from '../../patches/manifest.ts';
 import type { UpstreamInventory } from '../model/inventory.ts';
 
 import { excludedPackageDirectories } from './exclusions.ts';
+import { isParameterizedEntityFactoryType } from './entity-factory-call.ts';
 import { analyzeUpstream, sourcePathToHaxePackage, sourcePathToImplementationModule } from './inventory.ts';
 import { upstreamTypeScriptProgram } from './program.ts';
 import { semanticBodyPatchFunctionNames } from '../patch/apply.ts';
@@ -3028,8 +3029,9 @@ export function createTypedStructRegistry(
       return internal ? constructionBinding(internal) : undefined;
     },
     resolveFactoryIdentityConstruction(type) {
+      if (isParameterizedEntityFactoryType(type, checker)) return undefined;
       const schema = resolveIdentitySchema(type);
-      return schema?.audit.eligible ? constructionBinding(schema) : undefined;
+      return schema ? constructionBinding(schema) : undefined;
     },
     resolveIdentity(type) {
       return resolveIdentitySchema(type)?.audit;
