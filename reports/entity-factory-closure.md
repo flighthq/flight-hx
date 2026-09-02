@@ -9,8 +9,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | Production createEntity calls | 368 |
 | Exact concrete Entity calls | 191 |
 | Exact concrete Entity schemas | 148 |
-| Constructor-ready Entity calls | 152 |
-| Blocked Entity calls | 207 |
+| Constructor-ready Entity calls | 163 |
+| Blocked Entity calls | 196 |
 | Bare Entity calls | 0 |
 | Generic Entity calls | 3 |
 | Field-order-normalized calls | 24 |
@@ -34,7 +34,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#AnimationLayer` | 1 | 1 | 0 | `createAnimationLayer` |
 | `@flighthq/types:interface#AnimationLayerStack` | 1 | 1 | 0 | `createAnimationLayerStack` |
 | `@flighthq/types:interface#AnimationPlayer` | 2 | 2 | 0 | `cloneAnimationPlayer`, `createAnimationPlayer` |
-| `@flighthq/types:interface#AnimationRootMotionExtractor` | 1 | 0 | 1 | `createAnimationRootMotionExtractor` |
+| `@flighthq/types:interface#AnimationRootMotionExtractor` | 1 | 1 | 0 | `createAnimationRootMotionExtractor` |
 | `@flighthq/types:interface#AnimationSampleAccumulator` | 1 | 1 | 0 | `createAnimationSampleAccumulator` |
 | `@flighthq/types:interface#AnimationStateMachine` | 1 | 1 | 0 | `createAnimationStateMachine` |
 | `@flighthq/types:interface#AnimationStateMachineState` | 1 | 1 | 0 | `createAnimationStateMachineState` |
@@ -51,7 +51,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#CameraShake` | 1 | 1 | 0 | `createCameraShake` |
 | `@flighthq/types:interface#CanvasPipeline` | 1 | 1 | 0 | `createCanvasPipeline` |
 | `@flighthq/types:interface#CanvasRenderSurface` | 1 | 1 | 0 | `finishCanvasRenderSurface` |
-| `@flighthq/types:interface#CanvasRenderSurfaceCreator` | 1 | 0 | 1 | `createWebCanvasRenderSurfaceCreator` |
+| `@flighthq/types:interface#CanvasRenderSurfaceCreator` | 1 | 1 | 0 | `createWebCanvasRenderSurfaceCreator` |
 | `@flighthq/types:interface#CanvasTextureResolvers` | 1 | 0 | 1 | `createCanvasTextureResolvers` |
 | `@flighthq/types:interface#CapacitorShareContentBackend` | 1 | 1 | 0 | `createCapacitorShareContentBackend` |
 | `@flighthq/types:interface#Capsule` | 1 | 1 | 0 | `createCapsule` |
@@ -88,7 +88,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#MediaSessionActionSignal` | 1 | 1 | 0 | `createMediaSessionActionSignal` |
 | `@flighthq/types:interface#MediaSessionBackend` | 1 | 0 | 1 | `createWebMediaSessionBackend` |
 | `@flighthq/types:interface#MeshGeometry` | 1 | 1 | 0 | `createMeshGeometryRuntime` |
-| `@flighthq/types:interface#MidiAccess` | 1 | 0 | 1 | `createMidiAccessResource` |
+| `@flighthq/types:interface#MidiAccess` | 1 | 1 | 0 | `createMidiAccessResource` |
 | `@flighthq/types:interface#MidiInputPort` | 1 | 0 | 1 | `createMidiInputPortResource` |
 | `@flighthq/types:interface#MidiOutputPort` | 1 | 0 | 1 | `createMidiOutputPortResource` |
 | `@flighthq/types:interface#Notification` | 1 | 1 | 0 | `createNotificationResource` |
@@ -133,10 +133,10 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#ShellPathRevealBackend` | 2 | 2 | 0 | `makeElectronShellCapabilities`, `makeTauriShellCapabilities` |
 | `@flighthq/types:interface#ShellShortcutLinkBackend` | 1 | 1 | 0 | `createElectronShellShortcutLinkBackend` |
 | `@flighthq/types:interface#ShellTrashBackend` | 1 | 1 | 0 | `makeElectronShellCapabilities` |
-| `@flighthq/types:interface#ShortcutQueryBackend` | 2 | 0 | 2 | `createElectronShortcutQueryBackend`, `createTauriShortcutQueryBackend` |
-| `@flighthq/types:interface#ShortcutTriggerBackend` | 2 | 0 | 2 | `createElectronShortcutTriggerBackend`, `createTauriShortcutTriggerBackend` |
+| `@flighthq/types:interface#ShortcutQueryBackend` | 2 | 2 | 0 | `createElectronShortcutQueryBackend`, `createTauriShortcutQueryBackend` |
+| `@flighthq/types:interface#ShortcutTriggerBackend` | 2 | 2 | 0 | `createElectronShortcutTriggerBackend`, `createTauriShortcutTriggerBackend` |
 | `@flighthq/types:interface#Skeleton2D` | 2 | 0 | 2 | `cloneSkeleton2D`, `createSkeleton2D` |
-| `@flighthq/types:interface#Skeleton3D` | 3 | 1 | 2 | `cloneSkeleton3D`, `cloneSkeleton3DJointHierarchy`, `createSkeleton3D` |
+| `@flighthq/types:interface#Skeleton3D` | 3 | 3 | 0 | `cloneSkeleton3D`, `cloneSkeleton3DJointHierarchy`, `createSkeleton3D` |
 | `@flighthq/types:interface#SpecularPbrExtension` | 1 | 1 | 0 | `createSpecularPbrExtension` |
 | `@flighthq/types:interface#SpotLight` | 2 | 2 | 0 | `cloneSpotLight`, `createSpotLight` |
 | `@flighthq/types:interface#Spritesheet` | 2 | 2 | 0 | `cloneSpritesheet`, `createSpritesheet` |
@@ -154,8 +154,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#Vector3` | 1 | 1 | 0 | `createVector3` |
 | `@flighthq/types:interface#Vector4` | 1 | 1 | 0 | `createVector4` |
 | `@flighthq/types:interface#Viewport` | 1 | 1 | 0 | `createViewport` |
-| `@flighthq/types:interface#WebWindowStoragePersistenceCapabilities` | 1 | 0 | 1 | `createWebWindowStoragePersistenceCapabilities` |
-| `@flighthq/types:interface#WebWorkerStoragePersistenceCapabilities` | 1 | 0 | 1 | `createWebWorkerStoragePersistenceCapabilities` |
+| `@flighthq/types:interface#WebWindowStoragePersistenceCapabilities` | 1 | 1 | 0 | `createWebWindowStoragePersistenceCapabilities` |
+| `@flighthq/types:interface#WebWorkerStoragePersistenceCapabilities` | 1 | 1 | 0 | `createWebWorkerStoragePersistenceCapabilities` |
 | `@flighthq/types:interface#WgpuDeviceState` | 1 | 1 | 0 | `createWgpuDeviceState` |
 | `@flighthq/types:interface#WgpuPipeline` | 1 | 1 | 0 | `createWgpuPipeline` |
 | `@flighthq/types:interface#WrappedDiffusePbrExtension` | 1 | 1 | 0 | `createWrappedDiffusePbrExtension` |
@@ -187,7 +187,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/animation/src/animationLayerStack.ts:160:10` | `createAnimationLayer` | `@flighthq/types:interface#AnimationLayer` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/animation/src/animationPlayer.ts:109:10` | `cloneAnimationPlayer` | `@flighthq/types:interface#AnimationPlayer` | `contextual` | `object` | 10 | ready | — | — |
 | `upstream/packages/animation/src/animationPlayer.ts:136:10` | `createAnimationPlayer` | `@flighthq/types:interface#AnimationPlayer` | `contextual` | `object` | 10 | ready | — | — |
-| `upstream/packages/animation/src/animationRootMotion.ts:20:21` | `createAnimationRootMotionExtractor` | `@flighthq/types:interface#AnimationRootMotionExtractor` | `returned-variable` | `object` | 10 | blocked | — | `returned-variable-destination` |
+| `upstream/packages/animation/src/animationRootMotion.ts:20:21` | `createAnimationRootMotionExtractor` | `@flighthq/types:interface#AnimationRootMotionExtractor` | `returned-variable` | `object` | 10 | ready | — | — |
 | `upstream/packages/animation/src/animationStateMachine.ts:47:10` | `createAnimationStateMachine` | `@flighthq/types:interface#AnimationStateMachine` | `contextual` | `object` | 12 | ready | — | — |
 | `upstream/packages/animation/src/animationStateMachine.ts:68:10` | `createAnimationStateMachineState` | `@flighthq/types:interface#AnimationStateMachineState` | `contextual` | `object` | 2 | ready | — | — |
 | `upstream/packages/animation/src/animationTrack.ts:13:10` | `cloneAnimationTrack` | `@flighthq/types:interface#AnimationTrack` | `contextual` | `object` | 7 | ready | — | — |
@@ -323,8 +323,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-electron/src/electronShell.ts:50:46` | `makeElectronShellCapabilities` | `@flighthq/types:interface#ShellPathRevealBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-electron/src/electronShell.ts:60:36` | `makeElectronShellCapabilities` | `@flighthq/types:interface#ShellTrashBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-electron/src/electronShell.ts:77:10` | `createElectronShellShortcutLinkBackend` | `@flighthq/types:interface#ShellShortcutLinkBackend` | `contextual` | `object` | 2 | ready | — | — |
-| `upstream/packages/host-electron/src/electronShortcut.ts:11:20` | `createElectronShortcutQueryBackend` | `@flighthq/types:interface#ShortcutQueryBackend` | `returned-variable` | `object` | 1 | blocked | — | `returned-variable-destination` |
-| `upstream/packages/host-electron/src/electronShortcut.ts:32:20` | `createElectronShortcutTriggerBackend` | `@flighthq/types:interface#ShortcutTriggerBackend` | `returned-variable` | `object` | 3 | blocked | — | `returned-variable-destination` |
+| `upstream/packages/host-electron/src/electronShortcut.ts:11:20` | `createElectronShortcutQueryBackend` | `@flighthq/types:interface#ShortcutQueryBackend` | `returned-variable` | `object` | 1 | ready | — | — |
+| `upstream/packages/host-electron/src/electronShortcut.ts:32:20` | `createElectronShortcutTriggerBackend` | `@flighthq/types:interface#ShortcutTriggerBackend` | `returned-variable` | `object` | 3 | ready | — | — |
 | `upstream/packages/host-electron/src/electronShortcut.ts:46:28` | `subscribe` | `structural-entity` | `variable` | `omitted` | 0 | blocked | — | `omitted-construction`, `structural-entity-destination` |
 | `upstream/packages/host-electron/src/electronStorage.ts:76:10` | `createElectronStorageBackend` | `structural-entity` | `contextual` | `object` | 5 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/host-electron/src/electronTray.ts:51:21` | `createElectronTrayCapabilities` | `structural-entity` | `variable` | `object` | 4 | blocked | — | `structural-entity-destination` |
@@ -365,8 +365,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-tauri/src/tauriShell.ts:17:42` | `makeTauriShellCapabilities` | `@flighthq/types:interface#ShellExternalBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriShell.ts:27:42` | `makeTauriShellCapabilities` | `@flighthq/types:interface#ShellPathOpenBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriShell.ts:37:46` | `makeTauriShellCapabilities` | `@flighthq/types:interface#ShellPathRevealBackend` | `contextual` | `object` | 1 | ready | — | — |
-| `upstream/packages/host-tauri/src/tauriShortcut.ts:11:20` | `createTauriShortcutQueryBackend` | `@flighthq/types:interface#ShortcutQueryBackend` | `returned-variable` | `object` | 1 | blocked | — | `returned-variable-destination` |
-| `upstream/packages/host-tauri/src/tauriShortcut.ts:33:20` | `createTauriShortcutTriggerBackend` | `@flighthq/types:interface#ShortcutTriggerBackend` | `returned-variable` | `object` | 3 | blocked | — | `returned-variable-destination` |
+| `upstream/packages/host-tauri/src/tauriShortcut.ts:11:20` | `createTauriShortcutQueryBackend` | `@flighthq/types:interface#ShortcutQueryBackend` | `returned-variable` | `object` | 1 | ready | — | — |
+| `upstream/packages/host-tauri/src/tauriShortcut.ts:33:20` | `createTauriShortcutTriggerBackend` | `@flighthq/types:interface#ShortcutTriggerBackend` | `returned-variable` | `object` | 3 | ready | — | — |
 | `upstream/packages/host-tauri/src/tauriShortcut.ts:48:28` | `subscribe` | `structural-entity` | `variable` | `omitted` | 0 | blocked | — | `omitted-construction`, `structural-entity-destination` |
 | `upstream/packages/host-tauri/src/tauriTray.ts:39:21` | `createTauriTrayCapabilities` | `structural-entity` | `variable` | `object` | 4 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/host-tauri/src/tauriTray.ts:112:17` | `createTauriTrayCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
@@ -387,7 +387,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-web/src/webApp.ts:70:15` | `createWebAppCapabilities` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/host-web/src/webBitmapReadback.ts:7:10` | `createWebBitmapReadbackBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/host-web/src/webBitmapReadback.ts:33:30` | `readBitmap` | `@flighthq/types:interface#Bitmap` | `contextual` | `object` | 8 | ready | `field-order` | — |
-| `upstream/packages/host-web/src/webCanvasRenderSurface.ts:6:19` | `createWebCanvasRenderSurfaceCreator` | `@flighthq/types:interface#CanvasRenderSurfaceCreator` | `returned-variable` | `object` | 2 | blocked | — | `returned-variable-destination` |
+| `upstream/packages/host-web/src/webCanvasRenderSurface.ts:6:19` | `createWebCanvasRenderSurfaceCreator` | `@flighthq/types:interface#CanvasRenderSurfaceCreator` | `returned-variable` | `object` | 2 | ready | — | — |
 | `upstream/packages/host-web/src/webClipboard.ts:113:10` | `createWebClipboardProviderBackend` | `structural-entity` | `contextual` | `object` | 19 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/host-web/src/webConnectivity.ts:17:10` | `createWebConnectivityBackend` | `structural-entity` | `contextual` | `object` | 4 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/host-web/src/webCursor.ts:5:10` | `createWebCursorBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
@@ -428,8 +428,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-web/src/webShell.ts:6:62` | `<module>` | `@flighthq/types:interface#ShellExternalBackend` | `contextual` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-web/src/webStorage.ts:20:34` | `<module>` | `structural-entity` | `variable` | `object` | 7 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/host-web/src/webStoragePersistence.ts:14:30` | `createWebWindowStoragePersistenceCapabilities` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-web/src/webStoragePersistence.ts:21:24` | `createWebWindowStoragePersistenceCapabilities` | `@flighthq/types:interface#WebWindowStoragePersistenceCapabilities` | `returned-variable` | `object` | 2 | blocked | — | `returned-variable-destination` |
-| `upstream/packages/host-web/src/webStoragePersistence.ts:31:24` | `createWebWorkerStoragePersistenceCapabilities` | `@flighthq/types:interface#WebWorkerStoragePersistenceCapabilities` | `returned-variable` | `object` | 1 | blocked | — | `returned-variable-destination` |
+| `upstream/packages/host-web/src/webStoragePersistence.ts:21:24` | `createWebWindowStoragePersistenceCapabilities` | `@flighthq/types:interface#WebWindowStoragePersistenceCapabilities` | `returned-variable` | `object` | 2 | ready | — | — |
+| `upstream/packages/host-web/src/webStoragePersistence.ts:31:24` | `createWebWorkerStoragePersistenceCapabilities` | `@flighthq/types:interface#WebWorkerStoragePersistenceCapabilities` | `returned-variable` | `object` | 1 | ready | — | — |
 | `upstream/packages/host-web/src/webStoragePersistence.ts:36:19` | `createPersistenceQueryBackend` | `structural-entity` | `variable` | `object` | 1 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/image/src/imageResource.ts:8:10` | `cloneImageResource` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/image/src/imageResource.ts:22:10` | `createCompressedImage` | `@flighthq/types:interface#CompressedImage` | `contextual` | `object` | 7 | ready | — | — |
@@ -466,9 +466,9 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/menu/src/menu.ts:48:10` | `createMenuHighlight` | `@flighthq/types:interface#MenuHighlight` | `contextual` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/menu/src/menu.ts:68:10` | `createMenuSelect` | `@flighthq/types:interface#MenuSelect` | `contextual` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/mesh/src/meshGeometry.ts:192:20` | `createMeshGeometryRuntime` | `@flighthq/types:interface#MeshGeometry` | `contextual` | `object` | 7 | ready | — | — |
-| `upstream/packages/midi/src/midiAccess.ts:21:18` | `createMidiAccessResource` | `@flighthq/types:interface#MidiAccess` | `returned-variable` | `object` | 0 | blocked | — | `returned-variable-destination` |
-| `upstream/packages/midi/src/midiPort.ts:52:16` | `createMidiInputPortResource` | `@flighthq/types:interface#MidiInputPort` | `returned-variable` | `object` | 1 | blocked | — | `field-set-mismatch`, `returned-variable-destination`, `spread-construction` |
-| `upstream/packages/midi/src/midiPort.ts:61:16` | `createMidiOutputPortResource` | `@flighthq/types:interface#MidiOutputPort` | `returned-variable` | `object` | 1 | blocked | — | `field-set-mismatch`, `returned-variable-destination`, `spread-construction` |
+| `upstream/packages/midi/src/midiAccess.ts:21:18` | `createMidiAccessResource` | `@flighthq/types:interface#MidiAccess` | `returned-variable` | `object` | 0 | ready | — | — |
+| `upstream/packages/midi/src/midiPort.ts:52:16` | `createMidiInputPortResource` | `@flighthq/types:interface#MidiInputPort` | `returned-variable` | `object` | 1 | blocked | — | `field-set-mismatch`, `spread-construction` |
+| `upstream/packages/midi/src/midiPort.ts:61:16` | `createMidiOutputPortResource` | `@flighthq/types:interface#MidiOutputPort` | `returned-variable` | `object` | 1 | blocked | — | `field-set-mismatch`, `spread-construction` |
 | `upstream/packages/midi/src/midiSubscription.ts:131:24` | `createMidiSubscription` | `generic-entity` | `contextual` | `other` | 0 | blocked | — | `generic-entity-destination`, `non-object-construction` |
 | `upstream/packages/node/src/viewport.ts:8:10` | `createViewport` | `@flighthq/types:interface#Viewport` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/notification/src/notification.ts:188:10` | `createNotificationResource` | `@flighthq/types:interface#Notification` | `contextual` | `object` | 3 | ready | — | — |
@@ -518,9 +518,9 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/shortcut/src/shortcutExplicitDependency.ts:85:15` | `createGlobalShortcut` | `@flighthq/types:interface#GlobalShortcut` | `contextual` | `object` | 2 | ready | — | — |
 | `upstream/packages/skeleton2d/src/skeleton2d.ts:13:10` | `cloneSkeleton2D` | `@flighthq/types:interface#Skeleton2D` | `contextual` | `object` | 5 | blocked | — | `field-set-mismatch` |
 | `upstream/packages/skeleton2d/src/skeleton2d.ts:152:10` | `createSkeleton2D` | `@flighthq/types:interface#Skeleton2D` | `contextual` | `object` | 5 | blocked | — | `field-set-mismatch` |
-| `upstream/packages/skeleton3d/src/skeleton3d.ts:15:17` | `cloneSkeleton3D` | `@flighthq/types:interface#Skeleton3D` | `returned-variable` | `object` | 5 | blocked | — | `returned-variable-destination` |
+| `upstream/packages/skeleton3d/src/skeleton3d.ts:15:17` | `cloneSkeleton3D` | `@flighthq/types:interface#Skeleton3D` | `returned-variable` | `object` | 5 | ready | — | — |
 | `upstream/packages/skeleton3d/src/skeleton3d.ts:49:10` | `cloneSkeleton3DJointHierarchy` | `@flighthq/types:interface#Skeleton3D` | `contextual` | `object` | 5 | ready | — | — |
-| `upstream/packages/skeleton3d/src/skeleton3d.ts:87:20` | `createSkeleton3D` | `@flighthq/types:interface#Skeleton3D` | `returned-variable` | `object` | 5 | blocked | — | `returned-variable-destination` |
+| `upstream/packages/skeleton3d/src/skeleton3d.ts:87:20` | `createSkeleton3D` | `@flighthq/types:interface#Skeleton3D` | `returned-variable` | `object` | 5 | ready | — | — |
 | `upstream/packages/spatial/src/bvh3D.ts:42:10` | `createBvhSpatialBackend3D` | `structural-entity` | `contextual` | `object` | 9 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/spatial/src/uniformGrid.ts:61:10` | `createUniformGridSpatialBackend2D` | `structural-entity` | `contextual` | `object` | 9 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/spatial/src/uniformGrid3D.ts:48:10` | `createUniformGridSpatialBackend3D` | `structural-entity` | `contextual` | `object` | 9 | blocked | — | `structural-entity-destination` |

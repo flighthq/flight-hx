@@ -1574,11 +1574,11 @@ class _HostElectron {
 
   public static function createElectronShortcutQueryBackend(electron:ElectronApi):ShortcutQueryBackend {
     var provider:{ >Entity, var isRegistered:String->flight._internal._Promise<Bool>; } = cast _Runtime.UNDEFINED;
-    provider = (cast createEntity(({ final __callArgument687:Dynamic = { isRegistered: function(accelerator:Accelerator):flight._internal._Promise<Bool> {
+    provider = (cast createEntity(({ final __callArgument687:Dynamic = ({ isRegistered: function(accelerator:Accelerator):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.resolve((cast electron.globalShortcut : ElectronGlobalShortcut).isRegistered((cast accelerator : String)));
       }));
-    } }; __callArgument687; })) : { >Entity, var isRegistered:String->flight._internal._Promise<Bool>; });
+    } } : ShortcutQueryBackend); __callArgument687; })) : ShortcutQueryBackend);
     return cast provider;
     return cast null;
   }
@@ -1601,7 +1601,7 @@ class _HostElectron {
     });
     globalShortcut = electron.globalShortcut;
     registrations = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
-    provider = (cast createEntity((cast { destroy: function():flight._internal._Promise<flight._internal._Nothing> {
+    provider = (cast createEntity((cast ({ destroy: function():flight._internal._Promise<flight._internal._Nothing> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var firstError:flight._internal._Any = cast _Runtime.UNDEFINED;
@@ -1683,7 +1683,7 @@ class _HostElectron {
           });
         })
       );
-    } } : Dynamic)) : { >Entity, var destroy:Void->flight._internal._Promise<flight._internal._Nothing>; var subscribe:String->(Void->Void)->flight._internal._Promise<flight._internal._Union2<{ var reason:String; @:optional var subscription:flight._internal._Any; }, { var reason:String; var subscription:Entity; }>>; var unsubscribe:ShortcutTriggerSubscription->flight._internal._Promise<{ var reason:String; }>; });
+    } } : ShortcutTriggerBackend) : Dynamic)) : ShortcutTriggerBackend);
     return cast provider;
     return cast null;
   }

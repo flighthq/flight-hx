@@ -3686,7 +3686,6 @@ function cppStructInitEntityFactoryConstruction(
   const call = createEntityCallForObjectLiteral(node, checker);
   if (!call) return undefined;
   const binding = entityFactoryDestinationCandidates(call, checker)
-    .filter((candidate) => candidate.route !== 'returned-variable')
     .map((candidate) => registry.resolveFactoryIdentityConstruction(candidate.type))
     .find((candidate) => candidate !== undefined);
   if (!binding) return undefined;

@@ -541,11 +541,11 @@
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createAnimationRootMotionExtractor"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#AnimationRootMotionExtractor",
       "schemaName": "AnimationRootMotionExtractor",
       "sites": [
@@ -565,9 +565,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 21,
           "destination": {
             "kind": "exact-entity",
@@ -583,7 +581,7 @@
           "line": 20,
           "normalizations": [],
           "source": "upstream/packages/animation/src/animationRootMotion.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -1629,11 +1627,11 @@
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createWebCanvasRenderSurfaceCreator"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#CanvasRenderSurfaceCreator",
       "schemaName": "CanvasRenderSurfaceCreator",
       "sites": [
@@ -1645,9 +1643,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 19,
           "destination": {
             "kind": "exact-entity",
@@ -1663,7 +1659,7 @@
           "line": 6,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webCanvasRenderSurface.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -3324,11 +3320,11 @@
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createMidiAccessResource"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#MidiAccess",
       "schemaName": "MidiAccess",
       "sites": [
@@ -3337,9 +3333,7 @@
             "fields": [],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 18,
           "destination": {
             "kind": "exact-entity",
@@ -3355,7 +3349,7 @@
           "line": 21,
           "normalizations": [],
           "source": "upstream/packages/midi/src/midiAccess.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -3377,7 +3371,6 @@
           },
           "blockers": [
             "field-set-mismatch",
-            "returned-variable-destination",
             "spread-construction"
           ],
           "column": 16,
@@ -3417,7 +3410,6 @@
           },
           "blockers": [
             "field-set-mismatch",
-            "returned-variable-destination",
             "spread-construction"
           ],
           "column": 16,
@@ -5446,12 +5438,12 @@
       ]
     },
     {
-      "blockedCalls": 2,
+      "blockedCalls": 0,
       "factories": [
         "createElectronShortcutQueryBackend",
         "createTauriShortcutQueryBackend"
       ],
-      "readyCalls": 0,
+      "readyCalls": 2,
       "schemaId": "@flighthq/types:interface#ShortcutQueryBackend",
       "schemaName": "ShortcutQueryBackend",
       "sites": [
@@ -5462,9 +5454,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 20,
           "destination": {
             "kind": "exact-entity",
@@ -5480,7 +5470,7 @@
           "line": 11,
           "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronShortcut.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -5489,9 +5479,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 20,
           "destination": {
             "kind": "exact-entity",
@@ -5507,17 +5495,17 @@
           "line": 11,
           "normalizations": [],
           "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 2,
+      "blockedCalls": 0,
       "factories": [
         "createElectronShortcutTriggerBackend",
         "createTauriShortcutTriggerBackend"
       ],
-      "readyCalls": 0,
+      "readyCalls": 2,
       "schemaId": "@flighthq/types:interface#ShortcutTriggerBackend",
       "schemaName": "ShortcutTriggerBackend",
       "sites": [
@@ -5530,9 +5518,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 20,
           "destination": {
             "kind": "exact-entity",
@@ -5548,7 +5534,7 @@
           "line": 32,
           "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronShortcut.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -5559,9 +5545,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 20,
           "destination": {
             "kind": "exact-entity",
@@ -5577,7 +5561,7 @@
           "line": 33,
           "normalizations": [],
           "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -5656,13 +5640,13 @@
       ]
     },
     {
-      "blockedCalls": 2,
+      "blockedCalls": 0,
       "factories": [
         "cloneSkeleton3D",
         "cloneSkeleton3DJointHierarchy",
         "createSkeleton3D"
       ],
-      "readyCalls": 1,
+      "readyCalls": 3,
       "schemaId": "@flighthq/types:interface#Skeleton3D",
       "schemaName": "Skeleton3D",
       "sites": [
@@ -5677,9 +5661,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 17,
           "destination": {
             "kind": "exact-entity",
@@ -5695,7 +5677,7 @@
           "line": 15,
           "normalizations": [],
           "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -5737,9 +5719,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 20,
           "destination": {
             "kind": "exact-entity",
@@ -5755,7 +5735,7 @@
           "line": 87,
           "normalizations": [],
           "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -6557,11 +6537,11 @@
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createWebWindowStoragePersistenceCapabilities"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#WebWindowStoragePersistenceCapabilities",
       "schemaName": "WebWindowStoragePersistenceCapabilities",
       "sites": [
@@ -6573,9 +6553,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 24,
           "destination": {
             "kind": "exact-entity",
@@ -6591,16 +6569,16 @@
           "line": 21,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createWebWorkerStoragePersistenceCapabilities"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#WebWorkerStoragePersistenceCapabilities",
       "schemaName": "WebWorkerStoragePersistenceCapabilities",
       "sites": [
@@ -6611,9 +6589,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "returned-variable-destination"
-          ],
+          "blockers": [],
           "column": 24,
           "destination": {
             "kind": "exact-entity",
@@ -6629,7 +6605,7 @@
           "line": 31,
           "normalizations": [],
           "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -7709,9 +7685,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 21,
       "destination": {
         "kind": "exact-entity",
@@ -7727,7 +7701,7 @@
       "line": 20,
       "normalizations": [],
       "source": "upstream/packages/animation/src/animationRootMotion.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11576,9 +11550,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
         "kind": "exact-entity",
@@ -11594,7 +11566,7 @@
       "line": 11,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShortcut.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11605,9 +11577,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
         "kind": "exact-entity",
@@ -11623,7 +11593,7 @@
       "line": 32,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShortcut.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12675,9 +12645,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
         "kind": "exact-entity",
@@ -12693,7 +12661,7 @@
       "line": 11,
       "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12704,9 +12672,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
         "kind": "exact-entity",
@@ -12722,7 +12688,7 @@
       "line": 33,
       "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -13256,9 +13222,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 19,
       "destination": {
         "kind": "exact-entity",
@@ -13274,7 +13238,7 @@
       "line": 6,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webCanvasRenderSurface.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14343,9 +14307,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 24,
       "destination": {
         "kind": "exact-entity",
@@ -14361,7 +14323,7 @@
       "line": 21,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14370,9 +14332,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 24,
       "destination": {
         "kind": "exact-entity",
@@ -14388,7 +14348,7 @@
       "line": 31,
       "normalizations": [],
       "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -15487,9 +15447,7 @@
         "fields": [],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 18,
       "destination": {
         "kind": "exact-entity",
@@ -15505,7 +15463,7 @@
       "line": 21,
       "normalizations": [],
       "source": "upstream/packages/midi/src/midiAccess.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -15516,7 +15474,6 @@
       },
       "blockers": [
         "field-set-mismatch",
-        "returned-variable-destination",
         "spread-construction"
       ],
       "column": 16,
@@ -15545,7 +15502,6 @@
       },
       "blockers": [
         "field-set-mismatch",
-        "returned-variable-destination",
         "spread-construction"
       ],
       "column": 16,
@@ -16989,9 +16945,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
         "kind": "exact-entity",
@@ -17007,7 +16961,7 @@
       "line": 15,
       "normalizations": [],
       "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17049,9 +17003,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "returned-variable-destination"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
         "kind": "exact-entity",
@@ -17067,7 +17019,7 @@
       "line": 87,
       "normalizations": [],
       "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17745,14 +17697,14 @@
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 207,
+    "blockedEntityCalls": 196,
     "calls": 368,
     "exactEntityCalls": 191,
     "exactEntitySchemas": 148,
     "exactNonEntityCalls": 9,
     "genericEntityCalls": 3,
     "normalizedFieldOrderCalls": 24,
-    "readyEntityCalls": 152,
+    "readyEntityCalls": 163,
     "structuralEntityCalls": 141,
     "unresolvedCalls": 24
   },

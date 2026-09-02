@@ -910,13 +910,13 @@ class _HostTauri {
 
   public static function createTauriShortcutQueryBackend(tauri:TauriApi):ShortcutQueryBackend {
     var provider:{ >Entity, var isRegistered:String->flight._internal._Promise<Bool>; } = cast _Runtime.UNDEFINED;
-    provider = (cast createEntity(({ final __callArgument301:Dynamic = { isRegistered: function(accelerator:Accelerator):flight._internal._Promise<Bool> {
+    provider = (cast createEntity(({ final __callArgument301:Dynamic = ({ isRegistered: function(accelerator:Accelerator):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.resolve(flight._internal._Async.protect(function():Dynamic {
         return flight._internal._Async.flatMap((cast tauri.globalShortcut : TauriGlobalShortcutPlugin).isRegistered((cast accelerator : String)), function(__awaitValue300:Dynamic):Dynamic {
           return flight._internal._Async.resolve(__awaitValue300);
         });
       }));
-    } }; __callArgument301; })) : { >Entity, var isRegistered:String->flight._internal._Promise<Bool>; });
+    } } : ShortcutQueryBackend); __callArgument301; })) : ShortcutQueryBackend);
     return cast provider;
     return cast null;
   }
@@ -945,7 +945,7 @@ class _HostTauri {
     globalShortcut = tauri.globalShortcut;
     registrations = _Runtime.construct(flight._internal._HostValueLut.get('Map'), []);
     pending = _Runtime.construct(flight._internal._HostValueLut.get('Set'), []);
-    provider = (cast createEntity((cast { destroy: function():flight._internal._Promise<flight._internal._Nothing> {
+    provider = (cast createEntity((cast ({ destroy: function():flight._internal._Promise<flight._internal._Nothing> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           var firstError:flight._internal._Any = cast _Runtime.UNDEFINED;
@@ -1043,7 +1043,7 @@ class _HostTauri {
           });
         })
       );
-    } } : Dynamic)) : { >Entity, var destroy:Void->flight._internal._Promise<flight._internal._Nothing>; var subscribe:String->(Void->Void)->flight._internal._Promise<{ var reason:String; var subscription:Entity; }>; var unsubscribe:ShortcutTriggerSubscription->flight._internal._Promise<{ var reason:String; }>; });
+    } } : ShortcutTriggerBackend) : Dynamic)) : ShortcutTriggerBackend);
     return cast provider;
     return cast null;
   }

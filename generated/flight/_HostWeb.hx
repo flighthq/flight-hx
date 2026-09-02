@@ -911,7 +911,7 @@ class _HostWeb {
 
   public static function createWebCanvasRenderSurfaceCreator():CanvasRenderSurfaceCreator {
     var creator:{ >Entity, var createRenderSurface:Float->Float->Float->flight._internal.dom.HTMLCanvasElement; var destroyRenderSurface:flight._internal.dom.HTMLCanvasElement->Void; } = cast _Runtime.UNDEFINED;
-    creator = (cast createEntity(({ final __callArgument137:Dynamic = { createRenderSurface: function(width:Float, height:Float, pixelRatio:Float):flight._internal.dom.HTMLCanvasElement {
+    creator = (cast createEntity(({ final __callArgument137:Dynamic = ({ createRenderSurface: function(width:Float, height:Float, pixelRatio:Float):flight._internal.dom.HTMLCanvasElement {
       var canvas:flight._internal.dom.HTMLCanvasElement = cast _Runtime.UNDEFINED;
       canvas = flight._internal.backend.DomDocumentBackend.call(flight._internal.backend.DomDocumentBackend.value(), 'createElement', cast (['canvas'] : Array<Dynamic>));
       ((cast (cast canvas : flight._internal.dom.HTMLCanvasElement).style : flight._internal.dom.CSSStyleDeclaration).width = '' + Std.string(width) + 'px');
@@ -923,7 +923,7 @@ class _HostWeb {
     }, destroyRenderSurface: function(canvas:flight._internal.dom.HTMLCanvasElement):Void {
       flight._internal.backend.CanvasElementBackend.setField(canvas, 'width', 0.0);
       flight._internal.backend.CanvasElementBackend.setField(canvas, 'height', 0.0);
-    } }; __callArgument137; })) : { >Entity, var createRenderSurface:Float->Float->Float->flight._internal.dom.HTMLCanvasElement; var destroyRenderSurface:flight._internal.dom.HTMLCanvasElement->Void; });
+    } } : CanvasRenderSurfaceCreator); __callArgument137; })) : CanvasRenderSurfaceCreator);
     _Runtime.setIndex(creator, EntityRuntimeKey, { binding: null });
     return cast creator;
     return cast null;
@@ -7007,14 +7007,14 @@ class _HostWeb {
         });
       }));
     } }; __callArgument1445; })) : { >Entity, var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; });
-    capabilities = (cast createEntity((cast { persistenceQuery: (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument1453:Dynamic = api; __callArgument1453; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }), persistenceRequest: persistenceRequest } : Dynamic)) : { >Entity, var persistenceQuery:{ >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }; var persistenceRequest:{ >Entity, var requestPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }; });
+    capabilities = (cast createEntity((cast ({ persistenceQuery: (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument1453:Dynamic = api; __callArgument1453; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }), persistenceRequest: persistenceRequest } : WebWindowStoragePersistenceCapabilities) : Dynamic)) : WebWindowStoragePersistenceCapabilities);
     return cast capabilities;
     return cast null;
   }
 
   public static function createWebWorkerStoragePersistenceCapabilities(api:WebWorkerStoragePersistenceApi):WebWorkerStoragePersistenceCapabilities {
     var capabilities:{ >Entity, var persistenceQuery:{ >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }; } = cast _Runtime.UNDEFINED;
-    capabilities = (cast createEntity((cast { persistenceQuery: (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument1457:Dynamic = api; __callArgument1457; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }) } : Dynamic)) : { >Entity, var persistenceQuery:{ >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }; });
+    capabilities = (cast createEntity((cast ({ persistenceQuery: (cast _HostWeb.createPersistenceQueryBackend__webStoragePersistence(({ final __callArgument1457:Dynamic = api; __callArgument1457; })) : { >Entity, var getPersistence:Void->flight._internal._Promise<StoragePersistenceResult>; }) } : WebWorkerStoragePersistenceCapabilities) : Dynamic)) : WebWorkerStoragePersistenceCapabilities);
     return cast capabilities;
     return cast null;
   }

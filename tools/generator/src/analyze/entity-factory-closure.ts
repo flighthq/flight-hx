@@ -28,7 +28,6 @@ export type EntityFactoryBlocker =
   | 'non-object-construction'
   | 'omitted-construction'
   | 'parameterized-destination'
-  | 'returned-variable-destination'
   | 'spread-construction'
   | 'structural-entity-destination'
   | 'unresolved-destination'
@@ -188,8 +187,6 @@ function auditFactorySite(
   else if (destinationKind === 'structural-entity') blockers.push('structural-entity-destination');
   else if (destinationKind === 'unresolved') blockers.push('unresolved-destination');
   if (exact && isParameterizedEntityFactoryType(exact.type, checker)) blockers.push('parameterized-destination');
-  if (exact?.route === 'returned-variable') blockers.push('returned-variable-destination');
-
   const object = entityFactoryObjectLiteral(call);
   let argument: EntityFactoryClosureSite['argument'];
   if (object) {

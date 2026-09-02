@@ -4406,14 +4406,14 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 207,
+      blockedEntityCalls: 196,
       calls: 368,
       exactEntityCalls: 191,
       exactEntitySchemas: 148,
       exactNonEntityCalls: 9,
       genericEntityCalls: 3,
       normalizedFieldOrderCalls: 24,
-      readyEntityCalls: 152,
+      readyEntityCalls: 163,
       structuralEntityCalls: 141,
       unresolvedCalls: 24,
     });
@@ -4446,9 +4446,9 @@ describe('typed struct analysis', () => {
     expect(
       entityFactories.sites.find((site) => site.factory.name === 'createElectronShortcutTriggerBackend'),
     ).toMatchObject({
-      blockers: ['returned-variable-destination'],
+      blockers: [],
       destination: { kind: 'exact-entity', route: 'returned-variable', schemaName: 'ShortcutTriggerBackend' },
-      status: 'blocked',
+      status: 'ready',
     });
     expect(
       entityFactories.sites.find(
