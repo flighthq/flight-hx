@@ -181,6 +181,7 @@ typedef SavedGlRenderState__glRenderStateBracket = { var activeTexture:Float; va
 typedef GlRenderTargetStorage__glRenderTarget = { >RenderTargetAxes, var framebuffer:flight._internal.dom.WebGLFramebuffer; var resolveFramebuffer:Null<flight._internal.dom.WebGLFramebuffer>; var textures:Array<flight._internal.dom.WebGLTexture>; var depthTexture:Null<flight._internal.dom.WebGLTexture>; var colorRenderbuffers:Array<flight._internal.dom.WebGLRenderbuffer>; var depthStencilRenderbuffer:Null<flight._internal.dom.WebGLRenderbuffer>; };
 
 @:noCompletion
+@:keepInit
 class _RenderGl {
   @:allow(flight)
   @:keep
@@ -1011,6 +1012,7 @@ class _RenderGl {
   public static var _standardGlBlendRealizations__glDraw:KeyedTable<GlBlendRealization> = (cast createKeyedTable((cast 'GlBlendRealization' : String), (cast 'Normal' : String)) : KeyedTable<GlBlendRealization>);
 
   @:noCompletion
+  @:keep
   public static function __flightModuleInitialize__glDraw():Bool {
     for (__iteration3 in _Runtime.iterable(_RenderGl.DEFAULT_GL_BLEND_MODES__glDraw)) {
       var mode:String = flight._internal._StaticIndex.readArray(__iteration3, 0.0);
@@ -1022,6 +1024,7 @@ class _RenderGl {
   }
 
   @:noCompletion
+  @:keep
   public static final __flightModuleInitialized__glDraw:Bool = (cast _RenderGl.__flightModuleInitialize__glDraw() : Bool);
 
   public static var _provider__glElement:Null<GlRenderSurfaceProvider> = _Runtime.explicitNull();

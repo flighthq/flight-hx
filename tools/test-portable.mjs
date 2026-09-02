@@ -46,6 +46,31 @@ function runTarget(target) {
   const executable = path.join(buildDirectory, process.platform === 'win32' ? 'CoreSmoke.exe' : 'CoreSmoke');
   if (!existsSync(executable)) throw new Error(`hxcpp did not produce ${executable}`);
   run(executable, []);
+
+  process.stdout.write(`\n[portable:${target}] compiling and running ModuleInitializerDceSmoke with full DCE\n`);
+  const dceBuildDirectory = path.join(workspace, 'build', 'portable', `${target}-dce`);
+  rmSync(dceBuildDirectory, { force: true, recursive: true });
+  mkdirSync(dceBuildDirectory, { recursive: true });
+  runHaxe([
+    '-cp',
+    'src',
+    '-cp',
+    'generated',
+    '-cp',
+    'tests/haxe',
+    '--main',
+    'ModuleInitializerDceSmoke',
+    '-dce',
+    'full',
+    '--cpp',
+    dceBuildDirectory,
+  ]);
+  const dceExecutable = path.join(
+    dceBuildDirectory,
+    process.platform === 'win32' ? 'ModuleInitializerDceSmoke.exe' : 'ModuleInitializerDceSmoke',
+  );
+  if (!existsSync(dceExecutable)) throw new Error(`hxcpp did not produce ${dceExecutable}`);
+  run(dceExecutable, []);
 }
 
 function runHaxe(arguments_) {

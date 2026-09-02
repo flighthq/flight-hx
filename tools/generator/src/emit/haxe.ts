@@ -221,6 +221,7 @@ export function emitHaxeModule(module: IrModule): string {
   // build.
   if (valueDeclarations.length === 0) return finalizeStaticLoweringEmission(lines.join('\n'));
   if (module.namespaceNoCompletion) lines.push('@:noCompletion');
+  if (valueDeclarations.some((declaration) => declaration.moduleInitializer)) lines.push('@:keepInit');
   lines.push(`class ${module.name} {`);
   for (const declaration of typeDeclarations) {
     if (declaration.kind !== 'enum') continue;
@@ -243,6 +244,7 @@ export function emitHaxeModule(module: IrModule): string {
   for (const declaration of valueDeclarations) {
     const emitted = [
       ...(declaration.noCompletion ? ['@:noCompletion'] : []),
+      ...(declaration.moduleInitializer ? ['@:keep'] : []),
       ...(declaration.allowPackage ? [`@:allow(${declaration.allowPackage})`, '@:keep'] : []),
       ...emitModuleValue(declaration),
     ];
@@ -2473,7 +2475,6 @@ function emitExpression(expression: IrExpression): string {
             throw new Error(`Optional structural assignment is not supported: ${expression.left.name}`);
           }
           if (safeName(expression.left.name) !== expression.left.name) {
-            const current = `_Runtime.field(${object}, ${quote(expression.left.name)})`;
             if (expression.operator === '??=') {
               const ownerTemporary = `__nullishOwner${String(temporaryIndex++)}`;
               const valueTemporary = `__nullishValue${String(temporaryIndex++)}`;
@@ -2482,7 +2483,9 @@ function emitExpression(expression: IrExpression): string {
             if (expression.operator === '=') {
               return `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitExpression(expression.right)})`;
             }
-            return `_Runtime.setField(${object}, ${quote(expression.left.name)}, ${emitCompoundOperation(current, expression.operator.slice(0, -1), expression.right, compoundUsesRuntimeNumber(expression))})`;
+            const ownerTemporary = `__compoundOwner${String(temporaryIndex++)}`;
+            const current = `_Runtime.field(${ownerTemporary}, ${quote(expression.left.name)})`;
+            return `({ final ${ownerTemporary}:Dynamic = ${object}; _Runtime.setField(${ownerTemporary}, ${quote(expression.left.name)}, ${emitCompoundOperation(current, expression.operator.slice(0, -1), expression.right, compoundUsesRuntimeNumber(expression))}); })`;
           }
           if (expression.operator === '??=') {
             const left = expression.left;

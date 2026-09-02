@@ -71,8 +71,11 @@ describe('TypeScript lowering and Haxe emission', () => {
     });
 
     expect(lowered.diagnostics).toEqual([]);
+    expect(output).toContain('@:keepInit\nclass RegistryFixture');
+    expect(output).toContain('  @:noCompletion\n  @:keep\n  public static function __flightModuleInitialize():Bool');
     expect(output).toContain('static function __flightModuleInitialize():Bool');
     expect(output).toContain('for (__iteration');
+    expect(output).toContain('  @:noCompletion\n  @:keep\n  public static final __flightModuleInitialized:Bool');
     expect(output).toContain(
       'static final __flightModuleInitialized:Bool = (cast RegistryFixture.__flightModuleInitialize() : Bool);',
     );
@@ -82,6 +85,35 @@ describe('TypeScript lowering and Haxe emission', () => {
     expect(output.indexOf('static var registry')).toBeLessThan(
       output.indexOf('static final __flightModuleInitialized'),
     );
+  });
+
+  it('evaluates reserved-name structural compound-assignment receivers once', () => {
+    const { checker, source } = typedSource(
+      '/workspace/upstream/packages/example/src/compound.ts',
+      `
+        interface State {
+          default: number;
+        }
+
+        export function add(getState: () => State, amount: number): number {
+          return getState().default += amount;
+        }
+      `,
+    );
+    const lowered = lowerTypeScriptSource(source, '@flighthq/example', '/workspace', checker);
+    const output = emitHaxeModule({
+      declarations: lowered.declarations,
+      imports: [],
+      name: 'CompoundFixture',
+      packageName: '@flighthq/example',
+    });
+
+    expect(lowered.diagnostics).toEqual([]);
+    const compoundAssignment = output.match(
+      /\(\{ final (__compoundOwner\d+):Dynamic = [^;]+; _Runtime\.setField\(\1, 'default',[\s\S]*?; \}\)/u,
+    );
+    expect(compoundAssignment).not.toBeNull();
+    expect(compoundAssignment?.[0].match(/getState/gu) ?? []).toHaveLength(1);
   });
 
   it('orders static fields used through eagerly called helpers before their consumers', () => {

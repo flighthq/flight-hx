@@ -296,6 +296,7 @@ export interface IrFunctionDeclaration {
   haxeBody?: string | undefined;
   haxeCondition?: string | undefined;
   kind: 'function';
+  moduleInitializer?: true | undefined;
   name: string;
   noCompletion?: true | undefined;
   origin: SourceOrigin;
@@ -318,6 +319,7 @@ export interface IrVariableDeclaration extends IrVariable {
   allowPackage?: string | undefined;
   exported: boolean;
   kind: 'variable';
+  moduleInitializer?: true | undefined;
   noCompletion?: true | undefined;
   origin: SourceOrigin;
 }
