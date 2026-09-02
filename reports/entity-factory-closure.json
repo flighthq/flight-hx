@@ -3354,11 +3354,11 @@
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createMidiInputPortResource"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#MidiInputPort",
       "schemaName": "MidiInputPort",
       "sites": [
@@ -3369,10 +3369,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch",
-            "spread-construction"
-          ],
+          "blockers": [],
           "column": 16,
           "destination": {
             "kind": "exact-entity",
@@ -3386,18 +3383,20 @@
             "name": "createMidiInputPortResource"
           },
           "line": 52,
-          "normalizations": [],
+          "normalizations": [
+            "spread-projection"
+          ],
           "source": "upstream/packages/midi/src/midiPort.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createMidiOutputPortResource"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#MidiOutputPort",
       "schemaName": "MidiOutputPort",
       "sites": [
@@ -3408,10 +3407,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch",
-            "spread-construction"
-          ],
+          "blockers": [],
           "column": 16,
           "destination": {
             "kind": "exact-entity",
@@ -3425,9 +3421,11 @@
             "name": "createMidiOutputPortResource"
           },
           "line": 61,
-          "normalizations": [],
+          "normalizations": [
+            "spread-projection"
+          ],
           "source": "upstream/packages/midi/src/midiPort.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -6051,12 +6049,12 @@
       ]
     },
     {
-      "blockedCalls": 2,
+      "blockedCalls": 0,
       "factories": [
         "cloneTexture",
         "createTexture2D"
       ],
-      "readyCalls": 0,
+      "readyCalls": 2,
       "schemaId": "@flighthq/types:interface#Texture2D",
       "schemaName": "Texture2D",
       "sites": [
@@ -6068,10 +6066,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch",
-            "spread-construction"
-          ],
+          "blockers": [],
           "column": 14,
           "destination": {
             "kind": "exact-entity",
@@ -6085,9 +6080,11 @@
             "name": "cloneTexture"
           },
           "line": 46,
-          "normalizations": [],
+          "normalizations": [
+            "spread-projection"
+          ],
           "source": "upstream/packages/texture/src/texture.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -6097,10 +6094,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-set-mismatch",
-            "spread-construction"
-          ],
+          "blockers": [],
           "column": 19,
           "destination": {
             "kind": "exact-entity",
@@ -6114,9 +6108,11 @@
             "name": "createTexture2D"
           },
           "line": 153,
-          "normalizations": [],
+          "normalizations": [
+            "spread-projection"
+          ],
           "source": "upstream/packages/texture/src/texture.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -15472,10 +15468,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 16,
       "destination": {
         "kind": "exact-entity",
@@ -15489,9 +15482,11 @@
         "name": "createMidiInputPortResource"
       },
       "line": 52,
-      "normalizations": [],
+      "normalizations": [
+        "spread-projection"
+      ],
       "source": "upstream/packages/midi/src/midiPort.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -15500,10 +15495,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 16,
       "destination": {
         "kind": "exact-entity",
@@ -15517,9 +15509,11 @@
         "name": "createMidiOutputPortResource"
       },
       "line": 61,
-      "normalizations": [],
+      "normalizations": [
+        "spread-projection"
+      ],
       "source": "upstream/packages/midi/src/midiPort.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17340,10 +17334,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
         "kind": "exact-entity",
@@ -17357,9 +17348,11 @@
         "name": "cloneTexture"
       },
       "line": 46,
-      "normalizations": [],
+      "normalizations": [
+        "spread-projection"
+      ],
       "source": "upstream/packages/texture/src/texture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17543,10 +17536,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-set-mismatch",
-        "spread-construction"
-      ],
+      "blockers": [],
       "column": 19,
       "destination": {
         "kind": "exact-entity",
@@ -17560,9 +17550,11 @@
         "name": "createTexture2D"
       },
       "line": 153,
-      "normalizations": [],
+      "normalizations": [
+        "spread-projection"
+      ],
       "source": "upstream/packages/texture/src/texture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17697,14 +17689,15 @@
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 196,
+    "blockedEntityCalls": 192,
     "calls": 368,
     "exactEntityCalls": 191,
     "exactEntitySchemas": 148,
     "exactNonEntityCalls": 9,
     "genericEntityCalls": 3,
     "normalizedFieldOrderCalls": 24,
-    "readyEntityCalls": 163,
+    "normalizedSpreadProjectionCalls": 4,
+    "readyEntityCalls": 167,
     "structuralEntityCalls": 141,
     "unresolvedCalls": 24
   },

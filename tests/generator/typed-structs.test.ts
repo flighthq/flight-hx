@@ -4201,6 +4201,70 @@ describe('typed struct analysis', () => {
     );
   });
 
+  it('projects a spread result into the nominal struct-init identity', () => {
+    const candidate: TypedStructCandidate = {
+      emission: 'direct',
+      name: 'Camera2D',
+      packageName: '@flighthq/types',
+      purpose: 'struct-init spread fixture',
+      source: 'upstream/packages/types/src/CameraPilot.ts',
+    };
+    const result = lowerFixture(
+      `
+        export interface Camera2D { x: number; y: number; }
+        export function createCamera2D(): Camera2D {
+          const base = { x: 1 };
+          return { ...base, y: 2 };
+        }
+      `,
+      candidate,
+    );
+    const declaration = result.lowered.declarations.find(
+      (item) => item.kind === 'type' && item.name === candidate.name,
+    );
+    if (!declaration || declaration.kind !== 'type') throw new Error('Expected Camera2D spread fixture type');
+    declaration.cppStructInitSchemaId = candidateId(candidate);
+    const fixtureModule = {
+      declarations: result.lowered.declarations,
+      haxePackage: 'flight.types',
+      imports: [],
+      name: 'CameraPilot',
+      packageName: '@flighthq/types',
+    };
+    sealCppStructInitConstructors([fixtureModule]);
+    const output = emitHaxeModule(fixtureModule);
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain('final __structInitSource:Dynamic = _Runtime.mergeObjects([base, { y: 2.0 }]);');
+    expect(output).toContain(
+      "({ x: _Runtime.field(__structInitSource, 'x'), y: _Runtime.field(__structInitSource, 'y') } : Camera2D)",
+    );
+
+    const fixtureDirectory = path.resolve('build/haxe-struct-init-spread-fixture');
+    const packageDirectory = path.join(fixtureDirectory, 'flight', 'types');
+    rmSync(fixtureDirectory, { force: true, recursive: true });
+    mkdirSync(packageDirectory, { recursive: true });
+    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), output);
+    writeFileSync(
+      path.join(fixtureDirectory, 'Main.hx'),
+      `
+        class Main {
+          static function main() {
+            final camera = flight.types.CameraPilot.createCamera2D();
+            if (!Std.isOfType(camera, flight.types.CameraPilot.Camera2D)) throw 'not a class';
+            if (camera.x != 1 || camera.y != 2) throw 'bad projected fields';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync('node', ['tools/haxe.mjs', '-cp', fixtureDirectory, '-cp', 'src', '--main', 'Main', '--interp'], {
+        cwd: path.resolve('.'),
+        stdio: 'pipe',
+      }),
+    ).not.toThrow();
+  });
+
   it('censuses class migration flows and observability by canonical schema', () => {
     const audit = classAuditFixture(
       `
@@ -4406,14 +4470,15 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 196,
+      blockedEntityCalls: 192,
       calls: 368,
       exactEntityCalls: 191,
       exactEntitySchemas: 148,
       exactNonEntityCalls: 9,
       genericEntityCalls: 3,
       normalizedFieldOrderCalls: 24,
-      readyEntityCalls: 163,
+      normalizedSpreadProjectionCalls: 4,
+      readyEntityCalls: 167,
       structuralEntityCalls: 141,
       unresolvedCalls: 24,
     });

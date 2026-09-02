@@ -9,11 +9,12 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | Production createEntity calls | 368 |
 | Exact concrete Entity calls | 191 |
 | Exact concrete Entity schemas | 148 |
-| Constructor-ready Entity calls | 163 |
-| Blocked Entity calls | 196 |
+| Constructor-ready Entity calls | 167 |
+| Blocked Entity calls | 192 |
 | Bare Entity calls | 0 |
 | Generic Entity calls | 3 |
 | Field-order-normalized calls | 24 |
+| Spread-projected calls | 4 |
 | Structural Entity calls | 141 |
 | Exact non-Entity calls | 9 |
 | Unresolved calls | 24 |
@@ -89,8 +90,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#MediaSessionBackend` | 1 | 0 | 1 | `createWebMediaSessionBackend` |
 | `@flighthq/types:interface#MeshGeometry` | 1 | 1 | 0 | `createMeshGeometryRuntime` |
 | `@flighthq/types:interface#MidiAccess` | 1 | 1 | 0 | `createMidiAccessResource` |
-| `@flighthq/types:interface#MidiInputPort` | 1 | 0 | 1 | `createMidiInputPortResource` |
-| `@flighthq/types:interface#MidiOutputPort` | 1 | 0 | 1 | `createMidiOutputPortResource` |
+| `@flighthq/types:interface#MidiInputPort` | 1 | 1 | 0 | `createMidiInputPortResource` |
+| `@flighthq/types:interface#MidiOutputPort` | 1 | 1 | 0 | `createMidiOutputPortResource` |
 | `@flighthq/types:interface#Notification` | 1 | 1 | 0 | `createNotificationResource` |
 | `@flighthq/types:interface#Obb` | 1 | 1 | 0 | `createObb` |
 | `@flighthq/types:interface#OrbitCameraController` | 1 | 1 | 0 | `createOrbitCameraController` |
@@ -143,7 +144,7 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `@flighthq/types:interface#SpritesheetAnimation` | 1 | 1 | 0 | `createSpritesheetAnimation` |
 | `@flighthq/types:interface#StandardMaterial` | 1 | 1 | 0 | `createStandardMaterial` |
 | `@flighthq/types:interface#StorageSignals` | 1 | 1 | 0 | `createStorageSignals` |
-| `@flighthq/types:interface#Texture2D` | 2 | 0 | 2 | `cloneTexture`, `createTexture2D` |
+| `@flighthq/types:interface#Texture2D` | 2 | 2 | 0 | `cloneTexture`, `createTexture2D` |
 | `@flighthq/types:interface#TextureAtlas` | 1 | 1 | 0 | `createTextureAtlas` |
 | `@flighthq/types:interface#TextureAtlasRegion` | 1 | 1 | 0 | `createTextureAtlasRegion` |
 | `@flighthq/types:interface#Transform2D` | 1 | 1 | 0 | `createTransform2D` |
@@ -467,8 +468,8 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/menu/src/menu.ts:68:10` | `createMenuSelect` | `@flighthq/types:interface#MenuSelect` | `contextual` | `object` | 1 | not-entity | — | — |
 | `upstream/packages/mesh/src/meshGeometry.ts:192:20` | `createMeshGeometryRuntime` | `@flighthq/types:interface#MeshGeometry` | `contextual` | `object` | 7 | ready | — | — |
 | `upstream/packages/midi/src/midiAccess.ts:21:18` | `createMidiAccessResource` | `@flighthq/types:interface#MidiAccess` | `returned-variable` | `object` | 0 | ready | — | — |
-| `upstream/packages/midi/src/midiPort.ts:52:16` | `createMidiInputPortResource` | `@flighthq/types:interface#MidiInputPort` | `returned-variable` | `object` | 1 | blocked | — | `field-set-mismatch`, `spread-construction` |
-| `upstream/packages/midi/src/midiPort.ts:61:16` | `createMidiOutputPortResource` | `@flighthq/types:interface#MidiOutputPort` | `returned-variable` | `object` | 1 | blocked | — | `field-set-mismatch`, `spread-construction` |
+| `upstream/packages/midi/src/midiPort.ts:52:16` | `createMidiInputPortResource` | `@flighthq/types:interface#MidiInputPort` | `returned-variable` | `object` | 1 | ready | `spread-projection` | — |
+| `upstream/packages/midi/src/midiPort.ts:61:16` | `createMidiOutputPortResource` | `@flighthq/types:interface#MidiOutputPort` | `returned-variable` | `object` | 1 | ready | `spread-projection` | — |
 | `upstream/packages/midi/src/midiSubscription.ts:131:24` | `createMidiSubscription` | `generic-entity` | `contextual` | `other` | 0 | blocked | — | `generic-entity-destination`, `non-object-construction` |
 | `upstream/packages/node/src/viewport.ts:8:10` | `createViewport` | `@flighthq/types:interface#Viewport` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/notification/src/notification.ts:188:10` | `createNotificationResource` | `@flighthq/types:interface#Notification` | `contextual` | `object` | 3 | ready | — | — |
@@ -531,14 +532,14 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/texture/src/renderTexture.ts:18:13` | `createRenderTexture` | `@flighthq/types:interface#RenderTarget` | `contextual` | `object` | 12 | blocked | — | `field-set-mismatch` |
 | `upstream/packages/texture/src/sampler.ts:7:10` | `cloneSampler` | `@flighthq/types:interface#Sampler` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/texture/src/sampler.ts:51:10` | `createSampler` | `@flighthq/types:interface#Sampler` | `contextual` | `object` | 6 | ready | — | — |
-| `upstream/packages/texture/src/texture.ts:46:14` | `cloneTexture` | `@flighthq/types:interface#Texture2D` | `contextual` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
+| `upstream/packages/texture/src/texture.ts:46:14` | `cloneTexture` | `@flighthq/types:interface#Texture2D` | `contextual` | `object` | 2 | ready | `spread-projection` | — |
 | `upstream/packages/texture/src/texture.ts:48:14` | `cloneTexture` | `@flighthq/types:type#Texture` | `return` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
 | `upstream/packages/texture/src/texture.ts:54:14` | `cloneTexture` | `@flighthq/types:type#Texture` | `return` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
 | `upstream/packages/texture/src/texture.ts:59:14` | `cloneTexture` | `@flighthq/types:type#Texture` | `return` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
 | `upstream/packages/texture/src/texture.ts:119:17` | `createTexture` | `@flighthq/types:type#Texture` | `assignment` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
 | `upstream/packages/texture/src/texture.ts:126:17` | `createTexture` | `@flighthq/types:type#Texture` | `assignment` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
 | `upstream/packages/texture/src/texture.ts:133:17` | `createTexture` | `@flighthq/types:type#Texture` | `assignment` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
-| `upstream/packages/texture/src/texture.ts:153:19` | `createTexture2D` | `@flighthq/types:interface#Texture2D` | `contextual` | `object` | 2 | blocked | — | `field-set-mismatch`, `spread-construction` |
+| `upstream/packages/texture/src/texture.ts:153:19` | `createTexture2D` | `@flighthq/types:interface#Texture2D` | `contextual` | `object` | 2 | ready | `spread-projection` | — |
 | `upstream/packages/texture/src/videoTexture.ts:97:17` | `createVideoImageResource` | `@flighthq/types:interface#Image` | `contextual` | `object` | 7 | ready | `field-order` | — |
 | `upstream/packages/textureatlas/src/textureAtlas.ts:6:10` | `createTextureAtlas` | `@flighthq/types:interface#TextureAtlas` | `contextual` | `object` | 6 | ready | — | — |
 | `upstream/packages/textureatlas/src/textureAtlasRegion.ts:121:10` | `createTextureAtlasRegion` | `@flighthq/types:interface#TextureAtlasRegion` | `contextual` | `object` | 15 | ready | `field-order` | — |

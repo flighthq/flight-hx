@@ -5,6 +5,7 @@ import { upstreamTypeScriptProgram, type UpstreamTypeScriptProgram } from './pro
 import type { TypedStructRegistry, TypedStructSchemaAudit } from './typed-structs.ts';
 import {
   entityFactoryDestinationCandidates,
+  entityFactoryExpandedObjectFields,
   entityFactoryObjectLiteral,
   entityFactoryObjectShape,
   isParameterizedEntityFactoryType,
@@ -33,7 +34,7 @@ export type EntityFactoryBlocker =
   | 'unresolved-destination'
   | 'unsupported-object-member';
 
-export type EntityFactoryNormalization = 'field-order';
+export type EntityFactoryNormalization = 'field-order' | 'spread-projection';
 
 export interface EntityFactoryClosureSite {
   argument: {
@@ -79,6 +80,7 @@ export interface EntityFactoryClosureAudit {
     exactNonEntityCalls: number;
     genericEntityCalls: number;
     normalizedFieldOrderCalls: number;
+    normalizedSpreadProjectionCalls: number;
     readyEntityCalls: number;
     structuralEntityCalls: number;
     unresolvedCalls: number;
@@ -138,6 +140,7 @@ export function auditEntityFactoryClosure(
       exactNonEntityCalls: countKind('exact-non-entity'),
       genericEntityCalls: countKind('generic-entity'),
       normalizedFieldOrderCalls: sites.filter((site) => site.normalizations.includes('field-order')).length,
+      normalizedSpreadProjectionCalls: sites.filter((site) => site.normalizations.includes('spread-projection')).length,
       readyEntityCalls: sites.filter((site) => site.status === 'ready').length,
       structuralEntityCalls: countKind('structural-entity'),
       unresolvedCalls: countKind('unresolved'),
@@ -193,9 +196,21 @@ function auditFactorySite(
     const shape = entityFactoryObjectShape(object);
     argument = { fields: shape.fields, kind: 'object' };
     if (shape.hasComputed) blockers.push('computed-construction');
-    if (shape.hasSpread) blockers.push('spread-construction');
     if (shape.hasUnsupported) blockers.push('unsupported-object-member');
-    if (schema) addFieldFindings(shape.fields, schema, blockers, normalizations);
+    const expandedFields = shape.hasSpread ? entityFactoryExpandedObjectFields(object, checker) : undefined;
+    const constructionFields = expandedFields ?? shape.fields;
+    const exactSpreadProjection =
+      shape.hasSpread &&
+      destinationKind === 'exact-entity' &&
+      schema !== undefined &&
+      !shape.hasComputed &&
+      !shape.hasUnsupported &&
+      sameFieldSet(constructionFields, schema.fields.map((field) => field.name));
+    if (shape.hasSpread) {
+      if (exactSpreadProjection) normalizations.push('spread-projection');
+      else blockers.push('spread-construction');
+    }
+    if (schema) addFieldFindings(constructionFields, schema, blockers, normalizations, !shape.hasSpread);
   } else if (call.arguments.length === 0) {
     argument = { fields: [], kind: 'omitted' };
     blockers.push('omitted-construction');
@@ -241,13 +256,24 @@ function addFieldFindings(
   schema: TypedStructSchemaAudit,
   blockers: EntityFactoryBlocker[],
   normalizations: EntityFactoryNormalization[],
+  recordFieldOrder = true,
 ): void {
   const expected = schema.fields.map((field) => field.name);
   if (fields.length !== expected.length || fields.some((field) => !expected.includes(field))) {
     blockers.push('field-set-mismatch');
     return;
   }
-  if (fields.some((field, index) => field !== expected[index])) normalizations.push('field-order');
+  if (recordFieldOrder && fields.some((field, index) => field !== expected[index])) {
+    normalizations.push('field-order');
+  }
+}
+
+function sameFieldSet(actual: readonly string[], expected: readonly string[]): boolean {
+  return (
+    actual.length === expected.length &&
+    actual.every((field) => expected.includes(field)) &&
+    expected.every((field) => actual.includes(field))
+  );
 }
 
 function locateEntityType(workspaceDirectory: string, program: ts.Program, checker: ts.TypeChecker): ts.Type {

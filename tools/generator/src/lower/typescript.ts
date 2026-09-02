@@ -6,6 +6,7 @@ import { auditStaticFacts } from '../analyze/static-facts.ts';
 import {
   createEntityCallForObjectLiteral,
   entityFactoryDestinationCandidates,
+  entityFactoryExpandedObjectFields,
   entityFactoryObjectShape,
 } from '../analyze/entity-factory-call.ts';
 import {
@@ -3690,13 +3691,14 @@ function cppStructInitEntityFactoryConstruction(
     .find((candidate) => candidate !== undefined);
   if (!binding) return undefined;
   const shape = entityFactoryObjectShape(node);
+  const constructionFields = shape.hasSpread ? entityFactoryExpandedObjectFields(node, checker) : shape.fields;
   if (
     shape.hasComputed ||
-    shape.hasSpread ||
     shape.hasUnsupported ||
-    shape.fields.length !== binding.fieldNames.length ||
-    shape.fields.some((field) => !binding.fieldNames.includes(field)) ||
-    binding.fieldNames.some((field) => !shape.fields.includes(field))
+    !constructionFields ||
+    constructionFields.length !== binding.fieldNames.length ||
+    constructionFields.some((field) => !binding.fieldNames.includes(field)) ||
+    binding.fieldNames.some((field) => !constructionFields.includes(field))
   ) {
     return undefined;
   }

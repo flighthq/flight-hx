@@ -90,6 +90,16 @@ export function entityFactoryObjectShape(node: ts.ObjectLiteralExpression): Enti
   return { fields, hasComputed, hasSpread, hasUnsupported };
 }
 
+export function entityFactoryExpandedObjectFields(
+  node: ts.ObjectLiteralExpression,
+  checker: ts.TypeChecker,
+): string[] | undefined {
+  const type = checker.getTypeAtLocation(node);
+  if (type.isUnion()) return undefined;
+  if (checker.getIndexTypeOfType(type, ts.IndexKind.String)) return undefined;
+  return checker.getPropertiesOfType(type).map((property) => property.getName());
+}
+
 export function entityFactoryDestinationCandidates(
   call: ts.CallExpression,
   checker: ts.TypeChecker,

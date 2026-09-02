@@ -2832,6 +2832,25 @@ function emitExpression(expression: IrExpression): string {
       return `new ${emitExpression(expression.callee)}(${expression.arguments.map(emitExpression).join(', ')})`;
     case 'object':
       if (expression.cppStructInit) {
+        if (expression.properties.some((property) => property.kind === 'spread')) {
+          const source = '__structInitSource';
+          const merged = `_Runtime.mergeObjects([${expression.properties
+            .map((property) =>
+              property.kind === 'spread'
+                ? emitExpression(property.expression)
+                : property.kind === 'computedProperty'
+                  ? `_Runtime.objectFromPairs([{ key: ${emitExpression(property.key)}, value: ${emitExpression(property.value)} }])`
+                  : emitNamedObject(property.name, property.value),
+            )
+            .join(', ')}])`;
+          const value = `{ ${expression.cppStructInit.fieldNames
+            .map((field) => `${safeName(field)}: _Runtime.field(${source}, ${quote(field)})`)
+            .join(', ')} }`;
+          return emitObjectThisCapture(
+            expression,
+            `({ final ${source}:Dynamic = ${merged}; (${value} : ${expression.cppStructInit.schemaHaxeType}); })`,
+          );
+        }
         const namedProperties = expression.properties.filter(
           (property): property is Extract<(typeof expression.properties)[number], { kind: 'property' }> =>
             property.kind === 'property',
