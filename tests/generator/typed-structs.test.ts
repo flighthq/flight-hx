@@ -3995,7 +3995,7 @@ describe('typed struct analysis', () => {
     });
 
     expect(result.lowered.diagnostics).toEqual([]);
-    expect(output).toContain('#if cpp\n@:structInit\nclass Camera2D {');
+    expect(output).toContain('#if (cpp && !flight_cpp_struct_init_baseline)\n@:structInit\nclass Camera2D {');
     expect(output).toContain(
       'public function new(rotation:Float, viewportHeight:Float, viewportWidth:Float, x:Float, y:Float, zoom:Float):Void',
     );
@@ -4006,7 +4006,10 @@ describe('typed struct analysis', () => {
     const packageDirectory = path.join(fixtureDirectory, 'flight', 'types');
     rmSync(fixtureDirectory, { force: true, recursive: true });
     mkdirSync(packageDirectory, { recursive: true });
-    writeFileSync(path.join(packageDirectory, 'CameraPilot.hx'), output.replace('#if cpp', '#if (cpp || eval)'));
+    writeFileSync(
+      path.join(packageDirectory, 'CameraPilot.hx'),
+      output.replace('(cpp && !flight_cpp_struct_init_baseline)', '(eval && !flight_cpp_struct_init_baseline)'),
+    );
     writeFileSync(
       path.join(fixtureDirectory, 'Main.hx'),
       `
@@ -4024,6 +4027,36 @@ describe('typed struct analysis', () => {
         cwd: path.resolve('.'),
         stdio: 'pipe',
       }),
+    ).not.toThrow();
+
+    writeFileSync(
+      path.join(fixtureDirectory, 'BaselineMain.hx'),
+      `
+        class BaselineMain {
+          static function main() {
+            final camera = flight.types.CameraPilot.createCamera2D();
+            if (camera.x != 12 || camera.viewportHeight != 480 || camera.zoom != 2) throw 'bad fields';
+          }
+        }
+      `,
+    );
+    expect(() =>
+      execFileSync(
+        'node',
+        [
+          'tools/haxe.mjs',
+          '-cp',
+          fixtureDirectory,
+          '-cp',
+          'src',
+          '-D',
+          'flight_cpp_struct_init_baseline',
+          '--main',
+          'BaselineMain',
+          '--interp',
+        ],
+        { cwd: path.resolve('.'), stdio: 'pipe' },
+      ),
     ).not.toThrow();
 
     writeFileSync(

@@ -13,7 +13,7 @@ class TypedStructClassSmoke {
     if (camera.viewportWidth != 640 || camera.viewportHeight != 480) {
       throw 'Camera2D construction lost viewport values';
     }
-    #if cpp
+    #if (cpp && !flight_cpp_struct_init_baseline)
     if (!Std.isOfType(camera, flight.types.Camera2D)) {
       throw 'Camera2D cpp pilot did not construct a class instance';
     }

@@ -30,7 +30,7 @@ typedef Camera2D = {
 
 This is now the emitted shape for the exact canonical ID `@flighthq/types:upstream/packages/types/src/Camera2D.ts#Camera2D`. The generated constructor includes every declared field in deterministic declaration order and uses the same lowered field types as the typedef. `@:structInit` is the compatibility mechanism for contextual object literals; it is not a license to cast anonymous or dynamic native objects to a class.
 
-The allowlist is default-off: only exact reviewed canonical IDs enter, and generation fails when an enabled identity is absent, indirect, ineligible, generic, inherited, optional, or not an anonymous required-field record. The pilot also records construction identity in the IR, validates the exact field set and declaration order at emission, and leaves all non-cpp declarations on the existing typedef branch.
+The allowlist is default-off: only exact reviewed canonical IDs enter, and generation fails when an enabled identity is absent, indirect, ineligible, generic, inherited, optional, or not an anonymous required-field record. The pilot also records construction identity in the IR, validates the exact field set and declaration order at emission, and leaves all non-cpp declarations on the existing typedef branch. A cpp build with `-D flight_cpp_struct_init_baseline` selects that same typedef branch, providing a controlled A/B baseline from one generated tree without changing the normal class-enabled build.
 
 ## Camera pilot verdict
 

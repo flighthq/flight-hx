@@ -603,7 +603,7 @@ function emitDeclaration(declaration: IrDeclaration): string[] {
       }
       const fields = declaration.type.fields;
       const lines = [
-        '#if cpp',
+        '#if (cpp && !flight_cpp_struct_init_baseline)',
         ...completionMetadata,
         '@:structInit',
         `${modifier}class ${safeName(declaration.name)}${generics} {`,

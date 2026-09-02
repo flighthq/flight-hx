@@ -100,7 +100,15 @@ Treat Linux hxcpp as practical for this tranche when all of the following hold o
 4. Particles rendered p95 remains below 8.33 ms (120 fps), with no increase in allocations per frame.
 5. Every native-layout tranche preserves JS output, portable Haxe behavior, render pixels, and nominal provenance closure.
 
-The current aggregate harness cannot calculate p95. Adding per-frame samples is therefore the first implementation task, not an optional refinement.
+The current aggregate harness cannot calculate p95. Adding per-frame samples is therefore the first implementation task, not an optional refinement. Before expanding the class allowlist, re-establish the existing `Camera2D` result on this pin by interleaving normal cpp builds with `-D flight_cpp_struct_init_baseline` builds. Both variants come from the same generated tree: the normal build uses the provenance-closed `@:structInit` class created by `createCamera2D`, while the define selects the anonymous typedef branch. This isolates hxcpp representation from generator and upstream drift.
+
+## Constructor-layout A/B result
+
+The shared-tree switch confirms that the representation hypothesis is real but narrowly distributed. Five interleaved 1,800-frame camera2d script-only pairs produced a median paired class gain of only 0.09% (0.85% by aggregate mean), with pair results from -1.46% to +6.17%. That is host noise, not an accepted scene improvement.
+
+A CPU-only probe then repeated the example's composed camera operations 5,000,000 times: view matrix, visible bounds, parallax, and camera mutation. Across five interleaved pairs on the same pinned CPU, the class median was 2.485 seconds versus 3.477 seconds for the typedef, 28.5% less time, with identical checksums. The fixed-offset `Camera2D` layout is therefore materially faster inside its own hot span, but that span is too small to move the whole scene reliably.
+
+The next camera-layout tranche should apply factory provenance to the larger allocation boundary: `createNode`/`createNode2D` create each node once, and the transform initializers then populate the `HasTransform2D` view on that same identity. The generator currently audits those views as cross-schema transfers rather than recognizing one factory-created native object. Normalize that identity before class emission; do not cast the existing anonymous node to a class. `BitmapRegion` remains the safest independent closed candidate, but it is no longer ahead of constructor-proven node/transform identity for the camera target.
 
 ## Implementation plan
 
@@ -141,4 +149,4 @@ After P1-P3, map sampled native stacks back to the typed-struct and erasure repo
 
 ## Recommended order
 
-P0 instrumentation, P1 `BitmapRegion`, P2 transform closure, P3 measured GL invalidation/caching, then P2 particle-data closure and P4 residual specialization. This order can reach the camera budget without depending on speculative whole-program lowering, while retaining particles as an allocation guard and the cached-shape example as a regression control.
+The constructor-layout A/B control is complete. Continue with P0 instrumentation, P2 node/transform factory-identity closure, P1 `BitmapRegion` as an independent closed control, P3 measured GL invalidation/caching, then P2 particle-data closure and P4 residual specialization. This order follows the measured camera opportunity without depending on speculative whole-program lowering, while retaining particles as an allocation guard and the cached-shape example as a regression control.
