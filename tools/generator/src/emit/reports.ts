@@ -32,7 +32,7 @@ export function entityFactoryClosureSummary(audit: EntityFactoryClosureAudit): s
     '',
     `Upstream commit: \`${audit.upstreamCommit}\``,
     '',
-    "This audit inventories exact calls to Flight's production `createEntity` helper. A ready site has a declared concrete Entity identity plus an exact ordered object construction. It reports closure prerequisites; it does not activate class emission.",
+    "This audit inventories exact calls to Flight's production `createEntity` helper. A ready site has a declared concrete Entity identity plus an exact object field set. Source-order differences are normalized after preserving initializer evaluation order. It reports closure prerequisites; it does not activate class emission.",
     '',
     '| Metric | Count |',
     '| --- | ---: |',
@@ -43,6 +43,7 @@ export function entityFactoryClosureSummary(audit: EntityFactoryClosureAudit): s
     `| Blocked Entity calls | ${summary.blockedEntityCalls} |`,
     `| Bare Entity calls | ${summary.bareEntityCalls} |`,
     `| Generic Entity calls | ${summary.genericEntityCalls} |`,
+    `| Field-order-normalized calls | ${summary.normalizedFieldOrderCalls} |`,
     `| Structural Entity calls | ${summary.structuralEntityCalls} |`,
     `| Exact non-Entity calls | ${summary.exactNonEntityCalls} |`,
     `| Unresolved calls | ${summary.unresolvedCalls} |`,
@@ -61,12 +62,12 @@ export function entityFactoryClosureSummary(audit: EntityFactoryClosureAudit): s
     '',
     '## Sites',
     '',
-    '| Source | Factory | Destination | Route | Argument | Fields | Status | Blockers |',
-    '| --- | --- | --- | --- | --- | ---: | :---: | --- |',
+    '| Source | Factory | Destination | Route | Argument | Fields | Status | Normalizations | Blockers |',
+    '| --- | --- | --- | --- | --- | ---: | :---: | --- | --- |',
   );
   for (const site of audit.sites) {
     lines.push(
-      `| \`${site.source}:${site.line}:${site.column}\` | \`${site.factory.name}\` | \`${site.destination.schemaId ?? site.destination.kind}\` | \`${site.destination.route ?? '—'}\` | \`${site.argument.kind}\` | ${site.argument.fields.length} | ${site.status} | ${site.blockers.length > 0 ? site.blockers.map((blocker) => `\`${blocker}\``).join(', ') : '—'} |`,
+      `| \`${site.source}:${site.line}:${site.column}\` | \`${site.factory.name}\` | \`${site.destination.schemaId ?? site.destination.kind}\` | \`${site.destination.route ?? '—'}\` | \`${site.argument.kind}\` | ${site.argument.fields.length} | ${site.status} | ${site.normalizations.length > 0 ? site.normalizations.map((normalization) => `\`${normalization}\``).join(', ') : '—'} | ${site.blockers.length > 0 ? site.blockers.map((blocker) => `\`${blocker}\``).join(', ') : '—'} |`,
     );
   }
   lines.push('');

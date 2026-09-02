@@ -3696,7 +3696,8 @@ function cppStructInitEntityFactoryConstruction(
     shape.hasSpread ||
     shape.hasUnsupported ||
     shape.fields.length !== binding.fieldNames.length ||
-    shape.fields.some((field, index) => field !== binding.fieldNames[index])
+    shape.fields.some((field) => !binding.fieldNames.includes(field)) ||
+    binding.fieldNames.some((field) => !shape.fields.includes(field))
   ) {
     return undefined;
   }

@@ -556,7 +556,7 @@ class _Texture {
   public static function createVideoImageResource__videoTexture(source:VideoResource):Null<Image> {
     var image:Image = cast _Runtime.UNDEFINED;
     if ((cast _Runtime.strictEquals(source.element, null) : Bool)) { return cast null; }
-    image = (cast createEntity(({ final __callArgument164:Dynamic = { height: 0.0, alphaType: 'straight', gamut: 'srgb', kind: ImageTextureSourceKind, source: source.element, version: _Texture.INITIAL_VIDEO_VERSION__videoTexture, width: 0.0 }; __callArgument164; })) : Image);
+    image = (cast (cast createEntity(({ final __callArgument164:Dynamic = ({ final __structInitField0:Dynamic = 0.0; final __structInitField1:Dynamic = 'straight'; final __structInitField2:Dynamic = 'srgb'; final __structInitField3:Dynamic = ImageTextureSourceKind; final __structInitField4:Dynamic = source.element; final __structInitField5:Dynamic = _Texture.INITIAL_VIDEO_VERSION__videoTexture; final __structInitField6:Dynamic = 0.0; ({ alphaType: __structInitField1, gamut: __structInitField2, height: __structInitField0, kind: __structInitField3, source: __structInitField4, version: __structInitField5, width: __structInitField6 } : Image); }); __callArgument164; })) : Image) : Image);
     _Texture.updateVideoImageSize__videoTexture(({ final __callArgument166:Dynamic = image; __callArgument166; }));
     return cast image;
     return cast null;

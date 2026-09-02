@@ -32,6 +32,7 @@
             "name": "createAabb"
           },
           "line": 67,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/aabb.ts",
           "status": "ready"
         }
@@ -72,6 +73,7 @@
             "name": "createWebAccessibilityBackend"
           },
           "line": 47,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webAccessibility.ts",
           "status": "ready"
         }
@@ -109,6 +111,7 @@
             "name": "createAmbientLight"
           },
           "line": 13,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/ambientLight.ts",
           "status": "ready"
         }
@@ -147,6 +150,7 @@
             "name": "createAnimationBlendTree"
           },
           "line": 60,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationBlendTree.ts",
           "status": "ready"
         }
@@ -184,6 +188,7 @@
             "name": "createAnimationBlendTreeInput"
           },
           "line": 70,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationBlendTree.ts",
           "status": "ready"
         }
@@ -220,6 +225,7 @@
             "name": "createAnimationChannel"
           },
           "line": 19,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationClip.ts",
           "status": "ready"
         }
@@ -258,6 +264,7 @@
             "name": "cloneAnimationClip"
           },
           "line": 14,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationClip.ts",
           "status": "ready"
         },
@@ -284,6 +291,7 @@
             "name": "createAnimationClip"
           },
           "line": 38,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationClip.ts",
           "status": "ready"
         }
@@ -321,6 +329,7 @@
             "name": "createAnimationClipEvent"
           },
           "line": 43,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationClip.ts",
           "status": "ready"
         }
@@ -364,6 +373,7 @@
             "name": "createAnimationCrossfade"
           },
           "line": 37,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationCrossfade.ts",
           "status": "ready"
         }
@@ -403,6 +413,7 @@
             "name": "createAnimationLayer"
           },
           "line": 160,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationLayerStack.ts",
           "status": "ready"
         }
@@ -443,6 +454,7 @@
             "name": "createAnimationLayerStack"
           },
           "line": 68,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationLayerStack.ts",
           "status": "ready"
         }
@@ -488,6 +500,7 @@
             "name": "cloneAnimationPlayer"
           },
           "line": 109,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationPlayer.ts",
           "status": "ready"
         },
@@ -521,6 +534,7 @@
             "name": "createAnimationPlayer"
           },
           "line": 136,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationPlayer.ts",
           "status": "ready"
         }
@@ -567,6 +581,7 @@
             "name": "createAnimationRootMotionExtractor"
           },
           "line": 20,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationRootMotion.ts",
           "status": "blocked"
         }
@@ -605,6 +620,7 @@
             "name": "createAnimationSampleAccumulator"
           },
           "line": 87,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationBlend.ts",
           "status": "ready"
         }
@@ -651,6 +667,7 @@
             "name": "createAnimationStateMachine"
           },
           "line": 47,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationStateMachine.ts",
           "status": "ready"
         }
@@ -687,6 +704,7 @@
             "name": "createAnimationStateMachineState"
           },
           "line": 68,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationStateMachine.ts",
           "status": "ready"
         }
@@ -730,6 +748,7 @@
             "name": "cloneAnimationTrack"
           },
           "line": 13,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationTrack.ts",
           "status": "ready"
         },
@@ -760,6 +779,7 @@
             "name": "createAnimationTrack"
           },
           "line": 36,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationTrack.ts",
           "status": "ready"
         },
@@ -790,6 +810,7 @@
             "name": "trimAnimationTrack"
           },
           "line": 130,
+          "normalizations": [],
           "source": "upstream/packages/animation/src/animationTrack.ts",
           "status": "ready"
         }
@@ -829,6 +850,7 @@
             "name": "createAnisotropyPbrExtension"
           },
           "line": 9,
+          "normalizations": [],
           "source": "upstream/packages/materials/src/anisotropyPbrExtension.ts",
           "status": "ready"
         }
@@ -869,6 +891,7 @@
             "name": "createApp"
           },
           "line": 134,
+          "normalizations": [],
           "source": "upstream/packages/app/src/app.ts",
           "status": "ready"
         }
@@ -916,6 +939,7 @@
             "name": "createApplication"
           },
           "line": 65,
+          "normalizations": [],
           "source": "upstream/packages/application/src/application.ts",
           "status": "ready"
         }
@@ -956,17 +980,18 @@
             "name": "createApplicationRenderView"
           },
           "line": 43,
+          "normalizations": [],
           "source": "upstream/packages/application/src/applicationRenderView.ts",
           "status": "blocked"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createApplicationWindow"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#ApplicationWindow",
       "schemaName": "ApplicationWindow",
       "sites": [
@@ -1012,9 +1037,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -1028,8 +1051,11 @@
             "name": "createApplicationWindow"
           },
           "line": 251,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/application/src/window.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -1075,6 +1101,7 @@
             "name": "cloneAreaLight"
           },
           "line": 8,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/areaLight.ts",
           "status": "ready"
         },
@@ -1110,13 +1137,14 @@
             "name": "createAreaLight"
           },
           "line": 33,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/areaLight.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 8,
+      "blockedCalls": 0,
       "factories": [
         "cloneBitmap",
         "createBitmap",
@@ -1127,7 +1155,7 @@
         "readBitmap",
         "trimBitmap"
       ],
-      "readyCalls": 0,
+      "readyCalls": 8,
       "schemaId": "@flighthq/types:interface#Bitmap",
       "schemaName": "Bitmap",
       "sites": [
@@ -1145,9 +1173,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -1161,8 +1187,11 @@
             "name": "cloneBitmap"
           },
           "line": 6,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/bitmap/src/bitmap.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -1178,9 +1207,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -1194,8 +1221,11 @@
             "name": "createBitmap"
           },
           "line": 74,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/bitmap/src/bitmap.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -1211,9 +1241,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -1227,8 +1255,11 @@
             "name": "makeBitmap"
           },
           "line": 136,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/bitmap/src/bitmapChannel.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -1244,9 +1275,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -1260,8 +1289,11 @@
             "name": "cropBitmap"
           },
           "line": 37,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/bitmap/src/bitmapCrop.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -1277,9 +1309,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -1293,8 +1323,11 @@
             "name": "extendBitmap"
           },
           "line": 110,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/bitmap/src/bitmapCrop.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -1310,9 +1343,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 12,
           "destination": {
             "kind": "exact-entity",
@@ -1326,8 +1357,11 @@
             "name": "trimBitmap"
           },
           "line": 148,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/bitmap/src/bitmapCrop.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -1343,9 +1377,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -1359,8 +1391,11 @@
             "name": "createBitmapFromCanvas"
           },
           "line": 27,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/bitmap/src/bitmapFrom.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -1376,9 +1411,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 30,
           "destination": {
             "kind": "exact-entity",
@@ -1392,8 +1425,11 @@
             "name": "readBitmap"
           },
           "line": 33,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/host-web/src/webBitmapReadback.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -1428,6 +1464,7 @@
             "name": "createBoundingSphere"
           },
           "line": 48,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/boundingSphere.ts",
           "status": "ready"
         }
@@ -1468,6 +1505,7 @@
             "name": "createCamera3D"
           },
           "line": 20,
+          "normalizations": [],
           "source": "upstream/packages/camera/src/camera.ts",
           "status": "ready"
         }
@@ -1508,6 +1546,7 @@
             "name": "createCameraShake"
           },
           "line": 10,
+          "normalizations": [],
           "source": "upstream/packages/camera-controls/src/cameraShake.ts",
           "status": "ready"
         }
@@ -1543,6 +1582,7 @@
             "name": "createCanvasPipeline"
           },
           "line": 7,
+          "normalizations": [],
           "source": "upstream/packages/scene2d-canvas/src/canvasPipeline.ts",
           "status": "ready"
         }
@@ -1582,6 +1622,7 @@
             "name": "finishCanvasRenderSurface"
           },
           "line": 49,
+          "normalizations": [],
           "source": "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts",
           "status": "ready"
         }
@@ -1620,6 +1661,7 @@
             "name": "createWebCanvasRenderSurfaceCreator"
           },
           "line": 6,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webCanvasRenderSurface.ts",
           "status": "blocked"
         }
@@ -1659,6 +1701,7 @@
             "name": "createCanvasTextureResolvers"
           },
           "line": 48,
+          "normalizations": [],
           "source": "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
           "status": "blocked"
         }
@@ -1696,6 +1739,7 @@
             "name": "createCapacitorShareContentBackend"
           },
           "line": 13,
+          "normalizations": [],
           "source": "upstream/packages/host-capacitor/src/capacitorShare.ts",
           "status": "ready"
         }
@@ -1737,6 +1781,7 @@
             "name": "createCapsule"
           },
           "line": 24,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/capsule.ts",
           "status": "ready"
         }
@@ -1781,17 +1826,18 @@
             "name": "createClearcoatPbrExtension"
           },
           "line": 9,
+          "normalizations": [],
           "source": "upstream/packages/materials/src/clearcoatPbrExtension.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createTauriClipboardBackend"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#ClipboardTextBackend",
       "schemaName": "ClipboardTextBackend",
       "sites": [
@@ -1805,9 +1851,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -1821,17 +1865,20 @@
             "name": "createTauriClipboardBackend"
           },
           "line": 8,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/host-tauri/src/tauriClipboard.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createColorScaleBias"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#ColorScaleBias",
       "schemaName": "ColorScaleBias",
       "sites": [
@@ -1849,9 +1896,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -1865,8 +1910,11 @@
             "name": "createColorScaleBias"
           },
           "line": 50,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/materials/src/colorScaleBias.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -1906,6 +1954,7 @@
             "name": "createCompressedImage"
           },
           "line": 22,
+          "normalizations": [],
           "source": "upstream/packages/image/src/imageResource.ts",
           "status": "ready"
         }
@@ -1945,6 +1994,7 @@
             "name": "createConnectivity"
           },
           "line": 50,
+          "normalizations": [],
           "source": "upstream/packages/connectivity/src/connectivity.ts",
           "status": "ready"
         }
@@ -1988,6 +2038,7 @@
             "name": "cloneDirectionalLight"
           },
           "line": 8,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/directionalLight.ts",
           "status": "ready"
         },
@@ -2019,6 +2070,7 @@
             "name": "createDirectionalLight"
           },
           "line": 25,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/directionalLight.ts",
           "status": "ready"
         }
@@ -2054,6 +2106,7 @@
             "name": "createDownloadedUpdate"
           },
           "line": 133,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronUpdater.ts",
           "status": "ready"
         }
@@ -2091,6 +2144,7 @@
             "name": "createEnvironment"
           },
           "line": 15,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/environment.ts",
           "status": "ready"
         }
@@ -2132,6 +2186,7 @@
             "name": "createExternalGlTexture"
           },
           "line": 22,
+          "normalizations": [],
           "source": "upstream/packages/render-gl/src/glExternalTexture.ts",
           "status": "blocked"
         },
@@ -2161,6 +2216,7 @@
             "name": "createExternalWgpuTexture"
           },
           "line": 21,
+          "normalizations": [],
           "source": "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts",
           "status": "blocked"
         }
@@ -2198,6 +2254,7 @@
             "name": "createFileDialogHandle"
           },
           "line": 26,
+          "normalizations": [],
           "source": "upstream/packages/dialog/src/fileDialog.ts",
           "status": "ready"
         }
@@ -2240,6 +2297,7 @@
             "name": "createFlyCameraController"
           },
           "line": 36,
+          "normalizations": [],
           "source": "upstream/packages/camera-controls/src/flyCameraController.ts",
           "status": "ready"
         }
@@ -2275,6 +2333,7 @@
             "name": "createFont"
           },
           "line": 5,
+          "normalizations": [],
           "source": "upstream/packages/font/src/font.ts",
           "status": "ready"
         }
@@ -2315,6 +2374,7 @@
             "name": "createFrustum"
           },
           "line": 20,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/frustum.ts",
           "status": "ready"
         }
@@ -2350,6 +2410,7 @@
             "name": "createGlContextState"
           },
           "line": 51,
+          "normalizations": [],
           "source": "upstream/packages/render-gl/src/glRenderState.ts",
           "status": "ready"
         }
@@ -2386,6 +2447,7 @@
             "name": "createGlobalShortcut"
           },
           "line": 85,
+          "normalizations": [],
           "source": "upstream/packages/shortcut/src/shortcutExplicitDependency.ts",
           "status": "ready"
         }
@@ -2421,6 +2483,7 @@
             "name": "createGlPipeline"
           },
           "line": 29,
+          "normalizations": [],
           "source": "upstream/packages/render-gl/src/glPipeline.ts",
           "status": "ready"
         }
@@ -2459,13 +2522,14 @@
             "name": "createHemisphereLight"
           },
           "line": 18,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/hemisphereLight.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "cloneImageResource",
         "createImageResource",
@@ -2474,7 +2538,7 @@
         "createImageResourceFromImageElement",
         "createVideoImageResource"
       ],
-      "readyCalls": 5,
+      "readyCalls": 6,
       "schemaId": "@flighthq/types:interface#Image",
       "schemaName": "Image",
       "sites": [
@@ -2505,6 +2569,7 @@
             "name": "cloneImageResource"
           },
           "line": 8,
+          "normalizations": [],
           "source": "upstream/packages/image/src/imageResource.ts",
           "status": "ready"
         },
@@ -2535,6 +2600,7 @@
             "name": "createImageResource"
           },
           "line": 34,
+          "normalizations": [],
           "source": "upstream/packages/image/src/imageResource.ts",
           "status": "ready"
         },
@@ -2565,6 +2631,7 @@
             "name": "createImageResourceFromCanvas"
           },
           "line": 18,
+          "normalizations": [],
           "source": "upstream/packages/image/src/imageResourceFrom.ts",
           "status": "ready"
         },
@@ -2595,6 +2662,7 @@
             "name": "createImageResourceFromImageBitmap"
           },
           "line": 30,
+          "normalizations": [],
           "source": "upstream/packages/image/src/imageResourceFrom.ts",
           "status": "ready"
         },
@@ -2625,6 +2693,7 @@
             "name": "createImageResourceFromImageElement"
           },
           "line": 42,
+          "normalizations": [],
           "source": "upstream/packages/image/src/imageResourceFrom.ts",
           "status": "ready"
         },
@@ -2641,9 +2710,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 17,
           "destination": {
             "kind": "exact-entity",
@@ -2657,8 +2724,11 @@
             "name": "createVideoImageResource"
           },
           "line": 97,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/texture/src/videoTexture.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -2692,6 +2762,7 @@
             "name": "<module>"
           },
           "line": 15,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
         }
@@ -2727,6 +2798,7 @@
             "name": "<module>"
           },
           "line": 33,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
         }
@@ -2763,6 +2835,7 @@
             "name": "<module>"
           },
           "line": 46,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
         }
@@ -2798,6 +2871,7 @@
             "name": "<module>"
           },
           "line": 87,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
         }
@@ -2833,6 +2907,7 @@
             "name": "createWebInputTargetHandle"
           },
           "line": 131,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
         }
@@ -2868,6 +2943,7 @@
             "name": "createElectronIpcMessageBackend"
           },
           "line": 13,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronIpc.ts",
           "status": "ready"
         }
@@ -2911,6 +2987,7 @@
             "name": "createIridescencePbrExtension"
           },
           "line": 11,
+          "normalizations": [],
           "source": "upstream/packages/materials/src/iridescencePbrExtension.ts",
           "status": "ready"
         }
@@ -2949,6 +3026,7 @@
             "name": "cloneMaterial"
           },
           "line": 7,
+          "normalizations": [],
           "source": "upstream/packages/materials/src/material.ts",
           "status": "blocked"
         },
@@ -2975,6 +3053,7 @@
             "name": "createMaterial"
           },
           "line": 20,
+          "normalizations": [],
           "source": "upstream/packages/materials/src/material.ts",
           "status": "blocked"
         }
@@ -3015,6 +3094,7 @@
             "name": "createMatrix"
           },
           "line": 149,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/matrix.ts",
           "status": "ready"
         }
@@ -3050,6 +3130,7 @@
             "name": "createMatrix3"
           },
           "line": 114,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/matrix3.ts",
           "status": "ready"
         }
@@ -3085,6 +3166,7 @@
             "name": "createMatrix4"
           },
           "line": 360,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/matrix4.ts",
           "status": "ready"
         }
@@ -3120,6 +3202,7 @@
             "name": "createWebMediaSessionActionBackend"
           },
           "line": 123,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webMediasession.ts",
           "status": "blocked"
         }
@@ -3156,6 +3239,7 @@
             "name": "createMediaSessionActionSignal"
           },
           "line": 39,
+          "normalizations": [],
           "source": "upstream/packages/mediasession/src/mediasession.ts",
           "status": "ready"
         }
@@ -3191,6 +3275,7 @@
             "name": "createWebMediaSessionBackend"
           },
           "line": 322,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webMediasession.ts",
           "status": "blocked"
         }
@@ -3232,6 +3317,7 @@
             "name": "createMeshGeometryRuntime"
           },
           "line": 192,
+          "normalizations": [],
           "source": "upstream/packages/mesh/src/meshGeometry.ts",
           "status": "ready"
         }
@@ -3267,6 +3353,7 @@
             "name": "createMidiAccessResource"
           },
           "line": 21,
+          "normalizations": [],
           "source": "upstream/packages/midi/src/midiAccess.ts",
           "status": "blocked"
         }
@@ -3306,6 +3393,7 @@
             "name": "createMidiInputPortResource"
           },
           "line": 52,
+          "normalizations": [],
           "source": "upstream/packages/midi/src/midiPort.ts",
           "status": "blocked"
         }
@@ -3345,6 +3433,7 @@
             "name": "createMidiOutputPortResource"
           },
           "line": 61,
+          "normalizations": [],
           "source": "upstream/packages/midi/src/midiPort.ts",
           "status": "blocked"
         }
@@ -3382,6 +3471,7 @@
             "name": "createNotificationResource"
           },
           "line": 188,
+          "normalizations": [],
           "source": "upstream/packages/notification/src/notification.ts",
           "status": "ready"
         }
@@ -3426,6 +3516,7 @@
             "name": "createObb"
           },
           "line": 28,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/obb.ts",
           "status": "ready"
         }
@@ -3472,6 +3563,7 @@
             "name": "createOrbitCameraController"
           },
           "line": 42,
+          "normalizations": [],
           "source": "upstream/packages/camera-controls/src/orbitCameraController.ts",
           "status": "ready"
         }
@@ -3510,6 +3602,7 @@
             "name": "createPlane"
           },
           "line": 26,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/plane.ts",
           "status": "ready"
         }
@@ -3554,6 +3647,7 @@
             "name": "clonePointLight"
           },
           "line": 8,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/pointLight.ts",
           "status": "ready"
         },
@@ -3586,6 +3680,7 @@
             "name": "createPointLight"
           },
           "line": 26,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/pointLight.ts",
           "status": "ready"
         }
@@ -3629,6 +3724,7 @@
             "name": "createPower"
           },
           "line": 108,
+          "normalizations": [],
           "source": "upstream/packages/power/src/power.ts",
           "status": "ready"
         }
@@ -3664,17 +3760,18 @@
             "name": "createProtocolHandler"
           },
           "line": 24,
+          "normalizations": [],
           "source": "upstream/packages/protocol/src/protocol.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createQuaternion"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#Quaternion",
       "schemaName": "Quaternion",
       "sites": [
@@ -3688,9 +3785,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -3704,8 +3799,11 @@
             "name": "createQuaternion"
           },
           "line": 41,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/geometry/src/quaternion.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -3740,17 +3838,18 @@
             "name": "createRay3D"
           },
           "line": 24,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/ray3d.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createRectangle"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#Rectangle",
       "schemaName": "Rectangle",
       "sites": [
@@ -3764,9 +3863,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -3780,8 +3877,11 @@
             "name": "createRectangle"
           },
           "line": 53,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/geometry/src/rectangle.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -3816,6 +3916,7 @@
             "name": "createRenderCache"
           },
           "line": 18,
+          "normalizations": [],
           "source": "upstream/packages/render/src/renderCache.ts",
           "status": "ready"
         }
@@ -3851,6 +3952,7 @@
             "name": "<module>"
           },
           "line": 100,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
         }
@@ -3891,6 +3993,7 @@
             "name": "createCanvasTextLabelData"
           },
           "line": 25,
+          "normalizations": [],
           "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts",
           "status": "blocked"
         },
@@ -3917,6 +4020,7 @@
             "name": "createGlRichTextData"
           },
           "line": 43,
+          "normalizations": [],
           "source": "upstream/packages/scene2d-gl/src/glRichText.ts",
           "status": "blocked"
         },
@@ -3947,6 +4051,7 @@
             "name": "createGlTextLabelData"
           },
           "line": 50,
+          "normalizations": [],
           "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts",
           "status": "blocked"
         },
@@ -3974,17 +4079,18 @@
             "name": "createSpriteRendererData"
           },
           "line": 48,
+          "normalizations": [],
           "source": "upstream/packages/scene2d/src/sprite.ts",
           "status": "blocked"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createRenderProxy"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#RenderProxy",
       "schemaName": "RenderProxy",
       "sites": [
@@ -4016,9 +4122,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -4032,8 +4136,11 @@
             "name": "createRenderProxy"
           },
           "line": 36,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/render/src/renderProxy.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -4078,6 +4185,7 @@
             "name": "createRenderState"
           },
           "line": 12,
+          "normalizations": [],
           "source": "upstream/packages/render/src/renderState.ts",
           "status": "ready"
         }
@@ -4113,6 +4221,7 @@
             "name": "<module>"
           },
           "line": 119,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webInputTarget.ts",
           "status": "ready"
         }
@@ -4161,6 +4270,7 @@
             "name": "createRenderTexture"
           },
           "line": 18,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/renderTexture.ts",
           "status": "blocked"
         }
@@ -4202,6 +4312,7 @@
             "name": "cloneSampler"
           },
           "line": 7,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/sampler.ts",
           "status": "ready"
         },
@@ -4231,6 +4342,7 @@
             "name": "createSampler"
           },
           "line": 51,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/sampler.ts",
           "status": "ready"
         }
@@ -4271,6 +4383,7 @@
             "name": "createScene2D"
           },
           "line": 18,
+          "normalizations": [],
           "source": "upstream/packages/scene2d/src/scene2d.ts",
           "status": "ready"
         }
@@ -4306,6 +4419,7 @@
             "name": "createScene2DDocumentImporterRegistry"
           },
           "line": 26,
+          "normalizations": [],
           "source": "upstream/packages/scene2d-resources/src/scene2DDocumentImporterRegistry.ts",
           "status": "ready"
         }
@@ -4344,6 +4458,7 @@
             "name": "createScene3D"
           },
           "line": 14,
+          "normalizations": [],
           "source": "upstream/packages/scene3d/src/scene.ts",
           "status": "ready"
         }
@@ -4390,6 +4505,7 @@
             "name": "createScene3DHit"
           },
           "line": 36,
+          "normalizations": [],
           "source": "upstream/packages/picking/src/pickScene3D.ts",
           "status": "ready"
         }
@@ -4429,6 +4545,7 @@
             "name": "createScene3DLights"
           },
           "line": 14,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/sceneLights.ts",
           "status": "ready"
         }
@@ -4465,6 +4582,7 @@
             "name": "createScene3DMaterialTextureRegistry"
           },
           "line": 17,
+          "normalizations": [],
           "source": "upstream/packages/scene3d-resources/src/sceneMaterialTextureRegistry.ts",
           "status": "ready"
         }
@@ -4503,6 +4621,7 @@
             "name": "createScene3DResourceResolver"
           },
           "line": 42,
+          "normalizations": [],
           "source": "upstream/packages/scene3d-resources/src/sceneResourceResolver.ts",
           "status": "blocked"
         }
@@ -4539,6 +4658,7 @@
             "name": "createScene3DResourceSignals"
           },
           "line": 8,
+          "normalizations": [],
           "source": "upstream/packages/scene3d-resources/src/sceneResourceSignals.ts",
           "status": "ready"
         }
@@ -4576,18 +4696,19 @@
             "name": "createScheduledNotificationResource"
           },
           "line": 197,
+          "normalizations": [],
           "source": "upstream/packages/notification/src/notification.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 2,
+      "blockedCalls": 0,
       "factories": [
         "createScreenInfo",
         "emptyScreenInfo"
       ],
-      "readyCalls": 0,
+      "readyCalls": 2,
       "schemaId": "@flighthq/types:interface#ScreenInfo",
       "schemaName": "ScreenInfo",
       "sites": [
@@ -4622,9 +4743,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -4638,8 +4757,11 @@
             "name": "emptyScreenInfo"
           },
           "line": 71,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/host-electron/src/electronScreen.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -4672,9 +4794,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -4688,17 +4808,20 @@
             "name": "createScreenInfo"
           },
           "line": 37,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/screen/src/screen.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createScreenMode"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#ScreenMode",
       "schemaName": "ScreenMode",
       "sites": [
@@ -4713,9 +4836,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -4729,8 +4850,11 @@
             "name": "createScreenMode"
           },
           "line": 67,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/screen/src/screen.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -4764,6 +4888,7 @@
             "name": "createScreenPermissionChange"
           },
           "line": 71,
+          "normalizations": [],
           "source": "upstream/packages/screen/src/screen.ts",
           "status": "ready"
         }
@@ -4801,6 +4926,7 @@
             "name": "createScreenSignals"
           },
           "line": 75,
+          "normalizations": [],
           "source": "upstream/packages/screen/src/screen.ts",
           "status": "ready"
         }
@@ -4838,6 +4964,7 @@
             "name": "createShadedMaterial"
           },
           "line": 20,
+          "normalizations": [],
           "source": "upstream/packages/shading/src/createShadedMaterial.ts",
           "status": "blocked"
         }
@@ -4875,6 +5002,7 @@
             "name": "<module>"
           },
           "line": 11,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webShare.ts",
           "status": "ready"
         }
@@ -4912,6 +5040,7 @@
             "name": "<module>"
           },
           "line": 27,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webShare.ts",
           "status": "ready"
         }
@@ -4947,6 +5076,7 @@
             "name": "enableShareSignals"
           },
           "line": 38,
+          "normalizations": [],
           "source": "upstream/packages/share/src/share.ts",
           "status": "ready"
         }
@@ -4988,6 +5118,7 @@
             "name": "createSheenPbrExtension"
           },
           "line": 9,
+          "normalizations": [],
           "source": "upstream/packages/materials/src/sheenPbrExtension.ts",
           "status": "ready"
         }
@@ -5023,6 +5154,7 @@
             "name": "makeElectronShellCapabilities"
           },
           "line": 25,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronShell.ts",
           "status": "ready"
         }
@@ -5060,6 +5192,7 @@
             "name": "makeElectronShellCapabilities"
           },
           "line": 30,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronShell.ts",
           "status": "ready"
         },
@@ -5084,6 +5217,7 @@
             "name": "makeTauriShellCapabilities"
           },
           "line": 17,
+          "normalizations": [],
           "source": "upstream/packages/host-tauri/src/tauriShell.ts",
           "status": "ready"
         },
@@ -5108,6 +5242,7 @@
             "name": "<module>"
           },
           "line": 6,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webShell.ts",
           "status": "ready"
         }
@@ -5144,6 +5279,7 @@
             "name": "makeElectronShellCapabilities"
           },
           "line": 40,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronShell.ts",
           "status": "ready"
         },
@@ -5168,6 +5304,7 @@
             "name": "makeTauriShellCapabilities"
           },
           "line": 27,
+          "normalizations": [],
           "source": "upstream/packages/host-tauri/src/tauriShell.ts",
           "status": "ready"
         }
@@ -5204,6 +5341,7 @@
             "name": "makeElectronShellCapabilities"
           },
           "line": 50,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronShell.ts",
           "status": "ready"
         },
@@ -5228,6 +5366,7 @@
             "name": "makeTauriShellCapabilities"
           },
           "line": 37,
+          "normalizations": [],
           "source": "upstream/packages/host-tauri/src/tauriShell.ts",
           "status": "ready"
         }
@@ -5264,6 +5403,7 @@
             "name": "createElectronShellShortcutLinkBackend"
           },
           "line": 77,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronShell.ts",
           "status": "ready"
         }
@@ -5299,6 +5439,7 @@
             "name": "makeElectronShellCapabilities"
           },
           "line": 60,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronShell.ts",
           "status": "ready"
         }
@@ -5337,6 +5478,7 @@
             "name": "createElectronShortcutQueryBackend"
           },
           "line": 11,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronShortcut.ts",
           "status": "blocked"
         },
@@ -5363,6 +5505,7 @@
             "name": "createTauriShortcutQueryBackend"
           },
           "line": 11,
+          "normalizations": [],
           "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
           "status": "blocked"
         }
@@ -5403,6 +5546,7 @@
             "name": "createElectronShortcutTriggerBackend"
           },
           "line": 32,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronShortcut.ts",
           "status": "blocked"
         },
@@ -5431,6 +5575,7 @@
             "name": "createTauriShortcutTriggerBackend"
           },
           "line": 33,
+          "normalizations": [],
           "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
           "status": "blocked"
         }
@@ -5473,6 +5618,7 @@
             "name": "cloneSkeleton2D"
           },
           "line": 13,
+          "normalizations": [],
           "source": "upstream/packages/skeleton2d/src/skeleton2d.ts",
           "status": "blocked"
         },
@@ -5503,6 +5649,7 @@
             "name": "createSkeleton2D"
           },
           "line": 152,
+          "normalizations": [],
           "source": "upstream/packages/skeleton2d/src/skeleton2d.ts",
           "status": "blocked"
         }
@@ -5546,6 +5693,7 @@
             "name": "cloneSkeleton3D"
           },
           "line": 15,
+          "normalizations": [],
           "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
           "status": "blocked"
         },
@@ -5574,6 +5722,7 @@
             "name": "cloneSkeleton3DJointHierarchy"
           },
           "line": 49,
+          "normalizations": [],
           "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
           "status": "ready"
         },
@@ -5604,6 +5753,7 @@
             "name": "createSkeleton3D"
           },
           "line": 87,
+          "normalizations": [],
           "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
           "status": "blocked"
         }
@@ -5645,6 +5795,7 @@
             "name": "createSpecularPbrExtension"
           },
           "line": 9,
+          "normalizations": [],
           "source": "upstream/packages/materials/src/specularPbrExtension.ts",
           "status": "ready"
         }
@@ -5692,6 +5843,7 @@
             "name": "cloneSpotLight"
           },
           "line": 8,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/spotLight.ts",
           "status": "ready"
         },
@@ -5727,18 +5879,19 @@
             "name": "createSpotLight"
           },
           "line": 31,
+          "normalizations": [],
           "source": "upstream/packages/lighting/src/spotLight.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 2,
+      "blockedCalls": 0,
       "factories": [
         "cloneSpritesheet",
         "createSpritesheet"
       ],
-      "readyCalls": 0,
+      "readyCalls": 2,
       "schemaId": "@flighthq/types:interface#Spritesheet",
       "schemaName": "Spritesheet",
       "sites": [
@@ -5751,9 +5904,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -5767,8 +5918,11 @@
             "name": "cloneSpritesheet"
           },
           "line": 17,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/spritesheet/src/spritesheet.ts",
-          "status": "blocked"
+          "status": "ready"
         },
         {
           "argument": {
@@ -5779,9 +5933,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -5795,8 +5947,11 @@
             "name": "createSpritesheet"
           },
           "line": 25,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/spritesheet/src/spritesheet.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -5836,6 +5991,7 @@
             "name": "createSpritesheetAnimation"
           },
           "line": 5,
+          "normalizations": [],
           "source": "upstream/packages/spritesheet/src/spritesheetAnimation.ts",
           "status": "ready"
         }
@@ -5872,6 +6028,7 @@
             "name": "createStandardMaterial"
           },
           "line": 6,
+          "normalizations": [],
           "source": "upstream/packages/materials/src/standardMaterial.ts",
           "status": "ready"
         }
@@ -5907,6 +6064,7 @@
             "name": "createStorageSignals"
           },
           "line": 73,
+          "normalizations": [],
           "source": "upstream/packages/storage/src/storage.ts",
           "status": "ready"
         }
@@ -5947,6 +6105,7 @@
             "name": "cloneTexture"
           },
           "line": 46,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/texture.ts",
           "status": "blocked"
         },
@@ -5975,6 +6134,7 @@
             "name": "createTexture2D"
           },
           "line": 153,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/texture.ts",
           "status": "blocked"
         }
@@ -6015,17 +6175,18 @@
             "name": "createTextureAtlas"
           },
           "line": 6,
+          "normalizations": [],
           "source": "upstream/packages/textureatlas/src/textureAtlas.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createTextureAtlasRegion"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#TextureAtlasRegion",
       "schemaName": "TextureAtlasRegion",
       "sites": [
@@ -6050,9 +6211,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -6066,8 +6225,11 @@
             "name": "createTextureAtlasRegion"
           },
           "line": 121,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/textureatlas/src/textureAtlasRegion.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -6109,17 +6271,18 @@
             "name": "createTransform2D"
           },
           "line": 18,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/transform2d.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createTransform3D"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#Transform3D",
       "schemaName": "Transform3D",
       "sites": [
@@ -6132,9 +6295,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -6148,8 +6309,11 @@
             "name": "createTransform3D"
           },
           "line": 16,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/geometry/src/transform3d.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -6192,6 +6356,7 @@
             "name": "createTransmissionVolumePbrExtension"
           },
           "line": 11,
+          "normalizations": [],
           "source": "upstream/packages/materials/src/transmissionVolumePbrExtension.ts",
           "status": "ready"
         }
@@ -6229,6 +6394,7 @@
             "name": "createElectronUpdaterBackend"
           },
           "line": 71,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronUpdater.ts",
           "status": "ready"
         }
@@ -6265,6 +6431,7 @@
             "name": "createVector2"
           },
           "line": 59,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/vector2.ts",
           "status": "ready"
         }
@@ -6302,17 +6469,18 @@
             "name": "createVector3"
           },
           "line": 83,
+          "normalizations": [],
           "source": "upstream/packages/geometry/src/vector3.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createVector4"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:interface#Vector4",
       "schemaName": "Vector4",
       "sites": [
@@ -6326,9 +6494,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -6342,8 +6508,11 @@
             "name": "createVector4"
           },
           "line": 89,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/geometry/src/vector4.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -6381,6 +6550,7 @@
             "name": "createViewport"
           },
           "line": 8,
+          "normalizations": [],
           "source": "upstream/packages/node/src/viewport.ts",
           "status": "ready"
         }
@@ -6419,6 +6589,7 @@
             "name": "createWebWindowStoragePersistenceCapabilities"
           },
           "line": 21,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
           "status": "blocked"
         }
@@ -6456,6 +6627,7 @@
             "name": "createWebWorkerStoragePersistenceCapabilities"
           },
           "line": 31,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
           "status": "blocked"
         }
@@ -6491,6 +6663,7 @@
             "name": "createWgpuDeviceState"
           },
           "line": 55,
+          "normalizations": [],
           "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
           "status": "ready"
         }
@@ -6526,6 +6699,7 @@
             "name": "createWgpuPipeline"
           },
           "line": 25,
+          "normalizations": [],
           "source": "upstream/packages/render-wgpu/src/wgpuPipeline.ts",
           "status": "ready"
         }
@@ -6568,6 +6742,7 @@
             "name": "createWrappedDiffusePbrExtension"
           },
           "line": 11,
+          "normalizations": [],
           "source": "upstream/packages/materials/src/wrappedDiffusePbrExtension.ts",
           "status": "ready"
         }
@@ -6605,6 +6780,7 @@
             "name": "createCapacitorAppCapabilities"
           },
           "line": 37,
+          "normalizations": [],
           "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
           "status": "ready"
         }
@@ -6645,6 +6821,7 @@
             "name": "createCapacitorNotificationCapabilities"
           },
           "line": 101,
+          "normalizations": [],
           "source": "upstream/packages/host-capacitor/src/capacitorNotification.ts",
           "status": "ready"
         }
@@ -6680,6 +6857,7 @@
             "name": "createCapacitorProtocolCapabilities"
           },
           "line": 9,
+          "normalizations": [],
           "source": "upstream/packages/host-capacitor/src/capacitorProtocol.ts",
           "status": "ready"
         }
@@ -6727,6 +6905,7 @@
             "name": "createElectronAppCapabilities"
           },
           "line": 41,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronApp.ts",
           "status": "ready"
         }
@@ -6766,17 +6945,18 @@
             "name": "createElectronProtocolCapabilities"
           },
           "line": 15,
+          "normalizations": [],
           "source": "upstream/packages/host-electron/src/electronProtocol.ts",
           "status": "ready"
         }
       ]
     },
     {
-      "blockedCalls": 1,
+      "blockedCalls": 0,
       "factories": [
         "createTauriAppCapabilities"
       ],
-      "readyCalls": 0,
+      "readyCalls": 1,
       "schemaId": "@flighthq/types:type#TauriAppCapabilities",
       "schemaName": "TauriAppCapabilities",
       "sites": [
@@ -6793,9 +6973,7 @@
             ],
             "kind": "object"
           },
-          "blockers": [
-            "field-order-mismatch"
-          ],
+          "blockers": [],
           "column": 10,
           "destination": {
             "kind": "exact-entity",
@@ -6809,8 +6987,11 @@
             "name": "createTauriAppCapabilities"
           },
           "line": 20,
+          "normalizations": [
+            "field-order"
+          ],
           "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-          "status": "blocked"
+          "status": "ready"
         }
       ]
     },
@@ -6846,6 +7027,7 @@
             "name": "createTauriNotificationCapabilities"
           },
           "line": 15,
+          "normalizations": [],
           "source": "upstream/packages/host-tauri/src/tauriNotification.ts",
           "status": "ready"
         }
@@ -6886,6 +7068,7 @@
             "name": "cloneTexture"
           },
           "line": 48,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/texture.ts",
           "status": "blocked"
         },
@@ -6914,6 +7097,7 @@
             "name": "cloneTexture"
           },
           "line": 54,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/texture.ts",
           "status": "blocked"
         },
@@ -6942,6 +7126,7 @@
             "name": "cloneTexture"
           },
           "line": 59,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/texture.ts",
           "status": "blocked"
         },
@@ -6970,6 +7155,7 @@
             "name": "createTexture"
           },
           "line": 119,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/texture.ts",
           "status": "blocked"
         },
@@ -6998,6 +7184,7 @@
             "name": "createTexture"
           },
           "line": 126,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/texture.ts",
           "status": "blocked"
         },
@@ -7026,6 +7213,7 @@
             "name": "createTexture"
           },
           "line": 133,
+          "normalizations": [],
           "source": "upstream/packages/texture/src/texture.ts",
           "status": "blocked"
         }
@@ -7062,6 +7250,7 @@
             "name": "createTrayIcon"
           },
           "line": 75,
+          "normalizations": [],
           "source": "upstream/packages/tray/src/tray.ts",
           "status": "blocked"
         }
@@ -7103,6 +7292,7 @@
             "name": "createWebPageNotificationCapabilities"
           },
           "line": 48,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webNotification.ts",
           "status": "ready"
         }
@@ -7145,6 +7335,7 @@
             "name": "createWebServiceWorkerNotificationCapabilities"
           },
           "line": 60,
+          "normalizations": [],
           "source": "upstream/packages/host-web/src/webServiceWorkerNotification.ts",
           "status": "ready"
         }
@@ -7176,6 +7367,7 @@
         "name": "createAnimationSampleAccumulator"
       },
       "line": 87,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationBlend.ts",
       "status": "ready"
     },
@@ -7203,6 +7395,7 @@
         "name": "createAnimationBlendTree"
       },
       "line": 60,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationBlendTree.ts",
       "status": "ready"
     },
@@ -7229,6 +7422,7 @@
         "name": "createAnimationBlendTreeInput"
       },
       "line": 70,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationBlendTree.ts",
       "status": "ready"
     },
@@ -7255,6 +7449,7 @@
         "name": "cloneAnimationClip"
       },
       "line": 14,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationClip.ts",
       "status": "ready"
     },
@@ -7280,6 +7475,7 @@
         "name": "createAnimationChannel"
       },
       "line": 19,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationClip.ts",
       "status": "ready"
     },
@@ -7306,6 +7502,7 @@
         "name": "createAnimationClip"
       },
       "line": 38,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationClip.ts",
       "status": "ready"
     },
@@ -7332,6 +7529,7 @@
         "name": "createAnimationClipEvent"
       },
       "line": 43,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationClip.ts",
       "status": "ready"
     },
@@ -7364,6 +7562,7 @@
         "name": "createAnimationCrossfade"
       },
       "line": 37,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationCrossfade.ts",
       "status": "ready"
     },
@@ -7393,6 +7592,7 @@
         "name": "createAnimationLayerStack"
       },
       "line": 68,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationLayerStack.ts",
       "status": "ready"
     },
@@ -7421,6 +7621,7 @@
         "name": "createAnimationLayer"
       },
       "line": 160,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationLayerStack.ts",
       "status": "ready"
     },
@@ -7454,6 +7655,7 @@
         "name": "cloneAnimationPlayer"
       },
       "line": 109,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationPlayer.ts",
       "status": "ready"
     },
@@ -7487,6 +7689,7 @@
         "name": "createAnimationPlayer"
       },
       "line": 136,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationPlayer.ts",
       "status": "ready"
     },
@@ -7522,6 +7725,7 @@
         "name": "createAnimationRootMotionExtractor"
       },
       "line": 20,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationRootMotion.ts",
       "status": "blocked"
     },
@@ -7557,6 +7761,7 @@
         "name": "createAnimationStateMachine"
       },
       "line": 47,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationStateMachine.ts",
       "status": "ready"
     },
@@ -7582,6 +7787,7 @@
         "name": "createAnimationStateMachineState"
       },
       "line": 68,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationStateMachine.ts",
       "status": "ready"
     },
@@ -7612,6 +7818,7 @@
         "name": "cloneAnimationTrack"
       },
       "line": 13,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationTrack.ts",
       "status": "ready"
     },
@@ -7642,6 +7849,7 @@
         "name": "createAnimationTrack"
       },
       "line": 36,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationTrack.ts",
       "status": "ready"
     },
@@ -7672,6 +7880,7 @@
         "name": "trimAnimationTrack"
       },
       "line": 130,
+      "normalizations": [],
       "source": "upstream/packages/animation/src/animationTrack.ts",
       "status": "ready"
     },
@@ -7701,6 +7910,7 @@
         "name": "createApp"
       },
       "line": 134,
+      "normalizations": [],
       "source": "upstream/packages/app/src/app.ts",
       "status": "ready"
     },
@@ -7737,6 +7947,7 @@
         "name": "createApplication"
       },
       "line": 65,
+      "normalizations": [],
       "source": "upstream/packages/application/src/application.ts",
       "status": "ready"
     },
@@ -7766,6 +7977,7 @@
         "name": "createApplicationRenderView"
       },
       "line": 43,
+      "normalizations": [],
       "source": "upstream/packages/application/src/applicationRenderView.ts",
       "status": "blocked"
     },
@@ -7811,9 +8023,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -7827,8 +8037,11 @@
         "name": "createApplicationWindow"
       },
       "line": 251,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/application/src/window.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -7844,9 +8057,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -7860,8 +8071,11 @@
         "name": "cloneBitmap"
       },
       "line": 6,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/bitmap/src/bitmap.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -7877,9 +8091,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -7893,8 +8105,11 @@
         "name": "createBitmap"
       },
       "line": 74,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/bitmap/src/bitmap.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -7910,9 +8125,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -7926,8 +8139,11 @@
         "name": "makeBitmap"
       },
       "line": 136,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/bitmap/src/bitmapChannel.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -7943,9 +8159,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -7959,8 +8173,11 @@
         "name": "cropBitmap"
       },
       "line": 37,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/bitmap/src/bitmapCrop.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -7976,9 +8193,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -7992,8 +8207,11 @@
         "name": "extendBitmap"
       },
       "line": 110,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/bitmap/src/bitmapCrop.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -8009,9 +8227,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 12,
       "destination": {
         "kind": "exact-entity",
@@ -8025,8 +8241,11 @@
         "name": "trimBitmap"
       },
       "line": 148,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/bitmap/src/bitmapCrop.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -8042,9 +8261,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -8058,8 +8275,11 @@
         "name": "createBitmapFromCanvas"
       },
       "line": 27,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/bitmap/src/bitmapFrom.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -8087,6 +8307,7 @@
         "name": "createCameraShake"
       },
       "line": 10,
+      "normalizations": [],
       "source": "upstream/packages/camera-controls/src/cameraShake.ts",
       "status": "ready"
     },
@@ -8118,6 +8339,7 @@
         "name": "createFlyCameraController"
       },
       "line": 36,
+      "normalizations": [],
       "source": "upstream/packages/camera-controls/src/flyCameraController.ts",
       "status": "ready"
     },
@@ -8153,6 +8375,7 @@
         "name": "createOrbitCameraController"
       },
       "line": 42,
+      "normalizations": [],
       "source": "upstream/packages/camera-controls/src/orbitCameraController.ts",
       "status": "ready"
     },
@@ -8182,6 +8405,7 @@
         "name": "createCamera3D"
       },
       "line": 20,
+      "normalizations": [],
       "source": "upstream/packages/camera/src/camera.ts",
       "status": "ready"
     },
@@ -8210,6 +8434,7 @@
         "name": "createConnectivity"
       },
       "line": 50,
+      "normalizations": [],
       "source": "upstream/packages/connectivity/src/connectivity.ts",
       "status": "ready"
     },
@@ -8236,6 +8461,7 @@
         "name": "createFileDialogHandle"
       },
       "line": 26,
+      "normalizations": [],
       "source": "upstream/packages/dialog/src/fileDialog.ts",
       "status": "ready"
     },
@@ -8259,6 +8485,7 @@
         "name": "cloneEntity"
       },
       "line": 12,
+      "normalizations": [],
       "source": "upstream/packages/entity/src/clone.ts",
       "status": "blocked"
     },
@@ -8309,6 +8536,7 @@
         "name": "createHost"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/entity/src/host.ts",
       "status": "blocked"
     },
@@ -8333,6 +8561,7 @@
         "name": "createFont"
       },
       "line": 5,
+      "normalizations": [],
       "source": "upstream/packages/font/src/font.ts",
       "status": "ready"
     },
@@ -8358,6 +8587,7 @@
         "name": "createGlyphRasterizerBackendFromGlyphOutlineSource"
       },
       "line": 21,
+      "normalizations": [],
       "source": "upstream/packages/font/src/glyphOutlineSource.ts",
       "status": "blocked"
     },
@@ -8383,6 +8613,7 @@
         "name": "createAabb"
       },
       "line": 67,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/aabb.ts",
       "status": "ready"
     },
@@ -8408,6 +8639,7 @@
         "name": "createBoundingSphere"
       },
       "line": 48,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/boundingSphere.ts",
       "status": "ready"
     },
@@ -8438,6 +8670,7 @@
         "name": "createCapsule"
       },
       "line": 24,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/capsule.ts",
       "status": "ready"
     },
@@ -8467,6 +8700,7 @@
         "name": "createFrustum"
       },
       "line": 20,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/frustum.ts",
       "status": "ready"
     },
@@ -8496,6 +8730,7 @@
         "name": "createMatrix"
       },
       "line": 149,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/matrix.ts",
       "status": "ready"
     },
@@ -8520,6 +8755,7 @@
         "name": "createMatrix3"
       },
       "line": 114,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/matrix3.ts",
       "status": "ready"
     },
@@ -8544,6 +8780,7 @@
         "name": "createMatrix4"
       },
       "line": 360,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/matrix4.ts",
       "status": "ready"
     },
@@ -8577,6 +8814,7 @@
         "name": "createObb"
       },
       "line": 28,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/obb.ts",
       "status": "ready"
     },
@@ -8604,6 +8842,7 @@
         "name": "createPlane"
       },
       "line": 26,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/plane.ts",
       "status": "ready"
     },
@@ -8617,9 +8856,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -8633,8 +8870,11 @@
         "name": "createQuaternion"
       },
       "line": 41,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/geometry/src/quaternion.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -8658,6 +8898,7 @@
         "name": "createRay3D"
       },
       "line": 24,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/ray3d.ts",
       "status": "ready"
     },
@@ -8671,9 +8912,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -8687,8 +8926,11 @@
         "name": "createRectangle"
       },
       "line": 53,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/geometry/src/rectangle.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -8719,6 +8961,7 @@
         "name": "createTransform2D"
       },
       "line": 18,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/transform2d.ts",
       "status": "ready"
     },
@@ -8731,9 +8974,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -8747,8 +8988,11 @@
         "name": "createTransform3D"
       },
       "line": 16,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/geometry/src/transform3d.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -8772,6 +9016,7 @@
         "name": "createVector2"
       },
       "line": 59,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/vector2.ts",
       "status": "ready"
     },
@@ -8798,6 +9043,7 @@
         "name": "createVector3"
       },
       "line": 83,
+      "normalizations": [],
       "source": "upstream/packages/geometry/src/vector3.ts",
       "status": "ready"
     },
@@ -8811,9 +9057,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -8827,8 +9071,11 @@
         "name": "createVector4"
       },
       "line": 89,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/geometry/src/vector4.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -8851,6 +9098,7 @@
         "name": "createStubGlyphRasterizerBackend"
       },
       "line": 12,
+      "normalizations": [],
       "source": "upstream/packages/glyphatlas/src/glyphRasterizerBackend.ts",
       "status": "blocked"
     },
@@ -8877,6 +9125,7 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 37,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
       "status": "ready"
     },
@@ -8901,6 +9150,7 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 38,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
       "status": "blocked"
     },
@@ -8925,6 +9175,7 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 46,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
       "status": "blocked"
     },
@@ -8949,6 +9200,7 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 47,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
       "status": "blocked"
     },
@@ -8975,6 +9227,7 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 50,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
       "status": "blocked"
     },
@@ -8999,6 +9252,7 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 52,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
       "status": "blocked"
     },
@@ -9023,6 +9277,7 @@
         "name": "createCapacitorAppCapabilities"
       },
       "line": 53,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorApp.ts",
       "status": "blocked"
     },
@@ -9053,6 +9308,7 @@
         "name": "createCapacitorClipboardBackend"
       },
       "line": 15,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorClipboard.ts",
       "status": "blocked"
     },
@@ -9079,6 +9335,7 @@
         "name": "createCapacitorConnectivityBackend"
       },
       "line": 70,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorConnectivity.ts",
       "status": "blocked"
     },
@@ -9107,6 +9364,7 @@
         "name": "createCapacitorDeviceBackend"
       },
       "line": 42,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorDevice.ts",
       "status": "blocked"
     },
@@ -9132,6 +9390,7 @@
         "name": "createCapacitorMessageDialogBackend"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts",
       "status": "blocked"
     },
@@ -9156,6 +9415,7 @@
         "name": "createCapacitorPromptDialogBackend"
       },
       "line": 31,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorDialog.ts",
       "status": "blocked"
     },
@@ -9193,6 +9453,7 @@
         "name": "createCapacitorFileSystemBackend"
       },
       "line": 14,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorFileSystem.ts",
       "status": "blocked"
     },
@@ -9222,6 +9483,7 @@
         "name": "createCapacitorGeolocationBackend"
       },
       "line": 24,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorGeolocation.ts",
       "status": "blocked"
     },
@@ -9246,6 +9508,7 @@
         "name": "createCapacitorSoftKeyboardAccessoryBarBackend"
       },
       "line": 32,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
       "status": "blocked"
     },
@@ -9270,6 +9533,7 @@
         "name": "createCapacitorSoftKeyboardChangeBackend"
       },
       "line": 46,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
       "status": "blocked"
     },
@@ -9294,6 +9558,7 @@
         "name": "createCapacitorSoftKeyboardInfoBackend"
       },
       "line": 83,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
       "status": "blocked"
     },
@@ -9318,6 +9583,7 @@
         "name": "createCapacitorSoftKeyboardResizeModeWriteBackend"
       },
       "line": 98,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
       "status": "blocked"
     },
@@ -9342,6 +9608,7 @@
         "name": "createCapacitorSoftKeyboardScrollAssistBackend"
       },
       "line": 113,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
       "status": "blocked"
     },
@@ -9366,6 +9633,7 @@
         "name": "createCapacitorSoftKeyboardStyleBackend"
       },
       "line": 126,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
       "status": "blocked"
     },
@@ -9391,6 +9659,7 @@
         "name": "createCapacitorSoftKeyboardVisibilityBackend"
       },
       "line": 141,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorKeyboard.ts",
       "status": "blocked"
     },
@@ -9420,6 +9689,7 @@
         "name": "createCapacitorNotificationCapabilities"
       },
       "line": 101,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorNotification.ts",
       "status": "ready"
     },
@@ -9444,6 +9714,7 @@
         "name": "createCapacitorProtocolCapabilities"
       },
       "line": 9,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorProtocol.ts",
       "status": "ready"
     },
@@ -9468,6 +9739,7 @@
         "name": "createCapacitorProtocolCapabilities"
       },
       "line": 10,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorProtocol.ts",
       "status": "blocked"
     },
@@ -9517,6 +9789,7 @@
         "name": "capacitorHost"
       },
       "line": 103,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorRegister.ts",
       "status": "blocked"
     },
@@ -9543,6 +9816,7 @@
         "name": "createCapacitorShareContentBackend"
       },
       "line": 13,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorShare.ts",
       "status": "ready"
     },
@@ -9571,6 +9845,7 @@
         "name": "createCapacitorStatusBarBackend"
       },
       "line": 40,
+      "normalizations": [],
       "source": "upstream/packages/host-capacitor/src/capacitorStatusBar.ts",
       "status": "blocked"
     },
@@ -9607,6 +9882,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 41,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "ready"
     },
@@ -9631,6 +9907,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 42,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9655,6 +9932,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 43,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9681,6 +9959,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 44,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9705,6 +9984,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 49,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9729,6 +10009,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 50,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9755,6 +10036,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 51,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9779,6 +10061,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 56,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9803,6 +10086,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 57,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9827,6 +10111,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 65,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9851,6 +10136,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 66,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9875,6 +10161,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 67,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9901,6 +10188,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 72,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9925,6 +10213,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 77,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9959,6 +10248,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 83,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -9983,6 +10273,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 85,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10007,6 +10298,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 86,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10031,6 +10323,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 89,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10060,6 +10353,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 90,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10084,6 +10378,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 100,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10108,6 +10403,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 105,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10132,6 +10428,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 106,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10156,6 +10453,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 108,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10183,6 +10481,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 113,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10207,6 +10506,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 117,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10232,6 +10532,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 121,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10256,6 +10557,7 @@
         "name": "createElectronAppCapabilities"
       },
       "line": 123,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10281,6 +10583,7 @@
         "name": "createElectronLoginItemBackend"
       },
       "line": 128,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10306,6 +10609,7 @@
         "name": "createElectronRecentDocumentsBackend"
       },
       "line": 150,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronApp.ts",
       "status": "blocked"
     },
@@ -10348,6 +10652,7 @@
         "name": "createElectronClipboardBackend"
       },
       "line": 23,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronClipboard.ts",
       "status": "blocked"
     },
@@ -10372,6 +10677,7 @@
         "name": "createElectronDirectoryOpenDialogBackend"
       },
       "line": 18,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronDialog.ts",
       "status": "blocked"
     },
@@ -10396,6 +10702,7 @@
         "name": "createElectronFileOpenDialogBackend"
       },
       "line": 40,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronDialog.ts",
       "status": "blocked"
     },
@@ -10420,6 +10727,7 @@
         "name": "createElectronFileSaveDialogBackend"
       },
       "line": 67,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronDialog.ts",
       "status": "blocked"
     },
@@ -10444,6 +10752,7 @@
         "name": "createElectronIpcMessageBackend"
       },
       "line": 13,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronIpc.ts",
       "status": "ready"
     },
@@ -10469,6 +10778,7 @@
         "name": "createElectronMenuBackends"
       },
       "line": 29,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronMenu.ts",
       "status": "not-entity"
     },
@@ -10493,6 +10803,7 @@
         "name": "createElectronMenuBackends"
       },
       "line": 44,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronMenu.ts",
       "status": "not-entity"
     },
@@ -10517,6 +10828,7 @@
         "name": "createElectronMenuBackends"
       },
       "line": 59,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronMenu.ts",
       "status": "not-entity"
     },
@@ -10540,6 +10852,7 @@
         "name": "createElectronNotificationCapabilities"
       },
       "line": 177,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronNotification.ts",
       "status": "blocked"
     },
@@ -10566,6 +10879,7 @@
         "name": "createElectronNotificationCapabilities"
       },
       "line": 178,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronNotification.ts",
       "status": "blocked"
     },
@@ -10590,6 +10904,7 @@
         "name": "createElectronPlatformBackend"
       },
       "line": 9,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPlatform.ts",
       "status": "blocked"
     },
@@ -10613,6 +10928,7 @@
         "name": "createElectronPowerBackends"
       },
       "line": 44,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "blocked"
     },
@@ -10636,6 +10952,7 @@
         "name": "createElectronPowerBackends"
       },
       "line": 49,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "blocked"
     },
@@ -10660,6 +10977,7 @@
         "name": "createElectronPowerBackends"
       },
       "line": 59,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "blocked"
     },
@@ -10686,6 +11004,7 @@
         "name": "createElectronPowerBackends"
       },
       "line": 69,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "blocked"
     },
@@ -10710,6 +11029,7 @@
         "name": "createElectronPowerBackends"
       },
       "line": 102,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "blocked"
     },
@@ -10733,6 +11053,7 @@
         "name": "createElectronPowerBackends"
       },
       "line": 112,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "blocked"
     },
@@ -10757,6 +11078,7 @@
         "name": "createElectronPowerBackends"
       },
       "line": 126,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "blocked"
     },
@@ -10782,6 +11104,7 @@
         "name": "createElectronPowerBackends"
       },
       "line": 146,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
       "status": "blocked"
     },
@@ -10807,6 +11130,7 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 7,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
       "status": "blocked"
     },
@@ -10835,6 +11159,7 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 15,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
       "status": "ready"
     },
@@ -10861,6 +11186,7 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 16,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
       "status": "blocked"
     },
@@ -10885,6 +11211,7 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 25,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
       "status": "blocked"
     },
@@ -10909,6 +11236,7 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 33,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
       "status": "blocked"
     },
@@ -10933,6 +11261,7 @@
         "name": "createElectronProtocolCapabilities"
       },
       "line": 34,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronProtocol.ts",
       "status": "blocked"
     },
@@ -10982,6 +11311,7 @@
         "name": "registerElectronBackends"
       },
       "line": 157,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronRegister.ts",
       "status": "blocked"
     },
@@ -11008,6 +11338,7 @@
         "name": "createElectronScreenCapabilities"
       },
       "line": 17,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronScreen.ts",
       "status": "blocked"
     },
@@ -11032,6 +11363,7 @@
         "name": "createElectronScreenCapabilities"
       },
       "line": 36,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronScreen.ts",
       "status": "blocked"
     },
@@ -11066,9 +11398,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -11082,8 +11412,11 @@
         "name": "emptyScreenInfo"
       },
       "line": 71,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/host-electron/src/electronScreen.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11106,6 +11439,7 @@
         "name": "makeElectronShellCapabilities"
       },
       "line": 25,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShell.ts",
       "status": "ready"
     },
@@ -11130,6 +11464,7 @@
         "name": "makeElectronShellCapabilities"
       },
       "line": 30,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShell.ts",
       "status": "ready"
     },
@@ -11154,6 +11489,7 @@
         "name": "makeElectronShellCapabilities"
       },
       "line": 40,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShell.ts",
       "status": "ready"
     },
@@ -11178,6 +11514,7 @@
         "name": "makeElectronShellCapabilities"
       },
       "line": 50,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShell.ts",
       "status": "ready"
     },
@@ -11202,6 +11539,7 @@
         "name": "makeElectronShellCapabilities"
       },
       "line": 60,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShell.ts",
       "status": "ready"
     },
@@ -11227,6 +11565,7 @@
         "name": "createElectronShellShortcutLinkBackend"
       },
       "line": 77,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShell.ts",
       "status": "ready"
     },
@@ -11253,6 +11592,7 @@
         "name": "createElectronShortcutQueryBackend"
       },
       "line": 11,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShortcut.ts",
       "status": "blocked"
     },
@@ -11281,6 +11621,7 @@
         "name": "createElectronShortcutTriggerBackend"
       },
       "line": 32,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShortcut.ts",
       "status": "blocked"
     },
@@ -11304,6 +11645,7 @@
         "name": "subscribe"
       },
       "line": 46,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronShortcut.ts",
       "status": "blocked"
     },
@@ -11332,6 +11674,7 @@
         "name": "createElectronStorageBackend"
       },
       "line": 76,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronStorage.ts",
       "status": "blocked"
     },
@@ -11359,6 +11702,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 51,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11383,6 +11727,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 114,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11408,6 +11753,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 134,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11432,6 +11778,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 154,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11455,6 +11802,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 177,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11478,6 +11826,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 189,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11501,6 +11850,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 192,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11524,6 +11874,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 195,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11547,6 +11898,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 213,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11570,6 +11922,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 220,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11593,6 +11946,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 221,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11616,6 +11970,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 239,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11640,6 +11995,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 252,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11664,6 +12020,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 280,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11687,6 +12044,7 @@
         "name": "createElectronTrayCapabilities"
       },
       "line": 313,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronTray.ts",
       "status": "blocked"
     },
@@ -11713,6 +12071,7 @@
         "name": "createElectronUpdaterBackend"
       },
       "line": 71,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronUpdater.ts",
       "status": "ready"
     },
@@ -11737,6 +12096,7 @@
         "name": "createDownloadedUpdate"
       },
       "line": 133,
+      "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronUpdater.ts",
       "status": "ready"
     },
@@ -11753,9 +12113,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -11769,8 +12127,11 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 20,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11795,6 +12156,7 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 21,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
       "status": "blocked"
     },
@@ -11819,6 +12181,7 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 26,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
       "status": "blocked"
     },
@@ -11843,6 +12206,7 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 27,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
       "status": "blocked"
     },
@@ -11867,6 +12231,7 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 28,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
       "status": "blocked"
     },
@@ -11891,6 +12256,7 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 29,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
       "status": "blocked"
     },
@@ -11915,6 +12281,7 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 30,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
       "status": "blocked"
     },
@@ -11939,6 +12306,7 @@
         "name": "createTauriAppCapabilities"
       },
       "line": 31,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriApp.ts",
       "status": "blocked"
     },
@@ -11952,9 +12320,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -11968,8 +12334,11 @@
         "name": "createTauriClipboardBackend"
       },
       "line": 8,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/host-tauri/src/tauriClipboard.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -11992,6 +12361,7 @@
         "name": "createTauriDirectoryOpenDialogBackend"
       },
       "line": 20,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriDialog.ts",
       "status": "blocked"
     },
@@ -12016,6 +12386,7 @@
         "name": "createTauriFileOpenDialogBackend"
       },
       "line": 43,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriDialog.ts",
       "status": "blocked"
     },
@@ -12040,6 +12411,7 @@
         "name": "createTauriFileSaveDialogBackend"
       },
       "line": 70,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriDialog.ts",
       "status": "blocked"
     },
@@ -12065,6 +12437,7 @@
         "name": "createTauriMenuBackends"
       },
       "line": 30,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriMenu.ts",
       "status": "not-entity"
     },
@@ -12089,6 +12462,7 @@
         "name": "createTauriMenuBackends"
       },
       "line": 51,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriMenu.ts",
       "status": "not-entity"
     },
@@ -12113,6 +12487,7 @@
         "name": "createTauriMenuBackends"
       },
       "line": 62,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriMenu.ts",
       "status": "not-entity"
     },
@@ -12139,6 +12514,7 @@
         "name": "createTauriNotificationCapabilities"
       },
       "line": 15,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriNotification.ts",
       "status": "ready"
     },
@@ -12163,6 +12539,7 @@
         "name": "createTauriPlatformBackend"
       },
       "line": 17,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriPlatform.ts",
       "status": "not-entity"
     },
@@ -12212,6 +12589,7 @@
         "name": "registerTauriBackends"
       },
       "line": 96,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriRegister.ts",
       "status": "blocked"
     },
@@ -12236,6 +12614,7 @@
         "name": "makeTauriShellCapabilities"
       },
       "line": 17,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriShell.ts",
       "status": "ready"
     },
@@ -12260,6 +12639,7 @@
         "name": "makeTauriShellCapabilities"
       },
       "line": 27,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriShell.ts",
       "status": "ready"
     },
@@ -12284,6 +12664,7 @@
         "name": "makeTauriShellCapabilities"
       },
       "line": 37,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriShell.ts",
       "status": "ready"
     },
@@ -12310,6 +12691,7 @@
         "name": "createTauriShortcutQueryBackend"
       },
       "line": 11,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
       "status": "blocked"
     },
@@ -12338,6 +12720,7 @@
         "name": "createTauriShortcutTriggerBackend"
       },
       "line": 33,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
       "status": "blocked"
     },
@@ -12361,6 +12744,7 @@
         "name": "subscribe"
       },
       "line": 48,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriShortcut.ts",
       "status": "blocked"
     },
@@ -12388,6 +12772,7 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 39,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
       "status": "blocked"
     },
@@ -12412,6 +12797,7 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 112,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
       "status": "blocked"
     },
@@ -12436,6 +12822,7 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 118,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
       "status": "blocked"
     },
@@ -12459,6 +12846,7 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 187,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
       "status": "blocked"
     },
@@ -12484,6 +12872,7 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 192,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
       "status": "blocked"
     },
@@ -12508,6 +12897,7 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 208,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
       "status": "blocked"
     },
@@ -12533,6 +12923,7 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 211,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
       "status": "blocked"
     },
@@ -12556,6 +12947,7 @@
         "name": "createTauriTrayCapabilities"
       },
       "line": 233,
+      "normalizations": [],
       "source": "upstream/packages/host-tauri/src/tauriTray.ts",
       "status": "blocked"
     },
@@ -12585,6 +12977,7 @@
         "name": "createWebAccessibilityBackend"
       },
       "line": 47,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webAccessibility.ts",
       "status": "ready"
     },
@@ -12615,6 +13008,7 @@
         "name": "createWebAppCapabilities"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webApp.ts",
       "status": "blocked"
     },
@@ -12639,6 +13033,7 @@
         "name": "createWebAppCapabilities"
       },
       "line": 9,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webApp.ts",
       "status": "blocked"
     },
@@ -12663,6 +13058,7 @@
         "name": "createWebAppCapabilities"
       },
       "line": 21,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webApp.ts",
       "status": "blocked"
     },
@@ -12689,6 +13085,7 @@
         "name": "createWebAppCapabilities"
       },
       "line": 28,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webApp.ts",
       "status": "blocked"
     },
@@ -12713,6 +13110,7 @@
         "name": "createWebAppCapabilities"
       },
       "line": 43,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webApp.ts",
       "status": "blocked"
     },
@@ -12737,6 +13135,7 @@
         "name": "createWebAppCapabilities"
       },
       "line": 48,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webApp.ts",
       "status": "blocked"
     },
@@ -12761,6 +13160,7 @@
         "name": "createWebAppCapabilities"
       },
       "line": 55,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webApp.ts",
       "status": "blocked"
     },
@@ -12785,6 +13185,7 @@
         "name": "createWebAppCapabilities"
       },
       "line": 70,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webApp.ts",
       "status": "blocked"
     },
@@ -12809,6 +13210,7 @@
         "name": "createWebBitmapReadbackBackend"
       },
       "line": 7,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webBitmapReadback.ts",
       "status": "blocked"
     },
@@ -12826,9 +13228,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 30,
       "destination": {
         "kind": "exact-entity",
@@ -12842,8 +13242,11 @@
         "name": "readBitmap"
       },
       "line": 33,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/host-web/src/webBitmapReadback.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -12869,6 +13272,7 @@
         "name": "createWebCanvasRenderSurfaceCreator"
       },
       "line": 6,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webCanvasRenderSurface.ts",
       "status": "blocked"
     },
@@ -12911,6 +13315,7 @@
         "name": "createWebClipboardProviderBackend"
       },
       "line": 113,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webClipboard.ts",
       "status": "blocked"
     },
@@ -12938,6 +13343,7 @@
         "name": "createWebConnectivityBackend"
       },
       "line": 17,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webConnectivity.ts",
       "status": "blocked"
     },
@@ -12962,6 +13368,7 @@
         "name": "createWebCursorBackend"
       },
       "line": 5,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webCursor.ts",
       "status": "blocked"
     },
@@ -12986,6 +13393,7 @@
         "name": "<module>"
       },
       "line": 20,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webDialog.ts",
       "status": "blocked"
     },
@@ -13010,6 +13418,7 @@
         "name": "<module>"
       },
       "line": 24,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webDialog.ts",
       "status": "blocked"
     },
@@ -13034,6 +13443,7 @@
         "name": "<module>"
       },
       "line": 28,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webDialog.ts",
       "status": "blocked"
     },
@@ -13061,6 +13471,7 @@
         "name": "createWebFontLoadingBackend"
       },
       "line": 6,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webFontLoading.ts",
       "status": "blocked"
     },
@@ -13086,6 +13497,7 @@
         "name": "createWebGlyphRasterizerBackend"
       },
       "line": 12,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webGlyphRasterizer.ts",
       "status": "blocked"
     },
@@ -13110,6 +13522,7 @@
         "name": "<module>"
       },
       "line": 15,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
     },
@@ -13134,6 +13547,7 @@
         "name": "<module>"
       },
       "line": 33,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
     },
@@ -13159,6 +13573,7 @@
         "name": "<module>"
       },
       "line": 46,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
     },
@@ -13183,6 +13598,7 @@
         "name": "<module>"
       },
       "line": 87,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
     },
@@ -13207,6 +13623,7 @@
         "name": "<module>"
       },
       "line": 100,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
     },
@@ -13231,6 +13648,7 @@
         "name": "<module>"
       },
       "line": 119,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
     },
@@ -13255,6 +13673,7 @@
         "name": "createWebInputTargetHandle"
       },
       "line": 131,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webInputTarget.ts",
       "status": "ready"
     },
@@ -13279,6 +13698,7 @@
         "name": "createWebSoftKeyboardChangeBackend"
       },
       "line": 16,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webKeyboard.ts",
       "status": "blocked"
     },
@@ -13303,6 +13723,7 @@
         "name": "createWebSoftKeyboardInfoBackend"
       },
       "line": 39,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webKeyboard.ts",
       "status": "blocked"
     },
@@ -13328,6 +13749,7 @@
         "name": "createWebSoftKeyboardVisibilityBackend"
       },
       "line": 53,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webKeyboard.ts",
       "status": "blocked"
     },
@@ -13352,6 +13774,7 @@
         "name": "createWebMediaSessionActionBackend"
       },
       "line": 123,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webMediasession.ts",
       "status": "blocked"
     },
@@ -13376,6 +13799,7 @@
         "name": "createWebMediaSessionBackend"
       },
       "line": 322,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webMediasession.ts",
       "status": "blocked"
     },
@@ -13400,6 +13824,7 @@
         "name": "createWebMidiProfile"
       },
       "line": 111,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webMidi.ts",
       "status": "blocked"
     },
@@ -13424,6 +13849,7 @@
         "name": "createWebMidiProfile"
       },
       "line": 121,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webMidi.ts",
       "status": "blocked"
     },
@@ -13448,6 +13874,7 @@
         "name": "createWebMidiProfile"
       },
       "line": 122,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webMidi.ts",
       "status": "blocked"
     },
@@ -13473,6 +13900,7 @@
         "name": "createWebMidiProfile"
       },
       "line": 125,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webMidi.ts",
       "status": "blocked"
     },
@@ -13497,6 +13925,7 @@
         "name": "attachWebMidiEvent"
       },
       "line": 140,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webMidi.ts",
       "status": "blocked"
     },
@@ -13527,6 +13956,7 @@
         "name": "createWebPageNotificationCapabilities"
       },
       "line": 48,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webNotification.ts",
       "status": "ready"
     },
@@ -13553,6 +13983,7 @@
         "name": "<module>"
       },
       "line": 181,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webPower.ts",
       "status": "blocked"
     },
@@ -13578,6 +14009,7 @@
         "name": "createWebProtocolCapabilities"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webProtocol.ts",
       "status": "blocked"
     },
@@ -13602,6 +14034,7 @@
         "name": "createWebProtocolCapabilities"
       },
       "line": 9,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webProtocol.ts",
       "status": "blocked"
     },
@@ -13627,6 +14060,7 @@
         "name": "createWebProtocolCapabilities"
       },
       "line": 20,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webProtocol.ts",
       "status": "blocked"
     },
@@ -13654,6 +14088,7 @@
         "name": "createWebScreenCapabilities"
       },
       "line": 178,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webScreen.ts",
       "status": "blocked"
     },
@@ -13678,6 +14113,7 @@
         "name": "createWebScreenCapabilities"
       },
       "line": 221,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webScreen.ts",
       "status": "blocked"
     },
@@ -13703,6 +14139,7 @@
         "name": "createWebScreenCapabilities"
       },
       "line": 242,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webScreen.ts",
       "status": "blocked"
     },
@@ -13727,6 +14164,7 @@
         "name": "createWebScreenCapabilities"
       },
       "line": 272,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webScreen.ts",
       "status": "blocked"
     },
@@ -13758,6 +14196,7 @@
         "name": "createWebServiceWorkerNotificationCapabilities"
       },
       "line": 60,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webServiceWorkerNotification.ts",
       "status": "ready"
     },
@@ -13784,6 +14223,7 @@
         "name": "<module>"
       },
       "line": 11,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webShare.ts",
       "status": "ready"
     },
@@ -13810,6 +14250,7 @@
         "name": "<module>"
       },
       "line": 27,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webShare.ts",
       "status": "ready"
     },
@@ -13834,6 +14275,7 @@
         "name": "<module>"
       },
       "line": 6,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webShell.ts",
       "status": "ready"
     },
@@ -13864,6 +14306,7 @@
         "name": "<module>"
       },
       "line": 20,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webStorage.ts",
       "status": "blocked"
     },
@@ -13888,6 +14331,7 @@
         "name": "createWebWindowStoragePersistenceCapabilities"
       },
       "line": 14,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
       "status": "blocked"
     },
@@ -13915,6 +14359,7 @@
         "name": "createWebWindowStoragePersistenceCapabilities"
       },
       "line": 21,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
       "status": "blocked"
     },
@@ -13941,6 +14386,7 @@
         "name": "createWebWorkerStoragePersistenceCapabilities"
       },
       "line": 31,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
       "status": "blocked"
     },
@@ -13965,6 +14411,7 @@
         "name": "createPersistenceQueryBackend"
       },
       "line": 36,
+      "normalizations": [],
       "source": "upstream/packages/host-web/src/webStoragePersistence.ts",
       "status": "blocked"
     },
@@ -13995,6 +14442,7 @@
         "name": "cloneImageResource"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/image/src/imageResource.ts",
       "status": "ready"
     },
@@ -14025,6 +14473,7 @@
         "name": "createCompressedImage"
       },
       "line": 22,
+      "normalizations": [],
       "source": "upstream/packages/image/src/imageResource.ts",
       "status": "ready"
     },
@@ -14055,6 +14504,7 @@
         "name": "createImageResource"
       },
       "line": 34,
+      "normalizations": [],
       "source": "upstream/packages/image/src/imageResource.ts",
       "status": "ready"
     },
@@ -14085,6 +14535,7 @@
         "name": "createImageResourceFromCanvas"
       },
       "line": 18,
+      "normalizations": [],
       "source": "upstream/packages/image/src/imageResourceFrom.ts",
       "status": "ready"
     },
@@ -14115,6 +14566,7 @@
         "name": "createImageResourceFromImageBitmap"
       },
       "line": 30,
+      "normalizations": [],
       "source": "upstream/packages/image/src/imageResourceFrom.ts",
       "status": "ready"
     },
@@ -14145,6 +14597,7 @@
         "name": "createImageResourceFromImageElement"
       },
       "line": 42,
+      "normalizations": [],
       "source": "upstream/packages/image/src/imageResourceFrom.ts",
       "status": "ready"
     },
@@ -14168,6 +14621,7 @@
         "name": "decodeEmbeddedImageResourceReference"
       },
       "line": 73,
+      "normalizations": [],
       "source": "upstream/packages/image/src/imageResourceReference.ts",
       "status": "blocked"
     },
@@ -14194,6 +14648,7 @@
         "name": "createSoftKeyboard"
       },
       "line": 51,
+      "normalizations": [],
       "source": "upstream/packages/keyboard/src/keyboard.ts",
       "status": "blocked"
     },
@@ -14220,6 +14675,7 @@
         "name": "createAmbientLight"
       },
       "line": 13,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/ambientLight.ts",
       "status": "ready"
     },
@@ -14255,6 +14711,7 @@
         "name": "cloneAreaLight"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/areaLight.ts",
       "status": "ready"
     },
@@ -14290,6 +14747,7 @@
         "name": "createAreaLight"
       },
       "line": 33,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/areaLight.ts",
       "status": "ready"
     },
@@ -14321,6 +14779,7 @@
         "name": "cloneDirectionalLight"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/directionalLight.ts",
       "status": "ready"
     },
@@ -14352,6 +14811,7 @@
         "name": "createDirectionalLight"
       },
       "line": 25,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/directionalLight.ts",
       "status": "ready"
     },
@@ -14378,6 +14838,7 @@
         "name": "createEnvironment"
       },
       "line": 15,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/environment.ts",
       "status": "ready"
     },
@@ -14405,6 +14866,7 @@
         "name": "createHemisphereLight"
       },
       "line": 18,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/hemisphereLight.ts",
       "status": "ready"
     },
@@ -14437,6 +14899,7 @@
         "name": "clonePointLight"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/pointLight.ts",
       "status": "ready"
     },
@@ -14469,6 +14932,7 @@
         "name": "createPointLight"
       },
       "line": 26,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/pointLight.ts",
       "status": "ready"
     },
@@ -14497,6 +14961,7 @@
         "name": "createScene3DLights"
       },
       "line": 14,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/sceneLights.ts",
       "status": "ready"
     },
@@ -14532,6 +14997,7 @@
         "name": "cloneSpotLight"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/spotLight.ts",
       "status": "ready"
     },
@@ -14567,6 +15033,7 @@
         "name": "createSpotLight"
       },
       "line": 31,
+      "normalizations": [],
       "source": "upstream/packages/lighting/src/spotLight.ts",
       "status": "ready"
     },
@@ -14595,6 +15062,7 @@
         "name": "createAnisotropyPbrExtension"
       },
       "line": 9,
+      "normalizations": [],
       "source": "upstream/packages/materials/src/anisotropyPbrExtension.ts",
       "status": "ready"
     },
@@ -14628,6 +15096,7 @@
         "name": "createClearcoatPbrExtension"
       },
       "line": 9,
+      "normalizations": [],
       "source": "upstream/packages/materials/src/clearcoatPbrExtension.ts",
       "status": "ready"
     },
@@ -14645,9 +15114,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -14661,8 +15128,11 @@
         "name": "createColorScaleBias"
       },
       "line": 50,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/materials/src/colorScaleBias.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -14693,6 +15163,7 @@
         "name": "createIridescencePbrExtension"
       },
       "line": 11,
+      "normalizations": [],
       "source": "upstream/packages/materials/src/iridescencePbrExtension.ts",
       "status": "ready"
     },
@@ -14719,6 +15190,7 @@
         "name": "cloneMaterial"
       },
       "line": 7,
+      "normalizations": [],
       "source": "upstream/packages/materials/src/material.ts",
       "status": "blocked"
     },
@@ -14745,6 +15217,7 @@
         "name": "createMaterial"
       },
       "line": 20,
+      "normalizations": [],
       "source": "upstream/packages/materials/src/material.ts",
       "status": "blocked"
     },
@@ -14775,6 +15248,7 @@
         "name": "createSheenPbrExtension"
       },
       "line": 9,
+      "normalizations": [],
       "source": "upstream/packages/materials/src/sheenPbrExtension.ts",
       "status": "ready"
     },
@@ -14805,6 +15279,7 @@
         "name": "createSpecularPbrExtension"
       },
       "line": 9,
+      "normalizations": [],
       "source": "upstream/packages/materials/src/specularPbrExtension.ts",
       "status": "ready"
     },
@@ -14830,6 +15305,7 @@
         "name": "createStandardMaterial"
       },
       "line": 6,
+      "normalizations": [],
       "source": "upstream/packages/materials/src/standardMaterial.ts",
       "status": "ready"
     },
@@ -14863,6 +15339,7 @@
         "name": "createTransmissionVolumePbrExtension"
       },
       "line": 11,
+      "normalizations": [],
       "source": "upstream/packages/materials/src/transmissionVolumePbrExtension.ts",
       "status": "ready"
     },
@@ -14894,6 +15371,7 @@
         "name": "createWrappedDiffusePbrExtension"
       },
       "line": 11,
+      "normalizations": [],
       "source": "upstream/packages/materials/src/wrappedDiffusePbrExtension.ts",
       "status": "ready"
     },
@@ -14919,6 +15397,7 @@
         "name": "createMediaSessionActionSignal"
       },
       "line": 39,
+      "normalizations": [],
       "source": "upstream/packages/mediasession/src/mediasession.ts",
       "status": "ready"
     },
@@ -14943,6 +15422,7 @@
         "name": "createMenuHighlight"
       },
       "line": 48,
+      "normalizations": [],
       "source": "upstream/packages/menu/src/menu.ts",
       "status": "not-entity"
     },
@@ -14967,6 +15447,7 @@
         "name": "createMenuSelect"
       },
       "line": 68,
+      "normalizations": [],
       "source": "upstream/packages/menu/src/menu.ts",
       "status": "not-entity"
     },
@@ -14997,6 +15478,7 @@
         "name": "createMeshGeometryRuntime"
       },
       "line": 192,
+      "normalizations": [],
       "source": "upstream/packages/mesh/src/meshGeometry.ts",
       "status": "ready"
     },
@@ -15021,6 +15503,7 @@
         "name": "createMidiAccessResource"
       },
       "line": 21,
+      "normalizations": [],
       "source": "upstream/packages/midi/src/midiAccess.ts",
       "status": "blocked"
     },
@@ -15049,6 +15532,7 @@
         "name": "createMidiInputPortResource"
       },
       "line": 52,
+      "normalizations": [],
       "source": "upstream/packages/midi/src/midiPort.ts",
       "status": "blocked"
     },
@@ -15077,6 +15561,7 @@
         "name": "createMidiOutputPortResource"
       },
       "line": 61,
+      "normalizations": [],
       "source": "upstream/packages/midi/src/midiPort.ts",
       "status": "blocked"
     },
@@ -15100,6 +15585,7 @@
         "name": "createMidiSubscription"
       },
       "line": 131,
+      "normalizations": [],
       "source": "upstream/packages/midi/src/midiSubscription.ts",
       "status": "blocked"
     },
@@ -15128,6 +15614,7 @@
         "name": "createViewport"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/node/src/viewport.ts",
       "status": "ready"
     },
@@ -15154,6 +15641,7 @@
         "name": "createNotificationResource"
       },
       "line": 188,
+      "normalizations": [],
       "source": "upstream/packages/notification/src/notification.ts",
       "status": "ready"
     },
@@ -15180,6 +15668,7 @@
         "name": "createScheduledNotificationResource"
       },
       "line": 197,
+      "normalizations": [],
       "source": "upstream/packages/notification/src/notification.ts",
       "status": "ready"
     },
@@ -15203,6 +15692,7 @@
         "name": "createNotificationSubscription"
       },
       "line": 314,
+      "normalizations": [],
       "source": "upstream/packages/notification/src/notification.ts",
       "status": "blocked"
     },
@@ -15238,6 +15728,7 @@
         "name": "createScene3DHit"
       },
       "line": 36,
+      "normalizations": [],
       "source": "upstream/packages/picking/src/pickScene3D.ts",
       "status": "ready"
     },
@@ -15270,6 +15761,7 @@
         "name": "createPower"
       },
       "line": 108,
+      "normalizations": [],
       "source": "upstream/packages/power/src/power.ts",
       "status": "ready"
     },
@@ -15294,6 +15786,7 @@
         "name": "createProtocolHandler"
       },
       "line": 24,
+      "normalizations": [],
       "source": "upstream/packages/protocol/src/protocol.ts",
       "status": "ready"
     },
@@ -15323,6 +15816,7 @@
         "name": "createExternalGlTexture"
       },
       "line": 22,
+      "normalizations": [],
       "source": "upstream/packages/render-gl/src/glExternalTexture.ts",
       "status": "blocked"
     },
@@ -15347,6 +15841,7 @@
         "name": "createGlPipeline"
       },
       "line": 29,
+      "normalizations": [],
       "source": "upstream/packages/render-gl/src/glPipeline.ts",
       "status": "ready"
     },
@@ -15371,6 +15866,7 @@
         "name": "createGlContextState"
       },
       "line": 51,
+      "normalizations": [],
       "source": "upstream/packages/render-gl/src/glRenderState.ts",
       "status": "ready"
     },
@@ -15412,6 +15908,7 @@
         "name": "createGlRenderTarget"
       },
       "line": 85,
+      "normalizations": [],
       "source": "upstream/packages/render-gl/src/glRenderTarget.ts",
       "status": "blocked"
     },
@@ -15441,6 +15938,7 @@
         "name": "createExternalWgpuTexture"
       },
       "line": 21,
+      "normalizations": [],
       "source": "upstream/packages/render-wgpu/src/wgpuExternalTexture.ts",
       "status": "blocked"
     },
@@ -15465,6 +15963,7 @@
         "name": "createWgpuPipeline"
       },
       "line": 25,
+      "normalizations": [],
       "source": "upstream/packages/render-wgpu/src/wgpuPipeline.ts",
       "status": "ready"
     },
@@ -15489,6 +15988,7 @@
         "name": "createWgpuDeviceState"
       },
       "line": 55,
+      "normalizations": [],
       "source": "upstream/packages/render-wgpu/src/wgpuRenderState.ts",
       "status": "ready"
     },
@@ -15514,6 +16014,7 @@
         "name": "createRenderCache"
       },
       "line": 18,
+      "normalizations": [],
       "source": "upstream/packages/render/src/renderCache.ts",
       "status": "ready"
     },
@@ -15545,9 +16046,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -15561,8 +16060,11 @@
         "name": "createRenderProxy"
       },
       "line": 36,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/render/src/renderProxy.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -15596,6 +16098,7 @@
         "name": "createRenderState"
       },
       "line": 12,
+      "normalizations": [],
       "source": "upstream/packages/render/src/renderState.ts",
       "status": "ready"
     },
@@ -15620,6 +16123,7 @@
         "name": "createCanvasPipeline"
       },
       "line": 7,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-canvas/src/canvasPipeline.ts",
       "status": "ready"
     },
@@ -15648,6 +16152,7 @@
         "name": "finishCanvasRenderSurface"
       },
       "line": 49,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-canvas/src/canvasRenderSurface.ts",
       "status": "ready"
     },
@@ -15673,6 +16178,7 @@
         "name": "<anonymous>"
       },
       "line": 23,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-canvas/src/canvasTestSupport.ts",
       "status": "blocked"
     },
@@ -15699,6 +16205,7 @@
         "name": "createCanvasTextLabelData"
       },
       "line": 25,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-canvas/src/canvasTextLabel.ts",
       "status": "blocked"
     },
@@ -15727,6 +16234,7 @@
         "name": "createCanvasTextureResolvers"
       },
       "line": 48,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-canvas/src/canvasTextureResolver.ts",
       "status": "blocked"
     },
@@ -15751,6 +16259,7 @@
         "name": "createDomRichTextData"
       },
       "line": 38,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-dom/src/domRichText.ts",
       "status": "blocked"
     },
@@ -15776,6 +16285,7 @@
         "name": "createDomScale9ShapeData"
       },
       "line": 31,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-dom/src/domScale9Shape.ts",
       "status": "blocked"
     },
@@ -15801,6 +16311,7 @@
         "name": "createDomShapeData"
       },
       "line": 25,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-dom/src/domShape.ts",
       "status": "blocked"
     },
@@ -15825,6 +16336,7 @@
         "name": "createDomTextData"
       },
       "line": 26,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-dom/src/domTextLabel.ts",
       "status": "blocked"
     },
@@ -15851,6 +16363,7 @@
         "name": "createGlRichTextData"
       },
       "line": 43,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-gl/src/glRichText.ts",
       "status": "blocked"
     },
@@ -15881,6 +16394,7 @@
         "name": "createGlScale9ShapeData"
       },
       "line": 50,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-gl/src/glScale9Shape.ts",
       "status": "blocked"
     },
@@ -15911,6 +16425,7 @@
         "name": "createGlShapeData"
       },
       "line": 28,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-gl/src/glShapeData.ts",
       "status": "blocked"
     },
@@ -15941,6 +16456,7 @@
         "name": "createGlTextLabelData"
       },
       "line": 50,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-gl/src/glTextLabel.ts",
       "status": "blocked"
     },
@@ -15965,6 +16481,7 @@
         "name": "createScene2DDocumentImporterRegistry"
       },
       "line": 26,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-resources/src/scene2DDocumentImporterRegistry.ts",
       "status": "ready"
     },
@@ -15988,6 +16505,7 @@
         "name": "createWgpuRendererData"
       },
       "line": 15,
+      "normalizations": [],
       "source": "upstream/packages/scene2d-wgpu/src/wgpuRendererData.ts",
       "status": "blocked"
     },
@@ -16017,6 +16535,7 @@
         "name": "createScene2D"
       },
       "line": 18,
+      "normalizations": [],
       "source": "upstream/packages/scene2d/src/scene2d.ts",
       "status": "ready"
     },
@@ -16044,6 +16563,7 @@
         "name": "createSpriteRendererData"
       },
       "line": 48,
+      "normalizations": [],
       "source": "upstream/packages/scene2d/src/sprite.ts",
       "status": "blocked"
     },
@@ -16069,6 +16589,7 @@
         "name": "createScene3DMaterialTextureRegistry"
       },
       "line": 17,
+      "normalizations": [],
       "source": "upstream/packages/scene3d-resources/src/sceneMaterialTextureRegistry.ts",
       "status": "ready"
     },
@@ -16096,6 +16617,7 @@
         "name": "createScene3DResourceResolver"
       },
       "line": 42,
+      "normalizations": [],
       "source": "upstream/packages/scene3d-resources/src/sceneResourceResolver.ts",
       "status": "blocked"
     },
@@ -16121,6 +16643,7 @@
         "name": "createScene3DResourceSignals"
       },
       "line": 8,
+      "normalizations": [],
       "source": "upstream/packages/scene3d-resources/src/sceneResourceSignals.ts",
       "status": "ready"
     },
@@ -16148,6 +16671,7 @@
         "name": "createScene3D"
       },
       "line": 14,
+      "normalizations": [],
       "source": "upstream/packages/scene3d/src/scene.ts",
       "status": "ready"
     },
@@ -16176,6 +16700,7 @@
         "name": "<anonymous>"
       },
       "line": 109,
+      "normalizations": [],
       "source": "upstream/packages/scene3d/src/sceneDocument.ts",
       "status": "blocked"
     },
@@ -16210,9 +16735,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -16226,8 +16749,11 @@
         "name": "createScreenInfo"
       },
       "line": 37,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/screen/src/screen.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16240,9 +16766,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -16256,8 +16780,11 @@
         "name": "createScreenMode"
       },
       "line": 67,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/screen/src/screen.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16280,6 +16807,7 @@
         "name": "createScreenPermissionChange"
       },
       "line": 71,
+      "normalizations": [],
       "source": "upstream/packages/screen/src/screen.ts",
       "status": "ready"
     },
@@ -16306,6 +16834,7 @@
         "name": "createScreenSignals"
       },
       "line": 75,
+      "normalizations": [],
       "source": "upstream/packages/screen/src/screen.ts",
       "status": "ready"
     },
@@ -16332,6 +16861,7 @@
         "name": "createShadedMaterial"
       },
       "line": 20,
+      "normalizations": [],
       "source": "upstream/packages/shading/src/createShadedMaterial.ts",
       "status": "blocked"
     },
@@ -16356,6 +16886,7 @@
         "name": "enableShareSignals"
       },
       "line": 38,
+      "normalizations": [],
       "source": "upstream/packages/share/src/share.ts",
       "status": "ready"
     },
@@ -16381,6 +16912,7 @@
         "name": "createGlobalShortcut"
       },
       "line": 85,
+      "normalizations": [],
       "source": "upstream/packages/shortcut/src/shortcutExplicitDependency.ts",
       "status": "ready"
     },
@@ -16411,6 +16943,7 @@
         "name": "cloneSkeleton2D"
       },
       "line": 13,
+      "normalizations": [],
       "source": "upstream/packages/skeleton2d/src/skeleton2d.ts",
       "status": "blocked"
     },
@@ -16441,6 +16974,7 @@
         "name": "createSkeleton2D"
       },
       "line": 152,
+      "normalizations": [],
       "source": "upstream/packages/skeleton2d/src/skeleton2d.ts",
       "status": "blocked"
     },
@@ -16471,6 +17005,7 @@
         "name": "cloneSkeleton3D"
       },
       "line": 15,
+      "normalizations": [],
       "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
       "status": "blocked"
     },
@@ -16499,6 +17034,7 @@
         "name": "cloneSkeleton3DJointHierarchy"
       },
       "line": 49,
+      "normalizations": [],
       "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
       "status": "ready"
     },
@@ -16529,6 +17065,7 @@
         "name": "createSkeleton3D"
       },
       "line": 87,
+      "normalizations": [],
       "source": "upstream/packages/skeleton3d/src/skeleton3d.ts",
       "status": "blocked"
     },
@@ -16561,6 +17098,7 @@
         "name": "createBvhSpatialBackend3D"
       },
       "line": 42,
+      "normalizations": [],
       "source": "upstream/packages/spatial/src/bvh3D.ts",
       "status": "blocked"
     },
@@ -16593,6 +17131,7 @@
         "name": "createUniformGridSpatialBackend2D"
       },
       "line": 61,
+      "normalizations": [],
       "source": "upstream/packages/spatial/src/uniformGrid.ts",
       "status": "blocked"
     },
@@ -16625,6 +17164,7 @@
         "name": "createUniformGridSpatialBackend3D"
       },
       "line": 48,
+      "normalizations": [],
       "source": "upstream/packages/spatial/src/uniformGrid3D.ts",
       "status": "blocked"
     },
@@ -16637,9 +17177,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -16653,8 +17191,11 @@
         "name": "cloneSpritesheet"
       },
       "line": 17,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/spritesheet/src/spritesheet.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16665,9 +17206,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -16681,8 +17220,11 @@
         "name": "createSpritesheet"
       },
       "line": 25,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/spritesheet/src/spritesheet.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -16711,6 +17253,7 @@
         "name": "createSpritesheetAnimation"
       },
       "line": 5,
+      "normalizations": [],
       "source": "upstream/packages/spritesheet/src/spritesheetAnimation.ts",
       "status": "ready"
     },
@@ -16735,6 +17278,7 @@
         "name": "createStorageSignals"
       },
       "line": 73,
+      "normalizations": [],
       "source": "upstream/packages/storage/src/storage.ts",
       "status": "ready"
     },
@@ -16772,6 +17316,7 @@
         "name": "createRenderTexture"
       },
       "line": 18,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/renderTexture.ts",
       "status": "blocked"
     },
@@ -16801,6 +17346,7 @@
         "name": "cloneSampler"
       },
       "line": 7,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/sampler.ts",
       "status": "ready"
     },
@@ -16830,6 +17376,7 @@
         "name": "createSampler"
       },
       "line": 51,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/sampler.ts",
       "status": "ready"
     },
@@ -16858,6 +17405,7 @@
         "name": "cloneTexture"
       },
       "line": 46,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/texture.ts",
       "status": "blocked"
     },
@@ -16886,6 +17434,7 @@
         "name": "cloneTexture"
       },
       "line": 48,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/texture.ts",
       "status": "blocked"
     },
@@ -16914,6 +17463,7 @@
         "name": "cloneTexture"
       },
       "line": 54,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/texture.ts",
       "status": "blocked"
     },
@@ -16942,6 +17492,7 @@
         "name": "cloneTexture"
       },
       "line": 59,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/texture.ts",
       "status": "blocked"
     },
@@ -16970,6 +17521,7 @@
         "name": "createTexture"
       },
       "line": 119,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/texture.ts",
       "status": "blocked"
     },
@@ -16998,6 +17550,7 @@
         "name": "createTexture"
       },
       "line": 126,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/texture.ts",
       "status": "blocked"
     },
@@ -17026,6 +17579,7 @@
         "name": "createTexture"
       },
       "line": 133,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/texture.ts",
       "status": "blocked"
     },
@@ -17054,6 +17608,7 @@
         "name": "createTexture2D"
       },
       "line": 153,
+      "normalizations": [],
       "source": "upstream/packages/texture/src/texture.ts",
       "status": "blocked"
     },
@@ -17070,9 +17625,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
         "kind": "exact-entity",
@@ -17086,8 +17639,11 @@
         "name": "createVideoImageResource"
       },
       "line": 97,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/texture/src/videoTexture.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17115,6 +17671,7 @@
         "name": "createTextureAtlas"
       },
       "line": 6,
+      "normalizations": [],
       "source": "upstream/packages/textureatlas/src/textureAtlas.ts",
       "status": "ready"
     },
@@ -17139,9 +17696,7 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "field-order-mismatch"
-      ],
+      "blockers": [],
       "column": 10,
       "destination": {
         "kind": "exact-entity",
@@ -17155,8 +17710,11 @@
         "name": "createTextureAtlasRegion"
       },
       "line": 121,
+      "normalizations": [
+        "field-order"
+      ],
       "source": "upstream/packages/textureatlas/src/textureAtlasRegion.ts",
-      "status": "blocked"
+      "status": "ready"
     },
     {
       "argument": {
@@ -17180,19 +17738,21 @@
         "name": "createTrayIcon"
       },
       "line": 75,
+      "normalizations": [],
       "source": "upstream/packages/tray/src/tray.ts",
       "status": "blocked"
     }
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 231,
+    "blockedEntityCalls": 207,
     "calls": 368,
     "exactEntityCalls": 191,
     "exactEntitySchemas": 148,
     "exactNonEntityCalls": 9,
     "genericEntityCalls": 3,
-    "readyEntityCalls": 128,
+    "normalizedFieldOrderCalls": 24,
+    "readyEntityCalls": 152,
     "structuralEntityCalls": 141,
     "unresolvedCalls": 24
   },

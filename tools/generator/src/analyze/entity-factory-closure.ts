@@ -23,7 +23,6 @@ export type EntityFactoryDestinationKind =
 export type EntityFactoryBlocker =
   | 'bare-entity-destination'
   | 'computed-construction'
-  | 'field-order-mismatch'
   | 'field-set-mismatch'
   | 'generic-entity-destination'
   | 'non-object-construction'
@@ -34,6 +33,8 @@ export type EntityFactoryBlocker =
   | 'structural-entity-destination'
   | 'unresolved-destination'
   | 'unsupported-object-member';
+
+export type EntityFactoryNormalization = 'field-order';
 
 export interface EntityFactoryClosureSite {
   argument: {
@@ -54,6 +55,7 @@ export interface EntityFactoryClosureSite {
     name: string;
   };
   line: number;
+  normalizations: EntityFactoryNormalization[];
   source: string;
   status: 'blocked' | 'not-entity' | 'ready';
 }
@@ -77,6 +79,7 @@ export interface EntityFactoryClosureAudit {
     exactEntitySchemas: number;
     exactNonEntityCalls: number;
     genericEntityCalls: number;
+    normalizedFieldOrderCalls: number;
     readyEntityCalls: number;
     structuralEntityCalls: number;
     unresolvedCalls: number;
@@ -135,6 +138,7 @@ export function auditEntityFactoryClosure(
       exactEntitySchemas: schemas.length,
       exactNonEntityCalls: countKind('exact-non-entity'),
       genericEntityCalls: countKind('generic-entity'),
+      normalizedFieldOrderCalls: sites.filter((site) => site.normalizations.includes('field-order')).length,
       readyEntityCalls: sites.filter((site) => site.status === 'ready').length,
       structuralEntityCalls: countKind('structural-entity'),
       unresolvedCalls: countKind('unresolved'),
@@ -178,6 +182,7 @@ function auditFactorySite(
         ? 'structural-entity'
         : 'unresolved';
   const blockers: EntityFactoryBlocker[] = [];
+  const normalizations: EntityFactoryNormalization[] = [];
   if (destinationKind === 'bare-entity') blockers.push('bare-entity-destination');
   else if (destinationKind === 'generic-entity') blockers.push('generic-entity-destination');
   else if (destinationKind === 'structural-entity') blockers.push('structural-entity-destination');
@@ -193,7 +198,7 @@ function auditFactorySite(
     if (shape.hasComputed) blockers.push('computed-construction');
     if (shape.hasSpread) blockers.push('spread-construction');
     if (shape.hasUnsupported) blockers.push('unsupported-object-member');
-    if (schema) addFieldBlockers(shape.fields, schema, blockers);
+    if (schema) addFieldFindings(shape.fields, schema, blockers, normalizations);
   } else if (call.arguments.length === 0) {
     argument = { fields: [], kind: 'omitted' };
     blockers.push('omitted-construction');
@@ -228,22 +233,24 @@ function auditFactorySite(
       name: factoryName,
     },
     line: position.line + 1,
+    normalizations,
     source: path.relative(workspaceDirectory, source.fileName).split(path.sep).join('/'),
     status,
   };
 }
 
-function addFieldBlockers(
+function addFieldFindings(
   fields: readonly string[],
   schema: TypedStructSchemaAudit,
   blockers: EntityFactoryBlocker[],
+  normalizations: EntityFactoryNormalization[],
 ): void {
   const expected = schema.fields.map((field) => field.name);
   if (fields.length !== expected.length || fields.some((field) => !expected.includes(field))) {
     blockers.push('field-set-mismatch');
     return;
   }
-  if (fields.some((field, index) => field !== expected[index])) blockers.push('field-order-mismatch');
+  if (fields.some((field, index) => field !== expected[index])) normalizations.push('field-order');
 }
 
 function locateEntityType(workspaceDirectory: string, program: ts.Program, checker: ts.TypeChecker): ts.Type {

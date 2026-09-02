@@ -4330,7 +4330,7 @@ class _Geometry {
   }
 
   public static function createQuaternion(?x:Float, ?y:Float, ?z:Float, ?w:Float):Quaternion {
-    return cast (cast createEntity(({ final __callArgument430:Dynamic = { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 1.0) }; __callArgument430; })) : { >Entity, var x:Float; var y:Float; var z:Float; var w:Float; });
+    return cast (cast createEntity(({ final __callArgument430:Dynamic = ({ final __structInitField0:Dynamic = _Runtime.coalesce(x, function():Dynamic return cast 0.0); final __structInitField1:Dynamic = _Runtime.coalesce(y, function():Dynamic return cast 0.0); final __structInitField2:Dynamic = _Runtime.coalesce(z, function():Dynamic return cast 0.0); final __structInitField3:Dynamic = _Runtime.coalesce(w, function():Dynamic return cast 1.0); ({ w: __structInitField3, x: __structInitField0, y: __structInitField1, z: __structInitField2 } : Quaternion); }); __callArgument430; })) : Quaternion);
     return cast null;
   }
 
@@ -5381,7 +5381,7 @@ class _Geometry {
   }
 
   public static function createRectangle(?x:Float, ?y:Float, ?width:Float, ?height:Float):Rectangle {
-    return cast (cast createEntity(({ final __callArgument492:Dynamic = { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), width: _Runtime.coalesce(width, function():Dynamic return cast 0.0), height: _Runtime.coalesce(height, function():Dynamic return cast 0.0) }; __callArgument492; })) : { >Entity, var x:Float; var y:Float; var width:Float; var height:Float; });
+    return cast (cast createEntity(({ final __callArgument492:Dynamic = ({ final __structInitField0:Dynamic = _Runtime.coalesce(x, function():Dynamic return cast 0.0); final __structInitField1:Dynamic = _Runtime.coalesce(y, function():Dynamic return cast 0.0); final __structInitField2:Dynamic = _Runtime.coalesce(width, function():Dynamic return cast 0.0); final __structInitField3:Dynamic = _Runtime.coalesce(height, function():Dynamic return cast 0.0); ({ height: __structInitField3, width: __structInitField2, x: __structInitField0, y: __structInitField1 } : Rectangle); }); __callArgument492; })) : Rectangle);
     return cast null;
   }
 
@@ -5800,7 +5800,7 @@ class _Geometry {
   }
 
   public static function createTransform3D():Transform3D {
-    return cast (cast createEntity((cast { rotation: (cast (#if js _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) #else createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Quaternion), scale: (cast createVector3(({ final __callArgument536:Dynamic = 1.0; __callArgument536; }), ({ final __callArgument537:Dynamic = 1.0; __callArgument537; }), ({ final __callArgument538:Dynamic = 1.0; __callArgument538; })) : Vector3), position: (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3) } : Dynamic)) : { >Entity, var rotation:Quaternion; var scale:Vector3; var position:Vector3; });
+    return cast (cast createEntity((cast ({ final __structInitField0:Dynamic = (cast (#if js _Runtime.callValue(createQuaternion, cast ([] : Array<Dynamic>)) #else createQuaternion(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Quaternion); final __structInitField1:Dynamic = (cast createVector3(({ final __callArgument536:Dynamic = 1.0; __callArgument536; }), ({ final __callArgument537:Dynamic = 1.0; __callArgument537; }), ({ final __callArgument538:Dynamic = 1.0; __callArgument538; })) : Vector3); final __structInitField2:Dynamic = (cast (#if js _Runtime.callValue(createVector3, cast ([] : Array<Dynamic>)) #else createVector3(#if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end, #if js (cast _Runtime.field(_Runtime, 'UNDEFINED') : Dynamic) #else (cast null : Dynamic) #end) #end) : Vector3); ({ position: __structInitField2, rotation: __structInitField0, scale: __structInitField1 } : Transform3D); }) : Dynamic)) : Transform3D);
     return cast null;
   }
 
@@ -6705,7 +6705,7 @@ class _Geometry {
   }
 
   public static function createVector4(?x:Float, ?y:Float, ?z:Float, ?w:Float):Vector4 {
-    return cast (cast createEntity(({ final __callArgument624:Dynamic = { x: _Runtime.coalesce(x, function():Dynamic return cast 0.0), y: _Runtime.coalesce(y, function():Dynamic return cast 0.0), z: _Runtime.coalesce(z, function():Dynamic return cast 0.0), w: _Runtime.coalesce(w, function():Dynamic return cast 0.0) }; __callArgument624; })) : { >Entity, var x:Float; var y:Float; var z:Float; var w:Float; });
+    return cast (cast createEntity(({ final __callArgument624:Dynamic = ({ final __structInitField0:Dynamic = _Runtime.coalesce(x, function():Dynamic return cast 0.0); final __structInitField1:Dynamic = _Runtime.coalesce(y, function():Dynamic return cast 0.0); final __structInitField2:Dynamic = _Runtime.coalesce(z, function():Dynamic return cast 0.0); final __structInitField3:Dynamic = _Runtime.coalesce(w, function():Dynamic return cast 0.0); ({ w: __structInitField3, x: __structInitField0, y: __structInitField1, z: __structInitField2 } : Vector4); }); __callArgument624; })) : Vector4);
     return cast null;
   }
 

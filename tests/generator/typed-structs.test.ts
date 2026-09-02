@@ -4162,6 +4162,45 @@ describe('typed struct analysis', () => {
     expect(readFileSync(candidateJavaScript)).toEqual(readFileSync(baselineJavaScript));
   });
 
+  it('canonicalizes struct-init field order after preserving initializer evaluation order', () => {
+    const candidate: TypedStructCandidate = {
+      emission: 'direct',
+      name: 'Camera2D',
+      packageName: '@flighthq/types',
+      purpose: 'struct-init order fixture',
+      source: 'upstream/packages/types/src/CameraPilot.ts',
+    };
+    const result = lowerFixture(
+      `
+        export interface Camera2D { x: number; y: number; }
+        export function createCamera2D(): Camera2D { return { y: 2, x: 1 }; }
+      `,
+      candidate,
+    );
+    const declaration = result.lowered.declarations.find(
+      (item) => item.kind === 'type' && item.name === candidate.name,
+    );
+    if (!declaration || declaration.kind !== 'type') throw new Error('Expected Camera2D order fixture type');
+    declaration.cppStructInitSchemaId = candidateId(candidate);
+    const fixtureModule = {
+      declarations: result.lowered.declarations,
+      haxePackage: 'flight.types',
+      imports: [],
+      name: 'CameraPilot',
+      packageName: '@flighthq/types',
+    };
+    sealCppStructInitConstructors([fixtureModule]);
+    const output = emitHaxeModule(fixtureModule);
+
+    expect(result.lowered.diagnostics).toEqual([]);
+    expect(output).toContain('final __structInitField0:Dynamic = 2.0;');
+    expect(output).toContain('final __structInitField1:Dynamic = 1.0;');
+    expect(output).toContain('({ x: __structInitField1, y: __structInitField0 } : Camera2D)');
+    expect(output.indexOf('__structInitField0:Dynamic = 2.0')).toBeLessThan(
+      output.indexOf('__structInitField1:Dynamic = 1.0'),
+    );
+  });
+
   it('censuses class migration flows and observability by canonical schema', () => {
     const audit = classAuditFixture(
       `
@@ -4367,19 +4406,26 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 231,
+      blockedEntityCalls: 207,
       calls: 368,
       exactEntityCalls: 191,
       exactEntitySchemas: 148,
       exactNonEntityCalls: 9,
       genericEntityCalls: 3,
-      readyEntityCalls: 128,
+      normalizedFieldOrderCalls: 24,
+      readyEntityCalls: 152,
       structuralEntityCalls: 141,
       unresolvedCalls: 24,
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'createMatrix4')).toMatchObject({
       blockers: [],
       destination: { kind: 'exact-entity', schemaName: 'Matrix4' },
+      status: 'ready',
+    });
+    expect(entityFactories.sites.find((site) => site.factory.name === 'createRectangle')).toMatchObject({
+      blockers: [],
+      destination: { kind: 'exact-entity', schemaName: 'Rectangle' },
+      normalizations: ['field-order'],
       status: 'ready',
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'cloneEntity')).toMatchObject({

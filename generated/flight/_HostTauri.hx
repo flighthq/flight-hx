@@ -149,22 +149,22 @@ class _HostTauri {
     _Runtime.voidValue(flight._internal._Async.recover(_Runtime.callProperty((cast tauri.os : TauriOsModule).locale(), 'then', cast ([function(value:Null<String>):String return (locale = cast (_Runtime.coalesce(value, function():Dynamic return cast '') : Dynamic))] : Array<Dynamic>)), function(__unused2:flight._internal._Any):Void {
 
     }));
-    return cast (cast createEntity((cast { locale: (cast createEntity(({ final __callArgument0:Dynamic = { getLocale: function():String return locale, getPreferredSystemLanguages: function():Array<String> return ((cast _Runtime.strictEquals(locale, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([locale] : Array<Dynamic>) : Dynamic)), getSystemLocale: function():String return locale }; __callArgument0; })) : { >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<String>; var getSystemLocale:Void->String; }), name: (cast createEntity(({ final __callArgument2:Dynamic = { getName: function():String return name }; __callArgument2; })) : { >Entity, var getName:Void->String; }), hide: (cast createEntity(({ final __callArgument4:Dynamic = { hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).hide(), function(__unused3:flight._internal._Any):Void {
+    return cast (cast createEntity((cast ({ final __structInitField0:Dynamic = (cast createEntity(({ final __callArgument0:Dynamic = { getLocale: function():String return locale, getPreferredSystemLanguages: function():Array<String> return ((cast _Runtime.strictEquals(locale, '') : Bool) ? (cast cast ([] : Array<Dynamic>) : Dynamic) : (cast cast ([locale] : Array<Dynamic>) : Dynamic)), getSystemLocale: function():String return locale }; __callArgument0; })) : { >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<String>; var getSystemLocale:Void->String; }); final __structInitField1:Dynamic = (cast createEntity(({ final __callArgument2:Dynamic = { getName: function():String return name }; __callArgument2; })) : { >Entity, var getName:Void->String; }); final __structInitField2:Dynamic = (cast createEntity(({ final __callArgument4:Dynamic = { hideApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).hide(), function(__unused3:flight._internal._Any):Void {
 
-    })) }; __callArgument4; })) : { >Entity, var hideApp:Void->flight._internal._Any; }), quit: (cast createEntity(({ final __callArgument8:Dynamic = { quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).exit(({ final __callArgument7:Dynamic = 0.0; __callArgument7; })), function(__unused4:flight._internal._Any):Void {
+    })) }; __callArgument4; })) : { >Entity, var hideApp:Void->flight._internal._Any; }); final __structInitField3:Dynamic = (cast createEntity(({ final __callArgument8:Dynamic = { quit: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).exit(({ final __callArgument7:Dynamic = 0.0; __callArgument7; })), function(__unused4:flight._internal._Any):Void {
 
-    })) }; __callArgument8; })) : { >Entity, var quit:Void->flight._internal._Any; }), relaunch: (cast createEntity(({ final __callArgument12:Dynamic = { relaunch: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).relaunch(), function(__unused5:flight._internal._Any):Void {
+    })) }; __callArgument8; })) : { >Entity, var quit:Void->flight._internal._Any; }); final __structInitField4:Dynamic = (cast createEntity(({ final __callArgument12:Dynamic = { relaunch: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.process : TauriProcessPlugin).relaunch(), function(__unused5:flight._internal._Any):Void {
 
-    })) }; __callArgument12; })) : { >Entity, var relaunch:Void->flight._internal._Any; }), show: (cast createEntity(({ final __callArgument14:Dynamic = { showApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).show(), function(__unused6:flight._internal._Any):Void {
+    })) }; __callArgument12; })) : { >Entity, var relaunch:Void->flight._internal._Any; }); final __structInitField5:Dynamic = (cast createEntity(({ final __callArgument14:Dynamic = { showApp: function():flight._internal._Any return _Runtime.voidValue(flight._internal._Async.recover((cast tauri.app : TauriAppModule).show(), function(__unused6:flight._internal._Any):Void {
 
-    })) }; __callArgument14; })) : { >Entity, var showApp:Void->flight._internal._Any; }), version: (cast createEntity(({ final __callArgument16:Dynamic = { getVersion: function():String return version }; __callArgument16; })) : { >Entity, var getVersion:Void->String; }) } : Dynamic)) : { >Entity, var locale:{ >Entity, var getLocale:Void->String; var getPreferredSystemLanguages:Void->Array<String>; var getSystemLocale:Void->String; }; var name:{ >Entity, var getName:Void->String; }; var hide:{ >Entity, var hideApp:Void->flight._internal._Any; }; var quit:{ >Entity, var quit:Void->flight._internal._Any; }; var relaunch:{ >Entity, var relaunch:Void->flight._internal._Any; }; var show:{ >Entity, var showApp:Void->flight._internal._Any; }; var version:{ >Entity, var getVersion:Void->String; }; });
+    })) }; __callArgument14; })) : { >Entity, var showApp:Void->flight._internal._Any; }); final __structInitField6:Dynamic = (cast createEntity(({ final __callArgument16:Dynamic = { getVersion: function():String return version }; __callArgument16; })) : { >Entity, var getVersion:Void->String; }); ({ hide: __structInitField2, locale: __structInitField0, name: __structInitField1, quit: __structInitField3, relaunch: __structInitField4, show: __structInitField5, version: __structInitField6 } : TauriAppCapabilities); }) : Dynamic)) : TauriAppCapabilities);
     return cast null;
   }
 
   public static function createTauriClipboardBackend(tauri:TauriApi):ClipboardTextBackend {
     var clipboard:TauriClipboardManager = cast _Runtime.UNDEFINED;
     clipboard = tauri.clipboard;
-    return cast (cast createEntity(({ final __callArgument40:Dynamic = { readText: function():flight._internal._Promise<String> {
+    return cast (cast createEntity(({ final __callArgument40:Dynamic = ({ final __structInitField0:Dynamic = function():flight._internal._Promise<String> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -181,7 +181,7 @@ class _HostTauri {
           });
         })
       );
-    }, writeText: function(text:String):flight._internal._Promise<Bool> {
+    }; final __structInitField1:Dynamic = function(text:String):flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -199,7 +199,7 @@ class _HostTauri {
           });
         })
       );
-    }, hasText: function():flight._internal._Promise<Bool> {
+    }; final __structInitField2:Dynamic = function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -216,7 +216,7 @@ class _HostTauri {
           });
         })
       );
-    }, clear: function():flight._internal._Promise<Bool> {
+    }; final __structInitField3:Dynamic = function():flight._internal._Promise<Bool> {
       return cast flight._internal._Async.finishFlow(
         flight._internal._Async.protect(function():Dynamic {
           return flight._internal._Async.continueFlow(flight._internal._Async.recover(flight._internal._Async.protect(function():Dynamic {
@@ -234,7 +234,7 @@ class _HostTauri {
           });
         })
       );
-    } }; __callArgument40; })) : { >Entity, var readText:Void->flight._internal._Promise<String>; var writeText:String->flight._internal._Promise<Bool>; var hasText:Void->flight._internal._Promise<Bool>; var clear:Void->flight._internal._Promise<Bool>; });
+    }; ({ clear: __structInitField3, hasText: __structInitField2, readText: __structInitField0, writeText: __structInitField1 } : ClipboardTextBackend); }); __callArgument40; })) : ClipboardTextBackend);
     return cast null;
   }
 

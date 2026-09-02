@@ -2832,22 +2832,40 @@ function emitExpression(expression: IrExpression): string {
       return `new ${emitExpression(expression.callee)}(${expression.arguments.map(emitExpression).join(', ')})`;
     case 'object':
       if (expression.cppStructInit) {
-        const actualFields = expression.properties.map((property) =>
-          property.kind === 'property' ? property.name : property.kind,
+        const namedProperties = expression.properties.filter(
+          (property): property is Extract<(typeof expression.properties)[number], { kind: 'property' }> =>
+            property.kind === 'property',
         );
+        const actualFields = namedProperties.map((property) => property.name);
         if (
           actualFields.length !== expression.cppStructInit.fieldNames.length ||
-          actualFields.some((field, index) => field !== expression.cppStructInit!.fieldNames[index])
+          actualFields.some((field) => !expression.cppStructInit!.fieldNames.includes(field)) ||
+          expression.cppStructInit.fieldNames.some((field) => !actualFields.includes(field))
         ) {
           throw new Error(
-            `cpp @:structInit construction order mismatch for ${expression.cppStructInit.schemaId}: expected ${expression.cppStructInit.fieldNames.join(', ')}, received ${actualFields.join(', ')}`,
+            `cpp @:structInit construction field mismatch for ${expression.cppStructInit.schemaId}: expected ${expression.cppStructInit.fieldNames.join(', ')}, received ${actualFields.join(', ')}`,
           );
         }
-        const value = `{ ${expression.properties
-          .map((property) =>
-            property.kind === 'property' ? `${safeName(property.name)}: ${emitExpression(property.value)}` : '',
-          )
-          .filter(Boolean)
+        const sourceOrderMatches = actualFields.every(
+          (field, index) => field === expression.cppStructInit!.fieldNames[index],
+        );
+        if (!sourceOrderMatches) {
+          const temporaryByField = new Map<string, string>();
+          const evaluations = namedProperties.map((property, index) => {
+            const temporary = `__structInitField${String(index)}`;
+            temporaryByField.set(property.name, temporary);
+            return `final ${temporary}:Dynamic = ${emitExpression(property.value)};`;
+          });
+          const value = `{ ${expression.cppStructInit.fieldNames
+            .map((field) => `${safeName(field)}: ${temporaryByField.get(field)!}`)
+            .join(', ')} }`;
+          return emitObjectThisCapture(
+            expression,
+            `({ ${evaluations.join(' ')} (${value} : ${expression.cppStructInit.schemaHaxeType}); })`,
+          );
+        }
+        const value = `{ ${namedProperties
+          .map((property) => `${safeName(property.name)}: ${emitExpression(property.value)}`)
           .join(', ')} }`;
         return emitObjectThisCapture(expression, `(${value} : ${expression.cppStructInit.schemaHaxeType})`);
       }
