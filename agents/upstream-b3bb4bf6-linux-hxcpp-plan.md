@@ -99,6 +99,7 @@ Treat Linux hxcpp as practical for this tranche when all of the following hold o
 3. The 1,000-shape control does not regress by more than 3%.
 4. Particles rendered p95 remains below 8.33 ms (120 fps), with no increase in allocations per frame.
 5. Every native-layout tranche preserves JS output, portable Haxe behavior, render pixels, and nominal provenance closure.
+6. Horse Stacker records paired HTML/Linux p50 and p95 on real GL for the default, no-backdrop, 1x `rgba8`, and combined variants; its CPU-only scene-preparation control must pass checksum equality and the 3% control stability gate.
 
 The current aggregate harness cannot calculate p95. Adding per-frame samples is therefore the first implementation task, not an optional refinement. Before expanding the class allowlist, re-establish the existing `Camera2D` result on this pin by interleaving normal cpp builds with `-D flight_cpp_struct_init_baseline` builds. Both variants come from the same generated tree: the normal build uses the provenance-closed `@:structInit` class created by `createCamera2D`, while the define selects the anonymous typedef branch. This isolates hxcpp representation from generator and upstream drift.
 
@@ -110,6 +111,28 @@ A CPU-only probe then repeated the example's composed camera operations 5,000,00
 
 The next camera-layout tranche should apply factory provenance to the larger allocation boundary: `createNode`/`createNode2D` create each node once, and the transform initializers then populate the `HasTransform2D` view on that same identity. The generator currently audits those views as cross-schema transfers rather than recognizing one factory-created native object. Normalize that identity before class emission; do not cast the existing anonymous node to a class. `BitmapRegion` remains the safest independent closed candidate, but it is no longer ahead of constructor-proven node/transform identity for the camera target.
 
+## 3D acceptance workload: Horse Stacker
+
+[Horse Stacker](https://github.com/jgranick/haxejam2026) is the representative end-to-end 3D workload. Revision `16e8e39` builds against this candidate Flight tree and exercises the public factory vocabulary heavily: `createNode3D`, `createMesh`, `createCamera3D`, material, geometry, light, and scene constructors. It also renders a directional shadow map, the main 3D scene, a UI scene, and a full-screen effect pipeline every frame. The default target is four-sample `rgba16f` with depth/stencil; title and result states add a backdrop blur up to sigma 13 plus a vignette.
+
+An external benchmark-only probe measured ten title frames under Xvfb and llvmpipe. These numbers attribute phases on this software renderer; they are not production FPS claims and are not an HTML-versus-native comparison:
+
+| Native probe variant             |   FPS | Main scene | Effects |
+| -------------------------------- | ----: | ---------: | ------: |
+| Default: backdrop + 4x `rgba16f` |  1.39 |     270 ms |  482 ms |
+| No backdrop effects              |  5.08 |     182 ms |    4 ms |
+| Backdrop + 1x `rgba8`            |  2.37 |      11 ms |  424 ms |
+| No backdrop effects + 1x `rgba8` | 14.29 |      11 ms |   32 ms |
+
+The gross slowdown in this environment is therefore not principally node typedef access. The separable blur alone reaches a 39-pixel radius at sigma 13, while the multisampled half-float target magnifies both the main pass and effect traffic. That renderer finding and the hxcpp layout hypothesis are separate optimization tracks:
+
+1. Run Horse Stacker HTML and Linux C++ on the same real-GPU host, viewport, scene state, and quality settings. Retain the no-backdrop and 1x `rgba8` variants as controls so a target/allocation win is not misreported as a class-layout win.
+2. Measure factory-created 3D records without GL. `npm run bench:scene3d:cpp` builds a normal candidate and the same-tree typedef baseline, then interleaves five pairs of a 128-mesh `prepareScene3DRender` workload with camera and node invalidation. This is the acceptance gate for `createNode3D`/`createMesh` identity closure.
+
+The initial headless control has identical checksums and a 2.47% median paired normal-build gain, inside the 3% noise threshold. That is the expected neutral result because the current cpp class set does not include the Node3D/mesh identities exercised by this workload; it becomes an optimization gate only when that tranche changes.
+
+Flight's public API should remain constructor-shaped free functions. A cpp-only internal class is an implementation of `create<Type>`, not a replacement public `new()` API. The generator must prove that the factory creates the identity and all trait initializers enrich that same identity before it emits a class; a cast from an already-created anonymous object is not sufficient.
+
 ## Implementation plan
 
 ### P0: make the performance gates reproducible
@@ -117,6 +140,8 @@ The next camera-layout tranche should apply factory provenance to the larger all
 - Extend the three harnesses with warmup, fixed timestep, and per-frame timing consistently. Emit p50/p95/p99 for script preparation, backend rendering, and total frame time.
 - Add counters around draw calls, texture/program/framebuffer binds, uniform uploads, fallback shape rasterizations, mesh rebuilds, proxy recomputations, and cache hits. Count allocated bytes or GC allocation events rather than relying only on net heap movement.
 - Check in one runner that performs five interleaved parent/candidate pairs under one X server and fixed CPU affinity. A control-versus-control run must stay within 3% before a candidate result is accepted.
+- Keep `npm run bench:scene3d:cpp` headless and GL-free. It must construct its scene exclusively through Flight's public factories, verify candidate/baseline checksums, and report the paired median before any 3D record class is admitted.
+- Add equivalent phase JSON to Horse Stacker without making benchmark instrumentation part of the game. On a real-GPU runner, capture the default render, empty-effect, simple-target, and combined controls in both HTML and Linux C++.
 
 This phase is complete when it reproduces the broad current split: nearly zero rendered overhead for the cached-shape control, a large CPU and GL split for camera2d, and a much smaller GL split for particles.
 
@@ -126,10 +151,11 @@ Add `@flighthq/types:interface#BitmapRegion` to the cpp-only `@:structInit` allo
 
 Acceptance requires fixed-offset member access in emitted C++, unchanged non-cpp Haxe/JS output, clean portable tests and pixels, and a statistically credible improvement in the particle script span. Keep the class only if its paired median improves by at least 5% or instrumentation proves a smaller result removes at least 10% of executed dynamic field operations in the workload.
 
-### P2: close the two hot CPU identity gaps
+### P2: close the factory-created CPU identity gaps
 
-1. Normalize the two `HasTransform2D` and two `HasTransform2DRuntime` cross-schema transfers in `displayObject.ts` and `guiTestHelper.ts`. Preserve the canonical identity through the `Node`/`Node2DTraits` and `NodeRuntime` intersections instead of casting an anonymous composite. Re-run provenance, then trial the required-field transform record before the optional runtime record. The camera projection is 151 accesses per frame; require at least a 10% script-span gain and the 8.0 ms script target before expanding the class set.
-2. Preserve or normalize `ParticleEmitterData` identity in the `ParticleEmitter2D` and `ParticleEmitter3D` outer `data` slots. It has 461 direct sites and previously reduced the measured heap window, but it remains correctly blocked by normalization provenance. Enable it only after the report proves closure and the outer ingress test passes. Require a 10% particle script improvement or a 20% allocation reduction.
+1. Teach provenance that a reviewed `create<Type>` factory is a nominal allocation boundary and that its initializer chain enriches one identity. Begin with `createNode3D`/`createMesh` plus their node, appearance, transform, and mesh views. Emit one flattened cpp-only class only after every constructor and escape path closes; keep the public factory and non-cpp output unchanged. Require a stable `bench:scene3d:cpp` checksum, at least a 10% paired CPU-span gain, and no Horse Stacker pixel or render-phase regression.
+2. Apply the same rule to the two `HasTransform2D` and two `HasTransform2DRuntime` cross-schema transfers in `displayObject.ts` and `guiTestHelper.ts`. Preserve the canonical identity through the `Node`/`Node2DTraits` and `NodeRuntime` intersections instead of casting an anonymous composite. Re-run provenance, then trial the required-field transform record before the optional runtime record. The camera projection is 151 accesses per frame; require at least a 10% script-span gain and the 8.0 ms script target before expanding the class set.
+3. Preserve or normalize `ParticleEmitterData` identity in the `ParticleEmitter2D` and `ParticleEmitter3D` outer `data` slots. It has 461 direct sites and previously reduced the measured heap window, but it remains correctly blocked by normalization provenance. Enable it only after the report proves closure and the outer ingress test passes. Require a 10% particle script improvement or a 20% allocation reduction.
 
 Do not bulk-enable the remaining 841 closed candidates. `BitmapRegion`, transform state, and particle data each get their own generated delta, C++ inspection, correctness gate, and paired benchmark.
 
@@ -149,4 +175,4 @@ After P1-P3, map sampled native stacks back to the typed-struct and erasure repo
 
 ## Recommended order
 
-The constructor-layout A/B control is complete. Continue with P0 instrumentation, P2 node/transform factory-identity closure, P1 `BitmapRegion` as an independent closed control, P3 measured GL invalidation/caching, then P2 particle-data closure and P4 residual specialization. This order follows the measured camera opportunity without depending on speculative whole-program lowering, while retaining particles as an allocation guard and the cached-shape example as a regression control.
+The constructor-layout A/B control is complete. Continue with P0 instrumentation, P2 Node3D factory-identity closure against the new CPU gate, P2 Node2D/transform closure, P1 `BitmapRegion` as an independent closed control, P3 measured GL invalidation/caching/effect work, then P2 particle-data closure and P4 residual specialization. Horse Stacker is the real-GL 3D acceptance workload; its headless preparation control prevents the dominant target/effect cost from hiding a successful or failed layout change.

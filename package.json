@@ -7,6 +7,7 @@
     "api": "tsx tools/generator/src/cli.ts --api",
     "api:check": "tsx tools/generator/src/cli.ts --api --check",
     "api:json": "tsx tools/generator/src/cli.ts --api --json",
+    "bench:scene3d:cpp": "node tools/bench-scene3d-prepare.mjs",
     "build": "tsc -p tsconfig.build.json",
     "build:check": "tsc -p tsconfig.json --noEmit",
     "build:haxe:js": "node tools/haxe.mjs -cp src -cp generated -cp tests/haxe --main JsEntry --js build/haxe-js/flight.cjs -D js-es=6 --macro \"include('flight')\" --macro \"addGlobalMetadata('flight', '@:expose')\"",
