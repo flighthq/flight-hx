@@ -1190,10 +1190,10 @@ class _HostElectron {
     powerMonitor = electron.powerMonitor;
     powerSaveBlocker = electron.powerSaveBlocker;
     blockerId = -1.0;
-    backends = (cast { batteryHealth: (cast createEntity(({ final __callArgument449:Dynamic = { getBatteryHealth: function(out:PowerBatteryHealth):PowerBatteryHealth {
+    backends = (cast { batteryHealth: (cast createEntity(({ final __callArgument449:Dynamic = ({ getBatteryHealth: function(out:PowerBatteryHealth):PowerBatteryHealth {
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument449; })) : { >PowerBatteryHealthBackend, >Entity, }), change: (cast createEntity(({ final __callArgument459:Dynamic = { subscribe: function(listener:Void->Void):Void->Void {
+    } } : PowerBatteryHealthBackend); __callArgument449; })) : PowerBatteryHealthBackend), change: (cast createEntity(({ final __callArgument459:Dynamic = ({ subscribe: function(listener:Void->Void):Void->Void {
       (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument451:Dynamic = 'on-battery'; __callArgument451; }), ({ final __callArgument452:Dynamic = listener; __callArgument452; }));
       (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument453:Dynamic = 'on-ac'; __callArgument453; }), ({ final __callArgument454:Dynamic = listener; __callArgument454; }));
       return cast function():Void {
@@ -1201,13 +1201,13 @@ class _HostElectron {
         (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument457:Dynamic = 'on-ac'; __callArgument457; }), ({ final __callArgument458:Dynamic = listener; __callArgument458; }));
       };
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument459; })) : { >PowerChangeBackend, >Entity, }), idle: (cast createEntity(({ final __callArgument469:Dynamic = { getIdleState: function(thresholdSeconds:Float):PowerIdleState {
+    } } : PowerChangeBackend); __callArgument459; })) : PowerChangeBackend), idle: (cast createEntity(({ final __callArgument469:Dynamic = ({ getIdleState: function(thresholdSeconds:Float):PowerIdleState {
       return cast (cast _HostElectron.toIdleState__electronPower((cast (cast powerMonitor : ElectronPowerMonitor).getSystemIdleState((cast thresholdSeconds : Float)) : String)) : PowerIdleState);
       return cast _Runtime.UNDEFINED;
     }, getIdleTimeSeconds: function():Float {
       return cast (cast powerMonitor : ElectronPowerMonitor).getSystemIdleTime();
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument469; })) : { >PowerIdleBackend, >Entity, }), keepAwake: (cast createEntity(({ final __callArgument471:Dynamic = { acquire: function(mode:PowerKeepAwakeMode):flight._internal._Promise<PowerKeepAwakeAcquireResult> {
+    } } : PowerIdleBackend); __callArgument469; })) : PowerIdleBackend), keepAwake: (cast createEntity(({ final __callArgument471:Dynamic = ({ acquire: function(mode:PowerKeepAwakeMode):flight._internal._Promise<PowerKeepAwakeAcquireResult> {
       if ((cast ((cast blockerId : Float) >= (cast 0.0 : Float)) : Bool)) { return cast flight._internal._Async.resolve({ reason: 'ok' }); }
       try {
         (blockerId = cast ((cast powerSaveBlocker : ElectronPowerSaveBlocker).start((cast ((cast _Runtime.strictEquals(mode, 'PreventAppSuspension') : Bool) ? (cast 'prevent-app-suspension' : Dynamic) : (cast 'prevent-display-sleep' : Dynamic)) : String)) : Dynamic));
@@ -1234,7 +1234,7 @@ class _HostElectron {
       (blockerId = cast (-1.0 : Dynamic));
       return cast flight._internal._Async.resolve({ reason: 'ok' });
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument471; })) : { >PowerKeepAwakeBackend, >Entity, }), sessionLock: (cast createEntity(({ final __callArgument481:Dynamic = { subscribeLock: function(listener:Void->Void):Void->Void {
+    } } : PowerKeepAwakeBackend); __callArgument471; })) : PowerKeepAwakeBackend), sessionLock: (cast createEntity(({ final __callArgument481:Dynamic = ({ subscribeLock: function(listener:Void->Void):Void->Void {
       (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument473:Dynamic = 'lock-screen'; __callArgument473; }), ({ final __callArgument474:Dynamic = listener; __callArgument474; }));
       return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument475:Dynamic = 'lock-screen'; __callArgument475; }), ({ final __callArgument476:Dynamic = listener; __callArgument476; })); };
       return cast _Runtime.UNDEFINED;
@@ -1242,7 +1242,7 @@ class _HostElectron {
       (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument477:Dynamic = 'unlock-screen'; __callArgument477; }), ({ final __callArgument478:Dynamic = listener; __callArgument478; }));
       return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument479:Dynamic = 'unlock-screen'; __callArgument479; }), ({ final __callArgument480:Dynamic = listener; __callArgument480; })); };
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument481; })) : { >PowerSessionLockBackend, >Entity, }), status: (cast createEntity(({ final __callArgument493:Dynamic = { getStatus: function(out:PowerStatus):PowerStatus {
+    } } : PowerSessionLockBackend); __callArgument481; })) : PowerSessionLockBackend), status: (cast createEntity(({ final __callArgument493:Dynamic = ({ getStatus: function(out:PowerStatus):PowerStatus {
       var onBattery:Bool = cast _Runtime.UNDEFINED;
       onBattery = _Runtime.strictEquals((cast powerMonitor : ElectronPowerMonitor).onBatteryPower, true);
       (out.batteryLevel = cast (-1.0 : Float));
@@ -1255,7 +1255,7 @@ class _HostElectron {
       (out.thermalState = cast ((cast _HostElectron.readThermalState__electronPower(({ final __callArgument491:Dynamic = powerMonitor; __callArgument491; })) : PowerThermalState) : PowerThermalState));
       return cast out;
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument493; })) : { >PowerStatusBackend, >Entity, }), suspension: (cast createEntity(({ final __callArgument505:Dynamic = { subscribeResume: function(listener:Void->Void):Void->Void {
+    } } : PowerStatusBackend); __callArgument493; })) : PowerStatusBackend), suspension: (cast createEntity(({ final __callArgument505:Dynamic = ({ subscribeResume: function(listener:Void->Void):Void->Void {
       (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument497:Dynamic = 'resume'; __callArgument497; }), ({ final __callArgument498:Dynamic = listener; __callArgument498; }));
       return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument499:Dynamic = 'resume'; __callArgument499; }), ({ final __callArgument500:Dynamic = listener; __callArgument500; })); };
       return cast _Runtime.UNDEFINED;
@@ -1263,9 +1263,9 @@ class _HostElectron {
       (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument501:Dynamic = 'suspend'; __callArgument501; }), ({ final __callArgument502:Dynamic = listener; __callArgument502; }));
       return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument503:Dynamic = 'suspend'; __callArgument503; }), ({ final __callArgument504:Dynamic = listener; __callArgument504; })); };
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument505; })) : { >PowerSuspensionBackend, >Entity, }) });
+    } } : PowerSuspensionBackend); __callArgument505; })) : PowerSuspensionBackend) });
     if ((cast !_Runtime.strictEquals(_Runtime.typeofValue((cast powerMonitor : ElectronPowerMonitor).getCurrentThermalState), 'function') : Bool)) { return cast backends; }
-    return cast _Runtime.mergeObjects([backends, { thermal: (cast createEntity(({ final __callArgument525:Dynamic = { getThermalState: function():PowerThermalState {
+    return cast _Runtime.mergeObjects([backends, { thermal: (cast createEntity(({ final __callArgument525:Dynamic = ({ getThermalState: function():PowerThermalState {
       return cast (cast _HostElectron.readThermalState__electronPower(({ final __callArgument515:Dynamic = powerMonitor; __callArgument515; })) : PowerThermalState);
       return cast _Runtime.UNDEFINED;
     }, subscribeThermalStateChange: function(listener:PowerThermalState->Void):Void->Void {
@@ -1274,7 +1274,7 @@ class _HostElectron {
       (cast powerMonitor : ElectronPowerMonitor).on(({ final __callArgument521:Dynamic = 'thermal-state-change'; __callArgument521; }), ({ final __callArgument522:Dynamic = onChange; __callArgument522; }));
       return cast function():Void { (cast powerMonitor : ElectronPowerMonitor).removeListener(({ final __callArgument523:Dynamic = 'thermal-state-change'; __callArgument523; }), ({ final __callArgument524:Dynamic = onChange; __callArgument524; })); };
       return cast _Runtime.UNDEFINED;
-    } }; __callArgument525; })) : { >PowerThermalBackend, >Entity, }) }]);
+    } } : PowerThermalBackend); __callArgument525; })) : PowerThermalBackend) }]);
     return cast null;
   }
 

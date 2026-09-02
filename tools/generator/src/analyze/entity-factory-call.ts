@@ -9,6 +9,7 @@ export type EntityFactoryDestinationRoute =
   | 'contextual'
   | 'return'
   | 'returned-variable'
+  | 'type-argument'
   | 'variable';
 
 export interface EntityFactoryDestinationCandidate {
@@ -113,6 +114,9 @@ export function entityFactoryDestinationCandidates(
   };
 
   add(checker.getContextualType(call), 'contextual');
+  if (call.typeArguments?.length === 1) {
+    add(checker.getTypeFromTypeNode(call.typeArguments[0]!), 'type-argument');
+  }
   let current: ts.Expression = call;
   while (isTransparentExpressionParent(current.parent, current)) {
     current = current.parent;

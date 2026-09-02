@@ -10885,13 +10885,14 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 20,
       "destination": {
-        "kind": "unresolved",
-        "type": "unknown"
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:interface#PowerBatteryHealthBackend",
+        "schemaName": "PowerBatteryHealthBackend",
+        "type": "PowerBatteryHealthBackend"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -10900,7 +10901,7 @@
       "line": 44,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
-      "status": "blocked"
+      "status": "not-entity"
     },
     {
       "argument": {
@@ -10909,13 +10910,14 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
-        "kind": "unresolved",
-        "type": "unknown"
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:interface#PowerChangeBackend",
+        "schemaName": "PowerChangeBackend",
+        "type": "PowerChangeBackend"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -10924,7 +10926,7 @@
       "line": 49,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
-      "status": "blocked"
+      "status": "not-entity"
     },
     {
       "argument": {
@@ -10934,13 +10936,14 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 11,
       "destination": {
-        "kind": "unresolved",
-        "type": "unknown"
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:interface#PowerIdleBackend",
+        "schemaName": "PowerIdleBackend",
+        "type": "PowerIdleBackend"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -10949,7 +10952,7 @@
       "line": 59,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
-      "status": "blocked"
+      "status": "not-entity"
     },
     {
       "argument": {
@@ -10961,13 +10964,14 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 16,
       "destination": {
-        "kind": "unresolved",
-        "type": "unknown"
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:interface#PowerKeepAwakeBackend",
+        "schemaName": "PowerKeepAwakeBackend",
+        "type": "PowerKeepAwakeBackend"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -10976,7 +10980,7 @@
       "line": 69,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
-      "status": "blocked"
+      "status": "not-entity"
     },
     {
       "argument": {
@@ -10986,13 +10990,14 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 18,
       "destination": {
-        "kind": "unresolved",
-        "type": "unknown"
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:interface#PowerSessionLockBackend",
+        "schemaName": "PowerSessionLockBackend",
+        "type": "PowerSessionLockBackend"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -11001,7 +11006,7 @@
       "line": 102,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
-      "status": "blocked"
+      "status": "not-entity"
     },
     {
       "argument": {
@@ -11010,13 +11015,14 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 13,
       "destination": {
-        "kind": "unresolved",
-        "type": "unknown"
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:interface#PowerStatusBackend",
+        "schemaName": "PowerStatusBackend",
+        "type": "PowerStatusBackend"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -11025,7 +11031,7 @@
       "line": 112,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
-      "status": "blocked"
+      "status": "not-entity"
     },
     {
       "argument": {
@@ -11035,13 +11041,14 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 17,
       "destination": {
-        "kind": "unresolved",
-        "type": "unknown"
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:interface#PowerSuspensionBackend",
+        "schemaName": "PowerSuspensionBackend",
+        "type": "PowerSuspensionBackend"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -11050,7 +11057,7 @@
       "line": 126,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
-      "status": "blocked"
+      "status": "not-entity"
     },
     {
       "argument": {
@@ -11060,14 +11067,14 @@
         ],
         "kind": "object"
       },
-      "blockers": [
-        "unresolved-destination"
-      ],
+      "blockers": [],
       "column": 14,
       "destination": {
-        "kind": "unresolved",
-        "route": "contextual",
-        "type": "PowerThermalBackend | undefined"
+        "kind": "exact-non-entity",
+        "route": "type-argument",
+        "schemaId": "@flighthq/types:interface#PowerThermalBackend",
+        "schemaName": "PowerThermalBackend",
+        "type": "PowerThermalBackend"
       },
       "factory": {
         "canonicalForSchema": false,
@@ -11076,7 +11083,7 @@
       "line": 146,
       "normalizations": [],
       "source": "upstream/packages/host-electron/src/electronPower.ts",
-      "status": "blocked"
+      "status": "not-entity"
     },
     {
       "argument": {
@@ -17689,17 +17696,17 @@
   ],
   "summary": {
     "bareEntityCalls": 0,
-    "blockedEntityCalls": 192,
+    "blockedEntityCalls": 184,
     "calls": 368,
     "exactEntityCalls": 191,
     "exactEntitySchemas": 148,
-    "exactNonEntityCalls": 9,
+    "exactNonEntityCalls": 17,
     "genericEntityCalls": 3,
     "normalizedFieldOrderCalls": 24,
     "normalizedSpreadProjectionCalls": 4,
     "readyEntityCalls": 167,
     "structuralEntityCalls": 141,
-    "unresolvedCalls": 24
+    "unresolvedCalls": 16
   },
   "upstreamCommit": "98a7a58a934f55555a561a308cc23c1363c45652"
 }

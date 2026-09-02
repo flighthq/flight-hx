@@ -10,14 +10,14 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | Exact concrete Entity calls | 191 |
 | Exact concrete Entity schemas | 148 |
 | Constructor-ready Entity calls | 167 |
-| Blocked Entity calls | 192 |
+| Blocked Entity calls | 184 |
 | Bare Entity calls | 0 |
 | Generic Entity calls | 3 |
 | Field-order-normalized calls | 24 |
 | Spread-projected calls | 4 |
 | Structural Entity calls | 141 |
-| Exact non-Entity calls | 9 |
-| Unresolved calls | 24 |
+| Exact non-Entity calls | 17 |
+| Unresolved calls | 16 |
 
 ## Concrete Entity identities
 
@@ -300,14 +300,14 @@ This audit inventories exact calls to Flight's production `createEntity` helper.
 | `upstream/packages/host-electron/src/electronNotification.ts:177:44` | `createElectronNotificationCapabilities` | `structural-entity` | `contextual` | `other` | 0 | blocked | — | `non-object-construction`, `structural-entity-destination` |
 | `upstream/packages/host-electron/src/electronNotification.ts:178:10` | `createElectronNotificationCapabilities` | `structural-entity` | `contextual` | `object` | 2 | blocked | — | `spread-construction`, `structural-entity-destination` |
 | `upstream/packages/host-electron/src/electronPlatform.ts:9:10` | `createElectronPlatformBackend` | `structural-entity` | `contextual` | `object` | 1 | blocked | — | `structural-entity-destination` |
-| `upstream/packages/host-electron/src/electronPower.ts:44:20` | `createElectronPowerBackends` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronPower.ts:49:13` | `createElectronPowerBackends` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronPower.ts:59:11` | `createElectronPowerBackends` | `unresolved` | `—` | `object` | 2 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronPower.ts:69:16` | `createElectronPowerBackends` | `unresolved` | `—` | `object` | 4 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronPower.ts:102:18` | `createElectronPowerBackends` | `unresolved` | `—` | `object` | 2 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronPower.ts:112:13` | `createElectronPowerBackends` | `unresolved` | `—` | `object` | 1 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronPower.ts:126:17` | `createElectronPowerBackends` | `unresolved` | `—` | `object` | 2 | blocked | — | `unresolved-destination` |
-| `upstream/packages/host-electron/src/electronPower.ts:146:14` | `createElectronPowerBackends` | `unresolved` | `contextual` | `object` | 2 | blocked | — | `unresolved-destination` |
+| `upstream/packages/host-electron/src/electronPower.ts:44:20` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerBatteryHealthBackend` | `type-argument` | `object` | 1 | not-entity | — | — |
+| `upstream/packages/host-electron/src/electronPower.ts:49:13` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerChangeBackend` | `type-argument` | `object` | 1 | not-entity | — | — |
+| `upstream/packages/host-electron/src/electronPower.ts:59:11` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerIdleBackend` | `type-argument` | `object` | 2 | not-entity | — | — |
+| `upstream/packages/host-electron/src/electronPower.ts:69:16` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerKeepAwakeBackend` | `type-argument` | `object` | 4 | not-entity | — | — |
+| `upstream/packages/host-electron/src/electronPower.ts:102:18` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerSessionLockBackend` | `type-argument` | `object` | 2 | not-entity | — | — |
+| `upstream/packages/host-electron/src/electronPower.ts:112:13` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerStatusBackend` | `type-argument` | `object` | 1 | not-entity | — | — |
+| `upstream/packages/host-electron/src/electronPower.ts:126:17` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerSuspensionBackend` | `type-argument` | `object` | 2 | not-entity | — | — |
+| `upstream/packages/host-electron/src/electronPower.ts:146:14` | `createElectronPowerBackends` | `@flighthq/types:interface#PowerThermalBackend` | `type-argument` | `object` | 2 | not-entity | — | — |
 | `upstream/packages/host-electron/src/electronProtocol.ts:7:24` | `createElectronProtocolCapabilities` | `structural-entity` | `variable` | `object` | 2 | blocked | — | `structural-entity-destination` |
 | `upstream/packages/host-electron/src/electronProtocol.ts:15:10` | `createElectronProtocolCapabilities` | `@flighthq/types:type#ElectronProtocolCapabilities` | `contextual` | `object` | 5 | ready | — | — |
 | `upstream/packages/host-electron/src/electronProtocol.ts:16:14` | `createElectronProtocolCapabilities` | `structural-entity` | `contextual` | `object` | 3 | blocked | — | `structural-entity-destination` |

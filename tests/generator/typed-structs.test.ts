@@ -4470,17 +4470,17 @@ describe('typed struct analysis', () => {
     expect(registry.resolveIdentity(renderTextureReturn)?.name).toBe('RenderTexture');
     expect(entityFactories.summary).toEqual({
       bareEntityCalls: 0,
-      blockedEntityCalls: 192,
+      blockedEntityCalls: 184,
       calls: 368,
       exactEntityCalls: 191,
       exactEntitySchemas: 148,
-      exactNonEntityCalls: 9,
+      exactNonEntityCalls: 17,
       genericEntityCalls: 3,
       normalizedFieldOrderCalls: 24,
       normalizedSpreadProjectionCalls: 4,
       readyEntityCalls: 167,
       structuralEntityCalls: 141,
-      unresolvedCalls: 24,
+      unresolvedCalls: 16,
     });
     expect(entityFactories.sites.find((site) => site.factory.name === 'createMatrix4')).toMatchObject({
       blockers: [],
@@ -4522,6 +4522,16 @@ describe('typed struct analysis', () => {
           site.factory.name === 'createTauriPlatformBackend',
       ),
     ).toMatchObject({ destination: { kind: 'exact-non-entity', schemaName: 'PlatformBackend' }, status: 'not-entity' });
+    expect(
+      entityFactories.sites.find(
+        (site) =>
+          site.source.endsWith('/host-electron/src/electronPower.ts') &&
+          site.destination.schemaName === 'PowerStatusBackend',
+      ),
+    ).toMatchObject({
+      destination: { kind: 'exact-non-entity', route: 'type-argument', schemaName: 'PowerStatusBackend' },
+      status: 'not-entity',
+    });
     expect(entityFactoryClosureSummary(entityFactories)).toContain('| Production createEntity calls | 368 |');
     const typeErasureReport = JSON.parse(readFileSync('reports/type-erasures.json', 'utf8')) as {
       modules: Array<{ byReason: Record<string, number>; module: string; source: string; total: number }>;
